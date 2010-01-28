@@ -1,0 +1,31 @@
+EMFText 1.1 released
+
+The fastest way to refinable, durable and evolution-resistant textual
+syntaxes for EMF models just got even better.
+
+EMFText is an Eclipse plug-in that allows you to define text syntax
+for languages described by an Ecore metamodel. EMFText enables
+developers to define textual Domain Specific Languages quickly and
+without the need to learn new technologies and concepts. Give it a
+shot and you'll find EMFText indispensible for your model-driven
+development processes.
+
+With version 1.1, EMFText is more stable and brings some useful new
+features: 
+- It is now possible to define colour and style of your syntax 
+  directly in the CS specification. 
+- EMFText now generates a customizable New File Wizard for your 
+  language that is automatically able to create an initial model. 
+- The CS analysis has improved and now gives you much more 
+  information about where you might want to improve your syntax.
+
+On the update site you can now find more than 20 ready made languages,
+including: 
+- The complete Java5 syntax 
+- The complete OWL Manchester syntax 
+- A complete textual Ecore syntax
+
+You can download the tool, watch a screencast, or read the
+documentation at http://www.emftext.org.
+
+Enjoy! :-) 

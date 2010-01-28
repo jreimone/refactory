@@ -1,0 +1,381 @@
+<project basedir="." default="run-emftext-language-tests" name="Run tests for EMFText languages">
+
+	<property name="test_result_dir" value="test_results"/>
+	<property file="build.properties"/>	
+
+	<macrodef name="run-test">
+		<attribute name="plugin"/>
+		<attribute name="extension"/>
+			
+		<sequential>
+			<jar destfile="../temp_classpath.jar">
+				<manifest>
+					<attribute name="Class-Path" value="${run_test_classpath_prop}"/>
+				</manifest>
+			</jar>
+
+			<junit haltonfailure="true" haltonerror="true" fork="true" dir="../@{plugin}.test">
+				
+				<jvmarg value="-ea" />
+				<classpath>
+					<path path="../temp_classpath.jar"/>
+				</classpath>
+
+				<formatter type="plain"/>
+		
+				<batchtest todir="${test_result_dir}">
+					<fileset dir="../@{plugin}.test/src">
+						<include name="**/**Test.java"/>
+						<exclude name="**/CSharpTest.java" />
+						<exclude name="**/BulkGraphTest.java" />
+					</fileset>
+				</batchtest>
+			</junit>
+		</sequential>
+	</macrodef>
+
+	<!-- TODO add run-test-java-templates -->
+	<target name="run-emftext-language-tests" depends="clean, run-overall-tests, run-test-ecore, run-test-java, run-simple-tests, run-test-custom-sandwich" />
+
+	<target name="clean">
+		<delete dir="${test_result_dir}" includes="*.txt" />
+	</target>
+
+	<target name="create-classpath-jar">
+		<path id="run_test_classpath">
+			<pathelement path="../org.emftext.access/bin"/>
+			<pathelement path="../org.emftext.language.conference.examples/bin"/>
+			<pathelement path="../org.emftext.language.custom_sandwich.examples/bin"/>
+			<pathelement path="../org.emftext.language.java.homepage/bin"/>
+			<pathelement path="../org.emftext.language.km3.examples/bin"/>
+			<pathelement path="../org.emftext.language.quickuml.examples/bin"/>
+			<pathelement path="../org.emftext.language.tbool.examples/bin"/>
+			<pathelement path="../org.emftext.commons.antlr3_2_0/bin"/>
+			<pathelement path="../org.emftext.language.abnf/bin"/>
+			<pathelement path="../org.emftext.language.abnf.resource.abnf/bin"/>
+			<pathelement path="../org.emftext.language.aterms/bin"/>
+			<pathelement path="../org.emftext.language.aterms.resource.aterms/bin"/>
+			<pathelement path="../org.emftext.language.b/bin"/>
+			<pathelement path="../org.emftext.language.b.resource.mch/bin"/>
+			<pathelement path="../org.emftext.language.bool/bin"/>
+			<pathelement path="../org.emftext.language.bool.resource.bool/bin"/>
+			<pathelement path="../org.emftext.language.c_sharp/bin"/>
+			<pathelement path="../org.emftext.language.c_sharp.resource.csharp/bin"/>
+			<pathelement path="../org.emftext.language.c_sharp.test/bin"/>
+			<pathelement path="../org.emftext.language.chess/bin"/>
+			<pathelement path="../org.emftext.language.chess.checker/bin"/>
+			<pathelement path="../org.emftext.language.chess.resource.cg/bin"/>
+			<pathelement path="../org.emftext.language.conference/bin"/>
+			<pathelement path="../org.emftext.language.conference.resource.conference/bin"/>
+			<pathelement path="../org.emftext.language.csv/bin"/>
+			<pathelement path="../org.emftext.language.csv.resource.csv/bin"/>
+			<pathelement path="../org.emftext.language.custom_sandwich/bin"/>
+			<pathelement path="../org.emftext.language.custom_sandwich.resource.custom_sandwich/bin"/>
+			<pathelement path="../org.emftext.language.custom_sandwich.test/bin"/>
+			<pathelement path="../org.emftext.language.customer/bin"/>
+			<pathelement path="../org.emftext.language.customer.resource.customer/bin"/>
+			<pathelement path="../org.emftext.language.dot/bin"/>
+			<pathelement path="../org.emftext.language.dot.examples/bin"/>
+			<pathelement path="../org.emftext.language.dot.resource.dot/bin"/>
+			<pathelement path="../org.emftext.language.dot.test/bin"/>
+			<pathelement path="../org.emftext.language.dot.tools/bin"/>
+			<pathelement path="../org.emftext.language.ecore.resource/bin"/>
+			<pathelement path="../org.emftext.language.ecore.resource.ecore/bin"/>
+			<pathelement path="../org.emftext.language.ecore.resource.facade/bin"/>
+			<pathelement path="../org.emftext.language.ecore.resource.text/bin"/>
+			<pathelement path="../org.emftext.language.ecore.test/bin"/>
+			<pathelement path="../org.emftext.language.efactory/bin"/>
+			<pathelement path="../org.emftext.language.efactory.resource.efactory/bin"/>
+			<pathelement path="../org.emftext.language.efactory.resource.efactory.post_processing/bin"/>
+			<pathelement path="../org.emftext.language.featherweight_java/bin"/>
+			<pathelement path="../org.emftext.language.featherweight_java.resource.fj/bin"/>
+			<pathelement path="../org.emftext.language.featherweight_java.test/bin"/>
+			<pathelement path="../org.emftext.language.feature/bin"/>
+			<pathelement path="../org.emftext.language.feature.resource.feature/bin"/>
+			<pathelement path="../org.emftext.language.filesystem/bin"/>
+			<pathelement path="../org.emftext.language.filesystem.resource.fs/bin"/>
+			<pathelement path="../org.emftext.language.filesystem.resource.physical/bin"/>
+			<pathelement path="../org.emftext.language.filesystem.resource.physical.test/bin"/>
+			<pathelement path="../org.emftext.language.forms/bin"/>
+			<pathelement path="../org.emftext.language.forms.generator/bin"/>
+			<pathelement path="../org.emftext.language.forms.resource.forms/bin"/>
+			<pathelement path="../org.emftext.language.formular/bin"/>
+			<pathelement path="../org.emftext.language.formular.generator/bin"/>
+			<pathelement path="../org.emftext.language.formular.resource.formular/bin"/>
+			<pathelement path="../org.emftext.language.java/bin"/>
+			<pathelement path="../org.emftext.language.java_templates/bin"/>
+			<pathelement path="../org.emftext.language.java_templates.examples/bin"/>
+			<pathelement path="../org.emftext.language.java_templates.resource.java_template/bin"/>
+			<pathelement path="../org.emftext.language.java_templates.test/bin"/>
+			<pathelement path="../org.emftext.language.java.edit/bin"/>
+			<pathelement path="../org.emftext.language.java.ejava/bin"/>
+			<pathelement path="../org.emftext.language.java.ejava.edit/bin"/>
+			<pathelement path="../org.emftext.language.java.ejava.resource.ejava/bin"/>
+			<pathelement path="../org.emftext.language.java.examples/bin"/>
+			<pathelement path="../org.emftext.language.java.jamoppc/bin"/>
+			<pathelement path="../org.emftext.language.java.javabehavior4uml/bin"/>
+			<pathelement path="../org.emftext.language.java.javabehavior4uml.resource/bin"/>
+			<pathelement path="../org.emftext.language.java.javabehavior4uml.resource.javabehavior/bin"/>
+			<pathelement path="../org.emftext.language.java.metamodelprinter/bin"/>
+			<pathelement path="../org.emftext.language.java.properties/bin"/>
+			<pathelement path="../org.emftext.language.java.properties.edit/bin"/>
+			<pathelement path="../org.emftext.language.java.properties.resource/bin"/>
+			<pathelement path="../org.emftext.language.java.properties.resource.propjava/bin"/>
+			<pathelement path="../org.emftext.language.java.resource/bin"/>
+			<pathelement path="../org.emftext.language.java.resource.java/bin"/>
+			<pathelement path="../org.emftext.language.java.reusejava/bin"/>
+			<pathelement path="../org.emftext.language.java.reusejava.resource/bin"/>
+			<pathelement path="../org.emftext.language.java.reusejava.resource.reusejava/bin"/>
+			<pathelement path="../org.emftext.language.java.test/bin"/>
+			<pathelement path="../org.emftext.language.java.treejava/bin"/>
+			<pathelement path="../org.emftext.language.java.treejava.edit/bin"/>
+			<pathelement path="../org.emftext.language.java.treejava.examples/bin"/>
+			<pathelement path="../org.emftext.language.java.treejava.resource/bin"/>
+			<pathelement path="../org.emftext.language.java.treejava.resource.treejava/bin"/>
+			<pathelement path="../org.emftext.language.km3/bin"/>
+			<pathelement path="../org.emftext.language.km3.resource.km3/bin"/>
+			<pathelement path="../org.emftext.language.martinfowlerdsl/bin"/>
+			<pathelement path="../org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl/bin"/>
+			<pathelement path="../org.emftext.language.models/bin"/>
+			<pathelement path="../org.emftext.language.models.resource.model/bin"/>
+			<pathelement path="../org.emftext.language.office/bin"/>
+			<pathelement path="../org.emftext.language.office.resource.office/bin"/>
+			<pathelement path="../org.emftext.language.owl/bin"/>
+			<pathelement path="../org.emftext.language.owl.edit/bin"/>
+			<pathelement path="../org.emftext.language.owl.reasoning/bin"/>
+			<pathelement path="../org.emftext.language.owl.resource.owl/bin"/>
+			<pathelement path="../org.emftext.language.owl.test/bin"/>
+			<pathelement path="../org.emftext.language.parametercheck/bin"/>
+			<pathelement path="../org.emftext.language.parametercheck.resource.pcheck/bin"/>
+			<pathelement path="../org.emftext.language.petrinet/bin"/>
+			<pathelement path="../org.emftext.language.petrinet.resource.petrinet/bin"/>
+			<pathelement path="../org.emftext.language.pico/bin"/>
+			<pathelement path="../org.emftext.language.pico.resource.pico/bin"/>
+			<pathelement path="../org.emftext.language.plugin/bin"/>
+			<pathelement path="../org.emftext.language.plugin.resource.topf/bin"/>
+			<pathelement path="../org.emftext.language.plugin.resource.topf.post_processing/bin"/>
+			<pathelement path="../org.emftext.language.primitive_types/bin"/>
+			<pathelement path="../org.emftext.language.primitive_types.edit/bin"/>
+			<pathelement path="../org.emftext.language.quickuml/bin"/>
+			<pathelement path="../org.emftext.language.quickuml.resource.quml/bin"/>
+			<pathelement path="../org.emftext.language.rails/bin"/>
+			<pathelement path="../org.emftext.language.rails.resource.rails/bin"/>
+			<pathelement path="../org.emftext.language.regexp/bin"/>
+			<pathelement path="../org.emftext.language.regexp.resource.regexp_antlr/bin"/>
+			<pathelement path="../org.emftext.language.regexp.resource.regexp_sdf/bin"/>
+			<pathelement path="../org.emftext.language.regexp.test/bin"/>
+			<pathelement path="../org.emftext.language.sandwich/bin"/>
+			<pathelement path="../org.emftext.language.sandwich.resource.sandwich/bin"/>
+			<pathelement path="../org.emftext.language.simple_c/bin"/>
+			<pathelement path="../org.emftext.language.simple_c.resource.c/bin"/>
+			<pathelement path="../org.emftext.language.simple_c.test/bin"/>
+			<pathelement path="../org.emftext.language.simple_gui/bin"/>
+			<pathelement path="../org.emftext.language.simple_gui.resource.simplegui/bin"/>
+			<pathelement path="../org.emftext.language.simple_math/bin"/>
+			<pathelement path="../org.emftext.language.simple_math.resource.sm/bin"/>
+			<pathelement path="../org.emftext.language.simple_math.test/bin"/>
+			<pathelement path="../org.emftext.language.sparql/bin"/>
+			<pathelement path="../org.emftext.language.sparql.resource.sparql/bin"/>
+			<pathelement path="../org.emftext.language.statemachine/bin"/>
+			<pathelement path="../org.emftext.language.statemachine.resource.statemachine/bin"/>
+			<pathelement path="../org.emftext.language.tbool/bin"/>
+			<pathelement path="../org.emftext.language.tbool.resource.tbool/bin"/>
+			<pathelement path="../org.emftext.language.tbool.test/bin"/>
+			<pathelement path="../org.emftext.language.template_concepts/bin"/>
+			<pathelement path="../org.emftext.language.template_concepts.call/bin"/>
+			<pathelement path="../org.emftext.language.template_concepts.call.resource.template_call/bin"/>
+			<pathelement path="../org.emftext.language.template_concepts.interpreter/bin"/>
+			<pathelement path="../org.emftext.language.template_concepts.interpreter.test/bin"/>
+			<pathelement path="../org.emftext.language.test/bin"/>
+			<pathelement path="../org.emftext.language.test.bug933/bin"/>
+			<pathelement path="../org.emftext.language.test.bug933.resource.bug933/bin"/>
+			<pathelement path="../org.emftext.language.textadventure/bin"/>
+			<pathelement path="../org.emftext.language.textadventure.resource.tas/bin"/>
+			<pathelement path="../org.emftext.language.threevaluedlogic/bin"/>
+			<pathelement path="../org.emftext.language.threevaluedlogic.resource.tvl/bin"/>
+			<pathelement path="../org.emftext.language.usecaseinvariant/bin"/>
+			<pathelement path="../org.emftext.language.usecaseinvariant.resource.ucinv/bin"/>
+			<pathelement path="../org.emftext.language.valueflow/bin"/>
+			<pathelement path="../org.emftext.language.valueflow.diagram/bin"/>
+			<pathelement path="../org.emftext.language.valueflow.edit/bin"/>
+			<pathelement path="../org.emftext.language.valueflow.resource/bin"/>
+			<pathelement path="../org.emftext.language.valueflow.resource.valueflow/bin"/>
+			<pathelement path="../org.emftext.language.xml/bin"/>
+			<pathelement path="../org.emftext.language.xml.resource.xml/bin"/>
+			<pathelement path="../org.emftext.language.xml.test/bin"/>
+			<pathelement path="../org.emftext.sdk/bin" />
+			<pathelement path="../org.emftext.sdk.ant/bin" />
+			<pathelement path="../org.emftext.sdk.antlr3_2_0/bin" />
+			<pathelement path="../org.emftext.sdk.automaton/bin" />
+			<pathelement path="../org.emftext.sdk.codegen/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
+			<pathelement path="../org.emftext.test/bin"/>
+			<pathelement path="../org.emftext.test.ant/bin"/>
+			<pathelement path="../org.emftext.test.atl/bin"/>
+			<pathelement path="../org.emftext.test.bug933/bin"/>
+			<pathelement path="../org.emftext.test.bug933.resource.bug933/bin"/>
+			<pathelement path="../org.emftext.test.bug933.test/bin"/>
+			<pathelement path="../org.emftext.test.cct1/bin"/>
+			<pathelement path="../org.emftext.test.cct1.resource.cct1/bin"/>
+			<pathelement path="../org.emftext.test.cct2/bin"/>
+			<pathelement path="../org.emftext.test.cct2.resource.cct2/bin"/>
+			<pathelement path="../org.emftext.test.cct3/bin"/>
+			<pathelement path="../org.emftext.test.cct3.resource.cct3/bin"/>
+			<pathelement path="../org.emftext.test.code_completion.test/bin"/>
+			<pathelement path="../org.emftext.test.escaping/bin"/>
+			<pathelement path="../org.emftext.test.escaping.resource.escaping/bin"/>
+			<pathelement path="../org.emftext.test.grammar_features/bin"/>
+			<pathelement path="../org.emftext.test.grammar_features.resource.grammar_features/bin"/>
+			<pathelement path="../org.emftext.test.scannerless_parser/bin"/>
+			<pathelement path="../org.reuseware.coconut/bin"/>
+			<pathelement path="../org.reuseware.coconut.compositionprogram/bin"/>
+			<pathelement path="../org.reuseware.coconut.compositionprogramsyntax/bin"/>
+			<pathelement path="../org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax/bin"/>
+			<pathelement path="../org.reuseware.coconut.compositionsystem/bin"/>
+			<pathelement path="../org.reuseware.coconut.compositionsystem.resource.csys/bin"/>
+			<pathelement path="../org.reuseware.coconut.fragment/bin"/>
+			<pathelement path="../org.reuseware.coconut.fragment.resource.fragment/bin"/>
+			<pathelement path="../org.reuseware.coconut.repository/bin"/>
+			<pathelement path="../org.reuseware.coconut.reuseextension/bin"/>
+			<pathelement path="../org.reuseware.coconut.reuseextension.resource.rex/bin"/>
+			<pathelement path="../org.reuseware.coconut.store/bin"/>			
+			<fileset dir="../org.emftext.language.owl.reasoning/lib/">
+				<include name="**/*.jar"/>
+			</fileset>	
+			<fileset dir="../org.emftext.language.owl.resource.owl/lib/">
+				<include name="**/*.jar"/>
+			</fileset>	
+			<fileset dir="${eclipse.home}/">
+				<include name="plugins/**/org.junit*/junit.jar"/>
+				<include name="plugins/**/org.hamcrest*.jar"/>
+				<include name="plugins/**/org.eclipse.*.jar"/>
+				<include name="plugins/org.eclipse.core*.jar"/>
+				<include name="plugins/org.eclipse.osgi*.jar"/>
+				<include name="plugins/net.sourceforge.lpg.*.jar"/>
+			</fileset>
+		</path>
+
+		<manifestclasspath property="run_test_classpath_prop" jarfile="../temp_classpath.jar">
+			<classpath refid="run_test_classpath" />
+		</manifestclasspath>
+		
+		<jar destfile="../temp_classpath.jar">
+			<manifest>
+				<attribute name="Class-Path" value="${run_test_classpath_prop}"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="run-simple-tests" depends="create-classpath-jar">
+		<run-test plugin="org.emftext.language.c_sharp" extension="csharp" />
+		<run-test plugin="org.emftext.language.dot" extension="dot" />
+		<run-test plugin="org.emftext.language.ecore" extension="text" />
+		<run-test plugin="org.emftext.language.featherweight_java" extension="fj" />
+		<run-test plugin="org.emftext.language.regexp" extension="regexp" />
+		<run-test plugin="org.emftext.language.simple_c" extension="c" />
+		<run-test plugin="org.emftext.language.simple_math" extension="sm" />
+		<run-test plugin="org.emftext.test.bug933" extension="bug933" />
+		<!-- TODO enable this test -->
+		<!-- <run-test plugin="org.emftext.language.xml" extension="xml" /> -->
+	</target>
+
+	<target name="run-overall-tests" depends="create-classpath-jar">
+		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.test">
+			<jvmarg value="-ea" />
+			<jvmarg value="-Xms40m" />
+			<jvmarg value="-Xmx900m" />
+
+			<classpath>
+				<path path="../temp_classpath.jar"/>
+			</classpath>
+			
+			<formatter type="plain"/>
+	
+			<batchtest todir="${test_result_dir}">
+				<fileset dir="../org.emftext.language.test/src">
+					<include name="**/**Test.java"/>
+					<exclude name="**/CodeCompletionTest.java" />
+					<exclude name="**/Bug921Test.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+		
+	<target name="run-test-custom-sandwich" depends="create-classpath-jar">
+		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.custom_sandwich.test">
+			<jvmarg value="-ea" />
+
+			<classpath>
+				<path path="../temp_classpath.jar"/>
+			</classpath>
+			
+			<formatter type="plain"/>
+	
+			<batchtest todir="${test_result_dir}">
+				<fileset dir="../org.emftext.language.custom_sandwich.test/src">
+					<include name="**/**Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="run-test-java-templates">
+		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.java_templates.test">
+			<jvmarg value="-ea" />
+			<classpath>
+				<path path="../temp_classpath.jar"/>
+			</classpath>
+			
+			<formatter type="plain"/>
+	
+			<batchtest todir="${test_result_dir}">
+				<fileset dir="../org.emftext.language.java_templates.test/src">
+					<include name="**/**Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="run-test-ecore" depends="create-classpath-jar">
+		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.ecore.test">
+			<jvmarg value="-ea" />
+
+			<classpath>
+				<path path="../temp_classpath.jar"/>
+			</classpath>
+			
+			<formatter type="plain"/>
+	
+			<batchtest todir="${test_result_dir}">
+				<fileset dir="../org.emftext.language.ecore.test/src">
+					<include name="**/**Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+		
+	<target name="run-test-java">
+		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.java.test" newenvironment="true">
+			<jvmarg value="-ea" />
+			<classpath>
+				<path path="../temp_classpath.jar"/>
+			</classpath>
+			
+			<formatter type="plain"/>
+	
+			<batchtest todir="${test_result_dir}">
+				<fileset dir="../org.emftext.language.java.test/src">
+					<include name="**/**Test.java"/>
+					<!-- TODO remove these exclusions -->
+					<exclude name="org/emftext/language/java/test/AutomatedJavaLanguageFeatureTest.java" />
+					<exclude name="org/emftext/language/java/test/JavaLanguageFeatureTest.java" />
+					<exclude name="org/emftext/language/java/test/OrderedJavaLanguageFeatureTest.java" />
+					<exclude name="org/emftext/language/java/test/resolving_new/ResolvingTest.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+		
+</project>
