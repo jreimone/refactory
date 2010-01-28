@@ -1,0 +1,67 @@
+<project basedir="." default="run-all-emftext-tests" name="Run all tests for EMFText">
+	
+	<property name="test_result_dir" value="test_results"/>
+	<property file="build.properties"/>	
+	
+	<target name="run-all-emftext-tests" depends="run-emftext-tests" />
+		
+	<target name="run-emftext-tests">
+		
+		<delete dir="${test_result_dir}" includes="*.txt" />
+		
+		<path id="junit_classpath">
+			<pathelement path="../org.emftext.sdk/bin" />
+			<pathelement path="../org.emftext.sdk.ant/bin" />
+			<pathelement path="../org.emftext.sdk.antlr3_2_0/bin" />
+			<pathelement path="../org.emftext.sdk.automaton/bin" />
+			<pathelement path="../org.emftext.sdk.codegen/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
+			<pathelement path="../org.emftext.test/bin" />
+			<pathelement path="../org.emftext.test.escaping/bin" />
+			<pathelement path="../org.emftext.test.escaping.resource.escaping/bin" />
+			<pathelement path="../org.emftext.test.grammar_features/bin" />
+			<pathelement path="../org.emftext.test.grammar_features.resource.grammar_features/bin" />
+			<pathelement path="../org.emftext.test.scannerless_parser/bin" />
+			<fileset dir="${eclipse.home}/">
+				<include name="plugins/**/org.junit*/junit.jar"/>
+				<include name="plugins/**/org.hamcrest*.jar"/>
+				<include name="plugins/**/org.eclipse.*.jar"/>
+			</fileset>
+		</path>
+
+		<manifestclasspath property="junit_classpath_prop" jarfile="../temp_classpath.jar">
+			<classpath refid="junit_classpath" />
+		</manifestclasspath>
+		
+		<jar destfile="../temp_classpath.jar">
+			<manifest>
+				<attribute name="Class-Path" value="${junit_classpath_prop}"/>
+			</manifest>
+		</jar>
+
+	  	<!-- Run tests in plug-in org.emftext.test -->
+		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.test">
+			<jvmarg value="-ea" />
+			<classpath>
+				<path path="../temp_classpath.jar"/>
+			</classpath>
+			
+			<formatter type="plain"/>
+	
+			<batchtest todir="${test_result_dir}">
+				<fileset dir="../org.emftext.test/src">
+					<include name="**/**Test.java"/>
+					
+					<!-- Exclude DeterministicLoadTest because it needs to run as JUnit Plug-in test -->
+					<exclude name="org/emftext/test/resource/DeterministicLoadTest.java" />
+				</fileset>
+				<fileset dir="../org.emftext.test.scannerless_parser/src">
+					<include name="**/**Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+		
+</project>

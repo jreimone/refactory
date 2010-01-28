@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.emftext.language.java.ejava"
+      label="eJava: Specification Language for eOperations"
+      version="0.0.0"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://jamopp.inf.tu-dresden.de">
+      eJava: Specification Language for eOperation bodys in Ecore models.
+   </description>
+
+   <copyright>
+      Copyright (C) 2008-2009 Software Technology Group, Dresden University
+of Technology, Germany
+   </copyright>
+
+   <license>
+      eJava
+ Copyright (c) 2006-2010 
+ Software Technology Group, Dresden University of Technology
+ 
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0 
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+ 
+ Contributors:
+   Software Technology Group - TU Dresden, Germany 
+      - initial API and implementation
+   </license>
+
+   <requires>    
+      <import feature="org.emftext.language.java"/>
+   </requires>
+
+   <plugin
+         id="org.emftext.language.java.ejava"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.language.java.ejava.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.language.java.ejava.resource"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.language.java.ejava.resource.ejava"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+</feature>

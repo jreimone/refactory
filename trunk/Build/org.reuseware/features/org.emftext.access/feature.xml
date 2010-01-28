@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.emftext.access"
+      label="EMFText Access"
+      version="0.0.0"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://emftext.org">
+      EMFText: a grammar-based text syntax definition tool for Ecore metamodels.
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2010 Software Technology Group, Dresden University
+of Technology, Germany
+   </copyright>
+
+   <license>
+ Copyright (c) 2006-2010 
+ Software Technology Group, Dresden University of Technology
+ 
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0 
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+ 
+ Contributors:
+   Software Technology Group - TU Dresden, Germany 
+      - initial API and implementation
+   </license>
+   
+   <requires>
+      <import feature="org.eclipse.platform"/>
+      <import feature="org.eclipse.emf"/>
+      <import feature="org.eclipse.emf.workspace"/>
+   </requires>
+
+   <plugin
+         id="org.emftext.access"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

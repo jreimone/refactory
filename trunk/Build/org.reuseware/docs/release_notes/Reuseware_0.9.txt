@@ -1,0 +1,15 @@
+
+Reuseware Composition Framework 0.9 released
+
+Version 0.9 is now available at the Reuseware update site
+(http://reuseware.org/update). With the Reuseware Composition
+Framework, it is easy to integrate new composition abstractions 
+into arbitrary software languages that are defined by Ecore
+metamodels. In this major release the stability of Reuseware 
+has been significantly improved and a number of new applications 
+are provided.
+
+Please visit the Reuseware website at 
+http://reuseware.org 
+and explore the existing applications at
+http://reuseware.org/index.php/Applications.

@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [<!ENTITY buildfile SYSTEM "file:./build-user.xml">]>
+
+<!-- 
+  This ANT script builds EMFText and Reuseware. It is intended to be executed within Eclipse.
+  The projects of EMFText and/or Reuseware need to be available inside the same workspace
+  as the "org.reuseware" plugin (in which this file resides). This build does not compile Java
+  source files but packages the class files built by the Eclipse JDT builder.
+  
+  The following tasks are provided for local building:
+  
+  Properties (build.properties file):
+  ===================================
+    baseversion      - Version of the release, e.g. 0.5.3 (current timestamp will be appended automatically)
+  
+  Task:
+  =====
+    dist:                builds everything into the "dist" folder
+    dist-reuseware:      builds Reuseware (incl. EMFText) into the "dist" folder
+    dist-emf-text:       builds only EMFText into the "dist" folder
+
+
+  The following tasks are provided for distributing a new version on the web. To run these tasks, 
+  jsch-0.1.29.jar or later is required in the classpath (available from: http://www.jcraft.com/jsch/index.html)
+  
+  Properties (build.properties file):
+  ===================================
+    baseversion      - Version of the release, e.g. 0.5.3 (current timestamp will be appended automatically)
+
+  Task:
+  =====
+    dist:                builds everything into the "dist" folder
+    dist-upload:         builds and uploads to 1) "http://reuseware.org/update" (update site)
+                         2) to "http://reuseware.org/archive/reuseware-XXX.zip"
+    dist-dev-upload:     builds and uploads to "http://reuseware.org/update/dev" (developer version update site)
+    dist-doc-upload:     builds and publishes the javadoc at "http://reuseware.org/api"
+
+
+  The following tasks can be used during development (not used by the tasks above!)
+
+  Task:
+  =====
+    generate-doc:        refreshes the javadoc in all org.reuseware.*.doc projects
+    generate-reuseware-metamodel-code:        
+                         generates Reuseware metamodel code by calling the EMF code generation;
+                         Fujaba code generation needs to be executed first (!)
+                             
+-->
+
+<project basedir="." default="dist" name="Reuseware">
+	<property file="build.properties"/>
+	<property name="plugins.vendor" value="Software Technology Group - TU Dresden Germany" />
+	<property name="plugins.namepre" value="" />
+    <property name="plugins.namepost" value="" />
+
+	<macrodef name="buildplugin" >
+	    <attribute name="package"/>
+	    <attribute name="name"/>
+		<attribute name="version"/>
+		
+	    <sequential>
+
+			<manifest file="../@{package}/META-INF/MANIFEST.MF" mode="update">
+		    	<attribute name="Bundle-Version" value="@{version}.v${DSTAMP}${TSTAMP}"/>
+				<attribute name="Bundle-Vendor" value="${plugins.vendor}"/>
+				<attribute name="Bundle-SymbolicName" value="@{package}; singleton:=true"/>
+				<attribute name="Bundle-Name" value="${plugins.namepre}@{name}${plugins.namepost}"/>
+		    	</manifest>
+		    	
+		    	<jar destfile="dist/plugins/@{package}_@{version}.v${DSTAMP}${TSTAMP}.jar" manifest="../@{package}/META-INF/MANIFEST.MF">
+		    		<fileset dir="../@{package}/bin"/>		
+		    		<fileset dir="../@{package}" includes="*.xml *.zip about.* LICENSE.TXT messages.properties plugin.properties model/** metamodel/** store/** schema/** icons/** html/** css/** lib/**"/>	
+		    		<fileset dir="../@{package}" includes="src*/**/*.java"/>			    	
+		    	</jar>
+
+	    </sequential>
+	</macrodef>
+	
+	<macrodef name="buildfeature" >
+	    <attribute name="package"/>
+		<attribute name="version"/>
+		
+		<!-- update version numbers in feature.xml -->
+		
+	    <sequential>
+	    	<!-- copy to be modified -->
+	    	<copy file="features/@{package}/feature.xml" tofile="dist/features/@{package}/feature.xml"/>
+	    	<!-- set version in copy -->
+	    	<replace file="dist/features/@{package}/feature.xml" token="0.0.0" value="@{version}.v${DSTAMP}${TSTAMP}"/>
+	    	<!-- jar -->
+			<jar basedir="dist/features/@{package}" includes="feature.xml" destfile="dist/features/@{package}_@{version}.v${DSTAMP}${TSTAMP}.jar"/>
+	    	<!-- delete copy -->
+	    	<delete dir="dist/features/@{package}"/>
+	    	<!-- set version in site.xml -->
+	    	<replaceregexp file="dist/site.xml"
+	    		match='feature url="features/@{package}_[0-9]*.[0-9]*.[0-9]*.v[0-9]*.jar" id="@{package}" version="[0-9]*.[0-9]*.[0-9]*.v[0-9]*"' 
+	    	    replace='feature url="features/@{package}_@{version}.v${DSTAMP}${TSTAMP}.jar" id="@{package}" version="@{version}.v${DSTAMP}${TSTAMP}"'/>
+	    </sequential>
+
+	</macrodef>
+
+	<target name="dist" depends="dist-clean,dist-set-up,build-emf-text,build-emftext-language-components,build-jamopp,build-emftext-languages,build-reuseware,dist-tear-down">
+	</target>
+		
+	<target name="dist-reuseware" depends="dist-clean,dist-set-up,build-reuseware,dist-tear-down">
+	</target>
+
+	<target name="dist-emf-text" depends="dist-clean,dist-set-up,build-emf-text,dist-tear-down">
+	</target>
+	
+	<target name="dist-set-up">
+		<tstamp/>
+		<!-- <property name="plugins.version" value="${baseversion}.v${DSTAMP}${TSTAMP}"/> -->
+		
+		<!-- create target directories -->
+		<mkdir dir="dist/plugins"/>
+		<mkdir dir="dist/features"/>
+		
+		<!-- Global files -->
+		<copy file="site.xml" todir="dist"/>
+		<copy file="associateSites.xml" todir="dist"/>
+		<copy file="COPYING" todir="dist"/>
+	</target>
+			
+	<target name="dist-tear-down">
+	</target>
+
+	<target name="dist-clean">
+		<delete dir="dist"/>
+		<mkdir dir="dist"/>
+	</target>
+		
+	<target name="build-reuseware">
+		<property name="reuseware.version" value="0.9.1"/>
+		
+		<!-- CoCoNut Feature -->
+		<buildplugin name="Reuseware Runtime (CoCoNut)"             package="org.reuseware.coconut" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Runtime (CoCoNut) Resource Management"  package="org.reuseware.coconut.resource" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Runtime (CoCoNut) Eclipse UI"  package="org.reuseware.coconut.ui.eclipse" version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware Repository Metamodel"            package="org.reuseware.coconut.repository" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Repository Metamodel Edit"       package="org.reuseware.coconut.repository.edit" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware Composition System Metamodel"            package="org.reuseware.coconut.compositionsystem" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition System Metamodel Edit"       package="org.reuseware.coconut.compositionsystem.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition System Metamodel Textsyntax" package="org.reuseware.coconut.compositionsystem.resource.csys" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware Reuse Extension Metamodel"            package="org.reuseware.coconut.reuseextension" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Metamodel Edit"       package="org.reuseware.coconut.reuseextension.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Metamodel Textsyntax" package="org.reuseware.coconut.reuseextension.resource.rex" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware Fragment Store Metamodel"          package="org.reuseware.coconut.store" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware Fragment Metamodel"                package="org.reuseware.coconut.fragment" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Fragment Metamodel Edit"           package="org.reuseware.coconut.fragment.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Fragment Metamodel Textsyntax for Virtual Fragments"  package="org.reuseware.coconut.fragment.resource.fragment" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware Composition Program Metamodel"                package="org.reuseware.coconut.compositionprogram" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition Program Metamodel Edit"           package="org.reuseware.coconut.compositionprogram.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition Program Metamodel Diagram Editor" package="org.reuseware.coconut.compositionprogram.diagram" version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware Composition Program Syntax Metamodel"            package="org.reuseware.coconut.compositionprogramsyntax" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition Program Syntax Metamodel Edit"       package="org.reuseware.coconut.compositionprogramsyntax.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition Program Syntax Metamodel Textsyntax" package="org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax" version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware Selection Virtual Fragment Interpreter"  package="org.reuseware.coconut.fragment.virtual.selection" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Fragment Query Interpreter"              package="org.reuseware.coconut.fragment.virtual.query" version="${reuseware.version}"/>
+			
+		<buildplugin name="Reuseware Documentation"   package="org.reuseware.coconut.doc" version="${reuseware.version}"/>
+		
+		<buildfeature package="org.reuseware.coconut" version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware GMF Diagram Composition"        package="org.reuseware.coconut.fragment.diagrams.gmf" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.coconut.diagrams.gmf"   version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware RSA Diagram Composition"        package="org.reuseware.coconut.fragment.diagrams.rsa" version="${reuseware.version}"/>	
+		<buildfeature package="org.reuseware.coconut.diagrams.rsa"   version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware TOPCASED Diagram Composition"   package="org.reuseware.coconut.fragment.diagrams.topcased" version="${reuseware.version}"/>	
+		<buildfeature package="org.reuseware.coconut.diagrams.topcased"    version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware Round-trip support"             package="org.reuseware.coconut.roundtrip" version="${reuseware.version}"/>
+		<!-- TODO Activate this when multiple handlers are supported and add it to feature
+		<buildplugin name="Reuseware Round-trip Interactive"   package="org.reuseware.coconut.roundtrip.security_dsl" version="${reuseware.version}"/> -->
+		<buildfeature package="org.reuseware.coconut.roundtrip"      version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware Library Metamodel"      package="org.reuseware.coconut.description"          version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Library Metamodel Edit" package="org.reuseware.coconut.description.edit"     version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Library Classify"       package="org.reuseware.coconut.description.classify" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Library Browser"        package="org.reuseware.coconut.description.browse"   version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Library Simlple Facet View" package="org.reuseware.coconut.description.facetview.simple" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.coconut.description" version="${reuseware.version}"/>
+		
+		<zip basedir="dist" destfile="dist/reuseware-${reuseware.version}.v${DSTAMP}${TSTAMP}.zip"
+			includes="COPYING, 
+			         plugins/org.reuseware.*,
+		             features/org.reuseware.*"/>
+	</target>
+		
+	<target name="build-emf-text">
+		<!-- DEPRECATED: EMFText 1.1 Runtime Feature -->
+		<buildplugin name="ANTLR3 Runtime (DEPRECATED)"                 package="org.emftext.runtime.antlr" version="1.1.3"/>	
+		<buildplugin name="EMFText 1.1 Runtime (DEPRECATED)"            package="org.emftext.runtime" version="1.1.3"/>	
+		<buildplugin name="EMFText OCL Validation Support (DEPRECATED)" package="org.emftext.runtime.ocl" version="1.1.3"/>	
+		<buildplugin name="EMFText Eclipse UI (DEPRECATED)"             package="org.emftext.runtime.ui" version="1.1.3"/>	
+		<buildfeature package="org.emftext.runtime" version="1.1.3"/>
+		<!-- DEPRECATED -->
+		
+		<property name="emftext.version" value="1.2.0"/>
+
+		<!-- EMFText Shared ANTLR Runtime -->
+		<buildplugin name="EMFText Shared ANTLR 3.1.1 Runtime" package="org.emftext.commons.antlr3_1_1" version="3.1.1"/>	
+		
+		<buildfeature package="org.emftext.commons.antlr3_1_1" version="3.1.1"/>
+		
+		<!-- EMFText Access Feature -->
+		<buildplugin name="EMFText Access"                 package="org.emftext.access" version="${emftext.version}"/>	
+		
+		<buildfeature package="org.emftext.access" version="${emftext.version}"/>
+		
+		<!-- EMFText SDK Feature -->
+		<buildplugin name="Dependencies: ANTLR3 SDK, ANTLR2, STRINGTEMPLATE" package="org.emftext.sdk.antlr" version="${emftext.version}"/>	
+
+		<buildplugin name="EMFText SDK"                         package="org.emftext.sdk" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK ANTLR Support"           package="org.emftext.sdk.antlr" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK ANTLR 3.2.0 Support"     package="org.emftext.sdk.antlr3_2_0" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Automaton Support"       package="org.emftext.sdk.automaton" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators"         package="org.emftext.sdk.codegen" version="${emftext.version}"/>	
+		<buildplugin name="EMFText Concretesyntax Metamodel"    package="org.emftext.sdk.concretesyntax" version="${emftext.version}"/>	
+		<buildplugin name="EMFText Concretesyntax Metamodel Edit Support"    package="org.emftext.sdk.concretesyntax.edit" version="${emftext.version}"/>	
+		<buildplugin name="EMFText Concretesyntax Metamodel Text Syntax"     package="org.emftext.sdk.concretesyntax.resource.cs" version="${emftext.version}"/>
+		<buildplugin name="EMFText Concretesyntax Metamodel Post Processing" package="org.emftext.sdk.concretesyntax.resource.cs.post_processing" version="${emftext.version}"/>
+		<buildplugin name="EMFText SDK Eclipse UI"      package="org.emftext.sdk.ui" version="${emftext.version}"/>
+		<buildplugin name="EMFText SDK Ant Support"     package="org.emftext.sdk.ant" version="${emftext.version}"/>	
+		<buildplugin name="EMFText Documentation"   	package="org.emftext.doc" version="${emftext.version}"/>
+		
+		<buildfeature package="org.emftext.sdk" version="${emftext.version}"/>
+		
+		<zip basedir="dist" destfile="dist/emf-text-${emftext.version}.v${DSTAMP}${TSTAMP}.zip"
+			includes="COPYING, 
+	                 plugins/org.emftext.sdk*, 
+                     features/org.emftext.sdk*,
+			         plugins/org.emftext.access*, 
+		             features/org.emftext.access*"/>
+	</target>
+
+
+	<target name="build-emftext-language-components">
+		<property name="emftext.components.version" value="1.2.0"/>
+			
+		<buildplugin name="Primitive Types Core Metamodel"              package="org.emftext.language.primitive_types"      version="0.5.1"/>
+		<buildplugin name="Primitive Types Core Metamodel Edit Support" package="org.emftext.language.primitive_types.edit" version="0.5.1"/>
+		<buildfeature                                                   package="org.emftext.language.primitive_types"      version="0.5.1"/>
+
+		<buildplugin name="Template Concepts Metamodel"  
+			package="org.emftext.language.template_concepts"                             version="0.5.1"/>
+		<buildplugin name="Safe Template Interpreter"    
+			package="org.emftext.language.template_concepts.interpreter"                 version="0.5.1"/>
+		<buildplugin name="Safe Template Call Languge Metamodel" 
+			package="org.emftext.language.template_concepts.call"                        version="0.5.1"/>
+		<buildplugin name="Safe Template Call Languge Syntax"    
+			package="org.emftext.language.template_concepts.call.resource.template_call" version="0.5.1"/>
+		<buildfeature                                    
+			package="org.emftext.language.template_concepts"                             version="0.5.1"/>
+		
+		<!-- TODO OCL?
+			<buildplugin name="EMFText OCL Validation Support" package="org.emftext.util.ocl" version="${emftext.version}"/>	
+		-->
+		
+		<zip basedir="dist" destfile="dist/emf-text-language-components-${emftext.components.version}.v${DSTAMP}${TSTAMP}.zip" 
+			includes="COPYING,
+			          plugins/org.emftext.language.template_concepts*,
+			          features/org.emftext.language.template_concepts_*,
+                      plugins/org.emftext.language.primitive_types*,
+                      features/org.emftext.language.primitive_types_*"/>
+	</target>
+		
+	<target name="build-jamopp">
+		<property name="jamopp.version" value="1.1.0"/>
+		<!-- JaMoPP Feature -->		
+		<buildplugin name="JaMoPP (Java Model Parser and Printer) Metamodel"                                  package="org.emftext.language.java" version="${jamopp.version}"/>	
+		<buildplugin name="JaMoPP (Java Model Parser and Printer) Metamodel Edit Support"                     package="org.emftext.language.java.edit" version="${jamopp.version}"/>	
+		<buildplugin name="JaMoPP (Java Model Parser and Printer) Source File Support"                        package="org.emftext.language.java.resource.java" version="${jamopp.version}"/>	
+		<buildplugin name="JaMoPP (Java Model Parser and Printer) Integrated Source and Class File Support"   package="org.emftext.language.java.resource" version="${jamopp.version}"/>	
+		
+		<buildfeature package="org.emftext.language.java" version="${jamopp.version}"/>
+		
+		<zip basedir="dist" destfile="dist/jamopp-${jamopp.version}.v${DSTAMP}${TSTAMP}.zip" 
+			includes="COPYING,
+			          plugins/org.emftext.language.java_*, 
+	                  plugins/org.emftext.language.java.edit_*, 
+			          plugins/org.emftext.language.java.resource.java_*, 
+			          plugins/org.emftext.language.java.resource_*,
+		              features/org.emftext.language.java_*,
+					  plugins/org.emftext.commons.antlr3_1_1_*,          
+                      features/org.emftext.commons.antlr3_1_1_*"/>
+	</target>
+	
+	<target name="build-emftext-languages">
+		<property name="emftext.zoo.version" value="1.2.0"/>
+		<!-- ABNF -->
+		<buildplugin  name="Metamodel for ABNF syntax" package="org.emftext.language.abnf"               version="0.8.0" />
+		<buildplugin  name="ABNF syntax plugin"        package="org.emftext.language.abnf.resource.abnf" version="0.8.0" />
+		<buildfeature                                  package="org.emftext.language.abnf"               version="0.8.0" />
+		
+		<!-- Chess -->
+		<buildplugin  name="Metamodel for Chess Boards" package="org.emftext.language.chess"              version="0.5.1"/>
+		<buildplugin  name="Chess Checker"              package="org.emftext.language.chess.checker"      version="0.5.1"/>
+		<buildplugin  name="Chess Board Textsyntax"     package="org.emftext.language.chess.resource.cg"  version="0.5.1"/>
+		<buildfeature                                   package="org.emftext.language.chess"              version="0.5.1" />
+
+		<!-- Conference -->
+		<buildplugin  name="Metamodel for Conference Planning" package="org.emftext.language.conference"                     version="0.1.2"/>
+		<buildplugin  name="Conference Planning Textsyntax"    package="org.emftext.language.conference.resource.conference" version="0.1.2"/>
+		<buildfeature                                          package="org.emftext.language.conference"                     version="0.1.2" />
+
+		<!-- CSV -->
+		<buildplugin  name="Comma Separated Value (CSV) Metamodel"   package="org.emftext.language.csv"              version="1.0.0"/>
+		<buildplugin  name="Comma Separated Value (CSV) Textsyntax"  package="org.emftext.language.csv.resource.csv" version="1.0.0"/>
+		<buildfeature                                                package="org.emftext.language.csv"              version="1.0.0" />
+		
+		<!-- Customer -->
+		<buildplugin  name="Metamodel for Customers" package="org.emftext.language.customer"                    version="0.5.1"/>
+		<buildplugin  name="Customer Textsyntax"     package="org.emftext.language.customer.resource.customer"  version="0.5.1"/>
+		<buildfeature                                package="org.emftext.language.customer"                    version="0.5.1" />
+
+		<!-- Custom Sandwich (Template Language) -->
+		<buildplugin  name="Sandwich Template Language" 
+			package="org.emftext.language.custom_sandwich"                          version="0.5.1"/>
+		<buildplugin  name="Sandwich Template Language Resource"     
+			package="org.emftext.language.custom_sandwich.resource"                 version="0.5.1"/>
+
+		<buildplugin  name="Sandwich Template Language Textsyntax"     
+			package="org.emftext.language.custom_sandwich.resource.custom_sandwich" version="0.5.1"/>
+		<buildfeature                                
+			package="org.emftext.language.custom_sandwich"                          version="0.5.1" />
+			
+		<!-- TODO: C# -->
+		
+		<!-- Dot -->
+		<buildplugin  name="Metamodel for graphs" package="org.emftext.language.dot"              version="0.5.0"/>
+		<buildplugin  name="DOT Textsyntax"       package="org.emftext.language.dot.resource.dot" version="0.5.0"/>
+		<buildplugin  name="DOT tool integration" package="org.emftext.language.dot.tools"        version="0.5.0"/>
+		<buildfeature                             package="org.emftext.language.dot"              version="0.5.0" />
+
+		<!-- Ecore Text -->
+		<buildplugin  name="Multi-Format Support for Ecore Models" package="org.emftext.language.ecore.resource"      version="0.9.2"/>
+		<buildplugin  name="Ecore Text Syntax Specification"        package="org.emftext.language.ecore.resource.text" version="0.9.2"/>
+		<buildfeature                                               package="org.emftext.language.ecore"               version="0.9.2" />
+		
+		<!-- Ecore Facade -->
+		<buildplugin  name="Ecore Facade Text Syntax Specification"  package="org.emftext.language.ecore.resource.facade" version="0.9.2"/>
+		<buildplugin  name="Ecore Facade Model Merger"               package="org.emftext.language.ecore.resource.facade.merger" version="0.9.2"/>
+		<buildfeature                                                package="org.emftext.language.ecore.facade"          version="0.9.2" />
+		
+		<!-- TODO: EMF-XML -->
+		
+		<!-- EFactory -->
+		<buildplugin name="EFactory Metamodel"            package="org.emftext.language.efactory" version="0.1.0"/>
+		<buildplugin name="EFactory Textsyntax"           package="org.emftext.language.efactory.resource.efactory" version="0.1.0"/>
+		<buildplugin name="EFactory Post Processing"      package="org.emftext.language.efactory.resource.efactory.post_processing" version="0.1.0"/>
+		<buildfeature                                     package="org.emftext.language.efactory" version="0.1.0"/>
+
+		<!-- Featherweight Java -->
+		<buildplugin name="Featherweight Java Metamodel"  package="org.emftext.language.featherweight_java" version="0.1.0"/>
+		<buildplugin name="Featherweight Java Textsyntax" package="org.emftext.language.featherweight_java.resource.fj" version="0.1.0"/>
+		<buildfeature                                     package="org.emftext.language.featherweight_java" version="0.1.0"/>
+		
+		<!-- Feature -->
+		<buildplugin name="Feature Model Metamodel"  package="org.emftext.language.feature" version="0.5.1"/>
+		<buildplugin name="Feature Model Textsyntax" package="org.emftext.language.feature.resource.feature" version="0.5.1"/>
+		<buildfeature                                package="org.emftext.language.feature" version="0.5.1"/>
+
+		<!-- Forms -->
+		<buildplugin  name="Forms Syntax Specification" package="org.emftext.language.forms"                       version="1.0.1" />
+		<buildplugin  name="HTML and PDF Generators for Forms language" package="org.emftext.language.forms.generator" version="1.0.1" />
+		<buildplugin  name="Forms Syntax"               package="org.emftext.language.forms.resource.forms"        version="1.0.1" />
+		<buildfeature                                   package="org.emftext.language.forms"                       version="1.0.1" />
+		
+		<!-- Formular -->
+		<buildplugin  name="Formular Syntax Specification" package="org.emftext.language.formular"                       version="1.0.1" />
+		<buildplugin  name="HTML and PDF Generators for Formular language" package="org.emftext.language.formular.generator" version="1.0.1" />
+		<buildplugin  name="Formular Syntax"               package="org.emftext.language.formular.resource.formular"     version="1.0.1" />
+		<buildfeature                                      package="org.emftext.language.formular"                       version="1.0.1" />
+		
+		<!-- eJava  -->
+		<buildplugin name="eJava Metamodel"              package="org.emftext.language.java.ejava" version="1.0.1"/>
+		<buildplugin name="eJava Metamodel Edit Support" package="org.emftext.language.java.ejava.edit" version="1.0.1"/>
+		<buildplugin name="eJava Resource"               package="org.emftext.language.java.ejava.resource" version="1.0.1"/>
+		<buildplugin name="eJava Textsyntax"             package="org.emftext.language.java.ejava.resource.ejava" version="1.0.1"/>
+		<buildfeature package="org.emftext.language.java.ejava" version="1.0.1"/>
+
+		<!-- TODO Java Template 
+		<buildplugin name="Safe Java Template Language (Metamodel)"  package="org.emftext.language.java_templates" version="0.5.1"/>
+		<buildplugin name="Safe Java Template Language (Resource)"   package="org.emftext.language.java_templates.resource" version="0.5.1"/>
+		<buildplugin name="Safe Java Template Language (Textsyntax)" package="org.emftext.language.java_templates.resource.java_template" version="0.5.1"/>
+		<buildfeature package="org.emftext.language.java_templates" version="0.5.1"/>		
+		-->
+		
+		<!-- JavaBehavior4UML -->
+		<buildplugin name="Java Method Behavior in UML Class Diagrams (Metamodel)"  package="org.emftext.language.java.javabehavior4uml" version="0.1.1"/>
+		<buildplugin name="Java Method Behavior in UML Class Diagrams (Resource)"   package="org.emftext.language.java.javabehavior4uml.resource" version="0.1.1"/>
+		<buildplugin name="Java Method Behavior in UML Class Diagrams (Textsyntax)" package="org.emftext.language.java.javabehavior4uml.resource.javabehavior" version="0.1.1"/>
+		<buildfeature package="org.emftext.language.java.javabehavior4uml" version="0.1.1"/>
+		
+		<!-- Java Properties -->
+		<buildplugin name="Java Properties Extension (Metamodel)"  package="org.emftext.language.java.properties" version="0.1.0"/>
+		<buildplugin name="Java Properties Extension (Edit)"       package="org.emftext.language.java.properties.edit" version="0.1.0"/>
+		<buildplugin name="Java Properties Extension (Resource)"   package="org.emftext.language.java.properties.resource" version="0.1.0"/>
+		<buildplugin name="Java Properties Extension (Textsyntax)" package="org.emftext.language.java.properties.resource.propjava" version="0.1.0"/>
+		<buildfeature package="org.emftext.language.java.properties" version="0.1.0"/>
+		
+		<!-- Reuse Java -->
+		<buildplugin name="Example Java Extension for Reuseware (Metamodel)"  package="org.emftext.language.java.reusejava" version="0.1.1"/>
+		<buildplugin name="Example Java Extension for Reuseware (Resource)"   package="org.emftext.language.java.reusejava.resource" version="0.1.1"/>
+		<buildplugin name="Example Java Extension for Reuseware (Textsyntax)" package="org.emftext.language.java.reusejava.resource.reusejava" version="0.1.1"/>
+		<buildfeature package="org.emftext.language.java.reusejava" version="0.1.1"/>
+
+		<!-- Tree Java -->
+		<buildplugin  name="Tree Java Metamodel"      package="org.emftext.language.java.treejava"                version="0.1.2" />
+		<buildplugin  name="Tree Java Metamodel Edit" package="org.emftext.language.java.treejava.edit"           version="0.1.2" />
+		<buildplugin  name="Tree Java Resource"    package="org.emftext.language.java.treejava.resource"          version="0.1.2" />
+		<buildplugin  name="Tree Java Textsyntax"  package="org.emftext.language.java.treejava.resource.treejava" version="0.1.2" />
+		<buildfeature                              package="org.emftext.language.java.treejava"                   version="0.1.2" />
+		
+		<!-- TODO: PropJava -->
+		
+		<!-- TODO: Models -->
+		
+		<!-- KM3 -->
+		<buildplugin  name="KM3 Metamodel"          package="org.emftext.language.km3"                version="0.5.1" />
+		<buildplugin  name="KM3 Syntax"             package="org.emftext.language.km3.resource.km3"   version="0.5.1" />
+		<buildfeature                               package="org.emftext.language.km3"                version="0.5.1" />
+
+		<!-- Martin Fowler's DSL -->
+		<buildplugin  name="Martin Fowler's DSL Metamodel"          package="org.emftext.language.martinfowlerdsl"                version="0.5.0" />
+		<buildplugin  name="Martin Fowler's DSL Syntax"   package="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl" version="0.5.0" />
+		<buildfeature                                               package="org.emftext.language.martinfowlerdsl"                version="0.5.0" />
+			
+		<!-- Office -->
+		<buildplugin  name="Office DSL Metamodel" package="org.emftext.language.office"                 version="0.5.0" />
+		<buildplugin  name="Office DSL Syntax"    package="org.emftext.language.office.resource.office" version="0.5.0" />
+		<buildfeature                             package="org.emftext.language.office"                 version="0.5.0" />
+		
+		<!-- OWL -->
+		<buildplugin  name="OWL Metamodel"          package="org.emftext.language.owl"                version="1.1.0" />
+		<buildplugin  name="OWL Metamodel (Edit Support)" package="org.emftext.language.owl.edit"     version="1.1.0" />
+		<buildplugin  name="OWL Reasoning"          package="org.emftext.language.owl.reasoning"      version="1.1.0" />
+		<buildplugin  name="OWL Manchester Syntax"  package="org.emftext.language.owl.resource.owl"   version="1.1.0" />
+		<buildfeature                               package="org.emftext.language.owl"                version="1.1.0" />
+
+		<!-- Petrinet -->
+		<buildplugin  name="Petri Net Metamodel" package="org.emftext.language.petrinet"                   version="0.5.0" />
+		<buildplugin  name="Petri Net Syntax"    package="org.emftext.language.petrinet.resource.petrinet" version="0.5.0" />
+		<buildfeature                            package="org.emftext.language.petrinet"                   version="0.5.0" />
+
+		<!-- Pico -->
+		<buildplugin  name="Pico Metamodel" package="org.emftext.language.pico"               version="0.1.0" />
+		<buildplugin  name="Pico Syntax"    package="org.emftext.language.pico.resource.pico" version="0.1.0" />
+		<buildfeature                       package="org.emftext.language.pico"               version="0.1.0" />
+	
+		<!-- TODO: Plugin -->
+		
+		<!-- Quick UML -->
+		<buildplugin  name="Quick UML Syntax"  package="org.emftext.language.quickuml.resource.quml"   version="0.1.2" />
+		<buildfeature                          package="org.emftext.language.quickuml"                 version="0.1.2" />
+	
+		<!-- Regular Expressions -->
+		<buildplugin  name="Regular Expressions Syntax Specification" package="org.emftext.language.regexp"                     version="0.1.2" />
+		<buildplugin  name="Regular Expressions ANTLR Syntax"         package="org.emftext.language.regexp.resource.regexp_antlr" version="0.1.2" />
+		<buildplugin  name="Regular Expressions SDF Syntax"           package="org.emftext.language.regexp.resource.regexp_sdf" version="0.1.2" />
+		<buildfeature                                                 package="org.emftext.language.regexp"                     version="0.1.2" />
+		
+		<!-- Sandwich -->
+		<buildplugin name="Sandwich Recipe Metamodel"  package="org.emftext.language.sandwich" version="0.5.1"/>
+		<buildplugin name="Sandwich Recipe Textsyntax" package="org.emftext.language.sandwich.resource.sandwich" version="0.5.1"/>
+		<buildfeature package="org.emftext.language.sandwich" version="0.5.1"/>
+
+		<!-- TODO Simple C 
+		<buildplugin name="Simple C Metamodel"  package="org.emftext.language.simple_c" version="0.1.2"/>
+		<buildplugin name="Simple C Textsyntax" package="org.emftext.language.simple_c.resource.c" version="0.1.2"/>
+		<buildfeature package="org.emftext.language.simple_c" version="0.1.2"/>
+		-->
+		
+		<!-- Simple GUI -->
+		<buildplugin name="Simple GUI Metamodel"  package="org.emftext.language.simple_gui" version="0.1.2"/>
+		<buildplugin name="Simple GUI Textsyntax" package="org.emftext.language.simple_gui.resource.simplegui" version="0.1.2"/>
+		<buildfeature package="org.emftext.language.simple_gui" version="0.1.2"/>
+		
+		<!-- Simple Math -->
+		<buildplugin name="Simple Math Metamodel"  package="org.emftext.language.simple_math" version="0.1.2"/>
+		<buildplugin name="Simple Math Textsyntax" package="org.emftext.language.simple_math.resource.sm" version="0.1.2"/>
+		<buildfeature package="org.emftext.language.simple_math" version="0.1.2"/>
+		
+		<!-- Statemachine -->
+		<buildplugin name="UML Statemachine Textsyntax Specification" package="org.emftext.language.statemachine" version="0.1.2"/>
+		<buildplugin name="UML Statemachine Textsyntax" package="org.emftext.language.statemachine.resource.statemachine" version="0.1.2"/>
+		<buildfeature package="org.emftext.language.statemachine" version="0.1.2"/>	
+		
+		<!-- TODO TCL/TK -->
+		
+		<!-- Text Adventure -->
+		<buildplugin  name="Metamodel for Text Adventures" package="org.emftext.language.textadventure"               version="0.1.2"/>
+		<buildplugin  name="Text Adventure Syntax"         package="org.emftext.language.textadventure.resource.tas"  version="0.1.2"/>
+		<buildfeature package="org.emftext.language.textadventure" version="0.1.2"/>
+
+		<!-- Three-Valued Logic -->
+		<buildplugin  name="Metamodel for Three-Valued Logic" package="org.emftext.language.threevaluedlogic"               version="0.1.2"/>
+		<buildplugin  name="Three-Valued Logic Syntax"        package="org.emftext.language.threevaluedlogic.resource.tvl"  version="0.1.2"/>
+		<buildfeature package="org.emftext.language.threevaluedlogic" version="0.1.2"/>
+
+		<!-- Use Case Invariant  -->
+		<buildplugin  name="Metamodel for Use Case Invariants" package="org.emftext.language.usecaseinvariant"                 version="0.5.1"/>
+		<buildplugin  name="Use Case Invariants Resource"      package="org.emftext.language.usecaseinvariant.resource"        version="0.5.1"/>
+		<buildplugin  name="Use Case Invariants Syntax"        package="org.emftext.language.usecaseinvariant.resource.ucinv"  version="0.5.1"/>
+		<buildfeature package="org.emftext.language.usecaseinvariant" version="0.5.1"/>
+			
+		<!-- Value Flow-->
+		<buildplugin  name="Metamodel for Value Flow"                package="org.emftext.language.valueflow"      version="0.5.1"/>
+		<buildplugin  name="Metamodel for Value Flow (Edit Support)" package="org.emftext.language.valueflow.edit" version="0.5.1"/>
+		<buildplugin  name="Value Flow Resource Management"          package="org.emftext.language.valueflow.resource" version="0.5.1"/>
+		<buildplugin  name="Value Flow Text Syntax"                  package="org.emftext.language.valueflow.resource.valueflow" version="0.5.1"/>
+		<buildplugin  name="Value Flow Graphical Syntax"             package="org.emftext.language.valueflow.diagram" version="0.5.1"/>
+		<buildfeature package="org.emftext.language.valueflow" version="0.5.1"/>
+			
+			
+		<zip basedir="dist" destfile="dist/emf-text-syntax-zoo-${emftext.zoo.version}.v${DSTAMP}${TSTAMP}.zip" 
+			includes="COPYING,
+			          plugins/org.emftext.language.*,
+			          features/org.emftext.language.*,
+			          plugins/org.emftext.commons.antlr3_1_1_*,          
+                      features/org.emftext.commons.antlr3_1_1_*"
+			
+			excludes="plugins/org.emftext.language.template_concepts.*,
+	                  features/org.emftext.language.template_concepts_*,
+			          plugins/org.emftext.language.java_*, 
+			          plugins/org.emftext.language.java.resource.java_*, 
+			          plugins/org.emftext.language.java.resource_*,
+		              features/org.emftext.language.java_*"/>
+	</target>
+	
+	<!-- Downloads the current update site to the local disc -->
+	<target name="dist-download">
+		<scp file="${usr}:${pwd}@${host}:/users/${usr}/reuseware/update/site.xml" todir="dist/site.xml" port="${port}" sftp="true" trust="true"/>
+	</target>
+	
+	<target name="dist-upload">
+		<!-- Update Manager -->
+		<scp todir="${usr}:${pwd}@${host}:reuseware/update" port="${port}" sftp="true" trust="true">
+			<fileset dir="dist">
+				<include name="features/**"/>
+				<include name="plugins/**"/>
+				<include name="site.xml"/>
+				<include name="COPYING"/>
+			</fileset>
+		</scp>
+		 
+		<!--Release archive-->
+		<scp todir="${usr}:${pwd}@${host}:reuseware/archive" port="${port}" sftp="true" trust="true">
+			<fileset dir="dist">
+				<include name="*.zip"/>
+			</fileset>
+		</scp>		
+	</target>	
+		
+	<target name="dist-dev-upload" depends="dist">
+		<!-- Update Manager -->
+		<scp todir="${usr}:${pwd}@${host}:reuseware/update/dev" port="${port}" sftp="true" trust="true">
+			<fileset dir="dist">
+				<include name="features/**"/>
+				<include name="plugins/**"/>
+				<include name="site.xml"/>
+				<include name="COPYING"/>
+			</fileset>
+		</scp>
+	</target>	
+	
+	
+	<target name="dist-doc-upload">
+		<scp todir="${usr}:${pwd}@${host}:reuseware/api" port="${port}" sftp="true" trust="true">
+			<fileset dir="dist/doc/api">
+			</fileset>
+		</scp>
+	</target>	
+	
+	<target name="generate-doc-all" depends="generate-doc-reuseware,generate-doc-emftext,generate-doc-jamopp"/>
+	<target name="generate-doc-reuseware">
+		
+		<!-- javadoc task -->		
+		<javadoc  verbose="all"
+			destdir="dist/doc/api/reuseware" 
+			windowtitle="Reuseware Composition Framework API"
+			footer="Copyright 2006-2009 TU Dresden, Software Technology Group; All Rights Reserved."
+			access="protected" 
+			additionalparam="-breakiterator -tag model:X -tag generated:X -tag ordered:X"
+			author="false"
+			breakiterator="true"
+			charset="UTF-8"
+			docencoding="UTF-8"
+			nodeprecated="false"
+			nodeprecatedlist="false" 
+			noindex="false" 
+			nonavbar="false" 
+			notree="false" 
+			source="1.5"
+			splitindex="true" 
+			use="true" 
+			version="true"
+			maxmemory="512m"> 
+			
+				<!-- include the installed plugins into classpath -->
+		       	<classpath>
+		      	<fileset dir="${eclipseDir}/plugins">
+		        	<include name="**/*.jar"/>
+		      	</fileset>
+		    	</classpath>
+				
+				<!-- link to official Java API -->
+				<link href="http://java.sun.com/j2se/1.5/docs/api/"/>
+				
+				<!-- TODO Enable link to local platform documentation -->
+				<!-- <link offline="true" href="/help/topic/org.eclipse.platform.doc.isv/reference/api/" packagelistLoc="${javadoc.link.location}/platform/reference/api/"/> -->
+				
+				<!-- ignore EMF tags in javadoc -->
+				<tag name="ignore"     description="ignore" enabled="false"/>
+				<tag name="generated"  description="ignore" enabled="false"/>
+				<tag name="model"      description="ignore" enabled="false"/>
+				<tag name="modifiable" description="ignore" enabled="false"/>
+				<tag name="extends"    description="ignore" enabled="false"/>
+				<tag name="implements" description="ignore" enabled="false"/>
+				<tag name="ordered"    description="ignore" enabled="false"/>
+
+				<group title="Reuseware Core (CoCoNut)"  packages="org.reuseware.coconut*"/>
+				<!-- <group title="Reuseware Runtime (CoCoNut) Eclipse UI" packages="org.reuseware.coconut.ui*:org.reuseware.coconut.fragment.provider:org.reuseware.coconut.fragment.diagram*"/> -->
+				
+				<!-- find source files (could use packageset for better performance, but they can not be found dynamically) -->
+				<fileset dir="..">
+					<include name="org.reuseware.coconut.*/src/**/*.java"/>
+					<!-- TODO Javadoc fails because of something here: <include name="org.reuseware.coconut.*/src-gen/**/*.java"/> -->
+				</fileset>
+		</javadoc>		
+	</target>
+		
+		<target name="generate-doc-emftext">
+			<!-- wiki to eclipse html task -->
+			
+			<!-- javadoc task -->		
+			<javadoc 
+				destdir="dist/doc/api/emftext" 
+				windowtitle="EMFText API"
+				footer="Copyright 2006-2009 TU Dresden, Software Technology Group; All Rights Reserved."
+				access="protected" 
+				additionalparam="-breakiterator -tag model:X -tag generated:X -tag ordered:X"
+				author="false"
+				breakiterator="true"
+				charset="UTF-8"
+				docencoding="UTF-8"
+				nodeprecated="false"
+				nodeprecatedlist="false" 
+				noindex="false" 
+				nonavbar="false" 
+				notree="false" 
+				source="1.5"
+				splitindex="true" 
+				use="true" 
+				version="true"
+				maxmemory="512m"> 
+				
+					<!-- include the installed plugins into classpath -->
+			       	<classpath>
+			      	<fileset dir="${eclipseDir}/plugins">
+			        	<include name="**/*.jar"/>
+			      	</fileset>
+			    	</classpath>
+					
+					<!-- link to official Java API -->
+					<link href="http://java.sun.com/j2se/1.5/docs/api/"/>
+					
+					<!-- TODO Enable link to local platform documentation -->
+					<!-- <link offline="true" href="/help/topic/org.eclipse.platform.doc.isv/reference/api/" packagelistLoc="${javadoc.link.location}/platform/reference/api/"/> -->
+					
+					<!-- ignore EMF tags in javadoc -->
+					<tag name="ignore"     description="ignore" enabled="false"/>
+					<tag name="generated"  description="ignore" enabled="false"/>
+					<tag name="model"      description="ignore" enabled="false"/>
+					<tag name="modifiable" description="ignore" enabled="false"/>
+					<tag name="extends"    description="ignore" enabled="false"/>
+					<tag name="implements" description="ignore" enabled="false"/>
+					<tag name="ordered"    description="ignore" enabled="false"/>
+
+					<group title="EMFText Access"  packages="org.emftext.access*"/>
+
+					<group title="EMFText SDK"     packages="org.emftext.sdk*"/>
+					
+					<!-- find source files (could use packageset for better performance, but they can not be found dynamically) -->
+					<fileset dir="..">
+						<include name="org.emftext.access/src*/**/*.java/"/>
+						<include name="org.emftext.sdk/src*/**/*.java"/>
+						<include name="org.emftext.sdk.ant/src*/**/*.java"/>
+						<include name="org.emftext.sdk.codegen/src*/**/*.java"/>
+						<include name="org.emftext.sdk.concretesyntax*/src*/**/*.java"/>
+						<include name="org.emftext.sdk.ui/src*/**/*.java"/>
+					</fileset>
+					
+			</javadoc>
+		</target>
+		
+		<target name="generate-doc-jamopp">
+			<!-- wiki to eclipse html task -->
+			
+			<!-- javadoc task -->		
+			<javadoc 
+				destdir="dist/doc/api/jamopp" 
+				windowtitle="JaMoPP: Java Model Parser and Printer"
+				footer="Copyright 2008-2009 TU Dresden, Software Technology Group; All Rights Reserved."
+				access="protected" 
+				additionalparam="-breakiterator -tag model:X -tag generated:X -tag ordered:X"
+				author="false"
+				breakiterator="true"
+				charset="UTF-8"
+				docencoding="UTF-8"
+				nodeprecated="false"
+				nodeprecatedlist="false" 
+				noindex="false" 
+				nonavbar="false" 
+				notree="true" 
+				source="1.5"
+				splitindex="true" 
+				use="true" 
+				version="true"
+				maxmemory="1512m"> 
+				
+					<!-- include the installed plugins into classpath -->
+			       	<classpath>
+			      	<fileset dir="${eclipseDir}/plugins">
+			        	<include name="**/*.jar"/>
+			      	</fileset>
+			    	</classpath>
+					
+					<!-- link to official Java API -->
+					<link href="http://java.sun.com/j2se/1.5/docs/api/"/>
+					
+					<!-- TODO Enable link to local platform documentation -->
+					<!-- <link offline="true" href="/help/topic/org.eclipse.platform.doc.isv/reference/api/" packagelistLoc="${javadoc.link.location}/platform/reference/api/"/> -->
+					
+					<!-- ignore EMF tags in javadoc -->
+					<tag name="ignore"     description="ignore" enabled="false"/>
+					<tag name="generated"  description="ignore" enabled="false"/>
+					<tag name="model"      description="ignore" enabled="false"/>
+					<tag name="modifiable" description="ignore" enabled="false"/>
+					<tag name="extends"    description="ignore" enabled="false"/>
+					<tag name="implements" description="ignore" enabled="false"/>
+					<tag name="ordered"    description="ignore" enabled="false"/>
+				
+					<group title="Java Metamodel Textsyntax" packages="org.emftext.language.java.resource*"/>
+					<group title="Java Metamodel"  packages="org.emftext.language.java*"/>
+
+					
+					<!-- find source files (could use packageset for better performance, but they can not be found dynamically) -->
+					<fileset dir="..">
+						<include name="org.emftext.language.java/src*/**/*.java/"/>
+						<include name="org.emftext.language.java.resource/src*/**/*.java/"/>
+						<include name="org.emftext.language.java.resource.java/src*/**/*.java/"/>
+					</fileset>
+					
+			</javadoc>
+			
+		</target>
+				
+</project>

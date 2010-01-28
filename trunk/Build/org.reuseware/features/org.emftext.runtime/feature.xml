@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.emftext.runtime"
+      label="EMFText 1.1 Runtime (DEPRECATED)"
+      version="0.0.0"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://emftext.org">
+      EMFText: a grammar-based text syntax definition tool for Ecore metamodels.
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2010 Software Technology Group, Dresden University
+of Technology, Germany
+   </copyright>
+
+   <license>
+      EMFText.
+Copyright (c) 2006-2010 Software Technology Group, Dresden University
+of Technology 
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public License
+as published by the Free Software Foundation; either version
+2 of the License, or (at your option) any later version. This
+library is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General
+Public License for more details.
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+USA
+
+
+ANTLR2, ANTLR3 (www.antlr.org) and STRINGTEMPLATE (www.stringtemplate.org) 
+are redistributed with this tool. 
+Copyright (c) 2003-2007, Terence Parr. All rights reserved.
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.platform"/>
+      <import feature="org.eclipse.emf"/>
+      <import feature="org.eclipse.emf.workspace"/>
+      <import feature="org.eclipse.emf.ocl"/>
+   </requires>
+
+   <plugin
+         id="org.emftext.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.runtime.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.runtime.antlr"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.runtime.ocl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

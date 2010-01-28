@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [<!ENTITY buildfile SYSTEM "file:./build-user.xml">]>
+<!-- TODO: This file should be integrated with build.xml
+-->
+<project basedir="." default="dist" name="Reuseware">
+
+
+	<property name="plugins.version" value="0.6.0.v20080118" />
+	<property name="plugins.vendor" value="Software Technology Group - TU Dresden Germany" />
+	<property name="plugins.namepre" value="Reuseware " />
+    <property name="plugins.namepost" value=" Plugin" />	
+
+	<macrodef name="buildplugin" >
+	    <attribute name="package"/>
+	    <attribute name="name"/>
+		
+	    <sequential>
+
+			<manifest file="../de.tudresden.reuseware.@{package}/META-INF/MANIFEST.MF" mode="update">
+		    		<attribute name="Bundle-Version" value="${plugins.version}"/>
+				<attribute name="Bundle-Vendor" value="${plugins.vendor}"/>
+				<attribute name="Bundle-SymbolicName" value="de.tudresden.reuseware.@{package}; singleton:=true"/>
+				<attribute name="Bundle-Name" value="${plugins.namepre}@{name}${plugins.namepost}"/>
+		    	</manifest>
+		    	
+		    	<jar destfile="dist/plugins/de.tudresden.reuseware.@{package}_${plugins.version}.jar" manifest="../de.tudresden.reuseware.@{package}/META-INF/MANIFEST.MF">
+		    		<fileset dir="../de.tudresden.reuseware.@{package}/bin"/>		
+		    		<fileset dir="../de.tudresden.reuseware.@{package}" includes="plugin.xml schema/* icons/*"/>	
+		    		<fileset dir="../de.tudresden.reuseware.@{package}" includes="plugin.xml schema/* trans/*"/>	
+		    	</jar>
+
+	    </sequential>
+	</macrodef>
+
+	<macrodef name="buildplugin-reusewair" >
+	    <attribute name="package"/>
+	    <attribute name="name"/>
+		
+	    <sequential>
+
+			<manifest file="../org.reuseware.air.@{package}/META-INF/MANIFEST.MF" mode="update">
+		    		<attribute name="Bundle-Version" value="${plugins.version}"/>
+				<attribute name="Bundle-Vendor" value="${plugins.vendor}"/>
+				<attribute name="Bundle-SymbolicName" value="org.reuseware.air.@{package}; singleton:=true"/>
+				<attribute name="Bundle-Name" value="${plugins.namepre}@{name}${plugins.namepost}"/>
+		    	</manifest>
+		    	
+		    	<jar destfile="dist/plugins/org.reuseware.air.@{package}_${plugins.version}.jar" manifest="../org.reuseware.air.@{package}/META-INF/MANIFEST.MF">
+		    		<fileset dir="../org.reuseware.air.@{package}/bin"/>		
+		    		<fileset dir="../org.reuseware.air.@{package}" includes="plugin.xml schema/* icons/*"/>	
+		    		<fileset dir="../org.reuseware.air.@{package}" includes="plugin.xml schema/* trans/*"/>	
+		    	</jar>
+
+	    </sequential>
+	</macrodef>
+
+	
+	<macrodef name="buildfeature" >
+	    <attribute name="package"/>
+		
+	    <sequential>
+			<jar basedir="features/de.tudresden.reuseware.@{package}" includes="feature.xml" destfile="dist/features/de.tudresden.reuseware.@{package}_${plugins.version}.jar"/>
+	    </sequential>
+	</macrodef>
+
+	<target name="dist" depends="dist-clean,dist-eclipse,dist-examples">
+	</target>
+
+	<target name="dist-clean">
+		<delete dir="dist"/>
+		<mkdir dir="dist"/>
+	</target>
+		
+	<target name="dist-eclipse">
+		<mkdir dir="dist/plugins"/>
+
+		<copy todir="../de.tudresden.reuseware.coconut.textsyntax/bin">
+		    <fileset dir="../de.tudresden.reuseware.coconut.textsyntax/antlr"/>
+		</copy>
+
+		<!-- copy jar files --> 
+		 <copy file="../org.reuseware.air.generator/antlr-2.7.7.jar" 
+		 	   todir="../org.reuseware.air.generator/bin"/>
+		 <copy file="../org.reuseware.air.generator/stringtemplate.jar" 
+		 	   todir="../org.reuseware.air.generator/bin"/>
+
+		<!-- copy stringtemplate templates --> 
+		<copy todir="../org.reuseware.air.generator/bin/templates">
+			<fileset dir="../org.reuseware.air.generator/templates"/> 
+		</copy>
+
+		<buildplugin name="CoCoNut Textual Concrete Syntax"      package="coconut.textsyntax"/>		
+		<buildplugin name="CoCoNut Eclipse User Interface"       package="coconut.ui.eclipse"/>	
+		
+		<buildplugin-reusewair name="Reusewair Algebra"                  	 package="algebra"/>
+		<buildplugin-reusewair name="CoCoNut"                              	 package="coconut"/>
+		<buildplugin-reusewair name="Reusewair CoMoGen" 		           	 package="comogen"/>
+		<buildplugin-reusewair name="Reusewair Core Component"            	 package="core"/>
+		<buildplugin-reusewair name="Reusewair Template Generator"         	 package="generator"/>
+		<buildplugin-reusewair name="Grammar Utils"                        	 package="grammar"/>	
+		<buildplugin-reusewair name="Grammar Eclipse User Interface"         package="grammar.ui.eclipse"/>		
+		<buildplugin-reusewair name="Reusewair Eclipse"                  	 package="ui.eclipse"/>
+		<buildplugin-reusewair name="Reusewair Utils"         	 			 package="util"/>
+
+		<!--
+		<copy todir="../de.tudresden.reuseware.coconut.ui.gexeditor/bin">
+		    <fileset dir="../de.tudresden.reuseware.coconut.ui.gexeditor/antlr"/>
+		</copy>
+		-->
+		
+		<!--
+		<buildplugin name="GEX Editor"                    	 	 package="coconut.ui.gexeditor"/>
+		<buildplugin name="Language GEX"          				 package="language.gex"/>	
+		<buildplugin name="Language GEX Textsyntax"   			 package="language.gex.textsyntax.gex"/>
+		-->	
+
+
+		<!--
+		<buildplugin name="FraCoLa"                              package="fracola"/>	
+		<buildplugin name="FraCoLa Eclipse User Interface"       package="fracola.ui.eclipse"/>
+		-->	
+			
+		<buildplugin name="Language Componentmodel"              package="language.componentmodel"/>
+		<!--
+        <buildplugin name="Language Minimlacl"                   package="language.minimalcl"/>
+        -->	
+		
+		<!--
+        <buildplugin name="Language Basiccl"                     package="language.basiccl"/>	
+        <buildplugin name="Language Basiccl Textsyntax"          package="language.basiccl.textsyntax.bc"/>
+        -->
+        	
+		<buildplugin name="Language Abstractsyntax"              package="language.abstractsyntax"/>	
+		<buildplugin name="Language Abstractsyntax Textsyntax"   package="language.abstractsyntax.textsyntax.as"/>	
+		<buildplugin name="Language Concretesyntax"              package="language.concretesyntax"/>	
+		<buildplugin name="Language Concretesyntax Textsyntax"   package="language.concretesyntax.textsyntax.cs"/>	
+
+		<!--
+		<buildplugin name="Language Rulecl"                    	 package="language.rulecl"/>	
+		<buildplugin name="Language Rulecl Textsyntax"         	 package="language.rulecl.textsyntax.rc"/>
+		-->
+		
+		<buildplugin name="Language CMSL"                    	 package="language.cmsl"/>	
+		<buildplugin name="Language CMSL Textsyntax"         	 package="language.cmsl.textsyntax.cmsl"/>	
+		
+
+		<buildplugin name="Language Datalog"                     package="language.datalog"/> 
+		<buildplugin name="Language Datalog Textsyntax"          package="language.datalog.textsyntax.datalog"/>
+		<buildplugin name="Language RDatalog"                    package="language.rdatalog"/>
+		<buildplugin name="Language RDatalog Textsyntax"         package="language.rdatalog.textsyntax.rdatalog"/>
+		<buildplugin-reusewair name="Datalog Component Model"              package="language.datalog.cm"/>
+
+		<buildplugin name="Language Javamm"                      package="language.javamm"/> 
+		<buildplugin name="Language Javamm Textsyntax"           package="language.javamm.textsyntax.javamm"/>
+		<buildplugin name="Language RJavamm"                     package="language.rjavamm"/> 
+		<buildplugin name="Language RJavamm Textsyntax"          package="language.rjavamm.textsyntax.rjavamm"/>
+		<buildplugin-reusewair name="Javamm Component Model"               package="language.javamm.cm"/>
+
+		<!--
+		<buildplugin name="Language Owlm"                      	package="language.owlm"/> 
+		<buildplugin name="Language Owlm Textsyntax"           	package="language.owlm.textsyntax.owlm"/>
+		<buildplugin name="Language ROwlm"                     	package="language.rowlm"/> 
+		<buildplugin name="Language ROwlm Textsyntax"          	package="language.rowlm.textsyntax.rowlm"/>
+		<buildplugin-reusewair name="Owlm Component Model"              	package="language.owlm.cm"/>
+		-->
+		
+		<!--
+		<buildplugin name="Language Xcerpt"                     package="language.xcerpt"/> 
+		<buildplugin name="Language Xcerpt Textsyntax"          package="language.xcerpt.textsyntax.xcerpt"/>
+		<buildplugin name="Language RXcerpt"                    package="language.rxcerpt"/>
+		<buildplugin name="Language RXcerpt Textsyntax"         package="language.rxcerpt.textsyntax.rxcerpt"/>
+		<buildplugin name="Xcerpt Component Model"              package="language.xcerpt.cm"/>
+		-->
+		
+		<!--
+		<buildplugin name="Language Java"                    	package="language.java"/>
+		-->	
+		<!--
+		<buildplugin name="Language Java Textsyntax"         package="language.java.textsyntax.java"/>	
+		<buildplugin name="Language Reuse Java"              package="language.reusejava"/>	
+		<buildplugin name="Language Reuse Java Textsyntax"   package="language.reusejava.textsyntax.rjava"/>	
+		<buildplugin name="Language Xcerpt"                    package="language.xcerpt"/>	
+		<buildplugin name="Language Xcerpt Textsyntax"         package="language.xcerpt.textsyntax.xcerpt"/>	
+		<buildplugin name="Language Modular Xcerpt"              package="language.modularxcerpt"/>	
+		<buildplugin name="Language Modular Xcerpt Textsyntax"   package="language.modularxcerpt.textsyntax.mxcerpt"/> 
+
+		<buildplugin name="Language Ecore"                   package="language.ecore.textsyntax.ecore"/>	
+		
+		<buildplugin name="Language EcoreWeaving"              package="language.ecoreweaving"/>	
+		<buildplugin name="Language EcoreWeaving Textsyntax"   package="language.ecoreweaving.textsyntax.eweaving"/>	
+-->		
+	
+		<mkdir dir="dist/features"/>
+		
+		<buildfeature package="coconut"/>
+		<buildfeature package="comogen"/>
+		<buildfeature package="fracola"/>
+				
+<!--		<buildfeature package="language.java"/>
+		<buildfeature package="language.xcerpt"/>		
+		<buildfeature package="language.ecore"/> -->
+		
+		<copy file="site.xml" todir="dist"/>
+			
+		<copy file="COPYING" todir="dist"/>
+
+		<!-- <zip basedir="dist" destfile="dist/reuseware-${plugins.version}.zip"/> --> 
+		
+		<copy todir="/Users/b0kaj/Development/reusewair">
+		    <fileset dir="dist/plugins" />
+	  	</copy>
+
+	</target>
+
+	<!-- TODO: Dist command line -->
+			
+	<target name="dist-examples">
+		<mkdir dir="dist/examples"/>
+		<copy todir="dist/examples">
+		    <fileset dir="examples">
+				<include name="*/**"/>
+			</fileset> 
+		</copy>
+	</target>
+
+</project>

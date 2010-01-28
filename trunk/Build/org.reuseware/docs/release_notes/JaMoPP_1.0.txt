@@ -1,0 +1,33 @@
+JaMoPP: The Java Model Parser and Printer - 1.0 released
+
+We are pleased to announce that JaMoPP 1.0 is now available at
+http://jamopp.inf.tu-dresden.de 
+and from our update site at
+http://reuseware.org/update
+
+JaMoPP consists of (1) a complete Java5 Ecore Metamodel (2) a complete
+Java5 EMFText Syntax and (3) an implementation of Java5's static
+semantics analysis. Through JaMoPP, any Java program can be processed
+as any other EMF model. JaMoPP therefore bridges the gap between
+modelling and Java programming. JaMoPP enables the application of
+arbitrary EMF-based tools on full Java programs. Since JaMoPP is
+developed through metamodelling and code generation, extending Java 
+and embedding Java into other modelling languages, using standard
+metamodeling techniques and tools, is now possible. To ensure the
+quality of JaMoPP, it has been successfully tested on a code base 
+of 79.017 Java files of today's most famous Java projects.
+
+JaMoPP has already been utilised successfully in a number of
+applications: 
+- to create a safe template language for Java 
+- to generate code through model-2-model transformations 
+- to embed Java statements into UML 
+- to visualize Java programs using GMF 
+- to map features to Java programs using the FeatureMapper 
+- to extend Java with new reuse concepts processable by Reuseware 
+- to perform static source code analysis with OCL
+
+If you are working with models AND Java, you should try JaMoPP and 
+see how it can help you in your model-driven development process!
+
+http://jamopp.inf.tu-dresden.de http://reuseware.org/update

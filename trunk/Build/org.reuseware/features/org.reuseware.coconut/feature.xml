@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.reuseware.coconut"
+      label="Reuseware Core (CoCoNut)"
+      version="0.0.0"
+      provider-name="Software Technology Group - TU Dresden"
+      plugin="org.reuseware.coconut">
+
+   <description url="http://reuseware.org">
+      Reuseware Runtime (CoCoNut); required by all Reuseware-based composition systems.
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2010 Software Technology Group, Dresden University of Technology, Germany
+   </copyright>
+
+   <license>
+ Copyright (c) 2006-2010 
+ Software Technology Group, Dresden University of Technology
+ 
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0 
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+ 
+ Contributors:
+   Software Technology Group - TU Dresden, Germany 
+      - initial API and implementation
+
+The ANTLR 3.1.1 runtime (www.antlr.org) is redistributed with this tool. 
+Copyright (c) 2003-2007, Terence Parr. All rights reserved.
+
+The Story Driven Modelling (SDM) runtime (www.fujaba.de) of the FUJABA ToolSuite project is redistributed with this tool. 
+Copyright (C) Fujaba Development Group. All rights reserved.
+   </license>
+
+   
+      
+   
+
+   <requires>
+	<import feature="org.eclipse.platform"/>
+	<import feature="org.eclipse.sdk" />
+	<import feature="org.eclipse.emf"/>
+	<import feature="org.eclipse.emf.workspace"/> 
+	<import feature="org.eclipse.emf.ocl"/>
+	<import feature="org.eclipse.gmf"/>
+   </requires>
+
+   <plugin
+         id="org.reuseware.coconut"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.repository"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.repository.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionprogram"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionprogram.diagram"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionprogram.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionprogramsyntax"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionprogramsyntax.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionsystem"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionsystem.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.compositionsystem.resource.csys"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.store"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.reuseware.coconut.fragment"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.fragment.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.fragment.resource.fragment"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.fragment.virtual.selection"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.fragment.virtual.query"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.reuseware.coconut.reuseextension"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.reuseextension.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.reuseextension.resource.rex"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.resource"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.ui.eclipse"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.doc"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

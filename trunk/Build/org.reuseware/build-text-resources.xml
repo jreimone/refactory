@@ -1,0 +1,246 @@
+<project basedir="." default="generate-emftext-languages-text-resources" name="Build EMFText text resource">
+	<property file="build.properties"/>
+	
+	<property name="emftext.plugins.dir" value=".."/>
+	<property name="language.plugins.dir" value=".."/>
+	<property name="test.plugins.dir" value=".."/>
+	<property name="ontomopp.plugins.dir" value=".."/>
+	
+		<!-- Define the EMF Generate Resource task. To have this task available, the plugin
+	     org.emftext.sdk.ant must be available in the classpath. To ensure this the external tools
+	     configuration needs to have the setting "Run in the same JRE as the workspace" enabled. -->
+	<taskdef name="emftext-generate-text-resource" classname="org.emftext.sdk.ant.GenerateTextResourceTask">
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_2_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
+		<!-- for ecore text resource support -->
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.ecore/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.text/bin" />
+	</taskdef>
+	
+	<!-- for ecore text resource support -->
+	<taskdef name="emftext-register-ecore-resource-factory" classname="org.emftext.sdk.ant.RegisterEcoreResourceFactoryTask">
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_2_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs/bin" />
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.ecore/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.text/bin" />
+	</taskdef>
+
+	<!-- A macro for generating one text resource plug-in -->
+	<macrodef name="generate-text-resource">
+	    <attribute name="plugin"/>
+	    <attribute name="syntax"/>
+		<attribute name="dir" default="${language.plugins.dir}" />
+		<attribute name="resourcePlugin" default="@{plugin}.resource.@{syntax}" />
+			
+		<sequential>
+			<delete dir="@{dir}/@{resourcePlugin}/src-gen" includes="**/*" excludes=".svn"/>
+			<echo message="Building text resource for syntax '@{syntax}' in plug-in '@{plugin}'" />
+			
+			<emftext-generate-text-resource syntax="@{dir}/@{plugin}/metamodel/@{syntax}.cs" rootFolder="@{dir}" syntaxProjectName="@{plugin}" >
+			</emftext-generate-text-resource>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="generate-metamodel-code">
+	    <attribute name="plugin"/>
+	    <attribute name="model"/>
+	    <attribute name="generateEditProject"/>
+	    <attribute name="secondaryExtension" default="" />	
+	    <attribute name="dir" default="${language.plugins.dir}" />
+			
+		<sequential>
+			<delete dir="${language.plugins.dir}/@{plugin}/src-gen" includes="**/*.java" excludes=".svn"/>
+			<eclipse.refreshLocal depth="infinite" resource="@{plugin}"/>
+			<echo message="${language.plugins.dir}/@{plugin}/metamodel/@{model}.@{secondaryExtension}.ecore" />
+			<emf.Ecore2Java 
+				model="@{dir}/@{plugin}/metamodel/@{model}.@{secondaryExtension}.ecore" 
+				genModel="@{dir}/@{plugin}/metamodel/@{model}.genmodel" 
+				generateeditproject="@{generateEditProject}" 
+				generateeditorproject="false"
+				modelProject="@{dir}/@{plugin}" 
+				modelProjectFragmentPath="src-gen"
+				reconcileGenModel="keep"
+			/>
+			
+			<eclipse.refreshLocal depth="infinite" resource="@{plugin}"/>
+		</sequential>
+	</macrodef>
+	
+	<target name="generate-ecore-text-text-resources">
+		<generate-text-resource plugin="org.emftext.language.ecore.resource.text"   syntax="text.ecore" resourcePlugin="org.emftext.language.ecore.resource.text"/>
+		<generate-text-resource plugin="org.emftext.language.ecore.resource.facade" syntax="facade.ecore" resourcePlugin="org.emftext.language.ecore.resource.facade"/>
+
+		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.facade"/>
+		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.text"/>
+	</target>
+	
+	<target name="run-all-tests">
+		<property name="test_result_dir" value="${basedir}/test_results"/>
+
+		<delete>
+			<fileset dir="${test_result_dir}">
+			    <include name="*.txt"/>
+			</fileset>
+		</delete>
+		
+		<ant antfile="${basedir}/run-emftext-tests.xml">
+			<property name="test_result_dir" value="${test_result_dir}"/>
+		</ant>
+		<ant antfile="${basedir}/run-emftext-language-tests.xml">
+			<property name="test_result_dir" value="${test_result_dir}"/>
+		</ant>
+	</target>
+
+	<!-- run 'generate-ecore-text-text-resources' first! -->
+	<target name="generate-emftext-languages-text-resources" depends="generate-emftext-languages-metamodel-code,generate-text-resources" description="Generate the EMF text resource plug-ins for all languages">	
+		<eclipse.refreshLocal depth="infinite" resource="/"/>
+	</target>
+
+	<target name="generate-emftext-languages-metamodel-code">
+		
+		<emftext-register-ecore-resource-factory 
+			className="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" 
+			type="text"/>
+		
+		<generate-metamodel-code plugin="org.emftext.language.abnf" model="abnf" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.aterms" model="aterms" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.b" model="B" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.bool" model="bool" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.chess" model="chess" generateEditProject="false"/>
+		<generate-metamodel-code plugin="org.emftext.language.c_sharp" model="c_sharp" generateEditProject="false"/>
+		<generate-metamodel-code plugin="org.emftext.language.conference" model="conference" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.csv" model="csv" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.custom_sandwich" model="custom_sandwich" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.customer" model="customer" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.dot" model="dot" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.efactory" model="efactory" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.featherweight_java" model="featherweight_java" generateEditProject="false"/>
+		<generate-metamodel-code plugin="org.emftext.language.feature" model="feature" generateEditProject="false"/>
+		<generate-metamodel-code plugin="org.emftext.language.filesystem" model="filesystem" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.forms" model="forms" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.formular" model="FormularMM" generateEditProject="false"/>
+		<generate-metamodel-code plugin="org.emftext.language.km3" model="KM3" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.martinfowlerdsl" model="martinfowlerdsl" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.models" model="models" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.office" model="office" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.owl" model="owl" secondaryExtension="text" generateEditProject="true" dir="${ontomopp.plugins.dir}" />
+		<generate-metamodel-code plugin="org.emftext.language.java" model="java" generateEditProject="true" />
+		<generate-metamodel-code plugin="org.emftext.language.java.ejava" model="eJava" generateEditProject="true" />
+		<generate-metamodel-code plugin="org.emftext.language.java_templates" model="java_templates" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.java.javabehavior4uml" model="JavaBehavior4UML" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.java.properties" model="properties" generateEditProject="true" />
+		<generate-metamodel-code plugin="org.emftext.language.java.reusejava" model="reusejava" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.java.treejava" model="treejava" generateEditProject="true" />
+		<generate-metamodel-code plugin="org.emftext.language.parametercheck" model="parametercheck" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.petrinet" model="petrinet" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.pico" model="pico" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.primitive_types" model="primitive_types" generateEditProject="true" />
+		<generate-metamodel-code plugin="org.emftext.language.plugin" model="plugin" secondaryExtension="text" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.rails" model="rails" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.regexp" model="regular_expressions" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.sandwich" model="sandwich" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.simple_c" model="c" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.simple_gui" model="simple_gui" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.simple_math" model="simple_math" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.sparql" model="sparql" generateEditProject="false" dir="${ontomopp.plugins.dir}" />
+		<generate-metamodel-code plugin="org.emftext.language.template_concepts" model="template_concepts" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.template_concepts.call" model="template_call" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.tbool" model="tbool" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.tcltk" model="tcl" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.textadventure" model="textadventure" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.threevaluedlogic" model="threevaluedlogic" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.usecaseinvariant" model="UseCaseInvariant" generateEditProject="false" />
+		<generate-metamodel-code plugin="org.emftext.language.valueflow" model="valueflow" secondaryExtension="text"  generateEditProject="true"/>
+		<generate-metamodel-code plugin="org.emftext.language.xml" model="xml" generateEditProject="false" />
+		
+		<generate-metamodel-code plugin="org.emftext.test.bug933" model="bug933" generateEditProject="false" dir="${test.plugins.dir}"/>
+		<generate-metamodel-code plugin="org.emftext.test.cct1" model="cct1" generateEditProject="false" dir="${test.plugins.dir}"/>
+		<generate-metamodel-code plugin="org.emftext.test.cct2" model="cct2" generateEditProject="false" dir="${test.plugins.dir}"/>
+		<generate-metamodel-code plugin="org.emftext.test.cct3" model="cct3" generateEditProject="false" dir="${test.plugins.dir}"/>
+		<generate-metamodel-code plugin="org.emftext.test.escaping" model="escaping" generateEditProject="false" dir="${test.plugins.dir}"/>
+		<generate-metamodel-code plugin="org.emftext.test.grammar_features" model="grammar_features" generateEditProject="false" dir="${test.plugins.dir}"/>
+	</target>
+
+	<!-- A task for generating text resource plug-ins for all EMFText languages -->
+	<target name="generate-text-resources">
+		
+		<emftext-register-ecore-resource-factory 
+			className="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" 
+			type="text"/>
+		
+		<generate-text-resource plugin="org.emftext.language.abnf" syntax="abnf" resourcePlugin="org.emftext.language.abnf.resource.abnf" />
+		<generate-text-resource plugin="org.emftext.language.aterms" syntax="aterms" resourcePlugin="org.emftext.language.aterms.resource.aterms" />
+		<generate-text-resource plugin="org.emftext.language.b" syntax="B" resourcePlugin="org.emftext.language.b.resource.mch" />
+		<generate-text-resource plugin="org.emftext.language.bool" syntax="bool" resourcePlugin="org.emftext.language.bool.resource.bool" />
+		<generate-text-resource plugin="org.emftext.language.chess" syntax="chess" resourcePlugin="org.emftext.language.chess.resource.cg" />
+		<generate-text-resource plugin="org.emftext.language.conference" syntax="conference" resourcePlugin="org.emftext.language.conference.resource.conference"/>
+		<generate-text-resource plugin="org.emftext.language.c_sharp" syntax="c_sharp" resourcePlugin="org.emftext.language.c_sharp.resource.csharp" />
+		<generate-text-resource plugin="org.emftext.language.csv" syntax="csv" resourcePlugin="org.emftext.language.csv.resource.csv"/>
+		<generate-text-resource plugin="org.emftext.language.custom_sandwich" syntax="custom_sandwich" resourcePlugin="org.emftext.language.custom_sandwich.resource.custom_sandwich" />
+		<generate-text-resource plugin="org.emftext.language.customer" syntax="customer" resourcePlugin="org.emftext.language.customer.resource.customer" />
+		<generate-text-resource plugin="org.emftext.language.dot" syntax="dot" resourcePlugin="org.emftext.language.dot.resource.dot" />
+		<!-- performed earlier: <generate-text-resource plugin="org.emftext.language.ecore.resource.text" syntax="text.ecore" /> -->
+		<generate-text-resource plugin="org.emftext.language.efactory" syntax="efactory" resourcePlugin="org.emftext.language.efactory.resource.efactory"/>
+		<generate-text-resource plugin="org.emftext.language.ecore.resource.facade" syntax="facade.ecore" resourcePlugin="org.emftext.language.ecore.resource.facade"/>
+		<generate-text-resource plugin="org.emftext.language.featherweight_java" syntax="featherweight_java" resourcePlugin="org.emftext.language.featherweight_java.resource.fj" />
+		<generate-text-resource plugin="org.emftext.language.feature" syntax="feature" resourcePlugin="org.emftext.language.feature.resource.feature" />
+		<generate-text-resource plugin="org.emftext.language.filesystem" syntax="filesystem"  resourcePlugin="org.emftext.language.filesystem.resource.fs" />
+		<generate-text-resource plugin="org.emftext.language.forms" syntax="forms"  resourcePlugin="org.emftext.language.forms.resource.forms" />
+		<generate-text-resource plugin="org.emftext.language.formular" syntax="FormularMM" resourcePlugin="org.emftext.language.formular.resource.formular" />
+		<generate-text-resource plugin="org.emftext.language.java" syntax="java" resourcePlugin="org.emftext.language.java.resource.java" />
+		<generate-text-resource plugin="org.emftext.language.java.ejava" syntax="eJava" resourcePlugin="org.emftext.language.java.ejava.resource.ejava" />
+		<generate-text-resource plugin="org.emftext.language.java_templates" syntax="java_templates" resourcePlugin="org.emftext.language.java_templates.resource.java_template" />
+		<generate-text-resource plugin="org.emftext.language.java.javabehavior4uml" syntax="JavaBehavior4UML" resourcePlugin="org.emftext.language.java.javabehavior4uml.resource.javabehavior" />
+		<generate-text-resource plugin="org.emftext.language.java.properties" syntax="properties" resourcePlugin="org.emftext.language.java.properties.resource.propjava"/>
+		<generate-text-resource plugin="org.emftext.language.java.reusejava" syntax="reusejava" resourcePlugin="org.emftext.language.java.reusejava.resource.reusejava" />
+		<generate-text-resource plugin="org.emftext.language.java.treejava" syntax="treejava" resourcePlugin="org.emftext.language.java.treejava.resource.treejava"/>
+		<generate-text-resource plugin="org.emftext.language.km3" syntax="KM3"  resourcePlugin="org.emftext.language.km3.resource.km3" />
+		<generate-text-resource plugin="org.emftext.language.martinfowlerdsl" syntax="martinfowlerdsl" resourcePlugin="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl"/>
+		<generate-text-resource plugin="org.emftext.language.models" syntax="models" resourcePlugin="org.emftext.language.models.resource.model"/>
+		<generate-text-resource plugin="org.emftext.language.office" syntax="office"  resourcePlugin="org.emftext.language.office.resource.office" />
+		<generate-text-resource plugin="org.emftext.language.owl" syntax="owl" resourcePlugin="org.emftext.language.owl.resource.owl" dir="${ontomopp.plugins.dir}" />
+		<generate-text-resource plugin="org.emftext.language.parametercheck" syntax="parametercheck" resourcePlugin="org.emftext.language.parametercheck.resource.pcheck" />
+		<generate-text-resource plugin="org.emftext.language.petrinet" syntax="petrinet" resourcePlugin="org.emftext.language.petrinet.resource.petrinet" />
+		<generate-text-resource plugin="org.emftext.language.pico" syntax="pico" resourcePlugin="org.emftext.language.pico.resource.pico" />
+		<generate-text-resource plugin="org.emftext.language.plugin" syntax="plugin" resourcePlugin="org.emftext.language.plugin.resource.topf" />
+		<generate-text-resource plugin="org.emftext.language.quickuml" syntax="quickuml" resourcePlugin="org.emftext.language.quickuml.resource.quml"/>
+		<generate-text-resource plugin="org.emftext.language.rails" syntax="rails" resourcePlugin="org.emftext.language.rails.resource.rails"/>
+		<generate-text-resource plugin="org.emftext.language.regexp" syntax="regular_expressions_antlr" resourcePlugin="org.emftext.language.regexp.resource.regexp_antlr"/>
+		<generate-text-resource plugin="org.emftext.language.regexp" syntax="regular_expressions_sdf" resourcePlugin="org.emftext.language.regexp.resource.regexp_sdf"/>
+		<generate-text-resource plugin="org.emftext.language.sandwich" syntax="sandwich" resourcePlugin="org.emftext.language.sandwich.resource.sandwich" />
+		<generate-text-resource plugin="org.emftext.language.simple_c" syntax="c" resourcePlugin="org.emftext.language.simple_c.resource.c" />
+		<generate-text-resource plugin="org.emftext.language.simple_gui" syntax="simple_gui" resourcePlugin="org.emftext.language.simple_gui.resource.simplegui"/>
+		<generate-text-resource plugin="org.emftext.language.simple_math" syntax="simple_math" resourcePlugin="org.emftext.language.simple_math.resource.sm"/>
+		<generate-text-resource plugin="org.emftext.language.sparql" syntax="sparql" resourcePlugin="org.emftext.language.sparql.resource.sparql" dir="${ontomopp.plugins.dir}" />
+		<generate-text-resource plugin="org.emftext.language.statemachine" syntax="statemachine" resourcePlugin="org.emftext.language.statemachine.resource.statemachine" />
+		<generate-text-resource plugin="org.emftext.language.tbool" syntax="tbool" resourcePlugin="org.emftext.language.tbool.resource.tbool" />
+		<generate-text-resource plugin="org.emftext.language.tcltk" syntax="tcl" resourcePlugin="org.emftext.language.tcltk.resource.tcl" />
+		<generate-text-resource plugin="org.emftext.language.template_concepts.call" syntax="template_call" resourcePlugin="org.emftext.language.template_concepts.call.resource.template_call" />
+		<generate-text-resource plugin="org.emftext.language.textadventure" syntax="textadventure" resourcePlugin="org.emftext.language.textadventure.resource.tas"/>
+		<generate-text-resource plugin="org.emftext.language.threevaluedlogic" syntax="threevaluedlogic" resourcePlugin="org.emftext.language.threevaluedlogic.resource.tvl"/>
+		<generate-text-resource plugin="org.emftext.language.usecaseinvariant" syntax="UseCaseInvariant" resourcePlugin="org.emftext.language.usecaseinvariant.resource.ucinv" />
+		<generate-text-resource plugin="org.emftext.language.valueflow" syntax="valueflow" resourcePlugin="org.emftext.language.valueflow.resource.valueflow" />
+		<generate-text-resource plugin="org.emftext.language.xml" syntax="xml" resourcePlugin="org.emftext.language.xml.resource.xml" />
+		
+		<generate-text-resource plugin="org.emftext.test.bug933" syntax="bug933" dir="${test.plugins.dir}" resourcePlugin="org.emftext.test.bug933.resource.bug933" />
+		<generate-text-resource plugin="org.emftext.test.cct1" syntax="cct1" dir="${test.plugins.dir}" />
+		<generate-text-resource plugin="org.emftext.test.cct2" syntax="cct2" dir="${test.plugins.dir}" />
+		<generate-text-resource plugin="org.emftext.test.cct3" syntax="cct3" dir="${test.plugins.dir}" />
+		<generate-text-resource plugin="org.emftext.test.grammar_features" syntax="grammar_features" dir="${test.plugins.dir}" />
+		<generate-text-resource plugin="org.emftext.test.escaping" syntax="escaping" dir="${test.plugins.dir}" />
+	</target>
+	
+</project>
