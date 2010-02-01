@@ -59,6 +59,7 @@ TOKENSTYLES {
 }
 
 RULES {
+	@Foldable
 	Program   ::= ("program"|"PROGRAM") name[PL0ID] block ".";
 	
 	Block ::= 	(("const"|"CONST") constants ("," constants)* ";")?
@@ -70,9 +71,10 @@ RULES {
 	
 	VarDeclaration ::= name[PL0ID];
 	
+	@Foldable
 	ProcedureDeclaration ::= 	("procedure"|"PROCEDURE") name[PL0ID] ";" 
 								block ";";
-	
+	@Foldable
 	Body ::= 	("begin"|"BEGIN") 
 				(statements (";" statements)*)? 
 				("end"|"END");
