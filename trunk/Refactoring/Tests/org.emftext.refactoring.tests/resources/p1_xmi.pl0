@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pl0:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pl0="http://www.emftext.org/language/pl0" name="p1">
+  <block>
+    <variables name="x"/>
+    <variables name="y"/>
+    <variables name="z"/>
+    <constants name="a" number="25"/>
+    <constants name="b" number="10"/>
+    <body>
+      <statements xsi:type="pl0:Assignment" left="//@block/@variables.0">
+        <right xsi:type="pl0:TermExpression">
+          <obligatory>
+            <obligatory xsi:type="pl0:IdentReference" ident="//@block/@constants.1"/>
+          </obligatory>
+          <optional op="-">
+            <term>
+              <obligatory xsi:type="pl0:IdentReference" ident="//@block/@constants.0"/>
+            </term>
+          </optional>
+        </right>
+      </statements>
+      <statements xsi:type="pl0:Assignment" left="//@block/@variables.1">
+        <right xsi:type="pl0:TermExpression">
+          <obligatory>
+            <obligatory xsi:type="pl0:IdentReference" ident="//@block/@variables.0"/>
+            <optional>
+              <factor xsi:type="pl0:Number" number="12"/>
+            </optional>
+          </obligatory>
+        </right>
+      </statements>
+      <statements xsi:type="pl0:Assignment" left="//@block/@variables.2">
+        <right xsi:type="pl0:TermExpression">
+          <obligatory>
+            <obligatory xsi:type="pl0:IdentReference" ident="//@block/@variables.1"/>
+            <optional op="/">
+              <factor xsi:type="pl0:IdentReference" ident="//@block/@constants.0"/>
+            </optional>
+          </obligatory>
+        </right>
+      </statements>
+    </body>
+  </block>
+</pl0:Program>

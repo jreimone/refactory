@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.emftext.refactoring.tests
+Bundle-SymbolicName: org.emftext.refactoring.tests
+Bundle-Version: 0.1.0
+Require-Bundle: org.junit4,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
+ org.emftext.refactoring.graph;bundle-version="0.0.1",
+ org.emftext.language.pl0;bundle-version="1.0.0",
+ org.emftext.language.pl0.resource.pl0;bundle-version="1.0.0",
+ org.emftext.language.java;bundle-version="1.1.0"
