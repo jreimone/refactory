@@ -461,6 +461,11 @@
 	
 		<!-- TODO: Plugin -->
 		
+		<!-- Pl/0 -->
+		<buildplugin  name="PL/0 Metamodel" package="org.emftext.language.pl0"               version="0.5.0" />
+		<buildplugin  name="PL/0 Syntax"    package="org.emftext.language.pl0.resource.pl0"  version="0.5.0" />
+		<buildfeature                       package="org.emftext.language.pl0"               version="0.5.0" />
+	
 		<!-- Quick UML -->
 		<buildplugin  name="Quick UML Syntax"  package="org.emftext.language.quickuml.resource.quml"   version="0.1.2" />
 		<buildfeature                          package="org.emftext.language.quickuml"                 version="0.1.2" />

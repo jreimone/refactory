@@ -156,6 +156,9 @@
 			<pathelement path="../org.emftext.language.plugin.resource.topf.post_processing/bin"/>
 			<pathelement path="../org.emftext.language.primitive_types/bin"/>
 			<pathelement path="../org.emftext.language.primitive_types.edit/bin"/>
+			<pathelement path="../org.emftext.language.pl0/bin"/>
+			<pathelement path="../org.emftext.language.pl0.test/bin"/>
+			<pathelement path="../org.emftext.language.pl0.resource.pl0/bin"/>
 			<pathelement path="../org.emftext.language.quickuml/bin"/>
 			<pathelement path="../org.emftext.language.quickuml.resource.quml/bin"/>
 			<pathelement path="../org.emftext.language.rails/bin"/>

@@ -148,6 +148,7 @@
 		<generate-metamodel-code plugin="org.emftext.language.petrinet" model="petrinet" generateEditProject="false" />
 		<generate-metamodel-code plugin="org.emftext.language.pico" model="pico" generateEditProject="false" />
 		<generate-metamodel-code plugin="org.emftext.language.primitive_types" model="primitive_types" generateEditProject="true" />
+		<generate-metamodel-code plugin="org.emftext.language.pl0" model="pl0" generateEditProject="false" />
 		<generate-metamodel-code plugin="org.emftext.language.plugin" model="plugin" secondaryExtension="text" generateEditProject="false" />
 		<generate-metamodel-code plugin="org.emftext.language.rails" model="rails" generateEditProject="false" />
 		<generate-metamodel-code plugin="org.emftext.language.regexp" model="regular_expressions" generateEditProject="false" />
@@ -216,6 +217,7 @@
 		<generate-text-resource plugin="org.emftext.language.petrinet" syntax="petrinet" resourcePlugin="org.emftext.language.petrinet.resource.petrinet" />
 		<generate-text-resource plugin="org.emftext.language.pico" syntax="pico" resourcePlugin="org.emftext.language.pico.resource.pico" />
 		<generate-text-resource plugin="org.emftext.language.plugin" syntax="plugin" resourcePlugin="org.emftext.language.plugin.resource.topf" />
+		<generate-text-resource plugin="org.emftext.language.pl0" syntax="pl0" resourcePlugin="org.emftext.language.pl0.resource.pl0" />
 		<generate-text-resource plugin="org.emftext.language.quickuml" syntax="quickuml" resourcePlugin="org.emftext.language.quickuml.resource.quml"/>
 		<generate-text-resource plugin="org.emftext.language.rails" syntax="rails" resourcePlugin="org.emftext.language.rails.resource.rails"/>
 		<generate-text-resource plugin="org.emftext.language.regexp" syntax="regular_expressions_antlr" resourcePlugin="org.emftext.language.regexp.resource.regexp_antlr"/>
