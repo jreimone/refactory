@@ -502,6 +502,11 @@
 		<buildplugin name="UML Statemachine Textsyntax" package="org.emftext.language.statemachine.resource.statemachine" version="0.1.2"/>
 		<buildfeature package="org.emftext.language.statemachine" version="0.1.2"/>	
 		
+		<!-- SPARQL -->
+		<buildplugin name="SPARQL Textsyntax Specification" package="org.emftext.language.sparql" version="0.9.0"/>
+		<buildplugin name="SPARQL Textsyntax" package="org.emftext.language.sparql" version="0.9.0"/>
+		<buildfeature package="org.emftext.language.sparql" version="0.9.0"/>	
+		
 		<!-- TODO TCL/TK -->
 		
 		<!-- Text Adventure -->
