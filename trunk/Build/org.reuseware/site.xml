@@ -157,6 +157,9 @@
    <feature url="features/org.emftext.language.statemachine_0.1.2.v200911130906.jar" id="org.emftext.language.statemachine" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
+   <feature url="features/org.emftext.language.sparql_0.0.0.v0.jar" id="org.emftext.language.sparql" version="0.0.0.v0">
+      <category name="EMFText Languages"/>
+   </feature>  
    <!-- TODO add tbool (once it is ready) -->
    <feature url="features/org.emftext.language.textadventure_0.1.2.v200911130906.jar" id="org.emftext.language.textadventure" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
