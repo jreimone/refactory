@@ -362,6 +362,8 @@
 	<target name="run-test-java">
 		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.java.test" newenvironment="true">
 			<jvmarg value="-ea" />
+			<jvmarg value="-Xms40m" />
+			<jvmarg value="-Xmx900m" />
 			<classpath>
 				<path path="../temp_classpath.jar"/>
 			</classpath>

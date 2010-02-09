@@ -503,9 +503,9 @@
 		<buildfeature package="org.emftext.language.statemachine" version="0.1.2"/>	
 		
 		<!-- SPARQL -->
-		<buildplugin name="SPARQL Textsyntax Specification" package="org.emftext.language.sparql" version="0.9.0"/>
-		<buildplugin name="SPARQL Textsyntax" package="org.emftext.language.sparql" version="0.9.0"/>
-		<buildfeature package="org.emftext.language.sparql" version="0.9.0"/>	
+		<buildplugin name="SPARQL Textsyntax Specification" package="org.emftext.language.sparql"                 version="0.9.0"/>
+		<buildplugin name="SPARQL Textsyntax"               package="org.emftext.language.sparql.resource.sparql" version="0.9.0"/>
+		<buildfeature package="org.emftext.language.sparql" version="0.9.0"/>
 		
 		<!-- TODO TCL/TK -->
 		
