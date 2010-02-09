@@ -195,6 +195,27 @@ Copyright (C) Fujaba Development Group. All rights reserved.
          unpack="false"/>
 
    <plugin
+         id="org.reuseware.coconut.reuseextensionactivator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.reuseextensionactivator.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.coconut.reuseextensionactivator.resource.rexactivator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
          id="org.reuseware.coconut.resource"
          download-size="0"
          install-size="0"
