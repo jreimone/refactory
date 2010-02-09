@@ -99,10 +99,10 @@
 
 	</macrodef>
 
-	<target name="dist" depends="dist-clean,dist-set-up,build-emf-text,build-emftext-language-components,build-jamopp,build-emftext-languages,build-reuseware,dist-tear-down">
+	<target name="dist" depends="dist-clean,dist-set-up,build-emf-text,build-emftext-language-components,build-jamopp,build-emftext-languages,build-reuseware,build-reuseware-applications,dist-tear-down">
 	</target>
 		
-	<target name="dist-reuseware" depends="dist-clean,dist-set-up,build-reuseware,dist-tear-down">
+	<target name="dist-reuseware" depends="dist-clean,dist-set-up,build-reuseware,build-reuseware-applications,dist-tear-down">
 	</target>
 
 	<target name="dist-emf-text" depends="dist-clean,dist-set-up,build-emf-text,dist-tear-down">
@@ -131,7 +131,7 @@
 	</target>
 		
 	<target name="build-reuseware">
-		<property name="reuseware.version" value="0.9.1"/>
+		<property name="reuseware.version" value="0.9.3"/>
 		
 		<!-- CoCoNut Feature -->
 		<buildplugin name="Reuseware Runtime (CoCoNut)"             package="org.reuseware.coconut" version="${reuseware.version}"/>
@@ -148,6 +148,10 @@
 		<buildplugin name="Reuseware Reuse Extension Metamodel"            package="org.reuseware.coconut.reuseextension" version="${reuseware.version}"/>
 		<buildplugin name="Reuseware Reuse Extension Metamodel Edit"       package="org.reuseware.coconut.reuseextension.edit" version="${reuseware.version}"/>
 		<buildplugin name="Reuseware Reuse Extension Metamodel Textsyntax" package="org.reuseware.coconut.reuseextension.resource.rex" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware Reuse Extension Activator Metamodel"            package="org.reuseware.coconut.reuseextensionactivator" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Activator Metamodel Edit"       package="org.reuseware.coconut.reuseextensionactivator.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Activator Metamodel Textsyntax" package="org.reuseware.coconut.reuseextensionactivator.resource.rexactivator" version="${reuseware.version}"/>
 
 		<buildplugin name="Reuseware Fragment Store Metamodel"          package="org.reuseware.coconut.store" version="${reuseware.version}"/>
 
@@ -196,6 +200,26 @@
 			         plugins/org.reuseware.*,
 		             features/org.reuseware.*"/>
 	</target>
+
+	<target name="build-reuseware-applications">
+		
+		<!-- TaiPan -->
+		<buildplugin name="Extended TaiPan Metamodel"                package="org.reuseware.application.taipan"            version="1.0.0"/>
+		<buildplugin name="Extended TaiPan Metamodel Edit"           package="org.reuseware.application.taipan.edit"       version="1.0.0"/>
+		<buildplugin name="Extended TaiPan Metamodel Editor"         package="org.reuseware.application.taipan.editor"     version="1.0.0"/>
+		<buildplugin name="Extended TaiPan Metamodel Diagram Editor" package="org.reuseware.application.taipan.gmf.editor" version="1.0.0"/>
+		<buildfeature package="org.reuseware.application.taipan" version="1.0.0"/>
+		
+		<!-- CIM -->
+		<buildplugin name="Common Information Model"                package="es.tid.cim"            version="1.0.0"/>
+		<buildplugin name="Common Information Model Edit"           package="es.tid.cim.edit"       version="1.0.0"/>
+		<buildplugin name="Common Information Model Editor"         package="es.tid.cim.editor"     version="1.0.0"/>
+		<buildplugin name="Common Information Model Diagram Editor" package="es.tid.cim.diagram"    version="1.0.0"/>
+		<buildplugin name="Common Information Model Composition System" package="org.reuseware.application.cim" version="1.0.0"/>
+		<buildfeature package="org.reuseware.application.cim" version="1.0.0"/>
+
+	</target>
+
 		
 	<target name="build-emf-text">
 		<!-- DEPRECATED: EMFText 1.1 Runtime Feature -->

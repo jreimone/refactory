@@ -26,6 +26,13 @@
       <category name="Reuseware Composition Framework"/>
    </feature>
 
+   <feature url="features/org.reuseware.application.taipan_0.0.0.v0.jar" id="org.reuseware.application.taipan" version="0.0.0.v0">
+      <category name="Reuseware Applications"/>
+   </feature>
+   <feature url="features/org.reuseware.application.cim_0.0.0.v0.jar" id="org.reuseware.application.cim" version="0.0.0.v0">
+      <category name="Reuseware Applications"/>
+   </feature>
+
    <feature url="features/org.emftext.commons.antlr3_1_1_3.1.1.v200911130906.jar" id="org.emftext.commons.antlr3_1_1" version="3.1.1.v200911130906">
       <category name="EMFText Deprecated"/>
    </feature>
@@ -178,6 +185,11 @@
    <category-def name="Reuseware Composition Framework" label="Reuseware Composition Framework">
       <description>
          The Reuseware Composition Framework and accompanying tools.
+      </description>
+   </category-def>
+   <category-def name="Reuseware Applications" label="Reuseware Applications">
+      <description>
+         Applications that instantiate the Reuseware Composition Framework.
       </description>
    </category-def>
    <category-def name="EMFText" label="EMFText">
