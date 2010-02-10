@@ -169,6 +169,11 @@
 			<pathelement path="../org.emftext.language.regexp.test/bin"/>
 			<pathelement path="../org.emftext.language.sandwich/bin"/>
 			<pathelement path="../org.emftext.language.sandwich.resource.sandwich/bin"/>
+			<pathelement path="../org.emftext.language.secprop/bin"/>
+			<pathelement path="../org.emftext.language.secprop.diagram/bin"/>
+			<pathelement path="../org.emftext.language.secprop.edit/bin"/>
+			<pathelement path="../org.emftext.language.secprop.resource/bin"/>
+			<pathelement path="../org.emftext.language.secprop.resource.text.secprop/bin"/>
 			<pathelement path="../org.emftext.language.simple_c/bin"/>
 			<pathelement path="../org.emftext.language.simple_c.resource.c/bin"/>
 			<pathelement path="../org.emftext.language.simple_c.test/bin"/>

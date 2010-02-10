@@ -505,6 +505,14 @@
 		<buildplugin name="Sandwich Recipe Textsyntax" package="org.emftext.language.sandwich.resource.sandwich" version="0.5.1"/>
 		<buildfeature package="org.emftext.language.sandwich" version="0.5.1"/>
 
+		<!-- SecProp-->
+		<buildplugin  name="Metamodel for SecProp"                package="org.emftext.language.secprop"      version="0.1.0"/>
+		<buildplugin  name="Metamodel for SecProp (Edit Support)" package="org.emftext.language.secprop.edit" version="0.1.0"/>
+		<buildplugin  name="SecProp Resource Management"          package="org.emftext.language.secprop.resource" version="0.1.0"/>
+		<buildplugin  name="SecProp Text Syntax"                  package="org.emftext.language.secprop.resource.text.secprop" version="0.1.0"/>
+		<buildplugin  name="SecProp Graphical Syntax"             package="org.emftext.language.secprop.diagram" version="0.1.0"/>
+		<buildfeature package="org.emftext.language.secprop" version="0.1.0"/>
+			
 		<!-- TODO Simple C 
 		<buildplugin name="Simple C Metamodel"  package="org.emftext.language.simple_c" version="0.1.2"/>
 		<buildplugin name="Simple C Textsyntax" package="org.emftext.language.simple_c.resource.c" version="0.1.2"/>
