@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="roles_manualPalette"
+      description="">
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Roles"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Role"
+          description="Create new Role">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/new/role.gif"
+            bundle="org.emftext.language.refactoring.roles.edit"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Relations"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Implication"
+          description="Create new RoleImplication relation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/new/implication.gif"
+            bundle="org.emftext.language.refactoring.roles.edit"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Prohibition"
+          description="Create new Role Prohibition">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/new/prohibition.gif"
+            bundle="org.emftext.language.refactoring.roles.edit"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Association"
+          description="Create new Role Association">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/new/association.gif"
+            bundle="org.emftext.language.refactoring.roles.edit"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Composition"
+          description="Create new Role Composition">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/new/composition.gif"
+            bundle="org.emftext.language.refactoring.roles.edit"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>

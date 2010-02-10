@@ -45,7 +45,9 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 		targetClass = target.eClass();
 		TreeNode root = new TreeParent(sourceClass);
 		visitedNodesMap.put(sourceClass, root);
-		System.err.println(root.getEClass().getName());
+		if(output){
+			System.err.println(root.getEClass().getName());
+		}
 		createContainmentTree(root);
 		return paths;
 	}

@@ -1,0 +1,7 @@
+# Tracing options for the org.emftext.language.refactoring.roles.diagram plug-in
+
+# Common issues
+org.emftext.language.refactoring.roles.diagram/debug=false
+
+# Visual IDs
+org.emftext.language.refactoring.roles.diagram/debug/visualID=false
