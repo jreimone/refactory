@@ -154,6 +154,7 @@
 			<generate-metamodel-code plugin="org.emftext.language.rails" model="rails" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.regexp" model="regular_expressions" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.sandwich" model="sandwich" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.secprop" model="secprop" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.simple_c" model="c" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.simple_gui" model="simple_gui" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.simple_math" model="simple_math" generateEditProject="false" />
@@ -226,6 +227,7 @@
 		<generate-text-resource plugin="org.emftext.language.regexp" syntax="regular_expressions_antlr" resourcePlugin="org.emftext.language.regexp.resource.regexp_antlr"/>
 		<generate-text-resource plugin="org.emftext.language.regexp" syntax="regular_expressions_sdf" resourcePlugin="org.emftext.language.regexp.resource.regexp_sdf"/>
 		<generate-text-resource plugin="org.emftext.language.sandwich" syntax="sandwich" resourcePlugin="org.emftext.language.sandwich.resource.sandwich" />
+		<generate-text-resource plugin="org.emftext.language.secprop" syntax="text.secprop" resourcePlugin="org.emftext.language.secprop.resource.text.secprop" />
 		<generate-text-resource plugin="org.emftext.language.simple_c" syntax="c" resourcePlugin="org.emftext.language.simple_c.resource.c" />
 		<generate-text-resource plugin="org.emftext.language.simple_gui" syntax="simple_gui" resourcePlugin="org.emftext.language.simple_gui.resource.simplegui"/>
 		<generate-text-resource plugin="org.emftext.language.simple_math" syntax="simple_math" resourcePlugin="org.emftext.language.simple_math.resource.sm"/>

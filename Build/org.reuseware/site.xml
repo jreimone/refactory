@@ -152,7 +152,10 @@
    </feature>
    <feature url="features/org.emftext.language.sandwich_0.5.1.v200911130906.jar" id="org.emftext.language.sandwich" version="0.5.1.v200911130906">
       <category name="EMFText Languages"/>
-   </feature>  
+   </feature>
+   <feature url="features/org.emftext.language.secprop_0.0.0.v0.jar" id="org.emftext.language.secprop" version="0.0.0.v0">
+      <category name="EMFText Languages"/>
+   </feature>
    <!-- TODO add rolecore (once it is ready) -->
    <!-- TODO add simple_c (once it is ready) -->
    <feature url="features/org.emftext.language.simple_gui_0.1.2.v200911130906.jar" id="org.emftext.language.simple_gui" version="0.1.2.v200911130906">
