@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles:RoleModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roles="http://www.emftext.org/language/roles">
+  <roles name="OriginalContainer" outgoing="//@relations.0 //@relations.4" incoming="//@relations.3"/>
+  <roles name="MovedReference" outgoing="//@relations.5" incoming="//@relations.4" optional="true"/>
+  <roles name="NewContainer" outgoing="//@relations.1" incoming="//@relations.2 //@relations.5"/>
+  <roles name="Extract" incoming="//@relations.0 //@relations.1" input="true"/>
+  <roles name="ContainerContainer" outgoing="//@relations.2 //@relations.3" selectOnRuntime="true"/>
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='OriginalContainer']" target="//@roles[name='Extract']" transitive="true" sourceName="" targetName="extracts">
+    <sourceMultiplicity lowerBound="1" upperBound="1"/>
+    <targetMultiplicity lowerBound="1" upperBound="1"/>
+  </relations>
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='NewContainer']" target="//@roles[name='Extract']" transitive="true" sourceName="" targetName="moved">
+    <sourceMultiplicity lowerBound="1" upperBound="1"/>
+    <targetMultiplicity lowerBound="1" upperBound="1"/>
+  </relations>
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='ContainerContainer']" target="//@roles[name='NewContainer']">
+    <sourceMultiplicity lowerBound="1" upperBound="1"/>
+    <targetMultiplicity lowerBound="1" upperBound="1"/>
+  </relations>
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='ContainerContainer']" target="//@roles[name='OriginalContainer']" transitive="true" reflexive="true">
+    <sourceMultiplicity lowerBound="1" upperBound="1"/>
+    <targetMultiplicity lowerBound="1" upperBound="1"/>
+  </relations>
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='OriginalContainer']" target="//@roles[name='MovedReference']" transitive="true">
+    <sourceMultiplicity lowerBound="1" upperBound="1"/>
+    <targetMultiplicity lowerBound="1" upperBound="1"/>
+  </relations>
+  <relations xsi:type="roles:RoleAssociation" source="//@roles[name='MovedReference']" target="//@roles[name='NewContainer']">
+    <sourceMultiplicity lowerBound="1" upperBound="1"/>
+    <targetMultiplicity lowerBound="1" upperBound="1"/>
+  </relations>
+</roles:RoleModel>
