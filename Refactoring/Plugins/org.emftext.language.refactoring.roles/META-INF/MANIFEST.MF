@@ -8,7 +8,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.ui;bundle-version="3.5.1"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.emftext.language.refactoring.roles,
  org.emftext.language.refactoring.roles.impl,

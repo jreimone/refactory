@@ -16,5 +16,12 @@
             class="roles.RolesPackage"
             genModel="metamodel/roles.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.emftext.language.refactoring.remfactor"
+            name="rEMFactor">
+      </category>
+   </extension>
 
 </plugin>

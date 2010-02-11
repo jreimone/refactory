@@ -17,7 +17,7 @@
           editorPattern=""
           editPattern="">
         <diagramLabel
-            href="roles_manual.gmfgraph#RoleName"/>
+            href="roles.gmfgraph#RoleName"/>
         <features
             href="roles.ecore#//NamedElement/name"/>
         <editableFeatures
@@ -25,9 +25,9 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="roles_manual.gmftool#//@palette/@tools.0/@tools.0"/>
+          href="roles.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
-          href="roles_manual.gmfgraph#RoleNode"/>
+          href="roles.gmfgraph#RoleNode"/>
     </ownedChild>
   </nodes>
   <links>
@@ -37,9 +37,9 @@
         href="roles.ecore#//RoleModel/relations"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="roles_manual.gmftool#//@palette/@tools.1/@tools.0"/>
+        href="roles.gmftool#//@palette/@tools.1/@tools.0"/>
     <diagramLink
-        href="roles_manual.gmfgraph#RoleImplicationConnection"/>
+        href="roles.gmfgraph#RoleImplicationConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="roles.ecore#//Relation/source"/>
@@ -54,9 +54,9 @@
         href="roles.ecore#//RoleModel/relations"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="roles_manual.gmftool#//@palette/@tools.1/@tools.1"/>
+        href="roles.gmftool#//@palette/@tools.1/@tools.1"/>
     <diagramLink
-        href="roles_manual.gmfgraph#RoleProhibitionConnection"/>
+        href="roles.gmfgraph#RoleProhibitionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="roles.ecore#//Relation/source"/>
@@ -125,7 +125,7 @@
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="roles_manual.gmfgraph#RoleAssociationSourceName"/>
+          href="roles.gmfgraph#RoleAssociationSourceName"/>
       <features
           href="roles.ecore#//MultiplicityRelation/sourceName"/>
       <editableFeatures
@@ -134,7 +134,7 @@
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="roles_manual.gmfgraph#RoleAssociationTargetName"/>
+          href="roles.gmfgraph#RoleAssociationTargetName"/>
       <features
           href="roles.ecore#//MultiplicityRelation/targetName"/>
       <editableFeatures
@@ -144,9 +144,9 @@
         href="roles.ecore#//RoleModel/relations"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="roles_manual.gmftool#//@palette/@tools.1/@tools.2"/>
+        href="roles.gmftool#//@palette/@tools.1/@tools.2"/>
     <diagramLink
-        href="roles_manual.gmfgraph#RoleAssociationConnection"/>
+        href="roles.gmfgraph#RoleAssociationConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="roles.ecore#//Relation/source"/>
@@ -215,7 +215,7 @@
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="roles_manual.gmfgraph#RoleCompositionSourceName"/>
+          href="roles.gmfgraph#RoleCompositionSourceName"/>
       <features
           href="roles.ecore#//MultiplicityRelation/sourceName"/>
       <editableFeatures
@@ -224,7 +224,7 @@
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="roles_manual.gmfgraph#RoleCompositionTargetName"/>
+          href="roles.gmfgraph#RoleCompositionTargetName"/>
       <features
           href="roles.ecore#//MultiplicityRelation/targetName"/>
       <editableFeatures
@@ -234,9 +234,9 @@
         href="roles.ecore#//RoleModel/relations"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="roles_manual.gmftool#//@palette/@tools.1/@tools.3"/>
+        href="roles.gmftool#//@palette/@tools.1/@tools.3"/>
     <diagramLink
-        href="roles_manual.gmfgraph#RoleCompositionConnection"/>
+        href="roles.gmfgraph#RoleCompositionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="roles.ecore#//Relation/source"/>
@@ -246,12 +246,12 @@
   </links>
   <diagram>
     <diagramCanvas
-        href="roles_manual.gmfgraph#roles"/>
+        href="roles.gmfgraph#roles"/>
     <domainModel
         href="roles.ecore#/"/>
     <domainMetaElement
         href="roles.ecore#//RoleModel"/>
     <palette
-        href="roles_manual.gmftool#//@palette"/>
+        href="roles.gmftool#//@palette"/>
   </diagram>
 </gmfmap:Mapping>

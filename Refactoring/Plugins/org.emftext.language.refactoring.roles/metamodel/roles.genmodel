@@ -9,12 +9,14 @@
   <foreignModel>roles.ecore</foreignModel>
   <genPackages prefix="Roles" basePackage="org.emftext.language.refactoring" disposableProviderFactory="true"
       ecorePackage="roles.ecore#/">
-    <genClasses ecoreClass="roles.ecore#//RoleModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/roles"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/relations"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="roles.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="roles.ecore#//Relation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Relation/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Relation/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Relation/transitive"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Relation/reflexive"/>
     </genClasses>
     <genClasses ecoreClass="roles.ecore#//Role">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/outgoing"/>
@@ -23,26 +25,24 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Role/selectOnRuntime"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Role/input"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="roles.ecore#//Relation">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Relation/source"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Relation/target"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Relation/transitive"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Relation/reflexive"/>
+    <genClasses ecoreClass="roles.ecore#//RoleModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/roles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/relations"/>
     </genClasses>
-    <genClasses ecoreClass="roles.ecore#//RoleImplication"/>
-    <genClasses ecoreClass="roles.ecore#//RoleProhibition"/>
+    <genClasses ecoreClass="roles.ecore#//Multiplicity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Multiplicity/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Multiplicity/upperBound"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="roles.ecore#//MultiplicityRelation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//MultiplicityRelation/sourceMultiplicity"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//MultiplicityRelation/targetMultiplicity"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//MultiplicityRelation/sourceName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//MultiplicityRelation/targetName"/>
     </genClasses>
-    <genClasses ecoreClass="roles.ecore#//Multiplicity">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Multiplicity/lowerBound"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Multiplicity/upperBound"/>
-    </genClasses>
+    <genClasses ecoreClass="roles.ecore#//RoleUse"/>
+    <genClasses ecoreClass="roles.ecore#//RoleProhibition"/>
     <genClasses ecoreClass="roles.ecore#//RoleAssociation"/>
     <genClasses ecoreClass="roles.ecore#//RoleComposition"/>
-    <genClasses ecoreClass="roles.ecore#//RoleUse"/>
+    <genClasses ecoreClass="roles.ecore#//RoleImplication"/>
   </genPackages>
 </genmodel:GenModel>

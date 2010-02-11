@@ -44,15 +44,11 @@
   	  <wizard
   	     name="%newWizardName"
   	     icon="icons/new/rolemodel.gif"
-  	     category="org.emftext.language.refactoring.category"
+  	     category="org.emftext.language.refactoring.remfactor"
   	     class="org.emftext.language.refactoring.roles.diagram.part.RolesCreationWizard"
   	     id="org.emftext.language.refactoring.roles.diagram.part.RolesCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
-     <category
-           id="org.emftext.language.refactoring.category"
-           name="rEMFactor">
-     </category>
    </extension>
 
    <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
