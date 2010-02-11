@@ -3,6 +3,10 @@
   <children xmi:type="notation:Node" xmi:id="_k4GnYBcEEd-v66FqVrAtPg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_k4HOcBcEEd-v66FqVrAtPg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_k4HOcRcEEd-v66FqVrAtPg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_r30tkRc7Ed-kzeSjdxd1gw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="rolemapping.ecore#//RoleMappingModel/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_r30tkhc7Ed-kzeSjdxd1gw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_k4HOchcEEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_k4HOcxcEEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_k4HOdBcEEd-v66FqVrAtPg"/>
