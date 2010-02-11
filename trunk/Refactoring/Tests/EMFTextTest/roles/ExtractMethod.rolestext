@@ -1,0 +1,17 @@
+RoleModel ExtractMethod {
+	role OrigContainer;
+	role Extract(,true,);
+	role NewContainer;
+	role ContainerContainer(,,true);
+	role MovedReference(true,,);
+	
+	OrigContainer [1..1] <>- Extract extracts [0..-1] (true,);
+	OrigContainer [1..1] <>- MovedReference [1..1] (true,);
+	
+	NewContainer [1..1] <>- Extract moved [0..-1] (true,);
+	
+	ContainerContainer [1..1] <>- NewContainer [1..1] (true,);
+	ContainerContainer [1..1] <>- OrigContainer [1..1] (true,true);
+	
+	MovedReference [1..1] -- NewContainer [1..1];
+} 
