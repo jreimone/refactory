@@ -51,10 +51,8 @@ public class RolestextHyperlink implements org.eclipse.jface.text.hyperlink.IHyp
 			org.eclipse.ui.IWorkbench workbench = org.eclipse.ui.PlatformUI.getWorkbench();
 			org.eclipse.ui.IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 			try {
-				org.eclipse.ui.IEditorPart activeEditor = page.getActiveEditor();
 				org.eclipse.ui.IEditorDescriptor desc = workbench.getEditorRegistry().getDefaultEditor(file.getName());
-				page.openEditor(new org.eclipse.ui.part.FileEditorInput(file), desc.getId());
-				org.eclipse.ui.IEditorPart editorPart = activeEditor;
+				org.eclipse.ui.IEditorPart editorPart = page.openEditor(new org.eclipse.ui.part.FileEditorInput(file), desc.getId());
 				if (editorPart instanceof org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor) {
 					org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor emftEditor = (org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor) editorPart;
 					emftEditor.setCaret(linkTarget, text);
@@ -66,9 +64,10 @@ public class RolestextHyperlink implements org.eclipse.jface.text.hyperlink.IHyp
 	}
 	
 	private org.eclipse.core.resources.IFile getIFileFromResource() {
-		org.eclipse.emf.common.util.URI resourceURI = linkTarget.eResource().getURI();
-		if (resourceURI.toString().startsWith("pathmap")) {
-			resourceURI = org.eclipse.emf.ecore.resource.URIConverter.URI_MAP.get(resourceURI);
+		org.eclipse.emf.ecore.resource.Resource linkTargetResource = linkTarget.eResource();
+		org.eclipse.emf.common.util.URI resourceURI = linkTargetResource.getURI();
+		if (linkTargetResource.getResourceSet() != null && linkTargetResource.getResourceSet().getURIConverter() != null) {
+			resourceURI = linkTargetResource.getResourceSet().getURIConverter().normalize(resourceURI);
 		}
 		if (resourceURI.isPlatformResource()) {
 			String platformString = resourceURI.toPlatformString(true);

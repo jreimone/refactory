@@ -20,13 +20,12 @@ public class RolestextHyperlinkDetector implements org.eclipse.jface.text.hyperl
 	
 	public org.eclipse.jface.text.hyperlink.IHyperlink[] detectHyperlinks(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion region, boolean canShowMultipleHyperlinks) {
 		org.emftext.language.refactoring.roles.resource.rolestext.IRolestextLocationMap locationMap = textResource.getLocationMap();
-		String resourceFileExtension = textResource.getURI().fileExtension();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(region.getOffset());
 		org.eclipse.emf.ecore.EObject resolvedEObject = null;
 		for (org.eclipse.emf.ecore.EObject eObject : elementsAtOffset) {
 			if (eObject.eIsProxy()) {
 				resolvedEObject = org.eclipse.emf.ecore.util.EcoreUtil.resolve(eObject, textResource);
-				if (resolvedEObject == eObject || (resolvedEObject.eResource() != null && !resourceFileExtension.equals(resolvedEObject.eResource().getURI().fileExtension()))) {
+				if (resolvedEObject == eObject) {
 					continue;
 				}
 				int offset = locationMap.getCharStart(eObject);

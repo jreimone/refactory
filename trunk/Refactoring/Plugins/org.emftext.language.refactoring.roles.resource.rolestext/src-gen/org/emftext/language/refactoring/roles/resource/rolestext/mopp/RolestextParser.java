@@ -7,31 +7,34 @@ import org.antlr.runtime3_2_0.*;
 import java.util.HashMap;
 public class RolestextParser extends RolestextANTLRParserBase {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "IDENTIFIER", "BOOLEAN_LITERAL", "NUMBER", "SL_COMMENT", "ML_COMMENT", "WHITESPACE", "LINEBREAKS", "'RoleModel'", "'{'", "'}'", "'role'", "'('", "','", "')'", "';'", "'|-|'", "'->'", "'--'", "'<>-'", "'['", "'..'", "']'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "IDENTIFIER", "OPTIONAL", "INPUT", "RUNTIME", "TRANSITIVE", "REFLEXIVE", "NUMBER", "SL_COMMENT", "ML_COMMENT", "WHITESPACE", "LINEBREAKS", "'RoleModel'", "'{'", "'}'", "'role'", "'('", "')'", "';'", "'|-|'", "'->'", "'--'", "'<>-'", "'['", "'..'", "']'"
     };
+    public static final int TRANSITIVE=8;
+    public static final int T__28=28;
+    public static final int T__27=27;
+    public static final int T__26=26;
     public static final int T__25=25;
     public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;
     public static final int T__21=21;
     public static final int T__20=20;
-    public static final int NUMBER=6;
-    public static final int WHITESPACE=9;
-    public static final int LINEBREAKS=10;
+    public static final int NUMBER=10;
+    public static final int INPUT=6;
+    public static final int WHITESPACE=13;
+    public static final int LINEBREAKS=14;
     public static final int EOF=-1;
-    public static final int BOOLEAN_LITERAL=5;
-    public static final int ML_COMMENT=8;
+    public static final int OPTIONAL=5;
+    public static final int RUNTIME=7;
+    public static final int ML_COMMENT=12;
     public static final int T__19=19;
     public static final int T__16=16;
     public static final int T__15=15;
     public static final int T__18=18;
     public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
-    public static final int T__13=13;
     public static final int IDENTIFIER=4;
-    public static final int SL_COMMENT=7;
+    public static final int SL_COMMENT=11;
+    public static final int REFLEXIVE=9;
 
     // delegates
     // delegators
@@ -385,7 +388,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
     				break;
     			}
     		}
-    		int followSetID = 82;
+    		int followSetID = 76;
     		int i;
     		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
     			org.antlr.runtime3_2_0.CommonToken nextToken = (org.antlr.runtime3_2_0.CommonToken) tokenStream.get(i);
@@ -566,53 +569,47 @@ public class RolestextParser extends RolestextANTLRParserBase {
     	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_9 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__NAME), "IDENTIFIER");
     	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_10 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), "(");
     	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_11 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ";");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_12 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__OPTIONAL), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_13 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ",");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_14 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_15 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ",");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_16 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_17 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ")");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_18 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), "|-|");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_19 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TARGET), "IDENTIFIER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_20 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), "(");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_21 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ";");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_22 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TRANSITIVE), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_23 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ",");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_24 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_25 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ")");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_26 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), "->");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_27 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TARGET), "IDENTIFIER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_28 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), "(");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_29 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ";");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_30 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TRANSITIVE), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_31 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ",");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_32 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_33 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ")");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_34 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__SOURCE_NAME), "IDENTIFIER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_35 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "[");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_36 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), "--");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_37 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TARGET), "IDENTIFIER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_38 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TARGET_NAME), "IDENTIFIER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_39 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), "(");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_40 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ";");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_41 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TRANSITIVE), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_42 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ",");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_43 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_44 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ")");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_45 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__SOURCE_NAME), "IDENTIFIER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_46 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), "<>-");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_47 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TARGET), "IDENTIFIER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_48 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TARGET_NAME), "IDENTIFIER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_49 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), "(");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_50 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ";");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_51 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TRANSITIVE), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_52 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ",");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_53 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), "BOOLEAN_LITERAL");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_54 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ")");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_55 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.MULTIPLICITY__LOWER_BOUND), "NUMBER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_56 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "..");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_57 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.MULTIPLICITY__UPPER_BOUND), "NUMBER");
-    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_58 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "]");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_12 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__OPTIONAL), "OPTIONAL");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_13 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), "INPUT");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_14 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), "RUNTIME");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_15 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ")");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_16 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), "|-|");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_17 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TARGET), "IDENTIFIER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_18 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), "(");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_19 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ";");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_20 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TRANSITIVE), "TRANSITIVE");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_21 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), "REFLEXIVE");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_22 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ")");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_23 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), "->");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_24 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TARGET), "IDENTIFIER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_25 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), "(");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_26 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ";");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_27 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TRANSITIVE), "TRANSITIVE");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_28 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), "REFLEXIVE");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_29 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ")");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_30 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__SOURCE_NAME), "IDENTIFIER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_31 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "[");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_32 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), "--");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_33 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TARGET), "IDENTIFIER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_34 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TARGET_NAME), "IDENTIFIER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_35 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), "(");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_36 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ";");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_37 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TRANSITIVE), "TRANSITIVE");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_38 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), "REFLEXIVE");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_39 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ")");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_40 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__SOURCE_NAME), "IDENTIFIER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_41 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), "<>-");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_42 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TARGET), "IDENTIFIER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_43 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TARGET_NAME), "IDENTIFIER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_44 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), "(");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_45 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ";");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_46 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TRANSITIVE), "TRANSITIVE");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_47 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), "REFLEXIVE");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_48 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ")");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_49 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.MULTIPLICITY__LOWER_BOUND), "NUMBER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_50 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "..");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_51 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.MULTIPLICITY__UPPER_BOUND), "NUMBER");
+    	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_52 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "]");
     	
     	private final static org.eclipse.emf.ecore.EStructuralFeature FEATURE_0 = org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleModel().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_MODEL__ROLES);
     	private final static org.eclipse.emf.ecore.EStructuralFeature FEATURE_1 = org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleModel().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_MODEL__RELATIONS);
@@ -635,96 +632,97 @@ public class RolestextParser extends RolestextANTLRParserBase {
     		TERMINAL_9.addFollower(TERMINAL_11, EMPTY_FEATURE_ARRAY);
     		TERMINAL_10.addFollower(TERMINAL_12, EMPTY_FEATURE_ARRAY);
     		TERMINAL_10.addFollower(TERMINAL_13, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_10.addFollower(TERMINAL_14, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_10.addFollower(TERMINAL_15, EMPTY_FEATURE_ARRAY);
     		TERMINAL_12.addFollower(TERMINAL_13, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_12.addFollower(TERMINAL_14, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_12.addFollower(TERMINAL_15, EMPTY_FEATURE_ARRAY);
     		TERMINAL_13.addFollower(TERMINAL_14, EMPTY_FEATURE_ARRAY);
     		TERMINAL_13.addFollower(TERMINAL_15, EMPTY_FEATURE_ARRAY);
     		TERMINAL_14.addFollower(TERMINAL_15, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_15.addFollower(TERMINAL_16, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_15.addFollower(TERMINAL_17, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_16.addFollower(TERMINAL_17, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_17.addFollower(TERMINAL_11, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_15.addFollower(TERMINAL_11, EMPTY_FEATURE_ARRAY);
     		TERMINAL_11.addFollower(TERMINAL_3, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_0, });
     		TERMINAL_11.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
     		TERMINAL_11.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
     		TERMINAL_11.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
     		TERMINAL_11.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
     		TERMINAL_11.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_4.addFollower(TERMINAL_18, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_18.addFollower(TERMINAL_19, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_19.addFollower(TERMINAL_20, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_19.addFollower(TERMINAL_21, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_4.addFollower(TERMINAL_16, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_16.addFollower(TERMINAL_17, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_17.addFollower(TERMINAL_18, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_17.addFollower(TERMINAL_19, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_18.addFollower(TERMINAL_20, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_18.addFollower(TERMINAL_21, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_18.addFollower(TERMINAL_22, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_20.addFollower(TERMINAL_21, EMPTY_FEATURE_ARRAY);
     		TERMINAL_20.addFollower(TERMINAL_22, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_20.addFollower(TERMINAL_23, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_22.addFollower(TERMINAL_23, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_21.addFollower(TERMINAL_22, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_22.addFollower(TERMINAL_19, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_19.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_19.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_19.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_19.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_19.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_5.addFollower(TERMINAL_23, EMPTY_FEATURE_ARRAY);
     		TERMINAL_23.addFollower(TERMINAL_24, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_23.addFollower(TERMINAL_25, EMPTY_FEATURE_ARRAY);
     		TERMINAL_24.addFollower(TERMINAL_25, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_25.addFollower(TERMINAL_21, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_21.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_21.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_21.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_21.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_21.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_5.addFollower(TERMINAL_26, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_26.addFollower(TERMINAL_27, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_24.addFollower(TERMINAL_26, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_25.addFollower(TERMINAL_27, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_25.addFollower(TERMINAL_28, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_25.addFollower(TERMINAL_29, EMPTY_FEATURE_ARRAY);
     		TERMINAL_27.addFollower(TERMINAL_28, EMPTY_FEATURE_ARRAY);
     		TERMINAL_27.addFollower(TERMINAL_29, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_28.addFollower(TERMINAL_30, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_28.addFollower(TERMINAL_31, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_30.addFollower(TERMINAL_31, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_31.addFollower(TERMINAL_32, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_31.addFollower(TERMINAL_33, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_28.addFollower(TERMINAL_29, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_29.addFollower(TERMINAL_26, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_26.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_26.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_26.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_26.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_26.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_6.addFollower(TERMINAL_30, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_6.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+    		TERMINAL_30.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
     		TERMINAL_32.addFollower(TERMINAL_33, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_33.addFollower(TERMINAL_29, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_29.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_29.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_29.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_29.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_29.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_6.addFollower(TERMINAL_34, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_6.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-    		TERMINAL_34.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-    		TERMINAL_36.addFollower(TERMINAL_37, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_33.addFollower(TERMINAL_34, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_33.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+    		TERMINAL_34.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+    		TERMINAL_35.addFollower(TERMINAL_37, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_35.addFollower(TERMINAL_38, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_35.addFollower(TERMINAL_39, EMPTY_FEATURE_ARRAY);
     		TERMINAL_37.addFollower(TERMINAL_38, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_37.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-    		TERMINAL_38.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-    		TERMINAL_39.addFollower(TERMINAL_41, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_39.addFollower(TERMINAL_42, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_37.addFollower(TERMINAL_39, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_38.addFollower(TERMINAL_39, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_39.addFollower(TERMINAL_36, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_36.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_36.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_36.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_36.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_36.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_7.addFollower(TERMINAL_40, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_7.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+    		TERMINAL_40.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
     		TERMINAL_41.addFollower(TERMINAL_42, EMPTY_FEATURE_ARRAY);
     		TERMINAL_42.addFollower(TERMINAL_43, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_42.addFollower(TERMINAL_44, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_43.addFollower(TERMINAL_44, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_44.addFollower(TERMINAL_40, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_40.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_40.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_40.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_40.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_40.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_7.addFollower(TERMINAL_45, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_7.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-    		TERMINAL_45.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+    		TERMINAL_42.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+    		TERMINAL_43.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+    		TERMINAL_44.addFollower(TERMINAL_46, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_44.addFollower(TERMINAL_47, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_44.addFollower(TERMINAL_48, EMPTY_FEATURE_ARRAY);
     		TERMINAL_46.addFollower(TERMINAL_47, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_46.addFollower(TERMINAL_48, EMPTY_FEATURE_ARRAY);
     		TERMINAL_47.addFollower(TERMINAL_48, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_47.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-    		TERMINAL_48.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-    		TERMINAL_49.addFollower(TERMINAL_51, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_49.addFollower(TERMINAL_52, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_48.addFollower(TERMINAL_45, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_45.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_45.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_45.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_45.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+    		TERMINAL_45.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_31.addFollower(TERMINAL_49, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_49.addFollower(TERMINAL_50, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_50.addFollower(TERMINAL_51, EMPTY_FEATURE_ARRAY);
     		TERMINAL_51.addFollower(TERMINAL_52, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_52.addFollower(TERMINAL_53, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_52.addFollower(TERMINAL_54, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_53.addFollower(TERMINAL_54, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_54.addFollower(TERMINAL_50, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_50.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_50.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_50.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_50.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-    		TERMINAL_50.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_35.addFollower(TERMINAL_55, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_55.addFollower(TERMINAL_56, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_56.addFollower(TERMINAL_57, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_57.addFollower(TERMINAL_58, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_58.addFollower(TERMINAL_36, EMPTY_FEATURE_ARRAY);
-    		TERMINAL_58.addFollower(TERMINAL_46, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_52.addFollower(TERMINAL_32, EMPTY_FEATURE_ARRAY);
+    		TERMINAL_52.addFollower(TERMINAL_41, EMPTY_FEATURE_ARRAY);
     	}
     	// wire the terminals
     	static {
@@ -734,7 +732,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "start"
-    // Rolestext.g:707:1: start returns [ org.eclipse.emf.ecore.EObject element = null] : (c0= parse_org_emftext_language_refactoring_roles_RoleModel ) EOF ;
+    // Rolestext.g:702:1: start returns [ org.eclipse.emf.ecore.EObject element = null] : (c0= parse_org_emftext_language_refactoring_roles_RoleModel ) EOF ;
     public final org.eclipse.emf.ecore.EObject start() throws RecognitionException {
         org.eclipse.emf.ecore.EObject element =  null;
         int start_StartIndex = input.index();
@@ -743,8 +741,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 1) ) { return element; }
-            // Rolestext.g:708:1: ( (c0= parse_org_emftext_language_refactoring_roles_RoleModel ) EOF )
-            // Rolestext.g:709:2: (c0= parse_org_emftext_language_refactoring_roles_RoleModel ) EOF
+            // Rolestext.g:703:1: ( (c0= parse_org_emftext_language_refactoring_roles_RoleModel ) EOF )
+            // Rolestext.g:704:2: (c0= parse_org_emftext_language_refactoring_roles_RoleModel ) EOF
             {
             if ( state.backtracking==0 ) {
 
@@ -753,8 +751,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
               		expectedElementsIndexOfLastCompleteElement = expectedElements.size() - 1;
               	
             }
-            // Rolestext.g:714:2: (c0= parse_org_emftext_language_refactoring_roles_RoleModel )
-            // Rolestext.g:715:3: c0= parse_org_emftext_language_refactoring_roles_RoleModel
+            // Rolestext.g:709:2: (c0= parse_org_emftext_language_refactoring_roles_RoleModel )
+            // Rolestext.g:710:3: c0= parse_org_emftext_language_refactoring_roles_RoleModel
             {
             pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleModel_in_start82);
             c0=parse_org_emftext_language_refactoring_roles_RoleModel();
@@ -785,7 +783,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_language_refactoring_roles_RoleModel"
-    // Rolestext.g:720:1: parse_org_emftext_language_refactoring_roles_RoleModel returns [org.emftext.language.refactoring.roles.RoleModel element = null] : a0= 'RoleModel' (a1= IDENTIFIER ) a2= '{' ( (a3_0= parse_org_emftext_language_refactoring_roles_Role ) )* ( (a4_0= parse_org_emftext_language_refactoring_roles_Relation ) )* a5= '}' ;
+    // Rolestext.g:715:1: parse_org_emftext_language_refactoring_roles_RoleModel returns [org.emftext.language.refactoring.roles.RoleModel element = null] : a0= 'RoleModel' (a1= IDENTIFIER ) a2= '{' ( (a3_0= parse_org_emftext_language_refactoring_roles_Role ) )* ( (a4_0= parse_org_emftext_language_refactoring_roles_Relation ) )* a5= '}' ;
     public final org.emftext.language.refactoring.roles.RoleModel parse_org_emftext_language_refactoring_roles_RoleModel() throws RecognitionException {
         org.emftext.language.refactoring.roles.RoleModel element =  null;
         int parse_org_emftext_language_refactoring_roles_RoleModel_StartIndex = input.index();
@@ -802,10 +800,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
-            // Rolestext.g:723:1: (a0= 'RoleModel' (a1= IDENTIFIER ) a2= '{' ( (a3_0= parse_org_emftext_language_refactoring_roles_Role ) )* ( (a4_0= parse_org_emftext_language_refactoring_roles_Relation ) )* a5= '}' )
-            // Rolestext.g:724:2: a0= 'RoleModel' (a1= IDENTIFIER ) a2= '{' ( (a3_0= parse_org_emftext_language_refactoring_roles_Role ) )* ( (a4_0= parse_org_emftext_language_refactoring_roles_Relation ) )* a5= '}'
+            // Rolestext.g:718:1: (a0= 'RoleModel' (a1= IDENTIFIER ) a2= '{' ( (a3_0= parse_org_emftext_language_refactoring_roles_Role ) )* ( (a4_0= parse_org_emftext_language_refactoring_roles_Relation ) )* a5= '}' )
+            // Rolestext.g:719:2: a0= 'RoleModel' (a1= IDENTIFIER ) a2= '{' ( (a3_0= parse_org_emftext_language_refactoring_roles_Role ) )* ( (a4_0= parse_org_emftext_language_refactoring_roles_Relation ) )* a5= '}'
             {
-            a0=(Token)match(input,11,FOLLOW_11_in_parse_org_emftext_language_refactoring_roles_RoleModel112); if (state.failed) return element;
+            a0=(Token)match(input,15,FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleModel112); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -821,8 +819,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
               		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_1, 1));
               	
             }
-            // Rolestext.g:736:2: (a1= IDENTIFIER )
-            // Rolestext.g:737:3: a1= IDENTIFIER
+            // Rolestext.g:731:2: (a1= IDENTIFIER )
+            // Rolestext.g:732:3: a1= IDENTIFIER
             {
             a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleModel130); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -861,7 +859,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
               		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_2, 2));
               	
             }
-            a2=(Token)match(input,12,FOLLOW_12_in_parse_org_emftext_language_refactoring_roles_RoleModel151); if (state.failed) return element;
+            a2=(Token)match(input,16,FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleModel151); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -882,23 +880,23 @@ public class RolestextParser extends RolestextANTLRParserBase {
               		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 3));
               	
             }
-            // Rolestext.g:786:2: ( (a3_0= parse_org_emftext_language_refactoring_roles_Role ) )*
+            // Rolestext.g:781:2: ( (a3_0= parse_org_emftext_language_refactoring_roles_Role ) )*
             loop1:
             do {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==14) ) {
+                if ( (LA1_0==18) ) {
                     alt1=1;
                 }
 
 
                 switch (alt1) {
             	case 1 :
-            	    // Rolestext.g:787:3: (a3_0= parse_org_emftext_language_refactoring_roles_Role )
+            	    // Rolestext.g:782:3: (a3_0= parse_org_emftext_language_refactoring_roles_Role )
             	    {
-            	    // Rolestext.g:787:3: (a3_0= parse_org_emftext_language_refactoring_roles_Role )
-            	    // Rolestext.g:788:4: a3_0= parse_org_emftext_language_refactoring_roles_Role
+            	    // Rolestext.g:782:3: (a3_0= parse_org_emftext_language_refactoring_roles_Role )
+            	    // Rolestext.g:783:4: a3_0= parse_org_emftext_language_refactoring_roles_Role
             	    {
             	    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Role_in_parse_org_emftext_language_refactoring_roles_RoleModel174);
             	    a3_0=parse_org_emftext_language_refactoring_roles_Role();
@@ -945,7 +943,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
               		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 4));
               	
             }
-            // Rolestext.g:815:2: ( (a4_0= parse_org_emftext_language_refactoring_roles_Relation ) )*
+            // Rolestext.g:810:2: ( (a4_0= parse_org_emftext_language_refactoring_roles_Relation ) )*
             loop2:
             do {
                 int alt2=2;
@@ -958,10 +956,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
                 switch (alt2) {
             	case 1 :
-            	    // Rolestext.g:816:3: (a4_0= parse_org_emftext_language_refactoring_roles_Relation )
+            	    // Rolestext.g:811:3: (a4_0= parse_org_emftext_language_refactoring_roles_Relation )
             	    {
-            	    // Rolestext.g:816:3: (a4_0= parse_org_emftext_language_refactoring_roles_Relation )
-            	    // Rolestext.g:817:4: a4_0= parse_org_emftext_language_refactoring_roles_Relation
+            	    // Rolestext.g:811:3: (a4_0= parse_org_emftext_language_refactoring_roles_Relation )
+            	    // Rolestext.g:812:4: a4_0= parse_org_emftext_language_refactoring_roles_Relation
             	    {
             	    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Relation_in_parse_org_emftext_language_refactoring_roles_RoleModel209);
             	    a4_0=parse_org_emftext_language_refactoring_roles_Relation();
@@ -1007,7 +1005,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
               		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 5));
               	
             }
-            a5=(Token)match(input,13,FOLLOW_13_in_parse_org_emftext_language_refactoring_roles_RoleModel235); if (state.failed) return element;
+            a5=(Token)match(input,17,FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleModel235); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1039,7 +1037,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_language_refactoring_roles_Role"
-    // Rolestext.g:856:1: parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.refactoring.roles.Role element = null] : a0= 'role' (a1= IDENTIFIER ) ( (a2= '(' ( ( (a3= BOOLEAN_LITERAL ) ) )? a4= ',' ( ( (a5= BOOLEAN_LITERAL ) ) )? a6= ',' ( ( (a7= BOOLEAN_LITERAL ) ) )? a8= ')' ) )? a9= ';' ;
+    // Rolestext.g:851:1: parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.refactoring.roles.Role element = null] : a0= 'role' (a1= IDENTIFIER ) ( (a2= '(' ( ( (a3= OPTIONAL ) ) )? ( ( (a4= INPUT ) ) )? ( ( (a5= RUNTIME ) ) )? a6= ')' ) )? a7= ';' ;
     public final org.emftext.language.refactoring.roles.Role parse_org_emftext_language_refactoring_roles_Role() throws RecognitionException {
         org.emftext.language.refactoring.roles.Role element =  null;
         int parse_org_emftext_language_refactoring_roles_Role_StartIndex = input.index();
@@ -1051,17 +1049,15 @@ public class RolestextParser extends RolestextANTLRParserBase {
         Token a5=null;
         Token a6=null;
         Token a7=null;
-        Token a8=null;
-        Token a9=null;
 
 
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
-            // Rolestext.g:859:1: (a0= 'role' (a1= IDENTIFIER ) ( (a2= '(' ( ( (a3= BOOLEAN_LITERAL ) ) )? a4= ',' ( ( (a5= BOOLEAN_LITERAL ) ) )? a6= ',' ( ( (a7= BOOLEAN_LITERAL ) ) )? a8= ')' ) )? a9= ';' )
-            // Rolestext.g:860:2: a0= 'role' (a1= IDENTIFIER ) ( (a2= '(' ( ( (a3= BOOLEAN_LITERAL ) ) )? a4= ',' ( ( (a5= BOOLEAN_LITERAL ) ) )? a6= ',' ( ( (a7= BOOLEAN_LITERAL ) ) )? a8= ')' ) )? a9= ';'
+            // Rolestext.g:854:1: (a0= 'role' (a1= IDENTIFIER ) ( (a2= '(' ( ( (a3= OPTIONAL ) ) )? ( ( (a4= INPUT ) ) )? ( ( (a5= RUNTIME ) ) )? a6= ')' ) )? a7= ';' )
+            // Rolestext.g:855:2: a0= 'role' (a1= IDENTIFIER ) ( (a2= '(' ( ( (a3= OPTIONAL ) ) )? ( ( (a4= INPUT ) ) )? ( ( (a5= RUNTIME ) ) )? a6= ')' ) )? a7= ';'
             {
-            a0=(Token)match(input,14,FOLLOW_14_in_parse_org_emftext_language_refactoring_roles_Role264); if (state.failed) return element;
+            a0=(Token)match(input,18,FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_Role264); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1077,8 +1073,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
               		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_9, 7));
               	
             }
-            // Rolestext.g:872:2: (a1= IDENTIFIER )
-            // Rolestext.g:873:3: a1= IDENTIFIER
+            // Rolestext.g:867:2: (a1= IDENTIFIER )
+            // Rolestext.g:868:3: a1= IDENTIFIER
             {
             a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_Role282); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -1118,21 +1114,21 @@ public class RolestextParser extends RolestextANTLRParserBase {
               		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 8));
               	
             }
-            // Rolestext.g:906:2: ( (a2= '(' ( ( (a3= BOOLEAN_LITERAL ) ) )? a4= ',' ( ( (a5= BOOLEAN_LITERAL ) ) )? a6= ',' ( ( (a7= BOOLEAN_LITERAL ) ) )? a8= ')' ) )?
+            // Rolestext.g:901:2: ( (a2= '(' ( ( (a3= OPTIONAL ) ) )? ( ( (a4= INPUT ) ) )? ( ( (a5= RUNTIME ) ) )? a6= ')' ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==15) ) {
+            if ( (LA6_0==19) ) {
                 alt6=1;
             }
             switch (alt6) {
                 case 1 :
-                    // Rolestext.g:907:3: (a2= '(' ( ( (a3= BOOLEAN_LITERAL ) ) )? a4= ',' ( ( (a5= BOOLEAN_LITERAL ) ) )? a6= ',' ( ( (a7= BOOLEAN_LITERAL ) ) )? a8= ')' )
+                    // Rolestext.g:902:3: (a2= '(' ( ( (a3= OPTIONAL ) ) )? ( ( (a4= INPUT ) ) )? ( ( (a5= RUNTIME ) ) )? a6= ')' )
                     {
-                    // Rolestext.g:907:3: (a2= '(' ( ( (a3= BOOLEAN_LITERAL ) ) )? a4= ',' ( ( (a5= BOOLEAN_LITERAL ) ) )? a6= ',' ( ( (a7= BOOLEAN_LITERAL ) ) )? a8= ')' )
-                    // Rolestext.g:908:4: a2= '(' ( ( (a3= BOOLEAN_LITERAL ) ) )? a4= ',' ( ( (a5= BOOLEAN_LITERAL ) ) )? a6= ',' ( ( (a7= BOOLEAN_LITERAL ) ) )? a8= ')'
+                    // Rolestext.g:902:3: (a2= '(' ( ( (a3= OPTIONAL ) ) )? ( ( (a4= INPUT ) ) )? ( ( (a5= RUNTIME ) ) )? a6= ')' )
+                    // Rolestext.g:903:4: a2= '(' ( ( (a3= OPTIONAL ) ) )? ( ( (a4= INPUT ) ) )? ( ( (a5= RUNTIME ) ) )? a6= ')'
                     {
-                    a2=(Token)match(input,15,FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_Role312); if (state.failed) return element;
+                    a2=(Token)match(input,19,FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_Role312); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1147,26 +1143,28 @@ public class RolestextParser extends RolestextANTLRParserBase {
                       				// expected elements (follow set)
                       				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_12, 9));
                       				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_13, 9));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 9));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 9));
                       			
                     }
-                    // Rolestext.g:921:4: ( ( (a3= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:918:4: ( ( (a3= OPTIONAL ) ) )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
-                    if ( (LA3_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA3_0==OPTIONAL) ) {
                         alt3=1;
                     }
                     switch (alt3) {
                         case 1 :
-                            // Rolestext.g:922:5: ( (a3= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:919:5: ( (a3= OPTIONAL ) )
                             {
-                            // Rolestext.g:922:5: ( (a3= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:923:6: (a3= BOOLEAN_LITERAL )
+                            // Rolestext.g:919:5: ( (a3= OPTIONAL ) )
+                            // Rolestext.g:920:6: (a3= OPTIONAL )
                             {
-                            // Rolestext.g:923:6: (a3= BOOLEAN_LITERAL )
-                            // Rolestext.g:924:7: a3= BOOLEAN_LITERAL
+                            // Rolestext.g:920:6: (a3= OPTIONAL )
+                            // Rolestext.g:921:7: a3= OPTIONAL
                             {
-                            a3=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_Role353); if (state.failed) return element;
+                            a3=(Token)match(input,OPTIONAL,FOLLOW_OPTIONAL_in_parse_org_emftext_language_refactoring_roles_Role353); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -1176,7 +1174,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
                               							}
                               							if (a3 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("OPTIONAL");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
                               								tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__OPTIONAL), result);
@@ -1201,6 +1199,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
                               						// expected elements (follow set)
                               						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_13, 10));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 10));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 10));
                               					
                             }
 
@@ -1216,43 +1216,99 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
                       				// expected elements (follow set)
                       				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_13, 11));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 11));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 11));
                       			
                     }
-                    a4=(Token)match(input,16,FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_Role421); if (state.failed) return element;
-                    if ( state.backtracking==0 ) {
-
-                      				if (element == null) {
-                      					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
-                      				}
-                      				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
-                      			
-                    }
-                    if ( state.backtracking==0 ) {
-
-                      				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 12));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 12));
-                      			
-                    }
-                    // Rolestext.g:976:4: ( ( (a5= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:964:4: ( ( (a4= INPUT ) ) )?
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
-                    if ( (LA4_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA4_0==INPUT) ) {
                         alt4=1;
                     }
                     switch (alt4) {
                         case 1 :
-                            // Rolestext.g:977:5: ( (a5= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:965:5: ( (a4= INPUT ) )
                             {
-                            // Rolestext.g:977:5: ( (a5= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:978:6: (a5= BOOLEAN_LITERAL )
+                            // Rolestext.g:965:5: ( (a4= INPUT ) )
+                            // Rolestext.g:966:6: (a4= INPUT )
                             {
-                            // Rolestext.g:978:6: (a5= BOOLEAN_LITERAL )
-                            // Rolestext.g:979:7: a5= BOOLEAN_LITERAL
+                            // Rolestext.g:966:6: (a4= INPUT )
+                            // Rolestext.g:967:7: a4= INPUT
                             {
-                            a5=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_Role462); if (state.failed) return element;
+                            a4=(Token)match(input,INPUT,FOLLOW_INPUT_in_parse_org_emftext_language_refactoring_roles_Role442); if (state.failed) return element;
+                            if ( state.backtracking==0 ) {
+
+                              							if (terminateParsing) {
+                              								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
+                              							}
+                              							if (element == null) {
+                              								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
+                              							}
+                              							if (a4 != null) {
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INPUT");
+                              								tokenResolver.setOptions(getOptions());
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
+                              								tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), result);
+                              								java.lang.Object resolvedObject = result.getResolvedToken();
+                              								if (resolvedObject == null) {
+                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStopIndex());
+                              								}
+                              								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+                              								if (resolved != null) {
+                              									element.eSet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), resolved);
+                              									completedElement(resolved);
+                              								}
+                              								collectHiddenTokens(element);
+                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, element);
+                              							}
+                              						
+                            }
+
+                            }
+
+                            if ( state.backtracking==0 ) {
+
+                              						// expected elements (follow set)
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 12));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 12));
+                              					
+                            }
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+                    if ( state.backtracking==0 ) {
+
+                      				// expected elements (follow set)
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 13));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 13));
+                      			
+                    }
+                    // Rolestext.g:1008:4: ( ( (a5= RUNTIME ) ) )?
+                    int alt5=2;
+                    int LA5_0 = input.LA(1);
+
+                    if ( (LA5_0==RUNTIME) ) {
+                        alt5=1;
+                    }
+                    switch (alt5) {
+                        case 1 :
+                            // Rolestext.g:1009:5: ( (a5= RUNTIME ) )
+                            {
+                            // Rolestext.g:1009:5: ( (a5= RUNTIME ) )
+                            // Rolestext.g:1010:6: (a5= RUNTIME )
+                            {
+                            // Rolestext.g:1010:6: (a5= RUNTIME )
+                            // Rolestext.g:1011:7: a5= RUNTIME
+                            {
+                            a5=(Token)match(input,RUNTIME,FOLLOW_RUNTIME_in_parse_org_emftext_language_refactoring_roles_Role531); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -1262,17 +1318,17 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
                               							}
                               							if (a5 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("RUNTIME");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-                              								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), result);
+                              								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), result);
                               								java.lang.Object resolvedObject = result.getResolvedToken();
                               								if (resolvedObject == null) {
                               									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
                               								}
                               								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
                               								if (resolved != null) {
-                              									element.eSet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), resolved);
+                              									element.eSet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), resolved);
                               									completedElement(resolved);
                               								}
                               								collectHiddenTokens(element);
@@ -1286,7 +1342,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 13));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 14));
                               					
                             }
 
@@ -1301,10 +1357,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 14));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 15));
                       			
                     }
-                    a6=(Token)match(input,16,FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_Role530); if (state.failed) return element;
+                    a6=(Token)match(input,20,FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_Role599); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1317,93 +1373,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_16, 15));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_17, 15));
-                      			
-                    }
-                    // Rolestext.g:1031:4: ( ( (a7= BOOLEAN_LITERAL ) ) )?
-                    int alt5=2;
-                    int LA5_0 = input.LA(1);
-
-                    if ( (LA5_0==BOOLEAN_LITERAL) ) {
-                        alt5=1;
-                    }
-                    switch (alt5) {
-                        case 1 :
-                            // Rolestext.g:1032:5: ( (a7= BOOLEAN_LITERAL ) )
-                            {
-                            // Rolestext.g:1032:5: ( (a7= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:1033:6: (a7= BOOLEAN_LITERAL )
-                            {
-                            // Rolestext.g:1033:6: (a7= BOOLEAN_LITERAL )
-                            // Rolestext.g:1034:7: a7= BOOLEAN_LITERAL
-                            {
-                            a7=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_Role571); if (state.failed) return element;
-                            if ( state.backtracking==0 ) {
-
-                              							if (terminateParsing) {
-                              								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
-                              							}
-                              							if (element == null) {
-                              								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
-                              							}
-                              							if (a7 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
-                              								tokenResolver.setOptions(getOptions());
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-                              								tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), result);
-                              								java.lang.Object resolvedObject = result.getResolvedToken();
-                              								if (resolvedObject == null) {
-                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStopIndex());
-                              								}
-                              								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
-                              								if (resolved != null) {
-                              									element.eSet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), resolved);
-                              									completedElement(resolved);
-                              								}
-                              								collectHiddenTokens(element);
-                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, element);
-                              							}
-                              						
-                            }
-
-                            }
-
-                            if ( state.backtracking==0 ) {
-
-                              						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_17, 16));
-                              					
-                            }
-
-                            }
-
-
-                            }
-                            break;
-
-                    }
-
-                    if ( state.backtracking==0 ) {
-
-                      				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_17, 17));
-                      			
-                    }
-                    a8=(Token)match(input,17,FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_Role639); if (state.failed) return element;
-                    if ( state.backtracking==0 ) {
-
-                      				if (element == null) {
-                      					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
-                      				}
-                      				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
-                      			
-                    }
-                    if ( state.backtracking==0 ) {
-
-                      				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 18));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 16));
                       			
                     }
 
@@ -1418,28 +1388,28 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 19));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 17));
               	
             }
-            a9=(Token)match(input,18,FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_Role672); if (state.failed) return element;
+            a7=(Token)match(input,21,FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_Role632); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
               			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
               		}
               		collectHiddenTokens(element);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
+              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
               	
             }
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_3, 20, FEATURE_0));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 20, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 20, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 20, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 20, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 20));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_3, 18, FEATURE_0));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 18, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 18, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 18, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 18, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 18));
               	
             }
 
@@ -1459,7 +1429,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_language_refactoring_roles_RoleProhibition"
-    // Rolestext.g:1111:1: parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftext.language.refactoring.roles.RoleProhibition element = null] : (a0= IDENTIFIER ) a1= '|-|' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' ) )? a8= ';' ;
+    // Rolestext.g:1088:1: parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftext.language.refactoring.roles.RoleProhibition element = null] : (a0= IDENTIFIER ) a1= '|-|' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' ) )? a7= ';' ;
     public final org.emftext.language.refactoring.roles.RoleProhibition parse_org_emftext_language_refactoring_roles_RoleProhibition() throws RecognitionException {
         org.emftext.language.refactoring.roles.RoleProhibition element =  null;
         int parse_org_emftext_language_refactoring_roles_RoleProhibition_StartIndex = input.index();
@@ -1471,19 +1441,18 @@ public class RolestextParser extends RolestextANTLRParserBase {
         Token a5=null;
         Token a6=null;
         Token a7=null;
-        Token a8=null;
 
 
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return element; }
-            // Rolestext.g:1114:1: ( (a0= IDENTIFIER ) a1= '|-|' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' ) )? a8= ';' )
-            // Rolestext.g:1115:2: (a0= IDENTIFIER ) a1= '|-|' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' ) )? a8= ';'
+            // Rolestext.g:1091:1: ( (a0= IDENTIFIER ) a1= '|-|' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' ) )? a7= ';' )
+            // Rolestext.g:1092:2: (a0= IDENTIFIER ) a1= '|-|' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' ) )? a7= ';'
             {
-            // Rolestext.g:1115:2: (a0= IDENTIFIER )
-            // Rolestext.g:1116:3: a0= IDENTIFIER
+            // Rolestext.g:1092:2: (a0= IDENTIFIER )
+            // Rolestext.g:1093:3: a0= IDENTIFIER
             {
-            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleProhibition705); if (state.failed) return element;
+            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleProhibition665); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -1521,10 +1490,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_18, 21));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_16, 19));
               	
             }
-            a1=(Token)match(input,19,FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleProhibition726); if (state.failed) return element;
+            a1=(Token)match(input,22,FOLLOW_22_in_parse_org_emftext_language_refactoring_roles_RoleProhibition686); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1537,13 +1506,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_19, 22));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_17, 20));
               	
             }
-            // Rolestext.g:1164:2: (a2= IDENTIFIER )
-            // Rolestext.g:1165:3: a2= IDENTIFIER
+            // Rolestext.g:1141:2: (a2= IDENTIFIER )
+            // Rolestext.g:1142:3: a2= IDENTIFIER
             {
-            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleProhibition744); if (state.failed) return element;
+            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleProhibition704); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -1581,25 +1550,25 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_20, 23));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 23));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_18, 21));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_19, 21));
               	
             }
-            // Rolestext.g:1202:2: ( (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' ) )?
+            // Rolestext.g:1179:2: ( (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( (LA9_0==15) ) {
+            if ( (LA9_0==19) ) {
                 alt9=1;
             }
             switch (alt9) {
                 case 1 :
-                    // Rolestext.g:1203:3: (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' )
+                    // Rolestext.g:1180:3: (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' )
                     {
-                    // Rolestext.g:1203:3: (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' )
-                    // Rolestext.g:1204:4: a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')'
+                    // Rolestext.g:1180:3: (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' )
+                    // Rolestext.g:1181:4: a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')'
                     {
-                    a3=(Token)match(input,15,FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleProhibition774); if (state.failed) return element;
+                    a3=(Token)match(input,19,FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleProhibition734); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1612,28 +1581,29 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 24));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_23, 24));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_20, 22));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 22));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 22));
                       			
                     }
-                    // Rolestext.g:1217:4: ( ( (a4= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:1195:4: ( ( (a4= TRANSITIVE ) ) )?
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
-                    if ( (LA7_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA7_0==TRANSITIVE) ) {
                         alt7=1;
                     }
                     switch (alt7) {
                         case 1 :
-                            // Rolestext.g:1218:5: ( (a4= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:1196:5: ( (a4= TRANSITIVE ) )
                             {
-                            // Rolestext.g:1218:5: ( (a4= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:1219:6: (a4= BOOLEAN_LITERAL )
+                            // Rolestext.g:1196:5: ( (a4= TRANSITIVE ) )
+                            // Rolestext.g:1197:6: (a4= TRANSITIVE )
                             {
-                            // Rolestext.g:1219:6: (a4= BOOLEAN_LITERAL )
-                            // Rolestext.g:1220:7: a4= BOOLEAN_LITERAL
+                            // Rolestext.g:1197:6: (a4= TRANSITIVE )
+                            // Rolestext.g:1198:7: a4= TRANSITIVE
                             {
-                            a4=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleProhibition815); if (state.failed) return element;
+                            a4=(Token)match(input,TRANSITIVE,FOLLOW_TRANSITIVE_in_parse_org_emftext_language_refactoring_roles_RoleProhibition775); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -1643,7 +1613,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
                               							}
                               							if (a4 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
                               								tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TRANSITIVE), result);
@@ -1667,7 +1637,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_23, 25));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 23));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 23));
                               					
                             }
 
@@ -1682,44 +1653,28 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_23, 26));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 24));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 24));
                       			
                     }
-                    a5=(Token)match(input,16,FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleProhibition883); if (state.failed) return element;
-                    if ( state.backtracking==0 ) {
-
-                      				if (element == null) {
-                      					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
-                      				}
-                      				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
-                      			
-                    }
-                    if ( state.backtracking==0 ) {
-
-                      				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_24, 27));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_25, 27));
-                      			
-                    }
-                    // Rolestext.g:1272:4: ( ( (a6= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:1239:4: ( ( (a5= REFLEXIVE ) ) )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
-                    if ( (LA8_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA8_0==REFLEXIVE) ) {
                         alt8=1;
                     }
                     switch (alt8) {
                         case 1 :
-                            // Rolestext.g:1273:5: ( (a6= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:1240:5: ( (a5= REFLEXIVE ) )
                             {
-                            // Rolestext.g:1273:5: ( (a6= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:1274:6: (a6= BOOLEAN_LITERAL )
+                            // Rolestext.g:1240:5: ( (a5= REFLEXIVE ) )
+                            // Rolestext.g:1241:6: (a5= REFLEXIVE )
                             {
-                            // Rolestext.g:1274:6: (a6= BOOLEAN_LITERAL )
-                            // Rolestext.g:1275:7: a6= BOOLEAN_LITERAL
+                            // Rolestext.g:1241:6: (a5= REFLEXIVE )
+                            // Rolestext.g:1242:7: a5= REFLEXIVE
                             {
-                            a6=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleProhibition924); if (state.failed) return element;
+                            a5=(Token)match(input,REFLEXIVE,FOLLOW_REFLEXIVE_in_parse_org_emftext_language_refactoring_roles_RoleProhibition864); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -1728,14 +1683,14 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               							if (element == null) {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
                               							}
-                              							if (a6 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              							if (a5 != null) {
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-                              								tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), result);
+                              								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), result);
                               								java.lang.Object resolvedObject = result.getResolvedToken();
                               								if (resolvedObject == null) {
-                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStopIndex());
+                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
                               								}
                               								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
                               								if (resolved != null) {
@@ -1743,7 +1698,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               									completedElement(resolved);
                               								}
                               								collectHiddenTokens(element);
-                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
+                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
                               							}
                               						
                             }
@@ -1753,7 +1708,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_25, 28));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 25));
                               					
                             }
 
@@ -1768,23 +1723,23 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_25, 29));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 26));
                       			
                     }
-                    a7=(Token)match(input,17,FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleProhibition992); if (state.failed) return element;
+                    a6=(Token)match(input,20,FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleProhibition932); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
                       					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
                       				}
                       				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 30));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_19, 27));
                       			
                     }
 
@@ -1799,27 +1754,27 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 31));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_19, 28));
               	
             }
-            a8=(Token)match(input,18,FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_RoleProhibition1025); if (state.failed) return element;
+            a7=(Token)match(input,21,FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleProhibition965); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
               			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
               		}
               		collectHiddenTokens(element);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
+              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
               	
             }
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 32, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 32, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 32, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 32, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 32));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 29, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 29, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 29, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 29, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 29));
               	
             }
 
@@ -1839,7 +1794,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_language_refactoring_roles_RoleImplication"
-    // Rolestext.g:1351:1: parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftext.language.refactoring.roles.RoleImplication element = null] : (a0= IDENTIFIER ) a1= '->' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' ) )? a8= ';' ;
+    // Rolestext.g:1318:1: parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftext.language.refactoring.roles.RoleImplication element = null] : (a0= IDENTIFIER ) a1= '->' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' ) )? a7= ';' ;
     public final org.emftext.language.refactoring.roles.RoleImplication parse_org_emftext_language_refactoring_roles_RoleImplication() throws RecognitionException {
         org.emftext.language.refactoring.roles.RoleImplication element =  null;
         int parse_org_emftext_language_refactoring_roles_RoleImplication_StartIndex = input.index();
@@ -1851,19 +1806,18 @@ public class RolestextParser extends RolestextANTLRParserBase {
         Token a5=null;
         Token a6=null;
         Token a7=null;
-        Token a8=null;
 
 
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return element; }
-            // Rolestext.g:1354:1: ( (a0= IDENTIFIER ) a1= '->' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' ) )? a8= ';' )
-            // Rolestext.g:1355:2: (a0= IDENTIFIER ) a1= '->' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' ) )? a8= ';'
+            // Rolestext.g:1321:1: ( (a0= IDENTIFIER ) a1= '->' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' ) )? a7= ';' )
+            // Rolestext.g:1322:2: (a0= IDENTIFIER ) a1= '->' (a2= IDENTIFIER ) ( (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' ) )? a7= ';'
             {
-            // Rolestext.g:1355:2: (a0= IDENTIFIER )
-            // Rolestext.g:1356:3: a0= IDENTIFIER
+            // Rolestext.g:1322:2: (a0= IDENTIFIER )
+            // Rolestext.g:1323:3: a0= IDENTIFIER
             {
-            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleImplication1058); if (state.failed) return element;
+            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleImplication998); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -1901,10 +1855,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_26, 33));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_23, 30));
               	
             }
-            a1=(Token)match(input,20,FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleImplication1079); if (state.failed) return element;
+            a1=(Token)match(input,23,FOLLOW_23_in_parse_org_emftext_language_refactoring_roles_RoleImplication1019); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1917,13 +1871,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_27, 34));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_24, 31));
               	
             }
-            // Rolestext.g:1404:2: (a2= IDENTIFIER )
-            // Rolestext.g:1405:3: a2= IDENTIFIER
+            // Rolestext.g:1371:2: (a2= IDENTIFIER )
+            // Rolestext.g:1372:3: a2= IDENTIFIER
             {
-            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleImplication1097); if (state.failed) return element;
+            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleImplication1037); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -1961,25 +1915,25 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_28, 35));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 35));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_25, 32));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_26, 32));
               	
             }
-            // Rolestext.g:1442:2: ( (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' ) )?
+            // Rolestext.g:1409:2: ( (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( (LA12_0==15) ) {
+            if ( (LA12_0==19) ) {
                 alt12=1;
             }
             switch (alt12) {
                 case 1 :
-                    // Rolestext.g:1443:3: (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' )
+                    // Rolestext.g:1410:3: (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' )
                     {
-                    // Rolestext.g:1443:3: (a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')' )
-                    // Rolestext.g:1444:4: a3= '(' ( ( (a4= BOOLEAN_LITERAL ) ) )? a5= ',' ( ( (a6= BOOLEAN_LITERAL ) ) )? a7= ')'
+                    // Rolestext.g:1410:3: (a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')' )
+                    // Rolestext.g:1411:4: a3= '(' ( ( (a4= TRANSITIVE ) ) )? ( ( (a5= REFLEXIVE ) ) )? a6= ')'
                     {
-                    a3=(Token)match(input,15,FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleImplication1127); if (state.failed) return element;
+                    a3=(Token)match(input,19,FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleImplication1067); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1992,28 +1946,29 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_30, 36));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 36));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_27, 33));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_28, 33));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 33));
                       			
                     }
-                    // Rolestext.g:1457:4: ( ( (a4= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:1425:4: ( ( (a4= TRANSITIVE ) ) )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
-                    if ( (LA10_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA10_0==TRANSITIVE) ) {
                         alt10=1;
                     }
                     switch (alt10) {
                         case 1 :
-                            // Rolestext.g:1458:5: ( (a4= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:1426:5: ( (a4= TRANSITIVE ) )
                             {
-                            // Rolestext.g:1458:5: ( (a4= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:1459:6: (a4= BOOLEAN_LITERAL )
+                            // Rolestext.g:1426:5: ( (a4= TRANSITIVE ) )
+                            // Rolestext.g:1427:6: (a4= TRANSITIVE )
                             {
-                            // Rolestext.g:1459:6: (a4= BOOLEAN_LITERAL )
-                            // Rolestext.g:1460:7: a4= BOOLEAN_LITERAL
+                            // Rolestext.g:1427:6: (a4= TRANSITIVE )
+                            // Rolestext.g:1428:7: a4= TRANSITIVE
                             {
-                            a4=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleImplication1168); if (state.failed) return element;
+                            a4=(Token)match(input,TRANSITIVE,FOLLOW_TRANSITIVE_in_parse_org_emftext_language_refactoring_roles_RoleImplication1108); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -2023,7 +1978,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
                               							}
                               							if (a4 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
                               								tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TRANSITIVE), result);
@@ -2047,7 +2002,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 37));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_28, 34));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 34));
                               					
                             }
 
@@ -2062,44 +2018,28 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 38));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_28, 35));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 35));
                       			
                     }
-                    a5=(Token)match(input,16,FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleImplication1236); if (state.failed) return element;
-                    if ( state.backtracking==0 ) {
-
-                      				if (element == null) {
-                      					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
-                      				}
-                      				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
-                      			
-                    }
-                    if ( state.backtracking==0 ) {
-
-                      				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_32, 39));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_33, 39));
-                      			
-                    }
-                    // Rolestext.g:1512:4: ( ( (a6= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:1469:4: ( ( (a5= REFLEXIVE ) ) )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
-                    if ( (LA11_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA11_0==REFLEXIVE) ) {
                         alt11=1;
                     }
                     switch (alt11) {
                         case 1 :
-                            // Rolestext.g:1513:5: ( (a6= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:1470:5: ( (a5= REFLEXIVE ) )
                             {
-                            // Rolestext.g:1513:5: ( (a6= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:1514:6: (a6= BOOLEAN_LITERAL )
+                            // Rolestext.g:1470:5: ( (a5= REFLEXIVE ) )
+                            // Rolestext.g:1471:6: (a5= REFLEXIVE )
                             {
-                            // Rolestext.g:1514:6: (a6= BOOLEAN_LITERAL )
-                            // Rolestext.g:1515:7: a6= BOOLEAN_LITERAL
+                            // Rolestext.g:1471:6: (a5= REFLEXIVE )
+                            // Rolestext.g:1472:7: a5= REFLEXIVE
                             {
-                            a6=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleImplication1277); if (state.failed) return element;
+                            a5=(Token)match(input,REFLEXIVE,FOLLOW_REFLEXIVE_in_parse_org_emftext_language_refactoring_roles_RoleImplication1197); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -2108,14 +2048,14 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               							if (element == null) {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
                               							}
-                              							if (a6 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              							if (a5 != null) {
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-                              								tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), result);
+                              								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), result);
                               								java.lang.Object resolvedObject = result.getResolvedToken();
                               								if (resolvedObject == null) {
-                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStopIndex());
+                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
                               								}
                               								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
                               								if (resolved != null) {
@@ -2123,7 +2063,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               									completedElement(resolved);
                               								}
                               								collectHiddenTokens(element);
-                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
+                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
                               							}
                               						
                             }
@@ -2133,7 +2073,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_33, 40));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 36));
                               					
                             }
 
@@ -2148,23 +2088,23 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_33, 41));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 37));
                       			
                     }
-                    a7=(Token)match(input,17,FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleImplication1345); if (state.failed) return element;
+                    a6=(Token)match(input,20,FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleImplication1265); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
                       					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
                       				}
                       				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 42));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_26, 38));
                       			
                     }
 
@@ -2179,27 +2119,27 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 43));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_26, 39));
               	
             }
-            a8=(Token)match(input,18,FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_RoleImplication1378); if (state.failed) return element;
+            a7=(Token)match(input,21,FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleImplication1298); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
               			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
               		}
               		collectHiddenTokens(element);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
+              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
               	
             }
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 44, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 44, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 44, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 44, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 44));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 40, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 40, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 40, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 40, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 40));
               	
             }
 
@@ -2219,7 +2159,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_language_refactoring_roles_RoleAssociation"
-    // Rolestext.g:1591:1: parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftext.language.refactoring.roles.RoleAssociation element = null] : (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '--' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' ) )? a12= ';' ;
+    // Rolestext.g:1548:1: parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftext.language.refactoring.roles.RoleAssociation element = null] : (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '--' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' ) )? a11= ';' ;
     public final org.emftext.language.refactoring.roles.RoleAssociation parse_org_emftext_language_refactoring_roles_RoleAssociation() throws RecognitionException {
         org.emftext.language.refactoring.roles.RoleAssociation element =  null;
         int parse_org_emftext_language_refactoring_roles_RoleAssociation_StartIndex = input.index();
@@ -2233,7 +2173,6 @@ public class RolestextParser extends RolestextANTLRParserBase {
         Token a9=null;
         Token a10=null;
         Token a11=null;
-        Token a12=null;
         org.emftext.language.refactoring.roles.Multiplicity a2_0 = null;
 
         org.emftext.language.refactoring.roles.Multiplicity a6_0 = null;
@@ -2243,13 +2182,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return element; }
-            // Rolestext.g:1594:1: ( (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '--' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' ) )? a12= ';' )
-            // Rolestext.g:1595:2: (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '--' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' ) )? a12= ';'
+            // Rolestext.g:1551:1: ( (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '--' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' ) )? a11= ';' )
+            // Rolestext.g:1552:2: (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '--' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' ) )? a11= ';'
             {
-            // Rolestext.g:1595:2: (a0= IDENTIFIER )
-            // Rolestext.g:1596:3: a0= IDENTIFIER
+            // Rolestext.g:1552:2: (a0= IDENTIFIER )
+            // Rolestext.g:1553:3: a0= IDENTIFIER
             {
-            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1411); if (state.failed) return element;
+            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1331); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -2287,11 +2226,11 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_34, 45));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 45, FEATURE_2));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_30, 41));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 41, FEATURE_2));
               	
             }
-            // Rolestext.g:1633:2: ( (a1= IDENTIFIER ) )?
+            // Rolestext.g:1590:2: ( (a1= IDENTIFIER ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2300,12 +2239,12 @@ public class RolestextParser extends RolestextANTLRParserBase {
             }
             switch (alt13) {
                 case 1 :
-                    // Rolestext.g:1634:3: (a1= IDENTIFIER )
+                    // Rolestext.g:1591:3: (a1= IDENTIFIER )
                     {
-                    // Rolestext.g:1634:3: (a1= IDENTIFIER )
-                    // Rolestext.g:1635:4: a1= IDENTIFIER
+                    // Rolestext.g:1591:3: (a1= IDENTIFIER )
+                    // Rolestext.g:1592:4: a1= IDENTIFIER
                     {
-                    a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1441); if (state.failed) return element;
+                    a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1361); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (terminateParsing) {
@@ -2345,13 +2284,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 46, FEATURE_2));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 42, FEATURE_2));
               	
             }
-            // Rolestext.g:1668:2: (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity )
-            // Rolestext.g:1669:3: a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity
+            // Rolestext.g:1625:2: (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity )
+            // Rolestext.g:1626:3: a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity
             {
-            pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1475);
+            pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1395);
             a2_0=parse_org_emftext_language_refactoring_roles_Multiplicity();
 
             state._fsp--;
@@ -2379,10 +2318,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 47));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_32, 43));
               	
             }
-            a3=(Token)match(input,21,FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1493); if (state.failed) return element;
+            a3=(Token)match(input,24,FOLLOW_24_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1413); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -2395,13 +2334,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_37, 48));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_33, 44));
               	
             }
-            // Rolestext.g:1702:2: (a4= IDENTIFIER )
-            // Rolestext.g:1703:3: a4= IDENTIFIER
+            // Rolestext.g:1659:2: (a4= IDENTIFIER )
+            // Rolestext.g:1660:3: a4= IDENTIFIER
             {
-            a4=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1511); if (state.failed) return element;
+            a4=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1431); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -2439,11 +2378,11 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_38, 49));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 49, FEATURE_3));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_34, 45));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 45, FEATURE_3));
               	
             }
-            // Rolestext.g:1740:2: ( (a5= IDENTIFIER ) )?
+            // Rolestext.g:1697:2: ( (a5= IDENTIFIER ) )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -2452,12 +2391,12 @@ public class RolestextParser extends RolestextANTLRParserBase {
             }
             switch (alt14) {
                 case 1 :
-                    // Rolestext.g:1741:3: (a5= IDENTIFIER )
+                    // Rolestext.g:1698:3: (a5= IDENTIFIER )
                     {
-                    // Rolestext.g:1741:3: (a5= IDENTIFIER )
-                    // Rolestext.g:1742:4: a5= IDENTIFIER
+                    // Rolestext.g:1698:3: (a5= IDENTIFIER )
+                    // Rolestext.g:1699:4: a5= IDENTIFIER
                     {
-                    a5=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1541); if (state.failed) return element;
+                    a5=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1461); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (terminateParsing) {
@@ -2497,13 +2436,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 50, FEATURE_3));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 46, FEATURE_3));
               	
             }
-            // Rolestext.g:1775:2: (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity )
-            // Rolestext.g:1776:3: a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity
+            // Rolestext.g:1732:2: (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity )
+            // Rolestext.g:1733:3: a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity
             {
-            pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1575);
+            pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1495);
             a6_0=parse_org_emftext_language_refactoring_roles_Multiplicity();
 
             state._fsp--;
@@ -2531,25 +2470,25 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 51));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_40, 51));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 47));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 47));
               	
             }
-            // Rolestext.g:1798:2: ( (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' ) )?
+            // Rolestext.g:1755:2: ( (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' ) )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
-            if ( (LA17_0==15) ) {
+            if ( (LA17_0==19) ) {
                 alt17=1;
             }
             switch (alt17) {
                 case 1 :
-                    // Rolestext.g:1799:3: (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' )
+                    // Rolestext.g:1756:3: (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' )
                     {
-                    // Rolestext.g:1799:3: (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' )
-                    // Rolestext.g:1800:4: a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')'
+                    // Rolestext.g:1756:3: (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' )
+                    // Rolestext.g:1757:4: a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')'
                     {
-                    a7=(Token)match(input,15,FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1602); if (state.failed) return element;
+                    a7=(Token)match(input,19,FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1522); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -2562,28 +2501,29 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_41, 52));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_42, 52));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_37, 48));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_38, 48));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 48));
                       			
                     }
-                    // Rolestext.g:1813:4: ( ( (a8= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:1771:4: ( ( (a8= TRANSITIVE ) ) )?
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
-                    if ( (LA15_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA15_0==TRANSITIVE) ) {
                         alt15=1;
                     }
                     switch (alt15) {
                         case 1 :
-                            // Rolestext.g:1814:5: ( (a8= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:1772:5: ( (a8= TRANSITIVE ) )
                             {
-                            // Rolestext.g:1814:5: ( (a8= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:1815:6: (a8= BOOLEAN_LITERAL )
+                            // Rolestext.g:1772:5: ( (a8= TRANSITIVE ) )
+                            // Rolestext.g:1773:6: (a8= TRANSITIVE )
                             {
-                            // Rolestext.g:1815:6: (a8= BOOLEAN_LITERAL )
-                            // Rolestext.g:1816:7: a8= BOOLEAN_LITERAL
+                            // Rolestext.g:1773:6: (a8= TRANSITIVE )
+                            // Rolestext.g:1774:7: a8= TRANSITIVE
                             {
-                            a8=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1643); if (state.failed) return element;
+                            a8=(Token)match(input,TRANSITIVE,FOLLOW_TRANSITIVE_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1563); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -2593,7 +2533,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
                               							}
                               							if (a8 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
                               								tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TRANSITIVE), result);
@@ -2617,7 +2557,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_42, 53));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_38, 49));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 49));
                               					
                             }
 
@@ -2632,44 +2573,28 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_42, 54));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_38, 50));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 50));
                       			
                     }
-                    a9=(Token)match(input,16,FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1711); if (state.failed) return element;
-                    if ( state.backtracking==0 ) {
-
-                      				if (element == null) {
-                      					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
-                      				}
-                      				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
-                      			
-                    }
-                    if ( state.backtracking==0 ) {
-
-                      				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_43, 55));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_44, 55));
-                      			
-                    }
-                    // Rolestext.g:1868:4: ( ( (a10= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:1815:4: ( ( (a9= REFLEXIVE ) ) )?
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
-                    if ( (LA16_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA16_0==REFLEXIVE) ) {
                         alt16=1;
                     }
                     switch (alt16) {
                         case 1 :
-                            // Rolestext.g:1869:5: ( (a10= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:1816:5: ( (a9= REFLEXIVE ) )
                             {
-                            // Rolestext.g:1869:5: ( (a10= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:1870:6: (a10= BOOLEAN_LITERAL )
+                            // Rolestext.g:1816:5: ( (a9= REFLEXIVE ) )
+                            // Rolestext.g:1817:6: (a9= REFLEXIVE )
                             {
-                            // Rolestext.g:1870:6: (a10= BOOLEAN_LITERAL )
-                            // Rolestext.g:1871:7: a10= BOOLEAN_LITERAL
+                            // Rolestext.g:1817:6: (a9= REFLEXIVE )
+                            // Rolestext.g:1818:7: a9= REFLEXIVE
                             {
-                            a10=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1752); if (state.failed) return element;
+                            a9=(Token)match(input,REFLEXIVE,FOLLOW_REFLEXIVE_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1652); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -2678,14 +2603,14 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               							if (element == null) {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
                               							}
-                              							if (a10 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              							if (a9 != null) {
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-                              								tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), result);
+                              								tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), result);
                               								java.lang.Object resolvedObject = result.getResolvedToken();
                               								if (resolvedObject == null) {
-                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a10).getStopIndex());
+                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a9).getStopIndex());
                               								}
                               								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
                               								if (resolved != null) {
@@ -2693,7 +2618,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               									completedElement(resolved);
                               								}
                               								collectHiddenTokens(element);
-                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a10, element);
+                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a9, element);
                               							}
                               						
                             }
@@ -2703,7 +2628,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_44, 56));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 51));
                               					
                             }
 
@@ -2718,23 +2643,23 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_44, 57));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 52));
                       			
                     }
-                    a11=(Token)match(input,17,FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1820); if (state.failed) return element;
+                    a10=(Token)match(input,20,FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1720); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
                       					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
                       				}
                       				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a10, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_40, 58));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 53));
                       			
                     }
 
@@ -2749,27 +2674,27 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_40, 59));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 54));
               	
             }
-            a12=(Token)match(input,18,FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1853); if (state.failed) return element;
+            a11=(Token)match(input,21,FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1753); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
               			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
               		}
               		collectHiddenTokens(element);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a12, element);
+              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
               	
             }
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 60, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 60, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 60, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 60, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 60));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 55, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 55, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 55, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 55, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 55));
               	
             }
 
@@ -2789,7 +2714,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_language_refactoring_roles_RoleComposition"
-    // Rolestext.g:1947:1: parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftext.language.refactoring.roles.RoleComposition element = null] : (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '<>-' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' ) )? a12= ';' ;
+    // Rolestext.g:1894:1: parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftext.language.refactoring.roles.RoleComposition element = null] : (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '<>-' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' ) )? a11= ';' ;
     public final org.emftext.language.refactoring.roles.RoleComposition parse_org_emftext_language_refactoring_roles_RoleComposition() throws RecognitionException {
         org.emftext.language.refactoring.roles.RoleComposition element =  null;
         int parse_org_emftext_language_refactoring_roles_RoleComposition_StartIndex = input.index();
@@ -2803,7 +2728,6 @@ public class RolestextParser extends RolestextANTLRParserBase {
         Token a9=null;
         Token a10=null;
         Token a11=null;
-        Token a12=null;
         org.emftext.language.refactoring.roles.Multiplicity a2_0 = null;
 
         org.emftext.language.refactoring.roles.Multiplicity a6_0 = null;
@@ -2813,13 +2737,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return element; }
-            // Rolestext.g:1950:1: ( (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '<>-' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' ) )? a12= ';' )
-            // Rolestext.g:1951:2: (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '<>-' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' ) )? a12= ';'
+            // Rolestext.g:1897:1: ( (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '<>-' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' ) )? a11= ';' )
+            // Rolestext.g:1898:2: (a0= IDENTIFIER ) ( (a1= IDENTIFIER ) )? (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) a3= '<>-' (a4= IDENTIFIER ) ( (a5= IDENTIFIER ) )? (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity ) ( (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' ) )? a11= ';'
             {
-            // Rolestext.g:1951:2: (a0= IDENTIFIER )
-            // Rolestext.g:1952:3: a0= IDENTIFIER
+            // Rolestext.g:1898:2: (a0= IDENTIFIER )
+            // Rolestext.g:1899:3: a0= IDENTIFIER
             {
-            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1886); if (state.failed) return element;
+            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1786); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -2857,11 +2781,11 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_45, 61));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 61, FEATURE_2));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_40, 56));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 56, FEATURE_2));
               	
             }
-            // Rolestext.g:1989:2: ( (a1= IDENTIFIER ) )?
+            // Rolestext.g:1936:2: ( (a1= IDENTIFIER ) )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -2870,12 +2794,12 @@ public class RolestextParser extends RolestextANTLRParserBase {
             }
             switch (alt18) {
                 case 1 :
-                    // Rolestext.g:1990:3: (a1= IDENTIFIER )
+                    // Rolestext.g:1937:3: (a1= IDENTIFIER )
                     {
-                    // Rolestext.g:1990:3: (a1= IDENTIFIER )
-                    // Rolestext.g:1991:4: a1= IDENTIFIER
+                    // Rolestext.g:1937:3: (a1= IDENTIFIER )
+                    // Rolestext.g:1938:4: a1= IDENTIFIER
                     {
-                    a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1916); if (state.failed) return element;
+                    a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1816); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (terminateParsing) {
@@ -2915,13 +2839,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 62, FEATURE_2));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 57, FEATURE_2));
               	
             }
-            // Rolestext.g:2024:2: (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity )
-            // Rolestext.g:2025:3: a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity
+            // Rolestext.g:1971:2: (a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity )
+            // Rolestext.g:1972:3: a2_0= parse_org_emftext_language_refactoring_roles_Multiplicity
             {
-            pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleComposition1950);
+            pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleComposition1850);
             a2_0=parse_org_emftext_language_refactoring_roles_Multiplicity();
 
             state._fsp--;
@@ -2949,10 +2873,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_46, 63));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_41, 58));
               	
             }
-            a3=(Token)match(input,22,FOLLOW_22_in_parse_org_emftext_language_refactoring_roles_RoleComposition1968); if (state.failed) return element;
+            a3=(Token)match(input,25,FOLLOW_25_in_parse_org_emftext_language_refactoring_roles_RoleComposition1868); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -2965,13 +2889,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_47, 64));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_42, 59));
               	
             }
-            // Rolestext.g:2058:2: (a4= IDENTIFIER )
-            // Rolestext.g:2059:3: a4= IDENTIFIER
+            // Rolestext.g:2005:2: (a4= IDENTIFIER )
+            // Rolestext.g:2006:3: a4= IDENTIFIER
             {
-            a4=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1986); if (state.failed) return element;
+            a4=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1886); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -3009,11 +2933,11 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 65));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 65, FEATURE_3));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_43, 60));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 60, FEATURE_3));
               	
             }
-            // Rolestext.g:2096:2: ( (a5= IDENTIFIER ) )?
+            // Rolestext.g:2043:2: ( (a5= IDENTIFIER ) )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -3022,12 +2946,12 @@ public class RolestextParser extends RolestextANTLRParserBase {
             }
             switch (alt19) {
                 case 1 :
-                    // Rolestext.g:2097:3: (a5= IDENTIFIER )
+                    // Rolestext.g:2044:3: (a5= IDENTIFIER )
                     {
-                    // Rolestext.g:2097:3: (a5= IDENTIFIER )
-                    // Rolestext.g:2098:4: a5= IDENTIFIER
+                    // Rolestext.g:2044:3: (a5= IDENTIFIER )
+                    // Rolestext.g:2045:4: a5= IDENTIFIER
                     {
-                    a5=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition2016); if (state.failed) return element;
+                    a5=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1916); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (terminateParsing) {
@@ -3067,13 +2991,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 66, FEATURE_3));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 61, FEATURE_3));
               	
             }
-            // Rolestext.g:2131:2: (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity )
-            // Rolestext.g:2132:3: a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity
+            // Rolestext.g:2078:2: (a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity )
+            // Rolestext.g:2079:3: a6_0= parse_org_emftext_language_refactoring_roles_Multiplicity
             {
-            pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleComposition2050);
+            pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleComposition1950);
             a6_0=parse_org_emftext_language_refactoring_roles_Multiplicity();
 
             state._fsp--;
@@ -3101,25 +3025,25 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_49, 67));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_50, 67));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_44, 62));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_45, 62));
               	
             }
-            // Rolestext.g:2154:2: ( (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' ) )?
+            // Rolestext.g:2101:2: ( (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' ) )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
-            if ( (LA22_0==15) ) {
+            if ( (LA22_0==19) ) {
                 alt22=1;
             }
             switch (alt22) {
                 case 1 :
-                    // Rolestext.g:2155:3: (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' )
+                    // Rolestext.g:2102:3: (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' )
                     {
-                    // Rolestext.g:2155:3: (a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')' )
-                    // Rolestext.g:2156:4: a7= '(' ( ( (a8= BOOLEAN_LITERAL ) ) )? a9= ',' ( ( (a10= BOOLEAN_LITERAL ) ) )? a11= ')'
+                    // Rolestext.g:2102:3: (a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')' )
+                    // Rolestext.g:2103:4: a7= '(' ( ( (a8= TRANSITIVE ) ) )? ( ( (a9= REFLEXIVE ) ) )? a10= ')'
                     {
-                    a7=(Token)match(input,15,FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleComposition2077); if (state.failed) return element;
+                    a7=(Token)match(input,19,FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleComposition1977); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -3132,28 +3056,29 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_51, 68));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_52, 68));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_46, 63));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_47, 63));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 63));
                       			
                     }
-                    // Rolestext.g:2169:4: ( ( (a8= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:2117:4: ( ( (a8= TRANSITIVE ) ) )?
                     int alt20=2;
                     int LA20_0 = input.LA(1);
 
-                    if ( (LA20_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA20_0==TRANSITIVE) ) {
                         alt20=1;
                     }
                     switch (alt20) {
                         case 1 :
-                            // Rolestext.g:2170:5: ( (a8= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:2118:5: ( (a8= TRANSITIVE ) )
                             {
-                            // Rolestext.g:2170:5: ( (a8= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:2171:6: (a8= BOOLEAN_LITERAL )
+                            // Rolestext.g:2118:5: ( (a8= TRANSITIVE ) )
+                            // Rolestext.g:2119:6: (a8= TRANSITIVE )
                             {
-                            // Rolestext.g:2171:6: (a8= BOOLEAN_LITERAL )
-                            // Rolestext.g:2172:7: a8= BOOLEAN_LITERAL
+                            // Rolestext.g:2119:6: (a8= TRANSITIVE )
+                            // Rolestext.g:2120:7: a8= TRANSITIVE
                             {
-                            a8=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleComposition2118); if (state.failed) return element;
+                            a8=(Token)match(input,TRANSITIVE,FOLLOW_TRANSITIVE_in_parse_org_emftext_language_refactoring_roles_RoleComposition2018); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -3163,7 +3088,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
                               							}
                               							if (a8 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
                               								tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TRANSITIVE), result);
@@ -3187,7 +3112,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_52, 69));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_47, 64));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 64));
                               					
                             }
 
@@ -3202,44 +3128,28 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_52, 70));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_47, 65));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 65));
                       			
                     }
-                    a9=(Token)match(input,16,FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleComposition2186); if (state.failed) return element;
-                    if ( state.backtracking==0 ) {
-
-                      				if (element == null) {
-                      					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
-                      				}
-                      				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
-                      			
-                    }
-                    if ( state.backtracking==0 ) {
-
-                      				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_53, 71));
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_54, 71));
-                      			
-                    }
-                    // Rolestext.g:2224:4: ( ( (a10= BOOLEAN_LITERAL ) ) )?
+                    // Rolestext.g:2161:4: ( ( (a9= REFLEXIVE ) ) )?
                     int alt21=2;
                     int LA21_0 = input.LA(1);
 
-                    if ( (LA21_0==BOOLEAN_LITERAL) ) {
+                    if ( (LA21_0==REFLEXIVE) ) {
                         alt21=1;
                     }
                     switch (alt21) {
                         case 1 :
-                            // Rolestext.g:2225:5: ( (a10= BOOLEAN_LITERAL ) )
+                            // Rolestext.g:2162:5: ( (a9= REFLEXIVE ) )
                             {
-                            // Rolestext.g:2225:5: ( (a10= BOOLEAN_LITERAL ) )
-                            // Rolestext.g:2226:6: (a10= BOOLEAN_LITERAL )
+                            // Rolestext.g:2162:5: ( (a9= REFLEXIVE ) )
+                            // Rolestext.g:2163:6: (a9= REFLEXIVE )
                             {
-                            // Rolestext.g:2226:6: (a10= BOOLEAN_LITERAL )
-                            // Rolestext.g:2227:7: a10= BOOLEAN_LITERAL
+                            // Rolestext.g:2163:6: (a9= REFLEXIVE )
+                            // Rolestext.g:2164:7: a9= REFLEXIVE
                             {
-                            a10=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleComposition2227); if (state.failed) return element;
+                            a9=(Token)match(input,REFLEXIVE,FOLLOW_REFLEXIVE_in_parse_org_emftext_language_refactoring_roles_RoleComposition2107); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               							if (terminateParsing) {
@@ -3248,14 +3158,14 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               							if (element == null) {
                               								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
                               							}
-                              							if (a10 != null) {
-                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+                              							if (a9 != null) {
+                              								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
                               								tokenResolver.setOptions(getOptions());
                               								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-                              								tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), result);
+                              								tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), result);
                               								java.lang.Object resolvedObject = result.getResolvedToken();
                               								if (resolvedObject == null) {
-                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a10).getStopIndex());
+                              									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a9).getStopIndex());
                               								}
                               								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
                               								if (resolved != null) {
@@ -3263,7 +3173,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                               									completedElement(resolved);
                               								}
                               								collectHiddenTokens(element);
-                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a10, element);
+                              								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a9, element);
                               							}
                               						
                             }
@@ -3273,7 +3183,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
                             if ( state.backtracking==0 ) {
 
                               						// expected elements (follow set)
-                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_54, 72));
+                              						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 66));
                               					
                             }
 
@@ -3288,23 +3198,23 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_54, 73));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 67));
                       			
                     }
-                    a11=(Token)match(input,17,FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleComposition2295); if (state.failed) return element;
+                    a10=(Token)match(input,20,FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleComposition2175); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
                       					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
                       				}
                       				collectHiddenTokens(element);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a10, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
 
                       				// expected elements (follow set)
-                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_50, 74));
+                      				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_45, 68));
                       			
                     }
 
@@ -3319,27 +3229,27 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_50, 75));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_45, 69));
               	
             }
-            a12=(Token)match(input,18,FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_RoleComposition2328); if (state.failed) return element;
+            a11=(Token)match(input,21,FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleComposition2208); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
               			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
               		}
               		collectHiddenTokens(element);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a12, element);
+              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
               	
             }
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 76, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 76, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 76, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 76, FEATURE_1));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 76));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 70, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 70, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 70, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 70, FEATURE_1));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 70));
               	
             }
 
@@ -3359,7 +3269,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_language_refactoring_roles_Multiplicity"
-    // Rolestext.g:2303:1: parse_org_emftext_language_refactoring_roles_Multiplicity returns [org.emftext.language.refactoring.roles.Multiplicity element = null] : a0= '[' (a1= NUMBER ) a2= '..' (a3= NUMBER ) a4= ']' ;
+    // Rolestext.g:2240:1: parse_org_emftext_language_refactoring_roles_Multiplicity returns [org.emftext.language.refactoring.roles.Multiplicity element = null] : a0= '[' (a1= NUMBER ) a2= '..' (a3= NUMBER ) a4= ']' ;
     public final org.emftext.language.refactoring.roles.Multiplicity parse_org_emftext_language_refactoring_roles_Multiplicity() throws RecognitionException {
         org.emftext.language.refactoring.roles.Multiplicity element =  null;
         int parse_org_emftext_language_refactoring_roles_Multiplicity_StartIndex = input.index();
@@ -3373,10 +3283,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return element; }
-            // Rolestext.g:2306:1: (a0= '[' (a1= NUMBER ) a2= '..' (a3= NUMBER ) a4= ']' )
-            // Rolestext.g:2307:2: a0= '[' (a1= NUMBER ) a2= '..' (a3= NUMBER ) a4= ']'
+            // Rolestext.g:2243:1: (a0= '[' (a1= NUMBER ) a2= '..' (a3= NUMBER ) a4= ']' )
+            // Rolestext.g:2244:2: a0= '[' (a1= NUMBER ) a2= '..' (a3= NUMBER ) a4= ']'
             {
-            a0=(Token)match(input,23,FOLLOW_23_in_parse_org_emftext_language_refactoring_roles_Multiplicity2357); if (state.failed) return element;
+            a0=(Token)match(input,26,FOLLOW_26_in_parse_org_emftext_language_refactoring_roles_Multiplicity2237); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -3389,13 +3299,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_55, 77));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_49, 71));
               	
             }
-            // Rolestext.g:2319:2: (a1= NUMBER )
-            // Rolestext.g:2320:3: a1= NUMBER
+            // Rolestext.g:2256:2: (a1= NUMBER )
+            // Rolestext.g:2257:3: a1= NUMBER
             {
-            a1=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_parse_org_emftext_language_refactoring_roles_Multiplicity2375); if (state.failed) return element;
+            a1=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_parse_org_emftext_language_refactoring_roles_Multiplicity2255); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -3429,10 +3339,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_56, 78));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_50, 72));
               	
             }
-            a2=(Token)match(input,24,FOLLOW_24_in_parse_org_emftext_language_refactoring_roles_Multiplicity2396); if (state.failed) return element;
+            a2=(Token)match(input,27,FOLLOW_27_in_parse_org_emftext_language_refactoring_roles_Multiplicity2276); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -3445,13 +3355,13 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_57, 79));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_51, 73));
               	
             }
-            // Rolestext.g:2364:2: (a3= NUMBER )
-            // Rolestext.g:2365:3: a3= NUMBER
+            // Rolestext.g:2301:2: (a3= NUMBER )
+            // Rolestext.g:2302:3: a3= NUMBER
             {
-            a3=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_parse_org_emftext_language_refactoring_roles_Multiplicity2414); if (state.failed) return element;
+            a3=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_parse_org_emftext_language_refactoring_roles_Multiplicity2294); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -3485,10 +3395,10 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_58, 80));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_52, 74));
               	
             }
-            a4=(Token)match(input,25,FOLLOW_25_in_parse_org_emftext_language_refactoring_roles_Multiplicity2435); if (state.failed) return element;
+            a4=(Token)match(input,28,FOLLOW_28_in_parse_org_emftext_language_refactoring_roles_Multiplicity2315); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -3501,8 +3411,8 @@ public class RolestextParser extends RolestextANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 81));
-              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_46, 81));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_32, 75));
+              		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_41, 75));
               	
             }
 
@@ -3522,7 +3432,7 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_language_refactoring_roles_Relation"
-    // Rolestext.g:2412:1: parse_org_emftext_language_refactoring_roles_Relation returns [org.emftext.language.refactoring.roles.Relation element = null] : (c0= parse_org_emftext_language_refactoring_roles_RoleProhibition | c1= parse_org_emftext_language_refactoring_roles_RoleImplication | c2= parse_org_emftext_language_refactoring_roles_RoleAssociation | c3= parse_org_emftext_language_refactoring_roles_RoleComposition );
+    // Rolestext.g:2349:1: parse_org_emftext_language_refactoring_roles_Relation returns [org.emftext.language.refactoring.roles.Relation element = null] : (c0= parse_org_emftext_language_refactoring_roles_RoleProhibition | c1= parse_org_emftext_language_refactoring_roles_RoleImplication | c2= parse_org_emftext_language_refactoring_roles_RoleAssociation | c3= parse_org_emftext_language_refactoring_roles_RoleComposition );
     public final org.emftext.language.refactoring.roles.Relation parse_org_emftext_language_refactoring_roles_Relation() throws RecognitionException {
         org.emftext.language.refactoring.roles.Relation element =  null;
         int parse_org_emftext_language_refactoring_roles_Relation_StartIndex = input.index();
@@ -3537,14 +3447,14 @@ public class RolestextParser extends RolestextANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 9) ) { return element; }
-            // Rolestext.g:2413:1: (c0= parse_org_emftext_language_refactoring_roles_RoleProhibition | c1= parse_org_emftext_language_refactoring_roles_RoleImplication | c2= parse_org_emftext_language_refactoring_roles_RoleAssociation | c3= parse_org_emftext_language_refactoring_roles_RoleComposition )
+            // Rolestext.g:2350:1: (c0= parse_org_emftext_language_refactoring_roles_RoleProhibition | c1= parse_org_emftext_language_refactoring_roles_RoleImplication | c2= parse_org_emftext_language_refactoring_roles_RoleAssociation | c3= parse_org_emftext_language_refactoring_roles_RoleComposition )
             int alt23=4;
             alt23 = dfa23.predict(input);
             switch (alt23) {
                 case 1 :
-                    // Rolestext.g:2414:2: c0= parse_org_emftext_language_refactoring_roles_RoleProhibition
+                    // Rolestext.g:2351:2: c0= parse_org_emftext_language_refactoring_roles_RoleProhibition
                     {
-                    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleProhibition_in_parse_org_emftext_language_refactoring_roles_Relation2460);
+                    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleProhibition_in_parse_org_emftext_language_refactoring_roles_Relation2340);
                     c0=parse_org_emftext_language_refactoring_roles_RoleProhibition();
 
                     state._fsp--;
@@ -3556,9 +3466,9 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Rolestext.g:2415:4: c1= parse_org_emftext_language_refactoring_roles_RoleImplication
+                    // Rolestext.g:2352:4: c1= parse_org_emftext_language_refactoring_roles_RoleImplication
                     {
-                    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleImplication_in_parse_org_emftext_language_refactoring_roles_Relation2470);
+                    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleImplication_in_parse_org_emftext_language_refactoring_roles_Relation2350);
                     c1=parse_org_emftext_language_refactoring_roles_RoleImplication();
 
                     state._fsp--;
@@ -3570,9 +3480,9 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Rolestext.g:2416:4: c2= parse_org_emftext_language_refactoring_roles_RoleAssociation
+                    // Rolestext.g:2353:4: c2= parse_org_emftext_language_refactoring_roles_RoleAssociation
                     {
-                    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleAssociation_in_parse_org_emftext_language_refactoring_roles_Relation2480);
+                    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleAssociation_in_parse_org_emftext_language_refactoring_roles_Relation2360);
                     c2=parse_org_emftext_language_refactoring_roles_RoleAssociation();
 
                     state._fsp--;
@@ -3584,9 +3494,9 @@ public class RolestextParser extends RolestextANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Rolestext.g:2417:4: c3= parse_org_emftext_language_refactoring_roles_RoleComposition
+                    // Rolestext.g:2354:4: c3= parse_org_emftext_language_refactoring_roles_RoleComposition
                     {
-                    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleComposition_in_parse_org_emftext_language_refactoring_roles_Relation2490);
+                    pushFollow(FOLLOW_parse_org_emftext_language_refactoring_roles_RoleComposition_in_parse_org_emftext_language_refactoring_roles_Relation2370);
                     c3=parse_org_emftext_language_refactoring_roles_RoleComposition();
 
                     state._fsp--;
@@ -3620,19 +3530,19 @@ public class RolestextParser extends RolestextANTLRParserBase {
     static final String DFA23_eofS =
         "\14\uffff";
     static final String DFA23_minS =
-        "\2\4\1\27\1\6\2\uffff\1\30\1\6\1\31\1\25\2\uffff";
+        "\2\4\1\uffff\1\32\1\12\1\uffff\1\33\1\12\1\34\1\30\2\uffff";
     static final String DFA23_maxS =
-        "\1\4\2\27\1\6\2\uffff\1\30\1\6\1\31\1\26\2\uffff";
+        "\1\4\1\32\1\uffff\1\32\1\12\1\uffff\1\33\1\12\1\34\1\31\2\uffff";
     static final String DFA23_acceptS =
-        "\4\uffff\1\2\1\1\4\uffff\1\3\1\4";
+        "\2\uffff\1\2\2\uffff\1\1\4\uffff\1\3\1\4";
     static final String DFA23_specialS =
         "\14\uffff}>";
     static final String[] DFA23_transitionS = {
             "\1\1",
-            "\1\2\16\uffff\1\5\1\4\2\uffff\1\3",
-            "\1\3",
-            "\1\6",
+            "\1\3\21\uffff\1\5\1\2\2\uffff\1\4",
             "",
+            "\1\4",
+            "\1\6",
             "",
             "\1\7",
             "\1\10",
@@ -3672,81 +3582,75 @@ public class RolestextParser extends RolestextANTLRParserBase {
             this.transition = DFA23_transition;
         }
         public String getDescription() {
-            return "2412:1: parse_org_emftext_language_refactoring_roles_Relation returns [org.emftext.language.refactoring.roles.Relation element = null] : (c0= parse_org_emftext_language_refactoring_roles_RoleProhibition | c1= parse_org_emftext_language_refactoring_roles_RoleImplication | c2= parse_org_emftext_language_refactoring_roles_RoleAssociation | c3= parse_org_emftext_language_refactoring_roles_RoleComposition );";
+            return "2349:1: parse_org_emftext_language_refactoring_roles_Relation returns [org.emftext.language.refactoring.roles.Relation element = null] : (c0= parse_org_emftext_language_refactoring_roles_RoleProhibition | c1= parse_org_emftext_language_refactoring_roles_RoleImplication | c2= parse_org_emftext_language_refactoring_roles_RoleAssociation | c3= parse_org_emftext_language_refactoring_roles_RoleComposition );";
         }
     }
  
 
     public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleModel_in_start82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_parse_org_emftext_language_refactoring_roles_RoleModel112 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleModel130 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_org_emftext_language_refactoring_roles_RoleModel151 = new BitSet(new long[]{0x0000000000006010L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Role_in_parse_org_emftext_language_refactoring_roles_RoleModel174 = new BitSet(new long[]{0x0000000000006010L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Relation_in_parse_org_emftext_language_refactoring_roles_RoleModel209 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_13_in_parse_org_emftext_language_refactoring_roles_RoleModel235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_parse_org_emftext_language_refactoring_roles_Role264 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_Role282 = new BitSet(new long[]{0x0000000000048000L});
-    public static final BitSet FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_Role312 = new BitSet(new long[]{0x0000000000010020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_Role353 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_Role421 = new BitSet(new long[]{0x0000000000010020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_Role462 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_Role530 = new BitSet(new long[]{0x0000000000020020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_Role571 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_Role639 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_Role672 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleProhibition705 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleProhibition726 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleProhibition744 = new BitSet(new long[]{0x0000000000048000L});
-    public static final BitSet FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleProhibition774 = new BitSet(new long[]{0x0000000000010020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleProhibition815 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleProhibition883 = new BitSet(new long[]{0x0000000000020020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleProhibition924 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleProhibition992 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_RoleProhibition1025 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleImplication1058 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleImplication1079 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleImplication1097 = new BitSet(new long[]{0x0000000000048000L});
-    public static final BitSet FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleImplication1127 = new BitSet(new long[]{0x0000000000010020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleImplication1168 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleImplication1236 = new BitSet(new long[]{0x0000000000020020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleImplication1277 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleImplication1345 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_RoleImplication1378 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1411 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1441 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1475 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1493 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1511 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1541 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1575 = new BitSet(new long[]{0x0000000000048000L});
-    public static final BitSet FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1602 = new BitSet(new long[]{0x0000000000010020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1643 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1711 = new BitSet(new long[]{0x0000000000020020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1752 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1820 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1886 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1916 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleComposition1950 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_parse_org_emftext_language_refactoring_roles_RoleComposition1968 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1986 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition2016 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleComposition2050 = new BitSet(new long[]{0x0000000000048000L});
-    public static final BitSet FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleComposition2077 = new BitSet(new long[]{0x0000000000010020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleComposition2118 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleComposition2186 = new BitSet(new long[]{0x0000000000020020L});
-    public static final BitSet FOLLOW_BOOLEAN_LITERAL_in_parse_org_emftext_language_refactoring_roles_RoleComposition2227 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleComposition2295 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_RoleComposition2328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_parse_org_emftext_language_refactoring_roles_Multiplicity2357 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_NUMBER_in_parse_org_emftext_language_refactoring_roles_Multiplicity2375 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_parse_org_emftext_language_refactoring_roles_Multiplicity2396 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_NUMBER_in_parse_org_emftext_language_refactoring_roles_Multiplicity2414 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_parse_org_emftext_language_refactoring_roles_Multiplicity2435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleProhibition_in_parse_org_emftext_language_refactoring_roles_Relation2460 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleImplication_in_parse_org_emftext_language_refactoring_roles_Relation2470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleAssociation_in_parse_org_emftext_language_refactoring_roles_Relation2480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleComposition_in_parse_org_emftext_language_refactoring_roles_Relation2490 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_parse_org_emftext_language_refactoring_roles_RoleModel112 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleModel130 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_parse_org_emftext_language_refactoring_roles_RoleModel151 = new BitSet(new long[]{0x0000000000060010L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Role_in_parse_org_emftext_language_refactoring_roles_RoleModel174 = new BitSet(new long[]{0x0000000000060010L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Relation_in_parse_org_emftext_language_refactoring_roles_RoleModel209 = new BitSet(new long[]{0x0000000000020010L});
+    public static final BitSet FOLLOW_17_in_parse_org_emftext_language_refactoring_roles_RoleModel235 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_parse_org_emftext_language_refactoring_roles_Role264 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_Role282 = new BitSet(new long[]{0x0000000000280000L});
+    public static final BitSet FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_Role312 = new BitSet(new long[]{0x00000000001000E0L});
+    public static final BitSet FOLLOW_OPTIONAL_in_parse_org_emftext_language_refactoring_roles_Role353 = new BitSet(new long[]{0x00000000001000C0L});
+    public static final BitSet FOLLOW_INPUT_in_parse_org_emftext_language_refactoring_roles_Role442 = new BitSet(new long[]{0x0000000000100080L});
+    public static final BitSet FOLLOW_RUNTIME_in_parse_org_emftext_language_refactoring_roles_Role531 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_Role599 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_Role632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleProhibition665 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_parse_org_emftext_language_refactoring_roles_RoleProhibition686 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleProhibition704 = new BitSet(new long[]{0x0000000000280000L});
+    public static final BitSet FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleProhibition734 = new BitSet(new long[]{0x0000000000100300L});
+    public static final BitSet FOLLOW_TRANSITIVE_in_parse_org_emftext_language_refactoring_roles_RoleProhibition775 = new BitSet(new long[]{0x0000000000100200L});
+    public static final BitSet FOLLOW_REFLEXIVE_in_parse_org_emftext_language_refactoring_roles_RoleProhibition864 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleProhibition932 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleProhibition965 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleImplication998 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_parse_org_emftext_language_refactoring_roles_RoleImplication1019 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleImplication1037 = new BitSet(new long[]{0x0000000000280000L});
+    public static final BitSet FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleImplication1067 = new BitSet(new long[]{0x0000000000100300L});
+    public static final BitSet FOLLOW_TRANSITIVE_in_parse_org_emftext_language_refactoring_roles_RoleImplication1108 = new BitSet(new long[]{0x0000000000100200L});
+    public static final BitSet FOLLOW_REFLEXIVE_in_parse_org_emftext_language_refactoring_roles_RoleImplication1197 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleImplication1265 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleImplication1298 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1331 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1361 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1395 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1413 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1431 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1461 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1495 = new BitSet(new long[]{0x0000000000280000L});
+    public static final BitSet FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1522 = new BitSet(new long[]{0x0000000000100300L});
+    public static final BitSet FOLLOW_TRANSITIVE_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1563 = new BitSet(new long[]{0x0000000000100200L});
+    public static final BitSet FOLLOW_REFLEXIVE_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1652 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1720 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleAssociation1753 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1786 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1816 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleComposition1850 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_parse_org_emftext_language_refactoring_roles_RoleComposition1868 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1886 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_emftext_language_refactoring_roles_RoleComposition1916 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_Multiplicity_in_parse_org_emftext_language_refactoring_roles_RoleComposition1950 = new BitSet(new long[]{0x0000000000280000L});
+    public static final BitSet FOLLOW_19_in_parse_org_emftext_language_refactoring_roles_RoleComposition1977 = new BitSet(new long[]{0x0000000000100300L});
+    public static final BitSet FOLLOW_TRANSITIVE_in_parse_org_emftext_language_refactoring_roles_RoleComposition2018 = new BitSet(new long[]{0x0000000000100200L});
+    public static final BitSet FOLLOW_REFLEXIVE_in_parse_org_emftext_language_refactoring_roles_RoleComposition2107 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_parse_org_emftext_language_refactoring_roles_RoleComposition2175 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_parse_org_emftext_language_refactoring_roles_RoleComposition2208 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_parse_org_emftext_language_refactoring_roles_Multiplicity2237 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_NUMBER_in_parse_org_emftext_language_refactoring_roles_Multiplicity2255 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_parse_org_emftext_language_refactoring_roles_Multiplicity2276 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_NUMBER_in_parse_org_emftext_language_refactoring_roles_Multiplicity2294 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_28_in_parse_org_emftext_language_refactoring_roles_Multiplicity2315 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleProhibition_in_parse_org_emftext_language_refactoring_roles_Relation2340 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleImplication_in_parse_org_emftext_language_refactoring_roles_Relation2350 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleAssociation_in_parse_org_emftext_language_refactoring_roles_Relation2360 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_org_emftext_language_refactoring_roles_RoleComposition_in_parse_org_emftext_language_refactoring_roles_Relation2370 = new BitSet(new long[]{0x0000000000000002L});
 
 }
