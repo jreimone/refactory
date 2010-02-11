@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.roles.RolesPackage;
  */
 public class RoleUseImpl extends MultiplicityRelationImpl implements RoleUse {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleUseImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return RolesPackage.Literals.ROLE_USE;
-	}
+    return RolesPackage.Literals.ROLE_USE;
+  }
 
 } //RoleUseImpl

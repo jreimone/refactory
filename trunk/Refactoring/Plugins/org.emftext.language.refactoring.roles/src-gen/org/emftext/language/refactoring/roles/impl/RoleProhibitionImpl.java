@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.roles.RolesPackage;
  */
 public class RoleProhibitionImpl extends RelationImpl implements RoleProhibition {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleProhibitionImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return RolesPackage.Literals.ROLE_PROHIBITION;
-	}
+    return RolesPackage.Literals.ROLE_PROHIBITION;
+  }
 
 } //RoleProhibitionImpl

@@ -28,107 +28,107 @@ package org.emftext.language.refactoring.roles;
  */
 public interface MultiplicityRelation extends Relation {
 	/**
-	 * Returns the value of the '<em><b>Source Multiplicity</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Source Multiplicity</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source Multiplicity</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source Multiplicity</em>' containment reference.
-	 * @see #setSourceMultiplicity(Multiplicity)
-	 * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicityRelation_SourceMultiplicity()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Source Multiplicity</em>' containment reference.
+   * @see #setSourceMultiplicity(Multiplicity)
+   * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicityRelation_SourceMultiplicity()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	Multiplicity getSourceMultiplicity();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.roles.MultiplicityRelation#getSourceMultiplicity <em>Source Multiplicity</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.roles.MultiplicityRelation#getSourceMultiplicity <em>Source Multiplicity</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source Multiplicity</em>' containment reference.
-	 * @see #getSourceMultiplicity()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Source Multiplicity</em>' containment reference.
+   * @see #getSourceMultiplicity()
+   * @generated
+   */
 	void setSourceMultiplicity(Multiplicity value);
 
 	/**
-	 * Returns the value of the '<em><b>Target Multiplicity</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Target Multiplicity</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target Multiplicity</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Multiplicity</em>' containment reference.
-	 * @see #setTargetMultiplicity(Multiplicity)
-	 * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicityRelation_TargetMultiplicity()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Target Multiplicity</em>' containment reference.
+   * @see #setTargetMultiplicity(Multiplicity)
+   * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicityRelation_TargetMultiplicity()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	Multiplicity getTargetMultiplicity();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.roles.MultiplicityRelation#getTargetMultiplicity <em>Target Multiplicity</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.roles.MultiplicityRelation#getTargetMultiplicity <em>Target Multiplicity</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target Multiplicity</em>' containment reference.
-	 * @see #getTargetMultiplicity()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Target Multiplicity</em>' containment reference.
+   * @see #getTargetMultiplicity()
+   * @generated
+   */
 	void setTargetMultiplicity(Multiplicity value);
 
 	/**
-	 * Returns the value of the '<em><b>Source Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Source Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source Name</em>' attribute.
-	 * @see #setSourceName(String)
-	 * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicityRelation_SourceName()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Source Name</em>' attribute.
+   * @see #setSourceName(String)
+   * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicityRelation_SourceName()
+   * @model
+   * @generated
+   */
 	String getSourceName();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.roles.MultiplicityRelation#getSourceName <em>Source Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.roles.MultiplicityRelation#getSourceName <em>Source Name</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source Name</em>' attribute.
-	 * @see #getSourceName()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Source Name</em>' attribute.
+   * @see #getSourceName()
+   * @generated
+   */
 	void setSourceName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Target Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Target Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Name</em>' attribute.
-	 * @see #setTargetName(String)
-	 * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicityRelation_TargetName()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Target Name</em>' attribute.
+   * @see #setTargetName(String)
+   * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicityRelation_TargetName()
+   * @model
+   * @generated
+   */
 	String getTargetName();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.roles.MultiplicityRelation#getTargetName <em>Target Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.roles.MultiplicityRelation#getTargetName <em>Target Name</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target Name</em>' attribute.
-	 * @see #getTargetName()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Target Name</em>' attribute.
+   * @see #getTargetName()
+   * @generated
+   */
 	void setTargetName(String value);
 
 } // MultiplicityRelation
