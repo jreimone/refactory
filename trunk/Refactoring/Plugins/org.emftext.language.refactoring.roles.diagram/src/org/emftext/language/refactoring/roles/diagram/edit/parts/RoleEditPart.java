@@ -360,7 +360,7 @@ public class RoleEditPart extends ShapeNodeEditPart {
 			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(20),
 					getMapMode().DPtoLP(20)));
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.black);
+			this.setForegroundColor(ColorConstants.gray);
 			createContents();
 		}
 

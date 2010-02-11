@@ -24,7 +24,7 @@
             minorAlignment="CENTER"/>
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
+            value="gray"/>
         <children
             xsi:type="gmfgraph:Label"
             name="RoleNameFigure"
