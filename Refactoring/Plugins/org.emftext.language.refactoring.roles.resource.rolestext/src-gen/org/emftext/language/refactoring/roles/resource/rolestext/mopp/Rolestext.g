@@ -357,7 +357,7 @@ options {
 				break;
 			}
 		}
-		int followSetID = 82;
+		int followSetID = 76;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
 			org.antlr.runtime3_2_0.CommonToken nextToken = (org.antlr.runtime3_2_0.CommonToken) tokenStream.get(i);
@@ -538,53 +538,47 @@ options {
 	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_9 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__NAME), "IDENTIFIER");
 	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_10 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), "(");
 	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_11 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ";");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_12 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__OPTIONAL), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_13 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ",");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_14 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_15 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ",");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_16 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_17 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ")");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_18 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), "|-|");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_19 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TARGET), "IDENTIFIER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_20 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), "(");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_21 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ";");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_22 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TRANSITIVE), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_23 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ",");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_24 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_25 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ")");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_26 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), "->");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_27 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TARGET), "IDENTIFIER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_28 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), "(");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_29 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ";");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_30 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TRANSITIVE), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_31 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ",");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_32 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_33 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ")");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_34 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__SOURCE_NAME), "IDENTIFIER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_35 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "[");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_36 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), "--");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_37 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TARGET), "IDENTIFIER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_38 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TARGET_NAME), "IDENTIFIER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_39 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), "(");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_40 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ";");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_41 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TRANSITIVE), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_42 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ",");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_43 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_44 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ")");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_45 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__SOURCE_NAME), "IDENTIFIER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_46 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), "<>-");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_47 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TARGET), "IDENTIFIER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_48 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TARGET_NAME), "IDENTIFIER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_49 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), "(");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_50 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ";");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_51 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TRANSITIVE), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_52 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ",");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_53 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), "BOOLEAN_LITERAL");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_54 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ")");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_55 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.MULTIPLICITY__LOWER_BOUND), "NUMBER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_56 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "..");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_57 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.MULTIPLICITY__UPPER_BOUND), "NUMBER");
-	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_58 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "]");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_12 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__OPTIONAL), "OPTIONAL");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_13 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), "INPUT");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_14 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), "RUNTIME");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_15 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRole(), ")");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_16 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), "|-|");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_17 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TARGET), "IDENTIFIER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_18 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), "(");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_19 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ";");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_20 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TRANSITIVE), "TRANSITIVE");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_21 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), "REFLEXIVE");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_22 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleProhibition(), ")");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_23 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), "->");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_24 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TARGET), "IDENTIFIER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_25 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), "(");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_26 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ";");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_27 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TRANSITIVE), "TRANSITIVE");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_28 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), "REFLEXIVE");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_29 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleImplication(), ")");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_30 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__SOURCE_NAME), "IDENTIFIER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_31 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "[");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_32 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), "--");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_33 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TARGET), "IDENTIFIER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_34 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TARGET_NAME), "IDENTIFIER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_35 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), "(");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_36 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ";");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_37 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TRANSITIVE), "TRANSITIVE");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_38 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), "REFLEXIVE");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_39 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleAssociation(), ")");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_40 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__SOURCE_NAME), "IDENTIFIER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_41 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), "<>-");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_42 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TARGET), "IDENTIFIER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_43 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TARGET_NAME), "IDENTIFIER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_44 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), "(");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_45 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ";");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_46 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TRANSITIVE), "TRANSITIVE");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_47 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), "REFLEXIVE");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_48 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleComposition(), ")");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_49 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.MULTIPLICITY__LOWER_BOUND), "NUMBER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_50 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "..");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_51 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.MULTIPLICITY__UPPER_BOUND), "NUMBER");
+	private final static org.emftext.language.refactoring.roles.resource.rolestext.IRolestextExpectedElement TERMINAL_52 = new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedCsString(org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getMultiplicity(), "]");
 	
 	private final static org.eclipse.emf.ecore.EStructuralFeature FEATURE_0 = org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleModel().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_MODEL__ROLES);
 	private final static org.eclipse.emf.ecore.EStructuralFeature FEATURE_1 = org.emftext.language.refactoring.roles.RolesPackage.eINSTANCE.getRoleModel().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_MODEL__RELATIONS);
@@ -607,96 +601,97 @@ options {
 		TERMINAL_9.addFollower(TERMINAL_11, EMPTY_FEATURE_ARRAY);
 		TERMINAL_10.addFollower(TERMINAL_12, EMPTY_FEATURE_ARRAY);
 		TERMINAL_10.addFollower(TERMINAL_13, EMPTY_FEATURE_ARRAY);
+		TERMINAL_10.addFollower(TERMINAL_14, EMPTY_FEATURE_ARRAY);
+		TERMINAL_10.addFollower(TERMINAL_15, EMPTY_FEATURE_ARRAY);
 		TERMINAL_12.addFollower(TERMINAL_13, EMPTY_FEATURE_ARRAY);
+		TERMINAL_12.addFollower(TERMINAL_14, EMPTY_FEATURE_ARRAY);
+		TERMINAL_12.addFollower(TERMINAL_15, EMPTY_FEATURE_ARRAY);
 		TERMINAL_13.addFollower(TERMINAL_14, EMPTY_FEATURE_ARRAY);
 		TERMINAL_13.addFollower(TERMINAL_15, EMPTY_FEATURE_ARRAY);
 		TERMINAL_14.addFollower(TERMINAL_15, EMPTY_FEATURE_ARRAY);
-		TERMINAL_15.addFollower(TERMINAL_16, EMPTY_FEATURE_ARRAY);
-		TERMINAL_15.addFollower(TERMINAL_17, EMPTY_FEATURE_ARRAY);
-		TERMINAL_16.addFollower(TERMINAL_17, EMPTY_FEATURE_ARRAY);
-		TERMINAL_17.addFollower(TERMINAL_11, EMPTY_FEATURE_ARRAY);
+		TERMINAL_15.addFollower(TERMINAL_11, EMPTY_FEATURE_ARRAY);
 		TERMINAL_11.addFollower(TERMINAL_3, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_0, });
 		TERMINAL_11.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
 		TERMINAL_11.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
 		TERMINAL_11.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
 		TERMINAL_11.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
 		TERMINAL_11.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-		TERMINAL_4.addFollower(TERMINAL_18, EMPTY_FEATURE_ARRAY);
-		TERMINAL_18.addFollower(TERMINAL_19, EMPTY_FEATURE_ARRAY);
-		TERMINAL_19.addFollower(TERMINAL_20, EMPTY_FEATURE_ARRAY);
-		TERMINAL_19.addFollower(TERMINAL_21, EMPTY_FEATURE_ARRAY);
+		TERMINAL_4.addFollower(TERMINAL_16, EMPTY_FEATURE_ARRAY);
+		TERMINAL_16.addFollower(TERMINAL_17, EMPTY_FEATURE_ARRAY);
+		TERMINAL_17.addFollower(TERMINAL_18, EMPTY_FEATURE_ARRAY);
+		TERMINAL_17.addFollower(TERMINAL_19, EMPTY_FEATURE_ARRAY);
+		TERMINAL_18.addFollower(TERMINAL_20, EMPTY_FEATURE_ARRAY);
+		TERMINAL_18.addFollower(TERMINAL_21, EMPTY_FEATURE_ARRAY);
+		TERMINAL_18.addFollower(TERMINAL_22, EMPTY_FEATURE_ARRAY);
+		TERMINAL_20.addFollower(TERMINAL_21, EMPTY_FEATURE_ARRAY);
 		TERMINAL_20.addFollower(TERMINAL_22, EMPTY_FEATURE_ARRAY);
-		TERMINAL_20.addFollower(TERMINAL_23, EMPTY_FEATURE_ARRAY);
-		TERMINAL_22.addFollower(TERMINAL_23, EMPTY_FEATURE_ARRAY);
+		TERMINAL_21.addFollower(TERMINAL_22, EMPTY_FEATURE_ARRAY);
+		TERMINAL_22.addFollower(TERMINAL_19, EMPTY_FEATURE_ARRAY);
+		TERMINAL_19.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_19.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_19.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_19.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_19.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
+		TERMINAL_5.addFollower(TERMINAL_23, EMPTY_FEATURE_ARRAY);
 		TERMINAL_23.addFollower(TERMINAL_24, EMPTY_FEATURE_ARRAY);
-		TERMINAL_23.addFollower(TERMINAL_25, EMPTY_FEATURE_ARRAY);
 		TERMINAL_24.addFollower(TERMINAL_25, EMPTY_FEATURE_ARRAY);
-		TERMINAL_25.addFollower(TERMINAL_21, EMPTY_FEATURE_ARRAY);
-		TERMINAL_21.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_21.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_21.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_21.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_21.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-		TERMINAL_5.addFollower(TERMINAL_26, EMPTY_FEATURE_ARRAY);
-		TERMINAL_26.addFollower(TERMINAL_27, EMPTY_FEATURE_ARRAY);
+		TERMINAL_24.addFollower(TERMINAL_26, EMPTY_FEATURE_ARRAY);
+		TERMINAL_25.addFollower(TERMINAL_27, EMPTY_FEATURE_ARRAY);
+		TERMINAL_25.addFollower(TERMINAL_28, EMPTY_FEATURE_ARRAY);
+		TERMINAL_25.addFollower(TERMINAL_29, EMPTY_FEATURE_ARRAY);
 		TERMINAL_27.addFollower(TERMINAL_28, EMPTY_FEATURE_ARRAY);
 		TERMINAL_27.addFollower(TERMINAL_29, EMPTY_FEATURE_ARRAY);
-		TERMINAL_28.addFollower(TERMINAL_30, EMPTY_FEATURE_ARRAY);
-		TERMINAL_28.addFollower(TERMINAL_31, EMPTY_FEATURE_ARRAY);
-		TERMINAL_30.addFollower(TERMINAL_31, EMPTY_FEATURE_ARRAY);
-		TERMINAL_31.addFollower(TERMINAL_32, EMPTY_FEATURE_ARRAY);
-		TERMINAL_31.addFollower(TERMINAL_33, EMPTY_FEATURE_ARRAY);
+		TERMINAL_28.addFollower(TERMINAL_29, EMPTY_FEATURE_ARRAY);
+		TERMINAL_29.addFollower(TERMINAL_26, EMPTY_FEATURE_ARRAY);
+		TERMINAL_26.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_26.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_26.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_26.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_26.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
+		TERMINAL_6.addFollower(TERMINAL_30, EMPTY_FEATURE_ARRAY);
+		TERMINAL_6.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+		TERMINAL_30.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
 		TERMINAL_32.addFollower(TERMINAL_33, EMPTY_FEATURE_ARRAY);
-		TERMINAL_33.addFollower(TERMINAL_29, EMPTY_FEATURE_ARRAY);
-		TERMINAL_29.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_29.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_29.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_29.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_29.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-		TERMINAL_6.addFollower(TERMINAL_34, EMPTY_FEATURE_ARRAY);
-		TERMINAL_6.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-		TERMINAL_34.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-		TERMINAL_36.addFollower(TERMINAL_37, EMPTY_FEATURE_ARRAY);
+		TERMINAL_33.addFollower(TERMINAL_34, EMPTY_FEATURE_ARRAY);
+		TERMINAL_33.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+		TERMINAL_34.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+		TERMINAL_35.addFollower(TERMINAL_37, EMPTY_FEATURE_ARRAY);
+		TERMINAL_35.addFollower(TERMINAL_38, EMPTY_FEATURE_ARRAY);
+		TERMINAL_35.addFollower(TERMINAL_39, EMPTY_FEATURE_ARRAY);
 		TERMINAL_37.addFollower(TERMINAL_38, EMPTY_FEATURE_ARRAY);
-		TERMINAL_37.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-		TERMINAL_38.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-		TERMINAL_39.addFollower(TERMINAL_41, EMPTY_FEATURE_ARRAY);
-		TERMINAL_39.addFollower(TERMINAL_42, EMPTY_FEATURE_ARRAY);
+		TERMINAL_37.addFollower(TERMINAL_39, EMPTY_FEATURE_ARRAY);
+		TERMINAL_38.addFollower(TERMINAL_39, EMPTY_FEATURE_ARRAY);
+		TERMINAL_39.addFollower(TERMINAL_36, EMPTY_FEATURE_ARRAY);
+		TERMINAL_36.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_36.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_36.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_36.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_36.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
+		TERMINAL_7.addFollower(TERMINAL_40, EMPTY_FEATURE_ARRAY);
+		TERMINAL_7.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+		TERMINAL_40.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
 		TERMINAL_41.addFollower(TERMINAL_42, EMPTY_FEATURE_ARRAY);
 		TERMINAL_42.addFollower(TERMINAL_43, EMPTY_FEATURE_ARRAY);
-		TERMINAL_42.addFollower(TERMINAL_44, EMPTY_FEATURE_ARRAY);
-		TERMINAL_43.addFollower(TERMINAL_44, EMPTY_FEATURE_ARRAY);
-		TERMINAL_44.addFollower(TERMINAL_40, EMPTY_FEATURE_ARRAY);
-		TERMINAL_40.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_40.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_40.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_40.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_40.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-		TERMINAL_7.addFollower(TERMINAL_45, EMPTY_FEATURE_ARRAY);
-		TERMINAL_7.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
-		TERMINAL_45.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_2, });
+		TERMINAL_42.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+		TERMINAL_43.addFollower(TERMINAL_31, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
+		TERMINAL_44.addFollower(TERMINAL_46, EMPTY_FEATURE_ARRAY);
+		TERMINAL_44.addFollower(TERMINAL_47, EMPTY_FEATURE_ARRAY);
+		TERMINAL_44.addFollower(TERMINAL_48, EMPTY_FEATURE_ARRAY);
 		TERMINAL_46.addFollower(TERMINAL_47, EMPTY_FEATURE_ARRAY);
+		TERMINAL_46.addFollower(TERMINAL_48, EMPTY_FEATURE_ARRAY);
 		TERMINAL_47.addFollower(TERMINAL_48, EMPTY_FEATURE_ARRAY);
-		TERMINAL_47.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-		TERMINAL_48.addFollower(TERMINAL_35, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_3, });
-		TERMINAL_49.addFollower(TERMINAL_51, EMPTY_FEATURE_ARRAY);
-		TERMINAL_49.addFollower(TERMINAL_52, EMPTY_FEATURE_ARRAY);
+		TERMINAL_48.addFollower(TERMINAL_45, EMPTY_FEATURE_ARRAY);
+		TERMINAL_45.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_45.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_45.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_45.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
+		TERMINAL_45.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
+		TERMINAL_31.addFollower(TERMINAL_49, EMPTY_FEATURE_ARRAY);
+		TERMINAL_49.addFollower(TERMINAL_50, EMPTY_FEATURE_ARRAY);
+		TERMINAL_50.addFollower(TERMINAL_51, EMPTY_FEATURE_ARRAY);
 		TERMINAL_51.addFollower(TERMINAL_52, EMPTY_FEATURE_ARRAY);
-		TERMINAL_52.addFollower(TERMINAL_53, EMPTY_FEATURE_ARRAY);
-		TERMINAL_52.addFollower(TERMINAL_54, EMPTY_FEATURE_ARRAY);
-		TERMINAL_53.addFollower(TERMINAL_54, EMPTY_FEATURE_ARRAY);
-		TERMINAL_54.addFollower(TERMINAL_50, EMPTY_FEATURE_ARRAY);
-		TERMINAL_50.addFollower(TERMINAL_4, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_50.addFollower(TERMINAL_5, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_50.addFollower(TERMINAL_6, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_50.addFollower(TERMINAL_7, new org.eclipse.emf.ecore.EStructuralFeature[] {FEATURE_1, });
-		TERMINAL_50.addFollower(TERMINAL_8, EMPTY_FEATURE_ARRAY);
-		TERMINAL_35.addFollower(TERMINAL_55, EMPTY_FEATURE_ARRAY);
-		TERMINAL_55.addFollower(TERMINAL_56, EMPTY_FEATURE_ARRAY);
-		TERMINAL_56.addFollower(TERMINAL_57, EMPTY_FEATURE_ARRAY);
-		TERMINAL_57.addFollower(TERMINAL_58, EMPTY_FEATURE_ARRAY);
-		TERMINAL_58.addFollower(TERMINAL_36, EMPTY_FEATURE_ARRAY);
-		TERMINAL_58.addFollower(TERMINAL_46, EMPTY_FEATURE_ARRAY);
+		TERMINAL_52.addFollower(TERMINAL_32, EMPTY_FEATURE_ARRAY);
+		TERMINAL_52.addFollower(TERMINAL_41, EMPTY_FEATURE_ARRAY);
 	}
 	// wire the terminals
 	static {
@@ -916,12 +911,14 @@ parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.
 				// expected elements (follow set)
 				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_12, 9));
 				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_13, 9));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 9));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 9));
 			}
 			
 			(
 				(
 					(
-						a3 = BOOLEAN_LITERAL						
+						a3 = OPTIONAL						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -930,7 +927,7 @@ parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
 							}
 							if (a3 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("OPTIONAL");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
 								tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__OPTIONAL), result);
@@ -951,6 +948,8 @@ parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.
 					{
 						// expected elements (follow set)
 						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_13, 10));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 10));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 10));
 					}
 					
 				)
@@ -958,25 +957,58 @@ parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.
 			)?			{
 				// expected elements (follow set)
 				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_13, 11));
-			}
-			
-			a4 = ',' {
-				if (element == null) {
-					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 12));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 12));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 11));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 11));
 			}
 			
 			(
 				(
 					(
-						a5 = BOOLEAN_LITERAL						
+						a4 = INPUT						
+						{
+							if (terminateParsing) {
+								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
+							}
+							if (element == null) {
+								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
+							}
+							if (a4 != null) {
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INPUT");
+								tokenResolver.setOptions(getOptions());
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
+								tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), result);
+								java.lang.Object resolvedObject = result.getResolvedToken();
+								if (resolvedObject == null) {
+									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStopIndex());
+								}
+								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+								if (resolved != null) {
+									element.eSet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), resolved);
+									completedElement(resolved);
+								}
+								collectHiddenTokens(element);
+								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, element);
+							}
+						}
+					)
+					{
+						// expected elements (follow set)
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 12));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 12));
+					}
+					
+				)
+				
+			)?			{
+				// expected elements (follow set)
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_14, 13));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 13));
+			}
+			
+			(
+				(
+					(
+						a5 = RUNTIME						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -985,17 +1017,17 @@ parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
 							}
 							if (a5 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("RUNTIME");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), result);
+								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), result);
 								java.lang.Object resolvedObject = result.getResolvedToken();
 								if (resolvedObject == null) {
 									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
 								}
 								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 								if (resolved != null) {
-									element.eSet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), resolved);
+									element.eSet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), resolved);
 									completedElement(resolved);
 								}
 								collectHiddenTokens(element);
@@ -1005,17 +1037,17 @@ parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 13));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 14));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 14));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_15, 15));
 			}
 			
-			a6 = ',' {
+			a6 = ')' {
 				if (element == null) {
 					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
 				}
@@ -1024,86 +1056,31 @@ parse_org_emftext_language_refactoring_roles_Role returns [org.emftext.language.
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_16, 15));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_17, 15));
-			}
-			
-			(
-				(
-					(
-						a7 = BOOLEAN_LITERAL						
-						{
-							if (terminateParsing) {
-								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
-							}
-							if (element == null) {
-								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
-							}
-							if (a7 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
-								tokenResolver.setOptions(getOptions());
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), result);
-								java.lang.Object resolvedObject = result.getResolvedToken();
-								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStopIndex());
-								}
-								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
-								if (resolved != null) {
-									element.eSet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), resolved);
-									completedElement(resolved);
-								}
-								collectHiddenTokens(element);
-								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, element);
-							}
-						}
-					)
-					{
-						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_17, 16));
-					}
-					
-				)
-				
-			)?			{
-				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_17, 17));
-			}
-			
-			a8 = ')' {
-				if (element == null) {
-					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 18));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 16));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 19));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_11, 17));
 	}
 	
-	a9 = ';' {
+	a7 = ';' {
 		if (element == null) {
 			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRole();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
+		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_3, 20, FEATURE_0));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 20, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 20, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 20, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 20, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 20));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_3, 18, FEATURE_0));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 18, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 18, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 18, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 18, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 18));
 	}
 	
 ;
@@ -1146,7 +1123,7 @@ parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_18, 21));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_16, 19));
 	}
 	
 	a1 = '|-|' {
@@ -1158,7 +1135,7 @@ parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftex
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_19, 22));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_17, 20));
 	}
 	
 	(
@@ -1195,8 +1172,8 @@ parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_20, 23));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 23));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_18, 21));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_19, 21));
 	}
 	
 	(
@@ -1210,14 +1187,15 @@ parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftex
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 24));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_23, 24));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_20, 22));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 22));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 22));
 			}
 			
 			(
 				(
 					(
-						a4 = BOOLEAN_LITERAL						
+						a4 = TRANSITIVE						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -1226,7 +1204,7 @@ parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftex
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
 							}
 							if (a4 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
 								tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TRANSITIVE), result);
@@ -1246,33 +1224,22 @@ parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftex
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_23, 25));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 23));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 23));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_23, 26));
-			}
-			
-			a5 = ',' {
-				if (element == null) {
-					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_24, 27));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_25, 27));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 24));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 24));
 			}
 			
 			(
 				(
 					(
-						a6 = BOOLEAN_LITERAL						
+						a5 = REFLEXIVE						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -1280,14 +1247,14 @@ parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftex
 							if (element == null) {
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
 							}
-							if (a6 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+							if (a5 != null) {
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), result);
+								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), result);
 								java.lang.Object resolvedObject = result.getResolvedToken();
 								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStopIndex());
+									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
 								}
 								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 								if (resolved != null) {
@@ -1295,55 +1262,55 @@ parse_org_emftext_language_refactoring_roles_RoleProhibition returns [org.emftex
 									completedElement(resolved);
 								}
 								collectHiddenTokens(element);
-								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
+								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_25, 28));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 25));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_25, 29));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_22, 26));
 			}
 			
-			a7 = ')' {
+			a6 = ')' {
 				if (element == null) {
 					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 30));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_19, 27));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_21, 31));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_19, 28));
 	}
 	
-	a8 = ';' {
+	a7 = ';' {
 		if (element == null) {
 			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleProhibition();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
+		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 32, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 32, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 32, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 32, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 32));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 29, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 29, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 29, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 29, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 29));
 	}
 	
 ;
@@ -1386,7 +1353,7 @@ parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_26, 33));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_23, 30));
 	}
 	
 	a1 = '->' {
@@ -1398,7 +1365,7 @@ parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftex
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_27, 34));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_24, 31));
 	}
 	
 	(
@@ -1435,8 +1402,8 @@ parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_28, 35));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 35));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_25, 32));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_26, 32));
 	}
 	
 	(
@@ -1450,14 +1417,15 @@ parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftex
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_30, 36));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 36));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_27, 33));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_28, 33));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 33));
 			}
 			
 			(
 				(
 					(
-						a4 = BOOLEAN_LITERAL						
+						a4 = TRANSITIVE						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -1466,7 +1434,7 @@ parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftex
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
 							}
 							if (a4 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
 								tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TRANSITIVE), result);
@@ -1486,33 +1454,22 @@ parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftex
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 37));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_28, 34));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 34));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 38));
-			}
-			
-			a5 = ',' {
-				if (element == null) {
-					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_32, 39));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_33, 39));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_28, 35));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 35));
 			}
 			
 			(
 				(
 					(
-						a6 = BOOLEAN_LITERAL						
+						a5 = REFLEXIVE						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -1520,14 +1477,14 @@ parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftex
 							if (element == null) {
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
 							}
-							if (a6 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+							if (a5 != null) {
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), result);
+								tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), result);
 								java.lang.Object resolvedObject = result.getResolvedToken();
 								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStopIndex());
+									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
 								}
 								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 								if (resolved != null) {
@@ -1535,55 +1492,55 @@ parse_org_emftext_language_refactoring_roles_RoleImplication returns [org.emftex
 									completedElement(resolved);
 								}
 								collectHiddenTokens(element);
-								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
+								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_33, 40));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 36));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_33, 41));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 37));
 			}
 			
-			a7 = ')' {
+			a6 = ')' {
 				if (element == null) {
 					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 42));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_26, 38));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_29, 43));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_26, 39));
 	}
 	
-	a8 = ';' {
+	a7 = ';' {
 		if (element == null) {
 			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleImplication();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
+		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 44, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 44, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 44, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 44, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 44));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 40, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 40, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 40, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 40, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 40));
 	}
 	
 ;
@@ -1626,8 +1583,8 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_34, 45));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 45, FEATURE_2));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_30, 41));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 41, FEATURE_2));
 	}
 	
 	(
@@ -1662,7 +1619,7 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 46, FEATURE_2));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 42, FEATURE_2));
 	}
 	
 	(
@@ -1684,7 +1641,7 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 47));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_32, 43));
 	}
 	
 	a3 = '--' {
@@ -1696,7 +1653,7 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_37, 48));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_33, 44));
 	}
 	
 	(
@@ -1733,8 +1690,8 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_38, 49));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 49, FEATURE_3));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_34, 45));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 45, FEATURE_3));
 	}
 	
 	(
@@ -1769,7 +1726,7 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 50, FEATURE_3));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 46, FEATURE_3));
 	}
 	
 	(
@@ -1791,8 +1748,8 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 51));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_40, 51));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 47));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 47));
 	}
 	
 	(
@@ -1806,14 +1763,15 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_41, 52));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_42, 52));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_37, 48));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_38, 48));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 48));
 			}
 			
 			(
 				(
 					(
-						a8 = BOOLEAN_LITERAL						
+						a8 = TRANSITIVE						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -1822,7 +1780,7 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
 							}
 							if (a8 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
 								tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TRANSITIVE), result);
@@ -1842,33 +1800,22 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_42, 53));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_38, 49));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 49));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_42, 54));
-			}
-			
-			a9 = ',' {
-				if (element == null) {
-					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_43, 55));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_44, 55));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_38, 50));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 50));
 			}
 			
 			(
 				(
 					(
-						a10 = BOOLEAN_LITERAL						
+						a9 = REFLEXIVE						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -1876,14 +1823,14 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 							if (element == null) {
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
 							}
-							if (a10 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+							if (a9 != null) {
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), result);
+								tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), result);
 								java.lang.Object resolvedObject = result.getResolvedToken();
 								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a10).getStopIndex());
+									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a9).getStopIndex());
 								}
 								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 								if (resolved != null) {
@@ -1891,55 +1838,55 @@ parse_org_emftext_language_refactoring_roles_RoleAssociation returns [org.emftex
 									completedElement(resolved);
 								}
 								collectHiddenTokens(element);
-								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a10, element);
+								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a9, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_44, 56));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 51));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_44, 57));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_39, 52));
 			}
 			
-			a11 = ')' {
+			a10 = ')' {
 				if (element == null) {
 					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
+				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a10, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_40, 58));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 53));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_40, 59));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 54));
 	}
 	
-	a12 = ';' {
+	a11 = ';' {
 		if (element == null) {
 			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleAssociation();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a12, element);
+		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 60, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 60, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 60, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 60, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 60));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 55, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 55, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 55, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 55, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 55));
 	}
 	
 ;
@@ -1982,8 +1929,8 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_45, 61));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 61, FEATURE_2));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_40, 56));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 56, FEATURE_2));
 	}
 	
 	(
@@ -2018,7 +1965,7 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 62, FEATURE_2));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 57, FEATURE_2));
 	}
 	
 	(
@@ -2040,7 +1987,7 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_46, 63));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_41, 58));
 	}
 	
 	a3 = '<>-' {
@@ -2052,7 +1999,7 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_47, 64));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_42, 59));
 	}
 	
 	(
@@ -2089,8 +2036,8 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 65));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 65, FEATURE_3));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_43, 60));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 60, FEATURE_3));
 	}
 	
 	(
@@ -2125,7 +2072,7 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_35, 66, FEATURE_3));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_31, 61, FEATURE_3));
 	}
 	
 	(
@@ -2147,8 +2094,8 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_49, 67));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_50, 67));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_44, 62));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_45, 62));
 	}
 	
 	(
@@ -2162,14 +2109,15 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_51, 68));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_52, 68));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_46, 63));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_47, 63));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 63));
 			}
 			
 			(
 				(
 					(
-						a8 = BOOLEAN_LITERAL						
+						a8 = TRANSITIVE						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -2178,7 +2126,7 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
 							}
 							if (a8 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
 								tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TRANSITIVE), result);
@@ -2198,33 +2146,22 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_52, 69));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_47, 64));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 64));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_52, 70));
-			}
-			
-			a9 = ',' {
-				if (element == null) {
-					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
-			}
-			{
-				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_53, 71));
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_54, 71));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_47, 65));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 65));
 			}
 			
 			(
 				(
 					(
-						a10 = BOOLEAN_LITERAL						
+						a9 = REFLEXIVE						
 						{
 							if (terminateParsing) {
 								throw new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextTerminateParsingException();
@@ -2232,14 +2169,14 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 							if (element == null) {
 								element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
 							}
-							if (a10 != null) {
-								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+							if (a9 != null) {
+								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
 								tokenResolver.setOptions(getOptions());
 								org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), result);
+								tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), result);
 								java.lang.Object resolvedObject = result.getResolvedToken();
 								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a10).getStopIndex());
+									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a9).getStopIndex());
 								}
 								java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 								if (resolved != null) {
@@ -2247,55 +2184,55 @@ parse_org_emftext_language_refactoring_roles_RoleComposition returns [org.emftex
 									completedElement(resolved);
 								}
 								collectHiddenTokens(element);
-								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a10, element);
+								copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a9, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_54, 72));
+						addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 66));
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_54, 73));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_48, 67));
 			}
 			
-			a11 = ')' {
+			a10 = ')' {
 				if (element == null) {
 					element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
+				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a10, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_50, 74));
+				addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_45, 68));
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_50, 75));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_45, 69));
 	}
 	
-	a12 = ';' {
+	a11 = ';' {
 		if (element == null) {
 			element = org.emftext.language.refactoring.roles.RolesFactory.eINSTANCE.createRoleComposition();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a12, element);
+		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 76, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 76, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 76, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 76, FEATURE_1));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 76));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_4, 70, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_5, 70, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_6, 70, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_7, 70, FEATURE_1));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_8, 70));
 	}
 	
 ;
@@ -2313,7 +2250,7 @@ parse_org_emftext_language_refactoring_roles_Multiplicity returns [org.emftext.l
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_55, 77));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_49, 71));
 	}
 	
 	(
@@ -2346,7 +2283,7 @@ parse_org_emftext_language_refactoring_roles_Multiplicity returns [org.emftext.l
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_56, 78));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_50, 72));
 	}
 	
 	a2 = '..' {
@@ -2358,7 +2295,7 @@ parse_org_emftext_language_refactoring_roles_Multiplicity returns [org.emftext.l
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_57, 79));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_51, 73));
 	}
 	
 	(
@@ -2391,7 +2328,7 @@ parse_org_emftext_language_refactoring_roles_Multiplicity returns [org.emftext.l
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_58, 80));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_52, 74));
 	}
 	
 	a4 = ']' {
@@ -2403,8 +2340,8 @@ parse_org_emftext_language_refactoring_roles_Multiplicity returns [org.emftext.l
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_36, 81));
-		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_46, 81));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_32, 75));
+		addExpectedElement(new org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextExpectedTerminal(TERMINAL_41, 75));
 	}
 	
 ;
@@ -2433,8 +2370,16 @@ LINEBREAKS:
 	('\r\n'|'\r'|'\n')
 	{ _channel = 99; }
 ;
-BOOLEAN_LITERAL:
-	'true'|'false';
+OPTIONAL:
+	'optional';
+INPUT:
+	'input';
+RUNTIME:
+	'runtime';
+TRANSITIVE:
+	'transitive';
+REFLEXIVE:
+	'reflexiv';
 IDENTIFIER:
 	('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 NUMBER:

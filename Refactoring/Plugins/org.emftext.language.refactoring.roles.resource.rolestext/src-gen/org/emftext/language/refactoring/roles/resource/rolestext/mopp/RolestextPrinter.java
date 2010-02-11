@@ -250,9 +250,6 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print(",");
-		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -266,9 +263,6 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print(",");
-		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -293,7 +287,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__OPTIONAL));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("OPTIONAL");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__OPTIONAL), element));
 				out.print(" ");
@@ -308,7 +302,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("INPUT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__INPUT), element));
 				out.print(" ");
@@ -323,7 +317,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("RUNTIME");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE__SELECT_ON_RUNTIME), element));
 				out.print(" ");
@@ -414,9 +408,6 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print(",");
-		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -441,7 +432,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TRANSITIVE));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__TRANSITIVE), element));
 				out.print(" ");
@@ -456,7 +447,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_PROHIBITION__REFLEXIVE), element));
 				out.print(" ");
@@ -547,9 +538,6 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print(",");
-		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -574,7 +562,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TRANSITIVE));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__TRANSITIVE), element));
 				out.print(" ");
@@ -589,7 +577,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_IMPLICATION__REFLEXIVE), element));
 				out.print(" ");
@@ -730,9 +718,6 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print(",");
-		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -757,7 +742,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TRANSITIVE));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__TRANSITIVE), element));
 				out.print(" ");
@@ -772,7 +757,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_ASSOCIATION__REFLEXIVE), element));
 				out.print(" ");
@@ -913,9 +898,6 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print(",");
-		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -940,7 +922,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TRANSITIVE));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("TRANSITIVE");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__TRANSITIVE), element));
 				out.print(" ");
@@ -955,7 +937,7 @@ public class RolestextPrinter implements org.emftext.language.refactoring.roles.
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE));
 			if (o != null) {
-				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
+				org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver resolver = tokenResolverFactory.createTokenResolver("REFLEXIVE");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.language.refactoring.roles.RolesPackage.ROLE_COMPOSITION__REFLEXIVE), element));
 				out.print(" ");

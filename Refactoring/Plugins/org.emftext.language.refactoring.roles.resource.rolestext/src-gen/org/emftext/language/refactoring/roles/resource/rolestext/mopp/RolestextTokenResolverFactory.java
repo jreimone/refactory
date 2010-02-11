@@ -17,7 +17,11 @@ public class RolestextTokenResolverFactory implements org.emftext.language.refac
 		featureName2CollectInTokenResolver = new java.util.HashMap<java.lang.String, org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolver>();
 		registerCollectInTokenResolver("comments", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextCOLLECT_commentsTokenResolver());
 		registerCollectInTokenResolver("comments", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextCOLLECT_commentsTokenResolver());
-		registerTokenResolver("BOOLEAN_LITERAL", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextBOOLEAN_LITERALTokenResolver());
+		registerTokenResolver("OPTIONAL", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextOPTIONALTokenResolver());
+		registerTokenResolver("INPUT", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextINPUTTokenResolver());
+		registerTokenResolver("RUNTIME", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextRUNTIMETokenResolver());
+		registerTokenResolver("TRANSITIVE", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextTRANSITIVETokenResolver());
+		registerTokenResolver("REFLEXIVE", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextREFLEXIVETokenResolver());
 		registerTokenResolver("IDENTIFIER", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextIDENTIFIERTokenResolver());
 		registerTokenResolver("NUMBER", new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextNUMBERTokenResolver());
 	}

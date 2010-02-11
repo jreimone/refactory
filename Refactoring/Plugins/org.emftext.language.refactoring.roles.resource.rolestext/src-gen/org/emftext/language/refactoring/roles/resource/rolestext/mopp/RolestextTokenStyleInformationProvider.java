@@ -68,6 +68,21 @@ public class RolestextTokenStyleInformationProvider {
 		if ("..".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x00, 0x00, 0xFF}, false, true, false, false);
 		}
+		if ("OPTIONAL".equals(tokenName)) {
+			return new TokenStyleImpl(new int[] {0x05, 0xD3, 0xE0}, true, false, false, false);
+		}
+		if ("INPUT".equals(tokenName)) {
+			return new TokenStyleImpl(new int[] {0x05, 0xD3, 0xE0}, true, false, false, false);
+		}
+		if ("RUNTIME".equals(tokenName)) {
+			return new TokenStyleImpl(new int[] {0x05, 0xD3, 0xE0}, true, false, false, false);
+		}
+		if ("TRANSITIVE".equals(tokenName)) {
+			return new TokenStyleImpl(new int[] {0x05, 0xD3, 0xE0}, true, false, false, false);
+		}
+		if ("REFLEXIVE".equals(tokenName)) {
+			return new TokenStyleImpl(new int[] {0x05, 0xD3, 0xE0}, true, false, false, false);
+		}
 		if ("RoleModel".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
