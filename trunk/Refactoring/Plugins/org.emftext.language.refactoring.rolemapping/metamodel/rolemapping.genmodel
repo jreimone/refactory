@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.emftext.language.refactoring.rolemapping/src-gen"
+    modelPluginID="org.emftext.language.refactoring.rolemapping" modelName="Rolemapping"
+    editPluginClass="org.emftext.language.refactoring.rolemapping.provider.RolemappingEditPlugin"
+    editorPluginClass="org.emftext.language.refactoring.rolemapping.presentation.RolemappingEditorPlugin"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.emftext.language.refactoring.roles/metamodel/roles.genmodel#//roles">
+  <foreignModel>rolemapping.ecore</foreignModel>
+  <genPackages prefix="Rolemapping" basePackage="org.emftext.language.refactoring"
+      disposableProviderFactory="true" ecorePackage="rolemapping.ecore#/">
+    <genClasses ecoreClass="rolemapping.ecore#//RoleMappingModel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMappingModel/targetMetamodel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMappingModel/mappings"/>
+    </genClasses>
+    <genClasses ecoreClass="rolemapping.ecore#//Mapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rolemapping.ecore#//Mapping/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//Mapping/mappedRoleModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//Mapping/roleToMetaelement"/>
+    </genClasses>
+    <genClasses ecoreClass="rolemapping.ecore#//ConcreteMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ConcreteMapping/role"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ConcreteMapping/metaclass"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

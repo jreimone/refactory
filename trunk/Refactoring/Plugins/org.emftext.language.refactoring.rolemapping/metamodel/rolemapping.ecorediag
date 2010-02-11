@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_aePQkBcEEd-v66FqVrAtPg" type="EcoreTools" name="rolemapping" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_k4GnYBcEEd-v66FqVrAtPg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_k4HOcBcEEd-v66FqVrAtPg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_k4HOcRcEEd-v66FqVrAtPg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_k4HOchcEEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_k4HOcxcEEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_k4HOdBcEEd-v66FqVrAtPg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_k4HOdRcEEd-v66FqVrAtPg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_k4HOdhcEEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_k4HOdxcEEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_k4HOeBcEEd-v66FqVrAtPg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_k4GnYRcEEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="rolemapping.ecore#//RoleMappingModel"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k4GnYhcEEd-v66FqVrAtPg" x="295" y="115" width="143"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_fsuSMBcFEd-v66FqVrAtPg" type="1001">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ftYZgBcFEd-v66FqVrAtPg" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ftYZgRcFEd-v66FqVrAtPg" key="modelID" value="EcoreTools"/>
+    </eAnnotations>
+    <children xmi:type="notation:Node" xmi:id="_ftE3gBcFEd-v66FqVrAtPg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_ftE3gRcFEd-v66FqVrAtPg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ftE3ghcFEd-v66FqVrAtPg" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ftE3gxcFEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ftE3hBcFEd-v66FqVrAtPg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ftE3hRcFEd-v66FqVrAtPg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ftE3hhcFEd-v66FqVrAtPg" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ftE3hxcFEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ftE3iBcFEd-v66FqVrAtPg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fsuSMRcFEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fsuSMhcFEd-v66FqVrAtPg" x="595" y="105"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_FiJmQBcGEd-v66FqVrAtPg" type="1001">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_FilEEBcGEd-v66FqVrAtPg" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_FilEERcGEd-v66FqVrAtPg" key="modelID" value="EcoreTools"/>
+    </eAnnotations>
+    <children xmi:type="notation:Node" xmi:id="_FidIQBcGEd-v66FqVrAtPg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_FidvUBcGEd-v66FqVrAtPg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_FidvURcGEd-v66FqVrAtPg" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_FidvUhcGEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_FidvUxcGEd-v66FqVrAtPg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_FidvVBcGEd-v66FqVrAtPg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_FidvVRcGEd-v66FqVrAtPg" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_FidvVhcGEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_FidvVxcGEd-v66FqVrAtPg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_FiJmQRcGEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="platform:/resource/org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FiJmQhcGEd-v66FqVrAtPg" x="80" y="255"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_Y4GHQBcGEd-v66FqVrAtPg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_Y4UJsBcGEd-v66FqVrAtPg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_Y4UJsRcGEd-v66FqVrAtPg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_fgrk0BcGEd-v66FqVrAtPg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="rolemapping.ecore#//Mapping/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_fgrk0RcGEd-v66FqVrAtPg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Y4UJshcGEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Y4UJsxcGEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Y4UJtBcGEd-v66FqVrAtPg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_Y4UJtRcGEd-v66FqVrAtPg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Y4UJthcGEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Y4UJtxcGEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Y4UJuBcGEd-v66FqVrAtPg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_Y4GHQRcGEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="rolemapping.ecore#//Mapping"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y4GHQhcGEd-v66FqVrAtPg" x="305" y="255"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_FBM_4BcHEd-v66FqVrAtPg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_FBbCUBcHEd-v66FqVrAtPg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_FBbpYBcHEd-v66FqVrAtPg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_FBbpYRcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_FBbpYhcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_FBbpYxcHEd-v66FqVrAtPg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_FBbpZBcHEd-v66FqVrAtPg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_FBbpZRcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_FBbpZhcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_FBbpZxcHEd-v66FqVrAtPg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_FBM_4RcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="rolemapping.ecore#//ConcreteMapping"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FBM_4hcHEd-v66FqVrAtPg" x="300" y="375" width="133"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_TJqIUBcHEd-v66FqVrAtPg" type="1001">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TKGNMBcHEd-v66FqVrAtPg" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TKGNMRcHEd-v66FqVrAtPg" key="modelID" value="EcoreTools"/>
+    </eAnnotations>
+    <children xmi:type="notation:Node" xmi:id="_TJ5Y4BcHEd-v66FqVrAtPg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_TJ5_8BcHEd-v66FqVrAtPg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_TJ5_8RcHEd-v66FqVrAtPg" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_TJ5_8hcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_TJ5_8xcHEd-v66FqVrAtPg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_TJ5_9BcHEd-v66FqVrAtPg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_TJ5_9RcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_TJ5_9hcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_TJ5_9xcHEd-v66FqVrAtPg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_TJqIURcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="platform:/resource/org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TJqIUhcHEd-v66FqVrAtPg" x="75" y="375"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_eQlZcBcHEd-v66FqVrAtPg" type="1001">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_eRAQMBcHEd-v66FqVrAtPg" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_eRAQMRcHEd-v66FqVrAtPg" key="modelID" value="EcoreTools"/>
+    </eAnnotations>
+    <children xmi:type="notation:Node" xmi:id="_eQsuMBcHEd-v66FqVrAtPg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_eQsuMRcHEd-v66FqVrAtPg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_eQsuMhcHEd-v66FqVrAtPg" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_eQsuMxcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_eQsuNBcHEd-v66FqVrAtPg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_eQsuNRcHEd-v66FqVrAtPg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_eQsuNhcHEd-v66FqVrAtPg" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_eQsuNxcHEd-v66FqVrAtPg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_eQsuOBcHEd-v66FqVrAtPg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_eQlZcRcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eQlZchcHEd-v66FqVrAtPg" x="595" y="365"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_aePQkRcEEd-v66FqVrAtPg"/>
+  <element xmi:type="ecore:EPackage" href="rolemapping.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_ftRr0BcFEd-v66FqVrAtPg" type="3002" source="_k4GnYBcEEd-v66FqVrAtPg" target="_fsuSMBcFEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_ftRr1BcFEd-v66FqVrAtPg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_ftRr1RcFEd-v66FqVrAtPg" x="-27" y="-11"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ftRr1hcFEd-v66FqVrAtPg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_ftRr1xcFEd-v66FqVrAtPg" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_ftRr0RcFEd-v66FqVrAtPg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_ftRr0hcFEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//RoleMappingModel/targetMetamodel"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ftRr0xcFEd-v66FqVrAtPg" points="[-59, -20, 307, 106]$[-365, -126, 1, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_FiiAwBcGEd-v66FqVrAtPg" type="3002" source="_Y4GHQBcGEd-v66FqVrAtPg" target="_FiJmQBcGEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_FiiAxBcGEd-v66FqVrAtPg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_FiiAxRcGEd-v66FqVrAtPg" x="-38" y="-12"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_FiiAxhcGEd-v66FqVrAtPg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_FiiAxxcGEd-v66FqVrAtPg" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_FiiAwRcGEd-v66FqVrAtPg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_FiiAwhcGEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//Mapping/mappedRoleModel"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_FiiAwxcGEd-v66FqVrAtPg" points="[-54, -20, 302, 116]$[-355, -136, 1, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_1z7kcBcGEd-v66FqVrAtPg" id="(0.1391304347826087,0.6470588235294118)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_cn9rQBcGEd-v66FqVrAtPg" type="3002" source="_k4GnYBcEEd-v66FqVrAtPg" target="_Y4GHQBcGEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_cn9rRBcGEd-v66FqVrAtPg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_cn9rRRcGEd-v66FqVrAtPg" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_cn9rRhcGEd-v66FqVrAtPg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_cn9rRxcGEd-v66FqVrAtPg" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_cn9rQRcGEd-v66FqVrAtPg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_cn9rQhcGEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//RoleMappingModel/mappings"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_cn9rQxcGEd-v66FqVrAtPg" points="[1, 21, 1, -119]$[50, 158, 50, 18]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_Hz-CcBcHEd-v66FqVrAtPg" type="3002" source="_Y4GHQBcGEd-v66FqVrAtPg" target="_FBM_4BcHEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_H0Mr8BcHEd-v66FqVrAtPg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_H0Mr8RcHEd-v66FqVrAtPg" x="-16" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_H0Mr8hcHEd-v66FqVrAtPg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_H0Mr8xcHEd-v66FqVrAtPg" x="-1" y="12"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_Hz-CcRcHEd-v66FqVrAtPg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Hz-CchcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//Mapping/roleToMetaelement"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Hz-CcxcHEd-v66FqVrAtPg" points="[-1, 25, -7, -81]$[-56, 86, -62, -20]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_TKB7wBcHEd-v66FqVrAtPg" type="3002" source="_FiJmQBcGEd-v66FqVrAtPg" target="_TJqIUBcHEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_TKB7xBcHEd-v66FqVrAtPg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_TKB7xRcHEd-v66FqVrAtPg" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_TKB7xhcHEd-v66FqVrAtPg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_TKB7xxcHEd-v66FqVrAtPg" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_TKB7wRcHEd-v66FqVrAtPg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_TKB7whcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="platform:/resource/org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel/roles"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_TKB7wxcHEd-v66FqVrAtPg" points="[-14, -29, 117, 256]$[-131, -284, 0, 1]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_VedcgBcHEd-v66FqVrAtPg" type="3002" source="_FBM_4BcHEd-v66FqVrAtPg" target="_TJqIUBcHEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_VedchBcHEd-v66FqVrAtPg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_VedchRcHEd-v66FqVrAtPg" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_VedchhcHEd-v66FqVrAtPg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_VedchxcHEd-v66FqVrAtPg" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_VedcgRcHEd-v66FqVrAtPg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_VedcghcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//ConcreteMapping/role"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VedcgxcHEd-v66FqVrAtPg" points="[-8, 2, 146, 1]$[-152, -19, 2, -20]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VefRsBcHEd-v66FqVrAtPg" id="(0.06766917293233082,0.46511627906976744)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VefRsRcHEd-v66FqVrAtPg" id="(0.7941176470588235,0.35)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_hsuwMBcHEd-v66FqVrAtPg" type="3002" source="_FBM_4BcHEd-v66FqVrAtPg" target="_eQlZcBcHEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_hsuwNBcHEd-v66FqVrAtPg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_hsuwNRcHEd-v66FqVrAtPg" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_hsvXQBcHEd-v66FqVrAtPg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_hsvXQRcHEd-v66FqVrAtPg" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_hsuwMRcHEd-v66FqVrAtPg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_hsuwMhcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//ConcreteMapping/metaclass"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hsuwMxcHEd-v66FqVrAtPg" points="[9, 0, -184, 1]$[194, 28, 1, 29]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hswlYBcHEd-v66FqVrAtPg" id="(0.9323308270676691,0.4883720930232558)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hsxMcBcHEd-v66FqVrAtPg" id="(0.20588235294117646,0.5)"/>
+  </edges>
+</notation:Diagram>
