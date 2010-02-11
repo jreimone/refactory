@@ -27,35 +27,35 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface RoleModel extends NamedElement {
 	/**
-	 * Returns the value of the '<em><b>Roles</b></em>' containment reference list.
-	 * The list contents are of type {@link org.emftext.language.refactoring.roles.Role}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Roles</b></em>' containment reference list.
+   * The list contents are of type {@link org.emftext.language.refactoring.roles.Role}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Roles</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Roles</em>' containment reference list.
-	 * @see org.emftext.language.refactoring.roles.RolesPackage#getRoleModel_Roles()
-	 * @model containment="true" keys="name"
-	 * @generated
-	 */
+   * @return the value of the '<em>Roles</em>' containment reference list.
+   * @see org.emftext.language.refactoring.roles.RolesPackage#getRoleModel_Roles()
+   * @model containment="true" keys="name"
+   * @generated
+   */
 	EList<Role> getRoles();
 
 	/**
-	 * Returns the value of the '<em><b>Relations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.emftext.language.refactoring.roles.Relation}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Relations</b></em>' containment reference list.
+   * The list contents are of type {@link org.emftext.language.refactoring.roles.Relation}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Relations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Relations</em>' containment reference list.
-	 * @see org.emftext.language.refactoring.roles.RolesPackage#getRoleModel_Relations()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Relations</em>' containment reference list.
+   * @see org.emftext.language.refactoring.roles.RolesPackage#getRoleModel_Relations()
+   * @model containment="true"
+   * @generated
+   */
 	EList<Relation> getRelations();
 
 } // RoleModel

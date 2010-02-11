@@ -27,55 +27,55 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Multiplicity extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Lower Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Lower Bound</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lower Bound</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lower Bound</em>' attribute.
-	 * @see #setLowerBound(int)
-	 * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicity_LowerBound()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Lower Bound</em>' attribute.
+   * @see #setLowerBound(int)
+   * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicity_LowerBound()
+   * @model required="true"
+   * @generated
+   */
 	int getLowerBound();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.roles.Multiplicity#getLowerBound <em>Lower Bound</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.roles.Multiplicity#getLowerBound <em>Lower Bound</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Lower Bound</em>' attribute.
-	 * @see #getLowerBound()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Lower Bound</em>' attribute.
+   * @see #getLowerBound()
+   * @generated
+   */
 	void setLowerBound(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Upper Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Upper Bound</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Upper Bound</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Upper Bound</em>' attribute.
-	 * @see #setUpperBound(int)
-	 * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicity_UpperBound()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Upper Bound</em>' attribute.
+   * @see #setUpperBound(int)
+   * @see org.emftext.language.refactoring.roles.RolesPackage#getMultiplicity_UpperBound()
+   * @model required="true"
+   * @generated
+   */
 	int getUpperBound();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.roles.Multiplicity#getUpperBound <em>Upper Bound</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.roles.Multiplicity#getUpperBound <em>Upper Bound</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Upper Bound</em>' attribute.
-	 * @see #getUpperBound()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Upper Bound</em>' attribute.
+   * @see #getUpperBound()
+   * @generated
+   */
 	void setUpperBound(int value);
 
 } // Multiplicity

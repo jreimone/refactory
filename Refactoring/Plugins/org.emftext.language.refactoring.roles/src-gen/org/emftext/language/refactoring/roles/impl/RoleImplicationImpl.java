@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.roles.RolesPackage;
  */
 public class RoleImplicationImpl extends RelationImpl implements RoleImplication {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleImplicationImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return RolesPackage.Literals.ROLE_IMPLICATION;
-	}
+    return RolesPackage.Literals.ROLE_IMPLICATION;
+  }
 
 } //RoleImplicationImpl
