@@ -13,6 +13,7 @@
     <genClasses ecoreClass="rolemapping.ecore#//RoleMappingModel">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMappingModel/targetMetamodel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMappingModel/mappings"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rolemapping.ecore#//RoleMappingModel/name"/>
     </genClasses>
     <genClasses ecoreClass="rolemapping.ecore#//Mapping">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rolemapping.ecore#//Mapping/name"/>
