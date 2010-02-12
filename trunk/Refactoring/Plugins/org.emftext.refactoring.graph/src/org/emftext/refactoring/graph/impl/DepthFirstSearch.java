@@ -39,7 +39,6 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.graph.IShortestPathAlgorithm#calculatePaths(org.eclipse.emf.ecore.resource.Resource, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EClass)
 	 */
-	@Override
 	public List<IPath> calculatePaths(EObject source, EObject target) {
 		sourceClass = source.eClass();
 		targetClass = target.eClass();
