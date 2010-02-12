@@ -1,17 +1,17 @@
 RoleModel ExtractMethod {
-	role OrigContainer;
-	role Extract(,true,);
-	role NewContainer;
-	role ContainerContainer(,,true);
-	role MovedReference(true,,);
+	input runtime input runtime optional ROLE OrigContainer;
+	ROLE Extract;
+	ROLE NewContainer;
+	ROLE ContainerContainer;
+	ROLE MovedReference;
 	
-	OrigContainer [1..1] <>- Extract extracts [0..-1] (true,);
-	OrigContainer [1..1] <>- MovedReference [1..1] (true,);
+	OrigContainer [1..1] <>- Extract extracts [0..-1] (transitive);
+	OrigContainer [1..1] <>- MovedReference [1..1] (transitive);
 	
-	NewContainer [1..1] <>- Extract moved [0..-1] (true,);
+	NewContainer [1..1] <>- Extract moved [0..-1] (transitive);
 	
-	ContainerContainer [1..1] <>- NewContainer [1..1] (true,);
-	ContainerContainer [1..1] <>- OrigContainer [1..1] (true,true);
+	ContainerContainer [1..1] <>- NewContainer [1..1] (transitive);
+	ContainerContainer [1..1] <>- OrigContainer [1..1] (transitive reflexiv);
 	
 	MovedReference [1..1] -- NewContainer [1..1];
 } 
