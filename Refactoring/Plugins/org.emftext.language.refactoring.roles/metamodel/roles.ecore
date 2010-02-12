@@ -20,9 +20,8 @@
         eType="#//Relation" eOpposite="#//Relation/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
         eType="#//Relation" eOpposite="#//Relation/target"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selectOnRuntime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifier" upperBound="-1"
+        eType="#//RoleModifier"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleModel" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
@@ -50,4 +49,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="RoleAssociation" eSuperTypes="#//MultiplicityRelation"/>
   <eClassifiers xsi:type="ecore:EClass" name="RoleComposition" eSuperTypes="#//MultiplicityRelation"/>
   <eClassifiers xsi:type="ecore:EClass" name="RoleImplication" eSuperTypes="#//Relation"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="RoleModifier">
+    <eLiterals name="optional"/>
+    <eLiterals name="runtime" value="1"/>
+    <eLiterals name="input" value="2"/>
+  </eClassifiers>
 </ecore:EPackage>

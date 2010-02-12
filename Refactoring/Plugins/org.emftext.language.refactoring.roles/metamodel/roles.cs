@@ -29,11 +29,12 @@ TOKENS{
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 
-	DEFINE OPTIONAL $'optional'$;
-	DEFINE INPUT $'input'$;
-	DEFINE RUNTIME $'runtime'$;
+	DEFINE ROLE_MODIFIER $'optional'|'runtime'|'input'$;
+	//DEFINE OPTIONAL $'optional'$;
+	//DEFINE INPUT $'input'$;
+	//DEFINE RUNTIME $'runtime'$;
 	DEFINE TRANSITIVE $'transitive'$;
-	DEFINE REFLEXIVE $'reflexiv'$;
+	DEFINE REFLEXIVE $'reflexive'$;
 
 	//DEFINE BOOLEAN_LITERAL $'true'|'false'$;
 	DEFINE IDENTIFIER $('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;	
@@ -48,7 +49,7 @@ TOKENSTYLES{
 	"BOOLEAN_LITERAL" COLOR #7F0055, BOLD;
 	"NUMBER" COLOR #0000FF, ITALIC;
 	".." COLOR #0000FF, ITALIC;
-	"OPTIONAL" COLOR #05D3E0, BOLD;
+	"ROLE_MODIFIER" COLOR #7F0055, BOLD;
 	"INPUT" COLOR #05D3E0, BOLD;
 	"RUNTIME" COLOR #05D3E0, BOLD;
 	"TRANSITIVE" COLOR #05D3E0, BOLD;
@@ -58,7 +59,7 @@ TOKENSTYLES{
 RULES {
 	RoleModel ::= "RoleModel" name[IDENTIFIER] "{" roles* relations* "}";
 	
-	Role ::= "role" name[IDENTIFIER] ("(" (optional[OPTIONAL])? (input[INPUT])?  (selectOnRuntime[RUNTIME])? ")" )? ";";
+	Role ::= ( modifier[ROLE_MODIFIER]* )? "ROLE" name[IDENTIFIER] ";";
 	
 	RoleProhibition ::= source[IDENTIFIER] "|-|" target[IDENTIFIER] ("(" (transitive[TRANSITIVE])? (reflexive[REFLEXIVE])? ")")? ";";
 	

@@ -9,6 +9,11 @@
   <foreignModel>roles.ecore</foreignModel>
   <genPackages prefix="Roles" basePackage="org.emftext.language.refactoring" disposableProviderFactory="true"
       ecorePackage="roles.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="roles.ecore#//RoleModifier">
+      <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/optional"/>
+      <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/runtime"/>
+      <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/input"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="roles.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//NamedElement/name"/>
     </genClasses>
@@ -21,9 +26,7 @@
     <genClasses ecoreClass="roles.ecore#//Role">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/outgoing"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/incoming"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Role/optional"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Role/selectOnRuntime"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Role/input"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Role/modifier"/>
     </genClasses>
     <genClasses ecoreClass="roles.ecore#//RoleModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/roles"/>
