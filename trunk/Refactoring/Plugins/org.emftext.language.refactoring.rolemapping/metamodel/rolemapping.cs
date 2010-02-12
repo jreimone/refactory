@@ -24,7 +24,7 @@ RULES {
 	
 	RoleMappingModel::= "ROLEMODELMAPPING" "FOR" targetMetamodel['<','>'] mappings+;
 	
-	Mapping::= name['"','"'] "maps" mappedRoleModel['<','>'] "{"  "}"  ;
+	Mapping::= name['"','"'] "maps" mappedRoleModel['<','>'] "{" roleToMetaelement+ "}"  ;
 	
 	ConcreteMapping ::= role['"','"'] "->" metaclass[];
 }

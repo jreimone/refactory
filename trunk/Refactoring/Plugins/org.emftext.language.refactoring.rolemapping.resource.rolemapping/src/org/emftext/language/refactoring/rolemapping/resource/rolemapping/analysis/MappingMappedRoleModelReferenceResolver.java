@@ -14,20 +14,41 @@
 
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
+import java.io.IOException;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.refactoring.roles.RoleModel;
+
 public class MappingMappedRoleModelReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.Mapping, org.emftext.language.refactoring.roles.RoleModel> {
 	
-	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.Mapping, org.emftext.language.refactoring.roles.RoleModel> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.Mapping, org.emftext.language.refactoring.roles.RoleModel>();
-	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.Mapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.RoleModel> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+		URI uri = URI.createURI(identifier);
+		ResourceSet resourceSet = container.eResource().getResourceSet();
+		Resource resource = resourceSet.createResource(uri);
+		try {
+			resource.load(null);
+		} catch (IOException e) {
+			result.setErrorMessage("Can't load role model: " + e.getMessage());
+			return;
+		}
+		EList<EObject> contents = resource.getContents();
+		for (EObject eObject : contents) {
+			if (eObject instanceof RoleModel) {
+				result.addMapping(identifier, (RoleModel) eObject); 
+			}
+		}
 	}
 	
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.RoleModel element, org.emftext.language.refactoring.rolemapping.Mapping container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return EcoreUtil.getURI(element).toString(); 
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend on any option
 	}
-	
+
 }

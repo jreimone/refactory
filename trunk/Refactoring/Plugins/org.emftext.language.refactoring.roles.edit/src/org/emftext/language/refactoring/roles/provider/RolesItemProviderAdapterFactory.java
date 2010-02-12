@@ -358,14 +358,14 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
-		if (roleModelItemProvider != null) roleModelItemProvider.dispose();
 		if (roleItemProvider != null) roleItemProvider.dispose();
-		if (roleImplicationItemProvider != null) roleImplicationItemProvider.dispose();
-		if (roleProhibitionItemProvider != null) roleProhibitionItemProvider.dispose();
+		if (roleModelItemProvider != null) roleModelItemProvider.dispose();
 		if (multiplicityItemProvider != null) multiplicityItemProvider.dispose();
+		if (roleUseItemProvider != null) roleUseItemProvider.dispose();
+		if (roleProhibitionItemProvider != null) roleProhibitionItemProvider.dispose();
 		if (roleAssociationItemProvider != null) roleAssociationItemProvider.dispose();
 		if (roleCompositionItemProvider != null) roleCompositionItemProvider.dispose();
-		if (roleUseItemProvider != null) roleUseItemProvider.dispose();
+		if (roleImplicationItemProvider != null) roleImplicationItemProvider.dispose();
 	}
 
 }

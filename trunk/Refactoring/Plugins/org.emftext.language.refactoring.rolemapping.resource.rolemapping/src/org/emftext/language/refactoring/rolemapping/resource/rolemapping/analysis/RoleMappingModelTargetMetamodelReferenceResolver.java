@@ -14,20 +14,27 @@
 
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
+import java.util.Set;
+
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
+
 public class RoleMappingModelTargetMetamodelReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.eclipse.emf.ecore.EPackage> {
 	
-	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.eclipse.emf.ecore.EPackage> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.eclipse.emf.ecore.EPackage>();
-	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.RoleMappingModel container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.eclipse.emf.ecore.EPackage> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+		Registry registry = EPackage.Registry.INSTANCE;
+		Set<String> uris = registry.keySet();
+		for (String uri : uris) {
+			if (uri.equals(identifier) || resolveFuzzy) {
+				result.addMapping(uri, (EPackage) registry.get(uri));
+			}
+		}
 	}
 	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EPackage element, org.emftext.language.refactoring.rolemapping.RoleMappingModel container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return element.getNsURI();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend on any option
 	}
-	
 }
