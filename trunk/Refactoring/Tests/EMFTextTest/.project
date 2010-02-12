@@ -80,6 +80,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.refactoring.rolemapping.resource.rolemapping.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.emftext.language.models.resource.model.nature</nature>
@@ -97,5 +102,6 @@
 		<nature>org.emftext.language.conference.resource.conference.nature</nature>
 		<nature>org.emftext.language.refactoring.roles.resource.roles.nature</nature>
 		<nature>org.emftext.language.refactoring.roles.resource.rolestext.nature</nature>
+		<nature>org.emftext.language.refactoring.rolemapping.resource.rolemapping.nature</nature>
 	</natures>
 </projectDescription>
