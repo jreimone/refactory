@@ -14,12 +14,33 @@
 
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleModel;
+
 public class ConcreteMappingRoleReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.emftext.language.refactoring.roles.Role> {
 	
 	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.emftext.language.refactoring.roles.Role> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.emftext.language.refactoring.roles.Role>();
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.Role> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+		EObject parent = container.eContainer();
+		if (parent instanceof Mapping) {
+			Mapping mapping = (Mapping) parent;
+			RoleModel roleModel = mapping.getMappedRoleModel();
+			if (roleModel != null && ! roleModel.eIsProxy()) {
+				List<Role> roles = roleModel.getRoles();
+				for (Role role : roles) {
+					if (role.getName().equals(identifier) || resolveFuzzy) {
+						result.addMapping(role.getName(), role);
+					}
+				}
+			}
+		} else {
+			assert false;
+		}
 	}
 	
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.Role element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {

@@ -161,7 +161,7 @@ public class RoleModelItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(RolesPackage.Literals.ROLE_MODEL__RELATIONS,
-				 RolesFactory.eINSTANCE.createRoleImplication()));
+				 RolesFactory.eINSTANCE.createRoleUse()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -181,7 +181,7 @@ public class RoleModelItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(RolesPackage.Literals.ROLE_MODEL__RELATIONS,
-				 RolesFactory.eINSTANCE.createRoleUse()));
+				 RolesFactory.eINSTANCE.createRoleImplication()));
 	}
 
 }

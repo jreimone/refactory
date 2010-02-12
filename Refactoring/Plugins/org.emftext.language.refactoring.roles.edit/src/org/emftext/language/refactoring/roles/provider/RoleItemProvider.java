@@ -63,9 +63,7 @@ public class RoleItemProvider
 
 			addOutgoingPropertyDescriptor(object);
 			addIncomingPropertyDescriptor(object);
-			addOptionalPropertyDescriptor(object);
-			addSelectOnRuntimePropertyDescriptor(object);
-			addInputPropertyDescriptor(object);
+			addModifierPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -115,67 +113,23 @@ public class RoleItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Optional feature.
+	 * This adds a property descriptor for the Modifier feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOptionalPropertyDescriptor(Object object) {
+	protected void addModifierPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Role_optional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Role_optional_feature", "_UI_Role_type"),
-				 RolesPackage.Literals.ROLE__OPTIONAL,
+				 getString("_UI_Role_modifier_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Role_modifier_feature", "_UI_Role_type"),
+				 RolesPackage.Literals.ROLE__MODIFIER,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Select On Runtime feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSelectOnRuntimePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Role_selectOnRuntime_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Role_selectOnRuntime_feature", "_UI_Role_type"),
-				 RolesPackage.Literals.ROLE__SELECT_ON_RUNTIME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Input feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInputPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Role_input_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Role_input_feature", "_UI_Role_type"),
-				 RolesPackage.Literals.ROLE__INPUT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -217,9 +171,7 @@ public class RoleItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Role.class)) {
-			case RolesPackage.ROLE__OPTIONAL:
-			case RolesPackage.ROLE__SELECT_ON_RUNTIME:
-			case RolesPackage.ROLE__INPUT:
+			case RolesPackage.ROLE__MODIFIER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
