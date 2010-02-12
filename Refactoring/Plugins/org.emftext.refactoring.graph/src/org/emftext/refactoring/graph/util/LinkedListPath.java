@@ -25,7 +25,6 @@ public class LinkedListPath extends LinkedList<EClass> implements IPath {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.graph.util.IPath#removeAbstractEClasses()
 	 */
-	@Override
 	public boolean removeAbstractEClasses() {
 		List<EClass> classes = new ArrayList<EClass>();
 		for (EClass eClass : this) {
