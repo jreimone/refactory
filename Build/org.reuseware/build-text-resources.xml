@@ -59,15 +59,16 @@
 	    <attribute name="model"/>
 	    <attribute name="generateEditProject"/>
 	    <attribute name="secondaryExtension" default="" />	
+	    <attribute name="secondaryGenmodelExtension" default="" />	
 	    <attribute name="dir" default="${language.plugins.dir}" />
 			
 		<sequential>
 			<delete dir="${language.plugins.dir}/@{plugin}/src-gen" includes="**/*.java" excludes=".svn"/>
 			<eclipse.refreshLocal depth="infinite" resource="@{plugin}"/>
-			<echo message="${language.plugins.dir}/@{plugin}/metamodel/@{model}.@{secondaryExtension}.ecore" />
+			<echo message="${language.plugins.dir}/@{plugin}/metamodel/@{model}@{secondaryExtension}.ecore" />
 			<emf.Ecore2Java 
-				model="@{dir}/@{plugin}/metamodel/@{model}.@{secondaryExtension}.ecore" 
-				genModel="@{dir}/@{plugin}/metamodel/@{model}.genmodel" 
+				model="@{dir}/@{plugin}/metamodel/@{model}@{secondaryExtension}.ecore" 
+				genModel="@{dir}/@{plugin}/metamodel/@{model}@{secondaryGenmodelExtension}.genmodel" 
 				generateeditproject="@{generateEditProject}" 
 				generateeditorproject="false"
 				modelProject="@{dir}/@{plugin}" 
@@ -137,7 +138,7 @@
 			<generate-metamodel-code plugin="org.emftext.language.martinfowlerdsl" model="martinfowlerdsl" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.models" model="models" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.office" model="office" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.owl" model="owl" secondaryExtension="text" generateEditProject="true" dir="${ontomopp.plugins.dir}" />
+			<generate-metamodel-code plugin="org.emftext.language.owl" model="owl" secondaryExtension=".text" generateEditProject="true" dir="${ontomopp.plugins.dir}" />
 			<generate-metamodel-code plugin="org.emftext.language.java" model="java" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.java.ejava" model="eJava" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.java_templates" model="java_templates" generateEditProject="false" />
@@ -150,11 +151,11 @@
 			<generate-metamodel-code plugin="org.emftext.language.pico" model="pico" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.primitive_types" model="primitive_types" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.pl0" model="pl0" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.plugin" model="plugin" secondaryExtension="text" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.plugin" model="plugin" secondaryExtension=".text" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.rails" model="rails" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.regexp" model="regular_expressions" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.sandwich" model="sandwich" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.secprop" model="secprop" generateEditProject="true" />
+			<generate-metamodel-code plugin="org.emftext.language.secprop" model="secprop" secondaryExtension=".text" secondaryGenmodelExtension=".text" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.simple_c" model="c" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.simple_gui" model="simple_gui" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.simple_math" model="simple_math" generateEditProject="false" />
@@ -166,7 +167,7 @@
 			<generate-metamodel-code plugin="org.emftext.language.textadventure" model="textadventure" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.threevaluedlogic" model="threevaluedlogic" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.usecaseinvariant" model="UseCaseInvariant" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.valueflow" model="valueflow" secondaryExtension="text"  generateEditProject="true"/>
+			<generate-metamodel-code plugin="org.emftext.language.valueflow" model="valueflow" secondaryExtension=".text"  generateEditProject="true"/>
 			<generate-metamodel-code plugin="org.emftext.language.xml" model="xml" generateEditProject="false" />
 			
 			<generate-metamodel-code plugin="org.emftext.test.bug933" model="bug933" generateEditProject="false" dir="${test.plugins.dir}"/>
