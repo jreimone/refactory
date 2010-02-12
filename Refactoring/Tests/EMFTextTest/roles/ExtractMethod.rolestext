@@ -11,7 +11,7 @@ RoleModel ExtractMethod {
 	NewContainer [1..1] <>- Extract moved [0..-1] (transitive);
 	
 	ContainerContainer [1..1] <>- NewContainer [1..1] (transitive);
-	ContainerContainer [1..1] <>- OrigContainer [1..1] (transitive reflexiv);
+	ContainerContainer [1..1] <>- OrigContainer [1..1] (transitive reflexive);
 	
 	MovedReference [1..1] -- NewContainer [1..1];
 } 
