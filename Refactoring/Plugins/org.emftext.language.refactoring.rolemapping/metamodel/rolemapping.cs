@@ -14,32 +14,17 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 }
 
-TOKENS{
-	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
-	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
-	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
-	DEFINE TARGETMM $'http://'($+ TEXT +$|'.'|'/'|'_')*$;
-	DEFINE MAPPEDRM $'platform:'($+ TEXT +$|'.'|'/'|'_')*$;
+TOKENSTYLES {
+	"ROLEMODELMAPPING" COLOR #7F0055, BOLD;
+	"FOR" COLOR #7F0055, BOLD;
+	"maps" COLOR #7F0055, BOLD;
 }
 
-TOKENSTYLES{
-	"RoleMappingModel" COLOR #7F0055, BOLD;
-	"targetMetamodel" COLOR #7F0055, BOLD;
-	"mappings" COLOR #7F0055, BOLD;
-	"Mapping" COLOR #7F0055, BOLD;
-	"name" COLOR #7F0055, BOLD;
-	"mappedRoleModel" COLOR #7F0055, BOLD;
-	"roleToMetaelement" COLOR #7F0055, BOLD;
-	"ConcreteMapping" COLOR #7F0055, BOLD;
-	"role" COLOR #7F0055, BOLD;
-	"metaclass" COLOR #7F0055, BOLD;
-}
-
-RULES{
+RULES {
 	
-	RoleMappingModel::= "ROLEMODELMAPPING" "FOR" "<"targetMetamodel[TARGETMM]">" mappings (mappings)*;
+	RoleMappingModel::= "ROLEMODELMAPPING" "FOR" targetMetamodel['<','>'] mappings+;
 	
-	Mapping::= name['"','"'] "maps" mappedRoleModel[MAPPEDRM] "{"  "}"  ;
+	Mapping::= name['"','"'] "maps" mappedRoleModel['<','>'] "{"  "}"  ;
 	
-	//ConcreteMapping::= "ConcreteMapping"  "{" ( "role"  ":" role[]| "metaclass"  ":" metaclass[] )* "}"  ;
+	ConcreteMapping ::= role['"','"'] "->" metaclass[];
 }
