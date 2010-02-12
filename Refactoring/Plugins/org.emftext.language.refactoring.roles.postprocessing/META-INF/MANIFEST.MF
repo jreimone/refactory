@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Role Model Postprocessing
+Bundle-SymbolicName: org.emftext.language.refactoring.roles.postprocessing;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.language.refactoring.roles.resource.rolestext;bundle-version="1.0.0",
+ org.eclipse.emf;bundle-version="2.5.0",
+ org.emftext.language.refactoring.roles;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
