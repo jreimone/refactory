@@ -72,7 +72,7 @@ public interface RoleMappingModel extends EObject {
    */
 	EList<Mapping> getMappings();
 
-	/**
+  /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
