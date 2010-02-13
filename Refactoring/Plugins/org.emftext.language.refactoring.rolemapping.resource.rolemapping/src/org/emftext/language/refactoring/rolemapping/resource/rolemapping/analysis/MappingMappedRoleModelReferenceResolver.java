@@ -40,6 +40,8 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 		for (EObject eObject : contents) {
 			if (eObject instanceof RoleModel) {
 				result.addMapping(identifier, (RoleModel) eObject); 
+			} else {
+				result.setErrorMessage(identifier + " is not a valid Role Model");
 			}
 		}
 	}

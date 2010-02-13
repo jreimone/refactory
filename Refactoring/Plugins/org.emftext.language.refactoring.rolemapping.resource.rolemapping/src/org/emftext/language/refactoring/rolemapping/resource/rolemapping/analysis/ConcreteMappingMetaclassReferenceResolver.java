@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 
 public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> {
@@ -31,7 +32,12 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 		if (parent instanceof RoleMappingModel) {
 			RoleMappingModel mappingModel = (RoleMappingModel) parent;
 			EPackage targetMetamodel = mappingModel.getTargetMetamodel();
+			if(targetMetamodel.eIsProxy()){
+				EcoreUtil.resolveAll(mappingModel);
+			}
 			if (targetMetamodel != null && !targetMetamodel.eIsProxy()) {
+//			if (targetMetamodel != null) {
+				
 				List<EClassifier> eClassifiers = targetMetamodel.getEClassifiers();
 				for (EClassifier eClassifier : eClassifiers) {
 					if (eClassifier.getName().equals(identifier) || resolveFuzzy) {
