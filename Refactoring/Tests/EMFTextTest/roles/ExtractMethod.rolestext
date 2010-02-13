@@ -1,9 +1,9 @@
 RoleModel ExtractMethod {
-	input runtime input runtime optional ROLE OrigContainer;
-	ROLE Extract;
+	ROLE OrigContainer;
+	input ROLE Extract;
 	ROLE NewContainer;
 	ROLE ContainerContainer;
-	ROLE MovedReference;
+	optional ROLE MovedReference;
 	
 	OrigContainer [1..1] <>- Extract extracts [0..-1] (transitive);
 	OrigContainer [1..1] <>- MovedReference [1..1] (transitive);
