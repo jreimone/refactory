@@ -30,11 +30,12 @@ TOKENS{
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 
 	DEFINE ROLE_MODIFIER $'optional'|'runtime'|'input'$;
+	DEFINE RELATION_MODIFIER $'transitive'|'reflexive'$;
 	//DEFINE OPTIONAL $'optional'$;
 	//DEFINE INPUT $'input'$;
 	//DEFINE RUNTIME $'runtime'$;
-	DEFINE TRANSITIVE $'transitive'$;
-	DEFINE REFLEXIVE $'reflexive'$;
+	//DEFINE TRANSITIVE $'transitive'$;
+	//DEFINE REFLEXIVE $'reflexive'$;
 
 	//DEFINE BOOLEAN_LITERAL $'true'|'false'$;
 	DEFINE IDENTIFIER $('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;	
@@ -46,14 +47,11 @@ TOKENSTYLES{
 	"->" COLOR #FFC400, BOLD;
 	"--" COLOR #00FF00, BOLD;
 	"<>-" COLOR #00FFFF, BOLD;
-	"BOOLEAN_LITERAL" COLOR #7F0055, BOLD;
+	//"BOOLEAN_LITERAL" COLOR #7F0055, BOLD;
 	"NUMBER" COLOR #0000FF, ITALIC;
 	".." COLOR #0000FF, ITALIC;
 	"ROLE_MODIFIER" COLOR #7F0055, BOLD;
-	"INPUT" COLOR #05D3E0, BOLD;
-	"RUNTIME" COLOR #05D3E0, BOLD;
-	"TRANSITIVE" COLOR #05D3E0, BOLD;
-	"REFLEXIVE" COLOR #05D3E0, BOLD;
+	"RELATION_MODIFIER" COLOR #7F0055, BOLD;
 }
 
 RULES {
@@ -61,13 +59,13 @@ RULES {
 	
 	Role ::= ( modifier[ROLE_MODIFIER]* )? "ROLE" name[IDENTIFIER] ";";
 	
-	RoleProhibition ::= source[IDENTIFIER] "|-|" target[IDENTIFIER] ("(" (transitive[TRANSITIVE])? (reflexive[REFLEXIVE])? ")")? ";";
+	RoleProhibition ::= (modifier[RELATION_MODIFIER]* ":")? source[IDENTIFIER] "|-|" target[IDENTIFIER] ";";
 	
-	RoleImplication ::= source[IDENTIFIER] "->" target[IDENTIFIER] ("(" (transitive[TRANSITIVE])? (reflexive[REFLEXIVE])? ")")? ";";
+	RoleImplication ::= (modifier[RELATION_MODIFIER]* ":")? source[IDENTIFIER] "->" target[IDENTIFIER] ";";
 	
-	RoleAssociation ::= source[IDENTIFIER] sourceName[IDENTIFIER]? sourceMultiplicity "--" target[IDENTIFIER] targetName[IDENTIFIER]? targetMultiplicity ("(" (transitive[TRANSITIVE])? (reflexive[REFLEXIVE])? ")")? ";";
+	RoleAssociation ::= (modifier[RELATION_MODIFIER]* ":")? source[IDENTIFIER] sourceName[IDENTIFIER]? sourceMultiplicity "--" target[IDENTIFIER] targetName[IDENTIFIER]? targetMultiplicity  ";";
 	
-	RoleComposition ::= source[IDENTIFIER] sourceName[IDENTIFIER]? sourceMultiplicity "<>-" target[IDENTIFIER] targetName[IDENTIFIER]? targetMultiplicity ("(" (transitive[TRANSITIVE])? (reflexive[REFLEXIVE])? ")")? ";";
+	RoleComposition ::= (modifier[RELATION_MODIFIER]* ":")? source[IDENTIFIER] sourceName[IDENTIFIER]? sourceMultiplicity "<>-" target[IDENTIFIER] targetName[IDENTIFIER]? targetMultiplicity  ";";
 	
 	Multiplicity ::= "[" lowerBound[NUMBER] ".." upperBound[NUMBER] "]";
 }

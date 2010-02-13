@@ -14,14 +14,17 @@
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/runtime"/>
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/input"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="roles.ecore#//RelationModifier">
+      <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RelationModifier/transitive"/>
+      <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RelationModifier/reflexive"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="roles.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//NamedElement/name"/>
     </genClasses>
     <genClasses image="false" ecoreClass="roles.ecore#//Relation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Relation/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Relation/target"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Relation/transitive"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Relation/reflexive"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Relation/modifier"/>
     </genClasses>
     <genClasses ecoreClass="roles.ecore#//Role">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/outgoing"/>
