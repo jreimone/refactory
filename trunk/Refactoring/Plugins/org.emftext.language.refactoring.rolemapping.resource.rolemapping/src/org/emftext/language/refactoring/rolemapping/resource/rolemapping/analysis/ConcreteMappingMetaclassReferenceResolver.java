@@ -36,8 +36,6 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 				EcoreUtil.resolveAll(mappingModel);
 			}
 			if (targetMetamodel != null && !targetMetamodel.eIsProxy()) {
-//			if (targetMetamodel != null) {
-				
 				List<EClassifier> eClassifiers = targetMetamodel.getEClassifiers();
 				for (EClassifier eClassifier : eClassifiers) {
 					if (eClassifier.getName().equals(identifier) || resolveFuzzy) {

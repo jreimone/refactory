@@ -26,7 +26,7 @@ public class RoleMappingModelTargetMetamodelReferenceResolver implements org.emf
 		Set<String> uris = registry.keySet();
 		for (String uri : uris) {
 			if (uri.equals(identifier) || resolveFuzzy) {
-				result.addMapping(uri, (EPackage) registry.get(uri));
+				result.addMapping(uri, registry.getEPackage(uri));
 			}
 		}
 	}
