@@ -11,23 +11,29 @@
   <roles name="MovedReference" outgoing="//@relations.5" incoming="//@relations.1">
     <modifier>optional</modifier>
   </roles>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='OrigContainer']" target="//@roles[name='Extract']" transitive="true" targetName="extracts">
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='OrigContainer']" target="//@roles[name='Extract']" targetName="extracts">
+    <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity upperBound="-1"/>
   </relations>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='OrigContainer']" target="//@roles[name='MovedReference']" transitive="true">
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='OrigContainer']" target="//@roles[name='MovedReference']">
+    <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity lowerBound="1" upperBound="1"/>
   </relations>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='NewContainer']" target="//@roles[name='Extract']" transitive="true" targetName="moved">
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='NewContainer']" target="//@roles[name='Extract']" targetName="moved">
+    <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity upperBound="-1"/>
   </relations>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='ContainerContainer']" target="//@roles[name='NewContainer']" transitive="true">
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='ContainerContainer']" target="//@roles[name='NewContainer']">
+    <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity lowerBound="1" upperBound="1"/>
   </relations>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='ContainerContainer']" target="//@roles[name='OrigContainer']" transitive="true" reflexive="true">
+  <relations xsi:type="roles:RoleComposition" source="//@roles[name='ContainerContainer']" target="//@roles[name='OrigContainer']">
+    <modifier>transitive</modifier>
+    <modifier>reflexive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity lowerBound="1" upperBound="1"/>
   </relations>
