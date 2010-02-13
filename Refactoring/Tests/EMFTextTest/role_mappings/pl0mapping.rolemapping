@@ -6,4 +6,4 @@ ExtractMethod4Statements maps </EMFTextTest/roles/ExtractMethod.rolestext> {
 	NewContainer -> ProcedureDeclaration;
 	MovedReference -> CallStatement;
 	ContainerContainer -> Block;
-} 
+}
