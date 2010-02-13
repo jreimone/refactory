@@ -16,6 +16,7 @@ public class RolesOptionProvider implements IRolestextOptionProvider {
 		
 		List<IRolestextResourcePostProcessorProvider> postProcessors = new ArrayList<IRolestextResourcePostProcessorProvider>();
 		postProcessors.add(new RoleModifierAnalyser());
+		postProcessors.add(new RelationModifierAnalyser());
 		
 		options.put(IRolestextOptions.RESOURCE_POSTPROCESSOR_PROVIDER, postProcessors);
 		return options;
