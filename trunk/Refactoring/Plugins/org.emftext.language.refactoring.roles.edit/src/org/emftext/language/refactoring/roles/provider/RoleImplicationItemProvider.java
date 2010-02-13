@@ -20,6 +20,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.emftext.language.refactoring.roles.RelationModifier;
 import org.emftext.language.refactoring.roles.RoleImplication;
 
 /**
@@ -80,8 +81,7 @@ public class RoleImplicationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		RoleImplication roleImplication = (RoleImplication)object;
-		return getString("_UI_RoleImplication_type") + " " + roleImplication.isTransitive();
+		return getString("_UI_RoleImplication_type");
 	}
 
 	/**

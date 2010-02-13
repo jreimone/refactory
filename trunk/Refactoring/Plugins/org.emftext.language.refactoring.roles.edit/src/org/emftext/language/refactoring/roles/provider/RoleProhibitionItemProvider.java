@@ -20,6 +20,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.emftext.language.refactoring.roles.RelationModifier;
 import org.emftext.language.refactoring.roles.RoleProhibition;
 
 /**
@@ -80,8 +81,7 @@ public class RoleProhibitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		RoleProhibition roleProhibition = (RoleProhibition)object;
-		return getString("_UI_RoleProhibition_type") + " " + roleProhibition.isTransitive();
+		return getString("_UI_RoleProhibition_type");
 	}
 
 	/**
