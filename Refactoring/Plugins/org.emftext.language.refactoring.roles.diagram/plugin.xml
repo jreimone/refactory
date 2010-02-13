@@ -44,7 +44,7 @@
   	  <wizard
   	     name="%newWizardName"
   	     icon="icons/new/rolemodel.gif"
-  	     category="org.emftext.language.refactoring.remfactor"
+  	     category="org.eclipse.ui.Examples"
   	     class="org.emftext.language.refactoring.roles.diagram.part.RolesCreationWizard"
   	     id="org.emftext.language.refactoring.roles.diagram.part.RolesCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
