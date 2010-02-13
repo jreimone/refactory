@@ -18,13 +18,14 @@ TOKENSTYLES {
 	"ROLEMODELMAPPING" COLOR #7F0055, BOLD;
 	"FOR" COLOR #7F0055, BOLD;
 	"maps" COLOR #7F0055, BOLD;
+	"->" COLOR #FFC400, BOLD;
 }
 
 RULES {
 	
-	RoleMappingModel::= "ROLEMODELMAPPING" "FOR" targetMetamodel['<','>'] mappings+;
+	RoleMappingModel::= "ROLEMODELMAPPING" #1 name[] #1 "FOR" #1 targetMetamodel['<','>'] !0 !0 mappings+;
 	
-	Mapping::= name['"','"'] "maps" mappedRoleModel['<','>'] "{" roleToMetaelement+ "}"  ;
+	Mapping::= name[] #1 "maps" #1 mappedRoleModel['<','>'] #1 "{" !1 roleToMetaelement+ !0 "}"  ;
 	
-	ConcreteMapping ::= role['"','"'] "->" metaclass[];
+	ConcreteMapping ::= role[] "->" metaclass[] ";";
 }
