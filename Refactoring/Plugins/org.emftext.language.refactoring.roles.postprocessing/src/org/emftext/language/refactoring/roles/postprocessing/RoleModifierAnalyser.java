@@ -23,7 +23,7 @@ import org.emftext.language.refactoring.roles.resource.rolestext.util.RolestextE
  */
 public class RoleModifierAnalyser extends AbstractPostProcessor {
 
-	private static final String UNIQUE_ROLE_MODIFIER = "The modifier %1$s of Role %2$s mustn't be set repeatedly.";
+	private static final String UNIQUE_ROLE_MODIFIER = "The modifier \"%1$s\" of Role %2$s mustn't be set repeatedly.";
 	
 	private Set<RoleModifier> uniqueModifier;
 	
@@ -41,7 +41,7 @@ public class RoleModifierAnalyser extends AbstractPostProcessor {
 				if(!unique){
 					addProblem(resource
 							, ERoleModelProblemType.ROLE_MODIFIER_ALREADY_SET
-							, String.format(UNIQUE_ROLE_MODIFIER, modifier, role.getName())
+							, String.format(UNIQUE_ROLE_MODIFIER, roleModifier.getName(), role.getName())
 							, role);
 				}
 			}
