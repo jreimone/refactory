@@ -27,6 +27,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.emftext.language.refactoring.roles.Relation;
+import org.emftext.language.refactoring.roles.RelationModifier;
 import org.emftext.language.refactoring.roles.RolesPackage;
 
 /**
@@ -66,8 +67,7 @@ public class RelationItemProvider
 
 			addSourcePropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
-			addTransitivePropertyDescriptor(object);
-			addReflexivePropertyDescriptor(object);
+			addModifierPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -117,45 +117,23 @@ public class RelationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Transitive feature.
+	 * This adds a property descriptor for the Modifier feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTransitivePropertyDescriptor(Object object) {
+	protected void addModifierPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Relation_transitive_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Relation_transitive_feature", "_UI_Relation_type"),
-				 RolesPackage.Literals.RELATION__TRANSITIVE,
+				 getString("_UI_Relation_modifier_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Relation_modifier_feature", "_UI_Relation_type"),
+				 RolesPackage.Literals.RELATION__MODIFIER,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Reflexive feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addReflexivePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Relation_reflexive_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Relation_reflexive_feature", "_UI_Relation_type"),
-				 RolesPackage.Literals.RELATION__REFLEXIVE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -168,8 +146,7 @@ public class RelationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Relation relation = (Relation)object;
-		return getString("_UI_Relation_type") + " " + relation.isTransitive();
+		return getString("_UI_Relation_type");
 	}
 
 	/**
@@ -184,8 +161,7 @@ public class RelationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Relation.class)) {
-			case RolesPackage.RELATION__TRANSITIVE:
-			case RolesPackage.RELATION__REFLEXIVE:
+			case RolesPackage.RELATION__MODIFIER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
