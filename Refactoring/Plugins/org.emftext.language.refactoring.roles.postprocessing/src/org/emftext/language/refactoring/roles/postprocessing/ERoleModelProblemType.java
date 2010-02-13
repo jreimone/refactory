@@ -14,7 +14,8 @@ import org.emftext.language.refactoring.roles.resource.rolestext.util.RolestextS
  */
 public enum ERoleModelProblemType {
 	
-	ROLE_MODIFIER_ALREADY_SET(RolestextEProblemType.ERROR)
+	ROLE_MODIFIER_ALREADY_SET(RolestextEProblemType.ERROR),
+	RELATION_MODIFIER_ALREADY_SET(RolestextEProblemType.ERROR)
 	;
 	
 	
