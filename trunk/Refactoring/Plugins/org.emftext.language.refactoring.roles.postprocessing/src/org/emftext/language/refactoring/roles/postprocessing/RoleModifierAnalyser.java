@@ -24,8 +24,7 @@ import org.emftext.language.refactoring.roles.resource.rolestext.util.RolestextE
 public class RoleModifierAnalyser extends AbstractPostProcessor {
 
 	private static final String UNIQUE_ROLE_MODIFIER = "The modifier \"%1$s\" of Role %2$s mustn't be set repeatedly.";
-	
-	private Set<RoleModifier> uniqueModifier;
+	private static final String NO_INPUT_ROLE = "The Role Model contains no roles specified for input";
 	
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.roles.resource.rolestext.options.AbstractPostProcessor#analyse(org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResource, org.emftext.language.refactoring.roles.RoleModel)
@@ -33,10 +32,14 @@ public class RoleModifierAnalyser extends AbstractPostProcessor {
 	@Override
 	public void analyse(RolestextResource resource, RoleModel model) {
 		Collection<Role> roles = RolestextEObjectUtil.getObjectsByType(model.eAllContents(), RolesPackage.eINSTANCE.getRole());
+		boolean inputRoleSet = false;
 		for (Role role : roles) {
-			uniqueModifier = new HashSet<RoleModifier>();
+			Set<RoleModifier> uniqueModifier = new HashSet<RoleModifier>();
 			List<RoleModifier> modifier = role.getModifier();
 			for (RoleModifier roleModifier : modifier) {
+				if(roleModifier.equals(RoleModifier.INPUT)){
+					inputRoleSet = true;
+				}
 				boolean unique = uniqueModifier.add(roleModifier);
 				if(!unique){
 					addProblem(resource
@@ -45,6 +48,12 @@ public class RoleModifierAnalyser extends AbstractPostProcessor {
 							, role);
 				}
 			}
+		}
+		if(!inputRoleSet){
+			addProblem(resource
+					, ERoleModelProblemType.INPUT_ROLE_NOT_SET
+					, NO_INPUT_ROLE
+					, model);
 		}
 	}
 
