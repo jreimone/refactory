@@ -5,4 +5,6 @@ EClasses_Into_New_EPackage maps <platform:/resource/EMFTextTest/roles/ExtractMet
 	OrigContainer -> EPackage;
 	NewContainer -> EPackage;
 	ContainerContainer -> EPackage;
+	
+	(",extracts"): eClassifiers;
 }
