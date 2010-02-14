@@ -55,17 +55,17 @@ TOKENSTYLES{
 }
 
 RULES {
-	RoleModel ::= "RoleModel" name[IDENTIFIER] "{" roles* relations* "}";
+	RoleModel ::= "RoleModel" #1 name[IDENTIFIER] "{" !1 roles* !0 !0 relations* !0 "}";
 	
-	Role ::= ( modifier[ROLE_MODIFIER]* )? "ROLE" name[IDENTIFIER] ";";
+	Role ::= ( modifier[ROLE_MODIFIER]* )? #1 "ROLE" #1 name[IDENTIFIER] ";" !0;
 	
-	RoleProhibition ::= (modifier[RELATION_MODIFIER]* ":")? source[IDENTIFIER] "|-|" target[IDENTIFIER] ";";
+	RoleProhibition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 "|-|" #1 target[IDENTIFIER] ";" !0;
 	
-	RoleImplication ::= (modifier[RELATION_MODIFIER]* ":")? source[IDENTIFIER] "->" target[IDENTIFIER] ";";
+	RoleImplication ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 "->" #1 target[IDENTIFIER] ";" !0;
 	
-	RoleAssociation ::= (modifier[RELATION_MODIFIER]* ":")? source[IDENTIFIER] sourceName[IDENTIFIER]? sourceMultiplicity "--" target[IDENTIFIER] targetName[IDENTIFIER]? targetMultiplicity  ";";
+	RoleAssociation ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 sourceName[IDENTIFIER]? #1 sourceMultiplicity #1 "--" #1 target[IDENTIFIER] #1 targetName[IDENTIFIER]? #1 targetMultiplicity  ";" !0;
 	
-	RoleComposition ::= (modifier[RELATION_MODIFIER]* ":")? source[IDENTIFIER] sourceName[IDENTIFIER]? sourceMultiplicity "<>-" target[IDENTIFIER] targetName[IDENTIFIER]? targetMultiplicity  ";";
+	RoleComposition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 sourceName[IDENTIFIER]? #1 sourceMultiplicity #1 "<>-" #1 target[IDENTIFIER] #1 targetName[IDENTIFIER]? #1 targetMultiplicity  ";" !0;
 	
 	Multiplicity ::= "[" lowerBound[NUMBER] ".." upperBound[NUMBER] "]";
 }
