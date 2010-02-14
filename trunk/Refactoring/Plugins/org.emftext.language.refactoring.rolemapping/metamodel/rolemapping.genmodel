@@ -19,10 +19,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rolemapping.ecore#//Mapping/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//Mapping/mappedRoleModel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//Mapping/roleToMetaelement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//Mapping/relationMappings"/>
     </genClasses>
     <genClasses ecoreClass="rolemapping.ecore#//ConcreteMapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ConcreteMapping/role"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ConcreteMapping/metaclass"/>
+    </genClasses>
+    <genClasses ecoreClass="rolemapping.ecore#//RelationMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RelationMapping/relation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RelationMapping/references"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
