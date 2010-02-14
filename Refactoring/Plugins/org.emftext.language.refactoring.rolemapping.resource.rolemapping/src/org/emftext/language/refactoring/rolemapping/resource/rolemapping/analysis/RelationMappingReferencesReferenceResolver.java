@@ -54,7 +54,7 @@ public class RelationMappingReferencesReferenceResolver implements org.emftext.l
 	}
 
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EReference element, org.emftext.language.refactoring.rolemapping.RelationMapping container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return element.getName();
 	}
 
 	public void setOptions(java.util.Map<?,?> options) {
