@@ -44,7 +44,7 @@ public class RelationMappingRelationReferenceResolver implements org.emftext.lan
 				}
 			}
 		}
-		result.setErrorMessage("No outgoing relation with target name '" + targetName + "' could be found");
+		result.setErrorMessage("Role '" + mappedRole.getName() + "' has no outgoing relation with target name '" + targetName + "'");
 	}
 
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.MultiplicityRelation element, org.emftext.language.refactoring.rolemapping.RelationMapping container, org.eclipse.emf.ecore.EReference reference) {
