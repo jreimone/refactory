@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.members.MembersFactory;
+import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.pl0.PL0Factory;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.Program;
@@ -105,7 +106,7 @@ public class ExtractMethodTest extends TestCase{
 		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
 	}
 	
-	public void testFindShortestPathForJava(){
+	public void testFindShortestPathClassToClassMethodJava(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -121,6 +122,28 @@ public class ExtractMethodTest extends TestCase{
 		expectedPath.add((EClass) ClassifiersFactory.eINSTANCE.getEPackage().getEClassifier("Class"));
 		expectedPath.add((EClass) MembersFactory.eINSTANCE.getEPackage().getEClassifier("Member"));
 		expectedPath.add((EClass) MembersFactory.eINSTANCE.getEPackage().getEClassifier("ClassMethod"));
+		List<IPath> expectedPaths = new ArrayList<IPath>();
+		expectedPaths.add(expectedPath);
+		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
+	}
+	
+	public void testFindShortestPathClassMethodToMethodCallJava(){
+		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
+		assertNotNull("Factory mustn't be null", algoFactory);
+		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
+		algo.setOutput(true);
+		assertNotNull("Default algorithm mustn't be null", algo);
+//		JavaFactory javaFactory = JavaFactory.eINSTANCE;
+		EObject source = MembersFactory.eINSTANCE.createClassMethod();
+		assertNotNull("Source mustn't be null", algo);
+		EObject target = ReferencesFactory.eINSTANCE.createMethodCall();
+		assertNotNull("Target mustn't be null", algo);
+		List<IPath> paths = algo.calculatePaths( source, target);
+		assertNotNull("There must be a shortest path", paths);
+		IPath expectedPath = new LinkedListPath();
+		expectedPath.add((EClass) MembersFactory.eINSTANCE.getEPackage().getEClassifier("ClassMethod"));
+//		expectedPath.add((EClass) MembersFactory.eINSTANCE.getEPackage().getEClassifier("Member"));
+		expectedPath.add((EClass) ReferencesFactory.eINSTANCE.getEPackage().getEClassifier("MethodCall"));
 		List<IPath> expectedPaths = new ArrayList<IPath>();
 		expectedPaths.add(expectedPath);
 		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
@@ -197,7 +220,7 @@ public class ExtractMethodTest extends TestCase{
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
-		algo.setOutput(true);
+//		algo.setOutput(true);
 		assertNotNull("Default algorithm mustn't be null", algo);
 		PL0Factory pl0Factory = PL0Factory.eINSTANCE;
 		EObject source = pl0Factory.createOptionalTerm();
