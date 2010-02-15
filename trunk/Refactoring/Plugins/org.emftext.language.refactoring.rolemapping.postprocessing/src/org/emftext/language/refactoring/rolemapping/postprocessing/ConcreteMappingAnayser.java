@@ -17,6 +17,12 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 
+/**
+ * This postprocessor checks if all obligatory roles of a role model were mapped.
+ * 
+ * @author Jan Reimann
+ *
+ */
 public class ConcreteMappingAnayser extends AbstractPostProcessor {
 
 	private static final String MAPPED_ROLE_MISSED = "The obligatory role '%1$s' wasn't mapped. It will be asked for at runtime.";
