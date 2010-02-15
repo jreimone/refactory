@@ -1,11 +1,12 @@
 ROLEMODELMAPPING PL0Mapping FOR <http://www.emftext.org/language/pl0> 
 
-ExtractMethod4Statements maps </EMFTextTest/roles/ExtractMethod.rolestext#/> { 
-	OrigContainer -> Block ; 
+ExtractMethod4Statements maps <platform:/resource/EMFTextTest/roles/ExtractMethod.rolestext> { 
+	OrigContainer -> Block {
+		"extracts" : body -> statements;	
+	}; 
 	Extract -> Statement ; 
 	NewContainer -> ProcedureDeclaration ; 
 	MovedReference -> CallStatement ; 
 	ContainerContainer -> Block ;
-	
-	(",extracts") : body -> statements;
+
 }
