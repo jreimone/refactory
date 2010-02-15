@@ -16,13 +16,13 @@
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleToMetaelement" lowerBound="1"
         upperBound="-1" eType="#//ConcreteMapping" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relationMappings" upperBound="-1"
-        eType="#//RelationMapping" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConcreteMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaclass" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingRelationMappings"
+        upperBound="-1" eType="#//RelationMapping" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"

@@ -6,9 +6,10 @@
  */
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -19,7 +20,7 @@ public class RelationMappingReferencesReferenceResolver implements org.emftext.l
 	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RelationMapping, org.eclipse.emf.ecore.EReference> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RelationMapping, org.eclipse.emf.ecore.EReference>();
 
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.RelationMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
-		EObject parent = container.eContainer().eContainer();
+		EObject parent = container.eContainer().eContainer().eContainer();
 		if(!(parent instanceof RoleMappingModel)){
 			result.setErrorMessage("Invalid RoleMapping Model");
 			return;
@@ -35,14 +36,14 @@ public class RelationMappingReferencesReferenceResolver implements org.emftext.l
 					return;
 				}
 			}
-			result.setErrorMessage("No reference with name '" + identifier + "' exists");
+			result.setErrorMessage("No EReference with name '" + identifier + "' exists");
 		} else {
 			result.setErrorMessage("Could not resolve Role Mapping Model '" + mappingModel.getName() + "'");
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private static <T extends EObject> EList<T> getObjectsByType(TreeIterator<EObject> it, Class<T> type){
+	private static <T extends EObject> EList<T> getObjectsByType(Iterator<EObject> it, Class<T> type){
 		EList<T> list = new BasicEList<T>();
 		while (it.hasNext()) {
 			EObject eObject = it.next();

@@ -13,6 +13,8 @@ import org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolema
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingResourcePostProcessorProvider;
 
 /**
+ * OptionProvider for adding new postprocessors.
+ * 
  * @author Jan Reimann
  *
  */
