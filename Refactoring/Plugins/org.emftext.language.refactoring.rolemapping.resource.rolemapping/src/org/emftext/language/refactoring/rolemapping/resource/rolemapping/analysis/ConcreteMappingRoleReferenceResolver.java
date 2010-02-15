@@ -44,7 +44,7 @@ public class ConcreteMappingRoleReferenceResolver implements org.emftext.languag
 	}
 	
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.Role element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return element.getName();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
