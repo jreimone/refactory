@@ -16,7 +16,9 @@ public enum ERoleModelProblemType {
 	
 	ROLE_MODIFIER_ALREADY_SET(RolestextEProblemType.ERROR),
 	RELATION_MODIFIER_ALREADY_SET(RolestextEProblemType.ERROR),
-	INPUT_ROLE_NOT_SET(RolestextEProblemType.ERROR)
+	INPUT_ROLE_NOT_SET(RolestextEProblemType.ERROR),
+	DUPLICATE_OUTGOING_RELATION_TARGET_NAMES(RolestextEProblemType.ERROR),
+	EMPTY_OUTGOING_RELATION_TARGET_NAME(RolestextEProblemType.WARNING)
 	;
 	
 	
