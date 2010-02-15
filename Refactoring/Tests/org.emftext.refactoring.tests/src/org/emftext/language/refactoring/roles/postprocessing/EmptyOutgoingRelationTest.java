@@ -22,6 +22,8 @@ import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextR
 import org.junit.Before;
 
 /**
+ * Run as Plugin-Test
+ * 
  * @author Jan Reimann
  *
  */
