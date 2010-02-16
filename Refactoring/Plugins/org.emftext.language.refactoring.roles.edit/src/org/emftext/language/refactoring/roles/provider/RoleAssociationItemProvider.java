@@ -82,7 +82,10 @@ public class RoleAssociationItemProvider
 	public String getText(Object object) {
 		Role source = ((RoleAssociation) object).getSource();
 		Role target = ((RoleAssociation) object).getTarget();
-		String label = " " + source.getName() + " -- " + target.getName();
+		String label = null;
+		if(source != null && target != null){
+			label = " " + source.getName() + " |-| " + target.getName();
+		}
 		return label == null || label.length() == 0 ?
 			getString("_UI_RoleAssociation_type") :
 			getString("_UI_RoleAssociation_type") + " " + label;

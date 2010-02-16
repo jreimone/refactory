@@ -81,7 +81,10 @@ public class RoleImplicationItemProvider
 	public String getText(Object object) {
 		Role source = ((RoleImplication) object).getSource();
 		Role target = ((RoleImplication) object).getTarget();
-		String label = " " + source.getName() + " -> " + target.getName();
+		String label = null;
+		if(source != null && target != null){
+			label = " " + source.getName() + " |-| " + target.getName();
+		}
 		return label == null || label.length() == 0 ?
 				getString("_UI_RoleImplication_type") :
 				getString("_UI_RoleImplication_type") + " " + label;
