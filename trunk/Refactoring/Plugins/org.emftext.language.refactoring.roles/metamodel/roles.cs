@@ -39,10 +39,12 @@ TOKENS{
 
 	//DEFINE BOOLEAN_LITERAL $'true'|'false'$;
 	DEFINE IDENTIFIER $('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;	
-	DEFINE NUMBER $('0')|('-1')|(('1'..'9')('0'..'9')*)$;
+	DEFINE NUMBER $('0')|('-1')|('*')|(('1'..'9')('0'..'9')*)$;
 }
 
 TOKENSTYLES{
+	"ML_COMMENT" COLOR #008000, ITALIC;
+	"SL_COMMENT" COLOR #000080, ITALIC;
 	"|-|" COLOR #FF0000, BOLD;
 	"->" COLOR #FFC400, BOLD;
 	"--" COLOR #00FF00, BOLD;
