@@ -18,6 +18,8 @@ import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Relation;
 import org.emftext.language.refactoring.roles.RelationModifier;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleImplication;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleProhibition;
 import org.emftext.refactoring.roleconstraintchecker.Activator;
 import org.emftext.refactoring.roleconstraintchecker.IRoleConstraintValidator;
@@ -31,6 +33,8 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 	private static final String ROLE_PROHIBITION = "Metaclass %1$s plays roles %2$s and %3$s but they have to be XOR'ed";
 	private static final String ROLE_PROHIBITION_TRANSITIVE = "Metaclass %1$s plays role %2$s and metaclass %3$s plays role %4$s. " +
 																"But both roles mustn't be contained in the same inheritance tree.";
+	private static final String ROLE_IMPLICATION = "Metaclass %1$s has to play both role %2$s and %3$s.";
+	private static final String ROLE_IMPLICATION_TRANSITIVE = "Metaclass %1$s plays role %2$s. Role %3$s must be played from a superclass of %1$s.";
 	
 	private RoleMappingModel mappingModel;
 	
@@ -82,17 +86,26 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 			result.add(status);
 			return result;
 		}
+		RoleModel roleModel = mapping.getMappedRoleModel();
+		EcoreUtil.resolveAll(roleModel);
 		EcoreUtil.resolveAll(mapping);
+		EcoreUtil.resolve(roleModel, mappingModel);
 		List<IStatus> stati = new ArrayList<IStatus>();
 		EList<ConcreteMapping> mappings = mapping.getRoleToMetaelement();
 		for (ConcreteMapping concreteMapping : mappings) {
 			Role role = concreteMapping.getRole();
 			EList<Relation> outgoings = role.getOutgoing();
 			for (Relation relation : outgoings) {
+				IStatus status = null;
 				if(relation instanceof RoleProhibition){
-					IStatus status = validateProhibition((RoleProhibition) relation, concreteMapping.getMetaclass(), mappings);
-					stati.add(status);
+					status = validateProhibition((RoleProhibition) relation, concreteMapping.getMetaclass(), mappings);
+					
 				}
+				if(relation instanceof RoleImplication){
+					status = validateImplication((RoleImplication) relation, concreteMapping.getMetaclass(), mappings);
+					
+				}
+				stati.add(status);
 			}
 		}
 		return stati;
@@ -115,6 +128,28 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 				status = new Status(IStatus.ERROR
 						, Activator.PLUGIN_ID
 						, String.format(ROLE_PROHIBITION_TRANSITIVE, mappedEClass.getName(), sourceRole.getName(), targetEClass.getName(), targetRole.getName()));
+			}
+		}
+		return status;
+	}
+	
+	private IStatus validateImplication(RoleImplication implication, EClass mappedEClass, EList<ConcreteMapping> mappings){
+		IStatus status = null;
+		Role sourceRole = implication.getSource();
+		Role targetRole = implication.getTarget();
+		EClass targetEClass = getMappedEClassByRole(mappings, targetRole);
+		if(!implication.getModifier().contains(RelationModifier.TRANSITIVE)){
+			if(!mappedEClass.equals(targetEClass)){
+				status = new Status(IStatus.ERROR
+						, Activator.PLUGIN_ID
+						, String.format(ROLE_IMPLICATION, mappedEClass.getName(), sourceRole.getName(), targetRole.getName()));
+			}
+		} else {
+			EList<EClass> superTypes = mappedEClass.getEAllSuperTypes();
+			if(!superTypes.contains(targetEClass)){
+				status = new Status(IStatus.ERROR
+						, Activator.PLUGIN_ID
+						, String.format(ROLE_IMPLICATION_TRANSITIVE, mappedEClass.getName(), sourceRole.getName(), targetRole.getName()));
 			}
 		}
 		return status;
