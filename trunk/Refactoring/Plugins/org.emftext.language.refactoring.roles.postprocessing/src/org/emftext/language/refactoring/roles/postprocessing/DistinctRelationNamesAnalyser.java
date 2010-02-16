@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Relation;
 import org.emftext.language.refactoring.roles.Role;
@@ -32,6 +33,7 @@ public class DistinctRelationNamesAnalyser extends AbstractPostProcessor {
 	 */
 	@Override
 	public void analyse(RolestextResource resource, RoleModel model) {
+		EcoreUtil.resolveAll(model);
 		EList<Role> roles = model.getRoles();
 		for (Role role : roles) {
 			EList<Relation> outgoingRelations = role.getOutgoing();
