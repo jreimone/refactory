@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Role Constraint Checker
+Bundle-SymbolicName: org.emftext.refactoring.roleconstraintchecker;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Vendor: Jan Reimann
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.emftext.refactoring.roleconstraintchecker
+Require-Bundle: org.eclipse.emf.ecore,
+ org.emftext.language.refactoring.rolemapping,
+ org.eclipse.core.runtime
+Bundle-Activator: org.emftext.refactoring.roleconstraintchecker.Activator
