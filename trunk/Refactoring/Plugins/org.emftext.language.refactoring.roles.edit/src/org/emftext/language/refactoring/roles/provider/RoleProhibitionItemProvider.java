@@ -1,5 +1,5 @@
 /**
- * <copyright>
+i * <copyright>
  * </copyright>
  *
  * $Id$
@@ -28,13 +28,13 @@ import org.emftext.language.refactoring.roles.RoleProhibition;
  * @generated
  */
 public class RoleProhibitionItemProvider
-	extends RelationItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+extends RelationItemProvider
+implements
+IEditingDomainItemProvider,
+IStructuredItemContentProvider,
+ITreeItemContentProvider,
+IItemLabelProvider,
+IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -81,10 +81,13 @@ public class RoleProhibitionItemProvider
 	public String getText(Object object) {
 		Role source = ((RoleProhibition) object).getSource();
 		Role target = ((RoleProhibition) object).getTarget();
-		String label = " " + source.getName() + " |-| " + target.getName();
+		String label = null;
+		if(source != null && target != null){
+			label = " " + source.getName() + " |-| " + target.getName();
+		}
 		return label == null || label.length() == 0 ?
-			getString("_UI_RoleProhibition_type") :
-			getString("_UI_RoleProhibition_type") + " " + label;
+				getString("_UI_RoleProhibition_type") :
+					getString("_UI_RoleProhibition_type") + " " + label;
 	}
 
 	/**

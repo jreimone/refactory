@@ -82,7 +82,10 @@ IItemPropertySource {
 	public String getText(Object object) {
 		Role source = ((RoleComposition) object).getSource();
 		Role target = ((RoleComposition) object).getTarget();
-		String label = " " + source.getName() + " <>- " + target.getName();
+		String label = null;
+		if(source != null && target != null){
+			label = " " + source.getName() + " |-| " + target.getName();
+		}
 		return label == null || label.length() == 0 ?
 				getString("_UI_RoleComposition_type") :
 					getString("_UI_RoleComposition_type") + " " + label;
