@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.roleconstraintchecker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
@@ -13,6 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.AbstractRefactoringTest;
 import org.emftext.refactoring.util.ModelUtil;
 import org.junit.Before;
@@ -26,12 +28,22 @@ import org.junit.Before;
 public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 
 	private String path = "resources/relationTestMapping.rolemapping";
+	private String path1 = "resources/TestAssociation.rolestext";
+	private String path2 = "resources/TestComposition.rolestext";
+	private String path3 = "resources/TestImplication.rolestext";
+	private String path4 = "resources/TestProhibition.rolestext";
 	private RoleMappingModel mappingModel;
+	private List<RoleModel> roleModels;
 	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		mappingModel = getExpectedModelFromFile(path, RoleMappingModel.class);
+		roleModels = new ArrayList<RoleModel>();
+		roleModels.add(getExpectedModelFromFile(path1, RoleModel.class));
+		roleModels.add(getExpectedModelFromFile(path2, RoleModel.class));
+		roleModels.add(getExpectedModelFromFile(path3, RoleModel.class));
+		roleModels.add(getExpectedModelFromFile(path4, RoleModel.class));
 	}
 	
 	public void testProhibitionConstraints(){
