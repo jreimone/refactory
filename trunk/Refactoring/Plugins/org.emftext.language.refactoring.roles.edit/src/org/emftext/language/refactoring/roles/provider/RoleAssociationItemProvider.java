@@ -12,14 +12,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAssociation;
 import org.emftext.language.refactoring.roles.RolesPackage;
 
@@ -66,22 +65,24 @@ public class RoleAssociationItemProvider
 	 * This returns RoleAssociation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RoleAssociation"));
+		return overlayImage(object, getResourceLocator().getImage("new/association"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RoleAssociation)object).getSourceName();
+		Role source = ((RoleAssociation) object).getSource();
+		Role target = ((RoleAssociation) object).getTarget();
+		String label = " " + source.getName() + " -- " + target.getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_RoleAssociation_type") :
 			getString("_UI_RoleAssociation_type") + " " + label;
