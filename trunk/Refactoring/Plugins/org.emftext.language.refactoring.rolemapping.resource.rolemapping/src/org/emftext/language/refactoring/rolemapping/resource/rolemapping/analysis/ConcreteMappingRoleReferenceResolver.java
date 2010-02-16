@@ -17,6 +17,7 @@ package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analys
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -35,6 +36,7 @@ public class ConcreteMappingRoleReferenceResolver implements org.emftext.languag
 				for (Role role : roles) {
 					if (role.getName().equals(identifier) || resolveFuzzy) {
 						result.addMapping(role.getName(), role);
+						return;
 					}
 				}
 			}
