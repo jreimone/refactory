@@ -12,15 +12,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import org.emftext.language.refactoring.roles.RelationModifier;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleProhibition;
 
 /**
@@ -66,22 +64,27 @@ public class RoleProhibitionItemProvider
 	 * This returns RoleProhibition.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RoleProhibition"));
+		return overlayImage(object, getResourceLocator().getImage("new/prohibition"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_RoleProhibition_type");
+		Role source = ((RoleProhibition) object).getSource();
+		Role target = ((RoleProhibition) object).getTarget();
+		String label = " " + source.getName() + " |-| " + target.getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_RoleProhibition_type") :
+			getString("_UI_RoleProhibition_type") + " " + label;
 	}
 
 	/**

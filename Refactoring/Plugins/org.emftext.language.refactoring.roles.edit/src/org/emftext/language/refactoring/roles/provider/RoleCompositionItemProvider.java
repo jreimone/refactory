@@ -12,14 +12,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RolesPackage;
 
@@ -30,13 +29,13 @@ import org.emftext.language.refactoring.roles.RolesPackage;
  * @generated
  */
 public class RoleCompositionItemProvider
-	extends MultiplicityRelationItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+extends MultiplicityRelationItemProvider
+implements
+IEditingDomainItemProvider,
+IStructuredItemContentProvider,
+ITreeItemContentProvider,
+IItemLabelProvider,
+IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -66,25 +65,27 @@ public class RoleCompositionItemProvider
 	 * This returns RoleComposition.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RoleComposition"));
+		return overlayImage(object, getResourceLocator().getImage("new/composition"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RoleComposition)object).getSourceName();
+		Role source = ((RoleComposition) object).getSource();
+		Role target = ((RoleComposition) object).getTarget();
+		String label = " " + source.getName() + " <>- " + target.getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_RoleComposition_type") :
-			getString("_UI_RoleComposition_type") + " " + label;
+				getString("_UI_RoleComposition_type") :
+					getString("_UI_RoleComposition_type") + " " + label;
 	}
 
 	/**
@@ -129,8 +130,8 @@ public class RoleCompositionItemProvider
 
 		if (qualify) {
 			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			("_UI_CreateChild_text2",
+					new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

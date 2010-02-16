@@ -12,15 +12,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import org.emftext.language.refactoring.roles.RelationModifier;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleImplication;
 
 /**
@@ -66,22 +64,27 @@ public class RoleImplicationItemProvider
 	 * This returns RoleImplication.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RoleImplication"));
+		return overlayImage(object, getResourceLocator().getImage("new/implication"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_RoleImplication_type");
+		Role source = ((RoleImplication) object).getSource();
+		Role target = ((RoleImplication) object).getTarget();
+		String label = " " + source.getName() + " -> " + target.getName();
+		return label == null || label.length() == 0 ?
+				getString("_UI_RoleImplication_type") :
+				getString("_UI_RoleImplication_type") + " " + label;
 	}
 
 	/**
