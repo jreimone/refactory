@@ -9,6 +9,10 @@ Require-Bundle: org.junit4,
  org.emftext.language.pl0,
  org.emftext.language.pl0.resource.pl0,
  org.emftext.language.java,
- org.emftext.language.refactoring.roles,
- org.emftext.language.refactoring.roles.resource.rolestext
+ org.emftext.language.refactoring.roles.resource.rolestext,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping,
+ org.emftext.refactoring.util,
+ org.emftext.refactoring.roleconstraintchecker;bundle-version="0.0.1",
+ org.eclipse.core.runtime;bundle-version="3.5.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
