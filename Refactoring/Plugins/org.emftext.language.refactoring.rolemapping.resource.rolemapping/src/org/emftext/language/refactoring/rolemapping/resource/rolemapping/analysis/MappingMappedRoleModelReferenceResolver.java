@@ -14,8 +14,6 @@
 
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
-import java.io.IOException;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
