@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.pl0.PL0Package;
+import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
 import org.emftext.language.refactoring.roles.RolesFactory;
@@ -39,6 +41,8 @@ public abstract class AbstractRefactoringTest extends TestCase {
 		resourceSet.getPackageRegistry().put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("rolemapping", new RolemappingResourceFactory());
 		resourceSet.getPackageRegistry().put(RolemappingPackage.eNS_URI, RolemappingPackage.eINSTANCE);
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());
+		resourceSet.getPackageRegistry().put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
 	}
 	
 	

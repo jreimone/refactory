@@ -10,7 +10,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -27,11 +26,12 @@ import org.junit.Before;
  */
 public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 
+//	private String path = "test/testMapping.rolemapping";
 	private String path = "resources/relationTestMapping.rolemapping";
-	private String path1 = "resources/TestAssociation.rolestext";
-	private String path2 = "resources/TestComposition.rolestext";
-	private String path3 = "resources/TestImplication.rolestext";
-	private String path4 = "resources/TestProhibition.rolestext";
+//	private String path1 = "resources/TestAssociation.rolestext";
+//	private String path2 = "resources/TestComposition.rolestext";
+//	private String path3 = "resources/TestImplication.rolestext";
+//	private String path4 = "resources/TestProhibition.rolestext";
 	private RoleMappingModel mappingModel;
 	private List<RoleModel> roleModels;
 	
@@ -40,14 +40,14 @@ public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 		super.setUp();
 		mappingModel = getExpectedModelFromFile(path, RoleMappingModel.class);
 		roleModels = new ArrayList<RoleModel>();
-		roleModels.add(getExpectedModelFromFile(path1, RoleModel.class));
-		roleModels.add(getExpectedModelFromFile(path2, RoleModel.class));
-		roleModels.add(getExpectedModelFromFile(path3, RoleModel.class));
-		roleModels.add(getExpectedModelFromFile(path4, RoleModel.class));
+//		roleModels.add(getExpectedModelFromFile(path1, RoleModel.class));
+//		roleModels.add(getExpectedModelFromFile(path2, RoleModel.class));
+//		roleModels.add(getExpectedModelFromFile(path3, RoleModel.class));
+//		roleModels.add(getExpectedModelFromFile(path4, RoleModel.class));
 	}
 	
 	public void testProhibitionConstraints(){
-		EcoreUtil.resolveAll(mappingModel);
+//		EcoreUtil.resolveAll(mappingModel);
 		EPackage metamodel = mappingModel.getTargetMetamodel();
 		assertNotNull("Metamodel mustn't be null", metamodel);
 		EList<Mapping> mappings = mappingModel.getMappings();
