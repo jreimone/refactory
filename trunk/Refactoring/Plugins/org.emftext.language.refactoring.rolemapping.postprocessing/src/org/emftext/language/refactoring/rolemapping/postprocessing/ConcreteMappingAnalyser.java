@@ -23,7 +23,7 @@ import org.emftext.language.refactoring.roles.RoleModifier;
  * @author Jan Reimann
  *
  */
-public class ConcreteMappingAnayser extends AbstractPostProcessor {
+public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 
 	private static final String MAPPED_ROLE_MISSED = "The obligatory role '%1$s' wasn't mapped. It will be asked for at runtime.";
 	private static final String MAPPED_ROLE_UNIQUE = "The role '%1$s' was mapped more than once.";

@@ -7,4 +7,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Jan Reimann
 Require-Bundle: org.eclipse.emf;bundle-version="2.5.0",
  org.emftext.language.refactoring.rolemapping;bundle-version="1.0.0",
- org.emftext.language.refactoring.rolemapping.resource.rolemapping;bundle-version="1.0.0"
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping;bundle-version="1.0.0",
+ org.emftext.refactoring.roleconstraintchecker;bundle-version="0.0.1",
+ org.eclipse.core.runtime;bundle-version="3.5.0"
