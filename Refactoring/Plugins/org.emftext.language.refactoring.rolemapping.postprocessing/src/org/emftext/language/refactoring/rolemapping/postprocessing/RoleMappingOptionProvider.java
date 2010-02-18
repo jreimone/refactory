@@ -27,10 +27,11 @@ public class RoleMappingOptionProvider implements IRolemappingOptionProvider {
 		Map<String, Object> options = new HashMap<String, Object>();
 		
 		List<IRolemappingResourcePostProcessorProvider> postProcessors = new ArrayList<IRolemappingResourcePostProcessorProvider>();
-		postProcessors.add(new ConcreteMappingAnayser());
+		postProcessors.add(new ConcreteMappingAnalyser());
 		postProcessors.add(new RelationMappingAnalyser());
+		postProcessors.add(new RoleConstraintAnalyser());
 		
-		postProcessors.add(new ProxyResolver());
+//		postProcessors.add(new ProxyResolver());
 		
 		options.put(IRolemappingOptions.RESOURCE_POSTPROCESSOR_PROVIDER, postProcessors);
 		return options;
