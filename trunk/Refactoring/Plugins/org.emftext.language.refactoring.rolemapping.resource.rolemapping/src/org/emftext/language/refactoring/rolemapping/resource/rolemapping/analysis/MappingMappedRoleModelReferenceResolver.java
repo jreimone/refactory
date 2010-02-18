@@ -29,11 +29,9 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.Mapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.RoleModel> result) {
 		URI uri = URI.createURI(identifier);
 		ResourceSet resourceSet = container.eResource().getResourceSet();
-		Resource resource = resourceSet.createResource(uri);
-		try {
-			resource.load(null);
-		} catch (IOException e) {
-			result.setErrorMessage("Can't load role model: " + e.getMessage());
+		Resource resource = resourceSet.getResource(uri, true);
+		if (resource == null) {
+			result.setErrorMessage("Can't load role model from " + identifier);
 			return;
 		}
 		EList<EObject> contents = resource.getContents();
