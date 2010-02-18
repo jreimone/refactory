@@ -1,0 +1,7 @@
+ROLEMODELMAPPING relationTestMapping FOR <http://www.eclipse.org/emf/2002/Ecore>
+
+TestProhibitionMapping maps <platform:/resource/EMFTextTest/test/TestProhibition.xmi> { 
+	InputRole -> EClass ;
+	OutputRole -> EClass;
+	TransitiveOutputRoleParent -> EClassifier;
+}

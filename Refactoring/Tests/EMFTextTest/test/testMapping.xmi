@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rolemapping:RoleMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rolemapping="http://www.emftext.org/language/rolemapping" name="relationTestMapping">
+  <targetMetamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+  <mappings name="TestProhibitionMapping">
+    <mappedRoleModel href="TestProhibition.xmi#/"/>
+    <roleToMetaelement>
+      <role href="TestProhibition.xmi#//@roles[name='InputRole']"/>
+      <metaclass href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    </roleToMetaelement>
+    <roleToMetaelement>
+      <role href="TestProhibition.xmi#//@roles[name='OutputRole']"/>
+      <metaclass href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    </roleToMetaelement>
+    <roleToMetaelement>
+      <role href="TestProhibition.xmi#//@roles[name='TransitiveOutputRoleParent']"/>
+      <metaclass href="http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
+    </roleToMetaelement>
+  </mappings>
+</rolemapping:RoleMappingModel>
