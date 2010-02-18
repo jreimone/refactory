@@ -35,6 +35,7 @@ of Technology, Germany
    <requires>     
       <import feature="org.emftext.language.java"/>
       <import feature="org.eclipse.uml2"/>
+      <import feature="org.eclipse.gef"/>
    </requires>
 
    <plugin
