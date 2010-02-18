@@ -1,0 +1,10 @@
+RoleModel TestProhibition { 
+	input optional ROLE InputRole;
+	optional ROLE OutputRole;
+	optional ROLE TransitiveOutputRoleParent;
+	
+	// EClass that plays role InputRole mustn't play role OutputRole
+	InputRole |-| OutputRole;
+	// EClass that plays role InputRole mustn't have superclass that plays role TransitiveOutputRoleParent
+	transitive : InputRole |-| TransitiveOutputRoleParent;
+} 
