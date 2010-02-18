@@ -9,6 +9,7 @@ import junit.textui.TestRunner;
 
 import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelationTest;
 import org.emftext.refactoring.roleconstraintchecker.RoleConstraintCheckerTest;
+import org.emftext.refactoring.roleconstraintchecker.RoleConstraintCheckerTestXMI;
 import org.emftext.refactoring.util.UtilTest;
 
 /**
@@ -31,6 +32,7 @@ public class AllTests extends TestSuite {
         suite.addTestSuite(EmptyOutgoingRelationTest.class);
         suite.addTestSuite(UtilTest.class);
         suite.addTestSuite(RoleConstraintCheckerTest.class);
+        suite.addTestSuite(RoleConstraintCheckerTestXMI.class);
         return suite;
 	}
 	

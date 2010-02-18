@@ -3,47 +3,65 @@
  */
 package org.emftext.refactoring.roleconstraintchecker;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.refactoring.test.AbstractRefactoringTest;
+import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.refactoring.util.ModelUtil;
 import org.junit.Before;
 
 /**
- * Tests the constraints between roles with the mapped classes
- * 
- * @author Jan Reimann
+ * Run as JUnit-Plugin-Test !!!
  *
  */
-public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
+public class RoleConstraintCheckerTestXMI extends TestCase {
 
-	private String path = "resources/relationTestMapping.rolemapping";
-	private String path1 = "resources/TestAssociation.rolestext";
-	private String path2 = "resources/TestComposition.rolestext";
-	private String path3 = "resources/TestImplication.rolestext";
-	private String path4 = "resources/TestProhibition.rolestext";
+	private String path = "test/testMapping.xmi";
+	private String path1 = "test/TestProhibition.xmi";
 	private RoleMappingModel mappingModel;
 	private List<RoleModel> roleModels;
+	
+	private ResourceSet resourceSet;
+	
+	@SuppressWarnings("unchecked")
+	public <T extends EObject> T getExpectedModelFromFile(String filePath, Class<T> expectedType){
+		File file = new File(filePath);
+		assertTrue("File must exist", file.exists());
+		Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
+		assertNotNull("Resource mustn't be null", resource);
+		EObject root = resource.getContents().get(0);
+		assertTrue("root object must be of type '" + expectedType.getSimpleName() + "'", expectedType.isInstance(root));
+		return (T) root;
+	}
 	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
+		resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
+		resourceSet.getPackageRegistry().put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
+		resourceSet.getPackageRegistry().put(RolemappingPackage.eNS_URI, RolemappingPackage.eINSTANCE);
 		mappingModel = getExpectedModelFromFile(path, RoleMappingModel.class);
 		roleModels = new ArrayList<RoleModel>();
 		roleModels.add(getExpectedModelFromFile(path1, RoleModel.class));
-		roleModels.add(getExpectedModelFromFile(path2, RoleModel.class));
-		roleModels.add(getExpectedModelFromFile(path3, RoleModel.class));
-		roleModels.add(getExpectedModelFromFile(path4, RoleModel.class));
 	}
 	
 	public void testProhibitionConstraints(){
@@ -55,7 +73,6 @@ public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 		EList<EObject> prohibitionMappings = ModelUtil.filterObjectsByAttribute(mappings.iterator(), "name", "TestProhibitionMapping");
 		assertEquals("There must be a prohibition mapping", 1, prohibitionMappings.size());
 		Mapping prohibitionMapping = (Mapping) prohibitionMappings.get(0);
-//		prohibitionMapping.getMappedRoleModel()
 		EList<ConcreteMapping> concreteMappings = prohibitionMapping.getRoleToMetaelement();
 		assertTrue("There must be concrete mappings", concreteMappings.size() > 0);
 		IRoleConstraintValidator validator = RoleConstraintValidatorFactory.eInstance.getValidator(mappingModel);
