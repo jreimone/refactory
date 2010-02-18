@@ -33,7 +33,7 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 			RoleMappingModel mappingModel = (RoleMappingModel) parent;
 			EPackage targetMetamodel = mappingModel.getTargetMetamodel();
 			if(targetMetamodel.eIsProxy()){
-				EcoreUtil.resolveAll(mappingModel);
+				//EcoreUtil.resolveAll(mappingModel);
 			}
 			if (targetMetamodel != null && !targetMetamodel.eIsProxy()) {
 				List<EClassifier> eClassifiers = targetMetamodel.getEClassifiers();
