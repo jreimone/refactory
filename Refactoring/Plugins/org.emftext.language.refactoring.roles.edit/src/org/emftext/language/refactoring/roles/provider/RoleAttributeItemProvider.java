@@ -12,37 +12,41 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.emftext.language.refactoring.roles.Role;
-import org.emftext.language.refactoring.roles.RoleComposition;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RolesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.refactoring.roles.RoleComposition} object.
+ * This is the item provider adapter for a {@link org.emftext.language.refactoring.roles.RoleAttribute} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RoleCompositionItemProvider
-extends MultiplicityRelationItemProvider
-implements
-IEditingDomainItemProvider,
-IStructuredItemContentProvider,
-ITreeItemContentProvider,
-IItemLabelProvider,
-IItemPropertySource {
+public class RoleAttributeItemProvider
+	extends NamedElementItemProvider
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
+		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleCompositionItemProvider(AdapterFactory adapterFactory) {
+	public RoleAttributeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -57,37 +61,56 @@ IItemPropertySource {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addModifierPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This returns RoleComposition.gif.
+	 * This adds a property descriptor for the Modifier feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
+	 */
+	protected void addModifierPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RoleAttribute_modifier_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RoleAttribute_modifier_feature", "_UI_RoleAttribute_type"),
+				 RolesPackage.Literals.ROLE_ATTRIBUTE__MODIFIER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns RoleAttribute.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("new/composition"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RoleAttribute"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		Role source = ((RoleComposition) object).getSource();
-		Role target = ((RoleComposition) object).getTarget();
-		String label = null;
-		if(source != null && target != null){
-			label = " " + source.getName() + " <>- " + target.getName();
-		}
+		String label = ((RoleAttribute)object).getName();
 		return label == null || label.length() == 0 ?
-				getString("_UI_RoleComposition_type") : label;
+			getString("_UI_RoleAttribute_type") :
+			getString("_UI_RoleAttribute_type") + " " + label;
 	}
 
 	/**
@@ -100,6 +123,12 @@ IItemPropertySource {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(RoleAttribute.class)) {
+			case RolesPackage.ROLE_ATTRIBUTE__MODIFIER:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -113,29 +142,6 @@ IItemPropertySource {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == RolesPackage.Literals.MULTIPLICITY_RELATION__SOURCE_MULTIPLICITY ||
-			childFeature == RolesPackage.Literals.MULTIPLICITY_RELATION__TARGET_MULTIPLICITY;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

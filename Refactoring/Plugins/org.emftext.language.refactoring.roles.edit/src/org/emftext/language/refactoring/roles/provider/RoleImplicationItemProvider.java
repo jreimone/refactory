@@ -83,11 +83,10 @@ public class RoleImplicationItemProvider
 		Role target = ((RoleImplication) object).getTarget();
 		String label = null;
 		if(source != null && target != null){
-			label = " " + source.getName() + " |-| " + target.getName();
+			label = " " + source.getName() + " -> " + target.getName();
 		}
 		return label == null || label.length() == 0 ?
-				getString("_UI_RoleImplication_type") :
-				getString("_UI_RoleImplication_type") + " " + label;
+				getString("_UI_RoleImplication_type") : label;
 	}
 
 	/**
