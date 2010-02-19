@@ -145,6 +145,29 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleAttribute} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RoleAttributeItemProvider roleAttributeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleAttribute}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRoleAttributeAdapter() {
+		if (roleAttributeItemProvider == null) {
+			roleAttributeItemProvider = new RoleAttributeItemProvider(this);
+		}
+
+		return roleAttributeItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleProhibition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -366,6 +389,7 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 		if (roleAssociationItemProvider != null) roleAssociationItemProvider.dispose();
 		if (roleCompositionItemProvider != null) roleCompositionItemProvider.dispose();
 		if (roleImplicationItemProvider != null) roleImplicationItemProvider.dispose();
+		if (roleAttributeItemProvider != null) roleAttributeItemProvider.dispose();
 	}
 
 }
