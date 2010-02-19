@@ -29,7 +29,9 @@ RULES {
 					roleToMetaelement+ !0 !0  
 					"}" !0 !0 ;
 	
-	ConcreteMapping ::= role[] "->" metaclass[] ("{" outgoingRelationMappings* "}")? ";" !0;
+	ConcreteMapping ::= role[] "->" metaclass[] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings* "}")? ";" !0;
 	
 	RelationMapping ::= relation['"','"'] ":" references[] ("->" references[])* ";";
+	
+	AttributeMapping ::= roleAttribute[] "->" classAttribute[];
 }

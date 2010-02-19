@@ -23,11 +23,19 @@
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingRelationMappings"
         upperBound="-1" eType="#//RelationMapping" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeMappings" upperBound="-1"
+        eType="#//AttributeMapping" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="references" lowerBound="1"
         upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleAttribute" lowerBound="1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classAttribute" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>
   </eClassifiers>
 </ecore:EPackage>
