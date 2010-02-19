@@ -3,7 +3,6 @@
  */
 package org.emftext.refactoring.roleconstraintchecker;
 
-import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.roleconstraintchecker.impl.RoleConstraintValidatorFactoryImpl;
 
 /**
@@ -24,5 +23,5 @@ public interface RoleConstraintValidatorFactory {
 	 * @param mappingModel 
 	 * @return
 	 */
-	public IRoleConstraintValidator getValidator(RoleMappingModel mappingModel);
+	public IRoleConstraintValidator createValidator();
 }
