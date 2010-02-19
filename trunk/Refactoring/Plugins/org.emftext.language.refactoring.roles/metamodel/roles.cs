@@ -59,7 +59,9 @@ TOKENSTYLES{
 RULES {
 	RoleModel ::= "RoleModel" #1 name[IDENTIFIER] "{" !1 roles* !0 !0 relations* !0 "}";
 	
-	Role ::= ( modifier[ROLE_MODIFIER]* )? #1 "ROLE" #1 name[IDENTIFIER] ";" !0;
+	Role ::= ( modifier[ROLE_MODIFIER]* )? #1 "ROLE" #1 name[IDENTIFIER] ("(" attributes ("," attributes)* ")")? ";" !0;
+	
+	RoleAttribute ::= modifier[ROLE_MODIFIER]* name['"','"'];
 	
 	RoleProhibition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 "|-|" #1 target[IDENTIFIER] ";" !0;
 	
