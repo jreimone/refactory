@@ -7,7 +7,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Relation" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="Relation" abstract="true" eSuperTypes="#//RoleConcept">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//Role" eOpposite="#//Role/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
@@ -15,7 +15,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifier" unique="false"
         upperBound="-1" eType="#//RelationModifier"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//NamedElement #//RoleConcept">
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
         eType="#//Relation" eOpposite="#//Relation/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
@@ -64,4 +64,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifier" unique="false"
         upperBound="-1" eType="#//RoleModifier"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleConcept" abstract="true"/>
 </ecore:EPackage>
