@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Refactoring Specification
+Bundle-SymbolicName: org.emftext.language.refactoring.specification
+Bundle-Version: 0.0.1
+Bundle-Vendor: Jan Reimann
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
