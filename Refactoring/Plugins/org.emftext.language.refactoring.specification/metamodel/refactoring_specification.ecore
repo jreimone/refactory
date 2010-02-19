@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="refactoring_specification"
+    nsURI="http://www.emftext.org/language/refactoring_specification" nsPrefix="refspec">
+  <eClassifiers xsi:type="ecore:EClass" name="RefactoringSpecification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoleModel" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" lowerBound="1"
+        upperBound="-1" eType="#//Instruction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveCommand" abstract="true" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetRole" lowerBound="1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleConcept"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varUse" eType="#//VarDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//PrimitiveCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varDeclaration" eType="#//VarDeclaration"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//PrimitiveCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VarDeclaration"/>
+</ecore:EPackage>
