@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -36,24 +35,10 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 	private static final String ROLE_IMPLICATION = "Metaclass %1$s has to play both role %2$s and %3$s.";
 	private static final String ROLE_IMPLICATION_TRANSITIVE = "Metaclass %1$s plays role %2$s. Role %3$s must be played from a superclass of %1$s.";
 
-	private RoleMappingModel mappingModel;
-
-	public BasicRoleConstraintValidator(RoleMappingModel mappingModel){
-		this.mappingModel = mappingModel;
-		EcoreUtil.resolveAll(this.mappingModel);
-		EList<Mapping> mappings = this.mappingModel.getMappings();
-		for (Mapping mapping : mappings) {
-			//			EcoreUtil.resolve(mapping, this.mappingModel);
-			//			EcoreUtil.resolve(mapping.getMappedRoleModel(), this.mappingModel);
-			EcoreUtil.resolveAll(mapping.getMappedRoleModel());
-			//			EcoreUtil.resolveAll(mapping);
-		}
-	}
-
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.roleconstraintchecker.IRoleConstraintValidator#validate()
 	 */
-	public IStatus validate() {
+	public IStatus validate(RoleMappingModel mappingModel) {
 		EList<Mapping> mappings = mappingModel.getMappings();
 		int severity = 1;
 		List<IStatus> stati = new ArrayList<IStatus>();
@@ -80,17 +65,6 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 	 * @see org.emftext.refactoring.roleconstraintchecker.IRoleConstraintValidator#validateMapping(org.emftext.language.refactoring.rolemapping.Mapping)
 	 */
 	public List<IStatus> validateMapping(Mapping mapping) {
-		// TODO better check if mapping doesn't belong to the given RoleModel
-		if(!mappingModel.getMappings().contains(mapping)){
-			IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, "The given mapping isn't part of the role mapping model of the validator.");
-			List<IStatus> result = new ArrayList<IStatus>();
-			result.add(status);
-			return result;
-		}
-		//		RoleModel roleModel = mapping.getMappedRoleModel();
-		//		EcoreUtil.resolveAll(roleModel);
-		//		EcoreUtil.resolveAll(mapping);
-		//		EcoreUtil.resolve(roleModel, mappingModel);
 		List<IStatus> stati = new ArrayList<IStatus>();
 		EList<ConcreteMapping> mappings = mapping.getRoleToMetaelement();
 		for (ConcreteMapping concreteMapping : mappings) {
@@ -130,9 +104,9 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 						, ROLE_CORRECT_MAPPING);
 			}
 		} else {
-			// TODO hier werden nocch nicht alle SuperKlassen geholt????
-			EList<EClass> superTypes = mappedEClass.getEAllSuperTypes();
-			if(superTypes.contains(targetEClass)){
+			EList<EClass> superTypesSource = mappedEClass.getEAllSuperTypes();
+			EList<EClass> superTypesTarget = targetEClass.getEAllSuperTypes();
+			if(superTypesSource.contains(targetEClass) || superTypesTarget.contains(mappedEClass)){
 				status = new Status(IStatus.ERROR
 						, Activator.PLUGIN_ID
 						, String.format(ROLE_PROHIBITION_TRANSITIVE, mappedEClass.getName(), sourceRole.getName(), targetEClass.getName(), targetRole.getName()));
@@ -161,8 +135,9 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 						, ROLE_CORRECT_MAPPING);
 			}
 		} else {
-			EList<EClass> superTypes = mappedEClass.getEAllSuperTypes();
-			if(!superTypes.contains(targetEClass)){
+			EList<EClass> superTypesSource = mappedEClass.getEAllSuperTypes();
+			EList<EClass> superTypesTarget = targetEClass.getEAllSuperTypes();
+			if(!superTypesSource.contains(targetEClass) && !superTypesTarget.contains(mappedEClass)){
 				status = new Status(IStatus.ERROR
 						, Activator.PLUGIN_ID
 						, String.format(ROLE_IMPLICATION_TRANSITIVE, mappedEClass.getName(), sourceRole.getName(), targetRole.getName()));

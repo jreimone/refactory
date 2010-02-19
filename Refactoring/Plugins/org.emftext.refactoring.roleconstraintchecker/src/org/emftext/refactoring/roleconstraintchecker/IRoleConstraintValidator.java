@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 
 /**
  * Interface for role constraint validators.
@@ -20,7 +21,7 @@ public interface IRoleConstraintValidator {
 	 * Validates the whole RoleMappingModel
 	 * @return
 	 */
-	public IStatus validate();
+	public IStatus validate(RoleMappingModel mappingModel);
 	
 	/**
 	 * Validates the given mapping
