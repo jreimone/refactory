@@ -30,6 +30,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/outgoing"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/incoming"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Role/modifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//Role/attributes"/>
     </genClasses>
     <genClasses ecoreClass="roles.ecore#//RoleModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/roles"/>
@@ -50,5 +51,8 @@
     <genClasses ecoreClass="roles.ecore#//RoleAssociation"/>
     <genClasses ecoreClass="roles.ecore#//RoleComposition"/>
     <genClasses ecoreClass="roles.ecore#//RoleImplication"/>
+    <genClasses ecoreClass="roles.ecore#//RoleAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//RoleAttribute/modifier"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
