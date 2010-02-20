@@ -4,23 +4,44 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="refactoring_specification"
     nsURI="http://www.emftext.org/language/refactoring_specification" nsPrefix="refspec">
   <eClassifiers xsi:type="ecore:EClass" name="RefactoringSpecification">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoleModel" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoleModel" lowerBound="1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" lowerBound="1"
         upperBound="-1" eType="#//Instruction" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveCommand" abstract="true" eSuperTypes="#//Instruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetRole" lowerBound="1"
-        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleConcept"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="varUse" eType="#//VarDeclaration"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveCommand" abstract="true" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//PrimitiveCommand">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="varDeclaration" eType="#//VarDeclaration"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varDeclaration" eType="#//Variable"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceRoleReference" lowerBound="1"
+        eType="#//RoleReference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetContext" lowerBound="1"
+        eType="#//TargetContext" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//PrimitiveCommand"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VarDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//PrimitiveCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//SourceContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//TargetContext" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//SourceContext #//TargetContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//Variable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceContext" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleReference" eSuperTypes="#//SourceContext #//TargetContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationReference" eSuperTypes="#//SourceContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationRole" lowerBound="1"
+        eType="#//RoleReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetContext" abstract="true"/>
 </ecore:EPackage>
