@@ -16,6 +16,11 @@ SYNTAXDEF refspec
 FOR <http://www.emftext.org/language/refactoring_specification>
 START RefactoringSpecification
 
+OPTIONS{
+	resourcePluginID = "org.emftext.language.refactoring.specification.resource.refspec";
+	basePackage = "org.emftext.language.refactoring.specification.resource";
+}
+
 TOKENS{
 	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
@@ -36,7 +41,7 @@ TOKENSTYLES{
 
 RULES{
 	
-	RefactoringSpecification::= "REFACTORING" #1 name[] !0 "FOR" #1 usedRoleModel[] !0 !0 "STEPS" "{" !1 (instructions ";" !0)+ !0 "}"  ;
+	RefactoringSpecification::= "REFACTORING" #1 name[] !0 "FOR" #1 usedRoleModel['<','>'] !0 !0 "STEPS" "{" !1 (instructions ";" !0)+ !0 "}"  ;
 	
 	CREATE::= "create" #1 "new" #1 sourceRoleReference #1 ("(" "->" varDeclaration ")")? #1 "in" #1 targetContext;
 	
@@ -44,9 +49,11 @@ RULES{
 	
 	Variable::= name[] ;
 	
-	VariableReference::= variable[] ;
+	VariableReference::= "->" variable[] ;
 	
 	RoleReference::= role[];
 	
+	// TODO add relationRole with "." notation here!!!!
+	// until now it won't be recognized as feature of RelationReference for hell's sake
 	RelationReference::= relationRole "." relation[];
 }

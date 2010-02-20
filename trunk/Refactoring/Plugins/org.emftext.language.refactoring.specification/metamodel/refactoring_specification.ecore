@@ -4,6 +4,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="refactoring_specification"
     nsURI="http://www.emftext.org/language/refactoring_specification" nsPrefix="refspec">
   <eClassifiers xsi:type="ecore:EClass" name="RefactoringSpecification">
+    <eOperations name="getDeclaredVariables" upperBound="-1" eType="#//Variable"/>
+    <eOperations name="getVariableByName" eType="#//Variable">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoleModel" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -39,7 +43,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationReference" eSuperTypes="#//SourceContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
-        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Relation"/>
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relationRole" lowerBound="1"
         eType="#//RoleReference" containment="true"/>
   </eClassifiers>
