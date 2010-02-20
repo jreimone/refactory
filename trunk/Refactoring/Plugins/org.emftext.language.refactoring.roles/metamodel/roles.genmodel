@@ -5,7 +5,7 @@
     modelPluginID="org.emftext.language.refactoring.roles" modelName="Roles" editPluginClass="org.emftext.language.refactoring.roles.provider.RolesEditPlugin"
     editorPluginClass="org.emftext.language.refactoring.roles.presentation.RolesEditorPlugin"
     testSuiteClass="org.emftext.language.refactoring.roles.tests.RolesAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false">
+    complianceLevel="5.0" copyrightFields="false">
   <foreignModel>roles.ecore</foreignModel>
   <genPackages prefix="Roles" basePackage="org.emftext.language.refactoring" disposableProviderFactory="true"
       ecorePackage="roles.ecore#/">
