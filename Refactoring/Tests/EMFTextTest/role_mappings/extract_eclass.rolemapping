@@ -3,7 +3,7 @@ ROLEMODELMAPPING ExtractEClasses FOR <http://www.eclipse.org/emf/2002/Ecore>
 EClasses_Into_New_EPackage maps <platform:/resource/EMFTextTest/roles/ExtractMethod.rolestext> { 
 	Extract -> EClass;
 	OrigContainer -> EPackage{
-		"extracts": eClassifiers;
+		extracts: eClassifiers;
 	};
 	NewContainer -> EPackage;
 	ContainerContainer -> EPackage;
