@@ -31,7 +31,7 @@ RULES {
 	
 	ConcreteMapping ::= role[] "->" metaclass[] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings* "}")? ";" !0;
 	
-	RelationMapping ::= relation['"','"'] ":" references[] ("->" references[])* ";";
+	RelationMapping ::= relation[] ":" references[] ("->" references[])* ";";
 	
 	AttributeMapping ::= roleAttribute[] "->" classAttribute[];
 }
