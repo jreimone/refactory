@@ -16,7 +16,8 @@ public class RelationReferenceRelationReferenceResolver implements org.emftext.l
 	private org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RelationReference, org.emftext.language.refactoring.roles.MultiplicityRelation> delegate = new org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RelationReference, org.emftext.language.refactoring.roles.MultiplicityRelation>();
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.refactoring_specification.RelationReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<org.emftext.language.refactoring.roles.MultiplicityRelation> result) {
-		if(container.getRelationRole() == null){
+		if(container.getRelationRole() == null || container.getRelationRole().getRole() == null){
+			result.setErrorMessage("Could not resolve relation '" + identifier + "' because an invalid role was specified");
 			return;
 		}
 		Role role = container.getRelationRole().getRole();
