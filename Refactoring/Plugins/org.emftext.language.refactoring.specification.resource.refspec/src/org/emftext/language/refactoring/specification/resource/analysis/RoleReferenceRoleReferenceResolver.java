@@ -11,13 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.language.refactoring.specification.resource.util.RefspecEObjectUtil;
 
 public class RoleReferenceRoleReferenceResolver implements org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver<org.emftext.language.refactoring.refactoring_specification.RoleReference, org.emftext.language.refactoring.roles.Role> {
 	
 	private org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RoleReference, org.emftext.language.refactoring.roles.Role> delegate = new org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RoleReference, org.emftext.language.refactoring.roles.Role>();
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.refactoring_specification.RoleReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<org.emftext.language.refactoring.roles.Role> result) {
-		EObject parent = container.eContainer().eContainer();
+		EObject parent = RefspecEObjectUtil.findRootContainer(container);
 		if(!(parent instanceof RefactoringSpecification)){
 			result.setErrorMessage("Not a valid Refactoring Specification");
 			return;
