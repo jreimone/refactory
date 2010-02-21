@@ -15,16 +15,17 @@
         upperBound="-1" eType="#//Instruction" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveCommand" abstract="true" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//PrimitiveCommand">
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentCommand" abstract="true"
+      eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//ContainmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="varDeclaration" eType="#//Variable"
-        containment="true"/>
+        containment="true" eOpposite="#//Variable/createCommand"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceRoleReference" lowerBound="1"
         eType="#//RoleReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetContext" lowerBound="1"
         eType="#//TargetContext" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//PrimitiveCommand">
+  <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//ContainmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//SourceContext" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
@@ -32,6 +33,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createCommand" lowerBound="1"
+        eType="#//CREATE" eOpposite="#//CREATE/varDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//SourceContext #//TargetContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
@@ -48,4 +51,17 @@
         eType="#//RoleReference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TargetContext" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceCommand" abstract="true" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SET" eSuperTypes="#//ReferenceCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//SourceContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//TargetContext" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeCommand" abstract="true" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ASSIGN" eSuperTypes="#//AttributeCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceAttribute" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetAttribute" lowerBound="1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
+  </eClassifiers>
 </ecore:EPackage>

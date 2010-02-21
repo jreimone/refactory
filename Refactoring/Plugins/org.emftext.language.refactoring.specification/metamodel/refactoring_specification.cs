@@ -19,12 +19,14 @@ START RefactoringSpecification
 OPTIONS{
 	resourcePluginID = "org.emftext.language.refactoring.specification.resource.refspec";
 	basePackage = "org.emftext.language.refactoring.specification.resource";
+	reloadGeneratorModel = "true";
 }
 
 TOKENS{
 	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
 	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
+	DEFINE ATTRIBUTE_REF TEXT + $'.'$ + TEXT;
 }
 
 TOKENSTYLES{
@@ -37,23 +39,32 @@ TOKENSTYLES{
 	"move" COLOR #7F0055, BOLD;
 	"to" COLOR #7F0055, BOLD;
 	"->" COLOR #FFC400, BOLD;
+	"set" COLOR #7F0055, BOLD;
+	"use" COLOR #7F0055, BOLD;
+	"of" COLOR #7F0055, BOLD;
+	"assign" COLOR #7F0055, BOLD;
+	"for" COLOR #7F0055, BOLD;
+	"ATTRIBUTE_REF" COLOR #0000FF;
+	"TEXT" COLOR #0000FF;
 }
 
 RULES{
 	
-	RefactoringSpecification::= "REFACTORING" #1 name[] !0 "FOR" #1 usedRoleModel['<','>'] !0 !0 "STEPS" "{" !1 (instructions ";" !0)+ !0 "}"  ;
+	RefactoringSpecification ::= "REFACTORING" #1 name[] !0 "FOR" #1 usedRoleModel['<','>'] !0 !0 "STEPS" "{" !1 (instructions ";" !0)+ !0 "}"  ;
 	
-	CREATE::= "create" #1 "new" #1 sourceRoleReference #1 ("(" "->" varDeclaration ")")? #1 "in" #1 targetContext;
+	CREATE ::= "create" #1 "new" #1 sourceRoleReference #1 ("(" "->" varDeclaration ")")? #1 "in" #1 targetContext;
 	
-	MOVE::= "move" #1 source #1 "to" #1 target;
+	MOVE ::= "move" #1 source #1 "to" #1 target;
 	
-	Variable::= name[] ;
+	SET ::= "set" #1 "use" #1 "of" #1 source #1 "in" #1 target;
 	
-	VariableReference::= "->" variable[] ;
+	ASSIGN ::= "assign" #1 (sourceAttribute[ATTRIBUTE_REF] #1 "for" #1 )? targetAttribute[ATTRIBUTE_REF];
 	
-	RoleReference::= role[];
+	Variable ::= name[];
 	
-	// TODO add relationRole with "." notation here!!!!
-	// until now it won't be recognized as feature of RelationReference for hell's sake
-	RelationReference::= relationRole "." relation[];
+	VariableReference ::= "->" variable[] ;
+	
+	RoleReference ::= role[];
+	
+	RelationReference ::= relationRole "." relation[];
 }
