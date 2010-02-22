@@ -6,10 +6,12 @@
  */
 package org.emftext.language.refactoring.specification.resource.analysis;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 
-public class ASSIGNTargetAttributeReferenceResolver extends AbstractRoleAttributeResolver implements org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver<org.emftext.language.refactoring.refactoring_specification.ASSIGN, org.emftext.language.refactoring.roles.RoleAttribute> {
+public class ASSIGNTargetAttributeReferenceResolver extends AbstractRoleFeatureResolver<ASSIGN, RoleAttribute> implements org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver<org.emftext.language.refactoring.refactoring_specification.ASSIGN, org.emftext.language.refactoring.roles.RoleAttribute> {
 	
 	private org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.ASSIGN, org.emftext.language.refactoring.roles.RoleAttribute> delegate = new org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.ASSIGN, org.emftext.language.refactoring.roles.RoleAttribute>();
 
@@ -18,11 +20,10 @@ public class ASSIGNTargetAttributeReferenceResolver extends AbstractRoleAttribut
 	}
 
 	/* (non-Javadoc)
-	 * @see org.emftext.language.refactoring.specification.resource.analysis.AbstractRoleAttributeResolver#getSpecificRole(org.emftext.language.refactoring.refactoring_specification.ASSIGN)
+	 * @see org.emftext.language.refactoring.specification.resource.analysis.AbstractRoleFeatureResolver#getStructuralFeature(org.emftext.language.refactoring.roles.Role)
 	 */
 	@Override
-	protected RoleAttribute getSpecificRole(ASSIGN container) {
-		return container.getTargetAttribute();
+	protected EStructuralFeature getStructuralFeature(Role role) {
+		return role.eClass().getEStructuralFeature("attributes");
 	}
-	
 }
