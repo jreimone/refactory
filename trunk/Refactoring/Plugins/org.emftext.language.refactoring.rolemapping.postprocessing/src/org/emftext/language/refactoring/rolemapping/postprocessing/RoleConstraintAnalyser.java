@@ -14,7 +14,7 @@ public class RoleConstraintAnalyser extends AbstractPostProcessor  {
 
 	@Override
 	public void analyse(RolemappingResource resource, RoleMappingModel model) {
-		IRoleConstraintValidator validator = RoleConstraintValidatorFactory.eInstance.createValidator();
+		IRoleConstraintValidator validator = RoleConstraintValidatorFactory.eINSTANCE.createValidator();
 		EList<Mapping> mappings = model.getMappings();
 		for (Mapping mapping : mappings) {
 			List<IStatus> stati = validator.validateMapping(mapping);
