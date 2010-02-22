@@ -6,7 +6,7 @@
       provider-name="Software Technology Group - TU Dresden">
 
    <description>
-      A syntax for regular expressions.
+      A meta model and two syntax variants (ANTLR and SDF style) for regular expressions.
    </description>
 
    <copyright>
