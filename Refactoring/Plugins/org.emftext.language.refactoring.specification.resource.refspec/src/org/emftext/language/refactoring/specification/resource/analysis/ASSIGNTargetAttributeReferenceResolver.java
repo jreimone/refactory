@@ -6,6 +6,7 @@
  */
 package org.emftext.language.refactoring.specification.resource.analysis;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.roles.Role;
@@ -25,5 +26,13 @@ public class ASSIGNTargetAttributeReferenceResolver extends AbstractRoleFeatureR
 	@Override
 	protected EStructuralFeature getStructuralFeature(Role role) {
 		return role.eClass().getEStructuralFeature("attributes");
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver#deResolve(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EReference)
+	 */
+	@Override
+	public String deResolve(RoleAttribute element, ASSIGN container, EReference reference) {
+		return element.getAttributeRole().getName() + "." + element.getName();
 	}
 }

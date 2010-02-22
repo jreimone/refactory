@@ -15,26 +15,8 @@ public class RelationReferenceRelationReferenceResolver extends AbstractRoleFeat
 	
 	private org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RelationReference, org.emftext.language.refactoring.roles.MultiplicityRelation> delegate = new org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RelationReference, org.emftext.language.refactoring.roles.MultiplicityRelation>();
 	
-//	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.refactoring_specification.RelationReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<org.emftext.language.refactoring.roles.MultiplicityRelation> result) {
-//		if(container.getRelationRole() == null || container.getRelationRole().getRole() == null){
-//			result.setErrorMessage("Could not resolve relation '" + identifier + "' because an invalid role was specified");
-//			return;
-//		}
-//		Role role = container.getRelationRole().getRole();
-//		EList<Relation> relations = role.getOutgoing();
-//		for (Relation relation : relations) {
-//			if(relation instanceof MultiplicityRelation){
-//				if(((MultiplicityRelation) relation).getTargetName().equals(identifier)){
-//					result.addMapping(identifier, (MultiplicityRelation) relation);
-//					return;
-//				}
-//			}
-//		}
-//		result.setErrorMessage("Role '" + role.getName() + "' has no outgoing relation '" + identifier + "'");
-//	}
-	
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.MultiplicityRelation element, org.emftext.language.refactoring.refactoring_specification.RelationReference container, org.eclipse.emf.ecore.EReference reference) {
-		return element.getTargetName();
+		return element.getSource().getName() + "." + element.getTargetName();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
