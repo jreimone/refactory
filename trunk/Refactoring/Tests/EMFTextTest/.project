@@ -95,6 +95,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.threevaluedlogic.resource.tvl.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.emftext.language.models.resource.model.nature</nature>
@@ -115,5 +120,6 @@
 		<nature>org.emftext.language.refactoring.rolemapping.resource.rolemapping.nature</nature>
 		<nature>org.emftext.language.refactoring.refactoring_specification.resource.refspec.nature</nature>
 		<nature>org.emftext.language.refactoring.specification.resource.refspec.nature</nature>
+		<nature>org.emftext.language.threevaluedlogic.resource.tvl.nature</nature>
 	</natures>
 </projectDescription>
