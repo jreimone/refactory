@@ -279,7 +279,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_hvnbGx1oEd-RSI0QizO43A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_hvnbER1oEd-RSI0QizO43A" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="roles.ecore#//RoleConcept"/>
+    <element xmi:type="ecore:EClass" href="roles.ecore#//RoleFeature"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hvnbEh1oEd-RSI0QizO43A" x="366" y="355"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_0H6xkRblEd-v66FqVrAtPg"/>
@@ -481,12 +481,12 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_PWla0x1TEd-oRP33mANADQ" points="[21, 16, 77, 246]$[31, 16, 87, 246]$[31, -229, 87, 1]$[1, -229, 57, 1]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_PWla1B1TEd-oRP33mANADQ" id="(0.874251497005988,0.19607843137254902)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_q05kkB1oEd-RSI0QizO43A" type="3003" source="_0IeLMhblEd-v66FqVrAtPg" target="_hvnbEB1oEd-RSI0QizO43A">
+  <edges xmi:type="notation:Edge" xmi:id="_q05kkB1oEd-RSI0QizO43A" type="3003" source="_rkNjoR1SEd-oRP33mANADQ" target="_hvnbEB1oEd-RSI0QizO43A">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_q05kkR1oEd-RSI0QizO43A" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_q05kkh1oEd-RSI0QizO43A" fontName="Segoe UI"/>
     <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_q05kkx1oEd-RSI0QizO43A" points="[25, 14, -16, -191]$[25, 45, -16, -160]$[-40, 45, -81, -160]$[-40, 155, -81, -50]$[36, 155, -5, -50]$[36, 185, -5, -20]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_q092AB1oEd-RSI0QizO43A" id="(0.09580838323353294,0.7254901960784313)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_q05kkx1oEd-RSI0QizO43A" points="[17, 29, -1, -81]$[17, 90, -1, -20]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_q092AB1oEd-RSI0QizO43A" id="(0.20359281437125748,0.4117647058823529)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_sbUv0B1oEd-RSI0QizO43A" type="3003" source="_0Ic9FhblEd-v66FqVrAtPg" target="_hvnbEB1oEd-RSI0QizO43A">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_sbUv0R1oEd-RSI0QizO43A" routing="Rectilinear" lineColor="4210752"/>

@@ -55,6 +55,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//RoleAttribute/modifier"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference roles.ecore#//RoleAttribute/attributeRole"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="roles.ecore#//RoleConcept"/>
+    <genClasses image="false" ecoreClass="roles.ecore#//RoleFeature"/>
   </genPackages>
 </genmodel:GenModel>
