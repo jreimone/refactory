@@ -280,9 +280,9 @@
 			package="org.emftext.language.template_concepts"                             version="0.5.1"/>
 		<buildplugin name="Safe Template Interpreter"    
 			package="org.emftext.language.template_concepts.interpreter"                 version="0.5.1"/>
-		<buildplugin name="Safe Template Call Languge Metamodel" 
+		<buildplugin name="Safe Template Call Language Metamodel" 
 			package="org.emftext.language.template_concepts.call"                        version="0.5.1"/>
-		<buildplugin name="Safe Template Call Languge Syntax"    
+		<buildplugin name="Safe Template Call Language Syntax"    
 			package="org.emftext.language.template_concepts.call.resource.template_call" version="0.5.1"/>
 		<buildfeature                                    
 			package="org.emftext.language.template_concepts"                             version="0.5.1"/>
