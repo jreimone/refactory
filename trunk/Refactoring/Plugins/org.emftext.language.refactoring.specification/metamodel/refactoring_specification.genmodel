@@ -44,7 +44,6 @@
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//RelationReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RelationReference/relation"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RelationReference/relationRole"/>
     </genClasses>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//TargetContext"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ReferenceCommand"/>
