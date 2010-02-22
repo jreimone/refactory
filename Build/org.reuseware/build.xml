@@ -525,9 +525,11 @@
 		<buildfeature package="org.emftext.language.simple_gui" version="0.1.2"/>
 		
 		<!-- Simple Math -->
-		<buildplugin name="Simple Math Metamodel"  package="org.emftext.language.simple_math" version="0.1.2"/>
-		<buildplugin name="Simple Math Textsyntax" package="org.emftext.language.simple_math.resource.sm" version="0.1.2"/>
-		<buildfeature package="org.emftext.language.simple_math" version="0.1.2"/>
+		<buildplugin name="Simple Math Metamodel"  package="org.emftext.language.simple_math"               version="0.1.2"/>
+		<buildplugin name="Simple Math (Edit Support)"  package="org.emftext.language.simple_math.edit"     version="0.1.2"/>
+		<buildplugin name="Simple Math Interpreter"  package="org.emftext.language.simple_math.interpreter" version="0.1.2"/>
+		<buildplugin name="Simple Math Textsyntax" package="org.emftext.language.simple_math.resource.sm"   version="0.1.2"/>
+		<buildfeature package="org.emftext.language.simple_math"                                            version="0.1.2"/>
 		
 		<!-- Statemachine -->
 		<buildplugin name="UML Statemachine Textsyntax Specification" package="org.emftext.language.statemachine" version="0.1.2"/>
@@ -547,9 +549,11 @@
 		<buildfeature package="org.emftext.language.textadventure" version="0.1.2"/>
 
 		<!-- Three-Valued Logic -->
-		<buildplugin  name="Metamodel for Three-Valued Logic" package="org.emftext.language.threevaluedlogic"               version="0.1.2"/>
-		<buildplugin  name="Three-Valued Logic Syntax"        package="org.emftext.language.threevaluedlogic.resource.tvl"  version="0.1.2"/>
-		<buildfeature package="org.emftext.language.threevaluedlogic" version="0.1.2"/>
+		<buildplugin  name="Metamodel for Three-Valued Logic"  package="org.emftext.language.threevaluedlogic"               version="0.1.2"/>
+		<buildplugin  name="Three-Valued Logic (Edit Support)" package="org.emftext.language.threevaluedlogic.edit"          version="0.1.2"/>
+		<buildplugin  name="Three-Valued Logic Interpreter"    package="org.emftext.language.threevaluedlogic.interpreter"   version="0.1.2"/>
+		<buildplugin  name="Three-Valued Logic Syntax"         package="org.emftext.language.threevaluedlogic.resource.tvl"  version="0.1.2"/>
+		<buildfeature package="org.emftext.language.threevaluedlogic"                                                        version="0.1.2"/>
 
 		<!-- Use Case Invariant  -->
 		<buildplugin  name="Metamodel for Use Case Invariants" package="org.emftext.language.usecaseinvariant"                 version="0.5.1"/>

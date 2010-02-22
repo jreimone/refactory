@@ -48,6 +48,20 @@ of Technology, Germany
          unpack="false"/>
 
    <plugin
+         id="org.emftext.language.simple_math.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.language.simple_math.interpreter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.emftext.language.simple_math.resource.sm"
          download-size="0"
          install-size="0"
