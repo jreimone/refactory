@@ -26,7 +26,7 @@ TOKENS{
 	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
 	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
-	DEFINE ATTRIBUTE_REF TEXT + $'.'$ + TEXT;
+	DEFINE DOT_NOTATION TEXT + $'.'$ + TEXT;
 }
 
 TOKENSTYLES{
@@ -44,7 +44,7 @@ TOKENSTYLES{
 	"of" COLOR #7F0055, BOLD;
 	"assign" COLOR #7F0055, BOLD;
 	"for" COLOR #7F0055, BOLD;
-	"ATTRIBUTE_REF" COLOR #0000FF;
+	"DOT_NOTATION" COLOR #0000FF;
 	"TEXT" COLOR #0000FF;
 }
 
@@ -58,7 +58,7 @@ RULES{
 	
 	SET ::= "set" #1 "use" #1 "of" #1 source #1 "in" #1 target;
 	
-	ASSIGN ::= "assign" #1 (sourceAttribute[ATTRIBUTE_REF] #1 "for" #1 )? targetAttribute[ATTRIBUTE_REF];
+	ASSIGN ::= "assign" #1 (sourceAttribute[DOT_NOTATION] #1 "for" #1 )? targetAttribute[DOT_NOTATION];
 	
 	Variable ::= name[];
 	
@@ -66,5 +66,5 @@ RULES{
 	
 	RoleReference ::= role[];
 	
-	RelationReference ::= relationRole "." relation[];
+	RelationReference ::= relation[DOT_NOTATION];
 }

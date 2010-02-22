@@ -575,20 +575,6 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_UGZdAB4QEd-ggaHfox02rw" id="(0.8823529411764706,0.4883720930232558)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_UGaEEB4QEd-ggaHfox02rw" id="(0.08823529411764706,0.4883720930232558)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_JMeS0R4gEd-9XM35BaHt7g" type="3002" source="_h5b2cB4NEd-ggaHfox02rw" target="_gWe18B4NEd-ggaHfox02rw">
-    <children xmi:type="notation:Node" xmi:id="_JMgvEB4gEd-9XM35BaHt7g" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_JMgvER4gEd-9XM35BaHt7g" x="-71" y="41"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_JMhWIB4gEd-9XM35BaHt7g" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_JMhWIR4gEd-9XM35BaHt7g" x="10" y="10"/>
-    </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_JMeS0h4gEd-9XM35BaHt7g" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_JMeS0x4gEd-9XM35BaHt7g" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="refactoring_specification.ecore#//RelationReference/relationRole"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JMeS1B4gEd-9XM35BaHt7g" points="[-15, 13, 207, 12]$[-51, 42, 171, 41]$[-161, 42, 61, 41]$[-205, 13, 17, 12]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JMkZcB4gEd-9XM35BaHt7g" id="(0.21428571428571427,0.6976744186046512)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JMkZcR4gEd-9XM35BaHt7g" id="(0.7714285714285715,0.7209302325581395)"/>
-  </edges>
   <edges xmi:type="notation:Edge" xmi:id="_XbRRwR76Ed-_ss7nEdkTdw" type="3002" source="_IAnQ0B1pEd-RSI0QizO43A" target="_6jARoB1nEd-RSI0QizO43A">
     <children xmi:type="notation:Node" xmi:id="_XbTuAB76Ed-_ss7nEdkTdw" type="4011">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_XbTuAR76Ed-_ss7nEdkTdw" x="-10" y="-10"/>

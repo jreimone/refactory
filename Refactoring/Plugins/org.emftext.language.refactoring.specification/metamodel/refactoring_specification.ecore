@@ -47,8 +47,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="RelationReference" eSuperTypes="#//SourceContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relationRole" lowerBound="1"
-        eType="#//RoleReference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TargetContext" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceCommand" abstract="true" eSuperTypes="#//Instruction"/>
