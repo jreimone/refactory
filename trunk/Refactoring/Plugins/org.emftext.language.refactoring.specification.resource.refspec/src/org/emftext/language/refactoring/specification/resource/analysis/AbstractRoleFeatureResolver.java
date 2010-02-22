@@ -99,10 +99,6 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 		result.setErrorMessage("Role '" + roleString + "' has no " + featureName + " with name '" + featureString +"'");
 	}
 
-	public java.lang.String deResolve(org.emftext.language.refactoring.roles.RoleAttribute element, org.emftext.language.refactoring.refactoring_specification.ASSIGN container, org.eclipse.emf.ecore.EReference reference) {
-		return element.getAttributeRole().getName() + "." + element.getName();
-	}
-
 //	protected abstract Class<? extends RoleFeature> getSpecificFeature();
 	
 	protected abstract EStructuralFeature getStructuralFeature(Role role);
