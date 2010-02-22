@@ -16,7 +16,7 @@ public interface RoleConstraintValidatorFactory {
 	/**
 	 * The default instance.
 	 */
-	public static RoleConstraintValidatorFactory eInstance = new RoleConstraintValidatorFactoryImpl();
+	public static RoleConstraintValidatorFactory eINSTANCE = new RoleConstraintValidatorFactoryImpl();
 	
 	/**
 	 * Returns or creates the role constraint validator for the given role mapping model.
