@@ -4,6 +4,7 @@
 package org.emftext.refactoring.interpreter.internal;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.emftext.refactoring.indexconnector.IndexConnector;
 import org.emftext.refactoring.indexconnector.IndexConnectorFactory;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * @author Jan Reimann
@@ -29,6 +31,7 @@ public class Refactorer implements IRefactorer {
 	private RoleMappingModel roleMapping;
 	private EList<EObject> currentSelection;
 	private Map<RefactoringSpecification, IRefactoringInterpreter> interpreterMap;
+	private IndexConnector indexConnector;
 	
 	public Refactorer(EObject model, RoleMappingModel roleMapping){
 		this.model = model;
@@ -43,7 +46,7 @@ public class Refactorer implements IRefactorer {
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			EcoreUtil.resolveAll(roleModel);
 			IndexConnectorFactory factory = IndexConnectorFactory.defaultINSTANCE;
-			IndexConnector indexConnector = factory.getIndexConnector();
+			indexConnector = factory.getIndexConnector();
 			RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(roleModel);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter();
 			interpreter.initialize(refSpec, model, currentSelection);
@@ -54,9 +57,16 @@ public class Refactorer implements IRefactorer {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#getPossibleRefactorings()
 	 */
-	public List<RefactoringSpecification> getPossibleRefactorings() {
-		// TODO collect all possible refactorings for the current selection
-		return null;
+	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality) {
+		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
+		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMapping, minEquality);
+		for (Mapping mapping : possibleMappings) {
+			RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(mapping.getMappedRoleModel());
+			if(refSpec != null){
+				refSpecs.add(refSpec);
+			}
+		}
+		return refSpecs;
 	}
 
 	/* (non-Javadoc)
