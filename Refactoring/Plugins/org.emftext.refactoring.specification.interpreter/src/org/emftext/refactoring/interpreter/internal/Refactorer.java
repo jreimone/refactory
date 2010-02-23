@@ -63,10 +63,13 @@ public class Refactorer implements IRefactorer {
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#refactor(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, boolean)
 	 */
 	public EObject refactor(RefactoringSpecification refSpec, boolean copy) {
+		if(refSpec == null){
+			return null;
+		}
 		IRefactoringInterpreter interpreter = interpreterMap.get(refSpec);
 		EObject refactoredModel = null;
 		if(interpreter != null){
-			refactoredModel = interpreter.interprete(true);
+			refactoredModel = interpreter.interprete(copy);
 		}
 		return refactoredModel;
 	}
