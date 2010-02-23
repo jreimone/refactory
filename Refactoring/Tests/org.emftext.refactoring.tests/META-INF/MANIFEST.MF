@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.emftext.refactoring.tests
-Bundle-SymbolicName: org.emftext.refactoring.tests
+Bundle-SymbolicName: org.emftext.refactoring.tests;singleton:=true
 Bundle-Version: 0.1.0
 Require-Bundle: org.junit4,
  org.eclipse.emf.ecore.xmi,
@@ -15,6 +15,9 @@ Require-Bundle: org.junit4,
  org.emftext.refactoring.util,
  org.emftext.refactoring.roleconstraintchecker,
  org.eclipse.core.runtime,
- org.emftext.refactoring.specification.interpreter;bundle-version="0.0.1",
- org.emftext.language.refactoring.specification;bundle-version="1.0.0"
+ org.emftext.refactoring.specification.interpreter,
+ org.emftext.language.refactoring.specification,
+ org.eclipse.core.resources,
+ org.reuseware.sokan.index,
+ org.reuseware.sokan.resource
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
