@@ -30,7 +30,7 @@ public class SokanIndexConnector implements IndexConnector {
 	 * @see org.emftext.refactoring.indexconnector.IndexConnector#getRoleMapping(java.lang.String)
 	 */
 	public RoleMappingModel getRoleMapping(String metamodelURI) {
-		List<IndexRow> rows = getRowsByKey(RefactoringIndexer.KEY_IS_ROLEMAPPING);
+		List<IndexRow> rows = getRowsByBooleanKey(RefactoringIndexer.KEY_IS_ROLEMAPPING, "true");
 		for (IndexRow row : rows) {
 			Map<String, String> metaData = row.getMetaData();
 			if(Boolean.valueOf(metaData.get(RefactoringIndexer.KEY_IS_ROLEMAPPING))){
@@ -59,14 +59,18 @@ public class SokanIndexConnector implements IndexConnector {
 		}
 		return null;
 	}
-	
-	private List<IndexRow> getRowsByKey(String key){
+
+	private List<IndexRow> getRowsByBooleanKey(String key, String value){
 		List<IndexRow> rows = new LinkedList<IndexRow>();
 		List<IndexRow> index = IndexUtil.INSTANCE.getIndex();
 		for (IndexRow indexRow : index) {
 			Map<String, String> metaData = indexRow.getMetaData();
 			if(metaData.containsKey(key)){
-				rows.add(indexRow);
+//				if(Boolean.parseBoolean(metaData.get(key))){
+				if(Boolean.parseBoolean(metaData.get(key)) == Boolean.parseBoolean(value)){
+					rows.add(indexRow);
+				}
+//				}
 			}
 		}
 		return rows;
@@ -77,7 +81,7 @@ public class SokanIndexConnector implements IndexConnector {
 	 */
 	public RefactoringSpecification getRefactoringSpecification(
 			RoleModel roleModel) {
-		List<IndexRow> rows = getRowsByKey(RefactoringIndexer.KEY_IS_REFSPEC);
+		List<IndexRow> rows = getRowsByBooleanKey(RefactoringIndexer.KEY_IS_REFSPEC, "true");
 		Resource rmResource = roleModel.eResource();
 		URI rmUri = rmResource.getURI();
 		if(rmUri == null){
