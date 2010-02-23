@@ -1,0 +1,10 @@
+REFACTORING ExtractMethod 
+FOR <platform:/resource/EMFTextTest/roles/ExtractMethod.rolestext>
+
+STEPS { 
+	create new NewContainer (-> NC) in ContainerContainer;
+	assign NC.newName;
+	move OrigContainer.extracts  to ->NC;
+	create new MovedReference (->MR) in OrigContainer;
+	set use of ->NC in ->MR;
+} 
