@@ -3,14 +3,12 @@
  */
 package org.emftext.refactoring.interpreter;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 
 /**
- * Interface for RefactoringInterpreter.
+ * Interface for RefactoringInterpreter
  * 
  * @author Jan Reimann
  *
@@ -18,28 +16,19 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public interface IRefactoringInterpreter {
 
 	/**
-	 * Sets the input for the RefactoringInterpreter by passing the selected EObjects.
-	 * The selection can come for example from selected nodes in a EMF generated tree editor. 
+	 * Initializes a concrete RefactoringInterpreter with a {@link RefactoringSpecification} 
+	 * containing the declared steps for the refactoring. Besides that the model being refactored
+	 * and the elements serving as input for the refactoring are needed, too.
 	 * 
-	 * @param selectedElements the selected elements
+	 * @param refSpec the specification containing the steps of the refactoring
+	 * @param model the model being refactored
 	 */
-	public void setInput(EList<EObject> selectedElements);
+	public void initialize(RefactoringSpecification refSpec, EObject model, EList<EObject> selection);
 	
 	/**
-	 * Infers over the mapped roles if the elements set with {@link #setInput(EList)} and determines 
-	 * by the completeness of the applied roles in different mappings if they are invokable.
-	 * 
-	 * @return a list of possible RefactoringSpecifications
+	 * Invokes the refactoring process on the model and with the steps determined in {@link IRefactoringInterpreter#initialize(RefactoringSpecification, EObject)}.
+	 * @param copy flag to decide whether the refactoring should be invoked on a copy of the model
+	 * @return returns the refactored model
 	 */
-	public List<RefactoringSpecification> getPossibleRefactorings();
-	
-	/**
-	 * Invokes the specified RefactoringSpecification on the model set in {@link #setInput(EList)}.
-	 * 
-	 * @param refSpec the refactoring to invoke
-	 * @param copy specify of the refactoring should be done on a copy of the original model - 
-	 * if set to <code>true</code> the original model stays untouched
-	 * @return the refactored model
-	 */
-	public EObject refactor(RefactoringSpecification refSpec, boolean copy);
+	public EObject interprete(boolean copy);
 }
