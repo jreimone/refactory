@@ -26,12 +26,18 @@ public interface IRefactorer {
 	public void setInput(EList<EObject> selectedElements);
 	
 	/**
-	 * Infers over the mapped roles if the elements set with {@link #setInput(EList)} and determines 
+	 * Infers over the mapped roles of the elements set with {@link #setInput(EList)} and determines 
 	 * by the completeness of the applied roles in different mappings if they are invokable.
+	 * All present roles in the from the elements will be compared to the overall mapped roles in each 
+	 * mapping. If the procentual equality of the present roles and the one of the mapping is greater
+	 * or equal as minEquality then the corresponding {@link RefactoringSpecification} will be contained in
+	 * returned list.
 	 * 
-	 * @return a list of possible RefactoringSpecifications
+	 * @param minEquality the minimum equality of the present roles and the mapped roles
+	 * 
+	 * @return a list of possible RefactoringSpecifications matching the minimum equality
 	 */
-	public List<RefactoringSpecification> getPossibleRefactorings();
+	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality);
 	
 	/**
 	 * Invokes the specified RefactoringSpecification on the model set in {@link #setInput(EList)}.
