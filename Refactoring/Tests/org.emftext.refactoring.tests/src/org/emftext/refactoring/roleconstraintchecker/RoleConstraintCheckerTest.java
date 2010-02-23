@@ -58,7 +58,7 @@ public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 //		prohibitionMapping.getMappedRoleModel()
 		EList<ConcreteMapping> concreteMappings = prohibitionMapping.getRoleToMetaelement();
 		assertTrue("There must be concrete mappings", concreteMappings.size() > 0);
-		IRoleConstraintValidator validator = RoleConstraintValidatorFactory.eInstance.createValidator();
+		IRoleConstraintValidator validator = RoleConstraintValidatorFactory.eINSTANCE.createValidator();
 		assertNotNull("Validator mustn't be null", validator);
 		List<IStatus> stati = validator.validateMapping((Mapping) prohibitionMappings.get(0));
 		assertEquals("There must be 2 error status", 2, stati.size());
