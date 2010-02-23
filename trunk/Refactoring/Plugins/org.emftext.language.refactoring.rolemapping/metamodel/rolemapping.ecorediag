@@ -70,6 +70,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Y4UJtBcGEd-v66FqVrAtPg"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_Y4UJtRcGEd-v66FqVrAtPg" type="5002">
+      <children xmi:type="notation:Node" xmi:id="__iknESCVEd-um_9nLS95jg" type="2002">
+        <element xmi:type="ecore:EOperation" href="rolemapping.ecore#//Mapping/getAllMappedRoles"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__iknEiCVEd-um_9nLS95jg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zheXQCCWEd-um_9nLS95jg" type="2002">
+        <element xmi:type="ecore:EOperation" href="rolemapping.ecore#//Mapping/getMappedRolesForEObject"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zhe-UCCWEd-um_9nLS95jg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Y4UJthcGEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Y4UJtxcGEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Y4UJuBcGEd-v66FqVrAtPg"/>
