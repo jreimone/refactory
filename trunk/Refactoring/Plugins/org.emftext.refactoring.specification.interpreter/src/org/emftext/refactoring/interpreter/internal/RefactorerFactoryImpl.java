@@ -26,6 +26,9 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 		EObject root = resource.getContents().get(0);
 		String mmUri = root.eClass().getEPackage().getNsURI();
 		RoleMappingModel roleMapping = indexConnector.getRoleMapping(mmUri);
+		if(roleMapping == null){
+			return null;
+		}
 		return new Refactorer(root, roleMapping);
 	}
 
