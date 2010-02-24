@@ -21,7 +21,9 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.reuseware.sokan.IndexRow;
 import org.reuseware.sokan.Store;
+import org.reuseware.sokan.index.util.IndexUtil;
 import org.reuseware.sokan.index.util.StoreUtil;
 import org.reuseware.sokan.resource.util.BuildUtil;
 
@@ -52,17 +54,17 @@ public class WorkspaceBuilder {
 	}
 
 	public static void setTest(AbstractRefactoringTest test){
-		if(!test.equals(WorkspaceBuilder.test)){
-			clearWorkspace();
-		}
+//		if(!test.equals(WorkspaceBuilder.test)){
+//			clearWorkspace();
+//		}
+		clearWorkspace();
 		WorkspaceBuilder.test = test;
 	}
 
-	public static void clearWorkspace(){
+	protected static void clearWorkspace(){
 		//		if(!allTestCasesWereInvoked()){
 		//			return;
 		//		}
-		
 		if(testProject != null){
 			StoreUtil.INSTANCE.unmarkStore(testProject);
 			try {
@@ -71,6 +73,10 @@ public class WorkspaceBuilder {
 				e.printStackTrace();
 			}
 		}
+//		List<IndexRow> rows = IndexUtil.INSTANCE.getIndex();
+//		for (IndexRow indexRow : rows) {
+//			IndexUtil.INSTANCE.remove(indexRow.getArtifactID(), false);
+//		}
 		alreadyBuilt = false;
 	}
 
