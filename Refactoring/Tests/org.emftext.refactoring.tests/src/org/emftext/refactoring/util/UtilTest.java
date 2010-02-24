@@ -3,14 +3,17 @@
  */
 package org.emftext.refactoring.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.AbstractRefactoringTest;
+import org.junit.Test;
 
 /**
  * @author Jan Reimann
@@ -18,29 +21,24 @@ import org.emftext.refactoring.test.AbstractRefactoringTest;
  */
 public class UtilTest extends AbstractRefactoringTest {
 
-	private String pathRoleModel = "resources/ExtractMethod.rolestext";
-	private String pathRoleMapping = "resources/relationTestMapping.rolemapping";
+	private String pathRoleModel = "/roles/ExtractMethod.rolestext";
+	private String pathRoleMapping = "/role_mappings/pl0mapping.rolemapping";
 	private RoleModel roleModel;
 	private RoleMappingModel mappingModel;
-	
-	/* (non-Javadoc)
-	 * @see org.emftext.refactoring.test.AbstractRefactoringTest#setUp()
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		roleModel = getExpectedModelFromFile(pathRoleModel, RoleModel.class);
-		mappingModel = getExpectedModelFromFile(pathRoleMapping, RoleMappingModel.class);
-	}
 
-	public void testModelUtilGetObjectsByType(){	
+
+	@Test
+	public void modelUtilGetObjectsByType(){
+		roleModel = getExpectedModelFromFile(pathRoleModel, RoleModel.class);
 		EList<Role> roles = ModelUtil.getObjectsByType(roleModel.eAllContents(), Role.class);
 		assertTrue("Both lists must contain the same roles", roleModel.getRoles().containsAll(roles));
 	}
 	
-	public void testModelUtilFilterObjectsAttribute(){
-		EList<EObject> mappings = ModelUtil.filterObjectsByAttribute(mappingModel.eAllContents(), "name", "TestProhibitionMapping");
-		assertEquals("There must be 1 mapping with name 'TestProhibitionMapping'", 1, mappings.size());
+	@Test
+	public void modelUtilFilterObjectsAttribute(){
+		mappingModel = getExpectedModelFromFile(pathRoleMapping, RoleMappingModel.class);
+		EList<EObject> mappings = ModelUtil.filterObjectsByAttribute(mappingModel.eAllContents(), "name", "ExtractMethod4Statements");
+		assertEquals("There must be 1 mapping with name 'ExtractMethod4Statements'", 1, mappings.size());
 		assertTrue("The filtered element must be an instance of 'Mapping'", mappings.get(0) instanceof Mapping);
 	}
 }

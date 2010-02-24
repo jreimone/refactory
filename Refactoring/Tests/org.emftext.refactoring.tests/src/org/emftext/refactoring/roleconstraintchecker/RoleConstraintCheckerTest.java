@@ -3,7 +3,11 @@
  */
 package org.emftext.refactoring.roleconstraintchecker;
 
-import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
@@ -13,10 +17,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
-import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.AbstractRefactoringTest;
 import org.emftext.refactoring.util.ModelUtil;
-import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Tests the constraints between roles with the mapped classes
@@ -26,28 +29,28 @@ import org.junit.Before;
  */
 public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 
+	private static final String[] FOLDERS_TO_BE_COPIED_INTO_TEST_PROJECT = new String[]{
+		"constraintresources"
+	};
+
+	private static final List<String> VALID_EXTENSIONS_FOR_COPYING = Arrays.asList(
+			"rolemapping",
+			"rolestext",
+			"pl0"
+	);
+		
 //	private String path = "test/testMapping.rolemapping";
-	private String path = "resources/relationTestMapping.rolemapping";
+	private String path = "/resources/relationTestMapping.rolemapping";
 //	private String path1 = "resources/TestAssociation.rolestext";
 //	private String path2 = "resources/TestComposition.rolestext";
 //	private String path3 = "resources/TestImplication.rolestext";
 //	private String path4 = "resources/TestProhibition.rolestext";
 	private RoleMappingModel mappingModel;
-	private List<RoleModel> roleModels;
+//	private List<RoleModel> roleModels;
 	
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
+	@Test
+	public void prohibitionConstraints(){
 		mappingModel = getExpectedModelFromFile(path, RoleMappingModel.class);
-		roleModels = new ArrayList<RoleModel>();
-//		roleModels.add(getExpectedModelFromFile(path1, RoleModel.class));
-//		roleModels.add(getExpectedModelFromFile(path2, RoleModel.class));
-//		roleModels.add(getExpectedModelFromFile(path3, RoleModel.class));
-//		roleModels.add(getExpectedModelFromFile(path4, RoleModel.class));
-	}
-	
-	public void testProhibitionConstraints(){
-//		EcoreUtil.resolveAll(mappingModel);
 		EPackage metamodel = mappingModel.getTargetMetamodel();
 		assertNotNull("Metamodel mustn't be null", metamodel);
 		EList<Mapping> mappings = mappingModel.getMappings();
@@ -60,9 +63,25 @@ public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 		assertTrue("There must be concrete mappings", concreteMappings.size() > 0);
 		IRoleConstraintValidator validator = RoleConstraintValidatorFactory.eINSTANCE.createValidator();
 		assertNotNull("Validator mustn't be null", validator);
-		List<IStatus> stati = validator.validateMapping((Mapping) prohibitionMappings.get(0));
+		List<IStatus> stati = validator.validateMapping(prohibitionMapping);
 		assertEquals("There must be 2 error status", 2, stati.size());
 		assertEquals("The status code must be an ERROR", IStatus.ERROR, stati.get(0).getSeverity());
 		assertEquals("The status code must be an ERROR", IStatus.ERROR, stati.get(1).getSeverity());
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.test.AbstractRefactoringTest#getFolderNamesToCopyIntoTestProject()
+	 */
+	@Override
+	public String[] getFolderNamesToCopyIntoTestProject() {
+		return FOLDERS_TO_BE_COPIED_INTO_TEST_PROJECT;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.test.AbstractRefactoringTest#getValidExtensions()
+	 */
+	@Override
+	public List<String> getValidExtensions() {
+		return VALID_EXTENSIONS_FOR_COPYING;
 	}
 }
