@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -40,4 +41,15 @@ public class WorkspaceUtil {
 		return (T) root;
 	}
 
+	@SuppressWarnings("unchecked")
+	public static <T extends EObject> T getExpectedModelFromResource(Resource resource, Class<T> expectedType){
+		assertNotNull("Resource mustn't be null", resource);
+		EList<EObject> contents = resource.getContents();
+		assertNotNull(contents);
+		assertTrue(contents.size() > 0);
+		EObject root = contents.get(0);
+		assertNotNull(root);
+		assertTrue("root object must be of type '" + expectedType.getSimpleName() + "'", expectedType.isInstance(root));
+		return (T) root;
+	}
 }

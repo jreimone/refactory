@@ -45,7 +45,15 @@ public abstract class AbstractRefactoringTest{
 //		allTestsWereInvoked = true;
 		WorkspaceBuilder.clearWorkspace();
 	}
-
+	
+	public void delay(int millis){
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public String getTestProjectName(){
 		return WorkspaceBuilder.TEST_PROJECT_NAME;
 	}
