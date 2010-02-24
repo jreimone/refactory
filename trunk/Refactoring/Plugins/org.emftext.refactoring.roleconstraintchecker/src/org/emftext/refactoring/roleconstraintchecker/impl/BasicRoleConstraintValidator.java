@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -66,6 +67,7 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 	 */
 	public List<IStatus> validateMapping(Mapping mapping) {
 		List<IStatus> stati = new ArrayList<IStatus>();
+		EcoreUtil.resolveAll(mapping.getMappedRoleModel());
 		EList<ConcreteMapping> mappings = mapping.getRoleToMetaelement();
 		for (ConcreteMapping concreteMapping : mappings) {
 			Role role = concreteMapping.getRole();

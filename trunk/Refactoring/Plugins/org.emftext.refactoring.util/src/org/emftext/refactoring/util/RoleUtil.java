@@ -33,6 +33,9 @@ public class RoleUtil {
 	 */
 	public static Set<Role> getAppliedRoles(EList<EObject> objects, Mapping mapping){
 		Set<Role> appliedRoleSet = new LinkedHashSet<Role>();
+		if(objects == null){
+			return appliedRoleSet;
+		}
 		EcoreUtil.resolveAll(mapping.getMappedRoleModel());
 		for (EObject eObject : objects) {
 			EList<Role> objectRoles = mapping.getMappedRolesForEObject(eObject);

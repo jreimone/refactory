@@ -28,7 +28,7 @@ import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
  * @author Jan Reimann
  *
  */
-public class RefactoringInterpreter extends AbstractRefspecInterpreter<RefactoringInterpreterContext> implements IRefactoringInterpreter{
+public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, RefactoringInterpreterContext> implements IRefactoringInterpreter{
 	
 	private RefactoringSpecification refSpec;
 	private EObject model;
@@ -79,7 +79,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Refactori
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_RefactoringSpecification(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, java.lang.Object)
 	 */
 	@Override
-	public boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_RefactoringSpecification(
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_RefactoringSpecification(
 			RefactoringSpecification object,
 			RefactoringInterpreterContext context) {
 		RoleModel roleModel = object.getUsedRoleModel();
@@ -92,7 +92,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Refactori
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(org.emftext.language.refactoring.refactoring_specification.ASSIGN, java.lang.Object)
 	 */
 	@Override
-	public boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(
 			ASSIGN object, RefactoringInterpreterContext context) {
 		// TODO Auto-generated method stub
 		return super
@@ -104,7 +104,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Refactori
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE(org.emftext.language.refactoring.refactoring_specification.CREATE, java.lang.Object)
 	 */
 	@Override
-	public boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE(
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE(
 			CREATE object, RefactoringInterpreterContext context) {
 		// TODO Auto-generated method stub
 		return super
@@ -116,7 +116,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Refactori
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(org.emftext.language.refactoring.refactoring_specification.MOVE, java.lang.Object)
 	 */
 	@Override
-	public boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(
 			MOVE object, RefactoringInterpreterContext context) {
 		// TODO Auto-generated method stub
 		return super
@@ -128,7 +128,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Refactori
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(org.emftext.language.refactoring.refactoring_specification.SET, java.lang.Object)
 	 */
 	@Override
-	public boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(
 			SET object, RefactoringInterpreterContext context) {
 		// TODO Auto-generated method stub
 		return super

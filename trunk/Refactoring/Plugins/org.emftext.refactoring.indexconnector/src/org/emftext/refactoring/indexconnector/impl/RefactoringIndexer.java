@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -36,9 +37,12 @@ public class RefactoringIndexer implements Indexer {
 		if(resource == null){
 			return null;
 		}
-		EObject root = resource.getContents().get(0);
-		metaData.putAll(handleRoleMappingModel(root));
-		metaData.putAll(handleRefactoringSpecification(root));
+		EList<EObject> contents = resource.getContents();
+		if(contents.size() > 0){
+			EObject root = contents.get(0);
+			metaData.putAll(handleRoleMappingModel(root));
+			metaData.putAll(handleRefactoringSpecification(root));
+		}
 		return metaData;
 	}
 
