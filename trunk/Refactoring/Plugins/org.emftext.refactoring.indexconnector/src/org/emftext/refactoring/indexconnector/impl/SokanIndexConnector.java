@@ -79,8 +79,7 @@ public class SokanIndexConnector implements IndexConnector {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.indexconnector.IndexConnector#getRefactoringSpecification(org.emftext.language.refactoring.roles.RoleModel)
 	 */
-	public RefactoringSpecification getRefactoringSpecification(
-			RoleModel roleModel) {
+	public RefactoringSpecification getRefactoringSpecification(RoleModel roleModel) {
 		List<IndexRow> rows = getRowsByBooleanKey(RefactoringIndexer.KEY_IS_REFSPEC, "true");
 		Resource rmResource = roleModel.eResource();
 		URI rmUri = rmResource.getURI();
@@ -88,6 +87,9 @@ public class SokanIndexConnector implements IndexConnector {
 			return null;
 		}
 		String rmPlatformString = rmUri.toPlatformString(true);
+		if(rmPlatformString == null){
+			rmPlatformString = URI.createURI(rmUri.toString()).toString();
+		}
 		for (IndexRow row : rows) {
 			Map<String, String> metaData = row.getMetaData();
 			String rmIndexPlatformString = metaData.get(RefactoringIndexer.KEY_REFSPEC_FOR_ROLEMODEL_URI);
