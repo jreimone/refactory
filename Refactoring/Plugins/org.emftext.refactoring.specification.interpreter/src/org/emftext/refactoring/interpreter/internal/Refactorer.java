@@ -29,7 +29,7 @@ public class Refactorer implements IRefactorer {
 
 	private EObject model;
 	private RoleMappingModel roleMapping;
-	private EList<EObject> currentSelection;
+	private List<? extends EObject> currentSelection;
 	private Map<RefactoringSpecification, IRefactoringInterpreter> interpreterMap;
 	private IndexConnector indexConnector;
 	
@@ -57,7 +57,7 @@ public class Refactorer implements IRefactorer {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#getPossibleRefactorings()
 	 */
-	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality) {
+	public List<RefactoringSpecification> getPossibleRefactoringsForNearestRoleModels(double minEquality) {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
 		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMapping, minEquality);
 		for (Mapping mapping : possibleMappings) {
@@ -87,8 +87,26 @@ public class Refactorer implements IRefactorer {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#setInput(org.eclipse.emf.common.util.EList)
 	 */
-	public void setInput(EList<EObject> selectedElements) {
+	public void setInput(List<? extends EObject> selectedElements) {
 		currentSelection = selectedElements;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IRefactorer#getPossibleRefactorings(double)
+	 */
+	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality) {
+		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
+		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMapping, minEquality);
+		for (Mapping mapping : possibleMappings) {
+			double inputEquality = RoleUtil.getProcentualInputEquality(currentSelection, mapping);
+			if(inputEquality >= minEquality){
+				RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(mapping.getMappedRoleModel());
+				if(refSpec != null){
+					refSpecs.add(refSpec);
+				}
+			}
+		}
+		return refSpecs;
 	}
 
 }

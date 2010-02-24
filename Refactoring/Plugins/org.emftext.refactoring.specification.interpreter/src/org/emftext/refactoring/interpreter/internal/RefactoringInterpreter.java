@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -32,13 +31,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	
 	private RefactoringSpecification refSpec;
 	private EObject model;
-	private EList<EObject> selection;
+	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
 	
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#initialize(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, org.eclipse.emf.ecore.EObject)
 	 */
-	public void initialize(RefactoringSpecification refSpec, EObject model, EList<EObject> selection) {
+	public void initialize(RefactoringSpecification refSpec, EObject model, List<? extends EObject> selection) {
 		this.refSpec = refSpec;
 		this.model = model;
 		this.selection = selection;

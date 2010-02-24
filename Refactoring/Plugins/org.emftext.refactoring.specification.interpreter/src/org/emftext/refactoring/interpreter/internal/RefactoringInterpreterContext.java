@@ -3,6 +3,8 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -18,9 +20,9 @@ public class RefactoringInterpreterContext {
 
 	private EList<Variable> variables;
 	private EObject model;
-	private EList<EObject> selection;
+	private List<? extends EObject> selection;
 	
-	protected void setInitialContext(EObject model, EList<EObject> selection){
+	protected void setInitialContext(EObject model, List<? extends EObject> selection){
 		this.model = model;
 		this.selection = selection;
 	}
