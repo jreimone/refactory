@@ -1,6 +1,6 @@
 ROLEMODELMAPPING relationTestMappingPL0 FOR <http://www.emftext.org/language/pl0>
 
-TestProhibitionMapping maps <platform:/resource/EMFTextTest/roles/TestProhibition.rolestext> { 
+TestProhibitionMapping maps <platform:/resource/EMFTextTest/constraintresources/TestProhibition.rolestext> { 
 	InputRole -> Statement ;
 	OutputRole -> CallStatement;
 	TransitiveOutputRoleParent -> Expression;
