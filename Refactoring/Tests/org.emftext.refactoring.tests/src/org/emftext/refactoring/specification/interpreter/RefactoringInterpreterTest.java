@@ -35,6 +35,8 @@ public class RefactoringInterpreterTest extends AbstractRefactoringTest {
 
 	@Test
 	public void getPossibleRefactoringSpecifications(){
+		WorkspaceBuilder.clearWorkspace();
+		WorkspaceBuilder.buildTestWorkspace();
 		Resource resource = WorkspaceUtil.getResourceInWorkspace(this, path);
 		IRefactorer refactorer = getRefactorer(resource);
 		List<RefactoringSpecification> refSpecs = refactorer.getPossibleRefactorings(1.0);
@@ -43,6 +45,8 @@ public class RefactoringInterpreterTest extends AbstractRefactoringTest {
 
 	@Test
 	public void refactoringInterpreter(){
+		WorkspaceBuilder.clearWorkspace();
+		WorkspaceBuilder.buildTestWorkspace();
 		Resource resource = WorkspaceUtil.getResourceInWorkspace(this, path);
 		IRefactorer refactorer = getRefactorer(resource);
 		EObject refactoredModel = refactorer.refactor(null, true);
