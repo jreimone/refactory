@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleModifier;
 
 /**
  * Utility functions for models having to do with roles.
@@ -31,7 +32,7 @@ public class RoleUtil {
 	 * @param objects
 	 * @param mapping
 	 */
-	public static Set<Role> getAppliedRoles(EList<EObject> objects, Mapping mapping){
+	public static Set<Role> getAppliedRoles(List<? extends EObject> objects, Mapping mapping){
 		Set<Role> appliedRoleSet = new LinkedHashSet<Role>();
 		if(objects == null){
 			return appliedRoleSet;
@@ -49,12 +50,12 @@ public class RoleUtil {
 	 * <code>minEquality</code>. To ensure that only mappings will be determined from which all roles are
 	 * applied in the list of the selected objects then the value 1.0 has to be passed.
 	 * 
-	 * @param selection the selected objetcs for which the mappings will be compared to the present roles
+	 * @param selection the selected objects for which the mappings will be compared to the present roles
 	 * @param roleMapping
 	 * @param minEquality
 	 * @return
 	 */
-	public static List<Mapping> getPossibleMappingsForSelection(EList<EObject> selection, RoleMappingModel roleMapping, double minEquality){
+	public static List<Mapping> getPossibleMappingsForSelection(List<? extends EObject> selection, RoleMappingModel roleMapping, double minEquality){
 		List<Mapping> possibleMappings = new LinkedList<Mapping>();
 		EList<Mapping> mappings = roleMapping.getMappings();
 		for (Mapping mapping : mappings) {
@@ -75,21 +76,36 @@ public class RoleUtil {
 	 * @param mapping
 	 * @return
 	 */
-	public static double getProcentualEquality(EList<EObject> objects, Mapping mapping){
+	public static double getProcentualEquality(List<? extends EObject> objects, Mapping mapping){
 		Collection<Role> allMappedRoles = getAllMappedRoles(mapping);
 		Collection<Role> appliedRoles = getAppliedRoles(objects, mapping);
+		double result = getProcentualRolesEquality(allMappedRoles, appliedRoles);
+		return result;
+	}
+
+	/**
+	 * Calculates the procentual equality between both role collections. <code>mappedRoles</code> is intended
+	 * to be the list to which the other will be compared - it represents the calculation base. Then for every
+	 * role in <code>appliedRoles</code> will be determined if it is contained in <code>mappedRoles</code>. If 
+	 * both lists are contained in each other the result value will be 1.0
+	 * 
+	 * @param mappedRoles
+	 * @param appliedRoles
+	 * @return
+	 */
+	public static double getProcentualRolesEquality(Collection<Role> mappedRoles, Collection<Role> appliedRoles) {
 		Collection<Role> matchedRoles = new LinkedList<Role>();
 		for (Role appliedRole : appliedRoles) {
-			if(allMappedRoles.contains(appliedRole)){
+			if(mappedRoles.contains(appliedRole)){
 				matchedRoles.add(appliedRole);
 			}
 		}
 		appliedRoles.removeAll(matchedRoles);
-		allMappedRoles.removeAll(matchedRoles);
-		if(appliedRoles.size() == 0 && allMappedRoles.size() == 0){
+		mappedRoles.removeAll(matchedRoles);
+		if(appliedRoles.size() == 0 && mappedRoles.size() == 0){
 			return 1.0;
 		}
-		double result = 1.0 - ((allMappedRoles.size() - matchedRoles.size()) / allMappedRoles.size());
+		double result = 1.0 - ((mappedRoles.size() - matchedRoles.size()) / mappedRoles.size());
 		return result;
 	}
 	
@@ -102,5 +118,37 @@ public class RoleUtil {
 	public static List<Role> getAllMappedRoles(Mapping mapping){
 		EcoreUtil.resolveAll(mapping.getMappedRoleModel());
 		return mapping.getAllMappedRoles();
+	}
+	
+	/**
+	 * Returns all roles of the given mapping having the modifier {@link RoleModifier#INPUT}.
+	 * 
+	 * @param mapping the mapping to search for input roles
+	 * @return all input roles
+	 */
+	public static List<Role> getAllInputRoles(Mapping mapping){
+		List<Role> inputRoles = new LinkedList<Role>();
+		List<Role> mappedRoles = getAllMappedRoles(mapping);
+		for (Role role : mappedRoles) {
+			if(role.getModifier().contains(RoleModifier.INPUT)){
+				inputRoles.add(role);
+			}
+		}
+		return inputRoles;
+	}
+	
+	/**
+	 * Calculates the procentual equality of the given input and all roles of the given mapping having
+	 * the modifier {@link RoleModifier#INPUT}. If all input roles of the mapping are contained in the
+	 * <code>input</code> then the result will be 1.0
+	 * 
+	 * @param input
+	 * @param mapping
+	 * @return
+	 */
+	public static double getProcentualInputEquality(List<? extends EObject> input, Mapping mapping){
+		List<Role> inputRoles = getAllInputRoles(mapping);
+		Set<Role> appliedRoles = getAppliedRoles(input, mapping);
+		return getProcentualRolesEquality(inputRoles, appliedRoles);
 	}
 }
