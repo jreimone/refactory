@@ -5,6 +5,7 @@ package org.emftext.refactoring.test;
 
 import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelationTest;
 import org.emftext.refactoring.graph.GraphTest;
+import org.emftext.refactoring.indexconnector.IndexConnectorTest;
 import org.emftext.refactoring.roleconstraintchecker.RoleConstraintCheckerTest;
 import org.emftext.refactoring.specification.interpreter.RefactoringInterpreterTest;
 import org.emftext.refactoring.util.UtilTest;
@@ -23,6 +24,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	EmptyOutgoingRelationTest.class,
 	UtilTest.class,
 	RoleConstraintCheckerTest.class,
+	IndexConnectorTest.class,
 	RefactoringInterpreterTest.class,
 	GraphTest.class
 })
