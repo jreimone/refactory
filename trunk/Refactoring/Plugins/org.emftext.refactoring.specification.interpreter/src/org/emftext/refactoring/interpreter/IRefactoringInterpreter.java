@@ -3,7 +3,8 @@
  */
 package org.emftext.refactoring.interpreter;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 
@@ -23,7 +24,7 @@ public interface IRefactoringInterpreter {
 	 * @param refSpec the specification containing the steps of the refactoring
 	 * @param model the model being refactored
 	 */
-	public void initialize(RefactoringSpecification refSpec, EObject model, EList<EObject> selection);
+	public void initialize(RefactoringSpecification refSpec, EObject model, List<? extends EObject> selection);
 	
 	/**
 	 * Invokes the refactoring process on the model and with the steps determined in {@link IRefactoringInterpreter#initialize(RefactoringSpecification, EObject)}.
