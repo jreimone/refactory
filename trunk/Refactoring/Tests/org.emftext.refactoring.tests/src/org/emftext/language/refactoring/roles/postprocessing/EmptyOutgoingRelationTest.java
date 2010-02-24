@@ -3,13 +3,16 @@
  */
 package org.emftext.language.refactoring.roles.postprocessing;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.refactoring.roles.Relation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.AbstractRefactoringTest;
-import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Run as Plugin-Test
@@ -19,16 +22,13 @@ import org.junit.Before;
  */
 public class EmptyOutgoingRelationTest extends AbstractRefactoringTest {
 
-	private String path = "resources/ExtractMethod.rolestext";
+	private String path = "/roles/ExtractMethod.rolestext";
 	private RoleModel model;
 	
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
+	@Test
+	public void emptyOutgoingRelations(){
 		model = getExpectedModelFromFile(path, RoleModel.class);
-	}
-	
-	public void testEmptyOutgoingRelations(){
+		assertNotNull(model);
 		EList<Relation> relations = model.getRelations();
 		Role origContainerRole = null;
 		EList<Relation> outgoingRelations1 = new BasicEList<Relation>();

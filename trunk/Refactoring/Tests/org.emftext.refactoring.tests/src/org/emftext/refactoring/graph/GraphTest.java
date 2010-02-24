@@ -1,49 +1,41 @@
 package org.emftext.refactoring.graph;
 
-import java.io.File;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.pl0.PL0Factory;
-import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.Program;
-import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.emftext.refactoring.graph.util.GraphUtil;
 import org.emftext.refactoring.graph.util.IPath;
 import org.emftext.refactoring.graph.util.LinkedListPath;
 import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
-import org.junit.Before;
+import org.emftext.refactoring.test.AbstractRefactoringTest;
+import org.emftext.refactoring.test.WorkspaceUtil;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public class ExtractMethodTest extends TestCase{
+public class GraphTest extends AbstractRefactoringTest{
 
 //	private EObject model;
-	private String path = "resources/p1.pl0";
+	private String path = "/resources/p1.pl0";
 	private Resource resource;
 
-	@Before
-	public void setUp() throws Exception {
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());
-		resourceSet.getPackageRegistry().put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
-		File file = new File(path);
-		assertTrue("File must exist", file.exists());
-		resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
+	@Ignore("not yet")
+	@Test
+	public void findNodeByNameAndType(){
+		resource = WorkspaceUtil.getResourceInWorkspace(this, path);
 		assertNotNull("Resource mustn't be null", resource);
-	}
-
-	public void testFindNodeByNameAndType(){
 		EObject object = GraphUtil.findFirstNodeByNameAndType(resource, Program.class, "name", "p1");
 		assertNotNull("Requested object not found", object);
 	}
@@ -82,7 +74,9 @@ public class ExtractMethodTest extends TestCase{
 //	          |__~Condition
 //	          |__~Body
 //	          |__~Expression
-	public void testFindShortestPathForPL0(){
+	@Ignore("not yet")
+	@Test
+	public void findShortestPathForPL0(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -106,7 +100,9 @@ public class ExtractMethodTest extends TestCase{
 		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
 	}
 	
-	public void testFindShortestPathClassToClassMethodJava(){
+	@Ignore("not yet")
+	@Test
+	public void findShortestPathClassToClassMethodJava(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -127,7 +123,9 @@ public class ExtractMethodTest extends TestCase{
 		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
 	}
 	
-	public void testFindShortestPathClassMethodToMethodCallJava(){
+	@Ignore("not yet")
+	@Test
+	public void findShortestPathClassMethodToMethodCallJava(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -182,7 +180,9 @@ public class ExtractMethodTest extends TestCase{
 //	          |__~Body
 //	        |__+Assignment
 //	          |__~Expression
-	public void testFindPathFromProcedureToCallStatementAndRemoveAbstractClassesPL0(){
+	@Ignore("not yet")
+	@Test
+	public void findPathFromProcedureToCallStatementAndRemoveAbstractClassesPL0(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -209,14 +209,18 @@ public class ExtractMethodTest extends TestCase{
 		assertEquals("Both path's must be the same, especially without abstract classes", expectedPath, path);
 	}
 	
-	public void testGetAllSubTypesForAbstractSuperclass(){
+	@Ignore("not yet")
+	@Test
+	public void getAllSubTypesForAbstractSuperclass(){
 		EClass abstractSuper = (EClass) PL0Factory.eINSTANCE.getPL0Package().getEClassifier("Statement");
 		EList<EClass> subTypes = GraphUtil.getAllSubTypes(abstractSuper);
 		assertNotNull("Metaclass Statement must have 4 subtypes", subTypes);
 		assertEquals("Metaclass Statement must have 4 subtypes", 4, subTypes.size());
 	}
 	
-	public void testFindPathOptionalTermToTermPL0(){
+	@Ignore("not yet")
+	@Test
+	public void findPathOptionalTermToTermPL0(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
