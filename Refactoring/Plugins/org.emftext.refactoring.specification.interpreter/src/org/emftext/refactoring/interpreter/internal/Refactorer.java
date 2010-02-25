@@ -32,13 +32,13 @@ public class Refactorer implements IRefactorer {
 	private List<? extends EObject> currentSelection;
 	private Map<RefactoringSpecification, IRefactoringInterpreter> interpreterMap;
 	private IndexConnector indexConnector;
-	
+
 	public Refactorer(EObject model, RoleMappingModel roleMapping){
 		this.model = model;
 		this.roleMapping = roleMapping;
 		initInterpreterMap();
 	}
-	
+
 	private void initInterpreterMap(){
 		interpreterMap = new LinkedHashMap<RefactoringSpecification, IRefactoringInterpreter>();
 		EList<Mapping> mappings = roleMapping.getMappings();
@@ -53,7 +53,7 @@ public class Refactorer implements IRefactorer {
 			interpreterMap.put(refSpec, interpreter);
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#getPossibleRefactorings()
 	 */
@@ -96,14 +96,11 @@ public class Refactorer implements IRefactorer {
 	 */
 	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality) {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
-		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMapping, minEquality);
+		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMapping, minEquality);
 		for (Mapping mapping : possibleMappings) {
-			double inputEquality = RoleUtil.getProcentualInputEquality(currentSelection, mapping);
-			if(inputEquality >= minEquality){
-				RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(mapping.getMappedRoleModel());
-				if(refSpec != null){
-					refSpecs.add(refSpec);
-				}
+			RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(mapping.getMappedRoleModel());
+			if(refSpec != null){
+				refSpecs.add(refSpec);
 			}
 		}
 		return refSpecs;
