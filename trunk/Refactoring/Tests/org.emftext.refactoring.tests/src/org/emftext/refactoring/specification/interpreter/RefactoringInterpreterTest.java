@@ -57,7 +57,7 @@ public class RefactoringInterpreterTest extends AbstractRefactoringTest {
 		assertNotNull(statements);
 		assertTrue(statements.size() >= 3);
 		List<Statement> selection = statements.subList(0, 2);		
-		List<Mapping> mappings = RoleUtil.getPossibleMappingsForSelection(selection, mappingModel, 1.0);
+		List<Mapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(selection, mappingModel, 1.0);
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		for (Mapping mapping : mappings) {
