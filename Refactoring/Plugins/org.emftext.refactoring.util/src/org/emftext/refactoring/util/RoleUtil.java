@@ -68,6 +68,28 @@ public class RoleUtil {
 	}
 	
 	/**
+	 * Does the same like {@link RoleUtil#getPossibleMappingsForSelection(List, RoleMappingModel, double)} but only compares
+	 * Roles having the modifier {@link RoleModifier#INPUT}.
+	 * @param selection
+	 * @param roleMapping
+	 * @param minEquality
+	 * @return
+	 */
+	public static List<Mapping> getPossibleMappingsForInputSelection(List<? extends EObject> selection, RoleMappingModel roleMapping, double minEquality){
+		List<Mapping> possibleMappings = new LinkedList<Mapping>();
+		EList<Mapping> mappings = roleMapping.getMappings();
+		for (Mapping mapping : mappings) {
+			double equality = getProcentualInputEquality(selection, mapping);
+			if(equality >= minEquality){
+				possibleMappings.add(mapping);
+			}
+		}
+		return possibleMappings;
+	}
+	
+	
+	
+	/**
 	 * Calculates the procentual equality between the applied roles of the given objects and the
 	 * roles mapped in the given mapping. If all roles of the mapping were applied onto the objects
 	 * then the result will be 1.0 
@@ -105,7 +127,7 @@ public class RoleUtil {
 		if(appliedRoles.size() == 0 && mappedRoles.size() == 0){
 			return 1.0;
 		}
-		double result = 1.0 - ((mappedRoles.size() - matchedRoles.size()) / mappedRoles.size());
+		double result = 1.0 - ((new Integer(mappedRoles.size()).doubleValue() - new Integer(matchedRoles.size()).doubleValue()) / new Integer(mappedRoles.size()).doubleValue());
 		return result;
 	}
 	

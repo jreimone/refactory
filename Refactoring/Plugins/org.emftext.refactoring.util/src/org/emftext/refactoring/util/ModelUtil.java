@@ -123,11 +123,11 @@ public class ModelUtil {
 			if(!ref1.getEType().equals(ref2.getEType())){
 				return false;
 			}
-			Object value1 = first.eGet(ref1);
-			Object value2 = second.eGet(ref2);
-			if(!value1.equals(value2)){
-				return false;
-			}
+//			Object value1 = first.eGet(ref1);
+//			Object value2 = second.eGet(ref2);
+//			if(!value1.equals(value2)){
+//				return false;
+//			}
 		}
 		return true;
 	}
