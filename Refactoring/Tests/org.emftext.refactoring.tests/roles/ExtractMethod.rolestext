@@ -1,6 +1,6 @@
 RoleModel ExtractMethod {
 	ROLE OrigContainer;
-	input ROLE Extract;
+	input super ROLE Extract;
 	ROLE NewContainer (input runtime "newName");
 	ROLE ContainerContainer;
 	optional ROLE MovedReference;
