@@ -36,7 +36,9 @@ public class ConcreteMappingRoleReferenceResolver implements org.emftext.languag
 				for (Role role : roles) {
 					if (role.getName().equals(identifier) || resolveFuzzy) {
 						result.addMapping(role.getName(), role);
-						return;
+						if (!resolveFuzzy) {
+							return;
+						}
 					}
 				}
 			}

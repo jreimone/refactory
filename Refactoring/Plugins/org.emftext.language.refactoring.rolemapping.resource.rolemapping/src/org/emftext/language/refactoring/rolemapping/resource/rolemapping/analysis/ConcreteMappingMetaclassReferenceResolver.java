@@ -41,6 +41,9 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 					if (eClassifier.getName().equals(identifier) || resolveFuzzy) {
 						if (eClassifier instanceof EClass) {
 							result.addMapping(eClassifier.getName(), (EClass) eClassifier);
+							if (!resolveFuzzy) {
+								return;
+							}
 						}
 					}
 				}
