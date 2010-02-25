@@ -31,7 +31,6 @@ public class ASSIGNTargetAttributeReferenceResolver extends AbstractRoleFeatureR
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver#deResolve(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EReference)
 	 */
-	@Override
 	public String deResolve(RoleAttribute element, ASSIGN container, EReference reference) {
 		return element.getAttributeRole().getName() + "." + element.getName();
 	}
