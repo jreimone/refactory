@@ -30,6 +30,7 @@ import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.language.refactoring.roles.RoleModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -204,9 +205,14 @@ public class MappingImpl extends EObjectImpl implements Mapping {
 		EClass metaclass = object.eClass();
 		EList<ConcreteMapping> mappings = getRoleToMetaelement();
 		for (ConcreteMapping concreteMapping : mappings) {
+			Role mappedRole = concreteMapping.getRole();
 			EClass mappedClass = concreteMapping.getMetaclass();
 			if(mappedClass.equals(metaclass)){
-				mappedRoles.add(concreteMapping.getRole());
+				mappedRoles.add(mappedRole);
+			} else if(mappedRole.getModifier().contains(RoleModifier.SUPER)){
+				if(mappedClass.isSuperTypeOf(metaclass)){
+					mappedRoles.add(mappedRole);
+				}
 			}
 		}
 		return mappedRoles;
