@@ -29,7 +29,7 @@ TOKENS{
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 
-	DEFINE ROLE_MODIFIER $'optional'|'runtime'|'input'$;
+	DEFINE ROLE_MODIFIER $'optional'|'runtime'|'input'|'super'$;
 	DEFINE RELATION_MODIFIER $'transitive'|'reflexive'$;
 	//DEFINE OPTIONAL $'optional'$;
 	//DEFINE INPUT $'input'$;
