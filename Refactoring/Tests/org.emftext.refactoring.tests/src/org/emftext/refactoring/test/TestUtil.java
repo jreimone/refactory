@@ -18,10 +18,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
  * @author Jan Reimann
  *
  */
-public class WorkspaceUtil {
+public class TestUtil {
 
 	public static Resource getResourceInWorkspace(AbstractRefactoringTest test, String path) {
-		IFile file = (IFile) WorkspaceBuilder.getTestProject().findMember(path);
+		IFile file = null;
 		assertNotNull(file);
 		assertTrue(file.exists());
 		String filePath = file.getFullPath().toOSString();

@@ -19,7 +19,7 @@ import org.junit.Test;
  * @author Jan Reimann
  *
  */
-public class UtilTest extends AbstractRefactoringTest {
+public class UtilTest{
 
 	private String pathRoleModel = "/roles/ExtractMethod.rolestext";
 	private String pathRoleMapping = "/role_mappings/pl0mapping.rolemapping";
@@ -29,14 +29,14 @@ public class UtilTest extends AbstractRefactoringTest {
 
 	@Test
 	public void modelUtilGetObjectsByType(){
-		roleModel = getExpectedModelFromFile(pathRoleModel, RoleModel.class);
+//		roleModel = getExpectedModelFromFile(pathRoleModel, RoleModel.class);
 		EList<Role> roles = ModelUtil.getObjectsByType(roleModel.eAllContents(), Role.class);
 		assertTrue("Both lists must contain the same roles", roleModel.getRoles().containsAll(roles));
 	}
 	
 	@Test
 	public void modelUtilFilterObjectsAttribute(){
-		mappingModel = getExpectedModelFromFile(pathRoleMapping, RoleMappingModel.class);
+//		mappingModel = getExpectedModelFromFile(pathRoleMapping, RoleMappingModel.class);
 		EList<EObject> mappings = ModelUtil.filterObjectsByAttribute(mappingModel.eAllContents(), "name", "ExtractMethod4Statements");
 		assertEquals("There must be 1 mapping with name 'ExtractMethod4Statements'", 1, mappings.size());
 		assertTrue("The filtered element must be an instance of 'Mapping'", mappings.get(0) instanceof Mapping);

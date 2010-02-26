@@ -27,7 +27,7 @@ import org.junit.Test;
  * @author Jan Reimann
  *
  */
-public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
+public class RoleConstraintCheckerTest{
 
 	private static final String[] FOLDERS_TO_BE_COPIED_INTO_TEST_PROJECT = new String[]{
 		"constraintresources"
@@ -50,7 +50,7 @@ public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 	
 	@Test
 	public void prohibitionConstraints(){
-		mappingModel = getExpectedModelFromFile(path, RoleMappingModel.class);
+//		mappingModel = getExpectedModelFromFile(path, RoleMappingModel.class);
 		EPackage metamodel = mappingModel.getTargetMetamodel();
 		assertNotNull("Metamodel mustn't be null", metamodel);
 		EList<Mapping> mappings = mappingModel.getMappings();
@@ -72,16 +72,5 @@ public class RoleConstraintCheckerTest extends AbstractRefactoringTest {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.test.AbstractRefactoringTest#getFolderNamesToCopyIntoTestProject()
 	 */
-	@Override
-	public String[] getFolderNamesToCopyIntoTestProject() {
-		return FOLDERS_TO_BE_COPIED_INTO_TEST_PROJECT;
-	}
 
-	/* (non-Javadoc)
-	 * @see org.emftext.refactoring.test.AbstractRefactoringTest#getValidExtensions()
-	 */
-	@Override
-	public List<String> getValidExtensions() {
-		return VALID_EXTENSIONS_FOR_COPYING;
-	}
 }

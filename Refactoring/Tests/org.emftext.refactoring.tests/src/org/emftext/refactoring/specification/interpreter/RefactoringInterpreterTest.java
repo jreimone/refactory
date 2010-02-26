@@ -26,18 +26,17 @@ import org.emftext.refactoring.indexconnector.IndexConnectorFactory;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.test.AbstractRefactoringTest;
-import org.emftext.refactoring.test.WorkspaceUtil;
+import org.emftext.refactoring.test.TestUtil;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
 import org.junit.Test;
 
-public class RefactoringInterpreterTest extends AbstractRefactoringTest {
+public class RefactoringInterpreterTest{
 
 	private String path = "/pl0/wirth.pl0";
 	private static int DELAY = 2000;
 	
 	private IRefactorer getRefactorer(Resource resource){
-		delay(DELAY);
 		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
 		assertNotNull(refactorer);
 		return refactorer;
@@ -45,10 +44,11 @@ public class RefactoringInterpreterTest extends AbstractRefactoringTest {
 	
 	@Test
 	public void getAppliedRoles(){
-		Resource resource = WorkspaceUtil.getResourceInWorkspace(this, path);
+//		Resource resource = TestUtil.getResourceInWorkspace(this, path);
+		Resource resource = null;
 		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector();
 		assertNotNull(connector);
-		Program pl0Prog = WorkspaceUtil.getExpectedModelFromResource(resource, Program.class);
+		Program pl0Prog = TestUtil.getExpectedModelFromResource(resource, Program.class);
 		RoleMappingModel mappingModel = connector.getRoleMapping(pl0Prog.eClass().getEPackage().getNsURI());
 		assertNotNull(mappingModel);
 		Body body = pl0Prog.getBlock().getBody();
@@ -71,9 +71,10 @@ public class RefactoringInterpreterTest extends AbstractRefactoringTest {
 	public void getPossibleRefactoringSpecifications(){
 //		WorkspaceBuilder.setTest(this);
 //		WorkspaceBuilder.buildTestWorkspace();
-		Resource resource = WorkspaceUtil.getResourceInWorkspace(this, path);
+//		Resource resource = TestUtil.getResourceInWorkspace(this, path);
+		Resource resource = null;
 		IRefactorer refactorer = getRefactorer(resource);
-		Program pl0Prog = WorkspaceUtil.getExpectedModelFromResource(resource, Program.class);
+		Program pl0Prog = TestUtil.getExpectedModelFromResource(resource, Program.class);
 		Body body = pl0Prog.getBlock().getBody();
 		assertNotNull(body);
 		EList<Statement> statements = ModelUtil.getObjectsByType(body.eAllContents(), Statement.class);
@@ -90,7 +91,8 @@ public class RefactoringInterpreterTest extends AbstractRefactoringTest {
 	public void refactoringInterpreter(){
 //		WorkspaceBuilder.setTest(this);
 //		WorkspaceBuilder.buildTestWorkspace();
-		Resource resource = WorkspaceUtil.getResourceInWorkspace(this, path);
+//		Resource resource = TestUtil.getResourceInWorkspace(this, path);
+		Resource resource = null;
 		IRefactorer refactorer = getRefactorer(resource);
 		EObject refactoredModel = refactorer.refactor(null, true);
 		assertNull(refactoredModel);
