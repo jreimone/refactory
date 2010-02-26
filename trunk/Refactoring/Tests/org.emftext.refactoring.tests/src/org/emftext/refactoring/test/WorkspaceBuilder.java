@@ -53,13 +53,13 @@ public class WorkspaceBuilder {
 		// empty
 	}
 
-	public static void setTest(AbstractRefactoringTest test){
-//		if(!test.equals(WorkspaceBuilder.test)){
-//			clearWorkspace();
-//		}
-		clearWorkspace();
-		WorkspaceBuilder.test = test;
-	}
+//	public static void setTest(AbstractRefactoringTest test){
+////		if(!test.equals(WorkspaceBuilder.test)){
+////			clearWorkspace();
+////		}
+//		clearWorkspace();
+//		WorkspaceBuilder.test = test;
+//	}
 
 	protected static void clearWorkspace(){
 		//		if(!allTestCasesWereInvoked()){
@@ -80,53 +80,53 @@ public class WorkspaceBuilder {
 		alreadyBuilt = false;
 	}
 
-	public static void buildTestWorkspace(){
-		String testProjectName = test.getTestProjectName();
-		if(testProjectName == null || "".equals(testProjectName)){
-			testProjectName = TEST_PROJECT_NAME;
-		}
-		String[] folders = test.getFolderNamesToCopyIntoTestProject();
-		if(folders == null){
-			folders = FOLDERS_TO_BE_COPIED_INTO_TEST_PROJECT;
-		}
-		List<String> extensions = test.getValidExtensions();
-		if(extensions == null){
-			extensions = VALID_EXTENSIONS_FOR_COPYING;
-		}
-		if(alreadyBuilt){
-			return;
-		}
-		IWorkspace ws = ResourcesPlugin.getWorkspace();
-		assertNotNull(ws);
-		IWorkspaceRoot wsr = ws.getRoot();
-		assertNotNull(wsr);
-		testProject = wsr.getProject(testProjectName);
-		assertNotNull(testProject);
-		try {
-			if(!testProject.exists()){
-				testProject.create(null);
-			}
-			testProject.open(null);
-			assertTrue(testProject.exists());
-			assertTrue(testProject.isOpen());
-			for (String folderName : folders) {
-				IFolder folder = testProject.getFolder(folderName);
-				if(!folder.exists()){
-					folder.create(IResource.NONE, true, null);
-				}
-				File dir = new File(folderName);
-				copyFilesIntoTestProject(dir, folder, extensions);
-			}
-		} catch (CoreException e) {
-			e.printStackTrace();
-			assert false;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			assert false;
-		}
-		initializeSokan();
-		alreadyBuilt = true;
-	}
+//	public static void buildTestWorkspace(){
+//		String testProjectName = test.getTestProjectName();
+//		if(testProjectName == null || "".equals(testProjectName)){
+//			testProjectName = TEST_PROJECT_NAME;
+//		}
+//		String[] folders = test.getFolderNamesToCopyIntoTestProject();
+//		if(folders == null){
+//			folders = FOLDERS_TO_BE_COPIED_INTO_TEST_PROJECT;
+//		}
+//		List<String> extensions = test.getValidExtensions();
+//		if(extensions == null){
+//			extensions = VALID_EXTENSIONS_FOR_COPYING;
+//		}
+//		if(alreadyBuilt){
+//			return;
+//		}
+//		IWorkspace ws = ResourcesPlugin.getWorkspace();
+//		assertNotNull(ws);
+//		IWorkspaceRoot wsr = ws.getRoot();
+//		assertNotNull(wsr);
+//		testProject = wsr.getProject(testProjectName);
+//		assertNotNull(testProject);
+//		try {
+//			if(!testProject.exists()){
+//				testProject.create(null);
+//			}
+//			testProject.open(null);
+//			assertTrue(testProject.exists());
+//			assertTrue(testProject.isOpen());
+//			for (String folderName : folders) {
+//				IFolder folder = testProject.getFolder(folderName);
+//				if(!folder.exists()){
+//					folder.create(IResource.NONE, true, null);
+//				}
+//				File dir = new File(folderName);
+//				copyFilesIntoTestProject(dir, folder, extensions);
+//			}
+//		} catch (CoreException e) {
+//			e.printStackTrace();
+//			assert false;
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//			assert false;
+//		}
+//		initializeSokan();
+//		alreadyBuilt = true;
+//	}
 
 	public static void copyFilesIntoTestProject(File fromFolder, IFolder toIFolder, List<String> filterExtensions) throws CoreException, FileNotFoundException{
 		assertTrue(fromFolder.exists());
@@ -154,11 +154,8 @@ public class WorkspaceBuilder {
 		BuildUtil.INSTANCE.toggleStore(testProject, store);
 	}
 
-	/**
-	 * @return the testProject
-	 */
-	public static IProject getTestProject() {
-		return testProject;
-	}
+//	public static IProject getTestProject() {
+//		return testProject;
+//	}
 
 }

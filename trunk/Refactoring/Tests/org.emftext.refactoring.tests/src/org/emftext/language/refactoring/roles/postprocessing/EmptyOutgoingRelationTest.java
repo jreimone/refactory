@@ -20,14 +20,14 @@ import org.junit.Test;
  * @author Jan Reimann
  *
  */
-public class EmptyOutgoingRelationTest extends AbstractRefactoringTest {
+public class EmptyOutgoingRelationTest{
 
 	private String path = "/roles/ExtractMethod.rolestext";
 	private RoleModel model;
 	
 	@Test
 	public void emptyOutgoingRelations(){
-		model = getExpectedModelFromFile(path, RoleModel.class);
+//		model = getExpectedModelFromFile(path, RoleModel.class);
 		assertNotNull(model);
 		EList<Relation> relations = model.getRelations();
 		Role origContainerRole = null;

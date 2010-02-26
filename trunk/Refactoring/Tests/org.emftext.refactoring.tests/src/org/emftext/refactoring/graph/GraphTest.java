@@ -21,11 +21,11 @@ import org.emftext.refactoring.graph.util.IPath;
 import org.emftext.refactoring.graph.util.LinkedListPath;
 import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
 import org.emftext.refactoring.test.AbstractRefactoringTest;
-import org.emftext.refactoring.test.WorkspaceUtil;
+import org.emftext.refactoring.test.TestUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class GraphTest extends AbstractRefactoringTest{
+public class GraphTest{
 
 //	private EObject model;
 	private String path = "/resources/p1.pl0";
@@ -34,7 +34,7 @@ public class GraphTest extends AbstractRefactoringTest{
 	@Ignore("not yet")
 	@Test
 	public void findNodeByNameAndType(){
-		resource = WorkspaceUtil.getResourceInWorkspace(this, path);
+//		resource = TestUtil.getResourceInWorkspace(this, path);
 		assertNotNull("Resource mustn't be null", resource);
 		EObject object = GraphUtil.findFirstNodeByNameAndType(resource, Program.class, "name", "p1");
 		assertNotNull("Requested object not found", object);
