@@ -18,8 +18,6 @@ public abstract class AbstractRefactoringTest extends TestCase{
 
 	private boolean failed = false;
 	
-	private TestDataPair testData;
-	
 	public abstract void runRefactoringTest();
 
 	@Override
@@ -31,14 +29,4 @@ public abstract class AbstractRefactoringTest extends TestCase{
 			throw e;
 		}
 	}
-
-	public TestDataPair getTestData() {
-		return testData;
-	}
-
-	public void setTestData(TestDataPair testData) {
-		this.testData = testData;
-	}
-	
-	
 }

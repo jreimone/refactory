@@ -1,16 +1,18 @@
 package org.emftext.refactoring.test;
 
+import java.util.List;
+
 import org.emftext.test.test.TestDataPair;
 
 public class TestClass {
 
-	private TestDataPair testDataPair;
+	private List<TestDataPair> testDataPairs;
 
-	public TestDataPair getTestDataPair() {
-		return testDataPair;
+	public List<TestDataPair> getTestDataPairs() {
+		return testDataPairs;
 	}
 
-	public void setTestDataPair(TestDataPair testDataPair) {
-		this.testDataPair = testDataPair;
+	public void setTestDataPairs(List<TestDataPair> testDataPairs) {
+		this.testDataPairs = testDataPairs;
 	}
 }

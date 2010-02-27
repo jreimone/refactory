@@ -17,9 +17,10 @@ public class TestFileFilter implements FilenameFilter {
 
 	public boolean accept(File dir, String name) {
 		if(filterExpectExtension){
-			return name.startsWith(nameFilter);
+			String replacedFileName = name.replace(TestTests.EXPECTED_DATA_FILE_NAME_INSERT, "");
+			return replacedFileName.equals(nameFilter);
 		}
-		return name.startsWith(nameFilter) && !name.endsWith(TestTests.EXPECT_EXTENSION);
+		return name.startsWith(nameFilter) && !name.contains(TestTests.EXPECTED_DATA_FILE_NAME_INSERT);
 	}
 
 }
