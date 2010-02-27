@@ -9,8 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -41,8 +40,8 @@ import org.emftext.test.test.TestTest;
  */
 public class TestTests extends TestCase{
 
-	public static final String INPUT_FOLDER 	= "testInput";
-	public static final String EXPECT_EXTENSION = "expected";
+	public static final String INPUT_FOLDER 					= "testInput";
+	public static final String EXPECTED_DATA_FILE_NAME_INSERT 	= ".expected";
 
 	@SuppressWarnings("unchecked")
 	private static final ArrayList<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
@@ -61,6 +60,30 @@ public class TestTests extends TestCase{
 		}
 		return suite;
 	}
+	
+	private static List<List<TestDataPair>> getTestDataPairs(String classFolder, String[] filePatterns){
+		List<List<TestDataPair>> pairs = new LinkedList<List<TestDataPair>>();
+		int greatestList = 0;
+		for (String filePattern : filePatterns) {
+			List<TestDataPair> dataPairs = getTestDataPairs(classFolder, filePattern);
+			pairs.add(dataPairs);
+			if(dataPairs.size() > greatestList){
+				greatestList = dataPairs.size();
+			}
+		}
+		List<List<TestDataPair>> result = new LinkedList<List<TestDataPair>>();
+		for (int i = 0; i < greatestList; i++) {
+			List<TestDataPair> newList = new LinkedList<TestDataPair>();
+			for (int j = 0; j < pairs.size(); j++) {
+				if(pairs.get(j).size() <= i){
+					newList.add(pairs.get(j).get(i));
+				}
+			}
+			result.add(newList);
+		}
+		
+		return result;
+	}
 
 	private static List<TestDataPair> getTestDataPairs(String classFolder, String filePattern){
 		List<TestDataPair> testData = new LinkedList<TestDataPair>();
@@ -75,7 +98,7 @@ public class TestTests extends TestCase{
 				File input = null;
 				File expected = null;
 				for (File file2 : filePair) {
-					if(file2.getName().endsWith(EXPECT_EXTENSION)){
+					if(file2.getName().contains(EXPECTED_DATA_FILE_NAME_INSERT)){
 						expected = file2;
 						LOG.info("Found expected data in file " + expected.getName());
 					} else {
@@ -109,32 +132,36 @@ public class TestTests extends TestCase{
 		String folder = null;
 		TestData classAnnotation = testClass.getAnnotation(TestData.class);
 		if(classAnnotation != null){
-			folder = classAnnotation.pattern();
+			folder = classAnnotation.value();
 		} else {
 			folder = testClass.getSimpleName();
 		}
 		Method[] methods = testClass.getMethods();
 		for (final Method method : methods) {
 			org.junit.Test testAnnotation = method.getAnnotation(org.junit.Test.class);
-			TestData testDataAnnotation = method.getAnnotation(TestData.class);
-			List<TestDataPair> testData = null;
-			if(testDataAnnotation != null && testAnnotation != null){
-				testData = getTestDataPairs(folder, testDataAnnotation.pattern());
+			DataPairs dataPairsAnnotation = method.getAnnotation(DataPairs.class);
+			List<List<TestDataPair>> testDataLists = null;
+			if(dataPairsAnnotation != null && testAnnotation != null){
+				testDataLists = getTestDataPairs(folder, dataPairsAnnotation.value());
 			} else if (testAnnotation != null){
-				testData = getTestDataPairs(folder, method.getName());
+				testDataLists = getTestDataPairs(folder, new String[]{method.getName()});
 			} else {
 				continue;
 			}
 			try {
-				for (TestDataPair testDataPair : testData) {
+				for (List<TestDataPair> testDataList : testDataLists) {
+					String dataString = "";
+					for (TestDataPair testDataPair : testDataList) {
+						dataString += " " + testDataPair.getInput().getName(); 
+					}
 					AbstractRefactoringTest newTest = createTest(testClass
 							, method
-							, testDataPair
-							, "METHOD: " + method.getName() + " DATA: " + testDataPair.getInput().getName());
+							, testDataList
+							, "METHOD: " + method.getName() + " DATA:" + dataString);
 					newSuite.addTest(newTest);
-					LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName() + " and file " + testDataPair.getInput().getName());
+					LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName() + " and files" + dataString);
 				}
-				if(testData == null || testData.size() == 0){
+				if(testDataLists == null || testDataLists.size() == 0){
 					AbstractRefactoringTest newTest = createTest(testClass
 							, method
 							, null
@@ -155,12 +182,13 @@ public class TestTests extends TestCase{
 		return newSuite;
 	}
 
-	private static AbstractRefactoringTest createTest(Class<? extends TestClass> testClass, final Method method, TestDataPair testDataPair, String name) throws InstantiationException, IllegalAccessException{
+	private static AbstractRefactoringTest createTest(Class<? extends TestClass> testClass, final Method method, final List<TestDataPair> testDataPair, String name) throws InstantiationException, IllegalAccessException{
 		final TestClass instance = (TestClass) testClass.newInstance();
 		AbstractRefactoringTest newTest = new AbstractRefactoringTest() {
 			@Override
 			public void runRefactoringTest() {
 				try {
+					instance.setTestDataPairs(testDataPair);
 					method.invoke(instance);
 				} catch (IllegalArgumentException e) {
 					LOG.severe("Could not invoke method " + method.getName());
@@ -173,7 +201,6 @@ public class TestTests extends TestCase{
 				}
 			}
 		};
-		newTest.setTestData(testDataPair);
 		newTest.setName(name);
 		return newTest;
 	}
