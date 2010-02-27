@@ -28,6 +28,7 @@
 						<include name="**/**Test.java"/>
 						<exclude name="**/CSharpTest.java" />
 						<exclude name="**/BulkGraphTest.java" />
+						<exclude name="**/AbstractSimpleMathTest.java" />
 					</fileset>
 				</batchtest>
 			</junit>
@@ -35,7 +36,7 @@
 	</macrodef>
 
 	<!-- TODO add run-test-java-templates -->
-	<target name="run-emftext-language-tests" depends="clean, run-overall-tests, run-test-ecore, run-test-java, run-simple-tests, run-test-custom-sandwich" />
+	<target name="run-emftext-language-tests" depends="clean, run-simple-tests, run-overall-tests, run-test-ecore, run-test-java, run-test-custom-sandwich" />
 
 	<target name="clean">
 		<delete dir="${test_result_dir}" includes="*.txt" />
@@ -181,6 +182,7 @@
 			<pathelement path="../org.emftext.language.simple_gui/bin"/>
 			<pathelement path="../org.emftext.language.simple_gui.resource.simplegui/bin"/>
 			<pathelement path="../org.emftext.language.simple_math/bin"/>
+			<pathelement path="../org.emftext.language.simple_math.interpreter/bin"/>
 			<pathelement path="../org.emftext.language.simple_math.resource.sm/bin"/>
 			<pathelement path="../org.emftext.language.simple_math.test/bin"/>
 			<pathelement path="../org.emftext.language.sparql/bin"/>
@@ -201,7 +203,9 @@
 			<pathelement path="../org.emftext.language.textadventure/bin"/>
 			<pathelement path="../org.emftext.language.textadventure.resource.tas/bin"/>
 			<pathelement path="../org.emftext.language.threevaluedlogic/bin"/>
+			<pathelement path="../org.emftext.language.threevaluedlogic.interpreter/bin"/>
 			<pathelement path="../org.emftext.language.threevaluedlogic.resource.tvl/bin"/>
+			<pathelement path="../org.emftext.language.threevaluedlogic.test/bin"/>
 			<pathelement path="../org.emftext.language.usecaseinvariant/bin"/>
 			<pathelement path="../org.emftext.language.usecaseinvariant.resource.ucinv/bin"/>
 			<pathelement path="../org.emftext.language.valueflow/bin"/>
