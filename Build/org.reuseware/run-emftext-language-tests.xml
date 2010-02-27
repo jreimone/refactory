@@ -87,6 +87,7 @@
 			<pathelement path="../org.emftext.language.efactory/bin"/>
 			<pathelement path="../org.emftext.language.efactory.resource.efactory/bin"/>
 			<pathelement path="../org.emftext.language.efactory.resource.efactory.post_processing/bin"/>
+			<pathelement path="../org.emftext.language.efactory.test/bin"/>
 			<pathelement path="../org.emftext.language.featherweight_java/bin"/>
 			<pathelement path="../org.emftext.language.featherweight_java.resource.fj/bin"/>
 			<pathelement path="../org.emftext.language.featherweight_java.test/bin"/>
@@ -280,6 +281,7 @@
 		<run-test plugin="org.emftext.language.c_sharp" extension="csharp" />
 		<run-test plugin="org.emftext.language.dot" extension="dot" />
 		<run-test plugin="org.emftext.language.ecore" extension="text" />
+		<run-test plugin="org.emftext.language.efactory" extension="efactory" />
 		<run-test plugin="org.emftext.language.featherweight_java" extension="fj" />
 		<run-test plugin="org.emftext.language.regexp" extension="regexp" />
 		<run-test plugin="org.emftext.language.simple_c" extension="c" />
