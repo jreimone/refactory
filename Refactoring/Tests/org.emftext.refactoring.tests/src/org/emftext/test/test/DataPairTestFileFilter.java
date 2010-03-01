@@ -3,7 +3,7 @@ package org.emftext.test.test;
 import java.io.File;
 import java.io.FilenameFilter;
 
-import org.emftext.refactoring.test.TestTests;
+import org.emftext.refactoring.test.RefactoringTests;
 
 public class DataPairTestFileFilter implements FilenameFilter {
 
@@ -17,10 +17,10 @@ public class DataPairTestFileFilter implements FilenameFilter {
 
 	public boolean accept(File dir, String name) {
 		if(filterExpectExtension){
-			String replacedFileName = name.replace(TestTests.EXPECTED_DATA_FILE_NAME_INSERT, "");
+			String replacedFileName = name.replace(RefactoringTests.EXPECTED_DATA_FILE_NAME_INSERT, "");
 			return replacedFileName.equals(nameFilter);
 		}
-		return name.startsWith(nameFilter) && !name.contains(TestTests.EXPECTED_DATA_FILE_NAME_INSERT);
+		return name.startsWith(nameFilter) && !name.contains(RefactoringTests.EXPECTED_DATA_FILE_NAME_INSERT);
 	}
 
 }

@@ -3,11 +3,11 @@
  */
 package org.emftext.refactoring.specification.interpreter;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -28,13 +28,16 @@ import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
-import org.emftext.test.test.AbstractRefactoringTest;
+import org.emftext.test.test.InputData;
+import org.emftext.test.test.TestClass;
+import org.emftext.test.test.TestData;
+import org.emftext.test.test.TestDataSet;
 import org.junit.Test;
 
-public class RefactoringInterpreterTest{
+@TestData("pl0")
+public class RefactoringInterpreterTest extends TestClass{
 
-	private String path = "/pl0/wirth.pl0";
-	private static int DELAY = 2000;
+	private String path = "wirth";
 	
 	private IRefactorer getRefactorer(Resource resource){
 		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
@@ -43,9 +46,12 @@ public class RefactoringInterpreterTest{
 	}
 	
 	@Test
+	@InputData("wirth")
 	public void getAppliedRoles(){
-//		Resource resource = TestUtil.getResourceInWorkspace(this, path);
-		Resource resource = null;
+		TestDataSet dataSet = getTestDataSet();
+		File file = dataSet.getInputFileByPattern(path);
+		Resource resource = TestUtil.getResourceFromFile(file);
+		// TODO mock for connector
 		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector();
 		assertNotNull(connector);
 		Program pl0Prog = TestUtil.getExpectedModelFromResource(resource, Program.class);

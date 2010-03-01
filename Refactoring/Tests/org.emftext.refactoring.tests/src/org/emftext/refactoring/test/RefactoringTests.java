@@ -25,8 +25,10 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
 import org.emftext.language.refactoring.roles.RolesPackage;
+import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelationTest;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
+import org.emftext.refactoring.specification.interpreter.RefactoringInterpreterTest;
 import org.emftext.test.test.AbstractRefactoringTest;
 import org.emftext.test.test.DataPairTestFileFilter;
 import org.emftext.test.test.DataPairs;
@@ -44,18 +46,20 @@ import org.emftext.test.test.TestDataSet;
  * @author Jan Reimann
  *
  */
-public class TestTests extends TestCase{
+public class RefactoringTests extends TestCase{
 
 	public static final String INPUT_FOLDER 					= "testInput";
 	public static final String EXPECTED_DATA_FILE_NAME_INSERT 	= ".expected";
 
 	@SuppressWarnings("unchecked")
 	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
-			TestTest.class
+			TestTest.class,
+			EmptyOutgoingRelationTest.class,
+			RefactoringInterpreterTest.class
 	));
 
 
-	private static final Logger LOG = Logger.getLogger(TestTests.class.getSimpleName());
+	private static final Logger LOG = Logger.getLogger(RefactoringTests.class.getSimpleName());
 
 	public static Test suite(){
 		registerEPackages();
@@ -114,27 +118,31 @@ public class TestTests extends TestCase{
 		List<List<File>> inputFiles = new LinkedList<List<File>>();
 		List<List<File>> expectedFiles = new LinkedList<List<File>>();
 		int setCount = -1;
-		for (String filePattern : inputValue) {
-			List<File> files = getTestFiles(classFolder, filePattern, false);
-			if(setCount == -1){
-				setCount = files.size();
-			} else {
-				if(setCount != files.size()){
-					throw new FileNotFoundException("Some input files were not found. For TestDataSet all sets for one test method must have the same size.");
+		if(inputValue != null){
+			for (String filePattern : inputValue) {
+				List<File> files = getTestFiles(classFolder, filePattern, false);
+				if(setCount == -1){
+					setCount = files.size();
+				} else {
+					if(setCount != files.size()){
+						throw new FileNotFoundException("Some input files were not found. For TestDataSet all sets for one test method must have the same size.");
+					}
 				}
+				inputFiles.add(files);
 			}
-			inputFiles.add(files);
 		}
-		for (String filePattern : expectedValue) {
-			List<File> files = getTestFiles(classFolder, filePattern, false);
-			if(setCount == -1){
-				setCount = files.size();
-			} else {
-				if(setCount != files.size()){
-					throw new FileNotFoundException("Some expected files were not found. For TestDataSet all sets for one test method must have the same size.");
+		if(expectedValue != null){
+			for (String filePattern : expectedValue) {
+				List<File> files = getTestFiles(classFolder, filePattern, false);
+				if(setCount == -1){
+					setCount = files.size();
+				} else {
+					if(setCount != files.size()){
+						throw new FileNotFoundException("Some expected files were not found. For TestDataSet all sets for one test method must have the same size.");
+					}
 				}
+				expectedFiles.add(files);
 			}
-			expectedFiles.add(files);
 		}
 		List<TestDataSet> result = new LinkedList<TestDataSet>();
 		for (int i = 0; i < setCount; i++) {
@@ -208,7 +216,9 @@ public class TestTests extends TestCase{
 					, method.getName());
 			methodSuite = newTest;
 			LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName());
-			LOG.info("Created Test " + newTest.getName());
+			if(newTest != null){
+				LOG.info("Created Test " + newTest.getName());
+			}
 		} else {
 			methodSuite = new TestSuite(method.getName() + " Data:Pairs");
 			for (List<TestDataPair> testDataList : testDataLists) {
