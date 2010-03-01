@@ -7,10 +7,11 @@ import java.util.List;
 public class TestClass {
 
 	private List<TestDataPair> testDataPairs;
+	private TestDataSet testDataSet;
 
 	public List<TestDataPair> getTestDataPairs() {
 		if(testDataPairs == null){
-			return new LinkedList<TestDataPair>();
+			testDataPairs = new LinkedList<TestDataPair>();
 		}
 		return testDataPairs;
 	}
@@ -18,4 +19,17 @@ public class TestClass {
 	public void setTestDataPairs(List<TestDataPair> testDataPairs) {
 		this.testDataPairs = testDataPairs;
 	}
+
+	public TestDataSet getTestDataSet() {
+		if(testDataSet == null){
+			testDataSet = new TestDataSet();
+		}
+		return testDataSet;
+	}
+
+	public void setTestDataSet(TestDataSet testDataSet) {
+		this.testDataSet = testDataSet;
+	}
+
+	
 }
