@@ -1,9 +1,7 @@
 /**
  * 
  */
-package org.emftext.refactoring.test;
-
-import org.emftext.test.test.TestDataPair;
+package org.emftext.test.test;
 
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
@@ -18,7 +16,7 @@ public abstract class AbstractRefactoringTest extends TestCase{
 
 	private boolean failed = false;
 	
-	public abstract void runRefactoringTest();
+	public abstract void runRefactoringTest() throws Throwable;
 
 	@Override
 	protected void runTest() throws Throwable {

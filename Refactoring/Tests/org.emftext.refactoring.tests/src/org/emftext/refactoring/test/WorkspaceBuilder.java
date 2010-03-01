@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.emftext.test.test.AbstractRefactoringTest;
 import org.reuseware.sokan.IndexRow;
 import org.reuseware.sokan.Store;
 import org.reuseware.sokan.index.util.IndexUtil;

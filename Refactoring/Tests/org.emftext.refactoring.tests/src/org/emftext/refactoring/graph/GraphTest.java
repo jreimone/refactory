@@ -20,8 +20,8 @@ import org.emftext.refactoring.graph.util.GraphUtil;
 import org.emftext.refactoring.graph.util.IPath;
 import org.emftext.refactoring.graph.util.LinkedListPath;
 import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
-import org.emftext.refactoring.test.AbstractRefactoringTest;
 import org.emftext.refactoring.test.TestUtil;
+import org.emftext.test.test.AbstractRefactoringTest;
 import org.junit.Ignore;
 import org.junit.Test;
 

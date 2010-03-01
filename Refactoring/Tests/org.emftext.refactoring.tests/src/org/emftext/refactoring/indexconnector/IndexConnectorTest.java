@@ -12,9 +12,9 @@ import org.emftext.language.pl0.Program;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.refactoring.test.AbstractRefactoringTest;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.refactoring.util.ModelUtil;
+import org.emftext.test.test.AbstractRefactoringTest;
 import org.junit.Test;
 
 /**

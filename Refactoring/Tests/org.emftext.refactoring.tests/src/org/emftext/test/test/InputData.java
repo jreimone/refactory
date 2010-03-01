@@ -1,4 +1,4 @@
-package org.emftext.refactoring.test;
+package org.emftext.test.test;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -25,10 +25,10 @@ import org.emftext.refactoring.indexconnector.IndexConnector;
 import org.emftext.refactoring.indexconnector.IndexConnectorFactory;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
-import org.emftext.refactoring.test.AbstractRefactoringTest;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
+import org.emftext.test.test.AbstractRefactoringTest;
 import org.junit.Test;
 
 public class RefactoringInterpreterTest{
