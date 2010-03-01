@@ -5,7 +5,7 @@
     modelPluginID="org.emftext.language.refactoring.rolemapping" modelName="Rolemapping"
     editPluginClass="org.emftext.language.refactoring.rolemapping.provider.RolemappingEditPlugin"
     editorPluginClass="org.emftext.language.refactoring.rolemapping.presentation.RolemappingEditorPlugin"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
     usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.emftext.language.refactoring.roles/metamodel/roles.genmodel#//roles">
   <foreignModel>rolemapping.ecore</foreignModel>
   <genPackages prefix="Rolemapping" basePackage="org.emftext.language.refactoring"

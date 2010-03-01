@@ -30,7 +30,7 @@ eclass Mapping {
 			EClass mappedClass = concreteMapping.getMetaclass();
 			if(mappedClass.equals(metaclass)){
 				mappedRoles.add(mappedRole);
-			} else if(mappedRole.getModifier().contains(RoleModifier.super)){
+			} else if(mappedRole.getModifier().contains(RoleModifier.OPTIONAL)){
 			//} else if(mappedRole.getModifier().contains(RoleModifier.optional)){
 				if(mappedClass.isSuperTypeOf(metaclass)){
 					mappedRoles.add(mappedRole);

@@ -42,170 +42,163 @@ import org.emftext.language.refactoring.roles.MultiplicityRelation;
  */
 public class RelationMappingImpl extends EObjectImpl implements RelationMapping {
 	/**
-   * The cached value of the '{@link #getRelation() <em>Relation</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRelation() <em>Relation</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getRelation()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRelation()
+	 * @generated
+	 * @ordered
+	 */
 	protected MultiplicityRelation relation;
 
 	/**
-   * The cached value of the '{@link #getReferences() <em>References</em>}' reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getReferences()
-   * @generated
-   * @ordered
-   */
+	 * @see #getReferences()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<EReference> references;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected RelationMappingImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RolemappingPackage.Literals.RELATION_MAPPING;
-  }
+		return RolemappingPackage.Literals.RELATION_MAPPING;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public MultiplicityRelation getRelation() {
-    if (relation != null && relation.eIsProxy())
-    {
-      InternalEObject oldRelation = (InternalEObject)relation;
-      relation = (MultiplicityRelation)eResolveProxy(oldRelation);
-      if (relation != oldRelation)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RolemappingPackage.RELATION_MAPPING__RELATION, oldRelation, relation));
-      }
-    }
-    return relation;
-  }
+		if (relation != null && relation.eIsProxy()) {
+			InternalEObject oldRelation = (InternalEObject)relation;
+			relation = (MultiplicityRelation)eResolveProxy(oldRelation);
+			if (relation != oldRelation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RolemappingPackage.RELATION_MAPPING__RELATION, oldRelation, relation));
+			}
+		}
+		return relation;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public MultiplicityRelation basicGetRelation() {
-    return relation;
-  }
+		return relation;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setRelation(MultiplicityRelation newRelation) {
-    MultiplicityRelation oldRelation = relation;
-    relation = newRelation;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.RELATION_MAPPING__RELATION, oldRelation, relation));
-  }
+		MultiplicityRelation oldRelation = relation;
+		relation = newRelation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.RELATION_MAPPING__RELATION, oldRelation, relation));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<EReference> getReferences() {
-    if (references == null)
-    {
-      references = new EObjectResolvingEList<EReference>(EReference.class, this, RolemappingPackage.RELATION_MAPPING__REFERENCES);
-    }
-    return references;
-  }
+		if (references == null) {
+			references = new EObjectResolvingEList<EReference>(EReference.class, this, RolemappingPackage.RELATION_MAPPING__REFERENCES);
+		}
+		return references;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case RolemappingPackage.RELATION_MAPPING__RELATION:
-        if (resolve) return getRelation();
-        return basicGetRelation();
-      case RolemappingPackage.RELATION_MAPPING__REFERENCES:
-        return getReferences();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RolemappingPackage.RELATION_MAPPING__RELATION:
+				if (resolve) return getRelation();
+				return basicGetRelation();
+			case RolemappingPackage.RELATION_MAPPING__REFERENCES:
+				return getReferences();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case RolemappingPackage.RELATION_MAPPING__RELATION:
-        setRelation((MultiplicityRelation)newValue);
-        return;
-      case RolemappingPackage.RELATION_MAPPING__REFERENCES:
-        getReferences().clear();
-        getReferences().addAll((Collection<? extends EReference>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RolemappingPackage.RELATION_MAPPING__RELATION:
+				setRelation((MultiplicityRelation)newValue);
+				return;
+			case RolemappingPackage.RELATION_MAPPING__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends EReference>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case RolemappingPackage.RELATION_MAPPING__RELATION:
-        setRelation((MultiplicityRelation)null);
-        return;
-      case RolemappingPackage.RELATION_MAPPING__REFERENCES:
-        getReferences().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RolemappingPackage.RELATION_MAPPING__RELATION:
+				setRelation((MultiplicityRelation)null);
+				return;
+			case RolemappingPackage.RELATION_MAPPING__REFERENCES:
+				getReferences().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case RolemappingPackage.RELATION_MAPPING__RELATION:
-        return relation != null;
-      case RolemappingPackage.RELATION_MAPPING__REFERENCES:
-        return references != null && !references.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RolemappingPackage.RELATION_MAPPING__RELATION:
+				return relation != null;
+			case RolemappingPackage.RELATION_MAPPING__REFERENCES:
+				return references != null && !references.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //RelationMappingImpl

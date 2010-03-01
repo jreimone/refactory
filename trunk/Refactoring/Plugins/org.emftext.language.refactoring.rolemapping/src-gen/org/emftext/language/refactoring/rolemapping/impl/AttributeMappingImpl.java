@@ -36,196 +36,188 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
  */
 public class AttributeMappingImpl extends EObjectImpl implements AttributeMapping {
 	/**
-   * The cached value of the '{@link #getRoleAttribute() <em>Role Attribute</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRoleAttribute() <em>Role Attribute</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getRoleAttribute()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRoleAttribute()
+	 * @generated
+	 * @ordered
+	 */
 	protected RoleAttribute roleAttribute;
 
 	/**
-   * The cached value of the '{@link #getClassAttribute() <em>Class Attribute</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getClassAttribute() <em>Class Attribute</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getClassAttribute()
-   * @generated
-   * @ordered
-   */
+	 * @see #getClassAttribute()
+	 * @generated
+	 * @ordered
+	 */
 	protected EAttribute classAttribute;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected AttributeMappingImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RolemappingPackage.Literals.ATTRIBUTE_MAPPING;
-  }
+		return RolemappingPackage.Literals.ATTRIBUTE_MAPPING;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RoleAttribute getRoleAttribute() {
-    if (roleAttribute != null && roleAttribute.eIsProxy())
-    {
-      InternalEObject oldRoleAttribute = (InternalEObject)roleAttribute;
-      roleAttribute = (RoleAttribute)eResolveProxy(oldRoleAttribute);
-      if (roleAttribute != oldRoleAttribute)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE, oldRoleAttribute, roleAttribute));
-      }
-    }
-    return roleAttribute;
-  }
+		if (roleAttribute != null && roleAttribute.eIsProxy()) {
+			InternalEObject oldRoleAttribute = (InternalEObject)roleAttribute;
+			roleAttribute = (RoleAttribute)eResolveProxy(oldRoleAttribute);
+			if (roleAttribute != oldRoleAttribute) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE, oldRoleAttribute, roleAttribute));
+			}
+		}
+		return roleAttribute;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RoleAttribute basicGetRoleAttribute() {
-    return roleAttribute;
-  }
+		return roleAttribute;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setRoleAttribute(RoleAttribute newRoleAttribute) {
-    RoleAttribute oldRoleAttribute = roleAttribute;
-    roleAttribute = newRoleAttribute;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE, oldRoleAttribute, roleAttribute));
-  }
+		RoleAttribute oldRoleAttribute = roleAttribute;
+		roleAttribute = newRoleAttribute;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE, oldRoleAttribute, roleAttribute));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute getClassAttribute() {
-    if (classAttribute != null && classAttribute.eIsProxy())
-    {
-      InternalEObject oldClassAttribute = (InternalEObject)classAttribute;
-      classAttribute = (EAttribute)eResolveProxy(oldClassAttribute);
-      if (classAttribute != oldClassAttribute)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE, oldClassAttribute, classAttribute));
-      }
-    }
-    return classAttribute;
-  }
+		if (classAttribute != null && classAttribute.eIsProxy()) {
+			InternalEObject oldClassAttribute = (InternalEObject)classAttribute;
+			classAttribute = (EAttribute)eResolveProxy(oldClassAttribute);
+			if (classAttribute != oldClassAttribute) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE, oldClassAttribute, classAttribute));
+			}
+		}
+		return classAttribute;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EAttribute basicGetClassAttribute() {
-    return classAttribute;
-  }
+		return classAttribute;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setClassAttribute(EAttribute newClassAttribute) {
-    EAttribute oldClassAttribute = classAttribute;
-    classAttribute = newClassAttribute;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE, oldClassAttribute, classAttribute));
-  }
+		EAttribute oldClassAttribute = classAttribute;
+		classAttribute = newClassAttribute;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE, oldClassAttribute, classAttribute));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE:
-        if (resolve) return getRoleAttribute();
-        return basicGetRoleAttribute();
-      case RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE:
-        if (resolve) return getClassAttribute();
-        return basicGetClassAttribute();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE:
+				if (resolve) return getRoleAttribute();
+				return basicGetRoleAttribute();
+			case RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE:
+				if (resolve) return getClassAttribute();
+				return basicGetClassAttribute();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE:
-        setRoleAttribute((RoleAttribute)newValue);
-        return;
-      case RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE:
-        setClassAttribute((EAttribute)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE:
+				setRoleAttribute((RoleAttribute)newValue);
+				return;
+			case RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE:
+				setClassAttribute((EAttribute)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE:
-        setRoleAttribute((RoleAttribute)null);
-        return;
-      case RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE:
-        setClassAttribute((EAttribute)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE:
+				setRoleAttribute((RoleAttribute)null);
+				return;
+			case RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE:
+				setClassAttribute((EAttribute)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE:
-        return roleAttribute != null;
-      case RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE:
-        return classAttribute != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RolemappingPackage.ATTRIBUTE_MAPPING__ROLE_ATTRIBUTE:
+				return roleAttribute != null;
+			case RolemappingPackage.ATTRIBUTE_MAPPING__CLASS_ATTRIBUTE:
+				return classAttribute != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //AttributeMappingImpl
