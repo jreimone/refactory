@@ -11,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.emftext.language.refactoring.roles.Relation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.refactoring.test.AbstractRefactoringTest;
+import org.emftext.test.test.AbstractRefactoringTest;
 import org.junit.Test;
 
 /**

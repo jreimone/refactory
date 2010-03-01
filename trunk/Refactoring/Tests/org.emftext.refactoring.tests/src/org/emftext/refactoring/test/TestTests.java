@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -28,9 +27,12 @@ import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.Ro
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
+import org.emftext.test.test.AbstractRefactoringTest;
+import org.emftext.test.test.DataPairs;
+import org.emftext.test.test.TestClass;
+import org.emftext.test.test.TestData;
 import org.emftext.test.test.TestDataPair;
 import org.emftext.test.test.TestFileFilter;
-import org.emftext.test.test.TestTest;
 
 /**
  * Runs all tests.
@@ -44,9 +46,9 @@ public class TestTests extends TestCase{
 	public static final String EXPECTED_DATA_FILE_NAME_INSERT 	= ".expected";
 
 	@SuppressWarnings("unchecked")
-	private static final ArrayList<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
+	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
 			TestTest.class
-		));
+	));
 
 
 	private static final Logger LOG = Logger.getLogger(TestTests.class.getSimpleName());
@@ -60,7 +62,7 @@ public class TestTests extends TestCase{
 		}
 		return suite;
 	}
-	
+
 	private static List<List<TestDataPair>> getTestDataPairs(String classFolder, String[] filePatterns){
 		List<List<TestDataPair>> pairs = new LinkedList<List<TestDataPair>>();
 		int greatestList = 0;
@@ -75,13 +77,14 @@ public class TestTests extends TestCase{
 		for (int i = 0; i < greatestList; i++) {
 			List<TestDataPair> newList = new LinkedList<TestDataPair>();
 			for (int j = 0; j < pairs.size(); j++) {
-				if(pairs.get(j).size() <= i){
+				if(pairs.get(j).size() - 1 >= i){
 					newList.add(pairs.get(j).get(i));
 				}
 			}
-			result.add(newList);
-		}
-		
+			if(newList.size() > 0){
+				result.add(newList);
+			}
+		}	
 		return result;
 	}
 
@@ -127,6 +130,41 @@ public class TestTests extends TestCase{
 		}
 	}
 
+	private static Test handleDataPairAnnotation(org.junit.Test testAnnotation, DataPairs dataPairsAnnotation, Class<? extends TestClass> testClass, Method method, String folder) throws InstantiationException, IllegalAccessException{
+		List<List<TestDataPair>> testDataLists = null;
+		if(dataPairsAnnotation != null && testAnnotation != null){
+			testDataLists = getTestDataPairs(folder, dataPairsAnnotation.value());
+		} else if (testAnnotation != null){
+			testDataLists = getTestDataPairs(folder, new String[]{method.getName()});
+		} else {
+			return null;
+		}
+		Test methodSuite = null;
+		if(testDataLists == null || testDataLists.size() == 0){
+			AbstractRefactoringTest newTest = createTest(testClass
+					, method
+					, null
+					, method.getName());
+			methodSuite = newTest;
+			LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName());
+		} else {
+			methodSuite = new TestSuite(method.getName());
+			for (List<TestDataPair> testDataList : testDataLists) {
+				String dataString = "";
+				for (TestDataPair testDataPair : testDataList) {
+					dataString += " " + testDataPair.getInput().getName(); 
+				}
+				AbstractRefactoringTest newTest = createTest(testClass
+						, method
+						, testDataList
+						, "DATA:" + dataString);
+				((TestSuite) methodSuite).addTest(newTest);
+				LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName() + " and files" + dataString);
+			}
+		}
+		return methodSuite;
+	}
+
 	private static TestSuite createTests(Class<? extends TestClass> testClass){
 		TestSuite newSuite = new TestSuite(testClass.getSimpleName());
 		String folder = null;
@@ -138,36 +176,12 @@ public class TestTests extends TestCase{
 		}
 		Method[] methods = testClass.getMethods();
 		for (final Method method : methods) {
-			org.junit.Test testAnnotation = method.getAnnotation(org.junit.Test.class);
-			DataPairs dataPairsAnnotation = method.getAnnotation(DataPairs.class);
-			List<List<TestDataPair>> testDataLists = null;
-			if(dataPairsAnnotation != null && testAnnotation != null){
-				testDataLists = getTestDataPairs(folder, dataPairsAnnotation.value());
-			} else if (testAnnotation != null){
-				testDataLists = getTestDataPairs(folder, new String[]{method.getName()});
-			} else {
-				continue;
-			}
+			Test methodSuite = null;
 			try {
-				for (List<TestDataPair> testDataList : testDataLists) {
-					String dataString = "";
-					for (TestDataPair testDataPair : testDataList) {
-						dataString += " " + testDataPair.getInput().getName(); 
-					}
-					AbstractRefactoringTest newTest = createTest(testClass
-							, method
-							, testDataList
-							, "METHOD: " + method.getName() + " DATA:" + dataString);
-					newSuite.addTest(newTest);
-					LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName() + " and files" + dataString);
-				}
-				if(testDataLists == null || testDataLists.size() == 0){
-					AbstractRefactoringTest newTest = createTest(testClass
-							, method
-							, null
-							, "Test in class " + testClass.getSimpleName() + " for method " + method.getName());
-					newSuite.addTest(newTest);
-					LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName());
+				org.junit.Test testAnnotation = method.getAnnotation(org.junit.Test.class);
+				DataPairs dataPairsAnnotation = method.getAnnotation(DataPairs.class);
+				if(dataPairsAnnotation != null){
+					methodSuite = handleDataPairAnnotation(testAnnotation, dataPairsAnnotation, testClass, method, folder);
 				}
 			} catch (InstantiationException e) {
 				LOG.severe("Could not instantiate TestClass " + testClass.getSimpleName());
@@ -178,6 +192,9 @@ public class TestTests extends TestCase{
 				e.printStackTrace();
 				continue;
 			}
+			if(methodSuite != null){
+				newSuite.addTest(methodSuite);
+			}
 		}
 		return newSuite;
 	}
@@ -186,25 +203,25 @@ public class TestTests extends TestCase{
 		final TestClass instance = (TestClass) testClass.newInstance();
 		AbstractRefactoringTest newTest = new AbstractRefactoringTest() {
 			@Override
-			public void runRefactoringTest() {
+			public void runRefactoringTest() throws Throwable{
 				try {
 					instance.setTestDataPairs(testDataPair);
 					method.invoke(instance);
 				} catch (IllegalArgumentException e) {
 					LOG.severe("Could not invoke method " + method.getName());
-					e.printStackTrace();
+					throw e;
 				} catch (IllegalAccessException e) {
-					e.printStackTrace();
+					throw e;
 				} catch (InvocationTargetException e) {
 					LOG.severe("Method " + method.getName() + " threw an exception");
-					e.printStackTrace();
+					throw e.getTargetException();
 				}
 			}
 		};
 		newTest.setName(name);
 		return newTest;
 	}
-	
+
 	private static void registerEPackages(){
 		// needed for refactorings
 		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
