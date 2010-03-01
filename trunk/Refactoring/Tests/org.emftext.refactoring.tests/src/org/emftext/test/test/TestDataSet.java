@@ -26,4 +26,21 @@ public class TestDataSet {
 	public void setExpectedDataFiles(List<File> expectedDataFiles) {
 		this.expectedDataFiles = expectedDataFiles;
 	}
+	
+	public File getInputFileByPattern(String pattern){
+		return getFileByPattern(inputDataFiles, pattern);
+	}
+	
+	public File getExpectedFileByPattern(String pattern){
+		return getFileByPattern(expectedDataFiles, pattern);
+	}
+
+	private File getFileByPattern(List<File> source, String pattern) {
+		for (File file : source) {
+			if(file.getName().startsWith(pattern)){
+				return file;
+			}
+		}
+		return null;
+	}
 }

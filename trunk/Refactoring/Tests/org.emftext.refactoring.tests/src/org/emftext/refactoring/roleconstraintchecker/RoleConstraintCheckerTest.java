@@ -28,25 +28,9 @@ import org.junit.Test;
  *
  */
 public class RoleConstraintCheckerTest{
-
-	private static final String[] FOLDERS_TO_BE_COPIED_INTO_TEST_PROJECT = new String[]{
-		"constraintresources"
-	};
-
-	private static final List<String> VALID_EXTENSIONS_FOR_COPYING = Arrays.asList(
-			"rolemapping",
-			"rolestext",
-			"pl0"
-	);
 		
-//	private String path = "test/testMapping.rolemapping";
 	private String path = "/constraintresources/relationTestMapping.rolemapping";
-//	private String path1 = "resources/TestAssociation.rolestext";
-//	private String path2 = "resources/TestComposition.rolestext";
-//	private String path3 = "resources/TestImplication.rolestext";
-//	private String path4 = "resources/TestProhibition.rolestext";
 	private RoleMappingModel mappingModel;
-//	private List<RoleModel> roleModels;
 	
 	@Test
 	public void prohibitionConstraints(){
