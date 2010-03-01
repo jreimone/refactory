@@ -1,6 +1,9 @@
 package org.emftext.refactoring.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.util.Random;
 
 import org.emftext.test.test.DataPairs;
 import org.emftext.test.test.ExpectedData;
@@ -24,9 +27,18 @@ public class TestTest extends TestClass{
 	}
 	
 	@Test
-	@InputData({"", ""})
-	@ExpectedData({"", ""})
+	@InputData({"inputOne", "inputTwo"})
+	@ExpectedData({"dataOnly"})
 	public void arbitraryInputExpectedDataTest(){
-		System.out.println("TestTest.arbitraryInputExpectedDataTest()");
+		System.out.println("TestTest.arbitraryInputExpectedDataTest() with following data:");
+		System.out.println("INPUT:");
+		for (File file : getTestDataSet().getInputDataFiles()) {
+			System.out.print(file.getName() + " ");
+		}
+		System.out.println("EXPECTED:");
+		for (File file : getTestDataSet().getExpectedDataFiles()) {
+			System.out.print(file.getName() + " ");
+		}
+		assertTrue("Should be true", new Random(System.currentTimeMillis()).nextBoolean());
 	}
 }

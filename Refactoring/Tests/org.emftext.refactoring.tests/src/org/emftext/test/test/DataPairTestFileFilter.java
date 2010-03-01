@@ -5,12 +5,12 @@ import java.io.FilenameFilter;
 
 import org.emftext.refactoring.test.TestTests;
 
-public class TestFileFilter implements FilenameFilter {
+public class DataPairTestFileFilter implements FilenameFilter {
 
 	private String nameFilter;
 	private boolean filterExpectExtension;
 	
-	public TestFileFilter(String nameFilter, boolean includeExpectExtension){
+	public DataPairTestFileFilter(String nameFilter, boolean includeExpectExtension){
 		this.nameFilter = nameFilter;
 		this.filterExpectExtension = includeExpectExtension;
 	}
