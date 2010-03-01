@@ -33,87 +33,91 @@ import org.emftext.language.refactoring.roles.RoleModel;
  */
 public interface Mapping extends EObject {
 	/**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.emftext.language.refactoring.rolemapping.RolemappingPackage#getMapping_Name()
-   * @model required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.emftext.language.refactoring.rolemapping.RolemappingPackage#getMapping_Name()
+	 * @model required="true"
+	 * @generated
+	 */
 	String getName();
 
 	/**
-   * Sets the value of the '{@link org.emftext.language.refactoring.rolemapping.Mapping#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.emftext.language.refactoring.rolemapping.Mapping#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
 	void setName(String value);
 
 	/**
-   * Returns the value of the '<em><b>Mapped Role Model</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Mapped Role Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Mapped Role Model</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Mapped Role Model</em>' reference.
-   * @see #setMappedRoleModel(RoleModel)
-   * @see org.emftext.language.refactoring.rolemapping.RolemappingPackage#getMapping_MappedRoleModel()
-   * @model required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Mapped Role Model</em>' reference.
+	 * @see #setMappedRoleModel(RoleModel)
+	 * @see org.emftext.language.refactoring.rolemapping.RolemappingPackage#getMapping_MappedRoleModel()
+	 * @model required="true"
+	 * @generated
+	 */
 	RoleModel getMappedRoleModel();
 
 	/**
-   * Sets the value of the '{@link org.emftext.language.refactoring.rolemapping.Mapping#getMappedRoleModel <em>Mapped Role Model</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.emftext.language.refactoring.rolemapping.Mapping#getMappedRoleModel <em>Mapped Role Model</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Mapped Role Model</em>' reference.
-   * @see #getMappedRoleModel()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Mapped Role Model</em>' reference.
+	 * @see #getMappedRoleModel()
+	 * @generated
+	 */
 	void setMappedRoleModel(RoleModel value);
 
 	/**
-   * Returns the value of the '<em><b>Role To Metaelement</b></em>' containment reference list.
-   * The list contents are of type {@link org.emftext.language.refactoring.rolemapping.ConcreteMapping}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Role To Metaelement</b></em>' containment reference list.
+	 * The list contents are of type {@link org.emftext.language.refactoring.rolemapping.ConcreteMapping}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Role To Metaelement</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Role To Metaelement</em>' containment reference list.
-   * @see org.emftext.language.refactoring.rolemapping.RolemappingPackage#getMapping_RoleToMetaelement()
-   * @model containment="true" required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Role To Metaelement</em>' containment reference list.
+	 * @see org.emftext.language.refactoring.rolemapping.RolemappingPackage#getMapping_RoleToMetaelement()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
 	EList<ConcreteMapping> getRoleToMetaelement();
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @model kind="operation"
-   * @generated
-   */
+	 * <!-- begin-model-doc -->
+	 * 
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.roles.Role > roles = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.roles.Role > ( ) ; \r\norg.eclipse.emf.common.util.EList < org.emftext.language.refactoring.rolemapping.ConcreteMapping > mappings = getRoleToMetaelement ( ) ; \r\nfor ( org.emftext.language.refactoring.rolemapping.ConcreteMapping concreteMapping : mappings ) { \r\n\troles .add ( concreteMapping .getRole ( ) ) ; \r\n} \r\nreturn roles ; \r\n'"
+	 * @generated
+	 */
 	EList<Role> getAllMappedRoles();
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @model
-   * @generated
-   */
+	 * @model
+	 * @generated
+	 */
 	EList<Role> getMappedRolesForEObject(EObject object);
 
 } // Mapping

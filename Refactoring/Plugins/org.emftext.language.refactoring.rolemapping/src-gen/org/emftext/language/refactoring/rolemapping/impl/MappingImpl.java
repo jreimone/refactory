@@ -49,137 +49,134 @@ import org.emftext.language.refactoring.roles.RoleModifier;
  */
 public class MappingImpl extends EObjectImpl implements Mapping {
 	/**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
 	protected String name = NAME_EDEFAULT;
 
 	/**
-   * The cached value of the '{@link #getMappedRoleModel() <em>Mapped Role Model</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getMappedRoleModel() <em>Mapped Role Model</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getMappedRoleModel()
-   * @generated
-   * @ordered
-   */
+	 * @see #getMappedRoleModel()
+	 * @generated
+	 * @ordered
+	 */
 	protected RoleModel mappedRoleModel;
 
 	/**
-   * The cached value of the '{@link #getRoleToMetaelement() <em>Role To Metaelement</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRoleToMetaelement() <em>Role To Metaelement</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getRoleToMetaelement()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRoleToMetaelement()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<ConcreteMapping> roleToMetaelement;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected MappingImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RolemappingPackage.Literals.MAPPING;
-  }
+		return RolemappingPackage.Literals.MAPPING;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public String getName() {
-    return name;
-  }
+		return name;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setName(String newName) {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.MAPPING__NAME, oldName, name));
-  }
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.MAPPING__NAME, oldName, name));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RoleModel getMappedRoleModel() {
-    if (mappedRoleModel != null && mappedRoleModel.eIsProxy())
-    {
-      InternalEObject oldMappedRoleModel = (InternalEObject)mappedRoleModel;
-      mappedRoleModel = (RoleModel)eResolveProxy(oldMappedRoleModel);
-      if (mappedRoleModel != oldMappedRoleModel)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL, oldMappedRoleModel, mappedRoleModel));
-      }
-    }
-    return mappedRoleModel;
-  }
+		if (mappedRoleModel != null && mappedRoleModel.eIsProxy()) {
+			InternalEObject oldMappedRoleModel = (InternalEObject)mappedRoleModel;
+			mappedRoleModel = (RoleModel)eResolveProxy(oldMappedRoleModel);
+			if (mappedRoleModel != oldMappedRoleModel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL, oldMappedRoleModel, mappedRoleModel));
+			}
+		}
+		return mappedRoleModel;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RoleModel basicGetMappedRoleModel() {
-    return mappedRoleModel;
-  }
+		return mappedRoleModel;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setMappedRoleModel(RoleModel newMappedRoleModel) {
-    RoleModel oldMappedRoleModel = mappedRoleModel;
-    mappedRoleModel = newMappedRoleModel;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL, oldMappedRoleModel, mappedRoleModel));
-  }
+		RoleModel oldMappedRoleModel = mappedRoleModel;
+		mappedRoleModel = newMappedRoleModel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL, oldMappedRoleModel, mappedRoleModel));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<ConcreteMapping> getRoleToMetaelement() {
-    if (roleToMetaelement == null)
-    {
-      roleToMetaelement = new EObjectContainmentEList<ConcreteMapping>(ConcreteMapping.class, this, RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT);
-    }
-    return roleToMetaelement;
-  }
+		if (roleToMetaelement == null) {
+			roleToMetaelement = new EObjectContainmentEList<ConcreteMapping>(ConcreteMapping.class, this, RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT);
+		}
+		return roleToMetaelement;
+	}
 
 	/**
    * <!-- begin-user-doc -->
@@ -219,119 +216,114 @@ public class MappingImpl extends EObjectImpl implements Mapping {
   }
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
-        return ((InternalEList<?>)getRoleToMetaelement()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
+				return ((InternalEList<?>)getRoleToMetaelement()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case RolemappingPackage.MAPPING__NAME:
-        return getName();
-      case RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL:
-        if (resolve) return getMappedRoleModel();
-        return basicGetMappedRoleModel();
-      case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
-        return getRoleToMetaelement();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RolemappingPackage.MAPPING__NAME:
+				return getName();
+			case RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL:
+				if (resolve) return getMappedRoleModel();
+				return basicGetMappedRoleModel();
+			case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
+				return getRoleToMetaelement();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case RolemappingPackage.MAPPING__NAME:
-        setName((String)newValue);
-        return;
-      case RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL:
-        setMappedRoleModel((RoleModel)newValue);
-        return;
-      case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
-        getRoleToMetaelement().clear();
-        getRoleToMetaelement().addAll((Collection<? extends ConcreteMapping>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RolemappingPackage.MAPPING__NAME:
+				setName((String)newValue);
+				return;
+			case RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL:
+				setMappedRoleModel((RoleModel)newValue);
+				return;
+			case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
+				getRoleToMetaelement().clear();
+				getRoleToMetaelement().addAll((Collection<? extends ConcreteMapping>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case RolemappingPackage.MAPPING__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL:
-        setMappedRoleModel((RoleModel)null);
-        return;
-      case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
-        getRoleToMetaelement().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RolemappingPackage.MAPPING__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL:
+				setMappedRoleModel((RoleModel)null);
+				return;
+			case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
+				getRoleToMetaelement().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case RolemappingPackage.MAPPING__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL:
-        return mappedRoleModel != null;
-      case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
-        return roleToMetaelement != null && !roleToMetaelement.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RolemappingPackage.MAPPING__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case RolemappingPackage.MAPPING__MAPPED_ROLE_MODEL:
+				return mappedRoleModel != null;
+			case RolemappingPackage.MAPPING__ROLE_TO_METAELEMENT:
+				return roleToMetaelement != null && !roleToMetaelement.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
+	}
 
 } //MappingImpl
