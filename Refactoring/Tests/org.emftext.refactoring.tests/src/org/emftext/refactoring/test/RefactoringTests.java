@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import junit.framework.Test;
@@ -19,6 +20,8 @@ import junit.framework.TestSuite;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.conference.ConferencePackage;
+import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage;
@@ -111,7 +114,7 @@ public class RefactoringTests extends TestCase{
 			checkFolder(rootFolder);
 			File folder = new File(rootFolder.getAbsolutePath() + File.separator + classFolder);
 			checkFolder(folder);
-			File[] files = folder.listFiles(new DataSetTestFileFilter(filePattern));
+			File[] files = folder.listFiles(new DataSetTestFileFilter(filePattern, includeExpectExtension));
 			return Arrays.asList(files);
 		} catch (FileNotFoundException e) {
 			LOG.severe(e.getMessage());
@@ -125,7 +128,7 @@ public class RefactoringTests extends TestCase{
 		int setCount = -1;
 		if(inputValue != null){
 			for (String filePattern : inputValue) {
-				List<File> files = getTestFiles(classFolder, filePattern, false);
+				List<File> files = getTestFiles(classFolder, filePattern, true);
 				if(setCount == -1){
 					setCount = files.size();
 				} else {
@@ -355,7 +358,7 @@ public class RefactoringTests extends TestCase{
 				}
 			}
 		};
-		newTest.setName(name + " " + System.currentTimeMillis());
+		newTest.setName(name + " " + UUID.randomUUID().toString());
 		return newTest;
 	}
 
@@ -366,6 +369,7 @@ public class RefactoringTests extends TestCase{
 		EPackage.Registry.INSTANCE.put(RefactoringSpecificationPackage.eNS_URI, RefactoringSpecificationPackage.eINSTANCE);
 		// arbitrary metamodels
 		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(ConferencePackage.eNS_URI, ConferencePackage.eINSTANCE);
 	}
 
 	private static void registerResourceFactories(){
@@ -375,6 +379,7 @@ public class RefactoringTests extends TestCase{
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("refspec", new RefspecResourceFactory());
 		// arbitrary metamodels
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("conference", new ConferenceResourceFactory());
 	}
 
 }
