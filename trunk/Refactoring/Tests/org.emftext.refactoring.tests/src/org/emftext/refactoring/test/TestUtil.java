@@ -3,8 +3,7 @@
  */
 package org.emftext.refactoring.test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 
@@ -51,5 +50,18 @@ public class TestUtil {
 		assertNotNull(root);
 		assertTrue("root object must be of type '" + expectedType.getSimpleName() + "'", expectedType.isInstance(root));
 		return (T) root;
+	}
+	
+	public static EObject getModelFromResource(Resource resource){
+		EObject model = getExpectedModelFromResource(resource, EObject.class);
+		assertNotNull(model);
+		return model;
+	}
+	
+	public static File getFileByPath(String path){
+		File file = new File(path);
+		assertNotNull(file);
+		assertTrue(file.exists());
+		return file;
 	}
 }

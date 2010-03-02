@@ -37,7 +37,7 @@ public class TestDataSet {
 
 	private File getFileByPattern(List<File> source, String pattern) {
 		for (File file : source) {
-			if(file.getName().startsWith(pattern)){
+			if(file.getName().contains(pattern)){
 				return file;
 			}
 		}

@@ -7,7 +7,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.pl0.Program;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -15,51 +20,62 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.test.core.AbstractRefactoringTest;
+import org.emftext.test.core.ExpectedData;
+import org.emftext.test.core.InputData;
+import org.emftext.test.core.TestClass;
 import org.junit.Test;
 
 /**
  * @author Jan Reimann
  *
  */
-public class IndexConnectorTest{
+public class IndexConnectorTest extends TestClass{
 
-	private String path = "/pl0/wirth.pl0";
-	private String roleMappingPath = "/role_mappings/pl0mapping.rolemapping";
-	private String roleModelPath = "/roles/ExtractMethod.rolestext";
-	private String refSpecPath = "/refspecs/ExtractMethod.refspec";
+	public static final String CS_MODEL_INPUT_PREFIX = "CS_MODEL_";
+	public static final String CS_MAPPING_EXPECTED_PREFIX = "CS_MAPPING_";
+	public static final String CS_ROLE_MODEL_PREFIX = "CS_ROLE_";
+	public static final String CS_REFSPEC_PREFIX = "CS_REFSPEC_";
+//	private static final String roleMappingPattern = "pl0mapping";
+//	private static final String roleModelPattern = "ExtractMethod.rolestext";
+//	private static final String refSpecPattern = "ExtractMethod.refspec";
 	
 	@Test
+	@InputData({CS_MODEL_INPUT_PREFIX})
+	@ExpectedData({CS_MAPPING_EXPECTED_PREFIX})
 	public void connectorGetRoleMapping(){
-//		Resource resource = TestUtil.getResourceInWorkspace(this, path);
-		Resource resource = null;
-		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector();
+		List<File> inputFiles = getTestDataSet().getInputDataFiles();
+		File input = inputFiles.get(0);
+		Resource resource = TestUtil.getResourceFromFile(input);
+		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector(MockIndexConnector.class);
 		assertNotNull(connector);
-		Program pl0Prog = TestUtil.getExpectedModelFromResource(resource, Program.class);
-//		delay(3000);
-		RoleMappingModel mappingModel = connector.getRoleMapping(pl0Prog.eClass().getEPackage().getNsURI());
-//		delay(3000);
+		EObject model = TestUtil.getModelFromResource(resource);
+		RoleMappingModel mappingModel = connector.getRoleMapping(model.eClass().getEPackage().getNsURI());
 		assertNotNull(mappingModel);
-//		Resource mappingResource = TestUtil.getResourceInWorkspace(this, roleMappingPath);
-		Resource mappingResource = null;
-		RoleMappingModel targetMM = TestUtil.getExpectedModelFromResource(mappingResource, RoleMappingModel.class);
-		//		assertTrue(ModelUtil.bothModelsAreEqual(mappingModel, targetMM));
+		// both mappingModels are the same but different instances so equals() fails
+//		List<File> expectedFiles = getTestDataSet().getExpectedDataFiles();
+//		File expected = expectedFiles.get(0);
+//		Resource mappingResource = TestUtil.getResourceFromFile(expected);
+//		RoleMappingModel targetMM = TestUtil.getExpectedModelFromResource(mappingResource, RoleMappingModel.class);
 //		assertEquals(mappingModel, targetMM);
 	}
 	
 	@Test
+	@InputData({CS_ROLE_MODEL_PREFIX})
+	@ExpectedData({CS_REFSPEC_PREFIX})
 	public void connectorGetRefSpec(){
-		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector();
+		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector(MockIndexConnector.class);
 		assertNotNull(connector);
-//		Resource resource = TestUtil.getResourceInWorkspace(this, roleModelPath);
-		Resource resource = null;
+		List<File> inputFiles = getTestDataSet().getInputDataFiles();
+		File input = inputFiles.get(0);
+		Resource resource = TestUtil.getResourceFromFile(input);
 		RoleModel roleModel = TestUtil.getExpectedModelFromResource(resource, RoleModel.class);
-//		delay(3000);
 		RefactoringSpecification refSpec = connector.getRefactoringSpecification(roleModel);
-//		delay(3000);
 		assertNotNull(refSpec);
-//		Resource refSpecResource = TestUtil.getResourceInWorkspace(this, refSpecPath);
-		Resource refSpecResource = null;
-		RefactoringSpecification refSpecTarget = TestUtil.getExpectedModelFromResource(refSpecResource, RefactoringSpecification.class);
+		// both refspecs are the same but different instances so equals() fails
+//		List<File> expectedFiles = getTestDataSet().getExpectedDataFiles();
+//		File expected = expectedFiles.get(0);
+//		Resource refSpecResource = TestUtil.getResourceFromFile(expected);
+//		RefactoringSpecification refSpecTarget = TestUtil.getExpectedModelFromResource(refSpecResource, RefactoringSpecification.class);
 //		assertEquals(refSpec, refSpecTarget);
 	}
 }
