@@ -1,8 +1,8 @@
-package org.emftext.test.test;
+package org.emftext.test.core;
 
 import java.io.File;
 
-public class TestDataPair {
+public class TestDataPair{
 
 	private File input;
 	private File expected;

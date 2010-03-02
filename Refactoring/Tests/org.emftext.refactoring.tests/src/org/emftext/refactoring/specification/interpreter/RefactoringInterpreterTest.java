@@ -28,10 +28,10 @@ import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
-import org.emftext.test.test.InputData;
-import org.emftext.test.test.TestClass;
-import org.emftext.test.test.TestData;
-import org.emftext.test.test.TestDataSet;
+import org.emftext.test.core.InputData;
+import org.emftext.test.core.TestClass;
+import org.emftext.test.core.TestData;
+import org.emftext.test.core.TestDataSet;
 import org.junit.Test;
 
 @TestData("pl0")

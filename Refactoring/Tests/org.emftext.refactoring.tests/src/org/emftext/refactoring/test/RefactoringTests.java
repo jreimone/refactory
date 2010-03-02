@@ -29,16 +29,17 @@ import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelati
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
 import org.emftext.refactoring.specification.interpreter.RefactoringInterpreterTest;
-import org.emftext.test.test.AbstractRefactoringTest;
-import org.emftext.test.test.DataPairTestFileFilter;
-import org.emftext.test.test.DataPairs;
-import org.emftext.test.test.DataSetTestFileFilter;
-import org.emftext.test.test.ExpectedData;
-import org.emftext.test.test.InputData;
-import org.emftext.test.test.TestClass;
-import org.emftext.test.test.TestData;
-import org.emftext.test.test.TestDataPair;
-import org.emftext.test.test.TestDataSet;
+import org.emftext.test.core.AbstractRefactoringTest;
+import org.emftext.test.core.DataPairTestFileFilter;
+import org.emftext.test.core.DataPairs;
+import org.emftext.test.core.DataSetTestFileFilter;
+import org.emftext.test.core.ExpectedData;
+import org.emftext.test.core.InputData;
+import org.emftext.test.core.TestClass;
+import org.emftext.test.core.TestData;
+import org.emftext.test.core.TestDataPair;
+import org.emftext.test.core.TestDataPairSet;
+import org.emftext.test.core.TestDataSet;
 
 /**
  * Runs all tests.
@@ -75,26 +76,26 @@ public class RefactoringTests extends TestCase{
 		return suite;
 	}
 
-	private static List<List<TestDataPair>> getTestDataPairs(String classFolder, String[] filePatterns){
-		List<List<TestDataPair>> pairs = new LinkedList<List<TestDataPair>>();
+	private static List<TestDataPairSet> getTestDataPairs(String classFolder, String[] filePatterns){
+		List<List<TestDataPair>> pairSets = new LinkedList<List<TestDataPair>>();
 		int greatestList = 0;
 		for (String filePattern : filePatterns) {
 			List<TestDataPair> dataPairs = getTestDataPairs(classFolder, filePattern);
-			pairs.add(dataPairs);
+			pairSets.add(dataPairs);
 			if(dataPairs.size() > greatestList){
 				greatestList = dataPairs.size();
 			}
 		}
-		List<List<TestDataPair>> result = new LinkedList<List<TestDataPair>>();
+		List<TestDataPairSet> result = new LinkedList<TestDataPairSet>();
 		for (int i = 0; i < greatestList; i++) {
-			List<TestDataPair> newList = new LinkedList<TestDataPair>();
-			for (int j = 0; j < pairs.size(); j++) {
-				if(pairs.get(j).size() - 1 >= i){
-					newList.add(pairs.get(j).get(i));
+			TestDataPairSet newPairSet = new TestDataPairSet();
+			for (int j = 0; j < pairSets.size(); j++) {
+				if(pairSets.get(j).size() - 1 >= i){
+					newPairSet.addDataPair(pairSets.get(j).get(i));
 				}
 			}
-			if(newList.size() > 0){
-				result.add(newList);
+			if(newPairSet.getDataPairs().size() > 0){
+				result.add(newPairSet);
 			}
 		}	
 		return result;
@@ -202,14 +203,14 @@ public class RefactoringTests extends TestCase{
 
 	private static Test handleDataPairAnnotation(Class<? extends TestClass> testClass, Method method, String folder) throws InstantiationException, IllegalAccessException{
 		DataPairs dataPairsAnnotation = method.getAnnotation(DataPairs.class);
-		List<List<TestDataPair>> testDataLists = null;
+		List<TestDataPairSet> testData = null;
 		if(dataPairsAnnotation != null){
-			testDataLists = getTestDataPairs(folder, dataPairsAnnotation.value());
+			testData = getTestDataPairs(folder, dataPairsAnnotation.value());
 		} else {
-			testDataLists = getTestDataPairs(folder, new String[]{method.getName()});
+			testData = getTestDataPairs(folder, new String[]{method.getName()});
 		} 
 		Test methodSuite = null;
-		if(testDataLists == null || testDataLists.size() == 0){
+		if(testData == null || testData.size() == 0){
 			AbstractRefactoringTest newTest = createTest(testClass
 					, method
 					, null
@@ -221,14 +222,14 @@ public class RefactoringTests extends TestCase{
 			}
 		} else {
 			methodSuite = new TestSuite(method.getName() + " Data:Pairs");
-			for (List<TestDataPair> testDataList : testDataLists) {
+			for (TestDataPairSet testPairSet : testData) {
 				String dataString = "";
-				for (TestDataPair testDataPair : testDataList) {
+				for (TestDataPair testDataPair : testPairSet.getDataPairs()) {
 					dataString += " " + testDataPair.getInput().getName(); 
 				}
 				AbstractRefactoringTest newTest = createTest(testClass
 						, method
-						, testDataList
+						, testPairSet
 						, "DATA:" + dataString);
 				if(newTest != null){
 					((TestSuite) methodSuite).addTest(newTest);
@@ -329,29 +330,13 @@ public class RefactoringTests extends TestCase{
 		return newSuite;
 	}
 
-	private static AbstractRefactoringTest createTest(Class<? extends TestClass> testClass, final Method method, final Object testData, String name) throws InstantiationException, IllegalAccessException{
+	private static AbstractRefactoringTest createTest(Class<? extends TestClass> testClass, final Method method, final TestDataSet testData, String name) throws InstantiationException, IllegalAccessException{
 		final TestClass instance = testClass.newInstance();
-		if(!(testData instanceof TestDataSet)){
-			if(!(testData instanceof List<?>)){
-				return null;
-			} else {
-				for (Object element : (List<?>) testData) {
-					if(!(element instanceof TestDataPair)){
-						return null;
-					}
-				}
-			}
-		}
 		AbstractRefactoringTest newTest = new AbstractRefactoringTest() {
-			@SuppressWarnings("unchecked")
 			@Override
 			public void runRefactoringTest() throws Throwable{
 				try {
-					if(testData instanceof TestDataSet){
-						instance.setTestDataSet((TestDataSet) testData);
-					} else if(testData instanceof List<?>){
-						instance.setTestDataPairs((List<TestDataPair>) testData);
-					}
+					instance.setTestDataSet(testData);
 					method.invoke(instance);
 				} catch (IllegalArgumentException e) {
 					LOG.severe("Could not invoke method " + method.getName());
