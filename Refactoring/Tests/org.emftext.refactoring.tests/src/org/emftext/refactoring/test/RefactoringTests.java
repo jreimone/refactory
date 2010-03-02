@@ -29,6 +29,7 @@ import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelati
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
 import org.emftext.refactoring.indexconnector.IndexConnectorTest;
+import org.emftext.refactoring.roleconstraintchecker.RoleConstraintCheckerTest;
 import org.emftext.refactoring.specification.interpreter.RefactoringInterpreterTest;
 import org.emftext.test.core.AbstractRefactoringTest;
 import org.emftext.test.core.DataPairTestFileFilter;
@@ -58,7 +59,8 @@ public class RefactoringTests extends TestCase{
 			TestTest.class,
 			EmptyOutgoingRelationTest.class,
 			RefactoringInterpreterTest.class,
-			IndexConnectorTest.class
+			IndexConnectorTest.class,
+			RoleConstraintCheckerTest.class
 	));
 
 
