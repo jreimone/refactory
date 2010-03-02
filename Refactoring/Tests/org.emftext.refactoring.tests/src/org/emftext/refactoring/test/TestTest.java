@@ -3,7 +3,6 @@ package org.emftext.refactoring.test;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.util.Random;
 
 import org.emftext.test.core.DataPairs;
 import org.emftext.test.core.ExpectedData;
@@ -44,6 +43,6 @@ public class TestTest extends TestClass{
 		for (File file : getTestDataSet().getExpectedDataFiles()) {
 			System.out.print(file.getName() + " ");
 		}
-		assertTrue("Should be true", new Random(System.currentTimeMillis()).nextBoolean());
+		assertTrue("Should be true", true);
 	}
 }

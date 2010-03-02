@@ -25,10 +25,34 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.pl0.resource.pl0.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.refactoring.roles.resource.rolestext.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.refactoring.rolemapping.resource.rolemapping.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.refactoring.specification.resource.refspec.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>edu.umd.cs.findbugs.plugin.eclipse.findbugsNature</nature>
+		<nature>org.emftext.language.pl0.resource.pl0.nature</nature>
+		<nature>org.emftext.language.refactoring.roles.resource.rolestext.nature</nature>
+		<nature>org.emftext.language.refactoring.rolemapping.resource.rolemapping.nature</nature>
+		<nature>org.emftext.language.refactoring.specification.resource.refspec.nature</nature>
 	</natures>
 </projectDescription>

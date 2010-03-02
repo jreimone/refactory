@@ -28,6 +28,7 @@ import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelationTest;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
+import org.emftext.refactoring.indexconnector.IndexConnectorTest;
 import org.emftext.refactoring.specification.interpreter.RefactoringInterpreterTest;
 import org.emftext.test.core.AbstractRefactoringTest;
 import org.emftext.test.core.DataPairTestFileFilter;
@@ -56,7 +57,8 @@ public class RefactoringTests extends TestCase{
 	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
 			TestTest.class,
 			EmptyOutgoingRelationTest.class,
-			RefactoringInterpreterTest.class
+			RefactoringInterpreterTest.class,
+			IndexConnectorTest.class
 	));
 
 
@@ -344,7 +346,9 @@ public class RefactoringTests extends TestCase{
 				} catch (IllegalAccessException e) {
 					throw e;
 				} catch (InvocationTargetException e) {
-					LOG.severe("Method " + method.getName() + " threw an exception");
+					if(!(e.getTargetException() instanceof AssertionError)){
+						LOG.severe("Method " + method.getName() + " threw an exception");
+					}
 					throw e.getTargetException();
 				}
 			}
