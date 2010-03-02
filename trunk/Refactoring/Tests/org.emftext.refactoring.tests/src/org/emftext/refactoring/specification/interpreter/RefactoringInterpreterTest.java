@@ -23,6 +23,7 @@ import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.indexconnector.IndexConnector;
 import org.emftext.refactoring.indexconnector.IndexConnectorFactory;
+import org.emftext.refactoring.indexconnector.MockIndexConnector;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.test.TestUtil;
@@ -51,8 +52,7 @@ public class RefactoringInterpreterTest extends TestClass{
 		TestDataSet dataSet = getTestDataSet();
 		File file = dataSet.getInputFileByPattern(path);
 		Resource resource = TestUtil.getResourceFromFile(file);
-		// TODO mock for connector
-		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector();
+		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector(MockIndexConnector.class);
 		assertNotNull(connector);
 		Program pl0Prog = TestUtil.getExpectedModelFromResource(resource, Program.class);
 		RoleMappingModel mappingModel = connector.getRoleMapping(pl0Prog.eClass().getEPackage().getNsURI());

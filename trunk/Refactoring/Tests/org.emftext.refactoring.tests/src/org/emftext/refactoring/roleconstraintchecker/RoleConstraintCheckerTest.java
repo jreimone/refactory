@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
+import java.io.File;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
@@ -17,8 +17,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.refactoring.test.TestUtil;
 import org.emftext.refactoring.util.ModelUtil;
-import org.emftext.test.core.AbstractRefactoringTest;
+import org.emftext.test.core.InputData;
+import org.emftext.test.core.TestClass;
+import org.emftext.test.core.TestData;
 import org.junit.Test;
 
 /**
@@ -27,14 +30,18 @@ import org.junit.Test;
  * @author Jan Reimann
  *
  */
-public class RoleConstraintCheckerTest{
+@TestData("constraintresources")
+public class RoleConstraintCheckerTest extends TestClass{
 		
-	private String path = "/constraintresources/relationTestMapping.rolemapping";
-	private RoleMappingModel mappingModel;
+	private static final String path = "relationTestMapping.rolemapping";
+//	private RoleMappingModel mappingModel;
 	
 	@Test
+	@InputData(path)
 	public void prohibitionConstraints(){
-//		mappingModel = getExpectedModelFromFile(path, RoleMappingModel.class);
+		File input = getTestDataSet().getInputDataFiles().get(0);
+		assertNotNull(input);
+		RoleMappingModel mappingModel = TestUtil.getExpectedModelFromFile(input, RoleMappingModel.class);
 		EPackage metamodel = mappingModel.getTargetMetamodel();
 		assertNotNull("Metamodel mustn't be null", metamodel);
 		EList<Mapping> mappings = mappingModel.getMappings();
@@ -48,13 +55,8 @@ public class RoleConstraintCheckerTest{
 		IRoleConstraintValidator validator = RoleConstraintValidatorFactory.eINSTANCE.createValidator();
 		assertNotNull("Validator mustn't be null", validator);
 		List<IStatus> stati = validator.validateMapping(prohibitionMapping);
-		assertEquals("There must be 2 error status", 2, stati.size());
+		assertEquals("Maybe PROXY PROBLEM: There must be 2 error stati", 2, stati.size());
 //		assertEquals("The status code must be an ERROR", IStatus.ERROR, stati.get(0).getSeverity());
 //		assertEquals("The status code must be an ERROR", IStatus.ERROR, stati.get(1).getSeverity());
 	}
-
-	/* (non-Javadoc)
-	 * @see org.emftext.refactoring.test.AbstractRefactoringTest#getFolderNamesToCopyIntoTestProject()
-	 */
-
 }

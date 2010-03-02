@@ -1,25 +1,25 @@
 ROLEMODELMAPPING relationTestMappingPL0 FOR <http://www.emftext.org/language/pl0>
 
-TestProhibitionMapping maps <platform:/resource/EMFTextTest/constraintresources/TestProhibition.rolestext> { 
+TestProhibitionMapping maps <platform:/resource/org.emftext.refactoring.tests/testInput/constraintresources/TestProhibition.rolestext> { 
 	InputRole -> Statement ;
 	OutputRole -> CallStatement;
 	TransitiveOutputRoleParent -> Expression;
 } 
 	
-TestImplicationMapping maps <platform:/resource/EMFTextTest/roles/TestImplication.rolestext> { 
+TestImplicationMapping maps <platform:/resource/org.emftext.refactoring.tests/testInput/constraintresources/TestImplication.rolestext> { 
 	Parent -> Expression ;
 	DirectChild -> Expression;
 	TransitiveChild -> TermExpression;
 }	
 
-TestCompositionMapping maps <platform:/resource/EMFTextTest/roles/TestComposition.rolestext> { 
+TestCompositionMapping maps <platform:/resource/org.emftext.refactoring.tests/testInput/constraintresources/TestComposition.rolestext> { 
 	CompositionOwner -> Block ;
 	CompositionChild -> Body;
 	CompositionTransitiveChild -> Statement;
 	CompositionReflexiveChild -> Block;
 }
 
-TestAssociationMapping maps <platform:/resource/EMFTextTest/roles/TestAssociation.rolestext> { 
+TestAssociationMapping maps <platform:/resource/org.emftext.refactoring.tests/testInput/constraintresources/TestAssociation.rolestext> { 
 	AssociationSource -> CallStatement ;
 	AssociationTarget -> ProcedureDeclaration;
 	AssociationReflexiveTarget -> CallStatement;

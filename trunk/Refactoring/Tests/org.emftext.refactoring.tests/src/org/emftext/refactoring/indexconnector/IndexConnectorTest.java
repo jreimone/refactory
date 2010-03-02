@@ -3,23 +3,17 @@
  */
 package org.emftext.refactoring.indexconnector;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.pl0.Program;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.TestUtil;
-import org.emftext.refactoring.util.ModelUtil;
-import org.emftext.test.core.AbstractRefactoringTest;
 import org.emftext.test.core.ExpectedData;
 import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
@@ -35,9 +29,6 @@ public class IndexConnectorTest extends TestClass{
 	public static final String CS_MAPPING_EXPECTED_PREFIX = "CS_MAPPING_";
 	public static final String CS_ROLE_MODEL_PREFIX = "CS_ROLE_";
 	public static final String CS_REFSPEC_PREFIX = "CS_REFSPEC_";
-//	private static final String roleMappingPattern = "pl0mapping";
-//	private static final String roleModelPattern = "ExtractMethod.rolestext";
-//	private static final String refSpecPattern = "ExtractMethod.refspec";
 	
 	@Test
 	@InputData({CS_MODEL_INPUT_PREFIX})
