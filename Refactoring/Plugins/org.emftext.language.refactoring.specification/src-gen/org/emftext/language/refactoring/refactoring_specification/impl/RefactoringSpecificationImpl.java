@@ -180,35 +180,37 @@ public class RefactoringSpecificationImpl extends EObjectImpl implements Refacto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public EList<Variable> getDeclaredVariables() {
-		EList<Variable> variables = new BasicEList<Variable>();
-		EList<Instruction> instructions = getInstructions();
-		for (Instruction instruction : instructions) {
-			if(instruction instanceof CREATE){
-				Variable var = ((CREATE) instruction).getVarDeclaration();
-				if(var != null){
-					variables.add(var);
-				}
-			}
-		}
-		return variables;
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; 
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Instruction > instructions = getInstructions ( ) ; 
+		for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction : instructions ) { 
+			if ( instruction instanceof org.emftext.language.refactoring.refactoring_specification.CREATE ) { 
+				org.emftext.language.refactoring.refactoring_specification.Variable var = ( ( org.emftext.language.refactoring.refactoring_specification.CREATE ) instruction ) .getVarDeclaration ( ) ; 
+				if ( var != null ) { 
+					variables .add ( var ) ; 
+				} 
+			} 
+		} 
+		return variables ; 
+		
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public Variable getVariableByName(String name) {
-		EList<Variable> variables = getDeclaredVariables();
-		for (Variable variable : variables) {
-			if(variable.getName().equals(name)){
-				return variable;
-			}
-		}
-		return null;
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = getDeclaredVariables ( ) ; 
+		for ( org.emftext.language.refactoring.refactoring_specification.Variable variable : variables ) { 
+			if ( variable .getName ( ) .equals ( name ) ) { 
+				return variable ; 
+			} 
+		} 
+		return null ; 
+		
 	}
 
 	/**

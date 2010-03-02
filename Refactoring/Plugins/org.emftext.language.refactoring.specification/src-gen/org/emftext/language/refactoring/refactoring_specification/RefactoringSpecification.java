@@ -102,7 +102,11 @@ public interface RefactoringSpecification extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; \r\norg.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Instruction > instructions = getInstructions ( ) ; \r\nfor ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction : instructions ) { \r\n\tif ( instruction instanceof org.emftext.language.refactoring.refactoring_specification.CREATE ) { \r\n\t\torg.emftext.language.refactoring.refactoring_specification.Variable var = ( ( org.emftext.language.refactoring.refactoring_specification.CREATE ) instruction ) .getVarDeclaration ( ) ; \r\n\t\tif ( var != null ) { \r\n\t\t\tvariables .add ( var ) ; \r\n\t\t} \r\n\t} \r\n} \r\nreturn variables ; \r\n'"
 	 * @generated
 	 */
 	EList<Variable> getDeclaredVariables();
@@ -110,7 +114,10 @@ public interface RefactoringSpecification extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * <!-- begin-model-doc -->
+	 * 
+	 * <!-- end-model-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = getDeclaredVariables ( ) ; \r\nfor ( org.emftext.language.refactoring.refactoring_specification.Variable variable : variables ) { \r\n\tif ( variable .getName ( ) .equals ( name ) ) { \r\n\t\treturn variable ; \r\n\t} \r\n} \r\nreturn null ; \r\n'"
 	 * @generated
 	 */
 	Variable getVariableByName(String name);

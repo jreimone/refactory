@@ -1,0 +1,36 @@
+epackage refactoring_specification;
+
+// plain Java imports
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
+ 
+// import of other EClasses
+//import MyEPackage.MyEClass2;
+
+eclass RefactoringSpecification {
+	
+	getDeclaredVariables() {
+		EList<Variable> variables = new BasicEList<Variable>();
+		EList<Instruction> instructions = getInstructions();
+		for (Instruction instruction : instructions) {
+			if(instruction instanceof CREATE){
+				Variable var = ((CREATE) instruction).getVarDeclaration();
+				if(var != null){
+					variables.add(var);
+				}
+			}
+		}
+		return variables;
+	}
+	
+	getVariableByName(){
+		EList<Variable> variables = getDeclaredVariables();
+		for (Variable variable : variables) {
+			if(variable.getName().equals(name)){
+				return variable;
+			}
+		}
+		return null;
+	}
+}
