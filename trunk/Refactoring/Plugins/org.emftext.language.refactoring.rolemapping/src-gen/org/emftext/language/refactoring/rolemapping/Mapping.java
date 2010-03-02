@@ -115,7 +115,10 @@ public interface Mapping extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * <!-- begin-model-doc -->
+	 * 
+	 * <!-- end-model-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.roles.Role > mappedRoles = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.roles.Role > ( ) ; \r\norg.eclipse.emf.ecore.EClass metaclass = object .eClass ( ) ; \r\norg.eclipse.emf.common.util.EList < org.emftext.language.refactoring.rolemapping.ConcreteMapping > mappings = getRoleToMetaelement ( ) ; \r\nfor ( org.emftext.language.refactoring.rolemapping.ConcreteMapping concreteMapping : mappings ) { \r\n\torg.emftext.language.refactoring.roles.Role mappedRole = concreteMapping .getRole ( ) ; \r\n\torg.eclipse.emf.ecore.EClass mappedClass = concreteMapping .getMetaclass ( ) ; \r\n\tif ( mappedClass .equals ( metaclass ) ) { \r\n\t\tmappedRoles .add ( mappedRole ) ; \r\n\t} else if ( mappedRole .getModifier ( ) .contains ( org.emftext.language.refactoring.roles.RoleModifier .SUPER ) ) { \r\n\t\tif ( mappedClass .isSuperTypeOf ( metaclass ) ) { \r\n\t\t\tmappedRoles .add ( mappedRole ) ; \r\n\t\t} \r\n\t} \r\n} \r\nreturn mappedRoles ; \r\n'"
 	 * @generated
 	 */
 	EList<Role> getMappedRolesForEObject(EObject object);

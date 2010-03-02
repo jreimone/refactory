@@ -179,41 +179,43 @@ public class MappingImpl extends EObjectImpl implements Mapping {
 	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated NOT
-   */
+	 * @generated
+	 */
 	public EList<Role> getAllMappedRoles() {
-		EList<Role> roles = new BasicEList<Role>();
-		EList<ConcreteMapping> mappings = getRoleToMetaelement();
-		for (ConcreteMapping concreteMapping : mappings) {
-			roles.add(concreteMapping.getRole());
-		}
-		return roles;
-  }
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.roles.Role > roles = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.roles.Role > ( ) ; 
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.rolemapping.ConcreteMapping > mappings = getRoleToMetaelement ( ) ; 
+		for ( org.emftext.language.refactoring.rolemapping.ConcreteMapping concreteMapping : mappings ) { 
+			roles .add ( concreteMapping .getRole ( ) ) ; 
+		} 
+		return roles ; 
+		
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated NOT
-   */
+	 * @generated
+	 */
 	public EList<Role> getMappedRolesForEObject(EObject object) {
-		EList<Role> mappedRoles = new BasicEList<Role>();
-		EClass metaclass = object.eClass();
-		EList<ConcreteMapping> mappings = getRoleToMetaelement();
-		for (ConcreteMapping concreteMapping : mappings) {
-			Role mappedRole = concreteMapping.getRole();
-			EClass mappedClass = concreteMapping.getMetaclass();
-			if(mappedClass.equals(metaclass)){
-				mappedRoles.add(mappedRole);
-			} else if(mappedRole.getModifier().contains(RoleModifier.SUPER)){
-				if(mappedClass.isSuperTypeOf(metaclass)){
-					mappedRoles.add(mappedRole);
-				}
-			}
-		}
-		return mappedRoles;
-  }
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.roles.Role > mappedRoles = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.roles.Role > ( ) ; 
+		org.eclipse.emf.ecore.EClass metaclass = object .eClass ( ) ; 
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.rolemapping.ConcreteMapping > mappings = getRoleToMetaelement ( ) ; 
+		for ( org.emftext.language.refactoring.rolemapping.ConcreteMapping concreteMapping : mappings ) { 
+			org.emftext.language.refactoring.roles.Role mappedRole = concreteMapping .getRole ( ) ; 
+			org.eclipse.emf.ecore.EClass mappedClass = concreteMapping .getMetaclass ( ) ; 
+			if ( mappedClass .equals ( metaclass ) ) { 
+				mappedRoles .add ( mappedRole ) ; 
+			} else if ( mappedRole .getModifier ( ) .contains ( org.emftext.language.refactoring.roles.RoleModifier .SUPER ) ) { 
+				if ( mappedClass .isSuperTypeOf ( metaclass ) ) { 
+					mappedRoles .add ( mappedRole ) ; 
+				} 
+			} 
+		} 
+		return mappedRoles ; 
+		
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
