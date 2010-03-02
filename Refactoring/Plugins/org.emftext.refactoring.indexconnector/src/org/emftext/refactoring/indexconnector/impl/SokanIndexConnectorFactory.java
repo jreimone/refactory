@@ -19,4 +19,16 @@ public class SokanIndexConnectorFactory implements IndexConnectorFactory {
 		return new SokanIndexConnector();
 	}
 
+	public IndexConnector getIndexConnector(Class<? extends IndexConnector> clazz) {
+		IndexConnector connector = null;
+		try {
+			connector = clazz.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return connector;
+	}
+
 }

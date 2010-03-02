@@ -20,4 +20,11 @@ public interface IndexConnectorFactory {
 	 * @return
 	 */
 	public IndexConnector getIndexConnector();
+	
+	/**
+	 * Returns an instance of the given {@link IndexConnector} <code>clazz</code>
+	 * @param clazz
+	 * @return
+	 */
+	public IndexConnector getIndexConnector(Class<? extends IndexConnector> clazz);
 }
