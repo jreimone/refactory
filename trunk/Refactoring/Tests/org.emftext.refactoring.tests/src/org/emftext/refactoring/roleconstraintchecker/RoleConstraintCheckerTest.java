@@ -18,7 +18,7 @@ import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.util.ModelUtil;
-import org.emftext.test.test.AbstractRefactoringTest;
+import org.emftext.test.core.AbstractRefactoringTest;
 import org.junit.Test;
 
 /**

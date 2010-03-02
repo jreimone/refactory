@@ -1,4 +1,4 @@
-package org.emftext.test.test;
+package org.emftext.test.core;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -28,11 +28,11 @@ public class TestDataSet {
 	}
 	
 	public File getInputFileByPattern(String pattern){
-		return getFileByPattern(inputDataFiles, pattern);
+		return getFileByPattern(getInputDataFiles(), pattern);
 	}
 	
 	public File getExpectedFileByPattern(String pattern){
-		return getFileByPattern(expectedDataFiles, pattern);
+		return getFileByPattern(getExpectedDataFiles(), pattern);
 	}
 
 	private File getFileByPattern(List<File> source, String pattern) {

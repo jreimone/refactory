@@ -14,9 +14,9 @@ import org.emftext.language.refactoring.roles.Relation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.TestUtil;
-import org.emftext.test.test.InputData;
-import org.emftext.test.test.TestClass;
-import org.emftext.test.test.TestDataSet;
+import org.emftext.test.core.InputData;
+import org.emftext.test.core.TestClass;
+import org.emftext.test.core.TestDataSet;
 import org.junit.Test;
 
 /**

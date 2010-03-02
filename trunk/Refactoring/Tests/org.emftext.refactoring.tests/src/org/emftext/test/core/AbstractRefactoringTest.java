@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.emftext.test.test;
+package org.emftext.test.core;
 
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;

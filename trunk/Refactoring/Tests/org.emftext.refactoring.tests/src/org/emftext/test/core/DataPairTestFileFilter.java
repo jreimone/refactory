@@ -1,4 +1,4 @@
-package org.emftext.test.test;
+package org.emftext.test.core;
 
 import java.io.File;
 import java.io.FilenameFilter;
