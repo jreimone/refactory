@@ -76,9 +76,11 @@ public class RoleUtil {
 	 * @return
 	 */
 	public static List<Mapping> getPossibleMappingsForInputSelection(List<? extends EObject> selection, RoleMappingModel roleMapping, double minEquality){
+		EcoreUtil.resolveAll(roleMapping.getTargetMetamodel());
 		List<Mapping> possibleMappings = new LinkedList<Mapping>();
 		EList<Mapping> mappings = roleMapping.getMappings();
 		for (Mapping mapping : mappings) {
+			EcoreUtil.resolveAll(mapping.getMappedRoleModel());
 			double equality = getProcentualInputEquality(selection, mapping);
 			if(equality >= minEquality){
 				possibleMappings.add(mapping);
