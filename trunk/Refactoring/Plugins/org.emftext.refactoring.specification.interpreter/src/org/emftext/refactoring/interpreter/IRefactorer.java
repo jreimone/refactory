@@ -18,7 +18,7 @@ import org.emftext.language.refactoring.roles.RoleModifier;
  *
  */
 public interface IRefactorer {
-
+	
 	/**
 	 * Sets the input for the RefactoringInterpreter by passing the selected EObjects.
 	 * The selection can come for example from selected nodes in a EMF generated tree editor. 

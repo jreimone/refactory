@@ -16,7 +16,6 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.indexconnector.IndexConnector;
-import org.emftext.refactoring.indexconnector.IndexConnectorFactory;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.util.RoleUtil;
@@ -33,9 +32,10 @@ public class Refactorer implements IRefactorer {
 	private Map<RefactoringSpecification, IRefactoringInterpreter> interpreterMap;
 	private IndexConnector indexConnector;
 
-	public Refactorer(EObject model, RoleMappingModel roleMapping){
+	public Refactorer(EObject model, RoleMappingModel roleMapping, IndexConnector indexConnector){
 		this.model = model;
 		this.roleMapping = roleMapping;
+		this.indexConnector = indexConnector;
 		initInterpreterMap();
 	}
 
@@ -45,8 +45,8 @@ public class Refactorer implements IRefactorer {
 		for (Mapping mapping : mappings) {
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			EcoreUtil.resolveAll(roleModel);
-			IndexConnectorFactory factory = IndexConnectorFactory.defaultINSTANCE;
-			indexConnector = factory.getIndexConnector();
+//			IndexConnectorFactory factory = IndexConnectorFactory.defaultINSTANCE;
+//			indexConnector = factory.getIndexConnector();
 			RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(roleModel);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter();
 			interpreter.initialize(refSpec, model, currentSelection);
@@ -105,5 +105,4 @@ public class Refactorer implements IRefactorer {
 		}
 		return refSpecs;
 	}
-
 }

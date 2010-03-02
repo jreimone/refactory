@@ -4,6 +4,7 @@
 package org.emftext.refactoring.interpreter;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.refactoring.indexconnector.IndexConnector;
 import org.emftext.refactoring.interpreter.internal.RefactorerFactoryImpl;
 
 
@@ -17,6 +18,7 @@ public interface RefactorerFactory {
 
 	public static final RefactorerFactory eINSTANCE = new RefactorerFactoryImpl();
 	
+	
 	/**
 	 * Returns the Refactorer for the given resource determined by its metamodel.
 	 * 
@@ -24,4 +26,6 @@ public interface RefactorerFactory {
 	 * @return the RefactoringInterpreter corresponding to the metamodel of the given model
 	 */
 	public IRefactorer getRefactorer(Resource resource);
+	
+	public IRefactorer getRefactorer(Resource resource, IndexConnector indexConnector);
 }

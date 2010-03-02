@@ -23,13 +23,16 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 	public IRefactorer getRefactorer(Resource resource) {
 		IndexConnectorFactory factory = IndexConnectorFactory.defaultINSTANCE;
 		IndexConnector indexConnector = factory.getIndexConnector();
+		return getRefactorer(resource, indexConnector);
+	}
+
+	public IRefactorer getRefactorer(Resource resource, IndexConnector indexConnector) {		
 		EObject root = resource.getContents().get(0);
 		String mmUri = root.eClass().getEPackage().getNsURI();
 		RoleMappingModel roleMapping = indexConnector.getRoleMapping(mmUri);
 		if(roleMapping == null){
 			return null;
 		}
-		return new Refactorer(root, roleMapping);
+		return new Refactorer(root, roleMapping, indexConnector);
 	}
-
 }
