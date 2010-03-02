@@ -4,19 +4,14 @@
 package org.emftext.refactoring.specification.interpreter;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.pl0.Body;
-import org.emftext.language.pl0.Program;
-import org.emftext.language.pl0.Statement;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -26,81 +21,82 @@ import org.emftext.refactoring.indexconnector.IndexConnectorFactory;
 import org.emftext.refactoring.indexconnector.MockIndexConnector;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
+import org.emftext.refactoring.test.QueryUtil;
 import org.emftext.refactoring.test.TestUtil;
-import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
 import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
-import org.emftext.test.core.TestData;
 import org.emftext.test.core.TestDataSet;
 import org.junit.Test;
 
-@TestData("pl0")
 public class RefactoringInterpreterTest extends TestClass{
 
-	private String path = "wirth";
+	private static final String MODEL = "MODEL_";
+	private static final String PATH = "PATH_";
 	
-	private IRefactorer getRefactorer(Resource resource){
-		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
+	private IRefactorer getRefactorer(Resource resource, IndexConnector indexConnector){
+		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, indexConnector);
 		assertNotNull(refactorer);
 		return refactorer;
 	}
 	
 	@Test
-	@InputData("wirth")
+	@InputData({MODEL,PATH})
 	public void getAppliedRoles(){
 		TestDataSet dataSet = getTestDataSet();
-		File file = dataSet.getInputFileByPattern(path);
+		File file = dataSet.getInputFileByPattern(MODEL);
 		Resource resource = TestUtil.getResourceFromFile(file);
 		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector(MockIndexConnector.class);
 		assertNotNull(connector);
-		Program pl0Prog = TestUtil.getExpectedModelFromResource(resource, Program.class);
-		RoleMappingModel mappingModel = connector.getRoleMapping(pl0Prog.eClass().getEPackage().getNsURI());
+		
+		EObject model = TestUtil.getModelFromResource(resource);
+		RoleMappingModel mappingModel = connector.getRoleMapping(model.eClass().getEPackage().getNsURI());
 		assertNotNull(mappingModel);
-		Body body = pl0Prog.getBlock().getBody();
-		assertNotNull(body);
-		EList<Statement> statements = ModelUtil.getObjectsByType(body.eAllContents(), Statement.class);
-		assertNotNull(statements);
-		assertTrue(statements.size() >= 3);
-		List<Statement> selection = statements.subList(0, 2);		
-		List<Mapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(selection, mappingModel, 1.0);
+		
+		File path = dataSet.getInputFileByPattern(PATH);
+		assertNotNull(path);
+		String query = QueryUtil.getLineInFile(path, 1);
+		List<EObject> elements = QueryUtil.queryResource(resource, query);
+		assertNotNull(elements);
+		assertTrue(elements.size() > 0);
+		
+		List<Mapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elements, mappingModel, 1.0);
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		for (Mapping mapping : mappings) {
-			Set<Role> roles = RoleUtil.getAppliedRoles(selection, mapping);
+			Set<Role> roles = RoleUtil.getAppliedRoles(elements, mapping);
 			assertNotNull(roles);
 			assertTrue(roles.size() > 0);
 		}
 	}
 
 	@Test
+	@InputData({MODEL,PATH})
 	public void getPossibleRefactoringSpecifications(){
-//		WorkspaceBuilder.setTest(this);
-//		WorkspaceBuilder.buildTestWorkspace();
-//		Resource resource = TestUtil.getResourceInWorkspace(this, path);
-		Resource resource = null;
-		IRefactorer refactorer = getRefactorer(resource);
-		Program pl0Prog = TestUtil.getExpectedModelFromResource(resource, Program.class);
-		Body body = pl0Prog.getBlock().getBody();
-		assertNotNull(body);
-		EList<Statement> statements = ModelUtil.getObjectsByType(body.eAllContents(), Statement.class);
-		assertNotNull(statements);
-		assertTrue(statements.size() >= 3);
-		List<Statement> selection = statements.subList(0, 2);
-		refactorer.setInput(selection);
+		TestDataSet dataSet = getTestDataSet();
+		File file = dataSet.getInputFileByPattern(MODEL);
+		Resource resource = TestUtil.getResourceFromFile(file);
+		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector(MockIndexConnector.class);
+		IRefactorer refactorer = getRefactorer(resource, connector);
+//		EObject model = TestUtil.getModelFromResource(resource);
+		
+		File path = dataSet.getInputFileByPattern(PATH);
+		String query = QueryUtil.getLineInFile(path, 1);
+		List<EObject> elements = QueryUtil.queryResource(resource, query);
+		refactorer.setInput(elements);
 		List<RefactoringSpecification> refSpecs = refactorer.getPossibleRefactorings(1.0);
 		assertNotNull(refSpecs);
 		assertTrue(refSpecs.size() > 0);
 	}
 
-	@Test
-	public void refactoringInterpreter(){
-//		WorkspaceBuilder.setTest(this);
-//		WorkspaceBuilder.buildTestWorkspace();
-//		Resource resource = TestUtil.getResourceInWorkspace(this, path);
-		Resource resource = null;
-		IRefactorer refactorer = getRefactorer(resource);
-		EObject refactoredModel = refactorer.refactor(null, true);
-		assertNull(refactoredModel);
-	}
+	
+//	public void refactoringInterpreter(){
+////		WorkspaceBuilder.setTest(this);
+////		WorkspaceBuilder.buildTestWorkspace();
+////		Resource resource = TestUtil.getResourceInWorkspace(this, path);
+//		Resource resource = null;
+//		IRefactorer refactorer = getRefactorer(resource);
+//		EObject refactoredModel = refactorer.refactor(null, true);
+//		assertNull(refactoredModel);
+//	}
 }

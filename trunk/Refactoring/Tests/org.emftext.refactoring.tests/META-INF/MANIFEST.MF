@@ -19,5 +19,7 @@ Require-Bundle: org.junit4,
  org.reuseware.sokan.index,
  org.emftext.language.refactoring.specification.resource.refspec,
  org.emftext.refactoring.indexconnector,
- org.emftext.refactoring.roleconstraintchecker;bundle-version="0.0.1"
+ org.emftext.refactoring.roleconstraintchecker,
+ org.emftext.language.conference.resource.conference;bundle-version="1.0.0",
+ org.emftext.language.conference;bundle-version="0.1.2"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
