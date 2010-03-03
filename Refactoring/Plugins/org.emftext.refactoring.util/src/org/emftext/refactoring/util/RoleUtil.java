@@ -60,7 +60,7 @@ public class RoleUtil {
 		EList<Mapping> mappings = roleMapping.getMappings();
 		for (Mapping mapping : mappings) {
 			double equality = getProcentualEquality(selection, mapping);
-			if(equality >= minEquality){
+			if(Math.abs(equality) >= minEquality){
 				possibleMappings.add(mapping);
 			}
 		}
@@ -82,7 +82,7 @@ public class RoleUtil {
 		for (Mapping mapping : mappings) {
 			EcoreUtil.resolveAll(mapping.getMappedRoleModel());
 			double equality = getProcentualInputEquality(selection, mapping);
-			if(equality >= minEquality){
+			if(Math.abs(equality) >= minEquality){
 				possibleMappings.add(mapping);
 			}
 		}
@@ -129,7 +129,17 @@ public class RoleUtil {
 		if(appliedRoles.size() == 0 && mappedRoles.size() == 0){
 			return 1.0;
 		}
-		double result = 1.0 - ((new Integer(mappedRoles.size()).doubleValue() - new Integer(matchedRoles.size()).doubleValue()) / new Integer(mappedRoles.size()).doubleValue());
+		double result = Double.NaN;
+		if(mappedRoles.size() >= appliedRoles.size()){
+			double mappedRolesValue = new Integer(mappedRoles.size()).doubleValue();
+			double matchedRolesValue = new Integer(matchedRoles.size()).doubleValue();
+			result = 1.0 - ((mappedRolesValue - matchedRolesValue) / mappedRolesValue);
+		} else {
+			double matchedRolesValue = new Integer(matchedRoles.size()).doubleValue();
+			double appliedRolesValue = new Integer(appliedRoles.size()).doubleValue();
+			result = 1.0 + (appliedRolesValue / ( matchedRolesValue + appliedRolesValue));
+			result = - result;
+		}
 		return result;
 	}
 	
