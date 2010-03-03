@@ -1,5 +1,9 @@
 package org.emftext.refactoring.registry.rolemodel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.osgi.framework.BundleContext;
@@ -50,5 +54,20 @@ public class Activator extends Plugin {
 	
 	public void log(String message, int status){
 		getLog().log(new Status(status, PLUGIN_ID, message));
+		Level level = null;
+		switch (status) {
+		case IStatus.ERROR:
+			level = Level.SEVERE;
+			break;
+		case IStatus.INFO:
+			level = Level.INFO;
+			break;
+		case IStatus.WARNING:
+			level = Level.WARNING;
+			break;
+		default:
+			break;
+		}
+		Logger.getLogger(PLUGIN_ID).log(level, message);
 	}
 }
