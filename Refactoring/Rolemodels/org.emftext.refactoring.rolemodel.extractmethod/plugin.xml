@@ -7,5 +7,11 @@
             rolemodel_resource="rolemodel/ExtractMethod.rolestext">
       </rolemodel>
    </extension>
+   <extension
+         point="org.emftext.refactoring.refspec">
+      <refspec
+            refspec_resource="refspec/ExtractMethod.refspec">
+      </refspec>
+   </extension>
 
 </plugin>
