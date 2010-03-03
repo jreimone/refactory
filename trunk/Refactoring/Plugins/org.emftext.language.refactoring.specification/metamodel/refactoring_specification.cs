@@ -20,6 +20,8 @@ OPTIONS{
 	resourcePluginID = "org.emftext.language.refactoring.specification.resource.refspec";
 	basePackage = "org.emftext.language.refactoring.specification.resource";
 	reloadGeneratorModel = "true";
+	overrideManifest = "false";
+	overridePluginXML = "false";
 }
 
 TOKENS{
