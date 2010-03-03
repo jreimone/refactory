@@ -5,7 +5,6 @@ package org.emftext.refactoring.indexconnector.impl;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -16,6 +15,7 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.indexconnector.IndexConnector;
+import org.reuseware.sokan.IndexMetaData;
 import org.reuseware.sokan.IndexRow;
 import org.reuseware.sokan.index.util.IndexUtil;
 import org.reuseware.sokan.index.util.ResourceUtil;
@@ -32,9 +32,9 @@ public class SokanIndexConnector implements IndexConnector {
 	public RoleMappingModel getRoleMapping(String metamodelURI) {
 		List<IndexRow> rows = getRowsByBooleanKey(RefactoringIndexer.KEY_IS_ROLEMAPPING, "true");
 		for (IndexRow row : rows) {
-			Map<String, String> metaData = row.getMetaData();
-			if(Boolean.valueOf(metaData.get(RefactoringIndexer.KEY_IS_ROLEMAPPING))){
-				String mmUri = metaData.get(RefactoringIndexer.KEY_ROLEMAPPING_FOR_METAMODEL_URI);
+			IndexMetaData metaData = row.getMetaData();
+			if(Boolean.valueOf(metaData.getSingle(RefactoringIndexer.KEY_IS_ROLEMAPPING))){
+				String mmUri = metaData.getSingle(RefactoringIndexer.KEY_ROLEMAPPING_FOR_METAMODEL_URI);
 				if(mmUri != null){
 					if(mmUri.equals(metamodelURI)){
 						RoleMappingModel rmModel = getExpectedModelByUri(row.getPhyURI(), RoleMappingModel.class);
@@ -50,7 +50,7 @@ public class SokanIndexConnector implements IndexConnector {
 
 	@SuppressWarnings("unchecked")
 	private <T> T getExpectedModelByUri(String uri, Class<T> clazz){
-		URI resourceUri = ResourceUtil.INSTANCE.uriFrom(uri);
+		URI resourceUri = ResourceUtil.uriFrom(uri);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.getResource(resourceUri, true);
 		EObject root = resource.getContents().get(0);
@@ -64,10 +64,10 @@ public class SokanIndexConnector implements IndexConnector {
 		List<IndexRow> rows = new LinkedList<IndexRow>();
 		List<IndexRow> index = IndexUtil.INSTANCE.getIndex();
 		for (IndexRow indexRow : index) {
-			Map<String, String> metaData = indexRow.getMetaData();
-			if(metaData.containsKey(key)){
+			IndexMetaData metaData = indexRow.getMetaData();
+			if(metaData.getSingle(key) != null){
 //				if(Boolean.parseBoolean(metaData.get(key))){
-				if(Boolean.parseBoolean(metaData.get(key)) == Boolean.parseBoolean(value)){
+				if(Boolean.parseBoolean(metaData.getSingle(key)) == Boolean.parseBoolean(value)){
 					rows.add(indexRow);
 				}
 //				}
@@ -91,8 +91,8 @@ public class SokanIndexConnector implements IndexConnector {
 			rmPlatformString = URI.createURI(rmUri.toString()).toString();
 		}
 		for (IndexRow row : rows) {
-			Map<String, String> metaData = row.getMetaData();
-			String rmIndexPlatformString = metaData.get(RefactoringIndexer.KEY_REFSPEC_FOR_ROLEMODEL_URI);
+			IndexMetaData metaData = row.getMetaData();
+			String rmIndexPlatformString = metaData.getSingle(RefactoringIndexer.KEY_REFSPEC_FOR_ROLEMODEL_URI);
 			if(rmIndexPlatformString.equals(rmPlatformString)){
 				RefactoringSpecification refSpec = getExpectedModelByUri(row.getPhyURI(), RefactoringSpecification.class);
 				if(refSpec != null){
