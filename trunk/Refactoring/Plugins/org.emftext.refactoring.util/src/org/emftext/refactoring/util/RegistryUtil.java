@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -20,7 +21,11 @@ public class RegistryUtil {
 	public static <T extends EObject> List<T> collectRegisteredResources(String extensionPoint, String attribute, Class<T> expectedModel){
 		ResourceSet rs = new ResourceSetImpl();
 		List<T> resources = new ArrayList<T>();
-		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(extensionPoint);
+		IExtensionRegistry registry = Platform.getExtensionRegistry();
+		if(registry == null){
+			return resources;
+		}
+		IConfigurationElement[] elements = registry.getConfigurationElementsFor(extensionPoint);
 		for (IConfigurationElement element : elements) {
 			String value = element.getAttribute(attribute);
 			String plugin = element.getContributor().getName();
