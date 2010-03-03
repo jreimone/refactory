@@ -4,7 +4,6 @@
 package org.emftext.refactoring.interpreter;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.refactoring.indexconnector.IndexConnector;
 import org.emftext.refactoring.interpreter.internal.RefactorerFactoryImpl;
 
 
@@ -27,5 +26,5 @@ public interface RefactorerFactory {
 	 */
 	public IRefactorer getRefactorer(Resource resource);
 	
-	public IRefactorer getRefactorer(Resource resource, IndexConnector indexConnector);
+//	public IRefactorer getRefactorer(Resource resource, IndexConnector indexConnector);
 }

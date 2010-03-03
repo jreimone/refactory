@@ -15,9 +15,9 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.refactoring.indexconnector.IndexConnector;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
+import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -30,12 +30,13 @@ public class Refactorer implements IRefactorer {
 	private RoleMappingModel roleMapping;
 	private List<? extends EObject> currentSelection;
 	private Map<RefactoringSpecification, IRefactoringInterpreter> interpreterMap;
-	private IndexConnector indexConnector;
+	private IRefactoringSpecificationRegistry registry;
+//	private IndexConnector indexConnector;
 
-	public Refactorer(EObject model, RoleMappingModel roleMapping, IndexConnector indexConnector){
+	public Refactorer(EObject model, RoleMappingModel roleMapping){
 		this.model = model;
 		this.roleMapping = roleMapping;
-		this.indexConnector = indexConnector;
+		registry = IRefactoringSpecificationRegistry.INSTANCE;
 		initInterpreterMap();
 	}
 
@@ -47,7 +48,7 @@ public class Refactorer implements IRefactorer {
 			EcoreUtil.resolveAll(roleModel);
 //			IndexConnectorFactory factory = IndexConnectorFactory.defaultINSTANCE;
 //			indexConnector = factory.getIndexConnector();
-			RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(roleModel);
+			RefactoringSpecification refSpec = registry.getRefSpec(roleModel);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter();
 			interpreter.initialize(refSpec, model, currentSelection);
 			interpreterMap.put(refSpec, interpreter);
@@ -61,7 +62,7 @@ public class Refactorer implements IRefactorer {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
 		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMapping, minEquality);
 		for (Mapping mapping : possibleMappings) {
-			RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(mapping.getMappedRoleModel());
+			RefactoringSpecification refSpec = registry.getRefSpec(mapping.getMappedRoleModel());
 			if(refSpec != null){
 				refSpecs.add(refSpec);
 			}
@@ -98,7 +99,7 @@ public class Refactorer implements IRefactorer {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
 		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMapping, minEquality);
 		for (Mapping mapping : possibleMappings) {
-			RefactoringSpecification refSpec = indexConnector.getRefactoringSpecification(mapping.getMappedRoleModel());
+			RefactoringSpecification refSpec = registry.getRefSpec(mapping.getMappedRoleModel());
 			if(refSpec != null){
 				refSpecs.add(refSpec);
 			}
