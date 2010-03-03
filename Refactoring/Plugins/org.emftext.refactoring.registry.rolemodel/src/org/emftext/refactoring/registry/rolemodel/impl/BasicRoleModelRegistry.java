@@ -52,7 +52,7 @@ public class BasicRoleModelRegistry implements IRoleModelRegistry {
 			try {
 				registerRoleModel(roleModel);
 			} catch (RoleModelAlreadyRegisteredException e) {
-				Activator.getDefault().log(String.format("A RoleModel with name '%1$s' was already registered", e.getRoleModel().getName()), IStatus.ERROR);
+				Activator.getDefault().log(e.getMessage(), IStatus.ERROR);
 			}
 		}
 	}
