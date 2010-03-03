@@ -8,7 +8,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.emftext.refactoring.indexconnector,
  org.emftext.language.refactoring.specification,
  org.emftext.language.refactoring.specification.resource.refspec,
- org.emftext.language.refactoring.rolemapping;bundle-version="1.0.0",
- org.emftext.refactoring.util;bundle-version="0.0.1",
- org.emftext.refactoring.registry.refactoringspecification;bundle-version="0.0.1"
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.refactoring.util,
+ org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.rolemapping
 Export-Package: org.emftext.refactoring.interpreter
