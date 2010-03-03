@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.emftext.refactoring.util
 Bundle-Version: 0.0.1
 Bundle-Vendor: Jan Reimann
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.5.0",
- org.emftext.language.refactoring.rolemapping;bundle-version="1.0.0"
+Require-Bundle: org.eclipse.emf.ecore,
+ org.emftext.language.refactoring.rolemapping,
+ org.eclipse.core.runtime
 Export-Package: org.emftext.refactoring.util
