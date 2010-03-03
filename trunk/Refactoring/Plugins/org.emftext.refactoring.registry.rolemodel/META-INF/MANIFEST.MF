@@ -5,6 +5,9 @@ Bundle-SymbolicName: org.emftext.refactoring.registry.rolemodel;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Activator: org.emftext.refactoring.registry.rolemodel.Activator
 Bundle-Vendor: Jan Reimann
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.language.refactoring.roles
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.emftext.refactoring.registry.rolemodel,
+ org.emftext.refactoring.registry.rolemodel.exceptions
 Bundle-ActivationPolicy: lazy

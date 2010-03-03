@@ -1,6 +1,7 @@
 package org.emftext.refactoring.registry.rolemodel;
 
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -13,7 +14,7 @@ public class Activator extends Plugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -46,5 +47,8 @@ public class Activator extends Plugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
-
+	
+	public void log(String message, int status){
+		getLog().log(new Status(status, PLUGIN_ID, message));
+	}
 }
