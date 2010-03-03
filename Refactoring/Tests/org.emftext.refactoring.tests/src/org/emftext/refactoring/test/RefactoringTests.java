@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -18,7 +19,9 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
@@ -54,6 +57,7 @@ import org.emftext.test.core.TestDataSet;
  */
 public class RefactoringTests extends TestCase{
 
+//	private static final String PLUGIN_ID 						= "org.emftext.refactoring.tests";
 	public static final String INPUT_FOLDER 					= "testInput";
 	public static final String EXPECTED_DATA_FILE_NAME_INSERT 	= ".expected";
 
@@ -69,9 +73,23 @@ public class RefactoringTests extends TestCase{
 
 	private static final Logger LOG = Logger.getLogger(RefactoringTests.class.getSimpleName());
 
+	private static void registerTestingRootAsPlatformRoot(){
+		Map<String, URI> resourceMap = EcorePlugin.getPlatformResourceMap();
+		File root = new File(".");
+		assertTrue(root.exists());
+		String rootPath = root.getAbsolutePath();
+		URI rootUri = URI.createFileURI(rootPath);
+		rootUri = rootUri.trimSegments(1);
+		String testProjectRoot = rootUri.lastSegment();
+		assertNotNull(testProjectRoot);
+		rootUri = URI.createFileURI(rootPath);
+		resourceMap.put(testProjectRoot, rootUri);
+	}
+	
 	public static Test suite(){
 		registerEPackages();
 		registerResourceFactories();
+		registerTestingRootAsPlatformRoot();
 		TestSuite suite = new TestSuite("All Refactoring Tests"){};
 		for (Class<? extends TestClass> testClass : testClasses) {
 			try {
@@ -382,4 +400,5 @@ public class RefactoringTests extends TestCase{
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("conference", new ConferenceResourceFactory());
 	}
 
+	
 }
