@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.emftext.refactoring.rolemapping" name="rolemapping" schema="schema/org.emftext.refactoring.rolemapping.exsd"/>
+
+</plugin>
