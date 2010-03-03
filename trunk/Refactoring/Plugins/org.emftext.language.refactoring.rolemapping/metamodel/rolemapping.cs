@@ -12,6 +12,8 @@ OPTIONS {
 	//usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
+	overridePluginXML = "false";
+	overrideManifest = "false";
 }
 
 TOKENSTYLES {
