@@ -52,7 +52,7 @@ public class BasicRefactoringSpecificationRegistry implements
 			try {
 				registerRefSpec(roleModel);
 			} catch (RefSpecAlreadyRegisteredException e) {
-				RegistryUtil.log(String.format("A RefactoringSpecification for RoleModel '%1$s' was already registered", e.getRefSpec().getUsedRoleModel().getName()), IStatus.ERROR);
+				RegistryUtil.log(e.getMessage(), IStatus.ERROR);
 			}
 		}
 	}
