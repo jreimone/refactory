@@ -1,0 +1,17 @@
+RoleModel ExtractMethod {
+	ROLE OrigContainer;
+	input super ROLE Extract;
+	ROLE NewContainer (input runtime "newName");
+	ROLE ContainerContainer;
+	optional ROLE MovedReference;
+	
+	transitive : OrigContainer [1..1] <>- Extract extracts [0..-1];
+	transitive : OrigContainer [1..1] <>- MovedReference [1..1];
+	
+	transitive :NewContainer [1..1] <>- Extract moved [0..-1];
+	
+	transitive :ContainerContainer [1..1] <>- NewContainer target [1..1];
+	transitive reflexive :ContainerContainer [1..1] <>- OrigContainer source [1..1];
+	
+	MovedReference [1..1] -- NewContainer containerRef [1..1];
+} 
