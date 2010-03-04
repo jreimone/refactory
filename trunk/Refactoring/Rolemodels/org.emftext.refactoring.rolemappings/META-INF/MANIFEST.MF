@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rolemappings
+Bundle-SymbolicName: org.emftext.refactoring.rolemappings
+Bundle-Version: 0.0.1
+Bundle-Vendor: Jan Reimann
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.emftext.refactoring.registry.rolemapping
