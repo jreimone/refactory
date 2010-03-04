@@ -38,7 +38,8 @@ TOKENS{
 	//DEFINE REFLEXIVE $'reflexive'$;
 
 	//DEFINE BOOLEAN_LITERAL $'true'|'false'$;
-	DEFINE IDENTIFIER $('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;	
+	DEFINE UPPER_IDENTIFIER $('A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
+	DEFINE LOWER_IDENTIFIER $('a'..'z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;	
 	DEFINE NUMBER $('0')|('-1')|('*')|(('1'..'9')('0'..'9')*)$;
 }
 
@@ -49,7 +50,6 @@ TOKENSTYLES{
 	"->" COLOR #FFC400, BOLD;
 	"--" COLOR #00FF00, BOLD;
 	"<>-" COLOR #00FFFF, BOLD;
-	//"BOOLEAN_LITERAL" COLOR #7F0055, BOLD;
 	"NUMBER" COLOR #0000FF, ITALIC;
 	".." COLOR #0000FF, ITALIC;
 	"ROLE_MODIFIER" COLOR #7F0055, BOLD;
@@ -57,19 +57,19 @@ TOKENSTYLES{
 }
 
 RULES {
-	RoleModel ::= "RoleModel" #1 name[IDENTIFIER] "{" !1 roles* !0 !0 relations* !0 "}";
+	RoleModel ::= "RoleModel" #1 name[UPPER_IDENTIFIER] "{" !1 roles* !0 !0 relations* !0 "}";
 	
-	Role ::= ( modifier[ROLE_MODIFIER]* )? #1 "ROLE" #1 name[IDENTIFIER] ("(" attributes ("," attributes)* ")")? ";" !0;
+	Role ::= ( modifier[ROLE_MODIFIER]* )? #1 "ROLE" #1 name[UPPER_IDENTIFIER] ("(" attributes ("," attributes)* ")")? ";" !0;
 	
-	RoleAttribute ::= modifier[ROLE_MODIFIER]* name['"','"'];
+	RoleAttribute ::= modifier[ROLE_MODIFIER]* name[LOWER_IDENTIFIER];
 	
-	RoleProhibition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 "|-|" #1 target[IDENTIFIER] ";" !0;
+	RoleProhibition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[UPPER_IDENTIFIER] #1 "|-|" #1 target[UPPER_IDENTIFIER] ";" !0;
 	
-	RoleImplication ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 "->" #1 target[IDENTIFIER] ";" !0;
+	RoleImplication ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[UPPER_IDENTIFIER] #1 "->" #1 target[UPPER_IDENTIFIER] ";" !0;
 	
-	RoleAssociation ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 sourceName[IDENTIFIER]? #1 sourceMultiplicity #1 "--" #1 target[IDENTIFIER] #1 targetName[IDENTIFIER]? #1 targetMultiplicity  ";" !0;
+	RoleAssociation ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[UPPER_IDENTIFIER] #1 sourceName[LOWER_IDENTIFIER]? #1 sourceMultiplicity #1 "--" #1 target[UPPER_IDENTIFIER] #1 targetName[LOWER_IDENTIFIER]? #1 targetMultiplicity  ";" !0;
 	
-	RoleComposition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[IDENTIFIER] #1 sourceName[IDENTIFIER]? #1 sourceMultiplicity #1 "<>-" #1 target[IDENTIFIER] #1 targetName[IDENTIFIER]? #1 targetMultiplicity  ";" !0;
+	RoleComposition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[UPPER_IDENTIFIER] #1 sourceName[LOWER_IDENTIFIER]? #1 sourceMultiplicity #1 "<>-" #1 target[UPPER_IDENTIFIER] #1 targetName[LOWER_IDENTIFIER]? #1 targetMultiplicity  ";" !0;
 	
 	Multiplicity ::= "[" lowerBound[NUMBER] ".." upperBound[NUMBER] "]";
 }
