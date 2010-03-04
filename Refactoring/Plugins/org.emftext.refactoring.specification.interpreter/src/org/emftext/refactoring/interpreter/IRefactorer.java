@@ -9,10 +9,15 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 
 /**
- * Interface for Refactorer.
+ * Interface for Refactorer. A {@link IRefactorer} will be used for one {@link RoleMappingModel roleMapping}. 
+ * Internally the {@link IRefactorer refactorer} consists of a map which connects a {@link Mapping} with
+ * a {@link IRefactoringInterpreter}. This needed because one {@link RoleModel} can be applied to several parts 
+ * of the same metamodel.
  * 
  * @author Jan Reimann
  *
@@ -52,12 +57,25 @@ public interface IRefactorer {
 	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality);
 	
 	/**
-	 * Invokes the specified RefactoringSpecification on the model set in {@link #setInput(EList)}.
+	 * Invokes the RefactoringSpecification on the given {@link Mapping} on the model set with {@link #setInput(EList)}.
 	 * 
-	 * @param refSpec the refactoring to invoke
+	 * @param the mapping for which the {@link RefactoringSpecification} is intended to be invoked
 	 * @param copy specify of the refactoring should be done on a copy of the original model - 
 	 * if set to <code>true</code> the original model stays untouched
 	 * @return the refactored model
 	 */
-	public EObject refactor(RefactoringSpecification refSpec, boolean copy);
+	public EObject refactor(Mapping mapping, boolean copy);
+	
+	/**
+	 * Returns a list containing all {@link Mapping mappings} for which the current selection has all obligatory (input)roles
+	 * applied. With <code>minEquality</code> one can decide how strict the presence of the applied roles should be.
+	 * If <code>minEquality</code> is 1.0 than all (input)roles are considered to be applied in the current selection.
+	 * This method should be used for retrieving the possible refactorings which should be offered to the user maybe in 
+	 * a context menu. Therefore the {@link Mapping#getName()} is usefull because it is considered to have a meaningful name like
+	 * 'ExtractStatements' for the <a href="http://www.emftext.org/index.php/EMFText_Concrete_Syntax_Zoo_PL0">PL/0</a> language for example.
+	 * 
+	 * @param minEquality
+	 * @return
+	 */
+	public List<Mapping> getPossibleMappings(double minEquality);
 }
