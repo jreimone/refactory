@@ -19,16 +19,24 @@ START RefactoringSpecification
 OPTIONS{
 	resourcePluginID = "org.emftext.language.refactoring.specification.resource.refspec";
 	basePackage = "org.emftext.language.refactoring.specification.resource";
+	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	overrideManifest = "false";
 	overridePluginXML = "false";
 }
 
 TOKENS{
-	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
+	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
+	DEFINE ML_COMMENT $'/*'.*'*/'$ COLLECT IN comments;
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
 	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
-	DEFINE DOT_NOTATION TEXT + $'.'$ + TEXT;
+	
+	DEFINE UPPER_IDENTIFIER $('A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
+	DEFINE LOWER_IDENTIFIER $('a'..'z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
+	//DEFINE IDENTIFIER $('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
+	DEFINE DOT_NOTATION $($ + UPPER_IDENTIFIER + $|$ + LOWER_IDENTIFIER + $)$ + $'.'$ + LOWER_IDENTIFIER;
 }
 
 TOKENSTYLES{
@@ -47,14 +55,16 @@ TOKENSTYLES{
 	"assign" COLOR #7F0055, BOLD;
 	"for" COLOR #7F0055, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
-	"TEXT" COLOR #0000FF;
+	"IDENTIFIER" COLOR #0000FF;
+	"LOWER_IDENTIFIER" COLOR #0000FF;
+	"UPPER_IDENTIFIER" COLOR #0000FF;
 }
 
 RULES{
 	
-	RefactoringSpecification ::= "REFACTORING" #1 name[] !0 "FOR" #1 usedRoleModel['<','>'] !0 !0 "STEPS" "{" !1 (instructions ";" !0)+ !0 "}"  ;
+	RefactoringSpecification ::= "REFACTORING" #1 name[UPPER_IDENTIFIER] !0 "FOR" #1 usedRoleModel['<','>'] !0 !0 "STEPS" "{" !1 (instructions ";" !0)+ !0 "}"  ;
 	
-	CREATE ::= "create" #1 "new" #1 sourceRoleReference #1 ("(" "->" varDeclaration ")")? #1 "in" #1 targetContext;
+	CREATE ::= "create" #1 "new" #1 (varDeclaration #0 ":" #0)? sourceRoleReference #1 "in" #1 targetContext;
 	
 	MOVE ::= "move" #1 source #1 "to" #1 target;
 	
@@ -62,11 +72,11 @@ RULES{
 	
 	ASSIGN ::= "assign" #1 (sourceAttribute[DOT_NOTATION] #1 "for" #1 )? targetAttribute[DOT_NOTATION];
 	
-	Variable ::= name[];
+	Variable ::= name[LOWER_IDENTIFIER];
 	
-	VariableReference ::= "->" variable[] ;
+	VariableReference ::= variable[LOWER_IDENTIFIER] ;
 	
-	RoleReference ::= role[];
+	RoleReference ::= role[UPPER_IDENTIFIER];
 	
 	RelationReference ::= relation[DOT_NOTATION];
 }
