@@ -29,7 +29,7 @@ public class Refactorer implements IRefactorer {
 	private EObject model;
 	private RoleMappingModel roleMapping;
 	private List<? extends EObject> currentSelection;
-	private Map<RefactoringSpecification, IRefactoringInterpreter> interpreterMap;
+	private Map<Mapping, IRefactoringInterpreter> interpreterMap;
 	private IRefactoringSpecificationRegistry registry;
 
 	public Refactorer(EObject model, RoleMappingModel roleMapping){
@@ -40,15 +40,15 @@ public class Refactorer implements IRefactorer {
 	}
 
 	private void initInterpreterMap(){
-		interpreterMap = new LinkedHashMap<RefactoringSpecification, IRefactoringInterpreter>();
+		interpreterMap = new LinkedHashMap<Mapping, IRefactoringInterpreter>();
 		EList<Mapping> mappings = roleMapping.getMappings();
 		for (Mapping mapping : mappings) {
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			EcoreUtil.resolveAll(roleModel);
 			RefactoringSpecification refSpec = registry.getRefSpec(roleModel);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter();
-			interpreter.initialize(refSpec, model, currentSelection);
-			interpreterMap.put(refSpec, interpreter);
+			interpreter.initialize(refSpec, model, currentSelection, roleMapping, mapping);
+			interpreterMap.put(mapping, interpreter);
 		}
 	}
 
@@ -70,11 +70,11 @@ public class Refactorer implements IRefactorer {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#refactor(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, boolean)
 	 */
-	public EObject refactor(RefactoringSpecification refSpec, boolean copy) {
-		if(refSpec == null){
+	public EObject refactor(Mapping mapping, boolean copy) {
+		if(mapping == null){
 			return null;
 		}
-		IRefactoringInterpreter interpreter = interpreterMap.get(refSpec);
+		IRefactoringInterpreter interpreter = interpreterMap.get(mapping);
 		EObject refactoredModel = null;
 		if(interpreter != null){
 			refactoredModel = interpreter.interprete(copy);
@@ -102,5 +102,9 @@ public class Refactorer implements IRefactorer {
 			}
 		}
 		return refSpecs;
+	}
+	
+	public List<Mapping> getPossibleMappings(double minEquality){
+		return RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMapping, minEquality);
 	}
 }
