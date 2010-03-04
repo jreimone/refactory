@@ -1,5 +1,6 @@
 package org.emftext.refactoring.indexconnector.impl;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,12 +26,16 @@ public class RefactoringIndexer implements Indexer {
 	public static final String KEY_REFSPEC_FOR_ROLEMODEL_URI		= "REFSPEC_FOR_ROLEMODEL_URI";
 
 	public RefactoringIndexer() {
-		// TODO Auto-generated constructor stub
+		// hmm
 	}
 
 	private IndexMetaData handleRefactoringSpecification(EObject root) {
 //		Map<String, String> metaData = new LinkedHashMap<String, String>();
 		IndexMetaData metaData = SokanFactory.eINSTANCE.createIndexMetaData();
+		if(metaData.getSingleValueFields() == null || metaData.getMultiValueFields() == null ){
+			metaData.setSingleValueFields(new HashMap<String, String>());
+			metaData.setMultiValueFields(new HashMap<String, EList<String>>());
+		}
 		if(root instanceof RefactoringSpecification){
 			metaData.putSingle(KEY_IS_REFSPEC, Boolean.TRUE.toString());
 //			metaData.put(KEY_IS_REFSPEC, Boolean.TRUE.toString());
@@ -50,6 +55,10 @@ public class RefactoringIndexer implements Indexer {
 	private IndexMetaData handleRoleMappingModel(EObject root) {
 //		Map<String, String> metaData = new LinkedHashMap<String, String>();
 		IndexMetaData metaData = SokanFactory.eINSTANCE.createIndexMetaData();
+		if(metaData.getSingleValueFields() == null || metaData.getMultiValueFields() == null ){
+			metaData.setSingleValueFields(new HashMap<String, String>());
+			metaData.setMultiValueFields(new HashMap<String, EList<String>>());
+		}
 		if(root instanceof RoleMappingModel){
 			metaData.putSingle(KEY_IS_ROLEMAPPING, Boolean.TRUE.toString());
 			RoleMappingModel roleMapping = (RoleMappingModel) root;
@@ -72,7 +81,12 @@ public class RefactoringIndexer implements Indexer {
 
 	public void createIndex(URI artifactURI, IndexMetaData metaData, ResourceSet resourceSet) {
 //		Map<String, String> metaData = new LinkedHashMap<String, String>();
-		Resource resource = resourceSet.getResource(artifactURI, true);
+		Resource resource = null;
+		try {
+			resource = resourceSet.getResource(artifactURI, true);	
+		} catch (Exception e) {
+			return;
+		}
 		if(resource == null){
 			return;
 		}
