@@ -31,7 +31,6 @@ public class Refactorer implements IRefactorer {
 	private List<? extends EObject> currentSelection;
 	private Map<RefactoringSpecification, IRefactoringInterpreter> interpreterMap;
 	private IRefactoringSpecificationRegistry registry;
-//	private IndexConnector indexConnector;
 
 	public Refactorer(EObject model, RoleMappingModel roleMapping){
 		this.model = model;
@@ -46,8 +45,6 @@ public class Refactorer implements IRefactorer {
 		for (Mapping mapping : mappings) {
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			EcoreUtil.resolveAll(roleModel);
-//			IndexConnectorFactory factory = IndexConnectorFactory.defaultINSTANCE;
-//			indexConnector = factory.getIndexConnector();
 			RefactoringSpecification refSpec = registry.getRefSpec(roleModel);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter();
 			interpreter.initialize(refSpec, model, currentSelection);
