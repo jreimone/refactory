@@ -1,0 +1,28 @@
+epackage rolemapping;
+
+// plain Java imports
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+ 
+// import of other EClasses
+import roles.Role;
+import roles.RoleModifier;
+import roles.MultiplicityRelation;
+
+eclass ConcreteMapping {
+	
+	getRelationMappingForTargetRole() {
+		EList<RelationMapping> mappings = getOutgoingRelationMappings();
+		for (RelationMapping relationMapping : mappings) {
+			EcoreUtil.resolveAll(relationMapping);
+			MultiplicityRelation relation = relationMapping.getRelation();
+			if(relation.getTarget().equals(role)){
+				return relationMapping;
+			}
+		}
+		return null;
+  	}
+}

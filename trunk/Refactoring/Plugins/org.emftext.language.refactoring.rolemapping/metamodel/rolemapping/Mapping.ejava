@@ -38,4 +38,24 @@ eclass Mapping {
 		}
 		return mappedRoles;
   	}
+  	
+  	getEClassForRole(){
+  		EList<ConcreteMapping> mappings = getRoleToMetaelement();
+		for (ConcreteMapping mapping : mappings) {
+			if(mapping.getRole().equals(role)){
+				return mapping.getMetaclass();
+			}
+		}
+		return null;
+  	}
+  	
+  	getConcreteMappingForRole(){
+  		EList<ConcreteMapping> mappings = getRoleToMetaelement();
+		for (ConcreteMapping mapping : mappings) {
+			if(mapping.getRole().equals(role)){
+				return mapping;
+			}
+		}
+		return null;
+  	}
 }

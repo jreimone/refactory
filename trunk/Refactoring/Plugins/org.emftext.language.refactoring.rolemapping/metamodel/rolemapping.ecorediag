@@ -56,7 +56,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_FiJmQRcGEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/resource/org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FiJmQhcGEd-v66FqVrAtPg" x="75" y="255"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FiJmQhcGEd-v66FqVrAtPg" x="-5" y="250"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Y4GHQBcGEd-v66FqVrAtPg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Y4UJsBcGEd-v66FqVrAtPg" type="4001"/>
@@ -78,13 +78,21 @@
         <element xmi:type="ecore:EOperation" href="rolemapping.ecore#//Mapping/getMappedRolesForEObject"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_zhe-UCCWEd-um_9nLS95jg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_tbmtYCe2Ed-Y4tTkyiCD9g" type="2002">
+        <element xmi:type="ecore:EOperation" href="rolemapping.ecore#//Mapping/getEClassForRole"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tbmtYSe2Ed-Y4tTkyiCD9g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TDydYCe8Ed-Y4tTkyiCD9g" type="2002">
+        <element xmi:type="ecore:EOperation" href="rolemapping.ecore#//Mapping/getConcreteMappingForRole"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TDydYSe8Ed-Y4tTkyiCD9g"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Y4UJthcGEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Y4UJtxcGEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Y4UJuBcGEd-v66FqVrAtPg"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Y4GHQRcGEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="rolemapping.ecore#//Mapping"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y4GHQhcGEd-v66FqVrAtPg" x="310" y="255"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y4GHQhcGEd-v66FqVrAtPg" x="230" y="185"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_FBM_4BcHEd-v66FqVrAtPg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_FBbCUBcHEd-v66FqVrAtPg" type="4001"/>
@@ -94,13 +102,17 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_FBbpYxcHEd-v66FqVrAtPg"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_FBbpZBcHEd-v66FqVrAtPg" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_bXotcCe9Ed-Y4tTkyiCD9g" type="2002">
+        <element xmi:type="ecore:EOperation" href="rolemapping.ecore#//ConcreteMapping/getRelationMappingForTargetRole"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bXotcSe9Ed-Y4tTkyiCD9g"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_FBbpZRcHEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_FBbpZhcHEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_FBbpZxcHEd-v66FqVrAtPg"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_FBM_4RcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="rolemapping.ecore#//ConcreteMapping"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FBM_4hcHEd-v66FqVrAtPg" x="300" y="375" width="133"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FBM_4hcHEd-v66FqVrAtPg" x="65" y="375" width="368"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_TJqIUBcHEd-v66FqVrAtPg" type="1001">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TKGNMBcHEd-v66FqVrAtPg" source="Shortcut">
@@ -119,7 +131,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_TJqIURcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/resource/org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TJqIUhcHEd-v66FqVrAtPg" x="75" y="375"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TJqIUhcHEd-v66FqVrAtPg" x="-205" y="370"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_eQlZcBcHEd-v66FqVrAtPg" type="1001">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_eRAQMBcHEd-v66FqVrAtPg" source="Shortcut">
@@ -138,7 +150,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_eQlZcRcHEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eQlZchcHEd-v66FqVrAtPg" x="75" y="455"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eQlZchcHEd-v66FqVrAtPg" x="-205" y="450"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_MebwABmEEd-79KSBOkLXhw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_MejEwBmEEd-79KSBOkLXhw" type="4001"/>
