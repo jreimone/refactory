@@ -27,14 +27,23 @@ import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage;
+import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelationTest;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
 import org.emftext.refactoring.indexconnector.IndexConnectorTest;
+import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.emftext.refactoring.registry.rolemapping.exceptions.RoleMappingAlreadyRegistered;
+import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
+import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
 import org.emftext.refactoring.roleconstraintchecker.RoleConstraintCheckerTest;
 import org.emftext.refactoring.specification.interpreter.RefactoringInterpreterTest;
 import org.emftext.test.core.AbstractRefactoringTest;
@@ -57,9 +66,16 @@ import org.emftext.test.core.TestDataSet;
  */
 public class RefactoringTests extends TestCase{
 
-//	private static final String PLUGIN_ID 						= "org.emftext.refactoring.tests";
+	//	private static final String PLUGIN_ID 						= "org.emftext.refactoring.tests";
 	public static final String INPUT_FOLDER 					= "testInput";
 	public static final String EXPECTED_DATA_FILE_NAME_INSERT 	= ".expected";
+
+	// paths for files which will be inserted into registries
+	public static final String REGISTRY_FOLDER 					= INPUT_FOLDER + File.separator + "registry";
+	public static final String EXTRACT_METHOD_ROLES				= REGISTRY_FOLDER + File.separator + "ExtractMethod.rolestext";
+	public static final String EXTRACT_METHOD_REFSPEC			= REGISTRY_FOLDER + File.separator + "ExtractMethod.refspec";
+	public static final String PL0_MAPPING						= REGISTRY_FOLDER + File.separator + "pl0mapping.rolemapping";
+	public static final String CONFERENCE_MAPPING				= REGISTRY_FOLDER + File.separator + "conference.rolemapping";
 
 	@SuppressWarnings("unchecked")
 	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
@@ -85,11 +101,44 @@ public class RefactoringTests extends TestCase{
 		rootUri = URI.createFileURI(rootPath);
 		resourceMap.put(testProjectRoot, rootUri);
 	}
-	
+
+	private static void registerModelsForRefactorings(){
+		try {
+			// RoleModels
+			RoleModel roleModel = TestUtil.getExpectedModelFromResource(
+					TestUtil.getResourceFromFile(TestUtil.getFileByPath(EXTRACT_METHOD_ROLES))
+					, RoleModel.class);
+			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
+			
+			// RefSpecs
+			RefactoringSpecification refSpec = TestUtil.getExpectedModelFromResource(
+					TestUtil.getResourceFromFile(TestUtil.getFileByPath(EXTRACT_METHOD_REFSPEC))
+					, RefactoringSpecification.class);
+			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
+			
+			// RoleMappings
+			RoleMappingModel mapping = TestUtil.getExpectedModelFromResource(
+					TestUtil.getResourceFromFile(TestUtil.getFileByPath(PL0_MAPPING))
+					, RoleMappingModel.class);
+			IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
+			mapping = TestUtil.getExpectedModelFromResource(
+					TestUtil.getResourceFromFile(TestUtil.getFileByPath(CONFERENCE_MAPPING))
+					, RoleMappingModel.class);
+			IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
+		} catch (RoleModelAlreadyRegisteredException e) {
+			e.printStackTrace();
+		} catch (RefSpecAlreadyRegisteredException e) {
+			e.printStackTrace();
+		} catch (RoleMappingAlreadyRegistered e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static Test suite(){
 		registerEPackages();
 		registerResourceFactories();
 		registerTestingRootAsPlatformRoot();
+		registerModelsForRefactorings();
 		TestSuite suite = new TestSuite("All Refactoring Tests"){};
 		for (Class<? extends TestClass> testClass : testClasses) {
 			try {
@@ -400,5 +449,5 @@ public class RefactoringTests extends TestCase{
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("conference", new ConferenceResourceFactory());
 	}
 
-	
+
 }

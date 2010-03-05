@@ -90,6 +90,11 @@ public class RefactoringInterpreterTest extends TestClass{
 		File file = dataSet.getInputFileByPattern(MODEL);
 		Resource resource = TestUtil.getResourceFromFile(file);
 		IRefactorer refactorer = getRefactorer(resource);
+		
+		File path = dataSet.getInputFileByPattern(PATH);
+		String query = QueryUtil.getLineInFile(path, 1);
+		List<EObject> elements = QueryUtil.queryResource(resource, query);
+		refactorer.setInput(elements);
 		List<RefactoringSpecification> refSpecs = refactorer.getPossibleRefactorings(1.0);
 		assertNotNull(refSpecs);
 		assertTrue(refSpecs.size() > 0);
