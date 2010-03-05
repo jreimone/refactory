@@ -11,6 +11,9 @@
   <foreignModel>refactoring_specification.ecore</foreignModel>
   <genPackages prefix="RefactoringSpecification" basePackage="org.emftext.language.refactoring"
       disposableProviderFactory="true" fileExtensions="refspec" ecorePackage="refactoring_specification.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="refactoring_specification.ecore#//Constants">
+      <genEnumLiterals ecoreEnumLiteral="refactoring_specification.ecore#//Constants/INPUT"/>
+    </genEnums>
     <genClasses ecoreClass="refactoring_specification.ecore#//RefactoringSpecification">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RefactoringSpecification/usedRoleModel"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoring_specification.ecore#//RefactoringSpecification/name"/>
@@ -45,7 +48,9 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//RelationReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RelationReference/relation"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//TargetContext"/>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//TargetContext">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//TargetContext/from"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ReferenceCommand"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//SET">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//SET/source"/>
@@ -56,5 +61,15 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ASSIGN/sourceAttribute"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ASSIGN/targetAttribute"/>
     </genClasses>
+    <genClasses ecoreClass="refactoring_specification.ecore#//FromClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//FromClause/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//FromClause/reference"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//FromOperator"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//UPTREE"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//ConstantsReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoring_specification.ecore#//ConstantsReference/referencedConstant"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//FromReference"/>
   </genPackages>
 </genmodel:GenModel>

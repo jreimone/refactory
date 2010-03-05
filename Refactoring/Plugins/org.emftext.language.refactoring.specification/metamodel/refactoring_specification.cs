@@ -21,8 +21,9 @@ OPTIONS{
 	basePackage = "org.emftext.language.refactoring.specification.resource";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
-	overrideManifest = "false";
-	overridePluginXML = "false";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
+	//overrideManifest = "false";
+	//overridePluginXML = "false";
 }
 
 TOKENS{
@@ -33,6 +34,7 @@ TOKENS{
 	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
 	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
 	
+	DEFINE CONSTANTS $'INPUT'$;
 	DEFINE UPPER_IDENTIFIER $('A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
 	DEFINE LOWER_IDENTIFIER $('a'..'z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
 	//DEFINE IDENTIFIER $('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
@@ -48,16 +50,17 @@ TOKENSTYLES{
 	"in" COLOR #7F0055, BOLD;
 	"move" COLOR #7F0055, BOLD;
 	"to" COLOR #7F0055, BOLD;
-	"->" COLOR #FFC400, BOLD;
 	"set" COLOR #7F0055, BOLD;
 	"use" COLOR #7F0055, BOLD;
 	"of" COLOR #7F0055, BOLD;
 	"assign" COLOR #7F0055, BOLD;
 	"for" COLOR #7F0055, BOLD;
+	"from" COLOR #7F0055, BOLD;
+	"uptree" COLOR #50F05C, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
-	"IDENTIFIER" COLOR #0000FF;
 	"LOWER_IDENTIFIER" COLOR #0000FF;
 	"UPPER_IDENTIFIER" COLOR #0000FF;
+	"CONSTANTS" COLOR #FF8000, BOLD;
 }
 
 RULES{
@@ -76,7 +79,13 @@ RULES{
 	
 	VariableReference ::= variable[LOWER_IDENTIFIER] ;
 	
-	RoleReference ::= role[UPPER_IDENTIFIER];
+	RoleReference ::= role[UPPER_IDENTIFIER] (#1 "from" #1 from)?;
 	
 	RelationReference ::= relation[DOT_NOTATION];
+	
+	ConstantsReference ::= referencedConstant[CONSTANTS] ;
+	
+	FromClause ::= operator #0 "(" reference ")" ;
+	
+	UPTREE ::= "uptree";
 }
