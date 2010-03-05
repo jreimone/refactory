@@ -35,5 +35,5 @@ public interface IRefactoringSpecificationRegistry {
 	 * Returns the {@link RefactoringSpecification refspec} map.
 	 * @return
 	 */
-	public Map<RoleModel, RefactoringSpecification> getRefSpecMap();
+	public Map<String, RefactoringSpecification> getRefSpecMap();
 }
