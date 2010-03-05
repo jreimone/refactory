@@ -15,7 +15,7 @@ import org.emftext.refactoring.test.TestUtil;
 
 public class MockIndexConnector implements IndexConnector {
 
-	private static final String indexFolder = "index";
+	private static final String indexFolder = "registry";
 	
 	private static final Logger LOG = Logger.getLogger(MockIndexConnector.class.getSimpleName());
 	private static final Map<String, RoleMappingModel> simpleMappingIndex = new HashMap<String, RoleMappingModel>();
