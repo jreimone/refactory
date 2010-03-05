@@ -16,10 +16,10 @@ import org.emftext.refactoring.util.RegistryUtil;
 public class BasicRefactoringSpecificationRegistry implements
 		IRefactoringSpecificationRegistry {
 
-	private Map<RoleModel, RefactoringSpecification> refSpecMap;
+	private Map<String, RefactoringSpecification> refSpecMap;
 	
 	public BasicRefactoringSpecificationRegistry(){
-		refSpecMap = new HashMap<RoleModel, RefactoringSpecification>();
+		refSpecMap = new HashMap<String, RefactoringSpecification>();
 		collectRegisteredRefSpecs();
 	}
 	
@@ -28,20 +28,22 @@ public class BasicRefactoringSpecificationRegistry implements
 	}
 
 	public RefactoringSpecification getRefSpec(RoleModel roleModel) {
-		return getRefSpecMap().get(roleModel);
+		String name = roleModel.getName();
+		return getRefSpecMap().get(name);
 	}
 
-	public Map<RoleModel, RefactoringSpecification> getRefSpecMap() {
+	public Map<String, RefactoringSpecification> getRefSpecMap() {
 		return refSpecMap;
 	}
 
 	public void registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException{
 		RoleModel roleModel = refSpec.getUsedRoleModel();
-		RefactoringSpecification registeredRefSpec = getRefSpecMap().get(roleModel);
+		String name = roleModel.getName();
+		RefactoringSpecification registeredRefSpec = getRefSpecMap().get(name);
 		if(registeredRefSpec != null){
 			throw new RefSpecAlreadyRegisteredException(refSpec);
 		}
-		getRefSpecMap().put(roleModel, refSpec);
+		getRefSpecMap().put(name, refSpec);
 	}
 
 	private void collectRegisteredRefSpecs(){
