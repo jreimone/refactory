@@ -21,8 +21,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	}
 	
 	public RoleMappingModel getRoleMappingForUri(String nsUri) {
-
-		return null;
+		return getRoleMappingMap().get(nsUri);
 	}
 	
 	private void collectRegisteredRoleModels(){
