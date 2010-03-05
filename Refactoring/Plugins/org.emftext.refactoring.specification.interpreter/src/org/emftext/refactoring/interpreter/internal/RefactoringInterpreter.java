@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,9 +17,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
+import org.emftext.language.refactoring.refactoring_specification.Constants;
+import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
+import org.emftext.language.refactoring.refactoring_specification.FromClause;
+import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.Instruction;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
+import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.SET;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
@@ -27,6 +33,7 @@ import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter;
@@ -128,28 +135,81 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		Role childRole = object.getSourceRoleReference().getRole();
 		TargetContext target = object.getTargetContext();
 		if(target instanceof VariableReference){
-			Variable targetVar = ((VariableReference) target).getVariable();
-			EObject parentObject = context.getEObjectForVariable(targetVar);
-			EClass childClass = mapping.getEClassForRole(childRole);
-			EObject childObject = EcoreUtil.create(childClass);
-			ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetVar.getCreateCommand().getSourceRoleReference().getRole());
-			RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
-			if(relationMapping == null){
-				// add directly to parent
-				EClass parentClass = parentObject.eClass();
-				EList<EReference> references = parentClass.getEAllReferences();
-				for (EReference eReference : references) {
-					if(eReference.isContainment() && eReference.getEContainingClass().equals(childClass)){
-						parentObject.eGet(eReference);
-						// TODO add child to parent
-					}
-				}
+			return handleCREATETargetVariable(context, childRole, target);
+		}
+		if(target instanceof RoleReference){
+			FromClause from = target.getFrom();
+			Role targetRole = ((RoleReference) target).getRole();
+			List<? extends EObject> fromObjects = getFromReferenceObject(from);
+			// build up uptree
+		}
+		return false;
+	}
+	
+	private List<? extends EObject> getFromReferenceObject(FromClause from){
+		FromReference reference = from.getReference();
+		if(reference instanceof ConstantsReference){
+			Constants constant = ((ConstantsReference) reference).getReferencedConstant();
+			switch (constant) {
+			case INPUT:
+				return selection;
+			default:
+				break;
 			}
 		}
-		
-		return super
-				.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE(
-						object, context);
+		if(reference instanceof VariableReference){
+			Variable variable = ((VariableReference) reference).getVariable();
+			List<EObject> temp = new ArrayList<EObject>();
+			temp.add(context.getEObjectForVariable(variable));
+			return temp;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	private boolean handleCREATETargetVariable(RefactoringInterpreterContext context, Role childRole, TargetContext target) {
+		Variable targetVar = ((VariableReference) target).getVariable();
+		EObject parentObject = context.getEObjectForVariable(targetVar);
+		EClass childClass = mapping.getEClassForRole(childRole);
+		EObject childObject = EcoreUtil.create(childClass);
+		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetVar.getCreateCommand().getSourceRoleReference().getRole());
+		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
+		if(relationMapping == null){
+			// add directly to parent
+			EClass parentClass = parentObject.eClass();
+			EList<EReference> references = parentClass.getEAllReferences();
+			for (EReference eReference : references) {
+				if(eReference.isContainment() && eReference.getEContainingClass().equals(childClass)){
+					return ((List<EObject>)parentObject.eGet(eReference)).add(childObject);
+				}
+			}
+		} else {
+			// add with path
+			EList<EReference> references = relationMapping.getReferences();
+			List<EReference> tempList = new LinkedList<EReference>();
+			for (EReference eReference : references) {
+				tempList.add(eReference);
+			}
+			return createPath(parentObject, references, childObject);
+		}
+		return false;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private boolean createPath(EObject parent, List<EReference> remainingReferences, EObject child){
+		if(remainingReferences.size() == 1){
+			EReference reference = remainingReferences.get(0);
+			Object feature = parent.eGet(reference);
+			return ((List<EObject>) feature).add(child);
+		} else {
+			EReference reference = remainingReferences.get(0);
+			remainingReferences.remove(reference);
+			Object feature = parent.eGet(reference);
+			EClass tempParentClass = reference.getEContainingClass();
+			EObject tempParent = EcoreUtil.create(tempParentClass);
+			((List<EObject>) feature).add(tempParent);
+			return createPath(tempParent, remainingReferences, child);
+		}
 	}
 
 	/* (non-Javadoc)
