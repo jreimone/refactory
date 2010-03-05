@@ -4,7 +4,6 @@ ExtractProcedure maps <ExtractMethod> {
 	OrigContainer -> Body {
 		extracts : statements;	
 	}; 
-	
 	Extract -> Statement; 
 	NewContainer -> ProcedureDeclaration (newName -> name) ; 
 	MovedReference -> CallStatement {
@@ -12,6 +11,7 @@ ExtractProcedure maps <ExtractMethod> {
 	}; 
 	ContainerContainer -> Block {
 		source : body;
+		target : procedures;
 	} ;
 
 }
