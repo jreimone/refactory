@@ -1,6 +1,6 @@
 ROLEMODELMAPPING PL0Mapping FOR <http://www.emftext.org/language/pl0> 
 
-ExtractMethod4Statements maps <platform:/resource/org.emftext.refactoring.tests/testInput/IndexConnectorTest/CS_ROLE_ExtractMethod.rolestext> { 
+ExtractMethod4Statements maps <ExtractMethod> { 
 	OrigContainer -> Body {
 		extracts : statements;	
 	}; 

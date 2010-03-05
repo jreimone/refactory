@@ -1,5 +1,5 @@
-REFACTORING ExtractMethod 
-FOR <platform:/resource/org.emftext.refactoring.tests/testInput/IndexConnectorTest/CS_ROLE_ExtractMethod.rolestext>
+REFACTORING ExtractMethodRefactoring 
+FOR <ExtractMethod>
 
 STEPS { 
 	create new nc:NewContainer in ContainerContainer;
