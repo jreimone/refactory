@@ -12,8 +12,9 @@ OPTIONS {
 	//usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
-	overridePluginXML = "false";
-	overrideManifest = "false";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
+	//overridePluginXML = "false";
+	//overrideManifest = "false";
 }
 
 TOKENSTYLES {
