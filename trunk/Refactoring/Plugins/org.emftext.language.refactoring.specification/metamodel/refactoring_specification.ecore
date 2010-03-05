@@ -45,7 +45,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="createCommand" lowerBound="1"
         eType="#//CREATE" eOpposite="#//CREATE/varDeclaration"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//SourceContext #//TargetContext">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//SourceContext #//TargetContext #//FromReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//Variable"/>
   </eClassifiers>
@@ -57,7 +57,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TargetContext" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetContext" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//FromClause"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceCommand" abstract="true" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="SET" eSuperTypes="#//ReferenceCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -71,4 +74,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetAttribute" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FromClause">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
+        eType="#//FromOperator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="#//FromReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FromOperator" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UPTREE" eSuperTypes="#//FromOperator"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Constants">
+    <eLiterals name="INPUT"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstantsReference" eSuperTypes="#//FromReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referencedConstant" lowerBound="1"
+        eType="#//Constants"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FromReference" abstract="true"/>
 </ecore:EPackage>
