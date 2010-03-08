@@ -5,7 +5,9 @@ ExtractStatements maps <ExtractMethod> {
 		extracts : statements;	
 	}; 
 	Extract -> Statement; 
-	NewContainer -> ProcedureDeclaration (newName -> name) ; 
+	NewContainer -> ProcedureDeclaration (newName -> name){
+		moved : block -> body -> statements;
+	} ; 
 	MovedReference -> CallStatement {
 		containerRef : procedure;
 	}; 
