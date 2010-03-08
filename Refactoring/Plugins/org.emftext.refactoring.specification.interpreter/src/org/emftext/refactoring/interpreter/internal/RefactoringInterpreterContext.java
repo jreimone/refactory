@@ -8,8 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -67,7 +72,23 @@ public class RefactoringInterpreterContext {
 		Role varRole = create.getSourceRoleReference().getRole();
 		EClass metaClass = mapping.getEClassForRole(varRole);
 		EObject instance = EcoreUtil.create(metaClass);
+		handleObligatoryFeatures(instance);
 		varInstanceMap.put(variable, instance);
+	}
+	
+	private void handleObligatoryFeatures(EObject element){
+		EClass metaclass = element.eClass();
+		EList<EAttribute> attributes = metaclass.getEAllAttributes();
+		for (EAttribute attribute : attributes) {
+			int min = attribute.getLowerBound();
+			int max = attribute.getUpperBound();
+			if(min == max && min == 1){
+				EDataType type = attribute.getEAttributeType();
+				if(type.getInstanceClass().equals(String.class)){
+					element.eSet(attribute, "new" + metaclass.getName());
+				}
+			}
+		}
 	}
 	
 	/**
