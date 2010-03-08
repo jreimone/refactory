@@ -108,6 +108,7 @@ public class RefactoringInterpreterTest extends TestClass{
 		ResourceSet rs = resource.getResourceSet();
 		File origFile = getTestDataSet().getInputFileByPattern(CREATE);
 		String newName = origFile.getName();
+//		newName = newName.replace(CREATE, "CREATE_REFACTORED_").replace(".pl0", ".xmi");
 		newName = newName.replace(CREATE, "CREATE_REFACTORED_");
 		File refactoredFile = new File(origFile.getAbsoluteFile().getParent() + File.separator + newName);
 		Resource refactoredResource = rs.createResource(URI.createFileURI(refactoredFile.getAbsolutePath()));
