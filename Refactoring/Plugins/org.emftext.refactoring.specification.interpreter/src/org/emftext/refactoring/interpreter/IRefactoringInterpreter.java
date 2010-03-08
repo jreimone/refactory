@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.interpreter;
 
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -29,7 +30,7 @@ public interface IRefactoringInterpreter {
 	 * @param roleMapping 
 	 * @param mapping 
 	 */
-	public void initialize(RefactoringSpecification refSpec, EObject model, List<? extends EObject> selection, RoleMappingModel roleMapping, Mapping mapping);
+	public void initialize(RefactoringSpecification refSpec, EObject model, RoleMappingModel roleMapping, Mapping mapping);
 	
 	/**
 	 * Invokes the refactoring process on the model and with the steps determined in {@link IRefactoringInterpreter#initialize(RefactoringSpecification, EObject)}.
@@ -38,4 +39,10 @@ public interface IRefactoringInterpreter {
 	 * @return returns the refactored model or <code>null</code> if {@link IRefactoringInterpreter#setMapping(Mapping)} wasn't invoked before
 	 */
 	public EObject interprete(boolean copy);
+	
+	/**
+	 * Sets the the current selection, for which the appropriate interpreter is to be run, as input.
+	 * @param currentSelection
+	 */
+	public void setInput(List<? extends EObject> currentSelection);
 }

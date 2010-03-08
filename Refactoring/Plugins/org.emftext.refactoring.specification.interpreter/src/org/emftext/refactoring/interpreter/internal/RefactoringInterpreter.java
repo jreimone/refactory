@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
@@ -20,6 +21,7 @@ import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
+import org.emftext.language.refactoring.refactoring_specification.FromOperator;
 import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.Instruction;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
@@ -27,17 +29,23 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.SET;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
+import org.emftext.language.refactoring.refactoring_specification.UPTREE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
-import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter;
+import org.emftext.refactoring.graph.IShortestPathAlgorithm;
+import org.emftext.refactoring.graph.util.IPath;
+import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
+import org.emftext.refactoring.graph.util.TreeNode;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
+import org.emftext.refactoring.util.ModelUtil;
+import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -47,21 +55,20 @@ import org.emftext.refactoring.util.RoleUtil;
  *
  */
 public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, RefactoringInterpreterContext> implements IRefactoringInterpreter{
-	
+
 	private RefactoringSpecification refSpec;
 	private EObject model;
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
 	private RoleMappingModel roleMapping;
 	private Mapping mapping;
-	
+
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#initialize(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, org.eclipse.emf.ecore.EObject)
 	 */
-	public void initialize(RefactoringSpecification refSpec, EObject model, List<? extends EObject> selection, RoleMappingModel roleMapping, Mapping mapping) {
+	public void initialize(RefactoringSpecification refSpec, EObject model, RoleMappingModel roleMapping, Mapping mapping) {
 		this.refSpec = refSpec;
 		this.model = model;
-		this.selection = selection;
 		this.roleMapping = roleMapping;
 		this.mapping = mapping;
 	}
@@ -71,17 +78,18 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 */
 	public EObject interprete(boolean copy) {
 		context = new RefactoringInterpreterContext();
+		EObject initialModel = model;
 		if(copy){
 			Copier copier = new Copier();
 			EObject copiedModel = copier.copy(model);
-			context.setInitialContext(copiedModel, selection, roleMapping, mapping);
+			initialModel = copiedModel;
 		}
-		context.setInitialContext(model, selection, roleMapping, mapping);
+		context.setInitialContext(initialModel, selection, roleMapping, mapping);
 		initInterpretationStack();
 		interprete(context);
 		return context.getModel();
 	}	
-	
+
 	private void initInterpretationStack(){
 		TreeIterator<EObject> it = refSpec.eAllContents();
 		List<Instruction> instructions = new LinkedList<Instruction>();
@@ -96,7 +104,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			addObjectToInterprete(instruction);
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_RefactoringSpecification(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, java.lang.Object)
 	 */
@@ -106,20 +114,20 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			RefactoringInterpreterContext context) {
 		RoleModel roleModel = object.getUsedRoleModel();
 		EcoreUtil.resolveAll(roleModel);
-//		context.initializeVariables(object);
+		//		context.initializeVariables(object);
 		return true;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(org.emftext.language.refactoring.refactoring_specification.ASSIGN, java.lang.Object)
 	 */
 	@Override
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(
 			ASSIGN object, RefactoringInterpreterContext context) {
-//		object.get
+		//		object.get
 		return super
-				.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(
-						object, context);
+		.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(
+				object, context);
 	}
 
 	/* (non-Javadoc)
@@ -139,13 +147,40 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		}
 		if(target instanceof RoleReference){
 			FromClause from = target.getFrom();
-			Role targetRole = ((RoleReference) target).getRole();
-			List<? extends EObject> fromObjects = getFromReferenceObject(from);
-			// build up uptree
+			FromOperator operator = from.getOperator();
+			if(operator != null && (operator instanceof UPTREE)){
+				return handleFromOperatorUPTREE(childRole, target, from);
+			}
+
 		}
 		return false;
 	}
-	
+
+	/**
+	 * @param childRole
+	 * @param target
+	 * @param from
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private Boolean handleFromOperatorUPTREE(Role childRole, TargetContext target, FromClause from) {
+		Role targetRole = ((RoleReference) target).getRole();
+		List<? extends EObject> fromObjects = getFromReferenceObject(from);
+		List<?>[] rootPaths = new List<?>[fromObjects.size()];
+		int i = 0;
+		for (EObject eObject : fromObjects) {
+			List<EObject> rootPath = ModelUtil.getPathToRoot(eObject);
+			rootPaths[i] = rootPath;
+			i++;
+		}
+		// build up uptree
+		EObject targetObject = RoleUtil.getFirstCommonObjectWithRoleFromPaths(targetRole, mapping, (List<? extends EObject>[]) rootPaths);
+		RelationMapping relationMapping = mapping.getConcreteMappingForRole(targetRole).getRelationMappingForTargetRole(childRole);
+		EClass childClass = mapping.getEClassForRole(childRole);
+		EObject childObject = EcoreUtil.create(childClass);
+		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject);
+	}
+
 	private List<? extends EObject> getFromReferenceObject(FromClause from){
 		FromReference reference = from.getReference();
 		if(reference instanceof ConstantsReference){
@@ -194,10 +229,25 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		}
 		return false;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private boolean createPath(EObject parent, List<EReference> remainingReferences, EObject child){
-		if(remainingReferences.size() == 1){
+		if(remainingReferences == null){
+			IShortestPathAlgorithm algo = (new PathAlgorithmFactory()).getAlgorithm();
+			List<IPath> paths = algo.calculatePaths(parent, child);
+			if(paths != null && paths.size() > 0){
+				IPath path = paths.get(0);
+				path.removeAbstractEClasses();
+				List<EReference> references = new LinkedList<EReference>();
+				for (int i = 0; i < (path.size() - 1); i++) {
+					references.add(path.get(i).getReference());
+				}
+				return createPath(parent, references, child);
+			} else {
+				RegistryUtil.log("Couldn't find a shortest path between " + child + " and " + parent, IStatus.ERROR);
+				return false;
+			}
+		} else if(remainingReferences.size() == 1){
 			EReference reference = remainingReferences.get(0);
 			Object feature = parent.eGet(reference);
 			return ((List<EObject>) feature).add(child);
@@ -220,8 +270,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			MOVE object, RefactoringInterpreterContext context) {
 		// TODO Auto-generated method stub
 		return super
-				.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(
-						object, context);
+		.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(
+				object, context);
 	}
 
 	/* (non-Javadoc)
@@ -232,7 +282,38 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			SET object, RefactoringInterpreterContext context) {
 		// TODO Auto-generated method stub
 		return super
-				.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(
-						object, context);
+		.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(
+				object, context);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_FromOperator(org.emftext.language.refactoring.refactoring_specification.FromOperator, java.lang.Object)
+	 */
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_FromOperator(
+			FromOperator object, RefactoringInterpreterContext context) {
+		// TODO Auto-generated method stub
+		return super
+		.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_FromOperator(
+				object, context);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_UPTREE(org.emftext.language.refactoring.refactoring_specification.UPTREE, java.lang.Object)
+	 */
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_UPTREE(
+			UPTREE object, RefactoringInterpreterContext context) {
+		// TODO Auto-generated method stub
+		return super
+		.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_UPTREE(
+				object, context);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#setInput(java.util.List)
+	 */
+	public void setInput(List<? extends EObject> currentSelection) {
+		this.selection = currentSelection;
 	}
 }

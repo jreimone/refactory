@@ -47,7 +47,7 @@ public class Refactorer implements IRefactorer {
 			EcoreUtil.resolveAll(roleModel);
 			RefactoringSpecification refSpec = registry.getRefSpec(roleModel);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter();
-			interpreter.initialize(refSpec, model, currentSelection, roleMapping, mapping);
+			interpreter.initialize(refSpec, model, roleMapping, mapping);
 			interpreterMap.put(mapping, interpreter);
 		}
 	}
@@ -75,6 +75,7 @@ public class Refactorer implements IRefactorer {
 			return null;
 		}
 		IRefactoringInterpreter interpreter = interpreterMap.get(mapping);
+		interpreter.setInput(currentSelection);
 		EObject refactoredModel = null;
 		if(interpreter != null){
 			refactoredModel = interpreter.interprete(copy);
