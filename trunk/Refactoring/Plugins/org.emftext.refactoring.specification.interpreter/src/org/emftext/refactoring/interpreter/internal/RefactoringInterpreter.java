@@ -28,6 +28,7 @@ import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.SET;
+import org.emftext.language.refactoring.refactoring_specification.SourceContext;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 import org.emftext.language.refactoring.refactoring_specification.UPTREE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
@@ -178,7 +179,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		RelationMapping relationMapping = mapping.getConcreteMappingForRole(targetRole).getRelationMappingForTargetRole(childRole);
 		EClass childClass = mapping.getEClassForRole(childRole);
 		EObject childObject = EcoreUtil.create(childClass);
-		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject);
+		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject, false);
 	}
 
 	private List<? extends EObject> getFromReferenceObject(FromClause from){
@@ -225,13 +226,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			for (EReference eReference : references) {
 				tempList.add(eReference);
 			}
-			return createPath(parentObject, references, childObject);
+			return createPath(parentObject, references, childObject, false);
 		}
 		return false;
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean createPath(EObject parent, List<EReference> remainingReferences, EObject child){
+	private boolean createPath(EObject parent, List<EReference> remainingReferences, EObject child, boolean setCommand){
 		if(remainingReferences == null){
 			IShortestPathAlgorithm algo = (new PathAlgorithmFactory()).getAlgorithm();
 			List<IPath> paths = algo.calculatePaths(parent, child);
@@ -242,15 +243,25 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 				for (int i = 0; i < (path.size() - 1); i++) {
 					references.add(path.get(i).getReference());
 				}
-				return createPath(parent, references, child);
+				return createPath(parent, references, child, setCommand);
 			} else {
 				RegistryUtil.log("Couldn't find a shortest path between " + child + " and " + parent, IStatus.ERROR);
 				return false;
 			}
 		} else if(remainingReferences.size() == 1){
 			EReference reference = remainingReferences.get(0);
-			Object feature = parent.eGet(reference);
-			return ((List<EObject>) feature).add(child);
+			if(!setCommand){
+				Object feature = parent.eGet(reference);
+				return ((List<EObject>) feature).add(child);
+			} else {
+				try {
+					parent.eSet(reference, child);	
+				} catch (Exception e) {
+					RegistryUtil.log("Couldn't set feature " + child + " for " + parent, IStatus.ERROR);
+					return false;
+				}
+				return true;
+			}
 		} else {
 			EReference reference = remainingReferences.get(0);
 			remainingReferences.remove(reference);
@@ -258,7 +269,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			EClass tempParentClass = reference.getEContainingClass();
 			EObject tempParent = EcoreUtil.create(tempParentClass);
 			((List<EObject>) feature).add(tempParent);
-			return createPath(tempParent, remainingReferences, child);
+			return createPath(tempParent, remainingReferences, child, setCommand);
 		}
 	}
 
@@ -280,10 +291,23 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	@Override
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(
 			SET object, RefactoringInterpreterContext context) {
-		// TODO Auto-generated method stub
-		return super
-		.interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(
-				object, context);
+		SourceContext source = object.getSource();
+		TargetContext target = object.getTarget();
+		EObject sourceObject = null;
+		EObject targetObject = null;
+		Role targetRole = null;
+		Role sourceRole = null;
+		if(source instanceof VariableReference){
+			sourceObject = context.getEObjectForVariable(((VariableReference) source).getVariable());
+			sourceRole = ((VariableReference) source).getVariable().getCreateCommand().getSourceRoleReference().getRole();
+		}
+		if(target instanceof VariableReference){
+			targetObject = context.getEObjectForVariable(((VariableReference) target).getVariable());
+			targetRole = ((VariableReference) target).getVariable().getCreateCommand().getSourceRoleReference().getRole();
+		} 
+		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
+		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(sourceRole);
+		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), sourceObject, true);
 	}
 
 	/* (non-Javadoc)
