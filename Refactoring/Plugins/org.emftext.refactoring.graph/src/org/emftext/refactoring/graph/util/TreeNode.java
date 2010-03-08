@@ -1,13 +1,12 @@
 /**
  * 
  */
-package org.emftext.refactoring.graph.impl;
+package org.emftext.refactoring.graph.util;
 
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EClass;
-import org.emftext.refactoring.graph.util.IPath;
-import org.emftext.refactoring.graph.util.LinkedListPath;
+import org.eclipse.emf.ecore.EReference;
 
 
 /**
@@ -18,6 +17,7 @@ public abstract class TreeNode{
 
 	private EClass eClass;
 	private TreeNode parent;
+	private EReference reference;
 
 	public TreeNode(EClass eClass){
 		this.eClass = eClass;
@@ -66,13 +66,27 @@ public abstract class TreeNode{
 	
 	public IPath getPathFromRoot(){
 		IPath path = new LinkedListPath();
-		path.add(this.getEClass());
+		path.add(this);
 		TreeNode parent = this.getParent();
 		while (parent != null) {
-			path.add(parent.getEClass());
+			path.add(parent);
 			parent = parent.getParent();
 		}
 		Collections.reverse(path);
 		return path;
+	}
+
+	/**
+	 * @return the reference
+	 */
+	public EReference getReference() {
+		return reference;
+	}
+
+	/**
+	 * @param reference the reference to set
+	 */
+	public void setReference(EReference reference) {
+		this.reference = reference;
 	}
 }

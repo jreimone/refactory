@@ -5,7 +5,6 @@ package org.emftext.refactoring.graph.util;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * An interface for a path through a tree
@@ -13,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
  * @author Jan Reimann
  *
  */
-public interface IPath extends List<EClass>{
+public interface IPath extends List<TreeNode>{
 
 	/**
 	 * Removes the abstract EClasses in this path.
