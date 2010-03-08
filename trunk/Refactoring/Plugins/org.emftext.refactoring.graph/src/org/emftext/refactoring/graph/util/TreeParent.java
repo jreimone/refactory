@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.emftext.refactoring.graph.impl;
+package org.emftext.refactoring.graph.util;
 
 import java.util.ArrayList;
 import java.util.List;

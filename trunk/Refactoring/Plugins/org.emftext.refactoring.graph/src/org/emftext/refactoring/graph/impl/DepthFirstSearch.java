@@ -16,6 +16,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.emftext.refactoring.graph.IShortestPathAlgorithm;
 import org.emftext.refactoring.graph.util.GraphUtil;
 import org.emftext.refactoring.graph.util.IPath;
+import org.emftext.refactoring.graph.util.TreeLeaf;
+import org.emftext.refactoring.graph.util.TreeNode;
+import org.emftext.refactoring.graph.util.TreeNodeReferenceLeaf;
+import org.emftext.refactoring.graph.util.TreeParent;
 
 /**
  * @author Jan Reimann
@@ -57,15 +61,15 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 			if(parent.getEClass().isAbstract() || parent.getEClass().isInterface()){
 				EList<EClass> subTypes = GraphUtil.getAllSubTypes(parent.getEClass());
 				if(subTypes.size() == 0){
-					convertNodeToLeaf(parent);
+					convertNodeToLeaf(parent, null);
 					return;
 				} else {
 					for (EClass eClass : subTypes) {
-						checkTargetEquality(parent, eClass);
+						checkTargetEquality(parent, eClass, null);
 					}
 				}
 			} else {
-				convertNodeToLeaf(parent);
+				convertNodeToLeaf(parent, null);
 				return;
 			}
 		} else {
@@ -74,7 +78,7 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 			//		}
 			for (EReference eReference : containments) {
 				EClass contained = eReference.getEReferenceType();
-				checkTargetEquality(parent, contained);
+				checkTargetEquality(parent, contained, eReference);
 			}
 		}
 	}
@@ -83,11 +87,11 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 	 * @param parent
 	 * @param contained
 	 */
-	private void checkTargetEquality(TreeNode parent, EClass contained) {
+	private void checkTargetEquality(TreeNode parent, EClass contained, EReference reference) {
 		if(contained.equals(targetClass)){
-			createPath(parent, contained);
+			createPath(parent, contained, reference);
 		} else {
-			createSubTree(parent, contained);
+			createSubTree(parent, contained, reference);
 		}
 	}
 
@@ -95,10 +99,11 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 	 * @param parent
 	 * @param contained
 	 */
-	private void createPath(TreeNode parent, EClass contained) {
+	private void createPath(TreeNode parent, EClass contained, EReference reference) {
 		TreeNode child;
 		child = new TreeLeaf(contained);
 		parent.addChild(child);
+		parent.setReference(reference);
 		visitedNodesMap.put(contained, child);
 		IPath path = child.getPathFromRoot();
 		paths.add(path);
@@ -109,16 +114,18 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 	 * @param parent
 	 * @param contained
 	 */
-	private void createSubTree(TreeNode parent, EClass contained) {
+	private void createSubTree(TreeNode parent, EClass contained, EReference reference) {
 		TreeNode child = visitedNodesMap.get(contained);
 		if(child == null){
 			child = distinguishNodeType(contained);
 			parent.addChild(child);
+			parent.setReference(reference);
 			visitedNodesMap.put(contained, child);
 			checkUniqueNodeInPath(child);
 		} else {
 			TreeNode nodeReferenceLeaf = new TreeNodeReferenceLeaf(contained, child);
 			parent.addChild(nodeReferenceLeaf);
+			parent.setReference(reference);
 			outputEClassInTree(nodeReferenceLeaf, System.out, "~");
 		}
 
@@ -174,11 +181,12 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 	/**
 	 * @param nodeToConvert
 	 */
-	private void convertNodeToLeaf(TreeNode nodeToConvert) {
+	private void convertNodeToLeaf(TreeNode nodeToConvert, EReference reference) {
 		TreeNode parentParent = nodeToConvert.getParent();
 		parentParent.removeChild(nodeToConvert);
 		TreeNode parentLeaf = new TreeLeaf(nodeToConvert.getEClass());
 		parentParent.addChild(parentLeaf);
+		parentParent.setReference(reference);
 	}
 
 	/**

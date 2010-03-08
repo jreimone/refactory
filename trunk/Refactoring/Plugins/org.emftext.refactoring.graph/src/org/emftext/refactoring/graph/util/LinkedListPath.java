@@ -8,27 +8,26 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * @author Jan Reimann
  *
  */
-public class LinkedListPath extends LinkedList<EClass> implements IPath {
+public class LinkedListPath extends LinkedList<TreeNode> implements IPath {
 
 	private static final long serialVersionUID = -6308692673257748635L;
 
 	public LinkedListPath(){
-		super(Collections.synchronizedList(new LinkedList<EClass>()));
+		super(Collections.synchronizedList(new LinkedList<TreeNode>()));
 	}
 
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.graph.util.IPath#removeAbstractEClasses()
 	 */
 	public boolean removeAbstractEClasses() {
-		List<EClass> classes = new ArrayList<EClass>();
-		for (EClass eClass : this) {
-			if(eClass.isAbstract() || eClass.isInterface()){
+		List<TreeNode> classes = new ArrayList<TreeNode>();
+		for (TreeNode eClass : this) {
+			if(eClass.getEClass().isAbstract() || eClass.getEClass().isInterface()){
 				classes.add(eClass);
 			}
 		}
