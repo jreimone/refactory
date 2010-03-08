@@ -185,4 +185,38 @@ public class RoleUtil {
 		Set<Role> appliedRoles = getAppliedRoles(input, mapping);
 		return getProcentualRolesEquality(inputRoles, appliedRoles);
 	}
+
+	/**
+	 * Returns the first common {@link EObject} in paths to root, as calculated by {@link ModelUtil#getPathToRoot(EObject)},
+	 * having the given role applied in the given mapping. 
+	 * @param paths
+	 * @return
+	 */
+	public static EObject getFirstCommonObjectWithRoleFromPaths(Role role, Mapping mapping, List<? extends EObject>... paths){
+		List<List<? extends EObject>> sortedPaths = ModelUtil.sortPathsBySize(paths);
+		for (int i = 0; i < sortedPaths.size(); i++) {
+			List<? extends EObject> path = sortedPaths.get(i);
+			for (EObject eObject : path) {
+				boolean found = true;
+				for (int j = i + 1; j < sortedPaths.size(); j++) {
+					List<? extends EObject> nextPath = sortedPaths.get(j);
+					if(!nextPath.contains(eObject)){
+						found = false;
+					} else {
+						EList<Role> roles = mapping.getMappedRolesForEObject(eObject);
+						if(!roles.contains(role)){
+							found = false;
+						}
+					}
+					if(!found){
+						break;
+					}
+				}
+				if(found){
+					return eObject;
+				}
+			}
+		}
+		return null;
+	}
 }
