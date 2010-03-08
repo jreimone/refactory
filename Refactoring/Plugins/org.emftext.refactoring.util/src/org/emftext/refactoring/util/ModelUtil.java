@@ -3,7 +3,10 @@
  */
 package org.emftext.refactoring.util;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -12,6 +15,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * This class provides useful functionality to work with, query or filter models.
@@ -24,7 +28,60 @@ public class ModelUtil {
 	private ModelUtil(){
 		// just do nothing
 	}
-	
+
+	/**
+	 * Sorts the given paths by their size starting with the smallest.
+	 * @param paths
+	 */
+	public static List<List<? extends EObject>> sortPathsBySize(List<? extends EObject>... paths) {
+		List<List<? extends EObject>> sortedPaths = new ArrayList<List<? extends EObject>>();
+		for (List<? extends EObject> path : paths) {
+			if(sortedPaths.size() == 0){
+				sortedPaths.add(path);
+			} else if(sortedPaths.size() == 1){
+				List<? extends EObject> firstPath = sortedPaths.get(0);
+				if(firstPath.size() <= path.size()){
+					sortedPaths.add(path);
+				} else {
+					sortedPaths.add(0, path);
+				}
+			} else {
+				List<? extends EObject> firstPath = sortedPaths.get(0);
+				List<? extends EObject> secondPath = sortedPaths.get(1);
+				int i = 1;
+				while (!((firstPath.size() <= path.size()) && (secondPath.size() > path.size()))) {
+					if(i + 1 >= sortedPaths.size()){
+						break;
+					}
+					firstPath = sortedPaths.get(i);
+					secondPath = sortedPaths.get(i + 1);
+					i++;
+				}
+				sortedPaths.add(i, path);
+			}
+		}
+		return sortedPaths;
+	}
+
+	/**
+	 * Returns a {@link LinkedList} representing the path of the given {@link EObject child} to its
+	 * root. 
+	 * 
+	 * @param child
+	 * @return
+	 */
+	public static List<EObject> getPathToRoot(EObject child){
+		EObject temp = child;
+		List<EObject> path = new LinkedList<EObject>();
+		path.add(temp);
+		EObject root = EcoreUtil.getRootContainer(child, true);
+		while (!temp.equals(root)) {
+			temp = temp.eContainer();
+			path.add(temp);
+		}
+		return path;
+	}
+
 	/**
 	 * Gets an iterator as input and filters the elements by the given type. Then returns a list containing
 	 * only elements of type <code>type</code>. 
@@ -73,7 +130,7 @@ public class ModelUtil {
 		}
 		return filteredElements;
 	}
-	
+
 	public static <T extends EObject> boolean bothModelsAreEqual(T first, T second){
 		TreeIterator<EObject> itFirst = first.eAllContents();
 		TreeIterator<EObject> itSecond = second.eAllContents();
@@ -123,11 +180,11 @@ public class ModelUtil {
 			if(!ref1.getEType().equals(ref2.getEType())){
 				return false;
 			}
-//			Object value1 = first.eGet(ref1);
-//			Object value2 = second.eGet(ref2);
-//			if(!value1.equals(value2)){
-//				return false;
-//			}
+			//			Object value1 = first.eGet(ref1);
+			//			Object value2 = second.eGet(ref2);
+			//			if(!value1.equals(value2)){
+			//				return false;
+			//			}
 		}
 		return true;
 	}
