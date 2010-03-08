@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
 import org.emftext.language.pl0.PL0Package;
@@ -109,13 +110,13 @@ public class RefactoringTests extends TestCase{
 					TestUtil.getResourceFromFile(TestUtil.getFileByPath(EXTRACT_METHOD_ROLES))
 					, RoleModel.class);
 			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
-			
+
 			// RefSpecs
 			RefactoringSpecification refSpec = TestUtil.getExpectedModelFromResource(
 					TestUtil.getResourceFromFile(TestUtil.getFileByPath(EXTRACT_METHOD_REFSPEC))
 					, RefactoringSpecification.class);
 			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
-			
+
 			// RoleMappings
 			RoleMappingModel mapping = TestUtil.getExpectedModelFromResource(
 					TestUtil.getResourceFromFile(TestUtil.getFileByPath(PL0_MAPPING))
@@ -175,18 +176,29 @@ public class RefactoringTests extends TestCase{
 		return result;
 	}
 
-	private static List<File> getTestFiles(String classFolder, String filePattern, boolean includeExpectExtension){
+	private static List<File> getTestFiles(String classFolder, String filePattern, boolean includeExpectExtension, String... exclusionPatterns){
 		try {
 			File rootFolder = new File(INPUT_FOLDER);
 			checkFolder(rootFolder);
 			File folder = new File(rootFolder.getAbsolutePath() + File.separator + classFolder);
 			checkFolder(folder);
-			File[] files = folder.listFiles(new DataSetTestFileFilter(filePattern, includeExpectExtension));
+			File[] files = folder.listFiles(new DataSetTestFileFilter(filePattern, includeExpectExtension, exclusionPatterns));
 			return Arrays.asList(files);
 		} catch (FileNotFoundException e) {
 			LOG.severe(e.getMessage());
 			return null;
 		}
+	}
+
+	private static String[] getOthers(String[] inputValue, String base){
+		List<String> values = new ArrayList<String>();
+		for (String string : inputValue) {
+			if(string.length() > base.length()){
+				values.add(string);
+			}
+		}
+		values.remove(base);
+		return values.toArray(new String[0]);
 	}
 
 	private static List<TestDataSet> getTestFiles(String classFolder, String[] inputValue, String[] expectedValue) throws FileNotFoundException{
@@ -195,7 +207,8 @@ public class RefactoringTests extends TestCase{
 		int setCount = -1;
 		if(inputValue != null){
 			for (String filePattern : inputValue) {
-				List<File> files = getTestFiles(classFolder, filePattern, true);
+				String[] otherInputValues = getOthers(inputValue, filePattern);
+				List<File> files = getTestFiles(classFolder, filePattern, true, otherInputValues);
 				if(setCount == -1){
 					setCount = files.size();
 				} else {
@@ -208,7 +221,8 @@ public class RefactoringTests extends TestCase{
 		}
 		if(expectedValue != null){
 			for (String filePattern : expectedValue) {
-				List<File> files = getTestFiles(classFolder, filePattern, false);
+				String[] otherExpectedValues = getOthers(expectedValue, filePattern);
+				List<File> files = getTestFiles(classFolder, filePattern, false, otherExpectedValues);
 				if(setCount == -1){
 					setCount = files.size();
 				} else {
@@ -445,6 +459,7 @@ public class RefactoringTests extends TestCase{
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("rolemapping", new RolemappingResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("refspec", new RefspecResourceFactory());
 		// arbitrary metamodels
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("conference", new ConferenceResourceFactory());
 	}
