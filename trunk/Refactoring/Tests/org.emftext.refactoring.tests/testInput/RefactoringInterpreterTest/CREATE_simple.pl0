@@ -1,11 +1,14 @@
 PROGRAM CREATEsimple 
 
-CONST a = 25, b =10;
-
-VAR x,y,z;
-
+CONST 
+	a = 25 , 
+	b = 10 ; 
+	
+VAR 
+	x , y , z ; 
+	
 BEGIN 
-	x := b - a; 
-	y := x * 12;
-	z := y / a
+	x := + b - a ; 
+	y := + x * 12 ; 
+	z := + y / a 
 END. 
