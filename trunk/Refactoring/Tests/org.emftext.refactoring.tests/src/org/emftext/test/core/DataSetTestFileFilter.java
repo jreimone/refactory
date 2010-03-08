@@ -9,17 +9,31 @@ public class DataSetTestFileFilter implements FilenameFilter {
 
 	private String nameFilter;
 	private boolean includeExpectExtension = false;
+	private String[] exclusionPatterns;
 
-	public DataSetTestFileFilter(String nameFilter, boolean includeExpectExtension){
+	public DataSetTestFileFilter(String nameFilter, boolean includeExpectExtension, String... exclusionPatterns){
 		this.nameFilter = nameFilter;
 		this.includeExpectExtension = includeExpectExtension;
+		this.exclusionPatterns = exclusionPatterns;
+	}
+	
+	private boolean startsNotWithExclusions(String name){
+		if(exclusionPatterns == null){
+			return true;
+		}
+		for (String exclusion : exclusionPatterns) {
+			if(name.startsWith(exclusion)){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public boolean accept(File dir, String name) {
 		if(includeExpectExtension){
-			return name.startsWith(nameFilter) && !name.contains(RefactoringTests.EXPECTED_DATA_FILE_NAME_INSERT);
+			return name.startsWith(nameFilter) && !name.contains(RefactoringTests.EXPECTED_DATA_FILE_NAME_INSERT) && startsNotWithExclusions(name);
 		}
-		return name.startsWith(nameFilter);
+		return name.startsWith(nameFilter) && startsNotWithExclusions(name);
 	}
 
 }
