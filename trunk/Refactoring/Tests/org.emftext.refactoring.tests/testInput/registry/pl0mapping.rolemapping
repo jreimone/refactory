@@ -15,5 +15,9 @@ ExtractProcedure maps <ExtractMethod> {
 		source : body;
 		target : procedures;
 	} ;
+}
 
+CreateProcedureTest maps <platform:/resource/org.emftext.refactoring.tests/testInput/registry/CREATEcommand.rolestext> {
+	Container -> Block;
+	Createe -> ProcedureDeclaration;
 }
