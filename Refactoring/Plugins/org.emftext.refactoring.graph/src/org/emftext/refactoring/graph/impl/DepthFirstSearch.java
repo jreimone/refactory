@@ -61,11 +61,11 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 			if(parent.getEClass().isAbstract() || parent.getEClass().isInterface()){
 				EList<EClass> subTypes = GraphUtil.getAllSubTypes(parent.getEClass());
 				if(subTypes.size() == 0){
-					convertNodeToLeaf(parent, null);
+					convertNodeToLeaf(parent, parent.getReference());
 					return;
 				} else {
 					for (EClass eClass : subTypes) {
-						checkTargetEquality(parent, eClass, null);
+						checkTargetEquality(parent, eClass, parent.getReference());
 					}
 				}
 			} else {
