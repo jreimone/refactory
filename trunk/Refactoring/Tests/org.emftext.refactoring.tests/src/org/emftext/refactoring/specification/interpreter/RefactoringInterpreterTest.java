@@ -147,7 +147,7 @@ public class RefactoringInterpreterTest extends TestClass{
 		return elements;
 	}
 	
-//	@Test
+	@Test
 	@InputData({MODEL,PATH})
 	public void refactoringInterpreter(){
 		Resource resource = getResourceByPattern(MODEL);
@@ -155,11 +155,36 @@ public class RefactoringInterpreterTest extends TestClass{
 		
 		List<EObject> elements = getElementsByQuery(PATH, 1, resource);
 		refactorer.setInput(elements);
-		List<RefactoringSpecification> refSpecs = refactorer.getPossibleRefactorings(1.0);
-		assertNotNull(refSpecs);
-		assertTrue(refSpecs.size() > 0);
-		RefactoringSpecification refSpec = refSpecs.get(0);
-//		EObject refactoredModel = refactorer.refactor(refSpec, true);
-//		assertNotNull(refactoredModel);
+		List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
+		assertNotNull(mappings);
+		assertTrue(mappings.size() > 0);
+		Mapping mapping = mappings.get(0);
+		EObject refactoredRoot = refactorer.refactor(mapping, true);
+		EObject originalModel = getResourceByPattern(MODEL).getContents().get(0);
+		assertNotNull(refactoredRoot);
+		
+		ResourceSet rs = resource.getResourceSet();
+		File origFile = getTestDataSet().getInputFileByPattern(MODEL);
+		String newName = origFile.getAbsoluteFile().getParent() + File.separator + "output" + File.separator + origFile.getName();
+//		newName = newName.replace(MODEL, "CREATE_REFACTORED_").replace(".pl0", ".xmi");
+		newName = newName.replace(MODEL, "MODEL_REFACTORED_");
+		File refactoredFile = new File(newName);
+		Resource refactoredResource = rs.createResource(URI.createFileURI(refactoredFile.getAbsolutePath()));
+		boolean added = refactoredResource.getContents().add(refactoredRoot);
+		assertTrue(added);
+		try {
+			refactoredResource.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			MatchModel matchModel = MatchService.doMatch(originalModel, refactoredRoot, Collections.<String, Object>emptyMap());
+			EList<UnmatchElement> unmatches = matchModel.getUnmatchedElements();
+			assertNotNull(unmatches);
+//			RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
+//			assertTrue(unmatches.size() == refSpec.getInstructions().size());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }

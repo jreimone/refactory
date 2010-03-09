@@ -1,7 +1,10 @@
 ROLEMODELMAPPING conference FOR <http://www.emftext.org/language/conference> 
 
-ExtractTrack maps <platform:/resource/org.emftext.refactoring.tests/testInput/IndexConnectorTest/CS_ROLE_ExtractMethod.rolestext> { 
+ExtractTrack maps <ExtractMethod> { 
 	Extract -> Slot;
+	OrigContainer -> Track;
+	NewContainer -> Track;
+	ContainerContainer -> Conference;
 } 
 	
 	
