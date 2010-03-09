@@ -43,8 +43,15 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 			EList<EObject> contents = resource.getContents();
 			for (EObject eObject : contents) {
 				if (eObject instanceof RoleModel) {
-					result.addMapping(identifier, (RoleModel) eObject); 
-					EcoreUtil.resolveAll(eObject);
+					String name = ((RoleModel) eObject).getName();
+					model = registry.getRoleModelByName(name);
+					if(model != null){
+						result.addMapping(identifier, model); 
+						EcoreUtil.resolveAll(model);
+					} else {
+						result.addMapping(identifier, (RoleModel) eObject); 
+						EcoreUtil.resolveAll(eObject);
+					}
 				} else {
 					result.setErrorMessage(identifier + " is not a valid Role Model");
 				}
