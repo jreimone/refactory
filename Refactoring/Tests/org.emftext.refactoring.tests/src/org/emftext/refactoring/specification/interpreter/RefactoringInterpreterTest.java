@@ -3,15 +3,23 @@
  */
 package org.emftext.refactoring.specification.interpreter;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.compare.diff.metamodel.DiffElement;
+import org.eclipse.emf.compare.diff.metamodel.DiffModel;
+import org.eclipse.emf.compare.diff.service.DiffService;
+import org.eclipse.emf.compare.match.engine.IMatchEngine;
+import org.eclipse.emf.compare.match.metamodel.MatchModel;
+import org.eclipse.emf.compare.match.metamodel.UnmatchElement;
+import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -21,6 +29,7 @@ import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
+import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.test.QueryUtil;
 import org.emftext.refactoring.test.TestUtil;
@@ -102,21 +111,31 @@ public class RefactoringInterpreterTest extends TestClass{
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		Mapping mapping = mappings.get(0);
-		EObject refactoredRoot = refactorer.refactor(mapping, false);
+		EObject refactoredRoot = refactorer.refactor(mapping, true);
+		EObject originalModel = getResourceByPattern(CREATE).getContents().get(0);
 		assertNotNull(refactoredRoot);
 		
 		ResourceSet rs = resource.getResourceSet();
 		File origFile = getTestDataSet().getInputFileByPattern(CREATE);
-		String newName = origFile.getName();
+		String newName = origFile.getAbsoluteFile().getParent() + File.separator + "output" + File.separator + origFile.getName();
 //		newName = newName.replace(CREATE, "CREATE_REFACTORED_").replace(".pl0", ".xmi");
 		newName = newName.replace(CREATE, "CREATE_REFACTORED_");
-		File refactoredFile = new File(origFile.getAbsoluteFile().getParent() + File.separator + newName);
+		File refactoredFile = new File(newName);
 		Resource refactoredResource = rs.createResource(URI.createFileURI(refactoredFile.getAbsolutePath()));
 		boolean added = refactoredResource.getContents().add(refactoredRoot);
 		assertTrue(added);
 		try {
 			refactoredResource.save(null);
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			MatchModel matchModel = MatchService.doMatch(originalModel, refactoredRoot, Collections.<String, Object>emptyMap());
+			EList<UnmatchElement> unmatches = matchModel.getUnmatchedElements();
+			assertNotNull(unmatches);
+			RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
+			assertTrue(unmatches.size() == refSpec.getInstructions().size());
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}

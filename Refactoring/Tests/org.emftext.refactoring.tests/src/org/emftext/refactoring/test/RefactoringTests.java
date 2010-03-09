@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import junit.framework.Assert;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -74,7 +75,9 @@ public class RefactoringTests extends TestCase{
 	// paths for files which will be inserted into registries
 	public static final String REGISTRY_FOLDER 					= INPUT_FOLDER + File.separator + "registry";
 	public static final String EXTRACT_METHOD_ROLES				= REGISTRY_FOLDER + File.separator + "ExtractMethod.rolestext";
+	public static final String CREATE_ROLES						= REGISTRY_FOLDER + File.separator + "CREATEcommand.rolestext";
 	public static final String EXTRACT_METHOD_REFSPEC			= REGISTRY_FOLDER + File.separator + "ExtractMethod.refspec";
+	public static final String CREATE_REFSPEC					= REGISTRY_FOLDER + File.separator + "CREATEcommand.refspec";
 	public static final String PL0_MAPPING						= REGISTRY_FOLDER + File.separator + "pl0mapping.rolemapping";
 	public static final String CONFERENCE_MAPPING				= REGISTRY_FOLDER + File.separator + "conference.rolemapping";
 
@@ -110,10 +113,18 @@ public class RefactoringTests extends TestCase{
 					TestUtil.getResourceFromFile(TestUtil.getFileByPath(EXTRACT_METHOD_ROLES))
 					, RoleModel.class);
 			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
+			roleModel = TestUtil.getExpectedModelFromResource(
+					TestUtil.getResourceFromFile(TestUtil.getFileByPath(CREATE_ROLES))
+					, RoleModel.class);
+			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
 
 			// RefSpecs
 			RefactoringSpecification refSpec = TestUtil.getExpectedModelFromResource(
 					TestUtil.getResourceFromFile(TestUtil.getFileByPath(EXTRACT_METHOD_REFSPEC))
+					, RefactoringSpecification.class);
+			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
+			refSpec = TestUtil.getExpectedModelFromResource(
+					TestUtil.getResourceFromFile(TestUtil.getFileByPath(CREATE_REFSPEC))
 					, RefactoringSpecification.class);
 			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
 
@@ -144,8 +155,14 @@ public class RefactoringTests extends TestCase{
 		for (Class<? extends TestClass> testClass : testClasses) {
 			try {
 				suite.addTest(createTests(testClass));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+			} catch (final FileNotFoundException e) {
+				suite.addTest(new TestCase(testClass.getSimpleName()) {
+					@Override
+					protected void runTest() throws Throwable {
+						Assert.fail(e.getMessage());
+					}
+					
+				});
 			}
 		}
 		return suite;
