@@ -67,7 +67,7 @@ RULES{
 	
 	RefactoringSpecification ::= "REFACTORING" #1 name[UPPER_IDENTIFIER] !0 "FOR" #1 usedRoleModel['<','>'] !0 !0 "STEPS" "{" !1 (instructions ";" !0)+ !0 "}"  ;
 	
-	CREATE ::= "create" #1 "new" #1 (varDeclaration #0 ":" #0)? sourceRoleReference #1 "in" #1 targetContext;
+	CREATE ::= "create" #1 "new" #1 (varDeclaration #0 ":" #0)? sourceRoleReference #1 "in" #1 targetContext  (#1 "from" #1 from)?;
 	
 	MOVE ::= "move" #1 source #1 "to" #1 target;
 	
@@ -79,7 +79,7 @@ RULES{
 	
 	VariableReference ::= variable[LOWER_IDENTIFIER] ;
 	
-	RoleReference ::= role[UPPER_IDENTIFIER] (#1 "from" #1 from)?;
+	RoleReference ::= role[UPPER_IDENTIFIER];
 	
 	RelationReference ::= relation[DOT_NOTATION];
 	
