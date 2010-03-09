@@ -233,6 +233,9 @@
 			<pathelement path="../org.emftext.test.bug1154/bin"/>
 			<pathelement path="../org.emftext.test.bug1154.resource.bug1154/bin"/>
 			<pathelement path="../org.emftext.test.bug1154.test/bin"/>
+			<pathelement path="../org.emftext.test.bug1233/bin"/>
+			<pathelement path="../org.emftext.test.bug1233.resource.bug1233/bin"/>
+			<pathelement path="../org.emftext.test.bug1233.test/bin"/>
 			<pathelement path="../org.emftext.test.cct1/bin"/>
 			<pathelement path="../org.emftext.test.cct1.resource.cct1/bin"/>
 			<pathelement path="../org.emftext.test.cct2/bin"/>
@@ -295,6 +298,7 @@
 		<run-test plugin="org.emftext.language.simple_math" extension="sm" />
 		<run-test plugin="org.emftext.test.bug933" extension="bug933" />
 		<run-test plugin="org.emftext.test.bug1154" extension="bug1154" />
+		<run-test plugin="org.emftext.test.bug1233" extension="bug1233" />
 		<!-- TODO enable this test -->
 		<!-- <run-test plugin="org.emftext.language.xml" extension="xml" /> -->
 	</target>
