@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -27,6 +28,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.emftext.language.refactoring.roles.Multiplicity;
+import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.RolesPackage;
 
 /**
@@ -129,12 +131,31 @@ public class MultiplicityItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		Multiplicity multiplicity = (Multiplicity)object;
-		return getString("_UI_Multiplicity_type") + " " + multiplicity.getLowerBound();
+		int min = multiplicity.getLowerBound();
+		int max = multiplicity.getUpperBound();
+		String bounds = "[" + min + ".." + ((max == -1) ? "*" : max) + "]";
+		MultiplicityRelation relation = (MultiplicityRelation) multiplicity.eContainer();
+		String name = "";
+		if(relation.getSourceMultiplicity().equals(multiplicity)){
+			if(relation.getSourceName() == null || "".equals(relation.getSourceName())){
+				name = "source:";
+			} else {
+				name = relation.getSourceName();
+			}
+		} else {
+			if(relation.getTargetName() == null || "".equals(relation.getTargetName())){
+				name = "target:";
+			}else {
+				name = relation.getTargetName();
+			}
+		}
+		name += " " + bounds;
+		return name;
 	}
 
 	/**
