@@ -86,7 +86,7 @@ public abstract class TreeNode{
 	/**
 	 * @param reference the reference to set
 	 */
-	public void setReference(EReference reference) {
+	public void setReferenceFromParent(EReference reference) {
 		this.reference = reference;
 	}
 }
