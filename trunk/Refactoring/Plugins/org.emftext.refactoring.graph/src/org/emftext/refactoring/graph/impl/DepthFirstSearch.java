@@ -103,7 +103,7 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 		TreeNode child;
 		child = new TreeLeaf(contained);
 		parent.addChild(child);
-		parent.setReference(reference);
+		child.setReferenceFromParent(reference);
 		visitedNodesMap.put(contained, child);
 		IPath path = child.getPathFromRoot();
 		paths.add(path);
@@ -119,13 +119,13 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 		if(child == null){
 			child = distinguishNodeType(contained);
 			parent.addChild(child);
-			parent.setReference(reference);
+			child.setReferenceFromParent(reference);
 			visitedNodesMap.put(contained, child);
 			checkUniqueNodeInPath(child);
 		} else {
 			TreeNode nodeReferenceLeaf = new TreeNodeReferenceLeaf(contained, child);
 			parent.addChild(nodeReferenceLeaf);
-			parent.setReference(reference);
+			child.setReferenceFromParent(reference);
 			outputEClassInTree(nodeReferenceLeaf, System.out, "~");
 		}
 
@@ -186,7 +186,7 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 		parentParent.removeChild(nodeToConvert);
 		TreeNode parentLeaf = new TreeLeaf(nodeToConvert.getEClass());
 		parentParent.addChild(parentLeaf);
-		parentParent.setReference(reference);
+		parentLeaf.setReferenceFromParent(reference);
 	}
 
 	/**
