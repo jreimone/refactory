@@ -100,11 +100,4 @@ public class RefactoringInterpreterContext {
 	public EObject getEObjectForVariable(Variable variable){
 		return varInstanceMap.get(variable);
 	}
-
-	/**
-	 * @return the model
-	 */
-	public EObject getModel() {
-		return model;
-	}
 }

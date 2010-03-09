@@ -39,11 +39,11 @@ import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter;
 import org.emftext.refactoring.graph.IShortestPathAlgorithm;
 import org.emftext.refactoring.graph.util.IPath;
 import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
-import org.emftext.refactoring.graph.util.TreeNode;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -59,6 +59,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 
 	private RefactoringSpecification refSpec;
 	private EObject model;
+	private EObject originalModel;
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
 	private RoleMappingModel roleMapping;
@@ -70,6 +71,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	public void initialize(RefactoringSpecification refSpec, EObject model, RoleMappingModel roleMapping, Mapping mapping) {
 		this.refSpec = refSpec;
 		this.model = model;
+		this.originalModel = model;
 		this.roleMapping = roleMapping;
 		this.mapping = mapping;
 	}
@@ -82,13 +84,15 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		EObject initialModel = model;
 		if(copy){
 			Copier copier = new Copier();
-			EObject copiedModel = copier.copy(model);
-			initialModel = copiedModel;
+			// must be done so because refactorings always will be performed on the initial model
+			// because the selection referres to the initial model 
+			originalModel = copier.copy(model);
 		}
-		context.setInitialContext(initialModel, selection, roleMapping, mapping);
+		model = initialModel;
+		context.setInitialContext(model, selection, roleMapping, mapping);
 		initInterpretationStack();
 		interprete(context);
-		return context.getModel();
+		return getModel();
 	}	
 
 	private void initInterpretationStack(){
@@ -137,6 +141,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	@Override
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE(
 			CREATE object, RefactoringInterpreterContext context) {
+		EcoreUtil.resolveAll(object);
 		Variable sourceVar = object.getVarDeclaration();
 		if(sourceVar != null){
 			context.addEObjectForVariable(sourceVar);
@@ -147,26 +152,40 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			return handleCREATETargetVariable(context, childRole, target);
 		}
 		if(target instanceof RoleReference){
-			FromClause from = target.getFrom();
-			FromOperator operator = from.getOperator();
-			if(operator != null && (operator instanceof UPTREE)){
-				return handleFromOperatorUPTREE(childRole, target, from);
-			}
-
+			return handleCREATETargetRole(childRole, (RoleReference) target, object.getFrom());
 		}
 		return false;
 	}
 
-	/**
-	 * @param childRole
-	 * @param target
-	 * @param from
-	 * @return
-	 */
+	private Boolean handleCREATETargetRole(Role childRole, RoleReference target, FromClause from) {
+		if(from == null){
+			EClass metaclass = mapping.getEClassForRole(childRole);
+			EObject childObject = EcoreUtil.create(metaclass);
+			Role targetRole = target.getRole();
+			if(targetRole.getModifier().contains(RoleModifier.INPUT)){
+				if(selection.size() == 1){
+					EObject targetObject = selection.get(0);
+					ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
+					RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
+					return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject);
+				}
+			} else {
+				// TODO ask the user
+			}
+		} else {
+			FromOperator operator = from.getOperator();
+			List<? extends EObject> fromObjects = getFromReferenceObject(from);
+			if(operator instanceof UPTREE){
+				return handleFromOperatorUPTREE(childRole, target, from, fromObjects);
+			}
+		}
+		return false;
+	}
+
+
 	@SuppressWarnings("unchecked")
-	private Boolean handleFromOperatorUPTREE(Role childRole, TargetContext target, FromClause from) {
-		Role targetRole = ((RoleReference) target).getRole();
-		List<? extends EObject> fromObjects = getFromReferenceObject(from);
+	private Boolean handleFromOperatorUPTREE(Role childRole, RoleReference target, FromClause from, List<? extends EObject> fromObjects) {
+		Role targetRole = target.getRole();
 		List<?>[] rootPaths = new List<?>[fromObjects.size()];
 		int i = 0;
 		for (EObject eObject : fromObjects) {
@@ -179,7 +198,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		RelationMapping relationMapping = mapping.getConcreteMappingForRole(targetRole).getRelationMappingForTargetRole(childRole);
 		EClass childClass = mapping.getEClassForRole(childRole);
 		EObject childObject = EcoreUtil.create(childClass);
-		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject, false);
+		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject);
 	}
 
 	private List<? extends EObject> getFromReferenceObject(FromClause from){
@@ -226,13 +245,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			for (EReference eReference : references) {
 				tempList.add(eReference);
 			}
-			return createPath(parentObject, references, childObject, false);
+			return createPath(parentObject, references, childObject);
 		}
 		return false;
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean createPath(EObject parent, List<EReference> remainingReferences, EObject child, boolean setCommand){
+	private boolean createPath(EObject parent, List<EReference> remainingReferences, EObject child){
 		if(remainingReferences == null){
 			IShortestPathAlgorithm algo = (new PathAlgorithmFactory()).getAlgorithm();
 			List<IPath> paths = algo.calculatePaths(parent, child);
@@ -240,27 +259,27 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 				IPath path = paths.get(0);
 				path.removeAbstractEClasses();
 				List<EReference> references = new LinkedList<EReference>();
-				for (int i = 0; i < (path.size() - 1); i++) {
+				for (int i = 1; i < path.size(); i++) {
 					references.add(path.get(i).getReference());
 				}
-				return createPath(parent, references, child, setCommand);
+				return createPath(parent, references, child);
 			} else {
 				RegistryUtil.log("Couldn't find a shortest path between " + child + " and " + parent, IStatus.ERROR);
 				return false;
 			}
 		} else if(remainingReferences.size() == 1){
 			EReference reference = remainingReferences.get(0);
-			if(!setCommand){
-				Object feature = parent.eGet(reference);
-				return ((List<EObject>) feature).add(child);
-			} else {
-				try {
-					parent.eSet(reference, child);	
-				} catch (Exception e) {
-					RegistryUtil.log("Couldn't set feature " + child + " for " + parent, IStatus.ERROR);
-					return false;
+			try{
+				if(reference.isMany()){
+					Object feature = parent.eGet(reference);
+					return ((List<EObject>) feature).add(child);
+				} else {
+					parent.eSet(reference, child);
+					return true;
 				}
-				return true;
+			} catch (Exception e) {
+				RegistryUtil.log("Couldn't set feature " + child + " for " + parent, IStatus.ERROR);
+				return false;
 			}
 		} else {
 			EReference reference = remainingReferences.get(0);
@@ -269,7 +288,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			EClass tempParentClass = reference.getEContainingClass();
 			EObject tempParent = EcoreUtil.create(tempParentClass);
 			((List<EObject>) feature).add(tempParent);
-			return createPath(tempParent, remainingReferences, child, setCommand);
+			return createPath(tempParent, remainingReferences, child);
 		}
 	}
 
@@ -307,7 +326,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		} 
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
 		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(sourceRole);
-		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), sourceObject, true);
+		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), sourceObject);
 	}
 
 	/* (non-Javadoc)
@@ -339,5 +358,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 */
 	public void setInput(List<? extends EObject> currentSelection) {
 		this.selection = currentSelection;
+	}
+
+	public EObject getModel() {
+		return model;
+	}
+
+	public EObject getOriginalModel() {
+		return originalModel;
 	}
 }
