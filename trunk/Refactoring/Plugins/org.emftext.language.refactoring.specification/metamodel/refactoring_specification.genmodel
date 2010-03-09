@@ -29,6 +29,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/varDeclaration"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/sourceRoleReference"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/targetContext"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/from"/>
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//MOVE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//MOVE/source"/>
@@ -48,9 +49,7 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//RelationReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RelationReference/relation"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//TargetContext">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//TargetContext/from"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//TargetContext"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ReferenceCommand"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//SET">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//SET/source"/>
