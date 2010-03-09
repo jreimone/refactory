@@ -4,17 +4,22 @@
 package org.emftext.refactoring.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
@@ -25,8 +30,77 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class ModelUtil {
 
+	private static final Map<String, Integer> identifierMap = new HashMap<String, Integer>();
+
 	private ModelUtil(){
 		// just do nothing
+	}
+
+	/**
+	 * Creates an instance of the given {@link EClass} with {@link EcoreUtil#create(EClass)} and then
+	 * creates all obligatory structural features.
+	 * 
+	 * @param clazz
+	 * @return
+	 */
+	public static EObject create(EClass clazz){
+		EObject instance = EcoreUtil.create(clazz);
+		createObligatories(instance);
+		return instance;
+	}
+
+	private static int getNextIdentifierSuffix(String key){
+		Integer suffix = identifierMap.get(key);
+		if(suffix == null){
+			identifierMap.put(key, 1);
+		} else {
+			suffix++;
+			identifierMap.put(key, suffix);
+		}
+		return identifierMap.get(key);
+	}
+
+	/**
+	 * Creates all obligatory structural features of an {@link EObject}.
+	 * 
+	 * @param instance
+	 */
+	public static void createObligatories(EObject instance){
+		EClass clazz = instance.eClass();
+		List<EStructuralFeature> features = clazz.getEAllStructuralFeatures();
+		for (EStructuralFeature feature : features) {
+			if(feature.isChangeable()){
+				int min = feature.getLowerBound();
+				if(min >= 1){
+					if(feature.isMany()){
+
+					} else {
+						Object defaultValue = feature.getDefaultValue();
+						if(defaultValue != null){
+							instance.eSet(feature, defaultValue);
+						} else {
+							EClassifier classifier = feature.getEType();
+							if(classifier instanceof EDataType){
+								if(classifier.getInstanceClass().equals(String.class)){
+									String identifier = firstUppercase(clazz.getName()) + firstUppercase(feature.getName());
+									String name = "new" + identifier + getNextIdentifierSuffix(identifier);
+									instance.eSet(feature, name);
+								}
+							} else if(classifier instanceof EClass){
+								EObject child = create((EClass) classifier);
+								instance.eSet(feature, child);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public static String firstUppercase(String name){
+		StringBuilder builder = new StringBuilder(name);
+		builder.setCharAt(0, Character.toUpperCase(builder.charAt(0)));
+		return builder.toString();
 	}
 
 	/**
