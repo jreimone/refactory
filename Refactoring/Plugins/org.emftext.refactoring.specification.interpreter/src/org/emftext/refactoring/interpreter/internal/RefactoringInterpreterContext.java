@@ -22,6 +22,7 @@ import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -71,25 +72,25 @@ public class RefactoringInterpreterContext {
 		CREATE create = variable.getCreateCommand();
 		Role varRole = create.getSourceRoleReference().getRole();
 		EClass metaClass = mapping.getEClassForRole(varRole);
-		EObject instance = EcoreUtil.create(metaClass);
-		handleObligatoryFeatures(instance);
+		EObject instance = ModelUtil.create(metaClass);
+//		handleObligatoryFeatures(instance);
 		varInstanceMap.put(variable, instance);
 	}
 	
-	private void handleObligatoryFeatures(EObject element){
-		EClass metaclass = element.eClass();
-		EList<EAttribute> attributes = metaclass.getEAllAttributes();
-		for (EAttribute attribute : attributes) {
-			int min = attribute.getLowerBound();
-			int max = attribute.getUpperBound();
-			if(min == max && min == 1){
-				EDataType type = attribute.getEAttributeType();
-				if(type.getInstanceClass().equals(String.class)){
-					element.eSet(attribute, "new" + metaclass.getName());
-				}
-			}
-		}
-	}
+//	private void handleObligatoryFeatures(EObject element){
+//		EClass metaclass = element.eClass();
+//		EList<EAttribute> attributes = metaclass.getEAllAttributes();
+//		for (EAttribute attribute : attributes) {
+//			int min = attribute.getLowerBound();
+//			int max = attribute.getUpperBound();
+//			if(min == max && min == 1){
+//				EDataType type = attribute.getEAttributeType();
+//				if(type.getInstanceClass().equals(String.class)){
+//					element.eSet(attribute, "new" + metaclass.getName());
+//				}
+//			}
+//		}
+//	}
 	
 	/**
 	 * Returns the concrete instance for the given variable.

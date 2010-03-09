@@ -152,15 +152,15 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			return handleCREATETargetVariable(context, childRole, target);
 		}
 		if(target instanceof RoleReference){
-			return handleCREATETargetRole(childRole, (RoleReference) target, object.getFrom());
+			return handleCREATETargetRole(childRole, (RoleReference) target, object.getFrom(), sourceVar);
 		}
 		return false;
 	}
 
-	private Boolean handleCREATETargetRole(Role childRole, RoleReference target, FromClause from) {
+	private Boolean handleCREATETargetRole(Role childRole, RoleReference target, FromClause from, Variable variable) {
 		if(from == null){
 			EClass metaclass = mapping.getEClassForRole(childRole);
-			EObject childObject = EcoreUtil.create(metaclass);
+			EObject childObject = ModelUtil.create(metaclass);
 			Role targetRole = target.getRole();
 			if(targetRole.getModifier().contains(RoleModifier.INPUT)){
 				if(selection.size() == 1){
@@ -176,7 +176,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			FromOperator operator = from.getOperator();
 			List<? extends EObject> fromObjects = getFromReferenceObject(from);
 			if(operator instanceof UPTREE){
-				return handleFromOperatorUPTREE(childRole, target, from, fromObjects);
+				return handleFromOperatorUPTREE(childRole, target, fromObjects, variable);
 			}
 		}
 		return false;
@@ -184,7 +184,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 
 
 	@SuppressWarnings("unchecked")
-	private Boolean handleFromOperatorUPTREE(Role childRole, RoleReference target, FromClause from, List<? extends EObject> fromObjects) {
+	private Boolean handleFromOperatorUPTREE(Role childRole, RoleReference target, List<? extends EObject> fromObjects, Variable variable) {
 		Role targetRole = target.getRole();
 		List<?>[] rootPaths = new List<?>[fromObjects.size()];
 		int i = 0;
@@ -197,7 +197,12 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		EObject targetObject = RoleUtil.getFirstCommonObjectWithRoleFromPaths(targetRole, mapping, (List<? extends EObject>[]) rootPaths);
 		RelationMapping relationMapping = mapping.getConcreteMappingForRole(targetRole).getRelationMappingForTargetRole(childRole);
 		EClass childClass = mapping.getEClassForRole(childRole);
-		EObject childObject = EcoreUtil.create(childClass);
+		EObject childObject = null;
+		if(variable != null && context.getEObjectForVariable(variable) != null){
+			childObject = context.getEObjectForVariable(variable);
+		} else {
+			childObject = ModelUtil.create(childClass);
+		}
 		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject);
 	}
 
@@ -226,7 +231,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		Variable targetVar = ((VariableReference) target).getVariable();
 		EObject parentObject = context.getEObjectForVariable(targetVar);
 		EClass childClass = mapping.getEClassForRole(childRole);
-		EObject childObject = EcoreUtil.create(childClass);
+		EObject childObject = ModelUtil.create(childClass);
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetVar.getCreateCommand().getSourceRoleReference().getRole());
 		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
 		if(relationMapping == null){
@@ -286,7 +291,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			remainingReferences.remove(reference);
 			Object feature = parent.eGet(reference);
 			EClass tempParentClass = reference.getEContainingClass();
-			EObject tempParent = EcoreUtil.create(tempParentClass);
+			EObject tempParent = ModelUtil.create(tempParentClass);
 			((List<EObject>) feature).add(tempParent);
 			return createPath(tempParent, remainingReferences, child);
 		}
