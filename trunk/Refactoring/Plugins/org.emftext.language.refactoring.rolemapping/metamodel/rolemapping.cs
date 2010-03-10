@@ -19,9 +19,16 @@ OPTIONS {
 
 TOKENS {
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
-	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;
-	DEFINE TEXT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$;
-	DEFINE DOT_PATH TEXT + $('.'$ + TEXT + $)*$;
+	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;	
+	//DEFINE DOT_IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$ + $('.'$ + IDENT + $)*$;
+	DEFINE IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-') + ('.'('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+)*$;
+	//DEFINE IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$;
+	//DEFINE DOT_IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-'|'.')+$;
+	//DEFINE DOT_IDENT $(('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+('.')?('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+)+$;
+	//DEFINE DOT_IDENT IDENT + $('.'$ + IDENT + $)*$;
+	//DEFINE DOT_IDENT IDENT + $('.'?$ + IDENT + $)*$;
+	//DEFINE DOT_IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-'|'.')+$;
+	//DEFINE DOT_PATH $($ + IDENT + $|$ + DOT_IDENT + $)$;
 }
 
 TOKENSTYLES {
@@ -33,15 +40,15 @@ TOKENSTYLES {
 
 RULES {
 	
-	RoleMappingModel::= "ROLEMODELMAPPING" #1 name[] #1 "FOR" #1 targetMetamodel['<','>'] !0 !0 mappings+;
+	RoleMappingModel::= "ROLEMODELMAPPING" #1 name[IDENT] #1 "FOR" #1 targetMetamodel['<','>'] !0 !0 mappings+;
 	
-	Mapping ::= name[] #1 "maps" #1 mappedRoleModel['<','>'] #1 "{" !1 
+	Mapping ::= name[IDENT] #1 "maps" #1 mappedRoleModel['<','>'] #1 "{" !1 
 					roleToMetaelement+ !0 !0  
 					"}" !0 !0 ;
 	
-	ConcreteMapping ::= role[] "->" metaclass[DOT_PATH] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings* "}")? ";" !0;
+	ConcreteMapping ::= role[IDENT] "->" metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings* "}")? ";" !0;
 	
-	RelationMapping ::= relation[] ":" references[] ("->" references[])* ";";
+	RelationMapping ::= relation[IDENT] ":" references[IDENT] ("->" references[IDENT])* ";";
 	
-	AttributeMapping ::= roleAttribute[] "->" classAttribute[];
+	AttributeMapping ::= roleAttribute[IDENT] "->" classAttribute[IDENT];
 }
