@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
@@ -44,6 +45,23 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			throw new RoleMappingAlreadyRegistered(roleMapping);
 		}
 		getRoleMappingMap().put(nsUri, roleMapping);
+		EPackage rootPackage = roleMapping.getTargetMetamodel();
+		registerSubPackages(rootPackage, roleMapping);
+	}
+
+	private void registerSubPackages(EPackage rootPackage, RoleMappingModel roleMapping) throws RoleMappingAlreadyRegistered {
+		List<EPackage> subPackages = rootPackage.getESubpackages();
+		if(subPackages != null){
+			for (EPackage subpackage : subPackages) {
+				String nsUri = subpackage.getNsURI();
+				RoleMappingModel registered = getRoleMappingMap().get(nsUri);
+				if(registered != null){
+					throw new RoleMappingAlreadyRegistered(roleMapping);
+				}
+				getRoleMappingMap().put(nsUri, roleMapping);
+				registerSubPackages(subpackage, roleMapping);
+			}
+		}
 	}
 
 	public Map<String, RoleMappingModel> getRoleMappingMap() {
