@@ -161,7 +161,7 @@ public class RefactoringTests extends TestCase{
 					protected void runTest() throws Throwable {
 						Assert.fail(e.getMessage());
 					}
-					
+
 				});
 			}
 		}
@@ -200,7 +200,11 @@ public class RefactoringTests extends TestCase{
 			File folder = new File(rootFolder.getAbsolutePath() + File.separator + classFolder);
 			checkFolder(folder);
 			File[] files = folder.listFiles(new DataSetTestFileFilter(filePattern, includeExpectExtension, exclusionPatterns));
-			return Arrays.asList(files);
+			List<File> fileList = new ArrayList<File>();
+			for (File file : files) {
+				fileList.add(file);
+			}
+			return fileList;
 		} catch (FileNotFoundException e) {
 			LOG.severe(e.getMessage());
 			return null;
@@ -240,6 +244,9 @@ public class RefactoringTests extends TestCase{
 			for (String filePattern : expectedValue) {
 				String[] otherExpectedValues = getOthers(expectedValue, filePattern);
 				List<File> files = getTestFiles(classFolder, filePattern, false, otherExpectedValues);
+				for (List<File> list : inputFiles) {
+					files.removeAll(list);
+				}
 				if(setCount == -1){
 					setCount = files.size();
 				} else {

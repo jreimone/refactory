@@ -1,0 +1,23 @@
+PROGRAM CREATEsimple 
+
+VAR x; 
+	
+PROCEDURE newProcedureDeclarationName1;
+BEGIN	
+END; 
+
+PROCEDURE newProcedureDeclarationName2; 
+BEGIN
+END; 
+	
+PROCEDURE newProcedureDeclarationName4; 
+BEGIN 	
+END; 
+
+PROCEDURE newProcedureDeclarationName5; 
+BEGIN 
+END; 
+
+BEGIN 
+	x := + 2 
+END. 
