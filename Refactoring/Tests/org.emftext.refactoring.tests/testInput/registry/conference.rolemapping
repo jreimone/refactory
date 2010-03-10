@@ -6,5 +6,9 @@ ExtractTrack maps <ExtractMethod> {
 	NewContainer -> Track;
 	ContainerContainer -> Conference;
 } 
-	
+
+CreateTrackTest maps <platform:/resource/org.emftext.refactoring.tests/testInput/registry/CREATEcommand.rolestext> {
+	Container -> Conference;
+	Createe -> Track;
+}	
 	

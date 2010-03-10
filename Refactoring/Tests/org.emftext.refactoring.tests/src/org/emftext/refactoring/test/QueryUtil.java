@@ -1,7 +1,6 @@
 package org.emftext.refactoring.test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 public class QueryUtil {
 
+	private static final String ROOT_SYMBOL 				= "#";
 	private static final String SEGMENT_SEPERATOR 			= "/";
 	private static final String MULTIPLICITY_CONNECTOR 		= "\\.\\.";
 	private static final String ATTRIBUTE_OPEN		 		= "\\[";
@@ -32,6 +32,7 @@ public class QueryUtil {
 	public static List<EObject> queryResource(Resource resource, String query){
 		EObject model = resource.getContents().get(0);
 		assertNotNull(model);
+		assertNotNull(query);
 
 		String[] segments = query.split(SEGMENT_SEPERATOR);
 		List<EObject> element = getPath(model, segments);
@@ -64,6 +65,9 @@ public class QueryUtil {
 			return getSingleList(input);
 		}
 		String featureName = path[0];
+		if(ROOT_SYMBOL.equals(featureName)){
+			return getSingleList(input);
+		}
 		path = removeFirst(path);
 		String[] attributes = featureName.split(ATTRIBUTE_OPEN);
 		if(attributes == null || attributes.length == 0){
