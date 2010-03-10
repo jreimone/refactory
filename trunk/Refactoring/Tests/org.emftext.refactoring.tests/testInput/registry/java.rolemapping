@@ -1,0 +1,14 @@
+ROLEMODELMAPPING java FOR <http://www.emftext.org/java> 
+
+CreateMethodTest maps <platform:/resource/org.emftext.refactoring.tests/testInput/registry/CREATEcommand.rolestext> { 
+	Container -> classifiers.Class ;
+	Createe -> members.ClassMethod; 
+} 
+	
+ExtractMethod maps <ExtractMethod> { 
+	Extract -> statements.Statement;
+	OrigContainer -> members.ClassMethod;
+	NewContainer -> members.ClassMethod;
+	ContainerContainer -> classifiers.Class;
+	MovedReference -> references.MethodCall;
+}	

@@ -195,8 +195,6 @@ public class RefactoringInterpreterTest extends TestClass{
 			MatchModel matchModel = MatchService.doMatch(originalModel, refactoredRoot, Collections.<String, Object>emptyMap());
 			EList<UnmatchElement> unmatches = matchModel.getUnmatchedElements();
 			assertNotNull(unmatches);
-//			RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
-//			assertTrue(unmatches.size() == refSpec.getInstructions().size());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

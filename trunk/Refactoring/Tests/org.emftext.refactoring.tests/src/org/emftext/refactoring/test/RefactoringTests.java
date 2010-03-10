@@ -27,6 +27,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
+import org.emftext.language.java.JavaPackage;
+import org.emftext.language.java.containers.ContainersPackage;
+import org.emftext.language.java.members.MembersPackage;
+import org.emftext.language.java.resource.java.mopp.JavaResourceFactory;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -80,6 +84,7 @@ public class RefactoringTests extends TestCase{
 	public static final String CREATE_REFSPEC					= REGISTRY_FOLDER + File.separator + "CREATEcommand.refspec";
 	public static final String PL0_MAPPING						= REGISTRY_FOLDER + File.separator + "pl0mapping.rolemapping";
 	public static final String CONFERENCE_MAPPING				= REGISTRY_FOLDER + File.separator + "conference.rolemapping";
+	public static final String JAVA_MAPPING						= REGISTRY_FOLDER + File.separator + "java.rolemapping";
 
 	@SuppressWarnings("unchecked")
 	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
@@ -135,6 +140,10 @@ public class RefactoringTests extends TestCase{
 			IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
 			mapping = TestUtil.getExpectedModelFromResource(
 					TestUtil.getResourceFromFile(TestUtil.getFileByPath(CONFERENCE_MAPPING))
+					, RoleMappingModel.class);
+			IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
+			mapping = TestUtil.getExpectedModelFromResource(
+					TestUtil.getResourceFromFile(TestUtil.getFileByPath(JAVA_MAPPING))
 					, RoleMappingModel.class);
 			IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
 		} catch (RoleModelAlreadyRegisteredException e) {
@@ -475,6 +484,10 @@ public class RefactoringTests extends TestCase{
 		// arbitrary metamodels
 		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(ConferencePackage.eNS_URI, ConferencePackage.eINSTANCE);
+		// all java packages
+		EPackage.Registry.INSTANCE.put(JavaPackage.eNS_URI, JavaPackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put(ContainersPackage.eNS_URI, ContainersPackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put(MembersPackage.eNS_URI, MembersPackage.eINSTANCE);
 	}
 
 	private static void registerResourceFactories(){
@@ -486,6 +499,7 @@ public class RefactoringTests extends TestCase{
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("conference", new ConferenceResourceFactory());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("java", new JavaResourceFactory());
 	}
 
 
