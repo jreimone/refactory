@@ -9,12 +9,19 @@ IMPORTS{
 
 OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
-	//usePredefinedTokens = "false";
+	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
 	//overridePluginXML = "false";
 	//overrideManifest = "false";
+}
+
+TOKENS {
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;
+	DEFINE TEXT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$;
+	DEFINE DOT_PATH TEXT + $('.'$ + TEXT + $)*$;
 }
 
 TOKENSTYLES {
@@ -32,7 +39,7 @@ RULES {
 					roleToMetaelement+ !0 !0  
 					"}" !0 !0 ;
 	
-	ConcreteMapping ::= role[] "->" metaclass[] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings* "}")? ";" !0;
+	ConcreteMapping ::= role[] "->" metaclass[DOT_PATH] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings* "}")? ";" !0;
 	
 	RelationMapping ::= relation[] ":" references[] ("->" references[])* ";";
 	
