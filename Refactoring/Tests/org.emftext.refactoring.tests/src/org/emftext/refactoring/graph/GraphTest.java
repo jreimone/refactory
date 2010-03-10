@@ -20,8 +20,7 @@ import org.emftext.refactoring.graph.util.GraphUtil;
 import org.emftext.refactoring.graph.util.IPath;
 import org.emftext.refactoring.graph.util.LinkedListPath;
 import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
-import org.emftext.refactoring.test.TestUtil;
-import org.emftext.test.core.AbstractRefactoringTest;
+import org.emftext.refactoring.graph.util.TreeNode;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -100,7 +99,6 @@ public class GraphTest{
 		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
 	}
 	
-	@Ignore("not yet")
 	@Test
 	public void findShortestPathClassToClassMethodJava(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
@@ -114,13 +112,12 @@ public class GraphTest{
 		assertNotNull("Target mustn't be null", algo);
 		List<IPath> paths = algo.calculatePaths( source, target);
 		assertNotNull("There must be a shortest path", paths);
-		IPath expectedPath = new LinkedListPath();
-//		expectedPath.add((EClass) ClassifiersFactory.eINSTANCE.getEPackage().getEClassifier("Class"));
-//		expectedPath.add((EClass) MembersFactory.eINSTANCE.getEPackage().getEClassifier("Member"));
-//		expectedPath.add((EClass) MembersFactory.eINSTANCE.getEPackage().getEClassifier("ClassMethod"));
-		List<IPath> expectedPaths = new ArrayList<IPath>();
-		expectedPaths.add(expectedPath);
-		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
+		assertTrue(paths.size() > 0);
+		IPath shortestPath = paths.get(0);
+		shortestPath.removeAbstractEClasses();
+		assertTrue(shortestPath.size() == 2); // Class -> ClassMethod
+		TreeNode leaf = shortestPath.get(1);
+		assertEquals(leaf.getReference().getName(), "members");
 	}
 	
 	@Ignore("not yet")

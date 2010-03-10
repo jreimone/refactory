@@ -50,6 +50,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.java.resource.java.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
@@ -60,5 +65,6 @@
 		<nature>org.emftext.language.refactoring.rolemapping.resource.rolemapping.nature</nature>
 		<nature>org.emftext.language.refactoring.specification.resource.refspec.nature</nature>
 		<nature>org.emftext.language.conference.resource.conference.nature</nature>
+		<nature>org.emftext.language.java.resource.java.nature</nature>
 	</natures>
 </projectDescription>
