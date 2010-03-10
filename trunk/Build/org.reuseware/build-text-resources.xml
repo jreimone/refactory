@@ -161,8 +161,8 @@
 			<generate-metamodel-code plugin="org.emftext.language.simple_gui" model="simple_gui" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.simple_math" model="simple_math" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.sparql" model="sparql" generateEditProject="false" dir="${ontomopp.plugins.dir}" />
-			<generate-metamodel-code plugin="org.emftext.language.template_concepts" model="template_concepts" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.template_concepts.call" model="template_call" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.templateconcepts" model="templateconcepts" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.templateconcepts.call" model="templatecall" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.tbool" model="tbool" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.tcltk" model="tcl" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.textadventure" model="textadventure" generateEditProject="false" />
@@ -241,7 +241,7 @@
 		<generate-text-resource plugin="org.emftext.language.statemachine" syntax="statemachine" resourcePlugin="org.emftext.language.statemachine.resource.statemachine" />
 		<generate-text-resource plugin="org.emftext.language.tbool" syntax="tbool" resourcePlugin="org.emftext.language.tbool.resource.tbool" />
 		<generate-text-resource plugin="org.emftext.language.tcltk" syntax="tcl" resourcePlugin="org.emftext.language.tcltk.resource.tcl" />
-		<generate-text-resource plugin="org.emftext.language.template_concepts.call" syntax="template_call" resourcePlugin="org.emftext.language.template_concepts.call.resource.template_call" />
+		<generate-text-resource plugin="org.emftext.language.templateconcepts.call" syntax="templatecall" resourcePlugin="org.emftext.language.templateconcepts.call.resource.templatecall" />
 		<generate-text-resource plugin="org.emftext.language.textadventure" syntax="textadventure" resourcePlugin="org.emftext.language.textadventure.resource.tas"/>
 		<generate-text-resource plugin="org.emftext.language.threevaluedlogic" syntax="threevaluedlogic" resourcePlugin="org.emftext.language.threevaluedlogic.resource.tvl"/>
 		<generate-text-resource plugin="org.emftext.language.usecaseinvariant" syntax="UseCaseInvariant" resourcePlugin="org.emftext.language.usecaseinvariant.resource.ucinv" />
