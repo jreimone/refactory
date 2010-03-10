@@ -70,5 +70,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoring_specification.ecore#//ConstantsReference/referencedConstant"/>
     </genClasses>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//FromReference"/>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//Context"/>
   </genPackages>
 </genmodel:GenModel>

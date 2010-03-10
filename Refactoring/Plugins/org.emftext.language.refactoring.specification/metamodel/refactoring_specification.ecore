@@ -51,7 +51,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//Variable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SourceContext" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceContext" abstract="true" eSuperTypes="#//Context"/>
   <eClassifiers xsi:type="ecore:EClass" name="RoleReference" eSuperTypes="#//SourceContext #//TargetContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
   </eClassifiers>
@@ -59,7 +59,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TargetContext" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetContext" abstract="true" eSuperTypes="#//Context"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceCommand" abstract="true" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="SET" eSuperTypes="#//ReferenceCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -89,4 +89,5 @@
         eType="#//Constants"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FromReference" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Context" abstract="true"/>
 </ecore:EPackage>
