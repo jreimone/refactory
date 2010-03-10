@@ -16,6 +16,7 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.reuseware.sokan.ID;
 import org.reuseware.sokan.IndexMetaData;
 import org.reuseware.sokan.SokanFactory;
+import org.reuseware.sokan.index.DependencyMap;
 import org.reuseware.sokan.index.indexer.Indexer;
 
 public class RefactoringIndexer implements Indexer {
@@ -97,6 +98,11 @@ public class RefactoringIndexer implements Indexer {
 			metaData.putAll(handleRefactoringSpecification(root));
 		}
 //		return metaData;
+	}
+
+	public void getDependent(ID artifactID, DependencyMap depMap) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
