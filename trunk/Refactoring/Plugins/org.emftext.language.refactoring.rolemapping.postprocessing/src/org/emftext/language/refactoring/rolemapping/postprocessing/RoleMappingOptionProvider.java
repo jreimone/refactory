@@ -28,7 +28,7 @@ public class RoleMappingOptionProvider implements IRolemappingOptionProvider {
 		
 		List<IRolemappingResourcePostProcessorProvider> postProcessors = new ArrayList<IRolemappingResourcePostProcessorProvider>();
 		postProcessors.add(new ConcreteMappingAnalyser());
-		postProcessors.add(new RelationMappingAnalyser());
+//		postProcessors.add(new RelationMappingAnalyser());
 		postProcessors.add(new RoleConstraintAnalyser());
 		
 //		postProcessors.add(new ProxyResolver());
