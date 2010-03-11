@@ -150,7 +150,7 @@
 			<generate-metamodel-code plugin="org.emftext.language.parametercheck" model="parametercheck" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.petrinet" model="petrinet" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.pico" model="pico" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.primitive_types" model="primitive_types" generateEditProject="true" />
+			<generate-metamodel-code plugin="org.emftext.language.primitivetypes" model="primitivetypes" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.pl0" model="pl0" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.plugin" model="plugin" secondaryExtension=".text" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.rails" model="rails" generateEditProject="false" />

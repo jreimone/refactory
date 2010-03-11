@@ -46,7 +46,7 @@
 		<path id="run_test_classpath">
 			<pathelement path="../org.emftext.access/bin"/>
 			<pathelement path="../org.emftext.language.conference.examples/bin"/>
-			<pathelement path="../org.emftext.language.custom_sandwich.examples/bin"/>
+			<pathelement path="../org.emftext.language.customsandwich.examples/bin"/>
 			<pathelement path="../org.emftext.language.java.homepage/bin"/>
 			<pathelement path="../org.emftext.language.km3.examples/bin"/>
 			<pathelement path="../org.emftext.language.quickuml.examples/bin"/>
@@ -70,9 +70,9 @@
 			<pathelement path="../org.emftext.language.conference.resource.conference/bin"/>
 			<pathelement path="../org.emftext.language.csv/bin"/>
 			<pathelement path="../org.emftext.language.csv.resource.csv/bin"/>
-			<pathelement path="../org.emftext.language.custom_sandwich/bin"/>
-			<pathelement path="../org.emftext.language.custom_sandwich.resource.custom_sandwich/bin"/>
-			<pathelement path="../org.emftext.language.custom_sandwich.test/bin"/>
+			<pathelement path="../org.emftext.language.customsandwich/bin"/>
+			<pathelement path="../org.emftext.language.customsandwich.resource.customsandwich/bin"/>
+			<pathelement path="../org.emftext.language.customsandwich.test/bin"/>
 			<pathelement path="../org.emftext.language.customer/bin"/>
 			<pathelement path="../org.emftext.language.customer.resource.customer/bin"/>
 			<pathelement path="../org.emftext.language.dot/bin"/>
@@ -89,9 +89,9 @@
 			<pathelement path="../org.emftext.language.efactory.resource.efactory/bin"/>
 			<pathelement path="../org.emftext.language.efactory.resource.efactory.post_processing/bin"/>
 			<pathelement path="../org.emftext.language.efactory.test/bin"/>
-			<pathelement path="../org.emftext.language.featherweight_java/bin"/>
-			<pathelement path="../org.emftext.language.featherweight_java.resource.fj/bin"/>
-			<pathelement path="../org.emftext.language.featherweight_java.test/bin"/>
+			<pathelement path="../org.emftext.language.featherweightjava/bin"/>
+			<pathelement path="../org.emftext.language.featherweightjava.resource.fj/bin"/>
+			<pathelement path="../org.emftext.language.featherweightjava.test/bin"/>
 			<pathelement path="../org.emftext.language.feature/bin"/>
 			<pathelement path="../org.emftext.language.feature.resource.feature/bin"/>
 			<pathelement path="../org.emftext.language.filesystem/bin"/>
@@ -156,8 +156,8 @@
 			<pathelement path="../org.emftext.language.plugin/bin"/>
 			<pathelement path="../org.emftext.language.plugin.resource.topf/bin"/>
 			<pathelement path="../org.emftext.language.plugin.resource.topf.post_processing/bin"/>
-			<pathelement path="../org.emftext.language.primitive_types/bin"/>
-			<pathelement path="../org.emftext.language.primitive_types.edit/bin"/>
+			<pathelement path="../org.emftext.language.primitivetypes/bin"/>
+			<pathelement path="../org.emftext.language.primitivetypes.edit/bin"/>
 			<pathelement path="../org.emftext.language.pl0/bin"/>
 			<pathelement path="../org.emftext.language.pl0.test/bin"/>
 			<pathelement path="../org.emftext.language.pl0.resource.pl0/bin"/>
@@ -292,7 +292,7 @@
 		<run-test plugin="org.emftext.language.dot" extension="dot" />
 		<run-test plugin="org.emftext.language.ecore" extension="text" />
 		<run-test plugin="org.emftext.language.efactory" extension="efactory" />
-		<run-test plugin="org.emftext.language.featherweight_java" extension="fj" />
+		<run-test plugin="org.emftext.language.featherweightjava" extension="fj" />
 		<run-test plugin="org.emftext.language.regexp" extension="regexp" />
 		<run-test plugin="org.emftext.language.simple_c" extension="c" />
 		<run-test plugin="org.emftext.language.simple_math" extension="sm" />
@@ -326,7 +326,7 @@
 	</target>
 		
 	<target name="run-test-custom-sandwich" depends="create-classpath-jar">
-		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.custom_sandwich.test">
+		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.customsandwich.test">
 			<jvmarg value="-ea" />
 
 			<classpath>
@@ -336,7 +336,7 @@
 			<formatter type="plain"/>
 	
 			<batchtest todir="${test_result_dir}">
-				<fileset dir="../org.emftext.language.custom_sandwich.test/src">
+				<fileset dir="../org.emftext.language.customsandwich.test/src">
 					<include name="**/**Test.java"/>
 				</fileset>
 			</batchtest>

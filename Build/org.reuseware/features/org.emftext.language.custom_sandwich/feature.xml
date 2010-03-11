@@ -40,21 +40,21 @@ of Technology, Germany
    </requires>
 
    <plugin
-         id="org.emftext.language.custom_sandwich"
+         id="org.emftext.language.customsandwich"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.custom_sandwich.resource"
+         id="org.emftext.language.customsandwich.resource"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
          
    <plugin
-         id="org.emftext.language.custom_sandwich.resource.custom_sandwich"
+         id="org.emftext.language.customsandwich.resource.customsandwich"
          download-size="0"
          install-size="0"
          version="0.0.0"
