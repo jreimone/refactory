@@ -41,11 +41,15 @@
     </genClasses>
     <genClasses ecoreClass="rolemapping.ecore#//RelationMapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RelationMapping/relation"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RelationMapping/references"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RelationMapping/referenceMetaClassPair"/>
     </genClasses>
     <genClasses ecoreClass="rolemapping.ecore#//AttributeMapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//AttributeMapping/roleAttribute"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//AttributeMapping/classAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="rolemapping.ecore#//ReferenceMetaClassPair">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ReferenceMetaClassPair/reference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ReferenceMetaClassPair/metaClass"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
