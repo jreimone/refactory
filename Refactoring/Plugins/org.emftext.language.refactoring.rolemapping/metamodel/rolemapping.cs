@@ -12,7 +12,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
-	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util";
+	//additionalDependencies = "org.emftext.refactoring.util";
 	//overridePluginXML = "false";
 	//overrideManifest = "false";
 }
@@ -48,7 +49,9 @@ RULES {
 	
 	ConcreteMapping ::= role[IDENT] "->" metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings* "}")? ";" !0;
 	
-	RelationMapping ::= relation[IDENT] ":" references[IDENT] ("->" references[IDENT])* ";";
+	RelationMapping ::= relation[IDENT] ":" referenceMetaClassPair ("->" referenceMetaClassPair)* ";";
+	
+	ReferenceMetaClassPair ::= reference[IDENT] ( metaClass['(',')'])?;
 	
 	AttributeMapping ::= roleAttribute[IDENT] "->" classAttribute[IDENT];
 }
