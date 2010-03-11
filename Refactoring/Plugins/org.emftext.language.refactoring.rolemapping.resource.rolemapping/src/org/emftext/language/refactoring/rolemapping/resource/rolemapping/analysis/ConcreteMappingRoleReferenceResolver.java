@@ -27,6 +27,10 @@ public class ConcreteMappingRoleReferenceResolver implements org.emftext.languag
 	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.emftext.language.refactoring.roles.Role> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.emftext.language.refactoring.roles.Role>();
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.Role> result) {
+		if (identifier.contains(".")) {
+			result.setErrorMessage("Role references must not contain dots.");
+			return;
+		}
 		EObject parent = container.eContainer();
 		if (parent instanceof Mapping) {
 			Mapping mapping = (Mapping) parent;
