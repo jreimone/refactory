@@ -125,7 +125,7 @@
 			<generate-metamodel-code plugin="org.emftext.language.c_sharp" model="c_sharp" generateEditProject="false"/>
 			<generate-metamodel-code plugin="org.emftext.language.conference" model="conference" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.csv" model="csv" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.custom_sandwich" model="custom_sandwich" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.customsandwich" model="customsandwich" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.customer" model="customer" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.dot" model="dot" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.efactory" model="efactory" generateEditProject="false" />
@@ -199,7 +199,7 @@
 		<generate-text-resource plugin="org.emftext.language.conference" syntax="conference" resourcePlugin="org.emftext.language.conference.resource.conference"/>
 		<generate-text-resource plugin="org.emftext.language.c_sharp" syntax="c_sharp" resourcePlugin="org.emftext.language.c_sharp.resource.csharp" />
 		<generate-text-resource plugin="org.emftext.language.csv" syntax="csv" resourcePlugin="org.emftext.language.csv.resource.csv"/>
-		<generate-text-resource plugin="org.emftext.language.custom_sandwich" syntax="custom_sandwich" resourcePlugin="org.emftext.language.custom_sandwich.resource.custom_sandwich" />
+		<generate-text-resource plugin="org.emftext.language.customsandwich" syntax="customsandwich" resourcePlugin="org.emftext.language.customsandwich.resource.customsandwich" />
 		<generate-text-resource plugin="org.emftext.language.customer" syntax="customer" resourcePlugin="org.emftext.language.customer.resource.customer" />
 		<generate-text-resource plugin="org.emftext.language.dot" syntax="dot" resourcePlugin="org.emftext.language.dot.resource.dot" />
 		<!-- performed earlier: <generate-text-resource plugin="org.emftext.language.ecore.resource.text" syntax="text.ecore" /> -->
