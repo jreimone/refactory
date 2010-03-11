@@ -368,15 +368,17 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			ReferenceMetaClassPair referencePair = remainingReferences.get(0);
 			remainingReferences.remove(referencePair);
 			Object feature = parent.eGet(referencePair.getReference());
-			EClass tempParentClass = referencePair.getReference().getEContainingClass();
-			EObject tempParent = null;
-			if(tempParentClass.isAbstract()){
-				tempParent = ModelUtil.create(referencePair.getMetaClass());
-			} else {
-				tempParent = ModelUtil.create(tempParentClass);
+			EClass featureClass = referencePair.getMetaClass();
+			if(featureClass == null){
+				featureClass = referencePair.getReference().getEReferenceType();
 			}
-			((List<EObject>) feature).add(tempParent);
-			return createPath(tempParent, remainingReferences, child);
+			if(featureClass.isAbstract()){
+				// TODO ask user
+				return false;
+			}
+			EObject featureObject = ModelUtil.create(featureClass);
+			((List<EObject>) feature).add(featureObject);
+			return createPath(featureObject, remainingReferences, child);
 		}
 	}
 
