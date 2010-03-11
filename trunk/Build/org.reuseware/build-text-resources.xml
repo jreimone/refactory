@@ -129,7 +129,7 @@
 			<generate-metamodel-code plugin="org.emftext.language.customer" model="customer" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.dot" model="dot" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.efactory" model="efactory" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.featherweight_java" model="featherweight_java" generateEditProject="false"/>
+			<generate-metamodel-code plugin="org.emftext.language.featherweightjava" model="featherweightjava" generateEditProject="false"/>
 			<generate-metamodel-code plugin="org.emftext.language.feature" model="feature" generateEditProject="false"/>
 			<generate-metamodel-code plugin="org.emftext.language.filesystem" model="filesystem" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.forms" model="forms" generateEditProject="false" />
@@ -205,7 +205,7 @@
 		<!-- performed earlier: <generate-text-resource plugin="org.emftext.language.ecore.resource.text" syntax="text.ecore" /> -->
 		<generate-text-resource plugin="org.emftext.language.efactory" syntax="efactory" resourcePlugin="org.emftext.language.efactory.resource.efactory"/>
 		<generate-text-resource plugin="org.emftext.language.ecore.resource.facade" syntax="facade.ecore" resourcePlugin="org.emftext.language.ecore.resource.facade"/>
-		<generate-text-resource plugin="org.emftext.language.featherweight_java" syntax="featherweight_java" resourcePlugin="org.emftext.language.featherweight_java.resource.fj" />
+		<generate-text-resource plugin="org.emftext.language.featherweightjava" syntax="featherweightjava" resourcePlugin="org.emftext.language.featherweightjava.resource.fj" />
 		<generate-text-resource plugin="org.emftext.language.feature" syntax="feature" resourcePlugin="org.emftext.language.feature.resource.feature" />
 		<generate-text-resource plugin="org.emftext.language.filesystem" syntax="filesystem"  resourcePlugin="org.emftext.language.filesystem.resource.fs" />
 		<generate-text-resource plugin="org.emftext.language.forms" syntax="forms"  resourcePlugin="org.emftext.language.forms.resource.forms" />
