@@ -19,6 +19,8 @@ OPTIONS {
 }
 
 TOKENS {
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'))* $;
+	DEFINE ML_COMMENT $'/*'.*'*/'$;
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;	
 	//DEFINE DOT_IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$ + $('.'$ + IDENT + $)*$;
@@ -47,11 +49,11 @@ RULES {
 					roleToMetaelement+ !0 !0  
 					"}" !0 !0 ;
 	
-	ConcreteMapping ::= role[IDENT] "->" metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings outgoingRelationMappings* "}")? ";" !0;
+	ConcreteMapping ::= role[IDENT] ":=" metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings outgoingRelationMappings* "}")? ";" !0;
 	
-	RelationMapping ::= relation[IDENT] ":" referenceMetaClassPair ("->" referenceMetaClassPair)* ";";
+	RelationMapping ::= relation[IDENT] ":=" referenceMetaClassPair ("->" referenceMetaClassPair)* ";";
 	
-	ReferenceMetaClassPair ::= reference[IDENT] ( metaClass['(',')'])?;
+	ReferenceMetaClassPair ::= reference[IDENT] (":" metaClass[IDENT])?;
 	
 	AttributeMapping ::= roleAttribute[IDENT] "->" classAttribute[IDENT];
 }
