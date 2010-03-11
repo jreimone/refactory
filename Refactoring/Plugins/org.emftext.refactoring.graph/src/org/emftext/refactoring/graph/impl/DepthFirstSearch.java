@@ -14,12 +14,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.refactoring.graph.IShortestPathAlgorithm;
-import org.emftext.refactoring.graph.util.GraphUtil;
 import org.emftext.refactoring.graph.util.IPath;
 import org.emftext.refactoring.graph.util.TreeLeaf;
 import org.emftext.refactoring.graph.util.TreeNode;
 import org.emftext.refactoring.graph.util.TreeNodeReferenceLeaf;
 import org.emftext.refactoring.graph.util.TreeParent;
+import org.emftext.refactoring.util.ModelUtil;
 
 /**
  * @author Jan Reimann
@@ -59,7 +59,7 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 		EList<EReference> containments = parent.getEClass().getEAllContainments();
 		if(containments == null || containments.size() == 0){
 			if(parent.getEClass().isAbstract() || parent.getEClass().isInterface()){
-				EList<EClass> subTypes = GraphUtil.getAllSubTypes(parent.getEClass());
+				List<EClass> subTypes = ModelUtil.getAllSubTypes(parent.getEClass());
 				if(subTypes.size() == 0){
 					convertNodeToLeaf(parent, parent.getReference());
 					return;
@@ -168,7 +168,7 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 		EList<EReference> subContainments = eClass.getEAllContainments();
 		if(subContainments == null || subContainments.size() == 0){
 			if(eClass.isAbstract() || eClass.isInterface()){
-				EList<EClass> subTypes = GraphUtil.getAllSubTypes(eClass);
+				List<EClass> subTypes = ModelUtil.getAllSubTypes(eClass);
 				if(subTypes.size() > 0){
 					return new TreeParent(eClass);
 				}

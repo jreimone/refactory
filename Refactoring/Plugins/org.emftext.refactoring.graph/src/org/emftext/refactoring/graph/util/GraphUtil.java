@@ -7,14 +7,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 
 /**
@@ -67,21 +63,21 @@ public class GraphUtil {
 		return null;
 	}
 	
-	/**
-	 * Determines all subtypes from a given <i>supertype</i>.
-	 * @param supertype
-	 * @return a list containg all subtypes or the empty list if <i>supertype</i> has no subtypes
-	 */
-	public static EList<EClass> getAllSubTypes(EClass supertype){
-		EList<EClass> subTypes = new BasicEList<EClass>();
-		EPackage ePackage = supertype.getEPackage();
-		EList<EClassifier> classifiers = ePackage.getEClassifiers();
-		for (EClassifier eClassifier : classifiers) {
-			if(eClassifier instanceof EClass && supertype.isSuperTypeOf((EClass)eClassifier)){
-				subTypes.add((EClass)eClassifier);
-			}
-		}
-		subTypes.remove(supertype);
-		return subTypes;
-	}
+//	/**
+//	 * Determines all subtypes from a given <i>supertype</i>.
+//	 * @param supertype
+//	 * @return a list containg all subtypes or the empty list if <i>supertype</i> has no subtypes
+//	 */
+//	public static EList<EClass> getAllSubTypes(EClass supertype){
+//		EList<EClass> subTypes = new BasicEList<EClass>();
+//		EPackage ePackage = supertype.getEPackage();
+//		EList<EClassifier> classifiers = ePackage.getEClassifiers();
+//		for (EClassifier eClassifier : classifiers) {
+//			if(eClassifier instanceof EClass && supertype.isSuperTypeOf((EClass)eClassifier)){
+//				subTypes.add((EClass)eClassifier);
+//			}
+//		}
+//		subTypes.remove(supertype);
+//		return subTypes;
+//	}
 }
