@@ -6,6 +6,8 @@ package org.emftext.refactoring.test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -13,6 +15,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.util.JavaPostProcessor;
+import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 
 /**
  * @author Jan Reimann
@@ -26,11 +32,20 @@ public class TestUtil {
 		String filePath = file.getAbsolutePath();
 		URI uri = URI.createFileURI(filePath);
 		ResourceSet rs = new ResourceSetImpl();
+		rs.getLoadOptions().putAll(getJavaLoadOptions());
 		Resource resource = rs.getResource(uri, true);
 		assertNotNull(resource);
 		return resource;
 	}
 
+	protected static Map<?, ?> getJavaLoadOptions() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
+		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
+		return map;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T getExpectedModelFromFile(File file, Class<T> expectedType){
 		Resource resource = getResourceFromFile(file);

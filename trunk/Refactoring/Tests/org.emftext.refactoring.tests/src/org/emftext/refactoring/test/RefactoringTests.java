@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +28,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.members.MembersPackage;
+import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
+import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.mopp.JavaResourceFactory;
+import org.emftext.language.java.resource.util.JavaPostProcessor;
+import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -499,8 +505,6 @@ public class RefactoringTests extends TestCase{
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("conference", new ConferenceResourceFactory());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("java", new JavaResourceFactory());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
-
-
 }
