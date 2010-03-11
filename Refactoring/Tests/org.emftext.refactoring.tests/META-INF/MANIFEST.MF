@@ -28,5 +28,6 @@ Require-Bundle: org.junit4,
  org.eclipse.emf.compare.match,
  org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare,
+ org.emftext.language.java.resource,
  org.emftext.language.java.resource.java
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
