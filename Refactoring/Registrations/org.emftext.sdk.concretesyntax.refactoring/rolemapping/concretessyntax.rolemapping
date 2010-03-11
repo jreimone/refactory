@@ -1,0 +1,19 @@
+ROLEMODELMAPPING concretessyntax FOR <http://www.emftext.org/sdk/concretesyntax> 
+
+ExtractRule maps <ExtractMethod> { 
+	Extract := Choice ;
+	OrigContainer := Rule {
+		extracts := elements;
+		referer := elements : Containment;
+	};
+	NewContainer := Rule {
+		moved := elements;
+	};
+	ContainerContainer := ConcreteSyntax {
+		source := rules;
+		target := rules;
+	};
+	MovedReference := Containment {
+		containerRef := feature; // feature does not exist yet
+	};
+}
