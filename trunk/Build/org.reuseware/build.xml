@@ -272,9 +272,9 @@
 	<target name="build-emftext-language-components">
 		<property name="emftext.components.version" value="1.2.0"/>
 			
-		<buildplugin name="Primitive Types Core Metamodel"              package="org.emftext.language.primitive_types"      version="0.5.1"/>
-		<buildplugin name="Primitive Types Core Metamodel Edit Support" package="org.emftext.language.primitive_types.edit" version="0.5.1"/>
-		<buildfeature                                                   package="org.emftext.language.primitive_types"      version="0.5.1"/>
+		<buildplugin name="Primitive Types Core Metamodel"              package="org.emftext.language.primitivetypes"      version="0.5.1"/>
+		<buildplugin name="Primitive Types Core Metamodel Edit Support" package="org.emftext.language.primitivetypes.edit" version="0.5.1"/>
+		<buildfeature                                                   package="org.emftext.language.primitivetypes"      version="0.5.1"/>
 
 		<buildplugin name="Template Concepts Metamodel"  
 			package="org.emftext.language.template_concepts"                             version="0.5.1"/>
@@ -295,7 +295,7 @@
 			includes="COPYING,
 			          plugins/org.emftext.language.template_concepts*,
 			          features/org.emftext.language.template_concepts_*,
-                      plugins/org.emftext.language.primitive_types*,
+                      plugins/org.emftext.language.primitivetypes*,
                       features/org.emftext.language.primitive_types_*"/>
 	</target>
 		
@@ -350,12 +350,12 @@
 
 		<!-- Custom Sandwich (Template Language) -->
 		<buildplugin  name="Sandwich Template Language" 
-			package="org.emftext.language.custom_sandwich"                          version="0.5.1"/>
+			package="org.emftext.language.customsandwich"                          version="0.5.1"/>
 		<buildplugin  name="Sandwich Template Language Resource"     
-			package="org.emftext.language.custom_sandwich.resource"                 version="0.5.1"/>
+			package="org.emftext.language.customsandwich.resource"                 version="0.5.1"/>
 
 		<buildplugin  name="Sandwich Template Language Textsyntax"     
-			package="org.emftext.language.custom_sandwich.resource.custom_sandwich" version="0.5.1"/>
+			package="org.emftext.language.customsandwich.resource.customsandwich" version="0.5.1"/>
 		<buildfeature                                
 			package="org.emftext.language.custom_sandwich"                          version="0.5.1" />
 			
@@ -386,8 +386,8 @@
 		<buildfeature                                     package="org.emftext.language.efactory" version="0.1.0"/>
 
 		<!-- Featherweight Java -->
-		<buildplugin name="Featherweight Java Metamodel"  package="org.emftext.language.featherweight_java" version="0.1.0"/>
-		<buildplugin name="Featherweight Java Textsyntax" package="org.emftext.language.featherweight_java.resource.fj" version="0.1.0"/>
+		<buildplugin name="Featherweight Java Metamodel"  package="org.emftext.language.featherweightjava" version="0.1.0"/>
+		<buildplugin name="Featherweight Java Textsyntax" package="org.emftext.language.featherweightjava.resource.fj" version="0.1.0"/>
 		<buildfeature                                     package="org.emftext.language.featherweight_java" version="0.1.0"/>
 		
 		<!-- Feature -->

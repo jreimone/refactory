@@ -37,14 +37,14 @@ of Technology, Germany
    </requires>
 
    <plugin
-         id="org.emftext.language.primitive_types"
+         id="org.emftext.language.primitivetypes"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.primitive_types.edit"
+         id="org.emftext.language.primitivetypes.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"

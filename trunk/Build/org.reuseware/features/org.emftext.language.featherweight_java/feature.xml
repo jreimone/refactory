@@ -41,14 +41,14 @@ of Technology, Germany
    </requires>
 
    <plugin
-         id="org.emftext.language.featherweight_java"
+         id="org.emftext.language.featherweightjava"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
          
    <plugin
-         id="org.emftext.language.featherweight_java.resource.fj"
+         id="org.emftext.language.featherweightjava.resource.fj"
          download-size="0"
          install-size="0"
          version="0.0.0"
