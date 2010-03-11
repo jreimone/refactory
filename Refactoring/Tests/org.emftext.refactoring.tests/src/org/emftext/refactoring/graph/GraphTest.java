@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,6 +20,7 @@ import org.emftext.refactoring.graph.util.IPath;
 import org.emftext.refactoring.graph.util.LinkedListPath;
 import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
 import org.emftext.refactoring.graph.util.TreeNode;
+import org.emftext.refactoring.util.ModelUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class GraphTest{
 	private String path = "/resources/p1.pl0";
 	private Resource resource;
 
-	@Ignore("not yet")
+//	@Ignore("not yet")
 	@Test
 	public void findNodeByNameAndType(){
 //		resource = TestUtil.getResourceInWorkspace(this, path);
@@ -73,7 +73,7 @@ public class GraphTest{
 //	          |__~Condition
 //	          |__~Body
 //	          |__~Expression
-	@Ignore("not yet")
+//	@Ignore("not yet")
 	@Test
 	public void findShortestPathForPL0(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
@@ -120,13 +120,13 @@ public class GraphTest{
 		assertEquals(leaf.getReference().getName(), "members");
 	}
 	
-	@Ignore("not yet")
+//	@Ignore("not yet")
 	@Test
 	public void findShortestPathClassMethodToMethodCallJava(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
-		algo.setOutput(true);
+		algo.setOutput(false);
 		assertNotNull("Default algorithm mustn't be null", algo);
 //		JavaFactory javaFactory = JavaFactory.eINSTANCE;
 		EObject source = MembersFactory.eINSTANCE.createClassMethod();
@@ -177,7 +177,7 @@ public class GraphTest{
 //	          |__~Body
 //	        |__+Assignment
 //	          |__~Expression
-	@Ignore("not yet")
+//	@Ignore("not yet")
 	@Test
 	public void findPathFromProcedureToCallStatementAndRemoveAbstractClassesPL0(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
@@ -206,16 +206,16 @@ public class GraphTest{
 		assertEquals("Both path's must be the same, especially without abstract classes", expectedPath, path);
 	}
 	
-	@Ignore("not yet")
+//	@Ignore("not yet")
 	@Test
 	public void getAllSubTypesForAbstractSuperclass(){
 		EClass abstractSuper = (EClass) PL0Factory.eINSTANCE.getPL0Package().getEClassifier("Statement");
-		EList<EClass> subTypes = GraphUtil.getAllSubTypes(abstractSuper);
+		List<EClass> subTypes = ModelUtil.getAllSubTypes(abstractSuper);
 		assertNotNull("Metaclass Statement must have 4 subtypes", subTypes);
 		assertEquals("Metaclass Statement must have 4 subtypes", 4, subTypes.size());
 	}
 	
-	@Ignore("not yet")
+//	@Ignore("not yet")
 	@Test
 	public void findPathOptionalTermToTermPL0(){
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
