@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -37,6 +38,36 @@ public class ModelUtil {
 	}
 
 	/**
+	 * Determines all subtypes from a given <i>supertype</i>.
+	 * 
+	 * @param supertype
+	 * @return a list containg all subtypes or the empty list if <i>supertype</i> has no subtypes
+	 */
+	public static List<EClass> getAllSubTypes(EClass supertype){
+		EPackage ePackage = supertype.getEPackage();
+		EPackage superPackage = (EPackage) EcoreUtil.getRootContainer(ePackage);
+		List<EClass> subTypes = getSubTypesInPackage(supertype, superPackage);
+		subTypes.remove(supertype);
+		return subTypes;
+	}
+
+	private static List<EClass> getSubTypesInPackage(EClass supertype, EPackage ePackage) {
+		EList<EClassifier> classifiers = ePackage.getEClassifiers();
+		List<EClass> subTypes = new ArrayList<EClass>();
+		for (EClassifier eClassifier : classifiers) {
+			if(eClassifier instanceof EClass && supertype.isSuperTypeOf((EClass)eClassifier)){
+				subTypes.add((EClass)eClassifier);
+			}
+		}
+		List<EPackage> subPackages = ePackage.getESubpackages();
+		for (EPackage subPackage : subPackages) {
+			List<EClass> subTypesInPackage = getSubTypesInPackage(supertype, subPackage);
+			subTypes.addAll(subTypesInPackage);
+		}
+		return subTypes;
+	}
+	
+	/**
 	 * Creates an instance of the given {@link EClass} with {@link EcoreUtil#create(EClass)} and then
 	 * creates all obligatory structural features.
 	 * 
@@ -44,6 +75,9 @@ public class ModelUtil {
 	 * @return
 	 */
 	public static EObject create(EClass clazz){
+		if(clazz.isAbstract()){
+			return null;
+		}
 		EObject instance = EcoreUtil.create(clazz);
 		createObligatories(instance);
 		return instance;
