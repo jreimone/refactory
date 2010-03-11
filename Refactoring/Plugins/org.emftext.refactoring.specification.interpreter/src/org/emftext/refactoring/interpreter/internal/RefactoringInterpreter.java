@@ -37,8 +37,11 @@ import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.rolemapping.RolemappingFactory;
+import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
@@ -230,7 +233,11 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 					EObject targetObject = selection.get(0);
 					ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
 					RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
-					return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject);
+					List<ReferenceMetaClassPair> referencePairs = null;
+					if(relationMapping != null){
+						referencePairs = relationMapping.getReferenceMetaClassPair();
+					}
+					return createPath(targetObject, referencePairs, childObject);
 				}
 			} else {
 				// TODO ask the user
@@ -266,7 +273,11 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		} else {
 			childObject = ModelUtil.create(childClass);
 		}
-		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), childObject);
+		List<ReferenceMetaClassPair> referencePairs = null;
+		if(relationMapping != null){
+			referencePairs = relationMapping.getReferenceMetaClassPair();
+		}
+		return createPath(targetObject, referencePairs, childObject);
 	}
 
 	private List<? extends EObject> getFromReferenceObject(FromClause from){
@@ -308,27 +319,30 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			}
 		} else {
 			// add with path
-			EList<EReference> references = relationMapping.getReferences();
-			List<EReference> tempList = new LinkedList<EReference>();
-			for (EReference eReference : references) {
-				tempList.add(eReference);
-			}
-			return createPath(parentObject, references, childObject);
+//			EList<EReference> references = relationMapping.getReferences();
+//			List<EReference> tempList = new LinkedList<EReference>();
+//			for (EReference eReference : references) {
+//				tempList.add(eReference);
+//			}
+			return createPath(parentObject, relationMapping.getReferenceMetaClassPair(), childObject);
 		}
 		return false;
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean createPath(EObject parent, List<EReference> remainingReferences, EObject child){
+	private boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child){
 		if(remainingReferences == null){
 			IShortestPathAlgorithm algo = (new PathAlgorithmFactory()).getAlgorithm();
 			List<IPath> paths = algo.calculatePaths(parent, child);
 			if(paths != null && paths.size() > 0){
 				IPath path = paths.get(0);
 				path.removeAbstractEClasses();
-				List<EReference> references = new LinkedList<EReference>();
+				List<ReferenceMetaClassPair> references = new LinkedList<ReferenceMetaClassPair>();
 				for (int i = 1; i < path.size(); i++) {
-					references.add(path.get(i).getReference());
+					ReferenceMetaClassPair referencePair = RolemappingFactory.eINSTANCE.createReferenceMetaClassPair();
+					referencePair.setMetaClass(path.get(i).getEClass());
+					referencePair.setReference(path.get(i).getReference());
+					references.add(referencePair);
 				}
 				return createPath(parent, references, child);
 			} else {
@@ -336,25 +350,31 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 				return false;
 			}
 		} else if(remainingReferences.size() == 1){
-			EReference reference = remainingReferences.get(0);
+			ReferenceMetaClassPair referencePair = remainingReferences.get(0);
 			try{
-				if(reference.isMany()){
-					Object feature = parent.eGet(reference);
+				if(referencePair.getReference().isMany()){
+					Object feature = parent.eGet(referencePair.getReference());
 					return ((List<EObject>) feature).add(child);
 				} else {
-					parent.eSet(reference, child);
+					parent.eSet(referencePair.getReference(), child);
 					return true;
 				}
 			} catch (Exception e) {
 				RegistryUtil.log("Couldn't set feature " + child + " for " + parent, IStatus.ERROR);
+				e.printStackTrace();
 				return false;
 			}
 		} else {
-			EReference reference = remainingReferences.get(0);
-			remainingReferences.remove(reference);
-			Object feature = parent.eGet(reference);
-			EClass tempParentClass = reference.getEContainingClass();
-			EObject tempParent = ModelUtil.create(tempParentClass);
+			ReferenceMetaClassPair referencePair = remainingReferences.get(0);
+			remainingReferences.remove(referencePair);
+			Object feature = parent.eGet(referencePair.getReference());
+			EClass tempParentClass = referencePair.getReference().getEContainingClass();
+			EObject tempParent = null;
+			if(tempParentClass.isAbstract()){
+				tempParent = ModelUtil.create(referencePair.getMetaClass());
+			} else {
+				tempParent = ModelUtil.create(tempParentClass);
+			}
 			((List<EObject>) feature).add(tempParent);
 			return createPath(tempParent, remainingReferences, child);
 		}
@@ -394,7 +414,11 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		} 
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
 		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(sourceRole);
-		return createPath(targetObject, (relationMapping == null) ? null : relationMapping.getReferences(), sourceObject);
+		List<ReferenceMetaClassPair> referencePairs = null;
+		if(relationMapping != null){
+			referencePairs = relationMapping.getReferenceMetaClassPair();
+		}
+		return createPath(targetObject, referencePairs, sourceObject);
 	}
 
 	/* (non-Javadoc)
