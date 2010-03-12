@@ -139,7 +139,6 @@ public class RefactoringInterpreterTest extends TestClass{
 			RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 			// nur so viele nicht match-baren elemente wie es instructions im refspec gibt
 			assertTrue(unmatches.size() == refSpec.getInstructions().size());
-			
 			Resource expectedResource = getResourceByPattern(CREATE, true);
 			EObject expectedModel = TestUtil.getModelFromResource(expectedResource);
 			matchModel = MatchService.doMatch(expectedModel, refactoredModel, Collections.<String, Object>emptyMap());
