@@ -5,7 +5,7 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             class="org.emftext.refactoring.ui.RefactoringMenuContributor"
-            locationURI="popup:org.eclipse.ui.popup.any">
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
       </menuContribution>
    </extension>
 
