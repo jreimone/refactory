@@ -1,19 +1,19 @@
 ROLEMODELMAPPING PL0Mapping FOR <http://www.emftext.org/language/pl0> 
 
 ExtractProcedure maps <ExtractMethod> { 
-	OrigContainer -> Body {
-		extracts : statements;	
+	OrigContainer := Body {
+		extracts := statements;	
 	}; 
-	Extract -> Statement; 
-	NewContainer -> ProcedureDeclaration (newName -> name){
-		moved : block -> body -> statements;
+	Extract := Statement; 
+	NewContainer := ProcedureDeclaration (newName -> name){
+		moved := block -> body -> statements;
 	} ; 
-	MovedReference -> CallStatement {
-		containerRef : procedure;
+	MovedReference := CallStatement {
+		containerRef := procedure;
 	}; 
-	ContainerContainer -> Block {
-		source : body;
-		target : procedures;
+	ContainerContainer := Block {
+		source := body;
+		target := procedures;
 	} ;
 
 }
