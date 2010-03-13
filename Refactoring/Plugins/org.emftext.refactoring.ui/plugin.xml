@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
-	<!-- Register context menu -->
-	<extension point="org.eclipse.ui.popupMenus">
-		<viewerContribution
-        	id="org.emftext.refactoring.ui.viewerContribution"
-			targetID="org.emftext.sdk.concretesyntax.resource.cs.EditorContext">
-			<action
-         		class="org.emftext.refactoring.ui.RefactoringAction"
-         		id="org.emftext.refactoring.ui.refactor_action"
-         		label="EMF Refactor"
-         		menubarPath="additions">
-			</action>
-		</viewerContribution>
-	</extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            class="org.emftext.refactoring.ui.RefactoringMenuContributor"
+            locationURI="popup:org.eclipse.ui.popup.any">
+      </menuContribution>
+   </extension>
 
 </plugin>
