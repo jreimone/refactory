@@ -4,6 +4,7 @@
 package org.emftext.refactoring.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -66,7 +67,8 @@ public class ModelUtil {
 		}
 		return subTypes;
 	}
-	
+
+
 	/**
 	 * Creates an instance of the given {@link EClass} with {@link EcoreUtil#create(EClass)} and then
 	 * creates all obligatory structural features.
@@ -74,12 +76,24 @@ public class ModelUtil {
 	 * @param clazz
 	 * @return
 	 */
-	public static EObject create(EClass clazz){
+	public synchronized static EObject create(EClass clazz){
+		hackList = new ArrayList<EClass>();
+		EObject createe = createHack(clazz);
+		return createe;
+	}
+
+	private static List<EClass> hackList;
+
+	private static EObject createHack(EClass clazz){
 		if(clazz.isAbstract()){
 			return null;
 		}
 		EObject instance = EcoreUtil.create(clazz);
-		createObligatories(instance);
+		if(!hackList.contains(clazz)){
+			hackList.add(clazz);
+			createObligatories(instance);
+			return instance;
+		}
 		return instance;
 	}
 
@@ -99,7 +113,12 @@ public class ModelUtil {
 	 * 
 	 * @param instance
 	 */
-	public static void createObligatories(EObject instance){
+	private static void createObligatories(EObject instance){
+		//////////////////////////////////////////////////////////////////////////////
+		// TODO  here is a place were to call the MissingInformationProvider /////////
+		//////// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! /////////
+		//////// until now I must kind of hack that no endless loops occur   /////////
+		//////////////////////////////////////////////////////////////////////////////
 		EClass clazz = instance.eClass();
 		List<EStructuralFeature> features = clazz.getEAllStructuralFeatures();
 		for (EStructuralFeature feature : features) {
@@ -107,7 +126,7 @@ public class ModelUtil {
 				int min = feature.getLowerBound();
 				if(min >= 1){
 					if(feature.isMany()){
-
+						// TODO add add new feature 
 					} else {
 						Object defaultValue = feature.getDefaultValue();
 						if(defaultValue != null){
@@ -121,7 +140,7 @@ public class ModelUtil {
 									instance.eSet(feature, name);
 								}
 							} else if(classifier instanceof EClass){
-								EObject child = create((EClass) classifier);
+								EObject child = createHack((EClass) classifier);
 								instance.eSet(feature, child);
 							}
 						}
@@ -209,6 +228,25 @@ public class ModelUtil {
 			}
 		}
 		return filteredModel;
+	}
+
+	/**
+	 * Filters a given list of {@link EObject}s by the given {@link EClass metaClasses}. If an object's {@link EObject#eClass() metaclass}
+	 * is contained in <code>metaClasses</code> then it will be added into the result.
+	 * 
+	 * @param objects the object list to filter by metaclasses
+	 * @param metaClasses the metaclasses to check against
+	 * @return a filtered list
+	 */
+	public static List<? extends EObject> filterObjectsByTypes(List<? extends EObject> objects, EClass... metaClasses){
+		List<EClass> classes = Arrays.asList(metaClasses);
+		List<EObject> filteredList = new LinkedList<EObject>();
+		for (EObject object : objects) {
+			if(classes.contains(object.eClass())){
+				filteredList.add(object);
+			}
+		}
+		return filteredList;
 	}
 
 	/**

@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.util;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.Mapping;
@@ -44,7 +46,7 @@ public class RoleUtil {
 		}
 		return appliedRoleSet;
 	}
-	
+
 	/**
 	 * Returns a list containing all possible mappings having a minimal procentual equality given by 
 	 * <code>minEquality</code>. To ensure that only mappings will be determined from which all roles are
@@ -66,7 +68,7 @@ public class RoleUtil {
 		}
 		return possibleMappings;
 	}
-	
+
 	/**
 	 * Does the same like {@link RoleUtil#getPossibleMappingsForSelection(List, RoleMappingModel, double)} but only compares
 	 * Roles having the modifier {@link RoleModifier#INPUT}.
@@ -88,9 +90,9 @@ public class RoleUtil {
 		}
 		return possibleMappings;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Calculates the procentual equality between the applied roles of the given objects and the
 	 * roles mapped in the given mapping. If all roles of the mapping were applied onto the objects
@@ -142,7 +144,7 @@ public class RoleUtil {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Returns all roles mapped in the given mapping.
 	 * 
@@ -153,7 +155,7 @@ public class RoleUtil {
 		EcoreUtil.resolveAll(mapping.getMappedRoleModel());
 		return mapping.getAllMappedRoles();
 	}
-	
+
 	/**
 	 * Returns all roles of the given mapping having the modifier {@link RoleModifier#INPUT}.
 	 * 
@@ -170,7 +172,7 @@ public class RoleUtil {
 		}
 		return inputRoles;
 	}
-	
+
 	/**
 	 * Calculates the procentual equality of the given input and all roles of the given mapping having
 	 * the modifier {@link RoleModifier#INPUT}. If all input roles of the mapping are contained in the
@@ -185,6 +187,43 @@ public class RoleUtil {
 		Set<Role> appliedRoles = getAppliedRoles(input, mapping);
 		return getProcentualRolesEquality(inputRoles, appliedRoles);
 	}
+	
+	/**
+	 * Filters the given list of {@link EObject}s by the {@link EClass}es to which the input roles of the given
+	 * <code>mapping</code> where mapped.
+	 * 
+	 * @see RoleModifier#INPUT
+	 * @param objects
+	 * @param mapping
+	 * @return
+	 */
+	public static List<? extends EObject> filterObjectsByInputRoles(List<? extends EObject> objects, Mapping mapping){
+		List<Role> inputRoles = getAllInputRoles(mapping);
+		return filterObjectsByRoles(objects, mapping, inputRoles.toArray(new Role[0]));
+	}
+
+	/**
+	 * Returns a the given list of {@link EObject}s filtered by the given <code>roles</code> how they are
+	 * mapped to {@link EClass}es in the given <code>mapping</code>
+	 * 
+	 * @param objects
+	 * @param mapping
+	 * @param roles
+	 * @return
+	 */
+	public static List<? extends EObject> filterObjectsByRoles(List<? extends EObject> objects, Mapping mapping, Role... roles){
+		List<Role> roleList = Arrays.asList(roles);
+		List<EObject> filteredList = new LinkedList<EObject>();
+		for (EObject eObject : objects) {
+			List<Role> appliedRoles = mapping.getMappedRolesForEObject(eObject);
+			for (Role role : appliedRoles) {
+				if(roleList.contains(role)){
+					filteredList.add(eObject);
+				}
+			}
+		}
+		return filteredList;
+	}
 
 	/**
 	 * Returns the first common {@link EObject} in paths to root, as calculated by {@link ModelUtil#getPathToRoot(EObject)},
@@ -194,6 +233,16 @@ public class RoleUtil {
 	 */
 	public static EObject getFirstCommonObjectWithRoleFromPaths(Role role, Mapping mapping, List<? extends EObject>... paths){
 		List<List<? extends EObject>> sortedPaths = ModelUtil.sortPathsBySize(paths);
+		if(sortedPaths.size() == 1){
+			List<? extends EObject> path = sortedPaths.get(0);
+			for (EObject object : path) {
+				EList<Role> roles = mapping.getMappedRolesForEObject(object);
+				if(roles.contains(role)){
+					return object;
+				}
+			}
+			return null;
+		}
 		for (int i = 0; i < sortedPaths.size(); i++) {
 			List<? extends EObject> path = sortedPaths.get(i);
 			for (EObject eObject : path) {
