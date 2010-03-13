@@ -50,7 +50,9 @@ public class RefactoringUtil {
 					Object feature = parent.eGet(referencePair.getReference());
 					return ((List<EObject>) feature).add(child);
 				} else {
-					parent.eSet(referencePair.getReference(), child);
+					if(child != null){
+						parent.eSet(referencePair.getReference(), child);
+					}
 					return true;
 				}
 			} catch (Exception e) {
