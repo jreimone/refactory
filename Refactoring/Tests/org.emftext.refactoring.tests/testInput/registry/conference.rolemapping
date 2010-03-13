@@ -2,9 +2,16 @@ ROLEMODELMAPPING conference FOR <http://www.emftext.org/language/conference>
 
 ExtractTrack maps <ExtractMethod> { 
 	Extract := Slot;
-	OrigContainer := Track;
-	NewContainer := Track;
-	ContainerContainer := Conference;
+	OrigContainer := Track{
+		extracts := slots;
+	};
+	NewContainer := Track {
+		moved := slots;
+	};
+	ContainerContainer := Conference{
+		source := elements:Track;
+		target := elements:Track;
+	};
 } 
 
 CreateTrackTest maps <platform:/resource/org.emftext.refactoring.tests/testInput/registry/CREATEcommand.rolestext> {
