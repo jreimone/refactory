@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-	<!-- Register role mappings -->
-	<extension point="org.emftext.refactoring.rolemapping">
-		<rolemapping
-			rolemapping_resource="rolemapping/concretessyntax.rolemapping">
-		</rolemapping>
-	</extension>
 
 	<!-- Register context menu -->
-	<!--
 	<extension point="org.eclipse.ui.popupMenus">
 		<viewerContribution
         	id="org.emftext.refactoring.ui.viewerContribution"
@@ -22,6 +15,5 @@
 			</action>
 		</viewerContribution>
 	</extension>
-	-->
 
 </plugin>
