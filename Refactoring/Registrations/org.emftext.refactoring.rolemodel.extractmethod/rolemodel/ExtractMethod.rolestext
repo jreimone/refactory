@@ -6,7 +6,7 @@ RoleModel ExtractMethod {
 	optional ROLE MovedReference;
 	
 	transitive : OrigContainer [1..1] <>- Extract extracts [0..-1];
-	transitive : OrigContainer [1..1] <>- MovedReference [1..1];
+	transitive : OrigContainer [1..1] <>- MovedReference referer [1..1];
 	
 	transitive :NewContainer [1..1] <>- Extract moved [0..-1];
 	
