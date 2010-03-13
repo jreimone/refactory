@@ -74,8 +74,9 @@ public class Refactorer implements IRefactorer {
 		if(mapping == null){
 			return null;
 		}
+		List<? extends EObject> filteredElements = RoleUtil.filterObjectsByInputRoles(currentSelection, mapping);
 		IRefactoringInterpreter interpreter = interpreterMap.get(mapping);
-		interpreter.setInput(currentSelection);
+		interpreter.setInput(filteredElements);
 		EObject refactoredModel = null;
 		if(interpreter != null){
 			refactoredModel = interpreter.interprete(copy);
