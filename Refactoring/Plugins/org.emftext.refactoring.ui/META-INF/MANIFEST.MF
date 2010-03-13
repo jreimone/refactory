@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ui
+Bundle-Name: UI Contributions
 Bundle-SymbolicName: org.emftext.refactoring.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.emf.ecore,
@@ -8,5 +8,6 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.ui,
  org.eclipse.ui.editors,
  org.eclipse.jface.text,
- org.emftext.access
+ org.emftext.access,
+ org.eclipse.core.expressions
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
