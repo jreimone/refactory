@@ -9,6 +9,8 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RolemappingFactory;
 import org.emftext.refactoring.graph.IShortestPathAlgorithm;
@@ -50,14 +52,18 @@ public class RefactoringUtil {
 					Object feature = parent.eGet(referencePair.getReference());
 					return ((List<EObject>) feature).add(child);
 				} else {
-					if(child != null){
-						parent.eSet(referencePair.getReference(), child);
+					if(child != null && referencePair.getReference() != null){
+						EcoreUtil.resolveAll(referencePair.getMetaClass());
+						EcoreUtil.resolveAll(referencePair.getReference());
+						EReference reference = referencePair.getReference();
+						if(reference.getEReferenceType().isSuperTypeOf(child.eClass())){
+							parent.eSet(referencePair.getReference(), child);
+						}
 					}
 					return true;
 				}
 			} catch (Exception e) {
-				RegistryUtil.log("Couldn't set feature " + child + " for " + parent, IStatus.ERROR);
-				e.printStackTrace();
+				RegistryUtil.log("Couldn't set feature " + child + " for " + parent, IStatus.ERROR, e);
 				return false;
 			}
 		} else {
@@ -69,7 +75,7 @@ public class RefactoringUtil {
 				featureClass = referencePair.getReference().getEReferenceType();
 			}
 			if(featureClass.isAbstract()){
-				// TODO ask user
+				// TODO ask user or use MissingInformationProvider
 				return false;
 			}
 			EObject featureObject = ModelUtil.create(featureClass);

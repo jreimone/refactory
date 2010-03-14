@@ -78,4 +78,10 @@ public interface IRefactorer {
 	 * @return
 	 */
 	public List<Mapping> getPossibleMappings(double minEquality);
+	
+	/**
+	 * Returns <code>false</code> if no errors occured while refactoring. 
+	 * @return
+	 */
+	public boolean didErrorsOccur();
 }
