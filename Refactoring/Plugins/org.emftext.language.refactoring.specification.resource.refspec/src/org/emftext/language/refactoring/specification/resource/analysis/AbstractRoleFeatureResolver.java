@@ -4,14 +4,11 @@
 package org.emftext.language.refactoring.specification.resource.analysis;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.roles.MultiplicityRelation;
-import org.emftext.language.refactoring.roles.Relation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleFeature;
@@ -49,10 +46,12 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 		}
 		RefactoringSpecification refSpec = (RefactoringSpecification) parent;
 		EList<Variable> variables = refSpec.getDeclaredVariables();
+		EObject interpretationContext = null;
 		Variable var = null;
 		for (Variable variable : variables) {
 			if(variable.getName().equals(roleString)){
 				var = variable;
+				interpretationContext = variable;
 				break;
 			}
 		}
@@ -63,6 +62,7 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 			for (Role role : roles) {
 				if(role.getName().equals(roleString)){
 					matchedRole = role;
+					interpretationContext = role;
 					break;
 				}
 			}
@@ -83,6 +83,7 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 		for (RoleFeature feature : features) {
 			if(feature instanceof RoleAttribute){
 				if(((RoleAttribute) feature).getName().equals(featureString)){
+					((RoleAttribute) feature).setInterpretationContext(interpretationContext);
 					result.addMapping(identifier, (FeatureType) feature);
 					return;
 				}
