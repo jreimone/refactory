@@ -2,10 +2,6 @@ package org.emftext.refactoring.ui;
 
 import java.util.List;
 
-import org.eclipse.core.expressions.EvaluationResult;
-import org.eclipse.core.expressions.Expression;
-import org.eclipse.core.expressions.IEvaluationContext;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.action.Action;
@@ -16,7 +12,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
@@ -48,7 +43,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		IWorkbenchPart activePart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if(!activePart.equals(activeEditor)){
-			System.out.println("Workbenchpart '" + activePart.getTitle() + "' is not an editor");
+			System.out.println("Workbenchpart '" + activePart.getTitle() + "' is not the active editor");
 			return;
 		}
 		ISelectionProvider selectionProvider = activeEditor.getEditorSite().getSelectionProvider();
@@ -65,7 +60,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			selectedElements = (List<EObject>)temp;
 			resource = selectedElements.get(0).eResource();
 		} else if(selection instanceof ITextSelection){
-//			if(EMFTextAccessProxy.isAccessibleWith(activeEditor, IEditor.class)){
+//			if(EMFTextAccessProxy.isAccessibleWith(activeEditor.getClass(), IEditor.class)){
 				try {
 
 					IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(activeEditor, IEditor.class);
