@@ -40,13 +40,13 @@ public class CREATEInterpreter {
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
 	
-	public CREATEInterpreter(RefactoringInterpreterContext context, Mapping mapping){
-		this.context = context;
+	public CREATEInterpreter(Mapping mapping){
 		this.mapping = mapping;
 	}
 	
 	public Boolean interpreteCREATE(CREATE object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
 		this.selection = selection;
+		this.context = context;
 		Role childRole = object.getSourceRoleReference().getRole();
 		Variable sourceVar = object.getVarDeclaration();
 		if(sourceVar != null){

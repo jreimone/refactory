@@ -145,10 +145,10 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 */
 	public EObject interprete(boolean copy) {
 		context = new RefactoringInterpreterContext();
-		create = new CREATEInterpreter(context, mapping);
+		create = new CREATEInterpreter(mapping);
 		set = new SETInterpreter(mapping);
 		move = new MOVEInterpreter();
-		assign = new ASSIGNInterpreter();
+		assign = new ASSIGNInterpreter(mapping);
 		EObject initialModel = model;
 		if(copy){
 			Copier copier = new Copier();
