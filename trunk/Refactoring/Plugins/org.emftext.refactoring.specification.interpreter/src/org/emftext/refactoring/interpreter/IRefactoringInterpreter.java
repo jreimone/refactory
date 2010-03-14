@@ -45,4 +45,10 @@ public interface IRefactoringInterpreter {
 	 * @param currentSelection
 	 */
 	public void setInput(List<? extends EObject> currentSelection);
+	
+	/**
+	 * Returns <code>false</code> if no errors occured while refactoring. 
+	 * @return
+	 */
+	public boolean didErrorsOccur();
 }

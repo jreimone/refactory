@@ -56,6 +56,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	private SETInterpreter set;
 	private MOVEInterpreter move;
 	private ASSIGNInterpreter assign;
+	private Boolean occuredErrors;
 
 	@Override
 	public Boolean interprete(EObject object, RefactoringInterpreterContext context) {
@@ -158,7 +159,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		model = initialModel;
 		context.setInitialContext(model, selection, roleMapping, mapping);
 		initInterpretationStack();
-		interprete(context);
+		occuredErrors = !interprete(context);
 		return getModel();
 	}	
 
@@ -230,5 +231,12 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 
 	public EObject getOriginalModel() {
 		return originalModel;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#occuredErrors()
+	 */
+	public boolean didErrorsOccur() {
+		return occuredErrors;
 	}
 }

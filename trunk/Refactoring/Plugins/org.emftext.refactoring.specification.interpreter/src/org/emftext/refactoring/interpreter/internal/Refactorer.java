@@ -31,6 +31,7 @@ public class Refactorer implements IRefactorer {
 	private List<? extends EObject> currentSelection;
 	private Map<Mapping, IRefactoringInterpreter> interpreterMap;
 	private IRefactoringSpecificationRegistry registry;
+	private boolean occuredErrors;
 
 	public Refactorer(EObject model, RoleMappingModel roleMapping){
 		this.model = model;
@@ -70,16 +71,34 @@ public class Refactorer implements IRefactorer {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#refactor(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, boolean)
 	 */
-	public EObject refactor(Mapping mapping, boolean copy) {
+	public EObject refactor(Mapping mapping, boolean copy){
 		if(mapping == null){
 			return null;
 		}
 		List<? extends EObject> filteredElements = RoleUtil.filterObjectsByInputRoles(currentSelection, mapping);
+		List<EObject> elementsToRemove = new LinkedList<EObject>();
+		for (EObject child : filteredElements) {
+			List<EObject> othersList = new LinkedList<EObject>();
+			for (EObject eObject : filteredElements) {
+				if(!eObject.equals(child)){
+					othersList.add(eObject);
+				}
+			}
+			for (EObject parent : othersList) {
+				if(EcoreUtil.isAncestor(parent, child)){
+					elementsToRemove.add(child);
+				}
+			}
+		}
+		for (EObject child : elementsToRemove) {
+			filteredElements.remove(child);
+		}
 		IRefactoringInterpreter interpreter = interpreterMap.get(mapping);
 		interpreter.setInput(filteredElements);
 		EObject refactoredModel = null;
 		if(interpreter != null){
 			refactoredModel = interpreter.interprete(copy);
+			occuredErrors = interpreter.didErrorsOccur();
 		}
 		return refactoredModel;
 	}
@@ -108,5 +127,12 @@ public class Refactorer implements IRefactorer {
 	
 	public List<Mapping> getPossibleMappings(double minEquality){
 		return RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMapping, minEquality);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IRefactorer#occuredErrors()
+	 */
+	public boolean didErrorsOccur() {
+		return occuredErrors;
 	}
 }
