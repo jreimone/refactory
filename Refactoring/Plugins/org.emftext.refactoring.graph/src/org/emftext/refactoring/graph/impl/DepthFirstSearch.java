@@ -51,12 +51,12 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 		if(output){
 			System.err.println(root.getEClass().getName());
 		}
-		createContainmentTree(root);
+		createReferenceTree(root);
 		return paths;
 	}
 
-	private void createContainmentTree(TreeNode parent){
-		EList<EReference> containments = parent.getEClass().getEAllContainments();
+	private void createReferenceTree(TreeNode parent){
+		EList<EReference> containments = parent.getEClass().getEAllReferences();
 		if(containments == null || containments.size() == 0){
 			if(parent.getEClass().isAbstract() || parent.getEClass().isInterface()){
 				List<EClass> subTypes = ModelUtil.getAllSubTypes(parent.getEClass());
@@ -152,7 +152,7 @@ public class DepthFirstSearch implements IShortestPathAlgorithm {
 		} else {
 			if(child instanceof TreeParent){
 				outputEClassInTree(child, System.err, "+");
-				createContainmentTree(child);
+				createReferenceTree(child);
 			} else {
 				outputEClassInTree(child, System.err, "]");
 			}
