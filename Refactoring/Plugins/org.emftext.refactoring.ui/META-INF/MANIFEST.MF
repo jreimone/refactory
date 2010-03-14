@@ -17,3 +17,4 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.emftext.language.refactoring.specification,
  org.eclipse.emf.ecore.change
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.emftext.refactoring.ui
