@@ -142,11 +142,11 @@
 			<generate-metamodel-code plugin="org.emftext.language.owl" model="owl" secondaryExtension=".text" generateEditProject="true" dir="${ontomopp.plugins.dir}" />
 			<generate-metamodel-code plugin="org.emftext.language.java" model="java" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.java_properties" model="java_properties" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.java_templates" model="java_templates" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.java.ejava" model="eJava" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.java.javabehavior4uml" model="JavaBehavior4UML" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.java.properties" model="properties" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.java.reusejava" model="reusejava" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.java.jtemplates" model="jtemplates" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.java.treejava" model="treejava" generateEditProject="true" />
 			<generate-metamodel-code plugin="org.emftext.language.parametercheck" model="parametercheck" generateEditProject="false" />
 			<generate-metamodel-code plugin="org.emftext.language.petrinet" model="petrinet" generateEditProject="false" />
@@ -217,11 +217,11 @@
 		<generate-text-resource plugin="org.emftext.language.formular" syntax="FormularMM" resourcePlugin="org.emftext.language.formular.resource.formular" />
 		<generate-text-resource plugin="org.emftext.language.java" syntax="java" resourcePlugin="org.emftext.language.java.resource.java" />
 		<generate-text-resource plugin="org.emftext.language.java_properties" syntax="java_properties" resourcePlugin="org.emftext.language.java_properties.resource.java_properties" />
-		<generate-text-resource plugin="org.emftext.language.java_templates" syntax="java_templates" resourcePlugin="org.emftext.language.java_templates.resource.java_template" />
 		<generate-text-resource plugin="org.emftext.language.java.ejava" syntax="eJava" resourcePlugin="org.emftext.language.java.ejava.resource.ejava" />
 		<generate-text-resource plugin="org.emftext.language.java.javabehavior4uml" syntax="JavaBehavior4UML" resourcePlugin="org.emftext.language.java.javabehavior4uml.resource.javabehavior" />
 		<generate-text-resource plugin="org.emftext.language.java.properties" syntax="properties" resourcePlugin="org.emftext.language.java.properties.resource.propjava"/>
 		<generate-text-resource plugin="org.emftext.language.java.reusejava" syntax="reusejava" resourcePlugin="org.emftext.language.java.reusejava.resource.reusejava" />
+		<generate-text-resource plugin="org.emftext.language.java.jtemplates" syntax="jtemplates" resourcePlugin="org.emftext.language.java.jtemplates.resource.javatemplate" />
 		<generate-text-resource plugin="org.emftext.language.java.treejava" syntax="treejava" resourcePlugin="org.emftext.language.java.treejava.resource.treejava"/>
 		<generate-text-resource plugin="org.emftext.language.km3" syntax="KM3"  resourcePlugin="org.emftext.language.km3.resource.km3" />
 		<generate-text-resource plugin="org.emftext.language.martinfowlerdsl" syntax="martinfowlerdsl" resourcePlugin="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl"/>
