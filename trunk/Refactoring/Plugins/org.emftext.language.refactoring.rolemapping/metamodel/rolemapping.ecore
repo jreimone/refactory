@@ -52,6 +52,9 @@
       </eAnnotations>
       <eParameters name="role" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
     </eOperations>
+    <eOperations name="getAttributeMappingForAttribute" lowerBound="1" eType="#//AttributeMapping">
+      <eParameters name="attribute" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaclass" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>

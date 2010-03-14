@@ -38,6 +38,9 @@
       <genOperations ecoreOperation="rolemapping.ecore#//ConcreteMapping/getRelationMappingForTargetRole">
         <genParameters ecoreParameter="rolemapping.ecore#//ConcreteMapping/getRelationMappingForTargetRole/role"/>
       </genOperations>
+      <genOperations ecoreOperation="rolemapping.ecore#//ConcreteMapping/getAttributeMappingForAttribute">
+        <genParameters ecoreParameter="rolemapping.ecore#//ConcreteMapping/getAttributeMappingForAttribute/attribute"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="rolemapping.ecore#//RelationMapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RelationMapping/relation"/>
