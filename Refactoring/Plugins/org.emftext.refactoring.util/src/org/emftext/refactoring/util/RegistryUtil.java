@@ -52,6 +52,15 @@ public class RegistryUtil {
 		return resources;
 	}
 	
+	public static void log(String message, int status, Exception e){
+		if(e.getStackTrace() != null && e.getStackTrace().length > 0){
+		e.printStackTrace();
+		} else {
+			message = e.getMessage() + "\n" + message;
+		}
+		log(message, status);
+	}
+	
 	public static void log(String message, int status){
 		Level level = null;
 		switch (status) {
