@@ -41,13 +41,14 @@ public class RefactoringAction extends Action {
 			}
 			// now do something with the recorded changes
 			// until then the resource just will be saved as follows 
-
+			change = recorder.endRecording();
+			
 			// save or replace only modified parts 
-			// --> have to wait for Mirkos and Jendriks ideas of replacement and not simply overwrite all contents
+			// --> have to wait for Mirko's and Jendrik's ideas of replacement and not simply overwrite all contents
 			resource.getContents().set(0, refactoredModel);
 			resource.save(null);
 			resource.setModified(true);
-			change = recorder.endRecording();
+			
 		} catch (Exception e) {
 			change = recorder.endRecording();
 			// rollback
