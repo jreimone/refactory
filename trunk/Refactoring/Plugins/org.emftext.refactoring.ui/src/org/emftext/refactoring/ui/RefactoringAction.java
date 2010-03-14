@@ -1,10 +1,14 @@
 package org.emftext.refactoring.ui;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.action.Action;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.util.RegistryUtil;
 
 /**
  * This action can be registered to the context menus of editors
@@ -28,16 +32,29 @@ public class RefactoringAction extends Action {
 	 */
 	@Override
 	public void run() {
-		EObject refactoredModel = refactorer.refactor(mapping, false);
-		// save or replace only modified parts 
-		// --> have to wait for Mirkos and Jendriks ideas of replacement and not simply overwrite all contents
+		ChangeRecorder recorder = new ChangeRecorder(resource.getResourceSet());
+		ChangeDescription change = null;
 		try {
+			EObject refactoredModel = refactorer.refactor(mapping, false);	
+			if(refactorer.didErrorsOccur()){
+				throw new Exception("Some instructions couldn't be invoked");
+			}
+			// now do something with the recorded changes
+			// until then the resource just will be saved as follows 
+
+			// save or replace only modified parts 
+			// --> have to wait for Mirkos and Jendriks ideas of replacement and not simply overwrite all contents
 			resource.getContents().set(0, refactoredModel);
 			resource.save(null);
 			resource.setModified(true);
+			change = recorder.endRecording();
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error while saving refactored model");
+			change = recorder.endRecording();
+			// rollback
+			if(change != null){
+				change.apply();
+			}
+			RegistryUtil.log("Refactoring rolled back because of the stack trace or message above", IStatus.WARNING, e);
 		}
 	}
 }
