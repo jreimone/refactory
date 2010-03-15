@@ -25,7 +25,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ContainmentCommand" abstract="true"
-      eSuperTypes="#//Instruction"/>
+      eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//IndexVariable"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//ContainmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="varDeclaration" eType="#//Variable"
         containment="true" eOpposite="#//Variable/createCommand"/>
@@ -90,4 +92,24 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FromReference" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Context" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IndexAssignmentCommand" abstract="true"
+      eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//IndexVariable" containment="true" eOpposite="#//IndexVariable/indexCommand"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IndexVariable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indexCommand" lowerBound="1"
+        eType="#//IndexAssignmentCommand" eOpposite="#//IndexAssignmentCommand/variable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConcreteIndex" eSuperTypes="#//IndexAssignmentCommand">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FIRST" eSuperTypes="#//ObjectReferenceAssignment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LAST" eSuperTypes="#//ObjectReferenceAssignment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectReferenceAssignment" abstract="true"
+      eSuperTypes="#//IndexAssignmentCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="#//FromReference" containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

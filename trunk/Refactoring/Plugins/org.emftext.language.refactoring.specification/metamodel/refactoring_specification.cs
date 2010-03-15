@@ -31,7 +31,7 @@ TOKENS{
 	DEFINE ML_COMMENT $'/*'.*'*/'$ COLLECT IN comments;
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
-	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
+	DEFINE INTEGER$('1'..'9')('0'..'9')*|'0'$;
 	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
 	
 	DEFINE CONSTANTS $'INPUT'$;
@@ -52,11 +52,15 @@ TOKENSTYLES{
 	"to" COLOR #7F0055, BOLD;
 	"set" COLOR #7F0055, BOLD;
 	"use" COLOR #7F0055, BOLD;
+	"var" COLOR #7F0055, BOLD;
+	"index" COLOR #7F0055, BOLD;
 	"of" COLOR #7F0055, BOLD;
 	"assign" COLOR #7F0055, BOLD;
 	"for" COLOR #7F0055, BOLD;
 	"from" COLOR #7F0055, BOLD;
 	"uptree" COLOR #50F05C, BOLD;
+	"first" COLOR #50F05C, BOLD;
+	"last" COLOR #50F05C, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
 	"LOWER_IDENTIFIER" COLOR #0000FF;
 	"UPPER_IDENTIFIER" COLOR #0000FF;
@@ -67,9 +71,9 @@ RULES{
 	
 	RefactoringSpecification ::= "REFACTORING" #1 name[UPPER_IDENTIFIER] !0 "FOR" #1 usedRoleModel['<','>'] !0 !0 "STEPS" "{" !1 (instructions ";" !0)+ !0 "}"  ;
 	
-	CREATE ::= "create" #1 "new" #1 (varDeclaration #0 ":" #0)? sourceRoleReference #1 "in" #1 targetContext  (#1 "from" #1 from)?;
+	CREATE ::= "create" #1 "new" #1 (varDeclaration #0 ":" #0)? sourceRoleReference #1 "in" #1 targetContext  (#1 "from" #1 from)? ("at" index[LOWER_IDENTIFIER])?;
 	
-	MOVE ::= "move" #1 source #1 "to" #1 target;
+	MOVE ::= "move" #1 source #1 "to" #1 target ("at" index[LOWER_IDENTIFIER])?;
 	
 	SET ::= "set" #1 "use" #1 "of" #1 source #1 "in" #1 target;
 	
@@ -88,4 +92,12 @@ RULES{
 	FromClause ::= operator #0 "(" reference ")" ;
 	
 	UPTREE ::= "uptree";
+	
+	FIRST ::= "var" "index" variable ":=" "first" "(" reference ")";
+	
+	LAST  ::= "var" "index" variable ":=" "last" "(" reference ")";
+	
+	ConcreteIndex ::= "var" "index" variable ":=" index[INTEGER];
+	
+	IndexVariable ::= name[LOWER_IDENTIFIER];
 }
