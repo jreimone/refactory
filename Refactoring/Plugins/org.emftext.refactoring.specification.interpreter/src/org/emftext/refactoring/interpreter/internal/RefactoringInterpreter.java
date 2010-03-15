@@ -14,10 +14,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
+import org.emftext.language.refactoring.refactoring_specification.ConcreteIndex;
 import org.emftext.language.refactoring.refactoring_specification.Context;
+import org.emftext.language.refactoring.refactoring_specification.FIRST;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
 import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.Instruction;
+import org.emftext.language.refactoring.refactoring_specification.LAST;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.RelationReference;
@@ -56,6 +59,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	private SETInterpreter set;
 	private MOVEInterpreter move;
 	private ASSIGNInterpreter assign;
+	private IndexInterpreter indexInterpreter;
+	
 	private Boolean occuredErrors;
 
 	@Override
@@ -145,10 +150,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 */
 	public EObject interprete(boolean copy) {
 		context = new RefactoringInterpreterContext();
+		
 		create = new CREATEInterpreter(mapping);
 		set = new SETInterpreter(mapping);
 		move = new MOVEInterpreter();
 		assign = new ASSIGNInterpreter(mapping);
+		indexInterpreter = new IndexInterpreter();
+		
 		EObject initialModel = model;
 		if(copy){
 			Copier copier = new Copier();
@@ -157,7 +165,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			originalModel = copier.copy(model);
 		}
 		model = initialModel;
-		context.setInitialContext(model, selection, roleMapping, mapping);
+		context.setInitialContext(mapping);
 		initInterpretationStack();
 		occuredErrors = !interprete(context);
 		return getModel();
@@ -216,6 +224,33 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(
 			SET object, RefactoringInterpreterContext context) {
 		return set.interpreteSET(object, context);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ConcreteIndex(org.emftext.language.refactoring.refactoring_specification.ConcreteIndex, java.lang.Object)
+	 */
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ConcreteIndex(
+			ConcreteIndex object, RefactoringInterpreterContext context) {
+		return indexInterpreter.interpreteIndexCommand(object, context, selection);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_FIRST(org.emftext.language.refactoring.refactoring_specification.FIRST, java.lang.Object)
+	 */
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_FIRST(
+			FIRST object, RefactoringInterpreterContext context) {
+		return indexInterpreter.interpreteIndexCommand(object, context, selection);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_LAST(org.emftext.language.refactoring.refactoring_specification.LAST, java.lang.Object)
+	 */
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_LAST(
+			LAST object, RefactoringInterpreterContext context) {
+		return indexInterpreter.interpreteIndexCommand(object, context, selection);
 	}
 
 	/* (non-Javadoc)
