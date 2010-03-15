@@ -153,7 +153,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		
 		create = new CREATEInterpreter(mapping);
 		set = new SETInterpreter(mapping);
-		move = new MOVEInterpreter();
+		move = new MOVEInterpreter(mapping);
 		assign = new ASSIGNInterpreter(mapping);
 		indexInterpreter = new IndexInterpreter();
 		
@@ -214,7 +214,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	@Override
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(
 			MOVE object, RefactoringInterpreterContext context) {
-		return move.interpreteMOVE(object, context);
+		return move.interpreteMOVE(object, context, selection);
 	}
 
 	/* (non-Javadoc)
