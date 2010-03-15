@@ -14,7 +14,8 @@ import org.emftext.language.refactoring.rolemapping.resource.rolemapping.util.Ro
  */
 public enum ERoleMappingModelProblemType {
 	
-	NOT_ALL_ROLES_MAPPED(RolemappingEProblemType.WARNING),
+	NOT_ALL_ROLES_MAPPED(RolemappingEProblemType.ERROR),
+	NOT_ALL_ATTRIBUTES_MAPPED(RolemappingEProblemType.ERROR),
 	DUPLICATE_ROLE_MAPPING(RolemappingEProblemType.ERROR),
 	CHECK_RELATIONS_BETWEEN_ECLASSES(RolemappingEProblemType.WARNING)
 	;

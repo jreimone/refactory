@@ -3,10 +3,12 @@ package org.emftext.language.refactoring.rolemapping.postprocessing;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.emftext.language.refactoring.rolemapping.AttributeMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -14,6 +16,7 @@ import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResource;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.util.RolemappingEObjectUtil;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 
@@ -25,8 +28,9 @@ import org.emftext.language.refactoring.roles.RoleModifier;
  */
 public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 
-	private static final String MAPPED_ROLE_MISSED = "The obligatory role '%1$s' wasn't mapped. It will be asked for at runtime.";
-	private static final String MAPPED_ROLE_UNIQUE = "The role '%1$s' was mapped more than once.";
+	private static final String MAPPED_ROLE_MISSED 			= "The obligatory role '%1$s' has to be mapped.";
+	private static final String MAPPED_ROLE_UNIQUE 			= "The role '%1$s' was mapped more than once.";
+	private static final String MAPPED_ATTRIBUTE_MISSED 	= "The non-optional attribute '%1$s' has to be mapped.";
 	
 	private List<Role> obligatoryRoles;
 	private Set<Role> mappedRoles;
@@ -60,6 +64,32 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 							, ERoleMappingModelProblemType.NOT_ALL_ROLES_MAPPED
 							, String.format(MAPPED_ROLE_MISSED, obligatoryRole.getName())
 							, mapping);
+				}
+			}
+			analyseObligatoryAttributeMappings(resource, mapping);
+		}
+	}
+	
+	private void analyseObligatoryAttributeMappings(RolemappingResource resource, Mapping mapping){
+		List<ConcreteMapping> concreteMappings = mapping.getRoleToMetaelement();
+		for (ConcreteMapping concreteMapping : concreteMappings) {
+			List<AttributeMapping> attributeMappings = concreteMapping.getAttributeMappings();
+			List<RoleAttribute> mappedAttributes = new LinkedList<RoleAttribute>();
+			if(attributeMappings != null){
+				for (AttributeMapping attributeMapping : attributeMappings) {
+					mappedAttributes.add(attributeMapping.getRoleAttribute());
+				}
+			}
+			Role role = concreteMapping.getRole();
+			List<RoleAttribute> attributes = role.getAttributes();
+			for (RoleAttribute attribute : attributes) {
+				if(!attribute.getModifier().contains(RoleModifier.OPTIONAL)){
+					if(!mappedAttributes.contains(attribute)){
+						addProblem(resource
+								, ERoleMappingModelProblemType.NOT_ALL_ATTRIBUTES_MAPPED
+								, String.format(MAPPED_ATTRIBUTE_MISSED, attribute.getName())
+								, concreteMapping);
+					}
 				}
 			}
 		}
