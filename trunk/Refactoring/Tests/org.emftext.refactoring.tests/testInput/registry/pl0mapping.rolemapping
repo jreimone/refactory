@@ -5,7 +5,7 @@ ExtractProcedure maps <ExtractMethod> {
 		extracts := statements;	
 	}; 
 	Extract := Statement; 
-	NewContainer := ProcedureDeclaration  {
+	NewContainer := ProcedureDeclaration (newName -> name)  {
 		moved := block -> body -> statements;
 	} ; 
 	MovedReference := CallStatement {
