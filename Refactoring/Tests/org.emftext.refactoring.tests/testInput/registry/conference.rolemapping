@@ -5,7 +5,7 @@ ExtractTrack maps <ExtractMethod> {
 	OrigContainer := Track{
 		extracts := slots;
 	};
-	NewContainer := Track {
+	NewContainer := Track (newName -> name){
 		moved := slots;
 	};
 	ContainerContainer := Conference{

@@ -11,7 +11,7 @@ ExtractMethod maps <ExtractMethod> {
 		extracts := statements;
 		referer := statements : ExpressionStatement -> expression : MethodCall;
 	};
-	NewContainer := members.ClassMethod{
+	NewContainer := members.ClassMethod (newName -> name){
 		moved := statements;
 	};
 	ContainerContainer := classifiers.Class{
