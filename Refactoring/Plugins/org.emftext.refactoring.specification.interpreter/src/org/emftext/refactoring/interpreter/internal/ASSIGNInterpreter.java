@@ -49,6 +49,9 @@ public class ASSIGNInterpreter {
 	private boolean handleSourceAndTarget(RoleAttribute source, RoleAttribute target){
 		Role sourceRole = source.getAttributeRole();
 		AttributeMapping sourceMapping = mapping.getConcreteMappingForRole(sourceRole).getAttributeMappingForAttribute(source);
+		if(sourceMapping == null){
+			return false;
+		}
 		EObject sourceInterpretationContext = source.getInterpretationContext();
 		EObject sourceObject = null;
 		if(sourceInterpretationContext instanceof Variable){
@@ -62,6 +65,9 @@ public class ASSIGNInterpreter {
 		
 		Role targetRole = target.getAttributeRole();
 		AttributeMapping targetMapping = mapping.getConcreteMappingForRole(targetRole).getAttributeMappingForAttribute(target);
+		if(targetMapping == null){
+			return false;
+		}
 		EObject targetInterpretationContext = target.getInterpretationContext();
 		EObject targetObject = null;
 		if(targetInterpretationContext instanceof Variable){
@@ -93,6 +99,9 @@ public class ASSIGNInterpreter {
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
 		EcoreUtil.resolveAll(concreteMapping);
 		AttributeMapping attMapping = concreteMapping.getAttributeMappingForAttribute(target);
+		if(attMapping == null){
+			return false;
+		}
 		EAttribute classAttribute = attMapping.getClassAttribute();
 		EObject targetObject = null;
 		if(interpretationContext instanceof Variable){

@@ -37,6 +37,9 @@ public class DialogValueProvider implements IAttributeValueProvider, IInputValid
 				, this);
 		this.attribute = attribute;
 		int returnCode = dialog.open();
+		while (returnCode == InputDialog.CANCEL) {
+			returnCode = dialog.open();
+		}
 		value = convertValueIntoObject(dialog.getValue());
 		return value;
 	}
