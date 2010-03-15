@@ -16,6 +16,7 @@ import org.emftext.language.refactoring.refactoring_specification.ConstantsRefer
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
 import org.emftext.language.refactoring.refactoring_specification.FromOperator;
 import org.emftext.language.refactoring.refactoring_specification.FromReference;
+import org.emftext.language.refactoring.refactoring_specification.IndexVariable;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 import org.emftext.language.refactoring.refactoring_specification.UPTREE;
@@ -54,15 +55,15 @@ public class CREATEInterpreter {
 		}
 		TargetContext target = object.getTargetContext();
 		if(target instanceof VariableReference){
-			return handleCREATETargetVariable(context, childRole, target);
+			return handleCREATETargetVariable(context, childRole, target, object.getIndex());
 		}
 		if(target instanceof RoleReference){
-			return handleCREATETargetRole(childRole, (RoleReference) target, object.getFrom(), sourceVar);
+			return handleCREATETargetRole(childRole, (RoleReference) target, object.getFrom(), sourceVar, object.getIndex());
 		}
 		return false;
 	}
 	
-	private Boolean handleCREATETargetRole(Role childRole, RoleReference target, FromClause from, Variable variable) {
+	private Boolean handleCREATETargetRole(Role childRole, RoleReference target, FromClause from, Variable variable, IndexVariable index) {
 		if(from == null){
 			EClass metaclass = mapping.getEClassForRole(childRole);
 			EObject childObject = ModelUtil.create(metaclass);
@@ -76,7 +77,8 @@ public class CREATEInterpreter {
 					if(relationMapping != null){
 						referencePairs = relationMapping.getReferenceMetaClassPair();
 					}
-					return RefactoringUtil.createPath(targetObject, referencePairs, childObject);
+					Integer objectIndex = context.getIndexForVariable(index);
+					return RefactoringUtil.createPath(targetObject, referencePairs, childObject, objectIndex);
 				}
 			} else {
 				// TODO ask the user
@@ -85,14 +87,14 @@ public class CREATEInterpreter {
 			FromOperator operator = from.getOperator();
 			List<? extends EObject> fromObjects = getFromReferenceObject(from);
 			if(operator instanceof UPTREE){
-				return handleFromOperatorUPTREE(childRole, target, fromObjects, variable);
+				return handleFromOperatorUPTREE(childRole, target, fromObjects, variable, index);
 			}
 		}
 		return false;
 	}
 	
 	@SuppressWarnings("unchecked")
-	private boolean handleCREATETargetVariable(RefactoringInterpreterContext context, Role childRole, TargetContext target) {
+	private boolean handleCREATETargetVariable(RefactoringInterpreterContext context, Role childRole, TargetContext target, IndexVariable index) {
 		Variable targetVar = ((VariableReference) target).getVariable();
 		EObject parentObject = context.getEObjectForVariable(targetVar);
 		EClass childClass = mapping.getEClassForRole(childRole);
@@ -115,7 +117,8 @@ public class CREATEInterpreter {
 //			for (EReference eReference : references) {
 //				tempList.add(eReference);
 //			}
-			return RefactoringUtil.createPath(parentObject, relationMapping.getReferenceMetaClassPair(), childObject);
+			Integer objectIndex = context.getIndexForVariable(index);
+			return RefactoringUtil.createPath(parentObject, relationMapping.getReferenceMetaClassPair(), childObject, objectIndex);
 		}
 		return false;
 	}
@@ -141,7 +144,7 @@ public class CREATEInterpreter {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private Boolean handleFromOperatorUPTREE(Role childRole, RoleReference target, List<? extends EObject> fromObjects, Variable variable) {
+	private Boolean handleFromOperatorUPTREE(Role childRole, RoleReference target, List<? extends EObject> fromObjects, Variable variable, IndexVariable index) {
 		Role targetRole = target.getRole();
 		List<?>[] rootPaths = new List<?>[fromObjects.size()];
 		int i = 0;
@@ -164,6 +167,7 @@ public class CREATEInterpreter {
 		if(relationMapping != null){
 			referencePairs = relationMapping.getReferenceMetaClassPair();
 		}
-		return RefactoringUtil.createPath(targetObject, referencePairs, childObject);
+		Integer objectIndex = context.getIndexForVariable(index);
+		return RefactoringUtil.createPath(targetObject, referencePairs, childObject, objectIndex);
 	}
 }

@@ -10,7 +10,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RolemappingFactory;
 import org.emftext.refactoring.graph.IShortestPathAlgorithm;
@@ -25,8 +24,12 @@ import org.emftext.refactoring.util.RegistryUtil;
  */
 public class RefactoringUtil {
 
-	@SuppressWarnings("unchecked")
 	public static boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child){
+		return createPath(parent, remainingReferences, child, null);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child, Integer index){
 		if(remainingReferences == null){
 			IShortestPathAlgorithm algo = (new PathAlgorithmFactory()).getAlgorithm();
 			List<IPath> paths = algo.calculatePaths(parent, child);
@@ -40,7 +43,7 @@ public class RefactoringUtil {
 					referencePair.setReference(path.get(i).getReference());
 					references.add(referencePair);
 				}
-				return createPath(parent, references, child);
+				return createPath(parent, references, child,index);
 			} else {
 				RegistryUtil.log("Couldn't find a shortest path between " + child + " and " + parent, IStatus.ERROR);
 				return false;
@@ -50,11 +53,17 @@ public class RefactoringUtil {
 			try{
 				if(referencePair.getReference().isMany()){
 					Object feature = parent.eGet(referencePair.getReference());
-					return ((List<EObject>) feature).add(child);
+					if(index == null){
+						return ((List<EObject>) feature).add(child);
+					} else {
+						if(((List<EObject>) feature).size() <= index){
+							return ((List<EObject>) feature).add(child);
+						}
+						((List<EObject>) feature).add(index, child);
+						return true;
+					}
 				} else {
 					if(child != null && referencePair.getReference() != null){
-//						EcoreUtil.resolveAll(referencePair.getMetaClass());
-//						EcoreUtil.resolveAll(referencePair.getReference());
 						EReference reference = referencePair.getReference();
 						if(reference.getEReferenceType().isSuperTypeOf(child.eClass())){
 							parent.eSet(referencePair.getReference(), child);
@@ -80,7 +89,7 @@ public class RefactoringUtil {
 			}
 			EObject featureObject = ModelUtil.create(featureClass);
 			((List<EObject>) feature).add(featureObject);
-			return createPath(featureObject, remainingReferences, child);
+			return createPath(featureObject, remainingReferences, child, index);
 		}
 	}
 }
