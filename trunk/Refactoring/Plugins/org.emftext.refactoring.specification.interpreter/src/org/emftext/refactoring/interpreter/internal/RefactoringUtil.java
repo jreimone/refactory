@@ -53,8 +53,8 @@ public class RefactoringUtil {
 					return ((List<EObject>) feature).add(child);
 				} else {
 					if(child != null && referencePair.getReference() != null){
-						EcoreUtil.resolveAll(referencePair.getMetaClass());
-						EcoreUtil.resolveAll(referencePair.getReference());
+//						EcoreUtil.resolveAll(referencePair.getMetaClass());
+//						EcoreUtil.resolveAll(referencePair.getReference());
 						EReference reference = referencePair.getReference();
 						if(reference.getEReferenceType().isSuperTypeOf(child.eClass())){
 							parent.eSet(referencePair.getReference(), child);
