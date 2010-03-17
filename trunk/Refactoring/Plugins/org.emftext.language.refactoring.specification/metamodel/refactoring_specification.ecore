@@ -6,7 +6,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="RefactoringSpecification">
     <eOperations name="getDeclaredVariables" upperBound="-1" eType="#//Variable">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList &lt; org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; &#xD;&#xA;org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.refactoring_specification.Instruction > instructions = getInstructions ( ) ; &#xD;&#xA;for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction : instructions ) { &#xD;&#xA;&#x9;if ( instruction instanceof org.emftext.language.refactoring.refactoring_specification.CREATE ) { &#xD;&#xA;&#x9;&#x9;org.emftext.language.refactoring.refactoring_specification.Variable var = ( ( org.emftext.language.refactoring.refactoring_specification.CREATE ) instruction ) .getVarDeclaration ( ) ; &#xD;&#xA;&#x9;&#x9;if ( var != null ) { &#xD;&#xA;&#x9;&#x9;&#x9;variables .add ( var ) ; &#xD;&#xA;&#x9;&#x9;} &#xD;&#xA;&#x9;} &#xD;&#xA;} &#xD;&#xA;return variables ; &#xD;&#xA;"/>
+        <details key="body" value="org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList &lt; org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; &#xD;&#xA;&#x9;&#x9;org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.refactoring_specification.Instruction > instructions = getInstructions ( ) ; &#xD;&#xA;&#x9;&#x9;for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction : instructions ) { &#xD;&#xA;&#x9;&#x9;&#x9;if ( instruction instanceof org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) { &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;org.emftext.language.refactoring.refactoring_specification.Variable var = ( ( org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) instruction ) .getVariable() ; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if ( var != null ) { &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;variables .add ( var ) ; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;} &#xD;&#xA;&#x9;&#x9;&#x9;} &#xD;&#xA;&#x9;&#x9;} &#xD;&#xA;&#x9;&#x9;return variables ;"/>
         <details key="documentation" value=""/>
       </eAnnotations>
     </eOperations>
@@ -28,15 +28,11 @@
       eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//IndexVariable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//ContainmentCommand">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="varDeclaration" eType="#//Variable"
-        containment="true" eOpposite="#//Variable/createCommand"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceRoleReference" lowerBound="1"
-        eType="#//RoleReference" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//ContainmentCommand #//VariableDeclarationCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceRole" lowerBound="1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetContext" lowerBound="1"
         eType="#//TargetContext" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//FromClause"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//ContainmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -46,16 +42,18 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="createCommand" lowerBound="1"
-        eType="#//CREATE" eOpposite="#//CREATE/varDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containerCommand" lowerBound="1"
+        eType="#//VariableDeclarationCommand" eOpposite="#//VariableDeclarationCommand/variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//SourceContext #//TargetContext #//FromReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SourceContext" abstract="true" eSuperTypes="#//Context"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleReference" eSuperTypes="#//SourceContext #//TargetContext">
+  <eClassifiers xsi:type="ecore:EClass" name="RoleReference" eSuperTypes="#//ObjectAssignmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//FromClause"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationReference" eSuperTypes="#//SourceContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
@@ -111,5 +109,11 @@
       eSuperTypes="#//IndexAssignmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
         eType="#//FromReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectAssignmentCommand" abstract="true"
+      eSuperTypes="#//Instruction #//VariableDeclarationCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationCommand" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//Variable" containment="true" eOpposite="#//Variable/containerCommand"/>
   </eClassifiers>
 </ecore:EPackage>
