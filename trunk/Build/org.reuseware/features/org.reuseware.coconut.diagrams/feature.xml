@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.reuseware.coconut.diagrams.gmf"
-      label="Reuseware Feature: GMF Diagram Composition"
+      id="org.reuseware.coconut.diagrams"
+      label="Reuseware Feature: Diagram Composition Base"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://reuseware.org">
-      Support for composing GMF Diagrams in Reuseware.
+      Support for composing Diagrams in Reuseware.
    </description>
 
    <copyright>
@@ -32,15 +32,27 @@
    
 
    <requires>
-      <import feature="org.reuseware.coconut.fragment.diagrams"/>
       <import feature="org.reuseware.coconut"/>
    </requires>
 
    <plugin
-         id="org.reuseware.coconut.fragment.diagrams.gmf"
+         id="org.reuseware.coconut.fragment.diagrams.adjustment"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+   <plugin
+         id="org.reuseware.coconut.fragment.diagrams.odt"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   <plugin
+         id="org.reuseware.coconut.fragment.diagrams.emftext"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
 
 </feature>

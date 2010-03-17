@@ -33,7 +33,7 @@
 
    <requires>
       <import feature="org.reuseware.coconut"/>
-      <import feature="org.reuseware.coconut.diagrams.gmf"/>
+      <import feature="org.reuseware.coconut.diagrams"/>
       <import feature="org.topcased.modeler.uml"/>
    </requires>
 
