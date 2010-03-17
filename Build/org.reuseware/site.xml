@@ -10,6 +10,9 @@
    <feature url="features/org.reuseware.coconut_0.9.1.v200911130906.jar" id="org.reuseware.coconut" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
    </feature>
+   <feature url="features/org.reuseware.coconut.diagrams_0.0.0.v0.jar" id="org.reuseware.coconut.diagrams.gmf" version="0.0.0.v0">
+      <category name="Reuseware Composition Framework"/>
+   </feature>
    <feature url="features/org.reuseware.coconut.diagrams.gmf_0.9.1.v200911130906.jar" id="org.reuseware.coconut.diagrams.gmf" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
    </feature>

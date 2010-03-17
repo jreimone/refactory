@@ -173,7 +173,12 @@
 		<buildplugin name="Reuseware Documentation"   package="org.reuseware.coconut.doc" version="${reuseware.version}"/>
 		
 		<buildfeature package="org.reuseware.coconut" version="${reuseware.version}"/>
-		
+
+		<buildplugin name="Reuseware Diagram Composition Adjustment Algorithms"  package="org.reuseware.coconut.fragment.diagrams.adjustment" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware ODT Diagram Composition"        package="org.reuseware.coconut.fragment.diagrams.odt" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware EMFText Diagram Composition"    package="org.reuseware.coconut.fragment.diagrams.emftext" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.coconut.diagrams"   version="${reuseware.version}"/>
+
 		<buildplugin name="Reuseware GMF Diagram Composition"        package="org.reuseware.coconut.fragment.diagrams.gmf" version="${reuseware.version}"/>
 		<buildfeature package="org.reuseware.coconut.diagrams.gmf"   version="${reuseware.version}"/>
 		
