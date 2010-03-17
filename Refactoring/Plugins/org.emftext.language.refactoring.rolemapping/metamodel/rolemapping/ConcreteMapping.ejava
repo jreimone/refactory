@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import java.util.List;
  
 // import of other EClasses
 import roles.Role;
@@ -27,8 +28,11 @@ eclass ConcreteMapping {
   	}
   	
   	getAttributeMappingForAttribute() {
-		List<AttributeMapping> mappings = getAttributeMappings();
-		for (AttributeMapping attributeMapping : mappings) {
+		if(attribute == null){
+			return null;
+		}
+		List<AttributeMapping> attributeMappings = getAttributeMappings();
+		for (AttributeMapping attributeMapping : attributeMappings) {
 			if(attributeMapping.getRoleAttribute().equals(attribute)){
 				return attributeMapping;
 			}
