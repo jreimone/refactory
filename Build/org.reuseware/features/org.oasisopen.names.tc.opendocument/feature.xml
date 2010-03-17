@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.reuseware.coconut.diagrams.gmf"
-      label="Reuseware Feature: GMF Diagram Composition"
+      id="org.oasisopen.names.tc.opendocument"
+      label="Reuseware Application: EMF Open Document Support"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://reuseware.org">
-      Support for composing GMF Diagrams in Reuseware.
+      EMF Open Document Support
    </description>
 
    <copyright>
@@ -24,7 +24,7 @@
  
  Contributors:
    Software Technology Group - TU Dresden, Germany 
-      - initial API and implementation 
+      - initial API and implementation
    </license>
 
    
@@ -32,12 +32,11 @@
    
 
    <requires>
-      <import feature="org.reuseware.coconut.diagrams"/>
-      <import feature="org.reuseware.coconut"/>
+	<import feature="org.eclipse.emf"/>
    </requires>
 
    <plugin
-         id="org.reuseware.coconut.fragment.diagrams.gmf"
+         id="org.oasisopen.names.tc.opendocument"
          download-size="0"
          install-size="0"
          version="0.0.0"
