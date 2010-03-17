@@ -76,8 +76,14 @@ public class RefactoringUtil {
 				return false;
 			}
 		} else {
-			ReferenceMetaClassPair referencePair = remainingReferences.get(0);
-			remainingReferences.remove(referencePair);
+			// must work on a copy because otherwise all operations to the list will be reflected in the model
+			List<ReferenceMetaClassPair> tempRemainingList = new LinkedList<ReferenceMetaClassPair>();
+			for (ReferenceMetaClassPair referenceMetaClassPair : remainingReferences) {
+				tempRemainingList.add(referenceMetaClassPair);
+			}
+			
+			ReferenceMetaClassPair referencePair = tempRemainingList.get(0);
+			tempRemainingList.remove(referencePair);
 			Object feature = parent.eGet(referencePair.getReference());
 			EClass featureClass = referencePair.getMetaClass();
 			if(featureClass == null){
@@ -88,8 +94,20 @@ public class RefactoringUtil {
 				return false;
 			}
 			EObject featureObject = ModelUtil.create(featureClass);
-			((List<EObject>) feature).add(featureObject);
-			return createPath(featureObject, remainingReferences, child, index);
+			if(referencePair.getReference().isMany()){
+				if(index == null){
+					((List<EObject>) feature).add(featureObject);
+				} else {
+					if(((List<EObject>) feature).size() <= index){
+						((List<EObject>) feature).add(featureObject);
+					}
+					((List<EObject>) feature).add(index, featureObject);
+				}
+			} else {
+				parent.eSet(referencePair.getReference(), featureObject);
+			}
+//			((List<EObject>) feature).add(featureObject);
+			return createPath(featureObject, tempRemainingList, child, index);
 		}
 	}
 }

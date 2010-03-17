@@ -185,14 +185,12 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			addObjectToInterprete(instruction);
 		}
 	}
-
-
-	
 	
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(org.emftext.language.refactoring.refactoring_specification.ASSIGN, java.lang.Object)
 	 */
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_ASSIGN(
 			ASSIGN object, RefactoringInterpreterContext context) {
 		//		object.get
 		return assign.interpreteASSIGN(object, context);
@@ -201,7 +199,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE(org.emftext.language.refactoring.refactoring_specification.CREATE, java.lang.Object)
 	 */
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE(
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_CREATE(
 			CREATE object, RefactoringInterpreterContext context) {
 		return create.interpreteCREATE(object, context, selection);
 	}
@@ -209,7 +208,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(org.emftext.language.refactoring.refactoring_specification.MOVE, java.lang.Object)
 	 */
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_MOVE(
 			MOVE object, RefactoringInterpreterContext context) {
 		return move.interpreteMOVE(object, context, selection);
 	}
@@ -217,7 +217,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(org.emftext.language.refactoring.refactoring_specification.SET, java.lang.Object)
 	 */
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_SET(
 			SET object, RefactoringInterpreterContext context) {
 		return set.interpreteSET(object, context);
 	}
@@ -225,7 +226,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ConcreteIndex(org.emftext.language.refactoring.refactoring_specification.ConcreteIndex, java.lang.Object)
 	 */
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ConcreteIndex(
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_ConcreteIndex(
 			ConcreteIndex object, RefactoringInterpreterContext context) {
 		return indexInterpreter.interpreteIndexCommand(object, context, selection);
 	}
@@ -233,7 +235,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_FIRST(org.emftext.language.refactoring.refactoring_specification.FIRST, java.lang.Object)
 	 */
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_FIRST(
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_FIRST(
 			FIRST object, RefactoringInterpreterContext context) {
 		return indexInterpreter.interpreteIndexCommand(object, context, selection);
 	}
@@ -241,7 +244,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	/* (non-Javadoc)
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_LAST(org.emftext.language.refactoring.refactoring_specification.LAST, java.lang.Object)
 	 */
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005Fspecification_LAST(
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_LAST(
 			LAST object, RefactoringInterpreterContext context) {
 		return indexInterpreter.interpreteIndexCommand(object, context, selection);
 	}
