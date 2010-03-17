@@ -14,6 +14,7 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleFeature;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.specification.resource.util.RefspecEObjectUtil;
+import org.emftext.refactoring.util.RoleUtil;
 
 
 /**
@@ -27,7 +28,7 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 	public AbstractRoleFeatureResolver() {
 		super();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void resolve(java.lang.String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<FeatureType> result) {
 		// TODO split method into smaller ones
@@ -67,7 +68,7 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 				}
 			}
 		} else {
-			matchedRole = var.getCreateCommand().getSourceRoleReference().getRole();
+			matchedRole = RoleUtil.getRoleFromVariable(var);
 		}
 		if(matchedRole == null){
 			result.setErrorMessage("The name '" + roleString + "' doesn't match a role or variable");
@@ -100,8 +101,8 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 		result.setErrorMessage("Role '" + roleString + "' has no " + featureName + " with name '" + featureString +"'");
 	}
 
-//	protected abstract Class<? extends RoleFeature> getSpecificFeature();
-	
+	//	protected abstract Class<? extends RoleFeature> getSpecificFeature();
+
 	protected abstract EStructuralFeature getStructuralFeature(Role role);
-	
+
 }

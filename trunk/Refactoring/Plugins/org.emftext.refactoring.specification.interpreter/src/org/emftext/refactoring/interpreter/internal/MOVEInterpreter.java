@@ -18,6 +18,7 @@ import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * @author Jan Reimann
@@ -53,7 +54,7 @@ public class MOVEInterpreter {
 		if(targetContext instanceof VariableReference){
 			Variable variable = ((VariableReference) targetContext).getVariable();
 			targetObject = context.getEObjectForVariable(variable);
-			targetRole = variable.getCreateCommand().getSourceRoleReference().getRole();
+			targetRole = RoleUtil.getRoleFromVariable(variable);
 		}
 		RelationMapping relationMapping = mapping.getConcreteMappingForRole(targetRole).getRelationMappingForTargetRole(sourceRole);
 		List<ReferenceMetaClassPair> referencePairs = relationMapping.getReferenceMetaClassPair();

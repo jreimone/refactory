@@ -21,7 +21,7 @@ import org.emftext.language.refactoring.refactoring_specification.VariableRefere
  * @author Jan Reimann
  *
  */
-public class IndexInterpreter {
+public class IndexAssignmentInterpreter {
 
 	private RefactoringInterpreterContext context;
 	private List<? extends EObject> selection;
