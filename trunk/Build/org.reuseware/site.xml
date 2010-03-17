@@ -10,7 +10,7 @@
    <feature url="features/org.reuseware.coconut_0.9.1.v200911130906.jar" id="org.reuseware.coconut" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
    </feature>
-   <feature url="features/org.reuseware.coconut.diagrams_0.0.0.v0.jar" id="org.reuseware.coconut.diagrams.gmf" version="0.0.0.v0">
+   <feature url="features/org.reuseware.coconut.diagrams_0.0.0.v0.jar" id="org.reuseware.coconut.diagrams" version="0.0.0.v0">
       <category name="Reuseware Composition Framework"/>
    </feature>
    <feature url="features/org.reuseware.coconut.diagrams.gmf_0.9.1.v200911130906.jar" id="org.reuseware.coconut.diagrams.gmf" version="0.9.1.v200911130906">
@@ -35,7 +35,10 @@
    <feature url="features/org.reuseware.application.cim_0.0.0.v0.jar" id="org.reuseware.application.cim" version="0.0.0.v0">
       <category name="Reuseware Applications"/>
    </feature>
-
+   <feature url="features/org.oasisopen.names.tc.opendocument_0.0.0.v0.jar" id="org.oasisopen.names.tc.opendocument" version="0.0.0.v0">
+      <category name="Reuseware Applications"/>
+   </feature>
+   
    <feature url="features/org.emftext.commons.antlr3_1_1_3.1.1.v200911130906.jar" id="org.emftext.commons.antlr3_1_1" version="3.1.1.v200911130906">
       <category name="EMFText Deprecated"/>
    </feature>
