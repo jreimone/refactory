@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.action.Action;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -32,7 +33,8 @@ public class RefactoringAction extends Action {
 	 */
 	@Override
 	public void run() {
-		ChangeRecorder recorder = new ChangeRecorder(resource.getResourceSet());
+		ResourceSet rs = resource.getResourceSet();
+		ChangeRecorder recorder = new ChangeRecorder(rs);
 		ChangeDescription change = null;
 		try {
 			EObject refactoredModel = refactorer.refactor(mapping, false);	
