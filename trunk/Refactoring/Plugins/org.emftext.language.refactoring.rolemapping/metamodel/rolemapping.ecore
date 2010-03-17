@@ -53,6 +53,10 @@
       <eParameters name="role" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
     </eOperations>
     <eOperations name="getAttributeMappingForAttribute" lowerBound="1" eType="#//AttributeMapping">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if ( attribute == null ) { &#xD;&#xA;&#x9;return null ; &#xD;&#xA;} &#xD;&#xA;java.util.List &lt; org.emftext.language.refactoring.rolemapping.AttributeMapping > attributeMappings = getAttributeMappings ( ) ; &#xD;&#xA;for ( org.emftext.language.refactoring.rolemapping.AttributeMapping attributeMapping : attributeMappings ) { &#xD;&#xA;&#x9;if ( attributeMapping .getRoleAttribute ( ) .equals ( attribute ) ) { &#xD;&#xA;&#x9;&#x9;return attributeMapping ; &#xD;&#xA;&#x9;} &#xD;&#xA;} &#xD;&#xA;return null ; &#xD;&#xA;"/>
+        <details key="documentation" value=""/>
+      </eAnnotations>
       <eParameters name="attribute" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
