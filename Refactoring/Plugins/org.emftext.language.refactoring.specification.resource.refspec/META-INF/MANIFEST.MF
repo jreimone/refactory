@@ -19,6 +19,7 @@ Require-Bundle: org.eclipse.core.resources,
   org.eclipse.ui.ide,
   org.eclipse.ui.views,
   org.emftext.refactoring.registry.rolemodel,
+  org.emftext.refactoring.util,
   org.emftext.commons.antlr3_2_0,
   org.emftext.language.refactoring.specification,
   org.emftext.language.refactoring.roles

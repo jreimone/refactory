@@ -15,6 +15,7 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * @author Jan Reimann
@@ -37,11 +38,11 @@ public class SETInterpreter {
 		Role sourceRole = null;
 		if(source instanceof VariableReference){
 			sourceObject = context.getEObjectForVariable(((VariableReference) source).getVariable());
-			sourceRole = ((VariableReference) source).getVariable().getCreateCommand().getSourceRoleReference().getRole();
+			sourceRole = RoleUtil.getRoleFromVariable(((VariableReference) source).getVariable());
 		}
 		if(target instanceof VariableReference){
 			targetObject = context.getEObjectForVariable(((VariableReference) target).getVariable());
-			targetRole = ((VariableReference) target).getVariable().getCreateCommand().getSourceRoleReference().getRole();
+			targetRole = RoleUtil.getRoleFromVariable(((VariableReference) target).getVariable());
 		} 
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
 		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(sourceRole);

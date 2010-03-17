@@ -8,12 +8,12 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.IndexVariable;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.util.ModelUtil;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * The context for the RefactoringInterpreter
@@ -26,12 +26,12 @@ public class RefactoringInterpreterContext {
 	private Map<Variable, EObject> varInstanceMap;
 	private Map<IndexVariable, Integer> varIndexMap;
 	private Mapping mapping;
-	
+
 	public RefactoringInterpreterContext(){
 		varInstanceMap = new LinkedHashMap<Variable, EObject>();
 		varIndexMap = new LinkedHashMap<IndexVariable, Integer>();
 	}
-	
+
 	protected void setInitialContext(Mapping mapping){
 		this.mapping = mapping;
 	}
@@ -42,13 +42,25 @@ public class RefactoringInterpreterContext {
 	 * @param variable
 	 */
 	public void addEObjectForVariable(Variable variable) {
-		CREATE create = variable.getCreateCommand();
-		Role varRole = create.getSourceRoleReference().getRole();
+//		CREATE create = variable.getCreateCommand();
+		Role varRole = RoleUtil.getRoleFromVariable(variable);;
 		EClass metaClass = mapping.getEClassForRole(varRole);
 		EObject instance = ModelUtil.create(metaClass);
 		varInstanceMap.put(variable, instance);
 	}
-	
+
+	/** 
+	 * Adds a concrete {@link EObject object} for the given variable. 
+	 * 
+	 * @param variable
+	 * @param object
+	 */
+	public void addEObjectForVariable(Variable variable, EObject object){
+		if(variable != null && object != null){
+			varInstanceMap.put(variable, object);
+		}
+	}
+
 	/**
 	 * The given <code>index</code> will be saved for the give <code>variable</code>.
 	 * 
@@ -58,7 +70,7 @@ public class RefactoringInterpreterContext {
 	public void setIndexForVariable(IndexVariable variable, int index){
 		varIndexMap.put(variable, index);
 	}
-	
+
 	/**
 	 * Returns the index of the given <code>variable</code>.
 	 * 
@@ -71,7 +83,7 @@ public class RefactoringInterpreterContext {
 		}
 		return varIndexMap.get(variable);
 	}
-	
+
 	/**
 	 * Returns the concrete instance for the given variable.
 	 * 

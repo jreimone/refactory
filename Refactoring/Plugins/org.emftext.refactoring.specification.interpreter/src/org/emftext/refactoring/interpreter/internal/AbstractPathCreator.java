@@ -94,6 +94,7 @@ public abstract class AbstractPathCreator {
 				// TODO ask user or use MissingInformationProvider
 				return false;
 			}
+			// TODO replace this code by a check if a featureClass already exists!!!
 			EObject featureObject = ModelUtil.create(featureClass);
 			if(referencePair.getReference().isMany()){
 				if(index == null){

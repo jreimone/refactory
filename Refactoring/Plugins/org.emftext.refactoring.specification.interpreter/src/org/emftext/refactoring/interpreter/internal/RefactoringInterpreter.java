@@ -14,14 +14,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
-import org.emftext.language.refactoring.refactoring_specification.ConcreteIndex;
 import org.emftext.language.refactoring.refactoring_specification.Context;
-import org.emftext.language.refactoring.refactoring_specification.FIRST;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
 import org.emftext.language.refactoring.refactoring_specification.FromReference;
+import org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.Instruction;
-import org.emftext.language.refactoring.refactoring_specification.LAST;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
+import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
@@ -38,6 +37,7 @@ import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.util.RegistryUtil;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * Interpreter for a RefactoringSpecification.
@@ -59,25 +59,29 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	private SETInterpreter set;
 	private MOVEInterpreter move;
 	private ASSIGNInterpreter assign;
-	private IndexInterpreter indexInterpreter;
+	private IndexAssignmentInterpreter indexInterpreter;
+	private ObjectAssignmentInterpreter objectInterpreter;
 	
 	private Boolean occuredErrors;
 
 	@Override
 	public Boolean interprete(EObject object, RefactoringInterpreterContext context) {
 		EcoreUtil.resolveAll(object);
-		if(object instanceof CREATE){
-			CREATE create = (CREATE) object;
-			Role childRole = create.getSourceRoleReference().getRole();
-			if(containsModifierOPTIONAL(childRole)){return true;}
-			FromClause from = create.getFrom();
+		if(object instanceof RoleReference){
+			Role role = ((RoleReference) object).getRole();
+			if(containsModifierOPTIONAL(role)){return true;}
+			FromClause from = ((RoleReference) object).getFrom();
 			if(from != null){
 				FromReference fromReference = from.getReference();
 				if(fromReference instanceof VariableReference){
-					Role role = ((VariableReference) fromReference).getVariable().getCreateCommand().getSourceRoleReference().getRole();
-					if(containsModifierOPTIONAL(role)){return true;}
+					Role variableRole = RoleUtil.getRoleFromVariable(((VariableReference) fromReference).getVariable());
+					if(containsModifierOPTIONAL(variableRole)){return true;}
 				}
 			}
+		} else if(object instanceof CREATE){
+			CREATE create = (CREATE) object;
+			Role childRole = create.getSourceRole();
+			if(containsModifierOPTIONAL(childRole)){return true;}
 			TargetContext targetContext = create.getTargetContext();
 			if(contextIsOptional(targetContext)){return true;}
 		} else if(object instanceof ASSIGN){
@@ -91,7 +95,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		} else if(object instanceof SET){
 			if(sourceContextIsOptional(((SET) object).getSource())){return true;}
 			if(contextIsOptional(((SET) object).getTarget())){return true;}
-		}else if(object instanceof MOVE){
+		} else if(object instanceof MOVE){
 			if(sourceContextIsOptional(((MOVE) object).getSource())){return true;}
 			if(contextIsOptional(((MOVE) object).getTarget())){return true;}
 		}
@@ -114,12 +118,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	
 	private boolean contextIsOptional(Context context){
 		if(context instanceof VariableReference){
-			Role role = ((VariableReference) context).getVariable().getCreateCommand().getSourceRoleReference().getRole();
+			Role role = RoleUtil.getRoleFromVariable(((VariableReference) context).getVariable());
 			if(containsModifierOPTIONAL(role)){return true;}
-		} else if(context instanceof RoleReference){
-			Role role = ((RoleReference) context).getRole();
-			if(containsModifierOPTIONAL(role)){return true;}
-		}
+		} 
+//		else if(context instanceof RoleReference){
+//			Role role = ((RoleReference) context).getRole();
+//			if(containsModifierOPTIONAL(role)){return true;}
+//		}
 		return false;
 	}
 	
@@ -155,7 +160,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		set = new SETInterpreter(mapping);
 		move = new MOVEInterpreter(mapping);
 		assign = new ASSIGNInterpreter(mapping);
-		indexInterpreter = new IndexInterpreter();
+		indexInterpreter = new IndexAssignmentInterpreter();
+		objectInterpreter = new ObjectAssignmentInterpreter(mapping);
 		
 		EObject initialModel = model;
 		if(copy){
@@ -222,32 +228,26 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			SET object, RefactoringInterpreterContext context) {
 		return set.interpreteSET(object, context);
 	}
+	
+	
 
 	/* (non-Javadoc)
-	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ConcreteIndex(org.emftext.language.refactoring.refactoring_specification.ConcreteIndex, java.lang.Object)
+	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005fspecification_IndexAssignmentCommand(org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand, java.lang.Object)
 	 */
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_ConcreteIndex(
-			ConcreteIndex object, RefactoringInterpreterContext context) {
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_IndexAssignmentCommand(
+			IndexAssignmentCommand object, RefactoringInterpreterContext context) {
 		return indexInterpreter.interpreteIndexCommand(object, context, selection);
 	}
-
+	
 	/* (non-Javadoc)
-	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_FIRST(org.emftext.language.refactoring.refactoring_specification.FIRST, java.lang.Object)
+	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand, java.lang.Object)
 	 */
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_FIRST(
-			FIRST object, RefactoringInterpreterContext context) {
-		return indexInterpreter.interpreteIndexCommand(object, context, selection);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_LAST(org.emftext.language.refactoring.refactoring_specification.LAST, java.lang.Object)
-	 */
-	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_LAST(
-			LAST object, RefactoringInterpreterContext context) {
-		return indexInterpreter.interpreteIndexCommand(object, context, selection);
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(
+			ObjectAssignmentCommand object,
+			RefactoringInterpreterContext context) {
+		return objectInterpreter.interpreteObjectAssignmentCommand(object, context, selection);
 	}
 
 	/* (non-Javadoc)
