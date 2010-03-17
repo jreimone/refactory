@@ -9,7 +9,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RolemappingFactory;
 import org.emftext.refactoring.graph.IShortestPathAlgorithm;
@@ -22,17 +21,26 @@ import org.emftext.refactoring.util.RegistryUtil;
  * @author Jan Reimann
  *
  */
-public class RefactoringUtil {
+public abstract class AbstractPathCreator {
 
-	public static boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child){
+	public boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child){
 		return createPath(parent, remainingReferences, child, null);
 	}
 
+	abstract protected void onePairLeftUnaryReference(EObject targetParent, Object children, ReferenceMetaClassPair referencePair);
+
+	abstract protected boolean onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature);
+
+	abstract protected boolean onePairLeftIndexNull(Object children, ReferenceMetaClassPair referencePair, Object feature);
+	
+	abstract protected EObject getTargetObjectForPathCalculation(Object target);
+	
 	@SuppressWarnings("unchecked")
-	public static boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child, Integer index){
+	public boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, Object child, Integer index){
 		if(remainingReferences == null){
 			IShortestPathAlgorithm algo = (new PathAlgorithmFactory()).getAlgorithm();
-			List<IPath> paths = algo.calculatePaths(parent, child);
+			EObject target = getTargetObjectForPathCalculation(child);
+			List<IPath> paths = algo.calculatePaths(parent, target);
 			if(paths != null && paths.size() > 0){
 				IPath path = paths.get(0);
 				path.removeAbstractEClasses();
@@ -54,20 +62,13 @@ public class RefactoringUtil {
 				if(referencePair.getReference().isMany()){
 					Object feature = parent.eGet(referencePair.getReference());
 					if(index == null){
-						return ((List<EObject>) feature).add(child);
+						return onePairLeftIndexNull(child, referencePair, feature);
 					} else {
-						if(((List<EObject>) feature).size() <= index){
-							return ((List<EObject>) feature).add(child);
-						}
-						((List<EObject>) feature).add(index, child);
-						return true;
+						return onePairLeftIndexNotNull(child, index, referencePair, feature);
 					}
 				} else {
 					if(child != null && referencePair.getReference() != null){
-						EReference reference = referencePair.getReference();
-						if(reference.getEReferenceType().isSuperTypeOf(child.eClass())){
-							parent.eSet(referencePair.getReference(), child);
-						}
+						onePairLeftUnaryReference(parent, child, referencePair);
 					}
 					return true;
 				}

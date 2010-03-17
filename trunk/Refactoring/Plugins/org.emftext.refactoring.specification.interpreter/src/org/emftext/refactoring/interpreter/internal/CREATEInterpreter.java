@@ -78,7 +78,8 @@ public class CREATEInterpreter {
 						referencePairs = relationMapping.getReferenceMetaClassPair();
 					}
 					Integer objectIndex = context.getIndexForVariable(index);
-					return RefactoringUtil.createPath(targetObject, referencePairs, childObject, objectIndex);
+					AbstractPathCreator pathCreator = new CreatePathCreator();
+					return pathCreator.createPath(targetObject, referencePairs, childObject, objectIndex);
 				}
 			} else {
 				// TODO ask the user
@@ -118,7 +119,8 @@ public class CREATEInterpreter {
 //				tempList.add(eReference);
 //			}
 			Integer objectIndex = context.getIndexForVariable(index);
-			return RefactoringUtil.createPath(parentObject, relationMapping.getReferenceMetaClassPair(), childObject, objectIndex);
+			AbstractPathCreator pathCreator = new CreatePathCreator();
+			return pathCreator.createPath(parentObject, relationMapping.getReferenceMetaClassPair(), childObject, objectIndex);
 		}
 		return false;
 	}
@@ -168,6 +170,7 @@ public class CREATEInterpreter {
 			referencePairs = relationMapping.getReferenceMetaClassPair();
 		}
 		Integer objectIndex = context.getIndexForVariable(index);
-		return RefactoringUtil.createPath(targetObject, referencePairs, childObject, objectIndex);
+		AbstractPathCreator pathCreator = new CreatePathCreator();
+		return pathCreator.createPath(targetObject, referencePairs, childObject, objectIndex);
 	}
 }

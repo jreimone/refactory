@@ -49,6 +49,7 @@ public class SETInterpreter {
 		if(relationMapping != null){
 			referencePairs = relationMapping.getReferenceMetaClassPair();
 		}
-		return RefactoringUtil.createPath(targetObject, referencePairs, sourceObject);
+		AbstractPathCreator pathCreator = new CreatePathCreator();
+		return pathCreator.createPath(targetObject, referencePairs, sourceObject);
 	}
 }
