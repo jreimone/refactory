@@ -3,6 +3,8 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -93,6 +95,19 @@ public class Refactorer implements IRefactorer {
 		for (EObject child : elementsToRemove) {
 			filteredElements.remove(child);
 		}
+		Collections.sort(filteredElements, new Comparator<EObject>() {
+
+			public int compare(EObject o1, EObject o2) {
+				EObject parent1 = o1.eContainer();
+				EObject parent2 = o2.eContainer();
+				if(parent1.equals(parent2)){
+					int index1 = ((List<?>) parent1.eGet(o1.eContainingFeature())).indexOf(o1);
+					int index2 = ((List<?>) parent1.eGet(o2.eContainingFeature())).indexOf(o2);
+					return index1 - index2;
+				}
+				return 0;
+			}
+		});
 		IRefactoringInterpreter interpreter = interpreterMap.get(mapping);
 		interpreter.setInput(filteredElements);
 		EObject refactoredModel = null;
