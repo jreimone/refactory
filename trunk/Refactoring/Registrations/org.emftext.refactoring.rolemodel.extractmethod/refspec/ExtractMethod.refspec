@@ -2,10 +2,12 @@ REFACTORING ExtractMethodRefactoring
 FOR <ExtractMethod>
 
 STEPS { 
-	create new nc:NewContainer in ContainerContainer from uptree(INPUT);
+	var object containerContainerObject := ContainerContainer from uptree(INPUT);
+	var object origContainerObject := OrigContainer from uptree(INPUT); 
+	create new nc:NewContainer in containerContainerObject;
 	assign nc.newName;
 	var index extractsIndex := first(INPUT);
 	move OrigContainer.extracts to nc;
-	create new mr:MovedReference in OrigContainer from uptree(INPUT) at extractsIndex;
+	create new mr:MovedReference in origContainerObject at extractsIndex;
 	set use of nc in mr;
 } 
