@@ -11,17 +11,17 @@ import org.eclipse.emf.common.util.BasicEList;
 eclass RefactoringSpecification {
 	
 	getDeclaredVariables() {
-		EList<Variable> variables = new BasicEList<Variable>();
-		EList<Instruction> instructions = getInstructions();
-		for (Instruction instruction : instructions) {
-			if(instruction instanceof CREATE){
-				Variable var = ((CREATE) instruction).getVarDeclaration();
-				if(var != null){
-					variables.add(var);
-				}
-			}
-		}
-		return variables;
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; 
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Instruction > instructions = getInstructions ( ) ; 
+		for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction : instructions ) { 
+			if ( instruction instanceof org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) { 
+				org.emftext.language.refactoring.refactoring_specification.Variable var = ( ( org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) instruction ) .getVariable() ; 
+				if ( var != null ) { 
+					variables .add ( var ) ; 
+				} 
+			} 
+		} 
+		return variables ;
 	}
 	
 	getVariableByName(){

@@ -28,10 +28,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ContainmentCommand/index"/>
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//CREATE">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/varDeclaration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/sourceRoleReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/sourceRole"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/targetContext"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CREATE/from"/>
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//MOVE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//MOVE/source"/>
@@ -39,7 +37,7 @@
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoring_specification.ecore#//Variable/name"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference refactoring_specification.ecore#//Variable/createCommand"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference refactoring_specification.ecore#//Variable/containerCommand"/>
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//VariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//VariableReference/variable"/>
@@ -47,6 +45,7 @@
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//SourceContext"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//RoleReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RoleReference/role"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RoleReference/from"/>
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//RelationReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RelationReference/relation"/>
@@ -87,6 +86,10 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//LAST"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ObjectReferenceAssignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ObjectReferenceAssignment/reference"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ObjectAssignmentCommand"/>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//VariableDeclarationCommand">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//VariableDeclarationCommand/variable"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
