@@ -51,7 +51,7 @@ public class ObjectAssignmentInterpreter {
 		EObject value = null;
 		
 		if(object instanceof RoleReference){
-			value = handleCREATETargetRole((RoleReference) object, objectVar);
+			value = handleRoleReference((RoleReference) object);
 		}
 		
 		if(value != null){
@@ -61,12 +61,12 @@ public class ObjectAssignmentInterpreter {
 		return true;
 	}
 
-	private EObject handleCREATETargetRole(RoleReference roleRef, Variable variable) {
+	private EObject handleRoleReference(RoleReference roleRef) {
 		FromClause from = roleRef.getFrom();
 		FromOperator operator = from.getOperator();
 		List<? extends EObject> fromObjects = getFromReferenceObject(from);
 		if(operator instanceof UPTREE){
-			return handleFromOperatorUPTREE(roleRef.getRole(), fromObjects, variable);	
+			return handleFromOperatorUPTREE(roleRef.getRole(), fromObjects);	
 		}
 		return null;
 	}
@@ -92,7 +92,7 @@ public class ObjectAssignmentInterpreter {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private EObject handleFromOperatorUPTREE(Role fromRole, List<? extends EObject> fromObjects, Variable variable) {
+	private EObject handleFromOperatorUPTREE(Role fromRole, List<? extends EObject> fromObjects) {
 		List<?>[] rootPaths = new List<?>[fromObjects.size()];
 		int i = 0;
 		for (EObject eObject : fromObjects) {

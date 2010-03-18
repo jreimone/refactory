@@ -45,7 +45,7 @@ public class CREATEInterpreter {
 		}
 		TargetContext target = object.getTargetContext();
 		if(target instanceof VariableReference){
-			return handleCREATETargetVariable(context, childRole, target, object.getIndex());
+			return handleCREATETargetVariable(sourceVar, context, childRole, target, object.getIndex());
 		}
 //		if(target instanceof RoleReference){
 //			return handleCREATETargetRole(childRole, (RoleReference) target, object.getFrom(), sourceVar, object.getIndex());
@@ -85,32 +85,36 @@ public class CREATEInterpreter {
 //	}
 	
 	@SuppressWarnings("unchecked")
-	private boolean handleCREATETargetVariable(RefactoringInterpreterContext context, Role childRole, TargetContext target, IndexVariable index) {
+	private boolean handleCREATETargetVariable(Variable sourceVar, RefactoringInterpreterContext context, Role childRole, TargetContext target, IndexVariable index) {
 		Variable targetVar = ((VariableReference) target).getVariable();
 		EObject parentObject = context.getEObjectForVariable(targetVar);
 		EClass childClass = mapping.getEClassForRole(childRole);
-		EObject childObject = ModelUtil.create(childClass);
+		EObject childObject = context.getEObjectForVariable(sourceVar);
 		
 		Role varRole = RoleUtil.getRoleFromVariable(targetVar);
 		
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(varRole);
 		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
+		// TODO hier schauen, warum relationMapping null ist, beim 2. CREATE
 		if(relationMapping == null){
 			// add directly to parent
-			EClass parentClass = parentObject.eClass();
-			EList<EReference> references = parentClass.getEAllReferences();
-			for (EReference eReference : references) {
-				if(eReference.isContainment() && eReference.getEContainingClass().equals(childClass)){
-					return ((List<EObject>)parentObject.eGet(eReference)).add(childObject);
-				}
-			}
+//			EClass parentClass = parentObject.eClass();
+//			EList<EReference> references = parentClass.getEAllReferences();
+//			for (EReference eReference : references) {
+//				if(eReference.isContainment() && eReference.getEContainingClass().equals(childClass)){
+//					return ((List<EObject>)parentObject.eGet(eReference)).add(childObject);
+//				}
+//			}
+			Integer objectIndex = context.getIndexForVariable(index);
+			AbstractPathCreator pathCreator = new CreatePathCreator();
+			return pathCreator.createPath(parentObject, null, childObject, objectIndex);
 		} else {
 			// add with path
 			Integer objectIndex = context.getIndexForVariable(index);
 			AbstractPathCreator pathCreator = new CreatePathCreator();
 			return pathCreator.createPath(parentObject, relationMapping.getReferenceMetaClassPair(), childObject, objectIndex);
 		}
-		return false;
+//		return false;
 	}
 
 //	
