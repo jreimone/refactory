@@ -83,7 +83,7 @@ RULES{
 	
 	VariableReference ::= variable[LOWER_IDENTIFIER] ;
 	
-	RoleReference ::= "var" "object" variable ":=" role[UPPER_IDENTIFIER] #1 "from" #1 from;
+	RoleReference ::= "object" variable ":=" role[UPPER_IDENTIFIER] #1 "from" #1 from;
 	
 	RelationReference ::= relation[DOT_NOTATION];
 	
@@ -93,11 +93,11 @@ RULES{
 	
 	UPTREE ::= "uptree";
 	
-	FIRST ::= "var" "index" variable ":=" "first" "(" reference ")";
+	FIRST ::= "index" variable ":=" "first" "(" reference ")";
 	
-	LAST  ::= "var" "index" variable ":=" "last" "(" reference ")";
+	LAST  ::= "index" variable ":=" "last" "(" reference ")";
 	
-	ConcreteIndex ::= "var" "index" variable ":=" index[INTEGER];
+	ConcreteIndex ::= "index" variable ":=" index[INTEGER];
 	
 	IndexVariable ::= name[LOWER_IDENTIFIER];
 }
