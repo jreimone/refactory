@@ -6,25 +6,19 @@ package org.emftext.refactoring.interpreter.internal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
 import org.emftext.language.refactoring.refactoring_specification.FromOperator;
 import org.emftext.language.refactoring.refactoring_specification.FromReference;
-import org.emftext.language.refactoring.refactoring_specification.IndexVariable;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.UPTREE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
-import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
-import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
@@ -47,7 +41,7 @@ public class ObjectAssignmentInterpreter {
 		this.selection = selection;
 		this.context = context;
 		
-		Variable objectVar = object.getVariable();
+		Variable objectVar = object.getDeclaration().getVariable();
 		EObject value = null;
 		
 		if(object instanceof RoleReference){
