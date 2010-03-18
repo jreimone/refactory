@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -53,6 +56,13 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		if(selection instanceof StructuredSelection){
 			List<?> temp = ((StructuredSelection) selection).toList();
 			for (Object object : temp) {
+				if(object instanceof EditPart){
+					Object model = ((EditPart) object).getModel();
+					if(model instanceof View){
+						EObject ob = ((View) model).getElement();
+						System.out.println(ob);
+					}
+				}
 				if(!(object instanceof EObject)){
 					return;
 				}
