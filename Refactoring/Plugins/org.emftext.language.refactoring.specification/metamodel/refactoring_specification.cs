@@ -52,13 +52,13 @@ TOKENSTYLES{
 	"to" COLOR #7F0055, BOLD;
 	"set" COLOR #7F0055, BOLD;
 	"use" COLOR #7F0055, BOLD;
-	"var" COLOR #7F0055, BOLD;
 	"index" COLOR #7F0055, BOLD;
 	"of" COLOR #7F0055, BOLD;
 	"assign" COLOR #7F0055, BOLD;
 	"for" COLOR #7F0055, BOLD;
 	"from" COLOR #7F0055, BOLD;
 	"uptree" COLOR #50F05C, BOLD;
+	"trace" COLOR #50F05C, BOLD;
 	"first" COLOR #50F05C, BOLD;
 	"last" COLOR #50F05C, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
@@ -83,7 +83,11 @@ RULES{
 	
 	VariableReference ::= variable[LOWER_IDENTIFIER] ;
 	
-	RoleReference ::= "object" variable ":=" role[UPPER_IDENTIFIER] #1 "from" #1 from;
+	VariableAssignment ::= "object" variable ":=" assignment;
+	
+	RoleReference ::= role[UPPER_IDENTIFIER] #1 "from" #1 from;
+	
+	TRACE ::= "trace" "(" reference ")";
 	
 	RelationReference ::= relation[DOT_NOTATION];
 	
