@@ -87,9 +87,17 @@
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ObjectReferenceAssignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ObjectReferenceAssignment/reference"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ObjectAssignmentCommand"/>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ObjectAssignmentCommand">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ObjectAssignmentCommand/declaration"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//VariableDeclarationCommand">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//VariableDeclarationCommand/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="refactoring_specification.ecore#//TRACE">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//TRACE/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="refactoring_specification.ecore#//VariableAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//VariableAssignment/assignment"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

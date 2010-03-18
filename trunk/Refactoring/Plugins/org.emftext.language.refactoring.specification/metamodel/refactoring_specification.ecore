@@ -110,10 +110,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
         eType="#//FromReference" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ObjectAssignmentCommand" abstract="true"
-      eSuperTypes="#//Instruction #//VariableDeclarationCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectAssignmentCommand" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1"
+        eType="#//VariableAssignment" eOpposite="#//VariableAssignment/assignment"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationCommand" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//Variable" containment="true" eOpposite="#//Variable/containerCommand"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TRACE" eSuperTypes="#//ObjectAssignmentCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="#//FromReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment" eSuperTypes="#//Instruction #//VariableDeclarationCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" lowerBound="1"
+        eType="#//ObjectAssignmentCommand" containment="true" eOpposite="#//ObjectAssignmentCommand/declaration"/>
   </eClassifiers>
 </ecore:EPackage>
