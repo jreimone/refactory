@@ -12,7 +12,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
-	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.language.refactoring.roles.resource.rolestext";
+	overrideHoverTextProvider = "false";
 	//additionalDependencies = "org.emftext.refactoring.util";
 	//overridePluginXML = "false";
 	//overrideManifest = "false";
