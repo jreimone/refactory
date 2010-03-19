@@ -27,6 +27,7 @@ import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.SET;
 import org.emftext.language.refactoring.refactoring_specification.SourceContext;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
+import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -119,6 +120,10 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	private boolean contextIsOptional(Context context){
 		if(context instanceof VariableReference){
 			Role role = RoleUtil.getRoleFromVariable(((VariableReference) context).getVariable());
+			if(role == null){
+				boolean optional = !(this.context.getEObjectForVariable(((VariableReference) context).getVariable()) != null); 
+				return optional;
+			}
 			if(containsModifierOPTIONAL(role)){return true;}
 		} 
 //		else if(context instanceof RoleReference){
@@ -248,6 +253,12 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 			ObjectAssignmentCommand object,
 			RefactoringInterpreterContext context) {
 		return objectInterpreter.interpreteObjectAssignmentCommand(object, context, selection);
+	}
+	
+	@Override
+	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_VariableAssignment(
+			VariableAssignment object, RefactoringInterpreterContext context) {
+		return objectInterpreter.interpreteObjectAssignmentCommand(object.getAssignment(), context, selection);
 	}
 
 	/* (non-Javadoc)
