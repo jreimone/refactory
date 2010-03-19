@@ -27,8 +27,8 @@ OPTIONS{
 }
 
 TOKENS{
-	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
-	DEFINE ML_COMMENT $'/*'.*'*/'$ COLLECT IN comments;
+	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $;
+	DEFINE ML_COMMENT $'/*'.*'*/'$;
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 	DEFINE INTEGER$('1'..'9')('0'..'9')*|'0'$;
@@ -61,6 +61,7 @@ TOKENSTYLES{
 	"trace" COLOR #50F05C, BOLD;
 	"first" COLOR #50F05C, BOLD;
 	"last" COLOR #50F05C, BOLD;
+	"as" COLOR #7F0055, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
 	"LOWER_IDENTIFIER" COLOR #0000FF;
 	"UPPER_IDENTIFIER" COLOR #0000FF;
@@ -87,7 +88,7 @@ RULES{
 	
 	RoleReference ::= role[UPPER_IDENTIFIER] #1 "from" #1 from;
 	
-	TRACE ::= "trace" "(" reference ")";
+	TRACE ::= role[UPPER_IDENTIFIER] "as" "trace" "(" reference ")";
 	
 	RelationReference ::= relation[DOT_NOTATION];
 	

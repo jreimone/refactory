@@ -95,6 +95,11 @@
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//TRACE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//TRACE/reference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//TRACE/role"/>
+    </genClasses>
+    <genClasses ecoreClass="refactoring_specification.ecore#//TraceObject">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//TraceObject/container"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//TraceObject/appliedRole"/>
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//VariableAssignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//VariableAssignment/assignment"/>
