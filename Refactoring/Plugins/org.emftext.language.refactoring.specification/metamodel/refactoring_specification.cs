@@ -21,7 +21,8 @@ OPTIONS{
 	basePackage = "org.emftext.language.refactoring.specification.resource";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
-	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.language.refactoring.roles.resource.rolestext";
+	overrideHoverTextProvider = "false";
 	//overrideManifest = "false";
 	//overridePluginXML = "false";
 }
