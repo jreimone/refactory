@@ -15,8 +15,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
+import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
+import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
 import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -41,8 +43,12 @@ public class RoleUtil {
 		VariableDeclarationCommand command = variable.getContainerCommand();
 		if(command instanceof CREATE){
 			return ((CREATE) command).getSourceRole();
-		} else if(command instanceof RoleReference){
-			return ((RoleReference) command).getRole();
+		} else if(command instanceof VariableAssignment){
+			VariableAssignment assignment = (VariableAssignment) command;
+			ObjectAssignmentCommand objectAssignment = assignment.getAssignment();
+			if(objectAssignment instanceof RoleReference){
+				return ((RoleReference) objectAssignment).getRole();
+			}
 		}
 		return null;
 	}
