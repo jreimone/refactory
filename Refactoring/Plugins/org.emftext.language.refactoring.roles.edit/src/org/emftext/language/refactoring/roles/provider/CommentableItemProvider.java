@@ -26,17 +26,17 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.refactoring.roles.NamedElement;
+import org.emftext.language.refactoring.roles.Commentable;
 import org.emftext.language.refactoring.roles.RolesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.refactoring.roles.NamedElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.refactoring.roles.Commentable} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NamedElementItemProvider
-	extends CommentableItemProvider
+public class CommentableItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -49,7 +49,7 @@ public class NamedElementItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedElementItemProvider(AdapterFactory adapterFactory) {
+	public CommentableItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,25 +64,25 @@ public class NamedElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addCommentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Comment feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addCommentPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_NamedElement_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
-				 RolesPackage.Literals.NAMED_ELEMENT__NAME,
+				 getString("_UI_Commentable_comment_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Commentable_comment_feature", "_UI_Commentable_type"),
+				 RolesPackage.Literals.COMMENTABLE__COMMENT,
 				 true,
 				 false,
 				 false,
@@ -99,10 +99,10 @@ public class NamedElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((NamedElement)object).getName();
+		String label = ((Commentable)object).getComment();
 		return label == null || label.length() == 0 ?
-			getString("_UI_NamedElement_type") :
-			getString("_UI_NamedElement_type") + " " + label;
+			getString("_UI_Commentable_type") :
+			getString("_UI_Commentable_type") + " " + label;
 	}
 
 	/**
@@ -116,8 +116,8 @@ public class NamedElementItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(NamedElement.class)) {
-			case RolesPackage.NAMED_ELEMENT__NAME:
+		switch (notification.getFeatureID(Commentable.class)) {
+			case RolesPackage.COMMENTABLE__COMMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -134,6 +134,17 @@ public class NamedElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return RolesEditPlugin.INSTANCE;
 	}
 
 }
