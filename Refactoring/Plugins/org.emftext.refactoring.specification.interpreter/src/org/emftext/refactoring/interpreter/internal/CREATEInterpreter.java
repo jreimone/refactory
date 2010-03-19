@@ -3,7 +3,6 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -15,7 +14,6 @@ import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.util.RoleUtil;
@@ -57,21 +55,9 @@ public class CREATEInterpreter {
 		if(parentObject instanceof TraceObject){
 			TraceObject trace = (TraceObject) parentObject;
 			parentObject = trace.getContainer();
-
 			Role appliedContainerRole = trace.getAppliedRole();
 			ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(appliedContainerRole);
 			relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
-
-			//			ReferenceMetaClassPair pair = trace.getReferenceMetaClassPair();
-			//			pair.setMetaClass(childObject.eClass());
-
-
-			//			Integer objectIndex = context.getIndexForVariable(index);
-			//			AbstractPathCreator pathCreator = new CreatePathCreator();
-			//			List<ReferenceMetaClassPair> dummyList = new ArrayList<ReferenceMetaClassPair>();
-			//			dummyList.add(pair);
-			//			return pathCreator.createPath(parent, dummyList, childObject, objectIndex);
-
 		} else {
 			Role varRole = RoleUtil.getRoleFromVariable(targetVar);
 			ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(varRole);
