@@ -24,8 +24,8 @@ OPTIONS {
 }
 
 TOKENS{
-	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
-	DEFINE ML_COMMENT $'/*'.*'*/'$ COLLECT IN comments;
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $;
+	DEFINE ML_COMMENT $'/*'.*'*/'$;
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 
