@@ -41,6 +41,7 @@ TOKENS{
 	DEFINE UPPER_IDENTIFIER $('A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
 	DEFINE LOWER_IDENTIFIER $('a'..'z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;	
 	DEFINE NUMBER $('0')|('-1')|('*')|(('1'..'9')('0'..'9')*)$;
+	//DEFINE COMMENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|' ')*$;
 }
 
 TOKENSTYLES{
@@ -57,11 +58,14 @@ TOKENSTYLES{
 }
 
 RULES {
-	RoleModel ::= "RoleModel" #1 name[UPPER_IDENTIFIER] "{" !1 roles* !0 !0 relations* !0 "}";
+	RoleModel ::= 		(comment['/**','*/'])?
+						"RoleModel" #1 name[UPPER_IDENTIFIER] "{" !1 roles* !0 !0 relations* !0 "}";
 	
-	Role ::= ( modifier[ROLE_MODIFIER]* )? #1 "ROLE" #1 name[UPPER_IDENTIFIER] ("(" attributes ("," attributes)* ")")? ";" !0;
+	Role ::= 			(comment['/**','*/'])?
+						( modifier[ROLE_MODIFIER]* )? #1 "ROLE" #1 name[UPPER_IDENTIFIER] ("(" attributes ("," attributes)* ")")? ";" !0;
 	
-	RoleAttribute ::= modifier[ROLE_MODIFIER]* name[LOWER_IDENTIFIER];
+	RoleAttribute ::= 	(comment['/**','*/'])?
+						modifier[ROLE_MODIFIER]* name[LOWER_IDENTIFIER];
 	
 	RoleProhibition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[UPPER_IDENTIFIER] #1 "|-|" #1 target[UPPER_IDENTIFIER] ";" !0;
 	

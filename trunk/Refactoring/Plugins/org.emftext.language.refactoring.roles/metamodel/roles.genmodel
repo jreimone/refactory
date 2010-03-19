@@ -59,5 +59,8 @@
           ecoreFeature="ecore:EReference roles.ecore#//RoleAttribute/interpretationContext"/>
     </genClasses>
     <genClasses image="false" ecoreClass="roles.ecore#//RoleFeature"/>
+    <genClasses image="false" ecoreClass="roles.ecore#//Commentable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Commentable/comment"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
