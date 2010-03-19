@@ -13,7 +13,10 @@ import org.emftext.language.refactoring.refactoring_specification.FromClause;
 import org.emftext.language.refactoring.refactoring_specification.FromOperator;
 import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationFactory;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
+import org.emftext.language.refactoring.refactoring_specification.TRACE;
+import org.emftext.language.refactoring.refactoring_specification.TraceObject;
 import org.emftext.language.refactoring.refactoring_specification.UPTREE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
@@ -48,25 +51,43 @@ public class ObjectAssignmentInterpreter {
 			value = handleRoleReference((RoleReference) object);
 		}
 		
+		if(object instanceof TRACE){
+			value = handleTrace((TRACE) object);
+		}
+		
 		if(value != null){
 			context.addEObjectForVariable(objectVar, value);
 		}
 		
 		return true;
 	}
+	
+	private EObject handleTrace(TRACE trace){
+		FromReference from = trace.getReference();
+		List<? extends EObject> objects = getFromReferenceObject(from);
+		EObject first = objects.get(0);
+		EObject container = first.eContainer();
+//		EReference reference = first.eContainmentFeature();
+//		ReferenceMetaClassPair pair = RolemappingFactory.eINSTANCE.createReferenceMetaClassPair();
+//		pair.setReference(reference);
+		TraceObject traceObject = RefactoringSpecificationFactory.eINSTANCE.createTraceObject();
+		traceObject.setAppliedRole(trace.getRole());
+		traceObject.setContainer(container);
+//		traceObject.setReferenceMetaClassPair(pair);
+		return traceObject;
+	}
 
 	private EObject handleRoleReference(RoleReference roleRef) {
 		FromClause from = roleRef.getFrom();
 		FromOperator operator = from.getOperator();
-		List<? extends EObject> fromObjects = getFromReferenceObject(from);
+		List<? extends EObject> fromObjects = getFromReferenceObject(from.getReference());
 		if(operator instanceof UPTREE){
 			return handleFromOperatorUPTREE(roleRef.getRole(), fromObjects);	
 		}
 		return null;
 	}
 	
-	private List<? extends EObject> getFromReferenceObject(FromClause from){
-		FromReference reference = from.getReference();
+	private List<? extends EObject> getFromReferenceObject(FromReference reference){
 		if(reference instanceof ConstantsReference){
 			Constants constant = ((ConstantsReference) reference).getReferencedConstant();
 			switch (constant) {
@@ -96,20 +117,5 @@ public class ObjectAssignmentInterpreter {
 		}
 		// build up uptree
 		return RoleUtil.getFirstCommonObjectWithRoleFromPaths(fromRole, mapping, (List<? extends EObject>[]) rootPaths);
-//		RelationMapping relationMapping = mapping.getConcreteMappingForRole(targetRole).getRelationMappingForTargetRole(childRole);
-//		EClass childClass = mapping.getEClassForRole(childRole);
-//		EObject childObject = null;
-//		if(variable != null && context.getEObjectForVariable(variable) != null){
-//			childObject = context.getEObjectForVariable(variable);
-//		} else {
-//			childObject = ModelUtil.create(childClass);
-//		}
-//		List<ReferenceMetaClassPair> referencePairs = null;
-//		if(relationMapping != null){
-//			referencePairs = relationMapping.getReferenceMetaClassPair();
-//		}
-//		Integer objectIndex = context.getIndexForVariable(index);
-//		AbstractPathCreator pathCreator = new CreatePathCreator();
-//		return pathCreator.createPath(targetObject, referencePairs, childObject, objectIndex);
 	}
 }
