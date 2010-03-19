@@ -2,10 +2,9 @@ REFACTORING CREATEcommandRefactoring
 FOR <platform:/resource/org.emftext.refactoring.tests/testInput/registry/CREATEcommand.rolestext> 
 
 STEPS { 
-	create new Createe in Container;
-	// sollte dasselbe ergeben, wie in vorhergehender Zeile
-	create new Createe in Container from uptree(INPUT);
-	create new nc1:Createe in Container;
-	// sollte dasselbe ergeben, wie in vorhergehender Zeile
-	create new nc2:Createe in Container from uptree(INPUT); 
+	object container := Container from uptree(INPUT);
+	create new c1:Createe in container;
+	create new c2:Createe in container;
+	create new nc1:Createe in container;
+	create new nc2:Createe in container; 
 } 
