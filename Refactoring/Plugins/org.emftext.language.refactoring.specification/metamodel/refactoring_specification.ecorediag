@@ -653,6 +653,41 @@
     <element xmi:type="ecore:EClass" href="refactoring_specification.ecore#//VariableAssignment"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_L85q0jKfEd-Ai8vgQqAtWQ" x="90" y="240"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_wS9boDNUEd-aP7nyfPyxng" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_wS9bozNUEd-aP7nyfPyxng" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_wS9bpDNUEd-aP7nyfPyxng" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_wS9bpTNUEd-aP7nyfPyxng"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_wS9bpjNUEd-aP7nyfPyxng"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_wS9bpzNUEd-aP7nyfPyxng"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_wS9bqDNUEd-aP7nyfPyxng" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_wS9bqTNUEd-aP7nyfPyxng"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_wS9bqjNUEd-aP7nyfPyxng"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_wS9bqzNUEd-aP7nyfPyxng"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_wS9boTNUEd-aP7nyfPyxng" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="refactoring_specification.ecore#//TraceObject"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wS9bojNUEd-aP7nyfPyxng" x="-5" y="540"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_xi-SADNUEd-aP7nyfPyxng" type="1001">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_xi-SDDNUEd-aP7nyfPyxng" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_xi-SDTNUEd-aP7nyfPyxng" key="modelID" value="EcoreTools"/>
+    </eAnnotations>
+    <children xmi:type="notation:Node" xmi:id="_xi-SAzNUEd-aP7nyfPyxng" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_xi-SBDNUEd-aP7nyfPyxng" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_xi-SBTNUEd-aP7nyfPyxng"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_xi-SBjNUEd-aP7nyfPyxng"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_xi-SBzNUEd-aP7nyfPyxng"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xi-SCDNUEd-aP7nyfPyxng" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_xi-SCTNUEd-aP7nyfPyxng" collapsed="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_xi-SCjNUEd-aP7nyfPyxng"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_xi-SCzNUEd-aP7nyfPyxng"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_xi-SATNUEd-aP7nyfPyxng" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xi-SAjNUEd-aP7nyfPyxng" x="-65" y="640"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_KtnJ8h1mEd-RSI0QizO43A"/>
   <element xmi:type="ecore:EPackage" href="refactoring_specification.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_ssg4YB1mEd-RSI0QizO43A" type="3002" source="_Whx7kB1mEd-RSI0QizO43A" target="_pmzrsB1mEd-RSI0QizO43A">
@@ -1180,5 +1215,32 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ePHogzKgEd-Ai8vgQqAtWQ" points="[0, -8, 1, 88]$[0, -113, 1, -17]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ePHoiDKgEd-Ai8vgQqAtWQ" id="(0.2265193370165746,0.20930232558139536)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ePHoiTKgEd-Ai8vgQqAtWQ" id="(0.11194029850746269,0.42857142857142855)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_xjR0ADNUEd-aP7nyfPyxng" type="3002" source="_wS9boDNUEd-aP7nyfPyxng" target="_xi-SADNUEd-aP7nyfPyxng">
+    <children xmi:type="notation:Node" xmi:id="_xjR0BDNUEd-aP7nyfPyxng" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_xjR0BTNUEd-aP7nyfPyxng" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xjR0BjNUEd-aP7nyfPyxng" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_xjR0BzNUEd-aP7nyfPyxng" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_xjR0ATNUEd-aP7nyfPyxng" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_xjR0AjNUEd-aP7nyfPyxng" fontColor="4210752" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="refactoring_specification.ecore#//TraceObject/container"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_xjR0AzNUEd-aP7nyfPyxng" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xkBa4jNUEd-aP7nyfPyxng" id="(0.5,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xkBa4zNUEd-aP7nyfPyxng" id="(0.9711538461538461,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_PdDiUDNkEd-aP7nyfPyxng" type="3002" source="_XgHr0DKeEd-Ai8vgQqAtWQ" target="_lf18cB4NEd-ggaHfox02rw">
+    <children xmi:type="notation:Node" xmi:id="_PdDiVDNkEd-aP7nyfPyxng" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_PdDiVTNkEd-aP7nyfPyxng" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_PdDiVjNkEd-aP7nyfPyxng" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_PdDiVzNkEd-aP7nyfPyxng" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_PdDiUTNkEd-aP7nyfPyxng" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_PdDiUjNkEd-aP7nyfPyxng" fontColor="4210752" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="refactoring_specification.ecore#//TRACE/role"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_PdDiUzNkEd-aP7nyfPyxng" points="[17, -3, -655, 93]$[655, -125, -17, -29]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_PdDiWDNkEd-aP7nyfPyxng" id="(0.8333333333333334,0.38095238095238093)"/>
   </edges>
 </notation:Diagram>
