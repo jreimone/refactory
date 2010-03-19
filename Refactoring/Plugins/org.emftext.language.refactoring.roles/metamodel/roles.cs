@@ -58,13 +58,13 @@ TOKENSTYLES{
 }
 
 RULES {
-	RoleModel ::= 		(comment['/**','*/'])?
+	RoleModel ::= 		(comment[ML_COMMENT])?
 						"RoleModel" #1 name[UPPER_IDENTIFIER] "{" !1 roles* !0 !0 relations* !0 "}";
 	
-	Role ::= 			(comment['/**','*/'])?
+	Role ::= 			(comment[ML_COMMENT])?
 						( modifier[ROLE_MODIFIER]* )? #1 "ROLE" #1 name[UPPER_IDENTIFIER] ("(" attributes ("," attributes)* ")")? ";" !0;
 	
-	RoleAttribute ::= 	(comment['/**','*/'])?
+	RoleAttribute ::= 	(comment[ML_COMMENT])?
 						modifier[ROLE_MODIFIER]* name[LOWER_IDENTIFIER];
 	
 	RoleProhibition ::= (modifier[RELATION_MODIFIER]* #1 ":")? #1 source[UPPER_IDENTIFIER] #1 "|-|" #1 target[UPPER_IDENTIFIER] ";" !0;
