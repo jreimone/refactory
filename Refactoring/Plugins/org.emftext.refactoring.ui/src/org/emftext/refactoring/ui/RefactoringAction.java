@@ -7,6 +7,8 @@ import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -20,12 +22,14 @@ public class RefactoringAction extends Action {
 	private Mapping mapping;
 	private IRefactorer refactorer;
 	private Resource resource;
+	private ISelectionProvider selectionProvider;
 
-	public RefactoringAction(Mapping mapping, IRefactorer refactorer, Resource resource) {
+	public RefactoringAction(Mapping mapping, IRefactorer refactorer, Resource resource, ISelectionProvider selectionProvider) {
 		super();
 		this.mapping = mapping;
 		this.refactorer = refactorer;
 		this.resource = resource;
+		this.selectionProvider = selectionProvider;
 	}
 
 	/* (non-Javadoc)
@@ -50,6 +54,8 @@ public class RefactoringAction extends Action {
 			resource.getContents().set(0, refactoredModel);
 			resource.save(null);
 			resource.setModified(true);
+//			ISelection selection = selectionProvider.getSelection();
+//			selectionProvider.setSelection(selection);
 			
 		} catch (Exception e) {
 			change = recorder.endRecording();

@@ -5,7 +5,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
@@ -110,7 +109,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 					if(refSpec != null){
 						String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
-						Action refactoringAction = new RefactoringAction(mapping, refactorer, resource);
+						Action refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider);
 						refactoringAction.setText(refactoringName);
 						rootMenu.add(refactoringAction);
 						containsEntries = true;
