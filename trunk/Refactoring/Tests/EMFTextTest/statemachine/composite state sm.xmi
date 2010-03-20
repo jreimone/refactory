@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ASCII"?>
+<uml:StateMachine xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" name="Example">
+  <region>
+    <subvertex xsi:type="uml:Pseudostate" name="init"/>
+    <subvertex xsi:type="uml:State" name="first">
+      <doActivity xsi:type="uml:Activity" name="action1"/>
+    </subvertex>
+    <subvertex xsi:type="uml:State" name="s1">
+      <doActivity xsi:type="uml:Activity" name="s1_action"/>
+    </subvertex>
+    <subvertex xsi:type="uml:State" name="s2">
+      <doActivity xsi:type="uml:Activity" name="s2_action"/>
+      <region>
+        <subvertex xsi:type="uml:Pseudostate" name="subInit"/>
+        <subvertex xsi:type="uml:FinalState" name="subEnd"/>
+        <transition source="//@region.0/s2/@region.0/subInit" target="//@region.0/s2/@region.0/subEnd">
+          <trigger name="doSomething"/>
+        </transition>
+      </region>
+    </subvertex>
+    <subvertex xsi:type="uml:State" name="s4">
+      <doActivity xsi:type="uml:Activity" name="s4_action"/>
+      <region>
+        <subvertex xsi:type="uml:Pseudostate" name="sub_init"/>
+        <subvertex xsi:type="uml:State" name="sub1">
+          <doActivity xsi:type="uml:Activity" name="subaction1"/>
+        </subvertex>
+        <subvertex xsi:type="uml:State" name="sub2">
+          <doActivity xsi:type="uml:Activity" name="subaction2"/>
+        </subvertex>
+        <subvertex xsi:type="uml:FinalState" name="sub_end">
+          <doActivity xsi:type="uml:Activity" name="nothing"/>
+        </subvertex>
+        <transition source="//@region.0/s4/@region.0/sub_init" target="//@region.0/s4/@region.0/sub1">
+          <trigger name="substep"/>
+        </transition>
+        <transition source="//@region.0/s4/@region.0/sub1" target="//@region.0/s4/@region.0/sub2">
+          <trigger name="substep"/>
+        </transition>
+        <transition source="//@region.0/s4/@region.0/sub2" target="//@region.0/s4/@region.0/sub_end">
+          <trigger name="substep"/>
+        </transition>
+      </region>
+    </subvertex>
+    <subvertex xsi:type="uml:FinalState" name="end">
+      <doActivity xsi:type="uml:Activity" name="action2"/>
+    </subvertex>
+    <transition source="//@region.0/init" target="//@region.0/first">
+      <trigger name="step"/>
+    </transition>
+    <transition source="//@region.0/first" target="//@region.0/s1">
+      <trigger name="step"/>
+    </transition>
+    <transition source="//@region.0/s1" target="//@region.0/s2">
+      <trigger name="step"/>
+    </transition>
+    <transition source="//@region.0/s2" target="//@region.0/s4">
+      <trigger name="step"/>
+    </transition>
+    <transition source="//@region.0/s4" target="//@region.0/end">
+      <trigger name="step"/>
+    </transition>
+  </region>
+</uml:StateMachine>
