@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EPackage;
+import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemapping.exceptions.RoleMappingAlreadyRegistered;
@@ -66,5 +68,23 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 
 	public Map<String, RoleMappingModel> getRoleMappingMap() {
 		return roleMappingMap;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry#getPostProcessor(java.lang.String, java.lang.String)
+	 */
+	public IRefactoringPostProcessor getPostProcessor(String nsUri,
+			String mappingName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry#registerPostProcessor(org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.emftext.language.refactoring.rolemapping.Mapping, org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor)
+	 */
+	public void registerPostProcessor(RoleMappingModel roleMapping,
+			Mapping mapping, IRefactoringPostProcessor postProcessor) {
+		// TODO Auto-generated method stub
+		
 	}
 }
