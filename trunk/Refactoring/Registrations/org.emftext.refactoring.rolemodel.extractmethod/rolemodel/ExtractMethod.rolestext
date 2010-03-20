@@ -1,6 +1,7 @@
 RoleModel ExtractMethod {
 	/**
-	This role represents the container class which contains the elements with role 'Extract'
+	This role represents the container class which contains the elements being intended to be moved
+	to the new container.
 	*/
 	ROLE OrigContainer;
 	
