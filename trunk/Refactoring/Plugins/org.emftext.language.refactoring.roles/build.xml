@@ -32,7 +32,7 @@
 	</target>
 	
 	<target name="generate-metamodel-code">
-		<generate-metamodel-code plugin="${metamodelplugin}" model="${metamodelname}" generateEditProject="false" />
+		<generate-metamodel-code plugin="${metamodelplugin}" model="${metamodelname}" generateEditProject="true" />
 	</target>
 	
 	<macrodef name="generate-metamodel-code">
