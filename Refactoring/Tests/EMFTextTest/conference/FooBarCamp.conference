@@ -12,8 +12,6 @@ AT 9:0 : TALK "Foo vs. F00" PRESENTED BY "Andrew Bloomfield"
 AT 11:0 : TALK "Onyl Bar-S is true" PRESENTED BY "Homer Simpson" 
 AT 14:0 : TALK "This is now not Foo" PRESENTED BY "F. Barfoes" 
 
-TRACK "newTrackName1" : 
-
 REGISTERED SPEAKERS : 
 "Peter Meyers" FROM Germany , 
 "Andrew Bloomfield" FROM USA , 

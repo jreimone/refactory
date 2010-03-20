@@ -1,0 +1,30 @@
+StateMachine Example { 
+	initial state init ; 
+	
+	state first { 
+		do : "action1" 
+		
+		} ; 
+	
+	state s1 { 
+		do : "s1_action" 
+		
+		} ; 
+	
+	state s4 { 
+		do : "s4_action" 
+		
+		} ; 
+	
+	final state end { 
+		do : "action2" 
+		} ; 
+	
+	transitions { 
+		init -> first when "step" ; 
+		first -> s1 when "step" ; 
+		s4 -> end when "step" ; 
+		s1 -> s4 when "triggerSomething" ; 
+		
+		} 
+	} 
