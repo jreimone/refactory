@@ -6,24 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Activity;
 import org.eclipse.uml2.uml.Region;
 import org.eclipse.uml2.uml.State;
 import org.eclipse.uml2.uml.Transition;
 import org.eclipse.uml2.uml.UMLFactory;
-import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.Vertex;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
 public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostProcessor {
 
-	private Transition movedReference;
-	private Region origContainer;
 	private List<State> extract;
-	private Region containerContainer;
 	private State newContainer;
 
 	@SuppressWarnings("unchecked")
@@ -32,21 +27,9 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
 			Object runtimeObject = roleRuntimeInstanceMap.get(role);
-			if(role.getName().equals("MovedReference")){
-				if(runtimeObject instanceof Transition){
-					movedReference = (Transition) runtimeObject;
-				}
-			} else if(role.getName().equals("OrigContainer")){
-				if(runtimeObject instanceof Region){
-					origContainer = (Region) runtimeObject;
-				}
-			} else if(role.getName().equals("Extract")){
+			if(role.getName().equals("Extract")){
 				if(runtimeObject instanceof List<?>){
 					extract = (List<State>) runtimeObject;
-				}
-			} else if(role.getName().equals("ContainerContainer")){
-				if(runtimeObject instanceof Region){
-					containerContainer = (Region) runtimeObject;
 				}
 			} else if(role.getName().equals("NewContainer")){
 				if(runtimeObject instanceof State){
