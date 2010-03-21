@@ -9,7 +9,7 @@ import org.emftext.language.java.types.Void;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
-public class JavaPostProcessor implements IRefactoringPostProcessor {
+public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor {
 
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor#process(java.util.Map)
