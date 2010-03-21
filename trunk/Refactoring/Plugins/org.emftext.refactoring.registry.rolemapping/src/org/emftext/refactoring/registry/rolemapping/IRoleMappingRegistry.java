@@ -2,6 +2,7 @@ package org.emftext.refactoring.registry.rolemapping;
 
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.registry.rolemapping.exceptions.RoleMappingAlreadyRegistered;
@@ -48,12 +49,11 @@ public interface IRoleMappingRegistry {
 	public void registerPostProcessor(RoleMappingModel roleMapping, Mapping mapping, IRefactoringPostProcessor postProcessor);
 	
 	/**
-	 * Returns the postprocessor registered to the metamodel, specified by the given <code>nsUri</code>, and the {@link Mapping mapping},
-	 * specified by the given <code>mappingName</code>. 
+	 * Returns the postprocessor registered to the metamodel and the {@link Mapping mapping}. 
 	 * 
-	 * @param nsUri
-	 * @param mappingName
+	 * @param metamodel
+	 * @param mapping
 	 * @return
 	 */
-	public IRefactoringPostProcessor getPostProcessor(String nsUri, String mappingName);
+	public IRefactoringPostProcessor getPostProcessor(EPackage metamodel, Mapping mapping);
 }

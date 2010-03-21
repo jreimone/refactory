@@ -2,5 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.emftext.refactoring.rolemapping" name="rolemapping" schema="schema/org.emftext.refactoring.rolemapping.exsd"/>
+   <extension-point id="org.emftext.refactoring.postprocessor" name="postprocessor" schema="schema/org.emftext.refactoring.postprocessor.exsd"/>
 
 </plugin>

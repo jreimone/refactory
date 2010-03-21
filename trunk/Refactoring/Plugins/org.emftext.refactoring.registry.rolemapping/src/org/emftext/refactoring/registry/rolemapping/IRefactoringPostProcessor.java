@@ -27,12 +27,12 @@ public interface IRefactoringPostProcessor {
 
 	/**
 	 * This method will be invoked after the refactoring process. Do some additional transformations here by using 
-	 * the given <code>roleRuntimeInstanceMap</code>. Its keys are the names of the {@link Role roles} used in the
+	 * the given <code>roleRuntimeInstanceMap</code>. Its keys are the {@link Role roles} used in the
 	 * {@link ConcreteMapping concrete mappings} of the {@link Mapping mapping} to which this postprocessor is connected.
 	 * The value of each key can be a single {@link EObject object} or a list of {@link EObject objects} representing
 	 * the concrete objects on which the roles were bound at runtime of the refactoring.
 	 * 
-	 * @param roleRuntimeInstanceMap the map containing {@link Role role} names as keys and its at runtime bound {@link EObject objects} as values 
+	 * @param roleRuntimeInstanceMap the map containing {@link Role roles} as keys and its at runtime bound {@link EObject objects} as values 
 	 */
-	public void process(Map<String, Object> roleRuntimeInstanceMap);
+	public void process(Map<Role, Object> roleRuntimeInstanceMap);
 }
