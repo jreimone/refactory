@@ -32,9 +32,9 @@ public abstract class AbstractPathCreator {
 	abstract protected boolean onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature);
 
 	abstract protected boolean onePairLeftIndexNull(Object children, ReferenceMetaClassPair referencePair, Object feature);
-	
+
 	abstract protected EObject getTargetObjectForPathCalculation(Object target);
-	
+
 	@SuppressWarnings("unchecked")
 	public boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, Object child, Integer index){
 		if(remainingReferences == null){
@@ -82,7 +82,7 @@ public abstract class AbstractPathCreator {
 			for (ReferenceMetaClassPair referenceMetaClassPair : remainingReferences) {
 				tempRemainingList.add(referenceMetaClassPair);
 			}
-			
+
 			ReferenceMetaClassPair referencePair = tempRemainingList.get(0);
 			tempRemainingList.remove(referencePair);
 			Object feature = parent.eGet(referencePair.getReference());
@@ -103,12 +103,14 @@ public abstract class AbstractPathCreator {
 					if(((List<EObject>) feature).size() <= index){
 						((List<EObject>) feature).add(featureObject);
 					}
-					((List<EObject>) feature).add(index, featureObject);
+					if(!((List<EObject>) feature).contains(featureObject)){
+						((List<EObject>) feature).add(index, featureObject);
+					}
 				}
 			} else {
 				parent.eSet(referencePair.getReference(), featureObject);
 			}
-//			((List<EObject>) feature).add(featureObject);
+			//			((List<EObject>) feature).add(featureObject);
 			return createPath(featureObject, tempRemainingList, child, index);
 		}
 	}
