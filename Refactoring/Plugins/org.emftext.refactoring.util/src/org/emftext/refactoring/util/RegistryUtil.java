@@ -17,15 +17,22 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class RegistryUtil {
 
+	public static IConfigurationElement[] collectConfigurationElements(String extensionPoint){
+		IExtensionRegistry registry = Platform.getExtensionRegistry();
+		if(registry == null){
+			return null;
+		}
+		return registry.getConfigurationElementsFor(extensionPoint);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> List<T> collectRegisteredResources(String extensionPoint, String attribute, Class<T> expectedModel){
 		ResourceSet rs = new ResourceSetImpl();
 		List<T> resources = new ArrayList<T>();
-		IExtensionRegistry registry = Platform.getExtensionRegistry();
-		if(registry == null){
+		IConfigurationElement[] elements = collectConfigurationElements(extensionPoint);
+		if(elements == null){
 			return resources;
 		}
-		IConfigurationElement[] elements = registry.getConfigurationElementsFor(extensionPoint);
 		for (IConfigurationElement element : elements) {
 			String value = element.getAttribute(attribute);
 			String plugin = element.getContributor().getName();
