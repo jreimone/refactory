@@ -60,6 +60,8 @@ public class ObjectAssignmentInterpreter {
 		
 		if(value != null){
 			context.addEObjectForVariable(objectVar, value);
+		}
+		if(roleRuntimeValue == null){
 			roleRuntimeValue = value;
 		}
 		
@@ -72,6 +74,7 @@ public class ObjectAssignmentInterpreter {
 		List<? extends EObject> objects = getFromReferenceObject(from);
 		EObject first = objects.get(0);
 		EObject container = first.eContainer();
+		roleRuntimeValue = container;
 //		EReference reference = first.eContainmentFeature();
 //		ReferenceMetaClassPair pair = RolemappingFactory.eINSTANCE.createReferenceMetaClassPair();
 //		pair.setReference(reference);
