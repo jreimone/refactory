@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.java.util;
+//package org.emftext.language.java.util;
 
 /**
  * A CharacterEscaper can be used to escape and unescape special characters
