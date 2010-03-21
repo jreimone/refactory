@@ -1,11 +1,14 @@
-program p1
+PROGRAM p1 
 
-CONST a = 25, b =10;
-
-VAR x,y,z;
-
-BEGIN
-	x := b - a; 
-	y := x * 12;
-	z := y / a
-END.
+CONST 
+	a = 25 , 
+	b = 10 ; 
+	
+	VAR 
+	x , y , z ; 
+	
+BEGIN 
+	x := + b - a ; 
+	y := + x * 12 ; 
+	z := + y / a 
+END . 
