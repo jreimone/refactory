@@ -15,8 +15,4 @@ ExtractCompositeState maps <ExtractMethod> {
 	NewContainer := State (newName -> name){
 		moved := region -> subvertex:State;
 	};
-	
-	MovedReference := Transition{
-		containerRef := target:State;
-	};
 }	
