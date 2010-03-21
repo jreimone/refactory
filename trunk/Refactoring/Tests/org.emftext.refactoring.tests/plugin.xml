@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.emftext.refactoring.rolemapping">
-      <rolemapping
-            rolemapping_resource="testInput/registry/pl0mapping.rolemapping">
-      </rolemapping>
-      <rolemapping
-            rolemapping_resource="testInput/registry/conference.rolemapping">
-      </rolemapping>
-      <rolemapping
-            rolemapping_resource="testInput/registry/java.rolemapping">
-      </rolemapping>
-      <rolemapping
-            rolemapping_resource="testInput/registry/statemachine.rolemapping">
-      </rolemapping>
-   </extension>
 
 </plugin>
