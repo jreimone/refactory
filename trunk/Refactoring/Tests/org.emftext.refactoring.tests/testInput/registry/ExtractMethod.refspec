@@ -3,7 +3,6 @@ FOR <ExtractMethod>
 
 STEPS { 
 	object containerContainerObject := ContainerContainer from uptree(INPUT);
-	//object origContainerObject := OrigContainer from uptree(INPUT);
 	object origContainerObject := OrigContainer as trace(INPUT);
 	index extractsIndex := first(INPUT);
 	 
