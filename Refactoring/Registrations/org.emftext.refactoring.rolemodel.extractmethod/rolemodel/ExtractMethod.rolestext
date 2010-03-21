@@ -1,3 +1,9 @@
+/**
+This role model describes all roles being used to express the original Martin Fowler refactoring 
+<a href="http://www.refactoring.com/catalog/extractMethod.html">Extract Method</a>.
+Therein statements contained in a method (e.g. Java) will be selected and removed to a newly created method.
+At the old position of the statements a method call will be set instead.
+*/
 RoleModel ExtractMethod {
 	/**
 	This role represents the container class which contains the elements being intended to be moved
