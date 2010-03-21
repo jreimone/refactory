@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/pl0mapping.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/java.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/statemachine.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/conference.rolemapping">
+      </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="ExtractMethod"
+            nsUri="http://www.emftext.org/java"
+            postprocessor="org.emftext.refactoring.postprocessors.JavaPostProcessor">
+      </postprocessor>
+   </extension>
 
 </plugin>
