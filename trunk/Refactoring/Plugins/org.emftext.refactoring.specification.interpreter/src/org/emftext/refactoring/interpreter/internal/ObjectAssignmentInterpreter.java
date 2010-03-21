@@ -34,6 +34,9 @@ public class ObjectAssignmentInterpreter {
 	private Mapping mapping;
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
+	
+	private Role assignedRole;
+	private Object roleRuntimeValue;
 
 	public ObjectAssignmentInterpreter(Mapping mapping) {
 		super();
@@ -57,12 +60,14 @@ public class ObjectAssignmentInterpreter {
 		
 		if(value != null){
 			context.addEObjectForVariable(objectVar, value);
+			roleRuntimeValue = value;
 		}
 		
 		return true;
 	}
 	
 	private EObject handleTrace(TRACE trace){
+		assignedRole = trace.getRole();
 		FromReference from = trace.getReference();
 		List<? extends EObject> objects = getFromReferenceObject(from);
 		EObject first = objects.get(0);
@@ -71,18 +76,19 @@ public class ObjectAssignmentInterpreter {
 //		ReferenceMetaClassPair pair = RolemappingFactory.eINSTANCE.createReferenceMetaClassPair();
 //		pair.setReference(reference);
 		TraceObject traceObject = RefactoringSpecificationFactory.eINSTANCE.createTraceObject();
-		traceObject.setAppliedRole(trace.getRole());
+		traceObject.setAppliedRole(assignedRole);
 		traceObject.setContainer(container);
 //		traceObject.setReferenceMetaClassPair(pair);
 		return traceObject;
 	}
 
 	private EObject handleRoleReference(RoleReference roleRef) {
+		assignedRole = roleRef.getRole();
 		FromClause from = roleRef.getFrom();
 		FromOperator operator = from.getOperator();
 		List<? extends EObject> fromObjects = getFromReferenceObject(from.getReference());
 		if(operator instanceof UPTREE){
-			return handleFromOperatorUPTREE(roleRef.getRole(), fromObjects);	
+			return handleFromOperatorUPTREE(assignedRole, fromObjects);	
 		}
 		return null;
 	}
@@ -117,5 +123,19 @@ public class ObjectAssignmentInterpreter {
 		}
 		// build up uptree
 		return RoleUtil.getFirstCommonObjectWithRoleFromPaths(fromRole, mapping, (List<? extends EObject>[]) rootPaths);
+	}
+
+	/**
+	 * @return the assignedRole
+	 */
+	public Role getAssignedRole() {
+		return assignedRole;
+	}
+
+	/**
+	 * @return the roleRuntimeValue
+	 */
+	public Object getRoleRuntimeValue() {
+		return roleRuntimeValue;
 	}
 }

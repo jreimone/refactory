@@ -4,8 +4,10 @@
 package org.emftext.refactoring.interpreter.internal;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -37,6 +39,7 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
@@ -55,6 +58,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	private RefactoringInterpreterContext context;
 	private RoleMappingModel roleMapping;
 	private Mapping mapping;
+	private IRefactoringPostProcessor postProcessor;
+	private Map<Role, Object> roleRuntimeInstanceMap;
 	
 	private CREATEInterpreter create;
 	private SETInterpreter set;
@@ -65,6 +70,11 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	
 	private Boolean occuredErrors;
 
+	public RefactoringInterpreter(IRefactoringPostProcessor postProcessor){
+		this.postProcessor = postProcessor;
+		roleRuntimeInstanceMap = new LinkedHashMap<Role, Object>();
+	}
+	
 	@Override
 	public Boolean interprete(EObject object, RefactoringInterpreterContext context) {
 		EcoreUtil.resolveAll(object);
@@ -178,6 +188,14 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		model = initialModel;
 		context.setInitialContext(mapping);
 		initInterpretationStack();
+		
+		List<Role> roles = mapping.getAllMappedRoles();
+		for (Role role : roles) {
+			if(role.getModifier().contains(RoleModifier.INPUT)){
+				roleRuntimeInstanceMap.put(role, selection);
+			}
+		}
+		
 		occuredErrors = !interprete(context);
 		return getModel();
 	}	
@@ -213,7 +231,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	@Override
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_CREATE(
 			CREATE object, RefactoringInterpreterContext context) {
-		return create.interpreteCREATE(object, context, selection);
+		Boolean result = create.interpreteCREATE(object, context, selection);
+		Role assignedRole = create.getAssignedRole();
+		Object roleRuntimeInstance = create.getRoleRuntimeInstance();
+		if(assignedRole != null && roleRuntimeInstance != null){
+			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
+		}
+		return result;
 	}
 
 	/* (non-Javadoc)
@@ -252,13 +276,20 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(
 			ObjectAssignmentCommand object,
 			RefactoringInterpreterContext context) {
-		return objectInterpreter.interpreteObjectAssignmentCommand(object, context, selection);
+		Boolean result = objectInterpreter.interpreteObjectAssignmentCommand(object, context, selection);
+		Role assignedRole = objectInterpreter.getAssignedRole();
+		Object roleRuntimeInstance = objectInterpreter.getRoleRuntimeValue();
+		if(assignedRole != null && roleRuntimeInstance != null){
+			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
+		}
+		return result;
 	}
 	
 	@Override
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_VariableAssignment(
 			VariableAssignment object, RefactoringInterpreterContext context) {
-		return objectInterpreter.interpreteObjectAssignmentCommand(object.getAssignment(), context, selection);
+		return interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(object.getAssignment(), context);
+//		return objectInterpreter.interpreteObjectAssignmentCommand(object.getAssignment(), context, selection);
 	}
 
 	/* (non-Javadoc)
@@ -281,5 +312,19 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 */
 	public boolean didErrorsOccur() {
 		return occuredErrors;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#getPostProcessor()
+	 */
+	public IRefactoringPostProcessor getPostProcessor() {
+		return postProcessor;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#getRoleRuntimeInstances()
+	 */
+	public Map<Role, Object> getRoleRuntimeInstances() {
+		return roleRuntimeInstanceMap;
 	}
 }
