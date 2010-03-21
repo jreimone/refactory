@@ -27,6 +27,8 @@ public class CREATEInterpreter {
 	private Mapping mapping;
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
+	private Role assignedRole;
+	private Object roleRuntimeInstance;
 
 	public CREATEInterpreter(Mapping mapping){
 		this.mapping = mapping;
@@ -36,9 +38,11 @@ public class CREATEInterpreter {
 		this.selection = selection;
 		this.context = context;
 		Role childRole = object.getSourceRole();
+		assignedRole = childRole;
 		Variable sourceVar = object.getVariable();
 		if(sourceVar != null){
 			context.addEObjectForVariable(sourceVar);
+			roleRuntimeInstance = context.getEObjectForVariable(sourceVar);
 		}
 		TargetContext target = object.getTargetContext();
 		if(target instanceof VariableReference){
@@ -73,5 +77,19 @@ public class CREATEInterpreter {
 			AbstractPathCreator pathCreator = new CreatePathCreator();
 			return pathCreator.createPath(parentObject, relationMapping.getReferenceMetaClassPair(), childObject, objectIndex);
 		}
+	}
+
+	/**
+	 * @return the assignedRole
+	 */
+	public Role getAssignedRole() {
+		return assignedRole;
+	}
+
+	/**
+	 * @return the roleRuntimeInstance
+	 */
+	public Object getRoleRuntimeInstance() {
+		return roleRuntimeInstance;
 	}
 }

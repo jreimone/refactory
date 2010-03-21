@@ -5,11 +5,14 @@ package org.emftext.refactoring.interpreter;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
 /**
  * Interface for RefactoringInterpreter
@@ -51,4 +54,17 @@ public interface IRefactoringInterpreter {
 	 * @return
 	 */
 	public boolean didErrorsOccur();
+	
+	/**
+	 * Returns the {@link IRefactoringPostProcessor postprocessor} connected to this interpreter instance.
+	 * 
+	 * @return
+	 */
+	public IRefactoringPostProcessor getPostProcessor();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Map<Role, Object> getRoleRuntimeInstances();
 }

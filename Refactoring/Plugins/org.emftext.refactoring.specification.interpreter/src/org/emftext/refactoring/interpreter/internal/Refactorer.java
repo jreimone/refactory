@@ -20,6 +20,8 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -32,13 +34,15 @@ public class Refactorer implements IRefactorer {
 	private RoleMappingModel roleMapping;
 	private List<? extends EObject> currentSelection;
 	private Map<Mapping, IRefactoringInterpreter> interpreterMap;
-	private IRefactoringSpecificationRegistry registry;
+	private IRefactoringSpecificationRegistry refSpecRegistry;
+	private IRoleMappingRegistry roleMappingRegistry;
 	private boolean occuredErrors;
 
 	public Refactorer(EObject model, RoleMappingModel roleMapping){
 		this.model = model;
 		this.roleMapping = roleMapping;
-		registry = IRefactoringSpecificationRegistry.INSTANCE;
+		refSpecRegistry = IRefactoringSpecificationRegistry.INSTANCE;
+		roleMappingRegistry = IRoleMappingRegistry.INSTANCE;
 		initInterpreterMap();
 	}
 
@@ -48,8 +52,9 @@ public class Refactorer implements IRefactorer {
 		for (Mapping mapping : mappings) {
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			EcoreUtil.resolveAll(roleModel);
-			RefactoringSpecification refSpec = registry.getRefSpec(roleModel);
-			IRefactoringInterpreter interpreter = new RefactoringInterpreter();
+			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(roleModel);
+			IRefactoringPostProcessor postProcessor = roleMappingRegistry.getPostProcessor(roleMapping.getTargetMetamodel(), mapping);
+			IRefactoringInterpreter interpreter = new RefactoringInterpreter(postProcessor);
 			interpreter.initialize(refSpec, model, roleMapping, mapping);
 			interpreterMap.put(mapping, interpreter);
 		}
@@ -62,7 +67,7 @@ public class Refactorer implements IRefactorer {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
 		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMapping, minEquality);
 		for (Mapping mapping : possibleMappings) {
-			RefactoringSpecification refSpec = registry.getRefSpec(mapping.getMappedRoleModel());
+			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(mapping.getMappedRoleModel());
 			if(refSpec != null){
 				refSpecs.add(refSpec);
 			}
@@ -114,6 +119,12 @@ public class Refactorer implements IRefactorer {
 		if(interpreter != null){
 			refactoredModel = interpreter.interprete(copy);
 			occuredErrors = interpreter.didErrorsOccur();
+			if(!occuredErrors){
+				IRefactoringPostProcessor postProcessor = interpreter.getPostProcessor();
+				if(postProcessor != null){
+					postProcessor.process(interpreter.getRoleRuntimeInstances());
+				}
+			}
 		}
 		return refactoredModel;
 	}
@@ -132,7 +143,7 @@ public class Refactorer implements IRefactorer {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
 		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMapping, minEquality);
 		for (Mapping mapping : possibleMappings) {
-			RefactoringSpecification refSpec = registry.getRefSpec(mapping.getMappedRoleModel());
+			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(mapping.getMappedRoleModel());
 			if(refSpec != null){
 				refSpecs.add(refSpec);
 			}
