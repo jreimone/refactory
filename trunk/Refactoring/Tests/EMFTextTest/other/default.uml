@@ -27,6 +27,8 @@
       <transition xmi:id="_lOba4BJdEd-U4eN-EukmmA" source="_jCa2UBJdEd-U4eN-EukmmA" target="_fmilUBJdEd-U4eN-EukmmA"/>
       <transition xmi:id="_m6PccBJdEd-U4eN-EukmmA" source="_hRgSUBJdEd-U4eN-EukmmA" target="_mLKI4BJdEd-U4eN-EukmmA"/>
       <transition xmi:id="_pUl_ABJdEd-U4eN-EukmmA" source="_otIWYBJdEd-U4eN-EukmmA" target="_hBjx0BJdEd-U4eN-EukmmA"/>
+      <transition xmi:id="_GqHv4DWPEd-0JrdQT7vofQ" source="_hBjx0BJdEd-U4eN-EukmmA" target="_hRgSUBJdEd-U4eN-EukmmA"/>
+      <transition xmi:id="_Hv3P8DWPEd-0JrdQT7vofQ" source="_mLKI4BJdEd-U4eN-EukmmA" target="_jCa2UBJdEd-U4eN-EukmmA"/>
     </region>
   </packagedElement>
 </uml:Package>
