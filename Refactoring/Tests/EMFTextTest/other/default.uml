@@ -14,25 +14,19 @@
   </elementImport>
   <packagedElement xmi:type="uml:StateMachine" xmi:id="_a_L_sBJdEd-U4eN-EukmmA" name="StateMachine">
     <region xmi:id="_bDsFMBJdEd-U4eN-EukmmA" name="Region">
-      <subvertex xmi:type="uml:State" xmi:id="_d6470BJdEd-U4eN-EukmmA" name="State">
-        <region xmi:id="_d7HlUBJdEd-U4eN-EukmmA" name="Region">
-          <subvertex xmi:type="uml:State" xmi:id="_hBjx0BJdEd-U4eN-EukmmA" name="InnerState"/>
-          <subvertex xmi:type="uml:State" xmi:id="_hRgSUBJdEd-U4eN-EukmmA" name="InnerState1"/>
-          <transition xmi:id="_keDt4BJdEd-U4eN-EukmmA" source="_hBjx0BJdEd-U4eN-EukmmA" target="_hRgSUBJdEd-U4eN-EukmmA"/>
-          <transition xmi:id="_k4Y5cBJdEd-U4eN-EukmmA" source="_hRgSUBJdEd-U4eN-EukmmA" target="_jCa2UBJdEd-U4eN-EukmmA"/>
-        </region>
-      </subvertex>
       <subvertex xmi:type="uml:Pseudostate" xmi:id="_fBdiUBJdEd-U4eN-EukmmA"/>
       <subvertex xmi:type="uml:FinalState" xmi:id="_fmilUBJdEd-U4eN-EukmmA"/>
       <subvertex xmi:type="uml:State" xmi:id="_i68VUBJdEd-U4eN-EukmmA" name="State1"/>
       <subvertex xmi:type="uml:State" xmi:id="_jCa2UBJdEd-U4eN-EukmmA" name="State2"/>
       <subvertex xmi:type="uml:State" xmi:id="_mLKI4BJdEd-U4eN-EukmmA" name="State3"/>
       <subvertex xmi:type="uml:State" xmi:id="_otIWYBJdEd-U4eN-EukmmA" name="State4"/>
+      <subvertex xmi:type="uml:State" xmi:id="_hBjx0BJdEd-U4eN-EukmmA" name="InnerState"/>
+      <subvertex xmi:type="uml:State" xmi:id="_hRgSUBJdEd-U4eN-EukmmA" name="InnerState1"/>
       <transition xmi:id="_jsP2cBJdEd-U4eN-EukmmA" source="_fBdiUBJdEd-U4eN-EukmmA" target="_i68VUBJdEd-U4eN-EukmmA"/>
       <transition xmi:id="_kIUucBJdEd-U4eN-EukmmA" source="_i68VUBJdEd-U4eN-EukmmA" target="_hBjx0BJdEd-U4eN-EukmmA"/>
       <transition xmi:id="_lOba4BJdEd-U4eN-EukmmA" source="_jCa2UBJdEd-U4eN-EukmmA" target="_fmilUBJdEd-U4eN-EukmmA"/>
-      <transition xmi:id="_m6PccBJdEd-U4eN-EukmmA" source="_d6470BJdEd-U4eN-EukmmA" target="_mLKI4BJdEd-U4eN-EukmmA"/>
-      <transition xmi:id="_pUl_ABJdEd-U4eN-EukmmA" source="_otIWYBJdEd-U4eN-EukmmA" target="_d6470BJdEd-U4eN-EukmmA"/>
+      <transition xmi:id="_m6PccBJdEd-U4eN-EukmmA" source="_hRgSUBJdEd-U4eN-EukmmA" target="_mLKI4BJdEd-U4eN-EukmmA"/>
+      <transition xmi:id="_pUl_ABJdEd-U4eN-EukmmA" source="_otIWYBJdEd-U4eN-EukmmA" target="_hBjx0BJdEd-U4eN-EukmmA"/>
     </region>
   </packagedElement>
 </uml:Package>
