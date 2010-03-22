@@ -1,5 +1,6 @@
 package org.emftext.refactoring.ui;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -50,7 +51,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		}
 		ISelectionProvider selectionProvider = activeEditor.getEditorSite().getSelectionProvider();
 		ISelection selection = selectionProvider.getSelection();
-		List<EObject> selectedElements = null;
+		List<EObject> selectedElements = new LinkedList<EObject>();
 		Resource resource = null;
 		if(selection instanceof StructuredSelection){
 			List<?> temp = ((StructuredSelection) selection).toList();
@@ -58,15 +59,16 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				if(object instanceof EditPart){
 					Object model = ((EditPart) object).getModel();
 					if(model instanceof View){
-						EObject ob = ((View) model).getElement();
-						System.out.println(ob);
+						object = ((View) model).getElement();
+						System.out.println("found EObject " + object + " in diagram");
 					}
-				}
+				} 
 				if(!(object instanceof EObject)){
 					return;
 				}
+				selectedElements.add((EObject) object);
 			}
-			selectedElements = (List<EObject>)temp;
+//			selectedElements = (List<EObject>)temp;
 			resource = selectedElements.get(0).eResource();
 		} else if(selection instanceof ITextSelection){
 //			if(EMFTextAccessProxy.isAccessibleWith(activeEditor.getClass(), IEditor.class)){
