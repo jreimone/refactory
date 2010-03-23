@@ -1,10 +1,12 @@
 package org.emftext.refactoring.ui;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
@@ -88,6 +90,15 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						selectedElements = locationMap.getElementsAt(startOffset);
 					} else {
 						selectedElements = locationMap.getElementsBetween(startOffset, endOffset);
+					}
+					List<EObject> noReferencesList = new ArrayList<EObject>();
+					for (EObject object : selectedElements) {
+						EcoreUtil.resolveAll(object);
+						int start = locationMap.getCharStart(object);
+						int end = locationMap.getCharEnd(object);
+						if(start >= startOffset && end <= endOffset){
+							noReferencesList.add(object);
+						}
 					}
 				} catch (Exception e) {
 					// probably another non EMFText generated editor
