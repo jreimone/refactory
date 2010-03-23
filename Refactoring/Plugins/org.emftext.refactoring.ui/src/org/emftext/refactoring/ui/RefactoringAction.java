@@ -1,11 +1,17 @@
 package org.emftext.refactoring.ui;
 
+import java.io.IOException;
+
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -23,6 +29,7 @@ public class RefactoringAction extends Action {
 	private IRefactorer refactorer;
 	private Resource resource;
 	private ISelectionProvider selectionProvider;
+	private EObject refactoredModel;
 
 	public RefactoringAction(Mapping mapping, IRefactorer refactorer, Resource resource, ISelectionProvider selectionProvider) {
 		super();
@@ -38,32 +45,98 @@ public class RefactoringAction extends Action {
 	@Override
 	public void run() {
 		ResourceSet rs = resource.getResourceSet();
-		ChangeRecorder recorder = new ChangeRecorder(rs);
-		ChangeDescription change = null;
+		//		ChangeRecorder recorder = new ChangeRecorder(rs);
+		//		ChangeDescription change = null;
+		RefactoringRecordingCommand command = null;
+		TransactionalEditingDomain domain = null;
 		try {
-			EObject refactoredModel = refactorer.refactor(mapping, false);	
-			if(refactorer.didErrorsOccur()){
+			domain = TransactionUtil.getEditingDomain(rs);
+			if(domain == null){
+				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+			}
+			CommandStack stack = domain.getCommandStack();
+			command = new RefactoringRecordingCommand(resource, domain, refactorer, mapping);
+			stack.execute(command);
+//			domain.dispose();
+
+			//			refactoredModel = refactorer.refactor(mapping, false);	
+			if(command.didErrorsOccur()){
+				if(command.getException() != null){
+					throw command.getException();
+				}
 				throw new Exception("Some instructions couldn't be invoked");
 			}
 			// now do something with the recorded changes
 			// until then the resource just will be saved as follows 
-			change = recorder.endRecording();
-			
+			//			change = recorder.endRecording();
+
 			// save or replace only modified parts 
 			// --> have to wait for Mirko's and Jendrik's ideas of replacement and not simply overwrite all contents
-			resource.getContents().set(0, refactoredModel);
-			resource.save(null);
-			resource.setModified(true);
-//			ISelection selection = selectionProvider.getSelection();
-//			selectionProvider.setSelection(selection);
-			
+			//			resource.getContents().set(0, refactoredModel);
+			//			resource.save(null);
+			//			resource.setModified(true);
+			//			ISelection selection = selectionProvider.getSelection();
+			//			selectionProvider.setSelection(selection);
+
 		} catch (Exception e) {
-			change = recorder.endRecording();
+			//			change = recorder.endRecording();
 			// rollback
-			if(change != null){
-				change.apply();
+			//			if(change != null){
+			//				change.apply();
+			//			}
+			if(command != null){
+				command.undo();
 			}
 			RegistryUtil.log("Refactoring rolled back because of the stack trace or message above", IStatus.WARNING, e);
 		}
+		if(domain != null){
+			domain.dispose();
+		}
+	}
+
+	class RefactoringRecordingCommand extends RecordingCommand{
+
+		private EObject refactoredModel;
+		private IRefactorer refactorer;
+		private Mapping mapping;
+		private Resource resource;
+		private boolean didErrorsOccur = false;
+		private Exception exception;
+		private TransactionalEditingDomain domain;
+
+		public RefactoringRecordingCommand(Resource resource,TransactionalEditingDomain domain, IRefactorer refactorer, Mapping mapping) {
+			super(domain);
+			this.domain = domain;
+			this.refactorer = refactorer;
+			this.mapping = mapping;
+			this.resource = resource;
+		}
+
+		@Override
+		protected void doExecute() {
+			try {
+				refactoredModel = refactorer.refactor(mapping, false);
+//				TransactionUtil.disconnectFromEditingDomain(resource);
+				if(!refactorer.didErrorsOccur()){
+					resource.getContents().set(0, refactoredModel);
+					resource.save(null);
+					resource.setModified(true);
+				} else {
+					didErrorsOccur = true;
+				}
+			} catch (Exception e) {
+				didErrorsOccur = true;
+				exception = e;
+			}
+		}
+
+		public boolean didErrorsOccur() {
+			return didErrorsOccur;
+		}
+
+		public Exception getException() {
+			return exception;
+		}
+
 	}
 }
