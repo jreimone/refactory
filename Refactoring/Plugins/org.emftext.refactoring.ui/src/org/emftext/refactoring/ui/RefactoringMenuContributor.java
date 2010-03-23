@@ -96,10 +96,11 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						EcoreUtil.resolveAll(object);
 						int start = locationMap.getCharStart(object);
 						int end = locationMap.getCharEnd(object);
-						if(start >= startOffset && end <= endOffset){
+						if((start >= startOffset && end <= endOffset) && !object.eIsProxy()){
 							noReferencesList.add(object);
 						}
 					}
+					selectedElements = noReferencesList;
 				} catch (Exception e) {
 					// probably another non EMFText generated editor
 					System.out.println(e.getMessage());
