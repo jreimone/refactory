@@ -118,7 +118,7 @@ public class RefactoringAction extends Action {
 				refactoredModel = refactorer.refactor(mapping, false);
 //				TransactionUtil.disconnectFromEditingDomain(resource);
 				if(!refactorer.didErrorsOccur()){
-					resource.getContents().set(0, refactoredModel);
+//					resource.getContents().set(0, refactoredModel);
 					resource.save(null);
 					resource.setModified(true);
 				} else {
