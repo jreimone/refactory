@@ -222,7 +222,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_ASSIGN(
 			ASSIGN object, RefactoringInterpreterContext context) {
 		//		object.get
-		return assign.interpreteASSIGN(object, context);
+		Boolean result = assign.interpreteASSIGN(object, context, selection);
+		Role assignedRole = assign.getAssignedRole();
+		Object roleRuntimeInstance = assign.getRoleRuntimeValue();
+		if(assignedRole != null && roleRuntimeInstance != null){
+			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
+		}
+		return result;
 	}
 
 	/* (non-Javadoc)
