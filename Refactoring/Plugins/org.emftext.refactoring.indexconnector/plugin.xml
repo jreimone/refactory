@@ -4,8 +4,8 @@
    <extension
          point="org.reuseware.sokan.index">
       <indexer
-            class="org.emftext.refactoring.indexconnector.impl.RefactoringIndexer"
-            id="org.emftext.refactoring.indexer">
+            class="org.emftext.refactoring.indexconnector.impl.ModelReferencesIndexer"
+            id="org.emftext.refactoring.indexer.references">
       </indexer>
    </extension>
 

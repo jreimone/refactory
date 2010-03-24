@@ -3,6 +3,9 @@
  */
 package org.emftext.refactoring.indexconnector;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -23,6 +26,7 @@ public interface IndexConnector {
 	 * @param metamodelURI uri for the metamodel to get the role mapping for
 	 * @return the corresponding {@link RoleMappingModel}
 	 */
+	@Deprecated
 	public RoleMappingModel getRoleMapping(String metamodelURI);
 	
 	/**
@@ -32,5 +36,13 @@ public interface IndexConnector {
 	 * @param roleModel the RoleModel to get the refactoring steps for
 	 * @return the correspionding {@link RefactoringSpecification} for the given {@link RoleModel}
 	 */
+	@Deprecated
 	public RefactoringSpecification getRefactoringSpecification(RoleModel roleModel);
+	
+	/**
+	 * Returns a list with all {@link Resource resources} referencing the given <code>referee</code>.
+	 * @param referee
+	 * @return
+	 */
+	public List<Resource> getReferencingResources(Resource referee);
 }
