@@ -33,6 +33,7 @@ public interface IRefactoringPostProcessor {
 	 * the concrete objects on which the roles were bound at runtime of the refactoring.
 	 * 
 	 * @param roleRuntimeInstanceMap the map containing {@link Role roles} as keys and its at runtime bound {@link EObject objects} as values 
+	 * @return <code>true</code> if no errors occurred while postprocessing 
 	 */
-	public void process(Map<Role, Object> roleRuntimeInstanceMap);
+	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap);
 }
