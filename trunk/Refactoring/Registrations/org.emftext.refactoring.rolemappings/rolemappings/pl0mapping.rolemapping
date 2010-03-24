@@ -16,3 +16,15 @@ ExtractProcedure maps <ExtractMethod> {
 		target := procedures;
 	} ;
 }
+
+RenameProcedure maps <RenameMethod> {
+	Nameable := ProcedureDeclaration(name -> name);
+}
+
+RenameVariable maps <RenameMethod> {
+	Nameable := VarDeclaration (name -> name);
+}
+
+RenameConstant maps <RenameMethod> {
+	Nameable := ConstDeclaration (name -> name);
+}
