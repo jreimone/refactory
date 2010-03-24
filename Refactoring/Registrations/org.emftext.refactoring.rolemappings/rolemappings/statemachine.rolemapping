@@ -16,3 +16,7 @@ ExtractCompositeState maps <ExtractMethod> {
 		moved := region -> subvertex:State;
 	};
 }	
+
+RenameVertex maps <RenameMethod> {
+	Nameable := Vertex (name -> name);
+}

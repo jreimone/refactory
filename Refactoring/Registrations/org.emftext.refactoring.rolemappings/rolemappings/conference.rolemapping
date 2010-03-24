@@ -13,3 +13,19 @@ ExtractTrack maps <ExtractMethod> {
 		target := elements:Track;
 	};
 } 	
+
+RenameConference maps <RenameMethod> {
+	Nameable := Conference (name -> name);
+}
+
+RenameTalk maps <RenameMethod> {
+	Nameable := Talk (name -> name);
+}
+
+RenameParticipant maps <RenameMethod> {
+	Nameable := Participant (name -> name);
+}
+
+RenameTrack maps <RenameMethod> {
+	Nameable := Track (name -> name);
+}

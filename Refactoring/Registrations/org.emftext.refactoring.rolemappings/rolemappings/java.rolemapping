@@ -16,4 +16,8 @@ ExtractMethod maps <ExtractMethod> {
 	MovedReference := references.MethodCall{
 		containerRef := target;
 	};
+}
+
+RenameElement maps <RenameMethod> {
+	Nameable := commons.NamedElement (name -> name);
 }	
