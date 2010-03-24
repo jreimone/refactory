@@ -7,8 +7,14 @@ CONST
 	VAR 
 	x , y , z ; 
 	
+PROCEDURE innerProc ; 
+
 BEGIN 
 	x := + b - a ; 
-	y := + x * 12 ; 
+	y := + x * 12 
+END ; 
+
+BEGIN 
+	CALL innerProc ; 
 	z := + y / a 
 END . 
