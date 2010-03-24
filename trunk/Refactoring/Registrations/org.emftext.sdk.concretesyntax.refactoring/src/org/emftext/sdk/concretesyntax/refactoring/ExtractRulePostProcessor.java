@@ -28,7 +28,7 @@ import org.emftext.sdk.concretesyntax.SyntaxElement;
 // TODO the role mapping specified to put the moved elements in
 // reference 'children' of class 'Role'. This is wrong, because
 // this reference has type 'SyntaxElement', but is supposed to
-// hold exactly on element of type 'Choice' only. We must either
+// hold exactly one element of type 'Choice' only. We must either
 // change the mapping or repair this while post processing.
 public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 
