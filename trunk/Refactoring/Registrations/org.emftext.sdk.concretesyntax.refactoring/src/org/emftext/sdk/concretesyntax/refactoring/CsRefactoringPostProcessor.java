@@ -18,6 +18,18 @@ import org.emftext.sdk.concretesyntax.Containment;
 import org.emftext.sdk.concretesyntax.Rule;
 import org.emftext.sdk.concretesyntax.SyntaxElement;
 
+/**
+ * A post processor for the 'Extract Rule' refactoring of the
+ * CS language. The post processor mainly established the reference
+ * between the old rule (i.e., the one elements were removed from)
+ * and the new rule. It does so by creating a new meta class and a
+ * containment reference from the meta class of the old rule.
+ */
+// TODO the role mapping specified to put the moved elements in
+// reference 'children' of class 'Role'. This is wrong, because
+// this reference has type 'SyntaxElement', but is supposed to
+// hold exactly on element of type 'Choice' only. We must either
+// change the mapping or repair this while post processing.
 public class CsRefactoringPostProcessor implements IRefactoringPostProcessor {
 
 	public CsRefactoringPostProcessor() {
