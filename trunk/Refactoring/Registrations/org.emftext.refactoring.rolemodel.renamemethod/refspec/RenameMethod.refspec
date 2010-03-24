@@ -1,0 +1,6 @@
+REFACTORING RenameMethodRefactoring 
+FOR <RenameMethod> 
+
+STEPS { 
+	assign Nameable.name and update; 	
+} 
