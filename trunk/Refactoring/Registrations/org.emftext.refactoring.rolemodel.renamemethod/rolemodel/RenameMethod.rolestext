@@ -9,7 +9,7 @@ RoleModel RenameMethod {
 	/**
 	Map this role on a metaclass that owns an attribute which stands for the name and is intended to be renamed.
 	*/
-	input ROLE Nameable (
+	super input ROLE Nameable (
 		/**
 		Map this attribute to a String attribute of the owning metaclass which represents the name of it.
 		*/

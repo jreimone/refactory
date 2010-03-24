@@ -2,9 +2,11 @@ package org.emftext.refactoring.indexconnector;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -55,6 +57,11 @@ public class MockIndexConnector implements IndexConnector {
 	public RoleMappingModel getRoleMapping(String metamodelURI) {
 		System.out.println("Mock index returns RoleMappingModel for " + metamodelURI);
 		return simpleMappingIndex.get(metamodelURI);
+	}
+
+	public List<Resource> getReferencingResources(Resource referee) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
