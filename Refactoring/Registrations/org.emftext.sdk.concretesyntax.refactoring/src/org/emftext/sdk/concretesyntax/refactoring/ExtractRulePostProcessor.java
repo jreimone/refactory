@@ -30,9 +30,9 @@ import org.emftext.sdk.concretesyntax.SyntaxElement;
 // this reference has type 'SyntaxElement', but is supposed to
 // hold exactly on element of type 'Choice' only. We must either
 // change the mapping or repair this while post processing.
-public class CsRefactoringPostProcessor implements IRefactoringPostProcessor {
+public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 
-	public CsRefactoringPostProcessor() {
+	public ExtractRulePostProcessor() {
 		super();
 	}
 
