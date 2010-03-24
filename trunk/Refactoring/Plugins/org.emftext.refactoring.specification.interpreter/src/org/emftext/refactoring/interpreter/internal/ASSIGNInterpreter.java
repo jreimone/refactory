@@ -3,9 +3,9 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,23 +13,22 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.AdditionalCommand;
-import org.emftext.language.refactoring.refactoring_specification.Constants;
-import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
-import org.emftext.language.refactoring.refactoring_specification.FromReference;
+import org.emftext.language.refactoring.refactoring_specification.UPDATE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
-import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.AttributeMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
+import org.emftext.refactoring.indexconnector.IndexConnector;
+import org.emftext.refactoring.indexconnector.IndexConnectorFactory;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.specification.interpreter.ui.DialogValueProvider;
-import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * @author Jan Reimann
@@ -96,8 +95,10 @@ public class ASSIGNInterpreter {
 		}
 		EAttribute targetClassAttribute = targetMapping.getClassAttribute();
 		if(targetClassAttribute.getEAttributeType().equals(sourceClassAttribute.getEAttributeType())){
+			List<Resource> referer = getReferer(targetObject);
 			targetObject.eSet(targetClassAttribute, value);
-			return handleAdditional(addition, targetObject, targetClassAttribute, value);
+			handleAdditional(referer, addition, targetObject, targetClassAttribute, value);
+			return true;
 		}
 		return false;
 	}
@@ -141,20 +142,44 @@ public class ASSIGNInterpreter {
 			}
 		}
 		Object value = getValueProvider().provideAttributeValue(classAttribute);
-//		handleAdditional(addition, targetObject, classAttribute, value);
+		List<Resource> referer = getReferer(targetObject);
 		targetObject.eSet(classAttribute, value);
-//		return handleAdditional(addition, targetObject, classAttribute, value);
+		handleAdditional(referer, addition, targetObject, classAttribute, value);
 		return true;
 	}
 	
-	private boolean handleAdditional(AdditionalCommand addition, EObject owner, EStructuralFeature feature, Object value){
-		Map<EObject, Collection<Setting>> result = EcoreUtil.UsageCrossReferencer.find(Arrays.asList(new EObject[]{owner}));
-		Map<EObject, Collection<Setting>> result2 = EcoreUtil.ExternalCrossReferencer.find(owner);
-		for (EObject key : result.keySet()) {
-			Collection<Setting> settings = result.get(key);
-			System.out.println(settings);
+	private List<Resource> getReferer(EObject referenceTarget){
+		Resource referee = referenceTarget.eResource();
+		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector();
+		List<Resource> referers = connector.getReferencingResources(referee);
+		if(referers == null){
+			return null;
 		}
-		return false;
+		List<Resource> realReferers = new LinkedList<Resource>();
+		for (Resource resource : referers) {
+			Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(referenceTarget, resource);
+			if(references.size() > 0){
+				realReferers.add(resource);
+			}
+		}
+		return realReferers;
+	}
+	
+	private void handleAdditional(List<Resource> referers, AdditionalCommand addition, EObject owner, EStructuralFeature feature, Object value){
+		if(addition instanceof UPDATE){
+			if(referers == null){
+				return;
+			}
+			for (Resource resource : referers) {
+				Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(owner, resource);
+				for (Setting setting : references) {
+					EObject referer = setting.getEObject();
+					EStructuralFeature referingFeature = setting.getEStructuralFeature();
+					Object oldValue = referer.eGet(referingFeature);
+					System.out.println("Do the update of resource " + referer.eResource() + " here");
+				}
+			}
+		}
 	}
 	
 	/**

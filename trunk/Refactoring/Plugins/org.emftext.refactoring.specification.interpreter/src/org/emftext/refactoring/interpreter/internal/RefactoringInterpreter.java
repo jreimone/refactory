@@ -189,11 +189,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		context.setInitialContext(mapping);
 		initInterpretationStack();
 		
-		List<Role> roles = mapping.getAllMappedRoles();
+		List<Role> roles = RoleUtil.getAllInputRoles(mapping);
 		for (Role role : roles) {
-			if(role.getModifier().contains(RoleModifier.INPUT)){
-				roleRuntimeInstanceMap.put(role, selection);
-			}
+			roleRuntimeInstanceMap.put(role, selection);
 		}
 		
 		occuredErrors = !interprete(context);

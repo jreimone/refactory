@@ -1,8 +1,6 @@
 package org.emftext.refactoring.indexconnector.impl;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -21,10 +19,10 @@ import org.reuseware.sokan.index.indexer.Indexer;
 
 public class RefactoringIndexer implements Indexer {
 
-	public static final String KEY_ROLEMAPPING_FOR_METAMODEL_URI 	= "ROLEMAPPING_FOR_METAMODEL_URI";
-	public static final String KEY_IS_ROLEMAPPING 					= "IS_ROLEMAPPING";
-	public static final String KEY_IS_REFSPEC 						= "IS_REFSPEC";
-	public static final String KEY_REFSPEC_FOR_ROLEMODEL_URI		= "REFSPEC_FOR_ROLEMODEL_URI";
+	protected static final String KEY_ROLEMAPPING_FOR_METAMODEL_URI 	= "ROLEMAPPING_FOR_METAMODEL_URI";
+	protected static final String KEY_IS_ROLEMAPPING 					= "IS_ROLEMAPPING";
+	protected static final String KEY_IS_REFSPEC 						= "IS_REFSPEC";
+	protected static final String KEY_REFSPEC_FOR_ROLEMODEL_URI			= "REFSPEC_FOR_ROLEMODEL_URI";
 
 	public RefactoringIndexer() {
 		// hmm
@@ -72,16 +70,7 @@ public class RefactoringIndexer implements Indexer {
 		return metaData;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.reuseware.sokan.index.indexer.Indexer#getDependent(org.reuseware.sokan.ID)
-	 */
-	public Map<ID, Set<String>> getDependent(ID artifactID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void createIndex(URI artifactURI, IndexMetaData metaData, ResourceSet resourceSet) {
-//		Map<String, String> metaData = new LinkedHashMap<String, String>();
 		Resource resource = null;
 		try {
 			resource = resourceSet.getResource(artifactURI, true);	
@@ -94,8 +83,9 @@ public class RefactoringIndexer implements Indexer {
 		EList<EObject> contents = resource.getContents();
 		if(contents.size() > 0){
 			EObject root = contents.get(0);
-			metaData.putAll(handleRoleMappingModel(root));
-			metaData.putAll(handleRefactoringSpecification(root));
+//			metaData.
+//			metaData.putAll(handleRoleMappingModel(root));
+//			metaData.putAll(handleRefactoringSpecification(root));
 		}
 //		return metaData;
 	}
