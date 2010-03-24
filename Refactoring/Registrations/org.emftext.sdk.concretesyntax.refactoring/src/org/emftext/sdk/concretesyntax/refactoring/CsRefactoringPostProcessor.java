@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
-import org.emftext.sdk.concretesyntax.ConcretesyntaxFactory;
 import org.emftext.sdk.concretesyntax.Containment;
 import org.emftext.sdk.concretesyntax.Rule;
 import org.emftext.sdk.concretesyntax.SyntaxElement;
@@ -26,7 +25,6 @@ public class CsRefactoringPostProcessor implements IRefactoringPostProcessor {
 	}
 
 	public Boolean process(Map<Role, Object> roleMap) {
-		System.out.println("CsRefactoringPostProcessor.process() " + roleMap);
 		EObject newContainer = getEObjectByName(roleMap, "NewContainer");
 		if (newContainer == null) {
 			return false;
@@ -70,9 +68,10 @@ public class CsRefactoringPostProcessor implements IRefactoringPostProcessor {
 		newGenClass.setEcoreClass(newEClass);
 		
 		// Add new meta class to packages of old rule
-		EPackage ePackage = oldRule.getMetaclass().getEcoreClass().getEPackage();
+		GenClass oldMetaclass = oldRule.getMetaclass();
+		EPackage ePackage = oldMetaclass.getEcoreClass().getEPackage();
 		ePackage.getEClassifiers().add(newEClass);
-		GenPackage genPackage = oldRule.getMetaclass().getGenPackage();
+		GenPackage genPackage = oldMetaclass.getGenPackage();
 		genPackage.getGenClasses().add(newGenClass);
 		
 		// Add new containment feature
@@ -82,8 +81,8 @@ public class CsRefactoringPostProcessor implements IRefactoringPostProcessor {
 		newContainmentEFeature.setEType(newEClass);
 		GenFeature newContainmentGenFeature = GenModelFactory.eINSTANCE.createGenFeature();
 		newContainmentGenFeature.setEcoreFeature(newContainmentEFeature);
-		oldRule.getMetaclass().getEcoreClass().getEStructuralFeatures().add(newContainmentEFeature);
-		oldRule.getMetaclass().getGenFeatures().add(newContainmentGenFeature);
+		oldMetaclass.getEcoreClass().getEStructuralFeatures().add(newContainmentEFeature);
+		oldMetaclass.getGenFeatures().add(newContainmentGenFeature);
 
 		// Add containment reference in old rule to new class
 		newContainment.setFeature(newContainmentGenFeature);
