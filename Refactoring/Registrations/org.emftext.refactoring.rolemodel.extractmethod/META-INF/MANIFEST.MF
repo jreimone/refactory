@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Extractmethod RoleModel
+Bundle-Name: Extract Method Role Model
 Bundle-SymbolicName: org.emftext.refactoring.rolemodel.extractmethod;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Vendor: Jan Reimann
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.emftext.refactoring.registry.rolemodel;bundle-version="0.0.1",
- org.emftext.refactoring.registry.refactoringspecification;bundle-version="0.0.1"
+Require-Bundle: org.emftext.refactoring.registry.rolemodel,
+ org.emftext.refactoring.registry.refactoringspecification
