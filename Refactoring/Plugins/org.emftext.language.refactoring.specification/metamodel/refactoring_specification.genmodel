@@ -60,6 +60,7 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//ASSIGN">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ASSIGN/sourceAttribute"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ASSIGN/targetAttribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ASSIGN/additionalCommand"/>
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//FromClause">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//FromClause/operator"/>
@@ -104,5 +105,7 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//VariableAssignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//VariableAssignment/assignment"/>
     </genClasses>
+    <genClasses ecoreClass="refactoring_specification.ecore#//AdditionalCommand"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//UPDATE"/>
   </genPackages>
 </genmodel:GenModel>

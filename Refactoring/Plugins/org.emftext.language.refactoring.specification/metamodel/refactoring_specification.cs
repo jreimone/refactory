@@ -59,10 +59,12 @@ TOKENSTYLES{
 	"for" COLOR #7F0055, BOLD;
 	"from" COLOR #7F0055, BOLD;
 	"uptree" COLOR #50F05C, BOLD;
+	"update" COLOR #50F05C, BOLD;
 	"trace" COLOR #50F05C, BOLD;
 	"first" COLOR #50F05C, BOLD;
 	"last" COLOR #50F05C, BOLD;
 	"as" COLOR #7F0055, BOLD;
+	"and" COLOR #7F0055, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
 	"LOWER_IDENTIFIER" COLOR #0000FF;
 	"UPPER_IDENTIFIER" COLOR #0000FF;
@@ -79,7 +81,9 @@ RULES{
 	
 	SET ::= "set" #1 "use" #1 "of" #1 source #1 "in" #1 target;
 	
-	ASSIGN ::= "assign" #1 (sourceAttribute[DOT_NOTATION] #1 "for" #1 )? targetAttribute[DOT_NOTATION];
+	ASSIGN ::= "assign" #1 (sourceAttribute[DOT_NOTATION] #1 "for" #1 )? targetAttribute[DOT_NOTATION] ("and" #1 additionalCommand)?;
+	
+	UPDATE ::= "update";
 	
 	Variable ::= name[LOWER_IDENTIFIER];
 	
@@ -95,7 +99,7 @@ RULES{
 	
 	ConstantsReference ::= referencedConstant[CONSTANTS] ;
 	
-	FromClause ::= operator #0 "(" reference ")" ;
+	FromClause ::= operator #0 "(" reference ")";
 	
 	UPTREE ::= "uptree";
 	
