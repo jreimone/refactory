@@ -3,18 +3,33 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
+import org.emftext.language.refactoring.refactoring_specification.AdditionalCommand;
+import org.emftext.language.refactoring.refactoring_specification.Constants;
+import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
+import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
+import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.AttributeMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
+import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.specification.interpreter.ui.DialogValueProvider;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * @author Jan Reimann
@@ -29,24 +44,30 @@ public class ASSIGNInterpreter {
 	
 	private Mapping mapping;
 	private RefactoringInterpreterContext context;
+	private List<? extends EObject> selection;
+	
+	private Role assignedRole;
+	private Object roleRuntimeValue;
 	
 	public ASSIGNInterpreter(Mapping mapping) {
 		this.mapping = mapping;
 		this.valueProvider = new DialogValueProvider(mapping);
 	}
 
-	public Boolean interpreteASSIGN(ASSIGN object, RefactoringInterpreterContext context) {
+	public Boolean interpreteASSIGN(ASSIGN object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
 		this.context = context;
+		this.selection = selection;
 		RoleAttribute source = object.getSourceAttribute();
 		RoleAttribute target = object.getTargetAttribute();
+		AdditionalCommand addition = object.getAdditionalCommand();
 		if(source != null){
-			return handleSourceAndTarget(source, target);
+			return handleSourceAndTarget(source, target, addition);
 		} else {
-			return handleTargetOnly(target);
+			return handleTargetOnly(target, addition);
 		}
 	}
 	
-	private boolean handleSourceAndTarget(RoleAttribute source, RoleAttribute target){
+	private boolean handleSourceAndTarget(RoleAttribute source, RoleAttribute target, AdditionalCommand addition){
 		Role sourceRole = source.getAttributeRole();
 		AttributeMapping sourceMapping = mapping.getConcreteMappingForRole(sourceRole).getAttributeMappingForAttribute(source);
 		if(sourceMapping == null){
@@ -76,7 +97,7 @@ public class ASSIGNInterpreter {
 		EAttribute targetClassAttribute = targetMapping.getClassAttribute();
 		if(targetClassAttribute.getEAttributeType().equals(sourceClassAttribute.getEAttributeType())){
 			targetObject.eSet(targetClassAttribute, value);
-			return true;
+			return handleAdditional(addition, targetObject, targetClassAttribute, value);
 		}
 		return false;
 	}
@@ -93,7 +114,7 @@ public class ASSIGNInterpreter {
 //		return false;
 //	}
 	
-	private boolean handleTargetOnly(RoleAttribute target){
+	private boolean handleTargetOnly(RoleAttribute target, AdditionalCommand addition){
 		EObject interpretationContext = target.getInterpretationContext();
 		Role targetRole = target.getAttributeRole();
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
@@ -106,9 +127,32 @@ public class ASSIGNInterpreter {
 		EObject targetObject = null;
 		if(interpretationContext instanceof Variable){
 			targetObject = context.getEObjectForVariable((Variable) interpretationContext);
-			Object value = getValueProvider().provideAttributeValue(classAttribute);
-			targetObject.eSet(classAttribute, value);
-			return true;
+		} else if(interpretationContext instanceof Role) {
+			if(((Role) interpretationContext).getModifier().contains(RoleModifier.INPUT)){
+				if(selection.size() == 1){
+					targetObject = selection.get(0);
+					assignedRole = (Role) interpretationContext;
+					roleRuntimeValue = targetObject;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+		Object value = getValueProvider().provideAttributeValue(classAttribute);
+//		handleAdditional(addition, targetObject, classAttribute, value);
+		targetObject.eSet(classAttribute, value);
+//		return handleAdditional(addition, targetObject, classAttribute, value);
+		return true;
+	}
+	
+	private boolean handleAdditional(AdditionalCommand addition, EObject owner, EStructuralFeature feature, Object value){
+		Map<EObject, Collection<Setting>> result = EcoreUtil.UsageCrossReferencer.find(Arrays.asList(new EObject[]{owner}));
+		Map<EObject, Collection<Setting>> result2 = EcoreUtil.ExternalCrossReferencer.find(owner);
+		for (EObject key : result.keySet()) {
+			Collection<Setting> settings = result.get(key);
+			System.out.println(settings);
 		}
 		return false;
 	}
@@ -137,5 +181,13 @@ public class ASSIGNInterpreter {
 			}
 		}
 		return valueProvider;
+	}
+
+	public Role getAssignedRole() {
+		return assignedRole;
+	}
+
+	public Object getRoleRuntimeValue() {
+		return roleRuntimeValue;
 	}
 }

@@ -93,6 +93,9 @@ public class ObjectAssignmentInterpreter {
 		if(operator instanceof UPTREE){
 			return handleFromOperatorUPTREE(assignedRole, fromObjects);	
 		}
+//		if(operator == null){
+//			return getFromReferenceObject(from.getReference());
+//		}
 		return null;
 	}
 	
