@@ -22,7 +22,7 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 	private State newContainer;
 
 	@SuppressWarnings("unchecked")
-	public void process(Map<Role, Object> roleRuntimeInstanceMap) {
+	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap) {
 		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
@@ -38,6 +38,7 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 			}
 		}
 		processAdditionals();
+		return true;
 	}
 
 	private void processAdditionals(){

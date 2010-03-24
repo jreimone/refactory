@@ -2,7 +2,7 @@ ROLEMODELMAPPING concretessyntax FOR <http://www.emftext.org/sdk/concretesyntax>
 
 ExtractRule maps <ExtractMethod> { 
 	Extract := Choice ;
-	OrigContainer := Rule {
+	OrigContainer := SyntaxElement {
 		extracts := children;
 		referer := children : Containment;
 	};

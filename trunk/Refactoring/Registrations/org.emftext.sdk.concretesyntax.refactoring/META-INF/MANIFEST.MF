@@ -6,4 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.emftext.refactoring.registry.rolemapping,
  org.emftext.language.refactoring.roles,
- org.emftext.language.refactoring.rolemapping
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.sdk.concretesyntax,
+ org.eclipse.emf.codegen.ecore
