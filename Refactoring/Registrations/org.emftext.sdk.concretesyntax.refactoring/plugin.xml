@@ -11,7 +11,7 @@
  <extension
        point="org.emftext.refactoring.postprocessor">
     <postprocessor
-          mapping_name="org.emftext.sdk.concretesyntax.refactoring.postprocessor"
+          mapping_name="ExtractRule"
           nsUri="http://www.emftext.org/sdk/concretesyntax"
           postprocessor="org.emftext.sdk.concretesyntax.refactoring.CsRefactoringPostProcessor">
     </postprocessor>

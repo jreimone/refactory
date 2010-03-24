@@ -21,7 +21,7 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor#process(java.util.Map)
 	 */
-	public void process(Map<Role, Object> roleRuntimeInstanceMap) {
+	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap) {
 		System.out.println("Add return type for 'Extract Method' in Java");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
@@ -38,6 +38,7 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 			}
 		}
 		processMethodType();
+		return true;
 	}
 	
 	private void processMethodType(){
