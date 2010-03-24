@@ -37,11 +37,10 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 				}
 			}
 		}
-		processMethodType();
-		return true;
+		return processMethodType();
 	}
 	
-	private void processMethodType(){
+	private Boolean processMethodType(){
 		Void voidType = TypesFactory.eINSTANCE.createVoid();
 		newContainer.setTypeReference(voidType);
 		System.out.println("setting 'void' for method '" + newContainer.getName() + "'");
@@ -49,8 +48,9 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 		for (AnnotationInstanceOrModifier modifier : modifiers) {
 			if(modifier instanceof Static){
 				Static staticModifier = ModifiersFactory.eINSTANCE.createStatic();
-				newContainer.getAnnotationsAndModifiers().add(staticModifier);
+				return newContainer.getAnnotationsAndModifiers().add(staticModifier);
 			}
 		}
+		return true;
 	}
 }
