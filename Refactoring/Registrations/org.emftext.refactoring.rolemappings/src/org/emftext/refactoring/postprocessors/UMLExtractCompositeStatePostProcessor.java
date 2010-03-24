@@ -37,16 +37,18 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 				}
 			}
 		}
-		processAdditionals();
-		return true;
+		return processAdditionals();
 	}
 
-	private void processAdditionals(){
-		moveRelevantTransitionsToCompositeState();
-		createActivity();
+	private Boolean processAdditionals(){
+		Boolean result = moveRelevantTransitionsToCompositeState();
+		if(!result){
+			return result;
+		}
+		return createActivity();
 	}
 
-	private void moveRelevantTransitionsToCompositeState(){
+	private Boolean moveRelevantTransitionsToCompositeState(){
 		Set<Transition> removees = new HashSet<Transition>();
 		Set<Transition> inComposites = new HashSet<Transition>();
 		Set<Transition> outComposites = new HashSet<Transition>();
@@ -72,18 +74,22 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 			transition.setSource(newContainer);
 			System.out.println("set '" + newContainer + "' as new source of outgoing transition");
 		}
+		return true;
 	}
 
-	private void handleInternalTransitions(Set<Transition> removees) {
+	private Boolean handleInternalTransitions(Set<Transition> removees) {
 		List<Region> regions = newContainer.getRegions();
 		for (Region region : regions) {
 			if(region.getSubvertices().containsAll(extract)){
 				for (Transition transition : removees) {
 					EcoreUtil.remove(transition);
-					region.getTransitions().add(transition);
+					if(!region.getTransitions().add(transition)){
+						return false;
+					}
 				}
 			}
 		}
+		return true;
 	}
 
 	private void handleTransitions(Set<Transition> removees, Set<Transition> outsides, List<State> others, List<Transition> transitions, boolean source) {
@@ -102,10 +108,11 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 		}
 	}
 
-	private void createActivity(){
+	private Boolean createActivity(){
 		Activity activity = UMLFactory.eINSTANCE.createActivity();
 		activity.setName(newContainer.getName() + "Activity");
 		newContainer.setDoActivity(activity);
 		System.out.println("set new doActivity for " + newContainer);
+		return true;
 	}
 }
