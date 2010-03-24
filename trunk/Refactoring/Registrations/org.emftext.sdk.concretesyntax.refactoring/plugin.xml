@@ -13,7 +13,7 @@
     <postprocessor
           mapping_name="ExtractRule"
           nsUri="http://www.emftext.org/sdk/concretesyntax"
-          postprocessor="org.emftext.sdk.concretesyntax.refactoring.CsRefactoringPostProcessor">
+          postprocessor="org.emftext.sdk.concretesyntax.refactoring.ExtractRulePostProcessor">
     </postprocessor>
  </extension>
 
