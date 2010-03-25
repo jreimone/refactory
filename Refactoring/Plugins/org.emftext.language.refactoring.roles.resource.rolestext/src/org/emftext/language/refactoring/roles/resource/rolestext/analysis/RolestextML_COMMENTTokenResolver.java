@@ -19,8 +19,12 @@ public class RolestextML_COMMENTTokenResolver implements org.emftext.language.re
 	private org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextDefaultTokenResolver defaultTokenResolver = new org.emftext.language.refactoring.roles.resource.rolestext.analysis.RolestextDefaultTokenResolver();
 	
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTokenResolveResult result) {
+		try{
 		lexem = lexem.substring(3);
 		lexem = lexem.substring(0, lexem.length() - 2);
+		} catch (Exception e) {
+			lexem = "";
+		}
 		defaultTokenResolver.resolve(lexem, feature, result);
 	}
 	
