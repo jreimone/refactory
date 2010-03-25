@@ -1,9 +1,9 @@
 /**
  * 
  */
-package org.emftext.refactoring.indexconnector;
+package org.emftext.refactoring.indexconnector.impl;
 
-import org.emftext.refactoring.indexconnector.impl.SokanIndexConnectorFactory;
+import org.emftext.refactoring.indexconnector.IndexConnector;
 
 /**
  * Factory for {@link IndexConnector}s.
@@ -13,7 +13,7 @@ import org.emftext.refactoring.indexconnector.impl.SokanIndexConnectorFactory;
  */
 public interface IndexConnectorFactory {
 
-	public static final IndexConnectorFactory defaultINSTANCE = new SokanIndexConnectorFactory();
+	public static final IndexConnectorFactory defaultINSTANCE = new DefaultIndexConnectorFactory();
 	
 	/**
 	 * Returns the specific {@link IndexConnector}.

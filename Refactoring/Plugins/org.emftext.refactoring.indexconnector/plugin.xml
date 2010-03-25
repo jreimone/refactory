@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.reuseware.sokan.index">
-      <indexer
-            class="org.emftext.refactoring.indexconnector.impl.ModelReferencesIndexer"
-            id="org.emftext.refactoring.indexer.references">
-      </indexer>
-   </extension>
+   <extension-point id="org.emftext.registry.indexconnector" name="indexconnector" schema="schema/org.emftext.registry.indexconnector.exsd"/>
 
 </plugin>
