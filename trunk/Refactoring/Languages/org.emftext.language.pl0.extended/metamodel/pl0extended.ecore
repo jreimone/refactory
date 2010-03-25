@@ -15,6 +15,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="importReference" lowerBound="1"
         eType="#//Import"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referencedDeclaration"
-        lowerBound="1" eType="ecore:EClass ../../org.emftext.language.pl0/metamodel/pl0.ecore#//Declaration"/>
+        lowerBound="1" eType="ecore:EClass ../../org.emftext.language.pl0/metamodel/pl0.ecore#//ConstDeclaration"/>
   </eClassifiers>
 </ecore:EPackage>

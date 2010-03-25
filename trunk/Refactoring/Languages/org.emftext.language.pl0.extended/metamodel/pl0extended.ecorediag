@@ -103,7 +103,26 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_hStbcTgpEd-1KMMgX8HJOg" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore#//Declaration"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hStbcjgpEd-1KMMgX8HJOg" x="515" y="475"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hStbcjgpEd-1KMMgX8HJOg" x="580" y="460"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_5GaG4Dg5Ed-1KMMgX8HJOg" type="1001">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_5Gj34Dg5Ed-1KMMgX8HJOg" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_5Gj34Tg5Ed-1KMMgX8HJOg" key="modelID" value="EcoreTools"/>
+    </eAnnotations>
+    <children xmi:type="notation:Node" xmi:id="_5GaG4zg5Ed-1KMMgX8HJOg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_5GaG5Dg5Ed-1KMMgX8HJOg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5GaG5Tg5Ed-1KMMgX8HJOg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5GaG5jg5Ed-1KMMgX8HJOg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5GaG5zg5Ed-1KMMgX8HJOg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5GaG6Dg5Ed-1KMMgX8HJOg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5GaG6Tg5Ed-1KMMgX8HJOg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5GaG6jg5Ed-1KMMgX8HJOg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5GaG6zg5Ed-1KMMgX8HJOg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5GaG4Tg5Ed-1KMMgX8HJOg" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore#//ConstDeclaration"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5GaG4jg5Ed-1KMMgX8HJOg" x="385" y="537"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_nSI4AjgNEd-1KMMgX8HJOg"/>
   <element xmi:type="ecore:EPackage" href="pl0extended.ecore#/"/>
@@ -173,7 +192,7 @@
     <element xmi:type="ecore:EReference" href="platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore#//IdentReference/ident"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hStbgTgpEd-1KMMgX8HJOg" points="[-50, -28, 521, 297]$[-570, -325, 1, 0]"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_i5FjYDgpEd-1KMMgX8HJOg" type="3002" source="_LPiokDgQEd-1KMMgX8HJOg" target="_hStbcDgpEd-1KMMgX8HJOg">
+  <edges xmi:type="notation:Edge" xmi:id="_i5FjYDgpEd-1KMMgX8HJOg" type="3002" source="_LPiokDgQEd-1KMMgX8HJOg" target="_5GaG4Dg5Ed-1KMMgX8HJOg">
     <children xmi:type="notation:Node" xmi:id="_i5OtUDgpEd-1KMMgX8HJOg" type="4011">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_i5OtUTgpEd-1KMMgX8HJOg" x="-10" y="-10"/>
     </children>
@@ -185,6 +204,12 @@
     <element xmi:type="ecore:EReference" href="pl0extended.ecore#//ExternalIdentReference/referencedDeclaration"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_i5FjYzgpEd-1KMMgX8HJOg" points="[15, 9, -168, -94]$[184, 124, 1, 21]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_i5OtVDgpEd-1KMMgX8HJOg" id="(0.8636363636363636,0.7857142857142857)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_i5OtVTgpEd-1KMMgX8HJOg" id="(0.23076923076923078,0.676923076923077)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_i5OtVTgpEd-1KMMgX8HJOg" id="(0.4358974358974359,0.12307692307692308)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5GaG7jg5Ed-1KMMgX8HJOg" type="3003" source="_5GaG4Dg5Ed-1KMMgX8HJOg" target="_hStbcDgpEd-1KMMgX8HJOg">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_5GaG7zg5Ed-1KMMgX8HJOg" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5GaG8Dg5Ed-1KMMgX8HJOg"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5GaG8Tg5Ed-1KMMgX8HJOg" points="[1, 1, -572, -506]$[537, 476, -36, -31]"/>
   </edges>
 </notation:Diagram>
