@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MoveX
+Bundle-SymbolicName: org.emftext.refactoring.rolemodel.moveX;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.rolemodel
