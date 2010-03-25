@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.emftext.registry.indexconnector">
+      <connector
+            implementation="org.emftext.refactoring.indexconnector.sokan.SokanIndexConnector">
+      </connector>
+   </extension>
+   <extension
+         point="org.reuseware.sokan.index">
+      <indexer
+            class="org.emftext.refactoring.indexconnector.sokan.ModelReferencesIndexer"
+            id="org.emftext.refactoring.indexer.references">
+      </indexer>
+   </extension>
+
+</plugin>
