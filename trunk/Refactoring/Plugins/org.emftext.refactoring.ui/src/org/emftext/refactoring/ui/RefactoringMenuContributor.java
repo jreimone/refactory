@@ -109,6 +109,10 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 //			}
 		}
 		if(resource != null && selectedElements != null && selectedElements.size() >= 1){
+			if(resource.getErrors() != null && resource.getErrors().size() > 0){
+				System.out.println("resource " + resource + " contains errors and no refactoring menu will be contributed");
+				return;
+			}
 			for (EObject eObject : selectedElements) {
 				System.out.println("Selected: " + eObject);
 			}
