@@ -3,11 +3,9 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -25,8 +23,7 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
-import org.emftext.refactoring.indexconnector.IndexConnector;
-import org.emftext.refactoring.indexconnector.IndexConnectorFactory;
+import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.specification.interpreter.ui.DialogValueProvider;
 
@@ -149,10 +146,8 @@ public class ASSIGNInterpreter {
 	}
 	
 	private List<Resource> getReferer(EObject referenceTarget){
-		Resource referee = referenceTarget.eResource();
-		IndexConnector connector = IndexConnectorFactory.defaultINSTANCE.getIndexConnector();
-		List<Resource> referers = connector.getReferencingResources(referee);
-		if(referers == null){
+		List<Resource> referers = IndexConnectorRegistry.INSTANCE.getReferencingResources(referenceTarget);
+		if(referers == null || referers.size() == 0){
 			return null;
 		}
 		List<Resource> realReferers = new LinkedList<Resource>();
