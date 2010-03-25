@@ -2,19 +2,19 @@ PROGRAM p1
 
 CONST 
 	a = 25 , 
-	b = 10 ; 
+	ccc = 10 ; 
 	
 	VAR 
 	x , y , z ; 
 	
-PROCEDURE innerProc ; 
+	PROCEDURE innerProc ; 
 
 BEGIN 
-	x := + b - a ; 
+	x := + ccc - a ; 
 	y := + x * 12 
-END ; 
+	END ; 
 
 BEGIN 
 	CALL innerProc ; 
 	z := + y / a 
-END . 
+	END . 
