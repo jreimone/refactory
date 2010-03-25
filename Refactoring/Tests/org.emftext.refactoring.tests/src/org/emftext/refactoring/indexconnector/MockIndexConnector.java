@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.pl0.PL0Package;
@@ -59,7 +60,7 @@ public class MockIndexConnector implements IndexConnector {
 		return simpleMappingIndex.get(metamodelURI);
 	}
 
-	public List<Resource> getReferencingResources(Resource referee) {
+	public List<Resource> getReferencingResources(EObject referenceTarget) {
 		// TODO Auto-generated method stub
 		return null;
 	}
