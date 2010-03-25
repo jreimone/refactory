@@ -107,7 +107,11 @@
 	</target>
 
 	<!-- run 'generate-ecore-text-text-resources' first! -->
-	<target name="generate-emftext-languages-text-resources" depends="generate-emftext-languages-metamodel-code,generate-text-resources" description="Generate the EMF text resource plug-ins for all languages">
+	<target name="generate-emftext-languages-text-resources" depends="generate-emftext-languages-metamodel-code,generate-emftext-text-resources" description="Generate the EMF text resource plug-ins for all languages">
+		<eclipse.refreshLocal depth="infinite" resource="/"/>
+	</target>
+
+	<target name="generate-refactoring-languages-text-resources" depends="generate-refactoring-languages-metamodel-code,generate-refactoring-text-resources" description="Generate the EMF text resource plug-ins for all refactoring languages">
 		<eclipse.refreshLocal depth="infinite" resource="/"/>
 	</target>
 
@@ -189,8 +193,17 @@
 		</sequential>
 	</target>
 
+	<target name="generate-refactoring-languages-metamodel-code">
+		
+		<parallel threadsperprocessor="4">
+			<generate-metamodel-code plugin="org.emftext.language.refactoring.roles" model="roles" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.refactoring.rolemapping" model="rolemapping" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.refactoring.specification" model="refactoring_specification" generateEditProject="false" />
+		</parallel>
+	</target>
+
 	<!-- A task for generating text resource plug-ins for all EMFText languages -->
-	<target name="generate-text-resources">
+	<target name="generate-emftext-text-resources">
 		
 		<emftext-register-ecore-resource-factory 
 			className="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" 
@@ -262,6 +275,14 @@
 		<generate-text-resource plugin="org.emftext.test.cct4" syntax="cct4" dir="${test.plugins.dir}" />
 		<generate-text-resource plugin="org.emftext.test.grammar_features" syntax="grammar_features" dir="${test.plugins.dir}" />
 		<generate-text-resource plugin="org.emftext.test.escaping" syntax="escaping" dir="${test.plugins.dir}" />
+	</target>
+	
+	<!-- A task for generating text resource plug-ins for all refactoring languages -->
+	<target name="generate-refactoring-text-resources">
+		
+		<generate-text-resource plugin="org.emftext.language.refactoring.roles" syntax="roles" resourcePlugin="org.emftext.language.refactoring.roles.resource.rolestext" />
+		<generate-text-resource plugin="org.emftext.language.refactoring.rolemapping" syntax="rolemapping" resourcePlugin="org.emftext.language.refactoring.rolemapping.resource.rolemapping" />
+		<generate-text-resource plugin="org.emftext.language.refactoring.specification" syntax="refactoring_specification" resourcePlugin="org.emftext.language.refactoring.specification.resource.refspec" />
 	</target>
 	
 </project>
