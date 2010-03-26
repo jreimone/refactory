@@ -4,3 +4,4 @@ Bundle-Name: Refactoring
 Bundle-SymbolicName: org.eclipse.emf.ecore.refactoring;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.emftext.refactoring.registry.rolemapping
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
