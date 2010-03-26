@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.specification.interpreter.ui;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.dialogs.DialogSettings;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.swt.widgets.Composite;
@@ -116,6 +119,14 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 		Comparator<EObject> comparator = new Comparator<EObject>() {
 			
 			public int compare(EObject o1, EObject o2) {	
+				EcoreItemProviderAdapterFactory factory = new EcoreItemProviderAdapterFactory();
+				if(factory.isFactoryForType(IItemLabelProvider.class)){
+					IItemLabelProvider labelProvider1 = (IItemLabelProvider) factory.adapt(o1, IItemLabelProvider.class);
+					IItemLabelProvider labelProvider2 = (IItemLabelProvider) factory.adapt(o2, IItemLabelProvider.class);
+					String label1 = labelProvider1.getText(o1);
+					String label2 = labelProvider2.getText(o2);
+					return String.CASE_INSENSITIVE_ORDER.compare(label1, label2);
+				}
 				return 1;
 			}
 		};
