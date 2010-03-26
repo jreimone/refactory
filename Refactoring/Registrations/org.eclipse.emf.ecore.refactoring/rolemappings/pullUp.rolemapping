@@ -4,10 +4,10 @@ PullUpFeature maps <MoveX> {
 
 	Movee := EStructuralFeature;
 	SourceContainer := EClass {
-		sourceReference := eStructuralFeatures;
+		sourceContainment := eStructuralFeatures;
 		containerReference := eSuperTypes;
 	};
 	TargetContainer := EClass{
-		targetReference := eStructuralFeatures;
+		targetContainment := eStructuralFeatures;
 	};
 } 
