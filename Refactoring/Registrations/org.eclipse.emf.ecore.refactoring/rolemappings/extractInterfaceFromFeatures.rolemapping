@@ -1,0 +1,17 @@
+ROLEMODELMAPPING extractInterfaceFromFeatures FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+ExtractInterfaceFromFeatures maps <ExtractMethod> {
+
+	Extract := EStructuralFeature;
+	OrigContainer := EClass {
+		extracts := eStructuralFeatures;
+	};
+	NewContainer := EClass (newName -> name){
+		moved := eStructuralFeatures;
+		// TODO set new EClass to abstract=true and interface=true
+	};
+	ContainerContainer := EPackage {
+		source := eClassifiers;
+		target := eClassifiers;
+	};
+} 
