@@ -162,6 +162,8 @@ public class RoleUtil {
 			double mappedRolesValue = new Integer(mappedRoles.size()).doubleValue();
 			double matchedRolesValue = new Integer(matchedRoles.size()).doubleValue();
 			result = 1.0 - ((mappedRolesValue - matchedRolesValue) / mappedRolesValue);
+		} else if(matchedRoles.size() == 0){
+			return 0.0;
 		} else {
 			double matchedRolesValue = new Integer(matchedRoles.size()).doubleValue();
 			double appliedRolesValue = new Integer(appliedRoles.size()).doubleValue();
