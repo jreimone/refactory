@@ -3,13 +3,21 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.IndexVariable;
+import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
+import org.emftext.language.refactoring.refactoring_specification.RoleReference;
+import org.emftext.language.refactoring.refactoring_specification.TRACE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
+import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
+import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.util.ModelUtil;
@@ -36,6 +44,33 @@ public class RefactoringInterpreterContext {
 		this.mapping = mapping;
 	}
 
+	public Role getRoleForEObject(EObject object){
+		Collection<EObject> values = varInstanceMap.values();
+		for (EObject value : values) {
+			if(value.equals(object)){
+				Set<Variable> variables = varInstanceMap.keySet();
+				for (Variable variable : variables) {
+					if(varInstanceMap.get(variable).equals(value)){
+						VariableDeclarationCommand command = variable.getContainerCommand();
+						if(command instanceof CREATE){
+							return ((CREATE) command).getSourceRole();
+						}
+						if(command instanceof VariableAssignment){
+							ObjectAssignmentCommand objectAssignment = ((VariableAssignment) command).getAssignment();
+							if(objectAssignment instanceof TRACE){
+								return ((TRACE) objectAssignment).getRole();
+							}
+							if(objectAssignment instanceof RoleReference){
+								return ((RoleReference) objectAssignment).getRole();
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Creates a new instance for the {@link EClass} for which the given variable is considered. 
 	 * 
