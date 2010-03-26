@@ -1,0 +1,16 @@
+ROLEMODELMAPPING pullUp FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+ExtractSuperClass maps <ExtractMethod> {
+
+	Extract := EStructuralFeature;
+	OrigContainer := EClass {
+		extracts := eStructuralFeatures;
+	};
+	NewContainer := EClass (newName -> name){
+		moved := eStructuralFeatures;
+	};
+	ContainerContainer := EPackage {
+		source := eClassifiers;
+		target := eClassifiers;
+	};
+} 
