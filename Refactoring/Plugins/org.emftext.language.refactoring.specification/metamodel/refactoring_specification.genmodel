@@ -107,5 +107,6 @@
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//AdditionalCommand"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//UPDATE"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//PATH"/>
   </genPackages>
 </genmodel:GenModel>
