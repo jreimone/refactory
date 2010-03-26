@@ -3,39 +3,43 @@
  */
 package org.emftext.refactoring.specification.interpreter.ui;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.refactoring.interpreter.IAttributeValueProvider;
+import org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider;
 import org.emftext.refactoring.util.StringUtil;
 
 /**
  * @author Jan Reimann
  *
  */
-public class DialogValueProvider implements IAttributeValueProvider, IInputValidator {
+public class DialogAttributeValueProvider implements IStructuralFeatureValueProvider, IInputValidator {
 
 	private static final String MESSAGE = "The following attribute has to be provided: \n%1$s:%2$s";
 	private Mapping mapping;
 	private EAttribute attribute;
 	private Object value;
 
-	public DialogValueProvider(Mapping mapping){
+	public DialogAttributeValueProvider(Mapping mapping){
 		this.mapping = mapping;
 	}
 
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.internal.IAttributeValueProvider#provideAttributeValue(org.eclipse.emf.ecore.EAttribute)
 	 */
-	public Object provideAttributeValue(EAttribute attribute) {
+	public Object provideValue(EStructuralFeature structuralFeature) {
 		InputDialog dialog = new InputDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()
 				, StringUtil.convertCamelCaseToWords(mapping.getName())
-				, String.format(MESSAGE, attribute.getName(), attribute.getEAttributeType().getInstanceClassName())
+				, String.format(MESSAGE, structuralFeature.getName(), ((EAttribute) structuralFeature).getEAttributeType().getInstanceClassName())
 				, null
 				, this);
-		this.attribute = attribute;
+		this.attribute = (EAttribute) structuralFeature;
 		int returnCode = dialog.open();
 		while (returnCode == InputDialog.CANCEL) {
 			returnCode = dialog.open();
@@ -94,6 +98,13 @@ public class DialogValueProvider implements IAttributeValueProvider, IInputValid
 				return "the given value must be of type Double";
 			}
 		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider#provideValue(java.util.List)
+	 */
+	public EObject provideValue(List<EObject> elements) {
 		return null;
 	}
 }

@@ -3,7 +3,10 @@
  */
 package org.emftext.refactoring.interpreter;
 
-import org.eclipse.emf.ecore.EAttribute;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter;
 
 /**
@@ -15,13 +18,21 @@ import org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter;
  * @author Jan Reimann
  *
  */
-public interface IAttributeValueProvider {
+public interface IStructuralFeatureValueProvider {
 
 	/**
-	 * With this method a concrete value for the given <code>attribute</code> will be provided.
+	 * With this method a concrete value for the given <code>structuralFeature</code> will be provided.
 	 * 
-	 * @param attribute
+	 * @param structuralFeature
 	 * @return
 	 */
-	public Object provideAttributeValue(EAttribute attribute);
+	public Object provideValue(EStructuralFeature structuralFeature);
+	
+	/**
+	 * This method can be used to provide one value out of the given <code>elements</code>.
+	 * 
+	 * @param elements
+	 * @return
+	 */
+	public EObject provideValue(List<EObject> elements);
 }

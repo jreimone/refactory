@@ -24,8 +24,8 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
-import org.emftext.refactoring.interpreter.IAttributeValueProvider;
-import org.emftext.refactoring.specification.interpreter.ui.DialogValueProvider;
+import org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider;
+import org.emftext.refactoring.specification.interpreter.ui.DialogAttributeValueProvider;
 
 /**
  * @author Jan Reimann
@@ -34,9 +34,9 @@ import org.emftext.refactoring.specification.interpreter.ui.DialogValueProvider;
 public class ASSIGNInterpreter {
 	
 	// the following two variables will only be used when test plugin specifies a value provider
-	private static Class<IAttributeValueProvider> valueProviderClass;
+	private static Class<IStructuralFeatureValueProvider> valueProviderClass;
 	private boolean providerExternallySet = false;
-	private IAttributeValueProvider valueProvider;
+	private IStructuralFeatureValueProvider valueProvider;
 	
 	private Mapping mapping;
 	private RefactoringInterpreterContext context;
@@ -47,7 +47,7 @@ public class ASSIGNInterpreter {
 	
 	public ASSIGNInterpreter(Mapping mapping) {
 		this.mapping = mapping;
-		this.valueProvider = new DialogValueProvider(mapping);
+		this.valueProvider = new DialogAttributeValueProvider(mapping);
 	}
 
 	public Boolean interpreteASSIGN(ASSIGN object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
@@ -138,7 +138,7 @@ public class ASSIGNInterpreter {
 				return false;
 			}
 		}
-		Object value = getValueProvider().provideAttributeValue(classAttribute);
+		Object value = getValueProvider().provideValue(classAttribute);
 		List<Resource> referer = getReferer(targetObject);
 		targetObject.eSet(classAttribute, value);
 		handleAdditional(referer, addition, targetObject, classAttribute, value);
@@ -183,11 +183,11 @@ public class ASSIGNInterpreter {
 	 * 
 	 * @param valueProvider
 	 */
-	public static void setValueProvider(Class<IAttributeValueProvider> valueProvider){
+	public static void setValueProvider(Class<IStructuralFeatureValueProvider> valueProvider){
 		valueProviderClass = valueProvider;
 	}
 	
-	private IAttributeValueProvider getValueProvider(){
+	private IStructuralFeatureValueProvider getValueProvider(){
 		if(valueProviderClass != null){
 			if(!providerExternallySet){
 				try {
