@@ -6,8 +6,10 @@
  */
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -40,11 +42,15 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 				tempPairList.remove(index + 1);
 			}
 			//			this.result = result;
-			EReference reference1 = getReference(identifier, metaclass, tempPairList);
-			if(reference1 != null){
-				result.addMapping(identifier, reference1);
-				if(resolveFuzzy){
-					return;
+			Map<String, EReference> foundReferences = getReferences(metaclass, tempPairList);
+			if (!foundReferences.isEmpty()) {
+				for (String referenceName : foundReferences.keySet()) {
+					if (referenceName.equals(identifier) || resolveFuzzy) {
+						result.addMapping(referenceName, foundReferences.get(referenceName));
+						if (!resolveFuzzy) {
+							return;
+						}
+					}
 				}
 			} else {
 				String className = null;
@@ -58,23 +64,22 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 		}
 	}
 
-	private EReference getReference(String targetIdentifier, EClass metaClass, List<ReferenceMetaClassPair> pairs){
+	private Map<String, EReference> getReferences(EClass metaClass, List<ReferenceMetaClassPair> pairs){
+		Map<String, EReference> foundReferences = new LinkedHashMap<String, EReference>();
 		ReferenceMetaClassPair pair = pairs.get(0);
 		pairs.remove(pair);
 		if(pairs.size() == 0){
 			List<EReference> references = metaClass.getEAllReferences();
 			for (EReference eReference : references) {
-				if(eReference.getName().equals(targetIdentifier)){
-					EClass pairClass = pair.getMetaClass();
-					if(pairClass == null){
-						EClass referenceType = eReference.getEReferenceType();
-						if(!referenceType.isAbstract()){
-							pairClass = referenceType;
-							pair.setMetaClass(referenceType);
-						} 
-					}
-					return eReference;
+				EClass pairClass = pair.getMetaClass();
+				if(pairClass == null){
+					EClass referenceType = eReference.getEReferenceType();
+					if(!referenceType.isAbstract()){
+						pairClass = referenceType;
+						pair.setMetaClass(referenceType);
+					} 
 				}
+				foundReferences.put(eReference.getName(), eReference);
 			}
 		} else {
 			EClass stepClass = pair.getMetaClass();
@@ -86,9 +91,9 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 					pair.setMetaClass(referenceType);
 				} 
 			}
-			return getReference(targetIdentifier, stepClass, pairs);
+			foundReferences.putAll(getReferences(stepClass, pairs));
 		}
-		return null;
+		return foundReferences;
 	}
 
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EReference element, org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair container, org.eclipse.emf.ecore.EReference reference) {
