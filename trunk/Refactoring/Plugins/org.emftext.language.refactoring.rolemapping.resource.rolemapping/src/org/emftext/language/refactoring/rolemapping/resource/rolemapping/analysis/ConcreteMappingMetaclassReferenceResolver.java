@@ -14,8 +14,9 @@
 
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -25,7 +26,8 @@ import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 
 public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> {
 
-	private static final String PACKAGE_SEPARATOR = "\\.";
+	private static final String PACKAGE_SEPARATOR = ".";
+	private static final String PACKAGE_SEPARATOR_REGEX = "\\.";
 
 	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass>();
 
@@ -38,12 +40,16 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 				//EcoreUtil.resolveAll(mappingModel);
 			}
 			if (targetMetamodel != null && !targetMetamodel.eIsProxy()) {
-				String[] segments = identifier.split(PACKAGE_SEPARATOR);
-				EClass mappedClass = getEClassFromEPackage(targetMetamodel, segments, resolveFuzzy);
-				if(mappedClass != null){
-					result.addMapping(identifier, mappedClass);
-					if (!resolveFuzzy) {
-						return;
+				String[] segments = identifier.split(PACKAGE_SEPARATOR_REGEX);
+				Map<String, EClass> eClassMap = getEClassesFromEPackage(targetMetamodel);
+				if (!eClassMap.isEmpty()) {
+					for (String key : eClassMap.keySet()) {
+						if (key.equals(identifier) || resolveFuzzy) {
+							result.addMapping(key, eClassMap.get(key));
+							if (!resolveFuzzy) {
+								return;
+							}
+						}
 					}
 				} else {
 					if(segments.length == 1){
@@ -51,7 +57,7 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 					} else {
 						String packageString = "";
 						for (int i = 0; i < segments.length - 1; i++) {
-							packageString += segments[i] + ".";
+							packageString += segments[i] + PACKAGE_SEPARATOR;
 						}
 						StringBuilder builder = new StringBuilder(packageString);
 						builder.deleteCharAt(builder.length() - 1);
@@ -64,38 +70,33 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 		}
 	}
 
-	private EClass getEClassFromEPackage(EPackage epackage, String[] identifierPath, boolean resolveFuzzy){
-		if(identifierPath.length == 1){
-			String className = identifierPath[0];
-			List<EClassifier> eClassifiers = epackage.getEClassifiers();
-			for (EClassifier eClassifier : eClassifiers) {
-				if (eClassifier.getName().equals(className) || resolveFuzzy) {
-					if (eClassifier instanceof EClass) {
-						return (EClass) eClassifier;
-					}
-				}
-			}
-		} else {
-			String identifier = identifierPath[0];
-			identifierPath = removeFirst(identifierPath);
-			List<EPackage> subPackages = epackage.getESubpackages();
-			for (EPackage subpackage : subPackages) {
-				if(subpackage.getName().equals(identifier)){
-					return getEClassFromEPackage(subpackage, identifierPath, resolveFuzzy);
-				}
+	/**
+	 * Returns a map of all EClasses that can be found in the given EPackage.
+	 * The keys of the map are the names of the classes. EClasses found in sub 
+	 * packages are prefixed with the name of the sub package. 
+	 * 
+	 * @param ePackage the package to search in
+	 * @return
+	 */
+	private Map<String, EClass> getEClassesFromEPackage(EPackage ePackage) {
+		Map<String, EClass> foundEClasses = new LinkedHashMap<String, EClass>();
+		List<EClassifier> eClassifiers = ePackage.getEClassifiers();
+		for (EClassifier eClassifier : eClassifiers) {
+			if (eClassifier instanceof EClass) {
+				foundEClasses.put(eClassifier.getName(), (EClass) eClassifier);
 			}
 		}
-		return null;
+
+		List<EPackage> subPackages = ePackage.getESubpackages();
+		for (EPackage subpackage : subPackages) {
+			Map<String, EClass> eClassesInSubPackage = getEClassesFromEPackage(subpackage);
+			for (String key : eClassesInSubPackage.keySet()) {
+				foundEClasses.put(subpackage.getName() + PACKAGE_SEPARATOR + key, eClassesInSubPackage.get(key));
+			}
+		}
+		return foundEClasses;
 	}
 
-	private static String[] removeFirst(String[] path) {
-		List<String> temp = new ArrayList<String>();
-		for (int i = 1; i < path.length; i++) {
-			temp.add(path[i]);
-		}
-		return temp.toArray(new String[0]);
-	}
-	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
