@@ -51,6 +51,7 @@ public class DialogOneListElementProvider implements IStructuralFeatureValueProv
 	public EObject provideValue(List<EObject> elements) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		FilteredEObjectsSelectionDialog dialog = new FilteredEObjectsSelectionDialog(shell, elements, mapping);
+		dialog.setInitialPattern("**");
 		int returnCode = dialog.open();
 		while (returnCode == FilteredItemsSelectionDialog.CANCEL) {
 			returnCode = dialog.open();
