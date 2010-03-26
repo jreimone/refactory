@@ -21,5 +21,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//State"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AnotherUIParent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnotherUIParent" eSuperTypes="#//SuperParent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SuperParent"/>
 </ecore:EPackage>
