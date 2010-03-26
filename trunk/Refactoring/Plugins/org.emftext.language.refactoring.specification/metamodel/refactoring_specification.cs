@@ -59,6 +59,7 @@ TOKENSTYLES{
 	"for" COLOR #7F0055, BOLD;
 	"from" COLOR #7F0055, BOLD;
 	"uptree" COLOR #50F05C, BOLD;
+	"path" COLOR #50F05C, BOLD;
 	"update" COLOR #50F05C, BOLD;
 	"trace" COLOR #50F05C, BOLD;
 	"first" COLOR #50F05C, BOLD;
@@ -102,6 +103,8 @@ RULES{
 	FromClause ::= operator #0 "(" reference ")";
 	
 	UPTREE ::= "uptree";
+	
+	PATH ::= "path";
 	
 	FIRST ::= "index" variable ":=" "first" "(" reference ")";
 	

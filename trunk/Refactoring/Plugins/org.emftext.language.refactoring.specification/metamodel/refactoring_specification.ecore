@@ -137,4 +137,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditionalCommand" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="UPDATE" eSuperTypes="#//AdditionalCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PATH" eSuperTypes="#//FromOperator"/>
 </ecore:EPackage>
