@@ -3,28 +3,16 @@
  */
 package org.emftext.refactoring.specification.interpreter.ui;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
-import org.eclipse.emf.edit.provider.ReflectiveItemProvider;
-import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
@@ -72,33 +60,16 @@ public class DialogOneListElementProvider implements IStructuralFeatureValueProv
 		ILabelProvider provider = new LabelProvider() {
 
 			@Override
-			public Image getImage(Object element) {
-				EObject object = (EObject) element;
-				EcoreItemProviderAdapterFactory factory = new EcoreItemProviderAdapterFactory();
-				if(factory.isFactoryForType(IItemLabelProvider.class)){
-					IItemLabelProvider labelProvider = (IItemLabelProvider) factory.adapt(object, IItemLabelProvider.class);
-					if(labelProvider != null){
-						Object image = labelProvider.getImage(object);
-						if(image instanceof Image){
-							return (Image) image;
-						}
-						if(image instanceof URL){
-							URL imageUrl = null;
-							try {
-								imageUrl = (URL) image;
-								InputStream stream;
-								stream = imageUrl.openStream();
-								ImageLoader loader = new ImageLoader();
-								ImageData[] imgData = loader.load(stream);
-								stream.close();
-								Display display = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().getDisplay();
-								Image newImage = new Image(display, imgData[0]);
-								return newImage;
-							} catch (IOException e) {
-								System.out.println("couldn't load the image " + imageUrl);
-							}
-						}
-					}
+			public Image getImage(Object object) {
+				EObject element = (EObject) object;
+				org.eclipse.emf.edit.provider.ComposedAdapterFactory adapterFactory = new org.eclipse.emf.edit.provider.ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+				adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory());
+				org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider labelProvider = new org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider(adapterFactory);
+				Image image = labelProvider.getImage(element);
+				if (image != null) {
+					return image;
 				}
 				return super.getImage(object);
 			}
