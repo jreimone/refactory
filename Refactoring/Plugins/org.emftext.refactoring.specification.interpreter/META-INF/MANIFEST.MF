@@ -15,6 +15,7 @@ Require-Bundle: org.emftext.language.refactoring.specification,
  org.eclipse.core.runtime,
  org.eclipse.ui,
  org.emftext.refactoring.indexconnector,
+ org.eclipse.emf.edit.ui,
  org.eclipse.emf.ecore.edit
 Export-Package: org.emftext.refactoring.interpreter,
  org.emftext.refactoring.interpreter.internal;x-friends:="org.emftext.refactoring.tests"
