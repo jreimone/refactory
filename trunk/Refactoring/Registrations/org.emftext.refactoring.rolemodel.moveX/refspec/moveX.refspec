@@ -3,7 +3,7 @@ FOR <MoveX>
 
 STEPS {
 	object sourceContainer := SourceContainer from uptree(INPUT);
-	object targetContainer := TargetContainer from uptree(sourceContainer);
+	object targetContainer := TargetContainer from path(sourceContainer);
 
 	move SourceContainer.sourceContainment to targetContainer;
 }
