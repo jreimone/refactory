@@ -50,14 +50,22 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	@Override
 	protected ItemsFilter createFilter() {
 		ItemsFilter filter = new ItemsFilter(new SearchPattern(
-				SearchPattern.RULE_BLANK_MATCH
-				| SearchPattern.RULE_CAMELCASE_MATCH
+//				SearchPattern.RULE_BLANK_MATCH
+//				| 
+				SearchPattern.RULE_CAMELCASE_MATCH
 				| SearchPattern.RULE_EXACT_MATCH
 				| SearchPattern.RULE_PATTERN_MATCH
 				| SearchPattern.RULE_PREFIX_MATCH)) {
 			
 			@Override
 			public boolean matchItem(Object item) {
+				if(!(item instanceof EObject)){
+					return false;
+				}
+//				String search = getPattern();
+//				if("**".equals(search)){
+//					return true;
+//				}
 				return matches(((EObject) item).toString());
 			}
 			
@@ -74,8 +82,10 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	 */
 	@Override
 	protected void fillContentProvider(AbstractContentProvider contentProvider, ItemsFilter itemsFilter, IProgressMonitor progressMonitor) throws CoreException {
+		progressMonitor.beginTask("Looking for elements...", elements.size());
 		for (EObject element : elements) {
 			contentProvider.add(element, itemsFilter);
+			progressMonitor.worked(1);
 		}
 	}
 
