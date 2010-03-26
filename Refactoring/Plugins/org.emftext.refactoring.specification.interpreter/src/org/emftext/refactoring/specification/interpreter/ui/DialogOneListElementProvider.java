@@ -13,6 +13,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider;
+import org.emftext.refactoring.util.StringUtil;
 
 /**
  * This {@link IStructuralFeatureValueProvider value provider} provides one element of a list within a dialog.
@@ -51,6 +52,7 @@ public class DialogOneListElementProvider implements IStructuralFeatureValueProv
 	public EObject provideValue(List<EObject> elements) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		FilteredEObjectsSelectionDialog dialog = new FilteredEObjectsSelectionDialog(shell, elements, mapping);
+		dialog.setTitle(StringUtil.convertCamelCaseToWords(mapping.getName()));
 		dialog.setInitialPattern("**");
 		int returnCode = dialog.open();
 		while (returnCode == FilteredItemsSelectionDialog.CANCEL) {
