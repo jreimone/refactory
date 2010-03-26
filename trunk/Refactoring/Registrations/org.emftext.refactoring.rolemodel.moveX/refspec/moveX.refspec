@@ -2,7 +2,8 @@ REFACTORING MoveXSpec
 FOR <MoveX> 
 
 STEPS {
-	object targetObject := TargetContainer from uptree(INPUT);
+	object sourceContainer := SourceContainer from uptree(INPUT);
+	object targetContainer := TargetContainer from uptree(sourceContainer);
 
-	move SourceContainer.sourceReference to targetObject;
+	move SourceContainer.sourceContainment to targetContainer;
 }
