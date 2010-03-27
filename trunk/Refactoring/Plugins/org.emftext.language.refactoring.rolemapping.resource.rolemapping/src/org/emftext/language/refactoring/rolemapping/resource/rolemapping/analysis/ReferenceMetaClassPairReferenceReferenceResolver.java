@@ -42,17 +42,20 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 				tempPairList.remove(index + 1);
 			}
 			//			this.result = result;
-			Map<String, EReference> foundReferences = getReferences(metaclass, tempPairList);
+			Map<String, EReference> foundReferences = getReferences(identifier, metaclass, tempPairList);
+			boolean found = false;
 			if (!foundReferences.isEmpty()) {
 				for (String referenceName : foundReferences.keySet()) {
 					if (referenceName.equals(identifier) || resolveFuzzy) {
 						result.addMapping(referenceName, foundReferences.get(referenceName));
+						found = true;
 						if (!resolveFuzzy) {
 							return;
 						}
 					}
 				}
-			} else {
+			}
+			if(!found){
 				String className = null;
 				if(index == 0){
 					className = metaclass.getName();
@@ -64,20 +67,22 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 		}
 	}
 
-	private Map<String, EReference> getReferences(EClass metaClass, List<ReferenceMetaClassPair> pairs){
+	private Map<String, EReference> getReferences(String targetIdentifier, EClass metaClass, List<ReferenceMetaClassPair> pairs){
 		Map<String, EReference> foundReferences = new LinkedHashMap<String, EReference>();
 		ReferenceMetaClassPair pair = pairs.get(0);
 		pairs.remove(pair);
 		if(pairs.size() == 0){
 			List<EReference> references = metaClass.getEAllReferences();
 			for (EReference eReference : references) {
-				EClass pairClass = pair.getMetaClass();
-				if(pairClass == null){
-					EClass referenceType = eReference.getEReferenceType();
-					if(!referenceType.isAbstract()){
-						pairClass = referenceType;
-						pair.setMetaClass(referenceType);
-					} 
+				if(targetIdentifier.equals(eReference.getName())){
+					EClass pairClass = pair.getMetaClass();
+					if(pairClass == null){
+						EClass referenceType = eReference.getEReferenceType();
+						if(!referenceType.isAbstract()){
+							pairClass = referenceType;
+							pair.setMetaClass(referenceType);
+						} 
+					}
 				}
 				foundReferences.put(eReference.getName(), eReference);
 			}
@@ -91,7 +96,7 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 					pair.setMetaClass(referenceType);
 				} 
 			}
-			foundReferences.putAll(getReferences(stepClass, pairs));
+			foundReferences.putAll(getReferences(targetIdentifier, stepClass, pairs));
 		}
 		return foundReferences;
 	}
