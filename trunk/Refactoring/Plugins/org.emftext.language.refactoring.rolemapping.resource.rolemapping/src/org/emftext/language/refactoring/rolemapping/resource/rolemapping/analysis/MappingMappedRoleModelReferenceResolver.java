@@ -33,28 +33,32 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 			result.addMapping(identifier, model);
 			EcoreUtil.resolveAll(model);
 		} else {
-			URI uri = URI.createURI(identifier);
-			ResourceSet resourceSet = container.eResource().getResourceSet();
-			Resource resource = resourceSet.getResource(uri, true);
-			if (resource == null ) {
-				result.setErrorMessage("Can't load role model from " + identifier);
-				return;
-			}
-			EList<EObject> contents = resource.getContents();
-			for (EObject eObject : contents) {
-				if (eObject instanceof RoleModel) {
-					String name = ((RoleModel) eObject).getName();
-					model = registry.getRoleModelByName(name);
-					if(model != null){
-						result.addMapping(identifier, model); 
-						EcoreUtil.resolveAll(model);
-					} else {
-						result.addMapping(identifier, (RoleModel) eObject); 
-						EcoreUtil.resolveAll(eObject);
-					}
-				} else {
-					result.setErrorMessage(identifier + " is not a valid Role Model");
+			try{
+				URI uri = URI.createURI(identifier);
+				ResourceSet resourceSet = container.eResource().getResourceSet();
+				Resource resource = resourceSet.getResource(uri, true);
+				if (resource == null ) {
+					result.setErrorMessage("Can't load role model from " + identifier);
+					return;
 				}
+				EList<EObject> contents = resource.getContents();
+				for (EObject eObject : contents) {
+					if (eObject instanceof RoleModel) {
+						String name = ((RoleModel) eObject).getName();
+						model = registry.getRoleModelByName(name);
+						if(model != null){
+							result.addMapping(identifier, model); 
+							EcoreUtil.resolveAll(model);
+						} else {
+							result.addMapping(identifier, (RoleModel) eObject); 
+							EcoreUtil.resolveAll(eObject);
+						}
+					} else {
+						result.setErrorMessage(identifier + " is not a valid Role Model");
+					}
+				}
+			} catch (Exception e) {
+				result.setErrorMessage(identifier + " is not a valid Role Model");
 			}
 		}
 	}
