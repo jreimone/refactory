@@ -78,10 +78,10 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 					EClass pairClass = pair.getMetaClass();
 					if(pairClass == null){
 						EClass referenceType = eReference.getEReferenceType();
-						if(!referenceType.isAbstract()){
+//						if(!referenceType.isAbstract()){
 							pairClass = referenceType;
 							pair.setMetaClass(referenceType);
-						} 
+//						} 
 					}
 				}
 				foundReferences.put(eReference.getName(), eReference);
@@ -91,10 +91,10 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 			if(stepClass == null){
 				EReference reference = pair.getReference();
 				EClass referenceType = reference.getEReferenceType();
-				if(!referenceType.isAbstract()){
+//				if(!referenceType.isAbstract()){
 					stepClass = referenceType;
 					pair.setMetaClass(referenceType);
-				} 
+//				} 
 			}
 			foundReferences.putAll(getReferences(targetIdentifier, stepClass, pairs));
 		}
