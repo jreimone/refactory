@@ -95,22 +95,29 @@ public abstract class AbstractPathCreator {
 				return false;
 			}
 			// TODO replace this code by a check if a featureClass already exists!!!
-			EObject featureObject = ModelUtil.create(featureClass);
-			if(referencePair.getReference().isMany()){
-				if(index == null){
-					((List<EObject>) feature).add(featureObject);
-				} else {
-					if(((List<EObject>) feature).size() <= index){
-						((List<EObject>) feature).add(featureObject);
-					}
-					if(!((List<EObject>) feature).contains(featureObject)){
-						((List<EObject>) feature).add(index, featureObject);
-					}
-				}
+			//			EObject featureObject = ModelUtil.create(featureClass);
+			EObject featureObject = null;
+			if(feature != null && !referencePair.getReference().isMany()){
+				featureObject = (EObject) feature;
 			} else {
-				parent.eSet(referencePair.getReference(), featureObject);
+				featureObject = ModelUtil.create(featureClass);
+				if(referencePair.getReference().isMany()){
+					if(index == null){
+						((List<EObject>) feature).add(featureObject);
+					} else {
+						if(((List<EObject>) feature).size() <= index){
+							((List<EObject>) feature).add(featureObject);
+						}
+						if(!((List<EObject>) feature).contains(featureObject)){
+							((List<EObject>) feature).add(index, featureObject);
+						}
+					}
+				} else {
+					parent.eSet(referencePair.getReference(), featureObject);
+				}
 			}
 			//			((List<EObject>) feature).add(featureObject);
+			//			EObject featureObject = null;
 			return createPath(featureObject, tempRemainingList, child, index);
 		}
 	}
