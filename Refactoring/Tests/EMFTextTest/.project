@@ -110,6 +110,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.reuseware.sokan.resource.indexBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.emftext.language.models.resource.model.nature</nature>
@@ -133,5 +138,6 @@
 		<nature>org.emftext.language.threevaluedlogic.resource.tvl.nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.emftext.language.pl0extended.resource.pl0extended.nature</nature>
+		<nature>org.reuseware.sokan.resource.repositoryNature</nature>
 	</natures>
 </projectDescription>
