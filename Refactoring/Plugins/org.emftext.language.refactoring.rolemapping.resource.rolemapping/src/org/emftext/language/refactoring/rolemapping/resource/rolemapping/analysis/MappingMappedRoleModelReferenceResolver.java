@@ -28,6 +28,11 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.Mapping container, org.eclipse.emf.ecore.EReference reference, int position,
 			boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.RoleModel> result) {
 		IRoleModelRegistry registry = IRoleModelRegistry.INSTANCE;
+		if(resolveFuzzy){
+			for (RoleModel roleModel : registry.getAllRegisteredRoleModels()) {
+				result.addMapping(identifier, roleModel);
+			}
+		}
 		RoleModel model = registry.getRoleModelByName(identifier);
 		if(model != null){
 			result.addMapping(identifier, model);
