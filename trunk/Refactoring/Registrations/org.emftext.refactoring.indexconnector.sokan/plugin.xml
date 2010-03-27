@@ -13,6 +13,11 @@
             class="org.emftext.refactoring.indexconnector.sokan.ModelReferencesIndexer"
             id="org.emftext.refactoring.indexer.references">
       </indexer>
+      <indexer
+            class="org.emftext.refactoring.indexconnector.sokan.InverseModelReferencesIndexer"
+            dependsOn="org.emftext.refactoring.indexer.references"
+            id="org.emftext.refactoring.indexer.inversereferences">
+      </indexer>
    </extension>
 
 </plugin>

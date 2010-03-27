@@ -21,6 +21,7 @@ import org.reuseware.sokan.index.indexer.Indexer;
 
 public class ModelReferencesIndexer implements Indexer {
 
+	protected static final String INDEXER_ID = "org.emftext.refactoring.indexer.references";
 	protected static final String KEY_REFERENCED_RESOURCES	= "REFERENCED_RESOURCES";
 
 	private ResourceSet resourceSet;
