@@ -2,7 +2,7 @@ RoleModel MoveX {
 	/** The type that contains elements of type Movee */
 	ROLE SourceContainer;
 	/** The type that retrieves elements of type Movee when moving them */
-	ROLE TargetContainer;
+	super ROLE TargetContainer;
 	/** The type of the elements that are moved */
 	super input ROLE Movee;
 
