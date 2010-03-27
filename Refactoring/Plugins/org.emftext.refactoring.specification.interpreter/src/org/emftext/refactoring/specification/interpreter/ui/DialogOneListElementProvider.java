@@ -9,7 +9,11 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -62,11 +66,11 @@ public class DialogOneListElementProvider implements IStructuralFeatureValueProv
 			@Override
 			public Image getImage(Object object) {
 				EObject element = (EObject) object;
-				org.eclipse.emf.edit.provider.ComposedAdapterFactory adapterFactory = new org.eclipse.emf.edit.provider.ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-				adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory());
-				adapterFactory.addAdapterFactory(new org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory());
-				adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory());
-				org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider labelProvider = new org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider(adapterFactory);
+				ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+				adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+				AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
 				Image image = labelProvider.getImage(element);
 				if (image != null) {
 					return image;
@@ -77,13 +81,22 @@ public class DialogOneListElementProvider implements IStructuralFeatureValueProv
 			@Override
 			public String getText(Object element) {
 				EObject object = (EObject) element;
-				EcoreItemProviderAdapterFactory factory = new EcoreItemProviderAdapterFactory();
-				if(factory.isFactoryForType(IItemLabelProvider.class)){
-					IItemLabelProvider labelProvider = (IItemLabelProvider) factory.adapt(object, IItemLabelProvider.class);
-					if(labelProvider != null){
-						return labelProvider.getText(object);
-					}
+				ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+				adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+				AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+				String label = labelProvider.getText(object);
+				if(label != null){
+					return label;
 				}
+//				EcoreItemProviderAdapterFactory factory = new EcoreItemProviderAdapterFactory();
+//				if(factory.isFactoryForType(IItemLabelProvider.class)){
+//					IItemLabelProvider labelProvider = (IItemLabelProvider) factory.adapt(object, IItemLabelProvider.class);
+//					if(labelProvider != null){
+//						return labelProvider.getText(object);
+//					}
+//				}
 				return super.getText(element);
 			}
 
