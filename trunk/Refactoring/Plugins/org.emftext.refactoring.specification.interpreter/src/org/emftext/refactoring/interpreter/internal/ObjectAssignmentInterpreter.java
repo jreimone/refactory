@@ -119,7 +119,7 @@ public class ObjectAssignmentInterpreter {
 		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(assignedRole);
 		List<ReferenceMetaClassPair> pairs = relationMapping.getReferenceMetaClassPair();
 		List<EObject> values = getEObjectWithRoleFromPath(assignedRole, sourceObject, pairs);
-		if(values == null){
+		if(values == null  || values.size() == 0){
 			return null;
 		}
 		if(values.size() == 1){
@@ -152,6 +152,25 @@ public class ObjectAssignmentInterpreter {
 				return valuesWithRole;
 			}
 		} else if(pairs.size() > 1){
+			List<ReferenceMetaClassPair> tempPairs =  new LinkedList<ReferenceMetaClassPair>();
+			for (ReferenceMetaClassPair pair : pairs) {
+				tempPairs.add(pair);
+			}
+			ReferenceMetaClassPair pair = tempPairs.get(0);
+			tempPairs.remove(pair);
+			Object ob = parent.eGet(pair.getReference());
+			if(ob instanceof EObject){
+				EObject stepParent = (EObject) ob;
+				return getEObjectWithRoleFromPath(role, stepParent, tempPairs);
+			}
+			if(ob instanceof List<?>){
+				List<EObject> values = (List<EObject>)ob;
+				if(values.size() == 1){
+					return getEObjectWithRoleFromPath(role, values.get(0), tempPairs);
+				} else {
+					throw new UnsupportedOperationException("This case must be implemented!");
+				}
+			}
 			throw new UnsupportedOperationException("This case must be implemented!");
 		}
 		return null;
