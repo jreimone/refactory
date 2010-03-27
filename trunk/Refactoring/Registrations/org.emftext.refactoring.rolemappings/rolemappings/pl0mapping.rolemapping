@@ -17,6 +17,17 @@ ExtractProcedure maps <ExtractMethod> {
 	} ;
 }
 
+PullUpConstant maps <MoveX> {
+	Movee := ConstDeclaration;
+	SourceContainer := Block{
+		sourceContainment := constants;
+		containerReference := allOwners;
+	};
+	TargetContainer := BlockOwner{
+		targetContainment := block -> constants;
+	};
+}
+
 RenameProcedure maps <RenameMethod> {
 	Nameable := ProcedureDeclaration(name -> name);
 }
