@@ -10,7 +10,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -30,10 +29,9 @@ public interface IRefactoringInterpreter {
 	 * 
 	 * @param refSpec the specification containing the steps of the refactoring
 	 * @param model the model being refactored
-	 * @param roleMapping 
 	 * @param mapping 
 	 */
-	public void initialize(RefactoringSpecification refSpec, EObject model, RoleMappingModel roleMapping, Mapping mapping);
+	public void initialize(RefactoringSpecification refSpec, EObject model, Mapping mapping);
 	
 	/**
 	 * Invokes the refactoring process on the model and with the steps determined in {@link IRefactoringInterpreter#initialize(RefactoringSpecification, EObject)}.

@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -10,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -31,16 +31,16 @@ import org.emftext.refactoring.util.RoleUtil;
 public class Refactorer implements IRefactorer {
 
 	private EObject model;
-	private RoleMappingModel roleMapping;
+	private Map<String, Mapping> roleMappings;
 	private List<? extends EObject> currentSelection;
 	private Map<Mapping, IRefactoringInterpreter> interpreterMap;
 	private IRefactoringSpecificationRegistry refSpecRegistry;
 	private IRoleMappingRegistry roleMappingRegistry;
 	private boolean occuredErrors;
 
-	public Refactorer(EObject model, RoleMappingModel roleMapping){
+	public Refactorer(EObject model, Map<String, Mapping> roleMappings){
 		this.model = model;
-		this.roleMapping = roleMapping;
+		this.roleMappings = roleMappings;
 		refSpecRegistry = IRefactoringSpecificationRegistry.INSTANCE;
 		roleMappingRegistry = IRoleMappingRegistry.INSTANCE;
 		initInterpreterMap();
@@ -48,14 +48,16 @@ public class Refactorer implements IRefactorer {
 
 	private void initInterpreterMap(){
 		interpreterMap = new LinkedHashMap<Mapping, IRefactoringInterpreter>();
-		EList<Mapping> mappings = roleMapping.getMappings();
+		Collection<Mapping> mappings = roleMappings.values();
 		for (Mapping mapping : mappings) {
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			EcoreUtil.resolveAll(roleModel);
 			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(roleModel);
+			Mapping firstMapping = roleMappings.values().toArray(new Mapping[0])[0];
+			RoleMappingModel roleMapping = (RoleMappingModel) EcoreUtil.getRootContainer(firstMapping);
 			IRefactoringPostProcessor postProcessor = roleMappingRegistry.getPostProcessor(roleMapping.getTargetMetamodel(), mapping);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter(postProcessor);
-			interpreter.initialize(refSpec, model, roleMapping, mapping);
+			interpreter.initialize(refSpec, model, mapping);
 			interpreterMap.put(mapping, interpreter);
 		}
 	}
@@ -65,7 +67,7 @@ public class Refactorer implements IRefactorer {
 	 */
 	public List<RefactoringSpecification> getPossibleRefactoringsForNearestRoleModels(double minEquality) {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
-		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMapping, minEquality);
+		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMappings, minEquality);
 		for (Mapping mapping : possibleMappings) {
 			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(mapping.getMappedRoleModel());
 			if(refSpec != null){
@@ -141,7 +143,7 @@ public class Refactorer implements IRefactorer {
 	 */
 	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality) {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
-		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMapping, minEquality);
+		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMappings, minEquality);
 		for (Mapping mapping : possibleMappings) {
 			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(mapping.getMappedRoleModel());
 			if(refSpec != null){
@@ -152,7 +154,7 @@ public class Refactorer implements IRefactorer {
 	}
 	
 	public List<Mapping> getPossibleMappings(double minEquality){
-		return RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMapping, minEquality);
+		return RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMappings, minEquality);
 	}
 
 	/* (non-Javadoc)

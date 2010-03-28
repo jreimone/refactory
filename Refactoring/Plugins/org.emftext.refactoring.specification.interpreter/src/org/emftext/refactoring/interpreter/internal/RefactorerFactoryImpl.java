@@ -3,8 +3,11 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
@@ -23,7 +26,7 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		EObject root = resource.getContents().get(0);
 		String mmUri = root.eClass().getEPackage().getNsURI();
-		RoleMappingModel roleMapping = registry.getRoleMappingForUri(mmUri);
+		Map<String, Mapping> roleMapping = registry.getRoleMappingsForUri(mmUri);
 		if(roleMapping == null){
 			return null;
 		}
