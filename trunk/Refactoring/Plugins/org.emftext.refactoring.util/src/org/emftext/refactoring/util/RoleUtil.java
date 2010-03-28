@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -83,9 +84,9 @@ public class RoleUtil {
 	 * @param minEquality
 	 * @return
 	 */
-	public static List<Mapping> getPossibleMappingsForSelection(List<? extends EObject> selection, RoleMappingModel roleMapping, double minEquality){
+	public static List<Mapping> getPossibleMappingsForSelection(List<? extends EObject> selection, Map<String, Mapping> roleMappings, double minEquality){
 		List<Mapping> possibleMappings = new LinkedList<Mapping>();
-		EList<Mapping> mappings = roleMapping.getMappings();
+		List<Mapping> mappings = (List<Mapping>) roleMappings.values();
 		for (Mapping mapping : mappings) {
 			double equality = getProcentualEquality(selection, mapping);
 			if(Math.abs(equality) >= minEquality){
@@ -103,12 +104,11 @@ public class RoleUtil {
 	 * @param minEquality
 	 * @return
 	 */
-	public static List<Mapping> getPossibleMappingsForInputSelection(List<? extends EObject> selection, RoleMappingModel roleMapping, double minEquality){
-		EcoreUtil.resolveAll(roleMapping.getTargetMetamodel());
+	public static List<Mapping> getPossibleMappingsForInputSelection(List<? extends EObject> selection, Map<String, Mapping> roleMappings, double minEquality){
 		List<Mapping> possibleMappings = new LinkedList<Mapping>();
-		EList<Mapping> mappings = roleMapping.getMappings();
+		Collection<Mapping> mappings = roleMappings.values();
 		for (Mapping mapping : mappings) {
-			EcoreUtil.resolveAll(mapping.getMappedRoleModel());
+			EcoreUtil.resolveAll(mapping);
 			double equality = getProcentualInputEquality(selection, mapping);
 			if(Math.abs(equality) >= minEquality){
 				possibleMappings.add(mapping);
