@@ -1,14 +1,20 @@
 package org.emftext.refactoring.ui;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -57,7 +63,7 @@ public class RefactoringAction extends Action {
 			CommandStack stack = domain.getCommandStack();
 			command = new RefactoringRecordingCommand(resource, domain, refactorer, mapping);
 			stack.execute(command);
-//			domain.dispose();
+			//			domain.dispose();
 
 			//			refactoredModel = refactorer.refactor(mapping, false);	
 			if(command.didErrorsOccur()){
@@ -116,11 +122,22 @@ public class RefactoringAction extends Action {
 		protected void doExecute() {
 			try {
 				refactoredModel = refactorer.refactor(mapping, false);
-//				TransactionUtil.disconnectFromEditingDomain(resource);
+				//				TransactionUtil.disconnectFromEditingDomain(resource);
 				if(!refactorer.didErrorsOccur()){
-//					resource.getContents().set(0, refactoredModel);
-					resource.save(null);
-					resource.setModified(true);
+					//					resource.getContents().set(0, refactoredModel);
+					List<Resource> references = new LinkedList<Resource>();
+					references.add(resource);
+					Map<EObject, Collection<Setting>> externalReferences = EcoreUtil.ExternalCrossReferencer.find(resource);
+					for (EObject object : externalReferences.keySet()) {
+						Resource externalReference = object.eResource();
+						if(externalReference != null && externalReference.getURI().isPlatformResource()){
+							references.add(externalReference);
+						}
+					}
+					for (Resource externalResource : references) {
+						externalResource.save(null);
+						externalResource.setModified(true);
+					}
 				} else {
 					didErrorsOccur = true;
 				}
