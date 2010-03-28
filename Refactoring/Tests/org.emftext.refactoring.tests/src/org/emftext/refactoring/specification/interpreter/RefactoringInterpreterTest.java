@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -22,7 +23,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
@@ -69,8 +69,8 @@ public class RefactoringInterpreterTest extends TestClass{
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		assertNotNull(registry);
 		EObject model = TestUtil.getModelFromResource(resource);
-		RoleMappingModel mappingModel = registry.getRoleMappingForUri(model.eClass().getEPackage().getNsURI());
-		assertNotNull(mappingModel);
+		Map<String, Mapping> roleMappings = registry.getRoleMappingsForUri(model.eClass().getEPackage().getNsURI());
+		assertNotNull(roleMappings);
 		
 		File path = getTestDataSet().getInputFileByPattern(PATH);
 		assertNotNull(path);
@@ -79,7 +79,7 @@ public class RefactoringInterpreterTest extends TestClass{
 		assertNotNull(elements);
 		assertTrue(elements.size() > 0);
 		
-		List<Mapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elements, mappingModel, 1.0);
+		List<Mapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elements, roleMappings, 1.0);
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		for (Mapping mapping : mappings) {

@@ -45,7 +45,6 @@ import org.emftext.refactoring.indexconnector.IndexConnectorTest;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
-import org.emftext.refactoring.registry.rolemapping.exceptions.RoleMappingAlreadyRegistered;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
 import org.emftext.refactoring.roleconstraintchecker.RoleConstraintCheckerTest;
@@ -148,9 +147,7 @@ public class RefactoringTests extends TestCase{
 			e.printStackTrace();
 		} catch (RefSpecAlreadyRegisteredException e) {
 			e.printStackTrace();
-		} catch (RoleMappingAlreadyRegistered e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 
 	public static Test suite(){
