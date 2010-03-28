@@ -1,11 +1,11 @@
 package org.emftext.refactoring.registry.rolemapping;
 
+import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
-import org.emftext.refactoring.registry.rolemapping.exceptions.RoleMappingAlreadyRegistered;
 import org.emftext.refactoring.registry.rolemapping.impl.BasicRoleMappingRegistry;
 
 /**
@@ -24,29 +24,27 @@ public interface IRoleMappingRegistry {
 	 * @param nsUri
 	 * @return
 	 */
-	public RoleMappingModel getRoleMappingForUri(String nsUri);
+	public Map<String, Mapping> getRoleMappingsForUri(String nsUri);
 	
 	/**
 	 * To be invoked if a {@link RoleMappingModel} is intended to be registered at runtime. 
 	 * @param roleMapping
 	 */
-	public void registerRoleMapping(RoleMappingModel roleMapping) throws RoleMappingAlreadyRegistered;
+	public void registerRoleMapping(RoleMappingModel roleMapping);
 	
 	/**
 	 * Returns the {@link RoleMappingModel rolemapping} map.
 	 * @return
 	 */
-	public Map<String, RoleMappingModel> getRoleMappingMap();
+	public Map<String, Map<String, Mapping>> getRoleMappingsMap();
 	
 	/**
 	 * Use this method to register a {@link IRefactoringPostProcessor postprocessor} for the given <code>roleMapping</code> and 
 	 * <code>mapping</code>.
-	 * 
-	 * @param roleMapping
 	 * @param mapping
 	 * @param postProcessor
 	 */
-	public void registerPostProcessor(RoleMappingModel roleMapping, Mapping mapping, IRefactoringPostProcessor postProcessor);
+	public void registerPostProcessor(Mapping mapping, IRefactoringPostProcessor postProcessor);
 	
 	/**
 	 * Returns the postprocessor registered to the metamodel and the {@link Mapping mapping}. 
