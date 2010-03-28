@@ -1,5 +1,7 @@
-#Tue Mar 23 10:05:08 CET 2010
+#Sun Mar 28 19:41:38 CEST 2010
 eclipse.preferences.version=1
+encoding//ecore/ExtractSuperClass.ecore=UTF-8
+encoding//ecore/ExtractSuperClass.ecorediag=UTF-8
 encoding//roles/ExtractMethod.roles=UTF-8
 encoding//roles/ExtractMethod.rolesdiag=UTF-8
 encoding//statemachine/default.uml=UTF-8
