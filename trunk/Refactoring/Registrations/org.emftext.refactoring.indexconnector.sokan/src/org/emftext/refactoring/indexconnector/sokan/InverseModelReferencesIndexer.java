@@ -1,6 +1,5 @@
 package org.emftext.refactoring.indexconnector.sokan;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -24,36 +23,52 @@ public class InverseModelReferencesIndexer implements Indexer {
 	}
 
 	public void createIndex(URI artifactURI, IndexMetaData metaData, ResourceSet resourceSet) {
-		ID refereeID = ResourceUtil.idFrom(artifactURI);
-		if(refereeID == null){
-			return;
-		}
-		IndexRow row = IndexUtil.INSTANCE.getIndex(refereeID);
-		if(row == null){
-			return;
-		}
-		List<String> values = row.getMetaData().getMulti(ModelReferencesIndexer.KEY_REFERENCED_RESOURCES);
-		for (String string : values) {
-			URI referer = URI.createPlatformResourceURI(string, true);
-			ID refererID = ResourceUtil.idFrom(referer);
-			if(refererID == null){
-				return;
+		String platformString = artifactURI.toPlatformString(true);
+		List<IndexRow> index = IndexUtil.INSTANCE.getIndex();
+		for (IndexRow indexRow : index) {
+			IndexMetaData rowMetaData = indexRow.getMetaData();
+			List<String> values = rowMetaData.getMulti(ModelReferencesIndexer.KEY_REFERENCED_RESOURCES);
+			if(values != null){
+				for (String value : values) {
+					if(platformString.equals(value)){
+						String inverseReference = ResourceUtil.uriFrom(indexRow.getArtifactID()).toPlatformString(true);
+						metaData.addMultiple(KEY_INVERSE_REFERENCED_RESOURCES, inverseReference);
+						System.out.println("set inverse reference in " + platformString + " for " + inverseReference);
+					}
+				}
 			}
-			IndexRow refererRow = IndexUtil.INSTANCE.getIndex(refererID);
-			if(row == null){
-				return;
-			}
-			IndexMetaData refererMetaData = refererRow.getMetaData();
-			String platformString = artifactURI.toPlatformString(true);
-			refererMetaData.addMultiple(KEY_INVERSE_REFERENCED_RESOURCES, platformString);
-			IFile refererFile = ResourceUtil.fileFor(referer);
-			IndexUtil.INSTANCE.update(refererFile, true);
-			System.out.println("set inverse reference in " + referer + " for " + artifactURI);
 		}
+		
+//		ID refereeID = ResourceUtil.idFrom(artifactURI);
+//		if(refereeID == null){
+//			return;
+//		}
+//		IndexRow row = IndexUtil.INSTANCE.getIndex(refereeID);
+//		if(row == null){
+//			return;
+//		}
+//		List<String> values = row.getMetaData().getMulti(ModelReferencesIndexer.KEY_REFERENCED_RESOURCES);
+//		for (String string : values) {
+//			URI referer = URI.createPlatformResourceURI(string, true);
+//			ID refererID = ResourceUtil.idFrom(referer);
+//			if(refererID == null){
+//				return;
+//			}
+//			IndexRow refererRow = IndexUtil.INSTANCE.getIndex(refererID);
+//			if(row == null){
+//				return;
+//			}
+//			IndexMetaData refererMetaData = refererRow.getMetaData();
+//			String platformString = artifactURI.toPlatformString(true);
+//			refererMetaData.addMultiple(KEY_INVERSE_REFERENCED_RESOURCES, platformString);
+//			IFile refererFile = ResourceUtil.fileFor(referer);
+//			IndexUtil.INSTANCE.update(refererFile, true);
+//			System.out.println("set inverse reference in " + referer + " for " + artifactURI);
+//		}
 	}
 
 	public void getDependent(ID artifactID, DependencyMap depMap) {
-		depMap.put(artifactID, Arrays.asList(new String[]{ModelReferencesIndexer.INDEXER_ID, INDEXER_ID}));
+//		depMap.put(artifactID, Arrays.asList(new String[]{ModelReferencesIndexer.INDEXER_ID, INDEXER_ID}));
 	}
 
 }

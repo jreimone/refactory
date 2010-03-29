@@ -57,7 +57,7 @@ public class ModelReferencesIndexer implements Indexer {
 		Set<String> referers = new LinkedHashSet<String>();
 		Map<EObject, Collection<Setting>> references = EcoreUtil.ExternalCrossReferencer.find(referee);
 		for (EObject referer : references.keySet()) {
-			String identification = EcoreUtil.getIdentification(referer);
+//			String identification = EcoreUtil.getIdentification(referer);
 			Resource resource = referer.eResource();
 			URI uri = resource.getURI();
 			//			if(uri.isPlatformResource()){
