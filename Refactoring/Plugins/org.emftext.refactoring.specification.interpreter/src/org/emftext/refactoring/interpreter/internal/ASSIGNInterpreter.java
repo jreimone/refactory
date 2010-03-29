@@ -3,17 +3,13 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -30,26 +26,27 @@ import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider;
 import org.emftext.refactoring.specification.interpreter.ui.DialogAttributeValueProvider;
-import org.emftext.refactoring.util.RegistryUtil;
 
 /**
  * @author Jan Reimann
  *
  */
 public class ASSIGNInterpreter {
-	
+
 	// the following two variables will only be used when test plugin specifies a value provider
 	private static Class<IStructuralFeatureValueProvider> valueProviderClass;
 	private boolean providerExternallySet = false;
 	private IStructuralFeatureValueProvider valueProvider;
-	
+
 	private Mapping mapping;
 	private RefactoringInterpreterContext context;
 	private List<? extends EObject> selection;
-	
+
 	private Role assignedRole;
 	private Object roleRuntimeValue;
-	
+
+	private List<Resource> resourcesToSave;
+
 	public ASSIGNInterpreter(Mapping mapping) {
 		this.mapping = mapping;
 		this.valueProvider = new DialogAttributeValueProvider(mapping);
@@ -67,7 +64,7 @@ public class ASSIGNInterpreter {
 			return handleTargetOnly(target, addition);
 		}
 	}
-	
+
 	private boolean handleSourceAndTarget(RoleAttribute source, RoleAttribute target, AdditionalCommand addition){
 		Role sourceRole = source.getAttributeRole();
 		AttributeMapping sourceMapping = mapping.getConcreteMappingForRole(sourceRole).getAttributeMappingForAttribute(source);
@@ -84,7 +81,7 @@ public class ASSIGNInterpreter {
 		if(sourceObject != null){
 			value = sourceObject.eGet(sourceClassAttribute, true);
 		}
-		
+
 		Role targetRole = target.getAttributeRole();
 		AttributeMapping targetMapping = mapping.getConcreteMappingForRole(targetRole).getAttributeMappingForAttribute(target);
 		if(targetMapping == null){
@@ -104,19 +101,19 @@ public class ASSIGNInterpreter {
 		}
 		return false;
 	}
-	
-//	private boolean attributeIsBound(RoleAttribute attribute){
-//		Role role = attribute.getAttributeRole();
-//		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(role);
-//		List<AttributeMapping> attMappings = concreteMapping.getAttributeMappings();
-//		for (AttributeMapping attributeMapping : attMappings) {
-//			if(attributeMapping.getRoleAttribute().equals(attribute)){
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
+
+	//	private boolean attributeIsBound(RoleAttribute attribute){
+	//		Role role = attribute.getAttributeRole();
+	//		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(role);
+	//		List<AttributeMapping> attMappings = concreteMapping.getAttributeMappings();
+	//		for (AttributeMapping attributeMapping : attMappings) {
+	//			if(attributeMapping.getRoleAttribute().equals(attribute)){
+	//				return true;
+	//			}
+	//		}
+	//		return false;
+	//	}
+
 	private boolean handleTargetOnly(RoleAttribute target, AdditionalCommand addition){
 		EObject interpretationContext = target.getInterpretationContext();
 		Role targetRole = target.getAttributeRole();
@@ -144,48 +141,53 @@ public class ASSIGNInterpreter {
 			}
 		}
 		Object value = getValueProvider().provideValue(classAttribute);
-		List<Resource> referer = getReferer(targetObject);
+		resourcesToSave = getReferer(targetObject);
 		targetObject.eSet(classAttribute, value);
-		handleAdditional(referer, addition, targetObject, classAttribute, value);
+		handleAdditional(resourcesToSave, addition, targetObject, classAttribute, value);
 		return true;
 	}
-	
+
 	private List<Resource> getReferer(EObject referenceTarget){
 		List<Resource> referers = IndexConnectorRegistry.INSTANCE.getReferencingResources(referenceTarget);
 		if(referers == null || referers.size() == 0){
 			return null;
 		}
-		List<Resource> realReferers = new LinkedList<Resource>();
+//		List<Resource> realReferers = new LinkedList<Resource>();
+		ResourceSet refactoredModelResourceSet = referenceTarget.eResource().getResourceSet();
 		for (Resource resource : referers) {
-			ResourceSet refactoredModelResourceSet = referenceTarget.eResource().getResourceSet();
-			refactoredModelResourceSet.getResources().add(resource);
-		}
-		for (Resource resource : referers) {
-			Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(referenceTarget, resource);
-			if(references.size() > 0){
-				realReferers.add(resource);
+			URI uri = resource.getURI();
+			Resource alreadyContainedResource = refactoredModelResourceSet.getResource(uri, true);
+			if(alreadyContainedResource == null){
+				refactoredModelResourceSet.getResources().add(resource);
 			}
 		}
-		return realReferers;
+		//		for (Resource resource : referers) {
+		//			Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(referenceTarget, resource);
+		//			if(references.size() > 0){
+		//				realReferers.add(resource);
+		//			}
+		//		}
+		return referers;
 	}
-	
+
 	private void handleAdditional(List<Resource> referers, AdditionalCommand addition, EObject owner, EStructuralFeature feature, Object value){
 		if(addition instanceof UPDATE){
 			if(referers == null){
 				return;
 			}
-			for (Resource resource : referers) {
-				Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(owner, resource);
-				try {
-					resource.save(Collections.EMPTY_MAP);
-					System.out.println("Updated inverse reference resource " + resource);
-				} catch (IOException e) {
-					RegistryUtil.log("Failed saving inverse referenced resource " + resource, IStatus.ERROR, e);
-				}
-			}
+			resourcesToSave = referers;
+			//			for (Resource resource : referers) {
+			////				Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(owner, resource);
+			//				try {
+			//					resource.save(null);
+			//					System.out.println("Updated inverse reference resource " + resource);
+			//				} catch (IOException e) {
+			//					RegistryUtil.log("Failed saving inverse referenced resource " + resource, IStatus.ERROR, e);
+			//				}
+			//			}
 		}
 	}
-	
+
 	/**
 	 * Can only be invoked from the test plugin to activate an external value provider while testing
 	 * to not open dialogs when asking for values.
@@ -195,7 +197,7 @@ public class ASSIGNInterpreter {
 	public static void setValueProvider(Class<IStructuralFeatureValueProvider> valueProvider){
 		valueProviderClass = valueProvider;
 	}
-	
+
 	private IStructuralFeatureValueProvider getValueProvider(){
 		if(valueProviderClass != null){
 			if(!providerExternallySet){
@@ -218,5 +220,9 @@ public class ASSIGNInterpreter {
 
 	public Object getRoleRuntimeValue() {
 		return roleRuntimeValue;
+	}
+
+	public List<Resource> getResourcesToSave() {
+		return resourcesToSave;
 	}
 }

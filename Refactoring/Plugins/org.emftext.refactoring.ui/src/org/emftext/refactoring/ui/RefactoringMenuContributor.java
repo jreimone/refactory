@@ -8,6 +8,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
@@ -55,14 +58,20 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		ISelection selection = selectionProvider.getSelection();
 		List<EObject> selectedElements = new LinkedList<EObject>();
 		Resource resource = null;
+		IDiagramEditDomain diagramEditingDomain = null;
 		if(selection instanceof StructuredSelection){
 			List<?> temp = ((StructuredSelection) selection).toList();
 			for (Object object : temp) {
 				if(object instanceof EditPart){
 					Object model = ((EditPart) object).getModel();
 					if(model instanceof View){
-						object = ((View) model).getElement();
-						System.out.println("found EObject " + object + " in diagram");
+						EditPartViewer viewer = ((EditPart) object).getViewer();
+						if(viewer instanceof IDiagramGraphicalViewer){
+							IDiagramGraphicalViewer gmfViewer = (IDiagramGraphicalViewer) viewer;
+							diagramEditingDomain = gmfViewer.getDiagramEditDomain();
+							object = ((View) model).getElement();
+							System.out.println("found EObject " + object + " in diagram");
+						}
 					}
 				} 
 				if(!(object instanceof EObject)){
@@ -127,7 +136,12 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 					if(refSpec != null){
 						String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
-						Action refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider);
+						Action refactoringAction = null;
+						if(diagramEditingDomain == null){
+							refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider);
+						} else {
+							refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider, diagramEditingDomain);
+						}
 						refactoringAction.setText(refactoringName);
 						rootMenu.add(refactoringAction);
 						containsEntries = true;
