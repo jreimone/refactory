@@ -49,7 +49,11 @@
 			<delete dir="@{dir}/@{resourcePlugin}/src-gen" includes="**/*" excludes=".svn"/>
 			<echo message="Building text resource for syntax '@{syntax}' in plug-in '@{plugin}'" />
 			
-			<emftext-generate-text-resource syntax="@{dir}/@{plugin}/metamodel/@{syntax}.cs" rootFolder="@{dir}" syntaxProjectName="@{plugin}" >
+			<emftext-generate-text-resource 
+				syntax="@{dir}/@{plugin}/metamodel/@{syntax}.cs" 
+				rootFolder="@{dir}" 
+				syntaxProjectName="@{plugin}"
+				generateANTLRPlugin="false" >
 			</emftext-generate-text-resource>
 		</sequential>
 	</macrodef>
