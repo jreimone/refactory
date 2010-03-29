@@ -12,6 +12,7 @@ import java.util.Map;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
@@ -67,11 +68,14 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	private IndexAssignmentInterpreter indexInterpreter;
 	private ObjectAssignmentInterpreter objectInterpreter;
 	
+	private List<Resource> resourcesToSave;
+	
 	private Boolean occuredErrors;
 
 	public RefactoringInterpreter(IRefactoringPostProcessor postProcessor){
 		this.postProcessor = postProcessor;
 		roleRuntimeInstanceMap = new LinkedHashMap<Role, Object>();
+		resourcesToSave = new LinkedList<Resource>();
 	}
 	
 	@Override
@@ -224,6 +228,10 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		if(assignedRole != null && roleRuntimeInstance != null){
 			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
 		}
+		List<Resource> assignResourcesToSave = assign.getResourcesToSave();
+		if(assignResourcesToSave != null){
+			resourcesToSave.addAll(assignResourcesToSave);
+		}
 		return result;
 	}
 
@@ -328,5 +336,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 */
 	public Map<Role, Object> getRoleRuntimeInstances() {
 		return roleRuntimeInstanceMap;
+	}
+
+	public List<Resource> getResourcesToSave() {
+		return resourcesToSave;
 	}
 }

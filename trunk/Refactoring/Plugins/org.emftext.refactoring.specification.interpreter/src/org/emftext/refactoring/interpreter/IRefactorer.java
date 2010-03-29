@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -84,4 +85,13 @@ public interface IRefactorer {
 	 * @return
 	 */
 	public boolean didErrorsOccur();
+	
+	/**
+	 * Returns all resources which have to be saved after the refactoring. Those resources might be all inverse cross
+	 * references from the given model. That means those resources which refer the refactored model nad hence depend on 
+	 * the modifications. 
+	 * 
+	 * @return
+	 */
+	public List<Resource> getResourcesToSave();
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
@@ -37,6 +38,7 @@ public class Refactorer implements IRefactorer {
 	private IRefactoringSpecificationRegistry refSpecRegistry;
 	private IRoleMappingRegistry roleMappingRegistry;
 	private boolean occuredErrors;
+	private List<Resource> resourcesToSave;
 
 	public Refactorer(EObject model, Map<String, Mapping> roleMappings){
 		this.model = model;
@@ -127,6 +129,7 @@ public class Refactorer implements IRefactorer {
 					postProcessor.process(interpreter.getRoleRuntimeInstances());
 				}
 			}
+			resourcesToSave = interpreter.getResourcesToSave();
 		}
 		return refactoredModel;
 	}
@@ -162,5 +165,9 @@ public class Refactorer implements IRefactorer {
 	 */
 	public boolean didErrorsOccur() {
 		return occuredErrors;
+	}
+
+	public List<Resource> getResourcesToSave() {
+		return resourcesToSave;
 	}
 }
