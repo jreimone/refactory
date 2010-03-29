@@ -1,7 +1,5 @@
 package org.emftext.refactoring.registry.rolemapping.impl;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +15,6 @@ import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
-import org.emftext.refactoring.registry.rolemapping.exceptions.RoleMappingAlreadyRegistered;
 import org.emftext.refactoring.util.RegistryUtil;
 
 public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
@@ -90,10 +87,10 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			}
 		}
 		EPackage rootPackage = roleMapping.getTargetMetamodel();
-		registerSubPackages(rootPackage, roleMapping);
+		registerSubPackages(rootPackage, registered);
 	}
 
-	private void registerSubPackages(EPackage rootPackage, RoleMappingModel roleMapping){
+	private void registerSubPackages(EPackage rootPackage, Map<String, Mapping> mappings){
 		List<EPackage> subPackages = rootPackage.getESubpackages();
 		if(subPackages != null){
 			for (EPackage subpackage : subPackages) {
@@ -102,8 +99,8 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				if(registered != null){
 					RegistryUtil.log("Metamodel " + nsUri + " already registered ", IStatus.WARNING);
 				} else {
-					getRoleMappingsMap().put(nsUri, registered);
-					registerSubPackages(subpackage, roleMapping);
+					getRoleMappingsMap().put(nsUri, mappings);
+					registerSubPackages(subpackage, mappings);
 				}
 			}
 		}
