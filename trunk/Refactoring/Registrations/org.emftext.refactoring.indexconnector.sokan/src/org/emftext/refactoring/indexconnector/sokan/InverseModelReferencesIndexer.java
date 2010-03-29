@@ -2,7 +2,6 @@ package org.emftext.refactoring.indexconnector.sokan;
 
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.reuseware.sokan.ID;
@@ -38,33 +37,6 @@ public class InverseModelReferencesIndexer implements Indexer {
 				}
 			}
 		}
-		
-//		ID refereeID = ResourceUtil.idFrom(artifactURI);
-//		if(refereeID == null){
-//			return;
-//		}
-//		IndexRow row = IndexUtil.INSTANCE.getIndex(refereeID);
-//		if(row == null){
-//			return;
-//		}
-//		List<String> values = row.getMetaData().getMulti(ModelReferencesIndexer.KEY_REFERENCED_RESOURCES);
-//		for (String string : values) {
-//			URI referer = URI.createPlatformResourceURI(string, true);
-//			ID refererID = ResourceUtil.idFrom(referer);
-//			if(refererID == null){
-//				return;
-//			}
-//			IndexRow refererRow = IndexUtil.INSTANCE.getIndex(refererID);
-//			if(row == null){
-//				return;
-//			}
-//			IndexMetaData refererMetaData = refererRow.getMetaData();
-//			String platformString = artifactURI.toPlatformString(true);
-//			refererMetaData.addMultiple(KEY_INVERSE_REFERENCED_RESOURCES, platformString);
-//			IFile refererFile = ResourceUtil.fileFor(referer);
-//			IndexUtil.INSTANCE.update(refererFile, true);
-//			System.out.println("set inverse reference in " + referer + " for " + artifactURI);
-//		}
 	}
 
 	public void getDependent(ID artifactID, DependencyMap depMap) {
