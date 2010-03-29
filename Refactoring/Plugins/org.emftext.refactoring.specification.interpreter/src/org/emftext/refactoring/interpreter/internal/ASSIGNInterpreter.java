@@ -3,15 +3,19 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.AdditionalCommand;
@@ -26,6 +30,7 @@ import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider;
 import org.emftext.refactoring.specification.interpreter.ui.DialogAttributeValueProvider;
+import org.emftext.refactoring.util.RegistryUtil;
 
 /**
  * @author Jan Reimann
@@ -152,6 +157,10 @@ public class ASSIGNInterpreter {
 		}
 		List<Resource> realReferers = new LinkedList<Resource>();
 		for (Resource resource : referers) {
+			ResourceSet refactoredModelResourceSet = referenceTarget.eResource().getResourceSet();
+			refactoredModelResourceSet.getResources().add(resource);
+		}
+		for (Resource resource : referers) {
 			Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(referenceTarget, resource);
 			if(references.size() > 0){
 				realReferers.add(resource);
@@ -167,12 +176,19 @@ public class ASSIGNInterpreter {
 			}
 			for (Resource resource : referers) {
 				Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(owner, resource);
-				for (Setting setting : references) {
-					EObject referer = setting.getEObject();
-					EStructuralFeature referingFeature = setting.getEStructuralFeature();
-					Object oldValue = referer.eGet(referingFeature);
-					System.out.println("Do the update of resource " + referer.eResource() + " here");
+				try {
+					resource.save(Collections.EMPTY_MAP);
+					System.out.println("Updated inverse reference resource " + resource);
+				} catch (IOException e) {
+					RegistryUtil.log("Failed saving inverse referenced resource " + resource, IStatus.ERROR, e);
+//					e.printStackTrace();
 				}
+//				for (Setting setting : references) {
+//					EObject referer = setting.getEObject();
+//					EStructuralFeature referingFeature = setting.getEStructuralFeature();
+//					Object oldValue = referer.eGet(referingFeature);
+//					System.out.println("Do the update of resource " + referer.eResource() + " here");
+//				}
 			}
 		}
 	}
