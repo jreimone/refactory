@@ -181,14 +181,7 @@ public class ASSIGNInterpreter {
 					System.out.println("Updated inverse reference resource " + resource);
 				} catch (IOException e) {
 					RegistryUtil.log("Failed saving inverse referenced resource " + resource, IStatus.ERROR, e);
-//					e.printStackTrace();
 				}
-//				for (Setting setting : references) {
-//					EObject referer = setting.getEObject();
-//					EStructuralFeature referingFeature = setting.getEStructuralFeature();
-//					Object oldValue = referer.eGet(referingFeature);
-//					System.out.println("Do the update of resource " + referer.eResource() + " here");
-//				}
 			}
 		}
 	}
