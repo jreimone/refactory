@@ -1,0 +1,11 @@
+PROGRAM importP12 
+
+import </EMFTextTest/pl0/p1.pl0> 
+
+VAR 
+	x , y ; 
+	
+	BEGIN 
+	y := + p1.ccc ; 
+	x := + p1.a 
+	END . 
