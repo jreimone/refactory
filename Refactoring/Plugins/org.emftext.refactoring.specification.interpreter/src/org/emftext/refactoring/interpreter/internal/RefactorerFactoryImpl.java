@@ -8,7 +8,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
