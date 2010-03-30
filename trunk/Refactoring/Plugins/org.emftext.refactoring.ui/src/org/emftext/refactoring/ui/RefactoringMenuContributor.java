@@ -140,7 +140,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						if(diagramEditingDomain == null){
 							refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider);
 						} else {
-							refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider, diagramEditingDomain);
+							refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider, diagramEditingDomain, activeEditor);
 						}
 						refactoringAction.setText(refactoringName);
 						rootMenu.add(refactoringAction);
