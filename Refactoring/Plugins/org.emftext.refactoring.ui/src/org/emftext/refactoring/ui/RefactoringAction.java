@@ -1,15 +1,14 @@
 package org.emftext.refactoring.ui;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.operations.OperationHistoryFactory;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.util.URI;
@@ -18,16 +17,17 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.part.FileEditorInput;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -44,7 +44,8 @@ public class RefactoringAction extends Action {
 	private ISelectionProvider selectionProvider;
 	private EObject refactoredModel;
 	private IDiagramEditDomain diagramEditingDomain;
-
+	private IEditorPart activeEditor;
+	
 	public RefactoringAction(Mapping mapping, IRefactorer refactorer, Resource resource, ISelectionProvider selectionProvider) {
 		super();
 		this.mapping = mapping;
@@ -53,11 +54,47 @@ public class RefactoringAction extends Action {
 		this.selectionProvider = selectionProvider;
 	}
 
-	public RefactoringAction(Mapping mapping, IRefactorer refactorer, Resource resource, ISelectionProvider selectionProvider, IDiagramEditDomain diagramEditingDomain) {
+	public RefactoringAction(Mapping mapping, IRefactorer refactorer, Resource resource, ISelectionProvider selectionProvider, IDiagramEditDomain diagramEditingDomain, IEditorPart activeEditor) {
 		this(mapping, refactorer, resource, selectionProvider);
 		this.diagramEditingDomain = diagramEditingDomain;
+		this.activeEditor = activeEditor;
 	}
 
+	protected static EObject refactorInternal(IRefactorer refactorer, Mapping mapping, Resource resource, IEditorPart activeEditor) throws CoreException{
+		EObject refactoredModel = refactorer.refactor(mapping, false);
+		if(!refactorer.didErrorsOccur()){
+			final ResourceSet resourceSet = resource.getResourceSet();
+			URI origURI = resource.getURI();
+			Resource nonProxyResource = resourceSet.getResource(origURI, true); 
+			if(nonProxyResource != null){
+				resource = nonProxyResource;
+			} else {
+				resourceSet.getResources().add(resource);
+			}
+			boolean contained = resourceSet.getResources().contains(resource);
+			for (Resource externalReferer : refactorer.getResourcesToSave()) {
+				URI uri = externalReferer.getURI();
+				Resource temp = resourceSet.getResource(uri, true);
+				if(temp == null){
+					resourceSet.getResources().add(externalReferer);
+				}
+			}
+			Map<EObject, Collection<Setting>> externalReferences = EcoreUtil.ExternalCrossReferencer.find(resource);
+			for (EObject object : externalReferences.keySet()) {
+				Resource externalReference = object.eResource();
+				if(externalReference != null && externalReference.getURI().isPlatformResource()){
+					resourceSet.getResources().add(externalReference);
+				}
+			}
+			IWorkspaceRunnable runnable = new AllResourcesSaveWorkspaceRunnable(resourceSet, resource, mapping, activeEditor);
+			ResourcesPlugin.getWorkspace().run(runnable, null);
+			
+		} else {
+			refactoredModel = null;
+		}
+		return refactoredModel;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
@@ -65,6 +102,7 @@ public class RefactoringAction extends Action {
 	public void run() {
 		ResourceSet rs = resource.getResourceSet();
 		RefactoringRecordingCommand command = null;
+		AbstractTransactionalCommand gmfCommand = null;
 		TransactionalEditingDomain domain = null;
 		try {
 			domain = TransactionUtil.getEditingDomain(rs);
@@ -72,18 +110,23 @@ public class RefactoringAction extends Action {
 				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
 			}
 			if(diagramEditingDomain != null){
-				AbstractTransactionalCommand gmfCommand = new AbstractTransactionalCommand(domain, "", null) {
-					@Override
-					protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-						// TODO Auto-generated method stub
-						return null;
+				if(activeEditor != null){
+					IEditorInput input = activeEditor.getEditorInput();
+					if(input instanceof FileEditorInput){
+						IFile file = ((FileEditorInput) input).getFile();
+						URI gmfUri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+						Resource gmfResource = rs.getResource(gmfUri, true);
+						domain = TransactionUtil.getEditingDomain(gmfResource);
 					}
-				};
-				DiagramCommandStack diagramStack = diagramEditingDomain.getDiagramCommandStack();
+				}
+				gmfCommand = new GMFTransactionalCommand(domain, refactorer, mapping, resource, activeEditor);
+//				DiagramCommandStack diagramStack = diagramEditingDomain.getDiagramCommandStack();
+				IStatus result = OperationHistoryFactory.getOperationHistory().execute(gmfCommand, null, null);
+				System.out.println(result);
 //				diagramStack.execute(gmfCommand);
 			} else {
 				CommandStack stack = domain.getCommandStack();
-				command = new RefactoringRecordingCommand(resource, domain, refactorer, mapping);
+				command = new RefactoringRecordingCommand(resource, domain, refactorer, mapping, activeEditor);
 				stack.execute(command);
 				if(command.didErrorsOccur()){
 					if(command.getException() != null){
@@ -96,99 +139,17 @@ public class RefactoringAction extends Action {
 			if(command != null){
 				command.undo();
 			}
+			if(gmfCommand != null){
+				try {
+					gmfCommand.undo(null, null);
+				} catch (ExecutionException e1) {
+					RegistryUtil.log("Undo of Refactoring failed", IStatus.ERROR, e);
+				}
+			}
 			RegistryUtil.log("Refactoring rolled back because of the stack trace or message above", IStatus.WARNING, e);
 		}
 		if(domain != null){
 			domain.dispose();
 		}
-	}
-
-	class RefactoringRecordingCommand extends RecordingCommand{
-
-		private EObject refactoredModel;
-		private IRefactorer refactorer;
-		private Mapping mapping;
-		private Resource resource;
-		private boolean didErrorsOccur = false;
-		private Exception exception;
-		private TransactionalEditingDomain domain;
-
-		public RefactoringRecordingCommand(Resource resource,TransactionalEditingDomain domain, IRefactorer refactorer, Mapping mapping) {
-			super(domain);
-			this.domain = domain;
-			this.refactorer = refactorer;
-			this.mapping = mapping;
-			this.resource = resource;
-		}
-
-		@Override
-		protected void doExecute() {
-			try {
-				refactoredModel = refactorer.refactor(mapping, false);
-				//				TransactionUtil.disconnectFromEditingDomain(resource);
-				if(!refactorer.didErrorsOccur()){
-					//					resource.getContents().set(0, refactoredModel);
-					final ResourceSet resourceSet = resource.getResourceSet();
-					URI origURI = resource.getURI();
-					Resource nonProxyResource = resourceSet.getResource(origURI, true); 
-					if(nonProxyResource != null){
-						resource = nonProxyResource;
-					} else {
-						resourceSet.getResources().add(resource);
-					}
-					boolean contained = resourceSet.getResources().contains(resource);
-					//					final List<Resource> references = new LinkedList<Resource>();
-					//					references.add(resource);
-					for (Resource externalReferer : refactorer.getResourcesToSave()) {
-						URI uri = externalReferer.getURI();
-						Resource temp = resourceSet.getResource(uri, true);
-						if(temp == null){
-							resourceSet.getResources().add(externalReferer);
-						}
-					}
-					Map<EObject, Collection<Setting>> externalReferences = EcoreUtil.ExternalCrossReferencer.find(resource);
-					for (EObject object : externalReferences.keySet()) {
-						Resource externalReference = object.eResource();
-						if(externalReference != null && externalReference.getURI().isPlatformResource()){
-							resourceSet.getResources().add(externalReference);
-						}
-					}
-					ResourcesPlugin.getWorkspace().run(new IWorkspaceRunnable() {
-
-						public void run(IProgressMonitor monitor) throws CoreException {
-							try {
-								EcoreUtil.resolveAll(resourceSet);
-								//								resource.getContents().set(0, refactoredModel);
-								resource.save(null);
-								for (Resource externalResource : resourceSet.getResources()) {
-									if(!externalResource.equals(resource)){
-										externalResource.save(null);
-										System.out.println("Saved resource " + externalResource + " after refactoring '" + mapping.getName() + "'");
-										//									externalResource.setModified(true);
-									}
-								}
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}
-					}, null);
-
-				} else {
-					didErrorsOccur = true;
-				}
-			} catch (Exception e) {
-				didErrorsOccur = true;
-				exception = e;
-			}
-		}
-
-		public boolean didErrorsOccur() {
-			return didErrorsOccur;
-		}
-
-		public Exception getException() {
-			return exception;
-		}
-
 	}
 }
