@@ -10,6 +10,7 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -18,20 +19,22 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 
-class AllResourcesSaveWorkspaceRunnable implements IWorkspaceRunnable {
+class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 
 	private ResourceSet resourceSet;
-	private Resource refactoredModel;
+	private Resource refactoredResource;
 	private Mapping mapping;
 	private IEditorPart activeEditor;
 	private Resource gmfResource;
+	private EObject refactoredModel;
 
-	public AllResourcesSaveWorkspaceRunnable(ResourceSet resourceSet,
-			Resource refactoredModel, Mapping mapping, IEditorPart activeEditor) {
+	public SaveAllResourcesWorkspaceRunnable(ResourceSet resourceSet,
+			Resource refactoredResource, Mapping mapping, IEditorPart activeEditor, EObject refactoredModel) {
 		this.resourceSet = resourceSet;
-		this.refactoredModel = refactoredModel;
+		this.refactoredResource = refactoredResource;
 		this.mapping = mapping;
 		this.activeEditor = activeEditor;
+		this.refactoredModel = refactoredModel;
 		initGmfResource();
 	}
 
@@ -49,10 +52,9 @@ class AllResourcesSaveWorkspaceRunnable implements IWorkspaceRunnable {
 	public void run(IProgressMonitor monitor) throws CoreException {
 		try {
 			EcoreUtil.resolveAll(resourceSet);
-			// resource.getContents().set(0, refactoredModel);
-			refactoredModel.save(null);
+//			refactoredResource.getContents().set(0, refactoredModel);
 			for (Resource externalResource : resourceSet.getResources()) {
-				if (!externalResource.equals(refactoredModel) && !externalResource.equals(gmfResource)) {
+				if (!externalResource.equals(refactoredResource) && !externalResource.equals(gmfResource)) {
 					URI uri = externalResource.getURI();
 					if (uri.isPlatformResource()) {
 						EcoreUtil.resolveAll(externalResource);
@@ -63,6 +65,7 @@ class AllResourcesSaveWorkspaceRunnable implements IWorkspaceRunnable {
 					}
 				}
 			}
+			refactoredResource.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

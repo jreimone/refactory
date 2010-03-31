@@ -10,7 +10,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
@@ -25,14 +24,12 @@ public class GMFTransactionalCommand extends AbstractTransactionalCommand {
 	
 	private IRefactorer refactorer;
 	private Mapping mapping;
-	private Resource resource;
 	private IEditorPart activeEditor;
 	
-	GMFTransactionalCommand(TransactionalEditingDomain domain, IRefactorer refactorer, Mapping mapping, Resource resource, IEditorPart activeEditor) {
+	GMFTransactionalCommand(TransactionalEditingDomain domain, IRefactorer refactorer, Mapping mapping, IEditorPart activeEditor) {
 		super(domain, "Refactor " + mapping.getName(), null);
 		this.refactorer = refactorer;
 		this.mapping = mapping;
-		this.resource = resource;
 		this.activeEditor = activeEditor;
 	}
 
@@ -41,7 +38,7 @@ public class GMFTransactionalCommand extends AbstractTransactionalCommand {
 		CommandResult result = null;
 		IStatus status = null;
 		try {
-			EObject refactoredModel = RefactoringAction.refactorInternal(refactorer, mapping, resource, activeEditor);
+			EObject refactoredModel = RefactoringAction.refactorInternal(refactorer, mapping, activeEditor);
 			if(refactoredModel == null){
 				status = new Status(IStatus.ERROR, PLUGIN_ID, "Refactoring couldn't be executed");
 				result = new CommandResult(status);
