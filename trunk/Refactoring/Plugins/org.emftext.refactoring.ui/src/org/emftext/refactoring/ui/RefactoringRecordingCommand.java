@@ -43,5 +43,4 @@ class RefactoringRecordingCommand extends RecordingCommand{
 	public Exception getException() {
 		return exception;
 	}
-
 }
