@@ -17,8 +17,12 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
+import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.jface.action.Action;
@@ -42,6 +46,7 @@ public class RefactoringAction extends Action {
 	private ISelectionProvider selectionProvider;
 	private EObject refactoredModel;
 	private IDiagramEditDomain diagramEditingDomain;
+	private TransactionalEditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 	
 	public RefactoringAction(Mapping mapping, IRefactorer refactorer, ISelectionProvider selectionProvider) {
@@ -54,6 +59,12 @@ public class RefactoringAction extends Action {
 	public RefactoringAction(Mapping mapping, IRefactorer refactorer, ISelectionProvider selectionProvider, IDiagramEditDomain diagramEditingDomain, IEditorPart activeEditor) {
 		this(mapping, refactorer, selectionProvider);
 		this.diagramEditingDomain = diagramEditingDomain;
+		this.activeEditor = activeEditor;
+	}
+	
+	public RefactoringAction(Mapping mapping, IRefactorer refactorer, ISelectionProvider selectionProvider, TransactionalEditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor) {
+		this(mapping, refactorer, selectionProvider);
+		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
 		this.activeEditor = activeEditor;
 	}
 
@@ -97,7 +108,17 @@ public class RefactoringAction extends Action {
 			if(domain == null){
 				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
 			}
-			if(diagramEditingDomain != null){
+			if(diagramTransactionalEditingDomain != null){
+				CommandStack stack = diagramTransactionalEditingDomain.getCommandStack();
+				RecordingCommand gmfRecordingCommand = new RefactoringRecordingCommand(diagramTransactionalEditingDomain, refactorer, mapping, activeEditor);
+				stack.execute(gmfRecordingCommand);
+				
+//				ICommand anotherCommand = new SimpleGMFCommand(mapping, refactorer, activeEditor);
+//				DiagramCommandStack diagramStack = diagramEditingDomain.getDiagramCommandStack();
+//				ICommand tempCommand = new RefactoringRecordingCommand(domain, refactorer, mapping, activeEditor);
+//				diagramStack.execute(new ICommandProxy(tempCommand));
+				
+			} else if(diagramEditingDomain != null){
 				if(activeEditor != null){
 					IEditorInput input = activeEditor.getEditorInput();
 					if(input instanceof FileEditorInput){
@@ -106,11 +127,11 @@ public class RefactoringAction extends Action {
 						Resource gmfResource = rs.getResource(gmfUri, true);
 						domain = TransactionUtil.getEditingDomain(gmfResource);
 					}
-				}
+				}								
 				gmfCommand = new GMFTransactionalCommand(domain, refactorer, mapping, activeEditor);
-//				DiagramCommandStack diagramStack = diagramEditingDomain.getDiagramCommandStack();
+				
 				IStatus result = OperationHistoryFactory.getOperationHistory().execute(gmfCommand, null, null);
-				System.out.println(result);
+//				System.out.println("GMF Result: " + anotherCommand.getCommandResult());
 //				diagramStack.execute(gmfCommand);
 			} else {
 				CommandStack stack = domain.getCommandStack();
@@ -136,7 +157,9 @@ public class RefactoringAction extends Action {
 			}
 			RegistryUtil.log("Refactoring rolled back because of the stack trace or message above", IStatus.WARNING, e);
 		}
-		if(domain != null){
+		if(diagramTransactionalEditingDomain != null){
+			diagramTransactionalEditingDomain.dispose();
+		} else if(domain != null){
 			domain.dispose();
 		}
 	}
