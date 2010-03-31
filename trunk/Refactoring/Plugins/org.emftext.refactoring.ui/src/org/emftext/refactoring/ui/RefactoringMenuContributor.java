@@ -138,9 +138,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 						Action refactoringAction = null;
 						if(diagramEditingDomain == null){
-							refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider);
+							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider);
 						} else {
-							refactoringAction = new RefactoringAction(mapping, refactorer, resource, selectionProvider, diagramEditingDomain, activeEditor);
+							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider, diagramEditingDomain, activeEditor);
 						}
 						refactoringAction.setText(refactoringName);
 						rootMenu.add(refactoringAction);
