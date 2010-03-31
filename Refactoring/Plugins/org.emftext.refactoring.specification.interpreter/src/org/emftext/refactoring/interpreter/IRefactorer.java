@@ -88,10 +88,17 @@ public interface IRefactorer {
 	
 	/**
 	 * Returns all resources which have to be saved after the refactoring. Those resources might be all inverse cross
-	 * references from the given model. That means those resources which refer the refactored model nad hence depend on 
+	 * references from the given model. That means those resources which refer the refactored model and hence depend on 
 	 * the modifications. 
 	 * 
 	 * @return
 	 */
 	public List<Resource> getResourcesToSave();
+	
+	/**
+	 * The resource on which the refactorer works. 
+	 * 
+	 * @return
+	 */
+	public Resource getResource();
 }

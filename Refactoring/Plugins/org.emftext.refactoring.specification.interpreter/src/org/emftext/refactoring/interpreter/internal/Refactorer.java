@@ -39,9 +39,11 @@ public class Refactorer implements IRefactorer {
 	private IRoleMappingRegistry roleMappingRegistry;
 	private boolean occuredErrors;
 	private List<Resource> resourcesToSave;
+	private Resource resource;
 
-	public Refactorer(EObject model, Map<String, Mapping> roleMappings){
-		this.model = model;
+	public Refactorer(Resource resource, Map<String, Mapping> roleMappings){
+		this.resource = resource;
+		this.model = resource.getContents().get(0);
 		this.roleMappings = roleMappings;
 		refSpecRegistry = IRefactoringSpecificationRegistry.INSTANCE;
 		roleMappingRegistry = IRoleMappingRegistry.INSTANCE;
@@ -169,5 +171,9 @@ public class Refactorer implements IRefactorer {
 
 	public List<Resource> getResourcesToSave() {
 		return resourcesToSave;
+	}
+
+	public Resource getResource() {
+		return resource;
 	}
 }
