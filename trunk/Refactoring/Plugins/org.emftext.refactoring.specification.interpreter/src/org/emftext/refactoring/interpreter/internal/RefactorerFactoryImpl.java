@@ -29,6 +29,7 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 		if(roleMapping == null){
 			return null;
 		}
-		return new Refactorer(root, roleMapping);
+		System.out.println("created Refactorer for " + resource);
+		return new Refactorer(resource, roleMapping);
 	}
 }
