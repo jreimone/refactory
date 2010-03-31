@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+
    <extension
          point="org.emftext.registry.indexconnector">
       <connector
@@ -9,6 +10,7 @@
    </extension>
    <extension
          point="org.reuseware.sokan.index">
+      
       <indexer
             class="org.emftext.refactoring.indexconnector.sokan.ModelReferencesIndexer"
             id="org.emftext.refactoring.indexer.references">
@@ -18,6 +20,12 @@
             dependsOn="org.emftext.refactoring.indexer.references"
             id="org.emftext.refactoring.indexer.inversereferences">
       </indexer>
+      <!--
+      <indexer
+            class="org.emftext.refactoring.indexconnector.sokan.ResourceSetIndexer"
+            id="org.emftext.refactoring.indexer.resourcesetbuilder">
+      </indexer>
+      -->
    </extension>
 
 </plugin>
