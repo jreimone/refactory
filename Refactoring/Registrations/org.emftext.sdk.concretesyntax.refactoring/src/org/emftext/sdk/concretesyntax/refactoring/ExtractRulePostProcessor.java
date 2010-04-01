@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.sdk.concretesyntax.Containment;
@@ -36,7 +38,7 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 		super();
 	}
 
-	public Boolean process(Map<Role, Object> roleMap) {
+	public Boolean process(Map<Role, Object> roleMap, ResourceSet resourceSet, ChangeDescription change) {
 		EObject newContainer = getEObjectByName(roleMap, "NewContainer");
 		if (newContainer == null) {
 			return false;
