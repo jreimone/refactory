@@ -1,6 +1,6 @@
 ROLEMODELMAPPING extractInterfaceFromOperations FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
-ExtractInterfaceFromOperations maps <ExtractMethod> {
+ExtractInterfaceFromOperations maps <ExtractX> {
 
 	Extract := EOperation;
 	OrigContainer := EClass {

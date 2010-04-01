@@ -1,6 +1,6 @@
 ROLEMODELMAPPING statemachine FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
 
-ExtractCompositeState maps <ExtractMethod> {  
+ExtractCompositeState maps <ExtractX> {  
 	OrigContainer := Region{
 		extracts := subvertex:State;
 		referer := transition;
