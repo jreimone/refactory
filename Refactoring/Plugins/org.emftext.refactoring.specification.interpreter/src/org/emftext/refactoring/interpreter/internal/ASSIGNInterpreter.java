@@ -7,12 +7,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
-import org.emftext.language.refactoring.refactoring_specification.AdditionalCommand;
-import org.emftext.language.refactoring.refactoring_specification.UPDATE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.rolemapping.AttributeMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
@@ -54,15 +51,14 @@ public class ASSIGNInterpreter {
 		this.selection = selection;
 		RoleAttribute source = object.getSourceAttribute();
 		RoleAttribute target = object.getTargetAttribute();
-		AdditionalCommand addition = object.getAdditionalCommand();
 		if(source != null){
-			return handleSourceAndTarget(source, target, addition);
+			return handleSourceAndTarget(source, target);
 		} else {
-			return handleTargetOnly(target, addition);
+			return handleTargetOnly(target);
 		}
 	}
 
-	private boolean handleSourceAndTarget(RoleAttribute source, RoleAttribute target, AdditionalCommand addition){
+	private boolean handleSourceAndTarget(RoleAttribute source, RoleAttribute target){
 		Role sourceRole = source.getAttributeRole();
 		AttributeMapping sourceMapping = mapping.getConcreteMappingForRole(sourceRole).getAttributeMappingForAttribute(source);
 		if(sourceMapping == null){
@@ -91,27 +87,14 @@ public class ASSIGNInterpreter {
 		}
 		EAttribute targetClassAttribute = targetMapping.getClassAttribute();
 		if(targetClassAttribute.getEAttributeType().equals(sourceClassAttribute.getEAttributeType())){
-			List<Resource> referer = getReferer(targetObject);
+			resourcesToSave = getReferer(targetObject);
 			targetObject.eSet(targetClassAttribute, value);
-			handleAdditional(referer, addition, targetObject, targetClassAttribute, value);
 			return true;
 		}
 		return false;
 	}
 
-	//	private boolean attributeIsBound(RoleAttribute attribute){
-	//		Role role = attribute.getAttributeRole();
-	//		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(role);
-	//		List<AttributeMapping> attMappings = concreteMapping.getAttributeMappings();
-	//		for (AttributeMapping attributeMapping : attMappings) {
-	//			if(attributeMapping.getRoleAttribute().equals(attribute)){
-	//				return true;
-	//			}
-	//		}
-	//		return false;
-	//	}
-
-	private boolean handleTargetOnly(RoleAttribute target, AdditionalCommand addition){
+	private boolean handleTargetOnly(RoleAttribute target){
 		EObject interpretationContext = target.getInterpretationContext();
 		Role targetRole = target.getAttributeRole();
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
@@ -140,7 +123,6 @@ public class ASSIGNInterpreter {
 		Object value = getValueProvider().provideValue(classAttribute);
 		resourcesToSave = getReferer(targetObject);
 		targetObject.eSet(classAttribute, value);
-		handleAdditional(resourcesToSave, addition, targetObject, classAttribute, value);
 		return true;
 	}
 
@@ -150,24 +132,6 @@ public class ASSIGNInterpreter {
 			return null;
 		}
 		return referers;
-	}
-
-	private void handleAdditional(List<Resource> referers, AdditionalCommand addition, EObject owner, EStructuralFeature feature, Object value){
-		if(addition instanceof UPDATE){
-			if(referers == null){
-				return;
-			}
-			resourcesToSave = referers;
-			//			for (Resource resource : referers) {
-			////				Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(owner, resource);
-			//				try {
-			//					resource.save(null);
-			//					System.out.println("Updated inverse reference resource " + resource);
-			//				} catch (IOException e) {
-			//					RegistryUtil.log("Failed saving inverse referenced resource " + resource, IStatus.ERROR, e);
-			//				}
-			//			}
-		}
 	}
 
 	/**
