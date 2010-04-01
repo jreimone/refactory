@@ -3,13 +3,19 @@
  */
 package org.emftext.refactoring.indexconnector.sokan;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.refactoring.indexconnector.IndexConnector;
 import org.reuseware.sokan.ID;
@@ -40,20 +46,47 @@ public class SokanIndexConnector implements IndexConnector {
 			return null;
 		}
 		IndexMetaData metaData = row.getMetaData();
-		List<Resource> referers = new LinkedList<Resource>();
 		List<String> refererStrings = metaData.getMulti(InverseModelReferencesIndexer.KEY_INVERSE_REFERENCED_RESOURCES);
 		for (String string : refererStrings) {
 			URI refererUri = ResourceUtil.uriFrom(string);
-			Resource resource = resourceSet.getResource(refererUri, true);
-			if(resource == null){
-				resource = resourceSet.createResource(refererUri);
-			}
-			if(resource != null){
-				referers.add(resource);
-			}
+			resourceSet.getResource(refererUri, true);
 		}
-		EcoreUtil.resolveAll(resourceSet);
+//		EcoreUtil.resolveAll(resourceSet);
+		List<Resource> referers = new LinkedList<Resource>();
+		referers.addAll(getRealTargetObjectReferer(resourceSet, referenceTarget));
 		return referers;
 	}
 
+	private Set<Resource> getRealTargetObjectReferer(ResourceSet resourceSet, EObject referenceTarget){
+		EcoreUtil.resolveAll(resourceSet);
+		Resource targetResource = referenceTarget.eResource();
+		List<Adapter> adapters = resourceSet.eAdapters();
+		ECrossReferenceAdapter crossReferencer = null;
+		for (Adapter adapter : adapters) {
+			if(adapter instanceof ECrossReferenceAdapter){
+				crossReferencer = (ECrossReferenceAdapter) adapter;
+				break;
+			}
+		}
+		if(crossReferencer == null){
+			crossReferencer = new ECrossReferenceAdapter();
+			resourceSet.eAdapters().add(crossReferencer);
+		}
+		Set<Resource> referers = new LinkedHashSet<Resource>();
+		Collection<Setting> referencers = crossReferencer.getInverseReferences(referenceTarget, true);
+		for (Setting setting : referencers) {
+			EObject referer = setting.getEObject();
+			Resource resource = referer.eResource();
+			if(resource.equals(targetResource)){
+				continue;
+			}
+			URI uri = resource.getURI();
+			uri = resourceSet.getURIConverter().normalize(uri);
+			if(uri.isPlatformResource()){
+				referers.add(resource);
+			}
+		}
+		return referers;
+	}
+	
 }
