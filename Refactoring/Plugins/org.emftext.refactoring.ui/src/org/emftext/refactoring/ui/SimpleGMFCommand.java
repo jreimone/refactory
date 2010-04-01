@@ -41,7 +41,8 @@ public class SimpleGMFCommand extends AbstractCommand {
 		CommandResult result = null;
 		IStatus status = null;
 		try {
-			EObject refactoredModel = RefactoringAction.refactorInternal(refactorer, mapping, activeEditor);
+			InternalRefactoringAction action = new InternalRefactoringAction();
+			EObject refactoredModel = action.refactorInternal(refactorer, mapping, activeEditor);
 			change = recorder.endRecording();
 			if(refactoredModel == null){
 				status = new Status(IStatus.ERROR, GMFTransactionalCommand.PLUGIN_ID, "Refactoring couldn't be executed");

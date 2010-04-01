@@ -4,6 +4,7 @@
 package org.emftext.refactoring.ui;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -21,17 +22,19 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 
 class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 
-	private ResourceSet resourceSet;
+	private List<Resource> resourcesToSave;
 	private Resource refactoredResource;
 	private Mapping mapping;
 	private IEditorPart activeEditor;
 	private Resource gmfResource;
 	private EObject refactoredModel;
+	private ResourceSet resourceSet;
 
-	public SaveAllResourcesWorkspaceRunnable(ResourceSet resourceSet,
+	public SaveAllResourcesWorkspaceRunnable(List<Resource> resourcesToSave,
 			Resource refactoredResource, Mapping mapping, IEditorPart activeEditor, EObject refactoredModel) {
-		this.resourceSet = resourceSet;
+		this.resourcesToSave = resourcesToSave;
 		this.refactoredResource = refactoredResource;
+		this.resourceSet = refactoredResource.getResourceSet();
 		this.mapping = mapping;
 		this.activeEditor = activeEditor;
 		this.refactoredModel = refactoredModel;
@@ -53,8 +56,9 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 		try {
 			EcoreUtil.resolveAll(resourceSet);
 //			refactoredResource.getContents().set(0, refactoredModel);
-			for (Resource externalResource : resourceSet.getResources()) {
-				if (!externalResource.equals(refactoredResource) && !externalResource.equals(gmfResource)) {
+			refactoredResource.save(null);
+			for (Resource externalResource : resourcesToSave) {
+				if (!externalResource.equals(gmfResource)) {
 					URI uri = externalResource.getURI();
 					if (uri.isPlatformResource()) {
 						EcoreUtil.resolveAll(externalResource);
@@ -65,7 +69,7 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 					}
 				}
 			}
-			refactoredResource.save(null);
+//			refactoredResource.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

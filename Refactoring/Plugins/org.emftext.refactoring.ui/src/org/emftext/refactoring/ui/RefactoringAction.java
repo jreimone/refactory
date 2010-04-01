@@ -1,22 +1,15 @@
 package org.emftext.refactoring.ui;
 
-import java.util.Collection;
-import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspaceRunnable;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -68,32 +61,6 @@ public class RefactoringAction extends Action {
 		this.activeEditor = activeEditor;
 	}
 
-	protected static EObject refactorInternal(IRefactorer refactorer, Mapping mapping, IEditorPart activeEditor) throws CoreException{
-		EObject refactoredModel = refactorer.refactor(mapping, false);
-		Resource resource = refactorer.getResource();
-		if(!refactorer.didErrorsOccur()){
-			ResourceSet resourceSet = resource.getResourceSet();
-			for (Resource externalReferer : refactorer.getResourcesToSave()) {
-				URI uri = externalReferer.getURI();
-				Resource temp = resourceSet.getResource(uri, true);
-			}
-			Map<EObject, Collection<Setting>> externalReferences = EcoreUtil.ExternalCrossReferencer.find(resource);
-			for (EObject object : externalReferences.keySet()) {
-				Resource externalReference = object.eResource();
-				if(externalReference != null && externalReference.getURI().isPlatformResource()){
-					resourceSet.getResource(externalReference.getURI(), true);
-				}
-			}
-			
-			IWorkspaceRunnable runnable = new SaveAllResourcesWorkspaceRunnable(resourceSet, resource, mapping, activeEditor, refactoredModel);
-			ResourcesPlugin.getWorkspace().run(runnable, null);
-			
-		} else {
-			refactoredModel = null;
-		}
-		return refactoredModel;
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.action.Action#run()
 	 */

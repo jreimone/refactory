@@ -28,7 +28,8 @@ class RefactoringRecordingCommand extends RecordingCommand{
 	@Override
 	protected void doExecute() {
 		try {
-			EObject refactoredModel = RefactoringAction.refactorInternal(refactorer, mapping, activeEditor); 
+			InternalRefactoringAction action = new InternalRefactoringAction();
+			EObject refactoredModel = action.refactorInternal(refactorer, mapping, activeEditor); 
 			didErrorsOccur = (refactoredModel == null)?true:false;
 		} catch (Exception e) {
 			didErrorsOccur = true;
