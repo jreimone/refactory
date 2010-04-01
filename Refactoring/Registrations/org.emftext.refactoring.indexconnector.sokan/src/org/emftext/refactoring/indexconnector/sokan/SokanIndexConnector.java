@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.refactoring.indexconnector.IndexConnector;
 import org.reuseware.sokan.ID;
 import org.reuseware.sokan.IndexMetaData;
@@ -27,7 +28,7 @@ public class SokanIndexConnector implements IndexConnector {
 		Resource targetResource = referenceTarget.eResource();
 		ResourceSet resourceSet = targetResource.getResourceSet();
 		URI uri = targetResource.getURI();
-		if(uri == null){
+		if (uri == null) {
 			return null;
 		}
 		ID refereeID = ResourceUtil.idFrom(uri);
@@ -51,6 +52,7 @@ public class SokanIndexConnector implements IndexConnector {
 				referers.add(resource);
 			}
 		}
+		EcoreUtil.resolveAll(resourceSet);
 		return referers;
 	}
 

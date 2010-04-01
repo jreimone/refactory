@@ -3,15 +3,12 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.AdditionalCommand;
@@ -152,21 +149,6 @@ public class ASSIGNInterpreter {
 		if(referers == null || referers.size() == 0){
 			return null;
 		}
-//		List<Resource> realReferers = new LinkedList<Resource>();
-		ResourceSet refactoredModelResourceSet = referenceTarget.eResource().getResourceSet();
-		for (Resource resource : referers) {
-			URI uri = resource.getURI();
-			Resource alreadyContainedResource = refactoredModelResourceSet.getResource(uri, true);
-			if(alreadyContainedResource == null){
-				refactoredModelResourceSet.getResources().add(resource);
-			}
-		}
-		//		for (Resource resource : referers) {
-		//			Collection<Setting> references = EcoreUtil.UsageCrossReferencer.find(referenceTarget, resource);
-		//			if(references.size() > 0){
-		//				realReferers.add(resource);
-		//			}
-		//		}
 		return referers;
 	}
 
