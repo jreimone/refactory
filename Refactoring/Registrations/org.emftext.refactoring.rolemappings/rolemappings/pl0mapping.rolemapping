@@ -1,6 +1,6 @@
 ROLEMODELMAPPING PL0Mapping FOR <http://www.emftext.org/language/pl0> 
 
-ExtractProcedure maps <ExtractMethod> { 
+ExtractProcedure maps <ExtractX> { 
 	OrigContainer := Body {
 		extracts := statements;	
 	}; 
