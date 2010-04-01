@@ -11,13 +11,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
@@ -123,19 +128,27 @@ public class Refactorer implements IRefactorer {
 		interpreter.setInput(filteredElements);
 		EObject refactoredModel = null;
 		if(interpreter != null){
+			List<Resource> allReferencingResources = IndexConnectorRegistry.INSTANCE.getReferencingResources(model);
+			ResourceSet refactoredModelRS = getResource().getResourceSet();
+			for (Resource resource : allReferencingResources) {
+				URI uri = resource.getURI();
+				refactoredModelRS.getResource(uri, true);
+			}
+			ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
 			refactoredModel = interpreter.interprete(copy);
+			ChangeDescription change = recorder.summarize();
 			occuredErrors = interpreter.didErrorsOccur();
 			if(!occuredErrors){
 				IRefactoringPostProcessor postProcessor = interpreter.getPostProcessor();
 				if(postProcessor != null){
-					postProcessor.process(interpreter.getRoleRuntimeInstances());
+					postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModelRS, change);
 				}
 			}
 			resourcesToSave = interpreter.getResourcesToSave();
 		}
 		return refactoredModel;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#setInput(org.eclipse.emf.common.util.EList)
 	 */
