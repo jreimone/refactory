@@ -111,6 +111,16 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>org.emftext.language.ecore.resource.facade.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.ecore.resource.text.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.emftext.language.ecore.resource.text.builder</name>
 			<arguments>
 			</arguments>
@@ -138,6 +148,8 @@
 		<nature>org.emftext.language.threevaluedlogic.resource.tvl.nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.emftext.language.pl0extended.resource.pl0extended.nature</nature>
+		<nature>org.emftext.language.ecore.resource.facade.nature</nature>
+		<nature>org.emftext.language.ecore.resource.text.nature</nature>
 		<nature>org.emftext.language.ecore.resource.text.nature</nature>
 	</natures>
 </projectDescription>
