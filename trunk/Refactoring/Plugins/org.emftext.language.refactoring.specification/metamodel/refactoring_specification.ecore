@@ -72,8 +72,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceAttribute" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetAttribute" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalCommand" eType="#//AdditionalCommand"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FromClause">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
@@ -135,7 +133,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" lowerBound="1"
         eType="#//ObjectAssignmentCommand" containment="true" eOpposite="#//ObjectAssignmentCommand/declaration"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AdditionalCommand" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UPDATE" eSuperTypes="#//AdditionalCommand"/>
   <eClassifiers xsi:type="ecore:EClass" name="PATH" eSuperTypes="#//FromOperator"/>
 </ecore:EPackage>
