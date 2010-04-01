@@ -84,9 +84,7 @@ RULES{
 	
 	SET ::= "set" #1 "use" #1 "of" #1 source #1 "in" #1 target;
 	
-	ASSIGN ::= "assign" #1 (sourceAttribute[DOT_NOTATION] #1 "for" #1 )? targetAttribute[DOT_NOTATION] ("and" #1 additionalCommand)?;
-	
-	UPDATE ::= "update";
+	ASSIGN ::= "assign" #1 (sourceAttribute[DOT_NOTATION] #1 "for" #1 )? targetAttribute[DOT_NOTATION];
 	
 	Variable ::= name[LOWER_IDENTIFIER];
 	
