@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.ModifiersFactory;
@@ -21,7 +23,7 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor#process(java.util.Map)
 	 */
-	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap) {
+	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		System.out.println("Add return type for 'Extract Method' in Java");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
