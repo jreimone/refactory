@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Activity;
 import org.eclipse.uml2.uml.Region;
@@ -22,7 +24,7 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 	private State newContainer;
 
 	@SuppressWarnings("unchecked")
-	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap) {
+	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
