@@ -22,10 +22,13 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchSite;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
+import org.eclipse.ui.part.PageSite;
 import org.eclipse.ui.services.IServiceLocator;
 import org.emftext.access.EMFTextAccessProxy;
 import org.emftext.access.resource.IEditor;
@@ -51,6 +54,19 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 	@Override
 	public void createContributionItems(IServiceLocator serviceLocator, IContributionRoot additions) {
 		IWorkbenchPart activePart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
+		if(!(activePart instanceof ISaveablePart)){
+			System.out.println("Workbench Part " + activePart + " is not a saveable part");
+			return;
+		}
+		if(activePart instanceof IWorkbenchSite){
+			System.out.println("selection provider: " + ((IWorkbenchSite) activePart).getSelectionProvider());
+		}
+		IWorkbenchSite workbenchSite = (IWorkbenchSite) activePart.getAdapter(IWorkbenchSite.class);
+		if(workbenchSite == null){
+			System.out.println("no selection provider for " + activePart);
+		} else {
+			System.out.println("selection provider: " + ((IWorkbenchSite) activePart).getSelectionProvider());
+		}
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if(!activePart.equals(activeEditor)){
 			System.out.println("Workbenchpart '" + activePart.getTitle() + "' is not the active editor");
@@ -73,7 +89,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							IDiagramGraphicalViewer gmfViewer = (IDiagramGraphicalViewer) viewer;
 							diagramEditingDomain = gmfViewer.getDiagramEditDomain();
 							diagramTransactionalEditingDomain = ((IGraphicalEditPart) object).getEditingDomain();
-//							System.out.println(diagramTransactionalEditingDomain);
+							//							System.out.println(diagramTransactionalEditingDomain);
 							object = ((View) model).getElement();
 							System.out.println("found EObject " + object + " in diagram");
 						}
@@ -84,43 +100,43 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				}
 				selectedElements.add((EObject) object);
 			}
-//			selectedElements = (List<EObject>)temp;
+			//			selectedElements = (List<EObject>)temp;
 			resource = selectedElements.get(0).eResource();
 		} else if(selection instanceof ITextSelection){
-//			if(EMFTextAccessProxy.isAccessibleWith(activeEditor.getClass(), IEditor.class)){
-				try {
+			//			if(EMFTextAccessProxy.isAccessibleWith(activeEditor.getClass(), IEditor.class)){
+			try {
 
-					IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(activeEditor, IEditor.class);
-					IResource emftextResource = emftextEditor.getResource();
-					resource = emftextResource;
-					if(resource == null){
-						throw new Exception("just jump to catch block");
-					}
-					ILocationMap locationMap = emftextResource.getLocationMap();
-					ITextSelection textSelection = (ITextSelection) selection;
-					int startOffset = textSelection.getOffset();
-					int endOffset = startOffset + textSelection.getLength();
-					if(startOffset == endOffset){
-						selectedElements = locationMap.getElementsAt(startOffset);
-					} else {
-						selectedElements = locationMap.getElementsBetween(startOffset, endOffset);
-					}
-					List<EObject> noReferencesList = new ArrayList<EObject>();
-					for (EObject object : selectedElements) {
-						EcoreUtil.resolveAll(object);
-						int start = locationMap.getCharStart(object);
-						int end = locationMap.getCharEnd(object);
-						if((start >= startOffset && end <= endOffset) && !object.eIsProxy()){
-							noReferencesList.add(object);
-						}
-					}
-					selectedElements = noReferencesList;
-				} catch (Exception e) {
-					// probably another non EMFText generated editor
-					System.out.println(e.getMessage());
-					System.out.println("Editor " + activeEditor.getTitle() + " doesn't get Refactoring menu");
+				IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(activeEditor, IEditor.class);
+				IResource emftextResource = emftextEditor.getResource();
+				resource = emftextResource;
+				if(resource == null){
+					throw new Exception("just jump to catch block");
 				}
-//			}
+				ILocationMap locationMap = emftextResource.getLocationMap();
+				ITextSelection textSelection = (ITextSelection) selection;
+				int startOffset = textSelection.getOffset();
+				int endOffset = startOffset + textSelection.getLength();
+				if(startOffset == endOffset){
+					selectedElements = locationMap.getElementsAt(startOffset);
+				} else {
+					selectedElements = locationMap.getElementsBetween(startOffset, endOffset);
+				}
+				List<EObject> noReferencesList = new ArrayList<EObject>();
+				for (EObject object : selectedElements) {
+					EcoreUtil.resolveAll(object);
+					int start = locationMap.getCharStart(object);
+					int end = locationMap.getCharEnd(object);
+					if((start >= startOffset && end <= endOffset) && !object.eIsProxy()){
+						noReferencesList.add(object);
+					}
+				}
+				selectedElements = noReferencesList;
+			} catch (Exception e) {
+				// probably another non EMFText generated editor
+				System.out.println(e.getMessage());
+				System.out.println("Editor " + activeEditor.getTitle() + " doesn't get Refactoring menu");
+			}
+			//			}
 		}
 		if(resource != null && selectedElements != null && selectedElements.size() >= 1){
 			if(resource.getErrors() != null && resource.getErrors().size() > 0){
@@ -145,7 +161,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						if(diagramEditingDomain == null){
 							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider);
 						} else {
-//							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider, diagramEditingDomain, activeEditor);
+							//							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider, diagramEditingDomain, activeEditor);
 							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider, diagramTransactionalEditingDomain, activeEditor);
 						}
 						refactoringAction.setText(refactoringName);
