@@ -10,7 +10,7 @@
    <extension
          point="org.emftext.refactoring.refspec">
       <refspec
-            refspec_resource="refspec/ExtractMethod.refspec">
+            refspec_resource="refspec/ExtractX.refspec">
       </refspec>
    </extension>
 
