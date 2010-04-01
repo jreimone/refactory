@@ -8,4 +8,5 @@ Require-Bundle: org.emftext.refactoring.registry.rolemapping,
  org.emftext.language.refactoring.roles,
  org.emftext.language.refactoring.rolemapping,
  org.emftext.sdk.concretesyntax,
- org.eclipse.emf.codegen.ecore
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.emf.ecore.change
