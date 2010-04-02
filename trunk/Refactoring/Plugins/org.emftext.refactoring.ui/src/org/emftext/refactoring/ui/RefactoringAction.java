@@ -76,57 +76,7 @@ public class RefactoringAction extends Action {
 			command = new RefactoringRecordingCommand(domain, refactorer, mapping, activeEditor);
 			stack.execute(command);
 			IRefactoringStatus status = command.getStatus();
-			Shell shell;
-			String title;
-			String message;
-			switch (status.getSeverity()) {
-			case IRefactoringStatus.OK:
-				System.out.println("Refactored successfull");
-				break;
-			case IRefactoringStatus.INFO:
-				shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				title = "Information";
-				message = status.getMessage();
-				MessageDialog.openInformation(shell, title, message);
-				if(command.canUndo()){
-					command.undo();
-				}
-				System.out.println("Refactoring rolled back because of some infos");
-				break;
-			case IRefactoringStatus.WARNING:
-				shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				title = "Information";
-				message = status.getMessage();
-				MessageDialog.openInformation(shell, title, message);
-				if(command.canUndo()){
-					command.undo();
-				}
-				System.out.println("Refactoring rolled back because of some warnings");
-				break;
-			case IRefactoringStatus.CANCEL:
-				if(command.canUndo()){
-					command.undo();
-				}
-				System.out.println("Refactoring rolled back because of cancelation of dialog");
-				break;
-			case IRefactoringStatus.ERROR:
-				shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				title = "Refactoring will be rolled back";
-				message = "The refactoring will be rolled back because of the following unforseen error: \n\n";
-				message += status.getMessage();
-				if(status.getException() != null){
-					message += "\n\nCheck out the error log for further information.";
-					Activator.getDefault().getLog().log(status);
-				}
-				MessageDialog.openInformation(shell, title, message);
-				if(command.canUndo()){
-					command.undo();
-				}
-				System.out.println("Refactoring rolled back because of an error");
-				break;
-			default:
-				break;
-			}
+			statusSwitch(command, status);
 		} catch (Exception e) {
 			if(command != null && command.canUndo()){
 				command.undo();
@@ -140,6 +90,65 @@ public class RefactoringAction extends Action {
 		}
 		if(domain != null && diagramTransactionalEditingDomain == null){
 			domain.dispose();
+		}
+	}
+
+	/**
+	 * @param command
+	 * @param status
+	 */
+	private void statusSwitch(RefactoringRecordingCommand command,
+			IRefactoringStatus status) {
+		Shell shell;
+		String title;
+		String message;
+		switch (status.getSeverity()) {
+		case IRefactoringStatus.OK:
+			System.out.println("Refactored successfull");
+			break;
+		case IRefactoringStatus.INFO:
+			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			title = "Information";
+			message = status.getMessage();
+			MessageDialog.openInformation(shell, title, message);
+			if(command.canUndo()){
+				command.undo();
+			}
+			System.out.println("Refactoring rolled back because of some infos");
+			break;
+		case IRefactoringStatus.WARNING:
+			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			title = "Information";
+			message = status.getMessage();
+			MessageDialog.openInformation(shell, title, message);
+			if(command.canUndo()){
+				command.undo();
+			}
+			System.out.println("Refactoring rolled back because of some warnings");
+			break;
+		case IRefactoringStatus.CANCEL:
+			if(command.canUndo()){
+				command.undo();
+			}
+			System.out.println("Refactoring rolled back because of cancelation of dialog");
+			break;
+		case IRefactoringStatus.ERROR:
+			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			title = "Refactoring will be rolled back";
+			message = "The refactoring will be rolled back because of the following unforseen error: \n\n";
+			message += status.getMessage();
+			if(status.getException() != null){
+				message += "\n\nCheck out the error log for further information.";
+				Activator.getDefault().getLog().log(status);
+			}
+			MessageDialog.openInformation(shell, title, message);
+			if(command.canUndo()){
+				command.undo();
+			}
+			System.out.println("Refactoring rolled back because of an error");
+			break;
+		default:
+			break;
 		}
 	}
 }
