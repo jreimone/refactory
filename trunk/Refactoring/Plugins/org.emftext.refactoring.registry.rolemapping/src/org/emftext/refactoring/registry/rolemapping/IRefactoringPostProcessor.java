@@ -5,6 +5,7 @@ package org.emftext.refactoring.registry.rolemapping;
 
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -43,7 +44,7 @@ public interface IRefactoringPostProcessor {
 	 * @param roleRuntimeInstanceMap the map containing {@link Role roles} as keys and its at runtime bound {@link EObject objects} as values 
 	 * @param resourceSet the {@link ResourceSet} containing all referencing and inverse referencing {@link Resource resources}
 	 * @param change the {@link ChangeDescription} containing all changes which were made before invoking this postprocessor
-	 * @return <code>true</code> if no errors occurred while postprocessing 
+	 * @return the status of the postprocessing 
 	 */
-	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change);
+	public IStatus process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change);
 }
