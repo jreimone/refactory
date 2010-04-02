@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -24,7 +26,7 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 	private State newContainer;
 
 	@SuppressWarnings("unchecked")
-	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
@@ -39,7 +41,11 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 				}
 			}
 		}
-		return processAdditionals();
+		boolean result = processAdditionals();
+		if(!result){
+			return new Status(IStatus.WARNING, "org.emftext.refactoring.rolemappings", "Couldn't determine correctly the outgoing and incoming transitions");
+		}
+		return new Status(IStatus.OK, null, "");
 	}
 
 	private Boolean processAdditionals(){

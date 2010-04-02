@@ -9,4 +9,5 @@ Require-Bundle: org.emftext.refactoring.registry.rolemapping,
  org.emftext.language.refactoring.roles,
  org.emftext.language.java,
  org.eclipse.uml2.uml,
- org.eclipse.emf.ecore.change
+ org.eclipse.emf.ecore.change,
+ org.eclipse.core.runtime
