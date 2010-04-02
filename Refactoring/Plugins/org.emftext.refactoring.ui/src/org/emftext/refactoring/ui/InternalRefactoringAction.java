@@ -15,13 +15,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.IEditorPart;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
 
 public class InternalRefactoringAction {
 
 	public EObject refactorInternal(IRefactorer refactorer, Mapping mapping, IEditorPart activeEditor) throws CoreException{
 		EObject refactoredModel = refactorer.refactor(mapping, false);
 		Resource resource = refactorer.getResource();
-		if(!refactorer.didErrorsOccur()){
+		if(refactorer.getStatus().getSeverity() == IRefactoringStatus.OK){
 			ResourceSet resourceSet = resource.getResourceSet();
 			for (Resource externalReferer : refactorer.getResourcesToSave()) {
 				URI uri = externalReferer.getURI();

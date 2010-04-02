@@ -9,6 +9,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.ui.IEditorPart;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
 
 class RefactoringRecordingCommand extends RecordingCommand{
 
@@ -17,7 +18,8 @@ class RefactoringRecordingCommand extends RecordingCommand{
 	private boolean didErrorsOccur = false;
 	private Exception exception;
 	private IEditorPart activeEditor;
-
+	private IRefactoringStatus status;
+	
 	public RefactoringRecordingCommand(TransactionalEditingDomain domain, IRefactorer refactorer, Mapping mapping, IEditorPart activeEditor) {
 		super(domain);
 		this.refactorer = refactorer;
@@ -30,7 +32,8 @@ class RefactoringRecordingCommand extends RecordingCommand{
 		try {
 			InternalRefactoringAction action = new InternalRefactoringAction();
 			EObject refactoredModel = action.refactorInternal(refactorer, mapping, activeEditor); 
-			didErrorsOccur = (refactoredModel == null)?true:false;
+			status = refactorer.getStatus();
+			didErrorsOccur = (refactoredModel == null || status.getSeverity() != IRefactoringStatus.OK)?true:false;
 		} catch (Exception e) {
 			didErrorsOccur = true;
 			exception = e;
@@ -43,5 +46,12 @@ class RefactoringRecordingCommand extends RecordingCommand{
 
 	public Exception getException() {
 		return exception;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public IRefactoringStatus getStatus() {
+		return status;
 	}
 }
