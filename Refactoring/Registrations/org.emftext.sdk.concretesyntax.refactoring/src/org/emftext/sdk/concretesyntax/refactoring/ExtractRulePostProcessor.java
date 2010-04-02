@@ -3,6 +3,8 @@ package org.emftext.sdk.concretesyntax.refactoring;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
@@ -38,28 +40,28 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 		super();
 	}
 
-	public Boolean process(Map<Role, Object> roleMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, Object> roleMap, ResourceSet resourceSet, ChangeDescription change) {
 		EObject newContainer = getEObjectByName(roleMap, "NewContainer");
 		if (newContainer == null) {
-			return false;
+			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "NewContainer error");
 		}
 		EObject oldContainer = getEObjectByName(roleMap, "OrigContainer");
 		if (oldContainer == null) {
 			// fail
-			return false;
+			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "OrigContainer error");
 		}
 		if (!(oldContainer instanceof SyntaxElement)) {
 			// fail
-			return false;
+			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "SyntaxElement error");
 		}
 		EObject movedReference = getEObjectByName(roleMap, "MovedReference");
 		if (movedReference == null) {
 			// fail
-			return false;
+			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "MovedReference error");
 		}
 		if (!(movedReference instanceof Containment)) {
 			// fail
-			return false;
+			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "Containment error");
 		}
 		
 		Containment newContainment = (Containment) movedReference;
@@ -67,12 +69,12 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 		Rule oldRule = getContainingRule(oldContainer);
 		if (oldRule == null) {
 			// fail
-			return false;
+			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "Old rule error");
 		}
 		Rule newRule = getContainingRule(newContainer);
 		if (newRule == null) {
 			// fail
-			return false;
+			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "new rule error");
 		}
 		
 		// Create new meta class
@@ -103,7 +105,7 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 		
 		// Set new meta class in new rule
 		newRule.setMetaclass(newGenClass);
-		return true;
+		return new Status(IStatus.OK, "org.emftext.sdk.concretesyntax.refactoring", "");
 	}
 
 	private Rule getContainingRule(EObject object) {

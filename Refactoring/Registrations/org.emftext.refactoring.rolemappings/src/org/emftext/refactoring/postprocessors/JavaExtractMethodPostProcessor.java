@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.java.members.ClassMethod;
@@ -23,7 +25,7 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor#process(java.util.Map)
 	 */
-	public Boolean process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		System.out.println("Add return type for 'Extract Method' in Java");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
@@ -39,7 +41,11 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 				}
 			}
 		}
-		return processMethodType();
+		boolean result = processMethodType();
+		if(!result){
+			return new Status(IStatus.WARNING, "org.emftext.refactoring.rolemappings", "Couldn't determine the correct method return type and modifier");
+		}
+		return new Status(IStatus.OK, null, "");
 	}
 	
 	private Boolean processMethodType(){
