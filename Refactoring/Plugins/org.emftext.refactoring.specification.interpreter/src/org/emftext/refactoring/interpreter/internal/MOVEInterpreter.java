@@ -18,6 +18,7 @@ import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -35,7 +36,7 @@ public class MOVEInterpreter {
 		this.mapping = mapping;
 	}
 
-	public Boolean interpreteMOVE(MOVE object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
+	public IRefactoringStatus interpreteMOVE(MOVE object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
 		this.context = context;
 		SourceContext sourceContext = object.getSource();
 		Role sourceRole = null;

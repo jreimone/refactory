@@ -5,23 +5,27 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 
 public class CreatePathCreator extends AbstractPathCreator {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected boolean onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature) {
+	protected IRefactoringStatus onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature) {
 		if(((List<EObject>) feature).size() <= index){
-			return ((List<EObject>) feature).add((EObject) children);
+			boolean result = ((List<EObject>) feature).add((EObject) children);
+			return new RefactoringStatus(IRefactoringStatus.OK);
 		}
 		((List<EObject>) feature).add(index, (EObject) children);
-		return true;
+		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected boolean onePairLeftIndexNull(Object children, ReferenceMetaClassPair referencePair, Object feature) {
-		return ((List<EObject>) feature).add((EObject) children);
+	protected IRefactoringStatus onePairLeftIndexNull(Object children, ReferenceMetaClassPair referencePair, Object feature) {
+		((List<EObject>) feature).add((EObject) children);
+		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
 
 	@Override

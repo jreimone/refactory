@@ -75,4 +75,10 @@ public interface IRefactoringInterpreter {
 	 * @return
 	 */
 	public List<Resource> getResourcesToSave();
+	
+	/**
+	 * Returns the status which was processed during the refactoring.
+	 * @return
+	 */
+	public IRefactoringStatus getStatus();
 }

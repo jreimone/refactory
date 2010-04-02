@@ -3,10 +3,6 @@
  */
 package org.emftext.refactoring.interpreter;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter;
 
 /**
@@ -18,21 +14,21 @@ import org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter;
  * @author Jan Reimann
  *
  */
-public interface IStructuralFeatureValueProvider {
+public interface IValueProvider <ValueFrom, ValueType>{
 
 	/**
-	 * With this method a concrete value for the given <code>structuralFeature</code> will be provided.
+	 * With this method a concrete value for the given <code>from</code> will be provided.
 	 * 
-	 * @param structuralFeature
+	 * @param from
 	 * @return
 	 */
-	public Object provideValue(EStructuralFeature structuralFeature);
+	public ValueType provideValue(ValueFrom from);
 	
 	/**
-	 * This method can be used to provide one value out of the given <code>elements</code>.
+	 * Sometimes value providers provide the value by a dialog. Dialogs always have a return code.
+	 * This code should be returned by implementors.
 	 * 
-	 * @param elements
 	 * @return
 	 */
-	public EObject provideValue(List<EObject> elements);
+	public int getReturnCode();
 }

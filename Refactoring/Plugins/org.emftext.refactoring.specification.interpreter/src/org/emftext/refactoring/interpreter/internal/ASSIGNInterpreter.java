@@ -6,9 +6,16 @@ package org.emftext.refactoring.interpreter.internal;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.dialogs.Dialog;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.rolemapping.AttributeMapping;
@@ -18,7 +25,9 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
-import org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.IValueProvider;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.specification.interpreter.ui.DialogAttributeValueProvider;
 
 /**
@@ -28,9 +37,9 @@ import org.emftext.refactoring.specification.interpreter.ui.DialogAttributeValue
 public class ASSIGNInterpreter {
 
 	// the following two variables will only be used when test plugin specifies a value provider
-	private static Class<IStructuralFeatureValueProvider> valueProviderClass;
+	private static Class<IValueProvider<EAttribute, Object>> valueProviderClass;
 	private boolean providerExternallySet = false;
-	private IStructuralFeatureValueProvider valueProvider;
+	private IValueProvider<EAttribute, Object> valueProvider;
 
 	private Mapping mapping;
 	private RefactoringInterpreterContext context;
@@ -41,12 +50,14 @@ public class ASSIGNInterpreter {
 
 	private List<Resource> resourcesToSave;
 
+	private AdapterFactoryLabelProvider labelProvider;
+
 	public ASSIGNInterpreter(Mapping mapping) {
 		this.mapping = mapping;
 		this.valueProvider = new DialogAttributeValueProvider(mapping);
 	}
 
-	public Boolean interpreteASSIGN(ASSIGN object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
+	public IRefactoringStatus interpreteASSIGN(ASSIGN object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
 		this.context = context;
 		this.selection = selection;
 		RoleAttribute source = object.getSourceAttribute();
@@ -58,11 +69,13 @@ public class ASSIGNInterpreter {
 		}
 	}
 
-	private boolean handleSourceAndTarget(RoleAttribute source, RoleAttribute target){
+	private IRefactoringStatus handleSourceAndTarget(RoleAttribute source, RoleAttribute target){
 		Role sourceRole = source.getAttributeRole();
 		AttributeMapping sourceMapping = mapping.getConcreteMappingForRole(sourceRole).getAttributeMappingForAttribute(source);
 		if(sourceMapping == null){
-			return false;
+			EClass clazz = mapping.getEClassForRole(sourceRole);
+			String message = "For model element " + getLabelProvider().getText(clazz) + " no adequate attribute was mapped";
+			return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 		}
 		EObject sourceInterpretationContext = source.getInterpretationContext();
 		EObject sourceObject = null;
@@ -78,7 +91,9 @@ public class ASSIGNInterpreter {
 		Role targetRole = target.getAttributeRole();
 		AttributeMapping targetMapping = mapping.getConcreteMappingForRole(targetRole).getAttributeMappingForAttribute(target);
 		if(targetMapping == null){
-			return false;
+			EClass clazz = mapping.getEClassForRole(targetRole);
+			String message = "For model element " + getLabelProvider().getText(clazz) + " no adequate attribute was mapped";
+			return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 		}
 		EObject targetInterpretationContext = target.getInterpretationContext();
 		EObject targetObject = null;
@@ -89,19 +104,21 @@ public class ASSIGNInterpreter {
 		if(targetClassAttribute.getEAttributeType().equals(sourceClassAttribute.getEAttributeType())){
 			resourcesToSave = getReferer(targetObject);
 			targetObject.eSet(targetClassAttribute, value);
-			return true;
+			return new RefactoringStatus(IRefactoringStatus.OK);
 		}
-		return false;
+		return new RefactoringStatus(IRefactoringStatus.ERROR, "Couldn't assign something");
 	}
 
-	private boolean handleTargetOnly(RoleAttribute target){
+	private IRefactoringStatus handleTargetOnly(RoleAttribute target){
 		EObject interpretationContext = target.getInterpretationContext();
 		Role targetRole = target.getAttributeRole();
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
 		EcoreUtil.resolveAll(concreteMapping);
 		AttributeMapping attMapping = concreteMapping.getAttributeMappingForAttribute(target);
 		if(attMapping == null){
-			return false;
+			EClass clazz = mapping.getEClassForRole(targetRole);
+			String message = "For model element " + getLabelProvider().getText(clazz) + " no adequate attribute was mapped";
+			return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 		}
 		EAttribute classAttribute = attMapping.getClassAttribute();
 		EObject targetObject = null;
@@ -114,16 +131,23 @@ public class ASSIGNInterpreter {
 					assignedRole = (Role) interpretationContext;
 					roleRuntimeValue = targetObject;
 				} else {
-					return false;
+					EClass clazz = mapping.getEClassForRole((Role) interpretationContext);
+					String message = "The input of type " + getLabelProvider().getText(clazz) + " must only consist of one element";
+					return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 				}
 			} else {
-				return false;
+				EClass clazz = mapping.getEClassForRole((Role) interpretationContext);
+				String message = "Role " + getLabelProvider().getText(clazz) + " couldn't be bound";
+				return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 			}
 		}
 		Object value = getValueProvider().provideValue(classAttribute);
+		if(getValueProvider().getReturnCode() == Dialog.CANCEL){
+			return new RefactoringStatus(IRefactoringStatus.CANCEL);
+		}
 		resourcesToSave = getReferer(targetObject);
 		targetObject.eSet(classAttribute, value);
-		return true;
+		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
 
 	private List<Resource> getReferer(EObject referenceTarget){
@@ -140,11 +164,11 @@ public class ASSIGNInterpreter {
 	 * 
 	 * @param valueProvider
 	 */
-	public static void setValueProvider(Class<IStructuralFeatureValueProvider> valueProvider){
+	public static void setValueProvider(Class<IValueProvider<EAttribute, Object>> valueProvider){
 		valueProviderClass = valueProvider;
 	}
 
-	private IStructuralFeatureValueProvider getValueProvider(){
+	private IValueProvider<EAttribute, Object> getValueProvider(){
 		if(valueProviderClass != null){
 			if(!providerExternallySet){
 				try {
@@ -170,5 +194,16 @@ public class ASSIGNInterpreter {
 
 	public List<Resource> getResourcesToSave() {
 		return resourcesToSave;
+	}
+
+	private AdapterFactoryLabelProvider getLabelProvider(){
+		if(labelProvider == null){
+			ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+			labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		}
+		return labelProvider;
 	}
 }

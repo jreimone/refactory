@@ -6,6 +6,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 
 public class MovePathCreator extends AbstractPathCreator {
 
@@ -18,25 +20,27 @@ public class MovePathCreator extends AbstractPathCreator {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected boolean onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature) {
+	protected IRefactoringStatus onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature) {
 		for (EObject child : (List<? extends EObject>)children) {
 			EObject oldParent = child.eContainer();
 			EcoreUtil.remove(oldParent, referencePair.getReference(), child);
 		}
 		if(((List<EObject>) feature).size() <= index){
-			return ((List<EObject>) feature).addAll((List<? extends EObject>) children);
+			boolean result = ((List<EObject>) feature).addAll((List<? extends EObject>) children);
+			return new RefactoringStatus(IRefactoringStatus.OK);
 		}
 		((List<EObject>) feature).addAll(index, (List<? extends EObject>) children);
-		return true;
+		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected boolean onePairLeftIndexNull(Object children, ReferenceMetaClassPair referencePair, Object feature) {
+	protected IRefactoringStatus onePairLeftIndexNull(Object children, ReferenceMetaClassPair referencePair, Object feature) {
 		for (EObject child : (List<? extends EObject>) children) {
 			EObject oldParent = child.eContainer();
 			EcoreUtil.remove(oldParent, referencePair.getReference(), child);
 		}
-		return ((List<EObject>) feature).addAll((List<? extends EObject>) children);
+		boolean result = ((List<EObject>) feature).addAll((List<? extends EObject>) children);
+		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
 
 	@SuppressWarnings("unchecked")

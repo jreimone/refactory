@@ -16,6 +16,8 @@ import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.LAST;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 
 /**
  * @author Jan Reimann
@@ -26,19 +28,23 @@ public class IndexAssignmentInterpreter {
 	private RefactoringInterpreterContext context;
 	private List<? extends EObject> selection;
 	
-	public boolean interpreteIndexCommand(IndexAssignmentCommand command, RefactoringInterpreterContext context, List<? extends EObject> selection){
+	public IRefactoringStatus interpreteIndexCommand(IndexAssignmentCommand command, RefactoringInterpreterContext context, List<? extends EObject> selection){
 		this.context = context;
 		this.selection = selection;
+		boolean result = true;
 		if(command instanceof FIRST){
-			return interpreteFirst((FIRST)command);
+			result = interpreteFirst((FIRST)command);
 		}
 		if(command instanceof ConcreteIndex){
-			return interpreteConcreteIndex((ConcreteIndex) command);
+			result = interpreteConcreteIndex((ConcreteIndex) command);
 		}
 		if(command instanceof LAST){
-			return interpreteLast((LAST) command);
+			result = interpreteLast((LAST) command);
 		}
-		return false;
+		if(!result){
+			return new RefactoringStatus(IRefactoringStatus.WARNING, "Couldn't determine the correct position in the model");
+		}
+		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
 	
 	private boolean interpreteFirst(FIRST first){

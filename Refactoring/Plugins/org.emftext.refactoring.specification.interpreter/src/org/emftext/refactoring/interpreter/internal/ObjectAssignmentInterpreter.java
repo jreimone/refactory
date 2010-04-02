@@ -8,7 +8,14 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.dialogs.Dialog;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
@@ -28,7 +35,9 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.IValueProvider;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.specification.interpreter.ui.DialogOneListElementProvider;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
@@ -45,13 +54,15 @@ public class ObjectAssignmentInterpreter {
 
 	private Role assignedRole;
 	private Object roleRuntimeValue;
+	
+	private IRefactoringStatus status;
 
 	public ObjectAssignmentInterpreter(Mapping mapping) {
 		super();
 		this.mapping = mapping;
 	}
 
-	public Boolean interpreteObjectAssignmentCommand(ObjectAssignmentCommand object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
+	public IRefactoringStatus interpreteObjectAssignmentCommand(ObjectAssignmentCommand object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
 		this.selection = selection;
 		this.context = context;
 
@@ -65,15 +76,16 @@ public class ObjectAssignmentInterpreter {
 		if(object instanceof TRACE){
 			value = handleTrace((TRACE) object);
 		}
-
 		if(value != null){
 			context.addEObjectForVariable(objectVar, value);
 		}
 		if(roleRuntimeValue == null){
 			roleRuntimeValue = value;
 		}
-
-		return true;
+		if(status == null){
+			status = new RefactoringStatus(IRefactoringStatus.OK);
+		}
+		return status;
 	}
 
 	private EObject handleTrace(TRACE trace){
@@ -120,13 +132,24 @@ public class ObjectAssignmentInterpreter {
 		List<ReferenceMetaClassPair> pairs = relationMapping.getReferenceMetaClassPair();
 		List<EObject> values = getEObjectWithRoleFromPath(assignedRole, sourceObject, pairs);
 		if(values == null  || values.size() == 0){
+			ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+			AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+			EClass clazz = mapping.getEClassForRole(assignedRole);
+			String message = "From " + labelProvider.getText(sourceObject) + " no elements of type " + labelProvider.getText(clazz) + " are reachable or existent.";
+			status = new RefactoringStatus(IRefactoringStatus.INFO, message);
 			return null;
 		}
 		if(values.size() == 1){
 			return values.get(0);
 		}
-		IStructuralFeatureValueProvider valueProvider = new DialogOneListElementProvider(sourceObject, mapping);
+		IValueProvider<List<EObject>, EObject> valueProvider = new DialogOneListElementProvider(sourceObject, mapping);
 		EObject value = valueProvider.provideValue(values);
+		if(valueProvider.getReturnCode() == Dialog.CANCEL){
+			status = new RefactoringStatus(IRefactoringStatus.CANCEL);
+		}
 		return value;
 	}
 
@@ -205,7 +228,21 @@ public class ObjectAssignmentInterpreter {
 			i++;
 		}
 		// build up uptree
-		return RoleUtil.getFirstCommonObjectWithRoleFromPaths(fromRole, mapping, (List<? extends EObject>[]) rootPaths);
+		EObject uptreeObject = RoleUtil.getFirstCommonObjectWithRoleFromPaths(fromRole, mapping, (List<? extends EObject>[]) rootPaths);
+		if(uptreeObject == null){
+			ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+			AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+			EClass clazz = mapping.getEClassForRole(fromRole);
+			String message = "The following model elements aren't contained within the same " + labelProvider.getText(clazz) + ":\n";
+			for (EObject eObject : fromObjects) {
+				message += "\n" + labelProvider.getText(eObject);
+			}
+			status = new RefactoringStatus(mapping, IRefactoringStatus.INFO, message);
+		}
+		return uptreeObject;
 	}
 
 	/**

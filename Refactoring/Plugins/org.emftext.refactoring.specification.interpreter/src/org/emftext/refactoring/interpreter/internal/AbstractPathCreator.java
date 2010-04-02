@@ -6,7 +6,6 @@ package org.emftext.refactoring.interpreter.internal;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
@@ -14,8 +13,9 @@ import org.emftext.language.refactoring.rolemapping.RolemappingFactory;
 import org.emftext.refactoring.graph.IShortestPathAlgorithm;
 import org.emftext.refactoring.graph.util.IPath;
 import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.util.ModelUtil;
-import org.emftext.refactoring.util.RegistryUtil;
 
 /**
  * @author Jan Reimann
@@ -23,20 +23,20 @@ import org.emftext.refactoring.util.RegistryUtil;
  */
 public abstract class AbstractPathCreator {
 
-	public boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child){
+	public IRefactoringStatus createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child){
 		return createPath(parent, remainingReferences, child, null);
 	}
 
 	abstract protected void onePairLeftUnaryReference(EObject targetParent, Object children, ReferenceMetaClassPair referencePair);
 
-	abstract protected boolean onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature);
+	abstract protected IRefactoringStatus onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature);
 
-	abstract protected boolean onePairLeftIndexNull(Object children, ReferenceMetaClassPair referencePair, Object feature);
+	abstract protected IRefactoringStatus onePairLeftIndexNull(Object children, ReferenceMetaClassPair referencePair, Object feature);
 
 	abstract protected EObject getTargetObjectForPathCalculation(Object target);
 
 	@SuppressWarnings("unchecked")
-	public boolean createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, Object child, Integer index){
+	public IRefactoringStatus createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, Object child, Integer index){
 		if(remainingReferences == null){
 			IShortestPathAlgorithm algo = (new PathAlgorithmFactory()).getAlgorithm();
 			EObject target = getTargetObjectForPathCalculation(child);
@@ -53,8 +53,9 @@ public abstract class AbstractPathCreator {
 				}
 				return createPath(parent, references, child,index);
 			} else {
-				RegistryUtil.log("Couldn't find a shortest path between " + child + " and " + parent, IStatus.ERROR);
-				return false;
+				String message = "Couldn't find a shortest path between " + child + " and " + parent;
+				IRefactoringStatus status = new RefactoringStatus(IRefactoringStatus.ERROR, message);
+				return status;
 			}
 		} else if(remainingReferences.size() == 1){
 			ReferenceMetaClassPair referencePair = remainingReferences.get(0);
@@ -70,11 +71,12 @@ public abstract class AbstractPathCreator {
 					if(child != null && referencePair.getReference() != null){
 						onePairLeftUnaryReference(parent, child, referencePair);
 					}
-					return true;
+					return new RefactoringStatus(IRefactoringStatus.OK);
 				}
 			} catch (Exception e) {
-				RegistryUtil.log("Couldn't set feature " + child + " for " + parent, IStatus.ERROR, e);
-				return false;
+				String message = "Couldn't set feature " + child + " for " + parent;
+				IRefactoringStatus status = new RefactoringStatus(IRefactoringStatus.ERROR, message, e);
+				return status;
 			}
 		} else {
 			// must work on a copy because otherwise all operations to the list will be reflected in the model
@@ -92,7 +94,7 @@ public abstract class AbstractPathCreator {
 			}
 			if(featureClass.isAbstract()){
 				// TODO ask user or use MissingInformationProvider
-				return false;
+				return new RefactoringStatus(IRefactoringStatus.WARNING, "THIS CASE MUST BE IMPLEMENTED!");
 			}
 			//			EObject featureObject = ModelUtil.create(featureClass);
 			EObject featureObject = null;

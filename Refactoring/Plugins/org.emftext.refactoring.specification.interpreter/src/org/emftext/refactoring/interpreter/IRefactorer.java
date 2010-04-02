@@ -101,4 +101,10 @@ public interface IRefactorer {
 	 * @return
 	 */
 	public Resource getResource();
+	
+	/**
+	 * Returns the status which was processed during the refactoring.
+	 * @return
+	 */
+	public IRefactoringStatus getStatus();
 }
