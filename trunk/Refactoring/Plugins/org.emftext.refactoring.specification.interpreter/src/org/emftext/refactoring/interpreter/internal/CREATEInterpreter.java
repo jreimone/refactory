@@ -16,6 +16,8 @@ import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -34,7 +36,7 @@ public class CREATEInterpreter {
 		this.mapping = mapping;
 	}
 
-	public Boolean interpreteCREATE(CREATE object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
+	public IRefactoringStatus interpreteCREATE(CREATE object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
 		this.selection = selection;
 		this.context = context;
 		Role childRole = object.getSourceRole();
@@ -48,10 +50,10 @@ public class CREATEInterpreter {
 		if(target instanceof VariableReference){
 			return handleCREATETargetVariable(sourceVar, context, childRole, target, object.getIndex());
 		}
-		return false;
+		return new RefactoringStatus(IRefactoringStatus.ERROR, "Couldn't create something");
 	}
 
-	private boolean handleCREATETargetVariable(Variable sourceVar, RefactoringInterpreterContext context, Role childRole, TargetContext target, IndexVariable index) {
+	private IRefactoringStatus handleCREATETargetVariable(Variable sourceVar, RefactoringInterpreterContext context, Role childRole, TargetContext target, IndexVariable index) {
 		Variable targetVar = ((VariableReference) target).getVariable();
 		EObject parentObject = context.getEObjectForVariable(targetVar);
 		EObject childObject = context.getEObjectForVariable(sourceVar);

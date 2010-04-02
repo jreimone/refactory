@@ -39,6 +39,8 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
@@ -49,7 +51,7 @@ import org.emftext.refactoring.util.RoleUtil;
  * @author Jan Reimann
  *
  */
-public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, RefactoringInterpreterContext> implements IRefactoringInterpreter{
+public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactoringStatus, RefactoringInterpreterContext> implements IRefactoringInterpreter{
 
 	private RefactoringSpecification refSpec;
 	private EObject model;
@@ -70,7 +72,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	
 	private List<Resource> resourcesToSave;
 	
-	private Boolean occuredErrors;
+	private Boolean occuredErrors = false;
+	
+	private IRefactoringStatus status;
 
 	public RefactoringInterpreter(IRefactoringPostProcessor postProcessor){
 		this.postProcessor = postProcessor;
@@ -79,39 +83,49 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	}
 	
 	@Override
-	public Boolean interprete(EObject object, RefactoringInterpreterContext context) {
+	public IRefactoringStatus interprete(EObject object, RefactoringInterpreterContext context) {
 		EcoreUtil.resolveAll(object);
 		if(object instanceof RoleReference){
 			Role role = ((RoleReference) object).getRole();
-			if(containsModifierOPTIONAL(role)){return true;}
+			if(containsModifierOPTIONAL(role)){return new RefactoringStatus(IRefactoringStatus.OK);}
 			FromClause from = ((RoleReference) object).getFrom();
 			if(from != null){
 				FromReference fromReference = from.getReference();
 				if(fromReference instanceof VariableReference){
 					Role variableRole = RoleUtil.getRoleFromVariable(((VariableReference) fromReference).getVariable());
-					if(containsModifierOPTIONAL(variableRole)){return true;}
+					if(containsModifierOPTIONAL(variableRole)){return new RefactoringStatus(IRefactoringStatus.OK);}
 				}
 			}
 		} else if(object instanceof CREATE){
 			CREATE create = (CREATE) object;
 			Role childRole = create.getSourceRole();
-			if(containsModifierOPTIONAL(childRole)){return true;}
+			if(containsModifierOPTIONAL(childRole)){return new RefactoringStatus(IRefactoringStatus.OK);}
 			TargetContext targetContext = create.getTargetContext();
-			if(contextIsOptional(targetContext)){return true;}
+			if(contextIsOptional(targetContext)){return new RefactoringStatus(IRefactoringStatus.OK);}
 		} else if(object instanceof ASSIGN){
 			RoleAttribute attribute = ((ASSIGN) object).getSourceAttribute();
 			if(attribute != null){
 				Role sourceAttRole = attribute.getAttributeRole();
-				if(containsModifierOPTIONAL(sourceAttRole)){return true;}
+				if(containsModifierOPTIONAL(sourceAttRole)){return new RefactoringStatus(IRefactoringStatus.OK);}
+				if(attribute.getModifier().contains(RoleModifier.OPTIONAL)){
+					if(mapping.getConcreteMappingForRole(sourceAttRole).getAttributeMappingForAttribute(attribute) == null){
+						return new RefactoringStatus(IRefactoringStatus.OK);
+					}
+				}
 			}
 			Role targetRole = ((ASSIGN) object).getTargetAttribute().getAttributeRole();
-			if(containsModifierOPTIONAL(targetRole)){return true;}
+			if(containsModifierOPTIONAL(targetRole)){return new RefactoringStatus(IRefactoringStatus.OK);}
+			if(((ASSIGN) object).getTargetAttribute().getModifier().contains(RoleModifier.OPTIONAL)){
+				if(mapping.getConcreteMappingForRole(targetRole).getAttributeMappingForAttribute(attribute) == null){
+					return new RefactoringStatus(IRefactoringStatus.OK);
+				}
+			}
 		} else if(object instanceof SET){
-			if(sourceContextIsOptional(((SET) object).getSource())){return true;}
-			if(contextIsOptional(((SET) object).getTarget())){return true;}
+			if(sourceContextIsOptional(((SET) object).getSource())){return new RefactoringStatus(IRefactoringStatus.OK);}
+			if(contextIsOptional(((SET) object).getTarget())){return new RefactoringStatus(IRefactoringStatus.OK);}
 		} else if(object instanceof MOVE){
-			if(sourceContextIsOptional(((MOVE) object).getSource())){return true;}
-			if(contextIsOptional(((MOVE) object).getTarget())){return true;}
+			if(sourceContextIsOptional(((MOVE) object).getSource())){return new RefactoringStatus(IRefactoringStatus.OK);}
+			if(contextIsOptional(((MOVE) object).getTarget())){return new RefactoringStatus(IRefactoringStatus.OK);}
 		}
 		return super.interprete(object, context);
 	}
@@ -195,8 +209,10 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 		for (Role role : roles) {
 			roleRuntimeInstanceMap.put(role, selection);
 		}
-		
-		occuredErrors = !interprete(context);
+		status = interprete(context);
+		if(status.getSeverity() == IRefactoringStatus.ERROR){
+			occuredErrors = true;
+		}
 		return getModel();
 	}	
 
@@ -219,10 +235,10 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN(org.emftext.language.refactoring.refactoring_specification.ASSIGN, java.lang.Object)
 	 */
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_ASSIGN(
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_ASSIGN(
 			ASSIGN object, RefactoringInterpreterContext context) {
 		//		object.get
-		Boolean result = assign.interpreteASSIGN(object, context, selection);
+		IRefactoringStatus result = assign.interpreteASSIGN(object, context, selection);
 		Role assignedRole = assign.getAssignedRole();
 		Object roleRuntimeInstance = assign.getRoleRuntimeValue();
 		if(assignedRole != null && roleRuntimeInstance != null){
@@ -239,9 +255,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE(org.emftext.language.refactoring.refactoring_specification.CREATE, java.lang.Object)
 	 */
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_CREATE(
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_CREATE(
 			CREATE object, RefactoringInterpreterContext context) {
-		Boolean result = create.interpreteCREATE(object, context, selection);
+		IRefactoringStatus result = create.interpreteCREATE(object, context, selection);
 		Role assignedRole = create.getAssignedRole();
 		Object roleRuntimeInstance = create.getRoleRuntimeInstance();
 		if(assignedRole != null && roleRuntimeInstance != null){
@@ -254,7 +270,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE(org.emftext.language.refactoring.refactoring_specification.MOVE, java.lang.Object)
 	 */
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_MOVE(
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_MOVE(
 			MOVE object, RefactoringInterpreterContext context) {
 		return move.interpreteMOVE(object, context, selection);
 	}
@@ -263,7 +279,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET(org.emftext.language.refactoring.refactoring_specification.SET, java.lang.Object)
 	 */
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_SET(
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_SET(
 			SET object, RefactoringInterpreterContext context) {
 		return set.interpreteSET(object, context);
 	}
@@ -274,7 +290,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005fspecification_IndexAssignmentCommand(org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand, java.lang.Object)
 	 */
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_IndexAssignmentCommand(
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_IndexAssignmentCommand(
 			IndexAssignmentCommand object, RefactoringInterpreterContext context) {
 		return indexInterpreter.interpreteIndexCommand(object, context, selection);
 	}
@@ -283,10 +299,10 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand, java.lang.Object)
 	 */
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(
 			ObjectAssignmentCommand object,
 			RefactoringInterpreterContext context) {
-		Boolean result = objectInterpreter.interpreteObjectAssignmentCommand(object, context, selection);
+		IRefactoringStatus result = objectInterpreter.interpreteObjectAssignmentCommand(object, context, selection);
 		Role assignedRole = objectInterpreter.getAssignedRole();
 		Object roleRuntimeInstance = objectInterpreter.getRoleRuntimeValue();
 		if(assignedRole != null && roleRuntimeInstance != null){
@@ -296,10 +312,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 	}
 	
 	@Override
-	public Boolean interprete_org_emftext_language_refactoring_refactoring_005fspecification_VariableAssignment(
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_VariableAssignment(
 			VariableAssignment object, RefactoringInterpreterContext context) {
 		return interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(object.getAssignment(), context);
-//		return objectInterpreter.interpreteObjectAssignmentCommand(object.getAssignment(), context, selection);
 	}
 
 	/* (non-Javadoc)
@@ -340,5 +355,20 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<Boolean, 
 
 	public List<Resource> getResourcesToSave() {
 		return resourcesToSave;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter#continueInterpretation(java.lang.Object)
+	 */
+	@Override
+	protected boolean continueInterpretation(IRefactoringStatus result) {
+		return(result.getSeverity() == IRefactoringStatus.OK);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#getStatus()
+	 */
+	public IRefactoringStatus getStatus() {
+		return status;
 	}
 }

@@ -15,6 +15,7 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -29,7 +30,7 @@ public class SETInterpreter {
 		this.mapping = mapping;
 	}
 	
-	public Boolean interpreteSET(SET object, RefactoringInterpreterContext context) {
+	public IRefactoringStatus interpreteSET(SET object, RefactoringInterpreterContext context) {
 		SourceContext source = object.getSource();
 		TargetContext target = object.getTarget();
 		EObject sourceObject = null;

@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
@@ -25,6 +26,8 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
@@ -45,6 +48,7 @@ public class Refactorer implements IRefactorer {
 	private boolean occuredErrors;
 	private List<Resource> resourcesToSave;
 	private Resource resource;
+	private IRefactoringStatus status;
 
 	public Refactorer(Resource resource, Map<String, Mapping> roleMappings){
 		this.resource = resource;
@@ -136,12 +140,20 @@ public class Refactorer implements IRefactorer {
 			}
 			ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
 			refactoredModel = interpreter.interprete(copy);
+			status = interpreter.getStatus();
+			if(status.getSeverity() != IRefactoringStatus.OK){
+				return refactoredModel;
+			}
 			ChangeDescription change = recorder.summarize();
 			occuredErrors = interpreter.didErrorsOccur();
 			if(!occuredErrors){
 				IRefactoringPostProcessor postProcessor = interpreter.getPostProcessor();
 				if(postProcessor != null){
-					postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModelRS, change);
+					IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModelRS, change);
+					if(postProcessingStatus.getSeverity() != IRefactoringStatus.OK){
+						int severity = postProcessingStatus.getSeverity();
+						status = new RefactoringStatus(mapping, severity, postProcessingStatus.getMessage());
+					}
 				}
 			}
 			resourcesToSave = interpreter.getResourcesToSave();
@@ -188,5 +200,12 @@ public class Refactorer implements IRefactorer {
 
 	public Resource getResource() {
 		return resource;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IRefactorer#getStatus()
+	 */
+	public IRefactoringStatus getStatus() {
+		return status;
 	}
 }
