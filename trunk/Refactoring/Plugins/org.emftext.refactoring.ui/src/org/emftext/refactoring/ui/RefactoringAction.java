@@ -2,27 +2,17 @@ package org.emftext.refactoring.ui;
 
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.commands.operations.OperationHistoryFactory;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.gmf.runtime.common.core.command.ICommand;
-import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.part.FileEditorInput;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -35,7 +25,6 @@ public class RefactoringAction extends Action {
 
 	private Mapping mapping;
 	private IRefactorer refactorer;
-//	private Resource resource;
 	private ISelectionProvider selectionProvider;
 	private EObject refactoredModel;
 	private IDiagramEditDomain diagramEditingDomain;
@@ -74,33 +63,7 @@ public class RefactoringAction extends Action {
 			domain = TransactionUtil.getEditingDomain(rs);
 			if(domain == null){
 				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
-			}
-			if(diagramTransactionalEditingDomain != null){
-				CommandStack stack = diagramTransactionalEditingDomain.getCommandStack();
-				RecordingCommand gmfRecordingCommand = new RefactoringRecordingCommand(diagramTransactionalEditingDomain, refactorer, mapping, activeEditor);
-				stack.execute(gmfRecordingCommand);
-				
-//				ICommand anotherCommand = new SimpleGMFCommand(mapping, refactorer, activeEditor);
-//				DiagramCommandStack diagramStack = diagramEditingDomain.getDiagramCommandStack();
-//				ICommand tempCommand = new RefactoringRecordingCommand(domain, refactorer, mapping, activeEditor);
-//				diagramStack.execute(new ICommandProxy(tempCommand));
-				
-			} else if(diagramEditingDomain != null){
-				if(activeEditor != null){
-					IEditorInput input = activeEditor.getEditorInput();
-					if(input instanceof FileEditorInput){
-						IFile file = ((FileEditorInput) input).getFile();
-						URI gmfUri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-						Resource gmfResource = rs.getResource(gmfUri, true);
-						domain = TransactionUtil.getEditingDomain(gmfResource);
-					}
-				}								
-				gmfCommand = new GMFTransactionalCommand(domain, refactorer, mapping, activeEditor);
-				
-				IStatus result = OperationHistoryFactory.getOperationHistory().execute(gmfCommand, null, null);
-//				System.out.println("GMF Result: " + anotherCommand.getCommandResult());
-//				diagramStack.execute(gmfCommand);
-			} else {
+			}	
 				CommandStack stack = domain.getCommandStack();
 				command = new RefactoringRecordingCommand(domain, refactorer, mapping, activeEditor);
 				stack.execute(command);
@@ -110,7 +73,6 @@ public class RefactoringAction extends Action {
 					}
 					throw new Exception("Some instructions couldn't be invoked");
 				}
-			}
 		} catch (Exception e) {
 			if(command != null){
 				command.undo();
@@ -124,9 +86,7 @@ public class RefactoringAction extends Action {
 			}
 			RegistryUtil.log("Refactoring rolled back because of the stack trace or message above", IStatus.WARNING, e);
 		}
-		if(diagramTransactionalEditingDomain != null){
-			diagramTransactionalEditingDomain.dispose();
-		} else if(domain != null){
+		if(domain != null && diagramTransactionalEditingDomain == null){
 			domain.dispose();
 		}
 	}
