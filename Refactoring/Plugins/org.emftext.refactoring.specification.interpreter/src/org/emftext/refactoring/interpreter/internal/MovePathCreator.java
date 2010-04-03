@@ -12,10 +12,17 @@ import org.emftext.refactoring.interpreter.RefactoringStatus;
 public class MovePathCreator extends AbstractPathCreator {
 
 	@SuppressWarnings("unchecked")
-	protected void onePairLeftUnaryReference(EObject targetParent, Object children, ReferenceMetaClassPair referencePair) {
-		EReference reference = referencePair.getReference();
-		if(reference.getEReferenceType().isSuperTypeOf(((List<? extends EObject>) children).get(0).eClass())){
-			targetParent.eSet(referencePair.getReference(), ((List<? extends EObject>) children).get(0));
+	protected IRefactoringStatus onePairLeftUnaryReference(EObject targetParent, Object children, ReferenceMetaClassPair referencePair) {
+		try {
+			EReference reference = referencePair.getReference();
+			if(reference.getEReferenceType().isSuperTypeOf(((List<? extends EObject>) children).get(0).eClass())){
+				targetParent.eSet(referencePair.getReference(), ((List<? extends EObject>) children).get(0));
+			}
+			return new RefactoringStatus(IRefactoringStatus.OK);
+		} catch (Exception e) {
+			return new RefactoringStatus(IRefactoringStatus.ERROR
+					,"Couldn't set " + children + " in " + targetParent
+					,e);
 		}
 	}
 

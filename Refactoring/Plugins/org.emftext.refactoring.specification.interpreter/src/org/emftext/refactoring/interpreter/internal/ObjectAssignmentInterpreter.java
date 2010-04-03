@@ -18,6 +18,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
+import org.emftext.language.refactoring.refactoring_specification.FILTER;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
 import org.emftext.language.refactoring.refactoring_specification.FromOperator;
 import org.emftext.language.refactoring.refactoring_specification.FromReference;
@@ -54,7 +55,7 @@ public class ObjectAssignmentInterpreter {
 
 	private Role assignedRole;
 	private Object roleRuntimeValue;
-	
+
 	private IRefactoringStatus status;
 
 	public ObjectAssignmentInterpreter(Mapping mapping) {
@@ -70,10 +71,13 @@ public class ObjectAssignmentInterpreter {
 		EObject value = null;
 
 		if(object instanceof RoleReference){
-			value = handleRoleReference((RoleReference) object);
-		}
-
-		if(object instanceof TRACE){
+			FromOperator op = ((RoleReference) object).getFrom().getOperator();
+			if(op instanceof FILTER){
+				handleFILTER((RoleReference) object, objectVar);
+			} else {
+				value = handleRoleReference((RoleReference) object);
+			}
+		} else if(object instanceof TRACE){
 			value = handleTrace((TRACE) object);
 		}
 		if(value != null){
@@ -86,6 +90,28 @@ public class ObjectAssignmentInterpreter {
 			status = new RefactoringStatus(IRefactoringStatus.OK);
 		}
 		return status;
+	}
+
+	private void handleFILTER(RoleReference object, Variable objectVar) {
+		Role role = object.getRole();
+		assignedRole = role;
+		FromClause from = object.getFrom();
+		FromReference reference = from.getReference();
+		List<? extends EObject> elements = getFromReferenceObject(reference);
+		List<EObject> filteredElements = new LinkedList<EObject>();
+		for (EObject element : elements) {
+			List<Role> mappedRoles = mapping.getMappedRolesForEObject(element);
+			if(mappedRoles.contains(role)){
+				filteredElements.add(element);
+			}
+		}
+		if(filteredElements.size() == 1){
+			context.addEObjectForVariable(objectVar, filteredElements.get(0));
+			roleRuntimeValue = filteredElements.get(0);
+		} else {
+			context.addEObjectsForVariable(objectVar, filteredElements);
+			roleRuntimeValue = filteredElements;
+		}
 	}
 
 	private EObject handleTrace(TRACE trace){
@@ -115,9 +141,6 @@ public class ObjectAssignmentInterpreter {
 		} else if(operator instanceof PATH){
 			return handleFromOperatorPATH(assignedRole, fromObjects);
 		}
-		//		if(operator == null){
-		//			return getFromReferenceObject(from.getReference());
-		//		}
 		return null;
 	}
 
