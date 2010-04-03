@@ -2,9 +2,9 @@ package org.emftext.refactoring.registry.rolemodel.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.rolemodel.Activator;
@@ -45,10 +45,10 @@ public class BasicRoleModelRegistry implements IRoleModelRegistry {
 	}
 
 	private void collectRegisteredRoleModels(){
-		List<RoleModel> models = RegistryUtil.collectRegisteredResources(IRoleModelExtensionPoint.ID
+		Map<RoleModel, IConfigurationElement> models = RegistryUtil.collectRegisteredResources(IRoleModelExtensionPoint.ID
 				, IRoleModelExtensionPoint.RESOURCE_ATTRIBUTE
 				, RoleModel.class);
-		for (RoleModel roleModel : models) {
+		for (RoleModel roleModel : models.keySet()) {
 			try {
 				registerRoleModel(roleModel);
 			} catch (RoleModelAlreadyRegisteredException e) {
