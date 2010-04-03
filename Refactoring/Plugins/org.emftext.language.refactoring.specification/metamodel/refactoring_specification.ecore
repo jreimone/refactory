@@ -55,7 +55,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//FromClause"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RelationReference" eSuperTypes="#//SourceContext">
+  <eClassifiers xsi:type="ecore:EClass" name="RelationReference" eSuperTypes="#//SourceContext #//TargetContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
   </eClassifiers>
@@ -84,7 +84,7 @@
   <eClassifiers xsi:type="ecore:EEnum" name="Constants">
     <eLiterals name="INPUT"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConstantsReference" eSuperTypes="#//FromReference">
+  <eClassifiers xsi:type="ecore:EClass" name="ConstantsReference" eSuperTypes="#//FromReference #//SourceContext">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referencedConstant" lowerBound="1"
         eType="#//Constants"/>
   </eClassifiers>
@@ -134,4 +134,5 @@
         eType="#//ObjectAssignmentCommand" containment="true" eOpposite="#//ObjectAssignmentCommand/declaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PATH" eSuperTypes="#//FromOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FILTER" eSuperTypes="#//FromOperator"/>
 </ecore:EPackage>

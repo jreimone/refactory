@@ -62,12 +62,11 @@ TOKENSTYLES{
 	"from" COLOR #7F0055, BOLD;
 	"uptree" COLOR #50F05C, BOLD;
 	"path" COLOR #50F05C, BOLD;
-	"update" COLOR #50F05C, BOLD;
+	"filter" COLOR #50F05C, BOLD;
 	"trace" COLOR #50F05C, BOLD;
 	"first" COLOR #50F05C, BOLD;
 	"last" COLOR #50F05C, BOLD;
 	"as" COLOR #7F0055, BOLD;
-	"and" COLOR #7F0055, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
 	"LOWER_IDENTIFIER" COLOR #0000FF;
 	"UPPER_IDENTIFIER" COLOR #0000FF;
@@ -105,6 +104,8 @@ RULES{
 	UPTREE ::= "uptree";
 	
 	PATH ::= "path";
+	
+	FILTER ::= "filter";
 	
 	FIRST ::= "index" variable ":=" "first" "(" reference ")";
 	
