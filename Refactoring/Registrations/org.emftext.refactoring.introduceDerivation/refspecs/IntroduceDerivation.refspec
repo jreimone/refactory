@@ -1,0 +1,12 @@
+REFACTORING IntroduceDerivation 
+FOR <IntroduceDerivation> 
+
+STEPS { 
+	object derivationContainer := DerivationContainer from uptree(INPUT);
+	object derivees := Derivee from filter(INPUT);
+	
+	create new derivation:Derivation in derivationContainer;
+	set use of derivees in derivation.derivees;
+	assign derivation.attribute1;
+	assign derivation.attribute2;
+} 

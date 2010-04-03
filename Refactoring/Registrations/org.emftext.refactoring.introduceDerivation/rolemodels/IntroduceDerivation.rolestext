@@ -1,0 +1,39 @@
+/**
+This RoleModel is specifically designed for the FeatureMapper metamodel (http://www.tudresden.de/featuremapping).
+This RoleModel contains some Derivees, from which another element is intended to be derived. The derivation then
+gets associated with the derivees.<br>
+Use this RoleModel not only for the FeatureMapper metamodel but all other metamodels having similar structures and
+semantics.
+<br><br>
+For more information about the FeatureMapper checkout <a href="http://featuremapper.org/">featuremapper.org</a> 
+*/ 
+RoleModel IntroduceDerivation { 
+	/**
+	This role represents the element from which the other element is intended to be derived.
+	Map this role to the metaclass 'Feature'
+	*/ 
+	input  ROLE Derivee ; 
+	
+	/**
+	This role represents the container in which the derivation will be created.
+	Normally this role should be mapped to 'FeatureModel'
+	*/  
+	ROLE DerivationContainer ; 
+	
+	/**
+	This role represents the derivation of the <i>Derivees</i>. Map this role to 'Constraint'
+	*/  
+	ROLE Derivation (
+		/**
+		map this attribute to 'language'
+		*/
+		input runtime attribute1,
+		/**
+		map this attribute to 'expression'
+		*/
+		input runtime attribute2 
+	); 
+	
+	transitive: DerivationContainer [1..1] <>- Derivation derivation [0..*];
+	transitive: Derivation [1..1] -- Derivee derivees [0..*];
+} 
