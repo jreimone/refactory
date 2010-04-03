@@ -39,4 +39,15 @@ eclass ConcreteMapping {
 		}
 		return null;
 	}
+	
+	getRelationMappingForRelation() {
+		List<RelationMapping> relationMappings = getOutgoingRelationMappings();
+		for (RelationMapping relationMapping : relationMappings) {
+			MultiplicityRelation mappedRelation = relationMapping.getRelation();
+			if(mappedRelation.equals(relation)){
+				return relationMapping;
+			}
+		}
+		return null;
+	}
 }
