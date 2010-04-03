@@ -37,6 +37,7 @@ class RefactoringRecordingCommand extends RecordingCommand{
 		} catch (Exception e) {
 			didErrorsOccur = true;
 			exception = e;
+			e.printStackTrace();
 		}
 	}
 

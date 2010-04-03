@@ -24,6 +24,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchSite;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
@@ -58,21 +59,17 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			System.out.println("Workbench Part " + activePart + " is not a saveable part");
 			return;
 		}
-		if(activePart instanceof IWorkbenchSite){
-			System.out.println("selection provider: " + ((IWorkbenchSite) activePart).getSelectionProvider());
-		}
-		IWorkbenchSite workbenchSite = (IWorkbenchSite) activePart.getAdapter(IWorkbenchSite.class);
-		if(workbenchSite == null){
-			System.out.println("no selection provider for " + activePart);
-		} else {
-			System.out.println("selection provider: " + ((IWorkbenchSite) activePart).getSelectionProvider());
-		}
+		IWorkbenchPartSite partSite = activePart.getSite();
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if(!activePart.equals(activeEditor)){
-			System.out.println("Workbenchpart '" + activePart.getTitle() + "' is not the active editor");
+//		if(!activePart.equals(activeEditor)){
+//			System.out.println("Workbenchpart '" + activePart.getTitle() + "' is not the active editor");
+//			return;
+//		}
+		ISelectionProvider selectionProvider = partSite.getSelectionProvider();
+		if(selectionProvider == null){
+			System.out.println(activePart + " doesn't provide selections -> no context menu");
 			return;
 		}
-		ISelectionProvider selectionProvider = activeEditor.getEditorSite().getSelectionProvider();
 		ISelection selection = selectionProvider.getSelection();
 		List<EObject> selectedElements = new LinkedList<EObject>();
 		Resource resource = null;
@@ -149,8 +146,8 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, CONTEXT_MENU_ENTRY_ID);
 
 			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
-			refactorer.setInput(selectedElements);
 			if(refactorer != null){
+				refactorer.setInput(selectedElements);
 				List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
 				boolean containsEntries = false;
 				for (Mapping mapping : mappings) {
@@ -172,6 +169,8 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				if(containsEntries){
 					additions.addContributionItem(rootMenu, null);
 				}
+			} else {
+				System.out.println("no rolemappings registered for " + resource.getContents().get(0).eClass().getEPackage().getNsURI());
 			}
 		}
 	}
