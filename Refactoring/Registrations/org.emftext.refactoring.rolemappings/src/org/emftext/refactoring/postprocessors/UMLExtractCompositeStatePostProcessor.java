@@ -45,7 +45,7 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 		if(!result){
 			return new Status(IStatus.WARNING, "org.emftext.refactoring.rolemappings", "Couldn't determine correctly the outgoing and incoming transitions");
 		}
-		return new Status(IStatus.OK, null, "");
+		return new Status(IStatus.OK, "org.emftext.refactoring.rolemappings", "");
 	}
 
 	private Boolean processAdditionals(){

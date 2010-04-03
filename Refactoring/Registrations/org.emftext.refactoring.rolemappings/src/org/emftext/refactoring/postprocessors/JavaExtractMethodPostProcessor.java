@@ -45,7 +45,7 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 		if(!result){
 			return new Status(IStatus.WARNING, "org.emftext.refactoring.rolemappings", "Couldn't determine the correct method return type and modifier");
 		}
-		return new Status(IStatus.OK, null, "");
+		return new Status(IStatus.OK, "org.emftext.refactoring.rolemappings", "");
 	}
 	
 	private Boolean processMethodType(){
