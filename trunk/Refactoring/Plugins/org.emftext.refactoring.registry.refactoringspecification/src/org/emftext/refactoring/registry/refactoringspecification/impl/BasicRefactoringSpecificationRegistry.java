@@ -2,9 +2,9 @@ package org.emftext.refactoring.registry.refactoringspecification.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -47,10 +47,10 @@ public class BasicRefactoringSpecificationRegistry implements
 	}
 
 	private void collectRegisteredRefSpecs(){
-		List<RefactoringSpecification> models = RegistryUtil.collectRegisteredResources(IRefactoringSpecificationExtensionPoint.ID
+		Map<RefactoringSpecification, IConfigurationElement> models = RegistryUtil.collectRegisteredResources(IRefactoringSpecificationExtensionPoint.ID
 				, IRefactoringSpecificationExtensionPoint.RESOURCE_ATTRIBUTE
 				, RefactoringSpecification.class);
-		for (RefactoringSpecification roleModel : models) {
+		for (RefactoringSpecification roleModel : models.keySet()) {
 			try {
 				registerRefSpec(roleModel);
 			} catch (RefSpecAlreadyRegisteredException e) {
