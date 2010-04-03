@@ -1,9 +1,9 @@
 package org.emftext.refactoring.registry.rolemapping;
 
-import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.registry.rolemapping.impl.BasicRoleMappingRegistry;
@@ -54,4 +54,13 @@ public interface IRoleMappingRegistry {
 	 * @return
 	 */
 	public IRefactoringPostProcessor getPostProcessor(EPackage metamodel, Mapping mapping);
+	
+	/**
+	 * Returns an {@link ImageDescriptor image} for the given <code>mapping</code> or null of no
+	 * image was registered.
+	 * 
+	 * @param mapping
+	 * @return
+	 */
+	public ImageDescriptor getImageForMapping(Mapping mapping);
 }

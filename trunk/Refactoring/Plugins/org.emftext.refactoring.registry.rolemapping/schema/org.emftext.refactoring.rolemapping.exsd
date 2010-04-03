@@ -49,10 +49,50 @@
 
    <element name="rolemapping">
       <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="mappingIcon"/>
+         </sequence>
          <attribute name="rolemapping_resource" type="string" use="required">
             <annotation>
                <documentation>
                   
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="defaultIcon" type="string">
+            <annotation>
+               <documentation>
+                  Specify a default icon which will be shown in the context menu then
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="mappingIcon">
+      <annotation>
+         <documentation>
+            With this element you can specify an icon for a mapping which then will be displayed in the context menu. If no such icon is given for a mapping then the defaultIcon will be displayed.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="mapping_name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Specify the name of the Mapping for which the icon should be registered.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="icon" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Specify an icon for the given Mapping.
                </documentation>
                <appinfo>
                   <meta.attribute kind="resource"/>

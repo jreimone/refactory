@@ -1,5 +1,10 @@
 package org.emftext.refactoring.registry.rolemapping.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +12,11 @@ import java.util.Map;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.ImageData;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint;
@@ -21,10 +29,14 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 
 	private Map<String, Map<String, Mapping>> roleMappingsMap;
 	private Map<String, Map<Mapping, IRefactoringPostProcessor>> postProcessorMap;
+	private Map<Mapping, ImageDescriptor> iconMap;
+	private Map<Mapping, ImageDescriptor> defaultIconMap;
 
 	public BasicRoleMappingRegistry(){
 		roleMappingsMap = new LinkedHashMap<String, Map<String, Mapping>>();
 		postProcessorMap = new LinkedHashMap<String, Map<Mapping,IRefactoringPostProcessor>>();
+		iconMap = new LinkedHashMap<Mapping, ImageDescriptor>();
+		defaultIconMap = new LinkedHashMap<Mapping, ImageDescriptor>();
 		collectRegisteredRoleMappings();
 		collectRegisteredPostProcessors();
 	}
@@ -34,12 +46,55 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	}
 
 	private void collectRegisteredRoleMappings(){
-		List<RoleMappingModel> models = RegistryUtil.collectRegisteredResources(IRoleMappingExtensionPoint.ID
+		Map<RoleMappingModel, IConfigurationElement> models = RegistryUtil.collectRegisteredResources(IRoleMappingExtensionPoint.ID
 				, IRoleMappingExtensionPoint.RESOURCE_ATTRIBUTE
 				, RoleMappingModel.class);
-		for (RoleMappingModel roleMapping : models) {
-			registerRoleMapping(roleMapping);
+		for (RoleMappingModel roleMapping : models.keySet()) {
+			registerRoleMapping(roleMapping, models.get(roleMapping));
 		}
+	}
+
+	private void registerRoleMapping(RoleMappingModel roleMapping, IConfigurationElement config) {
+		try {
+			registerRoleMapping(roleMapping);
+			String defaultIconString = config.getAttribute(IRoleMappingExtensionPoint.DEFAULT_ICON_ATTRIBUTE);
+			if(defaultIconString == null){
+				return;
+			}
+			String plugin = config.getContributor().getName();
+			
+			ImageData imageData = getImageData(defaultIconString, plugin);
+			
+			ImageDescriptor defaultImage = ImageDescriptor.createFromImageData(imageData);
+			for (Mapping mapping : roleMapping.getMappings()) {
+				IConfigurationElement[] children = config.getChildren();
+				for (IConfigurationElement element : children) {
+					if(element.getName().equals(IRoleMappingExtensionPoint.SUB_MAPPING_ICON_ID)){
+						String mappingName = element.getAttribute(IRoleMappingExtensionPoint.SUB_MAPPING_NAME);
+						String mappingIcon = element.getAttribute(IRoleMappingExtensionPoint.SUB_ICON_RESOURCE);
+						System.out.println("found icon " + mappingIcon + " for mapping " + mappingName);
+					}
+				}
+			}
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private ImageData getImageData(String defaultIconString, String plugin) throws URISyntaxException, MalformedURLException, IOException {
+		// TODO uncomment and bugfix
+		//		URI uri = URI.createPlatformPluginURI("/" + plugin + "/" + defaultIconString, true);
+//		java.net.URI normalUri = new java.net.URI(uri.toPlatformString(true));
+//		URL imageUrl = normalUri.toURL();
+//		InputStream stream = imageUrl.openStream();
+//		ImageData imageData = new ImageData(stream);
+//		stream.close();
+//		return imageData;
+		return null;
 	}
 
 	private void collectRegisteredPostProcessors(){
@@ -84,10 +139,15 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				RegistryUtil.log("A mapping '" + mappingName + "' already exists in the registry for metamodel " + nsUri, IStatus.WARNING);
 			} else {
 				registered.put(mappingName, mappingsToRegister.get(mappingName));
+				registerIconForMapping(mappingsToRegister.get(mappingName));
 			}
 		}
 		EPackage rootPackage = roleMapping.getTargetMetamodel();
 		registerSubPackages(rootPackage, registered);
+	}
+
+	private void registerIconForMapping(Mapping mapping) {
+		//		RegistryUtil.
 	}
 
 	private void registerSubPackages(EPackage rootPackage, Map<String, Mapping> mappings){
@@ -142,5 +202,13 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			return null;
 		}
 		return map.get(mapping);
+	}
+
+	public ImageDescriptor getImageForMapping(Mapping mapping) {
+		ImageDescriptor image = iconMap.get(mapping);
+		if(image == null){
+			image = defaultIconMap.get(mapping);
+		}
+		return image;
 	}
 }
