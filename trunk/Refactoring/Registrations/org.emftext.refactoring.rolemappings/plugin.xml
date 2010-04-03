@@ -4,7 +4,12 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
+            defaultIcon="icons/defaultTest.png"
             rolemapping_resource="rolemappings/pl0mapping.rolemapping">
+         <mappingIcon
+               icon="icons/test.png"
+               mapping_name="ExtractProcedure">
+         </mappingIcon>
       </rolemapping>
       <rolemapping
             rolemapping_resource="rolemappings/java.rolemapping">
