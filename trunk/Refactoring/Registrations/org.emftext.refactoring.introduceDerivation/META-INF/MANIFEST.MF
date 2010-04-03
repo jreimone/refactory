@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Introduce Derivation Plugin
+Bundle-SymbolicName: org.emftext.refactoring.introduceDerivation;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemodel,
+ org.emftext.refactoring.registry.refactoringspecification
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
