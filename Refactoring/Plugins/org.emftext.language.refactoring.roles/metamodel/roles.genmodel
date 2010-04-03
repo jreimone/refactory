@@ -26,6 +26,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Relation/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Relation/target"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Relation/modifier"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference roles.ecore#//Relation/interpretationContext"/>
     </genClasses>
     <genClasses ecoreClass="roles.ecore#//Role">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/outgoing"/>

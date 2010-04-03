@@ -14,6 +14,8 @@
         eType="#//Role" eOpposite="#//Role/incoming"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifier" unique="false"
         upperBound="-1" eType="#//RelationModifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationContext"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
