@@ -92,6 +92,7 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 			if(feature instanceof MultiplicityRelation){
 				MultiplicityRelation multRelation = (MultiplicityRelation) feature;
 				if(multRelation.getTargetName() != null && multRelation.getTargetName().equals(featureString)){
+					((MultiplicityRelation) feature).setInterpretationContext(interpretationContext);
 					result.addMapping(identifier, (FeatureType) feature);
 					return;
 				}
