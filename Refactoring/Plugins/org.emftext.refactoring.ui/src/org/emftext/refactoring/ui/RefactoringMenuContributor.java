@@ -40,6 +40,7 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.util.StringUtil;
 
 public class RefactoringMenuContributor extends ExtensionContributionFactory {
@@ -162,6 +163,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider, diagramTransactionalEditingDomain, activeEditor);
 						}
 						refactoringAction.setText(refactoringName);
+						refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));
 						rootMenu.add(refactoringAction);
 						containsEntries = true;
 					}
