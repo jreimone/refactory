@@ -27,7 +27,7 @@ public abstract class AbstractPathCreator {
 		return createPath(parent, remainingReferences, child, null);
 	}
 
-	abstract protected void onePairLeftUnaryReference(EObject targetParent, Object children, ReferenceMetaClassPair referencePair);
+	abstract protected IRefactoringStatus onePairLeftUnaryReference(EObject targetParent, Object children, ReferenceMetaClassPair referencePair);
 
 	abstract protected IRefactoringStatus onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature);
 
@@ -69,9 +69,9 @@ public abstract class AbstractPathCreator {
 					}
 				} else {
 					if(child != null && referencePair.getReference() != null){
-						onePairLeftUnaryReference(parent, child, referencePair);
+						return onePairLeftUnaryReference(parent, child, referencePair);
 					}
-					return new RefactoringStatus(IRefactoringStatus.OK);
+					return new RefactoringStatus(IRefactoringStatus.ERROR);
 				}
 			} catch (Exception e) {
 				String message = "Couldn't set feature " + child + " for " + parent;

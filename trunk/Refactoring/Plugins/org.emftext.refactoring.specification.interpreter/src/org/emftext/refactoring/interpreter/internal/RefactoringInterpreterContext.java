@@ -5,6 +5,7 @@ package org.emftext.refactoring.interpreter.internal;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,12 +33,14 @@ import org.emftext.refactoring.util.RoleUtil;
 public class RefactoringInterpreterContext {
 
 	private Map<Variable, EObject> varInstanceMap;
+	private Map<Variable, List<EObject>> varInstancesMap;
 	private Map<IndexVariable, Integer> varIndexMap;
 	private Mapping mapping;
 
 	public RefactoringInterpreterContext(){
 		varInstanceMap = new LinkedHashMap<Variable, EObject>();
 		varIndexMap = new LinkedHashMap<IndexVariable, Integer>();
+		varInstancesMap = new LinkedHashMap<Variable, List<EObject>>();
 	}
 
 	protected void setInitialContext(Mapping mapping){
@@ -69,6 +72,24 @@ public class RefactoringInterpreterContext {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Stores the given <code>objects</code> for the <code>variable</code> in the context.
+	 * 
+	 * @param variable
+	 * @param objects
+	 */
+	public void addEObjectsForVariable(Variable variable, List<EObject> objects){
+		if(objects.size() == 1){
+			addEObjectForVariable(variable, objects.get(0));
+		} else {
+			varInstancesMap.put(variable, objects);
+		}
+	}
+	
+	public List<EObject> getEObjectsForVariable(Variable var){
+		return varInstancesMap.get(var);
 	}
 	
 	/**
@@ -127,5 +148,20 @@ public class RefactoringInterpreterContext {
 	 */
 	public EObject getEObjectForVariable(Variable variable){
 		return varInstanceMap.get(variable);
+	}
+	
+	/**
+	 * Returns whether an {@link EObject} which was registered with the given <code>var</code> or 
+	 * a list of {@link EObject}s if several elements where registered with <code>var</code>.
+	 * 
+	 * @param var
+	 * @return
+	 */
+	public Object getObjectForVariable(Variable var){
+		EObject single = getEObjectForVariable(var);
+		if(single != null){
+			return single;
+		}
+		return getEObjectsForVariable(var);
 	}
 }
