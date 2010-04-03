@@ -1,7 +1,7 @@
 package org.emftext.refactoring.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,12 +26,12 @@ public class RegistryUtil {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T extends EObject> List<T> collectRegisteredResources(String extensionPoint, String attribute, Class<T> expectedModel){
+	public static <T extends EObject> Map<T, IConfigurationElement> collectRegisteredResources(String extensionPoint, String attribute, Class<T> expectedModel){
 		ResourceSet rs = new ResourceSetImpl();
-		List<T> resources = new ArrayList<T>();
+		Map<T, IConfigurationElement> map = new LinkedHashMap<T, IConfigurationElement>();
 		IConfigurationElement[] elements = collectConfigurationElements(extensionPoint);
 		if(elements == null){
-			return resources;
+			return map;
 		}
 		for (IConfigurationElement element : elements) {
 			String value = element.getAttribute(attribute);
@@ -50,13 +50,13 @@ public class RegistryUtil {
 			}
 			EObject model = resource.getContents().get(0);
 			if(expectedModel.isInstance(model)){
-				resources.add((T) model);
+				map.put((T) model, element);
 			} else {
 				log(String.format("The resource with URI '%1$s' doesn't contain a %2$s", uri.toString(), expectedModel.getClass().getSimpleName())
 						, IStatus.ERROR);
 			}
 		}
-		return resources;
+		return map;
 	}
 	
 	public static void log(String message, int status, Exception e){
