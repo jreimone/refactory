@@ -19,12 +19,14 @@ class RefactoringRecordingCommand extends RecordingCommand{
 	private Exception exception;
 	private IEditorPart activeEditor;
 	private IRefactoringStatus status;
+	private String label;
 	
-	public RefactoringRecordingCommand(TransactionalEditingDomain domain, IRefactorer refactorer, Mapping mapping, IEditorPart activeEditor) {
+	public RefactoringRecordingCommand(TransactionalEditingDomain domain, IRefactorer refactorer, Mapping mapping, IEditorPart activeEditor, String label) {
 		super(domain);
 		this.refactorer = refactorer;
 		this.mapping = mapping;
 		this.activeEditor = activeEditor;
+		this.label = label;
 	}
 
 	@Override
@@ -54,5 +56,13 @@ class RefactoringRecordingCommand extends RecordingCommand{
 	 */
 	public IRefactoringStatus getStatus() {
 		return status;
+	}
+
+	@Override
+	public String getLabel() {
+		if(label != null && !"".equals(label)){
+			return label;
+		}
+		return super.getLabel();
 	}
 }

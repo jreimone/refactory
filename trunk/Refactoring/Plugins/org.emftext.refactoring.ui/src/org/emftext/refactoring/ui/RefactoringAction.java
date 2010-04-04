@@ -1,30 +1,27 @@
 package org.emftext.refactoring.ui;
 
 
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.commands.operations.IOperationHistory;
+import org.eclipse.core.commands.operations.IUndoableOperation;
+import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
-import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.Activator;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
-import org.emftext.refactoring.util.RegistryUtil;
 
 /**
  * This action can be registered to the context menus of editors
@@ -73,8 +70,12 @@ public class RefactoringAction extends Action {
 				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
 			}	
 			CommandStack stack = domain.getCommandStack();
-			command = new RefactoringRecordingCommand(domain, refactorer, mapping, activeEditor);
+			command = new RefactoringRecordingCommand(domain, refactorer, mapping, activeEditor, getText());
 			stack.execute(command);
+			IUndoableOperation operation = new RefactoringUndoOperation(command);
+			IOperationHistory history = PlatformUI.getWorkbench().getOperationSupport().getOperationHistory();
+			history.add(operation);
+			
 			IRefactoringStatus status = command.getStatus();
 			statusSwitch(command, status);
 		} catch (Exception e) {
