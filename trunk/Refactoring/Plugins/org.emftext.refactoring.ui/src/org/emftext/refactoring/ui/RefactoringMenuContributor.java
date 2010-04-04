@@ -15,8 +15,10 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -43,7 +45,7 @@ import org.emftext.refactoring.util.StringUtil;
 
 public class RefactoringMenuContributor extends ExtensionContributionFactory {
 
-	private static final String CONTEXT_MENU_ENTRY_TEXT 	= "EMF Refactor";
+	private static final String CONTEXT_MENU_ENTRY_TEXT 	= "Refactor";
 	private static final String CONTEXT_MENU_ENTRY_ID 		= "org.emftext.refactoring.menu";
 
 	public RefactoringMenuContributor() {
@@ -153,7 +155,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						if(diagramEditingDomain == null){
 							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider);
 						} else {
-							//							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider, diagramEditingDomain, activeEditor);
 							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider, diagramTransactionalEditingDomain, activeEditor);
 						}
 						refactoringAction.setText(refactoringName);
