@@ -36,6 +36,7 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
@@ -57,15 +58,21 @@ public class ObjectAssignmentInterpreter {
 	private Object roleRuntimeValue;
 
 	private IRefactoringStatus status;
+	
+	private IRefactoringInterpreter interpreter;
+	
+	private ObjectAssignmentCommand command;
 
-	public ObjectAssignmentInterpreter(Mapping mapping) {
+	public ObjectAssignmentInterpreter(IRefactoringInterpreter interpreter, Mapping mapping) {
 		super();
 		this.mapping = mapping;
+		this.interpreter = interpreter;
 	}
 
 	public IRefactoringStatus interpreteObjectAssignmentCommand(ObjectAssignmentCommand object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
 		this.selection = selection;
 		this.context = context;
+		this.command = object;
 
 		Variable objectVar = object.getDeclaration().getVariable();
 		EObject value = null;
@@ -168,8 +175,13 @@ public class ObjectAssignmentInterpreter {
 		if(values.size() == 1){
 			return values.get(0);
 		}
-		IValueProvider<List<EObject>, EObject> valueProvider = new DialogOneListElementProvider(sourceObject, mapping);
-		EObject value = valueProvider.provideValue(values);
+		@SuppressWarnings("unchecked")
+		IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
+		if(valueProvider == null){
+			valueProvider = new DialogOneListElementProvider(mapping);
+			interpreter.registerValueProviderForCommand(command, valueProvider);
+		}
+		EObject value = valueProvider.provideValue(interpreter, values);
 		if(valueProvider.getReturnCode() == Dialog.CANCEL){
 			status = new RefactoringStatus(IRefactoringStatus.CANCEL);
 		}

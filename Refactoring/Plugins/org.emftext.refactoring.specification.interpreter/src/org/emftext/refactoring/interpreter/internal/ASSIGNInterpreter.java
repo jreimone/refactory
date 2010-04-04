@@ -25,6 +25,8 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
+import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
+import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
@@ -52,12 +54,18 @@ public class ASSIGNInterpreter {
 
 	private AdapterFactoryLabelProvider labelProvider;
 
-	public ASSIGNInterpreter(Mapping mapping) {
+	private IRefactoringInterpreter interpreter;
+	
+	private ASSIGN assign;
+
+	public ASSIGNInterpreter(Mapping mapping, IRefactoringInterpreter interpreter) {
 		this.mapping = mapping;
 		this.valueProvider = new DialogAttributeValueProvider(mapping);
+		this.interpreter = interpreter;
 	}
 
 	public IRefactoringStatus interpreteASSIGN(ASSIGN object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
+		this.assign = object;
 		this.context = context;
 		this.selection = selection;
 		RoleAttribute source = object.getSourceAttribute();
@@ -141,7 +149,14 @@ public class ASSIGNInterpreter {
 				return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 			}
 		}
-		Object value = getValueProvider().provideValue(classAttribute);
+		
+		@SuppressWarnings("unchecked")
+		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderForCommand(assign);
+		if(valueProvider == null){
+			valueProvider = getValueProvider();
+			interpreter.registerValueProviderForCommand(assign, valueProvider);
+		}
+		Object value = valueProvider.provideValue(interpreter, classAttribute, targetObject);
 		if(getValueProvider().getReturnCode() == Dialog.CANCEL){
 			return new RefactoringStatus(IRefactoringStatus.CANCEL);
 		}
@@ -151,11 +166,14 @@ public class ASSIGNInterpreter {
 	}
 
 	private List<Resource> getReferer(EObject referenceTarget){
-		List<Resource> referers = IndexConnectorRegistry.INSTANCE.getReferencingResources(referenceTarget);
-		if(referers == null || referers.size() == 0){
-			return null;
+		if(!(interpreter instanceof IRefactoringFakeInterpreter)){
+			List<Resource> referers = IndexConnectorRegistry.INSTANCE.getReferencingResources(referenceTarget);
+			if(referers == null || referers.size() == 0){
+				return null;
+			}
+			return referers;
 		}
-		return referers;
+		return null;
 	}
 
 	/**

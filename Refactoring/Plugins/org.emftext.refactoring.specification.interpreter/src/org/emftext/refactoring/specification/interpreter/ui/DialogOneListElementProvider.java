@@ -3,10 +3,13 @@
  */
 package org.emftext.refactoring.specification.interpreter.ui;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
@@ -18,6 +21,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
+import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.util.StringUtil;
 
@@ -29,23 +34,34 @@ import org.emftext.refactoring.util.StringUtil;
  */
 public class DialogOneListElementProvider implements IValueProvider<List<EObject>, EObject> {
 
-	private EObject owner;
 	private Mapping mapping;
 	private int returnCode;
+	private IRefactoringFakeInterpreter fakeInterpreter;
+	private EObject value;
+	private List<EObject> fakeElements;
+	private List<EObject> realElements;
+	private List<EObject> elements;
 
-	public DialogOneListElementProvider(EObject owner, Mapping mapping){
-		this.owner = owner;
+
+	public DialogOneListElementProvider(Mapping mapping){
 		this.mapping = mapping;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider#provideValue(java.util.List)
-	 */
-	public EObject provideValue(List<EObject> elements) {
+	public void provideValue(Map<EObject, EObject> inverseCopier){
+		realElements = new LinkedList<EObject>();
+		for (EObject fakeElement : fakeElements) {
+			realElements.add(inverseCopier.get(fakeElement));
+		}
+		elements = realElements;
+		EObject selectedElement = openDialog();
+		value = selectedElement;
+	}
+
+	private EObject openDialog() {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		FilteredEObjectsSelectionDialog dialog = new FilteredEObjectsSelectionDialog(shell, elements, mapping);
 		ILabelProvider provider = new LabelProvider() {
-			
+
 			@Override
 			public Image getImage(Object object) {
 				EObject element = (EObject) object;
@@ -83,10 +99,30 @@ public class DialogOneListElementProvider implements IValueProvider<List<EObject
 		dialog.setInitialPattern("**");
 		returnCode = dialog.open();
 		if(returnCode == FilteredItemsSelectionDialog.CANCEL) {
-			return null;
+			value = null;
 		}
 		EObject selectedElement = (EObject) dialog.getFirstResult();
 		return selectedElement;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider#provideValue(java.util.List)
+	 */
+	public EObject provideValue(IRefactoringInterpreter interpreter, List<EObject> elements, Object... context) {
+		if(interpreter instanceof IRefactoringFakeInterpreter){
+			fakeInterpreter = (IRefactoringFakeInterpreter) interpreter;
+			fakeInterpreter.addValueProvider(this);
+			this.elements = elements;
+			this.fakeElements = elements;
+			return elements.get(0);
+		} else {
+			if(value != null){
+				return value;
+			} else {
+				this.elements = elements;
+				return openDialog();
+			}
+		}
 	}
 
 	/* (non-Javadoc)
@@ -94,6 +130,10 @@ public class DialogOneListElementProvider implements IValueProvider<List<EObject
 	 */
 	public int getReturnCode() {
 		return returnCode;
+	}
+
+	public Object getFakeObject() {
+		return fakeElements;
 	}
 
 }

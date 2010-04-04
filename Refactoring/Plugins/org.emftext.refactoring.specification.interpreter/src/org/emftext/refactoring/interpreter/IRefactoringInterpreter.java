@@ -20,7 +20,7 @@ import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
  * @author Jan Reimann
  *
  */
-public interface IRefactoringInterpreter {
+public interface IRefactoringInterpreter extends Cloneable{
 
 	/**
 	 * Initializes a concrete RefactoringInterpreter with a {@link RefactoringSpecification} 
@@ -32,7 +32,19 @@ public interface IRefactoringInterpreter {
 	 * @param model the model being refactored
 	 * @param mapping 
 	 */
-	public void initialize(RefactoringSpecification refSpec, EObject model, Mapping mapping);
+	public void initialize(RefactoringSpecification refSpec, Mapping mapping);
+	
+	/**
+	 * This method returns the {@link RefactoringSpecification} with which this interpreter has been initialized
+	 * @return
+	 */
+	public RefactoringSpecification getRefactoringSpecification();
+	
+	/**
+	 * Returns the mapping with which this interpreter has been initialized
+	 * @return
+	 */
+	public Mapping getMapping();
 	
 	/**
 	 * Invokes the refactoring process on the model and with the steps determined in {@link IRefactoringInterpreter#initialize(RefactoringSpecification, EObject)}.
@@ -40,7 +52,15 @@ public interface IRefactoringInterpreter {
 	 * @param copy flag to decide whether the refactoring should be invoked on a copy of the model
 	 * @return returns the refactored model or <code>null</code> if {@link IRefactoringInterpreter#setMapping(Mapping)} wasn't invoked before
 	 */
-	public EObject interprete(boolean copy);
+	public EObject interprete(EObject model);
+	
+	/**
+	 * This method should return a copy of this interpreter for a fake run. It then can be used to collect all
+	 * required inputs. For this reason this interface extends {@link Cloneable}.
+	 * 
+	 * @return
+	 */
+	public IRefactoringFakeInterpreter getFakeInterpreter();
 	
 	/**
 	 * Sets the the current selection, for which the appropriate interpreter is to be run, as input.
@@ -81,4 +101,19 @@ public interface IRefactoringInterpreter {
 	 * @return
 	 */
 	public IRefactoringStatus getStatus();
+	
+	/**
+	 * Returns the value provider for the given instruction. This method is needed that the interpreter and its
+	 * fake interpreter can share the same value provider
+	 * 
+	 * @param command
+	 * @return
+	 */
+	public IValueProvider<?, ?> getValueProviderForCommand(EObject command);
+	
+	/**
+	 * With this method a value provider will be registered to the given instruction.
+	 * @param command
+	 */
+	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider);
 }
