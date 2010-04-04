@@ -137,8 +137,9 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	 */
 	@Override
 	protected IStatus validateItem(Object item) {
-		IStatus status = new Status(IStatus.OK, "org.emftext.refactoring.specification.interpreter", "");
-		return status;
+		return Status.OK_STATUS;
+//		IStatus status = new Status(IStatus.OK, "org.emftext.refactoring.specification.interpreter", "");
+//		return status;
 	}
 
 }

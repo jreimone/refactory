@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.Context;
@@ -38,8 +37,10 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.language.refactoring.specification.resource.util.AbstractRefspecInterpreter;
+import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -55,7 +56,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 
 	private RefactoringSpecification refSpec;
 	private EObject model;
-	private EObject originalModel;
+//	private EObject originalModel;
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
 //	private RoleMappingModel roleMapping;
@@ -75,11 +76,16 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	private Boolean occuredErrors = false;
 	
 	private IRefactoringStatus status;
-
+	
+	private IRefactoringFakeInterpreter fakeInterpreter;
+	
+	private Map<EObject, IValueProvider<?, ?>> valueProviderMap;
+	
 	public RefactoringInterpreter(IRefactoringPostProcessor postProcessor){
 		this.postProcessor = postProcessor;
 		roleRuntimeInstanceMap = new LinkedHashMap<Role, Object>();
 		resourcesToSave = new LinkedList<Resource>();
+		valueProviderMap = new LinkedHashMap<EObject, IValueProvider<?,?>>();
 	}
 	
 	@Override
@@ -174,34 +180,27 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#initialize(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, org.eclipse.emf.ecore.EObject)
 	 */
-	public void initialize(RefactoringSpecification refSpec, EObject model, Mapping mapping) {
+	public void initialize(RefactoringSpecification refSpec, Mapping mapping) {
 		this.refSpec = refSpec;
-		this.model = model;
-		this.originalModel = model;
+//		this.model = model;
+//		this.originalModel = model;
 		this.mapping = mapping;
 	}
 
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#interprete()
 	 */
-	public EObject interprete(boolean copy) {
+	public EObject interprete(EObject model) {
+		this.model = model;
 		context = new RefactoringInterpreterContext();
 		
 		create = new CREATEInterpreter(mapping);
 		set = new SETInterpreter(mapping);
 		move = new MOVEInterpreter(mapping);
-		assign = new ASSIGNInterpreter(mapping);
+		assign = new ASSIGNInterpreter(mapping, this);
 		indexInterpreter = new IndexAssignmentInterpreter();
-		objectInterpreter = new ObjectAssignmentInterpreter(mapping);
-		
-		EObject initialModel = model;
-		if(copy){
-			Copier copier = new Copier();
-			// must be done so because refactorings always will be performed on the initial model
-			// because the selection referres to the initial model 
-			originalModel = copier.copy(model);
-		}
-		model = initialModel;
+		objectInterpreter = new ObjectAssignmentInterpreter(this, mapping);
+	
 		context.setInitialContext(mapping);
 		initInterpretationStack();
 		
@@ -328,10 +327,6 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return model;
 	}
 
-	public EObject getOriginalModel() {
-		return originalModel;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#occuredErrors()
 	 */
@@ -370,5 +365,47 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	 */
 	public IRefactoringStatus getStatus() {
 		return status;
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		RefactoringInterpreter clone = new RefactoringInterpreter(postProcessor);
+		clone.initialize(refSpec, mapping);
+		return clone;
+	}
+
+	public IRefactoringFakeInterpreter getFakeInterpreter() {
+		try {
+			if(fakeInterpreter == null){
+				fakeInterpreter = new RefactoringFakeInterpreter((IRefactoringInterpreter) this.clone());
+			}
+			return fakeInterpreter;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Mapping getMapping() {
+		return mapping;
+	}
+
+	public RefactoringSpecification getRefactoringSpecification() {
+		return refSpec;
+	}
+
+	public IValueProvider<?, ?> getValueProviderForCommand(EObject command) {
+		IValueProvider<?, ?> valueProvider = null;
+		if(fakeInterpreter != null){
+			valueProvider = fakeInterpreter.getValueProviderForCommand(command);
+		}
+		if(valueProvider == null){
+			return valueProviderMap.get(command);
+		}
+		return valueProvider;
+	}
+
+	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
+		valueProviderMap.put(command, valueProvider);
 	}
 }
