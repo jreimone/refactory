@@ -25,11 +25,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
-import org.eclipse.ui.IWorkbenchSite;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
-import org.eclipse.ui.part.PageSite;
 import org.eclipse.ui.services.IServiceLocator;
 import org.emftext.access.EMFTextAccessProxy;
 import org.emftext.access.resource.IEditor;
@@ -62,10 +60,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		}
 		IWorkbenchPartSite partSite = activePart.getSite();
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//		if(!activePart.equals(activeEditor)){
-//			System.out.println("Workbenchpart '" + activePart.getTitle() + "' is not the active editor");
-//			return;
-//		}
 		ISelectionProvider selectionProvider = partSite.getSelectionProvider();
 		if(selectionProvider == null){
 			System.out.println(activePart + " doesn't provide selections -> no context menu");
