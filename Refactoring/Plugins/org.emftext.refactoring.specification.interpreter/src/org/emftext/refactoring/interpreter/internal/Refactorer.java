@@ -13,7 +13,6 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
@@ -54,6 +53,11 @@ public class Refactorer implements IRefactorer {
 	private List<Resource> resourcesToSave;
 	private Resource resource;
 	private IRefactoringStatus status;
+	private Mapping currentMapping;
+	private IRefactoringInterpreter currentInterpreter;
+	private List<? extends EObject> currentFilteredSelection;
+	private ResourceSet currentModelResourceSet;
+	private EObject fakeRefactoredModel;
 
 	public Refactorer(Resource resource, Map<String, Mapping> roleMappings){
 		this.resource = resource;
@@ -94,128 +98,160 @@ public class Refactorer implements IRefactorer {
 		}
 		return refSpecs;
 	}
+	
+	public IRefactoringFakeInterpreter fakeRefactor(Mapping mapping){
+		if(mapping == null){
+			currentMapping = null;
+			return null;
+		}
+		currentMapping = mapping;
+		currentFilteredSelection = filterSelectedElements(mapping);
+		currentInterpreter = interpreterMap.get(mapping);
+
+		if(currentInterpreter != null && currentFilteredSelection.size() > 0){
+			List<Resource> allReferencingResources = IndexConnectorRegistry.INSTANCE.getReferencingResources(model);
+			currentModelResourceSet = getResource().getResourceSet();
+			for (Resource resource : allReferencingResources) {
+				URI uri = resource.getURI();
+				currentModelResourceSet.getResource(uri, true);
+			}
+			// can be used for displaying a comparison with 'model'
+			return fakeInterpreteAndPreCollectValues(currentFilteredSelection, currentInterpreter, currentModelResourceSet);
+		} else {
+			return null;
+		}
+	}
+	
+	public EObject getFakeRefactoredModel(){
+		return fakeRefactoredModel;
+	}
 
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactorer#refactor(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, boolean)
 	 */
-	public EObject refactor(Mapping mapping, boolean copy){
-		if(mapping == null){
+	public EObject refactor(){
+		if(currentMapping == null 
+				|| currentInterpreter == null 
+				|| currentFilteredSelection.size() == 0 
+				|| currentModelResourceSet == null){
 			return null;
 		}
-		List<? extends EObject> filteredElements = filterSelectedElements(mapping);
-		IRefactoringInterpreter interpreter = interpreterMap.get(mapping);
-
-		EObject refactoredModel = null;
-		if(interpreter != null){
-			List<Resource> allReferencingResources = IndexConnectorRegistry.INSTANCE.getReferencingResources(model);
-			ResourceSet refactoredModelRS = getResource().getResourceSet();
-			for (Resource resource : allReferencingResources) {
-				URI uri = resource.getURI();
-				refactoredModelRS.getResource(uri, true);
-			}
-
-			// copy init start
-			Copier copier = new Copier(false, false);
-			List<EObject> originalElements = new LinkedList<EObject>();
-			// copy start
-			for (Resource resource : refactoredModelRS.getResources()) {
-				URI uri = resource.getURI();
-				if(uri.isPlatformResource()){
-					for (EObject model : resource.getContents()) {
-						originalElements.add(model);
-					}
-				}
-			}
-			Collection<EObject> copiedElements = copier.copyAll(originalElements);
-			copier.copyReferences();
-			List<EObject> copiedInputSelection = new LinkedList<EObject>();
-			for (EObject eObject : filteredElements) {
-				copiedInputSelection.add(copier.get(eObject));
-			}
-			EObject copiedModel = copier.get(model);
-			interpreter.setInput(copiedInputSelection);
-			IRefactoringFakeInterpreter fakeInterpreter = interpreter.getFakeInterpreter();
-			fakeInterpreter.setInput(copiedInputSelection);
-			try {
-				// this model then can be used for compare view before refactoring
-				EObject copiedRefactoredModel = fakeInterpreter.interprete(copiedModel);
-			} catch (Exception e) {
-				System.out.println("fake interpreter threw exception");
-			}
-			// copy end
-			List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValuesToProvide();
-			Map<EObject, EObject> inverseCopier = new LinkedHashMap<EObject, EObject>();
-			for (EObject originalObject : copier.keySet()) {
-				inverseCopier.put(copier.get(originalObject), originalObject);
-			}
-			List<IValueProvider<?, ?>> provideableValues = new LinkedList<IValueProvider<?,?>>();
-			for (IValueProvider<?, ?> valueProvider : valueProviders) {
-				// check if value can be provided before Refactoring
-				Object fakeObject = valueProvider.getFakeObject();
-				//				if(fakeGenericObject.length == 1){
-				//					Object fakeObject = fakeGenericObject[0];
-				if(fakeObject instanceof EStructuralFeature){
-					provideableValues.add(valueProvider);
-				} else if(fakeObject instanceof EObject){
-					EObject realObject = inverseCopier.get(fakeObject);
-					if(realObject != null){
-						provideableValues.add(valueProvider);
-					}
-				} else if(fakeObject instanceof List<?>){
-					@SuppressWarnings("unchecked")
-					List<EObject> fakeObjects = (List<EObject>) fakeObject;
-					boolean provideable = true;
-					for (EObject object : fakeObjects) {
-						EObject realObject = inverseCopier.get(object);
-						if(realObject == null){
-							provideable = false;
-							break;
-						}
-					}
-					if(provideable){
-						provideableValues.add(valueProvider);
-					}
-				}
-				//				} 
-				//				else if(fakeGenericObject.length == 2){
-				//					if(fakeGenericObject[1] instanceof EStructuralFeature){
-				//						EObject owner = (EObject) fakeGenericObject[0];
-				//						EStructuralFeature feature = (EStructuralFeature) fakeGenericObject[1];
-				//						EObject realOwner = copier.get(owner);
-				//						EStructuralFeature realAttribute = realOwner.eClass().getEStructuralFeature(feature.getName());
-				//						if(realAttribute != null){
-				//							provideableValues.add(valueProvider);
-				//						}
-				//					}
-				//				}
-			}
-			for (IValueProvider<?, ?> valueProvider : provideableValues) {
-				valueProvider.provideValue(inverseCopier);
-				System.out.println("value " + valueProvider.getFakeObject() + " provided before refactoring");
-			}
-
-			interpreter.setInput(filteredElements);
-			ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
-			refactoredModel = interpreter.interprete(model);
-			status = interpreter.getStatus();
-			if(status.getSeverity() != IRefactoringStatus.OK){
-				return refactoredModel;
-			}
-			ChangeDescription change = recorder.summarize();
-			occuredErrors = interpreter.didErrorsOccur();
-			if(!occuredErrors){
-				IRefactoringPostProcessor postProcessor = interpreter.getPostProcessor();
-				if(postProcessor != null){
-					IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModelRS, change);
-					if(postProcessingStatus.getSeverity() != IRefactoringStatus.OK){
-						int severity = postProcessingStatus.getSeverity();
-						status = new RefactoringStatus(mapping, severity, postProcessingStatus.getMessage());
-					}
-				}
-			}
-			resourcesToSave = interpreter.getResourcesToSave();
-		}
+		EObject refactoredModel = realInterprete(currentMapping, currentFilteredSelection, currentInterpreter, currentModelResourceSet);
 		return refactoredModel;
+	}
+
+	/**
+	 * @param mapping
+	 * @param filteredElements
+	 * @param interpreter
+	 * @param refactoredModelRS
+	 * @return
+	 */
+	private EObject realInterprete(Mapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
+		EObject refactoredModel;
+		interpreter.setInput(filteredElements);
+		ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
+		refactoredModel = interpreter.interprete(model);
+		status = interpreter.getStatus();
+		if(status.getSeverity() != IRefactoringStatus.OK){
+			return refactoredModel;
+		}
+		ChangeDescription change = recorder.summarize();
+		occuredErrors = interpreter.didErrorsOccur();
+		if(!occuredErrors){
+			IRefactoringPostProcessor postProcessor = interpreter.getPostProcessor();
+			if(postProcessor != null){
+				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModelRS, change);
+				if(postProcessingStatus.getSeverity() != IRefactoringStatus.OK){
+					int severity = postProcessingStatus.getSeverity();
+					status = new RefactoringStatus(mapping, severity, postProcessingStatus.getMessage());
+				}
+			}
+		}
+		resourcesToSave = interpreter.getResourcesToSave();
+		return refactoredModel;
+	}
+
+	/**
+	 * @param filteredElements
+	 * @param interpreter
+	 * @param refactoredModelRS
+	 */
+	private IRefactoringFakeInterpreter fakeInterpreteAndPreCollectValues(List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
+		// TODO integrate and invoke post processor here, too, and pass value provider to it
+		// copy init start
+		Copier copier = new Copier(false, false);
+		List<EObject> originalElements = new LinkedList<EObject>();
+		// copy start
+		for (Resource resource : refactoredModelRS.getResources()) {
+			URI uri = resource.getURI();
+			if(uri.isPlatformResource()){
+				for (EObject model : resource.getContents()) {
+					originalElements.add(model);
+				}
+			}
+		}
+		Collection<EObject> copiedElements = copier.copyAll(originalElements);
+		copier.copyReferences();
+		List<EObject> copiedInputSelection = new LinkedList<EObject>();
+		for (EObject eObject : filteredElements) {
+			copiedInputSelection.add(copier.get(eObject));
+		}
+		EObject copiedModel = copier.get(model);
+		interpreter.setInput(copiedInputSelection);
+		IRefactoringFakeInterpreter fakeInterpreter = interpreter.getFakeInterpreter();
+		fakeInterpreter.setInput(copiedInputSelection);
+		EObject copiedRefactoredModel = null;
+		try {
+			// this model then can be used for compare view before refactoring
+			copiedRefactoredModel = fakeInterpreter.interprete(copiedModel);
+		} catch (Exception e) {
+			System.out.println("fake interpreter threw exception");
+			return null;
+		}
+		// copy end
+		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValuesToProvide();
+		Map<EObject, EObject> inverseCopier = new LinkedHashMap<EObject, EObject>();
+		for (EObject originalObject : copier.keySet()) {
+			inverseCopier.put(copier.get(originalObject), originalObject);
+		}
+		List<IValueProvider<?, ?>> provideableValues = new LinkedList<IValueProvider<?,?>>();
+		for (IValueProvider<?, ?> valueProvider : valueProviders) {
+			// check if value can be provided before Refactoring
+			Object fakeObject = valueProvider.getFakeObject();
+			if(fakeObject instanceof EStructuralFeature){
+				provideableValues.add(valueProvider);
+			} else if(fakeObject instanceof EObject){
+				EObject realObject = inverseCopier.get(fakeObject);
+				if(realObject != null){
+					provideableValues.add(valueProvider);
+				}
+			} else if(fakeObject instanceof List<?>){
+				@SuppressWarnings("unchecked")
+				List<EObject> fakeObjects = (List<EObject>) fakeObject;
+				boolean provideable = true;
+				for (EObject object : fakeObjects) {
+					EObject realObject = inverseCopier.get(object);
+					if(realObject == null){
+						provideable = false;
+						break;
+					}
+				}
+				if(provideable){
+					provideableValues.add(valueProvider);
+				}
+			}
+		}
+		if(copiedRefactoredModel != null){
+			fakeRefactoredModel = copiedRefactoredModel;
+		} else {
+			fakeRefactoredModel = null;
+		}
+		fakeInterpreter.setProvideableValues(provideableValues);
+		for (IValueProvider<?, ?> valueProvider : provideableValues) {
+			valueProvider.setCopier(copier);
+		}
+		return fakeInterpreter;
 	}
 
 	private List<? extends EObject> filterSelectedElements(Mapping mapping) {
@@ -299,5 +335,9 @@ public class Refactorer implements IRefactorer {
 	 */
 	public IRefactoringStatus getStatus() {
 		return status;
+	}
+
+	public EObject getOriginalModel() {
+		return model;
 	}
 }
