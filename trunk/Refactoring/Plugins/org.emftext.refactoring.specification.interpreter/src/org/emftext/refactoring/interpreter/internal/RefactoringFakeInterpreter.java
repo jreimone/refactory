@@ -37,15 +37,23 @@ public class RefactoringFakeInterpreter extends RefactoringInterpreter implement
 	public IRefactoringInterpreter getRealInterpreter() {
 		return realInterpreter;
 	}
+//
+//	@Override
+//	public IValueProvider<?, ?> getValueProviderForCommand(EObject command) {
+//		return valueProviderMap.get(command);
+//	}
+//
+//	@Override
+//	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
+//		valueProviderMap.put(command, valueProvider);
+//	}
 
+	/* (non-Javadoc)
+	 * @see org.emftext.refactoring.interpreter.internal.RefactoringInterpreter#getFakeInterpreter()
+	 */
 	@Override
-	public IValueProvider<?, ?> getValueProviderForCommand(EObject command) {
-		return valueProviderMap.get(command);
-	}
-
-	@Override
-	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
-		valueProviderMap.put(command, valueProvider);
+	public IRefactoringFakeInterpreter getFakeInterpreter() {
+		return this;
 	}
 
 	

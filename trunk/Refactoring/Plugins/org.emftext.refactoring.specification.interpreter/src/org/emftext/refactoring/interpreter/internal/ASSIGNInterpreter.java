@@ -199,6 +199,7 @@ public class ASSIGNInterpreter {
 				}
 			}
 		}
+		valueProvider = new DialogAttributeValueProvider(mapping);
 		return valueProvider;
 	}
 
