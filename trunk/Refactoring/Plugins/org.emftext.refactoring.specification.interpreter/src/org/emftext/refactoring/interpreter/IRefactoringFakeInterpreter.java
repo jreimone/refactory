@@ -28,4 +28,13 @@ public interface IRefactoringFakeInterpreter extends IRefactoringInterpreter {
 	 * @return
 	 */
 	public IRefactoringInterpreter getRealInterpreter();
+	
+	/**
+	 * Use this method after analysing the collected value providers returned by {@link IRefactoringFakeInterpreter#getValuesToProvide()}.
+	 * Analyse the values if they really can be provided before the refactoring starts. That means that the 
+	 * elements for which a value must be provided must be all contained in the original model.  
+	 * 
+	 * @param provideableValues
+	 */
+	public void setProvideableValues(List<IValueProvider<?, ?>> provideableValues);
 }

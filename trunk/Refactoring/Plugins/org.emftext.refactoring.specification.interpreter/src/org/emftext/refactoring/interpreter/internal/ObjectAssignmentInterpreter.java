@@ -178,7 +178,8 @@ public class ObjectAssignmentInterpreter {
 		@SuppressWarnings("unchecked")
 		IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
 		if(valueProvider == null){
-			valueProvider = new DialogOneListElementProvider(mapping);
+			EClass clazz = mapping.getEClassForRole(assignedRole);
+			valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
 			interpreter.registerValueProviderForCommand(command, valueProvider);
 		}
 		EObject value = valueProvider.provideValue(interpreter, values);

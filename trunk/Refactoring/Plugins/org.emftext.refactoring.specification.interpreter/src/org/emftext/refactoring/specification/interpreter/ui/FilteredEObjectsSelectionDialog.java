@@ -13,15 +13,22 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.DialogSettings;
 import org.eclipse.jface.dialogs.IDialogSettings;
+import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
 import org.eclipse.ui.dialogs.SearchPattern;
-import org.emftext.language.refactoring.rolemapping.Mapping;
 
 /**
  * @author Jan Reimann
@@ -30,14 +37,59 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialog {
 
 	private List<EObject> elements;
-	private Mapping mapping;
+	private String name;
+	private Composite dialogArea;
+	private Composite composite;
+	private EObject selectedObject;
 	
-	public FilteredEObjectsSelectionDialog(Shell shell, List<EObject> elements, Mapping mapping) {
+	public FilteredEObjectsSelectionDialog(Shell shell, List<EObject> elements, String name) {
 		super(shell, false);
 		this.elements = elements;
-		this.mapping = mapping;
+		this.name = name;
+		initialize();
+		this.create();
 	}
 
+	private void initialize(){
+		ILabelProvider provider = new LabelProvider() {
+
+			@Override
+			public Image getImage(Object object) {
+				EObject element = (EObject) object;
+				ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+				adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+				AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+				Image image = labelProvider.getImage(element);
+				if (image != null) {
+					return image;
+				}
+				return super.getImage(object);
+			}
+
+			@Override
+			public String getText(Object element) {
+				EObject object = (EObject) element;
+				ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+				adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+				AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+				String label = labelProvider.getText(object);
+				if(label != null){
+					return label;
+				}
+				return super.getText(element);
+			}
+
+		};
+		setListLabelProvider(provider);
+		setDetailsLabelProvider(provider);
+		setTitle(name);
+		setInitialPattern("**");
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.dialogs.FilteredItemsSelectionDialog#createExtendedContentArea(org.eclipse.swt.widgets.Composite)
 	 */
@@ -97,7 +149,7 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	@Override
 	protected IDialogSettings getDialogSettings() {
 		Resource resource = elements.get(0).eResource();
-		String root = resource.getURI() + "_" + mapping.getName();
+		String root = resource.getURI().toString();
 		IDialogSettings settings = new DialogSettings(root);
 		return settings;
 	}
@@ -140,6 +192,46 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 		return Status.OK_STATUS;
 //		IStatus status = new Status(IStatus.OK, "org.emftext.refactoring.specification.interpreter", "");
 //		return status;
+	}
+
+	@Override
+	protected Control createDialogArea(Composite parent) {
+		dialogArea = (Composite) super.createDialogArea(parent); 
+		return dialogArea;
+	}
+
+	/**
+	 * @return the dialogArea
+	 */
+	public Composite getDialogArea() {
+		return dialogArea;
+	}
+
+	@Override
+	protected void handleSelected(StructuredSelection selection) {
+		super.handleSelected(selection);
+		EObject[] selectedElements = (EObject[]) selection.toArray();
+		selectedObject = selectedElements[0];
+	}
+
+	/**
+	 * @return the selectedObject
+	 */
+	public EObject getSelectedObject() {
+		return selectedObject;
+	}
+
+	@Override
+	protected Control createContents(Composite parent) {
+		composite = (Composite) super.createContents(parent);
+		return composite;
+	}
+
+	/**
+	 * @return the composite
+	 */
+	public Composite getComposite() {
+		return composite;
 	}
 
 }

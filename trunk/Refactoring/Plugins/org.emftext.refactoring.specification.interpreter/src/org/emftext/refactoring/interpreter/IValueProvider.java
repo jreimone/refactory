@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.swt.widgets.Composite;
 import org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter;
 
 /**
@@ -32,6 +33,21 @@ public interface IValueProvider <ValueFrom, ValueType>{
 	public ValueType provideValue(IRefactoringInterpreter interpreter, ValueFrom from, Object... context);
 	
 	/**
+	 * Use this method to set the value.
+	 * 
+	 * @param value
+	 */
+	public void setValue(ValueType value);
+	
+	/**
+	 * This method just returns the previously provided value. Extenders must override this method 
+	 * to provide the value which is internally computed within this {@link Composite}.
+	 * 
+	 * @return
+	 */
+	public ValueType getValue();
+	
+	/**
 	 * Sometimes value providers provide the value by a dialog. Dialogs always have a return code.
 	 * This code should be returned by implementors.
 	 * 
@@ -40,12 +56,11 @@ public interface IValueProvider <ValueFrom, ValueType>{
 	public int getReturnCode();
 	
 	/**
-	 * Re-invokes the same value provider before the refactoring starts. With the copier the formerly 
-	 * fake elements can be evaluated to its real elements.
-	 * 
+	 * Re-invokes the same value provider before the refactoring starts. Internally {@link IValueProvider#getInverseCopier()}
+	 * should be used to resolve the fake objects to the original objects.
 	 * @param copier
 	 */
-	public void provideValue(Map<EObject, EObject> inverseCopier);
+	public void provideValue();
 	
 	/**
 	 * This method returns the fake object which was passed in the fake run to this value provider.
@@ -56,4 +71,37 @@ public interface IValueProvider <ValueFrom, ValueType>{
 	 * @return
 	 */
 	public Object getFakeObject();
+	
+	/**
+	 * Returns a user readable name of this value provider.
+	 * @return
+	 */
+	public String getName();
+	
+	/**
+	 * This method can be used to set the copier with which copies of the original objects have been created.
+	 * 
+	 * @param copier
+	 */
+	public void setCopier(Copier copier);
+	
+	/**
+	 * This method returns the copier
+	 * @return
+	 */
+	public Copier getCopier();
+	
+	/**
+	 * This method returns the inverse copier with which the fake objects can be resolved to its original ones.
+	 * Implementors must assure that this method returns the inverse map of {@link IValueProvider#getCopier()}.
+	 * 
+	 * @return
+	 */
+	public Map<EObject, EObject> getInverseCopier();
+	
+	/**
+	 * Return the composite which will presented to the user to provide this value.
+	 * @return
+	 */
+	public Composite getProvidingComposite();
 }

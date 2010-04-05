@@ -58,14 +58,29 @@ public interface IRefactorer {
 	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality);
 	
 	/**
+	 * This method must be invoked before {@link IRefactorer#refactor()}. By this a fake run will be executed to
+	 * collect all values whioch have to be provided by the user and to calculate a comparison model.
+	 * 
+	 * @param mapping
+	 * @return returns the fake interpreter used within this method
+	 */
+	public IRefactoringFakeInterpreter fakeRefactor(Mapping mapping);
+	
+	/**
 	 * Invokes the RefactoringSpecification on the given {@link Mapping} on the model set with {@link #setInput(EList)}.
 	 * 
 	 * @param the mapping for which the {@link RefactoringSpecification} is intended to be invoked
-	 * @param copy specify of the refactoring should be done on a copy of the original model - 
-	 * if set to <code>true</code> the original model stays untouched
 	 * @return the refactored model
 	 */
-	public EObject refactor(Mapping mapping, boolean copy);
+	public EObject refactor();
+	
+	/**
+	 * This method returns the result of the model after the execution of {@link IRefactorer#fakeRefactor(Mapping)}.
+	 * This model can be used to display a comparison dialog with the original model to show the effects of the refactoring.
+	 * 
+	 * @return
+	 */
+	public EObject getFakeRefactoredModel();
 	
 	/**
 	 * Returns a list containing all {@link Mapping mappings} for which the current selection has all obligatory (input)roles
@@ -107,4 +122,10 @@ public interface IRefactorer {
 	 * @return
 	 */
 	public IRefactoringStatus getStatus();
+	
+	/**
+	 * Returns the original model before the refactoring was invoked.
+	 * @return
+	 */
+	public EObject getOriginalModel();
 }

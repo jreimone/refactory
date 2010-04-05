@@ -3,39 +3,41 @@
  */
 package org.emftext.refactoring.specification.interpreter.ui;
 
+
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.refactoring.interpreter.AbstractValueProvider;
+import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
-import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.util.StringUtil;
 
 /**
  * @author Jan Reimann
  *
  */
-public class DialogAttributeValueProvider implements IValueProvider<EAttribute, Object>, IInputValidator {
+public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribute, Object> implements IAttributeValueProvider, IInputValidator {
 
 	private static final String MESSAGE = "The following attribute has to be provided: \n%1$s:%2$s";
 	private Mapping mapping;
 	private EAttribute attribute;
 	private Object value;
 	private int returnCode;
-	
+
 	private IRefactoringFakeInterpreter fakeInterpreter;
 	private EAttribute fakeAttribute;
 	private EObject fakeAttributeOwner;
+	private EObject realAttributeOwner;
 	private EAttribute realAttribute;
 
 	public DialogAttributeValueProvider(Mapping mapping){
+		super();
 		this.mapping = mapping;
 	}
 
@@ -52,11 +54,13 @@ public class DialogAttributeValueProvider implements IValueProvider<EAttribute, 
 			// because '1' is valid for all handled types in the method convertValueIntoObject()
 			return convertValueIntoObject(attribute, "1");
 		} else {
+			Object value = getValue();
 			if(value != null){
 				return value;
 			} else {
 				this.attribute = attribute;
-				return openDialog();
+				setValue(openDialog());
+				return getValue();
 			}
 		}
 	}
@@ -67,12 +71,13 @@ public class DialogAttributeValueProvider implements IValueProvider<EAttribute, 
 				, String.format(MESSAGE, attribute.getName(), attribute.getEAttributeType().getInstanceClassName())
 				, null
 				, this);
-//		this.attribute = attribute;
+		//		this.attribute = attribute;
 		returnCode = dialog.open();
 		if(returnCode  == InputDialog.CANCEL){
 			return null;
 		}
-		return convertValueIntoObject(attribute, dialog.getValue());
+		value = convertValueIntoObject(attribute, dialog.getValue());
+		return value;
 	}
 
 	private Object convertValueIntoObject(EAttribute attribute, String value){
@@ -139,13 +144,30 @@ public class DialogAttributeValueProvider implements IValueProvider<EAttribute, 
 		return  fakeAttribute;
 	}
 
-	public void provideValue(Map<EObject, EObject> inverseCopier) {		
-//		EStructuralFeature feature = fakeAttribute;
-//		EObject owner = feature.eContainer();
-//		EObject realOwner = copier.get(owner);
-//		EAttribute realAttribute1 = (EAttribute) realOwner.eClass().getEStructuralFeature(feature.getName());
-//		EAttribute realAttribute2 = (EAttribute) copier.get(fakeAttribute);
-//		realAttribute = realAttribute1;
-		value = openDialog();
+	public void provideValue() {		
+		realAttributeOwner = getInverseCopier().get(fakeAttributeOwner);
+		if(realAttributeOwner != null){
+			realAttribute = (EAttribute) realAttributeOwner.eClass().getEStructuralFeature(fakeAttribute.getName());
+			attribute = realAttribute;
+		}
+		//		EStructuralFeature feature = fakeAttribute;
+		//		EObject owner = feature.eContainer();
+		//		EObject realOwner = copier.get(owner);
+		//		EAttribute realAttribute1 = (EAttribute) realOwner.eClass().getEStructuralFeature(feature.getName());
+		//		EAttribute realAttribute2 = (EAttribute) copier.get(fakeAttribute);
+		//		realAttribute = realAttribute1;
+		//		value = openDialog();
+	}
+
+	public String getName() {
+		return "";
+	}
+
+	public EAttribute getAttribute() {
+		return attribute;
+	}
+
+	public EObject getAttributeOwner() {
+		return realAttributeOwner;
 	}
 }
