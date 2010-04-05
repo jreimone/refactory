@@ -19,14 +19,14 @@ import org.emftext.refactoring.interpreter.IRefactoringStatus;
 
 public class InternalRefactoringAction {
 
-	public EObject refactorInternal(IRefactorer refactorer, Mapping mapping, IEditorPart activeEditor) throws CoreException{
-		EObject refactoredModel = refactorer.refactor(mapping, false);
+	public EObject refactorInternal(IRefactorer refactorer, IEditorPart activeEditor) throws CoreException{
+		EObject refactoredModel = refactorer.refactor();
 		Resource resource = refactorer.getResource();
 		if(refactorer.getStatus().getSeverity() == IRefactoringStatus.OK){
 			ResourceSet resourceSet = resource.getResourceSet();
 			for (Resource externalReferer : refactorer.getResourcesToSave()) {
 				URI uri = externalReferer.getURI();
-				Resource temp = resourceSet.getResource(uri, true);
+				resourceSet.getResource(uri, true);
 			}
 			Map<EObject, Collection<Setting>> externalReferences = EcoreUtil.ExternalCrossReferencer.find(resource);
 			for (EObject object : externalReferences.keySet()) {
@@ -36,7 +36,7 @@ public class InternalRefactoringAction {
 				}
 			}
 			
-			IWorkspaceRunnable runnable = new SaveAllResourcesWorkspaceRunnable(refactorer.getResourcesToSave(), resource, mapping, activeEditor, refactoredModel);
+			IWorkspaceRunnable runnable = new SaveAllResourcesWorkspaceRunnable(refactorer.getResourcesToSave(), resource, activeEditor, refactoredModel);
 			ResourcesPlugin.getWorkspace().run(runnable, null);
 			
 		} else {

@@ -3,17 +3,14 @@ package org.emftext.refactoring.ui;
 
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoableOperation;
-import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
@@ -22,6 +19,8 @@ import org.emftext.refactoring.interpreter.Activator;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
+import org.emftext.refactoring.ltk.ModelRefactoring;
+import org.emftext.refactoring.ltk.ModelRefactoringWizard;
 
 /**
  * This action can be registered to the context menus of editors
@@ -31,27 +30,18 @@ public class RefactoringAction extends Action {
 
 	private Mapping mapping;
 	private IRefactorer refactorer;
-	private ISelectionProvider selectionProvider;
 	private EObject refactoredModel;
-	private IDiagramEditDomain diagramEditingDomain;
 	private TransactionalEditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 
-	public RefactoringAction(Mapping mapping, IRefactorer refactorer, ISelectionProvider selectionProvider) {
+	public RefactoringAction(Mapping mapping, IRefactorer refactorer) {
 		super();
 		this.mapping = mapping;
 		this.refactorer = refactorer;
-		this.selectionProvider = selectionProvider;
 	}
 
-	public RefactoringAction(Mapping mapping, IRefactorer refactorer, ISelectionProvider selectionProvider, IDiagramEditDomain diagramEditingDomain, IEditorPart activeEditor) {
-		this(mapping, refactorer, selectionProvider);
-		this.diagramEditingDomain = diagramEditingDomain;
-		this.activeEditor = activeEditor;
-	}
-
-	public RefactoringAction(Mapping mapping, IRefactorer refactorer, ISelectionProvider selectionProvider, TransactionalEditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor) {
-		this(mapping, refactorer, selectionProvider);
+	public RefactoringAction(Mapping mapping, IRefactorer refactorer, TransactionalEditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor) {
+		this(mapping, refactorer);
 		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
 		this.activeEditor = activeEditor;
 	}
@@ -59,47 +49,63 @@ public class RefactoringAction extends Action {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
+//	@Override
+//	public void run() {
+//		ResourceSet rs = refactorer.getResource().getResourceSet();
+//		RefactoringRecordingCommand command = null;
+//		TransactionalEditingDomain domain = null;
+//		try {
+//			domain = TransactionUtil.getEditingDomain(rs);
+//			if(domain == null){
+//				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+//			}	
+//			CommandStack stack = domain.getCommandStack();
+//			command = new RefactoringRecordingCommand(domain, refactorer, activeEditor, getText());
+//			stack.execute(command);
+//			IUndoableOperation operation = new RefactoringUndoOperation(command);
+//			IOperationHistory history = PlatformUI.getWorkbench().getOperationSupport().getOperationHistory();
+//			history.add(operation);
+//			
+//			IRefactoringStatus status = command.getStatus();
+//			statusSwitch(command, status);
+//		} catch (Exception e) {
+//			if(command != null && command.canUndo()){
+//				command.undo();
+//			}
+//			IRefactoringStatus status = new RefactoringStatus(IRefactoringStatus.ERROR, "Refactoring rolled back", e);
+//			Activator.getDefault().getLog().log(status);
+//			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//			String title = "Refactoring was rolled back";
+//			String message = "Refactoring rolled back because of an unforseen error. Check out the error log";
+//			MessageDialog.openInformation(shell, title, message);
+//		}
+//		if(domain != null && diagramTransactionalEditingDomain == null){
+//			domain.dispose();
+//		}
+//	}
+
 	@Override
 	public void run() {
-		ResourceSet rs = refactorer.getResource().getResourceSet();
-		RefactoringRecordingCommand command = null;
-		TransactionalEditingDomain domain = null;
+		ltkRun();
+	}
+	
+	public void ltkRun(){
+		ModelRefactoring refactoring = new ModelRefactoring(refactorer, mapping, diagramTransactionalEditingDomain, getText(), activeEditor);
+		ModelRefactoringWizard wizard = new ModelRefactoringWizard(refactoring);
+		RefactoringWizardOpenOperation op = new RefactoringWizardOpenOperation(wizard);
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		try {
-			domain = TransactionUtil.getEditingDomain(rs);
-			if(domain == null){
-				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
-			}	
-			CommandStack stack = domain.getCommandStack();
-			command = new RefactoringRecordingCommand(domain, refactorer, mapping, activeEditor, getText());
-			stack.execute(command);
-			IUndoableOperation operation = new RefactoringUndoOperation(command);
-			IOperationHistory history = PlatformUI.getWorkbench().getOperationSupport().getOperationHistory();
-			history.add(operation);
-			
-			IRefactoringStatus status = command.getStatus();
-			statusSwitch(command, status);
-		} catch (Exception e) {
-			if(command != null && command.canUndo()){
-				command.undo();
-			}
-			IRefactoringStatus status = new RefactoringStatus(IRefactoringStatus.ERROR, "Refactoring rolled back", e);
-			Activator.getDefault().getLog().log(status);
-			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			String title = "Refactoring was rolled back";
-			String message = "Refactoring rolled back because of an unforseen error. Check out the error log";
-			MessageDialog.openInformation(shell, title, message);
-		}
-		if(domain != null && diagramTransactionalEditingDomain == null){
-			domain.dispose();
+			op.run(shell, getText());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * @param command
 	 * @param status
 	 */
-	private void statusSwitch(RefactoringRecordingCommand command,
-			IRefactoringStatus status) {
+	private void statusSwitch(RefactoringRecordingCommand command, IRefactoringStatus status) {
 		Shell shell;
 		String title;
 		String message;

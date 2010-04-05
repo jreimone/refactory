@@ -39,7 +39,7 @@ public class GMFTransactionalCommand extends AbstractTransactionalCommand {
 		IStatus status = null;
 		try {
 			InternalRefactoringAction action = new InternalRefactoringAction();
-			EObject refactoredModel = action.refactorInternal(refactorer, mapping, activeEditor);
+			EObject refactoredModel = action.refactorInternal(refactorer, activeEditor);
 			if(refactoredModel == null){
 				status = new Status(IStatus.ERROR, PLUGIN_ID, "Refactoring couldn't be executed");
 				result = new CommandResult(status);

@@ -11,14 +11,11 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -52,7 +49,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		// 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void createContributionItems(IServiceLocator serviceLocator, IContributionRoot additions) {
 		IWorkbenchPart activePart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
@@ -70,7 +66,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		ISelection selection = selectionProvider.getSelection();
 		List<EObject> selectedElements = new LinkedList<EObject>();
 		Resource resource = null;
-		IDiagramEditDomain diagramEditingDomain = null;
 		TransactionalEditingDomain diagramTransactionalEditingDomain = null;
 		if(selection instanceof StructuredSelection){
 			List<?> temp = ((StructuredSelection) selection).toList();
@@ -80,10 +75,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					if(model instanceof View){
 						EditPartViewer viewer = ((EditPart) object).getViewer();
 						if(viewer instanceof IDiagramGraphicalViewer){
-							IDiagramGraphicalViewer gmfViewer = (IDiagramGraphicalViewer) viewer;
-							diagramEditingDomain = gmfViewer.getDiagramEditDomain();
 							diagramTransactionalEditingDomain = ((IGraphicalEditPart) object).getEditingDomain();
-							//							System.out.println(diagramTransactionalEditingDomain);
 							object = ((View) model).getElement();
 							System.out.println("found EObject " + object + " in diagram");
 						}
@@ -94,7 +86,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				}
 				selectedElements.add((EObject) object);
 			}
-			//			selectedElements = (List<EObject>)temp;
 			resource = selectedElements.get(0).eResource();
 		} else if(selection instanceof ITextSelection){
 			//			if(EMFTextAccessProxy.isAccessibleWith(activeEditor.getClass(), IEditor.class)){
@@ -152,10 +143,10 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					if(refSpec != null){
 						String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 						Action refactoringAction = null;
-						if(diagramEditingDomain == null){
-							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider);
+						if(diagramTransactionalEditingDomain == null){
+							refactoringAction = new RefactoringAction(mapping, refactorer);
 						} else {
-							refactoringAction = new RefactoringAction(mapping, refactorer, selectionProvider, diagramTransactionalEditingDomain, activeEditor);
+							refactoringAction = new RefactoringAction(mapping, refactorer, diagramTransactionalEditingDomain, activeEditor);
 						}
 						refactoringAction.setText(refactoringName);
 						refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));

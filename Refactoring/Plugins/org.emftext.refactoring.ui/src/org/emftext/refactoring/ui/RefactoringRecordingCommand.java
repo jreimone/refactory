@@ -7,24 +7,23 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.ui.IEditorPart;
-import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 
-class RefactoringRecordingCommand extends RecordingCommand{
+public class RefactoringRecordingCommand extends RecordingCommand{
 
 	private IRefactorer refactorer;
-	private Mapping mapping;
+//	private Mapping mapping;
 	private boolean didErrorsOccur = false;
 	private Exception exception;
 	private IEditorPart activeEditor;
 	private IRefactoringStatus status;
 	private String label;
 	
-	public RefactoringRecordingCommand(TransactionalEditingDomain domain, IRefactorer refactorer, Mapping mapping, IEditorPart activeEditor, String label) {
+	public RefactoringRecordingCommand(TransactionalEditingDomain domain, IRefactorer refactorer, IEditorPart activeEditor, String label) {
 		super(domain);
 		this.refactorer = refactorer;
-		this.mapping = mapping;
+//		this.mapping = mapping;
 		this.activeEditor = activeEditor;
 		this.label = label;
 	}
@@ -33,7 +32,7 @@ class RefactoringRecordingCommand extends RecordingCommand{
 	protected void doExecute() {
 		try {
 			InternalRefactoringAction action = new InternalRefactoringAction();
-			EObject refactoredModel = action.refactorInternal(refactorer, mapping, activeEditor); 
+			EObject refactoredModel = action.refactorInternal(refactorer, activeEditor); 
 			status = refactorer.getStatus();
 			didErrorsOccur = (refactoredModel == null || status.getSeverity() != IRefactoringStatus.OK)?true:false;
 		} catch (Exception e) {

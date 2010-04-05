@@ -18,24 +18,23 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
-import org.emftext.language.refactoring.rolemapping.Mapping;
 
 class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 
 	private List<Resource> resourcesToSave;
 	private Resource refactoredResource;
-	private Mapping mapping;
+//	private Mapping mapping;
 	private IEditorPart activeEditor;
 	private Resource gmfResource;
 	private EObject refactoredModel;
 	private ResourceSet resourceSet;
 
 	public SaveAllResourcesWorkspaceRunnable(List<Resource> resourcesToSave,
-			Resource refactoredResource, Mapping mapping, IEditorPart activeEditor, EObject refactoredModel) {
+			Resource refactoredResource, IEditorPart activeEditor, EObject refactoredModel) {
 		this.resourcesToSave = resourcesToSave;
 		this.refactoredResource = refactoredResource;
 		this.resourceSet = refactoredResource.getResourceSet();
-		this.mapping = mapping;
+//		this.mapping = mapping;
 		this.activeEditor = activeEditor;
 		this.refactoredModel = refactoredModel;
 		initGmfResource();
@@ -63,9 +62,7 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 					if (uri.isPlatformResource()) {
 						EcoreUtil.resolveAll(externalResource);
 						externalResource.save(null);
-						System.out.println("Saved resource " + externalResource
-								+ " after refactoring '" + mapping.getName()
-								+ "'");
+						System.out.println("Saved resource " + externalResource);
 					}
 				}
 			}
