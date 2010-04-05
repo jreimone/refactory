@@ -18,6 +18,13 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.change,
  org.eclipse.gmf.runtime.diagram.ui,
  org.eclipse.ui.ide,
- org.emftext.refactoring.registry.rolemapping
+ org.emftext.refactoring.registry.rolemapping,
+ org.eclipse.ltk.core.refactoring,
+ org.eclipse.ltk.ui.refactoring,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.compare.match,
+ org.eclipse.compare,
+ org.eclipse.emf.compare.diff
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.emftext.refactoring.ui
