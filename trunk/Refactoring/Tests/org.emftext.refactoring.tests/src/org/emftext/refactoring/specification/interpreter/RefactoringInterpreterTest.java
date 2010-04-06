@@ -115,7 +115,8 @@ public class RefactoringInterpreterTest extends TestClass{
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		Mapping mapping = mappings.get(0);
-		EObject refactoredModel = refactorer.refactor(mapping, true);
+		refactorer.fakeRefactor(mapping);
+		EObject refactoredModel = refactorer.refactor();
 		EObject originalModel = getResourceByPattern(CREATE, false).getContents().get(0);
 		assertNotNull(refactoredModel);
 		
@@ -169,7 +170,8 @@ public class RefactoringInterpreterTest extends TestClass{
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		Mapping mapping = mappings.get(0);
-		EObject refactoredRoot = refactorer.refactor(mapping, true);
+		refactorer.fakeRefactor(mapping);
+		EObject refactoredRoot = refactorer.refactor();
 		EObject originalModel = getResourceByPattern(MODEL, false).getContents().get(0);
 		assertNotNull(refactoredRoot);
 		
