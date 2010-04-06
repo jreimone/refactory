@@ -5,9 +5,12 @@ package org.emftext.refactoring.ltk;
 
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoableOperation;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -37,6 +40,9 @@ public class ModelRefactoringChange extends Change {
 	private IEditorPart activeEditor;
 	private IProgressMonitor monitor;
 	
+	private RefactoringRecordingCommand command;
+	private IRefactoringStatus status;
+	
 	public ModelRefactoringChange(ModelRefactoring modelRefactoring) {
 		super();
 		this.modelRefactoring = modelRefactoring;
@@ -57,20 +63,18 @@ public class ModelRefactoringChange extends Change {
 
 	@Override
 	public void initializeValidationData(IProgressMonitor pm) {
-		// TODO Auto-generated method stub
-
+		statusSwitch(false);
 	}
 
 	@Override
 	public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		return RefactoringStatus.create(Status.OK_STATUS);
+		return RefactoringStatus.create(status);
 	}
 
 	@Override
 	public Change perform(IProgressMonitor pm) throws CoreException {
 		this.monitor = pm;
 		ResourceSet rs = refactorer.getResource().getResourceSet();
-		RefactoringRecordingCommand command = null;
 		TransactionalEditingDomain domain = null;
 		try {
 			domain = TransactionUtil.getEditingDomain(rs);
@@ -84,73 +88,117 @@ public class ModelRefactoringChange extends Change {
 			IOperationHistory history = PlatformUI.getWorkbench().getOperationSupport().getOperationHistory();
 			history.add(operation);
 			
-			IRefactoringStatus status = command.getStatus();
-			statusSwitch(command, status);
+			status = command.getStatus();
+			statusSwitch(true);
+//			statusSwitch(command, status);
 		} catch (Exception e) {
-			if(command != null && command.canUndo()){
-				command.undo();
+//			if(command != null && command.canUndo()){
+//				command.undo();
+//			}
+			status = new org.emftext.refactoring.interpreter.RefactoringStatus(IRefactoringStatus.ERROR, "Refactoring rolled back", e);
+//			Activator.getDefault().getLog().log(status);
+//			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//			String title = "Refactoring was rolled back";
+//			String message = "Refactoring rolled back because of an unforseen error. Check out the error log";
+			statusSwitch(true);
+			if(domain != null && diagramTransactionalEditingDomain == null){
+				domain.dispose();
 			}
-			IRefactoringStatus status = new org.emftext.refactoring.interpreter.RefactoringStatus(IRefactoringStatus.ERROR, "Refactoring rolled back", e);
-			Activator.getDefault().getLog().log(status);
-			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			String title = "Refactoring was rolled back";
-			String message = "Refactoring rolled back because of an unforseen error. Check out the error log";
-			MessageDialog.openInformation(shell, title, message);
+			return null;
+//			MessageDialog.openInformation(shell, title, message);
 		}
 		if(domain != null && diagramTransactionalEditingDomain == null){
 			domain.dispose();
 		}
-		return null;
+		Change undoChange = new Change() {
+			
+			@Override
+			public Change perform(IProgressMonitor pm) throws CoreException {
+				if(command.canUndo()){
+					command.undo();
+				}
+				return null;
+			}
+			
+			@Override
+			public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException,
+					OperationCanceledException {
+				return RefactoringStatus.create(Status.OK_STATUS);
+			}
+			
+			@Override
+			public void initializeValidationData(IProgressMonitor pm) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public String getName() {
+				return "Undo " + modelRefactoring.getName();
+			}
+			
+			@Override
+			public Object getModifiedElement() {
+				return null;
+			}
+		};
+		return undoChange;
 	}
 
 	
-	private void statusSwitch(RefactoringRecordingCommand command, IRefactoringStatus status) {
-		Shell shell;
-		String title;
+	private void statusSwitch(boolean rollback) {
+//		Shell shell;
+//		String title;
 		String message;
+		if(status == null){
+			status = new org.emftext.refactoring.interpreter.RefactoringStatus(IStatus.OK);
+			return;
+		}
 		switch (status.getSeverity()) {
 		case IRefactoringStatus.OK:
 			System.out.println("Refactored successfull");
 			break;
 		case IRefactoringStatus.INFO:
-			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			title = "Information";
+//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//			title = "Information";
 			message = status.getMessage();
-			MessageDialog.openInformation(shell, title, message);
-			if(command.canUndo()){
+//			MessageDialog.openInformation(shell, title, message);
+			if(rollback && command.canUndo()){
 				command.undo();
 			}
 			System.out.println("Refactoring rolled back because of some infos");
 			break;
 		case IRefactoringStatus.WARNING:
-			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			title = "Information";
+//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//			title = "Information";
 			message = status.getMessage();
-			MessageDialog.openInformation(shell, title, message);
-			if(command.canUndo()){
+//			MessageDialog.openInformation(shell, title, message);
+			if(rollback && command.canUndo()){
 				command.undo();
 			}
 			System.out.println("Refactoring rolled back because of some warnings");
 			break;
 		case IRefactoringStatus.CANCEL:
-			if(command.canUndo()){
+			if(rollback && command.canUndo()){
 				command.undo();
 			}
 			System.out.println("Refactoring rolled back because of cancelation of dialog");
 			break;
 		case IRefactoringStatus.ERROR:
-			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			title = "Refactoring will be rolled back";
+//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//			title = "Refactoring will be rolled back";
 			message = "The refactoring will be rolled back because of the following unforseen error: \n\n";
 			message += status.getMessage();
 			if(status.getException() != null){
 				message += "\n\nCheck out the error log for further information.";
-				Activator.getDefault().getLog().log(status);
+//				Activator.getDefault().getLog().log(status);
+				ResourcesPlugin.getPlugin().getLog().log(status);
 			}
-			MessageDialog.openInformation(shell, title, message);
-			if(command.canUndo()){
+			status.setMessage(message);
+//			MessageDialog.openInformation(shell, title, message);
+			if(rollback && command.canUndo()){
 				command.undo();
 			}
+			
 			System.out.println("Refactoring rolled back because of an error");
 			break;
 		default:
