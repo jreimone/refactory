@@ -4,7 +4,9 @@
 package org.emftext.refactoring.ui;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -15,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
@@ -52,24 +55,32 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 	}
 
 	public void run(IProgressMonitor monitor) throws CoreException {
-		try {
 			EcoreUtil.resolveAll(resourceSet);
 //			refactoredResource.getContents().set(0, refactoredModel);
-			refactoredResource.save(null);
+			try {
+				Map<Object, Object> options = new LinkedHashMap<Object, Object>();
+				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
+				refactoredResource.save(options);
+			} catch (Exception e) {
+				e.printStackTrace();
+				refactoredResource.getErrors().clear();
+			}
 			for (Resource externalResource : resourcesToSave) {
 				if (!externalResource.equals(gmfResource)) {
 					URI uri = externalResource.getURI();
 					if (uri.isPlatformResource()) {
 						EcoreUtil.resolveAll(externalResource);
-						externalResource.save(null);
+						try {
+							externalResource.save(null);
+						} catch (Exception e) {
+							e.printStackTrace();
+							externalResource.getErrors().clear();
+						}
 						System.out.println("Saved resource " + externalResource);
 					}
 				}
 			}
 //			refactoredResource.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 }
