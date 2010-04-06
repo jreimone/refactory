@@ -239,4 +239,14 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 		return dialogArea;
 	}
 
+	@Override
+	protected void handleDoubleClick() {
+		// do nothing;
+	}
+
+	@Override
+	protected void okPressed() {
+		// do nothing
+	}
+
 }

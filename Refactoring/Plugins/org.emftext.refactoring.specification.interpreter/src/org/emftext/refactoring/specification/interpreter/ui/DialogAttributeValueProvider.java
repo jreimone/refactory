@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.AbstractValueProvider;
@@ -66,7 +67,7 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 	}
 
 	private Object openDialog() {
-		InputDialog dialog = new InputDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()
+		InputDialog dialog = new InputDialog(Display.getDefault().getActiveShell()
 				, StringUtil.convertCamelCaseToWords(mapping.getName())
 				, String.format(MESSAGE, attribute.getName(), attribute.getEAttributeType().getInstanceClassName())
 				, null
