@@ -12,26 +12,32 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
  *
  */
 public class RefactoringStatus implements IRefactoringStatus {
-	
+
 	private Mapping mapping;
 	private IStatus internalStatus;
-	
+
 	/**
 	 * 
 	 * @param severity the severity, e.g. {@link IRefactoringStatus#OK}
 	 */
 	public RefactoringStatus(int severity) {
-		internalStatus = new Status(severity, Activator.PLUGIN_ID, "");
+		if(severity == IStatus.OK){
+			internalStatus = Status.OK_STATUS;
+		} else if(severity == IStatus.CANCEL){
+			internalStatus = Status.CANCEL_STATUS;
+		} else {
+			internalStatus = new Status(severity, Activator.PLUGIN_ID, "");
+		}
 	}
-	
+
 	public RefactoringStatus(int severity, String message) {
 		internalStatus = new Status(severity, Activator.PLUGIN_ID, message);
 	}
-	
+
 	public RefactoringStatus(int severity, String message, Throwable throwable) {
 		internalStatus = new Status(severity, Activator.PLUGIN_ID, message, throwable);
 	}
-	
+
 	/**
 	 * 
 	 * @param mapping the mapping for which the status is produced
@@ -42,7 +48,7 @@ public class RefactoringStatus implements IRefactoringStatus {
 		this(severity, message);
 		this.mapping = mapping;
 	}
-	
+
 	public RefactoringStatus(Mapping mapping, int severity, String message, Throwable throwable) {
 		this(severity, message, throwable);
 		this.mapping = mapping;
@@ -123,5 +129,9 @@ public class RefactoringStatus implements IRefactoringStatus {
 	 */
 	public void setThrowable(Throwable throwable) {
 		internalStatus = new Status(getSeverity(), getPlugin(), getMessage(), throwable);
+	}
+
+	public void setMessage(String message) {
+		internalStatus = new Status(getSeverity(), getPlugin(), getCode(), message, getException());
 	}
 }
