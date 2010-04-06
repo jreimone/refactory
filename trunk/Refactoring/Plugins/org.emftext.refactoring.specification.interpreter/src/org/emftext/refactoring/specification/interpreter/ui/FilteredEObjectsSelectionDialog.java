@@ -210,8 +210,13 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	@Override
 	protected void handleSelected(StructuredSelection selection) {
 		super.handleSelected(selection);
-		EObject[] selectedElements = (EObject[]) selection.toArray();
-		selectedObject = selectedElements[0];
+		if(selection != null){
+			Object firstElement = selection.getFirstElement();
+			if(firstElement instanceof EObject){
+				selectedObject = (EObject) firstElement;
+				System.out.println(selectedObject);
+			}
+		}
 	}
 
 	/**
@@ -231,7 +236,7 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	 * @return the composite
 	 */
 	public Composite getComposite() {
-		return composite;
+		return dialogArea;
 	}
 
 }

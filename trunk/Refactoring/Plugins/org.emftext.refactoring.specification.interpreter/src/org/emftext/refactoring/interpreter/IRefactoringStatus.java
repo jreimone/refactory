@@ -29,4 +29,10 @@ public interface IRefactoringStatus extends IStatus{
 	 * @param throwable
 	 */
 	public void setThrowable(Throwable throwable);
+	
+	/**
+	 * Sets the message of this status
+	 * @param message
+	 */
+	public void setMessage(String message);
 }
