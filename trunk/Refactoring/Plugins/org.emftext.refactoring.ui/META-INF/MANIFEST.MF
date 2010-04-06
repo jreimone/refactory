@@ -24,7 +24,7 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.emf.edit.ui,
  org.eclipse.emf.ecore.edit,
  org.eclipse.emf.compare.match,
- org.eclipse.compare,
- org.eclipse.emf.compare.diff
+ org.eclipse.emf.compare.diff,
+ org.eclipse.compare
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.emftext.refactoring.ui
