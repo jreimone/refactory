@@ -18,6 +18,7 @@ import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.MatchOptions;
+import org.eclipse.emf.compare.match.engine.IMatchEngine;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
 import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.compare.ui.IModelCompareInputProvider;
@@ -237,8 +238,8 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		try {
 			EObject originalModel = refactorer.getOriginalModel();
 			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
-			
-			match = MatchService.doContentMatch(originalModel, fakeRefactoredModel, options);
+			IMatchEngine engine = new RefactoringMatchEngine();
+			match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
