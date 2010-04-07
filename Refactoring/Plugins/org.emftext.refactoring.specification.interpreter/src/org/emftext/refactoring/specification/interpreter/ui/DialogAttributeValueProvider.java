@@ -4,14 +4,11 @@
 package org.emftext.refactoring.specification.interpreter.ui;
 
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.AbstractValueProvider;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
@@ -151,13 +148,6 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 			realAttribute = (EAttribute) realAttributeOwner.eClass().getEStructuralFeature(fakeAttribute.getName());
 			attribute = realAttribute;
 		}
-		//		EStructuralFeature feature = fakeAttribute;
-		//		EObject owner = feature.eContainer();
-		//		EObject realOwner = copier.get(owner);
-		//		EAttribute realAttribute1 = (EAttribute) realOwner.eClass().getEStructuralFeature(feature.getName());
-		//		EAttribute realAttribute2 = (EAttribute) copier.get(fakeAttribute);
-		//		realAttribute = realAttribute1;
-		//		value = openDialog();
 	}
 
 	public String getName() {
@@ -170,5 +160,11 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 
 	public EObject getAttributeOwner() {
 		return realAttributeOwner;
+	}
+
+	public void propagateValueToFakeObject() {
+		if(getValue() != null){
+			fakeAttributeOwner.eSet(fakeAttribute, getValue());
+		}
 	}
 }

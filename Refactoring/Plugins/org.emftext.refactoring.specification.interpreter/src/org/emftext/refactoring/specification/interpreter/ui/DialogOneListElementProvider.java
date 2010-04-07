@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.specification.interpreter.ui;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,9 +47,8 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 			realElements.add(getInverseCopier().get(fakeElement));
 		}
 		elements = realElements;
+		elements = new ArrayList<EObject>(getCopier().keySet());
 		initDialog();
-//		EObject selectedElement = initDialog();
-//		value = selectedElement;
 	}
 
 	public Composite getProvidingComposite(){
@@ -58,13 +58,6 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 	private void initDialog() {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		dialog = new FilteredEObjectsSelectionDialog(shell, elements, getName());
-
-//		returnCode = dialog.open();
-//		if(returnCode == FilteredItemsSelectionDialog.CANCEL) {
-//			value = null;
-//		}
-//		EObject selectedElement = (EObject) dialog.getFirstResult();
-//		return selectedElement;
 	}
 	
 	private EObject openDialog() {
@@ -119,6 +112,12 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 	public EObject getValue() {
 		value = dialog.getSelectedObject();
 		return value;
+	}
+
+	public void propagateValueToFakeObject() {
+		if(value != null){
+			
+		}
 	}
 
 }
