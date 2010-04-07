@@ -104,4 +104,13 @@ public interface IValueProvider <ValueFrom, ValueType>{
 	 * @return
 	 */
 	public Composite getProvidingComposite();
+	
+	/**
+	 * For the creation of a comparison between original and fake refactored model,
+	 * the values, provided by the user, must be propagated to the fake object,
+	 * for the adequate presentation in the comparison. This propagation will be invoked 
+	 * with this method.
+	 * 
+	 */
+	public void propagateValueToFakeObject();
 }
