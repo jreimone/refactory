@@ -52,6 +52,7 @@ public class RefactoringCompareEditorInput extends CompareEditorInput {
 		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
 		MatchModel match = MatchService.doContentMatch(originalModel, fakeRefactoredModel, options);
 		DiffModel diff = DiffService.doDiff(match, false);
+		
 		System.out.println(diff);
 		return diff;
 	}

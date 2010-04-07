@@ -1,8 +1,17 @@
 package org.emftext.refactoring.ltk;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+import org.eclipse.compare.CompareUI;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.compare.diff.metamodel.DiffModel;
+import org.eclipse.emf.compare.diff.service.DiffService;
+import org.eclipse.emf.compare.match.MatchOptions;
+import org.eclipse.emf.compare.match.metamodel.MatchModel;
+import org.eclipse.emf.compare.match.service.MatchService;
+import org.eclipse.emf.compare.ui.ModelCompareInput;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.ui.refactoring.ChangePreviewViewerInput;
 import org.eclipse.ltk.ui.refactoring.IChangePreviewViewer;
@@ -33,6 +42,7 @@ public class ModelChangePreviewer implements IChangePreviewViewer {
 		ModelRefactoringChange change = (ModelRefactoringChange) input.getChange();
 		EObject originalModel = change.getRefactorer().getOriginalModel();
 		EObject fakeRefactoredModel = change.getRefactorer().getFakeRefactoredModel();
+		
 		compare.setOriginalModel(originalModel);
 		compare.setFakeRefactoredModel(fakeRefactoredModel);
 		try {
@@ -42,8 +52,9 @@ public class ModelChangePreviewer implements IChangePreviewViewer {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		compare.getControl().pack(true);
-		compare.getControl().setVisible(true);
+		//		compare.getControl().pack(true);
+		//		compare.getControl().setVisible(true);
+		CompareUI.openCompareDialog(compare);
 		System.out.println(compare);
 	}
 
