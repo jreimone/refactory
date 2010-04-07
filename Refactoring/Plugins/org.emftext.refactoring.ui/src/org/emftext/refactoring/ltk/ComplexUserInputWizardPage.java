@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.ltk;
 
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -41,6 +42,12 @@ public class ComplexUserInputWizardPage extends UserInputWizardPage {
 	protected boolean performFinish() {
 		valueProvider.getValue();
 		return super.performFinish();
+	}
+
+	@Override
+	public IWizardPage getNextPage() {
+		IWizardPage nextPage = super.getNextPage(); 
+		return nextPage;
 	}
 
 }
