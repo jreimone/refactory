@@ -3,6 +3,9 @@
  */
 package org.emftext.refactoring.ltk;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -10,19 +13,23 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.compare.diff.metamodel.DiffModel;
+import org.eclipse.emf.compare.diff.service.DiffService;
+import org.eclipse.emf.compare.match.MatchOptions;
+import org.eclipse.emf.compare.match.metamodel.MatchModel;
+import org.eclipse.emf.compare.match.service.MatchService;
+import org.eclipse.emf.compare.ui.IModelCompareInputProvider;
+import org.eclipse.emf.compare.ui.ModelCompareInput;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-import org.emftext.refactoring.interpreter.Activator;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.ui.RefactoringRecordingCommand;
@@ -32,7 +39,7 @@ import org.emftext.refactoring.ui.RefactoringUndoOperation;
  * @author Jan Reimann
  *
  */
-public class ModelRefactoringChange extends Change {
+public class ModelRefactoringChange extends Change implements IModelCompareInputProvider{
 
 	private IRefactorer refactorer;
 	private TransactionalEditingDomain diagramTransactionalEditingDomain;
@@ -218,5 +225,27 @@ public class ModelRefactoringChange extends Change {
 	 */
 	public IProgressMonitor getMonitor() {
 		return monitor;
+	}
+
+	public ModelCompareInput getModelCompareInput() {
+		Map<String, Object> options = new LinkedHashMap<String, Object>();
+		options.put(MatchOptions.OPTION_DISTINCT_METAMODELS, true);
+		options.put(MatchOptions.OPTION_IGNORE_ID, true);
+		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, true);
+		//		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
+		MatchModel match = null;
+		try {
+			EObject originalModel = refactorer.getOriginalModel();
+			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
+			match = MatchService.doContentMatch(originalModel, fakeRefactoredModel, options);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		if(match != null){
+			DiffModel diff = DiffService.doDiff(match, false);
+			ModelCompareInput compareInput = new ModelCompareInput(match, diff);
+			return compareInput;
+		}
+		return null;
 	}
 }
