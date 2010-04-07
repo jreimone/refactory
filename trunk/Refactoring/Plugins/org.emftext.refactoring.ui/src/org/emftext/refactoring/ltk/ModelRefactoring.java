@@ -54,7 +54,6 @@ public class ModelRefactoring extends Refactoring {
 			if(domain == null){
 				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
 			}
-			//		try {
 			domain.getCommandStack().execute(new RecordingCommand(domain) {
 
 				@Override
@@ -62,15 +61,6 @@ public class ModelRefactoring extends Refactoring {
 					fakeInterpreter = refactorer.fakeRefactor(mapping);
 				}
 			});
-			//			.runExclusive(new Runnable() {
-			//				
-			//				public void run() {
-			//					fakeInterpreter = refactorer.fakeRefactor(mapping);
-			//				}
-			//			});
-			//		} catch (InterruptedException e1) {
-			//			e1.printStackTrace();
-			//		}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

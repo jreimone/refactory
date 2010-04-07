@@ -14,6 +14,8 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.wizard.IWizardPage;
+import org.eclipse.ltk.internal.ui.refactoring.IPreviewWizardPage;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -61,7 +63,6 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 			valueProvider.provideValue();
 			EAttribute attribute = valueProvider.getAttribute();
 			EObject owner = valueProvider.getAttributeOwner();
-//			String type = attribute.getEAttributeType().getInstanceTypeName();
 			String temp = labelProvider.getText(attribute);
 			String addition = (owner == null)? "" : " from " + labelProvider.getText(owner);
 			String text = temp + addition;
@@ -75,7 +76,6 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 			attribInput.setLayoutData(data);
 			textMap.put(attribInput, valueProvider);
 		}
-//		setPageComplete(false);
 		setControl(composite);
 	}
 	
@@ -89,17 +89,23 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 
 	@Override
 	protected boolean performFinish() {
-		for (Text text : textMap.keySet()) {
-			textMap.get(text).setValue(text.getText());
-		}
+		propagateInputs();
 		return super.performFinish();
 	}
 
-//	@Override
-//	public Control getControl() {
-//		if(root != null){
-//			return root;
-//		}
-//		return super.getControl();
-//	}
+	private void propagateInputs() {
+		for (Text text : textMap.keySet()) {
+			textMap.get(text).setValue(text.getText());
+			textMap.get(text).propagateValueToFakeObject();
+		}
+	}
+
+	@Override
+	public IWizardPage getNextPage() {
+		IWizardPage nextPage = super.getNextPage(); 
+		if(nextPage instanceof IPreviewWizardPage){
+			propagateInputs();
+		}
+		return nextPage;
+	}
 }

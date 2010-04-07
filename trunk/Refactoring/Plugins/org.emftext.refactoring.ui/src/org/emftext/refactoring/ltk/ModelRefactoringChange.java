@@ -237,6 +237,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		try {
 			EObject originalModel = refactorer.getOriginalModel();
 			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
+			
 			match = MatchService.doContentMatch(originalModel, fakeRefactoredModel, options);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
@@ -244,6 +245,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		if(match != null){
 			DiffModel diff = DiffService.doDiff(match, false);
 			ModelCompareInput compareInput = new ModelCompareInput(match, diff);
+			
 			return compareInput;
 		}
 		return null;
