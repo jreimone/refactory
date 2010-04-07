@@ -804,15 +804,15 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 			if (((TypedElementWrapper)ancestorObject).getObject() == null) {
 				ancestorObject = null;
 			} else {
-				ancestorObject = ((TypedElementWrapper)ancestorObject).getObject().eResource()
-						.getResourceSet();
+				ancestorObject = getInputObject((TypedElementWrapper)ancestorObject);
 			}
 		}
+		// TODO independence of Resource is needed for comparison of in-memory models
 		if (leftObject instanceof TypedElementWrapper) {
-			leftObject = ((TypedElementWrapper)leftObject).getObject().eResource().getResourceSet();
+			leftObject = getInputObject((TypedElementWrapper)leftObject);
 		}
 		if (rightObject instanceof TypedElementWrapper) {
-			rightObject = ((TypedElementWrapper)rightObject).getObject().eResource().getResourceSet();
+			rightObject = getInputObject((TypedElementWrapper)rightObject);
 		}
 
 		if (ancestorObject != null) {
@@ -825,6 +825,14 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 			rightPart.setInput(rightObject);
 		}
 		update();
+	}
+
+	private Object getInputObject(TypedElementWrapper elementWrapper) {
+		Resource resource = elementWrapper.getObject().eResource();
+		if (resource != null) {
+			return resource.getResourceSet();
+		}
+		return elementWrapper;
 	}
 
 	/**
