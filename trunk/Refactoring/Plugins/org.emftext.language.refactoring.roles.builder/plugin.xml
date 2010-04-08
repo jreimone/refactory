@@ -2,9 +2,11 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         id="id1"
+         id="org.emftext.language.refactoring.roles.registrationBuilder"
+         name="RoleModel Registration Builder"
          point="org.eclipse.core.resources.builders">
-      <builder>
+      <builder
+            hasNature="true">
          <run
                class="org.emftext.language.refactoring.roles.builder.RegistrationBuilderAdapter">
          </run></builder>
