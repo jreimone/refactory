@@ -10,6 +10,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
@@ -18,11 +19,15 @@ import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.ltk.internal.ui.refactoring.IPreviewWizardPage;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 
@@ -36,7 +41,7 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 	private AdapterFactoryLabelProvider labelProvider;
 	private Map<Text, IAttributeValueProvider> textMap;
 	private Control root;
-	
+
 	/**
 	 * @param name
 	 */
@@ -52,16 +57,16 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		composite.setFont(parent.getFont());
-		
+
 		Label label = new Label(composite, NONE);
 		GridData data = new GridData();
 		data.horizontalSpan = 2;
 		label.setLayoutData(data);
-		
+
 		label.setText("The following attributes must be provided");
-		for (IAttributeValueProvider valueProvider : valueProviders) {
+		for (final IAttributeValueProvider valueProvider : valueProviders) {
 			valueProvider.provideValue();
-			EAttribute attribute = valueProvider.getAttribute();
+			final EAttribute attribute = valueProvider.getAttribute();
 			EObject owner = valueProvider.getAttributeOwner();
 			String temp = labelProvider.getText(attribute);
 			String addition = (owner == null)? "" : " from " + labelProvider.getText(owner);
@@ -70,8 +75,27 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 			iconLabel.setImage(labelProvider.getImage(attribute));
 			Label attribLabel = new Label(composite, SWT.NONE);
 			attribLabel.setText(text);
-			// TODO add validator 
-			Text attribInput = new Text(composite, SWT.BORDER | SWT.SINGLE);
+			final Text attribInput = new Text(composite, SWT.BORDER | SWT.SINGLE);
+			attribInput.addModifyListener(new ModifyListener() {
+				
+				public void modifyText(ModifyEvent e) {
+					setPageComplete();
+				}
+			});
+//			attribInput.addListener(SWT.Verify, new Listener() {
+//
+//				public void handleEvent(Event event) {
+//					setPageComplete();
+////					String input = attribInput.getText() + event.text;
+////					boolean valid = valueProvider.isValueValid(input);
+////					if(valid && !"".equals(input)){
+////						event.doit = true;
+////						setPageComplete();
+////					} else {
+////						event.doit = false;
+////					}
+//				}
+//			});
 			data = new GridData(GridData.FILL, GridData.BEGINNING, true, false);
 			data.horizontalSpan = 2;
 			attribInput.setFont(composite.getFont());
@@ -80,7 +104,7 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 		}
 		setControl(composite);
 	}
-	
+
 	private void initLabelProvider(){
 		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
@@ -106,5 +130,20 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 	public IWizardPage getNextPage() {
 		propagateInputs();
 		return super.getNextPage();
+	}
+
+	@Override
+	public boolean isPageComplete() {
+		boolean allValuesValid = true;
+		for (Text text : textMap.keySet()) {
+			String input = text.getText();
+			IAttributeValueProvider valueProvider = textMap.get(text);
+			allValuesValid = allValuesValid && valueProvider.isValueValid(input) && !"".equals(input);
+		}
+		return allValuesValid;
+	}
+
+	private void setPageComplete(){
+		setPageComplete(isPageComplete());
 	}
 }
