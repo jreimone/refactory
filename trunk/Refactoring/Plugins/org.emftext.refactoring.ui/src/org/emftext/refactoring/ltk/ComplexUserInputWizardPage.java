@@ -7,6 +7,7 @@ import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 import org.emftext.refactoring.interpreter.IValueProvider;
 
 /**
@@ -38,13 +39,21 @@ public class ComplexUserInputWizardPage extends UserInputWizardPage {
 
 	@Override
 	protected boolean performFinish() {
-		valueProvider.getValue();
+		propagateInputs();
 		return super.performFinish();
 	}
 
+	private void propagateInputs() {
+		valueProvider.getValue();
+		valueProvider.propagateValueToFakeObject();
+	}
+	
 	@Override
 	public IWizardPage getNextPage() {
-		IWizardPage nextPage = super.getNextPage(); 
+		IWizardPage nextPage = super.getNextPage();
+		if(nextPage.getName().toLowerCase().contains("preview")){
+			propagateInputs();
+		}
 		return nextPage;
 	}
 
