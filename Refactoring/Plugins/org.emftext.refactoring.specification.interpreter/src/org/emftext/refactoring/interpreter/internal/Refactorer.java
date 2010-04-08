@@ -206,6 +206,7 @@ public class Refactorer implements IRefactorer {
 			// this model then can be used for compare view before refactoring
 			copiedRefactoredModel = fakeInterpreter.interprete(copiedModel);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("fake interpreter threw exception");
 			return null;
 		}
