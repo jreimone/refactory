@@ -96,12 +96,14 @@ public class ModelContentMergeContentProvider implements IMergeViewerContentProv
 	public Object getLeftContent(Object element) {
 		Object content = null;
 		if (element instanceof ModelCompareInput) {
-			content = ((ModelCompareInput)element).getLeftResource();
-			// final Resource res = ((ModelCompareInput)element).getLeftResource();
-			// if (res != null && res.getResourceSet() != null)
-			// content = res.getResourceSet();
-			// else
-			// content = res;
+			final Resource res = ((ModelCompareInput)element).getLeftResource();
+			if (res == null) {
+				content = ((ModelCompareInput)element).getLeft();
+			} else if (res.getResourceSet() != null) {
+				content = res.getResourceSet();
+			} else {
+				content = res;
+			}
 		} else if (element instanceof ICompareInput)
 			content = ((ICompareInput)element).getLeft();
 		return content;
