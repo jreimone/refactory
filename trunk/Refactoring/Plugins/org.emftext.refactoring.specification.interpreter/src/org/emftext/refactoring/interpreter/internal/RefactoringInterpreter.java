@@ -196,7 +196,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		
 		create = new CREATEInterpreter(mapping);
 		set = new SETInterpreter(mapping);
-		move = new MOVEInterpreter(mapping);
+		move = new MOVEInterpreter(mapping, this);
 		assign = new ASSIGNInterpreter(mapping, this);
 		indexInterpreter = new IndexAssignmentInterpreter();
 		objectInterpreter = new ObjectAssignmentInterpreter(this, mapping);

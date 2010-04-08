@@ -17,6 +17,7 @@ import org.emftext.refactoring.interpreter.AbstractValueProvider;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IValueProvider;
+import org.emftext.refactoring.interpreter.internal.AbstractPathCreator;
 
 /**
  * This {@link IValueProvider value provider} provides one element of a list within a dialog.
@@ -35,6 +36,7 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 	private List<EObject> elements;
 	private String name;
 	private FilteredEObjectsSelectionDialog dialog;
+	private AbstractPathCreator pathCreator;
 
 	public DialogOneListElementProvider(String name, Mapping mapping){
 		this.mapping = mapping;
@@ -115,7 +117,18 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 
 	public void propagateValueToFakeObject() {
 		if(getValue() != null){
-			
+			EObject fakeValue = getCopier().get(getValue());
+			pathCreator.createPath(fakeValue, pathCreator.getRemainingReferences(), pathCreator.getChild(), pathCreator.getIndex());
+		}
+	}
+
+	@Override
+	public void setFakePropagationContext(Object... context) {
+		if(context != null){
+			Object firstContext = context[0];
+			if(firstContext instanceof AbstractPathCreator){
+				pathCreator = (AbstractPathCreator) firstContext;
+			}
 		}
 	}
 

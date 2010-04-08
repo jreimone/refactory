@@ -23,6 +23,11 @@ import org.emftext.refactoring.util.ModelUtil;
  */
 public abstract class AbstractPathCreator {
 
+	private EObject parent;
+	private List<ReferenceMetaClassPair> remainingReferences;
+	private Object child;
+	private Integer index;
+
 	public IRefactoringStatus createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, EObject child){
 		return createPath(parent, remainingReferences, child, null);
 	}
@@ -37,6 +42,18 @@ public abstract class AbstractPathCreator {
 
 	@SuppressWarnings("unchecked")
 	public IRefactoringStatus createPath(EObject parent, List<ReferenceMetaClassPair> remainingReferences, Object child, Integer index){
+		if(this.parent == null){
+			this.parent = parent;
+		}
+		if(this.remainingReferences == null){
+			this.remainingReferences = remainingReferences;
+		}
+		if(this.child == null){
+			this.child = child;
+		}
+		if(this.index == null){
+			this.index = index;
+		}
 		if(remainingReferences == null){
 			IShortestPathAlgorithm algo = (new PathAlgorithmFactory()).getAlgorithm();
 			EObject target = getTargetObjectForPathCalculation(child);
@@ -121,5 +138,21 @@ public abstract class AbstractPathCreator {
 			//			EObject featureObject = null;
 			return createPath(featureObject, tempRemainingList, child, index);
 		}
+	}
+
+	public EObject getParent() {
+		return parent;
+	}
+
+	public List<ReferenceMetaClassPair> getRemainingReferences() {
+		return remainingReferences;
+	}
+
+	public Object getChild() {
+		return child;
+	}
+
+	public Integer getIndex() {
+		return index;
 	}
 }

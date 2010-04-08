@@ -113,4 +113,13 @@ public interface IValueProvider <ValueFrom, ValueType>{
 	 * 
 	 */
 	public void propagateValueToFakeObject();
+	
+	/**
+	 * In more intensive value providers it can be necessary that formerely computed values are
+	 * accessable for the propagation of the made input to the fake object. With this method
+	 * those context objects can be passed.
+	 * 
+	 * @param context
+	 */
+	public void setFakePropagationContext(Object... context);
 }

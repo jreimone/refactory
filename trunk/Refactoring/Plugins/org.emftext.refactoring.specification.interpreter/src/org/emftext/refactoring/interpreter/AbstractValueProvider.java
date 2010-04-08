@@ -52,4 +52,8 @@ public abstract class AbstractValueProvider<ValueFrom, ValueType> implements IVa
 	public Composite getProvidingComposite(){
 		return null;
 	}
+	
+	public void setFakePropagationContext(Object... context) {
+		// do nothing
+	}
 }
