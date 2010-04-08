@@ -99,8 +99,6 @@ public class ModelContentMergeContentProvider implements IMergeViewerContentProv
 			final Resource res = ((ModelCompareInput)element).getLeftResource();
 			if (res == null) {
 				content = ((ModelCompareInput)element).getLeft();
-			} else if (res.getResourceSet() != null) {
-				content = res.getResourceSet();
 			} else {
 				content = res;
 			}
@@ -138,8 +136,6 @@ public class ModelContentMergeContentProvider implements IMergeViewerContentProv
 			final Resource res = ((ModelCompareInput)element).getRightResource();
 			if (res == null) {
 				content = ((ModelCompareInput)element).getRight();
-			} else if (res.getResourceSet() != null) {
-				content = res.getResourceSet();
 			} else {
 				content = res;
 			}
