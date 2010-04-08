@@ -12,7 +12,7 @@ RoleModel IntroduceDerivation {
 	This role represents the element from which the other element is intended to be derived.
 	Map this role to the metaclass 'Feature'
 	*/ 
-	input  ROLE Derivee ; 
+	super input ROLE Derivee ; 
 	
 	/**
 	This role represents the container in which the derivation will be created.
