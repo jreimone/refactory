@@ -214,7 +214,6 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 			Object firstElement = selection.getFirstElement();
 			if(firstElement instanceof EObject){
 				selectedObject = (EObject) firstElement;
-				System.out.println(selectedObject);
 			}
 		}
 	}

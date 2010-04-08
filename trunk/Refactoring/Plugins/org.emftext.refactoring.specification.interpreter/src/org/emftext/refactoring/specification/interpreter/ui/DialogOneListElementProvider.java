@@ -3,7 +3,6 @@
  */
 package org.emftext.refactoring.specification.interpreter.ui;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
