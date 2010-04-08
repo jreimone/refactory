@@ -807,7 +807,8 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 				ancestorObject = getInputObject((TypedElementWrapper)ancestorObject);
 			}
 		}
-		// TODO independence of Resource is needed for comparison of in-memory models
+		// independence of Resource is needed for comparison of in-memory models
+		// so in such a case just pass the TypedElementWrapper
 		if (leftObject instanceof TypedElementWrapper) {
 			leftObject = getInputObject((TypedElementWrapper)leftObject);
 		}

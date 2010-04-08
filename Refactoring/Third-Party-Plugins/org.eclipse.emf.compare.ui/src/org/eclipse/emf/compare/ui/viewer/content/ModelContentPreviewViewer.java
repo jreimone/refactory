@@ -62,6 +62,7 @@ public class ModelContentPreviewViewer implements IChangePreviewViewer {
 		if (!(in.getChange() instanceof IModelCompareInputProvider)) {
 			return;
 		}
+
 		final IModelCompareInputProvider p = (IModelCompareInputProvider)in.getChange();
 		view.setInput(p.getModelCompareInput());
 	}

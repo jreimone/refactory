@@ -857,15 +857,6 @@ public class ModelContentMergeDiffTab extends TreeViewer implements IModelConten
 				}
 				return elements.toArray();
 			}
-			// if (object instanceof EObject) {
-			// EObject root = EcoreUtil.getRootContainer((EObject)object);
-			// if (root.equals(object)) {
-			// // return new Object[] {root };
-			// }
-			// // return new Object[] {object };
-			// Object[] elements = super.getElements(object);
-			//
-			// }
 			if (object instanceof TypedElementWrapper) {
 				return new Object[] {((TypedElementWrapper)object).getObject() };
 			}
