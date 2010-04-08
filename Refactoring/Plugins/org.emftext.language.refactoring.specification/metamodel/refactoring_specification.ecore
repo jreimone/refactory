@@ -114,7 +114,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1"
         eType="#//VariableAssignment" eOpposite="#//VariableAssignment/assignment"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationCommand" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationCommand" abstract="true"
+      eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//Variable" containment="true" eOpposite="#//Variable/containerCommand"/>
   </eClassifiers>

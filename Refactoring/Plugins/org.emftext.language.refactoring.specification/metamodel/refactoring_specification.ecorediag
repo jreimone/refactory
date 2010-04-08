@@ -1296,4 +1296,11 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_yi_Lsz8UEd-_qNdTKfpnQg" points="[-7, -5, 93, 71]$[-63, -56, 37, 20]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_yi_LtD8UEd-_qNdTKfpnQg" id="(0.17647058823529413,0.14285714285714285)"/>
   </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_Sk2WoULvEd-5duaK_vLOyA" type="3003" source="_PU5zkDH-Ed-3c77mpWC5jQ" target="_pmzrsB1mEd-RSI0QizO43A">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_Sk2WokLvEd-5duaK_vLOyA" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Sk2Wo0LvEd-5duaK_vLOyA"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Sk2WpELvEd-5duaK_vLOyA" points="[20, -20, 18, 324]$[20, -314, 18, 30]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Sk2WpULvEd-5duaK_vLOyA" id="(0.22549019607843138,0.27906976744186046)"/>
+  </edges>
 </notation:Diagram>
