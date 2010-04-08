@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Roles Builder Plugin
+Bundle-SymbolicName: org.emftext.language.refactoring.roles.builder;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.emftext.language.refactoring.roles.builder.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.emftext.language.refactoring.roles.resource.rolestext,
+ org.eclipse.emf.common,
+ org.emftext.refactoring.registry.rolemodel,
+ org.eclipse.emf.ecore,
+ org.emftext.language.refactoring.roles
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
