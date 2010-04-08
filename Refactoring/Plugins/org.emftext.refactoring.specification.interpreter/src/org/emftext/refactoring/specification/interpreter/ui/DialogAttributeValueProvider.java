@@ -6,6 +6,7 @@ package org.emftext.refactoring.specification.interpreter.ui;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.widgets.Display;
@@ -79,56 +80,24 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 	}
 
 	private Object convertValueIntoObject(EAttribute attribute, String value){
-		if(attribute.getEAttributeType().getInstanceClass().equals(Integer.class)){
-			try {
-				return Integer.parseInt(value);
-			} catch (Exception e) {
-				return "the given value must be of type Integer";
-			}
+		try{
+			Object convertedValue = EcoreUtil.createFromString(attribute.getEAttributeType(), value);
+			return convertedValue;
+		} catch (Exception e) {
+			return null;
 		}
-		if(attribute.getEAttributeType().getInstanceClass().equals(Boolean.class)){
-			try {
-				return Boolean.parseBoolean(value);
-			} catch (Exception e) {
-				return "the given value must be of type Boolean";
-			}
-		}
-		if(attribute.getEAttributeType().getInstanceClass().equals(Double.class)){
-			try {
-				return Double.parseDouble(value);
-			} catch (Exception e) {
-				return "the given value must be of type Double";
-			}
-		}
-		return value;
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.dialogs.IInputValidator#isValid(java.lang.String)
 	 */
 	public String isValid(String newText) {
-		if(attribute.getEAttributeType().getInstanceClass().equals(Integer.class)){
-			try {
-				Integer.parseInt(newText);
-			} catch (Exception e) {
-				return "the given value must be of type Integer";
-			}
+		try {
+			EcoreUtil.createFromString(attribute.getEAttributeType(), newText);
+			return null;
+		} catch (Exception e) {
+			return "Value " + newText + " not applicable for attribute " + attribute.getName();
 		}
-		if(attribute.getEAttributeType().getInstanceClass().equals(Boolean.class)){
-			try {
-				Boolean.parseBoolean(newText);
-			} catch (Exception e) {
-				return "the given value must be of type Boolean";
-			}
-		}
-		if(attribute.getEAttributeType().getInstanceClass().equals(Double.class)){
-			try {
-				Double.parseDouble(newText);
-			} catch (Exception e) {
-				return "the given value must be of type Double";
-			}
-		}
-		return null;
 	}
 
 	/* (non-Javadoc)
@@ -166,5 +135,20 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 		if(getValue() != null){
 			fakeAttributeOwner.eSet(fakeAttribute, getValue());
 		}
+	}
+
+	public boolean isValueValid(String text) {
+		EAttribute attribute = getAttribute();
+		Object validValue = convertValueIntoObject(attribute, text);
+		if(validValue != null){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void setValue(Object value) {
+		Object realValue = convertValueIntoObject(attribute, (String) value);
+		super.setValue(realValue);
 	}
 }

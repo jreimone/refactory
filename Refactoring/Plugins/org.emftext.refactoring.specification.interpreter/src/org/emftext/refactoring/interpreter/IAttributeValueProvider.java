@@ -29,4 +29,11 @@ public interface IAttributeValueProvider extends IValueProvider<EAttribute, Obje
 	 * @return
 	 */
 	public EObject getAttributeOwner();
+
+	/**
+	 * Returns whether the given <code>text</code> is valid for this attribute
+	 * @param text 
+	 * @return
+	 */
+	public boolean isValueValid(String text);
 }
