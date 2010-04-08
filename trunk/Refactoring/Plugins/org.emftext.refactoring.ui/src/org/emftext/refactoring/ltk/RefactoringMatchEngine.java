@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 
 public class RefactoringMatchEngine extends GenericMatchEngine {
 
-	@Override
 	protected void setModelRoots(MatchModel modelRoot, EObject left, EObject right, EObject ancestor) {
 		// Sets values of left, right and ancestor model roots
 		setRoots(left, modelRoot.getLeftRoots());
