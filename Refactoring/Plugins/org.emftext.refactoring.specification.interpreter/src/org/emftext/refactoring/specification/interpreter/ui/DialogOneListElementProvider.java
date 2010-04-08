@@ -29,7 +29,7 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 	private Mapping mapping;
 	private int returnCode;
 	private IRefactoringFakeInterpreter fakeInterpreter;
-	private EObject value;
+//	private EObject value;
 	private List<EObject> fakeElements;
 	private List<EObject> realElements;
 	private List<EObject> elements;
@@ -47,7 +47,6 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 			realElements.add(getInverseCopier().get(fakeElement));
 		}
 		elements = realElements;
-		elements = new ArrayList<EObject>(getCopier().keySet());
 		initDialog();
 	}
 
@@ -66,7 +65,7 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 
 		returnCode = dialog.open();
 		if(returnCode == FilteredItemsSelectionDialog.CANCEL) {
-			value = null;
+			setValue(null);
 		}
 		EObject selectedElement = (EObject) dialog.getFirstResult();
 		return selectedElement;
@@ -83,12 +82,12 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 			this.fakeElements = elements;
 			return elements.get(0);
 		} else {
-			if(value != null){
-				return value;
+			if(getValue() != null){
+				return getValue();
 			} else {
 				this.elements = elements;
-				value = openDialog();
-				return value;
+				setValue(openDialog());
+				return getValue();
 			}
 		}
 	}
@@ -110,12 +109,12 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 
 	@Override
 	public EObject getValue() {
-		value = dialog.getSelectedObject();
-		return value;
+		setValue(dialog.getSelectedObject());
+		return super.getValue();
 	}
 
 	public void propagateValueToFakeObject() {
-		if(value != null){
+		if(getValue() != null){
 			
 		}
 	}
