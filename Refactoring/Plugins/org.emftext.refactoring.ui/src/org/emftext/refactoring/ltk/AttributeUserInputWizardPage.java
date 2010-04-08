@@ -102,10 +102,7 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 
 	@Override
 	public IWizardPage getNextPage() {
-		IWizardPage nextPage = super.getNextPage();
-		if(nextPage.getName().toLowerCase().contains("preview")){
-			propagateInputs();
-		}
-		return nextPage;
+		propagateInputs();
+		return super.getNextPage();
 	}
 }
