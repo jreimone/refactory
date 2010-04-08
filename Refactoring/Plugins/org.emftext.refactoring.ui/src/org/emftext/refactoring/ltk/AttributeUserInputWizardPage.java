@@ -66,6 +66,8 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 			String temp = labelProvider.getText(attribute);
 			String addition = (owner == null)? "" : " from " + labelProvider.getText(owner);
 			String text = temp + addition;
+			Label iconLabel = new Label(composite, SWT.NONE);
+			iconLabel.setImage(labelProvider.getImage(attribute));
 			Label attribLabel = new Label(composite, SWT.NONE);
 			attribLabel.setText(text);
 			// TODO add validator 
