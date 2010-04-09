@@ -3,9 +3,8 @@ package org.emftext.refactoring.registry.rolemapping.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +16,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Plugin;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -144,7 +141,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 	}
 
-	public void registerRoleMapping(RoleMappingModel roleMapping) {
+	public List<Mapping> registerRoleMapping(RoleMappingModel roleMapping) {
 		Map<String, Mapping> mappingsToRegister = new LinkedHashMap<String, Mapping>();
 		for (Mapping mapping : roleMapping.getMappings()) {
 			mappingsToRegister.put(mapping.getName(), mapping);
@@ -156,8 +153,10 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			registered = new LinkedHashMap<String, Mapping>();
 			getRoleMappingsMap().put(nsUri, registered);
 		}
+		List<Mapping> alreadyRegistered = new LinkedList<Mapping>();
 		for (String mappingName : mappingsToRegister.keySet()) {
 			if(registered.get(mappingName) != null){
+				alreadyRegistered.add(mappingsToRegister.get(mappingName));
 				RegistryUtil.log("A mapping '" + mappingName + "' already exists in the registry for metamodel " + nsUri, IStatus.WARNING);
 			} else {
 				registered.put(mappingName, mappingsToRegister.get(mappingName));
@@ -165,6 +164,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 		EPackage rootPackage = roleMapping.getTargetMetamodel();
 		registerSubPackages(rootPackage, registered);
+		return alreadyRegistered;
 	}
 
 	private void registerSubPackages(EPackage rootPackage, Map<String, Mapping> mappings){
@@ -227,5 +227,22 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			image = defaultIconMap.get(mapping);
 		}
 		return image;
+	}
+
+	public void updateMappings(List<Mapping> mappingsToUpdate) {
+		for (Mapping mapping : mappingsToUpdate) {
+			RoleMappingModel model = mapping.getOwningMappingModel();
+			if(model != null){
+				String nsUri = model.getTargetMetamodel().getNsURI();
+				Map<String, Mapping> registeredMappings = getRoleMappingsForUri(nsUri);
+				if(registeredMappings != null){
+					Mapping correspondingMapping = registeredMappings.get(mapping.getName());
+					if(correspondingMapping == null 
+							|| mapping.eResource().getURI().equals(correspondingMapping.eResource().getURI())){
+						registeredMappings.put(mapping.getName(), mapping);
+					}
+				}
+			}
+		}
 	}
 }

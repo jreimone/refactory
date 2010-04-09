@@ -55,11 +55,9 @@ public interface IRoleModelRegistry {
 	 */
 	public RoleModel getRoleModelByName(String name);
 	
-//	/**
-//	 * Returns a {@link RoleModel} by its namespace URI.
-//	 *  
-//	 * @param nsURI of the desired {@link RoleModel}
-//	 * @return the desired {@link RoleModel}
-//	 */
-//	public RoleModel getRoleModelByUri(String nsURI);
+	/**
+	 * Use this method to update an already registered role model.
+	 * @param model
+	 */
+	public void updateRoleModel(RoleModel model);
 }

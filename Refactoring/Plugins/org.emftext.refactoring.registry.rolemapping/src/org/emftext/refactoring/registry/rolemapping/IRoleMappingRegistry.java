@@ -1,5 +1,6 @@
 package org.emftext.refactoring.registry.rolemapping;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -27,10 +28,23 @@ public interface IRoleMappingRegistry {
 	public Map<String, Mapping> getRoleMappingsForUri(String nsUri);
 	
 	/**
-	 * To be invoked if a {@link RoleMappingModel} is intended to be registered at runtime. 
+	 * To be invoked if a {@link RoleMappingModel} is intended to be registered at runtime.
+	 * This method returns those mappings contained in the <code>roleMapping</code> which couldn't be registered
+	 * because they are already registered.
+	 *  
 	 * @param roleMapping
+	 * @return those mappings which couldn't be registered
 	 */
-	public void registerRoleMapping(RoleMappingModel roleMapping);
+	public List<Mapping> registerRoleMapping(RoleMappingModel roleMapping);
+	
+	/**
+	 * This method updates the registered mappings with the <code>mappingsToUpdate</code>. Only corresponding
+	 * mappings will be updated. As input the output from {@link IRoleMappingRegistry#registerRoleMapping(RoleMappingModel)}
+	 * could serve.
+	 *  
+	 * @param mappingsToUpdate
+	 */
+	public void updateMappings(List<Mapping> mappingsToUpdate);
 	
 	/**
 	 * Returns the {@link RoleMappingModel rolemapping} map.

@@ -32,6 +32,12 @@ public interface IRefactoringSpecificationRegistry {
 	public void registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException;
 	
 	/**
+	 * Use this method to update an already registered refspec
+	 * @param refSpec
+	 */
+	public void updateRefSpec(RefactoringSpecification refSpec);
+	
+	/**
 	 * Returns the {@link RefactoringSpecification refspec} map.
 	 * @return
 	 */

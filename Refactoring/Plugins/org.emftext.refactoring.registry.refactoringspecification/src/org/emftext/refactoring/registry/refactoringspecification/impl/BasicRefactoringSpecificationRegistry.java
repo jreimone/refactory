@@ -13,8 +13,7 @@ import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpe
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
 import org.emftext.refactoring.util.RegistryUtil;
 
-public class BasicRefactoringSpecificationRegistry implements
-		IRefactoringSpecificationRegistry {
+public class BasicRefactoringSpecificationRegistry implements IRefactoringSpecificationRegistry {
 
 	private Map<String, RefactoringSpecification> refSpecMap;
 	
@@ -57,5 +56,9 @@ public class BasicRefactoringSpecificationRegistry implements
 				RegistryUtil.log(e.getMessage(), IStatus.ERROR);
 			}
 		}
+	}
+
+	public void updateRefSpec(RefactoringSpecification refSpec) {
+		getRefSpecMap().put(refSpec.getName(), refSpec);
 	}
 }
