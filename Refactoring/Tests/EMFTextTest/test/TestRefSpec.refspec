@@ -1,0 +1,11 @@
+REFACTORING IntroduceDerivation 
+FOR <TestRoles>  
+
+STEPS { 
+	object derivationContainer := DerivationContainer from uptree(INPUT);
+	object derivees := TestInput from filter(INPUT);
+	
+	create new derivation:Derivation in derivationContainer;
+	set use of derivees in derivation.derivees;
+	assign derivation.attribute1;
+} 

@@ -125,6 +125,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.reuseware.sokan.resource.indexBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.emftext.language.models.resource.model.nature</nature>
@@ -151,5 +156,6 @@
 		<nature>org.emftext.language.ecore.resource.facade.nature</nature>
 		<nature>org.emftext.language.ecore.resource.text.nature</nature>
 		<nature>org.emftext.language.ecore.resource.text.nature</nature>
+		<nature>org.reuseware.sokan.resource.repositoryNature</nature>
 	</natures>
 </projectDescription>

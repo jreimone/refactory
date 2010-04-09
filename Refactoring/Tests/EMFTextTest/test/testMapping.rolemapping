@@ -1,7 +1,11 @@
 ROLEMODELMAPPING relationTestMapping FOR <http://www.eclipse.org/emf/2002/Ecore>
 
-TestProhibitionMapping maps <platform:/resource/EMFTextTest/test/TestProhibition.xmi> { 
-	InputRole -> EClass ;
-	OutputRole -> EClass;
-	TransitiveOutputRoleParent -> EClassifier;
+TestRuntimeRegistration maps <TestRoles> {
+	Derivation := EClass(attribute1 -> name){
+		derivees := eSuperTypes; 
+	};
+	DerivationContainer := EPackage{
+		derivation := eClassifiers;
+	};
+	TestInput := EClass;
 }
