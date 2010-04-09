@@ -22,6 +22,8 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	overrideHoverTextProvider = "false";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
+	overrideBuilder = "false";
 }
 
 TOKENS{

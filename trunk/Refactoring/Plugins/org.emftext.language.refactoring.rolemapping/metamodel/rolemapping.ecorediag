@@ -18,7 +18,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_k4GnYRcEEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="rolemapping.ecore#//RoleMappingModel"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k4GnYhcEEd-v66FqVrAtPg" x="295" y="115" width="143"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k4GnYhcEEd-v66FqVrAtPg" x="260" y="70" width="143"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_fsuSMBcFEd-v66FqVrAtPg" type="1001">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ftYZgBcFEd-v66FqVrAtPg" source="Shortcut">
@@ -340,7 +340,9 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_cn9rQRcGEd-v66FqVrAtPg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_cn9rQhcGEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="rolemapping.ecore#//RoleMappingModel/mappings"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_cn9rQxcGEd-v66FqVrAtPg" points="[1, 21, 1, -119]$[50, 158, 50, 18]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_cn9rQxcGEd-v66FqVrAtPg" points="[-16, 25, -8, -73]$[-5, 91, 3, -7]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_YvM70EO6Ed-CCOkyyTmOSQ" id="(0.5,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_YvM70UO6Ed-CCOkyyTmOSQ" id="(0.26571428571428574,0.07272727272727272)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_Hz-CcBcHEd-v66FqVrAtPg" type="3002" source="_Y4GHQBcGEd-v66FqVrAtPg" target="_FBM_4BcHEd-v66FqVrAtPg">
     <children xmi:type="notation:Node" xmi:id="_H0Mr8BcHEd-v66FqVrAtPg" type="4011">
@@ -486,5 +488,19 @@
     <element xmi:type="ecore:EReference" href="rolemapping.ecore#//ReferenceMetaClassPair/metaClass"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fsQf8yyBEd-WspGfTuLc6Q" points="[-5, 20, 23, -84]$[-27, 96, 1, -8]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_fsQf-CyBEd-WspGfTuLc6Q" id="(0.45098039215686275,0.15517241379310345)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_O9Jy8EO6Ed-CCOkyyTmOSQ" type="3002" source="_Y4GHQBcGEd-v66FqVrAtPg" target="_k4GnYBcEEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_O9LoIEO6Ed-CCOkyyTmOSQ" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_O9LoIUO6Ed-CCOkyyTmOSQ" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_O9MPMEO6Ed-CCOkyyTmOSQ" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_O9MPMUO6Ed-CCOkyyTmOSQ" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_O9Jy8UO6Ed-CCOkyyTmOSQ" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_O9Jy8kO6Ed-CCOkyyTmOSQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//Mapping/owningMappingModel"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_O9Jy80O6Ed-CCOkyyTmOSQ" points="[3, -7, -5, 91]$[-8, -73, -16, 25]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_O9PSgEO6Ed-CCOkyyTmOSQ" id="(0.26571428571428574,0.07272727272727272)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_YvJRcEO6Ed-CCOkyyTmOSQ" id="(0.5,0.5)"/>
   </edges>
 </notation:Diagram>

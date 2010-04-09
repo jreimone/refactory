@@ -12,11 +12,9 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
-	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.language.refactoring.roles.resource.rolestext";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.language.refactoring.roles.resource.rolestext,org.emftext.refactoring.registry.rolemapping";
 	overrideHoverTextProvider = "false";
-	//additionalDependencies = "org.emftext.refactoring.util";
-	//overridePluginXML = "false";
-	//overrideManifest = "false";
+	overrideBuilder = "false";
 }
 
 TOKENS {
