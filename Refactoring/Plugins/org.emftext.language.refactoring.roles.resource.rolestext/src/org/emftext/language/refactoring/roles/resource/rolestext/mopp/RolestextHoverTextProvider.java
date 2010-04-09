@@ -43,7 +43,7 @@ public class RolestextHoverTextProvider implements org.emftext.language.refactor
 	
 	private String handleRoleAttribute(RoleAttribute attribute){
 		StringBuilder builder = new StringBuilder();
-		builder.append("<strong>" + attribute.getAttributeRole().getName() + " Attribute: </strong>" + attribute.getName());
+		builder.append("<strong>" + attribute.getAttributeRole().getName() + "</strong> Attribute: <strong>" + attribute.getName() + "</strong>");
 		builder.append(handleComment(attribute));
 		builder.append(handleRoleModifiers(attribute.getModifier()));
 		return builder.toString();

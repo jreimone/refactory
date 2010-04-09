@@ -21,6 +21,13 @@ public class RefactoringSpecificationUsedRoleModelReferenceResolver implements o
 
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<org.emftext.language.refactoring.roles.RoleModel> result) {
 		IRoleModelRegistry registry = IRoleModelRegistry.INSTANCE;
+		if (resolveFuzzy) {
+			for (RoleModel roleModel : registry.getAllRegisteredRoleModels()) {
+//				result.addMapping("<" + roleModel.getName() + ">", roleModel);
+				result.addMapping(roleModel.getName(), roleModel);
+			}
+			return;
+		}
 		RoleModel model = registry.getRoleModelByName(identifier);
 		if(model != null){
 			result.addMapping(identifier, model);
@@ -28,8 +35,16 @@ public class RefactoringSpecificationUsedRoleModelReferenceResolver implements o
 		} else {
 			URI uri = URI.createURI(identifier);
 			ResourceSet resourceSet = container.eResource().getResourceSet();
-			Resource resource = resourceSet.getResource(uri, true);
-			if (resource == null ) {
+			Resource resource = null;
+			try {
+				resource = resourceSet.getResource(uri, true);
+			} catch (Exception e) {
+				if(!resolveFuzzy){
+					result.setErrorMessage("Can't load role model from " + identifier);
+				}
+				return;
+			}
+			if (resource == null && !resolveFuzzy) {
 				result.setErrorMessage("Can't load role model from " + identifier);
 				return;
 			}
