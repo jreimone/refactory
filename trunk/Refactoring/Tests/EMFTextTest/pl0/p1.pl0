@@ -9,12 +9,18 @@ CONST
 	
 	PROCEDURE innerProc ; 
 
+PROCEDURE asdfgsdfghsdfg ; 
+
 BEGIN 
-	x := + ccc - a ; 
-	y := + x * 12 
+	x :=  ccc - a ; 
+	y :=  x * 12 
+	END ; 
+
+BEGIN 
+	CALL asdfgsdfghsdfg 
 	END ; 
 
 BEGIN 
 	CALL innerProc ; 
-	z := + y / a 
+	z :=  y / a 
 	END . 

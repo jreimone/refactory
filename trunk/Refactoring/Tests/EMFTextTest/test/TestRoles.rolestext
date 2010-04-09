@@ -1,0 +1,11 @@
+RoleModel TestRoles { 
+ 
+	super input ROLE TestInput; 
+	  
+	ROLE DerivationContainer; 
+  
+	ROLE Derivation (input runtime attribute1); 
+
+	transitive: DerivationContainer [1..1] <>- Derivation derivation [0..*];
+	transitive: Derivation [1..1] -- TestInput derivees [0..*];
+} 
