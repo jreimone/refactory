@@ -7,6 +7,6 @@ STEPS {
 
 	create new nc:NewContainer in containerContainerObject; 
 	assign nc.newName;
-	move OrigContainer.extracts to nc;  
-	set use of nc in origContainerObject; 
+	move OrigContainer.extracts to nc distinct;  
+	set use of nc in containerContainerObject.source; 
 } 
