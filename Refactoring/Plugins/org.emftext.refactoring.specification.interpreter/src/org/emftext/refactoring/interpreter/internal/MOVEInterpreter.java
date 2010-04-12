@@ -3,10 +3,16 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.refactoring.refactoring_specification.DISTINCT;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
+import org.emftext.language.refactoring.refactoring_specification.Modifier;
 import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.SourceContext;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
@@ -54,6 +60,7 @@ public class MOVEInterpreter {
 				sourceObjects = selection;
 			}
 		}
+		sourceObjects = handleMoveModifier(sourceObjects, object.getMoveModifier());
 		
 		TargetContext targetContext = object.getTarget();
 		Role targetRole = null;
@@ -77,5 +84,35 @@ public class MOVEInterpreter {
 			valueProvider.setFakePropagationContext(pathCreator);
 		}
 		return pathCreator.createPath(targetObject, referencePairs, sourceObjects, index);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<EObject> handleMoveModifier(List<? extends EObject> sourceObjects, Modifier modifier){
+		if(modifier instanceof DISTINCT){
+			List<EObject> originals = new LinkedList<EObject>();
+			Set<EObject> copyList = new LinkedHashSet<EObject>();
+			for (EObject object : sourceObjects) {
+				List<EObject> others = new LinkedList<EObject>();
+				for (EObject otherObject : sourceObjects) {
+					if(!otherObject.equals(object)){
+						others.add(otherObject);
+					}
+				}
+				for (EObject otherObject : others) {
+					if(!copyList.contains(object) 
+							&& EcoreUtil.equals(object, otherObject)){
+						originals.add(object);
+						copyList.add(otherObject);
+					}
+				}
+			}
+			for (EObject eObject : sourceObjects) {
+				if(!originals.contains(eObject) && !copyList.contains(eObject)){
+					originals.add(eObject);
+				}
+			}
+			return originals;
+		}
+		return (List<EObject>) sourceObjects;
 	}
 }

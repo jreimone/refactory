@@ -66,6 +66,7 @@ public class SETInterpreter {
 		RelationMapping relationMapping = null;
 		if(target instanceof RelationReference){
 			MultiplicityRelation relation = ((RelationReference) target).getRelation();
+			// TODO das passt hier bei ExtractXwithReference nicht
 			targetRole = relation.getSource();
 			EObject interpretationContext = relation.getInterpretationContext();
 			if(interpretationContext instanceof Variable){
