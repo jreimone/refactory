@@ -8,5 +8,6 @@ STEPS {
 	create new nc:NewContainer in containerContainerObject; 
 	assign nc.newName;
 	move OrigContainer.extracts to nc distinct;  
+	// hier mal 'origContainerObject' als target nehmen und aber korrekt EObjects in context speichern!
 	set use of nc in containerContainerObject.source; 
 } 
