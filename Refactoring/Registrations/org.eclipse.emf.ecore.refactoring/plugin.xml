@@ -14,4 +14,24 @@
             rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
       </rolemapping>
    </extension>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/extractInterfaceFromFeatures.rolemapping">
+      </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/extractInterfaceFromOperations.rolemapping">
+      </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="ExtractInterfaceFromFeatures"
+            nsUri="http://www.eclipse.org/emf/2002/Ecore"
+            postprocessor="org.eclipse.emf.ecore.refactoring.postprocessors.InterfaceFromFeaturesPostProcessor">
+      </postprocessor>
+   </extension>
 </plugin>
