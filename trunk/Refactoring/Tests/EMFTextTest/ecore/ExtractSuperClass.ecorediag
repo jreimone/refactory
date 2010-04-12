@@ -52,6 +52,46 @@
     <element xmi:type="ecore:EClass" href="ExtractSuperClass.ecore#//ReferencedFeatureClass"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cwY14jqREd-nfJ0tnBophA" x="554" y="384"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_drpGMEZjEd-BEJhGlf-Cfw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_dryQIEZjEd-BEJhGlf-Cfw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_dryQIUZjEd-BEJhGlf-Cfw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_euitoEZjEd-BEJhGlf-Cfw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="ExtractSuperClass.ecore#//EClass0/simpleFeature"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_euitoUZjEd-BEJhGlf-Cfw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_dryQIkZjEd-BEJhGlf-Cfw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dryQI0ZjEd-BEJhGlf-Cfw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dryQJEZjEd-BEJhGlf-Cfw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_dryQJUZjEd-BEJhGlf-Cfw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_dryQJkZjEd-BEJhGlf-Cfw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dryQJ0ZjEd-BEJhGlf-Cfw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dryQKEZjEd-BEJhGlf-Cfw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_drpGMUZjEd-BEJhGlf-Cfw" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="ExtractSuperClass.ecore#//EClass0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_drpGMkZjEd-BEJhGlf-Cfw" x="93" y="97"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_eGKfAEZjEd-BEJhGlf-Cfw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_eGKfA0ZjEd-BEJhGlf-Cfw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_eGKfBEZjEd-BEJhGlf-Cfw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_goIsgEZjEd-BEJhGlf-Cfw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="ExtractSuperClass.ecore#//EClass1/simpleFeature"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_goIsgUZjEd-BEJhGlf-Cfw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_eGKfBUZjEd-BEJhGlf-Cfw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_eGKfBkZjEd-BEJhGlf-Cfw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_eGKfB0ZjEd-BEJhGlf-Cfw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_eGKfCEZjEd-BEJhGlf-Cfw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_eGKfCUZjEd-BEJhGlf-Cfw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_eGKfCkZjEd-BEJhGlf-Cfw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_eGKfC0ZjEd-BEJhGlf-Cfw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_eGKfAUZjEd-BEJhGlf-Cfw" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="ExtractSuperClass.ecore#//EClass1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eGKfAkZjEd-BEJhGlf-Cfw" x="245" y="180"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_KZxq8DqREd-nfJ0tnBophA"/>
   <element xmi:type="ecore:EPackage" href="ExtractSuperClass.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_ZhuhgDqREd-nfJ0tnBophA" type="3002" source="_Ql-HcDqREd-nfJ0tnBophA" target="_XiRLMDqREd-nfJ0tnBophA">
