@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:roles="http://www.emftext.org/language/roles" xmi:id="_btoxIEZSEd-cEZbbiSKtAQ" type="Role Model" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_bzdFQEZSEd-cEZbbiSKtAQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_bzdFRUZSEd-cEZbbiSKtAQ" type="5001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_bzdFQUZSEd-cEZbbiSKtAQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_bzdFQkZSEd-cEZbbiSKtAQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_bzdFQ0ZSEd-cEZbbiSKtAQ"/>
+    <element xmi:type="roles:Role" href="IntroduceDerivation.roles#//@roles[name='Derivee']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bzdFREZSEd-cEZbbiSKtAQ" x="290" y="135" width="71"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_bzdFRkZSEd-cEZbbiSKtAQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_bzdFS0ZSEd-cEZbbiSKtAQ" type="5001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_bzdFR0ZSEd-cEZbbiSKtAQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_bzdFSEZSEd-cEZbbiSKtAQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_bzdFSUZSEd-cEZbbiSKtAQ"/>
+    <element xmi:type="roles:Role" href="IntroduceDerivation.roles#//@roles[name='DerivationContainer']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bzdFSkZSEd-cEZbbiSKtAQ" x="50" y="40" width="136"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_bzdFTEZSEd-cEZbbiSKtAQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_bzdFUUZSEd-cEZbbiSKtAQ" type="5001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_bzdFTUZSEd-cEZbbiSKtAQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_bzdFTkZSEd-cEZbbiSKtAQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_bzdFT0ZSEd-cEZbbiSKtAQ"/>
+    <element xmi:type="roles:Role" href="IntroduceDerivation.roles#//@roles[name='Derivation']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bzdFUEZSEd-cEZbbiSKtAQ" x="80" y="130" width="81"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_btoxIUZSEd-cEZbbiSKtAQ"/>
+  <element xmi:type="roles:RoleModel" href="IntroduceDerivation.roles#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_b8iv0EZSEd-cEZbbiSKtAQ" type="4003" source="_bzdFTEZSEd-cEZbbiSKtAQ" target="_bzdFQEZSEd-cEZbbiSKtAQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_b8iv1EZSEd-cEZbbiSKtAQ" visible="false" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b8iv1UZSEd-cEZbbiSKtAQ" x="10"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_b8iv1kZSEd-cEZbbiSKtAQ" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b8iv10ZSEd-cEZbbiSKtAQ" x="-9" y="7"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_b8iv0UZSEd-cEZbbiSKtAQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_b8iv0kZSEd-cEZbbiSKtAQ"/>
+    <element xmi:type="roles:RoleAssociation" href="IntroduceDerivation.roles#//@relations.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_b8iv00ZSEd-cEZbbiSKtAQ" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_b_93QEZSEd-cEZbbiSKtAQ" id="(0.9506172839506173,0.45)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_b_93QUZSEd-cEZbbiSKtAQ" id="(0.09859154929577464,0.375)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_b-U4gEZSEd-cEZbbiSKtAQ" type="4004" source="_bzdFRkZSEd-cEZbbiSKtAQ" target="_bzdFTEZSEd-cEZbbiSKtAQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_b-U4hEZSEd-cEZbbiSKtAQ" visible="false" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b-U4hUZSEd-cEZbbiSKtAQ" x="10"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_b-U4hkZSEd-cEZbbiSKtAQ" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b-U4h0ZSEd-cEZbbiSKtAQ" x="-6" y="-2"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_b-U4gUZSEd-cEZbbiSKtAQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_b-U4gkZSEd-cEZbbiSKtAQ"/>
+    <element xmi:type="roles:RoleComposition" href="IntroduceDerivation.roles#//@relations.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_b-U4g0ZSEd-cEZbbiSKtAQ" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_b_93QkZSEd-cEZbbiSKtAQ" id="(0.496,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_b_93Q0ZSEd-cEZbbiSKtAQ" id="(0.4931506849315068,1.0)"/>
+  </edges>
+</notation:Diagram>
