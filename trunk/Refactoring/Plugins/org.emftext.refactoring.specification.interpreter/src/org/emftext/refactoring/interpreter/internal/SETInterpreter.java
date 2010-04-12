@@ -11,6 +11,7 @@ import org.emftext.language.refactoring.refactoring_specification.RelationRefere
 import org.emftext.language.refactoring.refactoring_specification.SET;
 import org.emftext.language.refactoring.refactoring_specification.SourceContext;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
+import org.emftext.language.refactoring.refactoring_specification.TraceObject;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
@@ -45,11 +46,21 @@ public class SETInterpreter {
 		Role sourceRole = null;
 		if(source instanceof VariableReference){
 			sourceObject = context.getEObjectForVariable(((VariableReference) source).getVariable());
-			sourceRole = RoleUtil.getRoleFromVariable(((VariableReference) source).getVariable());
+			if(sourceObject instanceof TraceObject){
+				sourceRole = ((TraceObject) sourceObject).getAppliedRole();
+				sourceObject = ((TraceObject) sourceObject).getContainer();
+			} else {
+				sourceRole = RoleUtil.getRoleFromVariable(((VariableReference) source).getVariable());
+			}
 		}
 		if(target instanceof VariableReference){
 			targetObject = context.getEObjectForVariable(((VariableReference) target).getVariable());
-			targetRole = RoleUtil.getRoleFromVariable(((VariableReference) target).getVariable());
+			if(targetObject instanceof TraceObject){
+				targetRole = ((TraceObject) targetObject).getAppliedRole();
+				targetObject = ((TraceObject) targetObject).getContainer();
+			} else {
+				targetRole = RoleUtil.getRoleFromVariable(((VariableReference) target).getVariable());
+			}
 		}
 		ConcreteMapping concreteMapping = null;
 		RelationMapping relationMapping = null;
@@ -73,7 +84,7 @@ public class SETInterpreter {
 			} else {
 				throw new UnsupportedOperationException("implement this case");
 			}
-			
+
 		} else {
 			concreteMapping = mapping.getConcreteMappingForRole(targetRole);
 			relationMapping = concreteMapping.getRelationMappingForTargetRole(sourceRole);
