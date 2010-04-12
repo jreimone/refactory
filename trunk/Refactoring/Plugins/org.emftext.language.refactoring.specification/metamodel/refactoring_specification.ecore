@@ -39,6 +39,8 @@
         eType="#//SourceContext" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//TargetContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moveModifier" eType="#//Modifier"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -136,4 +138,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PATH" eSuperTypes="#//FromOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="FILTER" eSuperTypes="#//FromOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Modifier" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DISTINCT" eSuperTypes="#//Modifier"/>
 </ecore:EPackage>

@@ -34,6 +34,7 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//MOVE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//MOVE/source"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//MOVE/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//MOVE/moveModifier"/>
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoring_specification.ecore#//Variable/name"/>
@@ -106,5 +107,7 @@
     </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//PATH"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//FILTER"/>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//Modifier"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//DISTINCT"/>
   </genPackages>
 </genmodel:GenModel>

@@ -68,6 +68,7 @@ TOKENSTYLES{
 	"first" COLOR #50F05C, BOLD;
 	"last" COLOR #50F05C, BOLD;
 	"as" COLOR #7F0055, BOLD;
+	"distinct" COLOR #7F0055, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
 	"LOWER_IDENTIFIER" COLOR #0000FF;
 	"UPPER_IDENTIFIER" COLOR #0000FF;
@@ -80,7 +81,9 @@ RULES{
 	
 	CREATE ::= "create" #1 "new" #1 variable #0 ":" #0 sourceRole[UPPER_IDENTIFIER] #1 "in" #1 targetContext ("at" index[LOWER_IDENTIFIER])?;
 	
-	MOVE ::= "move" #1 source #1 "to" #1 target ("at" index[LOWER_IDENTIFIER])?;
+	MOVE ::= "move" #1 source #1 "to" #1 target ("at" index[LOWER_IDENTIFIER])? (moveModifier)?;
+	
+	DISTINCT ::= "distinct";
 	
 	SET ::= "set" #1 "use" #1 "of" #1 source #1 "in" #1 target;
 	
