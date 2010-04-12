@@ -1,0 +1,12 @@
+REFACTORING ExtractXwithReferenceRefactoring 
+FOR <ExtractXwithReference> 
+
+STEPS { 
+	object containerContainerObject := ContainerContainer from uptree(INPUT); 
+	object origContainerObject := OrigContainer as trace(INPUT); 
+
+	create new nc:NewContainer in containerContainerObject; 
+	assign nc.newName;
+	move OrigContainer.extracts to nc;  
+	set use of nc in origContainerObject; 
+} 
