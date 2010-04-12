@@ -7,8 +7,6 @@ import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
-import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IValueProvider;
 
 /**
@@ -54,19 +52,4 @@ public class ComplexUserInputWizardPage extends UserInputWizardPage {
 		propagateInputs();
 		return super.getNextPage();
 	}
-
-//	@Override
-//	public boolean isPageComplete() {
-//		boolean allValuesValid = true;
-//		for (Text text : textMap.keySet()) {
-//			String input = text.getText();
-//			IAttributeValueProvider valueProvider = textMap.get(text);
-//			allValuesValid = allValuesValid && valueProvider.isValueValid(input) && !"".equals(input);
-//		}
-//		return allValuesValid;
-//	}
-//
-//	private void setPageComplete(){
-//		setPageComplete(isPageComplete());
-//	}
 }
