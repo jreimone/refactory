@@ -155,7 +155,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							rootMenu.add(refactoringAction);
 							containsEntries = true;
 						}
-					}
+					} 
 				}
 				if(containsEntries){
 					additions.addContributionItem(rootMenu, null);
