@@ -4,7 +4,7 @@ used refactorings in practice. 'Rename Method' has to be used if one wants to re
 and update all references to this method that they stay consistent. Originally <a href="http://www.refactoring.com/catalog/renameMethod.html">Rename Method</a> 
 comes from the Fowler book.
 */
-RoleModel RenameMethod { 
+RoleModel RenameX { 
 	
 	/**
 	Map this role on a metaclass that owns an attribute which stands for the name and is intended to be renamed.
