@@ -1,0 +1,35 @@
+ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+/**
+ * This refactoring takes a set of operation parameters and converts
+ * them into a class, which replaces the parameters. The new class
+ * encapsulates the set of parameters. 
+ */
+IntroduceParameterObject maps <ExtractXwithReference> {
+
+	Extractee := EParameter;
+	
+	OrigContainer := EOperation {
+		extracts := eParameters;
+		reference := eContainingClass -> ePackage;
+	};
+	
+	NewContainer := EClass(newName -> name) {
+		// TODO this will not work, since we extract parameters and these cannot
+		// be used as features. What we actually need is to convert each parameter
+		// to an attribute (if its type is primitive) or to a reference (if its type
+		// is complex). This conversion must also preserve the upper and lower bounds
+		// of the parameters.
+		//
+		// Any idea how to do this?
+		moved := eStructuralFeatures;
+	};
+	
+	ContainerContainer := EPackage {
+		source := eClassifiers;
+		target := eClassifiers;
+	};
+	
+	// TODO after creating the new class, we need to replace the operation parameters
+	// with one parameter where the type is the new class
+} 
