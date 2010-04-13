@@ -31,6 +31,12 @@ public interface IAttributeValueProvider extends IValueProvider<EAttribute, Obje
 	public EObject getAttributeOwner();
 
 	/**
+	 * Returns the owner of the fake attribute.
+	 * @return
+	 */
+	public EObject getFakeAttributeOwner();
+	
+	/**
 	 * Returns whether the given <code>text</code> is valid for this attribute
 	 * @param text 
 	 * @return

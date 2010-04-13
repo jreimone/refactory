@@ -151,4 +151,11 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 		Object realValue = convertValueIntoObject(attribute, (String) value);
 		super.setValue(realValue);
 	}
+
+	/**
+	 * @return the fakeAttributeOwner
+	 */
+	public EObject getFakeAttributeOwner() {
+		return fakeAttributeOwner;
+	}
 }
