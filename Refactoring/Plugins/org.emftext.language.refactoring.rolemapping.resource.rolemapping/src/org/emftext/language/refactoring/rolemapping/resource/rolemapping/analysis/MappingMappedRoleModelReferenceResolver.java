@@ -30,7 +30,7 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 		IRoleModelRegistry registry = IRoleModelRegistry.INSTANCE;
 		if (resolveFuzzy) {
 			for (RoleModel roleModel : registry.getAllRegisteredRoleModels()) {
-				result.addMapping("<" + roleModel.getName() + ">", roleModel);
+				result.addMapping(roleModel.getName(), roleModel);
 			}
 			return;
 		}

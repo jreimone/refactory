@@ -15,8 +15,6 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
-import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
-import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
 
 public class RefspecBuilder implements org.emftext.language.refactoring.specification.resource.IRefspecBuilder {
 	

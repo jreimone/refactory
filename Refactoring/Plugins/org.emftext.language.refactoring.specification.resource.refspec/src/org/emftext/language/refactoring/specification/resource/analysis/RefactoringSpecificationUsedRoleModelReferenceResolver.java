@@ -17,13 +17,10 @@ import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 
 public class RefactoringSpecificationUsedRoleModelReferenceResolver implements org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver<org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, org.emftext.language.refactoring.roles.RoleModel> {
 
-	private org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, org.emftext.language.refactoring.roles.RoleModel> delegate = new org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, org.emftext.language.refactoring.roles.RoleModel>();
-
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<org.emftext.language.refactoring.roles.RoleModel> result) {
 		IRoleModelRegistry registry = IRoleModelRegistry.INSTANCE;
 		if (resolveFuzzy) {
 			for (RoleModel roleModel : registry.getAllRegisteredRoleModels()) {
-//				result.addMapping("<" + roleModel.getName() + ">", roleModel);
 				result.addMapping(roleModel.getName(), roleModel);
 			}
 			return;
