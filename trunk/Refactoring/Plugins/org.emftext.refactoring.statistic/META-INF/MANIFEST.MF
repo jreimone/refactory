@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Refactoring Statistic Plugin
+Bundle-SymbolicName: org.emftext.refactoring.statistic;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.emftext.refactoring.statistic.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.rolemapping,
+ org.emftext.refactoring.registry.rolemodel,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui,
+ org.emftext.language.refactoring.roles,
+ org.emftext.language.refactoring.specification,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.refactoring.util
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
