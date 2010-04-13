@@ -139,19 +139,22 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
 				boolean containsEntries = false;
 				for (Mapping mapping : mappings) {
-					RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
-					if(refSpec != null){
-						String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
-						Action refactoringAction = null;
-						if(diagramTransactionalEditingDomain == null){
-							refactoringAction = new RefactoringAction(mapping, refactorer);
-						} else {
-							refactoringAction = new RefactoringAction(mapping, refactorer, diagramTransactionalEditingDomain, activeEditor);
+					Resource mappingResource = mapping.eResource();
+					if(mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0 )){
+						RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
+						if(refSpec != null){
+							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
+							Action refactoringAction = null;
+							if(diagramTransactionalEditingDomain == null){
+								refactoringAction = new RefactoringAction(mapping, refactorer);
+							} else {
+								refactoringAction = new RefactoringAction(mapping, refactorer, diagramTransactionalEditingDomain, activeEditor);
+							}
+							refactoringAction.setText(refactoringName);
+							refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));
+							rootMenu.add(refactoringAction);
+							containsEntries = true;
 						}
-						refactoringAction.setText(refactoringName);
-						refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));
-						rootMenu.add(refactoringAction);
-						containsEntries = true;
 					}
 				}
 				if(containsEntries){
