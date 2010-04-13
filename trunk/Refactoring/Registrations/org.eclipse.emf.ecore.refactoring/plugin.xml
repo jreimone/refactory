@@ -69,4 +69,10 @@
             postprocessor="org.eclipse.emf.ecore.refactoring.postprocessors.InterfaceFromFeaturesPostProcessor">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/extractSubEPackage.rolemapping">
+      </rolemapping>
+   </extension>
 </plugin>
