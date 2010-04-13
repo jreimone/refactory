@@ -1,5 +1,9 @@
 package org.emftext.refactoring.statistic.views;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -46,6 +50,7 @@ import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
@@ -358,11 +363,60 @@ public class RefactoringStatisticView extends ViewPart {
 	private void makeActions() {
 		action1 = new Action() {
 			public void run() {
-				showMessage("Action 1 executed");
+				ISelection selection = viewer.getSelection();
+				if(selection instanceof IStructuredSelection){
+					Object first = ((IStructuredSelection) selection).getFirstElement();
+					if(first != null){
+						if(first instanceof TreeParent){
+							TreeParent parent = (TreeParent) first;
+							RoleModel roleModel =  (RoleModel) parent.getObject();
+							if(roleModel != null){
+								try {
+									String tempdir = System.getProperty("java.io.tmpdir") + "Refactor";
+									File tempDir = new File(tempdir);
+									boolean success = true;
+									if(!tempDir.isDirectory()){
+										success = tempDir.mkdir();
+									}
+									if(success){
+										File documentation = File.createTempFile("doc_" + roleModel.getName() + "_", ".wiki", tempDir);
+										documentation.deleteOnExit();
+										FileWriter writer = new FileWriter(documentation);
+										writer.append("==" + roleModel.getName() + "==\n");
+										String comment = roleModel.getComment();
+										if(comment != null){
+											comment = comment.trim().replaceAll("[\r\n]", " ");
+											comment = comment.replaceAll("[\t]", "");
+										} else {
+											comment = "";
+										}
+										writer.append(comment + "\n\n\n");
+										for (Role role : roleModel.getRoles()) {
+											writer.append(";'''" + role.getName() + "'''\n");
+											comment = role.getComment();
+											if(comment != null){
+												comment = comment.trim().replaceAll("[\r\n]", " ");
+												comment = comment.replaceAll("[\t]", "");												
+											} else {
+												comment = "";
+											}
+											writer.append(":" + comment + "\n\n");
+										}
+										writer.append("\n\n");
+										writer.append("The textual representation of the role model above and the single steps being needed for this refactoring can be seen in the following:");
+										writer.close();
+									}
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+				}
 			}
 		};
-		action1.setText("Action 1");
-		action1.setToolTipText("Action 1 tooltip");
+		action1.setText("Generate Documentation of selected Refactoring");
+		action1.setToolTipText("Generate Documentation of selected Refactoring");
 		action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 
