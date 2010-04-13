@@ -17,6 +17,6 @@ ExtractCompositeState maps <ExtractX> {
 	};
 }	
 
-RenameVertex maps <RenameX> {
-	Nameable := Vertex (name -> name);
+RenameElement maps <RenameX> {
+	Nameable := NamedElement (name -> name);
 }

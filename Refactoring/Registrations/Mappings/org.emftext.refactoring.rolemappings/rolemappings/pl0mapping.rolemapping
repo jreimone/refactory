@@ -32,10 +32,10 @@ RenameProcedure maps <RenameX> {
 	Nameable := ProcedureDeclaration(name -> name);
 }
 
-RenameVariable maps <RenameX> {
-	Nameable := VarDeclaration (name -> name);
+RenameDeclaration maps <RenameX> {
+	Nameable := Declaration (name -> name);
 }
 
-RenameConstant maps <RenameX> {
-	Nameable := ConstDeclaration (name -> name);
+RenameProgram maps <RenameX> {
+	Nameable := Program (name -> name);
 }
