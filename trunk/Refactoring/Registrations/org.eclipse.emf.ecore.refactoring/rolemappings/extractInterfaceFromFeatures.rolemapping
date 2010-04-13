@@ -5,6 +5,7 @@ ExtractInterfaceFromFeatures maps <ExtractXwithReference> {
 	Extractee := EStructuralFeature;
 	OrigContainer := EClass {
 		extracts := eStructuralFeatures;
+		reference := eSuperTypes;
 	};
 	NewContainer := EClass (newName -> name){
 		moved := eStructuralFeatures;

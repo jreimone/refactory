@@ -5,6 +5,7 @@ ExtractInterfaceFromOperations maps <ExtractXwithReference> {
 	Extractee := EOperation;
 	OrigContainer := EClass {
 		extracts := eOperations;
+		reference := eSuperTypes;
 	};
 	NewContainer := EClass (newName -> name){
 		moved := eOperations;
