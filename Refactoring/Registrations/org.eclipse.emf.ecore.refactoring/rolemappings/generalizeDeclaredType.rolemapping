@@ -1,0 +1,12 @@
+ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+/**
+ * This refactoring replaces the type of a given ETypedElement by a more
+ * generic one (i.e., a superclass of the original type). Being mapped to
+ * ETypedElement the refactoring applied equally to EOperations, EParameters,
+ * and EStructuralFeatures.
+ */
+GeneralizeDeclaredType maps <ReplaceX?> {
+
+	// TODO implement this
+}
