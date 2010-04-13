@@ -6,7 +6,7 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_buvn4ji-Ed-c1J825eAh0Q" fontName="Segoe UI"/>
     <styles xmi:type="notation:FillStyle" xmi:id="_buvn4zi-Ed-c1J825eAh0Q"/>
     <element xmi:type="roles:Role" href="moveX.roles#//@roles[name='SourceContainer']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_buvn5Di-Ed-c1J825eAh0Q" x="330" y="80"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_buvn5Di-Ed-c1J825eAh0Q" x="370" y="80" width="116"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_buvn5ji-Ed-c1J825eAh0Q" type="2001">
     <children xmi:type="notation:DecorationNode" xmi:id="_buwO8ji-Ed-c1J825eAh0Q" type="5001"/>
@@ -14,7 +14,7 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_buvn6Di-Ed-c1J825eAh0Q" fontName="Segoe UI"/>
     <styles xmi:type="notation:FillStyle" xmi:id="_buwO8Di-Ed-c1J825eAh0Q"/>
     <element xmi:type="roles:Role" href="moveX.roles#//@roles[name='TargetContainer']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_buwO8Ti-Ed-c1J825eAh0Q" x="75" y="80"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_buwO8Ti-Ed-c1J825eAh0Q" x="75" y="80" width="111"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_buwO8zi-Ed-c1J825eAh0Q" type="2001">
     <children xmi:type="notation:DecorationNode" xmi:id="_buw2ADi-Ed-c1J825eAh0Q" type="5001"/>
@@ -22,7 +22,7 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_buwO9Ti-Ed-c1J825eAh0Q" fontName="Segoe UI"/>
     <styles xmi:type="notation:FillStyle" xmi:id="_buwO9ji-Ed-c1J825eAh0Q"/>
     <element xmi:type="roles:Role" href="moveX.roles#//@roles[name='Movee']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_buwO9zi-Ed-c1J825eAh0Q" x="275" y="260"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_buwO9zi-Ed-c1J825eAh0Q" x="240" y="175" width="61"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_btS2YTi-Ed-c1J825eAh0Q"/>
   <element xmi:type="roles:RoleModel" href="moveX.roles#/"/>
@@ -31,7 +31,7 @@
       <layoutConstraint xmi:type="notation:Location" xmi:id="_bu5_9Ti-Ed-c1J825eAh0Q" x="10"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_bu5_9ji-Ed-c1J825eAh0Q" type="6002">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_bu5_9zi-Ed-c1J825eAh0Q" x="-34" y="17"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bu5_9zi-Ed-c1J825eAh0Q" x="-22" y="12"/>
     </children>
     <styles xmi:type="notation:RoutingStyle" xmi:id="_bu5_8Ti-Ed-c1J825eAh0Q"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_bu5_8ji-Ed-c1J825eAh0Q" fontName="Segoe UI"/>
@@ -45,7 +45,7 @@
       <layoutConstraint xmi:type="notation:Location" xmi:id="_bv8hxTi-Ed-c1J825eAh0Q" x="10"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_bv8hxji-Ed-c1J825eAh0Q" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_bv8hxzi-Ed-c1J825eAh0Q" x="-1" y="-24"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_bv8hxzi-Ed-c1J825eAh0Q" x="-23" y="-39"/>
     </children>
     <styles xmi:type="notation:RoutingStyle" xmi:id="_bv8hwTi-Ed-c1J825eAh0Q"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_bv8hwji-Ed-c1J825eAh0Q" fontName="Segoe UI"/>
@@ -66,6 +66,6 @@
     <element xmi:type="roles:RoleComposition" href="moveX.roles#//@relations.1"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_bwAMIzi-Ed-c1J825eAh0Q" points="[0, 0, -84, 60]$[84, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_bwIvADi-Ed-c1J825eAh0Q" id="(0.49523809523809526,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_bwJWEDi-Ed-c1J825eAh0Q" id="(0.23636363636363636,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_bwJWEDi-Ed-c1J825eAh0Q" id="(0.06557377049180328,0.525)"/>
   </edges>
 </notation:Diagram>

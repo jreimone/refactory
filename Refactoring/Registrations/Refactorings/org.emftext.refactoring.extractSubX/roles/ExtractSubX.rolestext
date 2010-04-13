@@ -1,11 +1,32 @@
-/**someComment*/ 
+/**
+This role model represents the roles and its relations for a purpose when a container
+metaclass owns arbitrary elements. Those elements then can be extracted and put into a new
+container which is also contained in the original container - i.e. it is a sub-container 
+which will be extracted.
+*/ 
 RoleModel ExtractSubX { 
-	
+	/**
+	This role represents the element which will be moved to the 'NewContainer' role
+	*/
 	super input ROLE Extractee;
 	
+	/**
+	This role is intended to be mapped to a class which represents a container in which
+	elements, playing the role 'Extractee', are contained and another elment, playing the
+	role 'NewContainer', can be created.
+	*/
 	ROLE OrigContainer;
 	
-	ROLE NewContainer (name);
+	/**
+	This role will become the new home from the 'Extractees'. It will be itself contained
+	in 'OrigContainer'.
+	*/
+	ROLE NewContainer (
+		/**
+		The name of the newly created container.
+		*/
+		name
+	);
 	
 	transitive : OrigContainer [1..1] <>- Extractee extracts [1..*];
 	transitive : OrigContainer [1..1] <>- NewContainer newParent [1..*];
