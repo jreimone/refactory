@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
+import org.emftext.language.refactoring.refactoring_specification.TRACE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
 import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
@@ -49,6 +50,10 @@ public class RoleUtil {
 			ObjectAssignmentCommand objectAssignment = assignment.getAssignment();
 			if(objectAssignment instanceof RoleReference){
 				return ((RoleReference) objectAssignment).getRole();
+			} else if(objectAssignment instanceof TRACE){
+				return ((TRACE) objectAssignment).getRole();
+			} else {
+				throw new UnsupportedOperationException("implement this case");
 			}
 		}
 		return null;
