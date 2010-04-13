@@ -4,13 +4,13 @@
    <extension
          point="org.emftext.refactoring.rolemodel">
       <rolemodel
-            rolemodel_resource="rolemodel/RenameMethod.rolestext">
+            rolemodel_resource="rolemodel/RenameX.rolestext">
       </rolemodel>
    </extension>
    <extension
          point="org.emftext.refactoring.refspec">
       <refspec
-            refspec_resource="refspec/RenameMethod.refspec">
+            refspec_resource="refspec/RenameX.refspec">
       </refspec>
    </extension>
 
