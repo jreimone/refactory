@@ -14,18 +14,6 @@ ExtractTrack maps <ExtractX> {
 	};
 } 	
 
-RenameConference maps <RenameX> {
-	Nameable := Conference (name -> name);
-}
-
-RenameTalk maps <RenameX> {
-	Nameable := Talk (name -> name);
-}
-
-RenameParticipant maps <RenameX> {
-	Nameable := Participant (name -> name);
-}
-
-RenameTrack maps <RenameX> {
-	Nameable := Track (name -> name);
+RenameConferenceElement maps <RenameX> {
+	Nameable := NamedElement (name -> name);
 }
