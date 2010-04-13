@@ -1,0 +1,12 @@
+ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+/**
+ * This refactoring replaces references to an EClass with references to a 
+ * superclass thereof. This is somewhat similar to GeneralizeDeclaredType,
+ * but instead of selecting the element that references a type, the type is
+ * selected and references to the type are discovered automatically. 
+ */
+UseSuperTypeWherePossible maps <ReplaceX?> {
+
+	// TODO implement this
+}
