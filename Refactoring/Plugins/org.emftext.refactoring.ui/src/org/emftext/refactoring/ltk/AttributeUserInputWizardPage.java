@@ -54,27 +54,33 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 
 	public void createControl(Composite parent) {
 		Composite composite= new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(2, false));
+		composite.setLayout(new GridLayout(4, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		composite.setFont(parent.getFont());
 
 		Label label = new Label(composite, NONE);
 		GridData data = new GridData();
-		data.horizontalSpan = 2;
+		data.horizontalSpan = 4;
 		label.setLayoutData(data);
-
 		label.setText("The following attributes must be provided");
 		for (final IAttributeValueProvider valueProvider : valueProviders) {
 			valueProvider.provideValue();
 			final EAttribute attribute = valueProvider.getAttribute();
-			EObject owner = valueProvider.getAttributeOwner();
-			String temp = labelProvider.getText(attribute);
-			String addition = (owner == null)? "" : " from " + labelProvider.getText(owner);
-			String text = temp + addition;
-			Label iconLabel = new Label(composite, SWT.NONE);
-			iconLabel.setImage(labelProvider.getImage(attribute));
+			String text = labelProvider.getText(attribute) + " for ";
+			Label attribIconLabel = new Label(composite, SWT.NONE);
+			attribIconLabel.setImage(labelProvider.getImage(attribute));
 			Label attribLabel = new Label(composite, SWT.NONE);
 			attribLabel.setText(text);
+			
+			EObject owner = valueProvider.getAttributeOwner();
+			if(owner == null){
+				owner = valueProvider.getFakeAttributeOwner().eClass();
+			}
+			Label ownerIconLabel = new Label(composite, SWT.NONE);
+			ownerIconLabel.setImage(labelProvider.getImage(owner));
+			Label ownerLabel = new Label(composite, SWT.NONE);
+			ownerLabel.setText(labelProvider.getText(owner));
+			
 			final Text attribInput = new Text(composite, SWT.BORDER | SWT.SINGLE);
 			attribInput.addModifyListener(new ModifyListener() {
 				
@@ -97,7 +103,7 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 //				}
 //			});
 			data = new GridData(GridData.FILL, GridData.BEGINNING, true, false);
-			data.horizontalSpan = 2;
+			data.horizontalSpan = 4;
 			attribInput.setFont(composite.getFont());
 			attribInput.setLayoutData(data);
 			textMap.put(attribInput, valueProvider);
