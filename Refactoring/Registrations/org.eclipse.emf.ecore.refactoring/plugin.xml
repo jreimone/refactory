@@ -18,6 +18,13 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
+            rolemapping_resource="rolemappings/introduceParameterObject.rolemapping">
+      </rolemapping>
+   </extension>
+
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
             rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
       </rolemapping>
    </extension>
