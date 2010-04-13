@@ -13,7 +13,7 @@
             class="org.emftext.refactoring.statistic.views.RefactoringStatisticView"
             icon="icons/sample.gif"
             id="org.emftext.refactoring.statistic.views.RefactoringStatisticView"
-            name="Refactoring Statistics">
+            name="Refactoring Registry">
       </view>
    </extension>
 
