@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.emftext.language.refactoring.refactoring_specification.DISTINCT;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.Modifier;
@@ -89,7 +92,7 @@ public class MOVEInterpreter {
 	@SuppressWarnings("unchecked")
 	private List<EObject> handleMoveModifier(List<? extends EObject> sourceObjects, Modifier modifier){
 		if(modifier instanceof DISTINCT){
-			List<EObject> originals = new LinkedList<EObject>();
+			Set<EObject> originals = new LinkedHashSet<EObject>();
 			Set<EObject> copyList = new LinkedHashSet<EObject>();
 			for (EObject object : sourceObjects) {
 				List<EObject> others = new LinkedList<EObject>();
@@ -98,9 +101,13 @@ public class MOVEInterpreter {
 						others.add(otherObject);
 					}
 				}
+				Copier copier = new Copier();
+				EObject copiedObject = copier.copy(object);
 				for (EObject otherObject : others) {
+					EObject copiedOther = copier.copy(otherObject);
+					copier.copyReferences();
 					if(!copyList.contains(object) 
-							&& EcoreUtil.equals(object, otherObject)){
+							&& EcoreUtil.equals(copiedObject, copiedOther)){
 						originals.add(object);
 						copyList.add(otherObject);
 					}
@@ -111,7 +118,10 @@ public class MOVEInterpreter {
 					originals.add(eObject);
 				}
 			}
-			return originals;
+			for (EObject object : copyList) {
+				EcoreUtil.remove(object);
+			}
+			return new LinkedList<EObject>(originals);
 		}
 		return (List<EObject>) sourceObjects;
 	}

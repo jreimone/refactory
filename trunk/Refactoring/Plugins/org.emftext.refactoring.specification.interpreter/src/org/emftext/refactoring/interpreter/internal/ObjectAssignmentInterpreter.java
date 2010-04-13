@@ -5,8 +5,10 @@ package org.emftext.refactoring.interpreter.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -58,9 +60,9 @@ public class ObjectAssignmentInterpreter {
 	private Object roleRuntimeValue;
 
 	private IRefactoringStatus status;
-	
+
 	private IRefactoringInterpreter interpreter;
-	
+
 	private ObjectAssignmentCommand command;
 
 	public ObjectAssignmentInterpreter(IRefactoringInterpreter interpreter, Mapping mapping) {
@@ -84,14 +86,14 @@ public class ObjectAssignmentInterpreter {
 			} else {
 				value = handleRoleReference((RoleReference) object);
 			}
+			if(value != null){
+				context.addEObjectForVariable(objectVar, value);
+			}
+			if(roleRuntimeValue == null){
+				roleRuntimeValue = value;
+			}
 		} else if(object instanceof TRACE){
-			value = handleTrace((TRACE) object);
-		}
-		if(value != null){
-			context.addEObjectForVariable(objectVar, value);
-		}
-		if(roleRuntimeValue == null){
-			roleRuntimeValue = value;
+			handleTrace((TRACE) object, objectVar);
 		}
 		if(status == null){
 			status = new RefactoringStatus(IRefactoringStatus.OK);
@@ -121,21 +123,27 @@ public class ObjectAssignmentInterpreter {
 		}
 	}
 
-	private EObject handleTrace(TRACE trace){
+	private void handleTrace(TRACE trace, Variable objectVar){
 		assignedRole = trace.getRole();
 		FromReference from = trace.getReference();
 		List<? extends EObject> objects = getFromReferenceObject(from);
-		EObject first = objects.get(0);
-		EObject container = first.eContainer();
-		roleRuntimeValue = container;
-		//		EReference reference = first.eContainmentFeature();
-		//		ReferenceMetaClassPair pair = RolemappingFactory.eINSTANCE.createReferenceMetaClassPair();
-		//		pair.setReference(reference);
-		TraceObject traceObject = RefactoringSpecificationFactory.eINSTANCE.createTraceObject();
-		traceObject.setAppliedRole(assignedRole);
-		traceObject.setContainer(container);
-		//		traceObject.setReferenceMetaClassPair(pair);
-		return traceObject;
+		List<EObject> containers = new LinkedList<EObject>();
+		for (EObject object : objects) {
+			if(!containers.contains(object.eContainer())){
+				containers.add(object.eContainer());
+			}
+		}
+		roleRuntimeValue = containers;
+		context.addEObjectsForVariable(objectVar, containers);
+
+
+//		EObject first = objects.get(0);
+//		EObject container = first.eContainer();
+//		roleRuntimeValue = container;
+//		TraceObject traceObject = RefactoringSpecificationFactory.eINSTANCE.createTraceObject();
+//		traceObject.setAppliedRole(assignedRole);
+//		traceObject.setContainer(container);
+//		return traceObject;
 	}
 
 	private EObject handleRoleReference(RoleReference roleRef) {
