@@ -1,4 +1,4 @@
-ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING extractEEnum FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 ExtractEEnum maps <ExtractXwithReference> {
 

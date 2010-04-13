@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
+	<!-- role mappings -->
+	<extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/pullUp.rolemapping">
+            <mappingIcon
+                  icon="icons/pullUpFeature.gif"
+                  mapping_name="PullUpFeature">
+            </mappingIcon>
       </rolemapping>
    </extension>
 
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/extractEnum.rolemapping">
+            rolemapping_resource="rolemappings/extractEEnum.rolemapping">
+            <mappingIcon
+                  icon="icons/extractEEnum.gif"
+                  mapping_name="ExtractEEnum">
+            </mappingIcon>
       </rolemapping>
    </extension>
 
@@ -47,20 +56,44 @@
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
+            <mappingIcon
+                  icon="icons/extractSuperClass.gif"
+                  mapping_name="ExtractSuperClass">
+            </mappingIcon>
       </rolemapping>
    </extension>
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/extractInterfaceFromFeatures.rolemapping">
+            <mappingIcon
+                  icon="icons/extractInterface.gif"
+                  mapping_name="ExtractInterfaceFromFeatures">
+            </mappingIcon>
       </rolemapping>
    </extension>
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/extractInterfaceFromOperations.rolemapping">
+            <mappingIcon
+                  icon="icons/extractInterface.gif"
+                  mapping_name="ExtractInterfaceFromOperations">
+            </mappingIcon>
       </rolemapping>
    </extension>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/extractSubEPackage.rolemapping">
+            <mappingIcon
+                  icon="icons/extractSubEPackage.gif"
+                  mapping_name="ExtractSubEPackage">
+            </mappingIcon>
+      </rolemapping>
+   </extension>
+
+   <!-- post processors -->
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
@@ -68,11 +101,5 @@
             nsUri="http://www.eclipse.org/emf/2002/Ecore"
             postprocessor="org.eclipse.emf.ecore.refactoring.postprocessors.InterfaceFromFeaturesPostProcessor">
       </postprocessor>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.rolemapping">
-      <rolemapping
-            rolemapping_resource="rolemappings/extractSubEPackage.rolemapping">
-      </rolemapping>
    </extension>
 </plugin>

@@ -1,4 +1,4 @@
-ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING replaceInheritanceWithDelegation FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 /**
  * This refactoring replaces a reference to a superclass with an explicit
