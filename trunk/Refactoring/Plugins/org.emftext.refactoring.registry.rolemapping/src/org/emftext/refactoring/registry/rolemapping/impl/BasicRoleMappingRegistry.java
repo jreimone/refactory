@@ -64,38 +64,40 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	}
 
 	private void registerIconsForMappings(RoleMappingModel roleMapping, IConfigurationElement config) {
-		String defaultIconString = config.getAttribute(IRoleMappingExtensionPoint.DEFAULT_ICON_ATTRIBUTE);
-		if(defaultIconString == null){
-			return;
-		}
 		IContributor contributor = config.getContributor();
 		Bundle plugin = Platform.getBundle(contributor.getName());
-		
-		ImageData defaultImageData = getImageData(defaultIconString, plugin);
+
+		// first look for default icon
 		ImageDescriptor defaultImage = null;
-		if(defaultImageData != null){
-			defaultImage = ImageDescriptor.createFromImageData(defaultImageData);
+		String defaultIconString = config.getAttribute(IRoleMappingExtensionPoint.DEFAULT_ICON_ATTRIBUTE);
+		if (defaultIconString != null) {
+			ImageData defaultImageData = getImageData(defaultIconString, plugin);
+			if (defaultImageData != null) {
+				defaultImage = ImageDescriptor.createFromImageData(defaultImageData);
+			}
 		}
+		
+		// then look for specific icons
 		for (Mapping mapping : roleMapping.getMappings()) {
 			IConfigurationElement[] children = config.getChildren();
 			boolean found = false;
 			for (IConfigurationElement element : children) {
-				if(element.getName().equals(IRoleMappingExtensionPoint.SUB_MAPPING_ICON_ID)){
+				if (element.getName().equals(IRoleMappingExtensionPoint.SUB_MAPPING_ICON_ID)) {
 					String mappingName = element.getAttribute(IRoleMappingExtensionPoint.SUB_MAPPING_NAME);
-					if(mappingName.equals(mapping.getName())){
+					if (mappingName.equals(mapping.getName())) {
 						String mappingIcon = element.getAttribute(IRoleMappingExtensionPoint.SUB_ICON_RESOURCE);
 						ImageData iconData = getImageData(mappingIcon, plugin);
 						ImageDescriptor iconDescriptor = null;
-						if(iconData != null){
+						if (iconData != null) {
 							iconDescriptor = ImageDescriptor.createFromImageData(iconData);
 							iconMap.put(mapping, iconDescriptor);
-							System.out.println("found icon " + mappingIcon + " for mapping " + mappingName);
 							found = true;
 						}
 					}
 				}
 			}
-			if(!found && defaultImage != null){
+			// register default icon only if no specific icon was found
+			if (!found && defaultImage != null) {
 				defaultIconMap.put(mapping, defaultImage);
 			}
 		}
