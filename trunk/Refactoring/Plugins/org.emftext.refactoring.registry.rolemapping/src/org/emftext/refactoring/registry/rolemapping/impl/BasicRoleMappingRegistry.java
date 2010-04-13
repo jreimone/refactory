@@ -3,6 +3,7 @@ package org.emftext.refactoring.registry.rolemapping.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,14 +15,19 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IContributor;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.ImageData;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.refactoring.registry.rolemapping.Activator;
 import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
@@ -59,7 +65,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	}
 
 	private void registerRoleMapping(RoleMappingModel roleMapping, IConfigurationElement config) {
-		registerRoleMapping(roleMapping);
+		registerRoleMappingInternal(roleMapping, config);
 		registerIconsForMappings(roleMapping, config);
 	}
 
@@ -76,7 +82,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				defaultImage = ImageDescriptor.createFromImageData(defaultImageData);
 			}
 		}
-		
+
 		// then look for specific icons
 		for (Mapping mapping : roleMapping.getMappings()) {
 			IConfigurationElement[] children = config.getChildren();
@@ -143,10 +149,33 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 	}
 
-	public List<Mapping> registerRoleMapping(RoleMappingModel roleMapping) {
+	private List<Mapping> registerRoleMappingInternal(RoleMappingModel roleMapping, IConfigurationElement config) {
 		Map<String, Mapping> mappingsToRegister = new LinkedHashMap<String, Mapping>();
 		for (Mapping mapping : roleMapping.getMappings()) {
-			mappingsToRegister.put(mapping.getName(), mapping);
+			Resource mappingResource = mapping.eResource();
+			if(mappingResource != null && mappingResource.getErrors() != null && mappingResource.getErrors().size() > 0 ){
+				List<Diagnostic> errors = mappingResource.getErrors();
+				IStatus status = null;
+				String pluginId;
+				if(config != null){
+					pluginId = config.getContributor().getName();					
+				} else {
+					pluginId = Activator.PLUGIN_ID;
+				}
+				List<IStatus> errorStati = new ArrayList<IStatus>();
+				for (Diagnostic diagnostic : errors) {
+					errorStati.add(new Status(IStatus.ERROR, pluginId, diagnostic.getMessage()));
+				}
+				status = new MultiStatus(
+						pluginId
+						, IStatus.ERROR
+						, errorStati.toArray(new IStatus[0])
+						, "The mapping '" + mapping.getName() + "' cannot be registered because of contained errors. Inspect the sub-entries."
+						, null);
+				Activator.getDefault().getLog().log(status);
+			} else {
+				mappingsToRegister.put(mapping.getName(), mapping);
+			}
 		}
 
 		String nsUri = roleMapping.getTargetMetamodel().getNsURI();
@@ -167,6 +196,10 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		EPackage rootPackage = roleMapping.getTargetMetamodel();
 		registerSubPackages(rootPackage, registered);
 		return alreadyRegistered;
+	}
+
+	public List<Mapping> registerRoleMapping(RoleMappingModel roleMapping) {
+		return registerRoleMappingInternal(roleMapping, null);
 	}
 
 	private void registerSubPackages(EPackage rootPackage, Map<String, Mapping> mappings){
