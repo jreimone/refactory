@@ -1,4 +1,4 @@
-ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING introduceParameterObject FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 /**
  * This refactoring takes a set of operation parameters and converts

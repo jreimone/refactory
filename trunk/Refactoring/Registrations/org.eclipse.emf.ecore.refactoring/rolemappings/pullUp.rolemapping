@@ -1,4 +1,4 @@
-ROLEMODELMAPPING pullUp FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING pullUpFeature FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 PullUpFeature maps <MoveX> {
 

@@ -1,4 +1,4 @@
-ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING extractSubEPackage FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 /**
  * This refactoring extracts a set of EClassifiers to a new sub EPackage.

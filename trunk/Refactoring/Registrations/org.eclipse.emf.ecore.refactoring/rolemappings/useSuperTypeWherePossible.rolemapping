@@ -1,4 +1,4 @@
-ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING useSuperTypeWherePossible FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 /**
  * This refactoring replaces references to an EClass with references to a 
