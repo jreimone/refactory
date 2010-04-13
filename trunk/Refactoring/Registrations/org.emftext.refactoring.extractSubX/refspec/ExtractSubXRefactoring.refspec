@@ -1,0 +1,10 @@
+REFACTORING ExtractSubXRefactoring 
+FOR <ExtractSubX>
+
+STEPS { 
+	object origContainerObject := OrigContainer from uptree(INPUT);
+	
+	create new nc:NewContainer in origContainerObject;
+	assign nc.name;
+	move origContainerObject.extracts to nc;
+} 
