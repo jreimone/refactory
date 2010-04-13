@@ -18,6 +18,6 @@ ExtractMethod maps <ExtractX> {
 	};
 }
 
-RenameElement maps <RenameMethod> {
+RenameElement maps <RenameX> {
 	Nameable := commons.NamedElement (name -> name);
 }	

@@ -28,14 +28,14 @@ PullUpConstant maps <MoveX> {
 	};
 }
 
-RenameProcedure maps <RenameMethod> {
+RenameProcedure maps <RenameX> {
 	Nameable := ProcedureDeclaration(name -> name);
 }
 
-RenameVariable maps <RenameMethod> {
+RenameVariable maps <RenameX> {
 	Nameable := VarDeclaration (name -> name);
 }
 
-RenameConstant maps <RenameMethod> {
+RenameConstant maps <RenameX> {
 	Nameable := ConstDeclaration (name -> name);
 }
