@@ -70,16 +70,25 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 			Label attribIconLabel = new Label(composite, SWT.NONE);
 			attribIconLabel.setImage(labelProvider.getImage(attribute));
 			Label attribLabel = new Label(composite, SWT.NONE);
-			attribLabel.setText(text);
 			
 			EObject owner = valueProvider.getAttributeOwner();
+			boolean fake = false;
 			if(owner == null){
-				owner = valueProvider.getFakeAttributeOwner().eClass();
+				owner = valueProvider.getFakeAttributeOwner();
+				fake = true;
 			}
+			if(fake){
+				text += "new ";
+			}
+			attribLabel.setText(text);
 			Label ownerIconLabel = new Label(composite, SWT.NONE);
 			ownerIconLabel.setImage(labelProvider.getImage(owner));
 			Label ownerLabel = new Label(composite, SWT.NONE);
-			ownerLabel.setText(labelProvider.getText(owner));
+			if(!fake){
+				ownerLabel.setText(labelProvider.getText(owner));
+			} else {
+				ownerLabel.setText(labelProvider.getText(owner.eClass()));
+			}
 			
 			final Text attribInput = new Text(composite, SWT.BORDER | SWT.SINGLE);
 			attribInput.addModifyListener(new ModifyListener() {
