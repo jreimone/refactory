@@ -25,6 +25,13 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
+            rolemapping_resource="rolemappings/replaceInheritanceWithDelegation.rolemapping">
+      </rolemapping>
+   </extension>
+
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
             rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
       </rolemapping>
    </extension>
