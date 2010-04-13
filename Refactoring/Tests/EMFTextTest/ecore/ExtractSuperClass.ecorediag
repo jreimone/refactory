@@ -59,6 +59,10 @@
         <element xmi:type="ecore:EAttribute" href="ExtractSuperClass.ecore#//EClass0/simpleFeature"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_euitoUZjEd-BEJhGlf-Cfw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_1SRCsEbmEd-nW9OzU4qVAg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="ExtractSuperClass.ecore#//EClass0/otherFeature"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1SRCsUbmEd-nW9OzU4qVAg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_dryQIkZjEd-BEJhGlf-Cfw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_dryQI0ZjEd-BEJhGlf-Cfw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_dryQJEZjEd-BEJhGlf-Cfw"/>
