@@ -17,8 +17,6 @@ import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 
 public class RelationMappingReferencesReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.RelationMapping, org.eclipse.emf.ecore.EReference> {
 
-	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RelationMapping, org.eclipse.emf.ecore.EReference> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RelationMapping, org.eclipse.emf.ecore.EReference>();
-
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.RelationMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
 		EObject parent = container.eContainer().eContainer().eContainer();
 		if(!(parent instanceof RoleMappingModel)){

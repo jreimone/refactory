@@ -14,8 +14,6 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 
 public class AttributeMappingRoleAttributeReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.AttributeMapping, org.emftext.language.refactoring.roles.RoleAttribute> {
 	
-	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.AttributeMapping, org.emftext.language.refactoring.roles.RoleAttribute> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.AttributeMapping, org.emftext.language.refactoring.roles.RoleAttribute>();
-	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.AttributeMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.RoleAttribute> result) {
 		EObject parent = container.eContainer();
 		if(!(parent instanceof ConcreteMapping)){
