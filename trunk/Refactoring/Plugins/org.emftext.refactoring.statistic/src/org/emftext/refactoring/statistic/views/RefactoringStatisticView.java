@@ -382,7 +382,7 @@ public class RefactoringStatisticView extends ViewPart {
 										File documentation = File.createTempFile("doc_" + roleModel.getName() + "_", ".wiki", tempDir);
 										documentation.deleteOnExit();
 										FileWriter writer = new FileWriter(documentation);
-										writer.append("==" + roleModel.getName() + "==\n");
+										writer.append("==" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "==\n");
 										String comment = roleModel.getComment();
 										if(comment != null){
 											comment = comment.trim().replaceAll("[\r\n]", " ");
@@ -390,7 +390,9 @@ public class RefactoringStatisticView extends ViewPart {
 										} else {
 											comment = "";
 										}
-										writer.append(comment + "\n\n\n");
+										writer.append(comment + "\n\n");
+										writer.append("[[Image:Example.jpg]]");
+										writer.append("\n\n");
 										for (Role role : roleModel.getRoles()) {
 											writer.append(";'''" + role.getName() + "'''\n");
 											comment = role.getComment();
@@ -404,6 +406,10 @@ public class RefactoringStatisticView extends ViewPart {
 										}
 										writer.append("\n\n");
 										writer.append("The textual representation of the role model above and the single steps being needed for this refactoring can be seen in the following:");
+										writer.append("\n\n");
+										writer.append("[http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/Refactoring/Registrations/Refactorings/org.emftext.refactoring.extractXwithReference/rolemodels/ExtractXwithReference.rolestext ExtractXwithReference.rolestext]");
+										writer.append("\n<br>\n");
+										writer.append("[http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/Refactoring/Registrations/Refactorings/org.emftext.refactoring.extractXwithReference/refspecs/ExtractXwithReference.refspec ExtractXwithReference.refspec]");
 										writer.close();
 									}
 								} catch (IOException e) {
