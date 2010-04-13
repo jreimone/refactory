@@ -1,0 +1,20 @@
+ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+ExtractSubEPackage maps <ExtractXwithReference> {
+
+	Extractee := EClassifier;
+	
+	OrigContainer := EPackage {
+		extracts := eClassifiers;
+		reference := this;
+	};
+	
+	NewContainer := EPackage(newName -> name) {
+		moved := eClassifiers;
+	};
+	
+	ContainerContainer := EPackage {
+		source := this;
+		target := eSubpackages;
+	};
+} 
