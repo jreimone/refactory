@@ -187,12 +187,14 @@ public class RefactoringStatisticView extends ViewPart {
 					TreeParent modelParent = new TreeParent(roleModel);
 					invisibleRoot.addChild(modelParent);
 					List<Mapping> roleModelMappings = mappings.get(roleModel);
-					List<Mapping> uniqueMappings = new ArrayList<Mapping>();
-					for (Mapping mapping : roleModelMappings) {
-						if(!uniqueMappings.contains(mapping)){
-							TreeObject mappingChild = new TreeObject(mapping);
-							modelParent.addChild(mappingChild);
-							uniqueMappings.add(mapping);
+					if(roleModelMappings != null){
+						List<Mapping> uniqueMappings = new ArrayList<Mapping>();
+						for (Mapping mapping : roleModelMappings) {
+							if(!uniqueMappings.contains(mapping)){
+								TreeObject mappingChild = new TreeObject(mapping);
+								modelParent.addChild(mappingChild);
+								uniqueMappings.add(mapping);
+							}
 						}
 					}
 				}
