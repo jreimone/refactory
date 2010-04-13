@@ -154,7 +154,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		if(context instanceof VariableReference){
 			Role role = RoleUtil.getRoleFromVariable(((VariableReference) context).getVariable());
 			if(role == null){
-				boolean optional = !(this.context.getEObjectForVariable(((VariableReference) context).getVariable()) != null); 
+				Object variableObject = this.context.getObjectForVariable(((VariableReference) context).getVariable());
+				boolean optional = !(variableObject != null); 
 				return optional;
 			}
 			if(containsModifierOPTIONAL(role)){return true;}
