@@ -1,0 +1,20 @@
+ROLEMODELMAPPING encapsulateInPanel FOR <http://www.emftext.org/language/simple_gui> 
+
+EncapsulateInPanel maps <ExtractX> {
+
+	Extract := UIElement;
+	
+	OrigContainer := Container {
+		extracts := children;
+		referer := parent;
+	};
+	
+	NewContainer := Panel(newName -> name){
+		moved := children;
+	};
+	
+	ContainerContainer := Container {
+		source := children;
+		target := children;
+	};
+} 
