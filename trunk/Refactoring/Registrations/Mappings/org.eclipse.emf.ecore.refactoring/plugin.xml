@@ -103,6 +103,14 @@
       </postprocessor>
    </extension>
    <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="ExtractInterfaceFromOperations"
+            nsUri="http://www.eclipse.org/emf/2002/Ecore"
+            postprocessor="org.eclipse.emf.ecore.refactoring.postprocessors.InterfaceFromFeaturesPostProcessor">
+      </postprocessor>
+   </extension>
+   <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/renameElement.rolemapping">
