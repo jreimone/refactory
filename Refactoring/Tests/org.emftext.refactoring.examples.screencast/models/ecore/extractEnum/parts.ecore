@@ -4,7 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="parts"
     nsURI="http://parts.org" nsPrefix="parts">
   <eClassifiers xsi:type="ecore:EClass" name="Item">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="types"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="types" eType="#//ItemType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ItemType">
     <eLiterals name="COLOR_GREEN"/>
