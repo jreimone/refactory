@@ -13,6 +13,10 @@ package shapes // this is the package name
 	class Rectangle extends Shape {
 		attribute EString color;
 	}
+	
+	class RoundedRectangle extends Rectangle {
+		attribute EInt radius;
+	}
 
 	class Circle extends Shape {
 		attribute EDouble diameter (1..1);
