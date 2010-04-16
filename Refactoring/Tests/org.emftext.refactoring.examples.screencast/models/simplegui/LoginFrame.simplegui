@@ -1,0 +1,12 @@
+// a simple GUI for a login dialog
+F (LoginFrame) contains
+
+	P (Header) contains
+		L (welcome)
+	;
+
+	P (Buttons) contains
+		B (ok)
+		B (cancel)
+	;
+;

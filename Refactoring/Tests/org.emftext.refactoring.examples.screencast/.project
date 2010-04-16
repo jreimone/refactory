@@ -35,6 +35,21 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.forms.resource.forms.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.reuseware.sokan.resource.indexBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.simple_gui.resource.simplegui.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
@@ -43,5 +58,8 @@
 		<nature>org.emftext.language.pl0.resource.pl0.nature</nature>
 		<nature>org.emftext.language.pl0extended.resource.pl0extended.nature</nature>
 		<nature>sandwich_simple.resource.simple_sandwich.nature</nature>
+		<nature>org.emftext.language.forms.resource.forms.nature</nature>
+		<nature>org.reuseware.sokan.resource.repositoryNature</nature>
+		<nature>org.emftext.language.simple_gui.resource.simplegui.nature</nature>
 	</natures>
 </projectDescription>
