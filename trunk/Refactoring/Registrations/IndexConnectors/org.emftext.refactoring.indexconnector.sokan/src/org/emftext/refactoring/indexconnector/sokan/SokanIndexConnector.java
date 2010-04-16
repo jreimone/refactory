@@ -77,7 +77,7 @@ public class SokanIndexConnector implements IndexConnector {
 		for (Setting setting : referencers) {
 			EObject referer = setting.getEObject();
 			Resource resource = referer.eResource();
-			if(resource.equals(targetResource)){
+			if(resource == null || resource.equals(targetResource)){
 				continue;
 			}
 			URI uri = resource.getURI();
