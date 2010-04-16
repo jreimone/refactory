@@ -17,15 +17,11 @@
       </indexer>
       <indexer
             class="org.emftext.refactoring.indexconnector.sokan.InverseModelReferencesIndexer"
-            dependsOn="org.emftext.refactoring.indexer.references"
             id="org.emftext.refactoring.indexer.inversereferences">
+         <dependsOn
+               indexerID="org.emftext.refactoring.indexer.references">
+         </dependsOn>
       </indexer>
-      <!--
-      <indexer
-            class="org.emftext.refactoring.indexconnector.sokan.ResourceSetIndexer"
-            id="org.emftext.refactoring.indexer.resourcesetbuilder">
-      </indexer>
-      -->
    </extension>
 
 </plugin>
