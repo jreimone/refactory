@@ -1,15 +1,14 @@
 PROGRAM p1 
 
-CONST 
-	a = 25 , 
-	ccc = 10 ; 
+CONST
+	MINVALUE = 25 ,
+	MAXVALUE = 10 ; 
 	
-	VAR 
+VAR 
 	x , y , z ; 
 
-
 BEGIN 
-	x :=  ccc - a ; 
-	y :=  x * 12; 
-	z :=  y / a 
-END . 
+	x :=  MAXVALUE - MINVALUE ; 
+	y :=  x *12; 
+	z :=  y / MINVALUE 
+END.
