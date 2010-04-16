@@ -20,10 +20,28 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.pl0.resource.pl0.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.pl0extended.resource.pl0extended.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>sandwich_simple.resource.simple_sandwich.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.emftext.language.ecore.resource.facade.nature</nature>
 		<nature>org.emftext.language.ecore.resource.text.nature</nature>
+		<nature>org.emftext.language.pl0.resource.pl0.nature</nature>
+		<nature>org.emftext.language.pl0extended.resource.pl0extended.nature</nature>
+		<nature>sandwich_simple.resource.simple_sandwich.nature</nature>
 	</natures>
 </projectDescription>

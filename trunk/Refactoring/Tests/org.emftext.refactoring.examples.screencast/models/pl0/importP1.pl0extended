@@ -1,0 +1,10 @@
+PROGRAM importP1 
+
+import <platform:/resource/org.emftext.refactoring.examples.screencast/models/pl0/p1.pl0>
+
+var x,y;
+
+BEGIN 
+	y := p1.ccc;
+	x := p1.a
+END. 
