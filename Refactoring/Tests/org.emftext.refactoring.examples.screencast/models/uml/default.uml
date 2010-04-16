@@ -20,8 +20,8 @@
       <subvertex xmi:type="uml:State" xmi:id="_jCa2UBJdEd-U4eN-EukmmA" name="State2"/>
       <subvertex xmi:type="uml:State" xmi:id="_mLKI4BJdEd-U4eN-EukmmA" name="State3"/>
       <subvertex xmi:type="uml:State" xmi:id="_otIWYBJdEd-U4eN-EukmmA" name="State4"/>
-      <subvertex xmi:type="uml:State" xmi:id="_hBjx0BJdEd-U4eN-EukmmA" name="InnerState"/>
-      <subvertex xmi:type="uml:State" xmi:id="_hRgSUBJdEd-U4eN-EukmmA" name="InnerState1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_hBjx0BJdEd-U4eN-EukmmA" name="InnerState1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_hRgSUBJdEd-U4eN-EukmmA" name="InnerState2"/>
       <transition xmi:id="_jsP2cBJdEd-U4eN-EukmmA" source="_fBdiUBJdEd-U4eN-EukmmA" target="_i68VUBJdEd-U4eN-EukmmA"/>
       <transition xmi:id="_lOba4BJdEd-U4eN-EukmmA" source="_jCa2UBJdEd-U4eN-EukmmA" target="_fmilUBJdEd-U4eN-EukmmA"/>
       <transition xmi:id="_Hv3P8DWPEd-0JrdQT7vofQ" source="_mLKI4BJdEd-U4eN-EukmmA" target="_jCa2UBJdEd-U4eN-EukmmA"/>
@@ -29,6 +29,7 @@
       <transition xmi:id="_i66yUDZbEd-DcubWEMXppg" source="_i68VUBJdEd-U4eN-EukmmA" target="_hBjx0BJdEd-U4eN-EukmmA"/>
       <transition xmi:id="_je-hoDZbEd-DcubWEMXppg" source="_otIWYBJdEd-U4eN-EukmmA" target="_hBjx0BJdEd-U4eN-EukmmA"/>
       <transition xmi:id="_kKyewDZbEd-DcubWEMXppg" source="_hRgSUBJdEd-U4eN-EukmmA" target="_mLKI4BJdEd-U4eN-EukmmA"/>
+      <transition xmi:id="_PtcWcElXEd-RtvvQnB5vKg" source="_fBdiUBJdEd-U4eN-EukmmA" target="_otIWYBJdEd-U4eN-EukmmA"/>
     </region>
   </packagedElement>
 </uml:Package>
