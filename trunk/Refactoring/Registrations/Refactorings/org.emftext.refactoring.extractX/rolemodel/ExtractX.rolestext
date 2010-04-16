@@ -16,7 +16,7 @@ At the old position of the statements a method call will be set instead.
 	*/  ROLE NewContainer ( /**
 		The attribute 'newName' is intended to be mapped to a String attribute for the name of
 		the new container
-		*/ input runtime newName ) ; 
+		*/ optional input runtime newName ) ; 
 	/**
 	This role represents the container of the both other containers: 'OrigContainer' and 'NewContainer'.
 	It must be mapped to an EClass having containment references to the other both mapped EClasses
