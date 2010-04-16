@@ -14,6 +14,7 @@
 
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,9 +25,20 @@ public class RoleMappingModelTargetMetamodelReferenceResolver implements org.emf
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.RoleMappingModel container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.eclipse.emf.ecore.EPackage> result) {
 		Registry registry = EPackage.Registry.INSTANCE;
 		Set<String> uris = registry.keySet();
-		for (String uri : uris) {
+		// we need to copy the set of URIs, because this set changes
+		// when calling getEPackage(), which throws a ConcurrentModificationException
+		// when the URI set is accessed.
+		Set<String> uriSetCopy = new LinkedHashSet<String>();
+		uriSetCopy.addAll(uris);
+		for (String uri : uriSetCopy) {
 			if (uri.equals(identifier) || resolveFuzzy) {
-				result.addMapping(uri, registry.getEPackage(uri));
+				try {
+					result.addMapping(uri, registry.getEPackage(uri));
+				} catch (Exception e) {
+					// sometime loading EPackages from the registry causes exceptions
+					// if meta models are not registered correctly. we simple ignore
+					// those.
+				}
 			}
 		}
 	}
