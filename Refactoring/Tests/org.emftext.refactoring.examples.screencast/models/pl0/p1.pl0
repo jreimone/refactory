@@ -1,8 +1,8 @@
 PROGRAM p1 
 
 CONST
-	MINVALUE = 25 ,
-	MAXVALUE = 10 ; 
+	MINVALUE = 10 ,
+	MAXVALUE = 100 ; 
 	
 VAR 
 	x , y , z ; 
