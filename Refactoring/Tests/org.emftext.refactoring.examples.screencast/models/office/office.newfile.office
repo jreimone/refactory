@@ -1,0 +1,12 @@
+officemodel MyPersonalOffice {
+	
+	office MrAndMrsSmith 
+	
+	employee AngelinaJolie
+		works in MrAndMrsSmith
+		works with BradPitt
+		
+	employee BradPitt
+		works in MrAndMrsSmith
+		works with AngelinaJolie
+}

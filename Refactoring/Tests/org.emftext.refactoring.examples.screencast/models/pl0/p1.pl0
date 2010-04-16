@@ -1,0 +1,15 @@
+PROGRAM p1 
+
+CONST 
+	a = 25 , 
+	ccc = 10 ; 
+	
+	VAR 
+	x , y , z ; 
+
+
+BEGIN 
+	x :=  ccc - a ; 
+	y :=  x * 12; 
+	z :=  y / a 
+END . 
