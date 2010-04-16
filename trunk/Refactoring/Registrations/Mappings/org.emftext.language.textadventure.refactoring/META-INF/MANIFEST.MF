@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Refactoring
+Bundle-SymbolicName: org.emftext.language.textadventure.refactoring;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.emftext.language.textadventure.refactoring.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
