@@ -35,7 +35,7 @@ public class RoleMappingModelTargetMetamodelReferenceResolver implements org.emf
 				try {
 					result.addMapping(uri, registry.getEPackage(uri));
 				} catch (Exception e) {
-					// sometime loading EPackages from the registry causes exceptions
+					// sometimes loading EPackages from the registry causes exceptions
 					// if meta models are not registered correctly. we simple ignore
 					// those.
 				}
