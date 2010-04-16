@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cm:consulmodel xmlns:cm="http://www.pure-systems.com/consul/model" cm:id="iZGOrHoyAP8dWZ0Ej" cm:version="1.5" cm:type="ps:ccfm">
+  <cm:head>
+    <cm:properties>
+      <cm:property cm:id="iAHQrHU5cy7_CnRbQ" cm:type="ps:string" cm:invisible="true" cm:name="ps:name">
+        <cm:constant cm:id="iOk3mgtSDrkMPn12C" cm:type="ps:string">ContactManagementmappingccfm</cm:constant>
+      </cm:property>
+      <cm:property cm:id="iAtVTlkxZBmexMSPg" cm:type="ps:string" cm:invisible="true" cm:name="ps:author">
+        <cm:constant cm:id="irjuRtvTZ2ciQrOuO" cm:type="ps:string">Florian</cm:constant>
+      </cm:property>
+      <cm:property cm:id="idXbBXt97NMISXEI3" cm:type="ps:string" cm:invisible="true" cm:name="ps:version">
+        <cm:constant cm:id="i99B2hz1iEYx4UAN1" cm:type="ps:string">1.0</cm:constant>
+      </cm:property>
+      <cm:property cm:id="iF3PY6f3qxWks-8AU" cm:type="ps:datetime" cm:invisible="true" cm:name="ps:created">
+        <cm:constant cm:id="ipRX37nCT6HKKrI99" cm:type="ps:datetime">2009-05-04T18:11:58.731Z</cm:constant>
+      </cm:property>
+    </cm:properties>
+  </cm:head>
+  <cm:restrictions>
+    <cm:restset cm:id="iijX7TYArOoTenYGubf0EOIUqH5i">
+      <cm:restriction cm:id="ivnaEYhyJ5Uh2jDtsJabMRKos2Bf">
+        <cm:script cm:id="iG8xgn8bahrl9p0s5ajnb-Iw8O3n" cm:language="ps:pvscl" cm:type="ps:boolean">Addresses</cm:script>
+      </cm:restriction>
+    </cm:restset>
+    <cm:restset cm:id="iKDSsg1qnsAl2TDcnMrd-BWs7mhp">
+      <cm:restriction cm:id="i7a9klH9CXidQIOfJNR0eyTD97fg">
+        <cm:script cm:id="iBAHeZu0CrQS0Kn3KzpO4XNyNUWf" cm:language="ps:pvscl" cm:type="ps:boolean">Relationships</cm:script>
+      </cm:restriction>
+    </cm:restset>
+    <cm:restset cm:id="i4FP_NGzDXb2Y5WG1VX76BfoUmtk">
+      <cm:restriction cm:id="inefItxeBdZ0K7VGXUol76s0nX-f">
+        <cm:script cm:id="iuX7273nZuCLLEzsI-bL50wkZSdf" cm:language="ps:pvscl" cm:type="ps:boolean">Groups</cm:script>
+      </cm:restriction>
+    </cm:restset>
+    <cm:restset cm:id="iYVUMz5vrvb8pS7Hal0dPwCAnOqe">
+      <cm:restriction cm:id="iL9KV7ViaocydqPIpb7OF6HJn9tb">
+        <cm:script cm:id="iDy9OZbEU1Pq0oARbl5bkz8uAsqh" cm:language="ps:pvscl" cm:type="ps:boolean">Groups AND MultipleAssignment</cm:script>
+      </cm:restriction>
+    </cm:restset>
+    <cm:restset cm:id="iZSR-uLEQ5_AB4HSXqHqgupb3D1h">
+      <cm:restriction cm:id="iEvm25VfP6_TDjvazuvsDN-yTdAf">
+        <cm:script cm:id="ilLdIoXCzbYdM2B20xj7Q3NEDR2a" cm:language="ps:pvscl" cm:type="ps:boolean">ContactOpportunities</cm:script>
+      </cm:restriction>
+    </cm:restset>
+  </cm:restrictions>
+  <cm:elements cm:rootid="ivifJPIVJ9nLGnBu-">
+    <cm:element cm:id="ivifJPIVJ9nLGnBu-" cm:name="ContactManagementmappingccfm" cm:type="ps:family" cm:class="ps:family" cm:default="on">
+      <cm:relations cm:id="iMztKqKJO3DGi-pTRvficQ6gXu1yMdGIi5EtuC3V7" cm:class="ps:children">
+        <cm:relation cm:id="i5UfHgr0TYSzg0Tgb1Ty2URpdq0MP-_Iy5EJi09uv" cm:type="ps:mandatory">
+          <cm:target cm:id="iIOdWbGX8E3IiqubaYChXmZDNO66UotfbENKz6UDx">./iW1l_mVJRQB-q5eiaDXKXAJwSEyl</cm:target>
+          <cm:target cm:id="i1TtKAg4UCh1TdWjsPAC3WCpdOQ0nTB-pI4ntN5Bg">./iDYGL5w35XX3ElnXX_p9-zPfNTAk</cm:target>
+          <cm:target cm:id="iX8-VoZOkHiFNzgHOH49_6UmZSBOAIiKPN5mJXmXS">./i3nDSPsRxyydKj8CuO9AUhHSgvpp</cm:target>
+        </cm:relation>
+        <cm:relation cm:id="ilILP3nHiPAHytu3nIiCxjcyMs0M5DxXCxL1TUl29" cm:type="ps:optional">
+          <cm:target cm:id="ihb3TQkKzisYS-VQQQkuLQkEhWmhrfH7-MjjIGi8_">./iIKzGD3bXpX8o3tYKyTJT_iQno_m</cm:target>
+          <cm:target cm:id="iR66-8VVRx14-ksTRTlba9_nd6-pZW8y2wfqKreQk">./iUAzk0VoUSmwmad4NPcA5lbq54zo</cm:target>
+          <cm:target cm:id="iN5YC1nR6q0uvhrXS5ESRlcxfNjpdptvL29URbWVR">./ii4yC7BzlhvbAH6wPD6UUq1UvExa</cm:target>
+          <cm:target cm:id="i3neXFNsKWCD3ywmZ1npZdq1DO6-ppJkItewffrXm">./i5VkAVsUJ7FPTsYuPQfnq30bGhqf</cm:target>
+          <cm:target cm:id="ixvlcebodVlbqDhpJNPiImdisaaD3iYsK39mdca7U">./imDAUMPJ0ocGUzRvioL8glGguREo</cm:target>
+        </cm:relation>
+      </cm:relations>
+      <cm:properties>
+        <cm:property cm:id="id9xaxX7U5AYg5z6g" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:Source">
+          <cm:constant cm:id="iIZL8ltktpMpiVqE8" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="inKIJbWrOB68ZcBEa" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Created">
+          <cm:constant cm:id="i7MVRVNoCit-D2w7J" cm:type="ps:datetime">2009-05-04T18:11:58.731Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iW8pFAGB41ca3sdMh" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:ChangedBy">
+          <cm:constant cm:id="iwhbJnQRG5MMKKLBv" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iuW5lq5PPCPYCI6j6" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Changed">
+          <cm:constant cm:id="idQVh3tBVI2fcZUxT" cm:type="ps:datetime">2009-05-15T19:56:49.679Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iFZ89YOO3b2SSt84B" cm:type="ps:string" cm:fixed="true" cm:name="map:composerid">
+          <cm:constant cm:id="iOcqVWycpfLPC_lbY" cm:type="ps:string">org.featuremapper.interpreter.emf.interpreter</cm:constant>
+        </cm:property>
+      </cm:properties>
+    </cm:element>
+    <cm:element cm:id="iDYGL5w35XX3ElnXX_p9-zPfNTAk" cm:type="map:fm" cm:class="ps:component" cm:default="on">
+      <cm:relations cm:id="i7EdGpZvfzMx1KjcG9FvfzgK5qKT7BM5oSBv1wLPQ" cm:class="ps:parents">
+        <cm:relation cm:id="i3D5U4U6U6EZ84Ulc5U_FpZL5RQBwt09pqeAwr0xv" cm:type="ps:parent">
+          <cm:target cm:id="i-_9pWmU7odyw-Fgrnd39CxO6qK1ToJ-VMPLjvL09">./ivifJPIVJ9nLGnBu-</cm:target>
+        </cm:relation>
+      </cm:relations>
+      <cm:properties>
+        <cm:property cm:id="izFyLYwLWvE7-AxPv" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:Source">
+          <cm:constant cm:id="iog2mLrcv1TEfCO20" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iXoNuMvXmXiJ-Kh4B" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Created">
+          <cm:constant cm:id="ieKPK9RwVs8kTjZwH" cm:type="ps:datetime">2009-05-04T18:12:20.651Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="ilqtdYG8dsc5CmJV7" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:ChangedBy">
+          <cm:constant cm:id="iI5RHq1WAYq2fdN6m" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iNdfrC1ryj0d9n3fa" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Changed">
+          <cm:constant cm:id="i-5baw3T9cif8hbrt" cm:type="ps:datetime">2009-05-15T19:56:49.875Z</cm:constant>
+        </cm:property>
+      </cm:properties>
+      <cm:vname>
+        <cm:mimedesc cm:id="iXfH3XyYVk_gySzMe" cm:mimetype="text/plain" cm:encoding="utf-8">platform:/resource/ContactManagement/problem/ContactManagementApp.feature</cm:mimedesc>
+      </cm:vname>
+    </cm:element>
+    <cm:element cm:id="i3nDSPsRxyydKj8CuO9AUhHSgvpp" cm:type="map:ccfm" cm:class="ps:component" cm:default="on">
+      <cm:relations cm:id="ivL6EAM2TzwAwW8EhWSNzO6T77-nddaW8PkDx7-pJ" cm:class="ps:parents">
+        <cm:relation cm:id="i6EPA-FYShbvvN509H4YCTBser0W8hX29Nz1njYfb" cm:type="ps:parent">
+          <cm:target cm:id="iDhQklc2TIy3TaqgrCh-_FxWC3DfHcWPQ4-ks6oBg">./ivifJPIVJ9nLGnBu-</cm:target>
+        </cm:relation>
+      </cm:relations>
+      <cm:properties>
+        <cm:property cm:id="iAOOH7rxzyQjevL30" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:Source">
+          <cm:constant cm:id="iDU8N1mZevc-l34wn" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="ij7oZ2VhX0VG0PGI5" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Created">
+          <cm:constant cm:id="iRrMIQQb3_OHU447_" cm:type="ps:datetime">2009-05-04T18:12:51.357Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iJB13DVra7wZ4KbA3" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:ChangedBy">
+          <cm:constant cm:id="i7IojeAm1nsMVPGPL" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iQ-GGgV0iTH8HGxFK" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Changed">
+          <cm:constant cm:id="ickzbLa5hAh169hnu" cm:type="ps:datetime">2009-05-15T19:56:49.875Z</cm:constant>
+        </cm:property>
+      </cm:properties>
+      <cm:vname>
+        <cm:mimedesc cm:id="ic4vpVtGvsBq_xqaQ" cm:mimetype="text/plain" cm:encoding="utf-8">platform:/resource/ContactManagement/solution/ClassDiagram.uml</cm:mimedesc>
+      </cm:vname>
+    </cm:element>
+    <cm:element cm:id="imDAUMPJ0ocGUzRvioL8glGguREo" cm:restriction="iijX7TYArOoTenYGubf0EOIUqH5i" cm:type="map:rule" cm:class="ps:component" cm:default="on">
+      <cm:relations cm:id="iXSVBMP_prumtv1dW1nuf-piI4oI42TmJicxfH41n" cm:class="ps:parents">
+        <cm:relation cm:id="iu1KzYmhbfXVBTRYmCxndntGyB2sK8VX8-_PkzwmJ" cm:type="ps:parent">
+          <cm:target cm:id="i1DN5dqChQkzwChr0oJxfgXO65ElYmZENV7RkqeY8">./ivifJPIVJ9nLGnBu-</cm:target>
+        </cm:relation>
+      </cm:relations>
+      <cm:properties>
+        <cm:property cm:id="iFJbkHW-NThIy1APbWF40A8e3-ad" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:color">
+          <cm:constant cm:id="iLUkrqUhdXe83-V5yaJonpQ0A8ba" cm:type="ps:string">16724736</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iCaL_oV91p2vDKizZ3akecUeW7ac" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:elements">
+          <cm:constant cm:id="i1os3FKrSeWDKtJJ_8QE7vZfKr9p" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_GYmCEFMwEdykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="i1uMHNAHNoj7-Y0HCmEd5ohHqHRl" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_e68SWFM3Edykj4A2mwi4Sg</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iuTjtqawpc_Pp-ORm" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:Source">
+          <cm:constant cm:id="iuy6w0-tzZ0Hg2dZ-" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iwOr3MkVkIAt3NLFw" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Created">
+          <cm:constant cm:id="iFI4m4flkeNSIyMdc" cm:type="ps:datetime">2009-05-04T18:13:31.242Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="ikIeCldNvhKbJfISh" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:ChangedBy">
+          <cm:constant cm:id="iTrxi3Og8NR8g9y6p" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i9PgO8bzkMIF6Cyac" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Changed">
+          <cm:constant cm:id="iO5Kp6esMHhTQ161h" cm:type="ps:datetime">2009-05-15T19:56:49.876Z</cm:constant>
+        </cm:property>
+      </cm:properties>
+      <cm:vname>
+        <cm:mimedesc cm:id="iDecYTotzot4_h4cu" cm:mimetype="text/plain" cm:encoding="utf-8">Addresses</cm:mimedesc>
+      </cm:vname>
+    </cm:element>
+    <cm:element cm:id="iIKzGD3bXpX8o3tYKyTJT_iQno_m" cm:restriction="iKDSsg1qnsAl2TDcnMrd-BWs7mhp" cm:type="map:rule" cm:class="ps:component" cm:default="on">
+      <cm:relations cm:id="iTlndXCAMhH2TbWPkMzW8zM5oO6HybaV709q0UBLP" cm:class="ps:parents">
+        <cm:relation cm:id="iBw6oUREhZmR6Lz0TdWJi0DzwD329fXBwLP29gHYC" cm:type="ps:parent">
+          <cm:target cm:id="icqkIQA_p9VL5BwRQOAWmTBotzw_p3DMPxvGyjYuf">./ivifJPIVJ9nLGnBu-</cm:target>
+        </cm:relation>
+      </cm:relations>
+      <cm:properties>
+        <cm:property cm:id="iymJvfC0fH_o-iOlgLclcMbguFzf" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:color">
+          <cm:constant cm:id="iN0Q4fb6ZoYZGEuEq4BKpOYqVZNg" cm:type="ps:string">32768</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i8gWRxPk2qj9i14eX22nJapTyjwj" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:elements">
+          <cm:constant cm:id="i6cBTz0HndI3mgdsp3D-XH-b5uNn" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_JStCyFMwEdykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="izyqghvqBS-EE3nJQ9S7Pemq42qm" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_YwgwYlM3Edykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="i6pzn-8RVcalwEefYgDtYcckYu9e" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_uwE_CFM3Edykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="iyA5tm22-3iPhZYB8zf-wQB92Wnd" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_wm1sWFM3Edykj4A2mwi4Sg</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iSDHKt1W5dqcdp5_L" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:Source">
+          <cm:constant cm:id="iW9Xsx6LrzVqbIJ7m" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i-bit1ykfXtD5ADON" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Created">
+          <cm:constant cm:id="i8Rm-krK4wvCVA2S_" cm:type="ps:datetime">2009-05-11T09:37:34.910Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iKQB_yeKoc4Ak7wQK" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:ChangedBy">
+          <cm:constant cm:id="iGt_2PJFhMC5gl_Zw" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iTZjtZ59VkmypIiL4" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Changed">
+          <cm:constant cm:id="iqB7COMqsrlDuLR7q" cm:type="ps:datetime">2009-05-15T19:56:49.874Z</cm:constant>
+        </cm:property>
+      </cm:properties>
+      <cm:vname>
+        <cm:mimedesc cm:id="iOi3jyVWwOJ-epIZv" cm:mimetype="text/plain" cm:encoding="utf-8">Relationships</cm:mimedesc>
+      </cm:vname>
+    </cm:element>
+    <cm:element cm:id="iUAzk0VoUSmwmad4NPcA5lbq54zo" cm:restriction="i4FP_NGzDXb2Y5WG1VX76BfoUmtk" cm:type="map:rule" cm:class="ps:component" cm:default="on">
+      <cm:relations cm:id="ifrNjv1IOgH29_FBg-VJ4zg7UYmmZ3TkcNzZm3T0D" cm:class="ps:parents">
+        <cm:relation cm:id="ijsB2I4-_jcRkjImZywaGZSicmdsKfXZCod2TreYS" cm:type="ps:parent">
+          <cm:target cm:id="iXm1Tuf_FU72nhblc8_5-7-hrSRAwpd-_1nVBM5bq">./ivifJPIVJ9nLGnBu-</cm:target>
+        </cm:relation>
+      </cm:relations>
+      <cm:properties>
+        <cm:property cm:id="iOtpPec0QWkmDd_92FgynWucbrnd" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:color">
+          <cm:constant cm:id="isMmxPWGqYS2tnzy4mJdF05vWcEa" cm:type="ps:string">16744448</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i1QjO2OWidaqiJUfXGk6EGYURtNd" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:elements">
+          <cm:constant cm:id="i-rvEgO47L9pphy7h_AW5LRYpyYo" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_oeYx2R0GEd2b2b_4Mrd7cw</cm:constant>
+          <cm:constant cm:id="i-Pxwkg-TJGWJfoSI-Ne7C6DM7Yh" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_Yqc_AB0GEd2b2b_4Mrd7cw</cm:constant>
+          <cm:constant cm:id="ikhWSE8PwVaDKmaY8WNn5BT33n_i" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_c5dceB0OEd28c4O4qR84fQ</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i0gFK-49HC3lgoQRj" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:Source">
+          <cm:constant cm:id="iLLrewhutkqungKNY" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iD349wIRrD4xI0NP0" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Created">
+          <cm:constant cm:id="ibf0NdsUhRa9ugQUL" cm:type="ps:datetime">2009-05-15T19:56:49.675Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iBe1YqbpCebR1fSgo" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:ChangedBy">
+          <cm:constant cm:id="iuxROXO6vYHOGVGub" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="ilpeYwT4rCVdVsXNp" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Changed">
+          <cm:constant cm:id="ieSLy0W0euoJ9hxd-" cm:type="ps:datetime">2009-05-15T19:56:49.874Z</cm:constant>
+        </cm:property>
+      </cm:properties>
+      <cm:vname>
+        <cm:mimedesc cm:id="iX7WfEnG19BzAVR-L" cm:mimetype="text/plain" cm:encoding="utf-8">Groups</cm:mimedesc>
+      </cm:vname>
+    </cm:element>
+    <cm:element cm:id="i5VkAVsUJ7FPTsYuPQfnq30bGhqf" cm:restriction="iZSR-uLEQ5_AB4HSXqHqgupb3D1h" cm:type="map:rule" cm:class="ps:component" cm:default="on">
+      <cm:relations cm:id="iEh-FZSIyvfY8A2_VmtUBMjQ6cqB2XSjcTlVBFxpt" cm:class="ps:parents">
+        <cm:relation cm:id="imZ09Vl7UPAFNgbiYzMv109pJ3T5UvLhbH4-_pdVB" cm:type="ps:parent">
+          <cm:target cm:id="izMnJs0gXrK3DCxotC36oY81TrK-FebCxmJTl-FRA">./ivifJPIVJ9nLGnBu-</cm:target>
+        </cm:relation>
+      </cm:relations>
+      <cm:properties>
+        <cm:property cm:id="iTPELU160nmXabsZmuD3vca2zM-a" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:color">
+          <cm:constant cm:id="iuWdcYf9ZgllL-6Lv36ngQtinv1a" cm:type="ps:string">8388736</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i_fZ6SF6qSvSyRKPTAWAfgBqZani" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:elements">
+          <cm:constant cm:id="inq_cKrxcZGu-e4XUUd0Bj-ACwWm" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_arVB0lM4Edykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="izQ9sYo6DkT7Dukc1RvIdrl4GPMo" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_bbTtQlM4Edykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="iCJ_41Da1lEUlnWqzAF8DFuz_Lrd" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_hcK4-FM3Edykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="i5b85B1nCMqku_oF7dD6pe2dGGqe" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_ivxO01M3Edykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="is1ocqjnSoa_eo-fflQhLsvOU0ip" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_grvhlFM3Edykj4A2mwi4Sg</cm:constant>
+          <cm:constant cm:id="iZhpWYrwCDsNNiw-RbBv6LFkJmli" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_jGklRFM3Edykj4A2mwi4Sg</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iAFPEnLkfHdN40BKL" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:Source">
+          <cm:constant cm:id="iAd5NEOf61rtrHMyV" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="ispjMjAvhZzQj7seh" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Created">
+          <cm:constant cm:id="iXKZ6RJeh8zxO3GmZ" cm:type="ps:datetime">2009-05-15T19:56:49.676Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="ixsuuvSByp4Z81PDl" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:ChangedBy">
+          <cm:constant cm:id="iGZ2hAtscjflFYeYh" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i3TKbUMvhx-jDQY_s" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Changed">
+          <cm:constant cm:id="ieQQLDIRZhLpynqaM" cm:type="ps:datetime">2009-05-15T19:56:49.877Z</cm:constant>
+        </cm:property>
+      </cm:properties>
+      <cm:vname>
+        <cm:mimedesc cm:id="iiD8brIFdNIbde8nt" cm:mimetype="text/plain" cm:encoding="utf-8">ContactOpportunities</cm:mimedesc>
+      </cm:vname>
+    </cm:element>
+    <cm:element cm:id="ii4yC7BzlhvbAH6wPD6UUq1UvExa" cm:restriction="iYVUMz5vrvb8pS7Hal0dPwCAnOqe" cm:type="map:rule" cm:class="ps:component" cm:default="on">
+      <cm:relations cm:id="iQQgrAwTRM5_FeX2ThX2Du1Lz4-z2H4r0vfntbWdW" cm:class="ps:parents">
+        <cm:relation cm:id="iS79VChM5daHyXSOAlsksAwfb7UIOaW9V9FwLKjXm" cm:type="ps:parent">
+          <cm:target cm:id="iptIyfXhH-pt0DhDxQQG4L5IiYSreHOdqFxaqWScG">./ivifJPIVJ9nLGnBu-</cm:target>
+        </cm:relation>
+      </cm:relations>
+      <cm:properties>
+        <cm:property cm:id="iQqplrtIciorAfX5SSMwPkfXACha" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:color">
+          <cm:constant cm:id="iftVUXxWh7eyK8qH_CXSjtY4pc3h" cm:type="ps:string">33023</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i1OSbtJjPP7KTcFlXVxaq7_V0C7f" cm:type="ps:string" cm:fixed="true" cm:container="ps:list" cm:name="map:elements">
+          <cm:constant cm:id="im2JhXB_XrwxtZX6dTKNh6pcHiYj" cm:type="ps:string">platform:/resource/ContactManagement/solution/ClassDiagram.uml#_DWrwWR0PEd28c4O4qR84fQ</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iohuDNwXabgM4cdwX" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:Source">
+          <cm:constant cm:id="i5_Auog3sD9JxELOs" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="irBJhyExsRszvxsEu" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Created">
+          <cm:constant cm:id="i_peHQgVCRJfj6wMp" cm:type="ps:datetime">2009-05-15T19:56:49.677Z</cm:constant>
+        </cm:property>
+        <cm:property cm:id="i9TK8VuEZPqwa5ykL" cm:type="ps:string" cm:fixed="true" cm:readonly="true" cm:name="ps:ChangedBy">
+          <cm:constant cm:id="i1BZ-_w0Bl-0wrZ4W" cm:type="ps:string">Florian</cm:constant>
+        </cm:property>
+        <cm:property cm:id="iRRI47yFq2sVwZLKt" cm:type="ps:datetime" cm:fixed="true" cm:readonly="true" cm:name="ps:Changed">
+          <cm:constant cm:id="i9ur5cv09mu_q0mwh" cm:type="ps:datetime">2009-05-15T19:56:49.878Z</cm:constant>
+        </cm:property>
+      </cm:properties>
+      <cm:vname>
+        <cm:mimedesc cm:id="iOjWoFS7Sj4TPpUlU" cm:mimetype="text/plain" cm:encoding="utf-8">Groups AND MultipleAssignment</cm:mimedesc>
+      </cm:vname>
+    </cm:element>
+  </cm:elements>
+</cm:consulmodel>
