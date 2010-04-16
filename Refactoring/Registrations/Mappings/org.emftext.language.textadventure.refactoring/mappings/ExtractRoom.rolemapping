@@ -1,0 +1,15 @@
+ROLEMODELMAPPING ExtractRoom FOR <http://www.emftext.org/language/textadventure> 
+
+MoveToNewRoom maps <ExtractX>{ 
+	 Extract := Item;
+	 OrigContainer := Room{
+	 	extracts := items;
+	 };
+	 NewContainer := Room (newName -> name){
+	 	moved := items;
+	 };
+	 ContainerContainer := Adventure{
+	 	source := elements;
+	 	target := elements;
+	 };
+}
