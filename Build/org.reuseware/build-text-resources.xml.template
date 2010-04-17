@@ -1,0 +1,164 @@
+<project basedir="." default="generate-emftext-languages-text-resources" name="Build EMFText text resource">
+	<property file="build.properties"/>
+	
+	<property name="emftext.plugins.dir" value=".."/>
+	<property name="language.plugins.dir" value=".."/>
+	<property name="test.plugins.dir" value=".."/>
+	<property name="ontomopp.plugins.dir" value=".."/>
+	
+		<!-- Define the EMF Generate Resource task. To have this task available, the plugin
+	     org.emftext.sdk.ant must be available in the classpath. To ensure this the external tools
+	     configuration needs to have the setting "Run in the same JRE as the workspace" enabled. -->
+	<taskdef name="emftext-generate-text-resource" classname="org.emftext.sdk.ant.GenerateTextResourceTask">
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_2_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
+		<!-- for ecore text resource support -->
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.ecore/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.text/bin" />
+	</taskdef>
+	
+	<!-- for ecore text resource support -->
+	<taskdef name="emftext-register-ecore-resource-factory" classname="org.emftext.sdk.ant.RegisterEcoreResourceFactoryTask">
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_2_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs/bin" />
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.ecore/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.text/bin" />
+	</taskdef>
+
+	<!-- A macro for generating one text resource plug-in -->
+	<macrodef name="generate-text-resource">
+	    <attribute name="plugin"/>
+	    <attribute name="syntax"/>
+		<attribute name="dir" default="${language.plugins.dir}" />
+		<attribute name="resourcePlugin" default="@{plugin}.resource.@{syntax}" />
+			
+		<sequential>
+			<!-- <delete dir="@{dir}/@{resourcePlugin}/src-gen" includes="**/*" excludes=".svn"/> -->
+			<echo message="Building text resource for syntax '@{syntax}' in plug-in '@{plugin}'" />
+			
+			<emftext-generate-text-resource 
+				syntax="@{dir}/@{plugin}/metamodel/@{syntax}.cs" 
+				rootFolder="@{dir}" 
+				syntaxProjectName="@{plugin}"
+				generateANTLRPlugin="false" >
+			</emftext-generate-text-resource>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="generate-metamodel-code">
+	    <attribute name="plugin"/>
+	    <attribute name="model"/>
+	    <attribute name="generateEditProject"/>
+	    <attribute name="clear" default="**/*.java" />
+	    <attribute name="secondaryExtension" default="" />	
+	    <attribute name="secondaryGenmodelExtension" default="" />	
+	    <attribute name="dir" default="${language.plugins.dir}" />
+			
+		<sequential>
+			<!-- <delete dir="${language.plugins.dir}/@{plugin}/src-gen" includes="@{clear}" excludes=".svn"/>
+			<eclipse.refreshLocal depth="infinite" resource="@{plugin}"/> -->
+			<echo message="${language.plugins.dir}/@{plugin}/metamodel/@{model}@{secondaryExtension}.ecore" />
+			<emf.Ecore2Java 
+				model="@{dir}/@{plugin}/metamodel/@{model}@{secondaryExtension}.ecore" 
+				genModel="@{dir}/@{plugin}/metamodel/@{model}@{secondaryGenmodelExtension}.genmodel" 
+				generateeditproject="@{generateEditProject}" 
+				generateeditorproject="false"
+				modelProject="@{dir}/@{plugin}" 
+				modelProjectFragmentPath="src-gen"
+				reconcileGenModel="keep"
+			/>
+			
+			<eclipse.refreshLocal depth="infinite" resource="@{plugin}"/>
+		</sequential>
+	</macrodef>
+	
+	<target name="generate-ecore-text-text-resources">
+		<generate-text-resource plugin="org.emftext.language.ecore.resource.text"   syntax="text.ecore" resourcePlugin="org.emftext.language.ecore.resource.text"/>
+		<generate-text-resource plugin="org.emftext.language.ecore.resource.facade" syntax="facade.ecore" resourcePlugin="org.emftext.language.ecore.resource.facade"/>
+
+		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.facade"/>
+		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.text"/>
+	</target>
+	
+	<target name="run-all-tests">
+		<property name="test_result_dir" value="${basedir}/test_results"/>
+
+		<delete>
+			<fileset dir="${test_result_dir}">
+			    <include name="*.txt"/>
+			</fileset>
+		</delete>
+		
+		<ant antfile="${basedir}/run-emftext-tests.xml">
+			<property name="test_result_dir" value="${test_result_dir}"/>
+		</ant>
+		<ant antfile="${basedir}/run-emftext-language-tests.xml">
+			<property name="test_result_dir" value="${test_result_dir}"/>
+		</ant>
+	</target>
+
+	<!-- run 'generate-ecore-text-text-resources' first! -->
+	<target name="generate-emftext-languages-text-resources" depends="generate-emftext-languages-metamodel-code,generate-emftext-text-resources" description="Generate the EMF text resource plug-ins for all languages">
+		<eclipse.refreshLocal depth="infinite" resource="/"/>
+	</target>
+
+	<target name="generate-refactoring-languages-text-resources" depends="generate-refactoring-languages-metamodel-code,generate-refactoring-text-resources" description="Generate the EMF text resource plug-ins for all refactoring languages">
+		<eclipse.refreshLocal depth="infinite" resource="/"/>
+	</target>
+
+	<target name="generate-emftext-languages-metamodel-code">
+		
+		<emftext-register-ecore-resource-factory 
+			className="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" 
+			type="text"/>
+		
+		<parallel threadsperprocessor="4">
+<!--GENERATE_METAMODEL_TASKS-->
+		</parallel>
+	</target>
+
+	<target name="generate-refactoring-languages-metamodel-code">
+		
+		<parallel threadsperprocessor="4">
+			<generate-metamodel-code plugin="org.emftext.language.refactoring.roles" model="roles" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.refactoring.rolemapping" model="rolemapping" generateEditProject="false" />
+			<generate-metamodel-code plugin="org.emftext.language.refactoring.specification" model="refactoring_specification" generateEditProject="false" />
+		</parallel>
+	</target>
+
+	<!-- A task for generating text resource plug-ins for all EMFText languages -->
+	<target name="generate-emftext-text-resources">
+		
+		<emftext-register-ecore-resource-factory 
+			className="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" 
+			type="text"/>
+		
+<!--GENERATE_TEXT_RESOURCE_TASKS-->
+	</target>
+	
+	<!-- A task for generating text resource plug-ins for all refactoring languages -->
+	<target name="generate-refactoring-text-resources">
+		
+		<generate-text-resource plugin="org.emftext.language.refactoring.roles" syntax="roles" resourcePlugin="org.emftext.language.refactoring.roles.resource.rolestext" />
+		<generate-text-resource plugin="org.emftext.language.refactoring.rolemapping" syntax="rolemapping" resourcePlugin="org.emftext.language.refactoring.rolemapping.resource.rolemapping" />
+		<generate-text-resource plugin="org.emftext.language.refactoring.specification" syntax="refactoring_specification" resourcePlugin="org.emftext.language.refactoring.specification.resource.refspec" />
+	</target>
+	
+	<target name="clean">
+<!--CLEAN_TASKS-->
+	</target>
+	
+</project>
