@@ -255,7 +255,7 @@ public class BuildFileGenerator {
 					"org.emftext.language.plugin.resource.topf", "plugin", 
 					false, ".text"),
 			new Language(
-					"org.emftext.language.quickuml.resource.quml", null,
+					"org.emftext.language.quickuml", null,
 					"org.emftext.language.quickuml.resource.quml", "quickuml", 
 					false),
 			new Language(
