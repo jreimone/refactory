@@ -119,7 +119,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 					}
 				}
 			}
-			Role targetRole = ((ASSIGN) object).getTargetAttribute().getAttributeRole();
+			attribute = ((ASSIGN) object).getTargetAttribute();
+			Role targetRole = attribute.getAttributeRole();
 			if(containsModifierOPTIONAL(targetRole)){return new RefactoringStatus(IRefactoringStatus.OK);}
 			if(((ASSIGN) object).getTargetAttribute().getModifier().contains(RoleModifier.OPTIONAL)){
 				if(mapping.getConcreteMappingForRole(targetRole).getAttributeMappingForAttribute(attribute) == null){
