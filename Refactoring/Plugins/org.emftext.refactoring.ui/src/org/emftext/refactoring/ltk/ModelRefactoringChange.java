@@ -103,6 +103,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 //			if(command != null && command.canUndo()){
 //				command.undo();
 //			}
+			e.printStackTrace();
 			status = new org.emftext.refactoring.interpreter.RefactoringStatus(IRefactoringStatus.ERROR, "Refactoring rolled back", e);
 //			Activator.getDefault().getLog().log(status);
 //			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
