@@ -1,0 +1,14 @@
+
+Track      |   License URL
+----------------------------------------------
+ 01        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 02        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 03        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 04        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 05        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 06        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 07        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 08        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 09        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ 10        |   http://creativecommons.org/licenses/by-sa/2.0/de/
+ artwork   |   http://creativecommons.org/licenses/by-sa/2.0/de/
