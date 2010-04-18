@@ -70,9 +70,10 @@ public class ModelRefactoring extends Refactoring {
 		int flags = RefactoringWizard.CHECK_INITIAL_CONDITIONS_ON_OPEN;
 		if(refactorer.getFakeRefactoredModel() == null){
 			flags |= RefactoringWizard.NO_PREVIEW_PAGE;
-		} else {
-			flags |= RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
-		}
+		} 
+//		else {
+//			flags |= RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
+//		}
 		int attributeValueProvderCount = 0;
 		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValuesToProvide();
 		for (IValueProvider<?, ?> valueProvider : valueProviders) {
@@ -80,11 +81,17 @@ public class ModelRefactoring extends Refactoring {
 				attributeValueProvderCount++;
 			}
 		}
-		if(attributeValueProvderCount == valueProviders.size() || valueProviders.size() == 1){
-			flags |= RefactoringWizard.DIALOG_BASED_USER_INTERFACE;
+		if(valueProviders.size() == 0){
+			flags |= RefactoringWizard.NO_PREVIEW_PAGE;			
+			flags |= RefactoringWizard.NONE;
 		} else {
-			flags |= RefactoringWizard.WIZARD_BASED_USER_INTERFACE;
-		}
+			flags |= RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
+			if(attributeValueProvderCount == valueProviders.size() || valueProviders.size() == 1){
+				flags |= RefactoringWizard.DIALOG_BASED_USER_INTERFACE;
+			} else {
+				flags |= RefactoringWizard.WIZARD_BASED_USER_INTERFACE;
+			}
+		}		
 		return flags;
 	}
 
