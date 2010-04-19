@@ -1,0 +1,1 @@
+If you are interested in generic model refactoring, i.e. specification of model refactorings independent from the target metamodel, this video is a must-have-seen for you. It shows short screencasts of refactorings we could apply to several metamodels. If you have questions don't hesitate to leave a comment or send me an email to janreimone@gmail.com.
