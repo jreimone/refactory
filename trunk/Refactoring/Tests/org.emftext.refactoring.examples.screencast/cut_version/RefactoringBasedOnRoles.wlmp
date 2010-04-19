@@ -125,19 +125,6 @@
         <BoundPropertyFloat Name="Volume" Value="1" />
       </BoundProperties>
     </VideoClip>
-    <VideoClip extentID="6" gapBefore="0" mediaItemID="2" inTime="0" outTime="0">
-      <Effects />
-      <Transitions>
-        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
-          <BoundProperties />
-        </ShapeEffect>
-      </Transitions>
-      <BoundProperties>
-        <BoundPropertyBool Name="Mute" Value="false" />
-        <BoundPropertyInt Name="rotateStepNinety" Value="0" />
-        <BoundPropertyFloat Name="Volume" Value="1" />
-      </BoundProperties>
-    </VideoClip>
     <TitleClip extentID="23" gapBefore="0" duration="3">
       <Effects />
       <Transitions />
@@ -150,7 +137,7 @@
         <BoundPropertyFloat Name="transparency" Value="0" />
       </BoundProperties>
     </TitleClip>
-    <VideoClip extentID="7" gapBefore="0" mediaItemID="3" inTime="0" outTime="0">
+    <VideoClip extentID="6" gapBefore="0" mediaItemID="2" inTime="0" outTime="0">
       <Effects />
       <Transitions>
         <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
@@ -209,7 +196,7 @@
         <BoundPropertyFloat Name="transparency" Value="1" />
       </BoundProperties>
     </TitleClip>
-    <VideoClip extentID="8" gapBefore="0" mediaItemID="4" inTime="0" outTime="0">
+    <VideoClip extentID="7" gapBefore="0" mediaItemID="3" inTime="0" outTime="0">
       <Effects />
       <Transitions>
         <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
@@ -222,7 +209,7 @@
         <BoundPropertyFloat Name="Volume" Value="1" />
       </BoundProperties>
     </VideoClip>
-    <VideoClip extentID="9" gapBefore="0" mediaItemID="5" inTime="0" outTime="0">
+    <VideoClip extentID="8" gapBefore="0" mediaItemID="4" inTime="0" outTime="0">
       <Effects />
       <Transitions>
         <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
@@ -289,6 +276,19 @@
         <BoundPropertyFloat Name="transparency" Value="1" />
       </BoundProperties>
     </TitleClip>
+    <VideoClip extentID="9" gapBefore="0" mediaItemID="5" inTime="0" outTime="0">
+      <Effects />
+      <Transitions>
+        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
+          <BoundProperties />
+        </ShapeEffect>
+      </Transitions>
+      <BoundProperties>
+        <BoundPropertyBool Name="Mute" Value="false" />
+        <BoundPropertyInt Name="rotateStepNinety" Value="0" />
+        <BoundPropertyFloat Name="Volume" Value="1" />
+      </BoundProperties>
+    </VideoClip>
     <VideoClip extentID="10" gapBefore="0" mediaItemID="6" inTime="0" outTime="0">
       <Effects />
       <Transitions>
@@ -315,19 +315,6 @@
         <BoundPropertyFloat Name="Volume" Value="1" />
       </BoundProperties>
     </VideoClip>
-    <VideoClip extentID="12" gapBefore="0" mediaItemID="8" inTime="0" outTime="0">
-      <Effects />
-      <Transitions>
-        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="2">
-          <BoundProperties />
-        </ShapeEffect>
-      </Transitions>
-      <BoundProperties>
-        <BoundPropertyBool Name="Mute" Value="false" />
-        <BoundPropertyInt Name="rotateStepNinety" Value="0" />
-        <BoundPropertyFloat Name="Volume" Value="1" />
-      </BoundProperties>
-    </VideoClip>
     <TitleClip extentID="29" gapBefore="0" duration="10">
       <Effects />
       <Transitions />
@@ -340,10 +327,10 @@
         <BoundPropertyFloat Name="transparency" Value="0" />
       </BoundProperties>
     </TitleClip>
-    <VideoClip extentID="13" gapBefore="0" mediaItemID="9" inTime="0" outTime="0">
+    <VideoClip extentID="12" gapBefore="0" mediaItemID="8" inTime="0" outTime="0">
       <Effects />
       <Transitions>
-        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
+        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="2">
           <BoundProperties />
         </ShapeEffect>
       </Transitions>
@@ -407,6 +394,19 @@
         <BoundPropertyFloat Name="transparency" Value="1" />
       </BoundProperties>
     </TitleClip>
+    <VideoClip extentID="13" gapBefore="0" mediaItemID="9" inTime="0" outTime="0">
+      <Effects />
+      <Transitions>
+        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
+          <BoundProperties />
+        </ShapeEffect>
+      </Transitions>
+      <BoundProperties>
+        <BoundPropertyBool Name="Mute" Value="false" />
+        <BoundPropertyInt Name="rotateStepNinety" Value="0" />
+        <BoundPropertyFloat Name="Volume" Value="1" />
+      </BoundProperties>
+    </VideoClip>
     <VideoClip extentID="14" gapBefore="0" mediaItemID="10" inTime="0" outTime="0">
       <Effects />
       <Transitions>
