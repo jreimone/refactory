@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="RefactoringBasedOnRoles" version="65536" templateID="SimpleProjectTemplate">
   <MediaItems>
-    <MediaItem id="1" filePath="D:\EMFText\ScreencastRepo\videos\ecore_extractEnum_fast.avi" arWidth="1120" arHeight="840" duration="6.862069" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="2" filePath="D:\EMFText\ScreencastRepo\videos\ecore_extractInterface_fast.avi" arWidth="1120" arHeight="840" duration="9.6285714999999996" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="3" filePath="D:\EMFText\ScreencastRepo\videos\ecore_extractPackage_fast.avi" arWidth="1120" arHeight="840" duration="8.7586206999999998" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="4" filePath="D:\EMFText\ScreencastRepo\videos\ecore_extractSuperClass_fast.avi" arWidth="1120" arHeight="840" duration="9.2413793999999996" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="5" filePath="D:\EMFText\ScreencastRepo\videos\ecore_pullUp_fast.avi" arWidth="1120" arHeight="840" duration="8.2758620999999994" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="6" filePath="D:\EMFText\ScreencastRepo\videos\ecore_renameElement_fast.avi" arWidth="1120" arHeight="840" duration="10.3793104" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="7" filePath="D:\EMFText\ScreencastRepo\videos\feature_introduceConstraint_fast.avi" arWidth="1120" arHeight="840" duration="9.5172413999999996" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="8" filePath="D:\EMFText\ScreencastRepo\videos\forms_introduceGroup_fast.avi" arWidth="1120" arHeight="840" duration="6.3103448999999996" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="9" filePath="D:\EMFText\ScreencastRepo\videos\office_rename_fast.avi" arWidth="1120" arHeight="840" duration="14.896551799999999" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="10" filePath="D:\EMFText\ScreencastRepo\videos\pl0_extractAndRename_fast.avi" arWidth="1120" arHeight="840" duration="20.655172499999999" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="11" filePath="D:\EMFText\ScreencastRepo\videos\sandwich_rename_fast.avi" arWidth="1120" arHeight="840" duration="4.6551724999999999" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="12" filePath="D:\EMFText\ScreencastRepo\videos\simplegui_encapsulate_fast.avi" arWidth="1120" arHeight="840" duration="6.3103448999999996" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="13" filePath="D:\EMFText\ScreencastRepo\videos\tas_newRoom_fast.avi" arWidth="1120" arHeight="840" duration="6.4137931999999998" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="14" filePath="D:\EMFText\ScreencastRepo\videos\uml_extractCompositeState_fast.avi" arWidth="1120" arHeight="840" duration="10.586206900000001" songTitle="" songArtist="" songAlbum="" />
-    <MediaItem id="15" filePath="D:\EMFText\ScreencastRepo\cut_version\Sever - Coma Circle LP (Creative Commons License)\03 - Zero Human.mp3" arWidth="0" arHeight="0" duration="207" songTitle="Zero Human" songArtist="Sever" songAlbum="Coma Circle LP" />
+    <MediaItem id="1" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\ecore_extractEnum_fast.avi" arWidth="1120" arHeight="840" duration="6.862069" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="2" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\ecore_extractInterface_fast.avi" arWidth="1120" arHeight="840" duration="9.6285714999999996" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="3" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\ecore_extractPackage_fast.avi" arWidth="1120" arHeight="840" duration="8.7586206999999998" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="4" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\ecore_extractSuperClass_fast.avi" arWidth="1120" arHeight="840" duration="9.2413793999999996" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="5" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\ecore_pullUp_fast.avi" arWidth="1120" arHeight="840" duration="8.2758620999999994" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="6" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\ecore_renameElement_fast.avi" arWidth="1120" arHeight="840" duration="10.3793104" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="7" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\feature_introduceConstraint_fast.avi" arWidth="1120" arHeight="840" duration="9.5172413999999996" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="8" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\forms_introduceGroup_fast.avi" arWidth="1120" arHeight="840" duration="6.3103448999999996" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="9" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\office_rename_fast.avi" arWidth="1120" arHeight="840" duration="14.896551799999999" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="10" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\pl0_extractAndRename_fast.avi" arWidth="1120" arHeight="840" duration="20.655172499999999" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="11" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\sandwich_rename_fast.avi" arWidth="1120" arHeight="840" duration="4.6551724999999999" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="12" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\simplegui_encapsulate_fast.avi" arWidth="1120" arHeight="840" duration="6.3103448999999996" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="13" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\tas_newRoom_fast.avi" arWidth="1120" arHeight="840" duration="6.4137931999999998" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="14" filePath="C:\Users\jreimann\Documents\ScreencastRepo\videos\uml_extractCompositeState_fast.avi" arWidth="1120" arHeight="840" duration="10.586206900000001" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="15" filePath="C:\Users\jreimann\Documents\ScreencastRepo\cut_version\Sever - Coma Circle LP (Creative Commons License)\03 - Zero Human.mp3" arWidth="0" arHeight="0" duration="207" songTitle="Zero Human" songArtist="Sever" songAlbum="Coma Circle LP" />
   </MediaItems>
   <Extents>
     <VideoClip extentID="17" gapBefore="0" mediaItemID="13" inTime="0" outTime="0">
@@ -125,6 +125,19 @@
         <BoundPropertyFloat Name="Volume" Value="1" />
       </BoundProperties>
     </VideoClip>
+    <VideoClip extentID="6" gapBefore="0" mediaItemID="2" inTime="0" outTime="0">
+      <Effects />
+      <Transitions>
+        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
+          <BoundProperties />
+        </ShapeEffect>
+      </Transitions>
+      <BoundProperties>
+        <BoundPropertyBool Name="Mute" Value="false" />
+        <BoundPropertyInt Name="rotateStepNinety" Value="0" />
+        <BoundPropertyFloat Name="Volume" Value="1" />
+      </BoundProperties>
+    </VideoClip>
     <TitleClip extentID="23" gapBefore="0" duration="3">
       <Effects />
       <Transitions />
@@ -137,7 +150,7 @@
         <BoundPropertyFloat Name="transparency" Value="0" />
       </BoundProperties>
     </TitleClip>
-    <VideoClip extentID="6" gapBefore="0" mediaItemID="2" inTime="0" outTime="0">
+    <VideoClip extentID="7" gapBefore="0" mediaItemID="3" inTime="0" outTime="0">
       <Effects />
       <Transitions>
         <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
@@ -196,7 +209,7 @@
         <BoundPropertyFloat Name="transparency" Value="1" />
       </BoundProperties>
     </TitleClip>
-    <VideoClip extentID="7" gapBefore="0" mediaItemID="3" inTime="0" outTime="0">
+    <VideoClip extentID="8" gapBefore="0" mediaItemID="4" inTime="0" outTime="0">
       <Effects />
       <Transitions>
         <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
@@ -209,7 +222,7 @@
         <BoundPropertyFloat Name="Volume" Value="1" />
       </BoundProperties>
     </VideoClip>
-    <VideoClip extentID="8" gapBefore="0" mediaItemID="4" inTime="0" outTime="0">
+    <VideoClip extentID="9" gapBefore="0" mediaItemID="5" inTime="0" outTime="0">
       <Effects />
       <Transitions>
         <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
@@ -276,19 +289,6 @@
         <BoundPropertyFloat Name="transparency" Value="1" />
       </BoundProperties>
     </TitleClip>
-    <VideoClip extentID="9" gapBefore="0" mediaItemID="5" inTime="0" outTime="0">
-      <Effects />
-      <Transitions>
-        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
-          <BoundProperties />
-        </ShapeEffect>
-      </Transitions>
-      <BoundProperties>
-        <BoundPropertyBool Name="Mute" Value="false" />
-        <BoundPropertyInt Name="rotateStepNinety" Value="0" />
-        <BoundPropertyFloat Name="Volume" Value="1" />
-      </BoundProperties>
-    </VideoClip>
     <VideoClip extentID="10" gapBefore="0" mediaItemID="6" inTime="0" outTime="0">
       <Effects />
       <Transitions>
@@ -315,18 +315,6 @@
         <BoundPropertyFloat Name="Volume" Value="1" />
       </BoundProperties>
     </VideoClip>
-    <TitleClip extentID="29" gapBefore="0" duration="5">
-      <Effects />
-      <Transitions />
-      <BoundProperties>
-        <BoundPropertyFloatSet Name="diffuseColor">
-          <BoundPropertyFloatElement Value="0" />
-          <BoundPropertyFloatElement Value="0" />
-          <BoundPropertyFloatElement Value="0" />
-        </BoundPropertyFloatSet>
-        <BoundPropertyFloat Name="transparency" Value="0" />
-      </BoundProperties>
-    </TitleClip>
     <VideoClip extentID="12" gapBefore="0" mediaItemID="8" inTime="0" outTime="0">
       <Effects />
       <Transitions>
@@ -340,7 +328,32 @@
         <BoundPropertyFloat Name="Volume" Value="1" />
       </BoundProperties>
     </VideoClip>
-    <TitleClip extentID="30" gapBefore="0" duration="5">
+    <TitleClip extentID="29" gapBefore="0" duration="10">
+      <Effects />
+      <Transitions />
+      <BoundProperties>
+        <BoundPropertyFloatSet Name="diffuseColor">
+          <BoundPropertyFloatElement Value="0" />
+          <BoundPropertyFloatElement Value="0" />
+          <BoundPropertyFloatElement Value="0" />
+        </BoundPropertyFloatSet>
+        <BoundPropertyFloat Name="transparency" Value="0" />
+      </BoundProperties>
+    </TitleClip>
+    <VideoClip extentID="13" gapBefore="0" mediaItemID="9" inTime="0" outTime="0">
+      <Effects />
+      <Transitions>
+        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
+          <BoundProperties />
+        </ShapeEffect>
+      </Transitions>
+      <BoundProperties>
+        <BoundPropertyBool Name="Mute" Value="false" />
+        <BoundPropertyInt Name="rotateStepNinety" Value="0" />
+        <BoundPropertyFloat Name="Volume" Value="1" />
+      </BoundProperties>
+    </VideoClip>
+    <TitleClip extentID="30" gapBefore="0" duration="10">
       <Effects>
         <TextEffect effectTemplateID="TextEffectFadeTemplate" TextScriptId="1">
           <BoundProperties>
@@ -361,7 +374,7 @@
             <BoundPropertyFloat Name="maxExtent" Value="0" />
             <BoundPropertyFloatSet Name="position">
               <BoundPropertyFloatElement Value="0" />
-              <BoundPropertyFloatElement Value="1.883720874786377" />
+              <BoundPropertyFloatElement Value="2.5639533996582031" />
               <BoundPropertyFloatElement Value="0.02500000037252903" />
             </BoundPropertyFloatSet>
             <BoundPropertyFloat Name="size" Value="0.3333333432674408" />
@@ -369,6 +382,8 @@
               <BoundPropertyStringElement Value="Jan Reimann" />
               <BoundPropertyStringElement Value="" />
               <BoundPropertyStringElement Value="Diploma Thesis: Generisches Modellrefactoring" />
+              <BoundPropertyStringElement Value="" />
+              <BoundPropertyStringElement Value="www.emftext.org/refactoring" />
               <BoundPropertyStringElement Value="" />
               <BoundPropertyStringElement Value="Music: Sever - Zero Human" />
               <BoundPropertyStringElement Value="http://www.jamendo.com/de/album/42180" />
@@ -392,19 +407,6 @@
         <BoundPropertyFloat Name="transparency" Value="1" />
       </BoundProperties>
     </TitleClip>
-    <VideoClip extentID="13" gapBefore="0" mediaItemID="9" inTime="0" outTime="0">
-      <Effects />
-      <Transitions>
-        <ShapeEffect effectTemplateID="RollTransitionTemplate" duration="1">
-          <BoundProperties />
-        </ShapeEffect>
-      </Transitions>
-      <BoundProperties>
-        <BoundPropertyBool Name="Mute" Value="false" />
-        <BoundPropertyInt Name="rotateStepNinety" Value="0" />
-        <BoundPropertyFloat Name="Volume" Value="1" />
-      </BoundProperties>
-    </VideoClip>
     <VideoClip extentID="14" gapBefore="0" mediaItemID="10" inTime="0" outTime="0">
       <Effects />
       <Transitions>
