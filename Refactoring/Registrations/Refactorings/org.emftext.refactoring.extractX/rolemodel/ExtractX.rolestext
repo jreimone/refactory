@@ -20,7 +20,7 @@ At the old position of the statements a method call will be set instead.
 	/**
 	This role represents the container of the both other containers: 'OrigContainer' and 'NewContainer'.
 	It must be mapped to an EClass having containment references to the other both mapped EClasses
-	*/  ROLE ContainerContainer ; 
+	*/  super ROLE ContainerContainer ; 
 	/**
 	This role represents an element which can refer to the element owning the role 'NewContainer'.
 	It is optional because there might be metamodels for which no references must be set.
