@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:BpmnDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bpmn="http://stp.eclipse.org/bpmn" xmi:id="_llEBkEyaEd-1s95oBqtQMA" iD="_llCMYUyaEd-1s95oBqtQMA">
+  <pools xmi:type="bpmn:Pool" xmi:id="_lmiBMUyaEd-1s95oBqtQMA" iD="_lmiBMEyaEd-1s95oBqtQMA" name="Bakery">
+    <vertices xmi:type="bpmn:Activity" xmi:id="_K2G2MEybEd-1s95oBqtQMA" iD="_K2GPIEybEd-1s95oBqtQMA" outgoingEdges="_cqav4UycEd-g-KfcI_QPGw" name="2:00am" activityType="EventIntermediateTimer"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_HNCoUUycEd-g-KfcI_QPGw" iD="_HNCoUEycEd-g-KfcI_QPGw" outgoingEdges="_bqMpAUycEd-g-KfcI_QPGw" incomingEdges="_cqav4UycEd-g-KfcI_QPGw" name="bake rolls" activityType="Task"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_OD4kUUycEd-g-KfcI_QPGw" iD="_OD4kUEycEd-g-KfcI_QPGw" outgoingEdges="_ZplKMUyeEd-g-KfcI_QPGw" incomingEdges="_bqMpAUycEd-g-KfcI_QPGw" name="sell rolls"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_Qj1_oUycEd-g-KfcI_QPGw" iD="_Qj1_oEycEd-g-KfcI_QPGw" incomingEdges="_aiQeoUyeEd-g-KfcI_QPGw" activityType="EventEndEmpty"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_XAK390yeEd-g-KfcI_QPGw" iD="_XAJp0EyeEd-g-KfcI_QPGw" outgoingEdges="_Z7XdwUyeEd-g-KfcI_QPGw" incomingEdges="_ZplKMUyeEd-g-KfcI_QPGw" name="balance the cash"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_XAK3-EyeEd-g-KfcI_QPGw" iD="_XAKQ4EyeEd-g-KfcI_QPGw" outgoingEdges="_aKISgUyeEd-g-KfcI_QPGw" incomingEdges="_Z7XdwUyeEd-g-KfcI_QPGw" name="extract the money"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_XALfAEyeEd-g-KfcI_QPGw" iD="_XAKQ6EyeEd-g-KfcI_QPGw" outgoingEdges="_aiQeoUyeEd-g-KfcI_QPGw" incomingEdges="_aKISgUyeEd-g-KfcI_QPGw" name="close cash box"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_bqMpAUycEd-g-KfcI_QPGw" iD="_bqMpAEycEd-g-KfcI_QPGw"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_cqav4UycEd-g-KfcI_QPGw" iD="_cqav4EycEd-g-KfcI_QPGw"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_ZplKMUyeEd-g-KfcI_QPGw" iD="_ZplKMEyeEd-g-KfcI_QPGw"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_Z7XdwUyeEd-g-KfcI_QPGw" iD="_Z7XdwEyeEd-g-KfcI_QPGw"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_aKISgUyeEd-g-KfcI_QPGw" iD="_aKISgEyeEd-g-KfcI_QPGw"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_aiQeoUyeEd-g-KfcI_QPGw" iD="_aiQeoEyeEd-g-KfcI_QPGw"/>
+  </pools>
+</bpmn:BpmnDiagram>
