@@ -208,7 +208,7 @@ public class Refactorer implements IRefactorer {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("fake interpreter threw exception");
-			return null;
+			return fakeInterpreter;
 		}
 		// copy end
 		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValuesToProvide();
