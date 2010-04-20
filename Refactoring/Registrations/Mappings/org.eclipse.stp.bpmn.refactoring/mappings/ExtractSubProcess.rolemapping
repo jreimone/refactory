@@ -1,0 +1,17 @@
+ROLEMODELMAPPING bpmn FOR <http://stp.eclipse.org/bpmn> 
+
+ExtractSubProcess maps <ExtractX> {
+	Extract := Activity;
+	
+	NewContainer := SubProcess (newName -> name){
+		moved := vertices;
+	};
+	
+	OrigContainer := Pool{
+		extracts := vertices;
+	};
+	
+	ContainerContainer := Pool{
+		target := vertices;
+	}; 
+}

@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Refactoring
+Bundle-SymbolicName: org.eclipse.stp.bpmn.refactoring;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.stp.bpmn.refactoring.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping,
+ org.eclipse.emf.ecore.change,
+ org.emftext.language.refactoring.roles,
+ org.eclipse.stp.bpmn
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
