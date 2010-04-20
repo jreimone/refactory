@@ -1,5 +1,6 @@
 package org.emftext.sdk.concretesyntax.refactoring;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -128,6 +129,9 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 				if (object instanceof EObject) {
 					EObject eObject = (EObject) object;
 					return eObject;
+				} else if(object instanceof List<?>){
+					// the runtime objects can also be lists of EObjects!!!
+					return (EObject) ((List<?>) object).get(0);
 				}
 			}
 		}
