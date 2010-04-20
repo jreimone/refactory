@@ -6,7 +6,6 @@ EncapsulateInPanel maps <ExtractX> {
 	
 	OrigContainer := Container {
 		extracts := children;
-		referer := parent;
 	};
 	
 	NewContainer := Panel(newName -> name){
