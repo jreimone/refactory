@@ -41,12 +41,27 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>org.emftext.language.simple_gui.resource.simplegui.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.reuseware.sokan.resource.indexBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.emftext.language.simple_gui.resource.simplegui.builder</name>
+			<name>org.emftext.language.office.resource.office.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.textadventure.resource.tas.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.stp.bpmn.validation.BatchValidationBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -59,7 +74,10 @@
 		<nature>org.emftext.language.pl0extended.resource.pl0extended.nature</nature>
 		<nature>sandwich_simple.resource.simple_sandwich.nature</nature>
 		<nature>org.emftext.language.forms.resource.forms.nature</nature>
-		<nature>org.reuseware.sokan.resource.repositoryNature</nature>
 		<nature>org.emftext.language.simple_gui.resource.simplegui.nature</nature>
+		<nature>org.reuseware.sokan.resource.repositoryNature</nature>
+		<nature>org.emftext.language.office.resource.office.nature</nature>
+		<nature>org.emftext.language.textadventure.resource.tas.nature</nature>
+		<nature>org.eclipse.stp.bpmn.validation.BatchValidationBuildAbleNature</nature>
 	</natures>
 </projectDescription>
