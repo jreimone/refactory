@@ -47,10 +47,10 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 	private ModelRefactoring modelRefactoring;
 	private IEditorPart activeEditor;
 	private IProgressMonitor monitor;
-	
+
 	private RefactoringRecordingCommand command;
 	private IRefactoringStatus status;
-	
+
 	public ModelRefactoringChange(ModelRefactoring modelRefactoring) {
 		super();
 		this.modelRefactoring = modelRefactoring;
@@ -95,32 +95,32 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			IUndoableOperation operation = new RefactoringUndoOperation(command);
 			IOperationHistory history = PlatformUI.getWorkbench().getOperationSupport().getOperationHistory();
 			history.add(operation);
-			
+
 			status = command.getStatus();
 			statusSwitch(true);
-//			statusSwitch(command, status);
+			//			statusSwitch(command, status);
 		} catch (Exception e) {
-//			if(command != null && command.canUndo()){
-//				command.undo();
-//			}
+			//			if(command != null && command.canUndo()){
+			//				command.undo();
+			//			}
 			e.printStackTrace();
 			status = new org.emftext.refactoring.interpreter.RefactoringStatus(IRefactoringStatus.ERROR, "Refactoring rolled back", e);
-//			Activator.getDefault().getLog().log(status);
-//			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//			String title = "Refactoring was rolled back";
-//			String message = "Refactoring rolled back because of an unforseen error. Check out the error log";
+			//			Activator.getDefault().getLog().log(status);
+			//			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			//			String title = "Refactoring was rolled back";
+			//			String message = "Refactoring rolled back because of an unforseen error. Check out the error log";
 			statusSwitch(true);
 			if(domain != null && diagramTransactionalEditingDomain == null){
 				domain.dispose();
 			}
 			return null;
-//			MessageDialog.openInformation(shell, title, message);
+			//			MessageDialog.openInformation(shell, title, message);
 		}
 		if(domain != null && diagramTransactionalEditingDomain == null){
 			domain.dispose();
 		}
 		Change undoChange = new Change() {
-			
+
 			@Override
 			public Change perform(IProgressMonitor pm) throws CoreException {
 				if(command.canUndo()){
@@ -128,23 +128,23 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 				}
 				return null;
 			}
-			
+
 			@Override
 			public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException,
-					OperationCanceledException {
+			OperationCanceledException {
 				return RefactoringStatus.create(Status.OK_STATUS);
 			}
-			
+
 			@Override
 			public void initializeValidationData(IProgressMonitor pm) {
 				// TODO Auto-generated method stub
 			}
-			
+
 			@Override
 			public String getName() {
 				return "Undo " + modelRefactoring.getName();
 			}
-			
+
 			@Override
 			public Object getModifiedElement() {
 				return null;
@@ -153,10 +153,10 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		return undoChange;
 	}
 
-	
+
 	private void statusSwitch(boolean rollback) {
-//		Shell shell;
-//		String title;
+		//		Shell shell;
+		//		String title;
 		String message;
 		if(status == null){
 			status = new org.emftext.refactoring.interpreter.RefactoringStatus(IStatus.OK);
@@ -167,20 +167,20 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			System.out.println("Refactored successfull");
 			break;
 		case IRefactoringStatus.INFO:
-//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//			title = "Information";
+			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			//			title = "Information";
 			message = status.getMessage();
-//			MessageDialog.openInformation(shell, title, message);
+			//			MessageDialog.openInformation(shell, title, message);
 			if(rollback && command.canUndo()){
 				command.undo();
 			}
 			System.out.println("Refactoring rolled back because of some infos");
 			break;
 		case IRefactoringStatus.WARNING:
-//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//			title = "Information";
+			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			//			title = "Information";
 			message = status.getMessage();
-//			MessageDialog.openInformation(shell, title, message);
+			//			MessageDialog.openInformation(shell, title, message);
 			if(rollback && command.canUndo()){
 				command.undo();
 			}
@@ -193,21 +193,22 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			System.out.println("Refactoring rolled back because of cancelation of dialog");
 			break;
 		case IRefactoringStatus.ERROR:
-//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//			title = "Refactoring will be rolled back";
+			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			//			title = "Refactoring will be rolled back";
 			message = "The refactoring will be rolled back because of the following unforseen error: \n\n";
 			message += status.getMessage();
 			if(status.getException() != null){
+				status.getException().printStackTrace();
 				message += "\n\nCheck out the error log for further information.";
-//				Activator.getDefault().getLog().log(status);
+				//				Activator.getDefault().getLog().log(status);
 				ResourcesPlugin.getPlugin().getLog().log(status);
 			}
 			status.setMessage(message);
-//			MessageDialog.openInformation(shell, title, message);
+			//			MessageDialog.openInformation(shell, title, message);
 			if(rollback && command.canUndo()){
 				command.undo();
 			}
-			
+
 			System.out.println("Refactoring rolled back because of an error");
 			break;
 		default:
@@ -236,18 +237,23 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, true);
 		//		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
 		MatchModel match = null;
+		DiffModel diff = null;
 		try {
 			EObject originalModel = refactorer.getOriginalModel();
 			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
 			IMatchEngine engine = new RefactoringMatchEngine();
-			match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
+			if(originalModel != null && fakeRefactoredModel != null){
+				match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
+			}
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
 		if(match != null){
-			DiffModel diff = DiffService.doDiff(match, false);
+			if(match != null){
+				diff = DiffService.doDiff(match, false);
+			}
 			ModelCompareInput compareInput = new ModelCompareInput(match, diff);
-			
+
 			return compareInput;
 		}
 		return null;
