@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="mappings/ExtractSubProcess.rolemapping">
+      </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="ExtractSubProcess"
+            nsUri="http://stp.eclipse.org/bpmn"
+            postprocessor="org.eclipse.stp.bpmn.refactoring.ExtractSubProcessPostProcessor">
+      </postprocessor>
+   </extension>
+
+</plugin>
