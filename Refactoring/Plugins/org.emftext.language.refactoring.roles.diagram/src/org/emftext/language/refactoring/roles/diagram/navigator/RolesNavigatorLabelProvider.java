@@ -216,30 +216,14 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 * @generated
 	 */
 	private String getRoleImplication_4001Text(View view) {
-		RoleImplication domainModelElement = (RoleImplication) view
-				.getElement();
-		if (domainModelElement != null) {
-			return String.valueOf(domainModelElement.getModifier());
-		} else {
-			RolesDiagramEditorPlugin.getInstance().logError(
-					"No domain element for view with visualID = " + 4001); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
+		return ""; //$NON-NLS-1$
 	}
 
 	/**
 	 * @generated
 	 */
 	private String getRoleProhibition_4002Text(View view) {
-		RoleProhibition domainModelElement = (RoleProhibition) view
-				.getElement();
-		if (domainModelElement != null) {
-			return String.valueOf(domainModelElement.getModifier());
-		} else {
-			RolesDiagramEditorPlugin.getInstance().logError(
-					"No domain element for view with visualID = " + 4002); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
+		return ""; //$NON-NLS-1$
 	}
 
 	/**

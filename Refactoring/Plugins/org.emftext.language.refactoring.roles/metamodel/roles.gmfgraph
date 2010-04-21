@@ -9,6 +9,45 @@
         xsi:type="gmfgraph:PolylineDecoration"
         name="RoleImplicationTargetDecoration"
         lineWidth="2"/>
+    <figures
+        xsi:type="gmfgraph:PolylineDecoration"
+        name="RoleAssociationTargetDecoration"
+        fill="false"/>
+    <figures
+        xsi:type="gmfgraph:PolygonDecoration"
+        name="ContainmentSourceDecoration">
+      <template/>
+      <template
+          x="-1"
+          y="1"/>
+      <template
+          x="-2"/>
+      <template
+          x="-1"
+          y="-1"/>
+      <template/>
+    </figures>
+    <figures
+        xsi:type="gmfgraph:PolygonDecoration"
+        name="ProhibitionDecoration"
+        lineWidth="5">
+      <template
+          y="2"/>
+      <template
+          y="-2"/>
+    </figures>
+    <figures
+        xsi:type="gmfgraph:PolygonDecoration"
+        name="ImplicationTargetDecoration">
+      <template/>
+      <template
+          x="-2"
+          y="2"/>
+      <template
+          x="-2"
+          y="-2"/>
+      <template/>
+    </figures>
     <descriptors
         name="RoleFigure">
       <actualFigure
@@ -40,7 +79,7 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="RoleImplicationFigure"
           lineWidth="2"
-          targetDecoration="//@figures.0/@figures.0">
+          targetDecoration="//@figures.0/@figures.4">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="orange"/>
@@ -51,7 +90,9 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="RoleProhibitionFigure"
-          lineWidth="2">
+          lineWidth="2"
+          sourceDecoration="//@figures.0/@figures.3"
+          targetDecoration="//@figures.0/@figures.3">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="red"/>
@@ -62,7 +103,8 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="RoleAssociationFigure"
-          lineWidth="2">
+          lineWidth="2"
+          targetDecoration="//@figures.0/@figures.1">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="green"/>
@@ -87,7 +129,8 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="RoleCompositionFigure"
-          lineWidth="2">
+          lineWidth="2"
+          sourceDecoration="//@figures.0/@figures.2">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="cyan"/>
