@@ -2,6 +2,10 @@ package org.emftext.language.refactoring.roles.diagram.edit.parts;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.PolygonDecoration;
+import org.eclipse.draw2d.PolylineDecoration;
+import org.eclipse.draw2d.RotatableDecoration;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITreeBranchEditPart;
@@ -132,6 +136,7 @@ public class RoleCompositionEditPart extends ConnectionNodeEditPart implements
 			this.setForegroundColor(ColorConstants.cyan);
 
 			createContents();
+			setSourceDecoration(createSourceDecoration());
 		}
 
 		/**
@@ -149,6 +154,24 @@ public class RoleCompositionEditPart extends ConnectionNodeEditPart implements
 
 			this.add(fFigureCompositionTargetNameFigure);
 
+		}
+
+		/**
+		 * @generated
+		 */
+		private RotatableDecoration createSourceDecoration() {
+			PolygonDecoration df = new PolygonDecoration();
+			df.setFill(true);
+			df.setLineWidth(1);
+			PointList pl = new PointList();
+			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
+			pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(1));
+			pl.addPoint(getMapMode().DPtoLP(-2), getMapMode().DPtoLP(0));
+			pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(-1));
+			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
+			df.setTemplate(pl);
+			df.setScale(getMapMode().DPtoLP(7), getMapMode().DPtoLP(3));
+			return df;
 		}
 
 		/**

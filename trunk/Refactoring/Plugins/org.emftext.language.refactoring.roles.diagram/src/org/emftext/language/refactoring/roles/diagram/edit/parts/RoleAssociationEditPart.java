@@ -2,6 +2,8 @@ package org.emftext.language.refactoring.roles.diagram.edit.parts;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.PolylineDecoration;
+import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITreeBranchEditPart;
@@ -130,6 +132,7 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements
 			this.setForegroundColor(ColorConstants.green);
 
 			createContents();
+			setTargetDecoration(createTargetDecoration());
 		}
 
 		/**
@@ -147,6 +150,16 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements
 
 			this.add(fFigureTargetNameFigure);
 
+		}
+
+		/**
+		 * @generated
+		 */
+		private RotatableDecoration createTargetDecoration() {
+			PolylineDecoration df = new PolylineDecoration();
+			df.setFill(false);
+			df.setLineWidth(1);
+			return df;
 		}
 
 		/**
