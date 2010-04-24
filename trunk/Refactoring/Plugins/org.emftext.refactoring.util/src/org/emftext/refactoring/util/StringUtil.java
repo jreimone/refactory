@@ -24,4 +24,13 @@ public class StringUtil {
 		}
 		return sb.toString();
 	}
+	
+	public static String firstLetterUpperCase(String text){
+		if(text == null || "".equals(text)){
+			return "";
+		}
+		StringBuffer sb = new StringBuffer(text);
+		sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
+		return sb.toString();
+	}
 }
