@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
@@ -25,7 +27,11 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.CheckboxCellEditor;
 import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.EditingSupport;
+import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelection;
@@ -53,6 +59,7 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.util.StringUtil;
@@ -88,10 +95,11 @@ public class RefactoringStatisticView extends ViewPart {
 	private Action action1;
 	private Action action2;
 	private Action doubleClickAction;
+	private ViewContentProvider contentProvider;
 
 	private AdapterFactoryLabelProvider labelProvider;
 
-	class TreeObject implements IAdaptable {
+	abstract class TreeObject implements IAdaptable {
 		private EObject object;
 		private TreeParent parent;
 
@@ -109,6 +117,70 @@ public class RefactoringStatisticView extends ViewPart {
 		}
 		public EObject getObject() {
 			return object;
+		}
+	}
+	
+	class TreeLeaf extends TreeObject{
+
+		private Mapping mapping;
+		
+		public TreeLeaf(Mapping object) {
+			super(object);
+			this.mapping = object;
+		}
+		
+		private int countMetaclasses(EPackage epackage){
+			int count = 0;
+			if(epackage.getEClassifiers() != null){
+				for (EClassifier classifier : epackage.getEClassifiers()) {
+					if(classifier instanceof EClass){
+						count ++;
+					}
+				}
+			}
+			for (EPackage subPackage : epackage.getESubpackages()) {
+				count += countMetaclasses(subPackage);
+			}
+			return count;
+		}
+		
+		private int countRelations(EPackage epackage){
+			int count = 0;
+			if(epackage.getEClassifiers() != null){
+				for (EClassifier classifier : epackage.getEClassifiers()) {
+					if(classifier instanceof EClass){
+						count += ((EClass) classifier).getEReferences().size();
+					}
+				}
+			}
+			for (EPackage subPackage : epackage.getESubpackages()) {
+				count += countMetaclasses(subPackage);
+			}
+			return count;
+		}
+		
+		public EPackage getMetamodel(){
+			return mapping.getOwningMappingModel().getTargetMetamodel();
+		}
+		
+		public boolean hasPostProcessorRegistered(){
+			IRefactoringPostProcessor postProcessor = IRoleMappingRegistry.INSTANCE.getPostProcessor(mapping);
+			if(postProcessor != null){
+				return true;
+			}
+			return false;
+		}
+		
+		public int getCountMetaclasses(){
+			return countMetaclasses(getMetamodel());
+		}
+		
+		public int getCountRelations(){
+			return countRelations(getMetamodel());
+		}
+		
+		public double getCountRelationsPerMetaclass(){
+			return new Integer(getCountRelations()).doubleValue() / new Integer(getCountMetaclasses()).doubleValue();
 		}
 	}
 
@@ -196,7 +268,7 @@ public class RefactoringStatisticView extends ViewPart {
 						List<Mapping> uniqueMappings = new ArrayList<Mapping>();
 						for (Mapping mapping : roleModelMappings) {
 							if(!uniqueMappings.contains(mapping)){
-								TreeObject mappingChild = new TreeObject(mapping);
+								TreeObject mappingChild = new TreeLeaf(mapping);
 								modelParent.addChild(mappingChild);
 								uniqueMappings.add(mapping);
 							}
@@ -204,6 +276,9 @@ public class RefactoringStatisticView extends ViewPart {
 					}
 				}
 			}
+			return invisibleRoot;
+		}
+		public TreeParent getInvisibleRoot() {
 			return invisibleRoot;
 		}
 	}
@@ -229,7 +304,7 @@ public class RefactoringStatisticView extends ViewPart {
 			}
 			return null;
 		}
-
+		
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof TreeObject){
 				TreeObject object = (TreeObject) element;
@@ -243,9 +318,39 @@ public class RefactoringStatisticView extends ViewPart {
 					}
 					return "";
 				case 1: // Metamodel
-					if(eObject instanceof Mapping){
-						EPackage metamodel = ((Mapping) eObject).getOwningMappingModel().getTargetMetamodel();
-						return metamodel.getNsURI();
+					if(object instanceof TreeLeaf){
+						return ((TreeLeaf) object).getMetamodel().getNsURI();
+					}
+					return "";
+				case 2: // PostProcessor (PP)
+					if(object instanceof TreeLeaf){
+						boolean hasPostProcessor = ((TreeLeaf) object).hasPostProcessorRegistered();
+						if(hasPostProcessor){
+							return "X";
+						}
+					}
+					return "";
+				case 3: // count of Metaclasses
+					if(object instanceof TreeLeaf){
+						int count = ((TreeLeaf) object).getCountMetaclasses();
+						return String.valueOf(count);
+					}
+					return "";
+				case 4: // count of Relations
+					if(object instanceof TreeLeaf){
+						int count = ((TreeLeaf) object).getCountRelations();
+						return String.valueOf(count);
+					}
+					return "";
+				case 5: // average Relations per Metaclass
+					if(object instanceof TreeLeaf){
+						double average = ((TreeLeaf) object).getCountRelationsPerMetaclass();
+						String averageString = String.valueOf(average);
+						int dotIndex = averageString.indexOf(".");
+						if(dotIndex + 3 <= averageString.length()){
+							averageString = averageString.substring(0, dotIndex + 3);
+						}
+						return averageString;
 					}
 					return "";
 				default:
@@ -296,8 +401,8 @@ public class RefactoringStatisticView extends ViewPart {
 	 * to create the viewer and initialize it.
 	 */
 	public void createPartControl(Composite parent) {
-		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-
+		viewer = new TreeViewer(parent, SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
+		
 		Tree tree = viewer.getTree();
 		tree.setLinesVisible(true);
 		tree.setHeaderVisible(true);
@@ -305,11 +410,25 @@ public class RefactoringStatisticView extends ViewPart {
 		column1.setWidth(200);
 		column1.setText("Refactoring");
 		TreeColumn column2 = new TreeColumn(tree, SWT.LEFT);
-		column2.setWidth(400);
+		column2.setWidth(300);
 		column2.setText("Metamodel");
-
+		TreeColumn column3 = new TreeColumn(tree, SWT.CENTER);
+		column3.setWidth(40);
+		column3.setText("PP");
+		TreeColumn column4 = new TreeColumn(tree, SWT.CENTER);
+		column4.setWidth(40);
+		column4.setText("MC");
+		TreeColumn column5 = new TreeColumn(tree, SWT.CENTER);
+		column5.setWidth(40);
+		column5.setText("Rel");
+		TreeColumn column6 = new TreeColumn(tree, SWT.CENTER);
+		column6.setWidth(40);
+		column6.setText("R/MC");
+		
+		
 		drillDownAdapter = new DrillDownAdapter(viewer);
-		viewer.setContentProvider(new ViewContentProvider());
+		contentProvider = new ViewContentProvider();
+		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setSorter(new NameSorter());
 		viewer.setInput(getViewSite());
@@ -317,6 +436,7 @@ public class RefactoringStatisticView extends ViewPart {
 		hookContextMenu();
 		hookDoubleClickAction();
 		contributeToActionBars();
+		viewer.expandAll();
 	}
 
 	private void hookContextMenu() {
@@ -346,7 +466,6 @@ public class RefactoringStatisticView extends ViewPart {
 
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(action1);
-		manager.add(action2);
 		manager.add(new Separator());
 		drillDownAdapter.addNavigationActions(manager);
 		// Other plug-ins can contribute there actions here
@@ -428,13 +547,74 @@ public class RefactoringStatisticView extends ViewPart {
 
 		action2 = new Action() {
 			public void run() {
-				showMessage("Action 2 executed");
+				TreeParent invisibleRoot = contentProvider.getInvisibleRoot();
+				Object input = viewer.getInput();
+				try {
+					String tempdir = System.getProperty("java.io.tmpdir") + "Refactor";
+					File tempDir = new File(tempdir);
+					boolean success = true;
+					if(!tempDir.isDirectory()){
+						success = tempDir.mkdir();
+					}
+					if(success){
+						File tableFile = File.createTempFile("refactorings_", ".latex", tempDir);
+						tableFile.deleteOnExit();
+						FileWriter writer = new FileWriter(tableFile);
+						writer.append("\\begingroup\n");
+						writer.append("\\footnotesize\n");
+						writer.append("\\begin{longtable}{|l|l|c|c|c|c|}\n");
+						writer.append("\\caption{Refactorings applied to metamodels}\\\\\n");
+						writer.append("\\hline\n");
+						writer.append("\\textbf{Specific Name} & \\textbf{Metamodel} & \\textbf{PP} & \\textbf{MC} & \\textbf{Rel} & \\textbf{Rel/MC}\\\\ \\hline\n");
+						for (TreeObject object : invisibleRoot.getChildren()) {
+							if(object instanceof TreeParent){
+								TreeParent parent = (TreeParent) object;
+								RoleModel roleModel = (RoleModel) parent.getObject();
+								writer.append("\\multicolumn{6}{|l|}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}}\\\\ \\hline\n");
+								for (TreeObject child : parent.getChildren()) {
+									if(child instanceof TreeLeaf){
+										TreeLeaf leaf = (TreeLeaf) child;
+										Mapping mapping = (Mapping) leaf.getObject();
+										writer.append(StringUtil.convertCamelCaseToWords(mapping.getName()));
+										writer.append(" & ");
+										String mmName = StringUtil.firstLetterUpperCase(leaf.getMetamodel().getName());
+										mmName = mmName.replaceAll("_", " ");
+										writer.append(mmName);
+										writer.append(" & ");
+										boolean hasPostProcessor = leaf.hasPostProcessorRegistered();
+										if(hasPostProcessor){
+											writer.append("X");
+										}
+										writer.append(" & ");
+										writer.append(String.valueOf(leaf.getCountMetaclasses()));
+										writer.append(" & ");
+										writer.append(String.valueOf(leaf.getCountRelations()));
+										writer.append(" & ");
+										double average = leaf.getCountRelationsPerMetaclass();
+										String averageString = String.valueOf(average);
+										int dotIndex = averageString.indexOf(".");
+										if(dotIndex + 3 <= averageString.length()){
+											averageString = averageString.substring(0, dotIndex + 3);
+										}
+										writer.append(averageString);
+										writer.append("\\\\ \\hline\n");
+									}
+								}
+							}
+						}
+						writer.append("\\end{longtable}\n");
+						writer.append("\\endgroup\n");
+						writer.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		};
-		action2.setText("Action 2");
-		action2.setToolTipText("Action 2 tooltip");
+		action2.setText("Generate LaTeX table");
+		action2.setToolTipText("Generate LaTeX table");
 		action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
-				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+				getImageDescriptor(ISharedImages.IMG_OBJ_ELEMENT));
 		doubleClickAction = new Action() {
 			public void run() {
 				ISelection selection = viewer.getSelection();
