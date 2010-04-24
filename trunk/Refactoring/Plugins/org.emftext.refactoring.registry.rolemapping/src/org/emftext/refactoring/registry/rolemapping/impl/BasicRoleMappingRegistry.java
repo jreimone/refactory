@@ -247,8 +247,8 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry#getPostProcessor(org.eclipse.emf.ecore.EPackage, org.emftext.language.refactoring.rolemapping.Mapping)
 	 */
-	public IRefactoringPostProcessor getPostProcessor(EPackage metamodel, Mapping mapping) {
-		String nsUri = metamodel.getNsURI();
+	public IRefactoringPostProcessor getPostProcessor(Mapping mapping) {
+		String nsUri = mapping.getOwningMappingModel().getTargetMetamodel().getNsURI();
 		Map<Mapping, IRefactoringPostProcessor> map = postProcessorMap.get(nsUri);
 		if(map == null){
 			return null;

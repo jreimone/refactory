@@ -61,13 +61,12 @@ public interface IRoleMappingRegistry {
 	public void registerPostProcessor(Mapping mapping, IRefactoringPostProcessor postProcessor);
 	
 	/**
-	 * Returns the postprocessor registered to the metamodel and the {@link Mapping mapping}. 
+	 * Returns the postprocessor registered to the given {@link Mapping mapping}. 
 	 * 
 	 * @param metamodel
-	 * @param mapping
 	 * @return
 	 */
-	public IRefactoringPostProcessor getPostProcessor(EPackage metamodel, Mapping mapping);
+	public IRefactoringPostProcessor getPostProcessor(Mapping mapping);
 	
 	/**
 	 * Returns an {@link ImageDescriptor image} for the given <code>mapping</code> or null of no
