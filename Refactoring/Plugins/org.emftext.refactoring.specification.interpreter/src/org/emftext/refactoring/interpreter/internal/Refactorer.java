@@ -75,9 +75,9 @@ public class Refactorer implements IRefactorer {
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			EcoreUtil.resolveAll(roleModel);
 			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(roleModel);
-			Mapping firstMapping = roleMappings.values().toArray(new Mapping[0])[0];
-			RoleMappingModel roleMapping = (RoleMappingModel) EcoreUtil.getRootContainer(firstMapping);
-			IRefactoringPostProcessor postProcessor = roleMappingRegistry.getPostProcessor(roleMapping.getTargetMetamodel(), mapping);
+//			Mapping firstMapping = roleMappings.values().toArray(new Mapping[0])[0];
+//			RoleMappingModel roleMapping = (RoleMappingModel) EcoreUtil.getRootContainer(firstMapping);
+			IRefactoringPostProcessor postProcessor = roleMappingRegistry.getPostProcessor(mapping);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter(postProcessor);
 			interpreter.initialize(refSpec, mapping);
 			interpreterMap.put(mapping, interpreter);
