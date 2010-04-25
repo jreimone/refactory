@@ -565,7 +565,7 @@ public class RefactoringStatisticView extends ViewPart {
 							if(object instanceof TreeParent){
 								TreeParent parent = (TreeParent) object;
 								RoleModel roleModel = (RoleModel) parent.getObject();
-								writer.append("\\multicolumn{6}{|l|}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}}\\\\ \\hline\n");
+								writer.append("\\multicolumn{6}{|c|}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}}\\\\ \\hline\n");
 								for (TreeObject child : parent.getChildren()) {
 									if(child instanceof TreeLeaf){
 										TreeLeaf leaf = (TreeLeaf) child;
