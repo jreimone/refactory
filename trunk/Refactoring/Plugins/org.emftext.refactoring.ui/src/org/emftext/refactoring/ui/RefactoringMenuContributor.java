@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -105,7 +106,11 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		if(selectedElements != null && selectedElements.size() >= 1){
 			Resource resource = selectedElements.get(0).eResource();
 			if(resource == null || (resource.getErrors() != null && resource.getErrors().size() > 0)){
-				System.out.println("resource " + resource + " contains errors and no refactoring menu will be contributed");
+				System.out.println("resource is null or contains the following errors:");
+				List<Resource.Diagnostic> errors = resource.getErrors();
+				for (Resource.Diagnostic diagnostic : errors) {
+					System.out.println(diagnostic.getMessage());
+				}
 				return;
 			}
 			for (EObject eObject : selectedElements) {
