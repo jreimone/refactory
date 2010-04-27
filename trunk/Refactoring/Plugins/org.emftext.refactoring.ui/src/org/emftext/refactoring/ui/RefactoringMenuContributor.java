@@ -1,22 +1,18 @@
 package org.emftext.refactoring.ui;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.EditPartViewer;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -28,16 +24,15 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
 import org.eclipse.ui.services.IServiceLocator;
-import org.emftext.access.EMFTextAccessProxy;
-import org.emftext.access.resource.IEditor;
-import org.emftext.access.resource.ILocationMap;
-import org.emftext.access.resource.IResource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.refactoring.editorconnector.IEditorConnector;
+import org.emftext.refactoring.editorconnector.IEditorConnectorExtensionPoint;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.StringUtil;
 
 public class RefactoringMenuContributor extends ExtensionContributionFactory {
@@ -45,8 +40,21 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 	private static final String CONTEXT_MENU_ENTRY_TEXT 	= "Refactor";
 	private static final String CONTEXT_MENU_ENTRY_ID 		= "org.emftext.refactoring.menu";
 
+	private List<IEditorConnector> editorConnectors;
+	private Map<IEditorPart, IEditorConnector> editorConnectorCache;
+
 	public RefactoringMenuContributor() {
-		// 
+		editorConnectors = new LinkedList<IEditorConnector>();
+		editorConnectorCache = new LinkedHashMap<IEditorPart, IEditorConnector>();
+		IConfigurationElement[] elements = RegistryUtil.collectConfigurationElements(IEditorConnectorExtensionPoint.ID);
+		for (IConfigurationElement element : elements) {
+			try {
+				IEditorConnector connector = (IEditorConnector) element.createExecutableExtension(IEditorConnectorExtensionPoint.CONNECTOR_ATTRIBUTE);
+				editorConnectors.add(connector);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -57,7 +65,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			return;
 		}
 		IWorkbenchPartSite partSite = activePart.getSite();
-		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		//		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		ISelectionProvider selectionProvider = partSite.getSelectionProvider();
 		if(selectionProvider == null){
 			System.out.println(activePart + " doesn't provide selections -> no context menu");
@@ -65,66 +73,38 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		}
 		ISelection selection = selectionProvider.getSelection();
 		List<EObject> selectedElements = new LinkedList<EObject>();
-		Resource resource = null;
-		TransactionalEditingDomain diagramTransactionalEditingDomain = null;
 		if(selection instanceof StructuredSelection){
 			List<?> temp = ((StructuredSelection) selection).toList();
 			for (Object object : temp) {
-				if(object instanceof EditPart){
-					Object model = ((EditPart) object).getModel();
-					if(model instanceof View){
-						EditPartViewer viewer = ((EditPart) object).getViewer();
-						if(viewer instanceof IDiagramGraphicalViewer){
-							diagramTransactionalEditingDomain = ((IGraphicalEditPart) object).getEditingDomain();
-							object = ((View) model).getElement();
-							System.out.println("found EObject " + object + " in diagram");
-						}
-					}
-				} 
 				if(!(object instanceof EObject)){
-					return;
+					selectedElements = null;
+					break;
 				}
 				selectedElements.add((EObject) object);
 			}
-			resource = selectedElements.get(0).eResource();
-		} else if(selection instanceof ITextSelection){
-			//			if(EMFTextAccessProxy.isAccessibleWith(activeEditor.getClass(), IEditor.class)){
-			try {
-
-				IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(activeEditor, IEditor.class);
-				IResource emftextResource = emftextEditor.getResource();
-				resource = emftextResource;
-				if(resource == null){
-					throw new Exception("just jump to catch block");
-				}
-				ILocationMap locationMap = emftextResource.getLocationMap();
-				ITextSelection textSelection = (ITextSelection) selection;
-				int startOffset = textSelection.getOffset();
-				int endOffset = startOffset + textSelection.getLength();
-				if(startOffset == endOffset){
-					selectedElements = locationMap.getElementsAt(startOffset);
-				} else {
-					selectedElements = locationMap.getElementsBetween(startOffset, endOffset);
-				}
-				List<EObject> noReferencesList = new ArrayList<EObject>();
-				for (EObject object : selectedElements) {
-					EcoreUtil.resolveAll(object);
-					int start = locationMap.getCharStart(object);
-					int end = locationMap.getCharEnd(object);
-					if((start >= startOffset && end <= endOffset) && !object.eIsProxy()){
-						noReferencesList.add(object);
+		}
+		TransactionalEditingDomain transactionalEditingDomain = null;
+		IEditorPart activeEditor = null;
+		if(selectedElements == null || selectedElements.size() == 0){
+			activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+			IEditorConnector cachedConnector = editorConnectorCache.get(activeEditor);
+			if(cachedConnector == null){
+				for (IEditorConnector connector : editorConnectors) {
+					if(connector.canHandle(activeEditor)){
+						cachedConnector = connector;
+						editorConnectorCache.put(activeEditor, connector);
+						break;
 					}
 				}
-				selectedElements = noReferencesList;
-			} catch (Exception e) {
-				// probably another non EMFText generated editor
-				System.out.println(e.getMessage());
-				System.out.println("Editor " + activeEditor.getTitle() + " doesn't get Refactoring menu");
 			}
-			//			}
+			selectedElements = cachedConnector.handleSelection(selection);
+			if(selectedElements != null && selectedElements.size() >= 1){
+				transactionalEditingDomain = cachedConnector.getTransactionalEditingDomain();
+			}
 		}
-		if(resource != null && selectedElements != null && selectedElements.size() >= 1){
-			if(resource.getErrors() != null && resource.getErrors().size() > 0){
+		if(selectedElements != null && selectedElements.size() >= 1){
+			Resource resource = selectedElements.get(0).eResource();
+			if(resource == null || (resource.getErrors() != null && resource.getErrors().size() > 0)){
 				System.out.println("resource " + resource + " contains errors and no refactoring menu will be contributed");
 				return;
 			}
@@ -145,10 +125,10 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						if(refSpec != null){
 							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 							Action refactoringAction = null;
-							if(diagramTransactionalEditingDomain == null){
+							if(transactionalEditingDomain == null){
 								refactoringAction = new RefactoringAction(mapping, refactorer);
 							} else {
-								refactoringAction = new RefactoringAction(mapping, refactorer, diagramTransactionalEditingDomain, activeEditor);
+								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor);
 							}
 							refactoringAction.setText(refactoringName);
 							refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));
