@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
+
 <plugin>
+
    <extension-point id="org.emftext.refactoring.editorconnector" name="editorconnector" schema="schema/org.emftext.refactoring.editorconnector.exsd"/>
    <extension
          point="org.eclipse.ui.menus">
@@ -18,13 +20,4 @@
             editorconnector="org.emftext.refactoring.editorconnector.GMFEditorConnector">
       </editorconnector>
    </extension>
-  <!--
-<extension
-         point="org.eclipse.ltk.ui.refactoring.changePreviewViewers">
-      <changePreviewViewer
-            class="org.eclipse.emf.compare.ui.viewer.content.ModelContentPreviewViewer"
-            id="org.emftext.refactoring.ltk.modelChangePreviewer">
-      </changePreviewViewer>
-   </extension>
-   -->
 </plugin>
