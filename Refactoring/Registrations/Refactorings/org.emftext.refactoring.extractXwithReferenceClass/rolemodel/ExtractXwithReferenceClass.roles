@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<roles:RoleModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roles="http://www.emftext.org/language/roles" comment="&#xD;&#xA;This role model describes all roles being used to express the original Martin Fowler refactoring &#xD;&#xA;&lt;a href=&quot;http://www.refactoring.com/catalog/extractMethod.html&quot;>Extract Method&lt;/a>.&#xD;&#xA;Therein statements contained in a method (e.g. Java) will be selected and removed to a newly created method.&#xD;&#xA;At the old position of the statements a method call will be set instead.&#xD;&#xA;" name="ExtractX">
+<roles:RoleModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roles="http://www.emftext.org/language/roles" comment="&#xD;&#xA;This role model describes all roles being used to express the original Martin Fowler refactoring &#xD;&#xA;&lt;a href=&quot;http://www.refactoring.com/catalog/extractMethod.html&quot;>Extract Method&lt;/a>.&#xD;&#xA;Therein statements contained in a method (e.g. Java) will be selected and removed to a newly created method.&#xD;&#xA;At the old position of the statements a method call will be set instead.&#xD;&#xA;" name="ExtractXwithReferenceClass">
   <roles comment="&#xD;&#xA;&#x9;This role represents the container class which contains the elements being intended to be moved&#xD;&#xA;&#x9;to the new container.&#xD;&#xA;&#x9;" name="OrigContainer" outgoing="//@relations.0 //@relations.1" incoming="//@relations.4"/>
   <roles comment="&#xA;&#x9;This role stands for the elements contained in the role 'OrigContainer'&#xD;&#xA;&#x9;" name="Extract" incoming="//@relations.0 //@relations.2">
     <modifier>input</modifier>
@@ -7,11 +7,14 @@
   </roles>
   <roles comment="&#xA;&#x9;'NewContainer' is the role for the new parent of the elements with role 'Extract'&#xD;&#xA;&#x9;" name="NewContainer" outgoing="//@relations.2" incoming="//@relations.3 //@relations.5">
     <attributes comment="&#xA;&#x9;&#x9;The attribute 'newName' is intended to be mapped to a String attribute for the name of&#xD;&#xA;&#x9;&#x9;the new container&#xD;&#xA;&#x9;&#x9;" name="newName">
+      <modifier>optional</modifier>
       <modifier>input</modifier>
       <modifier>runtime</modifier>
     </attributes>
   </roles>
-  <roles comment="&#xA;&#x9;This role represents the container of the both other containers: 'OrigContainer' and 'NewContainer'.&#xD;&#xA;&#x9;It must be mapped to an EClass having containment references to the other both mapped EClasses&#xD;&#xA;&#x9;" name="ContainerContainer" outgoing="//@relations.3 //@relations.4"/>
+  <roles comment="&#xA;&#x9;This role represents the container of the both other containers: 'OrigContainer' and 'NewContainer'.&#xD;&#xA;&#x9;It must be mapped to an EClass having containment references to the other both mapped EClasses&#xD;&#xA;&#x9;" name="ContainerContainer" outgoing="//@relations.3 //@relations.4">
+    <modifier>super</modifier>
+  </roles>
   <roles comment="&#xA;&#x9;This role represents an element which can refer to the element owning the role 'NewContainer'.&#xD;&#xA;&#x9;It is optional because there might be metamodels for which no references must be set.&#xD;&#xA;&#x9;An example for such a metamodel is the conference language from the zoo. &#xD;&#xA;&#x9;" name="MovedReference" outgoing="//@relations.5" incoming="//@relations.1">
     <modifier>optional</modifier>
   </roles>
