@@ -4,13 +4,13 @@
    <extension
          point="org.emftext.refactoring.rolemodel">
       <rolemodel
-            rolemodel_resource="rolemodels/IntroduceDerivation.rolestext">
+            rolemodel_resource="rolemodels/IntroduceReferenceClass.rolestext">
       </rolemodel>
    </extension>
    <extension
          point="org.emftext.refactoring.refspec">
       <refspec
-            refspec_resource="refspecs/IntroduceDerivation.refspec">
+            refspec_resource="refspecs/IntroduceReferenceClass.refspec">
       </refspec>
    </extension>
 
