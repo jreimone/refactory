@@ -31,5 +31,7 @@ Require-Bundle: org.junit4,
  org.emftext.language.java.resource,
  org.emftext.language.java.resource.java,
  org.emftext.refactoring.tests.properties,
- org.emftext.refactoring.tests.properties.resource.properties
+ org.emftext.refactoring.tests.properties.resource.properties,
+ org.eclipse.emf.ecore.refactoring,
+ org.emftext.refactoring.rolemappings
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
