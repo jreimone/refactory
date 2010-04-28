@@ -1,4 +1,5 @@
-ROLEMODELMAPPING extractEEnum FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING extractEEnum FOR 
+<http://www.eclipse.org/emf/2002/Ecore> 
 
 ExtractEEnum maps <ExtractX> {
 
@@ -9,7 +10,8 @@ ExtractEEnum maps <ExtractX> {
 		reference := ePackage;
 	};
 	
-	NewContainer := EEnum(newName -> name){
+	NewContainer := EEnum(newName -> name)
+	{
 		moved := eLiterals;
 	};
 	
@@ -17,4 +19,4 @@ ExtractEEnum maps <ExtractX> {
 		source := eClassifiers;
 		target := eClassifiers;
 	};
-} 
+}
