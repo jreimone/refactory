@@ -34,7 +34,6 @@ import org.emftext.refactoring.util.RoleUtil;
 import org.emftext.test.core.ExpectedData;
 import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
-import org.emftext.test.core.TestDataSet;
 import org.junit.Test;
 
 public class RefactoringInterpreterTest extends TestClass{
@@ -50,22 +49,10 @@ public class RefactoringInterpreterTest extends TestClass{
 		return refactorer;
 	}
 	
-	private Resource getResourceByPattern(String pattern, boolean expected) {
-		TestDataSet dataSet = getTestDataSet();
-		File file = null;
-		if(expected){
-			file = dataSet.getExpectedFileByPattern(pattern);
-		} else {
-			file = dataSet.getInputFileByPattern(pattern);
-		}
-		Resource resource = TestUtil.getResourceFromFile(file);
-		return resource;
-	}
-	
 	@Test
 	@InputData({MODEL,PATH})
 	public void getAppliedRoles(){
-		Resource resource = getResourceByPattern(MODEL, false);
+		Resource resource = getTestDataSet().getResourceByPattern(MODEL, false);
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		assertNotNull(registry);
 		EObject model = TestUtil.getModelFromResource(resource);
@@ -92,7 +79,7 @@ public class RefactoringInterpreterTest extends TestClass{
 	@Test
 	@InputData({MODEL,PATH})
 	public void getPossibleRefactoringSpecifications(){
-		Resource resource = getResourceByPattern(MODEL, false);
+		Resource resource = getTestDataSet().getResourceByPattern(MODEL, false);
 		IRefactorer refactorer = getRefactorer(resource);
 		
 		List<EObject> elements = getElementsByQuery(PATH, 1, resource);
@@ -106,7 +93,7 @@ public class RefactoringInterpreterTest extends TestClass{
 	@InputData({CREATE, CREATE_PATH})
 	@ExpectedData(CREATE)
 	public void refactorCREATE(){
-		Resource resource = getResourceByPattern(CREATE, false);
+		Resource resource = getTestDataSet().getResourceByPattern(CREATE, false);
 		IRefactorer refactorer = getRefactorer(resource);
 		
 		List<EObject> elements = getElementsByQuery(CREATE_PATH, 1, resource);
@@ -117,7 +104,7 @@ public class RefactoringInterpreterTest extends TestClass{
 		Mapping mapping = mappings.get(0);
 		refactorer.fakeRefactor(mapping);
 		EObject refactoredModel = refactorer.refactor();
-		EObject originalModel = getResourceByPattern(CREATE, false).getContents().get(0);
+		EObject originalModel = getTestDataSet().getResourceByPattern(CREATE, false).getContents().get(0);
 		assertNotNull(refactoredModel);
 		
 		ResourceSet rs = resource.getResourceSet();
@@ -140,7 +127,7 @@ public class RefactoringInterpreterTest extends TestClass{
 			RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 			// nur so viele nicht match-baren elemente wie es instructions im refspec gibt
 			assertTrue(unmatches.size() == refSpec.getInstructions().size());
-			Resource expectedResource = getResourceByPattern(CREATE, true);
+			Resource expectedResource = getTestDataSet().getResourceByPattern(CREATE, true);
 			EObject expectedModel = TestUtil.getModelFromResource(expectedResource);
 			matchModel = MatchService.doMatch(expectedModel, refactoredModel, Collections.<String, Object>emptyMap());
 			unmatches = matchModel.getUnmatchedElements();
@@ -161,7 +148,7 @@ public class RefactoringInterpreterTest extends TestClass{
 	@Test
 	@InputData({MODEL,PATH})
 	public void refactoringInterpreter(){
-		Resource resource = getResourceByPattern(MODEL, false);
+		Resource resource = getTestDataSet().getResourceByPattern(MODEL, false);
 		IRefactorer refactorer = getRefactorer(resource);
 		
 		List<EObject> elements = getElementsByQuery(PATH, 1, resource);
@@ -172,7 +159,7 @@ public class RefactoringInterpreterTest extends TestClass{
 		Mapping mapping = mappings.get(0);
 		refactorer.fakeRefactor(mapping);
 		EObject refactoredRoot = refactorer.refactor();
-		EObject originalModel = getResourceByPattern(MODEL, false).getContents().get(0);
+		EObject originalModel = getTestDataSet().getResourceByPattern(MODEL, false).getContents().get(0);
 		assertNotNull(refactoredRoot);
 		
 		ResourceSet rs = resource.getResourceSet();

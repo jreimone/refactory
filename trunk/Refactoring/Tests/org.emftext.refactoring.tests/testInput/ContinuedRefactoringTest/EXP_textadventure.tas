@@ -1,0 +1,13 @@
+ADVENTURE "Curse Of Monkey Island" 
+
+ROOM NormalRoom CONTAINS 
+Flowers , 
+Table , 
+Chairs 
+DOOR AA BETWEEN NormalRoom AND NormalRoom 
+
+ROOM VoodooRoom CONTAINS 
+Voodoo-Puppet , 
+Three-Headed-Monkey , 
+Snakes , 
+Grog 

@@ -1,6 +1,7 @@
 package org.emftext.refactoring.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,9 +32,12 @@ public class QueryUtil {
 
 	public static List<EObject> queryResource(Resource resource, String query){
 		EObject model = resource.getContents().get(0);
+		return queryModel(model, query);
+	}
+	
+	public static List<EObject> queryModel(EObject model, String query){
 		assertNotNull(model);
 		assertNotNull(query);
-
 		String[] segments = query.split(SEGMENT_SEPERATOR);
 		List<EObject> element = getPath(model, segments);
 		return element;

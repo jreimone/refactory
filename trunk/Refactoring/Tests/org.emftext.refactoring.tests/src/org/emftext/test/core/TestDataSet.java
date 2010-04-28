@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.refactoring.test.TestUtil;
+
 public class TestDataSet {
 
 	private List<File> inputDataFiles;
@@ -42,5 +45,16 @@ public class TestDataSet {
 			}
 		}
 		return null;
+	}
+	
+	public Resource getResourceByPattern(String pattern, boolean expected) {
+		File file = null;
+		if(expected){
+			file = getExpectedFileByPattern(pattern);
+		} else {
+			file = getInputFileByPattern(pattern);
+		}
+		Resource resource = TestUtil.getResourceFromFile(file);
+		return resource;
 	}
 }
