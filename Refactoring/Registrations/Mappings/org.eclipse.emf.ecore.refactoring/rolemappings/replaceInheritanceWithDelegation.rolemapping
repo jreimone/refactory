@@ -4,7 +4,7 @@ ROLEMODELMAPPING replaceInheritanceWithDelegation FOR <http://www.eclipse.org/em
  * This refactoring replaces a reference to a superclass with an explicit
  * delegation reference, which is typed by the superclass.
  */
-ReplaceInheritanceWithDelegation maps <ExtractXwithReference> {
+ReplaceInheritanceWithDelegation maps <ExtractX> {
 
 	// TODO implement this
 }

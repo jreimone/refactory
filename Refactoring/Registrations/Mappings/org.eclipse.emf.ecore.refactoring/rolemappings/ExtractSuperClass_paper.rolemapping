@@ -2,7 +2,7 @@ ROLEMODELMAPPING extractSuperClassMapping
 FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 ExtractSuperClass 
-	maps <ExtractXwithReference> {
+	maps <ExtractX> {
 	Extractee := EStructuralFeature;
 	OrigContainer := EClass {
 		extracts := eStructuralFeatures;
