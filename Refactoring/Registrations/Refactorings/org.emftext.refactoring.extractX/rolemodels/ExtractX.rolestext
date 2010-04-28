@@ -1,16 +1,31 @@
-RoleModel ExtractX{ 
-	ROLE OrigContainer; 
-	input super  ROLE Extractee; 
-	ROLE NewContainer (input runtime newName); 
-	ROLE ContainerContainer; 
-	transitive:OrigContainer 		[1..1] 
-		<>- Extractee extracts 		[0..*]; 
-	transitive:NewContainer 		[1..1] 
-		<>- Extractee moved 		[0..*]; 
-	transitive:ContainerContainer 	[1..1] 
-		<>- NewContainer target 	[1..1]; 
-	transitive:ContainerContainer 	[1..1] 
-		<>- OrigContainer source 	[1..1]; 
-	transitive:OrigContainer 		[1..*] 
-		-- NewContainer reference 	[1..*]; 	
-}
+/**
+This role model describes all roles being used to express refactorings like <i>Extract Class</i>.
+Therein features contained in a class (e.g. Java) will be selected and removed to a newly created class.
+Furthermore the old class gets a reference to the new class (e.g. SuperClass).
+*/ RoleModel ExtractX { 
+	/**
+	This role represents the container class which contains the elements being intended to be moved
+	to the new container.
+	*/  ROLE OrigContainer ; 
+	/**
+	This role stands for the elements contained in the role 'OrigContainer'
+	*/ input super  ROLE Extractee ; 
+	/**
+	'NewContainer' is the role for the new parent of the elements with role 'Extract'
+	*/  ROLE NewContainer ( /**
+		The attribute 'newName' is intended to be mapped to a String attribute for the name of
+		the new container
+		*/ input runtime newName ) ; 
+	/**
+	This role represents the container of the both other containers: 'OrigContainer' and 'NewContainer'.
+	It must be mapped to an EClass having containment references to the other both mapped EClasses
+	*/  ROLE ContainerContainer ; 
+	
+	
+	transitive :  OrigContainer  [ 1 .. 1 ]  <>- Extractee extracts [ 0 .. * ] ; 
+	transitive :  NewContainer  [ 1 .. 1 ]  <>- Extractee moved [ 0 .. * ] ; 
+	transitive :  ContainerContainer  [ 1 .. 1 ]  <>- NewContainer target [ 1 .. 1 ] ; 
+	transitive :  ContainerContainer  [ 1 .. 1 ]  <>- OrigContainer source [ 1 .. 1 ] ; 
+	transitive :  OrigContainer  [ 1 .. * ]  -- NewContainer reference [ 1 .. * ] ; 
+	
+	} 
