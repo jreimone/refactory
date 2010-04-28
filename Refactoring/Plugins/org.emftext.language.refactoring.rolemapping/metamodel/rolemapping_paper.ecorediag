@@ -17,7 +17,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_cjy0kRmFEd-79KSBOkLXhw" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/resource/org.emftext.language.refactoring.roles/metamodel/roles_paper.ecore#//MultiplicityCollaboration"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cjy0khmFEd-79KSBOkLXhw" x="40" y="385" width="188"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cjy0khmFEd-79KSBOkLXhw" x="40" y="385" width="193"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_k4GnYBcEEd-v66FqVrAtPg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_k4HOcBcEEd-v66FqVrAtPg" type="4001"/>
@@ -56,7 +56,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_fsuSMRcFEd-v66FqVrAtPg" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fsuSMhcFEd-v66FqVrAtPg" x="765" y="180"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fsuSMhcFEd-v66FqVrAtPg" x="760" y="180" width="107"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_FiJmQBcGEd-v66FqVrAtPg" type="1001">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_FilEEBcGEd-v66FqVrAtPg" source="Shortcut">
@@ -260,7 +260,7 @@
   <element xmi:type="ecore:EPackage" href="rolemapping_paper.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_ftRr0BcFEd-v66FqVrAtPg" type="3002" source="_k4GnYBcEEd-v66FqVrAtPg" target="_fsuSMBcFEd-v66FqVrAtPg">
     <children xmi:type="notation:Node" xmi:id="_ftRr1BcFEd-v66FqVrAtPg" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_ftRr1RcFEd-v66FqVrAtPg" x="-41" y="-10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_ftRr1RcFEd-v66FqVrAtPg" x="-38" y="-10"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_ftRr1hcFEd-v66FqVrAtPg" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_ftRr1xcFEd-v66FqVrAtPg" x="6" y="15"/>
