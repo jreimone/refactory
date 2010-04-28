@@ -29,5 +29,7 @@ Require-Bundle: org.junit4,
  org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare,
  org.emftext.language.java.resource,
- org.emftext.language.java.resource.java
+ org.emftext.language.java.resource.java,
+ org.emftext.refactoring.tests.properties,
+ org.emftext.refactoring.tests.properties.resource.properties
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -1,6 +1,0 @@
-RoleModel CREATEcommand { 
-	input ROLE Container;
-	ROLE Createe;
-	
-	transitive: Container [1..1] <>- Createe children [0..*];
-} 
