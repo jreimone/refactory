@@ -1,6 +1,6 @@
 ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
-ExtractSuperClass maps <ExtractXwithReference> {
+ExtractSuperClass maps <ExtractX> {
 
 	Extractee := EStructuralFeature;
 	

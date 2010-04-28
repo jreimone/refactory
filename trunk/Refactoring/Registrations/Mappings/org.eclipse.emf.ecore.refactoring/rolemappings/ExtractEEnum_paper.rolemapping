@@ -2,7 +2,7 @@ ROLEMODELMAPPING extractEEnumMapping
 FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 ExtractEEnum 
-	maps <ExtractXwithReference> {
+	maps <ExtractX> {
 	Extractee := EEnumLiteral;
 	OrigContainer := EEnum {
 		extracts := eLiterals;
