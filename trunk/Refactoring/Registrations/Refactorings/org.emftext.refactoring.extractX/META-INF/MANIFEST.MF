@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ExtractXwithReference
-Bundle-SymbolicName: org.emftext.refactoring.extractXwithReference;singleton:=true
+Bundle-SymbolicName: org.emftext.refactoring.extractX;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.emftext.refactoring.extractxwithreference.Activator
 Bundle-Vendor: Jan Reimann
