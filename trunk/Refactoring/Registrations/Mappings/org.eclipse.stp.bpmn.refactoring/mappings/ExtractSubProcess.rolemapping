@@ -1,6 +1,6 @@
 ROLEMODELMAPPING bpmn FOR <http://stp.eclipse.org/bpmn> 
 
-ExtractSubProcess maps <ExtractX> {
+ExtractSubProcess maps <ExtractXwithReferenceClass> {
 	Extract := Activity;
 	
 	NewContainer := SubProcess (newName -> name){
