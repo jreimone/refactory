@@ -1,0 +1,29 @@
+Refactorings for UML2 class diagrams
+
+* Change Attribute To Association End - transforms an attribute to an association end.
+* Change Association End To Attribute - transforms an association end to an attribute and is the opposite of refactoring [Change Association End To Attribute].
+
+* Create Associated Class - creates an empty class and connects it with a new association to the source class from where it is extracted.
+* Create Intermediate Superclass - creates an empty class in between a selected class and one of its superclasses.
+* Create Subclass - creates an empty subclass of a selected class.
+* Create Subinterface - creates an empty subinterface of a selected interface.
+* Create Superclass - creates a new super-class of a class.
+
+* Hide Property - makes a non-private attribute/property of a given class private and creates getter and setter operations for it. In the literature, this refactoring is called [Attribute/Field/Property Privatization] and [Encapsulate Attribute/Field/Property].
+
+* Push Down Operation - pushes an operation down to all its sub-classes. Sometimes it is also called [Push Down Method] and it is the opposite of refactoring [Pull Up Operation].
+* Push Down Property - moves a property of a class to all of its sub-classes. It is the opposite of refactoring [Pull Up Property].
+
+* Remove Empty Intermediate Superclass - removes a completely empty class which is a superclass of a set of subclasses but also generalizes other classes or implements interfaces. It is the opposite of refactoring [Create Intermediate Superclass].
+* Remove Empty Subclass - removes a completely empty subclass of a classes and is the opposite of refactoring [Create Subclass].
+* Remove Empty Subinterface - removes a completely empty subinterface of an interface and is the opposite of refactoring [Create Subinterface].
+* Remove Empty Superclass - removes a completely empty superclass of a set of classes.
+
+* Show Property - makes a non-visible property public and removes its getter and setter operations. It is the opposite of refactoring [Hide Property].
+
+Refactorings for UML2 state machines
+
+* Fold Transition Incoming to Composite State - folds transitions with same event incoming to a composite state from a state outside that composite state.
+* Fold Transition Outgoing From Composite State - folds transitions with same event outgoing from a composite state to a state outside that composite state.
+* Unfold Transition Incoming to Composite State - unfolds a transition incoming to a composite state to transitions incoming to each sub-state of the composite state. It is the opposite of refactoring [Fold Transition Incoming to Composite State].
+* Unfold Transition Outgoing From Composite State - unfolds a transition outgoing from a composite state to transitions outgoing from each sub-state of the composite state. It is the opposite of refactoring [Fold Transition Outgoing From Composite State].
