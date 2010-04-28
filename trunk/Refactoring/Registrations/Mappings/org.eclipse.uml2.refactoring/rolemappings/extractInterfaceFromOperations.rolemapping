@@ -1,0 +1,19 @@
+ROLEMODELMAPPING extractInterfaceFromOperations 
+FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+
+ExtractInterfaceFromOperations maps <ExtractX> {
+
+	Extractee := Operation;
+	OrigContainer := Class {
+		extracts := ownedElement;
+		reference := superClass;
+	};
+	NewContainer := Class (newName -> name){
+		moved := ownedElement;
+		// TODO set new Class to abstract=true and interface=true in postprocessor
+	};
+	ContainerContainer := Package {
+		source := ownedElement;
+		target := ownedElement;
+	};
+} 

@@ -5,10 +5,10 @@ PullUpProperty maps <MoveX> {
 
 	Movee := Property;
 	SourceContainer := Class {
-		sourceContainment := ownedMember;
+		sourceContainment := ownedElement;
 		containerReference := superClass;
 	};
 	TargetContainer := Class {
-		targetContainment := ownedMember;
+		targetContainment := ownedElement;
 	};
 } 
