@@ -1,0 +1,18 @@
+ROLEMODELMAPPING pullUpOperationToSuperInterface 
+FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+
+/**
+ * Pull Up Operation To Superinterface - moves an operation 
+ * of an interface to one of its superinterfaces.
+ */
+PullUpOperationToSuperInterface maps <MoveX> {
+
+	Movee := Operation;
+	SourceContainer := Interface {
+		sourceContainment := ownedElement;
+		containerReference := redefinedElement;
+	};
+	TargetContainer := Interface {
+		targetContainment := ownedElement;
+	};
+} 

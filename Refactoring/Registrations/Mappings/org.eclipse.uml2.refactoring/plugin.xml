@@ -11,6 +11,15 @@
             rolemapping_resource="rolemappings/pullUpProperty.rolemapping">
       </rolemapping>
       <rolemapping
+            rolemapping_resource="rolemappings/pullUpOperation.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/pullUpOperationToInterface.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/pullUpOperationToSuperInterface.rolemapping">
+      </rolemapping>
+      <rolemapping
             rolemapping_resource="rolemappings/renameElement.rolemapping">
       </rolemapping>
       <rolemapping
