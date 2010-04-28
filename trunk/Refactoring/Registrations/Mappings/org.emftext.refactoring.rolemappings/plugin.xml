@@ -15,9 +15,6 @@
             rolemapping_resource="rolemappings/java.rolemapping">
       </rolemapping>
       <rolemapping
-            rolemapping_resource="rolemappings/statemachine.rolemapping">
-      </rolemapping>
-      <rolemapping
             rolemapping_resource="rolemappings/conference.rolemapping">
       </rolemapping>
    </extension>
@@ -27,11 +24,6 @@
             mapping_name="ExtractMethod"
             nsUri="http://www.emftext.org/java"
             postprocessor="org.emftext.refactoring.postprocessors.JavaExtractMethodPostProcessor">
-      </postprocessor>
-      <postprocessor
-            mapping_name="ExtractCompositeState"
-            nsUri="http://www.eclipse.org/uml2/3.0.0/UML"
-            postprocessor="org.emftext.refactoring.postprocessors.UMLExtractCompositeStatePostProcessor">
       </postprocessor>
    </extension>
 
