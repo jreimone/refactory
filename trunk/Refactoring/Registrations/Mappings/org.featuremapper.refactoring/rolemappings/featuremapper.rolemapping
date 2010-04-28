@@ -1,6 +1,6 @@
 ROLEMODELMAPPING featuremapper FOR <http://www.tudresden.de/feature> 
 
-IntroduceConstraint maps <IntroduceDerivation> { 
+IntroduceConstraint maps <IntroduceReferenceClass> { 
 	 
 	 DerivationContainer := FeatureModel{
 	 	derivation := constraints;
