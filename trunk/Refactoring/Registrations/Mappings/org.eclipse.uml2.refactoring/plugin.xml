@@ -20,7 +20,7 @@
             rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
       </rolemapping>
       <rolemapping
-            rolemapping_resource="rolemappings/extractInterfaceFromOperations.rolemapping">
+            rolemapping_resource="rolemappings/extractInterface.rolemapping">
       </rolemapping>
   </extension>
 
