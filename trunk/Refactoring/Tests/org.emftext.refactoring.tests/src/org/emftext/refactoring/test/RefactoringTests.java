@@ -4,6 +4,7 @@
 package org.emftext.refactoring.test;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,6 +22,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -49,6 +51,12 @@ import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
 import org.emftext.refactoring.roleconstraintchecker.RoleConstraintCheckerTest;
 import org.emftext.refactoring.specification.interpreter.RefactoringInterpreterTest;
+import org.emftext.refactoring.tests.properties.Category;
+import org.emftext.refactoring.tests.properties.EObjectReferenceValue;
+import org.emftext.refactoring.tests.properties.KeyValuePair;
+import org.emftext.refactoring.tests.properties.PropertiesPackage;
+import org.emftext.refactoring.tests.properties.PropertyModel;
+import org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResourceFactory;
 import org.emftext.test.core.AbstractRefactoringTest;
 import org.emftext.test.core.DataPairTestFileFilter;
 import org.emftext.test.core.DataPairs;
@@ -75,20 +83,14 @@ public class RefactoringTests extends TestCase{
 
 	// paths for files which will be inserted into registries
 	public static final String REGISTRY_FOLDER 					= INPUT_FOLDER + File.separator + "registry";
-	public static final String EXTRACT_METHOD_ROLES				= REGISTRY_FOLDER + File.separator + "ExtractMethod.rolestext";
-	public static final String CREATE_ROLES						= REGISTRY_FOLDER + File.separator + "CREATEcommand.rolestext";
-	public static final String EXTRACT_METHOD_REFSPEC			= REGISTRY_FOLDER + File.separator + "ExtractMethod.refspec";
-	public static final String CREATE_REFSPEC					= REGISTRY_FOLDER + File.separator + "CREATEcommand.refspec";
-	public static final String PL0_MAPPING						= REGISTRY_FOLDER + File.separator + "pl0mapping.rolemapping";
-	public static final String CONFERENCE_MAPPING				= REGISTRY_FOLDER + File.separator + "conference.rolemapping";
-	public static final String JAVA_MAPPING						= REGISTRY_FOLDER + File.separator + "java.rolemapping";
-
+	public static final String MODELS_TO_REGISTER				= REGISTRY_FOLDER + File.separator + "referenced_models.properties";
+	
 	@SuppressWarnings("unchecked")
 	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
 			TestTest.class,
 			EmptyOutgoingRelationTest.class,
 			RefactoringInterpreterTest.class,
-			IndexConnectorTest.class,
+//			IndexConnectorTest.class,
 			RoleConstraintCheckerTest.class
 	));
 
@@ -99,54 +101,71 @@ public class RefactoringTests extends TestCase{
 		Map<String, URI> resourceMap = EcorePlugin.getPlatformResourceMap();
 		File root = new File(".");
 		assertTrue(root.exists());
-		String rootPath = root.getAbsolutePath();
-		URI rootUri = URI.createFileURI(rootPath);
-		rootUri = rootUri.trimSegments(1);
-		String testProjectRoot = rootUri.lastSegment();
-		assertNotNull(testProjectRoot);
-		rootUri = URI.createFileURI(rootPath);
-		resourceMap.put(testProjectRoot, rootUri);
+		
+		root = root.getAbsoluteFile();
+		assertTrue(root.exists());
+		root = root.getParentFile().getParentFile();
+		assertTrue(root.exists());
+		File[] subDirs = root.listFiles(new FileFilter() {
+			
+			public boolean accept(File pathname) {
+				return pathname.exists() 
+					&& pathname.isDirectory() 
+					&& !pathname.isHidden() 
+					&& pathname.canRead()
+					&& !pathname.getName().startsWith(".");
+			}
+		});
+		for (File subDir : subDirs) {
+			String rootPath = subDir.getAbsolutePath() + File.separator + ".";
+			URI rootUri = URI.createFileURI(rootPath);
+			rootUri = rootUri.trimSegments(1);
+			String testProjectRoot = rootUri.lastSegment();
+			assertNotNull(testProjectRoot);
+			rootUri = URI.createFileURI(rootPath);
+			resourceMap.put(testProjectRoot, rootUri);
+		}
 	}
 
 	private static void registerModelsForRefactorings(){
-		try {
-			// RoleModels
-			RoleModel roleModel = TestUtil.getExpectedModelFromResource(
-					TestUtil.getResourceFromFile(TestUtil.getFileByPath(EXTRACT_METHOD_ROLES))
-					, RoleModel.class);
-			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
-			roleModel = TestUtil.getExpectedModelFromResource(
-					TestUtil.getResourceFromFile(TestUtil.getFileByPath(CREATE_ROLES))
-					, RoleModel.class);
-			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
-
-			// RefSpecs
-			RefactoringSpecification refSpec = TestUtil.getExpectedModelFromResource(
-					TestUtil.getResourceFromFile(TestUtil.getFileByPath(EXTRACT_METHOD_REFSPEC))
-					, RefactoringSpecification.class);
-			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
-			refSpec = TestUtil.getExpectedModelFromResource(
-					TestUtil.getResourceFromFile(TestUtil.getFileByPath(CREATE_REFSPEC))
-					, RefactoringSpecification.class);
-			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
-
-			// RoleMappings
-			RoleMappingModel mapping = TestUtil.getExpectedModelFromResource(
-					TestUtil.getResourceFromFile(TestUtil.getFileByPath(PL0_MAPPING))
-					, RoleMappingModel.class);
-			IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
-			mapping = TestUtil.getExpectedModelFromResource(
-					TestUtil.getResourceFromFile(TestUtil.getFileByPath(CONFERENCE_MAPPING))
-					, RoleMappingModel.class);
-			IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
-			mapping = TestUtil.getExpectedModelFromResource(
-					TestUtil.getResourceFromFile(TestUtil.getFileByPath(JAVA_MAPPING))
-					, RoleMappingModel.class);
-			IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
-		} catch (RoleModelAlreadyRegisteredException e) {
-			e.printStackTrace();
-		} catch (RefSpecAlreadyRegisteredException e) {
-			e.printStackTrace();
+		Resource models2Register = TestUtil.getResourceFromFile(TestUtil.getFileByPath(MODELS_TO_REGISTER));
+		EObject root = models2Register.getContents().get(0);
+		if(root instanceof PropertyModel){
+			List<Category> categories = ((PropertyModel) root).getCategories();
+			for (Category category : categories) {
+				if("rolemodels".equals(category.getName())){
+					List<KeyValuePair> pairs = category.getPairs();
+					for (KeyValuePair pair : pairs) {
+						EObjectReferenceValue value = (EObjectReferenceValue) pair.getValue();
+						RoleModel roleModel = (RoleModel) value.getObjectReference();
+						try {
+							IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
+						} catch (RoleModelAlreadyRegisteredException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				if("refspecs".equals(category.getName())){
+					List<KeyValuePair> pairs = category.getPairs();
+					for (KeyValuePair pair : pairs) {
+						EObjectReferenceValue value = (EObjectReferenceValue) pair.getValue();
+						RefactoringSpecification refSpec = (RefactoringSpecification) value.getObjectReference();
+						try {
+							IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
+						} catch (RefSpecAlreadyRegisteredException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				if("mappings".equals(category.getName())){
+					List<KeyValuePair> pairs = category.getPairs();
+					for (KeyValuePair pair : pairs) {
+						EObjectReferenceValue value = (EObjectReferenceValue) pair.getValue();
+						RoleMappingModel mapping = (RoleMappingModel) value.getObjectReference();
+						IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
+					}
+				}
+			}
 		} 
 	}
 
@@ -476,6 +495,8 @@ public class RefactoringTests extends TestCase{
 		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(RolemappingPackage.eNS_URI, RolemappingPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(RefactoringSpecificationPackage.eNS_URI, RefactoringSpecificationPackage.eINSTANCE);
+		// properties package
+		EPackage.Registry.INSTANCE.put(PropertiesPackage.eNS_URI, PropertiesPackage.eINSTANCE);
 		// arbitrary metamodels
 		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(ConferencePackage.eNS_URI, ConferencePackage.eINSTANCE);
@@ -490,6 +511,8 @@ public class RefactoringTests extends TestCase{
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("rolestext", new RolestextResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("rolemapping", new RolemappingResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("refspec", new RefspecResourceFactory());
+		// properties
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("properties", new PropertiesResourceFactory());
 		// arbitrary metamodels
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());

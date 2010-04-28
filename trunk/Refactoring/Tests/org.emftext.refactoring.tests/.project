@@ -55,6 +55,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.refactoring.tests.properties.resource.properties.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
@@ -66,5 +71,6 @@
 		<nature>org.emftext.language.refactoring.specification.resource.refspec.nature</nature>
 		<nature>org.emftext.language.conference.resource.conference.nature</nature>
 		<nature>org.emftext.language.java.resource.java.nature</nature>
+		<nature>org.emftext.refactoring.tests.properties.resource.properties.nature</nature>
 	</natures>
 </projectDescription>
