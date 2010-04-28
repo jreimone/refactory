@@ -44,9 +44,11 @@ import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelationTest;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
+import org.emftext.language.textadventure.TextadventurePackage;
+import org.emftext.language.textadventure.resource.tas.mopp.TasResourceFactory;
+import org.emftext.refactoring.continued_testing.ContinuedRefactoringTest;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
-import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
@@ -90,11 +92,12 @@ public class RefactoringTests extends TestCase{
 
 	@SuppressWarnings("unchecked")
 	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
-			TestTest.class,
-			EmptyOutgoingRelationTest.class,
-			RefactoringInterpreterTest.class,
+//			TestTest.class,
+//			EmptyOutgoingRelationTest.class,
+//			RefactoringInterpreterTest.class,
 			//			IndexConnectorTest.class,
-			RoleConstraintCheckerTest.class
+//			RoleConstraintCheckerTest.class,
+			ContinuedRefactoringTest.class
 	));
 
 
@@ -547,6 +550,7 @@ public class RefactoringTests extends TestCase{
 		// arbitrary metamodels
 		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(ConferencePackage.eNS_URI, ConferencePackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(TextadventurePackage.eNS_URI, TextadventurePackage.eINSTANCE);
 		// all java packages
 		EPackage.Registry.INSTANCE.put(JavaPackage.eNS_URI, JavaPackage.eINSTANCE);
 		//		EPackage.Registry.INSTANCE.put(ContainersPackage.eNS_URI, ContainersPackage.eINSTANCE);
@@ -565,5 +569,6 @@ public class RefactoringTests extends TestCase{
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("conference", new ConferenceResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("java", new JavaSourceOrClassFileResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tas", new TasResourceFactory());
 	}
 }

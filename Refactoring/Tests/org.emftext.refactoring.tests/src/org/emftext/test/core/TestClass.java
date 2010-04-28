@@ -1,5 +1,10 @@
 package org.emftext.test.core;
 
+import java.io.File;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.refactoring.test.TestUtil;
+
 
 
 public class TestClass {
@@ -28,6 +33,4 @@ public class TestClass {
 	public void setTestDataSet(TestDataSet testDataSet) {
 		this.testDataSet = testDataSet;
 	}
-
-	
 }
