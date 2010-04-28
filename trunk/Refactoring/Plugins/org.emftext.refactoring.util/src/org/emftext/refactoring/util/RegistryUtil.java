@@ -20,7 +20,7 @@ public class RegistryUtil {
 	public static IConfigurationElement[] collectConfigurationElements(String extensionPoint){
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		if(registry == null){
-			return null;
+			return new IConfigurationElement[0];
 		}
 		return registry.getConfigurationElementsFor(extensionPoint);
 	}
