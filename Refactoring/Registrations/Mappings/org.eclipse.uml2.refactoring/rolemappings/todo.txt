@@ -5,7 +5,7 @@ Refactorings for UML2 class diagrams
 
 * Create Associated Class - creates an empty class and connects it with a new association to the source class from where it is extracted.
 * Create Intermediate Superclass - creates an empty class in between a selected class and one of its superclasses.
-* Create Subclass - creates an empty subclass of a selected class.
+
 * Create Subinterface - creates an empty subinterface of a selected interface.
 * Create Superclass - creates a new super-class of a class.
 
