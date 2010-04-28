@@ -7,18 +7,19 @@ import org.antlr.runtime3_2_0.*;
 import java.util.HashMap;
 public class PropertiesParser extends PropertiesANTLRParserBase {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "QUOTED_91_93", "TEXT", "QUOTED_60_62", "COMMENT", "INTEGER", "FLOAT", "WHITESPACE", "LINEBREAK", "'='"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "QUOTED_91_93", "TEXT", "QUOTED_60_62", "QUOTED_34_34", "COMMENT", "INTEGER", "FLOAT", "WHITESPACE", "LINEBREAK", "'='"
     };
-    public static final int INTEGER=8;
-    public static final int T__12=12;
+    public static final int INTEGER=9;
     public static final int QUOTED_91_93=4;
     public static final int EOF=-1;
-    public static final int FLOAT=9;
+    public static final int T__13=13;
+    public static final int FLOAT=10;
     public static final int TEXT=5;
-    public static final int LINEBREAK=11;
-    public static final int COMMENT=7;
+    public static final int LINEBREAK=12;
+    public static final int COMMENT=8;
     public static final int QUOTED_60_62=6;
-    public static final int WHITESPACE=10;
+    public static final int WHITESPACE=11;
+    public static final int QUOTED_34_34=7;
 
     // delegates
     // delegators
@@ -867,7 +868,7 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>=TEXT && LA2_0<=QUOTED_60_62)) ) {
+                if ( ((LA2_0>=TEXT && LA2_0<=QUOTED_34_34)) ) {
                     alt2=1;
                 }
 
@@ -962,11 +963,7 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
             int LA3_0 = input.LA(1);
 
             if ( (LA3_0==TEXT) ) {
-                int LA3_1 = input.LA(2);
-
-                if ( (LA3_1==12) ) {
-                    alt3=1;
-                }
+                alt3=1;
             }
             switch (alt3) {
                 case 1 :
@@ -1010,7 +1007,7 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
                       				addExpectedElement(new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_4, 5));
                       			
                     }
-                    a1=(Token)match(input,12,FOLLOW_12_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair301); if (state.failed) return element;
+                    a1=(Token)match(input,13,FOLLOW_13_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair301); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1129,14 +1126,14 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
               				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
               				tokenResolver.setOptions(getOptions());
               				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolveResult result = getFreshTokenResolveResult();
-              				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__KEY), result);
+              				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME), result);
               				java.lang.Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
               					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
               				}
               				java.lang.String resolved = (java.lang.String)resolvedObject;
               				if (resolved != null) {
-              					element.eSet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__KEY), resolved);
+              					element.eSet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME), resolved);
               					completedElement(resolved, false);
               				}
               				collectHiddenTokens(element);
@@ -1249,7 +1246,7 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_refactoring_tests_properties_StringValue"
-    // Properties.g:924:1: parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.refactoring.tests.properties.StringValue element = null] : (a0= TEXT ) ;
+    // Properties.g:924:1: parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.refactoring.tests.properties.StringValue element = null] : (a0= QUOTED_34_34 ) ;
     public final org.emftext.refactoring.tests.properties.StringValue parse_org_emftext_refactoring_tests_properties_StringValue() throws RecognitionException {
         org.emftext.refactoring.tests.properties.StringValue element =  null;
         int parse_org_emftext_refactoring_tests_properties_StringValue_StartIndex = input.index();
@@ -1259,13 +1256,13 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return element; }
-            // Properties.g:927:1: ( (a0= TEXT ) )
-            // Properties.g:928:2: (a0= TEXT )
+            // Properties.g:927:1: ( (a0= QUOTED_34_34 ) )
+            // Properties.g:928:2: (a0= QUOTED_34_34 )
             {
-            // Properties.g:928:2: (a0= TEXT )
-            // Properties.g:929:3: a0= TEXT
+            // Properties.g:928:2: (a0= QUOTED_34_34 )
+            // Properties.g:929:3: a0= QUOTED_34_34
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_emftext_refactoring_tests_properties_StringValue455); if (state.failed) return element;
+            a0=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_emftext_refactoring_tests_properties_StringValue455); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -1275,7 +1272,7 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
               				element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createStringValue();
               			}
               			if (a0 != null) {
-              				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
+              				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
               				tokenResolver.setOptions(getOptions());
               				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolveResult result = getFreshTokenResolveResult();
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.STRING_VALUE__VALUE), result);
@@ -1341,7 +1338,7 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
             if ( (LA4_0==QUOTED_60_62) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==TEXT) ) {
+            else if ( (LA4_0==QUOTED_34_34) ) {
                 alt4=2;
             }
             else {
@@ -1402,14 +1399,14 @@ public class PropertiesParser extends PropertiesANTLRParserBase {
     public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_PropertyModel_in_start82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_Category_in_parse_org_emftext_refactoring_tests_properties_PropertyModel127 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_QUOTED_91_93_in_parse_org_emftext_refactoring_tests_properties_Category187 = new BitSet(new long[]{0x0000000000000062L});
-    public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_KeyValuePair_in_parse_org_emftext_refactoring_tests_properties_Category217 = new BitSet(new long[]{0x0000000000000062L});
-    public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_Key_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair273 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair301 = new BitSet(new long[]{0x0000000000000060L});
+    public static final BitSet FOLLOW_QUOTED_91_93_in_parse_org_emftext_refactoring_tests_properties_Category187 = new BitSet(new long[]{0x00000000000000E2L});
+    public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_KeyValuePair_in_parse_org_emftext_refactoring_tests_properties_Category217 = new BitSet(new long[]{0x00000000000000E2L});
+    public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_Key_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair273 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair301 = new BitSet(new long[]{0x00000000000000E0L});
     public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_Value_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair338 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_TEXT_in_parse_org_emftext_refactoring_tests_properties_Key375 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue415 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_org_emftext_refactoring_tests_properties_StringValue455 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_emftext_refactoring_tests_properties_StringValue455 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue_in_parse_org_emftext_refactoring_tests_properties_Value487 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_emftext_refactoring_tests_properties_StringValue_in_parse_org_emftext_refactoring_tests_properties_Value497 = new BitSet(new long[]{0x0000000000000002L});
 

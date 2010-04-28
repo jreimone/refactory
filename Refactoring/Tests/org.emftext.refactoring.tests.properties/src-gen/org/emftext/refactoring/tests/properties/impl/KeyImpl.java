@@ -23,7 +23,7 @@ import org.emftext.refactoring.tests.properties.PropertiesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.emftext.refactoring.tests.properties.impl.KeyImpl#getKey <em>Key</em>}</li>
+ *   <li>{@link org.emftext.refactoring.tests.properties.impl.KeyImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,24 +31,24 @@ import org.emftext.refactoring.tests.properties.PropertiesPackage;
  */
 public class KeyImpl extends EObjectImpl implements Key {
 	/**
-   * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getKey()
+   * @see #getName()
    * @generated
    * @ordered
    */
-	protected static final String KEY_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = null;
 
 	/**
-   * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getKey()
+   * @see #getName()
    * @generated
    * @ordered
    */
-	protected String key = KEY_EDEFAULT;
+	protected String name = NAME_EDEFAULT;
 
 	/**
    * <!-- begin-user-doc -->
@@ -74,8 +74,8 @@ public class KeyImpl extends EObjectImpl implements Key {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public String getKey() {
-    return key;
+	public String getName() {
+    return name;
   }
 
 	/**
@@ -83,11 +83,11 @@ public class KeyImpl extends EObjectImpl implements Key {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public void setKey(String newKey) {
-    String oldKey = key;
-    key = newKey;
+	public void setName(String newName) {
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PropertiesPackage.KEY__KEY, oldKey, key));
+      eNotify(new ENotificationImpl(this, Notification.SET, PropertiesPackage.KEY__NAME, oldName, name));
   }
 
 	/**
@@ -99,8 +99,8 @@ public class KeyImpl extends EObjectImpl implements Key {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID)
     {
-      case PropertiesPackage.KEY__KEY:
-        return getKey();
+      case PropertiesPackage.KEY__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -114,8 +114,8 @@ public class KeyImpl extends EObjectImpl implements Key {
 	public void eSet(int featureID, Object newValue) {
     switch (featureID)
     {
-      case PropertiesPackage.KEY__KEY:
-        setKey((String)newValue);
+      case PropertiesPackage.KEY__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -130,8 +130,8 @@ public class KeyImpl extends EObjectImpl implements Key {
 	public void eUnset(int featureID) {
     switch (featureID)
     {
-      case PropertiesPackage.KEY__KEY:
-        setKey(KEY_EDEFAULT);
+      case PropertiesPackage.KEY__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -146,8 +146,8 @@ public class KeyImpl extends EObjectImpl implements Key {
 	public boolean eIsSet(int featureID) {
     switch (featureID)
     {
-      case PropertiesPackage.KEY__KEY:
-        return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
+      case PropertiesPackage.KEY__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
@@ -162,8 +162,8 @@ public class KeyImpl extends EObjectImpl implements Key {
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (key: ");
-    result.append(key);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

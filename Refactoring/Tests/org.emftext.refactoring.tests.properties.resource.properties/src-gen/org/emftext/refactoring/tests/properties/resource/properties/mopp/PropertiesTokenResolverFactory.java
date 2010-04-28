@@ -18,6 +18,7 @@ public class PropertiesTokenResolverFactory implements org.emftext.refactoring.t
 		registerTokenResolver("TEXT", new org.emftext.refactoring.tests.properties.resource.properties.analysis.PropertiesTEXTTokenResolver());
 		registerTokenResolver("QUOTED_91_93", new org.emftext.refactoring.tests.properties.resource.properties.analysis.PropertiesQUOTED_91_93TokenResolver());
 		registerTokenResolver("QUOTED_60_62", new org.emftext.refactoring.tests.properties.resource.properties.analysis.PropertiesQUOTED_60_62TokenResolver());
+		registerTokenResolver("QUOTED_34_34", new org.emftext.refactoring.tests.properties.resource.properties.analysis.PropertiesQUOTED_34_34TokenResolver());
 	}
 	
 	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver createTokenResolver(java.lang.String tokenName) {

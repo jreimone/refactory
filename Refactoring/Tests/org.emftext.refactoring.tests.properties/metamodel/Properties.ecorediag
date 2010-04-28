@@ -72,7 +72,7 @@
     <children xmi:type="notation:Node" xmi:id="_O51ss1LCEd-ppMXWn8qrWw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_O51stFLCEd-ppMXWn8qrWw" type="5001">
       <children xmi:type="notation:Node" xmi:id="_Pr6C0FLCEd-ppMXWn8qrWw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="Properties.ecore#//Key/key"/>
+        <element xmi:type="ecore:EAttribute" href="Properties.ecore#//Key/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Pr6C0VLCEd-ppMXWn8qrWw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_O51stVLCEd-ppMXWn8qrWw"/>

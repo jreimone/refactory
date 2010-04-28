@@ -14,15 +14,7 @@ TOKENS{
 }
 
 TOKENSTYLES{
-	"PropertyModel" COLOR #7F0055, BOLD;
-	"categories" COLOR #7F0055, BOLD;
-	"Category" COLOR #7F0055, BOLD;
-	"pairs" COLOR #7F0055, BOLD;
-	"Value" COLOR #7F0055, BOLD;
-	"value" COLOR #7F0055, BOLD;
-	"KeyValuePair" COLOR #7F0055, BOLD;
-	"key" COLOR #7F0055, BOLD;
-	"Key" COLOR #7F0055, BOLD;
+	"COMMENT" COLOR #008000, ITALIC;
 }
 
 RULES{
@@ -33,10 +25,10 @@ RULES{
 	
 	KeyValuePair::= (key "=")? value !0;
 	
-	Key::= key[];
+	Key::= name[];
 	
 	EObjectReferenceValue ::= objectReference['<','>'];
 	
-	StringValue ::= value[];
+	StringValue ::= value['"','"'];
 	
 }

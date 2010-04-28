@@ -283,21 +283,21 @@ public class PropertiesPrinter implements org.emftext.refactoring.tests.properti
 		// 0 (if the feature is null).
 		java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.LinkedHashMap<java.lang.String, java.lang.Integer>(1);
 		java.lang.Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__KEY));
-		printCountingMap.put("key", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-		count = printCountingMap.get("key");
+		count = printCountingMap.get("name");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__KEY));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME));
 			if (o != null) {
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__KEY), element));
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME), element));
 				out.print(" ");
 			}
-			printCountingMap.put("key", count - 1);
+			printCountingMap.put("name", count - 1);
 		}
 	}
 	
@@ -339,12 +339,12 @@ public class PropertiesPrinter implements org.emftext.refactoring.tests.properti
 		printCountingMap.put("value", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
 		count = printCountingMap.get("value");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.STRING_VALUE__VALUE));
 			if (o != null) {
-				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.STRING_VALUE__VALUE), element));
 				out.print(" ");
