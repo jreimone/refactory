@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.3 2009/05/19 07:40:37 htraetteb Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/e4/tm/widgets.ecore" 
+            class="org.eclipse.e4.tm.widgets.impl.WidgetsPackageImpl"
+            genModel="model/tm.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/e4/tm/styles.ecore"
+            class="org.eclipse.e4.tm.styles.impl.StylesPackageImpl"
+            genModel="model/tm.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/e4/tm/layouts.ecore"
+            class="org.eclipse.e4.tm.layouts.impl.LayoutsPackageImpl"
+            genModel="model/tm.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/e4/tm/util.ecore"
+            class="org.eclipse.e4.tm.util.impl.UtilPackageImpl"
+            genModel="model/tm.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/e4/swt/widgets.ecore"
+            class="org.eclipse.e4.tm.swt.widgets.impl.WidgetsPackageImpl"
+            genModel="model/swt.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/e4/swt/styles.ecore"
+            class="org.eclipse.e4.tm.swt.styles.impl.StylesPackageImpl"
+            genModel="model/swt.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/e4/swt/layouts.ecore"
+            class="org.eclipse.e4.tm.swt.layouts.impl.LayoutsPackageImpl"
+            genModel="model/swt.genmodel"/>
+   </extension>
+
+</plugin>

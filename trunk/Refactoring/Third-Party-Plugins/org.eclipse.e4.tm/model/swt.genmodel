@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.e4.tm/src"
+    editDirectory="/org.eclipse.e4.tm.edit/src" editorDirectory="" modelPluginID="org.eclipse.e4.tm"
+    modelName="Swt" editPluginClass="org.eclipse.e4.tm.provider.TmEditPlugin" editorPluginClass=""
+    testsDirectory="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false" testsPluginID="org.eclipse.e4.tm.editor" usedGenPackages="tm.genmodel#//tm">
+  <foreignModel>swt.ecore</foreignModel>
+  <genPackages prefix="Swt" basePackage="org.eclipse.e4.tm" disposableProviderFactory="true"
+      ecorePackage="swt.ecore#/">
+    <nestedGenPackages prefix="Layouts" disposableProviderFactory="true" ecorePackage="swt.ecore#//layouts">
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/RowLayout">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/center"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/fill"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/justify"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/pack"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/wrap"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/spacing"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/marginLeft"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/marginTop"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/marginRight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayout/marginBottom"/>
+      </genClasses>
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/RowLayoutData">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/RowLayoutData/exclude"/>
+      </genClasses>
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/GridLayout">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/numColumns"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/makeColumnsEqualWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/marginLeft"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/marginTop"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/marginRight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/marginBottom"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/horizontalSpacing"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayout/verticalSpacing"/>
+      </genClasses>
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/GridLayoutData">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/verticalAlignment"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/horizontalAlignment"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/widthHint"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/heightHint"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/horizontalIndent"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/verticalIndent"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/horizontalSpan"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/verticalSpan"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/grabExcessHorizontalSpace"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/grabExcessVerticalSpace"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/minimumWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/minimumHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/GridLayoutData/exclude"/>
+      </genClasses>
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/FillLayout">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FillLayout/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FillLayout/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FillLayout/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FillLayout/spacing"/>
+      </genClasses>
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/StackLayout">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/StackLayout/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/StackLayout/marginHeight"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference swt.ecore#//layouts/StackLayout/topControl"/>
+      </genClasses>
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/FormLayout">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormLayout/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormLayout/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormLayout/marginLeft"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormLayout/marginTop"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormLayout/marginRight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormLayout/marginBottom"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormLayout/spacing"/>
+      </genClasses>
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/FormLayoutData">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference swt.ecore#//layouts/FormLayoutData/left"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference swt.ecore#//layouts/FormLayoutData/top"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference swt.ecore#//layouts/FormLayoutData/right"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference swt.ecore#//layouts/FormLayoutData/bottom"/>
+      </genClasses>
+      <genClasses dynamic="true" ecoreClass="swt.ecore#//layouts/FormAttachment">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormAttachment/numerator"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormAttachment/denominator"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormAttachment/offset"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference swt.ecore#//layouts/FormAttachment/control"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute swt.ecore#//layouts/FormAttachment/alignment"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Styles" disposableProviderFactory="true" ecorePackage="swt.ecore#//styles">
+      <genDataTypes ecoreDataType="swt.ecore#//styles/SwtConstant"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Widgets" disposableProviderFactory="true" ecorePackage="swt.ecore#//widgets">
+      <genClasses ecoreClass="swt.ecore#//widgets/Slider"/>
+      <genClasses ecoreClass="swt.ecore#//widgets/Spinner"/>
+      <genClasses ecoreClass="swt.ecore#//widgets/Scale"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>
