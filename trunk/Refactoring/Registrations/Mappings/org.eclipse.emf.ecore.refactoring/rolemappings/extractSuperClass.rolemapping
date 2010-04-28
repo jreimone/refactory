@@ -1,4 +1,5 @@
-ROLEMODELMAPPING extractSuperClass FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING extractSuperClass FOR 
+<http://www.eclipse.org/emf/2002/Ecore> 
 
 ExtractSuperClass maps <ExtractX> {
 
@@ -9,7 +10,8 @@ ExtractSuperClass maps <ExtractX> {
 		reference := eSuperTypes;
 	};
 	
-	NewContainer := EClass (newName -> name){
+	NewContainer := EClass(newName -> name)
+	{
 		moved := eStructuralFeatures;
 	};
 	
@@ -17,4 +19,4 @@ ExtractSuperClass maps <ExtractX> {
 		source := eClassifiers;
 		target := eClassifiers;
 	};
-} 
+}
