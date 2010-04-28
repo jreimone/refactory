@@ -38,6 +38,7 @@ public class PropertiesBracketInformationProvider {
 		java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesBracketPair> result = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesBracketPair>();
 		result.add(new BracketPair("[", "]", false));
 		result.add(new BracketPair("<", ">", false));
+		result.add(new BracketPair("\"", "\"", false));
 		return result;
 	}
 	

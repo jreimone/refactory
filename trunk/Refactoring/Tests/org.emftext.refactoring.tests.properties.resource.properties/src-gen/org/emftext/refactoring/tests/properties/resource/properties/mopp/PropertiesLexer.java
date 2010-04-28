@@ -6,16 +6,17 @@
 import org.antlr.runtime3_2_0.*;
 
 public class PropertiesLexer extends Lexer {
-    public static final int INTEGER=8;
-    public static final int T__12=12;
+    public static final int INTEGER=9;
     public static final int QUOTED_91_93=4;
     public static final int EOF=-1;
+    public static final int T__13=13;
     public static final int TEXT=5;
-    public static final int FLOAT=9;
-    public static final int LINEBREAK=11;
-    public static final int COMMENT=7;
+    public static final int FLOAT=10;
+    public static final int LINEBREAK=12;
+    public static final int COMMENT=8;
     public static final int QUOTED_60_62=6;
-    public static final int WHITESPACE=10;
+    public static final int QUOTED_34_34=7;
+    public static final int WHITESPACE=11;
 
     	public java.util.List<org.antlr.runtime3_2_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_2_0.RecognitionException>();
     	public java.util.List<java.lang.Integer> lexerExceptionsPosition = new java.util.ArrayList<java.lang.Integer>();
@@ -39,10 +40,10 @@ public class PropertiesLexer extends Lexer {
     }
     public String getGrammarFileName() { return "Properties.g"; }
 
-    // $ANTLR start "T__12"
-    public final void mT__12() throws RecognitionException {
+    // $ANTLR start "T__13"
+    public final void mT__13() throws RecognitionException {
         try {
-            int _type = T__12;
+            int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // Properties.g:16:7: ( '=' )
             // Properties.g:16:9: '='
@@ -57,7 +58,7 @@ public class PropertiesLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__12"
+    // $ANTLR end "T__13"
 
     // $ANTLR start "COMMENT"
     public final void mCOMMENT() throws RecognitionException {
@@ -630,15 +631,81 @@ public class PropertiesLexer extends Lexer {
     }
     // $ANTLR end "QUOTED_60_62"
 
+    // $ANTLR start "QUOTED_34_34"
+    public final void mQUOTED_34_34() throws RecognitionException {
+        try {
+            int _type = QUOTED_34_34;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Properties.g:1000:13: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Properties.g:1001:2: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            {
+            // Properties.g:1001:2: ( '\"' )
+            // Properties.g:1001:3: '\"'
+            {
+            match('\"'); 
+
+            }
+
+            // Properties.g:1001:7: (~ ( '\"' ) )*
+            loop13:
+            do {
+                int alt13=2;
+                int LA13_0 = input.LA(1);
+
+                if ( ((LA13_0>='\u0000' && LA13_0<='!')||(LA13_0>='#' && LA13_0<='\uFFFF')) ) {
+                    alt13=1;
+                }
+
+
+                switch (alt13) {
+            	case 1 :
+            	    // Properties.g:1001:8: ~ ( '\"' )
+            	    {
+            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
+            	        input.consume();
+
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop13;
+                }
+            } while (true);
+
+            // Properties.g:1001:16: ( '\"' )
+            // Properties.g:1001:17: '\"'
+            {
+            match('\"'); 
+
+            }
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "QUOTED_34_34"
+
     public void mTokens() throws RecognitionException {
-        // Properties.g:1:8: ( T__12 | COMMENT | INTEGER | FLOAT | TEXT | WHITESPACE | LINEBREAK | QUOTED_91_93 | QUOTED_60_62 )
-        int alt13=9;
-        alt13 = dfa13.predict(input);
-        switch (alt13) {
+        // Properties.g:1:8: ( T__13 | COMMENT | INTEGER | FLOAT | TEXT | WHITESPACE | LINEBREAK | QUOTED_91_93 | QUOTED_60_62 | QUOTED_34_34 )
+        int alt14=10;
+        alt14 = dfa14.predict(input);
+        switch (alt14) {
             case 1 :
-                // Properties.g:1:10: T__12
+                // Properties.g:1:10: T__13
                 {
-                mT__12(); 
+                mT__13(); 
 
                 }
                 break;
@@ -698,79 +765,88 @@ public class PropertiesLexer extends Lexer {
 
                 }
                 break;
+            case 10 :
+                // Properties.g:1:90: QUOTED_34_34
+                {
+                mQUOTED_34_34(); 
+
+                }
+                break;
 
         }
 
     }
 
 
-    protected DFA13 dfa13 = new DFA13(this);
-    static final String DFA13_eotS =
-        "\3\uffff\1\6\2\15\5\uffff\1\6\1\15\2\uffff";
-    static final String DFA13_eofS =
-        "\17\uffff";
-    static final String DFA13_minS =
-        "\1\11\2\uffff\1\60\2\55\5\uffff\1\56\1\55\2\uffff";
-    static final String DFA13_maxS =
-        "\1\172\2\uffff\1\71\2\172\5\uffff\1\56\1\172\2\uffff";
-    static final String DFA13_acceptS =
-        "\1\uffff\1\1\1\2\3\uffff\1\5\1\6\1\7\1\10\1\11\2\uffff\1\3\1\4";
-    static final String DFA13_specialS =
-        "\17\uffff}>";
-    static final String[] DFA13_transitionS = {
-            "\1\7\1\10\1\uffff\1\7\1\10\22\uffff\1\7\14\uffff\1\3\1\uffff"+
-            "\1\2\1\5\11\4\2\uffff\1\12\1\1\3\uffff\32\6\1\11\3\uffff\1\6"+
-            "\1\uffff\32\6",
+    protected DFA14 dfa14 = new DFA14(this);
+    static final String DFA14_eotS =
+        "\3\uffff\1\6\2\15\6\uffff\1\6\1\uffff\1\15\1\uffff";
+    static final String DFA14_eofS =
+        "\20\uffff";
+    static final String DFA14_minS =
+        "\1\11\2\uffff\1\60\2\55\6\uffff\1\56\1\uffff\1\55\1\uffff";
+    static final String DFA14_maxS =
+        "\1\172\2\uffff\1\71\2\172\6\uffff\1\56\1\uffff\1\172\1\uffff";
+    static final String DFA14_acceptS =
+        "\1\uffff\1\1\1\2\3\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\uffff\1\3"+
+        "\1\uffff\1\4";
+    static final String DFA14_specialS =
+        "\20\uffff}>";
+    static final String[] DFA14_transitionS = {
+            "\1\7\1\10\1\uffff\1\7\1\10\22\uffff\1\7\1\uffff\1\13\12\uffff"+
+            "\1\3\1\uffff\1\2\1\5\11\4\2\uffff\1\12\1\1\3\uffff\32\6\1\11"+
+            "\3\uffff\1\6\1\uffff\32\6",
             "",
             "",
-            "\1\13\11\4",
-            "\1\6\1\16\1\uffff\12\14\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
+            "\1\14\11\4",
+            "\1\6\1\17\1\uffff\12\16\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
             "\6",
-            "\1\6\1\16\1\uffff\12\6\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
-            "\6",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\16",
-            "\1\6\1\16\1\uffff\12\14\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
+            "\1\6\1\17\1\uffff\12\6\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
             "\6",
             "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\17",
+            "",
+            "\1\6\1\17\1\uffff\12\16\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
+            "\6",
             ""
     };
 
-    static final short[] DFA13_eot = DFA.unpackEncodedString(DFA13_eotS);
-    static final short[] DFA13_eof = DFA.unpackEncodedString(DFA13_eofS);
-    static final char[] DFA13_min = DFA.unpackEncodedStringToUnsignedChars(DFA13_minS);
-    static final char[] DFA13_max = DFA.unpackEncodedStringToUnsignedChars(DFA13_maxS);
-    static final short[] DFA13_accept = DFA.unpackEncodedString(DFA13_acceptS);
-    static final short[] DFA13_special = DFA.unpackEncodedString(DFA13_specialS);
-    static final short[][] DFA13_transition;
+    static final short[] DFA14_eot = DFA.unpackEncodedString(DFA14_eotS);
+    static final short[] DFA14_eof = DFA.unpackEncodedString(DFA14_eofS);
+    static final char[] DFA14_min = DFA.unpackEncodedStringToUnsignedChars(DFA14_minS);
+    static final char[] DFA14_max = DFA.unpackEncodedStringToUnsignedChars(DFA14_maxS);
+    static final short[] DFA14_accept = DFA.unpackEncodedString(DFA14_acceptS);
+    static final short[] DFA14_special = DFA.unpackEncodedString(DFA14_specialS);
+    static final short[][] DFA14_transition;
 
     static {
-        int numStates = DFA13_transitionS.length;
-        DFA13_transition = new short[numStates][];
+        int numStates = DFA14_transitionS.length;
+        DFA14_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA13_transition[i] = DFA.unpackEncodedString(DFA13_transitionS[i]);
+            DFA14_transition[i] = DFA.unpackEncodedString(DFA14_transitionS[i]);
         }
     }
 
-    class DFA13 extends DFA {
+    class DFA14 extends DFA {
 
-        public DFA13(BaseRecognizer recognizer) {
+        public DFA14(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 13;
-            this.eot = DFA13_eot;
-            this.eof = DFA13_eof;
-            this.min = DFA13_min;
-            this.max = DFA13_max;
-            this.accept = DFA13_accept;
-            this.special = DFA13_special;
-            this.transition = DFA13_transition;
+            this.decisionNumber = 14;
+            this.eot = DFA14_eot;
+            this.eof = DFA14_eof;
+            this.min = DFA14_min;
+            this.max = DFA14_max;
+            this.accept = DFA14_accept;
+            this.special = DFA14_special;
+            this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__12 | COMMENT | INTEGER | FLOAT | TEXT | WHITESPACE | LINEBREAK | QUOTED_91_93 | QUOTED_60_62 );";
+            return "1:1: Tokens : ( T__13 | COMMENT | INTEGER | FLOAT | TEXT | WHITESPACE | LINEBREAK | QUOTED_91_93 | QUOTED_60_62 | QUOTED_34_34 );";
         }
     }
  

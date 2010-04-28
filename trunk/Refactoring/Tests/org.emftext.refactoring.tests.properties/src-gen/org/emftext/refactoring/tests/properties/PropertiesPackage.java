@@ -191,13 +191,13 @@ public interface PropertiesPackage extends EPackage {
 	int KEY = 4;
 
 	/**
-   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KEY__KEY = 0;
+	int KEY__NAME = 0;
 
 	/**
    * The number of structural features of the '<em>Key</em>' class.
@@ -372,15 +372,15 @@ public interface PropertiesPackage extends EPackage {
 	EClass getKey();
 
 	/**
-   * Returns the meta object for the attribute '{@link org.emftext.refactoring.tests.properties.Key#getKey <em>Key</em>}'.
+   * Returns the meta object for the attribute '{@link org.emftext.refactoring.tests.properties.Key#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Key</em>'.
-   * @see org.emftext.refactoring.tests.properties.Key#getKey()
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.emftext.refactoring.tests.properties.Key#getName()
    * @see #getKey()
    * @generated
    */
-	EAttribute getKey_Key();
+	EAttribute getKey_Name();
 
 	/**
    * Returns the meta object for class '{@link org.emftext.refactoring.tests.properties.EObjectReferenceValue <em>EObject Reference Value</em>}'.
@@ -537,12 +537,12 @@ public interface PropertiesPackage extends EPackage {
 		EClass KEY = eINSTANCE.getKey();
 
 		/**
-     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
      */
-		EAttribute KEY__KEY = eINSTANCE.getKey_Key();
+		EAttribute KEY__NAME = eINSTANCE.getKey_Name();
 
 		/**
      * The meta object literal for the '{@link org.emftext.refactoring.tests.properties.impl.EObjectReferenceValueImpl <em>EObject Reference Value</em>}' class.

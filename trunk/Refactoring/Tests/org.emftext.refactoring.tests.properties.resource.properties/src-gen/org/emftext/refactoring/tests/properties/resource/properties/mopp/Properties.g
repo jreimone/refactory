@@ -851,14 +851,14 @@ parse_org_emftext_refactoring_tests_properties_Key returns [org.emftext.refactor
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__KEY), result);
+				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME), result);
 				java.lang.Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
 					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String)resolvedObject;
 				if (resolved != null) {
-					element.eSet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__KEY), resolved);
+					element.eSet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME), resolved);
 					completedElement(resolved, false);
 				}
 				collectHiddenTokens(element);
@@ -926,7 +926,7 @@ parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.
 }
 :
 	(
-		a0 = TEXT		
+		a0 = QUOTED_34_34		
 		{
 			if (terminateParsing) {
 				throw new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTerminateParsingException();
@@ -935,7 +935,7 @@ parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.
 				element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createStringValue();
 			}
 			if (a0 != null) {
-				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
+				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				tokenResolver.setOptions(getOptions());
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.STRING_VALUE__VALUE), result);
@@ -996,5 +996,8 @@ QUOTED_91_93:
 ;
 QUOTED_60_62:
 	('<')(~('>'))*('>')
+;
+QUOTED_34_34:
+	('"')(~('"'))*('"')
 ;
 

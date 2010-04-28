@@ -239,7 +239,7 @@ public class PropertiesPackageImpl extends EPackageImpl implements PropertiesPac
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EAttribute getKey_Key() {
+	public EAttribute getKey_Name() {
     return (EAttribute)keyEClass.getEStructuralFeatures().get(0);
   }
 
@@ -321,7 +321,7 @@ public class PropertiesPackageImpl extends EPackageImpl implements PropertiesPac
     createEReference(keyValuePairEClass, KEY_VALUE_PAIR__KEY);
 
     keyEClass = createEClass(KEY);
-    createEAttribute(keyEClass, KEY__KEY);
+    createEAttribute(keyEClass, KEY__NAME);
 
     eObjectReferenceValueEClass = createEClass(EOBJECT_REFERENCE_VALUE);
     createEReference(eObjectReferenceValueEClass, EOBJECT_REFERENCE_VALUE__OBJECT_REFERENCE);
@@ -379,7 +379,7 @@ public class PropertiesPackageImpl extends EPackageImpl implements PropertiesPac
     initEReference(getKeyValuePair_Key(), this.getKey(), null, "key", null, 0, 1, KeyValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(keyEClass, Key.class, "Key", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getKey_Key(), ecorePackage.getEString(), "key", null, 1, 1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getKey_Name(), ecorePackage.getEString(), "name", null, 1, 1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eObjectReferenceValueEClass, EObjectReferenceValue.class, "EObjectReferenceValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEObjectReferenceValue_ObjectReference(), theEcorePackage.getEObject(), null, "objectReference", null, 1, 1, EObjectReferenceValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
