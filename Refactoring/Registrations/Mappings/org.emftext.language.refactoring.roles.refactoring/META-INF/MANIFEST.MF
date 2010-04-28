@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Refactorings for RoleModels
+Bundle-SymbolicName: org.emftext.language.refactoring.roles.refactoring;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.emftext.language.refactoring.roles.refactoring.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
