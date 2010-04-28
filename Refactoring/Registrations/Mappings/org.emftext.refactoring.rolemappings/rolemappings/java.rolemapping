@@ -1,6 +1,6 @@
 ROLEMODELMAPPING java FOR <http://www.emftext.org/java>  
 	
-ExtractMethod maps <ExtractX> { 
+ExtractMethod maps <ExtractXwithReferenceClass> { 
 	Extract := statements.Statement;
 	OrigContainer := members.ClassMethod{
 		extracts := statements;
