@@ -10,6 +10,18 @@
       <rolemapping
             rolemapping_resource="rolemappings/pullUpProperty.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/renameElement.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractSubPackage.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractInterfaceFromOperations.rolemapping">
+      </rolemapping>
   </extension>
 
 	<!-- post processors -->
