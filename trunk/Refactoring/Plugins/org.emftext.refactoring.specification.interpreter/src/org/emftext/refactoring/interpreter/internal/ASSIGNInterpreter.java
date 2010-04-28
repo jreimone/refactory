@@ -25,6 +25,7 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
+import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
@@ -39,7 +40,7 @@ import org.emftext.refactoring.specification.interpreter.ui.DialogAttributeValue
 public class ASSIGNInterpreter {
 
 	// the following two variables will only be used when test plugin specifies a value provider
-	private static Class<IValueProvider<EAttribute, Object>> valueProviderClass;
+	private static Class<IAttributeValueProvider> externalValueProvider;
 	private boolean providerExternallySet = false;
 	private IValueProvider<EAttribute, Object> valueProvider;
 
@@ -182,22 +183,23 @@ public class ASSIGNInterpreter {
 	 * 
 	 * @param valueProvider
 	 */
-	public static void setValueProvider(Class<IValueProvider<EAttribute, Object>> valueProvider){
-		valueProviderClass = valueProvider;
+	@SuppressWarnings("unchecked")
+	public static void setValueProvider(Class<? extends IAttributeValueProvider> valueProvider){
+		externalValueProvider = (Class<IAttributeValueProvider>) valueProvider;
 	}
 
 	private IValueProvider<EAttribute, Object> getValueProvider(){
-		if(valueProviderClass != null){
-			if(!providerExternallySet){
+		if(externalValueProvider != null){
+//			if(!providerExternallySet){
 				try {
-					valueProvider = valueProviderClass.newInstance();
+					valueProvider = externalValueProvider.newInstance();
 					providerExternallySet = true;
 				} catch (InstantiationException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				}
-			}
+//			}
 		}
 		valueProvider = new DialogAttributeValueProvider(mapping);
 		return valueProvider;
