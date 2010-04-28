@@ -7,6 +7,9 @@
       <rolemapping
             rolemapping_resource="rolemappings/extractCompositeState.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/pullUpProperty.rolemapping">
+      </rolemapping>
   </extension>
 
 	<!-- post processors -->

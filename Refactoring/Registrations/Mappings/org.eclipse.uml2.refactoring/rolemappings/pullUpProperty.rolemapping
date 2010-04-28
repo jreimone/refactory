@@ -1,0 +1,14 @@
+ROLEMODELMAPPING pullUpProperty 
+FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+
+PullUpProperty maps <MoveX> {
+
+	Movee := Property;
+	SourceContainer := Class {
+		sourceContainment := ownedMember;
+		containerReference := superClass;
+	};
+	TargetContainer := Class {
+		targetContainment := ownedMember;
+	};
+} 
