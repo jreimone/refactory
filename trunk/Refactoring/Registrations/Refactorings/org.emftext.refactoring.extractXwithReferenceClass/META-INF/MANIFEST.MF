@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ExtractX Refactoring
-Bundle-SymbolicName: org.emftext.refactoring.extractX;singleton:=true
+Bundle-SymbolicName: org.emftext.refactoring.extractXwithReferenceClass;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Vendor: Jan Reimann
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

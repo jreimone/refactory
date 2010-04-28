@@ -1,5 +1,5 @@
 REFACTORING ExtractXRefactoring 
-FOR <ExtractX>
+FOR <ExtractXwithReferenceClass>
 
 STEPS { 
 	object containerContainerObject := ContainerContainer from uptree(INPUT);
