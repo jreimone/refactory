@@ -35,6 +35,7 @@ import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage;
+import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
@@ -43,9 +44,10 @@ import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelationTest;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
-import org.emftext.refactoring.indexconnector.IndexConnectorTest;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
+import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
@@ -56,6 +58,7 @@ import org.emftext.refactoring.tests.properties.EObjectReferenceValue;
 import org.emftext.refactoring.tests.properties.KeyValuePair;
 import org.emftext.refactoring.tests.properties.PropertiesPackage;
 import org.emftext.refactoring.tests.properties.PropertyModel;
+import org.emftext.refactoring.tests.properties.StringValue;
 import org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResourceFactory;
 import org.emftext.test.core.AbstractRefactoringTest;
 import org.emftext.test.core.DataPairTestFileFilter;
@@ -84,13 +87,13 @@ public class RefactoringTests extends TestCase{
 	// paths for files which will be inserted into registries
 	public static final String REGISTRY_FOLDER 					= INPUT_FOLDER + File.separator + "registry";
 	public static final String MODELS_TO_REGISTER				= REGISTRY_FOLDER + File.separator + "referenced_models.properties";
-	
+
 	@SuppressWarnings("unchecked")
 	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
 			TestTest.class,
 			EmptyOutgoingRelationTest.class,
 			RefactoringInterpreterTest.class,
-//			IndexConnectorTest.class,
+			//			IndexConnectorTest.class,
 			RoleConstraintCheckerTest.class
 	));
 
@@ -101,19 +104,19 @@ public class RefactoringTests extends TestCase{
 		Map<String, URI> resourceMap = EcorePlugin.getPlatformResourceMap();
 		File root = new File(".");
 		assertTrue(root.exists());
-		
+
 		root = root.getAbsoluteFile();
 		assertTrue(root.exists());
 		root = root.getParentFile().getParentFile();
 		assertTrue(root.exists());
 		File[] subDirs = root.listFiles(new FileFilter() {
-			
+
 			public boolean accept(File pathname) {
 				return pathname.exists() 
-					&& pathname.isDirectory() 
-					&& !pathname.isHidden() 
-					&& pathname.canRead()
-					&& !pathname.getName().startsWith(".");
+				&& pathname.isDirectory() 
+				&& !pathname.isHidden() 
+				&& pathname.canRead()
+				&& !pathname.getName().startsWith(".");
 			}
 		});
 		for (File subDir : subDirs) {
@@ -144,8 +147,7 @@ public class RefactoringTests extends TestCase{
 							e.printStackTrace();
 						}
 					}
-				}
-				if("refspecs".equals(category.getName())){
+				}else if("refspecs".equals(category.getName())){
 					List<KeyValuePair> pairs = category.getPairs();
 					for (KeyValuePair pair : pairs) {
 						EObjectReferenceValue value = (EObjectReferenceValue) pair.getValue();
@@ -156,8 +158,7 @@ public class RefactoringTests extends TestCase{
 							e.printStackTrace();
 						}
 					}
-				}
-				if("mappings".equals(category.getName())){
+				}else if("mappings".equals(category.getName())){
 					List<KeyValuePair> pairs = category.getPairs();
 					for (KeyValuePair pair : pairs) {
 						EObjectReferenceValue value = (EObjectReferenceValue) pair.getValue();
@@ -174,6 +175,7 @@ public class RefactoringTests extends TestCase{
 		registerResourceFactories();
 		registerTestingRootAsPlatformRoot();
 		registerModelsForRefactorings();
+		registerPostProcessors();
 		TestSuite suite = new TestSuite("All Refactoring Tests"){};
 		for (Class<? extends TestClass> testClass : testClasses) {
 			try {
@@ -189,6 +191,51 @@ public class RefactoringTests extends TestCase{
 			}
 		}
 		return suite;
+	}
+
+	private static void registerPostProcessors() {
+		Resource models2Register = TestUtil.getResourceFromFile(TestUtil.getFileByPath(MODELS_TO_REGISTER));
+		EObject root = models2Register.getContents().get(0);
+		if(root instanceof PropertyModel){
+			List<Category> categories = ((PropertyModel) root).getCategories();
+			for (Category category : categories) {
+				if("postprocessor".equals(category.getName())){
+					String nsUri = null;
+					String mappingName = null;
+					String qualifiedClass = null;
+					for (KeyValuePair pair : category.getPairs()) {
+						if("nsUri".equals(pair.getKey().getName()) && pair.getValue() instanceof StringValue){
+							nsUri = ((StringValue) pair.getValue()).getValue();
+						} else if("mappingName".equals(pair.getKey().getName()) && pair.getValue() instanceof StringValue){
+							mappingName = ((StringValue) pair.getValue()).getValue();
+						} else if("class".equals(pair.getKey().getName()) && pair.getValue() instanceof StringValue){
+							qualifiedClass = ((StringValue) pair.getValue()).getValue();
+						}
+					}
+					if(nsUri != null && mappingName != null && qualifiedClass != null){
+						try {
+							Class<?> postProcessorClass = Class.forName(qualifiedClass);
+							if(IRefactoringPostProcessor.class.isAssignableFrom(postProcessorClass)){
+								IRefactoringPostProcessor postProcessor = (IRefactoringPostProcessor) postProcessorClass.newInstance();
+								Map<String, Mapping> mappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(nsUri);
+								if(mappings != null){
+									Mapping mapping = mappings.get(mappingName);
+									if(mapping != null){
+										IRoleMappingRegistry.INSTANCE.registerPostProcessor(mapping, postProcessor);
+									}
+								}
+							}
+						} catch (ClassNotFoundException e) {
+							e.printStackTrace();
+						} catch (InstantiationException e) {
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private static List<TestDataPairSet> getTestDataPairs(String classFolder, String[] filePatterns){
@@ -502,8 +549,8 @@ public class RefactoringTests extends TestCase{
 		EPackage.Registry.INSTANCE.put(ConferencePackage.eNS_URI, ConferencePackage.eINSTANCE);
 		// all java packages
 		EPackage.Registry.INSTANCE.put(JavaPackage.eNS_URI, JavaPackage.eINSTANCE);
-//		EPackage.Registry.INSTANCE.put(ContainersPackage.eNS_URI, ContainersPackage.eINSTANCE);
-//		EPackage.Registry.INSTANCE.put(MembersPackage.eNS_URI, MembersPackage.eINSTANCE);
+		//		EPackage.Registry.INSTANCE.put(ContainersPackage.eNS_URI, ContainersPackage.eINSTANCE);
+		//		EPackage.Registry.INSTANCE.put(MembersPackage.eNS_URI, MembersPackage.eINSTANCE);
 	}
 
 	private static void registerResourceFactories(){
