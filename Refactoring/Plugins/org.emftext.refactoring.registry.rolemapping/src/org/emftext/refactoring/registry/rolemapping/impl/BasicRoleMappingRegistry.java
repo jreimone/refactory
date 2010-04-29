@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -179,6 +180,9 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 
 		String nsUri = roleMapping.getTargetMetamodel().getNsURI();
+		if(nsUri == null){// then the meta model isn't registered correctly and doesn't exist
+			return new LinkedList<Mapping>(mappingsToRegister.values());
+		}
 		Map<String, Mapping> registered = getRoleMappingsMap().get(nsUri);
 		if(registered == null){
 			registered = new LinkedHashMap<String, Mapping>();
@@ -269,6 +273,9 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			RoleMappingModel model = mapping.getOwningMappingModel();
 			if(model != null){
 				String nsUri = model.getTargetMetamodel().getNsURI();
+				if(nsUri == null){
+					return;
+				}
 				Map<String, Mapping> registeredMappings = getRoleMappingsForUri(nsUri);
 				if(registeredMappings != null){
 					Mapping correspondingMapping = registeredMappings.get(mapping.getName());
