@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,8 +88,9 @@ public class RefactoringStatisticView extends ViewPart {
 
 	private TreeViewer viewer;
 	private DrillDownAdapter drillDownAdapter;
-	private Action action1;
-	private Action action2;
+	private Action refactoringDocGenAction;
+	private Action complexLatexTableGenAction;
+	private Action simpleLatexTableGenAction;
 	private Action doubleClickAction;
 	private ViewContentProvider contentProvider;
 
@@ -139,17 +141,18 @@ public class RefactoringStatisticView extends ViewPart {
 			return count;
 		}
 		
-		private int countRelations(EPackage epackage){
+		private int countStructuralFeatures(EPackage epackage){
 			int count = 0;
 			if(epackage.getEClassifiers() != null){
 				for (EClassifier classifier : epackage.getEClassifiers()) {
 					if(classifier instanceof EClass){
-						count += ((EClass) classifier).getEReferences().size();
+						count += ((EClass) classifier).getEStructuralFeatures().size();
+//						count += ((EClass) classifier).getEReferences().size();
 					}
 				}
 			}
 			for (EPackage subPackage : epackage.getESubpackages()) {
-				count += countMetaclasses(subPackage);
+				count += countStructuralFeatures(subPackage);
 			}
 			return count;
 		}
@@ -170,12 +173,12 @@ public class RefactoringStatisticView extends ViewPart {
 			return countMetaclasses(getMetamodel());
 		}
 		
-		public int getCountRelations(){
-			return countRelations(getMetamodel());
+		public int getCountStructuralFeatures(){
+			return countStructuralFeatures(getMetamodel());
 		}
 		
-		public double getCountRelationsPerMetaclass(){
-			return new Integer(getCountRelations()).doubleValue() / new Integer(getCountMetaclasses()).doubleValue();
+		public double getCountStructuralFeaturesPerMetaclass(){
+			return new Integer(getCountStructuralFeatures()).doubleValue() / new Integer(getCountMetaclasses()).doubleValue();
 		}
 	}
 
@@ -331,21 +334,33 @@ public class RefactoringStatisticView extends ViewPart {
 						return String.valueOf(count);
 					}
 					return "";
-				case 4: // count of Relations
+//				case 4: // count of Relations
+//					if(object instanceof TreeLeaf){
+//						int count = ((TreeLeaf) object).getCountStructuralFeatures();
+//						return String.valueOf(count);
+//					}
+//					return "";
+				case 4: // count of StructuralFeatures
 					if(object instanceof TreeLeaf){
-						int count = ((TreeLeaf) object).getCountRelations();
+						int count = ((TreeLeaf) object).getCountStructuralFeatures();
 						return String.valueOf(count);
 					}
 					return "";
-				case 5: // average Relations per Metaclass
+//				case 5: // average Relations per Metaclass
+//					if(object instanceof TreeLeaf){
+//						double average = ((TreeLeaf) object).getCountStructuralFeaturesPerMetaclass();
+//						String averageString = String.valueOf(average);
+//						int dotIndex = averageString.indexOf(".");
+//						if(dotIndex + 3 <= averageString.length()){
+//							averageString = averageString.substring(0, dotIndex + 3);
+//						}
+//						return averageString;
+//					}
+//					return "";
+				case 5: // summation
 					if(object instanceof TreeLeaf){
-						double average = ((TreeLeaf) object).getCountRelationsPerMetaclass();
-						String averageString = String.valueOf(average);
-						int dotIndex = averageString.indexOf(".");
-						if(dotIndex + 3 <= averageString.length()){
-							averageString = averageString.substring(0, dotIndex + 3);
-						}
-						return averageString;
+						int sum = ((TreeLeaf) object).getCountStructuralFeatures() + ((TreeLeaf) object).getCountMetaclasses(); 
+						return String.valueOf(sum);
 					}
 					return "";
 				default:
@@ -415,10 +430,10 @@ public class RefactoringStatisticView extends ViewPart {
 		column4.setText("MC");
 		TreeColumn column5 = new TreeColumn(tree, SWT.CENTER);
 		column5.setWidth(40);
-		column5.setText("Rel");
+		column5.setText("SF");
 		TreeColumn column6 = new TreeColumn(tree, SWT.CENTER);
 		column6.setWidth(40);
-		column6.setText("R/MC");
+		column6.setText("SUM");
 		
 		
 		drillDownAdapter = new DrillDownAdapter(viewer);
@@ -454,13 +469,15 @@ public class RefactoringStatisticView extends ViewPart {
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
-		manager.add(action1);
+		manager.add(refactoringDocGenAction);
 		manager.add(new Separator());
-		manager.add(action2);
+		manager.add(complexLatexTableGenAction);
+		manager.add(new Separator());
+		manager.add(simpleLatexTableGenAction);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
-		manager.add(action1);
+		manager.add(refactoringDocGenAction);
 		manager.add(new Separator());
 		drillDownAdapter.addNavigationActions(manager);
 		// Other plug-ins can contribute there actions here
@@ -468,14 +485,178 @@ public class RefactoringStatisticView extends ViewPart {
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
-		manager.add(action1);
-		manager.add(action2);
+		manager.add(refactoringDocGenAction);
+		manager.add(complexLatexTableGenAction);
+		manager.add(simpleLatexTableGenAction);
 		manager.add(new Separator());
 		drillDownAdapter.addNavigationActions(manager);
 	}
 
 	private void makeActions() {
-		action1 = new Action() {
+		makeRefactoringDocGenAction();
+		makeComplexLatexTableGenAction();
+		makeSimpleLatexTableGenAction();
+		
+		doubleClickAction = new Action() {
+			public void run() {
+				ISelection selection = viewer.getSelection();
+				Object obj = ((IStructuredSelection)selection).getFirstElement();
+				showMessage("Double-click detected on "+obj.toString());
+			}
+		};
+	}
+
+	private void makeSimpleLatexTableGenAction() {
+		simpleLatexTableGenAction = new Action() {
+			public void run() {
+				TreeParent invisibleRoot = contentProvider.getInvisibleRoot();
+				try {
+					String tempdir = System.getProperty("java.io.tmpdir") + "Refactor";
+					File tempDir = new File(tempdir);
+					boolean success = true;
+					if(!tempDir.isDirectory()){
+						success = tempDir.mkdir();
+					}
+					if(success){
+						File tableFile = File.createTempFile("refactoringsSimple_", ".latex", tempDir);
+						tableFile.deleteOnExit();
+						FileWriter writer = new FileWriter(tableFile);
+						writer.append("\\begingroup\n");
+						writer.append("\\footnotesize\n");
+						writer.append("\\begin{longtable}{|c|l|c|c|}\n");
+						writer.append("\\caption{Refactorings applied to metamodels}\\\\\n");
+						writer.append("\\hline\n");
+						writer.append("\\textbf{Generic Name} & \\textbf{Metamodel} & \\textbf{MP} & \\textbf{PP} \\\\ \\hline\n\n");
+						for (TreeObject object : invisibleRoot.getChildren()) {
+							if(object instanceof TreeParent){
+								TreeParent parent = (TreeParent) object;
+								RoleModel roleModel = (RoleModel) parent.getObject();
+								Map<EPackage, Integer> mappingCountMap = new LinkedHashMap<EPackage, Integer>();
+								Map<EPackage, Integer> ppCountMap = new LinkedHashMap<EPackage, Integer>();
+								for (TreeObject child : parent.getChildren()) {
+									if(child instanceof TreeLeaf){
+										TreeLeaf leaf = (TreeLeaf) child;
+										EPackage metamodel = leaf.getMetamodel();
+										if(mappingCountMap.get(metamodel) == null){
+											mappingCountMap.put(metamodel, 1);
+										} else {
+											mappingCountMap.put(metamodel, mappingCountMap.get(metamodel) + 1);
+										}
+										boolean hasPostProcessor = leaf.hasPostProcessorRegistered();
+										if(hasPostProcessor){
+											if(ppCountMap.get(metamodel) == null){
+												ppCountMap.put(metamodel, 1);
+											} else {
+												ppCountMap.put(metamodel, ppCountMap.get(metamodel) + 1);
+											}
+										}
+									}
+								}
+								int count = mappingCountMap.keySet().size();
+								writer.append("\\multirow{" + count +"}{*}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}} \n");
+								for (EPackage metamodel : mappingCountMap.keySet()) {
+									count--;
+									String mmName = StringUtil.firstLetterUpperCase(metamodel.getName());
+									mmName = mmName.replaceAll("_", " ");
+									int mappingCount = mappingCountMap.get(metamodel);
+									Integer ppCount = ppCountMap.get(metamodel);
+									writer.append("& " + mmName + " & " + mappingCount + " & " + ((ppCount == null)?"":ppCount) + " \\\\ " + ((count == 0)?"\\hline":"\\cline{2-4}\n"));
+								}
+								writer.append("\n\n");
+							}
+						}
+						writer.append("\\multicolumn{4}{l}{MP = Mapping Count (quantity the role model was mapped)} \\\\");
+						writer.append("\\multicolumn{4}{l}{PP = Post Processors (quantity of needed post processors)}");
+						writer.append("\\end{longtable}\n");
+						writer.append("\\endgroup\n");
+						writer.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		simpleLatexTableGenAction.setText("Generate simple LaTeX table");
+		simpleLatexTableGenAction.setToolTipText("Generate simple LaTeX table");
+		simpleLatexTableGenAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+				getImageDescriptor(ISharedImages.IMG_OBJ_FILE));
+	}
+
+	private void makeComplexLatexTableGenAction() {
+		complexLatexTableGenAction = new Action() {
+			public void run() {
+				TreeParent invisibleRoot = contentProvider.getInvisibleRoot();
+				try {
+					String tempdir = System.getProperty("java.io.tmpdir") + "Refactor";
+					File tempDir = new File(tempdir);
+					boolean success = true;
+					if(!tempDir.isDirectory()){
+						success = tempDir.mkdir();
+					}
+					if(success){
+						File tableFile = File.createTempFile("refactoringsComplex_", ".latex", tempDir);
+						tableFile.deleteOnExit();
+						FileWriter writer = new FileWriter(tableFile);
+						writer.append("\\begingroup\n");
+						writer.append("\\footnotesize\n");
+						writer.append("\\begin{longtable}{|l|l|c|c|c|c|}\n");
+						writer.append("\\caption{Refactorings applied to metamodels}\\\\\n");
+						writer.append("\\hline\n");
+						writer.append("\\textbf{Specific Name} & \\textbf{Metamodel} & \\textbf{PP} & \\textbf{MC} & \\textbf{SF} & \\textbf{SUM}\\\\ \\hline\n");
+						for (TreeObject object : invisibleRoot.getChildren()) {
+							if(object instanceof TreeParent){
+								TreeParent parent = (TreeParent) object;
+								RoleModel roleModel = (RoleModel) parent.getObject();
+								writer.append("\\multicolumn{6}{|c|}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}}\\\\ \\hline\n");
+								for (TreeObject child : parent.getChildren()) {
+									if(child instanceof TreeLeaf){
+										TreeLeaf leaf = (TreeLeaf) child;
+										Mapping mapping = (Mapping) leaf.getObject();
+										writer.append(StringUtil.convertCamelCaseToWords(mapping.getName()));
+										writer.append(" & ");
+										String mmName = StringUtil.firstLetterUpperCase(leaf.getMetamodel().getName());
+										mmName = mmName.replaceAll("_", " ");
+										writer.append(mmName);
+										writer.append(" & ");
+										boolean hasPostProcessor = leaf.hasPostProcessorRegistered();
+										if(hasPostProcessor){
+											writer.append("X");
+										}
+										writer.append(" & ");
+										writer.append(String.valueOf(leaf.getCountMetaclasses()));
+										writer.append(" & ");
+										writer.append(String.valueOf(leaf.getCountStructuralFeatures()));
+										writer.append(" & ");
+//										double average = leaf.getCountRelationsPerMetaclass();
+//										String averageString = String.valueOf(average);
+//										int dotIndex = averageString.indexOf(".");
+//										if(dotIndex + 3 <= averageString.length()){
+//											averageString = averageString.substring(0, dotIndex + 3);
+//										}
+										int sum = leaf.getCountMetaclasses() + leaf.getCountStructuralFeatures();
+										writer.append(String.valueOf(sum));
+										writer.append("\\\\ \\hline\n");
+									}
+								}
+							}
+						}
+						writer.append("\\end{longtable}\n");
+						writer.append("\\endgroup\n");
+						writer.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		complexLatexTableGenAction.setText("Generate complex LaTeX table");
+		complexLatexTableGenAction.setToolTipText("Generate complex LaTeX table");
+		complexLatexTableGenAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+				getImageDescriptor(ISharedImages.IMG_OBJ_ELEMENT));
+	}
+
+	private void makeRefactoringDocGenAction() {
+		refactoringDocGenAction = new Action() {
 			public void run() {
 				ISelection selection = viewer.getSelection();
 				if(selection instanceof IStructuredSelection){
@@ -535,88 +716,10 @@ public class RefactoringStatisticView extends ViewPart {
 				}
 			}
 		};
-		action1.setText("Generate Documentation of selected Refactoring");
-		action1.setToolTipText("Generate Documentation of selected Refactoring");
-		action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+		refactoringDocGenAction.setText("Generate Documentation of selected Refactoring");
+		refactoringDocGenAction.setToolTipText("Generate Documentation of selected Refactoring");
+		refactoringDocGenAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
-
-		action2 = new Action() {
-			public void run() {
-				TreeParent invisibleRoot = contentProvider.getInvisibleRoot();
-				Object input = viewer.getInput();
-				try {
-					String tempdir = System.getProperty("java.io.tmpdir") + "Refactor";
-					File tempDir = new File(tempdir);
-					boolean success = true;
-					if(!tempDir.isDirectory()){
-						success = tempDir.mkdir();
-					}
-					if(success){
-						File tableFile = File.createTempFile("refactorings_", ".latex", tempDir);
-						tableFile.deleteOnExit();
-						FileWriter writer = new FileWriter(tableFile);
-						writer.append("\\begingroup\n");
-						writer.append("\\footnotesize\n");
-						writer.append("\\begin{longtable}{|l|l|c|c|c|c|}\n");
-						writer.append("\\caption{Refactorings applied to metamodels}\\\\\n");
-						writer.append("\\hline\n");
-						writer.append("\\textbf{Specific Name} & \\textbf{Metamodel} & \\textbf{PP} & \\textbf{MC} & \\textbf{Rel} & \\textbf{Rel/MC}\\\\ \\hline\n");
-						for (TreeObject object : invisibleRoot.getChildren()) {
-							if(object instanceof TreeParent){
-								TreeParent parent = (TreeParent) object;
-								RoleModel roleModel = (RoleModel) parent.getObject();
-								writer.append("\\multicolumn{6}{|c|}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}}\\\\ \\hline\n");
-								for (TreeObject child : parent.getChildren()) {
-									if(child instanceof TreeLeaf){
-										TreeLeaf leaf = (TreeLeaf) child;
-										Mapping mapping = (Mapping) leaf.getObject();
-										writer.append(StringUtil.convertCamelCaseToWords(mapping.getName()));
-										writer.append(" & ");
-										String mmName = StringUtil.firstLetterUpperCase(leaf.getMetamodel().getName());
-										mmName = mmName.replaceAll("_", " ");
-										writer.append(mmName);
-										writer.append(" & ");
-										boolean hasPostProcessor = leaf.hasPostProcessorRegistered();
-										if(hasPostProcessor){
-											writer.append("X");
-										}
-										writer.append(" & ");
-										writer.append(String.valueOf(leaf.getCountMetaclasses()));
-										writer.append(" & ");
-										writer.append(String.valueOf(leaf.getCountRelations()));
-										writer.append(" & ");
-										double average = leaf.getCountRelationsPerMetaclass();
-										String averageString = String.valueOf(average);
-										int dotIndex = averageString.indexOf(".");
-										if(dotIndex + 3 <= averageString.length()){
-											averageString = averageString.substring(0, dotIndex + 3);
-										}
-										writer.append(averageString);
-										writer.append("\\\\ \\hline\n");
-									}
-								}
-							}
-						}
-						writer.append("\\end{longtable}\n");
-						writer.append("\\endgroup\n");
-						writer.close();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		action2.setText("Generate LaTeX table");
-		action2.setToolTipText("Generate LaTeX table");
-		action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
-				getImageDescriptor(ISharedImages.IMG_OBJ_ELEMENT));
-		doubleClickAction = new Action() {
-			public void run() {
-				ISelection selection = viewer.getSelection();
-				Object obj = ((IStructuredSelection)selection).getFirstElement();
-				showMessage("Double-click detected on "+obj.toString());
-			}
-		};
 	}
 
 	private void hookDoubleClickAction() {
