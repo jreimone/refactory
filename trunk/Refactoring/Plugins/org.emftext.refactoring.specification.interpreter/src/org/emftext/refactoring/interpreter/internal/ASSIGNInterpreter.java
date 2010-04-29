@@ -56,7 +56,7 @@ public class ASSIGNInterpreter {
 	private AdapterFactoryLabelProvider labelProvider;
 
 	private IRefactoringInterpreter interpreter;
-	
+
 	private ASSIGN assign;
 
 	public ASSIGNInterpreter(Mapping mapping, IRefactoringInterpreter interpreter) {
@@ -150,7 +150,7 @@ public class ASSIGNInterpreter {
 				return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 			}
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderForCommand(assign);
 		if(valueProvider == null){
@@ -190,18 +190,19 @@ public class ASSIGNInterpreter {
 
 	private IValueProvider<EAttribute, Object> getValueProvider(){
 		if(externalValueProvider != null){
-//			if(!providerExternallySet){
-				try {
-					valueProvider = externalValueProvider.newInstance();
-					providerExternallySet = true;
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-//			}
+			//			if(!providerExternallySet){
+			try {
+				valueProvider = externalValueProvider.newInstance();
+				providerExternallySet = true;
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			//			}
+		} else {
+			valueProvider = new DialogAttributeValueProvider(mapping);
 		}
-		valueProvider = new DialogAttributeValueProvider(mapping);
 		return valueProvider;
 	}
 
