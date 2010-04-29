@@ -19,6 +19,7 @@ import org.eclipse.emf.compare.diff.metamodel.DiffElement;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.diff.service.DiffService;
+import org.eclipse.emf.compare.match.metamodel.MatchElement;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
 import org.eclipse.emf.compare.match.metamodel.UnmatchElement;
 import org.eclipse.emf.compare.match.service.MatchService;
@@ -152,16 +153,42 @@ public class ContinuedRefactoringTest extends TestClass {
 			Assert.fail("Exception occurred");
 		}
 		try {
-			MatchModel matchModel = MatchService.doMatch(expectedModel, refactoredModel, Collections.<String, Object>emptyMap());
-			DiffModel inputDiff = DiffService.doDiff(matchModel);
-
-			DiffGroup diffGroup = (DiffGroup) inputDiff.getOwnedElements().get(0);
-			if (diffGroup.getSubchanges() != 0) {
-				Assert.fail("Refactored model does not match expected result.");
-			}
+			MatchModel matchModel = MatchService.doMatch(expectedModel, refactoredModel, Collections.<String, Object>emptyMap());			
+			List<MatchElement> matchedElements = matchModel.getMatchedElements();
+			double similarity = sumSimilarity(matchedElements);
+			int count = sumMatches(matchedElements);
+			double ratio = count/ similarity;
+			assertTrue("Similarity must be 1.0 but is " + ratio, ratio == 1.0);
+			
+//			DiffModel inputDiff = DiffService.doDiff(matchModel);
+//
+//			DiffGroup diffGroup = (DiffGroup) inputDiff.getOwnedElements().get(0);
+//			if (diffGroup.getSubchanges() != 0) {
+//				Assert.fail("Refactored model does not match expected result.");
+//			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			Assert.fail("Exception occurred");
 		}
+	}
+
+	private double sumSimilarity(List<MatchElement> matchedElements) {
+		double similarity = 0.0;
+		for (MatchElement matchElement : matchedElements) {
+			similarity += matchElement.getSimilarity();
+			List<MatchElement> subMatches = matchElement.getSubMatchElements();
+			similarity += sumSimilarity(subMatches);
+		}
+		return similarity;
+	}
+	
+	private int sumMatches(List<MatchElement> matchedElements) {
+		int matches = 0;
+		for (MatchElement matchElement : matchedElements) {
+			matches++;
+			List<MatchElement> subMatches = matchElement.getSubMatchElements();
+			matches += sumSimilarity(subMatches);
+		}
+		return matches;
 	}
 }
