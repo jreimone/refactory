@@ -13,6 +13,13 @@
       </rolemapping>
    </extension>
 
+	<extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/deriveCompositeInterface.rolemapping">
+      </rolemapping>
+   </extension>
+
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
