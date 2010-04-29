@@ -7,12 +7,12 @@ FOR <http://www.eclipse.org/uml2/3.0.0/UML>
 CreateSubInterface maps <IntroduceReferenceClass> {
 	 
 	 DerivationContainer := Package {
-	 	derivation := ownedElement;
+	 	derivation := packagedElement;
 	 };
 	 
 	 // TODO jreimann: remove mapping of second attribute
 	 Derivation := Interface(attribute1 -> name, attribute2 -> name) {
-	 	derivees := redefinedClassifier;
+	 	derivees := redefinedInterface;
 	 };
 	 
 	 Derivee := Interface;
