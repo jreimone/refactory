@@ -9,6 +9,7 @@ Refactorings for UML2 class diagrams
 * Create Superclass - creates a new super-class of a class.
 
 * Hide Property - makes a non-private attribute/property of a given class private and creates getter and setter operations for it. In the literature, this refactoring is called [Attribute/Field/Property Privatization] and [Encapsulate Attribute/Field/Property].
+* Show Property - makes a non-visible property public and removes its getter and setter operations. It is the opposite of refactoring [Hide Property].
 
 * Push Down Operation - pushes an operation down to all its sub-classes. Sometimes it is also called [Push Down Method] and it is the opposite of refactoring [Pull Up Operation].
 * Push Down Property - moves a property of a class to all of its sub-classes. It is the opposite of refactoring [Pull Up Property].
@@ -17,8 +18,6 @@ Refactorings for UML2 class diagrams
 * Remove Empty Subclass - removes a completely empty subclass of a classes and is the opposite of refactoring [Create Subclass].
 * Remove Empty Subinterface - removes a completely empty subinterface of an interface and is the opposite of refactoring [Create Subinterface].
 * Remove Empty Superclass - removes a completely empty superclass of a set of classes.
-
-* Show Property - makes a non-visible property public and removes its getter and setter operations. It is the opposite of refactoring [Hide Property].
 
 Refactorings for UML2 state machines
 
