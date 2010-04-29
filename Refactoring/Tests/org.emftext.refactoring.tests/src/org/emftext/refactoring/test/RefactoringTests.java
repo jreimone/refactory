@@ -27,6 +27,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.uml2.uml.UMLPackage;
+import org.eclipse.uml2.uml.internal.resource.UML22UMLResourceFactoryImpl;
+import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
 import org.emftext.language.java.JavaPackage;
@@ -553,22 +556,25 @@ public class RefactoringTests extends TestCase{
 		EPackage.Registry.INSTANCE.put(TextadventurePackage.eNS_URI, TextadventurePackage.eINSTANCE);
 		// all java packages
 		EPackage.Registry.INSTANCE.put(JavaPackage.eNS_URI, JavaPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 		//		EPackage.Registry.INSTANCE.put(ContainersPackage.eNS_URI, ContainersPackage.eINSTANCE);
 		//		EPackage.Registry.INSTANCE.put(MembersPackage.eNS_URI, MembersPackage.eINSTANCE);
 	}
 
 	private static void registerResourceFactories(){
 		// needed for refactorings
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("rolestext", new RolestextResourceFactory());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("rolemapping", new RolemappingResourceFactory());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("refspec", new RefspecResourceFactory());
+		Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+		extensionToFactoryMap.put("rolestext", new RolestextResourceFactory());
+		extensionToFactoryMap.put("rolemapping", new RolemappingResourceFactory());
+		extensionToFactoryMap.put("refspec", new RefspecResourceFactory());
 		// properties
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("properties", new PropertiesResourceFactory());
+		extensionToFactoryMap.put("properties", new PropertiesResourceFactory());
 		// arbitrary metamodels
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pl0", new Pl0ResourceFactory());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("conference", new ConferenceResourceFactory());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("java", new JavaSourceOrClassFileResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tas", new TasResourceFactory());
+		extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl());
+		extensionToFactoryMap.put("pl0", new Pl0ResourceFactory());
+		extensionToFactoryMap.put("conference", new ConferenceResourceFactory());
+		extensionToFactoryMap.put("java", new JavaSourceOrClassFileResourceFactoryImpl());
+		extensionToFactoryMap.put("tas", new TasResourceFactory());
+		extensionToFactoryMap.put("uml", new UMLResourceFactoryImpl());
 	}
 }
