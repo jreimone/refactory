@@ -6,7 +6,6 @@ Refactorings for UML2 class diagrams
 * Create Associated Class - creates an empty class and connects it with a new association to the source class from where it is extracted.
 * Create Intermediate Superclass - creates an empty class in between a selected class and one of its superclasses.
 
-* Create Subinterface - creates an empty subinterface of a selected interface.
 * Create Superclass - creates a new super-class of a class.
 
 * Hide Property - makes a non-private attribute/property of a given class private and creates getter and setter operations for it. In the literature, this refactoring is called [Attribute/Field/Property Privatization] and [Encapsulate Attribute/Field/Property].

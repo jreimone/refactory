@@ -31,6 +31,9 @@
       <rolemapping
             rolemapping_resource="rolemappings/extractInterface.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/createSubInterface.rolemapping">
+      </rolemapping>
   </extension>
 
 	<!-- post processors -->

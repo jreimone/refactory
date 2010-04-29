@@ -12,10 +12,11 @@ CreateSubclass maps <IntroduceReferenceClass> {
 	 	derivation := ownedElement;
 	 };
 	 
-	 Derivation := Class(attribute1 -> name) {
-	 	derivees := constrainedFeatures;
+	 // TODO jreimann: remove mapping of second attribute
+	 Derivation := Class(attribute1 -> name, attribute2 -> name) {
+	 	derivees := redefinedClassifier;
 	 };
 	 
-	 Derivee := Feature;
+	 Derivee := Class;
 }	
 	
