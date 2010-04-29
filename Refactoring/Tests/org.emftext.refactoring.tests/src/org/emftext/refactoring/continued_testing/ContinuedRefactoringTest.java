@@ -15,6 +15,10 @@ import junit.framework.Assert;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.compare.diff.metamodel.DiffElement;
+import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
+import org.eclipse.emf.compare.diff.metamodel.DiffModel;
+import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
 import org.eclipse.emf.compare.match.metamodel.UnmatchElement;
 import org.eclipse.emf.compare.match.service.MatchService;
@@ -76,11 +80,11 @@ public class ContinuedRefactoringTest extends TestClass {
 		assertNotNull(path);
 		String query = QueryUtil.getLineInFile(path, 1);
 		List<EObject> elements = QueryUtil.queryModel(inputModel, query);
-		assertNotNull(elements);
+		assertNotNull("No elements found in given selection path.", elements);
 		assertTrue(elements.size() > 0);
 		
 		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(inputResource);
-		assertNotNull(refactorer);
+		assertNotNull("No refactoring found.", refactorer);
 		
 		refactorer.setInput(elements);
 		List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
@@ -149,8 +153,12 @@ public class ContinuedRefactoringTest extends TestClass {
 		}
 		try {
 			MatchModel matchModel = MatchService.doMatch(expectedModel, refactoredModel, Collections.<String, Object>emptyMap());
-			List<UnmatchElement> unmatches = matchModel.getUnmatchedElements();
-			assertTrue(unmatches.size() == 0);
+			DiffModel inputDiff = DiffService.doDiff(matchModel);
+
+			DiffGroup diffGroup = (DiffGroup) inputDiff.getOwnedElements().get(0);
+			if (diffGroup.getSubchanges() != 0) {
+				Assert.fail("Refactored model does not match expected result.");
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			Assert.fail("Exception occurred");
