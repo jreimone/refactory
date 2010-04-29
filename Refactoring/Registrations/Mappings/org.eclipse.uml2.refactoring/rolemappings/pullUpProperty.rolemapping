@@ -9,10 +9,10 @@ PullUpProperty maps <MoveX> {
 
 	Movee := Property;
 	SourceContainer := Class {
-		sourceContainment := ownedElement;
-		containerReference := superClass;
+		sourceContainment := ownedAttribute;
+		containerReference := redefinedClassifier;
 	};
 	TargetContainer := Class {
-		targetContainment := ownedElement;
+		targetContainment := ownedAttribute;
 	};
 } 
