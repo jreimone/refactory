@@ -12,8 +12,6 @@
         eType="#//Role" eOpposite="#//Role/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//Role" eOpposite="#//Role/incoming"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifier" unique="false"
-        upperBound="-1" eType="#//CollaborationModifier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationContext"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
@@ -30,7 +28,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="RoleModel" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
         eType="#//Role" containment="true" eKeys="#//NamedElement/name"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collaborations" upperBound="-1"
         eType="#//Collaboration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Multiplicity">
@@ -55,7 +53,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="RoleImplication" eSuperTypes="#//Collaboration"/>
   <eClassifiers xsi:type="ecore:EEnum" name="RoleModifier">
     <eLiterals name="optional"/>
-    <eLiterals name="runtime" value="1"/>
     <eLiterals name="input" value="2"/>
     <eLiterals name="super" value="3"/>
   </eClassifiers>
@@ -64,8 +61,6 @@
     <eLiterals name="reflexive" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleAttribute" eSuperTypes="#//NamedElement #//RoleFeature">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifier" unique="false"
-        upperBound="-1" eType="#//RoleModifier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributeRole" lowerBound="1"
         eType="#//Role" eOpposite="#//Role/attributes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationContext"
