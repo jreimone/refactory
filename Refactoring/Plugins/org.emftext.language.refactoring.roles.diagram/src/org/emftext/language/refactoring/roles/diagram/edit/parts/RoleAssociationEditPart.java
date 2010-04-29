@@ -129,7 +129,7 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements
 		 */
 		public RoleAssociationFigure() {
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.green);
+			this.setForegroundColor(ColorConstants.black);
 
 			createContents();
 			setTargetDecoration(createTargetDecoration());

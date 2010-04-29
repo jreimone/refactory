@@ -70,7 +70,7 @@ public class RoleImplicationEditPart extends ConnectionNodeEditPart implements
 		 */
 		public RoleImplicationFigure() {
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.orange);
+			this.setForegroundColor(ColorConstants.black);
 
 			setTargetDecoration(createTargetDecoration());
 		}
