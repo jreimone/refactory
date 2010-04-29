@@ -114,7 +114,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_0IicoRblEd-v66FqVrAtPg" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="roles_paper.ecore#//RoleProhibition"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0IicohblEd-v66FqVrAtPg" x="90" y="115"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0IicohblEd-v66FqVrAtPg" x="90" y="115" width="118"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_0IicrBblEd-v66FqVrAtPg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_0IjDsBblEd-v66FqVrAtPg" type="4001"/>
@@ -162,7 +162,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_0IjqyRblEd-v66FqVrAtPg" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="roles_paper.ecore#//RoleImplication"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0IjqyhblEd-v66FqVrAtPg" x="90" y="170"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0IjqyhblEd-v66FqVrAtPg" x="90" y="170" width="118"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_EGEcABfFEd-NefjSuvLqKQ" type="1005">
     <children xmi:type="notation:Node" xmi:id="_EGFqIBfFEd-NefjSuvLqKQ" type="4010"/>
@@ -304,7 +304,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_0ImuEhblEd-v66FqVrAtPg" type="3002" source="_0IhOgBblEd-v66FqVrAtPg" target="_0IgAZBblEd-v66FqVrAtPg">
     <children xmi:type="notation:Node" xmi:id="_0InVIBblEd-v66FqVrAtPg" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_0InVIRblEd-v66FqVrAtPg" x="-19" y="24"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_0InVIRblEd-v66FqVrAtPg" x="-24" y="24"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_0In8MBblEd-v66FqVrAtPg" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_0In8MRblEd-v66FqVrAtPg" x="1" y="9"/>
