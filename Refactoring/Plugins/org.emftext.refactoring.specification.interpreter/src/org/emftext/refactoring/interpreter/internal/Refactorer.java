@@ -185,7 +185,7 @@ public class Refactorer implements IRefactorer {
 		// copy start
 		for (Resource resource : refactoredModelRS.getResources()) {
 			URI uri = resource.getURI();
-			if(uri.isPlatformResource()){
+			if(uri.isPlatformResource() || uri.isFile()){
 				for (EObject model : resource.getContents()) {
 					originalElements.add(model);
 				}
