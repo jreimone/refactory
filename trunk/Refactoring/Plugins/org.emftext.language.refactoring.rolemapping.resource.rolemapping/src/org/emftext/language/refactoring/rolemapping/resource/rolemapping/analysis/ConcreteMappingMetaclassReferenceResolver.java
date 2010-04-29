@@ -44,6 +44,9 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 				Map<String, EClass> eClassMap = getEClassesFromEPackage(targetMetamodel);
 				if (!eClassMap.isEmpty()) {
 					for (String key : eClassMap.keySet()) {
+						if (key == null) {
+							continue;
+						}
 						if (key.equals(identifier) || resolveFuzzy) {
 							result.addMapping(key, eClassMap.get(key));
 							if (!resolveFuzzy) {
