@@ -69,7 +69,7 @@ public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements
 		 */
 		public RoleProhibitionFigure() {
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.red);
+			this.setForegroundColor(ColorConstants.black);
 
 			setSourceDecoration(createSourceDecoration());
 			setTargetDecoration(createTargetDecoration());

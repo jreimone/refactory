@@ -133,7 +133,7 @@ public class RoleCompositionEditPart extends ConnectionNodeEditPart implements
 		 */
 		public RoleCompositionFigure() {
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.cyan);
+			this.setForegroundColor(ColorConstants.black);
 
 			createContents();
 			setSourceDecoration(createSourceDecoration());

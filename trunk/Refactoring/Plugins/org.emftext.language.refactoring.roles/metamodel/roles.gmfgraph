@@ -82,7 +82,7 @@
           targetDecoration="//@figures.0/@figures.4">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="orange"/>
+            value="black"/>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -95,7 +95,7 @@
           targetDecoration="//@figures.0/@figures.3">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="black"/>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -107,7 +107,7 @@
           targetDecoration="//@figures.0/@figures.1">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="green"/>
+            value="black"/>
         <children
             xsi:type="gmfgraph:Label"
             name="SourceNameLabelFigure"
@@ -133,7 +133,7 @@
           sourceDecoration="//@figures.0/@figures.2">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="cyan"/>
+            value="black"/>
         <children
             xsi:type="gmfgraph:Label"
             name="CompositionSourceNameLabelFigure"
