@@ -6,17 +6,16 @@ ExtractSuperClass maps <ExtractX> {
 	Extractee := Property;
 	
 	OrigContainer := Class {
-		extracts := ownedElement;
+		extracts := ownedAttribute;
 		reference := superClass;
 	};
 	
-	NewContainer := Class(newName -> name)
-	{
-		moved := ownedElement;
+	NewContainer := Class(newName -> name){
+		moved := ownedAttribute;
 	};
 	
 	ContainerContainer := Package {
-		source := ownedElement;
-		target := ownedElement;
+		source := packagedElement;
+		target := packagedElement;
 	};
 }
