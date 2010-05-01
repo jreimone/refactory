@@ -157,7 +157,7 @@ public class ContinuedRefactoringTest extends TestClass {
 			List<MatchElement> matchedElements = matchModel.getMatchedElements();
 			double similarity = sumSimilarity(matchedElements);
 			int count = sumMatches(matchedElements);
-			double ratio = count/ similarity;
+			double ratio = similarity / count;
 			assertTrue("Similarity must be 1.0 but is " + ratio, ratio == 1.0);
 			
 //			DiffModel inputDiff = DiffService.doDiff(matchModel);
@@ -187,7 +187,7 @@ public class ContinuedRefactoringTest extends TestClass {
 		for (MatchElement matchElement : matchedElements) {
 			matches++;
 			List<MatchElement> subMatches = matchElement.getSubMatchElements();
-			matches += sumSimilarity(subMatches);
+			matches += sumMatches(subMatches);
 		}
 		return matches;
 	}
