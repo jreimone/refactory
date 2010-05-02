@@ -1,0 +1,6 @@
+ROLEMODELMAPPING RenameIdentifiable 
+FOR <http://stp.eclipse.org/bpmn>  
+
+RenameIdentifiable maps <RenameX> { 
+	 Nameable := Identifiable(name -> iD); 
+}

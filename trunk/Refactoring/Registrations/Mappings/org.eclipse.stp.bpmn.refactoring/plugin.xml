@@ -6,6 +6,9 @@
       <rolemapping
             rolemapping_resource="mappings/ExtractSubProcess.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="mappings/RenameIdentifiable.rolemapping">
+      </rolemapping>
    </extension>
    <extension
          point="org.emftext.refactoring.postprocessor">
