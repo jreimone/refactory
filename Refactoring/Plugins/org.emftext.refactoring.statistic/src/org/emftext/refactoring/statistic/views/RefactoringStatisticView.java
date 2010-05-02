@@ -654,6 +654,7 @@ public class RefactoringStatisticView extends ViewPart {
 					if(!tempDir.isDirectory()){
 						success = tempDir.mkdir();
 					}
+					int totalMappings = 0;
 					if(success){
 						Map<EPackage, Map<RoleModel, Integer>> mappingCountMap = new LinkedHashMap<EPackage, Map<RoleModel, Integer>>();
 						List<RoleModel> roleModels = new LinkedList<RoleModel>();
@@ -717,7 +718,7 @@ public class RefactoringStatisticView extends ViewPart {
 							writer.append("c|");
 						}
 						writer.append("}\n");
-						writer.append("\\caption{Refactorings applied to metamodels}\\\\\n");
+						writer.append("\\caption{Refactorings applied to metamodels}\\label{tab:evaluation}\\\\\n");
 						writer.append("\\hline\n");
 						for (EPackage ePackage : metamodels) {
 							String metamodelString = StringUtil.firstLetterUpperCase(ePackage.getName()).replaceAll("_", " ");
@@ -735,6 +736,7 @@ public class RefactoringStatisticView extends ViewPart {
 									ppCountValue = ppCount.get(roleModel);
 								}
 								Integer mappingCount = countMap.get(roleModel);
+								totalMappings += mappingCount == null ? 0 : mappingCount;
 								String mappingCountString = (mappingCount == null) ? "" : "" + mappingCount; 
 								String ppString = (ppCountValue == null) ? "" : "(" + ppCountValue + ")";
 								String metamodelString = StringUtil.firstLetterUpperCase(ePackage.getName()).replaceAll("_", " ");
@@ -748,6 +750,7 @@ public class RefactoringStatisticView extends ViewPart {
 						writer.append("\\endgroup\n");
 						writer.close();
 					}
+					System.out.println("RefactoringStatisticView.makeSimpleLatexTableGenAction() total mappings " + totalMappings);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
