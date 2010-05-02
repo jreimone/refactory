@@ -88,6 +88,7 @@ public class RefactoringStatisticView extends ViewPart {
 	 */
 	public static final String ID = "org.emftext.refactoring.statistic.views.RefactoringStatisticView";
 	private static final String EVEN_COLOR = "#D3D3D3";
+	private static final String ZOO_PREFIX = "EMFText_Concrete_Syntax_Zoo_";
 
 	private TreeViewer viewer;
 	private DrillDownAdapter drillDownAdapter;
@@ -600,13 +601,13 @@ public class RefactoringStatisticView extends ViewPart {
 										String metamodelShort = StringUtil.firstLetterUpperCase(metamodel.getName());
 										TreeObject[] mappingChildren = ((TreeParent) metamodelChild).getChildren();
 										if(mappingChildren.length > 1){
-											writer.append("| [[URLtoMetamodel|" + metamodelShort + "]]\n");
+											writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
 											writer.append("| \n");
 											writer.append("{| \n");
 											for (TreeObject mappingChild : mappingChildren) {
 												if(mappingChild instanceof TreeLeaf){
 													Mapping mapping = (Mapping) mappingChild.getObject();		
-													writer.append(" | [[Refactoring:" + roleModelName + ":" + metamodelShort +":" + mapping.getName() + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
+													writer.append(" | [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName() + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
 													writer.append(" |- \n");
 												}
 											}
@@ -621,8 +622,8 @@ public class RefactoringStatisticView extends ViewPart {
 										} else {
 											TreeObject mappingLeaf = mappingChildren[0];
 											Mapping mapping = (Mapping) mappingLeaf.getObject();
-											writer.append("| [[URLtoMetamodel|" + metamodelShort + "]]\n");
-											writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
+											writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
+											writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName() + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
 											even++;
 											if(even % 2 == 0){
 												style = "style=\"background:" + EVEN_COLOR + ";\"";
