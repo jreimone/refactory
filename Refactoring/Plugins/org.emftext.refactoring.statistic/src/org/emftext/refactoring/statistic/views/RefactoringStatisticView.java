@@ -87,6 +87,7 @@ public class RefactoringStatisticView extends ViewPart {
 	 * The ID of the view as specified by the extension.
 	 */
 	public static final String ID = "org.emftext.refactoring.statistic.views.RefactoringStatisticView";
+	private static final String EVEN_COLOR = "#D3D3D3";
 
 	private TreeViewer viewer;
 	private DrillDownAdapter drillDownAdapter;
@@ -490,7 +491,7 @@ public class RefactoringStatisticView extends ViewPart {
 		hookContextMenu();
 		hookDoubleClickAction();
 		contributeToActionBars();
-		viewer.expandAll();
+		viewer.expandToLevel(2);
 	}
 
 	private void hookContextMenu() {
@@ -587,7 +588,7 @@ public class RefactoringStatisticView extends ViewPart {
 								writer.append("! width=\"50%\" align=\"right\" |\n");
 								even++;
 								if(even % 2 == 0){
-									style = "style=\"background:#EAEAEA;\"";
+									style = "style=\"background:" + EVEN_COLOR + ";\"";
 								} else {
 									style = "";
 								}
@@ -610,7 +611,13 @@ public class RefactoringStatisticView extends ViewPart {
 												}
 											}
 											writer.append(" |} \n");
-											writer.append("|- \n");
+											even++;
+											if(even % 2 == 0){
+												style = "style=\"background:" + EVEN_COLOR + ";\"";
+											} else {
+												style = "";
+											}
+											writer.append("|- " + style + "\n");
 										} else {
 											TreeObject mappingLeaf = mappingChildren[0];
 											Mapping mapping = (Mapping) mappingLeaf.getObject();
@@ -618,7 +625,7 @@ public class RefactoringStatisticView extends ViewPart {
 											writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
 											even++;
 											if(even % 2 == 0){
-												style = "style=\"background:#EAEAEA;\"";
+												style = "style=\"background:" + EVEN_COLOR + ";\"";
 											} else {
 												style = "";
 											}
