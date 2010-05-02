@@ -6,6 +6,12 @@
       <rolemapping
             rolemapping_resource="mappings/ExtractRoom.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="mappings/renameRoom.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="mappings/renameDoor.rolemapping">
+      </rolemapping>
    </extension>
 
 </plugin>

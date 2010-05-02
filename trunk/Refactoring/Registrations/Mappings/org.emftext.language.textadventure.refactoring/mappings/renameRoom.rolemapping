@@ -1,0 +1,6 @@
+ROLEMODELMAPPING RenameRoom
+FOR <http://www.emftext.org/language/textadventure> 
+
+RenameRoom maps <RenameX> { 
+	 Nameable := Room(name -> name); 
+}
