@@ -4,7 +4,10 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/featuremapper.rolemapping">
+            rolemapping_resource="rolemappings/introduceConstraint.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/renameFeature.rolemapping">
       </rolemapping>
    </extension>
 
