@@ -4,7 +4,10 @@
 	<!-- Register role mappings -->
 	<extension point="org.emftext.refactoring.rolemapping">
 		<rolemapping
-			rolemapping_resource="rolemapping/concretessyntax.rolemapping">
+			rolemapping_resource="rolemapping/extractRule.rolemapping">
+		</rolemapping>
+		<rolemapping
+			rolemapping_resource="rolemapping/renameToken.rolemapping">
 		</rolemapping>
 	</extension>
 
