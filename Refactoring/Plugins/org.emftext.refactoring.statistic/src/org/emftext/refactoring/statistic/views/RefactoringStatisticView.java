@@ -722,7 +722,7 @@ public class RefactoringStatisticView extends ViewPart {
 						for (EPackage ePackage : metamodels) {
 							String metamodelString = StringUtil.firstLetterUpperCase(ePackage.getName()).replaceAll("_", " ");
 //							writer.append(" & \\multicolumn{1}{R{3cm}|}{\\textbf{" + metamodelString + "}}");
-							writer.append(" & \\multicolumn{1}{R{3cm}|}{" + metamodelString + "}");
+							writer.append(" & \\multicolumn{1}{R{2.5cm}|}{" + metamodelString + "}\n");
 						}
 						writer.append("\\\\ \\hline\n\n");
 						for (RoleModel roleModel : roleModels) {
@@ -737,13 +737,14 @@ public class RefactoringStatisticView extends ViewPart {
 								Integer mappingCount = countMap.get(roleModel);
 								String mappingCountString = (mappingCount == null) ? "" : "" + mappingCount; 
 								String ppString = (ppCountValue == null) ? "" : "(" + ppCountValue + ")";
-								writer.append(" & " + mappingCountString + ppString);
+								String metamodelString = StringUtil.firstLetterUpperCase(ePackage.getName()).replaceAll("_", " ");
+								writer.append("\n & " + mappingCountString + ppString + "%" + metamodelString);
 							}
-							writer.append("\\\\ \\hline\n");
+							writer.append("\n\\\\ \\hline\n\n");
 						}
 //						writer.append("\\multicolumn{4}{l}{MP = Mapping Count (quantity the role model was mapped)} \\\\\n");
 //						writer.append("\\multicolumn{4}{l}{PP = Post Processors (quantity of needed post processors)}\n");
-						writer.append("\n\\end{longtable}\n");
+						writer.append("\\end{longtable}\n");
 						writer.append("\\endgroup\n");
 						writer.close();
 					}
