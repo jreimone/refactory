@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EClass;
@@ -654,56 +655,95 @@ public class RefactoringStatisticView extends ViewPart {
 						success = tempDir.mkdir();
 					}
 					if(success){
-						File tableFile = File.createTempFile("refactoringsSimple_", ".latex", tempDir);
-						tableFile.deleteOnExit();
-						FileWriter writer = new FileWriter(tableFile);
-						writer.append("\\begingroup\n");
-						writer.append("\\footnotesize\n");
-						writer.append("\\begin{longtable}{|c|l|c|c|}\n");
-						writer.append("\\caption{Refactorings applied to metamodels}\\\\\n");
-						writer.append("\\hline\n");
-						writer.append("\\textbf{Generic Name} & \\textbf{Metamodel} & \\textbf{MP} & \\textbf{PP} \\\\ \\hline\n\n");
+						Map<EPackage, Map<RoleModel, Integer>> mappingCountMap = new LinkedHashMap<EPackage, Map<RoleModel, Integer>>();
+						List<RoleModel> roleModels = new LinkedList<RoleModel>();
+						Map<EPackage, Map<RoleModel, Integer>> ppCountMap = new LinkedHashMap<EPackage, Map<RoleModel, Integer>>();
 						for (TreeObject object : invisibleRoot.getChildren()) {
 							if(object instanceof TreeParent && !(object instanceof TreeMetaModelParent)){
 								TreeParent parent = (TreeParent) object;
 								RoleModel roleModel = (RoleModel) parent.getObject();
-								//								Map<EPackage, Integer> mappingCountMap = new LinkedHashMap<EPackage, Integer>();
-								Map<EPackage, Integer> ppCountMap = new LinkedHashMap<EPackage, Integer>();
+								roleModels.add(roleModel);
 								TreeObject[] roleModelChildren = parent.getChildren();
-								int count = parent.getChildren().length;
-								writer.append("\\multirow{" + count +"}{*}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}} \n");
+//								int count = parent.getChildren().length;
+//								writer.append("\\multirow{" + count +"}{*}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}} \n");
 								for (TreeObject treeObject : roleModelChildren) {
 									if(treeObject instanceof TreeMetaModelParent){
 										TreeMetaModelParent metamodelParent = (TreeMetaModelParent) treeObject;
-										int mappingCount = metamodelParent.getChildren().length;
 										EPackage metamodel= metamodelParent.getMetamodel();
+										Map<RoleModel, Integer> metamodelMap = mappingCountMap.get(metamodel);
+										if(metamodelMap == null){
+											metamodelMap = new LinkedHashMap<RoleModel, Integer>();
+											mappingCountMap.put(metamodel, metamodelMap);
+										}
+										int mappingCount = metamodelParent.getChildren().length;
+										metamodelMap.put(roleModel, mappingCount);
 										TreeObject[] children = metamodelParent.getChildren();
 										for (TreeObject child : children) {
 											if(child instanceof TreeLeaf){
 												TreeLeaf leaf = (TreeLeaf) child;
 												boolean hasPostProcessor = leaf.hasPostProcessorRegistered();
 												if(hasPostProcessor){
-													if(ppCountMap.get(metamodel) == null){
-														ppCountMap.put(metamodel, 1);
+													Map<RoleModel, Integer> ppCount = ppCountMap.get(metamodel);
+													if(ppCount == null){
+														ppCount = new LinkedHashMap<RoleModel, Integer>();
+														ppCountMap.put(metamodel, ppCount);
+													}
+													if(ppCount.get(roleModel) == null){
+														ppCount.put(roleModel, 1);
 													} else {
-														ppCountMap.put(metamodel, ppCountMap.get(metamodel) + 1);
+														ppCount.put(roleModel, ppCount.get(roleModel) + 1);
 													}
 												}
 											}
 										}
-										count--;
+//										count--;
 										String mmName = StringUtil.firstLetterUpperCase(metamodel.getName());
 										mmName = mmName.replaceAll("_", " ");
-										Integer ppCount = ppCountMap.get(metamodel);
-										writer.append("& " + mmName + " & " + mappingCount + " & " + ((ppCount == null)?"":ppCount) + " \\\\ " + ((count == 0)?"\\hline":"\\cline{2-4}\n"));
+//										Integer ppCount = ppCountMap.get(metamodel);
+//										writer.append("& " + mmName + " & " + mappingCount + " & " + ((ppCount == null)?"":ppCount) + " \\\\ " + ((count == 0)?"\\hline":"\\cline{2-4}\n"));
 									}
 								}
-								writer.append("\n\n");
+//								writer.append("\n\n");
 							}
+						}						
+						Set<EPackage> metamodels = mappingCountMap.keySet();
+						File tableFile = File.createTempFile("refactoringsSimple_", ".latex", tempDir);
+						tableFile.deleteOnExit();
+						FileWriter writer = new FileWriter(tableFile);
+						writer.append("\\begingroup\n");
+						writer.append("\\footnotesize\n");
+						writer.append("\\begin{longtable}{|l|");
+						for (EPackage ePackage : metamodels) {
+							writer.append("c|");
 						}
-						writer.append("\\multicolumn{4}{l}{MP = Mapping Count (quantity the role model was mapped)} \\\\\n");
-						writer.append("\\multicolumn{4}{l}{PP = Post Processors (quantity of needed post processors)}\n");
-						writer.append("\\end{longtable}\n");
+						writer.append("}\n");
+						writer.append("\\caption{Refactorings applied to metamodels}\\\\\n");
+						writer.append("\\hline\n");
+						for (EPackage ePackage : metamodels) {
+							String metamodelString = StringUtil.firstLetterUpperCase(ePackage.getName()).replaceAll("_", " ");
+//							writer.append(" & \\multicolumn{1}{R{3cm}|}{\\textbf{" + metamodelString + "}}");
+							writer.append(" & \\multicolumn{1}{R{3cm}|}{" + metamodelString + "}");
+						}
+						writer.append("\\\\ \\hline\n\n");
+						for (RoleModel roleModel : roleModels) {
+							writer.append(StringUtil.convertCamelCaseToWords(roleModel.getName()));
+							for (EPackage ePackage : metamodels) {
+								Map<RoleModel, Integer> countMap = mappingCountMap.get(ePackage);
+								Map<RoleModel, Integer> ppCount = ppCountMap.get(ePackage);
+								Integer ppCountValue = null;
+								if(ppCount != null){
+									ppCountValue = ppCount.get(roleModel);
+								}
+								Integer mappingCount = countMap.get(roleModel);
+								String mappingCountString = (mappingCount == null) ? "" : "" + mappingCount; 
+								String ppString = (ppCountValue == null) ? "" : "(" + ppCountValue + ")";
+								writer.append(" & " + mappingCountString + ppString);
+							}
+							writer.append("\\\\ \\hline\n");
+						}
+//						writer.append("\\multicolumn{4}{l}{MP = Mapping Count (quantity the role model was mapped)} \\\\\n");
+//						writer.append("\\multicolumn{4}{l}{PP = Post Processors (quantity of needed post processors)}\n");
+						writer.append("\n\\end{longtable}\n");
 						writer.append("\\endgroup\n");
 						writer.close();
 					}
