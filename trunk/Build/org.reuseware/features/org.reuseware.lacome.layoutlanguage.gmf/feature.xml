@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.reuseware.coconut.diagrams"
-      label="Reuseware Feature: Diagram Composition Base"
+      id="org.reuseware.lacome.layoutlanguage.gmf"
+      label="LaCoMe GMF support"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://reuseware.org">
-      Support for composing Diagrams in Reuseware.
+      Support for composing GMF diagrams with LaCoMe.
    </description>
 
    <copyright>
@@ -32,27 +32,15 @@
    
 
    <requires>
-      <import feature="org.reuseware.coconut"/>
+      <import feature="org.reuseware.lacome"/>
+      <import feature="org.eclipse.gmf"/>
    </requires>
 
    <plugin
-         id="org.reuseware.coconut.fragment.diagrams.adjustment"
+         id="org.reuseware.lacome.layoutlanguage.gmf"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-   <plugin
-         id="org.reuseware.coconut.fragment.diagrams.odt"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-   <plugin
-         id="org.reuseware.coconut.fragment.diagrams.emftext"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
 
 </feature>

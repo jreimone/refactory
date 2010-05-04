@@ -174,25 +174,33 @@
 		
 		<buildfeature package="org.reuseware.coconut" version="${reuseware.version}"/>
 
-		<buildplugin name="Reuseware Diagram Composition Adjustment Algorithms"  package="org.reuseware.coconut.fragment.diagrams.adjustment" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware ODT Diagram Composition"        package="org.reuseware.coconut.fragment.diagrams.odt" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware EMFText Diagram Composition"    package="org.reuseware.coconut.fragment.diagrams.emftext" version="${reuseware.version}"/>
-		<buildfeature package="org.reuseware.coconut.diagrams"   version="${reuseware.version}"/>
+		<!-- LaCoMe -->
+		<buildplugin name="LaCoMe - Layout Composition Framework (Core)"  package="org.reuseware.lacome" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.lacome"   version="${reuseware.version}"/>
 
-		<buildplugin name="Reuseware GMF Diagram Composition"        package="org.reuseware.coconut.fragment.diagrams.gmf" version="${reuseware.version}"/>
-		<buildfeature package="org.reuseware.coconut.diagrams.gmf"   version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe GMF support"        package="org.reuseware.lacome.layoutlanguage.gmf" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.lacome.layoutlanguage.gmf"   version="${reuseware.version}"/>
 		
-		<buildplugin name="Reuseware RSA Diagram Composition"        package="org.reuseware.coconut.fragment.diagrams.rsa" version="${reuseware.version}"/>	
-		<buildfeature package="org.reuseware.coconut.diagrams.rsa"   version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe RSA support"        package="org.reuseware.lacome.layoutlanguage.rsa" version="${reuseware.version}"/>	
+		<buildfeature package="org.reuseware.lacome.layoutlanguage.rsa"   version="${reuseware.version}"/>
 
-		<buildplugin name="Reuseware TOPCASED Diagram Composition"   package="org.reuseware.coconut.fragment.diagrams.topcased" version="${reuseware.version}"/>	
-		<buildfeature package="org.reuseware.coconut.diagrams.topcased"    version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe TOPCASED support"   package="org.reuseware.lacome.layoutlanguage.topcased" version="${reuseware.version}"/>	
+		<buildfeature package="org.reuseware.lacome.layoutlanguage.topcased"    version="${reuseware.version}"/>
 		
+		<buildplugin name="LaCoMe OpenOffice support"        package="org.reuseware.lacome.layoutlanguage.odt" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.lacome.layoutlanguage.odt"   version="${reuseware.version}"/>
+		
+		<buildplugin name="LaCoMe EMFText support"    package="org.reuseware.lacome.layoutlanguage.emftext" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.lacome.layoutlanguage.emftext"   version="${reuseware.version}"/>
+
+		
+		<!-- Rount-Trip -->
 		<buildplugin name="Reuseware Round-trip support"             package="org.reuseware.coconut.roundtrip" version="${reuseware.version}"/>
 		<!-- TODO Activate this when multiple handlers are supported and add it to feature
 		<buildplugin name="Reuseware Round-trip Interactive"   package="org.reuseware.coconut.roundtrip.security_dsl" version="${reuseware.version}"/> -->
 		<buildfeature package="org.reuseware.coconut.roundtrip"      version="${reuseware.version}"/>
 		
+		<!-- Sokan -->
 		<buildplugin name="Reuseware Library Metamodel"      package="org.reuseware.coconut.description"          version="${reuseware.version}"/>
 		<buildplugin name="Reuseware Library Metamodel Edit" package="org.reuseware.coconut.description.edit"     version="${reuseware.version}"/>
 		<buildplugin name="Reuseware Library Classify"       package="org.reuseware.coconut.description.classify" version="${reuseware.version}"/>

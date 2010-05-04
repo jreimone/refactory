@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.reuseware.coconut.diagrams.rsa"
-      label="Reuseware Feature: RSA Diagram Composition"
+      id="org.reuseware.lacome"
+      label="LaCoMe - Layout Composition Framework (Core)"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://reuseware.org">
-      Support for composing RSA Diagrams in Reuseware.
+      A generic and extensible layout composition framework.
    </description>
 
    <copyright>
@@ -27,13 +27,8 @@
       - initial API and implementation 
    </license>
 
-   <requires>
-      <import feature="org.reuseware.coconut"/>
-      <import feature="org.reuseware.coconut.diagrams.gmf"/>
-   </requires>
-
    <plugin
-         id="org.reuseware.coconut.fragment.diagrams.rsa"
+         id="org.reuseware.lacome"
          download-size="0"
          install-size="0"
          version="0.0.0"
