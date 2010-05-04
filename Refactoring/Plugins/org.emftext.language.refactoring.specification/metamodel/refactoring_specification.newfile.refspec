@@ -1,0 +1,5 @@
+REFACTORING FOR <RenameXample> 
+
+STEPS { 
+	assign Nameable.name; 	
+} 
