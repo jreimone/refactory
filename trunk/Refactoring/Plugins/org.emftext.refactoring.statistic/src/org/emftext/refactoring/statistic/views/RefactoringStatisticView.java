@@ -303,6 +303,9 @@ public class RefactoringStatisticView extends ViewPart {
 					TreeParent modelParent = new TreeParent(roleModel);
 					invisibleRoot.addChild(modelParent);
 					Map<EPackage, List<Mapping>> metamodelMappingsMap = roleModelMetamodelMappingsMap.get(roleModel);
+					if(metamodelMappingsMap == null){
+						continue;
+					}
 					for (EPackage metamodel : metamodelMappingsMap.keySet()) {
 						TreeMetaModelParent metamodelParent = new TreeMetaModelParent(metamodel);
 						modelParent.addChild(metamodelParent);
