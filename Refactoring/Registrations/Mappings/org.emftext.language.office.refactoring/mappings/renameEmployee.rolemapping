@@ -1,4 +1,4 @@
-ROLEMODELMAPPING renameEmployee FOR <http://emftext.org/office> 
+ROLEMODELMAPPING FOR <http://emftext.org/office> 
 
 RenameEmployee maps <RenameX> { 
 	 Nameable := Employee(name -> name); 

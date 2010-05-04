@@ -1,4 +1,4 @@
-ROLEMODELMAPPING introduceItemGroup FOR <http://www.emftext.org/language/forms> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/forms> 
 
 IntroduceItemGroup maps <ExtractXwithReferenceClass> {
 

@@ -1,5 +1,4 @@
-ROLEMODELMAPPING RenameToken 
-FOR <http://www.emftext.org/sdk/concretesyntax> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/sdk/concretesyntax> 
 
 RenameToken maps <RenameX> { 
 	 Nameable := AbstractTokenDefinition(name -> name); 

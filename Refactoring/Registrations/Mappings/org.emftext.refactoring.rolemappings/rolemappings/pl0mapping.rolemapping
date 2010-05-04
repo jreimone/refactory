@@ -1,4 +1,4 @@
-ROLEMODELMAPPING PL0Mapping FOR <http://www.emftext.org/language/pl0> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0> 
 
 ExtractProcedure maps <ExtractXwithReferenceClass> { 
 	OrigContainer := Body {

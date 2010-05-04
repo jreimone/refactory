@@ -1,5 +1,4 @@
-ROLEMODELMAPPING pullUpOperationToInterface 
-FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
 
 /**
  * Pull Up Operation To Interface - moves an operation of a class to 

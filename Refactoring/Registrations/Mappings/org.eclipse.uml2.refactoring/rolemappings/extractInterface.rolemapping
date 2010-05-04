@@ -1,5 +1,4 @@
-ROLEMODELMAPPING extractInterface 
-FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
 
 /**
  * Extracts a set of operations from an existing class to

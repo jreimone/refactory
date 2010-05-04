@@ -1,4 +1,4 @@
-ROLEMODELMAPPING ExtractRule FOR <http://www.emftext.org/sdk/concretesyntax> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/sdk/concretesyntax> 
 
 ExtractRule maps <ExtractXwithReferenceClass> { 
 	Extract := SyntaxElement ;

@@ -1,4 +1,4 @@
-ROLEMODELMAPPING featuremapper FOR <http://www.tudresden.de/feature> 
+ROLEMODELMAPPING FOR <http://www.tudresden.de/feature> 
 
 IntroduceConstraint maps <IntroduceReferenceClass> { 
 	 

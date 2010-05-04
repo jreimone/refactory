@@ -1,5 +1,4 @@
-ROLEMODELMAPPING DeriveCompositeInterface 
-FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 DeriveCompositeInterface maps <IntroduceReferenceClass> { 
 	 

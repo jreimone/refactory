@@ -1,4 +1,4 @@
-ROLEMODELMAPPING bpmn FOR <http://stp.eclipse.org/bpmn> 
+ROLEMODELMAPPING FOR <http://stp.eclipse.org/bpmn> 
 
 ExtractSubProcess maps <ExtractXwithReferenceClass> {
 	Extract := Activity;

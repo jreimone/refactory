@@ -1,5 +1,4 @@
-ROLEMODELMAPPING RenameOption 
-FOR <http://www.emftext.org/language/forms> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/forms> 
 
 RenameOption maps <RenameX> { 
 	 Nameable := Option(name -> id); 

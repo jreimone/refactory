@@ -1,5 +1,4 @@
-ROLEMODELMAPPING renameElement  
-FOR <http://org.emftext/owl.ecore>
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
 
 RenameElement maps <RenameX> { 
 	 Nameable := IRIIdentified(name -> iri) ; 

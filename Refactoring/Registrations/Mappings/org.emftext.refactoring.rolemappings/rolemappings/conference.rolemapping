@@ -1,4 +1,4 @@
-ROLEMODELMAPPING conference FOR <http://www.emftext.org/language/conference> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/conference> 
 
 ExtractTrack maps <ExtractXwithReferenceClass> { 
 	Extract := Slot;
