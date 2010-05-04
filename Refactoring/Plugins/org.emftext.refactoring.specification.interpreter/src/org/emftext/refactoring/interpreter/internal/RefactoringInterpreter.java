@@ -18,11 +18,11 @@ import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.Context;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
-import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.Instruction;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
+import org.emftext.language.refactoring.refactoring_specification.ObjectReference;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
@@ -96,7 +96,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 			if(containsModifierOPTIONAL(role)){return new RefactoringStatus(IRefactoringStatus.OK);}
 			FromClause from = ((RoleReference) object).getFrom();
 			if(from != null){
-				FromReference fromReference = from.getReference();
+				ObjectReference fromReference = from.getReference();
 				if(fromReference instanceof VariableReference){
 					Role variableRole = RoleUtil.getRoleFromVariable(((VariableReference) fromReference).getVariable());
 					if(containsModifierOPTIONAL(variableRole)){return new RefactoringStatus(IRefactoringStatus.OK);}
