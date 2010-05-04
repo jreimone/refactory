@@ -12,19 +12,8 @@
          </mappingIcon>
       </rolemapping>
       <rolemapping
-            rolemapping_resource="rolemappings/java.rolemapping">
-      </rolemapping>
-      <rolemapping
             rolemapping_resource="rolemappings/conference.rolemapping">
       </rolemapping>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
-            mapping_name="ExtractMethod"
-            nsUri="http://www.emftext.org/java"
-            postprocessor="org.emftext.refactoring.postprocessors.JavaExtractMethodPostProcessor">
-      </postprocessor>
    </extension>
 
 </plugin>
