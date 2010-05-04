@@ -13,12 +13,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 
 public class RelationMappingReferencesReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.RelationMapping, org.eclipse.emf.ecore.EReference> {
 
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.RelationMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
-		EObject parent = container.eContainer().eContainer().eContainer();
+//		EObject parent = container.eContainer().eContainer().eContainer();
+		EObject parent = EcoreUtil.getRootContainer(container, true);
 		if(!(parent instanceof RoleMappingModel)){
 			result.setErrorMessage("Invalid RoleMapping Model");
 			return;
@@ -36,7 +38,7 @@ public class RelationMappingReferencesReferenceResolver implements org.emftext.l
 			}
 			result.setErrorMessage("No EReference with name '" + identifier + "' exists");
 		} else {
-			result.setErrorMessage("Could not resolve Role Mapping Model '" + mappingModel.getName() + "'");
+			result.setErrorMessage("Could not resolve Role Mapping Model");
 		}
 	}
 
