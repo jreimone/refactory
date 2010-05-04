@@ -50,6 +50,7 @@ TOKENSTYLES{
 	"FOR" COLOR #7F0055, BOLD;
 	"STEPS" COLOR #7F0055, BOLD;
 	"create" COLOR #7F0055, BOLD;
+	"remove" COLOR #7F0055, BOLD;
 	"new" COLOR #7F0055, BOLD;
 	"in" COLOR #7F0055, BOLD;
 	"move" COLOR #7F0055, BOLD;
@@ -69,6 +70,7 @@ TOKENSTYLES{
 	"last" COLOR #50F05C, BOLD;
 	"as" COLOR #7F0055, BOLD;
 	"distinct" COLOR #7F0055, BOLD;
+	"unused" COLOR #7F0055, BOLD;
 	"DOT_NOTATION" COLOR #0000FF;
 	"LOWER_IDENTIFIER" COLOR #0000FF;
 	"UPPER_IDENTIFIER" COLOR #0000FF;
@@ -118,4 +120,10 @@ RULES{
 	ConcreteIndex ::= "index" variable ":=" index[INTEGER];
 	
 	IndexVariable ::= name[LOWER_IDENTIFIER];
+	
+	REMOVE ::= "remove" (modifier)? removal;
+	
+	RoleRemoval ::= role[UPPER_IDENTIFIER];
+	
+	UNUSED ::= "unused";
 }
