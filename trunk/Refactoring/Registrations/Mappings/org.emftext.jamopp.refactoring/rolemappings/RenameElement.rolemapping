@@ -1,0 +1,5 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+RenameElement maps <RenameX> {
+	Nameable := commons.NamedElement (name -> name);
+}
