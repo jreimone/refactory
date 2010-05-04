@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Refactoring RemoveUnusedX
+Bundle-SymbolicName: org.emftext.refactoring.removeUnusedX;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.emftext.refactoring.removeunusedx.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.rolemodel
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
