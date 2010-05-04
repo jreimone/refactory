@@ -3,10 +3,6 @@
   <children xmi:type="notation:Node" xmi:id="_Whx7kB1mEd-RSI0QizO43A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_WhzJsB1mEd-RSI0QizO43A" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Wh0-4B1mEd-RSI0QizO43A" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_ZVgAYB1mEd-RSI0QizO43A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="refactoring_specification.ecore#//RefactoringSpecification/name"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZVgAYR1mEd-RSI0QizO43A"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Wh0-4R1mEd-RSI0QizO43A"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Wh0-4h1mEd-RSI0QizO43A"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Wh0-4x1mEd-RSI0QizO43A"/>

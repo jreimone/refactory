@@ -37,9 +37,4 @@ public interface IRefactoringSpecificationRegistry {
 	 */
 	public void updateRefSpec(RefactoringSpecification refSpec);
 	
-	/**
-	 * Returns the {@link RefactoringSpecification refspec} map.
-	 * @return
-	 */
-	public Map<String, RefactoringSpecification> getRefSpecMap();
 }
