@@ -1,4 +1,4 @@
-ROLEMODELMAPPING relationTestMappingPL0 FOR <http://www.emftext.org/language/pl0>
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 TestProhibitionMapping maps <platform:/resource/org.emftext.refactoring.tests/testInput/constraintresources/TestProhibition.rolestext> { 
 	InputRole := Statement ;
