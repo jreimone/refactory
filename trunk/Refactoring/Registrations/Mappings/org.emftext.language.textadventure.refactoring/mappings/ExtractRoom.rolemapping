@@ -1,4 +1,4 @@
-ROLEMODELMAPPING ExtractRoom FOR <http://www.emftext.org/language/textadventure> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/textadventure> 
 
 MoveToNewRoom maps <ExtractXwithReferenceClass>{ 
 	 Extract := Item;

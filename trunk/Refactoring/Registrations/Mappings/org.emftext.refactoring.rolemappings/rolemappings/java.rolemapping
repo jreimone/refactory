@@ -1,4 +1,4 @@
-ROLEMODELMAPPING java FOR <http://www.emftext.org/java>  
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>  
 	
 ExtractMethod maps <ExtractXwithReferenceClass> { 
 	Extract := statements.Statement;

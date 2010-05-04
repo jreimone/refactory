@@ -1,4 +1,4 @@
-ROLEMODELMAPPING generalizeDeclaredType FOR <http://www.eclipse.org/emf/2002/Ecore> 
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
 /**
  * This refactoring replaces the type of a given ETypedElement by a more

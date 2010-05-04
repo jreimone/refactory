@@ -1,5 +1,4 @@
-ROLEMODELMAPPING createSubInterface 
-FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
 
 /**
  * Create Sub Interface - creates an empty sub interface of a selected interface.

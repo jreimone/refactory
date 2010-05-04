@@ -1,5 +1,4 @@
-ROLEMODELMAPPING RenameDoor
-FOR <http://www.emftext.org/language/textadventure> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/textadventure> 
 
 RenameDoor maps <RenameX> { 
 	 Nameable := Door(name -> name); 

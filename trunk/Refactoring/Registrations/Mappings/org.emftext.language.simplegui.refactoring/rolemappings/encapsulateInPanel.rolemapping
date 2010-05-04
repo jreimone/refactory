@@ -1,4 +1,4 @@
-ROLEMODELMAPPING encapsulateInPanel FOR <http://www.emftext.org/language/simple_gui> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/simple_gui> 
 
 EncapsulateInPanel maps <ExtractXwithReferenceClass> {
 

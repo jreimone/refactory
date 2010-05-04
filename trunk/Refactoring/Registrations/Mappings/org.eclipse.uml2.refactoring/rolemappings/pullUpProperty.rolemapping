@@ -1,5 +1,4 @@
-ROLEMODELMAPPING pullUpProperty 
-FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
 
 /**
  * Pull Up Property - removes a property from a class and 
