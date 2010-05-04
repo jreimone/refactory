@@ -1,5 +1,4 @@
-REFACTORING MoveXSpec 
-FOR <MoveX> 
+REFACTORING FOR <MoveX> 
 
 STEPS {
 	object sourceContainer := SourceContainer from uptree(INPUT);
