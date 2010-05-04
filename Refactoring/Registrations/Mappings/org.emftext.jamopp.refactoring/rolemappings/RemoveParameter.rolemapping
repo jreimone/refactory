@@ -1,0 +1,5 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+RemoveParameter maps <RemoveUnusedX> { 
+	 Removee := parameters.Parameter; 
+}
