@@ -70,7 +70,7 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//ConstantsReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoring_specification.ecore#//ConstantsReference/referencedConstant"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//FromReference"/>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ObjectReference"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//Context"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//IndexAssignmentCommand">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//IndexAssignmentCommand/variable"/>
@@ -108,5 +108,17 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//FILTER"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//Modifier"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//DISTINCT"/>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//DeleteCommand"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//UNSET"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//REMOVE">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//REMOVE/removal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//REMOVE/modifier"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ObjectRemoval"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//RoleRemoval">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RoleRemoval/role"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="refactoring_specification.ecore#//RemoveModifier"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//UNUSED"/>
   </genPackages>
 </genmodel:GenModel>
