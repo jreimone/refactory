@@ -1,5 +1,4 @@
-REFACTORING IntroduceReferenceClassRefactoring 
-FOR <IntroduceReferenceClass> 
+REFACTORING FOR <IntroduceReferenceClass> 
 
 STEPS { 
 	object derivationContainer := DerivationContainer from uptree(INPUT);

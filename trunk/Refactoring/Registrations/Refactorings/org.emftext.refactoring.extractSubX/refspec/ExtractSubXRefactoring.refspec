@@ -1,5 +1,4 @@
-REFACTORING ExtractSubXRefactoring 
-FOR <ExtractSubX>
+REFACTORING FOR <ExtractSubX>
 
 STEPS { 
 	object origContainerObject := OrigContainer from uptree(INPUT);

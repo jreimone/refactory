@@ -1,5 +1,4 @@
-REFACTORING RenameXRefactoring 
-FOR <RenameX> 
+REFACTORING FOR <RenameX> 
 
 STEPS { 
 	assign Nameable.name; 	
