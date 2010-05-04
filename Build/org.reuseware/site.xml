@@ -10,33 +10,41 @@
    <feature url="features/org.reuseware.coconut_0.9.1.v200911130906.jar" id="org.reuseware.coconut" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
    </feature>
-   <feature url="features/org.reuseware.coconut.diagrams_0.0.0.v0.jar" id="org.reuseware.coconut.diagrams" version="0.0.0.v0">
-      <category name="Reuseware Composition Framework"/>
-   </feature>
-   <feature url="features/org.reuseware.coconut.diagrams.gmf_0.9.1.v200911130906.jar" id="org.reuseware.coconut.diagrams.gmf" version="0.9.1.v200911130906">
-      <category name="Reuseware Composition Framework"/>
-   </feature>
-   <feature url="features/org.reuseware.coconut.diagrams.topcased_0.9.1.v200911130906.jar" id="org.reuseware.coconut.diagrams.topcased" version="0.9.1.v200911130906">
-      <category name="Reuseware Composition Framework"/>
-   </feature>
-   <feature url="features/org.reuseware.coconut.diagrams.rsa_0.9.1.v200911130906.jar" id="org.reuseware.coconut.diagrams.rsa" version="0.9.1.v200911130906">
-      <category name="Reuseware Composition Framework"/>
-   </feature>
    <feature url="features/org.reuseware.coconut.description_0.9.1.v200911130906.jar" id="org.reuseware.coconut.description" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
    </feature>
    <feature url="features/org.reuseware.coconut.roundtrip_0.9.1.v200911130906.jar" id="org.reuseware.coconut.roundtrip" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
    </feature>
-
+   
+   <feature url="features/org.reuseware.lacome_0.0.0.v0.jar" id="org.reuseware.lacome" version="0.0.0.v0">
+      <category name="LaCoMe - Layout Composition Framework"/>
+   </feature>
+   <feature url="features/org.reuseware.lacome.layoutlanguage.emftext_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.emftext" version="0.0.0.v0">
+      <category name="LaCoMe - Layout Composition Framework"/>
+   </feature>
+   <feature url="features/org.reuseware.lacome.layoutlanguage.gmf_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.gmf" version="0.0.0.v0">
+      <category name="LaCoMe - Layout Composition Framework"/>
+   </feature>
+    <feature url="features/org.reuseware.lacome.layoutlanguage.odt_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.odt" version="0.0.0.v0">
+      <category name="LaCoMe - Layout Composition Framework"/>
+   </feature>  
+   <feature url="features/org.reuseware.lacome.layoutlanguage.rsa_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.rsa" version="0.0.0.v0">
+      <category name="LaCoMe - Layout Composition Framework"/>
+   </feature>
+   <feature url="features/org.reuseware.lacome.layoutlanguage.topcased_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.topcased" version="0.0.0.v0">
+      <category name="LaCoMe - Layout Composition Framework"/>
+   </feature>
+        
    <feature url="features/org.reuseware.application.taipan_0.0.0.v0.jar" id="org.reuseware.application.taipan" version="0.0.0.v0">
       <category name="Reuseware Applications"/>
    </feature>
    <feature url="features/org.reuseware.application.cim_0.0.0.v0.jar" id="org.reuseware.application.cim" version="0.0.0.v0">
       <category name="Reuseware Applications"/>
    </feature>
+   
    <feature url="features/org.oasisopen.names.tc.opendocument_0.0.0.v0.jar" id="org.oasisopen.names.tc.opendocument" version="0.0.0.v0">
-      <category name="Reuseware Applications"/>
+      <category name="LaCoMe - Layout Composition Framework"/>
    </feature>
    
    <feature url="features/org.emftext.commons.antlr3_1_1_3.1.1.v200911130906.jar" id="org.emftext.commons.antlr3_1_1" version="3.1.1.v200911130906">
@@ -194,6 +202,11 @@
    <category-def name="Reuseware Composition Framework" label="Reuseware Composition Framework">
       <description>
          The Reuseware Composition Framework and accompanying tools.
+      </description>
+   </category-def>
+   <category-def name="LaCoMe - Layout Composition Framework" label="LaCoMe - Layout Composition Framework">
+      <description>
+         A generic and extensible layout composition framework.
       </description>
    </category-def>
    <category-def name="Reuseware Applications" label="Reuseware Applications">

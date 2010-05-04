@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.reuseware.coconut.diagrams.topcased"
-      label="Reuseware Feature: TOPCASED Diagram Composition"
+      id="org.reuseware.lacome.layoutlanguage.rsa"
+      label="LaCoMe RSA support"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://reuseware.org">
-      Support for composing TOPCASED Diagrams in Reuseware.
+      Support for composing RSA diagrams with LaCoMe.
    </description>
 
    <copyright>
@@ -24,7 +24,7 @@
  
  Contributors:
    Software Technology Group - TU Dresden, Germany 
-      - initial API and implementation
+      - initial API and implementation 
    </license>
 
    
@@ -32,13 +32,12 @@
    
 
    <requires>
-      <import feature="org.reuseware.coconut"/>
-      <import feature="org.reuseware.coconut.diagrams"/>
-      <import feature="org.topcased.modeler.uml"/>
+      <import feature="org.reuseware.lacome"/>
+      <import feature="org.eclipse.gmf"/>
    </requires>
 
    <plugin
-         id="org.reuseware.coconut.fragment.diagrams.topcased"
+         id="org.reuseware.lacome.layoutlanguage.rsa"
          download-size="0"
          install-size="0"
          version="0.0.0"
