@@ -1,0 +1,7 @@
+REFACTORING FOR <RemoveUnusedX> 
+
+STEPS {
+	//object removees := Removee as trace(INPUT);
+	 
+	remove unused Removee; 	
+} 
