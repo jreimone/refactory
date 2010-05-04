@@ -5,10 +5,8 @@ package org.emftext.refactoring.interpreter.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -23,13 +21,11 @@ import org.emftext.language.refactoring.refactoring_specification.ConstantsRefer
 import org.emftext.language.refactoring.refactoring_specification.FILTER;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
 import org.emftext.language.refactoring.refactoring_specification.FromOperator;
-import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
+import org.emftext.language.refactoring.refactoring_specification.ObjectReference;
 import org.emftext.language.refactoring.refactoring_specification.PATH;
-import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationFactory;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.TRACE;
-import org.emftext.language.refactoring.refactoring_specification.TraceObject;
 import org.emftext.language.refactoring.refactoring_specification.UPTREE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
@@ -105,8 +101,8 @@ public class ObjectAssignmentInterpreter {
 		Role role = object.getRole();
 		assignedRole = role;
 		FromClause from = object.getFrom();
-		FromReference reference = from.getReference();
-		List<? extends EObject> elements = getFromReferenceObject(reference);
+		ObjectReference reference = from.getReference();
+		List<? extends EObject> elements = getObjectReferenceObject(reference);
 		List<EObject> filteredElements = new LinkedList<EObject>();
 		for (EObject element : elements) {
 			List<Role> mappedRoles = mapping.getMappedRolesForEObject(element);
@@ -125,8 +121,8 @@ public class ObjectAssignmentInterpreter {
 
 	private void handleTrace(TRACE trace, Variable objectVar){
 		assignedRole = trace.getRole();
-		FromReference from = trace.getReference();
-		List<? extends EObject> objects = getFromReferenceObject(from);
+		ObjectReference from = trace.getReference();
+		List<? extends EObject> objects = getObjectReferenceObject(from);
 		List<EObject> containers = new LinkedList<EObject>();
 		for (EObject object : objects) {
 			if(!containers.contains(object.eContainer())){
@@ -150,7 +146,7 @@ public class ObjectAssignmentInterpreter {
 		assignedRole = roleRef.getRole();
 		FromClause from = roleRef.getFrom();
 		FromOperator operator = from.getOperator();
-		List<? extends EObject> fromObjects = getFromReferenceObject(from.getReference());
+		List<? extends EObject> fromObjects = getObjectReferenceObject(from.getReference());
 		if(operator instanceof UPTREE){
 			return handleFromOperatorUPTREE(assignedRole, fromObjects);	
 		} else if(operator instanceof PATH){
@@ -243,7 +239,7 @@ public class ObjectAssignmentInterpreter {
 		return null;
 	}
 
-	private List<? extends EObject> getFromReferenceObject(FromReference reference){
+	private List<? extends EObject> getObjectReferenceObject(ObjectReference reference){
 		if(reference instanceof ConstantsReference){
 			Constants constant = ((ConstantsReference) reference).getReferencedConstant();
 			switch (constant) {

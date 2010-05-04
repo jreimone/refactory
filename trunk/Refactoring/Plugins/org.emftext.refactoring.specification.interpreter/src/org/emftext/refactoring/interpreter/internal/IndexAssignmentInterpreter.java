@@ -12,9 +12,9 @@ import org.emftext.language.refactoring.refactoring_specification.ConcreteIndex;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
 import org.emftext.language.refactoring.refactoring_specification.FIRST;
-import org.emftext.language.refactoring.refactoring_specification.FromReference;
 import org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.LAST;
+import org.emftext.language.refactoring.refactoring_specification.ObjectReference;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
@@ -48,7 +48,7 @@ public class IndexAssignmentInterpreter {
 	}
 	
 	private boolean interpreteFirst(FIRST first){
-		FromReference reference = first.getReference();
+		ObjectReference reference = first.getReference();
 		if(reference instanceof VariableReference){
 			EObject object = context.getEObjectForVariable(((VariableReference) reference).getVariable());
 			return setIndexForFIRST(first, object);

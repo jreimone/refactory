@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
@@ -104,7 +105,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			}
 		}
 		if(selectedElements != null && selectedElements.size() >= 1){
-			Resource resource = selectedElements.get(0).eResource();
+			EObject first = selectedElements.get(0);
+			EcoreUtil.resolveAll(first);
+			Resource resource = first.eResource();
 			if(resource == null || (resource.getErrors() != null && resource.getErrors().size() > 0)){
 				System.out.println("resource is null or contains the following errors:");
 				List<Resource.Diagnostic> errors = resource.getErrors();
