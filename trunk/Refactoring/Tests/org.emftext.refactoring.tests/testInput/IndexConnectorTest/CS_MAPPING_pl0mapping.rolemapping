@@ -1,4 +1,4 @@
-ROLEMODELMAPPING PL0Mapping FOR <http://www.emftext.org/language/pl0> 
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0> 
 
 ExtractStatements maps <platform:/resource/org.emftext.refactoring.tests/testInput/IndexConnectorTest/CS_ROLE_ExtractMethod.rolestext> { 
 	OrigContainer := Body {
