@@ -20,7 +20,6 @@ import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.MatchOptions;
 import org.eclipse.emf.compare.match.engine.IMatchEngine;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.compare.ui.IModelCompareInputProvider;
 import org.eclipse.emf.compare.ui.ModelCompareInput;
 import org.eclipse.emf.ecore.EObject;
@@ -258,4 +257,5 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		}
 		return null;
 	}
+
 }
