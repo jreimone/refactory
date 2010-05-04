@@ -17,12 +17,6 @@ public interface IRoleModelRegistry {
 
 	public static IRoleModelRegistry INSTANCE = new BasicRoleModelRegistry();
 	
-	/**
-	 * Returns the map containing the name of a {@link RoleModel} as key and the {@link RoleModel} itself as value.
-	 * 
-	 * @return
-	 */
-	public Map<String, RoleModel> getRoleModelNameMap();
 	
 //	/**
 //	 * Returns the map containing the namespace URI of a {@link RoleModel} as key and the {@link RoleModel} itself as value.

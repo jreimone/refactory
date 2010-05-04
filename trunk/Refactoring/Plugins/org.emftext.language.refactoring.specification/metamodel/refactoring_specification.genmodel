@@ -16,7 +16,6 @@
     </genEnums>
     <genClasses ecoreClass="refactoring_specification.ecore#//RefactoringSpecification">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RefactoringSpecification/usedRoleModel"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoring_specification.ecore#//RefactoringSpecification/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RefactoringSpecification/instructions"/>
       <genOperations ecoreOperation="refactoring_specification.ecore#//RefactoringSpecification/getDeclaredVariables"/>
       <genOperations ecoreOperation="refactoring_specification.ecore#//RefactoringSpecification/getVariableByName">

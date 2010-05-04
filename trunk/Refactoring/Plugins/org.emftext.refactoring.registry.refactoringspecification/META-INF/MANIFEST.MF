@@ -7,7 +7,8 @@ Bundle-Activator: org.emftext.refactoring.registry.refactoringspecification.Acti
 Bundle-Vendor: Jan Reimann
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.language.refactoring.specification,
- org.emftext.refactoring.util
+ org.emftext.refactoring.util,
+ org.emftext.refactoring.registry.rolemodel
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.emftext.refactoring.registry.refactoringspecification,
