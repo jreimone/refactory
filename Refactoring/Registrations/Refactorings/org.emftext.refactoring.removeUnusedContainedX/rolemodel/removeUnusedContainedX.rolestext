@@ -1,0 +1,17 @@
+/**
+This role model is intended to be used to remove all objects mapped to <i>Removee</i> contained 
+in the object mapped to <i>RemoveeContainer</i>. They will only be removed if no references point to them.
+*/
+RoleModel RemoveUnusedContainedX { 
+	/**
+	The role which will be removed.
+	*/
+	super ROLE Removee;
+	
+	/**
+	The role which contains the removees.
+	*/
+	super input ROLE RemoveeContainer;
+	
+	RemoveeContainer [1..1] <>- Removee removees [0..*];	
+} 
