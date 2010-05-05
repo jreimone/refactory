@@ -56,7 +56,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//FromClause"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RelationReference" eSuperTypes="#//SourceContext #//TargetContext">
+  <eClassifiers xsi:type="ecore:EClass" name="RelationReference" eSuperTypes="#//SourceContext #//TargetContext #//ObjectRemoval">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
   </eClassifiers>
@@ -153,4 +153,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RemoveModifier" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="UNUSED" eSuperTypes="#//RemoveModifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EMPTY" eSuperTypes="#//RemoveModifier"/>
 </ecore:EPackage>
