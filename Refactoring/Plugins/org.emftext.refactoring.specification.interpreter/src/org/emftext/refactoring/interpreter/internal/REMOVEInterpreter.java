@@ -72,8 +72,10 @@ public class REMOVEInterpreter {
 	 * @param removals
 	 */
 	private void remove(List<EObject> removals) {
-		for (EObject removal : removals) {
-			EcoreUtil.remove(removal);
+		if (removals != null) {
+			for (EObject removal : removals) {
+				EcoreUtil.remove(removal);
+			}
 		}
 	}
 
@@ -101,15 +103,18 @@ public class REMOVEInterpreter {
 		for (EObject removal : removals) {
 			TreeIterator<Object> iterator = EcoreUtil.getAllContents(removal, true);
 			boolean empty = true;
-			while (iterator.hasNext()) {
-				Object object = (Object) iterator.next();
+			if (iterator.hasNext()) {
 				empty = false;
 			}
+//			while (iterator.hasNext()) {
+//				Object object = (Object) iterator.next();
+//				empty = false;
+//			}
 			if (empty) {
 				emptyRemovals.add(removal);
 			}
 		}
-		return null;
+		return emptyRemovals;
 	}
 
 	/**
@@ -238,12 +243,16 @@ public class REMOVEInterpreter {
 			if (interpretationContext instanceof Role) {
 				if (resolvedContext instanceof EObject) {
 					List<EObject> containedElements = collectRemovals(relation, (Role) interpretationContext, (EObject) resolvedContext);
-					removals.addAll(containedElements);
+					if (containedElements != null) {
+						removals.addAll(containedElements);
+					}
 				} else if (resolvedContext instanceof List<?>) {
 					List<EObject> objects = (List<EObject>) resolvedContext;
 					for (EObject eObject : objects) {
 						List<EObject> containedElements = collectRemovals(relation, (Role) interpretationContext, eObject);
-						removals.addAll(containedElements);
+						if (containedElements != null) {
+							removals.addAll(containedElements);
+						}
 					}
 				}
 			} else {
@@ -265,8 +274,15 @@ public class REMOVEInterpreter {
 		List<ReferenceMetaClassPair> pairs = relationMapping.getReferenceMetaClassPair();
 		Role targetRole = relation.getTarget();
 		List<EObject> children = referencesForEObject(root, pairs, targetRole);
-		removals.addAll(children);
-		return removals;
+		if (children != null) {
+			for (EObject eObject : children) {
+				if (eObject != null) {
+					removals.add(eObject);
+				}
+			}
+			return removals;
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -292,12 +308,19 @@ public class REMOVEInterpreter {
 				Object newRoot = root.eGet(pair.getReference());
 				if (newRoot instanceof EObject) {
 					return referencesForEObject((EObject) newRoot, reducedPairs, filter);
-				} else {
-					throw new UnsupportedOperationException(
-							"implement this case - but this shouldn't happen because here only one EObject should be returned");
+				} else if (newRoot instanceof List<?>) {
+					List<EObject> newRoots = (List<EObject>) newRoot;
+					List<EObject> objectCollection = new LinkedList<EObject>();
+					for (EObject eObject : newRoots) {
+						objectCollection.addAll(referencesForEObject(eObject, reducedPairs, filter));
+					}
+					return objectCollection;
+//					throw new UnsupportedOperationException(
+//							"implement this case - but this shouldn't happen because here only one EObject should be returned");
 				}
 			}
 		}
+		return null;
 	}
 
 	private Object resolveInterpretationContext(EObject interpretationContext) {
