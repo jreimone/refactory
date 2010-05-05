@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+
+RemoveUnusedClasses maps <RemoveUnusedContainedX> { 
+	 
+	 RemoveeContainer := Package{
+	 	removees := packagedElement;
+	 };
+	 
+	 Removee := Class;
+}
