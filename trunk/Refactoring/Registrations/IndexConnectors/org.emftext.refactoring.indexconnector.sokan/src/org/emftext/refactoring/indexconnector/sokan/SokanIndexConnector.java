@@ -26,23 +26,25 @@ import org.reuseware.sokan.index.util.ResourceUtil;
 
 /**
  * @author Jan Reimann
- *
  */
 public class SokanIndexConnector implements IndexConnector {
 
 	public List<Resource> getReferencingResources(EObject referenceTarget) {
 		Resource targetResource = referenceTarget.eResource();
+		if (targetResource == null) {
+			return null;
+		}
 		ResourceSet resourceSet = targetResource.getResourceSet();
 		URI uri = targetResource.getURI();
 		if (uri == null) {
 			return null;
 		}
 		ID refereeID = ResourceUtil.idFrom(uri);
-		if(refereeID == null){
+		if (refereeID == null) {
 			return null;
 		}
 		IndexRow row = IndexUtil.INSTANCE.getIndex(refereeID);
-		if(row == null){
+		if (row == null) {
 			return null;
 		}
 		IndexMetaData metaData = row.getMetaData();
@@ -51,24 +53,24 @@ public class SokanIndexConnector implements IndexConnector {
 			URI refererUri = ResourceUtil.uriFrom(string);
 			resourceSet.getResource(refererUri, true);
 		}
-//		EcoreUtil.resolveAll(resourceSet);
+		// EcoreUtil.resolveAll(resourceSet);
 		List<Resource> referers = new LinkedList<Resource>();
 		referers.addAll(getRealTargetObjectReferer(resourceSet, referenceTarget));
 		return referers;
 	}
 
-	private Set<Resource> getRealTargetObjectReferer(ResourceSet resourceSet, EObject referenceTarget){
+	private Set<Resource> getRealTargetObjectReferer(ResourceSet resourceSet, EObject referenceTarget) {
 		EcoreUtil.resolveAll(resourceSet);
 		Resource targetResource = referenceTarget.eResource();
 		List<Adapter> adapters = resourceSet.eAdapters();
 		ECrossReferenceAdapter crossReferencer = null;
 		for (Adapter adapter : adapters) {
-			if(adapter instanceof ECrossReferenceAdapter){
+			if (adapter instanceof ECrossReferenceAdapter) {
 				crossReferencer = (ECrossReferenceAdapter) adapter;
 				break;
 			}
 		}
-		if(crossReferencer == null){
+		if (crossReferencer == null) {
 			crossReferencer = new ECrossReferenceAdapter();
 			resourceSet.eAdapters().add(crossReferencer);
 		}
@@ -77,16 +79,16 @@ public class SokanIndexConnector implements IndexConnector {
 		for (Setting setting : referencers) {
 			EObject referer = setting.getEObject();
 			Resource resource = referer.eResource();
-			if(resource == null || resource.equals(targetResource)){
+			if (resource == null || resource.equals(targetResource)) {
 				continue;
 			}
 			URI uri = resource.getURI();
 			uri = resourceSet.getURIConverter().normalize(uri);
-			if(uri.isPlatformResource()){
+			if (uri.isPlatformResource()) {
 				referers.add(resource);
 			}
 		}
 		return referers;
 	}
-	
+
 }
