@@ -37,6 +37,9 @@
       <rolemapping
             rolemapping_resource="rolemappings/createSubclass.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/removeUnusedClass.rolemapping">
+      </rolemapping>
   </extension>
 
 	<!-- post processors -->
