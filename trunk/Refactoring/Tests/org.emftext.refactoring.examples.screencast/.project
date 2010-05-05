@@ -46,11 +46,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.reuseware.sokan.resource.indexBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.emftext.language.office.resource.office.builder</name>
 			<arguments>
 			</arguments>
@@ -65,6 +60,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.reuseware.sokan.resource.indexBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
@@ -75,9 +75,9 @@
 		<nature>sandwich_simple.resource.simple_sandwich.nature</nature>
 		<nature>org.emftext.language.forms.resource.forms.nature</nature>
 		<nature>org.emftext.language.simple_gui.resource.simplegui.nature</nature>
-		<nature>org.reuseware.sokan.resource.repositoryNature</nature>
 		<nature>org.emftext.language.office.resource.office.nature</nature>
 		<nature>org.emftext.language.textadventure.resource.tas.nature</nature>
 		<nature>org.eclipse.stp.bpmn.validation.BatchValidationBuildAbleNature</nature>
+		<nature>org.reuseware.sokan.resource.repositoryNature</nature>
 	</natures>
 </projectDescription>
