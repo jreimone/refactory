@@ -23,6 +23,7 @@ import org.emftext.language.refactoring.refactoring_specification.Instruction;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.ObjectReference;
+import org.emftext.language.refactoring.refactoring_specification.REMOVE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
@@ -70,6 +71,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	private ASSIGNInterpreter assign;
 	private IndexAssignmentInterpreter indexInterpreter;
 	private ObjectAssignmentInterpreter objectInterpreter;
+	private REMOVEInterpreter removeInterpreter;
 	
 	private List<Resource> resourcesToSave;
 	
@@ -202,7 +204,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		assign = new ASSIGNInterpreter(mapping, this);
 		indexInterpreter = new IndexAssignmentInterpreter();
 		objectInterpreter = new ObjectAssignmentInterpreter(this, mapping);
-	
+		removeInterpreter = new REMOVEInterpreter(this, mapping);
 		context.setInitialContext(mapping);
 		initInterpretationStack();
 		
@@ -312,6 +314,20 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return result;
 	}
 	
+	
+	
+	@Override
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_REMOVE(
+			REMOVE object, RefactoringInterpreterContext context) {
+		IRefactoringStatus result = removeInterpreter.interpreteREMOVE(object, context, selection);
+		Role assignedRole = removeInterpreter.getAssignedRole();
+		Object roleRuntimeInstance = removeInterpreter.getRoleRuntimeValue();
+		if(assignedRole != null && roleRuntimeInstance != null){
+			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
+		}
+		return result;
+	}
+
 	@Override
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_VariableAssignment(
 			VariableAssignment object, RefactoringInterpreterContext context) {

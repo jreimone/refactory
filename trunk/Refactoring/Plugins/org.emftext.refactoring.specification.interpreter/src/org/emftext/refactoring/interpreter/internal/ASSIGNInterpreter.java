@@ -89,7 +89,7 @@ public class ASSIGNInterpreter {
 		EObject sourceInterpretationContext = source.getInterpretationContext();
 		EObject sourceObject = null;
 		if(sourceInterpretationContext instanceof Variable){
-			sourceObject = context.getEObjectForVariable((Variable) sourceInterpretationContext);
+			sourceObject = (EObject) context.getObjectForVariable((Variable) sourceInterpretationContext);
 		}
 		EAttribute sourceClassAttribute = sourceMapping.getClassAttribute();
 		Object value = null;
@@ -107,7 +107,7 @@ public class ASSIGNInterpreter {
 		EObject targetInterpretationContext = target.getInterpretationContext();
 		EObject targetObject = null;
 		if(targetInterpretationContext instanceof Variable){
-			targetObject = context.getEObjectForVariable((Variable) targetInterpretationContext);
+			targetObject = (EObject) context.getObjectForVariable((Variable) targetInterpretationContext);
 		}
 		EAttribute targetClassAttribute = targetMapping.getClassAttribute();
 		if(targetClassAttribute.getEAttributeType().equals(sourceClassAttribute.getEAttributeType())){
@@ -132,7 +132,7 @@ public class ASSIGNInterpreter {
 		EAttribute classAttribute = attMapping.getClassAttribute();
 		EObject targetObject = null;
 		if(interpretationContext instanceof Variable){
-			targetObject = context.getEObjectForVariable((Variable) interpretationContext);
+			targetObject = (EObject) context.getObjectForVariable((Variable) interpretationContext);
 		} else if(interpretationContext instanceof Role) {
 			if(((Role) interpretationContext).getModifier().contains(RoleModifier.INPUT)){
 				if(selection.size() == 1){

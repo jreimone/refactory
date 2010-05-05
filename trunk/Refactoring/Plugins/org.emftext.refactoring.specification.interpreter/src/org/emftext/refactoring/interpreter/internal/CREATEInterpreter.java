@@ -44,7 +44,7 @@ public class CREATEInterpreter {
 		Variable sourceVar = object.getVariable();
 		if(sourceVar != null){
 			context.addEObjectForVariable(sourceVar);
-			roleRuntimeInstance = context.getEObjectForVariable(sourceVar);
+			roleRuntimeInstance = context.getObjectForVariable(sourceVar);
 		}
 		TargetContext target = object.getTargetContext();
 		if(target instanceof VariableReference){
@@ -55,8 +55,8 @@ public class CREATEInterpreter {
 
 	private IRefactoringStatus handleCREATETargetVariable(Variable sourceVar, RefactoringInterpreterContext context, Role childRole, TargetContext target, IndexVariable index) {
 		Variable targetVar = ((VariableReference) target).getVariable();
-		EObject parentObject = context.getEObjectForVariable(targetVar);
-		EObject childObject = context.getEObjectForVariable(sourceVar);
+		EObject parentObject = (EObject) context.getObjectForVariable(targetVar);
+		EObject childObject = (EObject) context.getObjectForVariable(sourceVar);
 		RelationMapping relationMapping = null;
 		if(parentObject instanceof TraceObject){
 			TraceObject trace = (TraceObject) parentObject;

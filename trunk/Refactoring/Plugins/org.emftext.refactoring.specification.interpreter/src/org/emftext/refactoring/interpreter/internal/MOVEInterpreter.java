@@ -3,7 +3,6 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
-import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.emftext.language.refactoring.refactoring_specification.DISTINCT;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.Modifier;
@@ -75,7 +73,7 @@ public class MOVEInterpreter {
 			if(command instanceof VariableAssignment){
 				instruction = ((VariableAssignment) command).getAssignment();
 			}
-			targetObject = context.getEObjectForVariable(variable);
+			targetObject = (EObject) context.getObjectForVariable(variable);
 			targetRole = RoleUtil.getRoleFromVariable(variable);
 		}
 		RelationMapping relationMapping = mapping.getConcreteMappingForRole(targetRole).getRelationMappingForTargetRole(sourceRole);

@@ -50,7 +50,7 @@ public class IndexAssignmentInterpreter {
 	private boolean interpreteFirst(FIRST first){
 		ObjectReference reference = first.getReference();
 		if(reference instanceof VariableReference){
-			EObject object = context.getEObjectForVariable(((VariableReference) reference).getVariable());
+			EObject object = (EObject) context.getObjectForVariable(((VariableReference) reference).getVariable());
 			return setIndexForFIRST(first, object);
 		}
 		if(reference instanceof ConstantsReference){
