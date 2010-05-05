@@ -34,7 +34,6 @@ import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
-import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.util.RoleUtil;
@@ -119,27 +118,29 @@ public class REMOVEInterpreter {
 	 */
 	private List<EObject> interpreteUNUSED(List<EObject> removals) {
 		List<EObject> unusedRemovals = new LinkedList<EObject>();
-		List<EObject> removalWithoutExternalReferences = new LinkedList<EObject>();
-		for (EObject removal : removals) {
-			List<Resource> removalReferences = IndexConnectorRegistry.INSTANCE.getReferencingResources(removal);
-			Resource ownResource = removal.eResource();
-			if (ownResource != null) {
-				boolean externalReferencFound = false;
-				for (Resource resource : removalReferences) {
-					if (!resource.equals(ownResource)) {
-						externalReferencFound = true;
-						break;
-					}
-				}
-				if (!externalReferencFound) {
-					removalWithoutExternalReferences.add(removal);
-				}
-			} else {
-				removalWithoutExternalReferences.add(removal);
-			}
-		}
-		if (removalWithoutExternalReferences.size() > 0) {
-			for (EObject removal : removalWithoutExternalReferences) {
+//		List<EObject> removalWithoutExternalReferences = new LinkedList<EObject>();
+//		for (EObject removal : removals) {
+//			List<Resource> removalReferences = IndexConnectorRegistry.INSTANCE.getReferencingResources(removal);
+//			Resource ownResource = removal.eResource();
+//			if (ownResource != null) {
+//				boolean externalReferencFound = false;
+//				for (Resource resource : removalReferences) {
+//					if (!resource.equals(ownResource)) {
+//						externalReferencFound = true;
+//						break;
+//					}
+//				}
+//				if (!externalReferencFound) {
+//					removalWithoutExternalReferences.add(removal);
+//				}
+//			} else {
+//				removalWithoutExternalReferences.add(removal);
+//			}
+//		}
+//		if (removalWithoutExternalReferences.size() > 0) {
+//			for (EObject removal : removalWithoutExternalReferences) {
+		if (removals.size() > 0) {
+			for (EObject removal : removals) {
 				Resource ownResource = removal.eResource();
 				ECrossReferenceAdapter crossReferencer;
 				if (ownResource != null) {
@@ -148,7 +149,7 @@ public class REMOVEInterpreter {
 					crossReferencer = getCrossReferencer(EcoreUtil.getRootContainer(removal));
 				}
 				if (crossReferencer != null) {
-					Collection<Setting> references = crossReferencer.getInverseReferences(removal, true);
+					Collection<Setting> references = crossReferencer.getNonNavigableInverseReferences(removal, true);
 					boolean onlyContainerReference = true;
 					for (Setting setting : references) {
 						EObject container = removal.eContainer();
@@ -257,27 +258,31 @@ public class REMOVEInterpreter {
 	 * @param role
 	 * @param root
 	 */
-	@SuppressWarnings("unchecked")
 	private List<EObject> collectRemovals(MultiplicityRelation relation, Role role, EObject root) {
 		List<EObject> removals = new LinkedList<EObject>();
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(role);
 		RelationMapping relationMapping = concreteMapping.getRelationMappingForRelation(relation);
 		List<ReferenceMetaClassPair> pairs = relationMapping.getReferenceMetaClassPair();
-		Object children = referencesForEObject(root, pairs);
-		if (children instanceof EObject) {
-			removals.add((EObject) children);
-		} else if (children instanceof List<?>) {
-			removals.addAll((List<EObject>) children);
-		}
+		Role targetRole = relation.getTarget();
+		List<EObject> children = referencesForEObject(root, pairs, targetRole);
+		removals.addAll(children);
 		return removals;
 	}
 
-	private Object referencesForEObject(EObject root, List<ReferenceMetaClassPair> pairs) {
+	@SuppressWarnings("unchecked")
+	private List<EObject> referencesForEObject(EObject root, List<ReferenceMetaClassPair> pairs, Role filter) {
 		if (pairs == null) {
 			return null;
 		} else {
 			if (pairs.size() == 1) {
-				return root.eGet(pairs.get(0).getReference(), true);
+				List<EObject> containments = new LinkedList<EObject>();
+				Object children = root.eGet(pairs.get(0).getReference(), true);
+				if (children instanceof EObject) {
+					containments.add((EObject) children);
+				} else if (children instanceof List<?>) {
+					containments.addAll((List<EObject>) children);
+				}
+				return RoleUtil.filterObjectsByRoles(containments, mapping, filter);
 			} else {
 				List<ReferenceMetaClassPair> reducedPairs = new LinkedList<ReferenceMetaClassPair>();
 				for (int i = 1; i < pairs.size(); i++) {
@@ -286,7 +291,7 @@ public class REMOVEInterpreter {
 				ReferenceMetaClassPair pair = pairs.get(0);
 				Object newRoot = root.eGet(pair.getReference());
 				if (newRoot instanceof EObject) {
-					return referencesForEObject((EObject) newRoot, reducedPairs);
+					return referencesForEObject((EObject) newRoot, reducedPairs, filter);
 				} else {
 					throw new UnsupportedOperationException(
 							"implement this case - but this shouldn't happen because here only one EObject should be returned");
