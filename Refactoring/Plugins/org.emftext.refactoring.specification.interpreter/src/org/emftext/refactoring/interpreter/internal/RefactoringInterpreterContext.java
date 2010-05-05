@@ -88,7 +88,7 @@ public class RefactoringInterpreterContext {
 		}
 	}
 	
-	public List<EObject> getEObjectsForVariable(Variable var){
+	private List<EObject> getEObjectsForVariable(Variable var){
 		return varInstancesMap.get(var);
 	}
 	
@@ -146,7 +146,7 @@ public class RefactoringInterpreterContext {
 	 * @param variable
 	 * @return
 	 */
-	public EObject getEObjectForVariable(Variable variable){
+	private EObject getEObjectForVariable(Variable variable){
 		return varInstanceMap.get(variable);
 	}
 	

@@ -239,6 +239,7 @@ public class ObjectAssignmentInterpreter {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<? extends EObject> getObjectReferenceObject(ObjectReference reference){
 		if(reference instanceof ConstantsReference){
 			Constants constant = ((ConstantsReference) reference).getReferencedConstant();
@@ -252,7 +253,12 @@ public class ObjectAssignmentInterpreter {
 		if(reference instanceof VariableReference){
 			Variable variable = ((VariableReference) reference).getVariable();
 			List<EObject> temp = new ArrayList<EObject>();
-			temp.add(context.getEObjectForVariable(variable));
+			Object object = context.getObjectForVariable(variable);
+			if(object instanceof EObject){
+				temp.add((EObject) object);
+			} else if(object instanceof List<?>) {
+				temp.addAll((List<EObject>) object);
+			}
 			return temp;
 		}
 		return null;

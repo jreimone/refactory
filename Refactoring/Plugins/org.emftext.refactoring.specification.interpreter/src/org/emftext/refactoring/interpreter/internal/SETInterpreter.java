@@ -6,7 +6,6 @@ package org.emftext.refactoring.interpreter.internal;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.SET;
@@ -21,9 +20,7 @@ import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
-import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -47,7 +44,7 @@ public class SETInterpreter {
 		Role targetRole = null;
 		Role sourceRole = null;
 		if(source instanceof VariableReference){
-			sourceObject = context.getEObjectForVariable(((VariableReference) source).getVariable());
+			sourceObject = (EObject) context.getObjectForVariable(((VariableReference) source).getVariable());
 			if(sourceObject instanceof TraceObject){
 				sourceRole = ((TraceObject) sourceObject).getAppliedRole();
 				sourceObject = ((TraceObject) sourceObject).getContainer();
@@ -72,7 +69,7 @@ public class SETInterpreter {
 			targetRole = relation.getSource();
 			EObject interpretationContext = relation.getInterpretationContext();
 			if(interpretationContext instanceof Variable){
-				targetObject = context.getEObjectForVariable((Variable) interpretationContext);
+				targetObject = context.getObjectForVariable((Variable) interpretationContext);
 			} else if(interpretationContext instanceof Role) {
 				throw new UnsupportedOperationException("implement this case");
 			}
