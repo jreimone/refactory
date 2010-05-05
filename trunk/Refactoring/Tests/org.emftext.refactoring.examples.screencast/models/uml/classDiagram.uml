@@ -14,6 +14,8 @@
   </elementImport>
   <packagedElement xmi:type="uml:Class" xmi:id="_4ofA4FhbEd-B3ISy7ifoMw" name="UsedClass1">
     <generalization xmi:id="_oE1OEFhrEd-2R4YpNKLzCw" general="_k7wkUFhrEd-2R4YpNKLzCw"/>
+    <generalization xmi:id="_b26NwFhtEd-Mz9671OXFlA" general="_Ysk_wFhtEd-Mz9671OXFlA"/>
+    <generalization xmi:id="_cL9QsFhtEd-Mz9671OXFlA" general="_YcHh4FhtEd-Mz9671OXFlA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_50COAFhbEd-B3ISy7ifoMw" name="UsedClass2"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_8MnO8FhbEd-B3ISy7ifoMw" memberEnd="_8Mq5UFhbEd-B3ISy7ifoMw _8MsugFhbEd-B3ISy7ifoMw">
@@ -38,5 +40,7 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_-WSRMFhbEd-B3ISy7ifoMw" name="UnusedClass1"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_J5iGYFhmEd-UYceXiQNN-w" name="UnusedClass2"/>
-  <packagedElement xmi:type="uml:Class" xmi:id="_k7wkUFhrEd-2R4YpNKLzCw" name="EmptySuperClass"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_k7wkUFhrEd-2R4YpNKLzCw" name="EmptySuperClass1"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_YcHh4FhtEd-Mz9671OXFlA" name="EmptySuperClass2"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Ysk_wFhtEd-Mz9671OXFlA" name="NonEmptySuperClass"/>
 </uml:Package>
