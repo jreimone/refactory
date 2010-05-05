@@ -12,6 +12,9 @@
       <rolemapping
             rolemapping_resource="rolemappings/RenameElement.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/RemoveEmptyMethods.rolemapping">
+      </rolemapping>
    </extension>
    <extension
          point="org.emftext.refactoring.postprocessor">

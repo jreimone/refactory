@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+RemoveEmptyMethods maps <RemoveEmptyContainedX> { 
+	
+	RemoveeContainer := classifiers.Class{
+		removees := members;
+	};
+	
+	Removee := members.Method; 
+}
