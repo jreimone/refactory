@@ -598,6 +598,10 @@ public class RefactoringStatisticView extends ViewPart {
 						File tableFile = File.createTempFile("refactoringsComplex_", ".wiki", tempDir);
 						tableFile.deleteOnExit();
 						FileWriter writer = new FileWriter(tableFile);
+						int specificCount = countSpecificRefactorings(invisibleRoot);
+						int genericCount = invisibleRoot.getChildren().length;
+						System.out.println("Reused " + genericCount + " generic refactorings for " + specificCount + " specific refactorings.");
+						writer.append("Reused '''" + genericCount + "''' generic refactorings for '''" + specificCount + "''' specific refactorings.\n");
 						writer.append("{| class=\"wikitable sortable\" border=\"1\" style=\"width:100%;border-collapse:collapse;border:1px solid;\"\n");
 						writer.append("! width=\"33%\" | Refactoring (Generic Name)\n");
 						writer.append("! width=\"33%\" | Applied for metamodel\n");
@@ -662,6 +666,18 @@ public class RefactoringStatisticView extends ViewPart {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			}
+
+			private int countSpecificRefactorings(TreeParent invisibleRoot) {
+				int count = 0;
+				for (TreeObject child : invisibleRoot.getChildren()) {
+					if (child instanceof TreeParent) {
+						count += countSpecificRefactorings((TreeParent) child);
+					} else {
+						count++;
+					}
+				}
+				return count;
 			}
 		};
 		complexWikiTableGenAction.setText("Generate complex Wiki table");
