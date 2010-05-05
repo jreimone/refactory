@@ -34,5 +34,6 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9hxEAFhbEd-B3ISy7ifoMw" value="1"/>
     </ownedEnd>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_-WSRMFhbEd-B3ISy7ifoMw" name="UnusedClass"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-WSRMFhbEd-B3ISy7ifoMw" name="UnusedClass1"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_J5iGYFhmEd-UYceXiQNN-w" name="UnusedClass2"/>
 </uml:Package>
