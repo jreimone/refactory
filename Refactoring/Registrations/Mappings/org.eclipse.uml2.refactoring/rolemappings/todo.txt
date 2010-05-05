@@ -17,7 +17,6 @@ Refactorings for UML2 class diagrams
 * Remove Empty Intermediate Superclass - removes a completely empty class which is a superclass of a set of subclasses but also generalizes other classes or implements interfaces. It is the opposite of refactoring [Create Intermediate Superclass].
 * Remove Empty Subclass - removes a completely empty subclass of a classes and is the opposite of refactoring [Create Subclass].
 * Remove Empty Subinterface - removes a completely empty subinterface of an interface and is the opposite of refactoring [Create Subinterface].
-* Remove Empty Superclass - removes a completely empty superclass of a set of classes.
 
 Refactorings for UML2 state machines
 
