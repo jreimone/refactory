@@ -397,7 +397,9 @@ public class BuildFileGenerator {
 			template = template.replace("<!--GENERATE_TEXT_RESOURCE_TASKS-->", getTextResourceTasks());
 			template = template.replace("<!--CLEAN_TASKS-->", getCleanTasks());
 			// save instantiated template
-			StreamUtil.copy(new ByteArrayInputStream(template.getBytes()), new FileOutputStream(new File(buildFileName)));
+			File buildFile = new File(buildFileName);
+			StreamUtil.copy(new ByteArrayInputStream(template.getBytes()), new FileOutputStream(buildFile));
+			System.out.println("Successfully generated build file to " + buildFile.getAbsolutePath());
 		} catch (IOException e) {
 			e.printStackTrace();
 			// signal error to build script
