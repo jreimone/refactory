@@ -228,7 +228,7 @@ public class RoleUtil {
 	 * @param mapping
 	 * @return
 	 */
-	public static List<? extends EObject> filterObjectsByInputRoles(List<? extends EObject> objects, Mapping mapping) {
+	public static List<EObject> filterObjectsByInputRoles(List<? extends EObject> objects, Mapping mapping) {
 		List<Role> inputRoles = getAllInputRoles(mapping);
 		return filterObjectsByRoles(objects, mapping, inputRoles.toArray(new Role[0]));
 	}
