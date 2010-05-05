@@ -4,7 +4,7 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/RemoveParameter.rolemapping">
+            rolemapping_resource="rolemappings/RemoveUnusedParameter.rolemapping">
       </rolemapping>
       <rolemapping
             rolemapping_resource="rolemappings/ExtractMethod.rolemapping">
