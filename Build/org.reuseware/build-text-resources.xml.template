@@ -22,6 +22,12 @@
 		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource/bin" />	
 		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.ecore/bin" />	
 		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.text/bin" />
+		<!-- the validation plugins might not be loaded yet -->
+		<classpath>
+			<fileset dir="${eclipse.home}/">
+				<include name="plugins/org.eclipse.emf.validation*.jar"/>
+			</fileset>
+		</classpath>
 	</taskdef>
 	
 	<!-- for ecore text resource support -->
