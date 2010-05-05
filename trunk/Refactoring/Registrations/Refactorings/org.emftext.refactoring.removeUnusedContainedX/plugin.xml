@@ -4,13 +4,13 @@
    <extension
          point="org.emftext.refactoring.rolemodel">
       <rolemodel
-            rolemodel_resource="rolemodel/removeUnusedX.rolestext">
+            rolemodel_resource="rolemodel/removeUnusedContainedX.rolestext">
       </rolemodel>
    </extension>
    <extension
          point="org.emftext.refactoring.refspec">
       <refspec
-            refspec_resource="refspec/removeUnusedX.refspec">
+            refspec_resource="refspec/removeUnusedContainedX.refspec">
       </refspec>
    </extension>
 
