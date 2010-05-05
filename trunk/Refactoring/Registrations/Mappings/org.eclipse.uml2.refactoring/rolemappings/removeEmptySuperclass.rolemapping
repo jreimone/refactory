@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+
+RemoveEmptySuperclass maps <RemoveEmptyContainedX> { 
+	 
+	 RemoveeContainer := Class{
+	 	removees := generalization:Generalization -> general:Class;
+	 };
+	 
+	 Removee := Class;
+}

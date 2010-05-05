@@ -40,6 +40,9 @@
       <rolemapping
             rolemapping_resource="rolemappings/removeUnusedClass.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/removeEmptySuperclass.rolemapping">
+      </rolemapping>
   </extension>
 
 	<!-- post processors -->
