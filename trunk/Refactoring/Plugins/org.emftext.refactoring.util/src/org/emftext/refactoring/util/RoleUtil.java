@@ -41,16 +41,16 @@ public class RoleUtil {
 	 * @param variable
 	 * @return
 	 */
-	public static Role getRoleFromVariable(Variable variable){
+	public static Role getRoleFromVariable(Variable variable) {
 		VariableDeclarationCommand command = variable.getContainerCommand();
-		if(command instanceof CREATE){
+		if (command instanceof CREATE) {
 			return ((CREATE) command).getSourceRole();
-		} else if(command instanceof VariableAssignment){
+		} else if (command instanceof VariableAssignment) {
 			VariableAssignment assignment = (VariableAssignment) command;
 			ObjectAssignmentCommand objectAssignment = assignment.getAssignment();
-			if(objectAssignment instanceof RoleReference){
+			if (objectAssignment instanceof RoleReference) {
 				return ((RoleReference) objectAssignment).getRole();
-			} else if(objectAssignment instanceof TRACE){
+			} else if (objectAssignment instanceof TRACE) {
 				return ((TRACE) objectAssignment).getRole();
 			} else {
 				throw new UnsupportedOperationException("implement this case");
@@ -58,7 +58,7 @@ public class RoleUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Given a list of objects this method returns all roles which are present in this object list
 	 * depending on the given mapping.
@@ -66,9 +66,9 @@ public class RoleUtil {
 	 * @param objects
 	 * @param mapping
 	 */
-	public static Set<Role> getAppliedRoles(List<? extends EObject> objects, Mapping mapping){
+	public static Set<Role> getAppliedRoles(List<? extends EObject> objects, Mapping mapping) {
 		Set<Role> appliedRoleSet = new LinkedHashSet<Role>();
-		if(objects == null){
+		if (objects == null) {
 			return appliedRoleSet;
 		}
 		EcoreUtil.resolveAll(mapping.getMappedRoleModel());
@@ -89,12 +89,12 @@ public class RoleUtil {
 	 * @param minEquality
 	 * @return
 	 */
-	public static List<Mapping> getPossibleMappingsForSelection(List<? extends EObject> selection, Map<String, Mapping> roleMappings, double minEquality){
+	public static List<Mapping> getPossibleMappingsForSelection(List<? extends EObject> selection, Map<String, Mapping> roleMappings, double minEquality) {
 		List<Mapping> possibleMappings = new LinkedList<Mapping>();
 		List<Mapping> mappings = (List<Mapping>) roleMappings.values();
 		for (Mapping mapping : mappings) {
 			double equality = getProcentualEquality(selection, mapping);
-			if(Math.abs(equality) >= minEquality){
+			if (Math.abs(equality) >= minEquality) {
 				possibleMappings.add(mapping);
 			}
 		}
@@ -109,20 +109,18 @@ public class RoleUtil {
 	 * @param minEquality
 	 * @return
 	 */
-	public static List<Mapping> getPossibleMappingsForInputSelection(List<? extends EObject> selection, Map<String, Mapping> roleMappings, double minEquality){
+	public static List<Mapping> getPossibleMappingsForInputSelection(List<? extends EObject> selection, Map<String, Mapping> roleMappings, double minEquality) {
 		List<Mapping> possibleMappings = new LinkedList<Mapping>();
 		Collection<Mapping> mappings = roleMappings.values();
 		for (Mapping mapping : mappings) {
 			EcoreUtil.resolveAll(mapping);
 			double equality = getProcentualInputEquality(selection, mapping);
-			if(Math.abs(equality) >= minEquality){
+			if (Math.abs(equality) >= minEquality) {
 				possibleMappings.add(mapping);
 			}
 		}
 		return possibleMappings;
 	}
-
-
 
 	/**
 	 * Calculates the procentual equality between the applied roles of the given objects and the
@@ -133,7 +131,7 @@ public class RoleUtil {
 	 * @param mapping
 	 * @return
 	 */
-	public static double getProcentualEquality(List<? extends EObject> objects, Mapping mapping){
+	public static double getProcentualEquality(List<? extends EObject> objects, Mapping mapping) {
 		Collection<Role> allMappedRoles = getAllMappedRoles(mapping);
 		Collection<Role> appliedRoles = getAppliedRoles(objects, mapping);
 		double result = getProcentualRolesEquality(allMappedRoles, appliedRoles);
@@ -153,27 +151,27 @@ public class RoleUtil {
 	public static double getProcentualRolesEquality(Collection<Role> mappedRoles, Collection<Role> appliedRoles) {
 		Collection<Role> matchedRoles = new LinkedList<Role>();
 		for (Role appliedRole : appliedRoles) {
-			if(mappedRoles.contains(appliedRole)){
+			if (mappedRoles.contains(appliedRole)) {
 				matchedRoles.add(appliedRole);
 			}
 		}
 		appliedRoles.removeAll(matchedRoles);
 		mappedRoles.removeAll(matchedRoles);
-		if(appliedRoles.size() == 0 && mappedRoles.size() == 0){
+		if (appliedRoles.size() == 0 && mappedRoles.size() == 0) {
 			return 1.0;
 		}
 		double result = Double.NaN;
-		if(mappedRoles.size() >= appliedRoles.size()){
+		if (mappedRoles.size() >= appliedRoles.size()) {
 			double mappedRolesValue = new Integer(mappedRoles.size()).doubleValue();
 			double matchedRolesValue = new Integer(matchedRoles.size()).doubleValue();
 			result = 1.0 - ((mappedRolesValue - matchedRolesValue) / mappedRolesValue);
-		} else if(matchedRoles.size() == 0){
+		} else if (matchedRoles.size() == 0) {
 			return 0.0;
 		} else {
 			double matchedRolesValue = new Integer(matchedRoles.size()).doubleValue();
 			double appliedRolesValue = new Integer(appliedRoles.size()).doubleValue();
-			result = 1.0 + (appliedRolesValue / ( matchedRolesValue + appliedRolesValue));
-			result = - result;
+			result = 1.0 + (appliedRolesValue / (matchedRolesValue + appliedRolesValue));
+			result = -result;
 		}
 		return result;
 	}
@@ -184,7 +182,7 @@ public class RoleUtil {
 	 * @param mapping
 	 * @return
 	 */
-	public static List<Role> getAllMappedRoles(Mapping mapping){
+	public static List<Role> getAllMappedRoles(Mapping mapping) {
 		EcoreUtil.resolveAll(mapping.getMappedRoleModel());
 		return mapping.getAllMappedRoles();
 	}
@@ -195,11 +193,11 @@ public class RoleUtil {
 	 * @param mapping the mapping to search for input roles
 	 * @return all input roles
 	 */
-	public static List<Role> getAllInputRoles(Mapping mapping){
+	public static List<Role> getAllInputRoles(Mapping mapping) {
 		List<Role> inputRoles = new LinkedList<Role>();
 		List<Role> mappedRoles = getAllMappedRoles(mapping);
 		for (Role role : mappedRoles) {
-			if(role.getModifier().contains(RoleModifier.INPUT)){
+			if (role.getModifier().contains(RoleModifier.INPUT)) {
 				inputRoles.add(role);
 			}
 		}
@@ -215,12 +213,12 @@ public class RoleUtil {
 	 * @param mapping
 	 * @return
 	 */
-	public static double getProcentualInputEquality(List<? extends EObject> input, Mapping mapping){
+	public static double getProcentualInputEquality(List<? extends EObject> input, Mapping mapping) {
 		List<Role> inputRoles = getAllInputRoles(mapping);
 		Set<Role> appliedRoles = getAppliedRoles(input, mapping);
 		return getProcentualRolesEquality(inputRoles, appliedRoles);
 	}
-	
+
 	/**
 	 * Filters the given list of {@link EObject}s by the {@link EClass}es to which the input roles of the given
 	 * <code>mapping</code> where mapped.
@@ -230,7 +228,7 @@ public class RoleUtil {
 	 * @param mapping
 	 * @return
 	 */
-	public static List<? extends EObject> filterObjectsByInputRoles(List<? extends EObject> objects, Mapping mapping){
+	public static List<? extends EObject> filterObjectsByInputRoles(List<? extends EObject> objects, Mapping mapping) {
 		List<Role> inputRoles = getAllInputRoles(mapping);
 		return filterObjectsByRoles(objects, mapping, inputRoles.toArray(new Role[0]));
 	}
@@ -244,13 +242,13 @@ public class RoleUtil {
 	 * @param roles
 	 * @return
 	 */
-	public static List<? extends EObject> filterObjectsByRoles(List<? extends EObject> objects, Mapping mapping, Role... roles){
+	public static List<EObject> filterObjectsByRoles(List<? extends EObject> objects, Mapping mapping, Role... roles) {
 		List<Role> roleList = Arrays.asList(roles);
 		List<EObject> filteredList = new LinkedList<EObject>();
 		for (EObject eObject : objects) {
 			List<Role> appliedRoles = mapping.getMappedRolesForEObject(eObject);
 			for (Role role : appliedRoles) {
-				if(roleList.contains(role)){
+				if (roleList.contains(role)) {
 					filteredList.add(eObject);
 				}
 			}
@@ -264,13 +262,13 @@ public class RoleUtil {
 	 * @param paths
 	 * @return
 	 */
-	public static EObject getFirstCommonObjectWithRoleFromPaths(Role role, Mapping mapping, List<? extends EObject>... paths){
+	public static EObject getFirstCommonObjectWithRoleFromPaths(Role role, Mapping mapping, List<? extends EObject>... paths) {
 		List<List<? extends EObject>> sortedPaths = ModelUtil.sortPathsBySize(paths);
-		if(sortedPaths.size() == 1){
+		if (sortedPaths.size() == 1) {
 			List<? extends EObject> path = sortedPaths.get(0);
 			for (EObject object : path) {
 				EList<Role> roles = mapping.getMappedRolesForEObject(object);
-				if(roles.contains(role)){
+				if (roles.contains(role)) {
 					return object;
 				}
 			}
@@ -282,19 +280,19 @@ public class RoleUtil {
 				boolean found = true;
 				for (int j = i + 1; j < sortedPaths.size(); j++) {
 					List<? extends EObject> nextPath = sortedPaths.get(j);
-					if(!nextPath.contains(eObject)){
+					if (!nextPath.contains(eObject)) {
 						found = false;
 					} else {
 						EList<Role> roles = mapping.getMappedRolesForEObject(eObject);
-						if(!roles.contains(role)){
+						if (!roles.contains(role)) {
 							found = false;
 						}
 					}
-					if(!found){
+					if (!found) {
 						break;
 					}
 				}
-				if(found){
+				if (found) {
 					return eObject;
 				}
 			}
