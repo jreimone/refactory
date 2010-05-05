@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RemoveEmptyContainedX
+Bundle-SymbolicName: org.emftext.refactoring.removeEmptyContainedX;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.emftext.refactoring.removeemptycontainedx.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.rolemodel
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
