@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -16,19 +18,26 @@ import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
+import org.emftext.language.refactoring.refactoring_specification.EMPTY;
 import org.emftext.language.refactoring.refactoring_specification.ObjectRemoval;
 import org.emftext.language.refactoring.refactoring_specification.REMOVE;
+import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.RemoveModifier;
 import org.emftext.language.refactoring.refactoring_specification.RoleRemoval;
 import org.emftext.language.refactoring.refactoring_specification.UNUSED;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
+import org.emftext.language.refactoring.rolemapping.RelationMapping;
+import org.emftext.language.refactoring.roles.MultiplicityRelation;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * @author Jan Reimann
@@ -78,8 +87,30 @@ public class REMOVEInterpreter {
 		List<EObject> filteredRemovals = new LinkedList<EObject>();
 		if (modifier instanceof UNUSED) {
 			filteredRemovals = interpreteUNUSED(removals);
+		} else if (modifier instanceof EMPTY) {
+			filteredRemovals = interpreteEMPTY(removals);
 		}
 		return filteredRemovals;
+	}
+
+	/**
+	 * @param removals
+	 * @return
+	 */
+	private List<EObject> interpreteEMPTY(List<EObject> removals) {
+		List<EObject> emptyRemovals = new LinkedList<EObject>();
+		for (EObject removal : removals) {
+			TreeIterator<Object> iterator = EcoreUtil.getAllContents(removal, true);
+			boolean empty = true;
+			while (iterator.hasNext()) {
+				Object object = (Object) iterator.next();
+				empty = false;
+			}
+			if (empty) {
+				emptyRemovals.add(removal);
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -110,19 +141,13 @@ public class REMOVEInterpreter {
 		if (removalWithoutExternalReferences.size() > 0) {
 			for (EObject removal : removalWithoutExternalReferences) {
 				Resource ownResource = removal.eResource();
+				ECrossReferenceAdapter crossReferencer;
 				if (ownResource != null) {
-					List<Adapter> adapters = ownResource.eAdapters();
-					ECrossReferenceAdapter crossReferencer = null;
-					for (Adapter adapter : adapters) {
-						if (adapter instanceof ECrossReferenceAdapter) {
-							crossReferencer = (ECrossReferenceAdapter) adapter;
-							break;
-						}
-					}
-					if (crossReferencer == null) {
-						crossReferencer = new ECrossReferenceAdapter();
-						ownResource.eAdapters().add(crossReferencer);
-					}
+					crossReferencer = getCrossReferencer(ownResource);
+				} else {
+					crossReferencer = getCrossReferencer(EcoreUtil.getRootContainer(removal));
+				}
+				if (crossReferencer != null) {
 					Collection<Setting> references = crossReferencer.getInverseReferences(removal, true);
 					boolean onlyContainerReference = true;
 					for (Setting setting : references) {
@@ -139,12 +164,33 @@ public class REMOVEInterpreter {
 					if (onlyContainerReference) {
 						unusedRemovals.add(removal);
 					}
-				} else {
-					unusedRemovals.add(removal);
 				}
 			}
 		}
 		return unusedRemovals;
+	}
+
+	/**
+	 * @param ownResource
+	 * @return
+	 */
+	private ECrossReferenceAdapter getCrossReferencer(Notifier ownResource) {
+		if (ownResource == null) {
+			return null;
+		}
+		List<Adapter> adapters = ownResource.eAdapters();
+		ECrossReferenceAdapter crossReferencer = null;
+		for (Adapter adapter : adapters) {
+			if (adapter instanceof ECrossReferenceAdapter) {
+				crossReferencer = (ECrossReferenceAdapter) adapter;
+				break;
+			}
+		}
+		if (crossReferencer == null) {
+			crossReferencer = new ECrossReferenceAdapter();
+			ownResource.eAdapters().add(crossReferencer);
+		}
+		return crossReferencer;
 	}
 
 	/**
@@ -184,8 +230,86 @@ public class REMOVEInterpreter {
 				default:
 					break;
 			}
+		} else if (removal instanceof RelationReference) {
+			MultiplicityRelation relation = ((RelationReference) removal).getRelation();
+			EObject interpretationContext = relation.getInterpretationContext();
+			Object resolvedContext = resolveInterpretationContext(interpretationContext);
+			if (interpretationContext instanceof Role) {
+				if (resolvedContext instanceof EObject) {
+					List<EObject> containedElements = collectRemovals(relation, (Role) interpretationContext, (EObject) resolvedContext);
+					removals.addAll(containedElements);
+				} else if (resolvedContext instanceof List<?>) {
+					List<EObject> objects = (List<EObject>) resolvedContext;
+					for (EObject eObject : objects) {
+						List<EObject> containedElements = collectRemovals(relation, (Role) interpretationContext, eObject);
+						removals.addAll(containedElements);
+					}
+				}
+			} else {
+				throw new UnsupportedOperationException("implement this case");
+			}
 		}
 		return removals;
+	}
+
+	/**
+	 * @param relation
+	 * @param role
+	 * @param root
+	 */
+	@SuppressWarnings("unchecked")
+	private List<EObject> collectRemovals(MultiplicityRelation relation, Role role, EObject root) {
+		List<EObject> removals = new LinkedList<EObject>();
+		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(role);
+		RelationMapping relationMapping = concreteMapping.getRelationMappingForRelation(relation);
+		List<ReferenceMetaClassPair> pairs = relationMapping.getReferenceMetaClassPair();
+		Object children = referencesForEObject(root, pairs);
+		if (children instanceof EObject) {
+			removals.add((EObject) children);
+		} else if (children instanceof List<?>) {
+			removals.addAll((List<EObject>) children);
+		}
+		return removals;
+	}
+
+	private Object referencesForEObject(EObject root, List<ReferenceMetaClassPair> pairs) {
+		if (pairs == null) {
+			return null;
+		} else {
+			if (pairs.size() == 1) {
+				return root.eGet(pairs.get(0).getReference(), true);
+			} else {
+				List<ReferenceMetaClassPair> reducedPairs = new LinkedList<ReferenceMetaClassPair>();
+				for (int i = 1; i < pairs.size(); i++) {
+					reducedPairs.add(pairs.get(i));
+				}
+				ReferenceMetaClassPair pair = pairs.get(0);
+				Object newRoot = root.eGet(pair.getReference());
+				if (newRoot instanceof EObject) {
+					return referencesForEObject((EObject) newRoot, reducedPairs);
+				} else {
+					throw new UnsupportedOperationException(
+							"implement this case - but this shouldn't happen because here only one EObject should be returned");
+				}
+			}
+		}
+	}
+
+	private Object resolveInterpretationContext(EObject interpretationContext) {
+		if (interpretationContext instanceof Variable) {
+			return context.getObjectForVariable((Variable) interpretationContext);
+		} else if (interpretationContext instanceof Role) {
+			Role role = (Role) interpretationContext;
+			if (role.getModifier().contains(RoleModifier.INPUT)) {
+				List<EObject> filteredSelection = RoleUtil.filterObjectsByRoles(selection, mapping, role);
+				assignedRole = role;
+				runtimeValue = filteredSelection;
+				return filteredSelection;
+			} else {
+				throw new UnsupportedOperationException("implement this case");
+			}
+		}
+		return null;
 	}
 
 	/**
