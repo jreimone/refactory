@@ -12,9 +12,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
-import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.refactoring.util.ModelUtil;
 
 public class ReferenceMetaClassPairMetaClassReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair, org.eclipse.emf.ecore.EClass> {
@@ -26,7 +26,7 @@ public class ReferenceMetaClassPairMetaClassReferenceResolver implements org.emf
 		if(parent instanceof ConcreteMapping){
 			ConcreteMapping concreteMapping = (ConcreteMapping) parent;
 			EClass metaclass = concreteMapping.getMetaclass();
-			RelationMapping relationMapping = (RelationMapping) container.eContainer();
+			CollaborationMapping relationMapping = (CollaborationMapping) container.eContainer();
 			
 			List<ReferenceMetaClassPair> referencePairs = relationMapping.getReferenceMetaClassPair();
 			List<ReferenceMetaClassPair> tempPairList = new LinkedList<ReferenceMetaClassPair>();
@@ -111,7 +111,8 @@ public class ReferenceMetaClassPairMetaClassReferenceResolver implements org.emf
 //	}
 	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return element.getName();
+//		return delegate.deResolve(element, container, reference);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

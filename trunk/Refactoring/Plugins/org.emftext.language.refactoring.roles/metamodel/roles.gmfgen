@@ -103,13 +103,13 @@
         <metaClass
             href="roles.genmodel#//roles/RoleImplication"/>
         <containmentMetaFeature
-            href="roles.genmodel#//roles/RoleModel/relations"/>
+            href="roles.genmodel#//roles/RoleModel/collaborations"/>
         <childMetaFeature
-            href="roles.genmodel#//roles/RoleModel/relations"/>
+            href="roles.genmodel#//roles/RoleModel/collaborations"/>
         <sourceMetaFeature
-            href="roles.genmodel#//roles/Relation/source"/>
+            href="roles.genmodel#//roles/Collaboration/source"/>
         <targetMetaFeature
-            href="roles.genmodel#//roles/Relation/target"/>
+            href="roles.genmodel#//roles/Collaboration/target"/>
       </modelFacet>
     </links>
     <links
@@ -137,13 +137,13 @@
         <metaClass
             href="roles.genmodel#//roles/RoleProhibition"/>
         <containmentMetaFeature
-            href="roles.genmodel#//roles/RoleModel/relations"/>
+            href="roles.genmodel#//roles/RoleModel/collaborations"/>
         <childMetaFeature
-            href="roles.genmodel#//roles/RoleModel/relations"/>
+            href="roles.genmodel#//roles/RoleModel/collaborations"/>
         <sourceMetaFeature
-            href="roles.genmodel#//roles/Relation/source"/>
+            href="roles.genmodel#//roles/Collaboration/source"/>
         <targetMetaFeature
-            href="roles.genmodel#//roles/Relation/target"/>
+            href="roles.genmodel#//roles/Collaboration/target"/>
       </modelFacet>
     </links>
     <links
@@ -171,15 +171,15 @@
         <metaClass
             href="roles.genmodel#//roles/RoleAssociation"/>
         <containmentMetaFeature
-            href="roles.genmodel#//roles/RoleModel/relations"/>
+            href="roles.genmodel#//roles/RoleModel/collaborations"/>
         <childMetaFeature
-            href="roles.genmodel#//roles/RoleModel/relations"/>
+            href="roles.genmodel#//roles/RoleModel/collaborations"/>
         <modelElementInitializer
             xsi:type="gmfgen:GenFeatureSeqInitializer">
           <initializers
               xsi:type="gmfgen:GenReferenceNewElementSpec">
             <feature
-                href="roles.genmodel#//roles/MultiplicityRelation/sourceMultiplicity"/>
+                href="roles.genmodel#//roles/MultiplicityCollaboration/sourceMultiplicity"/>
             <newElementInitializers>
               <initializers
                   xsi:type="gmfgen:GenFeatureValueSpec"
@@ -198,7 +198,7 @@
           <initializers
               xsi:type="gmfgen:GenReferenceNewElementSpec">
             <feature
-                href="roles.genmodel#//roles/MultiplicityRelation/targetMultiplicity"/>
+                href="roles.genmodel#//roles/MultiplicityCollaboration/targetMultiplicity"/>
             <newElementInitializers>
               <initializers
                   xsi:type="gmfgen:GenFeatureValueSpec"
@@ -216,9 +216,9 @@
           </initializers>
         </modelElementInitializer>
         <sourceMetaFeature
-            href="roles.genmodel#//roles/Relation/source"/>
+            href="roles.genmodel#//roles/Collaboration/source"/>
         <targetMetaFeature
-            href="roles.genmodel#//roles/Relation/target"/>
+            href="roles.genmodel#//roles/Collaboration/target"/>
       </modelFacet>
       <labels
           visualID="6001"
@@ -240,9 +240,9 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
           <metaFeatures
-              href="roles.genmodel#//roles/MultiplicityRelation/sourceName"/>
+              href="roles.genmodel#//roles/MultiplicityCollaboration/sourceName"/>
           <editableMetaFeatures
-              href="roles.genmodel#//roles/MultiplicityRelation/sourceName"/>
+              href="roles.genmodel#//roles/MultiplicityCollaboration/sourceName"/>
         </modelFacet>
       </labels>
       <labels
@@ -265,9 +265,9 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
           <metaFeatures
-              href="roles.genmodel#//roles/MultiplicityRelation/targetName"/>
+              href="roles.genmodel#//roles/MultiplicityCollaboration/targetName"/>
           <editableMetaFeatures
-              href="roles.genmodel#//roles/MultiplicityRelation/targetName"/>
+              href="roles.genmodel#//roles/MultiplicityCollaboration/targetName"/>
         </modelFacet>
       </labels>
     </links>
@@ -296,15 +296,15 @@
         <metaClass
             href="roles.genmodel#//roles/RoleComposition"/>
         <containmentMetaFeature
-            href="roles.genmodel#//roles/RoleModel/relations"/>
+            href="roles.genmodel#//roles/RoleModel/collaborations"/>
         <childMetaFeature
-            href="roles.genmodel#//roles/RoleModel/relations"/>
+            href="roles.genmodel#//roles/RoleModel/collaborations"/>
         <modelElementInitializer
             xsi:type="gmfgen:GenFeatureSeqInitializer">
           <initializers
               xsi:type="gmfgen:GenReferenceNewElementSpec">
             <feature
-                href="roles.genmodel#//roles/MultiplicityRelation/sourceMultiplicity"/>
+                href="roles.genmodel#//roles/MultiplicityCollaboration/sourceMultiplicity"/>
             <newElementInitializers>
               <initializers
                   xsi:type="gmfgen:GenFeatureValueSpec"
@@ -323,7 +323,7 @@
           <initializers
               xsi:type="gmfgen:GenReferenceNewElementSpec">
             <feature
-                href="roles.genmodel#//roles/MultiplicityRelation/targetMultiplicity"/>
+                href="roles.genmodel#//roles/MultiplicityCollaboration/targetMultiplicity"/>
             <newElementInitializers>
               <initializers
                   xsi:type="gmfgen:GenFeatureValueSpec"
@@ -341,9 +341,9 @@
           </initializers>
         </modelElementInitializer>
         <sourceMetaFeature
-            href="roles.genmodel#//roles/Relation/source"/>
+            href="roles.genmodel#//roles/Collaboration/source"/>
         <targetMetaFeature
-            href="roles.genmodel#//roles/Relation/target"/>
+            href="roles.genmodel#//roles/Collaboration/target"/>
       </modelFacet>
       <labels
           visualID="6003"
@@ -365,9 +365,9 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
           <metaFeatures
-              href="roles.genmodel#//roles/MultiplicityRelation/sourceName"/>
+              href="roles.genmodel#//roles/MultiplicityCollaboration/sourceName"/>
           <editableMetaFeatures
-              href="roles.genmodel#//roles/MultiplicityRelation/sourceName"/>
+              href="roles.genmodel#//roles/MultiplicityCollaboration/sourceName"/>
         </modelFacet>
       </labels>
       <labels
@@ -390,9 +390,9 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
           <metaFeatures
-              href="roles.genmodel#//roles/MultiplicityRelation/targetName"/>
+              href="roles.genmodel#//roles/MultiplicityCollaboration/targetName"/>
           <editableMetaFeatures
-              href="roles.genmodel#//roles/MultiplicityRelation/targetName"/>
+              href="roles.genmodel#//roles/MultiplicityCollaboration/targetName"/>
         </modelFacet>
       </labels>
     </links>
@@ -408,12 +408,12 @@
             genNodes="//@diagram/@topLevelNodes.0"/>
       </groups>
       <groups
-          title="Relations"
+          title="Collaborations"
           collapse="true">
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Implication"
-            description="Create new RoleImplication relation"
+            description="Create new Role Implication"
             smallIconPath="/org.emftext.language.refactoring.roles.edit/icons/new/implication.gif"
             genLinks="//@diagram/@links.0"/>
         <entries

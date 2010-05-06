@@ -12,9 +12,9 @@ import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 import org.emftext.language.refactoring.refactoring_specification.TraceObject;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
@@ -57,19 +57,19 @@ public class CREATEInterpreter {
 		Variable targetVar = ((VariableReference) target).getVariable();
 		EObject parentObject = (EObject) context.getObjectForVariable(targetVar);
 		EObject childObject = (EObject) context.getObjectForVariable(sourceVar);
-		RelationMapping relationMapping = null;
+		CollaborationMapping collaborationMapping = null;
 		if(parentObject instanceof TraceObject){
 			TraceObject trace = (TraceObject) parentObject;
 			parentObject = trace.getContainer();
 			Role appliedContainerRole = trace.getAppliedRole();
 			ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(appliedContainerRole);
-			relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
+			collaborationMapping = concreteMapping.getCollaborationMappingForTargetRole(childRole);
 		} else {
 			Role varRole = RoleUtil.getRoleFromVariable(targetVar);
 			ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(varRole);
-			relationMapping = concreteMapping.getRelationMappingForTargetRole(childRole);
+			collaborationMapping = concreteMapping.getCollaborationMappingForTargetRole(childRole);
 		}
-		if(relationMapping == null){
+		if(collaborationMapping == null){
 			Integer objectIndex = context.getIndexForVariable(index);
 			AbstractPathCreator pathCreator = new CreatePathCreator();
 			return pathCreator.createPath(parentObject, null, childObject, objectIndex);
@@ -77,7 +77,7 @@ public class CREATEInterpreter {
 			// add with path
 			Integer objectIndex = context.getIndexForVariable(index);
 			AbstractPathCreator pathCreator = new CreatePathCreator();
-			return pathCreator.createPath(parentObject, relationMapping.getReferenceMetaClassPair(), childObject, objectIndex);
+			return pathCreator.createPath(parentObject, collaborationMapping.getReferenceMetaClassPair(), childObject, objectIndex);
 		}
 	}
 

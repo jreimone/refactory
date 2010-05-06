@@ -22,7 +22,7 @@ public class RolesPaletteFactory {
 	 */
 	public void fillPalette(PaletteRoot paletteRoot) {
 		paletteRoot.add(createRoles1Group());
-		paletteRoot.add(createRelations2Group());
+		paletteRoot.add(createCollaborations2Group());
 	}
 
 	/**
@@ -38,13 +38,13 @@ public class RolesPaletteFactory {
 	}
 
 	/**
-	 * Creates "Relations" palette tool group
+	 * Creates "Collaborations" palette tool group
 	 * @generated
 	 */
-	private PaletteContainer createRelations2Group() {
+	private PaletteContainer createCollaborations2Group() {
 		PaletteDrawer paletteContainer = new PaletteDrawer(
-				Messages.Relations2Group_title);
-		paletteContainer.setId("createRelations2Group"); //$NON-NLS-1$
+				Messages.Collaborations2Group_title);
+		paletteContainer.setId("createCollaborations2Group"); //$NON-NLS-1$
 		paletteContainer.add(createImplication1CreationTool());
 		paletteContainer.add(createProhibition2CreationTool());
 		paletteContainer.add(createAssociation3CreationTool());

@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
-import org.emftext.language.refactoring.roles.MultiplicityRelation;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleFeature;
@@ -89,10 +89,10 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 					return;
 				}
 			}
-			if(feature instanceof MultiplicityRelation){
-				MultiplicityRelation multRelation = (MultiplicityRelation) feature;
+			if(feature instanceof MultiplicityCollaboration){
+				MultiplicityCollaboration multRelation = (MultiplicityCollaboration) feature;
 				if(multRelation.getTargetName() != null && multRelation.getTargetName().equals(featureString)){
-					((MultiplicityRelation) feature).setInterpretationContext(interpretationContext);
+					((MultiplicityCollaboration) feature).setInterpretationContext(interpretationContext);
 					result.addMapping(identifier, (FeatureType) feature);
 					return;
 				}

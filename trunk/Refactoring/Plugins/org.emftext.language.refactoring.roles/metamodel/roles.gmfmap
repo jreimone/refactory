@@ -34,7 +34,7 @@
     <domainMetaElement
         href="roles.ecore#//RoleImplication"/>
     <containmentFeature
-        href="roles.ecore#//RoleModel/relations"/>
+        href="roles.ecore#//RoleModel/collaborations"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="roles.gmftool#//@palette/@tools.1/@tools.0"/>
@@ -42,16 +42,16 @@
         href="roles.gmfgraph#RoleImplicationConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="roles.ecore#//Relation/source"/>
+        href="roles.ecore#//Collaboration/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="roles.ecore#//Relation/target"/>
+        href="roles.ecore#//Collaboration/target"/>
   </links>
   <links>
     <domainMetaElement
         href="roles.ecore#//RoleProhibition"/>
     <containmentFeature
-        href="roles.ecore#//RoleModel/relations"/>
+        href="roles.ecore#//RoleModel/collaborations"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="roles.gmftool#//@palette/@tools.1/@tools.1"/>
@@ -59,10 +59,10 @@
         href="roles.gmfgraph#RoleProhibitionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="roles.ecore#//Relation/source"/>
+        href="roles.ecore#//Collaboration/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="roles.ecore#//Relation/target"/>
+        href="roles.ecore#//Collaboration/target"/>
   </links>
   <links>
     <domainMetaElement
@@ -73,7 +73,7 @@
           xsi:type="gmfmap:ReferenceNewElementSpec">
         <feature
             xsi:type="ecore:EReference"
-            href="roles.ecore#//MultiplicityRelation/sourceMultiplicity"/>
+            href="roles.ecore#//MultiplicityCollaboration/sourceMultiplicity"/>
         <newElementInitializers>
           <initializers
               xsi:type="gmfmap:FeatureValueSpec">
@@ -99,7 +99,7 @@
           xsi:type="gmfmap:ReferenceNewElementSpec">
         <feature
             xsi:type="ecore:EReference"
-            href="roles.ecore#//MultiplicityRelation/targetMultiplicity"/>
+            href="roles.ecore#//MultiplicityCollaboration/targetMultiplicity"/>
         <newElementInitializers>
           <initializers
               xsi:type="gmfmap:FeatureValueSpec">
@@ -127,21 +127,21 @@
       <diagramLabel
           href="roles.gmfgraph#RoleAssociationSourceName"/>
       <features
-          href="roles.ecore#//MultiplicityRelation/sourceName"/>
+          href="roles.ecore#//MultiplicityCollaboration/sourceName"/>
       <editableFeatures
-          href="roles.ecore#//MultiplicityRelation/sourceName"/>
+          href="roles.ecore#//MultiplicityCollaboration/sourceName"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
           href="roles.gmfgraph#RoleAssociationTargetName"/>
       <features
-          href="roles.ecore#//MultiplicityRelation/targetName"/>
+          href="roles.ecore#//MultiplicityCollaboration/targetName"/>
       <editableFeatures
-          href="roles.ecore#//MultiplicityRelation/targetName"/>
+          href="roles.ecore#//MultiplicityCollaboration/targetName"/>
     </labelMappings>
     <containmentFeature
-        href="roles.ecore#//RoleModel/relations"/>
+        href="roles.ecore#//RoleModel/collaborations"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="roles.gmftool#//@palette/@tools.1/@tools.2"/>
@@ -149,10 +149,10 @@
         href="roles.gmfgraph#RoleAssociationConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="roles.ecore#//Relation/source"/>
+        href="roles.ecore#//Collaboration/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="roles.ecore#//Relation/target"/>
+        href="roles.ecore#//Collaboration/target"/>
   </links>
   <links>
     <domainMetaElement
@@ -163,7 +163,7 @@
           xsi:type="gmfmap:ReferenceNewElementSpec">
         <feature
             xsi:type="ecore:EReference"
-            href="roles.ecore#//MultiplicityRelation/sourceMultiplicity"/>
+            href="roles.ecore#//MultiplicityCollaboration/sourceMultiplicity"/>
         <newElementInitializers>
           <initializers
               xsi:type="gmfmap:FeatureValueSpec">
@@ -189,7 +189,7 @@
           xsi:type="gmfmap:ReferenceNewElementSpec">
         <feature
             xsi:type="ecore:EReference"
-            href="roles.ecore#//MultiplicityRelation/targetMultiplicity"/>
+            href="roles.ecore#//MultiplicityCollaboration/targetMultiplicity"/>
         <newElementInitializers>
           <initializers
               xsi:type="gmfmap:FeatureValueSpec">
@@ -217,21 +217,21 @@
       <diagramLabel
           href="roles.gmfgraph#RoleCompositionSourceName"/>
       <features
-          href="roles.ecore#//MultiplicityRelation/sourceName"/>
+          href="roles.ecore#//MultiplicityCollaboration/sourceName"/>
       <editableFeatures
-          href="roles.ecore#//MultiplicityRelation/sourceName"/>
+          href="roles.ecore#//MultiplicityCollaboration/sourceName"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
           href="roles.gmfgraph#RoleCompositionTargetName"/>
       <features
-          href="roles.ecore#//MultiplicityRelation/targetName"/>
+          href="roles.ecore#//MultiplicityCollaboration/targetName"/>
       <editableFeatures
-          href="roles.ecore#//MultiplicityRelation/targetName"/>
+          href="roles.ecore#//MultiplicityCollaboration/targetName"/>
     </labelMappings>
     <containmentFeature
-        href="roles.ecore#//RoleModel/relations"/>
+        href="roles.ecore#//RoleModel/collaborations"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="roles.gmftool#//@palette/@tools.1/@tools.3"/>
@@ -239,10 +239,10 @@
         href="roles.gmfgraph#RoleCompositionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="roles.ecore#//Relation/source"/>
+        href="roles.ecore#//Collaboration/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="roles.ecore#//Relation/target"/>
+        href="roles.ecore#//Collaboration/target"/>
   </links>
   <diagram>
     <diagramCanvas

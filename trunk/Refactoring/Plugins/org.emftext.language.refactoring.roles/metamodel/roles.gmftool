@@ -24,12 +24,12 @@
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="Relations"
+        title="Collaborations"
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
           title="Implication"
-          description="Create new RoleImplication relation">
+          description="Create new Role Implication">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/new/implication.gif"

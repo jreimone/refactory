@@ -59,9 +59,9 @@ public class RolesParserProvider extends AbstractProvider implements
 	private IParser getRoleAssociationSourceName_6001Parser() {
 		if (roleAssociationSourceName_6001Parser == null) {
 			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE
-					.getMultiplicityRelation_SourceName() };
+					.getMultiplicityCollaboration_SourceName() };
 			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE
-					.getMultiplicityRelation_SourceName() };
+					.getMultiplicityCollaboration_SourceName() };
 			MessageFormatParser parser = new MessageFormatParser(features,
 					editableFeatures);
 			roleAssociationSourceName_6001Parser = parser;
@@ -80,9 +80,9 @@ public class RolesParserProvider extends AbstractProvider implements
 	private IParser getRoleAssociationTargetName_6002Parser() {
 		if (roleAssociationTargetName_6002Parser == null) {
 			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE
-					.getMultiplicityRelation_TargetName() };
+					.getMultiplicityCollaboration_TargetName() };
 			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE
-					.getMultiplicityRelation_TargetName() };
+					.getMultiplicityCollaboration_TargetName() };
 			MessageFormatParser parser = new MessageFormatParser(features,
 					editableFeatures);
 			roleAssociationTargetName_6002Parser = parser;
@@ -101,9 +101,9 @@ public class RolesParserProvider extends AbstractProvider implements
 	private IParser getRoleCompositionSourceName_6003Parser() {
 		if (roleCompositionSourceName_6003Parser == null) {
 			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE
-					.getMultiplicityRelation_SourceName() };
+					.getMultiplicityCollaboration_SourceName() };
 			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE
-					.getMultiplicityRelation_SourceName() };
+					.getMultiplicityCollaboration_SourceName() };
 			MessageFormatParser parser = new MessageFormatParser(features,
 					editableFeatures);
 			roleCompositionSourceName_6003Parser = parser;
@@ -122,9 +122,9 @@ public class RolesParserProvider extends AbstractProvider implements
 	private IParser getRoleCompositionTargetName_6004Parser() {
 		if (roleCompositionTargetName_6004Parser == null) {
 			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE
-					.getMultiplicityRelation_TargetName() };
+					.getMultiplicityCollaboration_TargetName() };
 			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE
-					.getMultiplicityRelation_TargetName() };
+					.getMultiplicityCollaboration_TargetName() };
 			MessageFormatParser parser = new MessageFormatParser(features,
 					editableFeatures);
 			roleCompositionTargetName_6004Parser = parser;

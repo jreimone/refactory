@@ -85,7 +85,7 @@ public class RoleImplicationCreateCommand extends EditElementCommand {
 
 		RoleImplication newElement = RolesFactory.eINSTANCE
 				.createRoleImplication();
-		getContainer().getRelations().add(newElement);
+		getContainer().getCollaborations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
 		doConfigure(newElement, monitor, info);

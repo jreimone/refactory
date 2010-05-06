@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,18 +25,18 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.RolesFactory;
 import org.emftext.language.refactoring.roles.RolesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.refactoring.roles.Role} object.
+ * This is the item provider adapter for a {@link org.emftext.language.refactoring.roles.MultiplicityCollaboration} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RoleItemProvider
-	extends NamedElementItemProvider
+public class MultiplicityCollaborationItemProvider
+	extends CollaborationItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -48,7 +49,7 @@ public class RoleItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleItemProvider(AdapterFactory adapterFactory) {
+	public MultiplicityCollaborationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,71 +64,48 @@ public class RoleItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOutgoingPropertyDescriptor(object);
-			addIncomingPropertyDescriptor(object);
-			addModifierPropertyDescriptor(object);
+			addSourceNamePropertyDescriptor(object);
+			addTargetNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Outgoing feature.
+	 * This adds a property descriptor for the Source Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOutgoingPropertyDescriptor(Object object) {
+	protected void addSourceNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Role_outgoing_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Role_outgoing_feature", "_UI_Role_type"),
-				 RolesPackage.Literals.ROLE__OUTGOING,
+				 getString("_UI_MultiplicityCollaboration_sourceName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MultiplicityCollaboration_sourceName_feature", "_UI_MultiplicityCollaboration_type"),
+				 RolesPackage.Literals.MULTIPLICITY_COLLABORATION__SOURCE_NAME,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Incoming feature.
+	 * This adds a property descriptor for the Target Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIncomingPropertyDescriptor(Object object) {
+	protected void addTargetNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Role_incoming_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Role_incoming_feature", "_UI_Role_type"),
-				 RolesPackage.Literals.ROLE__INCOMING,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Modifier feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addModifierPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Role_modifier_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Role_modifier_feature", "_UI_Role_type"),
-				 RolesPackage.Literals.ROLE__MODIFIER,
+				 getString("_UI_MultiplicityCollaboration_targetName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MultiplicityCollaboration_targetName_feature", "_UI_MultiplicityCollaboration_type"),
+				 RolesPackage.Literals.MULTIPLICITY_COLLABORATION__TARGET_NAME,
 				 true,
 				 false,
 				 false,
@@ -148,7 +126,8 @@ public class RoleItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(RolesPackage.Literals.ROLE__ATTRIBUTES);
+			childrenFeatures.add(RolesPackage.Literals.MULTIPLICITY_COLLABORATION__SOURCE_MULTIPLICITY);
+			childrenFeatures.add(RolesPackage.Literals.MULTIPLICITY_COLLABORATION__TARGET_MULTIPLICITY);
 		}
 		return childrenFeatures;
 	}
@@ -167,17 +146,6 @@ public class RoleItemProvider
 	}
 
 	/**
-	 * This returns Role.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("new/role"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -185,10 +153,10 @@ public class RoleItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Role)object).getName();
+		String label = ((MultiplicityCollaboration)object).getSourceName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Role_type") :
-			getString("_UI_Role_type") + " " + label;
+			getString("_UI_MultiplicityCollaboration_type") :
+			getString("_UI_MultiplicityCollaboration_type") + " " + label;
 	}
 
 	/**
@@ -202,11 +170,13 @@ public class RoleItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Role.class)) {
-			case RolesPackage.ROLE__MODIFIER:
+		switch (notification.getFeatureID(MultiplicityCollaboration.class)) {
+			case RolesPackage.MULTIPLICITY_COLLABORATION__SOURCE_NAME:
+			case RolesPackage.MULTIPLICITY_COLLABORATION__TARGET_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case RolesPackage.ROLE__ATTRIBUTES:
+			case RolesPackage.MULTIPLICITY_COLLABORATION__SOURCE_MULTIPLICITY:
+			case RolesPackage.MULTIPLICITY_COLLABORATION__TARGET_MULTIPLICITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -226,8 +196,36 @@ public class RoleItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(RolesPackage.Literals.ROLE__ATTRIBUTES,
-				 RolesFactory.eINSTANCE.createRoleAttribute()));
+				(RolesPackage.Literals.MULTIPLICITY_COLLABORATION__SOURCE_MULTIPLICITY,
+				 RolesFactory.eINSTANCE.createMultiplicity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(RolesPackage.Literals.MULTIPLICITY_COLLABORATION__TARGET_MULTIPLICITY,
+				 RolesFactory.eINSTANCE.createMultiplicity()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == RolesPackage.Literals.MULTIPLICITY_COLLABORATION__SOURCE_MULTIPLICITY ||
+			childFeature == RolesPackage.Literals.MULTIPLICITY_COLLABORATION__TARGET_MULTIPLICITY;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

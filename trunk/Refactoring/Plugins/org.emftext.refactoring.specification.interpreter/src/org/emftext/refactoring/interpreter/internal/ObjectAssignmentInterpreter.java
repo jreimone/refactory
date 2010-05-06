@@ -29,10 +29,10 @@ import org.emftext.language.refactoring.refactoring_specification.TRACE;
 import org.emftext.language.refactoring.refactoring_specification.UPTREE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
-import org.emftext.language.refactoring.rolemapping.RelationMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
@@ -162,8 +162,8 @@ public class ObjectAssignmentInterpreter {
 			return null;
 		}
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(sourceRole);
-		RelationMapping relationMapping = concreteMapping.getRelationMappingForTargetRole(assignedRole);
-		List<ReferenceMetaClassPair> pairs = relationMapping.getReferenceMetaClassPair();
+		CollaborationMapping collaborationMapping = concreteMapping.getCollaborationMappingForTargetRole(assignedRole);
+		List<ReferenceMetaClassPair> pairs = collaborationMapping.getReferenceMetaClassPair();
 		List<EObject> values = getEObjectWithRoleFromPath(assignedRole, sourceObject, pairs);
 		if(values == null  || values.size() == 0){
 			ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);

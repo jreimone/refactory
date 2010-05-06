@@ -16,22 +16,22 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
 import org.emftext.language.refactoring.refactoring_specification.EMPTY;
 import org.emftext.language.refactoring.refactoring_specification.ObjectRemoval;
 import org.emftext.language.refactoring.refactoring_specification.REMOVE;
-import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.RemoveModifier;
 import org.emftext.language.refactoring.refactoring_specification.RoleRemoval;
 import org.emftext.language.refactoring.refactoring_specification.UNUSED;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
-import org.emftext.language.refactoring.rolemapping.RelationMapping;
-import org.emftext.language.refactoring.roles.MultiplicityRelation;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
@@ -236,20 +236,20 @@ public class REMOVEInterpreter {
 				default:
 					break;
 			}
-		} else if (removal instanceof RelationReference) {
-			MultiplicityRelation relation = ((RelationReference) removal).getRelation();
-			EObject interpretationContext = relation.getInterpretationContext();
+		} else if (removal instanceof CollaborationReference) {
+			MultiplicityCollaboration collaboration = ((CollaborationReference) removal).getCollaboration();
+			EObject interpretationContext = collaboration.getInterpretationContext();
 			Object resolvedContext = resolveInterpretationContext(interpretationContext);
 			if (interpretationContext instanceof Role) {
 				if (resolvedContext instanceof EObject) {
-					List<EObject> containedElements = collectRemovals(relation, (Role) interpretationContext, (EObject) resolvedContext);
+					List<EObject> containedElements = collectRemovals(collaboration, (Role) interpretationContext, (EObject) resolvedContext);
 					if (containedElements != null) {
 						removals.addAll(containedElements);
 					}
 				} else if (resolvedContext instanceof List<?>) {
 					List<EObject> objects = (List<EObject>) resolvedContext;
 					for (EObject eObject : objects) {
-						List<EObject> containedElements = collectRemovals(relation, (Role) interpretationContext, eObject);
+						List<EObject> containedElements = collectRemovals(collaboration, (Role) interpretationContext, eObject);
 						if (containedElements != null) {
 							removals.addAll(containedElements);
 						}
@@ -263,16 +263,16 @@ public class REMOVEInterpreter {
 	}
 
 	/**
-	 * @param relation
+	 * @param collaboration
 	 * @param role
 	 * @param root
 	 */
-	private List<EObject> collectRemovals(MultiplicityRelation relation, Role role, EObject root) {
+	private List<EObject> collectRemovals(MultiplicityCollaboration collaboration, Role role, EObject root) {
 		List<EObject> removals = new LinkedList<EObject>();
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(role);
-		RelationMapping relationMapping = concreteMapping.getRelationMappingForRelation(relation);
-		List<ReferenceMetaClassPair> pairs = relationMapping.getReferenceMetaClassPair();
-		Role targetRole = relation.getTarget();
+		CollaborationMapping collaborationMapping = concreteMapping.getCollaborationMappingForCollaboration(collaboration);
+		List<ReferenceMetaClassPair> pairs = collaborationMapping.getReferenceMetaClassPair();
+		Role targetRole = collaboration.getTarget();
 		List<EObject> children = referencesForEObject(root, pairs, targetRole);
 		if (children != null) {
 			for (EObject eObject : children) {

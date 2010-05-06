@@ -1,68 +1,63 @@
-epackage rolemapping;
+epackage rolemapping ; 
 
 // plain Java imports
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.BasicEList;
-import java.util.LinkedHashSet;
-import java.util.Set;
- 
+import org.eclipse.emf.ecore.EObject; 
+import org.eclipse.emf.ecore.EClass; 
+import org.eclipse.emf.common.util.EList; 
+import org.eclipse.emf.common.util.BasicEList; 
+import java.util.LinkedHashSet; 
+import java.util.Set; 
 // import of other EClasses
-import roles.Role;
-import roles.RoleModifier;
+import roles.Role; 
+import roles.RoleModifier; 
 
-eclass Mapping {
-	
-	getAllMappedRoles() {
-		EList<Role> roles = new BasicEList<Role>();
-		EList<ConcreteMapping> mappings = getRoleToMetaelement();
-		for (ConcreteMapping concreteMapping : mappings) {
-			roles.add(concreteMapping.getRole());
-		}
-		return roles;
-  	}
-  	
-  	getMappedRolesForEObject() {
-		Set<Role> roleSet = new LinkedHashSet<Role>();
-		EClass metaclass = object.eClass();
-		EList<ConcreteMapping> mappings = getRoleToMetaelement();
-		for (ConcreteMapping concreteMapping : mappings) {
-			Role mappedRole = concreteMapping.getRole();
-			EClass mappedClass = concreteMapping.getMetaclass();
-			if(mappedClass.equals(metaclass)){
-				roleSet.add(mappedRole);
-			}
-			if(mappedRole.getModifier().contains(RoleModifier.SUPER)){
-				if(mappedClass.isSuperTypeOf(metaclass)){
-					roleSet.add(mappedRole);
-				}
-			}
-		}
-		EList<Role> mappedRoles = new BasicEList<Role>();
-		for (Role role : roleSet) {
-			mappedRoles.add(role);
-		}
-		return mappedRoles;
-  	}
-  	
-  	getEClassForRole(){
-  		EList<ConcreteMapping> mappings = getRoleToMetaelement();
-		for (ConcreteMapping mapping : mappings) {
-			if(mapping.getRole().equals(role)){
-				return mapping.getMetaclass();
-			}
-		}
-		return null;
-  	}
-  	
-  	getConcreteMappingForRole(){
-  		EList<ConcreteMapping> mappings = getRoleToMetaelement();
-		for (ConcreteMapping mapping : mappings) {
-			if(mapping.getRole().equals(role)){
-				return mapping;
-			}
-		}
-		return null;
-  	}
-}
+eclass Mapping { 
+	getAllMappedRoles ( ) { 
+			EList < Role > roles = new BasicEList < Role > ( ) ; 
+			EList < ConcreteMapping > mappings = getRoleToMetaelement ( ) ; 
+			for ( ConcreteMapping concreteMapping : mappings ) { 
+				roles .add ( concreteMapping .getRole ( ) ) ; 
+			} 
+			return roles ; 
+		} 
+	getMappedRolesForEObject ( ) { 
+			Set < Role > roleSet = new LinkedHashSet < Role > ( ) ; 
+			EClass metaclass = object .eClass ( ) ; 
+			EList < ConcreteMapping > mappings = getRoleToMetaelement ( ) ; 
+			for ( ConcreteMapping concreteMapping : mappings ) { 
+				Role mappedRole = concreteMapping .getRole ( ) ; 
+				EClass mappedClass = concreteMapping .getMetaclass ( ) ; 
+				if ( mappedClass .equals ( metaclass ) ) { 
+					roleSet .add ( mappedRole ) ; 
+				} 
+				if ( mappedRole .getModifier ( ) .contains ( RoleModifier .SUPER ) ) { 
+					if ( mappedClass .isSuperTypeOf ( metaclass ) ) { 
+						roleSet .add ( mappedRole ) ; 
+					} 
+				} 
+			} 
+			EList < Role > mappedRoles = new BasicEList < Role > ( ) ; 
+			for ( Role role : roleSet ) { 
+				mappedRoles .add ( role ) ; 
+			} 
+			return mappedRoles ; 
+		} 
+	getEClassForRole ( ) { 
+			EList < ConcreteMapping > mappings = getRoleToMetaelement ( ) ; 
+			for ( ConcreteMapping mapping : mappings ) { 
+				if ( mapping .getRole ( ) .equals ( role ) ) { 
+					return mapping .getMetaclass ( ) ; 
+				} 
+			} 
+			return null ; 
+		} 
+	getConcreteMappingForRole ( ) { 
+			EList < ConcreteMapping > mappings = getRoleToMetaelement ( ) ; 
+			for ( ConcreteMapping mapping : mappings ) { 
+				if ( mapping .getRole ( ) .equals ( role ) ) { 
+					return mapping ; 
+				} 
+			} 
+			return null ; 
+		} 
+} 

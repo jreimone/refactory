@@ -248,7 +248,7 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String Relations2Group_title;
+	public static String Collaborations2Group_title;
 
 	/**
 	 * @generated

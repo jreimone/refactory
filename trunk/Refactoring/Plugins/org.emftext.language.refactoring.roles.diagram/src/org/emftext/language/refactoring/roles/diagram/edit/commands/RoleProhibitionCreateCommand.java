@@ -85,7 +85,7 @@ public class RoleProhibitionCreateCommand extends EditElementCommand {
 
 		RoleProhibition newElement = RolesFactory.eINSTANCE
 				.createRoleProhibition();
-		getContainer().getRelations().add(newElement);
+		getContainer().getCollaborations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
 		doConfigure(newElement, monitor, info);

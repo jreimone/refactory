@@ -13,8 +13,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,20 +21,19 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.refactoring.roles.Commentable;
+import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.RolesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.refactoring.roles.Commentable} object.
+ * This is the item provider adapter for a {@link org.emftext.language.refactoring.roles.Collaboration} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class CommentableItemProvider
-	extends ItemProviderAdapter
+public class CollaborationItemProvider
+	extends RoleFeatureItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -49,7 +46,7 @@ public class CommentableItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CommentableItemProvider(AdapterFactory adapterFactory) {
+	public CollaborationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,25 +61,71 @@ public class CommentableItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addCommentPropertyDescriptor(object);
+			addSourcePropertyDescriptor(object);
+			addTargetPropertyDescriptor(object);
+			addModifierPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Comment feature.
+	 * This adds a property descriptor for the Source feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addCommentPropertyDescriptor(Object object) {
+	protected void addSourcePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Commentable_comment_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Commentable_comment_feature", "_UI_Commentable_type"),
-				 RolesPackage.Literals.COMMENTABLE__COMMENT,
+				 getString("_UI_Collaboration_source_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Collaboration_source_feature", "_UI_Collaboration_type"),
+				 RolesPackage.Literals.COLLABORATION__SOURCE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Target feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTargetPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Collaboration_target_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Collaboration_target_feature", "_UI_Collaboration_type"),
+				 RolesPackage.Literals.COLLABORATION__TARGET,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Modifier feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addModifierPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Collaboration_modifier_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Collaboration_modifier_feature", "_UI_Collaboration_type"),
+				 RolesPackage.Literals.COLLABORATION__MODIFIER,
 				 true,
 				 false,
 				 false,
@@ -99,10 +142,7 @@ public class CommentableItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Commentable)object).getComment();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Commentable_type") :
-			getString("_UI_Commentable_type") + " " + label;
+		return getString("_UI_Collaboration_type");
 	}
 
 	/**
@@ -116,8 +156,8 @@ public class CommentableItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Commentable.class)) {
-			case RolesPackage.COMMENTABLE__COMMENT:
+		switch (notification.getFeatureID(Collaboration.class)) {
+			case RolesPackage.COLLABORATION__MODIFIER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -134,17 +174,6 @@ public class CommentableItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return RolesEditPlugin.INSTANCE;
 	}
 
 }

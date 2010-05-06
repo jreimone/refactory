@@ -8,8 +8,8 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.refactoring.roles.MultiplicityRelation;
-import org.emftext.language.refactoring.roles.Relation;
+import org.emftext.language.refactoring.roles.Collaboration;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResource;
@@ -36,11 +36,11 @@ public class DistinctRelationNamesAnalyser extends AbstractPostProcessor {
 		EcoreUtil.resolveAll(model);
 		EList<Role> roles = model.getRoles();
 		for (Role role : roles) {
-			EList<Relation> outgoingRelations = role.getOutgoing();
+			EList<Collaboration> collaborations = role.getOutgoing();
 			Set<String> targetNames = new HashSet<String>();
-			for (Relation relation : outgoingRelations) {
-				if(relation instanceof MultiplicityRelation){
-					String targetName = ((MultiplicityRelation) relation).getTargetName();
+			for (Collaboration relation : collaborations) {
+				if(relation instanceof MultiplicityCollaboration){
+					String targetName = ((MultiplicityCollaboration) relation).getTargetName();
 					if(targetName == null || "".equals(targetName)){
 						addProblem(resource
 								, ERoleModelProblemType.EMPTY_OUTGOING_RELATION_TARGET_NAME

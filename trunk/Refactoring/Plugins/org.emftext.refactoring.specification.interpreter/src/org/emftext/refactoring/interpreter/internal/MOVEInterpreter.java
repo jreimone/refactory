@@ -11,20 +11,20 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
 import org.emftext.language.refactoring.refactoring_specification.DISTINCT;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.Modifier;
-import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.SourceContext;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
 import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
-import org.emftext.language.refactoring.rolemapping.RelationMapping;
-import org.emftext.language.refactoring.roles.MultiplicityRelation;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
@@ -54,9 +54,9 @@ public class MOVEInterpreter {
 		SourceContext sourceContext = object.getSource();
 		Role sourceRole = null;
 		List<? extends EObject> sourceObjects = null;
-		if(sourceContext instanceof RelationReference){
-			MultiplicityRelation relation = ((RelationReference) sourceContext).getRelation();
-			sourceRole = relation.getTarget();
+		if(sourceContext instanceof CollaborationReference){
+			MultiplicityCollaboration collaboration = ((CollaborationReference) sourceContext).getCollaboration();
+			sourceRole = collaboration.getTarget();
 			if(sourceRole.getModifier().contains(RoleModifier.INPUT)){
 				sourceObjects = selection;
 			}
@@ -76,8 +76,8 @@ public class MOVEInterpreter {
 			targetObject = (EObject) context.getObjectForVariable(variable);
 			targetRole = RoleUtil.getRoleFromVariable(variable);
 		}
-		RelationMapping relationMapping = mapping.getConcreteMappingForRole(targetRole).getRelationMappingForTargetRole(sourceRole);
-		List<ReferenceMetaClassPair> referencePairs = relationMapping.getReferenceMetaClassPair();
+		CollaborationMapping collaborationMapping = mapping.getConcreteMappingForRole(targetRole).getCollaborationMappingForTargetRole(sourceRole);
+		List<ReferenceMetaClassPair> referencePairs = collaborationMapping.getReferenceMetaClassPair();
 		Integer index = context.getIndexForVariable(object.getIndex());
 		AbstractPathCreator pathCreator = new MovePathCreator();
 		IValueProvider<?, ?> valueProvider = interpreter.getValueProviderForCommand(instruction);

@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
-import org.emftext.language.refactoring.roles.Relation;
-import org.emftext.language.refactoring.roles.RelationModifier;
+import org.emftext.language.refactoring.roles.Collaboration;
+import org.emftext.language.refactoring.roles.CollaborationModifier;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleImplication;
 import org.emftext.language.refactoring.roles.RoleProhibition;
@@ -71,15 +71,15 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 		EList<ConcreteMapping> mappings = mapping.getRoleToMetaelement();
 		for (ConcreteMapping concreteMapping : mappings) {
 			Role role = concreteMapping.getRole();
-			EList<Relation> outgoings = role.getOutgoing();
-			for (Relation relation : outgoings) {
+			EList<Collaboration> outgoings = role.getOutgoing();
+			for (Collaboration collaboration : outgoings) {
 				IStatus status = null;
-				if(relation instanceof RoleProhibition){
-					status = validateProhibition((RoleProhibition) relation, concreteMapping.getMetaclass(), mappings);
+				if(collaboration instanceof RoleProhibition){
+					status = validateProhibition((RoleProhibition) collaboration, concreteMapping.getMetaclass(), mappings);
 
 				}
-				if(relation instanceof RoleImplication){
-					status = validateImplication((RoleImplication) relation, concreteMapping.getMetaclass(), mappings);
+				if(collaboration instanceof RoleImplication){
+					status = validateImplication((RoleImplication) collaboration, concreteMapping.getMetaclass(), mappings);
 
 				}
 				if(status != null){
@@ -95,7 +95,7 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 		Role sourceRole = prohibition.getSource();
 		Role targetRole = prohibition.getTarget();
 		EClass targetEClass = getMappedEClassByRole(mappings, targetRole);
-		if(!prohibition.getModifier().contains(RelationModifier.TRANSITIVE)){
+		if(!prohibition.getModifier().contains(CollaborationModifier.TRANSITIVE)){
 			if(mappedEClass.equals(targetEClass)){
 				status = new Status(IStatus.ERROR
 						, Activator.PLUGIN_ID
@@ -126,7 +126,7 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 		Role sourceRole = implication.getSource();
 		Role targetRole = implication.getTarget();
 		EClass targetEClass = getMappedEClassByRole(mappings, targetRole);
-		if(!implication.getModifier().contains(RelationModifier.TRANSITIVE)){
+		if(!implication.getModifier().contains(CollaborationModifier.TRANSITIVE)){
 			if(!mappedEClass.equals(targetEClass)){
 				status = new Status(IStatus.ERROR
 						, Activator.PLUGIN_ID
