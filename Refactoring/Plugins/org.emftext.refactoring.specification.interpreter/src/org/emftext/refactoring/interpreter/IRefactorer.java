@@ -4,6 +4,7 @@
 package org.emftext.refactoring.interpreter;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -11,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 
@@ -128,4 +130,11 @@ public interface IRefactorer {
 	 * @return
 	 */
 	public EObject getOriginalModel();
+	
+	/**
+	 * Returns the current interpreter which actually did the transformations.
+	 * 
+	 * @return
+	 */
+	public IRefactoringInterpreter getCurrentInterpreter();
 }

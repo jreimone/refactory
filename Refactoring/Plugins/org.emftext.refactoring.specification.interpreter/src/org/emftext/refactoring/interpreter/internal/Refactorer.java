@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -175,7 +176,15 @@ public class Refactorer implements IRefactorer {
 		resourcesToSave = interpreter.getResourcesToSave();
 		return refactoredModel;
 	}
+	
+	public IRefactoringInterpreter getCurrentInterpreter(){
+		return currentInterpreter;
+	}
 
+//	public Map<Role, Object> getRoleRuntimeInstances(){
+//		return roleRuntimeInstances;
+//	}
+	
 	/**
 	 * @param filteredElements
 	 * @param interpreter
