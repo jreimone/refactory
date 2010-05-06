@@ -86,7 +86,7 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 
 		RoleAssociation newElement = RolesFactory.eINSTANCE
 				.createRoleAssociation();
-		getContainer().getRelations().add(newElement);
+		getContainer().getCollaborations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
 		RolesElementTypes.init_RoleAssociation_4003(newElement);

@@ -7,18 +7,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.refactoring.refactoring_specification.RelationReference;
+import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
 import org.emftext.language.refactoring.refactoring_specification.SET;
 import org.emftext.language.refactoring.refactoring_specification.SourceContext;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 import org.emftext.language.refactoring.refactoring_specification.TraceObject;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
-import org.emftext.language.refactoring.rolemapping.RelationMapping;
-import org.emftext.language.refactoring.roles.MultiplicityRelation;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.util.RoleUtil;
@@ -63,19 +63,19 @@ public class SETInterpreter {
 			}
 		}
 		ConcreteMapping concreteMapping = null;
-		RelationMapping relationMapping = null;
-		if(target instanceof RelationReference){
-			MultiplicityRelation relation = ((RelationReference) target).getRelation();
-			targetRole = relation.getSource();
-			EObject interpretationContext = relation.getInterpretationContext();
+		CollaborationMapping collaborationMapping = null;
+		if(target instanceof CollaborationReference){
+			MultiplicityCollaboration collaboration = ((CollaborationReference) target).getCollaboration();
+			targetRole = collaboration.getSource();
+			EObject interpretationContext = collaboration.getInterpretationContext();
 			if(interpretationContext instanceof Variable){
 				targetObject = context.getObjectForVariable((Variable) interpretationContext);
 			} else if(interpretationContext instanceof Role) {
 				throw new UnsupportedOperationException("implement this case");
 			}
 			concreteMapping = mapping.getConcreteMappingForRole(targetRole);
-			relationMapping = concreteMapping.getRelationMappingForRelation(relation);
-			List<ReferenceMetaClassPair> pairs = relationMapping.getReferenceMetaClassPair();
+			collaborationMapping = concreteMapping.getCollaborationMappingForCollaboration(collaboration);
+			List<ReferenceMetaClassPair> pairs = collaborationMapping.getReferenceMetaClassPair();
 			Object sourceObjects = null;
 			if(source instanceof VariableReference){
 				sourceObjects = context.getObjectForVariable(((VariableReference) source).getVariable());
@@ -86,10 +86,10 @@ public class SETInterpreter {
 
 		} else {
 			concreteMapping = mapping.getConcreteMappingForRole(targetRole);
-			relationMapping = concreteMapping.getRelationMappingForTargetRole(sourceRole);
+			collaborationMapping = concreteMapping.getCollaborationMappingForTargetRole(sourceRole);
 			List<ReferenceMetaClassPair> referencePairs = null;
-			if(relationMapping != null){
-				referencePairs = relationMapping.getReferenceMetaClassPair();
+			if(collaborationMapping != null){
+				referencePairs = collaborationMapping.getReferenceMetaClassPair();
 			}
 			return handleTarget(targetObject, referencePairs, sourceObject);
 //			AbstractPathCreator pathCreator = new CreatePathCreator();

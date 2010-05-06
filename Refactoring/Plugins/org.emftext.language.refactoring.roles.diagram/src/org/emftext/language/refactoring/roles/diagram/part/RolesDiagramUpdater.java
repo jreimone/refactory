@@ -272,7 +272,7 @@ public class RolesDiagramUpdater {
 	private static Collection getContainedTypeModelFacetLinks_RoleImplication_4001(
 			RoleModel container) {
 		Collection result = new LinkedList();
-		for (Iterator links = container.getRelations().iterator(); links
+		for (Iterator links = container.getCollaborations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleImplication) {
@@ -298,7 +298,7 @@ public class RolesDiagramUpdater {
 	private static Collection getContainedTypeModelFacetLinks_RoleProhibition_4002(
 			RoleModel container) {
 		Collection result = new LinkedList();
-		for (Iterator links = container.getRelations().iterator(); links
+		for (Iterator links = container.getCollaborations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleProhibition) {
@@ -324,7 +324,7 @@ public class RolesDiagramUpdater {
 	private static Collection getContainedTypeModelFacetLinks_RoleAssociation_4003(
 			RoleModel container) {
 		Collection result = new LinkedList();
-		for (Iterator links = container.getRelations().iterator(); links
+		for (Iterator links = container.getCollaborations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleAssociation) {
@@ -350,7 +350,7 @@ public class RolesDiagramUpdater {
 	private static Collection getContainedTypeModelFacetLinks_RoleComposition_4004(
 			RoleModel container) {
 		Collection result = new LinkedList();
-		for (Iterator links = container.getRelations().iterator(); links
+		for (Iterator links = container.getCollaborations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleComposition) {
@@ -381,7 +381,7 @@ public class RolesDiagramUpdater {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
 			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE
-					.getRelation_Target()
+					.getCollaboration_Target()
 					|| false == setting.getEObject() instanceof RoleImplication) {
 				continue;
 			}
@@ -409,7 +409,7 @@ public class RolesDiagramUpdater {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
 			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE
-					.getRelation_Target()
+					.getCollaboration_Target()
 					|| false == setting.getEObject() instanceof RoleProhibition) {
 				continue;
 			}
@@ -437,7 +437,7 @@ public class RolesDiagramUpdater {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
 			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE
-					.getRelation_Target()
+					.getCollaboration_Target()
 					|| false == setting.getEObject() instanceof RoleAssociation) {
 				continue;
 			}
@@ -465,7 +465,7 @@ public class RolesDiagramUpdater {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
 			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE
-					.getRelation_Target()
+					.getCollaboration_Target()
 					|| false == setting.getEObject() instanceof RoleComposition) {
 				continue;
 			}
@@ -501,7 +501,7 @@ public class RolesDiagramUpdater {
 			return Collections.EMPTY_LIST;
 		}
 		Collection result = new LinkedList();
-		for (Iterator links = container.getRelations().iterator(); links
+		for (Iterator links = container.getCollaborations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleImplication) {
@@ -543,7 +543,7 @@ public class RolesDiagramUpdater {
 			return Collections.EMPTY_LIST;
 		}
 		Collection result = new LinkedList();
-		for (Iterator links = container.getRelations().iterator(); links
+		for (Iterator links = container.getCollaborations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleProhibition) {
@@ -585,7 +585,7 @@ public class RolesDiagramUpdater {
 			return Collections.EMPTY_LIST;
 		}
 		Collection result = new LinkedList();
-		for (Iterator links = container.getRelations().iterator(); links
+		for (Iterator links = container.getCollaborations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleAssociation) {
@@ -627,7 +627,7 @@ public class RolesDiagramUpdater {
 			return Collections.EMPTY_LIST;
 		}
 		Collection result = new LinkedList();
-		for (Iterator links = container.getRelations().iterator(); links
+		for (Iterator links = container.getCollaborations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleComposition) {

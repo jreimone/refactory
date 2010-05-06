@@ -86,7 +86,7 @@ public class RoleCompositionCreateCommand extends EditElementCommand {
 
 		RoleComposition newElement = RolesFactory.eINSTANCE
 				.createRoleComposition();
-		getContainer().getRelations().add(newElement);
+		getContainer().getCollaborations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
 		RolesElementTypes.init_RoleComposition_4004(newElement);

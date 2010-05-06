@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
+import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
 import org.emftext.language.refactoring.refactoring_specification.Context;
 import org.emftext.language.refactoring.refactoring_specification.FromClause;
 import org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand;
@@ -25,7 +26,6 @@ import org.emftext.language.refactoring.refactoring_specification.ObjectAssignme
 import org.emftext.language.refactoring.refactoring_specification.ObjectReference;
 import org.emftext.language.refactoring.refactoring_specification.REMOVE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.refactoring_specification.RelationReference;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.SET;
 import org.emftext.language.refactoring.refactoring_specification.SourceContext;
@@ -33,7 +33,7 @@ import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.roles.MultiplicityRelation;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
@@ -143,11 +143,11 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		if(contextIsOptional(context)){
 			return true;
 		}
-		if(context instanceof RelationReference){
-			MultiplicityRelation relation = ((RelationReference) context).getRelation();
-			Role role = relation.getSource();
+		if(context instanceof CollaborationReference){
+			MultiplicityCollaboration collaboration = ((CollaborationReference) context).getCollaboration();
+			Role role = collaboration.getSource();
 			if(containsModifierOPTIONAL(role)){return true;}
-			role = relation.getTarget();
+			role = collaboration.getTarget();
 			if(containsModifierOPTIONAL(role)){return true;}
 		}
 		return false;

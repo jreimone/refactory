@@ -50,9 +50,9 @@ RULES {
 					roleToMetaelement+ !0 !0  
 					"}" !0 !0 ;
 	
-	ConcreteMapping ::= role[IDENT] ":=" metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" outgoingRelationMappings outgoingRelationMappings* "}")? ";" !0;
+	ConcreteMapping ::= role[IDENT] ":=" metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" collaborationMappings collaborationMappings* "}")? ";" !0;
 	
-	RelationMapping ::= relation[IDENT] ":=" referenceMetaClassPair ("->" referenceMetaClassPair)* ";";
+	CollaborationMapping ::= collaboration[IDENT] ":=" referenceMetaClassPair ("->" referenceMetaClassPair)* ";";
 	
 	ReferenceMetaClassPair ::= reference[IDENT] (":" metaClass[IDENT])?;
 	

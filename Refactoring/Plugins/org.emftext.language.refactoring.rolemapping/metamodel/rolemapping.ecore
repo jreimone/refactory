@@ -46,9 +46,9 @@
         eType="#//RoleMappingModel" eOpposite="#//RoleMappingModel/mappings"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConcreteMapping">
-    <eOperations name="getRelationMappingForTargetRole" lowerBound="1" eType="#//RelationMapping">
+    <eOperations name="getCollaborationMappingForTargetRole" lowerBound="1" eType="#//CollaborationMapping">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.rolemapping.RelationMapping > mappings = getOutgoingRelationMappings ( ) ; &#xD;&#xA;for ( org.emftext.language.refactoring.rolemapping.RelationMapping relationMapping : mappings ) { &#xD;&#xA;&#x9;org.eclipse.emf.ecore.util.EcoreUtil .resolveAll ( relationMapping ) ; &#xD;&#xA;&#x9;org.emftext.language.refactoring.roles.MultiplicityRelation relation = relationMapping .getRelation ( ) ; &#xD;&#xA;&#x9;if ( relation .getTarget ( ) .equals ( role ) ) { &#xD;&#xA;&#x9;&#x9;return relationMapping ; &#xD;&#xA;&#x9;} &#xD;&#xA;} &#xD;&#xA;return null ; &#xD;&#xA;"/>
+        <details key="body" value="org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.rolemapping.CollaborationMapping > mappings = getCollaborationMappings ( ) ; &#xD;&#xA;for ( org.emftext.language.refactoring.rolemapping.CollaborationMapping relationMapping : mappings ) { &#xD;&#xA;&#x9;org.eclipse.emf.ecore.util.EcoreUtil .resolveAll ( relationMapping ) ; &#xD;&#xA;&#x9;org.emftext.language.refactoring.roles.MultiplicityCollaboration collaboration = relationMapping .getCollaboration ( ) ; &#xD;&#xA;&#x9;if ( collaboration .getTarget ( ) .equals ( role ) ) { &#xD;&#xA;&#x9;&#x9;return relationMapping ; &#xD;&#xA;&#x9;} &#xD;&#xA;} &#xD;&#xA;return null ; &#xD;&#xA;"/>
         <details key="documentation" value=""/>
       </eAnnotations>
       <eParameters name="role" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
@@ -60,24 +60,24 @@
       </eAnnotations>
       <eParameters name="attribute" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleAttribute"/>
     </eOperations>
-    <eOperations name="getRelationMappingForRelation" lowerBound="1" eType="#//RelationMapping">
+    <eOperations name="getCollaborationMappingForCollaboration" lowerBound="1" eType="#//CollaborationMapping">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="java.util.List &lt; org.emftext.language.refactoring.rolemapping.RelationMapping > relationMappings = getOutgoingRelationMappings ( ) ; &#xD;&#xA;for ( org.emftext.language.refactoring.rolemapping.RelationMapping relationMapping : relationMappings ) { &#xD;&#xA;&#x9;org.emftext.language.refactoring.roles.MultiplicityRelation mappedRelation = relationMapping .getRelation ( ) ; &#xD;&#xA;&#x9;if ( mappedRelation .equals ( relation ) ) { &#xD;&#xA;&#x9;&#x9;return relationMapping ; &#xD;&#xA;&#x9;} &#xD;&#xA;} &#xD;&#xA;return null ; &#xD;&#xA;"/>
+        <details key="body" value="java.util.List &lt; org.emftext.language.refactoring.rolemapping.CollaborationMapping > relationMappings = getCollaborationMappings ( ) ; &#xD;&#xA;for ( org.emftext.language.refactoring.rolemapping.CollaborationMapping collaborationMapping : relationMappings ) { &#xD;&#xA;&#x9;org.emftext.language.refactoring.roles.MultiplicityCollaboration mappedCollaboration = collaborationMapping .getCollaboration ( ) ; &#xD;&#xA;&#x9;if ( mappedCollaboration .equals ( collaboration ) ) { &#xD;&#xA;&#x9;&#x9;return collaborationMapping ; &#xD;&#xA;&#x9;} &#xD;&#xA;} &#xD;&#xA;return null ; &#xD;&#xA;"/>
         <details key="documentation" value=""/>
       </eAnnotations>
-      <eParameters name="relation" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
+      <eParameters name="collaboration" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityCollaboration"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaclass" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingRelationMappings"
-        upperBound="-1" eType="#//RelationMapping" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collaborationMappings"
+        upperBound="-1" eType="#//CollaborationMapping" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributeMappings" upperBound="-1"
         eType="#//AttributeMapping" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RelationMapping">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
-        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityRelation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollaborationMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collaboration" lowerBound="1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityCollaboration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenceMetaClassPair"
         lowerBound="1" upperBound="-1" eType="#//ReferenceMetaClassPair" containment="true"/>
   </eClassifiers>

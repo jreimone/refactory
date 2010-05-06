@@ -102,7 +102,7 @@ RULES{
 	
 	TRACE ::= role[UPPER_IDENTIFIER] "as" "trace" "(" reference ")";
 	
-	RelationReference ::= relation[DOT_NOTATION];
+	CollaborationReference ::= collaboration[DOT_NOTATION];
 	
 	ConstantsReference ::= referencedConstant[CONSTANTS] ;
 	

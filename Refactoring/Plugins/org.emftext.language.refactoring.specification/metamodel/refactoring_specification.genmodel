@@ -47,8 +47,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RoleReference/role"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RoleReference/from"/>
     </genClasses>
-    <genClasses ecoreClass="refactoring_specification.ecore#//RelationReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//RelationReference/relation"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//CollaborationReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//CollaborationReference/collaboration"/>
     </genClasses>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//TargetContext"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ReferenceCommand"/>
