@@ -1,129 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:roles="http://www.emftext.org/language/roles" xmi:id="_9O9IsVKoEd-QAejjnA8m9Q" type="Role Model" measurementUnit="Pixel">
-  <children xmi:type="notation:Node" xmi:id="_9aId8FKoEd-QAejjnA8m9Q" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9aId9VKoEd-QAejjnA8m9Q" type="5001"/>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_9aId8VKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9aId8lKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FillStyle" xmi:id="_9aId81KoEd-QAejjnA8m9Q"/>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:roles="http://www.emftext.org/language/roles" xmi:id="_Dp3ZsFkXEd-yT88BjbIbMQ" type="Role Model" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_EAXOIFkXEd-yT88BjbIbMQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAXOJVkXEd-yT88BjbIbMQ" type="5001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_EAXOIVkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAXOIlkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_EAXOI1kXEd-yT88BjbIbMQ"/>
     <element xmi:type="roles:Role" href="ExtractXwithReferenceClass.roles#//@roles[name='OrigContainer']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9aId9FKoEd-QAejjnA8m9Q" x="95" y="160"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EAXOJFkXEd-yT88BjbIbMQ" x="245" y="185"/>
   </children>
-  <children xmi:type="notation:Node" xmi:id="_9aId9lKoEd-QAejjnA8m9Q" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9aId-1KoEd-QAejjnA8m9Q" type="5001"/>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_9aId91KoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9aId-FKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FillStyle" xmi:id="_9aId-VKoEd-QAejjnA8m9Q"/>
+  <children xmi:type="notation:Node" xmi:id="_EAXOJlkXEd-yT88BjbIbMQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAXOK1kXEd-yT88BjbIbMQ" type="5001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_EAXOJ1kXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAXOKFkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_EAXOKVkXEd-yT88BjbIbMQ"/>
     <element xmi:type="roles:Role" href="ExtractXwithReferenceClass.roles#//@roles[name='Extract']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9aId-lKoEd-QAejjnA8m9Q" x="280" y="160"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EAXOKlkXEd-yT88BjbIbMQ" x="445" y="190"/>
   </children>
-  <children xmi:type="notation:Node" xmi:id="_9aId_FKoEd-QAejjnA8m9Q" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9aIeAVKoEd-QAejjnA8m9Q" type="5001"/>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_9aId_VKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9aId_lKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FillStyle" xmi:id="_9aId_1KoEd-QAejjnA8m9Q"/>
+  <children xmi:type="notation:Node" xmi:id="_EAXOLFkXEd-yT88BjbIbMQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAXOMVkXEd-yT88BjbIbMQ" type="5001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_EAXOLVkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAXOLlkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_EAXOL1kXEd-yT88BjbIbMQ"/>
     <element xmi:type="roles:Role" href="ExtractXwithReferenceClass.roles#//@roles[name='NewContainer']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9aIeAFKoEd-QAejjnA8m9Q" x="425" y="160"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EAXOMFkXEd-yT88BjbIbMQ" x="580" y="190"/>
   </children>
-  <children xmi:type="notation:Node" xmi:id="_9aIeAlKoEd-QAejjnA8m9Q" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9aSO8lKoEd-QAejjnA8m9Q" type="5001"/>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_9aIeA1KoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9aIeBFKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FillStyle" xmi:id="_9aSO8FKoEd-QAejjnA8m9Q"/>
+  <children xmi:type="notation:Node" xmi:id="_EAXOMlkXEd-yT88BjbIbMQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAXON1kXEd-yT88BjbIbMQ" type="5001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_EAXOM1kXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAXONFkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_EAXONVkXEd-yT88BjbIbMQ"/>
     <element xmi:type="roles:Role" href="ExtractXwithReferenceClass.roles#//@roles[name='ContainerContainer']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9aSO8VKoEd-QAejjnA8m9Q" x="225" y="60"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EAXONlkXEd-yT88BjbIbMQ" x="415" y="80"/>
   </children>
-  <children xmi:type="notation:Node" xmi:id="_9aSO81KoEd-QAejjnA8m9Q" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9aSO-FKoEd-QAejjnA8m9Q" type="5001"/>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_9aSO9FKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9aSO9VKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FillStyle" xmi:id="_9aSO9lKoEd-QAejjnA8m9Q"/>
+  <children xmi:type="notation:Node" xmi:id="_EAg_IFkXEd-yT88BjbIbMQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_JVkXEd-yT88BjbIbMQ" type="5001"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_EAg_IVkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAg_IlkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_EAg_I1kXEd-yT88BjbIbMQ"/>
     <element xmi:type="roles:Role" href="ExtractXwithReferenceClass.roles#//@roles[name='MovedReference']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9aSO91KoEd-QAejjnA8m9Q" x="245" y="280"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EAg_JFkXEd-yT88BjbIbMQ" x="420" y="300"/>
   </children>
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_9O9IslKoEd-QAejjnA8m9Q"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Dp3ZsVkXEd-yT88BjbIbMQ"/>
   <element xmi:type="roles:RoleModel" href="ExtractXwithReferenceClass.roles#/"/>
-  <edges xmi:type="notation:Edge" xmi:id="_9aSO-VKoEd-QAejjnA8m9Q" type="4003" source="_9aSO81KoEd-QAejjnA8m9Q" target="_9aId_FKoEd-QAejjnA8m9Q">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9aSO_VKoEd-QAejjnA8m9Q" visible="false" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9aSO_lKoEd-QAejjnA8m9Q" x="10"/>
+  <edges xmi:type="notation:Edge" xmi:id="_EAg_JlkXEd-yT88BjbIbMQ" type="4003" source="_EAg_IFkXEd-yT88BjbIbMQ" target="_EAXOLFkXEd-yT88BjbIbMQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_KlkXEd-yT88BjbIbMQ" visible="false" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAg_K1kXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_9aSO_1KoEd-QAejjnA8m9Q" type="6002">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9aSPAFKoEd-QAejjnA8m9Q" x="10"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_LFkXEd-yT88BjbIbMQ" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAg_LVkXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_9aSO-lKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9aSO-1KoEd-QAejjnA8m9Q"/>
-    <element xmi:type="roles:RoleAssociation" href="ExtractXwithReferenceClass.roles#//@relations.5"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9aSO_FKoEd-QAejjnA8m9Q" points="[3, 0, -117, 99]$[120, 0, 0, 99]$[120, -99, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB11lKoEd-QAejjnA8m9Q" id="(0.972972972972973,0.475)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB111KoEd-QAejjnA8m9Q" id="(0.5,1.0)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_EAg_J1kXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAg_KFkXEd-yT88BjbIbMQ"/>
+    <element xmi:type="roles:RoleAssociation" href="ExtractXwithReferenceClass.roles#//@collaborations.5"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EAg_KVkXEd-yT88BjbIbMQ" points="[5, 0, -97, 90]$[102, 0, 0, 90]$[102, -90, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6EFkXEd-yT88BjbIbMQ" id="(0.954954954954955,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6EVkXEd-yT88BjbIbMQ" id="(0.5,1.0)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_9ab_8FKoEd-QAejjnA8m9Q" type="4004" source="_9aId8FKoEd-QAejjnA8m9Q" target="_9aId9lKoEd-QAejjnA8m9Q">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9ab_9FKoEd-QAejjnA8m9Q" visible="false" type="6003">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9ab_9VKoEd-QAejjnA8m9Q" x="10"/>
+  <edges xmi:type="notation:Edge" xmi:id="_EAg_LlkXEd-yT88BjbIbMQ" type="4004" source="_EAXOIFkXEd-yT88BjbIbMQ" target="_EAXOJlkXEd-yT88BjbIbMQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_MlkXEd-yT88BjbIbMQ" visible="false" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAg_M1kXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_9ab_9lKoEd-QAejjnA8m9Q" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9ab_91KoEd-QAejjnA8m9Q" x="-9" y="8"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_NFkXEd-yT88BjbIbMQ" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAg_NVkXEd-yT88BjbIbMQ" x="-7" y="10"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_9ab_8VKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9ab_8lKoEd-QAejjnA8m9Q"/>
-    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@relations.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9ab_81KoEd-QAejjnA8m9Q" points="[24, 6, -120, -34]$[116, 32, -28, -8]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB12FKoEd-QAejjnA8m9Q" id="(0.967741935483871,0.475)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB12VKoEd-QAejjnA8m9Q" id="(0.017241379310344827,0.475)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_EAg_L1kXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAg_MFkXEd-yT88BjbIbMQ"/>
+    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@collaborations.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EAg_MVkXEd-yT88BjbIbMQ" points="[24, 6, -135, -39]$[131, 37, -28, -8]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6GFkXEd-yT88BjbIbMQ" id="(0.9139784946236559,0.675)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6GVkXEd-yT88BjbIbMQ" id="(0.06896551724137931,0.55)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_9ab_-FKoEd-QAejjnA8m9Q" type="4004" source="_9aId8FKoEd-QAejjnA8m9Q" target="_9aSO81KoEd-QAejjnA8m9Q">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9ab__FKoEd-QAejjnA8m9Q" visible="false" type="6003">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9ab__VKoEd-QAejjnA8m9Q" x="10"/>
+  <edges xmi:type="notation:Edge" xmi:id="_EAg_NlkXEd-yT88BjbIbMQ" type="4004" source="_EAXOIFkXEd-yT88BjbIbMQ" target="_EAg_IFkXEd-yT88BjbIbMQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_OlkXEd-yT88BjbIbMQ" visible="false" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAg_O1kXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_9ab__lKoEd-QAejjnA8m9Q" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9ab__1KoEd-QAejjnA8m9Q" x="9" y="-14"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_PFkXEd-yT88BjbIbMQ" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAg_PVkXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_9ab_-VKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9ab_-lKoEd-QAejjnA8m9Q"/>
-    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@relations.1"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9ab_-1KoEd-QAejjnA8m9Q" points="[0, 40, -110, -101]$[0, 141, -110, 0]$[104, 141, -6, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB10FKoEd-QAejjnA8m9Q" id="(0.4946236559139785,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB10VKoEd-QAejjnA8m9Q" id="(0.05405405405405406,0.525)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_EAg_N1kXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAg_OFkXEd-yT88BjbIbMQ"/>
+    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@collaborations.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EAg_OVkXEd-yT88BjbIbMQ" points="[0, 40, -133, -95]$[0, 135, -133, 0]$[129, 135, -4, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6FFkXEd-yT88BjbIbMQ" id="(0.4946236559139785,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6FVkXEd-yT88BjbIbMQ" id="(0.036036036036036036,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_9acAAFKoEd-QAejjnA8m9Q" type="4004" source="_9aId_FKoEd-QAejjnA8m9Q" target="_9aId9lKoEd-QAejjnA8m9Q">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9acABFKoEd-QAejjnA8m9Q" visible="false" type="6003">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9acABVKoEd-QAejjnA8m9Q" x="10"/>
+  <edges xmi:type="notation:Edge" xmi:id="_EAg_PlkXEd-yT88BjbIbMQ" type="4004" source="_EAXOLFkXEd-yT88BjbIbMQ" target="_EAXOJlkXEd-yT88BjbIbMQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_QlkXEd-yT88BjbIbMQ" visible="false" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAg_Q1kXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_9acABlKoEd-QAejjnA8m9Q" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9acAB1KoEd-QAejjnA8m9Q" x="-17" y="-10"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAg_RFkXEd-yT88BjbIbMQ" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAg_RVkXEd-yT88BjbIbMQ" x="-8" y="-11"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_9acAAVKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9acAAlKoEd-QAejjnA8m9Q"/>
-    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@relations.2"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9acAA1KoEd-QAejjnA8m9Q" points="[0, 0, -112, 60]$[112, -60, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB11FKoEd-QAejjnA8m9Q" id="(0.0625,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB11VKoEd-QAejjnA8m9Q" id="(0.896551724137931,0.475)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_EAg_P1kXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAg_QFkXEd-yT88BjbIbMQ"/>
+    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@collaborations.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EAg_QVkXEd-yT88BjbIbMQ" points="[0, 0, -112, 60]$[112, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6FlkXEd-yT88BjbIbMQ" id="(0.0625,0.525)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6F1kXEd-yT88BjbIbMQ" id="(0.9137931034482759,0.525)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_9au64FKoEd-QAejjnA8m9Q" type="4004" source="_9aIeAlKoEd-QAejjnA8m9Q" target="_9aId_FKoEd-QAejjnA8m9Q">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9au65FKoEd-QAejjnA8m9Q" visible="false" type="6003">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9au65VKoEd-QAejjnA8m9Q" x="10"/>
+  <edges xmi:type="notation:Edge" xmi:id="_EAqJEFkXEd-yT88BjbIbMQ" type="4004" source="_EAXOMlkXEd-yT88BjbIbMQ" target="_EAXOLFkXEd-yT88BjbIbMQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAqJFFkXEd-yT88BjbIbMQ" visible="false" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAqJFVkXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_9au65lKoEd-QAejjnA8m9Q" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9au651KoEd-QAejjnA8m9Q" x="23" y="23"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAqJFlkXEd-yT88BjbIbMQ" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAqJF1kXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_9au64VKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9au64lKoEd-QAejjnA8m9Q"/>
-    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@relations.3"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9au641KoEd-QAejjnA8m9Q" points="[3, 0, -127, -84]$[130, 0, 0, -84]$[130, 80, 0, -4]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB12lKoEd-QAejjnA8m9Q" id="(0.975609756097561,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB121KoEd-QAejjnA8m9Q" id="(0.5208333333333334,0.1)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_EAqJEVkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAqJElkXEd-yT88BjbIbMQ"/>
+    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@collaborations.3"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EAqJE1kXEd-yT88BjbIbMQ" points="[5, 0, -93, -92]$[98, 0, 0, -92]$[98, 92, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6GlkXEd-yT88BjbIbMQ" id="(0.959349593495935,0.45)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6G1kXEd-yT88BjbIbMQ" id="(0.53125,0.0)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_9au66FKoEd-QAejjnA8m9Q" type="4004" source="_9aIeAlKoEd-QAejjnA8m9Q" target="_9aId8FKoEd-QAejjnA8m9Q">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9au67FKoEd-QAejjnA8m9Q" visible="false" type="6003">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9au67VKoEd-QAejjnA8m9Q" x="10"/>
+  <edges xmi:type="notation:Edge" xmi:id="_EAqJGFkXEd-yT88BjbIbMQ" type="4004" source="_EAXOMlkXEd-yT88BjbIbMQ" target="_EAXOIFkXEd-yT88BjbIbMQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAqJHFkXEd-yT88BjbIbMQ" visible="false" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAqJHVkXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <children xmi:type="notation:DecorationNode" xmi:id="_9au67lKoEd-QAejjnA8m9Q" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9a4E0FKoEd-QAejjnA8m9Q" x="17" y="-22"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_EAqJHlkXEd-yT88BjbIbMQ" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EAqJH1kXEd-yT88BjbIbMQ" x="10"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_9au66VKoEd-QAejjnA8m9Q"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9au66lKoEd-QAejjnA8m9Q"/>
-    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@relations.4"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9au661KoEd-QAejjnA8m9Q" points="[-3, 0, 84, -121]$[-87, 0, 0, -121]$[-87, 81, 0, -40]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB10lKoEd-QAejjnA8m9Q" id="(0.024390243902439025,0.475)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9bB101KoEd-QAejjnA8m9Q" id="(0.4946236559139785,1.0)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_EAqJGVkXEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EAqJGlkXEd-yT88BjbIbMQ"/>
+    <element xmi:type="roles:RoleComposition" href="ExtractXwithReferenceClass.roles#//@collaborations.4"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EAqJG1kXEd-yT88BjbIbMQ" points="[-6, 0, 124, -125]$[-130, 0, 0, -125]$[-130, 85, 0, -40]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6ElkXEd-yT88BjbIbMQ" id="(0.04878048780487805,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EAz6E1kXEd-yT88BjbIbMQ" id="(0.4946236559139785,1.0)"/>
   </edges>
 </notation:Diagram>
