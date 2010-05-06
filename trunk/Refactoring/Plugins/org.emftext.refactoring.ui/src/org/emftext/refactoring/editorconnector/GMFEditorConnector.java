@@ -58,4 +58,8 @@ public class GMFEditorConnector implements IEditorConnector {
 		return selectedElements;
 	}
 
+	public void selectEObjects(List<EObject> objectsToSelect) {
+		System.out.println("GMFEditorConnector.selectEObjects() implement me");
+	}
+
 }

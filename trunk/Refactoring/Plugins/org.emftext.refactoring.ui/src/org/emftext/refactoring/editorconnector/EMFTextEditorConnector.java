@@ -10,6 +10,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.emftext.access.EMFTextAccessProxy;
 import org.emftext.access.resource.IEditor;
 import org.emftext.access.resource.ILocationMap;
@@ -55,6 +56,20 @@ public class EMFTextEditorConnector implements IEditorConnector {
 
 	public TransactionalEditingDomain getTransactionalEditingDomain() {
 		return null;
+	}
+
+	public void selectEObjects(List<EObject> objectsToSelect) {
+		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
+		IResource emftextResource = emftextEditor.getResource();
+		ILocationMap locationMap = emftextResource.getLocationMap();
+//		for (EObject eObject : objectsToSelect) {
+		EObject eObject = objectsToSelect.get(0);
+		// TODO: why are proxies not resovled?
+			int start = locationMap.getCharStart(eObject);
+			int end = locationMap.getCharEnd(eObject);
+			
+//		}
+		((ITextEditor) editor).selectAndReveal(start, end - start);
 	}
 
 }

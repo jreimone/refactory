@@ -45,4 +45,13 @@ public interface IEditorConnector {
 	 * @return
 	 */
 	public TransactionalEditingDomain getTransactionalEditingDomain();
+	
+	/**
+	 * The {@link EObject}s which have to be selected will be passed to this method.
+	 * Implementors then have to determine if it is possible to select all passed objects
+	 * or, as in text editors for example, only connected objects.
+	 * 
+	 * @param objectsToSelect
+	 */
+	public void selectEObjects(List<EObject> objectsToSelect);
 }
