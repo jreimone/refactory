@@ -13,9 +13,12 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
+import org.emftext.language.refactoring.refactoring_specification.Instruction;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.TRACE;
@@ -58,7 +61,7 @@ public class RoleUtil {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Given a list of objects this method returns all roles which are present in this object list
 	 * depending on the given mapping.
