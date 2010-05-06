@@ -1,9 +1,14 @@
 epackage refactoring_specification ; 
 
 // plain Java imports
-import org.eclipse.emf.ecore.EObject; 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EClass; 
 import org.eclipse.emf.common.util.EList; 
 import org.eclipse.emf.common.util.BasicEList; 
+import java.util.LinkedHashSet.LinkedHashSet;
+
+import org.emftext.language.refactoring.refactoring_specification.Variable;
+import org.emftext.language.refactoring.refactoring_specification.Instruction;
 
 // import of other EClasses
 //import MyEPackage.MyEClass2;
@@ -30,208 +35,49 @@ eclass RefactoringSpecification {
 			} 
 			return null ; 
 		} 
-	RoleModel getUsedRoleModel () ; 
-	void setUsedRoleModel (RoleModel value ) ; 
-	EList < Instruction > getInstructions () ; 
+		
+	getInstructionsReferencingRole() {
+		Set<Instruction> instructions = new LinkedHashSet<Instruction>();
+		List<Instruction> usedInstructions = getInstructions();
+		for (Instruction instruction : usedInstructions) {
+			boolean isReferencingObject = isRoleReferencedByObject(referencedRole, instruction);
+			if(isReferencingObject){
+				instructions.add(instruction);
+			}
+			TreeIterator<EObject> iterator = EcoreUtil.getAllContents(instruction, true);
+			while (iterator.hasNext()) {
+				EObject eObject = (EObject) iterator.next();
+				isReferencingObject = isRoleReferencedByObject(referencedRole, eObject);
+				if(isReferencingObject){
+					instructions.add(instruction);
+				}
+			}
+		}
+		return new BasicEList<Instruction>(instructions);
+	}
+	
+	isRoleReferencedByObject() {
+		EClass metaclass = eObject.eClass();
+		List<EReference> references = metaclass.getEAllReferences();
+		for (EReference reference : references) {
+			if(!reference.isContainment()){
+				EClassifier classifier = reference.getEType();
+				if(classifier.isInstance(referencedRole)){
+					Object value = eObject.eGet(reference);
+					if(value instanceof Role){
+						if(((Role) value).equals(referencedRole)){
+							return true;
+						}
+					} else if(value instanceof List<?>){
+						for (Role listObject : (List<Role>) value) {
+							if(listObject.equals(referencedRole)){
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
 } 
-
-interface Instruction extends EObject , EObject { 
-} 
-
-interface ContainmentCommand extends Instruction , ReferenceCommand , EObject , Instruction , ReferenceCommand , EObject { 
-	IndexVariable getIndex () ; 
-	void setIndex (IndexVariable value ) ; 
-} 
-
-interface CREATE extends ContainmentCommand , VariableDeclarationCommand , EObject , ContainmentCommand , VariableDeclarationCommand , EObject { 
-	Role getSourceRole () ; 
-	void setSourceRole (Role value ) ; 
-	TargetContext getTargetContext () ; 
-	void setTargetContext (TargetContext value ) ; 
-} 
-
-interface MOVE extends ContainmentCommand , EObject , ContainmentCommand , EObject { 
-	SourceContext getSource () ; 
-	void setSource (SourceContext value ) ; 
-	TargetContext getTarget () ; 
-	void setTarget (TargetContext value ) ; 
-	Modifier getMoveModifier () ; 
-	void setMoveModifier (Modifier value ) ; 
-} 
-
-interface Variable extends EObject , EObject { 
-	String getName () ; 
-	void setName (String value ) ; 
-	VariableDeclarationCommand getContainerCommand () ; 
-	void setContainerCommand (VariableDeclarationCommand value ) ; 
-} 
-
-interface VariableReference extends SourceContext , TargetContext , ObjectReference , EObject , SourceContext , TargetContext , ObjectReference , EObject { 
-	Variable getVariable () ; 
-	void setVariable (Variable value ) ; 
-} 
-
-interface SourceContext extends Context , EObject , Context , EObject { 
-} 
-
-interface RoleReference extends ObjectAssignmentCommand , EObject , ObjectAssignmentCommand , EObject { 
-	Role getRole () ; 
-	void setRole (Role value ) ; 
-	FromClause getFrom () ; 
-	void setFrom (FromClause value ) ; 
-} 
-
-interface RelationReference extends SourceContext , TargetContext , ObjectRemoval , EObject , SourceContext , TargetContext , ObjectRemoval , EObject { 
-	MultiplicityCollaboration getRelation () ; 
-	void setRelation (MultiplicityCollaboration value ) ; 
-} 
-
-interface TargetContext extends Context , EObject , Context , EObject { 
-} 
-
-interface ReferenceCommand extends Instruction , EObject , Instruction , EObject { 
-} 
-
-interface SET extends ReferenceCommand , EObject , ReferenceCommand , EObject { 
-	SourceContext getSource () ; 
-	void setSource (SourceContext value ) ; 
-	TargetContext getTarget () ; 
-	void setTarget (TargetContext value ) ; 
-} 
-
-interface AttributeCommand extends Instruction , EObject , Instruction , EObject { 
-} 
-
-interface ASSIGN extends AttributeCommand , EObject , AttributeCommand , EObject { 
-	RoleAttribute getSourceAttribute () ; 
-	void setSourceAttribute (RoleAttribute value ) ; 
-	RoleAttribute getTargetAttribute () ; 
-	void setTargetAttribute (RoleAttribute value ) ; 
-} 
-
-interface FromClause extends EObject , EObject { 
-	FromOperator getOperator () ; 
-	void setOperator (FromOperator value ) ; 
-	ObjectReference getReference () ; 
-	void setReference (ObjectReference value ) ; 
-} 
-
-interface FromOperator extends EObject , EObject { 
-} 
-
-interface UPTREE extends FromOperator , EObject , FromOperator , EObject { 
-} 
-
-enum Constants { 
-	INPUT } 
-
-interface ConstantsReference extends ObjectReference , SourceContext , EObject , ObjectReference , SourceContext , EObject { 
-	Constants getReferencedConstant () ; 
-	void setReferencedConstant (Constants value ) ; 
-} 
-
-interface ObjectReference extends ObjectRemoval , EObject , ObjectRemoval , EObject { 
-} 
-
-interface Context extends EObject , EObject { 
-} 
-
-interface IndexAssignmentCommand extends Instruction , EObject , Instruction , EObject { 
-	IndexVariable getVariable () ; 
-	void setVariable (IndexVariable value ) ; 
-} 
-
-interface IndexVariable extends EObject , EObject { 
-	String getName () ; 
-	void setName (String value ) ; 
-	IndexAssignmentCommand getIndexCommand () ; 
-	void setIndexCommand (IndexAssignmentCommand value ) ; 
-} 
-
-interface ConcreteIndex extends IndexAssignmentCommand , EObject , IndexAssignmentCommand , EObject { 
-	int getIndex () ; 
-	void setIndex (int value ) ; 
-} 
-
-interface FIRST extends ObjectReferenceAssignment , EObject , ObjectReferenceAssignment , EObject { 
-} 
-
-interface LAST extends ObjectReferenceAssignment , EObject , ObjectReferenceAssignment , EObject { 
-} 
-
-interface ObjectReferenceAssignment extends IndexAssignmentCommand , EObject , IndexAssignmentCommand , EObject { 
-	ObjectReference getReference () ; 
-	void setReference (ObjectReference value ) ; 
-} 
-
-interface ObjectAssignmentCommand extends EObject , EObject { 
-	VariableAssignment getDeclaration () ; 
-	void setDeclaration (VariableAssignment value ) ; 
-} 
-
-interface VariableDeclarationCommand extends Instruction , EObject , Instruction , EObject { 
-	Variable getVariable () ; 
-	void setVariable (Variable value ) ; 
-} 
-
-interface TRACE extends ObjectAssignmentCommand , EObject , ObjectAssignmentCommand , EObject { 
-	ObjectReference getReference () ; 
-	void setReference (ObjectReference value ) ; 
-	Role getRole () ; 
-	void setRole (Role value ) ; 
-} 
-
-interface TraceObject extends EObject , EObject { 
-	EObject getContainer () ; 
-	void setContainer (EObject value ) ; 
-	Role getAppliedRole () ; 
-	void setAppliedRole (Role value ) ; 
-} 
-
-interface VariableAssignment extends Instruction , VariableDeclarationCommand , EObject , Instruction , VariableDeclarationCommand , EObject { 
-	ObjectAssignmentCommand getAssignment () ; 
-	void setAssignment (ObjectAssignmentCommand value ) ; 
-} 
-
-interface PATH extends FromOperator , EObject , FromOperator , EObject { 
-} 
-
-interface FILTER extends FromOperator , EObject , FromOperator , EObject { 
-} 
-
-interface Modifier extends EObject , EObject { 
-} 
-
-interface DISTINCT extends Modifier , EObject , Modifier , EObject { 
-} 
-
-interface DeleteCommand extends Instruction , EObject , Instruction , EObject { 
-} 
-
-interface UNSET extends ReferenceCommand , DeleteCommand , EObject , ReferenceCommand , DeleteCommand , EObject { 
-} 
-
-interface REMOVE extends DeleteCommand , ContainmentCommand , EObject , DeleteCommand , ContainmentCommand , EObject { 
-	ObjectRemoval getRemoval () ; 
-	void setRemoval (ObjectRemoval value ) ; 
-	RemoveModifier getModifier () ; 
-	void setModifier (RemoveModifier value ) ; 
-} 
-
-interface ObjectRemoval extends EObject , EObject { 
-} 
-
-interface RoleRemoval extends ObjectRemoval , EObject , ObjectRemoval , EObject { 
-	Role getRole () ; 
-	void setRole (Role value ) ; 
-} 
-
-interface RemoveModifier extends EObject , EObject { 
-} 
-
-interface UNUSED extends RemoveModifier , EObject , RemoveModifier , EObject { 
-} 
-
-interface EMPTY extends RemoveModifier , EObject , RemoveModifier , EObject { 
-} 
-

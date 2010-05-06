@@ -8,6 +8,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Wh0-4x1mEd-RSI0QizO43A"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_Wh0-5B1mEd-RSI0QizO43A" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_4628sVk_Ed-aNOKqCvYjlQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="refactoring_specification.ecore#//RefactoringSpecification/isRoleReferencedByObject"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4628slk_Ed-aNOKqCvYjlQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_eTIGkVkzEd-_5f4PXfeivw" type="2002">
+        <element xmi:type="ecore:EOperation" href="refactoring_specification.ecore#//RefactoringSpecification/getInstructionsReferencingRole"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_eTIGklkzEd-_5f4PXfeivw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_K5GdoB4pEd-9XM35BaHt7g" type="2002">
         <element xmi:type="ecore:EOperation" href="refactoring_specification.ecore#//RefactoringSpecification/getDeclaredVariables"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_K5GdoR4pEd-9XM35BaHt7g"/>
@@ -22,7 +30,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Whx7kR1mEd-RSI0QizO43A" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="refactoring_specification.ecore#//RefactoringSpecification"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Whx7kh1mEd-RSI0QizO43A" x="305" y="-205" width="268"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Whx7kh1mEd-RSI0QizO43A" x="305" y="-205" width="343"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_pmzrsB1mEd-RSI0QizO43A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_pm1g4B1mEd-RSI0QizO43A" type="4001"/>
@@ -411,7 +419,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_vS9DkShFEd-47dx9YBAXow" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="refactoring_specification.ecore#//Constants"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vS9DkihFEd-47dx9YBAXow" x="605" y="-205"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vS9DkihFEd-47dx9YBAXow" x="740" y="-200"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_FIYewChGEd-47dx9YBAXow" type="1001">
     <children xmi:type="notation:Node" xmi:id="_FIYewyhGEd-47dx9YBAXow" type="4001"/>
