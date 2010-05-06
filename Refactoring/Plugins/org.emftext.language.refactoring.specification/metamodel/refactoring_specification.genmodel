@@ -21,6 +21,9 @@
       <genOperations ecoreOperation="refactoring_specification.ecore#//RefactoringSpecification/getVariableByName">
         <genParameters ecoreParameter="refactoring_specification.ecore#//RefactoringSpecification/getVariableByName/name"/>
       </genOperations>
+      <genOperations ecoreOperation="refactoring_specification.ecore#//RefactoringSpecification/getInstructionsReferencingRole">
+        <genParameters ecoreParameter="refactoring_specification.ecore#//RefactoringSpecification/getInstructionsReferencingRole/referencedRole"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//Instruction"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ContainmentCommand">
