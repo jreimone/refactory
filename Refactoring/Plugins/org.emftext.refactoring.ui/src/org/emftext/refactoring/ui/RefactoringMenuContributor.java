@@ -87,9 +87,10 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		}
 		TransactionalEditingDomain transactionalEditingDomain = null;
 		IEditorPart activeEditor = null;
+		IEditorConnector cachedConnector = null;
 		if(selectedElements == null || selectedElements.size() == 0){
 			activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			IEditorConnector cachedConnector = editorConnectorCache.get(activeEditor);
+			cachedConnector = editorConnectorCache.get(activeEditor);
 			if(cachedConnector == null){
 				for (IEditorConnector connector : editorConnectors) {
 					if(connector.canHandle(activeEditor)){
@@ -134,9 +135,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 							Action refactoringAction = null;
 							if(transactionalEditingDomain == null){
-								refactoringAction = new RefactoringAction(mapping, refactorer);
+								refactoringAction = new RefactoringAction(mapping, refactorer, cachedConnector);
 							} else {
-								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor);
+								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor, cachedConnector);
 							}
 							refactoringAction.setText(refactoringName);
 							refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));
