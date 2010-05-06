@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <roles:RoleModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roles="http://www.emftext.org/language/roles" comment="&#xD;&#xA;This role model represents the roles and its relations for a purpose when a container&#xD;&#xA;metaclass owns arbitrary elements. Those elements then can be extracted and put into a new&#xD;&#xA;container which is also contained in the original container - i.e. it is a sub-container &#xD;&#xA;which will be extracted.&#xD;&#xA;" name="ExtractSubX">
-  <roles comment="&#xD;&#xA;&#x9;This role represents the element which will be moved to the 'NewContainer' role&#xD;&#xA;&#x9;" name="Extractee" incoming="//@relations.0 //@relations.2">
+  <roles comment="&#xD;&#xA;&#x9;This role represents the element which will be moved to the 'NewContainer' role&#xD;&#xA;&#x9;" name="Extractee" incoming="//@collaborations.0 //@collaborations.2">
     <modifier>super</modifier>
     <modifier>input</modifier>
   </roles>
-  <roles comment="&#xD;&#xA;&#x9;This role is intended to be mapped to a class which represents a container in which&#xD;&#xA;&#x9;elements, playing the role 'Extractee', are contained and another elment, playing the&#xD;&#xA;&#x9;role 'NewContainer', can be created.&#xD;&#xA;&#x9;" name="OrigContainer" outgoing="//@relations.0 //@relations.1"/>
-  <roles comment="&#xD;&#xA;&#x9;This role will become the new home from the 'Extractees'. It will be itself contained&#xD;&#xA;&#x9;in 'OrigContainer'.&#xD;&#xA;&#x9;" name="NewContainer" outgoing="//@relations.2" incoming="//@relations.1">
+  <roles comment="&#xD;&#xA;&#x9;This role is intended to be mapped to a class which represents a container in which&#xD;&#xA;&#x9;elements, playing the role 'Extractee', are contained and another elment, playing the&#xD;&#xA;&#x9;role 'NewContainer', can be created.&#xD;&#xA;&#x9;" name="OrigContainer" outgoing="//@collaborations.0 //@collaborations.1"/>
+  <roles comment="&#xD;&#xA;&#x9;This role will become the new home from the 'Extractees'. It will be itself contained&#xD;&#xA;&#x9;in 'OrigContainer'.&#xD;&#xA;&#x9;" name="NewContainer" outgoing="//@collaborations.2" incoming="//@collaborations.1">
     <attributes comment="&#xD;&#xA;&#x9;&#x9;The name of the newly created container.&#xD;&#xA;&#x9;&#x9;" name="name"/>
   </roles>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='OrigContainer']" target="//@roles[name='Extractee']" targetName="extracts">
+  <collaborations xsi:type="roles:RoleComposition" source="//@roles[name='OrigContainer']" target="//@roles[name='Extractee']" targetName="extracts">
     <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity lowerBound="1" upperBound="-1"/>
-  </relations>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='OrigContainer']" target="//@roles[name='NewContainer']" targetName="newParent">
+  </collaborations>
+  <collaborations xsi:type="roles:RoleComposition" source="//@roles[name='OrigContainer']" target="//@roles[name='NewContainer']" targetName="newParent">
     <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity lowerBound="1" upperBound="-1"/>
-  </relations>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='NewContainer']" target="//@roles[name='Extractee']" targetName="moved">
+  </collaborations>
+  <collaborations xsi:type="roles:RoleComposition" source="//@roles[name='NewContainer']" target="//@roles[name='Extractee']" targetName="moved">
     <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity lowerBound="1" upperBound="-1"/>
-  </relations>
+  </collaborations>
 </roles:RoleModel>

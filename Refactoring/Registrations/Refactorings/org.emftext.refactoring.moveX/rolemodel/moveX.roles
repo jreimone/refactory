@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <roles:RoleModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roles="http://www.emftext.org/language/roles" name="MoveX">
-  <roles comment=" The type that contains elements of type Movee " name="SourceContainer" outgoing="//@relations.0 //@relations.2"/>
-  <roles comment=" The type that retrieves elements of type Movee when moving them " name="TargetContainer" outgoing="//@relations.1" incoming="//@relations.2"/>
-  <roles comment=" The type of the elements that are moved " name="Movee" incoming="//@relations.0 //@relations.1">
+  <roles comment=" The type that contains elements of type Movee " name="SourceContainer" outgoing="//@collaborations.0 //@collaborations.2"/>
+  <roles comment=" The type that retrieves elements of type Movee when moving them " name="TargetContainer" outgoing="//@collaborations.1" incoming="//@collaborations.2">
+    <modifier>super</modifier>
+  </roles>
+  <roles comment=" The type of the elements that are moved " name="Movee" incoming="//@collaborations.0 //@collaborations.1">
     <modifier>super</modifier>
     <modifier>input</modifier>
   </roles>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='SourceContainer']" target="//@roles[name='Movee']" targetName="sourceContainment">
+  <collaborations xsi:type="roles:RoleComposition" source="//@roles[name='SourceContainer']" target="//@roles[name='Movee']" targetName="sourceContainment">
     <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity upperBound="-1"/>
-  </relations>
-  <relations xsi:type="roles:RoleComposition" source="//@roles[name='TargetContainer']" target="//@roles[name='Movee']" targetName="targetContainment">
+  </collaborations>
+  <collaborations xsi:type="roles:RoleComposition" source="//@roles[name='TargetContainer']" target="//@roles[name='Movee']" targetName="targetContainment">
     <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity upperBound="-1"/>
-  </relations>
-  <relations xsi:type="roles:RoleAssociation" source="//@roles[name='SourceContainer']" target="//@roles[name='TargetContainer']" targetName="containerReference">
+  </collaborations>
+  <collaborations xsi:type="roles:RoleAssociation" source="//@roles[name='SourceContainer']" target="//@roles[name='TargetContainer']" targetName="containerReference">
     <modifier>transitive</modifier>
     <sourceMultiplicity lowerBound="1" upperBound="1"/>
     <targetMultiplicity upperBound="-1"/>
-  </relations>
+  </collaborations>
 </roles:RoleModel>
