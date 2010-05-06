@@ -8,9 +8,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
+import javax.management.relation.Relation;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.emftext.language.refactoring.roles.Relation;
+import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.TestUtil;
@@ -37,10 +39,10 @@ public class EmptyOutgoingRelationTest extends TestClass{
 		File file = dataSet.getInputFileByPattern(path);
 		model = TestUtil.getExpectedModelFromFile(file, RoleModel.class);
 		assertNotNull(model);
-		EList<Relation> relations = model.getRelations();
+		EList<Collaboration> relations = model.getCollaborations();
 		Role origContainerRole = null;
-		EList<Relation> outgoingRelations1 = new BasicEList<Relation>();
-		for (Relation relation : relations) {
+		EList<Collaboration> outgoingRelations1 = new BasicEList<Collaboration>();
+		for (Collaboration relation : relations) {
 			Role source = relation.getSource();
 			if("OrigContainer".equals(source.getName())){
 				origContainerRole = source;
@@ -49,7 +51,7 @@ public class EmptyOutgoingRelationTest extends TestClass{
 		}
 		assertNotNull("Role OrigContainer mustn't be null", origContainerRole);
 		assertTrue("outgoing relations of OrigContainer must contain relations", outgoingRelations1.size() > 0);
-		EList<Relation> outgoingRelations2 = origContainerRole.getOutgoing();
+		EList<Collaboration> outgoingRelations2 = origContainerRole.getOutgoing();
 		assertTrue("outgoing relations of OrigContainer must contain relations", outgoingRelations2.size() > 0);
 		assertTrue("the previous found relations must be all contained in the outgoing relations of OrigContainer", outgoingRelations2.containsAll(outgoingRelations1));
 	}
