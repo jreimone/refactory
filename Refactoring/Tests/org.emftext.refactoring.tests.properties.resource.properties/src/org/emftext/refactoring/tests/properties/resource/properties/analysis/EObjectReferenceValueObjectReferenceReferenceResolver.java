@@ -37,7 +37,8 @@ public class EObjectReferenceValueObjectReferenceReferenceResolver implements or
 	}
 
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EObject element, org.emftext.refactoring.tests.properties.EObjectReferenceValue container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return element.eResource().getURI().toPlatformString(true);
+//		return delegate.deResolve(element, container, reference);
 	}
 
 	public void setOptions(java.util.Map<?,?> options) {
