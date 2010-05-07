@@ -35,8 +35,7 @@ public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RoleProhibitionItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleProhibitionItemSemanticEditPolicy());
 	}
 
 	/**

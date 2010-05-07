@@ -52,9 +52,7 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
-		for (Iterator it = RolesDiagramUpdater
-				.getRoleModel_1000SemanticChildren(viewObject).iterator(); it
-				.hasNext();) {
+		for (Iterator it = RolesDiagramUpdater.getRoleModel_1000SemanticChildren(viewObject).iterator(); it.hasNext();) {
 			result.add(((RolesNodeDescriptor) it.next()).getModelElement());
 		}
 		return result;
@@ -73,10 +71,10 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
 		int visualID = RolesVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
-		case RoleEditPart.VISUAL_ID:
-			if (!semanticChildren.contains(view.getElement())) {
-				return true;
-			}
+			case RoleEditPart.VISUAL_ID:
+				if (!semanticChildren.contains(view.getElement())) {
+					return true;
+				}
 		}
 		return false;
 	}
@@ -94,8 +92,7 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
-			myFeaturesToSynchronize.add(RolesPackage.eINSTANCE
-					.getRoleModel_Roles());
+			myFeaturesToSynchronize.add(RolesPackage.eINSTANCE.getRoleModel_Roles());
 		}
 		return myFeaturesToSynchronize;
 	}
@@ -124,8 +121,7 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 	/**
 	 * @generated
 	 */
-	protected boolean shouldIncludeConnection(Edge connector,
-			Collection children) {
+	protected boolean shouldIncludeConnection(Edge connector, Collection children) {
 		return false;
 	}
 
@@ -141,8 +137,8 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 
 		if (createdViews.size() > 1) {
 			// perform a layout of the container
-			DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host()
-					.getEditingDomain(), createdViews, host());
+			DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(
+					host().getEditingDomain(), createdViews, host());
 			executeCommand(new ICommandProxy(layoutCmd));
 		}
 
@@ -162,17 +158,13 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 	 */
 	private Collection refreshConnections() {
 		Map domain2NotationMap = new HashMap();
-		Collection linkDescriptors = collectAllLinks(getDiagram(),
-				domain2NotationMap);
+		Collection linkDescriptors = collectAllLinks(getDiagram(), domain2NotationMap);
 		Collection existingLinks = new LinkedList(getDiagram().getEdges());
-		for (Iterator linksIterator = existingLinks.iterator(); linksIterator
-				.hasNext();) {
+		for (Iterator linksIterator = existingLinks.iterator(); linksIterator.hasNext();) {
 			Edge nextDiagramLink = (Edge) linksIterator.next();
-			int diagramLinkVisualID = RolesVisualIDRegistry
-					.getVisualID(nextDiagramLink);
+			int diagramLinkVisualID = RolesVisualIDRegistry.getVisualID(nextDiagramLink);
 			if (diagramLinkVisualID == -1) {
-				if (nextDiagramLink.getSource() != null
-						&& nextDiagramLink.getTarget() != null) {
+				if (nextDiagramLink.getSource() != null && nextDiagramLink.getTarget() != null) {
 					linksIterator.remove();
 				}
 				continue;
@@ -180,16 +172,9 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 			EObject diagramLinkObject = nextDiagramLink.getElement();
 			EObject diagramLinkSrc = nextDiagramLink.getSource().getElement();
 			EObject diagramLinkDst = nextDiagramLink.getTarget().getElement();
-			for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator
-					.hasNext();) {
-				RolesLinkDescriptor nextLinkDescriptor = (RolesLinkDescriptor) linkDescriptorsIterator
-						.next();
-				if (diagramLinkObject == nextLinkDescriptor.getModelElement()
-						&& diagramLinkSrc == nextLinkDescriptor.getSource()
-						&& diagramLinkDst == nextLinkDescriptor
-								.getDestination()
-						&& diagramLinkVisualID == nextLinkDescriptor
-								.getVisualID()) {
+			for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
+				RolesLinkDescriptor nextLinkDescriptor = (RolesLinkDescriptor) linkDescriptorsIterator.next();
+				if (diagramLinkObject == nextLinkDescriptor.getModelElement() && diagramLinkSrc == nextLinkDescriptor.getSource() && diagramLinkDst == nextLinkDescriptor.getDestination() && diagramLinkVisualID == nextLinkDescriptor.getVisualID()) {
 					linksIterator.remove();
 					linkDescriptorsIterator.remove();
 					break;
@@ -204,87 +189,71 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 	 * @generated
 	 */
 	private Collection collectAllLinks(View view, Map domain2NotationMap) {
-		if (!RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry
-				.getModelID(view))) {
+		if (!RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID(view))) {
 			return Collections.EMPTY_LIST;
 		}
 		Collection result = new LinkedList();
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-		case RoleModelEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(RolesDiagramUpdater
-						.getRoleModel_1000ContainedLinks(view));
+			case RoleModelEditPart.VISUAL_ID: {
+				if (!domain2NotationMap.containsKey(view.getElement())) {
+					result.addAll(RolesDiagramUpdater.getRoleModel_1000ContainedLinks(view));
+				}
+				if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+					domain2NotationMap.put(view.getElement(), view);
+				}
+				break;
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
+			case RoleEditPart.VISUAL_ID: {
+				if (!domain2NotationMap.containsKey(view.getElement())) {
+					result.addAll(RolesDiagramUpdater.getRole_2001ContainedLinks(view));
+				}
+				if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+					domain2NotationMap.put(view.getElement(), view);
+				}
+				break;
 			}
-			break;
+			case RoleImplicationEditPart.VISUAL_ID: {
+				if (!domain2NotationMap.containsKey(view.getElement())) {
+					result.addAll(RolesDiagramUpdater.getRoleImplication_4001ContainedLinks(view));
+				}
+				if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+					domain2NotationMap.put(view.getElement(), view);
+				}
+				break;
+			}
+			case RoleProhibitionEditPart.VISUAL_ID: {
+				if (!domain2NotationMap.containsKey(view.getElement())) {
+					result.addAll(RolesDiagramUpdater.getRoleProhibition_4002ContainedLinks(view));
+				}
+				if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+					domain2NotationMap.put(view.getElement(), view);
+				}
+				break;
+			}
+			case RoleAssociationEditPart.VISUAL_ID: {
+				if (!domain2NotationMap.containsKey(view.getElement())) {
+					result.addAll(RolesDiagramUpdater.getRoleAssociation_4003ContainedLinks(view));
+				}
+				if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+					domain2NotationMap.put(view.getElement(), view);
+				}
+				break;
+			}
+			case RoleCompositionEditPart.VISUAL_ID: {
+				if (!domain2NotationMap.containsKey(view.getElement())) {
+					result.addAll(RolesDiagramUpdater.getRoleComposition_4004ContainedLinks(view));
+				}
+				if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+					domain2NotationMap.put(view.getElement(), view);
+				}
+				break;
+			}
 		}
-		case RoleEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(RolesDiagramUpdater
-						.getRole_2001ContainedLinks(view));
-			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
-			break;
-		}
-		case RoleImplicationEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(RolesDiagramUpdater
-						.getRoleImplication_4001ContainedLinks(view));
-			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
-			break;
-		}
-		case RoleProhibitionEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(RolesDiagramUpdater
-						.getRoleProhibition_4002ContainedLinks(view));
-			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
-			break;
-		}
-		case RoleAssociationEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(RolesDiagramUpdater
-						.getRoleAssociation_4003ContainedLinks(view));
-			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
-			break;
-		}
-		case RoleCompositionEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(RolesDiagramUpdater
-						.getRoleComposition_4004ContainedLinks(view));
-			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
-			break;
-		}
-		}
-		for (Iterator children = view.getChildren().iterator(); children
-				.hasNext();) {
-			result.addAll(collectAllLinks((View) children.next(),
-					domain2NotationMap));
+		for (Iterator children = view.getChildren().iterator(); children.hasNext();) {
+			result.addAll(collectAllLinks((View) children.next(), domain2NotationMap));
 		}
 		for (Iterator edges = view.getSourceEdges().iterator(); edges.hasNext();) {
-			result.addAll(collectAllLinks((View) edges.next(),
-					domain2NotationMap));
+			result.addAll(collectAllLinks((View) edges.next(), domain2NotationMap));
 		}
 		return result;
 	}
@@ -292,25 +261,21 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 	/**
 	 * @generated
 	 */
-	private Collection createConnections(Collection linkDescriptors,
-			Map domain2NotationMap) {
+	private Collection createConnections(Collection linkDescriptors, Map domain2NotationMap) {
 		List adapters = new LinkedList();
-		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator
-				.hasNext();) {
-			final RolesLinkDescriptor nextLinkDescriptor = (RolesLinkDescriptor) linkDescriptorsIterator
-					.next();
-			EditPart sourceEditPart = getEditPart(nextLinkDescriptor
-					.getSource(), domain2NotationMap);
-			EditPart targetEditPart = getEditPart(nextLinkDescriptor
-					.getDestination(), domain2NotationMap);
+		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
+			final RolesLinkDescriptor nextLinkDescriptor = (RolesLinkDescriptor) linkDescriptorsIterator.next();
+			EditPart sourceEditPart = getEditPart(nextLinkDescriptor.getSource(), domain2NotationMap);
+			EditPart targetEditPart = getEditPart(nextLinkDescriptor.getDestination(), domain2NotationMap);
 			if (sourceEditPart == null || targetEditPart == null) {
 				continue;
 			}
 			CreateConnectionViewRequest.ConnectionViewDescriptor descriptor = new CreateConnectionViewRequest.ConnectionViewDescriptor(
-					nextLinkDescriptor.getSemanticAdapter(), String
-							.valueOf(nextLinkDescriptor.getVisualID()),
-					ViewUtil.APPEND, false, ((IGraphicalEditPart) getHost())
-							.getDiagramPreferencesHint());
+					nextLinkDescriptor.getSemanticAdapter(),
+					String.valueOf(nextLinkDescriptor.getVisualID()),
+					ViewUtil.APPEND,
+					false,
+					((IGraphicalEditPart) getHost()).getDiagramPreferencesHint());
 			CreateConnectionViewRequest ccr = new CreateConnectionViewRequest(
 					descriptor);
 			ccr.setType(RequestConstants.REQ_CONNECTION_START);
@@ -333,12 +298,10 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 	/**
 	 * @generated
 	 */
-	private EditPart getEditPart(EObject domainModelElement,
-			Map domain2NotationMap) {
+	private EditPart getEditPart(EObject domainModelElement, Map domain2NotationMap) {
 		View view = (View) domain2NotationMap.get(domainModelElement);
 		if (view != null) {
-			return (EditPart) getHost().getViewer().getEditPartRegistry().get(
-					view);
+			return (EditPart) getHost().getViewer().getEditPartRegistry().get(view);
 		}
 		return null;
 	}

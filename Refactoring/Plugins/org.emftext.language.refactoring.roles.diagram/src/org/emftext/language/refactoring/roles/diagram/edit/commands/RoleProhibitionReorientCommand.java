@@ -70,8 +70,7 @@ public class RoleProhibitionReorientCommand extends EditElementCommand {
 			return false;
 		}
 		RoleModel container = (RoleModel) getLink().eContainer();
-		return RolesBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistRoleProhibition_4002(container, getNewSource(), target);
+		return RolesBaseItemSemanticEditPolicy.LinkConstraints.canExistRoleProhibition_4002(container, getNewSource(), target);
 	}
 
 	/**
@@ -86,15 +85,13 @@ public class RoleProhibitionReorientCommand extends EditElementCommand {
 			return false;
 		}
 		RoleModel container = (RoleModel) getLink().eContainer();
-		return RolesBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistRoleProhibition_4002(container, source, getNewTarget());
+		return RolesBaseItemSemanticEditPolicy.LinkConstraints.canExistRoleProhibition_4002(container, source, getNewTarget());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-			IAdaptable info) throws ExecutionException {
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
 			throw new ExecutionException(
 					"Invalid arguments in reorient link command"); //$NON-NLS-1$

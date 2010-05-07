@@ -61,12 +61,11 @@ public class RolesDomainNavigatorContentProvider implements
 	 */
 	public RolesDomainNavigatorContentProvider() {
 		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
-				RolesDiagramEditorPlugin.getInstance()
-						.getItemProvidersAdapterFactory());
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
-				.createEditingDomain();
+				RolesDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory());
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		myEditingDomain = (AdapterFactoryEditingDomain) editingDomain;
 		myEditingDomain.setResourceToReadOnlyMap(new HashMap() {
+
 			public Object get(Object key) {
 				if (!containsKey(key)) {
 					put(key, Boolean.TRUE);
@@ -75,6 +74,7 @@ public class RolesDomainNavigatorContentProvider implements
 			}
 		});
 		myViewerRefreshRunnable = new Runnable() {
+
 			public void run() {
 				if (myViewer != null) {
 					myViewer.refresh();
@@ -83,45 +83,39 @@ public class RolesDomainNavigatorContentProvider implements
 		};
 		myWorkspaceSynchronizer = new WorkspaceSynchronizer(editingDomain,
 				new WorkspaceSynchronizer.Delegate() {
+
 					public void dispose() {
 					}
 
 					public boolean handleResourceChanged(final Resource resource) {
-						for (Iterator it = myEditingDomain.getResourceSet()
-								.getResources().iterator(); it.hasNext();) {
+						for (Iterator it = myEditingDomain.getResourceSet().getResources().iterator(); it.hasNext();) {
 							Resource nextResource = (Resource) it.next();
 							nextResource.unload();
 						}
 						if (myViewer != null) {
-							myViewer.getControl().getDisplay().asyncExec(
-									myViewerRefreshRunnable);
+							myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
 						}
 						return true;
 					}
 
 					public boolean handleResourceDeleted(Resource resource) {
-						for (Iterator it = myEditingDomain.getResourceSet()
-								.getResources().iterator(); it.hasNext();) {
+						for (Iterator it = myEditingDomain.getResourceSet().getResources().iterator(); it.hasNext();) {
 							Resource nextResource = (Resource) it.next();
 							nextResource.unload();
 						}
 						if (myViewer != null) {
-							myViewer.getControl().getDisplay().asyncExec(
-									myViewerRefreshRunnable);
+							myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
 						}
 						return true;
 					}
 
-					public boolean handleResourceMoved(Resource resource,
-							final URI newURI) {
-						for (Iterator it = myEditingDomain.getResourceSet()
-								.getResources().iterator(); it.hasNext();) {
+					public boolean handleResourceMoved(Resource resource, final URI newURI) {
+						for (Iterator it = myEditingDomain.getResourceSet().getResources().iterator(); it.hasNext();) {
 							Resource nextResource = (Resource) it.next();
 							nextResource.unload();
 						}
 						if (myViewer != null) {
-							myViewer.getControl().getDisplay().asyncExec(
-									myViewerRefreshRunnable);
+							myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
 						}
 						return true;
 					}
@@ -135,8 +129,7 @@ public class RolesDomainNavigatorContentProvider implements
 		myWorkspaceSynchronizer.dispose();
 		myWorkspaceSynchronizer = null;
 		myViewerRefreshRunnable = null;
-		for (Iterator it = myEditingDomain.getResourceSet().getResources()
-				.iterator(); it.hasNext();) {
+		for (Iterator it = myEditingDomain.getResourceSet().getResources().iterator(); it.hasNext();) {
 			Resource resource = (Resource) it.next();
 			resource.unload();
 		}
@@ -182,18 +175,13 @@ public class RolesDomainNavigatorContentProvider implements
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
-			URI fileURI = URI.createPlatformResourceURI(file.getFullPath()
-					.toString(), true);
-			Resource resource = myEditingDomain.getResourceSet().getResource(
-					fileURI, true);
-			return wrapEObjects(myAdapterFctoryContentProvier
-					.getChildren(resource), parentElement);
+			URI fileURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
+			return wrapEObjects(myAdapterFctoryContentProvier.getChildren(resource), parentElement);
 		}
 
 		if (parentElement instanceof RolesDomainNavigatorItem) {
-			return wrapEObjects(myAdapterFctoryContentProvier
-					.getChildren(((RolesDomainNavigatorItem) parentElement)
-							.getEObject()), parentElement);
+			return wrapEObjects(myAdapterFctoryContentProvier.getChildren(((RolesDomainNavigatorItem) parentElement).getEObject()), parentElement);
 		}
 		return EMPTY_ARRAY;
 	}

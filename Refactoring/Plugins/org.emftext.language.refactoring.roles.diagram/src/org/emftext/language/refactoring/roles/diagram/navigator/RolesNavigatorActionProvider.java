@@ -70,12 +70,10 @@ public class RolesNavigatorActionProvider extends CommonActionProvider {
 		if (!myContribute) {
 			return;
 		}
-		IStructuredSelection selection = (IStructuredSelection) getContext()
-				.getSelection();
+		IStructuredSelection selection = (IStructuredSelection) getContext().getSelection();
 		myOpenDiagramAction.selectionChanged(selection);
 		if (myOpenDiagramAction.isEnabled()) {
-			actionBars.setGlobalActionHandler(ICommonActionConstants.OPEN,
-					myOpenDiagramAction);
+			actionBars.setGlobalActionHandler(ICommonActionConstants.OPEN, myOpenDiagramAction);
 		}
 	}
 
@@ -116,16 +114,13 @@ public class RolesNavigatorActionProvider extends CommonActionProvider {
 			if (selection.size() == 1) {
 				Object selectedElement = selection.getFirstElement();
 				if (selectedElement instanceof RolesNavigatorItem) {
-					selectedElement = ((RolesNavigatorItem) selectedElement)
-							.getView();
+					selectedElement = ((RolesNavigatorItem) selectedElement).getView();
 				} else if (selectedElement instanceof IAdaptable) {
-					selectedElement = ((IAdaptable) selectedElement)
-							.getAdapter(View.class);
+					selectedElement = ((IAdaptable) selectedElement).getAdapter(View.class);
 				}
 				if (selectedElement instanceof Diagram) {
 					Diagram diagram = (Diagram) selectedElement;
-					if (RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry
-							.getModelID(diagram))) {
+					if (RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID(diagram))) {
 						myDiagram = diagram;
 					}
 				}
@@ -146,8 +141,7 @@ public class RolesNavigatorActionProvider extends CommonActionProvider {
 			try {
 				page.openEditor(editorInput, RolesDiagramEditor.ID);
 			} catch (PartInitException e) {
-				RolesDiagramEditorPlugin.getInstance().logError(
-						"Exception while openning diagram", e); //$NON-NLS-1$
+				RolesDiagramEditorPlugin.getInstance().logError("Exception while openning diagram", e); //$NON-NLS-1$
 			}
 		}
 
@@ -155,20 +149,18 @@ public class RolesNavigatorActionProvider extends CommonActionProvider {
 		 * @generated
 		 */
 		private IEditorInput getEditorInput() {
-			for (Iterator it = myDiagram.eResource().getContents().iterator(); it
-					.hasNext();) {
+			for (Iterator it = myDiagram.eResource().getContents().iterator(); it.hasNext();) {
 				EObject nextEObject = (EObject) it.next();
 				if (nextEObject == myDiagram) {
-					return new FileEditorInput(WorkspaceSynchronizer
-							.getFile(myDiagram.eResource()));
+					return new FileEditorInput(
+							WorkspaceSynchronizer.getFile(myDiagram.eResource()));
 				}
 				if (nextEObject instanceof Diagram) {
 					break;
 				}
 			}
 			URI uri = EcoreUtil.getURI(myDiagram);
-			String editorName = uri.lastSegment()
-					+ "#" + myDiagram.eResource().getContents().indexOf(myDiagram); //$NON-NLS-1$
+			String editorName = uri.lastSegment() + "#" + myDiagram.eResource().getContents().indexOf(myDiagram); //$NON-NLS-1$
 			IEditorInput editorInput = new URIEditorInput(uri, editorName);
 			return editorInput;
 		}
