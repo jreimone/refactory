@@ -5,13 +5,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EClass; 
 import org.eclipse.emf.common.util.EList; 
 import org.eclipse.emf.common.util.BasicEList; 
-import java.util.LinkedHashSet.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
-import org.emftext.language.refactoring.refactoring_specification.Variable;
-import org.emftext.language.refactoring.refactoring_specification.Instruction;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+//import org.emftext.language.refactoring.refactoring_specification.Variable;
+//import org.emftext.language.refactoring.refactoring_specification.Instruction;
 
 // import of other EClasses
-//import MyEPackage.MyEClass2;
+import roles.Role;
 eclass RefactoringSpecification { 
 	getDeclaredVariables ( ) { 
 			org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; 
