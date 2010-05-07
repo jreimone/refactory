@@ -3,7 +3,6 @@
  */
 package org.emftext.refactoring.ui;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +31,7 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 	private EObject refactoredModel;
 	private ResourceSet resourceSet;
 
-	public SaveAllResourcesWorkspaceRunnable(List<Resource> resourcesToSave,
-			Resource refactoredResource, IEditorPart activeEditor, EObject refactoredModel) {
+	public SaveAllResourcesWorkspaceRunnable(List<Resource> resourcesToSave, Resource refactoredResource, IEditorPart activeEditor, EObject refactoredModel) {
 		this.resourcesToSave = resourcesToSave;
 		this.refactoredResource = refactoredResource;
 		this.resourceSet = refactoredResource.getResourceSet();
@@ -43,10 +41,10 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 		initGmfResource();
 	}
 
-	private void initGmfResource(){
-		if(activeEditor != null){
+	private void initGmfResource() {
+		if (activeEditor != null) {
 			IEditorInput input = activeEditor.getEditorInput();
-			if(input instanceof FileEditorInput){
+			if (input instanceof FileEditorInput) {
 				IFile file = ((FileEditorInput) input).getFile();
 				URI gmfUri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 				gmfResource = resourceSet.getResource(gmfUri, true);
@@ -55,31 +53,32 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 	}
 
 	public void run(IProgressMonitor monitor) throws CoreException {
-			EcoreUtil.resolveAll(resourceSet);
+		EcoreUtil.resolveAll(resourceSet);
 //			refactoredResource.getContents().set(0, refactoredModel);
-			try {
-				Map<Object, Object> options = new LinkedHashMap<Object, Object>();
-				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
-				refactoredResource.save(options);
-			} catch (Exception e) {
-				e.printStackTrace();
-				refactoredResource.getErrors().clear();
-			}
-			for (Resource externalResource : resourcesToSave) {
-				if (!externalResource.equals(gmfResource)) {
-					URI uri = externalResource.getURI();
-					if (uri.isPlatformResource()) {
-						EcoreUtil.resolveAll(externalResource);
-						try {
-							externalResource.save(null);
-						} catch (Exception e) {
-							e.printStackTrace();
-							externalResource.getErrors().clear();
-						}
-						System.out.println("Saved resource " + externalResource);
+		try {
+			Map<Object, Object> options = new LinkedHashMap<Object, Object>();
+			options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
+			EcoreUtil.resolveAll(refactoredResource);
+			refactoredResource.save(options);
+		} catch (Exception e) {
+			e.printStackTrace();
+			refactoredResource.getErrors().clear();
+		}
+		for (Resource externalResource : resourcesToSave) {
+			if (!externalResource.equals(gmfResource)) {
+				URI uri = externalResource.getURI();
+				if (uri.isPlatformResource()) {
+					EcoreUtil.resolveAll(externalResource);
+					try {
+						externalResource.save(null);
+					} catch (Exception e) {
+						e.printStackTrace();
+						externalResource.getErrors().clear();
 					}
+					System.out.println("Saved resource " + externalResource);
 				}
 			}
+		}
 //			refactoredResource.save(null);
 	}
 
