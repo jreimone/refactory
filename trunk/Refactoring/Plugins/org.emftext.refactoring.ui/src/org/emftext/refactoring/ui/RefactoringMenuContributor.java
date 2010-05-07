@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -39,8 +38,8 @@ import org.emftext.refactoring.util.StringUtil;
 
 public class RefactoringMenuContributor extends ExtensionContributionFactory {
 
-	private static final String CONTEXT_MENU_ENTRY_TEXT 	= "Refactor";
-	private static final String CONTEXT_MENU_ENTRY_ID 		= "org.emftext.refactoring.menu";
+	private static final String CONTEXT_MENU_ENTRY_TEXT = "Refactor";
+	private static final String CONTEXT_MENU_ENTRY_ID = "org.emftext.refactoring.menu";
 
 	private List<IEditorConnector> editorConnectors;
 	private Map<IEditorPart, IEditorConnector> editorConnectorCache;
@@ -62,23 +61,23 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 	@Override
 	public void createContributionItems(IServiceLocator serviceLocator, IContributionRoot additions) {
 		IWorkbenchPart activePart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
-		if(!(activePart instanceof ISaveablePart)){
+		if (!(activePart instanceof ISaveablePart)) {
 			System.out.println("Workbench Part " + activePart + " is not a saveable part");
 			return;
 		}
 		IWorkbenchPartSite partSite = activePart.getSite();
 		//		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		ISelectionProvider selectionProvider = partSite.getSelectionProvider();
-		if(selectionProvider == null){
+		if (selectionProvider == null) {
 			System.out.println(activePart + " doesn't provide selections -> no context menu");
 			return;
 		}
 		ISelection selection = selectionProvider.getSelection();
 		List<EObject> selectedElements = new LinkedList<EObject>();
-		if(selection instanceof StructuredSelection){
+		if (selection instanceof StructuredSelection) {
 			List<?> temp = ((StructuredSelection) selection).toList();
 			for (Object object : temp) {
-				if(!(object instanceof EObject)){
+				if (!(object instanceof EObject)) {
 					selectedElements = null;
 					break;
 				}
@@ -88,12 +87,12 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		TransactionalEditingDomain transactionalEditingDomain = null;
 		IEditorPart activeEditor = null;
 		IEditorConnector cachedConnector = null;
-		if(selectedElements == null || selectedElements.size() == 0){
+		if (selectedElements == null || selectedElements.size() == 0) {
 			activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 			cachedConnector = editorConnectorCache.get(activeEditor);
-			if(cachedConnector == null){
+			if (cachedConnector == null) {
 				for (IEditorConnector connector : editorConnectors) {
-					if(connector.canHandle(activeEditor)){
+					if (connector.canHandle(activeEditor)) {
 						cachedConnector = connector;
 						editorConnectorCache.put(activeEditor, connector);
 						break;
@@ -101,15 +100,15 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				}
 			}
 			selectedElements = cachedConnector.handleSelection(selection);
-			if(selectedElements != null && selectedElements.size() >= 1){
+			if (selectedElements != null && selectedElements.size() >= 1) {
 				transactionalEditingDomain = cachedConnector.getTransactionalEditingDomain();
 			}
 		}
-		if(selectedElements != null && selectedElements.size() >= 1){
+		if (selectedElements != null && selectedElements.size() >= 1) {
 			EObject first = selectedElements.get(0);
 			EcoreUtil.resolveAll(first);
 			Resource resource = first.eResource();
-			if(resource == null || (resource.getErrors() != null && resource.getErrors().size() > 0)){
+			if (resource == null || (resource.getErrors() != null && resource.getErrors().size() > 0)) {
 				System.out.println("resource is null or contains the following errors:");
 				List<Resource.Diagnostic> errors = resource.getErrors();
 				for (Resource.Diagnostic diagnostic : errors) {
@@ -123,18 +122,19 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, CONTEXT_MENU_ENTRY_ID);
 
 			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
-			if(refactorer != null){
+			System.out.println("RefactoringMenuContributor.createContributionItems() " + refactorer);
+			if (refactorer != null) {
 				refactorer.setInput(selectedElements);
 				List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
 				boolean containsEntries = false;
 				for (Mapping mapping : mappings) {
 					Resource mappingResource = mapping.eResource();
-					if(mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0 )){
+					if (mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0)) {
 						RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
-						if(refSpec != null){
+						if (refSpec != null) {
 							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 							Action refactoringAction = null;
-							if(transactionalEditingDomain == null){
+							if (transactionalEditingDomain == null) {
 								refactoringAction = new RefactoringAction(mapping, refactorer, cachedConnector);
 							} else {
 								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor, cachedConnector);
@@ -144,9 +144,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							rootMenu.add(refactoringAction);
 							containsEntries = true;
 						}
-					} 
+					}
 				}
-				if(containsEntries){
+				if (containsEntries) {
 					additions.addContributionItem(rootMenu, null);
 				}
 			} else {

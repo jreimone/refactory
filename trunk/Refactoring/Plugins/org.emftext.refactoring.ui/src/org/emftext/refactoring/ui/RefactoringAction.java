@@ -1,12 +1,10 @@
 package org.emftext.refactoring.ui;
 
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -55,8 +53,11 @@ public class RefactoringAction extends Action {
 	public void run() {
 		ltkRun();
 	}
-	
-	public void ltkRun(){
+
+	public void ltkRun() {
+		EObject original = refactorer.getOriginalModel();
+		System.out.println("RefactoringAction.ltkRun() " + original);
+		System.out.println("RefactoringAction.ltkRun() " + refactorer);
 		ModelRefactoring refactoring = new ModelRefactoring(refactorer, mapping, diagramTransactionalEditingDomain, getText(), activeEditor);
 		ModelRefactoringWizard wizard = new ModelRefactoringWizard(refactoring);
 		wizard.setWindowTitle(refactoring.getName());
@@ -64,19 +65,22 @@ public class RefactoringAction extends Action {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		try {
 			int result = op.run(shell, getText());
-			if(result == IDialogConstants.OK_ID){
+			System.out.println("RefactoringAction.ltkRun() " + original);
+			System.out.println("RefactoringAction.ltkRun() " + refactorer);
+			if (result == IDialogConstants.OK_ID) {
 				IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
+				interpreter = refactoring.getRefactorer().getCurrentInterpreter();;
 				Map<Role, Object> roleRuntimeInstances = interpreter.getRoleRuntimeInstances();
 				RefactoringSpecification refSpec = interpreter.getRefactoringSpecification();
 				List<EObject> objectsToSelect = new LinkedList<EObject>();
 				for (Role role : roleRuntimeInstances.keySet()) {
 					List<Instruction> roleInstructions = refSpec.getInstructionsReferencingRole(role);
 					for (Instruction instruction : roleInstructions) {
-						if(instruction instanceof CREATE){
+						if (instruction instanceof CREATE) {
 							Object instance = roleRuntimeInstances.get(role);
-							if(instance instanceof EObject){
+							if (instance instanceof EObject) {
 								objectsToSelect.add((EObject) instance);
-							} else if(instance instanceof List<?>){
+							} else if (instance instanceof List<?>) {
 								objectsToSelect.addAll((List<EObject>) instance);
 							}
 						}
