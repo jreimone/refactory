@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -78,8 +77,7 @@ public class Refactorer implements IRefactorer {
 //			Mapping firstMapping = roleMappings.values().toArray(new Mapping[0])[0];
 //			RoleMappingModel roleMapping = (RoleMappingModel) EcoreUtil.getRootContainer(firstMapping);
 			IRefactoringPostProcessor postProcessor = roleMappingRegistry.getPostProcessor(mapping);
-			IRefactoringInterpreter interpreter = new RefactoringInterpreter(
-					postProcessor);
+			IRefactoringInterpreter interpreter = new RefactoringInterpreter(postProcessor);
 			interpreter.initialize(refSpec, mapping);
 			interpreterMap.put(mapping, interpreter);
 		}
@@ -168,23 +166,22 @@ public class Refactorer implements IRefactorer {
 				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModelRS, change);
 				if (postProcessingStatus.getSeverity() != IRefactoringStatus.OK) {
 					int severity = postProcessingStatus.getSeverity();
-					status = new RefactoringStatus(mapping, severity,
-							postProcessingStatus.getMessage());
+					status = new RefactoringStatus(mapping, severity, postProcessingStatus.getMessage());
 				}
 			}
 		}
 		resourcesToSave = interpreter.getResourcesToSave();
 		return refactoredModel;
 	}
-	
-	public IRefactoringInterpreter getCurrentInterpreter(){
+
+	public IRefactoringInterpreter getCurrentInterpreter() {
 		return currentInterpreter;
 	}
 
 //	public Map<Role, Object> getRoleRuntimeInstances(){
 //		return roleRuntimeInstances;
 //	}
-	
+
 	/**
 	 * @param filteredElements
 	 * @param interpreter
@@ -193,7 +190,7 @@ public class Refactorer implements IRefactorer {
 	private IRefactoringFakeInterpreter fakeInterpreteAndPreCollectValues(List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
 		// TODO integrate and invoke post processor here, too, and pass value provider to it
 		// copy init start
-		Copier copier = new Copier(false, false);
+		Copier copier = new Copier(false, true);
 		List<EObject> originalElements = new LinkedList<EObject>();
 		// copy start
 		for (Resource resource : refactoredModelRS.getResources()) {
