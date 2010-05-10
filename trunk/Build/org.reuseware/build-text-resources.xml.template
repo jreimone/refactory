@@ -15,6 +15,9 @@
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_2_0/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen.antlr/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen.resource/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen.resource.ui/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
@@ -96,7 +99,9 @@
 		<generate-text-resource plugin="org.emftext.language.ecore.resource.facade" syntax="facade.ecore" resourcePlugin="org.emftext.language.ecore.resource.facade"/>
 
 		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.facade"/>
+		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.ui.facade"/>
 		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.text"/>
+		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.ui.text"/>
 	</target>
 	
 	<target name="run-all-tests">
