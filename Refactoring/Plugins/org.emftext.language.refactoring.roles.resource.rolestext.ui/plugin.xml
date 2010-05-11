@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolestext" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" name="EMFText rolestext Editor">
+		</editor>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Rolestext Text Editor" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextSyntaxColoringPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextSyntaxColoringPreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextBracketPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextBracketPreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextOccurrencePreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextOccurrencePreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" name="EMFText .rolestext file">
+		</wizard>
+	</extension>
+	
+</plugin>

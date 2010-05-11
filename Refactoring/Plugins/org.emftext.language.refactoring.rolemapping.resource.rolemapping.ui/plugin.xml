@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolemapping" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingEditor" name="EMFText rolemapping Editor">
+		</editor>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Rolemapping Text Editor" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingSyntaxColoringPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingSyntaxColoringPreferencePage" category="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingBracketPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingBracketPreferencePage" category="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingOccurrencePreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingOccurrencePreferencePage" category="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewFileWizard" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewFileWizard" name="EMFText .rolemapping file">
+		</wizard>
+	</extension>
+	
+</plugin>
