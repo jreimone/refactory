@@ -4,7 +4,7 @@
  *
  * 
  */
-package org.emftext.language.refactoring.specification.resource.mopp;
+package org.emftext.language.refactoring.specification.resource.ui;
 
 public class RefspecHoverTextProvider implements org.emftext.language.refactoring.specification.resource.IRefspecHoverTextProvider {
 	

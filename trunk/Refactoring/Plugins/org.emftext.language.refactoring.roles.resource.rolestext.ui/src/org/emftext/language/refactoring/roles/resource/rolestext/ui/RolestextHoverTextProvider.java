@@ -4,7 +4,7 @@
  *
  * 
  */
-package org.emftext.language.refactoring.roles.resource.rolestext.mopp;
+package org.emftext.language.refactoring.roles.resource.rolestext.ui;
 
 public class RolestextHoverTextProvider implements org.emftext.language.refactoring.roles.resource.rolestext.IRolestextHoverTextProvider {
 	

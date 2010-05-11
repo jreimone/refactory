@@ -24,6 +24,10 @@
       <genOperations ecoreOperation="refactoring_specification.ecore#//RefactoringSpecification/getInstructionsReferencingRole">
         <genParameters ecoreParameter="refactoring_specification.ecore#//RefactoringSpecification/getInstructionsReferencingRole/referencedRole"/>
       </genOperations>
+      <genOperations ecoreOperation="refactoring_specification.ecore#//RefactoringSpecification/isRoleReferencedByObject">
+        <genParameters ecoreParameter="refactoring_specification.ecore#//RefactoringSpecification/isRoleReferencedByObject/referencedRole"/>
+        <genParameters ecoreParameter="refactoring_specification.ecore#//RefactoringSpecification/isRoleReferencedByObject/eObject"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//Instruction"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ContainmentCommand">
