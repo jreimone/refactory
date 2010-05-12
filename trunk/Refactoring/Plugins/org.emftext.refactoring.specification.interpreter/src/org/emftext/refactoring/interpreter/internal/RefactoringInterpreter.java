@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -63,7 +64,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 //	private RoleMappingModel roleMapping;
 	private Mapping mapping;
 	private IRefactoringPostProcessor postProcessor;
-	private Map<Role, Object> roleRuntimeInstanceMap;
+	private Map<Role, List<EObject>> roleRuntimeInstanceMap;
+	private Map<Role, List<URI>> roleRuntimeInstanceURIMap;
 	
 	private CREATEInterpreter create;
 	private SETInterpreter set;
@@ -85,7 +87,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	
 	public RefactoringInterpreter(IRefactoringPostProcessor postProcessor){
 		this.postProcessor = postProcessor;
-		roleRuntimeInstanceMap = new LinkedHashMap<Role, Object>();
+		roleRuntimeInstanceMap = new LinkedHashMap<Role, List<EObject>>();
+		roleRuntimeInstanceURIMap = new LinkedHashMap<Role, List<URI>>();
 		resourcesToSave = new LinkedList<Resource>();
 		valueProviderMap = new LinkedHashMap<EObject, IValueProvider<?,?>>();
 	}
@@ -210,7 +213,8 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		
 		List<Role> roles = RoleUtil.getAllInputRoles(mapping);
 		for (Role role : roles) {
-			roleRuntimeInstanceMap.put(role, selection);
+			List<EObject> roleElements = RoleUtil.filterObjectsByRoles(selection, mapping, role);
+			putIntoRoleRuntimeInstanceMap(role, roleElements);
 		}
 		status = interprete(context);
 		if(status.getSeverity() == IRefactoringStatus.ERROR){
@@ -245,7 +249,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		Role assignedRole = assign.getAssignedRole();
 		Object roleRuntimeInstance = assign.getRoleRuntimeValue();
 		if(assignedRole != null && roleRuntimeInstance != null){
-			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
+			putIntoRoleRuntimeInstanceMap(assignedRole, roleRuntimeInstance);
 		}
 		List<Resource> assignResourcesToSave = assign.getResourcesToSave();
 		if(assignResourcesToSave != null){
@@ -264,7 +268,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		Role assignedRole = create.getAssignedRole();
 		Object roleRuntimeInstance = create.getRoleRuntimeInstance();
 		if(assignedRole != null && roleRuntimeInstance != null){
-			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
+			putIntoRoleRuntimeInstanceMap(assignedRole, roleRuntimeInstance);
 		}
 		return result;
 	}
@@ -309,7 +313,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		Role assignedRole = objectInterpreter.getAssignedRole();
 		Object roleRuntimeInstance = objectInterpreter.getRoleRuntimeValue();
 		if(assignedRole != null && roleRuntimeInstance != null){
-			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
+			putIntoRoleRuntimeInstanceMap(assignedRole, roleRuntimeInstance);
 		}
 		return result;
 	}
@@ -323,7 +327,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		Role assignedRole = removeInterpreter.getAssignedRole();
 		Object roleRuntimeInstance = removeInterpreter.getRoleRuntimeValue();
 		if(assignedRole != null && roleRuntimeInstance != null){
-			roleRuntimeInstanceMap.put(assignedRole, roleRuntimeInstance);
+			putIntoRoleRuntimeInstanceMap(assignedRole, roleRuntimeInstance);
 		}
 		return result;
 	}
@@ -359,11 +363,47 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return postProcessor;
 	}
 
+	@SuppressWarnings("unchecked")
+	private void putIntoRoleRuntimeInstanceMap(Role role, Object object){
+		if(object instanceof EObject){
+			putEObjectIntoRoleRuntimeInstanceMap(role, object);
+//			putEObjectIntoRoleRuntimeInstanceURIMap(role, object);
+		} else if(object instanceof List<?>){
+			List<EObject> objects = (List<EObject>) object;
+			for (EObject eObject : objects) {
+				putEObjectIntoRoleRuntimeInstanceMap(role, eObject);
+//				putEObjectIntoRoleRuntimeInstanceURIMap(role, eObject);
+			}
+		}
+	}
+
+//	private void putEObjectIntoRoleRuntimeInstanceURIMap(Role role, Object object) {
+//		List<URI> uriList = roleRuntimeInstanceURIMap.get(role);
+//		if(uriList == null){
+//			uriList = new LinkedList<URI>();
+//			roleRuntimeInstanceURIMap.put(role, uriList);
+//		}
+//		uriList.add(EcoreUtil.getURI((EObject) object));
+//	}
+
+	private void putEObjectIntoRoleRuntimeInstanceMap(Role role, Object object) {
+		List<EObject> instanceList = roleRuntimeInstanceMap.get(role);
+		if(instanceList == null){
+			instanceList = new LinkedList<EObject>();
+			roleRuntimeInstanceMap.put(role, instanceList);
+		}
+		instanceList.add((EObject) object);
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#getRoleRuntimeInstances()
 	 */
-	public Map<Role, Object> getRoleRuntimeInstances() {
+	public Map<Role, List<EObject>> getRoleRuntimeInstances() {
 		return roleRuntimeInstanceMap;
+	}
+	
+	public Map<Role, List<URI>> getRoleRuntimeInstanceURIs(){
+		return roleRuntimeInstanceURIMap;
 	}
 
 	public List<Resource> getResourcesToSave() {
@@ -425,5 +465,10 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 
 	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
 		valueProviderMap.put(command, valueProvider);
+	}
+
+	public void setRoleRuntimeInstanceURIs(
+			Map<Role, List<URI>> roleRuntimeInstanceURIMap) {
+		this.roleRuntimeInstanceURIMap = roleRuntimeInstanceURIMap;
 	}
 }

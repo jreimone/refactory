@@ -7,8 +7,10 @@ package org.emftext.refactoring.interpreter;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
@@ -82,10 +84,27 @@ public interface IRefactoringInterpreter extends Cloneable{
 	public IRefactoringPostProcessor getPostProcessor();
 	
 	/**
+	 * Returns a map containing the roles of the current refactoring as keys and a list
+	 * containing its values, how they were resolved at runtime.
+	 * @return
+	 */
+	public Map<Role, List<EObject>> getRoleRuntimeInstances();
+	
+	/**
+	 * While saving a model the {@link EObject objects} will be unloaded and the proxies set instead.
+	 * To preserve unresolved proxies after saving this map returns the same structure as {@link #getRoleRuntimeInstances()}
+	 * but with unique {@link URI}s as values. After saving the model(s) the real {@link EObject objects}
+	 * then can be resolved again by calling {@link ResourceSet#getEObject(URI, boolean)}.
 	 * 
 	 * @return
 	 */
-	public Map<Role, Object> getRoleRuntimeInstances();
+	public Map<Role, List<URI>> getRoleRuntimeInstanceURIs();
+	
+	/**
+	 * Sets the runtime instance {@link URI}s before saving.
+	 * @param runtimeInstanceURIs
+	 */
+	public void setRoleRuntimeInstanceURIs(Map<Role, List<URI>> runtimeInstanceURIs);
 	
 	/**
 	 * Returns all resources which have to be saved after the refactoring. Those resources might be all inverse cross

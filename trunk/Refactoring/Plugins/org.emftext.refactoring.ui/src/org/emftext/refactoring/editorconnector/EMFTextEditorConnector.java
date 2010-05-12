@@ -19,7 +19,7 @@ import org.emftext.access.resource.IResource;
 public class EMFTextEditorConnector implements IEditorConnector {
 
 	private IEditorPart editor;
-	
+
 	public EMFTextEditorConnector() {
 		// empty
 	}
@@ -62,14 +62,16 @@ public class EMFTextEditorConnector implements IEditorConnector {
 		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
 		ILocationMap locationMap = emftextResource.getLocationMap();
-//		for (EObject eObject : objectsToSelect) {
-		EObject eObject = objectsToSelect.get(0);
-		// TODO: why are proxies not resovled?
+		if(objectsToSelect.size() > 0){
+			EObject eObject = objectsToSelect.get(0);
 			int start = locationMap.getCharStart(eObject);
 			int end = locationMap.getCharEnd(eObject);
-			
-//		}
-		((ITextEditor) editor).selectAndReveal(start, end - start);
+			((ITextEditor) editor).selectAndReveal(start, end - start);
+		} else {
+			int offset = ((ITextSelection) ((ITextEditor) editor).getSelectionProvider().getSelection()).getOffset();
+			((ITextEditor) editor).selectAndReveal(offset, 0);
+		}
+		//		}
 	}
 
 }
