@@ -36,7 +36,7 @@ public class InternalRefactoringAction {
 				}
 			}
 			
-			IWorkspaceRunnable runnable = new SaveAllResourcesWorkspaceRunnable(refactorer.getResourcesToSave(), resource, activeEditor, refactoredModel);
+			IWorkspaceRunnable runnable = new SaveAllResourcesWorkspaceRunnable(refactorer, activeEditor);
 			ResourcesPlugin.getWorkspace().run(runnable, null);
 			
 		} else {

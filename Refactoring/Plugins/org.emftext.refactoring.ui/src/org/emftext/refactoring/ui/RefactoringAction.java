@@ -1,10 +1,13 @@
 package org.emftext.refactoring.ui;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -14,6 +17,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.Instruction;
+import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.roles.Role;
@@ -56,8 +60,8 @@ public class RefactoringAction extends Action {
 
 	public void ltkRun() {
 		EObject original = refactorer.getOriginalModel();
-		System.out.println("RefactoringAction.ltkRun() " + original);
-		System.out.println("RefactoringAction.ltkRun() " + refactorer);
+		//		System.out.println("RefactoringAction.ltkRun() " + original);
+		//		System.out.println("RefactoringAction.ltkRun() " + refactorer);
 		ModelRefactoring refactoring = new ModelRefactoring(refactorer, mapping, diagramTransactionalEditingDomain, getText(), activeEditor);
 		ModelRefactoringWizard wizard = new ModelRefactoringWizard(refactoring);
 		wizard.setWindowTitle(refactoring.getName());
@@ -65,24 +69,21 @@ public class RefactoringAction extends Action {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		try {
 			int result = op.run(shell, getText());
-			System.out.println("RefactoringAction.ltkRun() " + original);
-			System.out.println("RefactoringAction.ltkRun() " + refactorer);
+			//			System.out.println("RefactoringAction.ltkRun() " + original);
+			//			System.out.println("RefactoringAction.ltkRun() " + refactorer);
 			if (result == IDialogConstants.OK_ID) {
 				IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
 				interpreter = refactoring.getRefactorer().getCurrentInterpreter();;
-				Map<Role, Object> roleRuntimeInstances = interpreter.getRoleRuntimeInstances();
+				Map<Role, List<URI>> roleRuntimeInstanceURIs = interpreter.getRoleRuntimeInstanceURIs();
+				Map<Role, List<EObject>> resolvedRoleRuntimeInstances = postSaveRuntimeInstanceHandling(roleRuntimeInstanceURIs, refactorer.getResource().getResourceSet());
 				RefactoringSpecification refSpec = interpreter.getRefactoringSpecification();
 				List<EObject> objectsToSelect = new LinkedList<EObject>();
-				for (Role role : roleRuntimeInstances.keySet()) {
+				for (Role role : resolvedRoleRuntimeInstances.keySet()) {
 					List<Instruction> roleInstructions = refSpec.getInstructionsReferencingRole(role);
 					for (Instruction instruction : roleInstructions) {
-						if (instruction instanceof CREATE) {
-							Object instance = roleRuntimeInstances.get(role);
-							if (instance instanceof EObject) {
-								objectsToSelect.add((EObject) instance);
-							} else if (instance instanceof List<?>) {
-								objectsToSelect.addAll((List<EObject>) instance);
-							}
+						if (instruction instanceof CREATE || instruction instanceof MOVE) {
+							List<EObject> instance = resolvedRoleRuntimeInstances.get(role);
+							objectsToSelect.addAll(instance);
 						}
 					}
 				}
@@ -91,5 +92,23 @@ public class RefactoringAction extends Action {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private Map<Role, List<EObject>> postSaveRuntimeInstanceHandling(Map<Role, List<URI>> roleRuntimeInstanceURIs, ResourceSet resourceSet) {
+		Map<Role, List<EObject>> resolvedRoleRuntimeInstances = new LinkedHashMap<Role, List<EObject>>();
+		for (Role role : roleRuntimeInstanceURIs.keySet()) {
+			List<URI> uriList = roleRuntimeInstanceURIs.get(role);
+			List<EObject> resolvedRuntimeInstances = new LinkedList<EObject>();
+			for (URI uri : uriList) {
+				try {
+					EObject resolvedObject = resourceSet.getEObject(uri, false);
+					resolvedRuntimeInstances.add(resolvedObject);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			resolvedRoleRuntimeInstances.put(role, resolvedRuntimeInstances);
+		}
+		return resolvedRoleRuntimeInstances;
 	}
 }

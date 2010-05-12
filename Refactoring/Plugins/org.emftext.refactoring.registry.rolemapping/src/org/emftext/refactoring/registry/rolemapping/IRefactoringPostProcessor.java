@@ -4,6 +4,7 @@
 package org.emftext.refactoring.registry.rolemapping;
 
 import java.util.Map;
+import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
@@ -46,5 +47,5 @@ public interface IRefactoringPostProcessor {
 	 * @param change the {@link ChangeDescription} containing all changes which were made before invoking this postprocessor
 	 * @return the status of the postprocessing 
 	 */
-	public IStatus process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change);
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change);
 }
