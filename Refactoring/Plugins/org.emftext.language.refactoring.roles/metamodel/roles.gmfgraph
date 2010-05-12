@@ -150,10 +150,27 @@
           accessor="getFigureCompositionTargetNameFigure"
           figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="AttributeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="AttributeRectangle">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="AttributeNameFigure"
+            text=""/>
+      </actualFigure>
+      <accessors
+          accessor="getFigureAttributeNameFigure"
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="RoleNode"
       figure="RoleFigure"/>
+  <nodes
+      name="AttributeNode"
+      figure="AttributeFigure"/>
   <connections
       name="RoleImplicationConnection"
       figure="RoleImplicationFigure"/>
@@ -166,10 +183,25 @@
   <connections
       name="RoleCompositionConnection"
       figure="RoleCompositionFigure"/>
+  <compartments
+      name="AttributeCompartment"
+      figure="RoleFigure"
+      collapsible="true">
+    <facets
+        xsi:type="gmfgraph:AlignmentFacet"
+        alignment="END"/>
+    <facets
+        xsi:type="gmfgraph:GradientFacet"
+        direction="NSEW"/>
+  </compartments>
   <labels
       name="RoleName"
       figure="RoleFigure"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels
+      name="AttributeName"
+      figure="AttributeFigure"
+      accessor="//@figures.0/@descriptors.5/@accessors.0"/>
   <labels
       name="RoleAssociationSourceName"
       figure="RoleAssociationFigure"

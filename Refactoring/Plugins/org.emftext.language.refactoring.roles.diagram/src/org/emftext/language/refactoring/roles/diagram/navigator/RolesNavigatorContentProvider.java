@@ -21,11 +21,13 @@ import org.eclipse.ui.IMemento;
 import org.eclipse.ui.navigator.ICommonContentExtensionSite;
 import org.eclipse.ui.navigator.ICommonContentProvider;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleImplicationEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleModelEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleProhibitionEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleRoleAttributeCompartmentEditPart;
 import org.emftext.language.refactoring.roles.diagram.part.Messages;
 import org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry;
 
@@ -262,9 +264,17 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 			RolesNavigatorGroup outgoinglinks = new RolesNavigatorGroup(
 					Messages.NavigatorGroupName_Role_2001_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getIncomingLinksByType(Collections
+			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view), RolesVisualIDRegistry
-					.getType(RoleImplicationEditPart.VISUAL_ID));
+					.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					RolesVisualIDRegistry
+							.getType(RoleAttributeEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getIncomingLinksByType(
+					Collections.singleton(view), RolesVisualIDRegistry
+							.getType(RoleImplicationEditPart.VISUAL_ID));
 			incominglinks.addChildren(createNavigatorItems(connectedViews,
 					incominglinks, true));
 			connectedViews = getOutgoingLinksByType(

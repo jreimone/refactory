@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gmf.runtime.common.core.command.ICompositeCommand;
 import org.eclipse.gmf.runtime.diagram.core.commands.DeleteCommand;
 import org.eclipse.gmf.runtime.emf.commands.core.command.CompositeTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.DestroyElementCommand;
@@ -11,6 +12,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipRequest;
 import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.emftext.language.refactoring.roles.diagram.edit.commands.RoleAssociationCreateCommand;
 import org.emftext.language.refactoring.roles.diagram.edit.commands.RoleAssociationReorientCommand;
@@ -21,9 +23,11 @@ import org.emftext.language.refactoring.roles.diagram.edit.commands.RoleImplicat
 import org.emftext.language.refactoring.roles.diagram.edit.commands.RoleProhibitionCreateCommand;
 import org.emftext.language.refactoring.roles.diagram.edit.commands.RoleProhibitionReorientCommand;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleImplicationEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleProhibitionEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleRoleAttributeCompartmentEditPart;
 import org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry;
 import org.emftext.language.refactoring.roles.diagram.providers.RolesElementTypes;
 
@@ -112,6 +116,7 @@ public class RoleItemSemanticEditPolicy extends RolesBaseItemSemanticEditPolicy 
 		EAnnotation annotation = view.getEAnnotation("Shortcut"); //$NON-NLS-1$
 		if (annotation == null) {
 			// there are indirectly referenced children, need extra commands: false
+			addDestroyChildNodesCommand(cmd);
 			addDestroyShortcutsCommand(cmd, view);
 			// delete host element
 			cmd.add(new DestroyElementCommand(req));
@@ -119,6 +124,33 @@ public class RoleItemSemanticEditPolicy extends RolesBaseItemSemanticEditPolicy 
 			cmd.add(new DeleteCommand(getEditingDomain(), view));
 		}
 		return getGEFWrapper(cmd.reduce());
+	}
+
+	/**
+	 * @generated
+	 */
+	private void addDestroyChildNodesCommand(ICompositeCommand cmd) {
+		View view = (View) getHost().getModel();
+		for (Iterator nit = view.getChildren().iterator(); nit.hasNext();) {
+			Node node = (Node) nit.next();
+			switch (RolesVisualIDRegistry.getVisualID(node)) {
+			case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+				for (Iterator cit = node.getChildren().iterator(); cit
+						.hasNext();) {
+					Node cnode = (Node) cit.next();
+					switch (RolesVisualIDRegistry.getVisualID(cnode)) {
+					case RoleAttributeEditPart.VISUAL_ID:
+						cmd.add(new DestroyElementCommand(
+								new DestroyElementRequest(getEditingDomain(),
+										cnode.getElement(), false))); // directlyOwned: true
+						// don't need explicit deletion of cnode as parent's view deletion would clean child views as well 
+						// cmd.add(new org.eclipse.gmf.runtime.diagram.core.commands.DeleteCommand(getEditingDomain(), cnode));
+						break;
+					}
+				}
+				break;
+			}
+		}
 	}
 
 	/**

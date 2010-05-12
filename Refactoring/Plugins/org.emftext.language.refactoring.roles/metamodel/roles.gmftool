@@ -21,6 +21,17 @@
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Role Attribute"
+          description="Create new Role Attribute">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/new/roleattribute.gif"
+            bundle="org.emftext.language.refactoring.roles.edit"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

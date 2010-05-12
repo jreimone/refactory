@@ -263,6 +263,16 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
+	public static String RoleAttribute2CreationTool_title;
+
+	/**
+	 * @generated
+	 */
+	public static String RoleAttribute2CreationTool_desc;
+
+	/**
+	 * @generated
+	 */
 	public static String Implication1CreationTool_title;
 
 	/**
@@ -299,6 +309,11 @@ public class Messages extends NLS {
 	 * @generated
 	 */
 	public static String Composition4CreationTool_desc;
+
+	/**
+	 * @generated
+	 */
+	public static String RoleRoleAttributeCompartmentEditPart_title;
 
 	/**
 	 * @generated

@@ -23,7 +23,8 @@ OPTIONS{
 	uiBasePackage = "org.emftext.language.refactoring.specification.resource";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
-	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.language.refactoring.roles.resource.rolestext,org.emftext.refactoring.registry.refactoringspecification";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.refactoring.registry.refactoringspecification";
+	additionalUIDependencies = "org.emftext.language.refactoring.roles.resource.rolestext.ui";
 	overrideHoverTextProvider = "false";
 	overrideBuilder = "false";
 	//overrideManifest = "false";

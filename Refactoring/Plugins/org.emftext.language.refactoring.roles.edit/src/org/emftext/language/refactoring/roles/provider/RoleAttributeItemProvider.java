@@ -92,11 +92,11 @@ public class RoleAttributeItemProvider
 	 * This returns RoleAttribute.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RoleAttribute"));
+		return overlayImage(object, getResourceLocator().getImage("new/roleattribute"));
 	}
 
 	/**

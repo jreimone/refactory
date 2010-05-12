@@ -13,17 +13,20 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.notation.View;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAssociation;
+import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleImplication;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleProhibition;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleImplicationEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleModelEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleProhibitionEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleRoleAttributeCompartmentEditPart;
 import org.emftext.language.refactoring.roles.diagram.providers.RolesElementTypes;
 
 /**
@@ -36,10 +39,39 @@ public class RolesDiagramUpdater {
 	 */
 	public static List getSemanticChildren(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
+		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+			return getRoleAttributeCompartment_7001SemanticChildren(view);
 		case RoleModelEditPart.VISUAL_ID:
 			return getRoleModel_1000SemanticChildren(view);
 		}
 		return Collections.EMPTY_LIST;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static List getRoleAttributeCompartment_7001SemanticChildren(
+			View view) {
+		if (false == view.eContainer() instanceof View) {
+			return Collections.EMPTY_LIST;
+		}
+		View containerView = (View) view.eContainer();
+		if (!containerView.isSetElement()) {
+			return Collections.EMPTY_LIST;
+		}
+		Role modelElement = (Role) containerView.getElement();
+		List result = new LinkedList();
+		for (Iterator it = modelElement.getAttributes().iterator(); it
+				.hasNext();) {
+			RoleAttribute childElement = (RoleAttribute) it.next();
+			int visualID = RolesVisualIDRegistry.getNodeVisualID(view,
+					childElement);
+			if (visualID == RoleAttributeEditPart.VISUAL_ID) {
+				result.add(new RolesNodeDescriptor(childElement, visualID));
+				continue;
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -72,6 +104,8 @@ public class RolesDiagramUpdater {
 			return getRoleModel_1000ContainedLinks(view);
 		case RoleEditPart.VISUAL_ID:
 			return getRole_2001ContainedLinks(view);
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getRoleAttribute_3001ContainedLinks(view);
 		case RoleImplicationEditPart.VISUAL_ID:
 			return getRoleImplication_4001ContainedLinks(view);
 		case RoleProhibitionEditPart.VISUAL_ID:
@@ -91,6 +125,8 @@ public class RolesDiagramUpdater {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
 		case RoleEditPart.VISUAL_ID:
 			return getRole_2001IncomingLinks(view);
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getRoleAttribute_3001IncomingLinks(view);
 		case RoleImplicationEditPart.VISUAL_ID:
 			return getRoleImplication_4001IncomingLinks(view);
 		case RoleProhibitionEditPart.VISUAL_ID:
@@ -110,6 +146,8 @@ public class RolesDiagramUpdater {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
 		case RoleEditPart.VISUAL_ID:
 			return getRole_2001OutgoingLinks(view);
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getRoleAttribute_3001OutgoingLinks(view);
 		case RoleImplicationEditPart.VISUAL_ID:
 			return getRoleImplication_4001OutgoingLinks(view);
 		case RoleProhibitionEditPart.VISUAL_ID:
@@ -143,6 +181,13 @@ public class RolesDiagramUpdater {
 	 * @generated
 	 */
 	public static List getRole_2001ContainedLinks(View view) {
+		return Collections.EMPTY_LIST;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static List getRoleAttribute_3001ContainedLinks(View view) {
 		return Collections.EMPTY_LIST;
 	}
 
@@ -196,6 +241,13 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
+	public static List getRoleAttribute_3001IncomingLinks(View view) {
+		return Collections.EMPTY_LIST;
+	}
+
+	/**
+	 * @generated
+	 */
 	public static List getRoleImplication_4001IncomingLinks(View view) {
 		return Collections.EMPTY_LIST;
 	}
@@ -236,6 +288,13 @@ public class RolesDiagramUpdater {
 		result
 				.addAll(getOutgoingTypeModelFacetLinks_RoleComposition_4004(modelElement));
 		return result;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static List getRoleAttribute_3001OutgoingLinks(View view) {
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
