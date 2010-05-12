@@ -41,7 +41,7 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 		super();
 	}
 
-	public IStatus process(Map<Role, Object> roleMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, List<EObject>> roleMap, ResourceSet resourceSet, ChangeDescription change) {
 		EObject newContainer = getEObjectByName(roleMap, "NewContainer");
 		if (newContainer == null) {
 			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "NewContainer error");
@@ -64,9 +64,9 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 			// fail
 			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "Containment error");
 		}
-		
+
 		Containment newContainment = (Containment) movedReference;
-		
+
 		Rule oldRule = getContainingRule(oldContainer);
 		if (oldRule == null) {
 			// fail
@@ -77,20 +77,20 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 			// fail
 			return new Status(IStatus.ERROR, "org.emftext.sdk.concretesyntax.refactoring", "new rule error");
 		}
-		
+
 		// Create new meta class
 		EClass newEClass = EcoreFactory.eINSTANCE.createEClass();
 		newEClass.setName("NewClass"); // TODO avoid name clashes
 		GenClass newGenClass = GenModelFactory.eINSTANCE.createGenClass();
 		newGenClass.setEcoreClass(newEClass);
-		
+
 		// Add new meta class to packages of old rule
 		GenClass oldMetaclass = oldRule.getMetaclass();
 		EPackage ePackage = oldMetaclass.getEcoreClass().getEPackage();
 		ePackage.getEClassifiers().add(newEClass);
 		GenPackage genPackage = oldMetaclass.getGenPackage();
 		genPackage.getGenClasses().add(newGenClass);
-		
+
 		// Add new containment feature
 		EReference newContainmentEFeature = EcoreFactory.eINSTANCE.createEReference();
 		newContainmentEFeature.setName("newClass");
@@ -103,7 +103,7 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 
 		// Add containment reference in old rule to new class
 		newContainment.setFeature(newContainmentGenFeature);
-		
+
 		// Set new meta class in new rule
 		newRule.setMetaclass(newGenClass);
 		return new Status(IStatus.OK, "org.emftext.sdk.concretesyntax.refactoring", "");
@@ -121,18 +121,12 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 		}
 	}
 
-	private EObject getEObjectByName(Map<Role, Object> roleMap, String roleName) {
+	private EObject getEObjectByName(Map<Role, List<EObject>> roleMap, String roleName) {
 		Set<Role> roles = roleMap.keySet();
 		for (Role role : roles) {
 			if (roleName.equals(role.getName())) {
-				Object object = roleMap.get(role);
-				if (object instanceof EObject) {
-					EObject eObject = (EObject) object;
-					return eObject;
-				} else if(object instanceof List<?>){
-					// the runtime objects can also be lists of EObjects!!!
-					return (EObject) ((List<?>) object).get(0);
-				}
+				List<EObject> object = roleMap.get(role);
+				return object.get(0);
 			}
 		}
 		return null;

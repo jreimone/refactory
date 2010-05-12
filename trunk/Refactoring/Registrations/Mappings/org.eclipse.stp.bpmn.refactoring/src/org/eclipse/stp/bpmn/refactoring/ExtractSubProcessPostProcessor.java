@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -22,25 +23,23 @@ import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
 public class ExtractSubProcessPostProcessor implements IRefactoringPostProcessor {
 
-	private List<Activity> extract;
+	private List<EObject> extract;
 	private SubProcess newContainer;
 
 	public ExtractSubProcessPostProcessor() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public IStatus process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		System.out.println("Add additional SequenceEdge for 'Extract SubProcess' in BPMN");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
-			Object runtimeObject = roleRuntimeInstanceMap.get(role);
+			List<EObject> runtimeObjects = roleRuntimeInstanceMap.get(role);
 			if(role.getName().equals("Extract")){
-				if(runtimeObject instanceof List<?>){
-					extract = (List<Activity>) runtimeObject;
-				}
+				extract = runtimeObjects;
 			} else if(role.getName().equals("NewContainer")){
-				if(runtimeObject instanceof SubProcess){
-					newContainer = (SubProcess) runtimeObject;
+				if(runtimeObjects.get(0) instanceof SubProcess){
+					newContainer = (SubProcess) runtimeObjects.get(0);
 				}
 			}
 		}
@@ -64,8 +63,8 @@ public class ExtractSubProcessPostProcessor implements IRefactoringPostProcessor
 		Activity end = BpmnFactory.eINSTANCE.createActivity();
 		end.setActivityType(ActivityType.EVENT_END_EMPTY_LITERAL);
 		newContainer.getVertices().add(end);
-		Activity first = extract.get(0);
-		Activity last = extract.get(extract.size() - 1);
+		Activity first = (Activity) extract.get(0);
+		Activity last = (Activity) extract.get(extract.size() - 1);
 		SequenceEdge edge = BpmnFactory.eINSTANCE.createSequenceEdge();
 		newContainer.getSequenceEdges().add(edge);
 		edge.setSource(start);
@@ -81,9 +80,11 @@ public class ExtractSubProcessPostProcessor implements IRefactoringPostProcessor
 		Set<SequenceEdge> removees = new HashSet<SequenceEdge>();
 		Set<SequenceEdge> inComposites = new HashSet<SequenceEdge>();
 		Set<SequenceEdge> outComposites = new HashSet<SequenceEdge>();
-		for (Activity activity : extract) {
+		for (EObject eObject : extract) {
+			Activity activity = (Activity) eObject;
 			List<Activity> others = new ArrayList<Activity>();
-			for (Activity other : extract) {
+			for (EObject otherObject : extract) {
+				Activity other = (Activity) otherObject;
 				if(!other.equals(activity)){
 					others.add(other);
 				}

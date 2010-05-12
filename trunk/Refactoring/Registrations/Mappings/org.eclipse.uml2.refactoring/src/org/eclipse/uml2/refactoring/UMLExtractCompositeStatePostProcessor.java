@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -25,19 +26,22 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 	private List<State> extract;
 	private State newContainer;
 
-	@SuppressWarnings("unchecked")
-	public IStatus process(Map<Role, Object> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
-			Object runtimeObject = roleRuntimeInstanceMap.get(role);
+			List<EObject> runtimeObject = roleRuntimeInstanceMap.get(role);
 			if(role.getName().equals("Extract")){
 				if(runtimeObject instanceof List<?>){
-					extract = (List<State>) runtimeObject;
+					for (EObject eObject : runtimeObject) {
+						if(eObject instanceof State){
+							extract.add((State) eObject);
+						}
+					}
 				}
 			} else if(role.getName().equals("NewContainer")){
-				if(runtimeObject instanceof State){
-					newContainer = (State) runtimeObject;
+				if(runtimeObject.get(0) instanceof State){
+					newContainer = (State) runtimeObject.get(0);
 				}
 			}
 		}
