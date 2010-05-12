@@ -392,7 +392,7 @@ public class BuildFileGenerator {
 	public void run() {
 		try {
 			String buildFileName = "build-text-resources.xml";
-			String template = new String(StreamUtil.getContent(new File("." + File.separator + buildFileName + ".template")));
+			String template = StreamUtil.getContentAsString(new File("." + File.separator + buildFileName + ".template"));
 			template = template.replace("<!--GENERATE_METAMODEL_TASKS-->", getMetaModelTasks());
 			template = template.replace("<!--GENERATE_TEXT_RESOURCE_TASKS-->", getTextResourceTasks());
 			template = template.replace("<!--CLEAN_TASKS-->", getCleanTasks());
