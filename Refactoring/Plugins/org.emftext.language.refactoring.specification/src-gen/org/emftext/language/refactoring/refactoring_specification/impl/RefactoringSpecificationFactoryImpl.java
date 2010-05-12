@@ -197,16 +197,15 @@ public class RefactoringSpecificationFactoryImpl extends EFactoryImpl implements
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public CollaborationReference createCollaborationReference()
-  {
+	public CollaborationReference createCollaborationReference() {
 		CollaborationReferenceImpl collaborationReference = new CollaborationReferenceImpl();
 		return collaborationReference;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -362,71 +361,65 @@ public class RefactoringSpecificationFactoryImpl extends EFactoryImpl implements
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public DISTINCT createDISTINCT()
-  {
+	public DISTINCT createDISTINCT() {
 		DISTINCTImpl distinct = new DISTINCTImpl();
 		return distinct;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public UNSET createUNSET()
-  {
+	public UNSET createUNSET() {
 		UNSETImpl unset = new UNSETImpl();
 		return unset;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public REMOVE createREMOVE()
-  {
+	public REMOVE createREMOVE() {
 		REMOVEImpl remove = new REMOVEImpl();
 		return remove;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public RoleRemoval createRoleRemoval()
-  {
+	public RoleRemoval createRoleRemoval() {
 		RoleRemovalImpl roleRemoval = new RoleRemovalImpl();
 		return roleRemoval;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public UNUSED createUNUSED()
-  {
+	public UNUSED createUNUSED() {
 		UNUSEDImpl unused = new UNUSEDImpl();
 		return unused;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EMPTY createEMPTY()
-  {
+	public EMPTY createEMPTY() {
 		EMPTYImpl empty = new EMPTYImpl();
 		return empty;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated

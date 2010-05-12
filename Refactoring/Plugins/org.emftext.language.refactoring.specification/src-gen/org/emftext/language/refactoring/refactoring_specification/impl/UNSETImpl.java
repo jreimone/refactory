@@ -20,26 +20,23 @@ import org.emftext.language.refactoring.refactoring_specification.UNSET;
  *
  * @generated
  */
-public class UNSETImpl extends ReferenceCommandImpl implements UNSET
-{
-  /**
+public class UNSETImpl extends ReferenceCommandImpl implements UNSET {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected UNSETImpl()
-  {
+	protected UNSETImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.UNSET;
 	}
 

@@ -83,13 +83,13 @@ public interface RefactoringSpecificationFactory extends EFactory
   /**
 	 * Returns a new object of class '<em>Collaboration Reference</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Collaboration Reference</em>'.
 	 * @generated
 	 */
-  CollaborationReference createCollaborationReference();
+	CollaborationReference createCollaborationReference();
 
-  /**
+		/**
 	 * Returns a new object of class '<em>SET</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -218,58 +218,58 @@ public interface RefactoringSpecificationFactory extends EFactory
   /**
 	 * Returns a new object of class '<em>DISTINCT</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>DISTINCT</em>'.
 	 * @generated
 	 */
-  DISTINCT createDISTINCT();
+	DISTINCT createDISTINCT();
 
-  /**
+		/**
 	 * Returns a new object of class '<em>UNSET</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>UNSET</em>'.
 	 * @generated
 	 */
-  UNSET createUNSET();
+	UNSET createUNSET();
 
-  /**
+		/**
 	 * Returns a new object of class '<em>REMOVE</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>REMOVE</em>'.
 	 * @generated
 	 */
-  REMOVE createREMOVE();
+	REMOVE createREMOVE();
 
-  /**
+		/**
 	 * Returns a new object of class '<em>Role Removal</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Role Removal</em>'.
 	 * @generated
 	 */
-  RoleRemoval createRoleRemoval();
+	RoleRemoval createRoleRemoval();
 
-  /**
+		/**
 	 * Returns a new object of class '<em>UNUSED</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>UNUSED</em>'.
 	 * @generated
 	 */
-  UNUSED createUNUSED();
+	UNUSED createUNUSED();
 
-  /**
+		/**
 	 * Returns a new object of class '<em>EMPTY</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>EMPTY</em>'.
 	 * @generated
 	 */
-  EMPTY createEMPTY();
+	EMPTY createEMPTY();
 
-  /**
+		/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -17,6 +17,5 @@ package org.emftext.language.refactoring.refactoring_specification;
  * @model
  * @generated
  */
-public interface UNSET extends ReferenceCommand, DeleteCommand
-{
+public interface UNSET extends ReferenceCommand, DeleteCommand {
 } // UNSET

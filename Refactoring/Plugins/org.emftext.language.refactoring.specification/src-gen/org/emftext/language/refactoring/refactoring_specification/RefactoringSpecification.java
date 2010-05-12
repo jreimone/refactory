@@ -97,16 +97,16 @@ public interface RefactoringSpecification extends EObject
 	 */
   Variable getVariableByName(String name);
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Returns all instructions which do work with the given <code>role</code>.
 	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
-  EList<Instruction> getInstructionsReferencingRole(Role referencedRole);
+	EList<Instruction> getInstructionsReferencingRole(Role referencedRole);
 
 		/**
 	 * <!-- begin-user-doc -->

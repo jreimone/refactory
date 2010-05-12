@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Role Model Postprocessing
 Bundle-SymbolicName: org.emftext.language.refactoring.roles.postprocessing;singleton:=true
 Bundle-Version: 0.0.1
-Require-Bundle: org.emftext.language.refactoring.roles.resource.rolestext;bundle-version="1.0.0",
- org.emftext.language.refactoring.roles;bundle-version="1.0.0"
+Require-Bundle: org.emftext.language.refactoring.roles.resource.rolestext,
+ org.emftext.language.refactoring.roles
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Jan Reimann

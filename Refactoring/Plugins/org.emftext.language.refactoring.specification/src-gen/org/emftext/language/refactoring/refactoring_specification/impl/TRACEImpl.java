@@ -34,66 +34,61 @@ import org.emftext.language.refactoring.roles.Role;
  *
  * @generated
  */
-public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE
-{
-  /**
+public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE {
+	/**
 	 * The cached value of the '{@link #getReference() <em>Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReference()
 	 * @generated
 	 * @ordered
 	 */
-  protected ObjectReference reference;
+	protected ObjectReference reference;
 
-  /**
+	/**
 	 * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRole()
 	 * @generated
 	 * @ordered
 	 */
-  protected Role role;
+	protected Role role;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected TRACEImpl()
-  {
+	protected TRACEImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.TRACE;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ObjectReference getReference()
-  {
+	public ObjectReference getReference() {
 		return reference;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetReference(ObjectReference newReference, NotificationChain msgs)
-  {
+	public NotificationChain basicSetReference(ObjectReference newReference, NotificationChain msgs) {
 		ObjectReference oldReference = reference;
 		reference = newReference;
 		if (eNotificationRequired()) {
@@ -103,13 +98,12 @@ public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE
 		return msgs;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setReference(ObjectReference newReference)
-  {
+	public void setReference(ObjectReference newReference) {
 		if (newReference != reference) {
 			NotificationChain msgs = null;
 			if (reference != null)
@@ -123,13 +117,12 @@ public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE
 			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.TRACE__REFERENCE, newReference, newReference));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Role getRole()
-  {
+	public Role getRole() {
 		if (role != null && role.eIsProxy()) {
 			InternalEObject oldRole = (InternalEObject)role;
 			role = (Role)eResolveProxy(oldRole);
@@ -141,37 +134,34 @@ public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE
 		return role;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Role basicGetRole()
-  {
+	public Role basicGetRole() {
 		return role;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setRole(Role newRole)
-  {
+	public void setRole(Role newRole) {
 		Role oldRole = role;
 		role = newRole;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.TRACE__ROLE, oldRole, role));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.TRACE__REFERENCE:
 				return basicSetReference(null, msgs);
@@ -179,14 +169,13 @@ public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.TRACE__REFERENCE:
 				return getReference();
@@ -197,14 +186,13 @@ public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.TRACE__REFERENCE:
 				setReference((ObjectReference)newValue);
@@ -216,14 +204,13 @@ public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.TRACE__REFERENCE:
 				setReference((ObjectReference)null);
@@ -235,14 +222,13 @@ public class TRACEImpl extends ObjectAssignmentCommandImpl implements TRACE
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.TRACE__REFERENCE:
 				return reference != null;

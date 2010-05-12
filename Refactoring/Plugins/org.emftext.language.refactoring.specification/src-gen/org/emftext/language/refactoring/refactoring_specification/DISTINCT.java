@@ -17,6 +17,5 @@ package org.emftext.language.refactoring.refactoring_specification;
  * @model
  * @generated
  */
-public interface DISTINCT extends Modifier
-{
+public interface DISTINCT extends Modifier {
 } // DISTINCT

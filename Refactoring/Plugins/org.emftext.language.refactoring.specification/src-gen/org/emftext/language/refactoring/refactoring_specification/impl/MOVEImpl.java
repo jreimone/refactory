@@ -60,14 +60,14 @@ public class MOVEImpl extends ContainmentCommandImpl implements MOVE
   /**
 	 * The cached value of the '{@link #getMoveModifier() <em>Move Modifier</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMoveModifier()
 	 * @generated
 	 * @ordered
 	 */
-  protected Modifier moveModifier;
+	protected Modifier moveModifier;
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -182,21 +182,19 @@ public class MOVEImpl extends ContainmentCommandImpl implements MOVE
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Modifier getMoveModifier()
-  {
+	public Modifier getMoveModifier() {
 		return moveModifier;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetMoveModifier(Modifier newMoveModifier, NotificationChain msgs)
-  {
+	public NotificationChain basicSetMoveModifier(Modifier newMoveModifier, NotificationChain msgs) {
 		Modifier oldMoveModifier = moveModifier;
 		moveModifier = newMoveModifier;
 		if (eNotificationRequired()) {
@@ -206,13 +204,12 @@ public class MOVEImpl extends ContainmentCommandImpl implements MOVE
 		return msgs;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setMoveModifier(Modifier newMoveModifier)
-  {
+	public void setMoveModifier(Modifier newMoveModifier) {
 		if (newMoveModifier != moveModifier) {
 			NotificationChain msgs = null;
 			if (moveModifier != null)
@@ -226,7 +223,7 @@ public class MOVEImpl extends ContainmentCommandImpl implements MOVE
 			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.MOVE__MOVE_MODIFIER, newMoveModifier, newMoveModifier));
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated

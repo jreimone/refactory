@@ -18,6 +18,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface RemoveModifier extends EObject
-{
+public interface RemoveModifier extends EObject {
 } // RemoveModifier

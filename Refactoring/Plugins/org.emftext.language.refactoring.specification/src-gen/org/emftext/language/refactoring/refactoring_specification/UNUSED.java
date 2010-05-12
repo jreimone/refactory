@@ -17,6 +17,5 @@ package org.emftext.language.refactoring.refactoring_specification;
  * @model
  * @generated
  */
-public interface UNUSED extends RemoveModifier
-{
+public interface UNUSED extends RemoveModifier {
 } // UNUSED

@@ -20,26 +20,23 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  *
  * @generated
  */
-public abstract class DeleteCommandImpl extends InstructionImpl implements DeleteCommand
-{
-  /**
+public abstract class DeleteCommandImpl extends InstructionImpl implements DeleteCommand {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected DeleteCommandImpl()
-  {
+	protected DeleteCommandImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.DELETE_COMMAND;
 	}
 

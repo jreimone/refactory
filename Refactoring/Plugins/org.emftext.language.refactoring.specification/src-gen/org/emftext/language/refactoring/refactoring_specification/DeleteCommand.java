@@ -17,6 +17,5 @@ package org.emftext.language.refactoring.refactoring_specification;
  * @model abstract="true"
  * @generated
  */
-public interface DeleteCommand extends Instruction
-{
+public interface DeleteCommand extends Instruction {
 } // DeleteCommand

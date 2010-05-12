@@ -31,46 +31,42 @@ import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
  *
  * @generated
  */
-public class CollaborationReferenceImpl extends SourceContextImpl implements CollaborationReference
-{
-  /**
+public class CollaborationReferenceImpl extends SourceContextImpl implements CollaborationReference {
+	/**
 	 * The cached value of the '{@link #getCollaboration() <em>Collaboration</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCollaboration()
 	 * @generated
 	 * @ordered
 	 */
-  protected MultiplicityCollaboration collaboration;
+	protected MultiplicityCollaboration collaboration;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected CollaborationReferenceImpl()
-  {
+	protected CollaborationReferenceImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.COLLABORATION_REFERENCE;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public MultiplicityCollaboration getCollaboration()
-  {
+	public MultiplicityCollaboration getCollaboration() {
 		if (collaboration != null && collaboration.eIsProxy()) {
 			InternalEObject oldCollaboration = (InternalEObject)collaboration;
 			collaboration = (MultiplicityCollaboration)eResolveProxy(oldCollaboration);
@@ -82,37 +78,34 @@ public class CollaborationReferenceImpl extends SourceContextImpl implements Col
 		return collaboration;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public MultiplicityCollaboration basicGetCollaboration()
-  {
+	public MultiplicityCollaboration basicGetCollaboration() {
 		return collaboration;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setCollaboration(MultiplicityCollaboration newCollaboration)
-  {
+	public void setCollaboration(MultiplicityCollaboration newCollaboration) {
 		MultiplicityCollaboration oldCollaboration = collaboration;
 		collaboration = newCollaboration;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.COLLABORATION_REFERENCE__COLLABORATION, oldCollaboration, collaboration));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.COLLABORATION_REFERENCE__COLLABORATION:
 				if (resolve) return getCollaboration();
@@ -121,14 +114,13 @@ public class CollaborationReferenceImpl extends SourceContextImpl implements Col
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.COLLABORATION_REFERENCE__COLLABORATION:
 				setCollaboration((MultiplicityCollaboration)newValue);
@@ -137,14 +129,13 @@ public class CollaborationReferenceImpl extends SourceContextImpl implements Col
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.COLLABORATION_REFERENCE__COLLABORATION:
 				setCollaboration((MultiplicityCollaboration)null);
@@ -153,14 +144,13 @@ public class CollaborationReferenceImpl extends SourceContextImpl implements Col
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.COLLABORATION_REFERENCE__COLLABORATION:
 				return collaboration != null;

@@ -44,11 +44,11 @@ public interface ObjectReferenceAssignment extends IndexAssignmentCommand
   /**
 	 * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.ObjectReferenceAssignment#getReference <em>Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reference</em>' containment reference.
 	 * @see #getReference()
 	 * @generated
 	 */
-  void setReference(ObjectReference value);
+	void setReference(ObjectReference value);
 
 } // ObjectReferenceAssignment

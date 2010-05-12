@@ -46,14 +46,14 @@ public interface TRACE extends ObjectAssignmentCommand
   /**
 	 * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.TRACE#getReference <em>Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reference</em>' containment reference.
 	 * @see #getReference()
 	 * @generated
 	 */
-  void setReference(ObjectReference value);
+	void setReference(ObjectReference value);
 
-  /**
+		/**
 	 * Returns the value of the '<em><b>Role</b></em>' reference.
 	 * <!-- begin-user-doc -->
    * <p>
