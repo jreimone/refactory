@@ -36,7 +36,8 @@ public class RoleModelItemSemanticEditPolicy extends
 	 * @generated
 	 */
 	protected Command getDuplicateCommand(DuplicateElementsRequest req) {
-		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
+		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost())
+				.getEditingDomain();
 		return getGEFWrapper(new DuplicateAnythingCommand(editingDomain, req));
 	}
 
@@ -49,10 +50,12 @@ public class RoleModelItemSemanticEditPolicy extends
 		/**
 		 * @generated
 		 */
-		public DuplicateAnythingCommand(TransactionalEditingDomain editingDomain, DuplicateElementsRequest req) {
-			super(editingDomain, req.getLabel(),
-					req.getElementsToBeDuplicated(),
-					req.getAllDuplicatedElementsMap());
+		public DuplicateAnythingCommand(
+				TransactionalEditingDomain editingDomain,
+				DuplicateElementsRequest req) {
+			super(editingDomain, req.getLabel(), req
+					.getElementsToBeDuplicated(), req
+					.getAllDuplicatedElementsMap());
 		}
 
 	}

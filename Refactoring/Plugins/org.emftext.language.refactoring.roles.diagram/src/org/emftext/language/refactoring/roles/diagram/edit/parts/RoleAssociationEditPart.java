@@ -36,7 +36,8 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleAssociationItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RoleAssociationItemSemanticEditPolicy());
 	}
 
 	/**
@@ -44,11 +45,13 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof RoleAssociationSourceNameEditPart) {
-			((RoleAssociationSourceNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureSourceNameFigure());
+			((RoleAssociationSourceNameEditPart) childEditPart)
+					.setLabel(getPrimaryShape().getFigureSourceNameFigure());
 			return true;
 		}
 		if (childEditPart instanceof RoleAssociationTargetNameEditPart) {
-			((RoleAssociationTargetNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureTargetNameFigure());
+			((RoleAssociationTargetNameEditPart) childEditPart)
+					.setLabel(getPrimaryShape().getFigureTargetNameFigure());
 			return true;
 		}
 		return false;
@@ -126,7 +129,7 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements
 		 */
 		public RoleAssociationFigure() {
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.black);
+			this.setForegroundColor(ColorConstants.gray);
 
 			createContents();
 			setTargetDecoration(createTargetDecoration());

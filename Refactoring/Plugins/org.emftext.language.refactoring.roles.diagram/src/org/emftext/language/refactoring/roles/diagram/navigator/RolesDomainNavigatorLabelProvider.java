@@ -17,7 +17,8 @@ public class RolesDomainNavigatorLabelProvider implements ICommonLabelProvider {
 	 * @generated
 	 */
 	private AdapterFactoryLabelProvider myAdapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
-			RolesDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory());
+			RolesDiagramEditorPlugin.getInstance()
+					.getItemProvidersAdapterFactory());
 
 	/**
 	 * @generated
@@ -30,7 +31,8 @@ public class RolesDomainNavigatorLabelProvider implements ICommonLabelProvider {
 	 */
 	public Image getImage(Object element) {
 		if (element instanceof RolesDomainNavigatorItem) {
-			return myAdapterFactoryLabelProvider.getImage(((RolesDomainNavigatorItem) element).getEObject());
+			return myAdapterFactoryLabelProvider
+					.getImage(((RolesDomainNavigatorItem) element).getEObject());
 		}
 		return null;
 	}
@@ -40,7 +42,8 @@ public class RolesDomainNavigatorLabelProvider implements ICommonLabelProvider {
 	 */
 	public String getText(Object element) {
 		if (element instanceof RolesDomainNavigatorItem) {
-			return myAdapterFactoryLabelProvider.getText(((RolesDomainNavigatorItem) element).getEObject());
+			return myAdapterFactoryLabelProvider
+					.getText(((RolesDomainNavigatorItem) element).getEObject());
 		}
 		return null;
 	}

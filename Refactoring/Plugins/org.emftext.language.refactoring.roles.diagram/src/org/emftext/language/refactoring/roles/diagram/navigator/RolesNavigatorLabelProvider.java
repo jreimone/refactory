@@ -42,8 +42,16 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 * @generated
 	 */
 	static {
-		RolesDiagramEditorPlugin.getInstance().getImageRegistry().put("Navigator?UnknownElement", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
-		RolesDiagramEditorPlugin.getInstance().getImageRegistry().put("Navigator?ImageNotFound", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
+		RolesDiagramEditorPlugin
+				.getInstance()
+				.getImageRegistry()
+				.put(
+						"Navigator?UnknownElement", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
+		RolesDiagramEditorPlugin
+				.getInstance()
+				.getImageRegistry()
+				.put(
+						"Navigator?ImageNotFound", ImageDescriptor.getMissingImageDescriptor()); //$NON-NLS-1$
 	}
 
 	/**
@@ -51,7 +59,8 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 */
 	public void updateLabel(ViewerLabel label, TreePath elementPath) {
 		Object element = elementPath.getLastSegment();
-		if (element instanceof RolesNavigatorItem && !isOwnView(((RolesNavigatorItem) element).getView())) {
+		if (element instanceof RolesNavigatorItem
+				&& !isOwnView(((RolesNavigatorItem) element).getView())) {
 			return;
 		}
 		label.setText(getText(element));
@@ -64,7 +73,8 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	public Image getImage(Object element) {
 		if (element instanceof RolesNavigatorGroup) {
 			RolesNavigatorGroup group = (RolesNavigatorGroup) element;
-			return RolesDiagramEditorPlugin.getInstance().getBundledImage(group.getIcon());
+			return RolesDiagramEditorPlugin.getInstance().getBundledImage(
+					group.getIcon());
 		}
 
 		if (element instanceof RolesNavigatorItem) {
@@ -83,18 +93,24 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 */
 	public Image getImage(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-			case RoleModelEditPart.VISUAL_ID:
-				return getImage("Navigator?Diagram?http://www.emftext.org/language/roles?RoleModel", RolesElementTypes.RoleModel_1000); //$NON-NLS-1$
-			case RoleEditPart.VISUAL_ID:
-				return getImage("Navigator?TopLevelNode?http://www.emftext.org/language/roles?Role", RolesElementTypes.Role_2001); //$NON-NLS-1$
-			case RoleImplicationEditPart.VISUAL_ID:
-				return getImage("Navigator?Link?http://www.emftext.org/language/roles?RoleImplication", RolesElementTypes.RoleImplication_4001); //$NON-NLS-1$
-			case RoleProhibitionEditPart.VISUAL_ID:
-				return getImage("Navigator?Link?http://www.emftext.org/language/roles?RoleProhibition", RolesElementTypes.RoleProhibition_4002); //$NON-NLS-1$
-			case RoleAssociationEditPart.VISUAL_ID:
-				return getImage("Navigator?Link?http://www.emftext.org/language/roles?RoleAssociation", RolesElementTypes.RoleAssociation_4003); //$NON-NLS-1$
-			case RoleCompositionEditPart.VISUAL_ID:
-				return getImage("Navigator?Link?http://www.emftext.org/language/roles?RoleComposition", RolesElementTypes.RoleComposition_4004); //$NON-NLS-1$
+		case RoleModelEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Diagram?http://www.emftext.org/language/roles?RoleModel", RolesElementTypes.RoleModel_1000); //$NON-NLS-1$
+		case RoleEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?TopLevelNode?http://www.emftext.org/language/roles?Role", RolesElementTypes.Role_2001); //$NON-NLS-1$
+		case RoleImplicationEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://www.emftext.org/language/roles?RoleImplication", RolesElementTypes.RoleImplication_4001); //$NON-NLS-1$
+		case RoleProhibitionEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://www.emftext.org/language/roles?RoleProhibition", RolesElementTypes.RoleProhibition_4002); //$NON-NLS-1$
+		case RoleAssociationEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://www.emftext.org/language/roles?RoleAssociation", RolesElementTypes.RoleAssociation_4003); //$NON-NLS-1$
+		case RoleCompositionEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://www.emftext.org/language/roles?RoleComposition", RolesElementTypes.RoleComposition_4004); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -103,9 +119,11 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 * @generated
 	 */
 	private Image getImage(String key, IElementType elementType) {
-		ImageRegistry imageRegistry = RolesDiagramEditorPlugin.getInstance().getImageRegistry();
+		ImageRegistry imageRegistry = RolesDiagramEditorPlugin.getInstance()
+				.getImageRegistry();
 		Image image = imageRegistry.get(key);
-		if (image == null && elementType != null && RolesElementTypes.isKnownElementType(elementType)) {
+		if (image == null && elementType != null
+				&& RolesElementTypes.isKnownElementType(elementType)) {
 			image = RolesElementTypes.getImage(elementType);
 			imageRegistry.put(key, image);
 		}
@@ -145,18 +163,18 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 			return getUnresolvedDomainElementProxyText(view);
 		}
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-			case RoleModelEditPart.VISUAL_ID:
-				return getRoleModel_1000Text(view);
-			case RoleEditPart.VISUAL_ID:
-				return getRole_2001Text(view);
-			case RoleImplicationEditPart.VISUAL_ID:
-				return getRoleImplication_4001Text(view);
-			case RoleProhibitionEditPart.VISUAL_ID:
-				return getRoleProhibition_4002Text(view);
-			case RoleAssociationEditPart.VISUAL_ID:
-				return getRoleAssociation_4003Text(view);
-			case RoleCompositionEditPart.VISUAL_ID:
-				return getRoleComposition_4004Text(view);
+		case RoleModelEditPart.VISUAL_ID:
+			return getRoleModel_1000Text(view);
+		case RoleEditPart.VISUAL_ID:
+			return getRole_2001Text(view);
+		case RoleImplicationEditPart.VISUAL_ID:
+			return getRoleImplication_4001Text(view);
+		case RoleProhibitionEditPart.VISUAL_ID:
+			return getRoleProhibition_4002Text(view);
+		case RoleAssociationEditPart.VISUAL_ID:
+			return getRoleAssociation_4003Text(view);
+		case RoleCompositionEditPart.VISUAL_ID:
+			return getRoleComposition_4004Text(view);
 		}
 		return getUnknownElementText(view);
 	}
@@ -169,7 +187,8 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 		if (domainModelElement != null) {
 			return domainModelElement.getName();
 		} else {
-			RolesDiagramEditorPlugin.getInstance().logError("No domain element for view with visualID = " + 1000); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError(
+					"No domain element for view with visualID = " + 1000); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -178,13 +197,17 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 * @generated
 	 */
 	private String getRole_2001Text(View view) {
-		IParser parser = RolesParserProvider.getParser(RolesElementTypes.Role_2001, view.getElement() != null ? view.getElement()
-				: view, RolesVisualIDRegistry.getType(RoleNameEditPart.VISUAL_ID));
+		IParser parser = RolesParserProvider.getParser(
+				RolesElementTypes.Role_2001, view.getElement() != null ? view
+						.getElement() : view, RolesVisualIDRegistry
+						.getType(RoleNameEditPart.VISUAL_ID));
 		if (parser != null) {
 			return parser.getPrintString(new EObjectAdapter(
-					view.getElement() != null ? view.getElement() : view), ParserOptions.NONE.intValue());
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
-			RolesDiagramEditorPlugin.getInstance().logError("Parser was not found for label " + 5001); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError(
+					"Parser was not found for label " + 5001); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -207,13 +230,18 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 * @generated
 	 */
 	private String getRoleAssociation_4003Text(View view) {
-		IParser parser = RolesParserProvider.getParser(RolesElementTypes.RoleAssociation_4003, view.getElement() != null ? view.getElement()
-				: view, RolesVisualIDRegistry.getType(RoleAssociationSourceNameEditPart.VISUAL_ID));
+		IParser parser = RolesParserProvider.getParser(
+				RolesElementTypes.RoleAssociation_4003,
+				view.getElement() != null ? view.getElement() : view,
+				RolesVisualIDRegistry
+						.getType(RoleAssociationSourceNameEditPart.VISUAL_ID));
 		if (parser != null) {
 			return parser.getPrintString(new EObjectAdapter(
-					view.getElement() != null ? view.getElement() : view), ParserOptions.NONE.intValue());
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
-			RolesDiagramEditorPlugin.getInstance().logError("Parser was not found for label " + 6001); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError(
+					"Parser was not found for label " + 6001); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -222,13 +250,18 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 * @generated
 	 */
 	private String getRoleComposition_4004Text(View view) {
-		IParser parser = RolesParserProvider.getParser(RolesElementTypes.RoleComposition_4004, view.getElement() != null ? view.getElement()
-				: view, RolesVisualIDRegistry.getType(RoleCompositionSourceNameEditPart.VISUAL_ID));
+		IParser parser = RolesParserProvider.getParser(
+				RolesElementTypes.RoleComposition_4004,
+				view.getElement() != null ? view.getElement() : view,
+				RolesVisualIDRegistry
+						.getType(RoleCompositionSourceNameEditPart.VISUAL_ID));
 		if (parser != null) {
 			return parser.getPrintString(new EObjectAdapter(
-					view.getElement() != null ? view.getElement() : view), ParserOptions.NONE.intValue());
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
-			RolesDiagramEditorPlugin.getInstance().logError("Parser was not found for label " + 6003); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError(
+					"Parser was not found for label " + 6003); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -276,7 +309,8 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 * @generated
 	 */
 	private boolean isOwnView(View view) {
-		return RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID(view));
+		return RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry
+				.getModelID(view));
 	}
 
 }
