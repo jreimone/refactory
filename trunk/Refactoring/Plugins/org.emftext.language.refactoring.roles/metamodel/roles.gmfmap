@@ -28,6 +28,35 @@
           href="roles.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="roles.gmfgraph#RoleNode"/>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild">
+        <containmentFeature
+            href="roles.ecore#//Role/attributes"/>
+        <ownedChild>
+          <domainMetaElement
+              href="roles.ecore#//RoleAttribute"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="roles.gmfgraph#AttributeName"/>
+            <features
+                href="roles.ecore#//NamedElement/name"/>
+            <editableFeatures
+                href="roles.ecore#//NamedElement/name"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="roles.gmftool#//@palette/@tools.0/@tools.1"/>
+          <diagramNode
+              href="roles.gmfgraph#AttributeNode"/>
+        </ownedChild>
+      </children>
+      <compartments
+          children="//@nodes.0/@ownedChild/@children.0">
+        <compartment
+            href="roles.gmfgraph#AttributeCompartment"/>
+      </compartments>
     </ownedChild>
   </nodes>
   <links>

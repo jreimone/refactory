@@ -37,6 +37,15 @@ public class RolesEditPartFactory implements EditPartFactory {
 			case RoleNameEditPart.VISUAL_ID:
 				return new RoleNameEditPart(view);
 
+			case RoleAttributeEditPart.VISUAL_ID:
+				return new RoleAttributeEditPart(view);
+
+			case RoleAttributeNameEditPart.VISUAL_ID:
+				return new RoleAttributeNameEditPart(view);
+
+			case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+				return new RoleRoleAttributeCompartmentEditPart(view);
+
 			case RoleImplicationEditPart.VISUAL_ID:
 				return new RoleImplicationEditPart(view);
 

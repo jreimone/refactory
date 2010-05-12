@@ -15,6 +15,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationSourceNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationTargetNameEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionSourceNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionTargetNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleNameEditPart;
@@ -46,6 +47,27 @@ public class RolesParserProvider extends AbstractProvider implements
 			roleName_5001Parser = parser;
 		}
 		return roleName_5001Parser;
+	}
+
+	/**
+	 * @generated
+	 */
+	private IParser roleAttributeName_5002Parser;
+
+	/**
+	 * @generated
+	 */
+	private IParser getRoleAttributeName_5002Parser() {
+		if (roleAttributeName_5002Parser == null) {
+			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE
+					.getNamedElement_Name() };
+			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE
+					.getNamedElement_Name() };
+			MessageFormatParser parser = new MessageFormatParser(features,
+					editableFeatures);
+			roleAttributeName_5002Parser = parser;
+		}
+		return roleAttributeName_5002Parser;
 	}
 
 	/**
@@ -139,6 +161,8 @@ public class RolesParserProvider extends AbstractProvider implements
 		switch (visualID) {
 		case RoleNameEditPart.VISUAL_ID:
 			return getRoleName_5001Parser();
+		case RoleAttributeNameEditPart.VISUAL_ID:
+			return getRoleAttributeName_5002Parser();
 		case RoleAssociationSourceNameEditPart.VISUAL_ID:
 			return getRoleAssociationSourceName_6001Parser();
 		case RoleAssociationTargetNameEditPart.VISUAL_ID:

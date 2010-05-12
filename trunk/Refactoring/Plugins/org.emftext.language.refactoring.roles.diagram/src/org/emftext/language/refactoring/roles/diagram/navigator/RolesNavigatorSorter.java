@@ -11,7 +11,7 @@ public class RolesNavigatorSorter extends ViewerSorter {
 	/**
 	 * @generated
 	 */
-	private static final int GROUP_CATEGORY = 4006;
+	private static final int GROUP_CATEGORY = 7003;
 
 	/**
 	 * @generated

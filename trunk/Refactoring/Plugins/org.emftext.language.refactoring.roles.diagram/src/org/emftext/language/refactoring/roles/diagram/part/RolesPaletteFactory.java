@@ -34,6 +34,7 @@ public class RolesPaletteFactory {
 				Messages.Roles1Group_title);
 		paletteContainer.setId("createRoles1Group"); //$NON-NLS-1$
 		paletteContainer.add(createRole1CreationTool());
+		paletteContainer.add(createRoleAttribute2CreationTool());
 		return paletteContainer;
 	}
 
@@ -65,6 +66,23 @@ public class RolesPaletteFactory {
 		entry
 				.setSmallIcon(RolesDiagramEditorPlugin
 						.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/role.gif")); //$NON-NLS-1$
+		entry.setLargeIcon(entry.getSmallIcon());
+		return entry;
+	}
+
+	/**
+	 * @generated
+	 */
+	private ToolEntry createRoleAttribute2CreationTool() {
+		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
+		types.add(RolesElementTypes.RoleAttribute_3001);
+		NodeToolEntry entry = new NodeToolEntry(
+				Messages.RoleAttribute2CreationTool_title,
+				Messages.RoleAttribute2CreationTool_desc, types);
+		entry.setId("createRoleAttribute2CreationTool"); //$NON-NLS-1$
+		entry
+				.setSmallIcon(RolesDiagramEditorPlugin
+						.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/roleattribute.gif")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}

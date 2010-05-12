@@ -10,6 +10,8 @@ import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationSourceNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationTargetNameEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionSourceNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionTargetNameEditPart;
@@ -18,6 +20,7 @@ import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleImplication
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleModelEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleProhibitionEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleRoleAttributeCompartmentEditPart;
 
 /**
  * This registry is used to determine which type of visual object should be
@@ -126,6 +129,12 @@ public class RolesVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
+		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+			if (RolesPackage.eINSTANCE.getRoleAttribute().isSuperTypeOf(
+					domainElement.eClass())) {
+				return RoleAttributeEditPart.VISUAL_ID;
+			}
+			break;
 		case RoleModelEditPart.VISUAL_ID:
 			if (RolesPackage.eINSTANCE.getRole().isSuperTypeOf(
 					domainElement.eClass())) {
@@ -159,6 +168,19 @@ public class RolesVisualIDRegistry {
 		switch (containerVisualID) {
 		case RoleEditPart.VISUAL_ID:
 			if (RoleNameEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			if (RoleRoleAttributeCompartmentEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			break;
+		case RoleAttributeEditPart.VISUAL_ID:
+			if (RoleAttributeNameEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			break;
+		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+			if (RoleAttributeEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;

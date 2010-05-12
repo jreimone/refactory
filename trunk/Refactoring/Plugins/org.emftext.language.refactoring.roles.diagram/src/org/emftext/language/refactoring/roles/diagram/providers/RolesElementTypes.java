@@ -17,6 +17,7 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleImplicationEditPart;
@@ -58,6 +59,11 @@ public class RolesElementTypes extends ElementInitializers {
 	 * @generated
 	 */
 	public static final IElementType Role_2001 = getElementType("org.emftext.language.refactoring.roles.diagram.Role_2001"); //$NON-NLS-1$
+	/**
+	 * @generated
+	 */
+	public static final IElementType RoleAttribute_3001 = getElementType("org.emftext.language.refactoring.roles.diagram.RoleAttribute_3001"); //$NON-NLS-1$
+
 	/**
 	 * @generated
 	 */
@@ -190,6 +196,9 @@ public class RolesElementTypes extends ElementInitializers {
 
 			elements.put(Role_2001, RolesPackage.eINSTANCE.getRole());
 
+			elements.put(RoleAttribute_3001, RolesPackage.eINSTANCE
+					.getRoleAttribute());
+
 			elements.put(RoleImplication_4001, RolesPackage.eINSTANCE
 					.getRoleImplication());
 
@@ -220,6 +229,7 @@ public class RolesElementTypes extends ElementInitializers {
 			KNOWN_ELEMENT_TYPES = new HashSet();
 			KNOWN_ELEMENT_TYPES.add(RoleModel_1000);
 			KNOWN_ELEMENT_TYPES.add(Role_2001);
+			KNOWN_ELEMENT_TYPES.add(RoleAttribute_3001);
 			KNOWN_ELEMENT_TYPES.add(RoleImplication_4001);
 			KNOWN_ELEMENT_TYPES.add(RoleProhibition_4002);
 			KNOWN_ELEMENT_TYPES.add(RoleAssociation_4003);
@@ -237,6 +247,8 @@ public class RolesElementTypes extends ElementInitializers {
 			return RoleModel_1000;
 		case RoleEditPart.VISUAL_ID:
 			return Role_2001;
+		case RoleAttributeEditPart.VISUAL_ID:
+			return RoleAttribute_3001;
 		case RoleImplicationEditPart.VISUAL_ID:
 			return RoleImplication_4001;
 		case RoleProhibitionEditPart.VISUAL_ID:

@@ -26,6 +26,7 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleImplicationEditPart;
@@ -225,6 +226,17 @@ public class RoleModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy 
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(RolesDiagramUpdater
 						.getRole_2001ContainedLinks(view));
+			}
+			if (!domain2NotationMap.containsKey(view.getElement())
+					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+				domain2NotationMap.put(view.getElement(), view);
+			}
+			break;
+		}
+		case RoleAttributeEditPart.VISUAL_ID: {
+			if (!domain2NotationMap.containsKey(view.getElement())) {
+				result.addAll(RolesDiagramUpdater
+						.getRoleAttribute_3001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$

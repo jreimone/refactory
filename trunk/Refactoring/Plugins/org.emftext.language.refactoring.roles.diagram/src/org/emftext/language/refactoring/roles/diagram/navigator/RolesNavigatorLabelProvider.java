@@ -20,6 +20,8 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleProhibition;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationSourceNameEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeEditPart;
+import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleCompositionSourceNameEditPart;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart;
@@ -99,6 +101,9 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 		case RoleEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?TopLevelNode?http://www.emftext.org/language/roles?Role", RolesElementTypes.Role_2001); //$NON-NLS-1$
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Node?http://www.emftext.org/language/roles?RoleAttribute", RolesElementTypes.RoleAttribute_3001); //$NON-NLS-1$
 		case RoleImplicationEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Link?http://www.emftext.org/language/roles?RoleImplication", RolesElementTypes.RoleImplication_4001); //$NON-NLS-1$
@@ -167,6 +172,8 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 			return getRoleModel_1000Text(view);
 		case RoleEditPart.VISUAL_ID:
 			return getRole_2001Text(view);
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getRoleAttribute_3001Text(view);
 		case RoleImplicationEditPart.VISUAL_ID:
 			return getRoleImplication_4001Text(view);
 		case RoleProhibitionEditPart.VISUAL_ID:
@@ -208,6 +215,26 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 		} else {
 			RolesDiagramEditorPlugin.getInstance().logError(
 					"Parser was not found for label " + 5001); //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	private String getRoleAttribute_3001Text(View view) {
+		IParser parser = RolesParserProvider.getParser(
+				RolesElementTypes.RoleAttribute_3001,
+				view.getElement() != null ? view.getElement() : view,
+				RolesVisualIDRegistry
+						.getType(RoleAttributeNameEditPart.VISUAL_ID));
+		if (parser != null) {
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
+		} else {
+			RolesDiagramEditorPlugin.getInstance().logError(
+					"Parser was not found for label " + 5002); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}

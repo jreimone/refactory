@@ -213,7 +213,7 @@
       <viewProvider class="org.emftext.language.refactoring.roles.diagram.providers.RolesViewProvider">
          <Priority name="Lowest"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Role Model"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,3001"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004"/>
       </viewProvider>
    </extension>
@@ -226,16 +226,16 @@
             <method name="getType()" value="Role Model"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001"/>
+            <method name="getType()" value="2001,3001"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001"/>
+            <method name="getType()" value="5001,5002"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
-            <method name="getType()" value=""/>
+            <method name="getType()" value="7001"/>
          </object>
          <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
       </editpartProvider>
@@ -285,6 +285,16 @@
                eclass="Role"
                edithelper="org.emftext.language.refactoring.roles.diagram.edit.helpers.RoleEditHelper">
             <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/language/roles">
+         <metamodelType
+               id="org.emftext.language.refactoring.roles.diagram.RoleAttribute_3001"
+               name="%metatype.name.RoleAttribute_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="RoleAttribute"
+               edithelper="org.emftext.language.refactoring.roles.diagram.edit.helpers.RoleAttributeEditHelper">
+            <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://www.emftext.org/language/roles">
@@ -341,6 +351,7 @@
       <binding context="org.emftext.language.refactoring.roles.diagram.TypeContext">
          <elementType ref="org.emftext.language.refactoring.roles.diagram.RoleModel_1000"/>
          <elementType ref="org.emftext.language.refactoring.roles.diagram.Role_2001"/>
+         <elementType ref="org.emftext.language.refactoring.roles.diagram.RoleAttribute_3001"/>
          <elementType ref="org.emftext.language.refactoring.roles.diagram.RoleImplication_4001"/>
          <elementType ref="org.emftext.language.refactoring.roles.diagram.RoleProhibition_4002"/>
          <elementType ref="org.emftext.language.refactoring.roles.diagram.RoleAssociation_4003"/>

@@ -36,6 +36,11 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	public List getTypesForPopupBar(IAdaptable host) {
 		IGraphicalEditPart editPart = (IGraphicalEditPart) host
 				.getAdapter(IGraphicalEditPart.class);
+		if (editPart instanceof RoleEditPart) {
+			ArrayList types = new ArrayList(1);
+			types.add(RolesElementTypes.RoleAttribute_3001);
+			return types;
+		}
 		if (editPart instanceof RoleModelEditPart) {
 			ArrayList types = new ArrayList(1);
 			types.add(RolesElementTypes.Role_2001);
