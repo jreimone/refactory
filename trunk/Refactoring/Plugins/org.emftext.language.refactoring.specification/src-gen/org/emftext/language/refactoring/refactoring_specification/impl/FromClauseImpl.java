@@ -34,66 +34,61 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  *
  * @generated
  */
-public class FromClauseImpl extends EObjectImpl implements FromClause
-{
-  /**
+public class FromClauseImpl extends EObjectImpl implements FromClause {
+	/**
 	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getOperator()
 	 * @generated
 	 * @ordered
 	 */
-  protected FromOperator operator;
+	protected FromOperator operator;
 
-  /**
+	/**
 	 * The cached value of the '{@link #getReference() <em>Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReference()
 	 * @generated
 	 * @ordered
 	 */
-  protected ObjectReference reference;
+	protected ObjectReference reference;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected FromClauseImpl()
-  {
+	protected FromClauseImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.FROM_CLAUSE;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public FromOperator getOperator()
-  {
+	public FromOperator getOperator() {
 		return operator;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetOperator(FromOperator newOperator, NotificationChain msgs)
-  {
+	public NotificationChain basicSetOperator(FromOperator newOperator, NotificationChain msgs) {
 		FromOperator oldOperator = operator;
 		operator = newOperator;
 		if (eNotificationRequired()) {
@@ -103,13 +98,12 @@ public class FromClauseImpl extends EObjectImpl implements FromClause
 		return msgs;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setOperator(FromOperator newOperator)
-  {
+	public void setOperator(FromOperator newOperator) {
 		if (newOperator != operator) {
 			NotificationChain msgs = null;
 			if (operator != null)
@@ -123,23 +117,21 @@ public class FromClauseImpl extends EObjectImpl implements FromClause
 			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.FROM_CLAUSE__OPERATOR, newOperator, newOperator));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ObjectReference getReference()
-  {
+	public ObjectReference getReference() {
 		return reference;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetReference(ObjectReference newReference, NotificationChain msgs)
-  {
+	public NotificationChain basicSetReference(ObjectReference newReference, NotificationChain msgs) {
 		ObjectReference oldReference = reference;
 		reference = newReference;
 		if (eNotificationRequired()) {
@@ -149,13 +141,12 @@ public class FromClauseImpl extends EObjectImpl implements FromClause
 		return msgs;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setReference(ObjectReference newReference)
-  {
+	public void setReference(ObjectReference newReference) {
 		if (newReference != reference) {
 			NotificationChain msgs = null;
 			if (reference != null)
@@ -169,14 +160,13 @@ public class FromClauseImpl extends EObjectImpl implements FromClause
 			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.FROM_CLAUSE__REFERENCE, newReference, newReference));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.FROM_CLAUSE__OPERATOR:
 				return basicSetOperator(null, msgs);
@@ -186,14 +176,13 @@ public class FromClauseImpl extends EObjectImpl implements FromClause
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.FROM_CLAUSE__OPERATOR:
 				return getOperator();
@@ -203,14 +192,13 @@ public class FromClauseImpl extends EObjectImpl implements FromClause
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.FROM_CLAUSE__OPERATOR:
 				setOperator((FromOperator)newValue);
@@ -222,14 +210,13 @@ public class FromClauseImpl extends EObjectImpl implements FromClause
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.FROM_CLAUSE__OPERATOR:
 				setOperator((FromOperator)null);
@@ -241,14 +228,13 @@ public class FromClauseImpl extends EObjectImpl implements FromClause
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.FROM_CLAUSE__OPERATOR:
 				return operator != null;

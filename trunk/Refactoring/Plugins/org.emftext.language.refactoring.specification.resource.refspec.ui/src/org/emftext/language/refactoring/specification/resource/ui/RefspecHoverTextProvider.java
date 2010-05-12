@@ -6,13 +6,18 @@
  */
 package org.emftext.language.refactoring.specification.resource.ui;
 
+import org.emftext.language.refactoring.roles.RolesPackage;
+import org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextHoverTextProvider;
+
 public class RefspecHoverTextProvider implements org.emftext.language.refactoring.specification.resource.IRefspecHoverTextProvider {
 	
-	private org.emftext.language.refactoring.specification.resource.ui.RefspecDefaultHoverTextProvider defaultProvider = new org.emftext.language.refactoring.specification.resource.ui.RefspecDefaultHoverTextProvider();
+private org.emftext.language.refactoring.specification.resource.ui.RefspecDefaultHoverTextProvider defaultProvider = new org.emftext.language.refactoring.specification.resource.ui.RefspecDefaultHoverTextProvider();
 	
 	public java.lang.String getHoverText(org.eclipse.emf.ecore.EObject object) {
-		// Set option overrideHoverTextProvider to false and customize this method to
-		// obtain custom hover texts.
+		if(object.eClass().getEPackage().equals(RolesPackage.eINSTANCE)){
+			RolestextHoverTextProvider rolesHoverProvider = new RolestextHoverTextProvider();
+			return rolesHoverProvider.getHoverText(object);
+		}
 		return defaultProvider.getHoverText(object);
 	}
 	

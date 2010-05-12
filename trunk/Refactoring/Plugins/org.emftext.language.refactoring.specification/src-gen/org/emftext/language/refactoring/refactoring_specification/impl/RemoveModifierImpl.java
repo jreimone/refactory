@@ -22,26 +22,23 @@ import org.emftext.language.refactoring.refactoring_specification.RemoveModifier
  *
  * @generated
  */
-public abstract class RemoveModifierImpl extends EObjectImpl implements RemoveModifier
-{
-  /**
+public abstract class RemoveModifierImpl extends EObjectImpl implements RemoveModifier {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected RemoveModifierImpl()
-  {
+	protected RemoveModifierImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.REMOVE_MODIFIER;
 	}
 

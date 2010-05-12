@@ -409,19 +409,18 @@ public class RefactoringSpecificationAdapterFactory extends AdapterFactoryImpl
   /**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.CollaborationReference <em>Collaboration Reference</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.CollaborationReference
 	 * @generated
 	 */
-  public Adapter createCollaborationReferenceAdapter()
-  {
+	public Adapter createCollaborationReferenceAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.TargetContext <em>Target Context</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -559,19 +558,18 @@ public class RefactoringSpecificationAdapterFactory extends AdapterFactoryImpl
   /**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.ObjectReference <em>Object Reference</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.ObjectReference
 	 * @generated
 	 */
-  public Adapter createObjectReferenceAdapter()
-  {
+	public Adapter createObjectReferenceAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.Context <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -784,154 +782,144 @@ public class RefactoringSpecificationAdapterFactory extends AdapterFactoryImpl
   /**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.Modifier <em>Modifier</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.Modifier
 	 * @generated
 	 */
-  public Adapter createModifierAdapter()
-  {
+	public Adapter createModifierAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.DISTINCT <em>DISTINCT</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.DISTINCT
 	 * @generated
 	 */
-  public Adapter createDISTINCTAdapter()
-  {
+	public Adapter createDISTINCTAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.DeleteCommand <em>Delete Command</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.DeleteCommand
 	 * @generated
 	 */
-  public Adapter createDeleteCommandAdapter()
-  {
+	public Adapter createDeleteCommandAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.UNSET <em>UNSET</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.UNSET
 	 * @generated
 	 */
-  public Adapter createUNSETAdapter()
-  {
+	public Adapter createUNSETAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.REMOVE <em>REMOVE</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.REMOVE
 	 * @generated
 	 */
-  public Adapter createREMOVEAdapter()
-  {
+	public Adapter createREMOVEAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.ObjectRemoval <em>Object Removal</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.ObjectRemoval
 	 * @generated
 	 */
-  public Adapter createObjectRemovalAdapter()
-  {
+	public Adapter createObjectRemovalAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.RoleRemoval <em>Role Removal</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.RoleRemoval
 	 * @generated
 	 */
-  public Adapter createRoleRemovalAdapter()
-  {
+	public Adapter createRoleRemovalAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.RemoveModifier <em>Remove Modifier</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.RemoveModifier
 	 * @generated
 	 */
-  public Adapter createRemoveModifierAdapter()
-  {
+	public Adapter createRemoveModifierAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.UNUSED <em>UNUSED</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.UNUSED
 	 * @generated
 	 */
-  public Adapter createUNUSEDAdapter()
-  {
+	public Adapter createUNUSEDAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.language.refactoring.refactoring_specification.EMPTY <em>EMPTY</em>}'.
 	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.emftext.language.refactoring.refactoring_specification.EMPTY
 	 * @generated
 	 */
-  public Adapter createEMPTYAdapter()
-  {
+	public Adapter createEMPTYAdapter() {
 		return null;
 	}
 
-  /**
+		/**
 	 * Creates a new adapter for the default case.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null.

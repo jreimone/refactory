@@ -56,324 +56,323 @@ import org.emftext.language.refactoring.roles.RolesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class RefactoringSpecificationPackageImpl extends EPackageImpl implements RefactoringSpecificationPackage
-{
-  /**
+public class RefactoringSpecificationPackageImpl extends EPackageImpl implements RefactoringSpecificationPackage {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass refactoringSpecificationEClass = null;
+	private EClass refactoringSpecificationEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass instructionEClass = null;
+	private EClass instructionEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass containmentCommandEClass = null;
+	private EClass containmentCommandEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass createEClass = null;
+	private EClass createEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass moveEClass = null;
+	private EClass moveEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass variableEClass = null;
+	private EClass variableEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass variableReferenceEClass = null;
+	private EClass variableReferenceEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass sourceContextEClass = null;
+	private EClass sourceContextEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass roleReferenceEClass = null;
+	private EClass roleReferenceEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass collaborationReferenceEClass = null;
+	private EClass collaborationReferenceEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass targetContextEClass = null;
+	private EClass targetContextEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass referenceCommandEClass = null;
+	private EClass referenceCommandEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass setEClass = null;
+	private EClass setEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass attributeCommandEClass = null;
+	private EClass attributeCommandEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass assignEClass = null;
+	private EClass assignEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass fromClauseEClass = null;
+	private EClass fromClauseEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass fromOperatorEClass = null;
+	private EClass fromOperatorEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass uptreeEClass = null;
+	private EClass uptreeEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass constantsReferenceEClass = null;
+	private EClass constantsReferenceEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass objectReferenceEClass = null;
+	private EClass objectReferenceEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass contextEClass = null;
+	private EClass contextEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass indexAssignmentCommandEClass = null;
+	private EClass indexAssignmentCommandEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass indexVariableEClass = null;
+	private EClass indexVariableEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass concreteIndexEClass = null;
+	private EClass concreteIndexEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass firstEClass = null;
+	private EClass firstEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass lastEClass = null;
+	private EClass lastEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass objectReferenceAssignmentEClass = null;
+	private EClass objectReferenceAssignmentEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass objectAssignmentCommandEClass = null;
+	private EClass objectAssignmentCommandEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass variableDeclarationCommandEClass = null;
+	private EClass variableDeclarationCommandEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass traceEClass = null;
+	private EClass traceEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass traceObjectEClass = null;
+	private EClass traceObjectEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass variableAssignmentEClass = null;
+	private EClass variableAssignmentEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass pathEClass = null;
+	private EClass pathEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass filterEClass = null;
+	private EClass filterEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass modifierEClass = null;
+	private EClass modifierEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass distinctEClass = null;
+	private EClass distinctEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass deleteCommandEClass = null;
+	private EClass deleteCommandEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass unsetEClass = null;
+	private EClass unsetEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass removeEClass = null;
+	private EClass removeEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass objectRemovalEClass = null;
+	private EClass objectRemovalEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass roleRemovalEClass = null;
+	private EClass roleRemovalEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass removeModifierEClass = null;
+	private EClass removeModifierEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass unusedEClass = null;
+	private EClass unusedEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass emptyEClass = null;
+	private EClass emptyEClass = null;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EEnum constantsEEnum = null;
+	private EEnum constantsEEnum = null;
 
-  /**
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -382,38 +381,36 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 	 * initialization of the package, or returns the registered package,
 	 * if one already exists.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-  private RefactoringSpecificationPackageImpl()
-  {
+	private RefactoringSpecificationPackageImpl() {
 		super(eNS_URI, RefactoringSpecificationFactory.eINSTANCE);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private static boolean isInited = false;
+	private static boolean isInited = false;
 
-  /**
+	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
 	 * <p>This method is used to initialize {@link RefactoringSpecificationPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-  public static RefactoringSpecificationPackage init()
-  {
+	public static RefactoringSpecificationPackage init() {
 		if (isInited) return (RefactoringSpecificationPackage)EPackage.Registry.INSTANCE.getEPackage(RefactoringSpecificationPackage.eNS_URI);
 
 		// Obtain or create and register package
@@ -439,842 +436,759 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 		return theRefactoringSpecificationPackage;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getRefactoringSpecification()
-  {
+	public EClass getRefactoringSpecification() {
 		return refactoringSpecificationEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getRefactoringSpecification_UsedRoleModel()
-  {
+	public EReference getRefactoringSpecification_UsedRoleModel() {
 		return (EReference)refactoringSpecificationEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getRefactoringSpecification_Instructions()
-  {
+	public EReference getRefactoringSpecification_Instructions() {
 		return (EReference)refactoringSpecificationEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getInstruction()
-  {
+	public EClass getInstruction() {
 		return instructionEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getContainmentCommand()
-  {
+	public EClass getContainmentCommand() {
 		return containmentCommandEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getContainmentCommand_Index()
-  {
+	public EReference getContainmentCommand_Index() {
 		return (EReference)containmentCommandEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getCREATE()
-  {
+	public EClass getCREATE() {
 		return createEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getCREATE_SourceRole()
-  {
+	public EReference getCREATE_SourceRole() {
 		return (EReference)createEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getCREATE_TargetContext()
-  {
+	public EReference getCREATE_TargetContext() {
 		return (EReference)createEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getMOVE()
-  {
+	public EClass getMOVE() {
 		return moveEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getMOVE_Source()
-  {
+	public EReference getMOVE_Source() {
 		return (EReference)moveEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getMOVE_Target()
-  {
+	public EReference getMOVE_Target() {
 		return (EReference)moveEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getMOVE_MoveModifier()
-  {
+	public EReference getMOVE_MoveModifier() {
 		return (EReference)moveEClass.getEStructuralFeatures().get(2);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getVariable()
-  {
+	public EClass getVariable() {
 		return variableEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getVariable_Name()
-  {
+	public EAttribute getVariable_Name() {
 		return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getVariable_ContainerCommand()
-  {
+	public EReference getVariable_ContainerCommand() {
 		return (EReference)variableEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getVariableReference()
-  {
+	public EClass getVariableReference() {
 		return variableReferenceEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getVariableReference_Variable()
-  {
+	public EReference getVariableReference_Variable() {
 		return (EReference)variableReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getSourceContext()
-  {
+	public EClass getSourceContext() {
 		return sourceContextEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getRoleReference()
-  {
+	public EClass getRoleReference() {
 		return roleReferenceEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getRoleReference_Role()
-  {
+	public EReference getRoleReference_Role() {
 		return (EReference)roleReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getRoleReference_From()
-  {
+	public EReference getRoleReference_From() {
 		return (EReference)roleReferenceEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getCollaborationReference()
-  {
+	public EClass getCollaborationReference() {
 		return collaborationReferenceEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getCollaborationReference_Collaboration()
-  {
+	public EReference getCollaborationReference_Collaboration() {
 		return (EReference)collaborationReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getTargetContext()
-  {
+	public EClass getTargetContext() {
 		return targetContextEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getReferenceCommand()
-  {
+	public EClass getReferenceCommand() {
 		return referenceCommandEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getSET()
-  {
+	public EClass getSET() {
 		return setEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getSET_Source()
-  {
+	public EReference getSET_Source() {
 		return (EReference)setEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getSET_Target()
-  {
+	public EReference getSET_Target() {
 		return (EReference)setEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getAttributeCommand()
-  {
+	public EClass getAttributeCommand() {
 		return attributeCommandEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getASSIGN()
-  {
+	public EClass getASSIGN() {
 		return assignEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getASSIGN_SourceAttribute()
-  {
+	public EReference getASSIGN_SourceAttribute() {
 		return (EReference)assignEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getASSIGN_TargetAttribute()
-  {
+	public EReference getASSIGN_TargetAttribute() {
 		return (EReference)assignEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getFromClause()
-  {
+	public EClass getFromClause() {
 		return fromClauseEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getFromClause_Operator()
-  {
+	public EReference getFromClause_Operator() {
 		return (EReference)fromClauseEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getFromClause_Reference()
-  {
+	public EReference getFromClause_Reference() {
 		return (EReference)fromClauseEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getFromOperator()
-  {
+	public EClass getFromOperator() {
 		return fromOperatorEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getUPTREE()
-  {
+	public EClass getUPTREE() {
 		return uptreeEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getConstantsReference()
-  {
+	public EClass getConstantsReference() {
 		return constantsReferenceEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getConstantsReference_ReferencedConstant()
-  {
+	public EAttribute getConstantsReference_ReferencedConstant() {
 		return (EAttribute)constantsReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getObjectReference()
-  {
+	public EClass getObjectReference() {
 		return objectReferenceEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getContext()
-  {
+	public EClass getContext() {
 		return contextEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getIndexAssignmentCommand()
-  {
+	public EClass getIndexAssignmentCommand() {
 		return indexAssignmentCommandEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getIndexAssignmentCommand_Variable()
-  {
+	public EReference getIndexAssignmentCommand_Variable() {
 		return (EReference)indexAssignmentCommandEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getIndexVariable()
-  {
+	public EClass getIndexVariable() {
 		return indexVariableEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getIndexVariable_Name()
-  {
+	public EAttribute getIndexVariable_Name() {
 		return (EAttribute)indexVariableEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getIndexVariable_IndexCommand()
-  {
+	public EReference getIndexVariable_IndexCommand() {
 		return (EReference)indexVariableEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getConcreteIndex()
-  {
+	public EClass getConcreteIndex() {
 		return concreteIndexEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getConcreteIndex_Index()
-  {
+	public EAttribute getConcreteIndex_Index() {
 		return (EAttribute)concreteIndexEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getFIRST()
-  {
+	public EClass getFIRST() {
 		return firstEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getLAST()
-  {
+	public EClass getLAST() {
 		return lastEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getObjectReferenceAssignment()
-  {
+	public EClass getObjectReferenceAssignment() {
 		return objectReferenceAssignmentEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getObjectReferenceAssignment_Reference()
-  {
+	public EReference getObjectReferenceAssignment_Reference() {
 		return (EReference)objectReferenceAssignmentEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getObjectAssignmentCommand()
-  {
+	public EClass getObjectAssignmentCommand() {
 		return objectAssignmentCommandEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getObjectAssignmentCommand_Declaration()
-  {
+	public EReference getObjectAssignmentCommand_Declaration() {
 		return (EReference)objectAssignmentCommandEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getVariableDeclarationCommand()
-  {
+	public EClass getVariableDeclarationCommand() {
 		return variableDeclarationCommandEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getVariableDeclarationCommand_Variable()
-  {
+	public EReference getVariableDeclarationCommand_Variable() {
 		return (EReference)variableDeclarationCommandEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getTRACE()
-  {
+	public EClass getTRACE() {
 		return traceEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getTRACE_Reference()
-  {
+	public EReference getTRACE_Reference() {
 		return (EReference)traceEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getTRACE_Role()
-  {
+	public EReference getTRACE_Role() {
 		return (EReference)traceEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getTraceObject()
-  {
+	public EClass getTraceObject() {
 		return traceObjectEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getTraceObject_Container()
-  {
+	public EReference getTraceObject_Container() {
 		return (EReference)traceObjectEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getTraceObject_AppliedRole()
-  {
+	public EReference getTraceObject_AppliedRole() {
 		return (EReference)traceObjectEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getVariableAssignment()
-  {
+	public EClass getVariableAssignment() {
 		return variableAssignmentEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getVariableAssignment_Assignment()
-  {
+	public EReference getVariableAssignment_Assignment() {
 		return (EReference)variableAssignmentEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getPATH()
-  {
+	public EClass getPATH() {
 		return pathEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getFILTER()
-  {
+	public EClass getFILTER() {
 		return filterEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getModifier()
-  {
+	public EClass getModifier() {
 		return modifierEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getDISTINCT()
-  {
+	public EClass getDISTINCT() {
 		return distinctEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getDeleteCommand()
-  {
+	public EClass getDeleteCommand() {
 		return deleteCommandEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getUNSET()
-  {
+	public EClass getUNSET() {
 		return unsetEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getREMOVE()
-  {
+	public EClass getREMOVE() {
 		return removeEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getREMOVE_Removal()
-  {
+	public EReference getREMOVE_Removal() {
 		return (EReference)removeEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getREMOVE_Modifier()
-  {
+	public EReference getREMOVE_Modifier() {
 		return (EReference)removeEClass.getEStructuralFeatures().get(1);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getObjectRemoval()
-  {
+	public EClass getObjectRemoval() {
 		return objectRemovalEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getRoleRemoval()
-  {
+	public EClass getRoleRemoval() {
 		return roleRemovalEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getRoleRemoval_Role()
-  {
+	public EReference getRoleRemoval_Role() {
 		return (EReference)roleRemovalEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getRemoveModifier()
-  {
+	public EClass getRemoveModifier() {
 		return removeModifierEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getUNUSED()
-  {
+	public EClass getUNUSED() {
 		return unusedEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getEMPTY()
-  {
+	public EClass getEMPTY() {
 		return emptyEClass;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EEnum getConstants()
-  {
+	public EEnum getConstants() {
 		return constantsEEnum;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public RefactoringSpecificationFactory getRefactoringSpecificationFactory()
-  {
+	public RefactoringSpecificationFactory getRefactoringSpecificationFactory() {
 		return (RefactoringSpecificationFactory)getEFactoryInstance();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private boolean isCreated = false;
+	private boolean isCreated = false;
 
-  /**
+	/**
 	 * Creates the meta-model objects for the package.  This method is
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void createPackageContents()
-  {
+	public void createPackageContents() {
 		if (isCreated) return;
 		isCreated = true;
 
@@ -1407,22 +1321,21 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 		constantsEEnum = createEEnum(CONSTANTS);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private boolean isInitialized = false;
+	private boolean isInitialized = false;
 
-  /**
+	/**
 	 * Complete the initialization of the package and its meta-model.  This
 	 * method is guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void initializePackageContents()
-  {
+	public void initializePackageContents() {
 		if (isInitialized) return;
 		isInitialized = true;
 

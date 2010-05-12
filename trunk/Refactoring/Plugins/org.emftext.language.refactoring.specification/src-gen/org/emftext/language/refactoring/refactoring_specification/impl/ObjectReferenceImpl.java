@@ -20,26 +20,23 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  *
  * @generated
  */
-public abstract class ObjectReferenceImpl extends ObjectRemovalImpl implements ObjectReference
-{
-  /**
+public abstract class ObjectReferenceImpl extends ObjectRemovalImpl implements ObjectReference {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected ObjectReferenceImpl()
-  {
+	protected ObjectReferenceImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.OBJECT_REFERENCE;
 	}
 

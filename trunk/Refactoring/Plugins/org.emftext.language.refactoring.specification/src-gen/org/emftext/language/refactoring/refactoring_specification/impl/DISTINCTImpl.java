@@ -20,26 +20,23 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  *
  * @generated
  */
-public class DISTINCTImpl extends ModifierImpl implements DISTINCT
-{
-  /**
+public class DISTINCTImpl extends ModifierImpl implements DISTINCT {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected DISTINCTImpl()
-  {
+	protected DISTINCTImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.DISTINCT;
 	}
 

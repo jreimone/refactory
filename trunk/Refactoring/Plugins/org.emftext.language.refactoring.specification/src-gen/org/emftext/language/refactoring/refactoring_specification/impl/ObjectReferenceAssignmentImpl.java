@@ -31,56 +31,51 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  *
  * @generated
  */
-public abstract class ObjectReferenceAssignmentImpl extends IndexAssignmentCommandImpl implements ObjectReferenceAssignment
-{
-  /**
+public abstract class ObjectReferenceAssignmentImpl extends IndexAssignmentCommandImpl implements ObjectReferenceAssignment {
+	/**
 	 * The cached value of the '{@link #getReference() <em>Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReference()
 	 * @generated
 	 * @ordered
 	 */
-  protected ObjectReference reference;
+	protected ObjectReference reference;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected ObjectReferenceAssignmentImpl()
-  {
+	protected ObjectReferenceAssignmentImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.OBJECT_REFERENCE_ASSIGNMENT;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ObjectReference getReference()
-  {
+	public ObjectReference getReference() {
 		return reference;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetReference(ObjectReference newReference, NotificationChain msgs)
-  {
+	public NotificationChain basicSetReference(ObjectReference newReference, NotificationChain msgs) {
 		ObjectReference oldReference = reference;
 		reference = newReference;
 		if (eNotificationRequired()) {
@@ -90,13 +85,12 @@ public abstract class ObjectReferenceAssignmentImpl extends IndexAssignmentComma
 		return msgs;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setReference(ObjectReference newReference)
-  {
+	public void setReference(ObjectReference newReference) {
 		if (newReference != reference) {
 			NotificationChain msgs = null;
 			if (reference != null)
@@ -110,14 +104,13 @@ public abstract class ObjectReferenceAssignmentImpl extends IndexAssignmentComma
 			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.OBJECT_REFERENCE_ASSIGNMENT__REFERENCE, newReference, newReference));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.OBJECT_REFERENCE_ASSIGNMENT__REFERENCE:
 				return basicSetReference(null, msgs);
@@ -125,14 +118,13 @@ public abstract class ObjectReferenceAssignmentImpl extends IndexAssignmentComma
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.OBJECT_REFERENCE_ASSIGNMENT__REFERENCE:
 				return getReference();
@@ -140,14 +132,13 @@ public abstract class ObjectReferenceAssignmentImpl extends IndexAssignmentComma
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.OBJECT_REFERENCE_ASSIGNMENT__REFERENCE:
 				setReference((ObjectReference)newValue);
@@ -156,14 +147,13 @@ public abstract class ObjectReferenceAssignmentImpl extends IndexAssignmentComma
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.OBJECT_REFERENCE_ASSIGNMENT__REFERENCE:
 				setReference((ObjectReference)null);
@@ -172,14 +162,13 @@ public abstract class ObjectReferenceAssignmentImpl extends IndexAssignmentComma
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case RefactoringSpecificationPackage.OBJECT_REFERENCE_ASSIGNMENT__REFERENCE:
 				return reference != null;

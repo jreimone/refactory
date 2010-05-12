@@ -18,6 +18,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface ObjectRemoval extends EObject
-{
+public interface ObjectRemoval extends EObject {
 } // ObjectRemoval

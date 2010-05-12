@@ -240,13 +240,13 @@ public interface RefactoringSpecificationPackage extends EPackage
   /**
 	 * The feature id for the '<em><b>Move Modifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int MOVE__MOVE_MODIFIER = CONTAINMENT_COMMAND_FEATURE_COUNT + 2;
+	int MOVE__MOVE_MODIFIER = CONTAINMENT_COMMAND_FEATURE_COUNT + 2;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>MOVE</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -435,32 +435,32 @@ public interface RefactoringSpecificationPackage extends EPackage
   /**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.CollaborationReferenceImpl <em>Collaboration Reference</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.CollaborationReferenceImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getCollaborationReference()
 	 * @generated
 	 */
-  int COLLABORATION_REFERENCE = 9;
+	int COLLABORATION_REFERENCE = 9;
 
-  /**
+		/**
 	 * The feature id for the '<em><b>Collaboration</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int COLLABORATION_REFERENCE__COLLABORATION = SOURCE_CONTEXT_FEATURE_COUNT + 0;
+	int COLLABORATION_REFERENCE__COLLABORATION = SOURCE_CONTEXT_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>Collaboration Reference</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int COLLABORATION_REFERENCE_FEATURE_COUNT = SOURCE_CONTEXT_FEATURE_COUNT + 1;
+	int COLLABORATION_REFERENCE_FEATURE_COUNT = SOURCE_CONTEXT_FEATURE_COUNT + 1;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.TargetContextImpl <em>Target Context</em>}' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -669,42 +669,42 @@ public interface RefactoringSpecificationPackage extends EPackage
   /**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.ObjectRemovalImpl <em>Object Removal</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.ObjectRemovalImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getObjectRemoval()
 	 * @generated
 	 */
-  int OBJECT_REMOVAL = 39;
+	int OBJECT_REMOVAL = 39;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>Object Removal</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int OBJECT_REMOVAL_FEATURE_COUNT = 0;
+	int OBJECT_REMOVAL_FEATURE_COUNT = 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.ObjectReferenceImpl <em>Object Reference</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.ObjectReferenceImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getObjectReference()
 	 * @generated
 	 */
-  int OBJECT_REFERENCE = 19;
+	int OBJECT_REFERENCE = 19;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>Object Reference</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int OBJECT_REFERENCE_FEATURE_COUNT = OBJECT_REMOVAL_FEATURE_COUNT + 0;
+	int OBJECT_REFERENCE_FEATURE_COUNT = OBJECT_REMOVAL_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.ConstantsReferenceImpl <em>Constants Reference</em>}' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1134,211 +1134,211 @@ public interface RefactoringSpecificationPackage extends EPackage
   /**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.ModifierImpl <em>Modifier</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.ModifierImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getModifier()
 	 * @generated
 	 */
-  int MODIFIER = 34;
+	int MODIFIER = 34;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>Modifier</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int MODIFIER_FEATURE_COUNT = 0;
+	int MODIFIER_FEATURE_COUNT = 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.DISTINCTImpl <em>DISTINCT</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.DISTINCTImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getDISTINCT()
 	 * @generated
 	 */
-  int DISTINCT = 35;
+	int DISTINCT = 35;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>DISTINCT</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int DISTINCT_FEATURE_COUNT = MODIFIER_FEATURE_COUNT + 0;
+	int DISTINCT_FEATURE_COUNT = MODIFIER_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.DeleteCommandImpl <em>Delete Command</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.DeleteCommandImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getDeleteCommand()
 	 * @generated
 	 */
-  int DELETE_COMMAND = 36;
+	int DELETE_COMMAND = 36;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>Delete Command</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int DELETE_COMMAND_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
+	int DELETE_COMMAND_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.UNSETImpl <em>UNSET</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.UNSETImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getUNSET()
 	 * @generated
 	 */
-  int UNSET = 37;
+	int UNSET = 37;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>UNSET</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int UNSET_FEATURE_COUNT = REFERENCE_COMMAND_FEATURE_COUNT + 0;
+	int UNSET_FEATURE_COUNT = REFERENCE_COMMAND_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.REMOVEImpl <em>REMOVE</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.REMOVEImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getREMOVE()
 	 * @generated
 	 */
-  int REMOVE = 38;
+	int REMOVE = 38;
 
-  /**
+		/**
 	 * The feature id for the '<em><b>Index</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int REMOVE__INDEX = DELETE_COMMAND_FEATURE_COUNT + 0;
+	int REMOVE__INDEX = DELETE_COMMAND_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The feature id for the '<em><b>Removal</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int REMOVE__REMOVAL = DELETE_COMMAND_FEATURE_COUNT + 1;
+	int REMOVE__REMOVAL = DELETE_COMMAND_FEATURE_COUNT + 1;
 
-  /**
+		/**
 	 * The feature id for the '<em><b>Modifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int REMOVE__MODIFIER = DELETE_COMMAND_FEATURE_COUNT + 2;
+	int REMOVE__MODIFIER = DELETE_COMMAND_FEATURE_COUNT + 2;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>REMOVE</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int REMOVE_FEATURE_COUNT = DELETE_COMMAND_FEATURE_COUNT + 3;
+	int REMOVE_FEATURE_COUNT = DELETE_COMMAND_FEATURE_COUNT + 3;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.RoleRemovalImpl <em>Role Removal</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RoleRemovalImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getRoleRemoval()
 	 * @generated
 	 */
-  int ROLE_REMOVAL = 40;
+	int ROLE_REMOVAL = 40;
 
-  /**
+		/**
 	 * The feature id for the '<em><b>Role</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ROLE_REMOVAL__ROLE = OBJECT_REMOVAL_FEATURE_COUNT + 0;
+	int ROLE_REMOVAL__ROLE = OBJECT_REMOVAL_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>Role Removal</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ROLE_REMOVAL_FEATURE_COUNT = OBJECT_REMOVAL_FEATURE_COUNT + 1;
+	int ROLE_REMOVAL_FEATURE_COUNT = OBJECT_REMOVAL_FEATURE_COUNT + 1;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.RemoveModifierImpl <em>Remove Modifier</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RemoveModifierImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getRemoveModifier()
 	 * @generated
 	 */
-  int REMOVE_MODIFIER = 41;
+	int REMOVE_MODIFIER = 41;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>Remove Modifier</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int REMOVE_MODIFIER_FEATURE_COUNT = 0;
+	int REMOVE_MODIFIER_FEATURE_COUNT = 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.UNUSEDImpl <em>UNUSED</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.UNUSEDImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getUNUSED()
 	 * @generated
 	 */
-  int UNUSED = 42;
+	int UNUSED = 42;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>UNUSED</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int UNUSED_FEATURE_COUNT = REMOVE_MODIFIER_FEATURE_COUNT + 0;
+	int UNUSED_FEATURE_COUNT = REMOVE_MODIFIER_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.EMPTYImpl <em>EMPTY</em>}' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.EMPTYImpl
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getEMPTY()
 	 * @generated
 	 */
-  int EMPTY = 43;
+	int EMPTY = 43;
 
-  /**
+		/**
 	 * The number of structural features of the '<em>EMPTY</em>' class.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int EMPTY_FEATURE_COUNT = REMOVE_MODIFIER_FEATURE_COUNT + 0;
+	int EMPTY_FEATURE_COUNT = REMOVE_MODIFIER_FEATURE_COUNT + 0;
 
-  /**
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.Constants <em>Constants</em>}' enum.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1479,15 +1479,15 @@ public interface RefactoringSpecificationPackage extends EPackage
   /**
 	 * Returns the meta object for the containment reference '{@link org.emftext.language.refactoring.refactoring_specification.MOVE#getMoveModifier <em>Move Modifier</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Move Modifier</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.MOVE#getMoveModifier()
 	 * @see #getMOVE()
 	 * @generated
 	 */
-  EReference getMOVE_MoveModifier();
+	EReference getMOVE_MoveModifier();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1585,25 +1585,25 @@ public interface RefactoringSpecificationPackage extends EPackage
   /**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.CollaborationReference <em>Collaboration Reference</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Collaboration Reference</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.CollaborationReference
 	 * @generated
 	 */
-  EClass getCollaborationReference();
+	EClass getCollaborationReference();
 
-  /**
+		/**
 	 * Returns the meta object for the reference '{@link org.emftext.language.refactoring.refactoring_specification.CollaborationReference#getCollaboration <em>Collaboration</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Collaboration</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.CollaborationReference#getCollaboration()
 	 * @see #getCollaborationReference()
 	 * @generated
 	 */
-  EReference getCollaborationReference_Collaboration();
+	EReference getCollaborationReference_Collaboration();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.TargetContext <em>Target Context</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1773,14 +1773,14 @@ public interface RefactoringSpecificationPackage extends EPackage
   /**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.ObjectReference <em>Object Reference</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Object Reference</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.ObjectReference
 	 * @generated
 	 */
-  EClass getObjectReference();
+	EClass getObjectReference();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.Context <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2055,137 +2055,137 @@ public interface RefactoringSpecificationPackage extends EPackage
   /**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.Modifier <em>Modifier</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Modifier</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.Modifier
 	 * @generated
 	 */
-  EClass getModifier();
+	EClass getModifier();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.DISTINCT <em>DISTINCT</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>DISTINCT</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.DISTINCT
 	 * @generated
 	 */
-  EClass getDISTINCT();
+	EClass getDISTINCT();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.DeleteCommand <em>Delete Command</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Delete Command</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.DeleteCommand
 	 * @generated
 	 */
-  EClass getDeleteCommand();
+	EClass getDeleteCommand();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.UNSET <em>UNSET</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>UNSET</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.UNSET
 	 * @generated
 	 */
-  EClass getUNSET();
+	EClass getUNSET();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.REMOVE <em>REMOVE</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>REMOVE</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.REMOVE
 	 * @generated
 	 */
-  EClass getREMOVE();
+	EClass getREMOVE();
 
-  /**
+		/**
 	 * Returns the meta object for the containment reference '{@link org.emftext.language.refactoring.refactoring_specification.REMOVE#getRemoval <em>Removal</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Removal</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.REMOVE#getRemoval()
 	 * @see #getREMOVE()
 	 * @generated
 	 */
-  EReference getREMOVE_Removal();
+	EReference getREMOVE_Removal();
 
-  /**
+		/**
 	 * Returns the meta object for the containment reference '{@link org.emftext.language.refactoring.refactoring_specification.REMOVE#getModifier <em>Modifier</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Modifier</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.REMOVE#getModifier()
 	 * @see #getREMOVE()
 	 * @generated
 	 */
-  EReference getREMOVE_Modifier();
+	EReference getREMOVE_Modifier();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.ObjectRemoval <em>Object Removal</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Object Removal</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.ObjectRemoval
 	 * @generated
 	 */
-  EClass getObjectRemoval();
+	EClass getObjectRemoval();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.RoleRemoval <em>Role Removal</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Role Removal</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.RoleRemoval
 	 * @generated
 	 */
-  EClass getRoleRemoval();
+	EClass getRoleRemoval();
 
-  /**
+		/**
 	 * Returns the meta object for the reference '{@link org.emftext.language.refactoring.refactoring_specification.RoleRemoval#getRole <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Role</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.RoleRemoval#getRole()
 	 * @see #getRoleRemoval()
 	 * @generated
 	 */
-  EReference getRoleRemoval_Role();
+	EReference getRoleRemoval_Role();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.RemoveModifier <em>Remove Modifier</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Remove Modifier</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.RemoveModifier
 	 * @generated
 	 */
-  EClass getRemoveModifier();
+	EClass getRemoveModifier();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.UNUSED <em>UNUSED</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>UNUSED</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.UNUSED
 	 * @generated
 	 */
-  EClass getUNUSED();
+	EClass getUNUSED();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.EMPTY <em>EMPTY</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>EMPTY</em>'.
 	 * @see org.emftext.language.refactoring.refactoring_specification.EMPTY
 	 * @generated
 	 */
-  EClass getEMPTY();
+	EClass getEMPTY();
 
-  /**
+		/**
 	 * Returns the meta object for enum '{@link org.emftext.language.refactoring.refactoring_specification.Constants <em>Constants</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2327,12 +2327,12 @@ public interface RefactoringSpecificationPackage extends EPackage
     /**
 		 * The meta object literal for the '<em><b>Move Modifier</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference MOVE__MOVE_MODIFIER = eINSTANCE.getMOVE_MoveModifier();
+		EReference MOVE__MOVE_MODIFIER = eINSTANCE.getMOVE_MoveModifier();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.VariableImpl <em>Variable</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2415,22 +2415,22 @@ public interface RefactoringSpecificationPackage extends EPackage
     /**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.CollaborationReferenceImpl <em>Collaboration Reference</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.CollaborationReferenceImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getCollaborationReference()
 		 * @generated
 		 */
-    EClass COLLABORATION_REFERENCE = eINSTANCE.getCollaborationReference();
+		EClass COLLABORATION_REFERENCE = eINSTANCE.getCollaborationReference();
 
-    /**
+				/**
 		 * The meta object literal for the '<em><b>Collaboration</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference COLLABORATION_REFERENCE__COLLABORATION = eINSTANCE.getCollaborationReference_Collaboration();
+		EReference COLLABORATION_REFERENCE__COLLABORATION = eINSTANCE.getCollaborationReference_Collaboration();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.TargetContextImpl <em>Target Context</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2579,14 +2579,14 @@ public interface RefactoringSpecificationPackage extends EPackage
     /**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.ObjectReferenceImpl <em>Object Reference</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.ObjectReferenceImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getObjectReference()
 		 * @generated
 		 */
-    EClass OBJECT_REFERENCE = eINSTANCE.getObjectReference();
+		EClass OBJECT_REFERENCE = eINSTANCE.getObjectReference();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.ContextImpl <em>Context</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2825,128 +2825,128 @@ public interface RefactoringSpecificationPackage extends EPackage
     /**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.ModifierImpl <em>Modifier</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.ModifierImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getModifier()
 		 * @generated
 		 */
-    EClass MODIFIER = eINSTANCE.getModifier();
+		EClass MODIFIER = eINSTANCE.getModifier();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.DISTINCTImpl <em>DISTINCT</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.DISTINCTImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getDISTINCT()
 		 * @generated
 		 */
-    EClass DISTINCT = eINSTANCE.getDISTINCT();
+		EClass DISTINCT = eINSTANCE.getDISTINCT();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.DeleteCommandImpl <em>Delete Command</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.DeleteCommandImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getDeleteCommand()
 		 * @generated
 		 */
-    EClass DELETE_COMMAND = eINSTANCE.getDeleteCommand();
+		EClass DELETE_COMMAND = eINSTANCE.getDeleteCommand();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.UNSETImpl <em>UNSET</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.UNSETImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getUNSET()
 		 * @generated
 		 */
-    EClass UNSET = eINSTANCE.getUNSET();
+		EClass UNSET = eINSTANCE.getUNSET();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.REMOVEImpl <em>REMOVE</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.REMOVEImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getREMOVE()
 		 * @generated
 		 */
-    EClass REMOVE = eINSTANCE.getREMOVE();
+		EClass REMOVE = eINSTANCE.getREMOVE();
 
-    /**
+				/**
 		 * The meta object literal for the '<em><b>Removal</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference REMOVE__REMOVAL = eINSTANCE.getREMOVE_Removal();
+		EReference REMOVE__REMOVAL = eINSTANCE.getREMOVE_Removal();
 
-    /**
+				/**
 		 * The meta object literal for the '<em><b>Modifier</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference REMOVE__MODIFIER = eINSTANCE.getREMOVE_Modifier();
+		EReference REMOVE__MODIFIER = eINSTANCE.getREMOVE_Modifier();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.ObjectRemovalImpl <em>Object Removal</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.ObjectRemovalImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getObjectRemoval()
 		 * @generated
 		 */
-    EClass OBJECT_REMOVAL = eINSTANCE.getObjectRemoval();
+		EClass OBJECT_REMOVAL = eINSTANCE.getObjectRemoval();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.RoleRemovalImpl <em>Role Removal</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RoleRemovalImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getRoleRemoval()
 		 * @generated
 		 */
-    EClass ROLE_REMOVAL = eINSTANCE.getRoleRemoval();
+		EClass ROLE_REMOVAL = eINSTANCE.getRoleRemoval();
 
-    /**
+				/**
 		 * The meta object literal for the '<em><b>Role</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference ROLE_REMOVAL__ROLE = eINSTANCE.getRoleRemoval_Role();
+		EReference ROLE_REMOVAL__ROLE = eINSTANCE.getRoleRemoval_Role();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.RemoveModifierImpl <em>Remove Modifier</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RemoveModifierImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getRemoveModifier()
 		 * @generated
 		 */
-    EClass REMOVE_MODIFIER = eINSTANCE.getRemoveModifier();
+		EClass REMOVE_MODIFIER = eINSTANCE.getRemoveModifier();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.UNUSEDImpl <em>UNUSED</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.UNUSEDImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getUNUSED()
 		 * @generated
 		 */
-    EClass UNUSED = eINSTANCE.getUNUSED();
+		EClass UNUSED = eINSTANCE.getUNUSED();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.EMPTYImpl <em>EMPTY</em>}' class.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.EMPTYImpl
 		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getEMPTY()
 		 * @generated
 		 */
-    EClass EMPTY = eINSTANCE.getEMPTY();
+		EClass EMPTY = eINSTANCE.getEMPTY();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.Constants <em>Constants</em>}' enum.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

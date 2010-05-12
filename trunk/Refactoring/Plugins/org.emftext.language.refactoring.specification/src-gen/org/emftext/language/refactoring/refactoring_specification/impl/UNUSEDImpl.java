@@ -20,26 +20,23 @@ import org.emftext.language.refactoring.refactoring_specification.UNUSED;
  *
  * @generated
  */
-public class UNUSEDImpl extends RemoveModifierImpl implements UNUSED
-{
-  /**
+public class UNUSEDImpl extends RemoveModifierImpl implements UNUSED {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected UNUSEDImpl()
-  {
+	protected UNUSEDImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.UNUSED;
 	}
 

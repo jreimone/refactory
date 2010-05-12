@@ -20,26 +20,23 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  *
  * @generated
  */
-public class EMPTYImpl extends RemoveModifierImpl implements EMPTY
-{
-  /**
+public class EMPTYImpl extends RemoveModifierImpl implements EMPTY {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected EMPTYImpl()
-  {
+	protected EMPTYImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return RefactoringSpecificationPackage.Literals.EMPTY;
 	}
 

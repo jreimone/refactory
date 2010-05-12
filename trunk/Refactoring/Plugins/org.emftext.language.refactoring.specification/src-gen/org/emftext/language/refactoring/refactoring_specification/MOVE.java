@@ -79,30 +79,30 @@ public interface MOVE extends ContainmentCommand
 	 */
   void setTarget(TargetContext value);
 
-  /**
+		/**
 	 * Returns the value of the '<em><b>Move Modifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Move Modifier</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Move Modifier</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Move Modifier</em>' containment reference.
 	 * @see #setMoveModifier(Modifier)
 	 * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getMOVE_MoveModifier()
 	 * @model containment="true"
 	 * @generated
 	 */
-  Modifier getMoveModifier();
+	Modifier getMoveModifier();
 
-  /**
+		/**
 	 * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.MOVE#getMoveModifier <em>Move Modifier</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Move Modifier</em>' containment reference.
 	 * @see #getMoveModifier()
 	 * @generated
 	 */
-  void setMoveModifier(Modifier value);
+	void setMoveModifier(Modifier value);
 
 } // MOVE

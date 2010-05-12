@@ -17,6 +17,5 @@ package org.emftext.language.refactoring.refactoring_specification;
  * @model abstract="true"
  * @generated
  */
-public interface ObjectReference extends ObjectRemoval
-{
+public interface ObjectReference extends ObjectRemoval {
 } // ObjectReference
