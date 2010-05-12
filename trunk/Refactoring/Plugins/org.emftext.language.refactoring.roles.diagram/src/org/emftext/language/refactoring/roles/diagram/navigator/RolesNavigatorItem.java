@@ -16,19 +16,24 @@ public class RolesNavigatorItem extends RolesAbstractNavigatorItem {
 	 */
 	static {
 		final Class[] supportedTypes = new Class[] { View.class, EObject.class };
-		Platform.getAdapterManager().registerAdapters(new IAdapterFactory() {
+		Platform.getAdapterManager().registerAdapters(
+				new IAdapterFactory() {
 
-			public Object getAdapter(Object adaptableObject, Class adapterType) {
-				if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem && (adapterType == View.class || adapterType == EObject.class)) {
-					return ((org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) adaptableObject).getView();
-				}
-				return null;
-			}
+					public Object getAdapter(Object adaptableObject,
+							Class adapterType) {
+						if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem
+								&& (adapterType == View.class || adapterType == EObject.class)) {
+							return ((org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) adaptableObject)
+									.getView();
+						}
+						return null;
+					}
 
-			public Class[] getAdapterList() {
-				return supportedTypes;
-			}
-		}, org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem.class);
+					public Class[] getAdapterList() {
+						return supportedTypes;
+					}
+				},
+				org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem.class);
 	}
 
 	/**
@@ -69,7 +74,12 @@ public class RolesNavigatorItem extends RolesAbstractNavigatorItem {
 	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) {
-			return EcoreUtil.getURI(getView()).equals(EcoreUtil.getURI(((org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) obj).getView()));
+			return EcoreUtil
+					.getURI(getView())
+					.equals(
+							EcoreUtil
+									.getURI(((org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) obj)
+											.getView()));
 		}
 		return super.equals(obj);
 	}

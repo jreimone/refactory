@@ -36,7 +36,8 @@ public class RoleImplicationEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleImplicationItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RoleImplicationItemSemanticEditPolicy());
 	}
 
 	/**
@@ -69,7 +70,7 @@ public class RoleImplicationEditPart extends ConnectionNodeEditPart implements
 		 */
 		public RoleImplicationFigure() {
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.black);
+			this.setForegroundColor(ColorConstants.gray);
 
 			setTargetDecoration(createTargetDecoration());
 		}

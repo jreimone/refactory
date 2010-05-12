@@ -62,7 +62,9 @@ public class RolesPaletteFactory {
 				Messages.Role1CreationTool_title,
 				Messages.Role1CreationTool_desc, types);
 		entry.setId("createRole1CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(RolesDiagramEditorPlugin.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/role.gif")); //$NON-NLS-1$
+		entry
+				.setSmallIcon(RolesDiagramEditorPlugin
+						.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/role.gif")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -77,7 +79,9 @@ public class RolesPaletteFactory {
 				Messages.Implication1CreationTool_title,
 				Messages.Implication1CreationTool_desc, types);
 		entry.setId("createImplication1CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(RolesDiagramEditorPlugin.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/implication.gif")); //$NON-NLS-1$
+		entry
+				.setSmallIcon(RolesDiagramEditorPlugin
+						.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/implication.gif")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -92,7 +96,9 @@ public class RolesPaletteFactory {
 				Messages.Prohibition2CreationTool_title,
 				Messages.Prohibition2CreationTool_desc, types);
 		entry.setId("createProhibition2CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(RolesDiagramEditorPlugin.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/prohibition.gif")); //$NON-NLS-1$
+		entry
+				.setSmallIcon(RolesDiagramEditorPlugin
+						.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/prohibition.gif")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -107,7 +113,9 @@ public class RolesPaletteFactory {
 				Messages.Association3CreationTool_title,
 				Messages.Association3CreationTool_desc, types);
 		entry.setId("createAssociation3CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(RolesDiagramEditorPlugin.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/association.gif")); //$NON-NLS-1$
+		entry
+				.setSmallIcon(RolesDiagramEditorPlugin
+						.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/association.gif")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -122,7 +130,9 @@ public class RolesPaletteFactory {
 				Messages.Composition4CreationTool_title,
 				Messages.Composition4CreationTool_desc, types);
 		entry.setId("createComposition4CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(RolesDiagramEditorPlugin.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/composition.gif")); //$NON-NLS-1$
+		entry
+				.setSmallIcon(RolesDiagramEditorPlugin
+						.findImageDescriptor("/org.emftext.language.refactoring.roles.edit/icons/new/composition.gif")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -140,7 +150,8 @@ public class RolesPaletteFactory {
 		/**
 		 * @generated
 		 */
-		private NodeToolEntry(String title, String description, List elementTypes) {
+		private NodeToolEntry(String title, String description,
+				List elementTypes) {
 			super(title, description, null, null);
 			this.elementTypes = elementTypes;
 		}
@@ -168,7 +179,8 @@ public class RolesPaletteFactory {
 		/**
 		 * @generated
 		 */
-		private LinkToolEntry(String title, String description, List relationshipTypes) {
+		private LinkToolEntry(String title, String description,
+				List relationshipTypes) {
 			super(title, description, null, null);
 			this.relationshipTypes = relationshipTypes;
 		}

@@ -35,7 +35,8 @@ public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleProhibitionItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RoleProhibitionItemSemanticEditPolicy());
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements
 		 */
 		public RoleProhibitionFigure() {
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.black);
+			this.setForegroundColor(ColorConstants.gray);
 
 			setSourceDecoration(createSourceDecoration());
 			setTargetDecoration(createTargetDecoration());

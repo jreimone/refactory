@@ -121,7 +121,8 @@ public class RolesEditPartProvider extends AbstractEditPartProvider {
 	public synchronized boolean provides(IOperation operation) {
 		if (operation instanceof CreateGraphicEditPartOperation) {
 			View view = ((IEditPartOperation) operation).getView();
-			if (!RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID(view))) {
+			if (!RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry
+					.getModelID(view))) {
 				return false;
 			}
 			if (isAllowCaching() && getCachedPart(view) != null) {

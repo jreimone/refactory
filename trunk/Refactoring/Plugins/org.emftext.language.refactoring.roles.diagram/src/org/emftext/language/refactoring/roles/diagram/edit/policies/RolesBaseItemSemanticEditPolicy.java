@@ -70,10 +70,11 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 */
 	public Command getCommand(Request request) {
 		if (request instanceof ReconnectRequest) {
-			Object view = ((ReconnectRequest) request).getConnectionEditPart().getModel();
+			Object view = ((ReconnectRequest) request).getConnectionEditPart()
+					.getModel();
 			if (view instanceof View) {
-				Integer id = new Integer(
-						RolesVisualIDRegistry.getVisualID((View) view));
+				Integer id = new Integer(RolesVisualIDRegistry
+						.getVisualID((View) view));
 				request.getExtendedData().put(VISUAL_ID_KEY, id);
 			}
 		}
@@ -95,11 +96,12 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	protected Command getSemanticCommand(IEditCommandRequest request) {
 		IEditCommandRequest completedRequest = completeRequest(request);
 		Command semanticCommand = getSemanticCommandSwitch(completedRequest);
-		semanticCommand = getEditHelperCommand(completedRequest, semanticCommand);
+		semanticCommand = getEditHelperCommand(completedRequest,
+				semanticCommand);
 		if (completedRequest instanceof DestroyRequest) {
 			DestroyRequest destroyRequest = (DestroyRequest) completedRequest;
-			return shouldProceed(destroyRequest) ? addDeleteViewCommand(semanticCommand, destroyRequest)
-					: null;
+			return shouldProceed(destroyRequest) ? addDeleteViewCommand(
+					semanticCommand, destroyRequest) : null;
 		}
 		return semanticCommand;
 	}
@@ -107,24 +109,29 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	/**
 	 * @generated
 	 */
-	protected Command addDeleteViewCommand(Command mainCommand, DestroyRequest completedRequest) {
+	protected Command addDeleteViewCommand(Command mainCommand,
+			DestroyRequest completedRequest) {
 		Command deleteViewCommand = getGEFWrapper(new DeleteCommand(
 				getEditingDomain(), (View) getHost().getModel()));
-		return mainCommand == null ? deleteViewCommand
-				: mainCommand.chain(deleteViewCommand);
+		return mainCommand == null ? deleteViewCommand : mainCommand
+				.chain(deleteViewCommand);
 	}
 
 	/**
 	 * @generated
 	 */
-	private Command getEditHelperCommand(IEditCommandRequest request, Command editPolicyCommand) {
+	private Command getEditHelperCommand(IEditCommandRequest request,
+			Command editPolicyCommand) {
 		if (editPolicyCommand != null) {
-			ICommand command = editPolicyCommand instanceof ICommandProxy ? ((ICommandProxy) editPolicyCommand).getICommand()
+			ICommand command = editPolicyCommand instanceof ICommandProxy ? ((ICommandProxy) editPolicyCommand)
+					.getICommand()
 					: new CommandProxy(editPolicyCommand);
-			request.setParameter(RolesBaseEditHelper.EDIT_POLICY_COMMAND, command);
+			request.setParameter(RolesBaseEditHelper.EDIT_POLICY_COMMAND,
+					command);
 		}
 		IElementType requestContextElementType = getContextElementType(request);
-		request.setParameter(RolesBaseEditHelper.CONTEXT_ELEMENT_TYPE, requestContextElementType);
+		request.setParameter(RolesBaseEditHelper.CONTEXT_ELEMENT_TYPE,
+				requestContextElementType);
 		ICommand command = requestContextElementType.getEditCommand(request);
 		request.setParameter(RolesBaseEditHelper.EDIT_POLICY_COMMAND, null);
 		request.setParameter(RolesBaseEditHelper.CONTEXT_ELEMENT_TYPE, null);
@@ -142,7 +149,8 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * @generated
 	 */
 	private IElementType getContextElementType(IEditCommandRequest request) {
-		IElementType requestContextElementType = RolesElementTypes.getElementType(getVisualID(request));
+		IElementType requestContextElementType = RolesElementTypes
+				.getElementType(getVisualID(request));
 		return requestContextElementType != null ? requestContextElementType
 				: myElementType;
 	}
@@ -243,14 +251,16 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	/**
 	 * @generated
 	 */
-	protected Command getReorientReferenceRelationshipCommand(ReorientReferenceRelationshipRequest req) {
+	protected Command getReorientReferenceRelationshipCommand(
+			ReorientReferenceRelationshipRequest req) {
 		return UnexecutableCommand.INSTANCE;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected Command getReorientRelationshipCommand(ReorientRelationshipRequest req) {
+	protected Command getReorientRelationshipCommand(
+			ReorientRelationshipRequest req) {
 		return UnexecutableCommand.INSTANCE;
 	}
 
@@ -275,7 +285,8 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 */
 	protected void addDestroyShortcutsCommand(ICompositeCommand cmd, View view) {
 		assert view.getEAnnotation("Shortcut") == null; //$NON-NLS-1$
-		for (Iterator it = view.getDiagram().getChildren().iterator(); it.hasNext();) {
+		for (Iterator it = view.getDiagram().getChildren().iterator(); it
+				.hasNext();) {
 			View nextView = (View) it.next();
 			if (nextView.getEAnnotation("Shortcut") == null || !nextView.isSetElement() || nextView.getElement() != view.getElement()) { //$NON-NLS-1$
 				continue;
@@ -297,56 +308,64 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateRoleImplication_4001(RoleModel container, Role source, Role target) {
+		public static boolean canCreateRoleImplication_4001(
+				RoleModel container, Role source, Role target) {
 			return canExistRoleImplication_4001(container, source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateRoleProhibition_4002(RoleModel container, Role source, Role target) {
+		public static boolean canCreateRoleProhibition_4002(
+				RoleModel container, Role source, Role target) {
 			return canExistRoleProhibition_4002(container, source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateRoleAssociation_4003(RoleModel container, Role source, Role target) {
+		public static boolean canCreateRoleAssociation_4003(
+				RoleModel container, Role source, Role target) {
 			return canExistRoleAssociation_4003(container, source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateRoleComposition_4004(RoleModel container, Role source, Role target) {
+		public static boolean canCreateRoleComposition_4004(
+				RoleModel container, Role source, Role target) {
 			return canExistRoleComposition_4004(container, source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canExistRoleImplication_4001(RoleModel container, Role source, Role target) {
+		public static boolean canExistRoleImplication_4001(RoleModel container,
+				Role source, Role target) {
 			return true;
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canExistRoleProhibition_4002(RoleModel container, Role source, Role target) {
+		public static boolean canExistRoleProhibition_4002(RoleModel container,
+				Role source, Role target) {
 			return true;
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canExistRoleAssociation_4003(RoleModel container, Role source, Role target) {
+		public static boolean canExistRoleAssociation_4003(RoleModel container,
+				Role source, Role target) {
 			return true;
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canExistRoleComposition_4004(RoleModel container, Role source, Role target) {
+		public static boolean canExistRoleComposition_4004(RoleModel container,
+				Role source, Role target) {
 			return true;
 		}
 	}
