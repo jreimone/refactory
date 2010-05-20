@@ -11,13 +11,4 @@
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
       </menuContribution>
    </extension>
-   <extension
-         point="org.emftext.refactoring.editorconnector">
-      <editorconnector
-            editorconnector="org.emftext.refactoring.editorconnector.EMFTextEditorConnector">
-      </editorconnector>
-      <editorconnector
-            editorconnector="org.emftext.refactoring.editorconnector.GMFEditorConnector">
-      </editorconnector>
-   </extension>
 </plugin>

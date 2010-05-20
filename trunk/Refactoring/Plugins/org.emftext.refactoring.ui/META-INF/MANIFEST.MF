@@ -3,20 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: UI Contributions
 Bundle-SymbolicName: org.emftext.refactoring.ui;singleton:=true
 Bundle-Version: 0.0.1
-Require-Bundle: org.eclipse.emf.ecore,
- org.eclipse.core.runtime,
- org.eclipse.ui,
- org.eclipse.ui.editors,
- org.eclipse.jface.text,
- org.emftext.access,
- org.eclipse.core.expressions,
- org.emftext.refactoring.specification.interpreter,
+Require-Bundle: org.emftext.refactoring.specification.interpreter,
  org.emftext.language.refactoring.rolemapping,
  org.emftext.refactoring.util,
  org.emftext.refactoring.registry.refactoringspecification,
  org.emftext.language.refactoring.specification,
- org.eclipse.emf.ecore.change,
- org.eclipse.gmf.runtime.diagram.ui,
  org.eclipse.ui.ide,
  org.emftext.refactoring.registry.rolemapping,
  org.eclipse.ltk.core.refactoring,
@@ -26,7 +17,10 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.emf.compare.match,
  org.eclipse.emf.compare.diff,
  org.eclipse.compare,
- org.eclipse.emf.compare.ui
+ org.eclipse.emf.compare.ui,
+ org.eclipse.core.expressions,
+ org.eclipse.emf.transaction,
+ org.eclipse.emf.ecore.xmi
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.emftext.refactoring.editorconnector,
  org.emftext.refactoring.ltk,
