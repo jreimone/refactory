@@ -99,9 +99,11 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					}
 				}
 			}
-			selectedElements = cachedConnector.handleSelection(selection);
-			if (selectedElements != null && selectedElements.size() >= 1) {
-				transactionalEditingDomain = cachedConnector.getTransactionalEditingDomain();
+			if(cachedConnector != null){
+				selectedElements = cachedConnector.handleSelection(selection);
+				if (selectedElements != null && selectedElements.size() >= 1) {
+					transactionalEditingDomain = cachedConnector.getTransactionalEditingDomain();
+				}
 			}
 		}
 		if (selectedElements != null && selectedElements.size() >= 1) {
