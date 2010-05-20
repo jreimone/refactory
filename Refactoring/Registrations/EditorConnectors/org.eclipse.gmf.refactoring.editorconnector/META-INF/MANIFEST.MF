@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EditorConnector for GMF editors
+Bundle-SymbolicName: org.eclipse.gmf.refactoring.editorconnector;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.eclipse.gmf.refactoring.editorconnector.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.ui,
+ org.eclipse.emf.transaction,
+ org.eclipse.ui.workbench,
+ org.eclipse.jface,
+ org.eclipse.gef,
+ org.eclipse.gmf.runtime.diagram.ui
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
