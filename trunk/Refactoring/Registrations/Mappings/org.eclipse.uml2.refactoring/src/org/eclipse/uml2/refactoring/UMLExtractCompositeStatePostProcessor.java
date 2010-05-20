@@ -2,6 +2,7 @@ package org.eclipse.uml2.refactoring;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 	private State newContainer;
 
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+		extract = new LinkedList<State>();
 		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
