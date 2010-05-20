@@ -23,7 +23,7 @@ import org.osgi.framework.Version;
 
 public class EMFTextEditorConnector implements IEditorConnector {
 
-	private static final String MIN_VERSION = "1.2.0";
+	private static final String MIN_VERSION = "1.3.0";
 
 	private IEditorPart editor;
 
@@ -39,9 +39,10 @@ public class EMFTextEditorConnector implements IEditorConnector {
 			try {
 				IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 				IResource emftextResource = emftextEditor.getResource();
-				ILocationMap locationMap = emftextResource.getLocationMap();
-				locationMap.getElementsAt(0);
-				return true;
+				if(emftextResource != null){
+					return true;
+				}
+				return false;
 			} catch (Exception e) {
 				// could not handle
 				return false;
