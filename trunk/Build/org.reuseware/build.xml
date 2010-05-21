@@ -255,6 +255,10 @@
 		
 		<buildfeature package="org.emftext.commons.antlr3_1_1" version="3.1.1"/>
 		
+		<buildplugin name="EMFText Shared ANTLR 3.2.0 Runtime" package="org.emftext.commons.antlr3_2_0" version="3.2.0"/>	
+		
+		<buildfeature package="org.emftext.commons.antlr3_2_0" version="3.2.0"/>
+		
 		<!-- EMFText Access Feature -->
 		<buildplugin name="EMFText Access"                 package="org.emftext.access" version="${emftext.version}"/>	
 		
@@ -267,11 +271,16 @@
 		<buildplugin name="EMFText SDK ANTLR Support"           package="org.emftext.sdk.antlr" version="${emftext.version}"/>	
 		<buildplugin name="EMFText SDK ANTLR 3.2.0 Support"     package="org.emftext.sdk.antlr3_2_0" version="${emftext.version}"/>	
 		<buildplugin name="EMFText SDK Automaton Support"       package="org.emftext.sdk.automaton" version="${emftext.version}"/>	
-		<buildplugin name="EMFText SDK Code Generators"         package="org.emftext.sdk.codegen" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generation Infrastructure" package="org.emftext.sdk.codegen" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators for ANTLR Common Runtime" package="org.emftext.sdk.codegen.antlr" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators for New Project Wizard" package="org.emftext.sdk.codegen.newproject" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators for Text Resource Plug-ins" package="org.emftext.sdk.codegen.resource" version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators for UI Plugin-s" package="org.emftext.sdk.codegen.resource.ui" version="${emftext.version}"/>	
 		<buildplugin name="EMFText Concretesyntax Metamodel"    package="org.emftext.sdk.concretesyntax" version="${emftext.version}"/>	
 		<buildplugin name="EMFText Concretesyntax Metamodel Edit Support"    package="org.emftext.sdk.concretesyntax.edit" version="${emftext.version}"/>	
 		<buildplugin name="EMFText Concretesyntax Metamodel Text Syntax"     package="org.emftext.sdk.concretesyntax.resource.cs" version="${emftext.version}"/>
 		<buildplugin name="EMFText Concretesyntax Metamodel Post Processing" package="org.emftext.sdk.concretesyntax.resource.cs.post_processing" version="${emftext.version}"/>
+		<buildplugin name="EMFText Concretesyntax Metamodel Text Syntax UI"     package="org.emftext.sdk.concretesyntax.resource.cs.ui" version="${emftext.version}"/>
 		<buildplugin name="EMFText SDK Eclipse UI"      package="org.emftext.sdk.ui" version="${emftext.version}"/>
 		<buildplugin name="EMFText SDK Ant Support"     package="org.emftext.sdk.ant" version="${emftext.version}"/>	
 		<buildplugin name="EMFText Documentation"   	package="org.emftext.doc" version="${emftext.version}"/>
@@ -323,6 +332,7 @@
 		<buildplugin name="JaMoPP (Java Model Parser and Printer) Metamodel"                                  package="org.emftext.language.java" version="${jamopp.version}"/>	
 		<buildplugin name="JaMoPP (Java Model Parser and Printer) Metamodel Edit Support"                     package="org.emftext.language.java.edit" version="${jamopp.version}"/>	
 		<buildplugin name="JaMoPP (Java Model Parser and Printer) Source File Support"                        package="org.emftext.language.java.resource.java" version="${jamopp.version}"/>	
+		<buildplugin name="JaMoPP (Java Model Parser and Printer) Source File Editor"                         package="org.emftext.language.java.resource.java.ui" version="${jamopp.version}"/>	
 		<buildplugin name="JaMoPP (Java Model Parser and Printer) Integrated Source and Class File Support"   package="org.emftext.language.java.resource" version="${jamopp.version}"/>	
 		
 		<buildfeature package="org.emftext.language.java" version="${jamopp.version}"/>
@@ -341,96 +351,111 @@
 	<target name="build-emftext-languages">
 		<property name="emftext.zoo.version" value="1.2.0"/>
 		<!-- ABNF -->
-		<buildplugin  name="Metamodel for ABNF syntax" package="org.emftext.language.abnf"               version="0.8.0" />
-		<buildplugin  name="ABNF syntax plugin"        package="org.emftext.language.abnf.resource.abnf" version="0.8.0" />
-		<buildfeature                                  package="org.emftext.language.abnf"               version="0.8.0" />
+		<buildplugin  name="Metamodel for ABNF syntax"    package="org.emftext.language.abnf"                  version="0.8.0" />
+		<buildplugin  name="ABNF syntax plugin"           package="org.emftext.language.abnf.resource.abnf"    version="0.8.0" />
+		<buildplugin  name="ABNF syntax editor"           package="org.emftext.language.abnf.resource.abnf.ui" version="0.8.0" />
+		<buildfeature                                     package="org.emftext.language.abnf"                  version="0.8.0" />
 		
 		<!-- Chess -->
-		<buildplugin  name="Metamodel for Chess Boards" package="org.emftext.language.chess"              version="0.5.1"/>
-		<buildplugin  name="Chess Checker"              package="org.emftext.language.chess.checker"      version="0.5.1"/>
-		<buildplugin  name="Chess Board Textsyntax"     package="org.emftext.language.chess.resource.cg"  version="0.5.1"/>
-		<buildfeature                                   package="org.emftext.language.chess"              version="0.5.1" />
+		<buildplugin  name="Metamodel for Chess Boards" package="org.emftext.language.chess"                 version="0.5.1"/>
+		<buildplugin  name="Chess Checker"              package="org.emftext.language.chess.checker"         version="0.5.1"/>
+		<buildplugin  name="Chess Board Textsyntax"     package="org.emftext.language.chess.resource.cg"     version="0.5.1"/>
+		<buildplugin  name="Chess Board Editor"         package="org.emftext.language.chess.resource.cg.ui"  version="0.5.1"/>
+		<buildfeature                                   package="org.emftext.language.chess"                 version="0.5.1" />
 
 		<!-- Conference -->
-		<buildplugin  name="Metamodel for Conference Planning" package="org.emftext.language.conference"                     version="0.1.2"/>
-		<buildplugin  name="Conference Planning Textsyntax"    package="org.emftext.language.conference.resource.conference" version="0.1.2"/>
-		<buildfeature                                          package="org.emftext.language.conference"                     version="0.1.2" />
+		<buildplugin  name="Metamodel for Conference Planning" package="org.emftext.language.conference"                        version="0.1.2"/>
+		<buildplugin  name="Conference Planning Textsyntax"    package="org.emftext.language.conference.resource.conference"    version="0.1.2"/>
+		<buildplugin  name="Conference Planning Editor"        package="org.emftext.language.conference.resource.conference.ui" version="0.1.2"/>
+		<buildfeature                                          package="org.emftext.language.conference"                        version="0.1.2" />
 
 		<!-- CSV -->
-		<buildplugin  name="Comma Separated Value (CSV) Metamodel"   package="org.emftext.language.csv"              version="1.0.0"/>
-		<buildplugin  name="Comma Separated Value (CSV) Textsyntax"  package="org.emftext.language.csv.resource.csv" version="1.0.0"/>
-		<buildfeature                                                package="org.emftext.language.csv"              version="1.0.0" />
+		<buildplugin  name="Comma Separated Value (CSV) Metamodel"   package="org.emftext.language.csv"                 version="1.0.0"/>
+		<buildplugin  name="Comma Separated Value (CSV) Textsyntax"  package="org.emftext.language.csv.resource.csv"    version="1.0.0"/>
+		<buildplugin  name="Comma Separated Value (CSV) Editor"      package="org.emftext.language.csv.resource.csv.ui" version="1.0.0"/>
+		<buildfeature                                                package="org.emftext.language.csv"                 version="1.0.0" />
 		
 		<!-- Customer -->
-		<buildplugin  name="Metamodel for Customers" package="org.emftext.language.customer"                    version="0.5.1"/>
-		<buildplugin  name="Customer Textsyntax"     package="org.emftext.language.customer.resource.customer"  version="0.5.1"/>
-		<buildfeature                                package="org.emftext.language.customer"                    version="0.5.1" />
+		<buildplugin  name="Metamodel for Customers" package="org.emftext.language.customer"                       version="0.5.1"/>
+		<buildplugin  name="Customer Textsyntax"     package="org.emftext.language.customer.resource.customer"     version="0.5.1"/>
+		<buildplugin  name="Customer Editor"         package="org.emftext.language.customer.resource.customer.ui"  version="0.5.1"/>
+		<buildfeature                                package="org.emftext.language.customer"                       version="0.5.1" />
 
 		<!-- Custom Sandwich (Template Language) -->
 		<buildplugin  name="Sandwich Template Language" 
-			package="org.emftext.language.customsandwich"                          version="0.5.1"/>
+			package="org.emftext.language.customsandwich"                            version="0.5.1"/>
 		<buildplugin  name="Sandwich Template Language Resource"     
-			package="org.emftext.language.customsandwich.resource"                 version="0.5.1"/>
-
+			package="org.emftext.language.customsandwich.resource"                   version="0.5.1"/>
 		<buildplugin  name="Sandwich Template Language Textsyntax"     
-			package="org.emftext.language.customsandwich.resource.customsandwich" version="0.5.1"/>
+			package="org.emftext.language.customsandwich.resource.customsandwich"    version="0.5.1"/>
+		<buildplugin  name="Sandwich Template Language Editor"     
+			package="org.emftext.language.customsandwich.resource.customsandwich.ui" version="0.5.1"/>
 		<buildfeature                                
-			package="org.emftext.language.custom_sandwich"                          version="0.5.1" />
+			package="org.emftext.language.custom_sandwich"                           version="0.5.1" />
 			
 		<!-- TODO: C# -->
 		
 		<!-- Dot -->
-		<buildplugin  name="Metamodel for graphs" package="org.emftext.language.dot"              version="0.5.0"/>
-		<buildplugin  name="DOT Textsyntax"       package="org.emftext.language.dot.resource.dot" version="0.5.0"/>
-		<buildplugin  name="DOT tool integration" package="org.emftext.language.dot.tools"        version="0.5.0"/>
-		<buildfeature                             package="org.emftext.language.dot"              version="0.5.0" />
+		<buildplugin  name="Metamodel for graphs" package="org.emftext.language.dot"                 version="0.5.0" />
+		<buildplugin  name="DOT Textsyntax"       package="org.emftext.language.dot.resource.dot"    version="0.5.0" />
+		<buildplugin  name="DOT Editor"           package="org.emftext.language.dot.resource.dot.ui" version="0.5.0" />
+		<buildplugin  name="DOT tool integration" package="org.emftext.language.dot.tools"           version="0.5.0" />
+		<buildfeature                             package="org.emftext.language.dot"                 version="0.5.0" />
 
 		<!-- Ecore Text -->
-		<buildplugin  name="Multi-Format Support for Ecore Models" package="org.emftext.language.ecore.resource"      version="0.9.2"/>
-		<buildplugin  name="Ecore Text Syntax Specification"        package="org.emftext.language.ecore.resource.text" version="0.9.2"/>
-		<buildfeature                                               package="org.emftext.language.ecore"               version="0.9.2" />
+		<buildplugin  name="Multi-Format Support for Ecore Models"  package="org.emftext.language.ecore.resource"         version="0.9.2" />
+		<buildplugin  name="Ecore Text Syntax Specification"        package="org.emftext.language.ecore.resource.text"    version="0.9.2" />
+		<buildplugin  name="Ecore Text Syntax Editor"               package="org.emftext.language.ecore.resource.text.ui" version="0.9.2" />
+		<buildfeature                                               package="org.emftext.language.ecore"                  version="0.9.2" />
 		
 		<!-- Ecore Facade -->
-		<buildplugin  name="Ecore Facade Text Syntax Specification"  package="org.emftext.language.ecore.resource.facade" version="0.9.2"/>
+		<buildplugin  name="Ecore Facade Text Syntax Specification"  package="org.emftext.language.ecore.resource.facade"        version="0.9.2"/>
+		<buildplugin  name="Ecore Facade Text Syntax Editor"         package="org.emftext.language.ecore.resource.facade.ui"     version="0.9.2"/>
 		<buildplugin  name="Ecore Facade Model Merger"               package="org.emftext.language.ecore.resource.facade.merger" version="0.9.2"/>
-		<buildfeature                                                package="org.emftext.language.ecore.facade"          version="0.9.2" />
+		<buildfeature                                                package="org.emftext.language.ecore.facade"                 version="0.9.2" />
 		
 		<!-- TODO: EMF-XML -->
 		
 		<!-- EFactory -->
-		<buildplugin name="EFactory Metamodel"            package="org.emftext.language.efactory" version="0.1.0"/>
-		<buildplugin name="EFactory Textsyntax"           package="org.emftext.language.efactory.resource.efactory" version="0.1.0"/>
+		<buildplugin name="EFactory Metamodel"            package="org.emftext.language.efactory"                                   version="0.1.0"/>
+		<buildplugin name="EFactory Textsyntax"           package="org.emftext.language.efactory.resource.efactory"                 version="0.1.0"/>
+		<buildplugin name="EFactory Editor"               package="org.emftext.language.efactory.resource.efactory.ui"              version="0.1.0"/>
 		<buildplugin name="EFactory Post Processing"      package="org.emftext.language.efactory.resource.efactory.post_processing" version="0.1.0"/>
-		<buildfeature                                     package="org.emftext.language.efactory" version="0.1.0"/>
+		<buildfeature                                     package="org.emftext.language.efactory"                                   version="0.1.0"/>
 
 		<!-- Featherweight Java -->
-		<buildplugin name="Featherweight Java Metamodel"  package="org.emftext.language.featherweightjava" version="0.1.0"/>
-		<buildplugin name="Featherweight Java Textsyntax" package="org.emftext.language.featherweightjava.resource.fj" version="0.1.0"/>
-		<buildfeature                                     package="org.emftext.language.featherweight_java" version="0.1.0"/>
+		<buildplugin name="Featherweight Java Metamodel"  package="org.emftext.language.featherweightjava"                version="0.1.0"/>
+		<buildplugin name="Featherweight Java Textsyntax" package="org.emftext.language.featherweightjava.resource.fj"    version="0.1.0"/>
+		<buildplugin name="Featherweight Java Editor"     package="org.emftext.language.featherweightjava.resource.fj.ui" version="0.1.0"/>
+		<buildfeature                                     package="org.emftext.language.featherweight_java"               version="0.1.0"/>
 		
 		<!-- Feature -->
-		<buildplugin name="Feature Model Metamodel"  package="org.emftext.language.feature" version="0.5.1"/>
-		<buildplugin name="Feature Model Textsyntax" package="org.emftext.language.feature.resource.feature" version="0.5.1"/>
-		<buildfeature                                package="org.emftext.language.feature" version="0.5.1"/>
+		<buildplugin name="Feature Model Metamodel"  package="org.emftext.language.feature"                     version="0.5.1"/>
+		<buildplugin name="Feature Model Textsyntax" package="org.emftext.language.feature.resource.feature"    version="0.5.1"/>
+		<buildplugin name="Feature Model Editor"     package="org.emftext.language.feature.resource.feature.ui" version="0.5.1"/>
+		<buildfeature                                package="org.emftext.language.feature"                     version="0.5.1"/>
 
 		<!-- Forms -->
-		<buildplugin  name="Forms Syntax Specification" package="org.emftext.language.forms"                       version="1.0.1" />
-		<buildplugin  name="HTML and PDF Generators for Forms language" package="org.emftext.language.forms.generator" version="1.0.1" />
-		<buildplugin  name="Forms Syntax"               package="org.emftext.language.forms.resource.forms"        version="1.0.1" />
-		<buildfeature                                   package="org.emftext.language.forms"                       version="1.0.1" />
+		<buildplugin  name="Forms Metamodel"                            package="org.emftext.language.forms"                   version="1.0.1" />
+		<buildplugin  name="HTML and PDF Generators for Forms language" package="org.emftext.language.forms.generator"         version="1.0.1" />
+		<buildplugin  name="Forms Textsyntax"                           package="org.emftext.language.forms.resource.forms"    version="1.0.1" />
+		<buildplugin  name="Forms Editor"                               package="org.emftext.language.forms.resource.forms.ui" version="1.0.1" />
+		<buildfeature                                                   package="org.emftext.language.forms"                   version="1.0.1" />
 		
 		<!-- Formular -->
-		<buildplugin  name="Formular Syntax Specification" package="org.emftext.language.formular"                       version="1.0.1" />
-		<buildplugin  name="HTML and PDF Generators for Formular language" package="org.emftext.language.formular.generator" version="1.0.1" />
-		<buildplugin  name="Formular Syntax"               package="org.emftext.language.formular.resource.formular"     version="1.0.1" />
-		<buildfeature                                      package="org.emftext.language.formular"                       version="1.0.1" />
+		<buildplugin  name="Formular Metamodel"                            package="org.emftext.language.formular"                       version="1.0.1" />
+		<buildplugin  name="HTML and PDF Generators for Formular language" package="org.emftext.language.formular.generator"             version="1.0.1" />
+		<buildplugin  name="Formular Textsyntax"                           package="org.emftext.language.formular.resource.formular"     version="1.0.1" />
+		<buildplugin  name="Formular Editor"                               package="org.emftext.language.formular.resource.formular.ui"  version="1.0.1" />
+		<buildfeature                                                      package="org.emftext.language.formular"                       version="1.0.1" />
 		
 		<!-- eJava  -->
-		<buildplugin name="eJava Metamodel"              package="org.emftext.language.java.ejava" version="1.0.1"/>
-		<buildplugin name="eJava Metamodel Edit Support" package="org.emftext.language.java.ejava.edit" version="1.0.1"/>
-		<buildplugin name="eJava Resource"               package="org.emftext.language.java.ejava.resource" version="1.0.1"/>
-		<buildplugin name="eJava Textsyntax"             package="org.emftext.language.java.ejava.resource.ejava" version="1.0.1"/>
-		<buildfeature package="org.emftext.language.java.ejava" version="1.0.1"/>
+		<buildplugin name="eJava Metamodel"              package="org.emftext.language.java.ejava"                   version="1.0.1"/>
+		<buildplugin name="eJava Metamodel Edit Support" package="org.emftext.language.java.ejava.edit"              version="1.0.1"/>
+		<buildplugin name="eJava Resource"               package="org.emftext.language.java.ejava.resource"          version="1.0.1"/>
+		<buildplugin name="eJava Textsyntax"             package="org.emftext.language.java.ejava.resource.ejava"    version="1.0.1"/>
+		<buildplugin name="eJava Editor"                 package="org.emftext.language.java.ejava.resource.ejava.ui" version="1.0.1"/>
+		<buildfeature                                    package="org.emftext.language.java.ejava"                   version="1.0.1"/>
 
 		<!-- TODO Java Template 
 		<buildplugin name="Safe Java Template Language (Metamodel)"  package="org.emftext.language.java_templates" version="0.5.1"/>
@@ -440,96 +465,118 @@
 		-->
 		
 		<!-- JavaBehavior4UML -->
-		<buildplugin name="Java Method Behavior in UML Class Diagrams (Metamodel)"  package="org.emftext.language.java.javabehavior4uml" version="0.1.1"/>
-		<buildplugin name="Java Method Behavior in UML Class Diagrams (Resource)"   package="org.emftext.language.java.javabehavior4uml.resource" version="0.1.1"/>
-		<buildplugin name="Java Method Behavior in UML Class Diagrams (Textsyntax)" package="org.emftext.language.java.javabehavior4uml.resource.javabehavior" version="0.1.1"/>
-		<buildfeature package="org.emftext.language.java.javabehavior4uml" version="0.1.1"/>
+		<buildplugin name="Java Method Behavior in UML Class Diagrams (Metamodel)"  package="org.emftext.language.java.javabehavior4uml"                          version="0.1.1"/>
+		<buildplugin name="Java Method Behavior in UML Class Diagrams (Resource)"   package="org.emftext.language.java.javabehavior4uml.resource"                 version="0.1.1"/>
+		<buildplugin name="Java Method Behavior in UML Class Diagrams (Textsyntax)" package="org.emftext.language.java.javabehavior4uml.resource.javabehavior"    version="0.1.1"/>
+		<buildplugin name="Java Method Behavior in UML Class Diagrams (Editor)"     package="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui" version="0.1.1"/>
+		<buildfeature                                                               package="org.emftext.language.java.javabehavior4uml"                          version="0.1.1"/>
 		
 		<!-- Java Properties -->
-		<buildplugin name="Java Properties Extension (Metamodel)"  package="org.emftext.language.java.properties" version="0.1.0"/>
-		<buildplugin name="Java Properties Extension (Edit)"       package="org.emftext.language.java.properties.edit" version="0.1.0"/>
-		<buildplugin name="Java Properties Extension (Resource)"   package="org.emftext.language.java.properties.resource" version="0.1.0"/>
-		<buildplugin name="Java Properties Extension (Textsyntax)" package="org.emftext.language.java.properties.resource.propjava" version="0.1.0"/>
-		<buildfeature package="org.emftext.language.java.properties" version="0.1.0"/>
+		<buildplugin name="Java Properties Extension (Metamodel)"  package="org.emftext.language.java.properties"                      version="0.1.0"/>
+		<buildplugin name="Java Properties Extension (Edit)"       package="org.emftext.language.java.properties.edit"                 version="0.1.0"/>
+		<buildplugin name="Java Properties Extension (Resource)"   package="org.emftext.language.java.properties.resource"             version="0.1.0"/>
+		<buildplugin name="Java Properties Extension (Textsyntax)" package="org.emftext.language.java.properties.resource.propjava"    version="0.1.0"/>
+		<buildplugin name="Java Properties Extension (Editor)"     package="org.emftext.language.java.properties.resource.propjava.ui" version="0.1.0"/>
+		<buildfeature                                              package="org.emftext.language.java.properties"                      version="0.1.0"/>
 		
 		<!-- Reuse Java -->
-		<buildplugin name="Example Java Extension for Reuseware (Metamodel)"  package="org.emftext.language.java.reusejava" version="0.1.1"/>
-		<buildplugin name="Example Java Extension for Reuseware (Resource)"   package="org.emftext.language.java.reusejava.resource" version="0.1.1"/>
-		<buildplugin name="Example Java Extension for Reuseware (Textsyntax)" package="org.emftext.language.java.reusejava.resource.reusejava" version="0.1.1"/>
-		<buildfeature package="org.emftext.language.java.reusejava" version="0.1.1"/>
+		<buildplugin name="Example Java Extension for Reuseware (Metamodel)"  package="org.emftext.language.java.reusejava"                       version="0.1.1"/>
+		<buildplugin name="Example Java Extension for Reuseware (Resource)"   package="org.emftext.language.java.reusejava.resource"              version="0.1.1"/>
+		<buildplugin name="Example Java Extension for Reuseware (Textsyntax)" package="org.emftext.language.java.reusejava.resource.reusejava"    version="0.1.1"/>
+		<buildplugin name="Example Java Extension for Reuseware (Editor)"     package="org.emftext.language.java.reusejava.resource.reusejava.ui" version="0.1.1"/>
+		<buildfeature                                                         package="org.emftext.language.java.reusejava"                       version="0.1.1"/>
 
 		<!-- Tree Java -->
-		<buildplugin  name="Tree Java Metamodel"      package="org.emftext.language.java.treejava"                version="0.1.2" />
-		<buildplugin  name="Tree Java Metamodel Edit" package="org.emftext.language.java.treejava.edit"           version="0.1.2" />
-		<buildplugin  name="Tree Java Resource"    package="org.emftext.language.java.treejava.resource"          version="0.1.2" />
-		<buildplugin  name="Tree Java Textsyntax"  package="org.emftext.language.java.treejava.resource.treejava" version="0.1.2" />
-		<buildfeature                              package="org.emftext.language.java.treejava"                   version="0.1.2" />
+		<buildplugin  name="Tree Java Metamodel"      package="org.emftext.language.java.treejava"                      version="0.1.2" />
+		<buildplugin  name="Tree Java Metamodel Edit" package="org.emftext.language.java.treejava.edit"                 version="0.1.2" />
+		<buildplugin  name="Tree Java Resource"       package="org.emftext.language.java.treejava.resource"             version="0.1.2" />
+		<buildplugin  name="Tree Java Textsyntax"     package="org.emftext.language.java.treejava.resource.treejava"    version="0.1.2" />
+		<buildplugin  name="Tree Java Editor"         package="org.emftext.language.java.treejava.resource.treejava.ui" version="0.1.2" />
+		<buildfeature                                 package="org.emftext.language.java.treejava"                      version="0.1.2" />
 		
-		<!-- TODO: PropJava -->
+		<!-- PropJava -->
+		<buildplugin  name="Properties Java Metamodel"      package="org.emftext.language.java.propjava"                      version="0.1.0" />
+		<buildplugin  name="Properties Java Metamodel Edit" package="org.emftext.language.java.propjava.edit"                 version="0.1.0" />
+		<buildplugin  name="Properties Java Resource"       package="org.emftext.language.java.propjava.resource"             version="0.1.0" />
+		<buildplugin  name="Properties Java Textsyntax"     package="org.emftext.language.java.propjava.resource.propjava"    version="0.1.0" />
+		<buildplugin  name="Properties Java Editor"         package="org.emftext.language.java.propjava.resource.propjava.ui" version="0.1.0" />
+		<buildfeature                                       package="org.emftext.language.java.propjava"                      version="0.1.0" />
 		
 		<!-- TODO: Models -->
 		
 		<!-- KM3 -->
-		<buildplugin  name="KM3 Metamodel"          package="org.emftext.language.km3"                version="0.5.1" />
-		<buildplugin  name="KM3 Syntax"             package="org.emftext.language.km3.resource.km3"   version="0.5.1" />
-		<buildfeature                               package="org.emftext.language.km3"                version="0.5.1" />
+		<buildplugin  name="KM3 Metamodel"          package="org.emftext.language.km3"                 version="0.5.1" />
+		<buildplugin  name="KM3 Syntax"             package="org.emftext.language.km3.resource.km3"    version="0.5.1" />
+		<buildplugin  name="KM3 Editor"             package="org.emftext.language.km3.resource.km3.ui" version="0.5.1" />
+		<buildfeature                               package="org.emftext.language.km3"                 version="0.5.1" />
 
 		<!-- Martin Fowler's DSL -->
-		<buildplugin  name="Martin Fowler's DSL Metamodel"          package="org.emftext.language.martinfowlerdsl"                version="0.5.0" />
-		<buildplugin  name="Martin Fowler's DSL Syntax"   package="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl" version="0.5.0" />
-		<buildfeature                                               package="org.emftext.language.martinfowlerdsl"                version="0.5.0" />
+		<buildplugin  name="Martin Fowler's DSL Metamodel" package="org.emftext.language.martinfowlerdsl"                             version="0.5.0" />
+		<buildplugin  name="Martin Fowler's DSL Syntax"    package="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl"    version="0.5.0" />
+		<buildplugin  name="Martin Fowler's DSL Editor"    package="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl.ui" version="0.5.0" />
+		<buildfeature                                      package="org.emftext.language.martinfowlerdsl"                             version="0.5.0" />
 			
 		<!-- Office -->
-		<buildplugin  name="Office DSL Metamodel" package="org.emftext.language.office"                 version="0.5.0" />
-		<buildplugin  name="Office DSL Syntax"    package="org.emftext.language.office.resource.office" version="0.5.0" />
-		<buildfeature                             package="org.emftext.language.office"                 version="0.5.0" />
+		<buildplugin  name="Office DSL Metamodel" package="org.emftext.language.office"                    version="0.5.0" />
+		<buildplugin  name="Office DSL Syntax"    package="org.emftext.language.office.resource.office"    version="0.5.0" />
+		<buildplugin  name="Office DSL Editor"    package="org.emftext.language.office.resource.office.ui" version="0.5.0" />
+		<buildfeature                             package="org.emftext.language.office"                    version="0.5.0" />
 		
 		<!-- OWL -->
-		<buildplugin  name="OWL Metamodel"          package="org.emftext.language.owl"                version="1.1.0" />
-		<buildplugin  name="OWL Metamodel (Edit Support)" package="org.emftext.language.owl.edit"     version="1.1.0" />
-		<buildplugin  name="OWL Reasoning"          package="org.emftext.language.owl.reasoning"      version="1.1.0" />
-		<buildplugin  name="OWL Manchester Syntax"  package="org.emftext.language.owl.resource.owl"   version="1.1.0" />
-		<buildfeature                               package="org.emftext.language.owl"                version="1.1.0" />
+		<buildplugin  name="OWL Metamodel"                package="org.emftext.language.owl"                 version="1.1.0" />
+		<buildplugin  name="OWL Metamodel (Edit Support)" package="org.emftext.language.owl.edit"            version="1.1.0" />
+		<buildplugin  name="OWL Reasoning"                package="org.emftext.language.owl.reasoning"       version="1.1.0" />
+		<buildplugin  name="OWL Manchester Syntax"        package="org.emftext.language.owl.resource.owl"    version="1.1.0" />
+		<buildplugin  name="OWL Manchester Editor"        package="org.emftext.language.owl.resource.owl.ui" version="1.1.0" />
+		<buildfeature                                     package="org.emftext.language.owl"                 version="1.1.0" />
 
 		<!-- Petrinet -->
-		<buildplugin  name="Petri Net Metamodel" package="org.emftext.language.petrinet"                   version="0.5.0" />
-		<buildplugin  name="Petri Net Syntax"    package="org.emftext.language.petrinet.resource.petrinet" version="0.5.0" />
-		<buildfeature                            package="org.emftext.language.petrinet"                   version="0.5.0" />
+		<buildplugin  name="Petri Net Metamodel" package="org.emftext.language.petrinet"                      version="0.5.0" />
+		<buildplugin  name="Petri Net Syntax"    package="org.emftext.language.petrinet.resource.petrinet"    version="0.5.0" />
+		<buildplugin  name="Petri Net Editor"    package="org.emftext.language.petrinet.resource.petrinet.ui" version="0.5.0" />
+		<buildfeature                            package="org.emftext.language.petrinet"                      version="0.5.0" />
 
 		<!-- Pico -->
-		<buildplugin  name="Pico Metamodel" package="org.emftext.language.pico"               version="0.1.0" />
-		<buildplugin  name="Pico Syntax"    package="org.emftext.language.pico.resource.pico" version="0.1.0" />
-		<buildfeature                       package="org.emftext.language.pico"               version="0.1.0" />
+		<buildplugin  name="Pico Metamodel" package="org.emftext.language.pico"                  version="0.1.0" />
+		<buildplugin  name="Pico Syntax"    package="org.emftext.language.pico.resource.pico"    version="0.1.0" />
+		<buildplugin  name="Pico Editor"    package="org.emftext.language.pico.resource.pico.ui" version="0.1.0" />
+		<buildfeature                       package="org.emftext.language.pico"                  version="0.1.0" />
 	
 		<!-- TODO: Plugin -->
 		
 		<!-- Pl/0 -->
-		<buildplugin  name="PL/0 Metamodel" package="org.emftext.language.pl0"               version="0.5.0" />
-		<buildplugin  name="PL/0 Syntax"    package="org.emftext.language.pl0.resource.pl0"  version="0.5.0" />
-		<buildfeature                       package="org.emftext.language.pl0"               version="0.5.0" />
+		<buildplugin  name="PL/0 Metamodel" package="org.emftext.language.pl0"                 version="0.5.0" />
+		<buildplugin  name="PL/0 Syntax"    package="org.emftext.language.pl0.resource.pl0"    version="0.5.0" />
+		<buildplugin  name="PL/0 Editor"    package="org.emftext.language.pl0.resource.pl0.ui" version="0.5.0" />
+		<buildfeature                       package="org.emftext.language.pl0"                 version="0.5.0" />
 	
 		<!-- Quick UML -->
-		<buildplugin  name="Quick UML Syntax"  package="org.emftext.language.quickuml.resource.quml"   version="0.1.2" />
-		<buildfeature                          package="org.emftext.language.quickuml"                 version="0.1.2" />
+		<buildplugin  name="Quick UML Syntax"  package="org.emftext.language.quickuml.resource.quml"    version="0.1.2" />
+		<buildplugin  name="Quick UML Editor"  package="org.emftext.language.quickuml.resource.quml.ui" version="0.1.2" />
+		<buildfeature                          package="org.emftext.language.quickuml"                  version="0.1.2" />
 	
 		<!-- Regular Expressions -->
-		<buildplugin  name="Regular Expressions Syntax Specification" package="org.emftext.language.regexp"                     version="0.1.2" />
-		<buildplugin  name="Regular Expressions ANTLR Syntax"         package="org.emftext.language.regexp.resource.regexp_antlr" version="0.1.2" />
-		<buildplugin  name="Regular Expressions SDF Syntax"           package="org.emftext.language.regexp.resource.regexp_sdf" version="0.1.2" />
-		<buildfeature                                                 package="org.emftext.language.regexp"                     version="0.1.2" />
+		<buildplugin  name="Regular Expressions Syntax Specification" package="org.emftext.language.regexp"                          version="0.1.2" />
+		<buildplugin  name="Regular Expressions ANTLR Syntax"         package="org.emftext.language.regexp.resource.regexp_antlr"    version="0.1.2" />
+		<buildplugin  name="Regular Expressions ANTLR Editor"         package="org.emftext.language.regexp.resource.regexp_antlr.ui" version="0.1.2" />
+		<buildplugin  name="Regular Expressions SDF Syntax"           package="org.emftext.language.regexp.resource.regexp_sdf"      version="0.1.2" />
+		<buildplugin  name="Regular Expressions SDF Editor"           package="org.emftext.language.regexp.resource.regexp_sdf.ui"   version="0.1.2" />
+		<buildfeature                                                 package="org.emftext.language.regexp"                          version="0.1.2" />
 		
 		<!-- Sandwich -->
-		<buildplugin name="Sandwich Recipe Metamodel"  package="org.emftext.language.sandwich" version="0.5.1"/>
-		<buildplugin name="Sandwich Recipe Textsyntax" package="org.emftext.language.sandwich.resource.sandwich" version="0.5.1"/>
-		<buildfeature package="org.emftext.language.sandwich" version="0.5.1"/>
+		<buildplugin name="Sandwich Recipe Metamodel"  package="org.emftext.language.sandwich"                      version="0.5.1"/>
+		<buildplugin name="Sandwich Recipe Textsyntax" package="org.emftext.language.sandwich.resource.sandwich"    version="0.5.1"/>
+		<buildplugin name="Sandwich Recipe Editor"     package="org.emftext.language.sandwich.resource.sandwich.ui" version="0.5.1"/>
+		<buildfeature                                  package="org.emftext.language.sandwich"                      version="0.5.1"/>
 
 		<!-- SecProp-->
-		<buildplugin  name="Metamodel for SecProp"                package="org.emftext.language.secprop"      version="0.1.0"/>
-		<buildplugin  name="Metamodel for SecProp (Edit Support)" package="org.emftext.language.secprop.edit" version="0.1.0"/>
-		<buildplugin  name="SecProp Resource Management"          package="org.emftext.language.secprop.resource" version="0.1.0"/>
-		<buildplugin  name="SecProp Text Syntax"                  package="org.emftext.language.secprop.resource.text.secprop" version="0.1.0"/>
-		<buildplugin  name="SecProp Graphical Syntax"             package="org.emftext.language.secprop.diagram" version="0.1.0"/>
-		<buildfeature package="org.emftext.language.secprop" version="0.1.0"/>
+		<buildplugin  name="Metamodel for SecProp"                package="org.emftext.language.secprop"                          version="0.1.0"/>
+		<buildplugin  name="Metamodel for SecProp (Edit Support)" package="org.emftext.language.secprop.edit"                     version="0.1.0"/>
+		<buildplugin  name="SecProp Resource Management"          package="org.emftext.language.secprop.resource"                 version="0.1.0"/>
+		<buildplugin  name="SecProp Text Syntax"                  package="org.emftext.language.secprop.resource.text.secprop"    version="0.1.0"/>
+		<buildplugin  name="SecProp Editor"                       package="org.emftext.language.secprop.resource.text.secprop.ui" version="0.1.0"/>
+		<buildplugin  name="SecProp Graphical Syntax"             package="org.emftext.language.secprop.diagram"                  version="0.1.0"/>
+		<buildfeature                                             package="org.emftext.language.secprop"                          version="0.1.0"/>
 			
 		<!-- TODO Simple C 
 		<buildplugin name="Simple C Metamodel"  package="org.emftext.language.simple_c" version="0.1.2"/>
@@ -538,54 +585,62 @@
 		-->
 		
 		<!-- Simple GUI -->
-		<buildplugin name="Simple GUI Metamodel"  package="org.emftext.language.simple_gui" version="0.1.2"/>
-		<buildplugin name="Simple GUI Textsyntax" package="org.emftext.language.simple_gui.resource.simplegui" version="0.1.2"/>
-		<buildfeature package="org.emftext.language.simple_gui" version="0.1.2"/>
+		<buildplugin name="Simple GUI Metamodel"  package="org.emftext.language.simple_gui"                       version="0.1.2"/>
+		<buildplugin name="Simple GUI Textsyntax" package="org.emftext.language.simple_gui.resource.simplegui"    version="0.1.2"/>
+		<buildplugin name="Simple GUI Editor"     package="org.emftext.language.simple_gui.resource.simplegui.ui" version="0.1.2"/>
+		<buildfeature                             package="org.emftext.language.simple_gui"                       version="0.1.2"/>
 		
 		<!-- Simple Math -->
-		<buildplugin name="Simple Math Metamodel"  package="org.emftext.language.simple_math"               version="0.1.2"/>
-		<buildplugin name="Simple Math (Edit Support)"  package="org.emftext.language.simple_math.edit"     version="0.1.2"/>
-		<buildplugin name="Simple Math Interpreter"  package="org.emftext.language.simple_math.interpreter" version="0.1.2"/>
-		<buildplugin name="Simple Math Textsyntax" package="org.emftext.language.simple_math.resource.sm"   version="0.1.2"/>
-		<buildfeature package="org.emftext.language.simple_math"                                            version="0.1.2"/>
+		<buildplugin name="Simple Math Metamodel"      package="org.emftext.language.simple_math"                version="0.1.2"/>
+		<buildplugin name="Simple Math (Edit Support)" package="org.emftext.language.simple_math.edit"           version="0.1.2"/>
+		<buildplugin name="Simple Math Interpreter"    package="org.emftext.language.simple_math.interpreter"    version="0.1.2"/>
+		<buildplugin name="Simple Math Textsyntax"     package="org.emftext.language.simple_math.resource.sm"    version="0.1.2"/>
+		<buildplugin name="Simple Math Editor"         package="org.emftext.language.simple_math.resource.sm.ui" version="0.1.2"/>
+		<buildfeature                                  package="org.emftext.language.simple_math"                version="0.1.2"/>
 		
 		<!-- Statemachine -->
-		<buildplugin name="UML Statemachine Textsyntax Specification" package="org.emftext.language.statemachine" version="0.1.2"/>
-		<buildplugin name="UML Statemachine Textsyntax" package="org.emftext.language.statemachine.resource.statemachine" version="0.1.2"/>
-		<buildfeature package="org.emftext.language.statemachine" version="0.1.2"/>	
+		<buildplugin name="UML Statemachine Textsyntax Specification" package="org.emftext.language.statemachine"                          version="0.1.2"/>
+		<buildplugin name="UML Statemachine Textsyntax"               package="org.emftext.language.statemachine.resource.statemachine"    version="0.1.2"/>
+		<buildplugin name="UML Statemachine Editor"                   package="org.emftext.language.statemachine.resource.statemachine.ui" version="0.1.2"/>
+		<buildfeature                                                 package="org.emftext.language.statemachine"                          version="0.1.2"/>	
 		
 		<!-- SPARQL -->
-		<buildplugin name="SPARQL Textsyntax Specification" package="org.emftext.language.sparql"                 version="0.9.0"/>
-		<buildplugin name="SPARQL Textsyntax"               package="org.emftext.language.sparql.resource.sparql" version="0.9.0"/>
-		<buildfeature package="org.emftext.language.sparql" version="0.9.0"/>
+		<buildplugin name="SPARQL Textsyntax Specification" package="org.emftext.language.sparql"                    version="0.9.0"/>
+		<buildplugin name="SPARQL Textsyntax"               package="org.emftext.language.sparql.resource.sparql"    version="0.9.0"/>
+		<buildplugin name="SPARQL Editor"                   package="org.emftext.language.sparql.resource.sparql.ui" version="0.9.0"/>
+		<buildfeature                                       package="org.emftext.language.sparql"                    version="0.9.0"/>
 		
 		<!-- TODO TCL/TK -->
 		
 		<!-- Text Adventure -->
-		<buildplugin  name="Metamodel for Text Adventures" package="org.emftext.language.textadventure"               version="0.1.2"/>
-		<buildplugin  name="Text Adventure Syntax"         package="org.emftext.language.textadventure.resource.tas"  version="0.1.2"/>
-		<buildfeature package="org.emftext.language.textadventure" version="0.1.2"/>
+		<buildplugin  name="Metamodel for Text Adventures" package="org.emftext.language.textadventure"                 version="0.1.2"/>
+		<buildplugin  name="Text Adventure Syntax"         package="org.emftext.language.textadventure.resource.tas"    version="0.1.2"/>
+		<buildplugin  name="Text Adventure Editor"         package="org.emftext.language.textadventure.resource.tas.ui" version="0.1.2"/>
+		<buildfeature                                      package="org.emftext.language.textadventure"                 version="0.1.2"/>
 
 		<!-- Three-Valued Logic -->
-		<buildplugin  name="Metamodel for Three-Valued Logic"  package="org.emftext.language.threevaluedlogic"               version="0.1.2"/>
-		<buildplugin  name="Three-Valued Logic (Edit Support)" package="org.emftext.language.threevaluedlogic.edit"          version="0.1.2"/>
-		<buildplugin  name="Three-Valued Logic Interpreter"    package="org.emftext.language.threevaluedlogic.interpreter"   version="0.1.2"/>
-		<buildplugin  name="Three-Valued Logic Syntax"         package="org.emftext.language.threevaluedlogic.resource.tvl"  version="0.1.2"/>
-		<buildfeature package="org.emftext.language.threevaluedlogic"                                                        version="0.1.2"/>
+		<buildplugin  name="Metamodel for Three-Valued Logic"  package="org.emftext.language.threevaluedlogic"                 version="0.1.2"/>
+		<buildplugin  name="Three-Valued Logic (Edit Support)" package="org.emftext.language.threevaluedlogic.edit"            version="0.1.2"/>
+		<buildplugin  name="Three-Valued Logic Interpreter"    package="org.emftext.language.threevaluedlogic.interpreter"     version="0.1.2"/>
+		<buildplugin  name="Three-Valued Logic Syntax"         package="org.emftext.language.threevaluedlogic.resource.tvl"    version="0.1.2"/>
+		<buildplugin  name="Three-Valued Logic Editor"         package="org.emftext.language.threevaluedlogic.resource.tvl.ui" version="0.1.2"/>
+		<buildfeature                                          package="org.emftext.language.threevaluedlogic"                 version="0.1.2"/>
 
 		<!-- Use Case Invariant  -->
-		<buildplugin  name="Metamodel for Use Case Invariants" package="org.emftext.language.usecaseinvariant"                 version="0.5.1"/>
-		<buildplugin  name="Use Case Invariants Resource"      package="org.emftext.language.usecaseinvariant.resource"        version="0.5.1"/>
-		<buildplugin  name="Use Case Invariants Syntax"        package="org.emftext.language.usecaseinvariant.resource.ucinv"  version="0.5.1"/>
-		<buildfeature package="org.emftext.language.usecaseinvariant" version="0.5.1"/>
+		<buildplugin  name="Metamodel for Use Case Invariants" package="org.emftext.language.usecaseinvariant"                   version="0.5.1"/>
+		<buildplugin  name="Use Case Invariants Resource"      package="org.emftext.language.usecaseinvariant.resource"          version="0.5.1"/>
+		<buildplugin  name="Use Case Invariants Syntax"        package="org.emftext.language.usecaseinvariant.resource.ucinv"    version="0.5.1"/>
+		<buildplugin  name="Use Case Invariants Editor"        package="org.emftext.language.usecaseinvariant.resource.ucinv.ui" version="0.5.1"/>
+		<buildfeature                                          package="org.emftext.language.usecaseinvariant"                   version="0.5.1"/>
 			
 		<!-- Value Flow-->
-		<buildplugin  name="Metamodel for Value Flow"                package="org.emftext.language.valueflow"      version="0.5.1"/>
-		<buildplugin  name="Metamodel for Value Flow (Edit Support)" package="org.emftext.language.valueflow.edit" version="0.5.1"/>
-		<buildplugin  name="Value Flow Resource Management"          package="org.emftext.language.valueflow.resource" version="0.5.1"/>
-		<buildplugin  name="Value Flow Text Syntax"                  package="org.emftext.language.valueflow.resource.valueflow" version="0.5.1"/>
-		<buildplugin  name="Value Flow Graphical Syntax"             package="org.emftext.language.valueflow.diagram" version="0.5.1"/>
-		<buildfeature package="org.emftext.language.valueflow" version="0.5.1"/>
+		<buildplugin  name="Metamodel for Value Flow"                package="org.emftext.language.valueflow"                       version="0.5.1"/>
+		<buildplugin  name="Metamodel for Value Flow (Edit Support)" package="org.emftext.language.valueflow.edit"                  version="0.5.1"/>
+		<buildplugin  name="Value Flow Resource Management"          package="org.emftext.language.valueflow.resource"              version="0.5.1"/>
+		<buildplugin  name="Value Flow Text Syntax"                  package="org.emftext.language.valueflow.resource.valueflow"    version="0.5.1"/>
+		<buildplugin  name="Value Flow Text Editor"                  package="org.emftext.language.valueflow.resource.valueflow.ui" version="0.5.1"/>
+		<buildplugin  name="Value Flow Graphical Syntax"             package="org.emftext.language.valueflow.diagram"               version="0.5.1"/>
+		<buildfeature                                                package="org.emftext.language.valueflow"                       version="0.5.1"/>
 			
 			
 		<zip basedir="dist" destfile="dist/emf-text-syntax-zoo-${emftext.zoo.version}.v${DSTAMP}${TSTAMP}.zip" 
