@@ -28,7 +28,9 @@
 						<include name="**/**Test.java"/>
 						<exclude name="**/CSharpTest.java" />
 						<exclude name="**/BulkGraphTest.java" />
+						<exclude name="**/AbstractPrintingTest.java" />
 						<exclude name="**/AbstractSimpleMathTest.java" />
+						<exclude name="**/efactory/test/LoadTest.java" /> <!-- TODO enable this test -->
 					</fileset>
 				</batchtest>
 			</junit>
@@ -105,10 +107,8 @@
 			<pathelement path="../org.emftext.language.formular.generator/bin"/>
 			<pathelement path="../org.emftext.language.formular.resource.formular/bin"/>
 			<pathelement path="../org.emftext.language.java/bin"/>
-			<pathelement path="../org.emftext.language.java_templates/bin"/>
-			<pathelement path="../org.emftext.language.java_templates.examples/bin"/>
-			<pathelement path="../org.emftext.language.java_templates.resource.java_template/bin"/>
-			<pathelement path="../org.emftext.language.java_templates.test/bin"/>
+			<pathelement path="../org.emftext.language.java_properties/bin"/>
+			<pathelement path="../org.emftext.language.java_properties.resource.properties/bin"/>
 			<pathelement path="../org.emftext.language.java.edit/bin"/>
 			<pathelement path="../org.emftext.language.java.ejava/bin"/>
 			<pathelement path="../org.emftext.language.java.ejava.edit/bin"/>
@@ -118,6 +118,10 @@
 			<pathelement path="../org.emftext.language.java.javabehavior4uml/bin"/>
 			<pathelement path="../org.emftext.language.java.javabehavior4uml.resource/bin"/>
 			<pathelement path="../org.emftext.language.java.javabehavior4uml.resource.javabehavior/bin"/>
+			<pathelement path="../org.emftext.language.java.jtemplates/bin"/>
+			<pathelement path="../org.emftext.language.java.jtemplates.examples/bin"/>
+			<pathelement path="../org.emftext.language.java.jtemplates.resource.javatemplate/bin"/>
+			<pathelement path="../org.emftext.language.java.jtemplates.test/bin"/>
 			<pathelement path="../org.emftext.language.java.metamodelprinter/bin"/>
 			<pathelement path="../org.emftext.language.java.properties/bin"/>
 			<pathelement path="../org.emftext.language.java.properties.edit/bin"/>
@@ -192,11 +196,13 @@
 			<pathelement path="../org.emftext.language.tbool/bin"/>
 			<pathelement path="../org.emftext.language.tbool.resource.tbool/bin"/>
 			<pathelement path="../org.emftext.language.tbool.test/bin"/>
-			<pathelement path="../org.emftext.language.template_concepts/bin"/>
-			<pathelement path="../org.emftext.language.template_concepts.call/bin"/>
-			<pathelement path="../org.emftext.language.template_concepts.call.resource.template_call/bin"/>
-			<pathelement path="../org.emftext.language.template_concepts.interpreter/bin"/>
-			<pathelement path="../org.emftext.language.template_concepts.interpreter.test/bin"/>
+			<pathelement path="../org.emftext.language.tcltk/bin"/>
+			<pathelement path="../org.emftext.language.tcltk.resource.tcl/bin"/>
+			<pathelement path="../org.emftext.language.templateconcepts/bin"/>
+			<pathelement path="../org.emftext.language.templateconcepts.call/bin"/>
+			<pathelement path="../org.emftext.language.templateconcepts.call.resource.templatecall/bin"/>
+			<pathelement path="../org.emftext.language.templateconcepts.interpreter/bin"/>
+			<pathelement path="../org.emftext.language.templateconcepts.interpreter.test/bin"/>
 			<pathelement path="../org.emftext.language.test/bin"/>
 			<pathelement path="../org.emftext.language.test.bug933/bin"/>
 			<pathelement path="../org.emftext.language.test.bug933.resource.bug933/bin"/>
@@ -221,6 +227,10 @@
 			<pathelement path="../org.emftext.sdk.antlr3_2_0/bin" />
 			<pathelement path="../org.emftext.sdk.automaton/bin" />
 			<pathelement path="../org.emftext.sdk.codegen/bin" />
+			<pathelement path="../org.emftext.sdk.codegen.antlr/bin" />
+			<pathelement path="../org.emftext.sdk.codegen.newproject/bin" />
+			<pathelement path="../org.emftext.sdk.codegen.resource/bin" />
+			<pathelement path="../org.emftext.sdk.codegen.resource.ui/bin" />
 			<pathelement path="../org.emftext.sdk.concretesyntax/bin" />
 			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs/bin" />
 			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
@@ -242,11 +252,16 @@
 			<pathelement path="../org.emftext.test.cct2.resource.cct2/bin"/>
 			<pathelement path="../org.emftext.test.cct3/bin"/>
 			<pathelement path="../org.emftext.test.cct3.resource.cct3/bin"/>
+			<pathelement path="../org.emftext.test.cct4/bin"/>
+			<pathelement path="../org.emftext.test.cct4.resource.cct4/bin"/>
 			<pathelement path="../org.emftext.test.code_completion.test/bin"/>
 			<pathelement path="../org.emftext.test.escaping/bin"/>
 			<pathelement path="../org.emftext.test.escaping.resource.escaping/bin"/>
 			<pathelement path="../org.emftext.test.grammar_features/bin"/>
 			<pathelement path="../org.emftext.test.grammar_features.resource.grammar_features/bin"/>
+			<pathelement path="../org.emftext.test.printing/bin"/>
+			<pathelement path="../org.emftext.test.printing.resource.printing/bin"/>
+			<pathelement path="../org.emftext.test.printing.test/bin"/>
 			<pathelement path="../org.emftext.test.scannerless_parser/bin"/>
 			<pathelement path="../org.reuseware.coconut/bin"/>
 			<pathelement path="../org.reuseware.coconut.compositionprogram/bin"/>
@@ -259,6 +274,8 @@
 			<pathelement path="../org.reuseware.coconut.repository/bin"/>
 			<pathelement path="../org.reuseware.coconut.reuseextension/bin"/>
 			<pathelement path="../org.reuseware.coconut.reuseextension.resource.rex/bin"/>
+			<pathelement path="../org.reuseware.coconut.reuseextensionactivator/bin"/>
+			<pathelement path="../org.reuseware.coconut.reuseextensionactivator.resource.rexactivator/bin"/>
 			<pathelement path="../org.reuseware.coconut.store/bin"/>			
 			<fileset dir="../org.emftext.language.owl.reasoning/lib/">
 				<include name="**/*.jar"/>
@@ -299,6 +316,7 @@
 		<run-test plugin="org.emftext.test.bug933" extension="bug933" />
 		<run-test plugin="org.emftext.test.bug1154" extension="bug1154" />
 		<run-test plugin="org.emftext.test.bug1233" extension="bug1233" />
+		<run-test plugin="org.emftext.test.printing" extension="printing" />
 		<!-- TODO enable this test -->
 		<!-- <run-test plugin="org.emftext.language.xml" extension="xml" /> -->
 	</target>
