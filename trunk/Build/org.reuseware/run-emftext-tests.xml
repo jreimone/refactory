@@ -10,14 +10,20 @@
 		<delete dir="${test_result_dir}" includes="*.txt" />
 		
 		<path id="junit_classpath">
+			<pathelement path="../org.emftext.access/bin" />
 			<pathelement path="../org.emftext.sdk/bin" />
 			<pathelement path="../org.emftext.sdk.ant/bin" />
 			<pathelement path="../org.emftext.sdk.antlr3_2_0/bin" />
 			<pathelement path="../org.emftext.sdk.automaton/bin" />
 			<pathelement path="../org.emftext.sdk.codegen/bin" />
+			<pathelement path="../org.emftext.sdk.codegen.antlr/bin" />
+			<pathelement path="../org.emftext.sdk.codegen.newproject/bin" />
+			<pathelement path="../org.emftext.sdk.codegen.resource/bin" />
+			<pathelement path="../org.emftext.sdk.codegen.resource.ui/bin" />
 			<pathelement path="../org.emftext.sdk.concretesyntax/bin" />
 			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs/bin" />
 			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs.ui/bin" />
 			<pathelement path="../org.emftext.test/bin" />
 			<pathelement path="../org.emftext.test.escaping/bin" />
 			<pathelement path="../org.emftext.test.escaping.resource.escaping/bin" />
