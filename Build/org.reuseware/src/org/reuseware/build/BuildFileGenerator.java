@@ -323,8 +323,16 @@ public class BuildFileGenerator {
 					"org.emftext.language.textadventure.resource.tas", "textadventure", 
 					false),
 			new Language(
+					"org.emftext.language.theater", "theater",
+					"org.emftext.language.theater.resource.theater", "theater", 
+					false),
+			new Language(
 					"org.emftext.language.threevaluedlogic", "threevaluedlogic",
 					"org.emftext.language.threevaluedlogic.resource.tvl", "threevaluedlogic", 
+					false),
+			new Language(
+					"org.emftext.language.timedautomata", "timedAutomata",
+					"org.emftext.language.timedautomata.resource.ta", "timedAutomata", 
 					false),
 			new Language(
 					"org.emftext.language.usecaseinvariant", "UseCaseInvariant",
