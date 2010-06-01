@@ -176,6 +176,7 @@
 
 		<!-- LaCoMe -->
 		<buildplugin name="LaCoMe - Layout Composition Framework (Core)"  package="org.reuseware.lacome" version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe standard adjustment strategies"         package="org.reuseware.lacome.adjustment" version="${reuseware.version}"/>
 		<buildfeature package="org.reuseware.lacome"   version="${reuseware.version}"/>
 
 		<buildplugin name="LaCoMe GMF support"        package="org.reuseware.lacome.layoutlanguage.gmf" version="${reuseware.version}"/>
