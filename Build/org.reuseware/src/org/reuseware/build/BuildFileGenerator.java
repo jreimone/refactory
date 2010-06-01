@@ -322,10 +322,12 @@ public class BuildFileGenerator {
 					"org.emftext.language.textadventure", "textadventure",
 					"org.emftext.language.textadventure.resource.tas", "textadventure", 
 					false),
+			// temporarily deactivate until bug 1354 is fixed
+			/*
 			new Language(
 					"org.emftext.language.theater", "theater",
 					"org.emftext.language.theater.resource.theater", "theater", 
-					false),
+					false),*/
 			new Language(
 					"org.emftext.language.threevaluedlogic", "threevaluedlogic",
 					"org.emftext.language.threevaluedlogic.resource.tvl", "threevaluedlogic", 
