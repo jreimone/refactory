@@ -1,0 +1,18 @@
+PROGRAM faculty 
+
+CONST 
+	c = 10 ; 
+	
+	VAR 
+	n , f , i ; 
+
+BEGIN 
+	n :=  c ; 
+	
+	f :=  1 ; 
+	i :=  2 ; 
+	WHILE  i <=  n DO BEGIN 
+		f :=  f * i ; 
+		i :=  i + 1 
+	END 
+END . 
