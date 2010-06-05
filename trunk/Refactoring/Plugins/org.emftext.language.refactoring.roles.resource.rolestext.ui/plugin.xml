@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextUIMetaInformation" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolestext" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" name="EMFText rolestext Editor">
 		</editor>
