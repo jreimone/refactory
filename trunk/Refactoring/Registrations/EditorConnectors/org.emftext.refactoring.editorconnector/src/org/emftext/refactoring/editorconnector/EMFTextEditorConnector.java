@@ -60,18 +60,22 @@ public class EMFTextEditorConnector implements IEditorConnector {
 		int startOffset = textSelection.getOffset();
 		int endOffset = startOffset + textSelection.getLength();
 		List<EObject> selectedElements = new LinkedList<EObject>();
+		List<EObject> noReferencesList = new ArrayList<EObject>();
 		if(startOffset == endOffset){
 			selectedElements = locationMap.getElementsAt(startOffset);
+			EObject nearestObject = selectedElements.get(0);
+			if(!nearestObject.eIsProxy()){
+				noReferencesList.add(nearestObject);
+			}
 		} else {
 			selectedElements = locationMap.getElementsBetween(startOffset, endOffset);
-		}
-		List<EObject> noReferencesList = new ArrayList<EObject>();
-		for (EObject object : selectedElements) {
-			EcoreUtil.resolveAll(object);
-			int start = locationMap.getCharStart(object);
-			int end = locationMap.getCharEnd(object);
-			if((start >= startOffset && end <= endOffset) && !object.eIsProxy()){
-				noReferencesList.add(object);
+			for (EObject object : selectedElements) {
+				EcoreUtil.resolveAll(object);
+				int start = locationMap.getCharStart(object);
+				int end = locationMap.getCharEnd(object);
+				if((start >= startOffset && end <= endOffset) && !object.eIsProxy()){
+					noReferencesList.add(object);
+				}
 			}
 		}
 		return noReferencesList;
@@ -92,8 +96,12 @@ public class EMFTextEditorConnector implements IEditorConnector {
 				int end = locationMap.getCharEnd(eObject);
 				((ITextEditor) editor).selectAndReveal(start, end - start);
 			} else {
-				int offset = ((ITextSelection) ((ITextEditor) editor).getSelectionProvider().getSelection()).getOffset();
-				((ITextEditor) editor).selectAndReveal(offset, 0);
+				int startOffset = ((ITextSelection) ((ITextEditor) editor).getSelectionProvider().getSelection()).getOffset();
+				EObject nearestObject = locationMap.getElementsAt(startOffset).get(0);
+				startOffset = locationMap.getCharStart(nearestObject);
+				int endOffset = locationMap.getCharEnd(nearestObject);
+				int length = endOffset - startOffset + 1;
+				((ITextEditor) editor).selectAndReveal(startOffset, length);
 			}
 		} catch (Exception e) {
 			// methods could not be invoked via EMFTextAccessProxy
