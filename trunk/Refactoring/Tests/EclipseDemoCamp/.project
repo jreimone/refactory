@@ -15,9 +15,15 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.forms.resource.forms.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.emftext.language.pl0.resource.pl0.nature</nature>
+		<nature>org.emftext.language.forms.resource.forms.nature</nature>
 	</natures>
 </projectDescription>
