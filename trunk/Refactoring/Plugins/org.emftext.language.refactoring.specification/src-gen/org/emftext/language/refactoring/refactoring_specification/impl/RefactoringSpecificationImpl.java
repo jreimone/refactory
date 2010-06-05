@@ -185,7 +185,7 @@ public class RefactoringSpecificationImpl extends EObjectImpl implements Refacto
   /**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<Instruction> getInstructionsReferencingRole(Role referencedRole) {
 		Set<Instruction> instructions = new LinkedHashSet<Instruction>();
@@ -211,7 +211,7 @@ public class RefactoringSpecificationImpl extends EObjectImpl implements Refacto
 		/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean isRoleReferencedByObject(Role referencedRole, EObject eObject) {
 		EClass metaclass = eObject.eClass();
