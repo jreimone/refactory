@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles:RoleModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roles="http://www.emftext.org/language/roles" name="MoveXloosely">
+  <roles name="Movee" incoming="//@collaborations.0 //@collaborations.2">
+    <modifier>super</modifier>
+    <modifier>input</modifier>
+  </roles>
+  <roles name="Neighbor" outgoing="//@collaborations.2" incoming="//@collaborations.1">
+    <modifier>super</modifier>
+  </roles>
+  <roles name="Container" outgoing="//@collaborations.0 //@collaborations.1">
+    <modifier>super</modifier>
+  </roles>
+  <collaborations xsi:type="roles:RoleComposition" source="//@roles[name='Container']" target="//@roles[name='Movee']" targetName="movedElements">
+    <modifier>transitive</modifier>
+    <sourceMultiplicity lowerBound="1" upperBound="1"/>
+    <targetMultiplicity lowerBound="1" upperBound="-1"/>
+  </collaborations>
+  <collaborations xsi:type="roles:RoleComposition" source="//@roles[name='Container']" target="//@roles[name='Neighbor']" targetName="neighbor">
+    <modifier>transitive</modifier>
+    <sourceMultiplicity lowerBound="1" upperBound="1"/>
+    <targetMultiplicity lowerBound="1" upperBound="-1"/>
+  </collaborations>
+  <collaborations xsi:type="roles:RoleImplication" source="//@roles[name='Neighbor']" target="//@roles[name='Movee']"/>
+</roles:RoleModel>

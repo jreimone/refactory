@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:roles="http://www.emftext.org/language/roles" xmi:id="_2wyt8XFeEd-P4akzgCZgFw" type="Role Model" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_27ErUHFeEd-P4akzgCZgFw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_27ErVXFeEd-P4akzgCZgFw" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_27ErVnFeEd-P4akzgCZgFw" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_27ErV3FeEd-P4akzgCZgFw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_27ErWHFeEd-P4akzgCZgFw"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_27ErUXFeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_27ErUnFeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_27ErU3FeEd-P4akzgCZgFw"/>
+    <element xmi:type="roles:Role" href="moveXloosely.roles#//@roles[name='Movee']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_27ErVHFeEd-P4akzgCZgFw" x="300" y="140"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_27ErWXFeEd-P4akzgCZgFw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_27ErXnFeEd-P4akzgCZgFw" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_27ErX3FeEd-P4akzgCZgFw" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_27ErYHFeEd-P4akzgCZgFw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_27ErYXFeEd-P4akzgCZgFw"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_27ErWnFeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_27ErW3FeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_27ErXHFeEd-P4akzgCZgFw"/>
+    <element xmi:type="roles:Role" href="moveXloosely.roles#//@roles[name='Neighbor']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_27ErXXFeEd-P4akzgCZgFw" x="100" y="140"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_27ErYnFeEd-P4akzgCZgFw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_27ErZ3FeEd-P4akzgCZgFw" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_27EraHFeEd-P4akzgCZgFw" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_27EraXFeEd-P4akzgCZgFw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_27EranFeEd-P4akzgCZgFw"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_27ErY3FeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_27ErZHFeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_27ErZXFeEd-P4akzgCZgFw"/>
+    <element xmi:type="roles:Role" href="moveXloosely.roles#//@roles[name='Container']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_27ErZnFeEd-P4akzgCZgFw" x="215" y="35"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_2wyt8nFeEd-P4akzgCZgFw"/>
+  <element xmi:type="roles:RoleModel" href="moveXloosely.roles#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_3IL6QHFeEd-P4akzgCZgFw" type="4001" source="_27ErWXFeEd-P4akzgCZgFw" target="_27ErUHFeEd-P4akzgCZgFw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_3IL6QXFeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_3IL6QnFeEd-P4akzgCZgFw"/>
+    <element xmi:type="roles:RoleImplication" href="moveXloosely.roles#//@collaborations.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3IL6Q3FeEd-P4akzgCZgFw" points="[0, 0, -70, 60]$[70, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3KHz8HFeEd-P4akzgCZgFw" id="(0.9529411764705882,0.525)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3KHz8XFeEd-P4akzgCZgFw" id="(0.1267605633802817,0.575)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_3I7hIHFeEd-P4akzgCZgFw" type="4004" source="_27ErYnFeEd-P4akzgCZgFw" target="_27ErUHFeEd-P4akzgCZgFw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_3I7hJHFeEd-P4akzgCZgFw" visible="false" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_3I7hJXFeEd-P4akzgCZgFw" x="10"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_3I7hJnFeEd-P4akzgCZgFw" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_3I7hJ3FeEd-P4akzgCZgFw" x="-2" y="-12"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_3I7hIXFeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_3I7hInFeEd-P4akzgCZgFw"/>
+    <element xmi:type="roles:RoleComposition" href="moveXloosely.roles#//@collaborations.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3I7hI3FeEd-P4akzgCZgFw" points="[0, 0, 0, 160]$[0, -160, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3KHz9HFeEd-P4akzgCZgFw" id="(0.5,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3KHz9XFeEd-P4akzgCZgFw" id="(0.49295774647887325,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_3JFSIHFeEd-P4akzgCZgFw" type="4004" source="_27ErYnFeEd-P4akzgCZgFw" target="_27ErWXFeEd-P4akzgCZgFw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_3JFSJHFeEd-P4akzgCZgFw" visible="false" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_3JFSJXFeEd-P4akzgCZgFw" x="10"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_3JFSJnFeEd-P4akzgCZgFw" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_3JFSJ3FeEd-P4akzgCZgFw" x="-3" y="7"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_3JFSIXFeEd-P4akzgCZgFw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_3JFSInFeEd-P4akzgCZgFw"/>
+    <element xmi:type="roles:RoleComposition" href="moveXloosely.roles#//@collaborations.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3JFSI3FeEd-P4akzgCZgFw" points="[0, 0, 66, 60]$[-66, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3KHz8nFeEd-P4akzgCZgFw" id="(0.25,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3KHz83FeEd-P4akzgCZgFw" id="(0.49411764705882355,1.0)"/>
+  </edges>
+</notation:Diagram>
