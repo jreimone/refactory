@@ -94,7 +94,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 				EObject eObject = objectsToSelect.get(0);
 				int start = locationMap.getCharStart(eObject);
 				int end = locationMap.getCharEnd(eObject);
-				((ITextEditor) editor).selectAndReveal(start, end - start);
+				((ITextEditor) editor).selectAndReveal(start, end - start + 1);
 			} else {
 				int startOffset = ((ITextSelection) ((ITextEditor) editor).getSelectionProvider().getSelection()).getOffset();
 				EObject nearestObject = locationMap.getElementsAt(startOffset).get(0);
