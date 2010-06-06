@@ -337,7 +337,9 @@
 				<fileset dir="../org.emftext.language.test/src">
 					<include name="**/**Test.java"/>
 					<exclude name="**/CodeCompletionTest.java" />
-					<exclude name="**/Bug921Test.java" />
+					<exclude name="**/Bug921Test.java" /> <!-- TODO enable this test? -->
+					<exclude name="**/GenericParseAndPrintTest.java" /> <!-- TODO enable this test -->
+					<exclude name="**/NewFileContentCreationTest.java" /> <!-- TODO enable this test once bug 1357 has been fixed -->
 				</fileset>
 			</batchtest>
 		</junit>
