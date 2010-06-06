@@ -370,6 +370,13 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass afterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum constantsEEnum = null;
 
 	/**
@@ -1161,6 +1168,15 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAFTER() {
+		return afterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstants() {
 		return constantsEEnum;
 	}
@@ -1317,6 +1333,8 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 
 		emptyEClass = createEClass(EMPTY);
 
+		afterEClass = createEClass(AFTER);
+
 		// Create enums
 		constantsEEnum = createEEnum(CONSTANTS);
 	}
@@ -1365,6 +1383,7 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 		collaborationReferenceEClass.getESuperTypes().add(this.getSourceContext());
 		collaborationReferenceEClass.getESuperTypes().add(this.getTargetContext());
 		collaborationReferenceEClass.getESuperTypes().add(this.getObjectRemoval());
+		collaborationReferenceEClass.getESuperTypes().add(this.getObjectAssignmentCommand());
 		targetContextEClass.getESuperTypes().add(this.getContext());
 		referenceCommandEClass.getESuperTypes().add(this.getInstruction());
 		setEClass.getESuperTypes().add(this.getReferenceCommand());
@@ -1394,6 +1413,7 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 		roleRemovalEClass.getESuperTypes().add(this.getObjectRemoval());
 		unusedEClass.getESuperTypes().add(this.getRemoveModifier());
 		emptyEClass.getESuperTypes().add(this.getRemoveModifier());
+		afterEClass.getESuperTypes().add(this.getObjectReferenceAssignment());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(refactoringSpecificationEClass, RefactoringSpecification.class, "RefactoringSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1531,6 +1551,8 @@ public class RefactoringSpecificationPackageImpl extends EPackageImpl implements
 		initEClass(unusedEClass, org.emftext.language.refactoring.refactoring_specification.UNUSED.class, "UNUSED", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(emptyEClass, org.emftext.language.refactoring.refactoring_specification.EMPTY.class, "EMPTY", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(afterEClass, org.emftext.language.refactoring.refactoring_specification.AFTER.class, "AFTER", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(constantsEEnum, Constants.class, "Constants");

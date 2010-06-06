@@ -92,6 +92,7 @@ public class RefactoringSpecificationFactoryImpl extends EFactoryImpl implements
 			case RefactoringSpecificationPackage.ROLE_REMOVAL: return createRoleRemoval();
 			case RefactoringSpecificationPackage.UNUSED: return createUNUSED();
 			case RefactoringSpecificationPackage.EMPTY: return createEMPTY();
+			case RefactoringSpecificationPackage.AFTER: return createAFTER();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -417,6 +418,16 @@ public class RefactoringSpecificationFactoryImpl extends EFactoryImpl implements
 	public EMPTY createEMPTY() {
 		EMPTYImpl empty = new EMPTYImpl();
 		return empty;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AFTER createAFTER() {
+		AFTERImpl after = new AFTERImpl();
+		return after;
 	}
 
 		/**

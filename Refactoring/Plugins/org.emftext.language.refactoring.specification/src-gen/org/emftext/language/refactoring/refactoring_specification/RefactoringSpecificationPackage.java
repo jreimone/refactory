@@ -443,13 +443,22 @@ public interface RefactoringSpecificationPackage extends EPackage
 	int COLLABORATION_REFERENCE = 9;
 
 		/**
+	 * The feature id for the '<em><b>Declaration</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLABORATION_REFERENCE__DECLARATION = SOURCE_CONTEXT_FEATURE_COUNT + 0;
+
+		/**
 	 * The feature id for the '<em><b>Collaboration</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLABORATION_REFERENCE__COLLABORATION = SOURCE_CONTEXT_FEATURE_COUNT + 0;
+	int COLLABORATION_REFERENCE__COLLABORATION = SOURCE_CONTEXT_FEATURE_COUNT + 1;
 
 		/**
 	 * The number of structural features of the '<em>Collaboration Reference</em>' class.
@@ -458,7 +467,7 @@ public interface RefactoringSpecificationPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COLLABORATION_REFERENCE_FEATURE_COUNT = SOURCE_CONTEXT_FEATURE_COUNT + 1;
+	int COLLABORATION_REFERENCE_FEATURE_COUNT = SOURCE_CONTEXT_FEATURE_COUNT + 2;
 
 		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.TargetContextImpl <em>Target Context</em>}' class.
@@ -1339,6 +1348,43 @@ public interface RefactoringSpecificationPackage extends EPackage
 	int EMPTY_FEATURE_COUNT = REMOVE_MODIFIER_FEATURE_COUNT + 0;
 
 		/**
+	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.AFTERImpl <em>AFTER</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.emftext.language.refactoring.refactoring_specification.impl.AFTERImpl
+	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getAFTER()
+	 * @generated
+	 */
+	int AFTER = 44;
+
+		/**
+	 * The feature id for the '<em><b>Variable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AFTER__VARIABLE = OBJECT_REFERENCE_ASSIGNMENT__VARIABLE;
+
+		/**
+	 * The feature id for the '<em><b>Reference</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AFTER__REFERENCE = OBJECT_REFERENCE_ASSIGNMENT__REFERENCE;
+
+		/**
+	 * The number of structural features of the '<em>AFTER</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AFTER_FEATURE_COUNT = OBJECT_REFERENCE_ASSIGNMENT_FEATURE_COUNT + 0;
+
+		/**
 	 * The meta object id for the '{@link org.emftext.language.refactoring.refactoring_specification.Constants <em>Constants</em>}' enum.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1346,7 +1392,7 @@ public interface RefactoringSpecificationPackage extends EPackage
 	 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getConstants()
 	 * @generated
 	 */
-  int CONSTANTS = 44;
+  int CONSTANTS = 45;
 
 
   /**
@@ -2186,6 +2232,16 @@ public interface RefactoringSpecificationPackage extends EPackage
 	EClass getEMPTY();
 
 		/**
+	 * Returns the meta object for class '{@link org.emftext.language.refactoring.refactoring_specification.AFTER <em>AFTER</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>AFTER</em>'.
+	 * @see org.emftext.language.refactoring.refactoring_specification.AFTER
+	 * @generated
+	 */
+	EClass getAFTER();
+
+		/**
 	 * Returns the meta object for enum '{@link org.emftext.language.refactoring.refactoring_specification.Constants <em>Constants</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2945,6 +3001,16 @@ public interface RefactoringSpecificationPackage extends EPackage
 		 * @generated
 		 */
 		EClass EMPTY = eINSTANCE.getEMPTY();
+
+				/**
+		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.impl.AFTERImpl <em>AFTER</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.emftext.language.refactoring.refactoring_specification.impl.AFTERImpl
+		 * @see org.emftext.language.refactoring.refactoring_specification.impl.RefactoringSpecificationPackageImpl#getAFTER()
+		 * @generated
+		 */
+		EClass AFTER = eINSTANCE.getAFTER();
 
 				/**
 		 * The meta object literal for the '{@link org.emftext.language.refactoring.refactoring_specification.Constants <em>Constants</em>}' enum.

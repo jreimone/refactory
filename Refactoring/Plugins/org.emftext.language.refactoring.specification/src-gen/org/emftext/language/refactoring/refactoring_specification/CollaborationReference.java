@@ -24,7 +24,7 @@ import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
  * @model
  * @generated
  */
-public interface CollaborationReference extends SourceContext, TargetContext, ObjectRemoval {
+public interface CollaborationReference extends SourceContext, TargetContext, ObjectRemoval, ObjectAssignmentCommand {
 	/**
 	 * Returns the value of the '<em><b>Collaboration</b></em>' reference.
 	 * <!-- begin-user-doc -->

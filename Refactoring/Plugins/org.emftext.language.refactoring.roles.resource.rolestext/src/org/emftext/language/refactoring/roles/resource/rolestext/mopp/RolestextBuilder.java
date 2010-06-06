@@ -6,7 +6,6 @@
  */
 package org.emftext.language.refactoring.roles.resource.rolestext.mopp;
 
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;

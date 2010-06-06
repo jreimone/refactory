@@ -71,6 +71,7 @@ TOKENSTYLES{
 	"trace" COLOR #50F05C, BOLD;
 	"first" COLOR #50F05C, BOLD;
 	"last" COLOR #50F05C, BOLD;
+	"after" COLOR #50F05C, BOLD;
 	"as" COLOR #7F0055, BOLD;
 	"distinct" COLOR #7F0055, BOLD;
 	"unused" COLOR #7F0055, BOLD;
@@ -120,6 +121,8 @@ RULES{
 	FIRST ::= "index" variable ":=" "first" "(" reference ")";
 	
 	LAST  ::= "index" variable ":=" "last" "(" reference ")";
+	
+	AFTER  ::= "index" variable ":=" "after" "(" reference ")";
 	
 	ConcreteIndex ::= "index" variable ":=" index[INTEGER];
 	

@@ -128,5 +128,6 @@
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//RemoveModifier"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//UNUSED"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//EMPTY"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//AFTER"/>
   </genPackages>
 </genmodel:GenModel>
