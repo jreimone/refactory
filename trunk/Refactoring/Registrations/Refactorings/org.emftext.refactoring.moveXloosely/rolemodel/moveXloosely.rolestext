@@ -1,0 +1,10 @@
+RoleModel MoveXloosely { 
+	
+	super input ROLE Movee;
+	super ROLE Neighbor;
+	super ROLE Container;
+	
+	transitive: Container [1..1] <>- Movee movedElements [1..*];
+	transitive: Container [1..1] <>- Neighbor neighbor [1..*];
+	Neighbor -> Movee;
+} 
