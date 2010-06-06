@@ -168,6 +168,7 @@ public class RefactoringSpecificationSwitch<T>
 				if (result == null) result = caseSourceContext(collaborationReference);
 				if (result == null) result = caseTargetContext(collaborationReference);
 				if (result == null) result = caseObjectRemoval(collaborationReference);
+				if (result == null) result = caseObjectAssignmentCommand(collaborationReference);
 				if (result == null) result = caseContext(collaborationReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -415,6 +416,15 @@ public class RefactoringSpecificationSwitch<T>
 				EMPTY empty = (EMPTY)theEObject;
 				T result = caseEMPTY(empty);
 				if (result == null) result = caseRemoveModifier(empty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case RefactoringSpecificationPackage.AFTER: {
+				AFTER after = (AFTER)theEObject;
+				T result = caseAFTER(after);
+				if (result == null) result = caseObjectReferenceAssignment(after);
+				if (result == null) result = caseIndexAssignmentCommand(after);
+				if (result == null) result = caseInstruction(after);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1111,6 +1121,21 @@ public class RefactoringSpecificationSwitch<T>
 	 * @generated
 	 */
 	public T caseEMPTY(EMPTY object) {
+		return null;
+	}
+
+		/**
+	 * Returns the result of interpreting the object as an instance of '<em>AFTER</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>AFTER</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAFTER(AFTER object) {
 		return null;
 	}
 

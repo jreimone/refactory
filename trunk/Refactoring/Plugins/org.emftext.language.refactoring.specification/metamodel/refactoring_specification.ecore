@@ -66,7 +66,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//FromClause"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CollaborationReference" eSuperTypes="#//SourceContext #//TargetContext #//ObjectRemoval">
+  <eClassifiers xsi:type="ecore:EClass" name="CollaborationReference" eSuperTypes="#//SourceContext #//TargetContext #//ObjectRemoval #//ObjectAssignmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="collaboration" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//MultiplicityCollaboration"/>
   </eClassifiers>
@@ -164,4 +164,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="RemoveModifier" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="UNUSED" eSuperTypes="#//RemoveModifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="EMPTY" eSuperTypes="#//RemoveModifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AFTER" eSuperTypes="#//ObjectReferenceAssignment"/>
 </ecore:EPackage>

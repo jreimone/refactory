@@ -16,6 +16,7 @@ import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.Dialog;
+import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
 import org.emftext.language.refactoring.refactoring_specification.FILTER;
@@ -28,11 +29,14 @@ import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.TRACE;
 import org.emftext.language.refactoring.refactoring_specification.UPTREE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
+import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
+import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
@@ -90,12 +94,100 @@ public class ObjectAssignmentInterpreter {
 			}
 		} else if(object instanceof TRACE){
 			handleTrace((TRACE) object, objectVar);
+		} else if(object instanceof CollaborationReference){
+			value = handleCollaboration((CollaborationReference) object, objectVar);
+			roleRuntimeValue = value;
 		}
 		if(status == null){
 			status = new RefactoringStatus(IRefactoringStatus.OK);
 		}
 		return status;
 	}
+
+	private EObject handleCollaboration(CollaborationReference object,	Variable objectVar) {
+		MultiplicityCollaboration collaboration = object.getCollaboration();
+		EObject interpretationContext = collaboration.getInterpretationContext();
+		Object targetObject = null;
+		ObjectAssignmentCommand connectedCommand = null;
+		if(interpretationContext instanceof Variable){
+			Variable variable = (Variable) interpretationContext;
+			targetObject = context.getObjectForVariable(variable);
+			VariableDeclarationCommand declarationCommand = variable.getContainerCommand();
+			if(declarationCommand instanceof VariableAssignment){
+				connectedCommand = ((VariableAssignment) declarationCommand).getAssignment();
+			}
+		} else if(interpretationContext instanceof Role) {
+			throw new UnsupportedOperationException("implement this case");
+		}
+		if(targetObject instanceof EObject){
+			EObject root = (EObject) targetObject;
+			Role sourceRole = collaboration.getSource();
+			Role targetRole = collaboration.getTarget();
+			assignedRole = targetRole;
+			ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(sourceRole);
+			CollaborationMapping collaborationMapping = concreteMapping.getCollaborationMappingForCollaboration(collaboration);
+			List<ReferenceMetaClassPair> pairs = collaborationMapping.getReferenceMetaClassPair();
+			List<EObject> resolvedObjects = getEObjectWithRoleFromPath(targetRole, root, pairs);
+			if(resolvedObjects.size() == 1){
+				return resolvedObjects.get(0);
+			}
+			@SuppressWarnings("unchecked")
+			IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
+			if(valueProvider == null){
+				EClass clazz = mapping.getEClassForRole(assignedRole);
+				valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
+				interpreter.registerValueProviderForCommand(command, valueProvider);
+				if(connectedCommand != null){
+					interpreter.registerValueProviderForCommand(connectedCommand, valueProvider);
+				}
+			}
+			EObject value = valueProvider.provideValue(interpreter, resolvedObjects);
+			context.addEObjectForVariable(objectVar, value);
+			if(valueProvider.getReturnCode() == Dialog.CANCEL){
+				status = new RefactoringStatus(IRefactoringStatus.CANCEL);
+			}
+			return value;
+		} else {
+			throw new UnsupportedOperationException("implement this case");
+		}
+	}
+	
+//	private List<EObject> resolveCollaboration(EObject root, List<ReferenceMetaClassPair> pairs, Role filter) {
+//		if (pairs == null) {
+//			return null;
+//		} else {
+//			if (pairs.size() == 1) {
+//				List<EObject> containments = new LinkedList<EObject>();
+//				Object children = root.eGet(pairs.get(0).getReference(), true);
+//				if (children instanceof EObject) {
+//					containments.add((EObject) children);
+//				} else if (children instanceof List<?>) {
+//					containments.addAll((List<EObject>) children);
+//				}
+//				return RoleUtil.filterObjectsByRoles(containments, mapping, filter);
+//			} else {
+//				List<ReferenceMetaClassPair> reducedPairs = new LinkedList<ReferenceMetaClassPair>();
+//				for (int i = 1; i < pairs.size(); i++) {
+//					reducedPairs.add(pairs.get(i));
+//				}
+//				ReferenceMetaClassPair pair = pairs.get(0);
+//				Object newRoot = root.eGet(pair.getReference());
+//				if (newRoot instanceof EObject) {
+//					return resolveCollaboration((EObject) newRoot, reducedPairs, filter);
+//				} else if (newRoot instanceof List<?>) {
+//					List<EObject> newRoots = (List<EObject>) newRoot;
+//					List<EObject> objectCollection = new LinkedList<EObject>();
+//					for (EObject eObject : newRoots) {
+//						objectCollection.addAll(resolveCollaboration(eObject, reducedPairs, filter));
+//					}
+//					return objectCollection;
+////					throw new UnsupportedOperationException(
+////							"implement this case - but this shouldn't happen because here only one EObject should be returned");
+//				}
+//			}
+//		}
+//		return null;
+//	}
 
 	private void handleFILTER(RoleReference object, Variable objectVar) {
 		Role role = object.getRole();

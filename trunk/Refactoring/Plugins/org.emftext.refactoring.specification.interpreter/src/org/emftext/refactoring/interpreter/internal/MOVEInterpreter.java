@@ -60,6 +60,8 @@ public class MOVEInterpreter {
 			if(sourceRole.getModifier().contains(RoleModifier.INPUT)){
 				sourceObjects = selection;
 			}
+		} else {
+			throw new UnsupportedOperationException("implement me");
 		}
 		sourceObjects = handleMoveModifier(sourceObjects, object.getMoveModifier());
 		
