@@ -10,8 +10,10 @@
       <rolemapping
             rolemapping_resource="rolemappings/renameOption.rolemapping">
       </rolemapping>
+      <!--
       <rolemapping
             rolemapping_resource="rolemappings/moveXloosely.rolemapping">
       </rolemapping>
+      -->
    </extension>
 </plugin>
