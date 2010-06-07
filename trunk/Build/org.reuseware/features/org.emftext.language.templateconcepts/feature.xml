@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.emftext.language.template_concepts"
+      id="org.emftext.language.templateconcepts"
       label="Template Concepts Metamodel and Interpreter"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">

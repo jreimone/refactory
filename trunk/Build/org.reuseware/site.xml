@@ -83,10 +83,10 @@
       <category name="JaMoPP Applications"/>
    </feature>
    
-   <feature url="features/org.emftext.language.primitive_types_0.5.1.v200911130906.jar" id="org.emftext.language.primitive_types" version="0.5.1.v200911130906">
+   <feature url="features/org.emftext.language.primitivetypes_0.5.1.v200911130906.jar" id="org.emftext.language.primitivetypes" version="0.5.1.v200911130906">
       <category name="Language Components"/>
    </feature>
-   <feature url="features/org.emftext.language.template_concepts_0.5.1.v200911130906.jar" id="org.emftext.language.template_concepts" version="0.5.1.v200911130906">
+   <feature url="features/org.emftext.language.templateconcepts_0.5.1.v200911130906.jar" id="org.emftext.language.templateconcepts" version="0.5.1.v200911130906">
       <category name="Language Components"/>
    </feature>
    

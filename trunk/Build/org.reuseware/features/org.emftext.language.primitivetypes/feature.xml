@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.emftext.language.primitive_types"
+      id="org.emftext.language.primitivetypes"
       label="Primitive Types Core Metamodel"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
