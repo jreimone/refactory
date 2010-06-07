@@ -172,10 +172,10 @@
    </feature>
    <!-- TODO add rolecore (once it is ready) -->
    <!-- TODO add simple_c (once it is ready) -->
-   <feature url="features/org.emftext.language.simple_gui_0.1.2.v200911130906.jar" id="org.emftext.language.simple_gui" version="0.1.2.v200911130906">
+   <feature url="features/org.emftext.language.simplegui_0.1.2.v200911130906.jar" id="org.emftext.language.simplegui" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
-   <feature url="features/org.emftext.language.simple_math_0.1.2.v200911130906.jar" id="org.emftext.language.simple_math" version="0.1.2.v200911130906">
+   <feature url="features/org.emftext.language.simplemath_0.1.2.v200911130906.jar" id="org.emftext.language.simplemath" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
    <feature url="features/org.emftext.language.statemachine_0.1.2.v200911130906.jar" id="org.emftext.language.statemachine" version="0.1.2.v200911130906">
