@@ -2,6 +2,6 @@ How to install the BPMN modeler including its metamodel:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * grab your update url from http://www.eclipse.org/stp/download.php
-* in the intall dialog only select the "BPMN Project Feature" if you just need this
+* in the install dialog only select the "BPMN Project Feature" if you just need this
 * restart Eclipse
 * create new BPMN model
