@@ -5,7 +5,7 @@
    </feature>
 
    <description>
-      Update site for EMFText, JaMoPP, and Reuseware.
+      Update site for EMFText, JaMoPP, Refactory and Reuseware.
    </description>
    <feature url="features/org.reuseware.coconut_0.9.1.v200911130906.jar" id="org.reuseware.coconut" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
@@ -198,6 +198,12 @@
       <category name="EMFText Languages"/>
    </feature>
    <!-- TODO add xml (?) -->
+
+
+	<!-- Refactory Features -->
+	<feature url="features/org.emftext.refactoring.sdk_0.0.0.v0.jar" id="org.emftext.refactoring.sdk" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
      
    <category-def name="Reuseware Composition Framework" label="Reuseware Composition Framework">
       <description>
@@ -242,6 +248,11 @@
    <category-def name="EMFText Languages" label="EMFText Languages">
       <description>
          A set of example languages specified with EMFText.
+      </description>
+   </category-def>
+   <category-def name="Refactory" label="Refactory">
+      <description>
+         Refactoring Support for EMF Models.
       </description>
    </category-def>
 </site>

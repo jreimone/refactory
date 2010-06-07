@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.emftext.language.javaproperties"
+      label="EMFText Syntax: Java Property Files"
+      version="0.0.0"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description>
+      Java Property Files.
+   </description>
+
+   <copyright>
+      Copyright (C) 2008-2009 Software Technology Group, Dresden University
+of Technology, Germany
+   </copyright>
+
+   <license>
+ Copyright (c) 2006-2010 
+ Software Technology Group, Dresden University of Technology
+ 
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0 
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+ 
+ Contributors:
+   Software Technology Group - TU Dresden, Germany 
+      - initial API and implementation
+   </license>
+
+   
+      
+   
+
+   <plugin
+         id="org.emftext.language.java_properties"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.language.java_properties.resource.properties"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.language.java_properties.resource.properties.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+</feature>
