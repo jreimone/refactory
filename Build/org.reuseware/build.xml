@@ -108,6 +108,9 @@
 	<target name="dist-emftext" depends="dist-set-up,build-emftext,build-emftext-language-components,build-emftext-languages,dist-tear-down">
 	</target>
 	
+	<target name="dist-jamopp" depends="dist-set-up,build-jamopp,dist-tear-down">
+	</target>
+	
 	<target name="dist-refactory" depends="dist-set-up,build-refactory,dist-tear-down">
 	</target>
 	
@@ -322,7 +325,7 @@
 			<buildplugin name="EMFText OCL Validation Support" package="org.emftext.util.ocl" version="${emftext.version}"/>	
 		-->
 		
-		<zip basedir="dist" destfile="dist/emf-text-language-components-${emftext.components.version}.v${DSTAMP}${TSTAMP}.zip" 
+		<zip basedir="dist" destfile="dist/emftext-language-components-${emftext.components.version}.v${DSTAMP}${TSTAMP}.zip" 
 			includes="COPYING,
 			          plugins/org.emftext.language.templateconcepts*,
 			          features/org.emftext.language.templateconcepts_*,
@@ -591,24 +594,24 @@
 		<buildfeature                                             package="org.emftext.language.secprop"                          version="0.2.0"/>
 			
 		<!-- TODO Simple C 
-		<buildplugin name="Simple C Metamodel"  package="org.emftext.language.simple_c" version="0.1.2"/>
-		<buildplugin name="Simple C Textsyntax" package="org.emftext.language.simple_c.resource.c" version="0.1.2"/>
-		<buildfeature package="org.emftext.language.simple_c" version="0.1.2"/>
+		<buildplugin name="Simple C Metamodel"  package="org.emftext.language.simplec" version="0.1.2"/>
+		<buildplugin name="Simple C Textsyntax" package="org.emftext.language.simplec.resource.c" version="0.1.2"/>
+		<buildfeature package="org.emftext.language.simplec" version="0.1.2"/>
 		-->
 		
 		<!-- Simple GUI -->
-		<buildplugin name="Simple GUI Metamodel"  package="org.emftext.language.simple_gui"                       version="0.2.0"/>
-		<buildplugin name="Simple GUI Textsyntax" package="org.emftext.language.simple_gui.resource.simplegui"    version="0.2.0"/>
-		<buildplugin name="Simple GUI Editor"     package="org.emftext.language.simple_gui.resource.simplegui.ui" version="0.2.0"/>
-		<buildfeature                             package="org.emftext.language.simple_gui"                       version="0.2.0"/>
+		<buildplugin name="Simple GUI Metamodel"  package="org.emftext.language.simplegui"                       version="0.2.0"/>
+		<buildplugin name="Simple GUI Textsyntax" package="org.emftext.language.simplegui.resource.simplegui"    version="0.2.0"/>
+		<buildplugin name="Simple GUI Editor"     package="org.emftext.language.simplegui.resource.simplegui.ui" version="0.2.0"/>
+		<buildfeature                             package="org.emftext.language.simplegui"                       version="0.2.0"/>
 		
 		<!-- Simple Math -->
-		<buildplugin name="Simple Math Metamodel"      package="org.emftext.language.simple_math"                version="0.2.0"/>
-		<buildplugin name="Simple Math (Edit Support)" package="org.emftext.language.simple_math.edit"           version="0.2.0"/>
-		<buildplugin name="Simple Math Interpreter"    package="org.emftext.language.simple_math.interpreter"    version="0.2.0"/>
-		<buildplugin name="Simple Math Textsyntax"     package="org.emftext.language.simple_math.resource.sm"    version="0.2.0"/>
-		<buildplugin name="Simple Math Editor"         package="org.emftext.language.simple_math.resource.sm.ui" version="0.2.0"/>
-		<buildfeature                                  package="org.emftext.language.simple_math"                version="0.2.0"/>
+		<buildplugin name="Simple Math Metamodel"      package="org.emftext.language.simplemath"                version="0.2.0"/>
+		<buildplugin name="Simple Math (Edit Support)" package="org.emftext.language.simplemath.edit"           version="0.2.0"/>
+		<buildplugin name="Simple Math Interpreter"    package="org.emftext.language.simplemath.interpreter"    version="0.2.0"/>
+		<buildplugin name="Simple Math Textsyntax"     package="org.emftext.language.simplemath.resource.sm"    version="0.2.0"/>
+		<buildplugin name="Simple Math Editor"         package="org.emftext.language.simplemath.resource.sm.ui" version="0.2.0"/>
+		<buildfeature                                  package="org.emftext.language.simplemath"                version="0.2.0"/>
 		
 		<!-- Statemachine -->
 		<buildplugin name="UML Statemachine Textsyntax Specification" package="org.emftext.language.statemachine"                          version="0.2.0"/>
@@ -656,7 +659,7 @@
 		<buildfeature                                                package="org.emftext.language.valueflow"                       version="0.6.0"/>
 			
 			
-		<zip basedir="dist" destfile="dist/emf-text-syntax-zoo-${emftext.zoo.version}.v${DSTAMP}${TSTAMP}.zip" 
+		<zip basedir="dist" destfile="dist/emftext-syntax-zoo-${emftext.zoo.version}.v${DSTAMP}${TSTAMP}.zip" 
 			includes="COPYING,
 			          plugins/org.emftext.language.*,
 			          features/org.emftext.language.*,
@@ -728,6 +731,41 @@
 
 		<buildplugin name="Refactory Index Connection - Sokan Connector" package="org.emftext.refactoring.indexconnector.sokan" version="${refactory.version}"/>
 		<buildfeature                                                    package="org.emftext.refactoring.indexconnector.sokan" version="${refactory.version}"/>
+
+		<!-- Concrete Refactorings -->
+		<buildplugin name="Refactorings for EMF models" package="org.eclipse.emf.ecore.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.eclipse.emf.ecore.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for BPMN models" package="org.eclipse.stp.bpmn.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.eclipse.stp.bpmn.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for UML2 models" package="org.eclipse.uml2.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.eclipse.uml2.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for the Forms GUI" package="org.emftext.language.forms.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.emftext.language.forms.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for the Office GUI" package="org.emftext.language.office.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.emftext.language.office.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for OWL" package="org.emftext.language.owl.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.emftext.language.owl.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for Role Models" package="org.emftext.language.refactoring.roles.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.emftext.language.refactoring.roles.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for the Sandwich GUI" package="org.emftext.language.sandwich.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.emftext.language.sandwich.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for Text Adventures" package="org.emftext.language.textadventure.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.emftext.language.textadventure.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for Role Mappings" package="org.emftext.refactoring.rolemappings" version="${refactory.version}"/>
+		<buildfeature                         package="org.emftext.refactoring.rolemappings" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for EMFText CS specifications" package="org.emftext.sdk.concretesyntax.refactoring" version="${refactory.version}"/>
+		<buildfeature                         package="org.emftext.sdk.concretesyntax.refactoring" version="${refactory.version}"/>
+		
 		
 		<zip basedir="dist" destfile="dist/refactory-${refactory.version}.v${DSTAMP}${TSTAMP}.zip"
 			includes="COPYING, 

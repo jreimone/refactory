@@ -201,7 +201,70 @@
 
 
 	<!-- Refactory Features -->
+	<feature url="features/org.emftext.refactoring.runtime_0.0.0.v0.jar" id="org.emftext.refactoring.runtime" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
 	<feature url="features/org.emftext.refactoring.sdk_0.0.0.v0.jar" id="org.emftext.refactoring.sdk" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.eclipse.gmf.refactoring.editorconnector_0.0.0.v0.jar" id="org.eclipse.gmf.refactoring.editorconnector" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.eclipse.xtext.refactoring.editorconnector_0.0.0.v0.jar" id="org.eclipse.xtext.refactoring.editorconnector" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.refactoring.editorconnector_0.0.0.v0.jar" id="org.emftext.refactoring.editorconnector" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.refactoring.indexconnector.sokan_0.0.0.v0.jar" id="org.emftext.refactoring.indexconnector.sokan" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.eclipse.emf.ecore.refactoring_0.0.0.v0.jar" id="org.eclipse.emf.ecore.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.eclipse.stp.bpmn.refactoring_0.0.0.v0.jar" id="org.eclipse.stp.bpmn.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.eclipse.uml2.refactoring_0.0.0.v0.jar" id="org.eclipse.uml2.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.language.forms.refactoring_0.0.0.v0.jar" id="org.emftext.language.forms.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.language.office.refactoring_0.0.0.v0.jar" id="org.emftext.language.office.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.language.owl.refactoring_0.0.0.v0.jar" id="org.emftext.language.owl.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.language.refactoring.roles.refactoring_0.0.0.v0.jar" id="org.emftext.language.refactoring.roles.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.language.sandwich.refactoring_0.0.0.v0.jar" id="org.emftext.language.sandwich.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.language.textadventure.refactoring_0.0.0.v0.jar" id="org.emftext.language.textadventure.refactoring" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.refactoring.rolemappings_0.0.0.v0.jar" id="org.emftext.refactoring.rolemappings" version="0.0.0.v0">
+		<category name="Refactory"/>
+	</feature>
+
+	<feature url="features/org.emftext.sdk.concretesyntax.refactoring_0.0.0.v0.jar" id="org.emftext.sdk.concretesyntax.refactoring" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
      
