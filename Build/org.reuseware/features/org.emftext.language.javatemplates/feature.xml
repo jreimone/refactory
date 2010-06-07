@@ -34,25 +34,32 @@ of Technology, Germany
 
    <requires>  
       <import feature="org.emftext.language.java"/>
-      <import feature="org.emftext.language.template_concepts"/>
+      <import feature="org.emftext.language.templateconcepts"/>
    </requires>
 
    <plugin
-         id="org.emftext.language.java_templates"
+         id="org.emftext.language.javatemplates"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.java_templates.resource"
+         id="org.emftext.language.javatemplates.resource"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
          
    <plugin
-         id="org.emftext.language.java_templates.resource.java_template"
+         id="org.emftext.language.javatemplates.resource.jtemplate"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.language.javatemplates.resource.jtemplate.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
