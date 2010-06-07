@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.emftext.refactoring.sdk"
-      label="Refactory SDK"
+      id="org.eclipse.gmf.refactoring.editorconnector"
+      label="Refactory GMF Editor Connector"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://emftext.org">
-      Refactory SDK: A role-based generic refactoring tool for EMF models.
+      Refactory GMF Editor Connector: Enables refactorings in GMF editors.
    </description>
 
    <copyright>
@@ -42,10 +42,5 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
 		<import feature="org.emftext.refactoring.runtime"/>
 	</requires>
 
-	<plugin id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-	<plugin id="org.emftext.language.refactoring.roles.diagram" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-	<plugin id="org.emftext.language.refactoring.roles.edit" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-	<plugin id="org.emftext.language.refactoring.roles.resource.rolestext.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-	<plugin id="org.emftext.language.refactoring.specification.resource.refspec.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-	<plugin id="org.emftext.refactoring.statistic" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.eclipse.gmf.refactoring.editorconnector" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 </feature>

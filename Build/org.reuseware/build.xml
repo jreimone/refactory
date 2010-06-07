@@ -675,29 +675,24 @@
 		
 		<property name="refactory.version" value="0.8.0"/>
 
+		<!-- Refactory Runtime -->
+		<!-- TODO jreimann: check that the assignment of plug-ins to runtime and SDK is correct.
+		     Changes must be propagated to the feature.xml files too -->
 		<buildplugin name="Refactory Role Mapping Metamodel" package="org.emftext.language.refactoring.rolemapping" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Mapping Post Processor" package="org.emftext.language.refactoring.rolemapping.postprocessing" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Mapping Text Syntax" package="org.emftext.language.refactoring.rolemapping.resource.rolemapping" version="${refactory.version}"/>
-		<buildplugin name="Refactory Role Mapping Text Editor" package="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Model Metamodel" package="org.emftext.language.refactoring.roles" version="${refactory.version}"/>
-		<buildplugin name="Refactory Role Model Diagram Editor" package="org.emftext.language.refactoring.roles.diagram" version="${refactory.version}"/>
-		<buildplugin name="Refactory Role Model Edit Support" package="org.emftext.language.refactoring.roles.edit" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Model Post Processor" package="org.emftext.language.refactoring.roles.postprocessing" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Model Text Syntax" package="org.emftext.language.refactoring.roles.resource.rolestext" version="${refactory.version}"/>
-		<buildplugin name="Refactory Role Model Text Editor" package="org.emftext.language.refactoring.roles.resource.rolestext.ui" version="${refactory.version}"/>
 		<buildplugin name="Refactory Specification Metamodel" package="org.emftext.language.refactoring.specification" version="${refactory.version}"/>
 		<buildplugin name="Refactory Specification Text Syntax" package="org.emftext.language.refactoring.specification.resource.refspec" version="${refactory.version}"/>
-		<buildplugin name="Refactory Specification Text Editor" package="org.emftext.language.refactoring.specification.resource.refspec.ui" version="${refactory.version}"/>
 		<buildplugin name="Refactory Graph Library" package="org.emftext.refactoring.graph" version="${refactory.version}"/>
 		<buildplugin name="Refactory Index Connection" package="org.emftext.refactoring.indexconnector" version="${refactory.version}"/>
-		<buildplugin name="Refactory Index Connection - Sokan Connector" package="org.emftext.refactoring.indexconnector.sokan" version="${refactory.version}"/>
 		<buildplugin name="Refactory Specification Registry" package="org.emftext.refactoring.registry.refactoringspecification" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Mapping Registry " package="org.emftext.refactoring.registry.rolemapping" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Model Registry" package="org.emftext.refactoring.registry.rolemodel" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Model Contraint Checking" package="org.emftext.refactoring.roleconstraintchecker" version="${refactory.version}"/>
 		<buildplugin name="Refactory Specification Interpreter" package="org.emftext.refactoring.specification.interpreter" version="${refactory.version}"/>
-		<buildplugin name="Refactory Additional UI Support" package="org.emftext.refactoring.statistic" version="${refactory.version}"/>
-		<buildplugin name="Refactory UI" package="org.emftext.refactoring.ui" version="${refactory.version}"/>
 		<buildplugin name="Refactory Utility Library" package="org.emftext.refactoring.util" version="${refactory.version}"/>
 
 		<buildplugin name="Refactory Generic Refactoring ExtractSubX" package="org.emftext.refactoring.extractSubX" version="${refactory.version}"/>
@@ -709,15 +704,37 @@
 		<buildplugin name="Refactory Generic Refactoring RemoveEmptyContainedX" package="org.emftext.refactoring.removeEmptyContainedX" version="${refactory.version}"/>
 		<buildplugin name="Refactory Generic Refactoring RemoveUnusedContainedX" package="org.emftext.refactoring.removeUnusedContainedX" version="${refactory.version}"/>
 		<buildplugin name="Refactory Generic Refactoring RenameX" package="org.emftext.refactoring.renameX" version="${refactory.version}"/>
+
+		<buildplugin name="Refactory UI" package="org.emftext.refactoring.ui" version="${refactory.version}"/>
+		<buildfeature                    package="org.emftext.refactoring.runtime" version="${refactory.version}"/>
+
+		<!-- Refactory SDK -->
+		<buildplugin name="Refactory Role Mapping Text Editor" package="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui" version="${refactory.version}"/>
+		<buildplugin name="Refactory Role Model Diagram Editor" package="org.emftext.language.refactoring.roles.diagram" version="${refactory.version}"/>
+		<buildplugin name="Refactory Role Model Edit Support" package="org.emftext.language.refactoring.roles.edit" version="${refactory.version}"/>
+		<buildplugin name="Refactory Role Model Text Editor" package="org.emftext.language.refactoring.roles.resource.rolestext.ui" version="${refactory.version}"/>
+		<buildplugin name="Refactory Specification Text Editor" package="org.emftext.language.refactoring.specification.resource.refspec.ui" version="${refactory.version}"/>
+		<buildplugin name="Refactory Additional UI Support" package="org.emftext.refactoring.statistic" version="${refactory.version}"/>
+		<buildfeature                    package="org.emftext.refactoring.sdk" version="${refactory.version}"/>
 		
-		<buildfeature                 package="org.emftext.refactoring.sdk" version="${refactory.version}"/>
+		<buildplugin name="Refactory GMF Editor Connector" package="org.eclipse.gmf.refactoring.editorconnector" version="${refactory.version}"/>
+		<buildfeature                                      package="org.eclipse.gmf.refactoring.editorconnector" version="${refactory.version}"/>
+		
+		<buildplugin name="Refactory xText Editor Connector" package="org.eclipse.xtext.refactoring.editorconnector" version="${refactory.version}"/>
+		<buildfeature                                        package="org.eclipse.xtext.refactoring.editorconnector" version="${refactory.version}"/>
+		
+		<buildplugin name="Refactory EMFText Editor Connector" package="org.emftext.refactoring.editorconnector" version="${refactory.version}"/>
+		<buildfeature                                          package="org.emftext.refactoring.editorconnector" version="${refactory.version}"/>
+
+		<buildplugin name="Refactory Index Connection - Sokan Connector" package="org.emftext.refactoring.indexconnector.sokan" version="${refactory.version}"/>
+		<buildfeature                                                    package="org.emftext.refactoring.indexconnector.sokan" version="${refactory.version}"/>
 		
 		<zip basedir="dist" destfile="dist/refactory-${refactory.version}.v${DSTAMP}${TSTAMP}.zip"
 			includes="COPYING, 
-	                 plugins/org.emftext.refactoring*, 
-                     features/org.emftext.refactoring*,
-			         plugins/org.emftext.language.refactoring*, 
-		             features/org.emftext.language.refactoring*"/>
+            		plugins/org.emftext.refactoring*, 
+            		features/org.emftext.refactoring*,
+			        plugins/org.emftext.language.refactoring*, 
+		            features/org.emftext.language.refactoring*"/>
 	</target>
 
 	<!-- Downloads the current update site to the local disc -->
