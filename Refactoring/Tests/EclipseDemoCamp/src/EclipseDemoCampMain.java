@@ -15,7 +15,7 @@ public class EclipseDemoCampMain {
 		for (String presentation : presentations) {
 			System.out.println(presentation);
 		}
-		System.out.println("Relax and get enterntained");
+		System.out.println("Relax and get entertained");
 	}
 
 }
