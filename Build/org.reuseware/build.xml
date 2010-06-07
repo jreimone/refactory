@@ -327,7 +327,7 @@
 			          plugins/org.emftext.language.templateconcepts*,
 			          features/org.emftext.language.templateconcepts_*,
                       plugins/org.emftext.language.primitivetypes*,
-                      features/org.emftext.language.primitive_types_*"/>
+                      features/org.emftext.language.primitivetypes*"/>
 	</target>
 		
 	<target name="build-jamopp">
@@ -348,8 +348,8 @@
 			          plugins/org.emftext.language.java.resource.java_*, 
 			          plugins/org.emftext.language.java.resource_*,
 		              features/org.emftext.language.java_*,
-					  plugins/org.emftext.commons.antlr3_1_1_*,          
-                      features/org.emftext.commons.antlr3_1_1_*"/>
+					  plugins/org.emftext.commons.antlr*,          
+                      features/org.emftext.commons.antlr*"/>
 	</target>
 	
 	<target name="build-emftext-languages">
@@ -481,12 +481,10 @@
 		
 		<property name="javaproperties.version" value="0.2.0"/>
 		<!-- Java Properties -->
-		<buildplugin name="Java Properties Extension (Metamodel)"  package="org.emftext.language.java.properties"                      version="${javaproperties.version}"/>
-		<buildplugin name="Java Properties Extension (Edit)"       package="org.emftext.language.java.properties.edit"                 version="${javaproperties.version}"/>
-		<buildplugin name="Java Properties Extension (Resource)"   package="org.emftext.language.java.properties.resource"             version="${javaproperties.version}"/>
-		<buildplugin name="Java Properties Extension (Textsyntax)" package="org.emftext.language.java.properties.resource.propjava"    version="${javaproperties.version}"/>
-		<buildplugin name="Java Properties Extension (Editor)"     package="org.emftext.language.java.properties.resource.propjava.ui" version="${javaproperties.version}"/>
-		<buildfeature                                              package="org.emftext.language.java.properties"                      version="${javaproperties.version}"/>
+		<buildplugin name="Java Property Files (Metamodel)"  package="org.emftext.language.java_properties"                        version="${javaproperties.version}"/>
+		<buildplugin name="Java Property Files (Textsyntax)" package="org.emftext.language.java_properties.resource.properties"    version="${javaproperties.version}"/>
+		<buildplugin name="Java Property Files (Editor)"     package="org.emftext.language.java_properties.resource.properties.ui" version="${javaproperties.version}"/>
+		<buildfeature                                        package="org.emftext.language.javaproperties"                        version="${javaproperties.version}"/>
 		
 		<property name="reusejava.version" value="0.2.0"/>
 		<!-- Reuse Java -->
@@ -507,12 +505,12 @@
 		
 		<property name="propjava.version" value="0.2.0"/>
 		<!-- PropJava -->
-		<buildplugin  name="Properties Java Metamodel"      package="org.emftext.language.java.propjava"                      version="${propjava.version}" />
-		<buildplugin  name="Properties Java Metamodel Edit" package="org.emftext.language.java.propjava.edit"                 version="${propjava.version}" />
-		<buildplugin  name="Properties Java Resource"       package="org.emftext.language.java.propjava.resource"             version="${propjava.version}" />
-		<buildplugin  name="Properties Java Textsyntax"     package="org.emftext.language.java.propjava.resource.propjava"    version="${propjava.version}" />
-		<buildplugin  name="Properties Java Editor"         package="org.emftext.language.java.propjava.resource.propjava.ui" version="${propjava.version}" />
-		<buildfeature                                       package="org.emftext.language.java.propjava"                      version="${propjava.version}" />
+		<buildplugin  name="Properties Java Metamodel"      package="org.emftext.language.java.properties"                      version="${propjava.version}" />
+		<buildplugin  name="Properties Java Metamodel Edit" package="org.emftext.language.java.properties.edit"                 version="${propjava.version}" />
+		<buildplugin  name="Properties Java Resource"       package="org.emftext.language.java.properties.resource"             version="${propjava.version}" />
+		<buildplugin  name="Properties Java Textsyntax"     package="org.emftext.language.java.properties.resource.propjava"    version="${propjava.version}" />
+		<buildplugin  name="Properties Java Editor"         package="org.emftext.language.java.properties.resource.propjava.ui" version="${propjava.version}" />
+		<buildfeature                                       package="org.emftext.language.java.properties"                      version="${propjava.version}" />
 		
 		<!-- TODO: Models -->
 		
@@ -662,11 +660,11 @@
 			includes="COPYING,
 			          plugins/org.emftext.language.*,
 			          features/org.emftext.language.*,
-			          plugins/org.emftext.commons.antlr3_1_1_*,          
-                      features/org.emftext.commons.antlr3_1_1_*"
+			          plugins/org.emftext.commons.antlr*,
+                      features/org.emftext.commons.antlr*"
 			
-			excludes="plugins/org.emftext.language.template_concepts.*,
-	                  features/org.emftext.language.template_concepts_*,
+			excludes="plugins/org.emftext.language.templateconcepts*,
+	                  features/org.emftext.language.templateconcepts*,
 			          plugins/org.emftext.language.java_*, 
 			          plugins/org.emftext.language.java.resource.java_*, 
 			          plugins/org.emftext.language.java.resource_*,
@@ -714,7 +712,7 @@
 		
 		<buildfeature                 package="org.emftext.refactoring.sdk" version="${refactory.version}"/>
 		
-		<zip basedir="dist" destfile="dist/refactory-${emftext.version}.v${DSTAMP}${TSTAMP}.zip"
+		<zip basedir="dist" destfile="dist/refactory-${refactory.version}.v${DSTAMP}${TSTAMP}.zip"
 			includes="COPYING, 
 	                 plugins/org.emftext.refactoring*, 
                      features/org.emftext.refactoring*,
