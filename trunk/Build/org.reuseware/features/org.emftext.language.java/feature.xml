@@ -60,6 +60,13 @@ of Technology, Germany
          unpack="false"/>
 
    <plugin
+         id="org.emftext.language.java.resource.java.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.emftext.language.java.resource"
          download-size="0"
          install-size="0"

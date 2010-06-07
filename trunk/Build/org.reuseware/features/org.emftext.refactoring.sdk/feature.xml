@@ -40,6 +40,7 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
 		<import feature="org.eclipse.emf.workspace"/>
 		<import feature="org.emftext.access"/>
 		<import feature="org.emftext.refactoring.runtime"/>
+		<import feature="org.eclipse.gmf"/>
 	</requires>
 
 	<plugin id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
