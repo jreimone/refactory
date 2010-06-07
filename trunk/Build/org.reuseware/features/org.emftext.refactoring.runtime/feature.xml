@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.emftext.refactoring.runtime"
+      label="Refactory Runtime"
+      version="0.0.0"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://emftext.org">
+      Refactory Runtime: A role-based generic refactoring tool for EMF models.
+   </description>
+
+   <copyright>
+Copyright (c) 2006-2010 Software Technology Group, Dresden University
+of Technology, Germany
+   </copyright>
+
+   <license>
+ Copyright (c) 2006-2010 
+ Software Technology Group, Dresden University of Technology
+ 
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0 
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+ 
+ Contributors:
+   Software Technology Group - TU Dresden, Germany 
+      - initial API and implementation
+      
+
+ANTLR2, ANTLR3 (www.antlr.org) and STRINGTEMPLATE (www.stringtemplate.org) 
+are redistributed with this tool. 
+Copyright (c) 2003-2007, Terence Parr. All rights reserved.
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.platform"/>
+      <import feature="org.eclipse.sdk" />
+      <import feature="org.eclipse.emf"/>
+      <import feature="org.eclipse.emf.workspace"/>
+      <import feature="org.emftext.access"/>
+   </requires>
+
+	<plugin id="org.emftext.language.refactoring.rolemapping" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.language.refactoring.rolemapping.postprocessing" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.language.refactoring.rolemapping.resource.rolemapping" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.language.refactoring.roles" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.language.refactoring.roles.postprocessing" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.language.refactoring.roles.resource.rolestext" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.language.refactoring.specification" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.language.refactoring.specification.resource.refspec" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.graph" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.indexconnector" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.registry.refactoringspecification" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.registry.rolemapping" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.registry.rolemodel" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.roleconstraintchecker" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.specification.interpreter" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.util" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	
+	<plugin id="org.emftext.refactoring.extractSubX" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.extractX" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.extractXwithReferenceClass" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.introduceReferenceClass" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.moveX" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.moveXloosely" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.removeEmptyContainedX" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.removeUnusedContainedX" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.renameX" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+
+	<plugin id="org.emftext.refactoring.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+
+</feature>
