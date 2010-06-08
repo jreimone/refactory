@@ -6,6 +6,10 @@
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/extractCompositeState.rolemapping">
+            <mappingIcon
+                  icon="icons/extract_composite_state.gif"
+                  mapping_name="ExtractCompositeState">
+            </mappingIcon>
       </rolemapping>
       <rolemapping
             rolemapping_resource="rolemappings/pullUpProperty.rolemapping">
@@ -21,6 +25,10 @@
       </rolemapping>
       <rolemapping
             rolemapping_resource="rolemappings/renameElement.rolemapping">
+            <mappingIcon
+                  icon="icons/rename_element.gif"
+                  mapping_name="RenameElement">
+            </mappingIcon>
       </rolemapping>
       <rolemapping
             rolemapping_resource="rolemappings/extractSubPackage.rolemapping">
