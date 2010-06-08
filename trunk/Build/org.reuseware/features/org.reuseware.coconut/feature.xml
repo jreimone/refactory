@@ -45,6 +45,7 @@ Copyright (C) Fujaba Development Group. All rights reserved.
 	<import feature="org.eclipse.emf.workspace"/> 
 	<import feature="org.eclipse.emf.ocl"/>
 	<import feature="org.eclipse.gmf"/>
+	<import feature="org.reuseware.lacome"/>
    </requires>
 
    <plugin
