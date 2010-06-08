@@ -99,7 +99,7 @@
 
 	</macrodef>
 
-	<target name="dist" depends="dist-clean,dist-set-up,build-emftext,build-emftext-language-components,build-jamopp,build-emftext-languages,build-reuseware,build-reuseware-applications,dist-tear-down">
+	<target name="dist" depends="dist-clean,dist-set-up,dist-emftext,dist-jamopp,dist-reuseware,dist-refactory,dist-sokan,dist-tear-down">
 	</target>
 		
 	<target name="dist-reuseware" depends="dist-clean,dist-set-up,build-reuseware,build-reuseware-applications,dist-tear-down">
@@ -112,6 +112,9 @@
 	</target>
 	
 	<target name="dist-refactory" depends="dist-set-up,build-refactory,dist-tear-down">
+	</target>
+	
+	<target name="dist-sokan" depends="dist-set-up,build-sokan,dist-tear-down">
 	</target>
 	
 	<target name="dist-set-up">
@@ -773,6 +776,24 @@
             		features/org.emftext.refactoring*,
 			        plugins/org.emftext.language.refactoring*, 
 		            features/org.emftext.language.refactoring*"/>
+	</target>
+
+	<!-- Sokan -->
+	<target name="build-sokan">
+		
+		<property name="sokan.version" value="0.8.0"/>
+
+		<buildplugin name="Sokan" package="org.reuseware.sokan"            version="${sokan.version}"/>
+		<buildplugin name="Sokan" package="org.reuseware.sokan.index"      version="${sokan.version}"/>
+		<buildplugin name="Sokan" package="org.reuseware.sokan.index.eg"   version="${sokan.version}"/>
+		<buildplugin name="Sokan" package="org.reuseware.sokan.index.solr" version="${sokan.version}"/>
+		<buildplugin name="Sokan" package="org.reuseware.sokan.resource"   version="${sokan.version}"/>
+		<buildfeature             package="org.reuseware.sokan"            version="${sokan.version}"/>
+		
+		<zip basedir="dist" destfile="dist/sokan-${sokan.version}.v${DSTAMP}${TSTAMP}.zip"
+			includes="COPYING, 
+            		plugins/org.reuseware.sokan*, 
+            		features/org.reuseware.sokan*"/>
 	</target>
 
 	<!-- Downloads the current update site to the local disc -->
