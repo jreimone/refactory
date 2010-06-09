@@ -1,0 +1,5 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/conference>  	
+
+RenameConferenceElement maps <RenameX> {
+	Nameable := NamedElement (name -> name);
+}
