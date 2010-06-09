@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Conference Refactorings
+Bundle-SymbolicName: org.emftext.language.conference.refactoring;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.emftext.language.conference.refactoring.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy

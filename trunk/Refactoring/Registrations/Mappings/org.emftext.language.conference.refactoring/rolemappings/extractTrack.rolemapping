@@ -1,0 +1,15 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/conference> 
+
+ExtractTrack maps <ExtractXwithReferenceClass> { 
+	Extract := Slot;
+	OrigContainer := Track{
+		extracts := slots;
+	};
+	NewContainer := Track (newName -> name){
+		moved := slots;
+	};
+	ContainerContainer := Conference{
+		source := elements:Track;
+		target := elements:Track;
+	};
+}
