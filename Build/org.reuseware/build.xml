@@ -738,37 +738,40 @@
 
 		<!-- Concrete Refactorings -->
 		<buildplugin name="Refactorings for EMF models" package="org.eclipse.emf.ecore.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.eclipse.emf.ecore.refactoring" version="${refactory.version}"/>
+		<buildfeature                                   package="org.eclipse.emf.ecore.refactoring" version="${refactory.version}"/>
 
 		<buildplugin name="Refactorings for BPMN models" package="org.eclipse.stp.bpmn.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.eclipse.stp.bpmn.refactoring" version="${refactory.version}"/>
+		<buildfeature                                    package="org.eclipse.stp.bpmn.refactoring" version="${refactory.version}"/>
 
 		<buildplugin name="Refactorings for UML2 models" package="org.eclipse.uml2.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.eclipse.uml2.refactoring" version="${refactory.version}"/>
+		<buildfeature                                    package="org.eclipse.uml2.refactoring" version="${refactory.version}"/>
 
-		<buildplugin name="Refactorings for the Forms GUI" package="org.emftext.language.forms.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.emftext.language.forms.refactoring" version="${refactory.version}"/>
+		<buildplugin name="Refactorings for the Forms DSL" package="org.emftext.language.forms.refactoring" version="${refactory.version}"/>
+		<buildfeature                                      package="org.emftext.language.forms.refactoring" version="${refactory.version}"/>
 
-		<buildplugin name="Refactorings for the Office GUI" package="org.emftext.language.office.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.emftext.language.office.refactoring" version="${refactory.version}"/>
+		<buildplugin name="Refactorings for the Conference DSL" package="org.emftext.language.conference.refactoring" version="${refactory.version}"/>
+		<buildfeature                                           package="org.emftext.language.conference.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for the Office DSL" package="org.emftext.language.office.refactoring" version="${refactory.version}"/>
+		<buildfeature                                       package="org.emftext.language.office.refactoring" version="${refactory.version}"/>
 
 		<buildplugin name="Refactorings for OWL" package="org.emftext.language.owl.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.emftext.language.owl.refactoring" version="${refactory.version}"/>
+		<buildfeature                            package="org.emftext.language.owl.refactoring" version="${refactory.version}"/>
+
+		<buildplugin name="Refactorings for Pl/0" package="org.emftext.language.pl0.refactoring" version="${refactory.version}"/>
+		<buildfeature                             package="org.emftext.language.pl0.refactoring" version="${refactory.version}"/>
 
 		<buildplugin name="Refactorings for Role Models" package="org.emftext.language.refactoring.roles.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.emftext.language.refactoring.roles.refactoring" version="${refactory.version}"/>
+		<buildfeature                                    package="org.emftext.language.refactoring.roles.refactoring" version="${refactory.version}"/>
 
-		<buildplugin name="Refactorings for the Sandwich GUI" package="org.emftext.language.sandwich.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.emftext.language.sandwich.refactoring" version="${refactory.version}"/>
+		<buildplugin name="Refactorings for the Sandwich DSL" package="org.emftext.language.sandwich.refactoring" version="${refactory.version}"/>
+		<buildfeature                                         package="org.emftext.language.sandwich.refactoring" version="${refactory.version}"/>
 
 		<buildplugin name="Refactorings for Text Adventures" package="org.emftext.language.textadventure.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.emftext.language.textadventure.refactoring" version="${refactory.version}"/>
-
-		<buildplugin name="Refactorings for Role Mappings" package="org.emftext.refactoring.rolemappings" version="${refactory.version}"/>
-		<buildfeature                         package="org.emftext.refactoring.rolemappings" version="${refactory.version}"/>
+		<buildfeature                                        package="org.emftext.language.textadventure.refactoring" version="${refactory.version}"/>
 
 		<buildplugin name="Refactorings for EMFText CS specifications" package="org.emftext.sdk.concretesyntax.refactoring" version="${refactory.version}"/>
-		<buildfeature                         package="org.emftext.sdk.concretesyntax.refactoring" version="${refactory.version}"/>
+		<buildfeature                                                  package="org.emftext.sdk.concretesyntax.refactoring" version="${refactory.version}"/>
 		
 		
 		<zip basedir="dist" destfile="dist/refactory-${refactory.version}.v${DSTAMP}${TSTAMP}.zip"
