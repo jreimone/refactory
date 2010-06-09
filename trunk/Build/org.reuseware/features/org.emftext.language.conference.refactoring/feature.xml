@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.emftext.refactoring.rolemappings"
-      label="Refactorings for Role Mappings"
+      id="org.emftext.language.conference.refactoring"
+      label="Refactorings for the Conference language"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://emftext.org">
-      Refactorings for Role Mappings.
+      Refactorings for the Conference DSL: Provides a set of refactorings for Conference models.
    </description>
 
    <copyright>
@@ -33,11 +33,11 @@ of Technology, Germany
       <import feature="org.eclipse.emf"/>
       <import feature="org.eclipse.emf.workspace"/>
       <import feature="org.emftext.refactoring.runtime"/>
-      <import feature="org.emftext.language.refactoring.sdk"/>
+      <import feature="org.emftext.language.conference"/>
    </requires>
 
    <plugin
-         id="org.emftext.refactoring.rolemappings"
+         id="org.emftext.language.conference.refactoring"
          download-size="0"
          install-size="0"
          version="0.0.0"
