@@ -18,10 +18,8 @@
                   mapping_name="RenameOption">
             </mappingIcon>
       </rolemapping>
-      <!--
       <rolemapping
             rolemapping_resource="rolemappings/moveXloosely.rolemapping">
       </rolemapping>
-      -->
    </extension>
 </plugin>
