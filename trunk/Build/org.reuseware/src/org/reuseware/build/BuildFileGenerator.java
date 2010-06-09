@@ -251,6 +251,10 @@ public class BuildFileGenerator {
 					"org.emftext.language.pl0.resource.pl0", "pl0", 
 					false),
 			new Language(
+					"org.emftext.language.pl0.extended", "pl0extended",
+					"org.emftext.language.pl0extended.resource.pl0extended", "pl0extended", 
+					false),
+			new Language(
 					"org.emftext.language.plugin", "plugin",
 					"org.emftext.language.plugin.resource.topf", "plugin", 
 					false, ".text"),
@@ -283,16 +287,16 @@ public class BuildFileGenerator {
 					"org.emftext.language.secprop.resource.text.secprop", "text.secprop", 
 					true, ".text", ".text"),
 			new Language(
-					"org.emftext.language.simple_c", "c",
-					"org.emftext.language.simple_c.resource.c", "c", 
+					"org.emftext.language.simplec", "c",
+					"org.emftext.language.simplec.resource.c", "c", 
 					false),
 			new Language(
-					"org.emftext.language.simple_gui", "simple_gui",
-					"org.emftext.language.simple_gui.resource.simplegui", "simple_gui", 
+					"org.emftext.language.simplegui", "simplegui",
+					"org.emftext.language.simplegui.resource.simplegui", "simplegui", 
 					false),
 			new Language(
-					"org.emftext.language.simple_math", "simple_math",
-					"org.emftext.language.simple_math.resource.sm", "simple_math", 
+					"org.emftext.language.simplemath", "simplemath",
+					"org.emftext.language.simplemath.resource.sm", "simplemath", 
 					false),
 			new OntMoPPLanguage(
 					"org.emftext.language.sparql", "sparql",
