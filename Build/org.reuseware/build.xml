@@ -449,6 +449,7 @@
 		
 		<!-- Forms -->
 		<buildplugin  name="Forms Metamodel"                            package="org.emftext.language.forms"                   version="${forms.version}" />
+		<buildplugin  name="Forms Edit Support"                         package="org.emftext.language.forms.edit"              version="${forms.version}" />
 		<buildplugin  name="HTML and PDF Generators for Forms language" package="org.emftext.language.forms.generator"         version="${forms.version}" />
 		<buildplugin  name="Forms Textsyntax"                           package="org.emftext.language.forms.resource.forms"    version="${forms.version}" />
 		<buildplugin  name="Forms Editor"                               package="org.emftext.language.forms.resource.forms.ui" version="${forms.version}" />

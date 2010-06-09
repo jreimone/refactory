@@ -5,7 +5,7 @@
    </feature>
 
    <description>
-      Update site for EMFText, JaMoPP, Refactory and Reuseware.
+      Update site for EMFText, JaMoPP, Refactory, Sokan and Reuseware.
    </description>
    <feature url="features/org.reuseware.coconut_0.9.1.v200911130906.jar" id="org.reuseware.coconut" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
@@ -268,6 +268,10 @@
 		<category name="Refactory"/>
 	</feature>
      
+	<feature url="features/org.reuseware.sokan_0.0.0.v0.jar" id="org.reuseware.sokan" version="0.0.0.v0">
+		<category name="Sokan"/>
+	</feature>
+     
    <category-def name="Reuseware Composition Framework" label="Reuseware Composition Framework">
       <description>
          The Reuseware Composition Framework and accompanying tools.
@@ -288,9 +292,9 @@
          Tool for defining textual syntax for EMF models.
       </description>
    </category-def>
-   <category-def name="EMFText Deprecated" label="EMFText 1.1 Runtime (DEPRECATED)">
+   <category-def name="EMFText Deprecated" label="EMFText Deprecated Features">
       <description>
-         Runtime for languages generated with EMFText 1.1.
+         Old features kept for compatibility reasons. Should not be add to fresh installations.
       </description>
    </category-def>
    <category-def name="JaMoPP" label="JaMoPP (Java Model Parser and Printer)">
@@ -316,6 +320,11 @@
    <category-def name="Refactory" label="Refactory">
       <description>
          Refactoring Support for EMF Models.
+      </description>
+   </category-def>
+   <category-def name="Sokan" label="Sokan - Workspace Indexing Framework">
+      <description>
+         A framework to index files in the Eclipse workspace.
       </description>
    </category-def>
 </site>
