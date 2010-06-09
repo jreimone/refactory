@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            defaultIcon="icons/defaultTest.png"
+            rolemapping_resource="rolemappings/extractProcedure.rolemapping">
+      </rolemapping>
+      <rolemapping
+            defaultIcon="icons/defaultTest.png"
+            rolemapping_resource="rolemappings/pullUpConstant.rolemapping">
+      </rolemapping>
+      <rolemapping
+            defaultIcon="icons/defaultTest.png"
+            rolemapping_resource="rolemappings/renamings.rolemapping">
+         <mappingIcon
+               icon="icons/test.png"
+               mapping_name="RenameProgram">
+         </mappingIcon>
+      </rolemapping>
+   </extension>
+
+</plugin>
