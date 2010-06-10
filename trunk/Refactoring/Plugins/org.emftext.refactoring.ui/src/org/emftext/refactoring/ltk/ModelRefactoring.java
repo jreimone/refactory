@@ -9,6 +9,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.compare.ui.EMFCompareUIPlugin;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -23,6 +24,7 @@ import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IValueProvider;
+import org.osgi.framework.Version;
 
 /**
  * @author Jan Reimann
@@ -30,6 +32,8 @@ import org.emftext.refactoring.interpreter.IValueProvider;
  */
 public class ModelRefactoring extends Refactoring {
 
+	private static final String MIN_COMPARE_VERSION = "1.2.0";
+	
 	private IRefactorer refactorer;
 	private String name;
 	private TransactionalEditingDomain diagramTransactionalEditingDomain;
@@ -71,9 +75,6 @@ public class ModelRefactoring extends Refactoring {
 		if(refactorer.getFakeRefactoredModel() == null){
 			flags |= RefactoringWizard.NO_PREVIEW_PAGE;
 		} 
-//		else {
-//			flags |= RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
-//		}
 		int attributeValueProvderCount = 0;
 		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValuesToProvide();
 		for (IValueProvider<?, ?> valueProvider : valueProviders) {
@@ -85,7 +86,7 @@ public class ModelRefactoring extends Refactoring {
 			flags |= RefactoringWizard.NO_PREVIEW_PAGE;			
 			flags |= RefactoringWizard.NONE;
 		} else {
-			flags |= RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
+			flags |= stateDependentFromEMFCompareVersion();
 			if(attributeValueProvderCount == valueProviders.size() || valueProviders.size() == 1){
 				flags |= RefactoringWizard.DIALOG_BASED_USER_INTERFACE;
 			} else {
@@ -93,6 +94,20 @@ public class ModelRefactoring extends Refactoring {
 			}
 		}		
 		return flags;
+	}
+	
+	private int stateDependentFromEMFCompareVersion(){
+		// this is needed because of the following bug:
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=316429
+		// the provided patch can't be integrated into the official Helios release,
+		// but in the first service release
+		// until then the version check must be done
+		Version currentCompareVersion= EMFCompareUIPlugin.getDefault().getBundle().getVersion();
+		Version minCompareVersion = Version.parseVersion(MIN_COMPARE_VERSION);
+		if(minCompareVersion.compareTo(currentCompareVersion) > 0) {
+			return RefactoringWizard.NO_PREVIEW_PAGE;
+		}
+		return RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
 	}
 
 	@Override
