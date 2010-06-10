@@ -49,5 +49,5 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
 	<plugin id="org.emftext.language.refactoring.roles.edit" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 	<plugin id="org.emftext.language.refactoring.roles.resource.rolestext.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 	<plugin id="org.emftext.language.refactoring.specification.resource.refspec.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-	<plugin id="org.emftext.refactoring.statistic" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.ui.additions" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 </feature>

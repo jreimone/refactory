@@ -721,7 +721,7 @@
 		<buildplugin name="Refactory Role Model Edit Support" package="org.emftext.language.refactoring.roles.edit" version="${refactory.version}"/>
 		<buildplugin name="Refactory Role Model Text Editor" package="org.emftext.language.refactoring.roles.resource.rolestext.ui" version="${refactory.version}"/>
 		<buildplugin name="Refactory Specification Text Editor" package="org.emftext.language.refactoring.specification.resource.refspec.ui" version="${refactory.version}"/>
-		<buildplugin name="Refactory Additional UI Support" package="org.emftext.refactoring.statistic" version="${refactory.version}"/>
+		<buildplugin name="Refactory Additional UI Support" package="org.emftext.refactoring.ui.additions" version="${refactory.version}"/>
 		<buildfeature                    package="org.emftext.refactoring.sdk" version="${refactory.version}"/>
 		
 		<buildplugin name="Refactory GMF Editor Connector" package="org.eclipse.gmf.refactoring.editorconnector" version="${refactory.version}"/>
