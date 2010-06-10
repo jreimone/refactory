@@ -4,10 +4,10 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="mappings/ExtractSubProcess.rolemapping">
+            rolemapping_resource="rolemappings/ExtractSubProcess.rolemapping">
       </rolemapping>
       <rolemapping
-            rolemapping_resource="mappings/RenameIdentifiable.rolemapping">
+            rolemapping_resource="rolemappings/RenameIdentifiable.rolemapping">
       </rolemapping>
    </extension>
    <extension
