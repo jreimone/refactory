@@ -4,7 +4,7 @@
    <extension
          point="org.emftext.refactoring.rolemodel">
       <rolemodel
-            rolemodel_resource="roles/ExtractSubX.rolestext">
+            rolemodel_resource="rolemodel/ExtractSubX.rolestext">
       </rolemodel>
    </extension>
    <extension
