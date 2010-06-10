@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.MatchOptions;
@@ -23,7 +24,10 @@ import org.eclipse.emf.compare.match.metamodel.MatchModel;
 import org.eclipse.emf.compare.ui.IModelCompareInputProvider;
 import org.eclipse.emf.compare.ui.ModelCompareInput;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -237,10 +241,13 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		DiffModel diff = null;
 		try {
 			EObject originalModel = refactorer.getOriginalModel();
+			createTemporaryResource(originalModel);
 			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
+			createTemporaryResource(fakeRefactoredModel);
 			IMatchEngine engine = new RefactoringMatchEngine();
 			if (originalModel != null && fakeRefactoredModel != null) {
-				match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
+//				match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
+				match = engine.modelMatch(originalModel, fakeRefactoredModel, options);
 			}
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
@@ -254,6 +261,17 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			return compareInput;
 		}
 		return null;
+	}
+
+	private Resource createTemporaryResource(EObject model) {
+		Resource resource = model.eResource();
+		if(resource == null){
+			String id = EcoreUtil.getIdentification(model);
+			URI uri = URI.createURI(id);
+			resource = new ResourceImpl(uri);
+			resource.getContents().add(model);
+		}
+		return resource;
 	}
 
 }

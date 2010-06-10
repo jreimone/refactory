@@ -86,7 +86,8 @@ public class ModelRefactoring extends Refactoring {
 			flags |= RefactoringWizard.NO_PREVIEW_PAGE;			
 			flags |= RefactoringWizard.NONE;
 		} else {
-			flags |= stateDependentFromEMFCompareVersion();
+//			flags |= stateDependentFromEMFCompareVersion();
+			flags |= RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
 			if(attributeValueProvderCount == valueProviders.size() || valueProviders.size() == 1){
 				flags |= RefactoringWizard.DIALOG_BASED_USER_INTERFACE;
 			} else {
