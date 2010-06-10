@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Refactoring Statistic Plugin
-Bundle-SymbolicName: org.emftext.refactoring.statistic;singleton:=true
+Bundle-SymbolicName: org.emftext.refactoring.ui.additions;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Activator: org.emftext.refactoring.statistic.Activator
 Bundle-Vendor: Jan Reimann
