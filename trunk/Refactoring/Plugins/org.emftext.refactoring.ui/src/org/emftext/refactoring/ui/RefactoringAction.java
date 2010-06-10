@@ -71,23 +71,25 @@ public class RefactoringAction extends Action {
 			int result = op.run(shell, getText());
 			//			System.out.println("RefactoringAction.ltkRun() " + original);
 			//			System.out.println("RefactoringAction.ltkRun() " + refactorer);
-			if (result == IDialogConstants.OK_ID) {
-				IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
-				interpreter = refactoring.getRefactorer().getCurrentInterpreter();;
-				Map<Role, List<URI>> roleRuntimeInstanceURIs = interpreter.getRoleRuntimeInstanceURIs();
-				Map<Role, List<EObject>> resolvedRoleRuntimeInstances = postSaveRuntimeInstanceHandling(roleRuntimeInstanceURIs, refactorer.getResource().getResourceSet());
-				RefactoringSpecification refSpec = interpreter.getRefactoringSpecification();
-				List<EObject> objectsToSelect = new LinkedList<EObject>();
-				for (Role role : resolvedRoleRuntimeInstances.keySet()) {
-					List<Instruction> roleInstructions = refSpec.getInstructionsReferencingRole(role);
-					for (Instruction instruction : roleInstructions) {
-						if (instruction instanceof CREATE || instruction instanceof MOVE) {
-							List<EObject> instance = resolvedRoleRuntimeInstances.get(role);
-							objectsToSelect.addAll(instance);
+			if(connector != null){
+				if (result == IDialogConstants.OK_ID) {
+					IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
+					interpreter = refactoring.getRefactorer().getCurrentInterpreter();;
+					Map<Role, List<URI>> roleRuntimeInstanceURIs = interpreter.getRoleRuntimeInstanceURIs();
+					Map<Role, List<EObject>> resolvedRoleRuntimeInstances = postSaveRuntimeInstanceHandling(roleRuntimeInstanceURIs, refactorer.getResource().getResourceSet());
+					RefactoringSpecification refSpec = interpreter.getRefactoringSpecification();
+					List<EObject> objectsToSelect = new LinkedList<EObject>();
+					for (Role role : resolvedRoleRuntimeInstances.keySet()) {
+						List<Instruction> roleInstructions = refSpec.getInstructionsReferencingRole(role);
+						for (Instruction instruction : roleInstructions) {
+							if (instruction instanceof CREATE || instruction instanceof MOVE) {
+								List<EObject> instance = resolvedRoleRuntimeInstances.get(role);
+								objectsToSelect.addAll(instance);
+							}
 						}
 					}
+					connector.selectEObjects(objectsToSelect);
 				}
-				connector.selectEObjects(objectsToSelect);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
