@@ -132,17 +132,19 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				String nsUri = element.getAttribute(IPostProcessorExtensionPoint.ATTRIBUTE_NS_URI);
 				String mappingName = element.getAttribute(IPostProcessorExtensionPoint.ATTRIBUTE_MAPPING);
 				Map<String, Mapping> roleMappings = getRoleMappingsForUri(nsUri);
-				Mapping mapping = null;
-				for (String registeredName : roleMappings.keySet()) {
-					if(registeredName.equals(mappingName.trim())){
-						mapping = roleMappings.get(registeredName);
-						break;
+				if(roleMappings != null){
+					Mapping mapping = null;
+					for (String registeredName : roleMappings.keySet()) {
+						if(registeredName.equals(mappingName.trim())){
+							mapping = roleMappings.get(registeredName);
+							break;
+						}
 					}
+					if(mapping == null){
+						continue;
+					}
+					registerPostProcessor(mapping, postprocessor);
 				}
-				if(mapping == null){
-					continue;
-				}
-				registerPostProcessor(mapping, postprocessor);
 			} catch (CoreException e) {
 				RegistryUtil.log("Could not instantiate postprocessor", IStatus.ERROR, e);
 			}
