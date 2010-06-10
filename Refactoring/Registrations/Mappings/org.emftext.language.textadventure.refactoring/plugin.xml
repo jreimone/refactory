@@ -4,13 +4,13 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="mappings/ExtractRoom.rolemapping">
+            rolemapping_resource="rolemappings/ExtractRoom.rolemapping">
       </rolemapping>
       <rolemapping
-            rolemapping_resource="mappings/renameRoom.rolemapping">
+            rolemapping_resource="rolemappings/renameRoom.rolemapping">
       </rolemapping>
       <rolemapping
-            rolemapping_resource="mappings/renameDoor.rolemapping">
+            rolemapping_resource="rolemappings/renameDoor.rolemapping">
       </rolemapping>
    </extension>
 

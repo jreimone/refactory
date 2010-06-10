@@ -4,7 +4,7 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="mappings/renameIngredient.rolemapping">
+            rolemapping_resource="rolemappings/renameIngredient.rolemapping">
       </rolemapping>
    </extension>
 
