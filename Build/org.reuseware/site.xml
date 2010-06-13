@@ -44,7 +44,7 @@
    </feature>
    
    <feature url="features/org.oasisopen.names.tc.opendocument_0.0.0.v0.jar" id="org.oasisopen.names.tc.opendocument" version="0.0.0.v0">
-      <category name="LaCoMe - Layout Composition Framework"/>
+      <category name="Reuseware Applications"/>
    </feature>
    
    <feature url="features/org.emftext.commons.antlr3_1_1_3.1.1.v200911130906.jar" id="org.emftext.commons.antlr3_1_1" version="3.1.1.v200911130906">
