@@ -77,6 +77,8 @@ public class BuildFileGenerator {
 	}
 	
 	public class OntMoPPLanguage extends Language {
+		
+		private static final String ONTOMOPP_DIR = "${ontomopp.plugins.dir}";
 
 		public OntMoPPLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode) {
 			this(pluginID, ecoreFile, resourcePluginID, csFile, generateEditCode, null);
@@ -92,7 +94,19 @@ public class BuildFileGenerator {
 		}
 	}
 	
+	public class RefactoryLanguage extends Language {
+		
+		private static final String REFACTORY_DIR = "${refactory.plugins.dir}";
+
+		public RefactoryLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode) {
+			super(pluginID, ecoreFile, resourcePluginID, csFile, generateEditCode);
+			setDir(REFACTORY_DIR);
+		}
+	}
+	
 	public class TestLanguage extends Language {
+		
+		private static final String TEST_DIR = "${test.plugins.dir}";
 
 		public TestLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode) {
 			super(pluginID, ecoreFile, resourcePluginID, csFile, generateEditCode);
@@ -101,9 +115,6 @@ public class BuildFileGenerator {
 	}
 
 	private static final String NEW_LINE = System.getProperty("line.separator");
-	
-	public String ONTOMOPP_DIR = "${ontomopp.plugins.dir}";
-	public String TEST_DIR = "${test.plugins.dir}";
 	
 	public Language[] languages = new Language[] {
 			new Language(
@@ -251,10 +262,6 @@ public class BuildFileGenerator {
 					"org.emftext.language.pl0.resource.pl0", "pl0", 
 					false),
 			new Language(
-					"org.emftext.language.pl0.extended", "pl0extended",
-					"org.emftext.language.pl0extended.resource.pl0extended", "pl0extended", 
-					false),
-			new Language(
 					"org.emftext.language.plugin", "plugin",
 					"org.emftext.language.plugin.resource.topf", "plugin", 
 					false, ".text"),
@@ -349,6 +356,19 @@ public class BuildFileGenerator {
 			new Language(
 					"org.emftext.language.xml", "xml",
 					"org.emftext.language.xml.resource.xml", "xml", 
+					false),
+					
+			new RefactoryLanguage(
+					"org.emftext.language.refactoring.rolemapping", "rolemapping", 
+					"org.emftext.language.refactoring.rolemapping.resource.rolemapping", "rolemapping", 
+					false),
+			new RefactoryLanguage(
+					"org.emftext.language.refactoring.roles", "roles", 
+					"org.emftext.language.refactoring.roles.resource.rolestext", "roles", 
+					false),
+			new RefactoryLanguage(
+					"org.emftext.language.refactoring.specification", "refactoring_specification", 
+					"org.emftext.language.refactoring.specification.resource.refspec", "refactoring_specification", 
 					false),
 					
 			new TestLanguage(

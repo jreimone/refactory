@@ -5,6 +5,7 @@
 	<property name="language.plugins.dir" value=".."/>
 	<property name="test.plugins.dir" value=".."/>
 	<property name="ontomopp.plugins.dir" value=".."/>
+	<property name="refactory.plugins.dir" value=".."/>
 	
 		<!-- Define the EMF Generate Resource task. To have this task available, the plugin
 	     org.emftext.sdk.ant must be available in the classpath. To ensure this the external tools
@@ -127,10 +128,6 @@
 		<eclipse.refreshLocal depth="infinite" resource="/"/>
 	</target>
 
-	<target name="generate-refactoring-languages-text-resources" depends="generate-refactoring-languages-metamodel-code,generate-refactoring-text-resources" description="Generate the EMF text resource plug-ins for all refactoring languages">
-		<eclipse.refreshLocal depth="infinite" resource="/"/>
-	</target>
-
 	<target name="generate-emftext-languages-metamodel-code">
 		
 		<emftext-register-ecore-resource-factory 
@@ -142,15 +139,6 @@
 		</parallel>
 	</target>
 
-	<target name="generate-refactoring-languages-metamodel-code">
-		
-		<parallel threadsperprocessor="4">
-			<generate-metamodel-code plugin="org.emftext.language.refactoring.roles" model="roles" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.refactoring.rolemapping" model="rolemapping" generateEditProject="false" />
-			<generate-metamodel-code plugin="org.emftext.language.refactoring.specification" model="refactoring_specification" generateEditProject="false" />
-		</parallel>
-	</target>
-
 	<!-- A task for generating text resource plug-ins for all EMFText languages -->
 	<target name="generate-emftext-text-resources">
 		
@@ -159,14 +147,6 @@
 			type="text"/>
 		
 <!--GENERATE_TEXT_RESOURCE_TASKS-->
-	</target>
-	
-	<!-- A task for generating text resource plug-ins for all refactoring languages -->
-	<target name="generate-refactoring-text-resources">
-		
-		<generate-text-resource plugin="org.emftext.language.refactoring.roles" syntax="roles" resourcePlugin="org.emftext.language.refactoring.roles.resource.rolestext" />
-		<generate-text-resource plugin="org.emftext.language.refactoring.rolemapping" syntax="rolemapping" resourcePlugin="org.emftext.language.refactoring.rolemapping.resource.rolemapping" />
-		<generate-text-resource plugin="org.emftext.language.refactoring.specification" syntax="refactoring_specification" resourcePlugin="org.emftext.language.refactoring.specification.resource.refspec" />
 	</target>
 	
 	<target name="clean">
