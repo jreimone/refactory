@@ -262,6 +262,10 @@ public class BuildFileGenerator {
 					"org.emftext.language.pl0.resource.pl0", "pl0", 
 					false),
 			new Language(
+					"org.emftext.language.pl0.extended", "pl0extended",
+					"org.emftext.language.pl0extended.resource.pl0extended", "pl0extended", 
+					false),
+			new Language(
 					"org.emftext.language.plugin", "plugin",
 					"org.emftext.language.plugin.resource.topf", "plugin", 
 					false, ".text"),
