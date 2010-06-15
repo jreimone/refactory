@@ -165,6 +165,8 @@
 			<pathelement path="../org.emftext.language.pl0/bin"/>
 			<pathelement path="../org.emftext.language.pl0.test/bin"/>
 			<pathelement path="../org.emftext.language.pl0.resource.pl0/bin"/>
+			<pathelement path="../org.emftext.language.pl0.extended/bin"/>
+			<pathelement path="../org.emftext.language.pl0extended.resource.pl0extended/bin"/>
 			<pathelement path="../org.emftext.language.quickuml/bin"/>
 			<pathelement path="../org.emftext.language.quickuml.resource.quml/bin"/>
 			<pathelement path="../org.emftext.language.rails/bin"/>
