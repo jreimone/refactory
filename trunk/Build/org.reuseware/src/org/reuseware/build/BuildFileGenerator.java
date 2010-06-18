@@ -503,15 +503,19 @@ public class BuildFileGenerator {
 				dir = "${language.plugins.dir}";
 			}
 			if (language.getEcoreFile() != null) {
-				result.append("\t\t<!-- Remove meta model code for " + language.getPluginID() + " -->");
+				result.append("\t\t<!-- Remove meta model code for " + plugin + " -->");
 				result.append(NEW_LINE);
 				result.append("\t\t<delete dir=\"" + dir + "/" + plugin + "/src-gen\" excludes=\".svn\"/>");	
 				result.append(NEW_LINE);
+				result.append("\t\t<eclipse.refreshLocal depth=\"infinite\" resource=\"" + plugin + "/src-gen\"/>");
+				result.append(NEW_LINE);
 			}
 			if (language.getResourcePluginID() != null) {
-				result.append("\t\t<!-- Remove text resource code for " + language.getResourcePluginID() + " -->");
+				result.append("\t\t<!-- Remove text resource code for " + resourcePlugin + " -->");
 				result.append(NEW_LINE);
 				result.append("\t\t<delete dir=\"" + dir + "/" + resourcePlugin + "/src-gen\" includes=\"**/*\" excludes=\".svn\"/>");
+				result.append(NEW_LINE);
+				result.append("\t\t<eclipse.refreshLocal depth=\"infinite\" resource=\"" + resourcePlugin + "/src-gen\"/>");
 				result.append(NEW_LINE);
 			}
 		}
