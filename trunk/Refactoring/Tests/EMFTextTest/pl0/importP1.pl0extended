@@ -1,6 +1,8 @@
 PROGRAM importP1 
 
-import <platform:/resource/EMFTextTest/pl0/p1.pl0>
+// import
+
+import "platform:/resource/EMFTextTest/pl0/p1.pl0"
 
 var x,y;
 
