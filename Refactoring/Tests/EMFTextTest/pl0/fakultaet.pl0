@@ -1,22 +1,22 @@
-program faculty
+PROGRAM faculty
 
-const c=10;
+CONST c=10;
 
-var n,f;
+VAR n,f, importVar;
 
-procedure fakultaet;
-	var i;
+PROCEDURE faculty;
+	VAR i;
 BEGIN
 	f := 1;
 	i := 2;
-	while i <= n do
-	begin 
+	WHILE i <= n DO
+	BEGIN 
 		f := f*i;
 		i := i+1
-	end 
-end;
+	END 
+END;
 
-begin
+BEGIN
 	n := c;
-	call fakultaet
-end.
+	CALL faculty
+END.

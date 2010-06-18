@@ -1,6 +1,6 @@
 PROGRAM importP12 
 
-import </EMFTextTest/pl0/p1.pl0> 
+import "/EMFTextTest/pl0/p1.pl0" 
 
 VAR 
 	x , y ; 
