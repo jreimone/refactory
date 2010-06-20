@@ -23,24 +23,24 @@ import org.emftext.language.refactoring.refactoring_specification.SourceContext;
 public abstract class SourceContextImpl extends ContextImpl implements SourceContext
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected SourceContextImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RefactoringSpecificationPackage.Literals.SOURCE_CONTEXT;
-	}
+    return RefactoringSpecificationPackage.Literals.SOURCE_CONTEXT;
+  }
 
 } //SourceContextImpl

@@ -23,24 +23,24 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public class PATHImpl extends FromOperatorImpl implements PATH
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected PATHImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RefactoringSpecificationPackage.Literals.PATH;
-	}
+    return RefactoringSpecificationPackage.Literals.PATH;
+  }
 
 } //PATHImpl
