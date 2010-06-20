@@ -25,24 +25,24 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public abstract class FromOperatorImpl extends EObjectImpl implements FromOperator
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected FromOperatorImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RefactoringSpecificationPackage.Literals.FROM_OPERATOR;
-	}
+    return RefactoringSpecificationPackage.Literals.FROM_OPERATOR;
+  }
 
 } //FromOperatorImpl

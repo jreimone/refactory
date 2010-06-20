@@ -31,146 +31,150 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public class ConcreteIndexImpl extends IndexAssignmentCommandImpl implements ConcreteIndex
 {
   /**
-	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getIndex()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getIndex()
+   * @generated
+   * @ordered
+   */
   protected static final int INDEX_EDEFAULT = 0;
 
   /**
-	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getIndex()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getIndex()
+   * @generated
+   * @ordered
+   */
   protected int index = INDEX_EDEFAULT;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected ConcreteIndexImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RefactoringSpecificationPackage.Literals.CONCRETE_INDEX;
-	}
+    return RefactoringSpecificationPackage.Literals.CONCRETE_INDEX;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public int getIndex()
   {
-		return index;
-	}
+    return index;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setIndex(int newIndex)
   {
-		int oldIndex = index;
-		index = newIndex;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX, oldIndex, index));
-	}
+    int oldIndex = index;
+    index = newIndex;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX, oldIndex, index));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX:
-				return getIndex();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX:
+        return getIndex();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX:
-				setIndex((Integer)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX:
+        setIndex((Integer)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX:
-				setIndex(INDEX_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX:
+        setIndex(INDEX_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX:
-				return index != INDEX_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.CONCRETE_INDEX__INDEX:
+        return index != INDEX_EDEFAULT;
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (index: ");
-		result.append(index);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (index: ");
+    result.append(index);
+    result.append(')');
+    return result.toString();
+  }
 
 } //ConcreteIndexImpl

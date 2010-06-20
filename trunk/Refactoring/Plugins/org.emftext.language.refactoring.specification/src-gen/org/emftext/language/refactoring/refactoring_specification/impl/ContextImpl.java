@@ -25,24 +25,24 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public abstract class ContextImpl extends EObjectImpl implements Context
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected ContextImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RefactoringSpecificationPackage.Literals.CONTEXT;
-	}
+    return RefactoringSpecificationPackage.Literals.CONTEXT;
+  }
 
 } //ContextImpl
