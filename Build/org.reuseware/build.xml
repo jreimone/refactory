@@ -624,11 +624,11 @@
 		<buildfeature                                                 package="org.emftext.language.statemachine"                          version="0.2.0"/>	
 		
 		<!-- SPARQL -->
-		<!-- TODO cwende: set version to 1.0 if SPARQL is ready -->
-		<buildplugin name="SPARQL Textsyntax Specification" package="org.emftext.language.sparql"                    version="0.9.1"/>
-		<buildplugin name="SPARQL Textsyntax"               package="org.emftext.language.sparql.resource.sparql"    version="0.9.1"/>
-		<buildplugin name="SPARQL Editor"                   package="org.emftext.language.sparql.resource.sparql.ui" version="0.9.1"/>
-		<buildfeature                                       package="org.emftext.language.sparql"                    version="0.9.1"/>
+		<property name="sparql.version" value="1.0.0"/>
+		<buildplugin name="SPARQL Textsyntax Specification" package="org.emftext.language.sparql"                    version="${sparql.version}"/>
+		<buildplugin name="SPARQL Textsyntax"               package="org.emftext.language.sparql.resource.sparql"    version="${sparql.version}"/>
+		<buildplugin name="SPARQL Editor"                   package="org.emftext.language.sparql.resource.sparql.ui" version="${sparql.version}"/>
+		<buildfeature                                       package="org.emftext.language.sparql"                    version="${sparql.version}"/>
 		
 		<!-- TODO TCL/TK -->
 		
