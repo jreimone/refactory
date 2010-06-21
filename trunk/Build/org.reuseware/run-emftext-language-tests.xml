@@ -210,10 +210,14 @@
 			<pathelement path="../org.emftext.language.test.bug933.resource.bug933/bin"/>
 			<pathelement path="../org.emftext.language.textadventure/bin"/>
 			<pathelement path="../org.emftext.language.textadventure.resource.tas/bin"/>
+			<pathelement path="../org.emftext.language.theater/bin"/>
+			<pathelement path="../org.emftext.language.theater.resource.theater/bin"/>
 			<pathelement path="../org.emftext.language.threevaluedlogic/bin"/>
 			<pathelement path="../org.emftext.language.threevaluedlogic.interpreter/bin"/>
 			<pathelement path="../org.emftext.language.threevaluedlogic.resource.tvl/bin"/>
 			<pathelement path="../org.emftext.language.threevaluedlogic.test/bin"/>
+			<pathelement path="../org.emftext.language.timedautomata/bin"/>
+			<pathelement path="../org.emftext.language.timedautomata.resource.ta/bin"/>
 			<pathelement path="../org.emftext.language.usecaseinvariant/bin"/>
 			<pathelement path="../org.emftext.language.usecaseinvariant.resource.ucinv/bin"/>
 			<pathelement path="../org.emftext.language.valueflow/bin"/>
@@ -278,7 +282,15 @@
 			<pathelement path="../org.reuseware.coconut.reuseextension.resource.rex/bin"/>
 			<pathelement path="../org.reuseware.coconut.reuseextensionactivator/bin"/>
 			<pathelement path="../org.reuseware.coconut.reuseextensionactivator.resource.rexactivator/bin"/>
-			<pathelement path="../org.reuseware.coconut.store/bin"/>			
+			<pathelement path="../org.reuseware.coconut.store/bin"/>
+			
+			<pathelement path="../org.emftext.language.refactoring.rolemapping/bin"/>
+			<pathelement path="../org.emftext.language.refactoring.rolemapping.resource.rolemapping/bin"/>
+			<pathelement path="../org.emftext.language.refactoring.roles/bin"/>
+			<pathelement path="../org.emftext.language.refactoring.roles.resource.rolestext/bin"/>
+			<pathelement path="../org.emftext.language.refactoring.specification/bin"/>
+			<pathelement path="../org.emftext.language.refactoring.specification.resource.refspec/bin"/>
+			
 			<fileset dir="../org.emftext.language.owl.reasoning/lib/">
 				<include name="**/*.jar"/>
 			</fileset>	
@@ -327,7 +339,8 @@
 		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.language.test">
 			<jvmarg value="-ea" />
 			<jvmarg value="-Xms40m" />
-			<jvmarg value="-Xmx900m" />
+			<jvmarg value="-Xmx1400m" />
+			<jvmarg value="-XX:MaxPermSize=256m" />
 
 			<classpath>
 				<path path="../temp_classpath.jar"/>
