@@ -33,7 +33,7 @@ of Technology, Germany
    
 
    <requires>
-     <import feature="org.emftext.language.primitive_types"/>
+     <import feature="org.emftext.language.primitivetypes"/>
 	 <import feature="org.eclipse.platform"/>
 	 <import feature="org.eclipse.sdk" />
 	 <import feature="org.eclipse.emf"/>
