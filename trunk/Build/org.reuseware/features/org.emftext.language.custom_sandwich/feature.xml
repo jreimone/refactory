@@ -35,8 +35,8 @@ of Technology, Germany
    <requires>
       
       <import feature="org.emftext.language.sandwich"/>
-      <import feature="org.emftext.language.primitive_types"/>
-      <import feature="org.emftext.language.template_concepts"/>
+      <import feature="org.emftext.language.primitivetypes"/>
+      <import feature="org.emftext.language.templateconcepts"/>
    </requires>
 
    <plugin
