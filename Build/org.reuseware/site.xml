@@ -106,7 +106,7 @@
    <feature url="features/org.emftext.language.csv_1.0.0.v200911130906.jar" id="org.emftext.language.csv" version="1.0.0.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
-   <feature url="features/org.emftext.language.custom_sandwich_0.5.1.v200911130906.jar" id="org.emftext.language.custom_sandwich" version="0.5.1.v200911130906">
+   <feature url="features/org.emftext.language.customsandwich_0.5.1.v200911130906.jar" id="org.emftext.language.customsandwich" version="0.5.1.v200911130906">
       <category name="EMFText Languages"/>
    </feature> 
    <feature url="features/org.emftext.language.customer_0.5.1.v200911130906.jar" id="org.emftext.language.customer" version="0.5.1.v200911130906">
