@@ -260,10 +260,6 @@
 		<category name="Refactory"/>
 	</feature>
 
-	<feature url="features/org.emftext.refactoring.rolemappings_0.0.0.v0.jar" id="org.emftext.refactoring.rolemappings" version="0.0.0.v0">
-		<category name="Refactory"/>
-	</feature>
-
 	<feature url="features/org.emftext.sdk.concretesyntax.refactoring_0.0.0.v0.jar" id="org.emftext.sdk.concretesyntax.refactoring" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
