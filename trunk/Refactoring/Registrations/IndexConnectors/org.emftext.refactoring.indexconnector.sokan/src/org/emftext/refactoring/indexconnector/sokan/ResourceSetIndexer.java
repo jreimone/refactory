@@ -58,7 +58,7 @@ public class ResourceSetIndexer implements Indexer {
 			}
 		} catch (Exception e) {
 			// just do nothing
-			System.out.println( artifactURI + " couldn't be indexed because of the following exception: " + e.getMessage());
+//			System.out.println( artifactURI + " couldn't be indexed because of the following exception: " + e.getMessage());
 		}
 	}
 

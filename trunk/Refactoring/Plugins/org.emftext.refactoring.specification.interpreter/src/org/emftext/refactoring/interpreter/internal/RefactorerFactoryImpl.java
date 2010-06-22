@@ -5,12 +5,14 @@ package org.emftext.refactoring.interpreter.internal;
 
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.rolemapping.Mapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.emftext.refactoring.util.RegistryUtil;
 
 /**
  * @author Jan Reimann
@@ -29,7 +31,7 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 		if(roleMapping == null){
 			return null;
 		}
-		System.out.println("created Refactorer for " + resource);
+		RegistryUtil.log("created Refactorer for " + resource, IStatus.INFO);
 		return new Refactorer(resource, roleMapping);
 	}
 }

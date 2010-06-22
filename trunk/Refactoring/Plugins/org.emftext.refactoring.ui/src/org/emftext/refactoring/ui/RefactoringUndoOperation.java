@@ -21,7 +21,6 @@ public class RefactoringUndoOperation implements IUndoableOperation {
 	}
 
 	public void addContext(IUndoContext context) {
-		System.out.println("add context?");
 	}
 
 	public boolean canExecute() {
@@ -74,7 +73,6 @@ public class RefactoringUndoOperation implements IUndoableOperation {
 	}
 
 	public void removeContext(IUndoContext context) {
-		System.out.println("remove context?");
 	}
 
 	public IStatus undo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {

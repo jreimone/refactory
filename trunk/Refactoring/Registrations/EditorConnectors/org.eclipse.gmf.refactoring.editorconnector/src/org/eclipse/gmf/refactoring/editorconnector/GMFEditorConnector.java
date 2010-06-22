@@ -31,7 +31,6 @@ public class GMFEditorConnector implements IEditorConnector {
 				EditPartViewer viewer = ((EditPart) first).getViewer();
 				if(viewer instanceof IDiagramGraphicalViewer){
 					diagramTransactionalEditingDomain = ((IGraphicalEditPart) first).getEditingDomain();
-					System.out.println("found GMF editor " + viewer);
 					return true;
 				}
 			}
@@ -53,14 +52,13 @@ public class GMFEditorConnector implements IEditorConnector {
 			Object model = editPart.getModel();
 			if(model instanceof View){
 				selectedElements.add(((View) model).getElement());
-				System.out.println("found EObject " + editPart + " in GMF editor");
 			}
 		}
 		return selectedElements;
 	}
 
 	public void selectEObjects(List<EObject> objectsToSelect) {
-		System.out.println("GMFEditorConnector.selectEObjects() implement me");
+		// TODO implement selection of graphical refactored elements
 	}
 
 }

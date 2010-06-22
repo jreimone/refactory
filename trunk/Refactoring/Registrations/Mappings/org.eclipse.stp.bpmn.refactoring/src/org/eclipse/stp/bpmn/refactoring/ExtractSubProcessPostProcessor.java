@@ -31,7 +31,7 @@ public class ExtractSubProcessPostProcessor implements IRefactoringPostProcessor
 	}
 
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-		System.out.println("Add additional SequenceEdge for 'Extract SubProcess' in BPMN");
+//		System.out.println("Add additional SequenceEdge for 'Extract SubProcess' in BPMN");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
 			List<EObject> runtimeObjects = roleRuntimeInstanceMap.get(role);
@@ -98,11 +98,11 @@ public class ExtractSubProcessPostProcessor implements IRefactoringPostProcessor
 		handleInternalTransitions(removees);
 		for (SequenceEdge edge : inComposites) {
 			edge.setTarget(newContainer);
-			System.out.println("set '" + newContainer + "' as new target of incoming SequenceEdge");
+//			System.out.println("set '" + newContainer + "' as new target of incoming SequenceEdge");
 		}
 		for (SequenceEdge edge : outComposites) {
 			edge.setSource(newContainer);
-			System.out.println("set '" + newContainer + "' as new source of outgoing SequenceEdge");
+//			System.out.println("set '" + newContainer + "' as new source of outgoing SequenceEdge");
 		}
 		return true;
 	}

@@ -55,7 +55,6 @@ public class ModelChangePreviewer implements IChangePreviewViewer {
 		//		compare.getControl().pack(true);
 		//		compare.getControl().setVisible(true);
 		CompareUI.openCompareDialog(compare);
-		System.out.println(compare);
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -62,14 +63,12 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 	public void createContributionItems(IServiceLocator serviceLocator, IContributionRoot additions) {
 		IWorkbenchPart activePart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
 		if (!(activePart instanceof ISaveablePart)) {
-			System.out.println("Workbench Part " + activePart + " is not a saveable part");
 			return;
 		}
 		IWorkbenchPartSite partSite = activePart.getSite();
 		//		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		ISelectionProvider selectionProvider = partSite.getSelectionProvider();
 		if (selectionProvider == null) {
-			System.out.println(activePart + " doesn't provide selections -> no context menu");
 			return;
 		}
 		ISelection selection = selectionProvider.getSelection();
@@ -111,20 +110,19 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			EcoreUtil.resolveAll(first);
 			Resource resource = first.eResource();
 			if (resource == null || (resource.getErrors() != null && resource.getErrors().size() > 0)) {
-				System.out.println("resource is null or contains the following errors:");
-				List<Resource.Diagnostic> errors = resource.getErrors();
-				for (Resource.Diagnostic diagnostic : errors) {
-					System.out.println(diagnostic.getMessage());
-				}
+//				System.out.println("resource is null or contains the following errors:");
+//				List<Resource.Diagnostic> errors = resource.getErrors();
+//				for (Resource.Diagnostic diagnostic : errors) {
+//					System.out.println(diagnostic.getMessage());
+//				}
 				return;
 			}
-			for (EObject eObject : selectedElements) {
-				System.out.println("Selected: " + eObject);
-			}
+//			for (EObject eObject : selectedElements) {
+//				System.out.println("Selected: " + eObject);
+//			}
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, CONTEXT_MENU_ENTRY_ID);
 
 			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
-			System.out.println("RefactoringMenuContributor.createContributionItems() " + refactorer);
 			if (refactorer != null) {
 				refactorer.setInput(selectedElements);
 				List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
@@ -152,7 +150,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					additions.addContributionItem(rootMenu, null);
 				}
 			} else {
-				System.out.println("no rolemappings registered for " + resource.getContents().get(0).eClass().getEPackage().getNsURI());
+				RegistryUtil.log("no rolemappings registered for " + resource.getContents().get(0).eClass().getEPackage().getNsURI(), IStatus.WARNING);
 			}
 		}
 	}

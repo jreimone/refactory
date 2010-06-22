@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -36,6 +37,7 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
+import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -162,7 +164,7 @@ public class REMOVEInterpreter {
 						EObject referer = setting.getEObject();
 						EStructuralFeature feature = setting.getEStructuralFeature();
 						if (!(container.equals(referer) && containingFeature.equals(feature))) {
-							System.out.println(referer + " referes to " + removal);
+							RegistryUtil.log(referer + " referes to " + removal, IStatus.INFO);
 							onlyContainerReference = false;
 							break;
 						}

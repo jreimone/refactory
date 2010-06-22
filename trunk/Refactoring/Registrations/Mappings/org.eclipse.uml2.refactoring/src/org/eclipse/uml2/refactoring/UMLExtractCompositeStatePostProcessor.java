@@ -29,7 +29,7 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		extract = new LinkedList<State>();
-		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
+//		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
 			List<EObject> runtimeObject = roleRuntimeInstanceMap.get(role);
@@ -82,11 +82,11 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 		handleInternalTransitions(removees);
 		for (Transition transition : inComposites) {
 			transition.setTarget(newContainer);
-			System.out.println("set '" + newContainer + "' as new target of incoming transition");
+//			System.out.println("set '" + newContainer + "' as new target of incoming transition");
 		}
 		for (Transition transition : outComposites) {
 			transition.setSource(newContainer);
-			System.out.println("set '" + newContainer + "' as new source of outgoing transition");
+//			System.out.println("set '" + newContainer + "' as new source of outgoing transition");
 		}
 		return true;
 	}
@@ -126,7 +126,7 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 		Activity activity = UMLFactory.eINSTANCE.createActivity();
 		activity.setName(newContainer.getName() + "Activity");
 		newContainer.setDoActivity(activity);
-		System.out.println("set new doActivity for " + newContainer);
+//		System.out.println("set new doActivity for " + newContainer);
 		return true;
 	}
 }

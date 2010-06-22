@@ -53,7 +53,6 @@ public class RefactoringCompareEditorInput extends CompareEditorInput {
 		MatchModel match = MatchService.doContentMatch(originalModel, fakeRefactoredModel, options);
 		DiffModel diff = DiffService.doDiff(match, false);
 		
-		System.out.println(diff);
 		return diff;
 	}
 
