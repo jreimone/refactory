@@ -158,7 +158,7 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements
 		private RotatableDecoration createTargetDecoration() {
 			PolylineDecoration df = new PolylineDecoration();
 			df.setFill(false);
-			df.setLineWidth(1);
+			df.setLineWidth(2);
 			return df;
 		}
 

@@ -12,7 +12,8 @@
     <figures
         xsi:type="gmfgraph:PolylineDecoration"
         name="RoleAssociationTargetDecoration"
-        fill="false"/>
+        fill="false"
+        lineWidth="2"/>
     <figures
         xsi:type="gmfgraph:PolygonDecoration"
         name="ContainmentSourceDecoration">
