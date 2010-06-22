@@ -69,7 +69,7 @@
 		    	
 		    	<jar destfile="dist/plugins/@{package}_@{version}.v${DSTAMP}${TSTAMP}.jar" manifest="../@{package}/META-INF/MANIFEST.MF">
 		    		<fileset dir="../@{package}/bin"/>		
-		    		<fileset dir="../@{package}" includes="*.xml *.zip about.* LICENSE.TXT messages.properties plugin.properties model/** metamodel/** store/** schema/** icons/** html/** css/** lib/** rolemappings/** mappings/** refspec/** refspecs/** roles/** rolemodel/** rolemodels/**"/>	
+		    		<fileset dir="../@{package}" includes="*.xml *.zip about.* LICENSE.TXT messages.properties plugin.properties model/** metamodel/** store/** schema/** icons/** html/** css/** lib/** rolemappings/** mappings/** refspec/** refspecs/** roles/** rolemodel/** rolemodels/** ant_tasks/**"/>	
 		    		<fileset dir="../@{package}" includes="src*/**/*.java"/>			    	
 		    	</jar>
 
@@ -262,10 +262,10 @@
 		<property name="emftext.version" value="1.3.0"/>
 
 		<!-- EMFText Shared ANTLR Runtimes -->
-		<!-- This one is deprecated -->
+		<!-- This one is deprecated --> 
 		<buildplugin name="EMFText Shared ANTLR 3.1.1 Runtime" package="org.emftext.commons.antlr3_1_1" version="3.1.1"/>	
 		<buildfeature                                          package="org.emftext.commons.antlr3_1_1" version="3.1.1"/>
-
+		
 		<!-- This is the current ANTLR Runtime -->
 		<buildplugin name="EMFText Shared ANTLR 3.2.0 Runtime" package="org.emftext.commons.antlr3_2_0" version="3.2.0"/>	
 		<buildfeature                                          package="org.emftext.commons.antlr3_2_0" version="3.2.0"/>
