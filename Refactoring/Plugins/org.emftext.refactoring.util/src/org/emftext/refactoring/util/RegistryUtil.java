@@ -9,6 +9,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -61,16 +62,16 @@ public class RegistryUtil {
 	
 	public static void log(String message, int status, Exception e){
 		if(e.getStackTrace() != null && e.getStackTrace().length > 0){
-		e.printStackTrace();
+//		e.printStackTrace();
 		} else {
 			message = e.getMessage() + "\n" + message;
 		}
 		log(message, status);
 	}
 	
-	public static void log(String message, int status){
+	public static void log(String message, int statusCode){
 		Level level = null;
-		switch (status) {
+		switch (statusCode) {
 		case IStatus.ERROR:
 			level = Level.SEVERE;
 			break;
@@ -83,6 +84,8 @@ public class RegistryUtil {
 		default:
 			break;
 		}
-		Logger.getLogger(RegistryUtil.class.getSimpleName()).log(level, message);
+		IStatus status = new Status(statusCode, RefactoringUtilPlugin.PLUGIN_ID, message); 
+		RefactoringUtilPlugin.getDefault().getLog().log(status);
+//		Logger.getLogger(RegistryUtil.class.getSimpleName()).log(level, message);
 	}
 }

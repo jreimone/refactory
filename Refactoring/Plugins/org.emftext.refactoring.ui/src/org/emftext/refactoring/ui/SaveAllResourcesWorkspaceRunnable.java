@@ -64,7 +64,7 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 			options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
 			EcoreUtil.resolveAll(refactoredResource);
 			refactoredResource.save(options);
-			System.out.println("Saved resource " + refactoredResource);
+//			System.out.println("Saved resource " + refactoredResource);
 		} catch (Exception e) {
 			e.printStackTrace();
 			refactoredResource.getErrors().clear();
@@ -76,7 +76,7 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 					EcoreUtil.resolveAll(externalResource);
 					try {
 						externalResource.save(null);
-						System.out.println("Saved resource " + externalResource);
+//						System.out.println("Saved resource " + externalResource);
 					} catch (Exception e) {
 						e.printStackTrace();
 						externalResource.getErrors().clear();
@@ -90,21 +90,21 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 	private void preSaveRuntimeInstanceHandling(IRefactorer refactorer){
 		IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
 		Map<Role, List<EObject>> roleInstanceMap = interpreter.getRoleRuntimeInstances();
-		System.out.println("~~~~~~~~~~~~~~~");
+//		System.out.println("~~~~~~~~~~~~~~~");
 		for (Role role : roleInstanceMap.keySet()) {
-			System.out.println(role.getName() + ":");
+//			System.out.println(role.getName() + ":");
 			List<EObject> instances = roleInstanceMap.get(role);
 			for (EObject eObject : instances) {
 				createPath(role, eObject);
 			}
 		}
-		System.out.println("~~~~~~~~~~~~~~~");
+//		System.out.println("~~~~~~~~~~~~~~~");
 		interpreter.setRoleRuntimeInstanceURIs(runtimeInstancePathMap);
 	}
 
 	private void createPath(Role role, EObject object) {
 		URI uri = EcoreUtil.getURI(object);
-		System.out.println("path: " + uri.toString());
+//		System.out.println("path: " + uri.toString());
 		List<URI> uriList = runtimeInstancePathMap.get(role);
 		if(uriList == null){
 			uriList = new LinkedList<URI>();

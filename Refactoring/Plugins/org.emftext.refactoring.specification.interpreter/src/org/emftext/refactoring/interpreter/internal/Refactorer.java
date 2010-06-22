@@ -34,6 +34,7 @@ import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -216,8 +217,8 @@ public class Refactorer implements IRefactorer {
 			// this model then can be used for compare view before refactoring
 			copiedRefactoredModel = fakeInterpreter.interprete(copiedModel);
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("fake interpreter threw exception");
+//			e.printStackTrace();
+			RegistryUtil.log("fake interpreter threw exception", IStatus.ERROR, e);
 			return fakeInterpreter;
 		}
 		// copy end

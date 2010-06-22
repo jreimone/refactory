@@ -12,6 +12,7 @@ import org.emftext.language.refactoring.roles.resource.rolestext.IRolestextBuild
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResource;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
+import org.emftext.refactoring.util.RegistryUtil;
 
 public class RegistrationBuilder implements IRolestextBuilder {
 
@@ -20,8 +21,7 @@ public class RegistrationBuilder implements IRolestextBuilder {
 		try {
 			IRoleModelRegistry.INSTANCE.registerRoleModel(model);
 		} catch (RoleModelAlreadyRegisteredException e) {
-			// TODO dialog to user (or log entry) that role model already exists
-			System.out.println("already exists");
+			RegistryUtil.log("Role Model " + model.getName() + " already registered", IStatus.WARNING);
 		}
 		return null;
 	}

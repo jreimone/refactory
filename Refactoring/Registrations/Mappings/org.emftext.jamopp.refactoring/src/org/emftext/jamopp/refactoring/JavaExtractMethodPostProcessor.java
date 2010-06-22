@@ -27,7 +27,7 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 	 * @see org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor#process(java.util.Map)
 	 */
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-		System.out.println("Add return type for 'Extract Method' in Java");
+//		System.out.println("Add return type for 'Extract Method' in Java");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
 			if(role.getName().equals("NewContainer")){
@@ -66,7 +66,7 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 	private Boolean processMethodType(){
 		Void voidType = TypesFactory.eINSTANCE.createVoid();
 		newContainer.setTypeReference(voidType);
-		System.out.println("setting 'void' for method '" + newContainer.getName() + "'");
+//		System.out.println("setting 'void' for method '" + newContainer.getName() + "'");
 		List<AnnotationInstanceOrModifier> modifiers = origContainer.getAnnotationsAndModifiers();
 		for (AnnotationInstanceOrModifier modifier : modifiers) {
 			if(modifier instanceof Static){

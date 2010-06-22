@@ -54,7 +54,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="RoleImplication" eSuperTypes="#//Collaboration"/>
   <eClassifiers xsi:type="ecore:EEnum" name="RoleModifier">
     <eLiterals name="optional"/>
-    <eLiterals name="runtime" value="1"/>
     <eLiterals name="input" value="2"/>
     <eLiterals name="super" value="3"/>
   </eClassifiers>

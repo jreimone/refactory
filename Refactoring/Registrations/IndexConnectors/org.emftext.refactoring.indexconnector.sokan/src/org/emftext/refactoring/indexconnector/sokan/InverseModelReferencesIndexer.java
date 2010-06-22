@@ -32,7 +32,7 @@ public class InverseModelReferencesIndexer implements Indexer {
 					if(platformString.equals(value)){
 						String inverseReference = ResourceUtil.uriFrom(indexRow.getArtifactID()).toPlatformString(true);
 						metaData.addMultiple(KEY_INVERSE_REFERENCED_RESOURCES, inverseReference);
-						System.out.println("set inverse reference in " + platformString + " for " + inverseReference);
+//						System.out.println("set inverse reference in " + platformString + " for " + inverseReference);
 					}
 				}
 			}

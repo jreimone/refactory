@@ -167,10 +167,6 @@
         <element xmi:type="ecore:EEnumLiteral" href="roles.ecore#//RoleModifier/optional"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_GztG8RfFEd-NefjSuvLqKQ"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_Hnuk4BfFEd-NefjSuvLqKQ" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="roles.ecore#//RoleModifier/runtime"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_Hnuk4RfFEd-NefjSuvLqKQ"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_JLI4YBfFEd-NefjSuvLqKQ" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="roles.ecore#//RoleModifier/input"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_JLI4YRfFEd-NefjSuvLqKQ"/>

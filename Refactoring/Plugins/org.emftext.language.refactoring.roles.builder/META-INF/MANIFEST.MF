@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.common,
  org.emftext.refactoring.registry.rolemodel,
  org.eclipse.emf.ecore,
- org.emftext.language.refactoring.roles
+ org.emftext.language.refactoring.roles,
+ org.emftext.refactoring.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

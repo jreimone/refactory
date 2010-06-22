@@ -38,6 +38,7 @@ import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.ui.RefactoringRecordingCommand;
 import org.emftext.refactoring.ui.RefactoringUndoOperation;
+import org.emftext.refactoring.util.RegistryUtil;
 
 /**
  * @author Jan Reimann
@@ -165,7 +166,6 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		}
 		switch (status.getSeverity()) {
 			case IRefactoringStatus.OK:
-				System.out.println("Refactored successfull");
 				break;
 			case IRefactoringStatus.INFO:
 				//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -175,7 +175,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 				if (rollback && command.canUndo()) {
 					command.undo();
 				}
-				System.out.println("Refactoring rolled back because of some infos");
+				RegistryUtil.log("Refactoring rolled back because of some infos", IStatus.INFO);
 				break;
 			case IRefactoringStatus.WARNING:
 				//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -185,13 +185,13 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 				if (rollback && command.canUndo()) {
 					command.undo();
 				}
-				System.out.println("Refactoring rolled back because of some warnings");
+				RegistryUtil.log("Refactoring rolled back because of some warnings", IStatus.WARNING);
 				break;
 			case IRefactoringStatus.CANCEL:
 				if (rollback && command.canUndo()) {
 					command.undo();
 				}
-				System.out.println("Refactoring rolled back because of cancelation of dialog");
+				RegistryUtil.log("Refactoring rolled back because of cancelation of dialog", IStatus.CANCEL);
 				break;
 			case IRefactoringStatus.ERROR:
 				//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -209,8 +209,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 				if (rollback && command.canUndo()) {
 					command.undo();
 				}
-
-				System.out.println("Refactoring rolled back because of an error");
+				RegistryUtil.log("Refactoring rolled back because of an error", IStatus.ERROR);
 				break;
 			default:
 				break;

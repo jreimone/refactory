@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -60,6 +61,7 @@ import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpe
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
+import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.StringUtil;
 
 /**
@@ -600,7 +602,7 @@ public class RefactoringStatisticView extends ViewPart {
 						FileWriter writer = new FileWriter(tableFile);
 						int specificCount = countSpecificRefactorings(invisibleRoot);
 						int genericCount = invisibleRoot.getChildren().length;
-						System.out.println("Reused " + genericCount + " generic refactorings for " + specificCount + " specific refactorings.");
+						RegistryUtil.log("Reused " + genericCount + " generic refactorings for " + specificCount + " specific refactorings.", IStatus.INFO);
 						writer.append("Reused '''" + genericCount + "''' generic refactorings for '''" + specificCount + "''' specific refactorings.\n");
 						writer.append("{| class=\"wikitable sortable\" border=\"1\" style=\"width:100%;border-collapse:collapse;border:1px solid;\"\n");
 						writer.append("! width=\"33%\" | Refactoring (Generic Name)\n");
@@ -805,9 +807,10 @@ public class RefactoringStatisticView extends ViewPart {
 						writer.append("\\endgroup\n");
 						writer.close();
 					}
-					System.out.println("RefactoringStatisticView.makeSimpleLatexTableGenAction() total mappings " + totalMappings);
+					RegistryUtil.log("RefactoringStatisticView.makeSimpleLatexTableGenAction() total mappings " + totalMappings, IStatus.INFO);
 				} catch (IOException e) {
 					e.printStackTrace();
+					RegistryUtil.log("an error occurred while generating the LaTeX table", IStatus.ERROR, e);
 				}
 			}
 		};
