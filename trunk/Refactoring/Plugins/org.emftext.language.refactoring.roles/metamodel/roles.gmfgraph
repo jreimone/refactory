@@ -33,8 +33,10 @@
         name="ProhibitionDecoration"
         lineWidth="5">
       <template
+          x="-1"
           y="2"/>
       <template
+          x="-1"
           y="-2"/>
     </figures>
     <figures
