@@ -83,8 +83,8 @@ public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements
 			df.setFill(true);
 			df.setLineWidth(5);
 			PointList pl = new PointList();
-			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(2));
-			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(-2));
+			pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(2));
+			pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(-2));
 			df.setTemplate(pl);
 			df.setScale(getMapMode().DPtoLP(7), getMapMode().DPtoLP(3));
 			return df;
@@ -98,8 +98,8 @@ public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements
 			df.setFill(true);
 			df.setLineWidth(5);
 			PointList pl = new PointList();
-			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(2));
-			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(-2));
+			pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(2));
+			pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(-2));
 			df.setTemplate(pl);
 			df.setScale(getMapMode().DPtoLP(7), getMapMode().DPtoLP(3));
 			return df;
