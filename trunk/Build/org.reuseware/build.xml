@@ -457,6 +457,7 @@
 		
 		<!-- Formular -->
 		<buildplugin  name="Formular Metamodel"                            package="org.emftext.language.formular"                       version="${forms.version}" />
+		<buildplugin  name="Formular Edit Support"                         package="org.emftext.language.formular.edit"                  version="${forms.version}" />
 		<buildplugin  name="HTML and PDF Generators for Formular language" package="org.emftext.language.formular.generator"             version="${forms.version}" />
 		<buildplugin  name="Formular Textsyntax"                           package="org.emftext.language.formular.resource.formular"     version="${forms.version}" />
 		<buildplugin  name="Formular Editor"                               package="org.emftext.language.formular.resource.formular.ui"  version="${forms.version}" />

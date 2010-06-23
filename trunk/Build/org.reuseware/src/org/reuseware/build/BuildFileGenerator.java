@@ -184,11 +184,11 @@ public class BuildFileGenerator {
 			new Language(
 					"org.emftext.language.forms", "forms",
 					"org.emftext.language.forms.resource.forms", "forms",
-					false),
+					true),
 			new Language(
 					"org.emftext.language.formular", "FormularMM",
 					"org.emftext.language.formular.resource.formular", "FormularMM", 
-					false),
+					true),
 			new Language(
 					"org.emftext.language.km3", "KM3",
 					"org.emftext.language.km3.resource.km3", "KM3",
