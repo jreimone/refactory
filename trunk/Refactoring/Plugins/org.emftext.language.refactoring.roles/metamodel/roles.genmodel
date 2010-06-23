@@ -11,7 +11,6 @@
       ecorePackage="roles.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="roles.ecore#//RoleModifier">
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/optional"/>
-      <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/runtime"/>
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/input"/>
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/super"/>
     </genEnums>
