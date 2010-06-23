@@ -218,7 +218,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_mQeK2kZfEd-XXe99C3SDrA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_mQeK20ZfEd-XXe99C3SDrA"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_mQeK0UZfEd-XXe99C3SDrA" fontColor="4210752" fontHeight="10" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_mQeK0UZfEd-XXe99C3SDrA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="refactoring_specification.ecore#//DISTINCT"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mQeK0kZfEd-XXe99C3SDrA" x="460" y="150"/>
   </children>
@@ -234,7 +234,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_aFHO21kDEd-xAt-m7ymymA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_aFHO3FkDEd-xAt-m7ymymA"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_aFHO0lkDEd-xAt-m7ymymA" fontColor="4210752" fontHeight="10" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_aFHO0lkDEd-xAt-m7ymymA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="refactoring_specification.ecore#//CollaborationReference"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aFHO01kDEd-xAt-m7ymymA" x="400" y="265" width="163"/>
   </children>
