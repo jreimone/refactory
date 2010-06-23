@@ -138,6 +138,7 @@
 			<pathelement path="../org.emftext.language.java.treejava.resource.treejava/bin"/>
 			<pathelement path="../org.emftext.language.javaproperties/bin"/>
 			<pathelement path="../org.emftext.language.javaproperties.resource.properties/bin"/>
+			<pathelement path="../org.emftext.language.javaproperties.test/bin"/>
 			<pathelement path="../org.emftext.language.km3/bin"/>
 			<pathelement path="../org.emftext.language.km3.resource.km3/bin"/>
 			<pathelement path="../org.emftext.language.martinfowlerdsl/bin"/>
