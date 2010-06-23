@@ -303,7 +303,7 @@
 				<include name="plugins/**/org.eclipse.*.jar"/>
 				<include name="plugins/org.eclipse.core*.jar"/>
 				<include name="plugins/org.eclipse.osgi*.jar"/>
-				<include name="plugins/net.sourceforge.lpg.*.jar"/>
+				<include name="plugins/lpg.runtime.*.jar"/>
 			</fileset>
 		</path>
 
