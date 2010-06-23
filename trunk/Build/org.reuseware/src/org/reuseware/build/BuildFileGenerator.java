@@ -214,10 +214,6 @@ public class BuildFileGenerator {
 				"org.emftext.language.java.resource.java", "java", 
 				true),
 			new Language(
-				"org.emftext.language.java_properties", "java_properties",
-				"org.emftext.language.java_properties.resource.java_properties", "java_properties", 
-				false),
-			new Language(
 				"org.emftext.language.java.ejava", "eJava",
 				"org.emftext.language.java.ejava.resource.ejava", "eJava", 
 				true),
@@ -241,6 +237,10 @@ public class BuildFileGenerator {
 				"org.emftext.language.java.treejava", "treejava",
 				"org.emftext.language.java.treejava.resource.treejava", "treejava", 
 				true),
+			new Language(
+				"org.emftext.language.javaproperties", "javaproperties",
+				"org.emftext.language.javaproperties.resource.javaproperties", "javaproperties", 
+				false),
 			new Language(
 				"org.emftext.language.parametercheck", "parametercheck",
 				"org.emftext.language.parametercheck.resource.pcheck", "parametercheck", 

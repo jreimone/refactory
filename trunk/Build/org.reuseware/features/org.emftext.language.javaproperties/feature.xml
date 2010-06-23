@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.emftext.language.javaproperties"
-      label="EMFText Syntax: Java Property Files"
+      label="EMFText Syntax: Java Properties Files"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
@@ -33,21 +33,21 @@ of Technology, Germany
    
 
    <plugin
-         id="org.emftext.language.java_properties"
+         id="org.emftext.language.javaproperties"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.java_properties.resource.properties"
+         id="org.emftext.language.javaproperties.resource.properties"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
          
    <plugin
-         id="org.emftext.language.java_properties.resource.properties.ui"
+         id="org.emftext.language.javaproperties.resource.properties.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

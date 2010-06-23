@@ -137,6 +137,9 @@
    <feature url="features/org.emftext.language.formular_1.0.1.v200911130906.jar" id="org.emftext.language.formular" version="1.0.1.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
+   <feature url="features/org.emftext.language.javaproperties_0.0.0.v0.jar" id="org.emftext.language.javaproperties" version="0.0.0.v0">
+      <category name="EMFText Languages"/>
+   </feature>
    <feature url="features/org.emftext.language.km3_0.5.1.v200911130906.jar" id="org.emftext.language.km3" version="0.5.1.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
