@@ -488,9 +488,9 @@
 		
 		<property name="javaproperties.version" value="0.2.0"/>
 		<!-- Java Properties -->
-		<buildplugin name="Java Property Files (Metamodel)"  package="org.emftext.language.java_properties"                        version="${javaproperties.version}"/>
-		<buildplugin name="Java Property Files (Textsyntax)" package="org.emftext.language.java_properties.resource.properties"    version="${javaproperties.version}"/>
-		<buildplugin name="Java Property Files (Editor)"     package="org.emftext.language.java_properties.resource.properties.ui" version="${javaproperties.version}"/>
+		<buildplugin name="Java Property Files (Metamodel)"  package="org.emftext.language.javaproperties"                        version="${javaproperties.version}"/>
+		<buildplugin name="Java Property Files (Textsyntax)" package="org.emftext.language.javaproperties.resource.properties"    version="${javaproperties.version}"/>
+		<buildplugin name="Java Property Files (Editor)"     package="org.emftext.language.javaproperties.resource.properties.ui" version="${javaproperties.version}"/>
 		<buildfeature                                        package="org.emftext.language.javaproperties"                        version="${javaproperties.version}"/>
 		
 		<property name="reusejava.version" value="0.2.0"/>

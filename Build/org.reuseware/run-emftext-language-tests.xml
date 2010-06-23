@@ -107,8 +107,6 @@
 			<pathelement path="../org.emftext.language.formular.generator/bin"/>
 			<pathelement path="../org.emftext.language.formular.resource.formular/bin"/>
 			<pathelement path="../org.emftext.language.java/bin"/>
-			<pathelement path="../org.emftext.language.java_properties/bin"/>
-			<pathelement path="../org.emftext.language.java_properties.resource.properties/bin"/>
 			<pathelement path="../org.emftext.language.java.edit/bin"/>
 			<pathelement path="../org.emftext.language.java.ejava/bin"/>
 			<pathelement path="../org.emftext.language.java.ejava.edit/bin"/>
@@ -138,6 +136,8 @@
 			<pathelement path="../org.emftext.language.java.treejava.examples/bin"/>
 			<pathelement path="../org.emftext.language.java.treejava.resource/bin"/>
 			<pathelement path="../org.emftext.language.java.treejava.resource.treejava/bin"/>
+			<pathelement path="../org.emftext.language.javaproperties/bin"/>
+			<pathelement path="../org.emftext.language.javaproperties.resource.properties/bin"/>
 			<pathelement path="../org.emftext.language.km3/bin"/>
 			<pathelement path="../org.emftext.language.km3.resource.km3/bin"/>
 			<pathelement path="../org.emftext.language.martinfowlerdsl/bin"/>
@@ -324,6 +324,7 @@
 		<run-test plugin="org.emftext.language.ecore" extension="text" />
 		<run-test plugin="org.emftext.language.efactory" extension="efactory" />
 		<run-test plugin="org.emftext.language.featherweightjava" extension="fj" />
+		<run-test plugin="org.emftext.language.javaproperties" extension="properties" />
 		<run-test plugin="org.emftext.language.regexp" extension="regexp" />
 		<run-test plugin="org.emftext.language.simplec" extension="c" />
 		<run-test plugin="org.emftext.language.simplemath" extension="sm" />
