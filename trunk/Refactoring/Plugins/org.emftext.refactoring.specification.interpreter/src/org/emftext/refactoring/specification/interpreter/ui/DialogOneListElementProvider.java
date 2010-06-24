@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.AbstractValueProvider;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
@@ -26,7 +26,7 @@ import org.emftext.refactoring.interpreter.internal.AbstractPathCreator;
  */
 public class DialogOneListElementProvider extends AbstractValueProvider<List<EObject>, EObject>{
 
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private int returnCode;
 	private IRefactoringFakeInterpreter fakeInterpreter;
 //	private EObject value;
@@ -37,7 +37,7 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 	private FilteredEObjectsSelectionDialog dialog;
 	private AbstractPathCreator pathCreator;
 
-	public DialogOneListElementProvider(String name, Mapping mapping){
+	public DialogOneListElementProvider(String name, RoleMapping mapping){
 		this.mapping = mapping;
 		this.name = name;
 	}

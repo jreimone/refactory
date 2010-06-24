@@ -22,7 +22,7 @@ import org.emftext.language.refactoring.refactoring_specification.VariableAssign
 import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
@@ -39,11 +39,11 @@ import org.emftext.refactoring.util.RoleUtil;
 public class MOVEInterpreter {
 
 	private RefactoringInterpreterContext context;
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private List<? extends EObject> selection;
 	private IRefactoringInterpreter interpreter;
 	
-	public MOVEInterpreter(Mapping mapping, IRefactoringInterpreter interpreter) {
+	public MOVEInterpreter(RoleMapping mapping, IRefactoringInterpreter interpreter) {
 		super();
 		this.mapping = mapping;
 		this.interpreter = interpreter;

@@ -53,7 +53,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -127,9 +127,9 @@ public class RefactoringStatisticView extends ViewPart {
 
 	class TreeLeaf extends TreeObject {
 
-		private Mapping mapping;
+		private RoleMapping mapping;
 
-		public TreeLeaf(Mapping object) {
+		public TreeLeaf(RoleMapping object) {
 			super(object);
 			this.mapping = object;
 		}
@@ -292,23 +292,23 @@ public class RefactoringStatisticView extends ViewPart {
 		private TreeParent initialize() {
 			TreeParent invisibleRoot = new TreeParent(null);
 			Collection<RoleModel> roleModels = IRoleModelRegistry.INSTANCE.getAllRegisteredRoleModels();
-			Map<String, Map<String, Mapping>> nsUriMappingsMap = IRoleMappingRegistry.INSTANCE.getRoleMappingsMap();
-			Map<RoleModel, Map<EPackage, List<Mapping>>> roleModelMetamodelMappingsMap = new LinkedHashMap<RoleModel, Map<EPackage, List<Mapping>>>();
+			Map<String, Map<String, RoleMapping>> nsUriMappingsMap = IRoleMappingRegistry.INSTANCE.getRoleMappingsMap();
+			Map<RoleModel, Map<EPackage, List<RoleMapping>>> roleModelMetamodelMappingsMap = new LinkedHashMap<RoleModel, Map<EPackage, List<RoleMapping>>>();
 			for (String nsUriString : nsUriMappingsMap.keySet()) {
-				Map<String, Mapping> mappingNameMap = nsUriMappingsMap.get(nsUriString);
+				Map<String, RoleMapping> mappingNameMap = nsUriMappingsMap.get(nsUriString);
 				for (String mappingName : mappingNameMap.keySet()) {
-					Mapping mapping = mappingNameMap.get(mappingName);
+					RoleMapping mapping = mappingNameMap.get(mappingName);
 					RoleModel roleModel = mapping.getMappedRoleModel();
 					RoleMappingModel roleMapping = mapping.getOwningMappingModel();
 					EPackage metamodel = roleMapping.getTargetMetamodel();
-					Map<EPackage, List<Mapping>> metamodelMappingsMap = roleModelMetamodelMappingsMap.get(roleModel);
+					Map<EPackage, List<RoleMapping>> metamodelMappingsMap = roleModelMetamodelMappingsMap.get(roleModel);
 					if (metamodelMappingsMap == null) {
-						roleModelMetamodelMappingsMap.put(roleModel, new LinkedHashMap<EPackage, List<Mapping>>());
+						roleModelMetamodelMappingsMap.put(roleModel, new LinkedHashMap<EPackage, List<RoleMapping>>());
 						metamodelMappingsMap = roleModelMetamodelMappingsMap.get(roleModel);
 					}
-					List<Mapping> metamodelMappings = metamodelMappingsMap.get(metamodel);
+					List<RoleMapping> metamodelMappings = metamodelMappingsMap.get(metamodel);
 					if (metamodelMappings == null) {
-						metamodelMappingsMap.put(metamodel, new LinkedList<Mapping>());
+						metamodelMappingsMap.put(metamodel, new LinkedList<RoleMapping>());
 						metamodelMappings = metamodelMappingsMap.get(metamodel);
 					}
 					metamodelMappings.add(mapping);
@@ -319,7 +319,7 @@ public class RefactoringStatisticView extends ViewPart {
 				if (refSpec != null) {
 					TreeParent modelParent = new TreeParent(roleModel);
 					invisibleRoot.addChild(modelParent);
-					Map<EPackage, List<Mapping>> metamodelMappingsMap = roleModelMetamodelMappingsMap.get(roleModel);
+					Map<EPackage, List<RoleMapping>> metamodelMappingsMap = roleModelMetamodelMappingsMap.get(roleModel);
 					if (metamodelMappingsMap == null) {
 						continue;
 					}
@@ -327,9 +327,9 @@ public class RefactoringStatisticView extends ViewPart {
 						TreeMetaModelParent metamodelParent = new TreeMetaModelParent(
 								metamodel);
 						modelParent.addChild(metamodelParent);
-						List<Mapping> metamodelMappings = metamodelMappingsMap.get(metamodel);
-						List<Mapping> uniqueMappings = new ArrayList<Mapping>();
-						for (Mapping mapping : metamodelMappings) {
+						List<RoleMapping> metamodelMappings = metamodelMappingsMap.get(metamodel);
+						List<RoleMapping> uniqueMappings = new ArrayList<RoleMapping>();
+						for (RoleMapping mapping : metamodelMappings) {
 							if (!uniqueMappings.contains(mapping)) {
 								TreeObject mappingChild = new TreeLeaf(mapping);
 								metamodelParent.addChild(mappingChild);
@@ -639,7 +639,7 @@ public class RefactoringStatisticView extends ViewPart {
 											writer.append("{| \n");
 											for (TreeObject mappingChild : mappingChildren) {
 												if (mappingChild instanceof TreeLeaf) {
-													Mapping mapping = (Mapping) mappingChild.getObject();
+													RoleMapping mapping = (RoleMapping) mappingChild.getObject();
 													writer.append(" | [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName() + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
 													writer.append(" |- \n");
 												}
@@ -648,7 +648,7 @@ public class RefactoringStatisticView extends ViewPart {
 //											writer.append("|- \n");
 										} else {
 											TreeObject mappingLeaf = mappingChildren[0];
-											Mapping mapping = (Mapping) mappingLeaf.getObject();
+											RoleMapping mapping = (RoleMapping) mappingLeaf.getObject();
 											writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
 											writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName() + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
 //											writer.append("|- \n");
@@ -801,7 +801,7 @@ public class RefactoringStatisticView extends ViewPart {
 							}
 							writer.append("\n\\\\ \\hline\n\n");
 						}
-						// writer.append("\\multicolumn{4}{l}{MP = Mapping Count (quantity the role model was mapped)} \\\\\n");
+						// writer.append("\\multicolumn{4}{l}{MP = RoleMapping Count (quantity the role model was mapped)} \\\\\n");
 						// writer.append("\\multicolumn{4}{l}{PP = Post Processors (quantity of needed post processors)}\n");
 						writer.append("\\end{longtable}\n");
 						writer.append("\\endgroup\n");
@@ -857,7 +857,7 @@ public class RefactoringStatisticView extends ViewPart {
 												mmName = mmName.replaceAll("_", " ");
 												writer.append(mmName);
 												writer.append(" & ");
-												Mapping mapping = (Mapping) leaf.getObject();
+												RoleMapping mapping = (RoleMapping) leaf.getObject();
 												writer.append(StringUtil.convertCamelCaseToWords(mapping.getName()));
 												writer.append(" & ");
 												boolean hasPostProcessor = leaf.hasPostProcessorRegistered();

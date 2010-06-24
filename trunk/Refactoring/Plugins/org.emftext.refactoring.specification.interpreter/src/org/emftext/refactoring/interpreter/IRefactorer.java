@@ -4,21 +4,18 @@
 package org.emftext.refactoring.interpreter;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
-import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 
 /**
- * Interface for Refactorer. A {@link IRefactorer} will be used for one {@link RoleMappingModel roleMapping}. 
- * Internally the {@link IRefactorer refactorer} consists of a map which connects a {@link Mapping} with
+ * Interface for Refactorer. A {@link IRefactorer} will be used for one {@link RoleRoleMappingModel roleRoleMapping}. 
+ * Internally the {@link IRefactorer refactorer} consists of a map which connects a {@link RoleMapping} with
  * a {@link IRefactoringInterpreter}. This needed because one {@link RoleModel} can be applied to several parts 
  * of the same metamodel.
  * 
@@ -51,7 +48,7 @@ public interface IRefactorer {
 	
 	/**
 	 * Infers over the objects which were set with {@link #setInput(EList)} and identifies all of its applied roles.
-	 * Then all {@link Mapping}s will be checked for roles marked as {@link RoleModifier#INPUT} and compared to
+	 * Then all {@link RoleMapping}s will be checked for roles marked as {@link RoleModifier#INPUT} and compared to
 	 * the input. If all input roles are present in the input then value 1.0 will be returned.
 	 * 
 	 * @param minEquality specifies the minimum equality in percent the applied roles must fulfill
@@ -66,10 +63,10 @@ public interface IRefactorer {
 	 * @param mapping
 	 * @return returns the fake interpreter used within this method
 	 */
-	public IRefactoringFakeInterpreter fakeRefactor(Mapping mapping);
+	public IRefactoringFakeInterpreter fakeRefactor(RoleMapping mapping);
 	
 	/**
-	 * Invokes the RefactoringSpecification on the given {@link Mapping} on the model set with {@link #setInput(EList)}.
+	 * Invokes the RefactoringSpecification on the given {@link RoleMapping} on the model set with {@link #setInput(EList)}.
 	 * 
 	 * @param the mapping for which the {@link RefactoringSpecification} is intended to be invoked
 	 * @return the refactored model
@@ -77,7 +74,7 @@ public interface IRefactorer {
 	public EObject refactor();
 	
 	/**
-	 * This method returns the result of the model after the execution of {@link IRefactorer#fakeRefactor(Mapping)}.
+	 * This method returns the result of the model after the execution of {@link IRefactorer#fakeRefactor(RoleMapping)}.
 	 * This model can be used to display a comparison dialog with the original model to show the effects of the refactoring.
 	 * 
 	 * @return
@@ -85,17 +82,17 @@ public interface IRefactorer {
 	public EObject getFakeRefactoredModel();
 	
 	/**
-	 * Returns a list containing all {@link Mapping mappings} for which the current selection has all obligatory (input)roles
+	 * Returns a list containing all {@link RoleMapping mappings} for which the current selection has all obligatory (input)roles
 	 * applied. With <code>minEquality</code> one can decide how strict the presence of the applied roles should be.
 	 * If <code>minEquality</code> is 1.0 than all (input)roles are considered to be applied in the current selection.
 	 * This method should be used for retrieving the possible refactorings which should be offered to the user maybe in 
-	 * a context menu. Therefore the {@link Mapping#getName()} is usefull because it is considered to have a meaningful name like
+	 * a context menu. Therefore the {@link RoleMapping#getName()} is usefull because it is considered to have a meaningful name like
 	 * 'ExtractStatements' for the <a href="http://www.emftext.org/index.php/EMFText_Concrete_Syntax_Zoo_PL0">PL/0</a> language for example.
 	 * 
 	 * @param minEquality
 	 * @return
 	 */
-	public List<Mapping> getPossibleMappings(double minEquality);
+	public List<RoleMapping> getPossibleRoleMappings(double minEquality);
 	
 	/**
 	 * Returns <code>false</code> if no errors occured while refactoring. 

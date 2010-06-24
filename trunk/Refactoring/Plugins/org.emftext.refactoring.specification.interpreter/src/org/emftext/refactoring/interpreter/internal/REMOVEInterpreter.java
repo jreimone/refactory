@@ -30,7 +30,7 @@ import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
@@ -46,13 +46,13 @@ import org.emftext.refactoring.util.RoleUtil;
 public class REMOVEInterpreter {
 
 	private RefactoringInterpreter refactoringInterpreter;
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private RefactoringInterpreterContext context;
 	private List<? extends EObject> selection;
 	private Role assignedRole;
 	private Object runtimeValue;
 
-	public REMOVEInterpreter(RefactoringInterpreter refactoringInterpreter, Mapping mapping) {
+	public REMOVEInterpreter(RefactoringInterpreter refactoringInterpreter, RoleMapping mapping) {
 		this.mapping = mapping;
 		this.refactoringInterpreter = refactoringInterpreter;
 	}

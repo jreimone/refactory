@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.CollaborationModifier;
@@ -40,10 +40,10 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 	 * @see org.emftext.refactoring.roleconstraintchecker.IRoleConstraintValidator#validate()
 	 */
 	public IStatus validate(RoleMappingModel mappingModel) {
-		EList<Mapping> mappings = mappingModel.getMappings();
+		EList<RoleMapping> mappings = mappingModel.getMappings();
 		int severity = 1;
 		List<IStatus> stati = new ArrayList<IStatus>();
-		for (Mapping mapping : mappings) {
+		for (RoleMapping mapping : mappings) {
 			List<IStatus> status = validateMapping(mapping);
 			for (IStatus iStatus : status) {
 				if(iStatus != null){
@@ -65,7 +65,7 @@ public class BasicRoleConstraintValidator implements IRoleConstraintValidator {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.roleconstraintchecker.IRoleConstraintValidator#validateMapping(org.emftext.language.refactoring.rolemapping.Mapping)
 	 */
-	public List<IStatus> validateMapping(Mapping mapping) {
+	public List<IStatus> validateMapping(RoleMapping mapping) {
 		List<IStatus> stati = new ArrayList<IStatus>();
 		EcoreUtil.resolveAll(mapping.getMappedRoleModel());
 		EList<ConcreteMapping> mappings = mapping.getRoleToMetaelement();

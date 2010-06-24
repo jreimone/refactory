@@ -8,7 +8,7 @@ import java.util.Map;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
@@ -27,7 +27,7 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		EObject root = resource.getContents().get(0);
 		String mmUri = root.eClass().getEPackage().getNsURI();
-		Map<String, Mapping> roleMapping = registry.getRoleMappingsForUri(mmUri);
+		Map<String, RoleMapping> roleMapping = registry.getRoleMappingsForUri(mmUri);
 		if(roleMapping == null){
 			return null;
 		}

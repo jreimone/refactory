@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.ImageData;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.registry.rolemapping.Activator;
 import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint;
@@ -37,21 +37,21 @@ import org.osgi.framework.Bundle;
 
 public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 
-	private Map<String, Map<String, Mapping>> roleMappingsMap;
-	private Map<String, Map<Mapping, IRefactoringPostProcessor>> postProcessorMap;
-	private Map<Mapping, ImageDescriptor> iconMap;
-	private Map<Mapping, ImageDescriptor> defaultIconMap;
+	private Map<String, Map<String, RoleMapping>> roleMappingsMap;
+	private Map<String, Map<RoleMapping, IRefactoringPostProcessor>> postProcessorMap;
+	private Map<RoleMapping, ImageDescriptor> iconMap;
+	private Map<RoleMapping, ImageDescriptor> defaultIconMap;
 
 	public BasicRoleMappingRegistry(){
-		roleMappingsMap = new LinkedHashMap<String, Map<String, Mapping>>();
-		postProcessorMap = new LinkedHashMap<String, Map<Mapping,IRefactoringPostProcessor>>();
-		iconMap = new LinkedHashMap<Mapping, ImageDescriptor>();
-		defaultIconMap = new LinkedHashMap<Mapping, ImageDescriptor>();
+		roleMappingsMap = new LinkedHashMap<String, Map<String, RoleMapping>>();
+		postProcessorMap = new LinkedHashMap<String, Map<RoleMapping,IRefactoringPostProcessor>>();
+		iconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
+		defaultIconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
 		collectRegisteredRoleMappings();
 		collectRegisteredPostProcessors();
 	}
 
-	public Map<String, Mapping> getRoleMappingsForUri(String nsUri) {
+	public Map<String, RoleMapping> getRoleMappingsForUri(String nsUri) {
 		return getRoleMappingsMap().get(nsUri);
 	}
 
@@ -84,7 +84,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 
 		// then look for specific icons
-		for (Mapping mapping : roleMapping.getMappings()) {
+		for (RoleMapping mapping : roleMapping.getMappings()) {
 			IConfigurationElement[] children = config.getChildren();
 			boolean found = false;
 			for (IConfigurationElement element : children) {
@@ -131,9 +131,9 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				IRefactoringPostProcessor postprocessor = (IRefactoringPostProcessor) element.createExecutableExtension(IPostProcessorExtensionPoint.ATTRIBUTE_POST_PROCESSOR);
 				String nsUri = element.getAttribute(IPostProcessorExtensionPoint.ATTRIBUTE_NS_URI);
 				String mappingName = element.getAttribute(IPostProcessorExtensionPoint.ATTRIBUTE_MAPPING);
-				Map<String, Mapping> roleMappings = getRoleMappingsForUri(nsUri);
+				Map<String, RoleMapping> roleMappings = getRoleMappingsForUri(nsUri);
 				if(roleMappings != null){
-					Mapping mapping = null;
+					RoleMapping mapping = null;
 					for (String registeredName : roleMappings.keySet()) {
 						if(registeredName.equals(mappingName.trim())){
 							mapping = roleMappings.get(registeredName);
@@ -151,9 +151,9 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 	}
 
-	private List<Mapping> registerRoleMappingInternal(RoleMappingModel roleMapping, IConfigurationElement config) {
-		Map<String, Mapping> mappingsToRegister = new LinkedHashMap<String, Mapping>();
-		for (Mapping mapping : roleMapping.getMappings()) {
+	private List<RoleMapping> registerRoleMappingInternal(RoleMappingModel roleMapping, IConfigurationElement config) {
+		Map<String, RoleMapping> mappingsToRegister = new LinkedHashMap<String, RoleMapping>();
+		for (RoleMapping mapping : roleMapping.getMappings()) {
 			Resource mappingResource = mapping.eResource();
 			if(mappingResource != null && mappingResource.getErrors() != null && mappingResource.getErrors().size() > 0 ){
 				List<Diagnostic> errors = mappingResource.getErrors();
@@ -182,14 +182,14 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 
 		String nsUri = roleMapping.getTargetMetamodel().getNsURI();
 		if(nsUri == null){// then the meta model isn't registered correctly and doesn't exist
-			return new LinkedList<Mapping>(mappingsToRegister.values());
+			return new LinkedList<RoleMapping>(mappingsToRegister.values());
 		}
-		Map<String, Mapping> registered = getRoleMappingsMap().get(nsUri);
+		Map<String, RoleMapping> registered = getRoleMappingsMap().get(nsUri);
 		if(registered == null){
-			registered = new LinkedHashMap<String, Mapping>();
+			registered = new LinkedHashMap<String, RoleMapping>();
 			getRoleMappingsMap().put(nsUri, registered);
 		}
-		List<Mapping> alreadyRegistered = new LinkedList<Mapping>();
+		List<RoleMapping> alreadyRegistered = new LinkedList<RoleMapping>();
 		for (String mappingName : mappingsToRegister.keySet()) {
 			if(registered.get(mappingName) != null){
 				alreadyRegistered.add(mappingsToRegister.get(mappingName));
@@ -203,16 +203,16 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		return alreadyRegistered;
 	}
 
-	public List<Mapping> registerRoleMapping(RoleMappingModel roleMapping) {
+	public List<RoleMapping> registerRoleMapping(RoleMappingModel roleMapping) {
 		return registerRoleMappingInternal(roleMapping, null);
 	}
 
-	private void registerSubPackages(EPackage rootPackage, Map<String, Mapping> mappings){
+	private void registerSubPackages(EPackage rootPackage, Map<String, RoleMapping> mappings){
 		List<EPackage> subPackages = rootPackage.getESubpackages();
 		if(subPackages != null){
 			for (EPackage subpackage : subPackages) {
 				String nsUri = subpackage.getNsURI();
-				Map<String, Mapping> registered = getRoleMappingsMap().get(nsUri);
+				Map<String, RoleMapping> registered = getRoleMappingsMap().get(nsUri);
 				if(registered != null){
 					RegistryUtil.log("Metamodel " + nsUri + " already registered ", IStatus.WARNING);
 				} else {
@@ -223,14 +223,14 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 	}
 
-	public Map<String, Map<String, Mapping>> getRoleMappingsMap() {
+	public Map<String, Map<String, RoleMapping>> getRoleMappingsMap() {
 		return roleMappingsMap;
 	}
 
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry#registerPostProcessor(org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.emftext.language.refactoring.rolemapping.Mapping, org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor)
 	 */
-	public void registerPostProcessor(Mapping mapping, IRefactoringPostProcessor postProcessor) {
+	public void registerPostProcessor(RoleMapping mapping, IRefactoringPostProcessor postProcessor) {
 		RoleMappingModel root = (RoleMappingModel) EcoreUtil.getRootContainer(mapping);
 		registerPostProcessor(root.getTargetMetamodel(), mapping, postProcessor);
 		List<EPackage> subPackages = root.getTargetMetamodel().getESubpackages();
@@ -239,11 +239,11 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 	}
 
-	private void registerPostProcessor(EPackage metamodel, Mapping mapping, IRefactoringPostProcessor postProcessor) {
+	private void registerPostProcessor(EPackage metamodel, RoleMapping mapping, IRefactoringPostProcessor postProcessor) {
 		String nsUri = metamodel.getNsURI();
-		Map<Mapping, IRefactoringPostProcessor> map = postProcessorMap.get(nsUri);
+		Map<RoleMapping, IRefactoringPostProcessor> map = postProcessorMap.get(nsUri);
 		if(map == null){
-			map = new LinkedHashMap<Mapping, IRefactoringPostProcessor>();
+			map = new LinkedHashMap<RoleMapping, IRefactoringPostProcessor>();
 		}
 		map.put(mapping, postProcessor);
 		postProcessorMap.put(nsUri, map);
@@ -252,16 +252,16 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry#getPostProcessor(org.eclipse.emf.ecore.EPackage, org.emftext.language.refactoring.rolemapping.Mapping)
 	 */
-	public IRefactoringPostProcessor getPostProcessor(Mapping mapping) {
+	public IRefactoringPostProcessor getPostProcessor(RoleMapping mapping) {
 		String nsUri = mapping.getOwningMappingModel().getTargetMetamodel().getNsURI();
-		Map<Mapping, IRefactoringPostProcessor> map = postProcessorMap.get(nsUri);
+		Map<RoleMapping, IRefactoringPostProcessor> map = postProcessorMap.get(nsUri);
 		if(map == null){
 			return null;
 		}
 		return map.get(mapping);
 	}
 
-	public ImageDescriptor getImageForMapping(Mapping mapping) {
+	public ImageDescriptor getImageForMapping(RoleMapping mapping) {
 		ImageDescriptor image = iconMap.get(mapping);
 		if(image == null){
 			image = defaultIconMap.get(mapping);
@@ -269,17 +269,17 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		return image;
 	}
 
-	public void updateMappings(List<Mapping> mappingsToUpdate) {
-		for (Mapping mapping : mappingsToUpdate) {
+	public void updateMappings(List<RoleMapping> mappingsToUpdate) {
+		for (RoleMapping mapping : mappingsToUpdate) {
 			RoleMappingModel model = mapping.getOwningMappingModel();
 			if(model != null){
 				String nsUri = model.getTargetMetamodel().getNsURI();
 				if(nsUri == null){
 					return;
 				}
-				Map<String, Mapping> registeredMappings = getRoleMappingsForUri(nsUri);
+				Map<String, RoleMapping> registeredMappings = getRoleMappingsForUri(nsUri);
 				if(registeredMappings != null){
-					Mapping correspondingMapping = registeredMappings.get(mapping.getName());
+					RoleMapping correspondingMapping = registeredMappings.get(mapping.getName());
 					if(correspondingMapping == null 
 							|| mapping.eResource().getURI().equals(correspondingMapping.eResource().getURI())){
 						registeredMappings.put(mapping.getName(), mapping);

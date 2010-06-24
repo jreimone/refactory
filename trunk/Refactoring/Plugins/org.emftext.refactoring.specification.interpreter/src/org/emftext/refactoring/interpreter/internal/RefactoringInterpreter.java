@@ -33,7 +33,7 @@ import org.emftext.language.refactoring.refactoring_specification.SourceContext;
 import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
@@ -62,7 +62,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
 //	private RoleMappingModel roleMapping;
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private IRefactoringPostProcessor postProcessor;
 	private Map<Role, List<EObject>> roleRuntimeInstanceMap;
 	private Map<Role, List<URI>> roleRuntimeInstanceURIMap;
@@ -187,7 +187,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#initialize(org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification, org.eclipse.emf.ecore.EObject)
 	 */
-	public void initialize(RefactoringSpecification refSpec, Mapping mapping) {
+	public void initialize(RefactoringSpecification refSpec, RoleMapping mapping) {
 		this.refSpec = refSpec;
 //		this.model = model;
 //		this.originalModel = model;
@@ -444,7 +444,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		}
 	}
 
-	public Mapping getMapping() {
+	public RoleMapping getRoleMapping() {
 		return mapping;
 	}
 

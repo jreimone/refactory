@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -44,22 +44,22 @@ import org.emftext.refactoring.util.RoleUtil;
 public class Refactorer implements IRefactorer {
 
 	private EObject model;
-	private Map<String, Mapping> roleMappings;
+	private Map<String, RoleMapping> roleMappings;
 	private List<? extends EObject> currentSelection;
-	private Map<Mapping, IRefactoringInterpreter> interpreterMap;
+	private Map<RoleMapping, IRefactoringInterpreter> interpreterMap;
 	private IRefactoringSpecificationRegistry refSpecRegistry;
 	private IRoleMappingRegistry roleMappingRegistry;
 	private boolean occuredErrors;
 	private List<Resource> resourcesToSave;
 	private Resource resource;
 	private IRefactoringStatus status;
-	private Mapping currentMapping;
+	private RoleMapping currentMapping;
 	private IRefactoringInterpreter currentInterpreter;
 	private List<? extends EObject> currentFilteredSelection;
 	private ResourceSet currentModelResourceSet;
 	private EObject fakeRefactoredModel;
 
-	public Refactorer(Resource resource, Map<String, Mapping> roleMappings) {
+	public Refactorer(Resource resource, Map<String, RoleMapping> roleMappings) {
 		this.resource = resource;
 		this.model = resource.getContents().get(0);
 		this.roleMappings = roleMappings;
@@ -69,13 +69,13 @@ public class Refactorer implements IRefactorer {
 	}
 
 	private void initInterpreterMap() {
-		interpreterMap = new LinkedHashMap<Mapping, IRefactoringInterpreter>();
-		Collection<Mapping> mappings = roleMappings.values();
-		for (Mapping mapping : mappings) {
+		interpreterMap = new LinkedHashMap<RoleMapping, IRefactoringInterpreter>();
+		Collection<RoleMapping> mappings = roleMappings.values();
+		for (RoleMapping mapping : mappings) {
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			EcoreUtil.resolveAll(roleModel);
 			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(roleModel);
-//			Mapping firstMapping = roleMappings.values().toArray(new Mapping[0])[0];
+//			RoleMapping firstMapping = roleMappings.values().toArray(new RoleMapping[0])[0];
 //			RoleMappingModel roleMapping = (RoleMappingModel) EcoreUtil.getRootContainer(firstMapping);
 			IRefactoringPostProcessor postProcessor = roleMappingRegistry.getPostProcessor(mapping);
 			IRefactoringInterpreter interpreter = new RefactoringInterpreter(postProcessor);
@@ -91,8 +91,8 @@ public class Refactorer implements IRefactorer {
 	 */
 	public List<RefactoringSpecification> getPossibleRefactoringsForNearestRoleModels(double minEquality) {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
-		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMappings, minEquality);
-		for (Mapping mapping : possibleMappings) {
+		List<RoleMapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMappings, minEquality);
+		for (RoleMapping mapping : possibleMappings) {
 			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(mapping.getMappedRoleModel());
 			if (refSpec != null) {
 				refSpecs.add(refSpec);
@@ -101,7 +101,7 @@ public class Refactorer implements IRefactorer {
 		return refSpecs;
 	}
 
-	public IRefactoringFakeInterpreter fakeRefactor(Mapping mapping) {
+	public IRefactoringFakeInterpreter fakeRefactor(RoleMapping mapping) {
 		if (mapping == null) {
 			currentMapping = null;
 			return null;
@@ -150,7 +150,7 @@ public class Refactorer implements IRefactorer {
 	 * @param refactoredModelRS
 	 * @return
 	 */
-	private EObject realInterprete(Mapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
+	private EObject realInterprete(RoleMapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
 		EObject refactoredModel;
 		interpreter.setInput(filteredElements);
 		ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
@@ -266,7 +266,7 @@ public class Refactorer implements IRefactorer {
 		return fakeInterpreter;
 	}
 
-	private List<? extends EObject> filterSelectedElements(Mapping mapping) {
+	private List<? extends EObject> filterSelectedElements(RoleMapping mapping) {
 		List<EObject> filteredElements = RoleUtil.filterObjectsByInputRoles(currentSelection, mapping);
 		List<EObject> elementsToRemove = new LinkedList<EObject>();
 		for (EObject child : filteredElements) {
@@ -319,8 +319,8 @@ public class Refactorer implements IRefactorer {
 	 */
 	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality) {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
-		List<Mapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMappings, minEquality);
-		for (Mapping mapping : possibleMappings) {
+		List<RoleMapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMappings, minEquality);
+		for (RoleMapping mapping : possibleMappings) {
 			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(mapping.getMappedRoleModel());
 			if (refSpec != null) {
 				refSpecs.add(refSpec);
@@ -329,7 +329,7 @@ public class Refactorer implements IRefactorer {
 		return refSpecs;
 	}
 
-	public List<Mapping> getPossibleMappings(double minEquality) {
+	public List<RoleMapping> getPossibleRoleMappings(double minEquality) {
 		return RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMappings, minEquality);
 	}
 

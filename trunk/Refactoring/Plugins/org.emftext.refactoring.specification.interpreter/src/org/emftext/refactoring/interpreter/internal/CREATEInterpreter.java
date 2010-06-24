@@ -14,7 +14,7 @@ import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
@@ -26,13 +26,13 @@ import org.emftext.refactoring.util.RoleUtil;
  */
 public class CREATEInterpreter {
 
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
 	private Role assignedRole;
 	private Object roleRuntimeInstance;
 
-	public CREATEInterpreter(Mapping mapping){
+	public CREATEInterpreter(RoleMapping mapping){
 		this.mapping = mapping;
 	}
 

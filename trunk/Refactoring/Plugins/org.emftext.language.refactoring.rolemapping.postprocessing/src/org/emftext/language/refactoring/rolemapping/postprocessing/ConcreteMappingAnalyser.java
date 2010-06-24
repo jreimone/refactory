@@ -10,7 +10,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.refactoring.rolemapping.AttributeMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResource;
@@ -40,9 +40,9 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 	 */
 	@Override
 	public void analyse(RolemappingResource resource, RoleMappingModel model) {
-		Collection<Mapping> mappings = RolemappingEObjectUtil.getObjectsByType(model.eAllContents()
-				, RolemappingPackage.eINSTANCE.getMapping());
-		for (Mapping mapping : mappings) {
+		Collection<RoleMapping> mappings = RolemappingEObjectUtil.getObjectsByType(model.eAllContents()
+				, RolemappingPackage.eINSTANCE.getRoleMapping());
+		for (RoleMapping mapping : mappings) {
 			obligatoryRoles = getObligatoryRoles(mapping);
 			mappedRoles = new HashSet<Role>();
 			EList<ConcreteMapping> concreteMappings = mapping.getRoleToMetaelement();
@@ -70,7 +70,7 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 		}
 	}
 	
-	private void analyseObligatoryAttributeMappings(RolemappingResource resource, Mapping mapping){
+	private void analyseObligatoryAttributeMappings(RolemappingResource resource, RoleMapping mapping){
 		List<ConcreteMapping> concreteMappings = mapping.getRoleToMetaelement();
 		for (ConcreteMapping concreteMapping : concreteMappings) {
 			List<AttributeMapping> attributeMappings = concreteMapping.getAttributeMappings();
@@ -99,7 +99,7 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 	 * @param mapping
 	 * @return
 	 */
-	private static List<Role> getObligatoryRoles(Mapping mapping) {
+	private static List<Role> getObligatoryRoles(RoleMapping mapping) {
 		RoleModel roleModel = mapping.getMappedRoleModel();
 		EList<Role> roles = roleModel.getRoles();
 		List<Role> nonOptionalRoles = new ArrayList<Role>();

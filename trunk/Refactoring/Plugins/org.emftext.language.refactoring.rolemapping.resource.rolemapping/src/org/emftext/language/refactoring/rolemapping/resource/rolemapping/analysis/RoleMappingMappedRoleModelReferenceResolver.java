@@ -23,10 +23,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 
-public class MappingMappedRoleModelReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.RoleMapping, org.emftext.language.refactoring.roles.RoleModel> {
-
-	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.RoleMapping container, org.eclipse.emf.ecore.EReference reference, int position,
-			boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.RoleModel> result) {
+public class RoleMappingMappedRoleModelReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.RoleMapping, org.emftext.language.refactoring.roles.RoleModel> {
+	
+	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RoleMapping, org.emftext.language.refactoring.roles.RoleModel> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RoleMapping, org.emftext.language.refactoring.roles.RoleModel>();
+	
+	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.RoleMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.RoleModel> result) {
 		IRoleModelRegistry registry = IRoleModelRegistry.INSTANCE;
 		if (resolveFuzzy) {
 			for (RoleModel roleModel : registry.getAllRegisteredRoleModels()) {
@@ -68,12 +69,13 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 			}
 		}
 	}
-
+	
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.RoleModel element, org.emftext.language.refactoring.rolemapping.RoleMapping container, org.eclipse.emf.ecore.EReference reference) {
-		return EcoreUtil.getURI(element).toString(); 
+		return EcoreUtil.getURI(element).toString();
 	}
-
+	
 	public void setOptions(java.util.Map<?,?> options) {
+		// save options in a field or leave method empty if this resolver does not depend on any option
 	}
-
+	
 }
