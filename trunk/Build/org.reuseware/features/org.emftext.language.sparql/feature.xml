@@ -48,14 +48,14 @@ of Technology, Germany
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.sparql.resource.rq"
+         id="org.emftext.language.sparql.resource.sparql"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.sparql.resource.rq.ui"
+         id="org.emftext.language.sparql.resource.sparql.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
