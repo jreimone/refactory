@@ -639,6 +639,12 @@
 		<buildplugin  name="Text Adventure Editor"         package="org.emftext.language.textadventure.resource.tas.ui" version="0.2.0"/>
 		<buildfeature                                      package="org.emftext.language.textadventure"                 version="0.2.0"/>
 
+		<!-- Theater Script -->
+		<buildplugin  name="Metamodel for Theater Scripts" package="org.emftext.language.theater"                     version="0.1.0"/>
+		<buildplugin  name="Theater Script Syntax"         package="org.emftext.language.theater.resource.theater"    version="0.1.0"/>
+		<buildplugin  name="Theater Script Editor"         package="org.emftext.language.theater.resource.theater.ui" version="0.1.0"/>
+		<buildfeature                                      package="org.emftext.language.theater"                     version="0.1.0"/>
+
 		<!-- Three-Valued Logic -->
 		<buildplugin  name="Metamodel for Three-Valued Logic"  package="org.emftext.language.threevaluedlogic"                 version="0.2.0"/>
 		<buildplugin  name="Three-Valued Logic (Edit Support)" package="org.emftext.language.threevaluedlogic.edit"            version="0.2.0"/>

@@ -191,6 +191,9 @@
    <feature url="features/org.emftext.language.textadventure_0.1.2.v200911130906.jar" id="org.emftext.language.textadventure" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
+   <feature url="features/org.emftext.language.theater_0.0.0.v0.jar" id="org.emftext.language.theater" version="0.0.0.v0">
+      <category name="EMFText Languages"/>
+   </feature>  
    <feature url="features/org.emftext.language.threevaluedlogic_0.1.2.v200911130906.jar" id="org.emftext.language.threevaluedlogic" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
