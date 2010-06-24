@@ -19,7 +19,7 @@ import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.Instruction;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -33,21 +33,21 @@ import org.emftext.refactoring.ltk.ModelRefactoringWizard;
  */
 public class RefactoringAction extends Action {
 
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private IRefactorer refactorer;
 	private EObject refactoredModel;
 	private TransactionalEditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 	private IEditorConnector connector;
 
-	public RefactoringAction(Mapping mapping, IRefactorer refactorer, IEditorConnector connector) {
+	public RefactoringAction(RoleMapping mapping, IRefactorer refactorer, IEditorConnector connector) {
 		super();
 		this.mapping = mapping;
 		this.refactorer = refactorer;
 		this.connector = connector;
 	}
 
-	public RefactoringAction(Mapping mapping, IRefactorer refactorer, TransactionalEditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector) {
+	public RefactoringAction(RoleMapping mapping, IRefactorer refactorer, TransactionalEditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector) {
 		this(mapping, refactorer, connector);
 		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
 		this.activeEditor = activeEditor;

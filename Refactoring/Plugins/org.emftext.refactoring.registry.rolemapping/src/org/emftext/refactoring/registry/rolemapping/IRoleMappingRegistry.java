@@ -3,9 +3,8 @@ package org.emftext.refactoring.registry.rolemapping;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.registry.rolemapping.impl.BasicRoleMappingRegistry;
 
@@ -25,7 +24,7 @@ public interface IRoleMappingRegistry {
 	 * @param nsUri
 	 * @return
 	 */
-	public Map<String, Mapping> getRoleMappingsForUri(String nsUri);
+	public Map<String, RoleMapping> getRoleMappingsForUri(String nsUri);
 	
 	/**
 	 * To be invoked if a {@link RoleMappingModel} is intended to be registered at runtime.
@@ -35,7 +34,7 @@ public interface IRoleMappingRegistry {
 	 * @param roleMapping
 	 * @return those mappings which couldn't be registered
 	 */
-	public List<Mapping> registerRoleMapping(RoleMappingModel roleMapping);
+	public List<RoleMapping> registerRoleMapping(RoleMappingModel roleMapping);
 	
 	/**
 	 * This method updates the registered mappings with the <code>mappingsToUpdate</code>. Only corresponding
@@ -44,13 +43,13 @@ public interface IRoleMappingRegistry {
 	 *  
 	 * @param mappingsToUpdate
 	 */
-	public void updateMappings(List<Mapping> mappingsToUpdate);
+	public void updateMappings(List<RoleMapping> mappingsToUpdate);
 	
 	/**
 	 * Returns the {@link RoleMappingModel rolemapping} map.
 	 * @return
 	 */
-	public Map<String, Map<String, Mapping>> getRoleMappingsMap();
+	public Map<String, Map<String, RoleMapping>> getRoleMappingsMap();
 	
 	/**
 	 * Use this method to register a {@link IRefactoringPostProcessor postprocessor} for the given <code>roleMapping</code> and 
@@ -58,7 +57,7 @@ public interface IRoleMappingRegistry {
 	 * @param mapping
 	 * @param postProcessor
 	 */
-	public void registerPostProcessor(Mapping mapping, IRefactoringPostProcessor postProcessor);
+	public void registerPostProcessor(RoleMapping mapping, IRefactoringPostProcessor postProcessor);
 	
 	/**
 	 * Returns the postprocessor registered to the given {@link Mapping mapping}. 
@@ -66,7 +65,7 @@ public interface IRoleMappingRegistry {
 	 * @param metamodel
 	 * @return
 	 */
-	public IRefactoringPostProcessor getPostProcessor(Mapping mapping);
+	public IRefactoringPostProcessor getPostProcessor(RoleMapping mapping);
 	
 	/**
 	 * Returns an {@link ImageDescriptor image} for the given <code>mapping</code> or null of no
@@ -75,5 +74,5 @@ public interface IRoleMappingRegistry {
 	 * @param mapping
 	 * @return
 	 */
-	public ImageDescriptor getImageForMapping(Mapping mapping);
+	public ImageDescriptor getImageForMapping(RoleMapping mapping);
 }

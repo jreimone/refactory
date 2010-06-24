@@ -20,7 +20,7 @@ import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.rolemapping.AttributeMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
@@ -44,7 +44,7 @@ public class ASSIGNInterpreter {
 	private boolean providerExternallySet = false;
 	private IValueProvider<EAttribute, Object> valueProvider;
 
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private RefactoringInterpreterContext context;
 	private List<? extends EObject> selection;
 
@@ -59,7 +59,7 @@ public class ASSIGNInterpreter {
 
 	private ASSIGN assign;
 
-	public ASSIGNInterpreter(Mapping mapping, IRefactoringInterpreter interpreter) {
+	public ASSIGNInterpreter(RoleMapping mapping, IRefactoringInterpreter interpreter) {
 		this.mapping = mapping;
 		this.valueProvider = new DialogAttributeValueProvider(mapping);
 		this.interpreter = interpreter;

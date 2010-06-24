@@ -14,20 +14,20 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMappingModel/targetMetamodel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMappingModel/mappings"/>
     </genClasses>
-    <genClasses ecoreClass="rolemapping.ecore#//Mapping">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rolemapping.ecore#//Mapping/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//Mapping/mappedRoleModel"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//Mapping/roleToMetaelement"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference rolemapping.ecore#//Mapping/owningMappingModel"/>
-      <genOperations ecoreOperation="rolemapping.ecore#//Mapping/getAllMappedRoles"/>
-      <genOperations ecoreOperation="rolemapping.ecore#//Mapping/getMappedRolesForEObject">
-        <genParameters ecoreParameter="rolemapping.ecore#//Mapping/getMappedRolesForEObject/object"/>
+    <genClasses ecoreClass="rolemapping.ecore#//RoleMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rolemapping.ecore#//RoleMapping/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMapping/mappedRoleModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMapping/roleToMetaelement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMapping/owningMappingModel"/>
+      <genOperations ecoreOperation="rolemapping.ecore#//RoleMapping/getAllMappedRoles"/>
+      <genOperations ecoreOperation="rolemapping.ecore#//RoleMapping/getMappedRolesForEObject">
+        <genParameters ecoreParameter="rolemapping.ecore#//RoleMapping/getMappedRolesForEObject/object"/>
       </genOperations>
-      <genOperations ecoreOperation="rolemapping.ecore#//Mapping/getEClassForRole">
-        <genParameters ecoreParameter="rolemapping.ecore#//Mapping/getEClassForRole/role"/>
+      <genOperations ecoreOperation="rolemapping.ecore#//RoleMapping/getEClassForRole">
+        <genParameters ecoreParameter="rolemapping.ecore#//RoleMapping/getEClassForRole/role"/>
       </genOperations>
-      <genOperations ecoreOperation="rolemapping.ecore#//Mapping/getConcreteMappingForRole">
-        <genParameters ecoreParameter="rolemapping.ecore#//Mapping/getConcreteMappingForRole/role"/>
+      <genOperations ecoreOperation="rolemapping.ecore#//RoleMapping/getConcreteMappingForRole">
+        <genParameters ecoreParameter="rolemapping.ecore#//RoleMapping/getConcreteMappingForRole/role"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="rolemapping.ecore#//ConcreteMapping">

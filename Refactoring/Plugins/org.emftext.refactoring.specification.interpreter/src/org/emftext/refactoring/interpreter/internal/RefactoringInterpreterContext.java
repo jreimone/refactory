@@ -19,7 +19,7 @@ import org.emftext.language.refactoring.refactoring_specification.TRACE;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableAssignment;
 import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
@@ -35,7 +35,7 @@ public class RefactoringInterpreterContext {
 	private Map<Variable, EObject> varInstanceMap;
 	private Map<Variable, List<EObject>> varInstancesMap;
 	private Map<IndexVariable, Integer> varIndexMap;
-	private Mapping mapping;
+	private RoleMapping mapping;
 
 	public RefactoringInterpreterContext(){
 		varInstanceMap = new LinkedHashMap<Variable, EObject>();
@@ -43,7 +43,7 @@ public class RefactoringInterpreterContext {
 		varInstancesMap = new LinkedHashMap<Variable, List<EObject>>();
 	}
 
-	protected void setInitialContext(Mapping mapping){
+	protected void setInitialContext(RoleMapping mapping){
 		this.mapping = mapping;
 	}
 

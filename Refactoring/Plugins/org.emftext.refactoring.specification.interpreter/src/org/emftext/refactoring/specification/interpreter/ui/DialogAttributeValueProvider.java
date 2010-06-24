@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.widgets.Display;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.AbstractValueProvider;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
@@ -24,7 +24,7 @@ import org.emftext.refactoring.util.StringUtil;
 public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribute, Object> implements IAttributeValueProvider, IInputValidator {
 
 	private static final String MESSAGE = "The following attribute has to be provided: \n%1$s:%2$s";
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private EAttribute attribute;
 	private Object value;
 	private int returnCode;
@@ -35,7 +35,7 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 	private EObject realAttributeOwner;
 	private EAttribute realAttribute;
 
-	public DialogAttributeValueProvider(Mapping mapping){
+	public DialogAttributeValueProvider(RoleMapping mapping){
 		super();
 		this.mapping = mapping;
 	}

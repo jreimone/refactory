@@ -34,7 +34,7 @@ import org.emftext.language.refactoring.refactoring_specification.VariableDeclar
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
@@ -52,7 +52,7 @@ import org.emftext.refactoring.util.RoleUtil;
  */
 public class ObjectAssignmentInterpreter {
 
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private List<? extends EObject> selection;
 	private RefactoringInterpreterContext context;
 
@@ -65,7 +65,7 @@ public class ObjectAssignmentInterpreter {
 
 	private ObjectAssignmentCommand command;
 
-	public ObjectAssignmentInterpreter(IRefactoringInterpreter interpreter, Mapping mapping) {
+	public ObjectAssignmentInterpreter(IRefactoringInterpreter interpreter, RoleMapping mapping) {
 		super();
 		this.mapping = mapping;
 		this.interpreter = interpreter;

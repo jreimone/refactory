@@ -19,7 +19,7 @@ import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizard;
 import org.eclipse.ui.IEditorPart;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
@@ -38,10 +38,10 @@ public class ModelRefactoring extends Refactoring {
 	private String name;
 	private TransactionalEditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private IRefactoringFakeInterpreter fakeInterpreter;
 
-	public ModelRefactoring(IRefactorer refactorer, Mapping mapping, TransactionalEditingDomain diagramTransactionalEditingDomain, String name, IEditorPart activeEditor) {
+	public ModelRefactoring(IRefactorer refactorer, RoleMapping mapping, TransactionalEditingDomain diagramTransactionalEditingDomain, String name, IEditorPart activeEditor) {
 		super();
 		this.refactorer = refactorer;
 		this.mapping = mapping;

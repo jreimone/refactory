@@ -17,7 +17,7 @@ package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analys
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 
@@ -29,8 +29,8 @@ public class ConcreteMappingRoleReferenceResolver implements org.emftext.languag
 			return;
 		}
 		EObject parent = container.eContainer();
-		if (parent instanceof Mapping) {
-			Mapping mapping = (Mapping) parent;
+		if (parent instanceof RoleMapping) {
+			RoleMapping mapping = (RoleMapping) parent;
 			RoleModel roleModel = mapping.getMappedRoleModel();
 			if (roleModel != null && ! roleModel.eIsProxy()) {
 				List<Role> roles = roleModel.getRoles();

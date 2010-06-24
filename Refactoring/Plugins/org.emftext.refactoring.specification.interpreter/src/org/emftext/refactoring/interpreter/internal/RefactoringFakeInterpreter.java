@@ -19,7 +19,7 @@ public class RefactoringFakeInterpreter extends RefactoringInterpreter implement
 		super(realInterpreter.getPostProcessor());
 		this.realInterpreter = realInterpreter;
 //		valueProviderMap = new LinkedHashMap<EObject, IValueProvider<?,?>>();
-		initialize(realInterpreter.getRefactoringSpecification(), realInterpreter.getMapping());
+		initialize(realInterpreter.getRefactoringSpecification(), realInterpreter.getRoleMapping());
 		valuesToProvide = new LinkedList<IValueProvider<?,?>>();
 	}
 	

@@ -5,7 +5,7 @@ package org.emftext.refactoring.interpreter;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 
 /**
  * @author Jan Reimann
@@ -13,7 +13,7 @@ import org.emftext.language.refactoring.rolemapping.Mapping;
  */
 public class RefactoringStatus implements IRefactoringStatus {
 
-	private Mapping mapping;
+	private RoleMapping mapping;
 	private IStatus internalStatus;
 
 	/**
@@ -44,20 +44,20 @@ public class RefactoringStatus implements IRefactoringStatus {
 	 * @param severity the severity, e.g. {@link IRefactoringStatus#OK}
 	 * @param message the message for the user
 	 */
-	public RefactoringStatus(Mapping mapping, int severity, String message) {
+	public RefactoringStatus(RoleMapping mapping, int severity, String message) {
 		this(severity, message);
 		this.mapping = mapping;
 	}
 
-	public RefactoringStatus(Mapping mapping, int severity, String message, Throwable throwable) {
+	public RefactoringStatus(RoleMapping mapping, int severity, String message, Throwable throwable) {
 		this(severity, message, throwable);
 		this.mapping = mapping;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.emftext.refactoring.interpreter.IRefactoringStatus#getMapping()
+	 * @see org.emftext.refactoring.interpreter.IRefactoringStatus#getRoleMapping()
 	 */
-	public Mapping getMapping() {
+	public RoleMapping getRoleMapping() {
 		return mapping;
 	}
 

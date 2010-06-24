@@ -6,7 +6,7 @@ package org.emftext.refactoring.roleconstraintchecker;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 
 /**
@@ -28,5 +28,5 @@ public interface IRoleConstraintValidator {
 	 * @param mapping the mapping to validate
 	 * @return
 	 */
-	public List<IStatus> validateMapping(Mapping mapping);
+	public List<IStatus> validateMapping(RoleMapping mapping);
 }

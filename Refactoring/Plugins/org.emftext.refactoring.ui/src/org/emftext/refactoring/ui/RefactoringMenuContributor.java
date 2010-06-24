@@ -27,7 +27,7 @@ import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
 import org.eclipse.ui.services.IServiceLocator;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.emftext.refactoring.editorconnector.IEditorConnectorExtensionPoint;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -125,9 +125,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
 			if (refactorer != null) {
 				refactorer.setInput(selectedElements);
-				List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
+				List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
 				boolean containsEntries = false;
-				for (Mapping mapping : mappings) {
+				for (RoleMapping mapping : mappings) {
 					Resource mappingResource = mapping.eResource();
 					if (mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0)) {
 						RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());

@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
@@ -27,14 +27,14 @@ public class RolemappingBuilder implements org.emftext.language.refactoring.role
 			EObject root = resource.getContents().get(0);
 			if(root instanceof RoleMappingModel){
 				RoleMappingModel model = (RoleMappingModel) root;
-				List<Mapping> mappings = model.getMappings();
+				List<RoleMapping> mappings = model.getMappings();
 				String uriString = model.getTargetMetamodel().getNsURI();
-				Map<String,Mapping> registeredMappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(uriString);
+				Map<String,RoleMapping> registeredMappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(uriString);
 				if(registeredMappings == null || registeredMappings.size() == 0){
 					return true;
 				} else {
-					for (Mapping mapping : mappings) {
-						Mapping registeredMapping = registeredMappings.get(mapping.getName());
+					for (RoleMapping mapping : mappings) {
+						RoleMapping registeredMapping = registeredMappings.get(mapping.getName());
 						if(registeredMapping == null){
 							return true;
 						}
@@ -50,7 +50,7 @@ public class RolemappingBuilder implements org.emftext.language.refactoring.role
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		RoleMappingModel model = (RoleMappingModel) resource.getContents().get(0);
 		if((resource.getErrors() == null || resource.getErrors().size() == 0)){
-			List<Mapping> unRegisterables = IRoleMappingRegistry.INSTANCE.registerRoleMapping(model);
+			List<RoleMapping> unRegisterables = IRoleMappingRegistry.INSTANCE.registerRoleMapping(model);
 			if(unRegisterables != null && unRegisterables.size() > 0){
 				IRoleMappingRegistry.INSTANCE.updateMappings(unRegisterables);
 			}
