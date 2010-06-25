@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
@@ -56,7 +56,7 @@ public class RefactoringInterpreterTest extends TestClass{
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		assertNotNull(registry);
 		EObject model = TestUtil.getModelFromResource(resource);
-		Map<String, Mapping> roleMappings = registry.getRoleMappingsForUri(model.eClass().getEPackage().getNsURI());
+		Map<String, RoleMapping> roleMappings = registry.getRoleMappingsForUri(model.eClass().getEPackage().getNsURI());
 		assertNotNull(roleMappings);
 		
 		File path = getTestDataSet().getInputFileByPattern(PATH);
@@ -66,10 +66,10 @@ public class RefactoringInterpreterTest extends TestClass{
 		assertNotNull(elements);
 		assertTrue(elements.size() > 0);
 		
-		List<Mapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elements, roleMappings, 1.0);
+		List<RoleMapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elements, roleMappings, 1.0);
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
-		for (Mapping mapping : mappings) {
+		for (RoleMapping mapping : mappings) {
 			Set<Role> roles = RoleUtil.getAppliedRoles(elements, mapping);
 			assertNotNull(roles);
 			assertTrue(roles.size() > 0);
@@ -98,10 +98,10 @@ public class RefactoringInterpreterTest extends TestClass{
 		
 		List<EObject> elements = getElementsByQuery(CREATE_PATH, 1, resource);
 		refactorer.setInput(elements);
-		List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
+		List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
-		Mapping mapping = mappings.get(0);
+		RoleMapping mapping = mappings.get(0);
 		refactorer.fakeRefactor(mapping);
 		EObject refactoredModel = refactorer.refactor();
 		EObject originalModel = getTestDataSet().getResourceByPattern(CREATE, false).getContents().get(0);
@@ -153,10 +153,10 @@ public class RefactoringInterpreterTest extends TestClass{
 		
 		List<EObject> elements = getElementsByQuery(PATH, 1, resource);
 		refactorer.setInput(elements);
-		List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
+		List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
-		Mapping mapping = mappings.get(0);
+		RoleMapping mapping = mappings.get(0);
 		refactorer.fakeRefactor(mapping);
 		EObject refactoredRoot = refactorer.refactor();
 		EObject originalModel = getTestDataSet().getResourceByPattern(MODEL, false).getContents().get(0);

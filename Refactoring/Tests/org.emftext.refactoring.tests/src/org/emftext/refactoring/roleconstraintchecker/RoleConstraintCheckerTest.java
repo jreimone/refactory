@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.refactoring.util.ModelUtil;
@@ -44,11 +44,11 @@ public class RoleConstraintCheckerTest extends TestClass{
 		RoleMappingModel mappingModel = TestUtil.getExpectedModelFromFile(input, RoleMappingModel.class);
 		EPackage metamodel = mappingModel.getTargetMetamodel();
 		assertNotNull("Metamodel mustn't be null", metamodel);
-		EList<Mapping> mappings = mappingModel.getMappings();
+		EList<RoleMapping> mappings = mappingModel.getMappings();
 		assertTrue("There must be mappings", mappings.size() > 0);
 		EList<EObject> prohibitionMappings = ModelUtil.filterObjectsByAttribute(mappings.iterator(), "name", "TestProhibitionMapping");
 		assertEquals("There must be a prohibition mapping", 1, prohibitionMappings.size());
-		Mapping prohibitionMapping = (Mapping) prohibitionMappings.get(0);
+		RoleMapping prohibitionMapping = (RoleMapping) prohibitionMappings.get(0);
 //		prohibitionMapping.getMappedRoleModel()
 		EList<ConcreteMapping> concreteMappings = prohibitionMapping.getRoleToMetaelement();
 		assertTrue("There must be concrete mappings", concreteMappings.size() > 0);

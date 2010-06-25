@@ -8,11 +8,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.test.core.AbstractRefactoringTest;
 import org.junit.Test;
 
 /**
@@ -39,6 +38,6 @@ public class UtilTest{
 //		mappingModel = getExpectedModelFromFile(pathRoleMapping, RoleMappingModel.class);
 		EList<EObject> mappings = ModelUtil.filterObjectsByAttribute(mappingModel.eAllContents(), "name", "ExtractMethod4Statements");
 		assertEquals("There must be 1 mapping with name 'ExtractMethod4Statements'", 1, mappings.size());
-		assertTrue("The filtered element must be an instance of 'Mapping'", mappings.get(0) instanceof Mapping);
+		assertTrue("The filtered element must be an instance of 'RoleMapping'", mappings.get(0) instanceof RoleMapping);
 	}
 }
