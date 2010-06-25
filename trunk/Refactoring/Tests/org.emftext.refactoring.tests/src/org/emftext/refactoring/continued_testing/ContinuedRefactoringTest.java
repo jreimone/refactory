@@ -13,23 +13,15 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.metamodel.DiffElement;
-import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
-import org.eclipse.emf.compare.diff.metamodel.DiffModel;
-import org.eclipse.emf.compare.diff.service.DiffService;
 import org.eclipse.emf.compare.match.metamodel.MatchElement;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.metamodel.UnmatchElement;
 import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.emftext.language.refactoring.rolemapping.Mapping;
-import org.emftext.refactoring.interpreter.IAttributeValueProvider;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
-import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter;
 import org.emftext.refactoring.test.QueryUtil;
@@ -88,13 +80,13 @@ public class ContinuedRefactoringTest extends TestClass {
 		assertNotNull("No refactoring found.", refactorer);
 		
 		refactorer.setInput(elements);
-		List<Mapping> mappings = refactorer.getPossibleMappings(1.0);
+		List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		File mappingFile = getTestDataSet().getInputFileByPattern(MAPPING_PATTERN);
 		String mappingName = QueryUtil.getLineInFile(mappingFile, 1).trim();
-		Mapping mappingToUse = null;
-		for (Mapping mapping : mappings) {
+		RoleMapping mappingToUse = null;
+		for (RoleMapping mapping : mappings) {
 			if(mapping.getName().equals(mappingName)){
 				mappingToUse = mapping;
 			}

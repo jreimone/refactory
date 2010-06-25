@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
-import org.eclipse.uml2.uml.internal.resource.UML22UMLResourceFactoryImpl;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
@@ -38,13 +37,12 @@ import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage;
-import org.emftext.language.refactoring.rolemapping.Mapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RolesPackage;
-import org.emftext.language.refactoring.roles.postprocessing.EmptyOutgoingRelationTest;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
 import org.emftext.language.textadventure.TextadventurePackage;
@@ -56,8 +54,6 @@ import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
-import org.emftext.refactoring.roleconstraintchecker.RoleConstraintCheckerTest;
-import org.emftext.refactoring.specification.interpreter.RefactoringInterpreterTest;
 import org.emftext.refactoring.tests.properties.Category;
 import org.emftext.refactoring.tests.properties.EObjectReferenceValue;
 import org.emftext.refactoring.tests.properties.KeyValuePair;
@@ -223,9 +219,9 @@ public class RefactoringTests extends TestCase{
 							Class<?> postProcessorClass = Class.forName(qualifiedClass);
 							if(IRefactoringPostProcessor.class.isAssignableFrom(postProcessorClass)){
 								IRefactoringPostProcessor postProcessor = (IRefactoringPostProcessor) postProcessorClass.newInstance();
-								Map<String, Mapping> mappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(nsUri);
+								Map<String, RoleMapping> mappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(nsUri);
 								if(mappings != null){
-									Mapping mapping = mappings.get(mappingName);
+									RoleMapping mapping = mappings.get(mappingName);
 									if(mapping != null){
 										IRoleMappingRegistry.INSTANCE.registerPostProcessor(mapping, postProcessor);
 									}
