@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.emftext.language.custom_sandwich"
+      id="org.emftext.language.customsandwich"
       label="EMFText Syntax: Sandwich - Safe Template Language"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
