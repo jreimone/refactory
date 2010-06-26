@@ -3,7 +3,6 @@ package org.emftext.refactoring.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -18,20 +17,20 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class RegistryUtil {
 
-	public static IConfigurationElement[] collectConfigurationElements(String extensionPoint){
+	public static IConfigurationElement[] collectConfigurationElements(String extensionPoint) {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
-		if(registry == null){
+		if (registry == null) {
 			return new IConfigurationElement[0];
 		}
 		return registry.getConfigurationElementsFor(extensionPoint);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static <T extends EObject> Map<T, IConfigurationElement> collectRegisteredResources(String extensionPoint, String attribute, Class<T> expectedModel){
+	public static <T extends EObject> Map<T, IConfigurationElement> collectRegisteredResources(String extensionPoint, String attribute, Class<T> expectedModel) {
 		ResourceSet rs = new ResourceSetImpl();
 		Map<T, IConfigurationElement> map = new LinkedHashMap<T, IConfigurationElement>();
 		IConfigurationElement[] elements = collectConfigurationElements(extensionPoint);
-		if(elements == null){
+		if (elements == null) {
 			return map;
 		}
 		for (IConfigurationElement element : elements) {
@@ -39,52 +38,53 @@ public class RegistryUtil {
 			String plugin = element.getContributor().getName();
 			URI uri = URI.createPlatformPluginURI("/" + plugin + "/" + value, true);
 			Resource resource = null;
-			try{
+			try {
 				resource = rs.getResource(uri, true);
 			} catch (Exception e) {
 				log(String.format("Resource '%1$s' couldn't be loaded", value), IStatus.ERROR);
 				continue;
 			}
-			if(resource == null){
+			if (resource == null) {
 				log(String.format("Resource '%1$s' couldn't be loaded", value), IStatus.ERROR);
 				continue;
 			}
 			EObject model = resource.getContents().get(0);
-			if(expectedModel.isInstance(model)){
+			if (expectedModel.isInstance(model)) {
 				map.put((T) model, element);
 			} else {
-				log(String.format("The resource with URI '%1$s' doesn't contain a %2$s", uri.toString(), expectedModel.getClass().getSimpleName())
-						, IStatus.ERROR);
+				log(String.format("The resource with URI '%1$s' doesn't contain a %2$s", uri.toString(), expectedModel.getClass().getSimpleName()), IStatus.ERROR);
 			}
 		}
 		return map;
 	}
-	
-	public static void log(String message, int status, Exception e){
-		if(e.getStackTrace() != null && e.getStackTrace().length > 0){
-//		e.printStackTrace();
+
+	public static void log(String message, int statusCode, Exception e) {
+		if (e.getStackTrace() != null && e.getStackTrace().length > 0) {
+			message = e.getMessage() + "\n" + message;
+			IStatus status = new Status(statusCode, RefactoringUtilPlugin.PLUGIN_ID, message, e);
+			RefactoringUtilPlugin.getDefault().getLog().log(status);
 		} else {
 			message = e.getMessage() + "\n" + message;
+			log(message, statusCode);
 		}
-		log(message, status);
 	}
-	
-	public static void log(String message, int statusCode){
+
+	public static void log(String message, int statusCode) {
 		Level level = null;
 		switch (statusCode) {
-		case IStatus.ERROR:
-			level = Level.SEVERE;
-			break;
-		case IStatus.INFO:
-			level = Level.INFO;
-			break;
-		case IStatus.WARNING:
-			level = Level.WARNING;
-			break;
-		default:
-			break;
+			case IStatus.ERROR:
+				level = Level.SEVERE;
+				break;
+			case IStatus.INFO:
+				level = Level.INFO;
+				break;
+			case IStatus.WARNING:
+				level = Level.WARNING;
+				break;
+			default:
+				break;
 		}
-		IStatus status = new Status(statusCode, RefactoringUtilPlugin.PLUGIN_ID, message); 
+		IStatus status = new Status(statusCode, RefactoringUtilPlugin.PLUGIN_ID, message);
 		RefactoringUtilPlugin.getDefault().getLog().log(status);
 //		Logger.getLogger(RegistryUtil.class.getSimpleName()).log(level, message);
 	}
