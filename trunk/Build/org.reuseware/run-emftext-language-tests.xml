@@ -68,6 +68,7 @@
 			<pathelement path="../org.emftext.language.chess/bin"/>
 			<pathelement path="../org.emftext.language.chess.checker/bin"/>
 			<pathelement path="../org.emftext.language.chess.resource.cg/bin"/>
+			<pathelement path="../org.emftext.language.chess.test/bin"/>
 			<pathelement path="../org.emftext.language.conference/bin"/>
 			<pathelement path="../org.emftext.language.conference.resource.conference/bin"/>
 			<pathelement path="../org.emftext.language.csv/bin"/>
@@ -103,6 +104,7 @@
 			<pathelement path="../org.emftext.language.forms/bin"/>
 			<pathelement path="../org.emftext.language.forms.generator/bin"/>
 			<pathelement path="../org.emftext.language.forms.resource.forms/bin"/>
+			<pathelement path="../org.emftext.language.forms.test/bin"/>
 			<pathelement path="../org.emftext.language.formular/bin"/>
 			<pathelement path="../org.emftext.language.formular.generator/bin"/>
 			<pathelement path="../org.emftext.language.formular.resource.formular/bin"/>
@@ -321,10 +323,12 @@
 	
 	<target name="run-simple-tests" depends="create-classpath-jar">
 		<run-test plugin="org.emftext.language.c_sharp" extension="csharp" />
+		<run-test plugin="org.emftext.language.chess" extension="chess" />
 		<run-test plugin="org.emftext.language.dot" extension="dot" />
 		<run-test plugin="org.emftext.language.ecore" extension="text" />
 		<run-test plugin="org.emftext.language.efactory" extension="efactory" />
 		<run-test plugin="org.emftext.language.featherweightjava" extension="fj" />
+		<run-test plugin="org.emftext.language.forms" extension="forms" />
 		<run-test plugin="org.emftext.language.javaproperties" extension="properties" />
 		<run-test plugin="org.emftext.language.regexp" extension="regexp" />
 		<run-test plugin="org.emftext.language.simplec" extension="c" />
