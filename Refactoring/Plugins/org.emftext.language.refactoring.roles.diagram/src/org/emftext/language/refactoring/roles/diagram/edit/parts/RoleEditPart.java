@@ -1,6 +1,7 @@
 package org.emftext.language.refactoring.roles.diagram.edit.parts;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -65,11 +66,9 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected void createDefaultEditPolicies() {
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
-				new CreationEditPolicy());
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicy());
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RoleItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
@@ -98,8 +97,7 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-		RoleFigure figure = new RoleFigure();
-		return primaryShape = figure;
+		return primaryShape = new RoleFigure();
 	}
 
 	/**
@@ -114,8 +112,7 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof RoleNameEditPart) {
-			((RoleNameEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getFigureRoleNameFigure());
+			((RoleNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureRoleNameFigure());
 			return true;
 		}
 		return false;
@@ -248,15 +245,14 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	public EditPart getPrimaryChildEditPart() {
-		return getChildBySemanticHint(RolesVisualIDRegistry
-				.getType(RoleNameEditPart.VISUAL_ID));
+		return getChildBySemanticHint(RolesVisualIDRegistry.getType(RoleNameEditPart.VISUAL_ID));
 	}
 
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnSource() {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMARelTypesOnSource() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(4);
 		types.add(RolesElementTypes.RoleImplication_4001);
 		types.add(RolesElementTypes.RoleProhibition_4002);
 		types.add(RolesElementTypes.RoleAssociation_4003);
@@ -267,9 +263,8 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnSourceAndTarget(
-			IGraphicalEditPart targetEditPart) {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMARelTypesOnSourceAndTarget(IGraphicalEditPart targetEditPart) {
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
 		if (targetEditPart instanceof org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart) {
 			types.add(RolesElementTypes.RoleImplication_4001);
 		}
@@ -288,19 +283,15 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMATypesForTarget(
-			IElementType relationshipType) {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
 		if (relationshipType == RolesElementTypes.RoleImplication_4001) {
 			types.add(RolesElementTypes.Role_2001);
-		}
-		if (relationshipType == RolesElementTypes.RoleProhibition_4002) {
+		} else if (relationshipType == RolesElementTypes.RoleProhibition_4002) {
 			types.add(RolesElementTypes.Role_2001);
-		}
-		if (relationshipType == RolesElementTypes.RoleAssociation_4003) {
+		} else if (relationshipType == RolesElementTypes.RoleAssociation_4003) {
 			types.add(RolesElementTypes.Role_2001);
-		}
-		if (relationshipType == RolesElementTypes.RoleComposition_4004) {
+		} else if (relationshipType == RolesElementTypes.RoleComposition_4004) {
 			types.add(RolesElementTypes.Role_2001);
 		}
 		return types;
@@ -309,8 +300,8 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnTarget() {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMARelTypesOnTarget() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(4);
 		types.add(RolesElementTypes.RoleImplication_4001);
 		types.add(RolesElementTypes.RoleProhibition_4002);
 		types.add(RolesElementTypes.RoleAssociation_4003);
@@ -321,19 +312,15 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMATypesForSource(
-			IElementType relationshipType) {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
 		if (relationshipType == RolesElementTypes.RoleImplication_4001) {
 			types.add(RolesElementTypes.Role_2001);
-		}
-		if (relationshipType == RolesElementTypes.RoleProhibition_4002) {
+		} else if (relationshipType == RolesElementTypes.RoleProhibition_4002) {
 			types.add(RolesElementTypes.Role_2001);
-		}
-		if (relationshipType == RolesElementTypes.RoleAssociation_4003) {
+		} else if (relationshipType == RolesElementTypes.RoleAssociation_4003) {
 			types.add(RolesElementTypes.Role_2001);
-		}
-		if (relationshipType == RolesElementTypes.RoleComposition_4004) {
+		} else if (relationshipType == RolesElementTypes.RoleComposition_4004) {
 			types.add(RolesElementTypes.Role_2001);
 		}
 		return types;
@@ -344,14 +331,10 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 */
 	public EditPart getTargetEditPart(Request request) {
 		if (request instanceof CreateViewAndElementRequest) {
-			CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request)
-					.getViewAndElementDescriptor()
-					.getCreateElementRequestAdapter();
-			IElementType type = (IElementType) adapter
-					.getAdapter(IElementType.class);
+			CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request).getViewAndElementDescriptor().getCreateElementRequestAdapter();
+			IElementType type = (IElementType) adapter.getAdapter(IElementType.class);
 			if (type == RolesElementTypes.RoleAttribute_3001) {
-				return getChildBySemanticHint(RolesVisualIDRegistry
-						.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
+				return getChildBySemanticHint(RolesVisualIDRegistry.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
 			}
 		}
 		return super.getTargetEditPart(request);
@@ -381,8 +364,7 @@ public class RoleEditPart extends ShapeNodeEditPart {
 
 			this.setLayoutManager(layoutThis);
 
-			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(20),
-					getMapMode().DPtoLP(20)));
+			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(20), getMapMode().DPtoLP(20)));
 			this.setLineWidth(2);
 			this.setForegroundColor(ColorConstants.gray);
 			createContents();

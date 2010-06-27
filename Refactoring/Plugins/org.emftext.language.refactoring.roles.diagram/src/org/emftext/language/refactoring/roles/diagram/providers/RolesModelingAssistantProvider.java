@@ -34,16 +34,15 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	 * @generated
 	 */
 	public List getTypesForPopupBar(IAdaptable host) {
-		IGraphicalEditPart editPart = (IGraphicalEditPart) host
-				.getAdapter(IGraphicalEditPart.class);
-		if (editPart instanceof RoleEditPart) {
-			ArrayList types = new ArrayList(1);
-			types.add(RolesElementTypes.RoleAttribute_3001);
+		IGraphicalEditPart editPart = (IGraphicalEditPart) host.getAdapter(IGraphicalEditPart.class);
+		if (editPart instanceof RoleModelEditPart) {
+			ArrayList<IElementType> types = new ArrayList<IElementType>(1);
+			types.add(RolesElementTypes.Role_2001);
 			return types;
 		}
-		if (editPart instanceof RoleModelEditPart) {
-			ArrayList types = new ArrayList(1);
-			types.add(RolesElementTypes.Role_2001);
+		if (editPart instanceof RoleEditPart) {
+			ArrayList<IElementType> types = new ArrayList<IElementType>(1);
+			types.add(RolesElementTypes.RoleAttribute_3001);
 			return types;
 		}
 		return Collections.EMPTY_LIST;
@@ -53,8 +52,7 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	 * @generated
 	 */
 	public List getRelTypesOnSource(IAdaptable source) {
-		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
-				.getAdapter(IGraphicalEditPart.class);
+		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof RoleEditPart) {
 			return ((RoleEditPart) sourceEditPart).getMARelTypesOnSource();
 		}
@@ -65,8 +63,7 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	 * @generated
 	 */
 	public List getRelTypesOnTarget(IAdaptable target) {
-		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
-				.getAdapter(IGraphicalEditPart.class);
+		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
 		if (targetEditPart instanceof RoleEditPart) {
 			return ((RoleEditPart) targetEditPart).getMARelTypesOnTarget();
 		}
@@ -76,15 +73,11 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
-	public List getRelTypesOnSourceAndTarget(IAdaptable source,
-			IAdaptable target) {
-		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
-				.getAdapter(IGraphicalEditPart.class);
-		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
-				.getAdapter(IGraphicalEditPart.class);
+	public List getRelTypesOnSourceAndTarget(IAdaptable source, IAdaptable target) {
+		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
+		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof RoleEditPart) {
-			return ((RoleEditPart) sourceEditPart)
-					.getMARelTypesOnSourceAndTarget(targetEditPart);
+			return ((RoleEditPart) sourceEditPart).getMARelTypesOnSourceAndTarget(targetEditPart);
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -92,13 +85,10 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
-	public List getTypesForSource(IAdaptable target,
-			IElementType relationshipType) {
-		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
-				.getAdapter(IGraphicalEditPart.class);
+	public List getTypesForSource(IAdaptable target, IElementType relationshipType) {
+		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
 		if (targetEditPart instanceof RoleEditPart) {
-			return ((RoleEditPart) targetEditPart)
-					.getMATypesForSource(relationshipType);
+			return ((RoleEditPart) targetEditPart).getMATypesForSource(relationshipType);
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -106,13 +96,10 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
-	public List getTypesForTarget(IAdaptable source,
-			IElementType relationshipType) {
-		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
-				.getAdapter(IGraphicalEditPart.class);
+	public List getTypesForTarget(IAdaptable source, IElementType relationshipType) {
+		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof RoleEditPart) {
-			return ((RoleEditPart) sourceEditPart)
-					.getMATypesForTarget(relationshipType);
+			return ((RoleEditPart) sourceEditPart).getMATypesForTarget(relationshipType);
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -120,19 +107,15 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
-	public EObject selectExistingElementForSource(IAdaptable target,
-			IElementType relationshipType) {
-		return selectExistingElement(target, getTypesForSource(target,
-				relationshipType));
+	public EObject selectExistingElementForSource(IAdaptable target, IElementType relationshipType) {
+		return selectExistingElement(target, getTypesForSource(target, relationshipType));
 	}
 
 	/**
 	 * @generated
 	 */
-	public EObject selectExistingElementForTarget(IAdaptable source,
-			IElementType relationshipType) {
-		return selectExistingElement(source, getTypesForTarget(source,
-				relationshipType));
+	public EObject selectExistingElementForTarget(IAdaptable source, IElementType relationshipType) {
+		return selectExistingElement(source, getTypesForTarget(source, relationshipType));
 	}
 
 	/**
@@ -142,15 +125,14 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 		if (types.isEmpty()) {
 			return null;
 		}
-		IGraphicalEditPart editPart = (IGraphicalEditPart) host
-				.getAdapter(IGraphicalEditPart.class);
+		IGraphicalEditPart editPart = (IGraphicalEditPart) host.getAdapter(IGraphicalEditPart.class);
 		if (editPart == null) {
 			return null;
 		}
 		Diagram diagram = (Diagram) editPart.getRoot().getContents().getModel();
-		Collection elements = new HashSet();
-		for (Iterator it = diagram.getElement().eAllContents(); it.hasNext();) {
-			EObject element = (EObject) it.next();
+		HashSet<EObject> elements = new HashSet<EObject>();
+		for (Iterator<EObject> it = diagram.getElement().eAllContents(); it.hasNext();) {
+			EObject element = it.next();
 			if (isApplicableElement(element, types)) {
 				elements.add(element);
 			}
@@ -158,16 +140,14 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 		if (elements.isEmpty()) {
 			return null;
 		}
-		return selectElement((EObject[]) elements.toArray(new EObject[elements
-				.size()]));
+		return selectElement((EObject[]) elements.toArray(new EObject[elements.size()]));
 	}
 
 	/**
 	 * @generated
 	 */
 	protected boolean isApplicableElement(EObject element, Collection types) {
-		IElementType type = ElementTypeRegistry.getInstance().getElementType(
-				element);
+		IElementType type = ElementTypeRegistry.getInstance().getElementType(element);
 		return types.contains(type);
 	}
 
@@ -176,11 +156,8 @@ public class RolesModelingAssistantProvider extends ModelingAssistantProvider {
 	 */
 	protected EObject selectElement(EObject[] elements) {
 		Shell shell = Display.getCurrent().getActiveShell();
-		ILabelProvider labelProvider = new AdapterFactoryLabelProvider(
-				RolesDiagramEditorPlugin.getInstance()
-						.getItemProvidersAdapterFactory());
-		ElementListSelectionDialog dialog = new ElementListSelectionDialog(
-				shell, labelProvider);
+		ILabelProvider labelProvider = new AdapterFactoryLabelProvider(RolesDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory());
+		ElementListSelectionDialog dialog = new ElementListSelectionDialog(shell, labelProvider);
 		dialog.setMessage(Messages.RolesModelingAssistantProviderMessage);
 		dialog.setTitle(Messages.RolesModelingAssistantProviderTitle);
 		dialog.setMultipleSelection(false);

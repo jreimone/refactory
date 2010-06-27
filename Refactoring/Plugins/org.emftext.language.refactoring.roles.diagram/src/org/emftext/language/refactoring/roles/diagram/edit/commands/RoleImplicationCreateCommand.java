@@ -40,8 +40,7 @@ public class RoleImplicationCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	public RoleImplicationCreateCommand(CreateRelationshipRequest request,
-			EObject source, EObject target) {
+	public RoleImplicationCreateCommand(CreateRelationshipRequest request, EObject source, EObject target) {
 		super(request.getLabel(), null, request);
 		this.source = source;
 		this.target = target;
@@ -68,23 +67,18 @@ public class RoleImplicationCreateCommand extends EditElementCommand {
 		if (getContainer() == null) {
 			return false;
 		}
-		return RolesBaseItemSemanticEditPolicy.LinkConstraints
-				.canCreateRoleImplication_4001(getContainer(), getSource(),
-						getTarget());
+		return RolesBaseItemSemanticEditPolicy.getLinkConstraints().canCreateRoleImplication_4001(getContainer(), getSource(), getTarget());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-			IAdaptable info) throws ExecutionException {
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
-			throw new ExecutionException(
-					"Invalid arguments in create link command"); //$NON-NLS-1$
+			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
 		}
 
-		RoleImplication newElement = RolesFactory.eINSTANCE
-				.createRoleImplication();
+		RoleImplication newElement = RolesFactory.eINSTANCE.createRoleImplication();
 		getContainer().getCollaborations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
@@ -97,22 +91,14 @@ public class RoleImplicationCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected void doConfigure(RoleImplication newElement,
-			IProgressMonitor monitor, IAdaptable info)
-			throws ExecutionException {
-		IElementType elementType = ((CreateElementRequest) getRequest())
-				.getElementType();
-		ConfigureRequest configureRequest = new ConfigureRequest(
-				getEditingDomain(), newElement, elementType);
-		configureRequest.setClientContext(((CreateElementRequest) getRequest())
-				.getClientContext());
+	protected void doConfigure(RoleImplication newElement, IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+		IElementType elementType = ((CreateElementRequest) getRequest()).getElementType();
+		ConfigureRequest configureRequest = new ConfigureRequest(getEditingDomain(), newElement, elementType);
+		configureRequest.setClientContext(((CreateElementRequest) getRequest()).getClientContext());
 		configureRequest.addParameters(getRequest().getParameters());
-		configureRequest.setParameter(CreateRelationshipRequest.SOURCE,
-				getSource());
-		configureRequest.setParameter(CreateRelationshipRequest.TARGET,
-				getTarget());
-		ICommand configureCommand = elementType
-				.getEditCommand(configureRequest);
+		configureRequest.setParameter(CreateRelationshipRequest.SOURCE, getSource());
+		configureRequest.setParameter(CreateRelationshipRequest.TARGET, getTarget());
+		ICommand configureCommand = elementType.getEditCommand(configureRequest);
 		if (configureCommand != null && configureCommand.canExecute()) {
 			configureCommand.execute(monitor, info);
 		}
@@ -155,8 +141,7 @@ public class RoleImplicationCreateCommand extends EditElementCommand {
 		// Find container element for the new link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null; element = element
-				.eContainer()) {
+		for (EObject element = source; element != null; element = element.eContainer()) {
 			if (element instanceof RoleModel) {
 				return (RoleModel) element;
 			}

@@ -18,6 +18,8 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.emftext.language.refactoring.roles.diagram.edit.policies.RolesBaseItemSemanticEditPolicy;
+import org.emftext.language.refactoring.roles.diagram.providers.ElementInitializers;
 import org.emftext.language.refactoring.roles.provider.RolesItemProviderAdapterFactory;
 import org.osgi.framework.BundleContext;
 
@@ -34,8 +36,7 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(
-			ID);
+	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(ID);
 
 	/**
 	 * @generated
@@ -53,6 +54,16 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	private RolesDocumentProvider documentProvider;
 
 	/**
+	* @generated
+	*/
+	private RolesBaseItemSemanticEditPolicy.LinkConstraints linkConstraints;
+
+	/**
+	* @generated
+	*/
+	private ElementInitializers initializers;
+
+	/**
 	 * @generated
 	 */
 	public RolesDiagramEditorPlugin() {
@@ -64,8 +75,7 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		instance = this;
-		PreferencesHint.registerPreferenceStore(DIAGRAM_PREFERENCES_HINT,
-				getPreferenceStore());
+		PreferencesHint.registerPreferenceStore(DIAGRAM_PREFERENCES_HINT, getPreferenceStore());
 		adapterFactory = createAdapterFactory();
 	}
 
@@ -75,6 +85,8 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		adapterFactory.dispose();
 		adapterFactory = null;
+		linkConstraints = null;
+		initializers = null;
 		instance = null;
 		super.stop(context);
 	}
@@ -90,7 +102,7 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	 * @generated
 	 */
 	protected ComposedAdapterFactory createAdapterFactory() {
-		List factories = new ArrayList();
+		ArrayList<AdapterFactory> factories = new ArrayList<AdapterFactory>();
 		fillItemProviderFactories(factories);
 		return new ComposedAdapterFactory(factories);
 	}
@@ -98,7 +110,7 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	protected void fillItemProviderFactories(List factories) {
+	protected void fillItemProviderFactories(List<AdapterFactory> factories) {
 		factories.add(new RolesItemProviderAdapterFactory());
 		factories.add(new ResourceItemProviderAdapterFactory());
 		factories.add(new ReflectiveItemProviderAdapterFactory());
@@ -115,11 +127,9 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	 * @generated
 	 */
 	public ImageDescriptor getItemImageDescriptor(Object item) {
-		IItemLabelProvider labelProvider = (IItemLabelProvider) adapterFactory
-				.adapt(item, IItemLabelProvider.class);
+		IItemLabelProvider labelProvider = (IItemLabelProvider) adapterFactory.adapt(item, IItemLabelProvider.class);
 		if (labelProvider != null) {
-			return ExtendedImageRegistry.getInstance().getImageDescriptor(
-					labelProvider.getImage(item));
+			return ExtendedImageRegistry.getInstance().getImageDescriptor(labelProvider.getImage(item));
 		}
 		return null;
 	}
@@ -148,8 +158,7 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	public static ImageDescriptor findImageDescriptor(String path) {
 		final IPath p = new Path(path);
 		if (p.isAbsolute() && p.segmentCount() > 1) {
-			return AbstractUIPlugin.imageDescriptorFromPlugin(p.segment(0), p
-					.removeFirstSegments(1).makeAbsolute().toString());
+			return AbstractUIPlugin.imageDescriptorFromPlugin(p.segment(0), p.removeFirstSegments(1).makeAbsolute().toString());
 		} else {
 			return getBundledImageDescriptor(p.makeAbsolute().toString());
 		}
@@ -192,6 +201,34 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 	}
 
 	/**
+	* @generated
+	*/
+	public RolesBaseItemSemanticEditPolicy.LinkConstraints getLinkConstraints() {
+		return linkConstraints;
+	}
+
+	/**
+	* @generated
+	*/
+	public void setLinkConstraints(RolesBaseItemSemanticEditPolicy.LinkConstraints lc) {
+		this.linkConstraints = lc;
+	}
+
+	/**
+	* @generated
+	*/
+	public ElementInitializers getElementInitializers() {
+		return initializers;
+	}
+
+	/**
+	* @generated
+	*/
+	public void setElementInitializers(ElementInitializers i) {
+		this.initializers = i;
+	}
+
+	/**
 	 * @generated
 	 */
 	public void logError(String error) {
@@ -205,9 +242,7 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 		if (error == null && throwable != null) {
 			error = throwable.getMessage();
 		}
-		getLog().log(
-				new Status(IStatus.ERROR, RolesDiagramEditorPlugin.ID,
-						IStatus.OK, error, throwable));
+		getLog().log(new Status(IStatus.ERROR, RolesDiagramEditorPlugin.ID, IStatus.OK, error, throwable));
 		debug(error, throwable);
 	}
 
@@ -225,9 +260,7 @@ public class RolesDiagramEditorPlugin extends AbstractUIPlugin {
 		if (message == null && throwable != null) {
 			message = throwable.getMessage();
 		}
-		getLog().log(
-				new Status(IStatus.INFO, RolesDiagramEditorPlugin.ID,
-						IStatus.OK, message, throwable));
+		getLog().log(new Status(IStatus.INFO, RolesDiagramEditorPlugin.ID, IStatus.OK, message, throwable));
 		debug(message, throwable);
 	}
 

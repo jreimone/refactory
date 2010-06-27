@@ -3,7 +3,9 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" modelID="Role Model"
-    diagramFileExtension="rolesdiag">
+    diagramFileExtension="rolesdiag"
+    domainFileExtension="rolestext"
+    templateDirectory="">
   <diagram
       visualID="1000"
       editPartClassName="RoleModelEditPart"
@@ -542,7 +544,8 @@
   <plugin
       name="Role Model Diagram Plugin"
       provider="Jan Reimann, TU Dresden"
-      version="0.0.1">
+      version="0.0.1"
+      printingEnabled="true">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   </plugin>

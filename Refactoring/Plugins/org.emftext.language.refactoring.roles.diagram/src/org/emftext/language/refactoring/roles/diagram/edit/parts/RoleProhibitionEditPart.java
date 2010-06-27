@@ -15,8 +15,7 @@ import org.emftext.language.refactoring.roles.diagram.edit.policies.RoleProhibit
 /**
  * @generated
  */
-public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements
-		ITreeBranchEditPart {
+public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements ITreeBranchEditPart {
 
 	/**
 	 * @generated
@@ -35,8 +34,7 @@ public class RoleProhibitionEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RoleProhibitionItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleProhibitionItemSemanticEditPolicy());
 	}
 
 	/**

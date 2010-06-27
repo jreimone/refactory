@@ -12,8 +12,7 @@ import org.emftext.language.refactoring.roles.diagram.providers.RolesElementType
 /**
  * @generated
  */
-public class RoleModelItemSemanticEditPolicy extends
-		RolesBaseItemSemanticEditPolicy {
+public class RoleModelItemSemanticEditPolicy extends RolesBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
@@ -36,26 +35,22 @@ public class RoleModelItemSemanticEditPolicy extends
 	 * @generated
 	 */
 	protected Command getDuplicateCommand(DuplicateElementsRequest req) {
-		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost())
-				.getEditingDomain();
+		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
 		return getGEFWrapper(new DuplicateAnythingCommand(editingDomain, req));
 	}
 
 	/**
 	 * @generated
 	 */
-	private static class DuplicateAnythingCommand extends
-			DuplicateEObjectsCommand {
+	private static class DuplicateAnythingCommand extends DuplicateEObjectsCommand {
 
 		/**
 		 * @generated
 		 */
-		public DuplicateAnythingCommand(
-				TransactionalEditingDomain editingDomain,
-				DuplicateElementsRequest req) {
-			super(editingDomain, req.getLabel(), req
-					.getElementsToBeDuplicated(), req
-					.getAllDuplicatedElementsMap());
+		public DuplicateAnythingCommand(TransactionalEditingDomain editingDomain, DuplicateElementsRequest req) {
+			super(editingDomain, req.getLabel(),
+					req.getElementsToBeDuplicated(),
+					req.getAllDuplicatedElementsMap());
 		}
 
 	}
