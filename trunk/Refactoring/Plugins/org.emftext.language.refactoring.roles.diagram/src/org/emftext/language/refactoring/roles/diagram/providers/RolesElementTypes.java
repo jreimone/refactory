@@ -28,7 +28,7 @@ import org.emftext.language.refactoring.roles.diagram.part.RolesDiagramEditorPlu
 /**
  * @generated
  */
-public class RolesElementTypes extends ElementInitializers {
+public class RolesElementTypes {
 
 	/**
 	 * @generated
@@ -39,7 +39,7 @@ public class RolesElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	private static Map elements;
+	private static Map<IElementType, ENamedElement> elements;
 
 	/**
 	 * @generated
@@ -49,7 +49,7 @@ public class RolesElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	private static Set KNOWN_ELEMENT_TYPES;
+	private static Set<IElementType> KNOWN_ELEMENT_TYPES;
 
 	/**
 	 * @generated
@@ -101,26 +101,21 @@ public class RolesElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	private static ImageDescriptor getProvidedImageDescriptor(
-			ENamedElement element) {
+	private static ImageDescriptor getProvidedImageDescriptor(ENamedElement element) {
 		if (element instanceof EStructuralFeature) {
 			EStructuralFeature feature = ((EStructuralFeature) element);
 			EClass eContainingClass = feature.getEContainingClass();
 			EClassifier eType = feature.getEType();
 			if (eContainingClass != null && !eContainingClass.isAbstract()) {
 				element = eContainingClass;
-			} else if (eType instanceof EClass
-					&& !((EClass) eType).isAbstract()) {
+			} else if (eType instanceof EClass && !((EClass) eType).isAbstract()) {
 				element = eType;
 			}
 		}
 		if (element instanceof EClass) {
 			EClass eClass = (EClass) element;
 			if (!eClass.isAbstract()) {
-				return RolesDiagramEditorPlugin.getInstance()
-						.getItemImageDescriptor(
-								eClass.getEPackage().getEFactoryInstance()
-										.create(eClass));
+				return RolesDiagramEditorPlugin.getInstance().getItemImageDescriptor(eClass.getEPackage().getEFactoryInstance().create(eClass));
 			}
 		}
 		// TODO : support structural features
@@ -190,26 +185,21 @@ public class RolesElementTypes extends ElementInitializers {
 	public static ENamedElement getElement(IAdaptable hint) {
 		Object type = hint.getAdapter(IElementType.class);
 		if (elements == null) {
-			elements = new IdentityHashMap();
+			elements = new IdentityHashMap<IElementType, ENamedElement>();
 
 			elements.put(RoleModel_1000, RolesPackage.eINSTANCE.getRoleModel());
 
 			elements.put(Role_2001, RolesPackage.eINSTANCE.getRole());
 
-			elements.put(RoleAttribute_3001, RolesPackage.eINSTANCE
-					.getRoleAttribute());
+			elements.put(RoleAttribute_3001, RolesPackage.eINSTANCE.getRoleAttribute());
 
-			elements.put(RoleImplication_4001, RolesPackage.eINSTANCE
-					.getRoleImplication());
+			elements.put(RoleImplication_4001, RolesPackage.eINSTANCE.getRoleImplication());
 
-			elements.put(RoleProhibition_4002, RolesPackage.eINSTANCE
-					.getRoleProhibition());
+			elements.put(RoleProhibition_4002, RolesPackage.eINSTANCE.getRoleProhibition());
 
-			elements.put(RoleAssociation_4003, RolesPackage.eINSTANCE
-					.getRoleAssociation());
+			elements.put(RoleAssociation_4003, RolesPackage.eINSTANCE.getRoleAssociation());
 
-			elements.put(RoleComposition_4004, RolesPackage.eINSTANCE
-					.getRoleComposition());
+			elements.put(RoleComposition_4004, RolesPackage.eINSTANCE.getRoleComposition());
 		}
 		return (ENamedElement) elements.get(type);
 	}
@@ -226,7 +216,7 @@ public class RolesElementTypes extends ElementInitializers {
 	 */
 	public static boolean isKnownElementType(IElementType elementType) {
 		if (KNOWN_ELEMENT_TYPES == null) {
-			KNOWN_ELEMENT_TYPES = new HashSet();
+			KNOWN_ELEMENT_TYPES = new HashSet<IElementType>();
 			KNOWN_ELEMENT_TYPES.add(RoleModel_1000);
 			KNOWN_ELEMENT_TYPES.add(Role_2001);
 			KNOWN_ELEMENT_TYPES.add(RoleAttribute_3001);
@@ -243,20 +233,20 @@ public class RolesElementTypes extends ElementInitializers {
 	 */
 	public static IElementType getElementType(int visualID) {
 		switch (visualID) {
-		case RoleModelEditPart.VISUAL_ID:
-			return RoleModel_1000;
-		case RoleEditPart.VISUAL_ID:
-			return Role_2001;
-		case RoleAttributeEditPart.VISUAL_ID:
-			return RoleAttribute_3001;
-		case RoleImplicationEditPart.VISUAL_ID:
-			return RoleImplication_4001;
-		case RoleProhibitionEditPart.VISUAL_ID:
-			return RoleProhibition_4002;
-		case RoleAssociationEditPart.VISUAL_ID:
-			return RoleAssociation_4003;
-		case RoleCompositionEditPart.VISUAL_ID:
-			return RoleComposition_4004;
+			case RoleModelEditPart.VISUAL_ID:
+				return RoleModel_1000;
+			case RoleEditPart.VISUAL_ID:
+				return Role_2001;
+			case RoleAttributeEditPart.VISUAL_ID:
+				return RoleAttribute_3001;
+			case RoleImplicationEditPart.VISUAL_ID:
+				return RoleImplication_4001;
+			case RoleProhibitionEditPart.VISUAL_ID:
+				return RoleProhibition_4002;
+			case RoleAssociationEditPart.VISUAL_ID:
+				return RoleAssociation_4003;
+			case RoleCompositionEditPart.VISUAL_ID:
+				return RoleComposition_4004;
 		}
 		return null;
 	}

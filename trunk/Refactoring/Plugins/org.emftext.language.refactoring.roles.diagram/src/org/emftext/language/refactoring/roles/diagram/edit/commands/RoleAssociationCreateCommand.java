@@ -16,6 +16,7 @@ import org.emftext.language.refactoring.roles.RoleAssociation;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RolesFactory;
 import org.emftext.language.refactoring.roles.diagram.edit.policies.RolesBaseItemSemanticEditPolicy;
+import org.emftext.language.refactoring.roles.diagram.providers.ElementInitializers;
 import org.emftext.language.refactoring.roles.diagram.providers.RolesElementTypes;
 
 /**
@@ -41,8 +42,7 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	public RoleAssociationCreateCommand(CreateRelationshipRequest request,
-			EObject source, EObject target) {
+	public RoleAssociationCreateCommand(CreateRelationshipRequest request, EObject source, EObject target) {
 		super(request.getLabel(), null, request);
 		this.source = source;
 		this.target = target;
@@ -69,27 +69,22 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 		if (getContainer() == null) {
 			return false;
 		}
-		return RolesBaseItemSemanticEditPolicy.LinkConstraints
-				.canCreateRoleAssociation_4003(getContainer(), getSource(),
-						getTarget());
+		return RolesBaseItemSemanticEditPolicy.getLinkConstraints().canCreateRoleAssociation_4003(getContainer(), getSource(), getTarget());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-			IAdaptable info) throws ExecutionException {
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
-			throw new ExecutionException(
-					"Invalid arguments in create link command"); //$NON-NLS-1$
+			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
 		}
 
-		RoleAssociation newElement = RolesFactory.eINSTANCE
-				.createRoleAssociation();
+		RoleAssociation newElement = RolesFactory.eINSTANCE.createRoleAssociation();
 		getContainer().getCollaborations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
-		RolesElementTypes.init_RoleAssociation_4003(newElement);
+		ElementInitializers.getInstance().init_RoleAssociation_4003(newElement);
 		doConfigure(newElement, monitor, info);
 		((CreateElementRequest) getRequest()).setNewElement(newElement);
 		return CommandResult.newOKCommandResult(newElement);
@@ -99,22 +94,14 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected void doConfigure(RoleAssociation newElement,
-			IProgressMonitor monitor, IAdaptable info)
-			throws ExecutionException {
-		IElementType elementType = ((CreateElementRequest) getRequest())
-				.getElementType();
-		ConfigureRequest configureRequest = new ConfigureRequest(
-				getEditingDomain(), newElement, elementType);
-		configureRequest.setClientContext(((CreateElementRequest) getRequest())
-				.getClientContext());
+	protected void doConfigure(RoleAssociation newElement, IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+		IElementType elementType = ((CreateElementRequest) getRequest()).getElementType();
+		ConfigureRequest configureRequest = new ConfigureRequest(getEditingDomain(), newElement, elementType);
+		configureRequest.setClientContext(((CreateElementRequest) getRequest()).getClientContext());
 		configureRequest.addParameters(getRequest().getParameters());
-		configureRequest.setParameter(CreateRelationshipRequest.SOURCE,
-				getSource());
-		configureRequest.setParameter(CreateRelationshipRequest.TARGET,
-				getTarget());
-		ICommand configureCommand = elementType
-				.getEditCommand(configureRequest);
+		configureRequest.setParameter(CreateRelationshipRequest.SOURCE, getSource());
+		configureRequest.setParameter(CreateRelationshipRequest.TARGET, getTarget());
+		ICommand configureCommand = elementType.getEditCommand(configureRequest);
 		if (configureCommand != null && configureCommand.canExecute()) {
 			configureCommand.execute(monitor, info);
 		}
@@ -157,8 +144,7 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 		// Find container element for the new link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null; element = element
-				.eContainer()) {
+		for (EObject element = source; element != null; element = element.eContainer()) {
 			if (element instanceof RoleModel) {
 				return (RoleModel) element;
 			}

@@ -28,47 +28,47 @@ public class RolesEditPartFactory implements EditPartFactory {
 			View view = (View) model;
 			switch (RolesVisualIDRegistry.getVisualID(view)) {
 
-			case RoleModelEditPart.VISUAL_ID:
-				return new RoleModelEditPart(view);
+				case RoleModelEditPart.VISUAL_ID:
+					return new RoleModelEditPart(view);
 
-			case RoleEditPart.VISUAL_ID:
-				return new RoleEditPart(view);
+				case RoleEditPart.VISUAL_ID:
+					return new RoleEditPart(view);
 
-			case RoleNameEditPart.VISUAL_ID:
-				return new RoleNameEditPart(view);
+				case RoleNameEditPart.VISUAL_ID:
+					return new RoleNameEditPart(view);
 
-			case RoleAttributeEditPart.VISUAL_ID:
-				return new RoleAttributeEditPart(view);
+				case RoleAttributeEditPart.VISUAL_ID:
+					return new RoleAttributeEditPart(view);
 
-			case RoleAttributeNameEditPart.VISUAL_ID:
-				return new RoleAttributeNameEditPart(view);
+				case RoleAttributeNameEditPart.VISUAL_ID:
+					return new RoleAttributeNameEditPart(view);
 
-			case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
-				return new RoleRoleAttributeCompartmentEditPart(view);
+				case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+					return new RoleRoleAttributeCompartmentEditPart(view);
 
-			case RoleImplicationEditPart.VISUAL_ID:
-				return new RoleImplicationEditPart(view);
+				case RoleImplicationEditPart.VISUAL_ID:
+					return new RoleImplicationEditPart(view);
 
-			case RoleProhibitionEditPart.VISUAL_ID:
-				return new RoleProhibitionEditPart(view);
+				case RoleProhibitionEditPart.VISUAL_ID:
+					return new RoleProhibitionEditPart(view);
 
-			case RoleAssociationEditPart.VISUAL_ID:
-				return new RoleAssociationEditPart(view);
+				case RoleAssociationEditPart.VISUAL_ID:
+					return new RoleAssociationEditPart(view);
 
-			case RoleAssociationSourceNameEditPart.VISUAL_ID:
-				return new RoleAssociationSourceNameEditPart(view);
+				case RoleAssociationSourceNameEditPart.VISUAL_ID:
+					return new RoleAssociationSourceNameEditPart(view);
 
-			case RoleAssociationTargetNameEditPart.VISUAL_ID:
-				return new RoleAssociationTargetNameEditPart(view);
+				case RoleAssociationTargetNameEditPart.VISUAL_ID:
+					return new RoleAssociationTargetNameEditPart(view);
 
-			case RoleCompositionEditPart.VISUAL_ID:
-				return new RoleCompositionEditPart(view);
+				case RoleCompositionEditPart.VISUAL_ID:
+					return new RoleCompositionEditPart(view);
 
-			case RoleCompositionSourceNameEditPart.VISUAL_ID:
-				return new RoleCompositionSourceNameEditPart(view);
+				case RoleCompositionSourceNameEditPart.VISUAL_ID:
+					return new RoleCompositionSourceNameEditPart(view);
 
-			case RoleCompositionTargetNameEditPart.VISUAL_ID:
-				return new RoleCompositionTargetNameEditPart(view);
+				case RoleCompositionTargetNameEditPart.VISUAL_ID:
+					return new RoleCompositionTargetNameEditPart(view);
 
 			}
 		}
@@ -86,8 +86,7 @@ public class RolesEditPartFactory implements EditPartFactory {
 	/**
 	 * @generated
 	 */
-	public static CellEditorLocator getTextCellEditorLocator(
-			ITextAwareEditPart source) {
+	public static CellEditorLocator getTextCellEditorLocator(ITextAwareEditPart source) {
 		if (source.getFigure() instanceof WrappingLabel)
 			return new TextCellEditorLocator((WrappingLabel) source.getFigure());
 		else {
@@ -126,15 +125,13 @@ public class RolesEditPartFactory implements EditPartFactory {
 			Text text = (Text) celleditor.getControl();
 			Rectangle rect = getWrapLabel().getTextBounds().getCopy();
 			getWrapLabel().translateToAbsolute(rect);
-			if (getWrapLabel().isTextWrapOn()
-					&& getWrapLabel().getText().length() > 0) {
-				rect.setSize(new Dimension(text.computeSize(rect.width,
-						SWT.DEFAULT)));
-			} else {
-				int avr = FigureUtilities.getFontMetrics(text.getFont())
-						.getAverageCharWidth();
-				rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT,
-						SWT.DEFAULT)).expand(avr * 2, 0));
+			if (!text.getFont().isDisposed()) {
+				if (getWrapLabel().isTextWrapOn() && getWrapLabel().getText().length() > 0) {
+					rect.setSize(new Dimension(text.computeSize(rect.width, SWT.DEFAULT)));
+				} else {
+					int avr = FigureUtilities.getFontMetrics(text.getFont()).getAverageCharWidth();
+					rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT, SWT.DEFAULT)).expand(avr * 2, 0));
+				}
 			}
 			if (!rect.equals(new Rectangle(text.getBounds()))) {
 				text.setBounds(rect.x, rect.y, rect.width, rect.height);
@@ -173,10 +170,10 @@ public class RolesEditPartFactory implements EditPartFactory {
 			Text text = (Text) celleditor.getControl();
 			Rectangle rect = getLabel().getTextBounds().getCopy();
 			getLabel().translateToAbsolute(rect);
-			int avr = FigureUtilities.getFontMetrics(text.getFont())
-					.getAverageCharWidth();
-			rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT,
-					SWT.DEFAULT)).expand(avr * 2, 0));
+			if (!text.getFont().isDisposed()) {
+				int avr = FigureUtilities.getFontMetrics(text.getFont()).getAverageCharWidth();
+				rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT, SWT.DEFAULT)).expand(avr * 2, 0));
+			}
 			if (!rect.equals(new Rectangle(text.getBounds()))) {
 				text.setBounds(rect.x, rect.y, rect.width, rect.height);
 			}

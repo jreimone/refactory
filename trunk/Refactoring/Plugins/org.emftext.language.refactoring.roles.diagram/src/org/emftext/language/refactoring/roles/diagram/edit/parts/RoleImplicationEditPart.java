@@ -16,8 +16,7 @@ import org.emftext.language.refactoring.roles.diagram.edit.policies.RoleImplicat
 /**
  * @generated
  */
-public class RoleImplicationEditPart extends ConnectionNodeEditPart implements
-		ITreeBranchEditPart {
+public class RoleImplicationEditPart extends ConnectionNodeEditPart implements ITreeBranchEditPart {
 
 	/**
 	 * @generated
@@ -36,8 +35,7 @@ public class RoleImplicationEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RoleImplicationItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleImplicationItemSemanticEditPolicy());
 	}
 
 	/**

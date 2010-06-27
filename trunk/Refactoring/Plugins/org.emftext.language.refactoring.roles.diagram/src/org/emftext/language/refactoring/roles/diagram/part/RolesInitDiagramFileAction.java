@@ -47,14 +47,11 @@ public class RolesInitDiagramFileAction implements IObjectActionDelegate {
 	public void selectionChanged(IAction action, ISelection selection) {
 		domainModelURI = null;
 		action.setEnabled(false);
-		if (selection instanceof IStructuredSelection == false
-				|| selection.isEmpty()) {
+		if (selection instanceof IStructuredSelection == false || selection.isEmpty()) {
 			return;
 		}
-		IFile file = (IFile) ((IStructuredSelection) selection)
-				.getFirstElement();
-		domainModelURI = URI.createPlatformResourceURI(file.getFullPath()
-				.toString(), true);
+		IFile file = (IFile) ((IStructuredSelection) selection).getFirstElement();
+		domainModelURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		action.setEnabled(true);
 	}
 
@@ -69,27 +66,21 @@ public class RolesInitDiagramFileAction implements IObjectActionDelegate {
 	 * @generated
 	 */
 	public void run(IAction action) {
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
-				.createEditingDomain();
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		ResourceSet resourceSet = editingDomain.getResourceSet();
 		EObject diagramRoot = null;
 		try {
 			Resource resource = resourceSet.getResource(domainModelURI, true);
 			diagramRoot = (EObject) resource.getContents().get(0);
 		} catch (WrappedException ex) {
-			RolesDiagramEditorPlugin.getInstance().logError(
-					"Unable to load resource: " + domainModelURI, ex); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError("Unable to load resource: " + domainModelURI, ex); //$NON-NLS-1$
 		}
 		if (diagramRoot == null) {
-			MessageDialog.openError(getShell(),
-					Messages.InitDiagramFile_ResourceErrorDialogTitle,
-					Messages.InitDiagramFile_ResourceErrorDialogMessage);
+			MessageDialog.openError(getShell(), Messages.InitDiagramFile_ResourceErrorDialogTitle, Messages.InitDiagramFile_ResourceErrorDialogMessage);
 			return;
 		}
-		Wizard wizard = new RolesNewDiagramFileWizard(domainModelURI,
-				diagramRoot, editingDomain);
-		wizard.setWindowTitle(NLS.bind(Messages.InitDiagramFile_WizardTitle,
-				RoleModelEditPart.MODEL_ID));
+		Wizard wizard = new RolesNewDiagramFileWizard(domainModelURI, diagramRoot, editingDomain);
+		wizard.setWindowTitle(NLS.bind(Messages.InitDiagramFile_WizardTitle, RoleModelEditPart.MODEL_ID));
 		RolesDiagramEditorUtil.runWizard(getShell(), wizard, "InitDiagramFile"); //$NON-NLS-1$
 	}
 }

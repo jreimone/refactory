@@ -8,8 +8,7 @@ import org.emftext.language.refactoring.roles.diagram.providers.RolesElementType
 /**
  * @generated
  */
-public class RoleProhibitionItemSemanticEditPolicy extends
-		RolesBaseItemSemanticEditPolicy {
+public class RoleProhibitionItemSemanticEditPolicy extends RolesBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated

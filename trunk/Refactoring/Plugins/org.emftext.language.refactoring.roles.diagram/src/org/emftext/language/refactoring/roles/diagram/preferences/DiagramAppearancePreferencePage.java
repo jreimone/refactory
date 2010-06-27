@@ -12,7 +12,6 @@ public class DiagramAppearancePreferencePage extends AppearancePreferencePage {
 	 * @generated
 	 */
 	public DiagramAppearancePreferencePage() {
-		setPreferenceStore(RolesDiagramEditorPlugin.getInstance()
-				.getPreferenceStore());
+		setPreferenceStore(RolesDiagramEditorPlugin.getInstance().getPreferenceStore());
 	}
 }

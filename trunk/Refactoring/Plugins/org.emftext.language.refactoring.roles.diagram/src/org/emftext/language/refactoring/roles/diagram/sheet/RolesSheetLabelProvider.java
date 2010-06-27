@@ -14,8 +14,7 @@ import org.emftext.language.refactoring.roles.diagram.providers.RolesElementType
 /**
  * @generated
  */
-public class RolesSheetLabelProvider extends BaseLabelProvider implements
-		ILabelProvider {
+public class RolesSheetLabelProvider extends BaseLabelProvider implements ILabelProvider {
 
 	/**
 	 * @generated

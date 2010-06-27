@@ -13,8 +13,7 @@ import org.eclipse.gmf.runtime.notation.View;
 /**
  * @generated
  */
-public class RolesReorientConnectionViewCommand extends
-		AbstractTransactionalCommand {
+public class RolesReorientConnectionViewCommand extends AbstractTransactionalCommand {
 
 	/**
 	 * @generated
@@ -24,8 +23,7 @@ public class RolesReorientConnectionViewCommand extends
 	/**
 	 * @generated
 	 */
-	public RolesReorientConnectionViewCommand(
-			TransactionalEditingDomain editingDomain, String label) {
+	public RolesReorientConnectionViewCommand(TransactionalEditingDomain editingDomain, String label) {
 		super(editingDomain, label, null);
 	}
 
@@ -57,8 +55,7 @@ public class RolesReorientConnectionViewCommand extends
 	/**
 	 * @generated
 	 */
-	protected CommandResult doExecuteWithResult(
-			IProgressMonitor progressMonitor, IAdaptable info) {
+	protected CommandResult doExecuteWithResult(IProgressMonitor progressMonitor, IAdaptable info) {
 		assert null != edgeAdaptor : "Null child in RolesReorientConnectionViewCommand"; //$NON-NLS-1$
 		Edge edge = (Edge) getEdgeAdaptor().getAdapter(Edge.class);
 		assert null != edge : "Null edge in RolesReorientConnectionViewCommand"; //$NON-NLS-1$
