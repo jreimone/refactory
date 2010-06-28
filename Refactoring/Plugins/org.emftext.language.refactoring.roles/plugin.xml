@@ -19,8 +19,8 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <category
-            id="org.emftext.language.refactoring.remfactor"
-            name="rEMFactor">
+            id="org.emftext.refactory.ui"
+            name="Refactory">
       </category>
    </extension>
 

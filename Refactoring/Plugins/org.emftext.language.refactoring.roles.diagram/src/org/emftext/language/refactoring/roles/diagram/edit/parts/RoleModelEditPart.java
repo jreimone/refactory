@@ -41,19 +41,22 @@ public class RoleModelEditPart extends DiagramEditPart {
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleModelItemSemanticEditPolicy());
-		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new RoleModelCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RoleModelItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
+				new RoleModelCanonicalEditPolicy());
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.POPUPBAR_ROLE);
 	}
 
 	/**
-	* @generated
-	*/
-	/*package-local*/static class NodeLabelDragPolicy extends NonResizableEditPolicy {
+	 * @generated
+	 */
+	/*package-local*/static class NodeLabelDragPolicy extends
+			NonResizableEditPolicy {
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		@SuppressWarnings("rawtypes")
 		protected List createSelectionHandles() {
 			MoveHandle h = new MoveHandle((GraphicalEditPart) getHost());
@@ -62,28 +65,29 @@ public class RoleModelEditPart extends DiagramEditPart {
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public Command getCommand(Request request) {
 			return null;
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public boolean understandsRequest(Request request) {
 			return false;
 		}
 	}
 
 	/**
-	* @generated
-	*/
-	/*package-local*/static class LinkLabelDragPolicy extends NonResizableLabelEditPolicy {
+	 * @generated
+	 */
+	/*package-local*/static class LinkLabelDragPolicy extends
+			NonResizableLabelEditPolicy {
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		@SuppressWarnings("rawtypes")
 		protected List createSelectionHandles() {
 			MoveHandle mh = new MoveHandle((GraphicalEditPart) getHost());

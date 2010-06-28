@@ -15,7 +15,8 @@ import org.emftext.language.refactoring.roles.diagram.part.Messages;
 /**
  * @generated
  */
-public class RoleRoleAttributeCompartmentEditPart extends ListCompartmentEditPart {
+public class RoleRoleAttributeCompartmentEditPart extends
+		ListCompartmentEditPart {
 
 	/**
 	 * @generated
@@ -47,7 +48,8 @@ public class RoleRoleAttributeCompartmentEditPart extends ListCompartmentEditPar
 	 * @generated
 	 */
 	public IFigure createFigure() {
-		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super.createFigure();
+		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
+				.createFigure();
 		result.setTitleVisibility(false);
 		return result;
 	}
@@ -57,10 +59,14 @@ public class RoleRoleAttributeCompartmentEditPart extends ListCompartmentEditPar
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleRoleAttributeCompartmentItemSemanticEditPolicy());
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicy());
-		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
-		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new RoleRoleAttributeCompartmentCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RoleRoleAttributeCompartmentItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
+				new CreationEditPolicy());
+		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
+				new DragDropEditPolicy());
+		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
+				new RoleRoleAttributeCompartmentCanonicalEditPolicy());
 	}
 
 	/**

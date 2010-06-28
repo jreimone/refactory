@@ -24,6 +24,7 @@ OPTIONS {
 	overrideHoverTextProvider = "false";
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
 	overrideBuilder = "false";
+	overrideUIPluginXML = "false";
 }
 
 TOKENS{

@@ -23,7 +23,8 @@ import org.emftext.language.refactoring.roles.diagram.part.RolesDiagramEditorPlu
 /**
  * @generated
  */
-public class RolesDomainNavigatorContentProvider implements ICommonContentProvider {
+public class RolesDomainNavigatorContentProvider implements
+		ICommonContentProvider {
 
 	/**
 	 * @generated
@@ -59,11 +60,13 @@ public class RolesDomainNavigatorContentProvider implements ICommonContentProvid
 	 * @generated
 	 */
 	public RolesDomainNavigatorContentProvider() {
-		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(RolesDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory());
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
+		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
+				RolesDiagramEditorPlugin.getInstance()
+						.getItemProvidersAdapterFactory());
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
+				.createEditingDomain();
 		myEditingDomain = (AdapterFactoryEditingDomain) editingDomain;
 		myEditingDomain.setResourceToReadOnlyMap(new HashMap() {
-
 			public Object get(Object key) {
 				if (!containsKey(key)) {
 					put(key, Boolean.TRUE);
@@ -72,36 +75,36 @@ public class RolesDomainNavigatorContentProvider implements ICommonContentProvid
 			}
 		});
 		myViewerRefreshRunnable = new Runnable() {
-
 			public void run() {
 				if (myViewer != null) {
 					myViewer.refresh();
 				}
 			}
 		};
-		myWorkspaceSynchronizer = new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
+		myWorkspaceSynchronizer = new WorkspaceSynchronizer(editingDomain,
+				new WorkspaceSynchronizer.Delegate() {
+					public void dispose() {
+					}
 
-			public void dispose() {
-			}
+					public boolean handleResourceChanged(final Resource resource) {
+						unloadAllResources();
+						asyncRefresh();
+						return true;
+					}
 
-			public boolean handleResourceChanged(final Resource resource) {
-				unloadAllResources();
-				asyncRefresh();
-				return true;
-			}
+					public boolean handleResourceDeleted(Resource resource) {
+						unloadAllResources();
+						asyncRefresh();
+						return true;
+					}
 
-			public boolean handleResourceDeleted(Resource resource) {
-				unloadAllResources();
-				asyncRefresh();
-				return true;
-			}
-
-			public boolean handleResourceMoved(Resource resource, final URI newURI) {
-				unloadAllResources();
-				asyncRefresh();
-				return true;
-			}
-		});
+					public boolean handleResourceMoved(Resource resource,
+							final URI newURI) {
+						unloadAllResources();
+						asyncRefresh();
+						return true;
+					}
+				});
 	}
 
 	/**
@@ -125,20 +128,22 @@ public class RolesDomainNavigatorContentProvider implements ICommonContentProvid
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	void unloadAllResources() {
-		for (Resource nextResource : myEditingDomain.getResourceSet().getResources()) {
+		for (Resource nextResource : myEditingDomain.getResourceSet()
+				.getResources()) {
 			nextResource.unload();
 		}
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	void asyncRefresh() {
 		if (myViewer != null && !myViewer.getControl().isDisposed()) {
-			myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
+			myViewer.getControl().getDisplay()
+					.asyncExec(myViewerRefreshRunnable);
 		}
 	}
 
@@ -173,13 +178,19 @@ public class RolesDomainNavigatorContentProvider implements ICommonContentProvid
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
-			URI fileURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
-			return wrapEObjects(myAdapterFctoryContentProvier.getChildren(resource), parentElement);
+			URI fileURI = URI.createPlatformResourceURI(file.getFullPath()
+					.toString(), true);
+			Resource resource = myEditingDomain.getResourceSet().getResource(
+					fileURI, true);
+			return wrapEObjects(
+					myAdapterFctoryContentProvier.getChildren(resource),
+					parentElement);
 		}
 
 		if (parentElement instanceof RolesDomainNavigatorItem) {
-			return wrapEObjects(myAdapterFctoryContentProvier.getChildren(((RolesDomainNavigatorItem) parentElement).getEObject()), parentElement);
+			return wrapEObjects(
+					myAdapterFctoryContentProvier.getChildren(((RolesDomainNavigatorItem) parentElement)
+							.getEObject()), parentElement);
 		}
 		return EMPTY_ARRAY;
 	}
@@ -191,7 +202,8 @@ public class RolesDomainNavigatorContentProvider implements ICommonContentProvid
 		Collection result = new ArrayList();
 		for (int i = 0; i < objects.length; i++) {
 			if (objects[i] instanceof EObject) {
-				result.add(new RolesDomainNavigatorItem((EObject) objects[i], parentElement, myAdapterFctoryContentProvier));
+				result.add(new RolesDomainNavigatorItem((EObject) objects[i],
+						parentElement, myAdapterFctoryContentProvier));
 			}
 		}
 		return result.toArray();

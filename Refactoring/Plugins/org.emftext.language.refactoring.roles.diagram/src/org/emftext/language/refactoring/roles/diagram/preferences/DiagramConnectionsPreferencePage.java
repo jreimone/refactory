@@ -12,6 +12,7 @@ public class DiagramConnectionsPreferencePage extends ConnectionsPreferencePage 
 	 * @generated
 	 */
 	public DiagramConnectionsPreferencePage() {
-		setPreferenceStore(RolesDiagramEditorPlugin.getInstance().getPreferenceStore());
+		setPreferenceStore(RolesDiagramEditorPlugin.getInstance()
+				.getPreferenceStore());
 	}
 }
