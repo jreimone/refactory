@@ -314,15 +314,17 @@
 		<buildfeature                                                   package="org.emftext.language.primitivetypes"      version="${emftext.components.version}"/>
 
 		<buildplugin name="Template Concepts Metamodel"  
-			package="org.emftext.language.templateconcepts"                             version="${emftext.components.version}"/>
+			package="org.emftext.language.templateconcepts"                               version="${emftext.components.version}"/>
 		<buildplugin name="Safe Template Interpreter"    
-			package="org.emftext.language.templateconcepts.interpreter"                 version="${emftext.components.version}"/>
+			package="org.emftext.language.templateconcepts.interpreter"                   version="${emftext.components.version}"/>
 		<buildplugin name="Safe Template Call Language Metamodel" 
-			package="org.emftext.language.templateconcepts.call"                        version="${emftext.components.version}"/>
+			package="org.emftext.language.templateconcepts.call"                          version="${emftext.components.version}"/>
 		<buildplugin name="Safe Template Call Language Syntax"    
-			package="org.emftext.language.templateconcepts.call.resource.templatecall" version="${emftext.components.version}"/>
+			package="org.emftext.language.templateconcepts.call.resource.templatecall"    version="${emftext.components.version}"/>
+		<buildplugin name="Safe Template Call Language Editor"    
+			package="org.emftext.language.templateconcepts.call.resource.templatecall.ui" version="${emftext.components.version}"/>
 		<buildfeature                                    
-			package="org.emftext.language.templateconcepts"                             version="${emftext.components.version}"/>
+			package="org.emftext.language.templateconcepts"                               version="${emftext.components.version}"/>
 		
 		<!-- TODO OCL?
 			<buildplugin name="EMFText OCL Validation Support" package="org.emftext.util.ocl" version="${emftext.version}"/>	
