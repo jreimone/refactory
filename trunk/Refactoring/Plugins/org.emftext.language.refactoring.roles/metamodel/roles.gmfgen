@@ -13,6 +13,7 @@
       canonicalEditPolicyClassName="RoleModelCanonicalEditPolicy"
       iconProviderPriority="Low"
       creationWizardIconPath="icons/new/rolemodel.gif"
+      creationWizardCategoryID="org.emftext.refactory.ui"
       validationProviderPriority="Low">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
