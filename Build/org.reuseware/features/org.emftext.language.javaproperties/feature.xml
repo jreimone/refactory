@@ -28,9 +28,13 @@ of Technology, Germany
       - initial API and implementation
    </license>
 
-   
-      
-   
+   <requires>
+	 <import feature="org.eclipse.platform"/>
+	 <import feature="org.eclipse.sdk" />
+	 <import feature="org.eclipse.emf"/>
+	 <import feature="org.eclipse.emf.workspace"/> 
+	 <import feature="org.emftext.commons.antlr3_2_0"/>
+   </requires>
 
    <plugin
          id="org.emftext.language.javaproperties"
