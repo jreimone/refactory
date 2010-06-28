@@ -14,4 +14,4 @@ RoleModel RemoveUnusedContainedX {
 	super input ROLE RemoveeContainer;
 	
 	RemoveeContainer [1..1] <>- Removee removees [0..*];	
-} 
+}

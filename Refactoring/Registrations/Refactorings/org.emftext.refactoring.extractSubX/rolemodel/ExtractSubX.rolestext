@@ -31,4 +31,4 @@ RoleModel ExtractSubX {
 	transitive : OrigContainer [1..1] <>- Extractee extracts [1..*];
 	transitive : OrigContainer [1..1] <>- NewContainer newParent [1..*];
 	transitive : NewContainer [1..1] <>- Extractee moved [1..*];
-} 
+}

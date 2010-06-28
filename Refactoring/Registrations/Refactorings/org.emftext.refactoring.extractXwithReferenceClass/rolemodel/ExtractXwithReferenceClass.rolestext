@@ -21,7 +21,7 @@ RoleModel ExtractXwithReferenceClass {
 		The attribute 'newName' is intended to be mapped to a String attribute for the name of
 		the new container
 		*/ 
-		optional input runtime newName ) ; 
+		optional input newName ) ; 
 	/**
 	This role represents the container of the both other containers: 'OrigContainer' and 'NewContainer'.
 	It must be mapped to an EClass having containment references to the other both mapped EClasses
@@ -32,14 +32,13 @@ RoleModel ExtractXwithReferenceClass {
 	It is optional because there might be metamodels for which no references must be set.
 	An example for such a metamodel is the conference language from the zoo. 
 	*/ 
-	optional  ROLE MovedReference ; 
+	optional  ROLE MovedReference ;
 	
+	transitive :  OrigContainer  [1 ..1 ]  <>- Extract extracts [0 ..* ] ; 
+	transitive :  OrigContainer  [1 ..1 ]  <>- MovedReference referer [1 ..1 ] ; 
+	transitive :  NewContainer  [1 ..1 ]  <>- Extract moved [0 ..* ] ; 
+	transitive :  ContainerContainer  [1 ..1 ]  <>- NewContainer target [1 ..1 ] ; 
+	transitive reflexive :  ContainerContainer  [1 ..1 ]  <>- OrigContainer source [1 ..1 ] ; 
+	 MovedReference  [1 ..1 ]  -- NewContainer containerRef [1 ..1 ] ; 
 	
-	transitive :  OrigContainer  [ 1 .. 1 ]  <>- Extract extracts [ 0 .. * ] ; 
-	transitive :  OrigContainer  [ 1 .. 1 ]  <>- MovedReference referer [ 1 .. 1 ] ; 
-	transitive :  NewContainer  [ 1 .. 1 ]  <>- Extract moved [ 0 .. * ] ; 
-	transitive :  ContainerContainer  [ 1 .. 1 ]  <>- NewContainer target [ 1 .. 1 ] ; 
-	transitive reflexive :  ContainerContainer  [ 1 .. 1 ]  <>- OrigContainer source [ 1 .. 1 ] ; 
-	 MovedReference  [ 1 .. 1 ]  -- NewContainer containerRef [ 1 .. 1 ] ; 
-	
-} 
+}

@@ -19,12 +19,12 @@ For more information about the FeatureMapper checkout <a href="http://featuremap
 	This role represents the derivation of the <i>Derivees</i>. Map this role to 'Constraint'
 	*/  ROLE Derivation ( /**
 		map this attribute to 'language'
-		*/ input runtime attribute1 , /**
+		*/ input attribute1 , /**
 		map this attribute to 'expression'
-		*/ input runtime attribute2 ) ; 
+		*/ input attribute2 ) ;
 	
 	
-	transitive :  DerivationContainer  [ 1 .. 1 ]  <>- Derivation derivation [ 0 .. * ] ; 
-	transitive :  Derivation  [ 1 .. 1 ]  -- Derivee derivees [ 0 .. * ] ; 
+	transitive :  DerivationContainer  [1 ..1 ]  <>- Derivation derivation [0 ..* ] ; 
+	transitive :  Derivation  [1 ..1 ]  -- Derivee derivees [0 ..* ] ; 
 	
-	} 
+	}
