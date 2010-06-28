@@ -6,8 +6,8 @@ RoleModel MoveX {
 	/** The type of the elements that are moved */
 	super input ROLE Movee;
 
-	transitive : SourceContainer [1..1] <>- Movee sourceContainment [0..-1];
-	transitive : TargetContainer [1..1] <>- Movee targetContainment [0..-1];
+	transitive : SourceContainer [1..1] <>- Movee sourceContainment [0..*];
+	transitive : TargetContainer [1..1] <>- Movee targetContainment [0..*];
 	
-	transitive : SourceContainer [1..1] -- TargetContainer containerReference [0..-1];
+	transitive : SourceContainer [1..1] -- TargetContainer containerReference [0..*];
 }

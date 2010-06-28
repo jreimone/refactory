@@ -3,11 +3,11 @@
   <children xmi:type="notation:Node" xmi:id="_IL5vkFkZEd-yT88BjbIbMQ" type="2001">
     <children xmi:type="notation:DecorationNode" xmi:id="_IL5vlVkZEd-yT88BjbIbMQ" type="5001"/>
     <styles xmi:type="notation:DescriptionStyle" xmi:id="_IL5vkVkZEd-yT88BjbIbMQ"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_IL5vklkZEd-yT88BjbIbMQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_IL5vklkZEd-yT88BjbIbMQ" fontName="Segoe UI" fontHeight="10"/>
     <styles xmi:type="notation:FillStyle" xmi:id="_IL5vk1kZEd-yT88BjbIbMQ"/>
-    <element xmi:type="roles:Role" href="RenameX.roles#//@roles[name='Nameable']"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IL5vlFkZEd-yT88BjbIbMQ" x="55" y="30"/>
+    <element xmi:type="roles:Role" href="RenameX.rolestext#//@roles[name='Nameable']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IL5vlFkZEd-yT88BjbIbMQ" x="55" y="30" width="86"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_IIB8MVkZEd-yT88BjbIbMQ"/>
-  <element xmi:type="roles:RoleModel" href="RenameX.roles#/"/>
+  <element xmi:type="roles:RoleModel" href="RenameX.rolestext#/"/>
 </notation:Diagram>

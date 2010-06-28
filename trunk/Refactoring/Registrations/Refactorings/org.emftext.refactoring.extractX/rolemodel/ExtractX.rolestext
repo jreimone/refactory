@@ -15,17 +15,17 @@ Furthermore the old class gets a reference to the new class (e.g. SuperClass).
 	*/  ROLE NewContainer ( /**
 		The attribute 'newName' is intended to be mapped to a String attribute for the name of
 		the new container
-		*/ input runtime newName ) ; 
+		*/ input newName ) ; 
 	/**
 	This role represents the container of the both other containers: 'OrigContainer' and 'NewContainer'.
 	It must be mapped to an EClass having containment references to the other both mapped EClasses
-	*/  ROLE ContainerContainer ; 
+	*/  
+	ROLE ContainerContainer ;
 	
+	transitive :  OrigContainer  [1 ..1 ]  <>- Extractee extracts [0 ..* ] ; 
+	transitive :  NewContainer  [1 ..1 ]  <>- Extractee moved [0 ..* ] ; 
+	transitive :  ContainerContainer  [1 ..1 ]  <>- NewContainer target [1 ..1 ] ; 
+	transitive :  ContainerContainer  [1 ..1 ]  <>- OrigContainer source [1 ..1 ] ; 
+	transitive :  OrigContainer  [1 ..* ]  -- NewContainer reference [1 ..* ] ; 
 	
-	transitive :  OrigContainer  [ 1 .. 1 ]  <>- Extractee extracts [ 0 .. * ] ; 
-	transitive :  NewContainer  [ 1 .. 1 ]  <>- Extractee moved [ 0 .. * ] ; 
-	transitive :  ContainerContainer  [ 1 .. 1 ]  <>- NewContainer target [ 1 .. 1 ] ; 
-	transitive :  ContainerContainer  [ 1 .. 1 ]  <>- OrigContainer source [ 1 .. 1 ] ; 
-	transitive :  OrigContainer  [ 1 .. * ]  -- NewContainer reference [ 1 .. * ] ; 
-	
-	} 
+	}
