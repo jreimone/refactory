@@ -69,10 +69,10 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	 */
 	@SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 	public RolesNavigatorContentProvider() {
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
+				.createEditingDomain();
 		myEditingDomain = (AdapterFactoryEditingDomain) editingDomain;
 		myEditingDomain.setResourceToReadOnlyMap(new HashMap() {
-
 			public Object get(Object key) {
 				if (!containsKey(key)) {
 					put(key, Boolean.TRUE);
@@ -81,36 +81,36 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 			}
 		});
 		myViewerRefreshRunnable = new Runnable() {
-
 			public void run() {
 				if (myViewer != null) {
 					myViewer.refresh();
 				}
 			}
 		};
-		myWorkspaceSynchronizer = new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
+		myWorkspaceSynchronizer = new WorkspaceSynchronizer(editingDomain,
+				new WorkspaceSynchronizer.Delegate() {
+					public void dispose() {
+					}
 
-			public void dispose() {
-			}
+					public boolean handleResourceChanged(final Resource resource) {
+						unloadAllResources();
+						asyncRefresh();
+						return true;
+					}
 
-			public boolean handleResourceChanged(final Resource resource) {
-				unloadAllResources();
-				asyncRefresh();
-				return true;
-			}
+					public boolean handleResourceDeleted(Resource resource) {
+						unloadAllResources();
+						asyncRefresh();
+						return true;
+					}
 
-			public boolean handleResourceDeleted(Resource resource) {
-				unloadAllResources();
-				asyncRefresh();
-				return true;
-			}
-
-			public boolean handleResourceMoved(Resource resource, final URI newURI) {
-				unloadAllResources();
-				asyncRefresh();
-				return true;
-			}
-		});
+					public boolean handleResourceMoved(Resource resource,
+							final URI newURI) {
+						unloadAllResources();
+						asyncRefresh();
+						return true;
+					}
+				});
 	}
 
 	/**
@@ -134,20 +134,22 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	void unloadAllResources() {
-		for (Resource nextResource : myEditingDomain.getResourceSet().getResources()) {
+		for (Resource nextResource : myEditingDomain.getResourceSet()
+				.getResources()) {
 			nextResource.unload();
 		}
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	void asyncRefresh() {
 		if (myViewer != null && !myViewer.getControl().isDisposed()) {
-			myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
+			myViewer.getControl().getDisplay()
+					.asyncExec(myViewerRefreshRunnable);
 		}
 	}
 
@@ -182,16 +184,21 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
-			URI fileURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
+			URI fileURI = URI.createPlatformResourceURI(file.getFullPath()
+					.toString(), true);
+			Resource resource = myEditingDomain.getResourceSet().getResource(
+					fileURI, true);
 			ArrayList<RolesNavigatorItem> result = new ArrayList<RolesNavigatorItem>();
-			ArrayList<View> topViews = new ArrayList<View>(resource.getContents().size());
+			ArrayList<View> topViews = new ArrayList<View>(resource
+					.getContents().size());
 			for (EObject o : resource.getContents()) {
 				if (o instanceof View) {
 					topViews.add((View) o);
 				}
 			}
-			result.addAll(createNavigatorItems(selectViewsByType(topViews, RoleModelEditPart.MODEL_ID), file, false));
+			result.addAll(createNavigatorItems(
+					selectViewsByType(topViews, RoleModelEditPart.MODEL_ID),
+					file, false));
 			return result.toArray();
 		}
 
@@ -217,136 +224,214 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	private Object[] getViewChildren(View view, Object parentElement) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
 
-			case RoleAssociationEditPart.VISUAL_ID: {
-				LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
-				Edge sv = (Edge) view;
-				RolesNavigatorGroup target = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleAssociation_4003_target, "icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				RolesNavigatorGroup source = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleAssociation_4003_source, "icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				Collection<View> connectedViews;
-				connectedViews = getLinksTargetByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				target.addChildren(createNavigatorItems(connectedViews, target, true));
-				connectedViews = getLinksSourceByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				source.addChildren(createNavigatorItems(connectedViews, source, true));
-				if (!target.isEmpty()) {
-					result.add(target);
-				}
-				if (!source.isEmpty()) {
-					result.add(source);
-				}
-				return result.toArray();
+		case RoleCompositionEditPart.VISUAL_ID: {
+			LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
+			Edge sv = (Edge) view;
+			RolesNavigatorGroup target = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleComposition_4004_target,
+					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			RolesNavigatorGroup source = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleComposition_4004_source,
+					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			if (!target.isEmpty()) {
+				result.add(target);
 			}
+			if (!source.isEmpty()) {
+				result.add(source);
+			}
+			return result.toArray();
+		}
 
-			case RoleCompositionEditPart.VISUAL_ID: {
-				LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
-				Edge sv = (Edge) view;
-				RolesNavigatorGroup target = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleComposition_4004_target, "icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				RolesNavigatorGroup source = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleComposition_4004_source, "icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				Collection<View> connectedViews;
-				connectedViews = getLinksTargetByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				target.addChildren(createNavigatorItems(connectedViews, target, true));
-				connectedViews = getLinksSourceByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				source.addChildren(createNavigatorItems(connectedViews, source, true));
-				if (!target.isEmpty()) {
-					result.add(target);
-				}
-				if (!source.isEmpty()) {
-					result.add(source);
-				}
-				return result.toArray();
+		case RoleImplicationEditPart.VISUAL_ID: {
+			LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
+			Edge sv = (Edge) view;
+			RolesNavigatorGroup target = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleImplication_4001_target,
+					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			RolesNavigatorGroup source = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleImplication_4001_source,
+					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			if (!target.isEmpty()) {
+				result.add(target);
 			}
+			if (!source.isEmpty()) {
+				result.add(source);
+			}
+			return result.toArray();
+		}
 
-			case RoleEditPart.VISUAL_ID: {
-				LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
-				Node sv = (Node) view;
-				RolesNavigatorGroup incominglinks = new RolesNavigatorGroup(Messages.NavigatorGroupName_Role_2001_incominglinks, "icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				RolesNavigatorGroup outgoinglinks = new RolesNavigatorGroup(Messages.NavigatorGroupName_Role_2001_outgoinglinks, "icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				Collection<View> connectedViews;
-				connectedViews = getChildrenByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
-				connectedViews = getChildrenByType(connectedViews, RolesVisualIDRegistry.getType(RoleAttributeEditPart.VISUAL_ID));
-				result.addAll(createNavigatorItems(connectedViews, parentElement, false));
-				connectedViews = getIncomingLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleImplicationEditPart.VISUAL_ID));
-				incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
-				connectedViews = getOutgoingLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleImplicationEditPart.VISUAL_ID));
-				outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
-				connectedViews = getIncomingLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleProhibitionEditPart.VISUAL_ID));
-				incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
-				connectedViews = getOutgoingLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleProhibitionEditPart.VISUAL_ID));
-				outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
-				connectedViews = getIncomingLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleAssociationEditPart.VISUAL_ID));
-				incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
-				connectedViews = getOutgoingLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleAssociationEditPart.VISUAL_ID));
-				outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
-				connectedViews = getIncomingLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleCompositionEditPart.VISUAL_ID));
-				incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
-				connectedViews = getOutgoingLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleCompositionEditPart.VISUAL_ID));
-				outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
-				if (!incominglinks.isEmpty()) {
-					result.add(incominglinks);
-				}
-				if (!outgoinglinks.isEmpty()) {
-					result.add(outgoinglinks);
-				}
-				return result.toArray();
+		case RoleEditPart.VISUAL_ID: {
+			LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
+			Node sv = (Node) view;
+			RolesNavigatorGroup incominglinks = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_Role_2001_incominglinks,
+					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			RolesNavigatorGroup outgoinglinks = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_Role_2001_outgoinglinks,
+					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					RolesVisualIDRegistry
+							.getType(RoleAttributeEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleImplicationEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleImplicationEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleProhibitionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleProhibitionEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleAssociationEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleAssociationEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleCompositionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleCompositionEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			if (!incominglinks.isEmpty()) {
+				result.add(incominglinks);
 			}
+			if (!outgoinglinks.isEmpty()) {
+				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
 
-			case RoleModelEditPart.VISUAL_ID: {
-				LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
-				Diagram sv = (Diagram) view;
-				RolesNavigatorGroup links = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleModel_1000_links, "icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				Collection<View> connectedViews;
-				connectedViews = getChildrenByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				result.addAll(createNavigatorItems(connectedViews, parentElement, false));
-				connectedViews = getDiagramLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleImplicationEditPart.VISUAL_ID));
-				links.addChildren(createNavigatorItems(connectedViews, links, false));
-				connectedViews = getDiagramLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleProhibitionEditPart.VISUAL_ID));
-				links.addChildren(createNavigatorItems(connectedViews, links, false));
-				connectedViews = getDiagramLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleAssociationEditPart.VISUAL_ID));
-				links.addChildren(createNavigatorItems(connectedViews, links, false));
-				connectedViews = getDiagramLinksByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleCompositionEditPart.VISUAL_ID));
-				links.addChildren(createNavigatorItems(connectedViews, links, false));
-				if (!links.isEmpty()) {
-					result.add(links);
-				}
-				return result.toArray();
+		case RoleProhibitionEditPart.VISUAL_ID: {
+			LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
+			Edge sv = (Edge) view;
+			RolesNavigatorGroup target = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleProhibition_4002_target,
+					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			RolesNavigatorGroup source = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleProhibition_4002_source,
+					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			if (!target.isEmpty()) {
+				result.add(target);
 			}
+			if (!source.isEmpty()) {
+				result.add(source);
+			}
+			return result.toArray();
+		}
 
-			case RoleProhibitionEditPart.VISUAL_ID: {
-				LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
-				Edge sv = (Edge) view;
-				RolesNavigatorGroup target = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleProhibition_4002_target, "icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				RolesNavigatorGroup source = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleProhibition_4002_source, "icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				Collection<View> connectedViews;
-				connectedViews = getLinksTargetByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				target.addChildren(createNavigatorItems(connectedViews, target, true));
-				connectedViews = getLinksSourceByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				source.addChildren(createNavigatorItems(connectedViews, source, true));
-				if (!target.isEmpty()) {
-					result.add(target);
-				}
-				if (!source.isEmpty()) {
-					result.add(source);
-				}
-				return result.toArray();
+		case RoleModelEditPart.VISUAL_ID: {
+			LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
+			Diagram sv = (Diagram) view;
+			RolesNavigatorGroup links = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleModel_1000_links,
+					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleImplicationEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleProhibitionEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleAssociationEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					RolesVisualIDRegistry
+							.getType(RoleCompositionEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			if (!links.isEmpty()) {
+				result.add(links);
 			}
+			return result.toArray();
+		}
 
-			case RoleImplicationEditPart.VISUAL_ID: {
-				LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
-				Edge sv = (Edge) view;
-				RolesNavigatorGroup target = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleImplication_4001_target, "icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				RolesNavigatorGroup source = new RolesNavigatorGroup(Messages.NavigatorGroupName_RoleImplication_4001_source, "icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-				Collection<View> connectedViews;
-				connectedViews = getLinksTargetByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				target.addChildren(createNavigatorItems(connectedViews, target, true));
-				connectedViews = getLinksSourceByType(Collections.singleton(sv), RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
-				source.addChildren(createNavigatorItems(connectedViews, source, true));
-				if (!target.isEmpty()) {
-					result.add(target);
-				}
-				if (!source.isEmpty()) {
-					result.add(source);
-				}
-				return result.toArray();
+		case RoleAssociationEditPart.VISUAL_ID: {
+			LinkedList<RolesAbstractNavigatorItem> result = new LinkedList<RolesAbstractNavigatorItem>();
+			Edge sv = (Edge) view;
+			RolesNavigatorGroup target = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleAssociation_4003_target,
+					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			RolesNavigatorGroup source = new RolesNavigatorGroup(
+					Messages.NavigatorGroupName_RoleAssociation_4003_source,
+					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					RolesVisualIDRegistry.getType(RoleEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			if (!target.isEmpty()) {
+				result.add(target);
 			}
+			if (!source.isEmpty()) {
+				result.add(source);
+			}
+			return result.toArray();
+		}
 		}
 		return EMPTY_ARRAY;
 	}
@@ -354,11 +439,13 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	/**
 	 * @generated
 	 */
-	private Collection<View> getLinksSourceByType(Collection<Edge> edges, String type) {
+	private Collection<View> getLinksSourceByType(Collection<Edge> edges,
+			String type) {
 		LinkedList<View> result = new LinkedList<View>();
 		for (Edge nextEdge : edges) {
 			View nextEdgeSource = nextEdge.getSource();
-			if (type.equals(nextEdgeSource.getType()) && isOwnView(nextEdgeSource)) {
+			if (type.equals(nextEdgeSource.getType())
+					&& isOwnView(nextEdgeSource)) {
 				result.add(nextEdgeSource);
 			}
 		}
@@ -368,11 +455,13 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	/**
 	 * @generated
 	 */
-	private Collection<View> getLinksTargetByType(Collection<Edge> edges, String type) {
+	private Collection<View> getLinksTargetByType(Collection<Edge> edges,
+			String type) {
 		LinkedList<View> result = new LinkedList<View>();
 		for (Edge nextEdge : edges) {
 			View nextEdgeTarget = nextEdge.getTarget();
-			if (type.equals(nextEdgeTarget.getType()) && isOwnView(nextEdgeTarget)) {
+			if (type.equals(nextEdgeTarget.getType())
+					&& isOwnView(nextEdgeTarget)) {
 				result.add(nextEdgeTarget);
 			}
 		}
@@ -382,7 +471,8 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	/**
 	 * @generated
 	 */
-	private Collection<View> getOutgoingLinksByType(Collection<? extends View> nodes, String type) {
+	private Collection<View> getOutgoingLinksByType(
+			Collection<? extends View> nodes, String type) {
 		LinkedList<View> result = new LinkedList<View>();
 		for (View nextNode : nodes) {
 			result.addAll(selectViewsByType(nextNode.getSourceEdges(), type));
@@ -393,7 +483,8 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	/**
 	 * @generated
 	 */
-	private Collection<View> getIncomingLinksByType(Collection<? extends View> nodes, String type) {
+	private Collection<View> getIncomingLinksByType(
+			Collection<? extends View> nodes, String type) {
 		LinkedList<View> result = new LinkedList<View>();
 		for (View nextNode : nodes) {
 			result.addAll(selectViewsByType(nextNode.getTargetEdges(), type));
@@ -404,7 +495,8 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	/**
 	 * @generated
 	 */
-	private Collection<View> getChildrenByType(Collection<? extends View> nodes, String type) {
+	private Collection<View> getChildrenByType(
+			Collection<? extends View> nodes, String type) {
 		LinkedList<View> result = new LinkedList<View>();
 		for (View nextNode : nodes) {
 			result.addAll(selectViewsByType(nextNode.getChildren(), type));
@@ -415,7 +507,8 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	/**
 	 * @generated
 	 */
-	private Collection<View> getDiagramLinksByType(Collection<Diagram> diagrams, String type) {
+	private Collection<View> getDiagramLinksByType(
+			Collection<Diagram> diagrams, String type) {
 		ArrayList<View> result = new ArrayList<View>();
 		for (Diagram nextDiagram : diagrams) {
 			result.addAll(selectViewsByType(nextDiagram.getEdges(), type));
@@ -426,7 +519,8 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	/**
 	 * @generated
 	 */
-	private Collection<View> selectViewsByType(Collection<View> views, String type) {
+	private Collection<View> selectViewsByType(Collection<View> views,
+			String type) {
 		ArrayList<View> result = new ArrayList<View>();
 		for (View nextView : views) {
 			if (type.equals(nextView.getType()) && isOwnView(nextView)) {
@@ -440,14 +534,17 @@ public class RolesNavigatorContentProvider implements ICommonContentProvider {
 	 * @generated
 	 */
 	private boolean isOwnView(View view) {
-		return RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID(view));
+		return RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry
+				.getModelID(view));
 	}
 
 	/**
 	 * @generated
 	 */
-	private Collection<RolesNavigatorItem> createNavigatorItems(Collection<View> views, Object parent, boolean isLeafs) {
-		ArrayList<RolesNavigatorItem> result = new ArrayList<RolesNavigatorItem>(views.size());
+	private Collection<RolesNavigatorItem> createNavigatorItems(
+			Collection<View> views, Object parent, boolean isLeafs) {
+		ArrayList<RolesNavigatorItem> result = new ArrayList<RolesNavigatorItem>(
+				views.size());
 		for (View nextView : views) {
 			result.add(new RolesNavigatorItem(nextView, parent, isLeafs));
 		}

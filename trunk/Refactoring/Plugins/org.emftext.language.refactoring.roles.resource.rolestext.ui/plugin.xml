@@ -37,9 +37,9 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		<category id="org.emftext.refactory.ui" name="Refactory">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" name="EMFText .rolestext file">
+		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" name="EMFText .rolestext file">
 		</wizard>
 	</extension>
 	

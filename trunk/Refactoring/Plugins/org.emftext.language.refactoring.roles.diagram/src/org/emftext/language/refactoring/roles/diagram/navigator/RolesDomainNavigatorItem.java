@@ -19,27 +19,32 @@ public class RolesDomainNavigatorItem extends PlatformObject {
 	static {
 		final Class[] supportedTypes = new Class[] { EObject.class,
 				IPropertySource.class };
-		Platform.getAdapterManager().registerAdapters(new IAdapterFactory() {
+		Platform.getAdapterManager().registerAdapters(
+				new IAdapterFactory() {
 
-			public Object getAdapter(Object adaptableObject, Class adapterType) {
-				if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) {
-					org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem domainNavigatorItem = (org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) adaptableObject;
-					EObject eObject = domainNavigatorItem.getEObject();
-					if (adapterType == EObject.class) {
-						return eObject;
+					public Object getAdapter(Object adaptableObject,
+							Class adapterType) {
+						if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) {
+							org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem domainNavigatorItem = (org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) adaptableObject;
+							EObject eObject = domainNavigatorItem.getEObject();
+							if (adapterType == EObject.class) {
+								return eObject;
+							}
+							if (adapterType == IPropertySource.class) {
+								return domainNavigatorItem
+										.getPropertySourceProvider()
+										.getPropertySource(eObject);
+							}
+						}
+
+						return null;
 					}
-					if (adapterType == IPropertySource.class) {
-						return domainNavigatorItem.getPropertySourceProvider().getPropertySource(eObject);
+
+					public Class[] getAdapterList() {
+						return supportedTypes;
 					}
-				}
-
-				return null;
-			}
-
-			public Class[] getAdapterList() {
-				return supportedTypes;
-			}
-		}, org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem.class);
+				},
+				org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem.class);
 	}
 
 	/**
@@ -60,7 +65,8 @@ public class RolesDomainNavigatorItem extends PlatformObject {
 	/**
 	 * @generated
 	 */
-	public RolesDomainNavigatorItem(EObject eObject, Object parent, IPropertySourceProvider propertySourceProvider) {
+	public RolesDomainNavigatorItem(EObject eObject, Object parent,
+			IPropertySourceProvider propertySourceProvider) {
 		myParent = parent;
 		myEObject = eObject;
 		myPropertySourceProvider = propertySourceProvider;
@@ -92,7 +98,11 @@ public class RolesDomainNavigatorItem extends PlatformObject {
 	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) {
-			return EcoreUtil.getURI(getEObject()).equals(EcoreUtil.getURI(((org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) obj).getEObject()));
+			return EcoreUtil
+					.getURI(getEObject())
+					.equals(EcoreUtil
+							.getURI(((org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) obj)
+									.getEObject()));
 		}
 		return super.equals(obj);
 	}

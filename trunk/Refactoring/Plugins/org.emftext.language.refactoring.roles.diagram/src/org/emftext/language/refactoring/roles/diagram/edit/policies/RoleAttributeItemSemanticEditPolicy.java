@@ -12,7 +12,8 @@ import org.emftext.language.refactoring.roles.diagram.providers.RolesElementType
 /**
  * @generated
  */
-public class RoleAttributeItemSemanticEditPolicy extends RolesBaseItemSemanticEditPolicy {
+public class RoleAttributeItemSemanticEditPolicy extends
+		RolesBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
@@ -26,7 +27,8 @@ public class RoleAttributeItemSemanticEditPolicy extends RolesBaseItemSemanticEd
 	 */
 	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		View view = (View) getHost().getModel();
-		CompositeTransactionalCommand cmd = new CompositeTransactionalCommand(getEditingDomain(), null);
+		CompositeTransactionalCommand cmd = new CompositeTransactionalCommand(
+				getEditingDomain(), null);
 		cmd.setTransactionNestingEnabled(false);
 		EAnnotation annotation = view.getEAnnotation("Shortcut"); //$NON-NLS-1$
 		if (annotation == null) {

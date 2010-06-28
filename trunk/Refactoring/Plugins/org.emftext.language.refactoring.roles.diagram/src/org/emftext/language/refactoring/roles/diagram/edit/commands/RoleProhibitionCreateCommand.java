@@ -40,7 +40,8 @@ public class RoleProhibitionCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	public RoleProhibitionCreateCommand(CreateRelationshipRequest request, EObject source, EObject target) {
+	public RoleProhibitionCreateCommand(CreateRelationshipRequest request,
+			EObject source, EObject target) {
 		super(request.getLabel(), null, request);
 		this.source = source;
 		this.target = target;
@@ -67,18 +68,23 @@ public class RoleProhibitionCreateCommand extends EditElementCommand {
 		if (getContainer() == null) {
 			return false;
 		}
-		return RolesBaseItemSemanticEditPolicy.getLinkConstraints().canCreateRoleProhibition_4002(getContainer(), getSource(), getTarget());
+		return RolesBaseItemSemanticEditPolicy.getLinkConstraints()
+				.canCreateRoleProhibition_4002(getContainer(), getSource(),
+						getTarget());
 	}
 
 	/**
 	 * @generated
 	 */
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+			IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
-			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
+			throw new ExecutionException(
+					"Invalid arguments in create link command"); //$NON-NLS-1$
 		}
 
-		RoleProhibition newElement = RolesFactory.eINSTANCE.createRoleProhibition();
+		RoleProhibition newElement = RolesFactory.eINSTANCE
+				.createRoleProhibition();
 		getContainer().getCollaborations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
@@ -91,14 +97,22 @@ public class RoleProhibitionCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected void doConfigure(RoleProhibition newElement, IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		IElementType elementType = ((CreateElementRequest) getRequest()).getElementType();
-		ConfigureRequest configureRequest = new ConfigureRequest(getEditingDomain(), newElement, elementType);
-		configureRequest.setClientContext(((CreateElementRequest) getRequest()).getClientContext());
+	protected void doConfigure(RoleProhibition newElement,
+			IProgressMonitor monitor, IAdaptable info)
+			throws ExecutionException {
+		IElementType elementType = ((CreateElementRequest) getRequest())
+				.getElementType();
+		ConfigureRequest configureRequest = new ConfigureRequest(
+				getEditingDomain(), newElement, elementType);
+		configureRequest.setClientContext(((CreateElementRequest) getRequest())
+				.getClientContext());
 		configureRequest.addParameters(getRequest().getParameters());
-		configureRequest.setParameter(CreateRelationshipRequest.SOURCE, getSource());
-		configureRequest.setParameter(CreateRelationshipRequest.TARGET, getTarget());
-		ICommand configureCommand = elementType.getEditCommand(configureRequest);
+		configureRequest.setParameter(CreateRelationshipRequest.SOURCE,
+				getSource());
+		configureRequest.setParameter(CreateRelationshipRequest.TARGET,
+				getTarget());
+		ICommand configureCommand = elementType
+				.getEditCommand(configureRequest);
 		if (configureCommand != null && configureCommand.canExecute()) {
 			configureCommand.execute(monitor, info);
 		}
@@ -141,7 +155,8 @@ public class RoleProhibitionCreateCommand extends EditElementCommand {
 		// Find container element for the new link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null; element = element.eContainer()) {
+		for (EObject element = source; element != null; element = element
+				.eContainer()) {
 			if (element instanceof RoleModel) {
 				return (RoleModel) element;
 			}

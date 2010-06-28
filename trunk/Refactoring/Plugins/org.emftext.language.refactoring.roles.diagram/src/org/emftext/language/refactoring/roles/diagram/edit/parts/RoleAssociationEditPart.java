@@ -16,7 +16,8 @@ import org.emftext.language.refactoring.roles.diagram.edit.policies.RoleAssociat
 /**
  * @generated
  */
-public class RoleAssociationEditPart extends ConnectionNodeEditPart implements ITreeBranchEditPart {
+public class RoleAssociationEditPart extends ConnectionNodeEditPart implements
+		ITreeBranchEditPart {
 
 	/**
 	 * @generated
@@ -35,7 +36,8 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements I
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleAssociationItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RoleAssociationItemSemanticEditPolicy());
 	}
 
 	/**
@@ -43,11 +45,13 @@ public class RoleAssociationEditPart extends ConnectionNodeEditPart implements I
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof RoleAssociationSourceNameEditPart) {
-			((RoleAssociationSourceNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureSourceNameFigure());
+			((RoleAssociationSourceNameEditPart) childEditPart)
+					.setLabel(getPrimaryShape().getFigureSourceNameFigure());
 			return true;
 		}
 		if (childEditPart instanceof RoleAssociationTargetNameEditPart) {
-			((RoleAssociationTargetNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureTargetNameFigure());
+			((RoleAssociationTargetNameEditPart) childEditPart)
+					.setLabel(getPrimaryShape().getFigureTargetNameFigure());
 			return true;
 		}
 		return false;

@@ -29,6 +29,7 @@ OPTIONS{
 	overrideBuilder = "false";
 	//overrideManifest = "false";
 	//overridePluginXML = "false";
+	overrideUIPluginXML = "false";
 }
 
 TOKENS{
