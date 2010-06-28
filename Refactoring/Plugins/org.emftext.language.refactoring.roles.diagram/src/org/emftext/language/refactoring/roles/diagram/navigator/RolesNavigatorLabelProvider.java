@@ -93,24 +93,24 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 	 */
 	public Image getImage(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-		case RoleCompositionEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http://www.emftext.org/language/roles?RoleComposition", RolesElementTypes.RoleComposition_4004); //$NON-NLS-1$
 		case RoleImplicationEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Link?http://www.emftext.org/language/roles?RoleImplication", RolesElementTypes.RoleImplication_4001); //$NON-NLS-1$
-		case RoleAttributeEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Node?http://www.emftext.org/language/roles?RoleAttribute", RolesElementTypes.RoleAttribute_3001); //$NON-NLS-1$
-		case RoleEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?TopLevelNode?http://www.emftext.org/language/roles?Role", RolesElementTypes.Role_2001); //$NON-NLS-1$
 		case RoleProhibitionEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Link?http://www.emftext.org/language/roles?RoleProhibition", RolesElementTypes.RoleProhibition_4002); //$NON-NLS-1$
+		case RoleEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?TopLevelNode?http://www.emftext.org/language/roles?Role", RolesElementTypes.Role_2001); //$NON-NLS-1$
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Node?http://www.emftext.org/language/roles?RoleAttribute", RolesElementTypes.RoleAttribute_3001); //$NON-NLS-1$
 		case RoleModelEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Diagram?http://www.emftext.org/language/roles?RoleModel", RolesElementTypes.RoleModel_1000); //$NON-NLS-1$
+		case RoleCompositionEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://www.emftext.org/language/roles?RoleComposition", RolesElementTypes.RoleComposition_4004); //$NON-NLS-1$
 		case RoleAssociationEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Link?http://www.emftext.org/language/roles?RoleAssociation", RolesElementTypes.RoleAssociation_4003); //$NON-NLS-1$
@@ -166,18 +166,18 @@ public class RolesNavigatorLabelProvider extends LabelProvider implements
 			return getUnresolvedDomainElementProxyText(view);
 		}
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-		case RoleCompositionEditPart.VISUAL_ID:
-			return getRoleComposition_4004Text(view);
 		case RoleImplicationEditPart.VISUAL_ID:
 			return getRoleImplication_4001Text(view);
-		case RoleAttributeEditPart.VISUAL_ID:
-			return getRoleAttribute_3001Text(view);
-		case RoleEditPart.VISUAL_ID:
-			return getRole_2001Text(view);
 		case RoleProhibitionEditPart.VISUAL_ID:
 			return getRoleProhibition_4002Text(view);
+		case RoleEditPart.VISUAL_ID:
+			return getRole_2001Text(view);
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getRoleAttribute_3001Text(view);
 		case RoleModelEditPart.VISUAL_ID:
 			return getRoleModel_1000Text(view);
+		case RoleCompositionEditPart.VISUAL_ID:
+			return getRoleComposition_4004Text(view);
 		case RoleAssociationEditPart.VISUAL_ID:
 			return getRoleAssociation_4003Text(view);
 		}

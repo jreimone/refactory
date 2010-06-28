@@ -49,10 +49,6 @@
   	     id="org.emftext.language.refactoring.roles.diagram.part.RolesCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
-     <category
-           id="org.emftext.refactory.ui"
-           name="Refactory">
-     </category>
    </extension>
 
    <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
