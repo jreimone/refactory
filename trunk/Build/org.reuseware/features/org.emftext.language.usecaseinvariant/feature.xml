@@ -36,7 +36,7 @@ of Technology, Germany
 	 <import feature="org.eclipse.platform"/>
 	 <import feature="org.eclipse.sdk" />
 	 <import feature="org.eclipse.emf"/>
-	 <import feature="org.eclipse.emf.ocl"/>
+	 <import feature="org.eclipse.ocl"/>
 	 <import feature="org.eclipse.emf.workspace"/> 
 	 <import feature="org.emftext.commons.antlr3_2_0"/>
    </requires>
