@@ -56,6 +56,7 @@
 			<pathelement path="../org.emftext.commons.antlr3_2_0/bin"/>
 			<pathelement path="../org.emftext.language.abnf/bin"/>
 			<pathelement path="../org.emftext.language.abnf.resource.abnf/bin"/>
+			<pathelement path="../org.emftext.language.abnf.test/bin"/>
 			<pathelement path="../org.emftext.language.aterms/bin"/>
 			<pathelement path="../org.emftext.language.aterms.resource.aterms/bin"/>
 			<pathelement path="../org.emftext.language.b/bin"/>
@@ -73,6 +74,7 @@
 			<pathelement path="../org.emftext.language.conference.resource.conference/bin"/>
 			<pathelement path="../org.emftext.language.csv/bin"/>
 			<pathelement path="../org.emftext.language.csv.resource.csv/bin"/>
+			<pathelement path="../org.emftext.language.csv.test/bin"/>
 			<pathelement path="../org.emftext.language.customsandwich/bin"/>
 			<pathelement path="../org.emftext.language.customsandwich.resource.customsandwich/bin"/>
 			<pathelement path="../org.emftext.language.customsandwich.test/bin"/>
@@ -322,8 +324,10 @@
 	</target>
 	
 	<target name="run-simple-tests" depends="create-classpath-jar">
+		<run-test plugin="org.emftext.language.abnf" extension="abnf" />
 		<run-test plugin="org.emftext.language.c_sharp" extension="csharp" />
 		<run-test plugin="org.emftext.language.chess" extension="chess" />
+		<run-test plugin="org.emftext.language.csv" extension="csv" />
 		<run-test plugin="org.emftext.language.dot" extension="dot" />
 		<run-test plugin="org.emftext.language.ecore" extension="text" />
 		<run-test plugin="org.emftext.language.efactory" extension="efactory" />
