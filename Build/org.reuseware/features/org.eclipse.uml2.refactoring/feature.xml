@@ -32,6 +32,7 @@ of Technology, Germany
       <import feature="org.eclipse.platform"/>
       <import feature="org.eclipse.emf"/>
       <import feature="org.eclipse.emf.workspace"/>
+      <import feature="org.eclipse.uml2"/>
       <import feature="org.emftext.refactoring.runtime"/>
    </requires>
 

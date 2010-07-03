@@ -38,6 +38,9 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
 		<import feature="org.eclipse.sdk" />
 		<import feature="org.eclipse.emf"/>
 		<import feature="org.eclipse.emf.workspace"/>
+		<import feature="org.eclipse.xtext.runtime"/>
+		<import feature="org.eclipse.xtext.sdk"/>
+		<import feature="org.eclipse.xtext.ui"/>
 		<import feature="org.emftext.access"/>
 		<import feature="org.emftext.refactoring.runtime"/>
 	</requires>
