@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.emftext.org/language/roles"
-            class="roles.RolesPackage"
+            class="org.emftext.language.refactoring.roles.RolesPackage"
             genModel="metamodel/roles.genmodel"/>
    </extension>
    <extension
