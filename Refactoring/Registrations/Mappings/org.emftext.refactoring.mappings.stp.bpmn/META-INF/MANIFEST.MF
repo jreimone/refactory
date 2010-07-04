@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Refactoring
-Bundle-SymbolicName: org.eclipse.stp.bpmn.refactoring;singleton:=true
+Bundle-SymbolicName: org.emftext.refactoring.mappings.stp.bpmn;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.stp.bpmn.refactoring.Activator
 Bundle-Vendor: Jan Reimann

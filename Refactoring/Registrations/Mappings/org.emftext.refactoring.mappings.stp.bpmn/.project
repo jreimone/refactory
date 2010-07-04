@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.stp.bpmn.refactoring</name>
+	<name>org.emftext.refactoring.mappings.stp.bpmn</name>
 	<comment></comment>
 	<projects>
 	</projects>
