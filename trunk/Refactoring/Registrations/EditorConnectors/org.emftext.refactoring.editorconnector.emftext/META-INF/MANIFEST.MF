@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EditorConnector for EMFText generated Editors
-Bundle-SymbolicName: org.emftext.refactoring.editorconnector;singleton:=true
+Bundle-SymbolicName: org.emftext.refactoring.editorconnector.emftext;singleton:=true
 Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: org.emftext.refactoring.editorconnector.Activator
 Bundle-Vendor: Jan Reimann

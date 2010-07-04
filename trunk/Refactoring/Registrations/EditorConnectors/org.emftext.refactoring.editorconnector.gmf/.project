@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.gmf.refactoring.editorconnector</name>
+	<name>org.emftext.refactoring.editorconnector.gmf</name>
 	<comment></comment>
 	<projects>
 	</projects>
