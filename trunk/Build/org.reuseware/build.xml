@@ -798,7 +798,6 @@
 
 		<buildplugin name="Sokan" package="org.reuseware.sokan"            version="${sokan.version}"/>
 		<buildplugin name="Sokan" package="org.reuseware.sokan.index"      version="${sokan.version}"/>
-		<buildplugin name="Sokan" package="org.reuseware.sokan.index.eg"   version="${sokan.version}"/>
 		<buildplugin name="Sokan" package="org.reuseware.sokan.index.solr" version="${sokan.version}"/>
 		<buildplugin name="Sokan" package="org.reuseware.sokan.resource"   version="${sokan.version}"/>
 		<buildfeature             package="org.reuseware.sokan"            version="${sokan.version}"/>
