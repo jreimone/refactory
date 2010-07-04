@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Refactoring
-Bundle-SymbolicName: org.eclipse.uml2.refactoring;singleton:=true
+Bundle-SymbolicName: org.emftext.refactoring.mappings.uml2;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.core.runtime,
