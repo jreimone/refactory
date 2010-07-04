@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.xtext.refactoring.editorconnector"
+      id="org.emftext.refactoring.editorconnector.xtext"
       label="Refactory xText Editor Connector"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
@@ -45,5 +45,5 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
 		<import feature="org.emftext.refactoring.runtime"/>
 	</requires>
 
-	<plugin id="org.eclipse.xtext.refactoring.editorconnector" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+	<plugin id="org.emftext.refactoring.editorconnector.xtext" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 </feature>

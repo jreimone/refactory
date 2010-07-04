@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.emf.ecore.refactoring"
-      label="Refactorings for Ecore models"
+      id="org.emftext.refactoring.mappings.uml2"
+      label="Refactorings for UML2 models"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://emftext.org">
-      Refactorings for Ecore models: Provides a set of refactorings for Ecore models.
+      Refactorings for UML2 models: Provides a set of refactorings for UML2 models.
    </description>
 
    <copyright>
@@ -32,11 +32,12 @@ of Technology, Germany
       <import feature="org.eclipse.platform"/>
       <import feature="org.eclipse.emf"/>
       <import feature="org.eclipse.emf.workspace"/>
+      <import feature="org.eclipse.uml2"/>
       <import feature="org.emftext.refactoring.runtime"/>
    </requires>
 
    <plugin
-         id="org.eclipse.emf.ecore.refactoring"
+         id="org.emftext.refactoring.mappings.uml2"
          download-size="0"
          install-size="0"
          version="0.0.0"
