@@ -733,27 +733,27 @@
 		<buildplugin name="Refactory Additional UI Support" package="org.emftext.refactoring.ui.additions" version="${refactory.version}"/>
 		<buildfeature                    package="org.emftext.refactoring.sdk" version="${refactory.version}"/>
 		
-		<buildplugin name="Refactory GMF Editor Connector" package="org.eclipse.gmf.refactoring.editorconnector" version="${refactory.version}"/>
-		<buildfeature                                      package="org.eclipse.gmf.refactoring.editorconnector" version="${refactory.version}"/>
+		<buildplugin name="Refactory GMF Editor Connector" package="org.emftext.refactoring.editorconnector.gmf" version="${refactory.version}"/>
+		<buildfeature                                      package="org.emftext.refactoring.editorconnector.gmf" version="${refactory.version}"/>
 		
-		<buildplugin name="Refactory xText Editor Connector" package="org.eclipse.xtext.refactoring.editorconnector" version="${refactory.version}"/>
-		<buildfeature                                        package="org.eclipse.xtext.refactoring.editorconnector" version="${refactory.version}"/>
+		<buildplugin name="Refactory xText Editor Connector" package="org.emftext.refactoring.editorconnector.xtext" version="${refactory.version}"/>
+		<buildfeature                                        package="org.emftext.refactoring.editorconnector.xtext" version="${refactory.version}"/>
 		
-		<buildplugin name="Refactory EMFText Editor Connector" package="org.emftext.refactoring.editorconnector" version="${refactory.version}"/>
-		<buildfeature                                          package="org.emftext.refactoring.editorconnector" version="${refactory.version}"/>
+		<buildplugin name="Refactory EMFText Editor Connector" package="org.emftext.refactoring.editorconnector.emftext" version="${refactory.version}"/>
+		<buildfeature                                          package="org.emftext.refactoring.editorconnector.emftext" version="${refactory.version}"/>
 
 		<buildplugin name="Refactory Index Connection - Sokan Connector" package="org.emftext.refactoring.indexconnector.sokan" version="${refactory.version}"/>
 		<buildfeature                                                    package="org.emftext.refactoring.indexconnector.sokan" version="${refactory.version}"/>
 
 		<!-- Concrete Refactorings -->
-		<buildplugin name="Refactorings for EMF models" package="org.eclipse.emf.ecore.refactoring" version="${refactory.version}"/>
-		<buildfeature                                   package="org.eclipse.emf.ecore.refactoring" version="${refactory.version}"/>
+		<buildplugin name="Refactorings for EMF models" package="org.emftext.refactoring.mappings.ecore" version="${refactory.version}"/>
+		<buildfeature                                   package="org.emftext.refactoring.mappings.ecore" version="${refactory.version}"/>
 
-		<buildplugin name="Refactorings for BPMN models" package="org.eclipse.stp.bpmn.refactoring" version="${refactory.version}"/>
-		<buildfeature                                    package="org.eclipse.stp.bpmn.refactoring" version="${refactory.version}"/>
+		<buildplugin name="Refactorings for BPMN models" package="org.emftext.refactoring.mappings.stp.bpmn" version="${refactory.version}"/>
+		<buildfeature                                    package="org.emftext.refactoring.mappings.stp.bpmn" version="${refactory.version}"/>
 
-		<buildplugin name="Refactorings for UML2 models" package="org.eclipse.uml2.refactoring" version="${refactory.version}"/>
-		<buildfeature                                    package="org.eclipse.uml2.refactoring" version="${refactory.version}"/>
+		<buildplugin name="Refactorings for UML2 models" package="org.emftext.refactoring.mappings.uml2" version="${refactory.version}"/>
+		<buildfeature                                    package="org.emftext.refactoring.mappings.uml2" version="${refactory.version}"/>
 
 		<buildplugin name="Refactorings for the Forms DSL" package="org.emftext.language.forms.refactoring" version="${refactory.version}"/>
 		<buildfeature                                      package="org.emftext.language.forms.refactoring" version="${refactory.version}"/>

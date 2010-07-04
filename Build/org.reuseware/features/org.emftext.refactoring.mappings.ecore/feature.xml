@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.stp.bpmn.refactoring"
-      label="Refactorings for BPMN models"
+      id="org.emftext.refactoring.mappings.ecore"
+      label="Refactorings for Ecore models"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://emftext.org">
-      Refactorings for BPMN models: Provides a set of refactorings for BPMN models.
+      Refactorings for Ecore models: Provides a set of refactorings for Ecore models.
    </description>
 
    <copyright>
@@ -32,12 +32,11 @@ of Technology, Germany
       <import feature="org.eclipse.platform"/>
       <import feature="org.eclipse.emf"/>
       <import feature="org.eclipse.emf.workspace"/>
-      <import feature="org.eclipse.stp.bpmn.feature"/>
       <import feature="org.emftext.refactoring.runtime"/>
    </requires>
 
    <plugin
-         id="org.eclipse.stp.bpmn.refactoring"
+         id="org.emftext.refactoring.mappings.ecore"
          download-size="0"
          install-size="0"
          version="0.0.0"
