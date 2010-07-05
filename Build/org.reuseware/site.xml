@@ -214,15 +214,15 @@
 		<category name="Refactory"/>
 	</feature>
 
-	<feature url="features/org.eclipse.gmf.refactoring.editorconnector_0.0.0.v0.jar" id="org.eclipse.gmf.refactoring.editorconnector" version="0.0.0.v0">
+	<feature url="features/org.emftext.refactoring.editorconnector.gmf_0.0.0.v0.jar" id="org.emftext.refactoring.editorconnector.gmf" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
 
-	<feature url="features/org.eclipse.xtext.refactoring.editorconnector_0.0.0.v0.jar" id="org.eclipse.xtext.refactoring.editorconnector" version="0.0.0.v0">
+	<feature url="features/org.emftext.refactoring.editorconnector.xtext_0.0.0.v0.jar" id="org.emftext.refactoring.editorconnector.xtext" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
 
-	<feature url="features/org.emftext.refactoring.editorconnector_0.0.0.v0.jar" id="org.emftext.refactoring.editorconnector" version="0.0.0.v0">
+	<feature url="features/org.emftext.refactoring.editorconnector.emftext_0.0.0.v0.jar" id="org.emftext.refactoring.editorconnector.emftext" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
 
@@ -230,15 +230,15 @@
 		<category name="Refactory"/>
 	</feature>
 
-	<feature url="features/org.eclipse.emf.ecore.refactoring_0.0.0.v0.jar" id="org.eclipse.emf.ecore.refactoring" version="0.0.0.v0">
+	<feature url="features/org.emftext.refactoring.mappings.ecore_0.0.0.v0.jar" id="org.emftext.refactoring.mappings.ecore" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
 
-	<feature url="features/org.eclipse.stp.bpmn.refactoring_0.0.0.v0.jar" id="org.eclipse.stp.bpmn.refactoring" version="0.0.0.v0">
+	<feature url="features/org.emftext.refactoring.mappings.stp.bpmn_0.0.0.v0.jar" id="org.emftext.refactoring.mappings.stp.bpmn" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
 
-	<feature url="features/org.eclipse.uml2.refactoring_0.0.0.v0.jar" id="org.eclipse.uml2.refactoring" version="0.0.0.v0">
+	<feature url="features/org.emftext.refactoring.mappings.uml2_0.0.0.v0.jar" id="org.emftext.refactoring.mappings.uml2" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
 
