@@ -6,6 +6,9 @@
       <rolemapping
             rolemapping_resource="rolemappings/renameEmployee.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/moveEmployeeNextTo.rolemapping">
+      </rolemapping>
    </extension>
 
 </plugin>
