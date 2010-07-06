@@ -4,14 +4,14 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            id="org.emftext.refactoring.category"
-            name="Model Refactoring">
+            id="org.emftext.refactory.ui.view"
+            name="Refactory">
       </category>
       <view
             allowMultiple="false"
-            category="org.emftext.refactoring.category"
+            category="org.emftext.refactory.ui.view"
             class="org.emftext.refactoring.statistic.views.RefactoringStatisticView"
-            icon="icons/sample.gif"
+            icon="icons/rolemodel.gif"
             id="org.emftext.refactoring.statistic.views.RefactoringStatisticView"
             name="Refactoring Registry">
       </view>
