@@ -10,8 +10,8 @@ without the need to learn new technologies and concepts. Give it a
 shot and you'll find EMFText indispensible for your model-driven
 development processes.
 
-With version 1.3.0, EMFText is more stable and brings some useful new
-features: 
+With version 1.3.0, EMFText is more stable (~100 issues have been 
+fixed) and brings some useful new features: 
 - It is now possible to define syntax for expressions (nested, left-
   recursive structures) more easily. 
 - EMFText now offers a New Project Wizard, which lets you setup a new
@@ -27,7 +27,7 @@ including:
 - The complete OWL Manchester syntax
 - eJava - a language to add EOperation bodies to Ecore models 
 
-Many more languages are available on the Website in the Concrete Syntax 
+Many more languages are available on the web in the Concrete Syntax 
 Zoo.
 
 You can download the tool, watch a screencast, or read the
