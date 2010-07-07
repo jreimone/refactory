@@ -25,7 +25,8 @@ applications:
 - to map features to Java programs using the FeatureMapper 
 - to extend Java with new reuse concepts processable by Reuseware 
 - to perform static source code analysis with OCL
-- to integrate Java into Ecore to allow the specification EOperation bodies
+- to integrate Java into Ecore to allow the specification of EOperation 
+  bodies
 - to implement a number of Java extensions 
 
 If you are working with models AND Java, you should try JaMoPP and 
