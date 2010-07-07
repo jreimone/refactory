@@ -1,17 +1,17 @@
 Refactory 0.8.0 released
 
 Refactory is a framework to enable the definition of model refactorings.
-The tooling is oriented on the Eclipse Language Toolkit (LTK) which offers
-the well known refactorings from the JDT for example. So, after defining
-a refactoring for your DSL or meta model you can invoke it in a wizard
-being very similar to the LTK refactorings like 'Extract Method'.
+The tooling is oriented at the Eclipse Language Toolkit (LTK) which offers
+the well known refactorings from the JDT. After defining a refactoring for 
+your DSL or meta model you can invoke it in a wizard being very similar to 
+the LTK refactorings like 'Extract Method'.
 
 To prepare a refactoring for a meta model Refactory follows a generic
 approach because, as evaluated under http://emftext.org/index.php/Refactoring:Catalog,
 model refactorings can be re-used in several metamodels. Following
 this apporach a refactoring designer first has to define the 
 participators, called 'roles', of a generic refactoring. Therefore
-a meta model exisits in Refactory for which a textual and a graphical 
+a meta model exists in Refactory for which a textual and a graphical 
 syntax was specified. Then the steps must be defined, which the model
 refactoring consists of. This will be achieved with an own transformation
 language being able to declare re-structurings depending only on the 
@@ -27,19 +27,19 @@ between them must only be mapped to meta classes and paths of relations.
 Refactory consists of the following main features:
 - several pre-defined and mapped generic refactorings (e.g. for
   Ecore, UML2 or BPMN)
-- to invoke refactorings in EMFText based editors you can install
-  an editor connector for it
-- to invoke refactorings in GMF based editors you can install
-  an editor connector for it
+- A connector for EMFText-based editors to invoke refactorings on
+  EMFText DSLs
+- A connector for GMF-based editors to invoke refactorings directly
+  in GMF editors
 - implement and register your own editor connectors
-- to update direct and inverse references when refactoring a model
-  install the Sokan index connector which then enables the propagation
+- Updating of direct and inverse references when refactoring a model
+  using the Sokan index connector which then enables the propagation
   of changes to dependend models
-- watch out the registry view where all defined refactorings can be found
-  and the meta models to which they have been applied
+- A registry view where all defined refactorings can be found
   
-For further information just visit the following web site:
+For further information visit:
+
 http://emftext.org/refactoring/
 
-For downloading Refactory navigate to the download section in http://www.emftext.org
-  
+To download Refactory navigate to the download section at 
+http://www.emftext.org
