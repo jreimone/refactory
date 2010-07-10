@@ -21,10 +21,9 @@ import org.emftext.refactoring.graph.util.LinkedListPath;
 import org.emftext.refactoring.graph.util.PathAlgorithmFactory;
 import org.emftext.refactoring.graph.util.TreeNode;
 import org.emftext.refactoring.util.ModelUtil;
-import org.junit.Ignore;
 import org.junit.Test;
 
-public class GraphTest{
+public class GraphTest {
 
 //	private EObject model;
 	private String path = "/resources/p1.pl0";
@@ -32,14 +31,14 @@ public class GraphTest{
 
 //	@Ignore("not yet")
 	@Test
-	public void findNodeByNameAndType(){
+	public void findNodeByNameAndType() {
 //		resource = TestUtil.getResourceInWorkspace(this, path);
 		assertNotNull("Resource mustn't be null", resource);
-		EObject object = GraphUtil.findFirstNodeByNameAndType(resource, Program.class, "name", "p1");
+		EObject object = GraphUtil.findFirstNodeByNameAndType(resource,
+				Program.class, "name", "p1");
 		assertNotNull("Requested object not found", object);
 	}
-	
-	
+
 //	Program
 //	  |__+Block
 //	    |__]VarDeclaration
@@ -75,7 +74,7 @@ public class GraphTest{
 //	          |__~Expression
 //	@Ignore("not yet")
 	@Test
-	public void findShortestPathForPL0(){
+	public void findShortestPathForPL0() {
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -85,22 +84,24 @@ public class GraphTest{
 		assertNotNull("Source mustn't be null", algo);
 		EObject target = pl0Factory.createProcedureDeclaration();
 		assertNotNull("Target mustn't be null", algo);
-		List<IPath> paths = algo.calculatePaths( source, target);
+		List<IPath> paths = algo.calculatePaths(source, target);
 		assertNotNull("There must be a shortest path", paths);
 		IPath expectedPath = new LinkedListPath();
 		EObject program = pl0Factory.createProgram();
 		EObject block = pl0Factory.createBlock();
 		EObject procedure = pl0Factory.createProcedureDeclaration();
+//		TreeNode sdf = new 
 //		expectedPath.add(program.eClass());
 //		expectedPath.add(block.eClass());
 //		expectedPath.add(procedure.eClass());
 		List<IPath> expectedPaths = new ArrayList<IPath>();
 		expectedPaths.add(expectedPath);
-		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
+		assertEquals("Expected paths and calculated paths should be the same",
+				expectedPaths, paths);
 	}
-	
+
 	@Test
-	public void findShortestPathClassToClassMethodJava(){
+	public void findShortestPathClassToClassMethodJava() {
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -110,7 +111,7 @@ public class GraphTest{
 		assertNotNull("Source mustn't be null", algo);
 		EObject target = MembersFactory.eINSTANCE.createClassMethod();
 		assertNotNull("Target mustn't be null", algo);
-		List<IPath> paths = algo.calculatePaths( source, target);
+		List<IPath> paths = algo.calculatePaths(source, target);
 		assertNotNull("There must be a shortest path", paths);
 		assertTrue(paths.size() > 0);
 		IPath shortestPath = paths.get(0);
@@ -119,10 +120,10 @@ public class GraphTest{
 		TreeNode leaf = shortestPath.get(1);
 		assertEquals(leaf.getReference().getName(), "members");
 	}
-	
+
 //	@Ignore("not yet")
 	@Test
-	public void findShortestPathClassMethodToMethodCallJava(){
+	public void findShortestPathClassMethodToMethodCallJava() {
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -133,7 +134,7 @@ public class GraphTest{
 		assertNotNull("Source mustn't be null", algo);
 		EObject target = ReferencesFactory.eINSTANCE.createMethodCall();
 		assertNotNull("Target mustn't be null", algo);
-		List<IPath> paths = algo.calculatePaths( source, target);
+		List<IPath> paths = algo.calculatePaths(source, target);
 		assertNotNull("There must be a shortest path", paths);
 		IPath expectedPath = new LinkedListPath();
 //		expectedPath.add((EClass) MembersFactory.eINSTANCE.getEPackage().getEClassifier("ClassMethod"));
@@ -141,9 +142,10 @@ public class GraphTest{
 //		expectedPath.add((EClass) ReferencesFactory.eINSTANCE.getEPackage().getEClassifier("MethodCall"));
 		List<IPath> expectedPaths = new ArrayList<IPath>();
 		expectedPaths.add(expectedPath);
-		assertEquals("Expected paths and calculated paths should be the same", expectedPaths, paths);
+		assertEquals("Expected paths and calculated paths should be the same",
+				expectedPaths, paths);
 	}
-	
+
 //	ProcedureDeclaration
 //	  |__+Block
 //	    |__]VarDeclaration
@@ -179,7 +181,7 @@ public class GraphTest{
 //	          |__~Expression
 //	@Ignore("not yet")
 	@Test
-	public void findPathFromProcedureToCallStatementAndRemoveAbstractClassesPL0(){
+	public void findPathFromProcedureToCallStatementAndRemoveAbstractClassesPL0() {
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -189,7 +191,7 @@ public class GraphTest{
 		assertNotNull("Source mustn't be null", algo);
 		EObject target = pl0Factory.createCallStatement();
 		assertNotNull("Target mustn't be null", algo);
-		List<IPath> paths = algo.calculatePaths( source, target);
+		List<IPath> paths = algo.calculatePaths(source, target);
 		assertNotNull("There must be a shortest path", paths);
 		assertEquals("There must be 1 shortest path", 1, paths.size());
 		IPath path = paths.get(0);
@@ -197,27 +199,34 @@ public class GraphTest{
 //		expectedPath.add((EClass) pl0Factory.getPL0Package().getEClassifier("ProcedureDeclaration"));
 //		expectedPath.add((EClass) pl0Factory.getPL0Package().getEClassifier("Block"));
 //		expectedPath.add((EClass) pl0Factory.getPL0Package().getEClassifier("Body"));
-		EClass statement = (EClass) pl0Factory.getPL0Package().getEClassifier("Statement");
+		EClass statement = (EClass) pl0Factory.getPL0Package().getEClassifier(
+				"Statement");
 //		expectedPath.add(statement);
 //		expectedPath.add((EClass) pl0Factory.getPL0Package().getEClassifier("CallStatement"));
 		assertTrue("Both path's must be the same", path.equals(expectedPath));
-		assertTrue("An abstract class must be removed", expectedPath.remove(statement));
-		assertTrue("An abstract class must be removed", path.removeAbstractEClasses());
-		assertEquals("Both path's must be the same, especially without abstract classes", expectedPath, path);
+		assertTrue("An abstract class must be removed",
+				expectedPath.remove(statement));
+		assertTrue("An abstract class must be removed",
+				path.removeAbstractEClasses());
+		assertEquals(
+				"Both path's must be the same, especially without abstract classes",
+				expectedPath, path);
 	}
-	
+
 //	@Ignore("not yet")
 	@Test
-	public void getAllSubTypesForAbstractSuperclass(){
-		EClass abstractSuper = (EClass) PL0Factory.eINSTANCE.getPL0Package().getEClassifier("Statement");
+	public void getAllSubTypesForAbstractSuperclass() {
+		EClass abstractSuper = (EClass) PL0Factory.eINSTANCE.getPL0Package().getEClassifier(
+				"Statement");
 		List<EClass> subTypes = ModelUtil.getAllSubTypes(abstractSuper);
 		assertNotNull("Metaclass Statement must have 4 subtypes", subTypes);
-		assertEquals("Metaclass Statement must have 4 subtypes", 4, subTypes.size());
+		assertEquals("Metaclass Statement must have 4 subtypes", 4,
+				subTypes.size());
 	}
-	
+
 //	@Ignore("not yet")
 	@Test
-	public void findPathOptionalTermToTermPL0(){
+	public void findPathOptionalTermToTermPL0() {
 		PathAlgorithmFactory algoFactory = new PathAlgorithmFactory();
 		assertNotNull("Factory mustn't be null", algoFactory);
 		IShortestPathAlgorithm algo = algoFactory.getAlgorithm();
@@ -228,7 +237,7 @@ public class GraphTest{
 		assertNotNull("Source mustn't be null", algo);
 		EObject target = pl0Factory.createTerm();
 		assertNotNull("Target mustn't be null", algo);
-		List<IPath> paths = algo.calculatePaths( source, target);
+		List<IPath> paths = algo.calculatePaths(source, target);
 		assertNotNull("There must be a shortest path", paths);
 		assertEquals("There must be 1 shortest path", 1, paths.size());
 		IPath path = paths.get(0);
