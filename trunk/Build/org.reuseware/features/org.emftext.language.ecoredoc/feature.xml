@@ -41,21 +41,28 @@ of Technology, Germany
    </requires>
 
    <plugin
-         id="org.emftext.language.feature"
+         id="org.emftext.language.ecoredoc"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.feature.resource.feature"
+         id="org.emftext.language.ecoredoc.resource.ecoredoc"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.feature.resource.feature.ui"
+         id="org.emftext.language.ecoredoc.resource.ecoredoc.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.language.ecoredoc.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
