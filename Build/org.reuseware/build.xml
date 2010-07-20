@@ -259,7 +259,7 @@
 		<buildfeature package="org.emftext.runtime"                                                         version="${emftext.runtime.version}"/>
 		<!-- DEPRECATED -->
 		
-		<property name="emftext.version" value="1.3.0"/>
+		<property name="emftext.version" value="1.3.1"/>
 
 		<!-- EMFText Shared ANTLR Runtimes -->
 		<!-- This one is deprecated --> 
@@ -307,7 +307,7 @@
 	</target>
 
 	<target name="build-emftext-language-components">
-		<property name="emftext.components.version" value="1.3.0"/>
+		<property name="emftext.components.version" value="1.3.1"/>
 			
 		<buildplugin name="Primitive Types Core Metamodel"              package="org.emftext.language.primitivetypes"      version="${emftext.components.version}"/>
 		<buildplugin name="Primitive Types Core Metamodel Edit Support" package="org.emftext.language.primitivetypes.edit" version="${emftext.components.version}"/>
@@ -361,7 +361,7 @@
 	</target>
 	
 	<target name="build-emftext-languages">
-		<property name="emftext.zoo.version" value="1.3.0"/>
+		<property name="emftext.zoo.version" value="1.3.1"/>
 		<!-- ABNF -->
 		<buildplugin  name="Metamodel for ABNF syntax"    package="org.emftext.language.abnf"                  version="0.9.0" />
 		<buildplugin  name="ABNF syntax plugin"           package="org.emftext.language.abnf.resource.abnf"    version="0.9.0" />
