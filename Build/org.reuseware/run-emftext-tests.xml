@@ -24,6 +24,7 @@
 			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs/bin" />
 			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
 			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs.ui/bin" />
+			<pathelement path="../org.emftext.sdk.ui/bin" />
 			<pathelement path="../org.emftext.test/bin" />
 			<pathelement path="../org.emftext.test.escaping/bin" />
 			<pathelement path="../org.emftext.test.escaping.resource.escaping/bin" />
