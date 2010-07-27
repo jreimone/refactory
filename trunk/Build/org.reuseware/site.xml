@@ -71,7 +71,9 @@
     <feature url="features/org.emftext.language.java.ejava_1.0.1.v200911130906.jar" id="org.emftext.language.java.ejava" version="1.0.1.v200911130906">
       <category name="JaMoPP Applications"/>
    </feature>  
-   <!-- TODO add java_closures (once it is ready) -->
+   <feature url="features/org.emftext.language.java.closures_0.0.0.v0.jar" id="org.emftext.language.java.closures" version="0.0.0.v0">
+      <category name="JaMoPP Applications"/>
+   </feature>
    <!-- TODO add java_templates (once it is ready) -->
    <feature url="features/org.emftext.language.java.properties_0.1.0.v200911130906.jar" id="org.emftext.language.java.properties" version="0.1.0.v200911130906">
       <category name="JaMoPP Applications"/>
