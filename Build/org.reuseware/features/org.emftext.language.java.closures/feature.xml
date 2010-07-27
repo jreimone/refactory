@@ -37,35 +37,28 @@ of Technology, Germany
    </requires>
 
    <plugin
-         id="org.emftext.language.java.properties"
+         id="org.emftext.language.java.closures"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.java.properties.edit"
+         id="org.emftext.language.java.closures.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
              
    <plugin
-         id="org.emftext.language.java.properties.resource"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.emftext.language.java.properties.resource.propjava"
+         id="org.emftext.language.java.closures.resource.closure"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
          
    <plugin
-         id="org.emftext.language.java.properties.resource.propjava.ui"
+         id="org.emftext.language.java.closures.resource.closure.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
