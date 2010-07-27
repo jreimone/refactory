@@ -521,6 +521,14 @@
 		<buildplugin  name="Tree Java Editor"         package="org.emftext.language.java.treejava.resource.treejava.ui" version="${treejava.version}" />
 		<buildfeature                                 package="org.emftext.language.java.treejava"                      version="${treejava.version}" />
 		
+		<property name="closurejava.version" value="0.1.0"/>
+		<!-- PropJava -->
+		<buildplugin  name="Closures Java Metamodel"      package="org.emftext.language.java.closures"                     version="${closurejava.version}" />
+		<buildplugin  name="Closures Java Metamodel Edit" package="org.emftext.language.java.closures.edit"                version="${closurejava.version}" />
+		<buildplugin  name="Closures Java Textsyntax"     package="org.emftext.language.java.closures.resource.closure"    version="${closurejava.version}" />
+		<buildplugin  name="Closures Java Editor"         package="org.emftext.language.java.closures.resource.closure.ui" version="${closurejava.version}" />
+		<buildfeature                                     package="org.emftext.language.java.closures"                     version="${closurejava.version}" />
+		
 		<property name="propjava.version" value="0.2.0"/>
 		<!-- PropJava -->
 		<buildplugin  name="Properties Java Metamodel"      package="org.emftext.language.java.properties"                      version="${propjava.version}" />
