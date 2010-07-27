@@ -222,8 +222,8 @@ public class BuildFileGenerator {
 					"org.emftext.language.java.ejava.resource.ejava", "eJava", 
 					true),
 			new Language(
-					"org.emftext.language.java.closures", "closure",
-					"org.emftext.language.java.closures.resource.closure", "closure", 
+					"org.emftext.language.java.closures", "closures",
+					"org.emftext.language.java.closures.resource.closure", "closures", 
 					true),
 			new Language(
 				"org.emftext.language.java.javabehavior4uml", "JavaBehavior4UML",
