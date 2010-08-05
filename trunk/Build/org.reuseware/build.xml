@@ -427,12 +427,13 @@
 		<buildfeature                                                package="org.emftext.language.ecore.facade"                 version="0.9.3" />
 		
 		<!-- EcoreDoc -->
-		<property name="ecoredoc.version" value="0.7.0"/>
-		<buildplugin name="EcoreDoc Metamodel"  package="org.emftext.language.ecoredoc"                                   version="${ecoredoc.version}"/>
-		<buildplugin name="EcoreDoc Textsyntax" package="org.emftext.language.ecoredoc.resource.ecoredoc"                 version="${ecoredoc.version}"/>
-		<buildplugin name="EcoreDoc Editor"     package="org.emftext.language.ecoredoc.resource.ecoredoc.ui"              version="${ecoredoc.version}"/>
-		<buildplugin name="EcoreDoc UI"         package="org.emftext.language.ecoredoc.ui"                                version="${ecoredoc.version}"/>
-		<buildfeature                           package="org.emftext.language.ecoredoc"                                   version="${ecoredoc.version}"/>
+		<property name="emfdoc.version" value="0.7.0"/>
+		<buildplugin name="EMFDoc Metamodel"    package="org.emftext.language.emfdoc"                    version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc Edit Support" package="org.emftext.language.emfdoc.edit"               version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc Textsyntax"   package="org.emftext.language.emfdoc.resource.emfdoc"    version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc Editor"       package="org.emftext.language.emfdoc.resource.emfdoc.ui" version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc UI"           package="org.emftext.language.emfdoc.ui"                 version="${emfdoc.version}"/>
+		<buildfeature                           package="org.emftext.language.emfdoc"                    version="${emfdoc.version}"/>
 
 		<!-- TODO: EMF-XML -->
 		
