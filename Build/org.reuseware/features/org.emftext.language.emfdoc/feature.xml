@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.emftext.language.ecoredoc"
-      label="EMFText Syntax: EcoreDoc"
+      id="org.emftext.language.emfdoc"
+      label="EMFText Syntax: EMFDoc"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description>
-      EcoreDoc can be used to document Ecore Models.
+      EMFDoc can be used to document Ecore Models.
    </description>
 
    <copyright>
-      Copyright (C) 2008-2009 Software Technology Group, Dresden University
+      Copyright (C) 2008-2010 Software Technology Group, Dresden University
 of Technology, Germany
    </copyright>
 
@@ -41,28 +41,35 @@ of Technology, Germany
    </requires>
 
    <plugin
-         id="org.emftext.language.ecoredoc"
+         id="org.emftext.language.emfdoc"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.ecoredoc.resource.ecoredoc"
+         id="org.emftext.language.emfdoc.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.ecoredoc.resource.ecoredoc.ui"
+         id="org.emftext.language.emfdoc.resource.emfdoc"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.emftext.language.ecoredoc.ui"
+         id="org.emftext.language.emfdoc.resource.emfdoc.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.language.emfdoc.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
