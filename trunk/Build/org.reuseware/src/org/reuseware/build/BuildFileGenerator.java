@@ -162,9 +162,9 @@ public class BuildFileGenerator {
 					"org.emftext.language.dot.resource.dot", "dot", 
 					false),
 			new Language(
-					"org.emftext.language.ecoredoc", "ecoredoc",
-					"org.emftext.language.ecoredoc.resource.ecoredoc", "ecoredoc", 
-					false),
+					"org.emftext.language.emfdoc", "emfdoc",
+					"org.emftext.language.emfdoc.resource.emfdoc", "emfdoc", 
+					true),
 			new Language(
 					"org.emftext.language.efactory", "efactory",
 					"org.emftext.language.efactory.resource.efactory", "efactory", 
