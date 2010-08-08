@@ -534,7 +534,6 @@
 		<!-- PropJava -->
 		<buildplugin  name="Properties Java Metamodel"      package="org.emftext.language.java.properties"                      version="${propjava.version}" />
 		<buildplugin  name="Properties Java Metamodel Edit" package="org.emftext.language.java.properties.edit"                 version="${propjava.version}" />
-		<buildplugin  name="Properties Java Resource"       package="org.emftext.language.java.properties.resource"             version="${propjava.version}" />
 		<buildplugin  name="Properties Java Textsyntax"     package="org.emftext.language.java.properties.resource.propjava"    version="${propjava.version}" />
 		<buildplugin  name="Properties Java Editor"         package="org.emftext.language.java.properties.resource.propjava.ui" version="${propjava.version}" />
 		<buildfeature                                       package="org.emftext.language.java.properties"                      version="${propjava.version}" />
