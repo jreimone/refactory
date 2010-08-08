@@ -86,7 +86,6 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void preSaveRuntimeInstanceHandling(IRefactorer refactorer){
 		IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
 		Map<Role, List<EObject>> roleInstanceMap = interpreter.getRoleRuntimeInstances();

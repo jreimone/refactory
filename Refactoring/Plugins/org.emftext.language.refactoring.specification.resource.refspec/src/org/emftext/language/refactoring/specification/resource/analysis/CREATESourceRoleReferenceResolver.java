@@ -15,8 +15,6 @@ import org.emftext.language.refactoring.specification.resource.util.RefspecEObje
 
 public class CREATESourceRoleReferenceResolver implements org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver<org.emftext.language.refactoring.refactoring_specification.CREATE, org.emftext.language.refactoring.roles.Role> {
 	
-	private org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.CREATE, org.emftext.language.refactoring.roles.Role> delegate = new org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.CREATE, org.emftext.language.refactoring.roles.Role>();
-	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.refactoring_specification.CREATE container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<org.emftext.language.refactoring.roles.Role> result) {
 		EObject parent = RefspecEObjectUtil.findRootContainer(container);
 		if(!(parent instanceof RefactoringSpecification)){

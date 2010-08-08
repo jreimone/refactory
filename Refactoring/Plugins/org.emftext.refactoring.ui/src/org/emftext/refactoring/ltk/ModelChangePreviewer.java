@@ -1,17 +1,9 @@
 package org.emftext.refactoring.ltk;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.eclipse.compare.CompareUI;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.compare.diff.metamodel.DiffModel;
-import org.eclipse.emf.compare.diff.service.DiffService;
-import org.eclipse.emf.compare.match.MatchOptions;
-import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.service.MatchService;
-import org.eclipse.emf.compare.ui.ModelCompareInput;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.ui.refactoring.ChangePreviewViewerInput;
 import org.eclipse.ltk.ui.refactoring.IChangePreviewViewer;

@@ -15,8 +15,6 @@ import org.emftext.language.refactoring.roles.Role;
 
 public class CollaborationMappingCollaborationReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.CollaborationMapping, org.emftext.language.refactoring.roles.MultiplicityCollaboration> {
 	
-	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.CollaborationMapping, org.emftext.language.refactoring.roles.MultiplicityCollaboration> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.CollaborationMapping, org.emftext.language.refactoring.roles.MultiplicityCollaboration>();
-	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.CollaborationMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.MultiplicityCollaboration> result) {
 		EObject parent = container.eContainer();
 		if (!(parent instanceof ConcreteMapping)) {
