@@ -13,8 +13,6 @@ import org.emftext.language.refactoring.roles.Role;
 
 public class CollaborationReferenceCollaborationReferenceResolver extends AbstractRoleFeatureResolver<CollaborationReference, MultiplicityCollaboration>  implements org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver<org.emftext.language.refactoring.refactoring_specification.CollaborationReference, org.emftext.language.refactoring.roles.MultiplicityCollaboration> {
 	
-	private org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.CollaborationReference, org.emftext.language.refactoring.roles.MultiplicityCollaboration> delegate = new org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.CollaborationReference, org.emftext.language.refactoring.roles.MultiplicityCollaboration>();
-	
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.MultiplicityCollaboration element, org.emftext.language.refactoring.refactoring_specification.CollaborationReference container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getSource().getName() + "." + element.getTargetName();
 	}

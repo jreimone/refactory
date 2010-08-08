@@ -6,9 +6,6 @@ package org.emftext.refactoring.ltk;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.jface.wizard.IWizardPage;
-import org.eclipse.ltk.core.refactoring.CheckConditionsOperation;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizard;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;

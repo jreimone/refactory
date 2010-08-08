@@ -6,16 +6,14 @@ package org.emftext.language.refactoring.specification.resource.analysis;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
+import org.emftext.language.refactoring.refactoring_specification.RoleRemoval;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
+import org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver;
 import org.emftext.language.refactoring.specification.resource.util.RefspecEObjectUtil;
 
-public class RoleRemovalRoleReferenceResolver
-		implements
-		org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver<org.emftext.language.refactoring.refactoring_specification.RoleRemoval, org.emftext.language.refactoring.roles.Role> {
-
-	private org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RoleRemoval, org.emftext.language.refactoring.roles.Role> delegate = new org.emftext.language.refactoring.specification.resource.analysis.RefspecDefaultResolverDelegate<org.emftext.language.refactoring.refactoring_specification.RoleRemoval, org.emftext.language.refactoring.roles.Role>();
+public class RoleRemovalRoleReferenceResolver implements IRefspecReferenceResolver<RoleRemoval, Role> {
 
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.refactoring_specification.RoleRemoval container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<org.emftext.language.refactoring.roles.Role> result) {
 		EObject parent = RefspecEObjectUtil.findRootContainer(container);

@@ -1,7 +1,6 @@
 package org.emftext.refactoring.registry.rolemodel;
 
 import java.util.Collection;
-import java.util.Map;
 
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;

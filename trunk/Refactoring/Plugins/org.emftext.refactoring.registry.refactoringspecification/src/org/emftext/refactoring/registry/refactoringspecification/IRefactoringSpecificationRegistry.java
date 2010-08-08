@@ -1,7 +1,6 @@
 package org.emftext.refactoring.registry.refactoringspecification;
 
 import java.util.Collection;
-import java.util.Map;
 
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.RoleModel;
