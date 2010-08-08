@@ -27,8 +27,6 @@ OPTIONS{
 	additionalUIDependencies = "org.emftext.language.refactoring.roles.resource.rolestext.ui";
 	overrideHoverTextProvider = "false";
 	overrideBuilder = "false";
-	//overrideManifest = "false";
-	//overridePluginXML = "false";
 	overrideUIPluginXML = "false";
 }
 
