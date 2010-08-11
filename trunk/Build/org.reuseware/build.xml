@@ -428,12 +428,13 @@
 		
 		<!-- EcoreDoc -->
 		<property name="emfdoc.version" value="0.7.0"/>
-		<buildplugin name="EMFDoc Metamodel"    package="org.emftext.language.emfdoc"                    version="${emfdoc.version}"/>
-		<buildplugin name="EMFDoc Edit Support" package="org.emftext.language.emfdoc.edit"               version="${emfdoc.version}"/>
-		<buildplugin name="EMFDoc Textsyntax"   package="org.emftext.language.emfdoc.resource.emfdoc"    version="${emfdoc.version}"/>
-		<buildplugin name="EMFDoc Editor"       package="org.emftext.language.emfdoc.resource.emfdoc.ui" version="${emfdoc.version}"/>
-		<buildplugin name="EMFDoc UI"           package="org.emftext.language.emfdoc.ui"                 version="${emfdoc.version}"/>
-		<buildfeature                           package="org.emftext.language.emfdoc"                    version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc Metamodel"           package="org.emftext.language.emfdoc"                    version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc Edit Support"        package="org.emftext.language.emfdoc.edit"               version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc Constraint Checking" package="org.emftext.language.emfdoc.constraints"        version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc Textsyntax"          package="org.emftext.language.emfdoc.resource.emfdoc"    version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc Editor"              package="org.emftext.language.emfdoc.resource.emfdoc.ui" version="${emfdoc.version}"/>
+		<buildplugin name="EMFDoc UI"                  package="org.emftext.language.emfdoc.ui"                 version="${emfdoc.version}"/>
+		<buildfeature                                  package="org.emftext.language.emfdoc"                    version="${emfdoc.version}"/>
 
 		<!-- TODO: EMF-XML -->
 		

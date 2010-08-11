@@ -48,6 +48,13 @@ of Technology, Germany
          unpack="false"/>
 
    <plugin
+         id="org.emftext.language.emfdoc.constraints"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.emftext.language.emfdoc.edit"
          download-size="0"
          install-size="0"
