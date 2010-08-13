@@ -298,6 +298,10 @@ public class BuildFileGenerator {
 					"org.emftext.language.regexp.resource.regexp_sdf", "regular_expressions_sdf", 
 					false),
 			new Language(
+					"org.emftext.language.regexp", null,
+					"org.emftext.language.regexp.resource.regexp_automaton", "regular_expressions_automaton", 
+					false),
+			new Language(
 					"org.emftext.language.sandwich", "sandwich",
 					"org.emftext.language.sandwich.resource.sandwich", "sandwich", 
 					false),
