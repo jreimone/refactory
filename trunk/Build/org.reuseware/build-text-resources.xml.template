@@ -64,7 +64,9 @@
 				syntax="@{dir}/@{plugin}/metamodel/@{syntax}.cs" 
 				rootFolder="@{dir}" 
 				syntaxProjectName="@{plugin}"
-				generateANTLRPlugin="false" >
+				generateANTLRPlugin="false"
+				generateModelCode="false"
+				>
 			</emftext-generate-text-resource>
 		</sequential>
 	</macrodef>
