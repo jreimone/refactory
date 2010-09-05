@@ -20,7 +20,7 @@ OPTIONS{
 	resourcePluginID = "org.emftext.language.refactoring.specification.resource.refspec";
 	basePackage = "org.emftext.language.refactoring.specification.resource";
 	resourceUIPluginID = "org.emftext.language.refactoring.specification.resource.refspec.ui";
-	uiBasePackage = "org.emftext.language.refactoring.specification.resource";
+	uiBasePackage = "org.emftext.language.refactoring.specification.resource.ui";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.refactoring.registry.refactoringspecification";
