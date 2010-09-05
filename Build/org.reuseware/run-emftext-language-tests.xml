@@ -253,6 +253,9 @@
 			<pathelement path="../org.emftext.test/bin"/>
 			<pathelement path="../org.emftext.test.ant/bin"/>
 			<pathelement path="../org.emftext.test.atl/bin"/>
+			<pathelement path="../org.emftext.test.booleanterminal/bin"/>
+			<pathelement path="../org.emftext.test.booleanterminal.resource.booleanterminal/bin"/>
+			<pathelement path="../org.emftext.test.booleanterminal.test/bin"/>
 			<pathelement path="../org.emftext.test.bug933/bin"/>
 			<pathelement path="../org.emftext.test.bug933.resource.bug933/bin"/>
 			<pathelement path="../org.emftext.test.bug933.test/bin"/>
