@@ -388,6 +388,10 @@ public class BuildFileGenerator {
 					false),
 					
 			new TestLanguage(
+					"org.emftext.test.booleanterminal", "booleanterminal",
+					"org.emftext.test.booleanterminal.resource.booleanterminal", "booleanterminal", 
+					false),
+			new TestLanguage(
 					"org.emftext.test.bug1154", "bug1154",
 					"org.emftext.test.bug1154.resource.bug1154", "bug1154", 
 					false),
