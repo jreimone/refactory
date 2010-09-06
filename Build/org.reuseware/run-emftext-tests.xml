@@ -63,6 +63,8 @@
 					
 					<!-- Exclude DeterministicLoadTest because it needs to run as JUnit Plug-in test -->
 					<exclude name="org/emftext/test/resource/DeterministicLoadTest.java" />
+					
+					<exclude name="org/emftext/test/expectationcomputer/AbstractExpectationComputerTest.java" />
 				</fileset>
 				<fileset dir="../org.emftext.test.scannerless_parser/src">
 					<include name="**/**Test.java"/>
