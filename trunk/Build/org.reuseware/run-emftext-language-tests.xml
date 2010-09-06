@@ -41,7 +41,7 @@
 	<target name="run-emftext-language-tests" depends="clean, run-simple-tests, run-overall-tests, run-test-ecore, run-test-java, run-test-custom-sandwich" />
 
 	<target name="clean">
-		<delete dir="${test_result_dir}" includes="*.txt" />
+		<delete dir="${test_result_dir}" includes="TEST-.*.txt" />
 	</target>
 
 	<target name="create-classpath-jar">
