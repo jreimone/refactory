@@ -31,7 +31,6 @@
 						<exclude name="**/AbstractPrintingTest.java" />
 						<exclude name="**/AbstractSimpleMathTest.java" />
 
-						<exclude name="**/org/emftext/language/javaproperties/test/PropertiesTest.java" /> <!-- TODO enable this test -->
 						<exclude name="**/efactory/test/LoadTest.java" /> <!-- TODO enable this test -->
 					</fileset>
 				</batchtest>
@@ -184,6 +183,7 @@
 			<pathelement path="../org.emftext.language.rails.resource.rails/bin"/>
 			<pathelement path="../org.emftext.language.regexp/bin"/>
 			<pathelement path="../org.emftext.language.regexp.resource.regexp_antlr/bin"/>
+			<pathelement path="../org.emftext.language.regexp.resource.regexp_antlr.ui/bin"/>
 			<pathelement path="../org.emftext.language.regexp.resource.regexp_automaton/bin"/>
 			<pathelement path="../org.emftext.language.regexp.resource.regexp_sdf/bin"/>
 			<pathelement path="../org.emftext.language.regexp.test/bin"/>
