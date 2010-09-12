@@ -161,6 +161,13 @@ public class BuildFileGenerator {
 					"org.emftext.language.dot", "dot",
 					"org.emftext.language.dot.resource.dot", "dot", 
 					false),
+			// TODO for some reason building the EAG language fails
+			/*
+			new Language(
+					"org.emftext.language.eag", "eag",
+					"org.emftext.language.eag.resource.eag", "eag", 
+					false),
+			*/
 			new Language(
 					"org.emftext.language.emfdoc", "emfdoc",
 					"org.emftext.language.emfdoc.resource.emfdoc", "emfdoc", 
