@@ -376,16 +376,17 @@
 		<buildfeature                                   package="org.emftext.language.chess"                 version="0.6.1" />
 
 		<!-- Conference -->
-		<buildplugin  name="Metamodel for Conference Planning" package="org.emftext.language.conference"                        version="0.2.1"/>
-		<buildplugin  name="Conference Planning Textsyntax"    package="org.emftext.language.conference.resource.conference"    version="0.2.1"/>
-		<buildplugin  name="Conference Planning Editor"        package="org.emftext.language.conference.resource.conference.ui" version="0.2.1"/>
+		<buildplugin  name="Metamodel for Conference Planning" package="org.emftext.language.conference"                        version="0.2.1" />
+		<buildplugin  name="Conference Planning Textsyntax"    package="org.emftext.language.conference.resource.conference"    version="0.2.1" />
+		<buildplugin  name="Conference Planning Editor"        package="org.emftext.language.conference.resource.conference.ui" version="0.2.1" />
 		<buildfeature                                          package="org.emftext.language.conference"                        version="0.2.1" />
 
 		<!-- CSV -->
-		<buildplugin  name="Comma Separated Value (CSV) Metamodel"   package="org.emftext.language.csv"                 version="1.1.1"/>
-		<buildplugin  name="Comma Separated Value (CSV) Textsyntax"  package="org.emftext.language.csv.resource.csv"    version="1.1.1"/>
-		<buildplugin  name="Comma Separated Value (CSV) Editor"      package="org.emftext.language.csv.resource.csv.ui" version="1.1.1"/>
-		<buildfeature                                                package="org.emftext.language.csv"                 version="1.1.1" />
+		<buildplugin  name="Comma Separated Value (CSV) Metamodel"       package="org.emftext.language.csv"                             version="1.1.1" />
+		<buildplugin  name="Comma Separated Value (CSV) Textsyntax"      package="org.emftext.language.csv.resource.csv"                version="1.1.1" />
+		<buildplugin  name="Comma Separated Value (CSV) Post Processing" package="org.emftext.language.csv.resource.csv.postprocessing" version="1.1.1" />
+		<buildplugin  name="Comma Separated Value (CSV) Editor"          package="org.emftext.language.csv.resource.csv.ui"             version="1.1.1" />
+		<buildfeature                                                    package="org.emftext.language.csv"                             version="1.1.1" />
 		
 		<!-- Customer -->
 		<buildplugin  name="Metamodel for Customers" package="org.emftext.language.customer"                       version="0.6.1"/>
