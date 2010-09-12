@@ -55,6 +55,13 @@ of Technology, Germany
          unpack="false"/>
 
    <plugin
+         id="org.emftext.language.csv.resource.csv.postprocessing"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.emftext.language.csv.resource.csv.ui"
          download-size="0"
          install-size="0"
