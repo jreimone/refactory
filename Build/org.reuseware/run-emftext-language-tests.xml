@@ -75,6 +75,7 @@
 			<pathelement path="../org.emftext.language.conference.resource.conference/bin"/>
 			<pathelement path="../org.emftext.language.csv/bin"/>
 			<pathelement path="../org.emftext.language.csv.resource.csv/bin"/>
+			<pathelement path="../org.emftext.language.csv.resource.csv.postprocessing/bin"/>
 			<pathelement path="../org.emftext.language.csv.test/bin"/>
 			<pathelement path="../org.emftext.language.customsandwich/bin"/>
 			<pathelement path="../org.emftext.language.customsandwich.resource.customsandwich/bin"/>
