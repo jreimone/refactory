@@ -348,10 +348,13 @@ public class BuildFileGenerator {
 					"org.emftext.language.tbool", "tbool",
 					"org.emftext.language.tbool.resource.tbool", "tbool", 
 					false),
+			// removed temporarily until bug 1496 (TclTk - Fix token definitions) is fixed
+			/*
 			new Language(
 					"org.emftext.language.tcltk", "tcl",
 					"org.emftext.language.tcltk.resource.tcl", "tcl", 
 					false),
+			*/
 			new Language(
 					"org.emftext.language.textadventure", "textadventure",
 					"org.emftext.language.textadventure.resource.tas", "textadventure", 
