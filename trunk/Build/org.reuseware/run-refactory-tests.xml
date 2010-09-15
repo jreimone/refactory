@@ -1,0 +1,83 @@
+<project basedir="." default="run-all-refactory-tests" name="Run all tests for Refactory">
+	
+	<property name="test_result_dir" value="test_results"/>
+	<property file="build.properties"/>	
+	
+	<target name="run-all-refactory-tests" depends="run-refactory-tests" />
+		
+	<target name="run-refactory-tests">
+		
+		<delete dir="${test_result_dir}" includes="*.txt" />
+		
+		<path id="junit_classpath">
+			<pathelement path="../org.emftext.commons.antlr3_2_0/bin" />
+
+			<pathelement path="../org.emftext.language.refactoring.rolemapping/bin" />
+			<pathelement path="../org.emftext.language.refactoring.rolemapping.resource.rolemapping/bin" />
+			
+			<pathelement path="../org.emftext.language.refactoring.roles/bin" />
+			<pathelement path="../org.emftext.language.refactoring.roles.postprocessing/bin" />
+			<pathelement path="../org.emftext.language.refactoring.roles.resource.rolestext/bin" />
+			
+			<pathelement path="../org.emftext.language.refactoring.specification/bin" />
+			<pathelement path="../org.emftext.language.refactoring.specification.resource.refspec/bin" />
+			
+			<pathelement path="../org.emftext.refactoring.registry.refactoringspecification/bin" />
+			<pathelement path="../org.emftext.refactoring.registry.rolemodel/bin" />
+			<pathelement path="../org.emftext.refactoring.registry.rolemapping/bin" />
+
+			<pathelement path="../org.emftext.refactoring.roleconstraintchecker/bin" />
+			<pathelement path="../org.emftext.refactoring.util/bin" />
+
+			<pathelement path="../org.emftext.refactoring.tests/bin" />
+			<pathelement path="../org.emftext.refactoring.tests.properties/bin" />
+			<pathelement path="../org.emftext.refactoring.tests.properties.resource.properties/bin" />
+			
+			<pathelement path="../org.emftext.language.conference/bin" />
+			<pathelement path="../org.emftext.language.conference.resource.conference/bin" />
+			<pathelement path="../org.emftext.language.java/bin" />
+			<pathelement path="../org.emftext.language.java.resource/bin" />
+			<pathelement path="../org.emftext.language.java.resource.java/bin" />
+			<pathelement path="../org.emftext.language.pl0/bin" />
+			<pathelement path="../org.emftext.language.pl0.resource.pl0/bin" />
+			<pathelement path="../org.emftext.language.textadventure/bin" />
+			<pathelement path="../org.emftext.language.textadventure.resource.tas/bin" />
+			
+			<!-- mapping plug-ins -->
+			<pathelement path="../org.emftext.refactoring.mappings.ecore/bin" />
+
+			<fileset dir="${eclipse.home}/">
+				<include name="plugins/**/org.junit*/junit.jar"/>
+				<include name="plugins/**/org.hamcrest*.jar"/>
+				<include name="plugins/**/org.eclipse.*.jar"/>
+			</fileset>
+		</path>
+
+		<manifestclasspath property="junit_classpath_prop" jarfile="../temp_classpath.jar">
+			<classpath refid="junit_classpath" />
+		</manifestclasspath>
+		
+		<jar destfile="../temp_classpath.jar">
+			<manifest>
+				<attribute name="Class-Path" value="${junit_classpath_prop}"/>
+			</manifest>
+		</jar>
+
+	  	<!-- Run tests in plug-in org.emftext.test -->
+		<junit haltonfailure="true" haltonerror="true" fork="true" dir="../org.emftext.refactoring.tests">
+			<jvmarg value="-ea" />
+			<classpath>
+				<path path="../temp_classpath.jar"/>
+			</classpath>
+			
+			<formatter type="plain"/>
+	
+			<batchtest todir="${test_result_dir}">
+				<fileset dir="../org.emftext.refactoring.tests/src">
+					<include name="**/RefactoringTests.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+		
+</project>
