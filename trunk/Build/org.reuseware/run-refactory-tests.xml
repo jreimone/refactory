@@ -25,9 +25,12 @@
 			<pathelement path="../org.emftext.refactoring.registry.refactoringspecification/bin" />
 			<pathelement path="../org.emftext.refactoring.registry.rolemodel/bin" />
 			<pathelement path="../org.emftext.refactoring.registry.rolemapping/bin" />
+			<pathelement path="../org.emftext.refactoring.indexconnector/bin"/>
 
 			<pathelement path="../org.emftext.refactoring.roleconstraintchecker/bin" />
 			<pathelement path="../org.emftext.refactoring.util/bin" />
+			
+			<pathelement path="../org.emftext.refactoring.specification.interpreter/bin"/>
 
 			<pathelement path="../org.emftext.refactoring.tests/bin" />
 			<pathelement path="../org.emftext.refactoring.tests.properties/bin" />
