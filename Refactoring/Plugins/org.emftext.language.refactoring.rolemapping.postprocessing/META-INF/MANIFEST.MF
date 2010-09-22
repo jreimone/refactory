@@ -1,12 +1,15 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Role Mapping Postprocessing
-Bundle-SymbolicName: org.emftext.language.refactoring.rolemapping.postprocessing;singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Name: Refactory Role Mapping Post Processor
+Bundle-SymbolicName: org.emftext.language.refactoring.rolemapping.post
+ processing; singleton:=true
+Bundle-Version: 0.8.1.v201009220913
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-Vendor: Jan Reimann
-Require-Bundle: org.eclipse.emf,
- org.emftext.language.refactoring.rolemapping,
- org.emftext.language.refactoring.rolemapping.resource.rolemapping,
- org.emftext.refactoring.roleconstraintchecker,
- org.eclipse.core.runtime
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.emf,org.emftext.language.refactoring.rolem
+ apping,org.emftext.language.refactoring.rolemapping.resource.rolemapp
+ ing,org.emftext.refactoring.roleconstraintchecker,org.eclipse.core.ru
+ ntime
+

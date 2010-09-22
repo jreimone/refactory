@@ -1,14 +1,15 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Sokan IndexConnector
-Bundle-SymbolicName: org.emftext.refactoring.indexconnector.sokan;singleton:=true
-Bundle-Version: 0.0.1
-Bundle-Vendor: Jan Reimann
+Bundle-Name: Refactory Index Connection - Sokan Connector
+Bundle-SymbolicName: org.emftext.refactoring.indexconnector.sokan; sin
+ gleton:=true
+Bundle-Version: 0.8.1.v201009220913
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.emftext.refactoring.indexconnector,
- org.eclipse.emf.common,
- org.eclipse.emf.ecore,
- org.reuseware.sokan.index,
- org.eclipse.core.resources,
- org.eclipse.core.runtime
+Require-Bundle: org.emftext.refactoring.indexconnector,org.eclipse.emf
+ .common,org.eclipse.emf.ecore,org.reuseware.sokan.index,org.eclipse.c
+ ore.resources,org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
+

@@ -1,16 +1,19 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Rolemapping Registry
-Bundle-SymbolicName: org.emftext.refactoring.registry.rolemapping;singleton:=true
-Bundle-Version: 0.0.1
-Bundle-Activator: org.emftext.refactoring.registry.rolemapping.Activator
-Bundle-Vendor: Jan Reimann
-Require-Bundle: org.eclipse.core.runtime,
- org.emftext.language.refactoring.rolemapping,
- org.emftext.refactoring.util,
- org.eclipse.emf.ecore.change,
- org.eclipse.jface
+Bundle-Name: Refactory Role Mapping Registry 
+Bundle-SymbolicName: org.emftext.refactoring.registry.rolemapping; sin
+ gleton:=true
+Bundle-Version: 0.8.1.v201009220913
+Bundle-Activator: org.emftext.refactoring.registry.rolemapping.Activat
+ or
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime,org.emftext.language.refactor
+ ing.rolemapping,org.emftext.refactoring.util,org.eclipse.emf.ecore.ch
+ ange,org.eclipse.jface
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.emftext.refactoring.registry.rolemapping,
- org.emftext.refactoring.registry.rolemapping.exceptions
+Export-Package: org.emftext.refactoring.registry.rolemapping,org.emfte
+ xt.refactoring.registry.rolemapping.exceptions
+

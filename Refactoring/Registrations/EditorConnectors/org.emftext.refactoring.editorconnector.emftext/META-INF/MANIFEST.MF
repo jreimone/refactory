@@ -1,18 +1,17 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: EditorConnector for EMFText generated Editors
-Bundle-SymbolicName: org.emftext.refactoring.editorconnector.emftext;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Name: Refactory EMFText Editor Connector
+Bundle-SymbolicName: org.emftext.refactoring.editorconnector.emftext; 
+ singleton:=true
+Bundle-Version: 0.8.1.v201009220913
 Bundle-Activator: org.emftext.refactoring.editorconnector.Activator
-Bundle-Vendor: Jan Reimann
-Require-Bundle: org.eclipse.core.runtime,
- org.emftext.refactoring.ui,
- org.eclipse.emf.ecore,
- org.emftext.access,
- org.eclipse.emf.transaction,
- org.eclipse.jface,
- org.eclipse.ui.workbench,
- org.eclipse.jface.text,
- org.eclipse.ui.workbench.texteditor
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime,org.emftext.refactoring.ui,or
+ g.eclipse.emf.ecore,org.emftext.access,org.eclipse.emf.transaction,or
+ g.eclipse.jface,org.eclipse.ui.workbench,org.eclipse.jface.text,org.e
+ clipse.ui.workbench.texteditor
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+

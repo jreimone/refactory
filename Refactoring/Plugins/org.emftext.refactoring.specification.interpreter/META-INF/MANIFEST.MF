@@ -1,23 +1,22 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactoring Specification Interpreter
-Bundle-SymbolicName: org.emftext.refactoring.specification.interpreter;singleton:=true
-Bundle-Version: 0.0.1
-Bundle-Vendor: Jan Reimann
+Bundle-Name: Refactory Specification Interpreter
+Bundle-SymbolicName: org.emftext.refactoring.specification.interpreter
+ ; singleton:=true
+Bundle-Version: 0.8.1.v201009220913
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.emftext.language.refactoring.specification,
- org.emftext.language.refactoring.specification.resource.refspec,
- org.emftext.language.refactoring.rolemapping,
- org.emftext.refactoring.util,
- org.emftext.refactoring.registry.refactoringspecification,
- org.emftext.refactoring.registry.rolemapping,
- org.emftext.refactoring.graph,
- org.eclipse.core.runtime,
- org.eclipse.ui,
- org.emftext.refactoring.indexconnector,
- org.eclipse.emf.edit.ui,
- org.eclipse.emf.ecore.edit
-Export-Package: org.emftext.refactoring.interpreter,
- org.emftext.refactoring.interpreter.internal;x-friends:="org.emftext.refactoring.tests"
+Require-Bundle: org.emftext.language.refactoring.specification,org.emf
+ text.language.refactoring.specification.resource.refspec,org.emftext.
+ language.refactoring.rolemapping,org.emftext.refactoring.util,org.emf
+ text.refactoring.registry.refactoringspecification,org.emftext.refact
+ oring.registry.rolemapping,org.emftext.refactoring.graph,org.eclipse.
+ core.runtime,org.eclipse.ui,org.emftext.refactoring.indexconnector,or
+ g.eclipse.emf.edit.ui,org.eclipse.emf.ecore.edit
+Export-Package: org.emftext.refactoring.interpreter,org.emftext.refact
+ oring.interpreter.internal;x-friends:="org.emftext.refactoring.tests"
 Bundle-Activator: org.emftext.refactoring.interpreter.Activator
 Bundle-ActivationPolicy: lazy
+
