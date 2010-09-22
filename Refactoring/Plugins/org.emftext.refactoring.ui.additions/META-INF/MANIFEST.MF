@@ -1,20 +1,21 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.7.1
-Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactory Additional UI Support
-Bundle-SymbolicName: org.emftext.refactoring.ui.additions; singleton:=
- true
-Bundle-Version: 0.8.1.v201009220913
+Bundle-Name: Refactoring Statistic Plugin
+Bundle-SymbolicName: org.emftext.refactoring.ui.additions;singleton:=true
+Bundle-Version: 0.0.1
 Bundle-Activator: org.emftext.refactoring.statistic.Activator
-Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.emftext.re
- factoring.registry.refactoringspecification,org.emftext.refactoring.r
- egistry.rolemapping,org.emftext.refactoring.registry.rolemodel,org.ec
- lipse.emf.ecore,org.eclipse.emf.ecore.edit,org.eclipse.emf.edit.ui,or
- g.emftext.language.refactoring.roles,org.emftext.language.refactoring
- .specification,org.emftext.language.refactoring.rolemapping,org.emfte
- xt.refactoring.util
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.rolemapping,
+ org.emftext.refactoring.registry.rolemodel,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui,
+ org.emftext.language.refactoring.roles,
+ org.emftext.language.refactoring.specification,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.refactoring.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-

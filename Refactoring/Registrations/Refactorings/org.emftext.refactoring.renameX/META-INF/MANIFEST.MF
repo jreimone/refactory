@@ -1,12 +1,9 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.7.1
-Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactory Generic Refactoring RenameX
-Bundle-SymbolicName: org.emftext.refactoring.renameX; singleton:=true
-Bundle-Version: 0.8.1.v201009220913
-Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Bundle-Name: Rename Method Role Model
+Bundle-SymbolicName: org.emftext.refactoring.renameX;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Vendor: Jan Reimann
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.emftext.refactoring.registry.refactoringspecificat
- ion,org.emftext.refactoring.registry.rolemodel
-
+Require-Bundle: org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.rolemodel
