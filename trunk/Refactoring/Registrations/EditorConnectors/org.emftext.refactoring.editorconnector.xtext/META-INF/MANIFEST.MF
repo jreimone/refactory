@@ -1,16 +1,13 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.7.1
-Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactory xText Editor Connector
-Bundle-SymbolicName: org.emftext.refactoring.editorconnector.xtext; si
- ngleton:=true
-Bundle-Version: 0.8.1.v201009220913
-Bundle-Activator: org.eclipse.xtext.refactoring.editorconnector.Activa
- tor
-Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.core.runtime,org.emftext.refactoring.ui,or
- g.eclipse.xtext.ui,org.eclipse.emf.transaction
+Bundle-Name: EditorConnector for XText generated editors
+Bundle-SymbolicName: org.emftext.refactoring.editorconnector.xtext;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.eclipse.xtext.refactoring.editorconnector.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.ui,
+ org.eclipse.xtext.ui,
+ org.eclipse.emf.transaction
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-

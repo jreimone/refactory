@@ -1,13 +1,11 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.7.1
-Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactory Graph Library
-Bundle-SymbolicName: org.emftext.refactoring.graph; singleton:=true
-Bundle-Version: 0.8.1.v201009220913
-Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Bundle-Name: Graph Utilities
+Bundle-SymbolicName: org.emftext.refactoring.graph
+Bundle-Version: 0.0.1
+Bundle-Vendor: Jan Reimann, TU Dresden
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.ecore,org.emftext.refactoring.util
-Export-Package: org.emftext.refactoring.graph,org.emftext.refactoring.
- graph.util
-
+Require-Bundle: org.eclipse.emf.ecore,
+ org.emftext.refactoring.util
+Export-Package: org.emftext.refactoring.graph,
+ org.emftext.refactoring.graph.util

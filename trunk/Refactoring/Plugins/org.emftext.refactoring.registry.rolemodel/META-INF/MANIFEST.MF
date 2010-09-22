@@ -1,17 +1,14 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.7.1
-Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactory Role Model Registry
-Bundle-SymbolicName: org.emftext.refactoring.registry.rolemodel; singl
- eton:=true
-Bundle-Version: 0.8.1.v201009220913
+Bundle-Name: RoleModel Registry
+Bundle-SymbolicName: org.emftext.refactoring.registry.rolemodel;singleton:=true
+Bundle-Version: 0.0.1
 Bundle-Activator: org.emftext.refactoring.registry.rolemodel.Activator
-Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.core.runtime,org.emftext.language.refactor
- ing.roles,org.emftext.refactoring.util
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.language.refactoring.roles,
+ org.emftext.refactoring.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.emftext.refactoring.registry.rolemodel,org.emftext
- .refactoring.registry.rolemodel.exceptions
+Export-Package: org.emftext.refactoring.registry.rolemodel,
+ org.emftext.refactoring.registry.rolemodel.exceptions
 Bundle-ActivationPolicy: lazy
-

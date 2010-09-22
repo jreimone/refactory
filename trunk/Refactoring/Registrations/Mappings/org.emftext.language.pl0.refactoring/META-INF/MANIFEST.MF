@@ -1,15 +1,11 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.7.1
-Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactorings for Pl/0
-Bundle-SymbolicName: org.emftext.language.pl0.refactoring; singleton:=
- true
-Bundle-Version: 0.8.1.v201009220913
+Bundle-Name: PL/0 Refactorings
+Bundle-SymbolicName: org.emftext.language.pl0.refactoring;singleton:=true
+Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: org.emftext.language.pl0.refactoring.Activator
-Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.core.runtime,org.emftext.refactoring.regis
- try.rolemapping
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-
