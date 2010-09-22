@@ -1,7 +1,12 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactoring
-Bundle-SymbolicName: org.emftext.language.office.refactoring;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Name: Refactorings for the Office DSL
+Bundle-SymbolicName: org.emftext.language.office.refactoring; singleto
+ n:=true
+Bundle-Version: 0.8.1.v201009220913
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.emftext.refactoring.registry.rolemapping
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+

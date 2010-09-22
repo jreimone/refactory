@@ -1,8 +1,12 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: MoveX
-Bundle-SymbolicName: org.emftext.refactoring.moveX;singleton:=true
-Bundle-Version: 1.0.0.qualifier
-Require-Bundle: org.emftext.refactoring.registry.refactoringspecification,
- org.emftext.refactoring.registry.rolemodel
+Bundle-Name: Refactory Generic Refactoring MoveX
+Bundle-SymbolicName: org.emftext.refactoring.moveX; singleton:=true
+Bundle-Version: 0.8.1.v201009220913
+Require-Bundle: org.emftext.refactoring.registry.refactoringspecificat
+ ion,org.emftext.refactoring.registry.rolemodel
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+

@@ -1,28 +1,27 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: EMFText Parser Plugin: refspec
-Bundle-SymbolicName: org.emftext.language.refactoring.specification.resource.refspec;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Name: Refactory Specification Text Syntax
+Bundle-SymbolicName: org.emftext.language.refactoring.specification.re
+ source.refspec; singleton:=true
+Bundle-Version: 0.8.1.v201009220913
 Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.core.resources,
-  org.eclipse.emf,
-  org.eclipse.emf.codegen.ecore,
-  org.eclipse.emf.ecore,
-  org.eclipse.emf.ecore.edit,
-  org.eclipse.emf.validation,
-  org.eclipse.emf.workspace,
-  org.emftext.access;resolution:=optional,
-  org.emftext.refactoring.registry.rolemodel,
-  org.emftext.refactoring.util,
-  org.emftext.refactoring.registry.refactoringspecification,
-  org.emftext.commons.antlr3_2_0,
-  org.emftext.language.refactoring.specification,
-  org.emftext.language.refactoring.roles
+Require-Bundle: org.eclipse.core.resources, org.eclipse.emf, org.eclip
+ se.emf.codegen.ecore, org.eclipse.emf.ecore, org.eclipse.emf.ecore.ed
+ it, org.eclipse.emf.validation, org.eclipse.emf.workspace, org.emftex
+ t.access;resolution:=optional, org.emftext.refactoring.registry.rolem
+ odel, org.emftext.refactoring.util, org.emftext.refactoring.registry.
+ refactoringspecification, org.emftext.commons.antlr3_2_0, org.emftext
+ .language.refactoring.specification, org.emftext.language.refactoring
+ .roles
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.emftext.language.refactoring.specification.resource,
-  org.emftext.language.refactoring.specification.resource.analysis,
-  org.emftext.language.refactoring.specification.resource.mopp,
-  org.emftext.language.refactoring.specification.resource.grammar,
-  org.emftext.language.refactoring.specification.resource.util
-Bundle-Activator: org.emftext.language.refactoring.specification.resource.mopp.RefspecPlugin
+Export-Package: org.emftext.language.refactoring.specification.resourc
+ e, org.emftext.language.refactoring.specification.resource.analysis, 
+ org.emftext.language.refactoring.specification.resource.mopp, org.emf
+ text.language.refactoring.specification.resource.grammar, org.emftext
+ .language.refactoring.specification.resource.util
+Bundle-Activator: org.emftext.language.refactoring.specification.resou
+ rce.mopp.RefspecPlugin
+

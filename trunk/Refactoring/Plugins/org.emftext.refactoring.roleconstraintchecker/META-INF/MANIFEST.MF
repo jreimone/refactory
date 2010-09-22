@@ -1,12 +1,16 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: Role Constraint Checker
-Bundle-SymbolicName: org.emftext.refactoring.roleconstraintchecker;singleton:=true
-Bundle-Version: 0.0.1
-Bundle-Vendor: Jan Reimann
+Bundle-Name: Refactory Role Model Contraint Checking
+Bundle-SymbolicName: org.emftext.refactoring.roleconstraintchecker; si
+ ngleton:=true
+Bundle-Version: 0.8.1.v201009220913
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.emftext.refactoring.roleconstraintchecker
-Require-Bundle: org.eclipse.emf.ecore,
- org.emftext.language.refactoring.rolemapping,
- org.eclipse.core.runtime
-Bundle-Activator: org.emftext.refactoring.roleconstraintchecker.Activator
+Require-Bundle: org.eclipse.emf.ecore,org.emftext.language.refactoring
+ .rolemapping,org.eclipse.core.runtime
+Bundle-Activator: org.emftext.refactoring.roleconstraintchecker.Activa
+ tor
+

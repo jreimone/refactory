@@ -1,9 +1,13 @@
 Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-b02 (Sun Microsystems Inc.)
 Bundle-ManifestVersion: 2
-Bundle-Name: ExtractX Refactoring
-Bundle-SymbolicName: org.emftext.refactoring.extractXwithReferenceClass;singleton:=true
-Bundle-Version: 0.0.1
-Bundle-Vendor: Jan Reimann
+Bundle-Name: Refactory Generic Refactoring ExtractXwithReferenceClass
+Bundle-SymbolicName: org.emftext.refactoring.extractXwithReferenceClas
+ s; singleton:=true
+Bundle-Version: 0.8.1.v201009220913
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.emftext.refactoring.registry.rolemodel,
- org.emftext.refactoring.registry.refactoringspecification
+Require-Bundle: org.emftext.refactoring.registry.rolemodel,org.emftext
+ .refactoring.registry.refactoringspecification
+
