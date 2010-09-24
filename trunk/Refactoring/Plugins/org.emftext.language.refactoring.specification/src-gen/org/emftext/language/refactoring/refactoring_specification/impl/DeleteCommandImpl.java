@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  */
 public abstract class DeleteCommandImpl extends InstructionImpl implements DeleteCommand {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected DeleteCommandImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RefactoringSpecificationPackage.Literals.DELETE_COMMAND;
-  }
+		return RefactoringSpecificationPackage.Literals.DELETE_COMMAND;
+	}
 
 } //DeleteCommandImpl

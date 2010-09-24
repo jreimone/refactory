@@ -33,135 +33,129 @@ import org.emftext.language.refactoring.roles.Role;
  */
 public class RoleRemovalImpl extends ObjectRemovalImpl implements RoleRemoval {
 	/**
-   * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getRole()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRole()
+	 * @generated
+	 * @ordered
+	 */
 	protected Role role;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected RoleRemovalImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RefactoringSpecificationPackage.Literals.ROLE_REMOVAL;
-  }
+		return RefactoringSpecificationPackage.Literals.ROLE_REMOVAL;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public Role getRole() {
-    if (role != null && role.eIsProxy())
-    {
-      InternalEObject oldRole = (InternalEObject)role;
-      role = (Role)eResolveProxy(oldRole);
-      if (role != oldRole)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE, oldRole, role));
-      }
-    }
-    return role;
-  }
+		if (role != null && role.eIsProxy()) {
+			InternalEObject oldRole = (InternalEObject)role;
+			role = (Role)eResolveProxy(oldRole);
+			if (role != oldRole) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE, oldRole, role));
+			}
+		}
+		return role;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public Role basicGetRole() {
-    return role;
-  }
+		return role;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setRole(Role newRole) {
-    Role oldRole = role;
-    role = newRole;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE, oldRole, role));
-  }
+		Role oldRole = role;
+		role = newRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE, oldRole, role));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE:
-        if (resolve) return getRole();
-        return basicGetRole();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE:
+				if (resolve) return getRole();
+				return basicGetRole();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE:
-        setRole((Role)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE:
+				setRole((Role)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE:
-        setRole((Role)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE:
+				setRole((Role)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE:
-        return role != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REMOVAL__ROLE:
+				return role != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //RoleRemovalImpl

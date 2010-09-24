@@ -23,24 +23,24 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public class LASTImpl extends ObjectReferenceAssignmentImpl implements LAST
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LASTImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RefactoringSpecificationPackage.Literals.LAST;
-  }
+		return RefactoringSpecificationPackage.Literals.LAST;
+	}
 
 } //LASTImpl
