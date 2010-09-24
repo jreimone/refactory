@@ -23,24 +23,24 @@ import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 public abstract class TargetContextImpl extends ContextImpl implements TargetContext
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TargetContextImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RefactoringSpecificationPackage.Literals.TARGET_CONTEXT;
-  }
+		return RefactoringSpecificationPackage.Literals.TARGET_CONTEXT;
+	}
 
 } //TargetContextImpl

@@ -33,144 +33,138 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public abstract class ContainmentCommandImpl extends InstructionImpl implements ContainmentCommand
 {
   /**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getIndex() <em>Index</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
+	 * @see #getIndex()
+	 * @generated
+	 * @ordered
+	 */
   protected IndexVariable index;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ContainmentCommandImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RefactoringSpecificationPackage.Literals.CONTAINMENT_COMMAND;
-  }
+		return RefactoringSpecificationPackage.Literals.CONTAINMENT_COMMAND;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public IndexVariable getIndex()
   {
-    if (index != null && index.eIsProxy())
-    {
-      InternalEObject oldIndex = (InternalEObject)index;
-      index = (IndexVariable)eResolveProxy(oldIndex);
-      if (index != oldIndex)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX, oldIndex, index));
-      }
-    }
-    return index;
-  }
+		if (index != null && index.eIsProxy()) {
+			InternalEObject oldIndex = (InternalEObject)index;
+			index = (IndexVariable)eResolveProxy(oldIndex);
+			if (index != oldIndex) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX, oldIndex, index));
+			}
+		}
+		return index;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public IndexVariable basicGetIndex()
   {
-    return index;
-  }
+		return index;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setIndex(IndexVariable newIndex)
   {
-    IndexVariable oldIndex = index;
-    index = newIndex;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX, oldIndex, index));
-  }
+		IndexVariable oldIndex = index;
+		index = newIndex;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX, oldIndex, index));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX:
-        if (resolve) return getIndex();
-        return basicGetIndex();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX:
+				if (resolve) return getIndex();
+				return basicGetIndex();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX:
-        setIndex((IndexVariable)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX:
+				setIndex((IndexVariable)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX:
-        setIndex((IndexVariable)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX:
+				setIndex((IndexVariable)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX:
-        return index != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX:
+				return index != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //ContainmentCommandImpl

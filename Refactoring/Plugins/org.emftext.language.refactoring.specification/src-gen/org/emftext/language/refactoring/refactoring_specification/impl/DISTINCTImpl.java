@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  */
 public class DISTINCTImpl extends ModifierImpl implements DISTINCT {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected DISTINCTImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RefactoringSpecificationPackage.Literals.DISTINCT;
-  }
+		return RefactoringSpecificationPackage.Literals.DISTINCT;
+	}
 
 } //DISTINCTImpl

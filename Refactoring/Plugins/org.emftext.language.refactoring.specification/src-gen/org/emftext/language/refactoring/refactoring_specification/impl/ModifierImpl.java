@@ -24,22 +24,22 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  */
 public abstract class ModifierImpl extends EObjectImpl implements Modifier {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ModifierImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RefactoringSpecificationPackage.Literals.MODIFIER;
-  }
+		return RefactoringSpecificationPackage.Literals.MODIFIER;
+	}
 
 } //ModifierImpl
