@@ -1,6 +1,6 @@
 PROGRAM importP1 
 
-import </org.emftext.refactoring.examples.screencast/models/pl0/p1.pl0> 
+import "/org.emftext.refactoring.examples.screencast/models/pl0/p1.pl0" 
 
 VAR 
 	x , y ; 
