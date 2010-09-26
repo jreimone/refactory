@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_In_HQMlqEd-hr-M-MZuBfA" type="EcoreTools" name="extractSuperClassMany" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_nkkewMlrEd-hr-M-MZuBfA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_nklF0MlrEd-hr-M-MZuBfA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_nklF0clrEd-hr-M-MZuBfA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_nklF0slrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_nklF08lrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_nklF1MlrEd-hr-M-MZuBfA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_nkls4MlrEd-hr-M-MZuBfA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_3M-XAMlrEd-hr-M-MZuBfA" type="2002">
+        <element xmi:type="ecore:EOperation" href="extractSuperClassMany.ecore#//EClass0/doSomething"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3M-XAclrEd-hr-M-MZuBfA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_nkls4clrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_nkls4slrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_nkls48lrEd-hr-M-MZuBfA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_nkkewclrEd-hr-M-MZuBfA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="extractSuperClassMany.ecore#//EClass0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nkkewslrEd-hr-M-MZuBfA" x="130" y="120"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_ugxb4MlrEd-hr-M-MZuBfA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_ugyqAMlrEd-hr-M-MZuBfA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_ugyqAclrEd-hr-M-MZuBfA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ugyqAslrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ugyqA8lrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ugyqBMlrEd-hr-M-MZuBfA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ugyqBclrEd-hr-M-MZuBfA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_4XQY0MlrEd-hr-M-MZuBfA" type="2002">
+        <element xmi:type="ecore:EOperation" href="extractSuperClassMany.ecore#//EClass1/doSomething"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4XQY0clrEd-hr-M-MZuBfA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ugyqBslrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ugyqB8lrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ugyqCMlrEd-hr-M-MZuBfA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ugxb4clrEd-hr-M-MZuBfA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="extractSuperClassMany.ecore#//EClass1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ugxb4slrEd-hr-M-MZuBfA" x="265" y="175"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_u4TyIMlrEd-hr-M-MZuBfA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_u4UZMMlrEd-hr-M-MZuBfA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_u4UZMclrEd-hr-M-MZuBfA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_u4UZMslrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_u4UZM8lrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_u4UZNMlrEd-hr-M-MZuBfA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_u4VnUMlrEd-hr-M-MZuBfA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_5Thz0MlrEd-hr-M-MZuBfA" type="2002">
+        <element xmi:type="ecore:EOperation" href="extractSuperClassMany.ecore#//EClass2/doSomething"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5Thz0clrEd-hr-M-MZuBfA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_u4VnUclrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_u4VnUslrEd-hr-M-MZuBfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_u4VnU8lrEd-hr-M-MZuBfA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_u4TyIclrEd-hr-M-MZuBfA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="extractSuperClassMany.ecore#//EClass2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_u4TyIslrEd-hr-M-MZuBfA" x="405" y="230"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_In_HQclqEd-hr-M-MZuBfA"/>
+  <element xmi:type="ecore:EPackage" href="extractSuperClassMany.ecore#/"/>
+</notation:Diagram>
