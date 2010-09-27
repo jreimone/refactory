@@ -197,6 +197,14 @@ public class BuildFileGenerator {
 					"org.emftext.language.forms.resource.forms", "forms",
 					true),
 			new Language(
+					"org.emftext.language.formsembedded", "formsembedded",
+					"org.emftext.language.formsembedded.resource.formsembedded", "formsembedded",
+					false),
+			new Language(
+					"org.emftext.language.formsextension", "formsextension",
+					"org.emftext.language.formsextension.resource.formsextension", "formsextension",
+					false),
+			new Language(
 					"org.emftext.language.formular", "FormularMM",
 					"org.emftext.language.formular.resource.formular", "FormularMM", 
 					true),
@@ -252,6 +260,14 @@ public class BuildFileGenerator {
 				"org.emftext.language.java.treejava", "treejava",
 				"org.emftext.language.java.treejava.resource.treejava", "treejava", 
 				true),
+			new Language(
+					"org.emftext.language.javaforms", "javaforms",
+					"org.emftext.language.javaforms.resource.javaforms", "javaforms", 
+					false),
+			new Language(
+					"org.emftext.language.javaforms.codegen", "javaformscodegen",
+					null, null, 
+					false),
 			new Language(
 				"org.emftext.language.javaproperties", "javaproperties",
 				"org.emftext.language.javaproperties.resource.javaproperties", "javaproperties", 
