@@ -12,5 +12,4 @@ FORM "Some questions about your health"
 		ITEM "Do you smoke" : DECISION ( "Yes", "No" )
 		ITEM "Do you drink a lot?" : DECISION ( "Yes", "No" )
 		ITEM "Do you consume any other drugs?" : CHOICE (TAKESDRUGS : "Yes" , "No" )
-		ITEM "Which?" ONLY IF TAKESDRUGS : FREETEXT
  
