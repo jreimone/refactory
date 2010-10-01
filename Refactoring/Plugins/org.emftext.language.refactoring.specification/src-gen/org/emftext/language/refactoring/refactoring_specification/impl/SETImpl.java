@@ -36,225 +36,234 @@ import org.emftext.language.refactoring.refactoring_specification.TargetContext;
 public class SETImpl extends ReferenceCommandImpl implements SET
 {
   /**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getSource()
+   * @generated
+   * @ordered
+   */
   protected SourceContext source;
 
   /**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTarget()
+   * @generated
+   * @ordered
+   */
   protected TargetContext target;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected SETImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RefactoringSpecificationPackage.Literals.SET;
-	}
+    return RefactoringSpecificationPackage.Literals.SET;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public SourceContext getSource()
   {
-		return source;
-	}
+    return source;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetSource(SourceContext newSource, NotificationChain msgs)
   {
-		SourceContext oldSource = source;
-		source = newSource;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.SET__SOURCE, oldSource, newSource);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    SourceContext oldSource = source;
+    source = newSource;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.SET__SOURCE, oldSource, newSource);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setSource(SourceContext newSource)
   {
-		if (newSource != source) {
-			NotificationChain msgs = null;
-			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.SET__SOURCE, null, msgs);
-			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.SET__SOURCE, null, msgs);
-			msgs = basicSetSource(newSource, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.SET__SOURCE, newSource, newSource));
-	}
+    if (newSource != source)
+    {
+      NotificationChain msgs = null;
+      if (source != null)
+        msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.SET__SOURCE, null, msgs);
+      if (newSource != null)
+        msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.SET__SOURCE, null, msgs);
+      msgs = basicSetSource(newSource, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.SET__SOURCE, newSource, newSource));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public TargetContext getTarget()
   {
-		return target;
-	}
+    return target;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetTarget(TargetContext newTarget, NotificationChain msgs)
   {
-		TargetContext oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.SET__TARGET, oldTarget, newTarget);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    TargetContext oldTarget = target;
+    target = newTarget;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.SET__TARGET, oldTarget, newTarget);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setTarget(TargetContext newTarget)
   {
-		if (newTarget != target) {
-			NotificationChain msgs = null;
-			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.SET__TARGET, null, msgs);
-			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.SET__TARGET, null, msgs);
-			msgs = basicSetTarget(newTarget, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.SET__TARGET, newTarget, newTarget));
-	}
+    if (newTarget != target)
+    {
+      NotificationChain msgs = null;
+      if (target != null)
+        msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.SET__TARGET, null, msgs);
+      if (newTarget != null)
+        msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.SET__TARGET, null, msgs);
+      msgs = basicSetTarget(newTarget, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.SET__TARGET, newTarget, newTarget));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.SET__SOURCE:
-				return basicSetSource(null, msgs);
-			case RefactoringSpecificationPackage.SET__TARGET:
-				return basicSetTarget(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.SET__SOURCE:
+        return basicSetSource(null, msgs);
+      case RefactoringSpecificationPackage.SET__TARGET:
+        return basicSetTarget(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.SET__SOURCE:
-				return getSource();
-			case RefactoringSpecificationPackage.SET__TARGET:
-				return getTarget();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.SET__SOURCE:
+        return getSource();
+      case RefactoringSpecificationPackage.SET__TARGET:
+        return getTarget();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.SET__SOURCE:
-				setSource((SourceContext)newValue);
-				return;
-			case RefactoringSpecificationPackage.SET__TARGET:
-				setTarget((TargetContext)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.SET__SOURCE:
+        setSource((SourceContext)newValue);
+        return;
+      case RefactoringSpecificationPackage.SET__TARGET:
+        setTarget((TargetContext)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.SET__SOURCE:
-				setSource((SourceContext)null);
-				return;
-			case RefactoringSpecificationPackage.SET__TARGET:
-				setTarget((TargetContext)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.SET__SOURCE:
+        setSource((SourceContext)null);
+        return;
+      case RefactoringSpecificationPackage.SET__TARGET:
+        setTarget((TargetContext)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.SET__SOURCE:
-				return source != null;
-			case RefactoringSpecificationPackage.SET__TARGET:
-				return target != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.SET__SOURCE:
+        return source != null;
+      case RefactoringSpecificationPackage.SET__TARGET:
+        return target != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //SETImpl

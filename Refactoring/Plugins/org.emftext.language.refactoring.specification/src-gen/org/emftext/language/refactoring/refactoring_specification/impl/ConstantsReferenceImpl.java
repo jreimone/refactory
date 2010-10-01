@@ -32,146 +32,150 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public class ConstantsReferenceImpl extends ObjectReferenceImpl implements ConstantsReference
 {
   /**
-	 * The default value of the '{@link #getReferencedConstant() <em>Referenced Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getReferencedConstant() <em>Referenced Constant</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getReferencedConstant()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getReferencedConstant()
+   * @generated
+   * @ordered
+   */
   protected static final Constants REFERENCED_CONSTANT_EDEFAULT = Constants.INPUT;
 
   /**
-	 * The cached value of the '{@link #getReferencedConstant() <em>Referenced Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getReferencedConstant() <em>Referenced Constant</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getReferencedConstant()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getReferencedConstant()
+   * @generated
+   * @ordered
+   */
   protected Constants referencedConstant = REFERENCED_CONSTANT_EDEFAULT;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected ConstantsReferenceImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RefactoringSpecificationPackage.Literals.CONSTANTS_REFERENCE;
-	}
+    return RefactoringSpecificationPackage.Literals.CONSTANTS_REFERENCE;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Constants getReferencedConstant()
   {
-		return referencedConstant;
-	}
+    return referencedConstant;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setReferencedConstant(Constants newReferencedConstant)
   {
-		Constants oldReferencedConstant = referencedConstant;
-		referencedConstant = newReferencedConstant == null ? REFERENCED_CONSTANT_EDEFAULT : newReferencedConstant;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT, oldReferencedConstant, referencedConstant));
-	}
+    Constants oldReferencedConstant = referencedConstant;
+    referencedConstant = newReferencedConstant == null ? REFERENCED_CONSTANT_EDEFAULT : newReferencedConstant;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT, oldReferencedConstant, referencedConstant));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT:
-				return getReferencedConstant();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT:
+        return getReferencedConstant();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT:
-				setReferencedConstant((Constants)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT:
+        setReferencedConstant((Constants)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT:
-				setReferencedConstant(REFERENCED_CONSTANT_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT:
+        setReferencedConstant(REFERENCED_CONSTANT_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT:
-				return referencedConstant != REFERENCED_CONSTANT_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case RefactoringSpecificationPackage.CONSTANTS_REFERENCE__REFERENCED_CONSTANT:
+        return referencedConstant != REFERENCED_CONSTANT_EDEFAULT;
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (referencedConstant: ");
-		result.append(referencedConstant);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (referencedConstant: ");
+    result.append(referencedConstant);
+    result.append(')');
+    return result.toString();
+  }
 
 } //ConstantsReferenceImpl
