@@ -23,24 +23,24 @@ import org.emftext.language.refactoring.refactoring_specification.UPTREE;
 public class UPTREEImpl extends FromOperatorImpl implements UPTREE
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected UPTREEImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return RefactoringSpecificationPackage.Literals.UPTREE;
-	}
+    return RefactoringSpecificationPackage.Literals.UPTREE;
+  }
 
 } //UPTREEImpl

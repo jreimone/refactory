@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.refactoring_specification.UNSET;
  */
 public class UNSETImpl extends ReferenceCommandImpl implements UNSET {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected UNSETImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return RefactoringSpecificationPackage.Literals.UNSET;
-	}
+    return RefactoringSpecificationPackage.Literals.UNSET;
+  }
 
 } //UNSETImpl
