@@ -165,54 +165,54 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			return;
 		}
 		switch (status.getSeverity()) {
-			case IRefactoringStatus.OK:
-				break;
-			case IRefactoringStatus.INFO:
-				//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				//			title = "Information";
-				message = status.getMessage();
-				//			MessageDialog.openInformation(shell, title, message);
-				if (rollback && command.canUndo()) {
-					command.undo();
-				}
-				RegistryUtil.log("Refactoring rolled back because of some infos", IStatus.INFO);
-				break;
-			case IRefactoringStatus.WARNING:
-				//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				//			title = "Information";
-				message = status.getMessage();
-				//			MessageDialog.openInformation(shell, title, message);
-				if (rollback && command.canUndo()) {
-					command.undo();
-				}
-				RegistryUtil.log("Refactoring rolled back because of some warnings", IStatus.WARNING);
-				break;
-			case IRefactoringStatus.CANCEL:
-				if (rollback && command.canUndo()) {
-					command.undo();
-				}
-				RegistryUtil.log("Refactoring rolled back because of cancelation of dialog", IStatus.CANCEL);
-				break;
-			case IRefactoringStatus.ERROR:
-				//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				//			title = "Refactoring will be rolled back";
-				message = "The refactoring will be rolled back because of the following unforseen error: \n\n";
-				message += status.getMessage();
-				if (status.getException() != null) {
-					status.getException().printStackTrace();
-					message += "\n\nCheck out the error log for further information.";
-					//				Activator.getDefault().getLog().log(status);
-					ResourcesPlugin.getPlugin().getLog().log(status);
-				}
-				status.setMessage(message);
-				//			MessageDialog.openInformation(shell, title, message);
-				if (rollback && command.canUndo()) {
-					command.undo();
-				}
-				RegistryUtil.log("Refactoring rolled back because of an error", IStatus.ERROR);
-				break;
-			default:
-				break;
+		case IRefactoringStatus.OK:
+			break;
+		case IRefactoringStatus.INFO:
+			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			//			title = "Information";
+			message = status.getMessage();
+			//			MessageDialog.openInformation(shell, title, message);
+			if (rollback && command.canUndo()) {
+				command.undo();
+			}
+			RegistryUtil.log("Refactoring rolled back because of some infos", IStatus.INFO);
+			break;
+		case IRefactoringStatus.WARNING:
+			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			//			title = "Information";
+			message = status.getMessage();
+			//			MessageDialog.openInformation(shell, title, message);
+			if (rollback && command.canUndo()) {
+				command.undo();
+			}
+			RegistryUtil.log("Refactoring rolled back because of some warnings", IStatus.WARNING);
+			break;
+		case IRefactoringStatus.CANCEL:
+			if (rollback && command.canUndo()) {
+				command.undo();
+			}
+			RegistryUtil.log("Refactoring rolled back because of cancelation of dialog", IStatus.CANCEL);
+			break;
+		case IRefactoringStatus.ERROR:
+			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			//			title = "Refactoring will be rolled back";
+			message = "The refactoring will be rolled back because of the following unforseen error: \n\n";
+			message += status.getMessage();
+			if (status.getException() != null) {
+				status.getException().printStackTrace();
+				message += "\n\nCheck out the error log for further information.";
+				//				Activator.getDefault().getLog().log(status);
+				ResourcesPlugin.getPlugin().getLog().log(status);
+			}
+			status.setMessage(message);
+			//			MessageDialog.openInformation(shell, title, message);
+			if (rollback && command.canUndo()) {
+				command.undo();
+			}
+			RegistryUtil.log("Refactoring rolled back because of an error", IStatus.ERROR);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -245,18 +245,15 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			createTemporaryResource(fakeRefactoredModel);
 			IMatchEngine engine = new RefactoringMatchEngine();
 			if (originalModel != null && fakeRefactoredModel != null) {
-//				match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
+				//				match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
 				match = engine.modelMatch(originalModel, fakeRefactoredModel, options);
 			}
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
 		if (match != null) {
-			if (match != null) {
-				diff = DiffService.doDiff(match, false);
-			}
+			diff = DiffService.doDiff(match, false);
 			ModelCompareInput compareInput = new ModelCompareInput(match, diff);
-
 			return compareInput;
 		}
 		return null;
