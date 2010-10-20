@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0> 
 
-ExtractProcedure maps <ExtractXwithReferenceClass> { 
+"Extract Procedure" maps <ExtractXwithReferenceClass> { 
 	OrigContainer := Body {
 		extracts := statements;	
 	}; 
