@@ -1,0 +1,21 @@
+/**
+This role model is a very simple one but with extensive impacts because it is one of the more often
+used refactorings in practice. 'Rename Method' has to be used if one wants to rename the methods name
+and update all references to this method that they stay consistent. Originally <a href="http://www.refactoring.com/catalog/renameMethod.html">Rename Method</a> 
+comes from the Fowler book.
+*/
+RoleModel RenameXample { 
+	
+	/**
+	Map this role on a metaclass that owns an attribute which stands for the name and is intended to be renamed.
+	*/
+	super input ROLE Nameable (
+		/**
+		Map this attribute to a String attribute of the owning metaclass which represents the name of it.
+		*/
+		name
+	);	
+	 ROLE Nameable (
+		name
+	);
+} 
