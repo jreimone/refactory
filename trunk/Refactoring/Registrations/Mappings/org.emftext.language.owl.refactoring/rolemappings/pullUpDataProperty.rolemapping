@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Pull up data property" maps <MoveX> {
+	 
+	 TargetContainer := Description;
+	 
+	 SourceContainer := Description;
+	 
+	 Movee := DataProperty;
+}
