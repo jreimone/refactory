@@ -8,7 +8,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -17,15 +16,14 @@ import org.emftext.language.refactoring.roles.resource.rolestext.IRolestextQuick
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResource;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
-import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
 public class DistinctRoleNamesAnalyser extends AbstractPostProcessor {
 
 	private static final String DUPLICATE_ROLE_NAMES = "A role named '%1$s' has already be defined";
-	
+
 	private Map<String, Role> roleNameMap;
-	
+
 	@Override
 	public void analyse(RolestextResource resource, RoleModel model) {
 		EcoreUtil.resolveAll(model);
@@ -47,17 +45,14 @@ public class DistinctRoleNamesAnalyser extends AbstractPostProcessor {
 						for (RoleMapping roleMapping : mappings) {
 							// TODO generalise by generating quickfixes for each available refactoring???
 							if(roleMapping.getName().toLowerCase().contains("rename")){
-								RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(roleMapping.getMappedRoleModel());
-								if(refSpec != null){
-									// TODO use this as icon for quickfix
-									ImageDescriptor image = IRoleMappingRegistry.INSTANCE.getImageForMapping(roleMapping);
-									IRolestextQuickFix quickfix = new RenameRoleRefactoringQuickFix(foundRole, role, originalName, refactorer);
-									addProblem(resource
-											, ERoleModelProblemType.DUPLICATE_ROLE_NAMES
-											, String.format(DUPLICATE_ROLE_NAMES, foundRole.getName())
-											, role
-											, quickfix);
-								}
+								// TODO use this as icon for quickfix
+								ImageDescriptor image = IRoleMappingRegistry.INSTANCE.getImageForMapping(roleMapping);
+								IRolestextQuickFix quickfix = new RenameRoleRefactoringQuickFix(roleMapping, foundRole, role, originalName, refactorer);
+								addProblem(resource
+										, ERoleModelProblemType.DUPLICATE_ROLE_NAMES
+										, String.format(DUPLICATE_ROLE_NAMES, foundRole.getName())
+										, role
+										, quickfix);
 							}
 						}
 					} else {
