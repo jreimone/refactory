@@ -267,7 +267,7 @@ public class BuildFileGenerator {
 			new Language(
 					"org.emftext.language.java.sqljava", "sqljava",
 					"org.emftext.language.java.sqljava.resource.sqljava", "sqljava", 
-					true),
+					false),
 			new Language(
 				"org.emftext.language.java.treejava", "treejava",
 				"org.emftext.language.java.treejava.resource.treejava", "treejava", 
@@ -362,7 +362,7 @@ public class BuildFileGenerator {
 					false),
 			new Language(
 					"org.emftext.language.sql", "sql",
-					null, null, 
+					"org.emftext.language.sql.resource.sql", "sql",
 					false),
 			new Language(
 					"org.emftext.language.statemachine", null,
