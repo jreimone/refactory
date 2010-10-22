@@ -59,11 +59,13 @@ public class ReferenceMetaClassPairMetaClassReferenceResolver implements org.emf
 				if(eReference.equals(containingReference)){
 					EClass containedClass = eReference.getEReferenceType();
 					if(containedClass.getName().equals(targetIdentifier)){
+						pair.setMetaClass(containedClass);
 						return containedClass;
 					}
 					List<EClass> subClasses = ModelUtil.getAllSubTypes(containedClass);
 					for (EClass subClass : subClasses) {
 						if(subClass.getName().equals(targetIdentifier)){
+							pair.setMetaClass(subClass);
 							return subClass;
 						}
 					}
