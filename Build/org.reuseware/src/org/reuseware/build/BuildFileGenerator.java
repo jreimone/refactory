@@ -228,6 +228,14 @@ public class BuildFileGenerator {
 					"org.emftext.language.owl", "owl",
 					"org.emftext.language.owl.resource.owl", "owl", 
 					true, ".text"),
+			new OntMoPPLanguage(
+					"org.emftext.runtime.owltext.test", "owlTextTestLanguage",
+					"org.emftext.runtime.owltext.test", "owlTextTestLanguage.text", 
+					false, ".text", ".text"),
+			new OntMoPPLanguage(
+					"org.emftext.language.owlcl", "owlcl",
+					"org.emftext.language.owlcl.resource.owlcl", "owlcl", 
+					false),
 			new Language(
 				"org.emftext.language.java", "java",
 				"org.emftext.language.java.resource.java", "java", 
@@ -256,6 +264,10 @@ public class BuildFileGenerator {
 				"org.emftext.language.java.jtemplates", "jtemplates",
 				"org.emftext.language.java.jtemplates.resource.javatemplate", "jtemplates", 
 				false),
+			new Language(
+					"org.emftext.language.java.sqljava", "sqljava",
+					"org.emftext.language.java.sqljava.resource.sqljava", "sqljava", 
+					true),
 			new Language(
 				"org.emftext.language.java.treejava", "treejava",
 				"org.emftext.language.java.treejava.resource.treejava", "treejava", 
@@ -347,6 +359,10 @@ public class BuildFileGenerator {
 			new OntMoPPLanguage(
 					"org.emftext.language.sparql", "sparql",
 					"org.emftext.language.sparql.resource.sparql", "sparql",
+					false),
+			new Language(
+					"org.emftext.language.sql", "sql",
+					null, null, 
 					false),
 			new Language(
 					"org.emftext.language.statemachine", null,
