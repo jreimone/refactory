@@ -365,6 +365,8 @@
 
 		<property name="closurejava.version" value="0.1.2"/>
 		<property name="theater.version" value="${closurejava.version}"/>
+		<property name="sql.version" value="${closurejava.version}"/>
+		<property name="sqljava.version" value="${closurejava.version}"/>
 
 		<property name="conference.version" value="0.2.2"/>
 		<property name="efactory.version" value="${conference.version}"/>
@@ -558,6 +560,13 @@
 		<buildplugin name="Example Java Extension for Reuseware (Editor)"     package="org.emftext.language.java.reusejava.resource.reusejava.ui" version="${reusejava.version}"/>
 		<buildfeature                                                         package="org.emftext.language.java.reusejava"                       version="${reusejava.version}"/>
 
+		<!-- SQL Java -->
+		<buildplugin  name="SQLJava Metamodel"      package="org.emftext.language.java.sqljava"                     version="${sqljava.version}" />
+		<buildplugin  name="SQLJava Resource"       package="org.emftext.language.java.sqljava.resource"            version="${sqljava.version}" />
+		<buildplugin  name="SQLJava Textsyntax"     package="org.emftext.language.java.sqljava.resource.sqljava"    version="${sqljava.version}" />
+		<buildplugin  name="SQLJava Editor"         package="org.emftext.language.java.sqljava.resource.sqljava.ui" version="${sqljava.version}" />
+		<buildfeature                               package="org.emftext.language.java.sqljava"                     version="${sqljava.version}" />
+		
 		<!-- Tree Java -->
 		<buildplugin  name="Tree Java Metamodel"      package="org.emftext.language.java.treejava"                      version="${treejava.version}" />
 		<buildplugin  name="Tree Java Metamodel Edit" package="org.emftext.language.java.treejava.edit"                 version="${treejava.version}" />
@@ -607,6 +616,17 @@
 		<buildplugin  name="OWL Manchester Syntax"        package="org.emftext.language.owl.resource.owl"    version="${owl.version}" />
 		<buildplugin  name="OWL Manchester Editor"        package="org.emftext.language.owl.resource.owl.ui" version="${owl.version}" />
 		<buildfeature                                     package="org.emftext.language.owl"                 version="${owl.version}" />
+
+		<!-- OWLizer -->
+		<buildplugin  name="OWLizer"    package="eu.most.transformation.ecore_owl"    version="${owl.version}" />
+		<buildplugin  name="OWLizer UI" package="eu.most.transformation.ecore_owl.ui" version="${owl.version}" />
+		<buildfeature                   package="eu.most.transformation.ecore_owl"    version="${owl.version}" />
+
+		<!-- OWLCL -->
+		<buildplugin  name="OWLCL Metamodel" package="org.emftext.language.owlcl"                   version="${owl.version}" />
+		<buildplugin  name="OWLCL Syntax"    package="org.emftext.language.owlcl.resource.owlcl"    version="${owl.version}" />
+		<buildplugin  name="OWLCL Editor"    package="org.emftext.language.owlcl.resource.owlcl.ui" version="${owl.version}" />
+		<buildfeature                        package="org.emftext.language.owlcl"                   version="${owl.version}" />
 
 		<!-- Petrinet -->
 		<buildplugin  name="Petri Net Metamodel" package="org.emftext.language.petrinet"                      version="${petrinet.version}" />
@@ -676,6 +696,12 @@
 		<buildplugin name="Simple Math Textsyntax"     package="org.emftext.language.simplemath.resource.sm"    version="${simplemath.version}" />
 		<buildplugin name="Simple Math Editor"         package="org.emftext.language.simplemath.resource.sm.ui" version="${simplemath.version}" />
 		<buildfeature                                  package="org.emftext.language.simplemath"                version="${simplemath.version}" />
+		
+		<!-- SQL -->
+		<buildplugin name="SQL Metamodel"  package="org.emftext.language.sql"                 version="${sql.version}" />
+		<buildplugin name="SQL Textsyntax" package="org.emftext.language.sql.resource.sql"    version="${sql.version}" />
+		<buildplugin name="SQL Editor"     package="org.emftext.language.sql.resource.sql.ui" version="${sql.version}" />
+		<buildfeature                      package="org.emftext.language.sql"                 version="${sql.version}" />
 		
 		<!-- Statemachine -->
 		<buildplugin name="UML Statemachine Textsyntax Specification" package="org.emftext.language.statemachine"                          version="${statemachine.version}" />
