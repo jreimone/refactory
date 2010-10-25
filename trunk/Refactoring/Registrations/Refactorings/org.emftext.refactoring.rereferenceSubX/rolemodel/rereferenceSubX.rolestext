@@ -1,0 +1,16 @@
+RoleModel RereferenceSubX {
+input super
+ ROLE Base;
+super
+ ROLE Source;
+super
+ ROLE OrigReference;
+ ROLE NewReference;
+ Base  [1..1] <>- Source originalReference [0..*];
+ Source newTarget [1..1] -- OrigReference reference [1..1];
+ Source  [1..1] -- NewReference newReference [1..1];
+ OrigReference  [1..1] -- NewReference relatedElements [1..1];
+	
+
+
+}
