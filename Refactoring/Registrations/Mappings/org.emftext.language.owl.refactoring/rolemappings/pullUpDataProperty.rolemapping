@@ -1,10 +1,19 @@
 ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
 
-"Pull up data property" maps <MoveX> {
+"Pull up data property" maps <RereferenceSubX> {
 	 
-	 TargetContainer := Description;
+	 Base := DataProperty{
+	 	originalReference := domain:ClassAtomic;
+	 };
+	  
+	 Source := ClassAtomic{
+	 	reference := clazz;
+	 	newReference := clazz;
+	 };
 	 
-	 SourceContainer := Description;
+	 OrigReference := Class{
+	 	relatedElements := superClassesDescriptions:ClassAtomic -> clazz;
+	 };
 	 
-	 Movee := DataProperty;
+	 NewReference := Class;
 }
