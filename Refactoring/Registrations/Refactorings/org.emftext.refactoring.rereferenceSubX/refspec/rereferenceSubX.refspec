@@ -1,0 +1,9 @@
+REFACTORING FOR <RereferenceSubX> 
+
+STEPS { 
+	object source := Base.originalReference;
+	object origRef := source.reference;
+	object relatedElements := origRef.relatedElements; 
+	
+	set use of relatedElements in source;
+} 
