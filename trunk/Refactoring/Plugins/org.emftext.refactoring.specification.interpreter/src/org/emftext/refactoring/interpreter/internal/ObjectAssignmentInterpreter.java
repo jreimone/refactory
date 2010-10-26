@@ -38,6 +38,7 @@ import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
@@ -105,6 +106,7 @@ public class ObjectAssignmentInterpreter {
 	}
 
 	private EObject handleCollaboration(CollaborationReference object,	Variable objectVar) {
+		// TODO split method
 		MultiplicityCollaboration collaboration = object.getCollaboration();
 		EObject interpretationContext = collaboration.getInterpretationContext();
 		Object targetObject = null;
@@ -117,7 +119,38 @@ public class ObjectAssignmentInterpreter {
 				connectedCommand = ((VariableAssignment) declarationCommand).getAssignment();
 			}
 		} else if(interpretationContext instanceof Role) {
-			throw new UnsupportedOperationException("implement this case");
+			Role referencedRole = (Role) interpretationContext;
+			Role targetRole = collaboration.getTarget();
+			assignedRole = targetRole;
+			ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(referencedRole);
+			CollaborationMapping collaborationMapping = concreteMapping.getCollaborationMappingForCollaboration(collaboration);
+			List<ReferenceMetaClassPair> pairs = collaborationMapping.getReferenceMetaClassPair();
+			if(referencedRole.getModifier().contains(RoleModifier.INPUT)){
+				List<EObject> objects = RoleUtil.filterObjectsByRoles(selection, mapping, referencedRole);
+				if(objects.size() == 1){
+					List<EObject> resolvedObjects = getEObjectWithRoleFromPath(targetRole, objects.get(0), pairs);
+					if(resolvedObjects.size() == 1){
+						return resolvedObjects.get(0);
+					}
+					@SuppressWarnings("unchecked")
+					IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
+					if(valueProvider == null){
+						EClass clazz = mapping.getEClassForRole(assignedRole);
+						valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
+						interpreter.registerValueProviderForCommand(command, valueProvider);
+					}
+					EObject value = valueProvider.provideValue(interpreter, resolvedObjects);
+					context.addEObjectForVariable(objectVar, value);
+					if(valueProvider.getReturnCode() == Dialog.CANCEL){
+						status = new RefactoringStatus(IRefactoringStatus.CANCEL);
+					}
+					return value;
+				} else {
+					throw new UnsupportedOperationException("implement this case and iterate over list");
+				}
+			} else {
+				throw new UnsupportedOperationException("implement this case");
+			}
 		}
 		if(targetObject instanceof EObject){
 			EObject root = (EObject) targetObject;
