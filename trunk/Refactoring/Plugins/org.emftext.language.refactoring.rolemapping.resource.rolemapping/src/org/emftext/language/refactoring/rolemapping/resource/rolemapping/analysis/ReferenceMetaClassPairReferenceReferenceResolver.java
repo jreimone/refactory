@@ -71,14 +71,15 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 			List<EReference> references = metaClass.getEAllReferences();
 			for (EReference eReference : references) {
 				if(targetIdentifier.equals(eReference.getName())){
-//					EClass pairClass = pair.getMetaClass();
-//					if(pairClass == null || pairClass.eIsProxy()){
+					pair.setReference(eReference);
+					EClass pairClass = pair.getMetaClass();
+					if(pairClass == null || pairClass.eIsProxy()){
 						EClass referenceType = eReference.getEReferenceType();
 //						if(!referenceType.isAbstract()){
 //							pairClass = referenceType;
 							pair.setMetaClass(referenceType);
 //						} 
-//					}
+					}
 				}
 				foundReferences.put(eReference.getName(), eReference);
 			}
