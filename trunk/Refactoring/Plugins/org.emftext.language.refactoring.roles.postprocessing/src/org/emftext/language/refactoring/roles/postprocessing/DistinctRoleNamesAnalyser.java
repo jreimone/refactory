@@ -1,5 +1,6 @@
 package org.emftext.language.refactoring.roles.postprocessing;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -43,11 +43,14 @@ public class DistinctRoleNamesAnalyser extends AbstractPostProcessor {
 						refactorer.setInput(selectedElement);
 						List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
 						for (RoleMapping roleMapping : mappings) {
-							// TODO generalise by generating quickfixes for each available refactoring???
 							if(roleMapping.getName().toLowerCase().contains("rename")){
-								// TODO use this as icon for quickfix
-								ImageDescriptor image = IRoleMappingRegistry.INSTANCE.getImageForMapping(roleMapping);
-								IRolestextQuickFix quickfix = new RenameRoleRefactoringQuickFix(roleMapping, foundRole, role, originalName, refactorer);
+								//								ImageDescriptor image = IRoleMappingRegistry.INSTANCE.getImageForMapping(roleMapping);
+								URL iconBundlePath = IRoleMappingRegistry.INSTANCE.getImagePathForMapping(roleMapping);
+								String iconBundlePathString = null;
+								if(iconBundlePath != null){
+									iconBundlePathString = iconBundlePath.toString();
+								}
+								IRolestextQuickFix quickfix = new RenameRoleRefactoringQuickFix(roleMapping, foundRole, role, originalName, refactorer, iconBundlePathString);
 								addProblem(resource
 										, ERoleModelProblemType.DUPLICATE_ROLE_NAMES
 										, String.format(DUPLICATE_ROLE_NAMES, foundRole.getName())

@@ -23,8 +23,8 @@ public class RenameRoleRefactoringQuickFix extends RolestextQuickFix {
 	private String originalName;
 	private RoleMapping mapping;
 
-	public RenameRoleRefactoringQuickFix(RoleMapping mapping, Role roleToBeRefactored, Role secondRole, String originalName, IRefactorer refactorer){
-		super("Refactor: Rename other role", null, roleToBeRefactored);
+	public RenameRoleRefactoringQuickFix(RoleMapping mapping, Role roleToBeRefactored, Role secondRole, String originalName, IRefactorer refactorer, String iconKey){
+		super("Refactor: Rename other role", iconKey, roleToBeRefactored);
 		this.secondRole = secondRole;
 		this.refactorer = refactorer;
 		this.originalName = originalName;
