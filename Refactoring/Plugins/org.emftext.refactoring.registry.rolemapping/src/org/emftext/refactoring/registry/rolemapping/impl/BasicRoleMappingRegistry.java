@@ -3,7 +3,9 @@ package org.emftext.refactoring.registry.rolemapping.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,12 +43,14 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	private Map<String, Map<RoleMapping, IRefactoringPostProcessor>> postProcessorMap;
 	private Map<RoleMapping, ImageDescriptor> iconMap;
 	private Map<RoleMapping, ImageDescriptor> defaultIconMap;
+	private Map<RoleMapping, URL> iconBundlePathMap;
 
 	public BasicRoleMappingRegistry(){
 		roleMappingsMap = new LinkedHashMap<String, Map<String, RoleMapping>>();
 		postProcessorMap = new LinkedHashMap<String, Map<RoleMapping,IRefactoringPostProcessor>>();
 		iconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
 		defaultIconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
+		iconBundlePathMap = new LinkedHashMap<RoleMapping, URL>();
 		collectRegisteredRoleMappings();
 		collectRegisteredPostProcessors();
 	}
@@ -76,10 +80,13 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		// first look for default icon
 		ImageDescriptor defaultImage = null;
 		String defaultIconString = config.getAttribute(IRoleMappingExtensionPoint.DEFAULT_ICON_ATTRIBUTE);
+		URL defaultIconBundleURL = null;
 		if (defaultIconString != null) {
 			ImageData defaultImageData = getImageData(defaultIconString, plugin);
 			if (defaultImageData != null) {
 				defaultImage = ImageDescriptor.createFromImageData(defaultImageData);
+				IPath path = new Path(defaultIconString);
+				defaultIconBundleURL = FileLocator.find(plugin, path, Collections.EMPTY_MAP);
 			}
 		}
 
@@ -97,6 +104,9 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 						if (iconData != null) {
 							iconDescriptor = ImageDescriptor.createFromImageData(iconData);
 							iconMap.put(mapping, iconDescriptor);
+							IPath path = new Path(mappingIcon);
+							URL iconBundlePath = FileLocator.find(plugin, path, Collections.EMPTY_MAP);
+							iconBundlePathMap.put(mapping, iconBundlePath);
 							found = true;
 						}
 					}
@@ -105,6 +115,9 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			// register default icon only if no specific icon was found
 			if (!found && defaultImage != null) {
 				defaultIconMap.put(mapping, defaultImage);
+				if(defaultIconBundleURL != null){
+					iconBundlePathMap.put(mapping, defaultIconBundleURL);
+				}
 			}
 		}
 	}
@@ -287,5 +300,9 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				}
 			}
 		}
+	}
+
+	public URL getImagePathForMapping(RoleMapping mapping) {
+		return iconBundlePathMap.get(mapping);
 	}
 }
