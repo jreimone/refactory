@@ -4,6 +4,7 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
+            defaultIcon="icons/newRoleName.png"
             rolemapping_resource="rolemappings/RenameMappings.rolemapping">
       </rolemapping>
    </extension>
