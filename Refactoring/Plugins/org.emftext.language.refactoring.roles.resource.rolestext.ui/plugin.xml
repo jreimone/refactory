@@ -8,16 +8,8 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolestext" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" name="EMFText rolestext Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.refactoring.roles.resource.rolestext"/>
 		</editor>
-	</extension>
-	
-	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
-		<persistent value="true">
-		</persistent>
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
@@ -32,8 +24,6 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextBracketPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextBracketPreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextOccurrencePreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextOccurrencePreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -41,6 +31,32 @@
 		</category>
 		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" name="EMFText .rolestext file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextMarkerResolutionGenerator" markerType="org.emftext.language.refactoring.roles.resource.rolestext.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextAnnotationModelFactory" extensions="rolestext" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.refactoring.roles.resource.rolestext" name=".rolestext File" base-type="org.eclipse.core.runtime.text" file-extensions="rolestext"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="rolestext" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences" />
+		<type name="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences.declaration" super="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences" label="Occurrences (in .rolestext files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="rolestext.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="rolestext.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="rolestext.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolestext.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolestext.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="rolestext.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="rolestext.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="rolestext.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="rolestext.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences.declaration" label="Declarations (in .rolestext files)" textPreferenceKey="rolestext.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="rolestext.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="rolestext.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolestext.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolestext.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="rolestext.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>
