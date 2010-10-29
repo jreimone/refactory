@@ -1,9 +1,9 @@
 package org.emftext.refactoring.registry.rolemapping;
 
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -82,5 +82,5 @@ public interface IRoleMappingRegistry {
 	 * @param mapping for which an icon was registered
 	 * @return the path in the bundle
 	 */
-	public URL getImagePathForMapping(RoleMapping mapping);
+	public URI getImagePathForMapping(RoleMapping mapping);
 }

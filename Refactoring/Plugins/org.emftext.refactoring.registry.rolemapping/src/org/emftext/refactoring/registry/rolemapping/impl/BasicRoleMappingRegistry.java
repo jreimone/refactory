@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -43,14 +44,14 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	private Map<String, Map<RoleMapping, IRefactoringPostProcessor>> postProcessorMap;
 	private Map<RoleMapping, ImageDescriptor> iconMap;
 	private Map<RoleMapping, ImageDescriptor> defaultIconMap;
-	private Map<RoleMapping, URL> iconBundlePathMap;
+	private Map<RoleMapping, URI> iconBundlePathMap;
 
 	public BasicRoleMappingRegistry(){
 		roleMappingsMap = new LinkedHashMap<String, Map<String, RoleMapping>>();
 		postProcessorMap = new LinkedHashMap<String, Map<RoleMapping,IRefactoringPostProcessor>>();
 		iconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
 		defaultIconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
-		iconBundlePathMap = new LinkedHashMap<RoleMapping, URL>();
+		iconBundlePathMap = new LinkedHashMap<RoleMapping, URI>();
 		collectRegisteredRoleMappings();
 		collectRegisteredPostProcessors();
 	}
@@ -81,12 +82,14 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		ImageDescriptor defaultImage = null;
 		String defaultIconString = config.getAttribute(IRoleMappingExtensionPoint.DEFAULT_ICON_ATTRIBUTE);
 		URL defaultIconBundleURL = null;
+		URI defaultIconURI = null;
 		if (defaultIconString != null) {
 			ImageData defaultImageData = getImageData(defaultIconString, plugin);
 			if (defaultImageData != null) {
 				defaultImage = ImageDescriptor.createFromImageData(defaultImageData);
 				IPath path = new Path(defaultIconString);
 				defaultIconBundleURL = FileLocator.find(plugin, path, Collections.EMPTY_MAP);
+				defaultIconURI = URI.createPlatformPluginURI("/" + plugin.getSymbolicName() + "/" + defaultIconString, true);
 			}
 		}
 
@@ -105,8 +108,20 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 							iconDescriptor = ImageDescriptor.createFromImageData(iconData);
 							iconMap.put(mapping, iconDescriptor);
 							IPath path = new Path(mappingIcon);
+							URI uri = URI.createPlatformPluginURI("/" + plugin.getSymbolicName() + "/" + mappingIcon, true);
 							URL iconBundlePath = FileLocator.find(plugin, path, Collections.EMPTY_MAP);
-							iconBundlePathMap.put(mapping, iconBundlePath);
+							URL resolvedPath = null;
+							try {
+								resolvedPath = new URL(uri.toPlatformString(false));
+							} catch (MalformedURLException e1) {
+								e1.printStackTrace();
+							}
+							try {
+								resolvedPath = FileLocator.resolve(iconBundlePath);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							iconBundlePathMap.put(mapping, uri);
 							found = true;
 						}
 					}
@@ -116,7 +131,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			if (!found && defaultImage != null) {
 				defaultIconMap.put(mapping, defaultImage);
 				if(defaultIconBundleURL != null){
-					iconBundlePathMap.put(mapping, defaultIconBundleURL);
+					iconBundlePathMap.put(mapping, defaultIconURI);
 				}
 			}
 		}
@@ -302,7 +317,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 	}
 
-	public URL getImagePathForMapping(RoleMapping mapping) {
+	public URI getImagePathForMapping(RoleMapping mapping) {
 		return iconBundlePathMap.get(mapping);
 	}
 }
