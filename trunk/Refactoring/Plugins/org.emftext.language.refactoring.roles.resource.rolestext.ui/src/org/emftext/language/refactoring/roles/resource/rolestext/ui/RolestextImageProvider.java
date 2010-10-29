@@ -6,10 +6,12 @@
  */
 package org.emftext.language.refactoring.roles.resource.rolestext.ui;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 /**
@@ -59,13 +61,24 @@ public class RolestextImageProvider {
 		// try loading image from UI bundle
 		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path(key);
 		org.eclipse.jface.resource.ImageDescriptor desriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(org.eclipse.core.runtime.FileLocator.find(org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextUIPlugin.getDefault().getBundle(), path, null));
+		
 		image = desriptor.createImage();
 
 		// try loading image from any bundle 
 		try {
 			// platform:/plugin/org.eclipse.core.runtime/$nl$/about.properties
+			URI uri = URI.createURI(key);
+			if(uri.isPlatformPlugin()){
+				String device = uri.device();
+				System.out.println(device);
+			}
 			URL pluginUrl = new URL(key);
 			pluginUrl = FileLocator.find(pluginUrl);
+			try {
+				pluginUrl = FileLocator.resolve(pluginUrl);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			desriptor = ImageDescriptor.createFromURL(pluginUrl);
 			image = desriptor.createImage();
 		} catch (MalformedURLException e1) {
