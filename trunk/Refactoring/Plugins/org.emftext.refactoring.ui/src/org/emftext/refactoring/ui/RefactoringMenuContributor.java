@@ -1,12 +1,8 @@
 package org.emftext.refactoring.ui;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -29,7 +25,7 @@ import org.eclipse.ui.services.IServiceLocator;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
-import org.emftext.refactoring.editorconnector.IEditorConnectorExtensionPoint;
+import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
@@ -42,21 +38,8 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 	private static final String CONTEXT_MENU_ENTRY_TEXT = "Refactor";
 	private static final String CONTEXT_MENU_ENTRY_ID = "org.emftext.refactoring.menu";
 
-	private List<IEditorConnector> editorConnectors;
-	private Map<IEditorPart, IEditorConnector> editorConnectorCache;
-
 	public RefactoringMenuContributor() {
-		editorConnectors = new LinkedList<IEditorConnector>();
-		editorConnectorCache = new LinkedHashMap<IEditorPart, IEditorConnector>();
-		IConfigurationElement[] elements = RegistryUtil.collectConfigurationElements(IEditorConnectorExtensionPoint.ID);
-		for (IConfigurationElement element : elements) {
-			try {
-				IEditorConnector connector = (IEditorConnector) element.createExecutableExtension(IEditorConnectorExtensionPoint.CONNECTOR_ATTRIBUTE);
-				editorConnectors.add(connector);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
+		super();
 	}
 
 	@Override
@@ -85,23 +68,14 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		}
 		TransactionalEditingDomain transactionalEditingDomain = null;
 		IEditorPart activeEditor = null;
-		IEditorConnector cachedConnector = null;
+		IEditorConnector editoConnector = null;
 		if (selectedElements == null || selectedElements.size() == 0) {
 			activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			cachedConnector = editorConnectorCache.get(activeEditor);
-			if (cachedConnector == null) {
-				for (IEditorConnector connector : editorConnectors) {
-					if (connector.canHandle(activeEditor)) {
-						cachedConnector = connector;
-						editorConnectorCache.put(activeEditor, connector);
-						break;
-					}
-				}
-			}
-			if(cachedConnector != null){
-				selectedElements = cachedConnector.handleSelection(selection);
+			editoConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
+			if(editoConnector != null){
+				selectedElements = editoConnector.handleSelection(selection);
 				if (selectedElements != null && selectedElements.size() >= 1) {
-					transactionalEditingDomain = cachedConnector.getTransactionalEditingDomain();
+					transactionalEditingDomain = editoConnector.getTransactionalEditingDomain();
 				}
 			}
 		}
@@ -135,9 +109,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 							Action refactoringAction = null;
 							if (transactionalEditingDomain == null) {
-								refactoringAction = new RefactoringAction(mapping, refactorer, cachedConnector);
+								refactoringAction = new RefactoringAction(mapping, refactorer, editoConnector);
 							} else {
-								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor, cachedConnector);
+								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor, editoConnector);
 							}
 							refactoringAction.setText(refactoringName);
 							refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));

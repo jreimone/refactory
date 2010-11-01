@@ -66,8 +66,6 @@ public class RefactoringAction extends Action {
 
 	public void ltkRun() {
 		EObject original = refactorer.getOriginalModel();
-		//		System.out.println("RefactoringAction.ltkRun() " + original);
-		//		System.out.println("RefactoringAction.ltkRun() " + refactorer);
 		ModelRefactoring refactoring = new ModelRefactoring(refactorer, mapping, diagramTransactionalEditingDomain, getText(), activeEditor);
 		ModelRefactoringWizard wizard = new ModelRefactoringWizard(refactoring);
 		wizard.setWindowTitle(refactoring.getName());
@@ -75,8 +73,6 @@ public class RefactoringAction extends Action {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		try {
 			int result = op.run(shell, getText());
-			//			System.out.println("RefactoringAction.ltkRun() " + original);
-			//			System.out.println("RefactoringAction.ltkRun() " + refactorer);
 			if(connector != null){
 				if (result == IDialogConstants.OK_ID) {
 					IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
