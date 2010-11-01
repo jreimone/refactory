@@ -11,4 +11,19 @@
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.emftext.refactoring.ui.generatefacadecontributor"
+            objectClass="org.eclipse.core.resources.IFolder">
+         <action
+               class="org.emftext.refactoring.ui.codegen.GenerateFacadeAction"
+               enablesFor="1"
+               id="org.emftext.refactoring.ui.generatefacadeaction"
+               label="Generate Facade for RoleMappings"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
 </plugin>
