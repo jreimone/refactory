@@ -6,12 +6,9 @@
  */
 package org.emftext.language.refactoring.roles.resource.rolestext.ui;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 /**
@@ -20,11 +17,11 @@ import org.eclipse.jface.resource.ImageDescriptor;
  * sure each image is loaded at most once.
  */
 public class RolestextImageProvider {
-	
+
 	public final static RolestextImageProvider INSTANCE = new RolestextImageProvider();
-	
+
 	private java.util.Map<String, org.eclipse.swt.graphics.Image> imageCache = new java.util.LinkedHashMap<String, org.eclipse.swt.graphics.Image>();
-	
+
 	/**
 	 * Returns the image associated with the given key. The key can be either a path
 	 * to an image file in the resource bundle or a shared image from
@@ -51,45 +48,40 @@ public class RolestextImageProvider {
 		if (image != null) {
 			return image;
 		}
-		
+
 		// try cache
 		if (imageCache.containsKey(key)) {
 			return imageCache.get(key);
 		}
-		
-		
+
+
 		// try loading image from UI bundle
 		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path(key);
-		org.eclipse.jface.resource.ImageDescriptor desriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(org.eclipse.core.runtime.FileLocator.find(org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextUIPlugin.getDefault().getBundle(), path, null));
-		
-		image = desriptor.createImage();
+		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(org.eclipse.core.runtime.FileLocator.find(org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextUIPlugin.getDefault().getBundle(), path, null));
+		if(ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null){
 
-		// try loading image from any bundle 
-		try {
-			// platform:/plugin/org.eclipse.core.runtime/$nl$/about.properties
-			URI uri = URI.createURI(key);
-			if(uri.isPlatformPlugin()){
-				String device = uri.device();
-				System.out.println(device);
-			}
-			URL pluginUrl = new URL(key);
-			pluginUrl = FileLocator.find(pluginUrl);
+			// try loading image from any bundle 
 			try {
-				pluginUrl = FileLocator.resolve(pluginUrl);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			desriptor = ImageDescriptor.createFromURL(pluginUrl);
-			image = desriptor.createImage();
-		} catch (MalformedURLException e1) {
-		}
-		
+				// possible forms:
+				// platform:/plugin/your.plugin/icons/yourIcon.png
+				// bundleentry://557.fwk3560063/icons/yourIcon.png
+				URL pluginUrl = new URL(key);
+				descriptor = ImageDescriptor.createFromURL(pluginUrl);
+				if(ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null){
+					return null;
+				}
+			} catch (MalformedURLException e1) {
+			}	
+
+		} 
+		image = descriptor.createImage();
+
 		if (image == null) {
 			return null;
 		}
-		
+
 		imageCache.put(key, image);
 		return image;
 	}
-	
+
 }

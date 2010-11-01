@@ -1,11 +1,11 @@
 package org.emftext.language.refactoring.roles.postprocessing;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
@@ -45,7 +45,7 @@ public class DistinctRoleNamesAnalyser extends AbstractPostProcessor {
 						for (RoleMapping roleMapping : mappings) {
 							if(roleMapping.getName().toLowerCase().contains("rename")){
 								//								ImageDescriptor image = IRoleMappingRegistry.INSTANCE.getImageForMapping(roleMapping);
-								URI iconBundlePath = IRoleMappingRegistry.INSTANCE.getImagePathForMapping(roleMapping);
+								URL iconBundlePath = IRoleMappingRegistry.INSTANCE.getImagePathForMapping(roleMapping);
 								String iconBundlePathString = null;
 								if(iconBundlePath != null){
 									iconBundlePathString = iconBundlePath.toString();
