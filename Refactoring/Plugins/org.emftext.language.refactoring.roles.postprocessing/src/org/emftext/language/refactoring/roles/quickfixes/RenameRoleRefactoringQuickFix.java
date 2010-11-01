@@ -18,13 +18,15 @@ import org.emftext.refactoring.util.RegistryUtil;
 
 public class RenameRoleRefactoringQuickFix extends RolestextQuickFix {
 
+	private static final String REFACTOR_RENAME_OTHER_ROLE = "Refactor: Rename other role";
+
 	private IRefactorer refactorer;
 	private Role secondRole;
 	private String originalName;
 	private RoleMapping mapping;
 
 	public RenameRoleRefactoringQuickFix(RoleMapping mapping, Role roleToBeRefactored, Role secondRole, String originalName, IRefactorer refactorer, String iconKey){
-		super("Refactor: Rename other role", iconKey, roleToBeRefactored);
+		super(REFACTOR_RENAME_OTHER_ROLE, iconKey, roleToBeRefactored);
 		this.secondRole = secondRole;
 		this.refactorer = refactorer;
 		this.originalName = originalName;
@@ -36,8 +38,8 @@ public class RenameRoleRefactoringQuickFix extends RolestextQuickFix {
 		System.out.println("RenameRoleRefactoringQuickFix.applyChanges()");
 		IEditorConnector connector = determineEditorConnector();
 		RefactoringAction action = new RefactoringAction(mapping, refactorer, connector);
+//		action.setText(REFACTOR_RENAME_OTHER_ROLE);
 		action.run();
-		secondRole.setName(originalName);
 	}
 
 	private IEditorConnector determineEditorConnector(){
