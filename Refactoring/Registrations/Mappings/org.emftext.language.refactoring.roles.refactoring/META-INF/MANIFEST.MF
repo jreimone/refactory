@@ -6,6 +6,9 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.emftext.language.refactoring.roles.refactoring.Activator
 Bundle-Vendor: Jan Reimann
 Require-Bundle: org.eclipse.core.runtime,
- org.emftext.refactoring.registry.rolemapping
+ org.emftext.refactoring.registry.rolemapping,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.refactoring.specification.interpreter
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Export-Package: org.emftext.language.refactoring.roles.refactoring
