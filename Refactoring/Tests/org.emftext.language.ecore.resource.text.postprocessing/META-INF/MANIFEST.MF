@@ -7,6 +7,11 @@ Bundle-Activator: org.emftext.language.ecore.resource.text.postprocessing.Activa
 Bundle-Vendor: Jan Reimann
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.language.ecore.resource.text,
- org.eclipse.emf.ecore
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+ org.eclipse.emf.ecore,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.refactoring.specification.interpreter,
+ org.eclipse.ui.workbench,
+ org.emftext.refactoring.ui,
+ org.emftext.refactoring.mappings.ecore
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

@@ -1,5 +1,6 @@
 package org.emftext.language.ecore.resource.text.postprocessing;
 
+import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,8 +9,14 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.emftext.language.ecore.resource.text.ITextEcoreQuickFix;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResource;
+import org.emftext.language.ecore.resource.text.quickfixes.ExtractSuperClassQuickFix;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.mappings.ecore.TextEcoreRefactoringFacade;
 
 public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 
@@ -23,6 +30,15 @@ public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 			for (EClassifier type : typeClassMap.keySet()) {
 				List<EClass> sameAttributeClasses = typeClassMap.get(type);
 				if(sameAttributeClasses.size() > 1){
+					List<EObject> attributesToPullUp = new LinkedList<EObject>();
+					for (EClass eClass : sameAttributeClasses) {
+						List<EAttribute> ownAttributes = eClass.getEAttributes();
+						for (EAttribute eAttribute : ownAttributes) {
+							if(eAttribute.getName().equals(name) && eAttribute.getEType().equals(type)){
+								attributesToPullUp.add(eAttribute);
+							}
+						}
+					}
 					for (EClass eClass : sameAttributeClasses) {
 						List<EClass> sameAttributeClassesCopy = new LinkedList<EClass>(sameAttributeClasses);
 						sameAttributeClassesCopy.remove(eClass);
@@ -33,7 +49,18 @@ public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 						message = String.copyValueOf(message.toCharArray(), 0, message.length() - 2);
 						message += "\nall have the same attribute '" + name + "' of type '" + type.getName() + "'." +
 								"\nYou should consider to invoke a refactoring.";
-						addProblem(resource, ETextEcoreProblemType.SAME_ATTRIBUTES_IN_HIERARCHY, message, eClass);
+						
+						//// always the same?
+						TextEcoreRefactoringFacade facade = new TextEcoreRefactoringFacade(resource, attributesToPullUp);
+						IRefactorer refactorer = facade.getRefactorer();
+						RoleMapping roleMapping = facade.getExtractSuperClassMapping();
+						URL iconBundlePath = facade.getExtractSuperClassIcon();
+						if(refactorer != null){
+							ITextEcoreQuickFix quickfix = new ExtractSuperClassQuickFix(roleMapping, attributesToPullUp, refactorer, (iconBundlePath != null) ? iconBundlePath.toString() : null);
+							addProblem(resource, ETextEcoreProblemType.SAME_ATTRIBUTES_IN_HIERARCHY, message, eClass, quickfix);
+						} else {
+							addProblem(resource, ETextEcoreProblemType.SAME_ATTRIBUTES_IN_HIERARCHY, message, eClass);
+						}
 					}
 				}
 			}

@@ -15,7 +15,6 @@ public class TextEcoreOptionProvider implements ITextEcoreOptionProvider {
 		super();
 	}
 
-	@Override
 	public Map<?, ?> getOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		
