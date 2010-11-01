@@ -26,6 +26,7 @@ import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.ltk.ModelRefactoring;
 import org.emftext.refactoring.ltk.ModelRefactoringWizard;
+import org.emftext.refactoring.util.StringUtil;
 
 /**
  * This action can be registered to the context menus of editors
@@ -56,6 +57,11 @@ public class RefactoringAction extends Action {
 	@Override
 	public void run() {
 		ltkRun();
+	}
+
+	@Override
+	public String getText() {
+		return StringUtil.convertCamelCaseToWords(mapping.getName());
 	}
 
 	public void ltkRun() {
