@@ -14,12 +14,10 @@ public abstract class AbstractPostProcessor implements
 		ITextEcoreResourcePostProcessorProvider,
 		ITextEcoreResourcePostProcessor {
 	
-	@Override
 	public ITextEcoreResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
 
-	@Override
 	public void process(TextEcoreResource resource) {
 		List<EObject> contents = resource.getContents();
 		for (EObject eObject : contents) {
