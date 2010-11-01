@@ -12,6 +12,7 @@ Require-Bundle: org.emftext.language.refactoring.roles.resource.rolestext,
  org.emftext.refactoring.ui,
  org.emftext.refactoring.util,
  org.eclipse.equinox.registry,
- org.eclipse.ui.workbench
+ org.eclipse.ui.workbench,
+ org.emftext.language.refactoring.roles.refactoring
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Jan Reimann
