@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Postprocessing
+Bundle-SymbolicName: org.emftext.language.ecore.resource.text.postprocessing;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.emftext.language.ecore.resource.text.postprocessing.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.language.ecore.resource.text,
+ org.eclipse.emf.ecore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
