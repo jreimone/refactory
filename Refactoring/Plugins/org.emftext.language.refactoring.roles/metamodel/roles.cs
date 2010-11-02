@@ -25,7 +25,6 @@ OPTIONS {
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
 	overrideBuilder = "false";
 	overrideUIPluginXML = "false";
-	overrideImageProvider = "false";
 }
 
 TOKENS{
