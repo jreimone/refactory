@@ -10,36 +10,5 @@
             class="org.emftext.refactoring.ui.RefactoringMenuContributor"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
       </menuContribution>
-      <menuContribution
-            allPopups="false"
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <command
-               commandId="org.emftext.refactoring.ui.generatefacade.command"
-               label="Generate Facade for RoleMappings"
-               style="push">
-         </command>
-      </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.popupMenus">
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            id="org.emftext.refactoring.ui.generatefacade.command"
-            name="Generate Facade for RoleMappings">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="org.emftext.refactoring.ui.codegen.GenerateFacadeHandler"
-            commandId="org.emftext.refactoring.ui.generatefacade.command">
-         <enabledWhen>
-            <count
-                  value="1">
-            </count>
-         </enabledWhen>
-      </handler>
    </extension>
 </plugin>
