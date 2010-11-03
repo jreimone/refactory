@@ -477,6 +477,10 @@ public class BuildFileGenerator {
 					"org.emftext.test.printing", "printing",
 					"org.emftext.test.printing.resource.printing", "printing",
 					false),
+			new TestLanguage(
+					"org.emftext.test.resolving", "resolving",
+					"org.emftext.test.resolving.resource.resolving", "resolving",
+					false),
 	};
 	
 	public static void main(String[] args) {
