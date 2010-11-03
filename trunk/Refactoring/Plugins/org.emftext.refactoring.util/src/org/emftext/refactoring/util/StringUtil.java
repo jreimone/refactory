@@ -33,4 +33,9 @@ public class StringUtil {
 		sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
 		return sb.toString();
 	}
+	
+	public static String convertWordsToCamelCase(String words){
+		String result = words.replaceAll(" ", "");
+		return firstLetterUpperCase(result);
+	}
 }
