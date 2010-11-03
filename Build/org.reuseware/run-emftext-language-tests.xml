@@ -284,6 +284,9 @@
 			<pathelement path="../org.emftext.test.printing/bin"/>
 			<pathelement path="../org.emftext.test.printing.resource.printing/bin"/>
 			<pathelement path="../org.emftext.test.printing.test/bin"/>
+			<pathelement path="../org.emftext.test.resolving/bin"/>
+			<pathelement path="../org.emftext.test.resolving.resource.resolving/bin"/>
+			<pathelement path="../org.emftext.test.resolving.test/bin"/>
 			<pathelement path="../org.emftext.test.scannerless_parser/bin"/>
 			<pathelement path="../org.reuseware.coconut/bin"/>
 			<pathelement path="../org.reuseware.coconut.compositionprogram/bin"/>
