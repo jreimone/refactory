@@ -1,6 +1,8 @@
 package org.emftext.refactoring.codegen;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -96,7 +98,7 @@ public class GenerateRoleMappingFacadesJob extends Job {
 		}
 		fragment = createFacadePackage(monitor);
 		monitor.worked(1);
-		addPluginDependencies(monitor);
+		generateManifest(monitor);
 		generateCompilationUnits(monitor);
 		try {
 			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
@@ -208,7 +210,7 @@ public class GenerateRoleMappingFacadesJob extends Job {
 		sc.addLineBreak();
 	}
 
-	private void addPluginDependencies(IProgressMonitor monitor) {
+	private void generateManifest(IProgressMonitor monitor) {
 		IFolder metaInf = project.getFolder("META-INF");
 		if (!metaInf.exists()) {
 			try {
@@ -226,51 +228,63 @@ public class GenerateRoleMappingFacadesJob extends Job {
 		Resource resource = rs.getResource(uri, true);
 		if (resource != null && resource.getContents().get(0) instanceof Manifest) {
 			Manifest manifest = (Manifest) resource.getContents().get(0);
-			RequireBundle requiredBundle = manifest.getRequireBundle();
-			if (requiredBundle == null) {
-				requiredBundle = ManifestFactory.eINSTANCE.createRequireBundle();
-				manifest.setRequireBundle(requiredBundle);
-//				manifest.eContents().move(0, requiredBundle);
-			}
-			List<RequireBundleDescription> requiredDescriptions = requiredBundle.getRequireBundleDescription();
-			List<String> requiredPlugins = Arrays.asList(REQUIRED_PLUGINS);
-			List<String> plugins2add = new LinkedList<String>(requiredPlugins);
-			for (RequireBundleDescription requireBundleDescription : requiredDescriptions) {
-				String plugin = requireBundleDescription.getSymbolicName();
-				if (requiredPlugins.contains(plugin)) {
-					plugins2add.remove(plugin);
-				}
-			}
-			for (String pluginID : plugins2add) {
-				RequireBundleDescription description = ManifestFactory.eINSTANCE.createRequireBundleDescription();
-				description.setSymbolicName(pluginID);
-				requiredDescriptions.add(description);
-			}
-			ExportPackage exportPackage = manifest.getExportPackage();
-			if (exportPackage == null) {
-				exportPackage = ManifestFactory.eINSTANCE.createExportPackage();
-				manifest.setExportPackage(exportPackage);
-			}
-			List<Export> exports = exportPackage.getExport();
-			boolean contained = false;
-			for (Export export : exports) {
-				if (export.getPackageName().equals(fragment.getElementName())) {
-					contained = true;
-					break;
-				}
-			}
-			if (!contained) {
-				Export export = ManifestFactory.eINSTANCE.createExport();
-				PackageName packageName = ManifestFactory.eINSTANCE.createPackageName();
-				packageName.setId(fragment.getElementName());
-				export.getPackageName().add(packageName);
-				exportPackage.getExport().add(export);
-			}
+			addRequiredPluginsToManifest(manifest);
+			addExportedPackagesToManifest(manifest);
 			try {
 				resource.save(Collections.EMPTY_MAP);
+				InputStream stream = new ByteArrayInputStream("\n".getBytes());
+				manifestFile.appendContents(stream, true, true, monitor);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void addExportedPackagesToManifest(Manifest manifest) {
+		ExportPackage exportPackage = manifest.getExportPackage();
+		if (exportPackage == null) {
+			exportPackage = ManifestFactory.eINSTANCE.createExportPackage();
+			manifest.setExportPackage(exportPackage);
+		}
+		List<Export> exports = exportPackage.getExport();
+		boolean contained = false;
+		for (Export export : exports) {
+			if (export.getPackageName().equals(fragment.getElementName())) {
+				contained = true;
+				break;
+			}
+		}
+		if (!contained) {
+			Export export = ManifestFactory.eINSTANCE.createExport();
+			PackageName packageName = ManifestFactory.eINSTANCE.createPackageName();
+			packageName.setId(fragment.getElementName());
+			export.getPackageName().add(packageName);
+			exportPackage.getExport().add(export);
+		}
+	}
+
+	private void addRequiredPluginsToManifest(Manifest manifest) {
+		RequireBundle requiredBundle = manifest.getRequireBundle();
+		if (requiredBundle == null) {
+			requiredBundle = ManifestFactory.eINSTANCE.createRequireBundle();
+			manifest.setRequireBundle(requiredBundle);
+		}
+		List<RequireBundleDescription> requiredDescriptions = requiredBundle.getRequireBundleDescription();
+		List<String> requiredPlugins = Arrays.asList(REQUIRED_PLUGINS);
+		List<String> plugins2add = new LinkedList<String>(requiredPlugins);
+		for (RequireBundleDescription requireBundleDescription : requiredDescriptions) {
+			String plugin = requireBundleDescription.getSymbolicName();
+			if (requiredPlugins.contains(plugin)) {
+				plugins2add.remove(plugin);
+			}
+		}
+		for (String pluginID : plugins2add) {
+			RequireBundleDescription description = ManifestFactory.eINSTANCE.createRequireBundleDescription();
+			description.setSymbolicName(pluginID);
+			requiredDescriptions.add(description);
 		}
 	}
 
