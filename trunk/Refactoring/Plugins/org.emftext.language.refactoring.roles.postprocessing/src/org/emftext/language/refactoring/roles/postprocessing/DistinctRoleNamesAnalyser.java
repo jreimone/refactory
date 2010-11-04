@@ -7,12 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.quickfixes.RenameRoleRefactoringQuickFix;
-import org.emftext.language.refactoring.roles.refactoring.RolesRefactoringFacade;
+import org.emftext.language.refactoring.roles.refactoring.facade.RolesRefactoringFacade;
 import org.emftext.language.refactoring.roles.resource.rolestext.IRolestextQuickFix;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResource;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -29,29 +28,38 @@ public class DistinctRoleNamesAnalyser extends AbstractPostProcessor {
 		List<Role> roles = model.getRoles();
 		for (Role role : roles) {
 			Role foundRole = roleNameMap.get(role.getName());
-			if(foundRole == null){
+			if (foundRole == null) {
 				roleNameMap.put(role.getName(), role);
 			} else {
-				if(!foundRole.equals(role)){
+				if (!foundRole.equals(role)) {
 					List<EObject> selectedElement = new ArrayList<EObject>();
 					selectedElement.add(foundRole);
-					
+
 					//// always the same?
 					RolesRefactoringFacade facade = new RolesRefactoringFacade(resource, selectedElement);
 					IRefactorer refactorer = facade.getRefactorer();
 					RoleMapping roleMapping = facade.getRenameRoleModelElementMapping();
 					URL iconBundlePath = facade.getRenameRoleModelElementIcon();
-					if(refactorer != null){
-						IRolestextQuickFix quickfix = new RenameRoleRefactoringQuickFix(roleMapping, foundRole, refactorer, (iconBundlePath != null) ? iconBundlePath.toString() : null);
-						addProblem(resource
-								, ERoleModelProblemType.DUPLICATE_ROLE_NAMES
-								, String.format(DUPLICATE_ROLE_NAMES, foundRole.getName())
+					if (refactorer != null) {
+						IRolestextQuickFix quickfix = new RenameRoleRefactoringQuickFix(roleMapping, foundRole, refactorer, (iconBundlePath != null) ? iconBundlePath.toString()
+								: null);
+						addProblem(
+								resource
+								,
+								ERoleModelProblemType.DUPLICATE_ROLE_NAMES
+								,
+								String.format(DUPLICATE_ROLE_NAMES,
+										foundRole.getName())
 								, role
 								, quickfix);
 					} else {
-						addProblem(resource
-								, ERoleModelProblemType.DUPLICATE_ROLE_NAMES
-								, String.format(DUPLICATE_ROLE_NAMES, foundRole.getName())
+						addProblem(
+								resource
+								,
+								ERoleModelProblemType.DUPLICATE_ROLE_NAMES
+								,
+								String.format(DUPLICATE_ROLE_NAMES,
+										foundRole.getName())
 								, role);
 					}
 				}
