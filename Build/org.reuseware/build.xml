@@ -391,6 +391,7 @@
 		<property name="feature.version" value="${chess.version}"/>
 		<property name="sandwichtemplate.version" value="${chess.version}"/>
 		<property name="km3.version" value="${chess.version}"/>
+		<property name="manifest.version" value="${chess.version}"/>
 		<property name="martinfowler.version" value="${chess.version}"/>
 		<property name="office.version" value="${chess.version}"/>
 		<property name="petrinet.version" value="${chess.version}"/>
@@ -596,6 +597,12 @@
 		<buildplugin  name="KM3 Syntax"             package="org.emftext.language.km3.resource.km3"    version="${km3.version}" />
 		<buildplugin  name="KM3 Editor"             package="org.emftext.language.km3.resource.km3.ui" version="${km3.version}" />
 		<buildfeature                               package="org.emftext.language.km3"                 version="${km3.version}" />
+
+		<!-- KM3 -->
+		<buildplugin  name="OSGi Manifest Metamodel" package="org.emftext.language.manifest"                      version="${manifest.version}" />
+		<buildplugin  name="OSGi Manifest Syntax"    package="org.emftext.language.manifest.resource.manifest"    version="${manifest.version}" />
+		<buildplugin  name="OSGi Manifest Editor"    package="org.emftext.language.manifest.resource.manifest.ui" version="${manifest.version}" />
+		<buildfeature                                package="org.emftext.language.manifest"                      version="${manifest.version}" />
 
 		<!-- Martin Fowler's DSL -->
 		<buildplugin  name="Martin Fowler's DSL Metamodel" package="org.emftext.language.martinfowlerdsl"                             version="${martinfowler.version}" />
