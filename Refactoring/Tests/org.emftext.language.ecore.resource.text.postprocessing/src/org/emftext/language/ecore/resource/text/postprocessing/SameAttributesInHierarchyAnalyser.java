@@ -16,12 +16,12 @@ import org.emftext.language.ecore.resource.text.mopp.TextEcoreResource;
 import org.emftext.language.ecore.resource.text.quickfixes.ExtractSuperClassQuickFix;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
-import org.emftext.refactoring.mappings.ecore.TextEcoreRefactoringFacade;
+import org.emftext.refactoring.mappings.ecore.facade.EcoreRefactoringFacade;
 
 public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 
-	private Map<String, Map<EClassifier, List<EClass>>> attributeTypeMap = new LinkedHashMap<String, Map<EClassifier,List<EClass>>>();
-	
+	private Map<String, Map<EClassifier, List<EClass>>> attributeTypeMap = new LinkedHashMap<String, Map<EClassifier, List<EClass>>>();
+
 	@Override
 	public void analyse(TextEcoreResource resource, EPackage epackage) {
 		fillMap(epackage);
@@ -29,12 +29,13 @@ public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 			Map<EClassifier, List<EClass>> typeClassMap = attributeTypeMap.get(name);
 			for (EClassifier type : typeClassMap.keySet()) {
 				List<EClass> sameAttributeClasses = typeClassMap.get(type);
-				if(sameAttributeClasses.size() > 1){
+				if (sameAttributeClasses.size() > 1) {
 					List<EObject> attributesToPullUp = new LinkedList<EObject>();
 					for (EClass eClass : sameAttributeClasses) {
 						List<EAttribute> ownAttributes = eClass.getEAttributes();
 						for (EAttribute eAttribute : ownAttributes) {
-							if(eAttribute.getName().equals(name) && eAttribute.getEType().equals(type)){
+							if (eAttribute.getName().equals(name) && eAttribute.getEType().equals(
+									type)) {
 								attributesToPullUp.add(eAttribute);
 							}
 						}
@@ -46,20 +47,28 @@ public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 						for (EClass eClass2 : sameAttributeClassesCopy) {
 							message += "'" + eClass2.getName() + "', ";
 						}
-						message = String.copyValueOf(message.toCharArray(), 0, message.length() - 2);
+						message = String.copyValueOf(message.toCharArray(), 0,
+								message.length() - 2);
 						message += "\nall have the same attribute '" + name + "' of type '" + type.getName() + "'." +
 								"\nYou should consider to invoke a refactoring.";
-						
+
 						//// always the same?
-						TextEcoreRefactoringFacade facade = new TextEcoreRefactoringFacade(resource, attributesToPullUp);
+						EcoreRefactoringFacade facade = new EcoreRefactoringFacade(resource, attributesToPullUp);
 						IRefactorer refactorer = facade.getRefactorer();
 						RoleMapping roleMapping = facade.getExtractSuperClassMapping();
 						URL iconBundlePath = facade.getExtractSuperClassIcon();
-						if(refactorer != null){
-							ITextEcoreQuickFix quickfix = new ExtractSuperClassQuickFix(roleMapping, attributesToPullUp, refactorer, (iconBundlePath != null) ? iconBundlePath.toString() : null);
-							addProblem(resource, ETextEcoreProblemType.SAME_ATTRIBUTES_IN_HIERARCHY, message, eClass, quickfix);
+						if (refactorer != null) {
+							ITextEcoreQuickFix quickfix = new ExtractSuperClassQuickFix(roleMapping, attributesToPullUp, refactorer, (iconBundlePath != null) ? iconBundlePath.toString()
+									: null);
+							addProblem(
+									resource,
+									ETextEcoreProblemType.SAME_ATTRIBUTES_IN_HIERARCHY,
+									message, eClass, quickfix);
 						} else {
-							addProblem(resource, ETextEcoreProblemType.SAME_ATTRIBUTES_IN_HIERARCHY, message, eClass);
+							addProblem(
+									resource,
+									ETextEcoreProblemType.SAME_ATTRIBUTES_IN_HIERARCHY,
+									message, eClass);
 						}
 					}
 				}
@@ -70,19 +79,19 @@ public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 	private void fillMap(EPackage epackage) {
 		List<EClassifier> classifiers = epackage.getEClassifiers();
 		for (EClassifier eClassifier : classifiers) {
-			if(eClassifier instanceof EClass){
+			if (eClassifier instanceof EClass) {
 				EClass eclass = (EClass) eClassifier;
 				List<EAttribute> attributes = eclass.getEAttributes();
 				for (EAttribute attribute : attributes) {
 					EClassifier type = attribute.getEType();
 					String name = attribute.getName();
 					Map<EClassifier, List<EClass>> typeClassMap = attributeTypeMap.get(name);
-					if(typeClassMap == null){
+					if (typeClassMap == null) {
 						typeClassMap = new LinkedHashMap<EClassifier, List<EClass>>();
 						attributeTypeMap.put(name, typeClassMap);
 					}
 					List<EClass> classes = typeClassMap.get(type);
-					if(classes == null){
+					if (classes == null) {
 						classes = new LinkedList<EClass>();
 						typeClassMap.put(type, classes);
 					}
