@@ -148,13 +148,13 @@
    <feature url="features/org.emftext.language.km3_0.5.1.v200911130906.jar" id="org.emftext.language.km3" version="0.5.1.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
+   <feature url="features/org.emftext.language.manifest_0.0.0.v0.jar" id="org.emftext.language.manifest" version="0.0.0.v0">
+      <category name="EMFText Languages"/>
+   </feature>
    <feature url="features/org.emftext.language.martinfowlerdsl_0.5.0.v200911130906.jar" id="org.emftext.language.martinfowlerdsl" version="0.5.0.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
    <feature url="features/org.emftext.language.office_0.5.0.v200911130906.jar" id="org.emftext.language.office" version="0.5.0.v200911130906">
-      <category name="EMFText Languages"/>
-   </feature>
-   <feature url="features/org.emftext.language.owl_1.1.0.v200911130906.jar" id="org.emftext.language.owl" version="1.1.0.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
    <feature url="features/org.emftext.language.quickuml_0.1.2.v200911130906.jar" id="org.emftext.language.quickuml" version="0.1.2.v200911130906">
@@ -189,9 +189,6 @@
    <feature url="features/org.emftext.language.statemachine_0.1.2.v200911130906.jar" id="org.emftext.language.statemachine" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
-   <feature url="features/org.emftext.language.sparql_0.0.0.v0.jar" id="org.emftext.language.sparql" version="0.0.0.v0">
-      <category name="EMFText Languages"/>
-   </feature>  
    <!-- TODO add tbool (once it is ready) -->
    <feature url="features/org.emftext.language.textadventure_0.1.2.v200911130906.jar" id="org.emftext.language.textadventure" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
@@ -210,6 +207,19 @@
    </feature>
    <!-- TODO add xml (?) -->
 
+	<!-- OntoMoPP Features -->
+	<feature url="features/org.emftext.language.owl_0.0.0.v0.jar" id="org.emftext.language.owl" version="0.0.0.v0">
+		<category name="OntoMoPP"/>
+	</feature>  
+	<feature url="features/org.emftext.language.owlcl_0.0.0.v0.jar" id="org.emftext.language.owlcl" version="0.0.0.v0">
+		<category name="OntoMoPP"/>
+	</feature>  
+	<feature url="features/eu.most.transformation.ecore_owl_0.0.0.v0.jar" id="eu.most.transformation.ecore_owl" version="0.0.0.v0">
+		<category name="OntoMoPP"/>
+	</feature>  
+	<feature url="features/org.emftext.language.sparql_0.0.0.v0.jar" id="org.emftext.language.sparql" version="0.0.0.v0">
+		<category name="OntoMoPP"/>
+	</feature>  
 
 	<!-- Refactory Features -->
 	<feature url="features/org.emftext.refactoring.runtime_0.0.0.v0.jar" id="org.emftext.refactoring.runtime" version="0.0.0.v0">
@@ -322,6 +332,11 @@
    <category-def name="EMFText Languages" label="EMFText Languages">
       <description>
          A set of example languages specified with EMFText.
+      </description>
+   </category-def>
+   <category-def name="OntoMoPP" label="OntoMoPP">
+      <description>
+         A set of languages that are related to ontologies.
       </description>
    </category-def>
    <category-def name="Refactory" label="Refactory">
