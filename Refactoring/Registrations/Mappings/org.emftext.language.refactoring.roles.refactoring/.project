@@ -25,10 +25,16 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.manifest.resource.manifest.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.emftext.language.refactoring.rolemapping.resource.rolemapping.nature</nature>
+		<nature>org.emftext.language.manifest.resource.manifest.nature</nature>
 	</natures>
 </projectDescription>
