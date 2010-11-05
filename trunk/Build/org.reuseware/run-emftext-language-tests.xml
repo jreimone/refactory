@@ -39,7 +39,7 @@
 	</macrodef>
 
 	<!-- TODO add run-test-java-templates -->
-	<target name="run-emftext-language-tests" depends="clean, run-simple-tests, run-overall-tests, run-test-ecore, run-test-java, run-test-custom-sandwich" />
+	<target name="run-emftext-language-tests" depends="clean, run-overall-tests, run-test-ecore, run-test-java, run-test-custom-sandwich, run-simple-tests" />
 
 	<target name="clean">
 		<delete dir="${test_result_dir}" includes="TEST-*.txt" />
@@ -151,6 +151,9 @@
 			<pathelement path="../org.emftext.language.javaproperties.test/bin"/>
 			<pathelement path="../org.emftext.language.km3/bin"/>
 			<pathelement path="../org.emftext.language.km3.resource.km3/bin"/>
+			<pathelement path="../org.emftext.language.manifest/bin"/>
+			<pathelement path="../org.emftext.language.manifest.resource.manifest/bin"/>
+			<pathelement path="../org.emftext.language.manifest.test/bin"/>
 			<pathelement path="../org.emftext.language.martinfowlerdsl/bin"/>
 			<pathelement path="../org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl/bin"/>
 			<pathelement path="../org.emftext.language.models/bin"/>
@@ -162,6 +165,8 @@
 			<pathelement path="../org.emftext.language.owl.reasoning/bin"/>
 			<pathelement path="../org.emftext.language.owl.resource.owl/bin"/>
 			<pathelement path="../org.emftext.language.owl.test/bin"/>
+			<pathelement path="../org.emftext.language.owlcl/bin"/>
+			<pathelement path="../org.emftext.language.owlcl.resource.owlcl/bin"/>
 			<pathelement path="../org.emftext.language.parametercheck/bin"/>
 			<pathelement path="../org.emftext.language.parametercheck.resource.pcheck/bin"/>
 			<pathelement path="../org.emftext.language.petrinet/bin"/>
@@ -208,6 +213,8 @@
 			<pathelement path="../org.emftext.language.sparql.resource.sparql/bin"/>
 			<pathelement path="../org.emftext.language.statemachine/bin"/>
 			<pathelement path="../org.emftext.language.statemachine.resource.statemachine/bin"/>
+			<pathelement path="../org.emftext.language.sql/bin"/>
+			<pathelement path="../org.emftext.language.sql.resource.sql/bin"/>
 			<pathelement path="../org.emftext.language.tbool/bin"/>
 			<pathelement path="../org.emftext.language.tbool.resource.tbool/bin"/>
 			<pathelement path="../org.emftext.language.tbool.test/bin"/>
@@ -348,6 +355,8 @@
 		<run-test plugin="org.emftext.language.featherweightjava" extension="fj" />
 		<run-test plugin="org.emftext.language.forms" extension="forms" />
 		<run-test plugin="org.emftext.language.javaproperties" extension="properties" />
+		<!-- TODO enable this test when bug 1586 is fixed -->
+		<!-- <run-test plugin="org.emftext.language.manifest" extension="manifest" /> -->
 		<run-test plugin="org.emftext.language.regexp" extension="regexp" />
 		<run-test plugin="org.emftext.language.simplec" extension="c" />
 		<run-test plugin="org.emftext.language.simplemath" extension="sm" />
@@ -355,6 +364,7 @@
 		<run-test plugin="org.emftext.test.bug1154" extension="bug1154" />
 		<run-test plugin="org.emftext.test.bug1233" extension="bug1233" />
 		<run-test plugin="org.emftext.test.printing" extension="printing" />
+		<run-test plugin="org.emftext.test.resolving" extension="resolving" />
 		<!-- TODO enable this test -->
 		<!-- <run-test plugin="org.emftext.language.xml" extension="xml" /> -->
 	</target>
