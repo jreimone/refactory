@@ -625,9 +625,10 @@
 		<buildfeature                                     package="org.emftext.language.owl"                 version="${owl.version}" />
 
 		<!-- OWLizer -->
-		<buildplugin  name="OWLizer"    package="eu.most.transformation.ecore_owl"    version="${owl.version}" />
-		<buildplugin  name="OWLizer UI" package="eu.most.transformation.ecore_owl.ui" version="${owl.version}" />
-		<buildfeature                   package="eu.most.transformation.ecore_owl"    version="${owl.version}" />
+		<buildplugin  name="OWLizer Ecore Adapter"  package="org.emftext.runtime.owltext"                   version="${owl.version}" />
+		<buildplugin  name="OWLizer Transformation" package="org.emftext.runtime.owltext.transformation"    version="${owl.version}" />
+		<buildplugin  name="OWLizer UI"             package="org.emftext.runtime.owltext.transformation.ui" version="${owl.version}" />
+		<buildfeature                               package="org.emftext.runtime.owltext"                   version="${owl.version}" />
 
 		<!-- OWLCL -->
 		<buildplugin  name="OWLCL Metamodel" package="org.emftext.language.owlcl"                   version="${owl.version}" />
