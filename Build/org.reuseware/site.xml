@@ -214,10 +214,10 @@
 	<feature url="features/org.emftext.language.owlcl_0.0.0.v0.jar" id="org.emftext.language.owlcl" version="0.0.0.v0">
 		<category name="OntoMoPP"/>
 	</feature>  
-	<feature url="features/eu.most.transformation.ecore_owl_0.0.0.v0.jar" id="eu.most.transformation.ecore_owl" version="0.0.0.v0">
+	<feature url="features/org.emftext.language.sparql_0.0.0.v0.jar" id="org.emftext.language.sparql" version="0.0.0.v0">
 		<category name="OntoMoPP"/>
 	</feature>  
-	<feature url="features/org.emftext.language.sparql_0.0.0.v0.jar" id="org.emftext.language.sparql" version="0.0.0.v0">
+	<feature url="features/org.emftext.runtime.owltext_0.0.0.v0.jar" id="org.emftext.runtime.owltext" version="0.0.0.v0">
 		<category name="OntoMoPP"/>
 	</feature>  
 

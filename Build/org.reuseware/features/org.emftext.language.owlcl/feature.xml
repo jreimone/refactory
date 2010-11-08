@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.emftext.language.owl"
+      id="org.emftext.language.owlcl"
       label="EMFText Syntax: OWL Constraint Language"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
@@ -35,7 +35,7 @@ of Technology, Germany
 	<import feature="org.eclipse.emf.workspace"/> 
 	<import feature="org.emftext.commons.antlr3_2_0"/>
 	<import feature="org.emftext.language.owl"/>
-	<import feature="eu.most.transformation.ecore_owl"/>
+	<import feature="org.emftext.runtime.owltext"/>
 </requires>
 
    <plugin
