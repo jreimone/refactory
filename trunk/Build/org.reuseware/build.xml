@@ -275,35 +275,35 @@
 		<buildfeature                                      package="org.emftext.access" version="${emftext.version}"/>
 		
 		<!-- EMFText SDK Feature -->
-		<buildplugin name="Dependencies: ANTLR3 SDK, ANTLR2, STRINGTEMPLATE" package="org.emftext.sdk.antlr" version="${emftext.version}"/>	
-
-		<buildplugin name="EMFText SDK"                         package="org.emftext.sdk" version="${emftext.version}"/>
+		<buildplugin name="EMFText SDK"                                            package="org.emftext.sdk" version="${emftext.version}"/>
 		<!-- TODO: this one is deprecated -->
-		<buildplugin name="EMFText SDK ANTLR Support"           package="org.emftext.sdk.antlr" version="${emftext.version}"/>	
-		<buildplugin name="EMFText SDK ANTLR 3.2.0 Support"     package="org.emftext.sdk.antlr3_2_0" version="${emftext.version}"/>	
-		<buildplugin name="EMFText SDK Automaton Support"       package="org.emftext.sdk.automaton" version="${emftext.version}"/>	
-		<buildplugin name="EMFText SDK Code Generation Infrastructure" package="org.emftext.sdk.codegen" version="${emftext.version}"/>	
-		<buildplugin name="EMFText SDK Code Generators for ANTLR Common Runtime" package="org.emftext.sdk.codegen.antlr" version="${emftext.version}"/>	
-		<buildplugin name="EMFText SDK Code Generators for New Project Wizard" package="org.emftext.sdk.codegen.newproject" version="${emftext.version}"/>	
-		<buildplugin name="EMFText SDK Code Generators for Text Resource Plug-ins" package="org.emftext.sdk.codegen.resource" version="${emftext.version}"/>	
-		<buildplugin name="EMFText SDK Code Generators for UI Plug-ins" package="org.emftext.sdk.codegen.resource.ui" version="${emftext.version}"/>	
-		<buildplugin name="EMFText Concretesyntax Metamodel"    package="org.emftext.sdk.concretesyntax" version="${emftext.version}"/>	
-		<buildplugin name="EMFText Concretesyntax Metamodel Edit Support"    package="org.emftext.sdk.concretesyntax.edit" version="${emftext.version}"/>	
-		<buildplugin name="EMFText Concretesyntax Metamodel Text Syntax"     package="org.emftext.sdk.concretesyntax.resource.cs" version="${emftext.version}"/>
-		<buildplugin name="EMFText Concretesyntax Metamodel Post Processing" package="org.emftext.sdk.concretesyntax.resource.cs.post_processing" version="${emftext.version}"/>
-		<buildplugin name="EMFText Concretesyntax Metamodel Text Syntax UI"     package="org.emftext.sdk.concretesyntax.resource.cs.ui" version="${emftext.version}"/>
-		<buildplugin name="EMFText SDK Eclipse UI"      package="org.emftext.sdk.ui" version="${emftext.version}"/>
-		<buildplugin name="EMFText SDK Ant Support"     package="org.emftext.sdk.ant" version="${emftext.version}"/>	
-		<buildplugin name="EMFText Documentation"   	package="org.emftext.doc" version="${emftext.version}"/>
+		<buildplugin name="EMFText SDK ANTLR Support"                              package="org.emftext.sdk.antlr"                                      version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK ANTLR 3.2.0 Support"                        package="org.emftext.sdk.antlr3_2_0"                                 version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Automaton Support"                          package="org.emftext.sdk.automaton"                                  version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generation Infrastructure"             package="org.emftext.sdk.codegen"                                    version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators for ANTLR Common Runtime"   package="org.emftext.sdk.codegen.antlr"                              version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators for New Project Wizard"     package="org.emftext.sdk.codegen.newproject"                         version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators for Text Resource Plug-ins" package="org.emftext.sdk.codegen.resource"                           version="${emftext.version}"/>	
+		<buildplugin name="EMFText SDK Code Generators for UI Plug-ins"            package="org.emftext.sdk.codegen.resource.ui"                        version="${emftext.version}"/>	
+		<buildplugin name="EMFText Concretesyntax Metamodel"                       package="org.emftext.sdk.concretesyntax"                             version="${emftext.version}"/>	
+		<buildplugin name="EMFText Concretesyntax Metamodel Edit Support"          package="org.emftext.sdk.concretesyntax.edit"                        version="${emftext.version}"/>	
+		<buildplugin name="EMFText Concretesyntax Metamodel Text Syntax"           package="org.emftext.sdk.concretesyntax.resource.cs"                 version="${emftext.version}"/>
+		<buildplugin name="EMFText Concretesyntax Metamodel Post Processing"       package="org.emftext.sdk.concretesyntax.resource.cs.post_processing" version="${emftext.version}"/>
+		<buildplugin name="EMFText Concretesyntax Metamodel Text Syntax UI"        package="org.emftext.sdk.concretesyntax.resource.cs.ui"              version="${emftext.version}"/>
+		<buildplugin name="EMFText SDK Eclipse UI"                                 package="org.emftext.sdk.ui"                                         version="${emftext.version}"/>
+		<buildplugin name="EMFText SDK Ant Support"                                package="org.emftext.sdk.ant"                                        version="${emftext.version}"/>	
+		<buildplugin name="EMFText Documentation"   	                           package="org.emftext.doc"                                            version="${emftext.version}"/>
 		
-		<buildfeature package="org.emftext.sdk" version="${emftext.version}"/>
+		<buildfeature                                                              package="org.emftext.sdk"                                            version="${emftext.version}"/>
 		
 		<zip basedir="dist" destfile="dist/emftext-${emftext.version}.v${DSTAMP}${TSTAMP}.zip"
 			includes="COPYING, 
-	                 plugins/org.emftext.sdk*, 
-                     features/org.emftext.sdk*,
-			         plugins/org.emftext.access*, 
-		             features/org.emftext.access*"/>
+            		plugins/org.emftext.doc*, 
+            		features/org.emftext.doc*,
+            		plugins/org.emftext.sdk*, 
+            		features/org.emftext.sdk*,
+					plugins/org.emftext.access*, 
+					features/org.emftext.access*"/>
 	</target>
 
 	<target name="build-emftext-language-components">
