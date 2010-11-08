@@ -355,8 +355,7 @@
 		<run-test plugin="org.emftext.language.featherweightjava" extension="fj" />
 		<run-test plugin="org.emftext.language.forms" extension="forms" />
 		<run-test plugin="org.emftext.language.javaproperties" extension="properties" />
-		<!-- TODO enable this test when bug 1586 is fixed -->
-		<!-- <run-test plugin="org.emftext.language.manifest" extension="manifest" /> -->
+		<run-test plugin="org.emftext.language.manifest" extension="manifest" />
 		<run-test plugin="org.emftext.language.regexp" extension="regexp" />
 		<run-test plugin="org.emftext.language.simplec" extension="c" />
 		<run-test plugin="org.emftext.language.simplemath" extension="sm" />
