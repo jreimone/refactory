@@ -248,6 +248,9 @@
 			<pathelement path="../org.emftext.language.xml/bin"/>
 			<pathelement path="../org.emftext.language.xml.resource.xml/bin"/>
 			<pathelement path="../org.emftext.language.xml.test/bin"/>
+			<pathelement path="../org.emftext.runtime.owltext/bin"/>
+			<pathelement path="../org.emftext.runtime.owltext.transformation/bin"/>
+			<pathelement path="../org.emftext.runtime.owltext.transformation.ui/bin"/>
 			<pathelement path="../org.emftext.sdk/bin" />
 			<pathelement path="../org.emftext.sdk.ant/bin" />
 			<pathelement path="../org.emftext.sdk.antlr3_2_0/bin" />
