@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="eu.most.transformation.ecore_owl"
-      label="OWLizer"
+      id="org.emftext.runtime.owltext"
+      label="OWLizer Runtime"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
@@ -38,14 +38,21 @@ of Technology, Germany
 </requires>
 
    <plugin
-         id="eu.most.transformation.ecore_owl"
+         id="org.emftext.runtime.owltext"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="eu.most.transformation.ecore_owl.ui"
+         id="org.emftext.runtime.owltext.transformation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.runtime.owltext.transformation.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
