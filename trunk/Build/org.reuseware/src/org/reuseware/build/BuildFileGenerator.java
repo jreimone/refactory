@@ -285,8 +285,8 @@ public class BuildFileGenerator {
 				"org.emftext.language.javaproperties.resource.javaproperties", "javaproperties", 
 				false),
 			new Language(
-				"org.emftext.language.manifest", "mf",
-				"org.emftext.language.manifest.resource.manifest", "mf", 
+				"org.emftext.language.manifest", "manifest",
+				"org.emftext.language.manifest.resource.manifest", "manifest", 
 				false),
 			new Language(
 				"org.emftext.language.parametercheck", "parametercheck",
