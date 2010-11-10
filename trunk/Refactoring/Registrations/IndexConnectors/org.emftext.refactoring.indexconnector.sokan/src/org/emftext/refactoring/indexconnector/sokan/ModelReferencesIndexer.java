@@ -18,6 +18,7 @@ import org.reuseware.sokan.ID;
 import org.reuseware.sokan.IndexMetaData;
 import org.reuseware.sokan.index.DependencyMap;
 import org.reuseware.sokan.index.indexer.Indexer;
+import org.reuseware.sokan.index.util.ResourceUtil;
 
 public class ModelReferencesIndexer implements Indexer {
 
@@ -61,11 +62,12 @@ public class ModelReferencesIndexer implements Indexer {
 			Resource resource = referer.eResource();
 			if(resource != null){
 				URI uri = resource.getURI();
+				String idString = ResourceUtil.idString(ResourceUtil.idFrom(uri));
 				//			if(uri.isPlatformResource()){
-				uri = resourceSet.getURIConverter().normalize(uri);
-				String platformString = uri.toPlatformString(true);
-				if(platformString != null){
-					referers.add(platformString);
+				//uri = resourceSet.getURIConverter().normalize(uri);
+				//String platformString = uri.toPlatformString(true);
+				if(idString != null){
+					referers.add(idString);
 				}
 			}
 			//			}
