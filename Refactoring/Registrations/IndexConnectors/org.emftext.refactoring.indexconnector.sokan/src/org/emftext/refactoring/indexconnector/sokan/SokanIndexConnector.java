@@ -50,7 +50,7 @@ public class SokanIndexConnector implements IndexConnector {
 		IndexMetaData metaData = row.getMetaData();
 		List<String> refererStrings = metaData.getMulti(InverseModelReferencesIndexer.KEY_INVERSE_REFERENCED_RESOURCES);
 		for (String string : refererStrings) {
-			URI refererUri = ResourceUtil.uriFrom(string);
+			URI refererUri = ResourceUtil.uriFrom(ResourceUtil.idFrom(string));
 			resourceSet.getResource(refererUri, true);
 		}
 		// EcoreUtil.resolveAll(resourceSet);

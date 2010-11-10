@@ -22,15 +22,15 @@ public class InverseModelReferencesIndexer implements Indexer {
 	}
 
 	public void createIndex(URI artifactURI, IndexMetaData metaData, ResourceSet resourceSet) {
-		String platformString = artifactURI.toPlatformString(true);
+		String idString = ResourceUtil.idString(ResourceUtil.idFrom(artifactURI));
 		List<IndexRow> index = IndexUtil.INSTANCE.getIndex();
 		for (IndexRow indexRow : index) {
 			IndexMetaData rowMetaData = indexRow.getMetaData();
 			List<String> values = rowMetaData.getMulti(ModelReferencesIndexer.KEY_REFERENCED_RESOURCES);
 			if(values != null){
 				for (String value : values) {
-					if(platformString.equals(value)){
-						String inverseReference = ResourceUtil.uriFrom(indexRow.getArtifactID()).toPlatformString(true);
+					if(idString.equals(value)){
+						String inverseReference = ResourceUtil.idString(indexRow.getArtifactID());
 						metaData.addMultiple(KEY_INVERSE_REFERENCED_RESOURCES, inverseReference);
 //						System.out.println("set inverse reference in " + platformString + " for " + inverseReference);
 					}
