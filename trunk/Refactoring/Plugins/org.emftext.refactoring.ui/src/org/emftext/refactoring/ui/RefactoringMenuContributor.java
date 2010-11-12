@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.action.Action;
@@ -83,17 +84,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			EObject first = selectedElements.get(0);
 			EcoreUtil.resolveAll(first);
 			Resource resource = first.eResource();
-			if (resource == null || (resource.getErrors() != null && resource.getErrors().size() > 0)) {
-//				System.out.println("resource is null or contains the following errors:");
-//				List<Resource.Diagnostic> errors = resource.getErrors();
-//				for (Resource.Diagnostic diagnostic : errors) {
-//					System.out.println(diagnostic.getMessage());
-//				}
+			if (resource == null) {
 				return;
 			}
-//			for (EObject eObject : selectedElements) {
-//				System.out.println("Selected: " + eObject);
-//			}
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, CONTEXT_MENU_ENTRY_ID);
 
 			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
