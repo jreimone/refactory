@@ -25,15 +25,8 @@ public class ModelReferencesIndexer implements Indexer {
 	protected static final String INDEXER_ID = "org.emftext.refactoring.indexer.references";
 	protected static final String KEY_REFERENCED_RESOURCES	= "REFERENCED_RESOURCES";
 
-	private ResourceSet resourceSet;
-
-
-	public ModelReferencesIndexer() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public void createIndex(URI artifactURI, IndexMetaData metaData, ResourceSet resourceSet) {
-		this.resourceSet = resourceSet;
 		Resource resource = null;
 		try {
 			resource = resourceSet.getResource(artifactURI, true);	
@@ -58,19 +51,14 @@ public class ModelReferencesIndexer implements Indexer {
 		Set<String> referers = new LinkedHashSet<String>();
 		Map<EObject, Collection<Setting>> references = EcoreUtil.ExternalCrossReferencer.find(referee);
 		for (EObject referer : references.keySet()) {
-			//			String identification = EcoreUtil.getIdentification(referer);
 			Resource resource = referer.eResource();
 			if(resource != null){
 				URI uri = resource.getURI();
 				String idString = ResourceUtil.idString(ResourceUtil.idFrom(uri));
-				//			if(uri.isPlatformResource()){
-				//uri = resourceSet.getURIConverter().normalize(uri);
-				//String platformString = uri.toPlatformString(true);
 				if(idString != null){
 					referers.add(idString);
 				}
 			}
-			//			}
 		}
 		return Arrays.asList(referers.toArray(new String[0]));
 	}
