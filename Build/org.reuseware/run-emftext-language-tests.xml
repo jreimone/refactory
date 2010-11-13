@@ -463,6 +463,7 @@
 			<batchtest todir="${test_result_dir}">
 				<fileset dir="../org.emftext.language.java.test/src">
 					<include name="**/**Test.java"/>
+					<exclude name="org/emftext/language/java/test/bugs/AbstractTest.java" />
 					<!-- TODO remove these exclusions -->
 					<exclude name="org/emftext/language/java/test/AutomatedJavaLanguageFeatureTest.java" />
 					<exclude name="org/emftext/language/java/test/JavaLanguageFeatureTest.java" />
