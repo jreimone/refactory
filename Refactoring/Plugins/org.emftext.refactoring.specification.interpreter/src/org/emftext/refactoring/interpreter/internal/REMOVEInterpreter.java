@@ -30,8 +30,8 @@ import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
@@ -103,7 +103,8 @@ public class REMOVEInterpreter {
 	private List<EObject> interpreteEMPTY(List<EObject> removals) {
 		List<EObject> emptyRemovals = new LinkedList<EObject>();
 		for (EObject removal : removals) {
-			TreeIterator<Object> iterator = EcoreUtil.getAllContents(removal, true);
+			TreeIterator<Object> iterator = EcoreUtil.getAllContents(removal,
+					true);
 			boolean empty = true;
 			if (iterator.hasNext()) {
 				empty = false;
@@ -156,7 +157,8 @@ public class REMOVEInterpreter {
 					crossReferencer = getCrossReferencer(EcoreUtil.getRootContainer(removal));
 				}
 				if (crossReferencer != null) {
-					Collection<Setting> references = crossReferencer.getNonNavigableInverseReferences(removal, true);
+					Collection<Setting> references = crossReferencer.getNonNavigableInverseReferences(
+							removal, true);
 					boolean onlyContainerReference = true;
 					for (Setting setting : references) {
 						EObject container = removal.eContainer();
@@ -164,7 +166,9 @@ public class REMOVEInterpreter {
 						EObject referer = setting.getEObject();
 						EStructuralFeature feature = setting.getEStructuralFeature();
 						if (!(container.equals(referer) && containingFeature.equals(feature))) {
-							RegistryUtil.log(referer + " referes to " + removal, IStatus.INFO);
+							RegistryUtil.log(
+									referer + " referes to " + removal,
+									IStatus.INFO);
 							onlyContainerReference = false;
 							break;
 						}
@@ -244,14 +248,18 @@ public class REMOVEInterpreter {
 			Object resolvedContext = resolveInterpretationContext(interpretationContext);
 			if (interpretationContext instanceof Role) {
 				if (resolvedContext instanceof EObject) {
-					List<EObject> containedElements = collectRemovals(collaboration, (Role) interpretationContext, (EObject) resolvedContext);
+					List<EObject> containedElements = collectRemovals(
+							collaboration, (Role) interpretationContext,
+							(EObject) resolvedContext);
 					if (containedElements != null) {
 						removals.addAll(containedElements);
 					}
 				} else if (resolvedContext instanceof List<?>) {
 					List<EObject> objects = (List<EObject>) resolvedContext;
 					for (EObject eObject : objects) {
-						List<EObject> containedElements = collectRemovals(collaboration, (Role) interpretationContext, eObject);
+						List<EObject> containedElements = collectRemovals(
+								collaboration, (Role) interpretationContext,
+								eObject);
 						if (containedElements != null) {
 							removals.addAll(containedElements);
 						}
@@ -300,7 +308,8 @@ public class REMOVEInterpreter {
 				} else if (children instanceof List<?>) {
 					containments.addAll((List<EObject>) children);
 				}
-				return RoleUtil.filterObjectsByRoles(containments, mapping, filter);
+				return RoleUtil.filterObjectsByRoles(containments, mapping,
+						filter);
 			} else {
 				List<ReferenceMetaClassPair> reducedPairs = new LinkedList<ReferenceMetaClassPair>();
 				for (int i = 1; i < pairs.size(); i++) {
@@ -309,12 +318,14 @@ public class REMOVEInterpreter {
 				ReferenceMetaClassPair pair = pairs.get(0);
 				Object newRoot = root.eGet(pair.getReference());
 				if (newRoot instanceof EObject) {
-					return referencesForEObject((EObject) newRoot, reducedPairs, filter);
+					return referencesForEObject((EObject) newRoot,
+							reducedPairs, filter);
 				} else if (newRoot instanceof List<?>) {
 					List<EObject> newRoots = (List<EObject>) newRoot;
 					List<EObject> objectCollection = new LinkedList<EObject>();
 					for (EObject eObject : newRoots) {
-						objectCollection.addAll(referencesForEObject(eObject, reducedPairs, filter));
+						objectCollection.addAll(referencesForEObject(eObject,
+								reducedPairs, filter));
 					}
 					return objectCollection;
 //					throw new UnsupportedOperationException(
@@ -331,7 +342,8 @@ public class REMOVEInterpreter {
 		} else if (interpretationContext instanceof Role) {
 			Role role = (Role) interpretationContext;
 			if (role.getModifier().contains(RoleModifier.INPUT)) {
-				List<EObject> filteredSelection = RoleUtil.filterObjectsByRoles(selection, mapping, role);
+				List<EObject> filteredSelection = RoleUtil.filterObjectsByRoles(
+						selection, mapping, role);
 				assignedRole = role;
 				runtimeValue = filteredSelection;
 				return filteredSelection;
