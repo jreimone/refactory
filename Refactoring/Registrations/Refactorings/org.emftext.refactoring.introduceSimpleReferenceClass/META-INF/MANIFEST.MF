@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: IntroduceSimpleReferenceClass
+Bundle-SymbolicName: org.emftext.refactoring.introduceSimpleReferenceClass;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Jan Reimann
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.emftext.refactoring.registry.rolemodel,
+ org.emftext.refactoring.registry.refactoringspecification
