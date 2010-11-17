@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingResourcePostProcessor;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingResourcePostProcessorProvider;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.RolemappingEProblemType;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingProblem;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResource;
 
@@ -41,7 +42,7 @@ public abstract class AbstractPostProcessor implements
 	}
 
 	protected void addProblem(RolemappingResource resource, ERoleMappingModelProblemType problemType, String message, EObject cause){
-		resource.addProblem(new RolemappingProblem(message, problemType.getProblemType()), cause);
+		resource.addProblem(new RolemappingProblem(message, RolemappingEProblemType.ANALYSIS_PROBLEM, problemType.getProblemSeverity()), cause);
 	}
 	
 	public abstract void analyse(RolemappingResource resource, RoleMappingModel model);
