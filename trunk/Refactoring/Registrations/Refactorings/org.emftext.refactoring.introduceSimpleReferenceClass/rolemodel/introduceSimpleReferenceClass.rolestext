@@ -1,0 +1,13 @@
+RoleModel IntroduceSimpleReferenceClass {
+	 ROLE DerivationContainer;
+ ROLE Derivation;
+input super
+ ROLE Derivee;
+
+
+ DerivationContainer  [1..1] <>- Derivation derivation [0..*];
+ Derivation  [1..1] -- Derivee derivees [0..*];
+	
+
+
+}
