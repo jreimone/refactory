@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
+import org.emftext.language.refactoring.refactoring_specification.Constants;
+import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
 import org.emftext.language.refactoring.refactoring_specification.DISTINCT;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.Modifier;
@@ -22,8 +24,8 @@ import org.emftext.language.refactoring.refactoring_specification.VariableAssign
 import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
@@ -42,7 +44,7 @@ public class MOVEInterpreter {
 	private RoleMapping mapping;
 	private List<? extends EObject> selection;
 	private IRefactoringInterpreter interpreter;
-	
+
 	public MOVEInterpreter(RoleMapping mapping, IRefactoringInterpreter interpreter) {
 		super();
 		this.mapping = mapping;
@@ -54,50 +56,73 @@ public class MOVEInterpreter {
 		SourceContext sourceContext = object.getSource();
 		Role sourceRole = null;
 		List<? extends EObject> sourceObjects = null;
-		if(sourceContext instanceof CollaborationReference){
+		if (sourceContext instanceof CollaborationReference) {
 			MultiplicityCollaboration collaboration = ((CollaborationReference) sourceContext).getCollaboration();
 			sourceRole = collaboration.getTarget();
-			if(sourceRole.getModifier().contains(RoleModifier.INPUT)){
+			if (sourceRole.getModifier().contains(RoleModifier.INPUT)) {
 				sourceObjects = selection;
+			}
+		} else if (sourceContext instanceof ConstantsReference) {
+			if (((ConstantsReference) sourceContext).getReferencedConstant() == Constants.INPUT) {
+				sourceObjects = selection;
+			} else {
+				throw new UnsupportedOperationException("implement me");
 			}
 		} else {
 			throw new UnsupportedOperationException("implement me");
 		}
-		sourceObjects = handleMoveModifier(sourceObjects, object.getMoveModifier());
-		
+		sourceObjects = handleMoveModifier(sourceObjects,
+				object.getMoveModifier());
+
 		TargetContext targetContext = object.getTarget();
 		Role targetRole = null;
 		EObject targetObject = null;
 		EObject instruction = null;
-		if(targetContext instanceof VariableReference){
+		if (targetContext instanceof VariableReference) {
 			Variable variable = ((VariableReference) targetContext).getVariable();
 			VariableDeclarationCommand command = variable.getContainerCommand();
-			if(command instanceof VariableAssignment){
+			if (command instanceof VariableAssignment) {
 				instruction = ((VariableAssignment) command).getAssignment();
 			}
 			targetObject = (EObject) context.getObjectForVariable(variable);
 			targetRole = RoleUtil.getRoleFromVariable(variable);
+		} else if (targetContext instanceof CollaborationReference) {
+			CollaborationReference reference = (CollaborationReference) targetContext;
+			MultiplicityCollaboration collaboration = reference.getCollaboration();
+			targetRole = collaboration.getTarget();
+
+//			
+//			@SuppressWarnings("unchecked")
+//			IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(object);
+//			if (valueProvider == null) {
+//				EClass clazz = mapping.getEClassForRole(targetRole);
+//				valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
+//				interpreter.registerValueProviderForCommand(object,
+//						valueProvider);
+//			}
 		}
-		CollaborationMapping collaborationMapping = mapping.getConcreteMappingForRole(targetRole).getCollaborationMappingForTargetRole(sourceRole);
+		CollaborationMapping collaborationMapping = mapping.getConcreteMappingForRole(
+				targetRole).getCollaborationMappingForTargetRole(sourceRole);
 		List<ReferenceMetaClassPair> referencePairs = collaborationMapping.getReferenceMetaClassPair();
 		Integer index = context.getIndexForVariable(object.getIndex());
 		AbstractPathCreator pathCreator = new MovePathCreator();
 		IValueProvider<?, ?> valueProvider = interpreter.getValueProviderForCommand(instruction);
-		if(valueProvider != null){
+		if (valueProvider != null) {
 			valueProvider.setFakePropagationContext(pathCreator);
 		}
-		return pathCreator.createPath(targetObject, referencePairs, sourceObjects, index);
+		return pathCreator.createPath(targetObject, referencePairs,
+				sourceObjects, index);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	private List<EObject> handleMoveModifier(List<? extends EObject> sourceObjects, Modifier modifier){
-		if(modifier instanceof DISTINCT){
+	private List<EObject> handleMoveModifier(List<? extends EObject> sourceObjects, Modifier modifier) {
+		if (modifier instanceof DISTINCT) {
 			Set<EObject> originals = new LinkedHashSet<EObject>();
 			Set<EObject> copyList = new LinkedHashSet<EObject>();
 			for (EObject object : sourceObjects) {
 				List<EObject> others = new LinkedList<EObject>();
 				for (EObject otherObject : sourceObjects) {
-					if(!otherObject.equals(object)){
+					if (!otherObject.equals(object)) {
 						others.add(otherObject);
 					}
 				}
@@ -106,15 +131,15 @@ public class MOVEInterpreter {
 				for (EObject otherObject : others) {
 					EObject copiedOther = copier.copy(otherObject);
 					copier.copyReferences();
-					if(!copyList.contains(object) 
-							&& EcoreUtil.equals(copiedObject, copiedOther)){
+					if (!copyList.contains(object)
+							&& EcoreUtil.equals(copiedObject, copiedOther)) {
 						originals.add(object);
 						copyList.add(otherObject);
 					}
 				}
 			}
 			for (EObject eObject : sourceObjects) {
-				if(!originals.contains(eObject) && !copyList.contains(eObject)){
+				if (!originals.contains(eObject) && !copyList.contains(eObject)) {
 					originals.add(eObject);
 				}
 			}
