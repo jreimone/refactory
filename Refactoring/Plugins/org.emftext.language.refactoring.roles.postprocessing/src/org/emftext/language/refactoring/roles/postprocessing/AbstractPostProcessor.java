@@ -9,6 +9,7 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.resource.rolestext.IRolestextQuickFix;
 import org.emftext.language.refactoring.roles.resource.rolestext.IRolestextResourcePostProcessor;
 import org.emftext.language.refactoring.roles.resource.rolestext.IRolestextResourcePostProcessorProvider;
+import org.emftext.language.refactoring.roles.resource.rolestext.RolestextEProblemType;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextProblem;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResource;
 
@@ -40,11 +41,11 @@ public abstract class AbstractPostProcessor implements IRolestextResourcePostPro
 	}
 
 	protected void addProblem(RolestextResource resource, ERoleModelProblemType problemType, String message, EObject cause){
-		resource.addProblem(new RolestextProblem(message, problemType.getProblemType()), cause);
+		resource.addProblem(new RolestextProblem(message, RolestextEProblemType.ANALYSIS_PROBLEM, problemType.getProblemSeverity()), cause);
 	}
 	
 	protected void addProblem(RolestextResource resource, ERoleModelProblemType problemType, String message, EObject cause, IRolestextQuickFix quickfix){
-		resource.addProblem(new RolestextProblem(message, problemType.getProblemType(), quickfix), cause);
+		resource.addProblem(new RolestextProblem(message, RolestextEProblemType.ANALYSIS_PROBLEM, problemType.getProblemSeverity(), quickfix), cause);
 	}
 	
 	public abstract void analyse(RolestextResource resource, RoleModel model);

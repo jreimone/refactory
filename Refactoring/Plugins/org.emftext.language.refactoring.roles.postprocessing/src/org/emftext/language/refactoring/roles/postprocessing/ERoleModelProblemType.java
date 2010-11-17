@@ -3,7 +3,7 @@
  */
 package org.emftext.language.refactoring.roles.postprocessing;
 
-import org.emftext.language.refactoring.roles.resource.rolestext.RolestextEProblemType;
+import org.emftext.language.refactoring.roles.resource.rolestext.RolestextEProblemSeverity;
 import org.emftext.language.refactoring.roles.resource.rolestext.util.RolestextStringUtil;
 
 /**
@@ -14,23 +14,23 @@ import org.emftext.language.refactoring.roles.resource.rolestext.util.RolestextS
  */
 public enum ERoleModelProblemType {
 	
-	ROLE_MODIFIER_ALREADY_SET(RolestextEProblemType.ERROR),
-	RELATION_MODIFIER_ALREADY_SET(RolestextEProblemType.ERROR),
-	INPUT_ROLE_NOT_SET(RolestextEProblemType.ERROR),
-	DUPLICATE_OUTGOING_RELATION_TARGET_NAMES(RolestextEProblemType.ERROR),
-	EMPTY_OUTGOING_RELATION_TARGET_NAME(RolestextEProblemType.WARNING),
-	DUPLICATE_ROLE_NAMES(RolestextEProblemType.WARNING)
+	ROLE_MODIFIER_ALREADY_SET(RolestextEProblemSeverity.ERROR),
+	RELATION_MODIFIER_ALREADY_SET(RolestextEProblemSeverity.ERROR),
+	INPUT_ROLE_NOT_SET(RolestextEProblemSeverity.ERROR),
+	DUPLICATE_OUTGOING_RELATION_TARGET_NAMES(RolestextEProblemSeverity.ERROR),
+	EMPTY_OUTGOING_RELATION_TARGET_NAME(RolestextEProblemSeverity.WARNING),
+	DUPLICATE_ROLE_NAMES(RolestextEProblemSeverity.WARNING)
 	;
 	
 	
-	private RolestextEProblemType problemType;
+	private RolestextEProblemSeverity problemSeverity;
 	
-	private ERoleModelProblemType(RolestextEProblemType problemType){
-		this.problemType = problemType;
+	private ERoleModelProblemType(RolestextEProblemSeverity problemSeverity){
+		this.problemSeverity = problemSeverity;
 	}
 	
-	public RolestextEProblemType getProblemType(){
-		return problemType;
+	public RolestextEProblemSeverity getProblemSeverity(){
+		return problemSeverity;
 	}
 	
 	public String getName(){
