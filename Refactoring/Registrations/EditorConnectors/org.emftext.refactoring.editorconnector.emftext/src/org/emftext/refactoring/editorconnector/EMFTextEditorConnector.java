@@ -18,7 +18,6 @@ import org.emftext.access.EMFTextAccessProxy;
 import org.emftext.access.resource.IEditor;
 import org.emftext.access.resource.ILocationMap;
 import org.emftext.access.resource.IResource;
-import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.osgi.framework.Version;
 
 public class EMFTextEditorConnector implements IEditorConnector {
@@ -35,11 +34,12 @@ public class EMFTextEditorConnector implements IEditorConnector {
 		this.editor = editor;
 		Version emftextVersion = EMFTextAccessPlugin.getDefault().getBundle().getVersion();
 		Version minVersion = new Version(MIN_VERSION);
-		if(emftextVersion.compareTo(minVersion) < 0){
+		if (emftextVersion.compareTo(minVersion) < 0) {
 			try {
-				IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
+				IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(
+						editor, IEditor.class);
 				IResource emftextResource = emftextEditor.getResource();
-				if(emftextResource != null){
+				if (emftextResource != null) {
 					return true;
 				}
 				return false;
@@ -48,32 +48,36 @@ public class EMFTextEditorConnector implements IEditorConnector {
 				return false;
 			}
 		} else {
-			return EMFTextAccessProxy.isAccessibleWith(editor.getClass(), IEditor.class);
+			return EMFTextAccessProxy.isAccessibleWith(editor.getClass(),
+					IEditor.class);
 		}
 	}
 
 	public List<EObject> handleSelection(ISelection selection) {
-		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
+		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor,
+				IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
 		ILocationMap locationMap = emftextResource.getLocationMap();
+		//TODO: fix bug 1600
 		ITextSelection textSelection = (ITextSelection) selection;
 		int startOffset = textSelection.getOffset();
 		int endOffset = startOffset + textSelection.getLength();
 		List<EObject> selectedElements = new LinkedList<EObject>();
 		List<EObject> noReferencesList = new ArrayList<EObject>();
-		if(startOffset == endOffset){
+		if (startOffset == endOffset) {
 			selectedElements = locationMap.getElementsAt(startOffset);
 			EObject nearestObject = selectedElements.get(0);
-			if(!nearestObject.eIsProxy()){
+			if (!nearestObject.eIsProxy()) {
 				noReferencesList.add(nearestObject);
 			}
 		} else {
-			selectedElements = locationMap.getElementsBetween(startOffset, endOffset);
+			selectedElements = locationMap.getElementsBetween(startOffset,
+					endOffset);
 			for (EObject object : selectedElements) {
 				EcoreUtil.resolveAll(object);
 				int start = locationMap.getCharStart(object);
 				int end = locationMap.getCharEnd(object);
-				if((start >= startOffset && end <= endOffset) && !object.eIsProxy()){
+				if ((start >= startOffset && end <= endOffset) && !object.eIsProxy()) {
 					noReferencesList.add(object);
 				}
 			}
@@ -87,17 +91,19 @@ public class EMFTextEditorConnector implements IEditorConnector {
 
 	public void selectEObjects(List<EObject> objectsToSelect) {
 		try {
-			IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
+			IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor,
+					IEditor.class);
 			IResource emftextResource = emftextEditor.getResource();
 			ILocationMap locationMap = emftextResource.getLocationMap();
-			if(objectsToSelect.size() > 0){
+			if (objectsToSelect.size() > 0) {
 				EObject eObject = objectsToSelect.get(0);
 				int start = locationMap.getCharStart(eObject);
 				int end = locationMap.getCharEnd(eObject);
 				((ITextEditor) editor).selectAndReveal(start, end - start + 1);
 			} else {
 				int startOffset = ((ITextSelection) ((ITextEditor) editor).getSelectionProvider().getSelection()).getOffset();
-				EObject nearestObject = locationMap.getElementsAt(startOffset).get(0);
+				EObject nearestObject = locationMap.getElementsAt(startOffset).get(
+						0);
 				startOffset = locationMap.getCharStart(nearestObject);
 				int endOffset = locationMap.getCharEnd(nearestObject);
 				int length = endOffset - startOffset + 1;
