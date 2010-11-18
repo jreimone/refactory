@@ -58,7 +58,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 				IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
 		ILocationMap locationMap = emftextResource.getLocationMap();
-		//TODO: fix bug 1600
+		//TODO: fix bug 1600 produced on Jendrik's Mac
 		ITextSelection textSelection = (ITextSelection) selection;
 		int startOffset = textSelection.getOffset();
 		int endOffset = startOffset + textSelection.getLength();
