@@ -11,3 +11,5 @@ Require-Bundle: org.emftext.refactoring.registry.rolemapping,
  org.eclipse.core.runtime,
  org.emftext.language.refactoring.rolemapping,
  org.emftext.refactoring.specification.interpreter
+
+
