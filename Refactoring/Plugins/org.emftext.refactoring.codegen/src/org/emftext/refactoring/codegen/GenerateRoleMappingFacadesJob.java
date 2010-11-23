@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -236,8 +237,7 @@ public class GenerateRoleMappingFacadesJob extends Job {
 				manifestFile.appendContents(stream, true, true, monitor);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
-			catch (CoreException e) {
+			} catch (CoreException e) {
 				e.printStackTrace();
 			}
 		}
@@ -252,9 +252,13 @@ public class GenerateRoleMappingFacadesJob extends Job {
 		List<Export> exports = exportPackage.getExport();
 		boolean contained = false;
 		for (Export export : exports) {
-			if (export.getPackageName().equals(fragment.getElementName())) {
-				contained = true;
-				break;
+			EList<PackageName> packageNames = export.getPackageName();
+			for (PackageName packageName : packageNames) {
+				String realPackageName = packageName.getId();
+				if (realPackageName.equals(fragment.getElementName())) {
+					contained = true;
+					break;
+				}
 			}
 		}
 		if (!contained) {
