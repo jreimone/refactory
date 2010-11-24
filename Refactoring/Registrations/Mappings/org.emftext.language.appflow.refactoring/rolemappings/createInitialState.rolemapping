@@ -1,4 +1,4 @@
-ROLEMODELMAPPING FOR <http://www.emftext.org/language/egui>
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/appflow>
 
 "Create Initial State" maps <IntroduceSimpleReferenceClass> { 
 	
