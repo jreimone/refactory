@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.ecore.resource.text.ITextEcoreQuickFix;
 import org.emftext.language.ecore.resource.text.ITextEcoreResourcePostProcessor;
 import org.emftext.language.ecore.resource.text.ITextEcoreResourcePostProcessorProvider;
+import org.emftext.language.ecore.resource.text.TextEcoreEProblemSeverity;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreProblem;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResource;
 
@@ -28,11 +29,11 @@ public abstract class AbstractPostProcessor implements
 	}
 	
 	protected void addProblem(TextEcoreResource resource, ETextEcoreProblemType problemType, String message, EObject cause){
-		resource.addProblem(new TextEcoreProblem(message, problemType.getProblemType()), cause);
+		resource.addProblem(new TextEcoreProblem(message, problemType.getProblemType(), TextEcoreEProblemSeverity.WARNING), cause);
 	}
 	
 	protected void addProblem(TextEcoreResource resource, ETextEcoreProblemType problemType, String message, EObject cause, ITextEcoreQuickFix quickFix){
-		resource.addProblem(new TextEcoreProblem(message, problemType.getProblemType(), quickFix), cause);
+		resource.addProblem(new TextEcoreProblem(message, problemType.getProblemType(), TextEcoreEProblemSeverity.WARNING, quickFix), cause);
 	}
 	
 	public abstract void analyse(TextEcoreResource resource, EPackage epackage);
