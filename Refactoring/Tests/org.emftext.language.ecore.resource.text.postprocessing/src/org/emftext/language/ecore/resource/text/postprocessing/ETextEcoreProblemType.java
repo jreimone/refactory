@@ -5,7 +5,7 @@ import org.emftext.language.ecore.resource.text.util.TextEcoreStringUtil;
 
 public enum ETextEcoreProblemType {
 	
-	SAME_ATTRIBUTES_IN_HIERARCHY(TextEcoreEProblemType.WARNING)
+	SAME_ATTRIBUTES_IN_HIERARCHY(TextEcoreEProblemType.ANALYSIS_PROBLEM)
 	;
 
 	
