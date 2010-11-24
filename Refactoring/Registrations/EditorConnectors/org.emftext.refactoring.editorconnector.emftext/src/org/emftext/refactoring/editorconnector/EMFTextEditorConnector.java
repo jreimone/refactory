@@ -27,7 +27,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 	private IEditorPart editor;
 
 	public EMFTextEditorConnector() {
-		// empty
+		// empty dffff
 	}
 
 	public boolean canHandle(IEditorPart editor) {
