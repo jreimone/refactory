@@ -75,13 +75,13 @@ public class RolesDiagramEditorUtil {
 	public static boolean openDiagram(Resource diagram)
 			throws PartInitException {
 		String path = diagram.getURI().toPlatformString(true);
-		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot()
-				.findMember(new Path(path));
+		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot().findMember(
+				new Path(path));
 		if (workspaceResource instanceof IFile) {
-			IWorkbenchPage page = PlatformUI.getWorkbench()
-					.getActiveWorkbenchWindow().getActivePage();
-			return null != page.openEditor(new FileEditorInput(
-					(IFile) workspaceResource), RolesDiagramEditor.ID);
+			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			return null != page.openEditor(
+					new FileEditorInput((IFile) workspaceResource),
+					RolesDiagramEditor.ID);
 		}
 		return false;
 	}
@@ -135,13 +135,10 @@ public class RolesDiagramEditorUtil {
 	 * @generated
 	 */
 	public static void runWizard(Shell shell, Wizard wizard, String settingsKey) {
-		IDialogSettings pluginDialogSettings = RolesDiagramEditorPlugin
-				.getInstance().getDialogSettings();
-		IDialogSettings wizardDialogSettings = pluginDialogSettings
-				.getSection(settingsKey);
+		IDialogSettings pluginDialogSettings = RolesDiagramEditorPlugin.getInstance().getDialogSettings();
+		IDialogSettings wizardDialogSettings = pluginDialogSettings.getSection(settingsKey);
 		if (wizardDialogSettings == null) {
-			wizardDialogSettings = pluginDialogSettings
-					.addNewSection(settingsKey);
+			wizardDialogSettings = pluginDialogSettings.addNewSection(settingsKey);
 		}
 		wizard.setDialogSettings(wizardDialogSettings);
 		WizardDialog dialog = new WizardDialog(shell, wizard);
@@ -157,26 +154,25 @@ public class RolesDiagramEditorUtil {
 	 */
 	public static Resource createDiagram(URI diagramURI, URI modelURI,
 			IProgressMonitor progressMonitor) {
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
-				.createEditingDomain();
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		progressMonitor.beginTask(
 				Messages.RolesDiagramEditorUtil_CreateDiagramProgressTask, 3);
-		final Resource diagramResource = editingDomain.getResourceSet()
-				.createResource(diagramURI);
-		final Resource modelResource = editingDomain.getResourceSet()
-				.createResource(modelURI);
+		final Resource diagramResource = editingDomain.getResourceSet().createResource(
+				diagramURI);
+		final Resource modelResource = editingDomain.getResourceSet().createResource(
+				modelURI);
 		final String diagramName = diagramURI.lastSegment();
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
 				editingDomain,
 				Messages.RolesDiagramEditorUtil_CreateDiagramCommandLabel,
 				Collections.EMPTY_LIST) {
-			protected CommandResult doExecuteWithResult(
-					IProgressMonitor monitor, IAdaptable info)
-					throws ExecutionException {
+
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 				RoleModel model = createInitialModel();
 				attachModelToResource(model, modelResource);
 
-				Diagram diagram = ViewService.createDiagram(model,
+				Diagram diagram = ViewService.createDiagram(
+						model,
 						RoleModelEditPart.MODEL_ID,
 						RolesDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				if (diagram != null) {
@@ -186,12 +182,8 @@ public class RolesDiagramEditorUtil {
 				}
 
 				try {
-					modelResource
-							.save(org.emftext.language.refactoring.roles.diagram.part.RolesDiagramEditorUtil
-									.getSaveOptions());
-					diagramResource
-							.save(org.emftext.language.refactoring.roles.diagram.part.RolesDiagramEditorUtil
-									.getSaveOptions());
+					modelResource.save(org.emftext.language.refactoring.roles.diagram.part.RolesDiagramEditorUtil.getSaveOptions());
+					diagramResource.save(org.emftext.language.refactoring.roles.diagram.part.RolesDiagramEditorUtil.getSaveOptions());
 				} catch (IOException e) {
 
 					RolesDiagramEditorPlugin.getInstance().logError(
@@ -213,21 +205,21 @@ public class RolesDiagramEditorUtil {
 	}
 
 	/**
-	 * Create a new instance of domain element associated with canvas.
-	 * <!-- begin-user-doc -->
+	* Create a new instance of domain element associated with canvas.
+	* <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	* @generated
+	*/
 	private static RoleModel createInitialModel() {
 		return RolesFactory.eINSTANCE.createRoleModel();
 	}
 
 	/**
-	 * Store model element in the resource.
-	 * <!-- begin-user-doc -->
+	* Store model element in the resource.
+	* <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	* @generated
+	*/
 	private static void attachModelToResource(RoleModel model, Resource resource) {
 		resource.getContents().add(model);
 	}
@@ -249,8 +241,8 @@ public class RolesDiagramEditorUtil {
 
 		if (!editParts.isEmpty()) {
 			diagramPart.getDiagramGraphicalViewer().reveal(
-					firstPrimary != null ? firstPrimary : (EditPart) editParts
-							.get(0));
+					firstPrimary != null ? firstPrimary
+							: (EditPart) editParts.get(0));
 		}
 	}
 
@@ -259,8 +251,7 @@ public class RolesDiagramEditorUtil {
 	 */
 	private static int findElementsInDiagramByID(DiagramEditPart diagramPart,
 			EObject element, List<EditPart> editPartCollector) {
-		IDiagramGraphicalViewer viewer = (IDiagramGraphicalViewer) diagramPart
-				.getViewer();
+		IDiagramGraphicalViewer viewer = (IDiagramGraphicalViewer) diagramPart.getViewer();
 		final int intialNumOfEditParts = editPartCollector.size();
 
 		if (element instanceof View) { // support notation element lookup
@@ -307,20 +298,18 @@ public class RolesDiagramEditorUtil {
 			EObject targetElement, LazyElement2ViewMap lazyElement2ViewMap) {
 		boolean hasStructuralURI = false;
 		if (targetElement.eResource() instanceof XMLResource) {
-			hasStructuralURI = ((XMLResource) targetElement.eResource())
-					.getID(targetElement) == null;
+			hasStructuralURI = ((XMLResource) targetElement.eResource()).getID(targetElement) == null;
 		}
 
 		View view = null;
 		LinkedList<EditPart> editPartHolder = new LinkedList<EditPart>();
-		if (hasStructuralURI
-				&& !lazyElement2ViewMap.getElement2ViewMap().isEmpty()) {
+		if (hasStructuralURI && !lazyElement2ViewMap.getElement2ViewMap().isEmpty()) {
 			view = lazyElement2ViewMap.getElement2ViewMap().get(targetElement);
 		} else if (findElementsInDiagramByID(diagramEditPart, targetElement,
 				editPartHolder) > 0) {
 			EditPart editPart = editPartHolder.get(0);
-			view = editPart.getModel() instanceof View ? (View) editPart
-					.getModel() : null;
+			view = editPart.getModel() instanceof View ? (View) editPart.getModel()
+					: null;
 		}
 
 		return (view == null) ? diagramEditPart.getDiagramView() : view;
@@ -385,27 +374,22 @@ public class RolesDiagramEditorUtil {
 				return true;
 			}
 
-			if (parentView.isSetElement()
-					&& !element2ViewMap.containsKey(parentView.getElement())
-					&& elements.contains(parentView.getElement())) {
+			if (parentView.isSetElement() && !element2ViewMap.containsKey(parentView.getElement()) && elements.contains(parentView.getElement())) {
 				element2ViewMap.put(parentView.getElement(), parentView);
 				if (elements.size() == element2ViewMap.size()) {
 					return true;
 				}
 			}
 			boolean complete = false;
-			for (Iterator<?> it = parentView.getChildren().iterator(); it
-					.hasNext() && !complete;) {
+			for (Iterator<?> it = parentView.getChildren().iterator(); it.hasNext() && !complete;) {
 				complete = buildElement2ViewMap((View) it.next(),
 						element2ViewMap, elements);
 			}
-			for (Iterator<?> it = parentView.getSourceEdges().iterator(); it
-					.hasNext() && !complete;) {
+			for (Iterator<?> it = parentView.getSourceEdges().iterator(); it.hasNext() && !complete;) {
 				complete = buildElement2ViewMap((View) it.next(),
 						element2ViewMap, elements);
 			}
-			for (Iterator<?> it = parentView.getTargetEdges().iterator(); it
-					.hasNext() && !complete;) {
+			for (Iterator<?> it = parentView.getTargetEdges().iterator(); it.hasNext() && !complete;) {
 				complete = buildElement2ViewMap((View) it.next(),
 						element2ViewMap, elements);
 			}

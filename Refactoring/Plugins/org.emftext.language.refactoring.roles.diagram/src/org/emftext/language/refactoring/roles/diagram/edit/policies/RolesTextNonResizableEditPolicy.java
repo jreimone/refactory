@@ -133,10 +133,8 @@ public class RolesTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 		if (getHostFigure() instanceof Label) {
 			Label feedbackFigure = new Label();
 			feedbackFigure.setOpaque(true);
-			feedbackFigure
-					.setBackgroundColor(ColorConstants.menuBackgroundSelected);
-			feedbackFigure
-					.setForegroundColor(ColorConstants.menuForegroundSelected);
+			feedbackFigure.setBackgroundColor(ColorConstants.menuBackgroundSelected);
+			feedbackFigure.setForegroundColor(ColorConstants.menuForegroundSelected);
 			return feedbackFigure;
 		} else {
 			RectangleFigure feedbackFigure = new RectangleFigure();
@@ -205,6 +203,7 @@ public class RolesTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	private FigureListener getHostPositionListener() {
 		if (hostPositionListener == null) {
 			hostPositionListener = new FigureListener() {
+
 				public void figureMoved(IFigure source) {
 					refreshFeedback();
 				}
@@ -217,7 +216,8 @@ public class RolesTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	 * @generated
 	 */
 	protected List createSelectionHandles() {
-		MoveHandle moveHandle = new MoveHandle((GraphicalEditPart) getHost());
+		MoveHandle moveHandle =
+				new MoveHandle((GraphicalEditPart) getHost());
 		moveHandle.setBorder(null);
 		moveHandle.setDragTracker(new DragEditPartsTrackerEx(getHost()));
 		return Collections.singletonList(moveHandle);

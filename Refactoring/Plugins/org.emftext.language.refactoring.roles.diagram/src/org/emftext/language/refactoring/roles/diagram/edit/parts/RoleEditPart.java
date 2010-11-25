@@ -114,8 +114,7 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof RoleNameEditPart) {
-			((RoleNameEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getFigureRoleNameFigure());
+			((RoleNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureRoleNameFigure());
 			return true;
 		}
 		return false;
@@ -248,8 +247,7 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	public EditPart getPrimaryChildEditPart() {
-		return getChildBySemanticHint(RolesVisualIDRegistry
-				.getType(RoleNameEditPart.VISUAL_ID));
+		return getChildBySemanticHint(RolesVisualIDRegistry.getType(RoleNameEditPart.VISUAL_ID));
 	}
 
 	/**
@@ -336,14 +334,10 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 */
 	public EditPart getTargetEditPart(Request request) {
 		if (request instanceof CreateViewAndElementRequest) {
-			CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request)
-					.getViewAndElementDescriptor()
-					.getCreateElementRequestAdapter();
-			IElementType type = (IElementType) adapter
-					.getAdapter(IElementType.class);
+			CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request).getViewAndElementDescriptor().getCreateElementRequestAdapter();
+			IElementType type = (IElementType) adapter.getAdapter(IElementType.class);
 			if (type == RolesElementTypes.RoleAttribute_3001) {
-				return getChildBySemanticHint(RolesVisualIDRegistry
-						.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
+				return getChildBySemanticHint(RolesVisualIDRegistry.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
 			}
 		}
 		return super.getTargetEditPart(request);
@@ -366,15 +360,17 @@ public class RoleEditPart extends ShapeNodeEditPart {
 
 			ToolbarLayout layoutThis = new ToolbarLayout();
 			layoutThis.setStretchMinorAxis(false);
-			layoutThis.setMinorAlignment(ToolbarLayout.ALIGN_CENTER);
+			layoutThis.setMinorAlignment(ToolbarLayout.ALIGN_CENTER
+					);
 
 			layoutThis.setSpacing(5);
 			layoutThis.setVertical(false);
 
 			this.setLayoutManager(layoutThis);
 
-			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(20),
-					getMapMode().DPtoLP(20)));
+			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(20)
+					, getMapMode().DPtoLP(20)
+					));
 			this.setLineWidth(2);
 			this.setForegroundColor(ColorConstants.gray);
 			createContents();

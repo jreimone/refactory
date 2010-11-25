@@ -70,9 +70,8 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 		if (getContainer() == null) {
 			return false;
 		}
-		return RolesBaseItemSemanticEditPolicy.getLinkConstraints()
-				.canCreateRoleAssociation_4003(getContainer(), getSource(),
-						getTarget());
+		return RolesBaseItemSemanticEditPolicy.getLinkConstraints().canCreateRoleAssociation_4003(
+				getContainer(), getSource(), getTarget());
 	}
 
 	/**
@@ -81,12 +80,10 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
-			throw new ExecutionException(
-					"Invalid arguments in create link command"); //$NON-NLS-1$
+			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
 		}
 
-		RoleAssociation newElement = RolesFactory.eINSTANCE
-				.createRoleAssociation();
+		RoleAssociation newElement = RolesFactory.eINSTANCE.createRoleAssociation();
 		getContainer().getCollaborations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
@@ -103,19 +100,15 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 	protected void doConfigure(RoleAssociation newElement,
 			IProgressMonitor monitor, IAdaptable info)
 			throws ExecutionException {
-		IElementType elementType = ((CreateElementRequest) getRequest())
-				.getElementType();
-		ConfigureRequest configureRequest = new ConfigureRequest(
-				getEditingDomain(), newElement, elementType);
-		configureRequest.setClientContext(((CreateElementRequest) getRequest())
-				.getClientContext());
+		IElementType elementType = ((CreateElementRequest) getRequest()).getElementType();
+		ConfigureRequest configureRequest = new ConfigureRequest(getEditingDomain(), newElement, elementType);
+		configureRequest.setClientContext(((CreateElementRequest) getRequest()).getClientContext());
 		configureRequest.addParameters(getRequest().getParameters());
 		configureRequest.setParameter(CreateRelationshipRequest.SOURCE,
 				getSource());
 		configureRequest.setParameter(CreateRelationshipRequest.TARGET,
 				getTarget());
-		ICommand configureCommand = elementType
-				.getEditCommand(configureRequest);
+		ICommand configureCommand = elementType.getEditCommand(configureRequest);
 		if (configureCommand != null && configureCommand.canExecute()) {
 			configureCommand.execute(monitor, info);
 		}
@@ -158,8 +151,7 @@ public class RoleAssociationCreateCommand extends EditElementCommand {
 		// Find container element for the new link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null; element = element
-				.eContainer()) {
+		for (EObject element = source; element != null; element = element.eContainer()) {
 			if (element instanceof RoleModel) {
 				return (RoleModel) element;
 			}

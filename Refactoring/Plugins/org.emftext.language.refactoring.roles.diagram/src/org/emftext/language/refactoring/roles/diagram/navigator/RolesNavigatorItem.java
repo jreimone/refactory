@@ -19,12 +19,9 @@ public class RolesNavigatorItem extends RolesAbstractNavigatorItem {
 		Platform.getAdapterManager().registerAdapters(
 				new IAdapterFactory() {
 
-					public Object getAdapter(Object adaptableObject,
-							Class adapterType) {
-						if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem
-								&& (adapterType == View.class || adapterType == EObject.class)) {
-							return ((org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) adaptableObject)
-									.getView();
+					public Object getAdapter(Object adaptableObject, Class adapterType) {
+						if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem && (adapterType == View.class || adapterType == EObject.class)) {
+							return ((org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) adaptableObject).getView();
 						}
 						return null;
 					}
@@ -74,11 +71,8 @@ public class RolesNavigatorItem extends RolesAbstractNavigatorItem {
 	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) {
-			return EcoreUtil
-					.getURI(getView())
-					.equals(EcoreUtil
-							.getURI(((org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) obj)
-									.getView()));
+			return EcoreUtil.getURI(getView()).equals(
+					EcoreUtil.getURI(((org.emftext.language.refactoring.roles.diagram.navigator.RolesNavigatorItem) obj).getView()));
 		}
 		return super.equals(obj);
 	}

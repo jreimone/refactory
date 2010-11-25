@@ -127,10 +127,8 @@ public class RolesTextSelectionEditPolicy extends SelectionEditPolicy {
 		if (getHostFigure() instanceof Label) {
 			Label feedbackFigure = new Label();
 			feedbackFigure.setOpaque(true);
-			feedbackFigure
-					.setBackgroundColor(ColorConstants.menuBackgroundSelected);
-			feedbackFigure
-					.setForegroundColor(ColorConstants.menuForegroundSelected);
+			feedbackFigure.setBackgroundColor(ColorConstants.menuBackgroundSelected);
+			feedbackFigure.setForegroundColor(ColorConstants.menuForegroundSelected);
 			return feedbackFigure;
 		} else {
 			RectangleFigure feedbackFigure = new RectangleFigure();
@@ -199,6 +197,7 @@ public class RolesTextSelectionEditPolicy extends SelectionEditPolicy {
 	private FigureListener getHostPositionListener() {
 		if (hostPositionListener == null) {
 			hostPositionListener = new FigureListener() {
+
 				public void figureMoved(IFigure source) {
 					refreshFeedback();
 				}

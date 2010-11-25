@@ -73,8 +73,8 @@ public abstract class AbstractParser implements IParser {
 			throw new IllegalArgumentException();
 		}
 		this.features = features;
-		if (editableFeatures == null
-				|| Arrays.asList(editableFeatures).contains(null)) {
+		if (editableFeatures == null || Arrays.asList(editableFeatures).contains(
+				null)) {
 			throw new IllegalArgumentException();
 		}
 		this.editableFeatures = editableFeatures;
@@ -192,18 +192,20 @@ public abstract class AbstractParser implements IParser {
 	 */
 	protected ICommand getParseCommand(IAdaptable adapter, Object[] values,
 			int flags) {
-		if (values == null
-				|| validateNewValues(values).getCode() != IParserEditStatus.EDITABLE) {
+		if (values == null || validateNewValues(values).getCode() !=
+				IParserEditStatus.EDITABLE) {
 			return UnexecutableCommand.INSTANCE;
 		}
-		EObject element = (EObject) adapter.getAdapter(EObject.class);
-		TransactionalEditingDomain editingDomain = TransactionUtil
-				.getEditingDomain(element);
+		EObject element =
+				(EObject) adapter.getAdapter(EObject.class);
+		TransactionalEditingDomain editingDomain =
+				TransactionUtil.getEditingDomain(element);
 		if (editingDomain == null) {
 			return UnexecutableCommand.INSTANCE;
 		}
-		CompositeTransactionalCommand command = new CompositeTransactionalCommand(
-				editingDomain, "Set Values"); //$NON-NLS-1$
+		CompositeTransactionalCommand command =
+				new CompositeTransactionalCommand(
+						editingDomain, "Set Values"); //$NON-NLS-1$
 		for (int i = 0; i < values.length; i++) {
 			command.compose(getModificationCommand(element,
 					editableFeatures[i], values[i]));
@@ -220,7 +222,8 @@ public abstract class AbstractParser implements IParser {
 		if (value instanceof InvalidValue) {
 			return UnexecutableCommand.INSTANCE;
 		}
-		SetRequest request = new SetRequest(element, feature, value);
+		SetRequest request =
+				new SetRequest(element, feature, value);
 		return new SetValueCommand(request);
 	}
 
@@ -234,8 +237,10 @@ public abstract class AbstractParser implements IParser {
 		for (int i = 0; i < values.length; i++) {
 			Object value = getValidNewValue(editableFeatures[i], values[i]);
 			if (value instanceof InvalidValue) {
-				return new ParserEditStatus(RolesDiagramEditorPlugin.ID,
-						IParserEditStatus.UNEDITABLE, value.toString());
+				return new ParserEditStatus(
+						RolesDiagramEditorPlugin.ID,
+						IParserEditStatus.UNEDITABLE,
+						value.toString());
 			}
 		}
 		return ParserEditStatus.EDITABLE_STATUS;
@@ -286,10 +291,9 @@ public abstract class AbstractParser implements IParser {
 						try {
 							value = Byte.valueOf(s);
 						} catch (NumberFormatException nfe) {
-							value = new InvalidValue(
-									NLS.bind(
-											Messages.AbstractParser_WrongStringConversion,
-											iClass.getName()));
+							value = new InvalidValue(NLS.bind(
+									Messages.AbstractParser_WrongStringConversion,
+									iClass.getName()));
 						}
 					}
 				} else {
@@ -310,10 +314,9 @@ public abstract class AbstractParser implements IParser {
 						try {
 							value = Short.valueOf(s);
 						} catch (NumberFormatException nfe) {
-							value = new InvalidValue(
-									NLS.bind(
-											Messages.AbstractParser_WrongStringConversion,
-											iClass.getName()));
+							value = new InvalidValue(NLS.bind(
+									Messages.AbstractParser_WrongStringConversion,
+									iClass.getName()));
 						}
 					}
 				} else {
@@ -334,10 +337,9 @@ public abstract class AbstractParser implements IParser {
 						try {
 							value = Integer.valueOf(s);
 						} catch (NumberFormatException nfe) {
-							value = new InvalidValue(
-									NLS.bind(
-											Messages.AbstractParser_WrongStringConversion,
-											iClass.getName()));
+							value = new InvalidValue(NLS.bind(
+									Messages.AbstractParser_WrongStringConversion,
+									iClass.getName()));
 						}
 					}
 				} else {
@@ -358,10 +360,9 @@ public abstract class AbstractParser implements IParser {
 						try {
 							value = Long.valueOf(s);
 						} catch (NumberFormatException nfe) {
-							value = new InvalidValue(
-									NLS.bind(
-											Messages.AbstractParser_WrongStringConversion,
-											iClass.getName()));
+							value = new InvalidValue(NLS.bind(
+									Messages.AbstractParser_WrongStringConversion,
+									iClass.getName()));
 						}
 					}
 				} else {
@@ -382,10 +383,9 @@ public abstract class AbstractParser implements IParser {
 						try {
 							value = Float.valueOf(s);
 						} catch (NumberFormatException nfe) {
-							value = new InvalidValue(
-									NLS.bind(
-											Messages.AbstractParser_WrongStringConversion,
-											iClass.getName()));
+							value = new InvalidValue(NLS.bind(
+									Messages.AbstractParser_WrongStringConversion,
+									iClass.getName()));
 						}
 					}
 				} else {
@@ -406,10 +406,9 @@ public abstract class AbstractParser implements IParser {
 						try {
 							value = Double.valueOf(s);
 						} catch (NumberFormatException nfe) {
-							value = new InvalidValue(
-									NLS.bind(
-											Messages.AbstractParser_WrongStringConversion,
-											iClass.getName()));
+							value = new InvalidValue(NLS.bind(
+									Messages.AbstractParser_WrongStringConversion,
+									iClass.getName()));
 						}
 					}
 				} else {
@@ -419,8 +418,8 @@ public abstract class AbstractParser implements IParser {
 				}
 			} else if (type instanceof EEnum) {
 				if (value instanceof String) {
-					EEnumLiteral literal = ((EEnum) type)
-							.getEEnumLiteralByLiteral((String) value);
+					EEnumLiteral literal =
+							((EEnum) type).getEEnumLiteralByLiteral((String) value);
 					if (literal == null) {
 						value = new InvalidValue(NLS.bind(
 								Messages.AbstractParser_UnknownLiteral, value));

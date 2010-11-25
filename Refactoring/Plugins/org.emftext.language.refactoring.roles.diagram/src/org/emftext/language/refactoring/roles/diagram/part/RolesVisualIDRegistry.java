@@ -47,8 +47,7 @@ public class RolesVisualIDRegistry {
 				return -1;
 			}
 		}
-		return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
-				.getVisualID(view.getType());
+		return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getVisualID(view.getType());
 	}
 
 	/**
@@ -76,8 +75,7 @@ public class RolesVisualIDRegistry {
 			if (Boolean.TRUE.toString().equalsIgnoreCase(
 					Platform.getDebugOption(DEBUG_KEY))) {
 				RolesDiagramEditorPlugin.getInstance().logError(
-						"Unable to parse view type as a visualID number: "
-								+ type);
+						"Unable to parse view type as a visualID number: " + type);
 			}
 		}
 		return -1;
@@ -98,8 +96,7 @@ public class RolesVisualIDRegistry {
 			return -1;
 		}
 		if (RolesPackage.eINSTANCE.getRoleModel().isSuperTypeOf(
-				domainElement.eClass())
-				&& isDiagram((RoleModel) domainElement)) {
+				domainElement.eClass()) && isDiagram((RoleModel) domainElement)) {
 			return RoleModelEditPart.VISUAL_ID;
 		}
 		return -1;
@@ -112,15 +109,13 @@ public class RolesVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		String containerModelID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
-				.getModelID(containerView);
+		String containerModelID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getModelID(containerView);
 		if (!RoleModelEditPart.MODEL_ID.equals(containerModelID)) {
 			return -1;
 		}
 		int containerVisualID;
 		if (RoleModelEditPart.MODEL_ID.equals(containerModelID)) {
-			containerVisualID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
-					.getVisualID(containerView);
+			containerVisualID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getVisualID(containerView);
 		} else {
 			if (containerView instanceof Diagram) {
 				containerVisualID = RoleModelEditPart.VISUAL_ID;
@@ -129,18 +124,18 @@ public class RolesVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
-		case RoleModelEditPart.VISUAL_ID:
-			if (RolesPackage.eINSTANCE.getRole().isSuperTypeOf(
-					domainElement.eClass())) {
-				return RoleEditPart.VISUAL_ID;
-			}
-			break;
-		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
-			if (RolesPackage.eINSTANCE.getRoleAttribute().isSuperTypeOf(
-					domainElement.eClass())) {
-				return RoleAttributeEditPart.VISUAL_ID;
-			}
-			break;
+			case RoleModelEditPart.VISUAL_ID:
+				if (RolesPackage.eINSTANCE.getRole().isSuperTypeOf(
+						domainElement.eClass())) {
+					return RoleEditPart.VISUAL_ID;
+				}
+				break;
+			case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+				if (RolesPackage.eINSTANCE.getRoleAttribute().isSuperTypeOf(
+						domainElement.eClass())) {
+					return RoleAttributeEditPart.VISUAL_ID;
+				}
+				break;
 		}
 		return -1;
 	}
@@ -149,15 +144,13 @@ public class RolesVisualIDRegistry {
 	 * @generated
 	 */
 	public static boolean canCreateNode(View containerView, int nodeVisualID) {
-		String containerModelID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
-				.getModelID(containerView);
+		String containerModelID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getModelID(containerView);
 		if (!RoleModelEditPart.MODEL_ID.equals(containerModelID)) {
 			return false;
 		}
 		int containerVisualID;
 		if (RoleModelEditPart.MODEL_ID.equals(containerModelID)) {
-			containerVisualID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
-					.getVisualID(containerView);
+			containerVisualID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getVisualID(containerView);
 		} else {
 			if (containerView instanceof Diagram) {
 				containerVisualID = RoleModelEditPart.VISUAL_ID;
@@ -166,45 +159,45 @@ public class RolesVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
-		case RoleModelEditPart.VISUAL_ID:
-			if (RoleEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case RoleEditPart.VISUAL_ID:
-			if (RoleNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			if (RoleRoleAttributeCompartmentEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case RoleAttributeEditPart.VISUAL_ID:
-			if (RoleAttributeNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
-			if (RoleAttributeEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case RoleAssociationEditPart.VISUAL_ID:
-			if (RoleAssociationSourceNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			if (RoleAssociationTargetNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case RoleCompositionEditPart.VISUAL_ID:
-			if (RoleCompositionSourceNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			if (RoleCompositionTargetNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
+			case RoleModelEditPart.VISUAL_ID:
+				if (RoleEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				break;
+			case RoleEditPart.VISUAL_ID:
+				if (RoleNameEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				if (RoleRoleAttributeCompartmentEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				break;
+			case RoleAttributeEditPart.VISUAL_ID:
+				if (RoleAttributeNameEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				break;
+			case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+				if (RoleAttributeEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				break;
+			case RoleAssociationEditPart.VISUAL_ID:
+				if (RoleAssociationSourceNameEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				if (RoleAssociationTargetNameEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				break;
+			case RoleCompositionEditPart.VISUAL_ID:
+				if (RoleCompositionSourceNameEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				if (RoleCompositionTargetNameEditPart.VISUAL_ID == nodeVisualID) {
+					return true;
+				}
+				break;
 		}
 		return false;
 	}
