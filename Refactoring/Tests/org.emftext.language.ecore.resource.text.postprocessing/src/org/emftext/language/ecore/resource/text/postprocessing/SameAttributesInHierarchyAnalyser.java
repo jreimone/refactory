@@ -13,12 +13,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.ecore.resource.text.ITextEcoreQuickFix;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResource;
-import org.emftext.language.ecore.resource.text.quickfixes.ExtractSuperClassQuickFix;
+import org.emftext.language.ecore.resource.text.quickfixes.RefactoringQuickFix;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.mappings.ecore.facade.EcoreRefactoringFacade;
 
 public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
+
+	private static final String REFACTOR_EXTRACT_SUPER_CLASS = "Refactor: Extract SuperClass from common attributes";
 
 	private Map<String, Map<EClassifier, List<EClass>>> attributeTypeMap = new LinkedHashMap<String, Map<EClassifier, List<EClass>>>();
 
@@ -52,14 +54,15 @@ public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 						message += "\nall have the same attribute '" + name + "' of type '" + type.getName() + "'." +
 								"\nYou should consider to invoke a refactoring.";
 
-						//// always the same?
+						//// quickfix addition
 						EcoreRefactoringFacade facade = new EcoreRefactoringFacade(resource, attributesToPullUp);
 						IRefactorer refactorer = facade.getRefactorer();
 						RoleMapping roleMapping = facade.getExtractSuperClassMapping();
 						URL iconBundlePath = facade.getExtractSuperClassIcon();
 						if (refactorer != null) {
-							ITextEcoreQuickFix quickfix = new ExtractSuperClassQuickFix(roleMapping, attributesToPullUp, refactorer, (iconBundlePath != null) ? iconBundlePath.toString()
-									: null);
+							ITextEcoreQuickFix quickfix =
+									new RefactoringQuickFix(REFACTOR_EXTRACT_SUPER_CLASS, roleMapping, attributesToPullUp, refactorer, (iconBundlePath != null) ? iconBundlePath.toString()
+											: null);
 							addProblem(
 									resource,
 									ETextEcoreProblemType.SAME_ATTRIBUTES_IN_HIERARCHY,
