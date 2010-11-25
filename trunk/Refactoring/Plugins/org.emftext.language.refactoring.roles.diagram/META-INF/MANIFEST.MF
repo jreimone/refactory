@@ -38,7 +38,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
  org.eclipse.gmf.runtime.diagram.ui.printing,
- org.eclipse.gmf.runtime.diagram.ui.printing.render
+ org.eclipse.gmf.runtime.diagram.ui.printing.render,
+ org.eclipse.emf.validation;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Eclipse-LazyStart: true

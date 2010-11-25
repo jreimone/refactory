@@ -16,6 +16,7 @@ public abstract class RolesAbstractNavigatorItem extends PlatformObject {
 	static {
 		final Class[] supportedTypes = new Class[] { ITabbedPropertySheetPageContributor.class };
 		final ITabbedPropertySheetPageContributor propertySheetPageContributor = new ITabbedPropertySheetPageContributor() {
+
 			public String getContributorId() {
 				return "org.emftext.language.refactoring.roles.diagram"; //$NON-NLS-1$
 			}
@@ -23,10 +24,8 @@ public abstract class RolesAbstractNavigatorItem extends PlatformObject {
 		Platform.getAdapterManager().registerAdapters(
 				new IAdapterFactory() {
 
-					public Object getAdapter(Object adaptableObject,
-							Class adapterType) {
-						if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesAbstractNavigatorItem
-								&& adapterType == ITabbedPropertySheetPageContributor.class) {
+					public Object getAdapter(Object adaptableObject, Class adapterType) {
+						if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesAbstractNavigatorItem && adapterType == ITabbedPropertySheetPageContributor.class) {
 							return propertySheetPageContributor;
 						}
 						return null;

@@ -22,8 +22,7 @@ public class RolesDomainNavigatorItem extends PlatformObject {
 		Platform.getAdapterManager().registerAdapters(
 				new IAdapterFactory() {
 
-					public Object getAdapter(Object adaptableObject,
-							Class adapterType) {
+					public Object getAdapter(Object adaptableObject, Class adapterType) {
 						if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) {
 							org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem domainNavigatorItem = (org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) adaptableObject;
 							EObject eObject = domainNavigatorItem.getEObject();
@@ -31,9 +30,8 @@ public class RolesDomainNavigatorItem extends PlatformObject {
 								return eObject;
 							}
 							if (adapterType == IPropertySource.class) {
-								return domainNavigatorItem
-										.getPropertySourceProvider()
-										.getPropertySource(eObject);
+								return domainNavigatorItem.getPropertySourceProvider().getPropertySource(
+										eObject);
 							}
 						}
 
@@ -98,11 +96,8 @@ public class RolesDomainNavigatorItem extends PlatformObject {
 	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) {
-			return EcoreUtil
-					.getURI(getEObject())
-					.equals(EcoreUtil
-							.getURI(((org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) obj)
-									.getEObject()));
+			return EcoreUtil.getURI(getEObject()).equals(
+					EcoreUtil.getURI(((org.emftext.language.refactoring.roles.diagram.navigator.RolesDomainNavigatorItem) obj).getEObject()));
 		}
 		return super.equals(obj);
 	}

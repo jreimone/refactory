@@ -47,8 +47,7 @@ public class RoleRoleAttributeCompartmentCanonicalEditPolicy extends
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		LinkedList<EObject> result = new LinkedList<EObject>();
-		List<RolesNodeDescriptor> childDescriptors = RolesDiagramUpdater
-				.getRoleAttributeCompartment_7001SemanticChildren(viewObject);
+		List<RolesNodeDescriptor> childDescriptors = RolesDiagramUpdater.getRoleAttributeCompartment_7001SemanticChildren(viewObject);
 		for (RolesNodeDescriptor d : childDescriptors) {
 			result.add(d.getModelElement());
 		}
@@ -60,16 +59,14 @@ public class RoleRoleAttributeCompartmentCanonicalEditPolicy extends
 	 */
 	protected boolean isOrphaned(Collection<EObject> semanticChildren,
 			final View view) {
-		return isMyDiagramElement(view)
-				&& !semanticChildren.contains(view.getElement());
+		return isMyDiagramElement(view) && !semanticChildren.contains(view.getElement());
 	}
 
 	/**
 	 * @generated
 	 */
 	private boolean isMyDiagramElement(View view) {
-		return RoleAttributeEditPart.VISUAL_ID == RolesVisualIDRegistry
-				.getVisualID(view);
+		return RoleAttributeEditPart.VISUAL_ID == RolesVisualIDRegistry.getVisualID(view);
 	}
 
 	/**
@@ -80,9 +77,7 @@ public class RoleRoleAttributeCompartmentCanonicalEditPolicy extends
 			return;
 		}
 		LinkedList<IAdaptable> createdViews = new LinkedList<IAdaptable>();
-		List<RolesNodeDescriptor> childDescriptors = RolesDiagramUpdater
-				.getRoleAttributeCompartment_7001SemanticChildren((View) getHost()
-						.getModel());
+		List<RolesNodeDescriptor> childDescriptors = RolesDiagramUpdater.getRoleAttributeCompartment_7001SemanticChildren((View) getHost().getModel());
 		LinkedList<View> orphaned = new LinkedList<View>();
 		// we care to check only views we recognize as ours
 		LinkedList<View> knownViewChildren = new LinkedList<View>();
@@ -96,8 +91,7 @@ public class RoleRoleAttributeCompartmentCanonicalEditPolicy extends
 		// iteration happens over list of desired semantic elements, trying to find best matching View, while original CEP
 		// iterates views, potentially losing view (size/bounds) information - i.e. if there are few views to reference same EObject, only last one 
 		// to answer isOrphaned == true will be used for the domain element representation, see #cleanCanonicalSemanticChildren()
-		for (Iterator<RolesNodeDescriptor> descriptorsIterator = childDescriptors
-				.iterator(); descriptorsIterator.hasNext();) {
+		for (Iterator<RolesNodeDescriptor> descriptorsIterator = childDescriptors.iterator(); descriptorsIterator.hasNext();) {
 			RolesNodeDescriptor next = descriptorsIterator.next();
 			String hint = RolesVisualIDRegistry.getType(next.getVisualID());
 			LinkedList<View> perfectMatch = new LinkedList<View>(); // both semanticElement and hint match that of NodeDescriptor
@@ -122,15 +116,11 @@ public class RoleRoleAttributeCompartmentCanonicalEditPolicy extends
 		// or those we have potential matches to, and thus need to be recreated, preserving size/location information.
 		orphaned.addAll(knownViewChildren);
 		//
-		ArrayList<CreateViewRequest.ViewDescriptor> viewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>(
-				childDescriptors.size());
+		ArrayList<CreateViewRequest.ViewDescriptor> viewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>(childDescriptors.size());
 		for (RolesNodeDescriptor next : childDescriptors) {
 			String hint = RolesVisualIDRegistry.getType(next.getVisualID());
-			IAdaptable elementAdapter = new CanonicalElementAdapter(
-					next.getModelElement(), hint);
-			CreateViewRequest.ViewDescriptor descriptor = new CreateViewRequest.ViewDescriptor(
-					elementAdapter, Node.class, hint, ViewUtil.APPEND, false,
-					host().getDiagramPreferencesHint());
+			IAdaptable elementAdapter = new CanonicalElementAdapter(next.getModelElement(), hint);
+			CreateViewRequest.ViewDescriptor descriptor = new CreateViewRequest.ViewDescriptor(elementAdapter, Node.class, hint, ViewUtil.APPEND, false, host().getDiagramPreferencesHint());
 			viewDescriptors.add(descriptor);
 		}
 
@@ -151,8 +141,7 @@ public class RoleRoleAttributeCompartmentCanonicalEditPolicy extends
 		}
 		if (createdViews.size() > 1) {
 			// perform a layout of the container
-			DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host()
-					.getEditingDomain(), createdViews, host());
+			DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host().getEditingDomain(), createdViews, host());
 			executeCommand(new ICommandProxy(layoutCmd));
 		}
 

@@ -76,8 +76,8 @@ public class RolesCreationWizardPage extends WizardNewFileCreationPage {
 			return false;
 		}
 		String extension = getExtension();
-		if (extension != null
-				&& !getFilePath().toString().endsWith("." + extension)) {
+		if (extension != null && !getFilePath().toString().endsWith(
+				"." + extension)) {
 			setErrorMessage(NLS.bind(
 					Messages.RolesCreationWizardPageExtensionError, extension));
 			return false;

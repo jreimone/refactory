@@ -75,11 +75,9 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 */
 	public Command getCommand(Request request) {
 		if (request instanceof ReconnectRequest) {
-			Object view = ((ReconnectRequest) request).getConnectionEditPart()
-					.getModel();
+			Object view = ((ReconnectRequest) request).getConnectionEditPart().getModel();
 			if (view instanceof View) {
-				Integer id = new Integer(
-						RolesVisualIDRegistry.getVisualID((View) view));
+				Integer id = new Integer(RolesVisualIDRegistry.getVisualID((View) view));
 				request.getExtendedData().put(VISUAL_ID_KEY, id);
 			}
 		}
@@ -116,10 +114,9 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 */
 	protected Command addDeleteViewCommand(Command mainCommand,
 			DestroyRequest completedRequest) {
-		Command deleteViewCommand = getGEFWrapper(new DeleteCommand(
-				getEditingDomain(), (View) getHost().getModel()));
-		return mainCommand == null ? deleteViewCommand : mainCommand
-				.chain(deleteViewCommand);
+		Command deleteViewCommand = getGEFWrapper(new DeleteCommand(getEditingDomain(), (View) getHost().getModel()));
+		return mainCommand == null ? deleteViewCommand
+				: mainCommand.chain(deleteViewCommand);
 	}
 
 	/**
@@ -128,8 +125,8 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	private Command getEditHelperCommand(IEditCommandRequest request,
 			Command editPolicyCommand) {
 		if (editPolicyCommand != null) {
-			ICommand command = editPolicyCommand instanceof ICommandProxy ? ((ICommandProxy) editPolicyCommand)
-					.getICommand() : new CommandProxy(editPolicyCommand);
+			ICommand command = editPolicyCommand instanceof ICommandProxy ? ((ICommandProxy) editPolicyCommand).getICommand()
+					: new CommandProxy(editPolicyCommand);
 			request.setParameter(RolesBaseEditHelper.EDIT_POLICY_COMMAND,
 					command);
 		}
@@ -141,8 +138,7 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		request.setParameter(RolesBaseEditHelper.CONTEXT_ELEMENT_TYPE, null);
 		if (command != null) {
 			if (!(command instanceof CompositeTransactionalCommand)) {
-				command = new CompositeTransactionalCommand(getEditingDomain(),
-						command.getLabel()).compose(command);
+				command = new CompositeTransactionalCommand(getEditingDomain(), command.getLabel()).compose(command);
 			}
 			return new ICommandProxy(command);
 		}
@@ -153,8 +149,7 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * @generated
 	 */
 	private IElementType getContextElementType(IEditCommandRequest request) {
-		IElementType requestContextElementType = RolesElementTypes
-				.getElementType(getVisualID(request));
+		IElementType requestContextElementType = RolesElementTypes.getElementType(getVisualID(request));
 		return requestContextElementType != null ? requestContextElementType
 				: myElementType;
 	}
@@ -289,8 +284,7 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 */
 	protected void addDestroyShortcutsCommand(ICompositeCommand cmd, View view) {
 		assert view.getEAnnotation("Shortcut") == null; //$NON-NLS-1$
-		for (Iterator it = view.getDiagram().getChildren().iterator(); it
-				.hasNext();) {
+		for (Iterator it = view.getDiagram().getChildren().iterator(); it.hasNext();) {
 			View nextView = (View) it.next();
 			if (nextView.getEAnnotation("Shortcut") == null || !nextView.isSetElement() || nextView.getElement() != view.getElement()) { //$NON-NLS-1$
 				continue;
@@ -303,8 +297,7 @@ public class RolesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * @generated
 	 */
 	public static LinkConstraints getLinkConstraints() {
-		LinkConstraints cached = RolesDiagramEditorPlugin.getInstance()
-				.getLinkConstraints();
+		LinkConstraints cached = RolesDiagramEditorPlugin.getInstance().getLinkConstraints();
 		if (cached == null) {
 			RolesDiagramEditorPlugin.getInstance().setLinkConstraints(
 					cached = new LinkConstraints());

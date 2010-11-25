@@ -39,10 +39,10 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesNodeDescriptor> getSemanticChildren(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-		case RoleModelEditPart.VISUAL_ID:
-			return getRoleModel_1000SemanticChildren(view);
-		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
-			return getRoleAttributeCompartment_7001SemanticChildren(view);
+			case RoleModelEditPart.VISUAL_ID:
+				return getRoleModel_1000SemanticChildren(view);
+			case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+				return getRoleAttributeCompartment_7001SemanticChildren(view);
 		}
 		return Collections.emptyList();
 	}
@@ -61,8 +61,7 @@ public class RolesDiagramUpdater {
 		}
 		Role modelElement = (Role) containerView.getElement();
 		LinkedList<RolesNodeDescriptor> result = new LinkedList<RolesNodeDescriptor>();
-		for (Iterator<?> it = modelElement.getAttributes().iterator(); it
-				.hasNext();) {
+		for (Iterator<?> it = modelElement.getAttributes().iterator(); it.hasNext();) {
 			RoleAttribute childElement = (RoleAttribute) it.next();
 			int visualID = RolesVisualIDRegistry.getNodeVisualID(view,
 					childElement);
@@ -101,20 +100,20 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesLinkDescriptor> getContainedLinks(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-		case RoleModelEditPart.VISUAL_ID:
-			return getRoleModel_1000ContainedLinks(view);
-		case RoleEditPart.VISUAL_ID:
-			return getRole_2001ContainedLinks(view);
-		case RoleAttributeEditPart.VISUAL_ID:
-			return getRoleAttribute_3001ContainedLinks(view);
-		case RoleImplicationEditPart.VISUAL_ID:
-			return getRoleImplication_4001ContainedLinks(view);
-		case RoleProhibitionEditPart.VISUAL_ID:
-			return getRoleProhibition_4002ContainedLinks(view);
-		case RoleAssociationEditPart.VISUAL_ID:
-			return getRoleAssociation_4003ContainedLinks(view);
-		case RoleCompositionEditPart.VISUAL_ID:
-			return getRoleComposition_4004ContainedLinks(view);
+			case RoleModelEditPart.VISUAL_ID:
+				return getRoleModel_1000ContainedLinks(view);
+			case RoleEditPart.VISUAL_ID:
+				return getRole_2001ContainedLinks(view);
+			case RoleAttributeEditPart.VISUAL_ID:
+				return getRoleAttribute_3001ContainedLinks(view);
+			case RoleImplicationEditPart.VISUAL_ID:
+				return getRoleImplication_4001ContainedLinks(view);
+			case RoleProhibitionEditPart.VISUAL_ID:
+				return getRoleProhibition_4002ContainedLinks(view);
+			case RoleAssociationEditPart.VISUAL_ID:
+				return getRoleAssociation_4003ContainedLinks(view);
+			case RoleCompositionEditPart.VISUAL_ID:
+				return getRoleComposition_4004ContainedLinks(view);
 		}
 		return Collections.emptyList();
 	}
@@ -124,18 +123,18 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesLinkDescriptor> getIncomingLinks(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-		case RoleEditPart.VISUAL_ID:
-			return getRole_2001IncomingLinks(view);
-		case RoleAttributeEditPart.VISUAL_ID:
-			return getRoleAttribute_3001IncomingLinks(view);
-		case RoleImplicationEditPart.VISUAL_ID:
-			return getRoleImplication_4001IncomingLinks(view);
-		case RoleProhibitionEditPart.VISUAL_ID:
-			return getRoleProhibition_4002IncomingLinks(view);
-		case RoleAssociationEditPart.VISUAL_ID:
-			return getRoleAssociation_4003IncomingLinks(view);
-		case RoleCompositionEditPart.VISUAL_ID:
-			return getRoleComposition_4004IncomingLinks(view);
+			case RoleEditPart.VISUAL_ID:
+				return getRole_2001IncomingLinks(view);
+			case RoleAttributeEditPart.VISUAL_ID:
+				return getRoleAttribute_3001IncomingLinks(view);
+			case RoleImplicationEditPart.VISUAL_ID:
+				return getRoleImplication_4001IncomingLinks(view);
+			case RoleProhibitionEditPart.VISUAL_ID:
+				return getRoleProhibition_4002IncomingLinks(view);
+			case RoleAssociationEditPart.VISUAL_ID:
+				return getRoleAssociation_4003IncomingLinks(view);
+			case RoleCompositionEditPart.VISUAL_ID:
+				return getRoleComposition_4004IncomingLinks(view);
 		}
 		return Collections.emptyList();
 	}
@@ -145,18 +144,18 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesLinkDescriptor> getOutgoingLinks(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-		case RoleEditPart.VISUAL_ID:
-			return getRole_2001OutgoingLinks(view);
-		case RoleAttributeEditPart.VISUAL_ID:
-			return getRoleAttribute_3001OutgoingLinks(view);
-		case RoleImplicationEditPart.VISUAL_ID:
-			return getRoleImplication_4001OutgoingLinks(view);
-		case RoleProhibitionEditPart.VISUAL_ID:
-			return getRoleProhibition_4002OutgoingLinks(view);
-		case RoleAssociationEditPart.VISUAL_ID:
-			return getRoleAssociation_4003OutgoingLinks(view);
-		case RoleCompositionEditPart.VISUAL_ID:
-			return getRoleComposition_4004OutgoingLinks(view);
+			case RoleEditPart.VISUAL_ID:
+				return getRole_2001OutgoingLinks(view);
+			case RoleAttributeEditPart.VISUAL_ID:
+				return getRoleAttribute_3001OutgoingLinks(view);
+			case RoleImplicationEditPart.VISUAL_ID:
+				return getRoleImplication_4001OutgoingLinks(view);
+			case RoleProhibitionEditPart.VISUAL_ID:
+				return getRoleProhibition_4002OutgoingLinks(view);
+			case RoleAssociationEditPart.VISUAL_ID:
+				return getRoleAssociation_4003OutgoingLinks(view);
+			case RoleCompositionEditPart.VISUAL_ID:
+				return getRoleComposition_4004OutgoingLinks(view);
 		}
 		return Collections.emptyList();
 	}
@@ -227,8 +226,7 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesLinkDescriptor> getRole_2001IncomingLinks(View view) {
 		Role modelElement = (Role) view.getElement();
-		Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences = EcoreUtil.CrossReferencer
-				.find(view.eResource().getResourceSet().getResources());
+		Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences = EcoreUtil.CrossReferencer.find(view.eResource().getResourceSet().getResources());
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		result.addAll(getIncomingTypeModelFacetLinks_RoleImplication_4001(
 				modelElement, crossReferences));
@@ -340,22 +338,18 @@ public class RolesDiagramUpdater {
 	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleImplication_4001(
 			RoleModel container) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		for (Iterator<?> links = container.getCollaborations().iterator(); links
-				.hasNext();) {
+		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleImplication) {
 				continue;
 			}
 			RoleImplication link = (RoleImplication) linkObject;
-			if (RoleImplicationEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleImplicationEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role dst = link.getTarget();
 			Role src = link.getSource();
-			result.add(new RolesLinkDescriptor(src, dst, link,
-					RolesElementTypes.RoleImplication_4001,
-					RoleImplicationEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, dst, link, RolesElementTypes.RoleImplication_4001, RoleImplicationEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -366,22 +360,18 @@ public class RolesDiagramUpdater {
 	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleProhibition_4002(
 			RoleModel container) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		for (Iterator<?> links = container.getCollaborations().iterator(); links
-				.hasNext();) {
+		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleProhibition) {
 				continue;
 			}
 			RoleProhibition link = (RoleProhibition) linkObject;
-			if (RoleProhibitionEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleProhibitionEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role dst = link.getTarget();
 			Role src = link.getSource();
-			result.add(new RolesLinkDescriptor(src, dst, link,
-					RolesElementTypes.RoleProhibition_4002,
-					RoleProhibitionEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, dst, link, RolesElementTypes.RoleProhibition_4002, RoleProhibitionEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -392,22 +382,18 @@ public class RolesDiagramUpdater {
 	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleAssociation_4003(
 			RoleModel container) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		for (Iterator<?> links = container.getCollaborations().iterator(); links
-				.hasNext();) {
+		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleAssociation) {
 				continue;
 			}
 			RoleAssociation link = (RoleAssociation) linkObject;
-			if (RoleAssociationEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleAssociationEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role dst = link.getTarget();
 			Role src = link.getSource();
-			result.add(new RolesLinkDescriptor(src, dst, link,
-					RolesElementTypes.RoleAssociation_4003,
-					RoleAssociationEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, dst, link, RolesElementTypes.RoleAssociation_4003, RoleAssociationEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -418,22 +404,18 @@ public class RolesDiagramUpdater {
 	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleComposition_4004(
 			RoleModel container) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		for (Iterator<?> links = container.getCollaborations().iterator(); links
-				.hasNext();) {
+		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleComposition) {
 				continue;
 			}
 			RoleComposition link = (RoleComposition) linkObject;
-			if (RoleCompositionEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleCompositionEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role dst = link.getTarget();
 			Role src = link.getSource();
-			result.add(new RolesLinkDescriptor(src, dst, link,
-					RolesElementTypes.RoleComposition_4004,
-					RoleCompositionEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, dst, link, RolesElementTypes.RoleComposition_4004, RoleCompositionEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -445,23 +427,17 @@ public class RolesDiagramUpdater {
 			Role target,
 			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		Collection<EStructuralFeature.Setting> settings = crossReferences
-				.get(target);
+		Collection<EStructuralFeature.Setting> settings = crossReferences.get(target);
 		for (EStructuralFeature.Setting setting : settings) {
-			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE
-					.getCollaboration_Target()
-					|| false == setting.getEObject() instanceof RoleImplication) {
+			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target() || false == setting.getEObject() instanceof RoleImplication) {
 				continue;
 			}
 			RoleImplication link = (RoleImplication) setting.getEObject();
-			if (RoleImplicationEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleImplicationEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role src = link.getSource();
-			result.add(new RolesLinkDescriptor(src, target, link,
-					RolesElementTypes.RoleImplication_4001,
-					RoleImplicationEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, target, link, RolesElementTypes.RoleImplication_4001, RoleImplicationEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -473,23 +449,17 @@ public class RolesDiagramUpdater {
 			Role target,
 			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		Collection<EStructuralFeature.Setting> settings = crossReferences
-				.get(target);
+		Collection<EStructuralFeature.Setting> settings = crossReferences.get(target);
 		for (EStructuralFeature.Setting setting : settings) {
-			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE
-					.getCollaboration_Target()
-					|| false == setting.getEObject() instanceof RoleProhibition) {
+			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target() || false == setting.getEObject() instanceof RoleProhibition) {
 				continue;
 			}
 			RoleProhibition link = (RoleProhibition) setting.getEObject();
-			if (RoleProhibitionEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleProhibitionEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role src = link.getSource();
-			result.add(new RolesLinkDescriptor(src, target, link,
-					RolesElementTypes.RoleProhibition_4002,
-					RoleProhibitionEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, target, link, RolesElementTypes.RoleProhibition_4002, RoleProhibitionEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -501,23 +471,17 @@ public class RolesDiagramUpdater {
 			Role target,
 			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		Collection<EStructuralFeature.Setting> settings = crossReferences
-				.get(target);
+		Collection<EStructuralFeature.Setting> settings = crossReferences.get(target);
 		for (EStructuralFeature.Setting setting : settings) {
-			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE
-					.getCollaboration_Target()
-					|| false == setting.getEObject() instanceof RoleAssociation) {
+			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target() || false == setting.getEObject() instanceof RoleAssociation) {
 				continue;
 			}
 			RoleAssociation link = (RoleAssociation) setting.getEObject();
-			if (RoleAssociationEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleAssociationEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role src = link.getSource();
-			result.add(new RolesLinkDescriptor(src, target, link,
-					RolesElementTypes.RoleAssociation_4003,
-					RoleAssociationEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, target, link, RolesElementTypes.RoleAssociation_4003, RoleAssociationEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -529,23 +493,17 @@ public class RolesDiagramUpdater {
 			Role target,
 			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		Collection<EStructuralFeature.Setting> settings = crossReferences
-				.get(target);
+		Collection<EStructuralFeature.Setting> settings = crossReferences.get(target);
 		for (EStructuralFeature.Setting setting : settings) {
-			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE
-					.getCollaboration_Target()
-					|| false == setting.getEObject() instanceof RoleComposition) {
+			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target() || false == setting.getEObject() instanceof RoleComposition) {
 				continue;
 			}
 			RoleComposition link = (RoleComposition) setting.getEObject();
-			if (RoleCompositionEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleCompositionEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role src = link.getSource();
-			result.add(new RolesLinkDescriptor(src, target, link,
-					RolesElementTypes.RoleComposition_4004,
-					RoleCompositionEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, target, link, RolesElementTypes.RoleComposition_4004, RoleCompositionEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -559,8 +517,7 @@ public class RolesDiagramUpdater {
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null && container == null; element = element
-				.eContainer()) {
+		for (EObject element = source; element != null && container == null; element = element.eContainer()) {
 			if (element instanceof RoleModel) {
 				container = (RoleModel) element;
 			}
@@ -569,15 +526,13 @@ public class RolesDiagramUpdater {
 			return Collections.emptyList();
 		}
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		for (Iterator<?> links = container.getCollaborations().iterator(); links
-				.hasNext();) {
+		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleImplication) {
 				continue;
 			}
 			RoleImplication link = (RoleImplication) linkObject;
-			if (RoleImplicationEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleImplicationEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role dst = link.getTarget();
@@ -585,9 +540,7 @@ public class RolesDiagramUpdater {
 			if (src != source) {
 				continue;
 			}
-			result.add(new RolesLinkDescriptor(src, dst, link,
-					RolesElementTypes.RoleImplication_4001,
-					RoleImplicationEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, dst, link, RolesElementTypes.RoleImplication_4001, RoleImplicationEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -601,8 +554,7 @@ public class RolesDiagramUpdater {
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null && container == null; element = element
-				.eContainer()) {
+		for (EObject element = source; element != null && container == null; element = element.eContainer()) {
 			if (element instanceof RoleModel) {
 				container = (RoleModel) element;
 			}
@@ -611,15 +563,13 @@ public class RolesDiagramUpdater {
 			return Collections.emptyList();
 		}
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		for (Iterator<?> links = container.getCollaborations().iterator(); links
-				.hasNext();) {
+		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleProhibition) {
 				continue;
 			}
 			RoleProhibition link = (RoleProhibition) linkObject;
-			if (RoleProhibitionEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleProhibitionEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role dst = link.getTarget();
@@ -627,9 +577,7 @@ public class RolesDiagramUpdater {
 			if (src != source) {
 				continue;
 			}
-			result.add(new RolesLinkDescriptor(src, dst, link,
-					RolesElementTypes.RoleProhibition_4002,
-					RoleProhibitionEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, dst, link, RolesElementTypes.RoleProhibition_4002, RoleProhibitionEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -643,8 +591,7 @@ public class RolesDiagramUpdater {
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null && container == null; element = element
-				.eContainer()) {
+		for (EObject element = source; element != null && container == null; element = element.eContainer()) {
 			if (element instanceof RoleModel) {
 				container = (RoleModel) element;
 			}
@@ -653,15 +600,13 @@ public class RolesDiagramUpdater {
 			return Collections.emptyList();
 		}
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		for (Iterator<?> links = container.getCollaborations().iterator(); links
-				.hasNext();) {
+		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleAssociation) {
 				continue;
 			}
 			RoleAssociation link = (RoleAssociation) linkObject;
-			if (RoleAssociationEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleAssociationEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role dst = link.getTarget();
@@ -669,9 +614,7 @@ public class RolesDiagramUpdater {
 			if (src != source) {
 				continue;
 			}
-			result.add(new RolesLinkDescriptor(src, dst, link,
-					RolesElementTypes.RoleAssociation_4003,
-					RoleAssociationEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, dst, link, RolesElementTypes.RoleAssociation_4003, RoleAssociationEditPart.VISUAL_ID));
 		}
 		return result;
 	}
@@ -685,8 +628,7 @@ public class RolesDiagramUpdater {
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
-		for (EObject element = source; element != null && container == null; element = element
-				.eContainer()) {
+		for (EObject element = source; element != null && container == null; element = element.eContainer()) {
 			if (element instanceof RoleModel) {
 				container = (RoleModel) element;
 			}
@@ -695,15 +637,13 @@ public class RolesDiagramUpdater {
 			return Collections.emptyList();
 		}
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		for (Iterator<?> links = container.getCollaborations().iterator(); links
-				.hasNext();) {
+		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof RoleComposition) {
 				continue;
 			}
 			RoleComposition link = (RoleComposition) linkObject;
-			if (RoleCompositionEditPart.VISUAL_ID != RolesVisualIDRegistry
-					.getLinkWithClassVisualID(link)) {
+			if (RoleCompositionEditPart.VISUAL_ID != RolesVisualIDRegistry.getLinkWithClassVisualID(link)) {
 				continue;
 			}
 			Role dst = link.getTarget();
@@ -711,9 +651,7 @@ public class RolesDiagramUpdater {
 			if (src != source) {
 				continue;
 			}
-			result.add(new RolesLinkDescriptor(src, dst, link,
-					RolesElementTypes.RoleComposition_4004,
-					RoleCompositionEditPart.VISUAL_ID));
+			result.add(new RolesLinkDescriptor(src, dst, link, RolesElementTypes.RoleComposition_4004, RoleCompositionEditPart.VISUAL_ID));
 		}
 		return result;
 	}
