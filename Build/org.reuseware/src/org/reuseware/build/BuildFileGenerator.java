@@ -76,19 +76,19 @@ public class BuildFileGenerator {
 		}
 	}
 	
-	public class OntMoPPLanguage extends Language {
+	public class OntoMoPPLanguage extends Language {
 		
 		private static final String ONTOMOPP_DIR = "${ontomopp.plugins.dir}";
 
-		public OntMoPPLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode) {
+		public OntoMoPPLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode) {
 			this(pluginID, ecoreFile, resourcePluginID, csFile, generateEditCode, null);
 		}
 
-		public OntMoPPLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode, String secondaryExtension) {
+		public OntoMoPPLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode, String secondaryExtension) {
 			this(pluginID, ecoreFile, resourcePluginID, csFile, generateEditCode, secondaryExtension, null);
 		}
 
-		public OntMoPPLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode, String secondaryExtension, String secondaryGenExtension) {
+		public OntoMoPPLanguage(String pluginID, String ecoreFile, String resourcePluginID, String csFile, boolean generateEditCode, String secondaryExtension, String secondaryGenExtension) {
 			super(pluginID, ecoreFile, resourcePluginID, csFile, generateEditCode, secondaryExtension, secondaryGenExtension);
 			setDir(ONTOMOPP_DIR);
 		}
@@ -224,15 +224,15 @@ public class BuildFileGenerator {
 					"org.emftext.language.office", "office",
 					"org.emftext.language.office.resource.office", "office",
 					false),
-			new OntMoPPLanguage(
+			new OntoMoPPLanguage(
 					"org.emftext.language.owl", "owl",
 					"org.emftext.language.owl.resource.owl", "owl", 
 					true, ".text"),
-			new OntMoPPLanguage(
+			new OntoMoPPLanguage(
 					"org.emftext.runtime.owltext.test", "owlTextTestLanguage",
 					"org.emftext.runtime.owltext.test", "owlTextTestLanguage.text", 
 					false, ".text", ".text"),
-			new OntMoPPLanguage(
+			new OntoMoPPLanguage(
 					"org.emftext.language.owlcl", "owlcl",
 					"org.emftext.language.owlcl.resource.owlcl", "owlcl", 
 					false),
@@ -284,6 +284,10 @@ public class BuildFileGenerator {
 				"org.emftext.language.javaproperties", "javaproperties",
 				"org.emftext.language.javaproperties.resource.javaproperties", "javaproperties", 
 				false),
+			new Language(
+					"org.emftext.language.mecore", "mecore",
+					"org.emftext.language.ecore.resource.mecore", "min.ecore", 
+					false),
 			new Language(
 				"org.emftext.language.manifest", "manifest",
 				"org.emftext.language.manifest.resource.manifest", "manifest", 
@@ -360,7 +364,7 @@ public class BuildFileGenerator {
 					"org.emftext.language.simplemath", "simplemath",
 					"org.emftext.language.simplemath.resource.sm", "simplemath", 
 					false),
-			new OntMoPPLanguage(
+			new OntoMoPPLanguage(
 					"org.emftext.language.sparql", "sparql",
 					"org.emftext.language.sparql.resource.sparql", "sparql",
 					false),

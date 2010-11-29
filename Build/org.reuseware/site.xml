@@ -124,6 +124,9 @@
    <feature url="features/org.emftext.language.ecore.facade_0.9.2.v200911130906.jar" id="org.emftext.language.ecore.facade" version="0.9.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
+   <feature url="features/org.emftext.language.ecore.mecore_0.0.0.v0.jar" id="org.emftext.language.ecore.mecore" version="0.0.0.v0">
+      <category name="EMFText Languages"/>
+   </feature>
    <feature url="features/org.emftext.language.emfdoc_0.0.0.v0.jar" id="org.emftext.language.emfdoc" version="0.0.0.v0">
       <category name="EMFText Languages"/>
    </feature>

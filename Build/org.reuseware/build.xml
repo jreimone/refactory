@@ -367,6 +367,7 @@
 		<property name="theater.version" value="${closurejava.version}"/>
 		<property name="sql.version" value="${closurejava.version}"/>
 		<property name="sqljava.version" value="${closurejava.version}"/>
+		<property name="minecore.version" value="${closurejava.version}"/>
 
 		<property name="conference.version" value="0.2.3"/>
 		<property name="efactory.version" value="${conference.version}"/>
@@ -609,6 +610,13 @@
 		<buildplugin  name="Martin Fowler's DSL Syntax"    package="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl"    version="${martinfowler.version}" />
 		<buildplugin  name="Martin Fowler's DSL Editor"    package="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl.ui" version="${martinfowler.version}" />
 		<buildfeature                                      package="org.emftext.language.martinfowlerdsl"                             version="${martinfowler.version}" />
+			
+		<!-- Minimal Ecore -->
+		<buildplugin  name="Minimal Ecore Metamodel"   package="org.emftext.language.mecore"                   version="${minecore.version}" />
+		<buildplugin  name="Minimal Ecore Constraints" package="org.emftext.language.mecore.postprocessing"    version="${minecore.version}" />
+		<buildplugin  name="Minimal Ecore Syntax"      package="org.emftext.language.ecore.resource.mecore"    version="${minecore.version}" />
+		<buildplugin  name="Minimal Ecore Editor"      package="org.emftext.language.ecore.resource.mecore.ui" version="${minecore.version}" />
+		<buildfeature                                  package="org.emftext.language.ecore.mecore"             version="${minecore.version}" />
 			
 		<!-- Office -->
 		<buildplugin  name="Office DSL Metamodel" package="org.emftext.language.office"                    version="${office.version}" />
