@@ -90,6 +90,7 @@
 			<pathelement path="../org.emftext.language.ecore.resource/bin"/>
 			<pathelement path="../org.emftext.language.ecore.resource.ecore/bin"/>
 			<pathelement path="../org.emftext.language.ecore.resource.facade/bin"/>
+			<pathelement path="../org.emftext.language.ecore.resource.mecore/bin"/>
 			<pathelement path="../org.emftext.language.ecore.resource.text/bin"/>
 			<pathelement path="../org.emftext.language.ecore.test/bin"/>
 			<pathelement path="../org.emftext.language.emfdoc/bin"/>
@@ -156,6 +157,8 @@
 			<pathelement path="../org.emftext.language.manifest.test/bin"/>
 			<pathelement path="../org.emftext.language.martinfowlerdsl/bin"/>
 			<pathelement path="../org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl/bin"/>
+			<pathelement path="../org.emftext.language.mecore/bin"/>
+			<pathelement path="../org.emftext.language.mecore.postprocessing/bin"/>
 			<pathelement path="../org.emftext.language.models/bin"/>
 			<pathelement path="../org.emftext.language.models.resource.model/bin"/>
 			<pathelement path="../org.emftext.language.office/bin"/>
