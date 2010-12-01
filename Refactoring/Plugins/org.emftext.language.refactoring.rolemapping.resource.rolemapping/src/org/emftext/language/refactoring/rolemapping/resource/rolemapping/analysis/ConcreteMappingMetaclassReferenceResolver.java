@@ -15,6 +15,7 @@
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,25 +37,38 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 		if (parent instanceof RoleMappingModel) {
 			RoleMappingModel mappingModel = (RoleMappingModel) parent;
 			EPackage targetMetamodel = mappingModel.getTargetMetamodel();
-			if(targetMetamodel.eIsProxy()){
-				//EcoreUtil.resolveAll(mappingModel);
-			}
+			List<EPackage> imports = mappingModel.getImports();
+			List<EPackage> validMetamodels = new LinkedList<EPackage>(imports);
+			validMetamodels.add(targetMetamodel);
+			
+//			if(targetMetamodel.eIsProxy()){
+//				//EcoreUtil.resolveAll(mappingModel);
+//			}
 			if (targetMetamodel != null && !targetMetamodel.eIsProxy()) {
-				String[] segments = identifier.split(PACKAGE_SEPARATOR_REGEX);
-				Map<String, EClass> eClassMap = getEClassesFromEPackage(targetMetamodel);
+				Map<String, List<EClass>> eClassMap = getEClassesFromEPackages(validMetamodels);
 				if (!eClassMap.isEmpty()) {
 					for (String key : eClassMap.keySet()) {
 						if (key == null) {
 							continue;
 						}
 						if (key.equals(identifier) || resolveFuzzy) {
-							result.addMapping(key, eClassMap.get(key));
-							if (!resolveFuzzy) {
-								return;
+							List<EClass> hopefullySingleElementList = eClassMap.get(key);
+							if(hopefullySingleElementList.size() == 1){
+								result.addMapping(key, hopefullySingleElementList.get(0));
+								if (!resolveFuzzy) {
+									return;
+								}
+								
+							} else {
+								StringBuffer message = new StringBuffer("Metaclass ");
+								message.append(identifier + " is not unique.\n");
+								message.append(hopefullySingleElementList.size() + " other Metaclasses have the same name and package navigation in the target and the imported metamodels");
+								result.setErrorMessage("");
 							}
 						}
 					}
 				} else {
+					String[] segments = identifier.split(PACKAGE_SEPARATOR_REGEX);
 					if(segments.length == 1){
 						result.setErrorMessage("Metaclass '" + segments[0] + "' doesn't exist in " + targetMetamodel.getNsURI());
 					} else {
@@ -78,26 +92,50 @@ public class ConcreteMappingMetaclassReferenceResolver implements org.emftext.la
 	 * The keys of the map are the names of the classes. EClasses found in sub 
 	 * packages are prefixed with the name of the sub package. 
 	 * 
-	 * @param ePackage the package to search in
+	 * @param packages the package to search in
 	 * @return
 	 */
-	private Map<String, EClass> getEClassesFromEPackage(EPackage ePackage) {
-		Map<String, EClass> foundEClasses = new LinkedHashMap<String, EClass>();
-		List<EClassifier> eClassifiers = ePackage.getEClassifiers();
-		for (EClassifier eClassifier : eClassifiers) {
-			if (eClassifier instanceof EClass) {
-				foundEClasses.put(eClassifier.getName(), (EClass) eClassifier);
+	private Map<String, List<EClass>> getEClassesFromEPackages(List<EPackage> packages) {
+		Map<String, List<EClass>> foundEClasses = new LinkedHashMap<String, List<EClass>>();
+		for (EPackage metamodel : packages) {
+			List<EClassifier> eClassifiers = metamodel.getEClassifiers();
+			for (EClassifier eClassifier : eClassifiers) {
+				if (eClassifier instanceof EClass) {
+					List<EClass> classesWithSameNames = foundEClasses.get(eClassifier.getName());
+					if(classesWithSameNames == null){
+						classesWithSameNames = new LinkedList<EClass>();
+						String name = "";
+						if(metamodel.getESuperPackage() == null){
+							name = eClassifier.getName();
+						} else {
+							name = getPackageNavigation((EClass) eClassifier);
+						}
+						foundEClasses.put(name, classesWithSameNames);
+					}
+					classesWithSameNames.add((EClass) eClassifier);
+				}
 			}
-		}
-
-		List<EPackage> subPackages = ePackage.getESubpackages();
-		for (EPackage subpackage : subPackages) {
-			Map<String, EClass> eClassesInSubPackage = getEClassesFromEPackage(subpackage);
-			for (String key : eClassesInSubPackage.keySet()) {
-				foundEClasses.put(subpackage.getName() + PACKAGE_SEPARATOR + key, eClassesInSubPackage.get(key));
+			List<EPackage> subPackages = metamodel.getESubpackages();
+			Map<String, List<EClass>> subPackagesMap = getEClassesFromEPackages(subPackages);
+			for (String  key : subPackagesMap.keySet()) {
+				List<EClass> existentClasses = foundEClasses.get(key);
+				if(existentClasses != null){
+					existentClasses.addAll(subPackagesMap.get(key));
+				} else {
+					foundEClasses.put(key, subPackagesMap.get(key));
+				}
 			}
 		}
 		return foundEClasses;
+	}
+
+	private String getPackageNavigation(EClass eclass) {
+		EPackage ePackage = eclass.getEPackage();
+		StringBuffer packageNavigation = new StringBuffer();
+		while (ePackage.getESuperPackage() != null) {
+			packageNavigation.insert(0, ePackage.getName() + PACKAGE_SEPARATOR);
+		}
+		return packageNavigation.toString();
 	}
 
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {

@@ -484,4 +484,16 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EzOmAH-ZEd-DIf-dzI8HNg" id="(0.9595375722543352,0.20930232558139536)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EjIUgH-ZEd-DIf-dzI8HNg" id="(0.029411764705882353,0.7333333333333333)"/>
   </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_2JaSsf0oEd-D1JS4KEiUGQ" type="3002" source="_k4GnYBcEEd-v66FqVrAtPg" target="_fsuSMBcFEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_2JdWAP0oEd-D1JS4KEiUGQ" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_2JdWAf0oEd-D1JS4KEiUGQ" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_2JdWAv0oEd-D1JS4KEiUGQ" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_2JdWA_0oEd-D1JS4KEiUGQ" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_2JaSsv0oEd-D1JS4KEiUGQ" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_2JaSs_0oEd-D1JS4KEiUGQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//RoleMappingModel/imports"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2JaStP0oEd-D1JS4KEiUGQ" points="[71, 0, 58, -89]$[115, 0, 102, -89]$[115, 89, 102, 0]$[71, 89, 58, 0]"/>
+  </edges>
 </notation:Diagram>
