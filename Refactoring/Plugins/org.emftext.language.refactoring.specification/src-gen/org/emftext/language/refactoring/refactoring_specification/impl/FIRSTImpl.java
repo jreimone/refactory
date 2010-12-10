@@ -23,24 +23,24 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public class FIRSTImpl extends ObjectReferenceAssignmentImpl implements FIRST
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected FIRSTImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RefactoringSpecificationPackage.Literals.FIRST;
-  }
+		return RefactoringSpecificationPackage.Literals.FIRST;
+	}
 
 } //FIRSTImpl

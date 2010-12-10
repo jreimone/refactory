@@ -26,29 +26,29 @@ import org.emftext.language.refactoring.roles.Role;
  */
 public interface RoleRemoval extends ObjectRemoval {
 	/**
-   * Returns the value of the '<em><b>Role</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Role</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Role</em>' reference.
-   * @see #setRole(Role)
-   * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getRoleRemoval_Role()
-   * @model required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Role</em>' reference.
+	 * @see #setRole(Role)
+	 * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getRoleRemoval_Role()
+	 * @model required="true"
+	 * @generated
+	 */
 	Role getRole();
 
 	/**
-   * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.RoleRemoval#getRole <em>Role</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.RoleRemoval#getRole <em>Role</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Role</em>' reference.
-   * @see #getRole()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Role</em>' reference.
+	 * @see #getRole()
+	 * @generated
+	 */
 	void setRole(Role value);
 
 } // RoleRemoval

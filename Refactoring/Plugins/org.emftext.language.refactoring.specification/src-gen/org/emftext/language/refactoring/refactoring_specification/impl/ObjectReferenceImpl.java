@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  */
 public abstract class ObjectReferenceImpl extends ObjectRemovalImpl implements ObjectReference {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ObjectReferenceImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RefactoringSpecificationPackage.Literals.OBJECT_REFERENCE;
-  }
+		return RefactoringSpecificationPackage.Literals.OBJECT_REFERENCE;
+	}
 
 } //ObjectReferenceImpl
