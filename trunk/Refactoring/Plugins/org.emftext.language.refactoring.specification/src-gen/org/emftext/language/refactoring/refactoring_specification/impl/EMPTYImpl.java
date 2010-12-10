@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  */
 public class EMPTYImpl extends RemoveModifierImpl implements EMPTY {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected EMPTYImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RefactoringSpecificationPackage.Literals.EMPTY;
-  }
+		return RefactoringSpecificationPackage.Literals.EMPTY;
+	}
 
 } //EMPTYImpl

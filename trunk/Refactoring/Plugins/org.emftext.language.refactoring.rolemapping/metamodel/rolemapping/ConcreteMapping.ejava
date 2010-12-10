@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.common.util.EList; 
 import org.eclipse.emf.common.util.BasicEList; 
 import org.eclipse.emf.ecore.util.EcoreUtil; 
-import java.util.List; 
+import java.util.List;
 // import of other EClasses
 import roles.Role; 
 import roles.RoleModifier; 
@@ -23,7 +23,21 @@ eclass ConcreteMapping {
 				} 
 			} 
 			return null ; 
-		} 
+		}
+		
+	getCollaborationMappingsForTargetRole ( ) { 
+			EList < CollaborationMapping > mappings = getCollaborationMappings ( ) ;
+			EList<CollaborationMapping> targetMappings = new BasicEList<CollaborationMapping>(); 
+			for ( CollaborationMapping relationMapping : mappings ) { 
+				EcoreUtil .resolveAll ( relationMapping ) ; 
+				MultiplicityCollaboration collaboration = relationMapping .getCollaboration ( ) ; 
+				if ( collaboration .getTarget ( ) .equals ( role ) ) { 
+					targetMappings.add(relationMapping); 
+				} 
+			} 
+			return targetMappings ; 
+		}		
+		 
 	getAttributeMappingForAttribute ( ) { 
 			if ( attribute == null ) { 
 				return null ; 
