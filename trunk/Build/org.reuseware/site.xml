@@ -50,8 +50,10 @@
    <feature url="features/org.emftext.commons.antlr3_1_1_3.1.1.v200911130906.jar" id="org.emftext.commons.antlr3_1_1" version="3.1.1.v200911130906">
       <category name="EMFText Deprecated"/>
    </feature>
-   <!-- TODO jjohannes: is this correct? -->
    <feature url="features/org.emftext.commons.antlr3_2_0_0.0.0.v0.jar" id="org.emftext.commons.antlr3_2_0" version="0.0.0.v0">
+      <category name="EMFText Deprecated"/>
+   </feature> 
+   <feature url="features/org.emftext.commons.antlr3_3_0_0.0.0.v0.jar" id="org.emftext.commons.antlr3_3_0" version="0.0.0.v0">
       <category name="EMFText"/>
    </feature> 
    <feature url="features/org.emftext.access_1.2.0.v200911130906.jar" id="org.emftext.access" version="1.2.0.v200911130906">

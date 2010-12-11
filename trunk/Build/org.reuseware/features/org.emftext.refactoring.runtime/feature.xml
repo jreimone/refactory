@@ -40,7 +40,7 @@ Copyright (c) 2003-2007, Terence Parr. All rights reserved.
       <import feature="org.eclipse.emf.compare"/>
       <import feature="org.eclipse.emf.workspace"/>
       <import feature="org.emftext.access"/>
-      <import feature="org.emftext.commons.antlr3_2_0"/>
+      <import feature="org.emftext.commons.antlr3_3_0"/>
    </requires>
 
 	<plugin id="org.emftext.language.refactoring.rolemapping" download-size="0" install-size="0" version="0.0.0" unpack="false"/>

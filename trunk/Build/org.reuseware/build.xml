@@ -266,10 +266,14 @@
 		<buildplugin name="EMFText Shared ANTLR 3.1.1 Runtime" package="org.emftext.commons.antlr3_1_1" version="3.1.1"/>	
 		<buildfeature                                          package="org.emftext.commons.antlr3_1_1" version="3.1.1"/>
 		
-		<!-- This is the current ANTLR Runtime -->
+		<!-- This one is deprecated --> 
 		<buildplugin name="EMFText Shared ANTLR 3.2.0 Runtime" package="org.emftext.commons.antlr3_2_0" version="3.2.0"/>	
 		<buildfeature                                          package="org.emftext.commons.antlr3_2_0" version="3.2.0"/>
-		
+			
+		<!-- This is the current ANTLR Runtime -->
+		<buildplugin name="EMFText Shared ANTLR 3.3.0 Runtime" package="org.emftext.commons.antlr3_3_0" version="3.3.0"/>	
+		<buildfeature                                          package="org.emftext.commons.antlr3_3_0" version="3.3.0"/>
+				
 		<!-- EMFText Access Feature -->
 		<buildplugin name="EMFText Access"                 package="org.emftext.access" version="${emftext.version}"/>	
 		<buildfeature                                      package="org.emftext.access" version="${emftext.version}"/>
