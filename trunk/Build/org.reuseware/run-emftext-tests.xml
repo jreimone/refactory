@@ -13,7 +13,7 @@
 			<pathelement path="../org.emftext.access/bin" />
 			<pathelement path="../org.emftext.sdk/bin" />
 			<pathelement path="../org.emftext.sdk.ant/bin" />
-			<pathelement path="../org.emftext.sdk.antlr3_2_0/bin" />
+			<pathelement path="../org.emftext.sdk.antlr3_3_0/bin" />
 			<pathelement path="../org.emftext.sdk.automaton/bin" />
 			<pathelement path="../org.emftext.sdk.codegen/bin" />
 			<pathelement path="../org.emftext.sdk.codegen.antlr/bin" />
