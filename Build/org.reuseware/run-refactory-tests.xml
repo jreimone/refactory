@@ -10,7 +10,7 @@
 		<delete dir="${test_result_dir}" includes="*.txt" />
 		
 		<path id="junit_classpath">
-			<pathelement path="../org.emftext.commons.antlr3_2_0/bin" />
+			<pathelement path="../org.emftext.commons.antlr3_3_0/bin" />
 
 			<pathelement path="../org.emftext.language.refactoring.rolemapping/bin" />
 			<pathelement path="../org.emftext.language.refactoring.rolemapping.resource.rolemapping/bin" />

@@ -54,7 +54,7 @@
 			<pathelement path="../org.emftext.language.km3.examples/bin"/>
 			<pathelement path="../org.emftext.language.quickuml.examples/bin"/>
 			<pathelement path="../org.emftext.language.tbool.examples/bin"/>
-			<pathelement path="../org.emftext.commons.antlr3_2_0/bin"/>
+			<pathelement path="../org.emftext.commons.antlr3_3_0/bin"/>
 			<pathelement path="../org.emftext.language.abnf/bin"/>
 			<pathelement path="../org.emftext.language.abnf.resource.abnf/bin"/>
 			<pathelement path="../org.emftext.language.abnf.test/bin"/>

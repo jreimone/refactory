@@ -13,7 +13,7 @@
 	<taskdef name="emftext-generate-text-resource" classname="org.emftext.sdk.ant.GenerateTextResourceTask">
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
-		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_2_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_3_0/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen.antlr/bin" />
@@ -39,7 +39,7 @@
 	<taskdef name="emftext-register-ecore-resource-factory" classname="org.emftext.sdk.ant.RegisterEcoreResourceFactoryTask">
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
-		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_2_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_3_0/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
@@ -53,7 +53,7 @@
 	<taskdef name="emftext-register-uri-mapping" classname="org.emftext.sdk.ant.RegisterURIMappingTask">
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
-		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_2_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_3_0/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
 		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
