@@ -1,0 +1,14 @@
+ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
+IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
+
+RenameNamedElement maps <RenameX> { 
+	 Nameable := NamedElement (name -> name);
+}
+
+RenameOperationDefinitionInDefCS maps <OCLRenameSubX> {
+	ParentObject := OperationDefinitionInDefCS{
+		subx := operation;
+	};
+	Renameable := Operation ( name -> name);
+
+}

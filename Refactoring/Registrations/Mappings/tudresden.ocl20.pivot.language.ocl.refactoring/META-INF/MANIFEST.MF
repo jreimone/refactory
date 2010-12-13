@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Oclrefactoring
+Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.refactoring;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: oclrefactoring.Activator
+Bundle-Vendor: Michael Muck
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

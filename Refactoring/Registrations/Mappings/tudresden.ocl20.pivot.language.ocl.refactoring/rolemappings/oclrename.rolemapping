@@ -1,0 +1,27 @@
+ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
+IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
+
+
+RenameSimpleNameCS maps <RenameX> { 
+	Nameable :=  SimpleNameCS( name -> simpleName )  ;
+}
+
+"Rename Operation" maps <RenameX> {
+	Nameable := Operation( name -> name) ;
+}
+
+RenameType maps <RenameX> {
+	Nameable := Type ( name -> name) ;
+}
+
+RenameNamedElement maps <RenameX> {
+	Nameable := NamedElement( name -> name);
+}
+
+RenameStringLiteralExpCS maps <RenameX> {
+	Nameable := StringLiteralExpCS (name -> stringLiteral);
+}
+
+RenameIntegerLiteralExpCS maps <RenameX> {
+	Nameable := IntegerLiteralExpCS (name -> integerLiteral);
+}
