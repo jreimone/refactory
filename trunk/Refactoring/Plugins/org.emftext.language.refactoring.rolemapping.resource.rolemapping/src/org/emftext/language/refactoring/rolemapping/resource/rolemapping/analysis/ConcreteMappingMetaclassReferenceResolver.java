@@ -50,7 +50,7 @@ public class ConcreteMappingMetaclassReferenceResolver
 						for (String key : eClassMap.keySet()) {
 							List<EClass> foundClasses = eClassMap.get(key);
 							for (EClass eClass : foundClasses) {
-								result.addMapping(identifier, eClass);
+								result.addMapping(key, eClass);
 							}
 						}
 						return;
