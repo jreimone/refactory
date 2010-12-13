@@ -1,0 +1,7 @@
+REFACTORING FOR <OCLRenameSubX> 
+
+STEPS { 
+	object renameable := Renameable from path(INPUT);
+	
+	assign renameable.name; 	
+} 
