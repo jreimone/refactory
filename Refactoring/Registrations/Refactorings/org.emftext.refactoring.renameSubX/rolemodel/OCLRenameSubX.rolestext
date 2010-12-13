@@ -1,0 +1,13 @@
+RoleModel OCLRenameSubX {
+
+	input ROLE ParentObject;
+ 	ROLE Renameable(
+ 			name
+ 	);
+
+
+ ParentObject  [1..1] -- Renameable subx [1..1];
+	
+
+
+}
