@@ -36,32 +36,33 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-		determineOriginalName(change);
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
-			if(role.getName().equals("Nameable")){
+			if (role.getName().equals("Nameable")) {
 				namedElements = roleRuntimeInstanceMap.get(role);
-				if(namedElements != null && namedElements.size() == 1 && (namedElements.get(0) instanceof SimpleNameCS)){
+				if (namedElements != null && namedElements.size() > 0
+						&& (namedElements.get(0) instanceof SimpleNameCS)) {
 					simpleName = (SimpleNameCS) namedElements.get(0);
-					performSpecificTransformation(simpleName);
+					if (determineOriginalName(change)) {
+						performSpecificTransformation(simpleName);
+					}
 				}
 			}
 		}
 		return Status.OK_STATUS;
 	}
 
-	private void determineOriginalName(ChangeDescription change) {
-		EMap<EObject,EList<FeatureChange>> objectChanges = change.getObjectChanges();
-		Set<EObject> keySet = objectChanges.keySet();
-		for (EObject eObject : keySet) {
-			EList<FeatureChange> eList = objectChanges.get(eObject);
-			for (FeatureChange featureChange : eList) {
-				EList<ListChange> listChanges = featureChange.getListChanges();
-				for (ListChange listChange : listChanges) {
-
-				}
+	private boolean determineOriginalName(ChangeDescription change) {
+		EMap<EObject, EList<FeatureChange>> objectChanges = change.getObjectChanges();
+		EList<FeatureChange> eList = objectChanges.get(simpleName);
+		for (FeatureChange featureChange : eList) {
+			Object value = featureChange.getValue();
+			if (value instanceof String) {
+				originalName = (String) value;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	private void performSpecificTransformation(SimpleNameCS simpleName2) {
@@ -71,10 +72,12 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 		TreeIterator<EObject> eAllContents = expression.eAllContents();
 		while (eAllContents.hasNext()) {
 			EObject eObject = (EObject) eAllContents.next();
-			if(eObject instanceof NamedLiteralExpCS){
+			if (eObject instanceof NamedLiteralExpCS) {
 				NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
 				NamedElement namedElement = literal.getNamedElement();
-				
+				if(namedElement.getName().equals(originalName)){
+					namedElement.setName(simpleName2.getSimpleName());
+				}
 			}
 		}
 	}
