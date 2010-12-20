@@ -7,6 +7,10 @@ Bundle-Activator: oclrefactoring.Activator
 Bundle-Vendor: Michael Muck
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.emftext.refactoring.registry.rolemapping
+ org.emftext.refactoring.registry.rolemapping,
+ org.eclipse.emf.ecore.change,
+ org.emftext.language.refactoring.roles,
+ tudresden.ocl20.pivot.language.ocl,
+ tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

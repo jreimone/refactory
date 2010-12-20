@@ -13,5 +13,13 @@
             rolemapping_resource="rolemappings/renameNE.rolemapping">
       </rolemapping>
    </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="RenameSimpleNameCS"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.OCLPostProcessor">
+      </postprocessor>
+   </extension>
 
 </plugin>
