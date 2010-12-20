@@ -93,20 +93,14 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 					setPageComplete();
 				}
 			});
-//			attribInput.addListener(SWT.Verify, new Listener() {
-//
-//				public void handleEvent(Event event) {
-//					setPageComplete();
-////					String input = attribInput.getText() + event.text;
-////					boolean valid = valueProvider.isValueValid(input);
-////					if(valid && !"".equals(input)){
-////						event.doit = true;
-////						setPageComplete();
-////					} else {
-////						event.doit = false;
-////					}
-//				}
-//			});
+			if(owner != null){
+				Object value = owner.eGet(attribute);
+				attribInput.setFocus();
+				attribInput.setText(value.toString());
+				int length = value.toString().length();
+				attribInput.setSelection(0, length);
+			}
+			
 			data = new GridData(GridData.FILL, GridData.BEGINNING, true, false);
 			data.horizontalSpan = 4;
 			attribInput.setFont(composite.getFont());
