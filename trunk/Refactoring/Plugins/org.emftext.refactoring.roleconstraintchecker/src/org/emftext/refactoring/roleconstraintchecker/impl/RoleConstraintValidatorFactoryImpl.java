@@ -23,7 +23,7 @@ public class RoleConstraintValidatorFactoryImpl implements
 	 * @see org.emftext.refactoring.roleconstraintchecker.RoleConstraintValidatorFactory#getValidator(org.emftext.language.refactoring.rolemapping.RoleMappingModel)
 	 */
 	public IRoleConstraintValidator createValidator() {
-		return new BasicRoleConstraintValidator();
+		return new CompositeRoleConstraintValidator();
 	}
 
 }

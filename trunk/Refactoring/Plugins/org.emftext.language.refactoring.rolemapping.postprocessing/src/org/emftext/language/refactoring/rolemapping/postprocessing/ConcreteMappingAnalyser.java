@@ -57,6 +57,7 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 							, String.format(MAPPED_ROLE_UNIQUE, mappedRole.getName())
 							, concreteMapping);
 				}
+				analyseObligatoryCollaborations(resource, concreteMapping);
 			}
 			if(!obligatoryRoles.isEmpty()){
 				for (Role obligatoryRole : obligatoryRoles) {
@@ -70,6 +71,11 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 		}
 	}
 	
+	private void analyseObligatoryCollaborations(RolemappingResource resource, ConcreteMapping concreteMapping) {
+		// TODO implements
+		
+	}
+
 	private void analyseObligatoryAttributeMappings(RolemappingResource resource, RoleMapping mapping){
 		List<ConcreteMapping> concreteMappings = mapping.getRoleToMetaelement();
 		for (ConcreteMapping concreteMapping : concreteMappings) {

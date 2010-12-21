@@ -219,7 +219,7 @@ public class ModelUtil {
 	 * @return a list containing only elements of the given type
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> EList<T> getObjectsByType(Iterator<EObject> iterator, Class<T> type){
+	public static <T> EList<T> getObjectsByType(Iterator<? extends EObject> iterator, Class<T> type){
 		EList<T> filteredModel = new BasicEList<T>();
 		while (iterator.hasNext()) {
 			EObject eObject = (EObject) iterator.next();
