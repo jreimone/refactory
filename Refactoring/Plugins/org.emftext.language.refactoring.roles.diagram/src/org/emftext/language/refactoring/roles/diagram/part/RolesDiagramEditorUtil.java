@@ -150,9 +150,9 @@ public class RolesDiagramEditorUtil {
 
 	/**
 	 * This method should be called within a workspace modify operation since it creates resources.
-	 * @generated
+	 * @generated NOT
 	 */
-	public static Resource createDiagram(URI diagramURI, URI modelURI,
+	public static Resource createDiagram(URI diagramURI, final URI modelURI,
 			IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		progressMonitor.beginTask(
@@ -168,7 +168,9 @@ public class RolesDiagramEditorUtil {
 				Collections.EMPTY_LIST) {
 
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-				RoleModel model = createInitialModel();
+				IPath path = new Path(modelURI.toPlatformString(true));
+				String fileName = path.removeFileExtension().lastSegment();
+				RoleModel model = createInitialModel(fileName);
 				attachModelToResource(model, modelResource);
 
 				Diagram diagram = ViewService.createDiagram(
@@ -208,10 +210,12 @@ public class RolesDiagramEditorUtil {
 	* Create a new instance of domain element associated with canvas.
 	* <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	* @generated
+	* @generated NOT
 	*/
-	private static RoleModel createInitialModel() {
-		return RolesFactory.eINSTANCE.createRoleModel();
+	private static RoleModel createInitialModel(String initialName) {
+		RoleModel roleModel = RolesFactory.eINSTANCE.createRoleModel();
+		roleModel.setName(initialName);
+		return roleModel;
 	}
 
 	/**

@@ -3,6 +3,7 @@ package org.emftext.language.refactoring.roles.diagram.part;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -125,7 +126,21 @@ public class RolesCreationWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
+	 */
+	private String getFileNameWithoutExtension(IPath path){
+		return path.removeFileExtension().lastSegment();
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	private boolean equalFileNamesWithoutExtension() {
+		return getFileNameWithoutExtension(domainModelFilePage.getFilePath()).equals(getFileNameWithoutExtension(diagramModelFilePage.getFilePath()));
+	}
+
+	/**
+	 * @generated NOT
 	 */
 	public boolean performFinish() {
 		IRunnableWithProgress op =
@@ -133,6 +148,14 @@ public class RolesCreationWizard extends Wizard implements INewWizard {
 
 					protected void execute(IProgressMonitor monitor)
 							throws CoreException, InterruptedException {
+						if(!equalFileNamesWithoutExtension()){
+							IPath diagramPath = diagramModelFilePage.getFilePath();
+							String diagramName = getFileNameWithoutExtension(diagramPath);
+							String fileExtension = domainModelFilePage.getExtension();
+							String uniqueFileName = RolesDiagramEditorUtil.getUniqueFileName(
+									domainModelFilePage.getContainerFullPath(), diagramName, fileExtension);
+							domainModelFilePage.setFileName(uniqueFileName);
+						}
 						diagram = RolesDiagramEditorUtil.createDiagram(
 								diagramModelFilePage.getURI(),
 								domainModelFilePage.getURI(),
