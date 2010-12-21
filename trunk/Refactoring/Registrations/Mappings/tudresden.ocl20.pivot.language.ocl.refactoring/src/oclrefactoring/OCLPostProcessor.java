@@ -36,6 +36,7 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
 			if (role.getName().equals("Nameable")) {
@@ -59,6 +60,7 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 			Object value = featureChange.getValue();
 			if (value instanceof String) {
 				originalName = (String) value;
+				System.err.println("original name determined as: "+originalName);
 				return true;
 			}
 		}
@@ -66,17 +68,24 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 	}
 
 	private void performSpecificTransformation(SimpleNameCS simpleName2) {
-		VariableDeclarationWithInitCS var = (VariableDeclarationWithInitCS) simpleName2.eContainer();
-		LetExpCS let = (LetExpCS) var.eContainer();
-		OclExpressionCS expression = let.getOclExpression();
-		TreeIterator<EObject> eAllContents = expression.eAllContents();
-		while (eAllContents.hasNext()) {
-			EObject eObject = (EObject) eAllContents.next();
-			if (eObject instanceof NamedLiteralExpCS) {
-				NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
-				NamedElement namedElement = literal.getNamedElement();
-				if(namedElement.getName().equals(originalName)){
-					namedElement.setName(simpleName2.getSimpleName());
+		//the following is just for renaming variable-definitions and their uses, so if a simpleNameCS outside a variable-definition is renamed,
+		//the following steps should not be executed!
+		if (simpleName2.eContainer() instanceof VariableDeclarationWithInitCS) {
+			VariableDeclarationWithInitCS var = (VariableDeclarationWithInitCS) simpleName2.eContainer();
+			//now, this part refers to variables inside let-expressions:
+			if(var.eContainer() instanceof LetExpCS) {
+				LetExpCS let = (LetExpCS) var.eContainer();
+				OclExpressionCS expression = let.getOclExpression();
+				TreeIterator<EObject> eAllContents = expression.eAllContents();
+				while (eAllContents.hasNext()) {
+					EObject eObject = (EObject) eAllContents.next();
+					if (eObject instanceof NamedLiteralExpCS) {
+						NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
+						NamedElement namedElement = literal.getNamedElement();
+						if(namedElement.getName().equals(originalName)){
+							namedElement.setName(simpleName2.getSimpleName());
+						}
+					}
 				}
 			}
 		}
