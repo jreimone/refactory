@@ -31,8 +31,7 @@ public class ElementInitializers {
 			newInstance_1_0.setUpperBound(1);
 
 		} catch (RuntimeException e) {
-			RolesDiagramEditorPlugin.getInstance().logError(
-					"Element initialization failed", e); //$NON-NLS-1$						
+			RolesDiagramEditorPlugin.getInstance().logError("Element initialization failed", e); //$NON-NLS-1$						
 		}
 	}
 
@@ -52,8 +51,7 @@ public class ElementInitializers {
 			newInstance_1_0.setUpperBound(1);
 
 		} catch (RuntimeException e) {
-			RolesDiagramEditorPlugin.getInstance().logError(
-					"Element initialization failed", e); //$NON-NLS-1$						
+			RolesDiagramEditorPlugin.getInstance().logError("Element initialization failed", e); //$NON-NLS-1$						
 		}
 	}
 
@@ -63,8 +61,7 @@ public class ElementInitializers {
 	public static ElementInitializers getInstance() {
 		ElementInitializers cached = RolesDiagramEditorPlugin.getInstance().getElementInitializers();
 		if (cached == null) {
-			RolesDiagramEditorPlugin.getInstance().setElementInitializers(
-					cached = new ElementInitializers());
+			RolesDiagramEditorPlugin.getInstance().setElementInitializers(cached = new ElementInitializers());
 		}
 		return cached;
 	}

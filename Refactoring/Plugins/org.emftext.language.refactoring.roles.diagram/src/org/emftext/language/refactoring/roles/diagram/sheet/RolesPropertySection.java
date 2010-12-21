@@ -34,8 +34,7 @@ public class RolesPropertySection extends AdvancedPropertySection implements
 		}
 		AdapterFactory af = getAdapterFactory(object);
 		if (af != null) {
-			IItemPropertySource ips = (IItemPropertySource) af.adapt(object,
-					IItemPropertySource.class);
+			IItemPropertySource ips = (IItemPropertySource) af.adapt(object, IItemPropertySource.class);
 			if (ips != null) {
 				return new PropertySource(object, ips);
 			}
@@ -79,7 +78,8 @@ public class RolesPropertySection extends AdvancedPropertySection implements
 	 * @generated
 	 */
 	public void setInput(IWorkbenchPart part, ISelection selection) {
-		if (selection.isEmpty() || false == selection instanceof StructuredSelection) {
+		if (selection.isEmpty()
+				|| false == selection instanceof StructuredSelection) {
 			super.setInput(part, selection);
 			return;
 		}

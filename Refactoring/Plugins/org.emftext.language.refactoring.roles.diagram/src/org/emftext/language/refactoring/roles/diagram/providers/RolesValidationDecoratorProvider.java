@@ -44,37 +44,37 @@ import org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
 /**
  * @generated
  */
-public class RolesValidationDecoratorProvider
-		extends AbstractProvider
+public class RolesValidationDecoratorProvider extends AbstractProvider
 		implements IDecoratorProvider {
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	private static final String KEY = "validationStatus"; //$NON-NLS-1$
 
 	/**
-	* @generated
-	*/
-	private static final String MARKER_TYPE = RolesDiagramEditorPlugin.ID + ".diagnostic"; //$NON-NLS-1$
+	 * @generated
+	 */
+	private static final String MARKER_TYPE = RolesDiagramEditorPlugin.ID
+			+ ".diagnostic"; //$NON-NLS-1$
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	private static MarkerObserver fileObserver;
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	private static Map/*<String, List<IDecorator>>*/allDecorators = new HashMap();
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
 		EditPart editPart = (EditPart) decoratorTarget.getAdapter(EditPart.class);
-		if (editPart instanceof GraphicalEditPart ||
-				editPart instanceof AbstractConnectionEditPart) {
+		if (editPart instanceof GraphicalEditPart
+				|| editPart instanceof AbstractConnectionEditPart) {
 			Object model = editPart.getModel();
 			if ((model instanceof View)) {
 				View view = (View) model;
@@ -87,36 +87,34 @@ public class RolesValidationDecoratorProvider
 				return;
 			}
 			if (((DiagramEditDomain) ed).getEditorPart() instanceof RolesDiagramEditor) {
-				decoratorTarget.installDecorator(KEY,
-						new StatusDecorator(decoratorTarget));
+				decoratorTarget.installDecorator(KEY, new StatusDecorator(decoratorTarget));
 			}
 		}
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	public boolean provides(IOperation operation) {
 		if (!(operation instanceof CreateDecoratorsOperation)) {
 			return false;
 		}
-		IDecoratorTarget decoratorTarget =
-				((CreateDecoratorsOperation) operation).getDecoratorTarget();
-		View view = (View) decoratorTarget.getAdapter(
-				View.class);
-		return view != null && RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID(view));
+		IDecoratorTarget decoratorTarget = ((CreateDecoratorsOperation) operation).getDecoratorTarget();
+		View view = (View) decoratorTarget.getAdapter(View.class);
+		return view != null
+				&& RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID(view));
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	public static void refreshDecorators(View view) {
 		refreshDecorators(ViewUtil.getIdStr(view), view.getDiagram());
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	private static void refreshDecorators(String viewId, Diagram diagram) {
 		final List decorators = viewId != null ? (List) allDecorators.get(viewId)
 				: null;
@@ -128,69 +126,61 @@ public class RolesValidationDecoratorProvider
 
 			public void run() {
 				try {
-					TransactionUtil.getEditingDomain(fdiagram).runExclusive(
-							new Runnable() {
+					TransactionUtil.getEditingDomain(fdiagram).runExclusive(new Runnable() {
 
-								public void run() {
-									for (Iterator it = decorators.iterator(); it.hasNext();) {
-										IDecorator decorator =
-												(IDecorator) it.next();
-										decorator.refresh();
-									}
-								}
-							});
+						public void run() {
+							for (Iterator it = decorators.iterator(); it.hasNext();) {
+								IDecorator decorator = (IDecorator) it.next();
+								decorator.refresh();
+							}
+						}
+					});
 				} catch (Exception e) {
-					RolesDiagramEditorPlugin.getInstance().logError(
-							"Decorator refresh failure", e); //$NON-NLS-1$
+					RolesDiagramEditorPlugin.getInstance().logError("Decorator refresh failure", e); //$NON-NLS-1$
 				}
 			}
 		});
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	public static class StatusDecorator extends AbstractDecorator {
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		private String viewId;
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public StatusDecorator(IDecoratorTarget decoratorTarget) {
 			super(decoratorTarget);
 			try {
-				final View view = (View) getDecoratorTarget().getAdapter(
-						View.class);
-				TransactionUtil.getEditingDomain(view).runExclusive(
-						new Runnable() {
+				final View view = (View) getDecoratorTarget().getAdapter(View.class);
+				TransactionUtil.getEditingDomain(view).runExclusive(new Runnable() {
 
-							public void run() {
-								StatusDecorator.this.viewId = view != null ?
-										ViewUtil.getIdStr(view) : null;
-							}
-						});
+					public void run() {
+						StatusDecorator.this.viewId = view != null ? ViewUtil.getIdStr(view)
+								: null;
+					}
+				});
 			} catch (Exception e) {
-				RolesDiagramEditorPlugin.getInstance().logError(
-						"ViewID access failure", e); //$NON-NLS-1$			
+				RolesDiagramEditorPlugin.getInstance().logError("ViewID access failure", e); //$NON-NLS-1$			
 			}
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void refresh() {
 			removeDecoration();
-			View view = (View) getDecoratorTarget().getAdapter(
-					View.class);
+			View view = (View) getDecoratorTarget().getAdapter(View.class);
 			if (view == null || view.eResource() == null) {
 				return;
 			}
-			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(
-					EditPart.class);
+			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 			if (editPart == null || editPart.getViewer() == null) {
 				return;
 			}
@@ -208,11 +198,9 @@ public class RolesValidationDecoratorProvider
 			}
 			IMarker[] markers = null;
 			try {
-				markers = resource.findMarkers(MARKER_TYPE, true,
-						IResource.DEPTH_INFINITE);
+				markers = resource.findMarkers(MARKER_TYPE, true, IResource.DEPTH_INFINITE);
 			} catch (CoreException e) {
-				RolesDiagramEditorPlugin.getInstance().logError(
-						"Validation markers refresh failure", e); //$NON-NLS-1$
+				RolesDiagramEditorPlugin.getInstance().logError("Validation markers refresh failure", e); //$NON-NLS-1$
 			}
 			if (markers == null || markers.length == 0) {
 				return;
@@ -220,20 +208,14 @@ public class RolesValidationDecoratorProvider
 			Label toolTip = null;
 			for (int i = 0; i < markers.length; i++) {
 				IMarker marker = markers[i];
-				String attribute = marker.getAttribute(
-						org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-						""); //$NON-NLS-1$
+				String attribute = marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, ""); //$NON-NLS-1$
 				if (attribute.equals(elementId)) {
-					int nextSeverity = marker.getAttribute(IMarker.SEVERITY,
-							IMarker.SEVERITY_INFO);
+					int nextSeverity = marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
 					Image nextImage = getImage(nextSeverity);
 					if (foundMarker == null) {
 						foundMarker = marker;
-						toolTip = new Label(
-															marker.getAttribute(
-																	IMarker.MESSAGE,
-																	""), //$NON-NLS-1$
-															nextImage);
+						toolTip = new Label(marker.getAttribute(IMarker.MESSAGE, ""), //$NON-NLS-1$
+						nextImage);
 					} else {
 						if (toolTip.getChildren().isEmpty()) {
 							Label comositeLabel = new Label();
@@ -243,11 +225,8 @@ public class RolesValidationDecoratorProvider
 							comositeLabel.add(toolTip);
 							toolTip = comositeLabel;
 						}
-						toolTip.add(new Label(
-															marker.getAttribute(
-																	IMarker.MESSAGE,
-																	""), //$NON-NLS-1$
-															nextImage));
+						toolTip.add(new Label(marker.getAttribute(IMarker.MESSAGE, ""), //$NON-NLS-1$
+						nextImage));
 					}
 					severity = (nextSeverity > severity) ? nextSeverity
 							: severity;
@@ -260,45 +239,39 @@ public class RolesValidationDecoratorProvider
 			// add decoration
 			if (editPart instanceof org.eclipse.gef.GraphicalEditPart) {
 				if (view instanceof Edge) {
-					setDecoration(getDecoratorTarget().addConnectionDecoration(
-							getImage(severity), 50, true));
+					setDecoration(getDecoratorTarget().addConnectionDecoration(getImage(severity), 50, true));
 				} else {
 					int margin = -1;
 					if (editPart instanceof org.eclipse.gef.GraphicalEditPart) {
-						margin = MapModeUtil.getMapMode(
-								((org.eclipse.gef.GraphicalEditPart) editPart).getFigure()).DPtoLP(
-								margin);
+						margin = MapModeUtil.getMapMode(((org.eclipse.gef.GraphicalEditPart) editPart).getFigure()).DPtoLP(margin);
 					}
-					setDecoration(getDecoratorTarget().addShapeDecoration(
-							getImage(severity),
-							IDecoratorTarget.Direction.NORTH_EAST, margin, true));
+					setDecoration(getDecoratorTarget().addShapeDecoration(getImage(severity), IDecoratorTarget.Direction.NORTH_EAST, margin, true));
 				}
 				getDecoration().setToolTip(toolTip);
 			}
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		private Image getImage(int severity) {
 			String imageName = ISharedImages.IMG_OBJS_ERROR_TSK;
 			switch (severity) {
-				case IMarker.SEVERITY_ERROR:
-					imageName = ISharedImages.IMG_OBJS_ERROR_TSK;
-					break;
-				case IMarker.SEVERITY_WARNING:
-					imageName = ISharedImages.IMG_OBJS_WARN_TSK;
-					break;
-				default:
-					imageName = ISharedImages.IMG_OBJS_INFO_TSK;
+			case IMarker.SEVERITY_ERROR:
+				imageName = ISharedImages.IMG_OBJS_ERROR_TSK;
+				break;
+			case IMarker.SEVERITY_WARNING:
+				imageName = ISharedImages.IMG_OBJS_WARN_TSK;
+				break;
+			default:
+				imageName = ISharedImages.IMG_OBJS_INFO_TSK;
 			}
-			return PlatformUI.getWorkbench().getSharedImages().getImage(
-					imageName);
+			return PlatformUI.getWorkbench().getSharedImages().getImage(imageName);
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void activate() {
 			if (viewId == null) {
 				return;
@@ -315,8 +288,7 @@ public class RolesValidationDecoratorProvider
 			}
 
 			// start listening to changes in resources
-			View view = (View) getDecoratorTarget().getAdapter(
-					View.class);
+			View view = (View) getDecoratorTarget().getAdapter(View.class);
 			if (view == null) {
 				return;
 			}
@@ -325,14 +297,13 @@ public class RolesValidationDecoratorProvider
 				return;
 			}
 			if (fileObserver == null) {
-				FileChangeManager.getInstance().addFileObserver(
-						fileObserver = new MarkerObserver(diagramView));
+				FileChangeManager.getInstance().addFileObserver(fileObserver = new MarkerObserver(diagramView));
 			}
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void deactivate() {
 			if (viewId == null) {
 				return;
@@ -357,87 +328,82 @@ public class RolesValidationDecoratorProvider
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	static class MarkerObserver implements IFileObserver {
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		private Diagram diagram;
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		private MarkerObserver(Diagram diagram) {
 			this.diagram = diagram;
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void handleFileRenamed(IFile oldFile, IFile file) {
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void handleFileMoved(IFile oldFile, IFile file) {
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void handleFileDeleted(IFile file) {
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void handleFileChanged(IFile file) {
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void handleMarkerAdded(IMarker marker) {
-			if (marker.getAttribute(
-					org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-					null) != null) {
+			if (marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, null) != null) {
 				handleMarkerChanged(marker);
 			}
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void handleMarkerDeleted(IMarker marker, Map attributes) {
 			String viewId = (String) attributes.get(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID);
 			refreshDecorators(viewId, diagram);
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		public void handleMarkerChanged(IMarker marker) {
 			if (!MARKER_TYPE.equals(getType(marker))) {
 				return;
 			}
-			String viewId = marker.getAttribute(
-					org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-					""); //$NON-NLS-1$
+			String viewId = marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, ""); //$NON-NLS-1$
 			refreshDecorators(viewId, diagram);
 		}
 
 		/**
-		* @generated
-		*/
+		 * @generated
+		 */
 		private String getType(IMarker marker) {
 			try {
 				return marker.getType();
 			} catch (CoreException e) {
-				RolesDiagramEditorPlugin.getInstance().logError(
-						"Validation marker refresh failure", e); //$NON-NLS-1$
+				RolesDiagramEditorPlugin.getInstance().logError("Validation marker refresh failure", e); //$NON-NLS-1$
 				return ""; //$NON-NLS-1$
 			}
 		}

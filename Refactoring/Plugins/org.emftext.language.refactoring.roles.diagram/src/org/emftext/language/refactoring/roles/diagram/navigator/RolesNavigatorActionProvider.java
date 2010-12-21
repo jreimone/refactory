@@ -74,8 +74,7 @@ public class RolesNavigatorActionProvider extends CommonActionProvider {
 		IStructuredSelection selection = (IStructuredSelection) getContext().getSelection();
 		myOpenDiagramAction.selectionChanged(selection);
 		if (myOpenDiagramAction.isEnabled()) {
-			actionBars.setGlobalActionHandler(ICommonActionConstants.OPEN,
-					myOpenDiagramAction);
+			actionBars.setGlobalActionHandler(ICommonActionConstants.OPEN, myOpenDiagramAction);
 		}
 	}
 
@@ -143,8 +142,7 @@ public class RolesNavigatorActionProvider extends CommonActionProvider {
 			try {
 				page.openEditor(editorInput, RolesDiagramEditor.ID);
 			} catch (PartInitException e) {
-				RolesDiagramEditorPlugin.getInstance().logError(
-						"Exception while openning diagram", e); //$NON-NLS-1$
+				RolesDiagramEditorPlugin.getInstance().logError("Exception while openning diagram", e); //$NON-NLS-1$
 			}
 		}
 
@@ -162,8 +160,8 @@ public class RolesNavigatorActionProvider extends CommonActionProvider {
 				}
 			}
 			URI uri = EcoreUtil.getURI(diagram);
-			String editorName = uri.lastSegment() + '#' + diagram.eResource().getContents().indexOf(
-					diagram);
+			String editorName = uri.lastSegment() + '#'
+					+ diagram.eResource().getContents().indexOf(diagram);
 			IEditorInput editorInput = new URIEditorInput(uri, editorName);
 			return editorInput;
 		}

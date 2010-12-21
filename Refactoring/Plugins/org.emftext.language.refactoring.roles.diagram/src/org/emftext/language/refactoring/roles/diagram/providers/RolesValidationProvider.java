@@ -12,24 +12,23 @@ import org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
 public class RolesValidationProvider {
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	private static boolean constraintsActive = false;
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	public static boolean shouldConstraintsBePrivate() {
 		return false;
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	public static void runWithConstraints(TransactionalEditingDomain editingDomain, Runnable operation) {
 		final Runnable op = operation;
 		Runnable task = new Runnable() {
-
 			public void run() {
 				try {
 					constraintsActive = true;
@@ -43,8 +42,7 @@ public class RolesValidationProvider {
 			try {
 				editingDomain.runExclusive(task);
 			} catch (Exception e) {
-				RolesDiagramEditorPlugin.getInstance().logError(
-						"Validation failed", e); //$NON-NLS-1$
+				RolesDiagramEditorPlugin.getInstance().logError("Validation failed", e); //$NON-NLS-1$
 			}
 		} else {
 			task.run();
@@ -52,14 +50,15 @@ public class RolesValidationProvider {
 	}
 
 	/**
-	* @generated
-	*/
+	 * @generated
+	 */
 	static boolean isInDefaultEditorContext(Object object) {
 		if (shouldConstraintsBePrivate() && !constraintsActive) {
 			return false;
 		}
 		if (object instanceof View) {
-			return constraintsActive && RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID((View) object));
+			return constraintsActive
+					&& RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID((View) object));
 		}
 		return true;
 	}

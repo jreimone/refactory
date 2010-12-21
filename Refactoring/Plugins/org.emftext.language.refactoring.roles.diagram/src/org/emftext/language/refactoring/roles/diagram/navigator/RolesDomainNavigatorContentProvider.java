@@ -64,7 +64,6 @@ public class RolesDomainNavigatorContentProvider implements
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		myEditingDomain = (AdapterFactoryEditingDomain) editingDomain;
 		myEditingDomain.setResourceToReadOnlyMap(new HashMap() {
-
 			public Object get(Object key) {
 				if (!containsKey(key)) {
 					put(key, Boolean.TRUE);
@@ -73,7 +72,6 @@ public class RolesDomainNavigatorContentProvider implements
 			}
 		});
 		myViewerRefreshRunnable = new Runnable() {
-
 			public void run() {
 				if (myViewer != null) {
 					myViewer.refresh();
@@ -81,7 +79,6 @@ public class RolesDomainNavigatorContentProvider implements
 			}
 		};
 		myWorkspaceSynchronizer = new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
-
 			public void dispose() {
 			}
 
@@ -139,8 +136,7 @@ public class RolesDomainNavigatorContentProvider implements
 	 */
 	void asyncRefresh() {
 		if (myViewer != null && !myViewer.getControl().isDisposed()) {
-			myViewer.getControl().getDisplay().asyncExec(
-					myViewerRefreshRunnable);
+			myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
 		}
 	}
 
@@ -175,19 +171,13 @@ public class RolesDomainNavigatorContentProvider implements
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
-			URI fileURI = URI.createPlatformResourceURI(
-					file.getFullPath().toString(), true);
-			Resource resource = myEditingDomain.getResourceSet().getResource(
-					fileURI, true);
-			return wrapEObjects(
-					myAdapterFctoryContentProvier.getChildren(resource),
-					parentElement);
+			URI fileURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
+			return wrapEObjects(myAdapterFctoryContentProvier.getChildren(resource), parentElement);
 		}
 
 		if (parentElement instanceof RolesDomainNavigatorItem) {
-			return wrapEObjects(
-					myAdapterFctoryContentProvier.getChildren(((RolesDomainNavigatorItem) parentElement).getEObject()),
-					parentElement);
+			return wrapEObjects(myAdapterFctoryContentProvier.getChildren(((RolesDomainNavigatorItem) parentElement).getEObject()), parentElement);
 		}
 		return EMPTY_ARRAY;
 	}

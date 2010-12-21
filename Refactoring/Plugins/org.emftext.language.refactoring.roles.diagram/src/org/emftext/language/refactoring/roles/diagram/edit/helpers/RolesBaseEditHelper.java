@@ -32,8 +32,7 @@ public class RolesBaseEditHelper extends AbstractEditHelper {
 	 */
 	protected IEditHelperAdvice[] getEditHelperAdvice(IEditCommandRequest req) {
 		if (req.getParameter(CONTEXT_ELEMENT_TYPE) instanceof IElementType) {
-			return ElementTypeRegistry.getInstance().getEditHelperAdvice(
-					(IElementType) req.getParameter(CONTEXT_ELEMENT_TYPE));
+			return ElementTypeRegistry.getInstance().getEditHelperAdvice((IElementType) req.getParameter(CONTEXT_ELEMENT_TYPE));
 		}
 		return super.getEditHelperAdvice(req);
 	}
@@ -42,8 +41,7 @@ public class RolesBaseEditHelper extends AbstractEditHelper {
 	 * @generated
 	 */
 	protected ICommand getInsteadCommand(IEditCommandRequest req) {
-		ICommand epCommand =
-				(ICommand) req.getParameter(EDIT_POLICY_COMMAND);
+		ICommand epCommand = (ICommand) req.getParameter(EDIT_POLICY_COMMAND);
 		req.setParameter(EDIT_POLICY_COMMAND, null);
 		ICommand ehCommand = super.getInsteadCommand(req);
 		if (epCommand == null) {
@@ -52,8 +50,7 @@ public class RolesBaseEditHelper extends AbstractEditHelper {
 		if (ehCommand == null) {
 			return epCommand;
 		}
-		CompositeCommand command =
-				new CompositeCommand(null);
+		CompositeCommand command = new CompositeCommand(null);
 		command.add(epCommand);
 		command.add(ehCommand);
 		return command;
@@ -69,8 +66,7 @@ public class RolesBaseEditHelper extends AbstractEditHelper {
 	/**
 	 * @generated
 	 */
-	protected ICommand getCreateRelationshipCommand(
-			CreateRelationshipRequest req) {
+	protected ICommand getCreateRelationshipCommand(CreateRelationshipRequest req) {
 		return null;
 	}
 

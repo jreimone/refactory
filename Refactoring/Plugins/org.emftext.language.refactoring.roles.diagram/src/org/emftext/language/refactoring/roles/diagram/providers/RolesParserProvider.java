@@ -38,12 +38,8 @@ public class RolesParserProvider extends AbstractProvider implements
 	 */
 	private IParser getRoleName_5001Parser() {
 		if (roleName_5001Parser == null) {
-			EAttribute[] features = new EAttribute[] {
-					RolesPackage.eINSTANCE.getNamedElement_Name()
-			};
-			EAttribute[] editableFeatures = new EAttribute[] {
-					RolesPackage.eINSTANCE.getNamedElement_Name()
-			};
+			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE.getNamedElement_Name() };
+			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE.getNamedElement_Name() };
 			MessageFormatParser parser = new MessageFormatParser(features, editableFeatures);
 			roleName_5001Parser = parser;
 		}
@@ -60,12 +56,8 @@ public class RolesParserProvider extends AbstractProvider implements
 	 */
 	private IParser getRoleAttributeName_5002Parser() {
 		if (roleAttributeName_5002Parser == null) {
-			EAttribute[] features = new EAttribute[] {
-					RolesPackage.eINSTANCE.getNamedElement_Name()
-			};
-			EAttribute[] editableFeatures = new EAttribute[] {
-					RolesPackage.eINSTANCE.getNamedElement_Name()
-			};
+			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE.getNamedElement_Name() };
+			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE.getNamedElement_Name() };
 			MessageFormatParser parser = new MessageFormatParser(features, editableFeatures);
 			roleAttributeName_5002Parser = parser;
 		}
@@ -82,12 +74,8 @@ public class RolesParserProvider extends AbstractProvider implements
 	 */
 	private IParser getRoleAssociationSourceName_6001Parser() {
 		if (roleAssociationSourceName_6001Parser == null) {
-			EAttribute[] features = new EAttribute[] {
-					RolesPackage.eINSTANCE.getMultiplicityCollaboration_SourceName()
-			};
-			EAttribute[] editableFeatures = new EAttribute[] {
-					RolesPackage.eINSTANCE.getMultiplicityCollaboration_SourceName()
-			};
+			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE.getMultiplicityCollaboration_SourceName() };
+			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE.getMultiplicityCollaboration_SourceName() };
 			MessageFormatParser parser = new MessageFormatParser(features, editableFeatures);
 			roleAssociationSourceName_6001Parser = parser;
 		}
@@ -104,12 +92,8 @@ public class RolesParserProvider extends AbstractProvider implements
 	 */
 	private IParser getRoleAssociationTargetName_6002Parser() {
 		if (roleAssociationTargetName_6002Parser == null) {
-			EAttribute[] features = new EAttribute[] {
-					RolesPackage.eINSTANCE.getMultiplicityCollaboration_TargetName()
-			};
-			EAttribute[] editableFeatures = new EAttribute[] {
-					RolesPackage.eINSTANCE.getMultiplicityCollaboration_TargetName()
-			};
+			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE.getMultiplicityCollaboration_TargetName() };
+			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE.getMultiplicityCollaboration_TargetName() };
 			MessageFormatParser parser = new MessageFormatParser(features, editableFeatures);
 			roleAssociationTargetName_6002Parser = parser;
 		}
@@ -126,12 +110,8 @@ public class RolesParserProvider extends AbstractProvider implements
 	 */
 	private IParser getRoleCompositionSourceName_6003Parser() {
 		if (roleCompositionSourceName_6003Parser == null) {
-			EAttribute[] features = new EAttribute[] {
-					RolesPackage.eINSTANCE.getMultiplicityCollaboration_SourceName()
-			};
-			EAttribute[] editableFeatures = new EAttribute[] {
-					RolesPackage.eINSTANCE.getMultiplicityCollaboration_SourceName()
-			};
+			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE.getMultiplicityCollaboration_SourceName() };
+			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE.getMultiplicityCollaboration_SourceName() };
 			MessageFormatParser parser = new MessageFormatParser(features, editableFeatures);
 			roleCompositionSourceName_6003Parser = parser;
 		}
@@ -148,12 +128,8 @@ public class RolesParserProvider extends AbstractProvider implements
 	 */
 	private IParser getRoleCompositionTargetName_6004Parser() {
 		if (roleCompositionTargetName_6004Parser == null) {
-			EAttribute[] features = new EAttribute[] {
-					RolesPackage.eINSTANCE.getMultiplicityCollaboration_TargetName()
-			};
-			EAttribute[] editableFeatures = new EAttribute[] {
-					RolesPackage.eINSTANCE.getMultiplicityCollaboration_TargetName()
-			};
+			EAttribute[] features = new EAttribute[] { RolesPackage.eINSTANCE.getMultiplicityCollaboration_TargetName() };
+			EAttribute[] editableFeatures = new EAttribute[] { RolesPackage.eINSTANCE.getMultiplicityCollaboration_TargetName() };
 			MessageFormatParser parser = new MessageFormatParser(features, editableFeatures);
 			roleCompositionTargetName_6004Parser = parser;
 		}
@@ -165,18 +141,18 @@ public class RolesParserProvider extends AbstractProvider implements
 	 */
 	protected IParser getParser(int visualID) {
 		switch (visualID) {
-			case RoleNameEditPart.VISUAL_ID:
-				return getRoleName_5001Parser();
-			case RoleAttributeNameEditPart.VISUAL_ID:
-				return getRoleAttributeName_5002Parser();
-			case RoleAssociationSourceNameEditPart.VISUAL_ID:
-				return getRoleAssociationSourceName_6001Parser();
-			case RoleAssociationTargetNameEditPart.VISUAL_ID:
-				return getRoleAssociationTargetName_6002Parser();
-			case RoleCompositionSourceNameEditPart.VISUAL_ID:
-				return getRoleCompositionSourceName_6003Parser();
-			case RoleCompositionTargetNameEditPart.VISUAL_ID:
-				return getRoleCompositionTargetName_6004Parser();
+		case RoleNameEditPart.VISUAL_ID:
+			return getRoleName_5001Parser();
+		case RoleAttributeNameEditPart.VISUAL_ID:
+			return getRoleAttributeName_5002Parser();
+		case RoleAssociationSourceNameEditPart.VISUAL_ID:
+			return getRoleAssociationSourceName_6001Parser();
+		case RoleAssociationTargetNameEditPart.VISUAL_ID:
+			return getRoleAssociationTargetName_6002Parser();
+		case RoleCompositionSourceNameEditPart.VISUAL_ID:
+			return getRoleCompositionSourceName_6003Parser();
+		case RoleCompositionTargetNameEditPart.VISUAL_ID:
+			return getRoleCompositionTargetName_6004Parser();
 		}
 		return null;
 	}
@@ -185,10 +161,8 @@ public class RolesParserProvider extends AbstractProvider implements
 	 * Utility method that consults ParserService
 	 * @generated
 	 */
-	public static IParser getParser(IElementType type, EObject object,
-			String parserHint) {
-		return ParserService.getInstance().getParser(
-				new HintAdapter(type, object, parserHint));
+	public static IParser getParser(IElementType type, EObject object, String parserHint) {
+		return ParserService.getInstance().getParser(new HintAdapter(type, object, parserHint));
 	}
 
 	/**
@@ -199,8 +173,7 @@ public class RolesParserProvider extends AbstractProvider implements
 		if (vid != null) {
 			return getParser(RolesVisualIDRegistry.getVisualID(vid));
 		}
-		View view =
-				(View) hint.getAdapter(View.class);
+		View view = (View) hint.getAdapter(View.class);
 		if (view != null) {
 			return getParser(RolesVisualIDRegistry.getVisualID(view));
 		}
@@ -212,8 +185,7 @@ public class RolesParserProvider extends AbstractProvider implements
 	 */
 	public boolean provides(IOperation operation) {
 		if (operation instanceof GetParserOperation) {
-			IAdaptable hint =
-					((GetParserOperation) operation).getHint();
+			IAdaptable hint = ((GetParserOperation) operation).getHint();
 			if (RolesElementTypes.getElement(hint) == null) {
 				return false;
 			}

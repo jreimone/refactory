@@ -67,13 +67,12 @@ public class RolesSheetLabelProvider extends BaseLabelProvider implements
 		// For intermediate views climb up the containment hierarchy to find the one associated with an element type.
 		while (view != null) {
 			int vid = RolesVisualIDRegistry.getVisualID(view);
-			IElementType etype =
-					RolesElementTypes.getElementType(vid);
+			IElementType etype = RolesElementTypes.getElementType(vid);
 			if (etype != null) {
 				return etype;
 			}
-			view = view.eContainer() instanceof View ?
-					(View) view.eContainer() : null;
+			view = view.eContainer() instanceof View ? (View) view.eContainer()
+					: null;
 		}
 		return null;
 	}

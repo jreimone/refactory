@@ -36,8 +36,7 @@ public class RoleImplicationEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RoleImplicationItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleImplicationItemSemanticEditPolicy());
 	}
 
 	/**
@@ -83,22 +82,12 @@ public class RoleImplicationEditPart extends ConnectionNodeEditPart implements
 			df.setFill(true);
 			df.setLineWidth(1);
 			PointList pl = new PointList();
-			pl.addPoint(getMapMode().DPtoLP(0)
-					, getMapMode().DPtoLP(0)
-					);
-			pl.addPoint(getMapMode().DPtoLP(-2)
-					, getMapMode().DPtoLP(2)
-					);
-			pl.addPoint(getMapMode().DPtoLP(-2)
-					, getMapMode().DPtoLP(-2)
-					);
-			pl.addPoint(getMapMode().DPtoLP(0)
-					, getMapMode().DPtoLP(0)
-					);
+			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
+			pl.addPoint(getMapMode().DPtoLP(-2), getMapMode().DPtoLP(2));
+			pl.addPoint(getMapMode().DPtoLP(-2), getMapMode().DPtoLP(-2));
+			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
 			df.setTemplate(pl);
-			df.setScale(getMapMode().DPtoLP(7)
-					, getMapMode().DPtoLP(3)
-					);
+			df.setScale(getMapMode().DPtoLP(7), getMapMode().DPtoLP(3));
 			return df;
 		}
 
