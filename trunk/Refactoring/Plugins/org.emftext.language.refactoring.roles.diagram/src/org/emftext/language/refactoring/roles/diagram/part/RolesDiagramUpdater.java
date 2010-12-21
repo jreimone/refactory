@@ -39,10 +39,10 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesNodeDescriptor> getSemanticChildren(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-			case RoleModelEditPart.VISUAL_ID:
-				return getRoleModel_1000SemanticChildren(view);
-			case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
-				return getRoleAttributeCompartment_7001SemanticChildren(view);
+		case RoleModelEditPart.VISUAL_ID:
+			return getRoleModel_1000SemanticChildren(view);
+		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+			return getRoleAttributeCompartment_7001SemanticChildren(view);
 		}
 		return Collections.emptyList();
 	}
@@ -50,8 +50,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<RolesNodeDescriptor> getRoleAttributeCompartment_7001SemanticChildren(
-			View view) {
+	public static List<RolesNodeDescriptor> getRoleAttributeCompartment_7001SemanticChildren(View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
 		}
@@ -63,8 +62,7 @@ public class RolesDiagramUpdater {
 		LinkedList<RolesNodeDescriptor> result = new LinkedList<RolesNodeDescriptor>();
 		for (Iterator<?> it = modelElement.getAttributes().iterator(); it.hasNext();) {
 			RoleAttribute childElement = (RoleAttribute) it.next();
-			int visualID = RolesVisualIDRegistry.getNodeVisualID(view,
-					childElement);
+			int visualID = RolesVisualIDRegistry.getNodeVisualID(view, childElement);
 			if (visualID == RoleAttributeEditPart.VISUAL_ID) {
 				result.add(new RolesNodeDescriptor(childElement, visualID));
 				continue;
@@ -76,8 +74,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<RolesNodeDescriptor> getRoleModel_1000SemanticChildren(
-			View view) {
+	public static List<RolesNodeDescriptor> getRoleModel_1000SemanticChildren(View view) {
 		if (!view.isSetElement()) {
 			return Collections.emptyList();
 		}
@@ -85,8 +82,7 @@ public class RolesDiagramUpdater {
 		LinkedList<RolesNodeDescriptor> result = new LinkedList<RolesNodeDescriptor>();
 		for (Iterator<?> it = modelElement.getRoles().iterator(); it.hasNext();) {
 			Role childElement = (Role) it.next();
-			int visualID = RolesVisualIDRegistry.getNodeVisualID(view,
-					childElement);
+			int visualID = RolesVisualIDRegistry.getNodeVisualID(view, childElement);
 			if (visualID == RoleEditPart.VISUAL_ID) {
 				result.add(new RolesNodeDescriptor(childElement, visualID));
 				continue;
@@ -100,20 +96,20 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesLinkDescriptor> getContainedLinks(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-			case RoleModelEditPart.VISUAL_ID:
-				return getRoleModel_1000ContainedLinks(view);
-			case RoleEditPart.VISUAL_ID:
-				return getRole_2001ContainedLinks(view);
-			case RoleAttributeEditPart.VISUAL_ID:
-				return getRoleAttribute_3001ContainedLinks(view);
-			case RoleImplicationEditPart.VISUAL_ID:
-				return getRoleImplication_4001ContainedLinks(view);
-			case RoleProhibitionEditPart.VISUAL_ID:
-				return getRoleProhibition_4002ContainedLinks(view);
-			case RoleAssociationEditPart.VISUAL_ID:
-				return getRoleAssociation_4003ContainedLinks(view);
-			case RoleCompositionEditPart.VISUAL_ID:
-				return getRoleComposition_4004ContainedLinks(view);
+		case RoleModelEditPart.VISUAL_ID:
+			return getRoleModel_1000ContainedLinks(view);
+		case RoleEditPart.VISUAL_ID:
+			return getRole_2001ContainedLinks(view);
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getRoleAttribute_3001ContainedLinks(view);
+		case RoleImplicationEditPart.VISUAL_ID:
+			return getRoleImplication_4001ContainedLinks(view);
+		case RoleProhibitionEditPart.VISUAL_ID:
+			return getRoleProhibition_4002ContainedLinks(view);
+		case RoleAssociationEditPart.VISUAL_ID:
+			return getRoleAssociation_4003ContainedLinks(view);
+		case RoleCompositionEditPart.VISUAL_ID:
+			return getRoleComposition_4004ContainedLinks(view);
 		}
 		return Collections.emptyList();
 	}
@@ -123,18 +119,18 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesLinkDescriptor> getIncomingLinks(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-			case RoleEditPart.VISUAL_ID:
-				return getRole_2001IncomingLinks(view);
-			case RoleAttributeEditPart.VISUAL_ID:
-				return getRoleAttribute_3001IncomingLinks(view);
-			case RoleImplicationEditPart.VISUAL_ID:
-				return getRoleImplication_4001IncomingLinks(view);
-			case RoleProhibitionEditPart.VISUAL_ID:
-				return getRoleProhibition_4002IncomingLinks(view);
-			case RoleAssociationEditPart.VISUAL_ID:
-				return getRoleAssociation_4003IncomingLinks(view);
-			case RoleCompositionEditPart.VISUAL_ID:
-				return getRoleComposition_4004IncomingLinks(view);
+		case RoleEditPart.VISUAL_ID:
+			return getRole_2001IncomingLinks(view);
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getRoleAttribute_3001IncomingLinks(view);
+		case RoleImplicationEditPart.VISUAL_ID:
+			return getRoleImplication_4001IncomingLinks(view);
+		case RoleProhibitionEditPart.VISUAL_ID:
+			return getRoleProhibition_4002IncomingLinks(view);
+		case RoleAssociationEditPart.VISUAL_ID:
+			return getRoleAssociation_4003IncomingLinks(view);
+		case RoleCompositionEditPart.VISUAL_ID:
+			return getRoleComposition_4004IncomingLinks(view);
 		}
 		return Collections.emptyList();
 	}
@@ -144,18 +140,18 @@ public class RolesDiagramUpdater {
 	 */
 	public static List<RolesLinkDescriptor> getOutgoingLinks(View view) {
 		switch (RolesVisualIDRegistry.getVisualID(view)) {
-			case RoleEditPart.VISUAL_ID:
-				return getRole_2001OutgoingLinks(view);
-			case RoleAttributeEditPart.VISUAL_ID:
-				return getRoleAttribute_3001OutgoingLinks(view);
-			case RoleImplicationEditPart.VISUAL_ID:
-				return getRoleImplication_4001OutgoingLinks(view);
-			case RoleProhibitionEditPart.VISUAL_ID:
-				return getRoleProhibition_4002OutgoingLinks(view);
-			case RoleAssociationEditPart.VISUAL_ID:
-				return getRoleAssociation_4003OutgoingLinks(view);
-			case RoleCompositionEditPart.VISUAL_ID:
-				return getRoleComposition_4004OutgoingLinks(view);
+		case RoleEditPart.VISUAL_ID:
+			return getRole_2001OutgoingLinks(view);
+		case RoleAttributeEditPart.VISUAL_ID:
+			return getRoleAttribute_3001OutgoingLinks(view);
+		case RoleImplicationEditPart.VISUAL_ID:
+			return getRoleImplication_4001OutgoingLinks(view);
+		case RoleProhibitionEditPart.VISUAL_ID:
+			return getRoleProhibition_4002OutgoingLinks(view);
+		case RoleAssociationEditPart.VISUAL_ID:
+			return getRoleAssociation_4003OutgoingLinks(view);
+		case RoleCompositionEditPart.VISUAL_ID:
+			return getRoleComposition_4004OutgoingLinks(view);
 		}
 		return Collections.emptyList();
 	}
@@ -163,8 +159,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleModel_1000ContainedLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleModel_1000ContainedLinks(View view) {
 		RoleModel modelElement = (RoleModel) view.getElement();
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		result.addAll(getContainedTypeModelFacetLinks_RoleImplication_4001(modelElement));
@@ -184,40 +179,35 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleAttribute_3001ContainedLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleAttribute_3001ContainedLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleImplication_4001ContainedLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleImplication_4001ContainedLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleProhibition_4002ContainedLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleProhibition_4002ContainedLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleAssociation_4003ContainedLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleAssociation_4003ContainedLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleComposition_4004ContainedLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleComposition_4004ContainedLinks(View view) {
 		return Collections.emptyList();
 	}
 
@@ -228,54 +218,45 @@ public class RolesDiagramUpdater {
 		Role modelElement = (Role) view.getElement();
 		Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences = EcoreUtil.CrossReferencer.find(view.eResource().getResourceSet().getResources());
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
-		result.addAll(getIncomingTypeModelFacetLinks_RoleImplication_4001(
-				modelElement, crossReferences));
-		result.addAll(getIncomingTypeModelFacetLinks_RoleProhibition_4002(
-				modelElement, crossReferences));
-		result.addAll(getIncomingTypeModelFacetLinks_RoleAssociation_4003(
-				modelElement, crossReferences));
-		result.addAll(getIncomingTypeModelFacetLinks_RoleComposition_4004(
-				modelElement, crossReferences));
+		result.addAll(getIncomingTypeModelFacetLinks_RoleImplication_4001(modelElement, crossReferences));
+		result.addAll(getIncomingTypeModelFacetLinks_RoleProhibition_4002(modelElement, crossReferences));
+		result.addAll(getIncomingTypeModelFacetLinks_RoleAssociation_4003(modelElement, crossReferences));
+		result.addAll(getIncomingTypeModelFacetLinks_RoleComposition_4004(modelElement, crossReferences));
 		return result;
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleAttribute_3001IncomingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleAttribute_3001IncomingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleImplication_4001IncomingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleImplication_4001IncomingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleProhibition_4002IncomingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleProhibition_4002IncomingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleAssociation_4003IncomingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleAssociation_4003IncomingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleComposition_4004IncomingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleComposition_4004IncomingLinks(View view) {
 		return Collections.emptyList();
 	}
 
@@ -295,48 +276,42 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleAttribute_3001OutgoingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleAttribute_3001OutgoingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleImplication_4001OutgoingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleImplication_4001OutgoingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleProhibition_4002OutgoingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleProhibition_4002OutgoingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleAssociation_4003OutgoingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleAssociation_4003OutgoingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List<RolesLinkDescriptor> getRoleComposition_4004OutgoingLinks(
-			View view) {
+	public static List<RolesLinkDescriptor> getRoleComposition_4004OutgoingLinks(View view) {
 		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleImplication_4001(
-			RoleModel container) {
+	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleImplication_4001(RoleModel container) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
@@ -357,8 +332,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleProhibition_4002(
-			RoleModel container) {
+	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleProhibition_4002(RoleModel container) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
@@ -379,8 +353,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleAssociation_4003(
-			RoleModel container) {
+	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleAssociation_4003(RoleModel container) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
@@ -401,8 +374,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleComposition_4004(
-			RoleModel container) {
+	private static Collection<RolesLinkDescriptor> getContainedTypeModelFacetLinks_RoleComposition_4004(RoleModel container) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		for (Iterator<?> links = container.getCollaborations().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
@@ -423,13 +395,12 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getIncomingTypeModelFacetLinks_RoleImplication_4001(
-			Role target,
-			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
+	private static Collection<RolesLinkDescriptor> getIncomingTypeModelFacetLinks_RoleImplication_4001(Role target, Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		Collection<EStructuralFeature.Setting> settings = crossReferences.get(target);
 		for (EStructuralFeature.Setting setting : settings) {
-			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target() || false == setting.getEObject() instanceof RoleImplication) {
+			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target()
+					|| false == setting.getEObject() instanceof RoleImplication) {
 				continue;
 			}
 			RoleImplication link = (RoleImplication) setting.getEObject();
@@ -445,13 +416,12 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getIncomingTypeModelFacetLinks_RoleProhibition_4002(
-			Role target,
-			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
+	private static Collection<RolesLinkDescriptor> getIncomingTypeModelFacetLinks_RoleProhibition_4002(Role target, Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		Collection<EStructuralFeature.Setting> settings = crossReferences.get(target);
 		for (EStructuralFeature.Setting setting : settings) {
-			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target() || false == setting.getEObject() instanceof RoleProhibition) {
+			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target()
+					|| false == setting.getEObject() instanceof RoleProhibition) {
 				continue;
 			}
 			RoleProhibition link = (RoleProhibition) setting.getEObject();
@@ -467,13 +437,12 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getIncomingTypeModelFacetLinks_RoleAssociation_4003(
-			Role target,
-			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
+	private static Collection<RolesLinkDescriptor> getIncomingTypeModelFacetLinks_RoleAssociation_4003(Role target, Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		Collection<EStructuralFeature.Setting> settings = crossReferences.get(target);
 		for (EStructuralFeature.Setting setting : settings) {
-			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target() || false == setting.getEObject() instanceof RoleAssociation) {
+			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target()
+					|| false == setting.getEObject() instanceof RoleAssociation) {
 				continue;
 			}
 			RoleAssociation link = (RoleAssociation) setting.getEObject();
@@ -489,13 +458,12 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getIncomingTypeModelFacetLinks_RoleComposition_4004(
-			Role target,
-			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
+	private static Collection<RolesLinkDescriptor> getIncomingTypeModelFacetLinks_RoleComposition_4004(Role target, Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
 		LinkedList<RolesLinkDescriptor> result = new LinkedList<RolesLinkDescriptor>();
 		Collection<EStructuralFeature.Setting> settings = crossReferences.get(target);
 		for (EStructuralFeature.Setting setting : settings) {
-			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target() || false == setting.getEObject() instanceof RoleComposition) {
+			if (setting.getEStructuralFeature() != RolesPackage.eINSTANCE.getCollaboration_Target()
+					|| false == setting.getEObject() instanceof RoleComposition) {
 				continue;
 			}
 			RoleComposition link = (RoleComposition) setting.getEObject();
@@ -511,8 +479,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getOutgoingTypeModelFacetLinks_RoleImplication_4001(
-			Role source) {
+	private static Collection<RolesLinkDescriptor> getOutgoingTypeModelFacetLinks_RoleImplication_4001(Role source) {
 		RoleModel container = null;
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
@@ -548,8 +515,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getOutgoingTypeModelFacetLinks_RoleProhibition_4002(
-			Role source) {
+	private static Collection<RolesLinkDescriptor> getOutgoingTypeModelFacetLinks_RoleProhibition_4002(Role source) {
 		RoleModel container = null;
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
@@ -585,8 +551,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getOutgoingTypeModelFacetLinks_RoleAssociation_4003(
-			Role source) {
+	private static Collection<RolesLinkDescriptor> getOutgoingTypeModelFacetLinks_RoleAssociation_4003(Role source) {
 		RoleModel container = null;
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
@@ -622,8 +587,7 @@ public class RolesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection<RolesLinkDescriptor> getOutgoingTypeModelFacetLinks_RoleComposition_4004(
-			Role source) {
+	private static Collection<RolesLinkDescriptor> getOutgoingTypeModelFacetLinks_RoleComposition_4004(Role source) {
 		RoleModel container = null;
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source

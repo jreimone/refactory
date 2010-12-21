@@ -44,8 +44,8 @@ public class RolesNavigatorLinkHelper implements ILinkHelper {
 			}
 		}
 		URI uri = EcoreUtil.getURI(diagram);
-		String editorName = uri.lastSegment() + '#' + diagram.eResource().getContents().indexOf(
-				diagram);
+		String editorName = uri.lastSegment() + '#'
+				+ diagram.eResource().getContents().indexOf(diagram);
 		IEditorInput editorInput = new URIEditorInput(uri, editorName);
 		return editorInput;
 	}
@@ -54,8 +54,7 @@ public class RolesNavigatorLinkHelper implements ILinkHelper {
 	 * @generated
 	 */
 	public IStructuredSelection findSelection(IEditorInput anInput) {
-		IDiagramDocument document = RolesDiagramEditorPlugin.getInstance().getDocumentProvider().getDiagramDocument(
-				anInput);
+		IDiagramDocument document = RolesDiagramEditorPlugin.getInstance().getDocumentProvider().getDiagramDocument(anInput);
 		if (document == null) {
 			return StructuredSelection.EMPTY;
 		}
@@ -71,8 +70,7 @@ public class RolesNavigatorLinkHelper implements ILinkHelper {
 	/**
 	 * @generated
 	 */
-	public void activateEditor(IWorkbenchPage aPage,
-			IStructuredSelection aSelection) {
+	public void activateEditor(IWorkbenchPage aPage, IStructuredSelection aSelection) {
 		if (aSelection == null || aSelection.isEmpty()) {
 			return;
 		}
@@ -102,14 +100,12 @@ public class RolesNavigatorLinkHelper implements ILinkHelper {
 		if (editor instanceof DiagramEditor) {
 			DiagramEditor diagramEditor = (DiagramEditor) editor;
 			ResourceSet diagramEditorResourceSet = diagramEditor.getEditingDomain().getResourceSet();
-			EObject selectedView = diagramEditorResourceSet.getEObject(
-					EcoreUtil.getURI(navigatorView), true);
+			EObject selectedView = diagramEditorResourceSet.getEObject(EcoreUtil.getURI(navigatorView), true);
 			if (selectedView == null) {
 				return;
 			}
 			GraphicalViewer graphicalViewer = (GraphicalViewer) diagramEditor.getAdapter(GraphicalViewer.class);
-			EditPart selectedEditPart = (EditPart) graphicalViewer.getEditPartRegistry().get(
-					selectedView);
+			EditPart selectedEditPart = (EditPart) graphicalViewer.getEditPartRegistry().get(selectedView);
 			if (selectedEditPart != null) {
 				graphicalViewer.select(selectedEditPart);
 			}

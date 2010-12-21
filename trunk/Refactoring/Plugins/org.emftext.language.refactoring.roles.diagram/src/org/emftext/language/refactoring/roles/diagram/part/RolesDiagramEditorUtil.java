@@ -49,9 +49,12 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.language.refactoring.roles.RolesFactory;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleModelEditPart;
+import org.emftext.language.refactoring.roles.resource.rolestext.util.RolestextStringUtil;
 
 /**
  * @generated
@@ -64,24 +67,19 @@ public class RolesDiagramEditorUtil {
 	public static Map<?, ?> getSaveOptions() {
 		HashMap<String, Object> saveOptions = new HashMap<String, Object>();
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
-		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-				Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		return saveOptions;
 	}
 
 	/**
 	 * @generated
 	 */
-	public static boolean openDiagram(Resource diagram)
-			throws PartInitException {
+	public static boolean openDiagram(Resource diagram) throws PartInitException {
 		String path = diagram.getURI().toPlatformString(true);
-		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot().findMember(
-				new Path(path));
+		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(path));
 		if (workspaceResource instanceof IFile) {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			return null != page.openEditor(
-					new FileEditorInput((IFile) workspaceResource),
-					RolesDiagramEditor.ID);
+			return null != page.openEditor(new FileEditorInput((IFile) workspaceResource), RolesDiagramEditor.ID);
 		}
 		return false;
 	}
@@ -96,16 +94,14 @@ public class RolesDiagramEditorUtil {
 		try {
 			file.setCharset("UTF-8", new NullProgressMonitor()); //$NON-NLS-1$
 		} catch (CoreException e) {
-			RolesDiagramEditorPlugin.getInstance().logError(
-					"Unable to set charset for file " + file.getFullPath(), e); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError("Unable to set charset for file " + file.getFullPath(), e); //$NON-NLS-1$
 		}
 	}
 
 	/**
 	 * @generated
 	 */
-	public static String getUniqueFileName(IPath containerFullPath,
-			String fileName, String extension) {
+	public static String getUniqueFileName(IPath containerFullPath, String fileName, String extension) {
 		if (containerFullPath == null) {
 			containerFullPath = new Path(""); //$NON-NLS-1$
 		}
@@ -143,8 +139,7 @@ public class RolesDiagramEditorUtil {
 		wizard.setDialogSettings(wizardDialogSettings);
 		WizardDialog dialog = new WizardDialog(shell, wizard);
 		dialog.create();
-		dialog.getShell().setSize(Math.max(500, dialog.getShell().getSize().x),
-				500);
+		dialog.getShell().setSize(Math.max(500, dialog.getShell().getSize().x), 500);
 		dialog.open();
 	}
 
@@ -152,20 +147,13 @@ public class RolesDiagramEditorUtil {
 	 * This method should be called within a workspace modify operation since it creates resources.
 	 * @generated NOT
 	 */
-	public static Resource createDiagram(URI diagramURI, final URI modelURI,
-			IProgressMonitor progressMonitor) {
+	public static Resource createDiagram(URI diagramURI, final URI modelURI, IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
-		progressMonitor.beginTask(
-				Messages.RolesDiagramEditorUtil_CreateDiagramProgressTask, 3);
-		final Resource diagramResource = editingDomain.getResourceSet().createResource(
-				diagramURI);
-		final Resource modelResource = editingDomain.getResourceSet().createResource(
-				modelURI);
+		progressMonitor.beginTask(Messages.RolesDiagramEditorUtil_CreateDiagramProgressTask, 3);
+		final Resource diagramResource = editingDomain.getResourceSet().createResource(diagramURI);
+		final Resource modelResource = editingDomain.getResourceSet().createResource(modelURI);
 		final String diagramName = diagramURI.lastSegment();
-		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
-				editingDomain,
-				Messages.RolesDiagramEditorUtil_CreateDiagramCommandLabel,
-				Collections.EMPTY_LIST) {
+		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, Messages.RolesDiagramEditorUtil_CreateDiagramCommandLabel, Collections.EMPTY_LIST) {
 
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 				IPath path = new Path(modelURI.toPlatformString(true));
@@ -173,10 +161,7 @@ public class RolesDiagramEditorUtil {
 				RoleModel model = createInitialModel(fileName);
 				attachModelToResource(model, modelResource);
 
-				Diagram diagram = ViewService.createDiagram(
-						model,
-						RoleModelEditPart.MODEL_ID,
-						RolesDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				Diagram diagram = ViewService.createDiagram(model, RoleModelEditPart.MODEL_ID, RolesDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				if (diagram != null) {
 					diagramResource.getContents().add(diagram);
 					diagram.setName(diagramName);
@@ -188,18 +173,15 @@ public class RolesDiagramEditorUtil {
 					diagramResource.save(org.emftext.language.refactoring.roles.diagram.part.RolesDiagramEditorUtil.getSaveOptions());
 				} catch (IOException e) {
 
-					RolesDiagramEditorPlugin.getInstance().logError(
-							"Unable to store model and diagram resources", e); //$NON-NLS-1$
+					RolesDiagramEditorPlugin.getInstance().logError("Unable to store model and diagram resources", e); //$NON-NLS-1$
 				}
 				return CommandResult.newOKCommandResult();
 			}
 		};
 		try {
-			OperationHistoryFactory.getOperationHistory().execute(command,
-					new SubProgressMonitor(progressMonitor, 1), null);
+			OperationHistoryFactory.getOperationHistory().execute(command, new SubProgressMonitor(progressMonitor, 1), null);
 		} catch (ExecutionException e) {
-			RolesDiagramEditorPlugin.getInstance().logError(
-					"Unable to create model and diagram", e); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError("Unable to create model and diagram", e); //$NON-NLS-1$
 		}
 		setCharset(WorkspaceSynchronizer.getFile(modelResource));
 		setCharset(WorkspaceSynchronizer.getFile(diagramResource));
@@ -207,23 +189,37 @@ public class RolesDiagramEditorUtil {
 	}
 
 	/**
-	* Create a new instance of domain element associated with canvas.
-	* <!-- begin-user-doc -->
+	 * Create a new instance of domain element associated with canvas.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	* @generated NOT
-	*/
+	 * @generated
+	 */
+	private static RoleModel createInitialModel() {
+		return RolesFactory.eINSTANCE.createRoleModel();
+	}
+
+	/**
+	 * Create a new instance of domain element associated with canvas.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	private static RoleModel createInitialModel(String initialName) {
 		RoleModel roleModel = RolesFactory.eINSTANCE.createRoleModel();
-		roleModel.setName(initialName);
+		roleModel.setName(RolestextStringUtil.capitalize(initialName));
+		Role inputRole = RolesFactory.eINSTANCE.createRole();
+		inputRole.getModifier().add(RoleModifier.INPUT);
+		inputRole.setName("InputRole");
+		roleModel.getRoles().add(inputRole);
 		return roleModel;
 	}
 
 	/**
-	* Store model element in the resource.
-	* <!-- begin-user-doc -->
+	 * Store model element in the resource.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	* @generated
-	*/
+	 * @generated
+	 */
 	private static void attachModelToResource(RoleModel model, Resource resource) {
 		resource.getContents().add(model);
 	}
@@ -231,8 +227,7 @@ public class RolesDiagramEditorUtil {
 	/**
 	 * @generated
 	 */
-	public static void selectElementsInDiagram(
-			IDiagramWorkbenchPart diagramPart, List<EditPart> editParts) {
+	public static void selectElementsInDiagram(IDiagramWorkbenchPart diagramPart, List<EditPart> editParts) {
 		diagramPart.getDiagramGraphicalViewer().deselectAll();
 
 		EditPart firstPrimary = null;
@@ -244,23 +239,20 @@ public class RolesDiagramEditorUtil {
 		}
 
 		if (!editParts.isEmpty()) {
-			diagramPart.getDiagramGraphicalViewer().reveal(
-					firstPrimary != null ? firstPrimary
-							: (EditPart) editParts.get(0));
+			diagramPart.getDiagramGraphicalViewer().reveal(firstPrimary != null ? firstPrimary
+					: (EditPart) editParts.get(0));
 		}
 	}
 
 	/**
 	 * @generated
 	 */
-	private static int findElementsInDiagramByID(DiagramEditPart diagramPart,
-			EObject element, List<EditPart> editPartCollector) {
+	private static int findElementsInDiagramByID(DiagramEditPart diagramPart, EObject element, List<EditPart> editPartCollector) {
 		IDiagramGraphicalViewer viewer = (IDiagramGraphicalViewer) diagramPart.getViewer();
 		final int intialNumOfEditParts = editPartCollector.size();
 
 		if (element instanceof View) { // support notation element lookup
-			EditPart editPart = (EditPart) viewer.getEditPartRegistry().get(
-					element);
+			EditPart editPart = (EditPart) viewer.getEditPartRegistry().get(element);
 			if (editPart != null) {
 				editPartCollector.add(editPart);
 				return 1;
@@ -269,8 +261,7 @@ public class RolesDiagramEditorUtil {
 
 		String elementID = EMFCoreUtil.getProxyID(element);
 		@SuppressWarnings("unchecked")
-		List<EditPart> associatedParts = viewer.findEditPartsForElement(
-				elementID, IGraphicalEditPart.class);
+		List<EditPart> associatedParts = viewer.findEditPartsForElement(elementID, IGraphicalEditPart.class);
 		// perform the possible hierarchy disjoint -> take the top-most parts only
 		for (EditPart nextPart : associatedParts) {
 			EditPart parentPart = nextPart.getParent();
@@ -287,8 +278,7 @@ public class RolesDiagramEditorUtil {
 				editPartCollector.add(associatedParts.get(0));
 			} else {
 				if (element.eContainer() != null) {
-					return findElementsInDiagramByID(diagramPart,
-							element.eContainer(), editPartCollector);
+					return findElementsInDiagramByID(diagramPart, element.eContainer(), editPartCollector);
 				}
 			}
 		}
@@ -298,8 +288,7 @@ public class RolesDiagramEditorUtil {
 	/**
 	 * @generated
 	 */
-	public static View findView(DiagramEditPart diagramEditPart,
-			EObject targetElement, LazyElement2ViewMap lazyElement2ViewMap) {
+	public static View findView(DiagramEditPart diagramEditPart, EObject targetElement, LazyElement2ViewMap lazyElement2ViewMap) {
 		boolean hasStructuralURI = false;
 		if (targetElement.eResource() instanceof XMLResource) {
 			hasStructuralURI = ((XMLResource) targetElement.eResource()).getID(targetElement) == null;
@@ -307,10 +296,10 @@ public class RolesDiagramEditorUtil {
 
 		View view = null;
 		LinkedList<EditPart> editPartHolder = new LinkedList<EditPart>();
-		if (hasStructuralURI && !lazyElement2ViewMap.getElement2ViewMap().isEmpty()) {
+		if (hasStructuralURI
+				&& !lazyElement2ViewMap.getElement2ViewMap().isEmpty()) {
 			view = lazyElement2ViewMap.getElement2ViewMap().get(targetElement);
-		} else if (findElementsInDiagramByID(diagramEditPart, targetElement,
-				editPartHolder) > 0) {
+		} else if (findElementsInDiagramByID(diagramEditPart, targetElement, editPartHolder) > 0) {
 			EditPart editPart = editPartHolder.get(0);
 			view = editPart.getModel() instanceof View ? (View) editPart.getModel()
 					: null;
@@ -371,31 +360,31 @@ public class RolesDiagramEditorUtil {
 		/**
 		 * @generated
 		 */
-		private static boolean buildElement2ViewMap(View parentView,
-				Map<EObject, View> element2ViewMap,
-				Set<? extends EObject> elements) {
+		private static boolean buildElement2ViewMap(View parentView, Map<EObject, View> element2ViewMap, Set<? extends EObject> elements) {
 			if (elements.size() == element2ViewMap.size()) {
 				return true;
 			}
 
-			if (parentView.isSetElement() && !element2ViewMap.containsKey(parentView.getElement()) && elements.contains(parentView.getElement())) {
+			if (parentView.isSetElement()
+					&& !element2ViewMap.containsKey(parentView.getElement())
+					&& elements.contains(parentView.getElement())) {
 				element2ViewMap.put(parentView.getElement(), parentView);
 				if (elements.size() == element2ViewMap.size()) {
 					return true;
 				}
 			}
 			boolean complete = false;
-			for (Iterator<?> it = parentView.getChildren().iterator(); it.hasNext() && !complete;) {
-				complete = buildElement2ViewMap((View) it.next(),
-						element2ViewMap, elements);
+			for (Iterator<?> it = parentView.getChildren().iterator(); it.hasNext()
+					&& !complete;) {
+				complete = buildElement2ViewMap((View) it.next(), element2ViewMap, elements);
 			}
-			for (Iterator<?> it = parentView.getSourceEdges().iterator(); it.hasNext() && !complete;) {
-				complete = buildElement2ViewMap((View) it.next(),
-						element2ViewMap, elements);
+			for (Iterator<?> it = parentView.getSourceEdges().iterator(); it.hasNext()
+					&& !complete;) {
+				complete = buildElement2ViewMap((View) it.next(), element2ViewMap, elements);
 			}
-			for (Iterator<?> it = parentView.getTargetEdges().iterator(); it.hasNext() && !complete;) {
-				complete = buildElement2ViewMap((View) it.next(),
-						element2ViewMap, elements);
+			for (Iterator<?> it = parentView.getTargetEdges().iterator(); it.hasNext()
+					&& !complete;) {
+				complete = buildElement2ViewMap((View) it.next(), element2ViewMap, elements);
 			}
 			return complete;
 		}

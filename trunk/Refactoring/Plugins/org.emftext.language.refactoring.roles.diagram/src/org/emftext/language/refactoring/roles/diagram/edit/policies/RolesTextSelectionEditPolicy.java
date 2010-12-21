@@ -168,8 +168,7 @@ public class RolesTextSelectionEditPolicy extends SelectionEditPolicy {
 				updateLabel((Label) selectionFeedbackFigure);
 				selectionFeedbackFigure.setBounds(getFeedbackBounds());
 			} else {
-				selectionFeedbackFigure.setBounds(getFeedbackBounds().expand(5,
-						5));
+				selectionFeedbackFigure.setBounds(getFeedbackBounds().expand(5, 5));
 			}
 		}
 	}
@@ -197,7 +196,6 @@ public class RolesTextSelectionEditPolicy extends SelectionEditPolicy {
 	private FigureListener getHostPositionListener() {
 		if (hostPositionListener == null) {
 			hostPositionListener = new FigureListener() {
-
 				public void figureMoved(IFigure source) {
 					refreshFeedback();
 				}

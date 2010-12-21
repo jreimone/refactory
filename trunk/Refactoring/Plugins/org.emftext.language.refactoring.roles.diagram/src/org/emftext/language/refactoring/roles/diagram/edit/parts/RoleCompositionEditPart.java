@@ -38,8 +38,7 @@ public class RoleCompositionEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RoleCompositionItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleCompositionItemSemanticEditPolicy());
 	}
 
 	/**
@@ -47,13 +46,11 @@ public class RoleCompositionEditPart extends ConnectionNodeEditPart implements
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof RoleCompositionSourceNameEditPart) {
-			((RoleCompositionSourceNameEditPart) childEditPart).setLabel(
-					getPrimaryShape().getFigureCompositionSourceNameFigure());
+			((RoleCompositionSourceNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureCompositionSourceNameFigure());
 			return true;
 		}
 		if (childEditPart instanceof RoleCompositionTargetNameEditPart) {
-			((RoleCompositionTargetNameEditPart) childEditPart).setLabel(
-					getPrimaryShape().getFigureCompositionTargetNameFigure());
+			((RoleCompositionTargetNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureCompositionTargetNameFigure());
 			return true;
 		}
 		return false;
@@ -162,25 +159,13 @@ public class RoleCompositionEditPart extends ConnectionNodeEditPart implements
 			df.setFill(true);
 			df.setLineWidth(1);
 			PointList pl = new PointList();
-			pl.addPoint(getMapMode().DPtoLP(0)
-					, getMapMode().DPtoLP(0)
-					);
-			pl.addPoint(getMapMode().DPtoLP(-1)
-					, getMapMode().DPtoLP(1)
-					);
-			pl.addPoint(getMapMode().DPtoLP(-2)
-					, getMapMode().DPtoLP(0)
-					);
-			pl.addPoint(getMapMode().DPtoLP(-1)
-					, getMapMode().DPtoLP(-1)
-					);
-			pl.addPoint(getMapMode().DPtoLP(0)
-					, getMapMode().DPtoLP(0)
-					);
+			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
+			pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(1));
+			pl.addPoint(getMapMode().DPtoLP(-2), getMapMode().DPtoLP(0));
+			pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(-1));
+			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
 			df.setTemplate(pl);
-			df.setScale(getMapMode().DPtoLP(7)
-					, getMapMode().DPtoLP(3)
-					);
+			df.setScale(getMapMode().DPtoLP(7), getMapMode().DPtoLP(3));
 			return df;
 		}
 

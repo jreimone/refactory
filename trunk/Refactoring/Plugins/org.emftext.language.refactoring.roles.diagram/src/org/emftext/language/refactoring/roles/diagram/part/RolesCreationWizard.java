@@ -81,8 +81,7 @@ public class RolesCreationWizard extends Wizard implements INewWizard {
 	/**
 	 * @generated
 	 */
-	public void setOpenNewlyCreatedDiagramEditor(
-			boolean openNewlyCreatedDiagramEditor) {
+	public void setOpenNewlyCreatedDiagramEditor(boolean openNewlyCreatedDiagramEditor) {
 		this.openNewlyCreatedDiagramEditor = openNewlyCreatedDiagramEditor;
 	}
 
@@ -106,16 +105,14 @@ public class RolesCreationWizard extends Wizard implements INewWizard {
 		diagramModelFilePage.setDescription(Messages.RolesCreationWizard_DiagramModelFilePageDescription);
 		addPage(diagramModelFilePage);
 
-		domainModelFilePage = new RolesCreationWizardPage(
-				"DomainModelFile", getSelection(), "rolestext") { //$NON-NLS-1$ //$NON-NLS-2$
+		domainModelFilePage = new RolesCreationWizardPage("DomainModelFile", getSelection(), "rolestext") { //$NON-NLS-1$ //$NON-NLS-2$
 
 			public void setVisible(boolean visible) {
 				if (visible) {
 					String fileName = diagramModelFilePage.getFileName();
-					fileName = fileName.substring(0,
-							fileName.length() - ".rolesdiag".length()); //$NON-NLS-1$
-					setFileName(RolesDiagramEditorUtil.getUniqueFileName(
-							getContainerFullPath(), fileName, "rolestext")); //$NON-NLS-1$
+					fileName = fileName.substring(0, fileName.length()
+							- ".rolesdiag".length()); //$NON-NLS-1$
+					setFileName(RolesDiagramEditorUtil.getUniqueFileName(getContainerFullPath(), fileName, "rolestext")); //$NON-NLS-1$
 				}
 				super.setVisible(visible);
 			}
@@ -128,10 +125,10 @@ public class RolesCreationWizard extends Wizard implements INewWizard {
 	/**
 	 * @generated NOT
 	 */
-	private String getFileNameWithoutExtension(IPath path){
+	private String getFileNameWithoutExtension(IPath path) {
 		return path.removeFileExtension().lastSegment();
 	}
-	
+
 	/**
 	 * @generated NOT
 	 */
@@ -143,47 +140,35 @@ public class RolesCreationWizard extends Wizard implements INewWizard {
 	 * @generated NOT
 	 */
 	public boolean performFinish() {
-		IRunnableWithProgress op =
-				new WorkspaceModifyOperation(null) {
+		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 
-					protected void execute(IProgressMonitor monitor)
-							throws CoreException, InterruptedException {
-						if(!equalFileNamesWithoutExtension()){
-							IPath diagramPath = diagramModelFilePage.getFilePath();
-							String diagramName = getFileNameWithoutExtension(diagramPath);
-							String fileExtension = domainModelFilePage.getExtension();
-							String uniqueFileName = RolesDiagramEditorUtil.getUniqueFileName(
-									domainModelFilePage.getContainerFullPath(), diagramName, fileExtension);
-							domainModelFilePage.setFileName(uniqueFileName);
-						}
-						diagram = RolesDiagramEditorUtil.createDiagram(
-								diagramModelFilePage.getURI(),
-								domainModelFilePage.getURI(),
-								monitor);
-						if (isOpenNewlyCreatedDiagramEditor() && diagram != null) {
-							try {
-								RolesDiagramEditorUtil.openDiagram(diagram);
-							} catch (PartInitException e) {
-								ErrorDialog.openError(
-										getContainer().getShell(),
-										Messages.RolesCreationWizardOpenEditorError,
-										null, e.getStatus());
-							}
-						}
+			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
+				if (!equalFileNamesWithoutExtension()) {
+					IPath diagramPath = diagramModelFilePage.getFilePath();
+					String diagramName = getFileNameWithoutExtension(diagramPath);
+					String fileExtension = domainModelFilePage.getExtension();
+					String uniqueFileName = RolesDiagramEditorUtil.getUniqueFileName(domainModelFilePage.getContainerFullPath(), diagramName, fileExtension);
+					domainModelFilePage.setFileName(uniqueFileName);
+				}
+				diagram = RolesDiagramEditorUtil.createDiagram(diagramModelFilePage.getURI(), domainModelFilePage.getURI(), monitor);
+				if (isOpenNewlyCreatedDiagramEditor() && diagram != null) {
+					try {
+						RolesDiagramEditorUtil.openDiagram(diagram);
+					} catch (PartInitException e) {
+						ErrorDialog.openError(getContainer().getShell(), Messages.RolesCreationWizardOpenEditorError, null, e.getStatus());
 					}
-				};
+				}
+			}
+		};
 		try {
 			getContainer().run(false, true, op);
 		} catch (InterruptedException e) {
 			return false;
 		} catch (InvocationTargetException e) {
 			if (e.getTargetException() instanceof CoreException) {
-				ErrorDialog.openError(getContainer().getShell(),
-						Messages.RolesCreationWizardCreationError, null,
-						((CoreException) e.getTargetException()).getStatus());
+				ErrorDialog.openError(getContainer().getShell(), Messages.RolesCreationWizardCreationError, null, ((CoreException) e.getTargetException()).getStatus());
 			} else {
-				RolesDiagramEditorPlugin.getInstance().logError(
-						"Error creating diagram", e.getTargetException()); //$NON-NLS-1$
+				RolesDiagramEditorPlugin.getInstance().logError("Error creating diagram", e.getTargetException()); //$NON-NLS-1$
 			}
 			return false;
 		}

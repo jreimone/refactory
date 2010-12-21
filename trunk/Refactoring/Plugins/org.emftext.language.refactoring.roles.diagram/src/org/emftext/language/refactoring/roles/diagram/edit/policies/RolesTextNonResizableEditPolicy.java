@@ -174,8 +174,7 @@ public class RolesTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 				updateLabel((Label) selectionFeedbackFigure);
 				selectionFeedbackFigure.setBounds(getFeedbackBounds());
 			} else {
-				selectionFeedbackFigure.setBounds(getFeedbackBounds().expand(5,
-						5));
+				selectionFeedbackFigure.setBounds(getFeedbackBounds().expand(5, 5));
 			}
 		}
 	}
@@ -203,7 +202,6 @@ public class RolesTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	private FigureListener getHostPositionListener() {
 		if (hostPositionListener == null) {
 			hostPositionListener = new FigureListener() {
-
 				public void figureMoved(IFigure source) {
 					refreshFeedback();
 				}
@@ -216,8 +214,7 @@ public class RolesTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	 * @generated
 	 */
 	protected List createSelectionHandles() {
-		MoveHandle moveHandle =
-				new MoveHandle((GraphicalEditPart) getHost());
+		MoveHandle moveHandle = new MoveHandle((GraphicalEditPart) getHost());
 		moveHandle.setBorder(null);
 		moveHandle.setDragTracker(new DragEditPartsTrackerEx(getHost()));
 		return Collections.singletonList(moveHandle);

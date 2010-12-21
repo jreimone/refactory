@@ -16,26 +16,24 @@ public abstract class RolesAbstractNavigatorItem extends PlatformObject {
 	static {
 		final Class[] supportedTypes = new Class[] { ITabbedPropertySheetPageContributor.class };
 		final ITabbedPropertySheetPageContributor propertySheetPageContributor = new ITabbedPropertySheetPageContributor() {
-
 			public String getContributorId() {
 				return "org.emftext.language.refactoring.roles.diagram"; //$NON-NLS-1$
 			}
 		};
-		Platform.getAdapterManager().registerAdapters(
-				new IAdapterFactory() {
+		Platform.getAdapterManager().registerAdapters(new IAdapterFactory() {
 
-					public Object getAdapter(Object adaptableObject, Class adapterType) {
-						if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesAbstractNavigatorItem && adapterType == ITabbedPropertySheetPageContributor.class) {
-							return propertySheetPageContributor;
-						}
-						return null;
-					}
+			public Object getAdapter(Object adaptableObject, Class adapterType) {
+				if (adaptableObject instanceof org.emftext.language.refactoring.roles.diagram.navigator.RolesAbstractNavigatorItem
+						&& adapterType == ITabbedPropertySheetPageContributor.class) {
+					return propertySheetPageContributor;
+				}
+				return null;
+			}
 
-					public Class[] getAdapterList() {
-						return supportedTypes;
-					}
-				},
-				org.emftext.language.refactoring.roles.diagram.navigator.RolesAbstractNavigatorItem.class);
+			public Class[] getAdapterList() {
+				return supportedTypes;
+			}
+		}, org.emftext.language.refactoring.roles.diagram.navigator.RolesAbstractNavigatorItem.class);
 	}
 
 	/**
