@@ -8,5 +8,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.emftext.refactoring.roleconstraintchecker
 Require-Bundle: org.eclipse.emf.ecore,
  org.emftext.language.refactoring.rolemapping,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.emftext.refactoring.util
 Bundle-Activator: org.emftext.refactoring.roleconstraintchecker.Activator
