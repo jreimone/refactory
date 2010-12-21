@@ -551,6 +551,7 @@
       printingEnabled="true">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
+    <requiredPlugins>org.emftext.language.refactoring.roles.resource.rolestext</requiredPlugins>
   </plugin>
   <editor
       iconPath="icons/new/rolemodel.gif"/>
