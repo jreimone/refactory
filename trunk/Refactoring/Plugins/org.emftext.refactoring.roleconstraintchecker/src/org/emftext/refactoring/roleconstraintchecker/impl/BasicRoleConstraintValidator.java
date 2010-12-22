@@ -94,9 +94,8 @@ public class BasicRoleConstraintValidator extends AbstractRoleConstraintValidato
 		Role targetRole = implication.getTarget();
 		EClass targetEClass = getMappedEClassByRole(mappings, targetRole);
 		EList<EClass> superTypesSource = mappedEClass.getEAllSuperTypes();
-		EList<EClass> superTypesTarget = targetEClass.getEAllSuperTypes();
-		if (!superTypesSource.contains(targetEClass)
-				&& !superTypesTarget.contains(mappedEClass)) {
+		if (!(mappedEClass.equals(targetEClass)
+				|| superTypesSource.contains(targetEClass))) {
 			status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, String.format(ROLE_IMPLICATION_TRANSITIVE, mappedEClass.getName(), sourceRole.getName(), targetRole.getName()));
 		} else {
 			status = new Status(IStatus.OK, Activator.PLUGIN_ID, ROLE_CORRECT_MAPPING);
