@@ -72,7 +72,7 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 	}
 	
 	private void analyseObligatoryCollaborations(RolemappingResource resource, ConcreteMapping concreteMapping) {
-		// TODO implements
+		// TODO implement
 		
 	}
 
