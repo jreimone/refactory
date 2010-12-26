@@ -48,4 +48,7 @@ public class RelationModifierAnalyser extends AbstractPostProcessor {
 		}
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }

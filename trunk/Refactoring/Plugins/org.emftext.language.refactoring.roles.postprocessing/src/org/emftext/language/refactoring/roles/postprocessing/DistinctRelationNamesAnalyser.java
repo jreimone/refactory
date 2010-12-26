@@ -57,4 +57,7 @@ public class DistinctRelationNamesAnalyser extends AbstractPostProcessor {
 		}
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }

@@ -67,4 +67,7 @@ public class DistinctRoleNamesAnalyser extends AbstractPostProcessor {
 		}
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }
