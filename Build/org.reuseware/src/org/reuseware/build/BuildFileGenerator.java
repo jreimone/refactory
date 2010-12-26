@@ -289,9 +289,13 @@ public class BuildFileGenerator {
 					"org.emftext.language.ecore.resource.mecore", "min.ecore", 
 					false),
 			new Language(
-				"org.emftext.language.manifest", "manifest",
-				"org.emftext.language.manifest.resource.manifest", "manifest", 
-				false),
+					"org.emftext.language.manifest", "manifest",
+					"org.emftext.language.manifest.resource.manifest", "manifest", 
+					false),
+			new Language(
+					"org.emftext.language.pacad", "pacad",
+					"org.emftext.language.pacad.resource.pacad", "pacad", 
+					false),
 			new Language(
 				"org.emftext.language.parametercheck", "parametercheck",
 				"org.emftext.language.parametercheck.resource.pcheck", "parametercheck", 
