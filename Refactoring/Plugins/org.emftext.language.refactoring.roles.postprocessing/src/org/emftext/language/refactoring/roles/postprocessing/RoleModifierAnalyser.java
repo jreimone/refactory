@@ -76,4 +76,7 @@ public class RoleModifierAnalyser extends AbstractPostProcessor {
 		}
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }

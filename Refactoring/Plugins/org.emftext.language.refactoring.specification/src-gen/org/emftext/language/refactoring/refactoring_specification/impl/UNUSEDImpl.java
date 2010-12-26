@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.refactoring_specification.UNUSED;
  */
 public class UNUSEDImpl extends RemoveModifierImpl implements UNUSED {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected UNUSEDImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return RefactoringSpecificationPackage.Literals.UNUSED;
-	}
+    return RefactoringSpecificationPackage.Literals.UNUSED;
+  }
 
 } //UNUSEDImpl

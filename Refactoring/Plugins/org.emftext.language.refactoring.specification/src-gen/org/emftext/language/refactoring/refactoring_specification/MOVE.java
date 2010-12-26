@@ -28,81 +28,81 @@ package org.emftext.language.refactoring.refactoring_specification;
 public interface MOVE extends ContainmentCommand
 {
   /**
-	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Source</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Source</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' containment reference.
-	 * @see #setSource(SourceContext)
-	 * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getMOVE_Source()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Source</em>' containment reference.
+   * @see #setSource(SourceContext)
+   * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getMOVE_Source()
+   * @model containment="true" required="true"
+   * @generated
+   */
   SourceContext getSource();
 
   /**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.MOVE#getSource <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.MOVE#getSource <em>Source</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' containment reference.
-	 * @see #getSource()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Source</em>' containment reference.
+   * @see #getSource()
+   * @generated
+   */
   void setSource(SourceContext value);
 
   /**
-	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Target</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Target</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target</em>' containment reference.
-	 * @see #setTarget(TargetContext)
-	 * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getMOVE_Target()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Target</em>' containment reference.
+   * @see #setTarget(TargetContext)
+   * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getMOVE_Target()
+   * @model containment="true" required="true"
+   * @generated
+   */
   TargetContext getTarget();
 
   /**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.MOVE#getTarget <em>Target</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.MOVE#getTarget <em>Target</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' containment reference.
-	 * @see #getTarget()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Target</em>' containment reference.
+   * @see #getTarget()
+   * @generated
+   */
   void setTarget(TargetContext value);
 
 		/**
-	 * Returns the value of the '<em><b>Move Modifier</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Move Modifier</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Move Modifier</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Move Modifier</em>' containment reference.
-	 * @see #setMoveModifier(Modifier)
-	 * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getMOVE_MoveModifier()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Move Modifier</em>' containment reference.
+   * @see #setMoveModifier(Modifier)
+   * @see org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage#getMOVE_MoveModifier()
+   * @model containment="true"
+   * @generated
+   */
 	Modifier getMoveModifier();
 
 		/**
-	 * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.MOVE#getMoveModifier <em>Move Modifier</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.emftext.language.refactoring.refactoring_specification.MOVE#getMoveModifier <em>Move Modifier</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Move Modifier</em>' containment reference.
-	 * @see #getMoveModifier()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Move Modifier</em>' containment reference.
+   * @see #getMoveModifier()
+   * @generated
+   */
 	void setMoveModifier(Modifier value);
 
 } // MOVE

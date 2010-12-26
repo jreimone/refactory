@@ -117,4 +117,7 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 		return nonOptionalRoles;
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }

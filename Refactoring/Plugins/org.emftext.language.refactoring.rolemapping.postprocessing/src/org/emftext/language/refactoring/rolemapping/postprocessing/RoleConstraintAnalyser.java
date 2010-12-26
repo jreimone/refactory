@@ -33,4 +33,8 @@ public class RoleConstraintAnalyser extends AbstractPostProcessor  {
 			}
 		}
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

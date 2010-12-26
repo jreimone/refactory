@@ -22,22 +22,22 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
  */
 public class AFTERImpl extends ObjectReferenceAssignmentImpl implements AFTER {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected AFTERImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return RefactoringSpecificationPackage.Literals.AFTER;
-	}
+    return RefactoringSpecificationPackage.Literals.AFTER;
+  }
 
 } //AFTERImpl
