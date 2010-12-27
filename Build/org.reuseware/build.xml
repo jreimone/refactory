@@ -48,7 +48,7 @@
 -->
 
 <project basedir="." default="dist" name="Reuseware">
-	<property file="build.properties"/>
+	<property file="local.build.properties"/>
 	<property name="plugins.vendor" value="Software Technology Group - TU Dresden Germany" />
 	<property name="plugins.namepre" value="" />
     <property name="plugins.namepost" value="" />
