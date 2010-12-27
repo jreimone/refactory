@@ -1,5 +1,5 @@
 <project basedir="." default="generate-emftext-languages-text-resources" name="Build EMFText text resource">
-	<property file="build.properties"/>
+	<property file="local.build.properties"/>
 	
 	<property name="emftext.plugins.dir" value=".."/>
 	<property name="language.plugins.dir" value=".."/>
