@@ -365,6 +365,7 @@
 		<run-test plugin="org.emftext.language.regexp" extension="regexp" />
 		<run-test plugin="org.emftext.language.simplec" extension="c" />
 		<run-test plugin="org.emftext.language.simplemath" extension="sm" />
+		<run-test plugin="org.emftext.language.theater" extension="theater" />
 		<run-test plugin="org.emftext.test.bug933" extension="bug933" />
 		<run-test plugin="org.emftext.test.bug1154" extension="bug1154" />
 		<run-test plugin="org.emftext.test.bug1233" extension="bug1233" />
