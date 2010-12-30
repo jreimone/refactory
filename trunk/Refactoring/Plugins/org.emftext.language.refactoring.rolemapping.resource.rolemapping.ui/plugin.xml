@@ -8,16 +8,9 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolemapping" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingEditor" name="EMFText rolemapping Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.refactoring.rolemapping.resource.rolemapping">
+			</contentTypeBinding>
 		</editor>
-	</extension>
-	
-	<extension id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
-		<persistent value="true">
-		</persistent>
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
@@ -32,15 +25,47 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingBracketPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingBracketPreferencePage" category="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingOccurrencePreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingOccurrencePreferencePage" category="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.refactory.ui" name="Refactory">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewFileWizard" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewFileWizard" name="EMFText .rolemapping file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewFileWizard" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewFileWizard" name="EMFText .rolemapping file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingMarkerResolutionGenerator" markerType="org.emftext.language.refactoring.rolemapping.resource.rolemapping.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingAnnotationModelFactory" extensions="rolemapping">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.refactoring.rolemapping.resource.rolemapping" name=".rolemapping File" base-type="org.eclipse.core.runtime.text" file-extensions="rolemapping">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="rolemapping" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences">
+		</type>
+		<type name="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences.declaration" super="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences" label="Occurrences (in .rolemapping files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="rolemapping.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="rolemapping.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="rolemapping.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolemapping.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolemapping.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="rolemapping.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="rolemapping.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="rolemapping.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="rolemapping.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences.declaration" label="Declarations (in .rolemapping files)" textPreferenceKey="rolemapping.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="rolemapping.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="rolemapping.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolemapping.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolemapping.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="rolemapping.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
 	</extension>
 	
 </plugin>

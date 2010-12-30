@@ -8,16 +8,9 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.refactoring.specification.resource.ui.RefspecEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="refspec" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.specification.resource.ui.RefspecEditor" name="EMFText refspec Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.refactoring.specification.resource.refspec">
+			</contentTypeBinding>
 		</editor>
-	</extension>
-	
-	<extension id="org.emftext.language.refactoring.specification.resource.refspec.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
-		<persistent value="true">
-		</persistent>
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
@@ -32,15 +25,47 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.refactoring.specification.resource.ui.RefspecBracketPreferencePage" class="org.emftext.language.refactoring.specification.resource.ui.RefspecBracketPreferencePage" category="org.emftext.language.refactoring.specification.resource.ui.RefspecPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.refactoring.specification.resource.ui.RefspecOccurrencePreferencePage" class="org.emftext.language.refactoring.specification.resource.ui.RefspecOccurrencePreferencePage" category="org.emftext.language.refactoring.specification.resource.ui.RefspecPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.refactory.ui" name="Refactory">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.specification.resource.ui.RefspecNewFileWizard" id="org.emftext.language.refactoring.specification.resource.ui.RefspecNewFileWizard" name="EMFText .refspec file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.specification.resource.ui.RefspecNewFileWizard" id="org.emftext.language.refactoring.specification.resource.ui.RefspecNewFileWizard" name="EMFText .refspec file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.refactoring.specification.resource.ui.RefspecMarkerResolutionGenerator" markerType="org.emftext.language.refactoring.specification.resource.refspec.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.refactoring.specification.resource.ui.RefspecAnnotationModelFactory" extensions="refspec">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.refactoring.specification.resource.refspec" name=".refspec File" base-type="org.eclipse.core.runtime.text" file-extensions="refspec">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="refspec" id="org.emftext.language.refactoring.specification.resource.refspec.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.refactoring.specification.resource.refspec.ui.occurences">
+		</type>
+		<type name="org.emftext.language.refactoring.specification.resource.refspec.ui.occurences.declaration" super="org.emftext.language.refactoring.specification.resource.refspec.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.refactoring.specification.resource.refspec.ui.occurences" label="Occurrences (in .refspec files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="refspec.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="refspec.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="refspec.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="refspec.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="refspec.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="refspec.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="refspec.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="refspec.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="refspec.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.refactoring.specification.resource.refspec.ui.occurences.declaration" label="Declarations (in .refspec files)" textPreferenceKey="refspec.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="refspec.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="refspec.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="refspec.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="refspec.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="refspec.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
 	</extension>
 	
 </plugin>
