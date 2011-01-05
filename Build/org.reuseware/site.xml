@@ -159,6 +159,9 @@
    <feature url="features/org.emftext.language.martinfowlerdsl_0.5.0.v200911130906.jar" id="org.emftext.language.martinfowlerdsl" version="0.5.0.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
+   <feature url="features/org.emftext.language.modelquery_0.0.0.v0.jar" id="org.emftext.language.modelquery" version="0.0.0.v0">
+      <category name="EMFText Languages"/>
+   </feature>
    <feature url="features/org.emftext.language.office_0.5.0.v200911130906.jar" id="org.emftext.language.office" version="0.5.0.v200911130906">
       <category name="EMFText Languages"/>
    </feature>

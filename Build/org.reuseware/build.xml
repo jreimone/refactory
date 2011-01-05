@@ -421,6 +421,7 @@
 		<property name="owl.version" value="1.2.3"/>
 		
 		<!-- languages used in Reuseware examples -->
+		<property name="modelquery.version" value="1.0.0"/>
 		<property name="simpleweave.version" value="1.0.0"/>
 		
 		<!-- ABNF -->
@@ -612,6 +613,12 @@
 		<buildplugin  name="OSGi Manifest Editor"    package="org.emftext.language.manifest.resource.manifest.ui" version="${manifest.version}" />
 		<buildfeature                                package="org.emftext.language.manifest"                      version="${manifest.version}" />
 
+		<!-- Modelquery -->
+		<buildplugin  name="Modelquery Metamodel" package="org.emftext.language.modelquery"                        version="${modelquery.version}" />
+		<buildplugin  name="Modelquery Syntax"    package="org.emftext.language.modelquery.resource.modelquery"    version="${modelquery.version}" />
+		<buildplugin  name="Modelquery Editor"    package="org.emftext.language.modelquery.resource.modelquery.ui" version="${modelquery.version}" />
+		<buildfeature                             package="org.emftext.language.modelquery"                        version="${modelquery.version}" />
+		
 		<!-- Martin Fowler's DSL -->
 		<buildplugin  name="Martin Fowler's DSL Metamodel" package="org.emftext.language.martinfowlerdsl"                             version="${martinfowler.version}" />
 		<buildplugin  name="Martin Fowler's DSL Syntax"    package="org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl"    version="${martinfowler.version}" />
