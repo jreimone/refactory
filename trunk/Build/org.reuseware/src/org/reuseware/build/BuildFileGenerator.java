@@ -217,6 +217,10 @@ public class BuildFileGenerator {
 					"org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl", "martinfowlerdsl", 
 					false),
 			new Language(
+					"org.emftext.language.modelquery", "modelquery",
+					"org.emftext.language.modelquery.resource.modelquery", "modelquery", 
+					false),
+			new Language(
 					"org.emftext.language.models", "models",
 					"org.emftext.language.models.resource.model", "models", 
 					false),
