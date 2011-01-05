@@ -368,6 +368,10 @@ public class BuildFileGenerator {
 					"org.emftext.language.simplemath", "simplemath",
 					"org.emftext.language.simplemath.resource.sm", "simplemath", 
 					false),
+			new Language(
+					"org.emftext.language.simpleweave", "simpleweave",
+					"org.emftext.language.simpleweave.resource.simpleweave", "simpleweave", 
+					false),
 			new OntoMoPPLanguage(
 					"org.emftext.language.sparql", "sparql",
 					"org.emftext.language.sparql.resource.sparql", "sparql",

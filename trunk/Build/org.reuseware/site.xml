@@ -191,6 +191,9 @@
    <feature url="features/org.emftext.language.simplemath_0.1.2.v200911130906.jar" id="org.emftext.language.simplemath" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
+   <feature url="features/org.emftext.language.simpleweave_0.0.0.v0.jar" id="org.emftext.language.simpleweave" version="0.0.0.v0">
+      <category name="EMFText Languages"/>
+   </feature>
    <feature url="features/org.emftext.language.statemachine_0.1.2.v200911130906.jar" id="org.emftext.language.statemachine" version="0.1.2.v200911130906">
       <category name="EMFText Languages"/>
    </feature>
