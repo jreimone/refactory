@@ -420,6 +420,9 @@
 		
 		<property name="owl.version" value="1.2.3"/>
 		
+		<!-- languages used in Reuseware examples -->
+		<property name="simpleweave.version" value="1.0.0"/>
+		
 		<!-- ABNF -->
 		<buildplugin  name="Metamodel for ABNF syntax"    package="org.emftext.language.abnf"                  version="${abnf.version}" />
 		<buildplugin  name="ABNF syntax plugin"           package="org.emftext.language.abnf.resource.abnf"    version="${abnf.version}" />
@@ -716,6 +719,12 @@
 		<buildplugin name="Simple Math Textsyntax"     package="org.emftext.language.simplemath.resource.sm"    version="${simplemath.version}" />
 		<buildplugin name="Simple Math Editor"         package="org.emftext.language.simplemath.resource.sm.ui" version="${simplemath.version}" />
 		<buildfeature                                  package="org.emftext.language.simplemath"                version="${simplemath.version}" />
+
+		<!-- Simple Weave -->
+		<buildplugin name="Simple Weave Metamodel"      package="org.emftext.language.simpleweave"                         version="${simpleweave.version}" />
+		<buildplugin name="Simple Weave Textsyntax"     package="org.emftext.language.simpleweave.resource.simpleweave"    version="${simpleweave.version}" />
+		<buildplugin name="Simple Weave Editor"         package="org.emftext.language.simpleweave.resource.simpleweave.ui" version="${simpleweave.version}" />
+		<buildfeature                                   package="org.emftext.language.simpleweave"                         version="${simpleweave.version}" />
 		
 		<!-- SQL -->
 		<buildplugin name="SQL Metamodel"  package="org.emftext.language.sql"                 version="${sql.version}" />
