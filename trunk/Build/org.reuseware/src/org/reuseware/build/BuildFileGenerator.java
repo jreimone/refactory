@@ -228,6 +228,10 @@ public class BuildFileGenerator {
 					"org.emftext.language.office", "office",
 					"org.emftext.language.office.resource.office", "office",
 					false),
+			new Language(
+					"org.emftext.language.office2", "office2",
+					"org.emftext.language.office2.resource.office2", "office2",
+					false),
 			new OntoMoPPLanguage(
 					"org.emftext.language.owl", "owl",
 					"org.emftext.language.owl.resource.owl", "owl", 
