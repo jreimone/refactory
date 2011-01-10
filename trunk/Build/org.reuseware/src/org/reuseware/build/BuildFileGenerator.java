@@ -126,6 +126,10 @@ public class BuildFileGenerator {
 					"org.emftext.language.aterms.resource.aterms", "aterms", 
 					false),
 			new Language(
+					"org.emftext.language.appflow", "appflow",
+					"org.emftext.language.appflow.resource.appflow", "appflow", 
+					false),
+			new Language(
 					"org.emftext.language.b", "B",
 					"org.emftext.language.b.resource.mch", "B", 
 					false),
