@@ -424,6 +424,10 @@ public class BuildFileGenerator {
 					"org.emftext.language.threevaluedlogic.resource.tvl", "threevaluedlogic", 
 					false),
 			new Language(
+					"org.emftext.language.timedautomata", "simpleGraph", //dependency of "timedAutomata"
+					null, null, 
+					false),
+			new Language(
 					"org.emftext.language.timedautomata", "timedAutomata",
 					"org.emftext.language.timedautomata.resource.ta", "timedAutomata", 
 					false),
