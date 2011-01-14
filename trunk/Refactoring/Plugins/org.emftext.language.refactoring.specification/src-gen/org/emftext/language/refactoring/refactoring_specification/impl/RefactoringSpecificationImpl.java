@@ -219,7 +219,7 @@ public class RefactoringSpecificationImpl extends EObjectImpl implements Refacto
 							return true;
 						}
 					} else if (value instanceof List<?>) {
-						for (Role listObject : (List<Role>) value) {
+						for (Object listObject : (List<?>) value) {
 							if (listObject.equals(referencedRole)) {
 								return true;
 							}
