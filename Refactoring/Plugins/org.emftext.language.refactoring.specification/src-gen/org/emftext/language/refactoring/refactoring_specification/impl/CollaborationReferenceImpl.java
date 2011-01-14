@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
-import org.emftext.language.refactoring.refactoring_specification.ObjectReference;
 import org.emftext.language.refactoring.refactoring_specification.ObjectRemoval;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage;
 
