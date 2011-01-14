@@ -11,4 +11,10 @@
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.emftext.refactoring.ui.StartUpRegistrations">
+      </startup>
+   </extension>
 </plugin>
