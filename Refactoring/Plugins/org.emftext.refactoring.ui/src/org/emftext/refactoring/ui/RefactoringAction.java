@@ -76,7 +76,7 @@ public class RefactoringAction extends Action {
 			if(connector != null){
 				if (result == IDialogConstants.OK_ID) {
 					IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
-					interpreter = refactoring.getRefactorer().getCurrentInterpreter();;
+					interpreter = refactoring.getRefactorer().getCurrentInterpreter();
 					Map<Role, List<URI>> roleRuntimeInstanceURIs = interpreter.getRoleRuntimeInstanceURIs();
 					Map<Role, List<EObject>> resolvedRoleRuntimeInstances = postSaveRuntimeInstanceHandling(roleRuntimeInstanceURIs, refactorer.getResource().getResourceSet());
 					RefactoringSpecification refSpec = interpreter.getRefactoringSpecification();
