@@ -5,6 +5,7 @@ package org.emftext.refactoring.interpreter.internal;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.IndexVariable;
@@ -47,6 +48,9 @@ public class CREATEInterpreter {
 			roleRuntimeInstance = context.getObjectForVariable(sourceVar);
 		}
 		TargetContext target = object.getTargetContext();
+		if(target == null){
+			return new RefactoringStatus(IStatus.OK);
+		}
 		if(target instanceof VariableReference){
 			return handleCREATETargetVariable(sourceVar, context, childRole, target, object.getIndex());
 		}
