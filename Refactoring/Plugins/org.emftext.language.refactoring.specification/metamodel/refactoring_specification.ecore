@@ -40,8 +40,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//ContainmentCommand #//VariableDeclarationCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceRole" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetContext" lowerBound="1"
-        eType="#//TargetContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetContext" eType="#//TargetContext"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//ContainmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
