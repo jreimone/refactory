@@ -17,6 +17,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
+import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
+import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
@@ -66,29 +69,61 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 		}
 		return false;
 	}
-
+	
 	private void performSpecificTransformation(SimpleNameCS simpleName2) {
-		//the following is just for renaming variable-definitions and their uses, so if a simpleNameCS outside a variable-definition is renamed,
-		//the following steps should not be executed!
-		if (simpleName2.eContainer() instanceof VariableDeclarationWithInitCS) {
-			VariableDeclarationWithInitCS var = (VariableDeclarationWithInitCS) simpleName2.eContainer();
-			//now, this part refers to variables inside let-expressions:
-			if(var.eContainer() instanceof LetExpCS) {
-				LetExpCS let = (LetExpCS) var.eContainer();
-				OclExpressionCS expression = let.getOclExpression();
-				TreeIterator<EObject> eAllContents = expression.eAllContents();
-				while (eAllContents.hasNext()) {
-					EObject eObject = (EObject) eAllContents.next();
-					if (eObject instanceof NamedLiteralExpCS) {
-						NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
-						NamedElement namedElement = literal.getNamedElement();
-						if(namedElement.getName().equals(originalName)){
-							namedElement.setName(simpleName2.getSimpleName());
-						}
-					}
+		EObject tempParent = simpleName2.eContainer();
+		System.err.println("tempparent: "+ tempParent.eClass());
+		while (	!(tempParent instanceof InvariantExpCS) && 
+				!(tempParent instanceof DefinitionExpCS) && 
+				!(tempParent instanceof BodyDeclarationCS)
+		) {
+			
+			tempParent = tempParent.eContainer();
+			System.err.println("tempparent: "+ tempParent.eClass());
+		}
+		//now the actual renaming
+		TreeIterator<EObject> eAllContents = tempParent.eAllContents();
+		while (eAllContents.hasNext()) {
+			EObject eObject = (EObject) eAllContents.next();
+			if (eObject instanceof NamedLiteralExpCS) {
+				NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
+				NamedElement namedElement = literal.getNamedElement();
+				if(namedElement.getName().equals(originalName)) {
+					namedElement.setName(simpleName2.getSimpleName());
+				}
+			}
+			else if (eObject instanceof SimpleNameCS) {
+				SimpleNameCS simpleNameEO = (SimpleNameCS) eObject;
+				if(simpleNameEO.getSimpleName().equals(originalName)) {
+					simpleNameEO.setSimpleName(simpleName2.getSimpleName());
 				}
 			}
 		}
 	}
+	
+
+//	private void performSpecificTransformation(SimpleNameCS simpleName2) {
+//		//the following is just for renaming variable-definitions and their uses, so if a simpleNameCS outside a variable-definition is renamed,
+//		//the following steps should not be executed!
+//		if (simpleName2.eContainer() instanceof VariableDeclarationWithInitCS) {
+//			VariableDeclarationWithInitCS var = (VariableDeclarationWithInitCS) simpleName2.eContainer();
+//			//now, this part refers to variables inside let-expressions:
+//			if(var.eContainer() instanceof LetExpCS) {
+//				LetExpCS let = (LetExpCS) var.eContainer();
+//				OclExpressionCS expression = let.getOclExpression();
+//				TreeIterator<EObject> eAllContents = expression.eAllContents();
+//				while (eAllContents.hasNext()) {
+//					EObject eObject = (EObject) eAllContents.next();
+//					if (eObject instanceof NamedLiteralExpCS) {
+//						NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
+//						NamedElement namedElement = literal.getNamedElement();
+//						if(namedElement.getName().equals(originalName)){
+//							namedElement.setName(simpleName2.getSimpleName());
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
 
 }

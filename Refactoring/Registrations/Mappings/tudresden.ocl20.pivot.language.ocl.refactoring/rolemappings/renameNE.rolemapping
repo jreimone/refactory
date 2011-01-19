@@ -12,3 +12,9 @@ RenameOperationDefinitionInDefCS maps <OCLRenameSubX> {
 	Renameable := Operation ( name -> name);
 
 }
+
+
+RenameNamedLiteralExpCS maps <OCLRenameSubX> {
+	ParentObject := NamedLiteralExpCS;
+	Renameable := NamedElement(name -> name);
+}
