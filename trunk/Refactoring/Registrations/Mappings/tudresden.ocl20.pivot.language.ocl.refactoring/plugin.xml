@@ -21,5 +21,11 @@
             postprocessor="oclrefactoring.OCLPostProcessor">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/extractings.rolemapping">
+      </rolemapping>
+   </extension>
 
 </plugin>
