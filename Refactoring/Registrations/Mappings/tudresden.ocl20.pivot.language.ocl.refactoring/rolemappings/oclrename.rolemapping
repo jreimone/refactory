@@ -6,16 +6,16 @@ RenameSimpleNameCS maps <RenameX> {
 	Nameable :=  SimpleNameCS( name -> simpleName )  ;
 }
 
-"Rename Operation" maps <RenameX> {
-	Nameable := Operation( name -> name) ;
+
+RenameNamedLiteralExpCS maps <OCLRenameSubX> {
+	ParentObject := NamedLiteralExpCS {
+		subx := namedElement;
+		};
+	Renameable := NamedElement(name -> name);
 }
 
-RenameType maps <RenameX> {
-	Nameable := Type ( name -> name) ;
-}
-
-RenameNamedElement maps <RenameX> {
-	Nameable := NamedElement( name -> name);
+RenameNamedElement maps <RenameX> { 
+	 Nameable := NamedElement (name -> name);
 }
 
 RenameStringLiteralExpCS maps <RenameX> {
