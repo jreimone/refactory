@@ -615,6 +615,7 @@
 
 		<!-- Modelquery -->
 		<buildplugin  name="Modelquery Metamodel" package="org.emftext.language.modelquery"                        version="${modelquery.version}" />
+		<buildplugin  name="Modelquery Resource Management" package="org.emftext.language.modelquery.resource"     version="${modelquery.version}" />
 		<buildplugin  name="Modelquery Syntax"    package="org.emftext.language.modelquery.resource.modelquery"    version="${modelquery.version}" />
 		<buildplugin  name="Modelquery Editor"    package="org.emftext.language.modelquery.resource.modelquery.ui" version="${modelquery.version}" />
 		<buildfeature                             package="org.emftext.language.modelquery"                        version="${modelquery.version}" />
