@@ -8,12 +8,6 @@
       </rolemapping>
    </extension>
    <extension
-         point="org.emftext.refactoring.rolemapping">
-      <rolemapping
-            rolemapping_resource="rolemappings/renameNE.rolemapping">
-      </rolemapping>
-   </extension>
-   <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
             mapping_name="RenameSimpleNameCS"
@@ -26,6 +20,22 @@
       <rolemapping
             rolemapping_resource="rolemappings/extractings.rolemapping">
       </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="ExtractLetExpression"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.ExtractLetExpPostProcessor">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="RenameNamedLiteralExpCS"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RenameNamedLiteralExpPostProcessor">
+      </postprocessor>
    </extension>
 
 </plugin>

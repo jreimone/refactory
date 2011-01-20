@@ -1,19 +1,18 @@
 ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
 IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
 
-"Extract LetExpression" maps <ExtractXmc> {
+ExtractLetExpression maps <ExtractXmc> {
 	OrigContainer := OclExpressionCS;
 	ContainerContainer := InvariantExpCS {
 		source := oclExpression;
 		};
 	NewContainer := VariableDeclarationWithInitCS {
 		realTarget := variableName;
+//		moved := initialization;
 		};
-	NewSubContainer := SimpleNameCS;
+	NewSubContainer := SimpleNameCS(name -> simpleName);
 	Extract := OclExpressionCS;
-	MovedReference := NamedLiteralExpCS {
-		containerRef := namedElement; 
-		};
+	MovedReference := NamedLiteralExpCS;
 	
 	
 }
