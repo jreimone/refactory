@@ -17,12 +17,11 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
-import tudresden.ocl20.pivot.language.ocl.LetExpCS;
-import tudresden.ocl20.pivot.language.ocl.LiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -31,7 +30,7 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  * @author Michael Muck
  *
  */
-public class RenameNamedLiteralExpPostProcessor {
+public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProcessor {
 
 	private List<EObject> namedElements;
 	private NamedLiteralExpCS namedLiteralExp;
@@ -41,6 +40,7 @@ public class RenameNamedLiteralExpPostProcessor {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
