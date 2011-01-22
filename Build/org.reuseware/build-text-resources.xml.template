@@ -110,7 +110,7 @@
 		</sequential>
 	</macrodef>
 	
-	<target name="generate-ecore-text-text-resources">
+	<target name="generate-ecore-text-text-resources" depends="register-gen-model">
 		<generate-text-resource plugin="org.emftext.language.ecore.resource.text"   syntax="text.ecore" resourcePlugin="org.emftext.language.ecore.resource.text"/>
 		<generate-text-resource plugin="org.emftext.language.ecore.resource.facade" syntax="facade.ecore" resourcePlugin="org.emftext.language.ecore.resource.facade"/>
 
@@ -172,4 +172,12 @@
 <!--CLEAN_TASKS-->
 	</target>
 	
+	<!-- register new custom task for registering gen-model -->
+	<taskdef name="emftext-register-gen-model" classname="org.emftext.sdk.ant.RegisterGenModelTask">
+	</taskdef>	
+	
+	<target name="register-gen-model">
+		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/Ecore" GenModelURI="jar:file:/home/hudson/build_server/libs/plugins/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar!/model/Ecore.genmodel" />
+		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/GenModel" GenModelURI="jar:file:/home/hudson/build_server/libs/plugins/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar!/model/GenModel.genmodel" />
+	</target>
 </project>
