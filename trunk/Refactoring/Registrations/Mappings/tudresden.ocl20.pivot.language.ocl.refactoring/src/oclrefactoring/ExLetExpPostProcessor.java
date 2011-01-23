@@ -46,13 +46,14 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
-			System.out.println("role found with name: "+role);
+			System.out.println("role found with name: "+role.getName());
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
 			for (EObject roleplayer : roleplayers) {
-				System.out.println("   element playing this role: "+roleplayer.eClass());
+				System.out.println("   element playing this role: "+roleplayer.eClass().getName());
 				if (roleplayer instanceof SimpleNameCS) {
 					System.out.println("      assigned name for SimpleNameCS: "+((SimpleNameCS)roleplayer).getSimpleName());
 				}
+				System.out.println();
 			}
 			/*if (role.getName().equals("Nameable")) {
 				namedElements = roleRuntimeInstanceMap.get(role);
