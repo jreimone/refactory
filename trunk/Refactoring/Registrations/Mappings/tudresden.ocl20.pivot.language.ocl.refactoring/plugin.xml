@@ -37,5 +37,13 @@
             postprocessor="oclrefactoring.RenameNamedLiteralExpPostProcessor">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="ExLetExp"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.ExLetExpPostProcessor">
+      </postprocessor>
+   </extension>
 
 </plugin>
