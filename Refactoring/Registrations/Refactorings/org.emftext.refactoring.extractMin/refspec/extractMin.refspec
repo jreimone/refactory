@@ -1,0 +1,9 @@
+REFACTORING FOR <ExtractMin> 
+
+STEPS {
+
+	object origContainerObject := OrigContainer as trace(INPUT);
+	
+	create new nc:NewContainer;
+	assign nc.newName;
+} 

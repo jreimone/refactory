@@ -1,0 +1,12 @@
+RoleModel ExtractMin {
+	
+		
+	ROLE NewContainer(input newName);
+	input super ROLE Extract;
+ 	super ROLE OrigContainer;
+
+
+ OrigContainer  [1..1] <>- Extract extracts [1..1];
+
+
+}
