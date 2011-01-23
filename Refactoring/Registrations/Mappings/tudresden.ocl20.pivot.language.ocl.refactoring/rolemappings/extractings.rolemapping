@@ -3,14 +3,21 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 
 
 ExLetExp maps <ExtractMin> {
-	OrigContainer := OperationCallWithSourceExpCS {
-		extracts := source;
-	};
+	OrigContainer := OclExpressionCS;
 	Extract := OclExpressionCS;
 	NewContainer := SimpleNameCS (newName -> simpleName );
 
 }
 
+
+//ExLetExp maps <ExtractMin> {
+//	OrigContainer := OperationCallWithSourceExpCS {
+//		extracts := source;
+//	};
+//	Extract := OclExpressionCS;
+//	NewContainer := SimpleNameCS (newName -> simpleName );
+
+//}
 
 ExtractLetExpression maps <ExtractXmc> {
 	OrigContainer := OperationCallBinaryExpCS {
