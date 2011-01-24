@@ -6,6 +6,7 @@ ExLetExp maps <ExtractMin> {
 	OrigContainer := OclExpressionCS;
 	Extract := OclExpressionCS;
 	NewContainer := SimpleNameCS (newName -> simpleName );
+	NewType := SimpleNameCS (newTypeName -> simpleName);
 
 }
 
