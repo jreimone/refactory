@@ -14,9 +14,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.FeatureChange;
+import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.emftext.language.refactoring.roles.Role;
@@ -34,6 +37,7 @@ import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 import tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.impl.*;
@@ -58,16 +62,24 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 	private SimpleNameCS newType;
 	private LetExpCS myLetExp;
 	private Boolean newLetExp;
+	private EStructuralFeature origRef;
 	
 	OclFactoryImpl myOclFactory;
 	DatatypesFactoryImpl myDataTypesFactory;
 	PivotModelFactoryImpl myPivotModelFactory;
+	
+	
+	
+	
 	
 	public ExLetExpPostProcessor() {
 		myOclFactory = new OclFactoryImpl();
 		myDataTypesFactory = new DatatypesFactoryImpl();
 		myPivotModelFactory = new PivotModelFactoryImpl();
 	}
+	
+	
+	
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		System.err.println("postprocessor activated!");
@@ -84,6 +96,7 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 			}
 			if (role.getName().equals("Extract")) {
 				if (roleplayers.size() == 1) extract = (OclExpressionCS) roleplayers.get(0);
+				origRef = extract.eContainingFeature();
 				System.out.println("   extract identified as: "+extract.toString());
 				System.out.println("");
 				TreeIterator<EObject> eac = extract.eAllContents();
@@ -177,20 +190,10 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 			newLetExp = true;
 		}
 		
-		System.out.println("new LetExpCS created: "+newLetExp);
+//		System.out.println("new LetExpCS created: "+newLetExp);
 		
 		
 		//add the new VariableDeclarationWithInit to the LetExpCS
-
-//		if (myLetExp.getVariableDeclarations() == null) {
-//			System.out.println("new LetExpCS needs to be created!");
-//			EList<VariableDeclarationWithInitCS> myVarDecList = new BasicEList<VariableDeclarationWithInitCS>();
-//			myVarDecList.add(myVD);
-//			((LetExpCSImpl)myLetExp).eSet(OclPackage.LET_EXP_CS__VARIABLE_DECLARATIONS, myVarDecList);
-//		} else {
-//			myLetExp.getVariableDeclarations().add(myVD);
-//		}
-		
 		myLetExp.getVariableDeclarations().add(myVD);
 		
 		
@@ -205,7 +208,27 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 			} else {
 				System.err.println("constraint root is neither an InvariantExpCS nor a BodyDeclarationExpCS!!! Refactoring invalid!");
 			}
-		}	
+		}
+		
+		//at last, there needs to be a reference created replacing the extract
+		NamedLiteralExpCS myReferenceLiteral = myOclFactory.createNamedLiteralExpCS();
+		Property myReferenceProp = myPivotModelFactory.createProperty();
+		myReferenceProp.setName(newContainer.getSimpleName());
+		myReferenceLiteral.setNamedElement(myReferenceProp);
+		
+		System.out.println("container of extract: "+extract.eContainer());
+		System.out.println("containing feature of extract: "+extract.eContainingFeature());
+		System.out.println("orig containing feature of extract: "+origRef);
+		
+		if (origRef instanceof EReferenceImpl) {
+			EReferenceImpl myref = ((EReferenceImpl)origRef);
+			origContainer.eSet(origRef, myReferenceLiteral);
+		}
+		
+		
+		
+		
+		
 	}
 	
 	
@@ -225,29 +248,7 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 		return false;
 	}
 
-	private void performSpecificTransformation(SimpleNameCS simpleName2) {
-		//the following is just for renaming variable-definitions and their uses, so if a simpleNameCS outside a variable-definition is renamed,
-		//the following steps should not be executed!
-		if (simpleName2.eContainer() instanceof VariableDeclarationWithInitCS) {
-			VariableDeclarationWithInitCS var = (VariableDeclarationWithInitCS) simpleName2.eContainer();
-			//now, this part refers to variables inside let-expressions:
-			if(var.eContainer() instanceof LetExpCS) {
-				LetExpCS let = (LetExpCS) var.eContainer();
-				OclExpressionCS expression = let.getOclExpression();
-				TreeIterator<EObject> eAllContents = expression.eAllContents();
-				while (eAllContents.hasNext()) {
-					EObject eObject = (EObject) eAllContents.next();
-					if (eObject instanceof NamedLiteralExpCS) {
-						NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
-						NamedElement namedElement = literal.getNamedElement();
-						if(namedElement.getName().equals(originalName)){
-							namedElement.setName(simpleName2.getSimpleName());
-						}
-					}
-				}
-			}
-		}
-	}
+	
 
 	
 	
