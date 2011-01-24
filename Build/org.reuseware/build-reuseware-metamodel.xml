@@ -46,6 +46,8 @@
 		<delete dir="${workspace}/org.reuseware.coconut/metamodel/generated/models"/>
 		<delete dir="${workspace}/org.reuseware.coconut/metamodel/generated/org"/>
 		
+		<delete dir="${workspace}/org.reuseware/fujaba/config/fujaba5.3.1/projects.workspace" includes="*"/>
+		
 		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut/metamodel"/>
 	</target>
 	
