@@ -1,0 +1,13 @@
+### TypeOf[ ${engine} ] := de.uni_kassel.fujaba.codegen.engine.CodeWritingEngine
+### TypeOf[ ${localVars} ] := de.uni_kassel.fujaba.codegen.rules.engine.LocalVariableInformation
+#set( $localVars = $engine.getFromInformation("localVars") )
+#set( $return = $localVars.addLocalVariable("fujabaIndex", "int", "0", $link) )
+fujabaIndex = $!mparam$!range;
+if (!(#if ( $linkNegative )!(#end
+#if ( $source.InstanceOf == "Setting" && $source.InstanceOf.DeclaredInPackage == "ecore.EStructuralFeature" && $targetRoleName == "Value")
+#set( $return = $imports.addToImports( "org.eclipse.emf.common.util.EList" ) )
+(fujabaIndex >= 0) && (fujabaIndex < (${sourceName}.getEStructuralFeature().isMany() ? ((EList<Object>)${sourceName}.get(true)).size() : 0))##
+#else
+(fujabaIndex >= 0) && (fujabaIndex < ${sourceName}.get$targetRoleName ().size())##
+#end
+#if ( $linkNegative ))#end)) {throw new Exception("SDMException");};

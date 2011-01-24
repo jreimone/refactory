@@ -1,0 +1,41 @@
+#set( $attr = $elem )
+#set( $name = $attr.Name )
+#set( $transient = $attr.hasKeyInStereotypes("transient") )
+#set( $final = $attr.hasKeyInStereotypes("final") )
+#set( $type = $utility.getEMFTypeAsString($attr.AttrType, $engine) )
+#set( $init = $utility.nullIfEmpty($utility.removeQuotes($attr.InitialValue)) )
+#set( $volatile = $attr.CreateAccessMethods == 1 )
+#set( $comment = $utility.replaceTags($attr.Comment.Text) )
+<eStructuralFeatures xsi:type=##
+#if (($type.hasKeyInStereotypes("type") || $utility.isBaseType($attr.AttrType)) && $attr.AttrType != "java.util.Map<String,String>")
+"ecore:EAttribute"##
+#else
+"ecore:EReference" containment="true"##
+#end
+ name="$name"##
+#if($attr.AttrType == "java.util.Map<String,String>")
+ eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStringToStringMapEntry" upperBound="-1">
+#else
+ eType="$type"##
+#if( $attr.AttrType == "StringArray")
+ upperBound="-1" unique="false"##
+#end
+#if( $attr.hasKeyInStereotypes("optional") )
+ lowerBound="0"##
+#else
+ lowerBound="1"##
+#end
+ transient="$transient"#if($init) defaultValueLiteral="$init"#end#if($volatile) volatile="true"#end#if($final) changeable="false"#end>
+#end
+#if( $comment )
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="$comment"/>
+  </eAnnotations>
+#end
+</eStructuralFeatures>
+#if( $final )
+$engine.warning("EMF does not support final attributes! Removing setter instead.",$elem)
+#end
+#if( $attr.isStatic() )
+$engine.warning("EMF does not support static attributes! Ignoring 'static'.",$elem)
+#end

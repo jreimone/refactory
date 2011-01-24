@@ -1,0 +1,64 @@
+### TypeOf[ ${preHook} ] := java.lang.String
+### TypeOf[ ${postHook} ] := java.lang.String
+
+#parse("$lang/default:classDiag/assoc/annotation.vm")
+#if( ! $targetClassIsInterface )
+private $!staticMarker$!transient$container $name;
+
+#parse("$lang/default:classDiag/assoc/annotationShort.vm")
+#end
+#if ( !$readOnly )
+$visibility $!{staticMarker}boolean set$methodSuffix (#if($partnerKey)$partnerKey partnerKey, #end$type value)##
+#if( $targetClassIsInterface )
+;
+#else
+
+{
+   boolean changed = false;
+
+   if (this.$name != value)
+   {
+      $!preHook
+#if( $ref )
+      $type oldValue = this.$name;
+      this.$name = value;
+#if( $prop )
+      getPropertyChangeSupport().firePropertyChange(PROPERTY_$utility.camelToUpperCase($name), oldValue, value);
+#end
+      changed = true;
+#else
+      $type oldValue = this.$name;
+      $class source = this;
+      if (this.$name != null)
+      {
+         this.$name = null;
+         oldValue.$remove;
+      }
+      this.$name = value;
+
+      if (value != null)
+      {
+         value.$insert;
+      }
+#if( $prop )
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_$utility.camelToUpperCase($name), oldValue, value);
+#end
+      changed = true;
+#end
+      $!postHook
+   }
+   return changed;
+}
+#end
+
+#parse("$lang/default:classDiag/assoc/annotationShort.vm")
+#end
+$visibility $!staticMarker$type get$methodSuffix ()##
+#if( $targetClassIsInterface )
+;
+#else
+
+{
+   return ${this}.$name;
+}
+#end

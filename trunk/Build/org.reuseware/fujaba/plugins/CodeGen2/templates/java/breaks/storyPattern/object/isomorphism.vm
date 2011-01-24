@@ -1,0 +1,5 @@
+#parse("java/breaks:storyPattern/object/import.vm" )
+#set( $secondName = $secondObject.ObjectName )
+#set( $opComment = "isomorphic binding check between objects $name and $secondName" )
+#set($condition = "!${name}.equals ($secondName)")
+#parse("java/breaks:storyPattern/condition.vm" )

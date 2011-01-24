@@ -1,0 +1,34 @@
+#if( !$toMany )
+#set( $directSetAccess = true )
+#end
+#parse("$lang/default:storyPattern/object/import.vm" )
+#set( $localVars = $engine.getFromInformation("localVars") )
+#if( $set && !$toMany )
+#set( $return = $imports.addToImports("de.upb.tools.fca.*") )
+#if ( $createVar )
+#set( $return = $localVars.addLocalVariable($name, "FHashSet", $object) )
+#end
+#else
+#if ( $createVar )
+#set( $return = $localVars.addLocalVariable($name, $object.InstanceOf, $object) )
+#end
+#end
+$tmpName = $source;
+
+#if ( $typeCast )
+#set( $opComment = "ensure correct type and really bound of object $name" )
+// $opComment
+#if ( $optional && !$toMany )
+if ( $tmpName instanceof $type )
+{
+   $name = ($type) $tmpName;
+}
+
+#else
+if (!( $tmpName instanceof $type#parse("$lang/default:storyPattern/sdmComment.vm") )) {throw new Exception("SDMException");};
+$name = ($type) $tmpName;
+
+#end
+#elseif ( !$optional )
+#parse("$lang/default:storyPattern/object/bound.vm" )
+#end

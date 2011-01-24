@@ -1,0 +1,3 @@
+#parse("java/breaks:storyPattern/link/import.vm" )
+#parse("java/breaks:classDiag/assoc/accessors.vm")
+$remover; // destroy link

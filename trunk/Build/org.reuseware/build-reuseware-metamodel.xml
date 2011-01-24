@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [<!ENTITY buildfile SYSTEM "file:./build-user.xml">]>
+
+<!-- 
+	Tasks to generate the Reuseware metamodel and text syntax code.
+-->
+
+<project basedir="." default="generate-all" name="Reuseware">
+	
+	<property file="build-reuseware-metamodel.properties"/>
+
+	<taskdef name="fujaba-generate-metamodel-code" classname="de.uni_paderborn.fujaba.ant.FujabaGenTask2">
+		<classpath path="${workspace}/org.reuseware/bin"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/fujaba.jar"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/jface-interface.jar"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/RuntimeTools.jar"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/features.jar"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/util.jar"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/log4j.jar"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/AppIndependent.jar"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/coobra2.jar"/>
+		<classpath location="${workspace}/org.reuseware/fujaba/libs/trove.jar"/>
+	</taskdef>
+
+	<!-- Define the EMF Generate Resource task. To have this task available, the plugin
+	     org.emftext.sdk.ant must be available in the classpath  -->
+	<taskdef name="emftext-generate-text-resource" classname="org.emftext.sdk.ant.GenerateTextResourceTask">
+	</taskdef>
+	
+	<!-- A macro for generating one text resource plug-in -->
+	<macrodef name="generate-text-resource">
+	    <attribute name="plugin"/>
+	    <attribute name="syntax"/>
+		
+		<sequential>
+			<echo message="Building text resource for syntax '@{syntax}' in plug-in '@{plugin}'" />
+				
+			<emftext-generate-text-resource syntax="${workspace}/@{plugin}/model/@{syntax}.cs" rootFolder="../.." syntaxProjectName="@{plugin}">
+			</emftext-generate-text-resource>
+		</sequential>
+	</macrodef>
+	
+	<target name="generate-all" depends="generate-emf,generate-emftext"/>
+
+	<target name="clean-fujaba">
+		<delete dir="${workspace}/org.reuseware.coconut/metamodel/generated/models"/>
+		<delete dir="${workspace}/org.reuseware.coconut/metamodel/generated/org"/>
+		
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut/metamodel"/>
+	</target>
+	
+	<target name="generate-fujaba" depends="clean-fujaba">
+		<fujaba-generate-metamodel-code 
+			pluginFolder="${workspace}/org.reuseware/fujaba/plugins"
+			depFileName="${workspace}/org.reuseware.coconut/metamodel/Ecore.ctr" 
+			fileName="${workspace}/org.reuseware.coconut/metamodel/ReusewareMetamodel.ctr" 
+			destDirname="/generated"/>
+		
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut/metamodel"/>
+	</target>
+	
+	<target name="clean-emf">
+		<delete dir="${workspace}/org.reuseware.coconut.id/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.fracol/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.reuseextension/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.reuseextensionactivator/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.fragment/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.compositionprogram/src-gen/org"/>
+		
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.id"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fracol"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextension"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextensionactivator"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fragment"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.compositionprogram"/>
+	</target>
+	
+	<target name="generate-emf" depends="generate-fujaba,clean-emf">
+		<!-- Place Fujaba-generated src files with method bodies -->
+		<copy todir="${workspace}/org.reuseware.coconut.id/src-gen/org/reuseware/coconut/">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/org/reuseware/coconut">
+				<include name="id/impl/**"/>
+			</fileset> 
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.fracol/src-gen/org/reuseware/coconut/">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/org/reuseware/coconut">
+				<include name="fracol/impl/**"/>
+			</fileset> 
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.reuseextension/src-gen/org/reuseware/coconut/">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/org/reuseware/coconut">
+				<include name="reuseextension/impl/**"/>
+			</fileset> 
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.reuseextensionactivator/src-gen/org/reuseware/coconut/">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/org/reuseware/coconut">
+				<include name="reuseextensionactivator/impl/**"/>
+			</fileset> 
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.fragment/src-gen/org/reuseware/coconut/">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/org/reuseware/coconut">
+				<include name="fragment/impl/**"/>
+			</fileset> 
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.compositionprogram/src-gen/org/reuseware/coconut/">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/org/reuseware/coconut">
+				<include name="compositionprogram/impl/**"/>
+			</fileset> 
+		</copy>
+		
+		<!-- adjust path in metamodels to qualified plugin path -->
+		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" id.ecore" value=" ../../org.reuseware.coconut.id/model/id.ecore"/>
+		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" fracol.ecore" value=" ../../org.reuseware.coconut.fracol/model/fracol.ecore"/>
+		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" reuseextension.ecore" value=" ../../org.reuseware.coconut.reuseextension/model/reuseextension.ecore"/>
+		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" reuseextensionactivator.ecore" value=" ../../org.reuseware.coconut.reuseextensionactivator/model/reuseextensionactivator.ecore"/>
+		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" fragment.ecore" value=" ../../org.reuseware.coconut.fragment/model/fragment.ecore"/>
+		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" compositionprogram.ecore" value=" ../../org.reuseware.coconut.compositionprogram/model/compositionprogram.ecore"/>		
+		<eclipse.refreshLocal depth="infinite" resource="${workspace}/org.reuseware.coconut/metamodel"/>
+
+		<!-- copy metamodels to model folders -->
+		<copy todir="${workspace}/org.reuseware.coconut.id/model">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/models">
+				<include name="id.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.fracol/model">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/models">
+				<include name="fracol.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.reuseextension/model">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/models">
+				<include name="reuseextension.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.reuseextensionactivator/model">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/models">
+				<include name="reuseextensionactivator.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.fragment/model">
+			<fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/models">
+				<include name="fragment.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${workspace}/org.reuseware.coconut.compositionprogram/model">
+		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/models">
+				<include name="compositionprogram.*"/>
+			</fileset>
+		</copy>
+		
+		<!-- move validators to 'src-gen' for evolution -->
+		<move file="${workspace}/org.reuseware.coconut.fracol/src-validator/org/reuseware/coconut/fracol/util/FracolValidator.java"
+			todir="${workspace}/org.reuseware.coconut.fracol/src-gen/org/reuseware/coconut/fracol/util"/>
+		<move file="${workspace}/org.reuseware.coconut.reuseextension/src-validator/org/reuseware/coconut/reuseextension/util/ReuseextensionValidator.java"
+			todir="${workspace}/org.reuseware.coconut.reuseextension/src-gen/org/reuseware/coconut/reuseextension/util"/>
+		<move file="${workspace}/org.reuseware.coconut.reuseextensionactivator/src-validator/org/reuseware/coconut/reuseextensionactivator/util/ReuseextensionactivatorValidator.java"
+			todir="${workspace}/org.reuseware.coconut.reuseextensionactivator/src-gen/org/reuseware/coconut/reuseextensionactivator/util"/>
+		<move file="${workspace}/org.reuseware.coconut.compositionprogram/src-validator/org/reuseware/coconut/compositionprogram/util/CompositionprogramValidator.java"
+			todir="${workspace}/org.reuseware.coconut.compositionprogram/src-gen/org/reuseware/coconut/compositionprogram/util"/>
+		
+		<!-- refresh required for EMF tools -->
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.id"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fracol"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextension"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextensionactivator"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fragment"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.compositionprogram"/>
+			
+		<!-- EMF CodeGen -->
+		<emf.Ecore2Java model="${workspace}/org.reuseware.coconut.id/model/id.ecore" 
+		                genModel="${workspace}/org.reuseware.coconut.id/model/id.genmodel" 
+		 				generateeditproject="true"
+		                reconcilegenmodel="reload">
+		 </emf.Ecore2Java>
+		 <emf.Ecore2Java model="${workspace}/org.reuseware.coconut.fracol/model/fracol.ecore" 
+		                genModel="${workspace}/org.reuseware.coconut.fracol/model/fracol.genmodel" 
+						generateeditproject="true"
+		                reconcilegenmodel="reload">
+		 </emf.Ecore2Java>
+
+		 <emf.Ecore2Java model="${workspace}/org.reuseware.coconut.reuseextension/model/reuseextension.ecore" 
+		                genModel="${workspace}/org.reuseware.coconut.reuseextension/model/reuseextension.genmodel" 
+						generateeditproject="true"
+		                reconcilegenmodel="reload">
+		 </emf.Ecore2Java>
+
+		 <emf.Ecore2Java model="${workspace}/org.reuseware.coconut.reuseextensionactivator/model/reuseextensionactivator.ecore" 
+		                genModel="${workspace}/org.reuseware.coconut.reuseextensionactivator/model/reuseextensionactivator.genmodel" 
+						generateeditproject="true"
+		                reconcilegenmodel="reload">
+		 </emf.Ecore2Java>
+
+		 <emf.Ecore2Java model="${workspace}/org.reuseware.coconut.fragment/model/fragment.ecore" 
+		                genModel="${workspace}/org.reuseware.coconut.fragment/model/fragment.genmodel" 
+						generateeditproject="true"
+		                reconcilegenmodel="reload">
+		 </emf.Ecore2Java>	
+
+		 <emf.Ecore2Java model="${workspace}/org.reuseware.coconut.compositionprogram/model/compositionprogram.ecore" 
+		                genModel="${workspace}/org.reuseware.coconut.compositionprogram/model/compositionprogram.genmodel" 
+		 				generateeditproject="true"
+		                reconcilegenmodel="reload">
+		 </emf.Ecore2Java>
+		
+		<!-- move validators back to 'src' -->
+		<move file="${workspace}/org.reuseware.coconut.fracol/src-gen/org/reuseware/coconut/fracol/util/FracolValidator.java"
+			todir="${workspace}/org.reuseware.coconut.fracol/src-validator/org/reuseware/coconut/fracol/util"/>
+		<move file="${workspace}/org.reuseware.coconut.reuseextension/src-gen/org/reuseware/coconut/reuseextension/util/ReuseextensionValidator.java"
+			todir="${workspace}/org.reuseware.coconut.reuseextension/src-validator/org/reuseware/coconut/reuseextension/util"/>
+		<move file="${workspace}/org.reuseware.coconut.reuseextensionactivator/src-gen/org/reuseware/coconut/reuseextensionactivator/util/ReuseextensionactivatorValidator.java"
+			todir="${workspace}/org.reuseware.coconut.reuseextensionactivator/src-validator/org/reuseware/coconut/reuseextensionactivator/util"/>
+		<move file="${workspace}/org.reuseware.coconut.compositionprogram/src-gen/org/reuseware/coconut/compositionprogram/util/CompositionprogramValidator.java"
+			todir="${workspace}/org.reuseware.coconut.compositionprogram/src-validator/org/reuseware/coconut/compositionprogram/util"/>
+		
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.id"/>		 	
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fracol"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextension"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextensionactivator"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fragment"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.compositionprogram"/>
+		
+	</target>
+
+	<target name="generate-emftext">
+		<generate-text-resource plugin="org.reuseware.coconut.fracol" syntax="fracol" />
+		<generate-text-resource plugin="org.reuseware.coconut.reuseextension" syntax="rex" />
+		<generate-text-resource plugin="org.reuseware.coconut.reuseextensionactivator" syntax="rex_activator" />
+	
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fracol.resource.fracol"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextension.resource.rex"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextensionactivator.resource.rexactivator"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.comogen.fracol.ui"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.comogen.reuseextension.ui"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextensionactivator.ui"/>
+	</target>
+</project>

@@ -1,0 +1,9 @@
+#parse("java/breaks:storyPattern/link/import.vm" )
+#set( $typeCast = (!$utility.isAssignableFrom($target.getInstanceOf(), $role.getTarget())) )
+#if( $toOne )
+#parse("$!{style}storyPattern/link/toOne.vm" )
+#elseif ( $children || $typeCast )
+#parse("$!{style}storyPattern/link/toMany.vm" )
+#else
+#parse("$!{style}storyPattern/link/singleToMany.vm" )
+#end

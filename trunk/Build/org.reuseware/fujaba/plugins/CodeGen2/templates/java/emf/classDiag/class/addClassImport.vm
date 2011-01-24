@@ -1,0 +1,3 @@
+#if (!$classToImport.name == "String")
+#set( $return = $imports.addToImports("${classToImport.declaredInPackage.fullPackageName}.${classToImport.Name}") )
+#end

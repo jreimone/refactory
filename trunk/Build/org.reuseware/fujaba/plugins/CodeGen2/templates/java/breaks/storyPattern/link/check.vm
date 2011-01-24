@@ -1,0 +1,9 @@
+#parse("java/breaks:storyPattern/link/import.vm" )
+#parse("java/breaks:classDiag/assoc/accessors.vm")
+#set( $opComment = "link check $link.InstanceOf.Name from $sourceName to $targetName" )
+#if ( $linkNegative )
+#set($condition = "!($contains)")
+#else
+#set($condition = "$contains")
+#end
+#parse("java/breaks:storyPattern/condition.vm" )

@@ -1,0 +1,12 @@
+// bind object
+#set( $typeCast = (!$role.getTarget().equals($target.getInstanceOf())) )
+#set( $source = "${sourceName}.get$!multi#if($utility.nullIfEmpty($range) && $utility.nullIfEmpty($targetRoleName))From#end$!targetRoleName ($!mparam$!range)" )
+#set( $targetToken = $dlrTool.createDLRToken([$target]) )
+$!targetToken.createStartTag()##
+#parse("$lang/default:storyPattern/object/assign.vm" )##
+#if($targetToken)#set( $!targetToken.Comment = $opComment )#end
+$!targetToken.createEndTag()
+$!dlrToken.createEndTag()##
+$!children##
+
+$!dlrToken.createStartTag()

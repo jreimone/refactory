@@ -1,0 +1,17 @@
+// bind object
+#set( $typeCast = (!$role.getTarget().equals($target.getInstanceOf())) )
+#set( $source = "${sourceName}.get$targetRoleName ()" )
+#if($mparam || $range)
+#set( $targetTypeName = $role.Target.Name )
+#set( $fullTargetName = "${role.Target.declaredInPackage.fullPackageName}.$targetTypeName" )
+#set( $return = $imports.addToImports( $fullTargetName ) )
+#set( $source = "($targetTypeName) ${source}.get (fujabaIndex)")
+#end
+#set( $targetToken = $dlrTool.createDLRToken([$target]) )
+$!targetToken.createStartTag()##
+#parse("java/default:storyPattern/object/assign.vm" )##
+$!targetToken.createEndTag()
+$!dlrToken.createEndTag()##
+$!children##
+
+$!dlrToken.createStartTag()

@@ -1,0 +1,7 @@
+#parse("java/breaks:storyPattern/link/import.vm" )
+#parse("java/breaks:classDiag/assoc/accessors.vm")
+#if ( $toOne )
+$setter; // create link
+#else
+${adder}; // create link
+#end

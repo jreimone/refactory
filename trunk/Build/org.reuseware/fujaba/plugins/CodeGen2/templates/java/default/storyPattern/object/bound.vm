@@ -1,0 +1,6 @@
+#parse("$lang/default:storyPattern/object/import.vm" )
+#if ( ! $object.noNotNullCheck )
+#set( $opComment = "check object $name is really bound" )
+// $opComment
+if (!( $name != null#parse("$lang/default:storyPattern/sdmComment.vm") )) {throw new Exception("SDMException");};
+#end
