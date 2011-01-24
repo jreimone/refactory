@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -63,6 +64,7 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 	private LetExpCS myLetExp;
 	private Boolean newLetExp;
 	private EStructuralFeature origRef;
+	private EObject constraintRoot;
 	
 	OclFactoryImpl myOclFactory;
 	DatatypesFactoryImpl myDataTypesFactory;
@@ -167,7 +169,7 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 		
 		//getting the root of the constraint and finding an existing or creating a new let-expression
 		
-		EObject constraintRoot = origContainer.eContainer();
+		constraintRoot = origContainer.eContainer();
 		System.err.println("tempparent: "+ constraintRoot.eClass());
 		while (	!(constraintRoot instanceof InvariantExpCS) && 
 				!(constraintRoot instanceof BodyDeclarationCS)) 
@@ -225,8 +227,24 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 			origContainer.eSet(origRef, myReferenceLiteral);
 		}
 		
+		//additionally we try to check, if there is any other occurance of the extract withing the actual constraint,
+		//and if there is, is will be replaced
 		
+		TreeIterator<EObject> myLetIt = myLetExp.eAllContents();
 		
+		while (myLetIt.hasNext()) {
+			EObject akt = myLetIt.next();
+			if (EcoreUtil.equals(akt, extract)) {
+				
+				NamedLiteralExpCS myRefLit = myOclFactory.createNamedLiteralExpCS();
+				Property myRefProp = myPivotModelFactory.createProperty();
+				myRefProp.setName(newContainer.getSimpleName());
+				myRefLit.setNamedElement(myRefProp);			
+				
+				EObject aktParent = akt.eContainer();
+				aktParent.eSet(akt.eContainmentFeature(), myRefLit);
+			}
+		}
 		
 		
 	}
