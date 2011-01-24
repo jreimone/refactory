@@ -72,12 +72,14 @@ public class PreferencesManager
     * The directory where the options are stored.
     */
 //   private static String baseDir = System.getProperty ("user.home"); // !!! MODIFIED !!!
-   private static String baseDir = PreferencesManager.class.getResource("../../../../fujaba/config").getFile();
+   private static String baseDir = PreferencesManager.class.getResource(
+		   ".." + File.separator + ".." + File.separator + ".." + File.separator + ".." + File.separator 
+		   + "fujaba" + File.separator + "config").getFile();
    
    /**
     * The file name of the properties file in which Fujaba remembers, which directory should be the 'propertyDir'.
     */
-   public static final String PROPERTIES_PATH = System.getProperty("user.home") + File.separator + "fujaba.properties";
+   public static final String PROPERTIES_PATH = baseDir + File.separator + "fujaba.properties";
 
    /**
     * Directory for all properties. Version number of fujaba is included, so different

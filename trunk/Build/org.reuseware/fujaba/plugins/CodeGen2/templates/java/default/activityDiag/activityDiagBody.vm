@@ -12,7 +12,7 @@ boolean fujaba__Success = false;
 #if( $localVar.Type )
 #set( $typeName = $utility.getTypeAsString($localVar.Type) )
 #set( $package = $localVar.Type.DeclaredInPackage )
-#if( $package && !$typeName.toString().contains("<") )
+#if( $package && !$typeName.toString().contains("<") && $typeName != "String")
 #set( $return = $imports.addToImports("${package.fullPackageName}.$typeName") )
 #end
 #else
