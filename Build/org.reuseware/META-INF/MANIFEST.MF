@@ -4,4 +4,5 @@ Bundle-Name: Reuseware
 Bundle-SymbolicName: org.reuseware
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.emftext.sdk
+Require-Bundle: org.emftext.sdk,
+ org.apache.ant

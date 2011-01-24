@@ -1,0 +1,6 @@
+### TypeOf[ ${utility} ] := de.uni_kassel.fujaba.codegen.Utility
+#parse("$lang/default:storyPattern/link/import2.vm" )
+#if( $utility.nullIfEmpty($range) || $mparam )
+#parse("java/emf:storyPattern/link/indexCheck.vm" )
+#end
+#parse("$lang/default:storyPattern/link/check.vm" )

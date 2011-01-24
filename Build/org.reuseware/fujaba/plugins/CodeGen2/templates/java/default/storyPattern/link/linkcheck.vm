@@ -1,0 +1,10 @@
+#if ( $toOne || $multi )
+${targetName}.equals (${sourceName}.get$!multi#if($utility.nullIfEmpty($range))From#end
+$!targetRoleName ($!mparam$!range))##
+#elseif ( $indmulti )
+${sourceName}.$indmulti$!targetRoleName ($mparam)
+#else
+${sourceName}.#if(!$targetRoleName)contains#else##
+hasIn#end$!targetRoleName (#if($range)$range, #end
+$targetName)##
+#end

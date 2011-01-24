@@ -1,0 +1,100 @@
+#set( $return = $imports.addToImports("java.util.*") )
+#set( $postfix = "$utility.upFirstChar($sourceName)To$utility.upFirstChar($targetName)" )
+#set( $iter = "fujaba__Iter$postfix" )
+#set( $children = $utility.indent("      ",$!children) )
+#set( $localVars = $engine.getFromInformation("localVars") )
+#set( $targetTypeName = $role.Target.Name )
+#set( $fullTargetName = "${role.Target.declaredInPackage.fullPackageName}.$targetTypeName" )
+#set( $return = $imports.addToImports( $fullTargetName ) )
+#set( $return = $localVars.addLocalVariable($iter, "Iterator<${targetTypeName}>", $link) )
+#set( $searchOpComment = "iterate to-many link $link.InstanceOf.Name from $sourceName to $targetName" )
+// $searchOpComment
+#if ( $targetSet )
+#set( $return = $imports.addToImports("de.upb.tools.fca.*") )
+#set( $return = $localVars.addLocalVariable($collectionName, "FHashSet", $link) )
+$collectionName = new FHashSet ();
+#else
+fujaba__Success = false;
+#end
+#if( $path )
+#if ( $path.statsWith("EcoreUtil"))
+$iter = $path;
+#elseif ( $source.InstanceOf == "Setting" && $source.InstanceOf.DeclaredInPackage == "ecore.EStructuralFeature" && $targetRoleName == "Value")
+if (${sourceName}.getEStructuralFeature().isMany()) {
+#set( $return = $imports.addToImports( "org.eclipse.emf.common.util.EList" ) )
+    $iter = new ArrayList<${targetTypeName}>((EList<Object>)${sourceName}.get(true)).iterator()
+}
+else {
+    $iter = Collections.singletonList(${sourceName}.get(true)).iterator();
+}
+#else
+$iter = new ArrayList<${targetTypeName}>($sourceName.$path).iterator()
+#end$iter = $path;
+##$iter = new de.uni_kassel.sdm.Path ($sourceName, "$path");
+##$iter = new Path ($sourceName, "$path");
+#elseif ( $target.InstanceOf == "Setting" && $target.InstanceOf.DeclaredInPackage == "ecore.EStructuralFeature" && $targetRoleName == "ESettings")
+#set( $return = $imports.addToImports("org.eclipse.emf.ecore.InternalEObject") )
+$iter = Collections.singletonList(((InternalEObject)${sourceName}).eSetting(feature)).iterator();
+#else
+$iter = #parse("$!{style}storyPattern/link/iterator.vm" )
+
+#end
+#if ( $upperbound )
+fujaba__UpperBound_$postfix = false;
+#set( $return = $localVars.addLocalVariable("fujaba__UpperBound_$postfix","boolean","false", $link) )
+#set( $upperadd = " && !(fujaba__UpperBound_$postfix)" )
+#end
+#if( $debug )
+List<Exception> causes$postfix = new ArrayList<Exception>();
+#end
+while ( #if(!$forEach && !$targetSet || $targetNegative || $check)!(fujaba__Success) && #end${iter}.hasNext ()$!upperadd )
+{
+   try
+   {
+#if($check)
+      if (!( ${targetName}.equals (${iter}.next ())#parse("$lang/default:storyPattern/sdmComment.vm") )) {throw new Exception("SDMException");};
+#else
+#set( $typeCast = (!$role.getTarget().equals($target.getInstanceOf())) )
+#set( $source = "#if(!$typeCast)($targetType)#end ${iter}.next ()" )
+#set( $toMany = true )
+#set( $targetToken = $dlrTool.createDLRToken([$target]) )
+$!targetToken.createStartTag()##
+#set( $template = "$lang/default:storyPattern/object/assign.vm" )
+$utility.indent("      ", "#parse($template)" )##
+$!targetToken.createEndTag()##
+#if($targetToken)#set( $targetToken.comment = $opComment )#end
+#if ( $upperbound )
+      if ( ${targetName}.equals ($upperbound) )
+      {
+         fujaba__UpperBound_$postfix = true;
+         throw new Exception () ;
+      }
+#end
+#end
+#set( $opComment = $searchOpComment )
+$!children
+#if ( $targetSet )
+      ${collectionName}.add ($targetName);
+#else
+      fujaba__Success = true;
+#end
+   }
+   catch ( Exception fujaba__InternalException )
+   {
+#if( $debug )
+      causes${postfix}.add (fujaba__InternalException);
+#end
+      fujaba__Success = false;
+   }
+}
+#if ( $targetOptional )
+if (!fujaba__Success)
+{
+   fujaba__Success = true;
+   $targetName = null;
+}
+#elseif ( !$targetSet )
+if (!(##
+#if( $path && $linkNegative )!#end
+fujaba__Success#if( $debug ), "$opComment", causes$postfix#end)) {throw new Exception("SDMException");};
+#end

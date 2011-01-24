@@ -1,0 +1,43 @@
+#parse("${style}storyPattern/object/tmpvar.vm")
+#parse("java/breaks:classDiag/assoc/accessors.vm")
+#set( $return = $imports.addToImports("java.util.*") )
+#set( $children = $utility.indent("   ",$!children) )
+#set( $localVars = $engine.getFromInformation("localVars") )
+#set( $searchOpComment = "iterate to-many link $link.InstanceOf.Name from $sourceName to $targetName" )
+#set( $return = $localVars.addLocalVariable($targetName, $object.InstanceOf, $object) )
+
+$targetName = null;
+#if( $targetRoleName == "" )
+#set( $iterator = "${sourceName}.iterator()" )
+#end
+#if ( $targetSet )
+#set( $return = $imports.addToImports("de.upb.tools.fca.*") )
+#set( $return = $localVars.addLocalVariable($collectionName, "FHashSet", $link) )
+$collectionName = new FHashSet ();
+#end
+for (Iterator<$roleType> $tmpVarIterator = $iterator; ${tmpVarIterator}.hasNext(); $targetName = null) // $searchOpComment
+{
+##invariant: $targetName is null here
+#if($typeCast)
+   $roleType $tmpVar = ${tmpVarIterator}.next(); 
+   if (!($tmpVar instanceof $targetType))
+   {
+      continue;
+   }
+   $targetName = ($targetType) $tmpVar;
+#else
+   $targetName = ${tmpVarIterator}.next();
+#end
+$!children
+#if ( $targetSet )
+   ${collectionName}.add ($targetName);
+#else
+#set ( $foreach = $object.getParentElement().getParentElement().isForEach() )
+#if (! $foreach )	
+   break;
+#end
+#end
+}
+#if(!$targetOptional)
+#parse("${style}storyPattern/link/checkSuccess.vm")
+#end

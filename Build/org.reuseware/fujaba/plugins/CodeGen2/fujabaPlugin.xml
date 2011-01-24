@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE Plugin SYSTEM "http://www.upb.de/cs/fujaba/DTDs/Plugin.dtd">
+
+<Plugin pluginClass="de.uni_kassel.fujaba.codegen.CodeGenPlugin">
+
+  <Name>CodeGen 2</Name>
+
+  <Version major="5" minor="5"/>
+
+  <PluginLib>CodeGen2.jar</PluginLib>
+
+  <Source>http://www.se.eecs.uni-kassel.de/~fujaba/downloads/plugins/CodeGen2/5_5/CodeGen2.zip</Source>
+
+  <Kernel major="5" minor="0" revision="5"/>
+
+  <Classpath>
+      <Path>libs/.*.jar</Path>
+  </Classpath>
+
+  <RequiredPlugins>
+  </RequiredPlugins>
+
+  <Description>
+
+    <ShortDescription>CodeGen2</ShortDescription>
+
+    <DetailedDescription>TODO</DetailedDescription>
+
+    <Vendor>University of Kassel</Vendor>
+
+    <Contact>mailto:christian.schneider@uni-kassel.de, leif.geiger@uni-kassel.de</Contact>
+
+  </Description>
+</Plugin>

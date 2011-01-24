@@ -1,0 +1,12 @@
+#parse("$lang/default:storyPattern/link/import.vm" )
+// destroy link
+${sourceName}.##
+#if ($toOne)
+#set( $targetName = "null" )
+set##
+#else
+remove#if($targetRoleName)From#end##
+#end
+$!targetRoleName (#if($range)$range, #end
+$targetName);
+

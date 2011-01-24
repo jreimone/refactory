@@ -3,5 +3,14 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="fujaba/libs/AppIndependent.jar"/>
+	<classpathentry kind="lib" path="fujaba/libs/coobra2.jar"/>
+	<classpathentry kind="lib" path="fujaba/libs/features.jar"/>
+	<classpathentry kind="lib" path="fujaba/libs/jface-interface.jar"/>
+	<classpathentry kind="lib" path="fujaba/libs/log4j.jar"/>
+	<classpathentry kind="lib" path="fujaba/libs/RuntimeTools.jar"/>
+	<classpathentry kind="lib" path="fujaba/libs/trove.jar"/>
+	<classpathentry kind="lib" path="fujaba/libs/util.jar"/>
+	<classpathentry kind="lib" path="fujaba/libs/fujaba.jar" sourcepath="fujaba/libs/fujaba-src.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

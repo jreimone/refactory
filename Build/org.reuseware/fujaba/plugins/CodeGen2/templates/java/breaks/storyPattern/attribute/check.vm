@@ -1,0 +1,13 @@
+#parse("java/breaks:storyPattern/attribute/import.vm" )
+#parse("java/breaks:classDiag/attribute/accessors.vm" )
+#parse("java/breaks:storyPattern/link/import.vm" )
+#set( $attrType = $attr.getInstanceOf().getAttrType().getName() )
+#set( $opComment = "attribute condition $attrName $attrOp $attrExpr" )
+#if ( $attrOp == "== RegExp:" )
+#set($condition = "($getter != null) && ${imports.shortName('java.util.regex.Pattern')}.matches ($attrExpr, $getter)")
+#elseif ( $attrType == "String" )
+#set($condition = "($getter == null && $attrExpr == null) || ($getter != null && $getter.equals($attrExpr))")
+#else
+#set($condition = "$getter $attrOp $attrExpr")
+#end
+#parse("java/breaks:storyPattern/condition.vm" )

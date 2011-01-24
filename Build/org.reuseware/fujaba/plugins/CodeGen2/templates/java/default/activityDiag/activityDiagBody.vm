@@ -1,0 +1,28 @@
+### TypeOf[ ${children} ] := java.lang.String
+### TypeOf[ ${utility} ] := de.uni_kassel.fujaba.codegen.Utility
+### TypeOf[ ${engine} ] := de.uni_kassel.fujaba.codegen.engine.CodeWritingEngine
+#set( $localVars = $engine.getFromInformation("localVars") )
+### TypeOf[ ${localVars} ] := de.uni_kassel.fujaba.codegen.rules.engine.LocalVariableInformation
+#set( $needsDecls = $utility.needs_Success_And_TmpObject_VarDecl($activityDiag) )
+#if( $needsDecls )
+boolean fujaba__Success = false;
+#end
+#set( $return = $localVars.removeParamsFromList($activityDiag) )
+#foreach( $localVar in $localVars.iteratorOfLocalVars() )
+#if( $localVar.Type )
+#set( $typeName = $utility.getTypeAsString($localVar.Type) )
+#set( $package = $localVar.Type.DeclaredInPackage )
+#if( $package && !$typeName.toString().contains("<") )
+#set( $return = $imports.addToImports("${package.fullPackageName}.$typeName") )
+#end
+#else
+#set( $typeName = $localVar.TypeName )
+#end
+#if (! $localVar.DefaultValue)
+$typeName $localVar.Name = null;
+#else
+$typeName $localVar.Name = $localVar.DefaultValue;
+#end
+#end
+
+$!children

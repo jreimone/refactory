@@ -1,0 +1,17 @@
+#set( $children = $utility.indent("   ",$!children) )
+// check negative bindings
+try
+{
+   fujaba__Success = false;
+
+$children
+   fujaba__Success = true;
+}
+catch ( Exception fujaba__InternalException )
+{
+   fujaba__Success = false;
+}
+
+fujaba__Success = !(fujaba__Success);
+
+if (!( fujaba__Success )) {throw new Exception("SDMException");};
