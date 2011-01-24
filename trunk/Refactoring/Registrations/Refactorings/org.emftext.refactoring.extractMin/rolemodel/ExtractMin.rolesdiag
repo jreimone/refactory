@@ -36,6 +36,23 @@
     <element xmi:type="roles:Role" href="ExtractMin.rolestext#//@roles[name='OrigContainer']"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rRJIpCapEeC6iqH6kxMvPA" x="150" y="120"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_jHATUCdaEeCulo0_CP12Rg" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_jHA6YCdaEeCulo0_CP12Rg" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_jHA6YSdaEeCulo0_CP12Rg" type="7001">
+      <children xmi:type="notation:Shape" xmi:id="_lkKSQCdaEeCulo0_CP12Rg" type="3001" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_lkK5UCdaEeCulo0_CP12Rg" type="5002"/>
+        <element xmi:type="roles:RoleAttribute" href="ExtractMin.rolestext#//@roles[name='NewType']/@attributes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lkKSQSdaEeCulo0_CP12Rg"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_jHA6YidaEeCulo0_CP12Rg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_jHA6YydaEeCulo0_CP12Rg"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_jHATUSdaEeCulo0_CP12Rg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_jHATUidaEeCulo0_CP12Rg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_jHATUydaEeCulo0_CP12Rg"/>
+    <element xmi:type="roles:Role" href="ExtractMin.rolestext#//@roles[name='NewType']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jHATVCdaEeCulo0_CP12Rg" x="455" y="260"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Xn4DESXlEeCqV6mbyiAd4Q"/>
   <element xmi:type="roles:RoleModel" href="ExtractMin.rolestext#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_vFrKMCapEeC6iqH6kxMvPA" type="4004" source="_rRJIoCapEeC6iqH6kxMvPA" target="_npnoUCapEeC6iqH6kxMvPA">
