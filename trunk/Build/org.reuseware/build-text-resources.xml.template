@@ -110,10 +110,15 @@
 		</sequential>
 	</macrodef>
 	
-	<target name="generate-ecore-text-text-resources" depends="register-gen-model">
+	<target name="generate-ecore-text-text-resources" depends="register-gen-model,generate-ecore-text-code,refresh-ecore-text-plugins">
+	</target>
+
+	<target name="generate-ecore-text-code" depends="register-gen-model">
 		<generate-text-resource plugin="org.emftext.language.ecore.resource.text"   syntax="text.ecore" resourcePlugin="org.emftext.language.ecore.resource.text"/>
 		<generate-text-resource plugin="org.emftext.language.ecore.resource.facade" syntax="facade.ecore" resourcePlugin="org.emftext.language.ecore.resource.facade"/>
+	</target>
 
+	<target name="refresh-ecore-text-plugins" unless="headless">
 		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.facade"/>
 		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.facade.ui"/>
 		<eclipse.refreshLocal depth="infinite" resource="${language.plugins.dir}/org.emftext.language.ecore.resource.text"/>
@@ -176,7 +181,7 @@
 	<taskdef name="emftext-register-gen-model" classname="org.emftext.sdk.ant.RegisterGenModelTask">
 	</taskdef>	
 	
-	<target name="register-gen-model">
+	<target name="register-gen-model" if="headless">
 		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/Ecore" GenModelURI="jar:file:/home/hudson/build_server/libs/plugins/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar!/model/Ecore.genmodel" />
 		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/GenModel" GenModelURI="jar:file:/home/hudson/build_server/libs/plugins/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar!/model/GenModel.genmodel" />
 	</target>
