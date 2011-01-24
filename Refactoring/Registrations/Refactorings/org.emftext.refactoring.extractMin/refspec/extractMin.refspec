@@ -6,4 +6,6 @@ STEPS {
 	
 	create new nc:NewContainer;
 	assign nc.newName;
+	create new nt:NewType;
+	assign nt.newTypeName;
 } 
