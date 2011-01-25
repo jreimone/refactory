@@ -272,12 +272,11 @@
 		<!-- OpenDocument support plugins: LaCoMe -->
 		<buildplugin name="LaCoMe OpenOffice support"
 			      package="org.reuseware.lacome.layoutlanguage.odt" version="${reuseware.version}"/>
-		<buildfeature package="org.reuseware.lacome.layoutlanguage.odt"   version="${reuseware.version}"/>
 
 		<buildfeature package="org.reuseware.support.opendocument" version="${reuseware.version}"/>
 		
 		<!-- Sokan only zip -->
-		<zip basedir="dist" destfile="dist/sokan-${sokan.version}.v${DSTAMP}${TSTAMP}.zip"
+		<zip basedir="dist" destfile="dist/sokan-${reuseware.version}.v${DSTAMP}${TSTAMP}.zip"
 			includes="COPYING, 
             		plugins/org.reuseware.sokan*, 
             		features/org.reuseware.sokan*"/>
