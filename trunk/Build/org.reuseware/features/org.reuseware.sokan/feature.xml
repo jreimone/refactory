@@ -7,7 +7,7 @@
       >
 
    <description url="http://reuseware.org">
-      Sokan - Workspace Indexing Framework.
+      Sokan: An indexing and building infrastructure for the Eclipse worksapce with specific EMF support.
    </description>
 
    <copyright>
