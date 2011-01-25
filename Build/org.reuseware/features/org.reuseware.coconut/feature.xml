@@ -7,7 +7,7 @@
       plugin="org.reuseware.coconut">
 
    <description url="http://reuseware.org">
-      Reuseware Runtime (CoCoNut); required by all Reuseware-based composition systems.
+      Reuseware Runtime (CoCoNut): Required by all Reuseware-based composition systems.
    </description>
 
    <copyright>
