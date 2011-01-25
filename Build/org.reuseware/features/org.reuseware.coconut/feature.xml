@@ -35,6 +35,7 @@
 	<import feature="org.eclipse.emf.workspace"/> 
 	<import feature="org.eclipse.ocl"/>
 	<import feature="org.eclipse.gmf"/>
+	<import feature="org.emftext.commons.antlr3_3_0"/>
 	<import feature="org.reuseware.sokan"/>
 	<import feature="org.reuseware.lacome"/>
    </requires>
