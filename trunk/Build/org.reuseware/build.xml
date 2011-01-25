@@ -69,7 +69,7 @@
 		    	
 		    	<jar destfile="dist/plugins/@{package}_@{version}.v${DSTAMP}${TSTAMP}.jar" manifest="../@{package}/META-INF/MANIFEST.MF">
 		    		<fileset dir="../@{package}/bin"/>		
-		    		<fileset dir="../@{package}" includes="*.xml *.zip about.* LICENSE.TXT messages.properties plugin.properties model/** metamodel/** store/** schema/** icons/** html/** css/** lib/** rolemappings/** mappings/** refspec/** refspecs/** roles/** rolemodel/** rolemodels/** ant_tasks/**"/>	
+		    		<fileset dir="../@{package}" includes="*.xml *.zip about.* LICENSE.TXT messages.properties plugin.properties model/** metamodel/** store/** schema/** icons/** html/** css/** lib/** conf/** rolemappings/** mappings/** refspec/** refspecs/** roles/** rolemodel/** rolemodels/** ant_tasks/**"/>	
 		    		<fileset dir="../@{package}" includes="src*/**/*.java"/>			    	
 		    	</jar>
 
