@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [<!ENTITY buildfile SYSTEM "file:./build-example-plugins.xml">]>
+
+<!-- Script that extends Reuseware application plugins with an example an a wizard to
+     create a new project from the example -->
+
+<project basedir="." default="generate-examples" name="Reuseware Example Projects">
+	<property file="local.build.properties"/>
+	<property name="plugins.vendor" value="Software Technology Group - TU Dresden Germany" />
+	<property name="plugins.namepre" value="" />
+    <property name="plugins.namepost" value="" />
+
+	<macrodef name="buildexampleplugin" >
+	    <attribute name="wizardproject"/>
+	    <attribute name="examplepackage"/>
+	    <attribute name="exampleproject"/>
+		<attribute name="title"/>
+		<attribute name="description"/>
+		
+	    <sequential>
+	    	<!-- Create the wizard -->
+	    	<copy file="ExampleUnzipperNewWizard.java.template" 
+	    		tofile="../@{wizardproject}/src-example/@{examplepackage}/ExampleUnzipperNewWizard.java"/>
+	    	<replace file="../@{wizardproject}/src-example/@{examplepackage}/ExampleUnzipperNewWizard.java"
+	    		token="PAGE_TITLE" value="@{title}"/>
+	    	<replace file="../@{wizardproject}/src-example/@{examplepackage}/ExampleUnzipperNewWizard.java"
+	    		token="PAGE_DESCRIPTION" value="@{description}"/>
+	    	<replace file="../@{wizardproject}/src-example/@{examplepackage}/ExampleUnzipperNewWizard.java"
+	    		token="PROJECT_NAME" value="@{exampleproject}"/>
+	    			
+	    	<!--- Create the example zip file -->
+	    	<zip destfile="../@{wizardproject}/example.zip">
+	    		<fileset dir="../@{exampleproject}" excludes="**/.svn"/>	
+	    	</zip>
+	    	
+	    	<eclipse.refreshLocal depth="infinite" resource="@{wizardproject}"/>
+	    </sequential>
+	</macrodef>
+
+	
+	<target name="generate-examples">
+		<buildexampleplugin 
+			exampleproject="org.modelplex.cim.tidlibrary"
+			examplepackage="org/modelplex/cim/tidlibrary"
+			wizardproject="org.reuseware.application.cim"
+			title="MODELPLEX Project CIM Library"
+			description="A library of CIM (Common Information Model) components that was developed in the Modelplex project."/>
+		
+		<buildexampleplugin 
+			exampleproject="org.reuseware.application.taipan.example.taosd"
+			examplepackage="org/reuseware/application/taipan/example/taosd"
+			wizardproject="org.reuseware.application.taipan"
+			title="TaiPan Composition Example"
+			description="The example used in the Paper 'On Language-Independent Model Modularisation' published in Transactions on Aspect-Oriented Software Development VI (Springer, LNCS)."/>
+				
+	</target>
+				
+</project>
