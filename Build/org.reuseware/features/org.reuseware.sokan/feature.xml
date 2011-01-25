@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.reuseware.sokan"
-      label="Sokan - Workspace Indexing Framework"
+      label="Sokan: Indexing and Building Infrastructure"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden"
       >
@@ -11,11 +11,11 @@
    </description>
 
    <copyright>
-      Copyright (c) 2006-2010 Software Technology Group, Dresden University of Technology, Germany
+      Copyright (c) 2006-2011 Software Technology Group, Dresden University of Technology, Germany
    </copyright>
 
    <license>
- Copyright (c) 2006-2010 
+ Copyright (c) 2006-2011
  Software Technology Group, Dresden University of Technology
  
  All rights reserved. This program and the accompanying materials
@@ -26,12 +26,7 @@
  Contributors:
    Software Technology Group - TU Dresden, Germany 
       - initial API and implementation
-
    </license>
-
-   
-      
-   
 
    <requires>
 	<import feature="org.eclipse.platform"/>
@@ -68,4 +63,24 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.reuseware.sokan.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.reuseware.sokan.ui.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.reuseware.sokan.ui.model.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 </feature>

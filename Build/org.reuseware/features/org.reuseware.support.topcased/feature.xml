@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.reuseware.lacome.layoutlanguage.topcased"
-      label="LaCoMe TOPCASED support"
+      id="org.reuseware.support.topcased"
+      label="Support: Topcased Diagram Format"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
@@ -10,11 +10,11 @@
    </description>
 
    <copyright>
-      Copyright (c) 2006-2010 Software Technology Group, Dresden University of Technology, Germany
+      Copyright (c) 2006-2011 Software Technology Group, Dresden University of Technology, Germany
    </copyright>
 
    <license>
- Copyright (c) 2006-2010 
+ Copyright (c) 2006-2011
  Software Technology Group, Dresden University of Technology
  
  All rights reserved. This program and the accompanying materials
@@ -29,10 +29,18 @@
 
    
    <requires>
+      <import feature="org.reuseware.coconut"/>
       <import feature="org.reuseware.lacome"/>
       <import feature="org.topcased.modeler.uml"/>
    </requires>
 
+   <plugin
+         id="org.reuseware.coconut.resource.topcased"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
    <plugin
          id="org.reuseware.lacome.layoutlanguage.topcased"
          download-size="0"

@@ -7,33 +7,24 @@
    <description>
       Update site for EMFText, JaMoPP, Refactory, Sokan and Reuseware.
    </description>
+   
    <feature url="features/org.reuseware.coconut_0.9.1.v200911130906.jar" id="org.reuseware.coconut" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
    </feature>
-   <feature url="features/org.reuseware.coconut.description_0.9.1.v200911130906.jar" id="org.reuseware.coconut.description" version="0.9.1.v200911130906">
+   <feature url="features/org.reuseware.comogen_0.9.1.v200911130906.jar" id="org.reuseware.coconut.description" version="0.9.1.v200911130906">
       <category name="Reuseware Composition Framework"/>
    </feature>
-   <feature url="features/org.reuseware.coconut.roundtrip_0.9.1.v200911130906.jar" id="org.reuseware.coconut.roundtrip" version="0.9.1.v200911130906">
-      <category name="Reuseware Composition Framework"/>
-   </feature>
-   
    <feature url="features/org.reuseware.lacome_0.0.0.v0.jar" id="org.reuseware.lacome" version="0.0.0.v0">
-      <category name="LaCoMe - Layout Composition Framework"/>
+      <category name="Reuseware Composition Framework"/>
+   </feature>   
+   <feature url="features/org.reuseware.sokan_0.0.0.v0.jar" id="org.reuseware.sokan" version="0.0.0.v0">
+      <category name="Reuseware Composition Framework"/>
    </feature>
-   <feature url="features/org.reuseware.lacome.layoutlanguage.emftext_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.emftext" version="0.0.0.v0">
-      <category name="LaCoMe - Layout Composition Framework"/>
+   <feature url="features/org.reuseware.support.opendocument_0.0.0.v0.jar" id="org.reuseware.support.opendocument" version="0.0.0.v0">
+      <category name="Reuseware Composition Framework"/>
    </feature>
-   <feature url="features/org.reuseware.lacome.layoutlanguage.gmf_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.gmf" version="0.0.0.v0">
-      <category name="LaCoMe - Layout Composition Framework"/>
-   </feature>
-    <feature url="features/org.reuseware.lacome.layoutlanguage.odt_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.odt" version="0.0.0.v0">
-      <category name="LaCoMe - Layout Composition Framework"/>
-   </feature>  
-   <feature url="features/org.reuseware.lacome.layoutlanguage.rsa_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.rsa" version="0.0.0.v0">
-      <category name="LaCoMe - Layout Composition Framework"/>
-   </feature>
-   <feature url="features/org.reuseware.lacome.layoutlanguage.topcased_0.0.0.v0.jar" id="org.reuseware.lacome.layoutlanguage.topcased" version="0.0.0.v0">
-      <category name="LaCoMe - Layout Composition Framework"/>
+   <feature url="features/org.reuseware.support.topcased_0.0.0.v0.jar" id="org.reuseware.support.topcased" version="0.0.0.v0">
+      <category name="Reuseware Composition Framework"/>
    </feature>
         
    <feature url="features/org.reuseware.application.taipan_0.0.0.v0.jar" id="org.reuseware.application.taipan" version="0.0.0.v0">
@@ -295,19 +286,10 @@
 	<feature url="features/org.emftext.sdk.concretesyntax.refactoring_0.0.0.v0.jar" id="org.emftext.sdk.concretesyntax.refactoring" version="0.0.0.v0">
 		<category name="Refactory"/>
 	</feature>
-     
-	<feature url="features/org.reuseware.sokan_0.0.0.v0.jar" id="org.reuseware.sokan" version="0.0.0.v0">
-		<category name="Sokan"/>
-	</feature>
-     
+
    <category-def name="Reuseware Composition Framework" label="Reuseware Composition Framework">
       <description>
          The Reuseware Composition Framework and accompanying tools.
-      </description>
-   </category-def>
-   <category-def name="LaCoMe - Layout Composition Framework" label="LaCoMe - Layout Composition Framework">
-      <description>
-         A generic and extensible layout composition framework.
       </description>
    </category-def>
    <category-def name="Reuseware Applications" label="Reuseware Applications">
@@ -353,11 +335,6 @@
    <category-def name="Refactory" label="Refactory">
       <description>
          Refactoring Support for EMF Models.
-      </description>
-   </category-def>
-   <category-def name="Sokan" label="Sokan - Workspace Indexing Framework">
-      <description>
-         A framework to index files in the Eclipse workspace.
       </description>
    </category-def>
 </site>

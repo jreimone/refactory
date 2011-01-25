@@ -99,7 +99,7 @@
 
 	</macrodef>
 
-	<target name="dist" depends="dist-clean,dist-set-up,dist-emftext,dist-jamopp,dist-reuseware,dist-refactory,dist-sokan,dist-tear-down">
+	<target name="dist" depends="dist-clean,dist-set-up,dist-emftext,dist-jamopp,dist-reuseware,dist-refactory,dist-tear-down">
 	</target>
 		
 	<target name="dist-reuseware" depends="dist-clean,dist-set-up,build-reuseware,build-reuseware-applications,dist-tear-down">
@@ -112,9 +112,6 @@
 	</target>
 	
 	<target name="dist-refactory" depends="dist-set-up,build-refactory,dist-tear-down">
-	</target>
-	
-	<target name="dist-sokan" depends="dist-set-up,build-sokan,dist-tear-down">
 	</target>
 	
 	<target name="dist-set-up">
@@ -140,112 +137,179 @@
 	</target>
 		
 	<target name="build-reuseware">
-		<property name="reuseware.version" value="0.9.5"/>
-		
+		<property name="reuseware.version" value="1.0.0"/>
+
+		<!-- Sokan Feature -->
+		<buildplugin name="Sokan: Indexing and Building Infrastructure - Metamodel"          
+			      package="org.reuseware.sokan" version="${reuseware.version}"/>
+		<buildplugin name="Sokan: Indexing and Building Infrastructure - Index Management"
+			      package="org.reuseware.sokan.index" version="${reuseware.version}"/>
+		<buildplugin name="Sokan: Indexing and Building Infrastructure - Solr-based Index Implementation"
+			      package="org.reuseware.sokan.index.solr" version="${reuseware.version}"/>
+		<buildplugin name="Sokan: Indexing and Building Infrastructure - Resource Management" 
+			      package="org.reuseware.sokan.resource" version="${reuseware.version}"/>
+		<buildplugin name="Sokan: Indexing and Building Infrastructure - UI" 
+			      package="org.reuseware.sokan.ui" version="${reuseware.version}"/>
+		<buildplugin name="Sokan: Indexing and Building Infrastructure - UI Model" 
+			      package="org.reuseware.sokan.ui.model" version="${reuseware.version}"/>
+		<buildplugin name="Sokan: Indexing and Building Infrastructure - UI Model Edit Support" 
+			      package="org.reuseware.sokan.ui.model.edit" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.sokan" version="${reuseware.version}"/>
+
 		<!-- CoCoNut Feature -->
-		<buildplugin name="Reuseware Runtime (CoCoNut)"             package="org.reuseware.coconut" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Runtime (CoCoNut) Resource Management"  package="org.reuseware.coconut.resource" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Runtime (CoCoNut) Eclipse UI"  package="org.reuseware.coconut.ui.eclipse" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Runtime (CoCoNut)" 
+			      package="org.reuseware.coconut" version="${reuseware.version}"/>
 		
-		<buildplugin name="Reuseware Repository Metamodel"            package="org.reuseware.coconut.repository" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Repository Metamodel Edit"       package="org.reuseware.coconut.repository.edit" version="${reuseware.version}"/>
-
-		<buildplugin name="Reuseware Composition System Metamodel"            package="org.reuseware.coconut.compositionsystem" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Composition System Metamodel Edit"       package="org.reuseware.coconut.compositionsystem.edit" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Composition System Metamodel Textsyntax" package="org.reuseware.coconut.compositionsystem.resource.csys" version="${reuseware.version}"/>
-
-		<buildplugin name="Reuseware Reuse Extension Metamodel"            package="org.reuseware.coconut.reuseextension" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Reuse Extension Metamodel Edit"       package="org.reuseware.coconut.reuseextension.edit" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Reuse Extension Metamodel Textsyntax" package="org.reuseware.coconut.reuseextension.resource.rex" version="${reuseware.version}"/>
-
-		<buildplugin name="Reuseware Reuse Extension Activator Metamodel"            package="org.reuseware.coconut.reuseextensionactivator" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Reuse Extension Activator Metamodel Edit"       package="org.reuseware.coconut.reuseextensionactivator.edit" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Reuse Extension Activator Metamodel Textsyntax" package="org.reuseware.coconut.reuseextensionactivator.resource.rexactivator" version="${reuseware.version}"/>
-
-		<buildplugin name="Reuseware Fragment Store Metamodel"          package="org.reuseware.coconut.store" version="${reuseware.version}"/>
-
-		<buildplugin name="Reuseware Fragment Metamodel"                package="org.reuseware.coconut.fragment" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Fragment Metamodel Edit"           package="org.reuseware.coconut.fragment.edit" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Fragment Metamodel Textsyntax for Virtual Fragments"  package="org.reuseware.coconut.fragment.resource.fragment" version="${reuseware.version}"/>
-
-		<buildplugin name="Reuseware Composition Program Metamodel"                package="org.reuseware.coconut.compositionprogram" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Composition Program Metamodel Edit"           package="org.reuseware.coconut.compositionprogram.edit" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Composition Program Metamodel Diagram Editor" package="org.reuseware.coconut.compositionprogram.diagram" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Runtime (CoCoNut) Resource Management"  
+			      package="org.reuseware.coconut.resource" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Runtime (CoCoNut) Sokan-based Resource Management Implementation"  
+			      package="org.reuseware.coconut.resource.sokan" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Runtime (CoCoNut) Resource Management GMF Connector"  
+			      package="org.reuseware.coconut.resource.gmf" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Runtime (CoCoNut) Resource Management EMFText Connector"  
+			      package="org.reuseware.coconut.resource.emftext" version="${reuseware.version}"/>
 		
-		<buildplugin name="Reuseware Composition Program Syntax Metamodel"            package="org.reuseware.coconut.compositionprogramsyntax" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Composition Program Syntax Metamodel Edit"       package="org.reuseware.coconut.compositionprogramsyntax.edit" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Composition Program Syntax Metamodel Textsyntax" package="org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Runtime (CoCoNut) UI"  
+			      package="org.reuseware.coconut.ui" version="${reuseware.version}"/>
 		
-		<buildplugin name="Reuseware Selection Virtual Fragment Interpreter"  package="org.reuseware.coconut.fragment.virtual.selection" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Fragment Query Interpreter"              package="org.reuseware.coconut.fragment.virtual.query" version="${reuseware.version}"/>
-			
-		<buildplugin name="Reuseware Documentation"   package="org.reuseware.coconut.doc" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition Program Metamodel"
+			      package="org.reuseware.coconut.compositionprogram" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition Program Metamodel Edit"
+			      package="org.reuseware.coconut.compositionprogram.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition Program Metamodel Diagram Editor" 
+			      package="org.reuseware.coconut.compositionprogram.diagram" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Composition Program Metamodel Resource Management" 
+			      package="org.reuseware.coconut.compositionprogram.resource.ucl" version="${reuseware.version}"/>				
+		
+		<buildplugin name="Reuseware LaCoMe Composition Step Post Processor" 
+			      package="org.reuseware.coconut.compositionprogram.lacome" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware Fracol Metamodel"            
+			      package="org.reuseware.coconut.fracol" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Fracol Metamodel Edit"       
+			      package="org.reuseware.coconut.fracol.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Fracol Metamodel Textsyntax" 
+			      package="org.reuseware.coconut.fracol.resource.fracol" version="${reuseware.version}"/>
+	
+		<buildplugin name="Reuseware Fragment Metamodel"                
+			      package="org.reuseware.coconut.fragment" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Fragment Metamodel Edit"          
+			      package="org.reuseware.coconut.fragment.edit" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware ID Metamodel"                
+			      package="org.reuseware.coconut.id" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware ID Metamodel Edit"          
+			      package="org.reuseware.coconut.id.edit" version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware Reuse Extension Metamodel"            
+			      package="org.reuseware.coconut.reuseextension" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Metamodel Edit"       
+			      package="org.reuseware.coconut.reuseextension.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Metamodel Textsyntax" 
+			      package="org.reuseware.coconut.reuseextension.resource.rex" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Metamodel OCL Expression Support" 
+			      package="org.reuseware.coconut.reuseextension.evaluator.ocl" version="${reuseware.version}"/>
+		
+		<buildplugin name="Reuseware Reuse Extension Activator Metamodel"            
+			      package="org.reuseware.coconut.reuseextensionactivator" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Activator Metamodel Edit"       
+			      package="org.reuseware.coconut.reuseextensionactivator.edit" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Activator Metamodel Textsyntax" 
+			      package="org.reuseware.coconut.reuseextensionactivator.resource.rexactivator" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Reuse Extension Activator Metamodel UI"            
+			      package="org.reuseware.coconut.reuseextensionactivator.ui" version="${reuseware.version}"/>
+
+		<buildplugin name="Reuseware Documentation"   
+			      package="org.reuseware.coconut.doc" version="${reuseware.version}"/>
 		
 		<buildfeature package="org.reuseware.coconut" version="${reuseware.version}"/>
+		
+		<!-- CoMoGen Feature -->
+		<buildplugin name="Reuseware SDK (CoMoGen) UI" 
+			      package="org.reuseware.comogen.ui" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware SDK (CoMoGen) Fracol UI" 
+			      package="org.reuseware.comogen.fracol.ui" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware SDK (CoMoGen) Reuse Extension UI" 
+			      package="org.reuseware.comogen.reuseextension.ui" version="${reuseware.version}"/>
 
+		<buildfeature package="org.reuseware.comogen" version="${reuseware.version}"/>
+		
 		<!-- LaCoMe -->
-		<buildplugin name="LaCoMe - Layout Composition Framework (Core)"  package="org.reuseware.lacome" version="${reuseware.version}"/>
-		<buildplugin name="LaCoMe standard adjustment strategies"         package="org.reuseware.lacome.adjustment" version="${reuseware.version}"/>
-		<buildfeature package="org.reuseware.lacome"   version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe - Layout Composition Framework (Core)"
+			      package="org.reuseware.lacome" version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe Standard Adjustment Strategies"         
+			      package="org.reuseware.lacome.adjustment" version="${reuseware.version}"/>
 
-		<buildplugin name="LaCoMe GMF support"        package="org.reuseware.lacome.layoutlanguage.gmf" version="${reuseware.version}"/>
-		<buildfeature package="org.reuseware.lacome.layoutlanguage.gmf"   version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe GMF support"        
+			     package="org.reuseware.lacome.layoutlanguage.gmf" version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe RSA support"        
+			      package="org.reuseware.lacome.layoutlanguage.rsa" version="${reuseware.version}"/>	
+		<buildplugin name="LaCoMe EMFText support"    
+			      package="org.reuseware.lacome.layoutlanguage.emftext" version="${reuseware.version}"/>
 		
-		<buildplugin name="LaCoMe RSA support"        package="org.reuseware.lacome.layoutlanguage.rsa" version="${reuseware.version}"/>	
-		<buildfeature package="org.reuseware.lacome.layoutlanguage.rsa"   version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.lacome" version="${reuseware.version}"/>
+		
+		<!-- TODO #1464: Picus -->
+		<!-- <buildplugin name="Reuseware Library Metamodel"      package="org.reuseware.picus"          version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Library Metamodel Edit" package="org.reuseware.picus.edit"     version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Library Classify"       package="org.reuseware.picus.classify" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Library Browser"        package="org.reuseware.picus.browse"   version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Library Simlple Facet View" package="org.reuseware.picus.facetview.simple" version="${reuseware.version}"/>
+		<buildfeature package="org.reuseware.picus" version="${reuseware.version}"/> -->
+		
+		<!-- TODO #689: Round-Trip 
+		<buildplugin name="Reuseware Round-trip support"       package="org.reuseware.coconut.roundtrip" version="${reuseware.version}"/>
+		<buildplugin name="Reuseware Round-trip Interactive"   package="org.reuseware.coconut.roundtrip.security_dsl" version="${reuseware.version}"/> 
+		<buildfeature package="org.reuseware.coconut.roundtrip"      version="${reuseware.version}"/> -->
+		
+		<!-- TOPCASED support plugins: Resource & LaCoMe -->
+		<buildplugin name="Reuseware Runtime (CoCoNut) Resource Management Topcased Connector"  
+			      package="org.reuseware.coconut.resource.topcased" version="${reuseware.version}"/>
+		<buildplugin name="LaCoMe TOPCASED support"   
+			      package="org.reuseware.lacome.layoutlanguage.topcased" version="${reuseware.version}"/>	
+		<buildfeature package="org.reuseware.support.topcased" version="${reuseware.version}"/>
 
-		<buildplugin name="LaCoMe TOPCASED support"   package="org.reuseware.lacome.layoutlanguage.topcased" version="${reuseware.version}"/>	
-		<buildfeature package="org.reuseware.lacome.layoutlanguage.topcased"    version="${reuseware.version}"/>
-		
-		<buildplugin name="LaCoMe OpenOffice support"        package="org.reuseware.lacome.layoutlanguage.odt" version="${reuseware.version}"/>
+		<!-- OpenDocument support plugins: LaCoMe -->
+		<buildplugin name="LaCoMe OpenOffice support"
+			      package="org.reuseware.lacome.layoutlanguage.odt" version="${reuseware.version}"/>
 		<buildfeature package="org.reuseware.lacome.layoutlanguage.odt"   version="${reuseware.version}"/>
-		
-		<buildplugin name="LaCoMe EMFText support"    package="org.reuseware.lacome.layoutlanguage.emftext" version="${reuseware.version}"/>
-		<buildfeature package="org.reuseware.lacome.layoutlanguage.emftext"   version="${reuseware.version}"/>
 
+		<buildfeature package="org.reuseware.support.opendocument" version="${reuseware.version}"/>
 		
-		<!-- Rount-Trip -->
-		<buildplugin name="Reuseware Round-trip support"             package="org.reuseware.coconut.roundtrip" version="${reuseware.version}"/>
-		<!-- TODO Activate this when multiple handlers are supported and add it to feature
-		<buildplugin name="Reuseware Round-trip Interactive"   package="org.reuseware.coconut.roundtrip.security_dsl" version="${reuseware.version}"/> -->
-		<buildfeature package="org.reuseware.coconut.roundtrip"      version="${reuseware.version}"/>
+		<!-- Sokan only zip -->
+		<zip basedir="dist" destfile="dist/sokan-${sokan.version}.v${DSTAMP}${TSTAMP}.zip"
+			includes="COPYING, 
+            		plugins/org.reuseware.sokan*, 
+            		features/org.reuseware.sokan*"/>
 		
-		<!-- Sokan -->
-		<buildplugin name="Reuseware Library Metamodel"      package="org.reuseware.coconut.description"          version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Library Metamodel Edit" package="org.reuseware.coconut.description.edit"     version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Library Classify"       package="org.reuseware.coconut.description.classify" version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Library Browser"        package="org.reuseware.coconut.description.browse"   version="${reuseware.version}"/>
-		<buildplugin name="Reuseware Library Simlple Facet View" package="org.reuseware.coconut.description.facetview.simple" version="${reuseware.version}"/>
-		<buildfeature package="org.reuseware.coconut.description" version="${reuseware.version}"/>
-		
+		<!-- Complete Reuseware zip -->
 		<zip basedir="dist" destfile="dist/reuseware-${reuseware.version}.v${DSTAMP}${TSTAMP}.zip"
 			includes="COPYING, 
 			         plugins/org.reuseware.*,
-		             features/org.reuseware.*"/>
+		             features/org.reuseware.*"/>		
 	</target>
 
 	<target name="build-reuseware-applications">
+		<property name="reuseware-app.version" value="1.0.0"/>
 		
 		<!-- TaiPan -->
-		<buildplugin name="Extended TaiPan Metamodel"                package="org.reuseware.application.taipan"            version="1.0.0"/>
-		<buildplugin name="Extended TaiPan Metamodel Edit"           package="org.reuseware.application.taipan.edit"       version="1.0.0"/>
-		<buildplugin name="Extended TaiPan Metamodel Editor"         package="org.reuseware.application.taipan.editor"     version="1.0.0"/>
-		<buildplugin name="Extended TaiPan Metamodel Diagram Editor" package="org.reuseware.application.taipan.gmf.editor" version="1.0.0"/>
-		<buildfeature package="org.reuseware.application.taipan" version="1.0.0"/>
+		<buildplugin name="Extended TaiPan Metamodel"                package="org.reuseware.application.taipan"            version="${reuseware-app.version}"/>
+		<buildplugin name="Extended TaiPan Metamodel Edit"           package="org.reuseware.application.taipan.edit"       version="${reuseware-app.version}"/>
+		<buildplugin name="Extended TaiPan Metamodel Editor"         package="org.reuseware.application.taipan.editor"     version="${reuseware-app.version}"/>
+		<buildplugin name="Extended TaiPan Metamodel Diagram Editor" package="org.reuseware.application.taipan.gmf.editor" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.taipan" version="${reuseware-app.version}"/>
 		
 		<!-- CIM -->
-		<buildplugin name="Common Information Model"                package="es.tid.cim"            version="1.0.0"/>
-		<buildplugin name="Common Information Model Edit"           package="es.tid.cim.edit"       version="1.0.0"/>
-		<buildplugin name="Common Information Model Editor"         package="es.tid.cim.editor"     version="1.0.0"/>
-		<buildplugin name="Common Information Model Diagram Editor" package="es.tid.cim.diagram"    version="1.0.0"/>
-		<buildplugin name="Common Information Model Composition System" package="org.reuseware.application.cim" version="1.0.0"/>
-		<buildfeature package="org.reuseware.application.cim" version="1.0.0"/>
+		<buildplugin name="Common Information Model"                package="es.tid.cim"            version="${reuseware-app.version}"/>
+		<buildplugin name="Common Information Model Edit"           package="es.tid.cim.edit"       version="${reuseware-app.version}"/>
+		<buildplugin name="Common Information Model Editor"         package="es.tid.cim.editor"     version="${reuseware-app.version}"/>
+		<buildplugin name="Common Information Model Diagram Editor" package="es.tid.cim.diagram"    version="${reuseware-app.version}"/>
+		<buildplugin name="Common Information Model Composition System" package="org.reuseware.application.cim" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.cim" version="${reuseware-app.version}"/>
 		
 		<!-- Open Document -->
-		<buildplugin name="EMF Open Document Support" package="org.oasisopen.names.tc.opendocument" version="0.9.0"/>
-		<buildfeature package="org.oasisopen.names.tc.opendocument" version="0.9.0"/>
-
-
+		<buildplugin name="EMF Open Document Support" package="org.oasisopen.names.tc.opendocument" version="${reuseware-app.version}"/>
+		<buildfeature package="org.oasisopen.names.tc.opendocument" version="${reuseware-app.version}"/>
 	</target>
 
 		
@@ -908,23 +972,6 @@
             		features/org.emftext.refactoring*,
 			        plugins/org.emftext.language.refactoring*, 
 		            features/org.emftext.language.refactoring*"/>
-	</target>
-
-	<!-- Sokan -->
-	<target name="build-sokan">
-		
-		<property name="sokan.version" value="0.8.3"/>
-
-		<buildplugin name="Sokan" package="org.reuseware.sokan"            version="${sokan.version}"/>
-		<buildplugin name="Sokan" package="org.reuseware.sokan.index"      version="${sokan.version}"/>
-		<buildplugin name="Sokan" package="org.reuseware.sokan.index.solr" version="${sokan.version}"/>
-		<buildplugin name="Sokan" package="org.reuseware.sokan.resource"   version="${sokan.version}"/>
-		<buildfeature             package="org.reuseware.sokan"            version="${sokan.version}"/>
-		
-		<zip basedir="dist" destfile="dist/sokan-${sokan.version}.v${DSTAMP}${TSTAMP}.zip"
-			includes="COPYING, 
-            		plugins/org.reuseware.sokan*, 
-            		features/org.reuseware.sokan*"/>
 	</target>
 
 	<!-- Downloads the current update site to the local disc -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.reuseware.coconut"
-      label="Reuseware Core (CoCoNut)"
+      label="CoCoNut: Reuseware Core"
       version="0.0.0"
       provider-name="Software Technology Group - TU Dresden"
       plugin="org.reuseware.coconut">
@@ -11,11 +11,11 @@
    </description>
 
    <copyright>
-      Copyright (c) 2006-2010 Software Technology Group, Dresden University of Technology, Germany
+      Copyright (c) 2006-2011 Software Technology Group, Dresden University of Technology, Germany
    </copyright>
 
    <license>
- Copyright (c) 2006-2010 
+ Copyright (c) 2006-2011
  Software Technology Group, Dresden University of Technology
  
  All rights reserved. This program and the accompanying materials
@@ -26,17 +26,7 @@
  Contributors:
    Software Technology Group - TU Dresden, Germany 
       - initial API and implementation
-
-The ANTLR 3.1.1 runtime (www.antlr.org) is redistributed with this tool. 
-Copyright (c) 2003-2007, Terence Parr. All rights reserved.
-
-The Story Driven Modelling (SDM) runtime (www.fujaba.de) of the FUJABA ToolSuite project is redistributed with this tool. 
-Copyright (C) Fujaba Development Group. All rights reserved.
    </license>
-
-   
-      
-   
 
    <requires>
 	<import feature="org.eclipse.platform"/>
@@ -45,6 +35,7 @@ Copyright (C) Fujaba Development Group. All rights reserved.
 	<import feature="org.eclipse.emf.workspace"/> 
 	<import feature="org.eclipse.ocl"/>
 	<import feature="org.eclipse.gmf"/>
+	<import feature="org.reuseware.sokan"/>
 	<import feature="org.reuseware.lacome"/>
    </requires>
 
@@ -56,19 +47,40 @@ Copyright (C) Fujaba Development Group. All rights reserved.
          unpack="false"/>
 
    <plugin
-         id="org.reuseware.coconut.repository"
+         id="org.reuseware.coconut.resource"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.reuseware.coconut.repository.edit"
+         id="org.reuseware.coconut.resource.sokan"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+   
+   <plugin
+         id="org.reuseware.coconut.resource.gmf"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+  
+   <plugin
+         id="org.reuseware.coconut.resource.emftext"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.reuseware.coconut.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
    <plugin
          id="org.reuseware.coconut.compositionprogram"
          download-size="0"
@@ -91,49 +103,35 @@ Copyright (C) Fujaba Development Group. All rights reserved.
          unpack="false"/>
 
    <plugin
-         id="org.reuseware.coconut.compositionprogramsyntax"
+         id="org.reuseware.coconut.compositionprogram.resource.ucl"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.reuseware.coconut.compositionprogramsyntax.edit"
+         id="org.reuseware.coconut.compositionprogram.lacome"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax"
+         id="org.reuseware.coconut.fracol"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.reuseware.coconut.compositionsystem"
+         id="org.reuseware.coconut.fracol.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.reuseware.coconut.compositionsystem.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.reuseware.coconut.compositionsystem.resource.csys"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.reuseware.coconut.store"
+         id="org.reuseware.coconut.fracol.resource.fracol"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -152,23 +150,16 @@ Copyright (C) Fujaba Development Group. All rights reserved.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
+         
    <plugin
-         id="org.reuseware.coconut.fragment.resource.fragment"
+         id="org.reuseware.coconut.id"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.reuseware.coconut.fragment.virtual.selection"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.reuseware.coconut.fragment.virtual.query"
+         id="org.reuseware.coconut.id.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -196,6 +187,13 @@ Copyright (C) Fujaba Development Group. All rights reserved.
          unpack="false"/>
 
    <plugin
+         id="org.reuseware.coconut.reuseextension.evaluator.ocl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
          id="org.reuseware.coconut.reuseextensionactivator"
          download-size="0"
          install-size="0"
@@ -217,14 +215,7 @@ Copyright (C) Fujaba Development Group. All rights reserved.
          unpack="false"/>
          
    <plugin
-         id="org.reuseware.coconut.resource"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.reuseware.coconut.ui.eclipse"
+         id="org.reuseware.coconut.reuseextensionactivator.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
