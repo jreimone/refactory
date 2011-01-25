@@ -27,7 +27,8 @@
 	    		token="PAGE_DESCRIPTION" value="@{description}"/>
 	    	<replace file="../@{wizardproject}/src-example/@{examplepackage}/ExampleUnzipperNewWizard.java"
 	    		token="PROJECT_NAME" value="@{exampleproject}"/>
-	    			
+	    	<replace file="../@{wizardproject}/src-example/@{examplepackage}/ExampleUnzipperNewWizard.java"
+	    		token="PLUGIN_ID" value="@{wizardproject}"/>	    			
 	    	<!--- Create the example zip file -->
 	    	<zip destfile="../@{wizardproject}/example.zip">
 	    		<fileset dir="../@{exampleproject}" excludes="**/.svn"/>	
