@@ -8,10 +8,10 @@
       Update site for EMFText, JaMoPP, Refactory, Sokan and Reuseware.
    </description>
    
-   <feature url="features/org.reuseware.coconut_0.9.1.v200911130906.jar" id="org.reuseware.coconut" version="0.9.1.v200911130906">
+   <feature url="features/org.reuseware.coconut_0.0.0.v0.jar" id="org.reuseware.coconut" version="0.0.0.v0">
       <category name="Reuseware Composition Framework"/>
    </feature>
-   <feature url="features/org.reuseware.comogen_0.9.1.v200911130906.jar" id="org.reuseware.coconut.description" version="0.9.1.v200911130906">
+   <feature url="features/org.reuseware.comogen_0.0.0.v0.jar" id="org.reuseware.comogen" version="0.0.0.v0">
       <category name="Reuseware Composition Framework"/>
    </feature>
    <feature url="features/org.reuseware.lacome_0.0.0.v0.jar" id="org.reuseware.lacome" version="0.0.0.v0">
