@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.reuseware.coconut"
+      id="org.reuseware.comogen"
       label="CoMoGen: Reuseware SDK"
       version="0.0.0"
-      provider-name="Software Technology Group - TU Dresden"
-      plugin="org.reuseware.comogen">
+      provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://reuseware.org">
       Reuseware SDK (CoMoGen); tool support to develop composition systems with Reuseware.
