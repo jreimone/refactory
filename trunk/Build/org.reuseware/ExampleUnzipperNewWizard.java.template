@@ -86,12 +86,22 @@ public class ExampleUnzipperNewWizard extends Wizard implements
 	 * The name of the project in the project creation page
 	 */
 	private String pageProjectName = "PROJECT_NAME";
+	
+	/**
+	 * Does the project need a java nature?
+	 */
+	private boolean needsJavaNature = NEEDS_JAVA;
 
 	/**
 	 * The configuration element associated with this new project wizard
 	 */
 	private IConfigurationElement config;
-
+	
+	private final static String JAVA_NATURE   = "org.eclipse.jdt.core.javanature";
+	private final static String JAVA_BUILDER  = "org.eclipse.jdt.core.javabuilder";
+	private final static String SOKAN_NATURE  = "org.reuseware.sokan.resource.repositoryNature";
+	private final static String SOKAN_BUILDER = "org.reuseware.sokan.resource.indexBuilder";
+	
 	/**
 	 * The constructor.
 	 */
@@ -160,11 +170,26 @@ public class ExampleUnzipperNewWizard extends Wizard implements
 										.newProjectDescription(project
 												.getName());
 								desc.setLocation(new Path(projectFolder));
-								desc.setNatureIds(new String[] {"org.reuseware.sokan.resource.repositoryNature"});
-								ICommand command = desc.newCommand();
-								command.setBuilderName("org.reuseware.sokan.resource.indexBuilder");
-								desc.setBuildSpec(new ICommand[] {command});
-
+								
+								String[]   natureIDs     = null; 
+								ICommand[] buildCommands = null;
+								
+								if (needsJavaNature) {
+									ICommand command1 = desc.newCommand();
+									command1.setBuilderName(JAVA_BUILDER);
+									ICommand command2 = desc.newCommand();
+									command2.setBuilderName(SOKAN_BUILDER);
+									buildCommands = new ICommand[] {command1, command2};
+									natureIDs = new String[] {JAVA_NATURE, SOKAN_NATURE};
+								} else {
+									ICommand command = desc.newCommand();
+									command.setBuilderName(SOKAN_BUILDER);
+									buildCommands = new ICommand[] {command};
+									natureIDs = new String[] {SOKAN_NATURE};
+								}
+								
+								desc.setNatureIds(natureIDs);
+								desc.setBuildSpec(buildCommands);
 								project.create(desc, monitor);
 							}
 						}
