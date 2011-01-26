@@ -53,7 +53,28 @@
 			wizardproject="org.reuseware.application.taipan"
 			title="TaiPan Composition Example"
 			description="The example used in the Paper 'On Language-Independent Model Modularisation' published in Transactions on Aspect-Oriented Software Development VI (Springer, LNCS)."/>
-				
+
+		<buildexampleplugin 
+			exampleproject="org.reuseware.application.classweaving"
+			examplepackage="org/reuseware/application/classweaving"
+			wizardproject="org.reuseware.application.classweaving.plugin"
+			title="Class Weaving (UML/Ecore/Java)"
+			description="This composition system demonstrates how Reuseware can be used for Aspect-Oriented Software Development (AOSD) by adding class weaving support to three different langueg (UML, Ecore, and Java)."/>
+
+		<buildexampleplugin 
+			exampleproject="org.reuseware.application.cbse.exercise"
+			examplepackage="org/reuseware/application/cbse/exercise"
+			wizardproject="org.reuseware.application.cbse"
+			title="CBSE Exercise (UML)"
+			description="An exercise that was developed for students of the Component-Based Software Engineering (CBSE) course at TU Dresden. The exercise explores the development of composition systems with Reuseware on the example of UML Class Diagrams and UML State Machines. The exercise sheet is included in the example project."/>
+
+		<buildexampleplugin 
+			exampleproject="org.reuseware.application.swt2.exercise"
+			examplepackage="org/reuseware/application/swt2/exercise"
+			wizardproject="org.reuseware.application.swt2"
+			title="SWT2 Exercise (UML)"
+			description="An exercise that was developed for students of the Softwaretechnology II (SWT2) course at TU Dresden. The exercise explores the usage of Reuseware composition systems on the example of a composition system for UML Class Diagrams and UML State Machines. The exercise sheet is included in the example project."/>
+		
 	</target>
 				
 </project>
