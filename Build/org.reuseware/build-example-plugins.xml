@@ -32,12 +32,15 @@
 	    		token="PLUGIN_ID" value="@{wizardproject}"/>
 	    	<replace file="../@{wizardproject}/src-example/@{examplepackage}/ExampleUnzipperNewWizard.java"
 	    		token="NEEDS_JAVA" value="@{java}"/>
+		    <!-- Clear the 'out' folder which might contain something from running the tests -->
+		    <delete dir="../@{exampleproject}/out" includes="**/*" includeemptydirs="true"/>
 	    	<!--- Create the example zip file -->
 	    	<zip destfile="../@{wizardproject}/example.zip">
 	    		<fileset dir="../@{exampleproject}" excludes="**/.svn"/>	
 	    	</zip>
 	    	
 	    	<eclipse.refreshLocal depth="infinite" resource="@{wizardproject}"/>
+	    	<eclipse.refreshLocal depth="infinite" resource="@{exampleproject}"/>
 	    </sequential>
 	</macrodef>
 
