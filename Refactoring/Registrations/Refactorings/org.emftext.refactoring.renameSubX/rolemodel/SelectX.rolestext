@@ -1,0 +1,7 @@
+RoleModel SelectX {
+
+	input super ROLE Selection;
+ 	optional ROLE Nameable(
+ 			optional input name
+ 	);
+}

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OclRenameSubX
-Bundle-SymbolicName: org.emftext.refactoring.renameSubX;singleton:=true
+Bundle-Name: SelectX
+Bundle-SymbolicName: org.emftext.refactoring.selectX;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Vendor: Michael Muck
 Require-Bundle: org.emftext.refactoring.registry.refactoringspecification,
