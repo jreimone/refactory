@@ -319,6 +319,23 @@
 		<!-- Class Weaving -->
 		<buildplugin name="Reuseware: Class Weaving Example" package="org.reuseware.application.classweaving.plugin" version="${reuseware-app.version}"/>
 		<buildfeature package="org.reuseware.application.classweaving" version="${reuseware-app.version}"/>
+
+		<!-- ReuseJava -->
+		<buildplugin name="Reuseware: Example Composition System for Java" package="org.reuseware.application.reusejava.plugin" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.reusejava" version="${reuseware-app.version}"/>
+		
+		<!-- ReuseUML -->
+		<buildplugin name="Reuseware: Example Composition System for UML Activity Diagrams" package="org.reuseware.application.reuseuml.plugin" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.reuseuml" version="${reuseware-app.version}"/>
+
+		<!-- UML2Java -->
+		<buildplugin name="Reuseware: UML2Java Model Transformation defined as Composition System" package="org.reuseware.application.uml2java.plugin" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.uml2java" version="${reuseware-app.version}"/>
+
+		<!-- ModelSoC -->
+		<buildplugin name="Reuseware: Example Application developed with the ModelSoC Approach" package="org.reuseware.application.ticketshop.plugin" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.ticketshop" version="${reuseware-app.version}"/>
+
 	</target>
 
 		
