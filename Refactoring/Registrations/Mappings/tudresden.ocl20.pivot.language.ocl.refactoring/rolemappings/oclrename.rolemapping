@@ -7,21 +7,19 @@ RenameSimpleNameCS maps <RenameX> {
 }
 
 
-RenameNamedLiteralExpCS maps <OCLRenameSubX> {
-	ParentObject := NamedLiteralExpCS {
-		subx := namedElement;
-		};
-	Renameable := NamedElement(name -> name);
+RenameNamedLiteralExpCS maps <SelectX> {
+	Selection := NamedLiteralExpCS;
+	Nameable := Property(name -> name);
 }
 
-RenameNamedElement maps <RenameX> { 
-	 Nameable := NamedElement (name -> name);
-}
+//RenameNamedElement maps <RenameX> { 
+//	 Nameable := NamedElement (name -> name);
+//}
 
-RenameStringLiteralExpCS maps <RenameX> {
-	Nameable := StringLiteralExpCS (name -> stringLiteral);
-}
+//RenameStringLiteralExpCS maps <RenameX> {
+//	Nameable := StringLiteralExpCS (name -> stringLiteral);
+//}
 
-RenameIntegerLiteralExpCS maps <RenameX> {
-	Nameable := IntegerLiteralExpCS (name -> integerLiteral);
-}
+//RenameIntegerLiteralExpCS maps <RenameX> {
+//	Nameable := IntegerLiteralExpCS (name -> integerLiteral);
+//}

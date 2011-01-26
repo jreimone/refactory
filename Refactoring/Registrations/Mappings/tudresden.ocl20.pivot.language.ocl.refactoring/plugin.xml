@@ -24,9 +24,9 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="ExtractLetExpression"
+            mapping_name="&quot;Integrate Variable From LetExpression&quot;"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.ExtractLetExpPostProcessor">
+            postprocessor="oclrefactoring.IntegrateVarFromLetExp">
       </postprocessor>
    </extension>
    <extension
