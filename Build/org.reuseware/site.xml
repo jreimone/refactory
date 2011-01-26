@@ -42,7 +42,19 @@
    <feature url="features/org.reuseware.application.classweaving_0.0.0.v0.jar" id="org.reuseware.application.classweaving" version="0.0.0.v0">
       <category name="Reuseware Applications"/>
    </feature>
-      
+   <feature url="features/org.reuseware.application.reusejava_0.0.0.v0.jar" id="org.reuseware.application.reusejava" version="0.0.0.v0">
+      <category name="Reuseware Applications"/>
+   </feature>  
+   <feature url="features/org.reuseware.application.reuseuml_0.0.0.v0.jar" id="org.reuseware.application.reuseuml" version="0.0.0.v0">
+      <category name="Reuseware Applications"/>
+   </feature>
+   <feature url="features/org.reuseware.application.uml2java_0.0.0.v0.jar" id="org.reuseware.application.uml2java" version="0.0.0.v0">
+      <category name="Reuseware Applications"/>
+   </feature>
+   <feature url="features/org.reuseware.application.ticketshop_0.0.0.v0.jar" id="org.reuseware.application.ticketshop" version="0.0.0.v0">
+      <category name="Reuseware Applications"/>
+   </feature>      
+         
    <feature url="features/org.emftext.commons.antlr3_1_1_3.1.1.v200911130906.jar" id="org.emftext.commons.antlr3_1_1" version="3.1.1.v200911130906">
       <category name="EMFText Deprecated"/>
    </feature>
