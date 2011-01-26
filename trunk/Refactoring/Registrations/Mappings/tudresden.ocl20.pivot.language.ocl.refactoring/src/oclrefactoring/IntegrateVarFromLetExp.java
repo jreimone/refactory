@@ -41,6 +41,10 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 	private EStructuralFeature origRef;
 	private EObject constraintRoot;
 	
+	
+	private VariableDeclarationWithInitCS selection;
+	
+	
 	OclFactoryImpl myOclFactory;
 	DatatypesFactoryImpl myDataTypesFactory;
 	PivotModelFactoryImpl myPivotModelFactory;
@@ -61,53 +65,10 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 		for (Role role : keySet) {
 			System.out.println("role found with name: "+role.getName());
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
-			for (EObject roleplayer : roleplayers) {
-				System.out.println("   element playing this role: "+roleplayer.eClass().getName());
-				if (roleplayer instanceof SimpleNameCS) {
-					System.out.println("      assigned name for SimpleNameCS: "+((SimpleNameCS)roleplayer).getSimpleName());
-				}
-				System.out.println();
-			}
-			if (role.getName().equals("Extract")) {
-				if (roleplayers.size() == 1) extract = (OclExpressionCS) roleplayers.get(0);
-				origRef = extract.eContainingFeature();
-				System.out.println("   extract identified as: "+extract.toString());
-				System.out.println("");
-				TreeIterator<EObject> eac = extract.eAllContents();
-				while (eac.hasNext()) {
-					System.out.println("     "+eac.next());
-				}
-				
-			}
-			else if (role.getName().equals("OrigContainer")) {
-				if (roleplayers.size() == 1) origContainer = (OclExpressionCS) roleplayers.get(0);
-				System.out.println("   OrigContainer identified as: "+origContainer.toString());
-				System.out.println("");
-				TreeIterator<EObject> oac = origContainer.eAllContents();
-				while (oac.hasNext()) {
-					System.out.println("     "+oac.next());
-				}
-				
-			}
-			else if (role.getName().equals("NewContainer")) {
-				if (roleplayers.size() == 1) newContainer = (SimpleNameCS) roleplayers.get(0);
-				System.out.println("   NewContainer identified as: "+newContainer.eClass());
-				System.out.println("");
-				TreeIterator<EObject> nac = newContainer.eAllContents();
-				while (nac.hasNext()) {
-					System.out.println("     "+nac.next());
-				}
-				
-			}
-			else if (role.getName().equals("NewType")) {
-				if (roleplayers.size() == 1) newType = (SimpleNameCS) roleplayers.get(0);
-				System.out.println("   NewType identified as: "+newType.eClass());
-				System.out.println("");
-				TreeIterator<EObject> ntac = newType.eAllContents();
-				while (ntac.hasNext()) {
-					System.out.println("     "+ntac.next());
-				}
-				
+			
+			if (role.getName().equals("Selection")) {
+				if (roleplayers.size() == 1) selection = (VariableDeclarationWithInitCS) roleplayers.get(0);
+				System.out.println("   extract identified as: "+selection.toString());
 			}
 			
 		}
