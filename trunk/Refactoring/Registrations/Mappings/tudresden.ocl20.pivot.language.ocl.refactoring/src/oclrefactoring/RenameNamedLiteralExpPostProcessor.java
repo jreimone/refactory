@@ -25,6 +25,7 @@ import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.Property;
 
 /**
  * @author Michael Muck
@@ -32,10 +33,12 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  */
 public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProcessor {
 
-	private List<EObject> namedElements;
-	private NamedLiteralExpCS namedLiteralExp;
+	private NamedLiteralExpCS selected;
+	private Property newNameHolder;
+	private String newName;
 	private String originalName;
-
+	
+	
 	public RenameNamedLiteralExpPostProcessor() {
 		// TODO Auto-generated constructor stub
 	}
@@ -45,60 +48,56 @@ public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProce
 		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
-			if (role.getName().equals("Nameable")) {
-				namedElements = roleRuntimeInstanceMap.get(role);
-				if (namedElements != null && namedElements.size() > 0
-						&& (namedElements.get(0) instanceof NamedLiteralExpCS)) {
-					namedLiteralExp = (NamedLiteralExpCS) namedElements.get(0);
-					if (determineOriginalName(change)) {
-						performSpecificTransformation(namedLiteralExp);
-					}
+			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
+			if (role.getName().equals("Selection")) {
+				if (roleplayers.size()==1 && roleplayers.get(0) instanceof NamedLiteralExpCS) {
+					selected = (NamedLiteralExpCS) roleplayers.get(0);
+					System.out.println("found selected element as: "+selected);
+					originalName = selected.getNamedElement().getName();
+					System.out.println("original name is: "+ originalName);
+				}
+			}
+			else if(role.getName().equals("Nameable")) {
+				if (roleplayers.size() == 1 && roleplayers.get(0) instanceof Property) {
+					newNameHolder = (Property) roleplayers.get(0);
+					newName = newNameHolder.getName();
+					System.out.println("new name is: "+ newName);
 				}
 			}
 		}
+		
+		performSpecificTransformation();
+		
 		return Status.OK_STATUS;
 	}
 
-	private boolean determineOriginalName(ChangeDescription change) {
-		EMap<EObject, EList<FeatureChange>> objectChanges = change.getObjectChanges();
-		EList<FeatureChange> eList = objectChanges.get(namedLiteralExp);
-		for (FeatureChange featureChange : eList) {
-			Object value = featureChange.getValue();
-			if (value instanceof String) {
-				originalName = (String) value;
-				System.err.println("original name determined as: "+originalName);
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private void performSpecificTransformation(NamedLiteralExpCS namedLiteralExp2) {
-		EObject tempParent = namedLiteralExp2.eContainer();
-		System.err.println("tempparent: "+ tempParent.eClass());
-		while (	!(tempParent instanceof InvariantExpCS) && 
-				!(tempParent instanceof DefinitionExpCS) && 
-				!(tempParent instanceof BodyDeclarationCS)
+	private void performSpecificTransformation() {
+		EObject constraintRoot = selected.eContainer();
+		while (	!(constraintRoot instanceof InvariantExpCS) && 
+				!(constraintRoot instanceof DefinitionExpCS) && 
+				!(constraintRoot instanceof BodyDeclarationCS)
 		) {
 			
-			tempParent = tempParent.eContainer();
-			System.err.println("tempparent: "+ tempParent.eClass());
+			constraintRoot = constraintRoot.eContainer();
+			
 		}
+		
+		System.err.println("constraint root determined as: "+ constraintRoot.eClass());
 		//now the actual renaming
-		TreeIterator<EObject> eAllContents = tempParent.eAllContents();
+		TreeIterator<EObject> eAllContents = constraintRoot.eAllContents();
 		while (eAllContents.hasNext()) {
 			EObject eObject = (EObject) eAllContents.next();
 			if (eObject instanceof NamedLiteralExpCS) {
 				NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
 				NamedElement namedElement = literal.getNamedElement();
 				if(namedElement.getName().equals(originalName)) {
-					namedElement.setName(namedLiteralExp2.getNamedElement().getName());
+					namedElement.setName(newName);
 				}
 			}
 			else if (eObject instanceof SimpleNameCS) {
-				SimpleNameCS simpleNameEO = (SimpleNameCS) eObject;
-				if(simpleNameEO.getSimpleName().equals(originalName)) {
-					simpleNameEO.setSimpleName(namedLiteralExp2.getNamedElement().getName());
+				SimpleNameCS simpleName = (SimpleNameCS) eObject;
+				if(simpleName.getSimpleName().equals(originalName)) {
+					simpleName.setSimpleName(newName);
 				}
 			}
 		}
