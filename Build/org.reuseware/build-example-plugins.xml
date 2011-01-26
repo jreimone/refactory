@@ -59,7 +59,7 @@
 			examplepackage="org/reuseware/application/classweaving"
 			wizardproject="org.reuseware.application.classweaving.plugin"
 			title="Class Weaving (UML/Ecore/Java)"
-			description="This composition system demonstrates how Reuseware can be used for Aspect-Oriented Software Development (AOSD) by adding class weaving support to three different langueg (UML, Ecore, and Java)."/>
+			description="This composition system demonstrates how Reuseware can be used for Aspect-Oriented Software Development (AOSD) by adding class weaving support to three different languages (UML, Ecore, and Java)."/>
 
 		<buildexampleplugin 
 			exampleproject="org.reuseware.application.cbse.exercise"

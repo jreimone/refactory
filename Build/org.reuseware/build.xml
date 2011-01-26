@@ -269,7 +269,9 @@
 			      package="org.reuseware.lacome.layoutlanguage.topcased" version="${reuseware.version}"/>	
 		<buildfeature package="org.reuseware.support.topcased" version="${reuseware.version}"/>
 
-		<!-- OpenDocument support plugins: LaCoMe -->
+		<!-- OpenDocument support plugins: EMF ODT metamodel & LaCoMe -->
+		<buildplugin name="EMF Open Document Support" 
+			      package="org.oasisopen.names.tc.opendocument" version="${reuseware.version}"/>
 		<buildplugin name="LaCoMe OpenOffice support"
 			      package="org.reuseware.lacome.layoutlanguage.odt" version="${reuseware.version}"/>
 
@@ -305,10 +307,18 @@
 		<buildplugin name="Common Information Model Diagram Editor" package="es.tid.cim.diagram"    version="${reuseware-app.version}"/>
 		<buildplugin name="Common Information Model Composition System" package="org.reuseware.application.cim" version="${reuseware-app.version}"/>
 		<buildfeature package="org.reuseware.application.cim" version="${reuseware-app.version}"/>
-		
-		<!-- Open Document -->
-		<buildplugin name="EMF Open Document Support" package="org.oasisopen.names.tc.opendocument" version="${reuseware-app.version}"/>
-		<buildfeature package="org.oasisopen.names.tc.opendocument" version="${reuseware-app.version}"/>
+
+		<!-- CBSE -->
+		<buildplugin name="Reuseware: CBSE Exercise" package="org.reuseware.application.cbse" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.cbse" version="${reuseware-app.version}"/>
+
+		<!-- SWT2 -->
+		<buildplugin name="Reuseware: SWT2 Exercise" package="org.reuseware.application.swt2" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.swt2" version="${reuseware-app.version}"/>
+
+		<!-- Class Weaving -->
+		<buildplugin name="Reuseware: Class Weaving Example" package="org.reuseware.application.classweaving.plugin" version="${reuseware-app.version}"/>
+		<buildfeature package="org.reuseware.application.classweaving" version="${reuseware-app.version}"/>
 	</target>
 
 		
