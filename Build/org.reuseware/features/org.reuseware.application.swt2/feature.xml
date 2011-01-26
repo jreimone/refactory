@@ -30,6 +30,7 @@
    <requires>
       <import feature="org.reuseware.coconut"/>
       <import feature="org.reuseware.lacome"/>
+      <import feature="org.eclipse.uml2"/>
       <import feature="org.topcased.modeler.uml"/>
       <import feature="org.reuseware.support.topcased"/>
    </requires>
