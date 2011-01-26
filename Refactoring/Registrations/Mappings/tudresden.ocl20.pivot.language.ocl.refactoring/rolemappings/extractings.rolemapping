@@ -12,8 +12,3 @@ ExLetExp maps <ExtractMin> {
 
 }
 
-
-"Integrate Variable From LetExpression" maps <ExtractMin> {
-	OrigContainer := LetExpCS {extracts := variableDeclarations;};
-	Extract := VariableDeclarationWithInitCS;
-}

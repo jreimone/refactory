@@ -45,5 +45,11 @@
             postprocessor="oclrefactoring.ExLetExpPostProcessor">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/integrations.rolemapping">
+      </rolemapping>
+   </extension>
 
 </plugin>
