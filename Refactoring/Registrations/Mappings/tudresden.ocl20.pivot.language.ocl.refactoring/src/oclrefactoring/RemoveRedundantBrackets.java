@@ -43,7 +43,7 @@ public class RemoveRedundantBrackets implements IRefactoringPostProcessor {
 
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-		System.err.println("postprocessor activated!");
+		System.out.println("Postprocessor for 'Remove Redundant Brackets' refactoring activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
@@ -54,6 +54,12 @@ public class RemoveRedundantBrackets implements IRefactoringPostProcessor {
 				}
 			}
 		}
+		
+		if (selected == null) {
+			System.err.println("This refactoring only works on bracket expressions. \nRefactoring aborted for no BracketExpression was selected as input!");
+			return Status.CANCEL_STATUS;
+		}
+		
 		removedBrackets = 0;
 		performSpecificTransformation();
 		
