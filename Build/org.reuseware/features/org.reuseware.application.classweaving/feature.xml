@@ -35,6 +35,8 @@
       <import feature="org.topcased.modeler.uml"/>
       <import feature="org.reuseware.support.topcased"/>
       <import feature="org.emftext.language.java"/>
+      <import feature="org.emftext.language.modelquery"/>
+      <import feature="org.emftext.language.simpleweave"/>
    </requires>
 
    <plugin
