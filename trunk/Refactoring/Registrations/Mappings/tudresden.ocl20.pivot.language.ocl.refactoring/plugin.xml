@@ -59,5 +59,13 @@
             postprocessor="oclrefactoring.RemoveRedundantBrackets">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Remove All Redundant Brackets"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RemoveAllRedundantBrackets">
+      </postprocessor>
+   </extension>
 
 </plugin>
