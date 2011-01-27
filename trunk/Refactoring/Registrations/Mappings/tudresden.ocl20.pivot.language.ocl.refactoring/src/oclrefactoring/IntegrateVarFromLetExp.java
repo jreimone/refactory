@@ -1,11 +1,15 @@
 package oclrefactoring;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -13,13 +17,16 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
+import tudresden.ocl20.pivot.language.ocl.LiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
@@ -36,13 +43,15 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 	private OclExpressionCS origContainer;
 	private SimpleNameCS newContainer;
 	private SimpleNameCS newType;
-	private LetExpCS myLetExp;
+
 	private Boolean newLetExp;
 	private EStructuralFeature origRef;
 	private EObject constraintRoot;
 	
 	
 	private VariableDeclarationWithInitCS selection;
+	private LetExpCS myLetExp;
+	String VariableName;
 	
 	
 	OclFactoryImpl myOclFactory;
@@ -73,112 +82,83 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 			
 		}
 		
-//		performSpecificTransformation();
+		performSpecificTransformation();
 		
 		return Status.OK_STATUS;
 	}
 	
-	private void performSpecificTransformation() {
+	private IStatus performSpecificTransformation() {
 		
-		
-		
-		
-		VariableDeclarationWithInitCS myVD = myOclFactory.createVariableDeclarationWithInitCS();
-		System.out.println("myvd: "+myVD.eClass());
-		myVD.setVariableName(newContainer);
-		
-		
-		//creating a new Type for the VariableDeclaration from the provided input name
-		TypePathNameSimpleCS mytype = myOclFactory.createTypePathNameSimpleCS();
-		
-		Type type = myPivotModelFactory.createType();
-		type.setName(newType.getSimpleName());
-				
-		mytype.setTypeName(type);
-		myVD.setTypeName(mytype);
-		myVD.setInitialization(extract);
-		myVD.setEqual("=");
-		
-		
-		//getting the root of the constraint and finding an existing or creating a new let-expression
-		
-		constraintRoot = origContainer.eContainer();
-		System.err.println("tempparent: "+ constraintRoot.eClass());
-		while (	!(constraintRoot instanceof InvariantExpCS) && 
-				!(constraintRoot instanceof BodyDeclarationCS)) 
-		{
-			constraintRoot = constraintRoot.eContainer();
-		}
-		System.out.println("found constraint-root as: "+constraintRoot.toString());
-		
-		myLetExp = null;
-		newLetExp = false;
-		
-		if (constraintRoot instanceof InvariantExpCS  && ((InvariantExpCS)constraintRoot).getOclExpression() instanceof LetExpCS) {
-			InvariantExpCS inv = (InvariantExpCS)constraintRoot;
-			myLetExp = (LetExpCS) inv.getOclExpression();
-		} else if (constraintRoot instanceof BodyDeclarationCS && ((BodyDeclarationCS)constraintRoot).getOclExpression() instanceof LetExpCS) {
-			BodyDeclarationCS inv = (BodyDeclarationCS)constraintRoot;
-			myLetExp = (LetExpCS) inv.getOclExpression();
-		} else {
-			myLetExp = myOclFactory.createLetExpCS();
-			newLetExp = true;
+		if (!(selection.eContainer() instanceof LetExpCS)) {
+			System.err.println("Integrate Variable From LetExpression cannot be called from outside a LetExp!");
+			return Status.CANCEL_STATUS;
 		}
 		
-//		System.out.println("new LetExpCS created: "+newLetExp);
+		myLetExp = (LetExpCS) selection.eContainer();
+		VariableName = selection.getVariableName().getSimpleName();
+		OclExpressionCS declaration = selection.getInitialization();
 		
 		
-		//add the new VariableDeclarationWithInit to the LetExpCS
-		myLetExp.getVariableDeclarations().add(myVD);
-		
-		
-		
-		if (newLetExp) {
-			if (constraintRoot instanceof InvariantExpCS) {
-				myLetExp.setOclExpression(((InvariantExpCS)constraintRoot).getOclExpression());
-				((InvariantExpCS)constraintRoot).setOclExpression(myLetExp);
-			} else if (constraintRoot instanceof BodyDeclarationCS) {
-				myLetExp.setOclExpression(((BodyDeclarationCS)constraintRoot).getOclExpression());
-				((BodyDeclarationCS)constraintRoot).setOclExpression(myLetExp);
-			} else {
-				System.err.println("constraint root is neither an InvariantExpCS nor a BodyDeclarationExpCS!!! Refactoring invalid!");
+		//at first, search and replace all instances of the variable with the actual declaration
+		// TODO bracket expression
+		TreeIterator<EObject> myIt = myLetExp.eAllContents();
+		while (myIt.hasNext()) {
+			EObject akt = myIt.next();
+			if (akt instanceof NamedLiteralExpCS) {
+				NamedLiteralExpCS aktLit = (NamedLiteralExpCS) akt;
+				if (aktLit.getNamedElement().getName().equals(VariableName)) {
+					//here we are at a place, where the variable should be integrated
+					EObject container = aktLit.eContainer();
+					EStructuralFeature containerRef = aktLit.eContainingFeature();
+					
+					//as a precaution for avoiding changes in meaning through weaker/stronger operator binding in the 
+					//target expression, the declaration will be set in brackets before it is integrated
+					BracketExpCS myBracket = myOclFactory.createBracketExpCS();
+					
+					ReferenceCopier copier = new ReferenceCopier();
+					EList<EObject> copiedList = new BasicEList<EObject>();
+					EObject myCopiedDeclaration = copier.copy(declaration);
+					copiedList.add(myCopiedDeclaration);
+					TreeIterator<EObject> copyListIterator = declaration.eAllContents();
+					while (copyListIterator.hasNext()) {
+						copiedList.add(copier.copy(copyListIterator.next()));
+					}
+					copier.copyReferences();
+					
+					
+					Iterator<EObject> myCopyIt = copiedList.iterator();
+					while (myCopyIt.hasNext()) {
+						EObject aktcopy = myCopyIt.next();
+						System.out.println(""+aktcopy);
+						if (EcoreUtil.equals(aktcopy, declaration)) {
+							myCopiedDeclaration = (OclExpressionCS) aktcopy;
+						}
+					}
+					if (myCopiedDeclaration instanceof BracketExpCS) {
+						myBracket = (BracketExpCS) myCopiedDeclaration;
+					} else { 
+						myBracket.setOclExpression((OclExpressionCS) myCopiedDeclaration);
+					}
+					container.eSet(containerRef, myBracket);
+					
+				}
 			}
 		}
 		
-		//at last, there needs to be a reference created replacing the extract
-		NamedLiteralExpCS myReferenceLiteral = myOclFactory.createNamedLiteralExpCS();
-		Property myReferenceProp = myPivotModelFactory.createProperty();
-		myReferenceProp.setName(newContainer.getSimpleName());
-		myReferenceLiteral.setNamedElement(myReferenceProp);
+		//now delete the declaration from the if expression
 		
-		System.out.println("container of extract: "+extract.eContainer());
-		System.out.println("containing feature of extract: "+extract.eContainingFeature());
-		System.out.println("orig containing feature of extract: "+origRef);
+		myLetExp.getVariableDeclarations().remove(selection);
 		
-		if (origRef instanceof EReferenceImpl) {
-			EReferenceImpl myref = ((EReferenceImpl)origRef);
-			origContainer.eSet(origRef, myReferenceLiteral);
+		//if there are no more variable declarations left, the let expression will be empty and has to be removed
+		if (myLetExp.getVariableDeclarations().size() == 0) {
+			System.out.println("removing empty let expression");
+			constraintRoot = myLetExp.eContainer();
+			EStructuralFeature parentLink = myLetExp.eContainingFeature();
+			constraintRoot.eSet(parentLink, myLetExp.getOclExpression());
 		}
 		
-		//additionally we try to check, if there is any other occurance of the extract withing the actual constraint,
-		//and if there is, is will be replaced
-		
-		TreeIterator<EObject> myLetIt = myLetExp.getOclExpression().eAllContents();
-		
-		while (myLetIt.hasNext()) {
-			EObject akt = myLetIt.next();
-			if (EcoreUtil.equals(akt, extract)) {
 				
-				NamedLiteralExpCS myRefLit = myOclFactory.createNamedLiteralExpCS();
-				Property myRefProp = myPivotModelFactory.createProperty();
-				myRefProp.setName(newContainer.getSimpleName());
-				myRefLit.setNamedElement(myRefProp);			
-				
-				EObject aktParent = akt.eContainer();
-				aktParent.eSet(akt.eContainmentFeature(), myRefLit);
-			}
-		}
-			
+		return Status.OK_STATUS;		
 	}
 
 }

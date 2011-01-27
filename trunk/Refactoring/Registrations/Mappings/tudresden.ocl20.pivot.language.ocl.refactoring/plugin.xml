@@ -24,14 +24,6 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="&quot;Integrate Variable From LetExpression&quot;"
-            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.IntegrateVarFromLetExp">
-      </postprocessor>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
             mapping_name="RenameNamedLiteralExpCS"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.RenameNamedLiteralExpPostProcessor">
@@ -50,6 +42,14 @@
       <rolemapping
             rolemapping_resource="rolemappings/integrations.rolemapping">
       </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Integrate Variable From LetExpression"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.IntegrateVarFromLetExp">
+      </postprocessor>
    </extension>
 
 </plugin>
