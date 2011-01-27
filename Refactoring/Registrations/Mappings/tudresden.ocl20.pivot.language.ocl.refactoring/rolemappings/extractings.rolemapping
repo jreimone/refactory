@@ -18,3 +18,8 @@ ExLetExp maps <ExtractMin> {
 
 }
 
+"Remove All Redundant Brackets" maps <SelectX> {
+	Selection := ContextDeclarationCS;
+	Nameable := Property ( name -> name);
+
+}
