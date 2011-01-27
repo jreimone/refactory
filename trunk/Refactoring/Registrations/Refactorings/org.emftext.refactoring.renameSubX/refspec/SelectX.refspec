@@ -1,6 +1,0 @@
-REFACTORING FOR <platform:/plugin/org.emftext.refactoring.selectX/rolemodel/SelectX.rolestext#/> 
-
-STEPS { 
-	create new n:Nameable;	
-	assign n.name; 	
-} 
