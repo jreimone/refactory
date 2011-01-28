@@ -77,6 +77,7 @@
 	<!-- A macro for generating one text resource plug-in -->
 	<macrodef name="generate-text-resource">
 	    <attribute name="plugin"/>
+		<attribute name="folder" default="metamodel" />
 	    <attribute name="syntax"/>
 		<attribute name="dir" default="${language.plugins.dir}" />
 		<attribute name="resourcePlugin" default="@{plugin}.resource.@{syntax}" />
@@ -173,7 +174,7 @@
 	</target>
 
 	<!-- A task for generating text resource plug-ins for all EMFText languages -->
-	<target name="generate-emftext-text-resources">
+	<target name="generate-emftext-text-resources depends="register-gen-model">
 		
 		<emftext-register-ecore-resource-factory 
 			className="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" 
@@ -212,7 +213,6 @@
 	</taskdef>	
 	
 	<target name="register-gen-model" if="headless">
-	
 		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/Ecore" GenModelURI="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar!/model/Ecore.genmodel" />
 		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/GenModel" GenModelURI="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar!/model/GenModel.genmodel" />
 	</target>
