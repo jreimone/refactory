@@ -216,5 +216,15 @@
 	<target name="register-gen-model" if="headless">
 		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/Ecore" GenModelURI="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar!/model/Ecore.genmodel" />
 		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/GenModel" GenModelURI="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar!/model/GenModel.genmodel" />
+		
+		<emftext-register-uri-mapping
+			from="platform:/plugin/org.eclipse.emf.ecore/model/"
+			to="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar!/model/"
+		/>
+		
+		<emftext-register-uri-mapping
+			from="platform:/plugin/org.eclipse.emf.codegen.ecore/model/"
+			to="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar!/model/"
+		/>
 	</target>
 </project>
