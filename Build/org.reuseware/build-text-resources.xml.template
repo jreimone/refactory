@@ -100,6 +100,7 @@
 
 	<macrodef name="generate-metamodel-code">
 	    <attribute name="plugin"/>
+	    <attribute name="folder" default="metamodel" />
 	    <attribute name="model"/>
 	    <attribute name="generateEditProject"/>
 	    <attribute name="clear" default="**/*.java" />
@@ -110,10 +111,10 @@
 		<sequential>
 			<!-- <delete dir="${language.plugins.dir}/@{plugin}/src-gen" includes="@{clear}" excludes=".svn"/>
 			<eclipse.refreshLocal depth="infinite" resource="@{plugin}"/> -->
-			<echo message="${language.plugins.dir}/@{plugin}/metamodel/@{model}@{secondaryExtension}.ecore" />
+			<echo message="${language.plugins.dir}/@{plugin}/@{folder}/@{model}@{secondaryExtension}.ecore" />
 			<emf.Ecore2Java 
-				model="@{dir}/@{plugin}/metamodel/@{model}@{secondaryExtension}.ecore" 
-				genModel="@{dir}/@{plugin}/metamodel/@{model}@{secondaryGenmodelExtension}.genmodel" 
+				model="@{dir}/@{plugin}/@{folder}/@{model}@{secondaryExtension}.ecore" 
+				genModel="@{dir}/@{plugin}/@{folder}/@{model}@{secondaryGenmodelExtension}.genmodel" 
 				generateeditproject="@{generateEditProject}" 
 				generateeditorproject="false"
 				generatetestsproject="false"
