@@ -186,11 +186,6 @@
 			className="org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl" 
 			type="genmodel"/>
 		
-		<emftext-register-uri-mapping
-			from="platform:/plugin/org.emftext.language.java/"
-			to="file:/home/hudson/build_server/build_workdir/org.emftext.language.java/"
-		/>
-		
 <!--GENERATE_TEXT_RESOURCE_TASKS-->
 	</target>
 	
@@ -226,6 +221,16 @@
 		<emftext-register-uri-mapping
 			from="platform:/plugin/org.eclipse.emf.codegen.ecore/model/"
 			to="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar!/model/"
+		/>
+		
+		<emftext-register-uri-mapping
+			from="platform:/plugin/org.eclipse.uml2.uml/model/"
+			to="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.uml2.uml_3.1.1.v201008191505.jar!/model/"
+		/>
+		
+		<emftext-register-uri-mapping
+			from="platform:/plugin/org.emftext.language.java/"
+			to="file:/home/hudson/build_server/build_workdir/org.emftext.language.java/"
 		/>
 	</target>
 </project>
