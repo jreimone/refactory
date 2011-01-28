@@ -6,6 +6,7 @@
 	<property name="test.plugins.dir" value=".."/>
 	<property name="ontomopp.plugins.dir" value=".."/>
 	<property name="refactory.plugins.dir" value=".."/>
+	<property name="reuseware.plugins.dir" value=".."/>
 	
 		<!-- Define the EMF Generate Resource task. To have this task available, the plugin
 	     org.emftext.sdk.ant must be available in the classpath. To ensure this the external tools
@@ -77,7 +78,7 @@
 	<!-- A macro for generating one text resource plug-in -->
 	<macrodef name="generate-text-resource">
 	    <attribute name="plugin"/>
-		<attribute name="folder" default="metamodel" />
+	    <attribute name="folder" default="metamodel" />
 	    <attribute name="syntax"/>
 		<attribute name="dir" default="${language.plugins.dir}" />
 		<attribute name="resourcePlugin" default="@{plugin}.resource.@{syntax}" />
@@ -87,7 +88,7 @@
 			<echo message="Building text resource for syntax '@{syntax}' in plug-in '@{plugin}'" />
 			
 			<emftext-generate-text-resource 
-				syntax="@{dir}/@{plugin}/metamodel/@{syntax}.cs" 
+				syntax="@{dir}/@{plugin}/@{folder}/@{syntax}.cs" 
 				rootFolder="@{dir}" 
 				syntaxProjectName="@{plugin}"
 				generateANTLRPlugin="false"
@@ -173,8 +174,8 @@
 		</parallel>
 	</target>
 
-	<!-- A task for generating text resource plug-ins for all EMFText languages -->
-	<target name="generate-emftext-text-resources depends="register-gen-model">
+	<!-- A task for generating text resource plug-ins for all EMFText languages -->	
+	<target name="generate-emftext-text-resources" depends="register-gen-model">
 		
 		<emftext-register-ecore-resource-factory 
 			className="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" 
