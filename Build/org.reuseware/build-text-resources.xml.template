@@ -48,6 +48,20 @@
 		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.ecore/bin" />	
 		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.text/bin" />
 	</taskdef>
+	
+	<!-- used to register 'genmodel' file extension -->
+	<taskdef name="emftext-register-resource-factory" classname="org.emftext.sdk.ant.RegisterResourceFactoryTask">
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_3_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs/bin" />
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.ecore/bin" />	
+		<classpath path="${language.plugins.dir}/org.emftext.language.ecore.resource.text/bin" />
+	</taskdef>
 
 	<!-- needed to register some URI mappings -->
 	<taskdef name="emftext-register-uri-mapping" classname="org.emftext.sdk.ant.RegisterURIMappingTask">
@@ -164,6 +178,10 @@
 		<emftext-register-ecore-resource-factory 
 			className="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" 
 			type="text"/>
+
+		<emftext-register-resource-factory 
+			className="org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl" 
+			type="genmodel"/>
 		
 		<emftext-register-uri-mapping
 			from="platform:/plugin/org.emftext.language.java/"
