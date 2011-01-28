@@ -185,7 +185,7 @@
 		
 		<emftext-register-uri-mapping
 			from="platform:/plugin/org.emftext.language.java/"
-			to="platform:/resource/org.emftext.language.java/"
+			to="file:/home/hudson/build_server/build_workdir/org.emftext.language.java/"
 		/>
 		
 <!--GENERATE_TEXT_RESOURCE_TASKS-->
