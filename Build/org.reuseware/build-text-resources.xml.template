@@ -179,9 +179,22 @@
 	
 	<!-- register new custom task for registering gen-model -->
 	<taskdef name="emftext-register-gen-model" classname="org.emftext.sdk.ant.RegisterGenModelTask">
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.ant/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.antlr3_3_0/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.automaton/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen.antlr/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen.resource/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.codegen.resource.ui/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs.ui/bin" />
+		<classpath path="${emftext.plugins.dir}/org.emftext.sdk.concretesyntax.resource.cs.post_processing/bin" />
 	</taskdef>	
 	
 	<target name="register-gen-model" if="headless">
+	
 		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/Ecore" GenModelURI="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar!/model/Ecore.genmodel" />
 		<emftext-register-gen-model NamespaceURI="http://www.eclipse.org/emf/2002/GenModel" GenModelURI="jar:file:/home/hudson/build_server/eclipse/plugins/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar!/model/GenModel.genmodel" />
 	</target>
