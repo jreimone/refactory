@@ -84,6 +84,7 @@
 	
 	<target name="generate-fujaba" depends="clean-fujaba">
 		<fujaba-generate-metamodel-code 
+			configDir="${workspace}/org.reuseware/fujaba/config"
 			pluginFolder="${workspace}/org.reuseware/fujaba/plugins"
 			depFileName="${workspace}/org.reuseware.coconut/metamodel/Ecore.ctr" 
 			fileName="${workspace}/org.reuseware.coconut/metamodel/ReusewareMetamodel.ctr" 
