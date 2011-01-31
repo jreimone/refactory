@@ -146,8 +146,7 @@
 		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" reuseextension.ecore" value=" ../../org.reuseware.coconut.reuseextension/model/reuseextension.ecore"/>
 		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" reuseextensionactivator.ecore" value=" ../../org.reuseware.coconut.reuseextensionactivator/model/reuseextensionactivator.ecore"/>
 		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" fragment.ecore" value=" ../../org.reuseware.coconut.fragment/model/fragment.ecore"/>
-		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" compositionprogram.ecore" value=" ../../org.reuseware.coconut.compositionprogram/model/compositionprogram.ecore"/>		
-		<eclipse.refreshLocal depth="infinite" resource="${workspace}/org.reuseware.coconut/metamodel"/>
+		<replace dir="${workspace}/org.reuseware.coconut/metamodel/generated/models" token=" compositionprogram.ecore" value=" ../../org.reuseware.coconut.compositionprogram/model/compositionprogram.ecore"/>	
 
 		<!-- copy metamodels to model folders -->
 		<copy todir="${workspace}/org.reuseware.coconut.id/model">
