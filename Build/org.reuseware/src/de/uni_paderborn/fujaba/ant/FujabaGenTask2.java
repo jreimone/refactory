@@ -70,6 +70,14 @@ public class FujabaGenTask2 extends FujabaGenTask {
 		
 		 ProjectManager.get().closeProject (depPrject, true);
 	}
+	
+	@Override
+	protected void validate() {
+		//Do not perform validation, because it is not correctly implemented.
+		//for a target directory "/generated", it will try to generate the
+		//absolute directory "/generated", although it might refer to a directory
+		//relative to the model's (ctr file) location.
+	}
 
 	public String getDepFileName() {
 		return depFileName;
