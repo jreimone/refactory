@@ -6,7 +6,6 @@
 -->
 
 <project basedir="." default="generate-all" name="Reuseware">
-	
 	<property file="local.build.properties"/>
 
 	<taskdef name="fujaba-generate-metamodel-code" classname="de.uni_paderborn.fujaba.ant.FujabaGenTask2">
@@ -81,8 +80,6 @@
 		<delete dir="${workspace}/org.reuseware.coconut/metamodel/generated/org"/>
 		
 		<delete dir="${workspace}/org.reuseware/fujaba/config/fujaba5.3.1/projects.workspace" includes="*"/>
-		
-		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut/metamodel"/>
 	</target>
 	
 	<target name="generate-fujaba" depends="clean-fujaba">
@@ -91,7 +88,25 @@
 			depFileName="${workspace}/org.reuseware.coconut/metamodel/Ecore.ctr" 
 			fileName="${workspace}/org.reuseware.coconut/metamodel/ReusewareMetamodel.ctr" 
 			destDirname="/generated"/>
+	</target>
+	
+	<target name="clean-emf">
+		<delete dir="${workspace}/org.reuseware.coconut.id/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.fracol/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.reuseextension/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.reuseextensionactivator/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.fragment/src-gen/org"/>
+		<delete dir="${workspace}/org.reuseware.coconut.compositionprogram/src-gen/org"/>
 		
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.id"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fracol"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextension"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextensionactivator"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fragment"/>
+		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.compositionprogram"/>
+	</target>
+	
+	<target name="prepare-emf" depends="generate-fujaba">
 		<!-- Place Fujaba-generated src files with method bodies -->
 		<copy todir="${workspace}/org.reuseware.coconut.id/src-gen/org/reuseware/coconut/">
 		    <fileset dir="${workspace}/org.reuseware.coconut/metamodel/generated/org/reuseware/coconut">
@@ -176,23 +191,7 @@
 			todir="${workspace}/org.reuseware.coconut.compositionprogram/src-gen/org/reuseware/coconut/compositionprogram/util"/>
 	</target>
 	
-	<target name="clean-emf">
-		<delete dir="${workspace}/org.reuseware.coconut.id/src-gen/org"/>
-		<delete dir="${workspace}/org.reuseware.coconut.fracol/src-gen/org"/>
-		<delete dir="${workspace}/org.reuseware.coconut.reuseextension/src-gen/org"/>
-		<delete dir="${workspace}/org.reuseware.coconut.reuseextensionactivator/src-gen/org"/>
-		<delete dir="${workspace}/org.reuseware.coconut.fragment/src-gen/org"/>
-		<delete dir="${workspace}/org.reuseware.coconut.compositionprogram/src-gen/org"/>
-		
-		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.id"/>
-		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fracol"/>
-		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextension"/>
-		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.reuseextensionactivator"/>
-		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fragment"/>
-		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.compositionprogram"/>
-	</target>
-	
-	<target name="generate-emf" depends="generate-fujaba,clean-emf">
+	<target name="generate-emf" depends="clean-emf,prepare-emf">	
 		<!-- refresh required for EMF tools -->
 		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.id"/>
 		<eclipse.refreshLocal depth="infinite" resource="org.reuseware.coconut.fracol"/>
