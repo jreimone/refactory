@@ -48,6 +48,7 @@ package de.uni_paderborn.fujaba.ant;
 
 import java.io.File;
 
+import de.fujaba.preferences.PreferencesManager;
 import de.uni_paderborn.fujaba.metamodel.common.FProject;
 import de.uni_paderborn.fujaba.project.ProjectManager;
 
@@ -57,11 +58,14 @@ import de.uni_paderborn.fujaba.project.ProjectManager;
 public class FujabaGenTask2 extends FujabaGenTask {
 
 	private String depFileName = null;
+	private String configDir = null;
 
 	/**
     */
 	@Override
 	protected void executeImpl() throws Exception {
+		//set base dir
+		PreferencesManager.setBaseDir(getConfigDir());	
 		//load dependency as well
 		File depFile = new File(getDepFileName());
 		FProject depPrject = ProjectManager.get().loadProject(depFile, null, false);
@@ -87,4 +91,11 @@ public class FujabaGenTask2 extends FujabaGenTask {
 		this.depFileName = depFileName;
 	}
 
+	public String getConfigDir() {
+		return configDir;
+	}
+
+	public void setConfigDir(String configDir) {
+		this.configDir = configDir;
+	}
 }
