@@ -1,3 +1,0 @@
-### TypeOf[ ${elem} ] := de.uni_paderborn.fujaba.uml.behavior.UMLActivityDiagram
-#set( $activityDiag = $elem )
-#parse("$lang/default:activityDiag/activityDiagBody.vm" )

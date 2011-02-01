@@ -1,6 +1,0 @@
-Sokan Workspace Indexing Framework 0.8.0 released
-
-Sokan is an extensible framework to index files in Eclipse Workspaces.
-Depending on the set of registered indexers, arbitrary indexes can be
-created and maintained. Sokan is for example used by Refactory to find
-cross-references between models in workspaces.
