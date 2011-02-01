@@ -67,9 +67,6 @@
 	    	<zip destfile="../@{wizardproject}/example.zip">
 	    		<fileset dir="../@{exampleproject}" excludes="**/.svn"/>	
 	    	</zip>
-	    	
-	    	<eclipse.refreshLocal depth="infinite" resource="@{wizardproject}"/>
-	    	<eclipse.refreshLocal depth="infinite" resource="@{exampleproject}"/>
 	    </sequential>
 	</macrodef>
 	
