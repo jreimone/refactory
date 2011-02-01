@@ -1,3 +1,0 @@
-#if (!$classToImport.name.contains("[]"))
-#set( $return = $imports.addToImports($classToImport.FullClassName) )
-#end

@@ -1,4 +1,0 @@
-## create a class table, if stereotype indicates this
-##if ( $class.hasKeyInStereotypes('GWTClassTable') )
-// gwt class table for the creation of objects from class names
-#end

@@ -1,4 +1,0 @@
-### TypeOf[ ${elem} ] := de.uni_paderborn.fujaba.uml.behavior.UMLStatementActivity
-#set( $statement = $elem )
-#set( $text = $statement.getState().getStatement() )
-$!text
