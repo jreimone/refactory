@@ -3,13 +3,21 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
@@ -162,8 +170,40 @@ public class ASSIGNInterpreter {
 			return new RefactoringStatus(IRefactoringStatus.CANCEL);
 		}
 		resourcesToSave = getReferer(targetObject);
+		collectReferer(targetObject);
 		targetObject.eSet(classAttribute, value);
 		return new RefactoringStatus(IRefactoringStatus.OK);
+	}
+
+	/**
+	 * This method is needed to collect all referers of an EObject. 
+	 * Must be done because sometimes pure EMF doesn't recognize appropriate referers.
+	 * Belongs to bug 1665:
+	 * http://mantis-st.inf.tu-dresden.de/view.php?id=1665
+	 * 
+	 * It seems that the refer must be touched once to assure correct proxy resolving
+	 * to the updated EObject.
+	 * 
+	 * @param targetObject
+	 */
+	private void collectReferer(EObject targetObject) {
+		Resource targetResource = targetObject.eResource();
+		if(targetResource == null) return;
+		ResourceSet resourceSet = targetResource.getResourceSet();
+		List<Adapter> adapters = resourceSet.eAdapters();
+		ECrossReferenceAdapter crossReferencer = null;
+		for (Adapter adapter : adapters) {
+			if (adapter instanceof ECrossReferenceAdapter) {
+				crossReferencer = (ECrossReferenceAdapter) adapter;
+				break;
+			}
+		}
+		if (crossReferencer == null) {
+			crossReferencer = new ECrossReferenceAdapter();
+			resourceSet.eAdapters().add(crossReferencer);
+		}
+		// just touch the references to assure correct proxy resolving 
+		crossReferencer.getInverseReferences(targetObject, true);
 	}
 
 	private List<Resource> getReferer(EObject referenceTarget){
