@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rolemodelmatching
+Bundle-SymbolicName: org.emftext.refactoring.rolemodelmatching
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.junit4,
+ org.eclipse.emf.ecore,
+ org.emftext.language.refactoring.roles,
+ org.emftext.language.refactoring.roles.resource.rolestext,
+ org.emftext.language.ecore.resource.text,
+ org.eclipse.emf.ecore.xmi
