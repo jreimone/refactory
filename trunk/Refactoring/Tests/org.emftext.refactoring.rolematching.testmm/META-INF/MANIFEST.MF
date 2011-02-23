@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Testmm
+Bundle-SymbolicName: org.emftext.refactoring.rolematching.testmm
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.emftext.refactoring.rolematching.testmm.Activator
+Require-Bundle: org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
