@@ -7,29 +7,29 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.roles.RoleModel;
 
-public class MatchNode {
+public abstract class MatchNode <RoleModelElement extends EObject, MetaModelElement extends EObject>{
 
-	private MatchNode parent;
-	private List<MatchNode> children;
+	private MatchNode<?,?> parent;
+	private List<MatchNode<?,?>> children;
 
 	// used for an element from the metamodel - can be an EClass, an EAtribute or an ReferenceMetaClassPair
-	private EObject metaElement;
+	private MetaModelElement metaElement;
 	// used for an element from the rolemodel - can be a Role, a RoleAttribute or a MultiplicityCollaboration
-	private EObject roleElement;
+	private RoleModelElement roleElement;
 
-	public EObject getMetaElement() {
+	public MetaModelElement getMetaElement() {
 		return metaElement;
 	}
 
-	public void setMetaElement(EObject metaElement) {
+	public void setMetaElement(MetaModelElement metaElement) {
 		this.metaElement = metaElement;
 	}
 
-	public EObject getRoleElement() {
+	public RoleModelElement getRoleElement() {
 		return roleElement;
 	}
 
-	public void setRoleElement(EObject roleElement) {
+	public void setRoleElement(RoleModelElement roleElement) {
 		this.roleElement = roleElement;
 	}
 
@@ -53,20 +53,20 @@ public class MatchNode {
 		this.rolemodel = rolemodel;
 	}
 
-	public List<MatchNode> getChildren() {
+	public List<MatchNode<?,?>> getChildren() {
 		return children;
 	}
 
-	public MatchNode(MatchNode parent) {
+	public MatchNode(MatchNode<?,?> parent) {
 		super();
 		this.parent = parent;
-		children = new LinkedList<MatchNode>();
+		children = new LinkedList<MatchNode<?,?>>();
 		if(parent != null){
 			parent.getChildren().add(this);
 		}
 	}
 
-	public MatchNode getParent() {
+	public MatchNode<?,?> getParent() {
 		return parent;
 	}
 
