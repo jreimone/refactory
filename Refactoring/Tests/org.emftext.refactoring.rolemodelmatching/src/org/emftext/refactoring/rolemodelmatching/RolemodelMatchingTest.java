@@ -27,6 +27,7 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -40,19 +41,30 @@ import org.junit.Test;
 public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
 	private static final String[] rolemodelURIs = new String[] { 
-		"platform:/resource/org.emftext.refactoring.extractX/rolemodel/ExtractX.rolestext" 
+		"platform:/resource/org.emftext.refactoring.extractX/rolemodel/ExtractX.rolestext"
+		,"platform:/resource/org.emftext.refactoring.extractSubX/rolemodel/ExtractSubX.rolestext" 
+		,"platform:/resource/org.emftext.refactoring.extractXwithReferenceClass/rolemodel/ExtractXwithReferenceClass.rolestext" 
+		,"platform:/resource/org.emftext.refactoring.introduceReferenceClass/rolemodel/IntroduceReferenceClass.rolestext" 
+		,"platform:/resource/org.emftext.refactoring.moveX/rolemodel/moveX.rolestext" 
+		,"platform:/resource/org.emftext.refactoring.moveXloosely/rolemodel/moveXloosely.rolestext" 
+		,"platform:/resource/org.emftext.refactoring.removeEmptyContainedX/rolemodel/removeEmptyContainedX.rolestext" 
+		,"platform:/resource/org.emftext.refactoring.removeUnusedContainedX/rolemodel/removeUnusedContainedX.rolestext"
+		,"platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext"
 	};
 
 	private static final String[] metamodelURIs = new String[] { 
-		"platform:/resource/org.emftext.refactoring.rolematching.testmm/metamodel/testmm.ecore"
-		,"platform:/resource/org.emftext.language.appflow/metamodel/appflow.text.ecore"
-		// , "platform:/resource/org.emftext.language.query/metamodel/query.ecore"
+		"platform:/resource/org.emftext.language.appflow/metamodel/appflow.text.ecore"
+		,"platform:/resource/org.emftext.refactoring.rolematching.testmm/metamodel/testmm.ecore"
+		,"platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
+		,"platform:/resource/org.eclipse.uml2.uml/model/UML.ecore"
+		,"platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore"
+		,"platform:/resource/org.emftext.language.forms/metamodel/forms.ecore"
+		,"platform:/resource/org.emftext.language.textadventure/metamodel/textadventure.ecore"
 	};
 
 	private static List<RoleModel> rolemodels;
 	private static List<EPackage> metamodels;
 
-	private List<MatchNode<?, ?>> matchTrees;
 	private List<EClass> currentMetaClasses;
 	private Map<RoleModel, List<EObject>> linearRoleModels;
 
@@ -62,60 +74,104 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		rolemodels = initRoleModels(rolemodelURIs);
 		metamodels = initMetamodels(metamodelURIs);
 	}
-
+	
 	@Test
+	public void matchExtractXtoTestmm(){
+		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(1));
+	}
+	
+	
+	@Test
+	public void matchExtractXtoEcore(){
+		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(2));
+	}
+	
+	@Test
+	public void matchExtractXwithReferenceClassToEcore(){
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(2));
+	}
+	
+	@Test
+	public void matchExtractXwithReferenceClassToPL0(){
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(4));
+	}
+	
+	@Test
+	public void matchExtractXwithReferenceClassToForms(){
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(5));
+	}
+	
+	@Test
+	public void matchExtractXwithReferenceClassToTextAdventure(){
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(6));
+	}
+	
+	@Test
+	@Ignore
+	public void matchExtractXtoUML(){
+		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(3));
+	}
+
+	private List<EObject> linearizeRoleModel(RoleModel roleModel){
+		LinkedList<EObject> linearization = new LinkedList<EObject>();
+		List<Role> roles = roleModel.getRoles();
+		List<List<EObject>> pathes = new LinkedList<List<EObject>>();
+		for (Role role : roles) {
+			constructPath(pathes, null, role);
+		}
+		Collections.sort(pathes, new Comparator<List<EObject>>() {
+			public int compare(List<EObject> o1, List<EObject> o2) {
+				if (o1.size() == o2.size()) {
+					return 0;
+				}
+				if (o1.size() < o2.size()) {
+					return -1;
+				}
+				return 1;
+			}
+		});
+		Collections.reverse(pathes);
+		for (List<EObject> path : pathes) {
+			for (EObject element : path) {
+				if (!linearization.contains(element)) {
+					linearization.add(element);
+				}
+			}
+		}
+		return linearization;
+	}
+	
+	@Test
+	@Ignore
 	public void linearizeRoleModels() {
 		linearRoleModels = new LinkedHashMap<RoleModel, List<EObject>>();
 		for (RoleModel roleModel : rolemodels) {
-			List<EObject> leftElements = new LinkedList<EObject>();
-			leftElements.addAll(roleModel.getRoles());
-			leftElements.addAll(roleModel.getCollaborations());
-			LinkedList<EObject> linearization = new LinkedList<EObject>();
+			List<EObject> linearization = linearizeRoleModel(roleModel);
 			linearRoleModels.put(roleModel, linearization);
-			List<Role> roles = roleModel.getRoles();
-			List<List<EObject>> pathes = new LinkedList<List<EObject>>();
-			for (Role role : roles) {
-				constructPath(pathes, null, role);
-			}
-			Collections.sort(pathes, new Comparator<List<EObject>>() {
-				public int compare(List<EObject> o1, List<EObject> o2) {
-					if (o1.size() == o2.size()) {
-						return 0;
-					}
-					if (o1.size() < o2.size()) {
-						return -1;
-					}
-					return 1;
-				}
-			});
-			Collections.reverse(pathes);
-			for (List<EObject> path : pathes) {
-				for (EObject element : path) {
-					if (!linearization.contains(element)) {
-						linearization.add(element);
-					}
-				}
-			}
 		}
 		for (RoleModel roleModel : rolemodels) {
 			List<EObject> linearization = linearRoleModels.get(roleModel);
-			System.out.println("Linear order for '" + roleModel.getName()
-					+ "' with longest path");
-			for (EObject element : linearization) {
-				String roleString = "";
-				if (element instanceof Role) {
-					roleString = ((Role) element).getName();
-				} else if (element instanceof MultiplicityCollaboration) {
-					roleString = ((MultiplicityCollaboration) element).getTargetName();
-				}
-				String connector = " --> ";
-				if (linearization.indexOf(element) == linearization.size() - 1) {
-					connector = "";
-				}
-				System.out.print(roleString + connector);
-			}
-			System.out.println();
+			printLinearization(roleModel, linearization);
 		}
+	}
+
+	private void printLinearization(RoleModel roleModel, List<EObject> linearization) {
+		System.out.println("Linear order for '" + roleModel.getName()
+				+ "' with longest path");
+		for (EObject element : linearization) {
+			String roleString = "";
+			if (element instanceof Role) {
+				roleString = ((Role) element).getName();
+			} else if (element instanceof MultiplicityCollaboration) {
+				roleString = ((MultiplicityCollaboration) element).getTargetName();
+			}
+			String connector = " --> ";
+			if (linearization.indexOf(element) == linearization.size() - 1) {
+				connector = "";
+			}
+			System.out.print(roleString + connector);
+		}
+		System.out.println();
 	}
 
 	private void constructPath(List<List<EObject>> pathes, List<EObject> path, Role role) {
@@ -155,19 +211,29 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		}
 	}
 
+	/**
+	 * 
+	 * @param rolemodel
+	 * @param metamodel
+	 * @return root of the match tree
+	 */
+	private void matchRoleModelInMetamodel(RoleModel rolemodel, EPackage metamodel){
+		RoleNode root = new RoleNode(null);
+		root.setMetamodel(metamodel);
+		root.setRolemodel(rolemodel);
+		List<EObject> linearRolemodel = linearizeRoleModel(rolemodel);
+		printLinearization(rolemodel, linearRolemodel);
+		match(linearRolemodel, metamodel, root);
+		printTree(root, linearRolemodel);
+	}
+	
 	@Test
-	public void matchPaths() {
+	@Ignore
+	public void matchAllRoleModelsInAllMetamodels() {
 		linearizeRoleModels();
-		matchTrees = new LinkedList<MatchNode<?, ?>>();
 		for (EPackage metamodel : metamodels) {
 			for (RoleModel rolemodel : rolemodels) {
-				RoleNode root = new RoleNode(null);
-				matchTrees.add(root);
-				root.setMetamodel(metamodel);
-				root.setRolemodel(rolemodel);
-				List<EObject> linearRolemodel = linearRoleModels.get(rolemodel);
-				match(linearRolemodel, metamodel, root);
-				printTree(root, rolemodel);
+				matchRoleModelInMetamodel(rolemodel, metamodel);
 			}
 		}
 	}
@@ -296,7 +362,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		return leafs;
 	}
 
-	private int traversePrint(List<MatchNode<?, ?>> leafs, RoleModel rolemodel) {
+	private int traversePrint(List<MatchNode<?, ?>> leafs, RoleModel rolemodel, List<EObject> linearization) {
 		List<List<MatchNode<?, ?>>> allMatchPaths = new LinkedList<List<MatchNode<?, ?>>>();
 		for (MatchNode<?, ?> leaf : leafs) {
 			List<MatchNode<?, ?>> matchPath = new LinkedList<MatchNode<?, ?>>();
@@ -311,7 +377,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		}
 		int count = 0;
 		for (List<MatchNode<?, ?>> path : allMatchPaths) {
-			int size = linearRoleModels.get(rolemodel).size();
+			int size = linearization.size();
 			if (path.size() == size) {
 				count++;
 				for (MatchNode<?, ?> matchNode : path) {
@@ -323,14 +389,15 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		return count;
 	}
 
-	private void printTree(MatchNode<?, ?> root, RoleModel rolemodel) {
+	private void printTree(RoleNode root, List<EObject> linearization) {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Matching for metamodel: "
 				+ root.getMetamodel().getNsURI());
 		System.out.println("role model: " + root.getRolemodel().getName());
 		System.out.println();
 		List<MatchNode<?, ?>> leafs = getLeafs(root);
-		int count = traversePrint(leafs, rolemodel);
+		RoleModel rolemodel = root.getRolemodel();
+		int count = traversePrint(leafs, rolemodel, linearization);
 		System.err.println("RoleModel '" + rolemodel.getName()
 				+ "' could be mapped in MetaModel '" + root.getMetamodel().getNsURI() + "' " + count + " time(s)");
 	}
