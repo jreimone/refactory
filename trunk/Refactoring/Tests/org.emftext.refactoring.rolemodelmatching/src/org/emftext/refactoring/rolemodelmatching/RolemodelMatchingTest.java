@@ -2,6 +2,7 @@ package org.emftext.refactoring.rolemodelmatching;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -27,8 +28,6 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
-import org.emftext.language.refactoring.roles.RolesFactory;
-import org.emftext.language.refactoring.roles.RolesPackage;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -63,6 +62,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		,"platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore"
 		,"platform:/resource/org.emftext.language.forms/metamodel/forms.ecore"
 		,"platform:/resource/org.emftext.language.textadventure/metamodel/textadventure.ecore"
+		,"platform:/resource/org.emftext.language.java/metamodel/java.ecore"
 	};
 
 	private static List<RoleModel> rolemodels;
@@ -80,46 +80,49 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
 	@Test
 	public void matchExtractXtoTestmm(){
-		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(1));
+		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(1), false);
 	}
 
 
 	@Test
-	@Ignore
 	public void matchExtractXtoEcore(){
-		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(2));
+		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(2), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToEcore(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(2));
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(2), false);
 	}
 
 	@Test
 	public void matchExtractXwithReferenceClassToPL0(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(4));
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(4), false);
 	}
-	
+
 	@Test
 	public void matchMoveXToPL0(){
-		matchRoleModelInMetamodel(rolemodels.get(4), metamodels.get(4));
+		matchRoleModelInMetamodel(rolemodels.get(4), metamodels.get(4), false);
 	}
 
 	@Test
 	public void matchExtractXwithReferenceClassToForms(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(5));
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(5), false);
 	}
 
 	@Test
 	public void matchExtractXwithReferenceClassToTextAdventure(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(6));
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(6), false);
+	}
+	
+	@Test
+	public void matchExtractXwithReferenceClassToJava(){
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(7), false);
 	}
 
 	@Test
 	@Ignore
 	public void matchExtractXtoUML(){
-		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(3));
+		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(3), false);
 	}
 
 	private List<EObject> linearizeRoleModel(RoleModel roleModel){
@@ -227,7 +230,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	 * @param metamodel
 	 * @return root of the match tree
 	 */
-	private void matchRoleModelInMetamodel(RoleModel rolemodel, EPackage metamodel){
+	private void matchRoleModelInMetamodel(RoleModel rolemodel, EPackage metamodel, boolean print){
 		RoleNode root = new RoleNode(null);
 		root.setMetamodel(metamodel);
 		root.setRolemodel(rolemodel);
@@ -237,7 +240,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 			printLinearization(rolemodel, linearRoleModelWithoutOptionals);
 		}
 		match(linearRolemodelsWithoutOptionals, metamodel, root);
-		printTree(root, linearRolemodel);
+		printTree(root, linearRolemodel, print);
 	}
 
 	private List<List<EObject>> getLinearRoleModelsWithoutOptional(RoleModel rolemodel, List<EObject> linearRolemodel) {
@@ -264,13 +267,13 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 						copiedRoleModel.getRoles().remove(copier.get(role));
 						for (Collaboration collaboration : role.getIncoming()) {
 							EcoreUtil.delete(copier.get(collaboration));
-//							EcoreUtil.remove(copier.get(collaboration));
-//							copiedRoleModel.getCollaborations().remove(copier.get(collaboration));
+							//							EcoreUtil.remove(copier.get(collaboration));
+							//							copiedRoleModel.getCollaborations().remove(copier.get(collaboration));
 						}
 						for (Collaboration collaboration : role.getOutgoing()) {
 							EcoreUtil.delete(copier.get(collaboration));
-//							EcoreUtil.remove(copier.get(collaboration));
-//							copiedRoleModel.getCollaborations().remove(copier.get(collaboration));
+							//							EcoreUtil.remove(copier.get(collaboration));
+							//							copiedRoleModel.getCollaborations().remove(copier.get(collaboration));
 						}
 					}
 					List<EObject> linearRolemodelWithoutOptionals = linearizeRoleModel(copiedRoleModel);
@@ -287,7 +290,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		linearizeRoleModels();
 		for (EPackage metamodel : metamodels) {
 			for (RoleModel rolemodel : rolemodels) {
-				matchRoleModelInMetamodel(rolemodel, metamodel);
+				matchRoleModelInMetamodel(rolemodel, metamodel, false);
 			}
 		}
 	}
@@ -420,7 +423,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		return leafs;
 	}
 
-	private int traversePrint(List<MatchNode<?, ?>> leafs, RoleModel rolemodel) {
+	private int traversePrint(Collection<MatchNode<?, ?>> leafs, RoleModel rolemodel) {
 		List<List<MatchNode<?, ?>>> allMatchPaths = new LinkedList<List<MatchNode<?, ?>>>();
 		for (MatchNode<?, ?> leaf : leafs) {
 			List<MatchNode<?, ?>> matchPath = new LinkedList<MatchNode<?, ?>>();
@@ -435,29 +438,37 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		}
 		int count = 0;
 		for (List<MatchNode<?, ?>> path : allMatchPaths) {
-//			int size = linearization.size();
-//			if (path.size() == size) {
-				count++;
-				for (MatchNode<?, ?> matchNode : path) {
-					printNode(matchNode);
-				}
-				System.out.println("******************************************");
-//			}
+			count++;
+			for (MatchNode<?, ?> matchNode : path) {
+				printNode(matchNode);
+			}
+			System.out.println("******************************************");
 		}
 		return count;
 	}
 
-	private void printTree(RoleNode root, List<EObject> linearization) {
+	private void printTree(RoleNode root, List<EObject> linearization, boolean print) {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Matching for metamodel: "
 				+ root.getMetamodel().getNsURI());
 		System.out.println("role model: " + root.getRolemodel().getName());
 		System.out.println();
 		List<MatchNode<?, ?>> leafs = getLeafs(root);
+		System.err.println();
+		int overallSize = leafs.size();
+		Set<MatchNode<?, ?>> uniqueLeafs = new LinkedHashSet<MatchNode<?,?>>();
+		for (MatchNode<?, ?> matchNode : leafs) {
+			uniqueLeafs.add(matchNode);
+		}
+		int uniqueSize = uniqueLeafs.size();
 		RoleModel rolemodel = root.getRolemodel();
-		int count = traversePrint(leafs, rolemodel);
+		if(print){
+			traversePrint(uniqueLeafs, rolemodel);
+		}
+		System.err.println("over all leafs: " + overallSize);
+		System.err.println("unique leafs: " + uniqueSize);
 		System.err.println("RoleModel '" + rolemodel.getName()
-				+ "' could be mapped in MetaModel '" + root.getMetamodel().getNsURI() + "' " + count + " time(s)");
+				+ "' could be mapped in MetaModel '" + root.getMetamodel().getNsURI() + "' " + uniqueSize + " time(s)");
 	}
 
 	private void printNode(MatchNode<?, ?> matchNode) {
@@ -514,7 +525,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		}
 		return classes;
 	}
-	
+
 	@Test
 	public void equalsHashTest(){
 		EPackage metamodel = metamodels.get(1);
@@ -532,7 +543,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		RoleNode c13 = new RoleNode(c12);
 		c13.setRoleElement(roleModel.getRoles().get(1));
 		c13.setMetaElement((EClass)metamodel.getEClassifiers().get(1));
-		
+
 		RoleNode n2 = new RoleNode(null);
 		n2.setMetamodel(metamodel);
 		n2.setRolemodel(roleModel);
@@ -545,13 +556,13 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		RoleNode c23 = new RoleNode(c22);
 		c23.setRoleElement(roleModel.getRoles().get(1));
 		c23.setMetaElement((EClass)metamodel.getEClassifiers().get(1));
-		
+
 		assertTrue("both trees should be the same", c13.equals(c23));
-		
+
 		Set<MatchNode<?, ?>> hashSet = new LinkedHashSet<MatchNode<?,?>>();
 		hashSet.add(c13);
 		assertFalse("should have already been added", hashSet.add(c23));
-		
+
 		RoleNode n3 = new RoleNode(null);
 		n3.setMetamodel(metamodel);
 		n3.setRolemodel(roleModel);
@@ -564,10 +575,10 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		RoleNode c33 = new RoleNode(c32);
 		c33.setRoleElement(roleModel.getRoles().get(2));
 		c33.setMetaElement((EClass)metamodel.getEClassifiers().get(1));
-		
+
 		assertFalse("both trees should not be the same", c13.equals(c33));
 		assertFalse("both trees should not be the same", c23.equals(c33));
-		
+
 		hashSet.add(c13);
 		assertTrue("should not have been added", hashSet.add(c33));
 	}
