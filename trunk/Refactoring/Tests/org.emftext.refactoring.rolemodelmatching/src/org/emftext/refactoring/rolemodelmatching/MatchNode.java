@@ -11,6 +11,15 @@ public abstract class MatchNode <RoleModelElement extends EObject, MetaModelElem
 
 	private MatchNode<?,?> parent;
 	private List<MatchNode<?,?>> children;
+	private boolean complete = false;
+	
+	public boolean isComplete() {
+		return complete;
+	}
+
+	public void setComplete(boolean complete) {
+		this.complete = complete;
+	}
 
 	// used for an element from the metamodel - can be an EClass, an EAtribute or an ReferenceMetaClassPair
 	private MetaModelElement metaElement;

@@ -53,4 +53,23 @@ public class CombinatoryTest {
 		assertEquals(first, second);
 	}
 
+	@Test
+	public void testCombinations(){
+		List<Object> elements = new LinkedList<Object>();
+		elements.add("J");
+		elements.add("a");
+		elements.add("n");
+		elements.add("R");
+		CombinationGenerator<Object> combinationsGenerator = new CombinationGenerator<Object>();
+		for (int count = 1; count <= elements.size(); count++) {
+			List<List<Object>> combinations = combinationsGenerator.getCombinations(elements, count);
+			System.out.println("Combinations: " + count);
+			for (List<Object> list : combinations) {
+				for (Object object : list) {
+					System.out.print(object + " ");
+				}
+				System.out.println();
+			}
+		}
+	}
 }
