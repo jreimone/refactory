@@ -78,32 +78,27 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXtoTestmm(){
 		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(1));
 	}
 
 
 	@Test
-	@Ignore
 	public void matchExtractXtoEcore(){
 		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(2));
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToEcore(){
 		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(2));
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToPL0(){
 		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(4));
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToForms(){
 		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(5));
 	}
