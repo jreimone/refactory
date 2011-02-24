@@ -1,7 +1,6 @@
 package org.emftext.refactoring.rolemodelmatching;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,6 +27,8 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
+import org.emftext.language.refactoring.roles.RolesFactory;
+import org.emftext.language.refactoring.roles.RolesPackage;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -84,11 +85,13 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
 
 	@Test
+	@Ignore
 	public void matchExtractXtoEcore(){
 		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(2));
 	}
 
 	@Test
+	@Ignore
 	public void matchExtractXwithReferenceClassToEcore(){
 		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(2));
 	}
@@ -96,6 +99,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	@Test
 	public void matchExtractXwithReferenceClassToPL0(){
 		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(4));
+	}
+	
+	@Test
+	public void matchMoveXToPL0(){
+		matchRoleModelInMetamodel(rolemodels.get(4), metamodels.get(4));
 	}
 
 	@Test
@@ -505,5 +513,62 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 			classes.addAll(collectClasses(subModel));
 		}
 		return classes;
+	}
+	
+	@Test
+	public void equalsHashTest(){
+		EPackage metamodel = metamodels.get(1);
+		RoleModel roleModel = rolemodels.get(0);
+
+		RoleNode n1 = new RoleNode(null);
+		n1.setMetamodel(metamodel);
+		n1.setRolemodel(roleModel);
+		RoleNode c11 = new RoleNode(n1);
+		c11.setRoleElement(roleModel.getRoles().get(0));
+		c11.setMetaElement((EClass) metamodel.getEClassifiers().get(0));
+		CollaborationNode c12 = new CollaborationNode(c11);
+		c12.setRoleElement(roleModel.getCollaborations().get(0));
+		c12.setMetaElement(((EClass) metamodel.getEClassifiers().get(0)).getEReferences().get(0));
+		RoleNode c13 = new RoleNode(c12);
+		c13.setRoleElement(roleModel.getRoles().get(1));
+		c13.setMetaElement((EClass)metamodel.getEClassifiers().get(1));
+		
+		RoleNode n2 = new RoleNode(null);
+		n2.setMetamodel(metamodel);
+		n2.setRolemodel(roleModel);
+		RoleNode c21 = new RoleNode(n2);
+		c21.setRoleElement(roleModel.getRoles().get(0));
+		c21.setMetaElement((EClass) metamodel.getEClassifiers().get(0));
+		CollaborationNode c22 = new CollaborationNode(c21);
+		c22.setRoleElement(roleModel.getCollaborations().get(0));
+		c22.setMetaElement(((EClass) metamodel.getEClassifiers().get(0)).getEReferences().get(0));
+		RoleNode c23 = new RoleNode(c22);
+		c23.setRoleElement(roleModel.getRoles().get(1));
+		c23.setMetaElement((EClass)metamodel.getEClassifiers().get(1));
+		
+		assertTrue("both trees should be the same", c13.equals(c23));
+		
+		Set<MatchNode<?, ?>> hashSet = new LinkedHashSet<MatchNode<?,?>>();
+		hashSet.add(c13);
+		assertFalse("should have already been added", hashSet.add(c23));
+		
+		RoleNode n3 = new RoleNode(null);
+		n3.setMetamodel(metamodel);
+		n3.setRolemodel(roleModel);
+		RoleNode c31 = new RoleNode(n3);
+		c31.setRoleElement(roleModel.getRoles().get(0));
+		c31.setMetaElement((EClass) metamodel.getEClassifiers().get(0));
+		CollaborationNode c32 = new CollaborationNode(c31);
+		c32.setRoleElement(roleModel.getCollaborations().get(0));
+		c32.setMetaElement(((EClass) metamodel.getEClassifiers().get(0)).getEReferences().get(0));
+		RoleNode c33 = new RoleNode(c32);
+		c33.setRoleElement(roleModel.getRoles().get(2));
+		c33.setMetaElement((EClass)metamodel.getEClassifiers().get(1));
+		
+		assertFalse("both trees should not be the same", c13.equals(c33));
+		assertFalse("both trees should not be the same", c23.equals(c33));
+		
+		hashSet.add(c13);
+		assertTrue("should not have been added", hashSet.add(c33));
 	}
 }
