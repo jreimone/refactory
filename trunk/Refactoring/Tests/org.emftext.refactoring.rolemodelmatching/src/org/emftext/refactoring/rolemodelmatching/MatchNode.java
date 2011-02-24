@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.roles.RoleModel;
 
 public abstract class MatchNode <RoleModelElement extends EObject, MetaModelElement extends EObject>{
@@ -77,6 +78,49 @@ public abstract class MatchNode <RoleModelElement extends EObject, MetaModelElem
 
 	public MatchNode<?,?> getParent() {
 		return parent;
+	}
+
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (complete ? 1231 : 1237);
+		result = prime * result
+				+ ((metaElement == null) ? 0 : metaElement.hashCode());
+		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		result = prime * result
+				+ ((roleElement == null) ? 0 : roleElement.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MatchNode<?,?> other = (MatchNode<?,?>) obj;
+		MatchNode<?,?> current = this;
+		while (current != null) {
+			EObject roleElementOther = other.getRoleElement();
+			EObject metaElementOther = other.getMetaElement();
+			if(!EcoreUtil.equals(current.getRoleElement(), roleElementOther)){
+				return false;
+			}
+			if(!EcoreUtil.equals(current.getMetaElement(), metaElementOther)){
+				return false;
+			}
+			other = other.getParent();
+			current = current.getParent();
+		}
+		if(other == null){
+			return true;
+		}
+		return false;
 	}
 
 }
