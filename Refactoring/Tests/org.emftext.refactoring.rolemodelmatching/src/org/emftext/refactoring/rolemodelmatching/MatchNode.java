@@ -7,19 +7,74 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.refactoring.rolemodelmatching.listener.IIncompleteNodeListener;
+import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
 
 public abstract class MatchNode <RoleModelElement extends EObject, MetaModelElement extends EObject>{
 
 	private MatchNode<?,?> parent;
 	private List<MatchNode<?,?>> children;
 	private boolean complete = false;
+	private List<INodeListener> listener;
 	
+	public List<INodeListener> getListener() {
+		return listener;
+	}
+	
+	public void addListener(INodeListener listener){
+		if(this.listener == null){
+			this.listener = new LinkedList<INodeListener>();
+		}
+		if(listener != null && !this.listener.contains(listener)){
+			this.listener.add(listener);
+			listener.setSubject(this);
+		}
+	}
+
 	public boolean isComplete() {
 		return complete;
 	}
 
 	public void setComplete(boolean complete) {
 		this.complete = complete;
+		if(complete){
+			updateCompletePathNode();
+		} else {
+			updateIncompletePathNode();
+		}
+	}
+
+	private void updateIncompletePathNode() {
+		initListenersFromRoot();
+		if(listener != null){
+			for (INodeListener listener : this.listener) {
+				if(listener instanceof IIncompleteNodeListener){
+					listener.execute(this);
+				}
+			}
+		}
+	}
+
+	public void updateCompletePathNode() {
+		initListenersFromRoot();
+		if(listener != null){
+			for (INodeListener listener : this.listener) {
+				if(!(listener instanceof IIncompleteNodeListener)){
+					listener.execute(this);
+				}
+			}
+		}
+	}
+
+	private void initListenersFromRoot() {
+		List<INodeListener> rootListeners = getRoot().getListener();
+		if(!(rootListeners == null || rootListeners.size() == 0)){
+			if(listener == null){
+				listener = new LinkedList<INodeListener>();
+			}
+			listener.addAll(rootListeners);
+			
+		}
 	}
 
 	// used for an element from the metamodel - can be an EClass, an EAtribute or an ReferenceMetaClassPair
@@ -80,7 +135,16 @@ public abstract class MatchNode <RoleModelElement extends EObject, MetaModelElem
 		return parent;
 	}
 
-	
+	public RoleNode getRoot(){
+		if(parent == null){
+			return (RoleNode) this;
+		}
+		MatchNode<?, ?> node = parent;
+		while (node.getParent() != null) {
+			node = node.getParent();
+		}
+		return (RoleNode) node;
+	}
 
 	@Override
 	public int hashCode() {
