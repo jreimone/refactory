@@ -2,7 +2,6 @@ package org.emftext.refactoring.rolemodelmatching;
 
 import static org.junit.Assert.*;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -11,11 +10,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -28,6 +27,12 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
+import org.emftext.refactoring.rolemodelmatching.combinatory.CombinationGenerator;
+import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
+import org.emftext.refactoring.rolemodelmatching.listener.MatchCountListener;
+import org.emftext.refactoring.rolemodelmatching.listener.PrintMatchPathListener;
+import org.emftext.refactoring.rolemodelmatching.listener.RemoveCompletePathListener;
+import org.emftext.refactoring.rolemodelmatching.listener.RemoveIncompletePathListener;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -115,6 +120,12 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 	
 	@Test
+	public void matchExtractXwithReferenceClassToAppflow(){
+		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(0), false);
+	}
+	
+	@Test
+	@Ignore
 	public void matchExtractXwithReferenceClassToJava(){
 		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(7), false);
 	}
@@ -232,6 +243,16 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	 */
 	private void matchRoleModelInMetamodel(RoleModel rolemodel, EPackage metamodel, boolean print){
 		RoleNode root = new RoleNode(null);
+//		INodeListener printMatchPathListener = new PrintMatchPathListener();
+//		root.addListener(printMatchPathListener);
+		AtomicInteger count = new AtomicInteger();
+		MatchCountListener matchCountListener = new MatchCountListener(count, rolemodel, metamodel);
+		root.addListener(matchCountListener);
+//		INodeListener removeCompletePathListener = new RemoveCompletePathListener(matchCountListener);
+//		root.addListener(removeCompletePathListener);
+		AtomicInteger incompleteCount = new AtomicInteger();
+		RemoveIncompletePathListener incompletePathListener = new RemoveIncompletePathListener(incompleteCount, rolemodel, metamodel);
+		root.addListener(incompletePathListener);
 		root.setMetamodel(metamodel);
 		root.setRolemodel(rolemodel);
 		List<EObject> linearRolemodel = linearizeRoleModel(rolemodel);
@@ -240,7 +261,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 			printLinearization(rolemodel, linearRoleModelWithoutOptionals);
 		}
 		match(linearRolemodelsWithoutOptionals, metamodel, root);
-		printTree(root, linearRolemodel, print);
+		matchCountListener.printCount();
+		incompletePathListener.printIncompleteRemovals();
 	}
 
 	private List<List<EObject>> getLinearRoleModelsWithoutOptional(RoleModel rolemodel, List<EObject> linearRolemodel) {
@@ -267,13 +289,9 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 						copiedRoleModel.getRoles().remove(copier.get(role));
 						for (Collaboration collaboration : role.getIncoming()) {
 							EcoreUtil.delete(copier.get(collaboration));
-							//							EcoreUtil.remove(copier.get(collaboration));
-							//							copiedRoleModel.getCollaborations().remove(copier.get(collaboration));
 						}
 						for (Collaboration collaboration : role.getOutgoing()) {
 							EcoreUtil.delete(copier.get(collaboration));
-							//							EcoreUtil.remove(copier.get(collaboration));
-							//							copiedRoleModel.getCollaborations().remove(copier.get(collaboration));
 						}
 					}
 					List<EObject> linearRolemodelWithoutOptionals = linearizeRoleModel(copiedRoleModel);
@@ -310,21 +328,28 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
 	private void matchClass(Role role, List<EObject> path, EPackage metamodel, MatchNode<?, ?> parent) {
 		if (getMappedClassByRole(role, parent) == null) {
-			currentMetaClasses = collectClasses(metamodel);
+			if(currentMetaClasses == null){
+				currentMetaClasses = collectClasses(metamodel);
+			}
 			if (parent instanceof CollaborationNode) {
 				EReference reference = ((CollaborationNode) parent).getMetaElement();
 				if (reference.getEType() instanceof EClass) {
 					EClass targetClass = (EClass) reference.getEType();
 					List<EClass> classes = getSubClasses(currentMetaClasses, targetClass);
+					boolean mappable = false;
 					for (EClass clazz : classes) {
 						List<RoleAttribute> roleAttributes = role.getAttributes();
 						List<EAttribute> classAttributes = clazz.getEAllAttributes();
 						if(roleAttributes.size() == 0 || (roleAttributes.size() > 0 && classAttributes.size() > 0)){
+							mappable = true;
 							RoleNode node = new RoleNode(parent);
 							node.setMetaElement(clazz);
 							node.setRoleElement(role);
 							nextStepAfterMatching(path, metamodel, node);
 						}
+					}
+					if(!mappable){
+						parent.setComplete(false);
 					}
 				} else {
 					fail("handle EClassifier!");
@@ -369,11 +394,16 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 			assertNotNull("something went wrong - mapped role '"
 					+ source.getName() + "' must have been mapped already", sourceClass);
 			List<EReference> references = sourceClass.getEAllReferences();
+			if(references.size() == 0){
+				parent.setComplete(false);
+			}
 			Role target = multiCol.getTarget();
 			EClass targetClass = getMappedClassByRole(target, parent);
+			boolean mappable = false;
 			if (targetClass == null) {
 				for (EReference reference : references) {
 					if (referenceMappable(reference, multiCol)) {
+						mappable = true;
 						CollaborationNode node = new CollaborationNode(parent);
 						node.setMetaElement(reference);
 						node.setRoleElement(multiCol);
@@ -386,6 +416,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 				for (EReference reference : references) {
 					if (referenceMappable(reference, multiCol)
 							&& classes.contains(reference.getEType())) {
+						mappable = true;
 						CollaborationNode node = new CollaborationNode(parent);
 						node.setMetaElement(reference);
 						node.setRoleElement(multiCol);
@@ -393,6 +424,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 					}
 				}
 			}
+			if(!mappable){
+				parent.setComplete(false);
+			}
+		} else {
+			parent.setComplete(false);
 		}
 	}
 
@@ -409,83 +445,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		return null;
 	}
 
-	// ////////////////////////////////////////////////////////////////////////////////////
 
-	private List<MatchNode<?, ?>> getLeafs(MatchNode<?, ?> root) {
-		List<MatchNode<?, ?>> leafs = new LinkedList<MatchNode<?, ?>>();
-		for (MatchNode<?, ?> child : root.getChildren()) {
-			if (child.getChildren().size() == 0 && child.isComplete()) {
-				leafs.add(child);
-			} else {
-				leafs.addAll(getLeafs(child));
-			}
-		}
-		return leafs;
-	}
-
-	private int traversePrint(Collection<MatchNode<?, ?>> leafs, RoleModel rolemodel) {
-		List<List<MatchNode<?, ?>>> allMatchPaths = new LinkedList<List<MatchNode<?, ?>>>();
-		for (MatchNode<?, ?> leaf : leafs) {
-			List<MatchNode<?, ?>> matchPath = new LinkedList<MatchNode<?, ?>>();
-			allMatchPaths.add(matchPath);
-			MatchNode<?, ?> node = leaf;
-			while (node != null && node.getMetaElement() != null
-					&& node.getRoleElement() != null) {
-				matchPath.add(node);
-				node = node.getParent();
-			}
-			Collections.reverse(matchPath);
-		}
-		int count = 0;
-		for (List<MatchNode<?, ?>> path : allMatchPaths) {
-			count++;
-			for (MatchNode<?, ?> matchNode : path) {
-				printNode(matchNode);
-			}
-			System.out.println("******************************************");
-		}
-		return count;
-	}
-
-	private void printTree(RoleNode root, List<EObject> linearization, boolean print) {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("Matching for metamodel: "
-				+ root.getMetamodel().getNsURI());
-		System.out.println("role model: " + root.getRolemodel().getName());
-		System.out.println();
-		List<MatchNode<?, ?>> leafs = getLeafs(root);
-		System.err.println();
-		int overallSize = leafs.size();
-		Set<MatchNode<?, ?>> uniqueLeafs = new LinkedHashSet<MatchNode<?,?>>();
-		for (MatchNode<?, ?> matchNode : leafs) {
-			uniqueLeafs.add(matchNode);
-		}
-		int uniqueSize = uniqueLeafs.size();
-		RoleModel rolemodel = root.getRolemodel();
-		if(print){
-			traversePrint(uniqueLeafs, rolemodel);
-		}
-		System.err.println("over all leafs: " + overallSize);
-		System.err.println("unique leafs: " + uniqueSize);
-		System.err.println("RoleModel '" + rolemodel.getName()
-				+ "' could be mapped in MetaModel '" + root.getMetamodel().getNsURI() + "' " + uniqueSize + " time(s)");
-	}
-
-	private void printNode(MatchNode<?, ?> matchNode) {
-		EObject roleElement = matchNode.getRoleElement();
-		String roleString = "";
-		if (roleElement instanceof Role) {
-			roleString = ((Role) roleElement).getName();
-		} else if (roleElement instanceof MultiplicityCollaboration) {
-			roleString = ((MultiplicityCollaboration) roleElement).getTargetName();
-		}
-		EObject metaElement = matchNode.getMetaElement();
-		String metaString = "";
-		if (metaElement instanceof ENamedElement) {
-			metaString = ((ENamedElement) metaElement).getName();
-		}
-		System.out.println(roleString + " --> " + metaString);
-	}
 
 	private List<EClass> getSubClasses(List<EClass> classes, EClass clazz) {
 		List<EClass> subClasses = new LinkedList<EClass>();

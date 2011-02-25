@@ -1,4 +1,4 @@
-package org.emftext.refactoring.rolemodelmatching;
+package org.emftext.refactoring.rolemodelmatching.combinatory;
 
 import java.math.BigInteger;
 import java.util.LinkedList;

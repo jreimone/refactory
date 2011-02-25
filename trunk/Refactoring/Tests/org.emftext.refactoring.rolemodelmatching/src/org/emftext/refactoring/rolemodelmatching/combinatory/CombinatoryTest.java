@@ -1,4 +1,4 @@
-package org.emftext.refactoring.rolemodelmatching;
+package org.emftext.refactoring.rolemodelmatching.combinatory;
 
 import java.util.LinkedList;
 import java.util.List;
