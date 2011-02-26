@@ -125,13 +125,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 	
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToJava(){
 		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(7), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXtoUML(){
 		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(3), false);
 	}
@@ -257,9 +255,9 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		root.setRolemodel(rolemodel);
 		List<EObject> linearRolemodel = linearizeRoleModel(rolemodel);
 		List<List<EObject>> linearRolemodelsWithoutOptionals = getLinearRoleModelsWithoutOptional(rolemodel, linearRolemodel);
-		for (List<EObject> linearRoleModelWithoutOptionals : linearRolemodelsWithoutOptionals) {
-			printLinearization(rolemodel, linearRoleModelWithoutOptionals);
-		}
+//		for (List<EObject> linearRoleModelWithoutOptionals : linearRolemodelsWithoutOptionals) {
+//			printLinearization(rolemodel, linearRoleModelWithoutOptionals);
+//		}
 		match(linearRolemodelsWithoutOptionals, metamodel, root);
 		matchCountListener.printCount();
 		incompletePathListener.printIncompleteRemovals();
