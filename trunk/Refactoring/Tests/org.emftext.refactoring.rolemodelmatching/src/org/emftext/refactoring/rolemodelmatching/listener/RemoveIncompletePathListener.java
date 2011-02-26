@@ -31,6 +31,6 @@ public class RemoveIncompletePathListener extends AbstractNodeListener implement
 	}
 	
 	public void printIncompleteRemovals(){
-		System.err.println("Matching rolemodel '" + rolemodel.getName() + "' in metamodel '" + metamodel.getNsURI() + "' contained incomplete paths: " + incompleteCount.get());
+		System.err.println(rolemodel.getName() + " --> " + metamodel.getNsURI() + " removed: " + incompleteCount.get());
 	}
 }
