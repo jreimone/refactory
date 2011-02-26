@@ -1,8 +1,11 @@
-package org.emftext.refactoring.rolemodelmatching.combinatory;
+package org.emftext.refactoring.rolemodelmatching.test.combinatory;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import org.emftext.refactoring.rolemodelmatching.combinatory.CombinationGenerator;
+import org.emftext.refactoring.rolemodelmatching.combinatory.PermutationGenerator;
+import org.emftext.refactoring.rolemodelmatching.combinatory.VariationGenerator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
