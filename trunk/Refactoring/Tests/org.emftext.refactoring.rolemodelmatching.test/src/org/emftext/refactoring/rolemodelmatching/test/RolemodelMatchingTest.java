@@ -1,6 +1,9 @@
-package org.emftext.refactoring.rolemodelmatching;
+package org.emftext.refactoring.rolemodelmatching.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,11 +30,12 @@ import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
+import org.emftext.refactoring.rolemodelmatching.CollaborationNode;
+import org.emftext.refactoring.rolemodelmatching.MatchNode;
+import org.emftext.refactoring.rolemodelmatching.RoleNode;
+import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingInitialization;
 import org.emftext.refactoring.rolemodelmatching.combinatory.CombinationGenerator;
-import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
 import org.emftext.refactoring.rolemodelmatching.listener.MatchCountListener;
-import org.emftext.refactoring.rolemodelmatching.listener.PrintMatchPathListener;
-import org.emftext.refactoring.rolemodelmatching.listener.RemoveCompletePathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveIncompletePathListener;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
