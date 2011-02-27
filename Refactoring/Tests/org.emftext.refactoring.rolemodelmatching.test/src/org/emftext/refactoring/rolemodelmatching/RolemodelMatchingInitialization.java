@@ -5,10 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.LinkedList;
-import java.util.List;
+import java.net.URL;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -72,8 +74,8 @@ public class RolemodelMatchingInitialization {
 		return resource;
 	}
 
-	protected static List<EPackage> initMetamodels(String[] metamodelURIs) {
-		List<EPackage> metamodels = new LinkedList<EPackage>();
+	protected static Map<String, EPackage> initMetamodels(String[] metamodelURIs) {
+		Map<String, EPackage> metamodels = new LinkedHashMap<String, EPackage>();
 		for (String metamodelURI : metamodelURIs) {
 			if(metamodelURI.endsWith(TEXT_ECORE_EXT)){
 				registerTextEcoreLanguage();
@@ -83,9 +85,24 @@ public class RolemodelMatchingInitialization {
 			Resource resource = getResourceFromURI(metamodelURI);
 			EObject model = resource.getContents().get(0);
 			assertTrue(model + " is not a Ecore metamodel", model instanceof EPackage);
-			metamodels.add((EPackage) model);
+			metamodels.put(metamodelURI, (EPackage) model);
 		}
 		return metamodels;
+	}
+	
+	protected static EPackage initArchiveMetamodel(String pathString, String nsURI, Class<?> clazz){
+		final Map<String, URI> packageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+		URL classResource = clazz.getResource(pathString);
+		String path = classResource.getFile();
+		path = path.replace("file:/", "archive:file:/");
+		packageNsURIToGenModelLocationMap.put(nsURI, URI.createURI(path));
+		URI uri = packageNsURIToGenModelLocationMap.get(nsURI);
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource = rs.getResource(uri, true);
+		GenModel genModel = (GenModel) resource.getContents().get(0);
+		GenPackage genPackage = genModel.getEcoreGenPackage();
+		EPackage metamodel = genPackage.getEcorePackage();
+		return metamodel;
 	}
 
 	private static void registerTextEcoreLanguage() {
@@ -104,7 +121,7 @@ public class RolemodelMatchingInitialization {
 				, new EcoreResourceFactoryImpl());
 	}
 
-	protected static List<RoleModel> initRoleModels(String[] rolemodelURIs) {
+	protected static Map<String, RoleModel> initRoleModels(String[] rolemodelURIs) {
 		// init roles metamodel
 		registerMetamodel(
 				RolesPackage.eNS_URI, 
@@ -112,12 +129,12 @@ public class RolemodelMatchingInitialization {
 				new RolestextMetaInformation().getSyntaxName(), 
 				new RolestextResourceFactory());
 		// load rolemodels
-		List<RoleModel> rolemodels = new LinkedList<RoleModel>();
+		Map<String, RoleModel> rolemodels = new LinkedHashMap<String, RoleModel>();
 		for (String rolemodelURI : rolemodelURIs) {
 			Resource resource = getResourceFromURI(rolemodelURI);
 			EObject model = resource.getContents().get(0);
 			assertTrue(model + " is not a rolemodel", model instanceof RoleModel);
-			rolemodels.add((RoleModel) model);
+			rolemodels.put(rolemodelURI, (RoleModel) model);
 		}
 		return rolemodels;
 	}
