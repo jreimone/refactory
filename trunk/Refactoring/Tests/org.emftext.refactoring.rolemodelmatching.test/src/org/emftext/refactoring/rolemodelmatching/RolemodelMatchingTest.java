@@ -104,9 +104,9 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		registerTestingRootAsPlatformRoot();
 		rolemodels = initRoleModels(rolemodelURIs);
 		metamodels = initMetamodels(metamodelURIs);
-		EPackage ecoreMetamodel = initArchiveMetamodel("/model/Ecore.genmodel", MM_ECORE, EClass.class);
+		EPackage ecoreMetamodel = initArchiveMetamodel("/model/Ecore.ecore", MM_ECORE, EClass.class);
 		metamodels.put(MM_ECORE, ecoreMetamodel);
-		EPackage umlMetamodel = initArchiveMetamodel("/model/UML.genmodel", MM_UML, Class.class);
+		EPackage umlMetamodel = initArchiveMetamodel("/model/UML.ecore", MM_UML, Class.class);
 		metamodels.put(MM_UML, umlMetamodel);
 	}
 
