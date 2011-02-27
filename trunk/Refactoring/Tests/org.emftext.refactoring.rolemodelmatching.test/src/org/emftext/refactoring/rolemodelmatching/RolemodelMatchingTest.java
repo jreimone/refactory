@@ -2,8 +2,11 @@ package org.emftext.refactoring.rolemodelmatching;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -19,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.uml2.uml.Class;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
@@ -47,31 +51,50 @@ import org.junit.Test;
  */
 public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
+	// Rolemodels
+	private static final String RM_RENAME_X 						= "platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext";
+	private static final String RM_REMOVE_UNUSED_CONTAINED_X 		= "platform:/resource/org.emftext.refactoring.removeUnusedContainedX/rolemodel/removeUnusedContainedX.rolestext";
+	private static final String RM_REMOVE_EMPTY_CONTAINED_X 		= "platform:/resource/org.emftext.refactoring.removeEmptyContainedX/rolemodel/removeEmptyContainedX.rolestext";
+	private static final String RM_MOVE_XLOOSELY 					= "platform:/resource/org.emftext.refactoring.moveXloosely/rolemodel/moveXloosely.rolestext";
+	private static final String RM_MOVE_X 							= "platform:/resource/org.emftext.refactoring.moveX/rolemodel/moveX.rolestext";
+	private static final String RM_INTRODUCE_REFERENCE_CLASS 		= "platform:/resource/org.emftext.refactoring.introduceReferenceClass/rolemodel/IntroduceReferenceClass.rolestext";
+	private static final String RM_EXTRACT_XWITH_REFERENCE_CLASS 	= "platform:/resource/org.emftext.refactoring.extractXwithReferenceClass/rolemodel/ExtractXwithReferenceClass.rolestext";
+	private static final String RM_EXTRACT_SUB_X 					= "platform:/resource/org.emftext.refactoring.extractSubX/rolemodel/ExtractSubX.rolestext";
+	private static final String RM_EXTRACT_X 						= "platform:/resource/org.emftext.refactoring.extractX/rolemodel/ExtractX.rolestext";
+
+	// Metamodels
+	private static final String MM_UML 				= "http://www.eclipse.org/uml2/3.0.0/UML";
+	private static final String MM_ECORE 			= "http://www.eclipse.org/emf/2002/Ecore";
+	private static final String MM_JAVA 			= "platform:/resource/org.emftext.language.java/metamodel/java.ecore";
+	private static final String MM_TEXTADVENTURE 	= "platform:/resource/org.emftext.language.textadventure/metamodel/textadventure.ecore";
+	private static final String MM_FORMS 			= "platform:/resource/org.emftext.language.forms/metamodel/forms.ecore";
+	private static final String MM_PL0 				= "platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore";
+	private static final String MM_TESTMM 			= "platform:/resource/org.emftext.refactoring.rolematching.testmm/metamodel/testmm.ecore";
+	private static final String MM_APPFLOW 			= "platform:/resource/org.emftext.language.appflow/metamodel/appflow.text.ecore";
+
 	private static final String[] rolemodelURIs = new String[] { 
-		"platform:/resource/org.emftext.refactoring.extractX/rolemodel/ExtractX.rolestext"
-		,"platform:/resource/org.emftext.refactoring.extractSubX/rolemodel/ExtractSubX.rolestext" 
-		,"platform:/resource/org.emftext.refactoring.extractXwithReferenceClass/rolemodel/ExtractXwithReferenceClass.rolestext" 
-		,"platform:/resource/org.emftext.refactoring.introduceReferenceClass/rolemodel/IntroduceReferenceClass.rolestext" 
-		,"platform:/resource/org.emftext.refactoring.moveX/rolemodel/moveX.rolestext" 
-		,"platform:/resource/org.emftext.refactoring.moveXloosely/rolemodel/moveXloosely.rolestext" 
-		,"platform:/resource/org.emftext.refactoring.removeEmptyContainedX/rolemodel/removeEmptyContainedX.rolestext" 
-		,"platform:/resource/org.emftext.refactoring.removeUnusedContainedX/rolemodel/removeUnusedContainedX.rolestext"
-		,"platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext"
+		RM_EXTRACT_X
+		,RM_EXTRACT_SUB_X 
+		,RM_EXTRACT_XWITH_REFERENCE_CLASS 
+		,RM_INTRODUCE_REFERENCE_CLASS 
+		,RM_MOVE_X 
+		,RM_MOVE_XLOOSELY 
+		,RM_REMOVE_EMPTY_CONTAINED_X 
+		,RM_REMOVE_UNUSED_CONTAINED_X
+		,RM_RENAME_X
 	};
 
 	private static final String[] metamodelURIs = new String[] { 
-		"platform:/resource/org.emftext.language.appflow/metamodel/appflow.text.ecore"
-		,"platform:/resource/org.emftext.refactoring.rolematching.testmm/metamodel/testmm.ecore"
-		,"platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
-		,"platform:/resource/org.eclipse.uml2.uml/model/UML.ecore"
-		,"platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore"
-		,"platform:/resource/org.emftext.language.forms/metamodel/forms.ecore"
-		,"platform:/resource/org.emftext.language.textadventure/metamodel/textadventure.ecore"
-		,"platform:/resource/org.emftext.language.java/metamodel/java.ecore"
+		MM_APPFLOW
+		,MM_TESTMM
+		,MM_PL0
+		,MM_FORMS
+		,MM_TEXTADVENTURE
+		,MM_JAVA
 	};
 
-	private static List<RoleModel> rolemodels;
-	private static List<EPackage> metamodels;
+	private static Map<String, RoleModel> rolemodels;
+	private static Map<String, EPackage> metamodels;
 
 	private List<EClass> currentMetaClasses;
 	private Map<RoleModel, List<EObject>> linearRoleModels;
@@ -81,59 +104,63 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		registerTestingRootAsPlatformRoot();
 		rolemodels = initRoleModels(rolemodelURIs);
 		metamodels = initMetamodels(metamodelURIs);
+		EPackage ecoreMetamodel = initArchiveMetamodel("/model/Ecore.genmodel", MM_ECORE, EClass.class);
+		metamodels.put(MM_ECORE, ecoreMetamodel);
+		EPackage umlMetamodel = initArchiveMetamodel("/model/UML.genmodel", MM_UML, Class.class);
+		metamodels.put(MM_UML, umlMetamodel);
 	}
 
 	@Test
 	public void matchExtractXtoTestmm(){
-		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(1), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_TESTMM), false);
 	}
 
 
 	@Test
 	public void matchExtractXtoEcore(){
-		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(2), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_ECORE), false);
 	}
 
 	@Test
 	public void matchExtractXwithReferenceClassToEcore(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(2), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_ECORE), false);
 	}
 
 	@Test
 	public void matchExtractXwithReferenceClassToPL0(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(4), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_PL0), false);
 	}
 
 	@Test
 	public void matchMoveXToPL0(){
-		matchRoleModelInMetamodel(rolemodels.get(4), metamodels.get(4), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_X), metamodels.get(MM_PL0), false);
 	}
 
 	@Test
 	public void matchExtractXwithReferenceClassToForms(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(5), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_FORMS), false);
 	}
 
 	@Test
 	public void matchExtractXwithReferenceClassToTextAdventure(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(6), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_TEXTADVENTURE), false);
 	}
-	
+
 	@Test
 	public void matchExtractXwithReferenceClassToAppflow(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(0), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_APPFLOW), false);
 	}
-	
+
 	@Test
 	@Ignore
 	public void matchExtractXwithReferenceClassToJava(){
-		matchRoleModelInMetamodel(rolemodels.get(2), metamodels.get(7), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_JAVA), false);
 	}
 
 	@Test
 	@Ignore
 	public void matchExtractXtoUML(){
-		matchRoleModelInMetamodel(rolemodels.get(0), metamodels.get(3), false);
+		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_UML), false);
 	}
 
 	private List<EObject> linearizeRoleModel(RoleModel roleModel){
@@ -169,11 +196,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	@Ignore
 	public void linearizeRoleModels() {
 		linearRoleModels = new LinkedHashMap<RoleModel, List<EObject>>();
-		for (RoleModel roleModel : rolemodels) {
+		for (RoleModel roleModel : rolemodels.values()) {
 			List<EObject> linearization = linearizeRoleModel(roleModel);
 			linearRoleModels.put(roleModel, linearization);
 		}
-		for (RoleModel roleModel : rolemodels) {
+		for (RoleModel roleModel : rolemodels.values()) {
 			List<EObject> linearization = linearRoleModels.get(roleModel);
 			printLinearization(roleModel, linearization);
 		}
@@ -243,13 +270,13 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	 */
 	private void matchRoleModelInMetamodel(RoleModel rolemodel, EPackage metamodel, boolean print){
 		RoleNode root = new RoleNode(null);
-//		INodeListener printMatchPathListener = new PrintMatchPathListener();
-//		root.addListener(printMatchPathListener);
+		//		INodeListener printMatchPathListener = new PrintMatchPathListener();
+		//		root.addListener(printMatchPathListener);
 		AtomicInteger count = new AtomicInteger();
 		MatchCountListener matchCountListener = new MatchCountListener(count, rolemodel, metamodel);
 		root.addListener(matchCountListener);
-//		INodeListener removeCompletePathListener = new RemoveCompletePathListener(matchCountListener);
-//		root.addListener(removeCompletePathListener);
+		//		INodeListener removeCompletePathListener = new RemoveCompletePathListener(matchCountListener);
+		//		root.addListener(removeCompletePathListener);
 		AtomicInteger incompleteCount = new AtomicInteger();
 		RemoveIncompletePathListener incompletePathListener = new RemoveIncompletePathListener(incompleteCount, rolemodel, metamodel);
 		root.addListener(incompletePathListener);
@@ -257,9 +284,9 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		root.setRolemodel(rolemodel);
 		List<EObject> linearRolemodel = linearizeRoleModel(rolemodel);
 		List<List<EObject>> linearRolemodelsWithoutOptionals = getLinearRoleModelsWithoutOptional(rolemodel, linearRolemodel);
-//		for (List<EObject> linearRoleModelWithoutOptionals : linearRolemodelsWithoutOptionals) {
-//			printLinearization(rolemodel, linearRoleModelWithoutOptionals);
-//		}
+		//		for (List<EObject> linearRoleModelWithoutOptionals : linearRolemodelsWithoutOptionals) {
+		//			printLinearization(rolemodel, linearRoleModelWithoutOptionals);
+		//		}
 		match(linearRolemodelsWithoutOptionals, metamodel, root);
 		matchCountListener.printCount();
 		incompletePathListener.printIncompleteRemovals();
@@ -306,8 +333,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	@Ignore
 	public void matchAllRoleModelsInAllMetamodels() {
 		linearizeRoleModels();
-		for (EPackage metamodel : metamodels) {
-			for (RoleModel rolemodel : rolemodels) {
+		for (EPackage metamodel : metamodels.values()) {
+			for (RoleModel rolemodel : rolemodels.values()) {
 				matchRoleModelInMetamodel(rolemodel, metamodel, false);
 			}
 		}
@@ -488,8 +515,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
 	@Test
 	public void equalsHashTest(){
-		EPackage metamodel = metamodels.get(1);
-		RoleModel roleModel = rolemodels.get(0);
+		EPackage metamodel = metamodels.get(MM_TESTMM);
+		RoleModel roleModel = rolemodels.get(RM_EXTRACT_X);
 
 		RoleNode n1 = new RoleNode(null);
 		n1.setMetamodel(metamodel);
