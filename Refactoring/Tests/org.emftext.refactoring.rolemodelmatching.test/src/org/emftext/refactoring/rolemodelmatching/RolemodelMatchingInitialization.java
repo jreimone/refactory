@@ -9,8 +9,6 @@ import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -91,17 +89,13 @@ public class RolemodelMatchingInitialization {
 	}
 	
 	protected static EPackage initArchiveMetamodel(String pathString, String nsURI, Class<?> clazz){
-		final Map<String, URI> packageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
 		URL classResource = clazz.getResource(pathString);
 		String path = classResource.getFile();
 		path = path.replace("file:/", "archive:file:/");
-		packageNsURIToGenModelLocationMap.put(nsURI, URI.createURI(path));
-		URI uri = packageNsURIToGenModelLocationMap.get(nsURI);
+		URI metamodelUri = URI.createURI(path);
 		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.getResource(uri, true);
-		GenModel genModel = (GenModel) resource.getContents().get(0);
-		GenPackage genPackage = genModel.getEcoreGenPackage();
-		EPackage metamodel = genPackage.getEcorePackage();
+		Resource resource = rs.getResource(metamodelUri, true);
+		EPackage metamodel = (EPackage) resource.getContents().get(0);
 		return metamodel;
 	}
 
