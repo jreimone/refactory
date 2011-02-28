@@ -10,7 +10,9 @@ Require-Bundle: org.junit4,
  org.emftext.language.refactoring.roles.resource.rolestext,
  org.emftext.language.ecore.resource.text,
  org.eclipse.emf.ecore.xmi,
- org.eclipse.uml2.uml
+ org.eclipse.uml2.uml,
+ org.emftext.sdk.concretesyntax,
+ org.eclipse.stp.bpmn
 Export-Package: org.emftext.refactoring.rolemodelmatching,
  org.emftext.refactoring.rolemodelmatching.combinatory,
  org.emftext.refactoring.rolemodelmatching.listener

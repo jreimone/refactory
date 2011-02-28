@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.stp.bpmn.SubProcess;
 import org.eclipse.uml2.uml.Class;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
@@ -40,6 +41,7 @@ import org.emftext.refactoring.rolemodelmatching.listener.MatchCountListener;
 import org.emftext.refactoring.rolemodelmatching.listener.PrintMatchPathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveCompletePathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveIncompletePathListener;
+import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -81,6 +83,20 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private static final String MM_PL0 				= "platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore";
 	private static final String MM_TESTMM 			= "platform:/resource/org.emftext.refactoring.rolematching.testmm/metamodel/testmm.ecore";
 	private static final String MM_APPFLOW 			= "platform:/resource/org.emftext.language.appflow/metamodel/appflow.text.ecore";
+	private static final String MM_CS 				= "http://www.emftext.org/sdk/concretesyntax";
+	private static final String MM_FEATURE 			= "platform:/resource/org.featuremapper.models.feature/model/feature.ecore";
+	private static final String MM_TA 				= "platform:/resource/org.emftext.language.timedautomata/metamodel/timedAutomata.ecore";
+	private static final String MM_OWL 				= "platform:/resource/org.emftext.language.owl/metamodel/owl.text.ecore";
+	private static final String MM_ROLES 			= "platform:/resource/org.emftext.language.refactoring.roles/metamodel/roles.ecore";
+	private static final String MM_REFSPEC 			= "platform:/resource/org.emftext.language.refactoring.specification/metamodel/refactoring_specification.ecore";
+	private static final String MM_ROLEMAPPING 		= "platform:/resource/org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.ecore";
+	private static final String MM_CONFERENCE 		= "platform:/resource/org.emftext.language.conference/metamodel/conference.ecore";
+	private static final String MM_OFFICE 			= "platform:/resource/org.emftext.language.office/metamodel/office.ecore";
+	private static final String MM_SIMPLEGUI 		= "platform:/resource/org.emftext.language.simplegui/metamodel/simplegui.ecore";
+	private static final String MM_SANDWICH 		= "platform:/resource/org.emftext.language.sandwich/metamodel/sandwich_simple.ecore";
+	private static final String MM_BPMN 			= "http://stp.eclipse.org/bpmn";
+	
+	
 
 	private static final String[] rolemodelURIs = new String[] { 
 		RM_EXTRACT_X
@@ -95,12 +111,22 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	};
 
 	private static final String[] metamodelURIs = new String[] { 
-//		MM_APPFLOW
-		MM_TESTMM
+		MM_APPFLOW
+		,MM_TESTMM
 		,MM_PL0
 		,MM_FORMS
 		,MM_TEXTADVENTURE
 		,MM_JAVA
+		,MM_FEATURE
+		,MM_TA
+		,MM_OWL
+		,MM_ROLES
+		,MM_REFSPEC
+		,MM_ROLEMAPPING
+		,MM_CONFERENCE
+		,MM_OFFICE
+		,MM_SIMPLEGUI
+		,MM_SANDWICH
 	};
 
 	private static Map<String, RoleModel> rolemodels;
@@ -119,6 +145,10 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		metamodels.put(MM_ECORE, ecoreMetamodel);
 		EPackage umlMetamodel = initArchiveMetamodel("/model/UML.ecore", MM_UML, Class.class);
 		metamodels.put(MM_UML, umlMetamodel);
+		EPackage csMetamodel = initArchiveMetamodel("/metamodel/concretesyntax.ecore", MM_CS, ConcreteSyntax.class);
+		metamodels.put(MM_CS, csMetamodel);
+		EPackage bpmnMetamodel = initArchiveMetamodel("/model/bpmn.ecore", MM_BPMN, SubProcess.class);
+		metamodels.put(MM_BPMN, bpmnMetamodel);
 	}
 
 	@Before
@@ -309,7 +339,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private void addFileWriterListener(RoleModel rolemodel, EPackage metamodel, RoleNode root) {
 		File hudsonDir = new File(HUDSON_RESULTS_DIR);
 		File file = null;
-		String fileName = MAPPING_FILE + "_" + metamodel.getNsPrefix() + "_" + rolemodel.getName() + "_" + System.currentTimeMillis() + FILE_EXT;
+		String fileName = MAPPING_FILE + "_" + metamodel.getName() + "_" + rolemodel.getName() + "_" + System.currentTimeMillis() + FILE_EXT;
 		if(hudsonDir.exists() && hudsonDir.isDirectory()){
 			File matchingDir = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS);
 			if(!matchingDir.exists()){
@@ -318,6 +348,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 				} else {
 					file = new File(HUDSON_RESULTS_DIR + fileName);
 				}
+			} else {
+				file = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS + fileName);
 			}
 		} else {
 			file = new File(RESULTS_DIR + fileName);
