@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.net.URL;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -30,7 +31,7 @@ public class RolemodelMatchingInitialization {
 	private static final String TEXT_ECORE_EXT 	= ".text.ecore";
 	
 	protected static void registerMetamodel(String nsUri, EPackage metamodel, String ext, Factory factory) {
-		EPackage.Registry.INSTANCE.put(nsUri, metamodel);
+		registerPackage(metamodel);
 		Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
 		extensionToFactoryMap.put(ext, factory);
 	}
@@ -83,11 +84,21 @@ public class RolemodelMatchingInitialization {
 			Resource resource = getResourceFromURI(metamodelURI);
 			EObject model = resource.getContents().get(0);
 			assertTrue(model + " is not a Ecore metamodel", model instanceof EPackage);
+			registerPackage((EPackage) model);
 			metamodels.put(metamodelURI, (EPackage) model);
 		}
 		return metamodels;
 	}
 	
+	private static void registerPackage(EPackage rootPackage) {
+		String nsUri = rootPackage.getNsURI();
+		EPackage.Registry.INSTANCE.put(nsUri, rootPackage);
+		List<EPackage> subpackages = rootPackage.getESubpackages();
+		for (EPackage subPackage : subpackages) {
+			registerPackage(subPackage);
+		}
+	}
+
 	protected static EPackage initArchiveMetamodel(String pathString, String nsURI, Class<?> clazz){
 		URL classResource = clazz.getResource(pathString);
 		String path = classResource.getFile();

@@ -97,7 +97,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private static Map<String, EPackage> metamodels;
 
 	private List<EClass> currentMetaClasses;
-	private Map<RoleModel, List<EObject>> linearRoleModels;
+	private Map<RoleModel, List<List<EObject>>> linearRoleModels;
 
 	@BeforeClass
 	public static void initialization() {
@@ -152,18 +152,16 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToJava(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_JAVA), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXtoUML(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_UML), false);
 	}
 
-	private List<EObject> linearizeRoleModel(RoleModel roleModel){
+	private List<List<EObject>> linearizeRoleModel(RoleModel roleModel){
 		LinkedList<EObject> linearization = new LinkedList<EObject>();
 		List<Role> roles = roleModel.getRoles();
 		List<List<EObject>> pathes = new LinkedList<List<EObject>>();
@@ -189,20 +187,21 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 				}
 			}
 		}
-		return linearization;
+		return getLinearRoleModelsWithoutOptional(roleModel, linearization);
 	}
 
 	@Test
-	@Ignore
 	public void linearizeRoleModels() {
-		linearRoleModels = new LinkedHashMap<RoleModel, List<EObject>>();
+		linearRoleModels = new LinkedHashMap<RoleModel, List<List<EObject>>>();
 		for (RoleModel roleModel : rolemodels.values()) {
-			List<EObject> linearization = linearizeRoleModel(roleModel);
-			linearRoleModels.put(roleModel, linearization);
+			List<List<EObject>> linearizations = linearizeRoleModel(roleModel);
+			linearRoleModels.put(roleModel, linearizations);
 		}
 		for (RoleModel roleModel : rolemodels.values()) {
-			List<EObject> linearization = linearRoleModels.get(roleModel);
-			printLinearization(roleModel, linearization);
+			List<List<EObject>> linearizations = linearRoleModels.get(roleModel);
+			for (List<EObject> linearization : linearizations) {
+				printLinearization(roleModel, linearization);
+			}
 		}
 	}
 
@@ -282,8 +281,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		root.addListener(incompletePathListener);
 		root.setMetamodel(metamodel);
 		root.setRolemodel(rolemodel);
-		List<EObject> linearRolemodel = linearizeRoleModel(rolemodel);
-		List<List<EObject>> linearRolemodelsWithoutOptionals = getLinearRoleModelsWithoutOptional(rolemodel, linearRolemodel);
+		List<List<EObject>> linearRolemodelsWithoutOptionals = linearizeRoleModel(rolemodel);
 		//		for (List<EObject> linearRoleModelWithoutOptionals : linearRolemodelsWithoutOptionals) {
 		//			printLinearization(rolemodel, linearRoleModelWithoutOptionals);
 		//		}
@@ -321,8 +319,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 							EcoreUtil.delete(copier.get(collaboration));
 						}
 					}
-					List<EObject> linearRolemodelWithoutOptionals = linearizeRoleModel(copiedRoleModel);
-					linearRolemodelsWithoutOptional.add(linearRolemodelWithoutOptionals);
+					List<List<EObject>> linearRolemodelWithoutOptionals = linearizeRoleModel(copiedRoleModel);
+					linearRolemodelsWithoutOptional.addAll(linearRolemodelWithoutOptionals);
 				}
 			}
 		}
@@ -330,13 +328,13 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 	@Test
-	@Ignore
 	public void matchAllRoleModelsInAllMetamodels() {
-		linearizeRoleModels();
 		for (EPackage metamodel : metamodels.values()) {
+			currentMetaClasses = collectClasses(metamodel);
 			for (RoleModel rolemodel : rolemodels.values()) {
 				matchRoleModelInMetamodel(rolemodel, metamodel, false);
 			}
+			System.err.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
 	}
 
@@ -362,7 +360,9 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 				EReference reference = ((CollaborationNode) parent).getMetaElement();
 				if (reference.getEType() instanceof EClass) {
 					EClass targetClass = (EClass) reference.getEType();
-					List<EClass> classes = getSubClasses(currentMetaClasses, targetClass);
+//					List<EClass> classes = getSubClasses(currentMetaClasses, targetClass);
+					List<EClass> classes = new LinkedList<EClass>();
+					classes.add(targetClass);
 					boolean mappable = false;
 					for (EClass clazz : classes) {
 						List<RoleAttribute> roleAttributes = role.getAttributes();
@@ -481,7 +481,6 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 				subClasses.add(eClass);
 			}
 		}
-		subClasses.add(clazz);
 		return subClasses;
 	}
 
