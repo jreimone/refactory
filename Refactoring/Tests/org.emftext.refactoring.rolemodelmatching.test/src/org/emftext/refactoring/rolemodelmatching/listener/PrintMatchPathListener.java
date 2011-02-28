@@ -16,10 +16,12 @@ public class PrintMatchPathListener extends AbstractNodeListener {
 
 	public void execute(MatchNode<?, ?> node) {
 		leaf = node;
-		printPath();
+		StringBuffer printPath = printPath(leaf);
+		System.out.println(printPath.toString());
 	}
 
-	private void printPath(){
+	protected StringBuffer printPath(MatchNode<?, ?> leaf){
+		StringBuffer print = new StringBuffer();
 		List<MatchNode<?, ?>> matchPath = new LinkedList<MatchNode<?, ?>>();
 		MatchNode<?, ?> node = leaf;
 		while (node != null && node.getMetaElement() != null
@@ -31,12 +33,14 @@ public class PrintMatchPathListener extends AbstractNodeListener {
 		int count = 0;
 		count++;
 		for (MatchNode<?, ?> matchNode : matchPath) {
-			printNode(matchNode);
+			print.append(printNode(matchNode) + "\t");
 		}
-		System.out.println("******************************************");
+		print.append("\n");
+		return print;
 	}
 
-	private void printNode(MatchNode<?, ?> matchNode) {
+	protected StringBuffer printNode(MatchNode<?, ?> matchNode) {
+		StringBuffer node = new StringBuffer();
 		EObject roleElement = matchNode.getRoleElement();
 		String roleString = "";
 		if (roleElement instanceof Role) {
@@ -49,7 +53,8 @@ public class PrintMatchPathListener extends AbstractNodeListener {
 		if (metaElement instanceof ENamedElement) {
 			metaString = ((ENamedElement) metaElement).getName();
 		}
-		System.out.println(roleString + " --> " + metaString);
+		node.append(roleString + " --> " + metaString);
+		return node;
 	}
 	
 }
