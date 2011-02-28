@@ -59,6 +59,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private static final String FILE_EXT			= ".txt";
 	private static final String RESULTS_DIR			= "test_results/";
 	private static final String HUDSON_RESULTS_DIR 	= "/home/hudson/build_server/build_workdir/" + RESULTS_DIR;
+	private static final String MATCHING_RESULTS	= "matching_results/";
 
 	// Rolemodels
 	private static final String RM_RENAME_X 						= "platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext";
@@ -94,8 +95,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	};
 
 	private static final String[] metamodelURIs = new String[] { 
-		MM_APPFLOW
-		,MM_TESTMM
+//		MM_APPFLOW
+		MM_TESTMM
 		,MM_PL0
 		,MM_FORMS
 		,MM_TEXTADVENTURE
@@ -162,6 +163,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 	@Test
+	@Ignore
 	public void matchExtractXwithReferenceClassToAppflow(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_APPFLOW), false);
 	}
@@ -295,11 +297,28 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		RemoveIncompletePathListener incompletePathListener = new RemoveIncompletePathListener(incompleteCount, rolemodel, metamodel);
 		root.addListener(incompletePathListener);
 
+		addFileWriterListener(rolemodel, metamodel, root);
+		root.setMetamodel(metamodel);
+		root.setRolemodel(rolemodel);
+		List<List<EObject>> linearRolemodelsWithoutOptionals = linearizeRoleModel(rolemodel);
+		match(linearRolemodelsWithoutOptionals, metamodel, root);
+		matchCountListener.printCount();
+		incompletePathListener.printIncompleteRemovals();
+	}
+
+	private void addFileWriterListener(RoleModel rolemodel, EPackage metamodel, RoleNode root) {
 		File hudsonDir = new File(HUDSON_RESULTS_DIR);
 		File file = null;
 		String fileName = MAPPING_FILE + "_" + metamodel.getNsPrefix() + "_" + rolemodel.getName() + "_" + System.currentTimeMillis() + FILE_EXT;
 		if(hudsonDir.exists() && hudsonDir.isDirectory()){
-			file = new File(HUDSON_RESULTS_DIR + RESULTS_DIR + fileName);
+			File matchingDir = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS);
+			if(!matchingDir.exists()){
+				if(matchingDir.mkdir()){
+					file = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS + fileName);
+				} else {
+					file = new File(HUDSON_RESULTS_DIR + fileName);
+				}
+			}
 		} else {
 			file = new File(RESULTS_DIR + fileName);
 		}
@@ -312,15 +331,6 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		root.setMetamodel(metamodel);
-		root.setRolemodel(rolemodel);
-		List<List<EObject>> linearRolemodelsWithoutOptionals = linearizeRoleModel(rolemodel);
-		//		for (List<EObject> linearRoleModelWithoutOptionals : linearRolemodelsWithoutOptionals) {
-		//			printLinearization(rolemodel, linearRoleModelWithoutOptionals);
-		//		}
-		match(linearRolemodelsWithoutOptionals, metamodel, root);
-		matchCountListener.printCount();
-		incompletePathListener.printIncompleteRemovals();
 	}
 
 	private List<List<EObject>> getLinearRoleModelsWithoutOptional(RoleModel rolemodel, List<EObject> linearRolemodel) {
