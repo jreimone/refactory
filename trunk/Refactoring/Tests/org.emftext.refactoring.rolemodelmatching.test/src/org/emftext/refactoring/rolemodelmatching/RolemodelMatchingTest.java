@@ -2,6 +2,8 @@ package org.emftext.refactoring.rolemodelmatching;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
@@ -32,11 +34,13 @@ import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.rolemodelmatching.combinatory.CombinationGenerator;
+import org.emftext.refactoring.rolemodelmatching.listener.FilePrinterListener;
 import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
 import org.emftext.refactoring.rolemodelmatching.listener.MatchCountListener;
 import org.emftext.refactoring.rolemodelmatching.listener.PrintMatchPathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveCompletePathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveIncompletePathListener;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -50,6 +54,11 @@ import org.junit.Test;
  * 
  */
 public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
+
+	private static final String MAPPING_FILE 		= "mappings";
+	private static final String FILE_EXT			= ".txt";
+	private static final String RESULTS_DIR			= "test_results/";
+	private static final String HUDSON_RESULTS_DIR 	= "/home/hudson/build_server/build_workdir/" + RESULTS_DIR;
 
 	// Rolemodels
 	private static final String RM_RENAME_X 						= "platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext";
@@ -97,6 +106,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private static Map<String, EPackage> metamodels;
 
 	private List<EClass> currentMetaClasses;
+	private Map<EClass, List<EClass>> subClassesCache;
 	private Map<RoleModel, List<List<EObject>>> linearRoleModels;
 
 	@BeforeClass
@@ -108,6 +118,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		metamodels.put(MM_ECORE, ecoreMetamodel);
 		EPackage umlMetamodel = initArchiveMetamodel("/model/UML.ecore", MM_UML, Class.class);
 		metamodels.put(MM_UML, umlMetamodel);
+	}
+
+	@Before
+	public void cacheInitialization(){
+		subClassesCache = Collections.synchronizedMap(new LinkedHashMap<EClass, List<EClass>>());
 	}
 
 	@Test
@@ -269,8 +284,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	 */
 	private void matchRoleModelInMetamodel(RoleModel rolemodel, EPackage metamodel, boolean print){
 		RoleNode root = new RoleNode(null);
-		//		INodeListener printMatchPathListener = new PrintMatchPathListener();
-		//		root.addListener(printMatchPathListener);
+		//				INodeListener printMatchPathListener = new PrintMatchPathListener();
+		//				root.addListener(printMatchPathListener);
 		AtomicInteger count = new AtomicInteger();
 		MatchCountListener matchCountListener = new MatchCountListener(count, rolemodel, metamodel);
 		root.addListener(matchCountListener);
@@ -279,6 +294,24 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		AtomicInteger incompleteCount = new AtomicInteger();
 		RemoveIncompletePathListener incompletePathListener = new RemoveIncompletePathListener(incompleteCount, rolemodel, metamodel);
 		root.addListener(incompletePathListener);
+
+		File hudsonDir = new File(HUDSON_RESULTS_DIR);
+		File file = null;
+		String fileName = MAPPING_FILE + "_" + metamodel.getNsPrefix() + "_" + rolemodel.getName() + "_" + System.currentTimeMillis() + FILE_EXT;
+		if(hudsonDir.exists() && hudsonDir.isDirectory()){
+			file = new File(HUDSON_RESULTS_DIR + RESULTS_DIR + fileName);
+		} else {
+			file = new File(RESULTS_DIR + fileName);
+		}
+		try {
+			if(file.createNewFile()){
+				FileWriter writer = new FileWriter(file);
+				FilePrinterListener filePrinter = new FilePrinterListener(writer);
+				root.addListener(filePrinter);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		root.setMetamodel(metamodel);
 		root.setRolemodel(rolemodel);
 		List<List<EObject>> linearRolemodelsWithoutOptionals = linearizeRoleModel(rolemodel);
@@ -360,7 +393,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 				EReference reference = ((CollaborationNode) parent).getMetaElement();
 				if (reference.getEType() instanceof EClass) {
 					EClass targetClass = (EClass) reference.getEType();
-//					List<EClass> classes = getSubClasses(currentMetaClasses, targetClass);
+					//					List<EClass> classes = getSubClasses(currentMetaClasses, targetClass);
 					List<EClass> classes = new LinkedList<EClass>();
 					classes.add(targetClass);
 					boolean mappable = false;
@@ -473,14 +506,19 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 
-
-	private List<EClass> getSubClasses(List<EClass> classes, EClass clazz) {
+	private synchronized List<EClass> getSubClasses(List<EClass> classes, EClass clazz) {
 		List<EClass> subClasses = new LinkedList<EClass>();
-		for (EClass eClass : classes) {
+		//		List<EClass> subClasses = subClassesCache.get(clazz);
+		//		if(subClasses == null){
+		subClasses = new LinkedList<EClass>();
+		//			subClassesCache.put(clazz, subClasses);
+		for (int i = 0; i < classes.size(); i++) {
+			EClass eClass = classes.get(i);
 			if (eClass.getEAllSuperTypes().contains(clazz)) {
 				subClasses.add(eClass);
 			}
 		}
+		//		}
 		return subClasses;
 	}
 
