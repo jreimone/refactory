@@ -62,7 +62,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private static final String FILE_EXT			= ".txt";
 	private static final String RESULTS_DIR			= "test_results/";
 	private static final String HUDSON_RESULTS_DIR 	= "/home/hudson/build_server/build_workdir/" + RESULTS_DIR;
-	private static final String MATCHING_RESULTS	= "matching_results/";
+	private static final String MATCHING_RESULTS	= "results-org_emftext_refactoring_rolemodelmatching_test/matching_results/";
 
 	// Rolemodels
 	private static final String RM_RENAME_X 						= "platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext";
