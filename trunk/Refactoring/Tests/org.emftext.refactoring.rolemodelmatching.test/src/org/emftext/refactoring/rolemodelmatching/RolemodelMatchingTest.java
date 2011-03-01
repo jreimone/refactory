@@ -83,7 +83,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private static final String MM_PL0 				= "platform:/resource/org.emftext.language.pl0/metamodel/pl0.ecore";
 	private static final String MM_TESTMM 			= "platform:/resource/org.emftext.refactoring.rolematching.testmm/metamodel/testmm.ecore";
 	private static final String MM_APPFLOW 			= "platform:/resource/org.emftext.language.appflow/metamodel/appflow.text.ecore";
-	private static final String MM_CS 				= "http://www.emftext.org/sdk/concretesyntax";
+	private static final String MM_CS 				= "platform:/resource/org.emftext.sdk.concretesyntax/metamodel/concretesyntax.ecore";
 	private static final String MM_FEATURE 			= "platform:/resource/org.featuremapper.models.feature/model/feature.ecore";
 	private static final String MM_TA 				= "platform:/resource/org.emftext.language.timedautomata/metamodel/timedAutomata.ecore";
 	private static final String MM_OWL 				= "platform:/resource/org.emftext.language.owl/metamodel/owl.text.ecore";
@@ -127,6 +127,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		,MM_OFFICE
 		,MM_SIMPLEGUI
 		,MM_SANDWICH
+		,MM_CS
 	};
 
 	private static Map<String, RoleModel> rolemodels;
@@ -143,7 +144,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		metamodels = initMetamodels(metamodelURIs);
 		initAndRegisterArchiveMetamodel("/model/Ecore.ecore", MM_ECORE, EClass.class, metamodels);
 		initAndRegisterArchiveMetamodel("/model/UML.ecore", MM_UML, Class.class, metamodels);
-		initAndRegisterArchiveMetamodel("/metamodel/concretesyntax.ecore", MM_CS, ConcreteSyntax.class, metamodels);
+//		initAndRegisterArchiveMetamodel("/metamodel/concretesyntax.ecore", MM_CS, ConcreteSyntax.class, metamodels);
 		initAndRegisterArchiveMetamodel("/model/bpmn.ecore", MM_BPMN, SubProcess.class, metamodels);
 	}
 
