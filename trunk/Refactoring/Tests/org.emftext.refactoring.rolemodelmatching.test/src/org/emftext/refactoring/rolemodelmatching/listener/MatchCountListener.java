@@ -24,7 +24,7 @@ public class MatchCountListener extends AbstractNodeListener {
 	}
 
 	public void printCount(){
-		System.err.println(rolemodel.getName() + " --> " + metamodel.getNsURI() + " mapped: " + count.get());
+		System.out.println(rolemodel.getName() + " --> " + metamodel.getNsURI() + " mapped: " + count.get());
 	}
 	
 	public AtomicInteger getCount(){
