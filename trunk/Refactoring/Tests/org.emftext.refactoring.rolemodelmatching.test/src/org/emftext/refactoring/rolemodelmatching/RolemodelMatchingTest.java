@@ -111,8 +111,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	};
 
 	private static final String[] metamodelURIs = new String[] { 
-		MM_APPFLOW
-		,MM_TESTMM
+//		MM_APPFLOW
+		MM_TESTMM
 		,MM_PL0
 		,MM_FORMS
 		,MM_TEXTADVENTURE
