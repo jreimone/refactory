@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+Created-By: 10.0-b23 (Sun Microsystems Inc.)
+Bundle-ManifestVersion: 2
+Bundle-Name: FeatureMapper Feature Metamodel Plug-In
+Bundle-SymbolicName: org.featuremapper.models.feature; singleton:=true
+Bundle-Version: 0.8.6.201003051400
+Bundle-ClassPath: .
+Bundle-Vendor: Software Technology Group - Technische Universität Dre
+ sden, Germany
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
+ ity:=reexport,org.eclipse.emf.query,org.eclipse.emf.query.ocl,org.ecl
+ ipse.emf.ecore.xmi
+ExecutionEnvironment: J2SE-1.5
+Export-Package: org.featuremapper.models.feature,org.featuremapper.mod
+ els.feature.impl,org.featuremapper.models.feature.util
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Activator: org.featuremapper.models.feature.FeatureModelPlugin$
+ Implementation
+Bundle-ActivationPolicy: lazy
+
