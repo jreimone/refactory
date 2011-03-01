@@ -99,15 +99,19 @@ public class RolemodelMatchingInitialization {
 		}
 	}
 
-	protected static EPackage initArchiveMetamodel(String pathString, String nsURI, Class<?> clazz){
+	protected static void initAndRegisterArchiveMetamodel(String pathString, String nsURI, Class<?> clazz, Map<String, EPackage> metamodels){
 		URL classResource = clazz.getResource(pathString);
+		assertNotNull("Path '" + pathString + "' could not be found in class '" + clazz.getName() + "'", classResource);
 		String path = classResource.getFile();
 		path = path.replace("file:/", "archive:file:/");
 		URI metamodelUri = URI.createURI(path);
+		assertNotNull("URI of path '" + path + "' mustn't be null", metamodelUri);
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.getResource(metamodelUri, true);
+		assertNotNull("Resource for URI '" + metamodelUri +"' mustn't be null", resource);
+		assertTrue("First element in resource '" + resource + "' must be an EPackage", resource.getContents().get(0) instanceof EPackage);
 		EPackage metamodel = (EPackage) resource.getContents().get(0);
-		return metamodel;
+		metamodels.put(nsURI, metamodel);
 	}
 
 	private static void registerTextEcoreLanguage() {
