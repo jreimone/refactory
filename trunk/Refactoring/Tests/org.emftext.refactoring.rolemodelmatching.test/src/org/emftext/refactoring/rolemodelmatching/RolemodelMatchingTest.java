@@ -141,14 +141,10 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		registerTestingRootAsPlatformRoot();
 		rolemodels = initRoleModels(rolemodelURIs);
 		metamodels = initMetamodels(metamodelURIs);
-		EPackage ecoreMetamodel = initArchiveMetamodel("/model/Ecore.ecore", MM_ECORE, EClass.class);
-		metamodels.put(MM_ECORE, ecoreMetamodel);
-		EPackage umlMetamodel = initArchiveMetamodel("/model/UML.ecore", MM_UML, Class.class);
-		metamodels.put(MM_UML, umlMetamodel);
-		EPackage csMetamodel = initArchiveMetamodel("/metamodel/concretesyntax.ecore", MM_CS, ConcreteSyntax.class);
-		metamodels.put(MM_CS, csMetamodel);
-		EPackage bpmnMetamodel = initArchiveMetamodel("/model/bpmn.ecore", MM_BPMN, SubProcess.class);
-		metamodels.put(MM_BPMN, bpmnMetamodel);
+		initAndRegisterArchiveMetamodel("/model/Ecore.ecore", MM_ECORE, EClass.class, metamodels);
+		initAndRegisterArchiveMetamodel("/model/UML.ecore", MM_UML, Class.class, metamodels);
+		initAndRegisterArchiveMetamodel("/metamodel/concretesyntax.ecore", MM_CS, ConcreteSyntax.class, metamodels);
+		initAndRegisterArchiveMetamodel("/model/bpmn.ecore", MM_BPMN, SubProcess.class, metamodels);
 	}
 
 	@Before
