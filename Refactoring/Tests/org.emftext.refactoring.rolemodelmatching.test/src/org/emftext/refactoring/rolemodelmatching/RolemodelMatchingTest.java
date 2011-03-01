@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
@@ -336,7 +337,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private void addFileWriterListener(RoleModel rolemodel, EPackage metamodel, RoleNode root) {
 		File hudsonDir = new File(HUDSON_RESULTS_DIR);
 		File file = null;
-		String fileName = MAPPING_FILE + "_" + metamodel.getName() + "_" + rolemodel.getName() + "_" + System.currentTimeMillis() + FILE_EXT;
+		final String prefix = MAPPING_FILE + "_" + metamodel.getName() + "_" + rolemodel.getName() + "_";
+		final String fileName = prefix + System.currentTimeMillis() + FILE_EXT;
 		if(hudsonDir.exists() && hudsonDir.isDirectory()){
 			File matchingDir = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS);
 			if(!matchingDir.exists()){
@@ -353,6 +355,19 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		}
 		try {
 			if(file.createNewFile()){
+				File parentFolder = file.getParentFile();
+				File[] files = parentFolder.listFiles(new FilenameFilter() {
+					
+					public boolean accept(File dir, String name) {
+						if(name.startsWith(prefix) && !name.equals(fileName)){
+							return true;
+						}
+						return false;
+					}
+				});
+				for (File fileToDelete : files) {
+					fileToDelete.delete();
+				}
 				FileWriter writer = new FileWriter(file);
 				FilePrinterListener filePrinter = new FilePrinterListener(writer);
 				root.addListener(filePrinter);
