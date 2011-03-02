@@ -337,8 +337,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private void addFileWriterListener(RoleModel rolemodel, EPackage metamodel, RoleNode root) {
 		File hudsonDir = new File(HUDSON_RESULTS_DIR);
 		File file = null;
-		final String prefix = MAPPING_FILE + "_" + metamodel.getName() + "_" + rolemodel.getName() + "_";
-		final String fileName = prefix + System.currentTimeMillis() + FILE_EXT;
+		final String prefix = MAPPING_FILE + "_" + metamodel.getName() + "_" + rolemodel.getName();
+		final String fileName = prefix + FILE_EXT;
 		if(hudsonDir.exists() && hudsonDir.isDirectory()){
 			File matchingDir = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS);
 			if(!matchingDir.exists()){
@@ -421,7 +421,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 			for (RoleModel rolemodel : rolemodels.values()) {
 				matchRoleModelInMetamodel(rolemodel, metamodel, false);
 			}
-			System.err.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
 	}
 
