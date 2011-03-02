@@ -63,11 +63,12 @@ import org.junit.Test;
  */
 public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
-	private static final String MAPPING_FILE 		= "mappings";
-	private static final String FILE_EXT			= ".txt";
-	private static final String RESULTS_DIR			= "test_results/";
-	private static final String HUDSON_RESULTS_DIR 	= "/home/hudson/build_server/build_workdir/" + RESULTS_DIR;
-	private static final String MATCHING_RESULTS	= "results-org.emftext.refactoring.rolemodelmatching.test/matching_results/";
+	private static final String MAPPING_FILE 			= "mappings";
+	private static final String FILE_EXT				= ".txt";
+	private static final String RESULTS_DIR				= "test_results/";
+	private static final String HUDSON_RESULTS_DIR 		= "/home/hudson/build_server/build_workdir/" + RESULTS_DIR;
+	private static final String MATCHING_RESULTS_ROOT 	= "results-org.emftext.refactoring.rolemodelmatching.test/";
+	private static final String MATCHING_RESULTS		= "matching_results/";
 
 	// Rolemodels
 	private static final String RM_RENAME_X 						= "platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext";
@@ -376,16 +377,28 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		final String prefix = MAPPING_FILE + "_" + metamodel.getName() + "_" + rolemodel.getName();
 		final String fileName = prefix + FILE_EXT;
 		if(hudsonDir.exists() && hudsonDir.isDirectory()){
-			File matchingDir = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS);
-			if(!matchingDir.exists()){
-				if(matchingDir.mkdir()){
-					file = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS + fileName);
+			String path = "";
+			File matchingDirRoot = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS_ROOT);
+			if(!matchingDirRoot.exists()){
+				if(matchingDirRoot.mkdir()){
+					path += HUDSON_RESULTS_DIR + MATCHING_RESULTS_ROOT;
 				} else {
-					file = new File(HUDSON_RESULTS_DIR + fileName);
+					path += HUDSON_RESULTS_DIR;
 				}
 			} else {
-				file = new File(HUDSON_RESULTS_DIR + MATCHING_RESULTS + fileName);
+				path += HUDSON_RESULTS_DIR + MATCHING_RESULTS_ROOT;
 			}
+			File matchingDir = new File(path + MATCHING_RESULTS);
+			if(!matchingDir.exists()){
+				if(matchingDir.mkdir()){
+					path += MATCHING_RESULTS + fileName;
+				} else {
+					path += fileName;
+				}
+			} else {
+				path += MATCHING_RESULTS + fileName;
+			}
+			file = new File(path);
 		} else {
 			file = new File(RESULTS_DIR + fileName);
 		}
