@@ -36,6 +36,7 @@ import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.rolemodelmatching.combinatory.CombinationGenerator;
+import org.emftext.refactoring.rolemodelmatching.listener.EqualityCheckListener;
 import org.emftext.refactoring.rolemodelmatching.listener.FilePrinterListener;
 import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
 import org.emftext.refactoring.rolemodelmatching.listener.MatchCountListener;
@@ -324,8 +325,10 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		AtomicInteger incompleteCount = new AtomicInteger();
 		RemoveIncompletePathListener incompletePathListener = new RemoveIncompletePathListener(incompleteCount, rolemodel, metamodel);
 		root.addListener(incompletePathListener);
-
 		addFileWriterListener(rolemodel, metamodel, root);
+		Set<MatchNode<?, ?>> nodeSet = new LinkedHashSet<MatchNode<?,?>>();
+		INodeListener equalityChecker = new EqualityCheckListener(nodeSet);
+		root.addListener(equalityChecker);
 		root.setMetamodel(metamodel);
 		root.setRolemodel(rolemodel);
 		List<List<EObject>> linearRolemodelsWithoutOptionals = linearizeRoleModel(rolemodel);
@@ -635,7 +638,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		c23.setRoleElement(roleModel.getRoles().get(1));
 		c23.setMetaElement((EClass)metamodel.getEClassifiers().get(1));
 
-		assertTrue("both trees should be the same", c13.equals(c23));
+		assertTrue("both trees should be equal", c13.equals(c23));
 
 		Set<MatchNode<?, ?>> hashSet = new LinkedHashSet<MatchNode<?,?>>();
 		hashSet.add(c13);
@@ -654,8 +657,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		c33.setRoleElement(roleModel.getRoles().get(2));
 		c33.setMetaElement((EClass)metamodel.getEClassifiers().get(1));
 
-		assertFalse("both trees should not be the same", c13.equals(c33));
-		assertFalse("both trees should not be the same", c23.equals(c33));
+		assertFalse("both trees should not be equal", c13.equals(c33));
+		assertFalse("both trees should not be equal", c23.equals(c33));
 
 		hashSet.add(c13);
 		assertTrue("should not have been added", hashSet.add(c33));
