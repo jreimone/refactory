@@ -22,6 +22,14 @@ public class FilterMappingListener extends AbstractNodeListener {
 	private RoleModel rolemodel;
 	private EPackage metamodel;
 	
+	public RoleModel getRolemodel() {
+		return rolemodel;
+	}
+
+	public EPackage getMetamodel() {
+		return metamodel;
+	}
+
 	public FilterMappingListener(RoleNode filterMapping, AtomicInteger filterCount, RoleModel rolemodel, EPackage metamodel) {
 		super();
 		this.filterMapping = filterMapping;
@@ -45,7 +53,14 @@ public class FilterMappingListener extends AbstractNodeListener {
 	}
 
 	public void printFilteredMatches(){
-		System.out.println("\tPre-selected mapping: " + filterMapping.getRoleElement().getName() + " --> " + filterMapping.getMetaElement().getName());
-		System.out.println("\t" + rolemodel.getName() + " --> " + metamodel.getNsURI() + " mapped: " + filterCount.get());
+		StringBuffer buffer = new StringBuffer(getFilteredMatchesString());
+		System.out.println(buffer.toString());
+	}
+
+	public StringBuffer getFilteredMatchesString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(filterMapping.getRoleElement().getName() + " --> " + filterMapping.getMetaElement().getName() + ": ");
+		buffer.append(filterCount.get());
+		return buffer;
 	}
 }

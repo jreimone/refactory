@@ -16,7 +16,9 @@ public abstract class CompositeListener extends AbstractNodeListener {
 		this.otherListeners = otherListeners;
 		for (INodeListener listener : otherListeners) {
 			// to ensure that listeners are not executed twice
-			listener.getSubject().getListener().remove(listener);
+			if(listener.getSubject() != null){
+				listener.getSubject().getListener().remove(listener);
+			}
 		}
 	}
 	
