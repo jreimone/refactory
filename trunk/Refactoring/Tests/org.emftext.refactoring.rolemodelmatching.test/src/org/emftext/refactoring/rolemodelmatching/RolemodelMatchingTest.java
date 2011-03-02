@@ -165,6 +165,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 	@Test
+	public void matchRenameXtoTestmm(){
+		matchRoleModelInMetamodel(rolemodels.get(RM_RENAME_X), metamodels.get(MM_TESTMM), false);
+	}
+	
+	@Test
 	public void matchExtractXtoTestmm(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_TESTMM), false);
 	}
@@ -536,34 +541,39 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 					//					List<EClass> classes = getSubClasses(currentMetaClasses, targetClass);
 					List<EClass> classes = new LinkedList<EClass>();
 					classes.add(targetClass);
-					boolean mappable = false;
-					for (EClass clazz : classes) {
-						List<RoleAttribute> roleAttributes = role.getAttributes();
-						List<EAttribute> classAttributes = clazz.getEAllAttributes();
-						if(roleAttributes.size() == 0 || (roleAttributes.size() > 0 && classAttributes.size() > 0)){
-							mappable = true;
-							RoleNode node = new RoleNode(parent);
-							node.setMetaElement(clazz);
-							node.setRoleElement(role);
-							nextStepAfterMatching(path, metamodel, node);
-						}
-					}
-					if(!mappable){
-						parent.setComplete(false);
-					}
+					matchClassWithAttribute(role, path, metamodel, parent, classes);
 				} else {
 					fail("handle EClassifier!");
 				}
 			} else {
-				for (EClass metaclass : currentMetaClasses) {
-					RoleNode node = new RoleNode(parent);
-					node.setRoleElement(role);
-					node.setMetaElement(metaclass);
-					nextStepAfterMatching(path, metamodel, node);
-				}
+				matchClassWithAttribute(role, path, metamodel, parent, currentMetaClasses);
+//				for (EClass metaclass : currentMetaClasses) {
+//					RoleNode node = new RoleNode(parent);
+//					node.setRoleElement(role);
+//					node.setMetaElement(metaclass);
+//					nextStepAfterMatching(path, metamodel, node);
+//				}
 			}
 		} else {
 			nextStepAfterMatching(path, metamodel, parent);
+		}
+	}
+
+	private void matchClassWithAttribute(Role role, List<EObject> path, EPackage metamodel, MatchNode<?, ?> parent, List<EClass> classes) {
+		boolean mappable = false;
+		for (EClass clazz : classes) {
+			List<RoleAttribute> roleAttributes = role.getAttributes();
+			List<EAttribute> classAttributes = clazz.getEAllAttributes();
+			if(roleAttributes.size() == 0 || (roleAttributes.size() > 0 && classAttributes.size() > 0)){
+				mappable = true;
+				RoleNode node = new RoleNode(parent);
+				node.setMetaElement(clazz);
+				node.setRoleElement(role);
+				nextStepAfterMatching(path, metamodel, node);
+			}
+		}
+		if(!mappable){
+			parent.setComplete(false);
 		}
 	}
 
