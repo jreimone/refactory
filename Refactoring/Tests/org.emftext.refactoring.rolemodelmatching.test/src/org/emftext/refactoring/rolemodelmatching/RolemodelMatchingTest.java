@@ -220,6 +220,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	public void matchExtractXtoUML(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_UML), false);
 	}
+	
+//	@Test
+//	public void matchExtractXwithReferenceClassToUML(){
+//		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_UML), false);
+//	}
 
 	private List<List<EObject>> linearizeRoleModel(RoleModel roleModel){
 		LinkedList<EObject> linearization = new LinkedList<EObject>();
@@ -508,11 +513,13 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	@Test
 	public void matchAllRoleModelsInAllMetamodels() {
 		for (EPackage metamodel : metamodels.values()) {
-			currentMetaClasses = collectClasses(metamodel);
-			for (RoleModel rolemodel : rolemodels.values()) {
-				matchRoleModelInMetamodel(rolemodel, metamodel, false);
+			if(!metamodel.equals(metamodels.get(MM_UML))){
+				currentMetaClasses = collectClasses(metamodel);
+				for (RoleModel rolemodel : rolemodels.values()) {
+					matchRoleModelInMetamodel(rolemodel, metamodel, false);
+				}
+				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			}
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
 	}
 
