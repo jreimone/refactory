@@ -40,13 +40,16 @@ import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.rolemodelmatching.combinatory.CombinationGenerator;
 import org.emftext.refactoring.rolemodelmatching.listener.EqualityCheckListener;
 import org.emftext.refactoring.rolemodelmatching.listener.FilePrinterListener;
+import org.emftext.refactoring.rolemodelmatching.listener.FilterMappingFilePrinterListener;
 import org.emftext.refactoring.rolemodelmatching.listener.FilterMappingListener;
 import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
 import org.emftext.refactoring.rolemodelmatching.listener.LeafCollectorListener;
 import org.emftext.refactoring.rolemodelmatching.listener.MatchCountListener;
+import org.emftext.refactoring.rolemodelmatching.listener.MatchNodeList;
 import org.emftext.refactoring.rolemodelmatching.listener.PrintMatchPathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveCompletePathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveIncompletePathListener;
+import org.emftext.refactoring.rolemodelmatching.listener.ValidMappingListener;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -64,6 +67,7 @@ import org.junit.Test;
 public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
 	private static final String MAPPING_FILE 			= "mappings";
+	private static final String FILTERED_MAPPING_FILE 	= "filtered";
 	private static final String FILE_EXT				= ".txt";
 	private static final String RESULTS_DIR				= "test_results/";
 	private static final String HUDSON_RESULTS_DIR 		= "/home/hudson/build_server/build_workdir/" + RESULTS_DIR;
@@ -102,8 +106,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private static final String MM_SIMPLEGUI 		= "platform:/resource/org.emftext.language.simplegui/metamodel/simplegui.ecore";
 	private static final String MM_SANDWICH 		= "platform:/resource/org.emftext.language.sandwich/metamodel/sandwich_simple.ecore";
 	private static final String MM_BPMN 			= "http://stp.eclipse.org/bpmn";
-	
-	
+
+
 
 	private static final String[] rolemodelURIs = new String[] { 
 		RM_EXTRACT_X
@@ -118,7 +122,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	};
 
 	private static final String[] metamodelURIs = new String[] { 
-//		MM_APPFLOW
+		//		MM_APPFLOW
 		MM_TESTMM
 		,MM_PL0
 		,MM_FORMS
@@ -151,7 +155,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		metamodels = initMetamodels(metamodelURIs);
 		initAndRegisterArchiveMetamodel("/model/Ecore.ecore", MM_ECORE, EClass.class, metamodels);
 		initAndRegisterArchiveMetamodel("/model/UML.ecore", MM_UML, Class.class, metamodels);
-//		initAndRegisterArchiveMetamodel("/metamodel/concretesyntax.ecore", MM_CS, ConcreteSyntax.class, metamodels);
+		//		initAndRegisterArchiveMetamodel("/metamodel/concretesyntax.ecore", MM_CS, ConcreteSyntax.class, metamodels);
 		initAndRegisterArchiveMetamodel("/model/bpmn.ecore", MM_BPMN, SubProcess.class, metamodels);
 	}
 
@@ -333,25 +337,58 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		AtomicInteger incompleteCount = new AtomicInteger();
 		RemoveIncompletePathListener incompletePathListener = new RemoveIncompletePathListener(incompleteCount, rolemodel, metamodel);
 		root.addListener(incompletePathListener);
-		addFileWriterListener(rolemodel, metamodel, root);
+		FileWriter mappingsWriter = getFileWriter(MAPPING_FILE, rolemodel, metamodel);
+		if(mappingsWriter != null){
+			FilePrinterListener filePrinter = new FilePrinterListener(mappingsWriter);
+			root.addListener(filePrinter);
+		}
 		Set<MatchNode<?, ?>> nodeSet = new LinkedHashSet<MatchNode<?,?>>();
 		INodeListener equalityChecker = new EqualityCheckListener(nodeSet);
 		root.addListener(equalityChecker);
-//		List<MatchNode<?, ?>> leafList = new LinkedList<MatchNode<?,?>>();
-//		LeafCollectorListener leafCollector = new LeafCollectorListener(leafList);
-//		root.addListener(leafCollector);
-		AtomicInteger filterCounter = new AtomicInteger();
-		RoleNode filterMapping = determineFilterMapping(rolemodel, metamodel); 
-		FilterMappingListener filterMapper = new FilterMappingListener(filterMapping, filterCounter, rolemodel, metamodel);
-		root.addListener(filterMapper);
-		
+		List<MatchNode<?, ?>> leafList = new LinkedList<MatchNode<?,?>>();
+		LeafCollectorListener leafCollector = new LeafCollectorListener(leafList);
+		root.addListener(leafCollector);
+
+		MatchNodeList validMappings = new MatchNodeList();
+		ValidMappingListener validMappingsListener = new ValidMappingListener(validMappings);
+		root.addListener(validMappingsListener);
+
 		root.setMetamodel(metamodel);
 		root.setRolemodel(rolemodel);
 		List<List<EObject>> linearRolemodelsWithoutOptionals = linearizeRoleModel(rolemodel);
 		match(linearRolemodelsWithoutOptionals, metamodel, root);
 		matchCountListener.printCount();
 		incompletePathListener.printIncompleteRemovals();
-		filterMapper.printFilteredMatches();
+
+		saveFilteredMappings(rolemodel, metamodel, count, leafList, validMappings);
+	}
+
+	private void saveFilteredMappings(RoleModel rolemodel, EPackage metamodel, AtomicInteger count, List<MatchNode<?, ?>> leafList, MatchNodeList validMappings) {
+		FileWriter filteredWriter = getFileWriter(FILTERED_MAPPING_FILE, rolemodel, metamodel);
+		if(filteredWriter != null){
+			try {
+				filteredWriter.append("Pre-selecting mappings for RoleModel '" + rolemodel.getName() + "'\n");
+				filteredWriter.append("and Metamodel '" + metamodel.getName() + "'");
+				filteredWriter.append("\n\n");
+				filteredWriter.flush();
+				for (MatchNode<?, ?> mapping : validMappings) {
+					AtomicInteger filterCounter = new AtomicInteger();
+					if(mapping instanceof RoleNode){
+						RoleNode filterMapping = (RoleNode) mapping;
+						FilterMappingListener filterMapper = new FilterMappingListener(filterMapping, filterCounter, rolemodel, metamodel);
+						FilterMappingFilePrinterListener filterFilePrinter = new FilterMappingFilePrinterListener(filterMapper, count, filteredWriter);
+						for (MatchNode<?, ?> leaf : leafList) {
+							leaf.addListener(filterFilePrinter);
+							filterMapper.execute(leaf);
+						}
+						filterFilePrinter.executeAfterOthers(null);
+					}
+				}
+				filteredWriter.append("*************************");
+			} catch (IOException e) {
+				fail(e.getMessage());
+			}
+		}
 	}
 
 	private RoleNode determineFilterMapping(RoleModel rolemodel, EPackage metamodel) {
@@ -371,10 +408,10 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		return filterMapping;
 	}
 
-	private void addFileWriterListener(RoleModel rolemodel, EPackage metamodel, RoleNode root) {
+	private FileWriter getFileWriter(String fileNamePrefix, RoleModel rolemodel, EPackage metamodel) {
 		File hudsonDir = new File(HUDSON_RESULTS_DIR);
 		File file = null;
-		final String prefix = MAPPING_FILE + "_" + metamodel.getName() + "_" + rolemodel.getName();
+		final String prefix = fileNamePrefix + "_" + metamodel.getName() + "_" + rolemodel.getName();
 		final String fileName = prefix + FILE_EXT;
 		if(hudsonDir.exists() && hudsonDir.isDirectory()){
 			String path = "";
@@ -403,27 +440,27 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 			file = new File(RESULTS_DIR + fileName);
 		}
 		try {
-			if(file.createNewFile()){
-				File parentFolder = file.getParentFile();
-				File[] files = parentFolder.listFiles(new FilenameFilter() {
-					
-					public boolean accept(File dir, String name) {
-						if(name.startsWith(prefix) && !name.equals(fileName)){
-							return true;
-						}
-						return false;
+			File parentFolder = file.getParentFile();
+			File[] files = parentFolder.listFiles(new FilenameFilter() {
+				
+				public boolean accept(File dir, String name) {
+					if(name.equals(fileName)){
+						return true;
 					}
-				});
-				for (File fileToDelete : files) {
-					fileToDelete.delete();
+					return false;
 				}
+			});
+			for (File fileToDelete : files) {
+				fileToDelete.delete();
+			}
+			if(file.createNewFile()){
 				FileWriter writer = new FileWriter(file);
-				FilePrinterListener filePrinter = new FilePrinterListener(writer);
-				root.addListener(filePrinter);
+				return writer;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	private List<List<EObject>> getLinearRoleModelsWithoutOptional(RoleModel rolemodel, List<EObject> linearRolemodel) {
@@ -464,6 +501,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 	@Test
+	@Ignore
 	public void matchAllRoleModelsInAllMetamodels() {
 		for (EPackage metamodel : metamodels.values()) {
 			currentMetaClasses = collectClasses(metamodel);
