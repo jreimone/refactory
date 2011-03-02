@@ -15,9 +15,11 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -38,7 +40,9 @@ import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.rolemodelmatching.combinatory.CombinationGenerator;
 import org.emftext.refactoring.rolemodelmatching.listener.EqualityCheckListener;
 import org.emftext.refactoring.rolemodelmatching.listener.FilePrinterListener;
+import org.emftext.refactoring.rolemodelmatching.listener.FilterMappingListener;
 import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
+import org.emftext.refactoring.rolemodelmatching.listener.LeafCollectorListener;
 import org.emftext.refactoring.rolemodelmatching.listener.MatchCountListener;
 import org.emftext.refactoring.rolemodelmatching.listener.PrintMatchPathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveCompletePathListener;
@@ -63,7 +67,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	private static final String FILE_EXT			= ".txt";
 	private static final String RESULTS_DIR			= "test_results/";
 	private static final String HUDSON_RESULTS_DIR 	= "/home/hudson/build_server/build_workdir/" + RESULTS_DIR;
-	private static final String MATCHING_RESULTS	= "results-org_emftext_refactoring_rolemodelmatching_test/matching_results/";
+	private static final String MATCHING_RESULTS	= "results-org.emftext.refactoring.rolemodelmatching.test/matching_results/";
 
 	// Rolemodels
 	private static final String RM_RENAME_X 						= "platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext";
@@ -332,12 +336,38 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		Set<MatchNode<?, ?>> nodeSet = new LinkedHashSet<MatchNode<?,?>>();
 		INodeListener equalityChecker = new EqualityCheckListener(nodeSet);
 		root.addListener(equalityChecker);
+//		List<MatchNode<?, ?>> leafList = new LinkedList<MatchNode<?,?>>();
+//		LeafCollectorListener leafCollector = new LeafCollectorListener(leafList);
+//		root.addListener(leafCollector);
+		AtomicInteger filterCounter = new AtomicInteger();
+		RoleNode filterMapping = determineFilterMapping(rolemodel, metamodel); 
+		FilterMappingListener filterMapper = new FilterMappingListener(filterMapping, filterCounter, rolemodel, metamodel);
+		root.addListener(filterMapper);
+		
 		root.setMetamodel(metamodel);
 		root.setRolemodel(rolemodel);
 		List<List<EObject>> linearRolemodelsWithoutOptionals = linearizeRoleModel(rolemodel);
 		match(linearRolemodelsWithoutOptionals, metamodel, root);
 		matchCountListener.printCount();
 		incompletePathListener.printIncompleteRemovals();
+		filterMapper.printFilteredMatches();
+	}
+
+	private RoleNode determineFilterMapping(RoleModel rolemodel, EPackage metamodel) {
+		List<Role> roles = rolemodel.getRoles();
+		List<EClass> metaclasses = null;
+		if(currentMetaClasses == null){
+			currentMetaClasses = collectClasses(metamodel);
+		}
+		metaclasses = currentMetaClasses;
+		Random rolesRandomizer = new Random(System.currentTimeMillis());
+		int roleIndex = rolesRandomizer.nextInt(roles.size());
+		Random metaclassesRandomizer = new Random(System.currentTimeMillis());
+		int metaclassIndex = metaclassesRandomizer.nextInt(metaclasses.size());
+		RoleNode filterMapping = new RoleNode(null);
+		filterMapping.setRoleElement(roles.get(roleIndex));
+		filterMapping.setMetaElement(metaclasses.get(metaclassIndex));
+		return filterMapping;
 	}
 
 	private void addFileWriterListener(RoleModel rolemodel, EPackage metamodel, RoleNode root) {

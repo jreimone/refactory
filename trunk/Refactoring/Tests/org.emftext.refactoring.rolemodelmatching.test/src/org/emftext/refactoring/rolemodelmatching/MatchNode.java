@@ -161,6 +161,30 @@ public abstract class MatchNode <RoleModelElement extends EObject, MetaModelElem
 
 	@Override
 	public boolean equals(Object obj) {
+		return equalsPath(obj);
+	}
+
+	public boolean equalsNode(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MatchNode<?,?> other = (MatchNode<?,?>) obj;
+		MatchNode<?,?> current = this;
+		EObject roleElementOther = other.getRoleElement();
+		EObject metaElementOther = other.getMetaElement();
+		if(!EcoreUtil.equals(current.getRoleElement(), roleElementOther)){
+			return false;
+		}
+		if(!EcoreUtil.equals(current.getMetaElement(), metaElementOther)){
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean equalsPath(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
