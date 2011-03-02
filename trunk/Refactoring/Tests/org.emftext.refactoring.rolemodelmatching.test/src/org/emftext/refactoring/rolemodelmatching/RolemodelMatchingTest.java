@@ -168,7 +168,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	public void matchRenameXtoTestmm(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_RENAME_X), metamodels.get(MM_TESTMM), false);
 	}
-	
+
 	@Test
 	public void matchExtractXtoTestmm(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_TESTMM), false);
@@ -220,11 +220,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	public void matchExtractXtoUML(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_UML), false);
 	}
-	
-//	@Test
-//	public void matchExtractXwithReferenceClassToUML(){
-//		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_UML), false);
-//	}
+
+	//	@Test
+	//	public void matchExtractXwithReferenceClassToUML(){
+	//		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_UML), false);
+	//	}
 
 	private List<List<EObject>> linearizeRoleModel(RoleModel roleModel){
 		LinkedList<EObject> linearization = new LinkedList<EObject>();
@@ -452,7 +452,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		try {
 			File parentFolder = file.getParentFile();
 			File[] files = parentFolder.listFiles(new FilenameFilter() {
-				
+
 				public boolean accept(File dir, String name) {
 					if(name.equals(fileName)){
 						return true;
@@ -513,13 +513,13 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	@Test
 	public void matchAllRoleModelsInAllMetamodels() {
 		for (EPackage metamodel : metamodels.values()) {
-			if(!metamodel.equals(metamodels.get(MM_UML))){
-				currentMetaClasses = collectClasses(metamodel);
-				for (RoleModel rolemodel : rolemodels.values()) {
+			currentMetaClasses = collectClasses(metamodel);
+			for (RoleModel rolemodel : rolemodels.values()) {
+				if(!(metamodel.equals(metamodels.get(MM_UML)) && rolemodel.equals(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS)))){
 					matchRoleModelInMetamodel(rolemodel, metamodel, false);
 				}
-				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			}
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
 	}
 
@@ -554,12 +554,12 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 				}
 			} else {
 				matchClassWithAttribute(role, path, metamodel, parent, currentMetaClasses);
-//				for (EClass metaclass : currentMetaClasses) {
-//					RoleNode node = new RoleNode(parent);
-//					node.setRoleElement(role);
-//					node.setMetaElement(metaclass);
-//					nextStepAfterMatching(path, metamodel, node);
-//				}
+				//				for (EClass metaclass : currentMetaClasses) {
+				//					RoleNode node = new RoleNode(parent);
+				//					node.setRoleElement(role);
+				//					node.setMetaElement(metaclass);
+				//					nextStepAfterMatching(path, metamodel, node);
+				//				}
 			}
 		} else {
 			nextStepAfterMatching(path, metamodel, parent);
