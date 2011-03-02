@@ -238,6 +238,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
 	@Test
 	public void linearizeRoleModels() {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("Linearization of RoleModels:");
 		linearRoleModels = new LinkedHashMap<RoleModel, List<List<EObject>>>();
 		for (RoleModel roleModel : rolemodels.values()) {
 			List<List<EObject>> linearizations = linearizeRoleModel(roleModel);
@@ -249,6 +251,7 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 				printLinearization(roleModel, linearization);
 			}
 		}
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	}
 
 	private void printLinearization(RoleModel roleModel, List<EObject> linearization) {
