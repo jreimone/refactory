@@ -501,7 +501,6 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 	@Test
-	@Ignore
 	public void matchAllRoleModelsInAllMetamodels() {
 		for (EPackage metamodel : metamodels.values()) {
 			currentMetaClasses = collectClasses(metamodel);
