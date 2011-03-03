@@ -565,7 +565,8 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 
 	public void matchClassWithAttribute(Role role, List<EObject> path, EPackage metamodel, MatchNode<?, ?> parent, List<EClass> classes) {
 		boolean mappable = false;
-		for (EClass clazz : classes) {
+		List<EClass> classList = new LinkedList<EClass>(classes);
+		for (EClass clazz : classList) {
 			List<RoleAttribute> roleAttributes = role.getAttributes();
 			List<EAttribute> classAttributes = clazz.getEAllAttributes();
 			if(roleAttributes.size() == 0 || (roleAttributes.size() > 0 && classAttributes.size() > 0)){
