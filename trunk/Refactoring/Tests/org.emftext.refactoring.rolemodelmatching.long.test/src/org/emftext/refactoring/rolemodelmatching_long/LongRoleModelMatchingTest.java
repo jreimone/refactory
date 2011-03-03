@@ -3,6 +3,7 @@ package org.emftext.refactoring.rolemodelmatching_long;
 import static org.junit.Assert.fail;
 
 import java.io.FileWriter;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -37,11 +38,10 @@ public class LongRoleModelMatchingTest extends RolemodelMatchingTest{
 	private Map<EClass, List<EClass>> subClassesCache;
 
 	@Before
-	public void initCache(){
+	public void cacheInitialization(){
 		subClassesCache = new LinkedHashMap<EClass, List<EClass>>();
 	}
-
-
+	
 	@BeforeClass
 	public static void initialization() {
 		MATCHING_RESULTS_ROOT = PLUGIN_DIR;
