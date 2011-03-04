@@ -353,9 +353,9 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 			FilePrinterListener filePrinter = new FilePrinterListener(mappingsWriter);
 			root.addListener(filePrinter);
 		}
-		Set<MatchNode<?, ?>> nodeSet = new LinkedHashSet<MatchNode<?,?>>();
-		INodeListener equalityChecker = new EqualityCheckListener(nodeSet);
-		root.addListener(equalityChecker);
+//		Set<MatchNode<?, ?>> nodeSet = new LinkedHashSet<MatchNode<?,?>>();
+//		INodeListener equalityChecker = new EqualityCheckListener(nodeSet);
+//		root.addListener(equalityChecker);
 		List<MatchNode<?, ?>> leafList = new LinkedList<MatchNode<?,?>>();
 		LeafCollectorListener leafCollector = new LeafCollectorListener(leafList);
 		root.addListener(leafCollector);
