@@ -516,9 +516,9 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 		for (EPackage metamodel : metamodels.values()) {
 			currentMetaClasses = collectClasses(metamodel);
 			for (RoleModel rolemodel : rolemodels.values()) {
-				if(!(metamodel.equals(metamodels.get(MM_UML)) && rolemodel.equals(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS)))){
+//				if(!(metamodel.equals(metamodels.get(MM_UML)) && rolemodel.equals(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS)))){
 					matchRoleModelInMetamodel(rolemodel, metamodel, false);
-				}
+//				}
 			}
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
