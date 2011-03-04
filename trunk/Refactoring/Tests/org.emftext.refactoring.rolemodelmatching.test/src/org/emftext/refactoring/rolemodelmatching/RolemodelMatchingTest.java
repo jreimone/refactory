@@ -217,13 +217,11 @@ public class RolemodelMatchingTest extends RolemodelMatchingInitialization {
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXtoUML(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_UML), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToUML(){
 		matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_UML), false);
 	}
