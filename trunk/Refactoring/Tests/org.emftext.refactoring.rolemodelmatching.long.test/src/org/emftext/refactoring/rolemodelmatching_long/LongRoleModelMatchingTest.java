@@ -67,9 +67,9 @@ public class LongRoleModelMatchingTest extends RolemodelMatchingTest{
 			FilePrinterListener filePrinter = new FilePrinterListener(mappingsWriter);
 			root.addListener(filePrinter);
 		}
-		Set<MatchNode<?, ?>> nodeSet = new LinkedHashSet<MatchNode<?,?>>();
-		INodeListener equalityChecker = new EqualityCheckListener(nodeSet);
-		root.addListener(equalityChecker);
+//		Set<MatchNode<?, ?>> nodeSet = new LinkedHashSet<MatchNode<?,?>>();
+//		INodeListener equalityChecker = new EqualityCheckListener(nodeSet);
+//		root.addListener(equalityChecker);
 
 		root.setMetamodel(metamodel);
 		root.setRolemodel(rolemodel);
