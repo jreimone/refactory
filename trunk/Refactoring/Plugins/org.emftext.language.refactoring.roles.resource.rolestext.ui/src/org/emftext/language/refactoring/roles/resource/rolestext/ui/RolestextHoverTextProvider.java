@@ -8,6 +8,7 @@ package org.emftext.language.refactoring.roles.resource.rolestext.ui;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.Commentable;
 import org.emftext.language.refactoring.roles.Role;
@@ -18,12 +19,17 @@ import org.emftext.language.refactoring.roles.RoleImplication;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.language.refactoring.roles.RoleProhibition;
+import org.emftext.language.refactoring.roles.resource.rolestext.IRolestextHoverTextProvider;
 
-public class RolestextHoverTextProvider implements org.emftext.language.refactoring.roles.resource.rolestext.IRolestextHoverTextProvider {
+public class RolestextHoverTextProvider implements IRolestextHoverTextProvider {
 	
-private org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextDefaultHoverTextProvider defaultProvider = new org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextDefaultHoverTextProvider();
-	
-	public java.lang.String getHoverText(org.eclipse.emf.ecore.EObject object) {
+	private RolestextDefaultHoverTextProvider defaultProvider = new RolestextDefaultHoverTextProvider();
+
+	public String getHoverText(EObject container, EObject referencedObject) {
+		return getHoverText(referencedObject);
+	}
+
+	public String getHoverText(EObject object) {
 		if(object instanceof Role){
 			return handleRole((Role) object);
 		} else if(object instanceof RoleAttribute){
