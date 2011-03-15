@@ -6,14 +6,19 @@ import static org.junit.Assert.assertTrue;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * Abstract test case for the Minzinc Generator.
@@ -28,8 +33,12 @@ public class AbstractMinzingTest {
 
 	/** The location of the {@link IModel} used for testing. */
 	protected static final String MODEL_INSTANCE01_NAME = "resources/instances/sequence01.uml";
+	
+	protected static final String CONSTRAINT_FILE = "resources/instances/wfr_sequence.ocl";
 
 	protected static IModel testModel;
+	
+	protected static List<ExpressionInOcl> oclExpressions;
 
 	/**
 	 * <p>
@@ -47,6 +56,16 @@ public class AbstractMinzingTest {
 		testModel = ModelBusPlugin.getMetamodelRegistry()
 				.getMetamodel(EcoreMetamodelPlugin.ID).getModelProvider()
 				.getModel(modelFile);
+		
+		// loading constraint file
+		File contraintFile = getFile(CONSTRAINT_FILE);
+		List<Constraint> constraints = Ocl2ForEclipseFacade.parseConstraints(contraintFile, testModel, false);
+		oclExpressions = new LinkedList<ExpressionInOcl>();
+		for (Constraint constraint : constraints) {
+			assertTrue("constraint must be instanceof ExpressionInOcl", constraint.getSpecification() instanceof ExpressionInOcl);
+			oclExpressions.add((ExpressionInOcl) constraint.getSpecification());
+		}
+//		ExpressionInOcl.getBodyExpression
 	}
 
 	/**
