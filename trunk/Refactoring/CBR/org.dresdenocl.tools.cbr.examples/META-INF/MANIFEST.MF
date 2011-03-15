@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Examples
+Bundle-SymbolicName: org.dresdenocl.tools.cbr.examples
+Bundle-Version: 3.1.0.qualifier
+Bundle-Activator: org.dresdenocl.tools.cbr.examples.Activator
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

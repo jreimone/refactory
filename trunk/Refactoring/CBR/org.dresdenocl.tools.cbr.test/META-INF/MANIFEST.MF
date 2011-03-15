@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Minzinc Compiler Test Plug-in
+Bundle-SymbolicName: org.dresdenocl.tools.cbr.test
+Bundle-Version: 3.1.0.qualifier
+Bundle-Activator: org.dresdenocl.tools.cbr.test.Activator
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.tools.cbr,
+ org.junit;bundle-version="4.0.0",
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.model,
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.metamodels.ecore,
+ tudresden.ocl20.pivot.modelinstancetype.ecore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
