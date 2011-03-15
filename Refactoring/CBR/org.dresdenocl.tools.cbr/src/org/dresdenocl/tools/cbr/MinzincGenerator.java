@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
@@ -28,6 +29,23 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class MinzincGenerator {
 
+	private Map<IModelInstanceObject, String> identifierOfObject;
+	private Map<Type, Integer> currentIdCounterForType;
+	
+	public String compile(IModelInstance modelInstance,
+			Collection<IModelInstanceObject> affectedObjects,
+			Set<Type> affectedTypes,
+			List<ExpressionInOcl> oclConstraints){
+		StringBuffer buffer = new StringBuffer(compileModelInstance(modelInstance, affectedObjects, affectedTypes));
+		buffer.append(compileConstraints(oclConstraints));
+		return buffer.toString();
+	}
+	
+	public String compileConstraints(List<ExpressionInOcl> oclConstraints){
+		
+		return "";
+	}
+	
 	public String compileModelInstance(IModelInstance modelInstance,
 			Collection<IModelInstanceObject> affectedObjects,
 			Set<Type> affectedTypes) {
@@ -49,8 +67,8 @@ public class MinzincGenerator {
 		result.append("\n");
 
 		/* Generate variables for each element. */
-		Map<Type, Integer> currentIdCounterForType = new HashMap<Type, Integer>();
-		Map<IModelInstanceObject, String> identifierOfObject = new HashMap<IModelInstanceObject, String>();
+		currentIdCounterForType = new HashMap<Type, Integer>();
+		identifierOfObject = new HashMap<IModelInstanceObject, String>();
 
 		int id = 0;
 

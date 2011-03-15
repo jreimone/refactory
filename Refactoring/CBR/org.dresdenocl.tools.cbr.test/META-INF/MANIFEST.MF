@@ -12,5 +12,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.model,
  tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.metamodels.ecore,
- tudresden.ocl20.pivot.modelinstancetype.ecore
+ tudresden.ocl20.pivot.modelinstancetype.ecore,
+ tudresden.ocl20.pivot.facade
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

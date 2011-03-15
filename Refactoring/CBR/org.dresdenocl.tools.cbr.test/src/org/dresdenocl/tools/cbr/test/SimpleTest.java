@@ -8,6 +8,7 @@ import java.util.Set;
 import org.dresdenocl.tools.cbr.MinzincGenerator;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
@@ -67,9 +68,9 @@ public class SimpleTest extends AbstractMinzingTest {
 		
 		/* Start compiler. */
 		MinzincGenerator generator = new MinzincGenerator();
-		String result = generator.compileModelInstance(testModelInstance,
-				affectedObjects, affectedTypes);
-
+		String result = generator.compile(testModelInstance,
+				affectedObjects, affectedTypes, oclExpressions);
+		
 		System.out.println(result);
 		// compareStringAndFile("resources/output/simpleTest.mzn", result);
 
