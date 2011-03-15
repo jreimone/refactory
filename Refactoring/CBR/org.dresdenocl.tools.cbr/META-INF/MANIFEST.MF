@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Minzinc Constraint File Generator
+Bundle-SymbolicName: org.dresdenocl.tools.cbr
+Bundle-Version: 3.1.0.qualifier
+Bundle-Activator: org.dresdenocl.tools.cbr.Activator
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.modelinstance
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.tools.cbr
