@@ -1,0 +1,77 @@
+-- Invariant 13 brackets:
+context CustomerCard
+inv:
+  if valid then
+	(((((self.validFrom.isBefore(Date::now())))) and (self.validThru.isAfter(Date::now())))) = false
+  else
+	((((((self.validFrom.isBefore(Date::now())))))) and (self.validThru.isAfter((((Date::now())))))) = true
+  endif
+  
+ 
+  
+  -- Invariant 13 unused variable:
+context CustomerCard
+inv: let blub : Boolean =
+	self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now()),
+	testUnused : Boolean = blub 
+in
+  if valid then
+	blub = false
+  else
+	blub = true
+  endif
+  
+  
+-- Invariant 13A extract:
+context CustomerCard
+inv:
+  if valid then
+	(self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())) = false
+  else
+	(self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())) = true
+  endif
+      
+
+ 
+    -- Invariant 13 integration:
+context CustomerCard
+inv: let hallo : Boolean = 	
+		self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())
+in
+  if valid then
+	hallo = false
+  else
+	hallo = true
+  endif
+
+
+-- Invariant 6:
+context LoyaltyProgram
+inv minServices: partners->forAll(bla | bla ->size() >= 1)
+  
+  
+-- Invariant 15:
+context LoyaltyAccount
+inv: points > 0 implies transactions->exists(test | test.points > 0)
+  
+
+-- Definition 8:
+context ProgramPartner
+def: getBurningTransactions(): Set(Transaction) =
+  self.deliveredServices.transaction->iterate( testTransaction : Transaction;
+    resultSet : Set(Transaction) = Set{} |
+    
+    if (testTransaction.oclIsTypeOf( Burning )) then
+      resultSet->including( testTransaction )
+    else
+      resultSet
+    endif
+  )
+  
+ 
+       
+-- Postcondition 9:
+-- Unable to find property 'membership' in type 'root::tudresden::ocl20::pivot::examples::royalsandloyals::CustomerCard' An error occured while building an property call expression. Error occured at line 6 and column 26. The error occured at the token membership.
+context Transaction::getProgram(): LoyaltyProgram
+post: result = card.membership.program
+
