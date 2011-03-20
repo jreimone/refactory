@@ -252,6 +252,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 			putIntoRoleRuntimeInstanceMap(role, roleElements);
 		}
 		status = interprete(context);
+		
 		if (status.getSeverity() == IRefactoringStatus.ERROR) {
 			occuredErrors = true;
 		}
@@ -271,8 +272,24 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		for (Instruction instruction : instructions) {
 			addObjectToInterprete(instruction);
 		}
+		//For refspecs containing no instructions there will be no objects to interprete
+		//this far. For the refactoring not to abort, the refspec object itself will be
+		//added - its interpretation will just trigger the return of an "OK"
+		if (instructions.isEmpty()) {
+			addObjectToInterprete(refSpec);
+		}
+		
+	}
+	
+	//For refspecs containing no instructions there will be no objects to interprete.
+	//For the refactoring not to abort, the refspec object itself has been
+	//added within initInterpretationStack()- its interpretation will just trigger the return of an "OK"
+	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_RefactoringSpecification(RefactoringSpecification object, RefactoringInterpreterContext context) {
+		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
 
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
