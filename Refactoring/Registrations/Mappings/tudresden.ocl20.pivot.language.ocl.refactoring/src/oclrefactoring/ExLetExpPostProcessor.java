@@ -34,6 +34,7 @@ import tudresden.ocl20.pivot.language.ocl.LetExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 import tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
@@ -78,57 +79,57 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 	
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-		System.err.println("postprocessor activated!");
+//		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
-			System.out.println("role found with name: "+role.getName());
+//			System.out.println("role found with name: "+role.getName());
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
-			for (EObject roleplayer : roleplayers) {
-				System.out.println("   element playing this role: "+roleplayer.eClass().getName());
-				if (roleplayer instanceof SimpleNameCS) {
-					System.out.println("      assigned name for SimpleNameCS: "+((SimpleNameCS)roleplayer).getSimpleName());
-				}
-				System.out.println();
-			}
+//			for (EObject roleplayer : roleplayers) {
+//				System.out.println("   element playing this role: "+roleplayer.eClass().getName());
+//				if (roleplayer instanceof SimpleNameCS) {
+//					System.out.println("      assigned name for SimpleNameCS: "+((SimpleNameCS)roleplayer).getSimpleName());
+//				}
+//			System.out.println();
+//			}
 			if (role.getName().equals("Extract")) {
 				if (roleplayers.size() == 1) extract = (OclExpressionCS) roleplayers.get(0);
 				origRef = extract.eContainingFeature();
-				System.out.println("   extract identified as: "+extract.toString());
-				System.out.println("");
-				TreeIterator<EObject> eac = extract.eAllContents();
-				while (eac.hasNext()) {
-					System.out.println("     "+eac.next());
-				}
+//				System.out.println("   extract identified as: "+extract.toString());
+//				System.out.println("");
+//				TreeIterator<EObject> eac = extract.eAllContents();
+//				while (eac.hasNext()) {
+//					System.out.println("     "+eac.next());
+//				}
 				
 			}
 			else if (role.getName().equals("OrigContainer")) {
 				if (roleplayers.size() == 1) origContainer = (OclExpressionCS) roleplayers.get(0);
-				System.out.println("   OrigContainer identified as: "+origContainer.toString());
-				System.out.println("");
-				TreeIterator<EObject> oac = origContainer.eAllContents();
-				while (oac.hasNext()) {
-					System.out.println("     "+oac.next());
-				}
+//				System.out.println("   OrigContainer identified as: "+origContainer.toString());
+//				System.out.println("");
+//				TreeIterator<EObject> oac = origContainer.eAllContents();
+//				while (oac.hasNext()) {
+//					System.out.println("     "+oac.next());
+//				}
 				
 			}
 			else if (role.getName().equals("NewContainer")) {
 				if (roleplayers.size() == 1) newContainer = (SimpleNameCS) roleplayers.get(0);
-				System.out.println("   NewContainer identified as: "+newContainer.eClass());
-				System.out.println("");
-				TreeIterator<EObject> nac = newContainer.eAllContents();
-				while (nac.hasNext()) {
-					System.out.println("     "+nac.next());
-				}
+//				System.out.println("   NewContainer identified as: "+newContainer.eClass());
+//				System.out.println("");
+//				TreeIterator<EObject> nac = newContainer.eAllContents();
+//				while (nac.hasNext()) {
+//					System.out.println("     "+nac.next());
+//				}
 				
 			}
 			else if (role.getName().equals("NewType")) {
 				if (roleplayers.size() == 1) newType = (SimpleNameCS) roleplayers.get(0);
-				System.out.println("   NewType identified as: "+newType.eClass());
-				System.out.println("");
-				TreeIterator<EObject> ntac = newType.eAllContents();
-				while (ntac.hasNext()) {
-					System.out.println("     "+ntac.next());
-				}
+//				System.out.println("   NewType identified as: "+newType.eClass());
+//				System.out.println("");
+//				TreeIterator<EObject> ntac = newType.eAllContents();
+//				while (ntac.hasNext()) {
+//					System.out.println("     "+ntac.next());
+//				}
 				
 			}
 			
@@ -145,7 +146,7 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 		
 		
 		VariableDeclarationWithInitCS myVD = myOclFactory.createVariableDeclarationWithInitCS();
-		System.out.println("myvd: "+myVD.eClass());
+//		System.out.println("myvd: "+myVD.eClass());
 		myVD.setVariableName(newContainer);
 		
 		
@@ -164,13 +165,13 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 		//getting the root of the constraint and finding an existing or creating a new let-expression
 		
 		constraintRoot = origContainer.eContainer();
-		System.err.println("tempparent: "+ constraintRoot.eClass());
+//		System.err.println("tempparent: "+ constraintRoot.eClass());
 		while (	!(constraintRoot instanceof InvariantExpCS) && 
-				!(constraintRoot instanceof BodyDeclarationCS)) 
+				!(constraintRoot instanceof PrePostOrBodyDeclarationCS)) 
 		{
 			constraintRoot = constraintRoot.eContainer();
 		}
-		System.out.println("found constraint-root as: "+constraintRoot.toString());
+//		System.out.println("found constraint-root as: "+constraintRoot.toString());
 		
 		myLetExp = null;
 		newLetExp = false;
@@ -178,8 +179,8 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 		if (constraintRoot instanceof InvariantExpCS  && ((InvariantExpCS)constraintRoot).getOclExpression() instanceof LetExpCS) {
 			InvariantExpCS inv = (InvariantExpCS)constraintRoot;
 			myLetExp = (LetExpCS) inv.getOclExpression();
-		} else if (constraintRoot instanceof BodyDeclarationCS && ((BodyDeclarationCS)constraintRoot).getOclExpression() instanceof LetExpCS) {
-			BodyDeclarationCS inv = (BodyDeclarationCS)constraintRoot;
+		} else if (constraintRoot instanceof PrePostOrBodyDeclarationCS && ((PrePostOrBodyDeclarationCS)constraintRoot).getOclExpression() instanceof LetExpCS) {
+			PrePostOrBodyDeclarationCS inv = (PrePostOrBodyDeclarationCS)constraintRoot;
 			myLetExp = (LetExpCS) inv.getOclExpression();
 		} else {
 			myLetExp = myOclFactory.createLetExpCS();
@@ -212,9 +213,9 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 		myReferenceProp.setName(newContainer.getSimpleName());
 		myReferenceLiteral.setNamedElement(myReferenceProp);
 		
-		System.out.println("container of extract: "+extract.eContainer());
-		System.out.println("containing feature of extract: "+extract.eContainingFeature());
-		System.out.println("orig containing feature of extract: "+origRef);
+//		System.out.println("container of extract: "+extract.eContainer());
+//		System.out.println("containing feature of extract: "+extract.eContainingFeature());
+//		System.out.println("orig containing feature of extract: "+origRef);
 		
 		if (origRef instanceof EReferenceImpl) {
 			EReferenceImpl myref = ((EReferenceImpl)origRef);

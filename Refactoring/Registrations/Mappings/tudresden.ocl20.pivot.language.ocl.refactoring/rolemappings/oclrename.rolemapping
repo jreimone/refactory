@@ -7,7 +7,7 @@ RenameSimpleNameCS maps <RenameX> {
 }
 
 
-RenameNamedLiteralExpCS maps <SelectX> {
+RenameNamedLiteralExpCS maps <SelectXWithVar> {
 	Selection := NamedLiteralExpCS;
 	Nameable := Property(name -> name);
 }

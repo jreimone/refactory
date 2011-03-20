@@ -42,14 +42,14 @@ public class RemoveAllRedundantBrackets implements IRefactoringPostProcessor {
 
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-		System.err.println("postprocessor activated!");
+		System.err.println("RemoveAllRedundantBrackets postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
 			if (role.getName().equals("Selection")) {
 				if (roleplayers.size()==1 && roleplayers.get(0) instanceof ContextDeclarationCS) {
 					selected = (ContextDeclarationCS) roleplayers.get(0);
-					System.out.println("found selected element as: "+selected);
+//					System.out.println("found selected element as: "+selected);
 				}
 			}
 		}
@@ -76,17 +76,6 @@ public class RemoveAllRedundantBrackets implements IRefactoringPostProcessor {
 	private void performSpecificTransformation() {
 		
 		EObject constraintRoot = selected;
-		
-//		EObject constraintRoot = selected.eContainer();
-//		while (	!(constraintRoot instanceof InvariantExpCS) && 
-//				!(constraintRoot instanceof DefinitionExpCS) && 
-//				!(constraintRoot instanceof BodyDeclarationCS)
-//		) {
-//			
-//			constraintRoot = constraintRoot.eContainer();
-//			
-//		}
-		
 		Boolean cleanPass = false;
 		
 		while (!cleanPass) {
