@@ -67,5 +67,37 @@
             postprocessor="oclrefactoring.RemoveAllRedundantBrackets">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Remove Empty Variable Declaration"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RemoveEmptyVariableDeclarationPostProcessor">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="tudresden.ocl20.pivot.language.ocl.refactoring.postprocessor2"
+            nsUri="tudresden.ocl20.pivot.language.ocl.refactoring.postprocessor2"
+            postprocessor="tudresden.ocl20.pivot.language.ocl.refactoring.RefactoringPostProcessor2">
+      </postprocessor>
+   </extension> 
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Remove All Empty Variable Declarations"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RemoveAllEmptyVariableDeclarationsPostProcessor">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Remove All Unused Variable Declarations"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RemoveAllUnusedVariableDeclarations">
+      </postprocessor>
+   </extension>
 
 </plugin>

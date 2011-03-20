@@ -1,6 +1,5 @@
 package oclrefactoring;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,38 +13,22 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
-import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
-import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
-import tudresden.ocl20.pivot.language.ocl.LiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
-import tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
 import tudresden.ocl20.pivot.language.ocl.impl.OclFactoryImpl;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
 public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 	
-	private OclExpressionCS extract;
-	private OclExpressionCS origContainer;
-	private SimpleNameCS newContainer;
-	private SimpleNameCS newType;
-
-	private Boolean newLetExp;
-	private EStructuralFeature origRef;
 	private EObject constraintRoot;
 	
 	
@@ -72,12 +55,12 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
-			System.out.println("role found with name: "+role.getName());
+//			System.out.println("role found with name: "+role.getName());
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
 			
 			if (role.getName().equals("Selection")) {
 				if (roleplayers.size() == 1) selection = (VariableDeclarationWithInitCS) roleplayers.get(0);
-				System.out.println("   extract identified as: "+selection.toString());
+//				System.out.println("   extract identified as: "+selection.toString());
 			}
 			
 		}
@@ -90,7 +73,7 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 	private IStatus performSpecificTransformation() {
 		
 		if (!(selection.eContainer() instanceof LetExpCS)) {
-			System.err.println("Integrate Variable From LetExpression cannot be called from outside a LetExp!");
+//			System.err.println("Integrate Variable From LetExpression cannot be called from outside a LetExp!");
 			return Status.CANCEL_STATUS;
 		}
 		
@@ -129,7 +112,6 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 					Iterator<EObject> myCopyIt = copiedList.iterator();
 					while (myCopyIt.hasNext()) {
 						EObject aktcopy = myCopyIt.next();
-						System.out.println(""+aktcopy);
 						if (EcoreUtil.equals(aktcopy, declaration)) {
 							myCopiedDeclaration = (OclExpressionCS) aktcopy;
 						}
@@ -151,7 +133,7 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 		
 		//if there are no more variable declarations left, the let expression will be empty and has to be removed
 		if (myLetExp.getVariableDeclarations().size() == 0) {
-			System.out.println("removing empty let expression");
+//			System.out.println("removing empty let expression");
 			constraintRoot = myLetExp.eContainer();
 			EStructuralFeature parentLink = myLetExp.eContainingFeature();
 			constraintRoot.eSet(parentLink, myLetExp.getOclExpression());

@@ -14,12 +14,20 @@ ExLetExp maps <ExtractMin> {
 
 "Remove Redundant Brackets" maps <SelectX> {
 	Selection := BracketExpCS;
-	Nameable := Property ( name -> name);
-
 }
 
 "Remove All Redundant Brackets" maps <SelectX> {
 	Selection := ContextDeclarationCS;
-	Nameable := Property ( name -> name);
+}
 
+"Remove Empty Variable Declaration" maps <SelectX> {
+	Selection := VariableDeclarationCS;
+}
+
+"Remove All Empty Variable Declarations" maps <SelectX> {
+	Selection := ContextDeclarationCS;
+}
+
+"Remove All Unused Variable Declarations" maps <SelectX> {
+	Selection := ContextDeclarationCS;
 }

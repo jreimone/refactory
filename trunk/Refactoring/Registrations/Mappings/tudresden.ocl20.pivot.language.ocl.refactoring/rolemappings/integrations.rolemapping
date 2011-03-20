@@ -4,5 +4,4 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 
 "Integrate Variable From LetExpression" maps <SelectX> {
 	Selection := VariableDeclarationWithInitCS;
-	Nameable := Property (name -> name);
 }
