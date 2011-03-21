@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.interpreter.IValueProviderRegistry;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
-import org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter;
 import org.emftext.refactoring.test.QueryUtil;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.test.core.InputData;
@@ -58,7 +58,6 @@ public class ContinuedRefactoringTest extends TestClass {
 	private void init(){
 		TestAttributeValueProvider.setTestDataSet(getTestDataSet());
 		TestAttributeValueProvider.setValuePattern(VALUE_PATTERN);
-		ASSIGNInterpreter.setValueProvider(TestAttributeValueProvider.class);
 	}
 	
 	@Test
@@ -92,6 +91,7 @@ public class ContinuedRefactoringTest extends TestClass {
 			}
 		}
 		assertNotNull(mappingToUse);
+		IValueProviderRegistry.INSTANCE.registerValueProvider(mappingToUse, TestAttributeValueProvider.class);
 		refactorer.fakeRefactor(mappingToUse);
 		EObject refactoredModel = refactorer.refactor();
 		assertNotNull(refactoredModel);
