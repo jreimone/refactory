@@ -164,7 +164,8 @@ public class Refactorer implements IRefactorer {
 		if (!occuredErrors) {
 			IRefactoringPostProcessor postProcessor = interpreter.getPostProcessor();
 			if (postProcessor != null) {
-				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModelRS, change);
+				RefactoringSpecification refactoringSpecification = interpreter.getRefactoringSpecification();
+				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModelRS, change, refactoringSpecification);
 				if (postProcessingStatus.getSeverity() != IRefactoringStatus.OK) {
 					int severity = postProcessingStatus.getSeverity();
 					status = new RefactoringStatus(mapping, severity, postProcessingStatus.getMessage());
@@ -178,10 +179,6 @@ public class Refactorer implements IRefactorer {
 	public IRefactoringInterpreter getCurrentInterpreter() {
 		return currentInterpreter;
 	}
-
-//	public Map<Role, Object> getRoleRuntimeInstances(){
-//		return roleRuntimeInstances;
-//	}
 
 	/**
 	 * @param filteredElements

@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.emftext.language.refactoring.rolemapping,
  org.emftext.refactoring.util,
  org.eclipse.emf.ecore.change,
- org.eclipse.jface
+ org.eclipse.jface,
+ org.emftext.language.refactoring.specification
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.emftext.refactoring.registry.rolemapping,
