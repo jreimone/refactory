@@ -72,6 +72,13 @@
                </appinfo>
             </annotation>
          </attribute>
+         <attribute name="subMenuPath" type="string">
+            <annotation>
+               <documentation>
+                  Specify a path for the sub menu which should be displayed in the &apos;Refactor&apos; context menu. If specified the refactoring, corresponding to this rolemapping, will be put into a sub menu. If several rolemappings are linked to the same sub menu all are grouped together. The String being specified here acts as a key in a map in which every key can map to a list of rolemappings which are displayed in the same sub menu entry.
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
