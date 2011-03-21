@@ -3,17 +3,12 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -33,7 +28,7 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
-import org.emftext.refactoring.interpreter.IAttributeValueProvider;
+import org.emftext.refactoring.interpreter.AbstractValueProviderInstantiator;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
@@ -45,12 +40,7 @@ import org.emftext.refactoring.specification.interpreter.ui.DialogAttributeValue
  * @author Jan Reimann
  *
  */
-public class ASSIGNInterpreter {
-
-	// the following two variables will only be used when test plugin specifies a value provider
-	private static Class<IAttributeValueProvider> externalValueProvider;
-	private boolean providerExternallySet = false;
-	private IValueProvider<EAttribute, Object> valueProvider;
+public class ASSIGNInterpreter extends AbstractValueProviderInstantiator<EAttribute, Object>{
 
 	private RoleMapping mapping;
 	private RefactoringInterpreterContext context;
@@ -69,7 +59,6 @@ public class ASSIGNInterpreter {
 
 	public ASSIGNInterpreter(RoleMapping mapping, IRefactoringInterpreter interpreter) {
 		this.mapping = mapping;
-		this.valueProvider = new DialogAttributeValueProvider(mapping);
 		this.interpreter = interpreter;
 	}
 
@@ -162,11 +151,11 @@ public class ASSIGNInterpreter {
 		@SuppressWarnings("unchecked")
 		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderForCommand(assign);
 		if(valueProvider == null){
-			valueProvider = getValueProvider();
+			valueProvider = getNewValueProvider(mapping);
 			interpreter.registerValueProviderForCommand(assign, valueProvider);
 		}
 		Object value = valueProvider.provideValue(interpreter, classAttribute, targetObject);
-		if(getValueProvider().getReturnCode() == Dialog.CANCEL){
+		if(valueProvider.getReturnCode() == Dialog.CANCEL){
 			return new RefactoringStatus(IRefactoringStatus.CANCEL);
 		}
 		resourcesToSave = getReferer(targetObject);
@@ -217,34 +206,34 @@ public class ASSIGNInterpreter {
 		return null;
 	}
 
-	/**
-	 * Can only be invoked from the test plugin to activate an external value provider while testing
-	 * to not open dialogs when asking for values.
-	 * 
-	 * @param valueProvider
-	 */
-	@SuppressWarnings("unchecked")
-	public static void setValueProvider(Class<? extends IAttributeValueProvider> valueProvider){
-		externalValueProvider = (Class<IAttributeValueProvider>) valueProvider;
-	}
+//	/**
+//	 * Can only be invoked from the test plugin to activate an external value provider while testing
+//	 * to not open dialogs when asking for values.
+//	 * 
+//	 * @param valueProvider
+//	 */
+//	@SuppressWarnings("unchecked")
+//	public static void setValueProvider(Class<? extends IAttributeValueProvider> valueProvider){
+//		externalValueProvider = (Class<IAttributeValueProvider>) valueProvider;
+//	}
 
-	private IValueProvider<EAttribute, Object> getValueProvider(){
-		if(externalValueProvider != null){
-			//			if(!providerExternallySet){
-			try {
-				valueProvider = externalValueProvider.newInstance();
-				providerExternallySet = true;
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-			//			}
-		} else {
-			valueProvider = new DialogAttributeValueProvider(mapping);
-		}
-		return valueProvider;
-	}
+//	private IValueProvider<EAttribute, Object> getValueProvider(){
+//		if(externalValueProvider != null){
+//			//			if(!providerExternallySet){
+//			try {
+//				valueProvider = externalValueProvider.newInstance();
+//				providerExternallySet = true;
+//			} catch (InstantiationException e) {
+//				e.printStackTrace();
+//			} catch (IllegalAccessException e) {
+//				e.printStackTrace();
+//			}
+//			//			}
+//		} else {
+//			valueProvider = new DialogAttributeValueProvider(mapping);
+//		}
+//		return valueProvider;
+//	}
 
 	public Role getAssignedRole() {
 		return assignedRole;
@@ -267,5 +256,10 @@ public class ASSIGNInterpreter {
 			labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
 		}
 		return labelProvider;
+	}
+
+	@Override
+	public IValueProvider<EAttribute, Object> getDefaultValueProvider(RoleMapping roleMapping) {
+		return new DialogAttributeValueProvider(roleMapping);
 	}
 }

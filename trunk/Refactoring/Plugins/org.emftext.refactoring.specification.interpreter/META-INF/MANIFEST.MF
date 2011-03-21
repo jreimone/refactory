@@ -18,6 +18,6 @@ Require-Bundle: org.emftext.language.refactoring.specification,
  org.eclipse.emf.edit.ui,
  org.eclipse.emf.ecore.edit
 Export-Package: org.emftext.refactoring.interpreter,
- org.emftext.refactoring.interpreter.internal;x-friends:="org.emftext.refactoring.tests"
+ org.emftext.refactoring.interpreter.internal
 Bundle-Activator: org.emftext.refactoring.interpreter.Activator
 Bundle-ActivationPolicy: lazy

@@ -39,6 +39,7 @@ import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
+import org.emftext.refactoring.interpreter.AbstractValueProviderInstantiator;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
@@ -51,7 +52,7 @@ import org.emftext.refactoring.util.RoleUtil;
  * @author Jan Reimann
  *
  */
-public class ObjectAssignmentInterpreter {
+public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiator<List<EObject>, EObject>{
 
 	private RoleMapping mapping;
 	private List<? extends EObject> selection;
@@ -65,6 +66,7 @@ public class ObjectAssignmentInterpreter {
 	private IRefactoringInterpreter interpreter;
 
 	private ObjectAssignmentCommand command;
+	private EClass classForValueProvider;
 
 	public ObjectAssignmentInterpreter(IRefactoringInterpreter interpreter, RoleMapping mapping) {
 		super();
@@ -135,8 +137,8 @@ public class ObjectAssignmentInterpreter {
 					@SuppressWarnings("unchecked")
 					IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
 					if(valueProvider == null){
-						EClass clazz = mapping.getEClassForRole(assignedRole);
-						valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
+						classForValueProvider = mapping.getEClassForRole(assignedRole);
+						valueProvider = getNewValueProvider(mapping);
 						interpreter.registerValueProviderForCommand(command, valueProvider);
 					}
 					EObject value = valueProvider.provideValue(interpreter, resolvedObjects);
@@ -307,8 +309,8 @@ public class ObjectAssignmentInterpreter {
 		@SuppressWarnings("unchecked")
 		IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
 		if(valueProvider == null){
-			EClass clazz = mapping.getEClassForRole(assignedRole);
-			valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
+			classForValueProvider = mapping.getEClassForRole(assignedRole);
+			valueProvider = getNewValueProvider(mapping);
 			interpreter.registerValueProviderForCommand(command, valueProvider);
 		}
 		EObject value = valueProvider.provideValue(interpreter, values);
@@ -428,5 +430,10 @@ public class ObjectAssignmentInterpreter {
 	 */
 	public Object getRoleRuntimeValue() {
 		return roleRuntimeValue;
+	}
+
+	@Override
+	public IValueProvider<List<EObject>, EObject> getDefaultValueProvider(RoleMapping roleMapping) {
+		return new DialogOneListElementProvider("Select one " + classForValueProvider.getName(), roleMapping);
 	}
 }

@@ -56,11 +56,7 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 			@Override
 			public Image getImage(Object object) {
 				EObject element = (EObject) object;
-				ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-				adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-				adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
-				adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-				AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+				AdapterFactoryLabelProvider labelProvider = getLabelProvider();
 				Image image = labelProvider.getImage(element);
 				if (image != null) {
 					return image;
@@ -71,16 +67,21 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 			@Override
 			public String getText(Object element) {
 				EObject object = (EObject) element;
-				ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-				adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-				adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
-				adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-				AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+				AdapterFactoryLabelProvider labelProvider = getLabelProvider();
 				String label = labelProvider.getText(object);
 				if(label != null){
 					return label;
 				}
 				return super.getText(element);
+			}
+
+			private AdapterFactoryLabelProvider getLabelProvider() {
+				ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+				adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+				adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+				AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+				return labelProvider;
 			}
 
 		};
