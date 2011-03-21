@@ -112,6 +112,7 @@ public class GenerateRoleMappingFacadesJob extends Job {
 
 	private void generateCompilationUnits(IProgressMonitor monitor) {
 		for (EPackage epackage : metamodelRoleMappings.keySet()) {
+			String nsURI = epackage.getNsURI();
 			String className = StringUtil.firstLetterUpperCase(epackage.getName()) + CLASS_NAME_POSTFIX;
 			monitor.subTask("Generating class " + className);
 			JavaComposite sc = new JavaComposite();
@@ -121,15 +122,14 @@ public class GenerateRoleMappingFacadesJob extends Job {
 			sc.addJavadoc(
 					"Provides a facade for simpler access to the registered {@link RoleMapping}s for"
 					,
-					"the metamodel: http://www.emftext.org/language/roles.<br>"
+					"the metamodel: " + nsURI + ".<br>"
 					,
 					"For every registered mapping two methods are contained in this facade:"
 					,
 					"<li> a method for returning the {@link RoleMapping} itself"
 					,
 					"<li> a method for returning the registered icon if one exists"
-					, "<br>"
-					, "@author jreimann");
+					, "<br>");
 			sc.add("public class " + className + " {");
 			sc.addLineBreak();
 			sc.add("private Resource resource;");
