@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.sdk.concretesyntax.Containment;
@@ -132,5 +133,9 @@ public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
 			}
 		}
 		return null;
+	}
+
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+		return process(roleRuntimeInstanceMap, resourceSet, change);
 	}
 }
