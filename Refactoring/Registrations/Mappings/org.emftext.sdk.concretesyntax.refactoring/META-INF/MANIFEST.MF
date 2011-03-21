@@ -10,4 +10,5 @@ Require-Bundle: org.emftext.refactoring.registry.rolemapping,
  org.emftext.sdk.concretesyntax,
  org.eclipse.emf.codegen.ecore,
  org.eclipse.emf.ecore.change,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.emftext.language.refactoring.specification

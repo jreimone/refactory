@@ -19,6 +19,7 @@ import org.eclipse.uml2.uml.State;
 import org.eclipse.uml2.uml.Transition;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.Vertex;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -128,5 +129,9 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 		newContainer.setDoActivity(activity);
 //		System.out.println("set new doActivity for " + newContainer);
 		return true;
+	}
+
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+		return process(roleRuntimeInstanceMap, resourceSet, change);
 	}
 }

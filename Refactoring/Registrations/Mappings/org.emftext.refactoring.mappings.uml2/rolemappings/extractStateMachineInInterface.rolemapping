@@ -1,0 +1,21 @@
+ROLEMODELMAPPING FOR 
+<http://www.eclipse.org/uml2/3.0.0/UML>
+
+ExtractStateMachineInInterface maps <ExtractX> { 
+	
+	ContainerContainer := Interface{
+		source := protocol;
+		target := nestedClassifier;
+	};
+
+	OrigContainer := ProtocolStateMachine{
+		extracts := region;
+		reference := extendedStateMachine;
+	};
+	
+	NewContainer := StateMachine(newName -> name){
+		moved := region;
+	};
+	
+	Extractee := Region;
+}

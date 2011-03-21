@@ -15,6 +15,7 @@ import org.emftext.language.java.modifiers.ModifiersFactory;
 import org.emftext.language.java.modifiers.Static;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.types.Void;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -75,5 +76,9 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 			}
 		}
 		return true;
+	}
+
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+		return process(roleRuntimeInstanceMap, resourceSet, change);
 	}
 }

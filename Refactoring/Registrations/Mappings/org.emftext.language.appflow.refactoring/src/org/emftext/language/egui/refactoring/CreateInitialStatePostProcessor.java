@@ -21,6 +21,7 @@ import org.emftext.language.appflow.statemodel.State;
 import org.emftext.language.appflow.statemodel.StateModel;
 import org.emftext.language.appflow.statemodel.StatemodelFactory;
 import org.emftext.language.appflow.statemodel.Transition;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -61,5 +62,9 @@ public class CreateInitialStatePostProcessor implements IRefactoringPostProcesso
 			}
 		}
 		return null;
+	}
+	
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+		return process(roleRuntimeInstanceMap, resourceSet, change);
 	}
 }

@@ -18,6 +18,7 @@ import org.eclipse.stp.bpmn.BpmnFactory;
 import org.eclipse.stp.bpmn.SequenceEdge;
 import org.eclipse.stp.bpmn.SubProcess;
 import org.eclipse.stp.bpmn.Vertex;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -131,5 +132,9 @@ public class ExtractSubProcessPostProcessor implements IRefactoringPostProcessor
 				outsides.add(edge);
 			}
 		}
+	}
+
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+		return process(roleRuntimeInstanceMap, resourceSet, change);
 	}
 }
