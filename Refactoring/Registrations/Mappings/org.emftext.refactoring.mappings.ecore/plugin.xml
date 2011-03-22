@@ -23,7 +23,8 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/extractEEnum.rolemapping">
+            rolemapping_resource="rolemappings/extractEEnum.rolemapping"
+            submenu="extractRefactorings">
             <mappingIcon
                   icon="icons/extractEEnum.gif"
                   mapping_name="ExtractEEnum">
@@ -63,7 +64,8 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
+            rolemapping_resource="rolemappings/extractSuperClass.rolemapping"
+            submenu="extractRefactorings">
             <mappingIcon
                   icon="icons/extractSuperClass.gif"
                   mapping_name="ExtractSuperClass">
@@ -73,7 +75,8 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/extractInterfaceFromFeatures.rolemapping">
+            rolemapping_resource="rolemappings/extractInterfaceFromFeatures.rolemapping"
+            submenu="extractRefactorings">
             <mappingIcon
                   icon="icons/extractInterface.gif"
                   mapping_name="ExtractInterfaceFromFeatures">
@@ -83,7 +86,8 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/extractInterfaceFromOperations.rolemapping">
+            rolemapping_resource="rolemappings/extractInterfaceFromOperations.rolemapping"
+            submenu="extractRefactorings">
             <mappingIcon
                   icon="icons/extractInterface.gif"
                   mapping_name="ExtractInterfaceFromOperations">
@@ -93,7 +97,8 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/extractSubEPackage.rolemapping">
+            rolemapping_resource="rolemappings/extractSubEPackage.rolemapping"
+            submenu="extractSubRefactorings">
             <mappingIcon
                   icon="icons/extractSubEPackage.gif"
                   mapping_name="ExtractSubEPackage">
@@ -123,5 +128,17 @@
       <rolemapping
             rolemapping_resource="rolemappings/renameElement.rolemapping">
       </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.submenu">
+      <refactoringSubMenu
+            displayString="Extract Refactorings"
+            submenuID="extractRefactorings">
+      </refactoringSubMenu>
+      <refactoringSubMenu
+            displayString="Specific Extract Refactorings"
+            generalises="extractRefactorings"
+            submenuID="extractSubRefactorings">
+      </refactoringSubMenu>
    </extension>
 </plugin>
