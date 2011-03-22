@@ -3,10 +3,10 @@
 <schema targetNamespace="org.emftext.refactoring.registry.rolemapping" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.emftext.refactoring.registry.rolemapping" id="org.emftext.refactoring.rolemapping" name="rolemapping"/>
+         <meta.schema plugin="org.emftext.refactoring.registry.rolemapping" id="org.emftext.refactoring.submenu" name="refactoringSubmenu"/>
       </appinfo>
       <documentation>
-         This extension point can be used to register RoleMappingModels.
+         Register submenus which will be displayed as children under the &apos;Refactor&apos; menu. Group together registered refatorings (rolemappings).
       </documentation>
    </annotation>
 
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="rolemapping"/>
+            <element ref="refactoringSubMenu"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,65 +47,34 @@
       </complexType>
    </element>
 
-   <element name="rolemapping">
-      <complexType>
-         <sequence minOccurs="0" maxOccurs="unbounded">
-            <element ref="mappingIcon"/>
-         </sequence>
-         <attribute name="rolemapping_resource" type="string" use="required">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-               <appinfo>
-                  <meta.attribute kind="resource"/>
-               </appinfo>
-            </annotation>
-         </attribute>
-         <attribute name="defaultIcon" type="string">
-            <annotation>
-               <documentation>
-                  Specify a default icon which will be shown in the context menu then
-               </documentation>
-               <appinfo>
-                  <meta.attribute kind="resource"/>
-               </appinfo>
-            </annotation>
-         </attribute>
-         <attribute name="submenu" type="string">
-            <annotation>
-               <documentation>
-                  Specify the submenu under which this rolemapping should be displayed as refactoring in the &apos;Refactor&apos; context menu. Refer to the ID of a registered submenu.
-               </documentation>
-               <appinfo>
-                  <meta.attribute kind="identifier" basedOn="org.emftext.refactoring.submenu/refactoringSubMenu/@submenuID"/>
-               </appinfo>
-            </annotation>
-         </attribute>
-      </complexType>
-   </element>
-
-   <element name="mappingIcon">
+   <element name="refactoringSubMenu">
       <annotation>
          <documentation>
-            With this element you can specify an icon for a mapping which then will be displayed in the context menu. If no such icon is given for a mapping then the defaultIcon will be displayed.
+            With this extension point one can register and name a submenu which will bi displayed in the root &apos;Refactor&apos; menu where all registered rolemappings (concrete refactorings) are displayed. Use a submenu to group together registered rolemappings in the context menu of a selection of elements to be refactored.
          </documentation>
       </annotation>
       <complexType>
-         <attribute name="mapping_name" type="string" use="required">
+         <attribute name="submenuID" type="string" use="required">
             <annotation>
                <documentation>
-                  Specify the name of the Mapping for which the icon should be registered.
+                  The submenu ID must be set to reference a submenu while registering a rolemapping. If that&apos;s the case the rolemapping occurs as entry in the submenu.
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="icon" type="string" use="required">
+         <attribute name="displayString" type="string" use="required">
             <annotation>
                <documentation>
-                  Specify an icon for the given Mapping.
+                  This string is displayed in the &apos;Refactor&apos; context menu.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="generalises" type="string">
+            <annotation>
+               <documentation>
+                  Use this attribute to specify another registered refactoring submenu as parent menu. In this way it is possible to compose several submenus.
                </documentation>
                <appinfo>
-                  <meta.attribute kind="resource"/>
+                  <meta.attribute kind="identifier" basedOn="org.emftext.refactoring.rolemapping/@submenuID"/>
                </appinfo>
             </annotation>
          </attribute>
