@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -32,8 +33,10 @@ import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.refactoring.registry.rolemapping.Activator;
 import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.emftext.refactoring.registry.rolemapping.ISubMenuExtensionPoint;
 import org.emftext.refactoring.util.RegistryUtil;
 import org.osgi.framework.Bundle;
 
@@ -71,6 +74,18 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	private void registerRoleMapping(RoleMappingModel roleMapping, IConfigurationElement config) {
 		registerRoleMappingInternal(roleMapping, config);
 		registerIconsForMappings(roleMapping, config);
+		registerSubMenu(roleMapping, config);
+	}
+
+	private void registerSubMenu(RoleMappingModel roleMappingModel, IConfigurationElement config) {
+		String subMenuID = config.getAttribute(IRoleMappingExtensionPoint.SUB_MENU_ID);
+		if(subMenuID != null){
+			IRefactoringSubMenuRegistry subMenuRegistry = IRefactoringSubMenuRegistry.INSTANCE;
+			List<RoleMapping> roleMappings = roleMappingModel.getMappings();
+			for (RoleMapping roleMapping : roleMappings) {
+				subMenuRegistry.registerRoleMappingForSubMenu(roleMapping, subMenuID);
+			}
+		}
 	}
 
 	private void registerIconsForMappings(RoleMappingModel roleMapping, IConfigurationElement config) {

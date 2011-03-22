@@ -3,5 +3,6 @@
 <plugin>
    <extension-point id="org.emftext.refactoring.rolemapping" name="rolemapping" schema="schema/org.emftext.refactoring.rolemapping.exsd"/>
    <extension-point id="org.emftext.refactoring.postprocessor" name="postprocessor" schema="schema/org.emftext.refactoring.postprocessor.exsd"/>
+   <extension-point id="org.emftext.refactoring.submenu" name="refactoringSubmenu" schema="schema/org.emftext.refactoring.submenu.exsd"/>
 
 </plugin>

@@ -3,6 +3,7 @@ package org.emftext.refactoring.ui;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.internal.preferences.ImmutableMap;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -14,6 +15,9 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPart;
@@ -29,6 +33,7 @@ import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.StringUtil;
@@ -36,7 +41,6 @@ import org.emftext.refactoring.util.StringUtil;
 public class RefactoringMenuContributor extends ExtensionContributionFactory {
 
 	private static final String CONTEXT_MENU_ENTRY_TEXT = "Refactor";
-	private static final String CONTEXT_MENU_ENTRY_ID = "org.emftext.refactoring.menu";
 
 	public RefactoringMenuContributor() {
 		super();
@@ -86,13 +90,14 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			if (resource == null) {
 				return;
 			}
-			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, CONTEXT_MENU_ENTRY_ID);
-
+			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
+			
 			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
 			if (refactorer != null) {
 				refactorer.setInput(selectedElements);
 				List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
 				boolean containsEntries = false;
+				List<IMenuManager> registeredSubMenus = new LinkedList<IMenuManager>();
 				for (RoleMapping mapping : mappings) {
 					Resource mappingResource = mapping.eResource();
 					if (mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0)) {
@@ -107,7 +112,22 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							}
 							refactoringAction.setText(refactoringName);
 							refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));
-							rootMenu.add(refactoringAction);
+							IRefactoringSubMenuRegistry subMenuRegistry = IRefactoringSubMenuRegistry.INSTANCE;
+							IMenuManager subMenu = subMenuRegistry.getSubMenuForRoleMapping(mapping);
+							if(subMenu == null){
+								rootMenu.add(refactoringAction);
+							} else {
+								List<IMenuManager> subMenuPath = subMenuRegistry.getSubMenuPathForRoleMapping(mapping);
+								IMenuManager parent = rootMenu;
+								for (IMenuManager singleSubMenu : subMenuPath) {
+									if(!registeredSubMenus.contains(singleSubMenu)){
+										parent.add(singleSubMenu);
+										registeredSubMenus.add(singleSubMenu);
+									}
+									parent = singleSubMenu;
+								}
+								parent.add(refactoringAction);
+							}
 							containsEntries = true;
 						}
 					}
