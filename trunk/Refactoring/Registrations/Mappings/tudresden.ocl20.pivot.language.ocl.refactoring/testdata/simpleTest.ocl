@@ -7,12 +7,12 @@ inv: let testEx : Boolean =self.validFrom.isBefore(Date::now()) and self.validTh
 	(testEx) = true
   endif
   
-  
+ 
 -- Invariant 13 integration:
 context CustomerCard
 inv:
   if valid then
-	(self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())) = false
+	((self.validFrom.isBefore(Date::now())) and self.validThru.isAfter(Date::now())) = false
   else
-	(self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())) = true
+	((self.validFrom.isBefore(Date::now())) and self.validThru.isAfter(Date::now())) = true
   endif
