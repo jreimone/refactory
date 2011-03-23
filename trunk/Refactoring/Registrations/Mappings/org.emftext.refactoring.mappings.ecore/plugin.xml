@@ -137,7 +137,7 @@
       </refactoringSubMenu>
       <refactoringSubMenu
             displayString="Specific Extract Refactorings"
-            generalises="extractRefactorings"
+            specialises="extractRefactorings"
             submenuID="extractSubRefactorings">
       </refactoringSubMenu>
    </extension>
