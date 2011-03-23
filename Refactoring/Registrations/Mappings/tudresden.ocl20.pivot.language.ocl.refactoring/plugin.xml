@@ -4,7 +4,7 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/oclrename.rolemapping">
+            rolemapping_resource="rolemappings/renamings.rolemapping">
       </rolemapping>
    </extension>
    <extension
@@ -16,7 +16,7 @@
    <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/integrations.rolemapping">
+            rolemapping_resource="rolemappings/inlinings.rolemapping">
       </rolemapping>
    </extension>
    <extension
@@ -30,7 +30,7 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="ExLetExp"
+            mapping_name="Extract Let Expression"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.ExLetExpPostProcessor">
       </postprocessor>
@@ -38,9 +38,9 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Integrate Variable From LetExpression"
+            mapping_name="Inline Variable From LetExpression"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.IntegrateVarFromLetExp">
+            postprocessor="oclrefactoring.InlineVarFromLetExp">
       </postprocessor>
    </extension>
    <extension
