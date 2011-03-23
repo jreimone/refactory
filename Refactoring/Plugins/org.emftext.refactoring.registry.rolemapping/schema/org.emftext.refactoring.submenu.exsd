@@ -68,13 +68,13 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="generalises" type="string">
+         <attribute name="specialises" type="string">
             <annotation>
                <documentation>
                   Use this attribute to specify another registered refactoring submenu as parent menu. In this way it is possible to compose several submenus.
                </documentation>
                <appinfo>
-                  <meta.attribute kind="identifier" basedOn="org.emftext.refactoring.rolemapping/@submenuID"/>
+                  <meta.attribute kind="identifier" basedOn="org.emftext.refactoring.submenu/refactoringSubMenu/@submenuID"/>
                </appinfo>
             </annotation>
          </attribute>
