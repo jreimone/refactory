@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
@@ -41,7 +42,7 @@ public class RemoveAllRedundantBrackets implements IRefactoringPostProcessor {
 	}
 
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
 		System.err.println("RemoveAllRedundantBrackets postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
@@ -140,6 +141,13 @@ public class RemoveAllRedundantBrackets implements IRefactoringPostProcessor {
 			}
 		}
 		return removedSomeBracket;
+	}
+
+	@Override
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
+			ResourceSet resourceSet, ChangeDescription change) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

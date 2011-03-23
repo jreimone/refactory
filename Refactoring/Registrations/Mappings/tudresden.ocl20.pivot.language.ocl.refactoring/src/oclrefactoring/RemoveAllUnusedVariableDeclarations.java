@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -51,7 +52,7 @@ public class RemoveAllUnusedVariableDeclarations implements IRefactoringPostProc
 
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
-			ResourceSet resourceSet, ChangeDescription change) {
+			ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
 
 
 		System.out.println("Postprocessor for 'Remove All Unused Variable Definitions' refactoring activated!");
@@ -179,6 +180,13 @@ public class RemoveAllUnusedVariableDeclarations implements IRefactoringPostProc
 		} else {
 			System.out.println("nothing to clean has been found");
 		}
+	}
+
+	@Override
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
+			ResourceSet resourceSet, ChangeDescription change) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -19,4 +19,5 @@ Import-Package: org.eclipse.emf.compare,
  org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare.diff.engine.check,
  org.eclipse.emf.compare.diff.metamodel,
- org.eclipse.emf.compare.match.metamodel
+ org.eclipse.emf.compare.match.metamodel,
+ org.emftext.language.refactoring.refactoring_specification
