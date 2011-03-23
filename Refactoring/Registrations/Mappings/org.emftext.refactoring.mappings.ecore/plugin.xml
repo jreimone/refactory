@@ -76,7 +76,7 @@
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/extractInterfaceFromFeatures.rolemapping"
-            submenu="extractSubRefactorings">
+            submenu="extractRefactorings">
             <mappingIcon
                   icon="icons/extractInterface.gif"
                   mapping_name="ExtractInterfaceFromFeatures">
@@ -134,11 +134,6 @@
       <refactoringSubMenu
             displayString="Extract Refactorings"
             submenuID="extractRefactorings">
-      </refactoringSubMenu>
-      <refactoringSubMenu
-            displayString="Specific Extract Refactorings"
-            specialises="extractRefactorings"
-            submenuID="extractSubRefactorings">
       </refactoringSubMenu>
    </extension>
 </plugin>
