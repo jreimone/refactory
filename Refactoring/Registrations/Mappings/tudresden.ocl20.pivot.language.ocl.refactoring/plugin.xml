@@ -8,25 +8,23 @@
       </rolemapping>
    </extension>
    <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
-            mapping_name="RenameSimpleNameCS"
-            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.OCLPostProcessor">
-      </postprocessor>
-   </extension>
-   <extension
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/extractings.rolemapping">
       </rolemapping>
    </extension>
    <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/integrations.rolemapping">
+      </rolemapping>
+   </extension>
+   <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="RenameNamedLiteralExpCS"
+            mapping_name="RenameSimpleNameCS"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RenameNamedLiteralExpPostProcessor">
+            postprocessor="oclrefactoring.OCLPostProcessor">
       </postprocessor>
    </extension>
    <extension
@@ -38,17 +36,19 @@
       </postprocessor>
    </extension>
    <extension
-         point="org.emftext.refactoring.rolemapping">
-      <rolemapping
-            rolemapping_resource="rolemappings/integrations.rolemapping">
-      </rolemapping>
-   </extension>
-   <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
             mapping_name="Integrate Variable From LetExpression"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.IntegrateVarFromLetExp">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Remove All Empty Variable Declarations"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RemoveAllEmptyVariableDeclarationsPostProcessor">
       </postprocessor>
    </extension>
    <extension
@@ -70,33 +70,25 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Remove Empty Variable Declaration"
-            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RemoveEmptyVariableDeclarationPostProcessor">
-      </postprocessor>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
-            mapping_name="tudresden.ocl20.pivot.language.ocl.refactoring.postprocessor2"
-            nsUri="tudresden.ocl20.pivot.language.ocl.refactoring.postprocessor2"
-            postprocessor="tudresden.ocl20.pivot.language.ocl.refactoring.RefactoringPostProcessor2">
-      </postprocessor>
-   </extension> 
-   <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
-            mapping_name="Remove All Empty Variable Declarations"
-            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RemoveAllEmptyVariableDeclarationsPostProcessor">
-      </postprocessor>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
             mapping_name="Remove All Unused Variable Declarations"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.RemoveAllUnusedVariableDeclarations">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="RenameNamedLiteralExpCS"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RenameNamedLiteralExpPostProcessor">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Remove Empty Variable Declaration"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RemoveEmptyVariableDeclarationPostProcessor">
       </postprocessor>
    </extension>
 
