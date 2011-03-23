@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -41,17 +42,9 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 	DatatypesFactoryImpl myDataTypesFactory;
 	PivotModelFactoryImpl myPivotModelFactory;
 	
-	
-	public IntegrateVarFromLetExp() {
-		myOclFactory = new OclFactoryImpl();
-		myDataTypesFactory = new DatatypesFactoryImpl();
-		myPivotModelFactory = new PivotModelFactoryImpl();
-	}
-	
-	
-	
-	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+		@Override
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change,
+			RefactoringSpecification refSpec) {
 		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
@@ -69,6 +62,16 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 		
 		return Status.OK_STATUS;
 	}
+		
+	public IntegrateVarFromLetExp() {
+		myOclFactory = new OclFactoryImpl();
+		myDataTypesFactory = new DatatypesFactoryImpl();
+		myPivotModelFactory = new PivotModelFactoryImpl();
+	}
+	
+	
+	
+
 	
 	private IStatus performSpecificTransformation() {
 		
@@ -141,6 +144,13 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 		
 				
 		return Status.OK_STATUS;		
+	}
+
+	@Override
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
+			ResourceSet resourceSet, ChangeDescription change) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

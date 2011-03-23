@@ -9,41 +9,31 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.change.ChangeDescription;
-import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 import tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.language.ocl.impl.OclFactoryImpl;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
-import tudresden.ocl20.pivot.language.ocl.impl.*;
-import tudresden.ocl20.pivot.language.ocl.util.OclAdapterFactory;
 
 /**
  * @author Michael Muck
@@ -78,7 +68,7 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 	
 	
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
 //		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
@@ -241,5 +231,14 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 			}
 		}
 			
+	}
+
+
+
+	@Override
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
+			ResourceSet resourceSet, ChangeDescription change) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

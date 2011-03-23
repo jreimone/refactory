@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.change.ListChange;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
@@ -38,7 +39,7 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 	}
 
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
 		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
@@ -99,6 +100,13 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 				}
 			}
 		}
+	}
+
+	@Override
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
+			ResourceSet resourceSet, ChangeDescription change) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

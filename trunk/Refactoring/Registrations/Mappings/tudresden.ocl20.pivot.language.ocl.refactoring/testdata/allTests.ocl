@@ -2,9 +2,9 @@
 context CustomerCard
 inv:
   if valid then
-	(((((self.validFrom.isBefore(Date::now())))) and (self.validThru.isAfter(Date::now())))) = false
+	((self.validFrom.isBefore(Date::now())) and (self.validThru.isAfter(Date::now()))) = false
   else
-	((((((self.validFrom.isBefore(Date::now())))))) and (self.validThru.isAfter((((Date::now())))))) = true
+	((self.validFrom.isBefore(Date::now())) and (self.validThru.isAfter((Date::now())))) = true
   endif
   
  
