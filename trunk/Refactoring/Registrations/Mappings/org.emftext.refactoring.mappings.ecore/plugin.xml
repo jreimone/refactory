@@ -76,7 +76,7 @@
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/extractInterfaceFromFeatures.rolemapping"
-            submenu="extractRefactorings">
+            submenu="extractSubRefactorings">
             <mappingIcon
                   icon="icons/extractInterface.gif"
                   mapping_name="ExtractInterfaceFromFeatures">
