@@ -28,7 +28,7 @@ import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
 import tudresden.ocl20.pivot.language.ocl.impl.OclFactoryImpl;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
-public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
+public class InlineVarFromLetExp implements IRefactoringPostProcessor {
 	
 	private EObject constraintRoot;
 	
@@ -63,7 +63,7 @@ public class IntegrateVarFromLetExp implements IRefactoringPostProcessor {
 		return Status.OK_STATUS;
 	}
 		
-	public IntegrateVarFromLetExp() {
+	public InlineVarFromLetExp() {
 		myOclFactory = new OclFactoryImpl();
 		myDataTypesFactory = new DatatypesFactoryImpl();
 		myPivotModelFactory = new PivotModelFactoryImpl();
