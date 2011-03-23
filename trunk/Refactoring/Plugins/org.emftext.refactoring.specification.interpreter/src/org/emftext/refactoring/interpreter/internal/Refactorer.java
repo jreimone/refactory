@@ -207,12 +207,27 @@ public class Refactorer implements IRefactorer {
 		}
 		EObject copiedModel = copier.get(model);
 		interpreter.setInput(copiedInputSelection);
+		ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
+		ChangeDescription change = recorder.summarize();
 		IRefactoringFakeInterpreter fakeInterpreter = interpreter.getFakeInterpreter();
 		fakeInterpreter.setInput(copiedInputSelection);
 		EObject copiedRefactoredModel = null;
 		try {
 			// this model then can be used for compare view before refactoring
 			copiedRefactoredModel = fakeInterpreter.interprete(copiedModel);
+			
+			//after interpreting and refactoring the generic part, the postprocessor is called here
+			IRefactoringPostProcessor fakePostProcessor = fakeInterpreter.getPostProcessor();
+			if (fakePostProcessor != null) {
+				RefactoringSpecification fakeRefactoringSpecification = fakeInterpreter.getRefactoringSpecification();
+				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), refactoredModelRS, change, fakeRefactoringSpecification);
+				if (fakePostProcessingStatus.getSeverity() != IRefactoringStatus.OK) {
+					int severity = fakePostProcessingStatus.getSeverity();
+					IRefactoringStatus fakeRefStatus = new RefactoringStatus(currentMapping, severity, fakePostProcessingStatus.getMessage());
+				}
+			}
+			//end of postprocessing
+			
 		} catch (Exception e) {
 //			e.printStackTrace();
 			RegistryUtil.log("fake interpreter threw exception", IStatus.ERROR, e);
