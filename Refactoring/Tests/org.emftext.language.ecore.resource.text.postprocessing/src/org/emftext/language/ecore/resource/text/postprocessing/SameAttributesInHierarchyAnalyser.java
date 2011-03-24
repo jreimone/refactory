@@ -104,4 +104,9 @@ public class SameAttributesInHierarchyAnalyser extends AbstractPostProcessor {
 		}
 	}
 
+	public void terminate() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
