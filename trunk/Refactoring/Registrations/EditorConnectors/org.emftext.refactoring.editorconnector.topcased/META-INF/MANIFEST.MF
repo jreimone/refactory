@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EditorConnector for Topcased
+Bundle-SymbolicName: org.emftext.refactoring.editorconnector.topcased;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Jan Reimann
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.emftext.refactoring.ui,
+ org.eclipse.ui.workbench,
+ org.eclipse.emf.ecore,
+ org.eclipse.jface,
+ org.eclipse.emf.transaction,
+ org.eclipse.gef,
+ org.topcased.modeler,
+ org.topcased.modeler.uml
