@@ -215,7 +215,7 @@ public class Refactorer implements IRefactorer {
 		try {
 			// this model then can be used for compare view before refactoring
 			copiedRefactoredModel = fakeInterpreter.interprete(copiedModel);
-			
+			change = recorder.summarize();
 			//after interpreting and refactoring the generic part, the postprocessor is called here
 			IRefactoringPostProcessor fakePostProcessor = fakeInterpreter.getPostProcessor();
 			if (fakePostProcessor != null) {
