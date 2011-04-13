@@ -6,13 +6,27 @@ inv:
   else
 	(self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())) = true
   endif
-  
-  
--- Invariant 13 integration:
-context CustomerCard
+
+-- Definition 2:
+context LoyaltyProgram
+def: getServicesByLevel(levelName: String): Set(Service)
+     = levels->select(name = levelName).availableServices->asSet()
+
+-- Invariant 16:
+context Service
+inv: self.oclIsUndefined() = false
+
+-- Invariant 17:
+context Service
+inv: self.oclIsInvalid() = false
+
+
+-- Invariant 17a:
+context Service
+inv: 
+	self.oclIsInvalid() = false 
+	
+context Service
 inv:
-  if valid then
-	((self.validFrom.isBefore(Date::now())) and self.validThru.isAfter(Date::now())) = false
-  else
-	((self.validFrom.isBefore(Date::now())) and self.validThru.isAfter(Date::now())) = true
-  endif
+	self.oclIsUndefined() = false
+	

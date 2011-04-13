@@ -91,5 +91,37 @@
             postprocessor="oclrefactoring.RemoveEmptyVariableDeclarationPostProcessor">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Split Constraint"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.SplitConstraintPP">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Split Constraint Atomic"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.SplitConstraintAtomicPP">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Merge Constraints"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.MergeConstraintsPP">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Merge Invariants"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.MergeInvariantsPP">
+      </postprocessor>
+   </extension>
 
 </plugin>
