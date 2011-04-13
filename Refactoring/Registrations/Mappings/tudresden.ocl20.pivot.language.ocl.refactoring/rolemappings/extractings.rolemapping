@@ -31,3 +31,11 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 "Remove All Unused Variable Declarations" maps <SelectX> {
 	Selection := ContextDeclarationCS;
 }
+
+"Split Constraint" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
+}
+
+"Split Constraint Atomic" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
+}

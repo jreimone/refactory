@@ -5,3 +5,11 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 "Inline Variable From LetExpression" maps <SelectX> {
 	Selection := VariableDeclarationWithInitCS;
 }
+
+"Merge Constraints" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
+}
+
+"Merge Invariants" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
+}
