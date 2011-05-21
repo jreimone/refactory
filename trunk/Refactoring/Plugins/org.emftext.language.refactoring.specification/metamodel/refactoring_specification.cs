@@ -28,6 +28,8 @@ OPTIONS{
 	overrideHoverTextProvider = "false";
 	overrideBuilder = "false";
 	overrideUIPluginXML = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{

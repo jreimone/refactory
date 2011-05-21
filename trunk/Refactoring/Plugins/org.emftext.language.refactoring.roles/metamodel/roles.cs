@@ -25,6 +25,8 @@ OPTIONS {
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
 	overrideBuilder = "false";
 	overrideUIPluginXML = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{

@@ -5,6 +5,8 @@ START PropertyModel
 OPTIONS{
 	generateCodeFromGeneratorModel = "true";
 	reloadGeneratorModel = "true";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{
