@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 
@@ -101,7 +101,7 @@ public class ConcreteMappingMetaclassReferenceResolver
 	 * Returns a map of all EClasses that can be found in the given EPackage.
 	 * The keys of the map are the names of the classes. EClasses found in sub
 	 * packages are prefixed with the name of the sub package.
-	 * 
+	 *
 	 * @param packages
 	 *            the package to search in
 	 * @return

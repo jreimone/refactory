@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2010 Software Technology Group - TU Dresden, Germany.
+ * Copyright (c) 2008-2011 Software Technology Group - TU Dresden, Germany.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3.0

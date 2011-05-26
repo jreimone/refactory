@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 
@@ -53,10 +53,10 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 						String name = ((RoleModel) eObject).getName();
 						model = registry.getRoleModelByName(name);
 						if(model != null){
-							result.addMapping(identifier, model); 
+							result.addMapping(identifier, model);
 							EcoreUtil.resolveAll(model);
 						} else {
-							result.addMapping(identifier, (RoleModel) eObject); 
+							result.addMapping(identifier, (RoleModel) eObject);
 							EcoreUtil.resolveAll(eObject);
 						}
 					} else {
@@ -70,7 +70,7 @@ public class MappingMappedRoleModelReferenceResolver implements org.emftext.lang
 	}
 
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.RoleModel element, org.emftext.language.refactoring.rolemapping.RoleMapping container, org.eclipse.emf.ecore.EReference reference) {
-		return EcoreUtil.getURI(element).toString(); 
+		return EcoreUtil.getURI(element).toString();
 	}
 
 	public void setOptions(java.util.Map<?,?> options) {

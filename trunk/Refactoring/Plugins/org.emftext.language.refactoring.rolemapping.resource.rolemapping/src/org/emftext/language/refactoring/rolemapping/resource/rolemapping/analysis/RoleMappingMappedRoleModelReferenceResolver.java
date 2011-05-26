@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 
@@ -24,7 +24,7 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 
 public class RoleMappingMappedRoleModelReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.RoleMapping, org.emftext.language.refactoring.roles.RoleModel> {
-	
+
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.RoleMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.RoleModel> result) {
 		IRoleModelRegistry registry = IRoleModelRegistry.INSTANCE;
 		if (resolveFuzzy) {
@@ -52,10 +52,10 @@ public class RoleMappingMappedRoleModelReferenceResolver implements org.emftext.
 						String name = ((RoleModel) eObject).getName();
 						model = registry.getRoleModelByName(name);
 						if(model != null){
-							result.addMapping(identifier, model); 
+							result.addMapping(identifier, model);
 							EcoreUtil.resolveAll(model);
 						} else {
-							result.addMapping(identifier, (RoleModel) eObject); 
+							result.addMapping(identifier, (RoleModel) eObject);
 							EcoreUtil.resolveAll(eObject);
 						}
 					} else {
@@ -67,13 +67,13 @@ public class RoleMappingMappedRoleModelReferenceResolver implements org.emftext.
 			}
 		}
 	}
-	
+
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.RoleModel element, org.emftext.language.refactoring.rolemapping.RoleMapping container, org.eclipse.emf.ecore.EReference reference) {
 		return EcoreUtil.getURI(element).toString();
 	}
-	
+
 	public void setOptions(java.util.Map<?,?> options) {
 		// save options in a field or leave method empty if this resolver does not depend on any option
 	}
-	
+
 }

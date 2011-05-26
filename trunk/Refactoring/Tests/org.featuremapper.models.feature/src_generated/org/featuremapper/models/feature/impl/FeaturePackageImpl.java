@@ -1,13 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2008-2010 Software Technology Group - TU Dresden, Germany.
- * 
+ * Copyright (c) 2008-2011 Software Technology Group - TU Dresden, Germany.
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.html
- * 
+ *
  * Contributors:
- *     Software Technology Group - TU Dresden, Germany 
+ *     Software Technology Group - TU Dresden, Germany
  *     - initial API and implementation
  ******************************************************************************/
 
@@ -110,7 +110,7 @@ public class FeaturePackageImpl extends EPackageImpl implements FeaturePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link FeaturePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -137,7 +137,7 @@ public class FeaturePackageImpl extends EPackageImpl implements FeaturePackage {
 		// Mark meta-data to indicate it can't be changed
 		theFeaturePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(FeaturePackage.eNS_URI, theFeaturePackage);
 		return theFeaturePackage;
