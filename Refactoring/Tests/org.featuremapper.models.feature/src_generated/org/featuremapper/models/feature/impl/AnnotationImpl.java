@@ -1,13 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2008-2010 Software Technology Group - TU Dresden, Germany.
- * 
+ * Copyright (c) 2008-2011 Software Technology Group - TU Dresden, Germany.
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.html
- * 
+ *
  * Contributors:
- *     Software Technology Group - TU Dresden, Germany 
+ *     Software Technology Group - TU Dresden, Germany
  *     - initial API and implementation
  ******************************************************************************/
 

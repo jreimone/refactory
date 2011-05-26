@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 
@@ -22,7 +22,7 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 
 public class ConcreteMappingRoleReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.emftext.language.refactoring.roles.Role> {
-	
+
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.emftext.language.refactoring.roles.Role> result) {
 		if (identifier.contains(".")) {
 			result.setErrorMessage("Role references must not contain dots.");
@@ -47,13 +47,13 @@ public class ConcreteMappingRoleReferenceResolver implements org.emftext.languag
 			assert false;
 		}
 	}
-	
+
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.Role element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getName();
 	}
-	
+
 	public void setOptions(java.util.Map<?,?> options) {
 		// save options in a field or leave method empty if this resolver does not depend on any option
 	}
-	
+
 }
