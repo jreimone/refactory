@@ -23,6 +23,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.emftext.language.refactoring.specification.resource,
   org.emftext.language.refactoring.specification.resource.analysis,
   org.emftext.language.refactoring.specification.resource.mopp,
+  org.emftext.language.refactoring.specification.resource.debug,
+  org.emftext.language.refactoring.specification.resource.launch,
   org.emftext.language.refactoring.specification.resource.grammar,
   org.emftext.language.refactoring.specification.resource.util
 Bundle-Activator: org.emftext.language.refactoring.specification.resource.mopp.RefspecPlugin

@@ -23,6 +23,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.emftext.language.refactoring.rolemapping.resource.rolemapping,
   org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis,
   org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp,
+  org.emftext.language.refactoring.rolemapping.resource.rolemapping.debug,
+  org.emftext.language.refactoring.rolemapping.resource.rolemapping.launch,
   org.emftext.language.refactoring.rolemapping.resource.rolemapping.grammar,
   org.emftext.language.refactoring.rolemapping.resource.rolemapping.util
 Bundle-Activator: org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingPlugin

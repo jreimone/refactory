@@ -45,6 +45,9 @@
       <genOperations ecoreOperation="rolemapping.ecore#//ConcreteMapping/getCollaborationMappingForCollaboration">
         <genParameters ecoreParameter="rolemapping.ecore#//ConcreteMapping/getCollaborationMappingForCollaboration/collaboration"/>
       </genOperations>
+      <genOperations ecoreOperation="rolemapping.ecore#//ConcreteMapping/getCollaborationMappingsForTargetRole">
+        <genParameters ecoreParameter="rolemapping.ecore#//ConcreteMapping/getCollaborationMappingsForTargetRole/role"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="rolemapping.ecore#//CollaborationMapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//CollaborationMapping/collaboration"/>

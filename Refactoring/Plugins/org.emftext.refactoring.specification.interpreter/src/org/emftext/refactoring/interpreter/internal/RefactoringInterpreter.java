@@ -497,9 +497,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	 * @see org.emftext.language.refactoring.specification.resource.util.
 	 * AbstractRefspecInterpreter#continueInterpretation(java.lang.Object)
 	 */
-	@Override
 	public boolean continueInterpretation(IRefactoringStatus result) {
 		return (result.getSeverity() == IRefactoringStatus.OK);
+	}
+
+	@Override
+	public boolean continueInterpretation(RefactoringInterpreterContext context, IRefactoringStatus result) {
+		return continueInterpretation(result);
 	}
 
 	/*
