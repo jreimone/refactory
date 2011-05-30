@@ -20,6 +20,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.emftext.language.refactoring.roles.resource.rolestext,
   org.emftext.language.refactoring.roles.resource.rolestext.analysis,
   org.emftext.language.refactoring.roles.resource.rolestext.mopp,
+  org.emftext.language.refactoring.roles.resource.rolestext.debug,
+  org.emftext.language.refactoring.roles.resource.rolestext.launch,
   org.emftext.language.refactoring.roles.resource.rolestext.grammar,
   org.emftext.language.refactoring.roles.resource.rolestext.util
 Bundle-Activator: org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextPlugin
