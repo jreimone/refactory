@@ -90,6 +90,11 @@ public class RefactoringAction extends Action {
 							}
 						}
 					}
+					if(objectsToSelect.isEmpty()){
+						for (List<EObject> list : resolvedRoleRuntimeInstances.values()) {
+							objectsToSelect.addAll(list);
+						}
+					}
 					connector.selectEObjects(objectsToSelect);
 				}
 			}
