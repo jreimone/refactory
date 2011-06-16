@@ -5,12 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.resources.IResource;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -20,13 +17,14 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
 
 public class XtextEditorConnector implements IEditorConnector {
 
 	private XtextEditor editor;
-	
+
 	public XtextEditorConnector() {
 		//
 	}
@@ -41,10 +39,6 @@ public class XtextEditorConnector implements IEditorConnector {
 
 	public List<EObject> handleSelection(ISelection selection) {
 		if(selection instanceof ITextSelection){
-			IResource res = editor.getResource();
-			ResourceSet rs = new ResourceSetImpl();
-			URI uri = URI.createPlatformResourceURI(res.getFullPath().toFile().getAbsolutePath(), true);
-//			Resource resource = rs.getResource(uri, true);
 			Resource resource = getXtextResource(editor);
 			System.out.println(resource);
 			if(resource instanceof XtextResource){
@@ -68,7 +62,7 @@ public class XtextEditorConnector implements IEditorConnector {
 		}
 		return null;
 	}
-	
+
 	private XtextResource getXtextResource(XtextEditor editor){
 		IXtextDocument doc = XtextDocumentUtil.get(editor);
 		XtextResource resource;
@@ -87,7 +81,23 @@ public class XtextEditorConnector implements IEditorConnector {
 	}
 
 	public void selectEObjects(List<EObject> objectsToSelect) {
-		System.out.println("XtextEditorConnector.selectEObjects() implement me");
+		int offset = Integer.MAX_VALUE;
+		int length = 0;
+		for (EObject object : objectsToSelect) {
+			EReference containmentFeature = object.eContainmentFeature();
+			TextLocation location = EObjectAtOffsetHelper.getLocation(object, containmentFeature, 0);
+			if (location.getOffset() < offset){
+				if(length != 0){
+					length += offset - location.getOffset();
+				} else {
+					length = location.getLength();
+				}
+				offset = location.getOffset();
+			}
+		}
+		if(length != 0){
+			editor.selectAndReveal(offset, length);
+		}
 	}
 
 }
