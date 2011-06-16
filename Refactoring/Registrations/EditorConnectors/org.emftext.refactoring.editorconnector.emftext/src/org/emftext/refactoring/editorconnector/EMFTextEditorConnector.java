@@ -13,16 +13,12 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.emftext.access.EMFTextAccessPlugin;
 import org.emftext.access.EMFTextAccessProxy;
 import org.emftext.access.resource.IEditor;
 import org.emftext.access.resource.ILocationMap;
 import org.emftext.access.resource.IResource;
-import org.osgi.framework.Version;
 
 public class EMFTextEditorConnector implements IEditorConnector {
-
-	private static final String MIN_VERSION = "1.3.0";
 
 	private IEditorPart editor;
 
@@ -31,26 +27,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 	}
 
 	public boolean canHandle(IEditorPart editor) {
-		this.editor = editor;
-		Version emftextVersion = EMFTextAccessPlugin.getDefault().getBundle().getVersion();
-		Version minVersion = new Version(MIN_VERSION);
-		if (emftextVersion.compareTo(minVersion) < 0) {
-			try {
-				IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(
-						editor, IEditor.class);
-				IResource emftextResource = emftextEditor.getResource();
-				if (emftextResource != null) {
-					return true;
-				}
-				return false;
-			} catch (Exception e) {
-				// could not handle
-				return false;
-			}
-		} else {
-			return EMFTextAccessProxy.isAccessibleWith(editor.getClass(),
-					IEditor.class);
-		}
+		return EMFTextAccessProxy.isAccessibleWith(editor.getClass(), IEditor.class);
 	}
 
 	public List<EObject> handleSelection(ISelection selection) {
