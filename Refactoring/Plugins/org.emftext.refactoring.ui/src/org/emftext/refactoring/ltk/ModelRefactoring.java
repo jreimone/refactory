@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.compare.ui.EMFCompareUIPlugin;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -36,12 +37,12 @@ public class ModelRefactoring extends Refactoring {
 	
 	private IRefactorer refactorer;
 	private String name;
-	private TransactionalEditingDomain diagramTransactionalEditingDomain;
+	private EditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 	private RoleMapping mapping;
 	private IRefactoringFakeInterpreter fakeInterpreter;
 
-	public ModelRefactoring(IRefactorer refactorer, RoleMapping mapping, TransactionalEditingDomain diagramTransactionalEditingDomain, String name, IEditorPart activeEditor) {
+	public ModelRefactoring(IRefactorer refactorer, RoleMapping mapping, EditingDomain diagramTransactionalEditingDomain, String name, IEditorPart activeEditor) {
 		super();
 		this.refactorer = refactorer;
 		this.mapping = mapping;
@@ -144,7 +145,7 @@ public class ModelRefactoring extends Refactoring {
 	/**
 	 * @return the diagramTransactionalEditingDomain
 	 */
-	public TransactionalEditingDomain getDiagramTransactionalEditingDomain() {
+	public EditingDomain getDiagramTransactionalEditingDomain() {
 		return diagramTransactionalEditingDomain;
 	}
 

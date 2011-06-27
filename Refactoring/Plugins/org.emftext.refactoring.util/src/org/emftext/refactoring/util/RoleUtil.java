@@ -53,7 +53,7 @@ public class RoleUtil {
 			} else if (objectAssignment instanceof TRACE) {
 				return ((TRACE) objectAssignment).getRole();
 			} else {
-				throw new UnsupportedOperationException("implement this case");
+				throw new UnsupportedOperationException("implement case where objectAssignment isinstanceof " + objectAssignment.getClass().getSimpleName());
 			}
 		}
 		return null;
