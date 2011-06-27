@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -47,7 +48,7 @@ import org.emftext.refactoring.util.RegistryUtil;
 public class ModelRefactoringChange extends Change implements IModelCompareInputProvider {
 
 	private IRefactorer refactorer;
-	private TransactionalEditingDomain diagramTransactionalEditingDomain;
+	private EditingDomain diagramTransactionalEditingDomain;
 	private ModelRefactoring modelRefactoring;
 	private IEditorPart activeEditor;
 	private IProgressMonitor monitor;

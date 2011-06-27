@@ -3,7 +3,7 @@ package org.emftext.refactoring.editorconnector;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 
@@ -39,12 +39,12 @@ public interface IEditorConnector {
 	
 	/**
 	 * Some editors, such as GMF editors, allow changes of the underlying model only if those changes 
-	 * will be executed in context of its {@link TransactionalEditingDomain editing domain}. So if
+	 * will be executed in context of its {@link EditingDomain editing domain}. So if
 	 * the passed editor needs it return the editing domain here. Otherwise return <code>null</code>.
 	 * 
 	 * @return
 	 */
-	public TransactionalEditingDomain getTransactionalEditingDomain();
+	public EditingDomain getTransactionalEditingDomain();
 	
 	/**
 	 * The {@link EObject}s which have to be selected will be passed to this method.

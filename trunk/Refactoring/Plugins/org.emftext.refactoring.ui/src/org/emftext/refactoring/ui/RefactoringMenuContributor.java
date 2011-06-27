@@ -3,21 +3,17 @@ package org.emftext.refactoring.ui;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.internal.preferences.ImmutableMap;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPart;
@@ -70,7 +66,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				selectedElements.add((EObject) object);
 			}
 		}
-		TransactionalEditingDomain transactionalEditingDomain = null;
+		EditingDomain transactionalEditingDomain = null;
 		IEditorPart activeEditor = null;
 		IEditorConnector editoConnector = null;
 		if (selectedElements == null || selectedElements.size() == 0) {

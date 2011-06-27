@@ -8,7 +8,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
@@ -37,7 +37,7 @@ public class RefactoringAction extends Action {
 	private RoleMapping mapping;
 	private IRefactorer refactorer;
 	private EObject refactoredModel;
-	private TransactionalEditingDomain diagramTransactionalEditingDomain;
+	private EditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 	private IEditorConnector connector;
 
@@ -48,7 +48,7 @@ public class RefactoringAction extends Action {
 		this.connector = connector;
 	}
 
-	public RefactoringAction(RoleMapping mapping, IRefactorer refactorer, TransactionalEditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector) {
+	public RefactoringAction(RoleMapping mapping, IRefactorer refactorer, EditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector) {
 		this(mapping, refactorer, connector);
 		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
 		this.activeEditor = activeEditor;
