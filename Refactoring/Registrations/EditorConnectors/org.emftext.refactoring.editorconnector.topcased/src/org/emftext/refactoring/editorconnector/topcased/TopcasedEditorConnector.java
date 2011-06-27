@@ -5,8 +5,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -15,32 +14,38 @@ import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.topcased.modeler.di.model.EMFSemanticModelBridge;
 import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.SemanticModelBridge;
+import org.topcased.modeler.editor.Modeler;
 
 public class TopcasedEditorConnector implements IEditorConnector {
 
-	private TransactionalEditingDomain transactionalEditingDomain;
+	private EditingDomain editingDomain;
+	private Resource resource;
 	
 	public TopcasedEditorConnector() {
 	}
 
 	public boolean canHandle(IEditorPart editor) {
-		ISelection selection = editor.getEditorSite().getSelectionProvider().getSelection();
-		if(selection instanceof StructuredSelection){
-			Object first = ((StructuredSelection) selection).getFirstElement();
-			if(first != null && first instanceof EditPart){
-				Object model = ((EditPart) first).getModel();
-				if(model instanceof GraphElement){
-					SemanticModelBridge semanticModel = ((GraphElement) model).getSemanticModel();
-					if(semanticModel instanceof EMFSemanticModelBridge){
-						EObject element = ((EMFSemanticModelBridge) semanticModel).getElement();
-						Resource eResource = element.eResource();
-						ResourceSet resourceSet = eResource.getResourceSet();
-						transactionalEditingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(resourceSet);
-						return true;
-					}
-				}
-			}
+		if(editor instanceof Modeler){
+			editingDomain = ((Modeler) editor).getEditingDomain();
+			return true;
 		}
+//		ISelection selection = editor.getEditorSite().getSelectionProvider().getSelection();
+//		if(selection instanceof StructuredSelection){
+//			Object first = ((StructuredSelection) selection).getFirstElement();
+//			if(first != null && first instanceof EditPart){
+//				Object model = ((EditPart) first).getModel();
+//				if(model instanceof GraphElement){
+//					SemanticModelBridge semanticModel = ((GraphElement) model).getSemanticModel();
+//					if(semanticModel instanceof EMFSemanticModelBridge){
+//						EObject element = ((EMFSemanticModelBridge) semanticModel).getElement();
+//						resource = element.eResource();
+//						ResourceSet resourceSet = resource.getResourceSet();
+//						transactionalEditingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(resourceSet);
+//						return true;
+//					}
+//				}
+//			}
+//		}
 		return false;
 	}
 
@@ -63,8 +68,8 @@ public class TopcasedEditorConnector implements IEditorConnector {
 		return selectedElements;
 	}
 
-	public TransactionalEditingDomain getTransactionalEditingDomain() {
-		return transactionalEditingDomain;
+	public EditingDomain getTransactionalEditingDomain() {
+		return editingDomain;
 	}
 
 	public void selectEObjects(List<EObject> objectsToSelect) {
