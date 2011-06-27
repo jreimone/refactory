@@ -24,16 +24,20 @@ public class GMFEditorConnector implements IEditorConnector {
 	}
 
 	public boolean canHandle(IEditorPart editor) {
-		ISelection selection = editor.getEditorSite().getSelectionProvider().getSelection();
-		if(selection instanceof StructuredSelection){
-			Object first = ((StructuredSelection) selection).getFirstElement();
-			if(first != null && first instanceof EditPart){
-				EditPartViewer viewer = ((EditPart) first).getViewer();
-				if(viewer instanceof IDiagramGraphicalViewer){
-					diagramTransactionalEditingDomain = ((IGraphicalEditPart) first).getEditingDomain();
-					return true;
+		try {
+			ISelection selection = editor.getEditorSite().getSelectionProvider().getSelection();
+			if(selection instanceof StructuredSelection){
+				Object first = ((StructuredSelection) selection).getFirstElement();
+				if(first != null && first instanceof EditPart){
+					EditPartViewer viewer = ((EditPart) first).getViewer();
+					if(viewer instanceof IDiagramGraphicalViewer){
+						diagramTransactionalEditingDomain = ((IGraphicalEditPart) first).getEditingDomain();
+						return true;
+					}
 				}
 			}
+		} catch (Exception e) {
+			// not an GMF editor
 		}
 		return false;
 	}
