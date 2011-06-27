@@ -8,6 +8,7 @@ Bundle-Vendor: Jan Reimann
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.refactoring.ui,
  org.eclipse.xtext.ui,
- org.eclipse.emf.transaction
+ org.eclipse.emf.transaction,
+ org.eclipse.ui.ide
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
