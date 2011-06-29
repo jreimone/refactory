@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
+import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.TRACE;
@@ -24,6 +25,7 @@ import org.emftext.language.refactoring.refactoring_specification.VariableAssign
 import org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
 
@@ -52,6 +54,11 @@ public class RoleUtil {
 				return ((RoleReference) objectAssignment).getRole();
 			} else if (objectAssignment instanceof TRACE) {
 				return ((TRACE) objectAssignment).getRole();
+			} else if (objectAssignment instanceof CollaborationReference) {
+				CollaborationReference collaborationReference = (CollaborationReference) objectAssignment;
+				MultiplicityCollaboration collaboration = collaborationReference.getCollaboration();
+				Role target = collaboration.getTarget();
+				return target;
 			} else {
 				throw new UnsupportedOperationException("implement case where objectAssignment isinstanceof " + objectAssignment.getClass().getSimpleName());
 			}
