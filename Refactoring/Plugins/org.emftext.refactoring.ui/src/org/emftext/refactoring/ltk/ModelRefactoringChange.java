@@ -261,6 +261,9 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 	}
 
 	private Resource createTemporaryResource(EObject model) {
+		if(model == null){
+			return null;
+		}
 		Resource resource = model.eResource();
 		if(resource == null){
 			String id = EcoreUtil.getIdentification(model);

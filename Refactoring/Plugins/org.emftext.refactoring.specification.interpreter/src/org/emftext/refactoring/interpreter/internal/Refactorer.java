@@ -202,8 +202,20 @@ public class Refactorer implements IRefactorer {
 		Collection<EObject> copiedElements = copier.copyAll(originalElements);
 		copier.copyReferences();
 		List<EObject> copiedInputSelection = new LinkedList<EObject>();
-		for (EObject eObject : filteredElements) {
-			copiedInputSelection.add(copier.get(eObject));
+		for (EObject originalElement : filteredElements) {
+			EObject copiedElement = copier.get(originalElement);
+			if(copiedElement == null){
+				URI uri = EcoreUtil.getURI(originalElement);
+				Collection<EObject> copies = copier.values();
+				for (EObject eObject : copies) {
+					URI uri2 = EcoreUtil.getURI(eObject);
+					if(uri.equals(uri2)){
+						copiedInputSelection.add(eObject);
+					}
+				}
+			} else {
+				copiedInputSelection.add(copier.get(originalElement));
+			}
 		}
 		EObject copiedModel = copier.get(model);
 		interpreter.setInput(copiedInputSelection);
