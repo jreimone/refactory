@@ -27,10 +27,17 @@ public class EMFTextEditorConnector implements IEditorConnector {
 	}
 
 	public boolean canHandle(IEditorPart editor) {
-		return EMFTextAccessProxy.isAccessibleWith(editor.getClass(), IEditor.class);
+		if(EMFTextAccessProxy.isAccessibleWith(editor.getClass(), IEditor.class)){
+			this.editor = editor;
+			return true;
+		}
+		return false;
 	}
 
 	public List<EObject> handleSelection(ISelection selection) {
+		if(editor == null){
+			return null;
+		}
 		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor,
 				IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
