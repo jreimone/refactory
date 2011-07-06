@@ -1,0 +1,13 @@
+ROLEMODELMAPPING FOR <http://org.emftext/company.ecore>
+
+"Rename Company" maps <RenameX> { 
+	 Nameable := Company(name -> name) ; 
+}
+
+"Rename Department" maps <RenameX> { 
+	 Nameable := Department(name -> name) ; 
+}
+
+"Rename Employee" maps <RenameX> { 
+	 Nameable := Employee(name -> name) ; 
+}

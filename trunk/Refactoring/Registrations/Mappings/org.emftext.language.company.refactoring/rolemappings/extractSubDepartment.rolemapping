@@ -1,0 +1,12 @@
+ROLEMODELMAPPING FOR <http://org.emftext/company.ecore>
+
+"Extract Sub-Department" maps <ExtractSubX> { 
+	OrigContainer := Department{
+		extracts := employees;
+		newParent := subDepartments;
+	};
+	NewContainer := Department(name -> name){
+		moved := employees;
+	};
+	Extractee := Employee;
+}
