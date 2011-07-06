@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Refactoring
+Bundle-SymbolicName: org.emftext.language.company.refactoring;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.emftext.refactoring.registry.rolemapping,
+ org.eclipse.equinox.common,
+ org.eclipse.emf.ecore,
+ org.emftext.language.refactoring.specification,
+ org.eclipse.emf.ecore.change,
+ org.emftext.language.company
