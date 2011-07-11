@@ -94,33 +94,33 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Split Constraint"
+            mapping_name="Split Expression"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.SplitConstraintPP">
+            postprocessor="oclrefactoring.SplitExpressionPP">
       </postprocessor>
    </extension>
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Split Constraint Atomic"
+            mapping_name="Split Expression Atomic"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.SplitConstraintAtomicPP">
+            postprocessor="oclrefactoring.SplitExpressionAtomicPP">
       </postprocessor>
    </extension>
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Merge Constraints"
+            mapping_name="Merge Atomic Expressions"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.MergeConstraintsPP">
+            postprocessor="oclrefactoring.MergeAtomicExpressionsPP">
       </postprocessor>
    </extension>
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Merge Invariants"
+            mapping_name="Merge Expressions"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.MergeInvariantsPP">
+            postprocessor="oclrefactoring.MergeExpressionsPP">
       </postprocessor>
    </extension>
 

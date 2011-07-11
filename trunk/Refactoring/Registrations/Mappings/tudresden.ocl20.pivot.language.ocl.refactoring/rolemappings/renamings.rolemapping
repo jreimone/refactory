@@ -3,7 +3,7 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 
 
 RenameSimpleNameCS maps <RenameX> { 
-	Nameable :=  SimpleNameCS( name -> simpleName )  ;
+	Nameable :=  SimpleNameCS( name -> simpleName );
 }
 
 

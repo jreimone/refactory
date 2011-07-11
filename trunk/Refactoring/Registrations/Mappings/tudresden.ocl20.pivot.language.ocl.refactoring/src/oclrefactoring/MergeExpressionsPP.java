@@ -35,7 +35,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  * @author Michael Muck
  *
  */
-public class MergeInvariantsPP implements IRefactoringPostProcessor {
+public class MergeExpressionsPP implements IRefactoringPostProcessor {
 
 	
 	OclFactoryImpl myOclFactory;
@@ -46,7 +46,7 @@ public class MergeInvariantsPP implements IRefactoringPostProcessor {
 	PostProcessingHelper myPPH;
 	
 
-	public MergeInvariantsPP() {
+	public MergeExpressionsPP() {
 
 		myOclFactory = new OclFactoryImpl();
 		myDataTypesFactory = new DatatypesFactoryImpl();
