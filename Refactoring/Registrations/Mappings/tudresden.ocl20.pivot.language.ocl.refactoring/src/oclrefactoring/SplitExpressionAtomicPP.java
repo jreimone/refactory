@@ -35,7 +35,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  * @author Michael Muck
  *
  */
-public class SplitConstraintAtomicPP implements IRefactoringPostProcessor {
+public class SplitExpressionAtomicPP implements IRefactoringPostProcessor {
 
 	
 	OclFactoryImpl myOclFactory;
@@ -47,7 +47,7 @@ public class SplitConstraintAtomicPP implements IRefactoringPostProcessor {
 	PackageDeclarationCS myPackage;
 	
 
-	public SplitConstraintAtomicPP() {
+	public SplitExpressionAtomicPP() {
 
 		myOclFactory = new OclFactoryImpl();
 		myDataTypesFactory = new DatatypesFactoryImpl();
