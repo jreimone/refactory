@@ -19,16 +19,15 @@ import org.eclipse.uml2.uml.State;
 import org.eclipse.uml2.uml.Transition;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.Vertex;
-import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostProcessor {
+public class UMLExtractCompositeStatePostProcessor extends AbstractRefactoringPostProcessor {
 
 	private List<State> extract;
 	private State newContainer;
 
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	ResourceSet resourceSet, ChangeDescription change) {
 		extract = new LinkedList<State>();
 //		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
@@ -129,9 +128,5 @@ public class UMLExtractCompositeStatePostProcessor implements IRefactoringPostPr
 		newContainer.setDoActivity(activity);
 //		System.out.println("set new doActivity for " + newContainer);
 		return true;
-	}
-
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
-		return process(roleRuntimeInstanceMap, resourceSet, change);
 	}
 }
