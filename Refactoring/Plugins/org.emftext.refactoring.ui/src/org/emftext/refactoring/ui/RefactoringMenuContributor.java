@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.Action;
@@ -68,14 +69,14 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		}
 		EditingDomain transactionalEditingDomain = null;
 		IEditorPart activeEditor = null;
-		IEditorConnector editoConnector = null;
+		IEditorConnector editorConnector = null;
 		if (selectedElements == null || selectedElements.size() == 0) {
 			activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			editoConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
-			if(editoConnector != null){
-				selectedElements = editoConnector.handleSelection(selection);
+			editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
+			if(editorConnector != null){
+				selectedElements = editorConnector.handleSelection(selection);
 				if (selectedElements != null && selectedElements.size() >= 1) {
-					transactionalEditingDomain = editoConnector.getTransactionalEditingDomain();
+					transactionalEditingDomain = editorConnector.getTransactionalEditingDomain();
 				}
 			}
 		}
@@ -86,6 +87,14 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			if (resource == null) {
 				return;
 			}
+			//Resolve the entire resource set, not just the resource itself. It might be the case that there are
+			//multiple models with cross references that have not been resolved up to this point. If one of the elements
+			//is changed during the refactoring, resolving the proxy to this element in another model does not recognize
+			//the changed element and creates a new one instead. This effectively creates an imperfect copy as the resolved
+			//element represents the state before the refactoring, whereas the refactored element represents the changed state.
+			//This leads to inconsistencies of the models and is to be avoided at all cost.
+			ResourceSet resourceSet = resource.getResourceSet();
+			EcoreUtil.resolveAll(resourceSet);
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
 			
 			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
@@ -102,9 +111,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 							Action refactoringAction = null;
 							if (transactionalEditingDomain == null) {
-								refactoringAction = new RefactoringAction(mapping, refactorer, editoConnector);
+								refactoringAction = new RefactoringAction(mapping, refactorer, editorConnector);
 							} else {
-								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor, editoConnector);
+								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor, editorConnector);
 							}
 							refactoringAction.setText(refactoringName);
 							refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));

@@ -39,332 +39,313 @@ import org.emftext.language.refactoring.refactoring_specification.RemoveModifier
  */
 public class REMOVEImpl extends DeleteCommandImpl implements REMOVE {
 	/**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getIndex() <em>Index</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
+	 * @see #getIndex()
+	 * @generated
+	 * @ordered
+	 */
 	protected IndexVariable index;
 
 	/**
-   * The cached value of the '{@link #getRemoval() <em>Removal</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRemoval() <em>Removal</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getRemoval()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRemoval()
+	 * @generated
+	 * @ordered
+	 */
 	protected ObjectRemoval removal;
 
 	/**
-   * The cached value of the '{@link #getModifier() <em>Modifier</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getModifier() <em>Modifier</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getModifier()
-   * @generated
-   * @ordered
-   */
+	 * @see #getModifier()
+	 * @generated
+	 * @ordered
+	 */
 	protected RemoveModifier modifier;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected REMOVEImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RefactoringSpecificationPackage.Literals.REMOVE;
-  }
+		return RefactoringSpecificationPackage.Literals.REMOVE;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public IndexVariable getIndex() {
-    if (index != null && index.eIsProxy())
-    {
-      InternalEObject oldIndex = (InternalEObject)index;
-      index = (IndexVariable)eResolveProxy(oldIndex);
-      if (index != oldIndex)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.REMOVE__INDEX, oldIndex, index));
-      }
-    }
-    return index;
-  }
+		if (index != null && index.eIsProxy()) {
+			InternalEObject oldIndex = (InternalEObject)index;
+			index = (IndexVariable)eResolveProxy(oldIndex);
+			if (index != oldIndex) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.REMOVE__INDEX, oldIndex, index));
+			}
+		}
+		return index;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public IndexVariable basicGetIndex() {
-    return index;
-  }
+		return index;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setIndex(IndexVariable newIndex) {
-    IndexVariable oldIndex = index;
-    index = newIndex;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__INDEX, oldIndex, index));
-  }
+		IndexVariable oldIndex = index;
+		index = newIndex;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__INDEX, oldIndex, index));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ObjectRemoval getRemoval() {
-    return removal;
-  }
+		return removal;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NotificationChain basicSetRemoval(ObjectRemoval newRemoval, NotificationChain msgs) {
-    ObjectRemoval oldRemoval = removal;
-    removal = newRemoval;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__REMOVAL, oldRemoval, newRemoval);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		ObjectRemoval oldRemoval = removal;
+		removal = newRemoval;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__REMOVAL, oldRemoval, newRemoval);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setRemoval(ObjectRemoval newRemoval) {
-    if (newRemoval != removal)
-    {
-      NotificationChain msgs = null;
-      if (removal != null)
-        msgs = ((InternalEObject)removal).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.REMOVE__REMOVAL, null, msgs);
-      if (newRemoval != null)
-        msgs = ((InternalEObject)newRemoval).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.REMOVE__REMOVAL, null, msgs);
-      msgs = basicSetRemoval(newRemoval, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__REMOVAL, newRemoval, newRemoval));
-  }
+		if (newRemoval != removal) {
+			NotificationChain msgs = null;
+			if (removal != null)
+				msgs = ((InternalEObject)removal).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.REMOVE__REMOVAL, null, msgs);
+			if (newRemoval != null)
+				msgs = ((InternalEObject)newRemoval).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.REMOVE__REMOVAL, null, msgs);
+			msgs = basicSetRemoval(newRemoval, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__REMOVAL, newRemoval, newRemoval));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RemoveModifier getModifier() {
-    return modifier;
-  }
+		return modifier;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NotificationChain basicSetModifier(RemoveModifier newModifier, NotificationChain msgs) {
-    RemoveModifier oldModifier = modifier;
-    modifier = newModifier;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__MODIFIER, oldModifier, newModifier);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		RemoveModifier oldModifier = modifier;
+		modifier = newModifier;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__MODIFIER, oldModifier, newModifier);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setModifier(RemoveModifier newModifier) {
-    if (newModifier != modifier)
-    {
-      NotificationChain msgs = null;
-      if (modifier != null)
-        msgs = ((InternalEObject)modifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.REMOVE__MODIFIER, null, msgs);
-      if (newModifier != null)
-        msgs = ((InternalEObject)newModifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.REMOVE__MODIFIER, null, msgs);
-      msgs = basicSetModifier(newModifier, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__MODIFIER, newModifier, newModifier));
-  }
+		if (newModifier != modifier) {
+			NotificationChain msgs = null;
+			if (modifier != null)
+				msgs = ((InternalEObject)modifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.REMOVE__MODIFIER, null, msgs);
+			if (newModifier != null)
+				msgs = ((InternalEObject)newModifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.REMOVE__MODIFIER, null, msgs);
+			msgs = basicSetModifier(newModifier, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REMOVE__MODIFIER, newModifier, newModifier));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REMOVE__REMOVAL:
-        return basicSetRemoval(null, msgs);
-      case RefactoringSpecificationPackage.REMOVE__MODIFIER:
-        return basicSetModifier(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REMOVE__REMOVAL:
+				return basicSetRemoval(null, msgs);
+			case RefactoringSpecificationPackage.REMOVE__MODIFIER:
+				return basicSetModifier(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REMOVE__INDEX:
-        if (resolve) return getIndex();
-        return basicGetIndex();
-      case RefactoringSpecificationPackage.REMOVE__REMOVAL:
-        return getRemoval();
-      case RefactoringSpecificationPackage.REMOVE__MODIFIER:
-        return getModifier();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REMOVE__INDEX:
+				if (resolve) return getIndex();
+				return basicGetIndex();
+			case RefactoringSpecificationPackage.REMOVE__REMOVAL:
+				return getRemoval();
+			case RefactoringSpecificationPackage.REMOVE__MODIFIER:
+				return getModifier();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REMOVE__INDEX:
-        setIndex((IndexVariable)newValue);
-        return;
-      case RefactoringSpecificationPackage.REMOVE__REMOVAL:
-        setRemoval((ObjectRemoval)newValue);
-        return;
-      case RefactoringSpecificationPackage.REMOVE__MODIFIER:
-        setModifier((RemoveModifier)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REMOVE__INDEX:
+				setIndex((IndexVariable)newValue);
+				return;
+			case RefactoringSpecificationPackage.REMOVE__REMOVAL:
+				setRemoval((ObjectRemoval)newValue);
+				return;
+			case RefactoringSpecificationPackage.REMOVE__MODIFIER:
+				setModifier((RemoveModifier)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REMOVE__INDEX:
-        setIndex((IndexVariable)null);
-        return;
-      case RefactoringSpecificationPackage.REMOVE__REMOVAL:
-        setRemoval((ObjectRemoval)null);
-        return;
-      case RefactoringSpecificationPackage.REMOVE__MODIFIER:
-        setModifier((RemoveModifier)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REMOVE__INDEX:
+				setIndex((IndexVariable)null);
+				return;
+			case RefactoringSpecificationPackage.REMOVE__REMOVAL:
+				setRemoval((ObjectRemoval)null);
+				return;
+			case RefactoringSpecificationPackage.REMOVE__MODIFIER:
+				setModifier((RemoveModifier)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REMOVE__INDEX:
-        return index != null;
-      case RefactoringSpecificationPackage.REMOVE__REMOVAL:
-        return removal != null;
-      case RefactoringSpecificationPackage.REMOVE__MODIFIER:
-        return modifier != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REMOVE__INDEX:
+				return index != null;
+			case RefactoringSpecificationPackage.REMOVE__REMOVAL:
+				return removal != null;
+			case RefactoringSpecificationPackage.REMOVE__MODIFIER:
+				return modifier != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-    if (baseClass == ReferenceCommand.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == ContainmentCommand.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case RefactoringSpecificationPackage.REMOVE__INDEX: return RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
+		if (baseClass == ReferenceCommand.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainmentCommand.class) {
+			switch (derivedFeatureID) {
+				case RefactoringSpecificationPackage.REMOVE__INDEX: return RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-    if (baseClass == ReferenceCommand.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == ContainmentCommand.class)
-    {
-      switch (baseFeatureID)
-      {
-        case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX: return RefactoringSpecificationPackage.REMOVE__INDEX;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-  }
+		if (baseClass == ReferenceCommand.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainmentCommand.class) {
+			switch (baseFeatureID) {
+				case RefactoringSpecificationPackage.CONTAINMENT_COMMAND__INDEX: return RefactoringSpecificationPackage.REMOVE__INDEX;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
 
 } //REMOVEImpl

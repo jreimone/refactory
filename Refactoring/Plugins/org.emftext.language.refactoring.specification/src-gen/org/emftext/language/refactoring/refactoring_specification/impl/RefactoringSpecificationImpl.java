@@ -49,132 +49,129 @@ import org.emftext.language.refactoring.roles.RoleModel;
 public class RefactoringSpecificationImpl extends EObjectImpl implements RefactoringSpecification {
 
 	/**
-   * The cached value of the '{@link #getUsedRoleModel() <em>Used Role Model</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getUsedRoleModel() <em>Used Role Model</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getUsedRoleModel()
-   * @generated
-   * @ordered
-   */
+	 * @see #getUsedRoleModel()
+	 * @generated
+	 * @ordered
+	 */
 	protected RoleModel usedRoleModel;
 
 	/**
-   * The cached value of the '{@link #getInstructions() <em>Instructions</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getInstructions() <em>Instructions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getInstructions()
-   * @generated
-   * @ordered
-   */
+	 * @see #getInstructions()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<Instruction> instructions;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected RefactoringSpecificationImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return RefactoringSpecificationPackage.Literals.REFACTORING_SPECIFICATION;
-  }
+		return RefactoringSpecificationPackage.Literals.REFACTORING_SPECIFICATION;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RoleModel getUsedRoleModel() {
-    if (usedRoleModel != null && usedRoleModel.eIsProxy())
-    {
-      InternalEObject oldUsedRoleModel = (InternalEObject)usedRoleModel;
-      usedRoleModel = (RoleModel)eResolveProxy(oldUsedRoleModel);
-      if (usedRoleModel != oldUsedRoleModel)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL, oldUsedRoleModel, usedRoleModel));
-      }
-    }
-    return usedRoleModel;
-  }
+		if (usedRoleModel != null && usedRoleModel.eIsProxy()) {
+			InternalEObject oldUsedRoleModel = (InternalEObject)usedRoleModel;
+			usedRoleModel = (RoleModel)eResolveProxy(oldUsedRoleModel);
+			if (usedRoleModel != oldUsedRoleModel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL, oldUsedRoleModel, usedRoleModel));
+			}
+		}
+		return usedRoleModel;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RoleModel basicGetUsedRoleModel() {
-    return usedRoleModel;
-  }
+		return usedRoleModel;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setUsedRoleModel(RoleModel newUsedRoleModel) {
-    RoleModel oldUsedRoleModel = usedRoleModel;
-    usedRoleModel = newUsedRoleModel;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL, oldUsedRoleModel, usedRoleModel));
-  }
+		RoleModel oldUsedRoleModel = usedRoleModel;
+		usedRoleModel = newUsedRoleModel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL, oldUsedRoleModel, usedRoleModel));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<Instruction> getInstructions() {
-    if (instructions == null)
-    {
-      instructions = new EObjectContainmentEList<Instruction>(Instruction.class, this, RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS);
-    }
-    return instructions;
-  }
+		if (instructions == null) {
+			instructions = new EObjectContainmentEList<Instruction>(Instruction.class, this, RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS);
+		}
+		return instructions;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<Variable> getDeclaredVariables() {
-    org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; 
-    org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Instruction > instructions = getInstructions ( ) ; 
-    for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction : instructions ) { 
-      if ( instruction instanceof org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) { 
-        org.emftext.language.refactoring.refactoring_specification.Variable var = ( ( org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) instruction ) .getVariable ( ) ; 
-        if ( var != null ) { 
-          variables .add ( var ) ; 
-        } 
-      } 
-    } 
-    return variables ; 
-    
-  }
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; 
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Instruction > instructions = getInstructions ( ) ; 
+		for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction : instructions ) { 
+			if ( instruction instanceof org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) { 
+				org.emftext.language.refactoring.refactoring_specification.Variable var = ( ( org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) instruction ) .getVariable ( ) ; 
+				if ( var != null ) { 
+					variables .add ( var ) ; 
+				} 
+			} 
+		} 
+		return variables ; 
+		
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public Variable getVariableByName(String name) {
-    org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = getDeclaredVariables ( ) ; 
-    for ( org.emftext.language.refactoring.refactoring_specification.Variable variable : variables ) { 
-      if ( variable .getName ( ) .equals ( name ) ) { 
-        return variable ; 
-      } 
-    } 
-    return null ; 
-    
-  }
+		org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = getDeclaredVariables ( ) ; 
+		for ( org.emftext.language.refactoring.refactoring_specification.Variable variable : variables ) { 
+			if ( variable .getName ( ) .equals ( name ) ) { 
+				return variable ; 
+			} 
+		} 
+		return null ; 
+		
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -232,93 +229,88 @@ public class RefactoringSpecificationImpl extends EObjectImpl implements Refacto
 	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	* <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
-        return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
+				return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL:
-        if (resolve) return getUsedRoleModel();
-        return basicGetUsedRoleModel();
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
-        return getInstructions();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL:
+				if (resolve) return getUsedRoleModel();
+				return basicGetUsedRoleModel();
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
+				return getInstructions();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL:
-        setUsedRoleModel((RoleModel)newValue);
-        return;
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
-        getInstructions().clear();
-        getInstructions().addAll((Collection<? extends Instruction>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL:
+				setUsedRoleModel((RoleModel)newValue);
+				return;
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
+				getInstructions().clear();
+				getInstructions().addAll((Collection<? extends Instruction>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL:
-        setUsedRoleModel((RoleModel)null);
-        return;
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
-        getInstructions().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL:
+				setUsedRoleModel((RoleModel)null);
+				return;
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
+				getInstructions().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL:
-        return usedRoleModel != null;
-      case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
-        return instructions != null && !instructions.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__USED_ROLE_MODEL:
+				return usedRoleModel != null;
+			case RefactoringSpecificationPackage.REFACTORING_SPECIFICATION__INSTRUCTIONS:
+				return instructions != null && !instructions.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //RefactoringSpecificationImpl

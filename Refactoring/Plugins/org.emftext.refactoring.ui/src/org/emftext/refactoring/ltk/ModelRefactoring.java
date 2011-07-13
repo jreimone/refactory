@@ -49,10 +49,14 @@ public class ModelRefactoring extends Refactoring {
 		this.name = name;
 		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
 		this.activeEditor = activeEditor;
-		doFakeRun();
+		
+		doCollectValuesToProvide();
 	}
 
-	private void doFakeRun(){
+	//cseidl
+	//Only collects the values to provide, which are needed to create a proper wizard layout.
+	//Fake run is postponed until immediately before the preview page is displayed.
+	private void doCollectValuesToProvide() {
 		try{
 			ResourceSet rs = refactorer.getResource().getResourceSet();
 			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rs);
@@ -63,24 +67,28 @@ public class ModelRefactoring extends Refactoring {
 
 				@Override
 				protected void doExecute() {
-					fakeInterpreter = refactorer.fakeRefactor(mapping);
+					fakeInterpreter = refactorer.collectValuesToProvide(mapping);
 				}
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public RoleMapping getRoleMapping()	{
+		return mapping;
+	}
+	
 	public int getFlags(){
 		int flags = RefactoringWizard.CHECK_INITIAL_CONDITIONS_ON_OPEN;
 		if(refactorer.getFakeRefactoredModel() == null){
 			flags |= RefactoringWizard.NO_PREVIEW_PAGE;
 		} 
-		int attributeValueProvderCount = 0;
+		int attributeValueProviderCount = 0;
 		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValuesToProvide();
 		for (IValueProvider<?, ?> valueProvider : valueProviders) {
 			if(valueProvider instanceof IAttributeValueProvider){
-				attributeValueProvderCount++;
+				attributeValueProviderCount++;
 			}
 		}
 		if(valueProviders.size() == 0){
@@ -89,7 +97,7 @@ public class ModelRefactoring extends Refactoring {
 		} else {
 //			flags |= stateDependentFromEMFCompareVersion();
 			flags |= RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
-			if(attributeValueProvderCount == valueProviders.size() || valueProviders.size() == 1){
+			if(attributeValueProviderCount == valueProviders.size() || valueProviders.size() == 1){
 				flags |= RefactoringWizard.DIALOG_BASED_USER_INTERFACE;
 			} else {
 				flags |= RefactoringWizard.WIZARD_BASED_USER_INTERFACE;
@@ -161,6 +169,10 @@ public class ModelRefactoring extends Refactoring {
 	 */
 	public IRefactoringFakeInterpreter getFakeInterpreter() {
 		return fakeInterpreter;
+	}
+
+	public RoleMapping getMapping() {
+		return mapping;
 	}
 
 }

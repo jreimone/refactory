@@ -37,228 +37,219 @@ import org.emftext.language.refactoring.roles.Role;
 public class RoleReferenceImpl extends ObjectAssignmentCommandImpl implements RoleReference
 {
   /**
-   * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRole()
-   * @generated
-   * @ordered
-   */
+	 * @see #getRole()
+	 * @generated
+	 * @ordered
+	 */
   protected Role role;
 
   /**
-   * The cached value of the '{@link #getFrom() <em>From</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getFrom() <em>From</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFrom()
-   * @generated
-   * @ordered
-   */
+	 * @see #getFrom()
+	 * @generated
+	 * @ordered
+	 */
   protected FromClause from;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected RoleReferenceImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RefactoringSpecificationPackage.Literals.ROLE_REFERENCE;
-  }
+		return RefactoringSpecificationPackage.Literals.ROLE_REFERENCE;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Role getRole()
   {
-    if (role != null && role.eIsProxy())
-    {
-      InternalEObject oldRole = (InternalEObject)role;
-      role = (Role)eResolveProxy(oldRole);
-      if (role != oldRole)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE, oldRole, role));
-      }
-    }
-    return role;
-  }
+		if (role != null && role.eIsProxy()) {
+			InternalEObject oldRole = (InternalEObject)role;
+			role = (Role)eResolveProxy(oldRole);
+			if (role != oldRole) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE, oldRole, role));
+			}
+		}
+		return role;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Role basicGetRole()
   {
-    return role;
-  }
+		return role;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setRole(Role newRole)
   {
-    Role oldRole = role;
-    role = newRole;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE, oldRole, role));
-  }
+		Role oldRole = role;
+		role = newRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE, oldRole, role));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public FromClause getFrom()
   {
-    return from;
-  }
+		return from;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetFrom(FromClause newFrom, NotificationChain msgs)
   {
-    FromClause oldFrom = from;
-    from = newFrom;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.ROLE_REFERENCE__FROM, oldFrom, newFrom);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		FromClause oldFrom = from;
+		from = newFrom;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.ROLE_REFERENCE__FROM, oldFrom, newFrom);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setFrom(FromClause newFrom)
   {
-    if (newFrom != from)
-    {
-      NotificationChain msgs = null;
-      if (from != null)
-        msgs = ((InternalEObject)from).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.ROLE_REFERENCE__FROM, null, msgs);
-      if (newFrom != null)
-        msgs = ((InternalEObject)newFrom).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.ROLE_REFERENCE__FROM, null, msgs);
-      msgs = basicSetFrom(newFrom, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.ROLE_REFERENCE__FROM, newFrom, newFrom));
-  }
+		if (newFrom != from) {
+			NotificationChain msgs = null;
+			if (from != null)
+				msgs = ((InternalEObject)from).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.ROLE_REFERENCE__FROM, null, msgs);
+			if (newFrom != null)
+				msgs = ((InternalEObject)newFrom).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RefactoringSpecificationPackage.ROLE_REFERENCE__FROM, null, msgs);
+			msgs = basicSetFrom(newFrom, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RefactoringSpecificationPackage.ROLE_REFERENCE__FROM, newFrom, newFrom));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
-        return basicSetFrom(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
+				return basicSetFrom(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE:
-        if (resolve) return getRole();
-        return basicGetRole();
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
-        return getFrom();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE:
+				if (resolve) return getRole();
+				return basicGetRole();
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
+				return getFrom();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE:
-        setRole((Role)newValue);
-        return;
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
-        setFrom((FromClause)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE:
+				setRole((Role)newValue);
+				return;
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
+				setFrom((FromClause)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE:
-        setRole((Role)null);
-        return;
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
-        setFrom((FromClause)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE:
+				setRole((Role)null);
+				return;
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
+				setFrom((FromClause)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE:
-        return role != null;
-      case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
-        return from != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__ROLE:
+				return role != null;
+			case RefactoringSpecificationPackage.ROLE_REFERENCE__FROM:
+				return from != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //RoleReferenceImpl
