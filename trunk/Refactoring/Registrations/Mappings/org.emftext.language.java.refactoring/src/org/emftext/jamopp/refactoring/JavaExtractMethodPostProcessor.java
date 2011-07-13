@@ -15,11 +15,10 @@ import org.emftext.language.java.modifiers.ModifiersFactory;
 import org.emftext.language.java.modifiers.Static;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.types.Void;
-import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor {
+public class JavaExtractMethodPostProcessor extends AbstractRefactoringPostProcessor {
 
 	private ClassMethod newContainer;
 	private ClassMethod origContainer;
@@ -27,7 +26,7 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 	/* (non-Javadoc)
 	 * @see org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor#process(java.util.Map)
 	 */
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	ResourceSet resourceSet, ChangeDescription change) {
 //		System.out.println("Add return type for 'Extract Method' in Java");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
@@ -76,9 +75,5 @@ public class JavaExtractMethodPostProcessor implements IRefactoringPostProcessor
 			}
 		}
 		return true;
-	}
-
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
-		return process(roleRuntimeInstanceMap, resourceSet, change);
 	}
 }
