@@ -3,6 +3,7 @@
  */
 package org.emftext.refactoring.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -60,7 +61,7 @@ public class RoleUtil {
 				Role target = collaboration.getTarget();
 				return target;
 			} else {
-				throw new UnsupportedOperationException("implement case where objectAssignment isinstanceof " + objectAssignment.getClass().getSimpleName());
+				throw new UnsupportedOperationException("implement this case");
 			}
 		}
 		return null;
@@ -305,5 +306,39 @@ public class RoleUtil {
 			}
 		}
 		return null;
+	}
+	
+	public static <T extends EObject> T getFirstObjectForRole(String roleName, Class<T> type, Map<Role, List<EObject>> roleRuntimeInstanceMap)
+	{
+		List<T> objects = getObjectsForRole(roleName, type, roleRuntimeInstanceMap);
+
+		if (objects == null || objects.isEmpty())
+		{
+			return null;
+		}
+
+		return objects.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends EObject> List<T> getObjectsForRole(String roleName, Class<T> type, Map<Role, List<EObject>> roleRuntimeInstanceMap)
+	{
+		Set<Role> roles = roleRuntimeInstanceMap.keySet();
+		List<T> typedObjects = new ArrayList<T>();
+		
+		for (Role role : roles)
+		{
+			if (role.getName().equals(roleName))
+			{
+				List<EObject> objects = roleRuntimeInstanceMap.get(role);
+				
+				for (EObject object : objects)
+				{
+					typedObjects.add((T) object);
+				}
+			}
+		}
+		
+		return typedObjects;
 	}
 }
