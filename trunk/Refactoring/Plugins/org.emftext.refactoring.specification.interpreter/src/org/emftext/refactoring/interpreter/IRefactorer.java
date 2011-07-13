@@ -56,6 +56,9 @@ public interface IRefactorer {
 	 */
 	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality);
 	
+	//cseidl
+	public IRefactoringFakeInterpreter collectValuesToProvide(RoleMapping mapping);
+	
 	/**
 	 * This method must be invoked before {@link IRefactorer#refactor()}. By this a fake run will be executed to
 	 * collect all values whioch have to be provided by the user and to calculate a comparison model.

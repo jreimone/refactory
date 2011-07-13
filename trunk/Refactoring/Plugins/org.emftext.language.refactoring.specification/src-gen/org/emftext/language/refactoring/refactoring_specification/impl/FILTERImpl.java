@@ -23,24 +23,24 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 public class FILTERImpl extends FromOperatorImpl implements FILTER
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected FILTERImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RefactoringSpecificationPackage.Literals.FILTER;
-  }
+		return RefactoringSpecificationPackage.Literals.FILTER;
+	}
 
 } //FILTERImpl

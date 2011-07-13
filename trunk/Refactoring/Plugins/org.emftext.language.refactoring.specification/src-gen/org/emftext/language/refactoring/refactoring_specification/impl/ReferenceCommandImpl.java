@@ -23,24 +23,24 @@ import org.emftext.language.refactoring.refactoring_specification.ReferenceComma
 public abstract class ReferenceCommandImpl extends InstructionImpl implements ReferenceCommand
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ReferenceCommandImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return RefactoringSpecificationPackage.Literals.REFERENCE_COMMAND;
-  }
+		return RefactoringSpecificationPackage.Literals.REFERENCE_COMMAND;
+	}
 
 } //ReferenceCommandImpl

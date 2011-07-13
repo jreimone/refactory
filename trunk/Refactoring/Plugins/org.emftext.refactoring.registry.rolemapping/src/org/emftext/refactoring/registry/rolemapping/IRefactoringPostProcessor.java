@@ -15,6 +15,7 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 
 /**
  * This interface is intended to be implemented by postprocessors which can hook into the refactoring process, 
@@ -69,10 +70,11 @@ public interface IRefactoringPostProcessor {
 	 * models depending in this refactoring, in which restructurings are executed that correspond to the passed refSpec.
 	 * 
 	 * @param roleRuntimeInstanceMap the map containing {@link Role roles} as keys and its at runtime bound {@link EObject objects} as values
+	 * @param refactoredModel TODO
 	 * @param resourceSet the {@link ResourceSet} containing all referencing and inverse referencing {@link Resource resources}
 	 * @param change the {@link ChangeDescription} containing all changes which were made before invoking this postprocessor
 	 * @param refSpec the passed {@link RefactoringSpecification} for further analysis
 	 * @return the status of the postprocessing 
 	 */
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec);
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun);
 }

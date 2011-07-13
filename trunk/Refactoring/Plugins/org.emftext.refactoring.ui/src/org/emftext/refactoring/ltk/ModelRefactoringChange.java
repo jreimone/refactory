@@ -31,10 +31,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.ui.RefactoringRecordingCommand;
@@ -62,8 +67,32 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		this.refactorer = modelRefactoring.getRefactorer();
 		this.diagramTransactionalEditingDomain = modelRefactoring.getDiagramTransactionalEditingDomain();
 		this.activeEditor = modelRefactoring.getActiveEditor();
+		
+		//cseidl
+		//Make sure the fake refactoring is performed, once the preview page is about to be displayed.
+		doFakeRun();
 	}
 
+	private void doFakeRun() {
+		try{
+//			ResourceSet rs = refactorer.getResource().getResourceSet();
+//			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rs);
+//			if(domain == null){
+//				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+//			}
+//			domain.getCommandStack().execute(new RecordingCommand(domain) {
+//
+//				@Override
+//				protected void doExecute() {
+					RoleMapping mapping = modelRefactoring.getMapping();
+					refactorer.fakeRefactor(mapping);
+//				}
+//			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public Object getModifiedElement() {
 		return refactorer.getOriginalModel();
@@ -103,6 +132,22 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 
 			status = command.getStatus();
 			statusSwitch(true);
+			
+//			if (status.getSeverity() == IStatus.ERROR) {
+//				Display display = PlatformUI.getWorkbench().getDisplay();
+//				final Shell shell = display.getActiveShell();
+//				display.syncExec(new Runnable()
+//				{
+//					public void run()
+//					{
+//						String title = "Refactoring Error";
+//						String message = "The refactoring could not be completed because the following error occurred:\n\n" + status.getMessage();
+//				
+//						MessageDialog.openInformation(shell, title, message);
+//					}
+//				});
+//			}
+			
 			//			statusSwitch(command, status);
 		} catch (Exception e) {
 			//			if(command != null && command.canUndo()){
@@ -215,8 +260,39 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		default:
 			break;
 		}
+		
+		if (status != null && status.getSeverity() != IStatus.OK) {
+			informUserAboutRefactoringStatus();
+		}
+		
 	}
 
+	//cseidl: Report the refactoring status to the user via an appropriate dialog.
+	private void informUserAboutRefactoringStatus() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		final Display display = workbench.getDisplay();
+
+		display.syncExec(new Runnable() {
+			public void run() {
+				Shell shell = display.getActiveShell();
+				String message = status.getMessage();
+
+				switch (status.getSeverity()) {
+				case IStatus.OK:
+				case IStatus.INFO:
+					MessageDialog.openInformation(shell, "Information", message);
+					break;
+				case IStatus.WARNING:
+					MessageDialog.openWarning(shell, "Warning", message);
+					break;
+				case IStatus.ERROR:
+					MessageDialog.openWarning(shell, "Error", message);
+					break;
+				}
+			}
+		});
+	}
+	
 	/**
 	 * @return the refactorer
 	 */
