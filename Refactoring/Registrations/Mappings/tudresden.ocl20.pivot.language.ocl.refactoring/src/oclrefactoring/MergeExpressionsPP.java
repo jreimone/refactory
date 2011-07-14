@@ -15,15 +15,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
 import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
@@ -35,7 +33,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  * @author Michael Muck
  *
  */
-public class MergeExpressionsPP implements IRefactoringPostProcessor {
+public class MergeExpressionsPP extends AbstractRefactoringPostProcessor {
 
 	
 	OclFactoryImpl myOclFactory;
@@ -56,9 +54,8 @@ public class MergeExpressionsPP implements IRefactoringPostProcessor {
 	
 	
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
-			ResourceSet resourceSet, ChangeDescription change,
-			RefactoringSpecification refSpec) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 
 		System.err.println("Merge Invariants postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();

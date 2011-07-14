@@ -23,13 +23,13 @@ import org.emftext.language.appflow.statemodel.StatemodelFactory;
 import org.emftext.language.appflow.statemodel.Transition;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
 /**
  * @author Jan Reimann
  *
  */
-public class CreateInitialStatePostProcessor implements IRefactoringPostProcessor {
+public class CreateInitialStatePostProcessor extends AbstractRefactoringPostProcessor {
 
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
 		StateModel stateModel = (StateModel) getEObjectsForRole(

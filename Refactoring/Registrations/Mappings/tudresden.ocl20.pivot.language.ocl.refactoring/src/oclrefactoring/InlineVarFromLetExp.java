@@ -17,7 +17,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
@@ -28,7 +29,7 @@ import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
 import tudresden.ocl20.pivot.language.ocl.impl.OclFactoryImpl;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
-public class InlineVarFromLetExp implements IRefactoringPostProcessor {
+public class InlineVarFromLetExp extends AbstractRefactoringPostProcessor {
 	
 	private EObject constraintRoot;
 	
@@ -43,8 +44,8 @@ public class InlineVarFromLetExp implements IRefactoringPostProcessor {
 	PivotModelFactoryImpl myPivotModelFactory;
 	
 		@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change,
-			RefactoringSpecification refSpec) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {

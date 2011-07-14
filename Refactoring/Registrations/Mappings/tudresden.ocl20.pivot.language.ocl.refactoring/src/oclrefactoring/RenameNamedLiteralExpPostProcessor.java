@@ -9,16 +9,14 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
-import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
@@ -32,7 +30,7 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * @author Michael Muck
  *
  */
-public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProcessor {
+public class RenameNamedLiteralExpPostProcessor extends AbstractRefactoringPostProcessor {
 
 	private NamedLiteralExpCS selected;
 	private Property newNameHolder;
@@ -45,7 +43,8 @@ public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProce
 	}
 
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {

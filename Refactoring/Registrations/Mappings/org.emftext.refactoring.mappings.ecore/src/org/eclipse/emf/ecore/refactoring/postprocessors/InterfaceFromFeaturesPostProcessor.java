@@ -11,10 +11,9 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-public class InterfaceFromFeaturesPostProcessor implements
-		IRefactoringPostProcessor {
+public class InterfaceFromFeaturesPostProcessor extends AbstractRefactoringPostProcessor {
 
 	public InterfaceFromFeaturesPostProcessor() {
 		// TODO Auto-generated constructor stub
