@@ -37,4 +37,5 @@ public class PropertiesElementMapping<ReferenceType> implements org.emftext.refa
 	public String getWarning() {
 		return warning;
 	}
+	
 }

@@ -63,4 +63,12 @@ public class PropertiesFuzzyResolveResult<ReferenceType extends org.eclipse.emf.
 		delegate.addMapping(identifier, uri, warning);
 	}
 	
+	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesQuickFix> getQuickFixes() {
+		return delegate.getQuickFixes();
+	}
+	
+	public void addQuickFix(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesQuickFix quickFix) {
+		delegate.addQuickFix(quickFix);
+	}
+	
 }

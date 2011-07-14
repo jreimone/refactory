@@ -25,4 +25,8 @@ public class PropertiesTerminal extends org.emftext.refactoring.tests.properties
 		return mandatoryOccurencesAfter;
 	}
 	
+	public String toString() {
+		return feature.getName() + "[]";
+	}
+	
 }

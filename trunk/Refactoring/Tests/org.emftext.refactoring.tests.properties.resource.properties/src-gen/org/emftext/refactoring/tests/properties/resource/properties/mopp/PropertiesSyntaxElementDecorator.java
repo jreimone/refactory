@@ -22,7 +22,7 @@ public class PropertiesSyntaxElementDecorator {
 	/**
 	 * a list of the indices that must be printed
 	 */
-	private java.util.List<java.lang.Integer> indicesToPrint = new java.util.ArrayList<java.lang.Integer>();
+	private java.util.List<Integer> indicesToPrint = new java.util.ArrayList<Integer>();
 	
 	public PropertiesSyntaxElementDecorator(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement decoratedElement, PropertiesSyntaxElementDecorator[] childDecorators) {
 		super();
@@ -30,7 +30,7 @@ public class PropertiesSyntaxElementDecorator {
 		this.childDecorators = childDecorators;
 	}
 	
-	public void addIndexToPrint(java.lang.Integer index) {
+	public void addIndexToPrint(Integer index) {
 		indicesToPrint.add(index);
 	}
 	
@@ -42,11 +42,15 @@ public class PropertiesSyntaxElementDecorator {
 		return childDecorators;
 	}
 	
-	public java.lang.Integer getNextIndexToPrint() {
+	public Integer getNextIndexToPrint() {
 		if (indicesToPrint.size() == 0) {
 			return null;
 		}
 		return indicesToPrint.remove(0);
+	}
+	
+	public String toString() {
+		return "" + getDecoratedElement();
 	}
 	
 }

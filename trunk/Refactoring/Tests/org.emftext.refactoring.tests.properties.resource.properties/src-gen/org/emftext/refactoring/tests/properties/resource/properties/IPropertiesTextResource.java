@@ -14,6 +14,12 @@ package org.emftext.refactoring.tests.properties.resource.properties;
 public interface IPropertiesTextResource extends org.eclipse.emf.ecore.resource.Resource, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResourcePluginPart {
 	
 	/**
+	 * Returns the raw contents of this resource. This method must be used by
+	 * generated classes only. It is not intended to be used by clients.
+	 */
+	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContentsInternal();
+	
+	/**
 	 * Try to load the content of this resource from the given stream. If loading
 	 * fails, the state of this resource is kept. If loading is successful, the
 	 * content of this resource is replaced with the new content.
@@ -58,20 +64,27 @@ public interface IPropertiesTextResource extends org.eclipse.emf.ecore.resource.
 	 * 
 	 * @param container
 	 * @param reference
-	 * @param pos
+	 * @param position
 	 * @param id
 	 * @param proxyElement
 	 */
-	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, java.lang.String id, org.eclipse.emf.ecore.EObject proxyElement);
+	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, String id, org.eclipse.emf.ecore.EObject proxyElement, int position);
 	
 	/**
 	 * Attaches a warning with the given message to object 'cause'.
 	 */
-	public void addWarning(java.lang.String message, org.eclipse.emf.ecore.EObject cause);
+	public void addWarning(String message, org.eclipse.emf.ecore.EObject cause);
 	
 	/**
 	 * Attaches an error with the given message to object 'cause'.
 	 */
-	public void addError(java.lang.String message, org.eclipse.emf.ecore.EObject cause);
+	public void addError(String message, org.eclipse.emf.ecore.EObject cause);
+	
+	/**
+	 * Returns the quick fix for the given context. This method is used by the
+	 * MarkerResolutionGenerator to retrieve fixes for problem that are associated
+	 * with this resource.
+	 */
+	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesQuickFix getQuickFix(String quickFixContext);
 	
 }

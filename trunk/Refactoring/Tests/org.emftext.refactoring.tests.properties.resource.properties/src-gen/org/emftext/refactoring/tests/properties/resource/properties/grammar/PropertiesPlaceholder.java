@@ -11,14 +11,14 @@ package org.emftext.refactoring.tests.properties.resource.properties.grammar;
  */
 public class PropertiesPlaceholder extends org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesTerminal {
 	
-	private final java.lang.String tokenName;
+	private final String tokenName;
 	
-	public PropertiesPlaceholder(org.eclipse.emf.ecore.EStructuralFeature feature, java.lang.String tokenName, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesCardinality cardinality, int mandatoryOccurencesAfter) {
+	public PropertiesPlaceholder(org.eclipse.emf.ecore.EStructuralFeature feature, String tokenName, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesCardinality cardinality, int mandatoryOccurencesAfter) {
 		super(feature, cardinality, mandatoryOccurencesAfter);
 		this.tokenName = tokenName;
 	}
 	
-	public java.lang.String getTokenName() {
+	public String getTokenName() {
 		return tokenName;
 	}
 	

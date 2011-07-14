@@ -12,7 +12,9 @@ package org.emftext.refactoring.tests.properties.resource.properties.util;
 public class PropertiesStringUtil {
 	
 	public final static String HEX_DIGIT_REGEXP = "[0-9a-fA-F]";
-	public final static String UNICODE_SEQUENCE_REGEXP = "\\A\\\\u" + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP;
+	public final static String UNICODE_SEQUENCE_REGEXP = "\\\\u" + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP;
+	public final static String ESC_OTHER = "\\\\(n|r|t|b|f|\"|'|>)";
+	public final static String ESC_REGEXP = "\\A((" + UNICODE_SEQUENCE_REGEXP + ")|(" + ESC_OTHER + ")).*";
 	
 	/**
 	 * Capitalizes the first letter of the given string.
@@ -84,13 +86,19 @@ public class PropertiesStringUtil {
 	/**
 	 * Concatenates the given parts and puts 'glue' between them.
 	 */
-	public static String explode(java.util.Collection<String> parts, String glue) {
+	public static String explode(java.util.Collection<? extends Object> parts, String glue) {
+		return explode(parts.toArray(new Object[parts.size()]), glue);
+	}
+	
+	/**
+	 * Concatenates the given parts and puts 'glue' between them.
+	 */
+	public static String explode(Object[] parts, String glue) {
 		StringBuilder sb = new StringBuilder();
-		java.util.Iterator<String> it = parts.iterator();
-		while (it.hasNext()) {
-			String next = it.next();
-			sb.append(next);
-			if (it.hasNext()) {
+		for (int i = 0; i < parts.length; i++) {
+			Object next = parts[i];
+			sb.append(next.toString());
+			if (i < parts.length - 1) {
 				sb.append(glue);
 			}
 		}
@@ -188,26 +196,24 @@ public class PropertiesStringUtil {
 	 * @return the escaped text
 	 */
 	public static String escapeToJavaString(String text) {
-		// for javac: replace one backslash by two and escape double quotes
-		return text.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"");
-	}
-	
-	/**
-	 * Escapes the given text such that it can be safely embedded in a string literal
-	 * in the Java source code contained in an ANTLR grammar. This method is similar
-	 * to escapeToJavaString(), but does also convert the percent character to its
-	 * Unicode representation, because the percent character has special meaning in
-	 * ANTLR grammars.
-	 * Also, single quotes are escaped. God knows why.
-	 * 
-	 * @param text the text to escape
-	 * 
-	 * @return the escaped text
-	 */
-	public static String escapeToJavaStringInANTLRGrammar(String text) {
-		// we must use the Unicode representation for the % character, because
-		// StringTemplate does treat % special
-		return escapeToJavaString(text.replaceAll("'", "\\'")).replace("%", "\u0025");
+		if (text == null) {
+			return null;
+		}
+		String result = text.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"").replace("\b", "\\b").replace("\f", "\\f").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
+		StringBuilder complete = new StringBuilder();
+		for (int i = 0; i < result.length(); i++) {
+			int codePointI = result.codePointAt(i);
+			if (codePointI >= 32 && codePointI <= 127) {
+				complete.append(Character.toChars(codePointI));
+			} else {
+				// use Unicode representation
+				complete.append("\\u");
+				String hex = Integer.toHexString(codePointI);
+				complete.append(getRepeatingString(4 - hex.length(), '0'));
+				complete.append(hex);
+			}
+		}
+		return complete.toString();
 	}
 	
 	/**
@@ -215,27 +221,12 @@ public class PropertiesStringUtil {
 	 * as keyword (i.e., an in-line token). Single quotes are escaped using a
 	 * backslash. Backslashes are escaped using a backslash.
 	 * 
-	 * @param text the text to escape
+	 * @param value the text to escape
 	 * 
 	 * @return the escaped text
 	 */
 	public static String escapeToANTLRKeyword(String value) {
-		String result = value;
-		int index = result.indexOf("\\");
-		while (index >= 0) {
-			String tail = result.substring(index);
-			if (!tail.matches(UNICODE_SEQUENCE_REGEXP)) {
-				// not Unicode - do escape backslash
-				String head = "";
-				if (index > 0) {
-					head = result.substring(0, index - 1);
-				}
-				result = head + "\\" + tail;
-			}
-			index = result.indexOf("\\", index + 2);
-		}
-		result.replaceAll("'", "\\'");
-		return result;
+		return escapeToJavaString(value).replace("'", "\\'").replace("%", "\\u0025");
 	}
 	
 	public static boolean isUnicodeSequence(String text) {
@@ -271,6 +262,108 @@ public class PropertiesStringUtil {
 		} else {
 			return null;
 		}
+	}
+	
+	public static String getRepeatingString(int count, char character) {
+		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < count; i++) {
+			result.append(character);
+		}
+		return result.toString();
+	}
+	
+	private static int minimum(int a, int b, int c) {
+		return Math.min(Math.min(a, b), c);
+	}
+	
+	public static int computeLevenshteinDistance(CharSequence str1, CharSequence str2) {
+		int[][] distance = new int[str1.length() + 1][str2.length() + 1];
+		for (int i = 0; i <= str1.length(); i++) {
+			distance[i][0] = i;
+		}
+		for (int j = 0; j <= str2.length(); j++) {
+			distance[0][j] = j;
+		}
+		for (int i = 1; i <= str1.length(); i++) {
+			for (int j = 1; j <= str2.length(); j++) {
+				distance[i][j] = minimum(distance[i - 1][j] + 1, distance[i][j - 1] + 1, distance[i - 1][j - 1] + ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
+			}
+		}
+		return distance[str1.length()][str2.length()];
+	}
+	
+	public static String encode(char delimiter, String[] parts) {
+		java.util.List<String> partList = new java.util.ArrayList<String>();
+		for (String part : parts) {
+			partList.add(part);
+		}
+		return encode(delimiter, partList);
+	}
+	
+	public static String encode(char delimiter, Iterable<String> parts) {
+		StringBuilder result = new StringBuilder();
+		for (String part : parts) {
+			String encodedPart = part.replace("\\", "\\\\");
+			encodedPart = encodedPart.replace("" + delimiter, "\\" + delimiter);
+			result.append(encodedPart);
+			result.append(delimiter);
+		}
+		return result.toString();
+	}
+	
+	public static java.util.List<String> decode(String text, char delimiter) {
+		java.util.List<String> parts = new java.util.ArrayList<String>();
+		
+		boolean escapeMode = false;
+		String part = "";
+		for (int i = 0; i < text.length(); i++) {
+			char c = text.charAt(i);
+			if (c == delimiter) {
+				if (escapeMode) {
+					part += delimiter;
+					escapeMode = false;
+				} else {
+					// end of part
+					parts.add(part);
+					part = "";
+				}
+			} else if (c == '\\') {
+				if (escapeMode) {
+					part += '\\';
+					escapeMode = false;
+				} else {
+					escapeMode = true;
+				}
+			} else {
+				part += c;
+			}
+		}
+		return parts;
+	}
+	
+	public static String convertToString(java.util.Map<String, Object> properties) {
+		java.util.List<String> parts = new java.util.ArrayList<String>();
+		for (String key : properties.keySet()) {
+			Object value = properties.get(key);
+			if (value instanceof String) {
+				parts.add(encode('=', new String[] {key, (String) value}));
+			} else {
+				System.out.println("Can't encode " + value);
+			}
+		}
+		return encode(';', parts);
+	}
+	
+	public static java.util.Map<String, String> convertFromString(String text) {
+		java.util.Map<String, String> result = new java.util.LinkedHashMap<String, String>();
+		java.util.List<String> keyValuePairs = decode(text, ';');
+		for (String pair : keyValuePairs) {
+			java.util.List<String> keyAndValue = decode(pair, '=');
+			String key = keyAndValue.get(0);
+			String value = keyAndValue.get(1);
+			result.put(key, value);
+		}
+		return result;
 	}
 	
 }

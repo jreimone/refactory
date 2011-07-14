@@ -7,27 +7,32 @@
 package org.emftext.refactoring.tests.properties.resource.properties.util;
 
 /**
- * Class TextResourceUtil can be used to perform common tasks on text resources,
- * such as loading and saving resources, as well as, checking them for errors.
+ * Class PropertiesTextResourceUtil can be used to perform common tasks on text
+ * resources, such as loading and saving resources, as well as, checking them for
+ * errors. This class is deprecated and has been replaced by
+ * org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesReso
+ * urceUtil.
  */
 public class PropertiesTextResourceUtil {
 	
+	@Deprecated	
 	public static org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource getResource(org.eclipse.core.resources.IFile file) {
-		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-		org.eclipse.emf.ecore.resource.Resource csResource = rs.getResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(),true), true);
-		return (org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource) csResource;
+		return org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesResourceUtil.getResource(file);
 	}
 	
-	public static org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource getResource(java.io.File file) {
-		return getResource(file, null);
-	}
-	
+	@Deprecated	
 	public static org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource getResource(java.io.File file, java.util.Map<?,?> options) {
-		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-		if (options != null) {
-			rs.getLoadOptions().putAll(options);
-		}
-		org.eclipse.emf.ecore.resource.Resource csResource = rs.getResource(org.eclipse.emf.common.util.URI.createFileURI(file.getAbsolutePath()), true);
-		return (org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource) csResource;
+		return org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesResourceUtil.getResource(file, options);
 	}
+	
+	@Deprecated	
+	public static org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource getResource(org.eclipse.emf.common.util.URI uri) {
+		return org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesResourceUtil.getResource(uri);
+	}
+	
+	@Deprecated	
+	public static org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
+		return org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesResourceUtil.getResource(uri, options);
+	}
+	
 }

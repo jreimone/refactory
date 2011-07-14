@@ -7,6 +7,21 @@
 package org.emftext.refactoring.tests.properties.resource.properties;
 
 public interface IPropertiesReferenceCache {
-	public java.lang.Object get(java.lang.String identifier);
-	public void put(java.lang.String identifier, java.lang.Object target);
+	
+	/**
+	 * Returns all EObjects of the given type.
+	 */
+	public java.util.Set<org.eclipse.emf.ecore.EObject> getObjects(org.eclipse.emf.ecore.EClass type);
+	
+	/**
+	 * Initializes the cache with the object tree that is rooted at <code>root</code>.
+	 * If the cache was already initialized, no action is performed.
+	 */
+	public void initialize(org.eclipse.emf.ecore.EObject root);
+	
+	/**
+	 * Clears the cache.
+	 */
+	public void clear();
+	
 }

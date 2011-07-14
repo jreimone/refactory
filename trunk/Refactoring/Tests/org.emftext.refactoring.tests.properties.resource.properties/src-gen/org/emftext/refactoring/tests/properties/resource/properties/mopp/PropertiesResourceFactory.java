@@ -15,4 +15,5 @@ public class PropertiesResourceFactory implements org.eclipse.emf.ecore.resource
 	public org.eclipse.emf.ecore.resource.Resource createResource(org.eclipse.emf.common.util.URI uri) {
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource(uri);
 	}
+	
 }

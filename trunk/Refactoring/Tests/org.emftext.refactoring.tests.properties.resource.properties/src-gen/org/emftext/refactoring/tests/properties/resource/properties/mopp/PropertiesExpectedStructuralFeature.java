@@ -27,11 +27,15 @@ public class PropertiesExpectedStructuralFeature extends org.emftext.refactoring
 		return placeholder.getTokenName();
 	}
 	
-	public java.lang.String toString() {
+	public java.util.Set<String> getTokenNames() {
+		return java.util.Collections.singleton(getTokenName());
+	}
+	
+	public String toString() {
 		return "EFeature " + getFeature().getEContainingClass().getName() + "." + getFeature().getName();
 	}
 	
-	public boolean equals(java.lang.Object o) {
+	public boolean equals(Object o) {
 		if (o instanceof PropertiesExpectedStructuralFeature) {
 			return getFeature().equals(((PropertiesExpectedStructuralFeature) o).getFeature());
 		}

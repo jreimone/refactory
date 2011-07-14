@@ -12,4 +12,8 @@ public class PropertiesSequence extends org.emftext.refactoring.tests.properties
 		super(cardinality, elements);
 	}
 	
+	public String toString() {
+		return org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesStringUtil.explode(getChildren(), " ");
+	}
+	
 }

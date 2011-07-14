@@ -18,4 +18,9 @@ public class PropertiesWhiteSpace extends org.emftext.refactoring.tests.properti
 	public int getAmount() {
 		return amount;
 	}
+	
+	public String toString() {
+		return "#" + getAmount();
+	}
+	
 }

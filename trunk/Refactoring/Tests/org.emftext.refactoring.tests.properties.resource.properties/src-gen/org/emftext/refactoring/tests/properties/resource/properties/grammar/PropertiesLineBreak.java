@@ -18,4 +18,9 @@ public class PropertiesLineBreak extends org.emftext.refactoring.tests.propertie
 	public int getTabs() {
 		return tabs;
 	}
+	
+	public String toString() {
+		return "!" + getTabs();
+	}
+	
 }

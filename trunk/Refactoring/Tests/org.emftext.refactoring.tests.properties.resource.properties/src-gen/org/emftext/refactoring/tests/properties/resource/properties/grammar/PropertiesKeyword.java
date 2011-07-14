@@ -22,4 +22,8 @@ public class PropertiesKeyword extends org.emftext.refactoring.tests.properties.
 		return value;
 	}
 	
+	public String toString() {
+		return value;
+	}
+	
 }
