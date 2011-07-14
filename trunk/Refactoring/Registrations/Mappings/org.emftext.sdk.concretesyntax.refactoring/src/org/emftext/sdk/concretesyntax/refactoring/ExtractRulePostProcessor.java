@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 import org.emftext.sdk.concretesyntax.Containment;
 import org.emftext.sdk.concretesyntax.Rule;
 import org.emftext.sdk.concretesyntax.SyntaxElement;
@@ -36,7 +36,7 @@ import org.emftext.sdk.concretesyntax.SyntaxElement;
 // this reference has type 'SyntaxElement', but is supposed to
 // hold exactly one element of type 'Choice' only. We must either
 // change the mapping or repair this while post processing.
-public class ExtractRulePostProcessor implements IRefactoringPostProcessor {
+public class ExtractRulePostProcessor extends AbstractRefactoringPostProcessor {
 
 	private static final String PLUGIN_ID = "org.emftext.sdk.concretesyntax.refactoring";
 

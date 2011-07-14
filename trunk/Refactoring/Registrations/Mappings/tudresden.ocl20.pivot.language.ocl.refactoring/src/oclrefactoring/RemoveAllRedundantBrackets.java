@@ -8,31 +8,21 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.ui.PlatformUI;
-import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
+import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
 import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
-import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Property;
 
 /**
  * @author Michael Muck
  *
  */
-public class RemoveAllRedundantBrackets implements IRefactoringPostProcessor {
+public class RemoveAllRedundantBrackets extends AbstractRefactoringPostProcessor {
 	
 	private ContextDeclarationCS selected;
 	private int removedBrackets = 0;
@@ -42,7 +32,8 @@ public class RemoveAllRedundantBrackets implements IRefactoringPostProcessor {
 	}
 
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 		System.err.println("RemoveAllRedundantBrackets postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {

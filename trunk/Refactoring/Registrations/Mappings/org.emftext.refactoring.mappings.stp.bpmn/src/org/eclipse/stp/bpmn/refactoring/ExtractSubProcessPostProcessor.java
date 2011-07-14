@@ -20,9 +20,9 @@ import org.eclipse.stp.bpmn.SubProcess;
 import org.eclipse.stp.bpmn.Vertex;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-public class ExtractSubProcessPostProcessor implements IRefactoringPostProcessor {
+public class ExtractSubProcessPostProcessor extends AbstractRefactoringPostProcessor {
 
 	private List<EObject> extract;
 	private SubProcess newContainer;

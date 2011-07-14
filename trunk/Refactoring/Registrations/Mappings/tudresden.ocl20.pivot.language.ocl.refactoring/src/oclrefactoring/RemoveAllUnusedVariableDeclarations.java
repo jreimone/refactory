@@ -17,7 +17,8 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
@@ -28,13 +29,12 @@ import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.TupleTypeCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
 
 /**
  * @author Michael Muck
  *
  */
-public class RemoveAllUnusedVariableDeclarations implements IRefactoringPostProcessor{
+public class RemoveAllUnusedVariableDeclarations extends AbstractRefactoringPostProcessor{
 	
 	
 	int varsFound;
@@ -51,8 +51,8 @@ public class RemoveAllUnusedVariableDeclarations implements IRefactoringPostProc
 	}
 
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
-			ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 
 
 		System.out.println("Postprocessor for 'Remove All Unused Variable Definitions' refactoring activated!");

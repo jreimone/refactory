@@ -11,12 +11,10 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.company.Department;
 import org.emftext.language.company.Employee;
-import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-public class ExtractSubDepartmentPostProcessor implements
-		IRefactoringPostProcessor {
+public class ExtractSubDepartmentPostProcessor extends AbstractRefactoringPostProcessor {
 
 	public ExtractSubDepartmentPostProcessor() {
 		// TODO Auto-generated constructor stub
@@ -35,10 +33,6 @@ public class ExtractSubDepartmentPostProcessor implements
 		return Status.OK_STATUS;
 	}
 
-	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
-		return process(roleRuntimeInstanceMap, resourceSet, change);
-	}
 
 	private List<EObject> getInstancesByRoleName(Map<Role, List<EObject>> roleRuntimeInstanceMap, String roleName){
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();

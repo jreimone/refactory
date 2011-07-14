@@ -18,7 +18,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
@@ -39,7 +40,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  * @author Michael Muck
  *
  */
-public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
+public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 	
 
 	private OclExpressionCS extract;
@@ -66,9 +67,9 @@ public class ExLetExpPostProcessor  implements IRefactoringPostProcessor {
 	}
 	
 	
-	
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 //		System.err.println("postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {

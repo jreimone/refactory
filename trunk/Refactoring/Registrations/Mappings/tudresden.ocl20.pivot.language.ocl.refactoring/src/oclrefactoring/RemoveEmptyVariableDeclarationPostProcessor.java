@@ -10,39 +10,29 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
-import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 import tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.TupleTypeCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Property;
 
 /**
  * @author Michael Muck
  *
  */
-public class RemoveEmptyVariableDeclarationPostProcessor implements IRefactoringPostProcessor {
+public class RemoveEmptyVariableDeclarationPostProcessor extends AbstractRefactoringPostProcessor {
 	
 	private VariableDeclarationCS selected;
 	String output;
@@ -55,7 +45,8 @@ public class RemoveEmptyVariableDeclarationPostProcessor implements IRefactoring
 	}
 
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 		System.out.println("Postprocessor for 'Remove Empty Variable Definition' refactoring activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
