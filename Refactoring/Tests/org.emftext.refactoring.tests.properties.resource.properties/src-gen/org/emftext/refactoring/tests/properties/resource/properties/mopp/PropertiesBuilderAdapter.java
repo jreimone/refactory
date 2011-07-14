@@ -15,8 +15,7 @@ public class PropertiesBuilderAdapter extends org.eclipse.core.resources.Increme
 	
 	private org.emftext.refactoring.tests.properties.resource.properties.IPropertiesBuilder builder = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesBuilder();
 	
-	@SuppressWarnings("rawtypes")
-	public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
+	public org.eclipse.core.resources.IProject[] build(int kind, @SuppressWarnings("rawtypes") java.util.Map args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
 		return build(kind, args, monitor, builder, getProject());
 	}
 	
@@ -27,11 +26,15 @@ public class PropertiesBuilderAdapter extends org.eclipse.core.resources.Increme
 		}
 		delta.accept(new org.eclipse.core.resources.IResourceDeltaVisitor() {
 			public boolean visit(org.eclipse.core.resources.IResourceDelta delta) throws org.eclipse.core.runtime.CoreException {
+				if (delta.getKind() == org.eclipse.core.resources.IResourceDelta.REMOVED) {
+					return false;
+				}
 				org.eclipse.core.resources.IResource resource = delta.getResource();
-				if (resource instanceof org.eclipse.core.resources.IFile && "properties".equals(resource.getFileExtension())) {
+				if (resource instanceof org.eclipse.core.resources.IFile && resource.getName().endsWith("." + "properties")) {
 					org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 					if (builder.isBuildingNeeded(uri)) {
 						org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource customResource = (org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResource) new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl().getResource(uri, true);
+						org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper.unmark(customResource, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.BUILDER_ERROR);
 						builder.build(customResource, monitor);
 					}
 					return false;

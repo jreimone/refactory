@@ -6,18 +6,29 @@
  */
 package org.emftext.refactoring.tests.properties.resource.properties.mopp;
 
+/**
+ * A PropertiesLayoutInformation is used to store layout information that is found
+ * while parsing text files. Layout information does include all unused tokens.
+ * Usually, these are whitespace characters, line breaks and comments, but
+ * depending on the concrete syntax definition it can also include other tokens.
+ * PropertiesLayoutInformations are aggregated in LayoutInformationAdapters. One
+ * PropertiesLayoutInformation contains the layout that was found before a
+ * keyword, attribute or reference.
+ */
 public class PropertiesLayoutInformation {
 	
 	private final org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement syntaxElement;
-	private final java.lang.String hiddenTokenText;
-	private final java.lang.String visibleTokenText;
-	private java.lang.Object object;
+	private final int startOffset;
+	private final String hiddenTokenText;
+	private final String visibleTokenText;
+	private Object object;
 	private boolean wasResolved;
 	
-	public PropertiesLayoutInformation(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement syntaxElement, java.lang.Object object, java.lang.String hiddenTokenText, java.lang.String visibleTokenText) {
+	public PropertiesLayoutInformation(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement syntaxElement, Object object, int startOffset, String hiddenTokenText, String visibleTokenText) {
 		super();
 		this.syntaxElement = syntaxElement;
 		this.object = object;
+		this.startOffset = startOffset;
 		this.hiddenTokenText = hiddenTokenText;
 		this.visibleTokenText = visibleTokenText;
 	}
@@ -26,7 +37,11 @@ public class PropertiesLayoutInformation {
 		return syntaxElement;
 	}
 	
-	public java.lang.Object getObject(org.eclipse.emf.ecore.EObject container) {
+	public int getStartOffset() {
+		return startOffset;
+	}
+	
+	public Object getObject(org.eclipse.emf.ecore.EObject container) {
 		if (wasResolved) {
 			return object;
 		}
@@ -51,11 +66,11 @@ public class PropertiesLayoutInformation {
 		return object;
 	}
 	
-	public java.lang.String getHiddenTokenText() {
+	public String getHiddenTokenText() {
 		return hiddenTokenText;
 	}
 	
-	public java.lang.String getVisibleTokenText() {
+	public String getVisibleTokenText() {
 		return visibleTokenText;
 	}
 	

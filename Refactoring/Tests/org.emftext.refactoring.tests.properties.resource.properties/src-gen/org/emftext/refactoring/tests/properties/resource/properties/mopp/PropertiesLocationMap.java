@@ -30,10 +30,10 @@ public class PropertiesLocationMap implements org.emftext.refactoring.tests.prop
 		boolean accept(int startOffset, int endOffset);
 	}
 	
-	protected org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> columnMap = new org.eclipse.emf.common.util.BasicEMap<org.eclipse.emf.ecore.EObject, Integer>();
-	protected org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> lineMap = new org.eclipse.emf.common.util.BasicEMap<org.eclipse.emf.ecore.EObject, Integer>();
-	protected org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> charStartMap = new org.eclipse.emf.common.util.BasicEMap<org.eclipse.emf.ecore.EObject, Integer>();
-	protected org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> charEndMap = new org.eclipse.emf.common.util.BasicEMap<org.eclipse.emf.ecore.EObject, Integer>();
+	protected java.util.Map<org.eclipse.emf.ecore.EObject, Integer> columnMap = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EObject, Integer>();
+	protected java.util.Map<org.eclipse.emf.ecore.EObject, Integer> lineMap = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EObject, Integer>();
+	protected java.util.Map<org.eclipse.emf.ecore.EObject, Integer> charStartMap = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EObject, Integer>();
+	protected java.util.Map<org.eclipse.emf.ecore.EObject, Integer> charEndMap = new java.util.IdentityHashMap<org.eclipse.emf.ecore.EObject, Integer>();
 	
 	public void setLine(org.eclipse.emf.ecore.EObject element, int line) {
 		setMapValueToMin(lineMap, element, line);
@@ -67,13 +67,13 @@ public class PropertiesLocationMap implements org.emftext.refactoring.tests.prop
 		return getMapValue(charEndMap, element);
 	}
 	
-	private int getMapValue(org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element) {
+	private int getMapValue(java.util.Map<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element) {
 		if (!map.containsKey(element)) return -1;
-		java.lang.Integer value = map.get(element);
+		Integer value = map.get(element);
 		return value == null ? -1 : value.intValue();
 	}
 	
-	private void setMapValueToMin(org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element, int value) {
+	private void setMapValueToMin(java.util.Map<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element, int value) {
 		// We need to synchronize the write access, because other threads may iterate over
 		// the map concurrently.
 		synchronized (this) {
@@ -83,7 +83,7 @@ public class PropertiesLocationMap implements org.emftext.refactoring.tests.prop
 		}
 	}
 	
-	private void setMapValueToMax(org.eclipse.emf.common.util.EMap<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element, int value) {
+	private void setMapValueToMax(java.util.Map<org.eclipse.emf.ecore.EObject, Integer> map, org.eclipse.emf.ecore.EObject element, int value) {
 		// We need to synchronize the write access, because other threads may iterate over
 		// the map concurrently.
 		synchronized (this) {
@@ -97,6 +97,20 @@ public class PropertiesLocationMap implements org.emftext.refactoring.tests.prop
 		java.util.List<org.eclipse.emf.ecore.EObject> result = getElements(new ISelector() {
 			public boolean accept(int start, int end) {
 				return start <= documentOffset && end >= documentOffset;
+			}
+		});
+		// sort elements according to containment hierarchy
+		java.util.Collections.sort(result, new java.util.Comparator<org.eclipse.emf.ecore.EObject>() {
+			public int compare(org.eclipse.emf.ecore.EObject objectA, org.eclipse.emf.ecore.EObject objectB) {
+				if (org.eclipse.emf.ecore.util.EcoreUtil.isAncestor(objectA, objectB)) {
+					return 1;
+				} else {
+					if (org.eclipse.emf.ecore.util.EcoreUtil.isAncestor(objectB, objectA)) {
+						return -1;
+					} else {
+						return 0;
+					}
+				}
 			}
 		});
 		return result;
@@ -120,8 +134,8 @@ public class PropertiesLocationMap implements org.emftext.refactoring.tests.prop
 		// the map concurrently.
 		synchronized (this) {
 			for (org.eclipse.emf.ecore.EObject next : charStartMap.keySet()) {
-				java.lang.Integer start = charStartMap.get(next);
-				java.lang.Integer end = charEndMap.get(next);
+				Integer start = charStartMap.get(next);
+				Integer end = charEndMap.get(next);
 				if (start == null || end == null) {
 					continue;
 				}

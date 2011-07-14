@@ -39,4 +39,5 @@ public class PropertiesTokenResolveResult implements org.emftext.refactoring.tes
 		errorMessage = "Can't resolve token.";
 		resolvedToken = null;
 	}
+	
 }

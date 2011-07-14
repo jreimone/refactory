@@ -12,4 +12,8 @@ public class PropertiesCompound extends org.emftext.refactoring.tests.properties
 		super(cardinality, new org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement[] {choice});
 	}
 	
+	public String toString() {
+		return "(" + getChildren()[0] + ")";
+	}
+	
 }

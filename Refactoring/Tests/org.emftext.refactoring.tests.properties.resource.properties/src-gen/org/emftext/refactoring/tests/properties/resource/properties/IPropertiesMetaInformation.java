@@ -58,7 +58,7 @@ public interface IPropertiesMetaInformation {
 	 * 
 	 * @return a new instance of the printer class
 	 */
-	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextPrinter createPrinter(java.io.OutputStream ouputStream, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource resource);
+	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextPrinter createPrinter(java.io.OutputStream outputStream, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource resource);
 	
 	/**
 	 * Returns all meta classes for which syntax was defined. This information is used
@@ -100,11 +100,5 @@ public interface IPropertiesMetaInformation {
 	 * Returns all classes for which folding must be enabled in the editor.
 	 */
 	public org.eclipse.emf.ecore.EClass[] getFoldableClasses();
-	
-	/**
-	 * Returns a hover text provider which provides the hover text for
-	 * <code>EObject</code>s
-	 */
-	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesHoverTextProvider getHoverTextProvider();
 	
 }

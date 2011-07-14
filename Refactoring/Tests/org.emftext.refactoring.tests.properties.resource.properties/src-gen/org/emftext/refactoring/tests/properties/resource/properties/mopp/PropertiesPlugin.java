@@ -9,12 +9,20 @@ package org.emftext.refactoring.tests.properties.resource.properties.mopp;
 /**
  * A singleton class for the text resource plug-in.
  */
-public class PropertiesPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
+public class PropertiesPlugin extends org.eclipse.core.runtime.Plugin {
 	
 	public static final String PLUGIN_ID = "org.emftext.refactoring.tests.properties.resource.properties";
-	public static final String EMFTEXT_SDK_VERSION = "1.2.0";
+	/**
+	 * The version of EMFText that was used to generate this plug-in.
+	 */
+	public static final String EMFTEXT_SDK_VERSION = "1.4.0";
+	/**
+	 * The ID of the extension point to register default options to be used when
+	 * loading resources with this plug-in.
+	 */
 	public static final String EP_DEFAULT_LOAD_OPTIONS_ID = PLUGIN_ID + ".default_load_options";
 	public static final String EP_ADDITIONAL_EXTENSION_PARSER_ID = PLUGIN_ID + ".additional_extension_parser";
+	public static final String DEBUG_MODEL_ID = PLUGIN_ID + ".debugModel";
 	
 	private static PropertiesPlugin plugin;
 	
@@ -36,17 +44,6 @@ public class PropertiesPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
 		return plugin;
 	}
 	
-	public static void showErrorDialog(final String title, final String message) {
-		org.eclipse.swt.widgets.Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				org.eclipse.swt.widgets.Shell parent = new org.eclipse.swt.widgets.Shell();
-				org.eclipse.jface.dialogs.MessageDialog dialog = new org.eclipse.jface.dialogs.MessageDialog(parent, title, null, message, org.eclipse.jface.dialogs.MessageDialog.ERROR,
-				new String[] { org.eclipse.jface.dialogs.IDialogConstants.OK_LABEL }, 0) {
-				};
-				dialog.open();
-			}
-		});
-	}
 	/**
 	 * Helper method for error logging.
 	 * 

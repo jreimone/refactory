@@ -72,7 +72,7 @@ public class PropertiesMinimalModelHelper {
 							continue;
 						}
 						
-						java.lang.Object value = root.eGet(reference);
+						Object value = root.eGet(reference);
 						if (value instanceof java.util.List<?>) {
 							java.util.List<org.eclipse.emf.ecore.EObject> list = org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesListUtil.castListUnchecked(value);
 							list.add(subModel);
@@ -85,13 +85,13 @@ public class PropertiesMinimalModelHelper {
 				org.eclipse.emf.ecore.EAttribute attribute = (org.eclipse.emf.ecore.EAttribute) feature;
 				if ("EString".equals(attribute.getEType().getName())) {
 					String initialValue;
-					if(attribute.getName().equals("name") && name != null) {
+					if (attribute.getName().equals("name") && name != null) {
 						initialValue = name;
 					}
 					else {
 						initialValue = "some" + org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesStringUtil.capitalize(attribute.getName());
 					}
-					java.lang.Object value = root.eGet(attribute);
+					Object value = root.eGet(attribute);
 					if (value instanceof java.util.List<?>) {
 						java.util.List<String> list = org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesListUtil.castListUnchecked(value);
 						list.add(initialValue);

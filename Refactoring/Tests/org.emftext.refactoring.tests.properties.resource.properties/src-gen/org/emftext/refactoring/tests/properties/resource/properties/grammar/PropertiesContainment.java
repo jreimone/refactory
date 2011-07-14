@@ -11,4 +11,9 @@ public class PropertiesContainment extends org.emftext.refactoring.tests.propert
 	public PropertiesContainment(org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesCardinality cardinality, int mandatoryOccurencesAfter) {
 		super(feature, cardinality, mandatoryOccurencesAfter);
 	}
+	
+	public String toString() {
+		return getFeature().getName();
+	}
+	
 }

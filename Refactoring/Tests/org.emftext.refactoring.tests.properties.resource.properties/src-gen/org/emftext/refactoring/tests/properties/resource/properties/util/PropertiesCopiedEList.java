@@ -8,7 +8,6 @@ package org.emftext.refactoring.tests.properties.resource.properties.util;
 
 public class PropertiesCopiedEList<E> implements org.eclipse.emf.common.util.EList<E> {
 	
-	private static final long serialVersionUID = 604726114003869602L;
 	private org.eclipse.emf.common.util.EList<E> original;
 	private org.eclipse.emf.common.util.EList<E> copy;
 	

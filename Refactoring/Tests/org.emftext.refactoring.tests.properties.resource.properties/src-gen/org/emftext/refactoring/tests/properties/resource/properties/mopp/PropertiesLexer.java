@@ -3,27 +3,27 @@
 	package org.emftext.refactoring.tests.properties.resource.properties.mopp;
 
 
-import org.antlr.runtime3_2_0.*;
+import org.antlr.runtime3_3_0.*;
 
 public class PropertiesLexer extends Lexer {
-    public static final int INTEGER=9;
-    public static final int QUOTED_91_93=4;
     public static final int EOF=-1;
     public static final int T__13=13;
+    public static final int QUOTED_91_93=4;
     public static final int TEXT=5;
-    public static final int FLOAT=10;
-    public static final int LINEBREAK=12;
-    public static final int COMMENT=8;
     public static final int QUOTED_60_62=6;
     public static final int QUOTED_34_34=7;
+    public static final int COMMENT=8;
+    public static final int INTEGER=9;
+    public static final int FLOAT=10;
     public static final int WHITESPACE=11;
+    public static final int LINEBREAK=12;
 
-    	public java.util.List<org.antlr.runtime3_2_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_2_0.RecognitionException>();
-    	public java.util.List<java.lang.Integer> lexerExceptionsPosition = new java.util.ArrayList<java.lang.Integer>();
+    	public java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>();
+    	public java.util.List<Integer> lexerExceptionsPosition = new java.util.ArrayList<Integer>();
     	
-    	public void reportError(org.antlr.runtime3_2_0.RecognitionException e) {
+    	public void reportError(org.antlr.runtime3_3_0.RecognitionException e) {
     		lexerExceptions.add(e);
-    		lexerExceptionsPosition.add(((org.antlr.runtime3_2_0.ANTLRStringStream) input).index());
+    		lexerExceptionsPosition.add(((org.antlr.runtime3_3_0.ANTLRStringStream) input).index());
     	}
 
 
@@ -65,12 +65,15 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:974:8: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Properties.g:975:2: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Properties.g:840:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Properties.g:841:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            {
+            // Properties.g:841:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Properties.g:841:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
-            // Properties.g:975:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Properties.g:841:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -83,7 +86,7 @@ public class PropertiesLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // Properties.g:975:7: ~ ( '\\n' | '\\r' | '\\uffff' )
+            	    // Properties.g:841:8: ~ ( '\\n' | '\\r' | '\\uffff' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -103,6 +106,9 @@ public class PropertiesLexer extends Lexer {
                 }
             } while (true);
 
+
+            }
+
              _channel = 99; 
 
             }
@@ -120,7 +126,10 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:978:8: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Properties.g:844:8: ( ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
+            // Properties.g:845:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            {
+            // Properties.g:845:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -138,9 +147,9 @@ public class PropertiesLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // Properties.g:979:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Properties.g:845:3: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // Properties.g:979:2: ( '-' )?
+                    // Properties.g:845:3: ( '-' )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -149,7 +158,7 @@ public class PropertiesLexer extends Lexer {
                     }
                     switch (alt2) {
                         case 1 :
-                            // Properties.g:979:3: '-'
+                            // Properties.g:845:4: '-'
                             {
                             match('-'); 
 
@@ -158,14 +167,14 @@ public class PropertiesLexer extends Lexer {
 
                     }
 
-                    // Properties.g:979:8: ( '1' .. '9' )
-                    // Properties.g:979:9: '1' .. '9'
+                    // Properties.g:845:9: ( '1' .. '9' )
+                    // Properties.g:845:10: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // Properties.g:979:18: ( '0' .. '9' )*
+                    // Properties.g:845:19: ( '0' .. '9' )*
                     loop3:
                     do {
                         int alt3=2;
@@ -178,7 +187,7 @@ public class PropertiesLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // Properties.g:979:19: '0' .. '9'
+                    	    // Properties.g:845:20: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -194,15 +203,19 @@ public class PropertiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Properties.g:979:30: '0'
+                    // Properties.g:845:31: '0'
                     {
                     match('0'); 
-                     _channel = 99; 
 
                     }
                     break;
 
             }
+
+             _channel = 99; 
+
+            }
+
             state.type = _type;
             state.channel = _channel;
         }
@@ -216,10 +229,13 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:981:6: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // Properties.g:982:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // Properties.g:848:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
+            // Properties.g:849:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
             {
-            // Properties.g:982:2: ( '-' )?
+            // Properties.g:849:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Properties.g:849:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            {
+            // Properties.g:849:3: ( '-' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -228,7 +244,7 @@ public class PropertiesLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // Properties.g:982:3: '-'
+                    // Properties.g:849:4: '-'
                     {
                     match('-'); 
 
@@ -237,7 +253,7 @@ public class PropertiesLexer extends Lexer {
 
             }
 
-            // Properties.g:982:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Properties.g:849:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -255,16 +271,16 @@ public class PropertiesLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // Properties.g:982:9: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Properties.g:849:10: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // Properties.g:982:9: ( '1' .. '9' )
-                    // Properties.g:982:10: '1' .. '9'
+                    // Properties.g:849:10: ( '1' .. '9' )
+                    // Properties.g:849:11: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // Properties.g:982:20: ( '0' .. '9' )*
+                    // Properties.g:849:21: ( '0' .. '9' )*
                     loop6:
                     do {
                         int alt6=2;
@@ -277,7 +293,7 @@ public class PropertiesLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // Properties.g:982:21: '0' .. '9'
+                    	    // Properties.g:849:22: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -293,7 +309,7 @@ public class PropertiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Properties.g:982:34: '0'
+                    // Properties.g:849:35: '0'
                     {
                     match('0'); 
 
@@ -303,7 +319,7 @@ public class PropertiesLexer extends Lexer {
             }
 
             match('.'); 
-            // Properties.g:982:43: ( '0' .. '9' )+
+            // Properties.g:849:44: ( '0' .. '9' )+
             int cnt8=0;
             loop8:
             do {
@@ -317,7 +333,7 @@ public class PropertiesLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // Properties.g:982:44: '0' .. '9'
+            	    // Properties.g:849:45: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -332,6 +348,9 @@ public class PropertiesLexer extends Lexer {
                 }
                 cnt8++;
             } while (true);
+
+
+            }
 
              _channel = 99; 
 
@@ -350,10 +369,13 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:984:5: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // Properties.g:985:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Properties.g:852:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
+            // Properties.g:853:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
             {
-            // Properties.g:985:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Properties.g:853:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Properties.g:853:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            {
+            // Properties.g:853:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt9=0;
             loop9:
             do {
@@ -394,6 +416,9 @@ public class PropertiesLexer extends Lexer {
 
             }
 
+
+            }
+
             state.type = _type;
             state.channel = _channel;
         }
@@ -407,8 +432,11 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:986:11: ( ( ' ' | '\\t' | '\\f' ) )
-            // Properties.g:987:2: ( ' ' | '\\t' | '\\f' )
+            // Properties.g:855:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Properties.g:856:2: ( ( ' ' | '\\t' | '\\f' ) )
+            {
+            // Properties.g:856:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Properties.g:856:3: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -418,6 +446,9 @@ public class PropertiesLexer extends Lexer {
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
                 throw mse;}
+
+
+            }
 
              _channel = 99; 
 
@@ -436,10 +467,13 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:990:10: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Properties.g:991:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // Properties.g:859:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Properties.g:860:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Properties.g:991:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // Properties.g:860:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Properties.g:860:3: ( '\\r\\n' | '\\r' | '\\n' )
+            {
+            // Properties.g:860:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt10=3;
             int LA10_0 = input.LA(1);
 
@@ -463,7 +497,7 @@ public class PropertiesLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // Properties.g:991:3: '\\r\\n'
+                    // Properties.g:860:4: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -471,19 +505,22 @@ public class PropertiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Properties.g:991:12: '\\r'
+                    // Properties.g:860:13: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Properties.g:991:19: '\\n'
+                    // Properties.g:860:20: '\\n'
                     {
                     match('\n'); 
 
                     }
                     break;
+
+            }
+
 
             }
 
@@ -504,17 +541,20 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_91_93;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:994:13: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
-            // Properties.g:995:2: ( '[' ) (~ ( ']' ) )* ( ']' )
+            // Properties.g:863:13: ( ( ( '[' ) (~ ( ']' ) )* ( ']' ) ) )
+            // Properties.g:864:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
             {
-            // Properties.g:995:2: ( '[' )
-            // Properties.g:995:3: '['
+            // Properties.g:864:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
+            // Properties.g:864:3: ( '[' ) (~ ( ']' ) )* ( ']' )
+            {
+            // Properties.g:864:3: ( '[' )
+            // Properties.g:864:4: '['
             {
             match('['); 
 
             }
 
-            // Properties.g:995:7: (~ ( ']' ) )*
+            // Properties.g:864:8: (~ ( ']' ) )*
             loop11:
             do {
                 int alt11=2;
@@ -527,7 +567,7 @@ public class PropertiesLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // Properties.g:995:8: ~ ( ']' )
+            	    // Properties.g:864:9: ~ ( ']' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\\')||(input.LA(1)>='^' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -547,10 +587,13 @@ public class PropertiesLexer extends Lexer {
                 }
             } while (true);
 
-            // Properties.g:995:16: ( ']' )
-            // Properties.g:995:17: ']'
+            // Properties.g:864:17: ( ']' )
+            // Properties.g:864:18: ']'
             {
             match(']'); 
+
+            }
+
 
             }
 
@@ -570,17 +613,20 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_60_62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:997:13: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
-            // Properties.g:998:2: ( '<' ) (~ ( '>' ) )* ( '>' )
+            // Properties.g:866:13: ( ( ( '<' ) (~ ( '>' ) )* ( '>' ) ) )
+            // Properties.g:867:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
             {
-            // Properties.g:998:2: ( '<' )
-            // Properties.g:998:3: '<'
+            // Properties.g:867:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
+            // Properties.g:867:3: ( '<' ) (~ ( '>' ) )* ( '>' )
+            {
+            // Properties.g:867:3: ( '<' )
+            // Properties.g:867:4: '<'
             {
             match('<'); 
 
             }
 
-            // Properties.g:998:7: (~ ( '>' ) )*
+            // Properties.g:867:8: (~ ( '>' ) )*
             loop12:
             do {
                 int alt12=2;
@@ -593,7 +639,7 @@ public class PropertiesLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // Properties.g:998:8: ~ ( '>' )
+            	    // Properties.g:867:9: ~ ( '>' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='=')||(input.LA(1)>='?' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -613,10 +659,13 @@ public class PropertiesLexer extends Lexer {
                 }
             } while (true);
 
-            // Properties.g:998:16: ( '>' )
-            // Properties.g:998:17: '>'
+            // Properties.g:867:17: ( '>' )
+            // Properties.g:867:18: '>'
             {
             match('>'); 
+
+            }
+
 
             }
 
@@ -636,17 +685,20 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_34_34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:1000:13: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Properties.g:1001:2: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Properties.g:869:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
+            // Properties.g:870:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
             {
-            // Properties.g:1001:2: ( '\"' )
-            // Properties.g:1001:3: '\"'
+            // Properties.g:870:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Properties.g:870:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            {
+            // Properties.g:870:3: ( '\"' )
+            // Properties.g:870:4: '\"'
             {
             match('\"'); 
 
             }
 
-            // Properties.g:1001:7: (~ ( '\"' ) )*
+            // Properties.g:870:8: (~ ( '\"' ) )*
             loop13:
             do {
                 int alt13=2;
@@ -659,7 +711,7 @@ public class PropertiesLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // Properties.g:1001:8: ~ ( '\"' )
+            	    // Properties.g:870:9: ~ ( '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -679,10 +731,13 @@ public class PropertiesLexer extends Lexer {
                 }
             } while (true);
 
-            // Properties.g:1001:16: ( '\"' )
-            // Properties.g:1001:17: '\"'
+            // Properties.g:870:17: ( '\"' )
+            // Properties.g:870:18: '\"'
             {
             match('\"'); 
+
+            }
+
 
             }
 
@@ -780,16 +835,16 @@ public class PropertiesLexer extends Lexer {
 
     protected DFA14 dfa14 = new DFA14(this);
     static final String DFA14_eotS =
-        "\3\uffff\1\6\2\15\6\uffff\1\6\1\uffff\1\15\1\uffff";
+        "\3\uffff\1\6\2\16\6\uffff\1\6\1\16\2\uffff";
     static final String DFA14_eofS =
         "\20\uffff";
     static final String DFA14_minS =
-        "\1\11\2\uffff\1\60\2\55\6\uffff\1\56\1\uffff\1\55\1\uffff";
+        "\1\11\2\uffff\1\60\2\55\6\uffff\1\56\1\55\2\uffff";
     static final String DFA14_maxS =
-        "\1\172\2\uffff\1\71\2\172\6\uffff\1\56\1\uffff\1\172\1\uffff";
+        "\1\172\2\uffff\1\71\2\172\6\uffff\1\56\1\172\2\uffff";
     static final String DFA14_acceptS =
-        "\1\uffff\1\1\1\2\3\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\uffff\1\3"+
-        "\1\uffff\1\4";
+        "\1\uffff\1\1\1\2\3\uffff\1\5\1\6\1\7\1\10\1\11\1\12\2\uffff\1\3"+
+        "\1\4";
     static final String DFA14_specialS =
         "\20\uffff}>";
     static final String[] DFA14_transitionS = {
@@ -799,7 +854,7 @@ public class PropertiesLexer extends Lexer {
             "",
             "",
             "\1\14\11\4",
-            "\1\6\1\17\1\uffff\12\16\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
+            "\1\6\1\17\1\uffff\12\15\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
             "\6",
             "\1\6\1\17\1\uffff\12\6\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
             "\6",
@@ -810,9 +865,9 @@ public class PropertiesLexer extends Lexer {
             "",
             "",
             "\1\17",
-            "",
-            "\1\6\1\17\1\uffff\12\16\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
+            "\1\6\1\17\1\uffff\12\15\7\uffff\32\6\4\uffff\1\6\1\uffff\32"+
             "\6",
+            "",
             ""
     };
 

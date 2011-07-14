@@ -26,10 +26,13 @@ public interface IPropertiesTextParser extends org.emftext.refactoring.tests.pro
 	 * element covers a range in the input stream.
 	 * If the parser implementation can not determine expected elements null can be
 	 * returned. This method is used by the code completion to figure out which
-	 * proposals can be shown to users for a given cursor position. The class 'type'
-	 * is used as start symbol.
+	 * proposals can be shown to users for a given cursor position. The class
+	 * <code>type</code> is used as start symbol. If <code>type</code> is
+	 * <code>null</code>, the start symbols from the syntax specification are used.
+	 * The <code>cursorPosition</code> is used to discard expected elements, which
+	 * will not be needed.
 	 */
-	public java.util.List<org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource dummyResource);
+	public java.util.List<org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource dummyResource, int cursorOffset);
 	
 	/**
 	 * Signals the parse to terminate parsing as soon as possible. This method must be

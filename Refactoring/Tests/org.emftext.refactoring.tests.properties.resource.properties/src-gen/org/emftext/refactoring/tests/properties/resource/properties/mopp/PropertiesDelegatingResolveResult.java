@@ -61,4 +61,13 @@ public class PropertiesDelegatingResolveResult<ReferenceType> implements org.emf
 	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
 		delegate.addMapping(identifier, uri, warning);
 	}
+	
+	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesQuickFix> getQuickFixes() {
+		return delegate.getQuickFixes();
+	}
+	
+	public void addQuickFix(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesQuickFix quickFix) {
+		delegate.addQuickFix(quickFix);
+	}
+	
 }

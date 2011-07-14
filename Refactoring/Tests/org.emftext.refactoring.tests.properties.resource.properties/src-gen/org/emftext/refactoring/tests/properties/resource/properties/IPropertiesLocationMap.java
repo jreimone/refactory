@@ -57,7 +57,8 @@ public interface IPropertiesLocationMap {
 	/**
 	 * Returns all EObjects that are located at the given offset in the text document.
 	 * This method can return multiple elements, because containers include their
-	 * children in the textual representation.
+	 * children in the textual representation. The child elements are returned at the
+	 * head of the result list.
 	 * 
 	 * @param documentOffset
 	 *  the offset where to search for elements
@@ -68,7 +69,9 @@ public interface IPropertiesLocationMap {
 	
 	/**
 	 * Returns all EObjects that are located between the given offsets in the text
-	 * document. The method can return multiple elements.
+	 * document. The method can return multiple elements. This no guarantee about the
+	 * order of the elements returned by this method. Even parsing the same document
+	 * twice may yield a different order of elements.
 	 * 
 	 * @param startOffset
 	 * @param endOffset

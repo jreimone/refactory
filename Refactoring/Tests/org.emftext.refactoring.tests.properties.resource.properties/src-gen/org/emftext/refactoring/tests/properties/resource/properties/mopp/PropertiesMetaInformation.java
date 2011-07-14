@@ -8,11 +8,11 @@ package org.emftext.refactoring.tests.properties.resource.properties.mopp;
 
 public class PropertiesMetaInformation implements org.emftext.refactoring.tests.properties.resource.properties.IPropertiesMetaInformation {
 	
-	public java.lang.String getSyntaxName() {
+	public String getSyntaxName() {
 		return "properties";
 	}
 	
-	public java.lang.String getURI() {
+	public String getURI() {
 		return "http://www.emftext.org/language/properties";
 	}
 	
@@ -20,12 +20,12 @@ public class PropertiesMetaInformation implements org.emftext.refactoring.tests.
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesAntlrScanner(new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesLexer());
 	}
 	
-	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextParser createParser(java.io.InputStream inputStream, java.lang.String encoding) {
+	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextParser createParser(java.io.InputStream inputStream, String encoding) {
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesParser().createInstance(inputStream, encoding);
 	}
 	
 	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextPrinter createPrinter(java.io.OutputStream outputStream, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource resource) {
-		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPrinter(outputStream, resource);
+		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPrinter2(outputStream, resource);
 	}
 	
 	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax() {
@@ -44,15 +44,15 @@ public class PropertiesMetaInformation implements org.emftext.refactoring.tests.
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTokenResolverFactory();
 	}
 	
-	public java.lang.String getPathToCSDefinition() {
+	public String getPathToCSDefinition() {
 		return "org.emftext.refactoring.tests.properties/metamodel/Properties.cs";
 	}
 	
-	public java.lang.String[] getTokenNames() {
+	public String[] getTokenNames() {
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesParser(null).getTokenNames();
 	}
 	
-	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenStyle getDefaultTokenStyle(java.lang.String tokenName) {
+	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenStyle getDefaultTokenStyle(String tokenName) {
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTokenStyleInformationProvider().getDefaultTokenStyle(tokenName);
 	}
 	
@@ -64,18 +64,6 @@ public class PropertiesMetaInformation implements org.emftext.refactoring.tests.
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesFoldingInformationProvider().getFoldableClasses();
 	}
 	
-	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesHoverTextProvider getHoverTextProvider() {
-		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesHoverTextProvider();
-	}
-	
-	public org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesColorManager createColorManager() {
-		return new org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesColorManager();
-	}
-	
-	public org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesTokenScanner createTokenScanner(org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesColorManager colorManager) {
-		return new org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesTokenScanner(colorManager);
-	}
-	
 	public org.eclipse.emf.ecore.resource.Resource.Factory createResourceFactory() {
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResourceFactory();
 	}
@@ -84,8 +72,32 @@ public class PropertiesMetaInformation implements org.emftext.refactoring.tests.
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesNewFileContentProvider();
 	}
 	
-	public org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesCodeCompletionHelper createCodeCompletionHelper() {
-		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesCodeCompletionHelper();
+	public void registerResourceFactory() {
+		org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(getSyntaxName(), new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResourceFactory());
+	}
+	
+	/**
+	 * Returns the key of the option that can be used to register a preprocessor that
+	 * is used as a pipe when loading resources. This key is language-specific. To
+	 * register one preprocessor for multiple resource types, it must be registered
+	 * individually using all keys.
+	 */
+	public String getInputStreamPreprocessorProviderOptionKey() {
+		return getSyntaxName() + "_" + "INPUT_STREAM_PREPROCESSOR_PROVIDER";
+	}
+	
+	/**
+	 * Returns the key of the option that can be used to register a post-processors
+	 * that are invoked after loading resources. This key is language-specific. To
+	 * register one post-processor for multiple resource types, it must be registered
+	 * individually using all keys.
+	 */
+	public String getResourcePostProcessorProviderOptionKey() {
+		return getSyntaxName() + "_" + "RESOURCE_POSTPROCESSOR_PROVIDER";
+	}
+	
+	public String getLaunchConfigurationType() {
+		return "org.emftext.refactoring.tests.properties.resource.properties.ui.launchConfigurationType";
 	}
 	
 }

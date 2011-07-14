@@ -53,7 +53,7 @@ public abstract class PropertiesContextDependentURIFragment<ContainerType extend
 			
 			// EMFText allows proxies to resolve to multiple objects. The first one is
 			// returned, the others are added here to the reference.
-			if(result.wasResolvedMultiple()) {
+			if (result.wasResolvedMultiple()) {
 				handleMultipleResults();
 			}
 		}
@@ -65,13 +65,13 @@ public abstract class PropertiesContextDependentURIFragment<ContainerType extend
 	
 	private void handleMultipleResults() {
 		org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> list = null;
-		java.lang.Object temp = container.eGet(reference);
+		Object temp = container.eGet(reference);
 		if (temp instanceof org.eclipse.emf.common.util.EList<?>) {
 			list = org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesCastUtil.cast(temp);
 		}
 		
 		boolean first = true;
-		for(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceMapping<ReferenceType> mapping : result.getMappings()) {
+		for (org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceMapping<ReferenceType> mapping : result.getMappings()) {
 			if (first) {
 				first = false;
 			} else if (list != null) {
