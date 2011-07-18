@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.emftext.refactoring.util;
 
 import java.util.ArrayList;
@@ -308,12 +305,12 @@ public class RoleUtil {
 		return null;
 	}
 	
-	public static <T extends EObject> T getFirstObjectForRole(String roleName, Class<T> type, Map<Role, List<EObject>> roleRuntimeInstanceMap)
-	{
-		List<T> objects = getObjectsForRole(roleName, type, roleRuntimeInstanceMap);
+	public static <T extends EObject> T getFirstObjectForRole(String roleName,
+			Class<T> type, Map<Role, List<EObject>> roleRuntimeInstanceMap) {
+		List<T> objects = getObjectsForRole(roleName, type,
+				roleRuntimeInstanceMap);
 
-		if (objects == null || objects.isEmpty())
-		{
+		if (objects == null || objects.isEmpty()) {
 			return null;
 		}
 
@@ -321,24 +318,32 @@ public class RoleUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends EObject> List<T> getObjectsForRole(String roleName, Class<T> type, Map<Role, List<EObject>> roleRuntimeInstanceMap)
-	{
+	public static <T extends EObject> List<T> getObjectsForRole(
+			String roleName, Class<T> type,
+			Map<Role, List<EObject>> roleRuntimeInstanceMap) {
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		List<T> typedObjects = new ArrayList<T>();
-		
-		for (Role role : roles)
-		{
-			if (role.getName().equals(roleName))
-			{
+
+		for (Role role : roles) {
+			if (role.getName().equals(roleName)) {
 				List<EObject> objects = roleRuntimeInstanceMap.get(role);
-				
-				for (EObject object : objects)
-				{
-					typedObjects.add((T) object);
+
+				for (EObject object : objects) {
+					// Inverse of instanceof on classes.
+					if (type.isAssignableFrom(object.getClass())) {
+						typedObjects.add((T) object);
+					} else {
+						System.out.println("WARNING: Discarding object "
+								+ object + " for role \"" + roleName
+								+ "\" because it has illegal type \""
+								+ object.getClass().getSimpleName()
+								+ "\" (expected \"" + type.getSimpleName()
+								+ "\")");
+					}
 				}
 			}
 		}
-		
+
 		return typedObjects;
 	}
 }
