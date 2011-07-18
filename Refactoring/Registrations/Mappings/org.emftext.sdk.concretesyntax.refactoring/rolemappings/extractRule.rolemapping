@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/sdk/concretesyntax> 
 
-ExtractRule maps <ExtractXwithReferenceClass> { 
+"Extract Rule" maps <ExtractXwithReferenceClass> { 
 	Extract := SyntaxElement ;
 	OrigContainer := SyntaxElement {
 		extracts := children;
