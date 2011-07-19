@@ -2,6 +2,11 @@ ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
 IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
 
 
+RenameVariable maps <SelectXWithVar> {
+	Selection := VariableDeclarationCS;
+	Nameable := SimpleNameCS( name -> simpleName);
+}
+
 RenameSimpleNameCS maps <RenameX> { 
 	Nameable :=  SimpleNameCS( name -> simpleName );
 }

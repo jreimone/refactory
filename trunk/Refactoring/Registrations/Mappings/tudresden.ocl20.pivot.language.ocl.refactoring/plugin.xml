@@ -123,5 +123,13 @@
             postprocessor="oclrefactoring.MergeExpressionsPP">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="RenameVariable"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.RenameVariablePP">
+      </postprocessor>
+   </extension>
 
 </plugin>

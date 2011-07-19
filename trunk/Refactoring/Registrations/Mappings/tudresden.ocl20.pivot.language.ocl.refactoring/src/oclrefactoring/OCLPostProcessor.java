@@ -1,5 +1,6 @@
 package oclrefactoring;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
@@ -38,7 +40,11 @@ public class OCLPostProcessor extends AbstractRefactoringPostProcessor {
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
 			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
-		System.err.println("postprocessor activated!");
+		if (isFakeRun) {
+			System.err.println("postprocessor activated in fake mode!");
+		} else {
+			System.err.println("postprocessor activated in real mode!");
+		}
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
 			if (role.getName().equals("Nameable")) {
@@ -56,21 +62,27 @@ public class OCLPostProcessor extends AbstractRefactoringPostProcessor {
 	}
 
 	private boolean determineOriginalName(ChangeDescription change) {
+		TreeIterator<EObject> changeit = change.eAllContents();
+		while(changeit.hasNext()){
+			System.err.println(""+changeit.next());
+		}
 		EMap<EObject, EList<FeatureChange>> objectChanges = change.getObjectChanges();
 		EList<FeatureChange> eList = objectChanges.get(simpleName);
+		System.out.println("found "+eList.size()+" object changes.");
 		for (FeatureChange featureChange : eList) {
 			Object value = featureChange.getValue();
 			if (value instanceof String) {
 				originalName = (String) value;
 				System.err.println("original name determined as: "+originalName);
+				System.err.println("new name will be: " + simpleName.getSimpleName());
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	private void performSpecificTransformation(SimpleNameCS simpleName2) {
-		EObject tempParent = simpleName2.eContainer();
+	private void performSpecificTransformation(SimpleNameCS selection) {
+		EObject tempParent = selection.eContainer();
 		System.err.println("tempparent: "+ tempParent.eClass());
 		while (	!(tempParent instanceof InvariantExpCS) && 
 				!(tempParent instanceof DefinitionExpCS) && 
@@ -88,13 +100,13 @@ public class OCLPostProcessor extends AbstractRefactoringPostProcessor {
 				NamedLiteralExpCS literal = (NamedLiteralExpCS) eObject;
 				NamedElement namedElement = literal.getNamedElement();
 				if(namedElement.getName().equals(originalName)) {
-					namedElement.setName(simpleName2.getSimpleName());
+					namedElement.setName(selection.getSimpleName());
 				}
 			}
 			else if (eObject instanceof SimpleNameCS) {
 				SimpleNameCS simpleNameEO = (SimpleNameCS) eObject;
 				if(simpleNameEO.getSimpleName().equals(originalName)) {
-					simpleNameEO.setSimpleName(simpleName2.getSimpleName());
+					simpleNameEO.setSimpleName(selection.getSimpleName());
 				}
 			}
 		}
