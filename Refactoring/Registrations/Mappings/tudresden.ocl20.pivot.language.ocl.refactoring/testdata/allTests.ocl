@@ -21,18 +21,18 @@ inv:
 	((self.validFrom.isBefore(Date::now())) and (self.validThru.isAfter((Date::now())))) = true
   endif
   
- 
+  
   
   -- Invariant 13 unused variable:
 context CustomerCard
-inv: let blub : Boolean =
+inv: let blub3 : Boolean =
 	self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now()),
-	testUnused : Boolean = blub 
+	testUnused : Boolean = blub3 
 in
   if valid then
-	blub = false
+	blub3 = false
   else
-	blub = true
+	blub3 = true
   endif
   
   
@@ -45,9 +45,9 @@ inv:
 	(self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())) = true
   endif
       
+      
 
- 
-    -- Invariant 13 integration:
+-- Invariant 13 integration:
 context CustomerCard
 inv: let correctDate : Boolean = 	
 		self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())
@@ -57,7 +57,7 @@ in
   else
 	correctDate = true
   endif
-
+ 
 
 -- Invariant 6:
 context LoyaltyProgram
@@ -71,7 +71,7 @@ inv: points > 0 implies transactions->exists(test | test.points > 0)
 
 
 
- 
+
        
 -- Postcondition 9:
 -- Unable to find property 'membership' in type 'root::tudresden::ocl20::pivot::examples::royalsandloyals::CustomerCard' An error occured while building an property call expression. Error occured at line 6 and column 26. The error occured at the token membership.
