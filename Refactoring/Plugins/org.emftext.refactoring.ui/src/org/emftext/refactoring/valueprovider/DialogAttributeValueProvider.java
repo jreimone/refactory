@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.emftext.refactoring.specification.interpreter.ui;
+package org.emftext.refactoring.valueprovider;
 
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -46,7 +46,7 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 	public Object provideValue(IRefactoringInterpreter interpreter, EAttribute attribute, Object... context) {
 		if(interpreter instanceof IRefactoringFakeInterpreter){
 			fakeInterpreter = (IRefactoringFakeInterpreter) interpreter;
-			fakeInterpreter.addValueProvider(this);
+			//			fakeInterpreter.addValueProvider(this);
 			fakeAttribute = attribute;
 			this.attribute = attribute;
 			fakeAttributeOwner = (EObject) context[0];
@@ -111,8 +111,10 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 		return  fakeAttribute;
 	}
 
-	public void provideValue() {		
-		realAttributeOwner = getInverseCopier().get(fakeAttributeOwner);
+	public void provideValue() {
+		if(fakeAttributeOwner != null){
+			realAttributeOwner = getInverseCopier().get(fakeAttributeOwner);
+		}
 		if(realAttributeOwner != null){
 			realAttribute = (EAttribute) realAttributeOwner.eClass().getEStructuralFeature(fakeAttribute.getName());
 			attribute = realAttribute;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.emftext.refactoring.specification.interpreter.ui;
+package org.emftext.refactoring.valueprovider;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -29,37 +29,39 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 	private RoleMapping mapping;
 	private int returnCode;
 	private IRefactoringFakeInterpreter fakeInterpreter;
-//	private EObject value;
+	//	private EObject value;
 	private List<EObject> fakeElements;
 	private List<EObject> realElements;
 	private List<EObject> elements;
-	private String name;
+	//	private String name;
 	private FilteredEObjectsSelectionDialog dialog;
 	private AbstractPathCreator pathCreator;
 
-	public DialogOneListElementProvider(String name, RoleMapping mapping){
+	public DialogOneListElementProvider(RoleMapping mapping){
 		this.mapping = mapping;
-		this.name = name;
+		//		this.name = name;
 	}
 
 	public void provideValue(){
-		realElements = new LinkedList<EObject>();
-		for (EObject fakeElement : fakeElements) {
-			realElements.add(getInverseCopier().get(fakeElement));
+		if(fakeElements != null){
+			realElements = new LinkedList<EObject>();
+			for (EObject fakeElement : fakeElements) {
+				realElements.add(getInverseCopier().get(fakeElement));
+			}
+			elements = realElements;
+			initDialog();
 		}
-		elements = realElements;
-		initDialog();
 	}
 
 	public Composite getProvidingComposite(){
 		return dialog.getComposite();
 	}
-	
+
 	private void initDialog() {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		dialog = new FilteredEObjectsSelectionDialog(shell, elements, getName());
 	}
-	
+
 	private EObject openDialog() {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		dialog = new FilteredEObjectsSelectionDialog(shell, elements, getName());
@@ -78,7 +80,7 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 	public EObject provideValue(IRefactoringInterpreter interpreter, List<EObject> elements, Object... context) {
 		if(interpreter instanceof IRefactoringFakeInterpreter){
 			fakeInterpreter = (IRefactoringFakeInterpreter) interpreter;
-			fakeInterpreter.addValueProvider(this);
+			//			fakeInterpreter.addValueProvider(this);
 			this.elements = elements;
 			this.fakeElements = elements;
 			return elements.get(0);
@@ -104,9 +106,6 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 		return fakeElements;
 	}
 
-	public String getName() {
-		return name;
-	}
 
 	@Override
 	public EObject getValue() {

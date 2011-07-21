@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -93,6 +94,17 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			//the changed element and creates a new one instead. This effectively creates an imperfect copy as the resolved
 			//element represents the state before the refactoring, whereas the refactored element represents the changed state.
 			//This leads to inconsistencies of the models and is to be avoided at all cost.
+			System.out.println("~~~~~~~");
+			System.out.println(resource);
+			EObject model = resource.getContents().get(0);
+			System.out.println(model);
+			TreeIterator<EObject> iterator = model.eAllContents();
+			while (iterator.hasNext()) {
+				EObject object = (EObject) iterator.next();
+				System.out.println(object);
+			}
+			System.out.println("~~~~~~~");
+			
 			ResourceSet resourceSet = resource.getResourceSet();
 			EcoreUtil.resolveAll(resourceSet);
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);

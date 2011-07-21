@@ -24,9 +24,11 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
+import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.ltk.ModelRefactoring;
 import org.emftext.refactoring.ltk.ModelRefactoringWizard;
 import org.emftext.refactoring.util.StringUtil;
+import org.emftext.refactoring.valueprovider.BasicValueProviderFactory;
 
 /**
  * This action can be registered to the context menus of editors
@@ -46,6 +48,8 @@ public class RefactoringAction extends Action {
 		this.mapping = mapping;
 		this.refactorer = refactorer;
 		this.connector = connector;
+		IValueProviderFactory factory = new BasicValueProviderFactory(refactorer, mapping);
+		refactorer.setValueProviderFactory(factory);
 	}
 
 	public RefactoringAction(RoleMapping mapping, IRefactorer refactorer, EditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector) {

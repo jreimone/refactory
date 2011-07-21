@@ -22,6 +22,8 @@ public abstract class AbstractValueProvider<ValueFrom, ValueType> implements IVa
 	
 	private Copier copier;
 	private Map<EObject, EObject> inverseCopier;
+	
+	private String name;
 
 	public Copier getCopier() {
 		return copier;
@@ -55,5 +57,13 @@ public abstract class AbstractValueProvider<ValueFrom, ValueType> implements IVa
 	
 	public void setFakePropagationContext(Object... context) {
 		// do nothing
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name){
+		this.name = name;
 	}
 }

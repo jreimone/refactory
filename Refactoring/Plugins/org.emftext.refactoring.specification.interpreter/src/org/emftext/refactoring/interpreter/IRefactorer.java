@@ -56,20 +56,18 @@ public interface IRefactorer {
 	 */
 	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality);
 	
-	//cseidl
-	public IRefactoringFakeInterpreter collectValuesToProvide(RoleMapping mapping);
+//	//cseidl
+//	public IRefactoringFakeInterpreter collectValuesToProvide(RoleMapping mapping);
 	
 	/**
-	 * This method must be invoked before {@link IRefactorer#refactor()}. By this a fake run will be executed to
-	 * collect all values whioch have to be provided by the user and to calculate a comparison model.
-	 * 
-	 * @param mapping
-	 * @return returns the fake interpreter used within this method
+	 * This method must be invoked to run a fake refactoring process by which a copied refactored model is constructed.
+	 * This is needed if a graphical comparison between original and target model is needed.
 	 */
-	public IRefactoringFakeInterpreter fakeRefactor(RoleMapping mapping);
+	public void fakeRefactor();
 	
 	/**
 	 * Invokes the RefactoringSpecification on the given {@link RoleMapping} on the model set with {@link #setInput(EList)}.
+	 * Clients must invoke {@link #setValueProviderFactory(IValueProviderFactory)} first.
 	 * 
 	 * @param the mapping for which the {@link RefactoringSpecification} is intended to be invoked
 	 * @return the refactored model
@@ -137,4 +135,19 @@ public interface IRefactorer {
 	 * @return
 	 */
 	public IRefactoringInterpreter getCurrentInterpreter();
+	
+	
+	/**
+	 * Sets the appropriate {@link RoleMapping} which is intended to be interpreted and returns the
+	 * corresponding {@link IRefactoringInterpreter}.
+	 * @param mapping
+	 * @return
+	 */
+	public IRefactoringInterpreter setRoleMappingToInterprete(RoleMapping mapping);
+	
+	/**
+	 * Sets the {@link IValueProviderFactory} for this refactorer.
+	 * @param factory
+	 */
+	public void setValueProviderFactory(IValueProviderFactory factory);
 }

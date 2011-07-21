@@ -31,6 +31,7 @@ import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
+import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
@@ -60,6 +61,7 @@ public class Refactorer implements IRefactorer {
 	private List<? extends EObject> currentFilteredSelection;
 	private ResourceSet currentModelResourceSet;
 	private EObject fakeRefactoredModel;
+	private IValueProviderFactory valueProviderFactory;
 
 	public Refactorer(Resource resource, Map<String, RoleMapping> roleMappings) {
 		this.resource = resource;
@@ -103,7 +105,13 @@ public class Refactorer implements IRefactorer {
 		return refSpecs;
 	}
 
-	public IRefactoringFakeInterpreter fakeRefactor(RoleMapping mapping) {
+	public void fakeRefactor() {
+		if (currentInterpreter != null && currentFilteredSelection.size() > 0) {
+			fakeInterpreteAndPreCollectValues(currentMapping, currentFilteredSelection, currentInterpreter, currentModelResourceSet);
+		} 
+	}
+	
+	public IRefactoringInterpreter setRoleMappingToInterprete(RoleMapping mapping){
 		if (mapping == null) {
 			currentMapping = null;
 			return null;
@@ -121,7 +129,8 @@ public class Refactorer implements IRefactorer {
 				currentModelResourceSet.getResource(uri, true);
 			}
 			// can be used for displaying a comparison with 'model'
-			return fakeInterpreteAndPreCollectValues(mapping, currentFilteredSelection, currentInterpreter, currentModelResourceSet);
+			currentInterpreter.setValueProviderFactory(valueProviderFactory);
+			return currentInterpreter;
 		} else {
 			return null;
 		}
@@ -181,6 +190,7 @@ public class Refactorer implements IRefactorer {
 	private EObject realInterprete(RoleMapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
 		EObject refactoredModel;
 		interpreter.setInput(filteredElements);
+		interpreter.setValueProviderFactory(valueProviderFactory);
 		ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
 		refactoredModel = interpreter.interprete(model);
 		status = interpreter.getStatus();
@@ -259,8 +269,8 @@ public class Refactorer implements IRefactorer {
 		
 		
 		
-		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter
-				.getValuesToProvide();
+		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValueProviderFactory().getValuesToProvide();
+
 		Map<EObject, EObject> inverseCopier = new LinkedHashMap<EObject, EObject>();
 		for (EObject originalObject : copier.keySet()) {
 			inverseCopier.put(copier.get(originalObject), originalObject);
@@ -293,7 +303,7 @@ public class Refactorer implements IRefactorer {
 			}
 		}
 		
-		fakeInterpreter.setProvideableValues(provideableValues);
+//		fakeInterpreter.setProvideableValues(provideableValues);
 
 		for (IValueProvider<?, ?> valueProvider : provideableValues) {
 			valueProvider.setCopier(copier);
@@ -307,7 +317,10 @@ public class Refactorer implements IRefactorer {
 	 * @param interpreter
 	 * @param refactoredModelRS
 	 */
-	private IRefactoringFakeInterpreter fakeInterpreteAndPreCollectValues(RoleMapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
+	private void fakeInterpreteAndPreCollectValues(RoleMapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
+		//TODO übergebene resourceset enthält zwar die resource vom anfang, die aber wiederum nicht dieselben instanz-objekte wie am anfang
+		//TODO unbedingt nochmal testen, ob die instanzen in RefactorerFactoryImpl der resource anders sind
+		//TODO wenn nicht dann eben die resource der selektierten elemente nehmen, die hier rein kommen 
 		// copy init start
 		Copier copier = new Copier(false, true);
 		List<EObject> originalElements = new LinkedList<EObject>();
@@ -357,7 +370,7 @@ public class Refactorer implements IRefactorer {
 		} catch (Exception e) {
 //			e.printStackTrace();
 			RegistryUtil.log("fake interpreter threw exception", IStatus.ERROR, e);
-			return fakeInterpreter;
+//			return fakeInterpreter;
 		}
 		// copy end
 		
@@ -410,7 +423,7 @@ public class Refactorer implements IRefactorer {
 		//cseidl
 		fakeRefactoredModel = copiedRefactoredModel;
 		
-		return fakeInterpreter;
+//		return fakeInterpreter;
 	}
 
 	private List<? extends EObject> filterSelectedElements(RoleMapping mapping) {
@@ -506,5 +519,9 @@ public class Refactorer implements IRefactorer {
 
 	public EObject getOriginalModel() {
 		return model;
+	}
+
+	public void setValueProviderFactory(IValueProviderFactory factory) {
+		this.valueProviderFactory = factory;
 	}
 }
