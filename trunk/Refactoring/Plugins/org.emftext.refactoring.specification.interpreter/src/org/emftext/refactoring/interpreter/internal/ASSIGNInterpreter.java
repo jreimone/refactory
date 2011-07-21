@@ -28,19 +28,18 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
-import org.emftext.refactoring.interpreter.AbstractValueProviderInstantiator;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
-import org.emftext.refactoring.specification.interpreter.ui.DialogAttributeValueProvider;
 
 /**
  * @author Jan Reimann
  *
  */
-public class ASSIGNInterpreter extends AbstractValueProviderInstantiator<EAttribute, Object>{
+//public class ASSIGNInterpreter extends AbstractValueProviderInstantiator<EAttribute, Object>{
+public class ASSIGNInterpreter {
 
 	private RoleMapping mapping;
 	private RefactoringInterpreterContext context;
@@ -149,11 +148,12 @@ public class ASSIGNInterpreter extends AbstractValueProviderInstantiator<EAttrib
 		}
 
 		@SuppressWarnings("unchecked")
-		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderForCommand(assign);
-		if(valueProvider == null){
-			valueProvider = getNewValueProvider(mapping);
-			interpreter.registerValueProviderForCommand(assign, valueProvider);
-		}
+		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderFactory().getValueProviderForCommand(assign);
+//		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderForCommand(assign);
+//		if(valueProvider == null){
+//			valueProvider = getNewValueProvider(mapping);
+//			interpreter.registerValueProviderForCommand(assign, valueProvider);
+//		}
 		Object value = valueProvider.provideValue(interpreter, classAttribute, targetObject);
 		if(valueProvider.getReturnCode() == Dialog.CANCEL){
 			return new RefactoringStatus(IRefactoringStatus.CANCEL);
@@ -258,8 +258,8 @@ public class ASSIGNInterpreter extends AbstractValueProviderInstantiator<EAttrib
 		return labelProvider;
 	}
 
-	@Override
-	public IValueProvider<EAttribute, Object> getDefaultValueProvider(RoleMapping roleMapping) {
-		return new DialogAttributeValueProvider(roleMapping);
-	}
+//	@Override
+//	public IValueProvider<EAttribute, Object> getDefaultValueProvider(RoleMapping roleMapping) {
+//		return new DialogAttributeValueProvider(roleMapping);
+//	}
 }

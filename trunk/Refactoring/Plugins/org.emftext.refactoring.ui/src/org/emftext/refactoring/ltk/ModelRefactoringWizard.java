@@ -14,7 +14,7 @@ import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.customwizardpage.ICustomWizardPageRegistry;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
-import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
+import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IValueProvider;
 
 /**
@@ -37,10 +37,8 @@ public class ModelRefactoringWizard extends RefactoringWizard {
 	@Override
 	protected void addUserInputPages() {
 
-		IRefactoringFakeInterpreter fakeInterpreter = refactoring
-				.getFakeInterpreter();
-		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter
-				.getValuesToProvide();
+		IRefactoringInterpreter interpreter = refactoring.getInterpreter();
+		List<IValueProvider<?, ?>> valueProviders = interpreter.getValueProviderFactory().getValuesToProvide();
 		List<IAttributeValueProvider> simpleProviders = new LinkedList<IAttributeValueProvider>();
 		
 		//TODO: cseidl Retrieve the appropriate value for the roleRuntimeInstanceMap and use it instead of null. 

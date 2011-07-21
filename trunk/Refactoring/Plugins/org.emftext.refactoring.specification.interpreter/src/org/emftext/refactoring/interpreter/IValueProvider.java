@@ -78,6 +78,8 @@ public interface IValueProvider <ValueFrom, ValueType>{
 	 */
 	public String getName();
 	
+	public void setName(String name);
+	
 	/**
 	 * This method can be used to set the copier with which copies of the original objects have been created.
 	 * 

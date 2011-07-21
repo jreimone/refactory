@@ -24,6 +24,7 @@ import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
+import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.osgi.framework.Version;
 
@@ -37,43 +38,47 @@ public class ModelRefactoring extends Refactoring {
 	
 	private IRefactorer refactorer;
 	private String name;
-	private EditingDomain diagramTransactionalEditingDomain;
+	private EditingDomain editingDomain;
 	private IEditorPart activeEditor;
 	private RoleMapping mapping;
 	private IRefactoringFakeInterpreter fakeInterpreter;
+	private IRefactoringInterpreter interpreter;
 
-	public ModelRefactoring(IRefactorer refactorer, RoleMapping mapping, EditingDomain diagramTransactionalEditingDomain, String name, IEditorPart activeEditor) {
+	public ModelRefactoring(IRefactorer refactorer, RoleMapping mapping, EditingDomain editingDomain, String name, IEditorPart activeEditor) {
 		super();
 		this.refactorer = refactorer;
 		this.mapping = mapping;
 		this.name = name;
-		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
+		this.editingDomain = editingDomain;
 		this.activeEditor = activeEditor;
 		
-		doCollectValuesToProvide();
+		interpreter = refactorer.setRoleMappingToInterprete(mapping);
+		interpreter.collectValueProviders();
+		refactorer.fakeRefactor();
+//		doCollectValuesToProvide();
 	}
 
-	//cseidl
-	//Only collects the values to provide, which are needed to create a proper wizard layout.
-	//Fake run is postponed until immediately before the preview page is displayed.
-	private void doCollectValuesToProvide() {
-		try{
-			ResourceSet rs = refactorer.getResource().getResourceSet();
-			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rs);
-			if(domain == null){
-				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
-			}
-			domain.getCommandStack().execute(new RecordingCommand(domain) {
-
-				@Override
-				protected void doExecute() {
-					fakeInterpreter = refactorer.collectValuesToProvide(mapping);
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	//cseidl
+//	//Only collects the values to provide, which are needed to create a proper wizard layout.
+//	//Fake run is postponed until immediately before the preview page is displayed.
+//	private void doCollectValuesToProvide() {
+//		try{
+//			ResourceSet rs = refactorer.getResource().getResourceSet();
+//			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rs);
+//			if(domain == null){
+//				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+//			}
+//			domain.getCommandStack().execute(new RecordingCommand(domain) {
+//
+//				@Override
+//				protected void doExecute() {
+//					fakeInterpreter = refactorer.collectValuesToProvide(mapping);
+//				}
+//			});
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public RoleMapping getRoleMapping()	{
 		return mapping;
@@ -81,11 +86,12 @@ public class ModelRefactoring extends Refactoring {
 	
 	public int getFlags(){
 		int flags = RefactoringWizard.CHECK_INITIAL_CONDITIONS_ON_OPEN;
-		if(refactorer.getFakeRefactoredModel() == null){
-			flags |= RefactoringWizard.NO_PREVIEW_PAGE;
-		} 
+//		if(refactorer.getFakeRefactoredModel() == null){
+//			flags |= RefactoringWizard.NO_PREVIEW_PAGE;
+//		} 
 		int attributeValueProviderCount = 0;
-		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValuesToProvide();
+		List<IValueProvider<?, ?>> valueProviders = interpreter.getValueProviderFactory().getValuesToProvide();
+//		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValuesToProvide();
 		for (IValueProvider<?, ?> valueProvider : valueProviders) {
 			if(valueProvider instanceof IAttributeValueProvider){
 				attributeValueProviderCount++;
@@ -154,7 +160,7 @@ public class ModelRefactoring extends Refactoring {
 	 * @return the diagramTransactionalEditingDomain
 	 */
 	public EditingDomain getDiagramTransactionalEditingDomain() {
-		return diagramTransactionalEditingDomain;
+		return editingDomain;
 	}
 
 	/**
@@ -167,8 +173,8 @@ public class ModelRefactoring extends Refactoring {
 	/**
 	 * @return the fakeInterpreter
 	 */
-	public IRefactoringFakeInterpreter getFakeInterpreter() {
-		return fakeInterpreter;
+	public IRefactoringInterpreter getInterpreter() {
+		return interpreter;
 	}
 
 	public RoleMapping getMapping() {

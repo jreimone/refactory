@@ -57,6 +57,12 @@ public interface IRefactoringInterpreter extends Cloneable{
 	public EObject interprete(EObject model);
 	
 	/**
+	 * Invokes the process of collecting the value providers before the refactoring starts.
+	 * It is determined by analysing the corresponding {@link RefactoringSpecification}.
+	 */
+	public void collectValueProviders();
+	
+	/**
 	 * This method should return a copy of this interpreter for a fake run. It then can be used to collect all
 	 * required inputs. For this reason this interface extends {@link Cloneable}.
 	 * 
@@ -121,18 +127,22 @@ public interface IRefactoringInterpreter extends Cloneable{
 	 */
 	public IRefactoringStatus getStatus();
 	
-	/**
-	 * Returns the value provider for the given instruction. This method is needed that the interpreter and its
-	 * fake interpreter can share the same value provider
-	 * 
-	 * @param command
-	 * @return
-	 */
-	public IValueProvider<?, ?> getValueProviderForCommand(EObject command);
+//	/**
+//	 * Returns the value provider for the given instruction. This method is needed that the interpreter and its
+//	 * fake interpreter can share the same value provider
+//	 * 
+//	 * @param command
+//	 * @return
+//	 */
+//	public IValueProvider<?, ?> getValueProviderForCommand(EObject command);
 	
 	/**
 	 * With this method a value provider will be registered to the given instruction.
 	 * @param command
 	 */
-	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider);
+//	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider);
+	
+	public IValueProviderFactory getValueProviderFactory();
+
+	public void setValueProviderFactory(IValueProviderFactory valueProviderFactory);
 }

@@ -34,17 +34,15 @@ import org.emftext.language.refactoring.refactoring_specification.VariableDeclar
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
 import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
-import org.emftext.refactoring.interpreter.AbstractValueProviderInstantiator;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
-import org.emftext.refactoring.specification.interpreter.ui.DialogOneListElementProvider;
 import org.emftext.refactoring.util.ModelUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
@@ -52,7 +50,8 @@ import org.emftext.refactoring.util.RoleUtil;
  * @author Jan Reimann
  *
  */
-public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiator<List<EObject>, EObject>{
+//public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiator<List<EObject>, EObject>{
+public class ObjectAssignmentInterpreter{
 
 	private RoleMapping mapping;
 	private List<? extends EObject> selection;
@@ -135,12 +134,13 @@ public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiat
 						return resolvedObjects.get(0);
 					}
 					@SuppressWarnings("unchecked")
-					IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
-					if(valueProvider == null){
-						classForValueProvider = mapping.getEClassForRole(assignedRole);
-						valueProvider = getNewValueProvider(mapping);
-						interpreter.registerValueProviderForCommand(command, valueProvider);
-					}
+					IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderFactory().getValueProviderForCommand(command, assignedRole);
+//					IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
+//					if(valueProvider == null){
+//						classForValueProvider = mapping.getEClassForRole(assignedRole);
+//						valueProvider = getNewValueProvider(mapping);
+//						interpreter.registerValueProviderForCommand(command, valueProvider);
+//					}
 					EObject value = valueProvider.provideValue(interpreter, resolvedObjects);
 					context.addEObjectForVariable(objectVar, value);
 					if(valueProvider.getReturnCode() == Dialog.CANCEL){
@@ -167,15 +167,19 @@ public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiat
 				return resolvedObjects.get(0);
 			}
 			@SuppressWarnings("unchecked")
-			IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
-			if(valueProvider == null){
-				EClass clazz = mapping.getEClassForRole(assignedRole);
-				valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
-				interpreter.registerValueProviderForCommand(command, valueProvider);
-				if(connectedCommand != null){
-					interpreter.registerValueProviderForCommand(connectedCommand, valueProvider);
-				}
+			IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderFactory().getValueProviderForCommand(command, assignedRole);
+			if(connectedCommand != null){
+				interpreter.getValueProviderFactory().registerValueProviderForCommand(connectedCommand, valueProvider);
 			}
+//			IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
+//			if(valueProvider == null){
+//				EClass clazz = mapping.getEClassForRole(assignedRole);
+//				valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
+//				interpreter.registerValueProviderForCommand(command, valueProvider);
+//				if(connectedCommand != null){
+//					interpreter.registerValueProviderForCommand(connectedCommand, valueProvider);
+//				}
+//			}
 			EObject value = valueProvider.provideValue(interpreter, resolvedObjects);
 			context.addEObjectForVariable(objectVar, value);
 			if(valueProvider.getReturnCode() == Dialog.CANCEL){
@@ -186,43 +190,43 @@ public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiat
 			throw new UnsupportedOperationException("implement this case");
 		}
 	}
-	
-//	private List<EObject> resolveCollaboration(EObject root, List<ReferenceMetaClassPair> pairs, Role filter) {
-//		if (pairs == null) {
-//			return null;
-//		} else {
-//			if (pairs.size() == 1) {
-//				List<EObject> containments = new LinkedList<EObject>();
-//				Object children = root.eGet(pairs.get(0).getReference(), true);
-//				if (children instanceof EObject) {
-//					containments.add((EObject) children);
-//				} else if (children instanceof List<?>) {
-//					containments.addAll((List<EObject>) children);
-//				}
-//				return RoleUtil.filterObjectsByRoles(containments, mapping, filter);
-//			} else {
-//				List<ReferenceMetaClassPair> reducedPairs = new LinkedList<ReferenceMetaClassPair>();
-//				for (int i = 1; i < pairs.size(); i++) {
-//					reducedPairs.add(pairs.get(i));
-//				}
-//				ReferenceMetaClassPair pair = pairs.get(0);
-//				Object newRoot = root.eGet(pair.getReference());
-//				if (newRoot instanceof EObject) {
-//					return resolveCollaboration((EObject) newRoot, reducedPairs, filter);
-//				} else if (newRoot instanceof List<?>) {
-//					List<EObject> newRoots = (List<EObject>) newRoot;
-//					List<EObject> objectCollection = new LinkedList<EObject>();
-//					for (EObject eObject : newRoots) {
-//						objectCollection.addAll(resolveCollaboration(eObject, reducedPairs, filter));
-//					}
-//					return objectCollection;
-////					throw new UnsupportedOperationException(
-////							"implement this case - but this shouldn't happen because here only one EObject should be returned");
-//				}
-//			}
-//		}
-//		return null;
-//	}
+
+	//	private List<EObject> resolveCollaboration(EObject root, List<ReferenceMetaClassPair> pairs, Role filter) {
+	//		if (pairs == null) {
+	//			return null;
+	//		} else {
+	//			if (pairs.size() == 1) {
+	//				List<EObject> containments = new LinkedList<EObject>();
+	//				Object children = root.eGet(pairs.get(0).getReference(), true);
+	//				if (children instanceof EObject) {
+	//					containments.add((EObject) children);
+	//				} else if (children instanceof List<?>) {
+	//					containments.addAll((List<EObject>) children);
+	//				}
+	//				return RoleUtil.filterObjectsByRoles(containments, mapping, filter);
+	//			} else {
+	//				List<ReferenceMetaClassPair> reducedPairs = new LinkedList<ReferenceMetaClassPair>();
+	//				for (int i = 1; i < pairs.size(); i++) {
+	//					reducedPairs.add(pairs.get(i));
+	//				}
+	//				ReferenceMetaClassPair pair = pairs.get(0);
+	//				Object newRoot = root.eGet(pair.getReference());
+	//				if (newRoot instanceof EObject) {
+	//					return resolveCollaboration((EObject) newRoot, reducedPairs, filter);
+	//				} else if (newRoot instanceof List<?>) {
+	//					List<EObject> newRoots = (List<EObject>) newRoot;
+	//					List<EObject> objectCollection = new LinkedList<EObject>();
+	//					for (EObject eObject : newRoots) {
+	//						objectCollection.addAll(resolveCollaboration(eObject, reducedPairs, filter));
+	//					}
+	//					return objectCollection;
+	////					throw new UnsupportedOperationException(
+	////							"implement this case - but this shouldn't happen because here only one EObject should be returned");
+	//				}
+	//			}
+	//		}
+	//		return null;
+	//	}
 
 	private void handleFILTER(RoleReference object, Variable objectVar) {
 		Role role = object.getRole();
@@ -260,13 +264,13 @@ public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiat
 		context.addEObjectsForVariable(objectVar, containers);
 
 
-//		EObject first = objects.get(0);
-//		EObject container = first.eContainer();
-//		roleRuntimeValue = container;
-//		TraceObject traceObject = RefactoringSpecificationFactory.eINSTANCE.createTraceObject();
-//		traceObject.setAppliedRole(assignedRole);
-//		traceObject.setContainer(container);
-//		return traceObject;
+		//		EObject first = objects.get(0);
+		//		EObject container = first.eContainer();
+		//		roleRuntimeValue = container;
+		//		TraceObject traceObject = RefactoringSpecificationFactory.eINSTANCE.createTraceObject();
+		//		traceObject.setAppliedRole(assignedRole);
+		//		traceObject.setContainer(container);
+		//		return traceObject;
 	}
 
 	private EObject handleRoleReference(RoleReference roleRef) {
@@ -307,12 +311,13 @@ public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiat
 			return values.get(0);
 		}
 		@SuppressWarnings("unchecked")
-		IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
-		if(valueProvider == null){
-			classForValueProvider = mapping.getEClassForRole(assignedRole);
-			valueProvider = getNewValueProvider(mapping);
-			interpreter.registerValueProviderForCommand(command, valueProvider);
-		}
+		IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderFactory().getValueProviderForCommand(command, assignedRole);
+		//		IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
+		//		if(valueProvider == null){
+		//			classForValueProvider = mapping.getEClassForRole(assignedRole);
+		//			valueProvider = getNewValueProvider(mapping);
+		//			interpreter.registerValueProviderForCommand(command, valueProvider);
+		//		}
 		EObject value = valueProvider.provideValue(interpreter, values);
 		if(valueProvider.getReturnCode() == Dialog.CANCEL){
 			status = new RefactoringStatus(IRefactoringStatus.CANCEL);
@@ -431,9 +436,9 @@ public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiat
 	public Object getRoleRuntimeValue() {
 		return roleRuntimeValue;
 	}
-
-	@Override
-	public IValueProvider<List<EObject>, EObject> getDefaultValueProvider(RoleMapping roleMapping) {
-		return new DialogOneListElementProvider("Select one " + classForValueProvider.getName(), roleMapping);
-	}
+//
+//	@Override
+//	public IValueProvider<List<EObject>, EObject> getDefaultValueProvider(RoleMapping roleMapping) {
+//		return new DialogOneListElementProvider("Select one " + classForValueProvider.getName(), roleMapping);
+//	}
 }

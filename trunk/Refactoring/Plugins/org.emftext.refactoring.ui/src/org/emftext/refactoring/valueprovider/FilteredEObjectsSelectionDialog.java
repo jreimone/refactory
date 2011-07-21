@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.emftext.refactoring.specification.interpreter.ui;
+package org.emftext.refactoring.valueprovider;
 
 import java.util.Comparator;
 import java.util.List;

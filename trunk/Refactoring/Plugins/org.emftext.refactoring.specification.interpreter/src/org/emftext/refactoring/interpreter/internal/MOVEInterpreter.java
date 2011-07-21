@@ -106,7 +106,7 @@ public class MOVEInterpreter {
 		List<ReferenceMetaClassPair> referencePairs = collaborationMapping.getReferenceMetaClassPair();
 		Integer index = context.getIndexForVariable(object.getIndex());
 		AbstractPathCreator pathCreator = new MovePathCreator();
-		IValueProvider<?, ?> valueProvider = interpreter.getValueProviderForCommand(instruction);
+		IValueProvider<?, ?> valueProvider = interpreter.getValueProviderFactory().getValueProviderForCommand(instruction);
 		if (valueProvider != null) {
 			valueProvider.setFakePropagationContext(pathCreator);
 		}

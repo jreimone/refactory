@@ -53,7 +53,7 @@ import org.emftext.refactoring.util.RegistryUtil;
 public class ModelRefactoringChange extends Change implements IModelCompareInputProvider {
 
 	private IRefactorer refactorer;
-	private EditingDomain diagramTransactionalEditingDomain;
+	private EditingDomain editingDomain;
 	private ModelRefactoring modelRefactoring;
 	private IEditorPart activeEditor;
 	private IProgressMonitor monitor;
@@ -65,33 +65,33 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		super();
 		this.modelRefactoring = modelRefactoring;
 		this.refactorer = modelRefactoring.getRefactorer();
-		this.diagramTransactionalEditingDomain = modelRefactoring.getDiagramTransactionalEditingDomain();
+		this.editingDomain = modelRefactoring.getDiagramTransactionalEditingDomain();
 		this.activeEditor = modelRefactoring.getActiveEditor();
 		
 		//cseidl
 		//Make sure the fake refactoring is performed, once the preview page is about to be displayed.
-		doFakeRun();
+//		doFakeRun();
 	}
 
-	private void doFakeRun() {
-		try{
-//			ResourceSet rs = refactorer.getResource().getResourceSet();
-//			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rs);
-//			if(domain == null){
-//				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
-//			}
-//			domain.getCommandStack().execute(new RecordingCommand(domain) {
-//
-//				@Override
-//				protected void doExecute() {
-					RoleMapping mapping = modelRefactoring.getMapping();
-					refactorer.fakeRefactor(mapping);
-//				}
-//			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	private void doFakeRun() {
+//		try{
+////			ResourceSet rs = refactorer.getResource().getResourceSet();
+////			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rs);
+////			if(domain == null){
+////				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+////			}
+////			domain.getCommandStack().execute(new RecordingCommand(domain) {
+////
+////				@Override
+////				protected void doExecute() {
+//					RoleMapping mapping = modelRefactoring.getMapping();
+//					refactorer.fakeRefactor(mapping);
+////				}
+////			});
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@Override
 	public Object getModifiedElement() {
@@ -129,7 +129,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			IUndoableOperation operation = new RefactoringUndoOperation(command);
 			IOperationHistory history = PlatformUI.getWorkbench().getOperationSupport().getOperationHistory();
 			history.add(operation);
-
+			
 			status = command.getStatus();
 			statusSwitch(true);
 			
@@ -160,13 +160,13 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			//			String title = "Refactoring was rolled back";
 			//			String message = "Refactoring rolled back because of an unforseen error. Check out the error log";
 			statusSwitch(true);
-			if (domain != null && diagramTransactionalEditingDomain == null) {
+			if (domain != null && editingDomain == null) {
 				domain.dispose();
 			}
 			return null;
 			//			MessageDialog.openInformation(shell, title, message);
 		}
-		if (domain != null && diagramTransactionalEditingDomain == null) {
+		if (domain != null && editingDomain == null) {
 			domain.dispose();
 		}
 		Change undoChange = new Change() {
@@ -318,6 +318,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		try {
 			EObject originalModel = refactorer.getOriginalModel();
 			createTemporaryResource(originalModel);
+//			refactorer.fakeRefactor();
 			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
 			createTemporaryResource(fakeRefactoredModel);
 			IMatchEngine engine = new RefactoringMatchEngine();

@@ -7,7 +7,9 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Stack;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -43,6 +45,7 @@ import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
+import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -83,16 +86,22 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 
 	private IRefactoringFakeInterpreter fakeInterpreter;
 
-	private Map<EObject, IValueProvider<?, ?>> valueProviderMap;
+//	private Map<EObject, IValueProvider<?, ?>> valueProviderMap;
+	private IValueProviderFactory valueProviderFactory;
 
 	public RefactoringInterpreter(IRefactoringPostProcessor postProcessor) {
 		this.postProcessor = postProcessor;
 		roleRuntimeInstanceMap = new LinkedHashMap<Role, List<EObject>>();
 		roleRuntimeInstanceURIMap = new LinkedHashMap<Role, List<URI>>();
 		resourcesToSave = new LinkedList<Resource>();
-		valueProviderMap = new LinkedHashMap<EObject, IValueProvider<?, ?>>();
+//		valueProviderMap = new LinkedHashMap<EObject, IValueProvider<?, ?>>();
 	}
 
+	/**
+	 * Basically, this method is used to determine if optional roles have not been mapped
+	 * and therefore no interpretation is needed. This method is called from {@link #interprete(EObject)}. 
+	 * 
+	 */
 	@Override
 	public IRefactoringStatus interprete(EObject object, RefactoringInterpreterContext context) {
 		EcoreUtil.resolveAll(object);
@@ -224,6 +233,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		// this.model = model;
 		// this.originalModel = model;
 		this.mapping = mapping;
+		initInterpretationStack();
 	}
 
 	/*
@@ -244,7 +254,6 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		objectInterpreter = new ObjectAssignmentInterpreter(this, mapping);
 		removeInterpreter = new REMOVEInterpreter(this, mapping);
 		context.setInitialContext(mapping);
-		initInterpretationStack();
 
 		List<Role> roles = RoleUtil.getAllInputRoles(mapping);
 		for (Role role : roles) {
@@ -257,6 +266,17 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 			occuredErrors = true;
 		}
 		return getModel();
+	}
+
+	public void collectValueProviders() {
+		Stack<EObject> stack = getInterpretationStack();
+		ListIterator<EObject> iterator = stack.listIterator();
+		while (iterator.hasNext()) {
+			Instruction instruction = (Instruction) iterator.next();
+			if(instruction instanceof ASSIGN || instruction instanceof ObjectAssignmentInterpreter){
+				getValueProviderFactory().registerValueProviderForCommand(instruction);
+			}
+		}
 	}
 
 	private void initInterpretationStack() {
@@ -543,22 +563,31 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return refSpec;
 	}
 
-	public IValueProvider<?, ?> getValueProviderForCommand(EObject command) {
-		IValueProvider<?, ?> valueProvider = null;
-		if (fakeInterpreter != null) {
-			valueProvider = fakeInterpreter.getValueProviderForCommand(command);
-		}
-		if (valueProvider == null) {
-			return valueProviderMap.get(command);
-		}
-		return valueProvider;
-	}
+//	public IValueProvider<?, ?> getValueProviderForCommand(EObject command) {
+//		IValueProvider<?, ?> valueProvider = null;
+//		if (fakeInterpreter != null) {
+//			valueProvider = fakeInterpreter.getValueProviderForCommand(command);
+//		}
+//		if (valueProvider == null) {
+//			return valueProviderMap.get(command);
+//		}
+//		return valueProvider;
+//	}
 
-	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
-		valueProviderMap.put(command, valueProvider);
-	}
+//	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
+//		valueProviderMap.put(command, valueProvider);
+//	}
 
 	public void setRoleRuntimeInstanceURIs(Map<Role, List<URI>> roleRuntimeInstanceURIMap) {
 		this.roleRuntimeInstanceURIMap = roleRuntimeInstanceURIMap;
+	}
+
+
+	public IValueProviderFactory getValueProviderFactory() {
+		return valueProviderFactory;
+	}
+
+	public void setValueProviderFactory(IValueProviderFactory valueProviderFactory) {
+		this.valueProviderFactory = valueProviderFactory;
 	}
 }
