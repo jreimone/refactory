@@ -102,7 +102,8 @@ public class RefactoringInterpreterTest extends TestClass{
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		RoleMapping mapping = mappings.get(0);
-		refactorer.fakeRefactor(mapping);
+		refactorer.setRoleMappingToInterprete(mapping);
+//		refactorer.fakeRefactor();
 		EObject refactoredModel = refactorer.refactor();
 		EObject originalModel = getTestDataSet().getResourceByPattern(CREATE, false).getContents().get(0);
 		assertNotNull(refactoredModel);
@@ -157,7 +158,8 @@ public class RefactoringInterpreterTest extends TestClass{
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		RoleMapping mapping = mappings.get(0);
-		refactorer.fakeRefactor(mapping);
+		refactorer.setRoleMappingToInterprete(mapping);
+//		refactorer.fakeRefactor();
 		EObject refactoredRoot = refactorer.refactor();
 		EObject originalModel = getTestDataSet().getResourceByPattern(MODEL, false).getContents().get(0);
 		assertNotNull(refactoredRoot);
