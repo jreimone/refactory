@@ -92,7 +92,8 @@ public class ContinuedRefactoringTest extends TestClass {
 		}
 		assertNotNull(mappingToUse);
 		IValueProviderRegistry.INSTANCE.registerValueProvider(mappingToUse, TestAttributeValueProvider.class);
-		refactorer.fakeRefactor(mappingToUse);
+		refactorer.setRoleMappingToInterprete(mappingToUse);
+//		refactorer.fakeRefactor();
 		EObject refactoredModel = refactorer.refactor();
 		assertNotNull(refactoredModel);
 	
