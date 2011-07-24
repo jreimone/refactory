@@ -7,15 +7,19 @@ RenameVariable maps <SelectXWithVar> {
 	Nameable := SimpleNameCS( name -> simpleName);
 }
 
-RenameSimpleNameCS maps <RenameX> { 
-	Nameable :=  SimpleNameCS( name -> simpleName );
+RenameSimpleNameCS maps <SelectXWithVar> { 
+	Selection := SimpleNameCS;
+	Nameable := SimpleNameCS( name -> simpleName);
 }
-
 
 RenameNamedLiteralExpCS maps <SelectXWithVar> {
 	Selection := NamedLiteralExpCS;
-	Nameable := Property(name -> name);
+	Nameable := SimpleNameCS( name -> simpleName);
 }
+
+//RenameSimpleNameCS maps <RenameX> { 
+//	Nameable :=  SimpleNameCS( name -> simpleName );
+//}
 
 //RenameNamedElement maps <RenameX> { 
 //	 Nameable := NamedElement (name -> name);

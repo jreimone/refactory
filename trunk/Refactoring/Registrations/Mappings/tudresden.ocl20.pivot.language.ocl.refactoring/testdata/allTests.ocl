@@ -1,3 +1,11 @@
+-- Invariant 15:
+context LoyaltyAccount
+inv: 
+let test : Boolean = true
+in
+points > 0 implies transactions->exists(test | test.points > 0)
+
+
 -- Invariant 5 - split and chain:
 context Membership
 inv levelAnColor:
@@ -40,14 +48,15 @@ in
 context CustomerCard
 inv:
   if valid then
-	(self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())) = false
+	((self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now()))) = false
   else
-	(self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())) = true
+	((self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now()))) = true
   endif
       
-      
-
+ 
+ 
 -- Invariant 13 integration:
+
 context CustomerCard
 inv: let correctDate : Boolean = 	
 		self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now())
@@ -66,7 +75,10 @@ inv minServices: partners->forAll(bla | bla ->size() >= 1)
   
 -- Invariant 15:
 context LoyaltyAccount
-inv: points > 0 implies transactions->exists(test | test.points > 0)
+inv: 
+let test : Boolean = true
+in
+points > 0 implies transactions->exists(test | test.points > 0)
   
 
 
