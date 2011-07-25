@@ -43,6 +43,7 @@ public class BasicIndexConnectorRegistry implements IndexConnectorRegistry {
 	}
 
 	public List<Resource> getReferencingResources(EObject referenceTarget) {
+		// TODO hier wird schon null zurückgegeben, also befindet sich referenceTarget nicht in einer Resource
 		List<Resource> referers = new LinkedList<Resource>();
 		for (IndexConnector connector : getConnectors()) {
 			List<Resource> connectorReferer = connector.getReferencingResources(referenceTarget);
