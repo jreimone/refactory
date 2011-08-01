@@ -20,6 +20,7 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
+import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
@@ -34,17 +35,17 @@ import tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS;
  * @author Michael Muck
  *
  */
-public class RemoveAllUnusedVariableDeclarations extends AbstractRefactoringPostProcessor{
+public class RemoveUnusedVariableDeclarationsPP extends AbstractRefactoringPostProcessor{
 	
 	
 	int varsFound;
-	private ContextDeclarationCS selected;
+	private ClassifierContextDeclarationCS selected;
 	private EList<VariableDeclarationCS> vars;
 	private EList<VariableDeclarationCS> varsToRemove;
 	int removedVars;
 	private PostProcessingHelper myPostProcessingHelper;
 	
-	public RemoveAllUnusedVariableDeclarations() {
+	public RemoveUnusedVariableDeclarationsPP() {
 		vars = new BasicEList<VariableDeclarationCS>();
 		varsToRemove = new BasicEList<VariableDeclarationCS>();
 		myPostProcessingHelper = new PostProcessingHelper();
@@ -60,18 +61,27 @@ public class RemoveAllUnusedVariableDeclarations extends AbstractRefactoringPost
 		for (Role role : keySet) {
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
 			if (role.getName().equals("Selection")) {
-				if (roleplayers.size()==1 && roleplayers.get(0) instanceof ContextDeclarationCS) {
-					selected = (ContextDeclarationCS) roleplayers.get(0);
+				if (roleplayers.size()==1 && roleplayers.get(0) instanceof ClassifierContextDeclarationCS) {
+					selected = (ClassifierContextDeclarationCS) roleplayers.get(0);
 					System.out.println("found selected element as: "+selected);
 				}
 			}
 		}
-		
+////prevent postprocessor from refactoring if it is a fake run for the preview
+////to circumvent an error in refactory
+////can be removed if this error is fixed
+////////////////////////////////////////////////////////////////////////////////////
+		if (isFakeRun) return Status.OK_STATUS;
+////////////////////////////////////////////////////////////////////////////////////
 		getAllVariables();
-		
+		System.out.println("found "+varsFound+" variables:");
+		Iterator<VariableDeclarationCS> sopit = vars.iterator();
+		while (sopit.hasNext()) {
+			System.out.println("   "+sopit.next().getVariableName().getSimpleName());
+		}
 		removedVars = 0;
 		if (varsFound > 0) {
-			findUnusedVariables();			
+			findUnusedVariables();
 			if (varsToRemove.size() > 0) {
 				removedVars = varsToRemove.size();
 				removeUnusedVariables();
@@ -90,18 +100,24 @@ public class RemoveAllUnusedVariableDeclarations extends AbstractRefactoringPost
 	
 	
 	private void getAllVariables() {
+		vars = new BasicEList<VariableDeclarationCS>();
 		varsFound = 0;
 		Iterator<EObject> myAllContentsIt = selected.eAllContents();
 		while (myAllContentsIt.hasNext()) {
 			EObject akt = myAllContentsIt.next();
-			if (akt instanceof VariableDeclarationCS) {
-				vars.add((VariableDeclarationCS) akt);
-				varsFound++;
+			if (akt instanceof LetExpCS) {
+				vars.addAll(((LetExpCS) akt).getVariableDeclarations());
+				varsFound += ((LetExpCS)akt).getVariableDeclarations().size();
 			}
+//			if (akt instanceof VariableDeclarationCS) {
+//				vars.add((VariableDeclarationCS) akt);
+//				varsFound++;
+//			}
 		}
 	}
 	
 	private void findUnusedVariables() {
+		varsToRemove = new BasicEList<VariableDeclarationCS>();
 		Iterator<VariableDeclarationCS> myVarsIt = vars.iterator();
 		while (myVarsIt.hasNext()) {
 			VariableDeclarationCS myVar = myVarsIt.next();
@@ -117,6 +133,7 @@ public class RemoveAllUnusedVariableDeclarations extends AbstractRefactoringPost
 				}
 			}
 			//now, if no use for the actual variable is found, the variable can be removed
+			System.out.println("found "+usesFound+" references to variable "+myVar.getVariableName().getSimpleName());
 			if(usesFound == 0) {
 				varsToRemove.add(myVar);
 			}
@@ -130,6 +147,7 @@ public class RemoveAllUnusedVariableDeclarations extends AbstractRefactoringPost
 		Iterator<VariableDeclarationCS> myRemovalIt = varsToRemove.iterator();
 		while (myRemovalIt.hasNext()) {
 			VariableDeclarationCS aktRemovee = myRemovalIt.next();
+			System.out.println("removing "+aktRemovee.getVariableName().getSimpleName());
 			EObject parent = aktRemovee.eContainer();
 			myPostProcessingHelper.removeObjectFromParent(aktRemovee);
 			cleanUp(parent);

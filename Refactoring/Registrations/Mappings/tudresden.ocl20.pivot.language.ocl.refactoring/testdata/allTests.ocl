@@ -22,11 +22,11 @@ inv totalPointsEarning:
 
 -- Invariant 13 brackets:
 context CustomerCard
-inv:
+inv: let hlasfas : Boolean =self.validFrom.isBefore(Date::now()) in
   if valid then
-	((self.validFrom.isBefore(Date::now())) and (self.validThru.isAfter(Date::now()))) = false
+	(((self.validFrom.isBefore(Date::now()))) and (self.validThru.isAfter(Date::now()))) = false
   else
-	((self.validFrom.isBefore(Date::now())) and (self.validThru.isAfter(Date::now()))) = true
+	(((self.validFrom.isBefore(Date::now()))) and (self.validThru.isAfter(Date::now()))) = true
   endif
   
   

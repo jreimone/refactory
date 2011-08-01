@@ -30,7 +30,7 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Extract Let Expression"
+            mapping_name="Extract Variable"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.ExLetExpPostProcessor">
       </postprocessor>
@@ -38,9 +38,9 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Inline Variable From LetExpression"
+            mapping_name="Inline Variable"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.InlineVarFromLetExp">
+            postprocessor="oclrefactoring.InlineVariablePP">
       </postprocessor>
    </extension>
    <extension
@@ -70,9 +70,9 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Remove All Unused Variable Declarations"
+            mapping_name="Remove Unused Variable Declarations"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RemoveAllUnusedVariableDeclarations">
+            postprocessor="oclrefactoring.RemoveUnusedVariableDeclarationsPP">
       </postprocessor>
    </extension>
    <extension
@@ -129,6 +129,14 @@
             mapping_name="RenameVariable"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.RenameVariablePP">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Inline Variable Here"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.InlineVariablePP">
       </postprocessor>
    </extension>
 
