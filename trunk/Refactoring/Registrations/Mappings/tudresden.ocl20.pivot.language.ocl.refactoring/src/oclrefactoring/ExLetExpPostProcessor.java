@@ -23,6 +23,7 @@ import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProce
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
@@ -213,8 +214,11 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 			origContainer.eSet(origRef, myReferenceLiteral);
 		}
 		
-		//additionally we try to check, if there is any other occurance of the extract withing the actual constraint,
-		//and if there is, is will be replaced
+		//additionally we try to check, if there is any other occurence of the extract within the actual constraint,
+		//and if there is, is will be replaced as well, but only if the selection is not an
+		//integer literal
+		
+		if(extract instanceof IntegerLiteralExpCS) return;
 		
 		TreeIterator<EObject> myLetIt = myLetExp.getOclExpression().eAllContents();
 		

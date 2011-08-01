@@ -3,7 +3,7 @@ context LoyaltyAccount
 inv: 
 let test : Boolean = true
 in
-points > 0 implies transactions->exists(test | test.points > 0)
+ points> 0 implies transactions->exists(test |test.points > 0)
 
 
 -- Invariant 5 - split and chain:
@@ -26,11 +26,11 @@ inv:
   if valid then
 	((self.validFrom.isBefore(Date::now())) and (self.validThru.isAfter(Date::now()))) = false
   else
-	((self.validFrom.isBefore(Date::now())) and (self.validThru.isAfter((Date::now())))) = true
+	((self.validFrom.isBefore(Date::now())) and (self.validThru.isAfter(Date::now()))) = true
   endif
   
   
-  
+   
   -- Invariant 13 unused variable:
 context CustomerCard
 inv: let blub3 : Boolean =
