@@ -1,0 +1,11 @@
+REFACTORING FOR <platform:/plugin/org.emftext.refactoring.selectXWith2Vars/rolemodel/SelectXWith2Vars.rolestext#/> 
+
+STEPS {
+
+	object origContainerObject := OrigContainer as trace(INPUT);
+	
+	create new nc:NewContainer;
+	assign nc.newName;
+	create new nt:NewType;
+	assign nt.newTypeName;
+} 
