@@ -4,7 +4,7 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 
 
 
-"Extract Let Expression" maps <SelectXWith2Vars> {
+"Extract Variable" maps <SelectXWith2Vars> {
 	OrigContainer := OclExpressionCS;
 	Extract := OclExpressionCS;
 	NewContainer := SimpleNameCS (newName -> simpleName );
@@ -17,7 +17,7 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 }
 
 "Remove All Redundant Brackets" maps <SelectX> {
-	Selection := ContextDeclarationCS;
+	Selection := ClassifierContextDeclarationCS;
 }
 
 "Remove Empty Variable Declaration" maps <SelectX> {
@@ -28,8 +28,8 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 	Selection := ContextDeclarationCS;
 }
 
-"Remove All Unused Variable Declarations" maps <SelectX> {
-	Selection := ContextDeclarationCS;
+"Remove Unused Variable Declarations" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
 }
 
 "Split Expression" maps <SelectX> {

@@ -2,8 +2,12 @@ ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
 IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
 
 
-"Inline Variable From LetExpression" maps <SelectX> {
+"Inline Variable" maps <SelectX> {
 	Selection := VariableDeclarationWithInitCS;
+}
+
+"Inline Variable Here" maps <SelectX> {
+	Selection := NamedLiteralExpCS;
 }
 
 "Merge Atomic Expressions" maps <SelectX> {
