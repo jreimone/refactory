@@ -171,7 +171,7 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 				//check if it can be renamed or if it is an iterator variable that does not reference the variable to rename
 				Boolean renamingOK = true;
 				if (hasOverlapping) {
-					renamingOK = checkIsReference(aktRef, overlappingIterators);
+					renamingOK = referencesSelection(aktRef, overlappingIterators);
 				}
 				if (!renamingOK) System.out.println(" - variable is an iterator variable and will not be renamed");
 				if (renamingOK) System.out.println("	- variable is not an iterator variable and can be renamed");
@@ -205,7 +205,7 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 
 	//checks if the given variable is contained in one of the iterators or not
 	//if it is not, it is a reference to the variable to rename and renaming would be true
-	private Boolean checkIsReference(NamedLiteralExpCS aktRef, EList<IteratorExpCS> overlappingIterators) {
+	private Boolean referencesSelection(NamedLiteralExpCS aktRef, EList<IteratorExpCS> overlappingIterators) {
 		
 		for (int i = 0; i < overlappingIterators.size(); i++) {
 			Iterator<EObject> it = overlappingIterators.get(i).eAllContents();
