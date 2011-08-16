@@ -35,7 +35,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  * @author Michael Muck
  *
  */
-public class SplitExpressionAtomicPP extends AbstractRefactoringPostProcessor {
+public class SeparateContextClassifiersPP extends AbstractRefactoringPostProcessor {
 
 	
 	OclFactoryImpl myOclFactory;
@@ -43,17 +43,15 @@ public class SplitExpressionAtomicPP extends AbstractRefactoringPostProcessor {
 	PivotModelFactoryImpl myPivotModelFactory;
 	private ClassifierContextDeclarationCS selected;
 	private int splitCount;
-	private boolean splitAtomic;
 	PackageDeclarationCS myPackage;
+	//set this to false to enable postprocessing for preview fake run
+	private boolean debug = true;
 	
 
-	public SplitExpressionAtomicPP() {
+	public SeparateContextClassifiersPP() {
 
-		myOclFactory = new OclFactoryImpl();
-		myDataTypesFactory = new DatatypesFactoryImpl();
-		myPivotModelFactory = new PivotModelFactoryImpl();
-		splitCount = 0;
-		splitAtomic = true;
+		System.out.println("Initializing SeparateContextClassifiersPostProcessor...");
+		
 	}
 	
 	
@@ -61,7 +59,8 @@ public class SplitExpressionAtomicPP extends AbstractRefactoringPostProcessor {
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
 			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 
-		System.err.println("Split Constraint postprocessor activated!");
+		if (debug && isFakeRun) return Status.OK_STATUS;
+		System.out.println("Separate Context Classifiers postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
@@ -90,70 +89,49 @@ public class SplitExpressionAtomicPP extends AbstractRefactoringPostProcessor {
 	
 	private IStatus performSpecificTransformation() {
 		
+		ReferenceCopier myCopier = new ReferenceCopier();
+		myOclFactory = new OclFactoryImpl();
+		myDataTypesFactory = new DatatypesFactoryImpl();
+		myPivotModelFactory = new PivotModelFactoryImpl();
+		splitCount = 0;
+		
 		if (selected.eContainer()instanceof PackageDeclarationCS) {
 			myPackage = (PackageDeclarationCS) selected.eContainer();
-			System.out.println("found package declaration as: "+myPackage);
+//			System.out.println("found package declaration as: "+myPackage);
 		} else {
-			System.err.println("package declaration not found - refactoring cancelled!");
+//			System.err.println("package declaration not found - refactoring cancelled!");
 			return Status.CANCEL_STATUS;
 		}
 		
 		EList<InvariantOrDefinitionCS> invList = selected.getInvariantsAndDefinitions();
-		Iterator<InvariantOrDefinitionCS> invListIt = invList.iterator();
-		EList<InvariantExpCS> myNewInvList = new BasicEList<InvariantExpCS>();
-		EList<DefinitionExpCS> myNewDefList = new BasicEList<DefinitionExpCS>();
-		while(invListIt.hasNext()) {
-			InvariantOrDefinitionCS invListElement = invListIt.next();
-			InvariantExpCS myInv = null;
-			DefinitionExpCS myDef = null;
-			LogicalAndOperationCallExpCS myAnd = null;
-			if (invListElement instanceof InvariantExpCS) {
-				myInv = (InvariantExpCS) invListElement;
-				if (myInv.getOclExpression() instanceof LogicalAndOperationCallExpCS) {
-					myAnd = (LogicalAndOperationCallExpCS) myInv.getOclExpression();
-					myInv.setOclExpression(myAnd.getSource());
-					InvariantExpCS myNewInv = myOclFactory.createInvariantExpCS();
-					myNewInv.setOclExpression(myAnd.getTarget());
-					myNewInvList.add(myNewInv);
-					splitCount++;
-				}
-			}
-			else if (invListElement instanceof DefinitionExpCS) {
-				myDef = (DefinitionExpCS) invListElement;
-				myNewDefList.add(myDef);
-				splitCount++;
-			}
-		}
-		System.out.println("Found "+myNewInvList.size()+" invariants and "+myNewDefList+" definitions to split.");
-		Iterator<InvariantExpCS> myNewInvListIterator = myNewInvList.iterator();
-		Iterator<DefinitionExpCS> myNewDefListIterator = myNewDefList.iterator();
-		if (splitAtomic) {
-			while (myNewInvListIterator.hasNext()) {
-				InvariantExpCS aktexp = myNewInvListIterator.next();
-				ClassifierContextDeclarationCS myClassifierContextDeclarationCS = myOclFactory.createClassifierContextDeclarationCS();
-				myClassifierContextDeclarationCS.getInvariantsAndDefinitions().add(aktexp);
-				//EcoreUtil.copy(selected.getTypeName());
-				myClassifierContextDeclarationCS.setTypeName(EcoreUtil.copy(selected.getTypeName()));
-				myPackage.getContextDeclarations().add(myPackage.getContextDeclarations().indexOf(selected)-1,myClassifierContextDeclarationCS);
-			}
-			while (myNewDefListIterator.hasNext()) {
-				DefinitionExpCS aktexp = myNewDefListIterator.next();
-				ClassifierContextDeclarationCS myClassifierContextDeclarationCS2 = myOclFactory.createClassifierContextDeclarationCS();
-				myClassifierContextDeclarationCS2.getInvariantsAndDefinitions().add(aktexp);
-				//EcoreUtil.copy(selected.getTypeName());
-				myClassifierContextDeclarationCS2.setTypeName(EcoreUtil.copy(selected.getTypeName()));
-				myPackage.getContextDeclarations().add(myClassifierContextDeclarationCS2);
-			}
-		} else {
-			while (myNewInvListIterator.hasNext()) {
-				InvariantExpCS aktexp = myNewInvListIterator.next();
-				selected.getInvariantsAndDefinitions().add(aktexp);
-			}
-		}
 		
 		
+		ClassifierContextDeclarationCS myClassifierContextDeclarationCS = myOclFactory.createClassifierContextDeclarationCS();
+		//System.out.println("created ClassifierContextDeclarationCS: "+myClassifierContextDeclarationCS);
+		myClassifierContextDeclarationCS.setTypeName(EcoreUtil.copy(selected.getTypeName()));
+		//System.out.println("added type to ClassifierContextDeclarationCS:"+myClassifierContextDeclarationCS.getTypeName());
 		
 		
+//		System.out.println("Found "+invList.size()+" invariants and definitions.");
+		//passesNeeded is used because the list shrinks with every element that is 
+		//put in another container, so an iterator wont do the trick
+		int passesNeeded = invList.size();
+		for (int i=0; i<passesNeeded;i++) {
+//			System.out.println("pass 1");		
+//			System.out.println("invlistsize: "+invList.size());
+			InvariantOrDefinitionCS akt = invList.get(0);
+			InvariantOrDefinitionCS aktCopy = (InvariantOrDefinitionCS) myCopier.copy(akt);
+			ClassifierContextDeclarationCS myccd = (ClassifierContextDeclarationCS) myCopier.copy(myClassifierContextDeclarationCS);
+			myccd.getInvariantsAndDefinitions().add(akt);
+//			System.out.println("added elements to ClassifierContextDeclarationCS"+myccd);
+//			System.out.println("    "+myccd.getInvariantsAndDefinitions().get(0));
+			myPackage.getContextDeclarations().add(myccd);
+//			System.out.println("added ClassifierContextDeclarationCS to package - it now contains "+myPackage.getContextDeclarations().size()+" context declarations.");
+			splitCount++;		
+//			System.out.println("invlistsize: "+invList.size());
+		}		
+		splitCount--;
+		myPackage.getContextDeclarations().remove(selected);
 		return Status.OK_STATUS;
 	}
 	

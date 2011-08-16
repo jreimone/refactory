@@ -59,6 +59,10 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
 			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 		System.err.println("postprocessor activated!");
+		if (isFakeRun) {
+			System.out.println("skipping postprocessing for fakerun");
+			return Status.OK_STATUS;
+		}
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
 //			System.out.println("role found with name: "+role.getName());
@@ -81,6 +85,7 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 	}
 		
 	private IStatus performSpecificTransformationForSelectedReference() {
+		System.out.println("variable name: "+selectedReference.getNamedElement().getName());
 		EObject parent = getDefinitionParent(selectedReference);
 		IStatus status = Status.CANCEL_STATUS;
 		if (parent == null) {
@@ -101,11 +106,24 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 		
 		IStatus status = Status.CANCEL_STATUS;
 		VariableDeclarationWithInitCS myvar = null;
-		for (int i=0; i<parent.getVariableDeclarations().size();i++) {
-			VariableDeclarationWithInitCS aktvar = parent.getVariableDeclarations().get(i);
-			if (aktvar.getVariableName().getSimpleName().equals(selectedReference.getNamedElement().getName())) {
-				myvar = aktvar;
-				i = parent.getVariableDeclarations().size();
+		boolean found = false;
+		boolean go = true;
+		while (!found && go) {
+			for (int i=0; i<parent.getVariableDeclarations().size();i++) {
+				System.out.println("found "+parent.getVariableDeclarations().size()+" variable declarations.");
+				VariableDeclarationWithInitCS aktvar = parent.getVariableDeclarations().get(i);
+				System.out.println("name of currently checked variable: "+aktvar.getVariableName().getSimpleName());
+				if (aktvar.getVariableName().getSimpleName().equals(selectedReference.getNamedElement().getName())) {
+					myvar = aktvar;
+					i = parent.getVariableDeclarations().size();
+					found = true;
+				}
+			}
+			//for chained let expressions the definition of the variable to inline can be located in any of them,
+			//therefore now the next one in the hierarchy has to be checked
+			if (!found) {
+				if (getDefinitionParent(parent) instanceof LetExpCS) parent = (LetExpCS) getDefinitionParent(parent);
+				else go = false;				
 			}
 		}
 		

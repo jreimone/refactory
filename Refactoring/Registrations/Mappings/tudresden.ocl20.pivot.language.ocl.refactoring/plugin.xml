@@ -139,5 +139,21 @@
             postprocessor="oclrefactoring.InlineVariablePP">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Separate Context Classifiers"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.SeparateContextClassifiersPP">
+      </postprocessor>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Merge Chained Let Expressions"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="oclrefactoring.MergeLetExpPP">
+      </postprocessor>
+   </extension>
 
 </plugin>

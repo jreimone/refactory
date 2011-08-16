@@ -22,6 +22,8 @@ import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProce
 
 import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
+import tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
@@ -171,6 +173,10 @@ public class RemoveUnusedVariableDeclarationsPP extends AbstractRefactoringPostP
 					((InvariantExpCS)myParentContainer).setOclExpression(myParent.getOclExpression());
 				} else if (myParentContainer instanceof PrePostOrBodyDeclarationCS) {
 					((PrePostOrBodyDeclarationCS)myParentContainer).setOclExpression(myParent.getOclExpression());
+				} else if (myParentContainer instanceof LetExpCS) {
+					((LetExpCS)myParentContainer).setOclExpression(myParent.getOclExpression());
+				} else if (myParentContainer instanceof DefinitionExpOperationCS) {
+					((DefinitionExpOperationCS)myParentContainer).setOclExpression(myParent.getOclExpression());
 				}
 				cleaned = true;
 				System.out.println("cleaning empty letExp");

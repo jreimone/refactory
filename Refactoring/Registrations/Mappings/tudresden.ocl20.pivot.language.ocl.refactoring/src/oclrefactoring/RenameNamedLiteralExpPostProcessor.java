@@ -114,16 +114,37 @@ public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProce
 	private void performPostProcessing() {
 
 		EObject parent = getDefinitionParent(selection);
-		if (parent instanceof LetExpCS) {
+		if (parent == null) refactoringSuccessful=false;
+		else if (parent instanceof LetExpCS) {
 			refactoringSuccessful = performRenamingForLetExp((LetExpCS)parent);
 		}
-		if (parent instanceof IteratorExpCS) {
+		else if (parent instanceof IteratorExpCS) {
 			refactoringSuccessful = performRenamingForIteratorExp((IteratorExpCS)parent);
+		}
+		else if (parent instanceof IterateExpCS) {
+			refactoringSuccessful = performRenamingForIterateExp((IterateExpCS)parent);
 		}
 		
 	}
 
 	
+
+	private boolean performRenamingForIterateExp(IterateExpCS parent) {
+		if (parent.getIteratorVariable().getVariableName().getSimpleName().equals(origName)) {
+			parent.getIteratorVariable().getVariableName().setSimpleName(newName);
+		}
+
+		//finding and renaming all references
+		Iterator<EObject> it = parent.eAllContents();
+		while (it.hasNext()) {
+			EObject akt = it.next();
+			if (akt instanceof NamedLiteralExpCS && ((NamedLiteralExpCS)akt).getNamedElement().getName().equals(origName)) {
+				//we found a variable reference with the original name
+				((NamedLiteralExpCS)akt).getNamedElement().setName(newName);
+			}
+		}
+		return true;
+	}
 
 	private boolean performRenamingForIteratorExp(IteratorExpCS parent) {
 		//finding and renaming the variable declaration
@@ -149,12 +170,33 @@ public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProce
 	}
 
 	private EObject getDefinitionParent(EObject child) {
-
+		//finding the definition of the variable in the way up the hierarchy
 		EObject parent = child.eContainer();
 		if (parent instanceof PackageDeclarationCS) return null; //break condition	
 		
-		if (parent instanceof LetExpCS) return parent;
-		if (parent instanceof IteratorExpCS) return parent;
+		else if (parent instanceof LetExpCS) {
+			//making sure the LetExpCS really contains the variable's definition
+			EList<VariableDeclarationWithInitCS> variables = ((LetExpCS) parent).getVariableDeclarations();
+			for (int i = 0; i < variables.size(); i++) {
+				VariableDeclarationWithInitCS akt = variables.get(i);
+				if (akt.getVariableName().getSimpleName().equals(origName)) {
+					return parent;
+				}
+			}
+			//if no variable definition is found the search will continue up the hierarchy
+		}
+		else if (parent instanceof IteratorExpCS) {
+			//finding and renaming the variable declaration
+			EList<IteratorExpVariableCS> variables = ((IteratorExpCS) parent).getIteratorVariables();
+			for (int i = 0; i < variables.size(); i++) {
+				IteratorExpVariableCS akt = variables.get(i);
+				if (akt.getVariableName().getSimpleName().equals(origName)) {
+					return parent;
+				}
+			}
+			//if no variable definition is found the search will continue up the hierarchy
+		}
+		else if (parent instanceof IterateExpCS && (((IterateExpCS)parent).getIteratorVariable().getVariableName().getSimpleName().equals(origName))) return parent;
 			
 		return getDefinitionParent(parent);
 		
@@ -162,14 +204,44 @@ public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProce
 
 	private boolean performRenamingForLetExp(LetExpCS parent) {
 		// rename declaration
-		EList<VariableDeclarationWithInitCS> variables = parent.getVariableDeclarations();
-		for (int i = 0; i < variables.size(); i++) {
-			VariableDeclarationWithInitCS akt = variables.get(i);
-			if (akt.getVariableName().getSimpleName().equals(origName)) {
-				akt.getVariableName().setSimpleName(newName);
-				i = variables.size();
+		boolean found = false;
+		boolean go = true;
+		while (!found && go) {
+			EList<VariableDeclarationWithInitCS> variables = parent.getVariableDeclarations();
+			for (int i = 0; i < variables.size(); i++) {
+				VariableDeclarationWithInitCS akt = variables.get(i);
+				if (akt.getVariableName().getSimpleName().equals(origName)) {
+					akt.getVariableName().setSimpleName(newName);
+					i = variables.size();
+					found = true;
+				}
+			}
+			//for chained let expressions the definition of the variable to rename can be located in any of them,
+			//therefore now the next one in the hierarchy has to be checked
+			if (!found) {
+				if (getDefinitionParent(parent) instanceof LetExpCS) parent = (LetExpCS) getDefinitionParent(parent);
+				else go = false;				
 			}
 		}
+//		LetExpCS nextParent = parent;
+//		while (!found && this.getDefinitionParent(nextParent) instanceof LetExpCS) {
+//			nextParent = (LetExpCS) this.getDefinitionParent(parent);
+//			EList<VariableDeclarationWithInitCS> nextVariables = nextParent.getVariableDeclarations();
+//			for (int i = 0; i < nextVariables.size(); i++) {
+//				VariableDeclarationWithInitCS akt = nextVariables.get(i);
+//				if (akt.getVariableName().getSimpleName().equals(origName)) {
+//					akt.getVariableName().setSimpleName(newName);
+//					i = variables.size();
+//					found = true;
+//				}
+//			}
+//		}
+		
+		if (!found) {
+			System.out.println("Refactoring could not be performed for no valid variable declaration has been found.");
+			return false;
+		}
+		
 		
 		EList<IteratorExpCS> overlappingIterators = calculateOverlappingIterators(parent.getOclExpression());
 		Boolean hasOverlapping = false;

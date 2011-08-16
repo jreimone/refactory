@@ -6,7 +6,7 @@ in
  points> 0 implies transactions->exists(test |test.points > 0)
 
 
--- Invariant 5 - split and chain:
+-- Invariant 5 - split expression - and chain:
 context Membership
 inv levelAnColor:
   	(currentLevel.name = 'Silver' implies card.color = Color::silver) 
@@ -19,29 +19,37 @@ inv totalPointsEarning:
   deliveredServices.transaction->select(
 	oclIsTypeOf(Earning)).points->sum() < 10000
 
-
--- Invariant 13 brackets:
+ 
+-- Invariant 13 redundant brackets:
 context CustomerCard
-inv: let hlasfas : Boolean =self.validFrom.isBefore(Date::now()) in
+inv:
   if valid then
 	(((self.validFrom.isBefore(Date::now()))) and (self.validThru.isAfter(Date::now()))) = false
   else
-	(((self.validFrom.isBefore(Date::now()))) and (self.validThru.isAfter(Date::now()))) = true
+	((((self.validFrom.isBefore(Date::now())) and ((self.validThru.isAfter((Date::now()))))))) = true
   endif
+ 
   
   
-   
-  -- Invariant 13 unused variable:
+-- Invariant 13 unused variable and chained letExpressions:
 context CustomerCard
-inv: let blub3 : Boolean =
-	self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now()),
-	testUnused : Boolean = blub3 
+inv: 
+let correctDate : Boolean =self.validFrom.isBefore(Date::now()) and self.validThru.isAfter(Date::now()),
+	testUnused : Boolean = correctDate
 in
-  if valid then
-	blub3 = false
-  else
-	blub3 = true
-  endif
+	let
+		varA : Integer = 1,
+		varB : Integer = 2,
+		varC : Integer = 3
+	in
+		let
+			varD : Integer = 4
+		in
+  			if valid then
+				correctDate = false
+  			else
+				correctDate = true
+  			endif
   
   
 -- Invariant 13A extract:
@@ -70,7 +78,7 @@ in
 
 -- Invariant 6:
 context LoyaltyProgram
-inv minServices: partners->forAll(bla | bla ->size() >= 1)
+inv minServices: partners->forAll(deliveredServices | deliveredServices->size() >= 1)
   
   
 -- Invariant 15:

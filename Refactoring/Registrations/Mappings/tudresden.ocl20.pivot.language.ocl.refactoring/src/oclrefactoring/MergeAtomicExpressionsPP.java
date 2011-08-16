@@ -42,6 +42,7 @@ public class MergeAtomicExpressionsPP extends AbstractRefactoringPostProcessor {
 	private ClassifierContextDeclarationCS selection1;
 	private ClassifierContextDeclarationCS selection2;
 	PackageDeclarationCS myPackage;
+	boolean debug = true;
 	
 
 	public MergeAtomicExpressionsPP() {
@@ -57,6 +58,8 @@ public class MergeAtomicExpressionsPP extends AbstractRefactoringPostProcessor {
 			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
 
 		System.err.println("Merge Constraints postprocessor activated!");
+		
+		if (debug && isFakeRun) return Status.OK_STATUS;
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
 		for (Role role : keySet) {
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
@@ -97,38 +100,9 @@ public class MergeAtomicExpressionsPP extends AbstractRefactoringPostProcessor {
 			System.err.println("  One of the selected input elements does not contain any invariants or definitions. Refactoring aborted.");
 			return Status.CANCEL_STATUS;
 		}
-		//collecting all invariants from selection 1
-		EList<InvariantOrDefinitionCS> selection1InvariantOrDefinitionList = selection1.getInvariantsAndDefinitions();
-		EList<InvariantExpCS> selection1InvariantList = new BasicEList<InvariantExpCS>();
-		Iterator<InvariantOrDefinitionCS> selection1InvariantOrDefinitionListIterator = selection1InvariantOrDefinitionList.iterator();
-		while (selection1InvariantOrDefinitionListIterator.hasNext()) {
-			InvariantOrDefinitionCS akt = selection1InvariantOrDefinitionListIterator.next();
-			if (akt instanceof InvariantExpCS) selection1InvariantList.add((InvariantExpCS) akt);
-		}
-		
-		//since only invariants can be merged, if the selected element contains definitions, the refactoring wont work
-		if (selection1InvariantList.size() != selection1InvariantOrDefinitionList.size()) {
-			System.err.println("  The selections contains DefinitionExpressions, but only InvariantExpressions can be merged!");
-			return Status.CANCEL_STATUS;
-		}
-		
-		//collecting all invariants from selection 2
-		EList<InvariantOrDefinitionCS> selection2InvariantOrDefinitionList = selection2.getInvariantsAndDefinitions();
-		EList<InvariantExpCS> selection2InvariantList = new BasicEList<InvariantExpCS>();
-		Iterator<InvariantOrDefinitionCS> selection2InvariantOrDefinitionListIterator = selection2InvariantOrDefinitionList.iterator();
-		while (selection2InvariantOrDefinitionListIterator.hasNext()) {
-			InvariantOrDefinitionCS akt = selection2InvariantOrDefinitionListIterator.next();
-			if (akt instanceof InvariantExpCS) selection2InvariantList.add((InvariantExpCS) akt);
-		}
-
-		//since only invariants can be merged, if the selected element contains definitions, the refactoring wont work
-		if (selection2InvariantList.size() != selection2InvariantOrDefinitionList.size()) {
-			System.err.println("  The selections contains DefinitionExpressions, but only InvariantExpressions can be merged!");
-			return Status.CANCEL_STATUS;
-		}
 		
 		//now merging the two invariant lists
-		selection1.getInvariantsAndDefinitions().addAll(selection2InvariantList);
+		selection1.getInvariantsAndDefinitions().addAll(selection2.getInvariantsAndDefinitions());
 		
 		//remove selection2
 		PostProcessingHelper myPPH = new PostProcessingHelper();
