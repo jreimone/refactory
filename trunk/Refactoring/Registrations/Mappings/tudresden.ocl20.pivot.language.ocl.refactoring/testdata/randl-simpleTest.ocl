@@ -10,23 +10,13 @@ inv:
 -- Definition 2:
 context LoyaltyProgram
 def: getServicesByLevel(levelName: String): Set(Service)
-     = levels->select(name = levelName).availableServices->asSet()
+     = levels->select(name = levelName).availableServices->asSet() 
+     
+context Service
+inv: self.oclIsInvalid() = false 
 
--- Invariant 16:
 context Service
 inv: self.oclIsUndefined() = false
-
--- Invariant 17:
-context Service
-inv: self.oclIsInvalid() = false
-
-
--- Invariant 17a:
-context Service
-inv: 
-	self.oclIsInvalid() = false 
 	
-context Service
-inv:
-	self.oclIsUndefined() = false
-	
+
+

@@ -17,3 +17,7 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 "Merge Expressions" maps <SelectX> {
 	Selection := ClassifierContextDeclarationCS;
 }
+
+"Merge Chained Let Expressions" maps <SelectX> {
+	Selection := LetExpCS;
+}
