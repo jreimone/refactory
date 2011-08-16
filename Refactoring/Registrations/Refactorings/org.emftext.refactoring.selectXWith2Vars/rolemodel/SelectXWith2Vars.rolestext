@@ -2,10 +2,10 @@ RoleModel SelectXWith2Vars {
 		
 	ROLE NewContainer(input newName);
 	input super ROLE Extract;
- 	super ROLE OrigContainer;
+// 	super ROLE OrigContainer;
  	ROLE NewType(input newTypeName);
 
-	OrigContainer  [1..1] <>- Extract extracts [1..1];
+//	OrigContainer  [1..1] <>- Extract extracts [1..1];
 
 }
 

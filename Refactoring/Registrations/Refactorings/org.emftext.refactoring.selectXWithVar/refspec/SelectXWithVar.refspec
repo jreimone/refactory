@@ -1,6 +1,7 @@
-REFACTORING FOR <platform:/plugin/org.emftext.refactoring.selectXWithVar/rolemodel/SelectXWithVar.rolestext#/> 
+REFACTORING FOR <SelectXWithVar>
 
 STEPS { 
 	create new n:Nameable;	
 	assign n.name; 	
 } 
+
