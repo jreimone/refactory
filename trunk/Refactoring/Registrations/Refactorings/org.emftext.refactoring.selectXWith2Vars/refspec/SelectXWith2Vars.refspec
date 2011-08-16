@@ -2,7 +2,7 @@ REFACTORING FOR <platform:/plugin/org.emftext.refactoring.selectXWith2Vars/rolem
 
 STEPS {
 
-	object origContainerObject := OrigContainer as trace(INPUT);
+//	object origContainerObject := OrigContainer as trace(INPUT);
 	
 	create new nc:NewContainer;
 	assign nc.newName;
