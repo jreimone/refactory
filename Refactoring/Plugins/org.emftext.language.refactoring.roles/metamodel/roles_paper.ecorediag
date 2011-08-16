@@ -175,10 +175,6 @@
         <element xmi:type="ecore:EEnumLiteral" href="roles_paper.ecore#//RoleModifier/input"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_JLI4YRfFEd-NefjSuvLqKQ"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_wDzM0CISEd-PkeW2QXEEJw" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="roles_paper.ecore#//RoleModifier/super"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_wDzM0SISEd-PkeW2QXEEJw"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_EGGRMRfFEd-NefjSuvLqKQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_EGGRMhfFEd-NefjSuvLqKQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_EGGRMxfFEd-NefjSuvLqKQ"/>
