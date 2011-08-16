@@ -83,7 +83,7 @@ public class RolemodelMatchingInitialization {
 			}
 			Resource resource = getResourceFromURI(metamodelURI);
 			EObject model = resource.getContents().get(0);
-			assertTrue(model + " is not a Ecore metamodel", model instanceof EPackage);
+			assertTrue(model + " is not an Ecore metamodel", model instanceof EPackage);
 			registerPackage((EPackage) model);
 			metamodels.put(metamodelURI, (EPackage) model);
 		}
