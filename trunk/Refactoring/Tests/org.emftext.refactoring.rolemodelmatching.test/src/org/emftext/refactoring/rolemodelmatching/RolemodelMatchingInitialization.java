@@ -26,7 +26,7 @@ import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 
-public class RolemodelMatchingInitialization {
+public class RolemodelMatchingInitialization extends RolemodelMatchingTestSuite{
 
 	private static final String TEXT_ECORE_EXT 	= ".text.ecore";
 	

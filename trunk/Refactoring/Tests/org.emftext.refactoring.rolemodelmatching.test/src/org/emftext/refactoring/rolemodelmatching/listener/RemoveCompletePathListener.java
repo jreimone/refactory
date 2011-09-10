@@ -15,8 +15,8 @@ import org.emftext.refactoring.rolemodelmatching.MatchNode;
 public class RemoveCompletePathListener extends SequenceListener {
 
 
-	public RemoveCompletePathListener(MatchCountListener matchCountListener){
-		super(Arrays.asList(new INodeListener[]{matchCountListener}));
+	public RemoveCompletePathListener(INodeListener otherListener){
+		super(Arrays.asList(new INodeListener[]{otherListener}));
 	}
 	
 	/**

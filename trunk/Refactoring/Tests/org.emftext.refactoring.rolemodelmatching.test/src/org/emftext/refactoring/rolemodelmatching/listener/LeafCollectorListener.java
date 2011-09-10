@@ -18,4 +18,7 @@ public class LeafCollectorListener extends AbstractNodeListener {
 		leafList.add(node);
 	}
 
+	public List<MatchNode<?, ?>> getLeafList(){
+		return leafList;
+	}
 }
