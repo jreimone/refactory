@@ -3,7 +3,7 @@ package org.emftext.refactoring.rolemodelmatching;
 import java.util.ArrayList;
 
 /**
- * Help class for better handling list containing {@link StringMappingNode}s.
+ * Help class for better handling list containing {@link StringMappingNode}s to enable simple comparison with Strings.
  * 
  * @author jreimann
  *

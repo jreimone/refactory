@@ -1,5 +1,6 @@
 package org.emftext.refactoring.rolemodelmatching;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,7 +16,6 @@ public class StringMappingNode {
 	private String mappingString;
 	private StringMappingNode parent;
 	private List<StringMappingNode> children;
-//	private StringMappingNode root;
 
 	public StringMappingNode(StringMappingNode parent) {
 		super();
@@ -24,20 +24,8 @@ public class StringMappingNode {
 		if(this.parent != null){
 			this.parent.getChildren().add(this);
 		}
-//		root = determineRoot();
 	}
 	
-//	private StringMappingNode determineRoot(){
-//		if(parent == null){
-//			return this;
-//		}
-//		StringMappingNode node = parent;
-//		while (node.getParent() != null) {
-//			node = node.getParent();
-//		}
-//		return node;
-//	}
-
 	public String getMappingString() {
 		return mappingString;
 	}
@@ -59,11 +47,28 @@ public class StringMappingNode {
 		if(mappingString == null || obj == null){
 			return false;
 		}
-		return mappingString.equals(obj);
+		if(obj instanceof String){
+			return mappingString.equals(obj);
+		}
+		if(obj instanceof StringMappingNode){
+			return (mappingString.equals(((StringMappingNode) obj).getMappingString()));
+		}
+		return false;
 	}
 
 	@Override
 	public String toString() {
-		return mappingString;
-	} 
+		return getMappingString();
+	}
+	
+	public StringMappingNodeList getListFromRoot(){
+		StringMappingNodeList rootList = new StringMappingNodeList();
+		StringMappingNode parent = this;
+		while (parent.getParent() != null) {
+			rootList.add(parent);
+			parent = parent.getParent();
+		}
+		Collections.reverse(rootList);
+		return rootList;
+	}
 }

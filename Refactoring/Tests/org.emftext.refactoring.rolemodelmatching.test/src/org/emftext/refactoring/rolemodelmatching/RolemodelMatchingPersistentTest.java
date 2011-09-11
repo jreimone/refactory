@@ -60,9 +60,8 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 
 
 	@Test
-	@Ignore
 	public void matchExtractXtoEcore(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_ECORE), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_ECORE), false);
 	}
 	
 	@Test
@@ -144,9 +143,8 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToEcore(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_ECORE), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_ECORE), false);
 	}
 
 	@Test

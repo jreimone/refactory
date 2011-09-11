@@ -9,11 +9,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -41,6 +44,11 @@ import org.emftext.refactoring.rolemodelmatching.listener.MatchNodeList;
 import org.emftext.refactoring.rolemodelmatching.listener.PersistMatchPathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveIncompletePathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.ValidMappingListener;
+import org.emftext.refactoring.rolemodelmatching.visitors.CollectDistinctMappingsVisitor;
+import org.emftext.refactoring.rolemodelmatching.visitors.INodeVisitor;
+import org.emftext.refactoring.rolemodelmatching.visitors.LeafCollectorVisitor;
+import org.emftext.refactoring.rolemodelmatching.visitors.LeafCounterVisitor;
+import org.emftext.refactoring.rolemodelmatching.visitors.PreSelectedMappingsCountVisitor;
 
 /**
  * A test class trying to match rolemodels on simple structures in a target
@@ -54,7 +62,8 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 
 	public List<EClass> currentMetaClasses;
 
-	//	private Map<EClass, List<EClass>> subClassesCache;
+	private RoleModel rolemodel;
+	private EPackage metamodel;
 
 	public List<List<EObject>> linearizeRoleModel(RoleModel roleModel){
 		LinkedList<EObject> linearization = new LinkedList<EObject>();
@@ -124,9 +133,13 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 	}
 
 	public void calculateMatchTreeAndFilter(RoleModel rolemodel, EPackage metamodel, boolean print){
+		this.rolemodel = rolemodel;
+		this.metamodel = metamodel;
 		String fileName = getFileName(ALL_VALID_MAPPINGS_FILE, rolemodel, metamodel);
 		File file = getFile(fileName);
 		if(file.isFile() && file.exists()){
+			System.out.println("----------------------------------------");
+			System.gc();
 			System.out.println(rolemodel.getName() + " -> " + metamodel.getNsURI());
 			constructStringMatchingTree(file);
 		} else {
@@ -135,26 +148,150 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 			calculateMatchTreeAndFilter(rolemodel, metamodel, print);
 		}
 	}
-	
+
 	private void constructStringMatchingTree(File file) {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String line = null;
 			StringMappingNode root = new StringMappingNode(null);
+			Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap = addVisitors();
 			List<String> stringCache = new ArrayList<String>();
-			List<StringMappingNode> leafList = new ArrayList<StringMappingNode>();
 			while ((line = in.readLine()) != null) {
 				String[] mappingParts = line.split(MAPPING_SEPARATOR);
-				addMapping(stringCache, root, mappingParts, leafList);
+				addMapping(stringCache, root, mappingParts, visitorMap);
 			}
-			System.out.println("All valid mappings: " + leafList.size());
+			publishVisitors(visitorMap);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 
-	private void addMapping(List<String> stringCache, StringMappingNode root, String[] mappingParts, List<StringMappingNode> leafList) {
+	private Map<Class<? extends INodeVisitor>, INodeVisitor> addVisitors() {
+		Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap = new HashMap<Class<? extends INodeVisitor>, INodeVisitor>();
+		// leafCollector only collects all leafs representing all valid matches
+		LeafCollectorVisitor leafCollector = new LeafCollectorVisitor();
+		visitorMap.put(LeafCollectorVisitor.class, leafCollector);
+		// a visitor which collects all distinct mappings which are needed to filter the whole match tree
+		CollectDistinctMappingsVisitor distinctMappingCollector = new CollectDistinctMappingsVisitor();
+		visitorMap.put(CollectDistinctMappingsVisitor.class, distinctMappingCollector);
+		return visitorMap;
+	}
+
+	private void publishVisitors(Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap) {
+		// print size of collected leafs
+		LeafCollectorVisitor leafCollectorVisitor = getVisitorByType(visitorMap, LeafCollectorVisitor.class);
+		System.out.println("All valid mappings: " + leafCollectorVisitor.getLeafList().size());
+		// print number of collected distinct mappings from role to metaclass 
+		CollectDistinctMappingsVisitor distinctMappingCollector = getVisitorByType(visitorMap, CollectDistinctMappingsVisitor.class);
+		System.out.println("number of distinct mappings: " + distinctMappingCollector.getDistinctNodeSet().size());
+		// filter
+		//		System.out.println("filter:");
+		StringMappingNode matchingTree = new StringMappingNode(null);
+		FileWriter filteredMatchesWriter = getFileWriter(FILTERED_MATCHES_FILE, rolemodel, metamodel);
+		try {
+			filteredMatchesWriter.append(rolemodel.getName() + " --> " + metamodel.getNsURI() + "\n\n");
+			Map<Class<? extends INodeVisitor>, INodeVisitor> filterVisitorMap = addFilterVisitors();
+			constructFilteredMatchingTree(leafCollectorVisitor.getLeafList(), distinctMappingCollector.getDistinctNodeSet(), matchingTree, filterVisitorMap, filteredMatchesWriter);
+			filteredMatchesWriter.close();
+			publishFilterVisitors(filterVisitorMap);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void publishFilterVisitors(Map<Class<? extends INodeVisitor>, INodeVisitor> filterVisitorMap) {
+		LeafCounterVisitor leafCounterVisitor = getVisitorByType(filterVisitorMap, LeafCounterVisitor.class);
+		System.out.println("different possibilities of manually mappings: " + leafCounterVisitor.getLeafCount());
+		PreSelectedMappingsCountVisitor preSelectedmappingsVisitor = getVisitorByType(filterVisitorMap, PreSelectedMappingsCountVisitor.class);
+		int overAllPreSelections = preSelectedmappingsVisitor.getPreSelectedMappingsCount();
+		double averagePreSelectionCount = new Integer(overAllPreSelections).doubleValue() / new Integer(leafCounterVisitor.getLeafCount()).doubleValue();
+		System.out.println("average pre-selections: " + averagePreSelectionCount);
+	}
+
+
+	private Map<Class<? extends INodeVisitor>, INodeVisitor> addFilterVisitors() {
+		Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap = new HashMap<Class<? extends INodeVisitor>, INodeVisitor>();
+		LeafCounterVisitor filterCounterVisitor = new LeafCounterVisitor();
+		visitorMap.put(LeafCounterVisitor.class, filterCounterVisitor);
+		PreSelectedMappingsCountVisitor preSelectedmappingsVisitor = new PreSelectedMappingsCountVisitor();
+		visitorMap.put(PreSelectedMappingsCountVisitor.class, preSelectedmappingsVisitor);
+		return visitorMap;
+	}
+
+
+	private void constructFilteredMatchingTree(List<StringMappingNode> leafList, Set<String> distinctNodeSet, StringMappingNode root, Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap, FileWriter fileWriter) {
+		StringMappingNode parent = root;
+		for (String mapping : distinctNodeSet) {
+			StringMappingNode child = new StringMappingNode(parent);
+			child.setMappingString(mapping);
+			List<StringMappingNode> filteredLeafList = new ArrayList<StringMappingNode>();
+			for (StringMappingNode leaf : leafList) {
+				StringMappingNodeList rootList = leaf.getListFromRoot();
+				if(rootList.contains(mapping)){
+					filteredLeafList.add(leaf);
+				}
+			}
+			if(filteredLeafList.size() > MAX_MAPPINGS_COUNT){
+				CollectDistinctMappingsVisitor filteredMappingsVisitor = new CollectDistinctMappingsVisitor();
+				for (StringMappingNode filteredLeaf : filteredLeafList) {
+					filteredMappingsVisitor.visit(filteredLeaf);
+				}
+				Set<String> filterednodeSet = filteredMappingsVisitor.getDistinctNodeSet();
+				filterednodeSet.remove(mapping);
+				filterednodeSet.retainAll(distinctNodeSet);
+				constructFilteredMatchingTree(filteredLeafList, filterednodeSet, child, visitorMap, fileWriter);
+			} else {
+				Collection<INodeVisitor> visitors = visitorMap.values();
+				for (INodeVisitor visitor : visitors) {
+					visitor.visit(child);
+				}
+				StringMappingNodeList completeMapping = child.getListFromRoot();
+				try {
+					fileWriter.append("manual mappings which result in less than " + MAX_MAPPINGS_COUNT + " valid complete mappings (" + completeMapping.size() + " pre-selected): ");
+					//				System.out.print("manual mappings which result in less than " + MAX_MAPPINGS_COUNT + " valid complete mappings (" + completeMapping.size() + " pre-selected): ");
+					//					printMappingNodeList(completeMapping);
+					fileWriter.append(printMappingNodeList(completeMapping) + "\n");
+					fileWriter.append("\tleft valid mappings: " + filteredLeafList.size() + "\n");
+					//					System.out.println("\tleft valid mappings: " + filteredLeafList.size());
+					for (StringMappingNode stringMappingNode : filteredLeafList) {
+						//					System.out.print("\t");
+						fileWriter.append("\t");
+						//					printMappingNodeList(stringMappingNode.getListFromRoot());
+						fileWriter.append(printMappingNodeList(stringMappingNode.getListFromRoot()) + "\n");
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+
+	private String printMappingNodeList(StringMappingNodeList completeMapping) {
+		StringBuffer buffer = new StringBuffer();
+		for (StringMappingNode stringMappingNode : completeMapping) {
+			String suffix = "";
+			int index = completeMapping.indexOf(stringMappingNode);
+			if(index < (completeMapping.size() - 1)){
+				suffix = " - ";
+			} else {
+				//				suffix = "\n";
+			}
+			buffer.append(stringMappingNode + suffix);
+			//			System.out.print(stringMappingNode + suffix);
+		}
+		return buffer.toString();
+	}
+
+
+	@SuppressWarnings("unchecked")
+	private <T extends INodeVisitor> T getVisitorByType(Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap, Class<T> visitorType){
+		return (T) visitorMap.get(visitorType);
+	}
+
+
+	private void addMapping(List<String> stringCache, StringMappingNode root, String[] mappingParts, Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap) {
 		StringMappingNode currentParent = root;
 		List<StringMappingNode> children = currentParent.getChildren();
 		if(children.size() == 0){
@@ -177,7 +314,10 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 				}
 			}
 		}
-		leafList.add(currentParent);
+		Collection<INodeVisitor> visitors = visitorMap.values();
+		for (INodeVisitor visitor : visitors) {
+			visitor.visit(currentParent);
+		}
 	}
 
 
@@ -189,23 +329,6 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		child.setMappingString(stringCache.get(stringCache.indexOf(mapping)));
 		return child;
 	}
-	
-//	private boolean stringNodesContainsString(List<StringMappingNode> stringNodes, String compareString){
-//		for (StringMappingNode node : stringNodes) {
-//			if(node.equals(compareString)){
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
-//	private List<String> convertNodeListToStringList(List<StringMappingNode> stringNodes) {
-//		List<String> strings = new ArrayList<String>();
-//		for (StringMappingNode stringMappingNode : stringNodes) {
-//			strings.add(stringMappingNode.getMappingString());
-//		}
-//		return strings;
-//	}
 
 
 	/**
@@ -240,15 +363,15 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		System.gc();
 		double freeMemoryEnd = Runtime.getRuntime().freeMemory();
 		freeMemoryEnd = freeMemoryEnd / 1024 / 1024;
 		System.out.println("memory end: " + freeMemoryEnd + "MB (" + (freeMemoryStart - freeMemoryEnd) + "MB)");
 	}
-	
-	
-	
+
+
+
 	/**
 	 * 
 	 * @param rolemodel
@@ -263,8 +386,8 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		//				INodeListener printMatchPathListener = new PrintMatchPathListener();
 		//				root.addListener(printMatchPathListener);
 		AtomicInteger count = new AtomicInteger();
-//		MatchCountListener matchCountListener = new MatchCountListener(count, rolemodel, metamodel);
-//		root.addListener(matchCountListener);
+		//		MatchCountListener matchCountListener = new MatchCountListener(count, rolemodel, metamodel);
+		//		root.addListener(matchCountListener);
 		AtomicInteger incompleteCount = new AtomicInteger();
 		RemoveIncompletePathListener incompletePathListener = new RemoveIncompletePathListener(incompleteCount, rolemodel, metamodel);
 		root.addListener(incompletePathListener);
@@ -279,8 +402,8 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		List<MatchNode<?, ?>> leafList = new LinkedList<MatchNode<?,?>>();
 		LeafCollectorListener leafCollector = new LeafCollectorListener(leafList);
 		root.addListener(leafCollector);
-//		INodeListener removeCompletePathListener = new RemoveCompletePathListener(leafCollector);
-//		root.addListener(removeCompletePathListener);
+		//		INodeListener removeCompletePathListener = new RemoveCompletePathListener(leafCollector);
+		//		root.addListener(removeCompletePathListener);
 
 		MatchNodeList validMappings = new MatchNodeList();
 		ValidMappingListener validMappingsListener = new ValidMappingListener(validMappings);
@@ -290,7 +413,7 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		root.setRolemodel(rolemodel);
 		List<List<EObject>> linearRolemodelsWithoutOptionals = linearizeRoleModel(rolemodel);
 		match(linearRolemodelsWithoutOptionals, metamodel, root);
-//		matchCountListener.printCount();
+		//		matchCountListener.printCount();
 		System.out.println(rolemodel.getName() + " --> " + metamodel.getNsURI() + " mapped: " + leafCollector.getLeafList().size());
 		//		System.out.println("Overall valid mappings: " + validMappings.size());
 		incompletePathListener.printIncompleteRemovals();
