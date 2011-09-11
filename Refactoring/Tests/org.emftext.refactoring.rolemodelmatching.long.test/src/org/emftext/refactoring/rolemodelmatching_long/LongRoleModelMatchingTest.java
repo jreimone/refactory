@@ -23,7 +23,7 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.rolemodelmatching.CollaborationNode;
 import org.emftext.refactoring.rolemodelmatching.MatchNode;
 import org.emftext.refactoring.rolemodelmatching.RoleNode;
-import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingTest;
+import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingTestOld;
 import org.emftext.refactoring.rolemodelmatching.listener.EqualityCheckListener;
 import org.emftext.refactoring.rolemodelmatching.listener.FilePrinterListener;
 import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
@@ -32,7 +32,7 @@ import org.emftext.refactoring.rolemodelmatching.listener.RemoveIncompletePathLi
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-public class LongRoleModelMatchingTest extends RolemodelMatchingTest{
+public class LongRoleModelMatchingTest extends RolemodelMatchingTestOld{
 
 	public static final String PLUGIN_DIR 	= "results-org.emftext.refactoring.rolemodelmatching.long.test/";
 	private Map<EClass, List<EClass>> subClassesCache;
