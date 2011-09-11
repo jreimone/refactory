@@ -11,17 +11,20 @@ import org.emftext.language.refactoring.roles.RoleModel;
 
 public class RolemodelMatchingTestSuite {
 
+	public static final int MAX_MAPPINGS_COUNT		= 15;
+	
 	public static final String ROLE_CONNECTOR 		= ":";
 	public static final String COLL_CONNECTOR 		= "#";
 	public static final String MAPPING_SEPARATOR	= ";";
 	
 	public static final String MAPPING_FILE 			= "mappings";
 	public static final String ALL_VALID_MAPPINGS_FILE 	= "avm";
+	public static final String FILTERED_MATCHES_FILE 	= "fm";
 	public static final String FILTERED_MAPPING_FILE 	= "filtered";
 	public static final String FILE_EXT 				= ".txt";
 	public static final String RESULTS_DIR 				= "test_results/";
 	public static final String HUDSON_RESULTS_DIR 		= "/home/hudson/build_server/build_workdir/" + RESULTS_DIR;
-	public static String MATCHING_RESULTS_ROOT 	= "results-org.emftext.refactoring.rolemodelmatching.test/";
+	public static String MATCHING_RESULTS_ROOT 			= "results-org.emftext.refactoring.rolemodelmatching.test/";
 	public static final String MATCHING_RESULTS 		= "matching_results/";
 	
 	
