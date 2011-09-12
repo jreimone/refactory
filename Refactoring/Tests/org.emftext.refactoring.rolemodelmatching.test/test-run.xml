@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="run-tests-org.emftext.refactoring.rolemodelmatching.test" name="Rolemodel Matching Test">
+
+<target name="run-tests-org.emftext.refactoring.rolemodelmatching.test">
+	<delete file="test-classpath.jar" />
+	<mkdir dir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test" />
+	<path id="test-classpath-org.emftext.refactoring.rolemodelmatching.test">
+		<pathelement path="org.emftext.refactoring.rolemodelmatching.test/bin"/>
+		<pathelement path="org.emftext.language.refactoring.roles/bin"/>
+		<pathelement path="org.emftext.language.refactoring.roles.resource.rolestext/bin"/>
+		<pathelement path="org.emftext.language.ecore.resource.text/bin"/>
+		<pathelement path="org.emftext.sdk.concretesyntax/bin"/>
+		<pathelement path="org.emftext.commons.antlr3_4_0/bin"/>
+		<pathelement path="org.emftext.access/bin"/>
+		<pathelement path="org.emftext.refactoring.registry.rolemodel/bin"/>
+		<pathelement path="org.emftext.refactoring.util/bin"/>
+		<pathelement path="org.emftext.language.refactoring.rolemapping/bin"/>
+		<pathelement path="org.emftext.language.refactoring.specification/bin"/>
+		<pathelement path="org.emftext.language.ecore.resource/bin"/>
+		
+		<fileset dir="${eclipse.home}/">
+			<include name="plugins/**/*.jar" />
+			<!-- we must exclude ANT because it conflicts with the running ANT version-->
+			<exclude name="plugins/org.apache.ant*/**/*.jar" />
+		</fileset>
+	</path>
+	
+	<manifestclasspath property="prop-test-classpath-org.emftext.refactoring.rolemodelmatching.test" jarfile="test-classpath.jar" maxparentlevels="10">
+		<classpath refid="test-classpath-org.emftext.refactoring.rolemodelmatching.test" />
+	</manifestclasspath>
+	
+	<jar destfile="test-classpath.jar">
+		<manifest>
+			<attribute name="Class-Path" value="${prop-test-classpath-org.emftext.refactoring.rolemodelmatching.test}"/>
+		</manifest>
+	</jar>
+	
+	<property environment="env" />
+	<mkdir dir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test" />
+	<mkdir dir="${env.WORKSPACE}/results-org.emftext.refactoring.rolemodelmatching.test" />
+	<junit haltonfailure="false" haltonerror="false" fork="true" dir="org.emftext.refactoring.rolemodelmatching.test" maxmemory="2048m">
+		<jvmarg value="-ea" />
+		<classpath>
+			<path path="test-classpath.jar"/>
+		</classpath>
+		<formatter type="xml"/>
+		<batchtest todir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test">
+			<fileset dir="org.emftext.refactoring.rolemodelmatching.test/src">
+				<include name="**/**Test.java"/>
+			</fileset>
+		</batchtest>
+	</junit>
+	<junitreport todir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test" tofile="SUITE-org.emftext.refactoring.rolemodelmatching.test.xml">
+		<fileset dir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test">
+			<include name="TEST-*.xml"/>
+		</fileset>
+		<report format="frames" todir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test"/>
+	</junitreport>
+	<copy todir="${env.WORKSPACE}/results-org.emftext.refactoring.rolemodelmatching.test">
+		<fileset dir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test"/>
+	</copy>
+</target>
+
+</project>
