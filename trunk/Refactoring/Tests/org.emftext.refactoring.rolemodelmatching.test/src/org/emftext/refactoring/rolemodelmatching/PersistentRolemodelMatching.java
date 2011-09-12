@@ -268,12 +268,12 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 					fileWriter.append(printMappingNodeList(completeMapping) + "\n");
 					fileWriter.append("\tleft valid mappings: " + filteredLeafList.size() + "\n");
 					//					System.out.println("\tleft valid mappings: " + filteredLeafList.size());
-					for (StringMappingNode stringMappingNode : filteredLeafList) {
-						//					System.out.print("\t");
-						fileWriter.append("\t");
-						//					printMappingNodeList(stringMappingNode.getListFromRoot());
-						fileWriter.append(printMappingNodeList(stringMappingNode.getListFromRoot()) + "\n");
-					}
+//					for (StringMappingNode stringMappingNode : filteredLeafList) {
+//						//					System.out.print("\t");
+//						fileWriter.append("\t");
+//						//					printMappingNodeList(stringMappingNode.getListFromRoot());
+//						fileWriter.append(printMappingNodeList(stringMappingNode.getListFromRoot()) + "\n");
+//					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
