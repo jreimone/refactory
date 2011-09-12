@@ -187,6 +187,7 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	}
 
 	@Test
+	@Ignore
 	public void matchAllRoleModelsInAllMetamodels() {
 		for (EPackage metamodel : metamodels.values()) {
 			for (RoleModel rolemodel : rolemodels.values()) {

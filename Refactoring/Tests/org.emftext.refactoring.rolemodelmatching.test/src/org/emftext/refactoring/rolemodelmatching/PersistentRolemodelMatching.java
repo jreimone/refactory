@@ -213,10 +213,15 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		System.out.println("different possibilities of manual mappings: " + leafCounterVisitor.getLeafCount());
 		PreSelectedMappingsCountVisitor preSelectedmappingsVisitor = getVisitorByType(filterVisitorMap, PreSelectedMappingsCountVisitor.class);
 		int overAllPreSelections = preSelectedmappingsVisitor.getPreSelectedMappingsCount();
-		double averagePreSelectionCount = new Integer(overAllPreSelections).doubleValue() / new Integer(leafCounterVisitor.getLeafCount()).doubleValue();
-		if(averagePreSelectionCount == Double.NaN){
-			averagePreSelectionCount = 0;
+		double averagePreSelectionCount;
+		if(leafCounterVisitor.getLeafCount() == 0){
+			averagePreSelectionCount = 0.0;
+		} else {
+			averagePreSelectionCount = new Integer(overAllPreSelections).doubleValue() / new Integer(leafCounterVisitor.getLeafCount()).doubleValue();
 		}
+//		if(averagePreSelectionCount == Double.NaN){
+//			averagePreSelectionCount = 0;
+//		}
 		System.out.println("average pre-selections: " + averagePreSelectionCount);
 	}
 
