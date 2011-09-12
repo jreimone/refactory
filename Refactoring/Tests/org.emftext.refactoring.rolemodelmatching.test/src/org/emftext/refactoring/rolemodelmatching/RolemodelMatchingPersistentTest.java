@@ -26,10 +26,10 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 
 	public static Map<String, RoleModel> rolemodels;
 	public static Map<String, EPackage> metamodels;
-	
+
 	private Map<RoleModel, List<List<EObject>>> linearRoleModels;
 	private PersistentRolemodelMatching matchingAlgorithm;
-	
+
 	@BeforeClass
 	public static void initialization() {
 		registerTestingRootAsPlatformRoot();
@@ -47,15 +47,13 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	}
 
 	@Test
-	@Ignore
 	public void matchRenameXtoTestmm(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_RENAME_X), metamodels.get(MM_TESTMM), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_RENAME_X), metamodels.get(MM_TESTMM), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXtoTestmm(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_TESTMM), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_TESTMM), false);
 	}
 
 
@@ -63,83 +61,70 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	public void matchExtractXtoEcore(){
 		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_ECORE), false);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoUML(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_UML), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_UML), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoBPMN(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_BPMN), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_BPMN), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoJava(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_JAVA), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_JAVA), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoCS(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_CS), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_CS), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoFeature(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_FEATURE), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_FEATURE), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoTA(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_TA), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_TA), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoPL0(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_PL0), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_PL0), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoOWL(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_OWL), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_OWL), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoEcore(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_ECORE), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_ECORE), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoOffice(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_OFFICE), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_OFFICE), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchMooveXlooselytoForms(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_FORMS), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_XLOOSELY), metamodels.get(MM_FORMS), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchRemoveUnusedContainedXtoEcore(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_REMOVE_UNUSED_CONTAINED_X), metamodels.get(MM_ECORE), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_REMOVE_UNUSED_CONTAINED_X), metamodels.get(MM_ECORE), true);
 	}
-	
+
 	@Test
-	@Ignore
 	public void matchRemoveEmptyContainedXtoEcore(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_REMOVE_EMPTY_CONTAINED_X), metamodels.get(MM_ECORE), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_REMOVE_EMPTY_CONTAINED_X), metamodels.get(MM_ECORE), true);
 	}
 
 	@Test
@@ -148,46 +133,40 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToPL0(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_PL0), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_PL0), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchMoveXToPL0(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_MOVE_X), metamodels.get(MM_PL0), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_MOVE_X), metamodels.get(MM_PL0), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToForms(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_FORMS), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_FORMS), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToTextAdventure(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_TEXTADVENTURE), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_TEXTADVENTURE), false);
 	}
 
 	@Test
-	@Ignore
 	public void matchExtractXwithReferenceClassToJava(){
-		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_JAVA), false);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_JAVA), false);
 	}
 
 	@Test
 	public void matchExtractXtoUML(){
-//		matchingAlgorithm.matchRoleModelInMetamodel(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_UML), false);
-		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_UML), true);
+		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_UML), false);
 	}
 
 	@Test
 	public void matchExtractXwithReferenceClassToUML(){
 		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS), metamodels.get(MM_UML), false);
 	}
-	
+
 	@Test
 	@Ignore
 	public void linearizeRoleModels() {
@@ -206,21 +185,18 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 		}
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	}
-	
+
 	@Test
 	@Ignore
 	public void matchAllRoleModelsInAllMetamodels() {
 		for (EPackage metamodel : metamodels.values()) {
-//			currentMetaClasses = collectClasses(metamodel);
 			for (RoleModel rolemodel : rolemodels.values()) {
-				if(!(metamodel.equals(metamodels.get(MM_UML)) && rolemodel.equals(rolemodels.get(RM_EXTRACT_XWITH_REFERENCE_CLASS)))){
-					matchingAlgorithm.matchRoleModelInMetamodel(rolemodel, metamodel, false);
-				}
+				matchingAlgorithm.calculateMatchTreeAndFilter(rolemodel, metamodel, false);
 			}
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
 	}
-	
+
 	@Test
 	@Ignore
 	public void equalsHashTest(){
@@ -278,7 +254,7 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 		hashSet.add(c13);
 		assertTrue("should not have been added", hashSet.add(c33));
 	}
-	
+
 	private void printLinearization(RoleModel roleModel, List<EObject> linearization) {
 		System.out.println("Linear order for '" + roleModel.getName()
 				+ "' with longest path");

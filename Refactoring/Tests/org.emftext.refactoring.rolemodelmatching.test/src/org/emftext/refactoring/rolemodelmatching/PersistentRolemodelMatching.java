@@ -181,10 +181,18 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 	private void publishVisitors(Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap) {
 		// print size of collected leafs
 		LeafCollectorVisitor leafCollectorVisitor = getVisitorByType(visitorMap, LeafCollectorVisitor.class);
-		System.out.println("All valid mappings: " + leafCollectorVisitor.getLeafList().size());
-		// print number of collected distinct mappings from role to metaclass 
+		int count = 0;
+		if(leafCollectorVisitor.getLeafList() != null){
+			count = leafCollectorVisitor.getLeafList().size();
+		}
+		System.out.println("All valid mappings: " + count);
+		// print number of collected distinct mappings from role to metaclass
+		count = 0;
 		CollectDistinctMappingsVisitor distinctMappingCollector = getVisitorByType(visitorMap, CollectDistinctMappingsVisitor.class);
-		System.out.println("number of distinct mappings: " + distinctMappingCollector.getDistinctNodeSet().size());
+		if(distinctMappingCollector.getDistinctNodeSet() != null){
+			count = distinctMappingCollector.getDistinctNodeSet().size();
+		}
+		System.out.println("number of distinct mappings: " + count);
 		// filter
 		//		System.out.println("filter:");
 		StringMappingNode matchingTree = new StringMappingNode(null);
@@ -202,10 +210,13 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 
 	private void publishFilterVisitors(Map<Class<? extends INodeVisitor>, INodeVisitor> filterVisitorMap) {
 		LeafCounterVisitor leafCounterVisitor = getVisitorByType(filterVisitorMap, LeafCounterVisitor.class);
-		System.out.println("different possibilities of manually mappings: " + leafCounterVisitor.getLeafCount());
+		System.out.println("different possibilities of manual mappings: " + leafCounterVisitor.getLeafCount());
 		PreSelectedMappingsCountVisitor preSelectedmappingsVisitor = getVisitorByType(filterVisitorMap, PreSelectedMappingsCountVisitor.class);
 		int overAllPreSelections = preSelectedmappingsVisitor.getPreSelectedMappingsCount();
 		double averagePreSelectionCount = new Integer(overAllPreSelections).doubleValue() / new Integer(leafCounterVisitor.getLeafCount()).doubleValue();
+		if(averagePreSelectionCount == Double.NaN){
+			averagePreSelectionCount = 0;
+		}
 		System.out.println("average pre-selections: " + averagePreSelectionCount);
 	}
 
@@ -221,6 +232,9 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 
 
 	private void constructFilteredMatchingTree(List<StringMappingNode> leafList, Set<String> distinctNodeSet, StringMappingNode root, Map<Class<? extends INodeVisitor>, INodeVisitor> visitorMap, FileWriter fileWriter) {
+		if(leafList == null){
+			return;
+		}
 		StringMappingNode parent = root;
 		for (String mapping : distinctNodeSet) {
 			StringMappingNode child = new StringMappingNode(parent);
