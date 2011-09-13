@@ -66,7 +66,7 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 
 	private RoleModel rolemodel;
 	private EPackage metamodel;
-	private int maxPreSelectionCount;
+	private int maxRemainingMappingsCount;
 
 	public List<List<EObject>> linearizeRoleModel(RoleModel roleModel){
 		LinkedList<EObject> linearization = new LinkedList<EObject>();
@@ -139,10 +139,10 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		calculateMatchTreeAndFilter(rolemodel, metamodel, print, MAX_MAPPINGS_COUNT);
 	}
 	
-	public void calculateMatchTreeAndFilter(RoleModel rolemodel, EPackage metamodel, boolean print, int maxPreSelectionCount){
+	public void calculateMatchTreeAndFilter(RoleModel rolemodel, EPackage metamodel, boolean print, int maxRemainingMappingsCount){
 		this.rolemodel = rolemodel;
 		this.metamodel = metamodel;
-		this.maxPreSelectionCount = maxPreSelectionCount;
+		this.maxRemainingMappingsCount = maxRemainingMappingsCount;
 		String fileName = getFileName(ALL_VALID_MAPPINGS_FILE, rolemodel, metamodel, FILE_EXT);
 		File file = getFile(fileName);
 		if(file.isFile() && file.exists()){
@@ -153,7 +153,7 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		} else {
 			calculateMatchTree(rolemodel, metamodel, print);
 			System.gc();
-			calculateMatchTreeAndFilter(rolemodel, metamodel, print, this.maxPreSelectionCount);
+			calculateMatchTreeAndFilter(rolemodel, metamodel, print, this.maxRemainingMappingsCount);
 		}
 	}
 
@@ -218,6 +218,7 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		} else {
 			averagePreSelectionCount = new Integer(overAllPreSelections).doubleValue() / new Integer(leafCounterVisitor.getLeafCount()).doubleValue();
 		}
+		System.out.println("maximum number of remaining possible mappings: " + maxRemainingMappingsCount);
 		System.out.println("average pre-selections: " + averagePreSelectionCount);
 		PersistPreSelectedMappingsCountVisitor persistentPreSelectionsCounter = getVisitorByType(filterVisitorMap, PersistPreSelectedMappingsCountVisitor.class);
 		PersistPreSelectedMappingsCountComplexVisitor persistentPreSelectionsComplexCounter = getVisitorByType(filterVisitorMap, PersistPreSelectedMappingsCountComplexVisitor.class);
@@ -236,10 +237,10 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		visitorMap.put(LeafCounterVisitor.class, filterCounterVisitor);
 		PreSelectedMappingsCountVisitor preSelectedmappingsVisitor = new PreSelectedMappingsCountVisitor();
 		visitorMap.put(PreSelectedMappingsCountVisitor.class, preSelectedmappingsVisitor);
-		FileWriter fileWriter = getFileWriter(FILTERED_MATCHES_FILE_SHORT + "_" + maxPreSelectionCount, rolemodel, metamodel, FILE_CSV_EXT);
+		FileWriter fileWriter = getFileWriter(FILTERED_MATCHES_FILE_SHORT + "_" + maxRemainingMappingsCount, rolemodel, metamodel, FILE_CSV_EXT);
 		PersistPreSelectedMappingsCountVisitor persistentPreSelectionsCounter = new PersistPreSelectedMappingsCountVisitor(fileWriter);
 		visitorMap.put(PersistPreSelectedMappingsCountVisitor.class, persistentPreSelectionsCounter);
-		FileWriter fileWriterComplex = getFileWriter(FILTERED_MATCHES_FILE + "_" + maxPreSelectionCount, rolemodel, metamodel);
+		FileWriter fileWriterComplex = getFileWriter(FILTERED_MATCHES_FILE + "_" + maxRemainingMappingsCount, rolemodel, metamodel);
 		PersistPreSelectedMappingsCountComplexVisitor persistentPreSelectionsComplexCounter = new PersistPreSelectedMappingsCountComplexVisitor(fileWriterComplex);
 		visitorMap.put(PersistPreSelectedMappingsCountComplexVisitor.class, persistentPreSelectionsComplexCounter);
 		return visitorMap;
@@ -261,7 +262,7 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 					filteredLeafList.add(leaf);
 				}
 			}
-			if(filteredLeafList.size() > maxPreSelectionCount){
+			if(filteredLeafList.size() > maxRemainingMappingsCount){
 				CollectDistinctMappingsVisitor filteredMappingsVisitor = new CollectDistinctMappingsVisitor();
 				for (StringMappingNode filteredLeaf : filteredLeafList) {
 					filteredMappingsVisitor.visit(filteredLeaf, null);
