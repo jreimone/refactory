@@ -9,7 +9,7 @@ public class LeafCollectorVisitor implements INodeVisitor {
 
 	private List<StringMappingNode> leafList;
 
-	public void visit(StringMappingNode node) {
+	public void visit(StringMappingNode node, Object context) {
 		if(leafList == null){
 			leafList = new ArrayList<StringMappingNode>();
 		}

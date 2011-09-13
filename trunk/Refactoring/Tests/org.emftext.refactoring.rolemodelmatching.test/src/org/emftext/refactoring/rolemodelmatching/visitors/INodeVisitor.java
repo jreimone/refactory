@@ -19,5 +19,5 @@ public interface INodeVisitor {
 	 * 
 	 * @param node
 	 */
-	public void visit(StringMappingNode node);
+	public void visit(StringMappingNode node, Object context);
 }
