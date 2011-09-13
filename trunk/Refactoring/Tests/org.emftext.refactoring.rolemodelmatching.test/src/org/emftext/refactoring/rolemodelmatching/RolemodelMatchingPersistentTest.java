@@ -46,16 +46,6 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 		matchingAlgorithm = new PersistentRolemodelMatching();
 	}
 
-	@Test
-	public void matchRenameXtoTestmm(){
-		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_RENAME_X), metamodels.get(MM_TESTMM), false);
-	}
-
-	@Test
-	public void matchExtractXtoTestmm(){
-		matchingAlgorithm.calculateMatchTreeAndFilter(rolemodels.get(RM_EXTRACT_X), metamodels.get(MM_TESTMM), false);
-	}
-
 
 	@Test
 	public void matchExtractXtoEcore(){
@@ -168,6 +158,7 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	}
 
 	@Test
+	@Ignore
 	public void linearizeRoleModels() {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Linearization of RoleModels:");
@@ -186,11 +177,24 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	}
 
 	@Test
-	public void matchAllRoleModelsInAllMetamodels() {
+	public void matchAllRoleModelsInAllMetamodelsFor15Remaining() {
 		for (EPackage metamodel : metamodels.values()) {
 			for (RoleModel rolemodel : rolemodels.values()) {
 				matchingAlgorithm.calculateMatchTreeAndFilter(rolemodel, metamodel, false, 15);
+				matchingAlgorithm = new PersistentRolemodelMatching();
+				System.gc();
+			}
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		}
+	}
+	
+	@Test
+	public void matchAllRoleModelsInAllMetamodelsFor20Remaining() {
+		for (EPackage metamodel : metamodels.values()) {
+			for (RoleModel rolemodel : rolemodels.values()) {
 				matchingAlgorithm.calculateMatchTreeAndFilter(rolemodel, metamodel, false, 20);
+				matchingAlgorithm = new PersistentRolemodelMatching();
+				System.gc();
 			}
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}

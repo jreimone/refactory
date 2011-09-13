@@ -43,6 +43,7 @@ public class RolemodelMatchingTestSuite {
 	
 	public static final String MM_UML 				= "http://www.eclipse.org/uml2/3.0.0/UML";
 	public static final String MM_ECORE 			= "http://www.eclipse.org/emf/2002/Ecore";
+	public static final String MM_BPMN 				= "http://stp.eclipse.org/bpmn";
 	public static final String MM_JAVA 				= "platform:/resource/org.emftext.language.java/metamodel/java.ecore";
 	public static final String MM_TEXTADVENTURE 	= "platform:/resource/org.emftext.language.textadventure/metamodel/textadventure.ecore";
 	public static final String MM_FORMS 			= "platform:/resource/org.emftext.language.forms/metamodel/forms.ecore";
@@ -60,7 +61,6 @@ public class RolemodelMatchingTestSuite {
 	public static final String MM_OFFICE 			= "platform:/resource/org.emftext.language.office/metamodel/office.ecore";
 	public static final String MM_SIMPLEGUI 		= "platform:/resource/org.emftext.language.simplegui/metamodel/simplegui.ecore";
 	public static final String MM_SANDWICH 			= "platform:/resource/org.emftext.language.sandwich/metamodel/sandwich_simple.ecore";
-	public static final String MM_BPMN 				= "http://stp.eclipse.org/bpmn";
 	
 	public static final String[] rolemodelURIs = new String[] { 
 			RM_EXTRACT_X
@@ -71,7 +71,6 @@ public class RolemodelMatchingTestSuite {
 			,RM_MOVE_XLOOSELY 
 			,RM_REMOVE_EMPTY_CONTAINED_X 
 			,RM_REMOVE_UNUSED_CONTAINED_X
-			,RM_RENAME_X
 		};
 	
 	public static final String[] metamodelURIs = new String[] { 
