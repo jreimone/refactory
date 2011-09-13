@@ -66,6 +66,7 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 
 	private RoleModel rolemodel;
 	private EPackage metamodel;
+	private int maxPreSelectionCount;
 
 	public List<List<EObject>> linearizeRoleModel(RoleModel roleModel){
 		LinkedList<EObject> linearization = new LinkedList<EObject>();
@@ -135,8 +136,13 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 	}
 
 	public void calculateMatchTreeAndFilter(RoleModel rolemodel, EPackage metamodel, boolean print){
+		calculateMatchTreeAndFilter(rolemodel, metamodel, print, MAX_MAPPINGS_COUNT);
+	}
+	
+	public void calculateMatchTreeAndFilter(RoleModel rolemodel, EPackage metamodel, boolean print, int maxPreSelectionCount){
 		this.rolemodel = rolemodel;
 		this.metamodel = metamodel;
+		this.maxPreSelectionCount = maxPreSelectionCount;
 		String fileName = getFileName(ALL_VALID_MAPPINGS_FILE, rolemodel, metamodel, FILE_EXT);
 		File file = getFile(fileName);
 		if(file.isFile() && file.exists()){
@@ -147,7 +153,7 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		} else {
 			calculateMatchTree(rolemodel, metamodel, print);
 			System.gc();
-			calculateMatchTreeAndFilter(rolemodel, metamodel, print);
+			calculateMatchTreeAndFilter(rolemodel, metamodel, print, this.maxPreSelectionCount);
 		}
 	}
 
@@ -230,10 +236,10 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 		visitorMap.put(LeafCounterVisitor.class, filterCounterVisitor);
 		PreSelectedMappingsCountVisitor preSelectedmappingsVisitor = new PreSelectedMappingsCountVisitor();
 		visitorMap.put(PreSelectedMappingsCountVisitor.class, preSelectedmappingsVisitor);
-		FileWriter fileWriter = getFileWriter(FILTERED_MATCHES_FILE_SHORT + "_" + MAX_MAPPINGS_COUNT, rolemodel, metamodel, FILE_CSV_EXT);
+		FileWriter fileWriter = getFileWriter(FILTERED_MATCHES_FILE_SHORT + "_" + maxPreSelectionCount, rolemodel, metamodel, FILE_CSV_EXT);
 		PersistPreSelectedMappingsCountVisitor persistentPreSelectionsCounter = new PersistPreSelectedMappingsCountVisitor(fileWriter);
 		visitorMap.put(PersistPreSelectedMappingsCountVisitor.class, persistentPreSelectionsCounter);
-		FileWriter fileWriterComplex = getFileWriter(FILTERED_MATCHES_FILE + "_" + MAX_MAPPINGS_COUNT, rolemodel, metamodel);
+		FileWriter fileWriterComplex = getFileWriter(FILTERED_MATCHES_FILE + "_" + maxPreSelectionCount, rolemodel, metamodel);
 		PersistPreSelectedMappingsCountComplexVisitor persistentPreSelectionsComplexCounter = new PersistPreSelectedMappingsCountComplexVisitor(fileWriterComplex);
 		visitorMap.put(PersistPreSelectedMappingsCountComplexVisitor.class, persistentPreSelectionsComplexCounter);
 		return visitorMap;
@@ -255,7 +261,7 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 					filteredLeafList.add(leaf);
 				}
 			}
-			if(filteredLeafList.size() > MAX_MAPPINGS_COUNT){
+			if(filteredLeafList.size() > maxPreSelectionCount){
 				CollectDistinctMappingsVisitor filteredMappingsVisitor = new CollectDistinctMappingsVisitor();
 				for (StringMappingNode filteredLeaf : filteredLeafList) {
 					filteredMappingsVisitor.visit(filteredLeaf, null);
@@ -269,23 +275,6 @@ public class PersistentRolemodelMatching extends RolemodelMatchingInitialization
 				for (INodeVisitor visitor : visitors) {
 					visitor.visit(child, filteredLeafList);
 				}
-				//				StringMappingNodeList completeMapping = child.getListFromRoot();
-				//				try {
-				//					fileWriter.append("manual mappings which result in less than " + MAX_MAPPINGS_COUNT + " valid complete mappings (" + completeMapping.size() + " pre-selected): ");
-				//					//				System.out.print("manual mappings which result in less than " + MAX_MAPPINGS_COUNT + " valid complete mappings (" + completeMapping.size() + " pre-selected): ");
-				//					//					printMappingNodeList(completeMapping);
-				//					fileWriter.append(completeMapping.printList() + "\n");
-				//					fileWriter.append("\tleft valid mappings: " + filteredLeafList.size() + "\n");
-				//					//					System.out.println("\tleft valid mappings: " + filteredLeafList.size());
-				////					for (StringMappingNode stringMappingNode : filteredLeafList) {
-				////						//					System.out.print("\t");
-				////						fileWriter.append("\t");
-				////						//					printMappingNodeList(stringMappingNode.getListFromRoot());
-				////						fileWriter.append(printMappingNodeList(stringMappingNode.getListFromRoot()) + "\n");
-				////					}
-				//				} catch (IOException e) {
-				//					e.printStackTrace();
-				//				}
 			}
 		}
 	}

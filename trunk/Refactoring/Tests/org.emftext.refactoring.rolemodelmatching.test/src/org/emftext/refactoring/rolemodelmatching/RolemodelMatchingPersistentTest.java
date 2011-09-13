@@ -168,7 +168,6 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	}
 
 	@Test
-	@Ignore
 	public void linearizeRoleModels() {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Linearization of RoleModels:");
@@ -187,11 +186,11 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 	}
 
 	@Test
-	@Ignore
 	public void matchAllRoleModelsInAllMetamodels() {
 		for (EPackage metamodel : metamodels.values()) {
 			for (RoleModel rolemodel : rolemodels.values()) {
-				matchingAlgorithm.calculateMatchTreeAndFilter(rolemodel, metamodel, false);
+				matchingAlgorithm.calculateMatchTreeAndFilter(rolemodel, metamodel, false, 15);
+				matchingAlgorithm.calculateMatchTreeAndFilter(rolemodel, metamodel, false, 20);
 			}
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
