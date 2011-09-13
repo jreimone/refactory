@@ -8,7 +8,7 @@ public class LeafCounterVisitor implements INodeVisitor {
 
 	private AtomicInteger count = new AtomicInteger();
 	
-	public void visit(StringMappingNode node) {
+	public void visit(StringMappingNode node, Object context) {
 		count.incrementAndGet();
 	}
 

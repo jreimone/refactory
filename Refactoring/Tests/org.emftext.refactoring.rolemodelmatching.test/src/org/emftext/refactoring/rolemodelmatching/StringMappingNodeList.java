@@ -35,4 +35,20 @@ public class StringMappingNodeList extends ArrayList<StringMappingNode> {
 		}
 		return -1;
 	}
+	
+	public String printList() {
+		StringBuffer buffer = new StringBuffer();
+		for (StringMappingNode stringMappingNode : this) {
+			String suffix = "";
+			int index = this.indexOf(stringMappingNode);
+			if(index < (this.size() - 1)){
+				suffix = " - ";
+			} else {
+				//				suffix = "\n";
+			}
+			buffer.append(stringMappingNode + suffix);
+			//			System.out.print(stringMappingNode + suffix);
+		}
+		return buffer.toString();
+	}
 }

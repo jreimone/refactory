@@ -9,7 +9,7 @@ public class PreSelectedMappingsCountVisitor implements INodeVisitor {
 
 	private AtomicInteger preSelectedMappingsCount = new AtomicInteger();
 	
-	public void visit(StringMappingNode node) {
+	public void visit(StringMappingNode node, Object context) {
 		StringMappingNodeList completeMapping = node.getListFromRoot();
 		preSelectedMappingsCount.addAndGet(completeMapping.size());
 	}

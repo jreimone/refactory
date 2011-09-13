@@ -17,7 +17,7 @@ public class CollectDistinctMappingsVisitor implements INodeVisitor {
 
 	private Set<String> distinctNodeSet;
 	
-	public void visit(StringMappingNode node) {
+	public void visit(StringMappingNode node, Object context) {
 		if(distinctNodeSet == null){
 			distinctNodeSet = new HashSet<String>();
 		}

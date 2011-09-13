@@ -11,21 +11,23 @@ import org.emftext.language.refactoring.roles.RoleModel;
 
 public class RolemodelMatchingTestSuite {
 
-	public static final int MAX_MAPPINGS_COUNT		= 15;
+	public static final int MAX_MAPPINGS_COUNT		= 20;
 	
 	public static final String ROLE_CONNECTOR 		= ":";
 	public static final String COLL_CONNECTOR 		= "#";
 	public static final String MAPPING_SEPARATOR	= ";";
 	
-	public static final String MAPPING_FILE 			= "mappings";
-	public static final String ALL_VALID_MAPPINGS_FILE 	= "avm";
-	public static final String FILTERED_MATCHES_FILE 	= "fm";
-	public static final String FILTERED_MAPPING_FILE 	= "filtered";
-	public static final String FILE_EXT 				= ".txt";
-	public static final String RESULTS_DIR 				= "test_results/";
-	public static final String HUDSON_RESULTS_DIR 		= "/srv/hudson/jobs/Dropsbox Build/workspace/build/" + RESULTS_DIR;
-	public static String MATCHING_RESULTS_ROOT 			= "results-org.emftext.refactoring.rolemodelmatching.test/";
-	public static final String MATCHING_RESULTS 		= "matching_results/";
+	public static final String MAPPING_FILE 				= "mappings";
+	public static final String ALL_VALID_MAPPINGS_FILE 		= "avm";
+	public static final String FILTERED_MATCHES_FILE 		= "fm";
+	public static final String FILTERED_MATCHES_FILE_SHORT 	= "fms";
+	public static final String FILTERED_MAPPING_FILE 		= "filtered";
+	public static final String FILE_EXT 					= "txt";
+	public static final String FILE_CSV_EXT					= "csv";
+	public static final String RESULTS_DIR 					= "test_results/";
+	public static final String HUDSON_RESULTS_DIR 			= "/srv/hudson/jobs/Dropsbox Build/workspace/build/" + RESULTS_DIR;
+	public static String MATCHING_RESULTS_ROOT 				= "results-org.emftext.refactoring.rolemodelmatching.test/";
+	public static final String MATCHING_RESULTS 			= "matching_results/";
 	
 	
 	public static final String RM_RENAME_X 						= "platform:/resource/org.emftext.refactoring.renameX/rolemodel/RenameX.rolestext";
@@ -93,8 +95,12 @@ public class RolemodelMatchingTestSuite {
 		};
 
 	public FileWriter getFileWriter(String fileNamePrefix, RoleModel rolemodel, EPackage metamodel) {
+		return getFileWriter(fileNamePrefix, rolemodel, metamodel, FILE_EXT);
+	}
+	
+	public FileWriter getFileWriter(String fileNamePrefix, RoleModel rolemodel, EPackage metamodel, String fileExtension) {
 		File file = null;
-		final String fileName = getFileName(fileNamePrefix, rolemodel, metamodel);
+		final String fileName = getFileName(fileNamePrefix, rolemodel, metamodel, fileExtension);
 		file = getFile(fileName);
 		try {
 			File parentFolder = file.getParentFile();
@@ -152,9 +158,9 @@ public class RolemodelMatchingTestSuite {
 		return file;
 	}
 
-	public String getFileName(String fileNamePrefix, RoleModel rolemodel, EPackage metamodel) {
+	public String getFileName(String fileNamePrefix, RoleModel rolemodel, EPackage metamodel, String fileExtension) {
 		String prefix = fileNamePrefix + "_" + metamodel.getName() + "_" + rolemodel.getName();
-		String fileName = prefix + FILE_EXT;
+		String fileName = prefix + "." + fileExtension;
 		return fileName;
 	}
 
