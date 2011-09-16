@@ -3,17 +3,24 @@ package org.emftext.refactoring.rolemodelmatching;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.stp.bpmn.SubProcess;
 import org.eclipse.uml2.uml.Class;
+import org.eclipse.uml2.uml.Region;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -46,6 +53,33 @@ public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitializa
 		matchingAlgorithm = new PersistentRolemodelMatching();
 	}
 
+	@Test
+	public void countStructuralFeaturesFromUMLStateMachineAndRegion(){
+		EPackage umlMetamodel = metamodels.get(MM_UML);
+		EClass region = (EClass) umlMetamodel.getEClassifier("Region");
+		EClass stateMachine = (EClass) umlMetamodel.getEClassifier("StateMachine");
+		EList<EStructuralFeature> statMachineFeatures = stateMachine.getEAllStructuralFeatures();
+		List<EReference> composites = new ArrayList<EReference>();
+		for (EStructuralFeature feature : statMachineFeatures) {
+			if(feature instanceof EReference && ((EReference) feature).isContainment()){
+				composites.add((EReference) feature);
+			}
+		}
+		List<EClass> regionContainingClasses = new ArrayList<EClass>();
+		for (EClassifier classifier : umlMetamodel.getEClassifiers()) {
+			if(classifier instanceof EClass){
+				EClass eclass = (EClass) classifier;
+				EList<EStructuralFeature> features = eclass.getEAllStructuralFeatures();
+				for (EStructuralFeature feature : features) {
+					if(feature instanceof EReference && ((EReference) feature).isContainment() && ((EReference) feature).getEType().equals(region)){
+						regionContainingClasses.add(eclass);
+					}
+				}
+			}
+		}
+		System.out.println("metaclass StateMachine has composite features: " + composites.size());
+		System.out.println("metaclass Region is contained by other metaclasses: " + regionContainingClasses.size());
+	}
 
 	@Test
 	public void matchExtractXtoEcore(){
