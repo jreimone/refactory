@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This ant script copys the created results dir of the rolemodel matching test plugin to the workspace of the corresponding
+	Jenkins job. The following parameter must be passed:
+		<resultsDirInDropsbox>	pass the directory in which the results of this project is created
+-->
+<project name="copy-test-results-to-workspace" default="copy">
+  <property environment="env"/>
+  <property name="workspace" value="${env.WORKSPACE}"/>
+
+  <target name="copy">
+    <copy todir="${workspace}">
+      	<fileset dir="${resultsDirInDropsbox}" />
+    </copy>
+  </target>
+</project>
