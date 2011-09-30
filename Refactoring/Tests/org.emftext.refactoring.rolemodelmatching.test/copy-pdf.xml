@@ -10,7 +10,7 @@
 
   <target name="copy">
     <copy todir="${workspace}">
-      	<fileset dir="${resultsDirInDropsbox}" />
+      	<fileset dir="${resultsDirInDropsbox}" includes="**/*.*" />
     </copy>
   </target>
 </project>
