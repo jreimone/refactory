@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.resource.java.IJavaOptions;
-import org.emftext.language.java.resource.util.JavaPostProcessor;
-import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 
 /**
  * @author Jan Reimann
