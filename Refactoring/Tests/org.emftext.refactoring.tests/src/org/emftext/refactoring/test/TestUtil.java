@@ -40,8 +40,6 @@ public class TestUtil {
 
 	protected static Map<?, ?> getJavaLoadOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 		return map;
 	}
