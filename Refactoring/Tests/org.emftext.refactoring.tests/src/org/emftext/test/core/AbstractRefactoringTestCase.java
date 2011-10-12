@@ -12,7 +12,7 @@ import junit.framework.TestCase;
  * @author Jan Reimann
  *
  */
-public abstract class AbstractRefactoringTest extends TestCase{
+public abstract class AbstractRefactoringTestCase extends TestCase {
 
 	private boolean failed = false;
 	
