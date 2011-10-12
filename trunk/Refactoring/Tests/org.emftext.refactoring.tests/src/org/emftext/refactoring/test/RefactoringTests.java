@@ -65,7 +65,7 @@ import org.emftext.refactoring.tests.properties.PropertiesPackage;
 import org.emftext.refactoring.tests.properties.PropertyModel;
 import org.emftext.refactoring.tests.properties.StringValue;
 import org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResourceFactory;
-import org.emftext.test.core.AbstractRefactoringTest;
+import org.emftext.test.core.AbstractRefactoringTestCase;
 import org.emftext.test.core.DataPairTestFileFilter;
 import org.emftext.test.core.DataPairs;
 import org.emftext.test.core.DataSetTestFileFilter;
@@ -405,7 +405,7 @@ public class RefactoringTests extends TestCase {
 		}
 		Test methodSuite = null;
 		if (testData == null || testData.size() == 0) {
-			AbstractRefactoringTest newTest = createTest(testClass, method,
+			AbstractRefactoringTestCase newTest = createTest(testClass, method,
 					null, method.getName());
 			methodSuite = newTest;
 			LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName());
@@ -419,7 +419,7 @@ public class RefactoringTests extends TestCase {
 				for (TestDataPair testDataPair : testPairSet.getDataPairs()) {
 					dataString += " " + testDataPair.getInput().getName();
 				}
-				AbstractRefactoringTest newTest = createTest(testClass, method,
+				AbstractRefactoringTestCase newTest = createTest(testClass, method,
 						testPairSet, "DATA:" + dataString);
 				if (newTest != null) {
 					((TestSuite) methodSuite).addTest(newTest);
@@ -449,7 +449,7 @@ public class RefactoringTests extends TestCase {
 		dataFiles = getTestFiles(folder, inputValue, expectedValue);
 		Test methodSuite = null;
 		if (dataFiles == null || dataFiles.size() == 0) {
-			AbstractRefactoringTest newTest = createTest(testClass, method,
+			AbstractRefactoringTestCase newTest = createTest(testClass, method,
 					null, method.getName());
 			methodSuite = newTest;
 			LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName());
@@ -465,7 +465,7 @@ public class RefactoringTests extends TestCase {
 				for (File expectedFile : testData.getExpectedDataFiles()) {
 					expectedFiles += " " + expectedFile.getName();
 				}
-				AbstractRefactoringTest newTest = createTest(testClass, method,
+				AbstractRefactoringTestCase newTest = createTest(testClass, method,
 						testData,
 						"INPUT:" + inputFiles + " EXPECTED:" + expectedFiles);
 				if (newTest != null) {
@@ -519,9 +519,9 @@ public class RefactoringTests extends TestCase {
 		return newSuite;
 	}
 
-	private static AbstractRefactoringTest createTest(Class<? extends TestClass> testClass, final Method method, final TestDataSet testData, String name) throws InstantiationException, IllegalAccessException {
+	private static AbstractRefactoringTestCase createTest(Class<? extends TestClass> testClass, final Method method, final TestDataSet testData, String name) throws InstantiationException, IllegalAccessException {
 		final TestClass instance = testClass.newInstance();
-		AbstractRefactoringTest newTest = new AbstractRefactoringTest() {
+		AbstractRefactoringTestCase newTest = new AbstractRefactoringTestCase() {
 
 			@Override
 			public void runRefactoringTest() throws Throwable {
