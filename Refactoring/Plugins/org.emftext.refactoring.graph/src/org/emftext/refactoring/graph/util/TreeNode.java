@@ -89,4 +89,9 @@ public abstract class TreeNode{
 	public void setReferenceFromParent(EReference reference) {
 		this.reference = reference;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return eClass.equals(((TreeNode) obj).getEClass());
+	}
 }
