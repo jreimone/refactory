@@ -268,8 +268,17 @@ public class ModelUtil {
 			for (EAttribute eAttribute : attributes) {
 				if(attributeName.equals(eAttribute.getName())){
 					Object elementsAttributeValue = element.eGet(eAttribute, true);
-					if(elementsAttributeValue.equals(value)){
-						filteredElements.add(element);
+					if(elementsAttributeValue instanceof List<?>){
+						List<?> list = (List<?>) elementsAttributeValue;
+						for (Object object : list) {
+							if(object.equals(value)){
+								filteredElements.add(element);
+							}	
+						}
+					} else {
+						if(elementsAttributeValue.equals(value)){
+							filteredElements.add(element);
+						}
 					}
 				}
 			}
