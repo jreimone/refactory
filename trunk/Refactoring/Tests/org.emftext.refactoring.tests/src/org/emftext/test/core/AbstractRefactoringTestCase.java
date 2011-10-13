@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.emftext.test.core;
 
 import junit.framework.AssertionFailedError;
