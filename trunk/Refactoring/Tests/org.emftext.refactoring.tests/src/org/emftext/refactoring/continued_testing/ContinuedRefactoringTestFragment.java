@@ -22,15 +22,18 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.interpreter.IValueProviderRegistry;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.test.QueryUtil;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
+import org.emftext.test.core.TestData;
 import org.junit.Test;
 
-public class ContinuedRefactoringTest extends TestClass {
+@TestData("ContinuedRefactoringTest")
+public class ContinuedRefactoringTestFragment extends TestClass {
 
 	/****************************************************************************
 	 * ATTENTION! 																*
@@ -76,7 +79,7 @@ public class ContinuedRefactoringTest extends TestClass {
 		assertTrue(elements.size() > 0);
 		
 		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(inputResource);
-		assertNotNull("No refactoring found.", refactorer);
+		assertNotNull("No refactorings exist for metamodel " + inputResource.getContents().get(0).eClass().getEPackage().getNsURI(), refactorer);
 		
 		refactorer.setInput(elements);
 		List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
@@ -91,6 +94,8 @@ public class ContinuedRefactoringTest extends TestClass {
 			}
 		}
 		assertNotNull(mappingToUse);
+		IValueProviderFactory factory = new TestValueProviderFactory();
+		refactorer.setValueProviderFactory(factory);
 		IValueProviderRegistry.INSTANCE.registerValueProvider(mappingToUse, TestAttributeValueProvider.class);
 		refactorer.setRoleMappingToInterprete(mappingToUse);
 //		refactorer.fakeRefactor();

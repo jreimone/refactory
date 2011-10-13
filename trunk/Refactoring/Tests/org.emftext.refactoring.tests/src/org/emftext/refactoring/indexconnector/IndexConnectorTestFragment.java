@@ -17,13 +17,15 @@ import org.emftext.refactoring.test.TestUtil;
 import org.emftext.test.core.ExpectedData;
 import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
+import org.emftext.test.core.TestData;
 import org.junit.Test;
 
 /**
  * @author Jan Reimann
  *
  */
-public class IndexConnectorTest extends TestClass{
+@TestData("IndexConnectorTest")
+public class IndexConnectorTestFragment extends TestClass{
 
 	public static final String CS_MODEL_INPUT_PREFIX = "CS_MODEL_";
 	public static final String CS_MAPPING_EXPECTED_PREFIX = "CS_MAPPING_";

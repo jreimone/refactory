@@ -15,7 +15,7 @@ import org.emftext.test.core.TestDataSet;
 import org.junit.Test;
 
 @TestData("TestTest")
-public class TestTest extends TestClass{
+public class TestTestFragment extends TestClass{
 
 	@Test
 	@DataPairs({"testMethod","anotherTestMethod"})

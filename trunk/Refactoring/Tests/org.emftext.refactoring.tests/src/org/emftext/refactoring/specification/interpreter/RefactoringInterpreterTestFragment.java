@@ -34,9 +34,11 @@ import org.emftext.refactoring.util.RoleUtil;
 import org.emftext.test.core.ExpectedData;
 import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
+import org.emftext.test.core.TestData;
 import org.junit.Test;
 
-public class RefactoringInterpreterTest extends TestClass{
+@TestData("RefactoringInterpreterTest")
+public class RefactoringInterpreterTestFragment extends TestClass{
 
 	private static final String MODEL = "MODEL_";
 	private static final String PATH = "PATH_";
