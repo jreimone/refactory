@@ -85,7 +85,8 @@ public class RegistryUtil {
 				break;
 		}
 		IStatus status = new Status(statusCode, RefactoringUtilPlugin.PLUGIN_ID, message);
-		RefactoringUtilPlugin.getDefault().getLog().log(status);
-//		Logger.getLogger(RegistryUtil.class.getSimpleName()).log(level, message);
+		if(Platform.isRunning()){
+			RefactoringUtilPlugin.getDefault().getLog().log(status);
+		}
 	}
 }
