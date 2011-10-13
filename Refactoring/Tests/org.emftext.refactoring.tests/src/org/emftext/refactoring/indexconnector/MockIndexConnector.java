@@ -13,7 +13,7 @@ import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.refactoring.test.RefactoringTests;
+import org.emftext.refactoring.test.RefactoringTestSuite;
 import org.emftext.refactoring.test.TestUtil;
 
 public class MockIndexConnector implements IndexConnector {
@@ -30,7 +30,7 @@ public class MockIndexConnector implements IndexConnector {
 	}
 
 	private static void initRefSpecIndex() {
-		File mapping = TestUtil.getFileByPath(RefactoringTests.INPUT_FOLDER + File.separator 
+		File mapping = TestUtil.getFileByPath(RefactoringTestSuite.INPUT_FOLDER + File.separator 
 				+ indexFolder + File.separator 
 				+ "ExtractMethod.refspec");
 		RefactoringSpecification refSpec = TestUtil.getExpectedModelFromFile(mapping, RefactoringSpecification.class);
@@ -38,12 +38,12 @@ public class MockIndexConnector implements IndexConnector {
 	}
 	
 	private static void initMappingIndex() {
-		File mapping = TestUtil.getFileByPath(RefactoringTests.INPUT_FOLDER + File.separator 
+		File mapping = TestUtil.getFileByPath(RefactoringTestSuite.INPUT_FOLDER + File.separator 
 				+ indexFolder + File.separator 
 				+ "pl0mapping.rolemapping");
 		RoleMappingModel mappingModel = TestUtil.getExpectedModelFromFile(mapping, RoleMappingModel.class);
 		simpleMappingIndex.put(PL0Package.eNS_URI, mappingModel);
-		mapping = TestUtil.getFileByPath(RefactoringTests.INPUT_FOLDER + File.separator 
+		mapping = TestUtil.getFileByPath(RefactoringTestSuite.INPUT_FOLDER + File.separator 
 				+ indexFolder + File.separator 
 				+ "conference.rolemapping");
 		mappingModel = TestUtil.getExpectedModelFromFile(mapping, RoleMappingModel.class);

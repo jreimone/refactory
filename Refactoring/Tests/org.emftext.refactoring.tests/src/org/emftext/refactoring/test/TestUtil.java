@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.util.JavaPostProcessor;
+import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 
 /**
  * @author Jan Reimann
@@ -25,8 +27,8 @@ import org.emftext.language.java.resource.java.IJavaOptions;
 public class TestUtil {
 
 	public static Resource getResourceFromFile(File file) {
-		assertNotNull(file);
-		assertTrue(file.exists());
+		assertNotNull("file must not be null", file);
+		assertTrue("file " + file.getAbsolutePath() + " must exist", file.exists());
 		String filePath = file.getAbsolutePath();
 		URI uri = URI.createFileURI(filePath);
 		ResourceSet rs = new ResourceSetImpl();

@@ -8,8 +8,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import javax.management.relation.Relation;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.refactoring.roles.Collaboration;
@@ -18,16 +16,17 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
+import org.emftext.test.core.TestData;
 import org.emftext.test.core.TestDataSet;
 import org.junit.Test;
 
 /**
- * Run as Plugin-Test
  * 
  * @author Jan Reimann
  *
  */
-public class EmptyOutgoingRelationTest extends TestClass{
+@TestData("EmptyOutgoingRelationTest")
+public class EmptyOutgoingRelationTestFragment extends TestClass{
 
 	private String path = "ExtractMethod";
 	private RoleModel model;

@@ -31,7 +31,7 @@ import org.junit.Test;
  *
  */
 @TestData("constraintresources")
-public class RoleConstraintCheckerTest extends TestClass{
+public class RoleConstraintCheckerTestFragment extends TestClass{
 		
 	private static final String path = "relationTestMapping.rolemapping";
 //	private RoleMappingModel mappingModel;

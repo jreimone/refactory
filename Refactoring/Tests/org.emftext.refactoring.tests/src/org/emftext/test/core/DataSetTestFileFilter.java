@@ -3,7 +3,7 @@ package org.emftext.test.core;
 import java.io.File;
 import java.io.FilenameFilter;
 
-import org.emftext.refactoring.test.RefactoringTests;
+import org.emftext.refactoring.test.RefactoringTestSuite;
 
 public class DataSetTestFileFilter implements FilenameFilter {
 
@@ -31,7 +31,7 @@ public class DataSetTestFileFilter implements FilenameFilter {
 	
 	public boolean accept(File dir, String name) {
 		if(includeExpectExtension){
-			return name.startsWith(nameFilter) && !name.contains(RefactoringTests.EXPECTED_DATA_FILE_NAME_INSERT) && startsNotWithExclusions(name);
+			return name.startsWith(nameFilter) && !name.contains(RefactoringTestSuite.EXPECTED_DATA_FILE_NAME_INSERT) && startsNotWithExclusions(name);
 		}
 		return name.startsWith(nameFilter) && startsNotWithExclusions(name);
 	}
