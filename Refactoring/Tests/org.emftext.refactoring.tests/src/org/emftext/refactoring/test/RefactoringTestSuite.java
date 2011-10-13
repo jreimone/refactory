@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 import junit.framework.Assert;
 import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
 import org.eclipse.emf.common.util.URI;
@@ -53,6 +52,7 @@ import org.emftext.language.refactoring.specification.resource.mopp.RefspecResou
 import org.emftext.language.textadventure.TextadventurePackage;
 import org.emftext.language.textadventure.resource.tas.mopp.TasResourceFactory;
 import org.emftext.refactoring.continued_testing.ContinuedRefactoringTestFragment;
+import org.emftext.refactoring.graph.GraphTestFragment;
 import org.emftext.refactoring.indexconnector.IndexConnectorTestFragment;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
@@ -107,6 +107,7 @@ public class RefactoringTestSuite extends TestCase {
 			IndexConnectorTestFragment.class,
 			RoleConstraintCheckerTestFragment.class,
 			UtilTestFragment.class,
+			GraphTestFragment.class,
 			ContinuedRefactoringTestFragment.class));
 
 	private static final Logger LOG = Logger.getLogger(RefactoringTestSuite.class.getSimpleName());
