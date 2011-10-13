@@ -202,7 +202,9 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 						, errorStati.toArray(new IStatus[0])
 						, "The mapping '" + mapping.getName() + "' cannot be registered because of contained errors. Inspect the sub-entries."
 						, null);
-				Activator.getDefault().getLog().log(status);
+				if(Platform.isRunning()){
+					Activator.getDefault().getLog().log(status);
+				}
 			} else {
 				mappingsToRegister.put(mapping.getName(), mapping);
 			}
