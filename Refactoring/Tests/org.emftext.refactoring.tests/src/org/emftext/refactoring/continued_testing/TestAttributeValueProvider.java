@@ -66,7 +66,6 @@ public class TestAttributeValueProvider extends AbstractValueProvider<EAttribute
 
 	public Object provideValue(IRefactoringInterpreter interpreter, EAttribute from, Object... context) {
 		if(interpreter instanceof IRefactoringFakeInterpreter){
-//			((IRefactoringFakeInterpreter) interpreter).addValueProvider(this);
 			fakeAttribute = attribute;
 			fakeAttributeOwner = (EObject) context[0];
 		}

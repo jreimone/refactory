@@ -104,7 +104,7 @@ public class RefactoringTestSuite extends TestCase {
 			TestTestFragment.class,
 			EmptyOutgoingRelationTestFragment.class,
 			RefactoringInterpreterTestFragment.class,
-			IndexConnectorTestFragment.class,
+//			IndexConnectorTestFragment.class,
 			RoleConstraintCheckerTestFragment.class,
 			UtilTestFragment.class,
 			GraphTestFragment.class,
