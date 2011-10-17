@@ -3,7 +3,7 @@ package org.emftext.refactoring.rolemodelmatching.visitors;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingTestSuite;
+import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingTestInitialization;
 import org.emftext.refactoring.rolemodelmatching.StringMappingNode;
 
 /**
@@ -23,7 +23,7 @@ public class CollectDistinctMappingsVisitor implements INodeVisitor {
 		}
 		StringMappingNode parent = node;
 		while (parent.getParent() != null) {
-			if(parent.getMappingString().contains(RolemodelMatchingTestSuite.ROLE_CONNECTOR)){
+			if(parent.getMappingString().contains(RolemodelMatchingTestInitialization.ROLE_CONNECTOR)){
 				distinctNodeSet.add(parent.getMappingString());
 			}
 			parent = parent.getParent();

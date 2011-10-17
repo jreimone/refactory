@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.rolemodelmatching.MatchNode;
-import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingTestSuite;
+import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingTestInitialization;
 
 public class PersistMatchPathListener extends AbstractNodeListener {
 
@@ -49,7 +49,7 @@ public class PersistMatchPathListener extends AbstractNodeListener {
 		for (MatchNode<?, ?> matchNode : matchPath) {
 			buffer.append(printNode(matchNode));
 			if(matchPath.indexOf(matchNode) < (matchPath.size() - 1)) {
-				buffer.append(RolemodelMatchingTestSuite.MAPPING_SEPARATOR) ;
+				buffer.append(RolemodelMatchingTestInitialization.MAPPING_SEPARATOR) ;
 			}
 		}
 		buffer.append("\n");
@@ -63,10 +63,10 @@ public class PersistMatchPathListener extends AbstractNodeListener {
 		String connector = "";
 		if (roleElement instanceof Role) {
 			roleString = ((Role) roleElement).getName();
-			connector = RolemodelMatchingTestSuite.ROLE_CONNECTOR;
+			connector = RolemodelMatchingTestInitialization.ROLE_CONNECTOR;
 		} else if (roleElement instanceof MultiplicityCollaboration) {
 			roleString = ((MultiplicityCollaboration) roleElement).getTargetName();
-			connector = RolemodelMatchingTestSuite.COLL_CONNECTOR;
+			connector = RolemodelMatchingTestInitialization.COLL_CONNECTOR;
 		}
 		EObject metaElement = matchNode.getMetaElement();
 		String metaString = "";

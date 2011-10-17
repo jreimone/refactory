@@ -60,7 +60,7 @@ import org.emftext.refactoring.rolemodelmatching.visitors.PreSelectedMappingsCou
  * @author jreimann
  * 
  */
-public class PersistentRolemodelMatching extends RolemodelMatchingInitialization {
+public class PersistentRolemodelMatching extends RolemodelMatchingInitialRegistrations {
 
 	public List<EClass> currentMetaClasses;
 
