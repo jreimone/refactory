@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.roles.RoleModel;
 
 
-public class RolemodelMatchingTestSuite {
+public class RolemodelMatchingTestInitialization {
 
 	public static final int MAX_MAPPINGS_COUNT		= 20;
 	

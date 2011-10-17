@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingTestSuite;
+import org.emftext.refactoring.rolemodelmatching.RolemodelMatchingTestInitialization;
 import org.emftext.refactoring.rolemodelmatching.StringMappingNode;
 import org.emftext.refactoring.rolemodelmatching.StringMappingNodeList;
 
@@ -25,7 +25,7 @@ public class PersistPreSelectedMappingsCountComplexVisitor implements INodeVisit
 		}
 		StringMappingNodeList completeMapping = node.getListFromRoot();
 		try {
-			fileWriter.append("manual mappings which result in less than " + RolemodelMatchingTestSuite.MAX_MAPPINGS_COUNT + " valid complete mappings (" + completeMapping.size() + " pre-selected): ");
+			fileWriter.append("manual mappings which result in less than " + RolemodelMatchingTestInitialization.MAX_MAPPINGS_COUNT + " valid complete mappings (" + completeMapping.size() + " pre-selected): ");
 			//				System.out.print("manual mappings which result in less than " + MAX_MAPPINGS_COUNT + " valid complete mappings (" + completeMapping.size() + " pre-selected): ");
 			//					printMappingNodeList(completeMapping);
 			fileWriter.append(completeMapping.printList() + "\n");

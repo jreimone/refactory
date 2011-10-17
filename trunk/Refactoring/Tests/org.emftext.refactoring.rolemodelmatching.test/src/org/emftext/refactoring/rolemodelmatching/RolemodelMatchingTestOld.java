@@ -64,7 +64,7 @@ import org.junit.Test;
  * @author jreimann
  * 
  */
-public class RolemodelMatchingTestOld extends RolemodelMatchingInitialization {
+public class RolemodelMatchingTestOld extends RolemodelMatchingInitialRegistrations {
 
 	public static Map<String, RoleModel> rolemodels;
 	public static Map<String, EPackage> metamodels;

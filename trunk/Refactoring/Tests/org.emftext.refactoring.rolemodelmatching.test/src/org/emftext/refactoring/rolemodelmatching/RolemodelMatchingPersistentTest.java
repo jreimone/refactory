@@ -29,7 +29,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitialization{
+public class RolemodelMatchingPersistentTest extends RolemodelMatchingInitialRegistrations{
 
 	public static Map<String, RoleModel> rolemodels;
 	public static Map<String, EPackage> metamodels;
