@@ -10,6 +10,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +55,6 @@ import org.emftext.language.textadventure.TextadventurePackage;
 import org.emftext.language.textadventure.resource.tas.mopp.TasResourceFactory;
 import org.emftext.refactoring.continued_testing.ContinuedRefactoringTestFragment;
 import org.emftext.refactoring.graph.GraphTestFragment;
-import org.emftext.refactoring.indexconnector.IndexConnectorTestFragment;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
@@ -104,7 +105,7 @@ public class RefactoringTestSuite extends TestCase {
 			TestTestFragment.class,
 			EmptyOutgoingRelationTestFragment.class,
 			RefactoringInterpreterTestFragment.class,
-//			IndexConnectorTestFragment.class,
+			//			IndexConnectorTestFragment.class,
 			RoleConstraintCheckerTestFragment.class,
 			UtilTestFragment.class,
 			GraphTestFragment.class,
@@ -186,12 +187,11 @@ public class RefactoringTestSuite extends TestCase {
 		registerTestingRootAsPlatformRoot();
 		registerModelsForRefactorings();
 		registerPostProcessors();
-		TestSuite suite = new TestSuite("All Refactoring Tests") {
-		};
+		TestSuite suite = new TestSuite("All Refactoring Tests") {};
 		for (Class<? extends TestClass> testClass : testClasses) {
 			try {
 				suite.addTest(createTests(testClass));
-			} catch (final FileNotFoundException e) {
+			} catch (final Exception e) {
 				suite.addTest(new TestCase(testClass.getSimpleName()) {
 
 					@Override
@@ -291,6 +291,11 @@ public class RefactoringTestSuite extends TestCase {
 			for (File file : files) {
 				fileList.add(file);
 			}
+			Collections.sort(fileList, new Comparator<File>() {
+				public int compare(File o1, File o2) {
+					return o1.getName().compareTo(o2.getName());
+				}
+			});
 			return fileList;
 		} catch (FileNotFoundException e) {
 			LOG.severe(e.getMessage());
@@ -348,6 +353,7 @@ public class RefactoringTestSuite extends TestCase {
 			}
 		}
 		List<TestDataSet> result = new LinkedList<TestDataSet>();
+		// TODO order of collected files is not the same -> alphabetical order? edit distance to determine corresponding files?
 		for (int i = 0; i < setCount; i++) {
 			TestDataSet dataSet = new TestDataSet();
 			for (List<File> list : inputFiles) {
@@ -426,7 +432,7 @@ public class RefactoringTestSuite extends TestCase {
 					dataString += " " + testDataPair.getInput().getName();
 				}
 				AbstractRefactoringTestCase newTest = createTest(testClass, method,
-						testPairSet, "DATA:" + dataString);
+						testPairSet, method.getName() + " -> DATA:" + dataString);
 				if (newTest != null) {
 					((TestSuite) methodSuite).addTest(newTest);
 					LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName() + " and files" + dataString);
@@ -473,7 +479,7 @@ public class RefactoringTestSuite extends TestCase {
 				}
 				AbstractRefactoringTestCase newTest = createTest(testClass, method,
 						testData,
-						"INPUT:" + inputFiles + " EXPECTED:" + expectedFiles);
+						method.getName() + " -> INPUT:" + inputFiles + " EXPECTED:" + expectedFiles);
 				if (newTest != null) {
 					((TestSuite) methodSuite).addTest(newTest);
 					LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName() + " with input files" + inputFiles + " and expected files " + expectedFiles);
@@ -504,16 +510,16 @@ public class RefactoringTestSuite extends TestCase {
 				Ignore  ignoreAnnotation = method.getAnnotation(Ignore.class);
 				if(ignoreAnnotation != null){
 					// method won't be added to test suite if @ignore is set
+					continue;
+				} 
+				Test inputExpectedDataTest = handleInputExpectedDataAnnotation(testClass, method, folder);
+				if (inputExpectedDataTest != null && inputExpectedDataTest.countTestCases() > 0) {
+					newSuite.addTest(inputExpectedDataTest);
 				} else {
-					Test inputExpectedDataTest = handleInputExpectedDataAnnotation(testClass, method, folder);
-					if (inputExpectedDataTest != null && inputExpectedDataTest.countTestCases() > 0) {
-						newSuite.addTest(inputExpectedDataTest);
-					} else {
-						Test dataPairTest = handleDataPairAnnotation(testClass,
-								method, folder);
-						if (dataPairTest != null && dataPairTest.countTestCases() > 0) {
-							newSuite.addTest(dataPairTest);
-						}
+					Test dataPairTest = handleDataPairAnnotation(testClass,
+							method, folder);
+					if (dataPairTest != null && dataPairTest.countTestCases() > 0) {
+						newSuite.addTest(dataPairTest);
 					}
 				}
 			} catch (InstantiationException e) {

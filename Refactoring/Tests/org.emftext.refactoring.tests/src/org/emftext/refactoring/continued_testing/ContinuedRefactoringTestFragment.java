@@ -72,11 +72,13 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		Resource inputResource = inputModel.eResource();
 		
 		File path = getTestDataSet().getInputFileByPattern(PATH_PATTERN);
-		assertNotNull(path);
+		assertNotNull("no path file could be found", path);
 		String query = QueryUtil.getLineInFile(path, 1);
 		List<EObject> elements = QueryUtil.queryModel(inputModel, query);
-		assertNotNull("No elements found in given selection path.", elements);
-		assertTrue(elements.size() > 0);
+		assertNotNull("No elements found for:\n" +
+				"model: " + inputModel
+				+ "\nquery: " + query, elements);
+		assertTrue("query must result at least in 1 element", elements.size() > 0);
 		
 		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(inputResource);
 		assertNotNull("No refactorings exist for metamodel " + inputResource.getContents().get(0).eClass().getEPackage().getNsURI(), refactorer);
