@@ -1,7 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2006-2012
+ * Software Technology Group, Dresden University of Technology
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.language.refactoring.roles.builder;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -42,4 +56,7 @@ public class RegistrationBuilder implements IRolestextBuilder {
 		return false;
 	}
 
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
