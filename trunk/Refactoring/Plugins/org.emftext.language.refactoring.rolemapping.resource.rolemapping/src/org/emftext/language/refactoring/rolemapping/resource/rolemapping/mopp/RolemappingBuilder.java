@@ -1,26 +1,38 @@
-/**
- * <copyright>
- * </copyright>
+/*******************************************************************************
+ * Copyright (c) 2006-2012
+ * Software Technology Group, Dresden University of Technology
  *
- * 
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp;
 
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingBuilder;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.RolemappingEProblemType;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
-public class RolemappingBuilder implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingBuilder {
+public class RolemappingBuilder implements IRolemappingBuilder {
 	
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.getResource(uri, true);
 		if(resource != null && (resource.getErrors() == null || resource.getErrors().size() == 0)){
@@ -47,16 +59,20 @@ public class RolemappingBuilder implements org.emftext.language.refactoring.role
 		}
 		return false;
 	}
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	
+	public IStatus build(RolemappingResource resource, IProgressMonitor monitor) {
 		RoleMappingModel model = (RoleMappingModel) resource.getContents().get(0);
 		if((resource.getErrors() == null || resource.getErrors().size() == 0)){
 			List<RoleMapping> unRegisterables = IRoleMappingRegistry.INSTANCE.registerRoleMapping(model);
 			if(unRegisterables != null && unRegisterables.size() > 0){
 				IRoleMappingRegistry.INSTANCE.updateMappings(unRegisterables);
 			}
-			resource.addWarning("This Role Mapping Model was only registered temporarily.\nYou should consider to register it as extension.", model);
+			resource.addWarning("This Role Mapping Model was only registered temporarily.\nYou should consider to register it as extension.", RolemappingEProblemType.BUILDER_ERROR, model);
 		}
 		return Status.OK_STATUS;
 	}
-	
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
