@@ -1,6 +1,16 @@
-/**
- * 
- */
+/*******************************************************************************
+ * Copyright (c) 2006-2012
+ * Software Technology Group, Dresden University of Technology
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.refactoring.test;
 
 import java.io.File;
@@ -26,6 +36,7 @@ import junit.framework.TestSuite;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -150,7 +161,9 @@ public class RefactoringTestSuite extends TestCase {
 					List<KeyValuePair> pairs = category.getPairs();
 					for (KeyValuePair pair : pairs) {
 						EObjectReferenceValue value = (EObjectReferenceValue) pair.getValue();
-						RoleModel roleModel = (RoleModel) value.getObjectReference();
+						EObject objectReference = value.getObjectReference();
+						failIfProxy(objectReference);
+						RoleModel roleModel = (RoleModel) objectReference;
 						try {
 							IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
 						} catch (RoleModelAlreadyRegisteredException e) {
@@ -161,7 +174,9 @@ public class RefactoringTestSuite extends TestCase {
 					List<KeyValuePair> pairs = category.getPairs();
 					for (KeyValuePair pair : pairs) {
 						EObjectReferenceValue value = (EObjectReferenceValue) pair.getValue();
-						RefactoringSpecification refSpec = (RefactoringSpecification) value.getObjectReference();
+						EObject objectReference = value.getObjectReference();
+						failIfProxy(objectReference);
+						RefactoringSpecification refSpec = (RefactoringSpecification) objectReference;
 						try {
 							IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
 						} catch (RefSpecAlreadyRegisteredException e) {
@@ -172,12 +187,23 @@ public class RefactoringTestSuite extends TestCase {
 					List<KeyValuePair> pairs = category.getPairs();
 					for (KeyValuePair pair : pairs) {
 						EObjectReferenceValue value = (EObjectReferenceValue) pair.getValue();
-						RoleMappingModel mapping = (RoleMappingModel) value.getObjectReference();
+						EObject objectReference = value.getObjectReference();
+						failIfProxy(objectReference);
+						RoleMappingModel mapping = (RoleMappingModel) objectReference;
 						EcoreUtil.resolveAll(mapping);
 						IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
 					}
 				}
 			}
+		}
+	}
+
+	private static void failIfProxy(EObject objectReference) {
+		if (objectReference.eIsProxy()) {
+			InternalEObject proxy = (InternalEObject) objectReference;
+			String message = "RefactoringTestSuite.registerModelsForRefactorings() Can't resolve reference " + proxy.eProxyURI();
+			System.err.println(message);
+			fail(message);
 		}
 	}
 
