@@ -1,22 +1,33 @@
-/**
- * <copyright>
- * </copyright>
+/*******************************************************************************
+ * Copyright (c) 2006-2012
+ * Software Technology Group, Dresden University of Technology
  *
- * 
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.refactoring.tests.properties.resource.properties.analysis;
+
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.emftext.refactoring.tests.properties.EObjectReferenceValue;
+import org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolveResult;
+import org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolver;
 
-public class EObjectReferenceValueObjectReferenceReferenceResolver implements org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolver<org.emftext.refactoring.tests.properties.EObjectReferenceValue, org.eclipse.emf.ecore.EObject> {
+public class EObjectReferenceValueObjectReferenceReferenceResolver implements IPropertiesReferenceResolver<EObjectReferenceValue, EObject> {
 
-	private org.emftext.refactoring.tests.properties.resource.properties.analysis.PropertiesDefaultResolverDelegate<org.emftext.refactoring.tests.properties.EObjectReferenceValue, org.eclipse.emf.ecore.EObject> delegate = new org.emftext.refactoring.tests.properties.resource.properties.analysis.PropertiesDefaultResolverDelegate<org.emftext.refactoring.tests.properties.EObjectReferenceValue, org.eclipse.emf.ecore.EObject>();
-
-	public void resolve(java.lang.String identifier, org.emftext.refactoring.tests.properties.EObjectReferenceValue container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolve(String identifier, EObjectReferenceValue container, EReference reference, int position, boolean resolveFuzzy, final IPropertiesReferenceResolveResult<EObject> result) {
 		try{
 			URI uri = URI.createURI(identifier);
 			ResourceSet resourceSet = container.eResource().getResourceSet();
@@ -36,12 +47,12 @@ public class EObjectReferenceValueObjectReferenceReferenceResolver implements or
 		}
 	}
 
-	public java.lang.String deResolve(org.eclipse.emf.ecore.EObject element, org.emftext.refactoring.tests.properties.EObjectReferenceValue container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(EObject element, EObjectReferenceValue container, EReference reference) {
 		return element.eResource().getURI().toPlatformString(true);
 //		return delegate.deResolve(element, container, reference);
 	}
 
-	public void setOptions(java.util.Map<?,?> options) {
+	public void setOptions(Map<?,?> options) {
 		// save options in a field or leave method empty if this resolver does not depend on any option
 	}
 
