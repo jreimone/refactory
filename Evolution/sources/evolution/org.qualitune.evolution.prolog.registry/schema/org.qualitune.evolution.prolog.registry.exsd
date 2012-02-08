@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.qualitune.evolution.prolog.registry" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.qualitune.evolution.prolog.registry" id="org.qualitune.evolution.prolog.registry" name="prologRegistry"/>
+      </appinfo>
+      <documentation>
+         This extension point can be used to register additional Prolog rules to the global Prolog knowledge base. The registered Prolog rules must at least contain one rule with the following syntax:
+&lt;br&gt;
+&lt;pre&gt;
+implicit(SourceModel,TargetElement,Reference,TargetElementUri) :- ....
+or
+implicit(SourceElement,TargetElement,Reference,TargetElementUri) :- ....
+&lt;/pre&gt;
+&lt;br&gt;
+The &lt;code&gt;implicit&lt;/code&gt; rule will be used to determine implicit dependencies. If the registered Prolog rules don&apos;t contain such a rule the registration has no effect.
+&lt;br&gt;
+The global knowledge base contains facts with the following patterns:
+&lt;pre&gt;
+explicit(Source,Reference,Target). 
+uri(ReferencingModelElement,&apos;EMF conform URI to resolve the element&apos;).
+&lt;/pre&gt;
+&lt;br&gt;
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="prologFile"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="prologFile">
+      <complexType>
+         <attribute name="prologResource" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Specify a .pl file with this attribute which contains Prolog rules. They will be added to the global Prolog knowledge base. The registered Prolog rules must at least contain one rule with the following syntax:
+&lt;br&gt;
+&lt;pre&gt;
+implicit(SourceModel,TargetElement,Reference,TargetElementUri) :- ....
+or
+implicit(SourceElement,TargetElement,Reference,TargetElementUri) :- ....
+&lt;/pre&gt;
+&lt;br&gt;
+The &lt;code&gt;implicit&lt;/code&gt; rule will be used to determine implicit dependencies. If the registered Prolog rules don&apos;t contain such a rule the registration has no effect.
+&lt;br&gt;
+The global knowledge base contains facts with the following patterns:
+&lt;pre&gt;
+explicit(Source,Reference,Target). 
+uri(ReferencingModelElement,&apos;EMF conform URI to resolve the element&apos;).
+&lt;/pre&gt;
+&lt;br&gt;
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         [Enter the first release in which this extension point appears.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         [Enter extension point usage example here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+
+</schema>

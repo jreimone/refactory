@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Registry for registering Prolog rules
+Bundle-SymbolicName: org.qualitune.evolution.prolog.registry;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.qualitune.evolution.prolog.registry.Activator
+Bundle-Vendor: qualitune.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.qualitune.tuprolog
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.qualitune.evolution.prolog.registry
