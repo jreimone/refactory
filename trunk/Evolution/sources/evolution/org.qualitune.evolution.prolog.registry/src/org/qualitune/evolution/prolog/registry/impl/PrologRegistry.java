@@ -66,11 +66,25 @@ public class PrologRegistry implements IPrologRegistry {
 
 	@Override
 	public Theory getKnowledgeBase() {
+//		engine.getTheory();
 		return manager.getLastConsultedTheory();
 	}
 
 	@Override
 	public Prolog getEngine() {
 		return engine;
+	}
+	
+	public String makeAtom(String string){
+		String atom = string.replaceAll(":", "_");
+		atom = atom.replaceAll("/", "_");
+		atom = atom.replaceAll("@", "_");
+		atom = atom.replaceAll("\\.", "_");
+		atom = atom.replaceAll("#", "_");
+		atom = atom.toLowerCase();
+		while(atom.indexOf("_") == 0){
+			atom = atom.substring(1);
+		}
+		return atom;
 	}
 }

@@ -7,7 +7,8 @@ Bundle-Activator: org.qualitune.evolution.prolog.generator.PrologGeneratorPlugin
 Bundle-Vendor: qualitune.org
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
- org.qualitune.tuprolog
+ org.qualitune.tuprolog,
+ org.qualitune.evolution.prolog.registry
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.qualitune.evolution.prolog.generator
