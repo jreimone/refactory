@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UI stuff for evolution
+Bundle-SymbolicName: org.qualitune.evolution.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.qualitune.evolution.ui.Activator
+Bundle-Vendor: qualitune.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.emf.common,
+ org.eclipse.emf.ecore,
+ org.qualitune.evolution.prolog.generator,
+ org.qualitune.tuprolog,
+ org.qualitune.evolution.prolog.registry
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

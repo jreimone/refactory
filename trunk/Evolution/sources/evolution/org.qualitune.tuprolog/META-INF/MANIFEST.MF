@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: tuProlog Wrapper Plugin
+Bundle-SymbolicName: org.qualitune.tuprolog
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: qualitune.org
+Export-Package: alice.tuprolog,
+ alice.tuprolog.event,
+ alice.tuprolog.interfaces,
+ alice.tuprolog.lib,
+ alice.util
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: libs/2p.jar,
+ libs/javassist.jar
