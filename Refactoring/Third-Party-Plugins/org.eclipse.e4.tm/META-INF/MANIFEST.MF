@@ -28,5 +28,5 @@ Export-Package: org.eclipse.e4.tm.layouts,
  org.eclipse.e4.tm.widgets,
  org.eclipse.e4.tm.widgets.impl,
  org.eclipse.e4.tm.widgets.util
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

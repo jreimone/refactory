@@ -4,7 +4,7 @@ Bundle-Name: Sokan IndexConnector
 Bundle-SymbolicName: org.emftext.refactoring.indexconnector.sokan;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Vendor: Jan Reimann
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.emftext.refactoring.indexconnector,
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Rolemodelmatching
 Bundle-SymbolicName: org.emftext.refactoring.rolemodelmatching.test
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit4,
  org.eclipse.emf.ecore,
  org.emftext.language.refactoring.roles,

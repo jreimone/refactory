@@ -4,7 +4,7 @@ Bundle-Name: Refactoring Specification Interpreter
 Bundle-SymbolicName: org.emftext.refactoring.specification.interpreter;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Vendor: Jan Reimann
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.emftext.language.refactoring.specification,
  org.emftext.language.refactoring.specification.resource.refspec,
  org.emftext.language.refactoring.rolemapping,

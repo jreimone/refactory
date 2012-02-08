@@ -4,7 +4,7 @@ Bundle-Name: Index Connector
 Bundle-SymbolicName: org.emftext.refactoring.indexconnector;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Vendor: Jan Reimann
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.refactoring.util,
  org.eclipse.emf.ecore

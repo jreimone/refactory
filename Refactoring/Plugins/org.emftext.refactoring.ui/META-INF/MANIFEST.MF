@@ -23,7 +23,7 @@ Require-Bundle: org.emftext.refactoring.specification.interpreter,
  org.eclipse.core.variables,
  org.emftext.refactoring.registry.rolemapping,
  org.emftext.refactoring.registry.customwizardpage
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.emftext.refactoring.editorconnector,
  org.emftext.refactoring.ltk,
  org.emftext.refactoring.ui

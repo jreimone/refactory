@@ -3,7 +3,7 @@ Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.emftext.language.refactoring.roles.refactoring.Activator
 Bundle-ManifestVersion: 2
 Bundle-Name: RoleModels
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-SymbolicName: org.emftext.language.refactoring.roles.refactoring;singleton:= true
 Bundle-Vendor: Reimann
 Bundle-Version: 1.0.0.qualifier
