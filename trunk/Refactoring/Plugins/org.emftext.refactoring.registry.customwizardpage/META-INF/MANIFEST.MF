@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Custom Wizard Page
 Bundle-SymbolicName: org.emftext.refactoring.registry.customwizardpage;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.emftext.refactoring.customwizardpage
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,

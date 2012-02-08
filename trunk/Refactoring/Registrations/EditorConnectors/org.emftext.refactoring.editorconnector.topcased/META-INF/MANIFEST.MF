@@ -4,7 +4,7 @@ Bundle-Name: EditorConnector for Topcased
 Bundle-SymbolicName: org.emftext.refactoring.editorconnector.topcased;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Jan Reimann
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.emftext.refactoring.ui,
  org.eclipse.ui.workbench,
  org.eclipse.emf.ecore,

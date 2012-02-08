@@ -7,5 +7,5 @@ Bundle-Activator: org.emftext.language.conference.refactoring.Activator
 Bundle-Vendor: Jan Reimann
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.refactoring.registry.rolemapping
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

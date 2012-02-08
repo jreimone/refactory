@@ -4,6 +4,6 @@ Bundle-Name: ExtractSubX
 Bundle-SymbolicName: org.emftext.refactoring.extractSubX;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Jan Reimann
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.emftext.refactoring.registry.refactoringspecification,
  org.emftext.refactoring.registry.rolemodel

@@ -8,5 +8,5 @@ Bundle-Vendor: Jan Reimann
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.refactoring.registry.rolemodel,
  org.emftext.refactoring.registry.refactoringspecification
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
