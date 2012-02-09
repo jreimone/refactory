@@ -29,20 +29,4 @@ public interface IPrologRegistry {
 	 * @return
 	 */
 	public Prolog getEngine();
-
-	/**
-	 * Returns the global knowledge base where all other theories are appended.
-	 * 
-	 * @return
-	 */
-	public Theory getKnowledgeBase();
-	
-	/**
-	 * Produces a valid Prolog atom for the given <code>st5ring</code>. Usually all invalid characters
-	 * are replaced with an underscore.
-	 * 
-	 * @param string
-	 * @return
-	 */
-	public String makeAtom(String string);
 }

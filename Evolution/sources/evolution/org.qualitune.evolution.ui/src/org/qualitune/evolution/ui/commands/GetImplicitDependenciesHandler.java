@@ -1,5 +1,8 @@
 package org.qualitune.evolution.ui.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -12,24 +15,23 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.qualitune.evolution.prolog.registry.IPrologRegistry;
+import org.qualitune.evolution.prolog.registry.PrologUtil;
 
 import alice.tuprolog.MalformedGoalException;
 import alice.tuprolog.NoMoreSolutionException;
 import alice.tuprolog.NoSolutionException;
 import alice.tuprolog.Prolog;
 import alice.tuprolog.SolveInfo;
-import alice.tuprolog.Term;
-import alice.tuprolog.Theory;
 
 public class GetImplicitDependenciesHandler extends AbstractHandler {
 
-	private static final String VAR_SOURCE_ELEMENT		= "SourceElement";
+	//	private static final String VAR_SOURCE_ELEMENT		= "SourceElement";
 	private static final String VAR_TARGET_ELEMENT		= "TargetElement";
 	private static final String VAR_SOURCE_ELEMENT_URI	= "SourceElementUri";
 	private static final String VAR_TARGET_ELEMENT_URI	= "TargetElementUri";
 	private static final String VAR_TARGET_MODEL		= "TargetModel";
 	private static final String VAR_TARGET_MODEL_URI	= "TargetModelUri";
-	
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IStructuredSelection currentSelection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
@@ -40,44 +42,57 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 			ResourceSet rs = new ResourceSetImpl();
 			IPrologRegistry registry = IPrologRegistry.INSTANCE;
 			Prolog engine = registry.getEngine();
-			Theory knowledgeBase = registry.getKnowledgeBase();
-			String query = "implicit(" + registry.makeAtom(uri.toString()) + "," + VAR_SOURCE_ELEMENT + ",_," + VAR_SOURCE_ELEMENT_URI + "," + VAR_TARGET_ELEMENT_URI + ").";
+			String query = "implicit(" + PrologUtil.makeStringAtomic(uri.toString()) + "," + VAR_TARGET_ELEMENT + ",_," + VAR_SOURCE_ELEMENT_URI + "," + VAR_TARGET_ELEMENT_URI + ").";
 			System.out.println(query);
 			try {
-				SolveInfo result = engine.solve(query);
-				while (result.isSuccess()){
-					System.out.println("solution: " + result.getSolution() + " - bindings: " + result);
-					String sourceElementUri = result.getVarValue(VAR_SOURCE_ELEMENT_URI).toString();
-					String targetElementUriString = result.getVarValue(VAR_TARGET_ELEMENT_URI).toString();
-					String targetElementString = result.getVarValue(VAR_TARGET_ELEMENT).toString();
-					String targetModelQuery = "elementtoresourcemapping(" + targetElementString + ", " + VAR_TARGET_MODEL + ").";
-					System.out.println(targetModelQuery);
-					SolveInfo modelResult = engine.solve(targetModelQuery);
-					String targetModel = modelResult.getVarValue(VAR_TARGET_MODEL).toString();
-					String targetModelUriQuery = "uri(" + targetModel + "," + VAR_TARGET_MODEL_URI + ")";
-					System.out.println(targetModelUriQuery);
-					SolveInfo modelUriResult = engine.solve(targetModelUriQuery);
-					String targetModelUriString = modelUriResult.getVarValue(VAR_TARGET_MODEL_URI).toString();
-					URI targetModelUri = URI.createURI(targetModelUriString);
-					Resource resource = rs.getResource(targetModelUri, true);
-					URI targetElementUri = URI.createURI(targetElementUriString);
-					EObject targetElement = rs.getEObject(targetElementUri, true);
-					if (engine.hasOpenAlternatives()){
-						result = engine.solveNext();
-					} else {
-						break;
+				List<SolveInfo> results = solveQuery(engine, query);
+				for (SolveInfo result : results) {
+					if (result.isSuccess()){
+						System.out.println("solution: " + result.getSolution() + " - bindings: " + result);
+						String sourceElementUri = PrologUtil.removeApostrophe(result.getVarValue(VAR_SOURCE_ELEMENT_URI).toString());
+						String targetElementUriString = PrologUtil.removeApostrophe(result.getVarValue(VAR_TARGET_ELEMENT_URI).toString());
+						String targetElementString = result.getVarValue(VAR_TARGET_ELEMENT).toString();
+						String targetModelQuery = "elementtoresourcemapping(" + targetElementString + ", " + VAR_TARGET_MODEL + ").";
+						System.out.println(targetModelQuery);
+						SolveInfo modelResult = engine.solve(targetModelQuery);
+						String targetModel = modelResult.getVarValue(VAR_TARGET_MODEL).toString();
+						String targetModelUriQuery = "uri(" + targetModel + "," + VAR_TARGET_MODEL_URI + ").";
+						System.out.println(targetModelUriQuery);
+						SolveInfo modelUriResult = engine.solve(targetModelUriQuery);
+						String targetModelUriString = PrologUtil.removeApostrophe(modelUriResult.getVarValue(VAR_TARGET_MODEL_URI).toString());
+						URI targetModelUri = URI.createURI(targetModelUriString);
+						Resource resource = rs.getResource(targetModelUri, true);
+						URI targetElementUri = URI.createURI(targetElementUriString);
+						EObject targetElement = rs.getEObject(targetElementUri, true);
+						System.out.println(targetElement);
 					}
-					System.out.println(targetElement);
 				}
 			} catch (MalformedGoalException e) {
 				e.printStackTrace();
 			} catch (NoSolutionException e) {
 				e.printStackTrace();
-			} catch (NoMoreSolutionException e) {
-				e.printStackTrace();
 			}
 		}
 		return null;
+	}
+
+	private List<SolveInfo> solveQuery(Prolog engine, String query) {
+		if(engine == null || query == null){
+			return null;
+		}
+		List<SolveInfo> results = new ArrayList<SolveInfo>();
+		try {
+			SolveInfo result = engine.solve(query);
+			results.add(result);
+			while (engine.hasOpenAlternatives()) {
+				results.add(engine.solveNext());
+			}
+		} catch (MalformedGoalException e) {
+			e.printStackTrace();
+		} catch (NoMoreSolutionException e) {
+			e.printStackTrace();
+		}
+		return results;
 	}
 
 }
