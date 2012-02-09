@@ -15,17 +15,13 @@ import org.qualitune.evolution.prolog.registry.IPrologRegistryExtensionPoint;
 import alice.tuprolog.InvalidTheoryException;
 import alice.tuprolog.Prolog;
 import alice.tuprolog.Theory;
-import alice.tuprolog.TheoryManager;
 
 public class PrologRegistry implements IPrologRegistry {
 
-	private static TheoryManager manager;
 	private static Prolog engine;
 	
 	public PrologRegistry(){
 		engine = new Prolog();
-		manager = new TheoryManager();
-		manager.initialize(engine);
 		initialise();
 	}
 	
@@ -57,7 +53,7 @@ public class PrologRegistry implements IPrologRegistry {
 		Theory theory = null;
 		try {
 			theory = new Theory(knowledgeBase);
-			getKnowledgeBase().append(theory);
+			getEngine().addTheory(theory);
 		} catch (InvalidTheoryException e) {
 			e.printStackTrace();
 		}
@@ -65,26 +61,7 @@ public class PrologRegistry implements IPrologRegistry {
 	}
 
 	@Override
-	public Theory getKnowledgeBase() {
-//		engine.getTheory();
-		return manager.getLastConsultedTheory();
-	}
-
-	@Override
 	public Prolog getEngine() {
 		return engine;
-	}
-	
-	public String makeAtom(String string){
-		String atom = string.replaceAll(":", "_");
-		atom = atom.replaceAll("/", "_");
-		atom = atom.replaceAll("@", "_");
-		atom = atom.replaceAll("\\.", "_");
-		atom = atom.replaceAll("#", "_");
-		atom = atom.toLowerCase();
-		while(atom.indexOf("_") == 0){
-			atom = atom.substring(1);
-		}
-		return atom;
 	}
 }

@@ -15,6 +15,7 @@ import org.qualitune.evolution.prolog.generator.IPrologGenerator;
 import org.qualitune.evolution.prolog.registry.IPrologRegistry;
 
 import alice.tuprolog.InvalidTheoryException;
+import alice.tuprolog.Prolog;
 import alice.tuprolog.Theory;
 
 public class GeneratePrologTheoryHandler extends AbstractHandler {
@@ -30,12 +31,12 @@ public class GeneratePrologTheoryHandler extends AbstractHandler {
 			Resource resource = rs.getResource(uri, true);
 			IPrologRegistry registry = IPrologRegistry.INSTANCE;
 			IPrologGenerator generator = IPrologGenerator.INSTANCE;
-			Theory knowledgeBase = registry.getKnowledgeBase();
+			Prolog engine = registry.getEngine();
 			if(resource != null){
 				for (EObject model : resource.getContents()) {
 					Theory theory = generator.generateTheory(model);
 					try {
-						knowledgeBase.append(theory);
+						engine.addTheory(theory);
 					} catch (InvalidTheoryException e) {
 						e.printStackTrace();
 					} 
