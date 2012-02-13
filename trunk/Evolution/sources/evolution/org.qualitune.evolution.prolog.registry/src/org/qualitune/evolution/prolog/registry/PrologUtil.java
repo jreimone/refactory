@@ -1,5 +1,8 @@
 package org.qualitune.evolution.prolog.registry;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * This class provides useful functionality for working with Prolog.
  * 
@@ -8,21 +11,21 @@ package org.qualitune.evolution.prolog.registry;
  */
 public abstract class PrologUtil {
 
+	private static final String	REPLACEMENT	= "_";
+	private static final Pattern validChar = Pattern.compile("[^a-z0-9" + REPLACEMENT + "]");
+	
 	/**
-	 * Produces a valid Prolog atom for the given <code>st5ring</code>. Usually all invalid characters
+	 * Produces a valid Prolog atom for the given <code>string</code>. Usually all invalid characters
 	 * are replaced with an underscore.
 	 * 
 	 * @param string
 	 * @return
 	 */
 	public static String makeStringAtomic(String string){
-		String atom = string.replaceAll(":", "_");
-		atom = atom.replaceAll("/", "_");
-		atom = atom.replaceAll("@", "_");
-		atom = atom.replaceAll("\\.", "_");
-		atom = atom.replaceAll("#", "_");
-		atom = atom.toLowerCase();
-		while(atom.indexOf("_") == 0){
+		String atom = string.toLowerCase();
+		Matcher matcher = validChar.matcher(atom);
+		atom = matcher.replaceAll(REPLACEMENT);
+		while(atom.indexOf(REPLACEMENT) == 0){
 			atom = atom.substring(1);
 		}
 		return atom;
