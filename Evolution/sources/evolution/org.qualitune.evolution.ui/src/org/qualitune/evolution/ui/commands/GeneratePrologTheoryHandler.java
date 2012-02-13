@@ -27,6 +27,9 @@ public class GeneratePrologTheoryHandler extends AbstractHandler {
 		if(firstElement instanceof IFile){
 			IFile file = (IFile) firstElement;
 			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			if(!uri.isPlatformResource()){
+				uri = URI.createPlatformResourceURI(uri.toString(), true);
+			}
 			ResourceSet rs = new ResourceSetImpl();
 			Resource resource = rs.getResource(uri, true);
 			IPrologRegistry registry = IPrologRegistry.INSTANCE;

@@ -9,7 +9,6 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -39,6 +38,9 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 		if(firstElement instanceof IFile){
 			IFile file = (IFile) firstElement;
 			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			if(!uri.isPlatformResource()){
+				uri = URI.createPlatformResourceURI(uri.toString(), true);
+			}
 			ResourceSet rs = new ResourceSetImpl();
 			IPrologRegistry registry = IPrologRegistry.INSTANCE;
 			Prolog engine = registry.getEngine();
@@ -48,20 +50,16 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 				List<SolveInfo> results = solveQuery(engine, query);
 				for (SolveInfo result : results) {
 					if (result.isSuccess()){
-						System.out.println("solution: " + result.getSolution() + " - bindings: " + result);
-						String sourceElementUri = PrologUtil.removeApostrophe(result.getVarValue(VAR_SOURCE_ELEMENT_URI).toString());
 						String targetElementUriString = PrologUtil.removeApostrophe(result.getVarValue(VAR_TARGET_ELEMENT_URI).toString());
 						String targetElementString = result.getVarValue(VAR_TARGET_ELEMENT).toString();
 						String targetModelQuery = "elementtoresourcemapping(" + targetElementString + ", " + VAR_TARGET_MODEL + ").";
-						System.out.println(targetModelQuery);
 						SolveInfo modelResult = engine.solve(targetModelQuery);
 						String targetModel = modelResult.getVarValue(VAR_TARGET_MODEL).toString();
 						String targetModelUriQuery = "uri(" + targetModel + "," + VAR_TARGET_MODEL_URI + ").";
-						System.out.println(targetModelUriQuery);
 						SolveInfo modelUriResult = engine.solve(targetModelUriQuery);
 						String targetModelUriString = PrologUtil.removeApostrophe(modelUriResult.getVarValue(VAR_TARGET_MODEL_URI).toString());
 						URI targetModelUri = URI.createURI(targetModelUriString);
-						Resource resource = rs.getResource(targetModelUri, true);
+						rs.getResource(targetModelUri, true);
 						URI targetElementUri = URI.createURI(targetElementUriString);
 						EObject targetElement = rs.getEObject(targetElementUri, true);
 						System.out.println(targetElement);
