@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Implicit mapping dependencies as Prolog rules
+Bundle-SymbolicName: org.qualitune.evolution.prolog.mappingdependencies;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.qualitune.evolution.prolog.mappingdependencies.Activator
+Bundle-Vendor: www.qualitune.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.qualitune.evolution.prolog.registry
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
