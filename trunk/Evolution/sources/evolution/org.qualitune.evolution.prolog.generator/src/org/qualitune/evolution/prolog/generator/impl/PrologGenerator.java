@@ -35,24 +35,24 @@ public class PrologGenerator implements IPrologGenerator {
 				for (EObject referencedElement : referencedElements) {
 					Resource otherResource = referencedElement.eResource();
 					if(!otherResource.equals(modelResource)){
-						URI uriElement = getPlatformURI(EcoreUtil.getURI(element));
+						URI uriElement = PrologUtil.getConsistentURI(EcoreUtil.getURI(element));
 						URI uriReference = EcoreUtil.getURI(reference);
-						URI uriReferencedElement = getPlatformURI( EcoreUtil.getURI(referencedElement));
+						URI uriReferencedElement = PrologUtil.getConsistentURI( EcoreUtil.getURI(referencedElement));
 						String atomElement = PrologUtil.makeStringAtomic(uriElement.toString());
 						String atomReference = PrologUtil.makeStringAtomic(uriReference.toString());
 						String atomReferencedElement = PrologUtil.makeStringAtomic(uriReferencedElement.toString());
 						buffer.append(PRED_EXPLICIT + "(" + atomElement+ ", " + atomReference + ", " + atomReferencedElement + ").\n");
-						buffer.append(PRED_URI + "(" + atomElement + ", '" + uriElement.toString() + "') :- !.\n");
-						buffer.append(PRED_URI + "(" + atomReference + ", '" + uriReference.toString() + "') :- !.\n");
-						buffer.append(PRED_URI + "(" + atomReferencedElement + ", '" + uriReferencedElement.toString() + "') :- !.\n");
-						URI modelResourceUri = getPlatformURI(modelResource.getURI());
-						URI otherResourceUri = getPlatformURI(otherResource.getURI());
+						buffer.append(PRED_URI + "(" + atomElement + ", '" + PrologUtil.escapeCharacters(uriElement) + "') :- !.\n");
+						buffer.append(PRED_URI + "(" + atomReference + ", '" + PrologUtil.escapeCharacters(uriReference) + "') :- !.\n");
+						buffer.append(PRED_URI + "(" + atomReferencedElement + ", '" + PrologUtil.escapeCharacters(uriReferencedElement) + "') :- !.\n");
+						URI modelResourceUri = PrologUtil.getConsistentURI(modelResource.getURI());
+						URI otherResourceUri = PrologUtil.getConsistentURI(otherResource.getURI());
 						String atomSourceModelURI = PrologUtil.makeStringAtomic(modelResourceUri.toString());
 						String atomTargetModelURI = PrologUtil.makeStringAtomic(otherResourceUri.toString());
 						buffer.append(PRED_ELEMENT2RESOURCE + "(" + atomElement + ", " + atomSourceModelURI + ").\n");
 						buffer.append(PRED_ELEMENT2RESOURCE + "(" + atomReferencedElement + ", " + atomTargetModelURI + ").\n");
-						buffer.append(PRED_URI + "(" + atomSourceModelURI + ", '" + modelResourceUri.toString() + "') :- !.\n");
-						buffer.append(PRED_URI + "(" + atomTargetModelURI + ", '" + otherResourceUri.toString() + "') :- !.\n");
+						buffer.append(PRED_URI + "(" + atomSourceModelURI + ", '" + PrologUtil.escapeCharacters(modelResourceUri) + "') :- !.\n");
+						buffer.append(PRED_URI + "(" + atomTargetModelURI + ", '" + PrologUtil.escapeCharacters(otherResourceUri) + "') :- !.\n");
 						buffer.append("\n");
 					}
 				}
@@ -66,13 +66,6 @@ public class PrologGenerator implements IPrologGenerator {
 			e.printStackTrace();
 		}
 		return theory;
-	}
-
-	private URI getPlatformURI(URI uri) {
-		if(!uri.isPlatformResource()){
-			uri = URI.createPlatformResourceURI(uri.toString(), true);
-		}
-		return uri;
 	}
 
 	private List<EReference> getAllReferences(EObject element){

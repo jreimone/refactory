@@ -54,6 +54,7 @@ public class PrologRegistry implements IPrologRegistry {
 		try {
 			theory = new Theory(knowledgeBase);
 			getEngine().addTheory(theory);
+			System.out.println("added Theory:\n" + knowledgeBase);
 		} catch (InvalidTheoryException e) {
 			e.printStackTrace();
 		}
