@@ -50,14 +50,17 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 				List<SolveInfo> results = solveQuery(engine, query);
 				for (SolveInfo result : results) {
 					if (result.isSuccess()){
-						String targetElementUriString = PrologUtil.removeApostrophe(result.getVarValue(VAR_TARGET_ELEMENT_URI).toString());
+//						String sourceElementUriString = PrologUtil.unescapeCharacters(PrologUtil.removeApostrophe(result.getVarValue(VAR_SOURCE_ELEMENT_URI).toString()));
+						String targetElementUriString = PrologUtil.unescapeCharacters(PrologUtil.removeApostrophe(result.getVarValue(VAR_TARGET_ELEMENT_URI).toString()));
 						String targetElementString = result.getVarValue(VAR_TARGET_ELEMENT).toString();
 						String targetModelQuery = "elementtoresourcemapping(" + targetElementString + ", " + VAR_TARGET_MODEL + ").";
+						System.out.println(targetModelQuery);
 						SolveInfo modelResult = engine.solve(targetModelQuery);
 						String targetModel = modelResult.getVarValue(VAR_TARGET_MODEL).toString();
 						String targetModelUriQuery = "uri(" + targetModel + "," + VAR_TARGET_MODEL_URI + ").";
+						System.out.println(targetModelUriQuery);
 						SolveInfo modelUriResult = engine.solve(targetModelUriQuery);
-						String targetModelUriString = PrologUtil.removeApostrophe(modelUriResult.getVarValue(VAR_TARGET_MODEL_URI).toString());
+						String targetModelUriString = PrologUtil.unescapeCharacters(PrologUtil.removeApostrophe(modelUriResult.getVarValue(VAR_TARGET_MODEL_URI).toString()));
 						URI targetModelUri = URI.createURI(targetModelUriString);
 						rs.getResource(targetModelUri, true);
 						URI targetElementUri = URI.createURI(targetElementUriString);

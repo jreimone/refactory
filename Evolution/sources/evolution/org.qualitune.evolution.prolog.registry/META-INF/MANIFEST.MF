@@ -6,7 +6,8 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.qualitune.evolution.prolog.registry.Activator
 Bundle-Vendor: qualitune.org
 Require-Bundle: org.eclipse.core.runtime,
- org.qualitune.tuprolog
+ org.qualitune.tuprolog,
+ org.eclipse.emf.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.qualitune.evolution.prolog.registry
