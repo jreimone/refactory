@@ -54,7 +54,7 @@ public abstract class PrologUtil {
 	 * @return
 	 */
 	public static URI getConsistentURI(URI uri) {
-		if(!uri.isPlatformResource() && !uri.isPlatformPlugin()){
+		if(!uri.isPlatformResource() && !uri.isPlatformPlugin() && !uri.hasAuthority()){
 			uri = URI.createPlatformResourceURI(uri.toString(), true);
 		}
 		return uri;

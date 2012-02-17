@@ -27,5 +27,5 @@ public interface IPrologGenerator {
 	 * @param model the model to generate the fact base for
 	 * @return the {@link Theory} containing the fact base for the given <code>model</code>
 	 */
-	public Theory generateTheory(EObject model);
+	public void generateTheoryAndAddToKnowledgebase(EObject model);
 }
