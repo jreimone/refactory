@@ -1,7 +1,11 @@
 package org.qualitune.evolution.ui.commands;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -9,12 +13,17 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.qualitune.evolution.prolog.registry.IPrologRegistry;
 import org.qualitune.evolution.prolog.registry.PrologUtil;
+import org.qualitune.evolution.ui.views.ImplicitDependencyView;
 
 import alice.tuprolog.MalformedGoalException;
 import alice.tuprolog.NoMoreSolutionException;
@@ -30,9 +39,12 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 	private static final String VAR_TARGET_ELEMENT_URI	= "TargetElementUri";
 	private static final String VAR_TARGET_MODEL		= "TargetModel";
 	private static final String VAR_TARGET_MODEL_URI	= "TargetModelUri";
+	
+	private Map<EObject, Set<EObject>> modelChildrenMap;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		modelChildrenMap = new HashMap<EObject, Set<EObject>>();
 		IStructuredSelection currentSelection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
 		Object firstElement = currentSelection.getFirstElement();
 		if(firstElement instanceof IFile){
@@ -48,7 +60,7 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 			System.out.println(query);
 			try {
 				List<SolveInfo> results = solveQuery(engine, query);
-				for (SolveInfo result : results) {
+				for (SolveInfo result : PrologUtil.removeDuplicates(results)) {
 					if (result.isSuccess()){
 //						String sourceElementUriString = PrologUtil.unescapeCharacters(PrologUtil.removeApostrophe(result.getVarValue(VAR_SOURCE_ELEMENT_URI).toString()));
 						String targetElementUriString = PrologUtil.unescapeCharacters(PrologUtil.removeApostrophe(result.getVarValue(VAR_TARGET_ELEMENT_URI).toString()));
@@ -65,16 +77,34 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 						rs.getResource(targetModelUri, true);
 						URI targetElementUri = URI.createURI(targetElementUriString);
 						EObject targetElement = rs.getEObject(targetElementUri, true);
-						System.out.println(targetElement);
+						addToMap(targetElement);
 					}
 				}
+				ImplicitDependencyView view = (ImplicitDependencyView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ImplicitDependencyView.ID);
+				Resource resource = rs.getResource(uri, true);
+				view.updateModel(modelChildrenMap, resource);
 			} catch (MalformedGoalException e) {
 				e.printStackTrace();
 			} catch (NoSolutionException e) {
 				e.printStackTrace();
+			} catch (PartInitException e) {
+				e.printStackTrace();
 			}
 		}
 		return null;
+	}
+
+	private void addToMap(EObject targetElement) {
+		EObject model = EcoreUtil.getRootContainer(targetElement, true);
+		if(model == null){
+			model = targetElement;
+		}
+		Set<EObject> children = modelChildrenMap.get(model);
+		if(children == null){
+			children = new HashSet<EObject>();
+			modelChildrenMap.put(model, children);
+		}
+		children.add(targetElement);
 	}
 
 	private List<SolveInfo> solveQuery(Prolog engine, String query) {

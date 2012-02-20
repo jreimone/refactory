@@ -11,6 +11,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore,
  org.qualitune.evolution.prolog.generator,
  org.qualitune.tuprolog,
- org.qualitune.evolution.prolog.registry
+ org.qualitune.evolution.prolog.registry,
+ org.eclipse.emf.edit,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

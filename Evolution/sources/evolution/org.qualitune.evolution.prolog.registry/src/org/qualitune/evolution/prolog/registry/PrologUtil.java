@@ -1,6 +1,9 @@
 package org.qualitune.evolution.prolog.registry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -9,8 +12,12 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 
+import alice.tuprolog.NoSolutionException;
+import alice.tuprolog.SolveInfo;
+import alice.tuprolog.Term;
+
 /**
- * This class provides useful functionality for working with Prolog.
+ * This class provides useful means for working with Prolog.
  * 
  * @author jreimann
  *
@@ -104,5 +111,32 @@ public abstract class PrologUtil {
 			newString = newString.substring(0, newString.length() - 1);
 		}
 		return newString;
+	}
+	
+	/**
+	 * This method removes duplicates in the given <code>redundantList</code>.
+	 * @param redundantList
+	 * @return
+	 */
+	public static List<SolveInfo> removeDuplicates(List<SolveInfo> redundantList){
+		List<SolveInfo> result = new ArrayList<SolveInfo>();
+		Set<String> uniques = new HashSet<String>();
+		for (SolveInfo solveInfo : redundantList) {
+			try {
+				Term solution = solveInfo.getSolution();
+				String string = solution.toString();
+				if(uniques.add(string)){
+					result.add(solveInfo);
+				}
+			} catch (NoSolutionException e) {
+//				BundleContext context = Activator.getContext();
+//				Bundle bundle = context.getBundle();
+//				ILog log = Platform.getLog(bundle);
+//				String symbolicName = bundle.getSymbolicName();
+//				log.log(new Status(IStatus.INFO, symbolicName, "No solutions"));
+				// just display nothing
+			}
+		}
+		return result;
 	}
 }
