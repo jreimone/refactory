@@ -1,8 +1,14 @@
+implicitModelDependency(SourceModel,TargetModel,SourceUri,TargetUri) :-
+        elementtoresourcemapping(TargetElement,TargetModel),
+        implicit(SourceModel,TargetElement,_,_,_),
+        uri(SourceModel,SourceUri),
+        uri(TargetModel,TargetUri).
+
 % implicit dependencies through inverse references
 implicit(SourceModel,TargetElement,Reference,SourceElementUri,TargetElementUri) :-
         elementtoresourcemapping(SourceElement,SourceModel),
         inverseReference(SourceElement,TargetElement,Reference,SourceElementUri,TargetElementUri).
-        
+
 implicit(SourceElement,TargetModel,Reference,SourceElementUri,TargetElementUri) :-
         elementtoresourcemapping(TargetElement,TargetModel),
         inverseReference(SourceElement,TargetElement,Reference,SourceElementUri,TargetElementUri).
@@ -16,6 +22,7 @@ inverseReference(SourceElement,TargetElement,Reference,SourceElementUri,TargetEl
         uri(TargetElement,TargetElementUri),
         uri(SourceElement,SourceElementUri),
         uri(Reference,_).
+
 
 % implicit dependencies by encoding them into a mapping model
 implicit(SourceModel,TargetElement,_,SourceElementUri,TargetElementUri) :-
@@ -49,6 +56,7 @@ mappingDependency(SourceElement,TargetElement,SourceElementUri,TargetElementUri)
         ,write('right: '),write(MappingElementRight),nl
         ,nl
         ,!.
+
 
 explicit(platform__resource_org_emftext_language_pl0_refactoring_rolemappings_renamings_rolemapping____mappings_0, http___www_emftext_org_language_rolemapping___rolemapping_mappedrolemodel, platform__resource_org_emftext_refactoring_renamex_rolemodel_renamex_rolestext__).
 uri(platform__resource_org_emftext_language_pl0_refactoring_rolemappings_renamings_rolemapping____mappings_0, 'platform:/resource/org.emftext.language.pl0.refactoring/rolemappings/renamings.rolemapping#//@mappings.0').
