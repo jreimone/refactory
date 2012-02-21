@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Registry for knowledge bases
+Bundle-SymbolicName: org.qualitune.evolution.registry;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.qualitune.evolution.registry.Activator
+Bundle-Vendor: www.qualitune.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.qualitune.evolution.registry
