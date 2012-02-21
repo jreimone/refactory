@@ -1,7 +1,7 @@
 package org.qualitune.evolution.ui.views;
 
+import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -58,7 +58,7 @@ public class ImplicitDependencyView extends ViewPart {
 		public Image getColumnImage(Object element, int columnIndex) {
 			if(element instanceof EObject){
 				EObject modelElement = (EObject) element;
-				Set<EObject> children = modelChildrenMap.get(modelElement);
+				Collection<EObject> children = modelChildrenMap.get(modelElement);
 				if(children != null && columnIndex == 0){ // column 1
 					return labelProvider.getImage(element);
 				}
@@ -73,7 +73,7 @@ public class ImplicitDependencyView extends ViewPart {
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof EObject){
 				EObject modelElement = (EObject) element;
-				Set<EObject> children = modelChildrenMap.get(modelElement);
+				Collection<EObject> children = modelChildrenMap.get(modelElement);
 				if(children != null && columnIndex == 0){ // column 1
 					return labelProvider.getText(element);
 				}
@@ -107,7 +107,7 @@ public class ImplicitDependencyView extends ViewPart {
 		public Object[] getChildren(Object parentElement) {
 			if(parentElement instanceof EObject){
 				EObject model = (EObject) parentElement;
-				Set<EObject> children = modelChildrenMap.get(model);
+				Collection<EObject> children = modelChildrenMap.get(model);
 				if(children != null){
 					return children.toArray(new EObject[]{});
 				}
@@ -118,7 +118,7 @@ public class ImplicitDependencyView extends ViewPart {
 		public Object getParent(Object element) {
 			if(element instanceof EObject){
 				EObject model = (EObject) element;
-				Set<EObject> children = modelChildrenMap.get(model);
+				Collection<EObject> children = modelChildrenMap.get(model);
 				if(children != null){
 					return model;
 				} 
@@ -136,7 +136,7 @@ public class ImplicitDependencyView extends ViewPart {
 	private CLabel label;
 	private static AdapterFactoryLabelProvider labelProvider;
 	private TreeViewer treeViewer;
-	private Map<EObject, Set<EObject>> modelChildrenMap;
+	private Map<EObject, Collection<EObject>> modelChildrenMap;
 
 	public ImplicitDependencyView() {
 		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
@@ -176,23 +176,24 @@ public class ImplicitDependencyView extends ViewPart {
 			TreeColumnLayout tcl_treeComposite = new TreeColumnLayout();
 			treeComposite.setLayout(tcl_treeComposite);
 			{
-				treeViewer = new TreeViewer(treeComposite, SWT.BORDER);
+				treeViewer = new TreeViewer(treeComposite, SWT.BORDER | SWT.FULL_SELECTION);
 				Tree tree = treeViewer.getTree();
 				tree.setHeaderVisible(true);
 				tree.setLinesVisible(true);
 				{
 					TreeColumn trclmnDependentModel = new TreeColumn(tree, SWT.NONE);
-					tcl_treeComposite.setColumnData(trclmnDependentModel, new ColumnPixelData(200, true, true));
+					tcl_treeComposite.setColumnData(trclmnDependentModel, new ColumnPixelData(250, true, true));
 					trclmnDependentModel.setText("Dependent Model");
 				}
 				{
 					TreeColumn trclmnDependentElement = new TreeColumn(tree, SWT.NONE);
-					tcl_treeComposite.setColumnData(trclmnDependentElement, new ColumnPixelData(300, true, true));
+					tcl_treeComposite.setColumnData(trclmnDependentElement, new ColumnPixelData(350, true, true));
 					trclmnDependentElement.setText("Dependent Element");
 				}
 				treeViewer.setLabelProvider(new ViewerLabelProvider());
 				contentProvider = new TreeContentProvider();
 				treeViewer.setContentProvider(contentProvider);
+				treeViewer.expandAll();
 			}
 		}
 
@@ -227,12 +228,13 @@ public class ImplicitDependencyView extends ViewPart {
 		// Set the focus
 	}
 
-	public void updateModel(Map<EObject, Set<EObject>> modelChildrenMap, Resource resource) {
+	public void updateModel(Map<EObject, Collection<EObject>> modelChildrenMap, Resource resource) {
 		this.modelChildrenMap = modelChildrenMap;
 		label.setText(labelProvider.getText(resource));
 		label.setImage(labelProvider.getImage(resource));
 		treeViewer.setInput(modelChildrenMap);
 		treeViewer.refresh(true);
+		treeViewer.expandAll();
 	}
 
 }

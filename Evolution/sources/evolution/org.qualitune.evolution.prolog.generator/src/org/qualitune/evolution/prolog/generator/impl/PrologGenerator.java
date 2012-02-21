@@ -82,6 +82,7 @@ public class PrologGenerator implements IPrologGenerator {
 		try {
 			for (String string : clauseList) {
 				String clause = string.trim();
+				@SuppressWarnings("unused")
 				SolveInfo result = engine.solve("retractall(" + clause + ").");
 				buffer.append(clause + ".\n");
 			}
