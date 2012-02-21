@@ -15,7 +15,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.qualitune.evolution.registry.IKnowledgeBaseRegistry;
 import org.qualitune.evolution.registry.KnowledgeBase;
 
-public class GeneratePrologTheoryHandler extends AbstractHandler {
+public class GenerateKnowledgeHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {

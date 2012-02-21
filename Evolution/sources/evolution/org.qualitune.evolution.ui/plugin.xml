@@ -21,7 +21,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.qualitune.evolution.ui.commands.GeneratePrologTheoryHandler"
+            class="org.qualitune.evolution.ui.commands.GenerateKnowledgeHandler"
             commandId="org.qualitune.evolution.ui.prologgeneration.command">
       </handler>
       <handler

@@ -42,7 +42,9 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 				List<KnowledgeBase> knowledgeBases = registry.getKnowledgeBases();
 				for (KnowledgeBase knowledgeBase : knowledgeBases) {
 					Map<EObject, Collection<EObject>> dependencies = knowledgeBase.getDependencies(uri, rs);
-					modelChildrenMap.putAll(dependencies);
+					if(dependencies != null){
+						modelChildrenMap.putAll(dependencies);
+					}
 				}
 				ImplicitDependencyView view = (ImplicitDependencyView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(ImplicitDependencyView.ID);
 				Resource resource = rs.getResource(uri, true);
