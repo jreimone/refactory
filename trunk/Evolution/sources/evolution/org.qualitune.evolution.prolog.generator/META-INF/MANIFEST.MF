@@ -1,14 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generator for Prolog fact base
-Bundle-SymbolicName: org.qualitune.evolution.prolog.generator
+Bundle-SymbolicName: org.qualitune.evolution.prolog.generator;singleton:=true
 Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: org.qualitune.evolution.prolog.generator.PrologGeneratorPlugin
 Bundle-Vendor: qualitune.org
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.qualitune.tuprolog,
- org.qualitune.evolution.prolog.registry
+ org.qualitune.evolution.prolog.registry,
+ org.qualitune.evolution.registry
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.qualitune.evolution.prolog.generator
