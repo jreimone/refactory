@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: guery
+Bundle-SymbolicName: org.qualitune.guery.resource.guery;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime,
+  org.eclipse.emf,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation,
+  org.emftext.access;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
+  org.qualitune.guery
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.qualitune.guery.resource.guery,
+  org.qualitune.guery.resource.guery.analysis,
+  org.qualitune.guery.resource.guery.mopp,
+  org.qualitune.guery.resource.guery.debug,
+  org.qualitune.guery.resource.guery.launch,
+  org.qualitune.guery.resource.guery.grammar,
+  org.qualitune.guery.resource.guery.util
+Bundle-Activator: org.qualitune.guery.resource.guery.mopp.GueryPlugin
