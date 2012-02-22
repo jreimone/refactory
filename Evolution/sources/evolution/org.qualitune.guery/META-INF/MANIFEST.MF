@@ -1,9 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: GUERY Wrapper plugin
-Bundle-SymbolicName: org.qualitune.guery
-Bundle-Version: 1.0.0
-Bundle-Vendor: www.qualitune.org
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.qualitune.guery;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .,
+ libs/collections-generic-4.01.jar,
+ libs/guery-api-1.3.3.jar,
+ libs/guery-impl-1.3.3.jar,
+ libs/jung-api-2.0.jar,
+ libs/jung-graph-impl-2.0.jar
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: edu.uci.ics.jung.graph,
  edu.uci.ics.jung.graph.event,
  edu.uci.ics.jung.graph.util,
@@ -27,10 +35,10 @@ Export-Package: edu.uci.ics.jung.graph,
  org.apache.commons.collections15.list,
  org.apache.commons.collections15.map,
  org.apache.commons.collections15.multimap,
- org.apache.commons.collections15.set
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-ClassPath: libs/collections-generic-4.01.jar,
- libs/guery-api-1.3.3.jar,
- libs/guery-impl-1.3.3.jar,
- libs/jung-api-2.0.jar,
- libs/jung-graph-impl-2.0.jar
+ org.apache.commons.collections15.set,
+ org.qualitune.guery,
+ org.qualitune.guery.impl,
+ org.qualitune.guery.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy
