@@ -14,18 +14,15 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-//import org.emftext.language.refactoring.refactoring_specification.Variable;
-//import org.emftext.language.refactoring.refactoring_specification.Instruction;
-
 // import of other EClasses
 import roles.Role;
 eclass RefactoringSpecification { 
 	getDeclaredVariables ( ) { 
-			org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Variable > variables = new org.eclipse.emf.common.util.BasicEList < org.emftext.language.refactoring.refactoring_specification.Variable > ( ) ; 
-			org.eclipse.emf.common.util.EList < org.emftext.language.refactoring.refactoring_specification.Instruction > instructions = getInstructions ( ) ; 
-			for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction : instructions ) { 
-				if ( instruction instanceof org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) { 
-					org.emftext.language.refactoring.refactoring_specification.Variable var = ( ( org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) instruction ) .getVariable ( ) ; 
+			org.eclipse.emf.common.util.EList <Variable> variables = new org.eclipse.emf.common.util.BasicEList <Variable> ( ) ; 
+			org.eclipse.emf.common.util.EList <Instruction> instructions = getInstructions ( ) ; 
+			for ( Instruction instruction : instructions ) { 
+				if ( instruction instanceof VariableDeclarationCommand ) { 
+					Variable var = ( ( VariableDeclarationCommand ) instruction ) .getVariable ( ) ; 
 					if ( var != null ) { 
 						variables .add ( var ) ; 
 					} 
@@ -47,14 +44,14 @@ eclass RefactoringSpecification {
 		Set<Instruction> instructions = new LinkedHashSet<Instruction>();
 		List<Instruction> usedInstructions = getInstructions();
 		for (Instruction instruction : usedInstructions) {
-			boolean isReferencingObject = isRoleReferencedByObject(referencedRole, instruction);
+			boolean isReferencingObject = isRoleReferencedByObject(referencedRole, (EObject) instruction);
 			if(isReferencingObject){
 				instructions.add(instruction);
 			}
 			TreeIterator<EObject> iterator = EcoreUtil.getAllContents(instruction, true);
 			while (iterator.hasNext()) {
 				EObject eObject = (EObject) iterator.next();
-				isReferencingObject = isRoleReferencedByObject(referencedRole, eObject);
+				isReferencingObject = isRoleReferencedByObject(referencedRole, (EObject) eObject);
 				if(isReferencingObject){
 					instructions.add(instruction);
 				}
@@ -64,13 +61,13 @@ eclass RefactoringSpecification {
 	}
 	
 	isRoleReferencedByObject() {
-		EClass metaclass = eObject.eClass();
+		EClass metaclass =((EObject) eObject).eClass();
 		List<EReference> references = metaclass.getEAllReferences();
 		for (EReference reference : references) {
 			if(!reference.isContainment()){
 				EClassifier classifier = reference.getEType();
 				if(classifier.isInstance(referencedRole)){
-					Object value = eObject.eGet(reference);
+					Object value = ((EObject) eObject).eGet(reference);
 					if(value instanceof Role){
 						if(((Role) value).equals(referencedRole)){
 							return true;
