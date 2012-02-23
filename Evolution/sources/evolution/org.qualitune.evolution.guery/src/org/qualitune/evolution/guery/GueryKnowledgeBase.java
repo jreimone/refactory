@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -13,19 +12,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.qualitune.evolution.guery.graph.ClusteredDirectedSparseMultiGraph;
+import org.qualitune.evolution.guery.graph.EObjectVertex;
+import org.qualitune.evolution.guery.graph.EReferenceEdge;
+import org.qualitune.evolution.guery.graph.ExternalEdge;
+import org.qualitune.evolution.guery.graph.InternalEdge;
 import org.qualitune.evolution.registry.KnowledgeBase;
 
-import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
-import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 public class GueryKnowledgeBase implements KnowledgeBase {
 
-	private static final String SEPARATOR	= "-->";
-	
-	private static List<Graph<EObject, String>> graphs = new ArrayList<Graph<EObject,String>>();
-
+	private ClusteredDirectedSparseMultiGraph<EObjectVertex<Resource>, EReferenceEdge, Resource> graph = new ClusteredDirectedSparseMultiGraph<EObjectVertex<Resource>, EReferenceEdge, Resource>();
 	private Resource resource;
 
 	@Override
@@ -38,45 +36,54 @@ public class GueryKnowledgeBase implements KnowledgeBase {
 		this.resource = resource;
 		List<EObject> contents = resource.getContents();
 		for (EObject model : contents) {
-			Graph<EObject, String> graph = new DirectedSparseMultigraph<EObject, String>();
-			graphs.add(graph);
-			graph.addVertex(model);
+			EObjectVertex<Resource> vertex = new EObjectVertex<Resource>(model);
+			graph.addVertex(vertex);
+			graph.annotateWithCluster(vertex, resource);
 			TreeIterator<EObject> treeIterator = model.eAllContents();
 			while (treeIterator.hasNext()) {
-				EObject element = (EObject) treeIterator.next();
-				addNode(graph, element);
+				EObject element = treeIterator.next();
+				EObjectVertex<Resource> elementVertex = new EObjectVertex<Resource>(element);
+				addNode(graph, elementVertex);
 			}
 		}
 	}
 
-	private void addNode(Graph<EObject, String> graph, EObject element) {
-		if(!graph.containsVertex(element)){
-			graph.addVertex(element);
+	private void addNode(ClusteredDirectedSparseMultiGraph<EObjectVertex<Resource>, EReferenceEdge, Resource> graph, EObjectVertex<Resource> elementVertex) {
+		if(!graph.containsVertex(elementVertex)){
+			graph.addVertex(elementVertex);
+			EObject element = elementVertex.getModelElement();
 			EObject container = element.eContainer();
+			EObjectVertex<Resource> containerVertex = new EObjectVertex<Resource>(container);
 			EdgeType edgeType = EdgeType.DIRECTED;
-			URI elementUri = EcoreUtil.getURI(element);
-			String edge = elementUri.toString();
-			if(!graph.containsVertex(container)){
-				addNode(graph, container);
+			EReference containmentFeature = element.eContainmentFeature();
+			assert container.eGet(containmentFeature, true).equals(element);
+			InternalEdge edge = new InternalEdge(containmentFeature);
+			if(!graph.containsVertex(containerVertex)){
+				addNode(graph, containerVertex);
 			}
-			graph.addEdge(edge, container, element, edgeType);
+			edge.setStart(containerVertex);
+			edge.setEnd(elementVertex);
+			graph.addEdge(edge, containerVertex, elementVertex, edgeType);
 			List<EReference> references = getAllReferences(element);
 			for (EReference reference : references) {
 				List<EObject> referencedElements = getReferencedElements(reference, element);
-				String name = reference.getName();
 				for (EObject referencedElement : referencedElements) {
-					if(!graph.containsVertex(referencedElement)){
+					EObjectVertex<Resource> referencedElementVertex = new EObjectVertex<Resource>(referencedElement);
+					EReferenceEdge newEdge = new InternalEdge(reference);
+					if(!graph.containsVertex(referencedElementVertex)){
 						Resource otherResource = referencedElement.eResource();
 						if(!otherResource.equals(resource)){
-							graph.addVertex(referencedElement);
+							graph.addVertex(referencedElementVertex);
+							newEdge = new ExternalEdge(reference);
 						} else {
-							addNode(graph, referencedElement);
+							addNode(graph, referencedElementVertex);
 						}
 					}
-					int index = referencedElements.indexOf(referencedElement);
-					String preEdge = graph.findEdge(container, element);
-					String newEdge = preEdge + SEPARATOR + name + "[" + index + "]";
-					graph.addEdge(newEdge, element, referencedElement, edgeType);
+					if(graph.findEdge(elementVertex, referencedElementVertex) == null){
+						newEdge.setStart(elementVertex);
+						newEdge.setEnd(referencedElementVertex);
+						graph.addEdge(newEdge, elementVertex, referencedElementVertex, edgeType);
+					}
 				}
 			}
 		}
