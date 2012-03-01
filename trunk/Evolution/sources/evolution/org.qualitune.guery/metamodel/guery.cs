@@ -9,6 +9,7 @@ OPTIONS {
 	editorName = "GUERY Motif Editor";
 	disableDebugSupport = "true";
 	disableLaunchSupport = "true";
+	overrideProposalPostProcessor = "false";
 }
 
 
@@ -36,17 +37,17 @@ RULES {
 				edgeSelections*
 				groupBy*;
 	
-	PreProcessor ::= !0 "prepare" "with" className[CLASSNAME];
+	PreProcessor ::= !0 "prepare with" className[CLASSNAME];
 	
-	VertexSelection ::= !0 "select" roles ("," roles)* constraint?;
+	VertexSelection ::= !0 "select" roles ("," roles)* (!0 "where" constraints ("and" constraints)*)?;
 	
 	Role ::= name[IDENTIFIER];
 	
-	Constraint ::= !0 "where" expressions['"','"'] ("and" expressions['"','"'])*;
+	Constraint ::= expression['"','"'];
 	
-	ConnectedBy ::= !0 "connected" "by" connections ("and" connections)* constraint?;
+	ConnectedBy ::= !0 "connected by" connections ("and" connections)* (!0 "where" constraints ("and" constraints)*)?;
 	
-	NotConnectedBy ::= !0 "not" "connected" "by"  connections ("and" connections)* constraint?;
+	NotConnectedBy ::= !0 "not connected by"  connections ("and" connections)* (!0 "where" constraints ("and" constraints)*)?;
 	
 	Connection ::= path[IDENTIFIER] "(" from[IDENTIFIER] ">" to[IDENTIFIER] ")" 
 						("["minLength[CARDINALITY] "," maxLength[CARDINALITY] "]")? 
@@ -54,5 +55,5 @@ RULES {
 	
 
 	
-	Grouping ::= !0 "group" "by" expressions['"','"'] ("and" expressions['"','"'])*;
+	Grouping ::= !0 "group by" constraints ("and" constraints)*;
 }

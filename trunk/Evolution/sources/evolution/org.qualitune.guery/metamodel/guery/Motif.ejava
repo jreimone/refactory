@@ -1,0 +1,42 @@
+epackage guery;
+
+import org.eclipse.emf.ecore.EObject ;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.BasicEMap;
+
+eclass Motif{
+
+	/**
+	Returns all contained Constrainables of this motif.
+	**/
+	getConstrainables(){
+		EList<Constrainable> constrainables = new BasicEList<Constrainable>();
+		constrainables.addAll(this.getGroupBy());
+		constrainables.addAll(this.getEdgeSelections());
+		constrainables.add(this.getVertexSelection());
+		return constrainables;
+	}
+	
+	/**
+	Returns a context map containing a String for a previously defined role or connection as key
+	and its corresponding EObject (Role or Connection) as value.
+	**/
+	getContexts(){
+		EMap<String, EObject> context = new BasicEMap<String, EObject>();
+		VertexSelection selection = this.getVertexSelection();
+		for (Role role : selection.getRoles()) {
+			context.put(role.getName(), role);
+		}
+		for (EdgeSelection edgeSelection : this.getEdgeSelections()) {
+			for (Connection	connection : edgeSelection.getConnections()) {
+				context.put(connection.getPath(), connection);
+			}
+		}
+		return context;
+	}
+}
+
+
