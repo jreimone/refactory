@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.qualitune.guery.resource.guery.default_load_options">
+      <provider
+            class="org.qualitune.guery.postprocessor.GueryOptionProvider"
+            id="org.qualitune.guery.postprocessor.provider">
+      </provider>
+   </extension>
+
+</plugin>
