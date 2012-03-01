@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PostProcessors for the GUERY language
+Bundle-SymbolicName: org.qualitune.guery.postprocessor;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.qualitune.guery.postprocessor.Activator
+Bundle-Vendor: www.qualitune.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.qualitune.guery.resource.guery,
+ org.eclipse.emf.ecore,
+ org.qualitune.guery
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
