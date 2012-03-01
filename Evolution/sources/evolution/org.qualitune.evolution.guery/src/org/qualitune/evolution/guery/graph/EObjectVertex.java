@@ -1,8 +1,5 @@
 package org.qualitune.evolution.guery.graph;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import nz.ac.massey.cs.guery.adapters.jungalt.Vertex;
 
 import org.eclipse.emf.ecore.EObject;
@@ -21,7 +18,7 @@ public class EObjectVertex<Cluster> extends Vertex<EReferenceEdge> implements Cl
 	private static final long serialVersionUID = -6542617958217341280L;
 
 	private final EObject modelElement;
-	private List<Cluster> cluster = new ArrayList<Cluster>();
+	private Cluster cluster;
 
 	public EObjectVertex(EObject modelElement) {
 		super();
@@ -37,7 +34,7 @@ public class EObjectVertex<Cluster> extends Vertex<EReferenceEdge> implements Cl
 	 * So this method delegates to {@link EObject#equals(Object)}.
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public final boolean equals(Object obj) {
 		if(obj instanceof EObjectVertex<?>){
 			EObjectVertex<?> other = (EObjectVertex<?>) obj;
 			return modelElement.equals(other.modelElement);
@@ -50,7 +47,7 @@ public class EObjectVertex<Cluster> extends Vertex<EReferenceEdge> implements Cl
 	 * So this method delegates to {@link EObject#hashCode()}.
 	 */
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((modelElement == null) ? 0 : modelElement.hashCode());
@@ -59,19 +56,22 @@ public class EObjectVertex<Cluster> extends Vertex<EReferenceEdge> implements Cl
 
 	@Override
 	public void annotateWithCluster(Cluster cluster) {
-		if(!this.cluster.contains(cluster)){
-			this.cluster.add(cluster);
-		}
+		this.cluster = cluster;
 	}
 
 	@Override
-	public List<Cluster> getAnnotatedClusters() {
+	public Cluster getAnnotatedCluster() {
 		return cluster;
 	}
 
 	@Override
-	public boolean removeCluster(Cluster cluster) {
-		return this.cluster.remove(cluster);
+	public boolean removeCluster() {
+		Cluster previous = this.cluster;
+		this.cluster = null;
+		if(previous != null){
+			return true;
+		}
+		return false;
 	}
 
 	@Override

@@ -24,11 +24,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Role/name"/>
     </genClasses>
     <genClasses ecoreClass="guery.ecore#//Constraint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Constraint/expressions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Constraint/expression"/>
     </genClasses>
     <genClasses ecoreClass="guery.ecore#//VertexSelection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//VertexSelection/roles"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//VertexSelection/constraint"/>
     </genClasses>
     <genClasses ecoreClass="guery.ecore#//ConnectedBy"/>
     <genClasses image="false" ecoreClass="guery.ecore#//Connection">
@@ -40,15 +39,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Connection/path"/>
     </genClasses>
     <genClasses ecoreClass="guery.ecore#//NotConnectedBy"/>
-    <genClasses ecoreClass="guery.ecore#//Grouping">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Grouping/expressions"/>
-    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//Grouping"/>
     <genClasses ecoreClass="guery.ecore#//PreProcessor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//PreProcessor/className"/>
     </genClasses>
     <genClasses image="false" ecoreClass="guery.ecore#//EdgeSelection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//EdgeSelection/connections"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//EdgeSelection/constraint"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="guery.ecore#//Constrainable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Constrainable/constraints"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

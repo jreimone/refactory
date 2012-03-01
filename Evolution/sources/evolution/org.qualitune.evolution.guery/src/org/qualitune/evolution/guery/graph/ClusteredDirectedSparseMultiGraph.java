@@ -2,7 +2,6 @@ package org.qualitune.evolution.guery.graph;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections15.map.HashedMap;
@@ -46,7 +45,7 @@ public class ClusteredDirectedSparseMultiGraph<Vertex extends ClusterVertex<Clus
 	 * @param clusterIndicator
 	 */
 	public void annotateWithCluster(Vertex vertex, Cluster clusterIndicator){
-		if(!this.containsVertex(vertex)){
+		if(!this.containsVertex(vertex) || clusterIndicator == null){
 			return;
 		}
 		Collection<Vertex> cluster = clusterMap.get(clusterIndicator);
@@ -55,10 +54,7 @@ public class ClusteredDirectedSparseMultiGraph<Vertex extends ClusterVertex<Clus
 			clusterMap.put(clusterIndicator, cluster);
 		}
 		cluster.add(vertex);
-		List<Cluster> annotatedClusters = vertex.getAnnotatedClusters();
-		if(!annotatedClusters.contains(clusterIndicator)){
-			vertex.annotateWithCluster(clusterIndicator);
-		}
+		vertex.annotateWithCluster(clusterIndicator);
 	}
 	
 	/**
@@ -71,7 +67,7 @@ public class ClusteredDirectedSparseMultiGraph<Vertex extends ClusterVertex<Clus
 	 * @return
 	 */
 	public boolean removeCluster(Vertex vertex, Cluster clusterIndicator){
-		return vertex.removeCluster(clusterIndicator) &&
+		return vertex.removeCluster() &&
 				clusterMap.get(clusterIndicator).remove(vertex);
 	}
 }

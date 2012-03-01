@@ -1,6 +1,5 @@
 package org.qualitune.evolution.guery.graph;
 
-import java.util.List;
 
 /**
  * An interface which vertices should implement when a {@link ClusteredDirectedSparseMultiGraph} is used.
@@ -20,18 +19,17 @@ public interface ClusterVertex<Cluster> {
 	public void annotateWithCluster(Cluster cluster);
 	
 	/**
-	 * Returns all annotated clusters.
+	 * Returns the annotated cluster.
 	 * @return
 	 */
-	public List<Cluster> getAnnotatedClusters();
+	public Cluster getAnnotatedCluster();
 	
 	/**
-	 * Removes the given <code>cluster</code>.
+	 * Removes the annotated cluster.
 	 * Note that if you use instances of this class in a {@link ClusteredDirectedSparseMultiGraph}
 	 * than prefer invoking {@link ClusteredDirectedSparseMultiGraph#removeCluster(ClusterVertex, Object)}
 	 * instead of this method. The method will delegate to this one. 
-	 * @param cluster
-	 * @return
+	 * @return <code>true</code> if this vertex was annotated with a cluster, <code>false</code> otherwise
 	 */
-	public boolean removeCluster(Cluster cluster);
+	public boolean removeCluster();
 }
