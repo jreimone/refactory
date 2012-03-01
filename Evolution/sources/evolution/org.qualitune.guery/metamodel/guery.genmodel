@@ -19,6 +19,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Motif/groupBy"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Motif/prepare"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Motif/edgeSelections"/>
+      <genOperations ecoreOperation="guery.ecore#//Motif/getConstrainables"/>
+      <genOperations ecoreOperation="guery.ecore#//Motif/getContexts"/>
     </genClasses>
     <genClasses ecoreClass="guery.ecore#//Role">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Role/name"/>
@@ -48,6 +50,10 @@
     </genClasses>
     <genClasses image="false" ecoreClass="guery.ecore#//Constrainable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Constrainable/constraints"/>
+    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//StringToEObjectMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//StringToEObjectMap/key"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference guery.ecore#//StringToEObjectMap/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
