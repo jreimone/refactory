@@ -33,15 +33,8 @@ public class MVELValidationPostProcessor extends AbstractGueryPostProcessor {
 		MapVariableResolverFactory resolverFactory = new MapVariableResolverFactory(variables);
 		String expression = constraint.getExpression();
 		MVELInterpretedRuntime interpreter = new MVELInterpretedRuntime(expression, null, resolverFactory);
-		Object result = null;
 		try {
-			result = interpreter.parse();
-			if(result instanceof Boolean && !(Boolean) result){
-				resource.addError("The constraint could not be parsed correctly." +
-						"\nUsually, a navigation expression starting from a variable expression is the cause."
-						, GueryEProblemType.ANALYSIS_PROBLEM
-						, constraint);
-			}
+			interpreter.parse();
 		} catch (Exception e) {
 			resource.addError(e.getMessage(), GueryEProblemType.SYNTAX_ERROR, constraint);
 		}
