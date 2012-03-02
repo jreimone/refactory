@@ -25,6 +25,7 @@ TOKENS {
 TOKENSTYLES{
 	"SL_COMMENT" COLOR #008000, ITALIC;
 	"CLASSNAME" COLOR #FF9000;
+	"find all","connected by","group by","not connected by","prepare with" COLOR #800055, BOLD;
 }
 
 
