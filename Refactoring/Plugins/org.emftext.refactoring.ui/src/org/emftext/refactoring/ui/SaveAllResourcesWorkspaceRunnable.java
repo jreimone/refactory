@@ -87,7 +87,7 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 	}
 
 	private void preSaveRuntimeInstanceHandling(IRefactorer refactorer){
-		IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
+		IRefactoringInterpreter interpreter = refactorer.getInterpreter();
 		Map<Role, List<EObject>> roleInstanceMap = interpreter.getRoleRuntimeInstances();
 //		System.out.println("~~~~~~~~~~~~~~~");
 		for (Role role : roleInstanceMap.keySet()) {

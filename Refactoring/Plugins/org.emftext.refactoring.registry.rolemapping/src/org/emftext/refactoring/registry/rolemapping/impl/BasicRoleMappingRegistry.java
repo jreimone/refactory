@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -36,6 +37,7 @@ import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
+import org.emftext.refactoring.util.RoleUtil;
 import org.osgi.framework.Bundle;
 
 public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
@@ -319,5 +321,13 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 
 	public URL getImagePathForMapping(RoleMapping mapping) {
 		return iconBundlePathMap.get(mapping);
+	}
+
+	@Override
+	public List<RoleMapping> getPossibleRoleMappingsForResource(Resource resource, List<EObject> selectedElements, double minEquality) {
+		EObject root = resource.getContents().get(0);
+		String mmUri = root.eClass().getEPackage().getNsURI();
+		Map<String, RoleMapping> roleMappings = getRoleMappingsForUri(mmUri);
+		return RoleUtil.getPossibleMappingsForInputSelection(selectedElements, roleMappings, minEquality);
 	}
 }

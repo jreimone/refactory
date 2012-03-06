@@ -15,7 +15,6 @@ import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizard;
 import org.eclipse.ui.IEditorPart;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
@@ -33,19 +32,19 @@ public class ModelRefactoring extends Refactoring {
 	private String name;
 	private EditingDomain editingDomain;
 	private IEditorPart activeEditor;
-	private RoleMapping mapping;
+//	private RoleMapping mapping;
 //	private IRefactoringFakeInterpreter fakeInterpreter;
 	private IRefactoringInterpreter interpreter;
 
-	public ModelRefactoring(IRefactorer refactorer, RoleMapping mapping, EditingDomain editingDomain, String name, IEditorPart activeEditor) {
+	public ModelRefactoring(IRefactorer refactorer, EditingDomain editingDomain, String name, IEditorPart activeEditor) {
 		super();
 		this.refactorer = refactorer;
-		this.mapping = mapping;
+//		this.mapping = mapping;
 		this.name = name;
 		this.editingDomain = editingDomain;
 		this.activeEditor = activeEditor;
 		
-		interpreter = refactorer.setRoleMappingToInterprete(mapping);
+		interpreter = refactorer.getInterpreter();
 		interpreter.collectValueProviders();
 		refactorer.fakeRefactor();
 //		doCollectValuesToProvide();
@@ -73,9 +72,9 @@ public class ModelRefactoring extends Refactoring {
 //		}
 //	}
 	
-	public RoleMapping getRoleMapping()	{
-		return mapping;
-	}
+//	public RoleMapping getRoleMapping()	{
+//		return mapping;
+//	}
 	
 	public int getFlags(){
 		int flags = RefactoringWizard.CHECK_INITIAL_CONDITIONS_ON_OPEN;
@@ -105,20 +104,6 @@ public class ModelRefactoring extends Refactoring {
 		return flags;
 	}
 	
-//	private int stateDependentFromEMFCompareVersion(){
-//		// this is needed because of the following bug:
-//		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=316429
-//		// the provided patch can't be integrated into the official Helios release,
-//		// but in the first service release
-//		// until then the version check must be done
-//		Version currentCompareVersion= EMFCompareUIPlugin.getDefault().getBundle().getVersion();
-//		Version minCompareVersion = Version.parseVersion(MIN_COMPARE_VERSION);
-//		if(minCompareVersion.compareTo(currentCompareVersion) > 0) {
-//			return RefactoringWizard.NO_PREVIEW_PAGE;
-//		}
-//		return RefactoringWizard.PREVIEW_EXPAND_FIRST_NODE;
-//	}
-
 	@Override
 	public RefactoringStatus checkFinalConditions(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		// TODO integrate post conditions here
@@ -170,8 +155,8 @@ public class ModelRefactoring extends Refactoring {
 		return interpreter;
 	}
 
-	public RoleMapping getMapping() {
-		return mapping;
-	}
+//	public RoleMapping getMapping() {
+//		return mapping;
+//	}
 
 }

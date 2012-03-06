@@ -2,7 +2,6 @@ package org.emftext.language.refactoring.roles.quickfixes;
 
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextQuickFix;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
@@ -15,12 +14,10 @@ public class RenameRoleRefactoringQuickFix extends RolestextQuickFix {
 	private static final String REFACTOR_RENAME_OTHER_ROLE = "Refactor: Rename other role";
 
 	private IRefactorer refactorer;
-	private RoleMapping mapping;
 
-	public RenameRoleRefactoringQuickFix(RoleMapping mapping, Role roleToBeRefactored, IRefactorer refactorer, String iconKey){
+	public RenameRoleRefactoringQuickFix(Role roleToBeRefactored, IRefactorer refactorer, String iconKey){
 		super(REFACTOR_RENAME_OTHER_ROLE, iconKey, roleToBeRefactored);
 		this.refactorer = refactorer;
-		this.mapping = mapping;
 	}
 
 	@Override
@@ -28,7 +25,7 @@ public class RenameRoleRefactoringQuickFix extends RolestextQuickFix {
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		IEditorConnector connector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
 		if(connector != null){
-			RefactoringAction action = new RefactoringAction(mapping, refactorer, connector);
+			RefactoringAction action = new RefactoringAction(refactorer, connector);
 			action.run();
 		}
 	}

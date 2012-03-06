@@ -8,7 +8,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IValueProvider;
@@ -18,12 +17,10 @@ import org.emftext.refactoring.interpreter.internal.ObjectAssignmentInterpreter;
 public class BasicValueProviderFactory implements IValueProviderFactory {
 
 	private IRefactorer refactorer;
-	private RoleMapping mapping;
 	private Map<EObject, IValueProvider<?, ?>> valueProviderMap;
 
-	public BasicValueProviderFactory(IRefactorer refactorer, RoleMapping mapping) {
+	public BasicValueProviderFactory(IRefactorer refactorer) {
 		super();
-		this.mapping = mapping;
 		this.refactorer = refactorer;
 		valueProviderMap = new HashMap<EObject, IValueProvider<?,?>>();
 	}
@@ -36,7 +33,7 @@ public class BasicValueProviderFactory implements IValueProviderFactory {
 			if (command instanceof ObjectAssignmentInterpreter){
 				if(context.length >= 1 && (context[0] instanceof Role)){
 					Role role = (Role) context[0];
-					EClass metaclass = mapping.getEClassForRole(role);
+					EClass metaclass = refactorer.getRoleMapping().getEClassForRole(role);
 					valueProvider.setName("Select one " + metaclass.getName());
 				}
 			}
@@ -59,9 +56,9 @@ public class BasicValueProviderFactory implements IValueProviderFactory {
 		IValueProvider<?, ?> valueProvider = valueProviderMap.get(command);
 		if(valueProvider == null){
 			if(command instanceof ASSIGN){
-				valueProvider = new DialogAttributeValueProvider(mapping);
+				valueProvider = new DialogAttributeValueProvider(refactorer.getRoleMapping());
 			} else if (command instanceof ObjectAssignmentInterpreter){
-				valueProvider = new DialogOneListElementProvider(mapping);
+				valueProvider = new DialogOneListElementProvider(refactorer.getRoleMapping());
 			}
 			registerValueProviderForCommand(command, valueProvider);
 		}

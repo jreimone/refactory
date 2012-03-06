@@ -19,7 +19,6 @@ import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.Instruction;
 import org.emftext.language.refactoring.refactoring_specification.MOVE;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -36,24 +35,21 @@ import org.emftext.refactoring.valueprovider.BasicValueProviderFactory;
  */
 public class RefactoringAction extends Action {
 
-	private RoleMapping mapping;
 	private IRefactorer refactorer;
-//	private EObject refactoredModel;
 	private EditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 	private IEditorConnector connector;
 
-	public RefactoringAction(RoleMapping mapping, IRefactorer refactorer, IEditorConnector connector) {
+	public RefactoringAction(IRefactorer refactorer, IEditorConnector connector) {
 		super();
-		this.mapping = mapping;
 		this.refactorer = refactorer;
 		this.connector = connector;
-		IValueProviderFactory factory = new BasicValueProviderFactory(refactorer, mapping);
+		IValueProviderFactory factory = new BasicValueProviderFactory(refactorer);
 		refactorer.setValueProviderFactory(factory);
 	}
 
-	public RefactoringAction(RoleMapping mapping, IRefactorer refactorer, EditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector) {
-		this(mapping, refactorer, connector);
+	public RefactoringAction(IRefactorer refactorer, EditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector) {
+		this(refactorer, connector);
 		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
 		this.activeEditor = activeEditor;
 	}
@@ -65,12 +61,12 @@ public class RefactoringAction extends Action {
 
 	@Override
 	public String getText() {
-		return StringUtil.convertCamelCaseToWords(mapping.getName());
+		return StringUtil.convertCamelCaseToWords(refactorer.getRoleMapping().getName());
 	}
 
 	public void ltkRun() {
 //		EObject original = refactorer.getOriginalModel();
-		ModelRefactoring refactoring = new ModelRefactoring(refactorer, mapping, diagramTransactionalEditingDomain, getText(), activeEditor);
+		ModelRefactoring refactoring = new ModelRefactoring(refactorer, diagramTransactionalEditingDomain, getText(), activeEditor);
 		ModelRefactoringWizard wizard = new ModelRefactoringWizard(refactoring);
 		wizard.setWindowTitle(refactoring.getName());
 		RefactoringWizardOpenOperation op = new RefactoringWizardOpenOperation(wizard);
@@ -79,8 +75,8 @@ public class RefactoringAction extends Action {
 			int result = op.run(shell, getText());
 			if(connector != null){
 				if (result == IDialogConstants.OK_ID) {
-					IRefactoringInterpreter interpreter = refactorer.getCurrentInterpreter();
-					interpreter = refactoring.getRefactorer().getCurrentInterpreter();
+					IRefactoringInterpreter interpreter = refactorer.getInterpreter();
+					interpreter = refactoring.getRefactorer().getInterpreter();
 					Map<Role, List<URI>> roleRuntimeInstanceURIs = interpreter.getRoleRuntimeInstanceURIs();
 					Map<Role, List<EObject>> resolvedRoleRuntimeInstances = postSaveRuntimeInstanceHandling(roleRuntimeInstanceURIs, refactorer.getResource().getResourceSet());
 					RefactoringSpecification refSpec = interpreter.getRefactoringSpecification();

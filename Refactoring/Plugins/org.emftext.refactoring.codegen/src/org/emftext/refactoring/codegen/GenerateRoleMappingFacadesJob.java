@@ -51,10 +51,10 @@ public class GenerateRoleMappingFacadesJob extends Job {
 	private static final String CLASS_NAME_POSTFIX = "RefactoringFacade";
 
 	private static final String[] REQUIRED_PLUGINS = new String[] {
-			"org.eclipse.core.runtime",
-			"org.emftext.refactoring.registry.rolemapping",
-			"org.emftext.language.refactoring.rolemapping",
-			"org.emftext.refactoring.specification.interpreter"
+		"org.eclipse.core.runtime",
+		"org.emftext.refactoring.registry.rolemapping",
+		"org.emftext.language.refactoring.rolemapping",
+		"org.emftext.refactoring.specification.interpreter"
 	};
 
 	private IProject project;
@@ -88,8 +88,7 @@ public class GenerateRoleMappingFacadesJob extends Job {
 		// one tick for creating the package
 		ticks++;
 		monitor.beginTask(GENERAL_JOB_NAME, ticks);
-		monitor.subTask(String.format(GENERATE_FACADE_PACKAGE,
-				project.getName() + FACADE_POSTFIX));
+		monitor.subTask(String.format(GENERATE_FACADE_PACKAGE, project.getName() + FACADE_POSTFIX));
 		if (!project.isOpen()) {
 			try {
 				project.open(monitor);
@@ -133,39 +132,38 @@ public class GenerateRoleMappingFacadesJob extends Job {
 			sc.add("public class " + className + " {");
 			sc.addLineBreak();
 			sc.add("private Resource resource;");
-			sc.add("private List<EObject> selectedElement;");
+			sc.add("private List<EObject> selectedElements;");
 			sc.add("private Map<String, RoleMapping> mappingMap;");
-			sc.add("private IRefactorer refactorer;");
+			sc.add("private Map<RoleMapping, IRefactorer> refactorerMap;");
 			sc.addLineBreak();
-			sc.add("public " + className + "(Resource resource, List<EObject> selectedElement){");
+			sc.add("public " + className + "(Resource resource, List<EObject> selectedElements){");
 			sc.add("super();");
 			sc.add("this.resource = resource;");
-			sc.add("this.selectedElement = selectedElement;");
+			sc.add("this.selectedElements = selectedElements;");
 			sc.add("initialize();");
 			sc.add("}");
 			sc.addLineBreak();
 			sc.add("private void initialize() {");
-			sc.add("mappingMap = new LinkedHashMap<String, RoleMapping>();");
-			sc.add("refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);");
-			sc.add("if(refactorer != null){");
-			sc.add("refactorer.setInput(selectedElement);");
-			sc.add("List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);");
-			sc.add("for (RoleMapping roleMapping : mappings) {");
+			sc.add("mappingMap = new HashMap<String, RoleMapping>();");
+			sc.add("List<RoleMapping> possibleRoleMappingsForResource = IRoleMappingRegistry.INSTANCE.getPossibleRoleMappingsForResource(resource, selectedElements, 1.0);");
+			sc.add("for (RoleMapping roleMapping : possibleRoleMappingsForResource) {");
 			sc.add("mappingMap.put(roleMapping.getName(), roleMapping);");
+			sc.add("IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, roleMapping);");
+			sc.add("if(refactorer != null){");
+			sc.add("refactorerMap.put(roleMapping, refactorer);");
 			sc.add("}");
 			sc.add("}");
 			sc.add("}");
 			sc.addLineBreak();
-			sc.addJavadoc("Returns the refactorer.");
-			sc.add("public IRefactorer getRefactorer() {");
-			sc.add("return refactorer;");
+			sc.addJavadoc("Returns a refactorer for the given <code>roleMapping</code>.");
+			sc.add("public IRefactorer getRefactorerForRoleMapping(RoleMapping roleMapping) {");
+			sc.add("return refactorerMap.get(roleMapping);");
 			sc.add("}");
 			sc.addLineBreak();
 			generateMethods(sc, metamodelRoleMappings.get(epackage), monitor);
 			sc.add("}");
 			try {
-				fragment.createCompilationUnit(className + ".java",
-						sc.toString(), true, monitor);
+				fragment.createCompilationUnit(className + ".java", sc.toString(), true, monitor);
 			} catch (JavaModelException e) {
 				e.printStackTrace();
 			}
@@ -198,7 +196,7 @@ public class GenerateRoleMappingFacadesJob extends Job {
 
 	private void addImports(JavaComposite sc) {
 		sc.add("import java.net.URL;");
-		sc.add("import java.util.LinkedHashMap;");
+		sc.add("import java.util.HashMap;");
 		sc.add("import java.util.List;");
 		sc.add("import java.util.Map;");
 		sc.addLineBreak();
@@ -313,11 +311,9 @@ public class GenerateRoleMappingFacadesJob extends Job {
 				List<IClasspathEntry> list = new ArrayList<IClasspathEntry>();
 				list.addAll(Arrays.asList(classPathEntries));
 				list.add(classPath);
-				javaProject.setRawClasspath(
-						list.toArray(new IClasspathEntry[0]), monitor);
+				javaProject.setRawClasspath(list.toArray(new IClasspathEntry[0]), monitor);
 			}
-			return srcFolder.createPackageFragment(
-					project.getName() + ".facade", true, monitor);
+			return srcFolder.createPackageFragment(project.getName() + ".facade", true, monitor);
 		} catch (JavaModelException e) {
 			e.printStackTrace();
 		} catch (CoreException e) {

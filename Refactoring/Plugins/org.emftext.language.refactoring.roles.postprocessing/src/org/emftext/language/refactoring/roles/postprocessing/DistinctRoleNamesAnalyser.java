@@ -37,11 +37,11 @@ public class DistinctRoleNamesAnalyser extends AbstractPostProcessor {
 
 					//// always the same?
 					RolesRefactoringFacade facade = new RolesRefactoringFacade(resource, selectedElement);
-					IRefactorer refactorer = facade.getRefactorer();
 					RoleMapping roleMapping = facade.getRenameRoleModelElementMapping();
+					IRefactorer refactorer = facade.getRefactorerForRoleMapping(roleMapping);
 					URL iconBundlePath = facade.getRenameRoleModelElementIcon();
 					if (refactorer != null) {
-						IRolestextQuickFix quickfix = new RenameRoleRefactoringQuickFix(roleMapping, foundRole, refactorer, (iconBundlePath != null) ? iconBundlePath.toString()
+						IRolestextQuickFix quickfix = new RenameRoleRefactoringQuickFix(foundRole, refactorer, (iconBundlePath != null) ? iconBundlePath.toString()
 								: null);
 						addProblem(
 								resource

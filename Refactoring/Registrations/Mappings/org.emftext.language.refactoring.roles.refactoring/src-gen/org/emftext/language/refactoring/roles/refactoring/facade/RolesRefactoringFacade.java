@@ -1,7 +1,7 @@
 package org.emftext.language.refactoring.roles.refactoring.facade;
 
 import java.net.URL;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,39 +19,38 @@ import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
  * <li> a method for returning the {@link RoleMapping} itself
  * <li> a method for returning the registered icon if one exists
  * <br>
- * @author jreimann
  */
 public class RolesRefactoringFacade {
 	
 	private Resource resource;
-	private List<EObject> selectedElement;
+	private List<EObject> selectedElements;
 	private Map<String, RoleMapping> mappingMap;
-	private IRefactorer refactorer;
+	private Map<RoleMapping, IRefactorer> refactorerMap;
 	
-	public RolesRefactoringFacade(Resource resource, List<EObject> selectedElement){
+	public RolesRefactoringFacade(Resource resource, List<EObject> selectedElements){
 		super();
 		this.resource = resource;
-		this.selectedElement = selectedElement;
+		this.selectedElements = selectedElements;
 		initialize();
 	}
 	
 	private void initialize() {
-		mappingMap = new LinkedHashMap<String, RoleMapping>();
-		refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
-		if(refactorer != null){
-			refactorer.setInput(selectedElement);
-			List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
-			for (RoleMapping roleMapping : mappings) {
-				mappingMap.put(roleMapping.getName(), roleMapping);
+		mappingMap = new HashMap<String, RoleMapping>();
+		List<RoleMapping> possibleRoleMappingsForResource = IRoleMappingRegistry.INSTANCE.getPossibleRoleMappingsForResource(resource, selectedElements, 1.0);
+		for (RoleMapping roleMapping : possibleRoleMappingsForResource) {
+			mappingMap.put(roleMapping.getName(), roleMapping);
+			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, roleMapping);
+			if(refactorer != null){
+				refactorerMap.put(roleMapping, refactorer);
 			}
 		}
 	}
 	
 	/**
-	 * Returns the refactorer.
+	 * Returns a refactorer for the given <code>roleMapping</code>.
 	 */
-	public IRefactorer getRefactorer() {
-		return refactorer;
+	public IRefactorer getRefactorerForRoleMapping(RoleMapping roleMapping) {
+		return refactorerMap.get(roleMapping);
 	}
 	
 	/**
