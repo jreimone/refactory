@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -83,4 +85,17 @@ public interface IRoleMappingRegistry {
 	 * @return the path in the bundle
 	 */
 	public URL getImagePathForMapping(RoleMapping mapping);
+	
+	/**
+	 * Returns a list containing all {@link RoleMapping mappings} for which the current selection has all obligatory (input)roles
+	 * applied. With <code>minEquality</code> one can decide how strict the presence of the applied roles should be.
+	 * If <code>minEquality</code> is 1.0 than all (input)roles are considered to be applied in the current selection.
+	 * This method should be used for retrieving the possible refactorings which should be offered to the user maybe in 
+	 * a context menu. Therefore the {@link RoleMapping#getName()} is usefull because it is considered to have a meaningful name like
+	 * 'ExtractStatements' for the <a href="http://www.emftext.org/index.php/EMFText_Concrete_Syntax_Zoo_PL0">PL/0</a> language for example.
+	 * 
+	 * @param minEquality
+	 * @return
+	 */
+	public List<RoleMapping> getPossibleRoleMappingsForResource(Resource resource, List<EObject> selectedElements, double minEquality);
 }

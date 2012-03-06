@@ -64,7 +64,7 @@ public class ModelRefactoringWizard extends RefactoringWizard {
 
 	//Collect custom wizard pages assigned via extension point and add them to this wizard.
 	private void addCustomWizardPages(Map<Role, List<EObject>> roleRuntimeInstanceMap) {
-		RoleMapping mapping = refactoring.getMapping();
+		RoleMapping mapping = refactoring.getRefactorer().getRoleMapping();
 		
 		//Get _fresh_ wizard page here because the UI elements of old instances have been disposed.
 		List<IModelRefactoringWizardPage> customPages = ICustomWizardPageRegistry.INSTANCE.getFreshCustomWizardPages(mapping, roleRuntimeInstanceMap);

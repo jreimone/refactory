@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.language.refactoring.roles.RoleModifier;
 
 /**
  * Interface for Refactorer. A {@link IRefactorer} will be used for one {@link RoleRoleMappingModel roleRoleMapping}. 
@@ -44,7 +43,7 @@ public interface IRefactorer {
 	 * 
 	 * @return a list of possible RefactoringSpecifications matching the minimum equality
 	 */
-	public List<RefactoringSpecification> getPossibleRefactoringsForNearestRoleModels(double minEquality);
+//	public List<RefactoringSpecification> getPossibleRefactoringsForNearestRoleModels(double minEquality);
 	
 	/**
 	 * Infers over the objects which were set with {@link #setInput(EList)} and identifies all of its applied roles.
@@ -54,7 +53,7 @@ public interface IRefactorer {
 	 * @param minEquality specifies the minimum equality in percent the applied roles must fulfill
 	 * @return a list of all {@link RefactoringSpecification}s having a percental equality greater or equal <code>minEquality</code> 
 	 */
-	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality);
+//	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality);
 	
 //	//cseidl
 //	public IRefactoringFakeInterpreter collectValuesToProvide(RoleMapping mapping);
@@ -81,19 +80,6 @@ public interface IRefactorer {
 	 * @return
 	 */
 	public EObject getFakeRefactoredModel();
-	
-	/**
-	 * Returns a list containing all {@link RoleMapping mappings} for which the current selection has all obligatory (input)roles
-	 * applied. With <code>minEquality</code> one can decide how strict the presence of the applied roles should be.
-	 * If <code>minEquality</code> is 1.0 than all (input)roles are considered to be applied in the current selection.
-	 * This method should be used for retrieving the possible refactorings which should be offered to the user maybe in 
-	 * a context menu. Therefore the {@link RoleMapping#getName()} is usefull because it is considered to have a meaningful name like
-	 * 'ExtractStatements' for the <a href="http://www.emftext.org/index.php/EMFText_Concrete_Syntax_Zoo_PL0">PL/0</a> language for example.
-	 * 
-	 * @param minEquality
-	 * @return
-	 */
-	public List<RoleMapping> getPossibleRoleMappings(double minEquality);
 	
 	/**
 	 * Returns <code>false</code> if no errors occured while refactoring. 
@@ -130,11 +116,11 @@ public interface IRefactorer {
 	public EObject getOriginalModel();
 	
 	/**
-	 * Returns the current interpreter which actually did the transformations.
+	 * Returns the interpreter which actually did the transformations.
 	 * 
 	 * @return
 	 */
-	public IRefactoringInterpreter getCurrentInterpreter();
+	public IRefactoringInterpreter getInterpreter();
 	
 	
 	/**
@@ -143,11 +129,17 @@ public interface IRefactorer {
 	 * @param mapping
 	 * @return
 	 */
-	public IRefactoringInterpreter setRoleMappingToInterprete(RoleMapping mapping);
+//	public IRefactoringInterpreter loadReferencingResources(RoleMapping mapping);
 	
 	/**
 	 * Sets the {@link IValueProviderFactory} for this refactorer.
 	 * @param factory
 	 */
 	public void setValueProviderFactory(IValueProviderFactory factory);
+	
+	/**
+	 * Returns the role mapping of this refactorer.
+	 * @return
+	 */
+	public RoleMapping getRoleMapping();
 }

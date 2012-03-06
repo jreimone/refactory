@@ -2,6 +2,7 @@ package org.emftext.refactoring.ui;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -34,6 +35,7 @@ import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpe
 import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
+import org.emftext.refactoring.util.RoleUtil;
 import org.emftext.refactoring.util.StringUtil;
 
 public class RefactoringMenuContributor extends ExtensionContributionFactory {
@@ -104,28 +106,29 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				System.out.println(object);
 			}
 			System.out.println("~~~~~~~");
-			
+
 			ResourceSet resourceSet = resource.getResourceSet();
 			EcoreUtil.resolveAll(resourceSet);
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
-			
-			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
-			if (refactorer != null) {
-				refactorer.setInput(selectedElements);
-				List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
-				boolean containsEntries = false;
-				List<IMenuManager> registeredSubMenus = new LinkedList<IMenuManager>();
-				for (RoleMapping mapping : mappings) {
-					Resource mappingResource = mapping.eResource();
-					if (mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0)) {
+
+			Map<String, RoleMapping> roleMappings = getRoleMappingsForResource(resource);
+			List<RoleMapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(selectedElements, roleMappings, 1.0);
+			boolean containsEntries = false;
+			List<IMenuManager> registeredSubMenus = new LinkedList<IMenuManager>();
+			for (RoleMapping mapping : mappings) {
+				Resource mappingResource = mapping.eResource();
+				if (mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0)) {
+					IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, mapping);
+					if (refactorer != null) {
+						refactorer.setInput(selectedElements);
 						RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 						if (refSpec != null) {
 							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 							Action refactoringAction = null;
 							if (transactionalEditingDomain == null) {
-								refactoringAction = new RefactoringAction(mapping, refactorer, editorConnector);
+								refactoringAction = new RefactoringAction(refactorer, editorConnector);
 							} else {
-								refactoringAction = new RefactoringAction(mapping, refactorer, transactionalEditingDomain, activeEditor, editorConnector);
+								refactoringAction = new RefactoringAction(refactorer, transactionalEditingDomain, activeEditor, editorConnector);
 							}
 							refactoringAction.setText(refactoringName);
 							refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));
@@ -147,15 +150,23 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							}
 							containsEntries = true;
 						}
+
+					} else {
+						RegistryUtil.log("no rolemappings registered for " + resource.getContents().get(0).eClass().getEPackage().getNsURI(), IStatus.WARNING);
 					}
 				}
-				if (containsEntries) {
-					additions.addContributionItem(rootMenu, null);
-				}
-			} else {
-				RegistryUtil.log("no rolemappings registered for " + resource.getContents().get(0).eClass().getEPackage().getNsURI(), IStatus.WARNING);
+				
+			} 
+			if (containsEntries) {
+				additions.addContributionItem(rootMenu, null);
 			}
 		}
 	}
 
+	private Map<String, RoleMapping> getRoleMappingsForResource(Resource resource){
+		EObject root = resource.getContents().get(0);
+		String mmUri = root.eClass().getEPackage().getNsURI();
+		Map<String, RoleMapping> roleMappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(mmUri);
+		return roleMappings;
+	}
 }

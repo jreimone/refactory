@@ -22,7 +22,8 @@ Require-Bundle: org.emftext.refactoring.specification.interpreter,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.core.variables,
  org.emftext.refactoring.registry.rolemapping,
- org.emftext.refactoring.registry.customwizardpage
+ org.emftext.refactoring.registry.customwizardpage,
+ org.emftext.refactoring.registry.rolemodel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.emftext.refactoring.editorconnector,
  org.emftext.refactoring.ltk,
