@@ -44,15 +44,15 @@ eclass RefactoringSpecification {
 		Set<Instruction> instructions = new LinkedHashSet<Instruction>();
 		List<Instruction> usedInstructions = getInstructions();
 		for (Instruction instruction : usedInstructions) {
-			boolean isReferencingObject = isRoleReferencedByObject(referencedRole, (EObject) instruction);
-			if(isReferencingObject){
+			boolean isReferencingObject = isRoleReferencedByObject(referencedRole, instruction);
+			if (isReferencingObject) {
 				instructions.add(instruction);
 			}
 			TreeIterator<EObject> iterator = EcoreUtil.getAllContents(instruction, true);
 			while (iterator.hasNext()) {
 				EObject eObject = (EObject) iterator.next();
-				isReferencingObject = isRoleReferencedByObject(referencedRole, (EObject) eObject);
-				if(isReferencingObject){
+				isReferencingObject = isRoleReferencedByObject(referencedRole, eObject);
+				if (isReferencingObject) {
 					instructions.add(instruction);
 				}
 			}
@@ -61,20 +61,20 @@ eclass RefactoringSpecification {
 	}
 	
 	isRoleReferencedByObject() {
-		EClass metaclass =((EObject) eObject).eClass();
+		EClass metaclass = eObject.eClass();
 		List<EReference> references = metaclass.getEAllReferences();
 		for (EReference reference : references) {
-			if(!reference.isContainment()){
+			if (!reference.isContainment()) {
 				EClassifier classifier = reference.getEType();
-				if(classifier.isInstance(referencedRole)){
-					Object value = ((EObject) eObject).eGet(reference);
-					if(value instanceof Role){
-						if(((Role) value).equals(referencedRole)){
+				if (classifier.isInstance(referencedRole)) {
+					Object value = eObject.eGet(reference);
+					if (value instanceof Role) {
+						if (((Role) value).equals(referencedRole)) {
 							return true;
 						}
-					} else if(value instanceof List<?>){
-						for (Role listObject : (List<Role>) value) {
-							if(listObject.equals(referencedRole)){
+					} else if (value instanceof List<?>) {
+						for (Object listObject : (List<?>) value) {
+							if (listObject.equals(referencedRole)) {
 								return true;
 							}
 						}
