@@ -25,3 +25,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.emftext.language.refactoring.roles.resource.rolestext.ui
 Bundle-Activator: org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextUIPlugin
+Import-Package: org.eclipse.ui.texteditor.spelling

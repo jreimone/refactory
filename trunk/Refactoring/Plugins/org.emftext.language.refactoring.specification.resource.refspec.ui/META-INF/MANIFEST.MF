@@ -27,3 +27,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.emftext.language.refactoring.specification.resource.ui
 Bundle-Activator: org.emftext.language.refactoring.specification.resource.ui.RefspecUIPlugin
+Import-Package: org.eclipse.ui.texteditor.spelling

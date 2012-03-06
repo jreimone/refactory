@@ -44,7 +44,6 @@ import org.emftext.language.refactoring.specification.resource.util.AbstractRefs
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
-import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;

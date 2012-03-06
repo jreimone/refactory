@@ -98,7 +98,7 @@
          point="org.emftext.refactoring.rolemapping">
       <rolemapping
             rolemapping_resource="rolemappings/extractSubEPackage.rolemapping"
-            submenu="extractSubRefactorings">
+            submenu="extractRefactorings">
             <mappingIcon
                   icon="icons/extractSubEPackage.gif"
                   mapping_name="ExtractSubEPackage">

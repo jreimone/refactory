@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
-import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -35,11 +34,6 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 		RegistryUtil.log("created Refactorer for " + resource, IStatus.INFO);
 		IRefactorer refactorer = new Refactorer(resource, roleMapping);
 		System.out.println(resource);
-//		refactorer.setValueProviderFactory(factory)
 		return refactorer;
-	}
-	
-	private void printResource(Resource resource){
-		
 	}
 }

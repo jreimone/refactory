@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 
 public class RoleMappingModelImportsReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.eclipse.emf.ecore.EPackage> {
 	
-	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.eclipse.emf.ecore.EPackage> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.eclipse.emf.ecore.EPackage>();
-	
 	public void resolve(String identifier
 			, org.emftext.language.refactoring.rolemapping.RoleMappingModel container
 			, org.eclipse.emf.ecore.EReference reference

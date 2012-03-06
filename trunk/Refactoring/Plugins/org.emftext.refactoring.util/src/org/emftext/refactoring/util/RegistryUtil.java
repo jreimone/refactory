@@ -2,7 +2,6 @@ package org.emftext.refactoring.util;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -70,20 +69,20 @@ public class RegistryUtil {
 	}
 
 	public static void log(String message, int statusCode) {
-		Level level = null;
-		switch (statusCode) {
-			case IStatus.ERROR:
-				level = Level.SEVERE;
-				break;
-			case IStatus.INFO:
-				level = Level.INFO;
-				break;
-			case IStatus.WARNING:
-				level = Level.WARNING;
-				break;
-			default:
-				break;
-		}
+//		Level level = null;
+//		switch (statusCode) {
+//			case IStatus.ERROR:
+//				level = Level.SEVERE;
+//				break;
+//			case IStatus.INFO:
+//				level = Level.INFO;
+//				break;
+//			case IStatus.WARNING:
+//				level = Level.WARNING;
+//				break;
+//			default:
+//				break;
+//		}
 		IStatus status = new Status(statusCode, RefactoringUtilPlugin.PLUGIN_ID, message);
 		if(Platform.isRunning()){
 			RefactoringUtilPlugin.getDefault().getLog().log(status);

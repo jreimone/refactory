@@ -116,6 +116,7 @@ public class RefactoringStatisticView extends ViewPart {
 			return parent;
 		}
 
+		@SuppressWarnings("rawtypes")
 		public Object getAdapter(Class key) {
 			return null;
 		}
@@ -767,7 +768,7 @@ public class RefactoringStatisticView extends ViewPart {
 						writer.append("\\begingroup\n");
 						writer.append("\\footnotesize\n");
 						writer.append("\\begin{longtable}{|l|");
-						for (EPackage ePackage : metamodels) {
+						for (int i = 0; i < metamodels.size(); i++) {
 							writer.append("c|");
 						}
 						writer.append("}\n");

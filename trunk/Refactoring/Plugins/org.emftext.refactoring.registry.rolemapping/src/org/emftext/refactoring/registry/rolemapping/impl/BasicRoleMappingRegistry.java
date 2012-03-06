@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -36,7 +35,6 @@ import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
-import org.emftext.refactoring.registry.rolemapping.ISubMenuExtensionPoint;
 import org.emftext.refactoring.util.RegistryUtil;
 import org.osgi.framework.Bundle;
 
