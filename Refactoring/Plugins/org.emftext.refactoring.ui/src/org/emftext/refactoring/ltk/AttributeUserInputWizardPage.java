@@ -22,7 +22,6 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
@@ -36,7 +35,7 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 	private List<IAttributeValueProvider> valueProviders;
 	private AdapterFactoryLabelProvider labelProvider;
 	private Map<Text, IAttributeValueProvider> textMap;
-	private Control root;
+//	private Control root;
 
 	/**
 	 * @param name

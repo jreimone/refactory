@@ -41,7 +41,7 @@ public class CrossReferenceIndexConnector implements IndexConnector {
 			URI uri = resource.getURI();
 			uri = rs.getURIConverter().normalize(uri);
 			if(uri.isPlatformResource()){
-				String platformString = uri.toPlatformString(true);
+//				String platformString = uri.toPlatformString(true);
 				referers.add(resource);
 			}
 		}

@@ -6,6 +6,7 @@ package org.emftext.language.refactoring.specification.resource.analysis;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.refactoring_specification.Variable;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
@@ -13,7 +14,6 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleFeature;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.language.refactoring.specification.resource.util.RefspecEObjectUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
 
@@ -41,7 +41,7 @@ public abstract class AbstractRoleFeatureResolver<ContainerType extends EObject,
 		}
 		String roleString = roleFeature[0];
 		String featureString = roleFeature[1];
-		EObject parent = RefspecEObjectUtil.findRootContainer(container);
+		EObject parent = EcoreUtil.getRootContainer(container, true);
 		if(!(parent instanceof RefactoringSpecification)){
 			result.setErrorMessage("This is not a valid Refactoring Specification");
 		}

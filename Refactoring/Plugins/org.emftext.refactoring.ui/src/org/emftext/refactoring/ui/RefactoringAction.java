@@ -38,7 +38,7 @@ public class RefactoringAction extends Action {
 
 	private RoleMapping mapping;
 	private IRefactorer refactorer;
-	private EObject refactoredModel;
+//	private EObject refactoredModel;
 	private EditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 	private IEditorConnector connector;
@@ -69,7 +69,7 @@ public class RefactoringAction extends Action {
 	}
 
 	public void ltkRun() {
-		EObject original = refactorer.getOriginalModel();
+//		EObject original = refactorer.getOriginalModel();
 		ModelRefactoring refactoring = new ModelRefactoring(refactorer, mapping, diagramTransactionalEditingDomain, getText(), activeEditor);
 		ModelRefactoringWizard wizard = new ModelRefactoringWizard(refactoring);
 		wizard.setWindowTitle(refactoring.getName());

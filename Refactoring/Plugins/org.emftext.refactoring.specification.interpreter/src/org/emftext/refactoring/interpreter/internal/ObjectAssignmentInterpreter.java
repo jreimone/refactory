@@ -65,7 +65,7 @@ public class ObjectAssignmentInterpreter{
 	private IRefactoringInterpreter interpreter;
 
 	private ObjectAssignmentCommand command;
-	private EClass classForValueProvider;
+//	private EClass classForValueProvider;
 
 	public ObjectAssignmentInterpreter(IRefactoringInterpreter interpreter, RoleMapping mapping) {
 		super();

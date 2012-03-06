@@ -8,15 +8,15 @@ package org.emftext.language.refactoring.specification.resource.analysis;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.language.refactoring.specification.resource.util.RefspecEObjectUtil;
 
 public class CREATESourceRoleReferenceResolver implements org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolver<org.emftext.language.refactoring.refactoring_specification.CREATE, org.emftext.language.refactoring.roles.Role> {
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.refactoring_specification.CREATE container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.specification.resource.IRefspecReferenceResolveResult<org.emftext.language.refactoring.roles.Role> result) {
-		EObject parent = RefspecEObjectUtil.findRootContainer(container);
+		EObject parent = EcoreUtil.getRootContainer(container, true);
 		if(!(parent instanceof RefactoringSpecification)){
 			result.setErrorMessage("Not a valid Refactoring Specification");
 			return;

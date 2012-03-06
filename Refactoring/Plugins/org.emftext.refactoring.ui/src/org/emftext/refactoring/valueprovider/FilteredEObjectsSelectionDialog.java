@@ -167,7 +167,7 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	 * @see org.eclipse.ui.dialogs.FilteredItemsSelectionDialog#getItemsComparator()
 	 */
 	@Override
-	protected Comparator getItemsComparator() {
+	protected Comparator<EObject> getItemsComparator() {
 		Comparator<EObject> comparator = new Comparator<EObject>() {
 			
 			public int compare(EObject o1, EObject o2) {	

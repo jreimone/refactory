@@ -1,6 +1,5 @@
 package org.emftext.refactoring.interpreter;
 
-import java.util.List;
 
 /**
  * This interface represents a fake interpreter for a fake refactoring run. It can be used to
