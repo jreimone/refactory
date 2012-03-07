@@ -12,9 +12,29 @@ package org.emftext.refactoring.tests.properties.resource.properties.ui;
  */
 public class PropertiesSyntaxColoringPreferencePage extends org.eclipse.jface.preference.PreferencePage implements org.eclipse.ui.IWorkbenchPreferencePage {
 	
-	private final static org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesAntlrTokenHelper tokenHelper = new org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesAntlrTokenHelper();
 	private final static java.util.Map<String, java.util.List<HighlightingColorListItem>> content = new java.util.LinkedHashMap<String, java.util.List<HighlightingColorListItem>>();
 	private final static java.util.Collection<IChangedPreference> changedPreferences = new java.util.ArrayList<IChangedPreference>();
+	
+	public PropertiesSyntaxColoringPreferencePage() {
+		super();
+		
+		org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation();
+		
+		String languageId = metaInformation.getSyntaxName();
+		
+		java.util.List<HighlightingColorListItem> terminals = new java.util.ArrayList<HighlightingColorListItem>();
+		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
+		
+		for (int i = 0; i < tokenNames.length; i++) {
+			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenNames[i]);
+			terminals.add(item);
+		}
+		java.util.Collections.sort(terminals);
+		content.put(languageId, terminals);
+		
+		setPreferenceStore(org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesUIPlugin.getDefault().getPreferenceStore());
+		setDescription("Configure syntax coloring for ." + languageId + " files.");
+	}
 	
 	private interface IChangedPreference {
 		public void apply(org.eclipse.jface.preference.IPreferenceStore store);
@@ -517,35 +537,6 @@ public class PropertiesSyntaxColoringPreferencePage extends org.eclipse.jface.pr
 		return (HighlightingColorListItem) element;
 	}
 	
-	public PropertiesSyntaxColoringPreferencePage() {
-		super();
-		
-		org.emftext.refactoring.tests.properties.resource.properties.IPropertiesMetaInformation syntaxPlugin = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation();
-		
-		String languageId = syntaxPlugin.getSyntaxName();
-		
-		java.util.List<HighlightingColorListItem> terminals = new java.util.ArrayList<HighlightingColorListItem>();
-		String[] tokenNames = syntaxPlugin.getTokenNames();
-		
-		for (int i = 0; i < tokenNames.length; i++) {
-			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
-				continue;
-			}
-			
-			String tokenName = tokenHelper.getTokenName(tokenNames, i);
-			if (tokenName == null) {
-				continue;
-			}
-			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenName);
-			terminals.add(item);
-		}
-		java.util.Collections.sort(terminals);
-		content.put(languageId, terminals);
-		
-		setPreferenceStore(org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesUIPlugin.getDefault().getPreferenceStore());
-		setDescription("Configure syntax coloring for ." + languageId + " files.");
-	}
-	
 	public void init(org.eclipse.ui.IWorkbench workbench) {
 	}
 	
@@ -615,4 +606,5 @@ public class PropertiesSyntaxColoringPreferencePage extends org.eclipse.jface.pr
 			emfTextEditor.invalidateTextRepresentation();
 		}
 	}
+	
 }

@@ -144,6 +144,8 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	 */
 	private boolean terminateReload = false;
 	
+	protected org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation();
+	
 	public PropertiesResource() {
 		super();
 		resetLocationMap();
@@ -156,12 +158,20 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		this.loadOptions = options;
+		resetLocationMap();
 		this.terminateReload = false;
 		String encoding = null;
+		if (new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().isEclipsePlatformAvailable()) {
+			encoding = new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesEclipseProxy().getPlatformResourceEncoding(uri);
+		}
 		java.io.InputStream actualInputStream = inputStream;
 		Object inputStreamPreProcessorProvider = null;
 		if (options != null) {
 			inputStreamPreProcessorProvider = options.get(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
+			Object encodingOption = options.get(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesOptions.OPTION_ENCODING);
+			if (encodingOption != null) {
+				encoding = encodingOption.toString();
+			}
 		}
 		if (inputStreamPreProcessorProvider != null) {
 			if (inputStreamPreProcessorProvider instanceof org.emftext.refactoring.tests.properties.resource.properties.IPropertiesInputStreamProcessorProvider) {
@@ -177,6 +187,8 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
 		referenceResolverSwitch.setOptions(options);
 		org.emftext.refactoring.tests.properties.resource.properties.IPropertiesParseResult result = parser.parse();
+		// dispose parser, we don't need it anymore
+		parser = null;
 		clearState();
 		getContentsInternal().clear();
 		org.eclipse.emf.ecore.EObject root = null;
@@ -201,21 +213,30 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
+	/**
+	 * Reloads the contents of this resource from the given stream.
+	 */
 	public void reload(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		try {
 			isLoaded = false;
 			java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 			doLoad(inputStream, loadOptions);
-			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.getResourceSet());
+			resolveAfterParsing();
 		} catch (org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTerminateParsingException tpe) {
 			// do nothing - the resource is left unchanged if this exception is thrown
 		}
 		isLoaded = true;
 	}
 	
+	/**
+	 * Cancels reloading this resource. The running parser and post processors are
+	 * terminated.
+	 */
 	public void cancelReload() {
 		org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextParser parserCopy = parser;
-		parserCopy.terminate();
+		if (parserCopy != null) {
+			parserCopy.terminate();
+		}
 		this.terminateReload = true;
 		org.emftext.refactoring.tests.properties.resource.properties.IPropertiesResourcePostProcessor runningPostProcessorCopy = runningPostProcessor;
 		if (runningPostProcessorCopy != null) {
@@ -247,8 +268,15 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation();
 	}
 	
+	/**
+	 * Clears the location map by replacing it with a new instance.
+	 */
 	protected void resetLocationMap() {
-		locationMap = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesLocationMap();
+		if (isLocationMapEnabled()) {
+			locationMap = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesLocationMap();
+		} else {
+			locationMap = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesDevNullLocationMap();
+		}
 	}
 	
 	public void addURIFragment(String internalURIFragment, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment) {
@@ -273,8 +301,8 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 				result = uriFragment.resolve();
 			} catch (Exception e) {
 				String message = "An expection occured while resolving the proxy for: "+ id + ". (" + e.toString() + ")";
-				addProblem(new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesProblem(message, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.UNRESOLVED_REFERENCE, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemSeverity.ERROR),uriFragment.getProxy());
-				org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError(message, e);
+				addProblem(new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesProblem(message, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.UNRESOLVED_REFERENCE, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemSeverity.ERROR), uriFragment.getProxy());
+				new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().logError(message, e);
 			}
 			if (result == null) {
 				// the resolving did call itself
@@ -312,7 +340,7 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	private org.eclipse.emf.ecore.EObject getResultElement(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final String errorMessage) {
+	protected org.eclipse.emf.ecore.EObject getResultElement(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final String errorMessage) {
 		if (mapping instanceof org.emftext.refactoring.tests.properties.resource.properties.IPropertiesURIMapping<?>) {
 			org.eclipse.emf.common.util.URI uri = ((org.emftext.refactoring.tests.properties.resource.properties.IPropertiesURIMapping<? extends org.eclipse.emf.ecore.EObject>)mapping).getTargetIdentifier();
 			if (uri != null) {
@@ -354,19 +382,21 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	private void removeDiagnostics(org.eclipse.emf.ecore.EObject cause, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
+	protected void removeDiagnostics(org.eclipse.emf.ecore.EObject cause, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
 		// remove all errors/warnings from this resource
 		for (org.eclipse.emf.ecore.resource.Resource.Diagnostic errorCand : new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(diagnostics)) {
 			if (errorCand instanceof org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextDiagnostic) {
 				if (((org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextDiagnostic) errorCand).wasCausedBy(cause)) {
 					diagnostics.remove(errorCand);
-					org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper.unmark(this, cause);
+					if (new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().isEclipsePlatformAvailable()) {
+						new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper().unmark(this, cause);
+					}
 				}
 			}
 		}
 	}
 	
-	private void attachResolveError(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
+	protected void attachResolveError(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
 		// attach errors to this resource
 		assert result != null;
 		final String errorMessage = result.getErrorMessage();
@@ -377,7 +407,7 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	private void attachResolveWarnings(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
+	protected void attachResolveWarnings(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
 		assert result != null;
 		assert result.wasResolved();
 		if (result.wasResolved()) {
@@ -401,8 +431,13 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		loadOptions = null;
 	}
 	
+	/**
+	 * Runs all post processors to process this resource.
+	 */
 	protected void runPostProcessors(java.util.Map<?, ?> loadOptions) {
-		org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper.unmark(this, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.ANALYSIS_PROBLEM);
+		if (new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().isEclipsePlatformAvailable()) {
+			new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper().unmark(this, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.ANALYSIS_PROBLEM);
+		}
 		if (terminateReload) {
 			return;
 		}
@@ -433,12 +468,15 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
+	/**
+	 * Runs the given post processor to process this resource.
+	 */
 	protected void runPostProcessor(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesResourcePostProcessor postProcessor) {
 		try {
 			this.runningPostProcessor = postProcessor;
 			postProcessor.process(this);
 		} catch (Exception e) {
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError("Exception while running a post-processor.", e);
+			new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().logError("Exception while running a post-processor.", e);
 		}
 		this.runningPostProcessor = null;
 	}
@@ -446,7 +484,11 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
 		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 		super.load(loadOptions);
-		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.getResourceSet());
+		resolveAfterParsing();
+	}
+	
+	protected void resolveAfterParsing() {
+		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this);
 	}
 	
 	public void setURI(org.eclipse.emf.common.util.URI uri) {
@@ -456,6 +498,10 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		super.setURI(uri);
 	}
 	
+	/**
+	 * Returns the location map that contains information about the position of the
+	 * contents of this resource in the original textual representation.
+	 */
 	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesLocationMap getLocationMap() {
 		return locationMap;
 	}
@@ -463,9 +509,22 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	public void addProblem(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesProblem problem, org.eclipse.emf.ecore.EObject element) {
 		ElementBasedTextDiagnostic diagnostic = new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element);
 		getDiagnostics(problem.getSeverity()).add(diagnostic);
-		if (isMarkerCreationEnabled()) {
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper.mark(this, diagnostic);
+		if (new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().isEclipsePlatformAvailable() && isMarkerCreationEnabled()) {
+			new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper().mark(this, diagnostic);
 		}
+		addQuickFixesToQuickFixMap(problem);
+	}
+	
+	public void addProblem(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesProblem problem, int column, int line, int charStart, int charEnd) {
+		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
+		getDiagnostics(problem.getSeverity()).add(diagnostic);
+		if (new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().isEclipsePlatformAvailable() && isMarkerCreationEnabled()) {
+			new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper().mark(this, diagnostic);
+		}
+		addQuickFixesToQuickFixMap(problem);
+	}
+	
+	protected void addQuickFixesToQuickFixMap(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesProblem problem) {
 		java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesQuickFix> quickFixes = problem.getQuickFixes();
 		if (quickFixes != null) {
 			for (org.emftext.refactoring.tests.properties.resource.properties.IPropertiesQuickFix quickFix : quickFixes) {
@@ -473,14 +532,6 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 					quickFixMap.put(quickFix.getContextAsString(), quickFix);
 				}
 			}
-		}
-	}
-	
-	public void addProblem(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesProblem problem, int column, int line, int charStart, int charEnd) {
-		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
-		getDiagnostics(problem.getSeverity()).add(diagnostic);
-		if (isMarkerCreationEnabled()) {
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper.mark(this, diagnostic);
 		}
 	}
 	
@@ -502,7 +553,7 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		addProblem(new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesProblem(message, type, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemSeverity.WARNING), cause);
 	}
 	
-	private java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemSeverity severity) {
+	protected java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemSeverity severity) {
 		if (severity == org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemSeverity.ERROR) {
 			return getErrors();
 		} else {
@@ -512,59 +563,14 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	
 	protected java.util.Map<Object, Object> addDefaultLoadOptions(java.util.Map<?, ?> loadOptions) {
 		java.util.Map<Object, Object> loadOptionsCopy = org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesMapUtil.copySafelyToObjectToObjectMap(loadOptions);
-		if (org.eclipse.core.runtime.Platform.isRunning()) {
-			// find default load option providers
-			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
-			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
-			for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
-				try {
-					org.emftext.refactoring.tests.properties.resource.properties.IPropertiesOptionProvider provider = (org.emftext.refactoring.tests.properties.resource.properties.IPropertiesOptionProvider) element.createExecutableExtension("class");
-					final java.util.Map<?, ?> options = provider.getOptions();
-					final java.util.Collection<?> keys = options.keySet();
-					for (Object key : keys) {
-						addLoadOption(loadOptionsCopy, key, options.get(key));
-					}
-				} catch (org.eclipse.core.runtime.CoreException ce) {
-					org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError("Exception while getting default options.", ce);
-				}
-			}
+		// first add static option provider
+		loadOptionsCopy.putAll(new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesOptionProvider().getOptions());
+		
+		// second, add dynamic option providers that are registered via extension
+		if (new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().isEclipsePlatformAvailable()) {
+			new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesEclipseProxy().getDefaultLoadOptionProviderExtensions(loadOptionsCopy);
 		}
 		return loadOptionsCopy;
-	}
-	
-	/**
-	 * Adds a new key,value pair to the list of options. If there is already an option
-	 * with the same key, the two values are collected in a list.
-	 */
-	private void addLoadOption(java.util.Map<Object, Object> options,Object key, Object value) {
-		// check if there is already an option set
-		if (options.containsKey(key)) {
-			Object currentValue = options.get(key);
-			if (currentValue instanceof java.util.List<?>) {
-				// if the current value is a list, we add the new value to this list
-				java.util.List<?> currentValueAsList = (java.util.List<?>) currentValue;
-				java.util.List<Object> currentValueAsObjectList = org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesListUtil.copySafelyToObjectList(currentValueAsList);
-				if (value instanceof java.util.Collection<?>) {
-					currentValueAsObjectList.addAll((java.util.Collection<?>) value);
-				} else {
-					currentValueAsObjectList.add(value);
-				}
-				options.put(key, currentValueAsObjectList);
-			} else {
-				// if the current value is not a list, we create a fresh list and add both the old
-				// (current) and the new value to this list
-				java.util.List<Object> newValueList = new java.util.ArrayList<Object>();
-				newValueList.add(currentValue);
-				if (value instanceof java.util.Collection<?>) {
-					newValueList.addAll((java.util.Collection<?>) value);
-				} else {
-					newValueList.add(value);
-				}
-				options.put(key, newValueList);
-			}
-		} else {
-			options.put(key, value);
-		}
 	}
 	
 	/**
@@ -577,10 +583,11 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		internalURIFragmentMap.clear();
 		getErrors().clear();
 		getWarnings().clear();
-		if (isMarkerCreationEnabled()) {
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper.unmark(this, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.UNKNOWN);
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper.unmark(this, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.SYNTAX_ERROR);
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper.unmark(this, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.UNRESOLVED_REFERENCE);
+		if (new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().isEclipsePlatformAvailable() && isMarkerCreationEnabled()) {
+			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper markerHelper = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMarkerHelper();
+			markerHelper.unmark(this, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.UNKNOWN);
+			markerHelper.unmark(this, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.SYNTAX_ERROR);
+			markerHelper.unmark(this, org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.UNRESOLVED_REFERENCE);
 		}
 		proxyCounter = 0;
 		resolverSwitch = null;
@@ -597,72 +604,33 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	}
 	
 	/**
-	 * Returns the raw contents of this resource.
+	 * Returns the raw contents of this resource. In contrast to getContents(), this
+	 * methods does not return a copy of the content list, but the original list.
 	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContentsInternal() {
 		return super.getContents();
 	}
 	
+	/**
+	 * Returns all warnings that are associated with this resource.
+	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getWarnings() {
 		return new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getWarnings());
 	}
 	
+	/**
+	 * Returns all errors that are associated with this resource.
+	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getErrors() {
 		return new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getErrors());
 	}
 	
-	@SuppressWarnings("restriction")	
-	private void runValidators(org.eclipse.emf.ecore.EObject root) {
-		// checking constraints provided by EMF validator classes was disabled
+	protected void runValidators(org.eclipse.emf.ecore.EObject root) {
+		// checking constraints provided by EMF validator classes was disabled by option
+		// 'disableEValidators'.
 		
-		// check EMF validation constraints
-		// EMF validation does not work if OSGi is not running
-		// The EMF validation framework code throws a NPE if the validation plug-in is not
-		// loaded. This is a bug, which is fixed in the Helios release. Nonetheless, we
-		// need to catch the exception here.
-		if (org.eclipse.core.runtime.Platform.isRunning()) {
-			// The EMF validation framework code throws a NPE if the validation plug-in is not
-			// loaded. This is a workaround for bug 322079.
-			if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
-				try {
-					org.eclipse.emf.validation.service.ModelValidationService service = org.eclipse.emf.validation.service.ModelValidationService.getInstance();
-					org.eclipse.emf.validation.service.IBatchValidator validator = service.<org.eclipse.emf.ecore.EObject, org.eclipse.emf.validation.service.IBatchValidator>newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
-					validator.setIncludeLiveConstraints(true);
-					org.eclipse.core.runtime.IStatus status = validator.validate(root);
-					addStatus(status, root);
-				} catch (Throwable t) {
-					org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
-				}
-			}
-		}
-	}
-	
-	private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
-		java.util.List<org.eclipse.emf.ecore.EObject> causes = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
-		causes.add(root);
-		if (status instanceof org.eclipse.emf.validation.model.ConstraintStatus) {
-			org.eclipse.emf.validation.model.ConstraintStatus constraintStatus = (org.eclipse.emf.validation.model.ConstraintStatus) status;
-			java.util.Set<org.eclipse.emf.ecore.EObject> resultLocus = constraintStatus.getResultLocus();
-			causes.clear();
-			causes.addAll(resultLocus);
-		}
-		boolean hasChildren = status.getChildren() != null && status.getChildren().length > 0;
-		// Ignore composite status objects that have children. The actual status
-		// information is then contained in the child objects.
-		if (!status.isMultiStatus() || !hasChildren) {
-			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.ERROR) {
-				for (org.eclipse.emf.ecore.EObject cause : causes) {
-					addError(status.getMessage(), org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.ANALYSIS_PROBLEM, cause);
-				}
-			}
-			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.WARNING) {
-				for (org.eclipse.emf.ecore.EObject cause : causes) {
-					addWarning(status.getMessage(), org.emftext.refactoring.tests.properties.resource.properties.PropertiesEProblemType.ANALYSIS_PROBLEM, cause);
-				}
-			}
-		}
-		for (org.eclipse.core.runtime.IStatus child : status.getChildren()) {
-			addStatus(child, root);
+		if (new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().isEclipsePlatformAvailable()) {
+			new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesEclipseProxy().checkEMFValidationConstraints(this, root);
 		}
 	}
 	
@@ -676,4 +644,12 @@ public class PropertiesResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 		return !loadOptions.containsKey(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS);
 	}
+	
+	protected boolean isLocationMapEnabled() {
+		if (loadOptions == null) {
+			return true;
+		}
+		return !loadOptions.containsKey(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesOptions.DISABLE_LOCATION_MAP);
+	}
+	
 }

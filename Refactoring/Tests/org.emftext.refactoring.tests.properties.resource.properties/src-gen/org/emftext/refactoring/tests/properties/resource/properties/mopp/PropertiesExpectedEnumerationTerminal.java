@@ -36,4 +36,16 @@ public class PropertiesExpectedEnumerationTerminal extends org.emftext.refactori
 	public org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesEnumerationTerminal getEnumerationTerminal() {
 		return this.enumerationTerminal;
 	}
+	
+	/**
+	 * Returns the expected enumeration terminal.
+	 */
+	public org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement getSymtaxElement() {
+		return enumerationTerminal;
+	}
+	
+	public String toString() {
+		return "EnumTerminal \"" + getEnumerationTerminal() + "\"";
+	}
+	
 }

@@ -13,7 +13,8 @@ package org.emftext.refactoring.tests.properties.resource.properties.mopp;
 public abstract class PropertiesAbstractExpectedElement implements org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement {
 	
 	private org.eclipse.emf.ecore.EClass ruleMetaclass;
-	private java.util.Set<org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> followers = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>>();
+	
+	private java.util.Set<org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[]>> followers = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[]>>();
 	
 	public PropertiesAbstractExpectedElement(org.eclipse.emf.ecore.EClass ruleMetaclass) {
 		super();
@@ -24,11 +25,11 @@ public abstract class PropertiesAbstractExpectedElement implements org.emftext.r
 		return ruleMetaclass;
 	}
 	
-	public void addFollower(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement follower, org.eclipse.emf.ecore.EStructuralFeature[] path) {
-		followers.add(new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>(follower, path));
+	public void addFollower(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement follower, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[] path) {
+		followers.add(new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[]>(follower, path));
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> getFollowers() {
+	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[]>> getFollowers() {
 		return followers;
 	}
 	

@@ -77,6 +77,9 @@ public class PropertiesOccurrence {
 		}
 		int caretOffset = textWidget.getCaretOffset();
 		caretOffset = projectionViewer.widgetOffset2ModelOffset(caretOffset);
+		if (textResource == null) {
+			return null;
+		}
 		org.emftext.refactoring.tests.properties.resource.properties.IPropertiesLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
 		
@@ -87,8 +90,9 @@ public class PropertiesOccurrence {
 			if (candidate.eIsProxy()) {
 				candidate = getResolvedEObject(candidate);
 			}
-			// take an element that is actually contained in a resource. the location map
-			// might reference elements that were removed by a post processor
+			// Only accept elements that are actually contained in a resource. The location
+			// map might reference elements that were removed by a post processor and which
+			// are therefore not part of the resource anymore.
 			if (candidate.eResource() != null) {
 				return candidate;
 			}

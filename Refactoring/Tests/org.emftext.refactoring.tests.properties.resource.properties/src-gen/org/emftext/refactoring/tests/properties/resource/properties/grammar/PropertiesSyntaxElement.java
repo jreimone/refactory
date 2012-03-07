@@ -26,9 +26,21 @@ public abstract class PropertiesSyntaxElement {
 		}
 	}
 	
+	/**
+	 * Sets the parent of this syntax element. This method must be invoked at most
+	 * once.
+	 */
 	public void setParent(PropertiesSyntaxElement parent) {
 		assert this.parent == null;
 		this.parent = parent;
+	}
+	
+	/**
+	 * Returns the parent of this syntax element. This parent is determined by the
+	 * containment hierarchy in the CS model.
+	 */
+	public PropertiesSyntaxElement getParent() {
+		return parent;
 	}
 	
 	public PropertiesSyntaxElement[] getChildren() {

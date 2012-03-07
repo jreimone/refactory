@@ -11,12 +11,12 @@ options {
 }
 
 @lexer::members {
-	public java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>();
+	public java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>();
 	public java.util.List<Integer> lexerExceptionsPosition = new java.util.ArrayList<Integer>();
 	
-	public void reportError(org.antlr.runtime3_3_0.RecognitionException e) {
+	public void reportError(org.antlr.runtime3_4_0.RecognitionException e) {
 		lexerExceptions.add(e);
-		lexerExceptionsPosition.add(((org.antlr.runtime3_3_0.ANTLRStringStream) input).index());
+		lexerExceptionsPosition.add(((org.antlr.runtime3_4_0.ANTLRStringStream) input).index());
 	}
 }
 @header{
@@ -52,7 +52,7 @@ options {
 	/**
 	 * A helper list to allow a lexer to pass errors to its parser
 	 */
-	protected java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>());
+	protected java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>());
 	
 	/**
 	 * Another helper list to allow a lexer to pass positions of errors to its parser
@@ -65,7 +65,7 @@ options {
 	 * pushed on the stack. Once the element was parser completely it is popped from
 	 * the stack.
 	 */
-	protected java.util.Stack<org.eclipse.emf.ecore.EObject> incompleteObjects = new java.util.Stack<org.eclipse.emf.ecore.EObject>();
+	java.util.List<org.eclipse.emf.ecore.EObject> incompleteObjects = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
 	
 	private int stopIncludingHiddenTokens;
 	private int stopExcludingHiddenTokens;
@@ -111,16 +111,26 @@ options {
 		});
 	}
 	
-	public void addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement terminal, int followSetID, org.eclipse.emf.ecore.EStructuralFeature... containmentTrace) {
+	public void addExpectedElement(org.eclipse.emf.ecore.EClass eClass, int[] ids) {
 		if (!this.rememberExpectedElements) {
 			return;
 		}
-		org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal expectedElement = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal(terminal, followSetID, containmentTrace);
+		int terminalID = ids[0];
+		int followSetID = ids[1];
+		org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement terminal = org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINALS[terminalID];
+		org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[] containmentFeatures = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[ids.length - 2];
+		for (int i = 2; i < ids.length; i++) {
+			containmentFeatures[i - 2] = org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.LINKS[ids[i]];
+		}
+		org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesContainmentTrace containmentTrace = new org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesContainmentTrace(eClass, containmentFeatures);
+		org.eclipse.emf.ecore.EObject container = getLastIncompleteElement();
+		org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal expectedElement = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal(container, terminal, followSetID, containmentTrace);
 		setPosition(expectedElement, input.index());
 		int startIncludingHiddenTokens = expectedElement.getStartIncludingHiddenTokens();
 		if (lastStartIncludingHidden >= 0 && lastStartIncludingHidden < startIncludingHiddenTokens && cursorOffset > startIncludingHiddenTokens) {
 			// clear list of expected elements
 			this.expectedElements.clear();
+			this.expectedElementsIndexOfLastCompleteElement = 0;
 		}
 		lastStartIncludingHidden = startIncludingHiddenTokens;
 		this.expectedElements.add(expectedElement);
@@ -130,6 +140,9 @@ options {
 	}
 	
 	protected void copyLocalizationInfos(final org.eclipse.emf.ecore.EObject source, final org.eclipse.emf.ecore.EObject target) {
+		if (disableLocationMap) {
+			return;
+		}
 		postParseCommands.add(new org.emftext.refactoring.tests.properties.resource.properties.IPropertiesCommand<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource>() {
 			public boolean execute(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource resource) {
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesLocationMap locationMap = resource.getLocationMap();
@@ -146,7 +159,10 @@ options {
 		});
 	}
 	
-	protected void copyLocalizationInfos(final org.antlr.runtime3_3_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
+	protected void copyLocalizationInfos(final org.antlr.runtime3_4_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
+		if (disableLocationMap) {
+			return;
+		}
 		postParseCommands.add(new org.emftext.refactoring.tests.properties.resource.properties.IPropertiesCommand<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource>() {
 			public boolean execute(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource resource) {
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesLocationMap locationMap = resource.getLocationMap();
@@ -171,6 +187,9 @@ options {
 	 * location map.
 	 */
 	protected void setLocalizationEnd(java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesCommand<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource>> postParseCommands , final org.eclipse.emf.ecore.EObject object, final int endChar, final int endLine) {
+		if (disableLocationMap) {
+			return;
+		}
 		postParseCommands.add(new org.emftext.refactoring.tests.properties.resource.properties.IPropertiesCommand<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource>() {
 			public boolean execute(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource resource) {
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesLocationMap locationMap = resource.getLocationMap();
@@ -188,12 +207,12 @@ options {
 	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextParser createInstance(java.io.InputStream actualInputStream, String encoding) {
 		try {
 			if (encoding == null) {
-				return new PropertiesParser(new org.antlr.runtime3_3_0.CommonTokenStream(new PropertiesLexer(new org.antlr.runtime3_3_0.ANTLRInputStream(actualInputStream))));
+				return new PropertiesParser(new org.antlr.runtime3_4_0.CommonTokenStream(new PropertiesLexer(new org.antlr.runtime3_4_0.ANTLRInputStream(actualInputStream))));
 			} else {
-				return new PropertiesParser(new org.antlr.runtime3_3_0.CommonTokenStream(new PropertiesLexer(new org.antlr.runtime3_3_0.ANTLRInputStream(actualInputStream, encoding))));
+				return new PropertiesParser(new org.antlr.runtime3_4_0.CommonTokenStream(new PropertiesLexer(new org.antlr.runtime3_4_0.ANTLRInputStream(actualInputStream, encoding))));
 			}
 		} catch (java.io.IOException e) {
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError("Error while creating parser.", e);
+			new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().logError("Error while creating parser.", e);
 			return null;
 		}
 	}
@@ -205,7 +224,7 @@ options {
 		super(null);
 	}
 	
-	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_3_0.RecognitionException {
+	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_4_0.RecognitionException {
 		this.lastPosition = 0;
 		// required because the lexer class can not be subclassed
 		((PropertiesLexer) getTokenStream().getTokenSource()).lexerExceptions = lexerExceptions;
@@ -241,7 +260,7 @@ options {
 		return mismatchedTokenRecoveryTries;
 	}
 	
-	public Object getMissingSymbol(org.antlr.runtime3_3_0.IntStream arg0, org.antlr.runtime3_3_0.RecognitionException arg1, int arg2, org.antlr.runtime3_3_0.BitSet arg3) {
+	public Object getMissingSymbol(org.antlr.runtime3_4_0.IntStream arg0, org.antlr.runtime3_4_0.RecognitionException arg1, int arg2, org.antlr.runtime3_4_0.BitSet arg3) {
 		mismatchedTokenRecoveryTries++;
 		return super.getMissingSymbol(arg0, arg1, arg2, arg3);
 	}
@@ -275,7 +294,7 @@ options {
 			if (lexerExceptions.isEmpty()) {
 				parseResult.setRoot(result);
 			}
-		} catch (org.antlr.runtime3_3_0.RecognitionException re) {
+		} catch (org.antlr.runtime3_4_0.RecognitionException re) {
 			reportError(re);
 		} catch (java.lang.IllegalArgumentException iae) {
 			if ("The 'no null' constraint is violated".equals(iae.getMessage())) {
@@ -285,7 +304,7 @@ options {
 				iae.printStackTrace();
 			}
 		}
-		for (org.antlr.runtime3_3_0.RecognitionException re : lexerExceptions) {
+		for (org.antlr.runtime3_4_0.RecognitionException re : lexerExceptions) {
 			reportLexicalError(re);
 		}
 		parseResult.getPostParseCommands().addAll(postParseCommands);
@@ -297,10 +316,10 @@ options {
 		this.parseToIndexTypeObject = type;
 		this.cursorOffset = cursorOffset;
 		this.lastStartIncludingHidden = -1;
-		final org.antlr.runtime3_3_0.CommonTokenStream tokenStream = (org.antlr.runtime3_3_0.CommonTokenStream) getTokenStream();
+		final org.antlr.runtime3_4_0.CommonTokenStream tokenStream = (org.antlr.runtime3_4_0.CommonTokenStream) getTokenStream();
 		org.emftext.refactoring.tests.properties.resource.properties.IPropertiesParseResult result = parse();
 		for (org.eclipse.emf.ecore.EObject incompleteObject : incompleteObjects) {
-			org.antlr.runtime3_3_0.Lexer lexer = (org.antlr.runtime3_3_0.Lexer) tokenStream.getTokenSource();
+			org.antlr.runtime3_4_0.Lexer lexer = (org.antlr.runtime3_4_0.Lexer) tokenStream.getTokenSource();
 			int endChar = lexer.getCharIndex();
 			int endLine = lexer.getLine();
 			setLocalizationEnd(result.getPostParseCommands(), incompleteObject, endChar, endLine);
@@ -330,7 +349,7 @@ options {
 		int followSetID = 12;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
-			org.antlr.runtime3_3_0.CommonToken nextToken = (org.antlr.runtime3_3_0.CommonToken) tokenStream.get(i);
+			org.antlr.runtime3_4_0.CommonToken nextToken = (org.antlr.runtime3_4_0.CommonToken) tokenStream.get(i);
 			if (nextToken.getType() < 0) {
 				break;
 			}
@@ -349,10 +368,12 @@ options {
 				for (org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal nextFollow : currentFollowSet) {
 					if (nextFollow.getTerminal().getTokenNames().contains(getTokenNames()[nextToken.getType()])) {
 						// keep this one - it matches
-						java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> newFollowers = nextFollow.getTerminal().getFollowers();
-						for (org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]> newFollowerPair : newFollowers) {
+						java.util.Collection<org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[]>> newFollowers = nextFollow.getTerminal().getFollowers();
+						for (org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesPair<org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesContainedFeature[]> newFollowerPair : newFollowers) {
 							org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement newFollower = newFollowerPair.getLeft();
-							org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal newFollowTerminal = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal(newFollower, followSetID, newFollowerPair.getRight());
+							org.eclipse.emf.ecore.EObject container = getLastIncompleteElement();
+							org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesContainmentTrace containmentTrace = new org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesContainmentTrace(null, newFollowerPair.getRight());
+							org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal newFollowTerminal = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectedTerminal(container, newFollower, followSetID, containmentTrace);
 							newFollowSet.add(newFollowTerminal);
 							expectedElements.add(newFollowTerminal);
 						}
@@ -378,9 +399,9 @@ options {
 			if (index >= input.size()) {
 				break;
 			}
-			org.antlr.runtime3_3_0.CommonToken tokenAtIndex = (org.antlr.runtime3_3_0.CommonToken) input.get(index);
+			org.antlr.runtime3_4_0.CommonToken tokenAtIndex = (org.antlr.runtime3_4_0.CommonToken) input.get(index);
 			stopIncludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
-			if (tokenAtIndex.getChannel() != 99) {
+			if (tokenAtIndex.getChannel() != 99 && !anonymousTokens.contains(tokenAtIndex)) {
 				stopExcludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
 			}
 		}
@@ -388,7 +409,7 @@ options {
 		expectedElement.setPosition(stopExcludingHiddenTokens, stopIncludingHiddenTokens);
 	}
 	
-	public Object recoverFromMismatchedToken(org.antlr.runtime3_3_0.IntStream input, int ttype, org.antlr.runtime3_3_0.BitSet follow) throws org.antlr.runtime3_3_0.RecognitionException {
+	public Object recoverFromMismatchedToken(org.antlr.runtime3_4_0.IntStream input, int ttype, org.antlr.runtime3_4_0.BitSet follow) throws org.antlr.runtime3_4_0.RecognitionException {
 		if (!rememberExpectedElements) {
 			return super.recoverFromMismatchedToken(input, ttype, follow);
 		} else {
@@ -399,35 +420,35 @@ options {
 	/**
 	 * Translates errors thrown by the parser into human readable messages.
 	 */
-	public void reportError(final org.antlr.runtime3_3_0.RecognitionException e)  {
+	public void reportError(final org.antlr.runtime3_4_0.RecognitionException e)  {
 		String message = e.getMessage();
-		if (e instanceof org.antlr.runtime3_3_0.MismatchedTokenException) {
-			org.antlr.runtime3_3_0.MismatchedTokenException mte = (org.antlr.runtime3_3_0.MismatchedTokenException) e;
+		if (e instanceof org.antlr.runtime3_4_0.MismatchedTokenException) {
+			org.antlr.runtime3_4_0.MismatchedTokenException mte = (org.antlr.runtime3_4_0.MismatchedTokenException) e;
 			String expectedTokenName = formatTokenName(mte.expecting);
 			String actualTokenName = formatTokenName(e.token.getType());
 			message = "Syntax error on token \"" + e.token.getText() + " (" + actualTokenName + ")\", \"" + expectedTokenName + "\" expected";
-		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedTreeNodeException) {
-			org.antlr.runtime3_3_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_3_0.MismatchedTreeNodeException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedTreeNodeException) {
+			org.antlr.runtime3_4_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_4_0.MismatchedTreeNodeException) e;
 			String expectedTokenName = formatTokenName(mtne.expecting);
 			message = "mismatched tree node: " + "xxx" + "; tokenName " + expectedTokenName;
-		} else if (e instanceof org.antlr.runtime3_3_0.NoViableAltException) {
+		} else if (e instanceof org.antlr.runtime3_4_0.NoViableAltException) {
 			message = "Syntax error on token \"" + e.token.getText() + "\", check following tokens";
-		} else if (e instanceof org.antlr.runtime3_3_0.EarlyExitException) {
+		} else if (e instanceof org.antlr.runtime3_4_0.EarlyExitException) {
 			message = "Syntax error on token \"" + e.token.getText() + "\", delete this token";
-		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedSetException) {
-			org.antlr.runtime3_3_0.MismatchedSetException mse = (org.antlr.runtime3_3_0.MismatchedSetException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedSetException) {
+			org.antlr.runtime3_4_0.MismatchedSetException mse = (org.antlr.runtime3_4_0.MismatchedSetException) e;
 			message = "mismatched token: " + e.token + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedNotSetException) {
-			org.antlr.runtime3_3_0.MismatchedNotSetException mse = (org.antlr.runtime3_3_0.MismatchedNotSetException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedNotSetException) {
+			org.antlr.runtime3_4_0.MismatchedNotSetException mse = (org.antlr.runtime3_4_0.MismatchedNotSetException) e;
 			message = "mismatched token: " +  e.token + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_3_0.FailedPredicateException) {
-			org.antlr.runtime3_3_0.FailedPredicateException fpe = (org.antlr.runtime3_3_0.FailedPredicateException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.FailedPredicateException) {
+			org.antlr.runtime3_4_0.FailedPredicateException fpe = (org.antlr.runtime3_4_0.FailedPredicateException) e;
 			message = "rule " + fpe.ruleName + " failed predicate: {" +  fpe.predicateText + "}?";
 		}
 		// the resource may be null if the parser is used for code completion
 		final String finalMessage = message;
-		if (e.token instanceof org.antlr.runtime3_3_0.CommonToken) {
-			final org.antlr.runtime3_3_0.CommonToken ct = (org.antlr.runtime3_3_0.CommonToken) e.token;
+		if (e.token instanceof org.antlr.runtime3_4_0.CommonToken) {
+			final org.antlr.runtime3_4_0.CommonToken ct = (org.antlr.runtime3_4_0.CommonToken) e.token;
 			addErrorToResource(finalMessage, ct.getCharPositionInLine(), ct.getLine(), ct.getStartIndex(), ct.getStopIndex());
 		} else {
 			addErrorToResource(finalMessage, e.token.getCharPositionInLine(), e.token.getLine(), 1, 5);
@@ -437,40 +458,55 @@ options {
 	/**
 	 * Translates errors thrown by the lexer into human readable messages.
 	 */
-	public void reportLexicalError(final org.antlr.runtime3_3_0.RecognitionException e)  {
+	public void reportLexicalError(final org.antlr.runtime3_4_0.RecognitionException e)  {
 		String message = "";
-		if (e instanceof org.antlr.runtime3_3_0.MismatchedTokenException) {
-			org.antlr.runtime3_3_0.MismatchedTokenException mte = (org.antlr.runtime3_3_0.MismatchedTokenException) e;
+		if (e instanceof org.antlr.runtime3_4_0.MismatchedTokenException) {
+			org.antlr.runtime3_4_0.MismatchedTokenException mte = (org.antlr.runtime3_4_0.MismatchedTokenException) e;
 			message = "Syntax error on token \"" + ((char) e.c) + "\", \"" + (char) mte.expecting + "\" expected";
-		} else if (e instanceof org.antlr.runtime3_3_0.NoViableAltException) {
+		} else if (e instanceof org.antlr.runtime3_4_0.NoViableAltException) {
 			message = "Syntax error on token \"" + ((char) e.c) + "\", delete this token";
-		} else if (e instanceof org.antlr.runtime3_3_0.EarlyExitException) {
-			org.antlr.runtime3_3_0.EarlyExitException eee = (org.antlr.runtime3_3_0.EarlyExitException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.EarlyExitException) {
+			org.antlr.runtime3_4_0.EarlyExitException eee = (org.antlr.runtime3_4_0.EarlyExitException) e;
 			message = "required (...)+ loop (decision=" + eee.decisionNumber + ") did not match anything; on line " + e.line + ":" + e.charPositionInLine + " char=" + ((char) e.c) + "'";
-		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedSetException) {
-			org.antlr.runtime3_3_0.MismatchedSetException mse = (org.antlr.runtime3_3_0.MismatchedSetException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedSetException) {
+			org.antlr.runtime3_4_0.MismatchedSetException mse = (org.antlr.runtime3_4_0.MismatchedSetException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedNotSetException) {
-			org.antlr.runtime3_3_0.MismatchedNotSetException mse = (org.antlr.runtime3_3_0.MismatchedNotSetException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedNotSetException) {
+			org.antlr.runtime3_4_0.MismatchedNotSetException mse = (org.antlr.runtime3_4_0.MismatchedNotSetException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedRangeException) {
-			org.antlr.runtime3_3_0.MismatchedRangeException mre = (org.antlr.runtime3_3_0.MismatchedRangeException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedRangeException) {
+			org.antlr.runtime3_4_0.MismatchedRangeException mre = (org.antlr.runtime3_4_0.MismatchedRangeException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set '" + (char) mre.a + "'..'" + (char) mre.b + "'";
-		} else if (e instanceof org.antlr.runtime3_3_0.FailedPredicateException) {
-			org.antlr.runtime3_3_0.FailedPredicateException fpe = (org.antlr.runtime3_3_0.FailedPredicateException) e;
+		} else if (e instanceof org.antlr.runtime3_4_0.FailedPredicateException) {
+			org.antlr.runtime3_4_0.FailedPredicateException fpe = (org.antlr.runtime3_4_0.FailedPredicateException) e;
 			message = "rule " + fpe.ruleName + " failed predicate: {" + fpe.predicateText + "}?";
 		}
 		addErrorToResource(message, e.charPositionInLine, e.line, lexerExceptionsPosition.get(lexerExceptions.indexOf(e)), lexerExceptionsPosition.get(lexerExceptions.indexOf(e)));
 	}
 	
-	protected void completedElement(Object object, boolean isContainment) {
+	private void startIncompleteElement(Object object) {
+		if (object instanceof org.eclipse.emf.ecore.EObject) {
+			this.incompleteObjects.add((org.eclipse.emf.ecore.EObject) object);
+		}
+	}
+	
+	private void completedElement(Object object, boolean isContainment) {
 		if (isContainment && !this.incompleteObjects.isEmpty()) {
-			this.incompleteObjects.pop();
+			boolean exists = this.incompleteObjects.remove(object);
+			if (!exists) {
+			}
 		}
 		if (object instanceof org.eclipse.emf.ecore.EObject) {
 			this.tokenIndexOfLastCompleteElement = getTokenStream().index();
 			this.expectedElementsIndexOfLastCompleteElement = expectedElements.size() - 1;
 		}
+	}
+	
+	private org.eclipse.emf.ecore.EObject getLastIncompleteElement() {
+		if (incompleteObjects.isEmpty()) {
+			return null;
+		}
+		return incompleteObjects.get(incompleteObjects.size() - 1);
 	}
 	
 }
@@ -479,7 +515,7 @@ start returns [ org.eclipse.emf.ecore.EObject element = null]
 :
 	{
 		// follow set for start rule(s)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_0, 0, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[0]);
 		expectedElementsIndexOfLastCompleteElement = 0;
 	}
 	(
@@ -504,7 +540,7 @@ parse_org_emftext_refactoring_tests_properties_PropertyModel returns [org.emftex
 					}
 					if (element == null) {
 						element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createPropertyModel();
-						incompleteObjects.push(element);
+						startIncompleteElement(element);
 					}
 					if (a0_0 != null) {
 						if (a0_0 != null) {
@@ -520,14 +556,14 @@ parse_org_emftext_refactoring_tests_properties_PropertyModel returns [org.emftex
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_0, 1, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_0);
+				addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[1]);
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_0, 2, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[2]);
 	}
 	
 ;
@@ -544,7 +580,7 @@ parse_org_emftext_refactoring_tests_properties_Category returns [org.emftext.ref
 			}
 			if (element == null) {
 				element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createCategory();
-				incompleteObjects.push(element);
+				startIncompleteElement(element);
 			}
 			if (a0 != null) {
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_91_93");
@@ -553,9 +589,9 @@ parse_org_emftext_refactoring_tests_properties_Category returns [org.emftext.ref
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.CATEGORY__NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
 				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
+				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
 					element.eSet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.CATEGORY__NAME), value);
@@ -563,16 +599,16 @@ parse_org_emftext_refactoring_tests_properties_Category returns [org.emftext.ref
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesGrammarInformationProvider.PROPERTIES_1_0_0_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_1, 3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_1, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_2, 3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_3, 3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_0, 3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[3]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[4]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[5]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[6]);
 	}
 	
 	(
@@ -583,7 +619,7 @@ parse_org_emftext_refactoring_tests_properties_Category returns [org.emftext.ref
 				}
 				if (element == null) {
 					element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createCategory();
-					incompleteObjects.push(element);
+					startIncompleteElement(element);
 				}
 				if (a1_0 != null) {
 					if (a1_0 != null) {
@@ -600,10 +636,10 @@ parse_org_emftext_refactoring_tests_properties_Category returns [org.emftext.ref
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_1, 4, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_1, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_2, 4, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_3, 4, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_0, 4, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[7]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[8]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[9]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[10]);
 	}
 	
 ;
@@ -621,7 +657,7 @@ parse_org_emftext_refactoring_tests_properties_KeyValuePair returns [org.emftext
 					}
 					if (element == null) {
 						element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createKeyValuePair();
-						incompleteObjects.push(element);
+						startIncompleteElement(element);
 					}
 					if (a0_0 != null) {
 						if (a0_0 != null) {
@@ -637,30 +673,30 @@ parse_org_emftext_refactoring_tests_properties_KeyValuePair returns [org.emftext
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_4, 5);
+				addExpectedElement(null, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[11]);
 			}
 			
 			a1 = '=' {
 				if (element == null) {
 					element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createKeyValuePair();
-					incompleteObjects.push(element);
+					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesGrammarInformationProvider.PROPERTIES_2_0_0_0_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_2, 6, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3);
-				addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_3, 6, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3);
+				addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[12]);
+				addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[13]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_2, 7, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_3, 7, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[14]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[15]);
 	}
 	
 	(
@@ -670,7 +706,7 @@ parse_org_emftext_refactoring_tests_properties_KeyValuePair returns [org.emftext
 			}
 			if (element == null) {
 				element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createKeyValuePair();
-				incompleteObjects.push(element);
+				startIncompleteElement(element);
 			}
 			if (a2_0 != null) {
 				if (a2_0 != null) {
@@ -686,10 +722,10 @@ parse_org_emftext_refactoring_tests_properties_KeyValuePair returns [org.emftext
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_1, 8, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_1, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_2, 8, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_3, 8, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_0, 8, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[16]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[17]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[18]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[19]);
 	}
 	
 ;
@@ -706,7 +742,7 @@ parse_org_emftext_refactoring_tests_properties_Key returns [org.emftext.refactor
 			}
 			if (element == null) {
 				element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createKey();
-				incompleteObjects.push(element);
+				startIncompleteElement(element);
 			}
 			if (a0 != null) {
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
@@ -715,9 +751,9 @@ parse_org_emftext_refactoring_tests_properties_Key returns [org.emftext.refactor
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
 				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
+				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
 					element.eSet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME), value);
@@ -725,13 +761,13 @@ parse_org_emftext_refactoring_tests_properties_Key returns [org.emftext.refactor
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesGrammarInformationProvider.PROPERTIES_3_0_0_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_4, 9);
+		addExpectedElement(null, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[20]);
 	}
 	
 ;
@@ -748,7 +784,7 @@ parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue returns [or
 			}
 			if (element == null) {
 				element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createEObjectReferenceValue();
-				incompleteObjects.push(element);
+				startIncompleteElement(element);
 			}
 			if (a0 != null) {
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
@@ -757,7 +793,7 @@ parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue returns [or
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.EOBJECT_REFERENCE_VALUE__OBJECT_REFERENCE), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.eclipse.emf.ecore.EObject proxy = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.createEObject();
@@ -770,17 +806,17 @@ parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue returns [or
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesGrammarInformationProvider.PROPERTIES_4_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_1, 10, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_1, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_2, 10, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_3, 10, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_0, 10, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[21]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[22]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[23]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[24]);
 	}
 	
 ;
@@ -797,7 +833,7 @@ parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.
 			}
 			if (element == null) {
 				element = org.emftext.refactoring.tests.properties.PropertiesFactory.eINSTANCE.createStringValue();
-				incompleteObjects.push(element);
+				startIncompleteElement(element);
 			}
 			if (a0 != null) {
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
@@ -806,9 +842,9 @@ parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.STRING_VALUE__VALUE), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
 				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
+				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
 					element.eSet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.STRING_VALUE__VALUE), value);
@@ -816,16 +852,16 @@ parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesGrammarInformationProvider.PROPERTIES_5_0_0_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_1, 11, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_1, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_2, 11, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_3, 11, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_3, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_2);
-		addExpectedElement(org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.TERMINAL_0, 11, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesFollowSetProvider.FEATURE_0);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[25]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[26]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[27]);
+		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesExpectationConstants.EXPECTATIONS[28]);
 	}
 	
 ;

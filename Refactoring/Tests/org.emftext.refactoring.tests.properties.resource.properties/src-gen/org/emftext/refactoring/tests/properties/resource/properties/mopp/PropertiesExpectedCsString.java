@@ -23,6 +23,13 @@ public class PropertiesExpectedCsString extends org.emftext.refactoring.tests.pr
 		return keyword.getValue();
 	}
 	
+	/**
+	 * Returns the expected keyword.
+	 */
+	public org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement getSymtaxElement() {
+		return keyword;
+	}
+	
 	public java.util.Set<String> getTokenNames() {
 		return java.util.Collections.singleton("'" + getValue() + "'");
 	}

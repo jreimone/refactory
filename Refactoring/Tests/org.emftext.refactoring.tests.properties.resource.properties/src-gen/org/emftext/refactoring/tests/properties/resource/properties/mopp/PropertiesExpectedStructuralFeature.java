@@ -23,6 +23,13 @@ public class PropertiesExpectedStructuralFeature extends org.emftext.refactoring
 		return placeholder.getFeature();
 	}
 	
+	/**
+	 * Returns the expected placeholder.
+	 */
+	public org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement getSymtaxElement() {
+		return placeholder;
+	}
+	
 	public String getTokenName() {
 		return placeholder.getTokenName();
 	}
