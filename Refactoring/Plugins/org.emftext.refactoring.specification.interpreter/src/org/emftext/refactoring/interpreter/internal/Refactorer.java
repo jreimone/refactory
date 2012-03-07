@@ -63,16 +63,16 @@ public class Refactorer implements IRefactorer {
 		this.resource = resource;
 		this.model = resource.getContents().get(0);
 		this.roleMapping = roleMapping;
+		createInterpreter();
 	}
 
-	private IRefactoringInterpreter createInterpreter() {
+	private void createInterpreter() {
 		RoleModel roleModel = roleMapping.getMappedRoleModel();
 		EcoreUtil.resolveAll(roleModel);
 		RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(roleModel);
 		IRefactoringPostProcessor postProcessor = IRoleMappingRegistry.INSTANCE.getPostProcessor(roleMapping);
-		IRefactoringInterpreter interpreter = new RefactoringInterpreter(postProcessor);
+		interpreter = new RefactoringInterpreter(postProcessor);
 		interpreter.initialize(refSpec, roleMapping);
-		return interpreter;
 	}
 
 	/*
@@ -93,16 +93,16 @@ public class Refactorer implements IRefactorer {
 	//	}
 
 	public void fakeRefactor() {
+		if(filteredSelection == null){
+			loadReferencingResources();
+		}
 		if (interpreter != null && filteredSelection.size() > 0) {
 			fakeInterpreteAndPreCollectValues(roleMapping, filteredSelection, interpreter, currentModelResourceSet);
 		} 
 	}
 
-	//TODO execute as initialisation before refactoring
 	private void loadReferencingResources(){
 		filteredSelection = filterSelectedElements();
-		interpreter = createInterpreter();
-
 		if (interpreter != null && filteredSelection.size() > 0) {
 			List<Resource> allReferencingResources = IndexConnectorRegistry.INSTANCE.getReferencingResources(model);
 			currentModelResourceSet = getResource().getResourceSet();
@@ -151,10 +151,12 @@ public class Refactorer implements IRefactorer {
 	 * boolean)
 	 */
 	public EObject refactor() {
+		if(filteredSelection == null){
+			loadReferencingResources();
+		}
 		if (roleMapping == null || interpreter == null || filteredSelection.size() == 0 || currentModelResourceSet == null) {
 			return null;
 		}
-		loadReferencingResources();
 		EObject refactoredModel = realInterprete(filteredSelection, interpreter, currentModelResourceSet);
 		return refactoredModel;
 	}
