@@ -16,7 +16,7 @@ import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
 
 public class BasicRefactoringSpecificationRegistry implements
-		IRefactoringSpecificationRegistry {
+IRefactoringSpecificationRegistry {
 
 	private Map<RoleModel, RefactoringSpecification> refSpecMap;
 

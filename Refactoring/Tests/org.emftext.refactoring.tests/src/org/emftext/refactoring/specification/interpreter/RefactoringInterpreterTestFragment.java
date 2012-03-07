@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.interpreter.IRefactorer;
-import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.test.QueryUtil;
 import org.emftext.refactoring.test.TestUtil;
@@ -32,12 +30,6 @@ public class RefactoringInterpreterTestFragment extends TestClass{
 
 	private static final String MODEL = "MODEL_";
 	private static final String PATH = "PATH_";
-	
-	private IRefactorer getRefactorer(Resource resource){
-		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource);
-		assertNotNull("No refactorer could be created for resource " + resource.getURI().toFileString(), refactorer);
-		return refactorer;
-	}
 	
 	@Test
 	@InputData({MODEL,PATH})
@@ -70,11 +62,8 @@ public class RefactoringInterpreterTestFragment extends TestClass{
 	@InputData({MODEL,PATH})
 	public void getPossibleRefactoringSpecifications(){
 		Resource resource = getTestDataSet().getResourceByPattern(MODEL, false);
-		IRefactorer refactorer = getRefactorer(resource);
-		
 		List<EObject> elements = getElementsByQuery(PATH, 1, resource);
-		refactorer.setInput(elements);
-		List<RefactoringSpecification> refSpecs = refactorer.getPossibleRefactorings(1.0);
+		List<RefactoringSpecification> refSpecs = IRoleMappingRegistry.INSTANCE.getPossibleRefactorings(elements, 1.0);
 		assertNotNull("No refspecs found", refSpecs);
 		assertTrue("No refspecs found", refSpecs.size() > 0);
 	}

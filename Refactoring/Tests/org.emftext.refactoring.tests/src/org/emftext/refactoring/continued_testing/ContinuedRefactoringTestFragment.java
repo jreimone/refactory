@@ -25,6 +25,7 @@ import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.interpreter.IValueProviderRegistry;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.test.QueryUtil;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.test.core.InputData;
@@ -41,7 +42,7 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 	 * Files belonging together, i.e. the input file, the expected file,		*
 	 * the file containing the path through the model, etc.						*
 	 * must only differ in its prefixes! If not they won't be recognized		*
-	 * as a belonging together.													*
+	 * as belonging together.													*
 	 * 																			*
 	*****************************************************************************/
 	
@@ -80,11 +81,8 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 				+ "\nquery: " + query, elements);
 		assertTrue("query must result at least in 1 element", elements.size() > 0);
 		
-		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(inputResource);
-		assertNotNull("No refactorings exist for metamodel " + inputResource.getContents().get(0).eClass().getEPackage().getNsURI(), refactorer);
 		
-		refactorer.setInput(elements);
-		List<RoleMapping> mappings = refactorer.getPossibleRoleMappings(1.0);
+		List<RoleMapping> mappings = IRoleMappingRegistry.INSTANCE.getPossibleRoleMappingsForResource(inputResource, elements, 1.0);
 		assertNotNull(mappings);
 		assertTrue(mappings.size() > 0);
 		File mappingFile = getTestDataSet().getInputFileByPattern(MAPPING_PATTERN);
@@ -96,11 +94,12 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 			}
 		}
 		assertNotNull(mappingToUse);
+		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(inputResource, mappingToUse);
+		assertNotNull("No refactorings exist for metamodel " + inputResource.getContents().get(0).eClass().getEPackage().getNsURI(), refactorer);
+		refactorer.setInput(elements);
 		IValueProviderFactory factory = new TestValueProviderFactory();
 		refactorer.setValueProviderFactory(factory);
 		IValueProviderRegistry.INSTANCE.registerValueProvider(mappingToUse, TestAttributeValueProvider.class);
-		refactorer.setRoleMappingToInterprete(mappingToUse);
-//		refactorer.fakeRefactor();
 		EObject refactoredModel = refactorer.refactor();
 		assertNotNull(refactoredModel);
 	
