@@ -83,8 +83,8 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		
 		
 		List<RoleMapping> mappings = IRoleMappingRegistry.INSTANCE.getPossibleRoleMappingsForResource(inputResource, elements, 1.0);
-		assertNotNull(mappings);
-		assertTrue(mappings.size() > 0);
+		assertNotNull("Some mappings must be registered for " + inputModel.eClass().getEPackage().getNsURI(), mappings);
+		assertTrue("At least one mapping must be registered for " + inputModel.eClass().getEPackage().getNsURI(), mappings.size() > 0);
 		File mappingFile = getTestDataSet().getInputFileByPattern(MAPPING_PATTERN);
 		String mappingName = QueryUtil.getLineInFile(mappingFile, 1).trim();
 		RoleMapping mappingToUse = null;
