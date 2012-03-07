@@ -318,9 +318,7 @@ public class RoleUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends EObject> List<T> getObjectsForRole(
-			String roleName, Class<T> type,
-			Map<Role, List<EObject>> roleRuntimeInstanceMap) {
+	public static <T extends EObject> List<T> getObjectsForRole(String roleName, Class<T> type, Map<Role, List<EObject>> roleRuntimeInstanceMap) {
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		List<T> typedObjects = new ArrayList<T>();
 

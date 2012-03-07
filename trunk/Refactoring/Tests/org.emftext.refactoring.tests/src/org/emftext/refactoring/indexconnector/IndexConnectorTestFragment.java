@@ -10,8 +10,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
-import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.test.TestUtil;
 import org.emftext.test.core.ExpectedData;

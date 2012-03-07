@@ -28,8 +28,10 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.ImageData;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.Activator;
 import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
@@ -329,5 +331,20 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		String mmUri = root.eClass().getEPackage().getNsURI();
 		Map<String, RoleMapping> roleMappings = getRoleMappingsForUri(mmUri);
 		return RoleUtil.getPossibleMappingsForInputSelection(selectedElements, roleMappings, minEquality);
+	}
+	
+	@Override
+	public List<RefactoringSpecification> getPossibleRefactorings(List<? extends EObject> selection, double minEquality) {
+		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
+		String mmUri = selection.get(0).eClass().getEPackage().getNsURI();
+		Map<String, RoleMapping> roleMappings = getRoleMappingsForUri(mmUri);
+		List<RoleMapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(selection, roleMappings, minEquality);
+		for (RoleMapping mapping : possibleMappings) {
+			RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
+			if (refSpec != null) {
+				refSpecs.add(refSpec);
+			}
+		}
+		return refSpecs;
 	}
 }

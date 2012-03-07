@@ -7,8 +7,10 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.registry.rolemapping.impl.BasicRoleMappingRegistry;
 
 /**
@@ -98,4 +100,14 @@ public interface IRoleMappingRegistry {
 	 * @return
 	 */
 	public List<RoleMapping> getPossibleRoleMappingsForResource(Resource resource, List<EObject> selectedElements, double minEquality);
+	
+	/**
+	 * Infers over the objects from the given <code>selection</code> and identifies all of its applied roles.
+	 * Then all {@link RoleMapping}s will be checked for roles marked as {@link RoleModifier#INPUT} and compared to
+	 * the input. If all input roles are present in the input then value 1.0 will be returned.
+	 * 
+	 * @param minEquality specifies the minimum equality in percent the applied roles must fulfill
+	 * @return a list of all {@link RefactoringSpecification}s having a percentual equality greater or equal <code>minEquality</code> 
+	 */
+	public List<RefactoringSpecification> getPossibleRefactorings(List<? extends EObject> selection, double minEquality);
 }
