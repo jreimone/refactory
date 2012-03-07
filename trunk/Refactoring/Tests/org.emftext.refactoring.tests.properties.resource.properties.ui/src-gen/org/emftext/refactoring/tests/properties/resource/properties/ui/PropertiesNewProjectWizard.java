@@ -12,7 +12,7 @@ package org.emftext.refactoring.tests.properties.resource.properties.ui;
  * .
  * It is responsible for offering an example project via the new dialog of Eclipse.
  */
-public class PropertiesExampleProjectWizard extends org.eclipse.jface.wizard.Wizard implements org.eclipse.ui.INewWizard, org.eclipse.core.runtime.IExecutableExtension {
+public class PropertiesNewProjectWizard extends org.eclipse.jface.wizard.Wizard implements org.eclipse.ui.INewWizard, org.eclipse.core.runtime.IExecutableExtension {
 	
 	/**
 	 * The single page provided by this base implementation. It provides all the
@@ -23,42 +23,37 @@ public class PropertiesExampleProjectWizard extends org.eclipse.jface.wizard.Wiz
 	/**
 	 * The name of the project creation page
 	 */
-	private String pageName = "PAGE_TITLE";
+	private String pageName = "New " + new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation().getSyntaxName() + " Project";
 	
 	/**
 	 * The title of the project creation page
 	 */
-	private String pageTitle = "PAGE_TITLE";
+	private String pageTitle = pageName;
 	
 	/**
 	 * The description of the project creation page
 	 */
-	private String pageDescription = "PAGE_DESCRIPTION";
+	private String pageDescription = "Enter a name and select a location where the new project shall be created.";
 	
 	/**
-	 * The name of the project in the project creation page
+	 *  The name of the project in the project creation page
 	 */
-	private String pageProjectName = "PROJECT_NAME";
+	private String  pageProjectName= "";
 	
 	/**
-	 * Does the project need a java nature?
+	 * The name of the new project zip file (relative to the UI plugin's root)
 	 */
-	private boolean needsJavaNature = false;
+	private String  newProjectZip="newProject.zip";
 	
 	/**
 	 * The configuration element associated with this new project wizard
 	 */
 	private org.eclipse.core.runtime.IConfigurationElement config;
 	
-	private final static String JAVA_NATURE   = "org.eclipse.jdt.core.javanature";
-	private final static String JAVA_BUILDER  = "org.eclipse.jdt.core.javabuilder";
-	private final static String SOKAN_NATURE  = "org.reuseware.sokan.resource.repositoryNature";
-	private final static String SOKAN_BUILDER = "org.reuseware.sokan.resource.indexBuilder";
-	
 	/**
 	 * The constructor.
 	 */
-	public PropertiesExampleProjectWizard() {
+	public PropertiesNewProjectWizard() {
 		super();
 	}
 	
@@ -92,49 +87,50 @@ public class PropertiesExampleProjectWizard extends org.eclipse.jface.wizard.Wiz
 							projectFolderFile.mkdirs();
 							monitor.worked(10);
 							
-							org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("PLUGIN_ID");
-							java.net.URL url = bundle.getEntry("example.zip");
+							org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("org.emftext.refactoring.tests.properties.resource.properties.ui");
+							java.net.URL newProjectZipURL = bundle.getEntry(newProjectZip);
 							
-							// Copy plug-in project code
-							extractProject(projectFolderFile, url, new org.eclipse.core.runtime.SubProgressMonitor(monitor, 100));
+							if (newProjectZipURL != null) {
+								// Copy plug-in project code
+								extractProject(projectFolderFile, newProjectZipURL, new org.eclipse.core.runtime.SubProgressMonitor(monitor, 100));
+							}
 							
 							if (monitor.isCanceled()) {
 								throw new InterruptedException();
 							}
 							
-							if (projectPath.equals(workspace.getRoot().getLocation())) {
-								project.create(monitor);
-							} else {
-								org.eclipse.core.resources.IProjectDescription desc = workspace.newProjectDescription(project.getName());
+							org.eclipse.core.resources.IProjectDescription desc = workspace.newProjectDescription(project.getName());
+							if (!projectPath.equals(workspace.getRoot().getLocation())) {
 								desc.setLocation(new org.eclipse.core.runtime.Path(projectFolder));
-								
-								String[]   natureIDs = null;
-								org.eclipse.core.resources.ICommand[] buildCommands = null;
-								
-								if (needsJavaNature) {
-									org.eclipse.core.resources.ICommand command1 = desc.newCommand();
-									command1.setBuilderName(JAVA_BUILDER);
-									org.eclipse.core.resources.ICommand command2 = desc.newCommand();
-									command2.setBuilderName(SOKAN_BUILDER);
-									buildCommands = new org.eclipse.core.resources.ICommand[] {command1, command2};
-									natureIDs = new String[] {JAVA_NATURE, SOKAN_NATURE};
-								} else {
-									org.eclipse.core.resources.ICommand command = desc.newCommand();
-									command.setBuilderName(SOKAN_BUILDER);
-									buildCommands = new org.eclipse.core.resources.ICommand[] {command};
-									natureIDs = new String[] {SOKAN_NATURE};
-								}
-								
-								desc.setNatureIds(natureIDs);
-								desc.setBuildSpec(buildCommands);
-								project.create(desc, monitor);
+							}
+							
+							String natureID = org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesNature.NATURE_ID;
+							java.util.List<org.eclipse.core.resources.ICommand> buildCommands = new java.util.ArrayList<org.eclipse.core.resources.ICommand>();
+							for (String builderID : org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesNature.BUILDER_IDS) {
+								org.eclipse.core.resources.ICommand command = desc.newCommand();
+								command.setBuilderName(builderID);
+								buildCommands.add(command);
+							}
+							
+							desc.setNatureIds(new String[] {natureID});
+							desc.setBuildSpec(buildCommands.toArray(new org.eclipse.core.resources.ICommand[buildCommands.size()]));
+							project.create(desc, monitor);
+							// Now, we ensure that the project is open.
+							project.open(monitor);
+							renameProject(project, projectName);
+							
+							org.eclipse.core.resources.IFile defaultNewFile = project.getFile("NEW_FILE_PLACEHOLDER");
+							if (newProjectZipURL == null) {
+								defaultNewFile.create(new java.io.ByteArrayInputStream(new byte[0]), true, null);
+							}
+							if (defaultNewFile.exists()) {
+								org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation info = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation();
+								String fileName = "new_file." + info.getSyntaxName();
+								String content = info.getNewFileContentProvider().getNewFileContent("new_file." + info.getSyntaxName());
+								defaultNewFile.setContents(new java.io.ByteArrayInputStream(content.getBytes()), org.eclipse.core.resources.IFile.FORCE, null);
+								defaultNewFile.move(project.getProjectRelativePath().append(fileName), true, null);
 							}
 						}
-						
-						// Now, we ensure that the project is open.
-						project.open(monitor);
-						
-						renameProject(project, projectName);
 						
 						monitor.worked(10);
 						if (monitor.isCanceled()) {
@@ -226,7 +222,7 @@ public class PropertiesExampleProjectWizard extends org.eclipse.jface.wizard.Wiz
 				}
 				
 				org.eclipse.core.runtime.Path path = new org.eclipse.core.runtime.Path(file.getPath());
-				if (path.getFileExtension().equals("java")) {
+				if ("java".equals(path.getFileExtension())) {
 					java.io.InputStreamReader is = null;
 					java.io.OutputStreamWriter os = null;
 					
@@ -303,6 +299,12 @@ public class PropertiesExampleProjectWizard extends org.eclipse.jface.wizard.Wiz
 	 * dNewProjectCreationPage(String)
 	 */
 	public void init(org.eclipse.ui.IWorkbench workbench, org.eclipse.jface.viewers.IStructuredSelection selection) {
+		// Set default image for all wizard pages
+		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path("icons/new_project_wizban.gif");
+		org.osgi.framework.Bundle bundle = org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesUIPlugin.getDefault().getBundle();
+		java.net.URL url = org.eclipse.core.runtime.FileLocator.find(bundle, path, null);
+		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(url);
+		setDefaultPageImageDescriptor(descriptor);
 		
 		wizardNewProjectCreationPage = new org.eclipse.ui.dialogs.WizardNewProjectCreationPage(pageName);
 		wizardNewProjectCreationPage.setTitle(pageTitle);

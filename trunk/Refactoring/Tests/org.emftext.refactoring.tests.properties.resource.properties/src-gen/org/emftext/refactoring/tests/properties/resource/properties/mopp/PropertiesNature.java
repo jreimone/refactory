@@ -15,7 +15,7 @@ public class PropertiesNature implements org.eclipse.core.resources.IProjectNatu
 	/**
 	 * the IDs of all builders, IDs of additional builders can be added here
 	 */
-	public final static String[] BUILDER_IDS = {org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesBuilderAdapter.BUILDER_ID};
+	public final static String[] BUILDER_IDS = {org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesBuilderAdapter.BUILDER_ID, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTaskItemBuilder.BUILDER_ID};
 	
 	public static void activate(org.eclipse.core.resources.IProject project) {
 		try {

@@ -29,7 +29,7 @@ public class PropertiesEditor extends org.eclipse.ui.editors.text.TextEditor imp
 	
 	public PropertiesEditor() {
 		super();
-		setSourceViewerConfiguration(new org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesEditorConfiguration(this, this, this, colorManager));
+		setSourceViewerConfiguration(new org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesSourceViewerConfiguration(this, this, this, colorManager));
 		initializeEditingDomain();
 		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE);
 		addSelectionChangedListener(this);
@@ -490,14 +490,21 @@ public class PropertiesEditor extends org.eclipse.ui.editors.text.TextEditor imp
 			Object object = structuredSelection.getFirstElement();
 			if (object instanceof org.eclipse.emf.ecore.EObject) {
 				org.eclipse.emf.ecore.EObject element = (org.eclipse.emf.ecore.EObject) object;
-				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource textResource = (org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource) element.eResource();
+				org.eclipse.emf.ecore.resource.Resource resource = element.eResource();
+				if (resource == null) {
+					return false;
+				}
+				if (!(resource instanceof org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource)) {
+					return false;
+				}
+				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource textResource = (org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTextResource) resource;
 				org.emftext.refactoring.tests.properties.resource.properties.IPropertiesLocationMap locationMap = textResource.getLocationMap();
 				int destination = locationMap.getCharStart(element);
 				if (destination < 0) {
 					destination = 0;
 				}
 				selectAndReveal(destination, 0);
-				int length = locationMap.getCharEnd(element) - destination;
+				int length = locationMap.getCharEnd(element) - destination + 1;
 				getSourceViewer().setRangeIndication(destination, length, true);
 				getSourceViewer().setSelectedRange(destination, length);
 				return true;

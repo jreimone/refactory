@@ -4,15 +4,13 @@ Bundle-Name: EMFText Parser Plugin: properties
 Bundle-SymbolicName: org.emftext.refactoring.tests.properties.resource.properties;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.core.resources,
+Require-Bundle: org.eclipse.core.runtime,
   org.eclipse.emf,
-  org.eclipse.emf.codegen.ecore,
   org.eclipse.emf.ecore,
-  org.eclipse.emf.ecore.edit,
+  org.eclipse.emf.ecore.change,
   org.eclipse.emf.validation,
-  org.eclipse.emf.workspace,
   org.emftext.access;resolution:=optional,
-  org.emftext.commons.antlr3_3_0,
+  org.emftext.commons.antlr3_4_0,
   org.emftext.refactoring.tests.properties
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

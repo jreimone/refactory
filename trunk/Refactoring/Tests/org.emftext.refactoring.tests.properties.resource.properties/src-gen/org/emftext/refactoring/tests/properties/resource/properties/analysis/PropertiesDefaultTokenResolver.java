@@ -7,8 +7,22 @@
 package org.emftext.refactoring.tests.properties.resource.properties.analysis;
 
 /**
- * A default implementation for token resolvers. It tries to resolve lexems using
- * Java methods.
+ * A default implementation for token resolvers. Generated token resolvers
+ * delegate calls to this class to convert text (i.e., tokens) to Java objects.
+ * This default implementation tries to perform this conversion using the
+ * EMF-based data type serialization mechanism using
+ * org.eclipse.emf.ecore.util.EcoreUtil.createFromString().
+ * 
+ * In addition, enumeration literals are converted to the respective literal
+ * object, if the text (i.e., the token) matches the literal.
+ * 
+ * For boolean attributes the token is considered to represent <code>true</code>
+ * if it matches the name of the attribute. Attributes that have names like
+ * <code>isFoo</code> are also interpret as <code>true</code> if the text is
+ * <code>foo</code>.
+ * 
+ * The behavior of this resolving can be customized by either changing the
+ * generated token resolver classes or by using custom EMF data type converters.
  */
 public class PropertiesDefaultTokenResolver implements org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenResolver {
 	
@@ -17,7 +31,7 @@ public class PropertiesDefaultTokenResolver implements org.emftext.refactoring.t
 	
 	/**
 	 * This constructor is used by token resolvers that were generated before EMFText
-	 * 1.3.5. It does not enable automatic escaping and unescaping of keywords.
+	 * 1.4.0. It does not enable automatic escaping and unescaping of keywords.
 	 */
 	public PropertiesDefaultTokenResolver() {
 		this(false);
@@ -25,7 +39,7 @@ public class PropertiesDefaultTokenResolver implements org.emftext.refactoring.t
 	
 	/**
 	 * This constructor is used by token resolvers that were generated with EMFText
-	 * 1.3.5 and later releases. It can optionally enable automatic escaping and
+	 * 1.4.0 and later releases. It can optionally enable automatic escaping and
 	 * unescaping of keywords.
 	 */
 	public PropertiesDefaultTokenResolver(boolean escapeKeywords) {
@@ -71,30 +85,40 @@ public class PropertiesDefaultTokenResolver implements org.emftext.refactoring.t
 		
 		// Step 3: convert text to Java object
 		if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
-			if (feature.getEType() instanceof org.eclipse.emf.ecore.EEnum) {
-				org.eclipse.emf.ecore.EEnumLiteral literal = ((org.eclipse.emf.ecore.EEnum) feature.getEType()).getEEnumLiteralByLiteral(lexem);
+			org.eclipse.emf.ecore.EClassifier featureType = feature.getEType();
+			if (featureType instanceof org.eclipse.emf.ecore.EEnum) {
+				org.eclipse.emf.ecore.EEnumLiteral literal = ((org.eclipse.emf.ecore.EEnum) featureType).getEEnumLiteralByLiteral(lexem);
 				if (literal != null) {
 					result.setResolvedToken(literal.getInstance());
 					return;
 				} else {
-					result.setErrorMessage("Could not map lexem '" + lexem + "' to enum '" + feature.getEType().getName() + "'.");
+					result.setErrorMessage("Could not map lexem '" + lexem + "' to enum '" + featureType.getName() + "'.");
 					return;
 				}
-			} else if (feature.getEType() instanceof org.eclipse.emf.ecore.EDataType) {
+			} else if (featureType instanceof org.eclipse.emf.ecore.EDataType) {
 				try {
-					result.setResolvedToken(org.eclipse.emf.ecore.util.EcoreUtil.createFromString((org.eclipse.emf.ecore.EDataType) feature.getEType(), lexem));
+					result.setResolvedToken(org.eclipse.emf.ecore.util.EcoreUtil.createFromString((org.eclipse.emf.ecore.EDataType) featureType, lexem));
 				} catch (Exception e) {
-					result.setErrorMessage("Could not convert '" + lexem + "' to '" + feature.getEType().getName() + "'.");
+					result.setErrorMessage("Could not convert '" + lexem + "' to '" + featureType.getName() + "'.");
 				}
-				String typeName = feature.getEType().getInstanceClassName();
+				String typeName = featureType.getInstanceClassName();
 				if (typeName.equals("boolean") || java.lang.Boolean.class.getName().equals(typeName)) {
 					String featureName = feature.getName();
 					boolean featureNameMatchesLexem = featureName.equals(lexem);
-					if (featureName.length() > 2 && featureName.startsWith("is")) {
-						featureNameMatchesLexem |= (featureName.substring(2, 3).toLowerCase() + featureName.substring(3)).equals(lexem);
+					if (featureNameMatchesLexem) {
+						result.setResolvedToken(true);
+						return;
 					}
-					result.setResolvedToken(Boolean.parseBoolean(lexem) || featureNameMatchesLexem);
-					return;
+					if (featureName.length() > 2 && featureName.startsWith("is")) {
+						if ((featureName.substring(2, 3).toLowerCase() + featureName.substring(3)).equals(lexem)) {
+							result.setResolvedToken(true);
+							return;
+						}
+					}
+					if (Boolean.parseBoolean(lexem)) {
+						result.setResolvedToken(true);
+						return;
+					}
 				}
 			} else {
 				assert false;
@@ -133,7 +157,7 @@ public class PropertiesDefaultTokenResolver implements org.emftext.refactoring.t
 		}
 		
 		// Step 3: escape keywords if required
-		if (escapeKeywords) {
+		if (escapeKeywords && result != null) {
 			// Escape keywords if required
 			for (String keyword : org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesGrammarInformationProvider.INSTANCE.getKeywords()) {
 				if (result.endsWith(keyword)) {

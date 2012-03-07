@@ -49,7 +49,7 @@ public class PropertiesMetaInformation implements org.emftext.refactoring.tests.
 	}
 	
 	public String[] getTokenNames() {
-		return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesParser(null).getTokenNames();
+		return org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesParser.tokenNames;
 	}
 	
 	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenStyle getDefaultTokenStyle(String tokenName) {
@@ -98,6 +98,29 @@ public class PropertiesMetaInformation implements org.emftext.refactoring.tests.
 	
 	public String getLaunchConfigurationType() {
 		return "org.emftext.refactoring.tests.properties.resource.properties.ui.launchConfigurationType";
+	}
+	
+	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesNameProvider createNameProvider() {
+		return new org.emftext.refactoring.tests.properties.resource.properties.analysis.PropertiesDefaultNameProvider();
+	}
+	
+	public String[] getSyntaxHighlightableTokenNames() {
+		org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesAntlrTokenHelper tokenHelper = new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesAntlrTokenHelper();
+		java.util.List<String> highlightableTokens = new java.util.ArrayList<String>();
+		String[] parserTokenNames = getTokenNames();
+		for (int i = 0; i < parserTokenNames.length; i++) {
+			// If ANTLR is used we need to normalize the token names
+			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
+				continue;
+			}
+			String tokenName = tokenHelper.getTokenName(parserTokenNames, i);
+			if (tokenName == null) {
+				continue;
+			}
+			highlightableTokens.add(tokenName);
+		}
+		highlightableTokens.add(org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTokenStyleInformationProvider.TASK_ITEM_TOKEN_NAME);
+		return highlightableTokens.toArray(new String[highlightableTokens.size()]);
 	}
 	
 }

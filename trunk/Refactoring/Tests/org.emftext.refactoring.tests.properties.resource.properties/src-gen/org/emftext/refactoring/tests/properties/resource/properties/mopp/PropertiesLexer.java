@@ -1,42 +1,48 @@
-// $ANTLR ${project.version} ${buildNumber}
+// $ANTLR 3.4
 
 	package org.emftext.refactoring.tests.properties.resource.properties.mopp;
 
 
-import org.antlr.runtime3_3_0.*;
+import org.antlr.runtime3_4_0.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
 
+@SuppressWarnings({"all", "warnings", "unchecked"})
 public class PropertiesLexer extends Lexer {
     public static final int EOF=-1;
     public static final int T__13=13;
-    public static final int QUOTED_91_93=4;
-    public static final int TEXT=5;
-    public static final int QUOTED_60_62=6;
-    public static final int QUOTED_34_34=7;
-    public static final int COMMENT=8;
-    public static final int INTEGER=9;
-    public static final int FLOAT=10;
-    public static final int WHITESPACE=11;
-    public static final int LINEBREAK=12;
+    public static final int COMMENT=4;
+    public static final int FLOAT=5;
+    public static final int INTEGER=6;
+    public static final int LINEBREAK=7;
+    public static final int QUOTED_34_34=8;
+    public static final int QUOTED_60_62=9;
+    public static final int QUOTED_91_93=10;
+    public static final int TEXT=11;
+    public static final int WHITESPACE=12;
 
-    	public java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>();
+    	public java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>();
     	public java.util.List<Integer> lexerExceptionsPosition = new java.util.ArrayList<Integer>();
     	
-    	public void reportError(org.antlr.runtime3_3_0.RecognitionException e) {
+    	public void reportError(org.antlr.runtime3_4_0.RecognitionException e) {
     		lexerExceptions.add(e);
-    		lexerExceptionsPosition.add(((org.antlr.runtime3_3_0.ANTLRStringStream) input).index());
+    		lexerExceptionsPosition.add(((org.antlr.runtime3_4_0.ANTLRStringStream) input).index());
     	}
 
 
     // delegates
     // delegators
+    public Lexer[] getDelegates() {
+        return new Lexer[] {};
+    }
 
-    public PropertiesLexer() {;} 
+    public PropertiesLexer() {} 
     public PropertiesLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
     public PropertiesLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
-
     }
     public String getGrammarFileName() { return "Properties.g"; }
 
@@ -45,8 +51,8 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:16:7: ( '=' )
-            // Properties.g:16:9: '='
+            // Properties.g:15:7: ( '=' )
+            // Properties.g:15:9: '='
             {
             match('='); 
 
@@ -56,6 +62,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "T__13"
@@ -65,37 +72,39 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:840:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Properties.g:841:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Properties.g:876:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Properties.g:877:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Properties.g:841:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Properties.g:841:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Properties.g:877:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Properties.g:877:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
-            // Properties.g:841:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+
+
+            // Properties.g:877:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( ((LA1_0>='\u0000' && LA1_0<='\t')||(LA1_0>='\u000B' && LA1_0<='\f')||(LA1_0>='\u000E' && LA1_0<='\uFFFE')) ) {
+                if ( ((LA1_0 >= '\u0000' && LA1_0 <= '\t')||(LA1_0 >= '\u000B' && LA1_0 <= '\f')||(LA1_0 >= '\u000E' && LA1_0 <= '\uFFFE')) ) {
                     alt1=1;
                 }
 
 
                 switch (alt1) {
             	case 1 :
-            	    // Properties.g:841:8: ~ ( '\\n' | '\\r' | '\\uffff' )
+            	    // Properties.g:
             	    {
-            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFE') ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -109,6 +118,7 @@ public class PropertiesLexer extends Lexer {
 
             }
 
+
              _channel = 99; 
 
             }
@@ -117,6 +127,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "COMMENT"
@@ -126,14 +137,14 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:844:8: ( ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
-            // Properties.g:845:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Properties.g:880:8: ( ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
+            // Properties.g:881:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             {
-            // Properties.g:845:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Properties.g:881:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0=='-'||(LA4_0>='1' && LA4_0<='9')) ) {
+            if ( (LA4_0=='-'||(LA4_0 >= '1' && LA4_0 <= '9')) ) {
                 alt4=1;
             }
             else if ( (LA4_0=='0') ) {
@@ -144,12 +155,13 @@ public class PropertiesLexer extends Lexer {
                     new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
+
             }
             switch (alt4) {
                 case 1 :
-                    // Properties.g:845:3: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Properties.g:881:3: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // Properties.g:845:3: ( '-' )?
+                    // Properties.g:881:3: ( '-' )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -158,7 +170,7 @@ public class PropertiesLexer extends Lexer {
                     }
                     switch (alt2) {
                         case 1 :
-                            // Properties.g:845:4: '-'
+                            // Properties.g:881:4: '-'
                             {
                             match('-'); 
 
@@ -167,29 +179,41 @@ public class PropertiesLexer extends Lexer {
 
                     }
 
-                    // Properties.g:845:9: ( '1' .. '9' )
-                    // Properties.g:845:10: '1' .. '9'
-                    {
-                    matchRange('1','9'); 
 
+                    if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
+                        input.consume();
+                    }
+                    else {
+                        MismatchedSetException mse = new MismatchedSetException(null,input);
+                        recover(mse);
+                        throw mse;
                     }
 
-                    // Properties.g:845:19: ( '0' .. '9' )*
+
+                    // Properties.g:881:19: ( '0' .. '9' )*
                     loop3:
                     do {
                         int alt3=2;
                         int LA3_0 = input.LA(1);
 
-                        if ( ((LA3_0>='0' && LA3_0<='9')) ) {
+                        if ( ((LA3_0 >= '0' && LA3_0 <= '9')) ) {
                             alt3=1;
                         }
 
 
                         switch (alt3) {
                     	case 1 :
-                    	    // Properties.g:845:20: '0' .. '9'
+                    	    // Properties.g:
                     	    {
-                    	    matchRange('0','9'); 
+                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+                    	        input.consume();
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;
+                    	    }
+
 
                     	    }
                     	    break;
@@ -203,7 +227,7 @@ public class PropertiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Properties.g:845:31: '0'
+                    // Properties.g:881:31: '0'
                     {
                     match('0'); 
 
@@ -211,6 +235,7 @@ public class PropertiesLexer extends Lexer {
                     break;
 
             }
+
 
              _channel = 99; 
 
@@ -220,6 +245,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "INTEGER"
@@ -229,13 +255,13 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:848:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
-            // Properties.g:849:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Properties.g:884:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
+            // Properties.g:885:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
             {
-            // Properties.g:849:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // Properties.g:849:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // Properties.g:885:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Properties.g:885:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // Properties.g:849:3: ( '-' )?
+            // Properties.g:885:3: ( '-' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -244,7 +270,7 @@ public class PropertiesLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // Properties.g:849:4: '-'
+                    // Properties.g:885:4: '-'
                     {
                     match('-'); 
 
@@ -253,11 +279,12 @@ public class PropertiesLexer extends Lexer {
 
             }
 
-            // Properties.g:849:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+
+            // Properties.g:885:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( ((LA7_0>='1' && LA7_0<='9')) ) {
+            if ( ((LA7_0 >= '1' && LA7_0 <= '9')) ) {
                 alt7=1;
             }
             else if ( (LA7_0=='0') ) {
@@ -268,34 +295,46 @@ public class PropertiesLexer extends Lexer {
                     new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
+
             }
             switch (alt7) {
                 case 1 :
-                    // Properties.g:849:10: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Properties.g:885:10: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // Properties.g:849:10: ( '1' .. '9' )
-                    // Properties.g:849:11: '1' .. '9'
-                    {
-                    matchRange('1','9'); 
-
+                    if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
+                        input.consume();
+                    }
+                    else {
+                        MismatchedSetException mse = new MismatchedSetException(null,input);
+                        recover(mse);
+                        throw mse;
                     }
 
-                    // Properties.g:849:21: ( '0' .. '9' )*
+
+                    // Properties.g:885:21: ( '0' .. '9' )*
                     loop6:
                     do {
                         int alt6=2;
                         int LA6_0 = input.LA(1);
 
-                        if ( ((LA6_0>='0' && LA6_0<='9')) ) {
+                        if ( ((LA6_0 >= '0' && LA6_0 <= '9')) ) {
                             alt6=1;
                         }
 
 
                         switch (alt6) {
                     	case 1 :
-                    	    // Properties.g:849:22: '0' .. '9'
+                    	    // Properties.g:
                     	    {
-                    	    matchRange('0','9'); 
+                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+                    	        input.consume();
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;
+                    	    }
+
 
                     	    }
                     	    break;
@@ -309,7 +348,7 @@ public class PropertiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Properties.g:849:35: '0'
+                    // Properties.g:885:35: '0'
                     {
                     match('0'); 
 
@@ -318,24 +357,34 @@ public class PropertiesLexer extends Lexer {
 
             }
 
+
             match('.'); 
-            // Properties.g:849:44: ( '0' .. '9' )+
+
+            // Properties.g:885:44: ( '0' .. '9' )+
             int cnt8=0;
             loop8:
             do {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( ((LA8_0>='0' && LA8_0<='9')) ) {
+                if ( ((LA8_0 >= '0' && LA8_0 <= '9')) ) {
                     alt8=1;
                 }
 
 
                 switch (alt8) {
             	case 1 :
-            	    // Properties.g:849:45: '0' .. '9'
+            	    // Properties.g:
             	    {
-            	    matchRange('0','9'); 
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
 
             	    }
             	    break;
@@ -352,6 +401,7 @@ public class PropertiesLexer extends Lexer {
 
             }
 
+
              _channel = 99; 
 
             }
@@ -360,6 +410,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "FLOAT"
@@ -369,20 +420,20 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:852:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
-            // Properties.g:853:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Properties.g:888:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
+            // Properties.g:889:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
             {
-            // Properties.g:853:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // Properties.g:853:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Properties.g:889:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Properties.g:889:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // Properties.g:853:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Properties.g:889:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt9=0;
             loop9:
             do {
                 int alt9=2;
                 int LA9_0 = input.LA(1);
 
-                if ( (LA9_0=='-'||(LA9_0>='0' && LA9_0<='9')||(LA9_0>='A' && LA9_0<='Z')||LA9_0=='_'||(LA9_0>='a' && LA9_0<='z')) ) {
+                if ( (LA9_0=='-'||(LA9_0 >= '0' && LA9_0 <= '9')||(LA9_0 >= 'A' && LA9_0 <= 'Z')||LA9_0=='_'||(LA9_0 >= 'a' && LA9_0 <= 'z')) ) {
                     alt9=1;
                 }
 
@@ -391,14 +442,14 @@ public class PropertiesLexer extends Lexer {
             	case 1 :
             	    // Properties.g:
             	    {
-            	    if ( input.LA(1)=='-'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	    if ( input.LA(1)=='-'||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -423,6 +474,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TEXT"
@@ -432,23 +484,18 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:855:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Properties.g:856:2: ( ( ' ' | '\\t' | '\\f' ) )
-            {
-            // Properties.g:856:2: ( ( ' ' | '\\t' | '\\f' ) )
-            // Properties.g:856:3: ( ' ' | '\\t' | '\\f' )
+            // Properties.g:891:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Properties.g:892:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
-
             }
             else {
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
-                throw mse;}
-
-
+                throw mse;
             }
+
 
              _channel = 99; 
 
@@ -458,6 +505,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "WHITESPACE"
@@ -467,13 +515,13 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:859:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Properties.g:860:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Properties.g:895:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Properties.g:896:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Properties.g:860:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Properties.g:860:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Properties.g:896:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Properties.g:896:3: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Properties.g:860:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Properties.g:896:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt10=3;
             int LA10_0 = input.LA(1);
 
@@ -484,7 +532,8 @@ public class PropertiesLexer extends Lexer {
                     alt10=1;
                 }
                 else {
-                    alt10=2;}
+                    alt10=2;
+                }
             }
             else if ( (LA10_0=='\n') ) {
                 alt10=3;
@@ -494,25 +543,27 @@ public class PropertiesLexer extends Lexer {
                     new NoViableAltException("", 10, 0, input);
 
                 throw nvae;
+
             }
             switch (alt10) {
                 case 1 :
-                    // Properties.g:860:4: '\\r\\n'
+                    // Properties.g:896:4: '\\r\\n'
                     {
                     match("\r\n"); 
+
 
 
                     }
                     break;
                 case 2 :
-                    // Properties.g:860:13: '\\r'
+                    // Properties.g:896:13: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Properties.g:860:20: '\\n'
+                    // Properties.g:896:20: '\\n'
                     {
                     match('\n'); 
 
@@ -524,6 +575,7 @@ public class PropertiesLexer extends Lexer {
 
             }
 
+
              _channel = 99; 
 
             }
@@ -532,6 +584,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "LINEBREAK"
@@ -541,42 +594,43 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_91_93;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:863:13: ( ( ( '[' ) (~ ( ']' ) )* ( ']' ) ) )
-            // Properties.g:864:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
+            // Properties.g:899:13: ( ( ( '[' ) (~ ( ']' ) )* ( ']' ) ) )
+            // Properties.g:900:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
             {
-            // Properties.g:864:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
-            // Properties.g:864:3: ( '[' ) (~ ( ']' ) )* ( ']' )
+            // Properties.g:900:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
+            // Properties.g:900:3: ( '[' ) (~ ( ']' ) )* ( ']' )
             {
-            // Properties.g:864:3: ( '[' )
-            // Properties.g:864:4: '['
+            // Properties.g:900:3: ( '[' )
+            // Properties.g:900:4: '['
             {
             match('['); 
 
             }
 
-            // Properties.g:864:8: (~ ( ']' ) )*
+
+            // Properties.g:900:8: (~ ( ']' ) )*
             loop11:
             do {
                 int alt11=2;
                 int LA11_0 = input.LA(1);
 
-                if ( ((LA11_0>='\u0000' && LA11_0<='\\')||(LA11_0>='^' && LA11_0<='\uFFFF')) ) {
+                if ( ((LA11_0 >= '\u0000' && LA11_0 <= '\\')||(LA11_0 >= '^' && LA11_0 <= '\uFFFF')) ) {
                     alt11=1;
                 }
 
 
                 switch (alt11) {
             	case 1 :
-            	    // Properties.g:864:9: ~ ( ']' )
+            	    // Properties.g:
             	    {
-            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\\')||(input.LA(1)>='^' && input.LA(1)<='\uFFFF') ) {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\\')||(input.LA(1) >= '^' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -587,8 +641,9 @@ public class PropertiesLexer extends Lexer {
                 }
             } while (true);
 
-            // Properties.g:864:17: ( ']' )
-            // Properties.g:864:18: ']'
+
+            // Properties.g:900:17: ( ']' )
+            // Properties.g:900:18: ']'
             {
             match(']'); 
 
@@ -604,6 +659,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "QUOTED_91_93"
@@ -613,42 +669,43 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_60_62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:866:13: ( ( ( '<' ) (~ ( '>' ) )* ( '>' ) ) )
-            // Properties.g:867:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
+            // Properties.g:902:13: ( ( ( '<' ) (~ ( '>' ) )* ( '>' ) ) )
+            // Properties.g:903:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
             {
-            // Properties.g:867:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
-            // Properties.g:867:3: ( '<' ) (~ ( '>' ) )* ( '>' )
+            // Properties.g:903:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
+            // Properties.g:903:3: ( '<' ) (~ ( '>' ) )* ( '>' )
             {
-            // Properties.g:867:3: ( '<' )
-            // Properties.g:867:4: '<'
+            // Properties.g:903:3: ( '<' )
+            // Properties.g:903:4: '<'
             {
             match('<'); 
 
             }
 
-            // Properties.g:867:8: (~ ( '>' ) )*
+
+            // Properties.g:903:8: (~ ( '>' ) )*
             loop12:
             do {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( ((LA12_0>='\u0000' && LA12_0<='=')||(LA12_0>='?' && LA12_0<='\uFFFF')) ) {
+                if ( ((LA12_0 >= '\u0000' && LA12_0 <= '=')||(LA12_0 >= '?' && LA12_0 <= '\uFFFF')) ) {
                     alt12=1;
                 }
 
 
                 switch (alt12) {
             	case 1 :
-            	    // Properties.g:867:9: ~ ( '>' )
+            	    // Properties.g:
             	    {
-            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='=')||(input.LA(1)>='?' && input.LA(1)<='\uFFFF') ) {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '=')||(input.LA(1) >= '?' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -659,8 +716,9 @@ public class PropertiesLexer extends Lexer {
                 }
             } while (true);
 
-            // Properties.g:867:17: ( '>' )
-            // Properties.g:867:18: '>'
+
+            // Properties.g:903:17: ( '>' )
+            // Properties.g:903:18: '>'
             {
             match('>'); 
 
@@ -676,6 +734,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "QUOTED_60_62"
@@ -685,42 +744,43 @@ public class PropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_34_34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Properties.g:869:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
-            // Properties.g:870:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Properties.g:905:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
+            // Properties.g:906:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
             {
-            // Properties.g:870:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Properties.g:870:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Properties.g:906:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Properties.g:906:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
             {
-            // Properties.g:870:3: ( '\"' )
-            // Properties.g:870:4: '\"'
+            // Properties.g:906:3: ( '\"' )
+            // Properties.g:906:4: '\"'
             {
             match('\"'); 
 
             }
 
-            // Properties.g:870:8: (~ ( '\"' ) )*
+
+            // Properties.g:906:8: (~ ( '\"' ) )*
             loop13:
             do {
                 int alt13=2;
                 int LA13_0 = input.LA(1);
 
-                if ( ((LA13_0>='\u0000' && LA13_0<='!')||(LA13_0>='#' && LA13_0<='\uFFFF')) ) {
+                if ( ((LA13_0 >= '\u0000' && LA13_0 <= '!')||(LA13_0 >= '#' && LA13_0 <= '\uFFFF')) ) {
                     alt13=1;
                 }
 
 
                 switch (alt13) {
             	case 1 :
-            	    // Properties.g:870:9: ~ ( '\"' )
+            	    // Properties.g:
             	    {
-            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -731,8 +791,9 @@ public class PropertiesLexer extends Lexer {
                 }
             } while (true);
 
-            // Properties.g:870:17: ( '\"' )
-            // Properties.g:870:18: '\"'
+
+            // Properties.g:906:17: ( '\"' )
+            // Properties.g:906:18: '\"'
             {
             match('\"'); 
 
@@ -748,6 +809,7 @@ public class PropertiesLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "QUOTED_34_34"
@@ -762,12 +824,14 @@ public class PropertiesLexer extends Lexer {
                 {
                 mT__13(); 
 
+
                 }
                 break;
             case 2 :
                 // Properties.g:1:16: COMMENT
                 {
                 mCOMMENT(); 
+
 
                 }
                 break;
@@ -776,12 +840,14 @@ public class PropertiesLexer extends Lexer {
                 {
                 mINTEGER(); 
 
+
                 }
                 break;
             case 4 :
                 // Properties.g:1:32: FLOAT
                 {
                 mFLOAT(); 
+
 
                 }
                 break;
@@ -790,12 +856,14 @@ public class PropertiesLexer extends Lexer {
                 {
                 mTEXT(); 
 
+
                 }
                 break;
             case 6 :
                 // Properties.g:1:43: WHITESPACE
                 {
                 mWHITESPACE(); 
+
 
                 }
                 break;
@@ -804,12 +872,14 @@ public class PropertiesLexer extends Lexer {
                 {
                 mLINEBREAK(); 
 
+
                 }
                 break;
             case 8 :
                 // Properties.g:1:64: QUOTED_91_93
                 {
                 mQUOTED_91_93(); 
+
 
                 }
                 break;
@@ -818,12 +888,14 @@ public class PropertiesLexer extends Lexer {
                 {
                 mQUOTED_60_62(); 
 
+
                 }
                 break;
             case 10 :
                 // Properties.g:1:90: QUOTED_34_34
                 {
                 mQUOTED_34_34(); 
+
 
                 }
                 break;

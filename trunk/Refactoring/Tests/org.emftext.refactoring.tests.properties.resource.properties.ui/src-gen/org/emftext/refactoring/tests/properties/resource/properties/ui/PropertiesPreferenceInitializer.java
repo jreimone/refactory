@@ -11,8 +11,6 @@ package org.emftext.refactoring.tests.properties.resource.properties.ui;
  */
 public class PropertiesPreferenceInitializer extends org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer {
 	
-	private final static org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesAntlrTokenHelper tokenHelper = new org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesAntlrTokenHelper();
-	
 	public void initializeDefaultPreferences() {
 		
 		initializeDefaultSyntaxHighlighting();
@@ -48,21 +46,14 @@ public class PropertiesPreferenceInitializer extends org.eclipse.core.runtime.pr
 		store.setDefault(languageId + org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSet.getBracketString());
 	}
 	
-	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesMetaInformation metaInformation) {
+	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesMetaInformation metaInformation) {
 		String languageId = metaInformation.getSyntaxName();
-		String[] tokenNames = metaInformation.getTokenNames();
+		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
 		if (tokenNames == null) {
 			return;
 		}
 		for (int i = 0; i < tokenNames.length; i++) {
-			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
-				continue;
-			}
-			
-			String tokenName = tokenHelper.getTokenName(tokenNames, i);
-			if (tokenName == null) {
-				continue;
-			}
+			String tokenName = tokenNames[i];
 			org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenStyle style = metaInformation.getDefaultTokenStyle(tokenName);
 			if (style != null) {
 				String color = getColorString(style.getColorAsRGB());

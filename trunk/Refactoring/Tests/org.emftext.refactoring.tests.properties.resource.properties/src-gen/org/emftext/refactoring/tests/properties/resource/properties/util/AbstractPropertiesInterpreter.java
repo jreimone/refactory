@@ -103,31 +103,31 @@ public class AbstractPropertiesInterpreter<ResultType, ContextType> {
 		return result;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_PropertyModel(org.emftext.refactoring.tests.properties.PropertyModel object, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_PropertyModel(org.emftext.refactoring.tests.properties.PropertyModel propertyModel, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_Category(org.emftext.refactoring.tests.properties.Category object, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_Category(org.emftext.refactoring.tests.properties.Category category, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_Value(org.emftext.refactoring.tests.properties.Value object, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_Value(org.emftext.refactoring.tests.properties.Value value, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_KeyValuePair(org.emftext.refactoring.tests.properties.KeyValuePair object, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_KeyValuePair(org.emftext.refactoring.tests.properties.KeyValuePair keyValuePair, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_Key(org.emftext.refactoring.tests.properties.Key object, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_Key(org.emftext.refactoring.tests.properties.Key key, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_EObjectReferenceValue(org.emftext.refactoring.tests.properties.EObjectReferenceValue object, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_EObjectReferenceValue(org.emftext.refactoring.tests.properties.EObjectReferenceValue eObjectReferenceValue, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_StringValue(org.emftext.refactoring.tests.properties.StringValue object, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_StringValue(org.emftext.refactoring.tests.properties.StringValue stringValue, ContextType context) {
 		return null;
 	}
 	
@@ -136,6 +136,7 @@ public class AbstractPropertiesInterpreter<ResultType, ContextType> {
 			listener.handleInterpreteObject(element);
 		}
 	}
+	
 	/**
 	 * Adds the given object to the interpretation stack. Attention: Objects that are
 	 * added first, are interpret last.
@@ -183,9 +184,11 @@ public class AbstractPropertiesInterpreter<ResultType, ContextType> {
 	public void addListener(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesInterpreterListener newListener) {
 		listeners.add(newListener);
 	}
+	
 	public boolean removeListener(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesInterpreterListener listener) {
 		return listeners.remove(listener);
 	}
+	
 	public org.eclipse.emf.ecore.EObject getNextObjectToInterprete() {
 		return nextObjectToInterprete;
 	}

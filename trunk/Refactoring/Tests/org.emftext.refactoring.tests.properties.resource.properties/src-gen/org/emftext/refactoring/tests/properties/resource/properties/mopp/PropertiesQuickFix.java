@@ -45,7 +45,7 @@ public abstract class PropertiesQuickFix implements org.emftext.refactoring.test
 			getResource().save(output, null);
 			return output.toString();
 		} catch (java.io.IOException e) {
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError("Exception while applying quick fix", e);
+			new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().logError("Exception while applying quick fix", e);
 		}
 		return null;
 	}

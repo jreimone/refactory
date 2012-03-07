@@ -23,6 +23,13 @@ public class PropertiesExpectedBooleanTerminal extends org.emftext.refactoring.t
 		return booleanTerminal;
 	}
 	
+	/**
+	 * Returns the expected boolean terminal.
+	 */
+	public org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesSyntaxElement getSymtaxElement() {
+		return booleanTerminal;
+	}
+	
 	private org.eclipse.emf.ecore.EStructuralFeature getFeature() {
 		return booleanTerminal.getFeature();
 	}

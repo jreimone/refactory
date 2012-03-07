@@ -37,7 +37,7 @@ public abstract class PropertiesContextDependentURIFragment<ContainerType extend
 		return result != null;
 	}
 	
-	public synchronized org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolveResult<ReferenceType> resolve() {
+	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesReferenceResolveResult<ReferenceType> resolve() {
 		if (resolving) {
 			return null;
 		}
@@ -77,7 +77,7 @@ public abstract class PropertiesContextDependentURIFragment<ContainerType extend
 			} else if (list != null) {
 				addResultToList(mapping, proxy, list);
 			} else {
-				org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
+				new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
 			}
 		}
 	}

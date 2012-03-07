@@ -19,9 +19,10 @@ Require-Bundle: org.eclipse.core.resources,
   org.eclipse.ui.ide,
   org.eclipse.ui.views,
   org.emftext.refactoring.tests.properties.resource.properties,
-  org.emftext.commons.antlr3_3_0,
+  org.emftext.commons.antlr3_4_0,
   org.emftext.refactoring.tests.properties
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.emftext.refactoring.tests.properties.resource.properties.ui
 Bundle-Activator: org.emftext.refactoring.tests.properties.resource.properties.ui.PropertiesUIPlugin
+Import-Package: org.eclipse.ui.texteditor.spelling

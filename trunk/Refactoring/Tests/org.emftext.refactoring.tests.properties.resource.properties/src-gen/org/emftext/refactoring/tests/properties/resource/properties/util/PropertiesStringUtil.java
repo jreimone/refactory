@@ -95,14 +95,43 @@ public class PropertiesStringUtil {
 	 */
 	public static String explode(Object[] parts, String glue) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < parts.length; i++) {
+		int length = parts.length;
+		for (int i = 0; i < length; i++) {
 			Object next = parts[i];
 			sb.append(next.toString());
-			if (i < parts.length - 1) {
+			if (i < length - 1) {
 				sb.append(glue);
 			}
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * Concatenates the given parts and puts 'glue' between them. The toStringFunction
+	 * is used to convert the parts to strings.
+	 */
+	public static <T> String explode(java.util.Collection<T> parts, String glue, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesFunction1<String, T> toStringFunction) {
+		String[] partsAsArray = new String[parts.size()];
+		int i = 0;
+		for (T part : parts) {
+			partsAsArray[i] = toStringFunction.execute(part);
+			i++;
+		}
+		return explode(partsAsArray, glue);
+	}
+	
+	/**
+	 * Concatenates the given parts and puts 'glue' between them. The toStringFunction
+	 * is used to convert the parts to strings.
+	 */
+	public static <T> String explode(T[] parts, String glue, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesFunction1<String, T> toStringFunction) {
+		String[] partsAsArray = new String[parts.length];
+		int i = 0;
+		for (T part : parts) {
+			partsAsArray[i] = toStringFunction.execute(part);
+			i++;
+		}
+		return explode(partsAsArray, glue);
 	}
 	
 	/**
@@ -348,7 +377,7 @@ public class PropertiesStringUtil {
 			if (value instanceof String) {
 				parts.add(encode('=', new String[] {key, (String) value}));
 			} else {
-				System.out.println("Can't encode " + value);
+				throw new RuntimeException("Can't encode " + value);
 			}
 		}
 		return encode(';', parts);

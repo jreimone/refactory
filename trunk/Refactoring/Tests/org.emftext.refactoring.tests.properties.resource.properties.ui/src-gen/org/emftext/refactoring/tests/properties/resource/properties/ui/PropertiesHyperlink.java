@@ -64,25 +64,28 @@ public class PropertiesHyperlink implements org.eclipse.jface.text.hyperlink.IHy
 					desc = workbench.getEditorRegistry().findEditor("org.eclipse.emf.ecore.presentation.ReflectiveEditorID");
 				}
 				org.eclipse.ui.IEditorPart editorPart = page.openEditor(new org.eclipse.ui.part.FileEditorInput(file), desc.getId());
-				if(editorPart instanceof org.eclipse.emf.edit.domain.IEditingDomainProvider){
+				if (editorPart instanceof org.eclipse.emf.edit.domain.IEditingDomainProvider) {
 					org.eclipse.emf.edit.domain.IEditingDomainProvider editingDomainProvider = (org.eclipse.emf.edit.domain.IEditingDomainProvider) editorPart;
 					org.eclipse.emf.edit.domain.EditingDomain editingDomain = editingDomainProvider.getEditingDomain();
 					org.eclipse.emf.common.util.URI uri = org.eclipse.emf.ecore.util.EcoreUtil.getURI(linkTarget);
 					org.eclipse.emf.ecore.EObject originalObject = editingDomain.getResourceSet().getEObject(uri, true);
-					if(editingDomainProvider instanceof org.eclipse.emf.common.ui.viewer.IViewerProvider){
+					if (editingDomainProvider instanceof org.eclipse.emf.common.ui.viewer.IViewerProvider) {
 						org.eclipse.emf.common.ui.viewer.IViewerProvider viewerProvider = (org.eclipse.emf.common.ui.viewer.IViewerProvider) editingDomainProvider;
 						org.eclipse.jface.viewers.Viewer viewer = viewerProvider.getViewer();
 						viewer.setSelection(new org.eclipse.jface.viewers.StructuredSelection(originalObject), true);
 					}
 				}
 			} catch (org.eclipse.ui.PartInitException e) {
-				e.printStackTrace();
+				org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError("Exception while opening hyperlink target.", e);
 			}
 		}
 	}
 	
 	private org.eclipse.core.resources.IFile getIFileFromResource() {
 		org.eclipse.emf.ecore.resource.Resource linkTargetResource = linkTarget.eResource();
+		if (linkTargetResource == null) {
+			return null;
+		}
 		org.eclipse.emf.common.util.URI resourceURI = linkTargetResource.getURI();
 		if (linkTargetResource.getResourceSet() != null && linkTargetResource.getResourceSet().getURIConverter() != null) {
 			resourceURI = linkTargetResource.getResourceSet().getURIConverter().normalize(resourceURI);

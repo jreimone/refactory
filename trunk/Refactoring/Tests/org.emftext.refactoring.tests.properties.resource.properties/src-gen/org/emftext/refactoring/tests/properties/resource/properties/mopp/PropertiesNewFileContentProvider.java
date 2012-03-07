@@ -43,7 +43,7 @@ public class PropertiesNewFileContentProvider {
 		try {
 			printer.print(root);
 		} catch (java.io.IOException e) {
-			org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesPlugin.logError("Exception while generating example content.", e);
+			new org.emftext.refactoring.tests.properties.resource.properties.util.PropertiesRuntimeUtil().logError("Exception while generating example content.", e);
 		}
 		return buffer.toString();
 	}

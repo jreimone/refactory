@@ -8,6 +8,8 @@ package org.emftext.refactoring.tests.properties.resource.properties.mopp;
 
 public class PropertiesTokenStyleInformationProvider {
 	
+	public static String TASK_ITEM_TOKEN_NAME = "TASK_ITEM";
+	
 	public org.emftext.refactoring.tests.properties.resource.properties.IPropertiesTokenStyle getDefaultTokenStyle(String tokenName) {
 		if ("COMMENT".equals(tokenName)) {
 			return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTokenStyle(new int[] {0x00, 0x80, 0x00}, null, false, true, false, false);
@@ -20,6 +22,9 @@ public class PropertiesTokenStyleInformationProvider {
 		}
 		if ("QUOTED_34_34".equals(tokenName)) {
 			return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTokenStyle(new int[] {0x2A, 0x00, 0xFF}, null, false, false, false, false);
+		}
+		if ("TASK_ITEM".equals(tokenName)) {
+			return new org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTokenStyle(new int[] {0x7F, 0x9F, 0xBF}, null, true, false, false, false);
 		}
 		return null;
 	}

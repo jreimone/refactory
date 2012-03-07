@@ -15,18 +15,35 @@ package org.emftext.refactoring.tests.properties.resource.properties.mopp;
  */
 public class PropertiesExpectedTerminal {
 	
+	/**
+	 * Run the attachment code to create a model the reflects the state that would be
+	 * reached if the completion was executed. This is required, because different
+	 * completions can yield different models.
+	 */
+	private Runnable attachmentCode;
+	
 	private int followSetID;
+	private org.eclipse.emf.ecore.EObject container;
 	private org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement terminal;
 	private int startIncludingHiddenTokens;
 	private int startExcludingHiddenTokens;
 	private String prefix;
-	private org.eclipse.emf.ecore.EStructuralFeature[] containmentTrace;
+	private org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesContainmentTrace containmentTrace;
 	
-	public PropertiesExpectedTerminal(org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement terminal, int followSetID, org.eclipse.emf.ecore.EStructuralFeature... containmentTrace) {
+	public PropertiesExpectedTerminal(org.eclipse.emf.ecore.EObject container, org.emftext.refactoring.tests.properties.resource.properties.IPropertiesExpectedElement terminal, int followSetID, org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesContainmentTrace containmentTrace) {
 		super();
+		this.container = container;
 		this.terminal = terminal;
 		this.followSetID = followSetID;
 		this.containmentTrace = containmentTrace;
+	}
+	
+	public Runnable getAttachmentCode() {
+		return attachmentCode;
+	}
+	
+	public void setAttachmentCode(Runnable attachmentCode) {
+		this.attachmentCode = attachmentCode;
 	}
 	
 	public int getFollowSetID() {
@@ -38,11 +55,16 @@ public class PropertiesExpectedTerminal {
 	}
 	
 	public String toString() {
-		return terminal == null ? "null" : terminal.toString();
+		return terminal == null ? "null" : terminal.toString() + " at " + startIncludingHiddenTokens + "/" + startExcludingHiddenTokens;
 	}
 	
 	public boolean equals(Object o) {
-		return this.terminal.equals(((PropertiesExpectedTerminal) o).terminal);
+		PropertiesExpectedTerminal otherExpectedTerminal = (PropertiesExpectedTerminal) o;
+		if (this.container == null && otherExpectedTerminal.container != null) {
+			return false;
+		}
+		boolean containersBothNull = this.container == null && otherExpectedTerminal.container == null;
+		return this.terminal.equals((otherExpectedTerminal).terminal) && (containersBothNull || this.container.equals(otherExpectedTerminal.container));
 	}
 	
 	public void setPosition(int startIncludingHiddenTokens, int startExcludingHiddenTokens) {
@@ -68,8 +90,41 @@ public class PropertiesExpectedTerminal {
 		this.prefix = prefix;
 	}
 	
-	public org.eclipse.emf.ecore.EStructuralFeature[] getContainmentTrace() {
+	public org.emftext.refactoring.tests.properties.resource.properties.grammar.PropertiesContainmentTrace getContainmentTrace() {
 		return containmentTrace;
+	}
+	
+	public org.eclipse.emf.ecore.EObject getContainer() {
+		return container;
+	}
+	
+	/**
+	 * This method creates a model that reflects the state that would be obtained if
+	 * this proposal was accepted. This model can differ from the current model,
+	 * because different proposals can result in different models. The code that is
+	 * passed as argument is executed once the (changed) model was created. After
+	 * executing the given code, all changes are reverted.
+	 */
+	public void materialize(Runnable code) {
+		org.eclipse.emf.ecore.EObject root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(getContainer());
+		if (root == null) {
+			code.run();
+			return;
+		}
+		org.eclipse.emf.ecore.change.util.ChangeRecorder recorder = new org.eclipse.emf.ecore.change.util.ChangeRecorder();
+		recorder.beginRecording(java.util.Collections.singleton(root));
+		
+		// attach proposal model fragment to main model
+		Runnable attachmentCode = getAttachmentCode();
+		if (attachmentCode != null) {
+			// Applying attachment code
+			attachmentCode.run();
+		}
+		
+		org.eclipse.emf.ecore.change.ChangeDescription changes = recorder.endRecording();
+		code.run();
+		// revert changes
+		changes.apply();
 	}
 	
 }

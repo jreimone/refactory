@@ -65,4 +65,16 @@ public class PropertiesEClassUtil {
 		return !isConcrete(eClass);
 	}
 	
+	/**
+	 * Returns true if the given object is an instance of one of the EClasses.
+	 */
+	public boolean isInstance(Object object, org.eclipse.emf.ecore.EClass[] allowedTypes) {
+		for (org.eclipse.emf.ecore.EClass allowedType : allowedTypes) {
+			if (allowedType.isInstance(object)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
