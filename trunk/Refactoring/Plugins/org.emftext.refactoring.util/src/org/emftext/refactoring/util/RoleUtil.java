@@ -116,6 +116,9 @@ public class RoleUtil {
 	 */
 	public static List<RoleMapping> getPossibleMappingsForInputSelection(List<? extends EObject> selection, Map<String, RoleMapping> roleMappings, double minEquality) {
 		List<RoleMapping> possibleMappings = new LinkedList<RoleMapping>();
+		if(roleMappings == null){
+			return possibleMappings;
+		}
 		Collection<RoleMapping> mappings = roleMappings.values();
 		for (RoleMapping mapping : mappings) {
 			EcoreUtil.resolveAll(mapping);
