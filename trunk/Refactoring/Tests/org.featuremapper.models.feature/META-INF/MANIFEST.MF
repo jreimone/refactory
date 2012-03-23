@@ -9,9 +9,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: Software Technology Group - Technische Universität Dre
  sden, Germany
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
- ity:=reexport,org.eclipse.emf.query,org.eclipse.emf.query.ocl,org.ecl
- ipse.emf.ecore.xmi
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi
 ExecutionEnvironment: J2SE-1.5
 Export-Package: org.featuremapper.models.feature,org.featuremapper.mod
  els.feature.impl,org.featuremapper.models.feature.util
