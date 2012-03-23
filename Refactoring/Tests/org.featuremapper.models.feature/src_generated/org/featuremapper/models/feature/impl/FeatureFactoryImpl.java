@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.featuremapper.models.feature.*;
 import org.featuremapper.models.feature.Annotation;
 import org.featuremapper.models.feature.Attribute;
 import org.featuremapper.models.feature.Constraint;
