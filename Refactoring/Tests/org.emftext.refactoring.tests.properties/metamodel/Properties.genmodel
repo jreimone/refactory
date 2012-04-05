@@ -1,34 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2006-2011&#xA;Software Technology Group, Dresden University of Technology&#xA;&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0 &#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Software Technology Group - TU Dresden, Germany &#xA;     - initial API and implementation&#xA;"
-    modelDirectory="/org.emftext.refactoring.tests.properties/src-gen" creationSubmenus="true"
-    modelPluginID="org.emftext.refactoring.tests.properties" modelName="Properties"
-    editPluginClass="org.emftext.refactoring.tests.properties.provider.PropertiesEditPlugin"
-    editorPluginClass="org.emftext.refactoring.tests.properties.presentation.PropertiesEditorPlugin"
-    testSuiteClass="org.emftext.refactoring.tests.properties.tests.PropertiesAllTests"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><genmodel:GenModel xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xmi="http://www.omg.org/XMI" complianceLevel="5.0" copyrightFields="false" copyrightText="/*******************************************************************************&#10; * Copyright (c) 2006-2012&#10; * Software Technology Group, Dresden University of Technology&#10; * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026&#10; *&#10; * All rights reserved. This program and the accompanying materials&#10; * are made available under the terms of the Eclipse Public License v1.0&#10; * which accompanies this distribution, and is available at&#10; * http://www.eclipse.org/legal/epl-v10.html&#10; *&#10; * Contributors:&#10; *   Software Technology Group - TU Dresden, Germany;&#10; *   DevBoost GmbH - Berlin, Germany&#10; *      - initial API and implementation&#10; ******************************************************************************/&#10;" creationSubmenus="true" editPluginClass="org.emftext.refactoring.tests.properties.provider.PropertiesEditPlugin" editorPluginClass="org.emftext.refactoring.tests.properties.presentation.PropertiesEditorPlugin" importerID="org.eclipse.emf.importer.ecore" modelDirectory="/org.emftext.refactoring.tests.properties/src-gen" modelName="Properties" modelPluginID="org.emftext.refactoring.tests.properties" testSuiteClass="org.emftext.refactoring.tests.properties.tests.PropertiesAllTests" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore" xmi:version="2.0">
   <foreignModel>Properties.ecore</foreignModel>
-  <genPackages prefix="Properties" basePackage="org.emftext.refactoring.tests" disposableProviderFactory="true"
-      ecorePackage="Properties.ecore#/">
+  <genPackages basePackage="org.emftext.refactoring.tests" disposableProviderFactory="true" ecorePackage="Properties.ecore#/" prefix="Properties">
     <genClasses ecoreClass="Properties.ecore#//PropertyModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Properties.ecore#//PropertyModel/categories"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference Properties.ecore#//PropertyModel/categories" property="None"/>
     </genClasses>
     <genClasses ecoreClass="Properties.ecore#//Category">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Properties.ecore#//Category/pairs"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference Properties.ecore#//Category/pairs" property="None"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Properties.ecore#//Category/name"/>
     </genClasses>
     <genClasses ecoreClass="Properties.ecore#//Value"/>
     <genClasses ecoreClass="Properties.ecore#//KeyValuePair">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Properties.ecore#//KeyValuePair/value"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Properties.ecore#//KeyValuePair/key"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference Properties.ecore#//KeyValuePair/value" property="None"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference Properties.ecore#//KeyValuePair/key" property="None"/>
     </genClasses>
     <genClasses ecoreClass="Properties.ecore#//Key">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Properties.ecore#//Key/name"/>
     </genClasses>
     <genClasses ecoreClass="Properties.ecore#//EObjectReferenceValue">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Properties.ecore#//EObjectReferenceValue/objectReference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Properties.ecore#//EObjectReferenceValue/objectReference" notify="false" propertySortChoices="true"/>
     </genClasses>
     <genClasses ecoreClass="Properties.ecore#//StringValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Properties.ecore#//StringValue/value"/>

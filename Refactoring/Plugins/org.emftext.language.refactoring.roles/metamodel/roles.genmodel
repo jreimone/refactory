@@ -1,51 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2006-2011&#xA;Software Technology Group, Dresden University of Technology&#xA;&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0 &#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Software Technology Group - TU Dresden, Germany &#xA;     - initial API and implementation&#xA;"
-    modelDirectory="/org.emftext.language.refactoring.roles/src-gen" modelPluginID="org.emftext.language.refactoring.roles"
-    modelName="Roles" editPluginClass="org.emftext.language.refactoring.roles.provider.RolesEditPlugin"
-    editorPluginClass="org.emftext.language.refactoring.roles.presentation.RolesEditorPlugin"
-    testSuiteClass="org.emftext.language.refactoring.roles.tests.RolesAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><genmodel:GenModel xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xmi="http://www.omg.org/XMI" complianceLevel="5.0" copyrightFields="false" copyrightText="/*******************************************************************************&#10; * Copyright (c) 2006-2012&#10; * Software Technology Group, Dresden University of Technology&#10; * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026&#10; *&#10; * All rights reserved. This program and the accompanying materials&#10; * are made available under the terms of the Eclipse Public License v1.0&#10; * which accompanies this distribution, and is available at&#10; * http://www.eclipse.org/legal/epl-v10.html&#10; *&#10; * Contributors:&#10; *   Software Technology Group - TU Dresden, Germany;&#10; *   DevBoost GmbH - Berlin, Germany&#10; *      - initial API and implementation&#10; ******************************************************************************/&#10;" editPluginClass="org.emftext.language.refactoring.roles.provider.RolesEditPlugin" editorPluginClass="org.emftext.language.refactoring.roles.presentation.RolesEditorPlugin" importerID="org.eclipse.emf.importer.ecore" modelDirectory="/org.emftext.language.refactoring.roles/src-gen" modelName="Roles" modelPluginID="org.emftext.language.refactoring.roles" testSuiteClass="org.emftext.language.refactoring.roles.tests.RolesAllTests" xmi:version="2.0">
   <foreignModel>roles.ecore</foreignModel>
-  <genPackages prefix="Roles" basePackage="org.emftext.language.refactoring" disposableProviderFactory="true"
-      ecorePackage="roles.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="roles.ecore#//RoleModifier">
+  <genPackages basePackage="org.emftext.language.refactoring" disposableProviderFactory="true" ecorePackage="roles.ecore#/" prefix="Roles">
+    <genEnums ecoreEnum="roles.ecore#//RoleModifier" typeSafeEnumCompatible="false">
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/optional"/>
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/input"/>
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//RoleModifier/super"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="roles.ecore#//CollaborationModifier">
+    <genEnums ecoreEnum="roles.ecore#//CollaborationModifier" typeSafeEnumCompatible="false">
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//CollaborationModifier/transitive"/>
       <genEnumLiterals ecoreEnumLiteral="roles.ecore#//CollaborationModifier/reflexive"/>
     </genEnums>
-    <genClasses image="false" ecoreClass="roles.ecore#//NamedElement">
+    <genClasses ecoreClass="roles.ecore#//NamedElement" image="false">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//NamedElement/name"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="roles.ecore#//Collaboration">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Collaboration/source"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Collaboration/target"/>
+    <genClasses ecoreClass="roles.ecore#//Collaboration" image="false">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference roles.ecore#//Collaboration/source" notify="false" propertySortChoices="true"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference roles.ecore#//Collaboration/target" notify="false" propertySortChoices="true"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Collaboration/modifier"/>
-      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference roles.ecore#//Collaboration/interpretationContext"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference roles.ecore#//Collaboration/interpretationContext" notify="false" property="None" propertySortChoices="true"/>
     </genClasses>
     <genClasses ecoreClass="roles.ecore#//Role">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/outgoing"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference roles.ecore#//Role/incoming"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference roles.ecore#//Role/outgoing" notify="false" propertySortChoices="true"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference roles.ecore#//Role/incoming" notify="false" propertySortChoices="true"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Role/modifier"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//Role/attributes"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//Role/attributes" property="None"/>
     </genClasses>
     <genClasses ecoreClass="roles.ecore#//RoleModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/roles"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/collaborations"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/roles" property="None"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//RoleModel/collaborations" property="None"/>
     </genClasses>
     <genClasses ecoreClass="roles.ecore#//Multiplicity">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Multiplicity/lowerBound"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Multiplicity/upperBound"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="roles.ecore#//MultiplicityCollaboration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//MultiplicityCollaboration/sourceMultiplicity"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//MultiplicityCollaboration/targetMultiplicity"/>
+    <genClasses ecoreClass="roles.ecore#//MultiplicityCollaboration" image="false">
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//MultiplicityCollaboration/sourceMultiplicity" property="None"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference roles.ecore#//MultiplicityCollaboration/targetMultiplicity" property="None"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//MultiplicityCollaboration/sourceName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//MultiplicityCollaboration/targetName"/>
     </genClasses>
@@ -55,12 +45,11 @@
     <genClasses ecoreClass="roles.ecore#//RoleImplication"/>
     <genClasses ecoreClass="roles.ecore#//RoleAttribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//RoleAttribute/modifier"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference roles.ecore#//RoleAttribute/attributeRole"/>
-      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference roles.ecore#//RoleAttribute/interpretationContext"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference roles.ecore#//RoleAttribute/attributeRole" notify="false" property="None"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference roles.ecore#//RoleAttribute/interpretationContext" notify="false" property="None" propertySortChoices="true"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="roles.ecore#//RoleFeature"/>
-    <genClasses image="false" ecoreClass="roles.ecore#//Commentable">
+    <genClasses ecoreClass="roles.ecore#//RoleFeature" image="false"/>
+    <genClasses ecoreClass="roles.ecore#//Commentable" image="false">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute roles.ecore#//Commentable/comment"/>
     </genClasses>
   </genPackages>
