@@ -65,8 +65,13 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 			fakeAttribute = attribute;
 			this.attribute = attribute;
 			fakeAttributeOwner = (EObject) context[0];
+//			String defaultLiteral = attribute.getDefaultValueLiteral();
+//			Object defaultValue = attribute.getDefaultValue();
+//			Object valueObject = convertValueIntoObject(attribute, defaultLiteral);
+			//TODO better initial value possible?
 			// because '1' is valid for all handled types in the method convertValueIntoObject()
-			return convertValueIntoObject(attribute, "1");
+			Object valueObject = convertValueIntoObject(attribute, "1");
+			return valueObject;
 		} else {
 			Object value = getValue();
 			if(value != null){
