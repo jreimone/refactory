@@ -554,6 +554,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	protected Object clone() throws CloneNotSupportedException {
 		RefactoringInterpreter clone = new RefactoringInterpreter(postProcessor);
 		clone.initialize(refSpec, mapping);
+		clone.setValueProviderFactory(this.getValueProviderFactory());
 		return clone;
 	}
 

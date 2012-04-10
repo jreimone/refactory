@@ -15,7 +15,6 @@
  ******************************************************************************/
 package org.emftext.refactoring.interpreter.internal;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
@@ -35,7 +34,8 @@ public class RefactoringFakeInterpreter extends RefactoringInterpreter implement
 		this.realInterpreter = realInterpreter;
 //		valueProviderMap = new LinkedHashMap<EObject, IValueProvider<?,?>>();
 		initialize(realInterpreter.getRefactoringSpecification(), realInterpreter.getRoleMapping());
-		valuesToProvide = new LinkedList<IValueProvider<?,?>>();
+//		valuesToProvide = new LinkedList<IValueProvider<?,?>>();
+		setValueProviderFactory(realInterpreter.getValueProviderFactory());
 	}
 	
 	public void addValueProvider(IValueProvider<?, ?> valueProvider) {

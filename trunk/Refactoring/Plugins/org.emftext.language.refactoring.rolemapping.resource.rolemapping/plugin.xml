@@ -59,20 +59,11 @@
 		</runtime>
 		<builder id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.builder">
 		</builder>
-		<builder id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.taskItemBuilder">
-		</builder>
 	</extension>
 	
 	<extension point="org.eclipse.core.resources.builders" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.builder" name="rolemapping Builder">
 		<builder hasNature="true">
 			<run class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingBuilderAdapter">
-			</run>
-		</builder>
-	</extension>
-	
-	<extension point="org.eclipse.core.resources.builders" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.taskItemBuilder" name="rolemapping Task Item Builder">
-		<builder hasNature="true">
-			<run class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingTaskItemBuilder">
 			</run>
 		</builder>
 	</extension>

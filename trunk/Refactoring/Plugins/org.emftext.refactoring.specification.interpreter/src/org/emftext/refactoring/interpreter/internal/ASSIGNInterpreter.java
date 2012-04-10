@@ -130,6 +130,7 @@ public class ASSIGNInterpreter {
 	}
 
 	private IRefactoringStatus handleTargetOnly(RoleAttribute target){
+		//TODO "assignedRole" und "roleRuntimeValue" werden hier nur einmal gesetzt --> korrekt? werden null
 		EObject interpretationContext = target.getInterpretationContext();
 		Role targetRole = target.getAttributeRole();
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
