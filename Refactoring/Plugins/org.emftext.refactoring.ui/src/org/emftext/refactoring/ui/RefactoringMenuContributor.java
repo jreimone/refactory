@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -65,12 +64,14 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 	public void createContributionItems(IServiceLocator serviceLocator, IContributionRoot additions) {
 		IWorkbenchPart activePart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
 		if (!(activePart instanceof ISaveablePart)) {
+//			System.out.println("not saveable");
 			return;
 		}
 		IWorkbenchPartSite partSite = activePart.getSite();
 		//		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		ISelectionProvider selectionProvider = partSite.getSelectionProvider();
 		if (selectionProvider == null) {
+//			System.out.println("no selection provider");
 			return;
 		}
 		ISelection selection = selectionProvider.getSelection();
@@ -99,29 +100,35 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			}
 		}
 		if (selectedElements != null && selectedElements.size() >= 1) {
-			EObject first = selectedElements.get(0);
-			EcoreUtil.resolveAll(first);
-			Resource resource = first.eResource();
+			EObject model = null;
+			Resource resource = null;
+			int i = 0;
+			do {
+				EObject element = selectedElements.get(i);
+				model = EcoreUtil.getRootContainer(element, true);
+				resource = model.eResource();
+				i++;
+			} while (i < selectedElements.size() && resource == null);
 			if (resource == null) {
+//				System.out.println("resource null");
 				return;
 			}
+//			System.out.println("~~~~~~~");
+//			System.out.println(resource);
+////			EObject model = resource.getContents().get(0);
+//			System.out.println(model);
+//			TreeIterator<EObject> iterator = model.eAllContents();
+//			while (iterator.hasNext()) {
+//				EObject object = (EObject) iterator.next();
+//				System.out.println(object);
+//			}
+//			System.out.println("~~~~~~~");
 			//Resolve the entire resource set, not just the resource itself. It might be the case that there are
 			//multiple models with cross references that have not been resolved up to this point. If one of the elements
 			//is changed during the refactoring, resolving the proxy to this element in another model does not recognize
 			//the changed element and creates a new one instead. This effectively creates an imperfect copy as the resolved
 			//element represents the state before the refactoring, whereas the refactored element represents the changed state.
 			//This leads to inconsistencies of the models and is to be avoided at all cost.
-			System.out.println("~~~~~~~");
-			System.out.println(resource);
-			EObject model = resource.getContents().get(0);
-			System.out.println(model);
-			TreeIterator<EObject> iterator = model.eAllContents();
-			while (iterator.hasNext()) {
-				EObject object = (EObject) iterator.next();
-				System.out.println(object);
-			}
-			System.out.println("~~~~~~~");
-
 			ResourceSet resourceSet = resource.getResourceSet();
 			EcoreUtil.resolveAll(resourceSet);
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
