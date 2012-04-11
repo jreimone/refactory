@@ -15,6 +15,8 @@
  ******************************************************************************/
 package org.emftext.language.refactoring.roles.quickfixes;
 
+import java.util.Collections;
+
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.roles.Role;
@@ -33,15 +35,14 @@ public class RenameRoleRefactoringQuickFix extends RolestextQuickFix {
 	public RenameRoleRefactoringQuickFix(Role roleToBeRefactored, IRefactorer refactorer, String iconKey){
 		super(REFACTOR_RENAME_OTHER_ROLE, iconKey, roleToBeRefactored);
 		this.refactorer = refactorer;
+		this.refactorer.setInput(Collections.singletonList(roleToBeRefactored));
 	}
 
 	@Override
 	public void applyChanges() {
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		IEditorConnector connector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
-		if(connector != null){
-			RefactoringAction action = new RefactoringAction(refactorer, connector);
-			action.run();
-		}
+		RefactoringAction action = new RefactoringAction(refactorer, connector);
+		action.run();
 	}
 }

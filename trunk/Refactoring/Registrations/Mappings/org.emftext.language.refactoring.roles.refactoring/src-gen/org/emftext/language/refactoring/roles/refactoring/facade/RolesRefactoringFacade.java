@@ -51,6 +51,7 @@ public class RolesRefactoringFacade {
 	
 	private void initialize() {
 		mappingMap = new HashMap<String, RoleMapping>();
+		refactorerMap = new HashMap<RoleMapping, IRefactorer>();
 		List<RoleMapping> possibleRoleMappingsForResource = IRoleMappingRegistry.INSTANCE.getPossibleRoleMappingsForResource(resource, selectedElements, 1.0);
 		for (RoleMapping roleMapping : possibleRoleMappingsForResource) {
 			mappingMap.put(roleMapping.getName(), roleMapping);
