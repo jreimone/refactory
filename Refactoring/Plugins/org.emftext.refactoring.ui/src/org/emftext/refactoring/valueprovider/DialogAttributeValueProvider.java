@@ -44,7 +44,6 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 	private Object value;
 	private int returnCode;
 
-	private IRefactoringFakeInterpreter fakeInterpreter;
 	private EAttribute fakeAttribute;
 	private EObject fakeAttributeOwner;
 	private EObject realAttributeOwner;
@@ -60,17 +59,17 @@ public class DialogAttributeValueProvider extends AbstractValueProvider<EAttribu
 	 */
 	public Object provideValue(IRefactoringInterpreter interpreter, EAttribute attribute, Object... context) {
 		if(interpreter instanceof IRefactoringFakeInterpreter){
-			fakeInterpreter = (IRefactoringFakeInterpreter) interpreter;
-			//			fakeInterpreter.addValueProvider(this);
+//			fakeInterpreter = (IRefactoringFakeInterpreter) interpreter;
 			fakeAttribute = attribute;
 			this.attribute = attribute;
 			fakeAttributeOwner = (EObject) context[0];
-//			String defaultLiteral = attribute.getDefaultValueLiteral();
-//			Object defaultValue = attribute.getDefaultValue();
-//			Object valueObject = convertValueIntoObject(attribute, defaultLiteral);
 			//TODO better initial value possible?
 			// because '1' is valid for all handled types in the method convertValueIntoObject()
-			Object valueObject = convertValueIntoObject(attribute, "1");
+			Object valueObject = fakeAttribute.getDefaultValue();
+			if(valueObject == null){
+//				valueObject = convertValueIntoObject(attribute, "1");
+				valueObject = "new" + StringUtil.firstLetterUpperCase(fakeAttribute.getName()) + "For" + StringUtil.firstLetterUpperCase(fakeAttributeOwner.eClass().getName());
+			}
 			return valueObject;
 		} else {
 			Object value = getValue();
