@@ -48,8 +48,10 @@ public interface IValueProviderFactory {
 	/**
 	 * Registers a new value provider for the given <code>command</code>.
 	 * @param command
+	 * @param context some optional context objects which can be used for further analysis (e.g. a role)
+	 * @return the value provider
 	 */
-	public void registerValueProviderForCommand(EObject command);
+	public IValueProvider<?, ?> registerValueProviderForCommand(EObject command, Object... context);
 	
 	/**
 	 * Returns all collected {@link IValueProvider}s. Implementors should check
