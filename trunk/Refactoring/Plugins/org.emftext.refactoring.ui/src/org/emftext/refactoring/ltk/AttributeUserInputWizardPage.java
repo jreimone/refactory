@@ -97,7 +97,8 @@ public class AttributeUserInputWizardPage extends UserInputWizardPage {
 			if(!fake){
 				ownerLabel.setText(labelProvider.getText(owner));
 			} else {
-				ownerLabel.setText(labelProvider.getText(owner.eClass()));
+//				ownerLabel.setText(labelProvider.getText(owner.eClass()));
+				ownerLabel.setText(owner.eClass().getName());
 			}
 			
 			final Text attribInput = new Text(composite, SWT.BORDER | SWT.SINGLE);
