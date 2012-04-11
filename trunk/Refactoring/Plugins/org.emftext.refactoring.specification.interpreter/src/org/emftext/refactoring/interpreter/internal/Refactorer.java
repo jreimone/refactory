@@ -166,12 +166,13 @@ public class Refactorer implements IRefactorer {
 	 * boolean)
 	 */
 	public EObject refactor() {
-		if(filteredSelection == null){
-			loadReferencingResources();
-		}
+//		if(filteredSelection == null){
+//			loadReferencingResources();
+//		}
 		if (roleMapping == null || interpreter == null || filteredSelection.size() == 0 || currentModelResourceSet == null) {
 			return null;
 		}
+		loadReferencingResources();
 		EObject refactoredModel = realInterprete(filteredSelection, interpreter, currentModelResourceSet);
 		return refactoredModel;
 	}
