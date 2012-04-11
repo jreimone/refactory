@@ -166,9 +166,6 @@ public class Refactorer implements IRefactorer {
 	 * boolean)
 	 */
 	public EObject refactor() {
-//		if(filteredSelection == null){
-//			loadReferencingResources();
-//		}
 		loadReferencingResources();
 		if (roleMapping == null || interpreter == null || filteredSelection.size() == 0 || currentModelResourceSet == null) {
 			return null;
