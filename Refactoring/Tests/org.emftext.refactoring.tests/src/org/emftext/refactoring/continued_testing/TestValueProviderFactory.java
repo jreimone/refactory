@@ -28,16 +28,16 @@ public class TestValueProviderFactory implements IValueProviderFactory {
 	}
 
 	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
-		// TODO Auto-generated method stub
+		// empty
 
 	}
 
-	public void registerValueProviderForCommand(EObject command) {
-		
+	public IValueProvider<?, ?> registerValueProviderForCommand(EObject command, Object... context) {
+		return null;
 	}
 
 	public List<IValueProvider<?, ?>> getValuesToProvide() {
-		// TODO Auto-generated method stub
+		// empty
 		return null;
 	}
 
