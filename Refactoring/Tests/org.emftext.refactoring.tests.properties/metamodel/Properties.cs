@@ -2,7 +2,9 @@ SYNTAXDEF properties
 FOR <http://www.emftext.org/language/properties>
 START PropertyModel
 
-OPTIONS{
+OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+
 	generateCodeFromGeneratorModel = "true";
 	reloadGeneratorModel = "true";
 	disableLaunchSupport = "true";
