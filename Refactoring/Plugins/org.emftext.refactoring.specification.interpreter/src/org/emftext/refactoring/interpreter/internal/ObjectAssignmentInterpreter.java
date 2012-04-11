@@ -150,12 +150,6 @@ public class ObjectAssignmentInterpreter{
 					}
 					@SuppressWarnings("unchecked")
 					IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderFactory().getValueProviderForCommand(command, assignedRole);
-//					IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
-//					if(valueProvider == null){
-//						classForValueProvider = mapping.getEClassForRole(assignedRole);
-//						valueProvider = getNewValueProvider(mapping);
-//						interpreter.registerValueProviderForCommand(command, valueProvider);
-//					}
 					EObject value = valueProvider.provideValue(interpreter, resolvedObjects);
 					context.addEObjectForVariable(objectVar, value);
 					if(valueProvider.getReturnCode() == Dialog.CANCEL){
@@ -186,15 +180,6 @@ public class ObjectAssignmentInterpreter{
 			if(connectedCommand != null){
 				interpreter.getValueProviderFactory().registerValueProviderForCommand(connectedCommand, valueProvider);
 			}
-//			IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
-//			if(valueProvider == null){
-//				EClass clazz = mapping.getEClassForRole(assignedRole);
-//				valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
-//				interpreter.registerValueProviderForCommand(command, valueProvider);
-//				if(connectedCommand != null){
-//					interpreter.registerValueProviderForCommand(connectedCommand, valueProvider);
-//				}
-//			}
 			EObject value = valueProvider.provideValue(interpreter, resolvedObjects);
 			context.addEObjectForVariable(objectVar, value);
 			if(valueProvider.getReturnCode() == Dialog.CANCEL){
@@ -327,12 +312,6 @@ public class ObjectAssignmentInterpreter{
 		}
 		@SuppressWarnings("unchecked")
 		IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderFactory().getValueProviderForCommand(command, assignedRole);
-		//		IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(command);
-		//		if(valueProvider == null){
-		//			classForValueProvider = mapping.getEClassForRole(assignedRole);
-		//			valueProvider = getNewValueProvider(mapping);
-		//			interpreter.registerValueProviderForCommand(command, valueProvider);
-		//		}
 		EObject value = valueProvider.provideValue(interpreter, values);
 		if(valueProvider.getReturnCode() == Dialog.CANCEL){
 			status = new RefactoringStatus(IRefactoringStatus.CANCEL);
