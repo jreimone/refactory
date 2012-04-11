@@ -37,7 +37,6 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 	public IRefactorer getRefactorer(Resource resource, RoleMapping roleMapping) {
 		IRefactorer refactorer = new Refactorer(resource, roleMapping);
 		RegistryUtil.log("created Refactorer for " + resource, IStatus.INFO);
-		System.out.println(resource);
 		return refactorer;
 	}
 }
