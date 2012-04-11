@@ -11,7 +11,10 @@ package shapes // this is the package name
 	}
 
 	class Rectangle extends Shape {
-		attribute EString color;	
+	}
+
+	class Square extends Rectangle{
+		attribute EString color;
 	}
 
 	class Circle extends Shape {
