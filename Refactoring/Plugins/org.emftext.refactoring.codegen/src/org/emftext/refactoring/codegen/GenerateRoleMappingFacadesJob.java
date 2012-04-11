@@ -160,6 +160,7 @@ public class GenerateRoleMappingFacadesJob extends Job {
 			sc.addLineBreak();
 			sc.add("private void initialize() {");
 			sc.add("mappingMap = new HashMap<String, RoleMapping>();");
+			sc.add("refactorerMap = new HashMap<RoleMapping, IRefactorer>();");
 			sc.add("List<RoleMapping> possibleRoleMappingsForResource = IRoleMappingRegistry.INSTANCE.getPossibleRoleMappingsForResource(resource, selectedElements, 1.0);");
 			sc.add("for (RoleMapping roleMapping : possibleRoleMappingsForResource) {");
 			sc.add("mappingMap.put(roleMapping.getName(), roleMapping);");
