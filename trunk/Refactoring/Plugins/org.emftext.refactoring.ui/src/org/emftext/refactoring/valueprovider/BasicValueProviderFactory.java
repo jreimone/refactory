@@ -23,11 +23,11 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.ASSIGN;
+import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.IValueProviderFactory;
-import org.emftext.refactoring.interpreter.internal.ObjectAssignmentInterpreter;
 
 public class BasicValueProviderFactory implements IValueProviderFactory {
 
@@ -43,16 +43,8 @@ public class BasicValueProviderFactory implements IValueProviderFactory {
 	public IValueProvider<?, ?> getValueProviderForCommand(EObject command, Object... context) {
 		IValueProvider<?, ?> valueProvider = valueProviderMap.get(command);
 		if(valueProvider == null){
-			registerValueProviderForCommand(command);
-		} else {
-			if (command instanceof ObjectAssignmentInterpreter){
-				if(context.length >= 1 && (context[0] instanceof Role)){
-					Role role = (Role) context[0];
-					EClass metaclass = refactorer.getRoleMapping().getEClassForRole(role);
-					valueProvider.setName("Select one " + metaclass.getName());
-				}
-			}
-		}
+			valueProvider = registerValueProviderForCommand(command, context);
+		} 
 		return valueProvider;
 	}
 
@@ -67,16 +59,22 @@ public class BasicValueProviderFactory implements IValueProviderFactory {
 		}
 	}
 
-	public void registerValueProviderForCommand(EObject command) {
+	public IValueProvider<?, ?>  registerValueProviderForCommand(EObject command, Object... context) {
 		IValueProvider<?, ?> valueProvider = valueProviderMap.get(command);
 		if(valueProvider == null){
 			if(command instanceof ASSIGN){
 				valueProvider = new DialogAttributeValueProvider(refactorer.getRoleMapping());
-			} else if (command instanceof ObjectAssignmentInterpreter){
+			} else if (command instanceof ObjectAssignmentCommand){
 				valueProvider = new DialogOneListElementProvider(refactorer.getRoleMapping());
+				if(context.length >= 1 && (context[0] instanceof Role)){
+					Role role = (Role) context[0];
+					EClass metaclass = refactorer.getRoleMapping().getEClassForRole(role);
+					valueProvider.setName("Select one " + metaclass.getName());
+				}
 			}
 			registerValueProviderForCommand(command, valueProvider);
 		}
+		return valueProvider;
 	}
 
 }

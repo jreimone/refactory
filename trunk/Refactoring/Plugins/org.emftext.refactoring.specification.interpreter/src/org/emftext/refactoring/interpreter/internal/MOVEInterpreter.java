@@ -106,15 +106,6 @@ public class MOVEInterpreter {
 			MultiplicityCollaboration collaboration = reference.getCollaboration();
 			targetRole = collaboration.getTarget();
 
-//			
-//			@SuppressWarnings("unchecked")
-//			IValueProvider<List<EObject>, EObject> valueProvider = (IValueProvider<List<EObject>, EObject>) interpreter.getValueProviderForCommand(object);
-//			if (valueProvider == null) {
-//				EClass clazz = mapping.getEClassForRole(targetRole);
-//				valueProvider = new DialogOneListElementProvider("Select one " + clazz.getName(), mapping);
-//				interpreter.registerValueProviderForCommand(object,
-//						valueProvider);
-//			}
 		}
 		CollaborationMapping collaborationMapping = mapping.getConcreteMappingForRole(
 				targetRole).getCollaborationMappingForTargetRole(sourceRole);
