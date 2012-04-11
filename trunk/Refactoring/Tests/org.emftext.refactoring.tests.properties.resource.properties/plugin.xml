@@ -59,20 +59,11 @@
 		</runtime>
 		<builder id="org.emftext.refactoring.tests.properties.resource.properties.builder">
 		</builder>
-		<builder id="org.emftext.refactoring.tests.properties.resource.properties.taskItemBuilder">
-		</builder>
 	</extension>
 	
 	<extension point="org.eclipse.core.resources.builders" id="org.emftext.refactoring.tests.properties.resource.properties.builder" name="properties Builder">
 		<builder hasNature="true">
 			<run class="org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesBuilderAdapter">
-			</run>
-		</builder>
-	</extension>
-	
-	<extension point="org.eclipse.core.resources.builders" id="org.emftext.refactoring.tests.properties.resource.properties.taskItemBuilder" name="properties Task Item Builder">
-		<builder hasNature="true">
-			<run class="org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesTaskItemBuilder">
 			</run>
 		</builder>
 	</extension>
