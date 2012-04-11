@@ -64,9 +64,11 @@ public class EMFTextEditorConnector implements IEditorConnector {
 		List<EObject> noReferencesList = new ArrayList<EObject>();
 		if (startOffset == endOffset) {
 			selectedElements = locationMap.getElementsAt(startOffset);
-			EObject nearestObject = selectedElements.get(0);
-			if (!nearestObject.eIsProxy()) {
-				noReferencesList.add(nearestObject);
+			if(selectedElements.size() > 0){
+				EObject nearestObject = selectedElements.get(0);
+				if (!nearestObject.eIsProxy()) {
+					noReferencesList.add(nearestObject);
+				}
 			}
 		} else {
 			selectedElements = locationMap.getElementsBetween(startOffset,
