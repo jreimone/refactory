@@ -9,4 +9,10 @@ Require-Bundle: org.emftext.refactoring.registry.rolemapping,
  org.eclipse.emf.ecore,
  org.emftext.language.refactoring.specification,
  org.eclipse.emf.ecore.change,
- org.emftext.language.company
+ org.emftext.language.company,
+ org.eclipse.ltk.ui.refactoring,
+ org.eclipse.jface,
+ org.eclipse.ltk.core.refactoring,
+ org.emftext.refactoring.ui,
+ org.eclipse.ui.workbench
+Export-Package: org.emftext.language.company.refactoring

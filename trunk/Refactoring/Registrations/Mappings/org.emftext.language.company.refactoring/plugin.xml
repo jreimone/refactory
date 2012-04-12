@@ -18,5 +18,13 @@
             postprocessor="org.emftext.language.company.refactoring.ExtractSubDepartmentPostProcessor">
       </postprocessor>
    </extension>
+   <extension
+         point="org.emftext.refactoring.customwizardpage">
+      <wizard_page
+            mapping_name="Extract Sub-Department"
+            nsUri="http://org.emftext/company.ecore"
+            wizard_page_class_name="org.emftext.language.company.refactoring.SetManagerWizardPage">
+      </wizard_page>
+   </extension>
 
 </plugin>

@@ -15,6 +15,7 @@
  ******************************************************************************/
 package org.emftext.language.company.refactoring;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,30 +27,58 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.company.Department;
 import org.emftext.language.company.Employee;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
 public class ExtractSubDepartmentPostProcessor extends AbstractRefactoringPostProcessor {
 
-	public ExtractSubDepartmentPostProcessor() {
-		// TODO Auto-generated constructor stub
-	}
-
+	private Map<EObject, EObject> inverseCopier;
+	
+	@SuppressWarnings("unchecked")
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-		List<EObject> extractees = getInstancesByRoleName(roleRuntimeInstanceMap, "Extractee");
-		List<EObject> containers = getInstancesByRoleName(roleRuntimeInstanceMap, "NewContainer");
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
+		List<Employee> extractees = (List<Employee>) getInstancesByRoleName(roleRuntimeInstanceMap, "Extractee");
+		List<Department> containers = (List<Department>) getInstancesByRoleName(roleRuntimeInstanceMap, "NewContainer");
 		Department container = (Department) containers.get(0);
 		if(container != null && extractees != null && extractees.size() > 0){
-			Employee manager = (Employee) extractees.get(0);
-//			extractees.remove(0);
-			container.setManager(manager);
+			if(isFakeRun){
+				Employee manager = extractees.get(0);
+				container.setManager(manager);
+				inverseCopier = getInverseCopier(copier);
+			} else {
+				for (IModelRefactoringWizardPage wizardPage : customWizardPages) {
+					if(wizardPage instanceof SetManagerWizardPage){
+						//TODO set correct elements with copier?
+						SetManagerWizardPage setManagerPage = (SetManagerWizardPage) wizardPage;
+						Employee manager = setManagerPage.getSelectedEmployee();
+						Employee realManager = null;
+						if(inverseCopier != null){
+							realManager = (Employee) inverseCopier.get(manager);
+						}
+						if(realManager != null){
+							container.setManager(realManager);
+						}
+					}
+				}
+			}
 		}
 		return Status.OK_STATUS;
 	}
 
-
-	private List<EObject> getInstancesByRoleName(Map<Role, List<EObject>> roleRuntimeInstanceMap, String roleName){
+	private Map<EObject, EObject> getInverseCopier(Map<EObject, EObject> copier){
+		if(copier == null){
+			return null;
+		}
+		Map<EObject, EObject> inverseCopier = new HashMap<EObject, EObject>();
+		for (EObject key : copier.keySet()) {
+			inverseCopier.put(copier.get(key), key);
+		}
+		return inverseCopier;
+	}
+	
+	private List<? extends EObject> getInstancesByRoleName(Map<Role, List<EObject>> roleRuntimeInstanceMap, String roleName){
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
 			if(role.getName().equals(roleName)){
