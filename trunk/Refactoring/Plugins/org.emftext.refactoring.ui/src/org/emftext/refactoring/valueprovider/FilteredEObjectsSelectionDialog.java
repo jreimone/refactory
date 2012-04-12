@@ -25,9 +25,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
@@ -49,18 +50,28 @@ import org.eclipse.ui.dialogs.SearchPattern;
  * @author Jan Reimann
  *
  */
-public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialog {
+public class FilteredEObjectsSelectionDialog <ElementType extends EObject> extends FilteredItemsSelectionDialog {
 
-	private List<EObject> elements;
+	private List<ElementType> elements;
 	private String name;
 	private Composite dialogArea;
 	private Composite composite;
-	private EObject selectedObject;
-	
-	public FilteredEObjectsSelectionDialog(Shell shell, List<EObject> elements, String name) {
+	private ElementType selectedObject;
+	private Composite parent;
+
+	public FilteredEObjectsSelectionDialog(Shell shell, List<ElementType> elements, String name) {
 		super(shell, false);
 		this.elements = elements;
 		this.name = name;
+		initialize();
+		this.create();
+	}
+	
+	public FilteredEObjectsSelectionDialog(Composite parent, Shell shell, List<ElementType> elements, String name) {
+		super(shell, false);
+		this.elements = elements;
+		this.name = name;
+		this.parent = parent;
 		initialize();
 		this.create();
 	}
@@ -105,7 +116,7 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 		setTitle(name);
 		setInitialPattern("**");
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.dialogs.FilteredItemsSelectionDialog#createExtendedContentArea(org.eclipse.swt.widgets.Composite)
 	 */
@@ -120,25 +131,25 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	@Override
 	protected ItemsFilter createFilter() {
 		ItemsFilter filter = new ItemsFilter(new SearchPattern(
-//				SearchPattern.RULE_BLANK_MATCH
-//				| 
+				//				SearchPattern.RULE_BLANK_MATCH
+				//				| 
 				SearchPattern.RULE_CAMELCASE_MATCH
 				| SearchPattern.RULE_EXACT_MATCH
 				| SearchPattern.RULE_PATTERN_MATCH
 				| SearchPattern.RULE_PREFIX_MATCH)) {
-			
+
 			@Override
 			public boolean matchItem(Object item) {
 				if(!(item instanceof EObject)){
 					return false;
 				}
-//				String search = getPattern();
-//				if("**".equals(search)){
-//					return true;
-//				}
+				//				String search = getPattern();
+				//				if("**".equals(search)){
+				//					return true;
+				//				}
 				return matches(((EObject) item).toString());
 			}
-			
+
 			@Override
 			public boolean isConsistentItem(Object item) {
 				return true;
@@ -153,7 +164,7 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	@Override
 	protected void fillContentProvider(AbstractContentProvider contentProvider, ItemsFilter itemsFilter, IProgressMonitor progressMonitor) throws CoreException {
 		progressMonitor.beginTask("Looking for elements...", elements.size());
-		for (EObject element : elements) {
+		for (ElementType element : elements) {
 			contentProvider.add(element, itemsFilter);
 			progressMonitor.worked(1);
 		}
@@ -164,9 +175,9 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	 */
 	@Override
 	protected IDialogSettings getDialogSettings() {
-		Resource resource = elements.get(0).eResource();
-		String root = resource.getURI().toString();
-		IDialogSettings settings = new DialogSettings(root);
+		EObject rootContainer = EcoreUtil.getRootContainer(elements.get(0));
+		URI uri = EcoreUtil.getURI(rootContainer);
+		IDialogSettings settings = new DialogSettings(uri.toString());
 		return settings;
 	}
 
@@ -175,17 +186,17 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	 */
 	@Override
 	public String getElementName(Object item) {
-		return ((EObject) item).toString();
+		return item.toString();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.dialogs.FilteredItemsSelectionDialog#getItemsComparator()
 	 */
 	@Override
-	protected Comparator<EObject> getItemsComparator() {
-		Comparator<EObject> comparator = new Comparator<EObject>() {
-			
-			public int compare(EObject o1, EObject o2) {	
+	protected Comparator<ElementType> getItemsComparator() {
+		Comparator<ElementType> comparator = new Comparator<ElementType>() {
+
+			public int compare(ElementType o1, ElementType o2) {	
 				EcoreItemProviderAdapterFactory factory = new EcoreItemProviderAdapterFactory();
 				if(factory.isFactoryForType(IItemLabelProvider.class)){
 					IItemLabelProvider labelProvider1 = (IItemLabelProvider) factory.adapt(o1, IItemLabelProvider.class);
@@ -206,8 +217,8 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	@Override
 	protected IStatus validateItem(Object item) {
 		return Status.OK_STATUS;
-//		IStatus status = new Status(IStatus.OK, "org.emftext.refactoring.specification.interpreter", "");
-//		return status;
+		//		IStatus status = new Status(IStatus.OK, "org.emftext.refactoring.specification.interpreter", "");
+		//		return status;
 	}
 
 	@Override
@@ -223,26 +234,28 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 		return dialogArea;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void handleSelected(StructuredSelection selection) {
 		super.handleSelected(selection);
 		if(selection != null){
 			Object firstElement = selection.getFirstElement();
-			if(firstElement instanceof EObject){
-				selectedObject = (EObject) firstElement;
-			}
+			selectedObject = (ElementType) firstElement;
 		}
 	}
 
 	/**
 	 * @return the selectedObject
 	 */
-	public EObject getSelectedObject() {
+	public ElementType getSelectedObject() {
 		return selectedObject;
 	}
 
 	@Override
 	protected Control createContents(Composite parent) {
+		if(this.parent != null){
+			parent = this.parent;
+		}
 		composite = (Composite) super.createContents(parent);
 		return composite;
 	}
@@ -251,7 +264,8 @@ public class FilteredEObjectsSelectionDialog extends FilteredItemsSelectionDialo
 	 * @return the composite
 	 */
 	public Composite getComposite() {
-		return dialogArea;
+//		return dialogArea;
+		return composite;
 	}
 
 	@Override

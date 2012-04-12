@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.ltk.ModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.ICustomWizardPageExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.ICustomWizardPageRegistry;
@@ -39,7 +40,6 @@ public class BasicCustomWizardPageRegistry implements ICustomWizardPageRegistry 
 	public BasicCustomWizardPageRegistry()
 	{
 		wizardClassMap = new LinkedHashMap<RoleMapping, List<ModelRefactoringWizardPage>>();
-		
 		refreshAllWizardPages();
 	}
 	
@@ -105,35 +105,42 @@ public class BasicCustomWizardPageRegistry implements ICustomWizardPageRegistry 
 		}
 	}
 	
-	public List<ModelRefactoringWizardPage> getFreshCustomWizardPages(RoleMapping mapping, Map<Role, List<EObject>> roleRuntimeInstanceMap)
+	public List<IModelRefactoringWizardPage> getCustomWizardPages(RoleMapping mapping, Map<Role, List<EObject>> roleRuntimeInstanceMap)
 	{
 		//Fresh pages are needed if a new instance of a refactoring is created
 		//because the old UI elements have been disposed.
-		refreshWizardPages(mapping);
+//		refreshWizardPages(mapping);
 		
-		List<ModelRefactoringWizardPage> customPages = getCustomWizardPages(mapping);
+		List<IModelRefactoringWizardPage> customPages = getCustomWizardPages(mapping);
 		
 		//Initialize the pages with the relevant data.
-		for (ModelRefactoringWizardPage page : customPages)
+		for (IModelRefactoringWizardPage page : customPages)
 		{
-			page.setRoleRuntimeInstanceMap(roleRuntimeInstanceMap);
+			if(roleRuntimeInstanceMap != null){
+				page.setRoleRuntimeInstanceMap(roleRuntimeInstanceMap);
+			}
 		}
 		
 		return customPages;
 	}
 	
-	public List<ModelRefactoringWizardPage> getCustomWizardPages(RoleMapping mapping)
+	private List<IModelRefactoringWizardPage> getCustomWizardPages(RoleMapping mapping)
 	{
 		if (wizardClassMap.containsKey(mapping))
 		{
 			//Only hand out copies of the original lists to prevent concurrent modifications through SWT threat.
 			List<ModelRefactoringWizardPage> customPages = wizardClassMap.get(mapping);
-			List<ModelRefactoringWizardPage> copiedCustomPages = new ArrayList<ModelRefactoringWizardPage>();
+			List<IModelRefactoringWizardPage> copiedCustomPages = new ArrayList<IModelRefactoringWizardPage>();
 			copiedCustomPages.addAll(customPages);
 			
 			return copiedCustomPages;
 		}
 		
-		return new ArrayList<ModelRefactoringWizardPage>();
+		return new ArrayList<IModelRefactoringWizardPage>();
+	}
+
+	@Override
+	public void init(RoleMapping roleMapping) {
+		refreshWizardPages(roleMapping);
 	}
 }

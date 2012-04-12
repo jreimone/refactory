@@ -49,9 +49,9 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 	private List<EObject> realElements;
 	private List<EObject> elements;
 	//	private String name;
-	private FilteredEObjectsSelectionDialog dialog;
+	private FilteredEObjectsSelectionDialog<EObject> dialog;
 	private AbstractPathCreator pathCreator;
-
+	
 	public DialogOneListElementProvider(RoleMapping mapping){
 		this.mapping = mapping;
 		//		this.name = name;
@@ -74,12 +74,12 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 
 	private void initDialog() {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		dialog = new FilteredEObjectsSelectionDialog(shell, elements, getName());
+		dialog = new FilteredEObjectsSelectionDialog<EObject> (shell, elements, getName());
 	}
 
 	private EObject openDialog() {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		dialog = new FilteredEObjectsSelectionDialog(shell, elements, getName());
+		dialog = new FilteredEObjectsSelectionDialog<EObject> (shell, elements, getName());
 
 		returnCode = dialog.open();
 		if(returnCode == FilteredItemsSelectionDialog.CANCEL) {

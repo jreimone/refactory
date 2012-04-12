@@ -46,6 +46,7 @@ import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.rolemapping.ICustomWizardPageRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -141,6 +142,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				Resource mappingResource = mapping.eResource();
 				if (mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0)) {
 					IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, mapping);
+					ICustomWizardPageRegistry.INSTANCE.init(mapping);
 					if (refactorer != null) {
 						refactorer.setInput(selectedElements);
 						RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());

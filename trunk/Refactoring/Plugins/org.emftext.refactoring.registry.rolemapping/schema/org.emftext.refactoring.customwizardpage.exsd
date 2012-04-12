@@ -3,7 +3,7 @@
 <schema targetNamespace="org.emftext.refactoring.registry.rolemapping" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.emftext.refactoring.registry.rolemapping" id="org.emftext.refactoring.customwizardpage" name="Custom Wizard Page"/>
+         <meta.schema plugin="org.emftext.refactoring.registry.rolemapping" id="org.emftext.refactoring.customwizardpage" name="customWizardPage"/>
       </appinfo>
       <documentation>
          Add a custom page to the refactoring wizard.

@@ -27,10 +27,10 @@ import org.eclipse.ltk.ui.refactoring.RefactoringWizard;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.customwizardpage.ICustomWizardPageRegistry;
 import org.emftext.refactoring.interpreter.IAttributeValueProvider;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IValueProvider;
+import org.emftext.refactoring.registry.rolemapping.ICustomWizardPageRegistry;
 
 /**
  * @author Jan Reimann
@@ -56,8 +56,6 @@ public class ModelRefactoringWizard extends RefactoringWizard {
 		List<IValueProvider<?, ?>> valueProviders = interpreter.getValueProviderFactory().getValuesToProvide();
 		List<IAttributeValueProvider> simpleProviders = new LinkedList<IAttributeValueProvider>();
 		
-		//TODO: cseidl Retrieve the appropriate value for the roleRuntimeInstanceMap and use it instead of null. 
-		Map<Role, List<EObject>> roleRuntimeInstanceMap = null;
 		
 		List<UserInputWizardPage> pages = new LinkedList<UserInputWizardPage>();
 		for (IValueProvider<?, ?> valueProvider : valueProviders) {
@@ -74,6 +72,8 @@ public class ModelRefactoringWizard extends RefactoringWizard {
 			this.addPage(userInputWizardPage);
 		}
 		
+		//TODO: cseidl Retrieve the appropriate value for the roleRuntimeInstanceMap and use it instead of null.
+		Map<Role, List<EObject>> roleRuntimeInstanceMap = refactoring.getInterpreter().getFakeInterpreter().getRoleRuntimeInstances();
 		addCustomWizardPages(roleRuntimeInstanceMap);
 	}
 
@@ -82,11 +82,11 @@ public class ModelRefactoringWizard extends RefactoringWizard {
 		RoleMapping mapping = refactoring.getRefactorer().getRoleMapping();
 		
 		//Get _fresh_ wizard page here because the UI elements of old instances have been disposed.
-		List<IModelRefactoringWizardPage> customPages = ICustomWizardPageRegistry.INSTANCE.getFreshCustomWizardPages(mapping, roleRuntimeInstanceMap);
+//		List<IModelRefactoringWizardPage> customPages = ICustomWizardPageRegistry.INSTANCE.getFreshCustomWizardPages(mapping, roleRuntimeInstanceMap);
+		List<IModelRefactoringWizardPage> customPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(mapping, roleRuntimeInstanceMap);
 
 		for (IModelRefactoringWizardPage page : customPages) {
 			ModelRefactoringWizardPage concretePage = (ModelRefactoringWizardPage) page;
-			
 			addPage(concretePage);
 		}
 		
