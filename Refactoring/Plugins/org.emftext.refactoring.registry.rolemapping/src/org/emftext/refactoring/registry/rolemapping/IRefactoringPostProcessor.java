@@ -89,7 +89,8 @@ public interface IRefactoringPostProcessor {
 	 * @param resourceSet the {@link ResourceSet} containing all referencing and inverse referencing {@link Resource resources}
 	 * @param change the {@link ChangeDescription} containing all changes which were made before invoking this postprocessor
 	 * @param refSpec the passed {@link RefactoringSpecification} for further analysis
+	 * @param copier a copier is passed which contains a map from original to copied model elements
 	 * @return the status of the postprocessing 
 	 */
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun);
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier);
 }

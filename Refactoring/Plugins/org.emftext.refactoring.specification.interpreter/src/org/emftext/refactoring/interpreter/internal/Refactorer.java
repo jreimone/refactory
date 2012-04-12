@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.refactoring.customwizardpage.ICustomWizardPageRegistry;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
@@ -49,6 +48,7 @@ import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.rolemapping.ICustomWizardPageRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -197,9 +197,12 @@ public class Refactorer implements IRefactorer {
 			if (postProcessor != null) {
 				RefactoringSpecification refactoringSpecification = interpreter.getRefactoringSpecification();
 
-				List<IModelRefactoringWizardPage> customWizardPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(getRoleMapping());
+				List<IModelRefactoringWizardPage> customWizardPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(getRoleMapping(), null);
+				for (IModelRefactoringWizardPage wizardPage : customWizardPages) {
+					wizardPage.setRoleRuntimeInstanceMap(interpreter.getRoleRuntimeInstances());
+				}
 
-				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false);
+				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, null);
 				int severity = postProcessingStatus.getSeverity();
 
 				if (severity != IRefactoringStatus.OK) {
@@ -345,10 +348,13 @@ public class Refactorer implements IRefactorer {
 			IRefactoringPostProcessor fakePostProcessor = fakeInterpreter.getPostProcessor();
 			if (fakePostProcessor != null) {
 				RefactoringSpecification fakeRefactoringSpecification = fakeInterpreter.getRefactoringSpecification();
-				//TODO better integration of custom wizard pages
-				List<IModelRefactoringWizardPage> customWizardPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(mapping);
-
-				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true);
+				List<IModelRefactoringWizardPage> customWizardPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(mapping, fakeInterpreter.getRoleRuntimeInstances());
+				//TODO this doesn't need to be done here
+//				for (IModelRefactoringWizardPage wizardPage : customWizardPages) {
+//					wizardPage.setRoleRuntimeInstanceMap(fakeInterpreter.getRoleRuntimeInstances());
+//				}
+				
+				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier);
 
 				if (fakePostProcessingStatus.getSeverity() != IRefactoringStatus.OK) {
 					int severity = fakePostProcessingStatus.getSeverity();

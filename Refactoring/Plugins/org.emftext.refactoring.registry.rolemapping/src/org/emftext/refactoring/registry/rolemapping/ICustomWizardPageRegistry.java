@@ -21,13 +21,22 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
-import org.emftext.refactoring.ltk.ModelRefactoringWizardPage;
+import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.impl.BasicCustomWizardPageRegistry;
 
 public interface ICustomWizardPageRegistry {
 
 	public static final ICustomWizardPageRegistry INSTANCE = new BasicCustomWizardPageRegistry();
 	
-	public List<ModelRefactoringWizardPage> getFreshCustomWizardPages(RoleMapping mapping, Map<Role, List<EObject>> roleRuntimeInstanceMap);
-	public List<ModelRefactoringWizardPage> getCustomWizardPages(RoleMapping mapping);
+//	public List<IModelRefactoringWizardPage> getFreshCustomWizardPages(RoleMapping mapping, Map<Role, List<EObject>> roleRuntimeInstanceMap);
+	public List<IModelRefactoringWizardPage> getCustomWizardPages(RoleMapping mapping, Map<Role, List<EObject>> roleRuntimeInstanceMap);
+	
+	/**
+	 * Is executed before a new refactoring is invoked for initialising the registry. This means, known
+	 * registered custom wizard pages stay known but the collected values from other refactorings are removed
+	 * and the page is initialised.
+	 * The given <code>roleMapping</code> is used to determine the registered wizard pages.
+	 * 
+	 */
+	public void init(RoleMapping roleMapping);
 }
