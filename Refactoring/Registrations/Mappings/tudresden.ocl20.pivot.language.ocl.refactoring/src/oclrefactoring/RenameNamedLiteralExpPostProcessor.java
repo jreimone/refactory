@@ -18,7 +18,6 @@
  */
 package oclrefactoring;
 
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +27,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
-import org.eclipse.emf.ecore.change.FeatureChange;
-import org.eclipse.emf.ecore.change.ListChange;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -41,9 +36,6 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 
-import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.IterateExpCS;
 import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
 import tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS;
@@ -53,9 +45,6 @@ import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
-import tudresden.ocl20.pivot.language.ocl.impl.IterateExpCSImpl;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Property;
 /**
  * @author Michael Muck
  *
@@ -85,7 +74,7 @@ public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProce
 			EObject refactoredModel, ResourceSet resourceSet,
 			ChangeDescription change, RefactoringSpecification refSpec,
 			List<IModelRefactoringWizardPage> customWizardPages,
-			boolean isFakeRun) {
+			boolean isFakeRun, Map<EObject, EObject> copier) {
 		
 		if (isFakeRun) {
 			System.out.println("---------------------postprocessor activated in fake mode - no processing done for now!--------------------");

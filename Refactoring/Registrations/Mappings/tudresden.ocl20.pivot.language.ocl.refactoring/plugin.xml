@@ -46,14 +46,6 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="Remove All Empty Variable Declarations"
-            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RemoveAllEmptyVariableDeclarationsPostProcessor">
-      </postprocessor>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
             mapping_name="Remove Redundant Brackets"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.RemoveRedundantBrackets">
@@ -81,14 +73,6 @@
             mapping_name="RenameNamedLiteralExpCS"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.RenameNamedLiteralExpPostProcessor">
-      </postprocessor>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
-            mapping_name="Remove Empty Variable Declaration"
-            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RemoveEmptyVariableDeclarationPostProcessor">
       </postprocessor>
    </extension>
    <extension

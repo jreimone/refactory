@@ -36,8 +36,6 @@ import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
 import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS;
 import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
@@ -70,7 +68,7 @@ public class RemoveUnusedVariableDeclarationsPP extends AbstractRefactoringPostP
 
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
-			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
 
 
 		System.out.println("Postprocessor for 'Remove All Unused Variable Definitions' refactoring activated!");
