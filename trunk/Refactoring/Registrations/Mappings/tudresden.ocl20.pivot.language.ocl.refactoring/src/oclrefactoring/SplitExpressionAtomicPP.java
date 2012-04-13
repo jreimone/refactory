@@ -74,7 +74,7 @@ public class SplitExpressionAtomicPP extends AbstractRefactoringPostProcessor {
 	
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
-			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
 
 		System.err.println("Split Constraint postprocessor activated!");
 		Set<Role> keySet = roleRuntimeInstanceMap.keySet();

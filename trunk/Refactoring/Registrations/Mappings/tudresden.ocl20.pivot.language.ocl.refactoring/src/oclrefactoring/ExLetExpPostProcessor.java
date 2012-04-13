@@ -51,7 +51,6 @@ import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 import tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS;
 import tudresden.ocl20.pivot.language.ocl.impl.OclFactoryImpl;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -90,7 +89,7 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 	
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
-			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
 		
 		if (isFakeRun) return Status.OK_STATUS;
 //		System.err.println("postprocessor activated!");
@@ -304,7 +303,7 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 //		System.out.println("orig containing feature of extract: "+origRef);
 		
 		if (origRef instanceof EReferenceImpl) {
-			EReferenceImpl myref = ((EReferenceImpl)origRef);
+//			EReferenceImpl myref = ((EReferenceImpl)origRef);
 			origContainer.eSet(origRef, myReferenceLiteral);
 		}
 		

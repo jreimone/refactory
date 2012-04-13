@@ -18,14 +18,12 @@
  */
 package oclrefactoring;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
@@ -38,10 +36,7 @@ import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProce
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.impl.OclFactoryImpl;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
@@ -72,7 +67,7 @@ public class SeparateContextClassifiersPP extends AbstractRefactoringPostProcess
 	
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
-			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun) {
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
 
 		if (debug && isFakeRun) return Status.OK_STATUS;
 		System.out.println("Separate Context Classifiers postprocessor activated!");
@@ -135,7 +130,7 @@ public class SeparateContextClassifiersPP extends AbstractRefactoringPostProcess
 //			System.out.println("pass 1");		
 //			System.out.println("invlistsize: "+invList.size());
 			InvariantOrDefinitionCS akt = invList.get(0);
-			InvariantOrDefinitionCS aktCopy = (InvariantOrDefinitionCS) myCopier.copy(akt);
+//			InvariantOrDefinitionCS aktCopy = (InvariantOrDefinitionCS) myCopier.copy(akt);
 			ClassifierContextDeclarationCS myccd = (ClassifierContextDeclarationCS) myCopier.copy(myClassifierContextDeclarationCS);
 			myccd.getInvariantsAndDefinitions().add(akt);
 //			System.out.println("added elements to ClassifierContextDeclarationCS"+myccd);
