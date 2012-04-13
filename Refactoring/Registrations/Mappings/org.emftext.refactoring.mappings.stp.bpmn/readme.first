@@ -1,7 +1,8 @@
-How to install the BPMN modeler including its metamodel:
+How to install the BPMN modeler including its metamodel in Indigo:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* grab your update url from http://www.eclipse.org/stp/download.php
-* in the install dialog only select the "BPMN Project Feature" if you just need this
+* Help -> Install New Software...
+* select "Indigo - http://download.eclipse.org/releases/indigo/" in the drop down list
+* select the "SOA Development" --> "BPMN Project Feature" if you just need the metamodel
 * restart Eclipse
 * create new BPMN model
