@@ -61,7 +61,7 @@ public class RefspecBuilder implements IRefspecBuilder {
 				resource.addWarning("This Refactoring Specification was only registered temporarily.\nYou should consider to register it as extension.", RefspecEProblemType.BUILDER_ERROR, model);
 			}
 		} catch (RefSpecAlreadyRegisteredException e) {
-			IRefactoringSpecificationRegistry.INSTANCE.updateRefSpec(model);
+//			IRefactoringSpecificationRegistry.INSTANCE.updateRefSpec(model);
 			resource.addWarning("This Refactoring Specification was only registered temporarily.\nYou should consider to register it as extension.", RefspecEProblemType.BUILDER_ERROR, model);
 		}
 		return Status.OK_STATUS;

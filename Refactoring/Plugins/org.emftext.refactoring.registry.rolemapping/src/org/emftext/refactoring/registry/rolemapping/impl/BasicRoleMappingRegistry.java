@@ -199,35 +199,15 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	private List<RoleMapping> registerRoleMappingInternal(RoleMappingModel roleMapping, IConfigurationElement config) {
 		Map<String, RoleMapping> mappingsToRegister = new LinkedHashMap<String, RoleMapping>();
 		for (RoleMapping mapping : roleMapping.getMappings()) {
-			Resource mappingResource = mapping.eResource();
-			if(mappingResource != null && mappingResource.getErrors() != null && mappingResource.getErrors().size() > 0 ){
-				List<Diagnostic> errors = mappingResource.getErrors();
-				IStatus status = null;
-				String pluginId;
-				if(config != null){
-					pluginId = config.getContributor().getName();					
-				} else {
-					pluginId = Activator.PLUGIN_ID;
-				}
-				List<IStatus> errorStati = new ArrayList<IStatus>();
-				for (Diagnostic diagnostic : errors) {
-					errorStati.add(new Status(IStatus.ERROR, pluginId, diagnostic.getMessage()));
-				}
-				status = new MultiStatus(
-						pluginId
-						, IStatus.ERROR
-						, errorStati.toArray(new IStatus[0])
-						, "The mapping '" + mapping.getName() + "' cannot be registered because of contained errors. Inspect the sub-entries."
-						, null);
-				if(Platform.isRunning()){
-					Activator.getDefault().getLog().log(status);
-				}
-			} else {
+			if(canRegisterSingleRoleMapping(mapping, config)){
 				mappingsToRegister.put(mapping.getName(), mapping);
 			}
 		}
+		return registerCollectedMappings(mappingsToRegister, roleMapping.getTargetMetamodel());
+	}
 
-		String nsUri = roleMapping.getTargetMetamodel().getNsURI();
+	private List<RoleMapping> registerCollectedMappings(Map<String, RoleMapping> mappingsToRegister, EPackage rootPackage){
+		String nsUri = rootPackage.getNsURI();
 		if(nsUri == null){// then the meta model isn't registered correctly and doesn't exist
 			return new LinkedList<RoleMapping>(mappingsToRegister.values());
 		}
@@ -240,18 +220,58 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		for (String mappingName : mappingsToRegister.keySet()) {
 			if(registered.get(mappingName) != null){
 				alreadyRegistered.add(mappingsToRegister.get(mappingName));
-				RegistryUtil.log("A mapping '" + mappingName + "' already exists in the registry for metamodel " + nsUri, IStatus.WARNING);
+				//				RegistryUtil.log("A mapping '" + mappingName + "' already exists in the registry for metamodel " + nsUri, IStatus.WARNING);
 			} else {
 				registered.put(mappingName, mappingsToRegister.get(mappingName));
 			}
 		}
-		EPackage rootPackage = roleMapping.getTargetMetamodel();
 		registerSubPackages(rootPackage, registered);
 		return alreadyRegistered;
 	}
 
-	public List<RoleMapping> registerRoleMapping(RoleMappingModel roleMapping) {
+	private boolean canRegisterSingleRoleMapping(RoleMapping mapping, IConfigurationElement config) {
+		Resource mappingResource = mapping.eResource();
+		if(mappingResource != null && mappingResource.getErrors() != null && mappingResource.getErrors().size() > 0 ){
+			List<Diagnostic> errors = mappingResource.getErrors();
+			IStatus status = null;
+			String pluginId;
+			if(config != null){
+				pluginId = config.getContributor().getName();					
+			} else {
+				pluginId = Activator.PLUGIN_ID;
+			}
+			List<IStatus> errorStati = new ArrayList<IStatus>();
+			for (Diagnostic diagnostic : errors) {
+				errorStati.add(new Status(IStatus.ERROR, pluginId, diagnostic.getMessage()));
+			}
+			status = new MultiStatus(
+					pluginId
+					, IStatus.ERROR
+					, errorStati.toArray(new IStatus[0])
+					, "The mapping '" + mapping.getName() + "' cannot be registered because of contained errors. Inspect the sub-entries."
+					, null);
+			if(Platform.isRunning()){
+				Activator.getDefault().getLog().log(status);
+			}
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public List<RoleMapping> registerRoleMappingModel(RoleMappingModel roleMapping) {
 		return registerRoleMappingInternal(roleMapping, null);
+	}
+
+	public List<RoleMapping> registerRoleMapping(RoleMapping roleMapping) {
+		if(roleMapping == null){
+			return null;
+		}
+		Map<String, RoleMapping> mappingsToRegister = new LinkedHashMap<String, RoleMapping>();
+		if(canRegisterSingleRoleMapping(roleMapping, null)){
+			mappingsToRegister.put(roleMapping.getName(), roleMapping);
+		}
+		return registerCollectedMappings(mappingsToRegister, roleMapping.getOwningMappingModel().getTargetMetamodel());
 	}
 
 	private void registerSubPackages(EPackage rootPackage, Map<String, RoleMapping> mappings){
@@ -316,24 +336,16 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		return image;
 	}
 
-	public void updateMappings(List<RoleMapping> mappingsToUpdate) {
-		for (RoleMapping mapping : mappingsToUpdate) {
-			RoleMappingModel model = mapping.getOwningMappingModel();
-			if(model != null){
-				String nsUri = model.getTargetMetamodel().getNsURI();
-				if(nsUri == null){
-					return;
-				}
+	public RoleMapping unregisterMappings(RoleMapping mappingToUnregister){
+		RoleMappingModel model = mappingToUnregister.getOwningMappingModel();
+		if(model != null){
+			String nsUri = model.getTargetMetamodel().getNsURI();
+			if(nsUri != null){
 				Map<String, RoleMapping> registeredMappings = getRoleMappingsForUri(nsUri);
-				if(registeredMappings != null){
-					RoleMapping correspondingMapping = registeredMappings.get(mapping.getName());
-					if(correspondingMapping == null 
-							|| mapping.eResource().getURI().equals(correspondingMapping.eResource().getURI())){
-						registeredMappings.put(mapping.getName(), mapping);
-					}
-				}
+				return registeredMappings.remove(mappingToUnregister.getName());
 			}
 		}
+		return null;
 	}
 
 	public URL getImagePathForMapping(RoleMapping mapping) {
@@ -347,7 +359,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		Map<String, RoleMapping> roleMappings = getRoleMappingsForUri(mmUri);
 		return RoleUtil.getPossibleMappingsForInputSelection(selectedElements, roleMappings, minEquality);
 	}
-	
+
 	@Override
 	public List<RefactoringSpecification> getPossibleRefactorings(List<? extends EObject> selection, double minEquality) {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();

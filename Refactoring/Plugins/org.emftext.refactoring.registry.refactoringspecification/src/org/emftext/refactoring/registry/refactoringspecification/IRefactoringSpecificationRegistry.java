@@ -46,9 +46,10 @@ public interface IRefactoringSpecificationRegistry {
 	public void registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException;
 	
 	/**
-	 * Use this method to update an already registered refspec
+	 * Use this method to unregister an already registered refspec
 	 * @param refSpec
+	 * @return the unregistered refSpec or <code>null</code> if no refSpec was registered
 	 */
-	public void updateRefSpec(RefactoringSpecification refSpec);
+	public RefactoringSpecification unregisterRefSpec(RefactoringSpecification refSpec);
 	
 }

@@ -64,8 +64,9 @@ public interface IRoleModelRegistry {
 	public RoleModel getRoleModelByName(String name);
 	
 	/**
-	 * Use this method to update an already registered role model.
+	 * Use this method to unregister an already registered role model.
 	 * @param model
+	 * @return the unregistered roleModel or <code>null</code> if there was no roleModel registered
 	 */
-	public void updateRoleModel(RoleModel model);
+	public RoleModel unregisterRoleModel(RoleModel roleModel);
 }

@@ -58,15 +58,13 @@ IRefactoringSpecificationRegistry {
 		return refSpecMap;
 	}
 
-	public void registerRefSpec(RefactoringSpecification refSpec)
-			throws RefSpecAlreadyRegisteredException {
+	public void registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException {
 		RoleModel roleModel = refSpec.getUsedRoleModel();
 		EcoreUtil.resolveAll(roleModel);
 		String name = roleModel.getName();
 		roleModel = IRoleModelRegistry.INSTANCE.getRoleModelByName(name);
 		if (roleModel != null) {
-			RefactoringSpecification registeredRefSpec = getRefSpecMap().get(
-					roleModel);
+			RefactoringSpecification registeredRefSpec = getRefSpecMap().get(roleModel);
 			if (registeredRefSpec != null) {
 				throw new RefSpecAlreadyRegisteredException(refSpec);
 			}
@@ -89,8 +87,8 @@ IRefactoringSpecificationRegistry {
 		}
 	}
 
-	public void updateRefSpec(RefactoringSpecification refSpec) {
+	public RefactoringSpecification unregisterRefSpec(RefactoringSpecification refSpec) {
 		RoleModel rolemodel = refSpec.getUsedRoleModel();
-		getRefSpecMap().put(rolemodel, refSpec);
+		return getRefSpecMap().remove(rolemodel);
 	}
 }

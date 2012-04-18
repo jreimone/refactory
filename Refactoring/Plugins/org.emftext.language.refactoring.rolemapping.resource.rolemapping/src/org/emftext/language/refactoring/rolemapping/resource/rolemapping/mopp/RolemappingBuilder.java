@@ -65,9 +65,9 @@ public class RolemappingBuilder implements IRolemappingBuilder {
 	public IStatus build(RolemappingResource resource, IProgressMonitor monitor) {
 		RoleMappingModel model = (RoleMappingModel) resource.getContents().get(0);
 		if((resource.getErrors() == null || resource.getErrors().size() == 0)){
-			List<RoleMapping> unRegisterables = IRoleMappingRegistry.INSTANCE.registerRoleMapping(model);
+			List<RoleMapping> unRegisterables = IRoleMappingRegistry.INSTANCE.registerRoleMappingModel(model);
 			if(unRegisterables != null && unRegisterables.size() > 0){
-				IRoleMappingRegistry.INSTANCE.updateMappings(unRegisterables);
+//				IRoleMappingRegistry.INSTANCE.updateMappings(unRegisterables);
 			}
 			resource.addWarning("This Role Mapping Model was only registered temporarily.\nYou should consider to register it as extension.", RolemappingEProblemType.BUILDER_ERROR, model);
 		}
