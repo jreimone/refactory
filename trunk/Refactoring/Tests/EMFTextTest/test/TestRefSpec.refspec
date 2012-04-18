@@ -1,5 +1,4 @@
-REFACTORING IntroduceDerivation 
-FOR <TestRoles>  
+REFACTORING FOR <TestRoles>  
 
 STEPS { 
 	object derivationContainer := DerivationContainer from uptree(INPUT);
