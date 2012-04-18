@@ -60,7 +60,7 @@ public class RolestextBuilder implements IRolestextBuilder {
 				resource.addWarning("This Role Model was only registered temporarily.\nYou should consider to register it as extension.", RolestextEProblemType.BUILDER_ERROR, model);
 			}
 		} catch (RoleModelAlreadyRegisteredException e) {
-			IRoleModelRegistry.INSTANCE.updateRoleModel(model);
+//			IRoleModelRegistry.INSTANCE.updateRoleModel(model);
 			resource.addWarning("This Role Model was only registered temporarily.\nYou should consider to register it as extension.", RolestextEProblemType.BUILDER_ERROR, model);
 		}
 		return Status.OK_STATUS;

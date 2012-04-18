@@ -72,8 +72,7 @@ public class BasicRoleModelRegistry implements IRoleModelRegistry {
 		}
 	}
 
-	public void updateRoleModel(RoleModel model) {
-//		RoleModel registeredModel = getRoleModelByName(model.getName());
-		getRoleModelNameMap().put(model.getName(), model);
+	public RoleModel unregisterRoleModel(RoleModel model) {
+		return getRoleModelNameMap().remove(model);
 	}
 }

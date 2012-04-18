@@ -54,16 +54,25 @@ public interface IRoleMappingRegistry {
 	 * @param roleMapping
 	 * @return those mappings which couldn't be registered
 	 */
-	public List<RoleMapping> registerRoleMapping(RoleMappingModel roleMapping);
+	public List<RoleMapping> registerRoleMappingModel(RoleMappingModel roleMapping);
+
+	/**
+	 * To be invoked if a single {@link RoleMapping} is intended to be registered at runtime.
+	 * This method returns those mappings contained in the <code>roleMapping</code> which couldn't be registered
+	 * because they are already registered.
+	 *  
+	 * @param roleMapping
+	 * @return those mappings which couldn't be registered
+	 */
+	public List<RoleMapping> registerRoleMapping(RoleMapping roleMapping);	
 	
 	/**
-	 * This method updates the registered mappings with the <code>mappingsToUpdate</code>. Only corresponding
-	 * mappings will be updated. As input the output from {@link IRoleMappingRegistry#registerRoleMapping(RoleMappingModel)}
-	 * could serve.
+	 * This method unregisters the registered mapping <code>mappingToUnregister</code>.
 	 *  
-	 * @param mappingsToUpdate
+	 * @param mappingToUnregister
+	 * @return the unregistered mapping or <code>null</code> if the mapping wasn't registered
 	 */
-	public void updateMappings(List<RoleMapping> mappingsToUpdate);
+	public RoleMapping unregisterMappings(RoleMapping mappingToUnregister);
 	
 	/**
 	 * Returns the {@link RoleMappingModel rolemapping} map.
