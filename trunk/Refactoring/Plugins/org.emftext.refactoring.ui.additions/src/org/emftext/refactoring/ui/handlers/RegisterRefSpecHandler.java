@@ -36,12 +36,13 @@ public class RegisterRefSpecHandler extends AbstractModelHandler<RefactoringSpec
 	}
 
 	@Override
-	protected void executeWithModel(RefactoringSpecification model) {
+	protected void executeWithModelInTextEditor(RefactoringSpecification model) {
 		try {
 			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(model);
 		} catch (RefSpecAlreadyRegisteredException e) {
-			// do nothing
-			e.printStackTrace();
+			UIUtil.showToolTip("Registering RefactoringSpecification"
+					, "RefactoringSpecification for '" + model.getUsedRoleModel().getName() + "' couldn't be registered.\nA RefSpec was registered already."
+					, getEditor());
 		}
 	}
 

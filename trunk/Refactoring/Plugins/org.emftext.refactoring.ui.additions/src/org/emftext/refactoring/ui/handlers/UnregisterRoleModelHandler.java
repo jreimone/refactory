@@ -15,33 +15,30 @@
  ******************************************************************************/
 package org.emftext.refactoring.ui.handlers;
 
-import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.ui.IEditorPart;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.language.refactoring.roles.resource.rolestext.IRolestextTextResource;
-import org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 
-public class UnregisterRoleModelHandler extends AbstractModelHandler<RoleModel, IRolestextTextResource, RolestextEditor> {
+public class UnregisterRoleModelHandler extends RegisterRoleModelHandler {
 
 	@Override
-	protected RoleModel getModelFromSelection(ITextSelection selection, IRolestextTextResource resource) {
-		return (RoleModel) resource.getContents().get(0);
+	protected void executeWithModelInTextEditor(RoleModel model) {
+		RoleModel unregisterRoleModel = IRoleModelRegistry.INSTANCE.unregisterRoleModel(model);
+		//TODO unregister all corresponding refspecs, rolemappings
+		if(unregisterRoleModel == null){
+			UIUtil.showToolTip("Unregistering RoleModel"
+					, "RoleModel '" + model.getName() + "' couldn't be unregistered.\nIt never was registered."
+					, getEditor());
+		}
 	}
 
 	@Override
-	protected boolean isModelEditorInstance(IEditorPart editor) {
-		return editor instanceof RolestextEditor;
+	protected void executeWithRoleModelInGMFEditor(RoleModel roleModel) {
+		RoleModel unregisteredRoleModel = IRoleModelRegistry.INSTANCE.unregisterRoleModel(roleModel);
+		//TODO unregister all corresponding refspecs, rolemappings
+		if(unregisteredRoleModel == null){
+			UIUtil.showToolTip("Untegistering RoleModel"
+					, "RoleModel '" + roleModel.getName() + "' couldn't be unregistered.\nIt never was registered."
+					, getEditor());
+		}
 	}
-
-	@Override
-	protected IRolestextTextResource getResource(RolestextEditor editor) {
-		return editor.getResource();
-	}
-
-	@Override
-	protected void executeWithModel(RoleModel model) {
-		IRoleModelRegistry.INSTANCE.unregisterRoleModel(model);
-	}
-
 }

@@ -73,6 +73,6 @@ public class BasicRoleModelRegistry implements IRoleModelRegistry {
 	}
 
 	public RoleModel unregisterRoleModel(RoleModel model) {
-		return getRoleModelNameMap().remove(model);
+		return getRoleModelNameMap().remove(model.getName());
 	}
 }

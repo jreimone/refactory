@@ -15,8 +15,11 @@
  ******************************************************************************/
 package org.emftext.refactoring.ui.handlers;
 
+import java.util.List;
+
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.ui.IEditorPart;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingTextResource;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingEditor;
@@ -35,8 +38,18 @@ public class RegisterRoleMappingModelHandler extends AbstractModelHandler<RoleMa
 	}
 
 	@Override
-	protected void executeWithModel(RoleMappingModel model) {
-		IRoleMappingRegistry.INSTANCE.registerRoleMappingModel(model);
+	protected void executeWithModelInTextEditor(RoleMappingModel model) {
+		List<RoleMapping> registeredRoleMappings = IRoleMappingRegistry.INSTANCE.registerRoleMappingModel(model);
+		if(registeredRoleMappings != null && registeredRoleMappings.size() > 0){
+			String roleMappings = "";
+			for (RoleMapping roleMapping : registeredRoleMappings) {
+				roleMappings += roleMapping.getName() + ", ";
+			}
+			roleMappings = roleMappings.substring(0, roleMappings.length() - 2);
+			UIUtil.showToolTip("Registering RoleMappings"
+					, "The following role mapping(s) couldn't be registered because they already were:\n\n" + roleMappings
+					, getEditor());
+		}
 	}
 
 	@Override

@@ -44,11 +44,13 @@ public class RegisterRoleModelHandler extends AbstractModelHandler <RoleModel, I
 	}
 
 	@Override
-	protected void executeWithModel(RoleModel model) {
+	protected void executeWithModelInTextEditor(RoleModel model) {
 		try {
 			IRoleModelRegistry.INSTANCE.registerRoleModel(model);
 		} catch (RoleModelAlreadyRegisteredException e) {
-			// do nothing
+			UIUtil.showToolTip("Registering RoleModel"
+					, "The role model '" + model.getName() + "' couldn't be registered.\nA model with the same name was already registered."
+					, getEditor());
 		}
 	}
 
@@ -64,14 +66,24 @@ public class RegisterRoleModelHandler extends AbstractModelHandler <RoleModel, I
 					EObject element = ((View) model).getElement();
 					EObject container = EcoreUtil.getRootContainer(element, true);
 					if(container instanceof RoleModel){
-						try {
-							IRoleModelRegistry.INSTANCE.registerRoleModel((RoleModel) container);
-						} catch (RoleModelAlreadyRegisteredException e) {
-							// do nothing
-						}
+						RoleModel roleModel = (RoleModel) container;
+						executeWithRoleModelInGMFEditor(roleModel);
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * @param roleModel
+	 */
+	protected void executeWithRoleModelInGMFEditor(RoleModel roleModel) {
+		try {
+			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
+		} catch (RoleModelAlreadyRegisteredException e) {
+			UIUtil.showToolTip("Registering RoleModel"
+					, "The role model '" + roleModel.getName() + "' couldn't be registered.\nA model with the same name was already registered."
+					, getEditor());
 		}
 	}
 

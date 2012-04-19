@@ -72,7 +72,14 @@ public interface IRoleMappingRegistry {
 	 * @param mappingToUnregister
 	 * @return the unregistered mapping or <code>null</code> if the mapping wasn't registered
 	 */
-	public RoleMapping unregisterMappings(RoleMapping mappingToUnregister);
+	public RoleMapping unregisterRoleMapping(RoleMapping mappingToUnregister);
+	
+	/**
+	 * Unregisters all role mappings contained in the given <code>mappingModel</code>.
+	 * @param mappingModelToUnregister
+	 * @return a list of all {@link RoleMapping role mappings} which couldn't be unregistered because they weren't registered
+	 */
+	public List<RoleMapping> unregisterRoleMappings(RoleMappingModel mappingModelToUnregister);
 	
 	/**
 	 * Returns the {@link RoleMappingModel rolemapping} map.
