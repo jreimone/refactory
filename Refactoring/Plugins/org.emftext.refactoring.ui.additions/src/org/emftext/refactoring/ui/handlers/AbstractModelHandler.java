@@ -26,6 +26,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 public abstract class AbstractModelHandler <Model, ModelResource extends Resource, ModelEditor> extends AbstractHandler{
 
+	private ModelEditor editor;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -35,9 +37,10 @@ public abstract class AbstractModelHandler <Model, ModelResource extends Resourc
 				IEditorPart editor = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getActiveEditor();
 				if(isModelEditorInstance(editor)){
 					ModelEditor modelEditor = (ModelEditor) editor;
+					this.editor = modelEditor;
 					ModelResource resource = getResource(modelEditor);
 					Model model = getModelFromSelection((ITextSelection) selection, resource);
-					executeWithModel(model);
+					executeWithModelInTextEditor(model);
 				}
 			}
 		}
@@ -51,7 +54,7 @@ public abstract class AbstractModelHandler <Model, ModelResource extends Resourc
 	
 	abstract protected ModelResource getResource(ModelEditor editor);
 	
-	abstract protected void executeWithModel(Model model);
+	abstract protected void executeWithModelInTextEditor(Model model);
 	
 	/**
 	 * Override this method for handlers needing more computation than only a text editor.
@@ -59,5 +62,12 @@ public abstract class AbstractModelHandler <Model, ModelResource extends Resourc
 	 */
 	protected void additionalExecution(ExecutionEvent event){
 		// default empty
+	}
+
+	/**
+	 * @return the editor
+	 */
+	public ModelEditor getEditor() {
+		return editor;
 	}
 }

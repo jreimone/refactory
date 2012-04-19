@@ -336,16 +336,30 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		return image;
 	}
 
-	public RoleMapping unregisterMappings(RoleMapping mappingToUnregister){
-		RoleMappingModel model = mappingToUnregister.getOwningMappingModel();
-		if(model != null){
-			String nsUri = model.getTargetMetamodel().getNsURI();
-			if(nsUri != null){
-				Map<String, RoleMapping> registeredMappings = getRoleMappingsForUri(nsUri);
-				return registeredMappings.remove(mappingToUnregister.getName());
+	public RoleMapping unregisterRoleMapping(RoleMapping mappingToUnregister){
+		if(mappingToUnregister != null){
+			RoleMappingModel model = mappingToUnregister.getOwningMappingModel();
+			if(model != null){
+				String nsUri = model.getTargetMetamodel().getNsURI();
+				if(nsUri != null){
+					Map<String, RoleMapping> registeredMappings = getRoleMappingsForUri(nsUri);
+					return registeredMappings.remove(mappingToUnregister.getName());
+				}
 			}
 		}
 		return null;
+	}
+
+	public List<RoleMapping> unregisterRoleMappings(RoleMappingModel mappingModelToUnregister){
+		List<RoleMapping> ununregisteredModels = new ArrayList<RoleMapping>();
+		List<RoleMapping> mappings = mappingModelToUnregister.getMappings();
+		for (RoleMapping roleMapping : mappings) {
+			RoleMapping unregisteredMapping = unregisterRoleMapping(roleMapping);
+			if(unregisteredMapping == null){
+				ununregisteredModels.add(roleMapping);
+			}
+		}
+		return ununregisteredModels;
 	}
 
 	public URL getImagePathForMapping(RoleMapping mapping) {
