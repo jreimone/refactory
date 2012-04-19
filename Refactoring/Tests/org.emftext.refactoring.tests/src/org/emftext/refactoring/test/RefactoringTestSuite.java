@@ -193,7 +193,7 @@ public class RefactoringTestSuite extends TestCase {
 						failIfProxy(objectReference);
 						RoleMappingModel mapping = (RoleMappingModel) objectReference;
 						EcoreUtil.resolveAll(mapping);
-						IRoleMappingRegistry.INSTANCE.registerRoleMapping(mapping);
+						IRoleMappingRegistry.INSTANCE.registerRoleMappingModel(mapping);
 					}
 				}
 			}
