@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2006-2012
+ * Software Technology Group, Dresden University of Technology
+ * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany;
+ *   DevBoost GmbH - Berlin, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.refactoring.ui.handlers;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -22,7 +37,7 @@ public abstract class AbstractModelHandler <Model, ModelResource extends Resourc
 					ModelEditor modelEditor = (ModelEditor) editor;
 					ModelResource resource = getResource(modelEditor);
 					Model model = getModelFromSelection((ITextSelection) selection, resource);
-					registerModel(model);
+					executeWithModel(model);
 				}
 			}
 		}
@@ -36,7 +51,7 @@ public abstract class AbstractModelHandler <Model, ModelResource extends Resourc
 	
 	abstract protected ModelResource getResource(ModelEditor editor);
 	
-	abstract protected void registerModel(Model model);
+	abstract protected void executeWithModel(Model model);
 	
 	/**
 	 * Override this method for handlers needing more computation than only a text editor.
