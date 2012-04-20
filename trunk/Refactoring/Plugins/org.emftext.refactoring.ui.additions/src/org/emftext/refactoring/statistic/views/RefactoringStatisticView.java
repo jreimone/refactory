@@ -20,6 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,14 +51,18 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ITableColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
@@ -111,8 +116,7 @@ public class RefactoringStatisticView extends ViewPart {
 	private Action simpleLatexTableGenAction;
 	private Action doubleClickAction;
 	private ViewContentProvider contentProvider;
-
-	private AdapterFactoryLabelProvider labelProvider;
+	private ViewLabelProvider labelProvider;
 
 	abstract class TreeObject implements IAdaptable {
 
@@ -133,6 +137,9 @@ public class RefactoringStatisticView extends ViewPart {
 
 		@SuppressWarnings("rawtypes")
 		public Object getAdapter(Class key) {
+			if(key.isInstance(getObject())){
+				return key.cast(getObject());
+			}
 			return null;
 		}
 
@@ -264,12 +271,100 @@ public class RefactoringStatisticView extends ViewPart {
 		}
 	}
 
-	class ViewContentProvider implements IStructuredContentProvider,
-			ITreeContentProvider {
+	class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
 
 		private TreeParent invisibleRoot;
+		private TreeViewer viewer;
 
+		private Map<RoleMapping, TreeLeaf> roleMappingLeafMap = new HashMap<RoleMapping, TreeLeaf>();
+		private Map<RoleModel, TreeParent> roleModelParentMap = new HashMap<RoleModel, TreeParent>();
+		private Map<RoleModel, Map<EPackage, TreeMetaModelParent>> roleModelMetamodelMap = new HashMap<RoleModel, Map<EPackage, TreeMetaModelParent>>();
+
+		public ViewContentProvider(){
+			initialize();
+		}
+		
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
+		}
+
+		public void remove(EObject element){
+			TreeObject object2remove = null;
+			if(element instanceof RoleModel){
+				RoleModel roleModel = (RoleModel) element;
+				TreeParent parent = roleModelParentMap.get(roleModel);
+				invisibleRoot.removeChild(parent);
+				roleModelMetamodelMap.remove(roleModel);
+				object2remove = parent;
+			} else if(element instanceof RefactoringSpecification){
+				RefactoringSpecification refSpec =(RefactoringSpecification) element;
+				RoleModel roleModel = refSpec.getUsedRoleModel();
+				TreeParent parent = roleModelParentMap.get(roleModel);
+				viewer.update(parent, null);
+			} else if(element instanceof RoleMapping){
+				RoleMapping roleMapping = (RoleMapping) element;
+				TreeLeaf leaf = roleMappingLeafMap.get(roleMapping);
+				TreeParent parent = leaf.getParent();
+				parent.removeChild(leaf);
+				if(parent instanceof TreeMetaModelParent && parent.getChildren().length == 0){
+					RoleModel roleModel = roleMapping.getMappedRoleModel();
+					Map<EPackage, TreeMetaModelParent> map = roleModelMetamodelMap.get(roleModel);
+					if(map != null){
+						map.remove(((TreeMetaModelParent) parent).getMetamodel());
+					}
+					object2remove = parent;
+				} else {
+					object2remove = leaf;
+				}
+			}
+			if(viewer != null && object2remove != null){
+				viewer.remove(object2remove);
+			}
+		}
+
+		public void add(EObject element){
+			if(element instanceof RoleModel){
+				TreeParent roleParent = new TreeParent(element);
+				invisibleRoot.addChild(roleParent);
+				roleModelParentMap.put((RoleModel) element, roleParent);
+				if(viewer != null){
+					viewer.refresh();
+//					viewer.add(invisibleRoot, roleParent);
+				}
+			} else if(element instanceof RoleMapping){
+				TreeObject mappingChild = createRoleMappingChild((RoleMapping) element);
+				if(viewer != null){
+					viewer.add(mappingChild.getParent(), mappingChild);
+				}
+			} else if(element instanceof RefactoringSpecification){
+				RefactoringSpecification refSpec =(RefactoringSpecification) element;
+				RoleModel roleModel = refSpec.getUsedRoleModel();
+				TreeParent parent = roleModelParentMap.get(roleModel);
+				viewer.update(parent, null);
+			}
+		}
+
+		private TreeObject createRoleMappingChild(RoleMapping element) {
+			RoleMappingModel owningMappingModel = element.getOwningMappingModel();
+			EPackage metamodel = owningMappingModel.getTargetMetamodel();
+			RoleModel roleModel = IRoleModelRegistry.INSTANCE.getRoleModelByName(element.getMappedRoleModel().getName());
+			Map<EPackage, TreeMetaModelParent> metamodelTreeMap = roleModelMetamodelMap.get(roleModel);
+			if(metamodelTreeMap == null){
+				metamodelTreeMap = new HashMap<EPackage, TreeMetaModelParent>();
+				roleModelMetamodelMap.put(roleModel, metamodelTreeMap);
+			}
+			TreeMetaModelParent metamodelObject = metamodelTreeMap.get(metamodel);
+			boolean metamodelObjectCreated = false;
+			if(metamodelObject == null){
+				metamodelObject = new TreeMetaModelParent(metamodel);
+				metamodelTreeMap.put(metamodel, metamodelObject);
+				TreeParent treeParent = roleModelParentMap.get(roleModel);
+				treeParent.addChild(metamodelObject);
+				metamodelObjectCreated = true;
+			}
+			TreeLeaf mappingLeaf = new TreeLeaf(element);
+			metamodelObject.addChild(mappingLeaf);
+			roleMappingLeafMap.put(element, mappingLeaf);
+			return (metamodelObjectCreated ? metamodelObject : mappingLeaf);
 		}
 
 		public void dispose() {
@@ -278,7 +373,7 @@ public class RefactoringStatisticView extends ViewPart {
 		public Object[] getElements(Object parent) {
 			if (parent.equals(getViewSite())) {
 				if (invisibleRoot == null) {
-					invisibleRoot = initialize();
+					initialize();
 				}
 				return getChildren(invisibleRoot);
 			}
@@ -305,8 +400,8 @@ public class RefactoringStatisticView extends ViewPart {
 			return false;
 		}
 
-		private TreeParent initialize() {
-			TreeParent invisibleRoot = new TreeParent(null);
+		private void initialize() {
+			invisibleRoot = new TreeParent(null);
 			Collection<RoleModel> roleModels = IRoleModelRegistry.INSTANCE.getAllRegisteredRoleModels();
 			Map<String, Map<String, RoleMapping>> nsUriMappingsMap = IRoleMappingRegistry.INSTANCE.getRoleMappingsMap();
 			Map<RoleModel, Map<EPackage, List<RoleMapping>>> roleModelMetamodelMappingsMap = new LinkedHashMap<RoleModel, Map<EPackage, List<RoleMapping>>>();
@@ -335,53 +430,74 @@ public class RefactoringStatisticView extends ViewPart {
 				if (refSpec != null) {
 					TreeParent modelParent = new TreeParent(roleModel);
 					invisibleRoot.addChild(modelParent);
+					roleModelParentMap.put(roleModel, modelParent);
 					Map<EPackage, List<RoleMapping>> metamodelMappingsMap = roleModelMetamodelMappingsMap.get(roleModel);
 					if (metamodelMappingsMap == null) {
 						continue;
 					}
 					for (EPackage metamodel : metamodelMappingsMap.keySet()) {
-						TreeMetaModelParent metamodelParent = new TreeMetaModelParent(
-								metamodel);
+						TreeMetaModelParent metamodelParent = new TreeMetaModelParent(metamodel);
 						modelParent.addChild(metamodelParent);
+						Map<EPackage, TreeMetaModelParent> metamodelTreeMap = roleModelMetamodelMap.get(roleModel);
+						if(metamodelTreeMap == null){
+							metamodelTreeMap = new HashMap<EPackage, TreeMetaModelParent>();
+							roleModelMetamodelMap.put(roleModel, metamodelTreeMap);
+						}
+						metamodelTreeMap.put(metamodel, metamodelParent);
 						List<RoleMapping> metamodelMappings = metamodelMappingsMap.get(metamodel);
 						List<RoleMapping> uniqueMappings = new ArrayList<RoleMapping>();
 						for (RoleMapping mapping : metamodelMappings) {
 							if (!uniqueMappings.contains(mapping)) {
-								TreeObject mappingChild = new TreeLeaf(mapping);
+								TreeLeaf mappingChild = new TreeLeaf(mapping);
 								metamodelParent.addChild(mappingChild);
+								roleMappingLeafMap.put(mapping, mappingChild);
 								uniqueMappings.add(mapping);
 							}
 						}
 					}
 				}
 			}
-			return invisibleRoot;
 		}
 
 		public TreeParent getInvisibleRoot() {
 			return invisibleRoot;
 		}
+
+		public void setViewer(TreeViewer viewer) {
+			this.viewer = viewer;
+		}
 	}
 
-	class ViewLabelProvider implements ITableLabelProvider {
+	class ViewLabelProvider implements ITableLabelProvider, ITableColorProvider {
 
+		private AdapterFactoryLabelProvider labelProvider;
+		
+		public ViewLabelProvider(){
+			ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
+					org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+			labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		}
+		
 		public Image getColumnImage(Object element, int columnIndex) {
 			if (element instanceof TreeObject) {
 				TreeObject object = (TreeObject) element;
 				EObject eObject = object.getObject();
 				switch (columnIndex) {
-					case 0: // Refactoring mapped to Metamodel
-						if (object instanceof TreeParent) {
-							return labelProvider.getImage(eObject);
-						} else {
-							return null;
-						}
-					case 1: // Specific Refactoring
-						if (object instanceof TreeLeaf) {
-							return labelProvider.getImage(eObject);
-						}
-					default:
+				case 0: // Refactoring mapped to Metamodel
+					if (object instanceof TreeParent) {
+						return labelProvider.getImage(eObject);
+					} else {
 						return null;
+					}
+				case 1: // Specific Refactoring
+					if (object instanceof TreeLeaf) {
+						return labelProvider.getImage(eObject);
+					}
+				default:
+					return null;
 				}
 			}
 			return null;
@@ -392,66 +508,66 @@ public class RefactoringStatisticView extends ViewPart {
 				TreeObject object = (TreeObject) element;
 				// EObject eObject = object.getObject();
 				switch (columnIndex) {
-					case 0: // Refactoring mapped to Metamodel
-						if (object instanceof TreeMetaModelParent) {
-							return object.toString();
-						} else if (object instanceof TreeParent) {
-							return StringUtil.convertCamelCaseToWords(object.toString());
+				case 0: // Refactoring mapped to Metamodel
+					if (object instanceof TreeMetaModelParent) {
+						return object.toString();
+					} else if (object instanceof TreeParent) {
+						return StringUtil.convertCamelCaseToWords(object.toString());
+					}
+					return "";
+				case 1: // Specific Refactoring
+					if (object instanceof TreeLeaf) {
+						return StringUtil.convertCamelCaseToWords(object.toString());
+					}
+					return "";
+				case 2: // PostProcessor (PP)
+					if (object instanceof TreeLeaf) {
+						boolean hasPostProcessor = ((TreeLeaf) object).hasPostProcessorRegistered();
+						if (hasPostProcessor) {
+							return "X";
 						}
-						return "";
-					case 1: // Specific Refactoring
-						if (object instanceof TreeLeaf) {
-							return StringUtil.convertCamelCaseToWords(object.toString());
-						}
-						return "";
-					case 2: // PostProcessor (PP)
-						if (object instanceof TreeLeaf) {
-							boolean hasPostProcessor = ((TreeLeaf) object).hasPostProcessorRegistered();
-							if (hasPostProcessor) {
-								return "X";
-							}
-						}
-						return "";
-					case 3: // count of Metaclasses
-						if (object instanceof TreeMetaModelParent) {
-							int count = ((TreeMetaModelParent) object).getCountMetaclasses();
-							return String.valueOf(count);
-						}
-						return "";
-						// case 4: // count of Relations
-						// if(object instanceof TreeLeaf){
-						// int count = ((TreeLeaf)
-						// object).getCountStructuralFeatures();
-						// return String.valueOf(count);
-						// }
-						// return "";
-					case 4: // count of StructuralFeatures
-						if (object instanceof TreeMetaModelParent) {
-							int count = ((TreeMetaModelParent) object).getCountStructuralFeatures();
-							return String.valueOf(count);
-						}
-						return "";
-						// case 5: // average Relations per Metaclass
-						// if(object instanceof TreeLeaf){
-						// double average = ((TreeLeaf)
-						// object).getCountStructuralFeaturesPerMetaclass();
-						// String averageString = String.valueOf(average);
-						// int dotIndex = averageString.indexOf(".");
-						// if(dotIndex + 3 <= averageString.length()){
-						// averageString = averageString.substring(0, dotIndex +
-						// 3);
-						// }
-						// return averageString;
-						// }
-						// return "";
-					case 5: // summation
-						if (object instanceof TreeMetaModelParent) {
-							int sum = ((TreeMetaModelParent) object).getCountStructuralFeatures() + ((TreeMetaModelParent) object).getCountMetaclasses();
-							return String.valueOf(sum);
-						}
-						return "";
-					default:
-						return "";
+					}
+					return "";
+				case 3: // count of Metaclasses
+					if (object instanceof TreeMetaModelParent) {
+						int count = ((TreeMetaModelParent) object).getCountMetaclasses();
+						return String.valueOf(count);
+					}
+					return "";
+					// case 4: // count of Relations
+					// if(object instanceof TreeLeaf){
+					// int count = ((TreeLeaf)
+					// object).getCountStructuralFeatures();
+					// return String.valueOf(count);
+					// }
+					// return "";
+				case 4: // count of StructuralFeatures
+					if (object instanceof TreeMetaModelParent) {
+						int count = ((TreeMetaModelParent) object).getCountStructuralFeatures();
+						return String.valueOf(count);
+					}
+					return "";
+					// case 5: // average Relations per Metaclass
+					// if(object instanceof TreeLeaf){
+					// double average = ((TreeLeaf)
+					// object).getCountStructuralFeaturesPerMetaclass();
+					// String averageString = String.valueOf(average);
+					// int dotIndex = averageString.indexOf(".");
+					// if(dotIndex + 3 <= averageString.length()){
+					// averageString = averageString.substring(0, dotIndex +
+					// 3);
+					// }
+					// return averageString;
+					// }
+					// return "";
+				case 5: // summation
+					if (object instanceof TreeMetaModelParent) {
+						int sum = ((TreeMetaModelParent) object).getCountStructuralFeatures() + ((TreeMetaModelParent) object).getCountMetaclasses();
+						return String.valueOf(sum);
+					}
+					return "";
+				default:
+					return "";
 				}
 			}
 			return null;
@@ -477,22 +593,40 @@ public class RefactoringStatisticView extends ViewPart {
 
 		}
 
+		@Override
+		public Color getForeground(Object element, int columnIndex) {
+			return null;
+		}
+
+		@Override
+		public Color getBackground(Object element, int columnIndex) {
+			if(element instanceof TreeParent){
+				EObject object = ((TreeParent) element).getObject();
+				if(object instanceof RoleModel){
+					RoleModel roleModel = (RoleModel) object;
+					RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(roleModel);
+					if(refSpec == null){
+						Display display = Display.getDefault();
+						RGB rgb = new RGB(0.0f, 0.33f, 1.0f);
+						Color color = new Color(display, rgb);
+//						return display.getSystemColor(SWT.COLOR_RED);
+						return color;
+					}
+				}
+			}
+			return null;
+		}
 	}
 
 	class NameSorter extends ViewerSorter {
 	}
 
-	/**
-	 * The constructor.
-	 */
-	public RefactoringStatisticView() {
-		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
-				org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-		labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
-	}
+//	/**
+//	 * The constructor.
+//	 */
+//	public RefactoringStatisticView() {
+//		
+//	}
 
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
@@ -526,10 +660,16 @@ public class RefactoringStatisticView extends ViewPart {
 
 		drillDownAdapter = new DrillDownAdapter(viewer);
 		contentProvider = new ViewContentProvider();
+		contentProvider.setViewer(viewer);
 		viewer.setContentProvider(contentProvider);
-		viewer.setLabelProvider(new ViewLabelProvider());
+		labelProvider = new ViewLabelProvider();
+		viewer.setLabelProvider(labelProvider);
 		viewer.setSorter(new NameSorter());
 		viewer.setInput(getViewSite());
+		RefactoringViewRegistryListener listener = new RefactoringViewRegistryListener(contentProvider);
+		IRoleModelRegistry.INSTANCE.addRegistryListener(listener);
+		IRefactoringSpecificationRegistry.INSTANCE.addRegistryListener(listener);
+		IRoleMappingRegistry.INSTANCE.addRegistryListener(listener);
 		makeActions();
 		hookContextMenu();
 		hookDoubleClickAction();
@@ -661,13 +801,13 @@ public class RefactoringStatisticView extends ViewPart {
 												}
 											}
 											writer.append(" |} \n");
-//											writer.append("|- \n");
+											//											writer.append("|- \n");
 										} else {
 											TreeObject mappingLeaf = mappingChildren[0];
 											RoleMapping mapping = (RoleMapping) mappingLeaf.getObject();
 											writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
 											writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName() + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
-//											writer.append("|- \n");
+											//											writer.append("|- \n");
 										}
 										TreeObject[] children = ((TreeParent) roleModelParent).getChildren();
 										if (children[children.length - 1].equals(metamodelChild)) {
@@ -995,4 +1135,5 @@ public class RefactoringStatisticView extends ViewPart {
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
+	
 }

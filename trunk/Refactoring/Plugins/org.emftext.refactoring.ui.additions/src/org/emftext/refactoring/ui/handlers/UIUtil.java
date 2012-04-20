@@ -35,13 +35,16 @@ public abstract class UIUtil {
 	 * @param editor
 	 */
 	public static void showToolTip(String title, String message, ITextEditor editor) {
-		Shell shell = Display.getDefault().getActiveShell();
+		Display display = Display.getDefault();
+		Shell shell = display.getActiveShell();
 		ToolTip tip = new ToolTip(shell, SWT.ICON_WARNING);
 		tip.setAutoHide(true);
 		tip.setText(title);
 		tip.setMessage(message);
 		if(editor != null){
 			//TODO locate tooltip at cursor position
+//			Point cursorLocation = display.getCursorLocation();
+//			tip.setLocation(cursorLocation);
 			ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 			selection.getOffset();
 		}

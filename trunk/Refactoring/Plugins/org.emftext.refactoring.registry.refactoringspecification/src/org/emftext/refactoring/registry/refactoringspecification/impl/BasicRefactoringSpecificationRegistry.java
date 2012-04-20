@@ -17,7 +17,9 @@ package org.emftext.refactoring.registry.refactoringspecification.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
@@ -26,17 +28,19 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationExtensionPoint;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistryListener;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
 
-public class BasicRefactoringSpecificationRegistry implements
-IRefactoringSpecificationRegistry {
+public class BasicRefactoringSpecificationRegistry implements IRefactoringSpecificationRegistry {
 
 	private Map<RoleModel, RefactoringSpecification> refSpecMap;
+	private Set<IRefactoringSpecificationRegistryListener> listeners;
 
 	public BasicRefactoringSpecificationRegistry() {
 		refSpecMap = new HashMap<RoleModel, RefactoringSpecification>();
+		listeners = new HashSet<IRefactoringSpecificationRegistryListener>();
 		collectRegisteredRefSpecs();
 	}
 
@@ -69,6 +73,9 @@ IRefactoringSpecificationRegistry {
 				throw new RefSpecAlreadyRegisteredException(refSpec);
 			}
 			getRefSpecMap().put(roleModel, refSpec);
+			for (IRefactoringSpecificationRegistryListener listener : listeners) {
+				listener.refSpecAdded(refSpec);
+			}
 			return roleModel;
 		}
 		return null;
@@ -91,6 +98,25 @@ IRefactoringSpecificationRegistry {
 
 	public RefactoringSpecification unregisterRefSpec(RefactoringSpecification refSpec) {
 		RoleModel rolemodel = refSpec.getUsedRoleModel();
-		return getRefSpecMap().remove(rolemodel);
+		RefactoringSpecification remove = getRefSpecMap().remove(rolemodel);
+		for (IRefactoringSpecificationRegistryListener listener : listeners) {
+			listener.refSpecRemoved(remove);
+		}
+		return remove;
+	}
+
+	@Override
+	public void addRegistryListener(IRefactoringSpecificationRegistryListener listener) {
+		if(listener != null){
+			listeners.add(listener);
+		}
+	}
+
+	@Override
+	public boolean removeRegistryListener(IRefactoringSpecificationRegistryListener listener) {
+		if(listener != null){
+			return listeners.remove(listener);
+		}
+		return false;
 	}
 }

@@ -18,6 +18,7 @@ package org.emftext.refactoring.registry.rolemapping;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,6 +26,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.registry.rolemapping.impl.BasicRoleMappingRegistry;
 
@@ -141,4 +143,24 @@ public interface IRoleMappingRegistry {
 	 * @return a list of all {@link RefactoringSpecification}s having a percentual equality greater or equal <code>minEquality</code> 
 	 */
 	public List<RefactoringSpecification> getPossibleRefactorings(List<? extends EObject> selection, double minEquality);
+	
+	/**
+	 * Adds a listener to this registry which is notified when the registry changes.
+	 * @param listener
+	 */
+	public void addRegistryListener(IRoleMappingRegistryListener listener);
+	
+	/**
+	 * The given listener is removed and will not be notified anymore.
+	 * @param listener
+	 * @return see {@link Set#remove(Object)}
+	 */
+	public boolean removeRegistryListener(IRoleMappingRegistryListener listener);
+	
+	/**
+	 * Returns all roleMappings for the given role model.
+	 * @param roleModel
+	 * @return
+	 */
+	public List<RoleMapping> getRoleMappingsForRoleModel(RoleModel roleModel);
 }
