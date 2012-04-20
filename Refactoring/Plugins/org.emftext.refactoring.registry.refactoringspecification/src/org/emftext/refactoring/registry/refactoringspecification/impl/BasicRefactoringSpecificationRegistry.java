@@ -58,7 +58,7 @@ IRefactoringSpecificationRegistry {
 		return refSpecMap;
 	}
 
-	public void registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException {
+	public RoleModel registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException {
 		RoleModel roleModel = refSpec.getUsedRoleModel();
 		EcoreUtil.resolveAll(roleModel);
 		String name = roleModel.getName();
@@ -69,7 +69,9 @@ IRefactoringSpecificationRegistry {
 				throw new RefSpecAlreadyRegisteredException(refSpec);
 			}
 			getRefSpecMap().put(roleModel, refSpec);
+			return roleModel;
 		}
+		return null;
 	}
 
 	private void collectRegisteredRefSpecs() {

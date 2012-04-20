@@ -42,13 +42,8 @@ public class RegisterRoleMappingHandler extends AbstractModelHandler<RoleMapping
 	protected void executeWithModelInTextEditor(RoleMapping model) {
 		List<RoleMapping> registeredRoleMappings = IRoleMappingRegistry.INSTANCE.registerRoleMapping(model);
 		if(registeredRoleMappings != null && registeredRoleMappings.size() > 0){
-			String roleMappings = "";
-			for (RoleMapping roleMapping : registeredRoleMappings) {
-				roleMappings += roleMapping.getName() + ", ";
-			}
-			roleMappings = roleMappings.substring(0, roleMappings.length() - 2);
 			UIUtil.showToolTip("Registering RoleMappings"
-					, "The following role mapping(s) couldn't be registered because they already were:\n\n" + roleMappings
+					, "The role mapping '" + model.getName() + "' couldn't be registered because it already was."
 					, getEditor());
 		}
 	}

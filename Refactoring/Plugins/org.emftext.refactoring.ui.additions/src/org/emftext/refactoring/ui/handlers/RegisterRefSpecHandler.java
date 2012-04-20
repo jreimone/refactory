@@ -18,6 +18,7 @@ package org.emftext.refactoring.ui.handlers;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.ui.IEditorPart;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.specification.resource.IRefspecTextResource;
 import org.emftext.language.refactoring.specification.resource.ui.RefspecEditor;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
@@ -38,7 +39,12 @@ public class RegisterRefSpecHandler extends AbstractModelHandler<RefactoringSpec
 	@Override
 	protected void executeWithModelInTextEditor(RefactoringSpecification model) {
 		try {
-			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(model);
+			RoleModel roleModel = IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(model);
+			if(roleModel == null){
+				UIUtil.showToolTip("Registering RefactoringSpecification"
+						, "The RefactoringSpecification couldn't be registered because the role model wasn't found in the registry."
+						, getEditor());
+			}
 		} catch (RefSpecAlreadyRegisteredException e) {
 			UIUtil.showToolTip("Registering RefactoringSpecification"
 					, "RefactoringSpecification for '" + model.getUsedRoleModel().getName() + "' couldn't be registered.\nA RefSpec was registered already."

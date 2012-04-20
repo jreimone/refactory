@@ -42,8 +42,9 @@ public interface IRefactoringSpecificationRegistry {
 	/**
 	 * Invoke this method if you want to register a new {@link RefactoringSpecification refspec} at runtime.
 	 * @param refSpec
+	 * @return the role model for which the refSpec is registered or <code>null</code> if no role model exists for this refSpec
 	 */
-	public void registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException;
+	public RoleModel registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException;
 	
 	/**
 	 * Use this method to unregister an already registered refspec
