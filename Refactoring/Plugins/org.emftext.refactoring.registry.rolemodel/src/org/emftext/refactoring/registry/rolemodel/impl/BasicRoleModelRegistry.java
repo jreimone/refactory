@@ -17,7 +17,9 @@ package org.emftext.refactoring.registry.rolemodel.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
@@ -25,15 +27,18 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.rolemodel.Activator;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelExtensionPoint;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
+import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistryListener;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
 import org.emftext.refactoring.util.RegistryUtil;
 
 public class BasicRoleModelRegistry implements IRoleModelRegistry {
 
 	private Map<String, RoleModel> roleModelNameMap;
+	private Set<IRoleModelRegistryListener> listeners;
 
 	public BasicRoleModelRegistry(){
 		roleModelNameMap = new HashMap<String, RoleModel>();
+		listeners = new HashSet<IRoleModelRegistryListener>();
 		collectRegisteredRoleModels();
 	}
 
@@ -57,6 +62,9 @@ public class BasicRoleModelRegistry implements IRoleModelRegistry {
 			throw new RoleModelAlreadyRegisteredException(roleModel);
 		}
 		getRoleModelNameMap().put(name, roleModel);
+		for (IRoleModelRegistryListener listener : listeners) {
+			listener.roleModelAdded(roleModel);
+		}
 	}
 
 	private void collectRegisteredRoleModels(){
@@ -73,6 +81,25 @@ public class BasicRoleModelRegistry implements IRoleModelRegistry {
 	}
 
 	public RoleModel unregisterRoleModel(RoleModel model) {
-		return getRoleModelNameMap().remove(model.getName());
+		RoleModel remove = getRoleModelNameMap().remove(model.getName());
+		for (IRoleModelRegistryListener listener : listeners) {
+			listener.roleModelRemoved(remove);
+		}
+		return remove;
+	}
+
+	@Override
+	public void addRegistryListener(IRoleModelRegistryListener listener) {
+		if(listener != null){
+			listeners.add(listener);
+		}
+	}
+
+	@Override
+	public boolean removeRegistryListener(IRoleModelRegistryListener listener) {
+		if(listener != null){
+			return listeners.remove(listener);
+		}
+		return false;
 	}
 }

@@ -15,7 +15,11 @@
  ******************************************************************************/
 package org.emftext.refactoring.ui.handlers;
 
+import java.util.List;
+
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 
 public class UnregisterRoleModelHandler extends RegisterRoleModelHandler {
@@ -23,7 +27,12 @@ public class UnregisterRoleModelHandler extends RegisterRoleModelHandler {
 	@Override
 	protected void executeWithModelInTextEditor(RoleModel model) {
 		RoleModel unregisterRoleModel = IRoleModelRegistry.INSTANCE.unregisterRoleModel(model);
-		//TODO unregister all corresponding refspecs, rolemappings
+		List<RoleMapping> mappingsForRoleModel = IRoleMappingRegistry.INSTANCE.getRoleMappingsForRoleModel(unregisterRoleModel);
+		if(mappingsForRoleModel != null){
+			for (RoleMapping roleMapping : mappingsForRoleModel) {
+				IRoleMappingRegistry.INSTANCE.unregisterRoleMapping(roleMapping);
+			}
+		}
 		if(unregisterRoleModel == null){
 			UIUtil.showToolTip("Unregistering RoleModel"
 					, "RoleModel '" + model.getName() + "' couldn't be unregistered.\nIt never was registered."
@@ -34,7 +43,12 @@ public class UnregisterRoleModelHandler extends RegisterRoleModelHandler {
 	@Override
 	protected void executeWithRoleModelInGMFEditor(RoleModel roleModel) {
 		RoleModel unregisteredRoleModel = IRoleModelRegistry.INSTANCE.unregisterRoleModel(roleModel);
-		//TODO unregister all corresponding refspecs, rolemappings
+		List<RoleMapping> mappingsForRoleModel = IRoleMappingRegistry.INSTANCE.getRoleMappingsForRoleModel(unregisteredRoleModel);
+		if(mappingsForRoleModel != null){
+			for (RoleMapping roleMapping : mappingsForRoleModel) {
+				IRoleMappingRegistry.INSTANCE.unregisterRoleMapping(roleMapping);
+			}
+		}
 		if(unregisteredRoleModel == null){
 			UIUtil.showToolTip("Untegistering RoleModel"
 					, "RoleModel '" + roleModel.getName() + "' couldn't be unregistered.\nIt never was registered."

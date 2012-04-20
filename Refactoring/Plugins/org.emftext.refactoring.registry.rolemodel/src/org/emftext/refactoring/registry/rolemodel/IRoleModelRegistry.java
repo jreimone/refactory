@@ -16,6 +16,7 @@
 package org.emftext.refactoring.registry.rolemodel;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
@@ -69,4 +70,17 @@ public interface IRoleModelRegistry {
 	 * @return the unregistered roleModel or <code>null</code> if there was no roleModel registered
 	 */
 	public RoleModel unregisterRoleModel(RoleModel roleModel);
+	
+	/**
+	 * Adds a listener to this registry which is notified when the registry changes.
+	 * @param listener
+	 */
+	public void addRegistryListener(IRoleModelRegistryListener listener);
+	
+	/**
+	 * The given listener is removed and will not be notified anymore.
+	 * @param listener
+	 * @return see {@link Set#remove(Object)}
+	 */
+	public boolean removeRegistryListener(IRoleModelRegistryListener listener);
 }

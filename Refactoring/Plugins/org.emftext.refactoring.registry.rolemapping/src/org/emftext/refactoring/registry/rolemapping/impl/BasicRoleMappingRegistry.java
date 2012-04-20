@@ -21,10 +21,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -46,6 +49,7 @@ import org.eclipse.swt.graphics.ImageData;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.Activator;
 import org.emftext.refactoring.registry.rolemapping.IPostProcessorExtensionPoint;
@@ -53,6 +57,7 @@ import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistryListener;
 import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
 import org.osgi.framework.Bundle;
@@ -60,17 +65,21 @@ import org.osgi.framework.Bundle;
 public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 
 	private Map<String, Map<String, RoleMapping>> roleMappingsMap;
+	private Map<RoleModel, List<RoleMapping>> roleModelMappingsMap;
 	private Map<String, Map<RoleMapping, IRefactoringPostProcessor>> postProcessorMap;
 	private Map<RoleMapping, ImageDescriptor> iconMap;
 	private Map<RoleMapping, ImageDescriptor> defaultIconMap;
 	private Map<RoleMapping, URL> iconBundlePathMap;
+	private Set<IRoleMappingRegistryListener> listeners;
 
 	public BasicRoleMappingRegistry(){
 		roleMappingsMap = new LinkedHashMap<String, Map<String, RoleMapping>>();
+		roleModelMappingsMap = new HashMap<RoleModel, List<RoleMapping>>();
 		postProcessorMap = new LinkedHashMap<String, Map<RoleMapping,IRefactoringPostProcessor>>();
 		iconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
 		defaultIconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
 		iconBundlePathMap = new LinkedHashMap<RoleMapping, URL>();
+		listeners = new HashSet<IRoleMappingRegistryListener>();
 		collectRegisteredRoleMappings();
 		collectRegisteredPostProcessors();
 	}
@@ -218,11 +227,22 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		}
 		List<RoleMapping> alreadyRegistered = new LinkedList<RoleMapping>();
 		for (String mappingName : mappingsToRegister.keySet()) {
+			RoleMapping roleMapping = mappingsToRegister.get(mappingName);
 			if(registered.get(mappingName) != null){
-				alreadyRegistered.add(mappingsToRegister.get(mappingName));
+				alreadyRegistered.add(roleMapping);
 				//				RegistryUtil.log("A mapping '" + mappingName + "' already exists in the registry for metamodel " + nsUri, IStatus.WARNING);
 			} else {
-				registered.put(mappingName, mappingsToRegister.get(mappingName));
+				RoleModel mappedRoleModel = roleMapping.getMappedRoleModel();
+				List<RoleMapping> roleMappings = roleModelMappingsMap.get(mappedRoleModel);
+				if(roleMappings == null){
+					roleMappings = new ArrayList<RoleMapping>();
+					roleModelMappingsMap.put(mappedRoleModel, roleMappings);
+				}
+				roleMappings.add(roleMapping);
+				registered.put(mappingName, roleMapping);
+				for (IRoleMappingRegistryListener listener : listeners) {
+					listener.roleMappingAdded(roleMapping);
+				}
 			}
 		}
 		registerSubPackages(rootPackage, registered);
@@ -343,7 +363,13 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				String nsUri = model.getTargetMetamodel().getNsURI();
 				if(nsUri != null){
 					Map<String, RoleMapping> registeredMappings = getRoleMappingsForUri(nsUri);
-					return registeredMappings.remove(mappingToUnregister.getName());
+					RoleMapping remove = registeredMappings.remove(mappingToUnregister.getName());
+					if(remove != null){
+						for (IRoleMappingRegistryListener listener : listeners) {
+							listener.roleMappingRemoved(remove);
+						}
+					}
+					return remove;
 				}
 			}
 		}
@@ -387,5 +413,25 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			}
 		}
 		return refSpecs;
+	}
+
+	@Override
+	public void addRegistryListener(IRoleMappingRegistryListener listener) {
+		if(listener != null){
+			listeners.add(listener);
+		}
+	}
+
+	@Override
+	public boolean removeRegistryListener(IRoleMappingRegistryListener listener) {
+		if(listener != null){
+			return listeners.remove(listener);
+		}
+		return false;
+	}
+
+	@Override
+	public List<RoleMapping> getRoleMappingsForRoleModel(RoleModel roleModel) {
+		return roleModelMappingsMap.get(roleModel);
 	}
 }

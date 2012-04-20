@@ -16,6 +16,7 @@
 package org.emftext.refactoring.registry.refactoringspecification;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -52,5 +53,17 @@ public interface IRefactoringSpecificationRegistry {
 	 * @return the unregistered refSpec or <code>null</code> if no refSpec was registered
 	 */
 	public RefactoringSpecification unregisterRefSpec(RefactoringSpecification refSpec);
+
+	/**
+	 * Adds a listener to this registry which is notified when the registry changes.
+	 * @param listener
+	 */
+	public void addRegistryListener(IRefactoringSpecificationRegistryListener listener);
 	
+	/**
+	 * The given listener is removed and will not be notified anymore.
+	 * @param listener
+	 * @return see {@link Set#remove(Object)}
+	 */
+	public boolean removeRegistryListener(IRefactoringSpecificationRegistryListener listener);
 }
