@@ -23,7 +23,7 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	overrideHoverTextProvider = "false";
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
-	overrideBuilder = "false";
+	overrideBuilder = "true";
 	overrideUIPluginXML = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
