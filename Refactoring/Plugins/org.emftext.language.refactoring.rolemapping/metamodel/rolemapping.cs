@@ -15,7 +15,7 @@ OPTIONS {
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.refactoring.registry.rolemapping";
 	additionalUIDependencies = "org.emftext.language.refactoring.roles.resource.rolestext.ui";
 	overrideHoverTextProvider = "false";
-	overrideBuilder = "false";
+	overrideBuilder = "true";
 	overrideUIPluginXML = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
