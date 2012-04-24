@@ -59,20 +59,11 @@
 		</runtime>
 		<builder id="org.qualitune.guery.resource.guery.builder">
 		</builder>
-		<builder id="org.qualitune.guery.resource.guery.taskItemBuilder">
-		</builder>
 	</extension>
 	
 	<extension point="org.eclipse.core.resources.builders" id="org.qualitune.guery.resource.guery.builder" name="guery Builder">
 		<builder hasNature="true">
 			<run class="org.qualitune.guery.resource.guery.mopp.GueryBuilderAdapter">
-			</run>
-		</builder>
-	</extension>
-	
-	<extension point="org.eclipse.core.resources.builders" id="org.qualitune.guery.resource.guery.taskItemBuilder" name="guery Task Item Builder">
-		<builder hasNature="true">
-			<run class="org.qualitune.guery.resource.guery.mopp.GueryTaskItemBuilder">
 			</run>
 		</builder>
 	</extension>
