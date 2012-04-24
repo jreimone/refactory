@@ -6,7 +6,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="RefactoringSpecification">
     <eOperations name="getDeclaredVariables" upperBound="-1" eType="#//Variable">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.refactoring.refactoring_specification.Variable >variables = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.refactoring.refactoring_specification.Variable >();&#xD;&#xA;org.eclipse.emf.common.util.EList&lt; org.emftext.language.refactoring.refactoring_specification.Instruction >instructions = getInstructions();&#xD;&#xA;for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction:instructions) {&#xD;&#xA;&#x9;if (instruction instanceof org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) {&#xD;&#xA;&#x9;&#x9;org.emftext.language.refactoring.refactoring_specification.Variable var = (( org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) instruction).getVariable();&#xD;&#xA;&#x9;&#x9;if (var != null) {&#xD;&#xA;&#x9;&#x9;&#x9;variables.add(var);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;return variables;&#xD;&#xA;"/>
+        <details key="body" value="org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.refactoring_specification.Variable >variables = new org.eclipse.emf.common.util.BasicEList &lt; org.emftext.language.refactoring.refactoring_specification.Variable >();&#xD;&#xA;org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.refactoring_specification.Instruction >instructions = getInstructions();&#xD;&#xA;for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction:instructions) {&#xD;&#xA;&#x9;if (instruction instanceof org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) {&#xD;&#xA;&#x9;&#x9;org.emftext.language.refactoring.refactoring_specification.Variable var = (( org.emftext.language.refactoring.refactoring_specification.VariableDeclarationCommand ) instruction).getVariable();&#xD;&#xA;&#x9;&#x9;if (var != null) {&#xD;&#xA;&#x9;&#x9;&#x9;variables.add(var);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;return variables;&#xD;&#xA;"/>
         <details key="documentation" value=""/>
       </eAnnotations>
     </eOperations>
@@ -32,6 +32,12 @@
       <eParameters name="referencedRole" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
       <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eOperations>
+    <eOperations name="getDeclaredIndexVariables" upperBound="-1" eType="#//IndexVariable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="java.util.List &lt; org.emftext.language.refactoring.refactoring_specification.IndexVariable >variables = new java.util.ArrayList &lt; org.emftext.language.refactoring.refactoring_specification.IndexVariable >();&#xD;&#xA;org.eclipse.emf.common.util.EList &lt; org.emftext.language.refactoring.refactoring_specification.Instruction >instructions = getInstructions();&#xD;&#xA;for ( org.emftext.language.refactoring.refactoring_specification.Instruction instruction:instructions) {&#xD;&#xA;&#x9;if (instruction instanceof org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand ) {&#xD;&#xA;&#x9;&#x9;org.emftext.language.refactoring.refactoring_specification.IndexVariable var = (( org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand ) instruction).getVariable();&#xD;&#xA;&#x9;&#x9;if (var != null) {&#xD;&#xA;&#x9;&#x9;&#x9;variables.add(var);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;return new org.eclipse.emf.common.util.BasicEList &lt; org.emftext.language.refactoring.refactoring_specification.IndexVariable >(variables);&#xD;&#xA;"/>
+        <details key="documentation" value=""/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoleModel" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//RoleModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
@@ -56,8 +62,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="moveModifier" eType="#//Modifier"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//AbstractVariable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containerCommand" lowerBound="1"
         eType="#//VariableDeclarationCommand" eOpposite="#//VariableDeclarationCommand/variable"/>
   </eClassifiers>
@@ -111,8 +116,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//IndexVariable" containment="true" eOpposite="#//IndexVariable/indexCommand"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IndexVariable">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IndexVariable" eSuperTypes="#//AbstractVariable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="indexCommand" lowerBound="1"
         eType="#//IndexAssignmentCommand" eOpposite="#//IndexAssignmentCommand/variable"/>
   </eClassifiers>
@@ -170,4 +174,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="UNUSED" eSuperTypes="#//RemoveModifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="EMPTY" eSuperTypes="#//RemoveModifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="AFTER" eSuperTypes="#//ObjectReferenceAssignment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractVariable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

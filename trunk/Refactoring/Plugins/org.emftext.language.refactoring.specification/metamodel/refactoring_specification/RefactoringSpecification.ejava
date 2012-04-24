@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.common.util.EList; 
 import org.eclipse.emf.common.util.BasicEList; 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.LinkedHashSet;
 
@@ -18,8 +19,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import roles.Role;
 eclass RefactoringSpecification { 
 	getDeclaredVariables ( ) { 
-			org.eclipse.emf.common.util.EList <Variable> variables = new org.eclipse.emf.common.util.BasicEList <Variable> ( ) ; 
-			org.eclipse.emf.common.util.EList <Instruction> instructions = getInstructions ( ) ; 
+			EList <Variable> variables = new BasicEList <Variable> ( ) ; 
+			EList <Instruction> instructions = getInstructions ( ) ; 
 			for ( Instruction instruction : instructions ) { 
 				if ( instruction instanceof VariableDeclarationCommand ) { 
 					Variable var = ( ( VariableDeclarationCommand ) instruction ) .getVariable ( ) ; 
@@ -29,7 +30,23 @@ eclass RefactoringSpecification {
 				} 
 			} 
 			return variables ; 
-		} 
+	}
+	
+	getDeclaredIndexVariables ( ) { 
+			List <IndexVariable> variables = new ArrayList<IndexVariable>(); 
+			EList <Instruction> instructions = getInstructions ( ) ; 
+			for (Instruction instruction : instructions){ 
+				if (instruction instanceof IndexAssignmentCommand) { 
+					IndexVariable var = ((IndexAssignmentCommand) instruction).getVariable(); 
+					if (var != null) { 
+						variables.add(var); 
+					} 
+				} 
+			} 
+			return new BasicEList<IndexVariable>(variables); 
+	}
+		
+		 
 	getVariableByName ( ) { 
 			EList < Variable > variables = getDeclaredVariables ( ) ; 
 			for ( Variable variable : variables ) { 
