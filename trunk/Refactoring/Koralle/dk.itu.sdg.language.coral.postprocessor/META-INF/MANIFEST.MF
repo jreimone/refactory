@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Postprocessor
+Bundle-SymbolicName: dk.itu.sdg.language.coral.postprocessor
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: dk.itu.sdg.language.coral.postprocessor.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
