@@ -63,14 +63,6 @@ public class RenameNamedLiteralExpPostProcessor implements IRefactoringPostProce
 
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
-			ResourceSet resourceSet, ChangeDescription change) {
-		// TODO Auto-generated method stub
-		System.out.println("--------- old postprocessor activated ------------");
-		return null;
-	}
-
-	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
 			EObject refactoredModel, ResourceSet resourceSet,
 			ChangeDescription change, RefactoringSpecification refSpec,
 			List<IModelRefactoringWizardPage> customWizardPages,
