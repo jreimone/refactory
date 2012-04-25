@@ -14,7 +14,7 @@ class PathFinder {
 			def endA = common.positionInFileA.snd
 			
 			//This works only for EMFText Resources
-//			def fstCandidateElements = fstResource.locationMap.getElementsBetween(startA, endA)
+			def fstCandidateElementsA = fstResource.locationMap.getElementsBetween(startA, endA)
 			def fstCandidateElements = fstResource.locationMap.getElementsAt(startA)
 			
 			
@@ -23,28 +23,55 @@ class PathFinder {
 			def endB = common.positionInFileB.snd
 			
 			//This works only for EMFText Resources
-//			def sndCandidateElements = sndResource.locationMap.getElementsBetween(startB, endB)
+			def sndCandidateElementsA = sndResource.locationMap.getElementsBetween(startB, endB)
 			def sndCandidateElements = sndResource.locationMap.getElementsAt(startB)
 			
 			
-			println common
+			
 			
 						
 			def numberFstCandidates = fstCandidateElements.size
 			def numberSndCandidates = sndCandidateElements.size
 			
-			if (numberFstCandidates > 0 && numberSndCandidates > 0) {				
+			if (numberFstCandidates > 0 && numberSndCandidates > 0) {
+				//find only leaf elements				
 				def fstLeafElements = fstCandidateElements.find({e -> ((EObject)e).eAllContents().size() == 0})
 				def sndLeafElements = sndCandidateElements.find({e -> e.eAllContents().size() == 0})
 				
 				if (fstLeafElements != null && sndLeafElements != null) {
+					
+					def leafStart = 0
+					def leafEnd = Integer.MAX_VALUE
 					for (fstLeafElement in fstLeafElements) {
-						((EObject)fstLeafElement).eContents()
-						println("A --> " + EcoreUtil.getURI(fstLeafElement))	
+						
+						def intermediteLeafStart = fstResource.locationMap.getCharStart(fstLeafElement)
+						def intermediteLeafEnd = fstResource.locationMap.getCharEnd(fstLeafElement)
+
+						(intermediteLeafStart > leafStart) ?: (leafStart = intermediteLeafStart)
+						(intermediteLeafEnd < leafEnd) ?: (leafEnd = intermediteLeafEnd)
 					}
+					def fstKey = fstResource.locationMap.getElementsBetween(leafStart, leafEnd)
+					
+					leafStart = 0
+					leafEnd = Integer.MAX_VALUE
 					for (sndLeafElement in sndLeafElements) {
-						println("B --> " +  EcoreUtil.getURI(sndLeafElement))
+						
+						def intermediteLeafStart = sndResource.locationMap.getCharStart(sndLeafElement)
+						def intermediteLeafEnd = sndResource.locationMap.getCharEnd(sndLeafElement)
+
+						(intermediteLeafStart > leafStart) ?: (leafStart = intermediteLeafStart)
+						(intermediteLeafEnd < leafEnd) ?: (leafEnd = intermediteLeafEnd)
 					}
+					def sndKey = sndResource.locationMap.getElementsBetween(leafStart, leafEnd)
+				
+					println (fstKey + " " + sndKey)
+//					for (fstLeafElement in fstLeafElements) {
+//						((EObject)fstLeafElement).eContents()
+//						println("A --> " + EcoreUtil.getURI(fstLeafElement))	
+//					}
+//					for (sndLeafElement in sndLeafElements) {
+//						println("B --> " +  EcoreUtil.getURI(sndLeafElement))
+//					}
 				}
 				
 				

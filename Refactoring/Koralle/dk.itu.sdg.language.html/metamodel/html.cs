@@ -96,7 +96,7 @@ TOKENSTYLES {
 RULES {
 	Document ::= doctype? "<html" parameters* ">" webPageBody? "</html>";
 	DocType ::= "<!doctype" parameters* ">" |
-				"<!DOCTYPE" "html" parameters* ">";
+				"<!DOCTYPE" "html" ("PUBLIC")? parameters* ">";
 	StringValParameter ::= name[IDENTIFIER] "=" value[STRING_LITERAL];
 	ColorValParameter ::= name[IDENTIFIER] "=" value[COLOUR];
     IDValParameter ::= name[IDENTIFIER] "=" value[IDENTIFIER];
