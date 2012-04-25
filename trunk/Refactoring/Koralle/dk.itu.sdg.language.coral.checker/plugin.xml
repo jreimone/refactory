@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+         <menu
+               icon="icons/coral_16.png"
+               label="Coral">
+            <command 
+            	  commandId="dk.itu.sdg.language.coral.checker.checkCommand"
+                  label="Check"
+                  style="push">
+            </command>
+            
+			<command 
+            	  commandId="dk.itu.sdg.language.coral.checker.inferCommand"
+                  label="Infer"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+	
+	<menuContribution 
+		locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+        <menu
+               icon="icons/coral_16.png"
+               label="Coral">
+	        <command 
+	        	commandId="dk.itu.sdg.language.coral.checker.checkCommand"
+	            id="coral"
+	            label="Check"
+	            style="push">
+	        </command>
+	        <command 
+	        	commandId="dk.itu.sdg.language.coral.checker.inferCommand"
+	            id="coralInfer"
+	            label="Infer"
+	            style="push">
+	        </command>
+        </menu>
+    </menuContribution>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+      <command
+            id="dk.itu.sdg.language.coral.checker.checkCommand"
+            name="check">
+      </command>
+      <command
+            id="dk.itu.sdg.language.coral.checker.inferCommand"
+            name="infer">
+      </command>
+   </extension>
+   <extension
+         id="Coral_Operations"
+         name="Coral Operations"
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="dk.itu.sdg.language.coral.checker.handlers.Check"
+            commandId="dk.itu.sdg.language.coral.checker.checkCommand">
+      </handler>
+      <handler
+            class="dk.itu.sdg.language.coral.checker.handlers.Infer"
+            commandId="dk.itu.sdg.language.coral.checker.inferCommand">
+      </handler>
+   </extension>
+</plugin>
