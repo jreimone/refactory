@@ -58,6 +58,7 @@ import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingExtensionPoint;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistryListener;
+import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
 import org.osgi.framework.Bundle;
@@ -275,7 +276,15 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 			}
 			return false;
 		} else {
-			return true;
+			RoleModel mappedRoleModel = mapping.getMappedRoleModel();
+			RoleModel registeredRoleModel = IRoleModelRegistry.INSTANCE.getRoleModelByName(mappedRoleModel.getName());
+			if(registeredRoleModel != null){
+				RefactoringSpecification registeredRefSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(registeredRoleModel);
+				if(registeredRefSpec != null){
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 
