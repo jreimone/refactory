@@ -1,0 +1,73 @@
+package coral // this is the package name 
+        coral // this is the namespace prefix
+        "http://www.itu.dk/language/coral" // the namespace URI 
+	{
+
+	class Coral {
+		attribute EString imports (0..-1);
+		containment reference PublicTypes publicTypes (1..-1);
+		containment reference Relation relations (1..-1);
+	}
+	
+	class PublicTypes {
+		transient attribute Language language (1..1);
+		attribute EString suffix (0..1);
+		containment reference PublicType types (1..-1);
+	}
+
+	class PublicType {
+		//This should be a reference to type names in any language definition
+		attribute EString name (1..1);
+	}
+	
+	
+	abstract class Relation {
+		transient attribute RelationType type (1..1);
+		
+		reference PublicType key (1..1);
+		transient attribute Language keyLanguage (1..1);
+		reference PublicType ref (1..1);
+		transient attribute Language refLanguage (1..1);
+		
+		containment reference ErrorType myErrorType (0..1);
+	}
+	
+	class FixedRelation extends Relation {
+	}
+	
+	class FreeRelation extends Relation {
+	}
+	
+	class StringTransformRelation extends Relation {
+		attribute EString methodName (1..1);
+	}
+	
+	class DSRelation extends Relation {
+		attribute EString methodName (1..1);
+	}
+	
+	class ErrorType {
+		transient attribute SecondaryRelationType secondType (1..1);
+		attribute EString message (1..1);
+	}
+	
+	enum RelationType {
+		0 : free = "free";
+		1 : fixed = "fixed";
+		2 : transform = "string transformation";
+		3 : dsr = "domain-specific";
+	}
+	
+	enum SecondaryRelationType {
+		0 : info = "info";
+		1 : warning = "warning";
+		2 : error = "error";
+	}
+	
+	enum Language {
+		0 : java = "java";
+		1 : html = "html";
+		2 : csharp = "c#";
+		3 : properties = "properties";
+	}
+}
