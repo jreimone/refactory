@@ -45,29 +45,6 @@ import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
  *
  */
 public interface IRefactoringPostProcessor {
-
-	/**
-	 * This method will be invoked after the refactoring process. Do some additional transformations here by using 
-	 * the given <code>roleRuntimeInstanceMap</code>. Its keys are the {@link Role roles} used in the
-	 * {@link ConcreteMapping concrete mappings} of the {@link Mapping mapping} to which this postprocessor is connected.
-	 * The value of each key can be a single {@link EObject object} or a list of {@link EObject objects} representing
-	 * the concrete objects on which the roles were bound at runtime of the refactoring.<br>
-	 * The passed {@link ResourceSet resourceSet} contains all {@link Resource resources} which are referenced from
-	 * the refactored model and are referencing the refactored model. Use this resourceSet to load more resources into it
-	 * for further modifications.<br>
-	 * The passed {@link ChangeDescription change description} contains all changes which have been made until this point.
-	 * It can be used to analyse the changes in detail and invoke dependent modifications.
-	 * 
-	 * @deprecated This method is deprecated. Use {@link #process(Map, ResourceSet, ChangeDescription, RefactoringSpecification)} instead.
-	 * 
-	 * @param roleRuntimeInstanceMap the map containing {@link Role roles} as keys and its at runtime bound {@link EObject objects} as values 
-	 * @param resourceSet the {@link ResourceSet} containing all referencing and inverse referencing {@link Resource resources}
-	 * @param change the {@link ChangeDescription} containing all changes which were made before invoking this postprocessor
-	 * @return the status of the postprocessing 
-	 */
-	@Deprecated
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change);
-	
 	/**
 	 * This method will be invoked after the refactoring process. Do some additional transformations here by using 
 	 * the given <code>roleRuntimeInstanceMap</code>. Its keys are the {@link Role roles} used in the
