@@ -43,7 +43,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.ImageData;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -312,8 +311,10 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				if(registered != null){
 					RegistryUtil.log("Metamodel " + nsUri + " already registered ", IStatus.WARNING);
 				} else {
-					getRoleMappingsMap().put(nsUri, mappings);
-					registerSubPackages(subpackage, mappings);
+					if(mappings != null){
+						getRoleMappingsMap().put(nsUri, mappings);
+						registerSubPackages(subpackage, mappings);
+					}
 				}
 			}
 		}
@@ -327,7 +328,12 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	 * @see org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry#registerPostProcessor(org.emftext.language.refactoring.rolemapping.RoleMappingModel, org.emftext.language.refactoring.rolemapping.Mapping, org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor)
 	 */
 	public void registerPostProcessor(RoleMapping mapping, IRefactoringPostProcessor postProcessor) {
-		RoleMappingModel root = (RoleMappingModel) EcoreUtil.getRootContainer(mapping);
+		RoleModel mappedRoleModel = mapping.getMappedRoleModel();
+		RoleModel registeredRoleModel = IRoleModelRegistry.INSTANCE.getRoleModelByName(mappedRoleModel.getName());
+		if(registeredRoleModel == null){
+			return;
+		}
+		RoleMappingModel root = mapping.getOwningMappingModel();
 		registerPostProcessor(root.getTargetMetamodel(), mapping, postProcessor);
 		List<EPackage> subPackages = root.getTargetMetamodel().getESubpackages();
 		for (EPackage subPackage : subPackages) {
