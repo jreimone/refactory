@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="operators"
+    nsURI="http://www.qualitune.org/operators" nsPrefix="operators">
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//Result"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newInstanceVariable" lowerBound="1"
+        eType="#//TypeVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Referrable"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" eSuperTypes="#//Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DELETE" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deletion" lowerBound="1"
+        eType="#//Referrable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ASSIGN" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EObjectReference" eSuperTypes="#//Result #//Referrable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Result" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Referrable" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveReference" eSuperTypes="#//Result">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SET" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Referrable"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//Referrable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedVariable" lowerBound="1"
+        eType="#//TypeVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newParent" lowerBound="1"
+        eType="#//Referrable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentReference" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="movee" lowerBound="1" eType="#//Referrable"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SPLIT" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="splitSets" lowerBound="1"
+        upperBound="-1" eType="#//StructuralFeatureSet" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="splitObject" lowerBound="1"
+        eType="#//Referrable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuralFeatureSet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeatures" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MERGE" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mergeObjects" lowerBound="2"
+        upperBound="-1" eType="#//Referrable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VAR" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//QueryVariable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QueryVariable" eSuperTypes="#//Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeature" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queryObject" lowerBound="1"
+        eType="#//Referrable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queryResult" lowerBound="1"
+        eType="#//Result"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2006-2012&#xD;&#xA;Software Technology Group, Dresden University of Technology&#xD;&#xA;DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026&#xD;&#xA;&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  Software Technology Group - TU Dresden, Germany;&#xD;&#xA;  DevBoost GmbH - Berlin, Germany&#xD;&#xA;     - initial API and implementation&#xD;&#xA; "
+    modelDirectory="/org.qualitune.evolution.operators/src-gen" editDirectory="/org.qualitune.evolution.operators.edit/src-gen"
+    modelPluginID="org.qualitune.evolution.operators" modelName="Operators" editPluginClass="org.qualitune.evolution.operators.provider.OperatorsEditPlugin"
+    editorPluginClass="org.qualitune.evolution.operators.presentation.OperatorsEditorPlugin"
+    testSuiteClass="org.qualitune.evolution.operators.tests.OperatorsAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>operators.ecore</foreignModel>
+  <genPackages prefix="Operators" basePackage="org.qualitune.evolution" disposableProviderFactory="true"
+      ecorePackage="operators.ecore#/">
+    <genClasses image="false" ecoreClass="operators.ecore#//Operator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//Operator/result"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//CREATE">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//CREATE/newInstanceVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//CREATE/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//TypeVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//TypeVariable/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//TypeVariable/value"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//DELETE">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//DELETE/deletion"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//ASSIGN">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//ASSIGN/attribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute operators.ecore#//ASSIGN/value"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//EObjectReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//EObjectReference/element"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="operators.ecore#//Result"/>
+    <genClasses image="false" ecoreClass="operators.ecore#//Referrable"/>
+    <genClasses ecoreClass="operators.ecore#//PrimitiveReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute operators.ecore#//PrimitiveReference/value"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//SET">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//SET/reference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//SET/value"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//VariableReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//VariableReference/referencedVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//MOVE">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//MOVE/newParent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//MOVE/parentReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//MOVE/movee"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//SPLIT">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//SPLIT/splitSets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//SPLIT/splitObject"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//StructuralFeatureSet">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//StructuralFeatureSet/structuralFeatures"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//MERGE">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//MERGE/mergeObjects"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//VAR">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//VAR/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//QueryVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/operation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/structuralFeature"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/queryObject"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/queryResult"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="operators.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute operators.ecore#//Variable/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
