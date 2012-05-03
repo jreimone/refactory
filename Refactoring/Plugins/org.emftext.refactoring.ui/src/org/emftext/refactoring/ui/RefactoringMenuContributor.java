@@ -92,11 +92,13 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		IEditorConnector editorConnector = null;
 		if (selectedElements == null || selectedElements.size() == 0) {
 			activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
-			if(editorConnector != null){
-				selectedElements = editorConnector.handleSelection(selection);
-				if (selectedElements != null && selectedElements.size() >= 1) {
-					transactionalEditingDomain = editorConnector.getTransactionalEditingDomain();
+			if(activeEditor.equals(activePart)){
+				editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
+				if(editorConnector != null){
+					selectedElements = editorConnector.handleSelection(selection);
+					if (selectedElements != null && selectedElements.size() >= 1) {
+						transactionalEditingDomain = editorConnector.getTransactionalEditingDomain();
+					}
 				}
 			}
 		}
