@@ -4,8 +4,12 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="operators"
     nsURI="http://www.qualitune.org/operators" nsPrefix="operators">
   <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true">
+    <eOperations name="execute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//Result"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="executed" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//Operator">
     <eStructuralFeatures xsi:type="ecore:EReference" name="newInstanceVariable" lowerBound="1"
@@ -43,7 +47,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//Referrable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referencedVariable" lowerBound="1"
-        eType="#//TypeVariable"/>
+        eType="#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//Operator">
     <eStructuralFeatures xsi:type="ecore:EReference" name="newParent" lowerBound="1"
@@ -68,6 +72,7 @@
         upperBound="-1" eType="#//Referrable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VAR" eSuperTypes="#//Operator">
+    <eOperations name="execute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//QueryVariable" containment="true"/>
   </eClassifiers>

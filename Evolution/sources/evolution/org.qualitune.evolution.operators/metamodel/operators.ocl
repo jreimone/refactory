@@ -1,0 +1,9 @@
+package operators
+
+context QueryVariable inv operationFeatureXOR:
+self.operation = null xor self.structuralFeature = null 
+
+context QueryVariable inv test:
+not(self.name = null)
+
+endpackage 
