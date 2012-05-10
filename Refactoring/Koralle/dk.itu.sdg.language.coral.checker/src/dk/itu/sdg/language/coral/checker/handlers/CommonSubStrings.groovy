@@ -22,7 +22,6 @@ class CommonSubStrings {
 		def int sl = second.length();
 		def int[][] table = new int[fl][sl];
 		
-		//TODO make a map with string and indices per file
 		commons = new CommonStrings() 
 				
 		for (int i = 0; i < fl; i++) {
@@ -55,6 +54,41 @@ class CommonSubStrings {
 	
 //		return maxLen;
 		return commons
+	}
+	
+	public CommonString longestSubstring(String first, String second) {
+		if (first == null || second == null || first.length() == 0 || second.length() == 0) {
+			return 0;
+		}
+	 
+		def int maxLen = 0;
+		def int fl = first.length();
+		def int sl = second.length();
+		def int[][] table = new int[fl][sl];
+		
+		def common
+				
+		for (int i = 0; i < fl; i++) {
+			maxLen = 0
+			for (int j = 0; j < sl; j++) {
+				if (first.charAt(i) == second.charAt(j)) {
+					
+					if (i == 0 || j == 0) {
+						table[i][j] = 1;
+					}
+					else {
+						table[i][j] = table[i - 1][j - 1] + 1;
+					}
+					if (table[i][j] > maxLen) {
+						maxLen = table[i][j]
+					
+						def c = second.substring(j - maxLen + 1, j + 1)
+						common = new CommonString(c, i, j, maxLen)
+					}
+				}
+			}
+		}
+		return common
 	}
 	
 	public filterWhitespaces() {

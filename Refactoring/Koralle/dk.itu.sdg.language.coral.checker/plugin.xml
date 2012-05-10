@@ -18,6 +18,12 @@
                   label="Infer"
                   style="push">
             </command>
+            
+            <command 
+            	  commandId="dk.itu.sdg.language.coral.checker.uncheckCommand"
+                  label="Uncheck"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
 	
@@ -30,6 +36,12 @@
 	        	commandId="dk.itu.sdg.language.coral.checker.checkCommand"
 	            id="coral"
 	            label="Check"
+	            style="push">
+	        </command>
+	        <command 
+	        	commandId="dk.itu.sdg.language.coral.checker.uncheckCommand"
+	            id="coralUncheck"
+	            label="Uncheck"
 	            style="push">
 	        </command>
 	        <command 
@@ -47,6 +59,12 @@
             id="dk.itu.sdg.language.coral.checker.checkCommand"
             name="check">
       </command>
+      
+      <command
+            id="dk.itu.sdg.language.coral.checker.uncheckCommand"
+            name="uncheck">
+      </command>
+      
       <command
             id="dk.itu.sdg.language.coral.checker.inferCommand"
             name="infer">
@@ -64,5 +82,87 @@
             class="dk.itu.sdg.language.coral.checker.handlers.Infer"
             commandId="dk.itu.sdg.language.coral.checker.inferCommand">
       </handler>
+      <handler
+            class="dk.itu.sdg.language.coral.checker.handlers.Uncheck"
+            commandId="dk.itu.sdg.language.coral.checker.uncheckCommand">
+      </handler>
    </extension>
+   
+   <extension id="generatedFixedRelation" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.problemmarker"/>
+  		<attribute name="message"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="generatedStringTransformRelation" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.problemmarker"/>
+  		<attribute name="message"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="generatedFixedAnnotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.generatedFixedRelation">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="generatedStringTransformAnnotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.generatedStringTransformRelation">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+             icon = "icons/coral.gif"
+             annotationType="generatedFixedAnnotation"
+             verticalRulerPreferenceKey="highlight.rulers.vertical"
+             textPreferenceKey="highlight.text"
+            colorPreferenceKey="highlight.color"
+            highlightPreferenceKey="highlight.background"
+            textPreferenceValue="true"
+            textStylePreferenceValue="BOX"
+            overviewRulerPreferenceKey="highlight.rulers.overview"
+            presentationLayer="4"
+            highlightPreferenceValue="true"
+            label="Generated Fixed Relations"
+            symbolicIcon="info"
+            colorPreferenceValue="255,0,0"
+            verticalRulerPreferenceValue="true"
+            overviewRulerPreferenceValue="true"
+            textStylePreferenceKey="highlight.text.style" >
+        </specification >
+    </extension>
+    
+    <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+             icon = "icons/coral_16.png"
+             annotationType="generatedStringTransformAnnotation"
+             verticalRulerPreferenceKey="highlight.rulers.vertical"
+             textPreferenceKey="highlight.text"
+            colorPreferenceKey="highlight.color"
+            highlightPreferenceKey="highlight.background"
+            textPreferenceValue="true"
+            textStylePreferenceValue="DASHED_BOX"
+            overviewRulerPreferenceKey="highlight.rulers.overview"
+            presentationLayer="4"
+            highlightPreferenceValue="true"
+            label="Generated String-Transformation Relations"
+            symbolicIcon="info"
+            colorPreferenceValue="0,255,0"
+            verticalRulerPreferenceValue="true"
+            overviewRulerPreferenceValue="true"
+            textStylePreferenceKey="highlight.text.style" >
+        </specification >
+    </extension>
 </plugin>

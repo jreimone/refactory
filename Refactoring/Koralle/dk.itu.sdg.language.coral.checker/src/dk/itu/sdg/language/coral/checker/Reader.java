@@ -1,8 +1,10 @@
 package dk.itu.sdg.language.coral.checker;
 
+import html.resource.html.mopp.HtmlResource;
 import html.resource.html.mopp.HtmlResourceFactory;
 import org.emftext.language.java.resource.java.mopp.JavaResourceFactory;
 import org.emftext.language.javaproperties.resource.properties.mopp.PropertiesResourceFactory;
+import org.emftext.language.xml.resource.xml.mopp.XmlResourceFactory;
 
 import org.eclipse.emf.common.util.URI;
 
@@ -10,6 +12,10 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import org.antlr.runtime3_4_0.Parser;
+
+import antlr.TokenStream;
 
 public class Reader {
 	
@@ -67,6 +73,9 @@ public class Reader {
 //			resource = rs.getResource(URI.createFileURI(file.getFullPath().toString()), true);
 			
 		} else if (filetype.equals("xml")) {
+			
+		} else {
+			//use smarttext for all unknown languages
 			
 		}
 		

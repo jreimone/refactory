@@ -15,12 +15,16 @@ Require-Bundle: org.eclipse.ui,
  org.codehaus.groovy;bundle-version="1.8.6"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: dk.itu.sdg.language.coral.resource.coral.mopp,
+Import-Package: de.devboost.smarttext.resource.stxt.mopp,
+ dk.itu.sdg.language.coral.resource.coral.mopp,
+ org.antlr.runtime3_4_0,
  org.eclipse.core.internal.resources,
  org.eclipse.emf.common.notify.impl,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.ui.ide,
  org.emftext.language.java.resource.java.mopp,
- org.emftext.language.javaproperties.resource.properties.mopp
+ org.emftext.language.javaproperties.resource.properties.mopp,
+ org.emftext.language.xml.resource.xml.mopp
