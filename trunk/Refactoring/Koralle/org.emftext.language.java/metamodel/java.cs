@@ -165,7 +165,7 @@ imports.StaticClassifierImport
 classifiers.Class
 	::=	annotationsAndModifiers*
 	    "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
-        ("extends" extends)?
+        ("extends" extends[])?
         ("implements" (implements ("," implements)*))?
         "{" 
         	(!1 members)* !0
@@ -181,7 +181,7 @@ classifiers.AnonymousClass
 classifiers.Interface
 	::=	annotationsAndModifiers*
 	    "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
-		("extends" (extends ("," extends)*))? 
+		("extends" (extends[] ("," extends[])*))? 
 	    "{"
         	(!1 members)* !0
 		"}"
