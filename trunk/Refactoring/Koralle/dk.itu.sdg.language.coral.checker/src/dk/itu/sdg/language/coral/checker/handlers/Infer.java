@@ -1,25 +1,28 @@
 package dk.itu.sdg.language.coral.checker.handlers;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.HashSet;
 
+import org.antlr.runtime3_4_0.CommonTokenStream;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.internal.resources.File;
+import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.internal.core.CompilationUnit;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import dk.itu.sdg.language.coral.checker.CheckGenerator;
 import dk.itu.sdg.language.coral.checker.CommonStrings;
+import dk.itu.sdg.language.coral.checker.GReader;
+import dk.itu.sdg.language.coral.checker.Pair;
 import dk.itu.sdg.language.coral.checker.PathFinder;
-import dk.itu.sdg.language.coral.checker.Reader;
 
 @SuppressWarnings("restriction")
 public class Infer extends AbstractHandler {
@@ -29,28 +32,71 @@ public class Infer extends AbstractHandler {
 		
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getActiveMenuSelection(event);
 		
+		//TODO: put this into a Job!!!
+		
 		if (selection.size() == 2) {
 			Object[]  selections = selection.toArray();
+			final Object fstSelection = selections[0];
+			final Object sndSelection = selections[1];	
+			
+			IResource fstFile = this.getResource(fstSelection);
+			IResource sndFile = this.getResource(sndSelection);
+			
+			if (fstFile != null && sndFile != null ) {
+				
+				Job job = new Job("Infer Relations from Two Files") {
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						// Set total number of work units
+						monitor.beginTask("Inferring...", 100);
+						
+						monitor.subTask("Reading Files...");
+						monitor.worked(20);
+
+						GReader reader = new GReader(Infer.getResource(fstSelection), Infer.getResource(sndSelection));
+							
+						monitor.subTask("Find Longest Common Strings...");
+						monitor.worked(20);
+
+						CommonSubStrings commonsSubs = new CommonSubStrings();
+						Pair<CommonTokenStream, CommonTokenStream> contents = reader.getTexts();
+							
+						String fstFileAsString = contents.fst.toString();
+						String sndFileAsString = contents.snd.toString();			
+						CommonStrings commons = commonsSubs.longestSubstr(fstFileAsString, sndFileAsString);
+							
+						monitor.subTask("Find Modell Elements Longest Common Strings...");
+						monitor.worked(20);
+
+						PathFinder pathFinder = new PathFinder();
+						pathFinder.findCommonContents(reader.getEmfResources().fst, reader.getEmfResources().snd, commons);
+						pathFinder.findCommonContentsOffsets(fstFileAsString, sndFileAsString, null);
+						Pair relations = pathFinder.findCommonContentsElements(reader.getEmfResources().fst, reader.getEmfResources().snd, null);
+							
+						monitor.subTask("Generate Relations as Constraints...");
+						monitor.worked(20);
+
+						CheckGenerator generator = new CheckGenerator();
+						generator.generateFixedRelations((HashSet)relations.fst);
+						generator.generateStringTransformationRelations((HashSet)relations.snd);
+						String classContents = generator.generateClass();
+						generator.saveFile(classContents);
+						
+						
+						return Status.OK_STATUS;
+					}
+				};
+				job.schedule();
+			}
+
+		} else if (selection.size() == 1) {
+			Object[]  selections = selection.toArray();
 			Object fstSelection = selections[0];
-			Object sndSelection = selections[1];
-			
-			//TODO: do the same thing again with decapitalized letters to find similar strings better
-			String firstString = this.getResourceContent(fstSelection);
-			String secondString = this.getResourceContent(sndSelection);
-			
-			CommonSubStrings commonsSubs = new CommonSubStrings();
-			CommonStrings commons = commonsSubs.longestSubstr(firstString, secondString);
-//			System.out.println(commons);
-			
-			Reader reader = new Reader(this.getResource(fstSelection), this.getResource(sndSelection));
-			
-			PathFinder pathFinder = new PathFinder();
-			pathFinder.findPathes(reader.getEmfResources().fst, reader.getEmfResources().snd, commons);
-			
-//			String a = reader.getEmfResources().fst.getURI().toString();
-//			String b = reader.getEmfResources().snd.getURI().toString();
-////
-//			System.out.println(a + " " + reader.getEmfResources().fst.getClass() + " --- " + b + " " + reader.getEmfResources().snd.getClass());
+
+			if (fstSelection instanceof Project) {
+				//TODO: implement to get all files of languages and compare them
+				MessageDialog.openInformation(HandlerUtil.getActiveShell(event), "Information", "Under construction...");
+			}
 		} else {
 			MessageDialog.openInformation(HandlerUtil.getActiveShell(event), "Information", "Please select two files.");
 		}
@@ -58,7 +104,7 @@ public class Infer extends AbstractHandler {
 		return null;
 	}
 	
-	private IResource getResource(Object selection) {
+	public static IResource getResource(Object selection) {
 		
 		IResource resource = null;
 		if (selection instanceof File) {
@@ -69,48 +115,5 @@ public class Infer extends AbstractHandler {
 			resource = file.getResource();
 		}
 		return resource;
-	}
-	
-	/**
-	 * CAUTION: For large files a String might be too small to hold the files contents!!!
-	 * In that case the CommonSubstringMethod has to be adapted to work on parts of files.
-	 * 
-	 * @param selection
-	 * @return the content of the file as string
-	 */
-	private String getResourceContent(Object selection) {
-
-		String content = "";
-		File file = null;
-		
-		if (selection instanceof File) {
-			file = (File) selection;	
-		} else if (selection instanceof CompilationUnit) {
-			file = (File)((CompilationUnit)selection).getResource();		
-		}
-		
-		if (file != null) {
-			InputStream fileStream;
-			try {
-				fileStream = file.getContents();
-			
-				DataInputStream inputStream = new DataInputStream(fileStream);
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-				String stringLine;
-				
-				while ((stringLine = bufferedReader.readLine()) != null)   {
-					content = content + "\n" + stringLine;
-				}
-				
-				inputStream.close();
-				
-			} catch (CoreException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return content;
 	}
 }
