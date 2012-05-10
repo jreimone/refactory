@@ -59,19 +59,17 @@
     <nestedGenPackages prefix="Classifiers" basePackage="org.emftext.language.java"
         disposableProviderFactory="true" ecorePackage="java.ecore#//classifiers">
       <genClasses image="false" ecoreClass="java.ecore#//classifiers/Classifier"/>
-      <genClasses image="false" ecoreClass="java.ecore#//classifiers/ConcreteClassifier">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java.ecore#//classifiers/ConcreteClassifier/fullName"/>
-      </genClasses>
+      <genClasses image="false" ecoreClass="java.ecore#//classifiers/ConcreteClassifier"/>
       <genClasses image="false" ecoreClass="java.ecore#//classifiers/Implementor">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//classifiers/Implementor/implements"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//classifiers/Class">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//classifiers/Class/extends"/>
         <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference java.ecore#//classifiers/Class/defaultExtends"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute java.ecore#//classifiers/Class/extends"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//classifiers/Interface">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//classifiers/Interface/extends"/>
         <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference java.ecore#//classifiers/Interface/defaultExtends"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute java.ecore#//classifiers/Interface/extends"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//classifiers/Enumeration">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//classifiers/Enumeration/constants"/>
@@ -226,7 +224,7 @@
       </genClasses>
       <genClasses ecoreClass="java.ecore#//imports/ClassifierImport">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference java.ecore#//imports/ClassifierImport/classifier"/>
+            ecoreFeature="ecore:EAttribute java.ecore#//imports/ClassifierImport/classifier"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//imports/PackageImport"/>
       <genClasses ecoreClass="java.ecore#//imports/StaticClassifierImport"/>
