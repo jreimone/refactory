@@ -70,13 +70,32 @@ public interface HtmlPackage extends EPackage {
 	int DOCUMENT = 0;
 
 	/**
+	 * The number of structural features of the '<em>Document</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link html.impl.CompleteDocumentImpl <em>Complete Document</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see html.impl.CompleteDocumentImpl
+	 * @see html.impl.HtmlPackageImpl#getCompleteDocument()
+	 * @generated
+	 */
+	int COMPLETE_DOCUMENT = 1;
+
+	/**
 	 * The feature id for the '<em><b>Doctype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT__DOCTYPE = 0;
+	int COMPLETE_DOCUMENT__DOCTYPE = DOCUMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -85,7 +104,7 @@ public interface HtmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT__PARAMETERS = 1;
+	int COMPLETE_DOCUMENT__PARAMETERS = DOCUMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Web Page Body</b></em>' containment reference.
@@ -94,16 +113,44 @@ public interface HtmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT__WEB_PAGE_BODY = 2;
+	int COMPLETE_DOCUMENT__WEB_PAGE_BODY = DOCUMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Document</em>' class.
+	 * The number of structural features of the '<em>Complete Document</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_FEATURE_COUNT = 3;
+	int COMPLETE_DOCUMENT_FEATURE_COUNT = DOCUMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link html.impl.ContentDocumentImpl <em>Content Document</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see html.impl.ContentDocumentImpl
+	 * @see html.impl.HtmlPackageImpl#getContentDocument()
+	 * @generated
+	 */
+	int CONTENT_DOCUMENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Content</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTENT_DOCUMENT__CONTENT = DOCUMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Content Document</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTENT_DOCUMENT_FEATURE_COUNT = DOCUMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link html.impl.DocTypeImpl <em>Doc Type</em>}' class.
@@ -113,7 +160,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDocType()
 	 * @generated
 	 */
-	int DOC_TYPE = 1;
+	int DOC_TYPE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -141,7 +188,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 2;
+	int PARAMETER = 4;
 
 	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
@@ -160,7 +207,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getStringValParameter()
 	 * @generated
 	 */
-	int STRING_VAL_PARAMETER = 3;
+	int STRING_VAL_PARAMETER = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -197,7 +244,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getColorValParameter()
 	 * @generated
 	 */
-	int COLOR_VAL_PARAMETER = 4;
+	int COLOR_VAL_PARAMETER = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -234,7 +281,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getIDValParameter()
 	 * @generated
 	 */
-	int ID_VAL_PARAMETER = 5;
+	int ID_VAL_PARAMETER = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -271,7 +318,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getIDParameter()
 	 * @generated
 	 */
-	int ID_PARAMETER = 6;
+	int ID_PARAMETER = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -299,7 +346,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getStringParameter()
 	 * @generated
 	 */
-	int STRING_PARAMETER = 7;
+	int STRING_PARAMETER = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -308,7 +355,7 @@ public interface HtmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_PARAMETER__NAME = 0;
+	int STRING_PARAMETER__NAME = PARAMETER_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>String Parameter</em>' class.
@@ -317,7 +364,7 @@ public interface HtmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_PARAMETER_FEATURE_COUNT = 1;
+	int STRING_PARAMETER_FEATURE_COUNT = PARAMETER_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link html.impl.WebPageBodyImpl <em>Web Page Body</em>}' class.
@@ -327,7 +374,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getWebPageBody()
 	 * @generated
 	 */
-	int WEB_PAGE_BODY = 8;
+	int WEB_PAGE_BODY = 10;
 
 	/**
 	 * The feature id for the '<em><b>Head</b></em>' containment reference.
@@ -364,7 +411,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getHead()
 	 * @generated
 	 */
-	int HEAD = 9;
+	int HEAD = 11;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -401,7 +448,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getBody()
 	 * @generated
 	 */
-	int BODY = 10;
+	int BODY = 12;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -438,7 +485,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getHeadItem()
 	 * @generated
 	 */
-	int HEAD_ITEM = 11;
+	int HEAD_ITEM = 13;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -466,7 +513,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTitleItem()
 	 * @generated
 	 */
-	int TITLE_ITEM = 12;
+	int TITLE_ITEM = 14;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -503,7 +550,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getMetaItem()
 	 * @generated
 	 */
-	int META_ITEM = 13;
+	int META_ITEM = 15;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -531,7 +578,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getLinkItem()
 	 * @generated
 	 */
-	int LINK_ITEM = 14;
+	int LINK_ITEM = 16;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -559,7 +606,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getBaseItem()
 	 * @generated
 	 */
-	int BASE_ITEM = 15;
+	int BASE_ITEM = 17;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -587,7 +634,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getBaseFontItem()
 	 * @generated
 	 */
-	int BASE_FONT_ITEM = 16;
+	int BASE_FONT_ITEM = 18;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -615,7 +662,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getScriptItem()
 	 * @generated
 	 */
-	int SCRIPT_ITEM = 17;
+	int SCRIPT_ITEM = 19;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -652,7 +699,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getContent()
 	 * @generated
 	 */
-	int CONTENT = 18;
+	int CONTENT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -716,7 +763,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getPContent()
 	 * @generated
 	 */
-	int PCONTENT = 19;
+	int PCONTENT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' containment reference.
@@ -762,7 +809,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTag()
 	 * @generated
 	 */
-	int TAG = 20;
+	int TAG = 22;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -790,7 +837,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getWord()
 	 * @generated
 	 */
-	int WORD = 21;
+	int WORD = 23;
 
 	/**
 	 * The feature id for the '<em><b>Content</b></em>' attribute.
@@ -818,7 +865,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getImageTag()
 	 * @generated
 	 */
-	int IMAGE_TAG = 22;
+	int IMAGE_TAG = 24;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -846,7 +893,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getBrTag()
 	 * @generated
 	 */
-	int BR_TAG = 23;
+	int BR_TAG = 25;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -874,7 +921,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getHrTag()
 	 * @generated
 	 */
-	int HR_TAG = 24;
+	int HR_TAG = 26;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -902,7 +949,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getPTag()
 	 * @generated
 	 */
-	int PTAG = 25;
+	int PTAG = 27;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -939,7 +986,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getH1Tag()
 	 * @generated
 	 */
-	int H1_TAG = 26;
+	int H1_TAG = 28;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -976,7 +1023,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getH2Tag()
 	 * @generated
 	 */
-	int H2_TAG = 27;
+	int H2_TAG = 29;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1013,7 +1060,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getH3Tag()
 	 * @generated
 	 */
-	int H3_TAG = 28;
+	int H3_TAG = 30;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1050,7 +1097,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getH4Tag()
 	 * @generated
 	 */
-	int H4_TAG = 29;
+	int H4_TAG = 31;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1087,7 +1134,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getH5Tag()
 	 * @generated
 	 */
-	int H5_TAG = 30;
+	int H5_TAG = 32;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1124,7 +1171,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getH6Tag()
 	 * @generated
 	 */
-	int H6_TAG = 31;
+	int H6_TAG = 33;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1161,7 +1208,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getATag()
 	 * @generated
 	 */
-	int ATAG = 32;
+	int ATAG = 34;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1198,7 +1245,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getMapTag()
 	 * @generated
 	 */
-	int MAP_TAG = 33;
+	int MAP_TAG = 35;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1235,7 +1282,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getBTag()
 	 * @generated
 	 */
-	int BTAG = 34;
+	int BTAG = 36;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1272,7 +1319,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getUTag()
 	 * @generated
 	 */
-	int UTAG = 35;
+	int UTAG = 37;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1309,7 +1356,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getEmTag()
 	 * @generated
 	 */
-	int EM_TAG = 36;
+	int EM_TAG = 38;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1346,7 +1393,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getITag()
 	 * @generated
 	 */
-	int ITAG = 37;
+	int ITAG = 39;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1383,7 +1430,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getStrikeTag()
 	 * @generated
 	 */
-	int STRIKE_TAG = 38;
+	int STRIKE_TAG = 40;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1420,7 +1467,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getStrongTag()
 	 * @generated
 	 */
-	int STRONG_TAG = 39;
+	int STRONG_TAG = 41;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1457,7 +1504,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getFontTag()
 	 * @generated
 	 */
-	int FONT_TAG = 40;
+	int FONT_TAG = 42;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1494,7 +1541,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getBigTag()
 	 * @generated
 	 */
-	int BIG_TAG = 41;
+	int BIG_TAG = 43;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1531,7 +1578,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getSmallTag()
 	 * @generated
 	 */
-	int SMALL_TAG = 42;
+	int SMALL_TAG = 44;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1568,7 +1615,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getSupTag()
 	 * @generated
 	 */
-	int SUP_TAG = 43;
+	int SUP_TAG = 45;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1605,7 +1652,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getSubTag()
 	 * @generated
 	 */
-	int SUB_TAG = 44;
+	int SUB_TAG = 46;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1642,7 +1689,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getBlockQuoteTag()
 	 * @generated
 	 */
-	int BLOCK_QUOTE_TAG = 45;
+	int BLOCK_QUOTE_TAG = 47;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1679,7 +1726,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getAddressTag()
 	 * @generated
 	 */
-	int ADDRESS_TAG = 46;
+	int ADDRESS_TAG = 48;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1716,7 +1763,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getCodeTag()
 	 * @generated
 	 */
-	int CODE_TAG = 47;
+	int CODE_TAG = 49;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1753,7 +1800,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getCiteTag()
 	 * @generated
 	 */
-	int CITE_TAG = 48;
+	int CITE_TAG = 50;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1790,7 +1837,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getCaptionTag()
 	 * @generated
 	 */
-	int CAPTION_TAG = 49;
+	int CAPTION_TAG = 51;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1827,7 +1874,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getSampTag()
 	 * @generated
 	 */
-	int SAMP_TAG = 50;
+	int SAMP_TAG = 52;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1864,7 +1911,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getKbdTag()
 	 * @generated
 	 */
-	int KBD_TAG = 51;
+	int KBD_TAG = 53;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1901,7 +1948,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTtTag()
 	 * @generated
 	 */
-	int TT_TAG = 52;
+	int TT_TAG = 54;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1938,7 +1985,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getCenterTag()
 	 * @generated
 	 */
-	int CENTER_TAG = 53;
+	int CENTER_TAG = 55;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1975,7 +2022,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getSpanTag()
 	 * @generated
 	 */
-	int SPAN_TAG = 54;
+	int SPAN_TAG = 56;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2012,7 +2059,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDivTag()
 	 * @generated
 	 */
-	int DIV_TAG = 55;
+	int DIV_TAG = 57;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2049,7 +2096,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getAppletTag()
 	 * @generated
 	 */
-	int APPLET_TAG = 56;
+	int APPLET_TAG = 58;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2086,7 +2133,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getObjectTag()
 	 * @generated
 	 */
-	int OBJECT_TAG = 57;
+	int OBJECT_TAG = 59;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2123,7 +2170,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTableTag()
 	 * @generated
 	 */
-	int TABLE_TAG = 58;
+	int TABLE_TAG = 60;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2160,7 +2207,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getUITag()
 	 * @generated
 	 */
-	int UI_TAG = 59;
+	int UI_TAG = 61;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2197,7 +2244,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getOlTag()
 	 * @generated
 	 */
-	int OL_TAG = 60;
+	int OL_TAG = 62;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2234,7 +2281,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDirTag()
 	 * @generated
 	 */
-	int DIR_TAG = 61;
+	int DIR_TAG = 63;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2271,7 +2318,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getMenutag()
 	 * @generated
 	 */
-	int MENUTAG = 62;
+	int MENUTAG = 64;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2308,7 +2355,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDlTag()
 	 * @generated
 	 */
-	int DL_TAG = 63;
+	int DL_TAG = 65;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2345,7 +2392,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getFormTag()
 	 * @generated
 	 */
-	int FORM_TAG = 64;
+	int FORM_TAG = 66;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2382,7 +2429,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getInputTag()
 	 * @generated
 	 */
-	int INPUT_TAG = 65;
+	int INPUT_TAG = 67;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2410,7 +2457,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getSelectTag()
 	 * @generated
 	 */
-	int SELECT_TAG = 66;
+	int SELECT_TAG = 68;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2447,7 +2494,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTextAreaTag()
 	 * @generated
 	 */
-	int TEXT_AREA_TAG = 67;
+	int TEXT_AREA_TAG = 69;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2484,7 +2531,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTableRow()
 	 * @generated
 	 */
-	int TABLE_ROW = 68;
+	int TABLE_ROW = 70;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2530,7 +2577,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTableCell()
 	 * @generated
 	 */
-	int TABLE_CELL = 69;
+	int TABLE_CELL = 71;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2567,7 +2614,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTDTableCell()
 	 * @generated
 	 */
-	int TD_TABLE_CELL = 70;
+	int TD_TABLE_CELL = 72;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2604,7 +2651,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getTHTableCell()
 	 * @generated
 	 */
-	int TH_TABLE_CELL = 71;
+	int TH_TABLE_CELL = 73;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2641,7 +2688,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDefItem()
 	 * @generated
 	 */
-	int DEF_ITEM = 72;
+	int DEF_ITEM = 74;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2678,7 +2725,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDdItem()
 	 * @generated
 	 */
-	int DD_ITEM = 73;
+	int DD_ITEM = 75;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2715,7 +2762,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDtItem()
 	 * @generated
 	 */
-	int DT_ITEM = 74;
+	int DT_ITEM = 76;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2752,7 +2799,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getListItem()
 	 * @generated
 	 */
-	int LIST_ITEM = 75;
+	int LIST_ITEM = 77;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2789,7 +2836,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getOption()
 	 * @generated
 	 */
-	int OPTION = 76;
+	int OPTION = 78;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2817,7 +2864,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getMapItem()
 	 * @generated
 	 */
-	int MAP_ITEM = 77;
+	int MAP_ITEM = 79;
 
 	/**
 	 * The feature id for the '<em><b>Area</b></em>' containment reference.
@@ -2854,7 +2901,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getArea()
 	 * @generated
 	 */
-	int AREA = 78;
+	int AREA = 80;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2882,7 +2929,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getParam()
 	 * @generated
 	 */
-	int PARAM = 79;
+	int PARAM = 81;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2920,7 +2967,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDSLTag()
 	 * @generated
 	 */
-	int DSL_TAG = 80;
+	int DSL_TAG = 82;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -2957,7 +3004,7 @@ public interface HtmlPackage extends EPackage {
 	 * @see html.impl.HtmlPackageImpl#getDSLTagStructure()
 	 * @generated
 	 */
-	int DSL_TAG_STRUCTURE = 81;
+	int DSL_TAG_STRUCTURE = 83;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -3016,37 +3063,68 @@ public interface HtmlPackage extends EPackage {
 	EClass getDocument();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link html.Document#getDoctype <em>Doctype</em>}'.
+	 * Returns the meta object for class '{@link html.CompleteDocument <em>Complete Document</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Complete Document</em>'.
+	 * @see html.CompleteDocument
+	 * @generated
+	 */
+	EClass getCompleteDocument();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link html.CompleteDocument#getDoctype <em>Doctype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Doctype</em>'.
-	 * @see html.Document#getDoctype()
-	 * @see #getDocument()
+	 * @see html.CompleteDocument#getDoctype()
+	 * @see #getCompleteDocument()
 	 * @generated
 	 */
-	EReference getDocument_Doctype();
+	EReference getCompleteDocument_Doctype();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link html.Document#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link html.CompleteDocument#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see html.Document#getParameters()
-	 * @see #getDocument()
+	 * @see html.CompleteDocument#getParameters()
+	 * @see #getCompleteDocument()
 	 * @generated
 	 */
-	EReference getDocument_Parameters();
+	EReference getCompleteDocument_Parameters();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link html.Document#getWebPageBody <em>Web Page Body</em>}'.
+	 * Returns the meta object for the containment reference '{@link html.CompleteDocument#getWebPageBody <em>Web Page Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Web Page Body</em>'.
-	 * @see html.Document#getWebPageBody()
-	 * @see #getDocument()
+	 * @see html.CompleteDocument#getWebPageBody()
+	 * @see #getCompleteDocument()
 	 * @generated
 	 */
-	EReference getDocument_WebPageBody();
+	EReference getCompleteDocument_WebPageBody();
+
+	/**
+	 * Returns the meta object for class '{@link html.ContentDocument <em>Content Document</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Content Document</em>'.
+	 * @see html.ContentDocument
+	 * @generated
+	 */
+	EClass getContentDocument();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link html.ContentDocument#getContent <em>Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Content</em>'.
+	 * @see html.ContentDocument#getContent()
+	 * @see #getContentDocument()
+	 * @generated
+	 */
+	EReference getContentDocument_Content();
 
 	/**
 	 * Returns the meta object for class '{@link html.DocType <em>Doc Type</em>}'.
@@ -4848,12 +4926,22 @@ public interface HtmlPackage extends EPackage {
 		EClass DOCUMENT = eINSTANCE.getDocument();
 
 		/**
+		 * The meta object literal for the '{@link html.impl.CompleteDocumentImpl <em>Complete Document</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see html.impl.CompleteDocumentImpl
+		 * @see html.impl.HtmlPackageImpl#getCompleteDocument()
+		 * @generated
+		 */
+		EClass COMPLETE_DOCUMENT = eINSTANCE.getCompleteDocument();
+
+		/**
 		 * The meta object literal for the '<em><b>Doctype</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOCUMENT__DOCTYPE = eINSTANCE.getDocument_Doctype();
+		EReference COMPLETE_DOCUMENT__DOCTYPE = eINSTANCE.getCompleteDocument_Doctype();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
@@ -4861,7 +4949,7 @@ public interface HtmlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOCUMENT__PARAMETERS = eINSTANCE.getDocument_Parameters();
+		EReference COMPLETE_DOCUMENT__PARAMETERS = eINSTANCE.getCompleteDocument_Parameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Web Page Body</b></em>' containment reference feature.
@@ -4869,7 +4957,25 @@ public interface HtmlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOCUMENT__WEB_PAGE_BODY = eINSTANCE.getDocument_WebPageBody();
+		EReference COMPLETE_DOCUMENT__WEB_PAGE_BODY = eINSTANCE.getCompleteDocument_WebPageBody();
+
+		/**
+		 * The meta object literal for the '{@link html.impl.ContentDocumentImpl <em>Content Document</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see html.impl.ContentDocumentImpl
+		 * @see html.impl.HtmlPackageImpl#getContentDocument()
+		 * @generated
+		 */
+		EClass CONTENT_DOCUMENT = eINSTANCE.getContentDocument();
+
+		/**
+		 * The meta object literal for the '<em><b>Content</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTENT_DOCUMENT__CONTENT = eINSTANCE.getContentDocument_Content();
 
 		/**
 		 * The meta object literal for the '{@link html.impl.DocTypeImpl <em>Doc Type</em>}' class.

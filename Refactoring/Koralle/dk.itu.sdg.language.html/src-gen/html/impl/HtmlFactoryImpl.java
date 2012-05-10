@@ -60,7 +60,8 @@ public class HtmlFactoryImpl extends EFactoryImpl implements HtmlFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case HtmlPackage.DOCUMENT: return createDocument();
+			case HtmlPackage.COMPLETE_DOCUMENT: return createCompleteDocument();
+			case HtmlPackage.CONTENT_DOCUMENT: return createContentDocument();
 			case HtmlPackage.DOC_TYPE: return createDocType();
 			case HtmlPackage.STRING_VAL_PARAMETER: return createStringValParameter();
 			case HtmlPackage.COLOR_VAL_PARAMETER: return createColorValParameter();
@@ -147,9 +148,19 @@ public class HtmlFactoryImpl extends EFactoryImpl implements HtmlFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Document createDocument() {
-		DocumentImpl document = new DocumentImpl();
-		return document;
+	public CompleteDocument createCompleteDocument() {
+		CompleteDocumentImpl completeDocument = new CompleteDocumentImpl();
+		return completeDocument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContentDocument createContentDocument() {
+		ContentDocumentImpl contentDocument = new ContentDocumentImpl();
+		return contentDocument;
 	}
 
 	/**

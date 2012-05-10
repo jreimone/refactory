@@ -76,6 +76,14 @@ public class HtmlAdapterFactory extends AdapterFactoryImpl {
 				return createDocumentAdapter();
 			}
 			@Override
+			public Adapter caseCompleteDocument(CompleteDocument object) {
+				return createCompleteDocumentAdapter();
+			}
+			@Override
+			public Adapter caseContentDocument(ContentDocument object) {
+				return createContentDocumentAdapter();
+			}
+			@Override
 			public Adapter caseDocType(DocType object) {
 				return createDocTypeAdapter();
 			}
@@ -430,6 +438,34 @@ public class HtmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDocumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link html.CompleteDocument <em>Complete Document</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see html.CompleteDocument
+	 * @generated
+	 */
+	public Adapter createCompleteDocumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link html.ContentDocument <em>Content Document</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see html.ContentDocument
+	 * @generated
+	 */
+	public Adapter createContentDocumentAdapter() {
 		return null;
 	}
 

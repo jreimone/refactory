@@ -26,13 +26,22 @@ public interface HtmlFactory extends EFactory {
 	HtmlFactory eINSTANCE = html.impl.HtmlFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Document</em>'.
+	 * Returns a new object of class '<em>Complete Document</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Document</em>'.
+	 * @return a new object of class '<em>Complete Document</em>'.
 	 * @generated
 	 */
-	Document createDocument();
+	CompleteDocument createCompleteDocument();
+
+	/**
+	 * Returns a new object of class '<em>Content Document</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Content Document</em>'.
+	 * @generated
+	 */
+	ContentDocument createContentDocument();
 
 	/**
 	 * Returns a new object of class '<em>Doc Type</em>'.

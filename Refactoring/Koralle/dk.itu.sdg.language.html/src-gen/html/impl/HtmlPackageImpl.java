@@ -22,7 +22,9 @@ import html.CenterTag;
 import html.CiteTag;
 import html.CodeTag;
 import html.ColorValParameter;
+import html.CompleteDocument;
 import html.Content;
+import html.ContentDocument;
 import html.DSLTag;
 import html.DSLTagStructure;
 import html.DdItem;
@@ -111,6 +113,20 @@ public class HtmlPackageImpl extends EPackageImpl implements HtmlPackage {
 	 * @generated
 	 */
 	private EClass documentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass completeDocumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass contentDocumentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -754,8 +770,8 @@ public class HtmlPackageImpl extends EPackageImpl implements HtmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDocument_Doctype() {
-		return (EReference)documentEClass.getEStructuralFeatures().get(0);
+	public EClass getCompleteDocument() {
+		return completeDocumentEClass;
 	}
 
 	/**
@@ -763,8 +779,8 @@ public class HtmlPackageImpl extends EPackageImpl implements HtmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDocument_Parameters() {
-		return (EReference)documentEClass.getEStructuralFeatures().get(1);
+	public EReference getCompleteDocument_Doctype() {
+		return (EReference)completeDocumentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -772,8 +788,35 @@ public class HtmlPackageImpl extends EPackageImpl implements HtmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDocument_WebPageBody() {
-		return (EReference)documentEClass.getEStructuralFeatures().get(2);
+	public EReference getCompleteDocument_Parameters() {
+		return (EReference)completeDocumentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompleteDocument_WebPageBody() {
+		return (EReference)completeDocumentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getContentDocument() {
+		return contentDocumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContentDocument_Content() {
+		return (EReference)contentDocumentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2317,9 +2360,14 @@ public class HtmlPackageImpl extends EPackageImpl implements HtmlPackage {
 
 		// Create classes and their features
 		documentEClass = createEClass(DOCUMENT);
-		createEReference(documentEClass, DOCUMENT__DOCTYPE);
-		createEReference(documentEClass, DOCUMENT__PARAMETERS);
-		createEReference(documentEClass, DOCUMENT__WEB_PAGE_BODY);
+
+		completeDocumentEClass = createEClass(COMPLETE_DOCUMENT);
+		createEReference(completeDocumentEClass, COMPLETE_DOCUMENT__DOCTYPE);
+		createEReference(completeDocumentEClass, COMPLETE_DOCUMENT__PARAMETERS);
+		createEReference(completeDocumentEClass, COMPLETE_DOCUMENT__WEB_PAGE_BODY);
+
+		contentDocumentEClass = createEClass(CONTENT_DOCUMENT);
+		createEReference(contentDocumentEClass, CONTENT_DOCUMENT__CONTENT);
 
 		docTypeEClass = createEClass(DOC_TYPE);
 		createEReference(docTypeEClass, DOC_TYPE__PARAMETERS);
@@ -2599,10 +2647,13 @@ public class HtmlPackageImpl extends EPackageImpl implements HtmlPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		completeDocumentEClass.getESuperTypes().add(this.getDocument());
+		contentDocumentEClass.getESuperTypes().add(this.getDocument());
 		stringValParameterEClass.getESuperTypes().add(this.getParameter());
 		colorValParameterEClass.getESuperTypes().add(this.getParameter());
 		idValParameterEClass.getESuperTypes().add(this.getParameter());
 		idParameterEClass.getESuperTypes().add(this.getParameter());
+		stringParameterEClass.getESuperTypes().add(this.getParameter());
 		titleItemEClass.getESuperTypes().add(this.getHeadItem());
 		metaItemEClass.getESuperTypes().add(this.getHeadItem());
 		linkItemEClass.getESuperTypes().add(this.getHeadItem());
@@ -2665,10 +2716,15 @@ public class HtmlPackageImpl extends EPackageImpl implements HtmlPackage {
 		dslTagStructureEClass.getESuperTypes().add(this.getTag());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(documentEClass, Document.class, "Document", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDocument_Doctype(), this.getDocType(), null, "doctype", null, 0, 1, Document.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDocument_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Document.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDocument_WebPageBody(), this.getWebPageBody(), null, "webPageBody", null, 0, 1, Document.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(documentEClass, Document.class, "Document", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(completeDocumentEClass, CompleteDocument.class, "CompleteDocument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompleteDocument_Doctype(), this.getDocType(), null, "doctype", null, 0, 1, CompleteDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompleteDocument_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, CompleteDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompleteDocument_WebPageBody(), this.getWebPageBody(), null, "webPageBody", null, 0, 1, CompleteDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(contentDocumentEClass, ContentDocument.class, "ContentDocument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getContentDocument_Content(), this.getContent(), null, "content", null, 0, 1, ContentDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(docTypeEClass, DocType.class, "DocType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDocType_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, DocType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
