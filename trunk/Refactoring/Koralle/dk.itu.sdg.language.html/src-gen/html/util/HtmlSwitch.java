@@ -76,6 +76,20 @@ public class HtmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case HtmlPackage.COMPLETE_DOCUMENT: {
+				CompleteDocument completeDocument = (CompleteDocument)theEObject;
+				T result = caseCompleteDocument(completeDocument);
+				if (result == null) result = caseDocument(completeDocument);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case HtmlPackage.CONTENT_DOCUMENT: {
+				ContentDocument contentDocument = (ContentDocument)theEObject;
+				T result = caseContentDocument(contentDocument);
+				if (result == null) result = caseDocument(contentDocument);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case HtmlPackage.DOC_TYPE: {
 				DocType docType = (DocType)theEObject;
 				T result = caseDocType(docType);
@@ -119,6 +133,7 @@ public class HtmlSwitch<T> extends Switch<T> {
 			case HtmlPackage.STRING_PARAMETER: {
 				StringParameter stringParameter = (StringParameter)theEObject;
 				T result = caseStringParameter(stringParameter);
+				if (result == null) result = caseParameter(stringParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -644,6 +659,36 @@ public class HtmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDocument(Document object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complete Document</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complete Document</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompleteDocument(CompleteDocument object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Content Document</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Content Document</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContentDocument(ContentDocument object) {
 		return null;
 	}
 
