@@ -1,11 +1,14 @@
 package dk.itu.sdg.language.coral.resource.coral.mopp
 
+import org.eclipse.core.internal.registry.osgi.Activator
+import org.eclipse.core.runtime.FileLocator
+import org.eclipse.core.runtime.IPath
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path
 import org.eclipse.emf.common.util.URI;
+import org.osgi.framework.Bundle
 
-import dk.itu.sdg.language.coral.Relation;
-import dk.itu.sdg.language.coral.impl.CoralImpl;
 import dk.itu.sdg.language.coral.resource.coral.ICoralBuilder
 
 import groovy.text.GStringTemplateEngine
@@ -34,8 +37,13 @@ class GCoralBuilder implements ICoralBuilder {
 		
 		def binding = ["firstname":"Sam", "lastname":"Pullara", "city":"San Francisco", "month":"December", "signed":"Groovy-Dev"]
 		
-		//TODO: make this string portable!!!
-		def file = new File('/Users/ropf/Documents/eclipse/indigo_dresden/dk.itu.sdg.language.coral.resource.coral/src/dk/itu/sdg/language/coral/resource/coral/mopp/Generator.template')
+		
+		def Bundle bundle = Activator.getDefault().getBundle();
+		def IPath path = new Path("src/dk/itu/sdg/language/coral/resource/coral/mopp/Generator.template");
+		def URL groovyClassUrl = FileLocator.find(bundle, path, Collections.EMPTY_MAP);
+		def File file = new File(FileLocator.toFileURL(groovyClassUrl).toURI());
+		
+		
 		def engine = new GStringTemplateEngine()
 		def template = engine.createTemplate(file).make([greeting: 'Welcome'])
 		println template.toString()
