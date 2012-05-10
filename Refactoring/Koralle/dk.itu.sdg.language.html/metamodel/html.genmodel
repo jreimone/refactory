@@ -6,10 +6,14 @@
     complianceLevel="5.0" copyrightFields="false">
   <foreignModel>html.text.ecore</foreignModel>
   <genPackages prefix="Html" disposableProviderFactory="true" ecorePackage="html.text.ecore#/">
-    <genClasses ecoreClass="html.text.ecore#//Document">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference html.text.ecore#//Document/doctype"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference html.text.ecore#//Document/parameters"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference html.text.ecore#//Document/webPageBody"/>
+    <genClasses ecoreClass="html.text.ecore#//Document"/>
+    <genClasses ecoreClass="html.text.ecore#//CompleteDocument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference html.text.ecore#//CompleteDocument/doctype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference html.text.ecore#//CompleteDocument/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference html.text.ecore#//CompleteDocument/webPageBody"/>
+    </genClasses>
+    <genClasses ecoreClass="html.text.ecore#//ContentDocument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference html.text.ecore#//ContentDocument/content"/>
     </genClasses>
     <genClasses ecoreClass="html.text.ecore#//DocType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference html.text.ecore#//DocType/parameters"/>

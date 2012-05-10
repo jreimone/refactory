@@ -3,10 +3,17 @@ package html // this is the package name
         "http://www.itu.dk/language/html" // the namespace URI 
 	{
 
-	class Document {
+	abstract class Document {
+	}
+
+	class CompleteDocument extends Document {
 		containment reference DocType doctype (0..1);
 		containment reference Parameter parameters (0..-1);
 		containment reference WebPageBody webPageBody (0..1);
+	}
+	
+	class ContentDocument extends Document {
+		containment reference Content content (0..1);
 	}
 
 	class DocType {
@@ -35,7 +42,7 @@ package html // this is the package name
 		attribute EString name;
 	}
 	
-	class StringParameter {
+	class StringParameter extends Parameter {
 		attribute EString name;
 	}
 	
