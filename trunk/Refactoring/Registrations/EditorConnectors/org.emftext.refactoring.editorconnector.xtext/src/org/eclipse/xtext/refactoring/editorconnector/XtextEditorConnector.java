@@ -57,6 +57,9 @@ public class XtextEditorConnector implements IEditorConnector {
 	}
 
 	public boolean canHandle(IEditorPart editor) {
+		if(editor == null){
+			return false;
+		}
 		if(editor instanceof XtextEditor){
 			this.editor = (XtextEditor) editor;
 			IXtextDocument doc = XtextDocumentUtil.get(editor);
@@ -90,7 +93,7 @@ public class XtextEditorConnector implements IEditorConnector {
 					ITextSelection textSelection = (ITextSelection) selection;
 					Set<EObject> elementSet = new LinkedHashSet<EObject>();
 					int offset = textSelection.getOffset();
-					for (int i = textSelection.getLength(); i > 0; i--) {
+					for (int i = (textSelection.getLength() == 0 ? 1 : textSelection.getLength()); i > 0; i--) {
 						EObject element = objectAtOffsetHelper.resolveElementAt(state, offset);
 						elementSet.add(element);
 						offset++;
