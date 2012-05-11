@@ -42,6 +42,9 @@ public class EMFTextEditorConnector implements IEditorConnector {
 	}
 
 	public boolean canHandle(IEditorPart editor) {
+		if(editor == null){
+			return false;
+		}
 		if(EMFTextAccessProxy.isAccessibleWith(editor.getClass(), IEditor.class)){
 			this.editor = editor;
 			return true;
