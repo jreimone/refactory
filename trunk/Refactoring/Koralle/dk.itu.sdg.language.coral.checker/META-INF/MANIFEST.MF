@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.ui,
  dk.itu.sdg.language.html;bundle-version="1.0.0",
  org.emftext.language.java;bundle-version="1.0.0",
  org.emftext.language.javaproperties;bundle-version="0.3.0",
- org.codehaus.groovy;bundle-version="1.8.6"
+ org.codehaus.groovy;bundle-version="1.8.6",
+ de.devboost.smarttext;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: de.devboost.smarttext.resource.stxt.mopp,

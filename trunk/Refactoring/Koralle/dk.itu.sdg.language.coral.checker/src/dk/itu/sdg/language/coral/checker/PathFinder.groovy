@@ -188,7 +188,8 @@ class PathFinder {
 						def CommonSubStrings commonsSub = new CommonSubStrings();
 						def CommonString common = commonsSub.longestSubstring(fstCommon.fst, sndCommon.fst);
 						def commonContent = common.commonString
-						 
+						
+						//TODO: Differenzen rein füttern und nicht was gleich ist. Sonst hat man viele checks für ähnliche generiert 
 						stringTransformRelation.add([common:commonContent, fstTypeName:fstCandidateElement.getClass().getName(), fstAttrName:fstAttr?.getName(), sndTypeName:sndCandidateElement.getClass().getName(), sndAttrName:sndAttr?.getName()])
 					}
 				}
