@@ -224,7 +224,7 @@ ${stringTransformMethods}
 	}
 	
 	def static Boolean stringTransformName${index}(${fstTypeName} leftHand, ${sndTypeName} rightHand) {						
-		if (leftHand.${fstAttrName}.toLowerCase().contains("${common}".toLowerCase()) && rightHand.${sndAttrName}.toLowerCase().contains("${common}".toLowerCase())) {
+		if (leftHand.${fstAttrName}.toLowerCase().contains(\'\'\'${common}\'\'\'.toLowerCase()) && rightHand.${sndAttrName}.toLowerCase().contains(\'\'\'${common}\'\'\'.toLowerCase())) {
 			return true	
 		}
 		return false
