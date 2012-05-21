@@ -68,6 +68,10 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_WX0mBJUDEeG-CeAr07OHmw"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_WX0mBZUDEeG-CeAr07OHmw" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_jFBS0KMkEeG2kP_lseQV6w" type="2002">
+        <element xmi:type="ecore:EOperation" href="operators.ecore#//DELETE/execute"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jFBS0aMkEeG2kP_lseQV6w"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_WX0mBpUDEeG-CeAr07OHmw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_WX0mB5UDEeG-CeAr07OHmw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_WX0mCJUDEeG-CeAr07OHmw"/>
