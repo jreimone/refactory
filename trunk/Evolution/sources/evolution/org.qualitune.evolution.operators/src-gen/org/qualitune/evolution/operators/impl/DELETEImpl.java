@@ -200,10 +200,8 @@ public class DELETEImpl extends OperatorImpl implements DELETE {
 		List<Diagnostic> errors = new BasicEList<Resource.Diagnostic>();
 		EObject deletion = OperatorsUtil.getEObjectFromReferrable(referrable, errors);
 		if(deletion == null){
-			for (Diagnostic error : errors) {
-				OperatorsUtil.addErrorToResourceOf(this, error);
-				return;
-			}
+			OperatorsUtil.addErrorsToResourceOf(this, errors);
+			return;
 		} else {
 			EcoreUtil.delete(deletion, true);
 		}

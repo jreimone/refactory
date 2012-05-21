@@ -329,7 +329,7 @@ public class CREATEImpl extends OperatorImpl implements CREATE {
 		final EClass metaclass = variable.getType();
 		EObjectReference result = OperatorsFactory.eINSTANCE.createEObjectReference();
 		if(metaclass.isAbstract() || metaclass.isInterface()){
-			OperatorsUtil.addErrorToResourceOf(this, "Metaclass " + metaclass.getName() + " must not be abstract");
+			OperatorsUtil.createDiagnostic(this, "Metaclass " + metaclass.getName() + " must not be abstract");
 			return;
 		}
 		EObject instance = EcoreUtil.create(metaclass);
@@ -337,20 +337,18 @@ public class CREATEImpl extends OperatorImpl implements CREATE {
 		variable.setValue(instance);
 		EReference containmentReference = getParentCompositeReference();
 		if(!containmentReference.isContainment()){
-			OperatorsUtil.addErrorToResourceOf(this, "Reference " + containmentReference.getName() + " must be a containment reference");
+			OperatorsUtil.createDiagnostic(this, "Reference " + containmentReference.getName() + " must be a containment reference");
 			return;
 		}
 		if(!containmentReference.getEReferenceType().isInstance(instance)){
-			OperatorsUtil.addErrorToResourceOf(this, "The type of reference '" + containmentReference.getName() + "' doesn't correspond to the referenced metaclass '" + metaclass.getName() + "'.");
+			OperatorsUtil.createDiagnostic(this, "The type of reference '" + containmentReference.getName() + "' doesn't correspond to the referenced metaclass '" + metaclass.getName() + "'.");
 			return;
 		}
 		Referrable parentReferrable = getParent();
 		List<Resource.Diagnostic> errors = new BasicEList<Resource.Diagnostic>();
 		EObject parent = OperatorsUtil.getEObjectFromReferrable(parentReferrable, errors);
 		if(parent == null){
-			for (Resource.Diagnostic error : errors) {
-				OperatorsUtil.addErrorToResourceOf(this, error);
-			}
+			OperatorsUtil.addErrorsToResourceOf(this, errors);
 			return;
 		}
 		if(containmentReference.isMany()){

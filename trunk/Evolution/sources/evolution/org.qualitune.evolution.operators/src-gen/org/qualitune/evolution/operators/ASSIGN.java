@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EAttribute;
  * <ul>
  *   <li>{@link org.qualitune.evolution.operators.ASSIGN#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link org.qualitune.evolution.operators.ASSIGN#getValue <em>Value</em>}</li>
+ *   <li>{@link org.qualitune.evolution.operators.ASSIGN#getAttributeOwner <em>Attribute Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,5 +88,39 @@ public interface ASSIGN extends Operator {
 	 * @generated
 	 */
 	void setValue(Object value);
+
+	/**
+	 * Returns the value of the '<em><b>Attribute Owner</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attribute Owner</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attribute Owner</em>' containment reference.
+	 * @see #setAttributeOwner(Referrable)
+	 * @see org.qualitune.evolution.operators.OperatorsPackage#getASSIGN_AttributeOwner()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	Referrable getAttributeOwner();
+
+	/**
+	 * Sets the value of the '{@link org.qualitune.evolution.operators.ASSIGN#getAttributeOwner <em>Attribute Owner</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Attribute Owner</em>' containment reference.
+	 * @see #getAttributeOwner()
+	 * @generated
+	 */
+	void setAttributeOwner(Referrable value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void execute();
 
 } // ASSIGN

@@ -227,7 +227,7 @@ public class VARImpl extends OperatorImpl implements VAR {
 					if(results != null && results.size() == 1){
 						contextObject = results.get(0);
 					} else {
-						OperatorsUtil.addErrorToResourceOf(this, "Variable " + referencedVariable.getName() + " refers to a list containing more than 1 element");
+						OperatorsUtil.createDiagnostic(this, "Variable " + referencedVariable.getName() + " refers to a list containing more than 1 element");
 					}
 				}
 			}
