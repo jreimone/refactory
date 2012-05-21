@@ -42,6 +42,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DELETE" eSuperTypes="#//Operator">
+    <eOperations name="execute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deletion" lowerBound="1"
         eType="#//Referrable" containment="true"/>
   </eClassifiers>
