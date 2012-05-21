@@ -76,7 +76,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_WX0mB5UDEeG-CeAr07OHmw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_WX0mCJUDEeG-CeAr07OHmw"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_WXw7oZUDEeG-CeAr07OHmw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_WXw7oZUDEeG-CeAr07OHmw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="8454016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="operators.ecore#//DELETE"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WXw7opUDEeG-CeAr07OHmw" x="270" y="305"/>
   </children>
