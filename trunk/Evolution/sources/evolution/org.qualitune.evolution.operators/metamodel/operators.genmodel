@@ -12,10 +12,13 @@
       ecorePackage="operators.ecore#/">
     <genClasses image="false" ecoreClass="operators.ecore#//Operator">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//Operator/result"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute operators.ecore#//Operator/executed"/>
+      <genOperations ecoreOperation="operators.ecore#//Operator/execute"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//CREATE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//CREATE/newInstanceVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//CREATE/parent"/>
+      <genOperations ecoreOperation="operators.ecore#//CREATE/execute"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//TypeVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//TypeVariable/type"/>
@@ -60,6 +63,7 @@
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//VAR">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//VAR/variable"/>
+      <genOperations ecoreOperation="operators.ecore#//VAR/execute"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//QueryVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/operation"/>

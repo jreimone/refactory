@@ -1,9 +1,19 @@
 package operators
 
+context Variable inv nameNotNull:
+not(self.name = null)
+
+-- either operation or structural feature must be set
 context QueryVariable inv operationFeatureXOR:
 self.operation = null xor self.structuralFeature = null 
 
-context QueryVariable inv test:
-not(self.name = null)
+
+-- referenced type of TypeVariable must not be abstract
+context TypeVariable inv typeMustBeConcrete:
+not(self.type.abstract = true)
+
+-- referenced EReference must be a containment to create a child
+context CREATE inv containmentReference:
+self.parentCompositeReference.containment = true
 
 endpackage 

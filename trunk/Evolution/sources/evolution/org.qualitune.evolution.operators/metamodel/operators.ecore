@@ -17,12 +17,27 @@
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//Operator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="containmentReference"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="containmentReference" value="self.parentCompositeReference.containment = true"/>
+    </eAnnotations>
+    <eOperations name="execute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="newInstanceVariable" lowerBound="1"
         eType="#//TypeVariable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Referrable"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+        eType="#//Referrable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentCompositeReference"
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" eSuperTypes="#//Variable">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="typeMustBeConcrete" value="not(self.type.abstract = true)"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="typeMustBeConcrete"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
   </eClassifiers>
@@ -87,7 +102,7 @@
       <details key="nameNotNull" value="not(self.name = null)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="operationFeatureXOR nameNotNull"/>
+      <details key="constraints" value="operationFeatureXOR"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeature" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature"/>
