@@ -47,9 +47,12 @@
         eType="#//Referrable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ASSIGN" eSuperTypes="#//Operator">
+    <eOperations name="execute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeOwner" lowerBound="1"
+        eType="#//Referrable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EObjectReference" eSuperTypes="#//Result #//Referrable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.qualitune.evolution.operators.EObjectReference;
 import org.qualitune.evolution.operators.PrimitiveReference;
 import org.qualitune.evolution.operators.QueryVariable;
@@ -35,7 +36,7 @@ public abstract class OperatorsUtil {
 		if(referrable instanceof EObjectReference){
 			List<EObject> elements = ((EObjectReference) referrable).getElement();
 			if(elements.size() != 1){
-				errors.add(addErrorToResourceOf(referrable, "The referenced parent must not be a multi-valued list"));
+				errors.add(createDiagnostic(referrable, "The referenced parent must not be a multi-valued list"));
 				return null;
 			}
 			result = elements.get(0);
@@ -46,12 +47,12 @@ public abstract class OperatorsUtil {
 				if(queryResult instanceof EObjectReference){
 					List<EObject> elements = ((EObjectReference) queryResult).getElement();
 					if(elements.size() != 1){
-						OperatorsUtil.addErrorToResourceOf(referrable, "The referenced parent must not be a multi-valued list");
+						errors.add(createDiagnostic(referrable, "The referenced parent must not be a multi-valued list"));
 						return null;
 					}
 					result = elements.get(0);
 				} else if(queryResult instanceof PrimitiveReference){
-					OperatorsUtil.addErrorToResourceOf(referrable, "The referenced parent must not be a primitive type");
+					errors.add(createDiagnostic(referrable, "The referenced parent must not be a primitive type"));
 					return null;
 				}
 			} else if(referencedVariable instanceof TypeVariable){
@@ -60,7 +61,7 @@ public abstract class OperatorsUtil {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Adds the given <code>error</code> to the resource of the given <code>element</code>.
 	 * @param element
@@ -74,15 +75,31 @@ public abstract class OperatorsUtil {
 		}
 		return resource;
 	}
-	
+
 	/**
-	 * Creates and {@link Diagnostic} to the resource of the given <code>element</code> with the given
+	 * Registers the given <code>errors</code> in the resource for the given <code>element</code>.
+	 * Returns the resource of the element or <code>null</code> if no resource exists.
+	 * 
+	 * @param element
+	 * @param errors
+	 * @return
+	 */
+	public static Resource addErrorsToResourceOf(EObject element, List<Diagnostic> errors){
+		Resource resource = null;
+		for (Diagnostic error : errors) {
+			resource = addErrorToResourceOf(element, error);
+		}
+		return resource;
+	}
+
+	/**
+	 * Creates a {@link Diagnostic} to the resource of the given <code>element</code> with the given
 	 * <code>errorsMessage</code>. Returns <code>null</code> if the element has no resource.
 	 * @param element
 	 * @param errorMessage
 	 * @return
 	 */
-	public static Resource.Diagnostic addErrorToResourceOf(final EObject element, final String errorMessage){
+	public static Resource.Diagnostic createDiagnostic(final EObject element, final String errorMessage){
 		Resource.Diagnostic diagnostic = new Resource.Diagnostic() {
 
 			@Override
@@ -109,10 +126,6 @@ public abstract class OperatorsUtil {
 				return 0;
 			}
 		};
-		Resource resource = addErrorToResourceOf(element, diagnostic);
-		if(resource != null){
-			return diagnostic;
-		}
-		return null;
+		return diagnostic;
 	}
 }

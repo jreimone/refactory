@@ -385,6 +385,15 @@ public class OperatorsPackageImpl extends EPackageImpl implements OperatorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getASSIGN_AttributeOwner() {
+		return (EReference)assignEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEObjectReference() {
 		return eObjectReferenceEClass;
 	}
@@ -706,6 +715,7 @@ public class OperatorsPackageImpl extends EPackageImpl implements OperatorsPacka
 		assignEClass = createEClass(ASSIGN);
 		createEReference(assignEClass, ASSIGN__ATTRIBUTE);
 		createEAttribute(assignEClass, ASSIGN__VALUE);
+		createEReference(assignEClass, ASSIGN__ATTRIBUTE_OWNER);
 
 		eObjectReferenceEClass = createEClass(EOBJECT_REFERENCE);
 		createEReference(eObjectReferenceEClass, EOBJECT_REFERENCE__ELEMENT);
@@ -824,6 +834,9 @@ public class OperatorsPackageImpl extends EPackageImpl implements OperatorsPacka
 		initEClass(assignEClass, org.qualitune.evolution.operators.ASSIGN.class, "ASSIGN", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getASSIGN_Attribute(), theEcorePackage.getEAttribute(), null, "attribute", null, 1, 1, org.qualitune.evolution.operators.ASSIGN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getASSIGN_Value(), ecorePackage.getEJavaObject(), "value", null, 1, 1, org.qualitune.evolution.operators.ASSIGN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getASSIGN_AttributeOwner(), this.getReferrable(), null, "attributeOwner", null, 1, 1, org.qualitune.evolution.operators.ASSIGN.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(assignEClass, null, "execute", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eObjectReferenceEClass, EObjectReference.class, "EObjectReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEObjectReference_Element(), theEcorePackage.getEObject(), null, "element", null, 1, -1, EObjectReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

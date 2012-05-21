@@ -338,13 +338,22 @@ public interface OperatorsPackage extends EPackage {
 	int ASSIGN__VALUE = OPERATOR_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Attribute Owner</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGN__ATTRIBUTE_OWNER = OPERATOR_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>ASSIGN</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_FEATURE_COUNT = OPERATOR_FEATURE_COUNT + 2;
+	int ASSIGN_FEATURE_COUNT = OPERATOR_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.evolution.operators.impl.ResultImpl <em>Result</em>}' class.
@@ -988,6 +997,17 @@ public interface OperatorsPackage extends EPackage {
 	EAttribute getASSIGN_Value();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.qualitune.evolution.operators.ASSIGN#getAttributeOwner <em>Attribute Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Attribute Owner</em>'.
+	 * @see org.qualitune.evolution.operators.ASSIGN#getAttributeOwner()
+	 * @see #getASSIGN()
+	 * @generated
+	 */
+	EReference getASSIGN_AttributeOwner();
+
+	/**
 	 * Returns the meta object for class '{@link org.qualitune.evolution.operators.EObjectReference <em>EObject Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1466,6 +1486,14 @@ public interface OperatorsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ASSIGN__VALUE = eINSTANCE.getASSIGN_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Attribute Owner</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGN__ATTRIBUTE_OWNER = eINSTANCE.getASSIGN_AttributeOwner();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.evolution.operators.impl.EObjectReferenceImpl <em>EObject Reference</em>}' class.
