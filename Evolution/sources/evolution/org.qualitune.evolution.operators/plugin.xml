@@ -26,5 +26,49 @@
             class="org.qualitune.evolution.operators.OperatorsPackage"
             genModel="metamodel/operators.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            id="org.qualitune.evolution.operators.category.ocl"
+            mandatory="true"
+            name="Operators OCL constraints">
+      </category>
+      <constraintProvider
+            cache="true"
+            mode="Live">
+         <package
+               namespaceUri="http://www.qualitune.org/operators">
+         </package>
+         <constraints
+               categories="org.qualitune.evolution.operators.category.ocl">
+            <constraint
+                  class="org.qualitune.evolution.operators.util.OCLConstraintProvider"
+                  id="org.qualitune.evolution.operators.OCLconstraintWrapper"
+                  lang="Java"
+                  mode="Live"
+                  name="Constraint which wraps the defined OCL constraints"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  message body text
+               </message>
+               <description>
+                  Invokes validation by delegating to OCL interpretation.
+               </description>
+            </constraint></constraints>
+      </constraintProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext
+            default="false"
+            id="org.qualitune.evolution.operators.OCLclientContext">
+         <enablement></enablement>
+      </clientContext>
+      <binding
+            category="org.qualitune.evolution.operators.category.ocl"
+            context="org.qualitune.evolution.operators.OCLclientContext">
+      </binding>
+   </extension>
 
 </plugin>

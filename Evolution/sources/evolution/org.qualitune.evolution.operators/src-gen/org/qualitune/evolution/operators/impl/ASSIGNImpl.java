@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -332,6 +333,15 @@ public class ASSIGNImpl extends OperatorImpl implements ASSIGN {
 		if(owner == null){
 			OperatorsUtil.addErrorsToResourceOf(this, errors);
 			return;
+		}
+		Object value = getValue();
+		EAttribute attribute = getAttribute();
+		EClassifier type = attribute.getEType();
+		if(type.isInstance(value)){
+			owner.eSet(attribute, value);
+		} else {
+			Diagnostic diagnostic = OperatorsUtil.createDiagnostic(this, "The type '" + type.getName() + "' is not compatible with the value '" + value + "'");
+			OperatorsUtil.addErrorToResourceOf(this, diagnostic);
 		}
 		super.execute();
 	}
