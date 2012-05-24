@@ -100,7 +100,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_qTaKspUDEeG-CeAr07OHmw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_qTaKs5UDEeG-CeAr07OHmw"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_qTV5QZUDEeG-CeAr07OHmw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_qTV5QZUDEeG-CeAr07OHmw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="8454016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="operators.ecore#//ASSIGN"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qTV5QpUDEeG-CeAr07OHmw" x="245" y="390"/>
   </children>
