@@ -475,6 +475,15 @@ public class OperatorsPackageImpl extends EPackageImpl implements OperatorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSET_ReferenceOwner() {
+		return (EReference)setEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVariableReference() {
 		return variableReferenceEClass;
 	}
@@ -730,6 +739,7 @@ public class OperatorsPackageImpl extends EPackageImpl implements OperatorsPacka
 		setEClass = createEClass(SET);
 		createEReference(setEClass, SET__REFERENCE);
 		createEReference(setEClass, SET__VALUE);
+		createEReference(setEClass, SET__REFERENCE_OWNER);
 
 		variableReferenceEClass = createEClass(VARIABLE_REFERENCE);
 		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__REFERENCED_VARIABLE);
@@ -851,6 +861,9 @@ public class OperatorsPackageImpl extends EPackageImpl implements OperatorsPacka
 		initEClass(setEClass, org.qualitune.evolution.operators.SET.class, "SET", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSET_Reference(), theEcorePackage.getEReference(), null, "reference", null, 1, 1, org.qualitune.evolution.operators.SET.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSET_Value(), this.getReferrable(), null, "value", null, 1, 1, org.qualitune.evolution.operators.SET.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSET_ReferenceOwner(), this.getReferrable(), null, "referenceOwner", null, 1, 1, org.qualitune.evolution.operators.SET.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(setEClass, null, "execute", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(variableReferenceEClass, VariableReference.class, "VariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableReference_ReferencedVariable(), this.getVariable(), null, "referencedVariable", null, 1, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -859,6 +872,8 @@ public class OperatorsPackageImpl extends EPackageImpl implements OperatorsPacka
 		initEReference(getMOVE_NewParent(), this.getReferrable(), null, "newParent", null, 1, 1, org.qualitune.evolution.operators.MOVE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMOVE_ParentReference(), theEcorePackage.getEReference(), null, "parentReference", null, 1, 1, org.qualitune.evolution.operators.MOVE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMOVE_Movee(), this.getReferrable(), null, "movee", null, 1, 1, org.qualitune.evolution.operators.MOVE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(moveEClass, null, "execute", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(splitEClass, org.qualitune.evolution.operators.SPLIT.class, "SPLIT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSPLIT_SplitSets(), this.getStructuralFeatureSet(), null, "splitSets", null, 1, -1, org.qualitune.evolution.operators.SPLIT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

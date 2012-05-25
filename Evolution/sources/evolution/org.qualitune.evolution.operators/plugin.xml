@@ -28,6 +28,55 @@
    </extension>
    <extension
          point="org.eclipse.emf.validation.constraintProviders">
+
+    <category
+          id="org.emftext.language.refactoring.specification.category2"
+          mandatory="true"
+          name="RefSpec constraints">
+	</category>
+      
+    <constraintProvider
+          cache="true"
+          mode="Batch">
+         <package namespaceUri="http://www.qualitune.org/operators" />
+         
+         <constraints categories="org.emftext.language.refactoring.specification.category2">
+
+            <constraint
+                  class="org.qualitune.evolution.operators.util.OCLConstraintProvider"
+                  id="org.emftext.language.refactoring.specification.uniqueNameConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="Unique variable names"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  message body text
+               </message>
+               <description>
+                  All variable declarations (including index variables) in a RefSpec should have unique names.
+               </description>
+               <target
+                     class="RefactoringSpecification"></target>
+            </constraint>
+         </constraints>
+      </constraintProvider>
+   </extension>
+<extension point="org.eclipse.emf.validation.constraintBindings">
+    <clientContext
+          default="false"
+          id="org.emftext.language.refactoring.specification.clientContext2">
+        <enablement>
+        </enablement>
+	</clientContext>
+    <binding
+          category="org.emftext.language.refactoring.specification.category2"
+          context="org.emftext.language.refactoring.specification.clientContext2">
+    </binding>
+	</extension>
+   <!--
+   <extension
+         point="org.eclipse.emf.validation.constraintProviders">
       <category
             id="org.qualitune.evolution.operators.category.ocl"
             mandatory="true"
@@ -35,7 +84,7 @@
       </category>
       <constraintProvider
             cache="true"
-            mode="Live">
+            mode="Batch">
          <package
                namespaceUri="http://www.qualitune.org/operators">
          </package>
@@ -43,9 +92,9 @@
                categories="org.qualitune.evolution.operators.category.ocl">
             <constraint
                   class="org.qualitune.evolution.operators.util.OCLConstraintProvider"
-                  id="org.qualitune.evolution.operators.OCLconstraintWrapper"
+                  id="org.qualitune.evolution.operators.oclconstraintWrapper"
                   lang="Java"
-                  mode="Live"
+                  mode="Batch"
                   name="Constraint which wraps the defined OCL constraints"
                   severity="ERROR"
                   statusCode="1">
@@ -62,13 +111,16 @@
          point="org.eclipse.emf.validation.constraintBindings">
       <clientContext
             default="false"
-            id="org.qualitune.evolution.operators.OCLclientContext">
-         <enablement></enablement>
+            id="org.qualitune.evolution.operators.oclclientContext">
+         <enablement>
+            <instanceof
+                  value="org.eclipse.emf.ecore.EObject">
+            </instanceof></enablement>
       </clientContext>
       <binding
             category="org.qualitune.evolution.operators.category.ocl"
-            context="org.qualitune.evolution.operators.OCLclientContext">
+            context="org.qualitune.evolution.operators.oclclientContext">
       </binding>
    </extension>
-
+-->
 </plugin>

@@ -64,16 +64,20 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SET" eSuperTypes="#//Operator">
+    <eOperations name="execute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Referrable"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceOwner" lowerBound="1"
+        eType="#//Referrable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//Referrable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referencedVariable" lowerBound="1"
         eType="#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//Operator">
+    <eOperations name="execute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="newParent" lowerBound="1"
         eType="#//Referrable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentReference" lowerBound="1"

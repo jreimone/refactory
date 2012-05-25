@@ -32,6 +32,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 
 import org.qualitune.evolution.operators.ASSIGN;
+import org.qualitune.evolution.operators.EObjectReference;
+import org.qualitune.evolution.operators.OperatorsFactory;
 import org.qualitune.evolution.operators.OperatorsPackage;
 import org.qualitune.evolution.operators.Referrable;
 import org.qualitune.evolution.operators.util.OperatorsUtil;
@@ -340,9 +342,12 @@ public class ASSIGNImpl extends OperatorImpl implements ASSIGN {
 		if(type.isInstance(value)){
 			owner.eSet(attribute, value);
 		} else {
-			Diagnostic diagnostic = OperatorsUtil.createDiagnostic(this, "The type '" + type.getName() + "' is not compatible with the value '" + value + "'");
-			OperatorsUtil.addErrorToResourceOf(this, diagnostic);
+			OperatorsUtil.createDiagnosticAndAddToResource(this, "The type '" + type.getName() + "' is not compatible with the value '" + value + "'");
+			return;
 		}
+		EObjectReference result = OperatorsFactory.eINSTANCE.createEObjectReference();
+		result.getElement().add(attribute);
+		setResult(result);
 		super.execute();
 	}
 
