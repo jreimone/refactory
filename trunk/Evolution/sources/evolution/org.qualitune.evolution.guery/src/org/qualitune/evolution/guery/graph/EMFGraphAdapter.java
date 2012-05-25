@@ -62,8 +62,6 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex<Cluster>, Edge extends
 			EReference containmentFeature = element.eContainmentFeature();
 			assert container.eGet(containmentFeature, true).equals(element);
 			Edge edge = factory.createEdge(containerVertex, elementVertex, containmentFeature);
-			edge.setStart(containerVertex);
-			edge.setEnd(elementVertex);
 			graph.addEdge(edge, containerVertex, elementVertex, edgeType);
 			List<EReference> references = Util.getAllReferences(element);
 			for (EReference reference : references) {

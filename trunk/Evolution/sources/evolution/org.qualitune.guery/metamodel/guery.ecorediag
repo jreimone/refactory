@@ -184,7 +184,7 @@
     <children xmi:type="notation:Node" xmi:id="_4mydeF1jEeGfIOIMw6LnYg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_4mydeV1jEeGfIOIMw6LnYg" type="5001">
       <children xmi:type="notation:Node" xmi:id="_4mydel1jEeGfIOIMw6LnYg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="guery.ecore#//PreProcessor/className"/>
+        <element xmi:type="ecore:EAttribute" href="guery.ecore#//PreProcessor/class"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_4myde11jEeGfIOIMw6LnYg"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_4mydfF1jEeGfIOIMw6LnYg"/>
@@ -421,7 +421,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_hDKpcWOiEeGN_r2WG2-t7w" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_hDKpcmOiEeGN_r2WG2-t7w" fontName="Segoe UI"/>
     <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hDKpc2OiEeGN_r2WG2-t7w" points="[23, 14, -71, 43]$[49, 14, -45, 43]$[49, -24, -45, 5]$[79, -24, -15, 5]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hDKpc2OiEeGN_r2WG2-t7w" points="[23, 14, -71, 43]$[49, 14, -45, 43]$[49, -21, -45, 8]$[79, -21, -15, 8]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hDNFsGOiEeGN_r2WG2-t7w" id="(0.7927927927927928,0.2558139534883721)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hDNFsWOiEeGN_r2WG2-t7w" id="(0.1568627450980392,0.4186046511627907)"/>
   </edges>
@@ -429,7 +429,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_hiEzAWOiEeGN_r2WG2-t7w" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_hiEzAmOiEeGN_r2WG2-t7w" fontName="Segoe UI"/>
     <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hiEzA2OiEeGN_r2WG2-t7w" points="[-9, -20, 71, 120]$[-30, -143, 50, -3]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hiEzA2OiEeGN_r2WG2-t7w" points="[-20, -20, 60, 120]$[-20, -80, 60, 60]$[-70, -80, 10, 60]$[-70, -119, 10, 21]"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_pYijgGOjEeGN_r2WG2-t7w" type="3003" source="_4mydaV1jEeGfIOIMw6LnYg" target="_4Ui6sWOhEeGN_r2WG2-t7w">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_pYijgWOjEeGN_r2WG2-t7w" routing="Rectilinear" lineColor="4210752"/>
