@@ -31,7 +31,7 @@ public abstract class OperatorsUtil {
 	 * @param errors
 	 * @return
 	 */
-	public static EObject getEObjectFromReferrable(Referrable referrable, List<Resource.Diagnostic> errors){
+	public static EObject getEObjectFromReferrable(Referrable referrable, List<Diagnostic> errors){
 		EObject result = null;
 		if(referrable instanceof EObjectReference){
 			List<EObject> elements = ((EObjectReference) referrable).getElement();
@@ -127,5 +127,17 @@ public abstract class OperatorsUtil {
 			}
 		};
 		return diagnostic;
+	}
+	
+	/**
+	 * Creates an error and adds it to the resource.
+	 * @param element
+	 * @param errorMessage
+	 * @return
+	 */
+	public static Resource createDiagnosticAndAddToResource(final EObject element, final String errorMessage){
+		Diagnostic error = createDiagnostic(element, errorMessage);
+		Resource resource = addErrorToResourceOf(element, error);
+		return resource;
 	}
 }

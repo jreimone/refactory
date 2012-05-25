@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  * <ul>
  *   <li>{@link org.qualitune.evolution.operators.SET#getReference <em>Reference</em>}</li>
  *   <li>{@link org.qualitune.evolution.operators.SET#getValue <em>Value</em>}</li>
+ *   <li>{@link org.qualitune.evolution.operators.SET#getReferenceOwner <em>Reference Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,5 +88,39 @@ public interface SET extends Operator {
 	 * @generated
 	 */
 	void setValue(Referrable value);
+
+	/**
+	 * Returns the value of the '<em><b>Reference Owner</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reference Owner</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reference Owner</em>' containment reference.
+	 * @see #setReferenceOwner(Referrable)
+	 * @see org.qualitune.evolution.operators.OperatorsPackage#getSET_ReferenceOwner()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	Referrable getReferenceOwner();
+
+	/**
+	 * Sets the value of the '{@link org.qualitune.evolution.operators.SET#getReferenceOwner <em>Reference Owner</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reference Owner</em>' containment reference.
+	 * @see #getReferenceOwner()
+	 * @generated
+	 */
+	void setReferenceOwner(Referrable value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void execute();
 
 } // SET

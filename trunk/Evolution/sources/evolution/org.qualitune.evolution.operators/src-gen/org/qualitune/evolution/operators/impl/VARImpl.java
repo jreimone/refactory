@@ -227,7 +227,8 @@ public class VARImpl extends OperatorImpl implements VAR {
 					if(results != null && results.size() == 1){
 						contextObject = results.get(0);
 					} else {
-						OperatorsUtil.createDiagnostic(this, "Variable " + referencedVariable.getName() + " refers to a list containing more than 1 element");
+						OperatorsUtil.createDiagnosticAndAddToResource(this, "Variable " + referencedVariable.getName() + " refers to a list containing more than 1 element");
+						return;
 					}
 				}
 			}
@@ -256,6 +257,11 @@ public class VARImpl extends OperatorImpl implements VAR {
 					}
 				} catch (InvocationTargetException e) {
 					e.printStackTrace();
+					OperatorsUtil.createDiagnosticAndAddToResource(this, "Operation " + operation.getName() + " threw an exception:" +
+							"\n\n" +
+							e.getMessage() + "\n\n" +
+							e.getCause());
+					return;
 				}
 
 			}

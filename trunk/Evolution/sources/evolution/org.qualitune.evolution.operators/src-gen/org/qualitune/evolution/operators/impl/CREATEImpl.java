@@ -329,7 +329,7 @@ public class CREATEImpl extends OperatorImpl implements CREATE {
 		final EClass metaclass = variable.getType();
 		EObjectReference result = OperatorsFactory.eINSTANCE.createEObjectReference();
 		if(metaclass.isAbstract() || metaclass.isInterface()){
-			OperatorsUtil.createDiagnostic(this, "Metaclass " + metaclass.getName() + " must not be abstract");
+			OperatorsUtil.createDiagnosticAndAddToResource(this, "Metaclass " + metaclass.getName() + " must not be abstract");
 			return;
 		}
 		EObject instance = EcoreUtil.create(metaclass);
@@ -337,11 +337,11 @@ public class CREATEImpl extends OperatorImpl implements CREATE {
 		variable.setValue(instance);
 		EReference containmentReference = getParentCompositeReference();
 		if(!containmentReference.isContainment()){
-			OperatorsUtil.createDiagnostic(this, "Reference " + containmentReference.getName() + " must be a containment reference");
+			OperatorsUtil.createDiagnosticAndAddToResource(this, "Reference " + containmentReference.getName() + " must be a containment reference");
 			return;
 		}
 		if(!containmentReference.getEReferenceType().isInstance(instance)){
-			OperatorsUtil.createDiagnostic(this, "The type of reference '" + containmentReference.getName() + "' doesn't correspond to the referenced metaclass '" + metaclass.getName() + "'.");
+			OperatorsUtil.createDiagnosticAndAddToResource(this, "The type of reference '" + containmentReference.getName() + "' doesn't correspond to the referenced metaclass '" + metaclass.getName() + "'.");
 			return;
 		}
 		Referrable parentReferrable = getParent();
@@ -358,6 +358,7 @@ public class CREATEImpl extends OperatorImpl implements CREATE {
 		} else {
 			parent.eSet(containmentReference, instance);
 		}
+		setResult(result);
 		super.execute();
 	}
 

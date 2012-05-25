@@ -496,13 +496,22 @@ public interface OperatorsPackage extends EPackage {
 	int SET__VALUE = OPERATOR_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Reference Owner</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET__REFERENCE_OWNER = OPERATOR_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>SET</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_FEATURE_COUNT = OPERATOR_FEATURE_COUNT + 2;
+	int SET_FEATURE_COUNT = OPERATOR_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.evolution.operators.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
@@ -1102,6 +1111,17 @@ public interface OperatorsPackage extends EPackage {
 	EReference getSET_Value();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.qualitune.evolution.operators.SET#getReferenceOwner <em>Reference Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Reference Owner</em>'.
+	 * @see org.qualitune.evolution.operators.SET#getReferenceOwner()
+	 * @see #getSET()
+	 * @generated
+	 */
+	EReference getSET_ReferenceOwner();
+
+	/**
 	 * Returns the meta object for class '{@link org.qualitune.evolution.operators.VariableReference <em>Variable Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1576,6 +1596,14 @@ public interface OperatorsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SET__VALUE = eINSTANCE.getSET_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference Owner</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SET__REFERENCE_OWNER = eINSTANCE.getSET_ReferenceOwner();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.evolution.operators.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.

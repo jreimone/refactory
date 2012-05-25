@@ -115,4 +115,12 @@ public interface MOVE extends Operator {
 	 */
 	void setMovee(Referrable value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void execute();
+
 } // MOVE
