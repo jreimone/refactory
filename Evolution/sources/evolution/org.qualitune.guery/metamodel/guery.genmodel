@@ -43,7 +43,7 @@
     <genClasses ecoreClass="guery.ecore#//NotConnectedBy"/>
     <genClasses ecoreClass="guery.ecore#//Grouping"/>
     <genClasses ecoreClass="guery.ecore#//PreProcessor">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//PreProcessor/className"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//PreProcessor/class"/>
     </genClasses>
     <genClasses image="false" ecoreClass="guery.ecore#//EdgeSelection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//EdgeSelection/connections"/>

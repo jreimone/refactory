@@ -38,7 +38,7 @@ RULES {
 				edgeSelections*
 				groupBy*;
 	
-	PreProcessor ::= !0 "prepare with" className[CLASSNAME];
+	PreProcessor ::= !0 "prepare with" class[CLASSNAME];
 	
 	VertexSelection ::= !0 "select" roles ("," roles)* (!0 "where" constraints ("and" constraints)*)?;
 	
