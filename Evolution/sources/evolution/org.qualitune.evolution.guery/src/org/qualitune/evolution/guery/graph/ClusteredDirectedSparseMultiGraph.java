@@ -1,7 +1,6 @@
 package org.qualitune.evolution.guery.graph;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.commons.collections15.map.HashedMap;
@@ -18,7 +17,7 @@ import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
  * @param <Edge> class for edge instances
  * @param <Cluster> class for cluster instances
  */
-public class ClusteredDirectedSparseMultiGraph<Vertex extends ClusterVertex<Cluster>, Edge, Cluster> extends DirectedSparseMultigraph<Vertex, Edge> {
+public class ClusteredDirectedSparseMultiGraph<Vertex, Edge, Cluster> extends DirectedSparseMultigraph<Vertex, Edge> {
 
 	private static final long serialVersionUID = 8547091998156585215L;
 
@@ -36,38 +35,38 @@ public class ClusteredDirectedSparseMultiGraph<Vertex extends ClusterVertex<Clus
 		return clusterMap.get(cluster);
 	}
 	
-	/**
-	 * Annotates the given <code>vertex</code> with the given <code>clusterIndicator</code>.
-	 * Additionally {@link ClusterVertex#annotateWithCluster(Object)} is invoked to which
-	 * <code>clusterIndicator</code> is delegated.
-	 * 
-	 * @param vertex
-	 * @param clusterIndicator
-	 */
-	public void annotateWithCluster(Vertex vertex, Cluster clusterIndicator){
-		if(!this.containsVertex(vertex) || clusterIndicator == null){
-			return;
-		}
-		Collection<Vertex> cluster = clusterMap.get(clusterIndicator);
-		if(cluster == null){
-			cluster = new HashSet<Vertex>();
-			clusterMap.put(clusterIndicator, cluster);
-		}
-		cluster.add(vertex);
-		vertex.annotateWithCluster(clusterIndicator);
-	}
+//	/**
+//	 * Annotates the given <code>vertex</code> with the given <code>clusterIndicator</code>.
+//	 * Additionally {@link ClusterVertex#annotateWithCluster(Object)} is invoked to which
+//	 * <code>clusterIndicator</code> is delegated.
+//	 * 
+//	 * @param vertex
+//	 * @param clusterIndicator
+//	 */
+//	public void annotateWithCluster(Vertex vertex, Cluster clusterIndicator){
+//		if(!this.containsVertex(vertex) || clusterIndicator == null){
+//			return;
+//		}
+//		Collection<Vertex> cluster = clusterMap.get(clusterIndicator);
+//		if(cluster == null){
+//			cluster = new HashSet<Vertex>();
+//			clusterMap.put(clusterIndicator, cluster);
+//		}
+//		cluster.add(vertex);
+//		vertex.annotateWithCluster(clusterIndicator);
+//	}
 	
-	/**
-	 * Removes the given <code>clusterIndicator</code> from the vertex.
-	 * Internally, {@link ClusterVertex#removeCluster(Object)} is invoked by delegating
-	 * <code>clusterIndicator</code>.
-	 * 
-	 * @param vertex
-	 * @param clusterIndicator
-	 * @return
-	 */
-	public boolean removeCluster(Vertex vertex, Cluster clusterIndicator){
-		return vertex.removeCluster() &&
-				clusterMap.get(clusterIndicator).remove(vertex);
-	}
+//	/**
+//	 * Removes the given <code>clusterIndicator</code> from the vertex.
+//	 * Internally, {@link ClusterVertex#removeCluster(Object)} is invoked by delegating
+//	 * <code>clusterIndicator</code>.
+//	 * 
+//	 * @param vertex
+//	 * @param clusterIndicator
+//	 * @return
+//	 */
+//	public boolean removeCluster(Vertex vertex, Cluster clusterIndicator){
+//		return vertex.removeCluster() &&
+//				clusterMap.get(clusterIndicator).remove(vertex);
+//	}
 }

@@ -28,7 +28,7 @@ import nz.ac.massey.cs.guery.Processor;
  * @author jreimann
  *
  */
-public class ModelMotifReader implements MotifReader<EObjectVertex<?>, EReferenceEdge> {
+public class ModelMotifReader implements MotifReader<EObjectVertex, EReferenceEdge> {
 
 	private MotifModel motifModel;
 	
@@ -37,8 +37,8 @@ public class ModelMotifReader implements MotifReader<EObjectVertex<?>, EReferenc
 	}
 	
 	@Override
-	public Motif<EObjectVertex<?>, EReferenceEdge> read(InputStream source) throws MotifReaderException {
-		Motif<EObjectVertex<?>, EReferenceEdge> motif = new Motif<EObjectVertex<?>, EReferenceEdge>() {
+	public Motif<EObjectVertex, EReferenceEdge> read(InputStream source) throws MotifReaderException {
+		Motif<EObjectVertex, EReferenceEdge> motif = new Motif<EObjectVertex, EReferenceEdge>() {
 			
 			@Override
 			public List<String> getRoles() {
@@ -65,13 +65,13 @@ public class ModelMotifReader implements MotifReader<EObjectVertex<?>, EReferenc
 			}
 			
 			@Override
-			public Collection<GroupByClause<EObjectVertex<?>>> getGroupByClauses() {
+			public Collection<GroupByClause<EObjectVertex>> getGroupByClauses() {
 				// TODO Auto-generated method stub
 				return null;
 			}
 			
 			@Override
-			public Collection<Processor<EObjectVertex<?>, EReferenceEdge>> getGraphProcessors() {
+			public Collection<Processor<EObjectVertex, EReferenceEdge>> getGraphProcessors() {
 				// TODO Auto-generated method stub
 				return null;
 			}

@@ -8,7 +8,8 @@ Bundle-Vendor: www.qualitune.org
 Require-Bundle: org.eclipse.core.runtime,
  org.qualitune.evolution.registry,
  org.eclipse.emf.ecore,
- org.qualitune.guery
+ org.qualitune.guery,
+ org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.qualitune.evolution.guery

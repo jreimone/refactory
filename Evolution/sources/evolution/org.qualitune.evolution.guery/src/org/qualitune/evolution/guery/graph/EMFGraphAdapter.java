@@ -10,32 +10,30 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
-public class EMFGraphAdapter<Vertex extends EObjectVertex<Cluster>, Edge extends EReferenceEdge, Cluster> extends AbstractGraphAdapter<Vertex, Edge> {
+public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferenceEdge> extends AbstractGraphAdapter<Vertex, Edge> {
 
-	private Cluster cluster;
 	private IEMFGraphAdapterFactory<Vertex, Edge> factory;
 	private Resource resource;
 	
-	private ClusteredDirectedSparseMultiGraph<Vertex, Edge, Cluster> graph;
+	private DirectedSparseMultigraph<Vertex, Edge> graph;
 	
 	private Vertex modelVertex;
 
-	public EMFGraphAdapter(Resource resource, IEMFGraphAdapterFactory<Vertex, Edge> factory, Cluster cluster){
+	public EMFGraphAdapter(Resource resource, IEMFGraphAdapterFactory<Vertex, Edge> factory){
 		this.resource = resource;
 		this.factory = factory;
-		this.cluster = cluster;
 		initialiseGraph();
 	}
 	
 	private void initialiseGraph() {
-		graph = new ClusteredDirectedSparseMultiGraph<Vertex, Edge, Cluster>();
+		graph = new DirectedSparseMultigraph<Vertex, Edge>();
 		List<EObject> contents = resource.getContents();
 		for (EObject model : contents) {
 			modelVertex = factory.createVertex(model);
 			graph.addVertex(modelVertex);
-			graph.annotateWithCluster(modelVertex, cluster);
 			TreeIterator<EObject> treeIterator = model.eAllContents();
 			while (treeIterator.hasNext()) {
 				EObject element = treeIterator.next();
@@ -138,7 +136,7 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex<Cluster>, Edge extends
 		return factory;
 	}
 
-	public ClusteredDirectedSparseMultiGraph<Vertex, Edge, Cluster> getGraph() {
+	public DirectedSparseMultigraph<Vertex, Edge> getGraph() {
 		return graph;
 	}
 

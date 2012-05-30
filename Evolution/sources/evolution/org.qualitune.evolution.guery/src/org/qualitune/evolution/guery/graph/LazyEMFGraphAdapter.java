@@ -22,27 +22,22 @@ import org.eclipse.emf.ecore.EReference;
  *  
  *  TODO jreimann: finish it when it's needed
  */
-public class LazyEMFGraphAdapter<Vertex extends EObjectVertex<Cluster>, Edge extends EReferenceEdge, Cluster> extends AbstractGraphAdapter<Vertex, Edge> {
+public class LazyEMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferenceEdge> extends AbstractGraphAdapter<Vertex, Edge> {
 
 	private EObject model;
 	private IEMFGraphAdapterFactory<Vertex, Edge> factory;
 	
-	private Set<EObjectVertex<Cluster>> vertices = new LinkedHashSet<EObjectVertex<Cluster>>();
+	private Set<EObjectVertex> vertices = new LinkedHashSet<EObjectVertex>();
 	private Set<EReferenceEdge> edges = new HashSet<EReferenceEdge>();
-	private Cluster cluster;
 	
-	public LazyEMFGraphAdapter(EObject model, IEMFGraphAdapterFactory<Vertex, Edge> factory, Cluster cluster) {
+	public LazyEMFGraphAdapter(EObject model, IEMFGraphAdapterFactory<Vertex, Edge> factory) {
 		super();
 		this.model = model;
 		this.factory = factory;
-		this.cluster = cluster;
 	}
 
 	private Vertex addVertex(EObject element){
 		Vertex vertex = factory.createVertex(element);
-		if(cluster != null){
-			vertex.annotateWithCluster(cluster);
-		}
 		if(!vertices.contains(vertex)){
 			vertices.add(vertex);
 		}

@@ -30,7 +30,7 @@ import org.qualitune.guery.VertexSelection;
  * @author jreimann
  *
  */
-public class ModelMotifAdapter implements Motif<EObjectVertex<?>, EReferenceEdge> {
+public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
 
 	private org.qualitune.guery.Motif motif;
 	
@@ -99,7 +99,7 @@ public class ModelMotifAdapter implements Motif<EObjectVertex<?>, EReferenceEdge
 			for (EdgeSelection edgeSelection : edgeSelections) {
 				constraints2 = edgeSelection.getConstraints();
 				for (org.qualitune.guery.Constraint constraint : constraints2) {
-					PathConstraint<EObjectVertex<?>, EReferenceEdge> gueryConstraint = new PathConstraint<EObjectVertex<?>, EReferenceEdge>();
+					PathConstraint<EObjectVertex, EReferenceEdge> gueryConstraint = new PathConstraint<EObjectVertex, EReferenceEdge>();
 //					gueryConstraint.
 				}
 			}
@@ -110,13 +110,13 @@ public class ModelMotifAdapter implements Motif<EObjectVertex<?>, EReferenceEdge
 	}
 
 	@Override
-	public Collection<GroupByClause<EObjectVertex<?>>> getGroupByClauses() {
+	public Collection<GroupByClause<EObjectVertex>> getGroupByClauses() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<Processor<EObjectVertex<?>, EReferenceEdge>> getGraphProcessors() {
+	public Collection<Processor<EObjectVertex, EReferenceEdge>> getGraphProcessors() {
 		// TODO Auto-generated method stub
 		return null;
 	}

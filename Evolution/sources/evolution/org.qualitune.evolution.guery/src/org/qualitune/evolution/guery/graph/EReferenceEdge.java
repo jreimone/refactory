@@ -10,7 +10,7 @@ import nz.ac.massey.cs.guery.adapters.jungalt.Edge;
  * @author jreimann
  *
  */
-public abstract class EReferenceEdge extends Edge<EObjectVertex<?>> {
+public abstract class EReferenceEdge extends Edge<EObjectVertex> {
 
 	private static final long serialVersionUID = 6893976893889977930L;
 
