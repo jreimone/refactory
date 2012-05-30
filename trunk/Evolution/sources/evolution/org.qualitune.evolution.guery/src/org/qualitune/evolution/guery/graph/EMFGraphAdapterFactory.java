@@ -6,11 +6,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 
-public class EMFGraphAdapterFactory<Cluster> implements IEMFGraphAdapterFactory<EObjectVertex<Cluster>, EReferenceEdge> {
+public class EMFGraphAdapterFactory implements IEMFGraphAdapterFactory<EObjectVertex, EReferenceEdge> {
 
 	@Override
-	public EObjectVertex<Cluster> createVertex(EObject modelElement) {
-		EObjectVertex<Cluster> vertex = new EObjectVertex<Cluster>(modelElement);
+	public EObjectVertex createVertex(EObject modelElement) {
+		EObjectVertex vertex = new EObjectVertex(modelElement);
 		return vertex;
 	}
 
@@ -34,7 +34,7 @@ public class EMFGraphAdapterFactory<Cluster> implements IEMFGraphAdapterFactory<
 	}
 
 	@Override
-	public EReferenceEdge createEdge(EObjectVertex<Cluster> from, EObjectVertex<Cluster> to, EReference reference) {
+	public EReferenceEdge createEdge(EObjectVertex from, EObjectVertex to, EReference reference) {
 		EReferenceEdge edge = createEdge(from.getModelElement(), to.getModelElement(), reference);
 		edge.setStart(from);
 		edge.setEnd(to);

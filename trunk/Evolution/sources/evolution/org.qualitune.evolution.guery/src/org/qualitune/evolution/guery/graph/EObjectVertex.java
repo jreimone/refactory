@@ -13,12 +13,12 @@ import com.google.common.base.Objects;
  * @author jreimann
  * @param <Cluster> the type of the cluster with which the vertices can be annotated
  */
-public class EObjectVertex<Cluster> extends Vertex<EReferenceEdge> implements ClusterVertex<Cluster>{
+public class EObjectVertex extends Vertex<EReferenceEdge>{
 
 	private static final long serialVersionUID = -6542617958217341280L;
 
 	private final EObject modelElement;
-	private Cluster cluster;
+//	private Cluster cluster;
 
 	public EObjectVertex(EObject modelElement) {
 		super();
@@ -35,8 +35,8 @@ public class EObjectVertex<Cluster> extends Vertex<EReferenceEdge> implements Cl
 	 */
 	@Override
 	public final boolean equals(Object obj) {
-		if(obj instanceof EObjectVertex<?>){
-			EObjectVertex<?> other = (EObjectVertex<?>) obj;
+		if(obj instanceof EObjectVertex){
+			EObjectVertex other = (EObjectVertex) obj;
 			return modelElement.equals(other.modelElement);
 		}
 		return super.equals(obj);
@@ -54,25 +54,25 @@ public class EObjectVertex<Cluster> extends Vertex<EReferenceEdge> implements Cl
 		return result;
 	}
 
-	@Override
-	public void annotateWithCluster(Cluster cluster) {
-		this.cluster = cluster;
-	}
-
-	@Override
-	public Cluster getAnnotatedCluster() {
-		return cluster;
-	}
-
-	@Override
-	public boolean removeCluster() {
-		Cluster previous = this.cluster;
-		this.cluster = null;
-		if(previous != null){
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public void annotateWithCluster(Cluster cluster) {
+//		this.cluster = cluster;
+//	}
+//
+//	@Override
+//	public Cluster getAnnotatedCluster() {
+//		return cluster;
+//	}
+//
+//	@Override
+//	public boolean removeCluster() {
+//		Cluster previous = this.cluster;
+//		this.cluster = null;
+//		if(previous != null){
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public String toString() {

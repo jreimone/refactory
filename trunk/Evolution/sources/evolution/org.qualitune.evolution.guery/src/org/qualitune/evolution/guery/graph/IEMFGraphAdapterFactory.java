@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EReference;
  * @author jreimann
  *
  */
-public interface IEMFGraphAdapterFactory<Vertex extends EObjectVertex<?>, Edge extends EReferenceEdge> {
+public interface IEMFGraphAdapterFactory<Vertex extends EObjectVertex, Edge extends EReferenceEdge> {
 
 	/**
 	 * Creates a new vertex for the given {@link EObject modelElement}.
