@@ -3,6 +3,7 @@ package org.qualitune.evolution.guery.graph;
 import nz.ac.massey.cs.guery.adapters.jungalt.Edge;
 
 import org.eclipse.emf.ecore.EReference;
+import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
 /**
  * An {@link Edge} instance indicating that a reference points to a model element in the same model.
