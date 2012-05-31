@@ -1,4 +1,4 @@
-package org.qualitune.evolution.prolog.generator;
+package org.qualitune.evolution.prolog;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

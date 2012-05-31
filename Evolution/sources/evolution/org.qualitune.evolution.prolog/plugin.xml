@@ -4,7 +4,7 @@
    <extension
          point="org.qualitune.evolution.knowledgebase">
       <knowledgebase
-            implementation="org.qualitune.evolution.prolog.generator.impl.PrologKnowledgeBase">
+            implementation="org.qualitune.evolution.prolog.impl.PrologKnowledgeBase">
       </knowledgebase>
    </extension>
 

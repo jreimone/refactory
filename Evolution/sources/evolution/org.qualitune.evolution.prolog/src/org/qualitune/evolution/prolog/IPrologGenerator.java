@@ -1,7 +1,7 @@
-package org.qualitune.evolution.prolog.generator;
+package org.qualitune.evolution.prolog;
 
 import org.eclipse.emf.ecore.EObject;
-import org.qualitune.evolution.prolog.generator.impl.PrologGenerator;
+import org.qualitune.evolution.prolog.impl.PrologGenerator;
 
 import alice.tuprolog.Theory;
 
