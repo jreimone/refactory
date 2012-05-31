@@ -1,0 +1,7 @@
+// finds inverse references
+motif inverseReferences
+select source, target
+connected by inverse(target>source)[1,1]
+where "inverse.getClass().getName()=='org.qualitune.evolution.guery.graph.ExternalEdge'"
+not connected by missing(source>target)
+group by "source"
