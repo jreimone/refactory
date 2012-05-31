@@ -1,0 +1,11 @@
+// finds mapping dependencies
+motif mappingReferences
+select source, target, mapping
+connected by left(mapping>source)[1,1] and right(mapping>target)[1,1] 
+where "left.getClass().getName()=='org.qualitune.evolution.guery.graph.ExternalEdge'" 
+	and "right.getClass().getName()=='org.qualitune.evolution.guery.graph.ExternalEdge'"
+	and "left != right"
+	and "mapping != right"
+	and "mapping != left"
+not connected by missingST(source>target) and missingTS(target>source)
+//group by "source" and "target"
