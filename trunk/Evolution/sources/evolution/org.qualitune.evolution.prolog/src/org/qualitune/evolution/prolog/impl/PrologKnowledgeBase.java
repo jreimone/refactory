@@ -1,4 +1,4 @@
-package org.qualitune.evolution.prolog.generator.impl;
+package org.qualitune.evolution.prolog.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.qualitune.evolution.prolog.generator.IPrologGenerator;
+import org.qualitune.evolution.prolog.IPrologGenerator;
 import org.qualitune.evolution.prolog.registry.IPrologRegistry;
 import org.qualitune.evolution.prolog.registry.PrologUtil;
 import org.qualitune.evolution.registry.KnowledgeBase;
