@@ -14,14 +14,12 @@ import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifInstance;
 import nz.ac.massey.cs.guery.MotifReader;
 import nz.ac.massey.cs.guery.MotifReaderException;
-import nz.ac.massey.cs.guery.Path;
 import nz.ac.massey.cs.guery.ResultListener;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 import nz.ac.massey.cs.guery.io.dsl.DefaultMotifReader;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -35,8 +33,6 @@ import org.qualitune.evolution.guery.graph.EReferenceEdge;
 import org.qualitune.evolution.guery.graph.IEMFGraphAdapterFactory;
 import org.qualitune.evolution.registry.KnowledgeBase;
 
-import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
-
 public class GueryKnowledgeBase implements KnowledgeBase {
 
 	private EMFGraphAdapter<EObjectVertex, EReferenceEdge> graphAdapter;
@@ -46,39 +42,30 @@ public class GueryKnowledgeBase implements KnowledgeBase {
 	@Override
 	public Map<EObject, Collection<EObject>> getDependencies(URI uri, ResourceSet rs) {
 		dependencies = new HashMap<EObject, Collection<EObject>>();
-		Bundle bundle = Activator.getContext().getBundle();
 		// TODO GUERY registry erstellen und hier verwenden
+		Bundle bundle = Activator.getContext().getBundle();
 		URI uri2 = resource.getURI();
 		String platformString = uri2.toPlatformString(true);
 		IFile member3 = (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
 		try {
-			InputStream contents = member3.getContents();
 			InputStream is = bundle.getEntry("inverseReferences.guery").openStream();
 			//				InputStream is = new FileInputStream(gueryFile);
 			MotifReader<EObjectVertex, EReferenceEdge> reader = new DefaultMotifReader<EObjectVertex, EReferenceEdge>();
 			Motif<EObjectVertex, EReferenceEdge> motif = reader.read(is);
-			DirectedSparseMultigraph<EObjectVertex,EReferenceEdge> graph = graphAdapter.getGraph();
 			ResultListener<EObjectVertex, EReferenceEdge> resultListener = new ResultListener<EObjectVertex, EReferenceEdge>() {
 
 				@Override
 				public boolean found(MotifInstance<EObjectVertex, EReferenceEdge> instance) {
-					Path<EObjectVertex, EReferenceEdge> missingPath = instance.getPath("missing");
-					Path<EObjectVertex, EReferenceEdge> inversePath = instance.getPath("inverse");
-					EObjectVertex source = instance.getVertex("source");
 					EObjectVertex target = instance.getVertex("target");
 					addToMap(target.getModelElement());
 					return true;
 				}
 
 				@Override
-				public void progressMade(int progress, int total) {
-					System.out.println(progress + "/" + total);
-				}
+				public void progressMade(int progress, int total) { }
 
 				@Override
-				public void done() {
-					System.out.println("done");
-				}
+				public void done() { }
 			};
 			GQL<EObjectVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<EObjectVertex, EReferenceEdge>();
 			engine.query(graphAdapter, motif, resultListener, ComputationMode.ALL_INSTANCES);
@@ -88,9 +75,7 @@ public class GueryKnowledgeBase implements KnowledgeBase {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
+		} 
 		return dependencies;
 	}
 

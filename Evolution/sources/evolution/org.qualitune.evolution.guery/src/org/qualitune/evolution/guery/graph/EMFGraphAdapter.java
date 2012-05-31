@@ -78,6 +78,9 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferen
 						}
 					}
 					if(graph.findEdge(elementVertex, referencedElementVertex) == null){
+						if(newEdge == null){
+							newEdge = factory.createEdge(element, referencedElement, reference);
+						}
 						newEdge.setStart(elementVertex);
 						newEdge.setEnd(referencedElementVertex);
 						graph.addEdge(newEdge, elementVertex, referencedElementVertex, edgeType);
