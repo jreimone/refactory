@@ -12,6 +12,8 @@ import nz.ac.massey.cs.guery.AbstractGraphAdapter;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.qualitune.evolution.guery.registry.EObjectVertex;
+import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
 /**
  *  CAUTION CAUTION CAUTION<br><br>

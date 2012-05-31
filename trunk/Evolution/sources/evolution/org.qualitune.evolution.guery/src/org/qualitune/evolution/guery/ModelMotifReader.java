@@ -7,16 +7,16 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 
-import org.qualitune.evolution.guery.graph.EObjectVertex;
-import org.qualitune.evolution.guery.graph.EReferenceEdge;
-import org.qualitune.guery.MotifModel;
-
 import nz.ac.massey.cs.guery.Constraint;
 import nz.ac.massey.cs.guery.GroupByClause;
 import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifReader;
 import nz.ac.massey.cs.guery.MotifReaderException;
 import nz.ac.massey.cs.guery.Processor;
+
+import org.qualitune.evolution.guery.registry.EObjectVertex;
+import org.qualitune.evolution.guery.registry.EReferenceEdge;
+import org.qualitune.guery.MotifModel;
 
 /**
  * Reads a {@link MotifModel} (created with the GUERY EMFText editor) and transforms it to

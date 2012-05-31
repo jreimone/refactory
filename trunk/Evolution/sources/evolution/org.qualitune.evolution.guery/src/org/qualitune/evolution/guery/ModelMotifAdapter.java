@@ -14,8 +14,8 @@ import nz.ac.massey.cs.guery.PathConstraint;
 import nz.ac.massey.cs.guery.Processor;
 
 import org.eclipse.emf.common.util.EList;
-import org.qualitune.evolution.guery.graph.EObjectVertex;
-import org.qualitune.evolution.guery.graph.EReferenceEdge;
+import org.qualitune.evolution.guery.registry.EObjectVertex;
+import org.qualitune.evolution.guery.registry.EReferenceEdge;
 import org.qualitune.guery.ConnectedBy;
 import org.qualitune.guery.Connection;
 import org.qualitune.guery.EdgeSelection;

@@ -5,6 +5,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.qualitune.evolution.guery.registry.EObjectVertex;
+import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
 public class EMFGraphAdapterFactory implements IEMFGraphAdapterFactory<EObjectVertex, EReferenceEdge> {
 

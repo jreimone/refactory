@@ -2,6 +2,8 @@ package org.qualitune.evolution.guery.graph;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.qualitune.evolution.guery.registry.EObjectVertex;
+import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
 /**
  * This interface is needed for instantiating the generic class arguments in the
