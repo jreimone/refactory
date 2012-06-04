@@ -1,9 +1,9 @@
 package org.qualitune.evolution.guery.graph;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,37 +23,26 @@ import org.qualitune.evolution.guery.registry.EReferenceEdge;
  *  CAUTION CAUTION CAUTION<br><br>
  *  
  *  TODO jreimann: finish it when it's needed
+ *  TODO implement getInEdges
  */
 public class LazyEMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferenceEdge> extends AbstractGraphAdapter<Vertex, Edge> {
 
 	private EObject model;
 	private IEMFGraphAdapterFactory<Vertex, Edge> factory;
-	
-	private Set<EObjectVertex> vertices = new LinkedHashSet<EObjectVertex>();
-	private Set<EReferenceEdge> edges = new HashSet<EReferenceEdge>();
-	
+
+	//	private Set<EObjectVertex> vertices = new LinkedHashSet<EObjectVertex>();
+	//	private Set<EReferenceEdge> edges = new HashSet<EReferenceEdge>();
+
 	public LazyEMFGraphAdapter(EObject model, IEMFGraphAdapterFactory<Vertex, Edge> factory) {
 		super();
 		this.model = model;
 		this.factory = factory;
 	}
 
-	private Vertex addVertex(EObject element){
-		Vertex vertex = factory.createVertex(element);
-		if(!vertices.contains(vertex)){
-			vertices.add(vertex);
-		}
-		return vertex;
-	}
-	
-	private Edge addEdge(Vertex start, Vertex end, EReference reference){
-		Edge edge = factory.createEdge(start, end, reference);
-		edges.add(edge);
-		return edge;
-	}
-	
 	@Override
 	public Iterator<Edge> getInEdges(Vertex vertex) {
+		EObject modelElement = vertex.getModelElement();
+
 		return null;
 	}
 
@@ -64,17 +53,20 @@ public class LazyEMFGraphAdapter<Vertex extends EObjectVertex, Edge extends ERef
 		List<Edge> outEdges = new ArrayList<Edge>();
 		for (EReference reference : allReferences) {
 			for (EObject referencedElement : Util.getReferencedElements(reference, modelElement)) {
-				
+				Edge edge = factory.createEdge(modelElement, referencedElement, reference);
+				outEdges.add(edge);
 			}
 		}
-		return null;
+		return outEdges.iterator();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Vertex getStart(Edge edge) {
 		return (Vertex) edge.getStart();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Vertex getEnd(Edge edge) {
 		return (Vertex) edge.getEnd();
@@ -82,8 +74,54 @@ public class LazyEMFGraphAdapter<Vertex extends EObjectVertex, Edge extends ERef
 
 	@Override
 	public Iterator<Edge> getEdges() {
-		
-		return null;
+		Iterator<Edge> it = new Iterator<Edge>() {
+
+			private Set<EReferenceEdge> visitedEdges = new HashSet<EReferenceEdge>();
+			private Set<EReferenceEdge> edgesOfCurrentVertex = new HashSet<EReferenceEdge>();
+			private Iterator<Vertex> vertices = getVertices();
+			private Vertex nextElement = null;
+			private boolean hasNext = true;
+
+			@Override
+			public boolean hasNext() {
+				return hasNext;
+			}
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public Edge next() {
+				Edge next = null;
+				do {
+					if(edgesOfCurrentVertex.size() == 0){
+						if(vertices.hasNext()){
+							nextElement = vertices.next();
+							Collection<EReferenceEdge> inEdges = nextElement.getInEdges();
+							Collection<EReferenceEdge> outEdges = nextElement.getOutEdges();
+							edgesOfCurrentVertex.addAll(inEdges);
+							edgesOfCurrentVertex.addAll(outEdges);
+						} else {
+							hasNext = false;
+						}
+					} 
+					Iterator<EReferenceEdge> iterator = edgesOfCurrentVertex.iterator();
+					if(iterator.hasNext()){
+						next = (Edge) iterator.next();
+						edgesOfCurrentVertex.remove(next);
+					}
+				} while (visitedEdges.contains(next));
+				if(next != null){
+					visitedEdges.add(next);
+				}
+				return next;
+			}
+
+			@Override
+			public void remove() {
+				// no remove allowed
+			}
+
+		};
+		return it;
 	}
 
 	@Override
@@ -92,7 +130,7 @@ public class LazyEMFGraphAdapter<Vertex extends EObjectVertex, Edge extends ERef
 		Iterator<Vertex> it = new Iterator<Vertex>() {
 
 			private boolean visitedModelItself = false;
-			
+
 			@Override
 			public boolean hasNext() {
 				return allContents.hasNext();
@@ -112,7 +150,7 @@ public class LazyEMFGraphAdapter<Vertex extends EObjectVertex, Edge extends ERef
 
 			@Override
 			public void remove() {
-				allContents.remove();
+				// remove is not allowed --> do nothing
 			}
 		};
 		return it;
@@ -125,13 +163,12 @@ public class LazyEMFGraphAdapter<Vertex extends EObjectVertex, Edge extends ERef
 
 	@Override
 	public int getEdgeCount() throws UnsupportedOperationException {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("This adapter doesn't support the calculation of the edge count");
 	}
 
 	@Override
 	public void closeIterator(Iterator<?> iterator) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
