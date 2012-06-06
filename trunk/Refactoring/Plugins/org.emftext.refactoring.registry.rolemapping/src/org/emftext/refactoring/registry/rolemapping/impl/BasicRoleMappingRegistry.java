@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -62,6 +64,12 @@ import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
 import org.osgi.framework.Bundle;
 
+import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.parser.ParseException;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+
 public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 
 	private Map<String, Map<String, RoleMapping>> roleMappingsMap;
@@ -71,6 +79,8 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	private Map<RoleMapping, ImageDescriptor> defaultIconMap;
 	private Map<RoleMapping, URL> iconBundlePathMap;
 	private Set<IRoleMappingRegistryListener> listeners;
+	private Map<RoleMapping, List<Entry<Constraint, String>>> preConditionsMap;
+	private Map<RoleMapping, List<Entry<Constraint, String>>> postConditionsMap;
 
 	public BasicRoleMappingRegistry(){
 		roleMappingsMap = new LinkedHashMap<String, Map<String, RoleMapping>>();
@@ -80,6 +90,8 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		defaultIconMap = new LinkedHashMap<RoleMapping, ImageDescriptor>();
 		iconBundlePathMap = new LinkedHashMap<RoleMapping, URL>();
 		listeners = new HashSet<IRoleMappingRegistryListener>();
+		preConditionsMap = new HashMap<RoleMapping, List<Entry<Constraint,String>>>();
+		postConditionsMap = new HashMap<RoleMapping, List<Entry<Constraint,String>>>();
 		collectRegisteredRoleMappings();
 		collectRegisteredPostProcessors();
 	}
@@ -100,8 +112,10 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	private void registerRoleMapping(RoleMappingModel roleMapping, IConfigurationElement config) {
 		registerRoleMappingInternal(roleMapping, config);
 		registerIconsForMappings(roleMapping, config);
+		registerConditionsForMappings(roleMapping, config);
 		registerSubMenu(roleMapping, config);
 	}
+
 
 	private void registerSubMenu(RoleMappingModel roleMappingModel, IConfigurationElement config) {
 		String subMenuID = config.getAttribute(IRoleMappingExtensionPoint.SUB_MENU_ID);
@@ -112,6 +126,76 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				subMenuRegistry.registerRoleMappingForSubMenu(roleMapping, subMenuID);
 			}
 		}
+	}
+
+	private void registerConditionsForMappings(RoleMappingModel roleMapping, IConfigurationElement config) {
+		Map<String, IConfigurationElement> mappingElementsMap = new HashMap<String, IConfigurationElement>();
+		IConfigurationElement[] conditions = config.getChildren(IRoleMappingExtensionPoint.CONDITIONS_ID);
+		for (IConfigurationElement element : conditions) {
+			String mappingName = element.getAttribute(IRoleMappingExtensionPoint.CONDITIONS_MAPPING_NAME);
+			mappingElementsMap.put(mappingName, element);
+		}
+		for (RoleMapping mapping : roleMapping.getMappings()) {
+			IConfigurationElement element = mappingElementsMap.get(mapping.getName());
+			if(element != null){
+				URL preURL = getURLForAttribute(element, IRoleMappingExtensionPoint.CONDITIONS_PRE);
+				URL postURL = getURLForAttribute(element, IRoleMappingExtensionPoint.CONDITIONS_POST);
+				EPackage metamodel = roleMapping.getTargetMetamodel();
+				Resource resource = metamodel.eResource();
+				Map<String, Constraint> preConditions = getConstraints(preURL, resource);
+				Map<String, Constraint> postConditions = getConstraints(postURL, resource);
+				Map<String, String> constraintErrorMessages = new HashMap<String, String>();
+				IConfigurationElement[] errorChildren = element.getChildren(IRoleMappingExtensionPoint.ERROR_MESSAGE_ID);
+				for (IConfigurationElement errorElement : errorChildren) {
+					String constraintName = errorElement.getAttribute(IRoleMappingExtensionPoint.ERROR_MESSAGE_CONSTRAINT);
+					String errorMessage = errorElement.getAttribute(IRoleMappingExtensionPoint.ERROR_MESSAGE_);
+					constraintErrorMessages.put(constraintName, errorMessage);
+				}
+				for (String preCondition : preConditions.keySet()) {
+					Constraint constraint = preConditions.get(preCondition);
+					String errorMessage = constraintErrorMessages.get(preCondition);
+					registerPreCondition(mapping, constraint, errorMessage);
+				}
+				for (String postCondition : postConditions.keySet()) {
+					Constraint constraint = postConditions.get(postCondition);
+					String errorMessage = constraintErrorMessages.get(postCondition);
+					registerPostCondition(mapping, constraint, errorMessage);
+				}
+			}
+		}
+	}
+
+	private Map<String, Constraint> getConstraints(URL constraintFile, Resource mmResource) {
+		Map<String, Constraint> constraints = new HashMap<String, Constraint>();
+		if(constraintFile != null){
+			try {
+				IMetamodel metaModel = Ocl2ForEclipseFacade.getMetaModel(Ocl2ForEclipseFacade.ECORE_META_MODEL);
+				IModel metamodelOCL = metaModel.getModelProvider().getModel(mmResource);
+				constraintFile = FileLocator.resolve(constraintFile);
+				List<Constraint> parseConstraints = Ocl2ForEclipseFacade.parseConstraints(constraintFile, metamodelOCL, true);
+				for (Constraint constraint : parseConstraints) {
+					constraints.put(constraint.getName(), constraint);
+				}
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return constraints;
+	}
+
+	private URL getURLForAttribute(IConfigurationElement element, String fileAttribute) {
+		String bundleID = element.getContributor().getName();
+		Bundle bundle = Platform.getBundle(bundleID);
+		String attributeValue = element.getAttribute(fileAttribute);
+		URL url = null;
+		if(attributeValue != null){
+			url = bundle.getEntry(attributeValue);
+		}
+		return url;
 	}
 
 	private void registerIconsForMappings(RoleMappingModel roleMapping, IConfigurationElement config) {
@@ -448,5 +532,35 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	@Override
 	public List<RoleMapping> getRoleMappingsForRoleModel(RoleModel roleModel) {
 		return roleModelMappingsMap.get(roleModel);
+	}
+
+	@Override
+	public void registerPreCondition(RoleMapping mapping, Constraint constraint, String errorMessage) {
+		registerCondition(preConditionsMap, mapping, constraint, errorMessage);
+	}
+
+	@Override
+	public void registerPostCondition(RoleMapping mapping, Constraint constraint, String errorMessage) {
+		registerCondition(postConditionsMap, mapping, constraint, errorMessage);
+	}
+
+	private void registerCondition(Map<RoleMapping, List<Entry<Constraint, String>>> conditionsMap, RoleMapping mapping, Constraint constraint, String errorMessage) {
+		List<Entry<Constraint, String>> list = conditionsMap.get(mapping);
+		if(list == null){
+			list = new ArrayList<Map.Entry<Constraint,String>>();
+			conditionsMap.put(mapping, list);
+		}
+		Map.Entry<Constraint,String> entry = new AbstractMap.SimpleEntry<Constraint,String>(constraint, errorMessage);
+		list.add(entry);
+	}
+
+	@Override
+	public List<Entry<Constraint, String>> getPreConditionsForRoleMapping(RoleMapping mapping) {
+		return preConditionsMap.get(mapping);
+	}
+
+	@Override
+	public List<Entry<Constraint, String>> getPostConditionsForRoleMapping(RoleMapping mapping) {
+		return postConditionsMap.get(mapping);
 	}
 }

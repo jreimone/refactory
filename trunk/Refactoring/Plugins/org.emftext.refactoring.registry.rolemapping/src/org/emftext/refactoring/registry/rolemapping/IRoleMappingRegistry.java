@@ -30,6 +30,8 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.registry.rolemapping.impl.BasicRoleMappingRegistry;
 
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+
 /**
  * Interface for the registry where {@link RoleMappingModel}s are registered to a specific metamodel.
  * 
@@ -163,4 +165,42 @@ public interface IRoleMappingRegistry {
 	 * @return
 	 */
 	public List<RoleMapping> getRoleMappingsForRoleModel(RoleModel roleModel);
+	
+	/**
+	 * Registers a {@link Constraint pre-condition} for the given <code>mapping</code>. The given
+	 * <code>errorMessage</code> will be displayed in case of violation of the <code>constraint</code>.
+	 *  
+	 * @param mapping
+	 * @param constraint
+	 * @param errorMessage
+	 */
+	public void registerPreCondition(RoleMapping mapping, Constraint constraint, String errorMessage);
+	
+	/**
+	 * Registers a {@link Constraint post-condition} for the given <code>mapping</code>. The given
+	 * <code>errorMessage</code> will be displayed in case of violation of the <code>constraint</code>.
+	 *  
+	 * @param mapping
+	 * @param constraint
+	 * @param errorMessage
+	 */
+	public void registerPostCondition(RoleMapping mapping, Constraint constraint, String errorMessage);
+	
+	/**
+	 * Returns all constraints (pre-conditions) registered for the given <code>mapping</code>. Additionally, the registered 
+	 * error message is returned for the found constraint.
+	 * 
+	 * @param mapping
+	 * @return
+	 */
+	public List<Map.Entry<Constraint, String>> getPreConditionsForRoleMapping(RoleMapping mapping);
+	
+	/**
+	 * Returns all constraints (post-conditions) registered for the given <code>mapping</code>. Additionally, the registered 
+	 * error message is returned for the found constraint.
+	 * 
+	 * @param mapping
+	 * @return
+	 */
+	public List<Map.Entry<Constraint, String>> getPostConditionsForRoleMapping(RoleMapping mapping);
 }

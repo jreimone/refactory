@@ -51,6 +51,7 @@
       <complexType>
          <sequence minOccurs="0" maxOccurs="unbounded">
             <element ref="mappingIcon"/>
+            <element ref="conditions"/>
          </sequence>
          <attribute name="rolemapping_resource" type="string" use="required">
             <annotation>
@@ -107,6 +108,70 @@
                <appinfo>
                   <meta.attribute kind="resource"/>
                </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="conditions">
+      <annotation>
+         <documentation>
+            Use this element to register pre- and/or post-conditions for a role mapping.
+         </documentation>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="errorMessage"/>
+         </sequence>
+         <attribute name="mapping_name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Specify the name of the Mapping for which the conditions should be registered.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="preConditions" type="string">
+            <annotation>
+               <documentation>
+                  Specify an .ocl resource here which contains the pre-conditions
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="postConditions" type="string">
+            <annotation>
+               <documentation>
+                  Specify an .ocl resource here which contains the post-conditions
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="errorMessage">
+      <annotation>
+         <documentation>
+            Use this extension to register error messages for a particular constraint.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="constraintName" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The unique name for a defined constraint.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="message" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The message to be displayed to the user.
+               </documentation>
             </annotation>
          </attribute>
       </complexType>
