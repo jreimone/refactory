@@ -29,4 +29,15 @@ public interface IRoleMappingExtensionPoint {
 	
 	// submenu
 	public static final String SUB_MENU_ID 				= "submenu";
+	
+	// pre- and post-conditions
+	public static final String CONDITIONS_ID			= "conditions";
+	public static final String CONDITIONS_MAPPING_NAME	= "mapping_name";
+	public static final String CONDITIONS_PRE			= "preConditions";
+	public static final String CONDITIONS_POST			= "postConditions";
+	
+	// error messages for constraints
+	public static final String ERROR_MESSAGE_ID			= "errorMessage";
+	public static final String ERROR_MESSAGE_CONSTRAINT	= "constraintName";
+	public static final String ERROR_MESSAGE_			= "message";
 }
