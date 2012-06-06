@@ -157,19 +157,24 @@ public class ASSIGNInterpreter {
 					return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 				}
 			} else {
-				EClass clazz = mapping.getEClassForRole((Role) interpretationContext);
-				String message = "Role " + getLabelProvider().getText(clazz) + " couldn't be bound";
-				return new RefactoringStatus(IRefactoringStatus.ERROR, message);
+				List<EObject> instances = interpreter.getRoleRuntimeInstances().get((Role) interpretationContext);
+				if(instances != null && instances.size() == 1){
+					targetObject = instances.get(0);
+				} else {
+					EClass clazz = mapping.getEClassForRole((Role) interpretationContext);
+					String message = "Role " + getLabelProvider().getText(clazz) + " couldn't be bound";
+					return new RefactoringStatus(IRefactoringStatus.ERROR, message);
+				}
 			}
 		}
 
 		@SuppressWarnings("unchecked")
 		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderFactory().getValueProviderForCommand(assign);
-//		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderForCommand(assign);
-//		if(valueProvider == null){
-//			valueProvider = getNewValueProvider(mapping);
-//			interpreter.registerValueProviderForCommand(assign, valueProvider);
-//		}
+		//		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderForCommand(assign);
+		//		if(valueProvider == null){
+		//			valueProvider = getNewValueProvider(mapping);
+		//			interpreter.registerValueProviderForCommand(assign, valueProvider);
+		//		}
 		Object value = valueProvider.provideValue(interpreter, classAttribute, targetObject);
 		if(valueProvider.getReturnCode() == Dialog.CANCEL){
 			return new RefactoringStatus(IRefactoringStatus.CANCEL);
@@ -222,34 +227,34 @@ public class ASSIGNInterpreter {
 		return null;
 	}
 
-//	/**
-//	 * Can only be invoked from the test plugin to activate an external value provider while testing
-//	 * to not open dialogs when asking for values.
-//	 * 
-//	 * @param valueProvider
-//	 */
-//	@SuppressWarnings("unchecked")
-//	public static void setValueProvider(Class<? extends IAttributeValueProvider> valueProvider){
-//		externalValueProvider = (Class<IAttributeValueProvider>) valueProvider;
-//	}
+	//	/**
+	//	 * Can only be invoked from the test plugin to activate an external value provider while testing
+	//	 * to not open dialogs when asking for values.
+	//	 * 
+	//	 * @param valueProvider
+	//	 */
+	//	@SuppressWarnings("unchecked")
+	//	public static void setValueProvider(Class<? extends IAttributeValueProvider> valueProvider){
+	//		externalValueProvider = (Class<IAttributeValueProvider>) valueProvider;
+	//	}
 
-//	private IValueProvider<EAttribute, Object> getValueProvider(){
-//		if(externalValueProvider != null){
-//			//			if(!providerExternallySet){
-//			try {
-//				valueProvider = externalValueProvider.newInstance();
-//				providerExternallySet = true;
-//			} catch (InstantiationException e) {
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				e.printStackTrace();
-//			}
-//			//			}
-//		} else {
-//			valueProvider = new DialogAttributeValueProvider(mapping);
-//		}
-//		return valueProvider;
-//	}
+	//	private IValueProvider<EAttribute, Object> getValueProvider(){
+	//		if(externalValueProvider != null){
+	//			//			if(!providerExternallySet){
+	//			try {
+	//				valueProvider = externalValueProvider.newInstance();
+	//				providerExternallySet = true;
+	//			} catch (InstantiationException e) {
+	//				e.printStackTrace();
+	//			} catch (IllegalAccessException e) {
+	//				e.printStackTrace();
+	//			}
+	//			//			}
+	//		} else {
+	//			valueProvider = new DialogAttributeValueProvider(mapping);
+	//		}
+	//		return valueProvider;
+	//	}
 
 	public Role getAssignedRole() {
 		return assignedRole;
@@ -274,8 +279,8 @@ public class ASSIGNInterpreter {
 		return labelProvider;
 	}
 
-//	@Override
-//	public IValueProvider<EAttribute, Object> getDefaultValueProvider(RoleMapping roleMapping) {
-//		return new DialogAttributeValueProvider(roleMapping);
-//	}
+	//	@Override
+	//	public IValueProvider<EAttribute, Object> getDefaultValueProvider(RoleMapping roleMapping) {
+	//		return new DialogAttributeValueProvider(roleMapping);
+	//	}
 }
