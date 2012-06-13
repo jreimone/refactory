@@ -18,6 +18,7 @@ package org.emftext.refactoring.registry.rolemapping;
 import java.net.URL;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 /**
@@ -37,14 +38,14 @@ public interface IConstraintInterpreter {
 	public boolean canInterprete(Object constraint);
 	
 	/**
-	 * Interpretes the given <code>constraint</code> for the given model <code>resource</code> and returns an interpretation result.
-	 * The given <code>mmResource</code> represents the resource which contains the metamodel of the <code>resource</code>.
+	 * Interpretes the given <code>constraint</code> for the given <code>model</code> and returns an interpretation result.
+	 * The given <code>mmResource</code> represents the resource which contains the metamodel of the <code>model</code>.
 	 * 
 	 * @param constraint
 	 * @param errorMessage
 	 * @return
 	 */
-	public IInterpretationResult interpreteConstraint(Object constraint, String errorMessage, Resource resource, Resource mmResource);
+	public IInterpretationResult interpreteConstraint(Object constraint, String errorMessage, EObject model, Resource mmResource);
 	
 	/**
 	 * Determines all constraints in the given <code>constraintFile</code> for the metamodel contained in <code>mmResource</code>. Returns a map containing
