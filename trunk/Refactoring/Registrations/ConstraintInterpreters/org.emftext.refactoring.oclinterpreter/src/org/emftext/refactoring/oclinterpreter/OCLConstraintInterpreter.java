@@ -17,6 +17,7 @@ package org.emftext.refactoring.oclinterpreter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +41,7 @@ import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -60,7 +62,7 @@ public class OCLConstraintInterpreter implements IConstraintInterpreter {
 	}
 
 	@Override
-	public IInterpretationResult interpreteConstraint(Object constraint, final String errorMessage, Resource resource, Resource mmResource) {
+	public IInterpretationResult interpreteConstraint(Object constraint, final String errorMessage, EObject model, Resource mmResource) {
 		Exception ex = null;
 		try {
 			Constraint oclConstraint = (Constraint) constraint;
@@ -79,42 +81,44 @@ public class OCLConstraintInterpreter implements IConstraintInterpreter {
 					contextSet.add(classifier);
 				}
 			}
-			EObject model = resource.getContents().get(0);
 			TreeIterator<EObject> contents = model.eAllContents();
+			List<IModelInstanceElement> modelInstanceElements = new ArrayList<IModelInstanceElement>();
 			while (contents.hasNext()) {
 				EObject next = contents.next();
 				if(contextSet.contains(next.eClass())){
-					IModelInstanceElement modelInstanceElement = modelInstance.addModelInstanceElement(next);
-					tudresden.ocl20.pivot.interpreter.IInterpretationResult result = Ocl2ForEclipseFacade.interpretConstraint(oclConstraint, modelInstance, modelInstanceElement);
-					if(!result.getResult().oclIsInvalid().isTrue() 
-							&& !result.getResult().oclIsUndefined().isTrue() 
-							&& !((OclBoolean) result.getResult()).isTrue()) {
-						return new IInterpretationResult() {
+					modelInstanceElements.add(modelInstance.addModelInstanceElement(next));
+				}
+			}
+			for (IModelInstanceElement modelInstanceElement : modelInstanceElements) {
+				tudresden.ocl20.pivot.interpreter.IInterpretationResult result = Ocl2ForEclipseFacade.interpretConstraint(oclConstraint, modelInstance, modelInstanceElement);
+				if(result != null && !result.getResult().oclIsInvalid().isTrue() 
+						&& !result.getResult().oclIsUndefined().isTrue() 
+						&& !((OclBoolean) result.getResult()).isTrue()) {
+					return new IInterpretationResult() {
 
-							@Override
-							public boolean wasSuccessful() {
-								return false;
-							}
+						@Override
+						public boolean wasSuccessful() {
+							return false;
+						}
 
-							@Override
-							public String getErrorMessage() {
-								return errorMessage;
-							}
-						};
-					} else {
-						return new IInterpretationResult() {
+						@Override
+						public String getErrorMessage() {
+							return errorMessage;
+						}
+					};
+				} else {
+					return new IInterpretationResult() {
 
-							@Override
-							public boolean wasSuccessful() {
-								return true;
-							}
+						@Override
+						public boolean wasSuccessful() {
+							return true;
+						}
 
-							@Override
-							public String getErrorMessage() {
-								return null;
-							}
-						};
-					}
+						@Override
+						public String getErrorMessage() {
+							return null;
+						}
+					};
 				}
 			}
 		} catch (IllegalArgumentException e) {

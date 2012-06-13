@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -131,26 +132,25 @@ public class ModelRefactoring extends Refactoring {
 	public RefactoringStatus checkFinalConditions(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		RoleMapping roleMapping = refactorer.getRoleMapping();
 		List<Entry<Object, String>> postConditions = IRoleMappingRegistry.INSTANCE.getPostConditionsForRoleMapping(roleMapping);
-		return interpreteConditions(roleMapping, postConditions);
+		return interpreteConditions(roleMapping, postConditions, refactorer.getFakeRefactoredModel());
 	}
 
 	@Override
 	public RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		RoleMapping roleMapping = refactorer.getRoleMapping();
 		List<Entry<Object, String>> preConditions = IRoleMappingRegistry.INSTANCE.getPreConditionsForRoleMapping(roleMapping);
-		return interpreteConditions(roleMapping, preConditions);
+		return interpreteConditions(roleMapping, preConditions, refactorer.getOriginalModel());
 	}
 
-	private RefactoringStatus interpreteConditions(RoleMapping roleMapping, List<Entry<Object, String>> conditions) {
+	private RefactoringStatus interpreteConditions(RoleMapping roleMapping, List<Entry<Object, String>> conditions, EObject model) {
 		EPackage metamodel = roleMapping.getOwningMappingModel().getTargetMetamodel();
 		Resource mmResource = metamodel.eResource();
-		Resource resource = refactorer.getResource();
 		if(conditions != null){
 			for (Entry<Object, String> condition : conditions) {
 				Object constraint = condition.getKey();
 				String errorMessage = condition.getValue();
 				IConstraintInterpreter interpreter = IConstraintInterpreterRegistry.INSTANCE.getInterpreterForConstraint(condition.getKey());
-				IInterpretationResult interpretationResult = interpreter.interpreteConstraint(constraint, errorMessage, resource, mmResource);
+				IInterpretationResult interpretationResult = interpreter.interpreteConstraint(constraint, errorMessage, model, mmResource);
 				if(!interpretationResult.wasSuccessful()){
 					return RefactoringStatus.createFatalErrorStatus(interpretationResult.getErrorMessage());
 				}
