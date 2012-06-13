@@ -5,4 +5,5 @@
    <extension-point id="org.emftext.refactoring.postprocessor" name="postprocessor" schema="schema/org.emftext.refactoring.postprocessor.exsd"/>
    <extension-point id="org.emftext.refactoring.submenu" name="refactoringSubmenu" schema="schema/org.emftext.refactoring.submenu.exsd"/>
    <extension-point id="org.emftext.refactoring.customwizardpage" name="customWizardPage" schema="schema/org.emftext.refactoring.customwizardpage.exsd"/>
+   <extension-point id="org.emftext.refactoring.constraintinterpreter" name="constraintinterpreter" schema="schema/org.emftext.refactoring.constraintinterpreter.exsd"/>
 </plugin>

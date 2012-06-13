@@ -30,8 +30,6 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.registry.rolemapping.impl.BasicRoleMappingRegistry;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-
 /**
  * Interface for the registry where {@link RoleMappingModel}s are registered to a specific metamodel.
  * 
@@ -174,7 +172,7 @@ public interface IRoleMappingRegistry {
 	 * @param constraint
 	 * @param errorMessage
 	 */
-	public void registerPreCondition(RoleMapping mapping, Constraint constraint, String errorMessage);
+	public void registerPreCondition(RoleMapping mapping, Object constraint, String errorMessage);
 	
 	/**
 	 * Registers a {@link Constraint post-condition} for the given <code>mapping</code>. The given
@@ -184,7 +182,7 @@ public interface IRoleMappingRegistry {
 	 * @param constraint
 	 * @param errorMessage
 	 */
-	public void registerPostCondition(RoleMapping mapping, Constraint constraint, String errorMessage);
+	public void registerPostCondition(RoleMapping mapping, Object constraint, String errorMessage);
 	
 	/**
 	 * Returns all constraints (pre-conditions) registered for the given <code>mapping</code>. Additionally, the registered 
@@ -193,7 +191,7 @@ public interface IRoleMappingRegistry {
 	 * @param mapping
 	 * @return
 	 */
-	public List<Map.Entry<Constraint, String>> getPreConditionsForRoleMapping(RoleMapping mapping);
+	public List<Map.Entry<Object, String>> getPreConditionsForRoleMapping(RoleMapping mapping);
 	
 	/**
 	 * Returns all constraints (post-conditions) registered for the given <code>mapping</code>. Additionally, the registered 
@@ -202,5 +200,5 @@ public interface IRoleMappingRegistry {
 	 * @param mapping
 	 * @return
 	 */
-	public List<Map.Entry<Constraint, String>> getPostConditionsForRoleMapping(RoleMapping mapping);
+	public List<Map.Entry<Object, String>> getPostConditionsForRoleMapping(RoleMapping mapping);
 }
