@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Oclinterpreter
+Bundle-SymbolicName: org.emftext.refactoring.oclinterpreter;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.emftext.refactoring.oclinterpreter.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping,
+ org.eclipse.emf.ecore,
+ tudresden.ocl20.pivot.facade
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
