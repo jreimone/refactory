@@ -41,7 +41,6 @@ import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
