@@ -24,9 +24,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelSmell"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="factor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Metric">
+  <eClassifiers xsi:type="ecore:EClass" name="Metric" abstract="true">
     <eOperations name="calculate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="EAttribute0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Metric_Quality_Mapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" lowerBound="1"
@@ -36,5 +37,51 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="metrics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="quality"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="factor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Main">
+    <eOperations name="init"/>
+    <eOperations name="createModelSmell_Rolemapping_Mapping"/>
+    <eOperations name="createQuality_ModelSmell_Mapping"/>
+    <eOperations name="createMetric_Quality_Mapping"/>
+    <eOperations name="calculate"/>
+    <eOperations name="updateGui"/>
+    <eOperations name="refactor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metricQuality" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityModelSmell" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metrics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualities" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelSmells" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" lowerBound="1"
+        upperBound="-1" eType="#//Metric"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference1" lowerBound="1"
+        upperBound="-1" eType="#//Metric_Quality_Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference2" lowerBound="1"
+        upperBound="-1" eType="#//Quality_ModelSmell_Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="" lowerBound="1" upperBound="-1"
+        eType="#//ModelSmell_Rolemapping_Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="" lowerBound="1" upperBound="-1"
+        eType="#//Quality"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="" lowerBound="1" upperBound="-1"
+        eType="#//ModelSmell"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gui"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="" lowerBound="1" eType="#//GUI"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Init"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GUI">
+    <eOperations name="notify"/>
+    <eOperations name="add"/>
+    <eOperations name="remove"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="components"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" lowerBound="1"
+        upperBound="-1" eType="#//Component"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="" lowerBound="1" upperBound="-1"
+        eType="#//Component"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//Observer #//Observer.1">
+    <eOperations name="update"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Observer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Observer" interface="true">
+    <eOperations name="update"/>
   </eClassifiers>
 </ecore:EPackage>
