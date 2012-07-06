@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smell_model"
-    nsURI="http://smell_model/1.0" nsPrefix="smell_model">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smell_model" nsURI="http://smell_model/1.0" nsPrefix="smell_model">
   <eClassifiers xsi:type="ecore:EClass" name="ModelSmell">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -54,7 +52,7 @@
         upperBound="-1" eType="#//Metric"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GUI">
-    <eOperations name="notify"/>
+    <eOperations name="notifyComponents"/>
     <eOperations name="add"/>
     <eOperations name="remove"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="components" lowerBound="1"
