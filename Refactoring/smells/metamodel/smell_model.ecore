@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smell_model" nsURI="http://smell_model/1.0" nsPrefix="smell_model">
-  <eClassifiers xsi:type="ecore:EClass" name="ModelSmell">
+  <eClassifiers xsi:type="ecore:EClass" name="ModelSmell" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelSmell_Rolemapping_Mapping">
+  <eClassifiers xsi:type="ecore:EClass" name="ModelSmell_Rolemapping_Mapping" abstract="true"
+      interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelSmell" lowerBound="1"
         eType="#//ModelSmell"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Quality">
+  <eClassifiers xsi:type="ecore:EClass" name="Quality" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Quality_ModelSmell_Mapping">
+  <eClassifiers xsi:type="ecore:EClass" name="Quality_ModelSmell_Mapping" abstract="true"
+      interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="factor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelSmell" lowerBound="1"
         eType="#//ModelSmell"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="qualities" lowerBound="1"
         upperBound="-1" eType="#//Quality"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Metric" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="Metric" abstract="true" interface="true">
     <eOperations name="calculate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Metric_Quality_Mapping">
+  <eClassifiers xsi:type="ecore:EClass" name="Metric_Quality_Mapping" abstract="true"
+      interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="factor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="quality" lowerBound="1"
         eType="#//Quality"/>
@@ -31,9 +34,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Main">
     <eOperations name="init"/>
-    <eOperations name="createModelSmell_Rolemapping_Mapping"/>
-    <eOperations name="createQuality_ModelSmell_Mapping"/>
-    <eOperations name="createMetric_Quality_Mapping"/>
     <eOperations name="calculate"/>
     <eOperations name="updateGui"/>
     <eOperations name="refactor"/>
@@ -43,7 +43,7 @@
         upperBound="-1" eType="#//Quality_ModelSmell_Mapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metric_quality" lowerBound="1"
         upperBound="-1" eType="#//Metric_Quality_Mapping"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="gui" lowerBound="1" eType="#//GUI"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="view" lowerBound="1" eType="#//View"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="qualities" lowerBound="1"
         upperBound="-1" eType="#//Quality"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelSmells" lowerBound="1"
@@ -51,17 +51,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" lowerBound="1"
         upperBound="-1" eType="#//Metric"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GUI">
-    <eOperations name="notifyComponents"/>
-    <eOperations name="add"/>
-    <eOperations name="remove"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="components" lowerBound="1"
-        upperBound="-1" eType="#//Component"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//Observer">
-    <eOperations name="update"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Observer" abstract="true" interface="true">
+  <eClassifiers xsi:type="ecore:EClass" name="View">
+    <eOperations name="create"/>
     <eOperations name="update"/>
   </eClassifiers>
 </ecore:EPackage>

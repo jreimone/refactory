@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.emftext.modelSmells.smell_model.Main#getModelSmell_roleMapping <em>Model Smell role Mapping</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.Main#getQuality_modelSmell <em>Quality model Smell</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.Main#getMetric_quality <em>Metric quality</em>}</li>
- *   <li>{@link org.emftext.modelSmells.smell_model.Main#getGui <em>Gui</em>}</li>
+ *   <li>{@link org.emftext.modelSmells.smell_model.Main#getView <em>View</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.Main#getQualities <em>Qualities</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.Main#getModelSmells <em>Model Smells</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.Main#getMetrics <em>Metrics</em>}</li>
@@ -78,30 +78,30 @@ public interface Main extends EObject {
 	EList<Metric_Quality_Mapping> getMetric_quality();
 
 	/**
-	 * Returns the value of the '<em><b>Gui</b></em>' reference.
+	 * Returns the value of the '<em><b>View</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Gui</em>' reference isn't clear,
+	 * If the meaning of the '<em>View</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Gui</em>' reference.
-	 * @see #setGui(GUI)
-	 * @see org.emftext.modelSmells.smell_model.Smell_modelPackage#getMain_Gui()
+	 * @return the value of the '<em>View</em>' reference.
+	 * @see #setView(View)
+	 * @see org.emftext.modelSmells.smell_model.Smell_modelPackage#getMain_View()
 	 * @model required="true"
 	 * @generated
 	 */
-	GUI getGui();
+	View getView();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.modelSmells.smell_model.Main#getGui <em>Gui</em>}' reference.
+	 * Sets the value of the '{@link org.emftext.modelSmells.smell_model.Main#getView <em>View</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Gui</em>' reference.
-	 * @see #getGui()
+	 * @param value the new value of the '<em>View</em>' reference.
+	 * @see #getView()
 	 * @generated
 	 */
-	void setGui(GUI value);
+	void setView(View value);
 
 	/**
 	 * Returns the value of the '<em><b>Qualities</b></em>' reference list.
@@ -158,30 +158,6 @@ public interface Main extends EObject {
 	 * @generated
 	 */
 	void init();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void createModelSmell_Rolemapping_Mapping();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void createQuality_ModelSmell_Mapping();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void createMetric_Quality_Mapping();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -108,22 +108,9 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Smell_modelPackage.GUI: {
-				GUI gui = (GUI)theEObject;
-				T result = caseGUI(gui);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case Smell_modelPackage.COMPONENT: {
-				Component component = (Component)theEObject;
-				T result = caseComponent(component);
-				if (result == null) result = caseObserver(component);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case Smell_modelPackage.OBSERVER: {
-				Observer observer = (Observer)theEObject;
-				T result = caseObserver(observer);
+			case Smell_modelPackage.VIEW: {
+				View view = (View)theEObject;
+				T result = caseView(view);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -237,47 +224,17 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>GUI</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>View</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>GUI</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>View</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGUI(GUI object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Component</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Component</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseComponent(Component object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Observer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Observer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseObserver(Observer object) {
+	public T caseView(View object) {
 		return null;
 	}
 

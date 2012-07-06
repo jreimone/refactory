@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import org.emftext.modelSmells.smell_model.GUI;
 import org.emftext.modelSmells.smell_model.Main;
 import org.emftext.modelSmells.smell_model.Metric;
 import org.emftext.modelSmells.smell_model.Metric_Quality_Mapping;
@@ -25,6 +24,7 @@ import org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping;
 import org.emftext.modelSmells.smell_model.Quality;
 import org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping;
 import org.emftext.modelSmells.smell_model.Smell_modelPackage;
+import org.emftext.modelSmells.smell_model.View;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ import org.emftext.modelSmells.smell_model.Smell_modelPackage;
  *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getModelSmell_roleMapping <em>Model Smell role Mapping</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getQuality_modelSmell <em>Quality model Smell</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getMetric_quality <em>Metric quality</em>}</li>
- *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getGui <em>Gui</em>}</li>
+ *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getView <em>View</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getQualities <em>Qualities</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getModelSmells <em>Model Smells</em>}</li>
  *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getMetrics <em>Metrics</em>}</li>
@@ -77,14 +77,14 @@ public class MainImpl extends EObjectImpl implements Main {
 	protected EList<Metric_Quality_Mapping> metric_quality;
 
 	/**
-	 * The cached value of the '{@link #getGui() <em>Gui</em>}' reference.
+	 * The cached value of the '{@link #getView() <em>View</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGui()
+	 * @see #getView()
 	 * @generated
 	 * @ordered
 	 */
-	protected GUI gui;
+	protected View view;
 
 	/**
 	 * The cached value of the '{@link #getQualities() <em>Qualities</em>}' reference list.
@@ -176,16 +176,16 @@ public class MainImpl extends EObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GUI getGui() {
-		if (gui != null && gui.eIsProxy()) {
-			InternalEObject oldGui = (InternalEObject)gui;
-			gui = (GUI)eResolveProxy(oldGui);
-			if (gui != oldGui) {
+	public View getView() {
+		if (view != null && view.eIsProxy()) {
+			InternalEObject oldView = (InternalEObject)view;
+			view = (View)eResolveProxy(oldView);
+			if (view != oldView) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Smell_modelPackage.MAIN__GUI, oldGui, gui));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Smell_modelPackage.MAIN__VIEW, oldView, view));
 			}
 		}
-		return gui;
+		return view;
 	}
 
 	/**
@@ -193,8 +193,8 @@ public class MainImpl extends EObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GUI basicGetGui() {
-		return gui;
+	public View basicGetView() {
+		return view;
 	}
 
 	/**
@@ -202,11 +202,11 @@ public class MainImpl extends EObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setGui(GUI newGui) {
-		GUI oldGui = gui;
-		gui = newGui;
+	public void setView(View newView) {
+		View oldView = view;
+		view = newView;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MAIN__GUI, oldGui, gui));
+			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MAIN__VIEW, oldView, view));
 	}
 
 	/**
@@ -261,39 +261,6 @@ public class MainImpl extends EObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void createModelSmell_Rolemapping_Mapping() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void createQuality_ModelSmell_Mapping() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void createMetric_Quality_Mapping() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public void calculate() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -336,9 +303,9 @@ public class MainImpl extends EObjectImpl implements Main {
 				return getQuality_modelSmell();
 			case Smell_modelPackage.MAIN__METRIC_QUALITY:
 				return getMetric_quality();
-			case Smell_modelPackage.MAIN__GUI:
-				if (resolve) return getGui();
-				return basicGetGui();
+			case Smell_modelPackage.MAIN__VIEW:
+				if (resolve) return getView();
+				return basicGetView();
 			case Smell_modelPackage.MAIN__QUALITIES:
 				return getQualities();
 			case Smell_modelPackage.MAIN__MODEL_SMELLS:
@@ -370,8 +337,8 @@ public class MainImpl extends EObjectImpl implements Main {
 				getMetric_quality().clear();
 				getMetric_quality().addAll((Collection<? extends Metric_Quality_Mapping>)newValue);
 				return;
-			case Smell_modelPackage.MAIN__GUI:
-				setGui((GUI)newValue);
+			case Smell_modelPackage.MAIN__VIEW:
+				setView((View)newValue);
 				return;
 			case Smell_modelPackage.MAIN__QUALITIES:
 				getQualities().clear();
@@ -406,8 +373,8 @@ public class MainImpl extends EObjectImpl implements Main {
 			case Smell_modelPackage.MAIN__METRIC_QUALITY:
 				getMetric_quality().clear();
 				return;
-			case Smell_modelPackage.MAIN__GUI:
-				setGui((GUI)null);
+			case Smell_modelPackage.MAIN__VIEW:
+				setView((View)null);
 				return;
 			case Smell_modelPackage.MAIN__QUALITIES:
 				getQualities().clear();
@@ -436,8 +403,8 @@ public class MainImpl extends EObjectImpl implements Main {
 				return quality_modelSmell != null && !quality_modelSmell.isEmpty();
 			case Smell_modelPackage.MAIN__METRIC_QUALITY:
 				return metric_quality != null && !metric_quality.isEmpty();
-			case Smell_modelPackage.MAIN__GUI:
-				return gui != null;
+			case Smell_modelPackage.MAIN__VIEW:
+				return view != null;
 			case Smell_modelPackage.MAIN__QUALITIES:
 				return qualities != null && !qualities.isEmpty();
 			case Smell_modelPackage.MAIN__MODEL_SMELLS:

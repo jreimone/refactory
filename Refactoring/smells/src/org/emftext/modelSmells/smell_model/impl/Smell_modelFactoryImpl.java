@@ -56,67 +56,11 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case Smell_modelPackage.MODEL_SMELL: return createModelSmell();
-			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING: return createModelSmell_Rolemapping_Mapping();
-			case Smell_modelPackage.QUALITY: return createQuality();
-			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING: return createQuality_ModelSmell_Mapping();
-			case Smell_modelPackage.METRIC_QUALITY_MAPPING: return createMetric_Quality_Mapping();
 			case Smell_modelPackage.MAIN: return createMain();
-			case Smell_modelPackage.GUI: return createGUI();
-			case Smell_modelPackage.COMPONENT: return createComponent();
+			case Smell_modelPackage.VIEW: return createView();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ModelSmell createModelSmell() {
-		ModelSmellImpl modelSmell = new ModelSmellImpl();
-		return modelSmell;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ModelSmell_Rolemapping_Mapping createModelSmell_Rolemapping_Mapping() {
-		ModelSmell_Rolemapping_MappingImpl modelSmell_Rolemapping_Mapping = new ModelSmell_Rolemapping_MappingImpl();
-		return modelSmell_Rolemapping_Mapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Quality createQuality() {
-		QualityImpl quality = new QualityImpl();
-		return quality;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Quality_ModelSmell_Mapping createQuality_ModelSmell_Mapping() {
-		Quality_ModelSmell_MappingImpl quality_ModelSmell_Mapping = new Quality_ModelSmell_MappingImpl();
-		return quality_ModelSmell_Mapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Metric_Quality_Mapping createMetric_Quality_Mapping() {
-		Metric_Quality_MappingImpl metric_Quality_Mapping = new Metric_Quality_MappingImpl();
-		return metric_Quality_Mapping;
 	}
 
 	/**
@@ -134,19 +78,9 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GUI createGUI() {
-		GUIImpl gui = new GUIImpl();
-		return gui;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Component createComponent() {
-		ComponentImpl component = new ComponentImpl();
-		return component;
+	public View createView() {
+		ViewImpl view = new ViewImpl();
+		return view;
 	}
 
 	/**

@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.emftext.modelSmells.smell_model.Smell_modelPackage#getModelSmell_Rolemapping_Mapping()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface ModelSmell_Rolemapping_Mapping extends EObject {

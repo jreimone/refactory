@@ -6,25 +6,25 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.emftext.modelSmells.smell_model.Component;
 import org.emftext.modelSmells.smell_model.Smell_modelPackage;
+import org.emftext.modelSmells.smell_model.View;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Component</b></em>'.
+ * An implementation of the model object '<em><b>View</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ComponentImpl extends EObjectImpl implements Component {
+public class ViewImpl extends EObjectImpl implements View {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ComponentImpl() {
+	protected ViewImpl() {
 		super();
 	}
 
@@ -35,7 +35,18 @@ public class ComponentImpl extends EObjectImpl implements Component {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return Smell_modelPackage.Literals.COMPONENT;
+		return Smell_modelPackage.Literals.VIEW;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void create() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -49,4 +60,4 @@ public class ComponentImpl extends EObjectImpl implements Component {
 		throw new UnsupportedOperationException();
 	}
 
-} //ComponentImpl
+} //ViewImpl
