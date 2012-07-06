@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.emftext.modelSmells.smell_model.Smell_modelPackage#getQuality()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface Quality extends EObject {

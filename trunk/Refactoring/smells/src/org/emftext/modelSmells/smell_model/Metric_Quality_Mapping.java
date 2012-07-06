@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.emftext.modelSmells.smell_model.Smell_modelPackage#getMetric_Quality_Mapping()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface Metric_Quality_Mapping extends EObject {

@@ -56,10 +56,10 @@ public interface Smell_modelPackage extends EPackage {
 	Smell_modelPackage eINSTANCE = org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.ModelSmellImpl <em>Model Smell</em>}' class.
+	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.ModelSmell <em>Model Smell</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.impl.ModelSmellImpl
+	 * @see org.emftext.modelSmells.smell_model.ModelSmell
 	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getModelSmell()
 	 * @generated
 	 */
@@ -84,10 +84,10 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.ModelSmell_Rolemapping_MappingImpl <em>Model Smell Rolemapping Mapping</em>}' class.
+	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping <em>Model Smell Rolemapping Mapping</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.impl.ModelSmell_Rolemapping_MappingImpl
+	 * @see org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping
 	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getModelSmell_Rolemapping_Mapping()
 	 * @generated
 	 */
@@ -112,10 +112,10 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_ROLEMAPPING_MAPPING_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.QualityImpl <em>Quality</em>}' class.
+	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.Quality <em>Quality</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.impl.QualityImpl
+	 * @see org.emftext.modelSmells.smell_model.Quality
 	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getQuality()
 	 * @generated
 	 */
@@ -140,10 +140,10 @@ public interface Smell_modelPackage extends EPackage {
 	int QUALITY_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.Quality_ModelSmell_MappingImpl <em>Quality Model Smell Mapping</em>}' class.
+	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping <em>Quality Model Smell Mapping</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.impl.Quality_ModelSmell_MappingImpl
+	 * @see org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping
 	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getQuality_ModelSmell_Mapping()
 	 * @generated
 	 */
@@ -186,10 +186,10 @@ public interface Smell_modelPackage extends EPackage {
 	int QUALITY_MODEL_SMELL_MAPPING_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.MetricImpl <em>Metric</em>}' class.
+	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.Metric <em>Metric</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.impl.MetricImpl
+	 * @see org.emftext.modelSmells.smell_model.Metric
 	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getMetric()
 	 * @generated
 	 */
@@ -214,10 +214,10 @@ public interface Smell_modelPackage extends EPackage {
 	int METRIC_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.Metric_Quality_MappingImpl <em>Metric Quality Mapping</em>}' class.
+	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.Metric_Quality_Mapping <em>Metric Quality Mapping</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.impl.Metric_Quality_MappingImpl
+	 * @see org.emftext.modelSmells.smell_model.Metric_Quality_Mapping
 	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getMetric_Quality_Mapping()
 	 * @generated
 	 */
@@ -297,13 +297,13 @@ public interface Smell_modelPackage extends EPackage {
 	int MAIN__METRIC_QUALITY = 2;
 
 	/**
-	 * The feature id for the '<em><b>Gui</b></em>' reference.
+	 * The feature id for the '<em><b>View</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAIN__GUI = 3;
+	int MAIN__VIEW = 3;
 
 	/**
 	 * The feature id for the '<em><b>Qualities</b></em>' reference list.
@@ -342,71 +342,23 @@ public interface Smell_modelPackage extends EPackage {
 	int MAIN_FEATURE_COUNT = 7;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.GUIImpl <em>GUI</em>}' class.
+	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.ViewImpl <em>View</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.impl.GUIImpl
-	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getGUI()
+	 * @see org.emftext.modelSmells.smell_model.impl.ViewImpl
+	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getView()
 	 * @generated
 	 */
-	int GUI = 7;
+	int VIEW = 7;
 
 	/**
-	 * The feature id for the '<em><b>Components</b></em>' reference list.
+	 * The number of structural features of the '<em>View</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUI__COMPONENTS = 0;
-
-	/**
-	 * The number of structural features of the '<em>GUI</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GUI_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.Observer <em>Observer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.Observer
-	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getObserver()
-	 * @generated
-	 */
-	int OBSERVER = 9;
-
-	/**
-	 * The number of structural features of the '<em>Observer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBSERVER_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.emftext.modelSmells.smell_model.impl.ComponentImpl <em>Component</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.emftext.modelSmells.smell_model.impl.ComponentImpl
-	 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getComponent()
-	 * @generated
-	 */
-	int COMPONENT = 8;
-
-	/**
-	 * The number of structural features of the '<em>Component</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_FEATURE_COUNT = OBSERVER_FEATURE_COUNT + 0;
-
+	int VIEW_FEATURE_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.emftext.modelSmells.smell_model.ModelSmell <em>Model Smell</em>}'.
@@ -622,15 +574,15 @@ public interface Smell_modelPackage extends EPackage {
 	EReference getMain_Metric_quality();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.emftext.modelSmells.smell_model.Main#getGui <em>Gui</em>}'.
+	 * Returns the meta object for the reference '{@link org.emftext.modelSmells.smell_model.Main#getView <em>View</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Gui</em>'.
-	 * @see org.emftext.modelSmells.smell_model.Main#getGui()
+	 * @return the meta object for the reference '<em>View</em>'.
+	 * @see org.emftext.modelSmells.smell_model.Main#getView()
 	 * @see #getMain()
 	 * @generated
 	 */
-	EReference getMain_Gui();
+	EReference getMain_View();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.emftext.modelSmells.smell_model.Main#getQualities <em>Qualities</em>}'.
@@ -666,45 +618,14 @@ public interface Smell_modelPackage extends EPackage {
 	EReference getMain_Metrics();
 
 	/**
-	 * Returns the meta object for class '{@link org.emftext.modelSmells.smell_model.GUI <em>GUI</em>}'.
+	 * Returns the meta object for class '{@link org.emftext.modelSmells.smell_model.View <em>View</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>GUI</em>'.
-	 * @see org.emftext.modelSmells.smell_model.GUI
+	 * @return the meta object for class '<em>View</em>'.
+	 * @see org.emftext.modelSmells.smell_model.View
 	 * @generated
 	 */
-	EClass getGUI();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.emftext.modelSmells.smell_model.GUI#getComponents <em>Components</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Components</em>'.
-	 * @see org.emftext.modelSmells.smell_model.GUI#getComponents()
-	 * @see #getGUI()
-	 * @generated
-	 */
-	EReference getGUI_Components();
-
-	/**
-	 * Returns the meta object for class '{@link org.emftext.modelSmells.smell_model.Component <em>Component</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Component</em>'.
-	 * @see org.emftext.modelSmells.smell_model.Component
-	 * @generated
-	 */
-	EClass getComponent();
-
-	/**
-	 * Returns the meta object for class '{@link org.emftext.modelSmells.smell_model.Observer <em>Observer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Observer</em>'.
-	 * @see org.emftext.modelSmells.smell_model.Observer
-	 * @generated
-	 */
-	EClass getObserver();
+	EClass getView();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -729,10 +650,10 @@ public interface Smell_modelPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.ModelSmellImpl <em>Model Smell</em>}' class.
+		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.ModelSmell <em>Model Smell</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.impl.ModelSmellImpl
+		 * @see org.emftext.modelSmells.smell_model.ModelSmell
 		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getModelSmell()
 		 * @generated
 		 */
@@ -747,10 +668,10 @@ public interface Smell_modelPackage extends EPackage {
 		EAttribute MODEL_SMELL__NAME = eINSTANCE.getModelSmell_Name();
 
 		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.ModelSmell_Rolemapping_MappingImpl <em>Model Smell Rolemapping Mapping</em>}' class.
+		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping <em>Model Smell Rolemapping Mapping</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.impl.ModelSmell_Rolemapping_MappingImpl
+		 * @see org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping
 		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getModelSmell_Rolemapping_Mapping()
 		 * @generated
 		 */
@@ -765,10 +686,10 @@ public interface Smell_modelPackage extends EPackage {
 		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL = eINSTANCE.getModelSmell_Rolemapping_Mapping_ModelSmell();
 
 		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.QualityImpl <em>Quality</em>}' class.
+		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.Quality <em>Quality</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.impl.QualityImpl
+		 * @see org.emftext.modelSmells.smell_model.Quality
 		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getQuality()
 		 * @generated
 		 */
@@ -783,10 +704,10 @@ public interface Smell_modelPackage extends EPackage {
 		EAttribute QUALITY__NAME = eINSTANCE.getQuality_Name();
 
 		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.Quality_ModelSmell_MappingImpl <em>Quality Model Smell Mapping</em>}' class.
+		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping <em>Quality Model Smell Mapping</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.impl.Quality_ModelSmell_MappingImpl
+		 * @see org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping
 		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getQuality_ModelSmell_Mapping()
 		 * @generated
 		 */
@@ -817,10 +738,10 @@ public interface Smell_modelPackage extends EPackage {
 		EReference QUALITY_MODEL_SMELL_MAPPING__QUALITIES = eINSTANCE.getQuality_ModelSmell_Mapping_Qualities();
 
 		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.MetricImpl <em>Metric</em>}' class.
+		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.Metric <em>Metric</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.impl.MetricImpl
+		 * @see org.emftext.modelSmells.smell_model.Metric
 		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getMetric()
 		 * @generated
 		 */
@@ -835,10 +756,10 @@ public interface Smell_modelPackage extends EPackage {
 		EAttribute METRIC__NAME = eINSTANCE.getMetric_Name();
 
 		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.Metric_Quality_MappingImpl <em>Metric Quality Mapping</em>}' class.
+		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.Metric_Quality_Mapping <em>Metric Quality Mapping</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.impl.Metric_Quality_MappingImpl
+		 * @see org.emftext.modelSmells.smell_model.Metric_Quality_Mapping
 		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getMetric_Quality_Mapping()
 		 * @generated
 		 */
@@ -903,12 +824,12 @@ public interface Smell_modelPackage extends EPackage {
 		EReference MAIN__METRIC_QUALITY = eINSTANCE.getMain_Metric_quality();
 
 		/**
-		 * The meta object literal for the '<em><b>Gui</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>View</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAIN__GUI = eINSTANCE.getMain_Gui();
+		EReference MAIN__VIEW = eINSTANCE.getMain_View();
 
 		/**
 		 * The meta object literal for the '<em><b>Qualities</b></em>' reference list feature.
@@ -935,42 +856,14 @@ public interface Smell_modelPackage extends EPackage {
 		EReference MAIN__METRICS = eINSTANCE.getMain_Metrics();
 
 		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.GUIImpl <em>GUI</em>}' class.
+		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.ViewImpl <em>View</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.impl.GUIImpl
-		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getGUI()
+		 * @see org.emftext.modelSmells.smell_model.impl.ViewImpl
+		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getView()
 		 * @generated
 		 */
-		EClass GUI = eINSTANCE.getGUI();
-
-		/**
-		 * The meta object literal for the '<em><b>Components</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GUI__COMPONENTS = eINSTANCE.getGUI_Components();
-
-		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.impl.ComponentImpl <em>Component</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.impl.ComponentImpl
-		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getComponent()
-		 * @generated
-		 */
-		EClass COMPONENT = eINSTANCE.getComponent();
-
-		/**
-		 * The meta object literal for the '{@link org.emftext.modelSmells.smell_model.Observer <em>Observer</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.emftext.modelSmells.smell_model.Observer
-		 * @see org.emftext.modelSmells.smell_model.impl.Smell_modelPackageImpl#getObserver()
-		 * @generated
-		 */
-		EClass OBSERVER = eINSTANCE.getObserver();
+		EClass VIEW = eINSTANCE.getView();
 
 	}
 

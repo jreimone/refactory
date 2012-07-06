@@ -12,5 +12,14 @@
             class="org.emftext.modelSmells.smell_model.Smell_modelPackage"
             genModel="metamodel/smell_model.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+      </perspectiveExtension>
+   </extension>
 
 </plugin>

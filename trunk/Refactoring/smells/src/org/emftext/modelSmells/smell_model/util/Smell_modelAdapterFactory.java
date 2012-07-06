@@ -96,16 +96,8 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 				return createMainAdapter();
 			}
 			@Override
-			public Adapter caseGUI(GUI object) {
-				return createGUIAdapter();
-			}
-			@Override
-			public Adapter caseComponent(Component object) {
-				return createComponentAdapter();
-			}
-			@Override
-			public Adapter caseObserver(Observer object) {
-				return createObserverAdapter();
+			public Adapter caseView(View object) {
+				return createViewAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -226,44 +218,16 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.GUI <em>GUI</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.View <em>View</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.GUI
+	 * @see org.emftext.modelSmells.smell_model.View
 	 * @generated
 	 */
-	public Adapter createGUIAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Component <em>Component</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Component
-	 * @generated
-	 */
-	public Adapter createComponentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Observer <em>Observer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Observer
-	 * @generated
-	 */
-	public Adapter createObserverAdapter() {
+	public Adapter createViewAdapter() {
 		return null;
 	}
 
