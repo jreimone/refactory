@@ -1,0 +1,39 @@
+package org.eclipse.emf.modelSmells.smell_model.impl;
+
+
+import org.eclipse.emf.modelSmells.smell_model.Activator;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
+
+public class ActivatorImpl extends AbstractUIPlugin implements Activator {
+
+		public static final String PLUGIN_ID = "model_smell_plugin";
+
+		private static ActivatorImpl plugin;
+		
+		/**
+		 * The constructor
+		 */
+		public ActivatorImpl() {
+		}
+
+		public void start(BundleContext context) throws Exception {
+			super.start(context);
+			plugin = this;
+		}
+
+		public void stop(BundleContext context) throws Exception {
+			plugin = null;
+			super.stop(context);
+		}
+
+		/**
+		 * Returns the shared instance
+		 *
+		 * @return the shared instance
+		 */
+		public static ActivatorImpl getDefault() {
+			return plugin;
+		}
+
+}
