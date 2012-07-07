@@ -32,7 +32,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Main/modelSmell_roleMapping"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Main/quality_modelSmell"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Main/metric_quality"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Main/view"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Main/qualities"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Main/modelSmells"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Main/metrics"/>
@@ -40,10 +39,6 @@
       <genOperations ecoreOperation="smell_model.ecore#//Main/calculate"/>
       <genOperations ecoreOperation="smell_model.ecore#//Main/updateGui"/>
       <genOperations ecoreOperation="smell_model.ecore#//Main/refactor"/>
-    </genClasses>
-    <genClasses ecoreClass="smell_model.ecore#//View">
-      <genOperations ecoreOperation="smell_model.ecore#//View/create"/>
-      <genOperations ecoreOperation="smell_model.ecore#//View/update"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
