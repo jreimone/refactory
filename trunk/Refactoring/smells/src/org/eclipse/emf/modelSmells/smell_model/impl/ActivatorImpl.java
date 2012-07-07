@@ -1,11 +1,10 @@
 package org.eclipse.emf.modelSmells.smell_model.impl;
 
 
-import org.eclipse.emf.modelSmells.smell_model.Activator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-public class ActivatorImpl extends AbstractUIPlugin implements Activator {
+public class ActivatorImpl extends AbstractUIPlugin {
 
 		public static final String PLUGIN_ID = "model_smell_plugin";
 
