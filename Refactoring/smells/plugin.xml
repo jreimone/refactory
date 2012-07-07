@@ -9,17 +9,21 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://smell_model/1.0"
-            class="org.emftext.modelSmells.smell_model.Smell_modelPackage"
+            class="org.eclipse.emf.modelSmells.smell_model.Smell_modelPackage"
             genModel="metamodel/smell_model.genmodel"/>
    </extension>
    <extension
          point="org.eclipse.ui.views">
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="*">
-      </perspectiveExtension>
+         <view
+               category="org.eclipse.emf.modelSmells.smell_model.impl.plugin_modelsmell_view_category"
+               class="org.eclipse.emf.modelSmells.smell_model.impl.ViewImpl"
+               icon="icons/view.gif"
+               id="org.emftext.modelSmells.smell_model.impl.plugin_modelsmell_view"
+               name="Modelsmell View"/>
+         <category
+               id="org.eclipse.emf.modelSmells.smell_model.impl.plugin_modelsmell_view_category"
+               name="Model Smells">
+         </category>
    </extension>
 
 </plugin>
