@@ -193,7 +193,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_gnpBYcbGEeGiNqYwZSRCnQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_gnpBYsbGEeGiNqYwZSRCnQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="smell_model.ecore#//Quality_ModelSmell_Mapping/qualities"/>
+    <element xmi:type="ecore:EReference" href="smell_model.ecore#//Quality_ModelSmell_Mapping/quality"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_gnpBY8bGEeGiNqYwZSRCnQ" points="[0, 0, -138, 68]$[138, -68, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_gnq2kMbGEeGiNqYwZSRCnQ" id="(0.6632124352331606,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_UG9SkcbHEeGiNqYwZSRCnQ" id="(0.24347826086956523,1.0)"/>
@@ -221,7 +221,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_nq0JMcbGEeGiNqYwZSRCnQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_nq0JMsbGEeGiNqYwZSRCnQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="smell_model.ecore#//Metric_Quality_Mapping/metrics"/>
+    <element xmi:type="ecore:EReference" href="smell_model.ecore#//Metric_Quality_Mapping/metric"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_nq0JM8bGEeGiNqYwZSRCnQ" points="[0, 0, -118, 60]$[118, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nq1-YMbGEeGiNqYwZSRCnQ" id="(0.6645962732919255,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_UG5oMMbHEeGiNqYwZSRCnQ" id="(0.24347826086956523,1.0)"/>
