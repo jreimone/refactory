@@ -54,5 +54,7 @@ public interface Metric extends EObject {
 	 * @generated
 	 */
 	void calculate();
+	
+	void register();
 
 } // Metric
