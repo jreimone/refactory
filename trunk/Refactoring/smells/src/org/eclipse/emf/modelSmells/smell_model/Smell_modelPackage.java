@@ -168,13 +168,13 @@ public interface Smell_modelPackage extends EPackage {
 	int QUALITY_MODEL_SMELL_MAPPING__MODEL_SMELL = 1;
 
 	/**
-	 * The feature id for the '<em><b>Qualities</b></em>' reference list.
+	 * The feature id for the '<em><b>Quality</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUALITY_MODEL_SMELL_MAPPING__QUALITIES = 2;
+	int QUALITY_MODEL_SMELL_MAPPING__QUALITY = 2;
 
 	/**
 	 * The number of structural features of the '<em>Quality Model Smell Mapping</em>' class.
@@ -242,13 +242,13 @@ public interface Smell_modelPackage extends EPackage {
 	int METRIC_QUALITY_MAPPING__QUALITY = 1;
 
 	/**
-	 * The feature id for the '<em><b>Metrics</b></em>' reference list.
+	 * The feature id for the '<em><b>Metric</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METRIC_QUALITY_MAPPING__METRICS = 2;
+	int METRIC_QUALITY_MAPPING__METRIC = 2;
 
 	/**
 	 * The number of structural features of the '<em>Metric Quality Mapping</em>' class.
@@ -428,15 +428,15 @@ public interface Smell_modelPackage extends EPackage {
 	EReference getQuality_ModelSmell_Mapping_ModelSmell();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping#getQualities <em>Qualities</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping#getQuality <em>Quality</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Qualities</em>'.
-	 * @see org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping#getQualities()
+	 * @return the meta object for the reference '<em>Quality</em>'.
+	 * @see org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping#getQuality()
 	 * @see #getQuality_ModelSmell_Mapping()
 	 * @generated
 	 */
-	EReference getQuality_ModelSmell_Mapping_Qualities();
+	EReference getQuality_ModelSmell_Mapping_Quality();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.modelSmells.smell_model.Metric <em>Metric</em>}'.
@@ -492,15 +492,15 @@ public interface Smell_modelPackage extends EPackage {
 	EReference getMetric_Quality_Mapping_Quality();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping#getMetrics <em>Metrics</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping#getMetric <em>Metric</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Metrics</em>'.
-	 * @see org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping#getMetrics()
+	 * @return the meta object for the reference '<em>Metric</em>'.
+	 * @see org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping#getMetric()
 	 * @see #getMetric_Quality_Mapping()
 	 * @generated
 	 */
-	EReference getMetric_Quality_Mapping_Metrics();
+	EReference getMetric_Quality_Mapping_Metric();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.modelSmells.smell_model.Main <em>Main</em>}'.
@@ -681,12 +681,12 @@ public interface Smell_modelPackage extends EPackage {
 		EReference QUALITY_MODEL_SMELL_MAPPING__MODEL_SMELL = eINSTANCE.getQuality_ModelSmell_Mapping_ModelSmell();
 
 		/**
-		 * The meta object literal for the '<em><b>Qualities</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Quality</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference QUALITY_MODEL_SMELL_MAPPING__QUALITIES = eINSTANCE.getQuality_ModelSmell_Mapping_Qualities();
+		EReference QUALITY_MODEL_SMELL_MAPPING__QUALITY = eINSTANCE.getQuality_ModelSmell_Mapping_Quality();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.modelSmells.smell_model.Metric <em>Metric</em>}' class.
@@ -733,12 +733,12 @@ public interface Smell_modelPackage extends EPackage {
 		EReference METRIC_QUALITY_MAPPING__QUALITY = eINSTANCE.getMetric_Quality_Mapping_Quality();
 
 		/**
-		 * The meta object literal for the '<em><b>Metrics</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Metric</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference METRIC_QUALITY_MAPPING__METRICS = eINSTANCE.getMetric_Quality_Mapping_Metrics();
+		EReference METRIC_QUALITY_MAPPING__METRIC = eINSTANCE.getMetric_Quality_Mapping_Metric();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.modelSmells.smell_model.impl.MainImpl <em>Main</em>}' class.
