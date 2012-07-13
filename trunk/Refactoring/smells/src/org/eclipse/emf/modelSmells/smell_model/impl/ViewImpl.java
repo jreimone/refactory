@@ -90,7 +90,6 @@ public class ViewImpl  extends ViewPart  implements View {
 	    load = new ToolItem(buttonBar, SWT.PUSH);
 		Image image_start = null;
 		Image image_load = null;
-		//TODO relativer Pfad
     	image_start = new Image(device, ViewImpl.class.getResourceAsStream(("/org/eclipse/emf/modelSmells/smell_model/icons/start.gif")));
         image_load = new Image(device, ViewImpl.class.getResourceAsStream(("/org/eclipse/emf/modelSmells/smell_model/icons/load.gif")));
         start.setImage(image_start);
