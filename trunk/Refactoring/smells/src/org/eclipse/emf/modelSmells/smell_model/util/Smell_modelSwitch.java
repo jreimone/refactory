@@ -1,13 +1,13 @@
 /**
  */
-package org.emftext.modelSmells.smell_model.util;
+package org.eclipse.emf.modelSmells.smell_model.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.emf.modelSmells.smell_model.*;
 
-import org.emftext.modelSmells.smell_model.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +19,7 @@ import org.emftext.modelSmells.smell_model.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.emftext.modelSmells.smell_model.Smell_modelPackage
+ * @see org.eclipse.emf.modelSmells.smell_model.Smell_modelPackage
  * @generated
  */
 public class Smell_modelSwitch<T> extends Switch<T> {
@@ -105,25 +105,6 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 			case Smell_modelPackage.MAIN: {
 				Main main = (Main)theEObject;
 				T result = caseMain(main);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case Smell_modelPackage.GUI: {
-				GUI gui = (GUI)theEObject;
-				T result = caseGUI(gui);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case Smell_modelPackage.COMPONENT: {
-				Component component = (Component)theEObject;
-				T result = caseComponent(component);
-				if (result == null) result = caseObserver(component);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case Smell_modelPackage.OBSERVER: {
-				Observer observer = (Observer)theEObject;
-				T result = caseObserver(observer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -233,51 +214,6 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMain(Main object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>GUI</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>GUI</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGUI(GUI object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Component</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Component</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseComponent(Component object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Observer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Observer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseObserver(Observer object) {
 		return null;
 	}
 
