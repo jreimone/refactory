@@ -1,6 +1,7 @@
 package org.eclipse.emf.modelSmells.smell_model.impl;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
@@ -30,7 +31,7 @@ public class ViewImpl_Quality{
 	}
 	
 	public void createNew(){
-		qualityComposite = new Composite(parent, SWT.BORDER);
+		qualityComposite = new Composite(parent, SWT.NONE);
 		GridLayout grid = new GridLayout();
 		grid.numColumns = 3;
 		qualityComposite.setLayout(grid);
@@ -41,6 +42,7 @@ public class ViewImpl_Quality{
 		
 		qualityScale = new Scale(qualityComposite, SWT.HORIZONTAL);
 		qualityScale.setSelection(factor);
+		//TODO Selection = 0 -> Smells ausblenden
 		qualityScale.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -83,7 +85,8 @@ public class ViewImpl_Quality{
 		qualityText_Factor.setText("   " + factor);
 		qualityText_Factor.setEnabled(false);
 		
-		qualityComposite.setSize(qualityComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		parent.setSize(parent.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		parent.layout();
 	}
 
 	public Text getQualityText_Name() {
@@ -114,7 +117,7 @@ public class ViewImpl_Quality{
 		return parent;
 	}
 	
-	public boolean setParent(Composite parent){
+	public boolean setParent(ScrolledComposite parent){
 		try {
 			this.parent = parent;
 		} catch (Exception e){
