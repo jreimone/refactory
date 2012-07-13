@@ -1,6 +1,6 @@
 /**
  */
-package org.emftext.modelSmells.smell_model.util;
+package org.eclipse.emf.modelSmells.smell_model.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -8,15 +8,15 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.modelSmells.smell_model.*;
 
-import org.emftext.modelSmells.smell_model.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.emftext.modelSmells.smell_model.Smell_modelPackage
+ * @see org.eclipse.emf.modelSmells.smell_model.Smell_modelPackage
  * @generated
  */
 public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
@@ -96,18 +96,6 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 				return createMainAdapter();
 			}
 			@Override
-			public Adapter caseGUI(GUI object) {
-				return createGUIAdapter();
-			}
-			@Override
-			public Adapter caseComponent(Component object) {
-				return createComponentAdapter();
-			}
-			@Override
-			public Adapter caseObserver(Observer object) {
-				return createObserverAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -128,13 +116,13 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.ModelSmell <em>Model Smell</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.modelSmells.smell_model.ModelSmell <em>Model Smell</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.ModelSmell
+	 * @see org.eclipse.emf.modelSmells.smell_model.ModelSmell
 	 * @generated
 	 */
 	public Adapter createModelSmellAdapter() {
@@ -142,13 +130,13 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping <em>Model Smell Rolemapping Mapping</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping <em>Model Smell Rolemapping Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping
+	 * @see org.eclipse.emf.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping
 	 * @generated
 	 */
 	public Adapter createModelSmell_Rolemapping_MappingAdapter() {
@@ -156,13 +144,13 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Quality <em>Quality</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.modelSmells.smell_model.Quality <em>Quality</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Quality
+	 * @see org.eclipse.emf.modelSmells.smell_model.Quality
 	 * @generated
 	 */
 	public Adapter createQualityAdapter() {
@@ -170,13 +158,13 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping <em>Quality Model Smell Mapping</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping <em>Quality Model Smell Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping
+	 * @see org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping
 	 * @generated
 	 */
 	public Adapter createQuality_ModelSmell_MappingAdapter() {
@@ -184,13 +172,13 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Metric <em>Metric</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.modelSmells.smell_model.Metric <em>Metric</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Metric
+	 * @see org.eclipse.emf.modelSmells.smell_model.Metric
 	 * @generated
 	 */
 	public Adapter createMetricAdapter() {
@@ -198,13 +186,13 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Metric_Quality_Mapping <em>Metric Quality Mapping</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping <em>Metric Quality Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Metric_Quality_Mapping
+	 * @see org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping
 	 * @generated
 	 */
 	public Adapter createMetric_Quality_MappingAdapter() {
@@ -212,58 +200,16 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Main <em>Main</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.modelSmells.smell_model.Main <em>Main</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Main
+	 * @see org.eclipse.emf.modelSmells.smell_model.Main
 	 * @generated
 	 */
 	public Adapter createMainAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.GUI <em>GUI</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.GUI
-	 * @generated
-	 */
-	public Adapter createGUIAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Component <em>Component</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Component
-	 * @generated
-	 */
-	public Adapter createComponentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.modelSmells.smell_model.Observer <em>Observer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.emftext.modelSmells.smell_model.Observer
-	 * @generated
-	 */
-	public Adapter createObserverAdapter() {
 		return null;
 	}
 
