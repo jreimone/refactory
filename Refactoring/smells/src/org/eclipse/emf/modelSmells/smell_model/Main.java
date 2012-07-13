@@ -155,5 +155,9 @@ public interface Main extends EObject {
 	 * @generated
 	 */
 	void refactor();
+	
+	String getLoadedResourcePath();
+
+	void setLoadedResourcePath(String path);
 
 } // Main
