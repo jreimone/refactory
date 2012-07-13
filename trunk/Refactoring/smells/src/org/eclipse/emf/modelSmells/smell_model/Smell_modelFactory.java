@@ -26,7 +26,6 @@ public interface Smell_modelFactory extends EFactory {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Model Smell</em>'.
-	 * @generated
 	 */
 	ModelSmell createModelSmell();
 
@@ -44,7 +43,6 @@ public interface Smell_modelFactory extends EFactory {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Quality</em>'.
-	 * @generated
 	 */
 	Quality createQuality();
 
