@@ -146,7 +146,7 @@ public interface Main extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void updateGui();
+	void registerMetric(Metric metric);
 
 	/**
 	 * <!-- begin-user-doc -->
