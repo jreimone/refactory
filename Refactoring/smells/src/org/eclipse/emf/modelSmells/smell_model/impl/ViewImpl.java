@@ -2,8 +2,6 @@
  */
 package org.eclipse.emf.modelSmells.smell_model.impl;
 
-import java.io.FileInputStream;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.modelSmells.smell_model.ModelSmell;
@@ -11,6 +9,8 @@ import org.eclipse.emf.modelSmells.smell_model.Quality;
 import org.eclipse.emf.modelSmells.smell_model.View;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Color;
@@ -22,6 +22,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.ToolBar;
@@ -52,6 +53,7 @@ public class ViewImpl  extends ViewPart  implements View {
 	private Composite smells;
 	private Composite smellTreeComposite;
 	private Tree smellTree;
+	private FileDialog loadDialog;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -59,15 +61,6 @@ public class ViewImpl  extends ViewPart  implements View {
 
 	public ViewImpl() {
 		super();
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void create() {
-		
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -97,21 +90,31 @@ public class ViewImpl  extends ViewPart  implements View {
 	    load = new ToolItem(buttonBar, SWT.PUSH);
 		Image image_start = null;
 		Image image_load = null;
-        try {
-          image_start = new Image(device, new FileInputStream("projects/smells/icons/start.gif"));
-          
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-        try {
-            image_load = new Image(device, new FileInputStream("projects/smells/icons/load.gif"));
-            
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
+		//TODO relativer Pfad
+    	image_start = new Image(device, ViewImpl.class.getResourceAsStream(("/org/eclipse/emf/modelSmells/smell_model/icons/start.gif")));
+        image_load = new Image(device, ViewImpl.class.getResourceAsStream(("/org/eclipse/emf/modelSmells/smell_model/icons/load.gif")));
         start.setImage(image_start);
         load.setImage(image_load);
 	    buttonBar.pack();
+	    load.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				loadDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.NULL);
+				loadDialog.setText("Load Resource");
+				loadDialog.setFilterPath("C:/");
+				//TODO Dateiendungen anpassen
+				String[] filterExt = { "*.txt", "*.doc", ".rtf", "*.*" };
+		        loadDialog.setFilterExtensions(filterExt);
+				String path = loadDialog.open();
+				MainImpl.getMain().setLoadedResourcePath(path);
+				System.out.println(MainImpl.getMain().getLoadedResourcePath());
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
 		
 		EList<Quality> qualitiesList = MainImpl.getMain().getQualities();
 		EList<ModelSmell> smellList = MainImpl.getMain().getModelSmells();
