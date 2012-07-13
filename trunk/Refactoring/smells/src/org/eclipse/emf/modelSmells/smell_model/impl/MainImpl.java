@@ -104,7 +104,9 @@ public class MainImpl extends EObjectImpl implements Main {
 	
 	private EList<String> configStrings = new BasicEList<String>();
 	
-	private static Main main = new MainImpl();
+	private static MainImpl main = new MainImpl();
+	
+	private String loadedResourcePath;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -166,8 +168,9 @@ public class MainImpl extends EObjectImpl implements Main {
 	private void readIn(){
 		FileReader fileReader = null;
 		//TODO relativen Pfad einfügen
+//		System.out.println(MainImpl.class.getClassLoader().getResource("/org/eclipse/emf/modelSmells/smell_model/config/config.cfg").getPath());
 		try {
-			fileReader = new FileReader("projects/smells/config/config.cfg");
+			fileReader = new FileReader("projects/smells/src/org/eclipse/emf/modelSmells/smell_model/config/config.cfg");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -192,13 +195,11 @@ public class MainImpl extends EObjectImpl implements Main {
 	    		ModelSmell smell = new ModelSmellImpl();
 	    		smell.setName(temp[1]);
 	    		modelSmells.add(smell);
-	    		System.out.println(temp[1]);
 	    	}
 	    	if(temp[0].equals("Quality")){
 	    		Quality quality = new QualityImpl();
 	    		quality.setName(temp[1]);
 	    		qualities.add(quality);
-	    		System.out.println(temp[1]);
 	    	}
 	    }
 	    for (int i = 0; i < configStrings.size(); i++){
@@ -216,7 +217,6 @@ public class MainImpl extends EObjectImpl implements Main {
 		    					tempMapping.setModelSmell(tempSmell);
 		    					tempMapping.setQuality(tempQuality);
 		    					quality_modelSmell.add(tempMapping);
-		    					System.out.println(tempMapping.getModelSmell().getName() + "::" + tempMapping.getQuality().getName() + "::" + tempMapping.getFactor());
 		    				}
 		    			}
 		    		}while(!(configStrings.get(i).equals("#")));
@@ -450,6 +450,14 @@ public class MainImpl extends EObjectImpl implements Main {
 				return metrics != null && !metrics.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	public String getLoadedResourcePath() {
+		return loadedResourcePath;
+	}
+	
+	public void setLoadedResourcePath(String loadedResourcePath) {
+		this.loadedResourcePath = loadedResourcePath;
 	}
 
 } //MainImpl
