@@ -1,6 +1,6 @@
 /**
  */
-package org.emftext.modelSmells.smell_model.impl;
+package org.eclipse.emf.modelSmells.smell_model.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -8,18 +8,16 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.modelSmells.smell_model.Main;
+import org.eclipse.emf.modelSmells.smell_model.Metric;
+import org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping;
+import org.eclipse.emf.modelSmells.smell_model.ModelSmell;
+import org.eclipse.emf.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping;
+import org.eclipse.emf.modelSmells.smell_model.Quality;
+import org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping;
+import org.eclipse.emf.modelSmells.smell_model.Smell_modelFactory;
+import org.eclipse.emf.modelSmells.smell_model.Smell_modelPackage;
 
-import org.emftext.modelSmells.smell_model.Component;
-import org.emftext.modelSmells.smell_model.Main;
-import org.emftext.modelSmells.smell_model.Metric;
-import org.emftext.modelSmells.smell_model.Metric_Quality_Mapping;
-import org.emftext.modelSmells.smell_model.ModelSmell;
-import org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping;
-import org.emftext.modelSmells.smell_model.Observer;
-import org.emftext.modelSmells.smell_model.Quality;
-import org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping;
-import org.emftext.modelSmells.smell_model.Smell_modelFactory;
-import org.emftext.modelSmells.smell_model.Smell_modelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,27 +76,6 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	private EClass mainEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass guiEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass componentEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass observerEClass = null;
-
-	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -109,7 +86,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.emftext.modelSmells.smell_model.Smell_modelPackage#eNS_URI
+	 * @see org.eclipse.emf.modelSmells.smell_model.Smell_modelPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -245,7 +222,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getQuality_ModelSmell_Mapping_Qualities() {
+	public EReference getQuality_ModelSmell_Mapping_Quality() {
 		return (EReference)quality_ModelSmell_MappingEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -299,7 +276,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMetric_Quality_Mapping_Metrics() {
+	public EReference getMetric_Quality_Mapping_Metric() {
 		return (EReference)metric_Quality_MappingEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -344,7 +321,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMain_Gui() {
+	public EReference getMain_Qualities() {
 		return (EReference)mainEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -353,7 +330,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMain_Qualities() {
+	public EReference getMain_ModelSmells() {
 		return (EReference)mainEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -362,53 +339,8 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMain_ModelSmells() {
-		return (EReference)mainEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getMain_Metrics() {
-		return (EReference)mainEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getGUI() {
-		return guiEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getGUI_Components() {
-		return (EReference)guiEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getComponent() {
-		return componentEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getObserver() {
-		return observerEClass;
+		return (EReference)mainEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -451,7 +383,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		quality_ModelSmell_MappingEClass = createEClass(QUALITY_MODEL_SMELL_MAPPING);
 		createEAttribute(quality_ModelSmell_MappingEClass, QUALITY_MODEL_SMELL_MAPPING__FACTOR);
 		createEReference(quality_ModelSmell_MappingEClass, QUALITY_MODEL_SMELL_MAPPING__MODEL_SMELL);
-		createEReference(quality_ModelSmell_MappingEClass, QUALITY_MODEL_SMELL_MAPPING__QUALITIES);
+		createEReference(quality_ModelSmell_MappingEClass, QUALITY_MODEL_SMELL_MAPPING__QUALITY);
 
 		metricEClass = createEClass(METRIC);
 		createEAttribute(metricEClass, METRIC__NAME);
@@ -459,23 +391,15 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		metric_Quality_MappingEClass = createEClass(METRIC_QUALITY_MAPPING);
 		createEAttribute(metric_Quality_MappingEClass, METRIC_QUALITY_MAPPING__FACTOR);
 		createEReference(metric_Quality_MappingEClass, METRIC_QUALITY_MAPPING__QUALITY);
-		createEReference(metric_Quality_MappingEClass, METRIC_QUALITY_MAPPING__METRICS);
+		createEReference(metric_Quality_MappingEClass, METRIC_QUALITY_MAPPING__METRIC);
 
 		mainEClass = createEClass(MAIN);
 		createEReference(mainEClass, MAIN__MODEL_SMELL_ROLE_MAPPING);
 		createEReference(mainEClass, MAIN__QUALITY_MODEL_SMELL);
 		createEReference(mainEClass, MAIN__METRIC_QUALITY);
-		createEReference(mainEClass, MAIN__GUI);
 		createEReference(mainEClass, MAIN__QUALITIES);
 		createEReference(mainEClass, MAIN__MODEL_SMELLS);
 		createEReference(mainEClass, MAIN__METRICS);
-
-		guiEClass = createEClass(GUI);
-		createEReference(guiEClass, GUI__COMPONENTS);
-
-		componentEClass = createEClass(COMPONENT);
-
-		observerEClass = createEClass(OBSERVER);
 	}
 
 	/**
@@ -506,7 +430,6 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		componentEClass.getESuperTypes().add(this.getObserver());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelSmellEClass, ModelSmell.class, "ModelSmell", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -521,9 +444,9 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		initEClass(quality_ModelSmell_MappingEClass, Quality_ModelSmell_Mapping.class, "Quality_ModelSmell_Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQuality_ModelSmell_Mapping_Factor(), ecorePackage.getEFloat(), "factor", null, 0, 1, Quality_ModelSmell_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQuality_ModelSmell_Mapping_ModelSmell(), this.getModelSmell(), null, "modelSmell", null, 1, 1, Quality_ModelSmell_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getQuality_ModelSmell_Mapping_Qualities(), this.getQuality(), null, "qualities", null, 1, -1, Quality_ModelSmell_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQuality_ModelSmell_Mapping_Quality(), this.getQuality(), null, "quality", null, 1, 1, Quality_ModelSmell_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(metricEClass, Metric.class, "Metric", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(metricEClass, Metric.class, "Metric", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetric_Name(), ecorePackage.getEString(), "name", null, 0, 1, Metric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(metricEClass, null, "calculate", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -531,47 +454,23 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		initEClass(metric_Quality_MappingEClass, Metric_Quality_Mapping.class, "Metric_Quality_Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetric_Quality_Mapping_Factor(), ecorePackage.getEFloat(), "factor", null, 0, 1, Metric_Quality_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetric_Quality_Mapping_Quality(), this.getQuality(), null, "quality", null, 1, 1, Metric_Quality_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMetric_Quality_Mapping_Metrics(), this.getMetric(), null, "metrics", null, 1, -1, Metric_Quality_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetric_Quality_Mapping_Metric(), this.getMetric(), null, "metric", null, 1, 1, Metric_Quality_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mainEClass, Main.class, "Main", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMain_ModelSmell_roleMapping(), this.getModelSmell_Rolemapping_Mapping(), null, "modelSmell_roleMapping", null, 1, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMain_Quality_modelSmell(), this.getQuality_ModelSmell_Mapping(), null, "quality_modelSmell", null, 1, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMain_Metric_quality(), this.getMetric_Quality_Mapping(), null, "metric_quality", null, 1, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMain_Gui(), this.getGUI(), null, "gui", null, 1, 1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMain_Qualities(), this.getQuality(), null, "qualities", null, 1, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMain_ModelSmells(), this.getModelSmell(), null, "modelSmells", null, 1, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMain_Metrics(), this.getMetric(), null, "metrics", null, 1, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(mainEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(mainEClass, null, "createModelSmell_Rolemapping_Mapping", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(mainEClass, null, "createQuality_ModelSmell_Mapping", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(mainEClass, null, "createMetric_Quality_Mapping", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(mainEClass, null, "calculate", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(mainEClass, null, "updateGui", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(mainEClass, null, "refactor", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(guiEClass, org.emftext.modelSmells.smell_model.GUI.class, "GUI", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGUI_Components(), this.getComponent(), null, "components", null, 1, -1, org.emftext.modelSmells.smell_model.GUI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(guiEClass, null, "notifyComponents", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(guiEClass, null, "add", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(guiEClass, null, "remove", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		addEOperation(componentEClass, null, "update", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(observerEClass, Observer.class, "Observer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		addEOperation(observerEClass, null, "update", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
