@@ -17,7 +17,7 @@
          <view
                category="org.eclipse.emf.modelSmells.smell_model.impl.plugin_modelsmell_view_category"
                class="org.eclipse.emf.modelSmells.smell_model.impl.ViewImpl"
-               icon="icons/view.gif"
+               icon="src/org/eclipse/emf/modelSmells/smell_model/icons/view.gif"
                id="org.eclipse.emf.modelSmells.smell_model.impl.plugin_modelsmell_view"
                name="Modelsmells"/>
          <category
