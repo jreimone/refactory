@@ -1,6 +1,6 @@
 /**
  */
-package org.emftext.modelSmells.smell_model.impl;
+package org.eclipse.emf.modelSmells.smell_model.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.modelSmells.smell_model.*;
 
-import org.emftext.modelSmells.smell_model.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,7 +51,6 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
@@ -62,8 +61,6 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING: return createQuality_ModelSmell_Mapping();
 			case Smell_modelPackage.METRIC_QUALITY_MAPPING: return createMetric_Quality_Mapping();
 			case Smell_modelPackage.MAIN: return createMain();
-			case Smell_modelPackage.GUI: return createGUI();
-			case Smell_modelPackage.COMPONENT: return createComponent();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -72,7 +69,6 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public ModelSmell createModelSmell() {
 		ModelSmellImpl modelSmell = new ModelSmellImpl();
@@ -92,7 +88,6 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public Quality createQuality() {
 		QualityImpl quality = new QualityImpl();
@@ -127,26 +122,6 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	public Main createMain() {
 		MainImpl main = new MainImpl();
 		return main;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public GUI createGUI() {
-		GUIImpl gui = new GUIImpl();
-		return gui;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Component createComponent() {
-		ComponentImpl component = new ComponentImpl();
-		return component;
 	}
 
 	/**
