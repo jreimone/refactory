@@ -49,7 +49,6 @@ public class ModelSmellImpl extends EObjectImpl implements ModelSmell {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected ModelSmellImpl() {
 		super();
