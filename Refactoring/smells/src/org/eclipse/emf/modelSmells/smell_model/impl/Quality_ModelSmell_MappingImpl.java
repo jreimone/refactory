@@ -2,11 +2,9 @@
  */
 package org.eclipse.emf.modelSmells.smell_model.impl;
 
-import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -14,7 +12,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.modelSmells.smell_model.ModelSmell;
 import org.eclipse.emf.modelSmells.smell_model.Quality;
 import org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping;
@@ -30,7 +27,7 @@ import org.eclipse.emf.modelSmells.smell_model.Smell_modelPackage;
  * <ul>
  *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.Quality_ModelSmell_MappingImpl#getFactor <em>Factor</em>}</li>
  *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.Quality_ModelSmell_MappingImpl#getModelSmell <em>Model Smell</em>}</li>
- *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.Quality_ModelSmell_MappingImpl#getQualities <em>Qualities</em>}</li>
+ *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.Quality_ModelSmell_MappingImpl#getQuality <em>Quality</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,19 +65,18 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 	protected ModelSmell modelSmell;
 
 	/**
-	 * The cached value of the '{@link #getQualities() <em>Qualities</em>}' reference list.
+	 * The cached value of the '{@link #getQuality() <em>Quality</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQualities()
+	 * @see #getQuality()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Quality> qualities;
+	protected Quality quality;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected Quality_ModelSmell_MappingImpl() {
 		super();
@@ -160,11 +156,37 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Quality> getQualities() {
-		if (qualities == null) {
-			qualities = new EObjectResolvingEList<Quality>(Quality.class, this, Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITIES);
+	public Quality getQuality() {
+		if (quality != null && quality.eIsProxy()) {
+			InternalEObject oldQuality = (InternalEObject)quality;
+			quality = (Quality)eResolveProxy(oldQuality);
+			if (quality != oldQuality) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITY, oldQuality, quality));
+			}
 		}
-		return qualities;
+		return quality;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Quality basicGetQuality() {
+		return quality;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQuality(Quality newQuality) {
+		Quality oldQuality = quality;
+		quality = newQuality;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITY, oldQuality, quality));
 	}
 
 	/**
@@ -180,8 +202,9 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__MODEL_SMELL:
 				if (resolve) return getModelSmell();
 				return basicGetModelSmell();
-			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITIES:
-				return getQualities();
+			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITY:
+				if (resolve) return getQuality();
+				return basicGetQuality();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,7 +214,6 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -201,9 +223,8 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__MODEL_SMELL:
 				setModelSmell((ModelSmell)newValue);
 				return;
-			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITIES:
-				getQualities().clear();
-				getQualities().addAll((Collection<? extends Quality>)newValue);
+			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITY:
+				setQuality((Quality)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,8 +244,8 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__MODEL_SMELL:
 				setModelSmell((ModelSmell)null);
 				return;
-			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITIES:
-				getQualities().clear();
+			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITY:
+				setQuality((Quality)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -242,8 +263,8 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 				return factor != FACTOR_EDEFAULT;
 			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__MODEL_SMELL:
 				return modelSmell != null;
-			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITIES:
-				return qualities != null && !qualities.isEmpty();
+			case Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__QUALITY:
+				return quality != null;
 		}
 		return super.eIsSet(featureID);
 	}
