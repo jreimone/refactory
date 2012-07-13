@@ -2,19 +2,11 @@
  */
 package org.eclipse.emf.modelSmells.smell_model.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.modelSmells.smell_model.Metric;
 import org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping;
 import org.eclipse.emf.modelSmells.smell_model.Quality;
@@ -30,7 +22,7 @@ import org.eclipse.emf.modelSmells.smell_model.Smell_modelPackage;
  * <ul>
  *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.Metric_Quality_MappingImpl#getFactor <em>Factor</em>}</li>
  *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.Metric_Quality_MappingImpl#getQuality <em>Quality</em>}</li>
- *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.Metric_Quality_MappingImpl#getMetrics <em>Metrics</em>}</li>
+ *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.Metric_Quality_MappingImpl#getMetric <em>Metric</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,14 +60,14 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	protected Quality quality;
 
 	/**
-	 * The cached value of the '{@link #getMetrics() <em>Metrics</em>}' reference list.
+	 * The cached value of the '{@link #getMetric() <em>Metric</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetrics()
+	 * @see #getMetric()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Metric> metrics;
+	protected Metric metric;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,11 +152,37 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Metric> getMetrics() {
-		if (metrics == null) {
-			metrics = new EObjectResolvingEList<Metric>(Metric.class, this, Smell_modelPackage.METRIC_QUALITY_MAPPING__METRICS);
+	public Metric getMetric() {
+		if (metric != null && metric.eIsProxy()) {
+			InternalEObject oldMetric = (InternalEObject)metric;
+			metric = (Metric)eResolveProxy(oldMetric);
+			if (metric != oldMetric) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Smell_modelPackage.METRIC_QUALITY_MAPPING__METRIC, oldMetric, metric));
+			}
 		}
-		return metrics;
+		return metric;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Metric basicGetMetric() {
+		return metric;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMetric(Metric newMetric) {
+		Metric oldMetric = metric;
+		metric = newMetric;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.METRIC_QUALITY_MAPPING__METRIC, oldMetric, metric));
 	}
 
 	/**
@@ -180,8 +198,9 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 			case Smell_modelPackage.METRIC_QUALITY_MAPPING__QUALITY:
 				if (resolve) return getQuality();
 				return basicGetQuality();
-			case Smell_modelPackage.METRIC_QUALITY_MAPPING__METRICS:
-				return getMetrics();
+			case Smell_modelPackage.METRIC_QUALITY_MAPPING__METRIC:
+				if (resolve) return getMetric();
+				return basicGetMetric();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,7 +210,6 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -201,9 +219,8 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 			case Smell_modelPackage.METRIC_QUALITY_MAPPING__QUALITY:
 				setQuality((Quality)newValue);
 				return;
-			case Smell_modelPackage.METRIC_QUALITY_MAPPING__METRICS:
-				getMetrics().clear();
-				getMetrics().addAll((Collection<? extends Metric>)newValue);
+			case Smell_modelPackage.METRIC_QUALITY_MAPPING__METRIC:
+				setMetric((Metric)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,8 +240,8 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 			case Smell_modelPackage.METRIC_QUALITY_MAPPING__QUALITY:
 				setQuality((Quality)null);
 				return;
-			case Smell_modelPackage.METRIC_QUALITY_MAPPING__METRICS:
-				getMetrics().clear();
+			case Smell_modelPackage.METRIC_QUALITY_MAPPING__METRIC:
+				setMetric((Metric)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -242,8 +259,8 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 				return factor != FACTOR_EDEFAULT;
 			case Smell_modelPackage.METRIC_QUALITY_MAPPING__QUALITY:
 				return quality != null;
-			case Smell_modelPackage.METRIC_QUALITY_MAPPING__METRICS:
-				return metrics != null && !metrics.isEmpty();
+			case Smell_modelPackage.METRIC_QUALITY_MAPPING__METRIC:
+				return metric != null;
 		}
 		return super.eIsSet(featureID);
 	}
