@@ -19,11 +19,7 @@
                class="org.eclipse.emf.modelSmells.smell_model.impl.ViewImpl"
                icon="icons/view.gif"
                id="org.emftext.modelSmells.smell_model.impl.plugin_modelsmell_view"
-               name="Modelsmell View"/>
-         <category
-               id="org.eclipse.emf.modelSmells.smell_model.impl.plugin_modelsmell_view_category"
-               name="Model Smells">
-         </category>
+               name="Modelsmells"/>
    </extension>
 
 </plugin>
