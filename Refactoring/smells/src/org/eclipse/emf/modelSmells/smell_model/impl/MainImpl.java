@@ -1,30 +1,27 @@
 /**
  */
-package org.emftext.modelSmells.smell_model.impl;
+package org.eclipse.emf.modelSmells.smell_model.impl;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.modelSmells.smell_model.Main;
+import org.eclipse.emf.modelSmells.smell_model.Metric;
+import org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping;
+import org.eclipse.emf.modelSmells.smell_model.ModelSmell;
+import org.eclipse.emf.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping;
+import org.eclipse.emf.modelSmells.smell_model.Quality;
+import org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping;
+import org.eclipse.emf.modelSmells.smell_model.Smell_modelPackage;
 
-import org.emftext.modelSmells.smell_model.GUI;
-import org.emftext.modelSmells.smell_model.Main;
-import org.emftext.modelSmells.smell_model.Metric;
-import org.emftext.modelSmells.smell_model.Metric_Quality_Mapping;
-import org.emftext.modelSmells.smell_model.ModelSmell;
-import org.emftext.modelSmells.smell_model.ModelSmell_Rolemapping_Mapping;
-import org.emftext.modelSmells.smell_model.Quality;
-import org.emftext.modelSmells.smell_model.Quality_ModelSmell_Mapping;
-import org.emftext.modelSmells.smell_model.Smell_modelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,13 +30,12 @@ import org.emftext.modelSmells.smell_model.Smell_modelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getModelSmell_roleMapping <em>Model Smell role Mapping</em>}</li>
- *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getQuality_modelSmell <em>Quality model Smell</em>}</li>
- *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getMetric_quality <em>Metric quality</em>}</li>
- *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getGui <em>Gui</em>}</li>
- *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getQualities <em>Qualities</em>}</li>
- *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getModelSmells <em>Model Smells</em>}</li>
- *   <li>{@link org.emftext.modelSmells.smell_model.impl.MainImpl#getMetrics <em>Metrics</em>}</li>
+ *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.MainImpl#getModelSmell_roleMapping <em>Model Smell role Mapping</em>}</li>
+ *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.MainImpl#getQuality_modelSmell <em>Quality model Smell</em>}</li>
+ *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.MainImpl#getMetric_quality <em>Metric quality</em>}</li>
+ *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.MainImpl#getQualities <em>Qualities</em>}</li>
+ *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.MainImpl#getModelSmells <em>Model Smells</em>}</li>
+ *   <li>{@link org.eclipse.emf.modelSmells.smell_model.impl.MainImpl#getMetrics <em>Metrics</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,16 +73,6 @@ public class MainImpl extends EObjectImpl implements Main {
 	protected EList<Metric_Quality_Mapping> metric_quality;
 
 	/**
-	 * The cached value of the '{@link #getGui() <em>Gui</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGui()
-	 * @generated
-	 * @ordered
-	 */
-	protected GUI gui;
-
-	/**
 	 * The cached value of the '{@link #getQualities() <em>Qualities</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,6 +101,10 @@ public class MainImpl extends EObjectImpl implements Main {
 	 * @ordered
 	 */
 	protected EList<Metric> metrics;
+	
+	private EList<String> configStrings = new BasicEList<String>();
+	
+	private static Main main = new MainImpl();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,6 +113,145 @@ public class MainImpl extends EObjectImpl implements Main {
 	 */
 	protected MainImpl() {
 		super();
+		init();
+	}
+	//TODO Modelsmell_Rolemapping_Mapping erzeugen
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void init() {
+		modelSmells = new BasicEList<ModelSmell>();
+		qualities = new BasicEList<Quality>();
+		metrics = new BasicEList<Metric>();
+		quality_modelSmell = new BasicEList<Quality_ModelSmell_Mapping>();
+		metric_quality = new BasicEList<Metric_Quality_Mapping>();
+		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
+		readIn();
+	}
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void calculate() {
+		// TODO: implement this method
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void registerMetric(Metric metric) {
+		metrics.add(metric);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void refactor() {
+		// TODO: implement this method
+	}
+	
+	public void setConfigStrins(EList<String> configStrings){
+		this.configStrings = configStrings;
+	}
+	
+	public EList<String> getConfigStrings(){
+		return this.configStrings;
+	}
+	
+	private void readIn(){
+		FileReader fileReader = null;
+		try {
+			fileReader = new FileReader("projects/smells/config/config.cfg");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	    BufferedReader bufferedReader = new BufferedReader(fileReader);
+	    String row = null;
+		try {
+			row = bufferedReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    while(row != null){
+	    	configStrings.add(row);
+	    	try {
+				row = bufferedReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
+	    for (int i = 0; i < configStrings.size(); i++){
+	    	String[] temp = configStrings.get(i).split("::");
+	    	if(temp[0].equals("ModelSmell")){
+	    		ModelSmell smell = new ModelSmellImpl();
+	    		smell.setName(temp[1]);
+	    		modelSmells.add(smell);
+	    		System.out.println(temp[1]);
+	    	}
+	    	if(temp[0].equals("Quality")){
+	    		Quality quality = new QualityImpl();
+	    		quality.setName(temp[1]);
+	    		qualities.add(quality);
+	    		System.out.println(temp[1]);
+	    	}
+	    }
+	    for (int i = 0; i < configStrings.size(); i++){
+	    	for (int j = 0; j < modelSmells.size(); j++){
+		    	ModelSmell tempSmell = modelSmells.get(j);
+		    	if(configStrings.get(i).equals(tempSmell.getName())){
+		    		do {
+		    			i++;
+		    			String[] temp = configStrings.get(i).split("::");
+		    			for (int k = 0; k < qualities.size(); k++){
+		    				Quality tempQuality = qualities.get(k);
+		    				if(temp[0].equals(">"+tempQuality.getName())){
+		    					Quality_ModelSmell_Mapping tempMapping = new Quality_ModelSmell_MappingImpl();
+		    					tempMapping.setFactor(Integer.parseInt(temp[1]));
+		    					tempMapping.setModelSmell(tempSmell);
+		    					tempMapping.setQuality(tempQuality);
+		    					quality_modelSmell.add(tempMapping);
+		    					System.out.println(tempMapping.getModelSmell().getName() + "::" + tempMapping.getQuality().getName() + "::" + tempMapping.getFactor());
+		    				}
+		    			}
+		    		}while(!(configStrings.get(i).equals("#")));
+		    	}
+	    	}
+	    }
+	    for (int i = 0; i < configStrings.size(); i++){
+	    	for (int j = 0; j < qualities.size(); j++){
+		    	Quality tempQuality = qualities.get(j);
+		    	if(configStrings.get(i).equals(tempQuality.getName())){
+		    		do {
+		    			i++;
+		    			String[] temp = configStrings.get(i).split("::");
+		    			for (int k = 0; k < metrics.size(); k++){
+		    				Metric tempMetric = metrics.get(k);
+		    				if(temp[0].equals(">"+tempMetric.getName())){
+		    					Metric_Quality_Mapping tempMapping = new Metric_Quality_MappingImpl();
+		    					tempMapping.setFactor(Integer.parseInt(temp[1]));
+		    					tempMapping.setQuality(tempQuality);
+		    					tempMapping.setMetric(tempMetric);
+		    					metric_quality.add(tempMapping);
+		    				}
+		    			}
+		    		}while(!(configStrings.get(i).equals("#")));
+		    	}
+	    	}
+	    }
+	    try {
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Main getMain(){
+		return main;
 	}
 
 	/**
@@ -176,44 +305,6 @@ public class MainImpl extends EObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GUI getGui() {
-		if (gui != null && gui.eIsProxy()) {
-			InternalEObject oldGui = (InternalEObject)gui;
-			gui = (GUI)eResolveProxy(oldGui);
-			if (gui != oldGui) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Smell_modelPackage.MAIN__GUI, oldGui, gui));
-			}
-		}
-		return gui;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public GUI basicGetGui() {
-		return gui;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setGui(GUI newGui) {
-		GUI oldGui = gui;
-		gui = newGui;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MAIN__GUI, oldGui, gui));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Quality> getQualities() {
 		if (qualities == null) {
 			qualities = new EObjectResolvingEList<Quality>(Quality.class, this, Smell_modelPackage.MAIN__QUALITIES);
@@ -250,83 +341,6 @@ public class MainImpl extends EObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void init() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void createModelSmell_Rolemapping_Mapping() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void createQuality_ModelSmell_Mapping() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void createMetric_Quality_Mapping() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void calculate() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void updateGui() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void refactor() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -336,9 +350,6 @@ public class MainImpl extends EObjectImpl implements Main {
 				return getQuality_modelSmell();
 			case Smell_modelPackage.MAIN__METRIC_QUALITY:
 				return getMetric_quality();
-			case Smell_modelPackage.MAIN__GUI:
-				if (resolve) return getGui();
-				return basicGetGui();
 			case Smell_modelPackage.MAIN__QUALITIES:
 				return getQualities();
 			case Smell_modelPackage.MAIN__MODEL_SMELLS:
@@ -369,9 +380,6 @@ public class MainImpl extends EObjectImpl implements Main {
 			case Smell_modelPackage.MAIN__METRIC_QUALITY:
 				getMetric_quality().clear();
 				getMetric_quality().addAll((Collection<? extends Metric_Quality_Mapping>)newValue);
-				return;
-			case Smell_modelPackage.MAIN__GUI:
-				setGui((GUI)newValue);
 				return;
 			case Smell_modelPackage.MAIN__QUALITIES:
 				getQualities().clear();
@@ -406,9 +414,6 @@ public class MainImpl extends EObjectImpl implements Main {
 			case Smell_modelPackage.MAIN__METRIC_QUALITY:
 				getMetric_quality().clear();
 				return;
-			case Smell_modelPackage.MAIN__GUI:
-				setGui((GUI)null);
-				return;
 			case Smell_modelPackage.MAIN__QUALITIES:
 				getQualities().clear();
 				return;
@@ -436,8 +441,6 @@ public class MainImpl extends EObjectImpl implements Main {
 				return quality_modelSmell != null && !quality_modelSmell.isEmpty();
 			case Smell_modelPackage.MAIN__METRIC_QUALITY:
 				return metric_quality != null && !metric_quality.isEmpty();
-			case Smell_modelPackage.MAIN__GUI:
-				return gui != null;
 			case Smell_modelPackage.MAIN__QUALITIES:
 				return qualities != null && !qualities.isEmpty();
 			case Smell_modelPackage.MAIN__MODEL_SMELLS:
