@@ -49,7 +49,6 @@ public class QualityImpl extends EObjectImpl implements Quality {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected QualityImpl() {
 		super();
