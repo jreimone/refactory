@@ -18,8 +18,12 @@
                category="org.eclipse.emf.modelSmells.smell_model.impl.plugin_modelsmell_view_category"
                class="org.eclipse.emf.modelSmells.smell_model.impl.ViewImpl"
                icon="icons/view.gif"
-               id="org.emftext.modelSmells.smell_model.impl.plugin_modelsmell_view"
+               id="org.eclipse.emf.modelSmells.smell_model.impl.plugin_modelsmell_view"
                name="Modelsmells"/>
+         <category
+               id="org.eclipse.emf.modelSmells.smell_model.impl.plugin_modelsmell_view_category"
+               name="Modelsmell View">
+         </category>
    </extension>
 
 </plugin>
