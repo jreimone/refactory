@@ -13,13 +13,6 @@ package org.eclipse.emf.modelSmells.smell_model;
  * @generated
  */
 public interface View {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void create();
 
 	/**
 	 * <!-- begin-user-doc -->
