@@ -165,6 +165,7 @@ public class MainImpl extends EObjectImpl implements Main {
 	
 	private void readIn(){
 		FileReader fileReader = null;
+		//TODO relativen Pfad einfügen
 		try {
 			fileReader = new FileReader("projects/smells/config/config.cfg");
 		} catch (FileNotFoundException e) {
