@@ -2,7 +2,11 @@
  */
 package org.eclipse.emf.modelSmells.smell_model.impl;
 
+import java.io.FileInputStream;
+
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.modelSmells.smell_model.ModelSmell;
 import org.eclipse.emf.modelSmells.smell_model.Quality;
 import org.eclipse.emf.modelSmells.smell_model.View;
 import org.eclipse.swt.SWT;
@@ -11,15 +15,17 @@ import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.CoolBar;
-import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.ViewPart;
@@ -34,12 +40,16 @@ import org.eclipse.ui.part.ViewPart;
  */
 public class ViewImpl  extends ViewPart  implements View {
 	
-	private CoolBar buttonBar;
-	private CoolItem start;
-	private CoolItem load;
+	private EList<ViewImpl_Quality> qualityCompositeList;
+	private EList<ViewImpl_ModelSmell> modelSmellCompositeList;
+	private ToolBar buttonBar;
+	private ToolItem start;
+	private ToolItem load;
 	private TabFolder qualitySmellTab;
-	private ScrolledComposite qualitiesComposite;
-	private ScrolledComposite smellsComposite;
+	private ScrolledComposite qualitiesScrolledComposite;
+	private Composite qualities;
+	private ScrolledComposite smellsScrolledComposite;
+	private Composite smells;
 	private Composite smellTreeComposite;
 	private Tree smellTree;
 	/**
@@ -71,53 +81,100 @@ public class ViewImpl  extends ViewPart  implements View {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		//TODO Layout anpassen (CoolBar zu groß)
-		FillLayout fill = new FillLayout();
-		fill.type = SWT.VERTICAL;
-		parent.setLayout(fill);
-		
-		//CoolBar
-		buttonBar = new CoolBar(parent, SWT.NULL);
-		GridLayout gridBar = new GridLayout();
-		gridBar.numColumns = 6;
-		buttonBar.setLayout(gridBar);
-		//TODO CoolItems mit Text / Icon versehen
-		load = new CoolItem(buttonBar, SWT.NULL);
-		load.setMinimumSize(100, 100);
-		load.setText("Load...");
-		start = new CoolItem(buttonBar, SWT.NULL);
-		start.setText("Start");
-		
-		EList<Quality> qualitiesList = MainImpl.getMain().getQualities();
-		
-		//Qualities and Smells
 		Device device = Display.getCurrent();
 		Color white = new Color(device, 255, 255, 255);
+//		Color grey = new Color(device, 155, 155, 155);
 		
+		GridLayout parentGrid = new GridLayout();
+		parentGrid.numColumns = 1;
+		parent.setLayout(parentGrid);
+		
+		//CoolBar
+		buttonBar = new ToolBar(parent, SWT.FLAT | SWT.RIGHT);
+		GridData buttonBarGridData = new GridData(GridData.END, GridData.END, true, false);
+		buttonBar.setLayoutData(buttonBarGridData);
+	    start = new ToolItem(buttonBar, SWT.PUSH);
+	    load = new ToolItem(buttonBar, SWT.PUSH);
+		Image image_start = null;
+		Image image_load = null;
+        try {
+          image_start = new Image(device, new FileInputStream("projects/smells/icons/start.gif"));
+          
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        try {
+            image_load = new Image(device, new FileInputStream("projects/smells/icons/load.gif"));
+            
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        start.setImage(image_start);
+        load.setImage(image_load);
+	    buttonBar.pack();
+		
+		EList<Quality> qualitiesList = MainImpl.getMain().getQualities();
+		EList<ModelSmell> smellList = MainImpl.getMain().getModelSmells();
+		
+		//Qualities and Smells Tab
 		qualitySmellTab = new TabFolder(parent, SWT.NULL);
+		GridData qualitySmellTabGridData = new GridData(GridData.FILL, GridData.CENTER, true, false);
+		qualitySmellTab.setLayoutData(qualitySmellTabGridData);
+		qualitySmellTab.setBackground(white);
 		TabItem qualityTabItem = new TabItem(qualitySmellTab, SWT.NULL);
 		qualityTabItem.setText("Qualities");
 		TabItem smellTabItem = new TabItem(qualitySmellTab, SWT.NULL);
 		smellTabItem.setText("Smells");
 		
-		//TODO Smells anzeigen
-		smellsComposite = new ScrolledComposite(qualitySmellTab, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
-		smellsComposite.setBackground(white);
-		
-		qualitiesComposite = new ScrolledComposite(qualitySmellTab, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
-		qualitiesComposite.setBackground(white);
-		//TODO Layout anpassen (Qualitäten sind übereinander)
-		RowLayout rowQuality = new RowLayout();
-		rowQuality.type = SWT.VERTICAL;
-		qualitiesComposite.setLayout(rowQuality);
-		for (int i = 0; i < qualitiesList.size(); i++){
-			addQuality(qualitiesComposite, qualitiesList.get(i).getName(), 100);
+		//Smells
+		smellsScrolledComposite = new ScrolledComposite(qualitySmellTab, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		GridData smellsCompositeGridData = new GridData(GridData.FILL, GridData.CENTER, true, true);
+		smellsScrolledComposite.setLayoutData(smellsCompositeGridData);
+		smellsScrolledComposite.setBackground(white);
+		smellsScrolledComposite.setExpandHorizontal(true);
+		smellsScrolledComposite.setExpandVertical(true);
+		smells = new Composite(smellsScrolledComposite, SWT.NONE);
+		smells.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
+		smells.setLayout(new GridLayout());
+		smells.setBackground(white);
+		modelSmellCompositeList = new BasicEList<ViewImpl_ModelSmell>();
+		for (int i = 0; i < smellList.size(); i++){
+			ViewImpl_ModelSmell temp = addModelSmell(smells, smellList.get(i).getName());
+			temp.getModelSmellLabel_Name().setBackground(white);
+			modelSmellCompositeList.add(temp);
 		}
-		qualityTabItem.setControl(qualitiesComposite);
-		smellTabItem.setControl(smellsComposite);
+		
+		//Qualities
+		qualitiesScrolledComposite = new ScrolledComposite(qualitySmellTab, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		GridData qualitiesCompositeGridData = new GridData(GridData.FILL, GridData.CENTER, true, true);
+		qualitiesScrolledComposite.setLayoutData(qualitiesCompositeGridData);
+		qualitiesScrolledComposite.setBackground(white);
+		qualitiesScrolledComposite.setExpandHorizontal(true);
+		qualitiesScrolledComposite.setExpandVertical(true);
+		qualities = new Composite(qualitiesScrolledComposite, SWT.NONE);
+		qualities.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
+		qualities.setLayout(new GridLayout());
+		Point size = new Point(0,0);
+		qualityCompositeList = new BasicEList<ViewImpl_Quality>();
+		for (int i = 0; i < qualitiesList.size(); i++){
+			ViewImpl_Quality temp = addQuality(qualities, qualitiesList.get(i).getName(), 100);
+			qualityCompositeList.add(temp);
+			if (size.x < (temp.getQualityComposite().computeSize(SWT.DEFAULT, SWT.DEFAULT)).x){
+				size.x = (temp.getQualityComposite().computeSize(SWT.DEFAULT, SWT.DEFAULT)).x;
+			}
+			size.y = size.y + (temp.getQualityComposite().computeSize(SWT.DEFAULT, SWT.DEFAULT)).y;
+		}
+		//TODO Qualitäten auf eine Größe bringen
+		qualitiesScrolledComposite.setMinSize(size.x+10, size.y);
+		qualitiesScrolledComposite.setContent(qualities);
+		qualityTabItem.setControl(qualitiesScrolledComposite);
+		smellTabItem.setControl(smellsScrolledComposite);
 		
 		//Smelltree
+		//TODO Smelltree erzeugen
 		smellTreeComposite = new Composite(parent, SWT.BORDER);
+		GridData smellTreeGridData = new GridData(GridData.FILL, GridData.CENTER, true, true);
+		smellTreeComposite.setLayoutData(smellTreeGridData);
 		smellTreeComposite.setLayout(new FillLayout());
 		
 		smellTree = new Tree(smellTreeComposite, SWT.CHECK);
@@ -133,8 +190,8 @@ public class ViewImpl  extends ViewPart  implements View {
 				
 			}
 		});
-		//TODO Smelltree erzeugen
-
+		
+		parent.pack();
 	}
 	
 	public void addTreeItem(String name){
@@ -142,8 +199,13 @@ public class ViewImpl  extends ViewPart  implements View {
 		item.setText("name");
 	}
 	
-	public ViewImpl_Quality addQuality(Composite parent, String name, int factor){
+	private ViewImpl_Quality addQuality(Composite parent, String name, int factor){
 		ViewImpl_Quality temp = new ViewImpl_Quality(parent, name, factor);
+		return temp;
+	}
+	
+	private ViewImpl_ModelSmell addModelSmell(Composite parent, String name){
+		ViewImpl_ModelSmell temp = new ViewImpl_ModelSmell(parent, name);
 		return temp;
 	}
 
