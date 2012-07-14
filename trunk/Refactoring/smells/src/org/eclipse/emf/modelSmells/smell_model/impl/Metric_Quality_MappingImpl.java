@@ -47,7 +47,7 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * @generated
 	 * @ordered
 	 */
-	protected float factor = FACTOR_EDEFAULT;
+	protected double factor = FACTOR_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getQuality() <em>Quality</em>}' reference.
@@ -93,7 +93,7 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public float getFactor() {
+	public double getFactor() {
 		return factor;
 	}
 
@@ -102,8 +102,8 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFactor(float newFactor) {
-		float oldFactor = factor;
+	public void setFactor(double newFactor) {
+		double oldFactor = factor;
 		factor = newFactor;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.METRIC_QUALITY_MAPPING__FACTOR, oldFactor, factor));
