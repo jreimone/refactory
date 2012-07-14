@@ -52,7 +52,7 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 	 * @generated
 	 * @ordered
 	 */
-	protected float factor = FACTOR_EDEFAULT;
+	protected double factor = FACTOR_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getModelSmell() <em>Model Smell</em>}' reference.
@@ -97,7 +97,7 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public float getFactor() {
+	public double getFactor() {
 		return factor;
 	}
 
@@ -106,8 +106,8 @@ public class Quality_ModelSmell_MappingImpl extends EObjectImpl implements Quali
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFactor(float newFactor) {
-		float oldFactor = factor;
+	public void setFactor(double newFactor) {
+		double oldFactor = factor;
 		factor = newFactor;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.QUALITY_MODEL_SMELL_MAPPING__FACTOR, oldFactor, factor));
