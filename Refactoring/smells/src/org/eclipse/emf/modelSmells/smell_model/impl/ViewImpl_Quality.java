@@ -10,8 +10,8 @@ import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Scale;
-import org.eclipse.swt.widgets.Text;
 
 public class ViewImpl_Quality{
 	
@@ -19,8 +19,8 @@ public class ViewImpl_Quality{
 	private String name;
 	private int factor;
 	private Composite qualityComposite;
-	private Text qualityText_Name;
-	private Text qualityText_Factor;
+	private Label qualityLabel_Name;
+	private Label qualityLabel_Factor;
 	private Scale qualityScale;
 	
 	public ViewImpl_Quality(Composite parent, String name, int factor){
@@ -34,11 +34,11 @@ public class ViewImpl_Quality{
 		qualityComposite = new Composite(parent, SWT.NONE);
 		GridLayout grid = new GridLayout();
 		grid.numColumns = 3;
+		grid.makeColumnsEqualWidth = true;
 		qualityComposite.setLayout(grid);
 		
-		qualityText_Name = new Text(qualityComposite, SWT.LEFT);
-		qualityText_Name.setText(name + ": ");
-		qualityText_Name.setEnabled(false);
+		qualityLabel_Name = new Label(qualityComposite, SWT.LEFT);
+		qualityLabel_Name.setText(name + ": ");
 		
 		qualityScale = new Scale(qualityComposite, SWT.HORIZONTAL);
 		qualityScale.setSelection(factor);
@@ -47,7 +47,7 @@ public class ViewImpl_Quality{
 			
 			@Override
 			public void mouseUp(MouseEvent e) {
-				qualityText_Factor.setText(""+qualityScale.getSelection());
+				qualityLabel_Factor.setText(""+qualityScale.getSelection());
 			}
 			
 			@Override
@@ -63,7 +63,7 @@ public class ViewImpl_Quality{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(e.keyCode == SWT.ARROW_LEFT || e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.ARROW_DOWN || e.keyCode == SWT.ARROW_UP){
-					qualityText_Factor.setText(""+qualityScale.getSelection());
+					qualityLabel_Factor.setText(""+qualityScale.getSelection());
 				}
 			}
 			
@@ -76,33 +76,32 @@ public class ViewImpl_Quality{
 			@Override
 			public void keyTraversed(TraverseEvent e) {
 				if(e.keyCode == SWT.ARROW_LEFT || e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.ARROW_DOWN || e.keyCode == SWT.ARROW_UP){
-					qualityText_Factor.setText(""+qualityScale.getSelection());
+					qualityLabel_Factor.setText(""+qualityScale.getSelection());
 				}
 			}
 		});
 		
-		qualityText_Factor = new Text(qualityComposite, SWT.CENTER);
-		qualityText_Factor.setText("   " + factor);
-		qualityText_Factor.setEnabled(false);
+		qualityLabel_Factor = new Label(qualityComposite, SWT.CENTER);
+		qualityLabel_Factor.setText("   " + factor);
 		
 		parent.setSize(parent.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		parent.layout();
 	}
 
-	public Text getQualityText_Name() {
-		return qualityText_Name;
+	public Label getQualityLabel_Name() {
+		return qualityLabel_Name;
 	}
 
-	public void setQualityText_Name(Text qualityText_Name) {
-		this.qualityText_Name = qualityText_Name;
+	public void setQualityLabel_Name(Label qualityText_Name) {
+		this.qualityLabel_Name = qualityText_Name;
 	}
 
-	public Text getQualityText_Factor() {
-		return qualityText_Factor;
+	public Label getQualityLabel_Factor() {
+		return qualityLabel_Factor;
 	}
 
-	public void setQualityText_Factor(Text qualityText_Factor) {
-		this.qualityText_Factor = qualityText_Factor;
+	public void setQualityLabel_Factor(Label qualityText_Factor) {
+		this.qualityLabel_Factor = qualityText_Factor;
 	}
 
 	public Scale getQualityScale() {
