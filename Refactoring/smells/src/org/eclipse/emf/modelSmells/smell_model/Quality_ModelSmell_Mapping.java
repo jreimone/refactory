@@ -37,7 +37,7 @@ public interface Quality_ModelSmell_Mapping extends EObject {
 	 * @model
 	 * @generated
 	 */
-	double getFactor();
+	int getFactor();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.emf.modelSmells.smell_model.Quality_ModelSmell_Mapping#getFactor <em>Factor</em>}' attribute.
@@ -47,7 +47,7 @@ public interface Quality_ModelSmell_Mapping extends EObject {
 	 * @see #getFactor()
 	 * @generated
 	 */
-	void setFactor(double value);
+	void setFactor(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Model Smell</b></em>' reference.

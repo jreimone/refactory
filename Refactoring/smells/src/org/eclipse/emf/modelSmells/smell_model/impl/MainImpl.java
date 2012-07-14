@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -107,6 +108,8 @@ public class MainImpl extends EObjectImpl implements Main {
 	private static MainImpl main = new MainImpl();
 	
 	private String loadedResourcePath;
+	
+	private HashMap<Quality, Integer> qualityScale;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,7 +132,11 @@ public class MainImpl extends EObjectImpl implements Main {
 		quality_modelSmell = new BasicEList<Quality_ModelSmell_Mapping>();
 		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
+		qualityScale = new HashMap<Quality, Integer>();
 		readIn();
+		for (int i = 0; i < qualities.size(); i++){
+			qualityScale.put(qualities.get(i), 100);
+		}
 	}
 
 
@@ -138,7 +145,34 @@ public class MainImpl extends EObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 */
 	public void calculate() {
-		// TODO: implement this method
+		HashMap<Quality, Integer> qualityResult = new HashMap<Quality, Integer>();
+		for (int i = 0; i < qualities.size(); i++){
+			for (int j = 0; j < metric_quality.size(); j++){
+				if (qualities.get(i).getName().equals(metric_quality.get(j).getQuality().getName())){
+					if (qualityResult.get(qualities.get(i)) != null){
+						//Map: Quality, old factor + metric value * metric factor
+						qualityResult.put(qualities.get(i), qualityResult.get(qualities.get(i)) + metric_quality.get(j).getMetric().calculate() * metric_quality.get(j).getFactor());
+					} else {
+						//Map: Quality, metric value * metric factor
+						qualityResult.put(qualities.get(i), metric_quality.get(j).getMetric().calculate() * metric_quality.get(j).getFactor());
+					}
+				}
+			}
+		}
+		HashMap<ModelSmell, Integer> modelSmellResult = new HashMap<ModelSmell, Integer>();
+		for (int i = 0; i < modelSmells.size(); i++){
+			for (int j = 0; j < quality_modelSmell.size(); j++){
+				if (modelSmells.get(i).getName().equals(quality_modelSmell.get(j).getModelSmell().getName())){
+					if (modelSmellResult.get(modelSmells.get(i)) != null){
+						//Map: Smell, old factor + quality value * quality factor * quality scale
+						modelSmellResult.put(modelSmells.get(i), modelSmellResult.get(modelSmells.get(i)) + qualityResult.get(quality_modelSmell.get(j).getQuality()) * quality_modelSmell.get(j).getFactor() * qualityScale.get(quality_modelSmell.get(j).getQuality()));
+					} else {
+						//Map: Smell, quality value * quality factor * quality scale
+						modelSmellResult.put(modelSmells.get(i), qualityResult.get(quality_modelSmell.get(j).getQuality()) * quality_modelSmell.get(j).getFactor() * qualityScale.get(quality_modelSmell.get(j).getQuality()));
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -163,6 +197,18 @@ public class MainImpl extends EObjectImpl implements Main {
 	
 	public EList<String> getConfigStrings(){
 		return this.configStrings;
+	}
+	
+	public HashMap<Quality, Integer> getQualityScale() {
+		return qualityScale;
+	}
+	
+	public void setQualityScale(HashMap<Quality, Integer> qualityScale) {
+		this.qualityScale = qualityScale;
+	}
+	
+	public void setQualityScale(Quality quality, Integer factor){
+		this.qualityScale.put(quality, factor);
 	}
 	
 	private void readIn(){

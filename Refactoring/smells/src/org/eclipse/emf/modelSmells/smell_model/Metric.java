@@ -53,7 +53,7 @@ public interface Metric extends EObject {
 	 * @model
 	 * @generated
 	 */
-	double calculate();
+	int calculate();
 	
 	void register();
 

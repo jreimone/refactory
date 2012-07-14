@@ -2,6 +2,8 @@
  */
 package org.eclipse.emf.modelSmells.smell_model;
 
+import java.util.HashMap;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -159,5 +161,11 @@ public interface Main extends EObject {
 	String getLoadedResourcePath();
 
 	void setLoadedResourcePath(String path);
+	
+	HashMap<Quality, Integer> getQualityScale();
+	
+	void setQualityScale(HashMap<Quality, Integer> qualityScale);
+	
+	void setQualityScale(Quality quality, Integer factor);
 
 } // Main

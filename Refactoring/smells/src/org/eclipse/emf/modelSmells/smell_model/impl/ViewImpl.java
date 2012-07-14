@@ -114,6 +114,18 @@ public class ViewImpl  extends ViewPart  implements View {
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
+	    start.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				//TODO grafische Rückmeldung
+				MainImpl.getMain().calculate();
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
 		
 		EList<Quality> qualitiesList = MainImpl.getMain().getQualities();
 		EList<ModelSmell> smellList = MainImpl.getMain().getModelSmells();
