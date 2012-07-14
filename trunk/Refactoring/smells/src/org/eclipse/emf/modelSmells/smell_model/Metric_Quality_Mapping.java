@@ -37,7 +37,7 @@ public interface Metric_Quality_Mapping extends EObject {
 	 * @model
 	 * @generated
 	 */
-	float getFactor();
+	double getFactor();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.emf.modelSmells.smell_model.Metric_Quality_Mapping#getFactor <em>Factor</em>}' attribute.
@@ -47,7 +47,7 @@ public interface Metric_Quality_Mapping extends EObject {
 	 * @see #getFactor()
 	 * @generated
 	 */
-	void setFactor(float value);
+	void setFactor(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Quality</b></em>' reference.
