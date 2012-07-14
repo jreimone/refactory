@@ -16,7 +16,6 @@ import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -94,6 +93,8 @@ public class ViewImpl  extends ViewPart  implements View {
         image_load = new Image(device, ViewImpl.class.getResourceAsStream(("/org/eclipse/emf/modelSmells/smell_model/icons/load.gif")));
         start.setImage(image_start);
         load.setImage(image_load);
+        start.setToolTipText("Start search");
+        load.setToolTipText("Load resource");
 	    buttonBar.pack();
 	    load.addSelectionListener(new SelectionListener() {
 			
@@ -107,7 +108,6 @@ public class ViewImpl  extends ViewPart  implements View {
 		        loadDialog.setFilterExtensions(filterExt);
 				String path = loadDialog.open();
 				MainImpl.getMain().setLoadedResourcePath(path);
-				System.out.println(MainImpl.getMain().getLoadedResourcePath());
 			}
 			
 			@Override
@@ -156,19 +156,14 @@ public class ViewImpl  extends ViewPart  implements View {
 		qualities = new Composite(qualitiesScrolledComposite, SWT.NONE);
 		qualities.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
 		qualities.setLayout(new GridLayout());
-		Point size = new Point(0,0);
 		qualityCompositeList = new BasicEList<ViewImpl_Quality>();
 		for (int i = 0; i < qualitiesList.size(); i++){
 			ViewImpl_Quality temp = addQuality(qualities, qualitiesList.get(i).getName(), 100);
 			qualityCompositeList.add(temp);
-			if (size.x < (temp.getQualityComposite().computeSize(SWT.DEFAULT, SWT.DEFAULT)).x){
-				size.x = (temp.getQualityComposite().computeSize(SWT.DEFAULT, SWT.DEFAULT)).x;
-			}
-			size.y = size.y + (temp.getQualityComposite().computeSize(SWT.DEFAULT, SWT.DEFAULT)).y;
 		}
 		//TODO Qualitäten auf eine Größe bringen
-		qualitiesScrolledComposite.setMinSize(size.x+10, size.y);
 		qualitiesScrolledComposite.setContent(qualities);
+		qualitiesScrolledComposite.setMinSize(qualities.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		qualityTabItem.setControl(qualitiesScrolledComposite);
 		smellTabItem.setControl(smellsScrolledComposite);
 		
