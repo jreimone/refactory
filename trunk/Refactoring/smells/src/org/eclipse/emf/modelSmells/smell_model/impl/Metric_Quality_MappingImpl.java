@@ -37,7 +37,7 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * @generated
 	 * @ordered
 	 */
-	protected static final float FACTOR_EDEFAULT = 0.0F;
+	protected static final int FACTOR_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getFactor() <em>Factor</em>}' attribute.
@@ -47,7 +47,7 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * @generated
 	 * @ordered
 	 */
-	protected double factor = FACTOR_EDEFAULT;
+	protected int factor = FACTOR_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getQuality() <em>Quality</em>}' reference.
@@ -93,7 +93,7 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getFactor() {
+	public int getFactor() {
 		return factor;
 	}
 
@@ -102,8 +102,8 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFactor(double newFactor) {
-		double oldFactor = factor;
+	public void setFactor(int newFactor) {
+		int oldFactor = factor;
 		factor = newFactor;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.METRIC_QUALITY_MAPPING__FACTOR, oldFactor, factor));
@@ -214,7 +214,7 @@ public class Metric_Quality_MappingImpl extends EObjectImpl implements Metric_Qu
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case Smell_modelPackage.METRIC_QUALITY_MAPPING__FACTOR:
-				setFactor((Float)newValue);
+				setFactor((Integer)newValue);
 				return;
 			case Smell_modelPackage.METRIC_QUALITY_MAPPING__QUALITY:
 				setQuality((Quality)newValue);

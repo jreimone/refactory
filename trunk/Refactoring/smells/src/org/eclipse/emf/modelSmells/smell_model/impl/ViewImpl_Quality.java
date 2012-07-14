@@ -48,6 +48,12 @@ public class ViewImpl_Quality{
 			@Override
 			public void mouseUp(MouseEvent e) {
 				qualityLabel_Factor.setText(""+qualityScale.getSelection());
+				String[] temp = qualityLabel_Name.getText().split(":");
+				for (int i = 0; i < MainImpl.getMain().getQualities().size(); i++){
+					if(MainImpl.getMain().getQualities().get(i).getName().equals(temp[0])){
+						MainImpl.getMain().setQualityScale(MainImpl.getMain().getQualities().get(i), qualityScale.getSelection());
+					}
+				}
 			}
 			
 			@Override
