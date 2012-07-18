@@ -1,17 +1,17 @@
-ROLEMODELMAPPING FOR <http://stp.eclipse.org/bpmn> 
+ROLEMODELMAPPING FOR <http://www.omg.org/spec/BPMN/20100524/MODEL-XMI> 
 
-ExtractSubProcess maps <ExtractXwithReferenceClass> {
+"Extract SubProcess" maps <ExtractXwithReferenceClass> {
 	Extract := Activity;
 	
 	NewContainer := SubProcess (newName -> name){
-		moved := vertices;
+		moved := flowElements;
 	};
 	
-	OrigContainer := Pool{
-		extracts := vertices;
+	OrigContainer := FlowElementsContainer{
+		extracts := flowElements;
 	};
 	
-	ContainerContainer := Pool{
-		target := vertices;
+	ContainerContainer := FlowElementsContainer{
+		target := flowElements;
 	}; 
 }
