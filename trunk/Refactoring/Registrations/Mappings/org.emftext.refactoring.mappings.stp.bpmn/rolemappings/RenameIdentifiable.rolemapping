@@ -1,5 +1,5 @@
-ROLEMODELMAPPING FOR <http://stp.eclipse.org/bpmn>  
+ROLEMODELMAPPING FOR <http://www.omg.org/spec/BPMN/20100524/MODEL-XMI>  
 
-RenameIdentifiable maps <RenameX> { 
-	 Nameable := Identifiable(name -> iD); 
+"Rename Flow Element" maps <RenameX> { 
+	 Nameable := FlowElement(name -> name); 
 }

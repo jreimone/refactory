@@ -13,8 +13,8 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="ExtractSubProcess"
-            nsUri="http://stp.eclipse.org/bpmn"
+            mapping_name="Extract SubProcess"
+            nsUri="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI"
             postprocessor="org.eclipse.stp.bpmn.refactoring.ExtractSubProcessPostProcessor">
       </postprocessor>
    </extension>

@@ -21,18 +21,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.bpmn2.Activity;
+import org.eclipse.bpmn2.Bpmn2Factory;
+import org.eclipse.bpmn2.FlowNode;
+import org.eclipse.bpmn2.SequenceFlow;
+import org.eclipse.bpmn2.SubProcess;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.stp.bpmn.Activity;
-import org.eclipse.stp.bpmn.ActivityType;
-import org.eclipse.stp.bpmn.BpmnFactory;
-import org.eclipse.stp.bpmn.SequenceEdge;
-import org.eclipse.stp.bpmn.SubProcess;
-import org.eclipse.stp.bpmn.Vertex;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
@@ -42,12 +41,9 @@ public class ExtractSubProcessPostProcessor extends AbstractRefactoringPostProce
 	private List<EObject> extract;
 	private SubProcess newContainer;
 
-	public ExtractSubProcessPostProcessor() {
-		// TODO Auto-generated constructor stub
-	}
-
+	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-//		System.out.println("Add additional SequenceEdge for 'Extract SubProcess' in BPMN");
+		//	System.out.println("Add additional SequenceEdge for 'Extract SubProcess' in BPMN");
 		Set<Role> roles = roleRuntimeInstanceMap.keySet();
 		for (Role role : roles) {
 			List<EObject> runtimeObjects = roleRuntimeInstanceMap.get(role);
@@ -71,31 +67,31 @@ public class ExtractSubProcessPostProcessor extends AbstractRefactoringPostProce
 		result =  result && createStartAndEnd();
 		return result;
 	}
-	
+
 	private boolean createStartAndEnd(){
-		Activity start = BpmnFactory.eINSTANCE.createActivity();
-		start.setActivityType(ActivityType.EVENT_START_EMPTY_LITERAL);
-		newContainer.getVertices().add(start);
-		Activity end = BpmnFactory.eINSTANCE.createActivity();
-		end.setActivityType(ActivityType.EVENT_END_EMPTY_LITERAL);
-		newContainer.getVertices().add(end);
+		Activity start = Bpmn2Factory.eINSTANCE.createCallActivity();
+		//		start.setActivityType(ActivityType.EVENT_START_EMPTY_LITERAL);
+		newContainer.getFlowElements().add(start);
+		Activity end = Bpmn2Factory.eINSTANCE.createCallActivity();
+		//		end.setActivityType(ActivityType.EVENT_END_EMPTY_LITERAL);
+		newContainer.getFlowElements().add(end);
 		Activity first = (Activity) extract.get(0);
 		Activity last = (Activity) extract.get(extract.size() - 1);
-		SequenceEdge edge = BpmnFactory.eINSTANCE.createSequenceEdge();
-		newContainer.getSequenceEdges().add(edge);
-		edge.setSource(start);
-		edge.setTarget(first);
-		edge = BpmnFactory.eINSTANCE.createSequenceEdge();
-		newContainer.getSequenceEdges().add(edge);
-		edge.setSource(last);
-		edge.setTarget(end);
+		SequenceFlow edge = Bpmn2Factory.eINSTANCE.createSequenceFlow();
+		newContainer.getFlowElements().add(edge);
+		edge.setSourceRef(start);
+		edge.setTargetRef(first);
+		edge = Bpmn2Factory.eINSTANCE.createSequenceFlow();
+		newContainer.getFlowElements().add(edge);
+		edge.setSourceRef(last);
+		edge.setTargetRef(end);
 		return true;
 	}
 
 	private Boolean moveRelevantAssociationsToSubProcess(){
-		Set<SequenceEdge> removees = new HashSet<SequenceEdge>();
-		Set<SequenceEdge> inComposites = new HashSet<SequenceEdge>();
-		Set<SequenceEdge> outComposites = new HashSet<SequenceEdge>();
+		Set<SequenceFlow> removees = new HashSet<SequenceFlow>();
+		Set<SequenceFlow> inComposites = new HashSet<SequenceFlow>();
+		Set<SequenceFlow> outComposites = new HashSet<SequenceFlow>();
 		for (EObject eObject : extract) {
 			Activity activity = (Activity) eObject;
 			List<Activity> others = new ArrayList<Activity>();
@@ -105,41 +101,41 @@ public class ExtractSubProcessPostProcessor extends AbstractRefactoringPostProce
 					others.add(other);
 				}
 			}
-			List<SequenceEdge> incomings = activity.getIncomingEdges();
+			List<SequenceFlow> incomings = activity.getIncoming();
 			handleTransitions(removees, inComposites, others, incomings, true);
-			List<SequenceEdge> outgoings = activity.getOutgoingEdges();
+			List<SequenceFlow> outgoings = activity.getOutgoing();
 			handleTransitions(removees, outComposites, others, outgoings, false);
 		}
 
 		handleInternalTransitions(removees);
-		for (SequenceEdge edge : inComposites) {
-			edge.setTarget(newContainer);
-//			System.out.println("set '" + newContainer + "' as new target of incoming SequenceEdge");
+		for (SequenceFlow edge : inComposites) {
+			edge.setTargetRef(newContainer);
+			//			System.out.println("set '" + newContainer + "' as new target of incoming SequenceEdge");
 		}
-		for (SequenceEdge edge : outComposites) {
-			edge.setSource(newContainer);
-//			System.out.println("set '" + newContainer + "' as new source of outgoing SequenceEdge");
+		for (SequenceFlow edge : outComposites) {
+			edge.setSourceRef(newContainer);
+			//			System.out.println("set '" + newContainer + "' as new source of outgoing SequenceEdge");
 		}
 		return true;
 	}
 
-	private Boolean handleInternalTransitions(Set<SequenceEdge> removees) {
-		for (SequenceEdge edge : removees) {
+	private Boolean handleInternalTransitions(Set<SequenceFlow> removees) {
+		for (SequenceFlow edge : removees) {
 			EcoreUtil.remove(edge);
-			if(!newContainer.getSequenceEdges().add(edge)){
+			if(!newContainer.getFlowElements().add(edge)){
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private void handleTransitions(Set<SequenceEdge> removees, Set<SequenceEdge> outsides, List<Activity> others, List<SequenceEdge> edges, boolean source) {
-		for (SequenceEdge edge : edges) {
-			Vertex vertex = null;
+	private void handleTransitions(Set<SequenceFlow> removees, Set<SequenceFlow> outsides, List<Activity> others, List<SequenceFlow> edges, boolean source) {
+		for (SequenceFlow edge : edges) {
+			FlowNode vertex = null;
 			if(source){
-				vertex = edge.getSource();
+				vertex = edge.getSourceRef();
 			} else {
-				vertex = edge.getTarget();
+				vertex = edge.getTargetRef();
 			}
 			if(others.contains(vertex)){
 				removees.add(edge);

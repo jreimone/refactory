@@ -1,8 +1,7 @@
-How to install the BPMN modeler including its metamodel in Indigo:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How to install the BPMN modeler including its metamodel in Juno:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Help -> Install New Software...
-* select "Indigo - http://download.eclipse.org/releases/indigo/" in the drop down list
-* select the "SOA Development" --> "BPMN Project Feature" if you just need the metamodel
+* use "http://download.eclipse.org/bpmn2-modeler/site/"
+* install "Eclipse BPMN2 Modeler"
 * restart Eclipse
-* create new BPMN model
