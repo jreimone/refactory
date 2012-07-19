@@ -36,7 +36,7 @@ public abstract class ModelRefactoringWizardPage extends UserInputWizardPage imp
 		setDescription("The refactoring requires additional parameters.");
 	}
 
-	final public void createControl(Composite parent)
+	public void createControl(Composite parent)
 	{
 		Control c = doCreateControl(parent);
 
