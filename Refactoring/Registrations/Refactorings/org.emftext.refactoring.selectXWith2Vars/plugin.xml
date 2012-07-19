@@ -10,7 +10,7 @@
    <extension
          point="org.emftext.refactoring.refspec">
       <refspec
-            refspec_resource="refspec/selectXWith2Vars.refspec">
+            refspec_resource="refspec/SelectXWith2Vars.refspec">
       </refspec>
    </extension>
 

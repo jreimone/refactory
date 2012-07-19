@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SelectXWith2Vars
 Bundle-SymbolicName: org.emftext.refactoring.selectXWith2Vars;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-Activator: org.emftext.refactoring.selectXWith2Vars.Activator
 Bundle-Vendor: Michael Muck
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.refactoring.registry.rolemodel;bundle-version="0.0.1",
