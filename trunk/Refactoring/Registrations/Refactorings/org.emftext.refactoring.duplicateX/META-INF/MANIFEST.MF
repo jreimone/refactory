@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: DuplicateX
+Bundle-SymbolicName: org.emftext.refactoring.duplicateX;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.emftext.refactoring.duplicatex
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.change,
+ org.emftext.language.refactoring.specification,
+ org.emftext.refactoring.registry.rolemapping,
+ org.emftext.refactoring.util
+Bundle-Vendor: Christoph Seidl
