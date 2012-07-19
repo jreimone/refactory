@@ -15,16 +15,17 @@
  ******************************************************************************/
 package org.emftext.refactoring.rolemodelmatching;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -34,7 +35,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.bpmn2.SubProcess;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -42,7 +43,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.stp.bpmn.SubProcess;
 import org.eclipse.uml2.uml.Class;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
@@ -53,19 +53,14 @@ import org.emftext.language.refactoring.roles.RoleComposition;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.rolemodelmatching.combinatory.CombinationGenerator;
-import org.emftext.refactoring.rolemodelmatching.listener.EqualityCheckListener;
 import org.emftext.refactoring.rolemodelmatching.listener.FilePrinterListener;
 import org.emftext.refactoring.rolemodelmatching.listener.FilterMappingFilePrinterListener;
 import org.emftext.refactoring.rolemodelmatching.listener.FilterMappingListener;
-import org.emftext.refactoring.rolemodelmatching.listener.INodeListener;
 import org.emftext.refactoring.rolemodelmatching.listener.LeafCollectorListener;
 import org.emftext.refactoring.rolemodelmatching.listener.MatchCountListener;
 import org.emftext.refactoring.rolemodelmatching.listener.MatchNodeList;
-import org.emftext.refactoring.rolemodelmatching.listener.PrintMatchPathListener;
-import org.emftext.refactoring.rolemodelmatching.listener.RemoveCompletePathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.RemoveIncompletePathListener;
 import org.emftext.refactoring.rolemodelmatching.listener.ValidMappingListener;
-import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
