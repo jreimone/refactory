@@ -320,9 +320,6 @@ public class CREATEImpl extends OperatorImpl implements CREATE {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * @generated NOT
-	 */
 	@Override
 	public void execute() {
 		TypeVariable variable = getNewInstanceVariable();

@@ -200,9 +200,6 @@ public class VARImpl extends OperatorImpl implements VAR {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * @generated NOT
-	 */
 	@Override
 	public void execute() {
 		QueryVariable queryVariable = getVariable();

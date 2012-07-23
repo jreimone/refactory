@@ -191,9 +191,6 @@ public class DELETEImpl extends OperatorImpl implements DELETE {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * @generated NOT
-	 */
 	@Override
 	public void execute() {
 		Referrable referrable = getDeletion();
