@@ -324,9 +324,6 @@ public class ASSIGNImpl extends OperatorImpl implements ASSIGN {
 		return result.toString();
 	}
 
-	/**
-	 * @generated NOT
-	 */
 	@Override
 	public void execute() {
 		Referrable attributeOwner = getAttributeOwner();
