@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2006-2012&#xD;&#xA;Software Technology Group, Dresden University of Technology&#xD;&#xA;DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026&#xD;&#xA;&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  Software Technology Group - TU Dresden, Germany;&#xD;&#xA;  DevBoost GmbH - Berlin, Germany&#xD;&#xA;     - initial API and implementation&#xD;&#xA; "
     modelDirectory="/org.qualitune.evolution.operators/src-gen" editDirectory="/org.qualitune.evolution.operators.edit/src-gen"
     modelPluginID="org.qualitune.evolution.operators" modelName="Operators" editPluginClass="org.qualitune.evolution.operators.provider.OperatorsEditPlugin"
@@ -18,7 +17,9 @@
     <genClasses ecoreClass="operators.ecore#//CREATE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//CREATE/newInstanceVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//CREATE/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//CREATE/parentCompositeReference"/>
       <genOperations ecoreOperation="operators.ecore#//CREATE/execute"/>
+      <genOperations ecoreOperation="operators.ecore#//CREATE/execute.1"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//TypeVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//TypeVariable/type"/>
@@ -26,10 +27,15 @@
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//DELETE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//DELETE/deletion"/>
+      <genOperations ecoreOperation="operators.ecore#//DELETE/execute"/>
+      <genOperations ecoreOperation="operators.ecore#//DELETE/execute.1"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//ASSIGN">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//ASSIGN/attribute"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute operators.ecore#//ASSIGN/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//ASSIGN/attributeOwner"/>
+      <genOperations ecoreOperation="operators.ecore#//ASSIGN/execute"/>
+      <genOperations ecoreOperation="operators.ecore#//ASSIGN/execute.1"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//EObjectReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//EObjectReference/element"/>
@@ -42,6 +48,9 @@
     <genClasses ecoreClass="operators.ecore#//SET">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//SET/reference"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//SET/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//SET/referenceOwner"/>
+      <genOperations ecoreOperation="operators.ecore#//SET/execute"/>
+      <genOperations ecoreOperation="operators.ecore#//SET/execute.1"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//VariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//VariableReference/referencedVariable"/>
@@ -50,6 +59,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//MOVE/newParent"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//MOVE/parentReference"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//MOVE/movee"/>
+      <genOperations ecoreOperation="operators.ecore#//MOVE/execute"/>
+      <genOperations ecoreOperation="operators.ecore#//MOVE/execute.1"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//SPLIT">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//SPLIT/splitSets"/>
@@ -64,6 +75,7 @@
     <genClasses ecoreClass="operators.ecore#//VAR">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//VAR/variable"/>
       <genOperations ecoreOperation="operators.ecore#//VAR/execute"/>
+      <genOperations ecoreOperation="operators.ecore#//VAR/execute.1"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//QueryVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/operation"/>

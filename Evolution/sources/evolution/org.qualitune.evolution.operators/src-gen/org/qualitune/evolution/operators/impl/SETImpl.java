@@ -322,9 +322,6 @@ public class SETImpl extends OperatorImpl implements SET {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * @generated NOT
-	 */
 	@Override
 	public void execute() {
 		Referrable referenceOwner = getReferenceOwner();
