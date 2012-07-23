@@ -319,9 +319,6 @@ public class MOVEImpl extends OperatorImpl implements MOVE {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * @generated NOT
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void execute() {
