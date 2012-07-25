@@ -44,6 +44,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
+import org.eclipse.uml2.uml.internal.resource.UML302UMLResourceFactoryImpl;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
@@ -632,6 +633,7 @@ public class RefactoringTestSuite extends TestCase {
 		extensionToFactoryMap.put("java",
 				new JavaSourceOrClassFileResourceFactoryImpl());
 		extensionToFactoryMap.put("tas", new TasResourceFactory());
-		extensionToFactoryMap.put("uml", new UMLResourceFactoryImpl());
+//		extensionToFactoryMap.put("uml", new UMLResourceFactoryImpl());
+		extensionToFactoryMap.put("uml", new UML302UMLResourceFactoryImpl());
 	}
 }

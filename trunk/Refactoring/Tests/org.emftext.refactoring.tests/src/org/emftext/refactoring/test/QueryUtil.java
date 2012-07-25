@@ -26,10 +26,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
 public class QueryUtil {
@@ -49,7 +51,7 @@ public class QueryUtil {
 		EObject model = resource.getContents().get(0);
 		return queryModel(model, query);
 	}
-	
+
 	public static List<EObject> queryModel(EObject model, String query){
 		assertNotNull(model);
 		assertNotNull(query);
@@ -104,7 +106,7 @@ public class QueryUtil {
 		}
 		Object value = input.eGet(feature, true);
 		if(value instanceof EObject){
-//			String[] temp = removeFirst(path);
+			//			String[] temp = removeFirst(path);
 			return getPath((EObject) value, path);
 		}
 		if(value instanceof List<?>){
@@ -115,12 +117,29 @@ public class QueryUtil {
 			}
 			try{
 				int index = Integer.parseInt(attribute);
-				EObject ob = (EObject) ((List<?>) value).get(index);
+				//				EObject ob = (EObject) ((List<?>) value).get(index);
+				Object ob = ((List<?>) value).get(index);
 				if(path.length == 0){
-					return getSingleList(ob);
+					if(ob instanceof EObject){
+						return getSingleList((EObject) ob);
+					} else {
+						if(ob instanceof EStructuralFeatureImpl.BasicFeatureMapEntry){
+							Object entryValue = ((EStructuralFeatureImpl.BasicFeatureMapEntry) ob).getValue();
+							return getSingleList((EObject) entryValue);
+						} 
+						throw new UnsupportedOperationException("implement this strange behaviour");
+					}
 				} else {
-//					path = removeFirst(path);
-					return getPath(ob, path);
+					//					path = removeFirst(path);
+					if(ob instanceof EObject){
+						return getPath((EObject) ob, path);
+					} else {
+						if(ob instanceof EStructuralFeatureImpl.BasicFeatureMapEntry){
+							Object entryValue = ((EStructuralFeatureImpl.BasicFeatureMapEntry) ob).getValue();
+							return getPath((EObject) entryValue, path);
+						} 
+						throw new UnsupportedOperationException("implement this strange behaviour");
+					}
 				}
 			} catch (NumberFormatException e) {
 
@@ -138,7 +157,7 @@ public class QueryUtil {
 					return result;
 				} else {
 					if(result.size() == 1){
-//						path = removeFirst(path);
+						//						path = removeFirst(path);
 						return getPath(result.get(0), path);
 					} else {
 						return null;
