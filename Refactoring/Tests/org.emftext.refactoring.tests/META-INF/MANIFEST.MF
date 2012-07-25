@@ -45,5 +45,8 @@ Require-Bundle: org.junit4,
  org.emftext.language.java.ejava.resource.ejava,
  org.emftext.language.java.resource,
  org.emftext.language.java.resource.java,
- org.eclipse.jdt.core
+ org.eclipse.jdt.core,
+ org.emftext.language.java.resource.bcel,
+ org.emftext.language.java.resource.jdt
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: libs/guava-12.0.1.jar
