@@ -55,7 +55,9 @@ public class RegistryUtil {
 			try {
 				resource = rs.getResource(uri, true);
 			} catch (Exception e) {
-				log(String.format("Resource '%1$s' couldn't be loaded", value), IStatus.ERROR);
+				log(String.format("Resource '%1$s' couldn't be loaded because of the following exception:" +
+						"\n\n" +
+						e.getMessage(), value), IStatus.ERROR);
 				continue;
 			}
 			if (resource == null) {
