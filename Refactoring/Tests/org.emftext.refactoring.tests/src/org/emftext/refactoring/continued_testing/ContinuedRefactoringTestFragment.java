@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IValueProviderFactory;
-import org.emftext.refactoring.interpreter.IValueProviderRegistry;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.test.QueryUtil;
@@ -154,11 +153,15 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		try {
 			created = movedInputFile.createNewFile();
 			assertTrue(created);
-			FileChannel inChannel = new FileInputStream(inputFile).getChannel();
-			FileChannel outChannel = new FileOutputStream(movedInputFile).getChannel();
+			FileInputStream fileInputStream = new FileInputStream(inputFile);
+			FileChannel inChannel = fileInputStream.getChannel();
+			FileOutputStream fileOutputStream = new FileOutputStream(movedInputFile);
+			FileChannel outChannel = fileOutputStream.getChannel();
 			inChannel.transferTo(0, inChannel.size(), outChannel);
 			inChannel.close();
 			outChannel.close();
+			fileInputStream.close();
+			fileOutputStream.close();
 //			movedInputResource.save(null);
 			movedExpectedResource.save(null);
 			refactoredResource.save(null);
