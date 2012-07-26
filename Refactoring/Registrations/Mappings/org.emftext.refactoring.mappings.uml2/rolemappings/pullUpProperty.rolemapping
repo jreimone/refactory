@@ -1,10 +1,10 @@
-ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/4.0.0/UML>
 
 /**
  * Pull Up Property - removes a property from a class and 
  * inserts it into one of its super-classes.
  */
-PullUpProperty maps <MoveX> {
+"Pull Up Property" maps <MoveX> {
 
 	Movee := Property;
 	SourceContainer := Class {
