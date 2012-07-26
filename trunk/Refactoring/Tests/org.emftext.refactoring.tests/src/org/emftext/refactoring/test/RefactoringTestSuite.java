@@ -611,6 +611,12 @@ public class RefactoringTestSuite extends TestCase {
 		EPackage.Registry.INSTANCE.put(JavaPackage.eNS_URI,
 				JavaPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/uml2/2.0.0/UML",
+				UMLPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/uml2/2.1.0/UML",
+				UMLPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/uml2/3.0.0/UML",
+				UMLPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(ContainersPackage.eNS_URI,
 				ContainersPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(MembersPackage.eNS_URI,
