@@ -633,7 +633,8 @@ public class RefactoringTestSuite extends TestCase {
 		extensionToFactoryMap.put("java",
 				new JavaSourceOrClassFileResourceFactoryImpl());
 		extensionToFactoryMap.put("tas", new TasResourceFactory());
-//		extensionToFactoryMap.put("uml", new UMLResourceFactoryImpl());
-		extensionToFactoryMap.put("uml", new UML302UMLResourceFactoryImpl());
+		extensionToFactoryMap.put("uml", new UMLResourceFactoryImpl());
+//		UMLPackage.eINSTANCE.getAbstraction();
+//		extensionToFactoryMap.put("uml", new UML302UMLResourceFactoryImpl());
 	}
 }

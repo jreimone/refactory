@@ -102,19 +102,19 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		assertTrue("At least one mapping must be registered for " + inputModel.eClass().getEPackage().getNsURI(), mappings.size() > 0);
 		File mappingFile = getTestDataSet().getInputFileByPattern(MAPPING_PATTERN);
 		String mappingName = QueryUtil.getLineInFile(mappingFile, 1).trim();
+		assertNotNull("A mapping name must be contained in " + mappingFile.getName(), mappingName);		
 		RoleMapping mappingToUse = null;
 		for (RoleMapping mapping : mappings) {
 			if(mapping.getName().equals(mappingName)){
 				mappingToUse = mapping;
 			}
 		}
-		assertNotNull(mappingToUse);
+		assertNotNull("Mapping '" + mappingName + "' was not found in registry", mappingToUse);
 		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(inputResource, mappingToUse);
 		assertNotNull("No refactorings exist for metamodel " + inputResource.getContents().get(0).eClass().getEPackage().getNsURI(), refactorer);
 		refactorer.setInput(elements);
 		IValueProviderFactory factory = new TestValueProviderFactory();
 		refactorer.setValueProviderFactory(factory);
-		IValueProviderRegistry.INSTANCE.registerValueProvider(mappingToUse, TestAttributeValueProvider.class);
 		EObject refactoredModel = refactorer.refactor();
 		assertNotNull(refactoredModel);
 	
