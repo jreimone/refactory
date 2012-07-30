@@ -82,6 +82,10 @@ public class RefactoringAction extends Action {
 	public void ltkRun() {
 //		EObject original = refactorer.getOriginalModel();
 		ModelRefactoring refactoring = new ModelRefactoring(refactorer, diagramTransactionalEditingDomain, getText(), activeEditor);
+		EObject fakeRefactoredModel = refactoring.getRefactorer().getFakeRefactoredModel();
+		if(fakeRefactoredModel == null){
+			return;
+		}
 		ModelRefactoringWizard wizard = new ModelRefactoringWizard(refactoring);
 		wizard.setWindowTitle(refactoring.getName());
 		RefactoringWizardOpenOperation op = new RefactoringWizardOpenOperation(wizard);
