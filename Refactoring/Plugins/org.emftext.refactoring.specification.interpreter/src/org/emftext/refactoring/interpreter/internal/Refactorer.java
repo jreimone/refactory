@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.language.refactoring.specification.resource.analysis.RefspecTEXTTokenResolver;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
@@ -329,8 +330,22 @@ public class Refactorer implements IRefactorer {
 		copier.copyAll(originalElements);
 		copier.copyReferences();
 		List<EObject> copiedInputSelection = new LinkedList<EObject>();
-		for (EObject eObject : filteredElements) {
-			copiedInputSelection.add(copier.get(eObject));
+		for (EObject original : filteredElements) {
+			URI uri = EcoreUtil.getURI(original);
+			EObject copy = copier.get(original);
+			//if(copy == null){
+//				EObject eObject = refactoredModelRS.getEObject(uri, true);
+//				EObject eObject2 = model.eResource().getResourceSet().getEObject(uri, true);
+//				 EObject eObject4 = model.eResource().getEObject(uri.toString());
+//				EObject eObject3 = originalElements.get(0).eResource().getResourceSet().getEObject(uri, true);
+//				EObject eObject5 = originalElements.get(0).eResource().getEObject(uri.toString());
+//				System.out.println();
+			//}
+			if(copy == null) {
+				RegistryUtil.log("Copy couldn't be found for fake interpreting. Retry right-clicking the element to refactor", IStatus.ERROR);
+				return;
+			}
+			copiedInputSelection.add(copy);
 		}
 		EObject copiedModel = copier.get(model);
 		interpreter.setInput(copiedInputSelection);
