@@ -36,7 +36,7 @@ public class ComplexUserInputWizardPage extends UserInputWizardPage {
 	 * @param name
 	 */
 	public ComplexUserInputWizardPage(IValueProvider<?, ?> valueProvider) {
-		super(valueProvider.getName());
+		super((valueProvider.getName() != null)?valueProvider.getName():"Provide some values");
 		this.valueProvider = valueProvider;
 	}
 
