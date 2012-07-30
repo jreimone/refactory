@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Oclrefactoring
-Bundle-SymbolicName: org.dresden-ocl.refactoring;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.refactoring;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: oclrefactoring.Activator
 Bundle-Vendor: Michael Muck
