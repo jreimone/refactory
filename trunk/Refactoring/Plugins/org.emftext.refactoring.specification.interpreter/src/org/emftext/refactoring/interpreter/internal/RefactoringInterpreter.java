@@ -286,7 +286,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		Stack<EObject> stack = getInterpretationStack();
 		ListIterator<EObject> iterator = stack.listIterator();
 		while (iterator.hasNext()) {
-			Instruction instruction = (Instruction) iterator.next();
+			EObject instruction = iterator.next();
 			if(instruction instanceof ASSIGN || instruction instanceof ObjectAssignmentInterpreter){
 				getValueProviderFactory().registerValueProviderForCommand(instruction);
 			}
