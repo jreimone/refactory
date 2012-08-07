@@ -6,9 +6,11 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -28,16 +30,17 @@ public class Conversion {
 
 	@Test
 	public void testTransformationSimple(){
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getPackageRegistry().put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("rolestext", new RolestextResourceFactory());
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("guery", new GueryResourceFactory());
+		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);
+		Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+		extensionToFactoryMap.put("rolestext", new RolestextResourceFactory());
+		extensionToFactoryMap.put("guery", new GueryResourceFactory());
 
 		File sourceFile = new File("..\\org.emftext.refactoring.extractX\\rolemodel\\ExtractX.rolestext");
 		assertTrue(sourceFile.exists());
 		System.out.println(sourceFile.getAbsolutePath());
 		URI uri = URI.createFileURI(sourceFile.getAbsolutePath());
+		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.getResource(uri, true);
 		EObject model = resource.getContents().get(0);
 		RoleModel rolemodel = (RoleModel) model;
