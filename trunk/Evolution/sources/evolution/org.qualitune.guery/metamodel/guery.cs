@@ -40,21 +40,21 @@ RULES {
 	
 	PreProcessor ::= !0 "prepare with" class[CLASSNAME];
 	
-	VertexSelection ::= !0 "select" roles ("," roles)* (!0 "where" constraints ("and" constraints)*)?;
+	VertexSelection ::= !0 "select" roles ("," #1 roles)* (!0 "where" constraints (!1 "and" constraints)*)?;
 	
 	Role ::= name[IDENTIFIER];
 	
 	Constraint ::= expression['"','"'];
 	
-	ConnectedBy ::= !0 "connected by" connections ("and" connections)* (!0 "where" constraints ("and" constraints)*)?;
+	ConnectedBy ::= !0 "connected by" #1 connections (!1 "and" connections)* (!0 "where" constraints (!1 "and" constraints)*)?;
 	
-	NotConnectedBy ::= !0 "not connected by"  connections ("and" connections)* (!0 "where" constraints ("and" constraints)*)?;
+	NotConnectedBy ::= !0 "not connected by" #1 connections (!1 "and" connections)* (!0 "where" constraints (!1 "and" constraints)*)?;
 	
 	Connection ::= path[IDENTIFIER] "(" from[IDENTIFIER] ">" to[IDENTIFIER] ")" 
 						("["minLength[CARDINALITY] "," maxLength[CARDINALITY] "]")? 
-						computeAll["find all" : ""];
+						#1 computeAll["find all" : ""];
 	
 
 	
-	Grouping ::= !0 "group by" constraints ("and" constraints)*;
+	Grouping ::= !0 "group by" constraints (!1 "and" constraints)*;
 }
