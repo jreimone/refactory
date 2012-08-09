@@ -6,6 +6,18 @@
       <rolemapping
             defaultIcon="icons/defaultTest.png"
             rolemapping_resource="rolemappings/extractProcedure.rolemapping">
+         <conditions
+               mapping_name="Extract Procedure"
+               postConditions="constraints/extractProcedure_post.ocl">
+            <errorMessage
+                  constraintName="uniqueVarName"
+                  message="Variables must have unique names. Please choose a different one.">
+            </errorMessage>
+            <errorMessage
+                  constraintName="uniqueProcedureName"
+                  message="Procedures must have unique names. Please choose a different one.">
+            </errorMessage>
+         </conditions>
       </rolemapping>
       <rolemapping
             defaultIcon="icons/defaultTest.png"
