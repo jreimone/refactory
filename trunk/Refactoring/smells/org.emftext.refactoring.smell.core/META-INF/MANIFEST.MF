@@ -6,16 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: smell_model.impl.ActivatorImpl
 Bundle-Localization: plugin
-Export-Package: ecore,
- ecore.impl,
- ecore.util,
- rolemapping,
- rolemapping.impl,
- rolemapping.util,
- roles,
- roles.impl,
- roles.util,
- smell_model,
+Export-Package: smell_model,
  smell_model.config,
  smell_model.impl,
  smell_model.ui,
