@@ -3,6 +3,7 @@
 package smell_model;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -55,7 +56,7 @@ public interface Metric extends EObject {
 	 * @model
 	 * @generated
 	 */
-	Map<EObject, Float> calculate(Resource loadedModel);
+	Map<EObject, Float> calculate(Resource loadedResource);
 
 	void register();
 

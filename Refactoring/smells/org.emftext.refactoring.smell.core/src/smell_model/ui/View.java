@@ -8,8 +8,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.events.TreeEvent;
-import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Image;
@@ -17,6 +15,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
@@ -24,8 +23,6 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.ViewPart;
 
 import smell_model.ModelSmell;
@@ -54,8 +51,8 @@ public class View  extends ViewPart {
 	private ScrolledComposite smellsScrolledComposite;
 	private Composite smells;
 	private Composite smellTreeComposite;
-	private Tree smellTree;
-	private FileDialog loadDialog;
+	private View_Tree smellTree;
+	private DirectoryDialog loadDialog;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,15 +99,15 @@ public class View  extends ViewPart {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				loadDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.NULL);
+				loadDialog = new DirectoryDialog(Display.getCurrent().getActiveShell(), SWT.NULL);
 				loadDialog.setText("Load Resource");
+				loadDialog.setMessage("Select a directory");
 				loadDialog.setFilterPath("C:/");
-				//TODO Dateiendungen anpassen
-				String[] filterExt = { "*.txt", "*.doc", ".rtf", "*.*" };
-		        loadDialog.setFilterExtensions(filterExt);
 				String path = loadDialog.open();
+				System.out.println(path);
 				ModelSmellModelImpl.getMain().setLoadedResourcePath(path);
-				//TODO Sprachlabel setzen
+				//TODO Sprache setzen
+				language.setText("");
 			}
 			
 			@Override
@@ -121,7 +118,6 @@ public class View  extends ViewPart {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				//TODO grafische Rückmeldung und Ergebnis
 				ModelSmellModelImpl.getMain().calculate();
 				
 			}
@@ -190,56 +186,16 @@ public class View  extends ViewPart {
 		smellTabItem.setControl(smellsScrolledComposite);
 		
 		//Smelltree
-		//TODO Smelltree erzeugen
 		smellTreeComposite = new Composite(parent, SWT.BORDER);
 		GridData smellTreeGridData = new GridData(SWT.FILL, SWT.BOTTOM, true, false, 1, 1);
 		smellTreeComposite.setLayoutData(smellTreeGridData);
 		smellTreeComposite.setLayout(new FillLayout());
+		smellTreeComposite.setVisible(false);
 		
-		smellTree = new Tree(smellTreeComposite, SWT.MULTI);
-		smellTree.addTreeListener(new TreeListener() {
-			
-			@Override
-			public void treeExpanded(TreeEvent e) {
-//				parentComposite.pack();
-			}
-			
-			@Override
-			public void treeCollapsed(TreeEvent e) {
-				
-			}
-		});
-		
-		TreeItem item1 = new TreeItem(smellTree, SWT.NULL);
-		item1.setText("Non-Understandability");
-		TreeItem item11 = new TreeItem(item1, SWT.NULL);
-		item11.setText("File: ModelSmellTestFile");
-		TreeItem item111 = new TreeItem(item11, SWT.NULL);
-		item111.setText("Link to Smell");
-		TreeItem item2 = new TreeItem(smellTree, SWT.NULL);
-		item2.setText("High Complexity");
-		TreeItem item21 = new TreeItem(item2, SWT.NULL);
-		item21.setText("File: ModelSmellTestFile");
-		TreeItem item3 = new TreeItem(smellTree, SWT.NULL);
-		item3.setText("Model Smell 3");
-		TreeItem item31 = new TreeItem(item3, SWT.NULL);
-		item31.setText("");
-		TreeItem item4 = new TreeItem(smellTree, SWT.NULL);
-		item4.setText("Model Smell 4");
-		TreeItem item41 = new TreeItem(item4, SWT.NULL);
-		item41.setText("");
-		TreeItem item5 = new TreeItem(smellTree, SWT.NULL);
-		item5.setText("Model Smell 5");
-		TreeItem item51 = new TreeItem(item5, SWT.NULL);
-		item51.setText("");
+		smellTree = new View_Tree(smellTreeComposite);
 		
 		parent.setBackground(qualitySmellTab.getBackground());
 		parent.pack();
-	}
-	
-	public void addTreeItem(String name){
-		TreeItem item = new TreeItem(smellTree,SWT.NULL);
-		item.setText("name");
 	}
 	
 	private View_Quality addQuality(Composite parent, String name, int factor){
