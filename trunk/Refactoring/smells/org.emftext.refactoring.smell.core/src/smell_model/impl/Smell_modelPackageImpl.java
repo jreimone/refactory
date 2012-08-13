@@ -2,6 +2,8 @@
  */
 package smell_model.impl;
 
+import ecore.EcorePackage;
+import ecore.impl.EcorePackageImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
@@ -9,9 +11,11 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
+import rolemapping.RolemappingPackage;
+import rolemapping.impl.RolemappingPackageImpl;
+import roles.RolesPackage;
+import roles.impl.RolesPackageImpl;
 import smell_model.Mapping;
 import smell_model.MappingConcretisation;
 import smell_model.Metric;
@@ -157,14 +161,22 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 
 		isInited = true;
 
-		// Initialize simple dependencies
-		RolemappingPackage.eINSTANCE.eClass();
+		// Obtain or create and register interdependencies
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI) : EcorePackage.eINSTANCE);
+		RolemappingPackageImpl theRolemappingPackage = (RolemappingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RolemappingPackage.eNS_URI) instanceof RolemappingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RolemappingPackage.eNS_URI) : RolemappingPackage.eINSTANCE);
+		RolesPackageImpl theRolesPackage = (RolesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSmell_modelPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
+		theRolemappingPackage.createPackageContents();
+		theRolesPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theSmell_modelPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
+		theRolemappingPackage.initializePackageContents();
+		theRolesPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theSmell_modelPackage.freeze();
