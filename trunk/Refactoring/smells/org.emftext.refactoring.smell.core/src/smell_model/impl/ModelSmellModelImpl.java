@@ -29,11 +29,14 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
+import rolemapping.RoleMapping;
 import smell_model.Metric;
 import smell_model.Metric_Quality_Mapping;
 import smell_model.ModelSmell;
 import smell_model.ModelSmellModel;
+import smell_model.ModelSmellResult;
 import smell_model.ModelSmell_Rolemapping_Mapping;
 import smell_model.Observer;
 import smell_model.Quality;
@@ -145,9 +148,13 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	
 	private static final String metric_ID = "org.emftext.refactoring.smell.core.smell_model.metric";
 	
-	private Map<Metric, Map<EObject, Float>> metricResultMapList = new HashMap<Metric, Map<EObject, Float>>();
+	private Map<Metric, Map<EObject, Float>> metricResultMap;
 	
 	private EList<Observer> observer = new BasicEList<Observer>();
+	
+	private ModelSmellResult result;
+	
+	private Map<ModelSmell, String> modelSmellDescription;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -158,7 +165,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		super();
 		init();
 	}
-	//TODO Modelsmell_Rolemapping_Mapping erzeugen
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * 
@@ -173,8 +180,10 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		qualityScale = new HashMap<Quality, Float>();
-		readIn();
+		createQualitySmellMap();
 		createMetrics(Platform.getExtensionRegistry());
+		createModelSmellDescription();
+		createModelSmellRolemappingMap();
 		for (int i = 0; i < qualities.size(); i++){
 			qualityScale.put(qualities.get(i), 1.0f);
 		}
@@ -219,9 +228,11 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		}
 	}
 	
+	//TODO evtl. mehrere Ressourcen anstatt nur einer
 	private void evaluateMetricExtension(IExtensionRegistry registry){
+		metricResultMap = new HashMap<Metric, Map<EObject, Float>>();
 		Smell_modelResourceFactoryImpl factory = new Smell_modelResourceFactoryImpl();
-		URI fileURI = URI.createFileURI(loadedResourcePath);
+		URI fileURI = URI.createURI(loadedResourcePath);
 		Resource resource = factory.createResource(fileURI);
 		IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
 		try {
@@ -246,7 +257,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 			@Override
 			public void run() throws Exception {
-				metricResultMapList.put(((Metric) o), ((Metric) o).calculate(resource));
+				metricResultMap.put(((Metric) o), ((Metric) o).calculate(resource));
 			}
 		};
 		SafeRunner.run(runnable);
@@ -277,12 +288,13 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	}
 	
 	private void calculateSmells(){
-		ModelSmellResult result = new ModelSmellResult();
-		result.calculate(metric_quality, quality_modelSmell, metricResultMapList, qualityScale);
+		ModelSmellResultImpl result = new ModelSmellResultImpl();
+		result.calculate(metric_quality, quality_modelSmell, metricResultMap, qualityScale);
+		setResult(result);
 		inform();
 	}
 
-	private void readIn(){
+	private void createQualitySmellMap(){
 		FileReader fileReader = null;
 		//TODO relativen Pfad einfügen
 		try {
@@ -359,6 +371,102 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			System.out.println(ex.getMessage());
 		}
 		createMetricQualityMapping();
+	}
+	
+	private void createModelSmellDescription(){
+		modelSmellDescription = new HashMap<ModelSmell, String>();
+		EList<String> descriptions = new BasicEList<String>();
+		FileReader fileReader = null;
+		//TODO relativen Pfad einfügen
+		try {
+			fileReader = new FileReader("projects/org.emftext.refactoring.smell.core/src/smell_model/config/descriptions.cfg");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	    BufferedReader bufferedReader = new BufferedReader(fileReader);
+	    String row = null;
+		try {
+			row = bufferedReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    while(row != null){
+	    	descriptions.add(row);
+	    	try {
+				row = bufferedReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
+	    for (int i = 0; i < descriptions.size(); i++){
+	    	if (descriptions.get(i).startsWith("#")){
+	    		for (ModelSmell m : modelSmells){
+	    			if (("#"+m.getName()).equals(descriptions.get(i))){
+	    				modelSmellDescription.put(m, descriptions.get(i+1));
+	    			}
+	    		}
+	    	}
+	    }
+	    try {
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void createModelSmellRolemappingMap(){
+		EList<String> rolemappings = new BasicEList<String>();
+		FileReader fileReader = null;
+		//TODO relativen Pfad einfügen
+		try {
+			fileReader = new FileReader("projects/org.emftext.refactoring.smell.core/src/smell_model/config/rolemappings.cfg");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	    BufferedReader bufferedReader = new BufferedReader(fileReader);
+	    String row = null;
+		try {
+			row = bufferedReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    while(row != null){
+	    	rolemappings.add(row);
+	    	try {
+				row = bufferedReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
+	    for (int i = 0; i < rolemappings.size(); i++){
+	    	if (rolemappings.get(i).startsWith("#")){
+	    		for (String s : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().keySet()){
+	    			if (("#"+s).equals(rolemappings.get(i))){
+	    				i++;
+	    				for (ModelSmell m : modelSmells){
+	    					if (m.getName().equals(rolemappings.get(i))){
+	    						i++;
+	    						while (rolemappings.get(i).startsWith(">")){
+		    						for (String name : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
+		    							if (rolemappings.get(i).equals(name)){
+		    								ModelSmell_Rolemapping_Mapping tempMapping = Smell_modelFactory.eINSTANCE.createModelSmell_Rolemapping_Mapping();
+		    								tempMapping.setModelSmell(m);
+		    								tempMapping.getRoleMapping().add((RoleMapping) IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).get(name));
+		    								modelSmell_roleMapping.add(tempMapping);
+		    							}
+		    						}
+	    						}
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+	    }
+	    try {
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -679,13 +787,25 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	public void setLoadedResourcePath(String loadedResourcePath) {
 		this.loadedResourcePath = loadedResourcePath;
 	}
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+
 	public Map<Quality, Float> getQualityScale() {
 		return qualityScale;
+	}
+	
+	public ModelSmellResult getResult() {
+		return result;
+	}
+	
+	public void setResult(ModelSmellResult result) {
+		this.result = result;
+	}
+	
+	public Map<ModelSmell, String> getModelSmellDescription() {
+		return modelSmellDescription;
+	}
+	
+	public void setModelSmellDescription(Map<ModelSmell, String> modelSmellDescription) {
+		this.modelSmellDescription = modelSmellDescription;
 	}
 
 } //MainImpl

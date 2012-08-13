@@ -210,6 +210,14 @@ public interface ModelSmellModel extends EObject {
 	 */
 	void setQualityScale(Quality quality, Float factor);
 	
+	ModelSmellResult getResult();
+	
+	void setResult(ModelSmellResult result);
+	
+	Map<ModelSmell, String> getModelSmellDescription();
+	
+	void setModelSmellDescription(Map<ModelSmell, String> modelSmellDescription);
+	
 	void register(Observer o);
 	
 	void unregister(Observer o);
