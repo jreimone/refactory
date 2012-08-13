@@ -2,10 +2,10 @@
  */
 package smell_model;
 
+import ecore.EPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import rolemapping.RoleMapping;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,7 +55,7 @@ public interface ModelSmell_Rolemapping_Mapping extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Role Mapping</b></em>' reference list.
-	 * The list contents are of type {@link org.emftext.language.refactoring.rolemapping.RoleMapping}.
+	 * The list contents are of type {@link rolemapping.RoleMapping}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Role Mapping</em>' reference list isn't clear,
