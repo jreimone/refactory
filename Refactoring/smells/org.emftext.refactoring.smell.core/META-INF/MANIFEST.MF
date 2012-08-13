@@ -6,7 +6,16 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: smell_model.impl.ActivatorImpl
 Bundle-Localization: plugin
-Export-Package: smell_model,
+Export-Package: ecore,
+ ecore.impl,
+ ecore.util,
+ rolemapping,
+ rolemapping.impl,
+ rolemapping.util,
+ roles,
+ roles.impl,
+ roles.util,
+ smell_model,
  smell_model.config,
  smell_model.impl,
  smell_model.ui,
@@ -19,8 +28,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.emf.ecore.xmi,
+Import-Package: org.eclipse.core.filesystem,
+ org.eclipse.emf.ecore.xmi,
  org.eclipse.emf.ecore.xmi.impl,
  org.eclipse.emf.ecore.xmi.util,
+ org.eclipse.ui.ide,
  org.emftext.refactoring.registry.rolemapping,
- smell_model
+ smell_model,
+ smell_model.util
