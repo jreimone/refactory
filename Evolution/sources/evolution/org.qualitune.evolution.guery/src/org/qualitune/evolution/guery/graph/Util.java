@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
 public abstract class Util {
-	
+
 
 	/**
 	 * Returns all references of <code>element</code>. Including containments.
@@ -18,9 +18,9 @@ public abstract class Util {
 	public static List<EReference> getAllReferences(EObject element){
 		EClass metaclass = element.eClass();
 		List<EReference> allReferences = metaclass.getEAllReferences();
-//		List<EReference> allContainments = metaclass.getEAllContainments();
+		//		List<EReference> allContainments = metaclass.getEAllContainments();
 		List<EReference> references = new ArrayList<EReference>(allReferences);
-//		references.removeAll(allContainments);
+		//		references.removeAll(allContainments);
 		return references;
 	}
 
@@ -34,10 +34,12 @@ public abstract class Util {
 	public static List<EObject> getReferencedElements(EReference reference, EObject element) {
 		List<EObject> referencedElements = new ArrayList<EObject>();
 		Object object = element.eGet(reference, true);
-		if(!reference.isMany()){
-			referencedElements.add((EObject) object);
-		} else {
-			referencedElements.addAll((List<EObject>) object);
+		if(object != null){
+			if(!reference.isMany()){
+				referencedElements.add((EObject) object);
+			} else {
+				referencedElements.addAll((List<EObject>) object);
+			}
 		}
 		return referencedElements;
 	}
