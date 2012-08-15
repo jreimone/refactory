@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Matching
+Bundle-SymbolicName: org.emftext.refactoring.matching
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.emf.ecore,
+ org.emftext.language.refactoring.roles,
+ org.emftext.language.refactoring.roles.resource.rolestext,
+ org.qualitune.guery,
+ org.qualitune.guery.resource.guery,
+ org.eclipse.emf.ecore.xmi,
+ org.junit4,
+ org.qualitune.evolution.guery,
+ org.qualitune.evolution.guery.registry

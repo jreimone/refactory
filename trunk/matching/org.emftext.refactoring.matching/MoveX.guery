@@ -1,0 +1,5 @@
+motif MoveX
+select SourceContainer, TargetContainer, Movee
+connected by sourceContainment(SourceContainer>Movee)[1,*] find all
+	and targetContainment(TargetContainer>Movee)[1,*] find all
+	and containerReference(SourceContainer>TargetContainer)[1,*] find all
