@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.Test;
 import org.qualitune.evolution.guery.registry.EObjectVertex;
@@ -52,14 +53,12 @@ public class SolverTest {
 //		RoleModel rolemodel = (RoleModel) model;
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put
-		(Resource.Factory.Registry.DEFAULT_EXTENSION, 
-		 new XMIResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 
 		// Register the package to ensure it is available during loading.
 		//
 		resourceSet.getPackageRegistry().put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);
-		String path = "D:/GIT/EMFText-Zoo/Inhabitants/PL0/org.emftext.language.pl0/metamodel/pl0.ecore";
+		String path = "../org.emftext.language.pl0/metamodel/pl0.ecore";
 		File file = new File(path);
 		assertTrue(file.exists());
 		URI uri = URI.createFileURI(file.getAbsolutePath());
@@ -80,7 +79,7 @@ public class SolverTest {
 	private static Motif<EObjectVertex,EReferenceEdge> loadMotifs(){
 		InputStream in=null;
 		try {
-			in = new FileInputStream("ExtractSubX.guery");
+			in = new FileInputStream("ExtractXwithReferenceClass.guery");
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -90,7 +89,8 @@ public class SolverTest {
 			motif = reader.read(in);
 		} catch (MotifReaderException e) {
 			e.printStackTrace();
-		} 
+		}
+		
 		return motif;
 	}
 }

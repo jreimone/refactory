@@ -1,5 +1,9 @@
 motif MoveX
 select SourceContainer, TargetContainer, Movee
-connected by sourceContainment(SourceContainer>Movee)[1,*] find all
-	and targetContainment(TargetContainer>Movee)[1,*] find all
-	and containerReference(SourceContainer>TargetContainer)[1,*] find all
+//where "SourceContainer!=null"
+//and "TargetContainer!=null"
+//and "Movee!=null"
+connected by sourceContainment(SourceContainer>Movee)[1,1]
+connected by targetContainment(TargetContainer>Movee)[1,1]
+connected by containerReference(SourceContainer>TargetContainer)[1,2]
+//group by "SourceContainer"

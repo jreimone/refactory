@@ -1,8 +1,8 @@
 motif ExtractXwithReferenceClass
 select OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference
-connected by extracts(OrigContainer>Extract)[1,*] find all
-	and referer(OrigContainer>MovedReference)[1,*] find all
-	and moved(NewContainer>Extract)[1,*] find all
-	and target(ContainerContainer>NewContainer)[1,*] find all
-	and source(ContainerContainer>OrigContainer)[1,*] find all
-	and containerRef(MovedReference>NewContainer)[1,1] find all
+connected by extracts(OrigContainer>Extract)[1,1] find all
+connected by referer(OrigContainer>MovedReference)[1,1] find all
+connected by moved(NewContainer>Extract)[1,1] find all
+connected by target(ContainerContainer>NewContainer)[1,1] find all
+connected by source(ContainerContainer>OrigContainer)[1,1] find all
+connected by containerRef(MovedReference>NewContainer)[1,1] find all
