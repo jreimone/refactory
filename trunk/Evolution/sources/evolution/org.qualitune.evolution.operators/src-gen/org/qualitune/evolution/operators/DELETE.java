@@ -35,37 +35,37 @@ package org.qualitune.evolution.operators;
  */
 public interface DELETE extends Operator {
 	/**
-	 * Returns the value of the '<em><b>Deletion</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Deletion</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Deletion</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Deletion</em>' containment reference.
-	 * @see #setDeletion(Referrable)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getDELETE_Deletion()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Deletion</em>' containment reference.
+   * @see #setDeletion(Referrable)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getDELETE_Deletion()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	Referrable getDeletion();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.DELETE#getDeletion <em>Deletion</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.DELETE#getDeletion <em>Deletion</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Deletion</em>' containment reference.
-	 * @see #getDeletion()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Deletion</em>' containment reference.
+   * @see #getDeletion()
+   * @generated
+   */
 	void setDeletion(Referrable value);
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * @model
+   * @generated
+   */
 	void execute();
 
 } // DELETE

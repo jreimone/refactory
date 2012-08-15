@@ -38,19 +38,19 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface EObjectReference extends Result, Referrable {
 	/**
-	 * Returns the value of the '<em><b>Element</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Element</b></em>' reference list.
+   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Element</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Element</em>' reference list.
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getEObjectReference_Element()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Element</em>' reference list.
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getEObjectReference_Element()
+   * @model required="true"
+   * @generated
+   */
 	EList<EObject> getElement();
 
 } // EObjectReference

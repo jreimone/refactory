@@ -48,148 +48,155 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
  */
 public class DELETEImpl extends OperatorImpl implements DELETE {
 	/**
-	 * The cached value of the '{@link #getDeletion() <em>Deletion</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDeletion() <em>Deletion</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDeletion()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDeletion()
+   * @generated
+   * @ordered
+   */
 	protected Referrable deletion;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected DELETEImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.DELETE;
-	}
+    return OperatorsPackage.Literals.DELETE;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Referrable getDeletion() {
-		return deletion;
-	}
+    return deletion;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetDeletion(Referrable newDeletion, NotificationChain msgs) {
-		Referrable oldDeletion = deletion;
-		deletion = newDeletion;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.DELETE__DELETION, oldDeletion, newDeletion);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Referrable oldDeletion = deletion;
+    deletion = newDeletion;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.DELETE__DELETION, oldDeletion, newDeletion);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setDeletion(Referrable newDeletion) {
-		if (newDeletion != deletion) {
-			NotificationChain msgs = null;
-			if (deletion != null)
-				msgs = ((InternalEObject)deletion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.DELETE__DELETION, null, msgs);
-			if (newDeletion != null)
-				msgs = ((InternalEObject)newDeletion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.DELETE__DELETION, null, msgs);
-			msgs = basicSetDeletion(newDeletion, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.DELETE__DELETION, newDeletion, newDeletion));
-	}
+    if (newDeletion != deletion)
+    {
+      NotificationChain msgs = null;
+      if (deletion != null)
+        msgs = ((InternalEObject)deletion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.DELETE__DELETION, null, msgs);
+      if (newDeletion != null)
+        msgs = ((InternalEObject)newDeletion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.DELETE__DELETION, null, msgs);
+      msgs = basicSetDeletion(newDeletion, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.DELETE__DELETION, newDeletion, newDeletion));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OperatorsPackage.DELETE__DELETION:
-				return basicSetDeletion(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.DELETE__DELETION:
+        return basicSetDeletion(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OperatorsPackage.DELETE__DELETION:
-				return getDeletion();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.DELETE__DELETION:
+        return getDeletion();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OperatorsPackage.DELETE__DELETION:
-				setDeletion((Referrable)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.DELETE__DELETION:
+        setDeletion((Referrable)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.DELETE__DELETION:
-				setDeletion((Referrable)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.DELETE__DELETION:
+        setDeletion((Referrable)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.DELETE__DELETION:
-				return deletion != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.DELETE__DELETION:
+        return deletion != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 	@Override
 	public void execute() {

@@ -53,272 +53,283 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
  */
 public class CREATEImpl extends OperatorImpl implements CREATE {
 	/**
-	 * The cached value of the '{@link #getNewInstanceVariable() <em>New Instance Variable</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getNewInstanceVariable() <em>New Instance Variable</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNewInstanceVariable()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getNewInstanceVariable()
+   * @generated
+   * @ordered
+   */
 	protected TypeVariable newInstanceVariable;
 
 	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getParent() <em>Parent</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParent()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getParent()
+   * @generated
+   * @ordered
+   */
 	protected Referrable parent;
 
 	/**
-	 * The cached value of the '{@link #getParentCompositeReference() <em>Parent Composite Reference</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getParentCompositeReference() <em>Parent Composite Reference</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParentCompositeReference()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getParentCompositeReference()
+   * @generated
+   * @ordered
+   */
 	protected EReference parentCompositeReference;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected CREATEImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.CREATE;
-	}
+    return OperatorsPackage.Literals.CREATE;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TypeVariable getNewInstanceVariable() {
-		return newInstanceVariable;
-	}
+    return newInstanceVariable;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetNewInstanceVariable(TypeVariable newNewInstanceVariable, NotificationChain msgs) {
-		TypeVariable oldNewInstanceVariable = newInstanceVariable;
-		newInstanceVariable = newNewInstanceVariable;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE, oldNewInstanceVariable, newNewInstanceVariable);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    TypeVariable oldNewInstanceVariable = newInstanceVariable;
+    newInstanceVariable = newNewInstanceVariable;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE, oldNewInstanceVariable, newNewInstanceVariable);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setNewInstanceVariable(TypeVariable newNewInstanceVariable) {
-		if (newNewInstanceVariable != newInstanceVariable) {
-			NotificationChain msgs = null;
-			if (newInstanceVariable != null)
-				msgs = ((InternalEObject)newInstanceVariable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE, null, msgs);
-			if (newNewInstanceVariable != null)
-				msgs = ((InternalEObject)newNewInstanceVariable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE, null, msgs);
-			msgs = basicSetNewInstanceVariable(newNewInstanceVariable, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE, newNewInstanceVariable, newNewInstanceVariable));
-	}
+    if (newNewInstanceVariable != newInstanceVariable)
+    {
+      NotificationChain msgs = null;
+      if (newInstanceVariable != null)
+        msgs = ((InternalEObject)newInstanceVariable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE, null, msgs);
+      if (newNewInstanceVariable != null)
+        msgs = ((InternalEObject)newNewInstanceVariable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE, null, msgs);
+      msgs = basicSetNewInstanceVariable(newNewInstanceVariable, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE, newNewInstanceVariable, newNewInstanceVariable));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Referrable getParent() {
-		return parent;
-	}
+    return parent;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetParent(Referrable newParent, NotificationChain msgs) {
-		Referrable oldParent = parent;
-		parent = newParent;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__PARENT, oldParent, newParent);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Referrable oldParent = parent;
+    parent = newParent;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__PARENT, oldParent, newParent);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setParent(Referrable newParent) {
-		if (newParent != parent) {
-			NotificationChain msgs = null;
-			if (parent != null)
-				msgs = ((InternalEObject)parent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.CREATE__PARENT, null, msgs);
-			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.CREATE__PARENT, null, msgs);
-			msgs = basicSetParent(newParent, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__PARENT, newParent, newParent));
-	}
+    if (newParent != parent)
+    {
+      NotificationChain msgs = null;
+      if (parent != null)
+        msgs = ((InternalEObject)parent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.CREATE__PARENT, null, msgs);
+      if (newParent != null)
+        msgs = ((InternalEObject)newParent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.CREATE__PARENT, null, msgs);
+      msgs = basicSetParent(newParent, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__PARENT, newParent, newParent));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EReference getParentCompositeReference() {
-		if (parentCompositeReference != null && parentCompositeReference.eIsProxy()) {
-			InternalEObject oldParentCompositeReference = (InternalEObject)parentCompositeReference;
-			parentCompositeReference = (EReference)eResolveProxy(oldParentCompositeReference);
-			if (parentCompositeReference != oldParentCompositeReference) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE, oldParentCompositeReference, parentCompositeReference));
-			}
-		}
-		return parentCompositeReference;
-	}
+    if (parentCompositeReference != null && parentCompositeReference.eIsProxy())
+    {
+      InternalEObject oldParentCompositeReference = (InternalEObject)parentCompositeReference;
+      parentCompositeReference = (EReference)eResolveProxy(oldParentCompositeReference);
+      if (parentCompositeReference != oldParentCompositeReference)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE, oldParentCompositeReference, parentCompositeReference));
+      }
+    }
+    return parentCompositeReference;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EReference basicGetParentCompositeReference() {
-		return parentCompositeReference;
-	}
+    return parentCompositeReference;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setParentCompositeReference(EReference newParentCompositeReference) {
-		EReference oldParentCompositeReference = parentCompositeReference;
-		parentCompositeReference = newParentCompositeReference;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE, oldParentCompositeReference, parentCompositeReference));
-	}
+    EReference oldParentCompositeReference = parentCompositeReference;
+    parentCompositeReference = newParentCompositeReference;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE, oldParentCompositeReference, parentCompositeReference));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
-				return basicSetNewInstanceVariable(null, msgs);
-			case OperatorsPackage.CREATE__PARENT:
-				return basicSetParent(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
+        return basicSetNewInstanceVariable(null, msgs);
+      case OperatorsPackage.CREATE__PARENT:
+        return basicSetParent(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
-				return getNewInstanceVariable();
-			case OperatorsPackage.CREATE__PARENT:
-				return getParent();
-			case OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE:
-				if (resolve) return getParentCompositeReference();
-				return basicGetParentCompositeReference();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
+        return getNewInstanceVariable();
+      case OperatorsPackage.CREATE__PARENT:
+        return getParent();
+      case OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE:
+        if (resolve) return getParentCompositeReference();
+        return basicGetParentCompositeReference();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
-				setNewInstanceVariable((TypeVariable)newValue);
-				return;
-			case OperatorsPackage.CREATE__PARENT:
-				setParent((Referrable)newValue);
-				return;
-			case OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE:
-				setParentCompositeReference((EReference)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
+        setNewInstanceVariable((TypeVariable)newValue);
+        return;
+      case OperatorsPackage.CREATE__PARENT:
+        setParent((Referrable)newValue);
+        return;
+      case OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE:
+        setParentCompositeReference((EReference)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
-				setNewInstanceVariable((TypeVariable)null);
-				return;
-			case OperatorsPackage.CREATE__PARENT:
-				setParent((Referrable)null);
-				return;
-			case OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE:
-				setParentCompositeReference((EReference)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
+        setNewInstanceVariable((TypeVariable)null);
+        return;
+      case OperatorsPackage.CREATE__PARENT:
+        setParent((Referrable)null);
+        return;
+      case OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE:
+        setParentCompositeReference((EReference)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
-				return newInstanceVariable != null;
-			case OperatorsPackage.CREATE__PARENT:
-				return parent != null;
-			case OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE:
-				return parentCompositeReference != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.CREATE__NEW_INSTANCE_VARIABLE:
+        return newInstanceVariable != null;
+      case OperatorsPackage.CREATE__PARENT:
+        return parent != null;
+      case OperatorsPackage.CREATE__PARENT_COMPOSITE_REFERENCE:
+        return parentCompositeReference != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 	@Override
 	public void execute() {

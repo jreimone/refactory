@@ -40,89 +40,89 @@ import org.eclipse.emf.ecore.EReference;
  */
 public interface CREATE extends Operator {
 	/**
-	 * Returns the value of the '<em><b>New Instance Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>New Instance Variable</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>New Instance Variable</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>New Instance Variable</em>' containment reference.
-	 * @see #setNewInstanceVariable(TypeVariable)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getCREATE_NewInstanceVariable()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>New Instance Variable</em>' containment reference.
+   * @see #setNewInstanceVariable(TypeVariable)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getCREATE_NewInstanceVariable()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	TypeVariable getNewInstanceVariable();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.CREATE#getNewInstanceVariable <em>New Instance Variable</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.CREATE#getNewInstanceVariable <em>New Instance Variable</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>New Instance Variable</em>' containment reference.
-	 * @see #getNewInstanceVariable()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>New Instance Variable</em>' containment reference.
+   * @see #getNewInstanceVariable()
+   * @generated
+   */
 	void setNewInstanceVariable(TypeVariable value);
 
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Parent</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' containment reference.
-	 * @see #setParent(Referrable)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getCREATE_Parent()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Parent</em>' containment reference.
+   * @see #setParent(Referrable)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getCREATE_Parent()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	Referrable getParent();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.CREATE#getParent <em>Parent</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.CREATE#getParent <em>Parent</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' containment reference.
-	 * @see #getParent()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Parent</em>' containment reference.
+   * @see #getParent()
+   * @generated
+   */
 	void setParent(Referrable value);
 
 	/**
-	 * Returns the value of the '<em><b>Parent Composite Reference</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Parent Composite Reference</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent Composite Reference</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Composite Reference</em>' reference.
-	 * @see #setParentCompositeReference(EReference)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getCREATE_ParentCompositeReference()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Parent Composite Reference</em>' reference.
+   * @see #setParentCompositeReference(EReference)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getCREATE_ParentCompositeReference()
+   * @model required="true"
+   * @generated
+   */
 	EReference getParentCompositeReference();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.CREATE#getParentCompositeReference <em>Parent Composite Reference</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.CREATE#getParentCompositeReference <em>Parent Composite Reference</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Composite Reference</em>' reference.
-	 * @see #getParentCompositeReference()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Parent Composite Reference</em>' reference.
+   * @see #getParentCompositeReference()
+   * @generated
+   */
 	void setParentCompositeReference(EReference value);
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * @model
+   * @generated
+   */
 	void execute();
 
 } // CREATE

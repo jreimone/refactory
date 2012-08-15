@@ -35,37 +35,37 @@ package org.qualitune.evolution.operators;
  */
 public interface VAR extends Operator {
 	/**
-	 * Returns the value of the '<em><b>Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Variable</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable</em>' containment reference.
-	 * @see #setVariable(QueryVariable)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getVAR_Variable()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Variable</em>' containment reference.
+   * @see #setVariable(QueryVariable)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getVAR_Variable()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	QueryVariable getVariable();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.VAR#getVariable <em>Variable</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.VAR#getVariable <em>Variable</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Variable</em>' containment reference.
-	 * @see #getVariable()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Variable</em>' containment reference.
+   * @see #getVariable()
+   * @generated
+   */
 	void setVariable(QueryVariable value);
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * @model
+   * @generated
+   */
 	void execute();
 
 } // VAR

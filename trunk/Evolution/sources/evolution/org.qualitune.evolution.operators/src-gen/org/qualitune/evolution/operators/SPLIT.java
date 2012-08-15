@@ -37,45 +37,45 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface SPLIT extends Operator {
 	/**
-	 * Returns the value of the '<em><b>Split Sets</b></em>' containment reference list.
-	 * The list contents are of type {@link org.qualitune.evolution.operators.StructuralFeatureSet}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Split Sets</b></em>' containment reference list.
+   * The list contents are of type {@link org.qualitune.evolution.operators.StructuralFeatureSet}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Split Sets</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Split Sets</em>' containment reference list.
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getSPLIT_SplitSets()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Split Sets</em>' containment reference list.
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getSPLIT_SplitSets()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	EList<StructuralFeatureSet> getSplitSets();
 
 	/**
-	 * Returns the value of the '<em><b>Split Object</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Split Object</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Split Object</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Split Object</em>' containment reference.
-	 * @see #setSplitObject(Referrable)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getSPLIT_SplitObject()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Split Object</em>' containment reference.
+   * @see #setSplitObject(Referrable)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getSPLIT_SplitObject()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	Referrable getSplitObject();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.SPLIT#getSplitObject <em>Split Object</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.SPLIT#getSplitObject <em>Split Object</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Split Object</em>' containment reference.
-	 * @see #getSplitObject()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Split Object</em>' containment reference.
+   * @see #getSplitObject()
+   * @generated
+   */
 	void setSplitObject(Referrable value);
 
 } // SPLIT

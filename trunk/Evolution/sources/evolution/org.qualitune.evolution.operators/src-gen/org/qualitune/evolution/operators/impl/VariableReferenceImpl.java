@@ -39,129 +39,135 @@ import org.qualitune.evolution.operators.VariableReference;
  */
 public class VariableReferenceImpl extends ReferrableImpl implements VariableReference {
 	/**
-	 * The cached value of the '{@link #getReferencedVariable() <em>Referenced Variable</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getReferencedVariable() <em>Referenced Variable</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferencedVariable()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getReferencedVariable()
+   * @generated
+   * @ordered
+   */
 	protected Variable referencedVariable;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected VariableReferenceImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.VARIABLE_REFERENCE;
-	}
+    return OperatorsPackage.Literals.VARIABLE_REFERENCE;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Variable getReferencedVariable() {
-		if (referencedVariable != null && referencedVariable.eIsProxy()) {
-			InternalEObject oldReferencedVariable = (InternalEObject)referencedVariable;
-			referencedVariable = (Variable)eResolveProxy(oldReferencedVariable);
-			if (referencedVariable != oldReferencedVariable) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE, oldReferencedVariable, referencedVariable));
-			}
-		}
-		return referencedVariable;
-	}
+    if (referencedVariable != null && referencedVariable.eIsProxy())
+    {
+      InternalEObject oldReferencedVariable = (InternalEObject)referencedVariable;
+      referencedVariable = (Variable)eResolveProxy(oldReferencedVariable);
+      if (referencedVariable != oldReferencedVariable)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE, oldReferencedVariable, referencedVariable));
+      }
+    }
+    return referencedVariable;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Variable basicGetReferencedVariable() {
-		return referencedVariable;
-	}
+    return referencedVariable;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setReferencedVariable(Variable newReferencedVariable) {
-		Variable oldReferencedVariable = referencedVariable;
-		referencedVariable = newReferencedVariable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE, oldReferencedVariable, referencedVariable));
-	}
+    Variable oldReferencedVariable = referencedVariable;
+    referencedVariable = newReferencedVariable;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE, oldReferencedVariable, referencedVariable));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE:
-				if (resolve) return getReferencedVariable();
-				return basicGetReferencedVariable();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE:
+        if (resolve) return getReferencedVariable();
+        return basicGetReferencedVariable();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE:
-				setReferencedVariable((Variable)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE:
+        setReferencedVariable((Variable)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE:
-				setReferencedVariable((Variable)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE:
+        setReferencedVariable((Variable)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE:
-				return referencedVariable != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.VARIABLE_REFERENCE__REFERENCED_VARIABLE:
+        return referencedVariable != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //VariableReferenceImpl

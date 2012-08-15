@@ -39,19 +39,19 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  */
 public interface StructuralFeatureSet extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Structural Features</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EStructuralFeature}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Structural Features</b></em>' reference list.
+   * The list contents are of type {@link org.eclipse.emf.ecore.EStructuralFeature}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Structural Features</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Structural Features</em>' reference list.
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getStructuralFeatureSet_StructuralFeatures()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Structural Features</em>' reference list.
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getStructuralFeatureSet_StructuralFeatures()
+   * @model required="true"
+   * @generated
+   */
 	EList<EStructuralFeature> getStructuralFeatures();
 
 } // StructuralFeatureSet

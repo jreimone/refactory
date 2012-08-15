@@ -37,64 +37,64 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Operator extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Result</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Result</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Result</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Result</em>' containment reference.
-	 * @see #setResult(Result)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getOperator_Result()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Result</em>' containment reference.
+   * @see #setResult(Result)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getOperator_Result()
+   * @model containment="true"
+   * @generated
+   */
 	Result getResult();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.Operator#getResult <em>Result</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.Operator#getResult <em>Result</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Result</em>' containment reference.
-	 * @see #getResult()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Result</em>' containment reference.
+   * @see #getResult()
+   * @generated
+   */
 	void setResult(Result value);
 
 	/**
-	 * Returns the value of the '<em><b>Executed</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Executed</b></em>' attribute.
+   * The default value is <code>"false"</code>.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Executed</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Executed</em>' attribute.
-	 * @see #setExecuted(boolean)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getOperator_Executed()
-	 * @model default="false" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Executed</em>' attribute.
+   * @see #setExecuted(boolean)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getOperator_Executed()
+   * @model default="false" required="true"
+   * @generated
+   */
 	boolean isExecuted();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.Operator#isExecuted <em>Executed</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.Operator#isExecuted <em>Executed</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Executed</em>' attribute.
-	 * @see #isExecuted()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Executed</em>' attribute.
+   * @see #isExecuted()
+   * @generated
+   */
 	void setExecuted(boolean value);
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * @model
+   * @generated
+   */
 	void execute();
 
 } // Operator

@@ -55,272 +55,283 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
  */
 public class SETImpl extends OperatorImpl implements SET {
 	/**
-	 * The cached value of the '{@link #getReference() <em>Reference</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getReference() <em>Reference</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReference()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getReference()
+   * @generated
+   * @ordered
+   */
 	protected EReference reference;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getValue()
+   * @generated
+   * @ordered
+   */
 	protected Referrable value;
 
 	/**
-	 * The cached value of the '{@link #getReferenceOwner() <em>Reference Owner</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getReferenceOwner() <em>Reference Owner</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferenceOwner()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getReferenceOwner()
+   * @generated
+   * @ordered
+   */
 	protected Referrable referenceOwner;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected SETImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.SET;
-	}
+    return OperatorsPackage.Literals.SET;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EReference getReference() {
-		if (reference != null && reference.eIsProxy()) {
-			InternalEObject oldReference = (InternalEObject)reference;
-			reference = (EReference)eResolveProxy(oldReference);
-			if (reference != oldReference) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperatorsPackage.SET__REFERENCE, oldReference, reference));
-			}
-		}
-		return reference;
-	}
+    if (reference != null && reference.eIsProxy())
+    {
+      InternalEObject oldReference = (InternalEObject)reference;
+      reference = (EReference)eResolveProxy(oldReference);
+      if (reference != oldReference)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperatorsPackage.SET__REFERENCE, oldReference, reference));
+      }
+    }
+    return reference;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EReference basicGetReference() {
-		return reference;
-	}
+    return reference;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setReference(EReference newReference) {
-		EReference oldReference = reference;
-		reference = newReference;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__REFERENCE, oldReference, reference));
-	}
+    EReference oldReference = reference;
+    reference = newReference;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__REFERENCE, oldReference, reference));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Referrable getValue() {
-		return value;
-	}
+    return value;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetValue(Referrable newValue, NotificationChain msgs) {
-		Referrable oldValue = value;
-		value = newValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__VALUE, oldValue, newValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Referrable oldValue = value;
+    value = newValue;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__VALUE, oldValue, newValue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setValue(Referrable newValue) {
-		if (newValue != value) {
-			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SET__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SET__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__VALUE, newValue, newValue));
-	}
+    if (newValue != value)
+    {
+      NotificationChain msgs = null;
+      if (value != null)
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SET__VALUE, null, msgs);
+      if (newValue != null)
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SET__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__VALUE, newValue, newValue));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Referrable getReferenceOwner() {
-		return referenceOwner;
-	}
+    return referenceOwner;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetReferenceOwner(Referrable newReferenceOwner, NotificationChain msgs) {
-		Referrable oldReferenceOwner = referenceOwner;
-		referenceOwner = newReferenceOwner;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__REFERENCE_OWNER, oldReferenceOwner, newReferenceOwner);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Referrable oldReferenceOwner = referenceOwner;
+    referenceOwner = newReferenceOwner;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__REFERENCE_OWNER, oldReferenceOwner, newReferenceOwner);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setReferenceOwner(Referrable newReferenceOwner) {
-		if (newReferenceOwner != referenceOwner) {
-			NotificationChain msgs = null;
-			if (referenceOwner != null)
-				msgs = ((InternalEObject)referenceOwner).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SET__REFERENCE_OWNER, null, msgs);
-			if (newReferenceOwner != null)
-				msgs = ((InternalEObject)newReferenceOwner).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SET__REFERENCE_OWNER, null, msgs);
-			msgs = basicSetReferenceOwner(newReferenceOwner, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__REFERENCE_OWNER, newReferenceOwner, newReferenceOwner));
-	}
+    if (newReferenceOwner != referenceOwner)
+    {
+      NotificationChain msgs = null;
+      if (referenceOwner != null)
+        msgs = ((InternalEObject)referenceOwner).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SET__REFERENCE_OWNER, null, msgs);
+      if (newReferenceOwner != null)
+        msgs = ((InternalEObject)newReferenceOwner).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SET__REFERENCE_OWNER, null, msgs);
+      msgs = basicSetReferenceOwner(newReferenceOwner, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.SET__REFERENCE_OWNER, newReferenceOwner, newReferenceOwner));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OperatorsPackage.SET__VALUE:
-				return basicSetValue(null, msgs);
-			case OperatorsPackage.SET__REFERENCE_OWNER:
-				return basicSetReferenceOwner(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SET__VALUE:
+        return basicSetValue(null, msgs);
+      case OperatorsPackage.SET__REFERENCE_OWNER:
+        return basicSetReferenceOwner(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OperatorsPackage.SET__REFERENCE:
-				if (resolve) return getReference();
-				return basicGetReference();
-			case OperatorsPackage.SET__VALUE:
-				return getValue();
-			case OperatorsPackage.SET__REFERENCE_OWNER:
-				return getReferenceOwner();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SET__REFERENCE:
+        if (resolve) return getReference();
+        return basicGetReference();
+      case OperatorsPackage.SET__VALUE:
+        return getValue();
+      case OperatorsPackage.SET__REFERENCE_OWNER:
+        return getReferenceOwner();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OperatorsPackage.SET__REFERENCE:
-				setReference((EReference)newValue);
-				return;
-			case OperatorsPackage.SET__VALUE:
-				setValue((Referrable)newValue);
-				return;
-			case OperatorsPackage.SET__REFERENCE_OWNER:
-				setReferenceOwner((Referrable)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SET__REFERENCE:
+        setReference((EReference)newValue);
+        return;
+      case OperatorsPackage.SET__VALUE:
+        setValue((Referrable)newValue);
+        return;
+      case OperatorsPackage.SET__REFERENCE_OWNER:
+        setReferenceOwner((Referrable)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.SET__REFERENCE:
-				setReference((EReference)null);
-				return;
-			case OperatorsPackage.SET__VALUE:
-				setValue((Referrable)null);
-				return;
-			case OperatorsPackage.SET__REFERENCE_OWNER:
-				setReferenceOwner((Referrable)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SET__REFERENCE:
+        setReference((EReference)null);
+        return;
+      case OperatorsPackage.SET__VALUE:
+        setValue((Referrable)null);
+        return;
+      case OperatorsPackage.SET__REFERENCE_OWNER:
+        setReferenceOwner((Referrable)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.SET__REFERENCE:
-				return reference != null;
-			case OperatorsPackage.SET__VALUE:
-				return value != null;
-			case OperatorsPackage.SET__REFERENCE_OWNER:
-				return referenceOwner != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SET__REFERENCE:
+        return reference != null;
+      case OperatorsPackage.SET__VALUE:
+        return value != null;
+      case OperatorsPackage.SET__REFERENCE_OWNER:
+        return referenceOwner != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 	@Override
 	public void execute() {

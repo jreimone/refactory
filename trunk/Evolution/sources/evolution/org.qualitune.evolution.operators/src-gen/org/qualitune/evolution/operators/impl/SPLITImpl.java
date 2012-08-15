@@ -52,183 +52,191 @@ import org.qualitune.evolution.operators.StructuralFeatureSet;
  */
 public class SPLITImpl extends OperatorImpl implements SPLIT {
 	/**
-	 * The cached value of the '{@link #getSplitSets() <em>Split Sets</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getSplitSets() <em>Split Sets</em>}' containment reference list.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSplitSets()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getSplitSets()
+   * @generated
+   * @ordered
+   */
 	protected EList<StructuralFeatureSet> splitSets;
 
 	/**
-	 * The cached value of the '{@link #getSplitObject() <em>Split Object</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getSplitObject() <em>Split Object</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSplitObject()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getSplitObject()
+   * @generated
+   * @ordered
+   */
 	protected Referrable splitObject;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected SPLITImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.SPLIT;
-	}
+    return OperatorsPackage.Literals.SPLIT;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EList<StructuralFeatureSet> getSplitSets() {
-		if (splitSets == null) {
-			splitSets = new EObjectContainmentEList<StructuralFeatureSet>(StructuralFeatureSet.class, this, OperatorsPackage.SPLIT__SPLIT_SETS);
-		}
-		return splitSets;
-	}
+    if (splitSets == null)
+    {
+      splitSets = new EObjectContainmentEList<StructuralFeatureSet>(StructuralFeatureSet.class, this, OperatorsPackage.SPLIT__SPLIT_SETS);
+    }
+    return splitSets;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Referrable getSplitObject() {
-		return splitObject;
-	}
+    return splitObject;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetSplitObject(Referrable newSplitObject, NotificationChain msgs) {
-		Referrable oldSplitObject = splitObject;
-		splitObject = newSplitObject;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.SPLIT__SPLIT_OBJECT, oldSplitObject, newSplitObject);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Referrable oldSplitObject = splitObject;
+    splitObject = newSplitObject;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.SPLIT__SPLIT_OBJECT, oldSplitObject, newSplitObject);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setSplitObject(Referrable newSplitObject) {
-		if (newSplitObject != splitObject) {
-			NotificationChain msgs = null;
-			if (splitObject != null)
-				msgs = ((InternalEObject)splitObject).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SPLIT__SPLIT_OBJECT, null, msgs);
-			if (newSplitObject != null)
-				msgs = ((InternalEObject)newSplitObject).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SPLIT__SPLIT_OBJECT, null, msgs);
-			msgs = basicSetSplitObject(newSplitObject, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.SPLIT__SPLIT_OBJECT, newSplitObject, newSplitObject));
-	}
+    if (newSplitObject != splitObject)
+    {
+      NotificationChain msgs = null;
+      if (splitObject != null)
+        msgs = ((InternalEObject)splitObject).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SPLIT__SPLIT_OBJECT, null, msgs);
+      if (newSplitObject != null)
+        msgs = ((InternalEObject)newSplitObject).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.SPLIT__SPLIT_OBJECT, null, msgs);
+      msgs = basicSetSplitObject(newSplitObject, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.SPLIT__SPLIT_OBJECT, newSplitObject, newSplitObject));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OperatorsPackage.SPLIT__SPLIT_SETS:
-				return ((InternalEList<?>)getSplitSets()).basicRemove(otherEnd, msgs);
-			case OperatorsPackage.SPLIT__SPLIT_OBJECT:
-				return basicSetSplitObject(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SPLIT__SPLIT_SETS:
+        return ((InternalEList<?>)getSplitSets()).basicRemove(otherEnd, msgs);
+      case OperatorsPackage.SPLIT__SPLIT_OBJECT:
+        return basicSetSplitObject(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OperatorsPackage.SPLIT__SPLIT_SETS:
-				return getSplitSets();
-			case OperatorsPackage.SPLIT__SPLIT_OBJECT:
-				return getSplitObject();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SPLIT__SPLIT_SETS:
+        return getSplitSets();
+      case OperatorsPackage.SPLIT__SPLIT_OBJECT:
+        return getSplitObject();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OperatorsPackage.SPLIT__SPLIT_SETS:
-				getSplitSets().clear();
-				getSplitSets().addAll((Collection<? extends StructuralFeatureSet>)newValue);
-				return;
-			case OperatorsPackage.SPLIT__SPLIT_OBJECT:
-				setSplitObject((Referrable)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SPLIT__SPLIT_SETS:
+        getSplitSets().clear();
+        getSplitSets().addAll((Collection<? extends StructuralFeatureSet>)newValue);
+        return;
+      case OperatorsPackage.SPLIT__SPLIT_OBJECT:
+        setSplitObject((Referrable)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.SPLIT__SPLIT_SETS:
-				getSplitSets().clear();
-				return;
-			case OperatorsPackage.SPLIT__SPLIT_OBJECT:
-				setSplitObject((Referrable)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SPLIT__SPLIT_SETS:
+        getSplitSets().clear();
+        return;
+      case OperatorsPackage.SPLIT__SPLIT_OBJECT:
+        setSplitObject((Referrable)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.SPLIT__SPLIT_SETS:
-				return splitSets != null && !splitSets.isEmpty();
-			case OperatorsPackage.SPLIT__SPLIT_OBJECT:
-				return splitObject != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.SPLIT__SPLIT_SETS:
+        return splitSets != null && !splitSets.isEmpty();
+      case OperatorsPackage.SPLIT__SPLIT_OBJECT:
+        return splitObject != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //SPLITImpl

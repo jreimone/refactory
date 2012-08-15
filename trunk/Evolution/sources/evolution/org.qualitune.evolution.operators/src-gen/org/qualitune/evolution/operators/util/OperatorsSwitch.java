@@ -38,458 +38,478 @@ import org.qualitune.evolution.operators.*;
  */
 public class OperatorsSwitch<T> extends Switch<T> {
 	/**
-	 * The cached model package
-	 * <!-- begin-user-doc -->
+   * The cached model package
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected static OperatorsPackage modelPackage;
 
 	/**
-	 * Creates an instance of the switch.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the switch.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public OperatorsSwitch() {
-		if (modelPackage == null) {
-			modelPackage = OperatorsPackage.eINSTANCE;
-		}
-	}
+    if (modelPackage == null)
+    {
+      modelPackage = OperatorsPackage.eINSTANCE;
+    }
+  }
 
 	/**
-	 * Checks whether this is a switch for the given package.
-	 * <!-- begin-user-doc -->
+   * Checks whether this is a switch for the given package.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
-	 * @return whether this is a switch for the given package.
-	 * @generated
-	 */
+   * @parameter ePackage the package in question.
+   * @return whether this is a switch for the given package.
+   * @generated
+   */
 	@Override
 	protected boolean isSwitchFor(EPackage ePackage) {
-		return ePackage == modelPackage;
-	}
+    return ePackage == modelPackage;
+  }
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
+   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @generated
+   */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case OperatorsPackage.OPERATOR: {
-				Operator operator = (Operator)theEObject;
-				T result = caseOperator(operator);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.CREATE: {
-				CREATE create = (CREATE)theEObject;
-				T result = caseCREATE(create);
-				if (result == null) result = caseOperator(create);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.TYPE_VARIABLE: {
-				TypeVariable typeVariable = (TypeVariable)theEObject;
-				T result = caseTypeVariable(typeVariable);
-				if (result == null) result = caseVariable(typeVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.DELETE: {
-				DELETE delete = (DELETE)theEObject;
-				T result = caseDELETE(delete);
-				if (result == null) result = caseOperator(delete);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.ASSIGN: {
-				ASSIGN assign = (ASSIGN)theEObject;
-				T result = caseASSIGN(assign);
-				if (result == null) result = caseOperator(assign);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.EOBJECT_REFERENCE: {
-				EObjectReference eObjectReference = (EObjectReference)theEObject;
-				T result = caseEObjectReference(eObjectReference);
-				if (result == null) result = caseResult(eObjectReference);
-				if (result == null) result = caseReferrable(eObjectReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.RESULT: {
-				Result result = (Result)theEObject;
-				T theResult = caseResult(result);
-				if (theResult == null) theResult = defaultCase(theEObject);
-				return theResult;
-			}
-			case OperatorsPackage.REFERRABLE: {
-				Referrable referrable = (Referrable)theEObject;
-				T result = caseReferrable(referrable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.PRIMITIVE_REFERENCE: {
-				PrimitiveReference primitiveReference = (PrimitiveReference)theEObject;
-				T result = casePrimitiveReference(primitiveReference);
-				if (result == null) result = caseResult(primitiveReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.SET: {
-				SET set = (SET)theEObject;
-				T result = caseSET(set);
-				if (result == null) result = caseOperator(set);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.VARIABLE_REFERENCE: {
-				VariableReference variableReference = (VariableReference)theEObject;
-				T result = caseVariableReference(variableReference);
-				if (result == null) result = caseReferrable(variableReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.MOVE: {
-				MOVE move = (MOVE)theEObject;
-				T result = caseMOVE(move);
-				if (result == null) result = caseOperator(move);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.SPLIT: {
-				SPLIT split = (SPLIT)theEObject;
-				T result = caseSPLIT(split);
-				if (result == null) result = caseOperator(split);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.STRUCTURAL_FEATURE_SET: {
-				StructuralFeatureSet structuralFeatureSet = (StructuralFeatureSet)theEObject;
-				T result = caseStructuralFeatureSet(structuralFeatureSet);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.MERGE: {
-				MERGE merge = (MERGE)theEObject;
-				T result = caseMERGE(merge);
-				if (result == null) result = caseOperator(merge);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.VAR: {
-				VAR var = (VAR)theEObject;
-				T result = caseVAR(var);
-				if (result == null) result = caseOperator(var);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.QUERY_VARIABLE: {
-				QueryVariable queryVariable = (QueryVariable)theEObject;
-				T result = caseQueryVariable(queryVariable);
-				if (result == null) result = caseVariable(queryVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OperatorsPackage.VARIABLE: {
-				Variable variable = (Variable)theEObject;
-				T result = caseVariable(variable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			default: return defaultCase(theEObject);
-		}
-	}
+    switch (classifierID)
+    {
+      case OperatorsPackage.OPERATOR:
+      {
+        Operator operator = (Operator)theEObject;
+        T result = caseOperator(operator);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.CREATE:
+      {
+        CREATE create = (CREATE)theEObject;
+        T result = caseCREATE(create);
+        if (result == null) result = caseOperator(create);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.TYPE_VARIABLE:
+      {
+        TypeVariable typeVariable = (TypeVariable)theEObject;
+        T result = caseTypeVariable(typeVariable);
+        if (result == null) result = caseVariable(typeVariable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.DELETE:
+      {
+        DELETE delete = (DELETE)theEObject;
+        T result = caseDELETE(delete);
+        if (result == null) result = caseOperator(delete);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.ASSIGN:
+      {
+        ASSIGN assign = (ASSIGN)theEObject;
+        T result = caseASSIGN(assign);
+        if (result == null) result = caseOperator(assign);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.EOBJECT_REFERENCE:
+      {
+        EObjectReference eObjectReference = (EObjectReference)theEObject;
+        T result = caseEObjectReference(eObjectReference);
+        if (result == null) result = caseResult(eObjectReference);
+        if (result == null) result = caseReferrable(eObjectReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.RESULT:
+      {
+        Result result = (Result)theEObject;
+        T theResult = caseResult(result);
+        if (theResult == null) theResult = defaultCase(theEObject);
+        return theResult;
+      }
+      case OperatorsPackage.REFERRABLE:
+      {
+        Referrable referrable = (Referrable)theEObject;
+        T result = caseReferrable(referrable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.PRIMITIVE_REFERENCE:
+      {
+        PrimitiveReference primitiveReference = (PrimitiveReference)theEObject;
+        T result = casePrimitiveReference(primitiveReference);
+        if (result == null) result = caseResult(primitiveReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.SET:
+      {
+        SET set = (SET)theEObject;
+        T result = caseSET(set);
+        if (result == null) result = caseOperator(set);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.VARIABLE_REFERENCE:
+      {
+        VariableReference variableReference = (VariableReference)theEObject;
+        T result = caseVariableReference(variableReference);
+        if (result == null) result = caseReferrable(variableReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.MOVE:
+      {
+        MOVE move = (MOVE)theEObject;
+        T result = caseMOVE(move);
+        if (result == null) result = caseOperator(move);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.SPLIT:
+      {
+        SPLIT split = (SPLIT)theEObject;
+        T result = caseSPLIT(split);
+        if (result == null) result = caseOperator(split);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.STRUCTURAL_FEATURE_SET:
+      {
+        StructuralFeatureSet structuralFeatureSet = (StructuralFeatureSet)theEObject;
+        T result = caseStructuralFeatureSet(structuralFeatureSet);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.MERGE:
+      {
+        MERGE merge = (MERGE)theEObject;
+        T result = caseMERGE(merge);
+        if (result == null) result = caseOperator(merge);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.VAR:
+      {
+        VAR var = (VAR)theEObject;
+        T result = caseVAR(var);
+        if (result == null) result = caseOperator(var);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.QUERY_VARIABLE:
+      {
+        QueryVariable queryVariable = (QueryVariable)theEObject;
+        T result = caseQueryVariable(queryVariable);
+        if (result == null) result = caseVariable(queryVariable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OperatorsPackage.VARIABLE:
+      {
+        Variable variable = (Variable)theEObject;
+        T result = caseVariable(variable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      default: return defaultCase(theEObject);
+    }
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operator</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Operator</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operator</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Operator</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseOperator(Operator object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>CREATE</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>CREATE</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>CREATE</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>CREATE</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseCREATE(CREATE object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Variable</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Type Variable</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Variable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseTypeVariable(TypeVariable object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>DELETE</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>DELETE</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>DELETE</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>DELETE</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseDELETE(DELETE object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>ASSIGN</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>ASSIGN</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>ASSIGN</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ASSIGN</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseASSIGN(ASSIGN object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EObject Reference</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>EObject Reference</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EObject Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EObject Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseEObjectReference(EObjectReference object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Result</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Result</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Result</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Result</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseResult(Result object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Referrable</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Referrable</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Referrable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Referrable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseReferrable(Referrable object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Primitive Reference</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Primitive Reference</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Primitive Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Primitive Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T casePrimitiveReference(PrimitiveReference object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>SET</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>SET</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>SET</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SET</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseSET(SET object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable Reference</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Variable Reference</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Variable Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseVariableReference(VariableReference object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>MOVE</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>MOVE</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>MOVE</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>MOVE</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseMOVE(MOVE object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>SPLIT</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>SPLIT</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>SPLIT</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SPLIT</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseSPLIT(SPLIT object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structural Feature Set</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Structural Feature Set</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structural Feature Set</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Structural Feature Set</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseStructuralFeatureSet(StructuralFeatureSet object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>MERGE</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>MERGE</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>MERGE</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>MERGE</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseMERGE(MERGE object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>VAR</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>VAR</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>VAR</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VAR</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseVAR(VAR object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Query Variable</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Query Variable</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Query Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Query Variable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseQueryVariable(QueryVariable object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseVariable(Variable object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+   * @generated
+   */
 	@Override
 	public T defaultCase(EObject object) {
-		return null;
-	}
+    return null;
+  }
 
 } //OperatorsSwitch
