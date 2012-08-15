@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_SsymEZUAEeG-CeAr07OHmw" type="EcoreTools" name="cods" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_VJ7W4JUAEeG-CeAr07OHmw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_VJ-aMJUAEeG-CeAr07OHmw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_VKA2cJUAEeG-CeAr07OHmw" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_VKA2cZUAEeG-CeAr07OHmw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VKA2cpUAEeG-CeAr07OHmw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VKA2c5UAEeG-CeAr07OHmw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_VKBdgJUAEeG-CeAr07OHmw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_VKBdgZUAEeG-CeAr07OHmw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VKBdgpUAEeG-CeAr07OHmw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VKBdg5UAEeG-CeAr07OHmw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_VJ7W4ZUAEeG-CeAr07OHmw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="cods.ecore#//CODS"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VJ7W4pUAEeG-CeAr07OHmw" x="240" y="104"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_SszNIJUAEeG-CeAr07OHmw"/>
+  <element xmi:type="ecore:EPackage" href="cods.ecore#/"/>
+</notation:Diagram>

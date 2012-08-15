@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CODS
+Bundle-SymbolicName: org.qualitune.evolution.cods
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: http://www.qualitune.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
