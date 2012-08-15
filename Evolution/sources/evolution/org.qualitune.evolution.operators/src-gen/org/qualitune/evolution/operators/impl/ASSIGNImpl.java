@@ -55,274 +55,283 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
  */
 public class ASSIGNImpl extends OperatorImpl implements ASSIGN {
 	/**
-	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttribute()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAttribute()
+   * @generated
+   * @ordered
+   */
 	protected EAttribute attribute;
 
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getValue()
+   * @generated
+   * @ordered
+   */
 	protected static final Object VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getValue()
+   * @generated
+   * @ordered
+   */
 	protected Object value = VALUE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAttributeOwner() <em>Attribute Owner</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAttributeOwner() <em>Attribute Owner</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttributeOwner()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAttributeOwner()
+   * @generated
+   * @ordered
+   */
 	protected Referrable attributeOwner;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ASSIGNImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.ASSIGN;
-	}
+    return OperatorsPackage.Literals.ASSIGN;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EAttribute getAttribute() {
-		if (attribute != null && attribute.eIsProxy()) {
-			InternalEObject oldAttribute = (InternalEObject)attribute;
-			attribute = (EAttribute)eResolveProxy(oldAttribute);
-			if (attribute != oldAttribute) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperatorsPackage.ASSIGN__ATTRIBUTE, oldAttribute, attribute));
-			}
-		}
-		return attribute;
-	}
+    if (attribute != null && attribute.eIsProxy())
+    {
+      InternalEObject oldAttribute = (InternalEObject)attribute;
+      attribute = (EAttribute)eResolveProxy(oldAttribute);
+      if (attribute != oldAttribute)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperatorsPackage.ASSIGN__ATTRIBUTE, oldAttribute, attribute));
+      }
+    }
+    return attribute;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EAttribute basicGetAttribute() {
-		return attribute;
-	}
+    return attribute;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setAttribute(EAttribute newAttribute) {
-		EAttribute oldAttribute = attribute;
-		attribute = newAttribute;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.ASSIGN__ATTRIBUTE, oldAttribute, attribute));
-	}
+    EAttribute oldAttribute = attribute;
+    attribute = newAttribute;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.ASSIGN__ATTRIBUTE, oldAttribute, attribute));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Object getValue() {
-		return value;
-	}
+    return value;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setValue(Object newValue) {
-		Object oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.ASSIGN__VALUE, oldValue, value));
-	}
+    Object oldValue = value;
+    value = newValue;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.ASSIGN__VALUE, oldValue, value));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Referrable getAttributeOwner() {
-		return attributeOwner;
-	}
+    return attributeOwner;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetAttributeOwner(Referrable newAttributeOwner, NotificationChain msgs) {
-		Referrable oldAttributeOwner = attributeOwner;
-		attributeOwner = newAttributeOwner;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER, oldAttributeOwner, newAttributeOwner);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Referrable oldAttributeOwner = attributeOwner;
+    attributeOwner = newAttributeOwner;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER, oldAttributeOwner, newAttributeOwner);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setAttributeOwner(Referrable newAttributeOwner) {
-		if (newAttributeOwner != attributeOwner) {
-			NotificationChain msgs = null;
-			if (attributeOwner != null)
-				msgs = ((InternalEObject)attributeOwner).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER, null, msgs);
-			if (newAttributeOwner != null)
-				msgs = ((InternalEObject)newAttributeOwner).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER, null, msgs);
-			msgs = basicSetAttributeOwner(newAttributeOwner, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER, newAttributeOwner, newAttributeOwner));
-	}
+    if (newAttributeOwner != attributeOwner)
+    {
+      NotificationChain msgs = null;
+      if (attributeOwner != null)
+        msgs = ((InternalEObject)attributeOwner).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER, null, msgs);
+      if (newAttributeOwner != null)
+        msgs = ((InternalEObject)newAttributeOwner).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER, null, msgs);
+      msgs = basicSetAttributeOwner(newAttributeOwner, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER, newAttributeOwner, newAttributeOwner));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
-				return basicSetAttributeOwner(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
+        return basicSetAttributeOwner(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OperatorsPackage.ASSIGN__ATTRIBUTE:
-				if (resolve) return getAttribute();
-				return basicGetAttribute();
-			case OperatorsPackage.ASSIGN__VALUE:
-				return getValue();
-			case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
-				return getAttributeOwner();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.ASSIGN__ATTRIBUTE:
+        if (resolve) return getAttribute();
+        return basicGetAttribute();
+      case OperatorsPackage.ASSIGN__VALUE:
+        return getValue();
+      case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
+        return getAttributeOwner();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OperatorsPackage.ASSIGN__ATTRIBUTE:
-				setAttribute((EAttribute)newValue);
-				return;
-			case OperatorsPackage.ASSIGN__VALUE:
-				setValue(newValue);
-				return;
-			case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
-				setAttributeOwner((Referrable)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.ASSIGN__ATTRIBUTE:
+        setAttribute((EAttribute)newValue);
+        return;
+      case OperatorsPackage.ASSIGN__VALUE:
+        setValue(newValue);
+        return;
+      case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
+        setAttributeOwner((Referrable)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.ASSIGN__ATTRIBUTE:
-				setAttribute((EAttribute)null);
-				return;
-			case OperatorsPackage.ASSIGN__VALUE:
-				setValue(VALUE_EDEFAULT);
-				return;
-			case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
-				setAttributeOwner((Referrable)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.ASSIGN__ATTRIBUTE:
+        setAttribute((EAttribute)null);
+        return;
+      case OperatorsPackage.ASSIGN__VALUE:
+        setValue(VALUE_EDEFAULT);
+        return;
+      case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
+        setAttributeOwner((Referrable)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.ASSIGN__ATTRIBUTE:
-				return attribute != null;
-			case OperatorsPackage.ASSIGN__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
-				return attributeOwner != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.ASSIGN__ATTRIBUTE:
+        return attribute != null;
+      case OperatorsPackage.ASSIGN__VALUE:
+        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+      case OperatorsPackage.ASSIGN__ATTRIBUTE_OWNER:
+        return attributeOwner != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (value: ");
+    result.append(value);
+    result.append(')');
+    return result.toString();
+  }
 
 	@Override
 	public void execute() {

@@ -36,19 +36,19 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface MERGE extends Operator {
 	/**
-	 * Returns the value of the '<em><b>Merge Objects</b></em>' containment reference list.
-	 * The list contents are of type {@link org.qualitune.evolution.operators.Referrable}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Merge Objects</b></em>' containment reference list.
+   * The list contents are of type {@link org.qualitune.evolution.operators.Referrable}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Merge Objects</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Merge Objects</em>' containment reference list.
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getMERGE_MergeObjects()
-	 * @model containment="true" lower="2"
-	 * @generated
-	 */
+   * @return the value of the '<em>Merge Objects</em>' containment reference list.
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getMERGE_MergeObjects()
+   * @model containment="true" lower="2"
+   * @generated
+   */
 	EList<Referrable> getMergeObjects();
 
 } // MERGE

@@ -34,22 +34,22 @@ import org.qualitune.evolution.operators.Referrable;
  */
 public abstract class ReferrableImpl extends EObjectImpl implements Referrable {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ReferrableImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.REFERRABLE;
-	}
+    return OperatorsPackage.Literals.REFERRABLE;
+  }
 
 } //ReferrableImpl

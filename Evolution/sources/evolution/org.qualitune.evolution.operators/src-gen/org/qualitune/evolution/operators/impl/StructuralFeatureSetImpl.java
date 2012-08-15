@@ -45,104 +45,109 @@ import org.qualitune.evolution.operators.StructuralFeatureSet;
  */
 public class StructuralFeatureSetImpl extends EObjectImpl implements StructuralFeatureSet {
 	/**
-	 * The cached value of the '{@link #getStructuralFeatures() <em>Structural Features</em>}' reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getStructuralFeatures() <em>Structural Features</em>}' reference list.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStructuralFeatures()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getStructuralFeatures()
+   * @generated
+   * @ordered
+   */
 	protected EList<EStructuralFeature> structuralFeatures;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected StructuralFeatureSetImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.STRUCTURAL_FEATURE_SET;
-	}
+    return OperatorsPackage.Literals.STRUCTURAL_FEATURE_SET;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EList<EStructuralFeature> getStructuralFeatures() {
-		if (structuralFeatures == null) {
-			structuralFeatures = new EObjectResolvingEList<EStructuralFeature>(EStructuralFeature.class, this, OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES);
-		}
-		return structuralFeatures;
-	}
+    if (structuralFeatures == null)
+    {
+      structuralFeatures = new EObjectResolvingEList<EStructuralFeature>(EStructuralFeature.class, this, OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES);
+    }
+    return structuralFeatures;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES:
-				return getStructuralFeatures();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES:
+        return getStructuralFeatures();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES:
-				getStructuralFeatures().clear();
-				getStructuralFeatures().addAll((Collection<? extends EStructuralFeature>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES:
+        getStructuralFeatures().clear();
+        getStructuralFeatures().addAll((Collection<? extends EStructuralFeature>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES:
-				getStructuralFeatures().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES:
+        getStructuralFeatures().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES:
-				return structuralFeatures != null && !structuralFeatures.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.STRUCTURAL_FEATURE_SET__STRUCTURAL_FEATURES:
+        return structuralFeatures != null && !structuralFeatures.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //StructuralFeatureSetImpl

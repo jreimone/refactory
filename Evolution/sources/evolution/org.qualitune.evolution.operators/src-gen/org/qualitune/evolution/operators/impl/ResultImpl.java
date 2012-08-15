@@ -34,22 +34,22 @@ import org.qualitune.evolution.operators.Result;
  */
 public abstract class ResultImpl extends EObjectImpl implements Result {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ResultImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.RESULT;
-	}
+    return OperatorsPackage.Literals.RESULT;
+  }
 
 } //ResultImpl

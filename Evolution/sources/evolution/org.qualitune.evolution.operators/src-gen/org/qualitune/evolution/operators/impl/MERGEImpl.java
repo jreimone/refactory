@@ -47,118 +47,124 @@ import org.qualitune.evolution.operators.Referrable;
  */
 public class MERGEImpl extends OperatorImpl implements MERGE {
 	/**
-	 * The cached value of the '{@link #getMergeObjects() <em>Merge Objects</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getMergeObjects() <em>Merge Objects</em>}' containment reference list.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMergeObjects()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getMergeObjects()
+   * @generated
+   * @ordered
+   */
 	protected EList<Referrable> mergeObjects;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected MERGEImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OperatorsPackage.Literals.MERGE;
-	}
+    return OperatorsPackage.Literals.MERGE;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EList<Referrable> getMergeObjects() {
-		if (mergeObjects == null) {
-			mergeObjects = new EObjectContainmentEList<Referrable>(Referrable.class, this, OperatorsPackage.MERGE__MERGE_OBJECTS);
-		}
-		return mergeObjects;
-	}
+    if (mergeObjects == null)
+    {
+      mergeObjects = new EObjectContainmentEList<Referrable>(Referrable.class, this, OperatorsPackage.MERGE__MERGE_OBJECTS);
+    }
+    return mergeObjects;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OperatorsPackage.MERGE__MERGE_OBJECTS:
-				return ((InternalEList<?>)getMergeObjects()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.MERGE__MERGE_OBJECTS:
+        return ((InternalEList<?>)getMergeObjects()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OperatorsPackage.MERGE__MERGE_OBJECTS:
-				return getMergeObjects();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.MERGE__MERGE_OBJECTS:
+        return getMergeObjects();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OperatorsPackage.MERGE__MERGE_OBJECTS:
-				getMergeObjects().clear();
-				getMergeObjects().addAll((Collection<? extends Referrable>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.MERGE__MERGE_OBJECTS:
+        getMergeObjects().clear();
+        getMergeObjects().addAll((Collection<? extends Referrable>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.MERGE__MERGE_OBJECTS:
-				getMergeObjects().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.MERGE__MERGE_OBJECTS:
+        getMergeObjects().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OperatorsPackage.MERGE__MERGE_OBJECTS:
-				return mergeObjects != null && !mergeObjects.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OperatorsPackage.MERGE__MERGE_OBJECTS:
+        return mergeObjects != null && !mergeObjects.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //MERGEImpl

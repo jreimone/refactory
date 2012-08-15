@@ -35,29 +35,29 @@ package org.qualitune.evolution.operators;
  */
 public interface VariableReference extends Referrable {
 	/**
-	 * Returns the value of the '<em><b>Referenced Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Referenced Variable</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Referenced Variable</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referenced Variable</em>' reference.
-	 * @see #setReferencedVariable(Variable)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getVariableReference_ReferencedVariable()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Referenced Variable</em>' reference.
+   * @see #setReferencedVariable(Variable)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getVariableReference_ReferencedVariable()
+   * @model required="true"
+   * @generated
+   */
 	Variable getReferencedVariable();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.VariableReference#getReferencedVariable <em>Referenced Variable</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.VariableReference#getReferencedVariable <em>Referenced Variable</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referenced Variable</em>' reference.
-	 * @see #getReferencedVariable()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Referenced Variable</em>' reference.
+   * @see #getReferencedVariable()
+   * @generated
+   */
 	void setReferencedVariable(Variable value);
 
 } // VariableReference

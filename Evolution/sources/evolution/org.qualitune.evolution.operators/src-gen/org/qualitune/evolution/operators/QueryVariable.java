@@ -41,107 +41,107 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  */
 public interface QueryVariable extends Variable {
 	/**
-	 * Returns the value of the '<em><b>Operation</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Operation</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operation</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Operation</em>' reference.
-	 * @see #setOperation(EOperation)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getQueryVariable_Operation()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Operation</em>' reference.
+   * @see #setOperation(EOperation)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getQueryVariable_Operation()
+   * @model
+   * @generated
+   */
 	EOperation getOperation();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.QueryVariable#getOperation <em>Operation</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.QueryVariable#getOperation <em>Operation</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Operation</em>' reference.
-	 * @see #getOperation()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Operation</em>' reference.
+   * @see #getOperation()
+   * @generated
+   */
 	void setOperation(EOperation value);
 
 	/**
-	 * Returns the value of the '<em><b>Structural Feature</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Structural Feature</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Structural Feature</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Structural Feature</em>' reference.
-	 * @see #setStructuralFeature(EStructuralFeature)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getQueryVariable_StructuralFeature()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Structural Feature</em>' reference.
+   * @see #setStructuralFeature(EStructuralFeature)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getQueryVariable_StructuralFeature()
+   * @model
+   * @generated
+   */
 	EStructuralFeature getStructuralFeature();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.QueryVariable#getStructuralFeature <em>Structural Feature</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.QueryVariable#getStructuralFeature <em>Structural Feature</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Structural Feature</em>' reference.
-	 * @see #getStructuralFeature()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Structural Feature</em>' reference.
+   * @see #getStructuralFeature()
+   * @generated
+   */
 	void setStructuralFeature(EStructuralFeature value);
 
 	/**
-	 * Returns the value of the '<em><b>Query Object</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Query Object</b></em>' containment reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Query Object</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Query Object</em>' containment reference.
-	 * @see #setQueryObject(Referrable)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getQueryVariable_QueryObject()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Query Object</em>' containment reference.
+   * @see #setQueryObject(Referrable)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getQueryVariable_QueryObject()
+   * @model containment="true" required="true"
+   * @generated
+   */
 	Referrable getQueryObject();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.QueryVariable#getQueryObject <em>Query Object</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.QueryVariable#getQueryObject <em>Query Object</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Query Object</em>' containment reference.
-	 * @see #getQueryObject()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Query Object</em>' containment reference.
+   * @see #getQueryObject()
+   * @generated
+   */
 	void setQueryObject(Referrable value);
 
 	/**
-	 * Returns the value of the '<em><b>Query Result</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Query Result</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Query Result</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Query Result</em>' reference.
-	 * @see #setQueryResult(Result)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getQueryVariable_QueryResult()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Query Result</em>' reference.
+   * @see #setQueryResult(Result)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getQueryVariable_QueryResult()
+   * @model required="true"
+   * @generated
+   */
 	Result getQueryResult();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.QueryVariable#getQueryResult <em>Query Result</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.QueryVariable#getQueryResult <em>Query Result</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Query Result</em>' reference.
-	 * @see #getQueryResult()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Query Result</em>' reference.
+   * @see #getQueryResult()
+   * @generated
+   */
 	void setQueryResult(Result value);
 
 } // QueryVariable

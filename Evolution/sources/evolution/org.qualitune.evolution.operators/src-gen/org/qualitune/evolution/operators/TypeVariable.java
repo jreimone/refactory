@@ -39,55 +39,55 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TypeVariable extends Variable {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(EClass)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getTypeVariable_Type()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Type</em>' reference.
+   * @see #setType(EClass)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getTypeVariable_Type()
+   * @model required="true"
+   * @generated
+   */
 	EClass getType();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.TypeVariable#getType <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.TypeVariable#getType <em>Type</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
-	 * @see #getType()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Type</em>' reference.
+   * @see #getType()
+   * @generated
+   */
 	void setType(EClass value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' reference.
-	 * @see #setValue(EObject)
-	 * @see org.qualitune.evolution.operators.OperatorsPackage#getTypeVariable_Value()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Value</em>' reference.
+   * @see #setValue(EObject)
+   * @see org.qualitune.evolution.operators.OperatorsPackage#getTypeVariable_Value()
+   * @model required="true"
+   * @generated
+   */
 	EObject getValue();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.evolution.operators.TypeVariable#getValue <em>Value</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.qualitune.evolution.operators.TypeVariable#getValue <em>Value</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' reference.
-	 * @see #getValue()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Value</em>' reference.
+   * @see #getValue()
+   * @generated
+   */
 	void setValue(EObject value);
 
 } // TypeVariable
