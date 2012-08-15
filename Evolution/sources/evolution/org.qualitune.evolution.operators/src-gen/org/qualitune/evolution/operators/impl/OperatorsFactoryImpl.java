@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.qualitune.evolution.operators.*;
+import org.qualitune.evolution.operators.custom.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,7 +96,7 @@ public class OperatorsFactoryImpl extends EFactoryImpl implements OperatorsFacto
 	 * @generated
 	 */
 	public CREATE createCREATE() {
-		CREATEImpl create = new CREATEImpl();
+		CREATEImpl create = new CREATECustom();
 		return create;
 	}
 
@@ -115,7 +116,7 @@ public class OperatorsFactoryImpl extends EFactoryImpl implements OperatorsFacto
 	 * @generated
 	 */
 	public DELETE createDELETE() {
-		DELETEImpl delete = new DELETEImpl();
+		DELETEImpl delete = new DELETECustom();
 		return delete;
 	}
 
@@ -125,7 +126,7 @@ public class OperatorsFactoryImpl extends EFactoryImpl implements OperatorsFacto
 	 * @generated
 	 */
 	public ASSIGN createASSIGN() {
-		ASSIGNImpl assign = new ASSIGNImpl();
+		ASSIGNImpl assign = new ASSIGNCustom();
 		return assign;
 	}
 
@@ -155,7 +156,7 @@ public class OperatorsFactoryImpl extends EFactoryImpl implements OperatorsFacto
 	 * @generated
 	 */
 	public SET createSET() {
-		SETImpl set = new SETImpl();
+		SETImpl set = new SETCustom();
 		return set;
 	}
 
@@ -175,7 +176,7 @@ public class OperatorsFactoryImpl extends EFactoryImpl implements OperatorsFacto
 	 * @generated
 	 */
 	public MOVE createMOVE() {
-		MOVEImpl move = new MOVEImpl();
+		MOVEImpl move = new MOVECustom();
 		return move;
 	}
 
@@ -215,7 +216,7 @@ public class OperatorsFactoryImpl extends EFactoryImpl implements OperatorsFacto
 	 * @generated
 	 */
 	public VAR createVAR() {
-		VARImpl var = new VARImpl();
+		VARImpl var = new VARCustom();
 		return var;
 	}
 
@@ -235,7 +236,7 @@ public class OperatorsFactoryImpl extends EFactoryImpl implements OperatorsFacto
 	 * @generated
 	 */
 	public OperatorsPackage getOperatorsPackage() {
-		return (OperatorsPackage)getEPackage();
+		return (OperatorsPackage) getEPackage();
 	}
 
 	/**
