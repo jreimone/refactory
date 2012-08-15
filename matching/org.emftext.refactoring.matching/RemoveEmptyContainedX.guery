@@ -1,0 +1,3 @@
+motif RemoveEmptyContainedX
+select Removee, RemoveeContainer
+connected by removees(RemoveeContainer>Removee)[1,1] find all

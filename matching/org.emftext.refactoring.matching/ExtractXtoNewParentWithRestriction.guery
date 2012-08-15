@@ -1,0 +1,10 @@
+motif ExtractXtoNewParentWithRestriction
+select Extractee, OrigContainer, NewContainer, NewContainerParent, OrigContainerParent, ContainerContainer
+where"OrigContainerParent!=NewContainerParent"
+connected by extracts(OrigContainer>Extractee)[1,*] find all
+	and moved(NewContainer>Extractee)[1,*] find all
+	and child(NewContainerParent>NewContainer)[1,*] find all
+	and targetParent(ContainerContainer>NewContainerParent)[1,*] find all
+	and reference(OrigContainer>NewContainer)[1,*] find all
+	and sourceParent(ContainerContainer>OrigContainerParent)[1,*] find all
+	and source(OrigContainerParent>OrigContainer)[1,*] find all

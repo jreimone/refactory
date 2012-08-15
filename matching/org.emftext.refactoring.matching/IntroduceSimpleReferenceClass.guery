@@ -1,0 +1,4 @@
+motif IntroduceSimpleReferenceClass
+select DerivationContainer, Derivation, Derivee
+connected by derivation(DerivationContainer>Derivation)[1,1] find all
+	and derivees(Derivation>Derivee)[1,1] find all

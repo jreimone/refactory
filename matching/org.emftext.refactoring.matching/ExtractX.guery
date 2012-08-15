@@ -1,0 +1,7 @@
+motif ExtractX
+select OrigContainer, Extractee, NewContainer, ContainerContainer
+connected by extracts(OrigContainer>Extractee)[1,*] find all
+	and moved(NewContainer>Extractee)[1,*] find all
+	and target(ContainerContainer>NewContainer)[1,*] find all
+	and source(ContainerContainer>OrigContainer)[1,*] find all
+	and reference(OrigContainer>NewContainer)[1,*] find all

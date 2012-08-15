@@ -1,0 +1,5 @@
+motif ExtractSubX
+select Extractee, OrigContainer, NewContainer
+connected by extracts(OrigContainer>Extractee)[1,*] find all
+	and newParent(OrigContainer>NewContainer)[1,*] find all
+	and moved(NewContainer>Extractee)[1,*] find all
