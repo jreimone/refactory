@@ -6,28 +6,20 @@ package org.qualitune.evolution.guery.test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.net.URL;
 import java.util.Iterator;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.pl0.PL0Package;
-import org.emftext.language.pl0.Program;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.junit.Before;
 import org.junit.Test;
-import org.qualitune.evolution.guery.graph.EMFGraphAdapter;
-import org.qualitune.evolution.guery.graph.EMFGraphAdapterFactory;
 import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
-import org.qualitune.evolution.guery.graph.MetamodelGraphAdapterFactory;
 import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EObjectVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
