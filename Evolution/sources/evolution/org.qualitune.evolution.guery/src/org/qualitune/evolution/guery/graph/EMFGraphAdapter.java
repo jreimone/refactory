@@ -60,7 +60,6 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferen
 			}
 			EdgeType edgeType = EdgeType.DIRECTED;
 			EReference containmentFeature = element.eContainmentFeature();
-			assert container.eGet(containmentFeature, true).equals(element);
 			Edge edge = factory.createEdge(containerVertex, elementVertex, containmentFeature);
 			graph.addEdge(edge, containerVertex, elementVertex, edgeType);
 			List<EReference> references = Util.getAllReferences(element);
