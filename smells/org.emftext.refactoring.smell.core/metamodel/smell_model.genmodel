@@ -4,7 +4,8 @@
     modelName="Smell_model" importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0"
     copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>smell_model.ecore</foreignModel>
-  <genPackages prefix="Smell_model" disposableProviderFactory="true" ecorePackage="smell_model.ecore#/">
+  <genPackages prefix="Smell_model" basePackage="org.emftext.refactoring.smell" disposableProviderFactory="true"
+      ecorePackage="smell_model.ecore#/">
     <genClasses ecoreClass="smell_model.ecore#//ModelSmell">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmell/name"/>
     </genClasses>
