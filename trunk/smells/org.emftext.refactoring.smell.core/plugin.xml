@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="org.emftext.refactoring.smell.core.metric" name="Metric" schema="schema/org.emftext.refactoring.smell.core.metric.exsd"/>
+   <extension-point id="org.emftext.refactoring.smell.smell_model.metric" name="Metric" schema="schema/org.emftext.refactoring.smell.smell_model.metric.exsd"/>
    <extension
          point="org.eclipse.ui.views">
          <view
                category="org.emftext.refactoring.smell.core.smell_model.plugin_modelsmell_view_category"
-               class="org.emftext.refactoring.smell.core.ui.View"
-               icon="src/org/emftext/refactoring/smell/core/ui/view.gif"
+               class="org.emftext.refactoring.smell.smell_model.ui.View"
+               icon="src/org/emftext/refactoring/smell/smell_model/ui/view.gif"
                id="org.emftext.refactoring.smell.core.smell_model.plugin_modelsmell_view"
                name="Modelsmells"/>
          <category
