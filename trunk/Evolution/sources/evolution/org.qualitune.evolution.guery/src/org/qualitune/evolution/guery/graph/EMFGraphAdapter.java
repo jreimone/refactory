@@ -30,8 +30,12 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferen
 		initialiseGraph();
 	}
 	
-	private void initialiseGraph() {
+	protected void initialiseGraph() {
 		graph = new DirectedSparseMultigraph<Vertex, Edge>();
+		createGraph();
+	}
+
+	protected void createGraph() {
 		List<EObject> contents = resource.getContents();
 		for (EObject model : contents) {
 			modelVertex = factory.createVertex(model);
@@ -49,7 +53,7 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferen
 		return modelVertex;
 	}
 	
-	private void addNode(Vertex elementVertex) {
+	protected void addNode(Vertex elementVertex) {
 		if(!graph.containsVertex(elementVertex)){
 			graph.addVertex(elementVertex);
 			EObject element = elementVertex.getModelElement();
@@ -142,6 +146,13 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferen
 
 	public DirectedSparseMultigraph<Vertex, Edge> getGraph() {
 		return graph;
+	}
+
+	/**
+	 * @return the resource
+	 */
+	public Resource getResource() {
+		return resource;
 	}
 
 }
