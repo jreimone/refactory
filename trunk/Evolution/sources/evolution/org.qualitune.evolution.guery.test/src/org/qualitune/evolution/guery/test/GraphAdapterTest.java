@@ -26,6 +26,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.qualitune.evolution.guery.graph.EMFGraphAdapter;
 import org.qualitune.evolution.guery.graph.EMFGraphAdapterFactory;
+import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
+import org.qualitune.evolution.guery.graph.MetamodelGraphAdapterFactory;
+import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EObjectVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
@@ -35,8 +38,6 @@ import org.qualitune.evolution.guery.registry.EReferenceEdge;
  */
 public class GraphAdapterTest {
 
-	private static final String PL0_PATH = "/metamodel/pl0.ecore";
-	
 	private EPackage pl0MM;
 	private Resource pl0MMResource;
 	
@@ -60,35 +61,33 @@ public class GraphAdapterTest {
 	
 	@Test
 	public void testGraphAdapterForPL0(){
-		EMFGraphAdapterFactory factory = new EMFGraphAdapterFactory();
-		EMFGraphAdapter<EObjectVertex, EReferenceEdge> adapter = new EMFGraphAdapter<EObjectVertex, EReferenceEdge>(pl0MMResource, factory);
-		Iterator<EObjectVertex> vertices = adapter.getVertices();
+		EPackageGraphAdapter adapter = new EPackageGraphAdapter(pl0MMResource);
+		Iterator<MetamodelVertex> vertices = adapter.getVertices();
 		System.out.println("~~~~~~~~~~~~~~~");
 		while (vertices.hasNext()) {
-			EObjectVertex vertex = (EObjectVertex) vertices.next();
+			MetamodelVertex vertex = (MetamodelVertex) vertices.next();
 			EObject element = vertex.getModelElement();
 			assertTrue("Input was an EPackage, i.e. the wrapped vertex must be an EClass", element instanceof EClassifier);
 			System.out.println(((EClass) element).getName());
 			Iterator<EReferenceEdge> outEdges = adapter.getOutEdges(vertex);
-			printEdges(outEdges, "---", "--->");
+			printEdges(outEdges, "---", "-->", true);
 			Iterator<EReferenceEdge> inEdges = adapter.getInEdges(vertex);
-			printEdges(inEdges, "<---", "---");
+			printEdges(inEdges, "<--", "---", false);
 		}
-//		int mmCount = pl0MM.getEClassifiers().size();
 	}
 
 	/**
 	 * @param edges
 	 */
-	private void printEdges(Iterator<EReferenceEdge> edges, String startArrow, String endArrow) {
+	private void printEdges(Iterator<EReferenceEdge> edges, String startArrow, String endArrow, boolean out) {
 		while (edges.hasNext()) {
 			EReferenceEdge edge = (EReferenceEdge) edges.next();
 			EObject reference = edge.getReference();
 			assertTrue("Input was an EPackage, i.e. the wrapped edge must be an EReference", reference instanceof EReference);
-			EObjectVertex end = edge.getEnd();
-			EObject endElement = end.getModelElement();
+			EObjectVertex vertex = out?edge.getEnd():edge.getStart();
+			EObject endElement = vertex.getModelElement();
 			assertTrue("Input was an EPackage, i.e. the wrapped vertex must be an EClass", endElement instanceof EClass);
-			System.out.println("\t" + startArrow + " " + ((EReference) reference).getName() + endArrow + " " + ((EClass) endElement).getName());
+			System.out.println("\t" + startArrow + " " + ((EReference) reference).getName() + " " + endArrow + " " + ((EClass) endElement).getName());
 		}
 	}
 }
