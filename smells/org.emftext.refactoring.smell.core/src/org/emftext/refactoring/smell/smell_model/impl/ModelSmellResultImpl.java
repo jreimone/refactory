@@ -132,26 +132,30 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 	 * @generated NOT
 	 */
 	public void calculate(EList<Metric_Quality_Mapping> metric_quality, EList<Quality_ModelSmell_Mapping> quality_modelSmell, Map<Metric, Map<EObject, Float>> metricResultMap, Map<Quality, Float> qualityScale) {
-		//		for (Metric m : metricResultMapList.keySet()){
-		//		for (EObject o : metricResultMapList.get(m).keySet()){
-		//			metricObjectMap.put(m, o);
-		//		}
-		//	}
+		ModelSmellModelImpl.getMain().setLoadedMetaModel(null);
+		if (result == null){
+			setResult(new HashMap<ModelSmell, Map<EObject, Float>>());
+		}
 		for (Quality_ModelSmell_Mapping qmm : quality_modelSmell){
 			for (Metric_Quality_Mapping mqm : metric_quality){
 				if (qmm.getQuality().equals(mqm.getQuality())){
-					//				List<Metric> tempList = smellMetricMap.get(qmm.getModelSmell());
-					//				tempList.add(mqm.getMetric());
-					//				smellMetricMap.put(qmm.getModelSmell(), tempList);
 					Float tempFloat = 0.0f;
 					ModelSmell tempModelSmell = qmm.getModelSmell();
 					Map<EObject, Float> tempMap = new HashMap<EObject, Float>();
 					for (EObject o : metricResultMap.get(mqm.getMetric()).keySet()){
+						if (ModelSmellModelImpl.getMain().getLoadedMetaModel() == null){
+							ModelSmellModelImpl.getMain().setLoadedMetaModel(o.eClass().getEPackage());
+						}
 						tempFloat = mqm.getFactor() * qualityScale.get(mqm.getQuality()) * qmm.getFactor();
-						if (result.get(tempModelSmell).containsKey(o)){
-							Float t = result.get(tempModelSmell).get(o) + tempFloat;
-							tempMap.put(o, t);
-							result.put(tempModelSmell, tempMap);
+						if (result.get(tempModelSmell) != null){
+							if (result.get(tempModelSmell).containsKey(o)){
+								Float t = result.get(tempModelSmell).get(o) + tempFloat;
+								tempMap.put(o, t);
+								result.put(tempModelSmell, tempMap);
+							} else {
+								tempMap.put(o, tempFloat);
+								result.put(tempModelSmell, tempMap);
+							}
 						} else {
 							tempMap.put(o, tempFloat);
 							result.put(tempModelSmell, tempMap);

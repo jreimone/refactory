@@ -3,10 +3,11 @@
 package org.emftext.refactoring.smell.smell_model.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.emftext.refactoring.smell.smell_model.RoleMapping;
 import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
-
 
 /**
  * <!-- begin-user-doc -->
