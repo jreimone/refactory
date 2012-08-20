@@ -136,29 +136,35 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 		if (result == null){
 			setResult(new HashMap<ModelSmell, Map<EObject, Float>>());
 		}
-		for (Quality_ModelSmell_Mapping qmm : quality_modelSmell){
-			for (Metric_Quality_Mapping mqm : metric_quality){
-				if (qmm.getQuality().equals(mqm.getQuality())){
-					Float tempFloat = 0.0f;
-					ModelSmell tempModelSmell = qmm.getModelSmell();
-					Map<EObject, Float> tempMap = new HashMap<EObject, Float>();
-					for (EObject o : metricResultMap.get(mqm.getMetric()).keySet()){
-						if (ModelSmellModelImpl.getMain().getLoadedMetaModel() == null){
-							ModelSmellModelImpl.getMain().setLoadedMetaModel(o.eClass().getEPackage());
-						}
-						tempFloat = mqm.getFactor() * qualityScale.get(mqm.getQuality()) * qmm.getFactor();
-						if (result.get(tempModelSmell) != null){
-							if (result.get(tempModelSmell).containsKey(o)){
-								Float t = result.get(tempModelSmell).get(o) + tempFloat;
-								tempMap.put(o, t);
-								result.put(tempModelSmell, tempMap);
-							} else {
-								tempMap.put(o, tempFloat);
-								result.put(tempModelSmell, tempMap);
+		if (metric_quality != null && quality_modelSmell != null && metricResultMap != null && qualityScale != null){
+			for (Quality_ModelSmell_Mapping qmm : quality_modelSmell){
+				for (Metric_Quality_Mapping mqm : metric_quality){
+					if (qmm.getQuality().equals(mqm.getQuality())){
+						Float tempFloat = 0.0f;
+						ModelSmell tempModelSmell = qmm.getModelSmell();
+						Map<EObject, Float> tempMap = new HashMap<EObject, Float>();
+						if (metricResultMap.get(mqm.getMetric()) != null){
+							for (EObject o : metricResultMap.get(mqm.getMetric()).keySet()){
+								if (ModelSmellModelImpl.getMain().getLoadedMetaModel() == null){
+									ModelSmellModelImpl.getMain().setLoadedMetaModel(o.eClass().getEPackage());
+								}
+								tempFloat = mqm.getFactor() * qualityScale.get(mqm.getQuality()) * qmm.getFactor();
+								if (tempFloat >= threshold){
+									if (result.get(tempModelSmell) != null){
+										if (result.get(tempModelSmell).containsKey(o)){
+											Float t = result.get(tempModelSmell).get(o) + tempFloat;
+											tempMap.put(o, t);
+											result.put(tempModelSmell, tempMap);
+										} else {
+											tempMap.put(o, tempFloat);
+											result.put(tempModelSmell, tempMap);
+										}
+									} else {
+										tempMap.put(o, tempFloat);
+										result.put(tempModelSmell, tempMap);
+									}
+								}
 							}
-						} else {
-							tempMap.put(o, tempFloat);
-							result.put(tempModelSmell, tempMap);
 						}
 					}
 				}

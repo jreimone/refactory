@@ -467,6 +467,15 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getModelSmellModel_Threshold() {
+		return (EAttribute)modelSmellModelEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRoleMapping() {
 		return roleMappingEClass;
 	}
@@ -617,6 +626,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__MODEL_SMELL_DESCRIPTION);
 		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__METRIC_RESULT_MAP);
 		createEReference(modelSmellModelEClass, MODEL_SMELL_MODEL__LOADED_META_MODEL);
+		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__THRESHOLD);
 
 		roleMappingEClass = createEClass(ROLE_MAPPING);
 
@@ -741,6 +751,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		g2.getETypeArguments().add(g3);
 		initEAttribute(getModelSmellModel_MetricResultMap(), g1, "metricResultMap", null, 0, 1, ModelSmellModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelSmellModel_LoadedMetaModel(), theEcorePackage.getEPackage(), null, "loadedMetaModel", null, 1, 1, ModelSmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelSmellModel_Threshold(), theEcorePackage.getEFloatObject(), "threshold", null, 0, 1, ModelSmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(modelSmellModelEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -753,6 +764,8 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		addEParameter(op, this.getObserver(), "o", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(modelSmellModelEClass, null, "inform", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(modelSmellModelEClass, theEcorePackage.getEString(), "getNamespace", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(roleMappingEClass, RoleMapping.class, "RoleMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

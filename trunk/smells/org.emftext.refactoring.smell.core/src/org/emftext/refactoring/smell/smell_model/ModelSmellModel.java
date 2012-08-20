@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getModelSmellDescription <em>Model Smell Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getMetricResultMap <em>Metric Result Map</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedMetaModel <em>Loaded Meta Model</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getThreshold <em>Threshold</em>}</li>
  * </ul>
  * </p>
  *
@@ -251,10 +252,44 @@ public interface ModelSmellModel extends EObject {
 
 	void setLoadedMetaModel(EPackage loadedMetaModel);
 
+	/**
+	 * Returns the value of the '<em><b>Threshold</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Threshold</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Threshold</em>' attribute.
+	 * @see #setThreshold(Float)
+	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmellModel_Threshold()
+	 * @model
+	 * @generated
+	 */
+	Float getThreshold();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getThreshold <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Threshold</em>' attribute.
+	 * @see #getThreshold()
+	 * @generated
+	 */
+	void setThreshold(Float value);
+
 	void register(Observer o);
 	
 	void unregister(Observer o);
 	
 	void inform();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getNamespace();
 
 } // ModelSmellModel

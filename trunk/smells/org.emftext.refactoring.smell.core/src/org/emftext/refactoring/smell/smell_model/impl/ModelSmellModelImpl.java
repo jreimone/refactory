@@ -68,6 +68,7 @@ import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getModelSmellDescription <em>Model Smell Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getMetricResultMap <em>Metric Result Map</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getLoadedMetaModel <em>Loaded Meta Model</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getThreshold <em>Threshold</em>}</li>
  * </ul>
  * </p>
  *
@@ -165,6 +166,26 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	private EPackage loadedMetaModel;
 
 	/**
+	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThreshold()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Float THRESHOLD_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThreshold()
+	 * @generated
+	 * @ordered
+	 */
+	protected Float threshold = THRESHOLD_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -190,6 +211,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		qualityScale = new HashMap<Quality, Float>();
+		threshold = 0.5f;
 		createQualitySmellMap();
 		createModelSmellDescription();
 		for (int i = 0; i < qualities.size(); i++){
@@ -237,27 +259,49 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		}
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getNamespace() {
+		String nameSpace = "";
+		ResourceSet resourceSet = new ResourceSetImpl();
+		if (loadedResourcePath != null){
+			File directory = new File(loadedResourcePath);
+			String[] files = directory.list();
+			for (int i = 0; i < files.length; i++){
+				URI fileURI = URI.createFileURI(loadedResourcePath + "\\" + files[i]);
+				Resource resource = resourceSet.getResource(fileURI, true);
+				nameSpace = resource.getContents().get(0).eClass().getEPackage().getNsURI();
+			}
+		}
+		return nameSpace;
+	}
+
 	private void evaluateMetricExtension(IExtensionRegistry registry){
 		EList<Resource> resources = new BasicEList<Resource>();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		metricResultMap = new HashMap<Metric, Map<EObject, Float>>();
-		File directory = new File(loadedResourcePath);
-		String[] files = directory.list();
-		for (int i = 0; i < files.length; i++){
-			URI fileURI = URI.createFileURI(loadedResourcePath + "\\" + files[i]);
-			Resource resource = resourceSet.getResource(fileURI, true);
-			resources.add(resource);
-		}
-		IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
-		try {
-			for (IConfigurationElement e : metricExtensions) {
-				final Object o = e.createExecutableExtension("class");
-				if (o instanceof Metric) {
-					executeMetricExtension(o, resources);
-				}
+		if (loadedResourcePath != null){
+			File directory = new File(loadedResourcePath);
+			String[] files = directory.list();
+			for (int i = 0; i < files.length; i++){
+				URI fileURI = URI.createFileURI(loadedResourcePath + "\\" + files[i]);
+				Resource resource = resourceSet.getResource(fileURI, true);
+				resources.add(resource);
 			}
-		} catch (CoreException ex) {
-			System.out.println(ex.getMessage());
+			IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
+			try {
+				for (IConfigurationElement e : metricExtensions) {
+					final Object o = e.createExecutableExtension("class");
+					if (o instanceof Metric) {
+						executeMetricExtension(o, resources);
+					}
+				}
+			} catch (CoreException ex) {
+				System.out.println(ex.getMessage());
+			}
 		}
 		calculateSmells();
 	}
@@ -282,6 +326,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	}
 	
 	private void createMetricQualityMapping(){
+		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		for (int i = 0; i < configStrings.size(); i++){
 			for (Quality q : qualities){
 				if(configStrings.get(i).equals(q.getName())){
@@ -305,6 +350,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	}
 
 	private void createQualitySmellMap(){
+		quality_modelSmell = new BasicEList<Quality_ModelSmell_Mapping>();
 		FileReader fileReader = null;
 		//TODO relativen Pfad einfügen
 		try {
@@ -425,6 +471,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	
 	private void createModelSmellRolemappingMap(){
 		EList<String> rolemappings = new BasicEList<String>();
+		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		FileReader fileReader = null;
 		//TODO relativen Pfad einfügen
 		try {
@@ -453,18 +500,20 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	    			i++;
 	    			for (String s : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().keySet()){
 	    				ModelSmell_Rolemapping_Mapping tempMapping = Smell_modelFactory.eINSTANCE.createModelSmell_Rolemapping_Mapping();
-	    				if (s.equals(loadedMetaModel.getNsURI())){
-	    					while (rolemappings.get(i).startsWith(">")){
-	    						for (String n : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
-	    							if (rolemappings.get(i).equals(">"+n)){
-		    							tempMapping.setMetaModelSpecification(loadedMetaModel);
-		    							tempMapping.setModelSmell(m);
-		    							tempMapping.getRoleMappings().add(IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).get(n));
-		    							modelSmell_roleMapping.add(tempMapping);
+	    				if (loadedMetaModel != null){
+	    					if (s.equals(loadedMetaModel.getNsURI())){
+		    					while (rolemappings.get(i).startsWith(">")){
+		    						for (String n : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
+		    							if (rolemappings.get(i).equals(">"+n)){
+			    							tempMapping.setMetaModelSpecification(loadedMetaModel);
+			    							tempMapping.setModelSmell(m);
+			    							tempMapping.getRoleMappings().add(IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).get(n));
+			    							modelSmell_roleMapping.add(tempMapping);
+			    						}
 		    						}
-	    						}
-	    						i++;
-	    					}
+		    						i++;
+		    					}
+		    				}
 	    				}
 	    			}
 	    		}
@@ -479,6 +528,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	
 	private void calculateSmells(){
 		ModelSmellResultImpl result = new ModelSmellResultImpl();
+		result.setThreshold(threshold);
 		result.calculate(metric_quality, quality_modelSmell, metricResultMap, qualityScale);
 		setResult(result);
 		createModelSmellRolemappingMap();
@@ -677,6 +727,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_META_MODEL:
 				if (resolve) return getLoadedMetaModel();
 				return basicGetLoadedMetaModel();
+			case Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD:
+				return getThreshold();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -735,6 +787,9 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_META_MODEL:
 				setLoadedMetaModel((EPackage)newValue);
 				return;
+			case Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD:
+				setThreshold((Float)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -786,6 +841,9 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_META_MODEL:
 				setLoadedMetaModel((EPackage)null);
 				return;
+			case Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD:
+				setThreshold(THRESHOLD_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -824,6 +882,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				return metricResultMap != null;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_META_MODEL:
 				return loadedMetaModel != null;
+			case Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD:
+				return THRESHOLD_EDEFAULT == null ? threshold != null : !THRESHOLD_EDEFAULT.equals(threshold);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -848,6 +908,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		result.append(modelSmellDescription);
 		result.append(", metricResultMap: ");
 		result.append(metricResultMap);
+		result.append(", threshold: ");
+		result.append(threshold);
 		result.append(')');
 		return result.toString();
 	}
@@ -925,6 +987,27 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	public void setLoadedMetaModel(EPackage loadedMetaModel) {
 		this.loadedMetaModel = loadedMetaModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Float getThreshold() {
+		return threshold;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setThreshold(Float newThreshold) {
+		Float oldThreshold = threshold;
+		threshold = newThreshold;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD, oldThreshold, threshold));
 	}
 
 } //MainImpl
