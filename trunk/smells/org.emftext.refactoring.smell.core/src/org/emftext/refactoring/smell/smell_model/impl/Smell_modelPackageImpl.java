@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.refactoring.smell.smell_model.Mapping;
 import org.emftext.refactoring.smell.smell_model.MappingConcretisation;
 import org.emftext.refactoring.smell.smell_model.Metric;
@@ -165,7 +166,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		isInited = true;
 
 		// Initialize simple dependencies
-		EcorePackage.eINSTANCE.eClass();
+		RolemappingPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSmell_modelPackage.createPackageContents();
@@ -223,7 +224,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelSmell_Rolemapping_Mapping_RoleMapping() {
+	public EReference getModelSmell_Rolemapping_Mapping_MappingConcretisation() {
 		return (EReference)modelSmell_Rolemapping_MappingEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -232,7 +233,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelSmell_Rolemapping_Mapping_MappingConcretisation() {
+	public EReference getModelSmell_Rolemapping_Mapping_RoleMappings() {
 		return (EReference)modelSmell_Rolemapping_MappingEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -241,7 +242,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelSmell_Rolemapping_Mapping_MetamodelSpecification() {
+	public EReference getModelSmell_Rolemapping_Mapping_MetaModelSpecification() {
 		return (EReference)modelSmell_Rolemapping_MappingEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -457,6 +458,15 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getModelSmellModel_LoadedMetaModel() {
+		return (EReference)modelSmellModelEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRoleMapping() {
 		return roleMappingEClass;
 	}
@@ -575,9 +585,9 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 
 		modelSmell_Rolemapping_MappingEClass = createEClass(MODEL_SMELL_ROLEMAPPING_MAPPING);
 		createEReference(modelSmell_Rolemapping_MappingEClass, MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL);
-		createEReference(modelSmell_Rolemapping_MappingEClass, MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPING);
 		createEReference(modelSmell_Rolemapping_MappingEClass, MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION);
-		createEReference(modelSmell_Rolemapping_MappingEClass, MODEL_SMELL_ROLEMAPPING_MAPPING__METAMODEL_SPECIFICATION);
+		createEReference(modelSmell_Rolemapping_MappingEClass, MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS);
+		createEReference(modelSmell_Rolemapping_MappingEClass, MODEL_SMELL_ROLEMAPPING_MAPPING__META_MODEL_SPECIFICATION);
 
 		qualityEClass = createEClass(QUALITY);
 		createEAttribute(qualityEClass, QUALITY__NAME);
@@ -606,6 +616,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		createEReference(modelSmellModelEClass, MODEL_SMELL_MODEL__RESULT);
 		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__MODEL_SMELL_DESCRIPTION);
 		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__METRIC_RESULT_MAP);
+		createEReference(modelSmellModelEClass, MODEL_SMELL_MODEL__LOADED_META_MODEL);
 
 		roleMappingEClass = createEClass(ROLE_MAPPING);
 
@@ -648,6 +659,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 
 		// Obtain other dependent packages
 		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+		RolemappingPackage theRolemappingPackage = (RolemappingPackage)EPackage.Registry.INSTANCE.getEPackage(RolemappingPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -663,9 +675,9 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 
 		initEClass(modelSmell_Rolemapping_MappingEClass, ModelSmell_Rolemapping_Mapping.class, "ModelSmell_Rolemapping_Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelSmell_Rolemapping_Mapping_ModelSmell(), this.getModelSmell(), null, "modelSmell", null, 1, 1, ModelSmell_Rolemapping_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelSmell_Rolemapping_Mapping_RoleMapping(), this.getRoleMapping(), null, "roleMapping", null, 1, -1, ModelSmell_Rolemapping_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelSmell_Rolemapping_Mapping_MappingConcretisation(), this.getMappingConcretisation(), null, "mappingConcretisation", null, 0, -1, ModelSmell_Rolemapping_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelSmell_Rolemapping_Mapping_MetamodelSpecification(), theEcorePackage.getEPackage(), null, "metamodelSpecification", null, 1, 1, ModelSmell_Rolemapping_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelSmell_Rolemapping_Mapping_RoleMappings(), theRolemappingPackage.getRoleMapping(), null, "roleMappings", null, 1, -1, ModelSmell_Rolemapping_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelSmell_Rolemapping_Mapping_MetaModelSpecification(), theEcorePackage.getEPackage(), null, "metaModelSpecification", null, 1, 1, ModelSmell_Rolemapping_Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qualityEClass, Quality.class, "Quality", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQuality_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Quality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -728,6 +740,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		g3 = createEGenericType(theEcorePackage.getEFloatObject());
 		g2.getETypeArguments().add(g3);
 		initEAttribute(getModelSmellModel_MetricResultMap(), g1, "metricResultMap", null, 0, 1, ModelSmellModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelSmellModel_LoadedMetaModel(), theEcorePackage.getEPackage(), null, "loadedMetaModel", null, 1, 1, ModelSmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(modelSmellModelEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
 
