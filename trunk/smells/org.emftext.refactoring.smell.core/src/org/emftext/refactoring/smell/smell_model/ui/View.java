@@ -103,7 +103,6 @@ public class View  extends ViewPart {
 				loadDialog.setMessage("Select a directory");
 				loadDialog.setFilterPath("C:/");
 				String path = loadDialog.open();
-				System.out.println(path);
 				ModelSmellModelImpl.getMain().setLoadedResourcePath(path);
 				//TODO Sprache setzen
 				language.setText("");
