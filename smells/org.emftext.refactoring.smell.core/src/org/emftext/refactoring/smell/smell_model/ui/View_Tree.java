@@ -10,6 +10,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.TreeEvent;
+import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -44,22 +46,29 @@ public class View_Tree implements Observer{
 	@Override
 	public void update() {
 		setResourceItemMap(new HashMap<TreeItem, EObject>());
+		setRoleItemMap(new HashMap<TreeItem, RoleMapping>());
+		if (tree != null){
+			tree.dispose();
+		}
+		setTree(new Tree(parent, SWT.HIDE_SELECTION));
 		tree.setRedraw(false);
-		ModelSmellResult result = ModelSmellModelImpl.getMain().getResult();
-		EList<ModelSmell_Rolemapping_Mapping> rolemapping = ModelSmellModelImpl.getMain().getModelSmell_roleMapping();
-		for (ModelSmell m : result.getResult().keySet()){
-			TreeItem smellItem = addTreeItem(tree, m.getName() + ": " + ModelSmellModelImpl.getMain().getModelSmellDescription().get(m), SWT.NONE);
-			for (EObject o : result.getResult().get(m).keySet()){
-				TreeItem objectItem = addTreeItem(smellItem, o.eResource().getURIFragment(o).substring(2), SWT.UNDERLINE_LINK);
-				for (ModelSmell_Rolemapping_Mapping r : rolemapping){
-					if (r.getModelSmell().equals(m)){
-						for (RoleMapping rm : r.getRoleMappings()){
-							TreeItem roleItem = addTreeItem(objectItem, rm.getName(), SWT.NONE);
-							roleItemMap.put(roleItem, rm);
+		if (ModelSmellModelImpl.getMain().getLoadedResourcePath() != null){
+			ModelSmellResult result = ModelSmellModelImpl.getMain().getResult();
+			EList<ModelSmell_Rolemapping_Mapping> rolemapping = ModelSmellModelImpl.getMain().getModelSmell_roleMapping();
+			for (ModelSmell m : result.getResult().keySet()){
+				TreeItem smellItem = addTreeItem(tree, m.getName() + ": " + ModelSmellModelImpl.getMain().getModelSmellDescription().get(m), SWT.NONE);
+				for (EObject o : result.getResult().get(m).keySet()){
+					TreeItem objectItem = addTreeItem(smellItem, o.eResource().getURIFragment(o).substring(2), SWT.UNDERLINE_LINK);
+					for (ModelSmell_Rolemapping_Mapping r : rolemapping){
+						if (r.getModelSmell().equals(m)){
+							for (RoleMapping rm : r.getRoleMappings()){
+								TreeItem roleItem = addTreeItem(objectItem, "Recommended Refactoring: "+rm.getName(), SWT.NONE);
+								roleItemMap.put(roleItem, rm);
+							}
 						}
 					}
+					objectItemMap.put(objectItem, o);
 				}
-				objectItemMap.put(objectItem, o);
 			}
 		}
 		tree.addListener(SWT.MouseDoubleClick, new Listener() {
@@ -86,8 +95,31 @@ public class View_Tree implements Observer{
 		        }
 			}
 		});
+		tree.addTreeListener(new TreeListener() {
+			
+			@Override
+			public void treeExpanded(TreeEvent e) {
+				tree.pack();
+				parent.pack();
+				parent.getParent().pack();
+			}
+			
+			@Override
+			public void treeCollapsed(TreeEvent e) {
+				tree.pack();
+				parent.pack();
+				parent.getParent().pack();
+			}
+		});
 		tree.setRedraw(true);
+		if (tree != null){
+			if (tree.getChildren().length > 0){
+				tree.getItem(0).setExpanded(true);
+			}
+		}
 		parent.setVisible(true);
+		parent.pack();
+		parent.getParent().pack();
 	}
 	
 	private TreeItem addTreeItem(Tree parent, String name, Integer style){

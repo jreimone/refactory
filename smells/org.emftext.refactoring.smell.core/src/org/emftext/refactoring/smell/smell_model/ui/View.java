@@ -52,6 +52,7 @@ public class View  extends ViewPart {
 	private Composite smellTreeComposite;
 	private View_Tree smellTree;
 	private DirectoryDialog loadDialog;
+	private Composite parentComposite;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,15 +73,16 @@ public class View  extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
+		this.parentComposite = parent;
 		Device device = Display.getCurrent();
 		Color white = new Color(device, 255, 255, 255);
 		//Color grey = new Color(device, 205, 205, 205);
 		
-		GridLayout parentForm = new GridLayout();
-		parent.setLayout(parentForm);
+		GridLayout parentGridLayout = new GridLayout();
+		this.parentComposite.setLayout(parentGridLayout);
 		
 		//ToolBar
-		buttonBar = new ToolBar(parent, SWT.FLAT | SWT.RIGHT);
+		buttonBar = new ToolBar(this.parentComposite, SWT.FLAT | SWT.RIGHT);
 		GridData buttonBarGridData = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
 		buttonBar.setLayoutData(buttonBarGridData);
 	    start = new ToolItem(buttonBar, SWT.PUSH);
@@ -104,8 +106,9 @@ public class View  extends ViewPart {
 				loadDialog.setFilterPath("C:/");
 				String path = loadDialog.open();
 				ModelSmellModelImpl.getMain().setLoadedResourcePath(path);
-				//TODO Sprache setzen
-				language.setText("");
+				language.setText(ModelSmellModelImpl.getMain().getNamespace());
+				parentComposite.pack();
+//				language.pack();
 			}
 			
 			@Override
@@ -117,7 +120,6 @@ public class View  extends ViewPart {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				ModelSmellModelImpl.getMain().calculate();
-				
 			}
 			
 			@Override
@@ -127,7 +129,7 @@ public class View  extends ViewPart {
 	    
 	    //Language Label
 	    GridData languageLabelGridData = new GridData(SWT.CENTER, SWT.TOP, true, false, 1, 1);
-	    language = new Label(parent, SWT.NULL);
+	    language = new Label(this.parentComposite, SWT.NULL);
 	    language.setText("");
 	    language.setLayoutData(languageLabelGridData);
 		
@@ -135,7 +137,7 @@ public class View  extends ViewPart {
 		EList<ModelSmell> smellList = ModelSmellModelImpl.getMain().getModelSmells();
 		
 		//Qualities and Smells Tab
-		qualitySmellTab = new TabFolder(parent, SWT.NULL);
+		qualitySmellTab = new TabFolder(this.parentComposite, SWT.NULL);
 		GridData qualitySmellTabGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		qualitySmellTab.setLayoutData(qualitySmellTabGridData);
 		TabItem qualityTabItem = new TabItem(qualitySmellTab, SWT.NULL);
@@ -184,7 +186,7 @@ public class View  extends ViewPart {
 		smellTabItem.setControl(smellsScrolledComposite);
 		
 		//Smelltree
-		smellTreeComposite = new Composite(parent, SWT.BORDER);
+		smellTreeComposite = new Composite(this.parentComposite, SWT.BORDER);
 		GridData smellTreeGridData = new GridData(SWT.FILL, SWT.BOTTOM, true, false, 1, 1);
 		smellTreeComposite.setLayoutData(smellTreeGridData);
 		smellTreeComposite.setLayout(new FillLayout());
@@ -192,8 +194,8 @@ public class View  extends ViewPart {
 		
 		smellTree = new View_Tree(smellTreeComposite);
 		
-		parent.setBackground(qualitySmellTab.getBackground());
-		parent.pack();
+		this.parentComposite.setBackground(qualitySmellTab.getBackground());
+		this.parentComposite.pack();
 	}
 	
 	private View_Quality addQuality(Composite parent, String name, int factor){

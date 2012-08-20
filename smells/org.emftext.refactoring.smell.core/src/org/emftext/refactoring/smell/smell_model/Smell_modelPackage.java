@@ -442,13 +442,22 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_MODEL__LOADED_META_MODEL = 12;
 
 	/**
+	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_SMELL_MODEL__THRESHOLD = 13;
+
+	/**
 	 * The number of structural features of the '<em>Model Smell Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL_FEATURE_COUNT = 13;
+	int MODEL_SMELL_MODEL_FEATURE_COUNT = 14;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.RoleMappingImpl <em>Role Mapping</em>}' class.
@@ -897,6 +906,17 @@ public interface Smell_modelPackage extends EPackage {
 	EReference getModelSmellModel_LoadedMetaModel();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getThreshold <em>Threshold</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Threshold</em>'.
+	 * @see org.emftext.refactoring.smell.smell_model.ModelSmellModel#getThreshold()
+	 * @see #getModelSmellModel()
+	 * @generated
+	 */
+	EAttribute getModelSmellModel_Threshold();
+
+	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.RoleMapping <em>Role Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1284,6 +1304,14 @@ public interface Smell_modelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_SMELL_MODEL__LOADED_META_MODEL = eINSTANCE.getModelSmellModel_LoadedMetaModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Threshold</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL_SMELL_MODEL__THRESHOLD = eINSTANCE.getModelSmellModel_Threshold();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.impl.RoleMappingImpl <em>Role Mapping</em>}' class.
