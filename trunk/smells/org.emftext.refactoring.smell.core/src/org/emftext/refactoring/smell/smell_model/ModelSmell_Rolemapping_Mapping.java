@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,9 +17,9 @@ import org.eclipse.emf.ecore.EPackage;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getModelSmell <em>Model Smell</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getRoleMapping <em>Role Mapping</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMappingConcretisation <em>Mapping Concretisation</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetamodelSpecification <em>Metamodel Specification</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getRoleMappings <em>Role Mappings</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetaModelSpecification <em>Meta Model Specification</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,22 +55,6 @@ public interface ModelSmell_Rolemapping_Mapping extends EObject {
 	void setModelSmell(ModelSmell value);
 
 	/**
-	 * Returns the value of the '<em><b>Role Mapping</b></em>' reference list.
-	 * The list contents are of type {@link org.emftext.refactoring.smell.smell_model.RoleMapping}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Role Mapping</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Role Mapping</em>' reference list.
-	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmell_Rolemapping_Mapping_RoleMapping()
-	 * @model required="true"
-	 * @generated
-	 */
-	EList<RoleMapping> getRoleMapping();
-
-	/**
 	 * Returns the value of the '<em><b>Mapping Concretisation</b></em>' containment reference list.
 	 * The list contents are of type {@link org.emftext.refactoring.smell.smell_model.MappingConcretisation}.
 	 * <!-- begin-user-doc -->
@@ -86,29 +71,45 @@ public interface ModelSmell_Rolemapping_Mapping extends EObject {
 	EList<MappingConcretisation> getMappingConcretisation();
 
 	/**
-	 * Returns the value of the '<em><b>Metamodel Specification</b></em>' reference.
+	 * Returns the value of the '<em><b>Role Mappings</b></em>' reference list.
+	 * The list contents are of type {@link org.emftext.language.refactoring.rolemapping.RoleMapping}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Metamodel Specification</em>' reference isn't clear,
+	 * If the meaning of the '<em>Role Mappings</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Metamodel Specification</em>' reference.
-	 * @see #setMetamodelSpecification(EPackage)
-	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmell_Rolemapping_Mapping_MetamodelSpecification()
+	 * @return the value of the '<em>Role Mappings</em>' reference list.
+	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmell_Rolemapping_Mapping_RoleMappings()
 	 * @model required="true"
 	 * @generated
 	 */
-	EPackage getMetamodelSpecification();
+	EList<RoleMapping> getRoleMappings();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetamodelSpecification <em>Metamodel Specification</em>}' reference.
+	 * Returns the value of the '<em><b>Meta Model Specification</b></em>' reference.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Meta Model Specification</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Metamodel Specification</em>' reference.
-	 * @see #getMetamodelSpecification()
+	 * @return the value of the '<em>Meta Model Specification</em>' reference.
+	 * @see #setMetaModelSpecification(EPackage)
+	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmell_Rolemapping_Mapping_MetaModelSpecification()
+	 * @model required="true"
 	 * @generated
 	 */
-	void setMetamodelSpecification(EPackage value);
+	EPackage getMetaModelSpecification();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetaModelSpecification <em>Meta Model Specification</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Meta Model Specification</em>' reference.
+	 * @see #getMetaModelSpecification()
+	 * @generated
+	 */
+	void setMetaModelSpecification(EPackage value);
 
 } // ModelSmell_Rolemapping_Mapping

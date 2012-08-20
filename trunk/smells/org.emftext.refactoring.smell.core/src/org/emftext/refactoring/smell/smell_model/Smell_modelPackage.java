@@ -103,31 +103,31 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Role Mapping</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPING = 1;
-
-	/**
 	 * The feature id for the '<em><b>Mapping Concretisation</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION = 2;
+	int MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Metamodel Specification</b></em>' reference.
+	 * The feature id for the '<em><b>Role Mappings</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_ROLEMAPPING_MAPPING__METAMODEL_SPECIFICATION = 3;
+	int MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Meta Model Specification</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_SMELL_ROLEMAPPING_MAPPING__META_MODEL_SPECIFICATION = 3;
 
 	/**
 	 * The number of structural features of the '<em>Model Smell Rolemapping Mapping</em>' class.
@@ -433,13 +433,22 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_MODEL__METRIC_RESULT_MAP = 11;
 
 	/**
+	 * The feature id for the '<em><b>Loaded Meta Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_SMELL_MODEL__LOADED_META_MODEL = 12;
+
+	/**
 	 * The number of structural features of the '<em>Model Smell Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL_FEATURE_COUNT = 12;
+	int MODEL_SMELL_MODEL_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.RoleMappingImpl <em>Role Mapping</em>}' class.
@@ -596,17 +605,6 @@ public interface Smell_modelPackage extends EPackage {
 	EReference getModelSmell_Rolemapping_Mapping_ModelSmell();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getRoleMapping <em>Role Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Role Mapping</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getRoleMapping()
-	 * @see #getModelSmell_Rolemapping_Mapping()
-	 * @generated
-	 */
-	EReference getModelSmell_Rolemapping_Mapping_RoleMapping();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMappingConcretisation <em>Mapping Concretisation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -618,15 +616,26 @@ public interface Smell_modelPackage extends EPackage {
 	EReference getModelSmell_Rolemapping_Mapping_MappingConcretisation();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetamodelSpecification <em>Metamodel Specification</em>}'.
+	 * Returns the meta object for the reference list '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getRoleMappings <em>Role Mappings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Metamodel Specification</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetamodelSpecification()
+	 * @return the meta object for the reference list '<em>Role Mappings</em>'.
+	 * @see org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getRoleMappings()
 	 * @see #getModelSmell_Rolemapping_Mapping()
 	 * @generated
 	 */
-	EReference getModelSmell_Rolemapping_Mapping_MetamodelSpecification();
+	EReference getModelSmell_Rolemapping_Mapping_RoleMappings();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetaModelSpecification <em>Meta Model Specification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Meta Model Specification</em>'.
+	 * @see org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetaModelSpecification()
+	 * @see #getModelSmell_Rolemapping_Mapping()
+	 * @generated
+	 */
+	EReference getModelSmell_Rolemapping_Mapping_MetaModelSpecification();
 
 	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.Quality <em>Quality</em>}'.
@@ -877,6 +886,17 @@ public interface Smell_modelPackage extends EPackage {
 	EAttribute getModelSmellModel_MetricResultMap();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedMetaModel <em>Loaded Meta Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Loaded Meta Model</em>'.
+	 * @see org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedMetaModel()
+	 * @see #getModelSmellModel()
+	 * @generated
+	 */
+	EReference getModelSmellModel_LoadedMetaModel();
+
+	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.RoleMapping <em>Role Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1040,14 +1060,6 @@ public interface Smell_modelPackage extends EPackage {
 		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL = eINSTANCE.getModelSmell_Rolemapping_Mapping_ModelSmell();
 
 		/**
-		 * The meta object literal for the '<em><b>Role Mapping</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPING = eINSTANCE.getModelSmell_Rolemapping_Mapping_RoleMapping();
-
-		/**
 		 * The meta object literal for the '<em><b>Mapping Concretisation</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1056,12 +1068,20 @@ public interface Smell_modelPackage extends EPackage {
 		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION = eINSTANCE.getModelSmell_Rolemapping_Mapping_MappingConcretisation();
 
 		/**
-		 * The meta object literal for the '<em><b>Metamodel Specification</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Role Mappings</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__METAMODEL_SPECIFICATION = eINSTANCE.getModelSmell_Rolemapping_Mapping_MetamodelSpecification();
+		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS = eINSTANCE.getModelSmell_Rolemapping_Mapping_RoleMappings();
+
+		/**
+		 * The meta object literal for the '<em><b>Meta Model Specification</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__META_MODEL_SPECIFICATION = eINSTANCE.getModelSmell_Rolemapping_Mapping_MetaModelSpecification();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.impl.QualityImpl <em>Quality</em>}' class.
@@ -1256,6 +1276,14 @@ public interface Smell_modelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MODEL_SMELL_MODEL__METRIC_RESULT_MAP = eINSTANCE.getModelSmellModel_MetricResultMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Loaded Meta Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_SMELL_MODEL__LOADED_META_MODEL = eINSTANCE.getModelSmellModel_LoadedMetaModel();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.impl.RoleMappingImpl <em>Role Mapping</em>}' class.
