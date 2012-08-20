@@ -7,11 +7,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="ModelSmell_Rolemapping_Mapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelSmell" lowerBound="1"
         eType="#//ModelSmell"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="roleMapping" lowerBound="1"
-        upperBound="-1" eType="#//RoleMapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingConcretisation"
         upperBound="-1" eType="#//MappingConcretisation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodelSpecification"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleMappings" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass platform:/plugin/org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.ecore#//RoleMapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaModelSpecification"
         lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Quality">
@@ -96,6 +96,8 @@
         </eTypeArguments>
       </eGenericType>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loadedMetaModel" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleMapping"/>
   <eClassifiers xsi:type="ecore:EClass" name="Mapping">
