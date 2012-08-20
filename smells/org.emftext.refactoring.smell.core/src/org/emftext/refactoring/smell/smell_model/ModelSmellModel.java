@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getResult <em>Result</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getModelSmellDescription <em>Model Smell Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getMetricResultMap <em>Metric Result Map</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedMetaModel <em>Loaded Meta Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -244,6 +246,10 @@ public interface ModelSmellModel extends EObject {
 	 * @generated
 	 */
 	void setMetricResultMap(Map<Metric, Map<EObject, Float>> value);
+	
+	EPackage getLoadedMetaModel();
+
+	void setLoadedMetaModel(EPackage loadedMetaModel);
 
 	void register(Observer o);
 	
