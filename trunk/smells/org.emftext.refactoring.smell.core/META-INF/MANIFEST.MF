@@ -13,9 +13,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.eclipse.core.filesystem,
+ org.eclipse.core.resources,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.emf.ecore.xmi.impl,
  org.eclipse.emf.ecore.xmi.util,
  org.eclipse.ui.ide,
+ org.eclipse.ui.part,
  org.emftext.refactoring.registry.rolemapping
 Bundle-ActivationPolicy: lazy
