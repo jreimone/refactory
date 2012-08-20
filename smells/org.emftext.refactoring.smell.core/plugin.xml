@@ -4,16 +4,17 @@
    <extension-point id="org.emftext.refactoring.smell.smell_model.metric" name="Metric" schema="schema/org.emftext.refactoring.smell.smell_model.metric.exsd"/>
    <extension
          point="org.eclipse.ui.views">
-         <view
-               category="org.emftext.refactoring.smell.core.smell_model.plugin_modelsmell_view_category"
-               class="org.emftext.refactoring.smell.smell_model.ui.View"
-               icon="src/org/emftext/refactoring/smell/smell_model/ui/view.gif"
-               id="org.emftext.refactoring.smell.core.smell_model.plugin_modelsmell_view"
-               name="Modelsmells"/>
-         <category
-               id="org.emftext.refactoring.smell.core.smell_model.plugin_modelsmell_view_category"
-               name="Modelsmell View">
-         </category>
+      <category
+            id="org.emftext.refactoring.smell.core.smell_model.view.category"
+            name="Modelsmell View">
+      </category>
+      <view
+            category="org.emftext.refactoring.smell.core.smell_model.view.category"
+            class="org.emftext.refactoring.smell.smell_model.ui.View"
+            icon="src/org/emftext/refactoring/smell/smell_model/ui/view.gif"
+            id="org.emftext.refactoring.smell.core.smell_model.view"
+            name="Modelsmells">
+      </view>
    </extension>
 
 </plugin>
