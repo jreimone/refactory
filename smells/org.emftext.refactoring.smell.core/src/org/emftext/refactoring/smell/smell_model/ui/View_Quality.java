@@ -46,7 +46,6 @@ public class View_Quality{
 		
 		qualityScale = new Scale(qualityComposite, SWT.HORIZONTAL);
 		qualityScale.setSelection(factor);
-		//TODO Selection = 0 -> Smells ausblenden
 		qualityScale.addMouseListener(new MouseListener() {
 			
 			@Override
