@@ -23,6 +23,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.smell.smell_model.ModelSmell;
 import org.emftext.refactoring.smell.smell_model.ModelSmellResult;
 import org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping;
@@ -37,7 +39,11 @@ public class View_Tree implements Observer{
 	private Map<TreeItem, EObject> objectItemMap;
 	private Map<TreeItem, RoleMapping> roleItemMap;
 	
-	public View_Tree(Composite parent){
+	public View_Tree(){
+		
+	}
+	
+	public void create(Composite parent){
 		setParent(parent);
 		setTree(new Tree(parent, SWT.HIDE_SELECTION));
 		ModelSmellModelImpl.getMain().register(this);
@@ -45,7 +51,7 @@ public class View_Tree implements Observer{
 
 	@Override
 	public void update() {
-		setResourceItemMap(new HashMap<TreeItem, EObject>());
+		setobjectItemMap(new HashMap<TreeItem, EObject>());
 		setRoleItemMap(new HashMap<TreeItem, RoleMapping>());
 		if (tree != null){
 			tree.dispose();
@@ -59,13 +65,18 @@ public class View_Tree implements Observer{
 				TreeItem smellItem = addTreeItem(tree, m.getName() + ": " + ModelSmellModelImpl.getMain().getModelSmellDescription().get(m), SWT.NONE);
 				for (EObject o : result.getResult().get(m).keySet()){
 					TreeItem objectItem = addTreeItem(smellItem, o.eResource().getURIFragment(o).substring(2), SWT.UNDERLINE_LINK);
+					boolean hasRoleMapping = false;
 					for (ModelSmell_Rolemapping_Mapping r : rolemapping){
 						if (r.getModelSmell().equals(m)){
 							for (RoleMapping rm : r.getRoleMappings()){
+								hasRoleMapping = true;
 								TreeItem roleItem = addTreeItem(objectItem, "Recommended Refactoring: "+rm.getName(), SWT.NONE);
 								roleItemMap.put(roleItem, rm);
 							}
 						}
+					}
+					if (!hasRoleMapping){
+						addTreeItem(objectItem, "Recommended Refactoring: No Refactoring, this is only a hint", SWT.NONE);
 					}
 					objectItemMap.put(objectItem, o);
 				}
@@ -88,10 +99,12 @@ public class View_Tree implements Observer{
 		        	} catch ( PartInitException e ) {
 		        		e.printStackTrace();
 		        	}
-		        }
-		        //TODO Rolemapping auf EObject aufrufen
-		        else if (item != null && roleItemMap.containsKey(item)) {
-		        	
+		        } else if (item != null && roleItemMap.containsKey(item)){
+		        	IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(objectItemMap.get(item.getParentItem()).eResource(), roleItemMap.get(item)); 
+		        	String iconKey = "warning.gif";
+		        	RefactoringQuickfix quickfix = new RefactoringQuickfix(objectItemMap.get(item.getParentItem()), refactorer, iconKey);
+		        	quickfix.applyChanges();
+		        	ModelSmellModelImpl.getMain().calculate();
 		        }
 			}
 		});
@@ -118,6 +131,8 @@ public class View_Tree implements Observer{
 			}
 		}
 		parent.setVisible(true);
+		parent.layout();
+		parent.getParent().layout();
 		parent.pack();
 		parent.getParent().pack();
 	}
@@ -154,7 +169,7 @@ public class View_Tree implements Observer{
 		return objectItemMap;
 	}
 
-	public void setResourceItemMap(Map<TreeItem, EObject> resourceItemMap) {
+	public void setobjectItemMap(Map<TreeItem, EObject> resourceItemMap) {
 		this.objectItemMap = resourceItemMap;
 	}
 

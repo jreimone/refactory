@@ -192,7 +192,8 @@ public class View  extends ViewPart {
 		smellTreeComposite.setLayout(new FillLayout());
 		smellTreeComposite.setVisible(false);
 		
-		smellTree = new View_Tree(smellTreeComposite);
+		smellTree = new View_Tree();
+		smellTree.create(smellTreeComposite);
 		
 		this.parentComposite.setBackground(qualitySmellTab.getBackground());
 		this.parentComposite.pack();
