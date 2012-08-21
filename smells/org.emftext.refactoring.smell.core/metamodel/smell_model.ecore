@@ -53,6 +53,7 @@
       <eParameters name="o" eType="#//Observer"/>
     </eOperations>
     <eOperations name="inform"/>
+    <eOperations name="getNamespace" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelSmell_roleMapping"
         lowerBound="1" upperBound="-1" eType="#//ModelSmell_Rolemapping_Mapping" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="quality_modelSmell" lowerBound="1"
@@ -98,6 +99,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="loadedMetaModel" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleMapping"/>
   <eClassifiers xsi:type="ecore:EClass" name="Mapping">
