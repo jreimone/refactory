@@ -195,8 +195,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		init();
 	}
 	
-	//TODO Modelsmell gefunden -> Rolemapping raussuchen und ausführen
-	
 	/**
 	 * <!-- begin-user-doc -->
 	 * 
@@ -494,6 +492,12 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				e.printStackTrace();
 			}
 	    }
+	    for (String s : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().keySet()){
+	    	System.out.println(s);
+	    	for (String t : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
+	    		System.out.println(t);
+	    	}
+	    }
 	    for (int i = 0; i < rolemappings.size(); i++){
 	    	for (ModelSmell m : modelSmells){
 	    		if (("#"+m.getName()).equals(rolemappings.get(i))){
@@ -605,6 +609,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	public void setQualityScale(Quality quality, Float factor){
 		this.qualityScale.put(quality, factor);
+		inform();
 	}
 	
 	public static ModelSmellModel getMain(){
