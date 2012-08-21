@@ -19,5 +19,9 @@ Import-Package: org.eclipse.core.filesystem,
  org.eclipse.emf.ecore.xmi.util,
  org.eclipse.ui.ide,
  org.eclipse.ui.part,
- org.emftext.refactoring.registry.rolemapping
+ org.emftext.language.refactoring.roles.resource.rolestext.mopp,
+ org.emftext.refactoring.editorconnector,
+ org.emftext.refactoring.interpreter,
+ org.emftext.refactoring.registry.rolemapping,
+ org.emftext.refactoring.ui
 Bundle-ActivationPolicy: lazy
