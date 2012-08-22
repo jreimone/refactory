@@ -1,10 +1,16 @@
 package org.emftext.refactoring.smell.smell_model.ui;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -33,6 +39,7 @@ import org.emftext.refactoring.smell.smell_model.ModelSmellResult;
 import org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping;
 import org.emftext.refactoring.smell.smell_model.Observer;
 import org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl;
+import org.emftext.refactoring.smell.smell_model.impl.RefactoringQuickfix;
 
 
 public class View_Tree implements Observer{
@@ -40,6 +47,7 @@ public class View_Tree implements Observer{
 	private Composite parent;
 	private Tree tree;
 	private Resource resource;
+	private List<IMarker> quickfixes;
 	private Map<TreeItem, EObject> objectItemMap;
 	private Map<TreeItem, RoleMapping> roleItemMap;
 	
@@ -55,6 +63,16 @@ public class View_Tree implements Observer{
 
 	@Override
 	public void update() {
+		if (quickfixes != null){
+			for(IMarker m : quickfixes){
+				try {
+					m.delete();
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		quickfixes = new ArrayList<IMarker>();
 		setobjectItemMap(new HashMap<TreeItem, EObject>());
 		setRoleItemMap(new HashMap<TreeItem, RoleMapping>());
 		if (tree != null){
@@ -79,6 +97,7 @@ public class View_Tree implements Observer{
 								hasRoleMapping = true;
 								TreeItem roleItem = addTreeItem(objectItem, "Recommended Refactoring: "+rm.getName(), SWT.NONE);
 								roleItemMap.put(roleItem, rm);
+								createQuickfix(m.getName());
 							}
 						}
 					}
@@ -96,11 +115,7 @@ public class View_Tree implements Observer{
 				Point point = new Point(event.x, event.y);
 		        TreeItem item = tree.getItem(point);
 		        if (item != null && roleItemMap.containsKey(item)){
-		        	IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(objectItemMap.get(item.getParentItem()).eResource(), roleItemMap.get(item)); 
-		        	String iconKey = "warning.gif";
-		        	RefactoringQuickfix quickfix = new RefactoringQuickfix(objectItemMap.get(item.getParentItem()), refactorer, iconKey);
-		        	quickfix.applyChanges();
-		        	ModelSmellModelImpl.getMain().calculate();
+		        	createRefactoringQuickfix(item);
 		        }
 			}
 		});
@@ -110,14 +125,12 @@ public class View_Tree implements Observer{
 			public void treeExpanded(TreeEvent e) {
 				tree.pack();
 				parent.pack();
-				parent.getParent().pack();
 			}
 			
 			@Override
 			public void treeCollapsed(TreeEvent e) {
 				tree.pack();
 				parent.pack();
-				parent.getParent().pack();
 			}
 		});
 		
@@ -129,9 +142,7 @@ public class View_Tree implements Observer{
 		openResource();
 		parent.setVisible(true);
 		parent.layout();
-		parent.getParent().layout();
 		parent.pack();
-		parent.getParent().pack();
 	}
 	
 	private TreeItem addTreeItem(Tree parent, String name, Integer style){
@@ -156,6 +167,28 @@ public class View_Tree implements Observer{
     	} catch ( PartInitException e ) {
     		e.printStackTrace();
     	}
+	}
+	
+	private void createRefactoringQuickfix(TreeItem item){
+		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(objectItemMap.get(item.getParentItem()).eResource(), roleItemMap.get(item)); 
+    	String iconKey = "";
+    	RefactoringQuickfix quickfix = new RefactoringQuickfix(objectItemMap.get(item.getParentItem()), refactorer, iconKey);
+    	quickfix.applyChanges();
+    	ModelSmellModelImpl.getMain().calculate();
+	}
+	
+	private void createQuickfix(String message){
+		//TODO IResource festlegen
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember("");
+		IMarker mk = null;
+		try {
+			mk = resource.createMarker(IMarker.PROBLEM);
+			mk.setAttribute(IMarker.MESSAGE, message);
+		    mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+		    quickfixes.add(mk);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Composite getParent() {
