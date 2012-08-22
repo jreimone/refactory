@@ -101,7 +101,6 @@ public class View  extends ViewPart {
 			public void widgetSelected(SelectionEvent e) {
 				fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.NULL);
 				fileDialog.setText("Load Resource");
-				fileDialog.setFilterPath("C:/");
 				String path = fileDialog.open();
 				ModelSmellModelImpl.getMain().setLoadedResourcePath(path);
 				language.setText(ModelSmellModelImpl.getMain().getNamespace());
