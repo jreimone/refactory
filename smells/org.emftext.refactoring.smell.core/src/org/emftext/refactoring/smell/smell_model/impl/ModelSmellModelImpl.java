@@ -3,7 +3,6 @@
 package org.emftext.refactoring.smell.smell_model.impl;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -264,47 +263,40 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 */
 	public String getNamespace() {
 		String nameSpace = "";
+		Resource resource = null;
 		ResourceSet resourceSet = new ResourceSetImpl();
 		if (loadedResourcePath != null){
-			File directory = new File(loadedResourcePath);
-			String[] files = directory.list();
-			for (int i = 0; i < files.length; i++){
-				URI fileURI = URI.createFileURI(loadedResourcePath + "\\" + files[i]);
-				Resource resource = resourceSet.getResource(fileURI, true);
-				nameSpace = resource.getContents().get(0).eClass().getEPackage().getNsURI();
-			}
+			URI fileURI = URI.createFileURI(loadedResourcePath);
+			resourceSet = new ResourceSetImpl();
+			resource = resourceSet.getResource(fileURI, true);
+			nameSpace = resource.getContents().get(0).eClass().getEPackage().getNsURI();
 		}
 		return nameSpace;
 	}
 
 	private void evaluateMetricExtension(IExtensionRegistry registry){
-		EList<Resource> resources = new BasicEList<Resource>();
+		Resource resource = null;
 		ResourceSet resourceSet = new ResourceSetImpl();
-		metricResultMap = new HashMap<Metric, Map<EObject, Float>>();
 		if (loadedResourcePath != null){
-			File directory = new File(loadedResourcePath);
-			String[] files = directory.list();
-			for (int i = 0; i < files.length; i++){
-				URI fileURI = URI.createFileURI(loadedResourcePath + "\\" + files[i]);
-				Resource resource = resourceSet.getResource(fileURI, true);
-				resources.add(resource);
-			}
-			IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
-			try {
-				for (IConfigurationElement e : metricExtensions) {
-					final Object o = e.createExecutableExtension("class");
-					if (o instanceof Metric) {
-						executeMetricExtension(o, resources);
-					}
+			URI fileURI = URI.createFileURI(loadedResourcePath);
+			resource = resourceSet.getResource(fileURI, true);
+		}
+		metricResultMap = new HashMap<Metric, Map<EObject, Float>>();
+		IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
+		try {
+			for (IConfigurationElement e : metricExtensions) {
+				final Object o = e.createExecutableExtension("class");
+				if (o instanceof Metric) {
+					executeMetricExtension(o, resource);
 				}
-			} catch (CoreException ex) {
-				System.out.println(ex.getMessage());
 			}
+		} catch (CoreException ex) {
+			System.out.println(ex.getMessage());
 		}
 		calculateSmells();
 	}
 	
-	private void executeMetricExtension(final Object o, final EList<Resource> resources){
+	private void executeMetricExtension(final Object o, final Resource resource){
 		ISafeRunnable runnable = new ISafeRunnable() {
 			@Override
 			public void handleException(Throwable e) {
@@ -315,7 +307,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			public void run() throws Exception {
 				for (Metric m : metrics){
 					if (m.getName().equals(((Metric) o).getName())){
-						metricResultMap.put(m, ((Metric) o).calculate(resources));
+						metricResultMap.put(m, ((Metric) o).calculate(resource));
 					}
 				}
 			}
@@ -492,12 +484,12 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				e.printStackTrace();
 			}
 	    }
-	    for (String s : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().keySet()){
-	    	System.out.println(s);
-	    	for (String t : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
-	    		System.out.println(t);
-	    	}
-	    }
+//	    for (String s : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().keySet()){
+//	    	System.out.println(s);
+//	    	for (String t : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
+//	    		System.out.println(t);
+//	    	}
+//	    }
 	    for (int i = 0; i < rolemappings.size(); i++){
 	    	for (ModelSmell m : modelSmells){
 	    		if (("#"+m.getName()).equals(rolemappings.get(i))){
