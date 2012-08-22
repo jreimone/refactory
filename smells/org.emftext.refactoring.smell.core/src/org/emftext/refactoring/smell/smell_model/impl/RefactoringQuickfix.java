@@ -1,4 +1,4 @@
-package org.emftext.refactoring.smell.smell_model.ui;
+package org.emftext.refactoring.smell.smell_model.impl;
 
 import java.util.Collections;
 

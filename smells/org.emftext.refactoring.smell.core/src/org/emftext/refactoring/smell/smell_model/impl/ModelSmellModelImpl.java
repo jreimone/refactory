@@ -48,7 +48,6 @@ import org.emftext.refactoring.smell.smell_model.Quality;
 import org.emftext.refactoring.smell.smell_model.Quality_ModelSmell_Mapping;
 import org.emftext.refactoring.smell.smell_model.Smell_modelFactory;
 import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
-import org.osgi.framework.Bundle;
 
 
 
@@ -213,7 +212,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		qualityScale = new HashMap<Quality, Float>();
-		threshold = 0.5f;
+		threshold = 0.3f;
 		createQualitySmellMap();
 		createModelSmellDescription();
 		for (int i = 0; i < qualities.size(); i++){
@@ -350,6 +349,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		try {
 			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/config.cfg");
 			url = FileLocator.toFileURL(url);
+			url = new URL(url.toString().replaceAll(" ", "%20"));
 			File file = new File(url.toURI());
 			assert file.exists();
 			fileReader = new FileReader(file);
@@ -416,6 +416,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	}
 	
 	private void createMetrics(IExtensionRegistry registry){
+		metrics = new BasicEList<Metric>();
 		IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
 		try {
 			for (IConfigurationElement e : metricExtensions) {
@@ -437,6 +438,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		try {
 			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/descriptions.cfg");
 			url = FileLocator.toFileURL(url);
+			url = new URL(url.toString().replaceAll(" ", "%20"));
 			File file = new File(url.toURI());
 			assert file.exists();
 			fileReader = new FileReader(file);
@@ -485,6 +487,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		try {
 			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/rolemappings.cfg");
 			url = FileLocator.toFileURL(url);
+			url = new URL(url.toString().replaceAll(" ", "%20"));
 			File file = new File(url.toURI());
 			assert file.exists();
 			fileReader = new FileReader(file);
