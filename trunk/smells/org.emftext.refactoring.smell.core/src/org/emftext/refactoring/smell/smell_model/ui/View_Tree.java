@@ -7,8 +7,11 @@ import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
@@ -36,6 +39,7 @@ public class View_Tree implements Observer{
 	
 	private Composite parent;
 	private Tree tree;
+	private Resource resource;
 	private Map<TreeItem, EObject> objectItemMap;
 	private Map<TreeItem, RoleMapping> roleItemMap;
 	
@@ -59,6 +63,9 @@ public class View_Tree implements Observer{
 		setTree(new Tree(parent, SWT.HIDE_SELECTION));
 		tree.setRedraw(false);
 		if (ModelSmellModelImpl.getMain().getLoadedResourcePath() != null){
+			URI fileURI = URI.createFileURI(ModelSmellModelImpl.getMain().getLoadedResourcePath());
+			ResourceSet resourceSet = new ResourceSetImpl();
+			resource = resourceSet.getResource(fileURI, true);
 			ModelSmellResult result = ModelSmellModelImpl.getMain().getResult();
 			EList<ModelSmell_Rolemapping_Mapping> rolemapping = ModelSmellModelImpl.getMain().getModelSmell_roleMapping();
 			for (ModelSmell m : result.getResult().keySet()){
@@ -88,18 +95,7 @@ public class View_Tree implements Observer{
 			public void handleEvent(Event event) {
 				Point point = new Point(event.x, event.y);
 		        TreeItem item = tree.getItem(point);
-		        if (item != null && objectItemMap.containsKey(item)) {
-		        	Resource resource = objectItemMap.get(item).eResource();
-		        	String path = resource.getURI().devicePath();
-		        	path = path.replaceAll("%20", " ");
-		        	IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(path));
-		        	IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		        	try {
-		        		IDE.openEditorOnFileStore( page, fileStore );
-		        	} catch ( PartInitException e ) {
-		        		e.printStackTrace();
-		        	}
-		        } else if (item != null && roleItemMap.containsKey(item)){
+		        if (item != null && roleItemMap.containsKey(item)){
 		        	IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(objectItemMap.get(item.getParentItem()).eResource(), roleItemMap.get(item)); 
 		        	String iconKey = "warning.gif";
 		        	RefactoringQuickfix quickfix = new RefactoringQuickfix(objectItemMap.get(item.getParentItem()), refactorer, iconKey);
@@ -124,12 +120,13 @@ public class View_Tree implements Observer{
 				parent.getParent().pack();
 			}
 		});
+		
 		tree.setRedraw(true);
-		if (tree != null){
-			if (tree.getChildren().length > 0){
-				tree.getItem(0).setExpanded(true);
-			}
+		if (tree.getItems().length == 0){
+			addTreeItem(tree, "No Smells found", SWT.NONE);
 		}
+		tree.getItem(0).setExpanded(true);
+		openResource();
 		parent.setVisible(true);
 		parent.layout();
 		parent.getParent().layout();
@@ -147,6 +144,18 @@ public class View_Tree implements Observer{
 		TreeItem item = new TreeItem(parent, style);
 		item.setText(name);
 		return item;
+	}
+	
+	private void openResource(){
+		String path = resource.getURI().devicePath();
+    	path = path.replaceAll("%20", " ");
+    	IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(path));
+    	IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+    	try {
+    		IDE.openEditorOnFileStore( page, fileStore );
+    	} catch ( PartInitException e ) {
+    		e.printStackTrace();
+    	}
 	}
 
 	public Composite getParent() {
@@ -179,6 +188,14 @@ public class View_Tree implements Observer{
 
 	public void setRoleItemMap(Map<TreeItem, RoleMapping> roleItemMap) {
 		this.roleItemMap = roleItemMap;
+	}
+
+	public Resource getResource() {
+		return resource;
+	}
+
+	public void setResource(Resource resource) {
+		this.resource = resource;
 	}
 
 }

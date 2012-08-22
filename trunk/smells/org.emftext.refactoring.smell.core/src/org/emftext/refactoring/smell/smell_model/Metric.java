@@ -4,7 +4,6 @@ package org.emftext.refactoring.smell.smell_model;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -54,9 +53,9 @@ public interface Metric extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model loadedResourceMany="false"
+	 * @model
 	 * @generated
 	 */
-	Map<EObject, Float> calculate(EList<Resource> loadedResource);
+	Map<EObject, Float> calculate(Resource loadedResource);
 
 } // Metric

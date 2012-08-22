@@ -15,8 +15,8 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -51,7 +51,7 @@ public class View  extends ViewPart {
 	private Composite smells;
 	private Composite smellTreeComposite;
 	private View_Tree smellTree;
-	private DirectoryDialog loadDialog;
+	private FileDialog fileDialog;
 	private Composite parentComposite;
 	/**
 	 * <!-- begin-user-doc -->
@@ -76,7 +76,6 @@ public class View  extends ViewPart {
 		this.parentComposite = parent;
 		Device device = Display.getCurrent();
 		Color white = new Color(device, 255, 255, 255);
-		//Color grey = new Color(device, 205, 205, 205);
 		
 		GridLayout parentGridLayout = new GridLayout();
 		this.parentComposite.setLayout(parentGridLayout);
@@ -100,15 +99,13 @@ public class View  extends ViewPart {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				loadDialog = new DirectoryDialog(Display.getCurrent().getActiveShell(), SWT.NULL);
-				loadDialog.setText("Load Resource");
-				loadDialog.setMessage("Select a directory");
-				loadDialog.setFilterPath("C:/");
-				String path = loadDialog.open();
+				fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.NULL);
+				fileDialog.setText("Load Resource");
+				fileDialog.setFilterPath("C:/");
+				String path = fileDialog.open();
 				ModelSmellModelImpl.getMain().setLoadedResourcePath(path);
 				language.setText(ModelSmellModelImpl.getMain().getNamespace());
 				parentComposite.pack();
-//				language.pack();
 			}
 			
 			@Override

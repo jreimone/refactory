@@ -700,12 +700,9 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		initEAttribute(getMetric_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Metric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(metricEClass, null, "calculate", 0, 1, IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(theEcorePackage.getEEList());
-		EGenericType g2 = createEGenericType(theEcorePackage.getEResource());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "loadedResource", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theEcorePackage.getEMap());
-		g2 = createEGenericType(theEcorePackage.getEObject());
+		addEParameter(op, theEcorePackage.getEResource(), "loadedResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(theEcorePackage.getEMap());
+		EGenericType g2 = createEGenericType(theEcorePackage.getEObject());
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(theEcorePackage.getEFloatObject());
 		g1.getETypeArguments().add(g2);
