@@ -125,12 +125,14 @@ public class View_Tree implements Observer{
 			public void treeExpanded(TreeEvent e) {
 				tree.pack();
 				parent.pack();
+				parent.getParent().pack();
 			}
 			
 			@Override
 			public void treeCollapsed(TreeEvent e) {
 				tree.pack();
 				parent.pack();
+				parent.getParent().pack();
 			}
 		});
 		
