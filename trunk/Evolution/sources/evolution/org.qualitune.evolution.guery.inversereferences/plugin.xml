@@ -6,6 +6,9 @@
       <motifFile
             motifResource="motifs/inverseReferences.guery">
       </motifFile>
+      <motifFile
+            motifResource="motifs/mappingDependency.guery">
+      </motifFile>
    </extension>
 
 </plugin>
