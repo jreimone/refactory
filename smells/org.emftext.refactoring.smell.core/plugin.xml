@@ -9,7 +9,7 @@
             name="Modelsmell View">
       </category>
       <view
-            category="org.emftext.refactoring.smell.core.smell_model.view.category"
+            category="org.emftext.refactory.ui.view"
             class="org.emftext.refactoring.smell.smell_model.ui.View"
             icon="src/org/emftext/refactoring/smell/smell_model/ui/view.gif"
             id="org.emftext.refactoring.smell.core.smell_model.view"
