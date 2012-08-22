@@ -3,14 +3,18 @@
 package org.emftext.refactoring.smell.smell_model.impl;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.ISafeRunnable;
@@ -44,6 +48,7 @@ import org.emftext.refactoring.smell.smell_model.Quality;
 import org.emftext.refactoring.smell.smell_model.Quality_ModelSmell_Mapping;
 import org.emftext.refactoring.smell.smell_model.Smell_modelFactory;
 import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
+import org.osgi.framework.Bundle;
 
 
 
@@ -342,12 +347,19 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	private void createQualitySmellMap(){
 		quality_modelSmell = new BasicEList<Quality_ModelSmell_Mapping>();
 		FileReader fileReader = null;
-		//TODO relativen Pfad einfügen
 		try {
-			fileReader = new FileReader("new projects/org.emftext.refactoring.smell.core/src/org/emftext/refactoring/smell/smell_model/config/config.cfg");
+			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/config.cfg");
+			url = FileLocator.toFileURL(url);
+			File file = new File(url.toURI());
+			assert file.exists();
+			fileReader = new FileReader(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} 
 	    BufferedReader bufferedReader = new BufferedReader(fileReader);
 	    String row = null;
 		try {
@@ -422,10 +434,17 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		modelSmellDescription = new HashMap<ModelSmell, String>();
 		EList<String> descriptions = new BasicEList<String>();
 		FileReader fileReader = null;
-		//TODO relativen Pfad einfügen
 		try {
-			fileReader = new FileReader("new projects/org.emftext.refactoring.smell.core/src/org/emftext/refactoring/smell/smell_model/config/descriptions.cfg");
+			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/descriptions.cfg");
+			url = FileLocator.toFileURL(url);
+			File file = new File(url.toURI());
+			assert file.exists();
+			fileReader = new FileReader(file);
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 	    BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -463,10 +482,17 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		EList<String> rolemappings = new BasicEList<String>();
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		FileReader fileReader = null;
-		//TODO relativen Pfad einfügen
 		try {
-			fileReader = new FileReader("new projects/org.emftext.refactoring.smell.core/src/org/emftext/refactoring/smell/smell_model/config/rolemappings.cfg");
+			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/rolemappings.cfg");
+			url = FileLocator.toFileURL(url);
+			File file = new File(url.toURI());
+			assert file.exists();
+			fileReader = new FileReader(file);
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 	    BufferedReader bufferedReader = new BufferedReader(fileReader);

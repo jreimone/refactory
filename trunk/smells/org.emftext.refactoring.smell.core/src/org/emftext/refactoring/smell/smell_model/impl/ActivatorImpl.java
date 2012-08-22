@@ -6,7 +6,7 @@ import org.osgi.framework.BundleContext;
 
 public class ActivatorImpl extends AbstractUIPlugin {
 
-		public static final String PLUGIN_ID = "model_smell_plugin";
+		public static final String PLUGIN_ID = "org.emftext.refactoring.smell.core";
 
 		private static ActivatorImpl plugin;
 		
