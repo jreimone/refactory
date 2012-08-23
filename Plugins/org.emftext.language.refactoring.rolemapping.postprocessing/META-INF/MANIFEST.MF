@@ -9,4 +9,5 @@ Require-Bundle: org.eclipse.emf,
  org.emftext.language.refactoring.rolemapping,
  org.emftext.language.refactoring.rolemapping.resource.rolemapping,
  org.emftext.refactoring.roleconstraintchecker,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.emftext.refactoring.util
