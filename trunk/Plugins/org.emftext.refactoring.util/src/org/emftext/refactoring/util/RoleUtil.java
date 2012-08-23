@@ -217,10 +217,31 @@ public class RoleUtil {
 	 * @return all input roles
 	 */
 	public static List<Role> getAllInputRoles(RoleMapping mapping) {
+		return getAllModifiedRoles(mapping, RoleModifier.INPUT);
+	}
+	
+	/**
+	 * Returns all roles of the given mapping having the modifier {@link RoleModifier#OPTIONAL}.
+	 * 
+	 * @param mapping the mapping to search for input roles
+	 * @return all input roles
+	 */
+	public static List<Role> getAllOptionalRoles(RoleMapping mapping) {
+		return getAllModifiedRoles(mapping, RoleModifier.OPTIONAL);
+	}
+	
+	/**
+	 * Returns all roles of the given mapping having the given modifier {@link RoleModifier}.
+	 * 
+	 * @param mapping the mapping to search for input roles
+	 * @param modifier the modifier by which the roles are filtered
+	 * @return all input roles
+	 */
+	public static List<Role> getAllModifiedRoles(RoleMapping mapping, RoleModifier modifier) {
 		List<Role> inputRoles = new LinkedList<Role>();
 		List<Role> mappedRoles = getAllMappedRoles(mapping);
 		for (Role role : mappedRoles) {
-			if (role.getModifier().contains(RoleModifier.INPUT)) {
+			if (role.getModifier().contains(modifier)) {
 				inputRoles.add(role);
 			}
 		}
