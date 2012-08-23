@@ -27,8 +27,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 
 public class ConcreteMappingMetaclassReferenceResolver
-		implements
-		org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> {
+implements
+org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> {
 
 	private static final String PACKAGE_SEPARATOR = ".";
 	private static final String PACKAGE_SEPARATOR_REGEX = "\\.";
@@ -87,9 +87,9 @@ public class ConcreteMappingMetaclassReferenceResolver
 						builder.deleteCharAt(builder.length() - 1);
 						result.setErrorMessage("Metaclass '"
 								+ segments[segments.length - 1]
-								+ "' doesn't exist in "
-								+ targetMetamodel.getNsURI() + "/"
-								+ builder.toString());
+										+ "' doesn't exist in "
+										+ targetMetamodel.getNsURI() + "/"
+										+ builder.toString());
 					}
 				}
 			}
@@ -117,7 +117,8 @@ public class ConcreteMappingMetaclassReferenceResolver
 					if (classesWithSameNames == null) {
 						classesWithSameNames = new LinkedList<EClass>();
 						String name = "";
-						if (metamodel.getESuperPackage() == null) {
+						EPackage superPackage = metamodel.getESuperPackage();
+						if (superPackage == null) {
 							name = eClassifier.getName();
 						} else {
 							name = getPackageNavigation((EClass) eClassifier);
