@@ -18,6 +18,9 @@ git:https://github.com/DevBoost/EMFTools.git!eJava/
 // Sokan
 git:https://github.com/DevBoost/Reuseware.git!Sokan/
 
+// Dresden OCL
+svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
+
 // JaMoPP
 //git:https://github.com/DevBoost/JaMoPP.git!Core/
 //git:https://github.com/DevBoost/JaMoPP.git!Eclipse-Integration/
