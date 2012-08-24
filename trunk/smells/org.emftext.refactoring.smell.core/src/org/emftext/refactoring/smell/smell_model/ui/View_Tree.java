@@ -11,18 +11,17 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
@@ -63,6 +62,16 @@ public class View_Tree implements Observer{
 
 	@Override
 	public void update() {
+		Display.getDefault().syncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				updateTree();
+			}
+		});
+	}
+	
+	private void updateTree(){
 		if (quickfixes != null){
 			for(IMarker m : quickfixes){
 				try {
@@ -80,10 +89,8 @@ public class View_Tree implements Observer{
 		}
 		setTree(new Tree(parent, SWT.HIDE_SELECTION));
 		tree.setRedraw(false);
-		if (ModelSmellModelImpl.getMain().getLoadedResourcePath() != null){
-			URI fileURI = URI.createFileURI(ModelSmellModelImpl.getMain().getLoadedResourcePath());
-			ResourceSet resourceSet = new ResourceSetImpl();
-			resource = resourceSet.getResource(fileURI, true);
+		if (ModelSmellModelImpl.getMain().getLoadedResource() != null){
+			resource = ModelSmellModelImpl.getMain().getLoadedResource();
 			ModelSmellResult result = ModelSmellModelImpl.getMain().getResult();
 			EList<ModelSmell_Rolemapping_Mapping> rolemapping = ModelSmellModelImpl.getMain().getModelSmell_roleMapping();
 			for (ModelSmell m : result.getResult().keySet()){
@@ -141,7 +148,9 @@ public class View_Tree implements Observer{
 			addTreeItem(tree, "No Smells found", SWT.NONE);
 		}
 		tree.getItem(0).setExpanded(true);
-		openResource();
+		if (resource != null){
+			openResource();
+		}
 		parent.setVisible(true);
 		parent.layout();
 		parent.pack();
@@ -179,17 +188,22 @@ public class View_Tree implements Observer{
     	ModelSmellModelImpl.getMain().calculate();
 	}
 	
-	private void createQuickfix(String message){
-		//TODO IResource festlegen
-		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember("");
+	//TODO org.eclipse.core.internal.resources.ResourceException: The resource tree is locked for modifications.
+	private void createQuickfix(final String message){
+		Path path = new Path(resource.getURI().devicePath());
+		Path workspacePath = new Path(ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
+		IPath newpath = path.makeRelativeTo(workspacePath);
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(newpath);
 		IMarker mk = null;
-		try {
-			mk = resource.createMarker(IMarker.PROBLEM);
-			mk.setAttribute(IMarker.MESSAGE, message);
-		    mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-		    quickfixes.add(mk);
-		} catch (CoreException e) {
-			e.printStackTrace();
+		if (resource != null){
+			try {
+				mk = resource.createMarker(IMarker.PROBLEM);
+				mk.setAttribute(IMarker.MESSAGE, message);
+				mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+				quickfixes.add(mk);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

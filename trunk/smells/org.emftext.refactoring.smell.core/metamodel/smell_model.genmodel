@@ -39,7 +39,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/qualities"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/modelSmells"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/metrics"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/loadedResourcePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/loadedResource"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/qualityScale"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/observer"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/result"/>

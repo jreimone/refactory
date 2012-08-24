@@ -401,14 +401,15 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getModelSmellModel_LoadedResourcePath() {
+  public EAttribute getModelSmellModel_LoadedResource()
+  {
 		return (EAttribute)modelSmellModelEClass.getEStructuralFeatures().get(6);
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -619,7 +620,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		createEReference(modelSmellModelEClass, MODEL_SMELL_MODEL__QUALITIES);
 		createEReference(modelSmellModelEClass, MODEL_SMELL_MODEL__MODEL_SMELLS);
 		createEReference(modelSmellModelEClass, MODEL_SMELL_MODEL__METRICS);
-		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__LOADED_RESOURCE_PATH);
+		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__LOADED_RESOURCE);
 		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__QUALITY_SCALE);
 		createEAttribute(modelSmellModelEClass, MODEL_SMELL_MODEL__OBSERVER);
 		createEReference(modelSmellModelEClass, MODEL_SMELL_MODEL__RESULT);
@@ -719,7 +720,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		initEReference(getModelSmellModel_Qualities(), this.getQuality(), null, "qualities", null, 1, -1, ModelSmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelSmellModel_ModelSmells(), this.getModelSmell(), null, "modelSmells", null, 1, -1, ModelSmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelSmellModel_Metrics(), this.getMetric(), null, "metrics", null, 1, -1, ModelSmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getModelSmellModel_LoadedResourcePath(), theEcorePackage.getEString(), "loadedResourcePath", null, 0, 1, ModelSmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelSmellModel_LoadedResource(), theEcorePackage.getEResource(), "loadedResource", "", 0, 1, ModelSmellModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(theEcorePackage.getEMap());
 		g2 = createEGenericType(this.getQuality());
 		g1.getETypeArguments().add(g2);

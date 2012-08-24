@@ -62,7 +62,8 @@
         upperBound="-1" eType="#//ModelSmell" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" lowerBound="1"
         upperBound="-1" eType="#//Metric" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loadedResourcePath" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loadedResource" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EResource"
+        transient="true" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityScale" transient="true"
         defaultValueLiteral="">
       <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">

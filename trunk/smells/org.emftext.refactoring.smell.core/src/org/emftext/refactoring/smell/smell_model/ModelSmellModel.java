@@ -7,6 +7,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getQualities <em>Qualities</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getModelSmells <em>Model Smells</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getMetrics <em>Metrics</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedResourcePath <em>Loaded Resource Path</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedResource <em>Loaded Resource</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getQualityScale <em>Quality Scale</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getObserver <em>Observer</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getResult <em>Result</em>}</li>
@@ -135,6 +136,33 @@ public interface ModelSmellModel extends EObject {
 	EList<Metric> getMetrics();
 
 	/**
+	 * Returns the value of the '<em><b>Loaded Resource</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Loaded Resource</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Loaded Resource</em>' attribute.
+	 * @see #setLoadedResource(Resource)
+	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmellModel_LoadedResource()
+	 * @model default="" transient="true"
+	 * @generated
+	 */
+  Resource getLoadedResource();
+
+  /**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedResource <em>Loaded Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Loaded Resource</em>' attribute.
+	 * @see #getLoadedResource()
+	 * @generated
+	 */
+  void setLoadedResource(Resource value);
+
+  /**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
@@ -149,10 +177,6 @@ public interface ModelSmellModel extends EObject {
 	 * @generated
 	 */
 	void calculate();
-
-	String getLoadedResourcePath();
-
-	void setLoadedResourcePath(String path);
 	
 	/**
 	 * Returns the value of the '<em><b>Quality Scale</b></em>' attribute.

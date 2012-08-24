@@ -50,13 +50,8 @@ public class View_Quality{
 			
 			@Override
 			public void mouseUp(MouseEvent e) {
-				qualityLabel_Factor.setText(""+qualityScale.getSelection());
-				String[] temp = qualityLabel_Name.getText().split(":");
-				for (int i = 0; i < ModelSmellModelImpl.getMain().getQualities().size(); i++){
-					if(ModelSmellModelImpl.getMain().getQualities().get(i).getName().equals(temp[0])){
-						ModelSmellModelImpl.getMain().setQualityScale(ModelSmellModelImpl.getMain().getQualities().get(i), qualityScale.getSelection()/100f);
-					}
-				}
+				qualityLabel_Factor.setText(""+qualityScale.getSelection()/100f);
+				setQualityScaleInMain();
 			}
 			
 			@Override
@@ -72,7 +67,8 @@ public class View_Quality{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(e.keyCode == SWT.ARROW_LEFT || e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.ARROW_DOWN || e.keyCode == SWT.ARROW_UP){
-					qualityLabel_Factor.setText(""+qualityScale.getSelection());
+					qualityLabel_Factor.setText(""+qualityScale.getSelection()/100f);
+					setQualityScaleInMain();
 				}
 			}
 			
@@ -85,16 +81,26 @@ public class View_Quality{
 			@Override
 			public void keyTraversed(TraverseEvent e) {
 				if(e.keyCode == SWT.ARROW_LEFT || e.keyCode == SWT.ARROW_RIGHT || e.keyCode == SWT.ARROW_DOWN || e.keyCode == SWT.ARROW_UP){
-					qualityLabel_Factor.setText(""+qualityScale.getSelection());
+					qualityLabel_Factor.setText(""+qualityScale.getSelection()/100f);
+					setQualityScaleInMain();
 				}
 			}
 		});
 		
 		qualityLabel_Factor = new Label(qualityComposite, SWT.CENTER);
-		qualityLabel_Factor.setText("   " + factor);
+		qualityLabel_Factor.setText("   " + getFactor()/100f);
 		
 		parent.setSize(parent.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		parent.layout();
+	}
+	
+	private void setQualityScaleInMain(){
+		String[] temp = qualityLabel_Name.getText().split(":");
+		for (int i = 0; i < ModelSmellModelImpl.getMain().getQualities().size(); i++){
+			if(ModelSmellModelImpl.getMain().getQualities().get(i).getName().equals(temp[0])){
+				ModelSmellModelImpl.getMain().setQualityScale(ModelSmellModelImpl.getMain().getQualities().get(i), qualityScale.getSelection()/100f);
+			}
+		}
 	}
 
 	public Label getQualityLabel_Name() {

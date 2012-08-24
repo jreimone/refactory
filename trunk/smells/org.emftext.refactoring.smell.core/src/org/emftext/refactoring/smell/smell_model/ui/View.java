@@ -6,22 +6,15 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.ui.part.ViewPart;
 import org.emftext.refactoring.smell.smell_model.ModelSmell;
 import org.emftext.refactoring.smell.smell_model.Quality;
@@ -36,14 +29,15 @@ import org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl;
  * </p>
  *
  */
+//TODO evtl. Baum rechts von Tab, oder je nach Position des Views variieren, Scrolled Composite als Parent von allen
 public class View  extends ViewPart {
 	
 	private EList<View_Quality> qualityCompositeList;
 	private EList<View_ModelSmell> modelSmellCompositeList;
-	private ToolBar buttonBar;
-	private ToolItem start;
-	private ToolItem load;
-	private Label language;
+//	private ToolBar buttonBar;
+//	private ToolItem start;
+//	private ToolItem load;
+	private View_Label language;
 	private TabFolder qualitySmellTab;
 	private ScrolledComposite qualitiesScrolledComposite;
 	private Composite qualities;
@@ -51,7 +45,7 @@ public class View  extends ViewPart {
 	private Composite smells;
 	private Composite smellTreeComposite;
 	private View_Tree smellTree;
-	private FileDialog fileDialog;
+//	private FileDialog fileDialog;
 	private Composite parentComposite;
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,53 +75,51 @@ public class View  extends ViewPart {
 		this.parentComposite.setLayout(parentGridLayout);
 		
 		//ToolBar
-		buttonBar = new ToolBar(this.parentComposite, SWT.FLAT | SWT.RIGHT);
-		GridData buttonBarGridData = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
-		buttonBar.setLayoutData(buttonBarGridData);
-	    start = new ToolItem(buttonBar, SWT.PUSH);
-	    load = new ToolItem(buttonBar, SWT.PUSH);
-		Image image_start = null;
-		Image image_load = null;
-    	image_start = new Image(device, View.class.getResourceAsStream(("/org/emftext/refactoring/smell/smell_model/ui/start.gif")));
-        image_load = new Image(device, View.class.getResourceAsStream(("/org/emftext/refactoring/smell/smell_model/ui/load.gif")));
-        start.setImage(image_start);
-        load.setImage(image_load);
-        start.setToolTipText("Start search");
-        load.setToolTipText("Load resource");
-	    buttonBar.pack();
-	    load.addSelectionListener(new SelectionListener() {
-			
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.NULL);
-				fileDialog.setText("Load Resource");
-				String path = fileDialog.open();
-				ModelSmellModelImpl.getMain().setLoadedResourcePath(path);
-				language.setText(ModelSmellModelImpl.getMain().getNamespace());
-				parentComposite.pack();
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-		});
-	    start.addSelectionListener(new SelectionListener() {
-			
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				ModelSmellModelImpl.getMain().calculate();
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-		});
+//		buttonBar = new ToolBar(this.parentComposite, SWT.FLAT | SWT.RIGHT);
+//		GridData buttonBarGridData = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
+//		buttonBar.setLayoutData(buttonBarGridData);
+//	    start = new ToolItem(buttonBar, SWT.PUSH);
+//	    load = new ToolItem(buttonBar, SWT.PUSH);
+//		Image image_start = null;
+//		Image image_load = null;
+//    	image_start = new Image(device, View.class.getResourceAsStream(("/org/emftext/refactoring/smell/smell_model/ui/start.gif")));
+//        image_load = new Image(device, View.class.getResourceAsStream(("/org/emftext/refactoring/smell/smell_model/ui/load.gif")));
+//        start.setImage(image_start);
+//        load.setImage(image_load);
+//        start.setToolTipText("Start search");
+//        load.setToolTipText("Load resource");
+//	    buttonBar.pack();
+//	    load.addSelectionListener(new SelectionListener() {
+//			
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.NULL);
+//				fileDialog.setText("Load Resource");
+//				String path = fileDialog.open();
+//				ModelSmellModelImpl.getMain().setLoadedResourcePath(path);
+//				parentComposite.pack();
+//			}
+//			
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent e) {
+//			}
+//		});
+//	    start.addSelectionListener(new SelectionListener() {
+//			
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				ModelSmellModelImpl.getMain().calculate();
+//			}
+//			
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent e) {
+//			}
+//		});
 	    
 	    //Language Label
 	    GridData languageLabelGridData = new GridData(SWT.CENTER, SWT.TOP, true, false, 1, 1);
-	    language = new Label(this.parentComposite, SWT.NULL);
-	    language.setText("");
-	    language.setLayoutData(languageLabelGridData);
+	    language = new View_Label(this.parentComposite, SWT.NULL, "");
+	    language.getLabel().setLayoutData(languageLabelGridData);
 		
 		EList<Quality> qualitiesList = ModelSmellModelImpl.getMain().getQualities();
 		EList<ModelSmell> smellList = ModelSmellModelImpl.getMain().getModelSmells();
