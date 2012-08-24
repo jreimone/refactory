@@ -1,17 +1,10 @@
 package org.emftext.refactoring.smell.smell_model.ui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -46,7 +39,6 @@ public class View_Tree implements Observer{
 	private Composite parent;
 	private Tree tree;
 	private Resource resource;
-	private List<IMarker> quickfixes;
 	private Map<TreeItem, EObject> objectItemMap;
 	private Map<TreeItem, RoleMapping> roleItemMap;
 	
@@ -72,16 +64,6 @@ public class View_Tree implements Observer{
 	}
 	
 	private void updateTree(){
-		if (quickfixes != null){
-			for(IMarker m : quickfixes){
-				try {
-					m.delete();
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		quickfixes = new ArrayList<IMarker>();
 		setobjectItemMap(new HashMap<TreeItem, EObject>());
 		setRoleItemMap(new HashMap<TreeItem, RoleMapping>());
 		if (tree != null){
@@ -104,7 +86,7 @@ public class View_Tree implements Observer{
 								hasRoleMapping = true;
 								TreeItem roleItem = addTreeItem(objectItem, "Recommended Refactoring: "+rm.getName(), SWT.NONE);
 								roleItemMap.put(roleItem, rm);
-								createQuickfix(m.getName());
+								ModelSmellModelImpl.getMain().createQuickfix(m.getName(), o.eResource().getURIFragment(o).substring(2));
 							}
 						}
 					}
@@ -185,26 +167,6 @@ public class View_Tree implements Observer{
     	String iconKey = "";
     	RefactoringQuickfix quickfix = new RefactoringQuickfix(objectItemMap.get(item.getParentItem()), refactorer, iconKey);
     	quickfix.applyChanges();
-    	ModelSmellModelImpl.getMain().calculate();
-	}
-	
-	//TODO org.eclipse.core.internal.resources.ResourceException: The resource tree is locked for modifications.
-	private void createQuickfix(final String message){
-		Path path = new Path(resource.getURI().devicePath());
-		Path workspacePath = new Path(ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
-		IPath newpath = path.makeRelativeTo(workspacePath);
-		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(newpath);
-		IMarker mk = null;
-		if (resource != null){
-			try {
-				mk = resource.createMarker(IMarker.PROBLEM);
-				mk.setAttribute(IMarker.MESSAGE, message);
-				mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-				quickfixes.add(mk);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	public Composite getParent() {

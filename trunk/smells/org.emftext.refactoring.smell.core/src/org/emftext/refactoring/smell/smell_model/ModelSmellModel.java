@@ -307,6 +307,8 @@ public interface ModelSmellModel extends EObject {
 	void unregister(Observer o);
 	
 	void inform();
+	
+	void createQuickfix(String smell, String location);
 
 	/**
 	 * <!-- begin-user-doc -->

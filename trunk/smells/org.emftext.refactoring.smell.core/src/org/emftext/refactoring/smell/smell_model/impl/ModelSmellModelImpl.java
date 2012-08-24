@@ -13,19 +13,26 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.ISafeRunnable;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SafeRunner;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -175,6 +182,10 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	private EPackage loadedMetaModel;
 	
 	private IWorkspace workspace;
+	
+	private IResourceChangeListener listener;
+	
+	private EList<IMarker> quickfixes;
 
 	/**
 	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
@@ -220,6 +231,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		qualityScale = new HashMap<Quality, Float>();
+		quickfixes = new BasicEList<IMarker>();
 		threshold = 0.3f;
 		createResourceObserver();
 		createQualitySmellMap();
@@ -238,6 +250,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	public void calculate() {
 		createMetrics(Platform.getExtensionRegistry());
 		evaluateMetricExtension(Platform.getExtensionRegistry());
+		
 	}
 
 	/**
@@ -482,25 +495,18 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		}
 	    return stringList;
 	}
+	
 	//TODO Modell von anderen Dateien unterscheiden
 	private void createResourceObserver(){
 		workspace = ResourcesPlugin.getWorkspace();
-		workspace.addResourceChangeListener(new IResourceChangeListener() {
+		listener = new IResourceChangeListener() {
 			
 			@Override
 			public void resourceChanged(IResourceChangeEvent event) {
-				if (event.getType() == IResourceChangeEvent.POST_CHANGE){
-					IResourceDelta delta = getChangedResource(event.getDelta());
-					IResource resource = delta.getResource();
-					if (!resource.getFileExtension().equals("java")){
-						URI fileURI = URI.createFileURI(resource.getLocation().toOSString());
-						ResourceSet resourceSet = new ResourceSetImpl();
-						loadedResource = resourceSet.getResource(fileURI, true);
-						calculate();
-					}
-				}
+				listenerOperation(event);
 			}
-		});
+		};
+		workspace.addResourceChangeListener(listener);
 	}
 	
 	private IResourceDelta getChangedResource(IResourceDelta delta){
@@ -511,12 +517,60 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	}
 	
 	private void calculateSmells(){
-		ModelSmellResultImpl result = new ModelSmellResultImpl();
+		ModelSmellResult result = Smell_modelFactory.eINSTANCE.createModelSmellResult();
 		result.setThreshold(threshold);
 		result.calculate(metric_quality, quality_modelSmell, metricResultMap, qualityScale);
 		setResult(result);
 		createModelSmellRolemappingMap();
 		inform();
+	}
+	
+	private void listenerOperation(IResourceChangeEvent event){
+		if (event.getType() == IResourceChangeEvent.POST_CHANGE){
+			IResourceDelta delta = getChangedResource(event.getDelta());
+			IResource resource = delta.getResource();
+			if (!resource.getFileExtension().equals("java")){
+				URI fileURI = URI.createFileURI(resource.getLocation().toOSString());
+				ResourceSet resourceSet = new ResourceSetImpl();
+				loadedResource = resourceSet.getResource(fileURI, true);
+				calculate();
+			}
+		}
+	}
+	
+	//TODO workspace.addResourceChangeListener(listener); an die richtige Stelle
+	public void createQuickfix(final String smell, final String location){
+		Path path = new Path(loadedResource.getURI().devicePath());
+		Path workspacePath = new Path(ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
+		IPath newpath = path.makeRelativeTo(workspacePath);
+		final IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(newpath);
+		WorkspaceJob job = new WorkspaceJob("addQuickfix") {
+			
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor)
+					throws CoreException {
+				workspace.removeResourceChangeListener(listener);
+				IMarker mk = null;
+				if (resource != null){
+					try {
+						for (int i = 0; i < quickfixes.size(); i++){
+							quickfixes.get(i).delete();
+						}
+						mk = resource.createMarker(IMarker.PROBLEM);
+						mk.setAttribute(IMarker.MESSAGE, smell);
+						mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+						mk.setAttribute(IMarker.LOCATION, location);
+						mk.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
+						quickfixes.add(mk);
+					} catch (CoreException e) {
+						e.printStackTrace();
+					}
+				}
+				workspace.addResourceChangeListener(listener);
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
 	}
 
 	/**
