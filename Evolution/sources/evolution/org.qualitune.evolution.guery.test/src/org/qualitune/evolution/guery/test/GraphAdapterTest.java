@@ -19,6 +19,7 @@ import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.qualitune.evolution.guery.graph.ContainmentEdge;
 import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
 import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EObjectVertex;
@@ -74,12 +75,17 @@ public class GraphAdapterTest {
 	private void printEdges(Iterator<EReferenceEdge> edges, String startArrow, String endArrow, boolean out) {
 		while (edges.hasNext()) {
 			EReferenceEdge edge = (EReferenceEdge) edges.next();
+			boolean containment = true;
+			if(!(edge instanceof ContainmentEdge)){
+				containment = false;
+			}
+			String containmentString = containment?"<>":" ";
 			EObject reference = edge.getReference();
 			assertTrue("Input was an EPackage, i.e. the wrapped edge must be an EReference", reference instanceof EReference);
 			EObjectVertex vertex = out?edge.getEnd():edge.getStart();
 			EObject endElement = vertex.getModelElement();
 			assertTrue("Input was an EPackage, i.e. the wrapped vertex must be an EClass", endElement instanceof EClass);
-			System.out.println("\t" + startArrow + " " + ((EReference) reference).getName() + " " + endArrow + " " + ((EClass) endElement).getName());
+			System.out.println("\t" + (out?containmentString:" ") + startArrow + " " + ((EReference) reference).getName() + " " + endArrow + (!out?containmentString:" ") + " " + ((EClass) endElement).getName());
 		}
 	}
 }
