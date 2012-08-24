@@ -496,7 +496,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	    return stringList;
 	}
 	
-	//TODO Modell von anderen Dateien unterscheiden
 	private void createResourceObserver(){
 		workspace = ResourcesPlugin.getWorkspace();
 		listener = new IResourceChangeListener() {
@@ -525,6 +524,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		inform();
 	}
 	
+	//TODO Modell von anderen Dateien unterscheiden
 	private void listenerOperation(IResourceChangeEvent event){
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE){
 			IResourceDelta delta = getChangedResource(event.getDelta());
