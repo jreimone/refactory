@@ -3,8 +3,6 @@
  */
 package org.emftext.refactoring.matching;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,9 +18,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.emftext.language.pl0.PL0Package;
 import org.junit.Test;
-import org.qualitune.evolution.guery.registry.EObjectVertex;
+import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
 import org.qualitune.guery.GueryPackage;
 
@@ -60,10 +58,11 @@ public class SolverTest {
 		resourceSet.getPackageRegistry().put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);
 		String path = "../org.emftext.language.pl0/metamodel/pl0.ecore";
 		File file = new File(path);
-		assertTrue(file.exists());
+//		assertTrue(file.exists());
 		URI uri = URI.createFileURI(file.getAbsolutePath());
-		Resource pl0MM = resourceSet.getResource(uri, true);
-		SolvingMotif solver = new SolvingMotif(loadMotifs(), pl0MM);
+		Resource resource = PL0Package.eINSTANCE.eResource();
+//		Resource pl0MM = resourceSet.getResource(uri, true);
+		SolvingMotif solver = new SolvingMotif(loadMotifs(), resource);
 		solver.findMotifInstances();
 		
 		
@@ -76,15 +75,15 @@ public class SolverTest {
 //		sm.findMotifInstances();
 	}
 	
-	private static Motif<EObjectVertex,EReferenceEdge> loadMotifs(){
+	private static Motif<MetamodelVertex,EReferenceEdge> loadMotifs(){
 		InputStream in=null;
 		try {
 			in = new FileInputStream("ExtractXwithReferenceClass.guery");
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		MotifReader<EObjectVertex,EReferenceEdge> reader = new DefaultMotifReader<EObjectVertex,EReferenceEdge>();
-		Motif<EObjectVertex,EReferenceEdge> motif=null;
+		MotifReader<MetamodelVertex,EReferenceEdge> reader = new DefaultMotifReader<MetamodelVertex,EReferenceEdge>();
+		Motif<MetamodelVertex,EReferenceEdge> motif=null;
 		try {
 			motif = reader.read(in);
 		} catch (MotifReaderException e) {
