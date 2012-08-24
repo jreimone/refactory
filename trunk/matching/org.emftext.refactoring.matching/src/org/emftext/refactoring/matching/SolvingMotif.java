@@ -1,10 +1,10 @@
 package org.emftext.refactoring.matching;
 
+import java.util.List;
 import java.util.Set;
 
 import nz.ac.massey.cs.guery.ComputationMode;
 import nz.ac.massey.cs.guery.GQL;
-import nz.ac.massey.cs.guery.GraphAdapter;
 import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifInstance;
 import nz.ac.massey.cs.guery.Path;
@@ -16,36 +16,33 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.qualitune.evolution.guery.graph.EMFGraphAdapter;
-import org.qualitune.evolution.guery.graph.EMFGraphAdapterFactory;
-import org.qualitune.evolution.guery.graph.IEMFGraphAdapterFactory;
+import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
+import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EObjectVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
 public class SolvingMotif {
 	
-	private IEMFGraphAdapterFactory<EObjectVertex, EReferenceEdge> factory;
-	private GraphAdapter<EObjectVertex, EReferenceEdge> graphAdapter;
+	private EPackageGraphAdapter graphAdapter;
 	private Resource resource;
-	private Motif<EObjectVertex, EReferenceEdge> motif;
+	private Motif<MetamodelVertex, EReferenceEdge> motif;
 	
-	public SolvingMotif(Motif<EObjectVertex, EReferenceEdge> motif, Resource resource){
+	public SolvingMotif(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource){
 		this.motif = motif;
 		this.resource = resource;
-		factory = new EMFGraphAdapterFactory();
-		graphAdapter = new EMFGraphAdapter<EObjectVertex, EReferenceEdge>(resource, factory);
+		graphAdapter = new EPackageGraphAdapter(resource);
 	}
 	
 	public void findMotifInstances(){
 //		Motif<EObjectVertex, EReferenceEdge> motif=loadMotifs();
-		ResultListener<EObjectVertex, EReferenceEdge> listener = new ResultListener<EObjectVertex, EReferenceEdge>(){
+		ResultListener<MetamodelVertex, EReferenceEdge> listener = new ResultListener<MetamodelVertex, EReferenceEdge>(){
 			private int i = 0;
 			public void done() {} 
-			public boolean found(MotifInstance<EObjectVertex, EReferenceEdge> instance) { 
+			public boolean found(MotifInstance<MetamodelVertex, EReferenceEdge> instance) { 
 				// do something 
 				//TODO transformation in rm
 //				if (i==1){
-				Set<EObjectVertex> instances=instance.getVertices();
+				Set<MetamodelVertex> instances=instance.getVertices();
 //				System.out.println(motif.getRoles().size());
 //				for (EObjectVertex instanceTest:instances){
 //					System.out.println(i+" "+instanceTest.getModelElement());
@@ -61,14 +58,14 @@ public class SolvingMotif {
 			}
 			public void progressMade(int progress, int total) {} 
 		};
-		GQL<EObjectVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<EObjectVertex, EReferenceEdge>();
+		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>();
 		engine.query(graphAdapter,motif,listener,ComputationMode.ALL_INSTANCES);
 	}
 	
-	public void analyzeMotifs(MotifInstance<EObjectVertex,EReferenceEdge> instance){
+	public void analyzeMotifs(MotifInstance<MetamodelVertex,EReferenceEdge> instance){
 		System.out.println("~~~~~~~~~~~~~~~~~~");
 //		MotifInstance<EObjectVertex,EReferenceEdge> instance = null;
-		Motif<EObjectVertex,EReferenceEdge> motif = instance.getMotif();
+		Motif<MetamodelVertex,EReferenceEdge> motif = instance.getMotif();
 		for (String vertexRole:motif.getRoles()) {
 			EObjectVertex vertex = instance.getVertex(vertexRole);
 			if(vertex != null){
@@ -90,9 +87,12 @@ public class SolvingMotif {
 		}
 		
 		for (String edgeRole:motif.getPathRoles()) {
-			Path<EObjectVertex,EReferenceEdge> path = instance.getPath(edgeRole);
-			java.util.List<EReferenceEdge> edges = path.getEdges();
-			System.out.println(edgeRole + " -> " + edges);
+			Path<MetamodelVertex,EReferenceEdge> path = instance.getPath(edgeRole);
+			System.out.println(edgeRole + ": ");
+			List<EReferenceEdge> edges = path.getEdges();
+			for (EReferenceEdge edge : edges) {
+				System.out.println("\t" + edge.getStart() + " --" + edge.getReference().getName() + "--> " + edge.getEnd());
+			}
 		}
 		System.out.println("~~~~~~~~~~~~~~~~~~");
 	}
