@@ -379,15 +379,15 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_MODEL__METRICS = 5;
 
 	/**
-	 * The feature id for the '<em><b>Loaded Resource Path</b></em>' attribute.
+	 * The feature id for the '<em><b>Loaded Resource</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL__LOADED_RESOURCE_PATH = 6;
+  int MODEL_SMELL_MODEL__LOADED_RESOURCE = 6;
 
-	/**
+  /**
 	 * The feature id for the '<em><b>Quality Scale</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -829,17 +829,17 @@ public interface Smell_modelPackage extends EPackage {
 	EReference getModelSmellModel_Metrics();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedResourcePath <em>Loaded Resource Path</em>}'.
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedResource <em>Loaded Resource</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Loaded Resource Path</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedResourcePath()
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Loaded Resource</em>'.
+	 * @see org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedResource()
 	 * @see #getModelSmellModel()
 	 * @generated
 	 */
-	EAttribute getModelSmellModel_LoadedResourcePath();
+  EAttribute getModelSmellModel_LoadedResource();
 
-	/**
+  /**
 	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getQualityScale <em>Quality Scale</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1250,14 +1250,14 @@ public interface Smell_modelPackage extends EPackage {
 		EReference MODEL_SMELL_MODEL__METRICS = eINSTANCE.getModelSmellModel_Metrics();
 
 		/**
-		 * The meta object literal for the '<em><b>Loaded Resource Path</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Loaded Resource</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MODEL_SMELL_MODEL__LOADED_RESOURCE_PATH = eINSTANCE.getModelSmellModel_LoadedResourcePath();
+    EAttribute MODEL_SMELL_MODEL__LOADED_RESOURCE = eINSTANCE.getModelSmellModel_LoadedResource();
 
-		/**
+    /**
 		 * The meta object literal for the '<em><b>Quality Scale</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->

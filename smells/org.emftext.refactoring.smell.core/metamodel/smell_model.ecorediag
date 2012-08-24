@@ -118,7 +118,7 @@
     <children xmi:type="notation:Node" xmi:id="_ae3NoMa4EeGiNqYwZSRCnQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ae3Noca4EeGiNqYwZSRCnQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_sV2moN_NEeGgkvm0fb4zVg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="smell_model.ecore#//ModelSmellModel/loadedResourcePath"/>
+        <element xmi:type="ecore:EAttribute" href="smell_model.ecore#//ModelSmellModel/loadedResource"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_sV2mod_NEeGgkvm0fb4zVg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_wSNugN_NEeGgkvm0fb4zVg" type="2001">

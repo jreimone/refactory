@@ -13,6 +13,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -64,7 +70,7 @@ import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getQualities <em>Qualities</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getModelSmells <em>Model Smells</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getMetrics <em>Metrics</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getLoadedResourcePath <em>Loaded Resource Path</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getLoadedResource <em>Loaded Resource</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getQualityScale <em>Quality Scale</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getObserver <em>Observer</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getResult <em>Result</em>}</li>
@@ -138,19 +144,19 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 */
 	protected EList<Metric> metrics;
 	
-	private EList<String> configStrings = new BasicEList<String>();
-	
 	/**
-	 * The default value of the '{@link #getLoadedResourcePath() <em>Loaded Resource Path</em>}' attribute.
+	 * The default value of the '{@link #getLoadedResource() <em>Loaded Resource</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLoadedResourcePath()
+   * <!-- end-user-doc -->
+	 * @see #getLoadedResource()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LOADED_RESOURCE_PATH_EDEFAULT = null;
+    protected static final Resource LOADED_RESOURCE_EDEFAULT = null;
 
-	private String loadedResourcePath;
+    private EList<String> configStrings = new BasicEList<String>();
+	
+	private Resource loadedResource;
 	
 	private Map<Quality, Float> qualityScale;
 	
@@ -167,6 +173,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	private Map<Metric, Map<EObject, Float>> metricResultMap;
 	
 	private EPackage loadedMetaModel;
+	
+	private IWorkspace workspace;
 
 	/**
 	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
@@ -213,6 +221,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		qualityScale = new HashMap<Quality, Float>();
 		threshold = 0.3f;
+		createResourceObserver();
 		createQualitySmellMap();
 		createModelSmellDescription();
 		for (int i = 0; i < qualities.size(); i++){
@@ -267,35 +276,26 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 */
 	public String getNamespace() {
 		String nameSpace = "";
-		Resource resource = null;
-		ResourceSet resourceSet = new ResourceSetImpl();
-		if (loadedResourcePath != null){
-			URI fileURI = URI.createFileURI(loadedResourcePath);
-			resourceSet = new ResourceSetImpl();
-			resource = resourceSet.getResource(fileURI, true);
-			nameSpace = resource.getContents().get(0).eClass().getEPackage().getNsURI();
+		if (loadedResource != null){
+			nameSpace = loadedResource.getContents().get(0).eClass().getEPackage().getNsURI();
 		}
 		return nameSpace;
 	}
 
 	private void evaluateMetricExtension(IExtensionRegistry registry){
-		Resource resource = null;
-		ResourceSet resourceSet = new ResourceSetImpl();
-		if (loadedResourcePath != null){
-			URI fileURI = URI.createFileURI(loadedResourcePath);
-			resource = resourceSet.getResource(fileURI, true);
-		}
-		metricResultMap = new HashMap<Metric, Map<EObject, Float>>();
-		IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
-		try {
-			for (IConfigurationElement e : metricExtensions) {
-				final Object o = e.createExecutableExtension("class");
-				if (o instanceof Metric) {
-					executeMetricExtension(o, resource);
+		if (loadedResource != null){
+			metricResultMap = new HashMap<Metric, Map<EObject, Float>>();
+			IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
+			try {
+				for (IConfigurationElement e : metricExtensions) {
+					final Object o = e.createExecutableExtension("class");
+					if (o instanceof Metric) {
+						executeMetricExtension(o, loadedResource);
+					}
 				}
+			} catch (CoreException ex) {
+				System.out.println(ex.getMessage());
 			}
-		} catch (CoreException ex) {
-			System.out.println(ex.getMessage());
 		}
 		calculateSmells();
 	}
@@ -345,36 +345,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	private void createQualitySmellMap(){
 		quality_modelSmell = new BasicEList<Quality_ModelSmell_Mapping>();
-		FileReader fileReader = null;
-		try {
-			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/config.cfg");
-			url = FileLocator.toFileURL(url);
-			url = new URL(url.toString().replaceAll(" ", "%20"));
-			File file = new File(url.toURI());
-			assert file.exists();
-			fileReader = new FileReader(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} 
-	    BufferedReader bufferedReader = new BufferedReader(fileReader);
-	    String row = null;
-		try {
-			row = bufferedReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	    while(row != null){
-	    	configStrings.add(row);
-	    	try {
-				row = bufferedReader.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	    }
+		configStrings = openConfig("/configs/config.cfg");
 	    for (int i = 0; i < configStrings.size(); i++){
 	    	String[] temp = configStrings.get(i).split("::");
 	    	if(temp[0].equals("ModelSmell")){
@@ -408,11 +379,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		    	}
 	    	}
 	    }
-	    try {
-			bufferedReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private void createMetrics(IExtensionRegistry registry){
@@ -434,36 +400,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	private void createModelSmellDescription(){
 		modelSmellDescription = new HashMap<ModelSmell, String>();
 		EList<String> descriptions = new BasicEList<String>();
-		FileReader fileReader = null;
-		try {
-			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/descriptions.cfg");
-			url = FileLocator.toFileURL(url);
-			url = new URL(url.toString().replaceAll(" ", "%20"));
-			File file = new File(url.toURI());
-			assert file.exists();
-			fileReader = new FileReader(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-	    BufferedReader bufferedReader = new BufferedReader(fileReader);
-	    String row = null;
-		try {
-			row = bufferedReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	    while(row != null){
-	    	descriptions.add(row);
-	    	try {
-				row = bufferedReader.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	    }
+		descriptions = openConfig("/configs/descriptions.cfg");
 	    for (int i = 0; i < descriptions.size(); i++){
 	    	if (descriptions.get(i).startsWith("#")){
 	    		for (ModelSmell m : modelSmells){
@@ -473,52 +410,12 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	    		}
 	    	}
 	    }
-	    try {
-			bufferedReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private void createModelSmellRolemappingMap(){
 		EList<String> rolemappings = new BasicEList<String>();
+		rolemappings = openConfig("/configs/rolemappings.cfg");
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
-		FileReader fileReader = null;
-		try {
-			URL url = ActivatorImpl.getDefault().getBundle().getEntry("/configs/rolemappings.cfg");
-			url = FileLocator.toFileURL(url);
-			url = new URL(url.toString().replaceAll(" ", "%20"));
-			File file = new File(url.toURI());
-			assert file.exists();
-			fileReader = new FileReader(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-	    BufferedReader bufferedReader = new BufferedReader(fileReader);
-	    String row = null;
-		try {
-			row = bufferedReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	    while(row != null){
-	    	rolemappings.add(row);
-	    	try {
-				row = bufferedReader.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	    }
-//	    for (String s : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().keySet()){
-//	    	System.out.println(s);
-//	    	for (String t : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
-//	    		System.out.println(t);
-//	    	}
-//	    }
 	    for (int i = 0; i < rolemappings.size(); i++){
 	    	for (ModelSmell m : modelSmells){
 	    		if (("#"+m.getName()).equals(rolemappings.get(i))){
@@ -544,11 +441,73 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	    		}
 	    	}
 	    }
+	}
+	
+	private EList<String> openConfig(String path){
+		FileReader fileReader = null;
+		EList<String> stringList= new BasicEList<String>();
+		try {
+			URL url = ActivatorImpl.getDefault().getBundle().getEntry(path);
+			url = FileLocator.toFileURL(url);
+			url = new URL(url.toString().replaceAll(" ", "%20"));
+			File file = new File(url.toURI());
+			assert file.exists();
+			fileReader = new FileReader(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+	    String row = null;
+		try {
+			row = bufferedReader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    while(row != null){
+	    	stringList.add(row);
+	    	try {
+				row = bufferedReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
 	    try {
 			bufferedReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	    return stringList;
+	}
+	//TODO Modell von anderen Dateien unterscheiden
+	private void createResourceObserver(){
+		workspace = ResourcesPlugin.getWorkspace();
+		workspace.addResourceChangeListener(new IResourceChangeListener() {
+			
+			@Override
+			public void resourceChanged(IResourceChangeEvent event) {
+				if (event.getType() == IResourceChangeEvent.POST_CHANGE){
+					IResourceDelta delta = getChangedResource(event.getDelta());
+					IResource resource = delta.getResource();
+					if (!resource.getFileExtension().equals("java")){
+						URI fileURI = URI.createFileURI(resource.getLocation().toOSString());
+						ResourceSet resourceSet = new ResourceSetImpl();
+						loadedResource = resourceSet.getResource(fileURI, true);
+						calculate();
+					}
+				}
+			}
+		});
+	}
+	
+	private IResourceDelta getChangedResource(IResourceDelta delta){
+		while(delta.getAffectedChildren().length > 0){
+			delta = getChangedResource(delta.getAffectedChildren()[0]);
+		}
+		return delta;
 	}
 	
 	private void calculateSmells(){
@@ -630,7 +589,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	public void setQualityScale(Quality quality, Float factor){
 		this.qualityScale.put(quality, factor);
-		inform();
 	}
 	
 	public static ModelSmellModel getMain(){
@@ -719,6 +677,29 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	/**
 	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public Resource getLoadedResource()
+  {
+		return loadedResource;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public void setLoadedResource(Resource newLoadedResource)
+  {
+		Resource oldLoadedResource = loadedResource;
+		loadedResource = newLoadedResource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE, oldLoadedResource, loadedResource));
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -737,8 +718,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				return getModelSmells();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
 				return getMetrics();
-			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE_PATH:
-				return getLoadedResourcePath();
+			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE:
+				return getLoadedResource();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE:
 				return getQualityScale();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__OBSERVER:
@@ -792,8 +773,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				getMetrics().clear();
 				getMetrics().addAll((Collection<? extends Metric>)newValue);
 				return;
-			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE_PATH:
-				setLoadedResourcePath((String)newValue);
+			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE:
+				setLoadedResource((Resource)newValue);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE:
 				setQualityScale((Map<Quality, Float>)newValue);
@@ -846,8 +827,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
 				getMetrics().clear();
 				return;
-			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE_PATH:
-				setLoadedResourcePath(LOADED_RESOURCE_PATH_EDEFAULT);
+			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE:
+				setLoadedResource(LOADED_RESOURCE_EDEFAULT);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE:
 				setQualityScale((Map<Quality, Float>)null);
@@ -894,8 +875,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				return modelSmells != null && !modelSmells.isEmpty();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
 				return metrics != null && !metrics.isEmpty();
-			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE_PATH:
-				return LOADED_RESOURCE_PATH_EDEFAULT == null ? loadedResourcePath != null : !LOADED_RESOURCE_PATH_EDEFAULT.equals(loadedResourcePath);
+			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE:
+				return LOADED_RESOURCE_EDEFAULT == null ? loadedResource != null : !LOADED_RESOURCE_EDEFAULT.equals(loadedResource);
 			case Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE:
 				return qualityScale != null;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__OBSERVER:
@@ -924,8 +905,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (loadedResourcePath: ");
-		result.append(loadedResourcePath);
+		result.append(" (loadedResource: ");
+		result.append(loadedResource);
 		result.append(", qualityScale: ");
 		result.append(qualityScale);
 		result.append(", observer: ");
@@ -938,14 +919,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		result.append(threshold);
 		result.append(')');
 		return result.toString();
-	}
-	
-	public String getLoadedResourcePath() {
-		return loadedResourcePath;
-	}
-	
-	public void setLoadedResourcePath(String loadedResourcePath) {
-		this.loadedResourcePath = loadedResourcePath;
 	}
 
 	public Map<Quality, Float> getQualityScale() {
