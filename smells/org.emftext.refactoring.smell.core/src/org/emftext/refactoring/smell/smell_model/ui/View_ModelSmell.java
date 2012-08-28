@@ -1,11 +1,17 @@
 package org.emftext.refactoring.smell.smell_model.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.emftext.refactoring.smell.smell_model.ModelSmell;
 import org.emftext.refactoring.smell.smell_model.Observer;
+import org.emftext.refactoring.smell.smell_model.Quality;
+import org.emftext.refactoring.smell.smell_model.Quality_ModelSmell_Mapping;
 import org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl;
 
 public class View_ModelSmell implements Observer{
@@ -66,10 +72,53 @@ public class View_ModelSmell implements Observer{
 		this.name = name;
 	}
 
-	//TODO Modelsmell ausblenden, wenn Quality = 0
 	@Override
 	public void update() {
-		
+		Display.getDefault().syncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				updateLabel();
+			}
+		});
+	}
+	
+	private void updateLabel(){
+		Map<ModelSmell, Integer> map = new HashMap<ModelSmell, Integer>();
+		for (Quality_ModelSmell_Mapping qmm : ModelSmellModelImpl.getMain().getQuality_modelSmell()){
+			if (map.get(qmm.getModelSmell()) != null){
+				Integer temp = map.get(qmm.getModelSmell());
+				map.put(qmm.getModelSmell(), temp+1);
+			} else {
+				map.put(qmm.getModelSmell(), 1);
+			}
+		}
+		for (Quality q : ModelSmellModelImpl.getMain().getQualityScale().keySet()){
+			if(ModelSmellModelImpl.getMain().getQualityScale().get(q).equals(0.0f)){
+				for (Quality_ModelSmell_Mapping qmm : ModelSmellModelImpl.getMain().getQuality_modelSmell()){
+					if (qmm.getQuality().equals(q)){
+						if (map.get(qmm.getModelSmell()) != null){
+							Integer temp = map.get(qmm.getModelSmell());
+							map.put(qmm.getModelSmell(), temp-1);
+						}
+						else {
+							map.put(qmm.getModelSmell(), 0);
+						}
+					}
+				}
+			}
+		}
+		for (ModelSmell m : map.keySet()){
+			if(map.get(m) == 0){
+				if (m.getName().equals(name)){
+					modelSmellLabel_Name.setEnabled(false);
+				}
+			} else {
+				if (m.getName().equals(name)){
+					modelSmellLabel_Name.setEnabled(true);
+				}
+			}
+		}
 	}
 
 }

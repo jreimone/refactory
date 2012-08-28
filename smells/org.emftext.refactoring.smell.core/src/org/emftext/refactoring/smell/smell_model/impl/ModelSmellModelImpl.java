@@ -160,8 +160,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 * @ordered
 	 */
     protected static final Resource LOADED_RESOURCE_EDEFAULT = null;
-
-    private EList<String> configStrings = new BasicEList<String>();
 	
 	private Resource loadedResource;
 	
@@ -232,7 +230,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		qualityScale = new HashMap<Quality, Float>();
 		quickfixes = new BasicEList<IMarker>();
-		threshold = 0.3f;
+		setThreshold();
 		createResourceObserver();
 		createQualitySmellMap();
 		createModelSmellDescription();
@@ -294,6 +292,16 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		}
 		return nameSpace;
 	}
+	
+	private void setThreshold(){
+		EList<String> configStrings = openConfig("/configs/config.cfg");
+		for (int i = 0; i < configStrings.size(); i++){
+	    	String[] temp = configStrings.get(i).split("::");
+	    	if(temp[0].equals("threshold")){
+	    		threshold = Float.parseFloat(temp[1]);
+	    	}
+		}
+	}
 
 	private void evaluateMetricExtension(IExtensionRegistry registry){
 		if (loadedResource != null){
@@ -333,6 +341,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	}
 	
 	private void createMetricQualityMapping(){
+		EList<String> configStrings = openConfig("/configs/config.cfg");
 		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		for (int i = 0; i < configStrings.size(); i++){
 			for (Quality q : qualities){
@@ -358,7 +367,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	private void createQualitySmellMap(){
 		quality_modelSmell = new BasicEList<Quality_ModelSmell_Mapping>();
-		configStrings = openConfig("/configs/config.cfg");
+		EList<String> configStrings = openConfig("/configs/config.cfg");
 	    for (int i = 0; i < configStrings.size(); i++){
 	    	String[] temp = configStrings.get(i).split("::");
 	    	if(temp[0].equals("ModelSmell")){
@@ -526,7 +535,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	
 	//TODO Modell von anderen Dateien unterscheiden
 	private void listenerOperation(IResourceChangeEvent event){
-		if (event.getType() == IResourceChangeEvent.POST_CHANGE){
+		if (event.getType() == IResourceChangeEvent.POST_CHANGE && getChangedResource(event.getDelta()).getMarkerDeltas().length <= 0){
 			IResourceDelta delta = getChangedResource(event.getDelta());
 			IResource resource = delta.getResource();
 			if (!resource.getFileExtension().equals("java")){
@@ -538,18 +547,22 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		}
 	}
 	
-	//TODO workspace.addResourceChangeListener(listener); an die richtige Stelle
+	//TODO marker wird nur bei Debug hinzugefügt
 	public void createQuickfix(final String smell, final String location){
 		Path path = new Path(loadedResource.getURI().devicePath());
 		Path workspacePath = new Path(ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
 		IPath newpath = path.makeRelativeTo(workspacePath);
 		final IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(newpath);
+		Map<String, Object> markerAttributes = new HashMap<String, Object>();
+		markerAttributes.put(IMarker.MESSAGE, smell);
+		markerAttributes.put(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+		markerAttributes.put(IMarker.LOCATION, location);
+		markerAttributes.put(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
 		WorkspaceJob job = new WorkspaceJob("addQuickfix") {
 			
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor)
 					throws CoreException {
-				workspace.removeResourceChangeListener(listener);
 				IMarker mk = null;
 				if (resource != null){
 					try {
@@ -561,12 +574,12 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 						mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
 						mk.setAttribute(IMarker.LOCATION, location);
 						mk.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
+						System.out.println("Marker created: " + mk.getAttribute(IMarker.MESSAGE));
 						quickfixes.add(mk);
 					} catch (CoreException e) {
 						e.printStackTrace();
 					}
 				}
-				workspace.addResourceChangeListener(listener);
 				return Status.OK_STATUS;
 			}
 		};
@@ -643,18 +656,11 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	public void setQualityScale(Quality quality, Float factor){
 		this.qualityScale.put(quality, factor);
+		inform();
 	}
 	
 	public static ModelSmellModel getMain(){
 		return main;
-	}
-	
-	public void setConfigStrins(EList<String> configStrings){
-		this.configStrings = configStrings;
-	}
-	
-	public EList<String> getConfigStrings(){
-		return this.configStrings;
 	}
 
 	/**
