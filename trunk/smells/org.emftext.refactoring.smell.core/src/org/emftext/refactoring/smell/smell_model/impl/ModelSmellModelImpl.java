@@ -14,25 +14,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.ISafeRunnable;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SafeRunner;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -183,7 +179,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	
 	private IResourceChangeListener listener;
 	
-	private EList<IMarker> quickfixes;
+	private Map<IMarker, RefactoringQuickfix> markerRefactoring;
 
 	/**
 	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
@@ -229,7 +225,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
 		qualityScale = new HashMap<Quality, Float>();
-		quickfixes = new BasicEList<IMarker>();
+		markerRefactoring = new HashMap<IMarker, RefactoringQuickfix>();
 		setThreshold();
 		createResourceObserver();
 		createQualitySmellMap();
@@ -291,6 +287,10 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			nameSpace = loadedResource.getContents().get(0).eClass().getEPackage().getNsURI();
 		}
 		return nameSpace;
+	}
+	
+	public RefactoringQuickfix getQuickfixForMarker(IMarker mk){
+		return markerRefactoring.get(mk);
 	}
 	
 	private void setThreshold(){
@@ -536,6 +536,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	//TODO Modell von anderen Dateien unterscheiden
 	private void listenerOperation(IResourceChangeEvent event){
 		IResourceDelta delta = event.getDelta();
+		IMarkerDelta[] markerDelta = getChangedResource(delta).getMarkerDeltas();
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE && getChangedResource(delta).getMarkerDeltas().length <= 0){
 			delta = getChangedResource(delta);
 			IResource resource = delta.getResource();
@@ -547,43 +548,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				calculate();
 			}
 		}
-	}
-	
-	//TODO marker wird nur bei Debug hinzugef�gt
-	public void createQuickfix(final String smell, final String location){
-		Path path = new Path(loadedResource.getURI().toPlatformString(true));
-		final IResource resource = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-		Map<String, Object> markerAttributes = new HashMap<String, Object>();
-		markerAttributes.put(IMarker.MESSAGE, smell);
-		markerAttributes.put(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-		markerAttributes.put(IMarker.LOCATION, location);
-		markerAttributes.put(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
-		WorkspaceJob job = new WorkspaceJob("addQuickfix") {
-			
-			@Override
-			public IStatus runInWorkspace(IProgressMonitor monitor)
-					throws CoreException {
-				IMarker mk = null;
-				if (resource != null){
-					try {
-						for (int i = 0; i < quickfixes.size(); i++){
-							quickfixes.get(i).delete();
-						}
-						mk = resource.createMarker(IMarker.PROBLEM);
-						mk.setAttribute(IMarker.MESSAGE, smell);
-						mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-						mk.setAttribute(IMarker.LOCATION, location);
-						mk.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
-						System.out.println("Marker created: " + mk.getAttribute(IMarker.MESSAGE));
-						quickfixes.add(mk);
-					} catch (CoreException e) {
-						e.printStackTrace();
-					}
-				}
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
 	}
 
 	/**
@@ -1067,6 +1031,14 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		threshold = newThreshold;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD, oldThreshold, threshold));
+	}
+
+	public Map<IMarker, RefactoringQuickfix> getMarkerRefactoring() {
+		return markerRefactoring;
+	}
+
+	public void putMarkerRefactoring(IMarker mk, RefactoringQuickfix r) {
+		markerRefactoring.put(mk, r);
 	}
 
 } //MainImpl

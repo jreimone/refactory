@@ -16,5 +16,11 @@
             name="Modelsmells">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="org.emftext.refactoring.smell.smell_model.ui.View_Quickfixer">
+      </markerResolutionGenerator>
+   </extension>
 
 </plugin>

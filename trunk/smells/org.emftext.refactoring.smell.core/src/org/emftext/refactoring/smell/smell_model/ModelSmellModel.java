@@ -4,10 +4,12 @@ package org.emftext.refactoring.smell.smell_model;
 
 import java.util.Map;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.refactoring.smell.smell_model.impl.RefactoringQuickfix;
 
 /**
  * <!-- begin-user-doc -->
@@ -307,8 +309,6 @@ public interface ModelSmellModel extends EObject {
 	void unregister(Observer o);
 	
 	void inform();
-	
-	void createQuickfix(String smell, String location);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -317,5 +317,11 @@ public interface ModelSmellModel extends EObject {
 	 * @generated
 	 */
 	String getNamespace();
+	
+	RefactoringQuickfix getQuickfixForMarker(IMarker mk);
+	
+	Map<IMarker, RefactoringQuickfix> getMarkerRefactoring();
+
+	void putMarkerRefactoring(IMarker mk, RefactoringQuickfix r);
 
 } // ModelSmellModel
