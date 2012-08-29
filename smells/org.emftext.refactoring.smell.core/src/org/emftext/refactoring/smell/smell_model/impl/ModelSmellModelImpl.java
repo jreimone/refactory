@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -536,7 +535,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	//TODO Modell von anderen Dateien unterscheiden
 	private void listenerOperation(IResourceChangeEvent event){
 		IResourceDelta delta = event.getDelta();
-		IMarkerDelta[] markerDelta = getChangedResource(delta).getMarkerDeltas();
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE && getChangedResource(delta).getMarkerDeltas().length <= 0){
 			delta = getChangedResource(delta);
 			IResource resource = delta.getResource();

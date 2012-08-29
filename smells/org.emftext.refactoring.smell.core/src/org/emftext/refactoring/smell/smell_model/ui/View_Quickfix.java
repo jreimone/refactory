@@ -1,7 +1,6 @@
 package org.emftext.refactoring.smell.smell_model.ui;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ui.IMarkerResolution;
 import org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl;
 
