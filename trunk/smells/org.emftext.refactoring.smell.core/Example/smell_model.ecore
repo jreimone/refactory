@@ -118,6 +118,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
   </eClassifiers>
   <eSubpackages name="Test">
-    <eClassifiers xsi:type="ecore:EClass" name="ModelSmellResult2"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelSmellResult"/>
   </eSubpackages>
 </ecore:EPackage>

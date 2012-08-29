@@ -535,11 +535,13 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	
 	//TODO Modell von anderen Dateien unterscheiden
 	private void listenerOperation(IResourceChangeEvent event){
-		if (event.getType() == IResourceChangeEvent.POST_CHANGE && getChangedResource(event.getDelta()).getMarkerDeltas().length <= 0){
-			IResourceDelta delta = getChangedResource(event.getDelta());
+		IResourceDelta delta = event.getDelta();
+		if (event.getType() == IResourceChangeEvent.POST_CHANGE && getChangedResource(delta).getMarkerDeltas().length <= 0){
+			delta = getChangedResource(delta);
 			IResource resource = delta.getResource();
 			if (!resource.getFileExtension().equals("java")){
-				URI fileURI = URI.createFileURI(resource.getLocation().toOSString());
+				IPath location = resource.getFullPath();
+				URI fileURI = URI.createPlatformResourceURI(location.toString(), true);
 				ResourceSet resourceSet = new ResourceSetImpl();
 				loadedResource = resourceSet.getResource(fileURI, true);
 				calculate();
@@ -547,12 +549,10 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		}
 	}
 	
-	//TODO marker wird nur bei Debug hinzugefügt
+	//TODO marker wird nur bei Debug hinzugefï¿½gt
 	public void createQuickfix(final String smell, final String location){
-		Path path = new Path(loadedResource.getURI().devicePath());
-		Path workspacePath = new Path(ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
-		IPath newpath = path.makeRelativeTo(workspacePath);
-		final IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(newpath);
+		Path path = new Path(loadedResource.getURI().toPlatformString(true));
+		final IResource resource = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 		Map<String, Object> markerAttributes = new HashMap<String, Object>();
 		markerAttributes.put(IMarker.MESSAGE, smell);
 		markerAttributes.put(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
