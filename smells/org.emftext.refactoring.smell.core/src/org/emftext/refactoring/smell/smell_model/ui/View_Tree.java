@@ -171,6 +171,7 @@ public class View_Tree implements Observer{
     	}
 	}
 	
+	//TODO Marker erscheinen nur im Debug Modus
 	private void  createMarker(final String smell, final String location, final TreeItem item, final TreeItem parentItem){
 		Path path = new Path(ModelSmellModelImpl.getMain().getLoadedResource().getURI().toPlatformString(true));
 		final IResource resource = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
