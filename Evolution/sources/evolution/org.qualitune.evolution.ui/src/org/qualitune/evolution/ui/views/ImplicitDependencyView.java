@@ -91,15 +91,19 @@ public class ImplicitDependencyView extends ViewPart {
 
 	private class TreeContentProvider implements ITreeContentProvider {
 
+		private Map<EObject, Collection<EObject>> modelChildren;
+		
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		}
 
 		public void dispose() {
 		}
 
+		@SuppressWarnings("unchecked")
 		public Object[] getElements(Object inputElement) {
-			if(modelChildrenMap != null){
-				return modelChildrenMap.keySet().toArray(new EObject[]{});
+			if(inputElement != null){
+				modelChildren = (Map<EObject, Collection<EObject>>) inputElement;
+				return modelChildren.keySet().toArray(new EObject[]{});
 			}
 			return new EObject[]{};
 		}
@@ -107,7 +111,7 @@ public class ImplicitDependencyView extends ViewPart {
 		public Object[] getChildren(Object parentElement) {
 			if(parentElement instanceof EObject){
 				EObject model = (EObject) parentElement;
-				Collection<EObject> children = modelChildrenMap.get(model);
+				Collection<EObject> children = modelChildren.get(model);
 				if(children != null){
 					return children.toArray(new EObject[]{});
 				}
@@ -118,7 +122,7 @@ public class ImplicitDependencyView extends ViewPart {
 		public Object getParent(Object element) {
 			if(element instanceof EObject){
 				EObject model = (EObject) element;
-				Collection<EObject> children = modelChildrenMap.get(model);
+				Collection<EObject> children = modelChildren.get(model);
 				if(children != null){
 					return model;
 				} 
@@ -127,7 +131,10 @@ public class ImplicitDependencyView extends ViewPart {
 		}
 
 		public boolean hasChildren(Object element) {
-			return getChildren(element).length > 0;
+			if(modelChildren.get(element) != null && modelChildren.get(element).size() > 0){
+				return true;
+			}
+			return false;
 		}
 	}
 
