@@ -42,6 +42,10 @@ public class Visualizations {
         
         frame = graphView(createGraph(getResource()));
         frame.setVisible(true);
+        
+        JFrame closeFrame = new JFrame("Close Frame");
+        closeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        closeFrame.setVisible(true);
     }
 	
     private static Resource getResource() {
@@ -84,7 +88,7 @@ public class Visualizations {
         JFrame frame = new JFrame("p r e f u s e  |  a g g r e g a t e d");
         frame.getContentPane().add(ad);
         frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         return frame;
     }
     
@@ -92,7 +96,7 @@ public class Visualizations {
         UILib.setPlatformLookAndFeel();
         RadialGraphView graphView = new RadialGraphView(graph, "name");
         JFrame frame = new JFrame("p r e f u s e  |  r a d i a l g r a p h v i e w");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(graphView);
         frame.pack();
         return frame;
@@ -102,7 +106,7 @@ public class Visualizations {
         UILib.setPlatformLookAndFeel();
         final GraphView view = new GraphView(graph, "name");
         JFrame frame = new JFrame("p r e f u s e  |  g r a p h v i e w");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(view);
         frame.pack();
         frame.addWindowListener(new WindowAdapter() {
