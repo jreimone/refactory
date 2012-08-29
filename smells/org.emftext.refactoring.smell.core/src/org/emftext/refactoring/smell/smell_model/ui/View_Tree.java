@@ -3,8 +3,8 @@ package org.emftext.refactoring.smell.smell_model.ui;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -151,12 +151,11 @@ public class View_Tree implements Observer{
 	}
 	
 	private void openResource(){
-		String path = resource.getURI().devicePath();
-    	path = path.replaceAll("%20", " ");
-    	IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(path));
+		String path = resource.getURI().toPlatformString(true);
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
     	IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
     	try {
-    		IDE.openEditorOnFileStore( page, fileStore );
+    		IDE.openEditor(page, file, true);
     	} catch ( PartInitException e ) {
     		e.printStackTrace();
     	}
