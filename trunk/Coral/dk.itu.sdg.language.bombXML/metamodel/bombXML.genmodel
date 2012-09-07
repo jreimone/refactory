@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/dk.itu.sdg.language.bombXML/src-gen"
+    modelPluginID="dk.itu.sdg.language.bombXML" modelName="bombXML" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>bombXML.text.ecore</foreignModel>
+  <genPackages prefix="BombXML" basePackage="dk.itu.sdg.language" disposableProviderFactory="true"
+      ecorePackage="bombXML.text.ecore#/">
+    <genClasses ecoreClass="bombXML.text.ecore#//Document">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//Document/doctype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//Document/xmltype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//Document/content"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//DocType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//DocType/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//XmlType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//XmlType/parameters"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="bombXML.text.ecore#//InnerNode"/>
+    <genClasses image="false" ecoreClass="bombXML.text.ecore#//Tag"/>
+    <genClasses ecoreClass="bombXML.text.ecore#//Word">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//Word/text"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//Content">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//Content/content"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//LineTag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//LineTag/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//LineTag/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//BlockTag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//BlockTag/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//BlockTag/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//BlockTag/content"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//CDataTag">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bombXML.text.ecore#//CDataTag/content"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="bombXML.text.ecore#//Parameter"/>
+    <genClasses ecoreClass="bombXML.text.ecore#//StringValParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//StringValParameter/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//StringValParameter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//IDValParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//IDValParameter/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//IDValParameter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//IDParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//IDParameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="bombXML.text.ecore#//StringParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bombXML.text.ecore#//StringParameter/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
