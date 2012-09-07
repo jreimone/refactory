@@ -1,0 +1,14 @@
+package dk.itu.sdg.language.coral.checker;
+
+public enum VisualCoralRelationTypes {
+	
+	DIRECTED_FIXED,
+	DIRECTED_STRINGTRANSFORM,
+	DIRECTED_FREE,
+	DIRECTED_DSR,
+	
+	UNDIRECTED_FIXED,
+	UNDIRECTED_STRINGTRANSFORM,
+	UNDIRECTED_FREE,
+	UNDIRECTED_DSR;
+}

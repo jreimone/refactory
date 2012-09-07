@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+         <menu
+               icon="icons/coral_16.png"
+               label="Coral">
+            <command 
+            	  commandId="dk.itu.sdg.language.coral.checker.checkCommand"
+                  label="Check"
+                  style="push">
+            </command>
+            
+			<command 
+            	  commandId="dk.itu.sdg.language.coral.checker.inferCommand"
+                  label="Infer"
+                  style="push">
+            </command>
+            
+            <command 
+            	  commandId="dk.itu.sdg.language.coral.checker.uncheckCommand"
+                  label="Uncheck"
+                  style="push">
+            </command>
+			<command 
+            	  commandId="dk.itu.sdg.language.coral.checker.preProcessXMLCommand"
+                  label="XML Pre-Processor"
+                  style="push">
+            </command>
+			<command 
+            	  commandId="dk.itu.sdg.language.coral.checker.postProcessXMLCommand"
+                  label="XML Post-Processor"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+	
+	<menuContribution 
+		locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+        <menu
+               icon="icons/coral_16.png"
+               label="Coral">
+	        <command 
+	        	commandId="dk.itu.sdg.language.coral.checker.checkCommand"
+	            id="coral"
+	            label="Check"
+	            style="push">
+	        </command>
+	        <command 
+	        	commandId="dk.itu.sdg.language.coral.checker.uncheckCommand"
+	            id="coralUncheck"
+	            label="Uncheck"
+	            style="push">
+	        </command>
+	        <command 
+	        	commandId="dk.itu.sdg.language.coral.checker.inferCommand"
+	            id="coralInfer"
+	            label="Infer"
+	            style="push">
+	        </command>
+			<command 
+	        	commandId="dk.itu.sdg.language.coral.checker.preProcessXMLCommand"
+	            id="coralXMLPreProc"
+	            label="XML PreProc"
+	            style="push">
+	        </command>
+			<command 
+	        	commandId="dk.itu.sdg.language.coral.checker.postProcessXMLCommand"
+	            id="coralXMLPostProc"
+	            label="XML PostProc"
+	            style="push">
+	        </command>
+        </menu>
+    </menuContribution>
+    
+    <menuContribution
+          allPopups="true"
+          class="dk.itu.sdg.language.coral.checker.ui.MarkerContributionFactory"
+          locationURI="popup:#AbstractTextEditorRulerContext?after=additions">
+  		<dynamic
+			class="dk.itu.sdg.language.coral.checker.ui.MarkerMenuContribution"
+			id="dk.itu.sdg.language.coral.checker.ui.MarkerMenuContribution">
+		</dynamic>
+	</menuContribution>
+
+<!-- TODO: die locationURI finden, so dass es die goto marker auch für den html editor funktionieren 
+       <menuContribution
+             allPopups="true"
+             class="dk.itu.sdg.language.coral.checker.ui.MarkerContributionFactory"
+             locationURI="popup:#StructuredTextEditor.RulerContext?after=additions">
+  		<dynamic
+			class="dk.itu.sdg.language.coral.checker.ui.MarkerMenuContribution"
+			id="dk.itu.sdg.language.coral.checker.ui.MarkerMenuContribution">
+		</dynamic>
+	</menuContribution>
+-->
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+      <command
+            id="dk.itu.sdg.language.coral.checker.checkCommand"
+            name="check">
+      </command>
+      
+      <command
+            id="dk.itu.sdg.language.coral.checker.uncheckCommand"
+            name="uncheck">
+      </command>
+      
+      <command
+            id="dk.itu.sdg.language.coral.checker.inferCommand"
+            name="infer">
+      </command>
+      <command
+            id="dk.itu.sdg.language.coral.checker.preProcessXMLCommand"
+            name="xmlpreproc">
+      </command>
+      <command
+            id="dk.itu.sdg.language.coral.checker.postProcessXMLCommand"
+            name="xmlpostproc">
+      </command>            
+   </extension>
+   <extension
+         id="Coral_Operations"
+         name="Coral Operations"
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="dk.itu.sdg.language.coral.checker.handlers.Check"
+            commandId="dk.itu.sdg.language.coral.checker.checkCommand">
+      </handler>
+      <handler
+            class="dk.itu.sdg.language.coral.checker.handlers.Infer"
+            commandId="dk.itu.sdg.language.coral.checker.inferCommand">
+      </handler>
+      <handler
+            class="dk.itu.sdg.language.coral.checker.handlers.Uncheck"
+            commandId="dk.itu.sdg.language.coral.checker.uncheckCommand">
+      </handler>
+      <handler
+            class="dk.itu.sdg.language.coral.checker.handlers.XMLPreProcess"
+            commandId="dk.itu.sdg.language.coral.checker.preProcessXMLCommand">
+      </handler>
+     <handler
+            class="dk.itu.sdg.language.coral.checker.handlers.XMLPostProcess"
+            commandId="dk.itu.sdg.language.coral.checker.postProcessXMLCommand">
+      </handler>             
+   </extension>
+ 
+ 
+<!-- MARKERS -->
+   <extension id="directed_fixed_key" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="directed_fixed_ref" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="directed_free_key" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="directed_free_ref" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="directed_strtr_key" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="directed_strtr_ref" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="directed_dsr_key" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="directed_dsr_ref" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="undirected_strtr" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="undirected_free" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="undirected_fixed" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="undirected_dsr" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+   <extension id="broken_relation" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.textmarker"/>
+		<super type="org.eclipse.core.resources.problemmarker"/>
+   		<persistent value="false"/>
+   </extension>
+   
+<!-- ANNOTATION TYPES -->
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+               markerType="dk.itu.sdg.language.coral.checker.directed_fixed_key"
+               name="directed_fixed_key_annotation"
+               super="org.eclipse.ui.workbench.texteditor.info">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="directed_fixed_ref_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.directed_fixed_ref">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+      <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="directed_free_key_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.directed_free_key">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="directed_free_ref_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.directed_free_ref">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+      <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="directed_strtr_key_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.directed_strtr_key">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="directed_strtr_ref_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.directed_strtr_ref">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+      <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="directed_dsr_key_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.directed_dsr_key">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="directed_dsr_ref_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.directed_dsr_ref">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+      <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="undirected_strtr_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.undirected_strtr">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="undirected_free_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.undirected_free">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+      <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="undirected_fixed_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.undirected_fixed">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="undirected_dsr_annotation"
+             super="org.eclipse.ui.workbench.texteditor.info"
+             markerType="dk.itu.sdg.language.coral.checker.undirected_dsr">
+             <!--markerSeverity="0"-->
+         </type>
+   </extension>
+   
+     <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+         <type
+             name="broken_relation_annotation"
+             super="org.eclipse.ui.workbench.texteditor.error"
+             markerType="dk.itu.sdg.language.coral.checker.broken_relation">
+             <!--markerSeverity="2"-->
+         </type>
+   </extension>
+   
+<!-- ANNOTATION SPEC -->  
+    
+   <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="directed_fixed_key_annotation" 
+			label="Directed Fixed Relation Key" 
+			icon="icons/directed_key_fixed.png"
+			symbolicIcon="info" 
+			textPreferenceKey="directed_key_fixed.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="directed_key_fixed.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="directed_key_fixed.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="directed_key_fixed.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="directed_key_fixed.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="directed_key_fixed.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+    </extension>
+
+   <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="directed_fixed_ref_annotation" 
+			label="Directed Fixed Relation Reference" 
+			icon="icons/directed_ref_fixed.png"
+			symbolicIcon="info"
+			textPreferenceKey="directed_fixed_ref.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="directed_fixed_ref.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="directed_fixed_ref.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="directed_fixed_ref.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="directed_fixed_ref.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="directed_fixed_ref.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+    </extension>
+    
+   <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="directed_free_key_annotation" 
+			label="Directed Free Relation Key" 
+			icon="icons/directed_key_free.png"
+			symbolicIcon="info"
+			textPreferenceKey="directed_key_free.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="directed_key_free.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="directed_key_free.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="directed_key_free.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="directed_key_free.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="directed_key_free.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+    </extension>    
+
+   <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="directed_free_ref_annotation" 
+			label="Directed Free Relation Reference" 
+			icon="icons/directed_ref_free.png"
+			symbolicIcon="info" 
+			textPreferenceKey="directed_ref_free.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="directed_ref_free.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="directed_ref_free.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="directed_ref_free.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="directed_ref_free.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="directed_ref_free.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+    </extension> 
+    
+    <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="directed_strtr_key_annotation" 
+			label="Directed String Transformation Relation Key" 
+			icon="icons/directed_key_strtr.png"
+			symbolicIcon="info" 
+			textPreferenceKey="directed_key_strtr.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="directed_key_strtr.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="directed_key_strtr.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="directed_key_strtr.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="directed_key_strtr.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="directed_key_strtr.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+     </extension>
+
+     <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="directed_strtr_ref_annotation" 
+			label="Directed String Transformation Relation Reference" 
+			icon="icons/directed_ref_strtr.png"
+			symbolicIcon="info" 
+			textPreferenceKey="directed_ref_strtr.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="directed_ref_strtr.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="directed_ref_strtr.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="directed_ref_strtr.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="directed_ref_strtr.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="directed_ref_strtr.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+      </extension>
+
+     <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="directed_dsr_key_annotation" 
+			label="Directed Domain-Specific Relation Key" 
+			icon="icons/directed_key_dsr.png"
+			symbolicIcon="info" 
+			textPreferenceKey="directed_key_dsr.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="directed_key_dsr.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="directed_key_dsr.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="directed_key_dsr.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="directed_key_dsr.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="directed_key_dsr.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+      </extension>
+          
+     <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="directed_dsr_ref_annotation" 
+			label="Directed Domain-Specific Relation Reference" 
+			icon="icons/directed_ref_dsr.png"
+			symbolicIcon="info" 
+			textPreferenceKey="directed_ref_dsr.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="directed_ref_dsr.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="directed_ref_dsr.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="directed_ref_dsr.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="directed_ref_dsr.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="directed_ref_dsr.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+     </extension>
+  
+     <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="undirected_strtr_annotation" 
+			label="Undirected String-Transformation Relation" 
+			icon="icons/undirected_strtr.png"
+			symbolicIcon="info" 
+			textPreferenceKey="undirected_strtr.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="undirected_strtr.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="undirected_strtr.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="undirected_strtr.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="undirected_strtr.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="undirected_strtr.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+     </extension>
+          
+     <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="undirected_free_annotation" 
+			label="Undirected Free Relation" 
+			icon="icons/undirected_free.png"
+			symbolicIcon="info" 
+			textPreferenceKey="undirected_free.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="undirected_free.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="undirected_free.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="undirected_free.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="undirected_free.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="undirected_free.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+     </extension>
+
+     <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="undirected_fixed_annotation" 
+			label="Undirected Fixed Relation" 
+			icon="icons/undirected_fixed.png"
+			symbolicIcon="info" 
+			textPreferenceKey="undirected_fixed.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="undirected_fixed.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="undirected_fixed.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="undirected_fixed.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="undirected_fixed.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="undirected_fixed.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+     </extension>
+
+     <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="undirected_dsr_annotation" 
+			label="Undirected Domain-Specific Relation" 
+			icon="icons/undirected_dsr.png"
+			symbolicIcon="info" 
+			textPreferenceKey="undirected_dsr.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="undirected_dsr.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="undirected_dsr.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="undirected_dsr.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="undirected_dsr.highlight.color" 
+			colorPreferenceValue="0,255,0" 
+			presentationLayer="4"  
+			textStylePreferenceKey="undirected_dsr.highlight.text.style" 
+			textStylePreferenceValue="DASHED_BOX">
+        </specification >
+     </extension>
+    
+     <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+         <specification
+         	annotationType="broken_relation_annotation" 
+			label="Broken Relation" 
+			icon="icons/broken_rel.png"
+			symbolicIcon="info" 
+			textPreferenceKey="broken_rel.highlight.text" 
+			textPreferenceValue="true" 
+			highlightPreferenceKey="broken_rel.highlight.background" 
+			highlightPreferenceValue="true" 
+			contributesToHeader="false" 
+			overviewRulerPreferenceKey="broken_rel.highlight.rulers.overview" 
+			overviewRulerPreferenceValue="true" 
+			verticalRulerPreferenceKey="broken_rel.highlight.rulers.vertical" 
+			verticalRulerPreferenceValue="true" 
+			colorPreferenceKey="broken_rel.highlight.color" 
+			colorPreferenceValue="255,0,0" 
+			presentationLayer="5"  
+			textStylePreferenceKey="broken_rel.highlight.text.style" 
+			textStylePreferenceValue="SQUIGGLES">
+        </specification >
+     </extension>
+    
+	<extension
+         point="dk.itu.sdg.language.coral.resource.coral.default_load_options">
+      <provider
+            class="dk.itu.sdg.language.coral.resource.coral.util.InterpreterProvider"
+            id="dk.itu.sdg.language.coral.resource.coral.util.interpreter.provider">
+      </provider>
+   </extension>
+</plugin>
