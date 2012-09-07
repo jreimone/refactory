@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/dk.itu.sdg.language.coral/src-gen"
+    modelPluginID="dk.itu.sdg.language.coral" modelName="coral" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" usedGenPackages="platform:/plugin/org.emftext.commons.jdt/metamodel/jdt.genmodel#//jdt">
+  <foreignModel>coral.text.ecore</foreignModel>
+  <genPackages prefix="Coral" basePackage="dk.itu.sdg.language" disposableProviderFactory="true"
+      ecorePackage="coral.text.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="coral.text.ecore#//RelationType">
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//RelationType/free"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//RelationType/fixed"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//RelationType/transform"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//RelationType/dsr"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="coral.text.ecore#//SecondaryRelationType">
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//SecondaryRelationType/info"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//SecondaryRelationType/warning"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//SecondaryRelationType/error"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="coral.text.ecore#//Language">
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//Language/java"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//Language/html"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//Language/csharp"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//Language/properties"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//Language/xml"/>
+      <genEnumLiterals ecoreEnumLiteral="coral.text.ecore#//Language/hbmxml"/>
+    </genEnums>
+    <genClasses ecoreClass="coral.text.ecore#//Coral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//Coral/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference coral.text.ecore#//Coral/publicTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference coral.text.ecore#//Coral/relations"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//LanguageTypes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//LanguageTypes/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//LanguageTypes/suffix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference coral.text.ecore#//LanguageTypes/types"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//PublicType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//PublicType/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference coral.text.ecore#//PublicType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//Relation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//Relation/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference coral.text.ecore#//Relation/myErrorType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//Relation/interpreted"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//DirectedRelation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference coral.text.ecore#//DirectedRelation/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//DirectedRelation/keyLanguage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference coral.text.ecore#//DirectedRelation/ref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//DirectedRelation/refLanguage"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//UndirectedRelation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference coral.text.ecore#//UndirectedRelation/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//UndirectedRelation/leftLanguage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference coral.text.ecore#//UndirectedRelation/right"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//UndirectedRelation/rightLanguage"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//FixedRelationDirected">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FixedRelationDirected/keyAttributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FixedRelationDirected/refAttributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FixedRelationDirected/methodName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FixedRelationDirected/implementation"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//FreeRelationDirected">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FreeRelationDirected/methodName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FreeRelationDirected/implementation"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//StringTransformRelationDirected">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//StringTransformRelationDirected/keyAttributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//StringTransformRelationDirected/refAttributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//StringTransformRelationDirected/methodName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//StringTransformRelationDirected/implementation"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//DSRelationDirected">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//DSRelationDirected/methodName"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//FixedRelation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FixedRelation/leftAttributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FixedRelation/rightAttributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FixedRelation/methodName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FixedRelation/implementation"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//FreeRelation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FreeRelation/methodName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//FreeRelation/implementation"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//StringTransformRelation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//StringTransformRelation/leftAttributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//StringTransformRelation/rightAttributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//StringTransformRelation/methodName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//StringTransformRelation/implementation"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//DSRelation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//DSRelation/methodName"/>
+    </genClasses>
+    <genClasses ecoreClass="coral.text.ecore#//ErrorType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//ErrorType/secondType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coral.text.ecore#//ErrorType/message"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
