@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="dk.itu.sdg.language.hbm.xml.mopp.HbmXmlMetaInformation" id="dk.itu.sdg.language.hbm.xml.mopp.HbmXmlMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hbm.xml.resource.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hbm.xml.resource.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hbm.xml.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hbm.xml.resource.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hbm.xml.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hbm.xml.resource.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hbm.xml.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hbm.xml.resource.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hbm.xml.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hbm.xml.resource.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hbm.xml.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hbm.xml.resource.nature" name="hbm.xml nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="dk.itu.sdg.language.hbm.xml.mopp.HbmXmlNature">
+			</run>
+		</runtime>
+		<builder id="dk.itu.sdg.language.hbm.xml.resource.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="dk.itu.sdg.language.hbm.xml.resource.builder" name="hbm.xml Builder">
+		<builder hasNature="true">
+			<run class="dk.itu.sdg.language.hbm.xml.mopp.HbmXmlBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="dk.itu.sdg.language.hbm.xml.resource.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="dk.itu.sdg.language.bombXML.resource.xml.additional_extension_parser">
+		<parser class="dk.itu.sdg.language.hbm.xml.mopp.HbmXmlResourceFactory" type="hbm">
+		</parser>
+	</extension>
+	
+</plugin>
