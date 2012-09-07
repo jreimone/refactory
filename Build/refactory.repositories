@@ -35,9 +35,9 @@ git:https://github.com/DevBoost/EMFText.git!Core/Features/
 git:https://github.com/DevBoost/EMFText.git!Core/License/
 
 // JaMoPP
-//git:https://github.com/DevBoost/JaMoPP.git!Core/
-//git:https://github.com/DevBoost/JaMoPP.git!Eclipse-Integration/
-//git:https://github.com/DevBoost/JaMoPP.git!Features/
+git:https://github.com/DevBoost/JaMoPP.git!Core/
+git:https://github.com/DevBoost/JaMoPP.git!Eclipse-Integration/
+git:https://github.com/DevBoost/JaMoPP.git!Features/
 
 // eJava
 git:https://github.com/DevBoost/EMFTools.git!eJava/
