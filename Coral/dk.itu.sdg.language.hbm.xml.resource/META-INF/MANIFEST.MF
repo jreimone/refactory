@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: hbm.xml
+Bundle-SymbolicName: dk.itu.sdg.language.hbm.xml.resource;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime,
+  org.eclipse.emf,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation,
+  org.emftext.access;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
+  dk.itu.sdg.language.hbm.xml
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: dk.itu.sdg.language.hbm.xml,
+  dk.itu.sdg.language.hbm.xml.analysis,
+  dk.itu.sdg.language.hbm.xml.mopp,
+  dk.itu.sdg.language.hbm.xml.debug,
+  dk.itu.sdg.language.hbm.xml.launch,
+  dk.itu.sdg.language.hbm.xml.grammar,
+  dk.itu.sdg.language.hbm.xml.util
+Bundle-Activator: dk.itu.sdg.language.hbm.xml.mopp.HbmXmlPlugin
+Import-Package: dk.itu.sdg.language.bombXML.impl,
+ dk.itu.sdg.language.bombXML.resource.xml.mopp,
+ org.eclipse.ui.plugin
