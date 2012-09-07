@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="dk.itu.sdg.language.coral.resource.coral.ui.CoralUIMetaInformation" id="dk.itu.sdg.language.coral.resource.coral.ui.CoralUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="dk.itu.sdg.language.coral.resource.coral.ui.CoralEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="coral" icon="icons/coral_16.png" id="dk.itu.sdg.language.coral.resource.coral.ui.CoralEditor" name="Coral Editor">
+			<contentTypeBinding contentTypeId="dk.itu.sdg.language.coral.resource.coral">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="dk.itu.sdg.language.coral.resource.coral.ui.CoralPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Coral Text Editor" id="dk.itu.sdg.language.coral.resource.coral.ui.CoralPreferencePage" class="dk.itu.sdg.language.coral.resource.coral.ui.CoralPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="dk.itu.sdg.language.coral.resource.coral.ui.CoralSyntaxColoringPreferencePage" class="dk.itu.sdg.language.coral.resource.coral.ui.CoralSyntaxColoringPreferencePage" category="dk.itu.sdg.language.coral.resource.coral.ui.CoralPreferencePage">
+		</page>
+		<page name="Brackets" id="dk.itu.sdg.language.coral.resource.coral.ui.CoralBracketPreferencePage" class="dk.itu.sdg.language.coral.resource.coral.ui.CoralBracketPreferencePage" category="dk.itu.sdg.language.coral.resource.coral.ui.CoralPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="dk.itu.sdg.language.coral.resource.coral.ui.CoralNewFileWizard" id="dk.itu.sdg.language.coral.resource.coral.ui.CoralNewFileWizard" name="EMFText .coral file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="dk.itu.sdg.language.coral.resource.coral.ui.CoralNewProjectWizard" id="dk.itu.sdg.language.coral.resource.coral.ui.CoralNewProjectWizard" name="EMFText coral project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="dk.itu.sdg.language.coral.resource.coral.ui.CoralMarkerResolutionGenerator" markerType="dk.itu.sdg.language.coral.resource.coral.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="dk.itu.sdg.language.coral.resource.coral.ui.CoralAnnotationModelFactory" extensions="coral">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="dk.itu.sdg.language.coral.resource.coral" name=".coral File" base-type="org.eclipse.core.runtime.text" file-extensions="coral">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="coral" id="dk.itu.sdg.language.coral.resource.coral.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="dk.itu.sdg.language.coral.resource.coral.ui.occurences">
+		</type>
+		<type name="dk.itu.sdg.language.coral.resource.coral.ui.occurences.declaration" super="dk.itu.sdg.language.coral.resource.coral.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="dk.itu.sdg.language.coral.resource.coral.ui.occurences" label="Occurrences (in .coral files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="coral.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="coral.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="coral.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="coral.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="coral.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="coral.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="coral.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="coral.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="coral.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="dk.itu.sdg.language.coral.resource.coral.ui.occurences.declaration" label="Declarations (in .coral files)" textPreferenceKey="coral.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="coral.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="coral.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="coral.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="coral.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="coral.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="dk.itu.sdg.language.coral.resource.coral.ui.launchConfigurationType" id="dk.itu.sdg.language.coral.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="dk.itu.sdg.language.coral.resource.coral.ui.launchConfigurationType" class="dk.itu.sdg.language.coral.resource.coral.ui.launch.CoralLaunchConfigurationTabGroup" id="dk.itu.sdg.language.coral.launchConfigurationTabGroup" helpContextId="dk.itu.sdg.language.coral.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug coral model.">
+			</launchMode>
+			<launchMode mode="run" description="Run coral model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="coral Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="dk.itu.sdg.language.coral.launch" modes="run,debug" class="dk.itu.sdg.language.coral.resource.coral.ui.launch.CoralLaunchShortcut" description="Launch a coral model" id="dk.itu.sdg.language.coral.launchShortcut">
+			<description description="Run coral model" mode="run">
+			</description>
+			<description description="Debug coral model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="dk.itu.sdg.language.coral.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="dk.itu.sdg.language.coral.resource.coral.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="dk.itu.sdg.language.coral.PropertyTester" type="java.lang.Object" namespace="dk.itu.sdg.language.coral" properties="isLaunchable" class="dk.itu.sdg.language.coral.resource.coral.ui.CoralPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="dk.itu.sdg.language.coral.resource.coral.ui.debug.lineBreakpoint" markerType="dk.itu.sdg.language.coral.resource.coral.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="dk.itu.sdg.language.coral.resource.coral.ui.debug.lineBreakpoint" label="Breakpoints (in .coral files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="dk.itu.sdg.language.coral.resource.coral.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="dk.itu.sdg.language.coral.resource.coral.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="dk.itu.sdg.language.coral.resource.coral.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="dk.itu.sdg.language.coral.resource.coral.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="dk.itu.sdg.language.coral.resource.coral.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="dk.itu.sdg.language.coral.resource.coral.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="dk.itu.sdg.language.coral.resource.coral.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="dk.itu.sdg.language.coral.resource.coral.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="dk.itu.sdg.language.coral.resource.coral.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="dk.itu.sdg.language.coral.resource.coral.ui.CoralEditor" class="dk.itu.sdg.language.coral.resource.coral.ui.debug.CoralAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="dk.itu.sdg.language.coral.resource.coral.debug.CoralDebugVariable" class="dk.itu.sdg.language.coral.resource.coral.ui.debug.CoralAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="dk.itu.sdg.language.coral.resource.coral.debug.CoralDebugVariable" class="dk.itu.sdg.language.coral.resource.coral.ui.debug.CoralAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="dk.itu.sdg.language.coral.resource.coral.ui.RulerPopupActions" targetID="dk.itu.sdg.language.coral.resource.coral.EditorRuler">
+			<action id="dk.itu.sdg.language.coral.resource.coral.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="dk.itu.sdg.language.coral.resource.coral.ui.CoralEditor" id="dk.itu.sdg.language.coral.resource.coral.ui.BreakpointRulerActions">
+			<action id="dk.itu.sdg.language.coral.resource.coral.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="dk.itu.sdg.language.coral.resource.coral.debugModel" class="dk.itu.sdg.language.coral.resource.coral.ui.debug.CoralDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+		
+	<!-- Coral Relation Viewer-->
+	<extension	point="org.eclipse.ui.views">
+      <category	name="Coral Category" id="Coral_View">
+      </category>
+      <view
+            name="Coral Relation View"
+            icon="icons/coral_16.png"
+            category="Coral_View"
+            class="dk.itu.sdg.language.coral.resource.coral.ui.CoralRelationView"
+            id="dk.itu.sdg.language.coral.resource.coral.ui.CoralRelationView">
+      </view>
+   </extension>
+   <extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="dk.itu.sdg.language.coral.resource.coral.ui.CoralRelationView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+	
+</plugin>

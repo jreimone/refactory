@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: coral
+Bundle-SymbolicName: dk.itu.sdg.language.coral.resource.coral;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.change,
+ org.eclipse.emf.validation,
+ org.emftext.access;resolution:=optional,
+ org.eclipse.debug.core,
+ org.emftext.commons.antlr3_4_0,
+ dk.itu.sdg.language.coral,
+ org.emftext.commons.jdt,
+ dk.itu.sdg.language.coral.checker;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: dk.itu.sdg.language.coral.resource.coral,
+ dk.itu.sdg.language.coral.resource.coral.analysis,
+ dk.itu.sdg.language.coral.resource.coral.debug,
+ dk.itu.sdg.language.coral.resource.coral.grammar,
+ dk.itu.sdg.language.coral.resource.coral.launch,
+ dk.itu.sdg.language.coral.resource.coral.mopp,
+ dk.itu.sdg.language.coral.resource.coral.util
+Bundle-Activator: dk.itu.sdg.language.coral.resource.coral.mopp.CoralPlugin
+Import-Package: dk.itu.sdg.language.coral.generators
