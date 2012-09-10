@@ -72,6 +72,26 @@ public abstract class GenerationUtil {
 		}
 		return rootClasses;
 	}
+	
+	/**
+	 * Returns all concrete classifiers in the given {@link GenModel model}.
+	 * @param model
+	 * @return
+	 */
+	public static List<GenClass> getConcreteClasses(GenModel model){
+		List<GenClass> classes = new ArrayList<GenClass>();
+		List<GenPackage> genPackages = model.getGenPackages();
+		for (GenPackage genPackage : genPackages) {
+			List<GenClass> genClasses = genPackage.getGenClasses();
+			for (GenClass genClass : genClasses) {
+				EClass ecoreClass = genClass.getEcoreClass();
+				if(!ecoreClass.isAbstract() && !ecoreClass.isInterface()){
+					classes.add(genClass);
+				}
+			}
+		}
+		return classes;
+	}
 
 	/**
 	 * Determines the {@link JavaResource} from the given <code>genClass</code>.
@@ -97,5 +117,15 @@ public abstract class GenerationUtil {
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		JavaResource resource = (JavaResource) rs.getResource(uri, true);
 		return resource;
+	}
+
+	/**
+	 * Returns the given <code>string</code> with the first letter uppercase.
+	 * @param genPackage
+	 */
+	public static String uppercaseFirstLetter(String string) {
+		char[] stringArray = string.toCharArray();
+		stringArray[0] = Character.toUpperCase(stringArray[0]);
+		return new String(stringArray);
 	}
 }
