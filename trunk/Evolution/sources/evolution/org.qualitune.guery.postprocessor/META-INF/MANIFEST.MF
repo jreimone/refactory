@@ -8,6 +8,7 @@ Bundle-Vendor: www.qualitune.org
 Require-Bundle: org.eclipse.core.runtime,
  org.qualitune.guery.resource.guery,
  org.eclipse.emf.ecore,
- org.qualitune.guery
+ org.qualitune.guery,
+ org.qualitune.graph
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
