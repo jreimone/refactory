@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Graph
+Bundle-SymbolicName: org.qualitune.ecore.graph
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.qualitune.ecore.graph.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ org.qualitune.guery,
+ org.qualitune.graph
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.qualitune.ecore.graph,
+ org.qualitune.ecore.graph.impl
