@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Visualization
+Bundle-SymbolicName: org.qualitune.ecore.graph.visualization;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.qualitune.ecore.graph.visualization.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.qualitune.ecore.graph,
+ prefuse,
+ org.eclipse.emf.edit,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.emf.ecore.edit,
+ org.qualitune.guery,
+ org.qualitune.graph
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

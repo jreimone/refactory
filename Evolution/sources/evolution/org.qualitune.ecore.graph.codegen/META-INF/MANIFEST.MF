@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Codegen
+Bundle-SymbolicName: org.qualitune.ecore.graph.codegen;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.qualitune.ecore.graph.codegen.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.ui,
+ org.emftext.language.manifest,
+ org.emftext.language.java,
+ org.qualitune.ecore.graph,
+ org.eclipse.core.resources
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.qualitune.ecore.graph.codegen
