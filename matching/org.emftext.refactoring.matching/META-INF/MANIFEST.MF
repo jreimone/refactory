@@ -13,4 +13,5 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.junit4,
  org.qualitune.evolution.guery,
  org.qualitune.evolution.guery.registry,
- org.emftext.language.pl0
+ org.emftext.language.pl0,
+ org.qualitune.graph
