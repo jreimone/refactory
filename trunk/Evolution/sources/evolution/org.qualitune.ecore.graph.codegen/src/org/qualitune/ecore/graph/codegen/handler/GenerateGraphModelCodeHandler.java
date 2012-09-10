@@ -29,7 +29,8 @@ public class GenerateGraphModelCodeHandler extends AbstractHandler {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					try {
-						monitor.beginTask("Generation starts", 5);
+						// TODO adjust step count
+						monitor.beginTask("", 5);
 						GraphModelCodeGenerator generator = new GraphModelCodeGenerator();
 						
 						monitor.subTask("Prepare genmodel for " + genModel.getModelName());
