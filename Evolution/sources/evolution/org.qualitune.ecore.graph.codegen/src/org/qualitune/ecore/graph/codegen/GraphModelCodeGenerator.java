@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
+import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -19,6 +20,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.imports.ImportsPackage;
+import org.emftext.language.java.members.ClassMethod;
+import org.emftext.language.java.members.MembersPackage;
+import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.manifest.Manifest;
 import org.emftext.language.manifest.ManifestFactory;
 import org.emftext.language.manifest.RequireBundleDescription;
@@ -77,7 +85,41 @@ public class GraphModelCodeGenerator {
 			return;
 		}
 		modifyManifest(project);
-		
+		modifyRootGraphClass(model);
+	}
+
+	private void modifyRootGraphClass(GenModel model) {
+		List<GenClass> rootClasses = GenerationUtil.getRootClasses(model);
+		ResourceSet rs = new ResourceSetImpl();
+		for (GenClass genClass : rootClasses) {
+			String id = genClass.getClassifierID();
+			JavaResource resource = GenerationUtil.getJavaResource(rs, genClass);
+			if(resource == null){
+				continue;
+			}
+			CompilationUnit cu = (CompilationUnit) resource.getContents().get(0);
+			String importString = "import org.qualitune.ecore.graph.GObject;";
+			ClassifierImport cimport = (ClassifierImport) GenerationUtil.parsePartialFragment(importString, ImportsPackage.Literals.CLASSIFIER_IMPORT).get(0);
+			cu.getImports().add(cimport);
+			String className = genClass.getClassName();
+			ConcreteClassifier clazz = cu.getContainedClassifier(className);
+			String methodString = 
+				"\n\n" + 
+				"	/**\n" +
+				"	* @generated\n" +
+				"	*/\n" + 
+				"	@Override\n" + 
+				"	public GObject gGraph() {\n" + 
+				"		return this;\n" + 
+				"	}";
+			ClassMethod method = (ClassMethod) GenerationUtil.parsePartialFragment(methodString, MembersPackage.Literals.CLASS_METHOD).get(0);
+			clazz.getMembers().add(method);
+			try {
+				resource.save(Collections.EMPTY_MAP);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void modifyManifest(IProject project) {
