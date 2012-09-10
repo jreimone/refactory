@@ -21,18 +21,17 @@ import edu.uci.ics.jung.graph.MultiGraph;
 public interface GObject extends EObject, DirectedGraph<GObject,GReference>, MultiGraph<GObject,GReference> {
 
 	/**
+	 * The annotation String which indicates the model element representing the root graph of the whole model.
+	 */
+	public static final String ROOT_GRAPH_ELEMENT	= "JUNG_GRAPH_MODEL";
+	
+	/**
 	 * Returns the graph instance of the model owning this {@link GObject} or null
 	 * if currently no model element represents the root graph object.
 	 * @return
 	 */
 	public GObject gGraph();
 	
-//	/**
-//	 * Returns the {@link EObjectGraph} element which represents the {@link Graph}
-//	 * @return
-//	 */
-//	public EObjectGraph eObjectGraph();
-
 	/**
 	 * Look at {@link Graph#getInEdges(Object)}
 	 * @return
