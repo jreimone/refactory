@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -26,10 +27,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.members.ClassMethod;
+import org.emftext.language.java.members.Field;
+import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.IdentifierReference;
@@ -40,7 +44,9 @@ import org.emftext.language.manifest.ManifestFactory;
 import org.emftext.language.manifest.RequireBundleDescription;
 import org.qualitune.ecore.graph.GObject;
 import org.qualitune.ecore.graph.impl.EObjectContainmentEListGraph;
+import org.qualitune.ecore.graph.impl.EObjectResolvingEListGraph;
 import org.qualitune.ecore.graph.impl.GObjectImpl;
+import org.qualitune.ecore.graph.impl.GReference;
 
 /**
  * @author jreimann
@@ -103,30 +109,23 @@ public class GraphModelCodeGenerator {
 		List<GenClass> classes = GenerationUtil.getConcreteClasses(model);
 		for (GenClass genClass : classes) {
 			JavaResource javaResource = GenerationUtil.getJavaResource(rs, genClass);
+			CompilationUnit cu = (CompilationUnit) javaResource.getContents().get(0);
 			List<GenFeature> getGenFeatures = genClass.getEGetGenFeatures();
 			boolean modified = false;
 			for (GenFeature feature : getGenFeatures) {
 				EStructuralFeature ecoreFeature = feature.getEcoreFeature();
 				if(ecoreFeature instanceof EReference){
 					EReference reference = (EReference) ecoreFeature;
-					if(reference.isMany() && reference.isContainment()){
-						CompilationUnit cu = (CompilationUnit) javaResource.getContents().get(0);
-						ConcreteClassifier classifier = cu.getContainedClassifier(genClass.getClassName());
-						String oldListName = EObjectContainmentEList.class.getName();
-						ConcreteClassifier oldList = cu.getConcreteClassifier(oldListName);
-						String newListName = EObjectContainmentEListGraph.class.getName();
-						ConcreteClassifier newList = cu.getConcreteClassifier(newListName);
-						Method method = classifier.getContainedMethod(feature.getGetAccessor());
-						GenPackage genPackage = genClass.getGenPackage();
-						String name = genPackage.getEcorePackage().getName();
-						name = GenerationUtil.uppercaseFirstLetter(name);
-						String parameterString = name + "Package.Literals." + genClass.getFeatureID(feature);
-						IdentifierReference parameter = (IdentifierReference) GenerationUtil.parsePartialFragment(parameterString, ReferencesPackage.Literals.IDENTIFIER_REFERENCE).get(0);
-						List<Expression> parameters = new ArrayList<Expression>();
-						parameters.add(parameter);
-						modified = GenerationUtil.replaceConstructorInMethod(oldList, newList, method, parameters);
-					} else if(reference.isMany() && !reference.isContainment()){
-
+					if(reference.isMany()){
+						if(reference.isContainment()){
+							modified = replaceLists(cu, genClass, feature, EObjectContainmentEList.class.getName(), EObjectContainmentEListGraph.class.getName());
+						} else {
+							modified = replaceLists(cu, genClass, feature, EObjectResolvingEList.class.getName(), EObjectResolvingEListGraph.class.getName());
+						}
+					} else {
+						String fieldName = addAttribute(cu, genClass);
+						overrideEBasicSetContainer(cu, genClass, fieldName);
+						modified = true;
 					}
 				}
 			}
@@ -138,6 +137,68 @@ public class GraphModelCodeGenerator {
 				}
 			}
 		}
+	}
+
+	private void overrideEBasicSetContainer(CompilationUnit cu, GenClass genClass, String fieldName) {
+		ConcreteClassifier classifier = cu.getContainedClassifier(genClass.getClassName());
+		List<Member> members = classifier.getMembersByName("eBasicSetContainer");
+		if(members == null || members.size() == 0){
+			String methodString = 
+				"\n\n	/**\n" +
+				"	* @generated\n" +
+				"	*/\n" +
+				"	@Override\n" +
+				"	protected void eBasicSetContainer(InternalEObject newContainer, int newContainerFeatureID) {\n" +
+				"		super.eBasicSetContainer(newContainer, newContainerFeatureID);\n" +
+				"		if(" + fieldName + " != null ){\n" +
+				"			while (!" + fieldName + ".isEmpty()) {\n" +
+				"				GReference edge = " + fieldName + ".pop();\n" +
+				"				if(!gGraph().getEdges().contains(edge)){\n" +
+				"					gGraph().getEdges().add(edge);\n" +
+				"				}\n" +
+				"			}\n" +
+				"		}\n" +
+				"	}\n\n\n";
+			ClassMethod method = (ClassMethod) GenerationUtil.parsePartialFragment(methodString, MembersPackage.Literals.CLASS_METHOD).get(0);
+			classifier.getMembers().add(method);
+		}
+	}
+
+	private String addAttribute(CompilationUnit cu, GenClass genClass) {
+		ConcreteClassifier classifier = cu.getContainedClassifier(genClass.getClassName());
+		String fieldName = "containerChildEdgesPending";
+		Field field = classifier.getContainedField(fieldName);
+		if(field == null){
+			String fieldDeclaration = 
+				"\n	/**\n" + 
+				"	* @generated\n" +
+				"	*/\n" +
+				"	private Stack<GReference> " + fieldName + ";\n\n\n";
+			field = (Field) GenerationUtil.parsePartialFragment(fieldDeclaration, MembersPackage.Literals.FIELD).get(0);
+			classifier.getMembers().add(0, field);
+			ConcreteClassifier stackClass = cu.getConcreteClassifier(Stack.class.getName());
+			ConcreteClassifier referenceClass = cu.getConcreteClassifier(GReference.class.getName());
+			GenerationUtil.addImport(cu, referenceClass);
+			GenerationUtil.addImport(cu, stackClass);
+		}
+		return fieldName;
+	}
+
+	private boolean replaceLists(CompilationUnit cu, GenClass genClass, GenFeature feature, String oldListName, String newListName) {
+		boolean modified;
+		ConcreteClassifier classifier = cu.getContainedClassifier(genClass.getClassName());
+		ConcreteClassifier oldList = cu.getConcreteClassifier(oldListName);
+		ConcreteClassifier newList = cu.getConcreteClassifier(newListName);
+		Method method = classifier.getContainedMethod(feature.getGetAccessor());
+		GenPackage genPackage = genClass.getGenPackage();
+		String name = genPackage.getEcorePackage().getName();
+		name = GenerationUtil.uppercaseFirstLetter(name);
+		String parameterString = name + "Package.Literals." + genClass.getFeatureID(feature);
+		IdentifierReference parameter = (IdentifierReference) GenerationUtil.parsePartialFragment(parameterString, ReferencesPackage.Literals.IDENTIFIER_REFERENCE).get(0);
+		List<Expression> parameters = new ArrayList<Expression>();
+		parameters.add(parameter);
+		modified = GenerationUtil.replaceConstructorInMethod(oldList, newList, method, parameters);
+		return modified;
 	}
 
 	private void modifyRootGraphClass(GenModel model) {
