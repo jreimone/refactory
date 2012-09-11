@@ -62,6 +62,7 @@ public abstract class GenerationUtil {
 			newImport.setClassifier(importClassifier);
 			CompilationUnit importCU = (CompilationUnit) importClassifier.eResource().getContents().get(0);
 			newImport.getNamespaces().addAll(importCU.getNamespaces());
+			cu.getImports().add(newImport);
 		}
 	}
 
