@@ -96,18 +96,24 @@ public abstract class GenerationUtil {
 	 * @param startRule
 	 * @return
 	 */
-	public static List<EObject> parsePartialFragment(String fragment, EClass startRule){
+	public static<Type> List<Type> parsePartialFragment(String fragment, EClass startRule, Class<Type> type){
 		URI uri = URI.createURI("temp.java");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(uri);
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(fragment.getBytes());
 		Map<?, ?> typeOption = Collections.singletonMap(IJavaOptions.RESOURCE_CONTENT_TYPE, startRule);
 		try {
-			resource.load(inputStream, typeOption );
+			resource.load(inputStream, typeOption);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return resource.getContents();
+		List<Type> result = new ArrayList<Type>();
+		for (EObject parseResult : resource.getContents()) {
+			if(type.isInstance(parseResult)){
+				result.add(type.cast(parseResult));
+			}
+		}
+		return result;
 	}
 
 	/**
