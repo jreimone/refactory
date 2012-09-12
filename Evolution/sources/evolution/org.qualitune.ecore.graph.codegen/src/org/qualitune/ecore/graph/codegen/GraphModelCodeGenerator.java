@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.core.resources.IFile;
@@ -19,8 +20,11 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -36,9 +40,19 @@ import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.language.java.statements.Condition;
+import org.emftext.language.java.statements.ForEachLoop;
+import org.emftext.language.java.statements.LocalVariableStatement;
+import org.emftext.language.java.statements.Return;
+import org.emftext.language.java.statements.Statement;
+import org.emftext.language.java.statements.StatementsPackage;
+import org.emftext.language.java.types.Type;
+import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.types.Void;
 import org.emftext.language.manifest.Manifest;
 import org.emftext.language.manifest.ManifestFactory;
 import org.emftext.language.manifest.RequireBundleDescription;
@@ -126,6 +140,14 @@ public class GraphModelCodeGenerator {
 						String fieldName = addAttribute(cu, genClass);
 						overrideEBasicSetContainer(cu, genClass, fieldName);
 						modified = true;
+						String type = feature.getType(genClass);
+						ConcreteClassifier referenceTargetClassifier = cu.getConcreteClassifier(type);
+						if(reference.isContainment()){
+							ConcreteClassifier notificationChainClassifier = cu.getConcreteClassifier(NotificationChain.class.getName());
+							modifySetFeatureMethod(cu, feature, "basicSet" + feature.getAccessorName(), fieldName, new Type[]{referenceTargetClassifier, notificationChainClassifier}, notificationChainClassifier);
+						} else {
+							modifySetFeatureMethod(cu, feature, "set" + feature.getAccessorName(), fieldName, new Type[]{referenceTargetClassifier}, null);
+						}
 					}
 				}
 			}
@@ -139,27 +161,122 @@ public class GraphModelCodeGenerator {
 		}
 	}
 
+	private void modifySetFeatureMethod(CompilationUnit cu, GenFeature feature, String methodName, String fieldName, Type[] requiredTypes, Type returnType) {
+		GenClass genClass = feature.getGenClass();
+		ConcreteClassifier classifier = cu.getContainedClassifier(genClass.getClassName());
+		ClassMethod basicSetFeatureMethod = null;
+		String referenceTargetParamName = null;
+		List<Member> members = classifier.getMembersByName(methodName);
+		for (Member member : members) {
+			if(member instanceof ClassMethod){
+				ClassMethod method = (ClassMethod) member;
+				List<Parameter> parameters = method.getParameters();
+				
+				boolean correctTypes = true;
+				if(parameters != null && parameters.size() == requiredTypes.length){
+					for (int i = 0; i< requiredTypes.length; i++) {
+						Type requiredType = requiredTypes[i];
+						Parameter presentParam = parameters.get(i);
+						if(!presentParam.getTypeReference().getTarget().equals(requiredType)){
+							correctTypes = false;
+						}
+						if(i == 0){
+							referenceTargetParamName = presentParam.getName();
+						}
+					}
+				}
+				TypeReference returnTypeReference = method.getTypeReference();
+				System.out.println(returnTypeReference instanceof Void);
+				System.out.println(((returnTypeReference instanceof Void) && (returnType == null)));
+				if(!returnTypeReference.getTarget().equals(returnType)){
+					if(!(returnTypeReference instanceof Void) && (returnType == null)){
+						correctTypes = false;
+					}
+				}
+				if(correctTypes){
+					basicSetFeatureMethod = method;
+					break;
+				}
+			}
+		}
+		if(basicSetFeatureMethod != null){
+			EList<Statement> statements = basicSetFeatureMethod.getStatements();
+			int index = statements.size() - 1;
+			Statement returnStatement = statements.get(index);
+			if(!(returnStatement instanceof Return)){
+				index = statements.size();
+			}
+			String name = model.getModelName();
+			name = GenerationUtil.uppercaseFirstLetter(name);
+			String literalString = name + "Package.Literals." + genClass.getFeatureID(feature);
+			List<Statement> additionalStatements = new ArrayList<Statement>(); 
+			String additionalStamentsString = "\n		GObject start = this;\n";
+			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
+			additionalStamentsString = "\n		GObject end = " + referenceTargetParamName + ";\n";
+			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
+			additionalStamentsString = "\n		EReference reference = " + literalString + ";\n";
+			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
+			additionalStamentsString = "\n		Set<GReference> outEdgesByReference = gGetOutEdgesByReference(reference);\n";
+			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
+			additionalStamentsString = "\n		GReference existentEdge = null;\n";
+			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
+			additionalStamentsString =
+					"\n		for (GReference edge : outEdgesByReference) {\n" +
+							"			if(edge.getEnd().equals(" + referenceTargetParamName + ")){\n" +
+							"				existentEdge = edge;\n" +
+							"			}\n" +
+							"		}\n";
+			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.FOR_EACH_LOOP, ForEachLoop.class).get(0));
+			additionalStamentsString = "\n		if(existentEdge == null){\n" +
+					"			existentEdge = new GReference(start, end, reference);\n" +
+					"			gGetOutEdges().add(existentEdge);\n" +
+					"			end.gGetInEdges().add(existentEdge);\n" +
+					"			getEdges().add(existentEdge);\n" +
+					"			if(gGraph() != null){\n" +
+					"				if(!gGraph().getEdges().contains(existentEdge)){\n" +
+					"					gGraph().getEdges().add(existentEdge);\n" +
+					"				}\n" +
+					"			} else {\n" +
+					"				if(" + fieldName + " == null){\n" +
+					"					" + fieldName + " = new Stack<GReference>();\n" +
+					"				}\n" +
+					"				" + fieldName + ".push(existentEdge);\n" +
+					"			}\n" +
+					"		} else {\n" +
+					"			existentEdge.setEnd(" + referenceTargetParamName + ");\n" +
+					"		}\n";
+			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.CONDITION, Condition.class).get(0));
+			statements.addAll(index, additionalStatements);
+			ConcreteClassifier importClassifier = cu.getConcreteClassifier(EReference.class.getName());
+			GenerationUtil.addImport(cu, importClassifier);
+			importClassifier = cu.getConcreteClassifier(Set.class.getName());
+			GenerationUtil.addImport(cu, importClassifier);
+			importClassifier = cu.getConcreteClassifier(GObject.class.getName());
+			GenerationUtil.addImport(cu, importClassifier);
+		}
+	}
+
 	private void overrideEBasicSetContainer(CompilationUnit cu, GenClass genClass, String fieldName) {
 		ConcreteClassifier classifier = cu.getContainedClassifier(genClass.getClassName());
 		List<Member> members = classifier.getMembersByName("eBasicSetContainer");
 		if(members == null || members.size() == 0){
 			String methodString = 
-				"\n\n	/**\n" +
-				"	* @generated\n" +
-				"	*/\n" +
-				"	@Override\n" +
-				"	protected void eBasicSetContainer(InternalEObject newContainer, int newContainerFeatureID) {\n" +
-				"		super.eBasicSetContainer(newContainer, newContainerFeatureID);\n" +
-				"		if(" + fieldName + " != null ){\n" +
-				"			while (!" + fieldName + ".isEmpty()) {\n" +
-				"				GReference edge = " + fieldName + ".pop();\n" +
-				"				if(!gGraph().getEdges().contains(edge)){\n" +
-				"					gGraph().getEdges().add(edge);\n" +
-				"				}\n" +
-				"			}\n" +
-				"		}\n" +
-				"	}\n\n\n";
-			ClassMethod method = (ClassMethod) GenerationUtil.parsePartialFragment(methodString, MembersPackage.Literals.CLASS_METHOD).get(0);
+					"\n\n	/**\n" +
+							"	* @generated\n" +
+							"	*/\n" +
+							"	@Override\n" +
+							"	protected void eBasicSetContainer(InternalEObject newContainer, int newContainerFeatureID) {\n" +
+							"		super.eBasicSetContainer(newContainer, newContainerFeatureID);\n" +
+							"		if(" + fieldName + " != null ){\n" +
+							"			while (!" + fieldName + ".isEmpty()) {\n" +
+							"				GReference edge = " + fieldName + ".pop();\n" +
+							"				if(!gGraph().getEdges().contains(edge)){\n" +
+							"					gGraph().getEdges().add(edge);\n" +
+							"				}\n" +
+							"			}\n" +
+							"		}\n" +
+							"	}\n\n\n";
+			ClassMethod method = GenerationUtil.parsePartialFragment(methodString, MembersPackage.Literals.CLASS_METHOD, ClassMethod.class).get(0);
 			classifier.getMembers().add(method);
 		}
 	}
@@ -170,11 +287,11 @@ public class GraphModelCodeGenerator {
 		Field field = classifier.getContainedField(fieldName);
 		if(field == null){
 			String fieldDeclaration = 
-				"\n	/**\n" + 
-				"	* @generated\n" +
-				"	*/\n" +
-				"	private Stack<GReference> " + fieldName + ";\n\n\n";
-			field = (Field) GenerationUtil.parsePartialFragment(fieldDeclaration, MembersPackage.Literals.FIELD).get(0);
+					"\n	/**\n" + 
+							"	* @generated\n" +
+							"	*/\n" +
+							"	private Stack<GReference> " + fieldName + ";\n\n\n";
+			field = GenerationUtil.parsePartialFragment(fieldDeclaration, MembersPackage.Literals.FIELD, Field.class).get(0);
 			classifier.getMembers().add(0, field);
 			ConcreteClassifier stackClass = cu.getConcreteClassifier(Stack.class.getName());
 			ConcreteClassifier referenceClass = cu.getConcreteClassifier(GReference.class.getName());
@@ -194,7 +311,7 @@ public class GraphModelCodeGenerator {
 		String name = genPackage.getEcorePackage().getName();
 		name = GenerationUtil.uppercaseFirstLetter(name);
 		String parameterString = name + "Package.Literals." + genClass.getFeatureID(feature);
-		IdentifierReference parameter = (IdentifierReference) GenerationUtil.parsePartialFragment(parameterString, ReferencesPackage.Literals.IDENTIFIER_REFERENCE).get(0);
+		IdentifierReference parameter = GenerationUtil.parsePartialFragment(parameterString, ReferencesPackage.Literals.IDENTIFIER_REFERENCE, IdentifierReference.class).get(0);
 		List<Expression> parameters = new ArrayList<Expression>();
 		parameters.add(parameter);
 		modified = GenerationUtil.replaceConstructorInMethod(oldList, newList, method, parameters);
@@ -223,7 +340,7 @@ public class GraphModelCodeGenerator {
 							"	public GObject gGraph() {\n" + 
 							"		return this;\n" + 
 							"	}";
-			ClassMethod method = (ClassMethod) GenerationUtil.parsePartialFragment(methodString, MembersPackage.Literals.CLASS_METHOD).get(0);
+			ClassMethod method = GenerationUtil.parsePartialFragment(methodString, MembersPackage.Literals.CLASS_METHOD, ClassMethod.class).get(0);
 			clazz.getMembers().add(method);
 			try {
 				resource.save(Collections.EMPTY_MAP);
