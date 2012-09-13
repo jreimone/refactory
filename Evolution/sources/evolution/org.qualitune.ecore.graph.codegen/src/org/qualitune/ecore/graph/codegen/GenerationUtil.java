@@ -37,11 +37,17 @@ import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.ImportsFactory;
 import org.emftext.language.java.instantiations.InstantiationsPackage;
 import org.emftext.language.java.instantiations.NewConstructorCall;
+import org.emftext.language.java.members.ClassMethod;
+import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
+import org.emftext.language.java.types.Type;
+import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.types.Void;
 import org.qualitune.ecore.graph.GObject;
 
 public abstract class GenerationUtil {
@@ -96,7 +102,7 @@ public abstract class GenerationUtil {
 	 * @param startRule
 	 * @return
 	 */
-	public static<Type> List<Type> parsePartialFragment(String fragment, EClass startRule, Class<Type> type){
+	public static<RuleType extends EObject> List<RuleType> parsePartialFragment(String fragment, EClass startRule, Class<RuleType> type){
 		URI uri = URI.createURI("temp.java");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(uri);
@@ -107,7 +113,7 @@ public abstract class GenerationUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		List<Type> result = new ArrayList<Type>();
+		List<RuleType> result = new ArrayList<RuleType>();
 		for (EObject parseResult : resource.getContents()) {
 			if(type.isInstance(parseResult)){
 				result.add(type.cast(parseResult));
@@ -228,5 +234,52 @@ public abstract class GenerationUtil {
 			modified = true;
 		}
 		return modified;
+	}
+
+	/**
+	 * Searches for a {@link ClassMethod} called <code>methodName</code> in the given <code>classifier</code>.<br>
+	 * <code>sortedRequiredParameterTypes</code> is an array specifying the expected types of the method's parameters.
+	 * The searches only matches in case the order of <code>sortedRequiredParameterTypes</code> corresponds to the
+	 * types of the parameters of a method and if the return type corresponds to <code>returnType</code>. Otherwise, 
+	 * <code>null</code> is returned.
+	 * 
+	 * @param classifier
+	 * @param methodName
+	 * @param sortedRequiredParameterTypes
+	 * @param returnType
+	 * 
+	 * @return
+	 */
+	public static ClassMethod findMethodInClassifier(ConcreteClassifier classifier, String methodName, Type[] sortedRequiredParameterTypes, Type returnType) {
+		ClassMethod basicSetFeatureMethod = null;
+		List<Member> members = classifier.getMembersByName(methodName);
+		for (Member member : members) {
+			if(member instanceof ClassMethod){
+				ClassMethod method = (ClassMethod) member;
+				List<Parameter> parameters = method.getParameters();
+				
+				boolean correctTypes = true;
+				if(parameters != null && parameters.size() == sortedRequiredParameterTypes.length){
+					for (int i = 0; i< sortedRequiredParameterTypes.length; i++) {
+						Type requiredType = sortedRequiredParameterTypes[i];
+						Parameter presentParam = parameters.get(i);
+						if(!presentParam.getTypeReference().getTarget().equals(requiredType)){
+							correctTypes = false;
+						}
+					}
+				}
+				TypeReference returnTypeReference = method.getTypeReference();
+				if(!returnTypeReference.getTarget().equals(returnType)){
+					if(!(returnTypeReference instanceof Void) && (returnType == null)){
+						correctTypes = false;
+					}
+				}
+				if(correctTypes){
+					basicSetFeatureMethod = method;
+					break;
+				}
+			}
+		}
+		return basicSetFeatureMethod;
 	}
 }

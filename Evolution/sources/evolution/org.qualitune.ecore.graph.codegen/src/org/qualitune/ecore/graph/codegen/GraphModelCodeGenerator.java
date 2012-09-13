@@ -24,7 +24,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -40,19 +39,14 @@ import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
-import org.emftext.language.java.statements.Condition;
-import org.emftext.language.java.statements.ForEachLoop;
-import org.emftext.language.java.statements.LocalVariableStatement;
+import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.Return;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.Type;
-import org.emftext.language.java.types.TypeReference;
-import org.emftext.language.java.types.Void;
 import org.emftext.language.manifest.Manifest;
 import org.emftext.language.manifest.ManifestFactory;
 import org.emftext.language.manifest.RequireBundleDescription;
@@ -164,42 +158,9 @@ public class GraphModelCodeGenerator {
 	private void modifySetFeatureMethod(CompilationUnit cu, GenFeature feature, String methodName, String fieldName, Type[] requiredTypes, Type returnType) {
 		GenClass genClass = feature.getGenClass();
 		ConcreteClassifier classifier = cu.getContainedClassifier(genClass.getClassName());
-		ClassMethod basicSetFeatureMethod = null;
-		String referenceTargetParamName = null;
-		List<Member> members = classifier.getMembersByName(methodName);
-		for (Member member : members) {
-			if(member instanceof ClassMethod){
-				ClassMethod method = (ClassMethod) member;
-				List<Parameter> parameters = method.getParameters();
-				
-				boolean correctTypes = true;
-				if(parameters != null && parameters.size() == requiredTypes.length){
-					for (int i = 0; i< requiredTypes.length; i++) {
-						Type requiredType = requiredTypes[i];
-						Parameter presentParam = parameters.get(i);
-						if(!presentParam.getTypeReference().getTarget().equals(requiredType)){
-							correctTypes = false;
-						}
-						if(i == 0){
-							referenceTargetParamName = presentParam.getName();
-						}
-					}
-				}
-				TypeReference returnTypeReference = method.getTypeReference();
-				System.out.println(returnTypeReference instanceof Void);
-				System.out.println(((returnTypeReference instanceof Void) && (returnType == null)));
-				if(!returnTypeReference.getTarget().equals(returnType)){
-					if(!(returnTypeReference instanceof Void) && (returnType == null)){
-						correctTypes = false;
-					}
-				}
-				if(correctTypes){
-					basicSetFeatureMethod = method;
-					break;
-				}
-			}
-		}
+		ClassMethod basicSetFeatureMethod = GenerationUtil.findMethodInClassifier(classifier, methodName, requiredTypes, returnType);
 		if(basicSetFeatureMethod != null){
+			String referenceTargetParamName = basicSetFeatureMethod.getParameters().get(0).getName();
 			EList<Statement> statements = basicSetFeatureMethod.getStatements();
 			int index = statements.size() - 1;
 			Statement returnStatement = statements.get(index);
@@ -209,25 +170,18 @@ public class GraphModelCodeGenerator {
 			String name = model.getModelName();
 			name = GenerationUtil.uppercaseFirstLetter(name);
 			String literalString = name + "Package.Literals." + genClass.getFeatureID(feature);
-			List<Statement> additionalStatements = new ArrayList<Statement>(); 
-			String additionalStamentsString = "\n		GObject start = this;\n";
-			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
-			additionalStamentsString = "\n		GObject end = " + referenceTargetParamName + ";\n";
-			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
-			additionalStamentsString = "\n		EReference reference = " + literalString + ";\n";
-			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
-			additionalStamentsString = "\n		Set<GReference> outEdgesByReference = gGetOutEdgesByReference(reference);\n";
-			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
-			additionalStamentsString = "\n		GReference existentEdge = null;\n";
-			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT, LocalVariableStatement.class).get(0));
-			additionalStamentsString =
-					"\n		for (GReference edge : outEdgesByReference) {\n" +
-							"			if(edge.getEnd().equals(" + referenceTargetParamName + ")){\n" +
-							"				existentEdge = edge;\n" +
-							"			}\n" +
-							"		}\n";
-			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.FOR_EACH_LOOP, ForEachLoop.class).get(0));
-			additionalStamentsString = "\n		if(existentEdge == null){\n" +
+			String blockString =
+					"\n		GObject start = this;\n" +
+					"		GObject end = " + referenceTargetParamName + ";\n" +
+					"		EReference reference = " + literalString + ";\n" + 
+					"		Set<GReference> outEdgesByReference = gGetOutEdgesByReference(reference);\n" + 
+					"		GReference existentEdge = null;\n" +
+					"		for (GReference edge : outEdgesByReference) {\n" +
+					"			if(edge.getEnd().equals(" + referenceTargetParamName + ")){\n" +
+					"				existentEdge = edge;\n" +
+					"			}\n" +
+					"		}\n" +
+					"		if(existentEdge == null){\n" +
 					"			existentEdge = new GReference(start, end, reference);\n" +
 					"			gGetOutEdges().add(existentEdge);\n" +
 					"			end.gGetInEdges().add(existentEdge);\n" +
@@ -245,8 +199,8 @@ public class GraphModelCodeGenerator {
 					"		} else {\n" +
 					"			existentEdge.setEnd(" + referenceTargetParamName + ");\n" +
 					"		}\n";
-			additionalStatements.add(GenerationUtil.parsePartialFragment(additionalStamentsString, StatementsPackage.Literals.CONDITION, Condition.class).get(0));
-			statements.addAll(index, additionalStatements);
+			Block block = GenerationUtil.parsePartialFragment("{" + blockString + "}", StatementsPackage.Literals.BLOCK, Block.class).get(0);
+			statements.addAll(index, block.getStatements());
 			ConcreteClassifier importClassifier = cu.getConcreteClassifier(EReference.class.getName());
 			GenerationUtil.addImport(cu, importClassifier);
 			importClassifier = cu.getConcreteClassifier(Set.class.getName());
