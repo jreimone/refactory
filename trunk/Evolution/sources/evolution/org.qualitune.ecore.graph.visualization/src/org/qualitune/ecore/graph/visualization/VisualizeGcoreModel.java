@@ -41,22 +41,27 @@ public class VisualizeGcoreModel extends AbstractHandler {
 			JungAdapter<GObject, GReference> adapter = new JungAdapter<GObject, GReference>(graph);
 			// prefuse
 			Graph prefuseGraph = createPrefuseGraph(adapter);
-			JFrame frame = Visualizations.aggregateVisualization(prefuseGraph);
-	        frame.setVisible(true);
+			
+			Map<String, String> edgeTypeColorMap = new HashMap<String, String>();
+			edgeTypeColorMap.put("containment", "200,0,0");
+			edgeTypeColorMap.put("reference", "200,200,200");
+			JFrame frame = Visualizations.radialGraphView(prefuseGraph, "edgeType", edgeTypeColorMap, false);
+			frame.setVisible(true);
 	        
-	        frame = Visualizations.radialGraphView(prefuseGraph);
-	        frame.setVisible(true);
+//			frame = Visualizations.aggregateVisualization(prefuseGraph);
+//	        frame.setVisible(true);
 	        
-	        frame = Visualizations.graphView(prefuseGraph);
-	        frame.setVisible(true);
+//	        frame = Visualizations.graphView(prefuseGraph);
+//	        frame.setVisible(true);
 		}
 		return null;
 	}
 
 	private Graph createPrefuseGraph(GraphAdapter<GObject, GReference> adapter) {
 		Iterator<GReference> iterator = adapter.getEdges();
-		Graph g = new Graph();
+		Graph g = new Graph(true);
 		g.addColumn("name", String.class);
+		g.addColumn("edgeType", String.class);
 		Map<GObject, Node> vertexNodeMap = new HashMap<GObject, Node>();
 		while (iterator.hasNext()) {
 			GReference edge = iterator.next();
@@ -75,6 +80,7 @@ public class VisualizeGcoreModel extends AbstractHandler {
 				vertexNodeMap.put(end, endNode);
 			}
 			Edge nodeEdge = g.addEdge(startNode, endNode);
+			nodeEdge.setString("edgeType", (edge.getReference().isContainment())?"containment":"reference");
 			nodeEdge.setString("name", edge.getReference().getName());
 		}
 		return g;
