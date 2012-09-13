@@ -37,7 +37,7 @@ public class Visualizations {
         JFrame frame = aggregateVisualization(createGraph(getResource()));
         frame.setVisible(true);
         
-        frame = radialGraphView(createGraph(getResource()));
+        frame = radialGraphView(createGraph(getResource()), null, null, false);
         frame.setVisible(true);
         
         frame = graphView(createGraph(getResource()));
@@ -92,9 +92,9 @@ public class Visualizations {
         return frame;
     }
     
-    public static JFrame radialGraphView(Graph graph){
+    public static JFrame radialGraphView(Graph graph, String edgeTypePredicate, Map<String, String> edgeTypeColorMap, boolean useStraightLineForSingleEdges){
         UILib.setPlatformLookAndFeel();
-        RadialGraphView graphView = new RadialGraphView(graph, "name");
+        RadialGraphView graphView = new RadialGraphView(graph, "name", edgeTypePredicate, edgeTypeColorMap, useStraightLineForSingleEdges);
         JFrame frame = new JFrame("p r e f u s e  |  r a d i a l g r a p h v i e w");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(graphView);
