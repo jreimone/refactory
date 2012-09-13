@@ -45,7 +45,7 @@ public class EObjectResolvingEListGraph<Type extends GObject> extends EObjectRes
 		owner.getEdges().add(edge);
 		owner.gGetOutEdges().add(edge);
 		object.gGetInEdges().add(edge);
-		if(owner.gGraph() != null){
+		if(owner.gGraph() != null && !owner.gGraph().getEdges().contains(edge)){
 			owner.gGraph().getEdges().add(edge);
 		}
 		targetEdgeMap.put(object, edge);
