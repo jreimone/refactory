@@ -38,6 +38,8 @@ public class VisualizeGcoreModel extends AbstractHandler {
 		if(currentSelection instanceof IStructuredSelection){
 			IStructuredSelection selection = (IStructuredSelection) currentSelection;
 			GObject graph = ((GObject) selection.getFirstElement()).gGraph();
+			System.out.println(graph.getEdges().size());
+			System.out.println(graph.getEdgeCount());
 			JungAdapter<GObject, GReference> adapter = new JungAdapter<GObject, GReference>(graph);
 			// prefuse
 			Graph prefuseGraph = createPrefuseGraph(adapter);

@@ -177,9 +177,9 @@ public class GraphModelCodeGenerator {
 					"		Set<GReference> outEdgesByReference = gGetOutEdgesByReference(reference);\n" + 
 					"		GReference existentEdge = null;\n" +
 					"		for (GReference edge : outEdgesByReference) {\n" +
-					"			if(edge.getEnd().equals(" + referenceTargetParamName + ")){\n" +
+					"			//if(edge.getEnd().equals(" + referenceTargetParamName + ")){\n" +
 					"				existentEdge = edge;\n" +
-					"			}\n" +
+					"			//}\n" +
 					"		}\n" +
 					"		if(existentEdge == null){\n" +
 					"			existentEdge = new GReference(start, end, reference);\n" +
