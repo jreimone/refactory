@@ -126,8 +126,20 @@ public class EObjectResolvingEListGraph<Type extends GObject> extends EObjectRes
 
 	@Override
 	public Type remove(int index) {
-		// TODO Auto-generated method stub
-		return super.remove(index);
+		Type result = super.remove(index);
+		if(result != null){
+			GObject element = (GObject) result;
+			GReference edge = targetEdgeMap.get(element);
+			GObject start = edge.getStart();
+			GObject end = edge.getEnd();
+			start.gGetOutEdges().remove(edge);
+			end.gGetInEdges().remove(edge);
+//			if(element.gGraph() != null){
+//				element.gGraph().getVertices().remove(element);
+//			}
+			targetEdgeMap.remove(element);
+		}
+		return result;
 	}
 
 	@Override
