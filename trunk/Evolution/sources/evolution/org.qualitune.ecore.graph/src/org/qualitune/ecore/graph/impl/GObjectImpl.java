@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.qualitune.ecore.graph.GObject;
@@ -376,4 +377,26 @@ public abstract class GObjectImpl extends EObjectImpl implements GObject {
 		}
 		return set;
 	}
+
+	@Override
+	public NotificationChain eBasicRemoveFromContainer(NotificationChain msgs) {
+		NotificationChain result = super.eBasicRemoveFromContainer(msgs);
+		List<GReference> inEdges = gGetInEdges();
+		List<GReference> outEdges = gGetOutEdges();
+		gGraph().getEdges().removeAll(inEdges);
+		gGraph().getEdges().removeAll(outEdges);
+		return result;
+	}
+
+//	@Override
+//	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+//		// TODO Auto-generated method stub
+//		return super.eBasicRemoveFromContainerFeature(msgs);
+//	}
+//
+//	@Override
+//	public NotificationChain eDynamicBasicRemoveFromContainer(NotificationChain msgs) {
+//		// TODO Auto-generated method stub
+//		return super.eDynamicBasicRemoveFromContainer(msgs);
+//	}
 }

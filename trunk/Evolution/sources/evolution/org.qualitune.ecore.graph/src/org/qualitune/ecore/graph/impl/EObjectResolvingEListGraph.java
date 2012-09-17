@@ -135,6 +135,8 @@ public class EObjectResolvingEListGraph<Type extends GObject> extends EObjectRes
 			GObject end = edge.getEnd();
 			start.gGetOutEdges().remove(edge);
 			end.gGetInEdges().remove(edge);
+			start.getEdges().remove(edge);
+			start.gGraph().getEdges().remove(edge);
 //			if(element.gGraph() != null){
 //				element.gGraph().getVertices().remove(element);
 //			}
