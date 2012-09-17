@@ -66,7 +66,8 @@ public abstract class GenerationUtil {
 		} else {
 			ClassifierImport newImport = ImportsFactory.eINSTANCE.createClassifierImport();
 			newImport.setClassifier(importClassifier);
-			CompilationUnit importCU = (CompilationUnit) importClassifier.eResource().getContents().get(0);
+			Resource resource = importClassifier.eResource();
+			CompilationUnit importCU = (CompilationUnit) resource.getContents().get(0);
 			newImport.getNamespaces().addAll(importCU.getNamespaces());
 			cu.getImports().add(newImport);
 		}

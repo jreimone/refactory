@@ -4,10 +4,10 @@
 package org.qualitune.ecore.graph.impl;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections15.map.HashedMap;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -106,41 +106,16 @@ public class EObjectContainmentEListGraph<Type extends GObject> extends EObjectC
 			addInternal(object, edge);
 		}
 	}
-	
-	@Override
-	public boolean remove(Object object) {
-		boolean result = super.remove(object);
-		if(result){
-			GObject element = (GObject) object;
-			GReference edge = targetEdgeMap.get(element);
-			GObject start = edge.getStart();
-			GObject end = edge.getEnd();
-			start.gGetOutEdges().remove(edge);
-			end.gGetInEdges().remove(edge);
-			if(element.gGraph() != null){
-				element.gGraph().getVertices().remove(element);
-			}
-			targetEdgeMap.remove(element);
-		}
-		return result;
-	}
 
 	@Override
 	public Type remove(int index) {
-		// TODO Auto-generated method stub
-		return super.remove(index);
+		Type removee = super.remove(index);
+		if(removee != null){
+			List<GReference> inEdges = removee.gGetInEdges();
+			List<GReference> outEdges = removee.gGetOutEdges();
+			owner.gGraph().getEdges().removeAll(inEdges);
+			owner.gGraph().getEdges().removeAll(outEdges);
+		}
+		return removee;
 	}
-
-	@Override
-	public boolean removeAll(Collection<?> collection) {
-		// TODO Auto-generated method stub
-		return super.removeAll(collection);
-	}
-
-	@Override
-	public NotificationChain basicRemove(Object object, NotificationChain notifications) {
-		// TODO Auto-generated method stub
-		return super.basicRemove(object, notifications);
-	}
-
 }

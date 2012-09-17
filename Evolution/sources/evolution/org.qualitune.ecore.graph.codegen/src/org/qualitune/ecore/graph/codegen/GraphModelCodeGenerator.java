@@ -197,7 +197,13 @@ public class GraphModelCodeGenerator {
 					"				" + fieldName + ".push(existentEdge);\n" +
 					"			}\n" +
 					"		} else {\n" +
-					"			existentEdge.setEnd(" + referenceTargetParamName + ");\n" +
+					"			if(" + referenceTargetParamName + " != null){\n" + 
+					"				existentEdge.setEnd(" + referenceTargetParamName + ");\n" +
+					"			} else {\n" +
+					"				start.gGetOutEdges().remove(existentEdge);\n" +
+					"				getEdges().remove(existentEdge);\n" +
+					"				gGraph().getEdges().remove(existentEdge);\n" +
+					"			}\n" +
 					"		}\n";
 			Block block = GenerationUtil.parsePartialFragment("{" + blockString + "}", StatementsPackage.Literals.BLOCK, Block.class).get(0);
 			statements.addAll(index, block.getStatements());
