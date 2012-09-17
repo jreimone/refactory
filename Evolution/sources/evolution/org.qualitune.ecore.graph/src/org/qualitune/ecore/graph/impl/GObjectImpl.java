@@ -26,8 +26,8 @@ public abstract class GObjectImpl extends EObjectImpl implements GObject {
 
 	private SynchronousMapList<GReference> outEdges;
 	private List<GReference> inEdges;
-	private List<GReference> edges;
-	private List<GObject> vertices;
+	private Set<GReference> edges;
+	private Set<GObject> vertices;
 	
 	@Override
 	public GObject gGraph() {
@@ -264,7 +264,7 @@ public abstract class GObjectImpl extends EObjectImpl implements GObject {
 	@Override
 	public Collection<GReference> getEdges() {
 		if(edges == null){
-			edges = new LinkedList<GReference>();
+			edges = new LinkedHashSet<GReference>();
 		}
 		return edges;
 	}
@@ -272,7 +272,7 @@ public abstract class GObjectImpl extends EObjectImpl implements GObject {
 	@Override
 	public Collection<GObject> getVertices() {
 		if(vertices == null){
-			vertices = new LinkedList<GObject>();
+			vertices = new LinkedHashSet<GObject>();
 		}
 		return vertices;
 	}

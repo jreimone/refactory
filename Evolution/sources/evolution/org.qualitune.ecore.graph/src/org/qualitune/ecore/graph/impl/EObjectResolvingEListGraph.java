@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.commons.collections15.map.HashedMap;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -45,7 +46,7 @@ public class EObjectResolvingEListGraph<Type extends GObject> extends EObjectRes
 		owner.getEdges().add(edge);
 		owner.gGetOutEdges().add(edge);
 		object.gGetInEdges().add(edge);
-		if(owner.gGraph() != null && !owner.gGraph().getEdges().contains(edge)){
+		if(owner.gGraph() != null){//TODO pending edges needed for model loading :(
 			owner.gGraph().getEdges().add(edge);
 		}
 		targetEdgeMap.put(object, edge);
@@ -146,6 +147,36 @@ public class EObjectResolvingEListGraph<Type extends GObject> extends EObjectRes
 	public boolean removeAll(Collection<?> collection) {
 		// TODO Auto-generated method stub
 		return super.removeAll(collection);
+	}
+
+	@Override
+	public void set(Object newValue) {
+		// TODO Auto-generated method stub
+		super.set(newValue);
+	}
+
+	@Override
+	public Type setUnique(int index, Type object) {
+		// TODO Auto-generated method stub
+		return super.setUnique(index, object);
+	}
+
+	@Override
+	public NotificationChain basicSet(int index, Type object, NotificationChain notifications) {
+		// TODO Auto-generated method stub
+		return super.basicSet(index, object, notifications);
+	}
+
+	@Override
+	public void setData(int size, Object[] data) {
+		// TODO Auto-generated method stub
+		super.setData(size, data);
+	}
+
+	@Override
+	public Type set(int index, Type object) {
+		// TODO Auto-generated method stub
+		return super.set(index, object);
 	}
 
 
