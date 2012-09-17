@@ -52,8 +52,10 @@ public class EObjectContainmentEListGraph<Type extends GObject> extends EObjectC
 		owner.getEdges().add(edge);
 		owner.gGetOutEdges().add(edge);
 		object.gGetInEdges().add(edge);
-		if(owner.gGraph() != null && !owner.gGraph().getEdges().contains(edge)){
+		if(owner.gGraph() != null){
 			owner.gGraph().getEdges().add(edge);
+			// must be done for adding pending edges from child elements
+			owner.gGraph().getEdges().addAll(object.getEdges());
 		}
 		targetEdgeMap.put(object, edge);
 	}

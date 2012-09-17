@@ -187,9 +187,9 @@ public class GraphModelCodeGenerator {
 					"			end.gGetInEdges().add(existentEdge);\n" +
 					"			getEdges().add(existentEdge);\n" +
 					"			if(gGraph() != null){\n" +
-					"				if(!gGraph().getEdges().contains(existentEdge)){\n" +
-					"					gGraph().getEdges().add(existentEdge);\n" +
-					"				}\n" +
+//					"				if(!gGraph().getEdges().contains(existentEdge)){\n" +
+					"				gGraph().getEdges().add(existentEdge);\n" +
+//					"				}\n" +
 					"			} else {\n" +
 					"				if(" + fieldName + " == null){\n" +
 					"					" + fieldName + " = new Stack<GReference>();\n" +
@@ -224,9 +224,9 @@ public class GraphModelCodeGenerator {
 							"		if(" + fieldName + " != null ){\n" +
 							"			while (!" + fieldName + ".isEmpty()) {\n" +
 							"				GReference edge = " + fieldName + ".pop();\n" +
-							"				if(!gGraph().getEdges().contains(edge)){\n" +
-							"					gGraph().getEdges().add(edge);\n" +
-							"				}\n" +
+//							"				if(!gGraph().getEdges().contains(edge)){\n" +
+							"				gGraph().getEdges().add(edge);\n" +
+//							"				}\n" +
 							"			}\n" +
 							"		}\n" +
 							"	}\n\n\n";
