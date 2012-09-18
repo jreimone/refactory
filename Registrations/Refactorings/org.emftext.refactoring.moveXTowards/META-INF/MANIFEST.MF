@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: MoveXTowards
 Bundle-SymbolicName: org.emftext.refactoring.moveXTowards;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.emftext.refactoring.movextowards
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.change,
