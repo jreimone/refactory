@@ -15,14 +15,18 @@
  ******************************************************************************/
 package org.emftext.refactoring.ui;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.Action;
@@ -31,11 +35,14 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
 import org.eclipse.ui.services.IServiceLocator;
@@ -105,17 +112,33 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		if (selectedElements != null && selectedElements.size() >= 1) {
 			EObject model = null;
 			Resource resource = null;
-			int i = 0;
-			do {
-				EObject element = selectedElements.get(i);
-				model = EcoreUtil.getRootContainer(element, true);
-				resource = model.eResource();
-				i++;
-			} while (i < selectedElements.size() && resource == null);
-			if (resource == null) {
-//				System.out.println("resource null");
+//			int i = 0;
+//			do {
+//				EObject element = selectedElements.get(i);
+//				model = EcoreUtil.getRootContainer(element, false);
+//				model = EcoreUtil.getRootContainer(element, true);
+//				resource = model.eResource();
+//				resource = element.eResource();
+//				if(resource != null){
+//					System.out.println(resource.getURIFragment(element));
+//				}
+//				i++;
+//			} while (i < selectedElements.size() && resource == null);
+//			if (resource == null) {
+//			}
+			IEditorInput editorInput = activeEditor.getEditorInput();
+			ResourceSet rs;
+			if(editorInput instanceof IFileEditorInput){
+				IFileEditorInput fei = (IFileEditorInput) editorInput;
+				IFile file = fei.getFile();
+				URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+				rs = new ResourceSetImpl();
+				resource = rs.getResource(uri, true);
+			}
+			if(resource == null){
 				return;
 			}
+			List<EObject> elementsInResource = getElementsByUris(resource, selectedElements);
 //			System.out.println("~~~~~~~");
 //			System.out.println(resource);
 ////			EObject model = resource.getContents().get(0);
@@ -132,12 +155,29 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			//the changed element and creates a new one instead. This effectively creates an imperfect copy as the resolved
 			//element represents the state before the refactoring, whereas the refactored element represents the changed state.
 			//This leads to inconsistencies of the models and is to be avoided at all cost.
+//			for (EObject element : elementsInResource) {
+//				URI uri = EcoreUtil.getURI(element);
+//				System.out.println(uri);
+//				ResourceSet resourceSet = resource.getResourceSet();
+//				System.out.println(resource.equals(element.eResource()));
+//				EObject eObject = resourceSet.getEObject(uri, true);
+//				System.out.println(element.equals(eObject));
+//			}
+			
 			ResourceSet resourceSet = resource.getResourceSet();
 			EcoreUtil.resolveAll(resourceSet);
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
 
+//			for (EObject element : elementsInResource) {
+//				URI uri = EcoreUtil.getURI(element);
+//				ResourceSet resourceSet2 = resource.getResourceSet();
+//				System.out.println(resource.equals(element.eResource()));
+//				EObject eObject = resourceSet2.getEObject(uri, true);
+//				System.out.println(element.equals(eObject));
+//			}
+			
 			Map<String, RoleMapping> roleMappings = getRoleMappingsForResource(resource);
-			List<RoleMapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(selectedElements, roleMappings, 1.0);
+			List<RoleMapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elementsInResource, roleMappings, 1.0);
 			boolean containsEntries = false;
 			List<IMenuManager> registeredSubMenus = new LinkedList<IMenuManager>();
 			for (RoleMapping mapping : mappings) {
@@ -146,7 +186,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, mapping);
 					ICustomWizardPageRegistry.INSTANCE.init(mapping);
 					if (refactorer != null) {
-						refactorer.setInput(selectedElements);
+						refactorer.setInput(elementsInResource);
 						RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 						if (refSpec != null) {
 							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
@@ -194,5 +234,28 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		String mmUri = root.eClass().getEPackage().getNsURI();
 		Map<String, RoleMapping> roleMappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(mmUri);
 		return roleMappings;
+	}
+	
+	private List<EObject> getElementsByUris(Resource resource, List<EObject> originalElements){
+		if(originalElements != null & resource != null){
+			ResourceSet rs = resource.getResourceSet();
+			List<EObject> elements = new ArrayList<EObject>();
+			for (EObject element : originalElements) {
+				URI uri = EcoreUtil.getURI(element);
+				boolean platform = uri.isPlatform();
+				EObject realElement = null;
+				if(platform){
+					realElement = rs.getEObject(uri, true);
+				} else {
+					String fragmentUri = uri.toString().substring(2);
+					realElement = resource.getEObject(fragmentUri);
+				}
+				if(realElement != null){
+					elements.add(realElement);
+				}
+			}
+			return elements;
+		}
+		return null;
 	}
 }
