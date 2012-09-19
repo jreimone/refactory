@@ -70,7 +70,7 @@ public class ModelRefactoring extends Refactoring {
 
 		interpreter = refactorer.getInterpreter();
 		interpreter.collectValueProviders();
-		refactorer.fakeRefactor();
+		this.refactorer.fakeRefactor();
 		//		doCollectValuesToProvide();
 	}
 

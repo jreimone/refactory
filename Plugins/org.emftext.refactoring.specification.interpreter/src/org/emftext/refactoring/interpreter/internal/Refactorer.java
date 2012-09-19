@@ -18,6 +18,7 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -73,6 +75,7 @@ public class Refactorer implements IRefactorer {
 	private EObject fakeRefactoredModel;
 	private IValueProviderFactory valueProviderFactory;
 	private RoleMapping roleMapping;
+	private Copier copier;
 
 	public Refactorer(Resource resource, RoleMapping roleMapping) {
 		this.resource = resource;
@@ -203,7 +206,7 @@ public class Refactorer implements IRefactorer {
 					wizardPage.setRoleRuntimeInstanceMap(interpreter.getRoleRuntimeInstances());
 				}
 
-				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, null);
+				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, copier);
 				int severity = postProcessingStatus.getSeverity();
 
 				if (severity != IRefactoringStatus.OK) {
@@ -316,7 +319,7 @@ public class Refactorer implements IRefactorer {
 	 */
 	private void fakeInterpreteAndPreCollectValues(RoleMapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
 		// copy init start
-		Copier copier = new Copier(false, true);
+		copier = new Copier(false, true);
 		List<EObject> originalElements = new LinkedList<EObject>();
 		// copy start
 		for (Resource resource : refactoredModelRS.getResources()) {
@@ -331,7 +334,25 @@ public class Refactorer implements IRefactorer {
 		copier.copyReferences();
 		List<EObject> copiedInputSelection = new LinkedList<EObject>();
 		for (EObject original : filteredElements) {
-			URI uri = EcoreUtil.getURI(original);
+			///// von hier neu
+			// TODO hier kommt NULL raus beim Kopieren, fuck
+//			for (EObject originalModel : originalElements) {
+//				if(EcoreUtil.isAncestor(originalModel, original)){
+//					URI uri = EcoreUtil.getURI(original);
+//					EObject copiedModel = copier.get(originalModel);
+//					Resource copiedRsource = copiedModel.eResource();
+//					if(copiedRsource == null){
+//						ResourceSet copiedRS = new ResourceSetImpl();
+//						URI copiedUri = EcoreUtil.getURI(copiedModel);
+//						copiedRsource = copiedRS.createResource(copiedUri);
+//						copiedRsource.getContents().add(copiedModel);
+//					}
+//					EObject copy = copiedRsource.getEObject(uri.toString());
+//					copiedInputSelection.add(copy);
+//				}
+//				
+//			}
+			//// bis hier hin
 			EObject copy = copier.get(original);
 			//if(copy == null){
 //				EObject eObject = refactoredModelRS.getEObject(uri, true);
@@ -481,7 +502,22 @@ public class Refactorer implements IRefactorer {
 	 * emf.common.util.EList)
 	 */
 	public void setInput(List<? extends EObject> selectedElements) {
-		currentSelection = selectedElements;
+		ResourceSet rs = resource.getResourceSet();
+		List<EObject> elements = new ArrayList<EObject>();
+		for (EObject element : selectedElements) {
+			URI uri = EcoreUtil.getURI(element);
+			boolean platform = uri.isPlatform();
+			EObject realElement = null;
+			if(platform){
+				realElement = rs.getEObject(uri, true);
+			} else {
+				realElement = resource.getEObject(uri.toString());
+			}
+			if(realElement != null){
+				elements.add(realElement);
+			}
+		}
+		currentSelection = elements;
 	}
 
 	/*
