@@ -532,19 +532,16 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		inform();
 	}
 	
-	//TODO Modell von anderen Dateien unterscheiden
 	private void listenerOperation(IResourceChangeEvent event){
 		IResourceDelta delta = event.getDelta();
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE && getChangedResource(delta).getMarkerDeltas().length <= 0){
 			delta = getChangedResource(delta);
 			IResource resource = delta.getResource();
-			if (!resource.getFileExtension().equals("java")){
-				IPath location = resource.getFullPath();
-				URI fileURI = URI.createPlatformResourceURI(location.toString(), true);
-				ResourceSet resourceSet = new ResourceSetImpl();
-				loadedResource = resourceSet.getResource(fileURI, true);
-				calculate();
-			}
+			IPath location = resource.getFullPath();
+			URI fileURI = URI.createPlatformResourceURI(location.toString(), true);
+			ResourceSet resourceSet = new ResourceSetImpl();
+			loadedResource = resourceSet.getResource(fileURI, true);
+			calculate();
 		}
 	}
 
@@ -616,9 +613,10 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MODEL_SMELL_MODEL__OBSERVER, oldObserver, observer));
 	}
 
+	
 	public void setQualityScale(Quality quality, Float factor){
 		this.qualityScale.put(quality, factor);
-		inform();
+		calculate();
 	}
 	
 	public static ModelSmellModel getMain(){
