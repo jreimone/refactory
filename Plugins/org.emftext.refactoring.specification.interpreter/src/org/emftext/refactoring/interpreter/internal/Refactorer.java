@@ -34,13 +34,11 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.language.refactoring.specification.resource.analysis.RefspecTEXTTokenResolver;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
@@ -206,7 +204,7 @@ public class Refactorer implements IRefactorer {
 					wizardPage.setRoleRuntimeInstanceMap(interpreter.getRoleRuntimeInstances());
 				}
 
-				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, copier);
+				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, copier, currentSelection);
 				int severity = postProcessingStatus.getSeverity();
 
 				if (severity != IRefactoringStatus.OK) {
@@ -390,7 +388,7 @@ public class Refactorer implements IRefactorer {
 //					wizardPage.setRoleRuntimeInstanceMap(fakeInterpreter.getRoleRuntimeInstances());
 //				}
 				
-				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier);
+				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier, currentSelection);
 
 				if (fakePostProcessingStatus.getSeverity() != IRefactoringStatus.OK) {
 					int severity = fakePostProcessingStatus.getSeverity();
