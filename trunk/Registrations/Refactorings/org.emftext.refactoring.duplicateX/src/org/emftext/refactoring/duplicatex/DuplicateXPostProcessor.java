@@ -51,7 +51,7 @@ public class DuplicateXPostProcessor extends AbstractRefactoringPostProcessor {
 	}
 
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection) {
 		EObject container = RoleUtil.getFirstObjectForRole("Container",	EObject.class, roleRuntimeInstanceMap);
 		EObject element = RoleUtil.getFirstObjectForRole("Element",	EObject.class, roleRuntimeInstanceMap);
 
