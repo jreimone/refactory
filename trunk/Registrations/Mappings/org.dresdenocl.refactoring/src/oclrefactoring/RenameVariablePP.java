@@ -63,7 +63,7 @@ public class RenameVariablePP implements IRefactoringPostProcessor {
 			EObject refactoredModel, ResourceSet resourceSet,
 			ChangeDescription change, RefactoringSpecification refSpec,
 			List<IModelRefactoringWizardPage> customWizardPages,
-			boolean isFakeRun, Map<EObject, EObject> copier) {
+			boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection) {
 		
 		if (isFakeRun) {
 			System.out.println("---------------------postprocessor activated in fake mode - no processing done for now!--------------------");

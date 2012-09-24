@@ -67,7 +67,7 @@ public class SeparateContextClassifiersPP extends AbstractRefactoringPostProcess
 	
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
-			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection) {
 
 		if (debug && isFakeRun) return Status.OK_STATUS;
 		System.out.println("Separate Context Classifiers postprocessor activated!");
