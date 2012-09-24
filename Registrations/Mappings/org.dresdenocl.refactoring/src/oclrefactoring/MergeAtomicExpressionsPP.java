@@ -66,7 +66,7 @@ public class MergeAtomicExpressionsPP extends AbstractRefactoringPostProcessor {
 	
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
-			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection) {
 
 		System.err.println("Merge Constraints postprocessor activated!");
 		
