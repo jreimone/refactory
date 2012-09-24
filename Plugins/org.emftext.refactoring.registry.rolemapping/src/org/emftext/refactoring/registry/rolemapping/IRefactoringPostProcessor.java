@@ -67,7 +67,8 @@ public interface IRefactoringPostProcessor {
 	 * @param change the {@link ChangeDescription} containing all changes which were made before invoking this postprocessor
 	 * @param refSpec the passed {@link RefactoringSpecification} for further analysis
 	 * @param copier a copier is passed which contains a map from original to copied model elements
+	 * @param initialSelection all the initial selected elements
 	 * @return the status of the postprocessing 
 	 */
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier);
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection);
 }
