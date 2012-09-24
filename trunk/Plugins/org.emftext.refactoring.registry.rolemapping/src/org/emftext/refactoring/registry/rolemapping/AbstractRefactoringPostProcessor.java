@@ -43,7 +43,7 @@ public class AbstractRefactoringPostProcessor implements IRefactoringPostProcess
 	}
 
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
-			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection) {
 		
 		//Provide backwards compatibility for those classes that need it.
 		//All others may simply override this method.
