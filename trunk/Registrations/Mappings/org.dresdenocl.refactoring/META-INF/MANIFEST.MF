@@ -23,3 +23,4 @@ Import-Package: org.eclipse.emf.compare,
  org.eclipse.emf.compare.diff.metamodel,
  org.eclipse.emf.compare.match.metamodel,
  org.emftext.language.refactoring.refactoring_specification
+Export-Package: org.dresdenocl.refactoring
