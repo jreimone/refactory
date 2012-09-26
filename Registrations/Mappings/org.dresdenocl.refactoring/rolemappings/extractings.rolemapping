@@ -2,15 +2,23 @@ ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
 IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
 
 
-
-
-"Extract Variable" maps <SelectXWith2Vars> {
+"Extract Variable" maps <SelectXWithVar> {
 //	OrigContainer := OclExpressionCS;
-	Extract := OclExpressionCS;
-	NewContainer := SimpleNameCS (newName -> simpleName );
-	NewType := SimpleNameCS (newTypeName -> simpleName);
-
+//	Extract := OclExpressionCS;
+//	NewContainer := SimpleNameCS (newName -> simpleName );
+//	NewType := SimpleNameCS (newTypeName -> simpleName);
+	
+	Selection := OclExpressionCS;
+	Nameable := SimpleNameCS( name -> simpleName);
 }
+
+
+//"Extract Variable" maps <SelectXWith2Vars> {
+//	OrigContainer := OclExpressionCS;
+//	Extract := OclExpressionCS;
+//	NewContainer := SimpleNameCS (newName -> simpleName );
+//	NewType := SimpleNameCS (newTypeName -> simpleName);
+//}
 
 "Remove Redundant Brackets" maps <SelectX> {
 	Selection := BracketExpCS;
