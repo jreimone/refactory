@@ -221,14 +221,13 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 		//		System.out.println("myvd: "+myVD.eClass());
 		variableDeclaration.setVariableName(variableName);
 
-		//there needs to be a reference created replacing the extract
-//		PostProcessingHelper.replaceExpression(extract, variableName);
-//		PostProcessingHelper.replaceExpression(context, extract, variableName);	
+		EObject context = extract.eContainer();
 		// now move the extract around
-		Copier copier = new Copier(false, true);
-		copier.copy(constraintRoot);
-		copier.copyReferences();
-		OclExpressionCS copy = (OclExpressionCS) copier.get(extract);
+//		Copier copier = new Copier(false, true);
+//		copier.copy(constraintRoot);
+//		copier.copyReferences();
+//		OclExpressionCS copy = (OclExpressionCS) copier.get(extract);
+		OclExpressionCS copy = EcoreUtil.copy(extract);
 		if(subsequentExtracts.size() == 1){
 //			variableDeclaration.setInitialization(extract);
 			variableDeclaration.setInitialization(copy);
@@ -246,7 +245,8 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 						} else if(featureCall instanceof OperationCallBaseExpCS){
 							callExp.getNavigationOperator().add("->");
 						}
-						callExp.getFeatureCalls().add(featureCall);
+						ImplicitFeatureCallCS featureCallCopy = EcoreUtil.copy(featureCall);
+						callExp.getFeatureCalls().add(featureCallCopy);
 					} else {
 						break;
 					}
@@ -257,6 +257,9 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 		}
 		variableDeclaration.setEqual("=");
 
+		//there needs to be a reference created replacing the extract
+//		PostProcessingHelper.replaceExpression(extract, variableName);
+//		PostProcessingHelper.replaceExpression(context, extract, variableName);	
 
 		//		
 		//		NamedLiteralExpCS myReferenceLiteral = myOclFactory.createNamedLiteralExpCS();
