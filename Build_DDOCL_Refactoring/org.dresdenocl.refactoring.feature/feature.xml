@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.dresdenocl.refactoring.feature"
+      label="Refactoring for Dresden OCL Feature"
+      version="1.0.0.qualifier"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://www.dresden-ocl.org/refactoring/">
+      Refactoring Support for Dresden OCL realised with Refactory (http://modelrefactoring.org).
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2012 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+   </copyright>
+
+   <license>
+      Eclipse Public License v1.0
+
+Copyright (c) 2006-2012
+Software Technology Group, Dresden University of Technology
+DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Software Technology Group - TU Dresden, Germany;
+  DevBoost GmbH - Berlin, Germany
+     - initial API and implementation
+   </license>
+
+   <requires>
+      <import feature="tudresden.ocl20.feature.facade" version="3.1.0.201207161929"/>
+      <import feature="org.emftext.refactoring.sdk" version="0.9.0.v201207171737"/>
+   </requires>
+
+   <plugin
+         id="org.dresdenocl.refactoring"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
