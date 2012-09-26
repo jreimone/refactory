@@ -1,0 +1,24 @@
+ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
+IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
+
+
+"Extract Variable" maps <SelectXWithVar> {
+	Selection := OclExpressionCS;
+	Nameable := SimpleNameCS( name -> simpleName);
+}
+
+
+//"Extract Variable" maps <SelectXWith2Vars> {
+//	OrigContainer := OclExpressionCS;
+//	Extract := OclExpressionCS;
+//	NewContainer := SimpleNameCS (newName -> simpleName );
+//	NewType := SimpleNameCS (newTypeName -> simpleName);
+//}
+
+"Inline Variable" maps <SelectX> {
+	Selection := VariableDeclarationWithInitCS;
+}
+
+"Inline Variable Here" maps <SelectX> {
+	Selection := NamedLiteralExpCS;
+}

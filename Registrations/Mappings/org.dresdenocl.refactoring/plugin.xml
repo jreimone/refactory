@@ -6,23 +6,20 @@
       <rolemapping
             rolemapping_resource="rolemappings/renamings.rolemapping">
       </rolemapping>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/extractings.rolemapping">
+            rolemapping_resource="rolemappings/removals.rolemapping">
       </rolemapping>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.rolemapping">
       <rolemapping
-            rolemapping_resource="rolemappings/inlinings.rolemapping">
+            rolemapping_resource="rolemappings/extractions.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/separations.rolemapping">
       </rolemapping>
    </extension>
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="RenameSimpleNameCS"
+            mapping_name="Rename"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.OCLPostProcessor">
       </postprocessor>
@@ -110,7 +107,7 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="RenameVariable"
+            mapping_name="Rename Variable"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
             postprocessor="oclrefactoring.RenameVariablePP">
       </postprocessor>

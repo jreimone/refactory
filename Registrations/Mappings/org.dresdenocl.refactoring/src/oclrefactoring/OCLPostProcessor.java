@@ -21,7 +21,6 @@ package oclrefactoring;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -35,6 +34,7 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.util.RoleUtil;
 
 import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
@@ -73,24 +73,9 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 		
 		//extract selection, old name and new name
 
-		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
-		List<EObject> mappedElements;
-		for (Role role : keySet) {
-			if (role.getName().equals("Selection")) {
-				mappedElements = roleRuntimeInstanceMap.get(role);
-				if (mappedElements != null && mappedElements.size() > 0
-						&& (mappedElements.get(0) instanceof SimpleNameCS)) {
-					selection = (SimpleNameCS) mappedElements.get(0);
-				}
-			}
-			else if (role.getName().equals("Nameable")) {
-				mappedElements = roleRuntimeInstanceMap.get(role);
-				if (mappedElements != null && mappedElements.size() >0 && (mappedElements.get(0)) instanceof SimpleNameCS) {
-					newName = ((SimpleNameCS) mappedElements.get(0)).getSimpleName();
-					
-				}
-			}
-		}
+		selection = RoleUtil.getFirstObjectForRole("Selection", SimpleNameCS.class, roleRuntimeInstanceMap);
+		newName = RoleUtil.getFirstObjectForRole("Nameable", SimpleNameCS.class, roleRuntimeInstanceMap).getSimpleName();
+		
 		if (selection == null) {
 			System.err.println("No variable declaration could be found by postprocessor. Refactoring aborted.");
 			return Status.OK_STATUS;

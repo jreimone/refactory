@@ -1,14 +1,18 @@
 ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
 IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
 
-
-"Inline Variable" maps <SelectX> {
-	Selection := VariableDeclarationWithInitCS;
+"Split Expression" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
 }
 
-"Inline Variable Here" maps <SelectX> {
-	Selection := NamedLiteralExpCS;
+"Split Expression Atomic" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
 }
+
+"Separate Context Classifiers" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
+}
+
 
 "Merge Atomic Expressions" maps <SelectX> {
 	Selection := ClassifierContextDeclarationCS;
