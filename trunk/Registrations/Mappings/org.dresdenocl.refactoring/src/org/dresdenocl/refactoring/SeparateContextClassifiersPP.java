@@ -16,7 +16,7 @@
 /**
  * 
  */
-package oclrefactoring;
+package org.dresdenocl.refactoring;
 
 import java.util.List;
 import java.util.Map;

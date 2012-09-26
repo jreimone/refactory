@@ -13,7 +13,7 @@
  *   DevBoost GmbH - Berlin, Germany
  *      - initial API and implementation
  ******************************************************************************/
-package oclrefactoring;
+package org.dresdenocl.refactoring;
 
 import java.util.List;
 import java.util.Map;

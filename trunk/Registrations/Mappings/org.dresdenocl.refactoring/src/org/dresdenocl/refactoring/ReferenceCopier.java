@@ -22,7 +22,7 @@
  *
  *
  */
-package oclrefactoring;
+package org.dresdenocl.refactoring;
 
 import java.util.ArrayList;
 import java.util.Collection;
