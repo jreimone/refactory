@@ -11,7 +11,6 @@
     </genClasses>
     <genClasses ecoreClass="smell_model.ecore#//ModelSmell_Rolemapping_Mapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmell_Rolemapping_Mapping/modelSmell"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmell_Rolemapping_Mapping/mappingConcretisation"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmell_Rolemapping_Mapping/roleMappings"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmell_Rolemapping_Mapping/metaModelSpecification"/>
     </genClasses>
@@ -21,12 +20,6 @@
     <genClasses ecoreClass="smell_model.ecore#//Quality_ModelSmell_Mapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Quality_ModelSmell_Mapping/modelSmell"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Quality_ModelSmell_Mapping/quality"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="smell_model.ecore#//Metric">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//Metric/name"/>
-      <genOperations ecoreOperation="smell_model.ecore#//Metric/calculate">
-        <genParameters ecoreParameter="smell_model.ecore#//Metric/calculate/loadedResource"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="smell_model.ecore#//Metric_Quality_Mapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//Metric_Quality_Mapping/quality"/>
@@ -38,45 +31,36 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/metric_quality"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/qualities"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/modelSmells"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/metrics"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/loadedResource"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/qualityScale"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/observer"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/result"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/modelSmellDescription"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/metricResultMap"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/loadedMetaModel"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellModel/threshold"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell_model.ecore#//ModelSmellModel/metrics"/>
       <genOperations ecoreOperation="smell_model.ecore#//ModelSmellModel/init"/>
       <genOperations ecoreOperation="smell_model.ecore#//ModelSmellModel/calculate"/>
-      <genOperations ecoreOperation="smell_model.ecore#//ModelSmellModel/register">
-        <genParameters ecoreParameter="smell_model.ecore#//ModelSmellModel/register/o"/>
-      </genOperations>
-      <genOperations ecoreOperation="smell_model.ecore#//ModelSmellModel/unregister">
-        <genParameters ecoreParameter="smell_model.ecore#//ModelSmellModel/unregister/o"/>
-      </genOperations>
-      <genOperations ecoreOperation="smell_model.ecore#//ModelSmellModel/inform"/>
       <genOperations ecoreOperation="smell_model.ecore#//ModelSmellModel/getNamespace"/>
     </genClasses>
     <genClasses ecoreClass="smell_model.ecore#//RoleMapping"/>
     <genClasses ecoreClass="smell_model.ecore#//Mapping">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//Mapping/factor"/>
     </genClasses>
-    <genClasses ecoreClass="smell_model.ecore#//MappingConcretisation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//MappingConcretisation/newFactor"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell_model.ecore#//MappingConcretisation/mapping"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="smell_model.ecore#//Observer">
-      <genOperations ecoreOperation="smell_model.ecore#//Observer/update"/>
-    </genClasses>
     <genClasses ecoreClass="smell_model.ecore#//ModelSmellResult">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellResult/result"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellResult/threshold"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelSmellResult/result"/>
       <genOperations ecoreOperation="smell_model.ecore#//ModelSmellResult/calculate">
         <genParameters ecoreParameter="smell_model.ecore#//ModelSmellResult/calculate/metric_quality"/>
         <genParameters ecoreParameter="smell_model.ecore#//ModelSmellResult/calculate/quality_modelSmell"/>
         <genParameters ecoreParameter="smell_model.ecore#//ModelSmellResult/calculate/metricResultMap"/>
         <genParameters ecoreParameter="smell_model.ecore#//ModelSmellResult/calculate/qualityScale"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="smell_model.ecore#//ModelMetric">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell_model.ecore#//ModelMetric/name"/>
+      <genOperations ecoreOperation="smell_model.ecore#//ModelMetric/calculate">
+        <genParameters ecoreParameter="smell_model.ecore#//ModelMetric/calculate/loadedResource"/>
       </genOperations>
     </genClasses>
   </genPackages>

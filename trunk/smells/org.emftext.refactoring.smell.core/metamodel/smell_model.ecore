@@ -7,8 +7,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ModelSmell_Rolemapping_Mapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelSmell" lowerBound="1"
         eType="#//ModelSmell"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingConcretisation"
-        upperBound="-1" eType="#//MappingConcretisation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleMappings" lowerBound="1"
         upperBound="-1" eType="ecore:EClass platform:/plugin/org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.ecore#//RoleMapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaModelSpecification"
@@ -23,32 +21,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="quality" lowerBound="1"
         eType="#//Quality"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Metric" abstract="true" interface="true">
-    <eOperations name="calculate">
-      <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
-        <eTypeArguments eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
-        <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
-      </eGenericType>
-      <eParameters name="loadedResource" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EResource"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Metric_Quality_Mapping" eSuperTypes="#//Mapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="quality" lowerBound="1"
         eType="#//Quality"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metric" lowerBound="1"
-        eType="#//Metric"/>
+        eType="#//ModelMetric"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelSmellModel">
     <eOperations name="init"/>
     <eOperations name="calculate"/>
-    <eOperations name="register">
-      <eParameters name="o" eType="#//Observer"/>
-    </eOperations>
-    <eOperations name="unregister">
-      <eParameters name="o" eType="#//Observer"/>
-    </eOperations>
-    <eOperations name="inform"/>
     <eOperations name="getNamespace" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelSmell_roleMapping"
         lowerBound="1" upperBound="-1" eType="#//ModelSmell_Rolemapping_Mapping" containment="true"/>
@@ -60,8 +41,6 @@
         upperBound="-1" eType="#//Quality" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelSmells" lowerBound="1"
         upperBound="-1" eType="#//ModelSmell" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" lowerBound="1"
-        upperBound="-1" eType="#//Metric" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="loadedResource" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EResource"
         transient="true" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityScale" transient="true"
@@ -69,11 +48,6 @@
       <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
         <eTypeArguments eClassifier="#//Quality"/>
         <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
-      </eGenericType>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="observer" transient="true">
-      <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EEList">
-        <eTypeArguments eClassifier="#//Observer"/>
       </eGenericType>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" lowerBound="1"
@@ -87,7 +61,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="metricResultMap" transient="true">
       <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
-        <eTypeArguments eClassifier="#//Metric"/>
+        <eTypeArguments eClassifier="#//ModelMetric"/>
         <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
           <eTypeArguments eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
           <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
@@ -97,18 +71,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="loadedMetaModel" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
+        eType="#//ModelMetric" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleMapping"/>
   <eClassifiers xsi:type="ecore:EClass" name="Mapping">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="factor" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingConcretisation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newFactor" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
-        eType="#//Mapping"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Observer" abstract="true" interface="true">
-    <eOperations name="update"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelSmellResult">
     <eOperations name="calculate">
@@ -124,7 +92,7 @@
       </eParameters>
       <eParameters name="metricResultMap">
         <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
-          <eTypeArguments eClassifier="#//Metric"/>
+          <eTypeArguments eClassifier="#//ModelMetric"/>
           <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
             <eTypeArguments eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
             <eTypeArguments eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
@@ -138,6 +106,7 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="result" transient="true">
       <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
         <eTypeArguments eClassifier="#//ModelSmell"/>
@@ -147,6 +116,15 @@
         </eTypeArguments>
       </eGenericType>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelMetric">
+    <eOperations name="calculate">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+      </eGenericType>
+      <eParameters name="loadedResource" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EResource"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -45,8 +45,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
-import org.emftext.refactoring.smell.smell_model.Metric;
 import org.emftext.refactoring.smell.smell_model.Metric_Quality_Mapping;
+import org.emftext.refactoring.smell.smell_model.ModelMetric;
 import org.emftext.refactoring.smell.smell_model.ModelSmell;
 import org.emftext.refactoring.smell.smell_model.ModelSmellModel;
 import org.emftext.refactoring.smell.smell_model.ModelSmellResult;
@@ -71,15 +71,14 @@ import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getMetric_quality <em>Metric quality</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getQualities <em>Qualities</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getModelSmells <em>Model Smells</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getMetrics <em>Metrics</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getLoadedResource <em>Loaded Resource</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getQualityScale <em>Quality Scale</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getObserver <em>Observer</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getResult <em>Result</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getModelSmellDescription <em>Model Smell Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getMetricResultMap <em>Metric Result Map</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getLoadedMetaModel <em>Loaded Meta Model</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getThreshold <em>Threshold</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl#getMetrics <em>Metrics</em>}</li>
  * </ul>
  * </p>
  *
@@ -137,16 +136,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	protected EList<ModelSmell> modelSmells;
 
 	/**
-	 * The cached value of the '{@link #getMetrics() <em>Metrics</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetrics()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Metric> metrics;
-	
-	/**
 	 * The default value of the '{@link #getLoadedResource() <em>Loaded Resource</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -154,7 +143,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Resource LOADED_RESOURCE_EDEFAULT = null;
 	
 	private Resource loadedResource;
 	
@@ -170,7 +158,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	
 	private Map<ModelSmell, String> modelSmellDescription;
 
-	private Map<Metric, Map<EObject, Float>> metricResultMap;
+	private Map<ModelMetric, Map<EObject, Float>> metricResultMap;
 	
 	private EPackage loadedMetaModel;
 	
@@ -201,6 +189,16 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	protected Float threshold = THRESHOLD_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getMetrics() <em>Metrics</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetrics()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ModelMetric> metrics;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -219,7 +217,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	public void init() {
 		modelSmells = new BasicEList<ModelSmell>();
 		qualities = new BasicEList<Quality>();
-		metrics = new BasicEList<Metric>();
+		metrics = new BasicEList<ModelMetric>();
 		quality_modelSmell = new BasicEList<Quality_ModelSmell_Mapping>();
 		metric_quality = new BasicEList<Metric_Quality_Mapping>();
 		modelSmell_roleMapping = new BasicEList<ModelSmell_Rolemapping_Mapping>();
@@ -304,12 +302,12 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	private void evaluateMetricExtension(IExtensionRegistry registry){
 		if (loadedResource != null){
-			metricResultMap = new HashMap<Metric, Map<EObject, Float>>();
+			metricResultMap = new HashMap<ModelMetric, Map<EObject, Float>>();
 			IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
 			try {
 				for (IConfigurationElement e : metricExtensions) {
 					final Object o = e.createExecutableExtension("class");
-					if (o instanceof Metric) {
+					if (o instanceof ModelMetric) {
 						executeMetricExtension(o, loadedResource);
 					}
 				}
@@ -329,9 +327,9 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 			@Override
 			public void run() throws Exception {
-				for (Metric m : metrics){
-					if (m.getName().equals(((Metric) o).getName())){
-						metricResultMap.put(m, ((Metric) o).calculate(resource));
+				for (ModelMetric m : metrics){
+					if (m.getName().equals(((ModelMetric) o).getName())){
+						metricResultMap.put(m, ((ModelMetric) o).calculate(resource));
 					}
 				}
 			}
@@ -348,7 +346,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 					i++;
 					while(configStrings.get(i).startsWith(">")) {
 						String[] temp = configStrings.get(i).split("::");
-						for (Metric m : metrics){
+						for (ModelMetric m : metrics){
 							if(temp[0].equals(">"+m.getName())){
 								Metric_Quality_Mapping tempMapping = Smell_modelFactory.eINSTANCE.createMetric_Quality_Mapping();
 								tempMapping.setFactor(Float.parseFloat(temp[1]));
@@ -403,13 +401,13 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	}
 	
 	private void createMetrics(IExtensionRegistry registry){
-		metrics = new BasicEList<Metric>();
+		metrics = new BasicEList<ModelMetric>();
 		IConfigurationElement[] metricExtensions = registry.getConfigurationElementsFor(metric_ID);
 		try {
 			for (IConfigurationElement e : metricExtensions) {
 				final Object o = e.createExecutableExtension("class");
-				if (o instanceof Metric) {
-					metrics.add((Metric) o);
+				if (o instanceof ModelMetric) {
+					metrics.add((ModelMetric) o);
 				}
 			}
 		} catch (CoreException ex) {
@@ -592,28 +590,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE, oldQualityScale, qualityScale));
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Observer> getObserver() {
-		return observer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setObserver(EList<Observer> newObserver) {
-		EList<Observer> oldObserver = observer;
-		observer = newObserver;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MODEL_SMELL_MODEL__OBSERVER, oldObserver, observer));
-	}
-
-	
 	public void setQualityScale(Quality quality, Float factor){
 		this.qualityScale.put(quality, factor);
 		calculate();
@@ -688,9 +664,9 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Metric> getMetrics() {
+	public EList<ModelMetric> getMetrics() {
 		if (metrics == null) {
-			metrics = new EObjectContainmentEList<Metric>(Metric.class, this, Smell_modelPackage.MODEL_SMELL_MODEL__METRICS);
+			metrics = new EObjectContainmentEList<ModelMetric>(ModelMetric.class, this, Smell_modelPackage.MODEL_SMELL_MODEL__METRICS);
 		}
 		return metrics;
 	}
@@ -736,14 +712,10 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				return getQualities();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__MODEL_SMELLS:
 				return getModelSmells();
-			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
-				return getMetrics();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE:
 				return getLoadedResource();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE:
 				return getQualityScale();
-			case Smell_modelPackage.MODEL_SMELL_MODEL__OBSERVER:
-				return getObserver();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__RESULT:
 				if (resolve) return getResult();
 				return basicGetResult();
@@ -756,6 +728,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				return basicGetLoadedMetaModel();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD:
 				return getThreshold();
+			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
+				return getMetrics();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -789,18 +763,11 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				getModelSmells().clear();
 				getModelSmells().addAll((Collection<? extends ModelSmell>)newValue);
 				return;
-			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
-				getMetrics().clear();
-				getMetrics().addAll((Collection<? extends Metric>)newValue);
-				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE:
 				setLoadedResource((Resource)newValue);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE:
 				setQualityScale((Map<Quality, Float>)newValue);
-				return;
-			case Smell_modelPackage.MODEL_SMELL_MODEL__OBSERVER:
-				setObserver((EList<Observer>)newValue);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__RESULT:
 				setResult((ModelSmellResult)newValue);
@@ -809,13 +776,17 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				setModelSmellDescription((Map<ModelSmell, String>)newValue);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__METRIC_RESULT_MAP:
-				setMetricResultMap((Map<Metric, Map<EObject, Float>>)newValue);
+				setMetricResultMap((Map<ModelMetric, Map<EObject, Float>>)newValue);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_META_MODEL:
 				setLoadedMetaModel((EPackage)newValue);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD:
 				setThreshold((Float)newValue);
+				return;
+			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
+				getMetrics().clear();
+				getMetrics().addAll((Collection<? extends ModelMetric>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -844,17 +815,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			case Smell_modelPackage.MODEL_SMELL_MODEL__MODEL_SMELLS:
 				getModelSmells().clear();
 				return;
-			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
-				getMetrics().clear();
-				return;
-			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE:
-				setLoadedResource(LOADED_RESOURCE_EDEFAULT);
-				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE:
 				setQualityScale((Map<Quality, Float>)null);
-				return;
-			case Smell_modelPackage.MODEL_SMELL_MODEL__OBSERVER:
-				setObserver((EList<Observer>)null);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__RESULT:
 				setResult((ModelSmellResult)null);
@@ -863,13 +825,16 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				setModelSmellDescription((Map<ModelSmell, String>)null);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__METRIC_RESULT_MAP:
-				setMetricResultMap((Map<Metric, Map<EObject, Float>>)null);
+				setMetricResultMap((Map<ModelMetric, Map<EObject, Float>>)null);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_META_MODEL:
 				setLoadedMetaModel((EPackage)null);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD:
 				setThreshold(THRESHOLD_EDEFAULT);
+				return;
+			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
+				getMetrics().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -893,14 +858,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				return qualities != null && !qualities.isEmpty();
 			case Smell_modelPackage.MODEL_SMELL_MODEL__MODEL_SMELLS:
 				return modelSmells != null && !modelSmells.isEmpty();
-			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
-				return metrics != null && !metrics.isEmpty();
-			case Smell_modelPackage.MODEL_SMELL_MODEL__LOADED_RESOURCE:
-				return LOADED_RESOURCE_EDEFAULT == null ? loadedResource != null : !LOADED_RESOURCE_EDEFAULT.equals(loadedResource);
 			case Smell_modelPackage.MODEL_SMELL_MODEL__QUALITY_SCALE:
 				return qualityScale != null;
-			case Smell_modelPackage.MODEL_SMELL_MODEL__OBSERVER:
-				return observer != null;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__RESULT:
 				return result != null;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__MODEL_SMELL_DESCRIPTION:
@@ -911,6 +870,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 				return loadedMetaModel != null;
 			case Smell_modelPackage.MODEL_SMELL_MODEL__THRESHOLD:
 				return THRESHOLD_EDEFAULT == null ? threshold != null : !THRESHOLD_EDEFAULT.equals(threshold);
+			case Smell_modelPackage.MODEL_SMELL_MODEL__METRICS:
+				return metrics != null && !metrics.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -929,8 +890,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		result.append(loadedResource);
 		result.append(", qualityScale: ");
 		result.append(qualityScale);
-		result.append(", observer: ");
-		result.append(observer);
 		result.append(", modelSmellDescription: ");
 		result.append(modelSmellDescription);
 		result.append(", metricResultMap: ");
@@ -975,7 +934,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map<Metric, Map<EObject, Float>> getMetricResultMap() {
+	public Map<ModelMetric, Map<EObject, Float>> getMetricResultMap() {
 		return metricResultMap;
 	}
 
@@ -984,8 +943,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMetricResultMap(Map<Metric, Map<EObject, Float>> newMetricResultMap) {
-		Map<Metric, Map<EObject, Float>> oldMetricResultMap = metricResultMap;
+	public void setMetricResultMap(Map<ModelMetric, Map<EObject, Float>> newMetricResultMap) {
+		Map<ModelMetric, Map<EObject, Float>> oldMetricResultMap = metricResultMap;
 		metricResultMap = newMetricResultMap;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Smell_modelPackage.MODEL_SMELL_MODEL__METRIC_RESULT_MAP, oldMetricResultMap, metricResultMap));
