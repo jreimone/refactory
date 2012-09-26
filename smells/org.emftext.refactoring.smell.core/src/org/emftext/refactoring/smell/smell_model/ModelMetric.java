@@ -15,15 +15,15 @@ import org.eclipse.emf.ecore.resource.Resource;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.Metric#getName <em>Name</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelMetric#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getMetric()
- * @model interface="true" abstract="true"
+ * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelMetric()
+ * @model
  * @generated
  */
-public interface Metric extends EObject {
+public interface ModelMetric extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -34,14 +34,14 @@ public interface Metric extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getMetric_Name()
+	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelMetric_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.Metric#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.ModelMetric#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.

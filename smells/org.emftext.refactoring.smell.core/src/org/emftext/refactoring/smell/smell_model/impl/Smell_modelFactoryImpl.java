@@ -150,9 +150,9 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MappingConcretisation createMappingConcretisation() {
-		MappingConcretisationImpl mappingConcretisation = new MappingConcretisationImpl();
-		return mappingConcretisation;
+	public ModelSmellResult createModelSmellResult() {
+		ModelSmellResultImpl modelSmellResult = new ModelSmellResultImpl();
+		return modelSmellResult;
 	}
 
 	/**
@@ -160,9 +160,9 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelSmellResult createModelSmellResult() {
-		ModelSmellResultImpl modelSmellResult = new ModelSmellResultImpl();
-		return modelSmellResult;
+	public ModelMetric createModelMetric() {
+		ModelMetricImpl modelMetric = new ModelMetricImpl();
+		return modelMetric;
 	}
 
 	/**

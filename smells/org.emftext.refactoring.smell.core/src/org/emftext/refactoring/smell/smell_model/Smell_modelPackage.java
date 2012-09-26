@@ -103,22 +103,13 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Concretisation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION = 1;
-
-	/**
 	 * The feature id for the '<em><b>Role Mappings</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS = 2;
+	int MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Meta Model Specification</b></em>' reference.
@@ -127,7 +118,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_ROLEMAPPING_MAPPING__META_MODEL_SPECIFICATION = 3;
+	int MODEL_SMELL_ROLEMAPPING_MAPPING__META_MODEL_SPECIFICATION = 2;
 
 	/**
 	 * The number of structural features of the '<em>Model Smell Rolemapping Mapping</em>' class.
@@ -136,7 +127,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_ROLEMAPPING_MAPPING_FEATURE_COUNT = 4;
+	int MODEL_SMELL_ROLEMAPPING_MAPPING_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.QualityImpl <em>Quality</em>}' class.
@@ -174,7 +165,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getMapping()
 	 * @generated
 	 */
-	int MAPPING = 8;
+	int MAPPING = 7;
 
 	/**
 	 * The feature id for the '<em><b>Factor</b></em>' attribute.
@@ -241,34 +232,6 @@ public interface Smell_modelPackage extends EPackage {
 	int QUALITY_MODEL_SMELL_MAPPING_FEATURE_COUNT = MAPPING_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.Metric <em>Metric</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.emftext.refactoring.smell.smell_model.Metric
-	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getMetric()
-	 * @generated
-	 */
-	int METRIC = 4;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METRIC__NAME = 0;
-
-	/**
-	 * The number of structural features of the '<em>Metric</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METRIC_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.Metric_Quality_MappingImpl <em>Metric Quality Mapping</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -276,7 +239,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getMetric_Quality_Mapping()
 	 * @generated
 	 */
-	int METRIC_QUALITY_MAPPING = 5;
+	int METRIC_QUALITY_MAPPING = 4;
 
 	/**
 	 * The feature id for the '<em><b>Factor</b></em>' attribute.
@@ -322,7 +285,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getModelSmellModel()
 	 * @generated
 	 */
-	int MODEL_SMELL_MODEL = 6;
+	int MODEL_SMELL_MODEL = 5;
 
 	/**
 	 * The feature id for the '<em><b>Model Smell role Mapping</b></em>' containment reference list.
@@ -370,22 +333,13 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_MODEL__MODEL_SMELLS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Metrics</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_SMELL_MODEL__METRICS = 5;
-
-	/**
 	 * The feature id for the '<em><b>Loaded Resource</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int MODEL_SMELL_MODEL__LOADED_RESOURCE = 6;
+  int MODEL_SMELL_MODEL__LOADED_RESOURCE = 5;
 
   /**
 	 * The feature id for the '<em><b>Quality Scale</b></em>' attribute.
@@ -394,16 +348,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL__QUALITY_SCALE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Observer</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_SMELL_MODEL__OBSERVER = 8;
+	int MODEL_SMELL_MODEL__QUALITY_SCALE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Result</b></em>' reference.
@@ -412,7 +357,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL__RESULT = 9;
+	int MODEL_SMELL_MODEL__RESULT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Model Smell Description</b></em>' attribute.
@@ -421,7 +366,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL__MODEL_SMELL_DESCRIPTION = 10;
+	int MODEL_SMELL_MODEL__MODEL_SMELL_DESCRIPTION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Metric Result Map</b></em>' attribute.
@@ -430,7 +375,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL__METRIC_RESULT_MAP = 11;
+	int MODEL_SMELL_MODEL__METRIC_RESULT_MAP = 9;
 
 	/**
 	 * The feature id for the '<em><b>Loaded Meta Model</b></em>' reference.
@@ -439,7 +384,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL__LOADED_META_MODEL = 12;
+	int MODEL_SMELL_MODEL__LOADED_META_MODEL = 10;
 
 	/**
 	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
@@ -448,7 +393,16 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL__THRESHOLD = 13;
+	int MODEL_SMELL_MODEL__THRESHOLD = 11;
+
+	/**
+	 * The feature id for the '<em><b>Metrics</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_SMELL_MODEL__METRICS = 12;
 
 	/**
 	 * The number of structural features of the '<em>Model Smell Model</em>' class.
@@ -457,7 +411,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_MODEL_FEATURE_COUNT = 14;
+	int MODEL_SMELL_MODEL_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.RoleMappingImpl <em>Role Mapping</em>}' class.
@@ -467,7 +421,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getRoleMapping()
 	 * @generated
 	 */
-	int ROLE_MAPPING = 7;
+	int ROLE_MAPPING = 6;
 
 	/**
 	 * The number of structural features of the '<em>Role Mapping</em>' class.
@@ -479,62 +433,6 @@ public interface Smell_modelPackage extends EPackage {
 	int ROLE_MAPPING_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.MappingConcretisationImpl <em>Mapping Concretisation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.emftext.refactoring.smell.smell_model.impl.MappingConcretisationImpl
-	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getMappingConcretisation()
-	 * @generated
-	 */
-	int MAPPING_CONCRETISATION = 9;
-
-	/**
-	 * The feature id for the '<em><b>New Factor</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CONCRETISATION__NEW_FACTOR = 0;
-
-	/**
-	 * The feature id for the '<em><b>Mapping</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CONCRETISATION__MAPPING = 1;
-
-	/**
-	 * The number of structural features of the '<em>Mapping Concretisation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CONCRETISATION_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.Observer <em>Observer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.emftext.refactoring.smell.smell_model.Observer
-	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getObserver()
-	 * @generated
-	 */
-	int OBSERVER = 10;
-
-	/**
-	 * The number of structural features of the '<em>Observer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBSERVER_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellResultImpl <em>Model Smell Result</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -542,16 +440,7 @@ public interface Smell_modelPackage extends EPackage {
 	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getModelSmellResult()
 	 * @generated
 	 */
-	int MODEL_SMELL_RESULT = 11;
-
-	/**
-	 * The feature id for the '<em><b>Result</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_SMELL_RESULT__RESULT = 0;
+	int MODEL_SMELL_RESULT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
@@ -560,7 +449,16 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_SMELL_RESULT__THRESHOLD = 1;
+	int MODEL_SMELL_RESULT__THRESHOLD = 0;
+
+	/**
+	 * The feature id for the '<em><b>Result</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_SMELL_RESULT__RESULT = 1;
 
 	/**
 	 * The number of structural features of the '<em>Model Smell Result</em>' class.
@@ -570,6 +468,34 @@ public interface Smell_modelPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_SMELL_RESULT_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.ModelMetricImpl <em>Model Metric</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.emftext.refactoring.smell.smell_model.impl.ModelMetricImpl
+	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getModelMetric()
+	 * @generated
+	 */
+	int MODEL_METRIC = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_METRIC__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Model Metric</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_METRIC_FEATURE_COUNT = 1;
 
 	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.ModelSmell <em>Model Smell</em>}'.
@@ -612,17 +538,6 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelSmell_Rolemapping_Mapping_ModelSmell();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMappingConcretisation <em>Mapping Concretisation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mapping Concretisation</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMappingConcretisation()
-	 * @see #getModelSmell_Rolemapping_Mapping()
-	 * @generated
-	 */
-	EReference getModelSmell_Rolemapping_Mapping_MappingConcretisation();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getRoleMappings <em>Role Mappings</em>}'.
@@ -698,27 +613,6 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getQuality_ModelSmell_Mapping_Quality();
-
-	/**
-	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.Metric <em>Metric</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Metric</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.Metric
-	 * @generated
-	 */
-	EClass getMetric();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.Metric#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.Metric#getName()
-	 * @see #getMetric()
-	 * @generated
-	 */
-	EAttribute getMetric_Name();
 
 	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.Metric_Quality_Mapping <em>Metric Quality Mapping</em>}'.
@@ -851,17 +745,6 @@ public interface Smell_modelPackage extends EPackage {
 	EAttribute getModelSmellModel_QualityScale();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getObserver <em>Observer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Observer</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.ModelSmellModel#getObserver()
-	 * @see #getModelSmellModel()
-	 * @generated
-	 */
-	EAttribute getModelSmellModel_Observer();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getResult <em>Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -948,48 +831,6 @@ public interface Smell_modelPackage extends EPackage {
 	EAttribute getMapping_Factor();
 
 	/**
-	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.MappingConcretisation <em>Mapping Concretisation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Mapping Concretisation</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.MappingConcretisation
-	 * @generated
-	 */
-	EClass getMappingConcretisation();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.MappingConcretisation#getNewFactor <em>New Factor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>New Factor</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.MappingConcretisation#getNewFactor()
-	 * @see #getMappingConcretisation()
-	 * @generated
-	 */
-	EAttribute getMappingConcretisation_NewFactor();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.smell_model.MappingConcretisation#getMapping <em>Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Mapping</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.MappingConcretisation#getMapping()
-	 * @see #getMappingConcretisation()
-	 * @generated
-	 */
-	EReference getMappingConcretisation_Mapping();
-
-	/**
-	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.Observer <em>Observer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Observer</em>'.
-	 * @see org.emftext.refactoring.smell.smell_model.Observer
-	 * @generated
-	 */
-	EClass getObserver();
-
-	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.ModelSmellResult <em>Model Smell Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1009,6 +850,27 @@ public interface Smell_modelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getModelSmellResult_Result();
+
+	/**
+	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.smell_model.ModelMetric <em>Model Metric</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Metric</em>'.
+	 * @see org.emftext.refactoring.smell.smell_model.ModelMetric
+	 * @generated
+	 */
+	EClass getModelMetric();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.ModelMetric#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.emftext.refactoring.smell.smell_model.ModelMetric#getName()
+	 * @see #getModelMetric()
+	 * @generated
+	 */
+	EAttribute getModelMetric_Name();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.smell_model.ModelSmellResult#getThreshold <em>Threshold</em>}'.
@@ -1080,14 +942,6 @@ public interface Smell_modelPackage extends EPackage {
 		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL = eINSTANCE.getModelSmell_Rolemapping_Mapping_ModelSmell();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Concretisation</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION = eINSTANCE.getModelSmell_Rolemapping_Mapping_MappingConcretisation();
-
-		/**
 		 * The meta object literal for the '<em><b>Role Mappings</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1146,24 +1000,6 @@ public interface Smell_modelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference QUALITY_MODEL_SMELL_MAPPING__QUALITY = eINSTANCE.getQuality_ModelSmell_Mapping_Quality();
-
-		/**
-		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.Metric <em>Metric</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.emftext.refactoring.smell.smell_model.Metric
-		 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getMetric()
-		 * @generated
-		 */
-		EClass METRIC = eINSTANCE.getMetric();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute METRIC__NAME = eINSTANCE.getMetric_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.impl.Metric_Quality_MappingImpl <em>Metric Quality Mapping</em>}' class.
@@ -1266,14 +1102,6 @@ public interface Smell_modelPackage extends EPackage {
 		EAttribute MODEL_SMELL_MODEL__QUALITY_SCALE = eINSTANCE.getModelSmellModel_QualityScale();
 
 		/**
-		 * The meta object literal for the '<em><b>Observer</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MODEL_SMELL_MODEL__OBSERVER = eINSTANCE.getModelSmellModel_Observer();
-
-		/**
 		 * The meta object literal for the '<em><b>Result</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1342,42 +1170,6 @@ public interface Smell_modelPackage extends EPackage {
 		EAttribute MAPPING__FACTOR = eINSTANCE.getMapping_Factor();
 
 		/**
-		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.impl.MappingConcretisationImpl <em>Mapping Concretisation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.emftext.refactoring.smell.smell_model.impl.MappingConcretisationImpl
-		 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getMappingConcretisation()
-		 * @generated
-		 */
-		EClass MAPPING_CONCRETISATION = eINSTANCE.getMappingConcretisation();
-
-		/**
-		 * The meta object literal for the '<em><b>New Factor</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_CONCRETISATION__NEW_FACTOR = eINSTANCE.getMappingConcretisation_NewFactor();
-
-		/**
-		 * The meta object literal for the '<em><b>Mapping</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_CONCRETISATION__MAPPING = eINSTANCE.getMappingConcretisation_Mapping();
-
-		/**
-		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.Observer <em>Observer</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.emftext.refactoring.smell.smell_model.Observer
-		 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getObserver()
-		 * @generated
-		 */
-		EClass OBSERVER = eINSTANCE.getObserver();
-
-		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellResultImpl <em>Model Smell Result</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1394,6 +1186,24 @@ public interface Smell_modelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MODEL_SMELL_RESULT__RESULT = eINSTANCE.getModelSmellResult_Result();
+
+		/**
+		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.impl.ModelMetricImpl <em>Model Metric</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.emftext.refactoring.smell.smell_model.impl.ModelMetricImpl
+		 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getModelMetric()
+		 * @generated
+		 */
+		EClass MODEL_METRIC = eINSTANCE.getModelMetric();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL_METRIC__NAME = eINSTANCE.getModelMetric_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Threshold</b></em>' attribute feature.

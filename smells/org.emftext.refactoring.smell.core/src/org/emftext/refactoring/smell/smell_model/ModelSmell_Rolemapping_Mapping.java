@@ -17,7 +17,6 @@ import org.emftext.language.refactoring.rolemapping.RoleMapping;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getModelSmell <em>Model Smell</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMappingConcretisation <em>Mapping Concretisation</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getRoleMappings <em>Role Mappings</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping#getMetaModelSpecification <em>Meta Model Specification</em>}</li>
  * </ul>
@@ -53,22 +52,6 @@ public interface ModelSmell_Rolemapping_Mapping extends EObject {
 	 * @generated
 	 */
 	void setModelSmell(ModelSmell value);
-
-	/**
-	 * Returns the value of the '<em><b>Mapping Concretisation</b></em>' containment reference list.
-	 * The list contents are of type {@link org.emftext.refactoring.smell.smell_model.MappingConcretisation}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Mapping Concretisation</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Concretisation</em>' containment reference list.
-	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmell_Rolemapping_Mapping_MappingConcretisation()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<MappingConcretisation> getMappingConcretisation();
 
 	/**
 	 * Returns the value of the '<em><b>Role Mappings</b></em>' reference list.

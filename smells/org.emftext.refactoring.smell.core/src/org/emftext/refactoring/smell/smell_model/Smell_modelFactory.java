@@ -92,15 +92,6 @@ public interface Smell_modelFactory extends EFactory {
 	Mapping createMapping();
 
 	/**
-	 * Returns a new object of class '<em>Mapping Concretisation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Concretisation</em>'.
-	 * @generated
-	 */
-	MappingConcretisation createMappingConcretisation();
-
-	/**
 	 * Returns a new object of class '<em>Model Smell Result</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,6 +99,15 @@ public interface Smell_modelFactory extends EFactory {
 	 * @generated
 	 */
 	ModelSmellResult createModelSmellResult();
+
+	/**
+	 * Returns a new object of class '<em>Model Metric</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Metric</em>'.
+	 * @generated
+	 */
+	ModelMetric createModelMetric();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -92,12 +92,6 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Smell_modelPackage.METRIC: {
-				Metric metric = (Metric)theEObject;
-				T result = caseMetric(metric);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case Smell_modelPackage.METRIC_QUALITY_MAPPING: {
 				Metric_Quality_Mapping metric_Quality_Mapping = (Metric_Quality_Mapping)theEObject;
 				T result = caseMetric_Quality_Mapping(metric_Quality_Mapping);
@@ -123,21 +117,15 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Smell_modelPackage.MAPPING_CONCRETISATION: {
-				MappingConcretisation mappingConcretisation = (MappingConcretisation)theEObject;
-				T result = caseMappingConcretisation(mappingConcretisation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case Smell_modelPackage.OBSERVER: {
-				Observer observer = (Observer)theEObject;
-				T result = caseObserver(observer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case Smell_modelPackage.MODEL_SMELL_RESULT: {
 				ModelSmellResult modelSmellResult = (ModelSmellResult)theEObject;
 				T result = caseModelSmellResult(modelSmellResult);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Smell_modelPackage.MODEL_METRIC: {
+				ModelMetric modelMetric = (ModelMetric)theEObject;
+				T result = caseModelMetric(modelMetric);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -206,21 +194,6 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Metric</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Metric</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMetric(Metric object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Metric Quality Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -281,36 +254,6 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mapping Concretisation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mapping Concretisation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMappingConcretisation(MappingConcretisation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Observer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Observer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseObserver(Observer object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Model Smell Result</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -322,6 +265,21 @@ public class Smell_modelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseModelSmellResult(ModelSmellResult object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Metric</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Metric</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelMetric(ModelMetric object) {
 		return null;
 	}
 

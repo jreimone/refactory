@@ -24,15 +24,14 @@ import org.emftext.refactoring.smell.smell_model.impl.RefactoringQuickfix;
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getMetric_quality <em>Metric quality</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getQualities <em>Qualities</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getModelSmells <em>Model Smells</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getMetrics <em>Metrics</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedResource <em>Loaded Resource</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getQualityScale <em>Quality Scale</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getObserver <em>Observer</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getResult <em>Result</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getModelSmellDescription <em>Model Smell Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getMetricResultMap <em>Metric Result Map</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getLoadedMetaModel <em>Loaded Meta Model</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getThreshold <em>Threshold</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getMetrics <em>Metrics</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,7 +122,7 @@ public interface ModelSmellModel extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Metrics</b></em>' containment reference list.
-	 * The list contents are of type {@link org.emftext.refactoring.smell.smell_model.Metric}.
+	 * The list contents are of type {@link org.emftext.refactoring.smell.smell_model.ModelMetric}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Metrics</em>' reference list isn't clear,
@@ -132,10 +131,10 @@ public interface ModelSmellModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Metrics</em>' containment reference list.
 	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmellModel_Metrics()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Metric> getMetrics();
+	EList<ModelMetric> getMetrics();
 
 	/**
 	 * Returns the value of the '<em><b>Loaded Resource</b></em>' attribute.
@@ -208,32 +207,6 @@ public interface ModelSmellModel extends EObject {
 	void setQualityScale(Map<Quality, Float> value);
 	
 	/**
-	 * Returns the value of the '<em><b>Observer</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Observer</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Observer</em>' attribute.
-	 * @see #setObserver(EList)
-	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelSmellModel_Observer()
-	 * @model many="false" transient="true"
-	 * @generated
-	 */
-	EList<Observer> getObserver();
-
-	/**
-	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getObserver <em>Observer</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Observer</em>' attribute.
-	 * @see #getObserver()
-	 * @generated
-	 */
-	void setObserver(EList<Observer> value);
-
-	/**
 	 * @param quality
 	 * @param factor
 	 * @generated NOT
@@ -262,7 +235,7 @@ public interface ModelSmellModel extends EObject {
 	 * @model transient="true"
 	 * @generated
 	 */
-	Map<Metric, Map<EObject, Float>> getMetricResultMap();
+	Map<ModelMetric, Map<EObject, Float>> getMetricResultMap();
 
 	/**
 	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.ModelSmellModel#getMetricResultMap <em>Metric Result Map</em>}' attribute.
@@ -272,7 +245,7 @@ public interface ModelSmellModel extends EObject {
 	 * @see #getMetricResultMap()
 	 * @generated
 	 */
-	void setMetricResultMap(Map<Metric, Map<EObject, Float>> value);
+	void setMetricResultMap(Map<ModelMetric, Map<EObject, Float>> value);
 	
 	EPackage getLoadedMetaModel();
 

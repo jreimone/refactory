@@ -56,12 +56,12 @@ public interface Metric_Quality_Mapping extends Mapping {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Metric</em>' reference.
-	 * @see #setMetric(Metric)
+	 * @see #setMetric(ModelMetric)
 	 * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getMetric_Quality_Mapping_Metric()
 	 * @model required="true"
 	 * @generated
 	 */
-	Metric getMetric();
+	ModelMetric getMetric();
 
 	/**
 	 * Sets the value of the '{@link org.emftext.refactoring.smell.smell_model.Metric_Quality_Mapping#getMetric <em>Metric</em>}' reference.
@@ -71,6 +71,6 @@ public interface Metric_Quality_Mapping extends Mapping {
 	 * @see #getMetric()
 	 * @generated
 	 */
-	void setMetric(Metric value);
+	void setMetric(ModelMetric value);
 
 } // Metric_Quality_Mapping

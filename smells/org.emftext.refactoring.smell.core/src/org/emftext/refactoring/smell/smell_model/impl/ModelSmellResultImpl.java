@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.emftext.refactoring.smell.smell_model.Metric;
+import org.emftext.refactoring.smell.smell_model.ModelMetric;
 import org.emftext.refactoring.smell.smell_model.Metric_Quality_Mapping;
 import org.emftext.refactoring.smell.smell_model.ModelSmell;
 import org.emftext.refactoring.smell.smell_model.ModelSmellResult;
@@ -27,24 +27,14 @@ import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellResultImpl#getResult <em>Result</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellResultImpl#getThreshold <em>Threshold</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmellResultImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResult {
-	/**
-	 * The cached value of the '{@link #getResult() <em>Result</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getResult()
-	 * @generated
-	 * @ordered
-	 */
-	protected Map<ModelSmell, Map<EObject, Float>> result;
-
 	/**
 	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -64,6 +54,16 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 	 * @ordered
 	 */
 	protected Float threshold = THRESHOLD_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getResult() <em>Result</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResult()
+	 * @generated
+	 * @ordered
+	 */
+	protected Map<ModelSmell, Map<EObject, Float>> result;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -131,7 +131,7 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void calculate(EList<Metric_Quality_Mapping> metric_quality, EList<Quality_ModelSmell_Mapping> quality_modelSmell, Map<Metric, Map<EObject, Float>> metricResultMap, Map<Quality, Float> qualityScale) {
+	public void calculate(EList<Metric_Quality_Mapping> metric_quality, EList<Quality_ModelSmell_Mapping> quality_modelSmell, Map<ModelMetric, Map<EObject, Float>> metricResultMap, Map<Quality, Float> qualityScale) {
 		ModelSmellModelImpl.getMain().setLoadedMetaModel(null);
 		if (result == null){
 			setResult(new HashMap<ModelSmell, Map<EObject, Float>>());
@@ -180,10 +180,10 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Smell_modelPackage.MODEL_SMELL_RESULT__RESULT:
-				return getResult();
 			case Smell_modelPackage.MODEL_SMELL_RESULT__THRESHOLD:
 				return getThreshold();
+			case Smell_modelPackage.MODEL_SMELL_RESULT__RESULT:
+				return getResult();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,11 +197,11 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Smell_modelPackage.MODEL_SMELL_RESULT__RESULT:
-				setResult((Map<ModelSmell, Map<EObject, Float>>)newValue);
-				return;
 			case Smell_modelPackage.MODEL_SMELL_RESULT__THRESHOLD:
 				setThreshold((Float)newValue);
+				return;
+			case Smell_modelPackage.MODEL_SMELL_RESULT__RESULT:
+				setResult((Map<ModelSmell, Map<EObject, Float>>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -215,11 +215,11 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Smell_modelPackage.MODEL_SMELL_RESULT__RESULT:
-				setResult((Map<ModelSmell, Map<EObject, Float>>)null);
-				return;
 			case Smell_modelPackage.MODEL_SMELL_RESULT__THRESHOLD:
 				setThreshold(THRESHOLD_EDEFAULT);
+				return;
+			case Smell_modelPackage.MODEL_SMELL_RESULT__RESULT:
+				setResult((Map<ModelSmell, Map<EObject, Float>>)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -233,10 +233,10 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Smell_modelPackage.MODEL_SMELL_RESULT__RESULT:
-				return result != null;
 			case Smell_modelPackage.MODEL_SMELL_RESULT__THRESHOLD:
 				return THRESHOLD_EDEFAULT == null ? threshold != null : !THRESHOLD_EDEFAULT.equals(threshold);
+			case Smell_modelPackage.MODEL_SMELL_RESULT__RESULT:
+				return result != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -251,10 +251,10 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (result: ");
-		result.append(result);
-		result.append(", threshold: ");
+		result.append(" (threshold: ");
 		result.append(threshold);
+		result.append(", result: ");
+		result.append(result);
 		result.append(')');
 		return result.toString();
 	}

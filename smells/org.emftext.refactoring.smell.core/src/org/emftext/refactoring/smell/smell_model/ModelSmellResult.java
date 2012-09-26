@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellResult#getResult <em>Result</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellResult#getThreshold <em>Threshold</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.smell_model.ModelSmellResult#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +83,6 @@ public interface ModelSmellResult extends EObject {
 	 * @model metric_qualityMany="false" quality_modelSmellMany="false"
 	 * @generated
 	 */
-	void calculate(EList<Metric_Quality_Mapping> metric_quality, EList<Quality_ModelSmell_Mapping> quality_modelSmell, Map<Metric, Map<EObject, Float>> metricResultMap, Map<Quality, Float> qualityScale);
+	void calculate(EList<Metric_Quality_Mapping> metric_quality, EList<Quality_ModelSmell_Mapping> quality_modelSmell, Map<ModelMetric, Map<EObject, Float>> metricResultMap, Map<Quality, Float> qualityScale);
 
 } // ModelSmellResult

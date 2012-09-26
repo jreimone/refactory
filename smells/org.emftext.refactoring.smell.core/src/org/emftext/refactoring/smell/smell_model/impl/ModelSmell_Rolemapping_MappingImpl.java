@@ -5,18 +5,14 @@ package org.emftext.refactoring.smell.smell_model.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
-import org.emftext.refactoring.smell.smell_model.MappingConcretisation;
 import org.emftext.refactoring.smell.smell_model.ModelSmell;
 import org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping;
 import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
@@ -30,7 +26,6 @@ import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmell_Rolemapping_MappingImpl#getModelSmell <em>Model Smell</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmell_Rolemapping_MappingImpl#getMappingConcretisation <em>Mapping Concretisation</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmell_Rolemapping_MappingImpl#getRoleMappings <em>Role Mappings</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.smell_model.impl.ModelSmell_Rolemapping_MappingImpl#getMetaModelSpecification <em>Meta Model Specification</em>}</li>
  * </ul>
@@ -48,16 +43,6 @@ public class ModelSmell_Rolemapping_MappingImpl extends EObjectImpl implements M
 	 * @ordered
 	 */
 	protected ModelSmell modelSmell;
-
-	/**
-	 * The cached value of the '{@link #getMappingConcretisation() <em>Mapping Concretisation</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMappingConcretisation()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<MappingConcretisation> mappingConcretisation;
 
 	/**
 	 * The cached value of the '{@link #getRoleMappings() <em>Role Mappings</em>}' reference list.
@@ -141,18 +126,6 @@ public class ModelSmell_Rolemapping_MappingImpl extends EObjectImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MappingConcretisation> getMappingConcretisation() {
-		if (mappingConcretisation == null) {
-			mappingConcretisation = new EObjectContainmentEList<MappingConcretisation>(MappingConcretisation.class, this, Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION);
-		}
-		return mappingConcretisation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<RoleMapping> getRoleMappings() {
 		if (roleMappings == null) {
 			roleMappings = new EObjectResolvingEList<RoleMapping>(RoleMapping.class, this, Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS);
@@ -204,27 +177,11 @@ public class ModelSmell_Rolemapping_MappingImpl extends EObjectImpl implements M
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION:
-				return ((InternalEList<?>)getMappingConcretisation()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL:
 				if (resolve) return getModelSmell();
 				return basicGetModelSmell();
-			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION:
-				return getMappingConcretisation();
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS:
 				return getRoleMappings();
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__META_MODEL_SPECIFICATION:
@@ -245,10 +202,6 @@ public class ModelSmell_Rolemapping_MappingImpl extends EObjectImpl implements M
 		switch (featureID) {
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL:
 				setModelSmell((ModelSmell)newValue);
-				return;
-			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION:
-				getMappingConcretisation().clear();
-				getMappingConcretisation().addAll((Collection<? extends MappingConcretisation>)newValue);
 				return;
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS:
 				getRoleMappings().clear();
@@ -272,9 +225,6 @@ public class ModelSmell_Rolemapping_MappingImpl extends EObjectImpl implements M
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL:
 				setModelSmell((ModelSmell)null);
 				return;
-			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION:
-				getMappingConcretisation().clear();
-				return;
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS:
 				getRoleMappings().clear();
 				return;
@@ -295,8 +245,6 @@ public class ModelSmell_Rolemapping_MappingImpl extends EObjectImpl implements M
 		switch (featureID) {
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MODEL_SMELL:
 				return modelSmell != null;
-			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__MAPPING_CONCRETISATION:
-				return mappingConcretisation != null && !mappingConcretisation.isEmpty();
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__ROLE_MAPPINGS:
 				return roleMappings != null && !roleMappings.isEmpty();
 			case Smell_modelPackage.MODEL_SMELL_ROLEMAPPING_MAPPING__META_MODEL_SPECIFICATION:

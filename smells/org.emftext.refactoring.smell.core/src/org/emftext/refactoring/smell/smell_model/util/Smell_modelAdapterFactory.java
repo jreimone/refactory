@@ -85,10 +85,6 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 				return createQuality_ModelSmell_MappingAdapter();
 			}
 			@Override
-			public Adapter caseMetric(Metric object) {
-				return createMetricAdapter();
-			}
-			@Override
 			public Adapter caseMetric_Quality_Mapping(Metric_Quality_Mapping object) {
 				return createMetric_Quality_MappingAdapter();
 			}
@@ -105,16 +101,12 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 				return createMappingAdapter();
 			}
 			@Override
-			public Adapter caseMappingConcretisation(MappingConcretisation object) {
-				return createMappingConcretisationAdapter();
-			}
-			@Override
-			public Adapter caseObserver(Observer object) {
-				return createObserverAdapter();
-			}
-			@Override
 			public Adapter caseModelSmellResult(ModelSmellResult object) {
 				return createModelSmellResultAdapter();
+			}
+			@Override
+			public Adapter caseModelMetric(ModelMetric object) {
+				return createModelMetricAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -193,20 +185,6 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.refactoring.smell.smell_model.Metric <em>Metric</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.emftext.refactoring.smell.smell_model.Metric
-	 * @generated
-	 */
-	public Adapter createMetricAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.refactoring.smell.smell_model.Metric_Quality_Mapping <em>Metric Quality Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -263,34 +241,6 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.refactoring.smell.smell_model.MappingConcretisation <em>Mapping Concretisation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.emftext.refactoring.smell.smell_model.MappingConcretisation
-	 * @generated
-	 */
-	public Adapter createMappingConcretisationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.emftext.refactoring.smell.smell_model.Observer <em>Observer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.emftext.refactoring.smell.smell_model.Observer
-	 * @generated
-	 */
-	public Adapter createObserverAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.emftext.refactoring.smell.smell_model.ModelSmellResult <em>Model Smell Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -301,6 +251,20 @@ public class Smell_modelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelSmellResultAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.emftext.refactoring.smell.smell_model.ModelMetric <em>Model Metric</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.emftext.refactoring.smell.smell_model.ModelMetric
+	 * @generated
+	 */
+	public Adapter createModelMetricAdapter() {
 		return null;
 	}
 
