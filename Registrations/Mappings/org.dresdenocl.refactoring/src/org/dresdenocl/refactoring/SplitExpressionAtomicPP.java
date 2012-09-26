@@ -16,7 +16,7 @@
 /**
  * 
  */
-package oclrefactoring;
+package org.dresdenocl.refactoring;
 
 import java.util.Iterator;
 import java.util.List;
@@ -30,6 +30,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
@@ -37,6 +38,7 @@ import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProce
 
 import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
 import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
 import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
@@ -48,7 +50,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
  * @author Michael Muck
  *
  */
-public class SplitExpressionPP extends AbstractRefactoringPostProcessor {
+public class SplitExpressionAtomicPP extends AbstractRefactoringPostProcessor {
 
 	
 	OclFactoryImpl myOclFactory;
@@ -60,13 +62,13 @@ public class SplitExpressionPP extends AbstractRefactoringPostProcessor {
 	PackageDeclarationCS myPackage;
 	
 
-	public SplitExpressionPP() {
+	public SplitExpressionAtomicPP() {
 
 		myOclFactory = new OclFactoryImpl();
 		myDataTypesFactory = new DatatypesFactoryImpl();
 		myPivotModelFactory = new PivotModelFactoryImpl();
 		splitCount = 0;
-		splitAtomic = false;
+		splitAtomic = true;
 	}
 	
 	
@@ -79,9 +81,9 @@ public class SplitExpressionPP extends AbstractRefactoringPostProcessor {
 		for (Role role : keySet) {
 			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
 			if (role.getName().equals("Selection")) {
-				
 				if (roleplayers.size()==1 && roleplayers.get(0) instanceof ClassifierContextDeclarationCS) {
 					selected = (ClassifierContextDeclarationCS) roleplayers.get(0);
+//					System.out.println("found selected element as: "+selected);
 				}
 			}
 		}
@@ -114,9 +116,11 @@ public class SplitExpressionPP extends AbstractRefactoringPostProcessor {
 		EList<InvariantOrDefinitionCS> invList = selected.getInvariantsAndDefinitions();
 		Iterator<InvariantOrDefinitionCS> invListIt = invList.iterator();
 		EList<InvariantExpCS> myNewInvList = new BasicEList<InvariantExpCS>();
+		EList<DefinitionExpCS> myNewDefList = new BasicEList<DefinitionExpCS>();
 		while(invListIt.hasNext()) {
 			InvariantOrDefinitionCS invListElement = invListIt.next();
 			InvariantExpCS myInv = null;
+			DefinitionExpCS myDef = null;
 			LogicalAndOperationCallExpCS myAnd = null;
 			if (invListElement instanceof InvariantExpCS) {
 				myInv = (InvariantExpCS) invListElement;
@@ -129,15 +133,31 @@ public class SplitExpressionPP extends AbstractRefactoringPostProcessor {
 					splitCount++;
 				}
 			}
+			else if (invListElement instanceof DefinitionExpCS) {
+				myDef = (DefinitionExpCS) invListElement;
+				myNewDefList.add(myDef);
+				splitCount++;
+			}
 		}
+		System.out.println("Found "+myNewInvList.size()+" invariants and "+myNewDefList+" definitions to split.");
 		Iterator<InvariantExpCS> myNewInvListIterator = myNewInvList.iterator();
+		Iterator<DefinitionExpCS> myNewDefListIterator = myNewDefList.iterator();
 		if (splitAtomic) {
 			while (myNewInvListIterator.hasNext()) {
 				InvariantExpCS aktexp = myNewInvListIterator.next();
 				ClassifierContextDeclarationCS myClassifierContextDeclarationCS = myOclFactory.createClassifierContextDeclarationCS();
 				myClassifierContextDeclarationCS.getInvariantsAndDefinitions().add(aktexp);
-				myClassifierContextDeclarationCS.setTypeName(selected.getTypeName());
-				myPackage.getContextDeclarations().add(myClassifierContextDeclarationCS);
+				//EcoreUtil.copy(selected.getTypeName());
+				myClassifierContextDeclarationCS.setTypeName(EcoreUtil.copy(selected.getTypeName()));
+				myPackage.getContextDeclarations().add(myPackage.getContextDeclarations().indexOf(selected)-1,myClassifierContextDeclarationCS);
+			}
+			while (myNewDefListIterator.hasNext()) {
+				DefinitionExpCS aktexp = myNewDefListIterator.next();
+				ClassifierContextDeclarationCS myClassifierContextDeclarationCS2 = myOclFactory.createClassifierContextDeclarationCS();
+				myClassifierContextDeclarationCS2.getInvariantsAndDefinitions().add(aktexp);
+				//EcoreUtil.copy(selected.getTypeName());
+				myClassifierContextDeclarationCS2.setTypeName(EcoreUtil.copy(selected.getTypeName()));
+				myPackage.getContextDeclarations().add(myClassifierContextDeclarationCS2);
 			}
 		} else {
 			while (myNewInvListIterator.hasNext()) {
@@ -152,17 +172,7 @@ public class SplitExpressionPP extends AbstractRefactoringPostProcessor {
 		return Status.OK_STATUS;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

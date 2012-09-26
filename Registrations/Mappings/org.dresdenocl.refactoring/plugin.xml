@@ -21,7 +21,7 @@
       <postprocessor
             mapping_name="Rename"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.OCLPostProcessor">
+            postprocessor="org.dresdenocl.refactoring.OCLPostProcessor">
       </postprocessor>
    </extension>
    <extension
@@ -29,7 +29,7 @@
       <postprocessor
             mapping_name="Extract Variable"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.ExLetExpPostProcessor">
+            postprocessor="org.dresdenocl.refactoring.ExLetExpPostProcessor">
       </postprocessor>
    </extension>
    <extension
@@ -37,7 +37,7 @@
       <postprocessor
             mapping_name="Inline Variable"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.InlineVariablePP">
+            postprocessor="org.dresdenocl.refactoring.InlineVariablePP">
       </postprocessor>
    </extension>
    <extension
@@ -45,7 +45,7 @@
       <postprocessor
             mapping_name="Remove Redundant Brackets"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RemoveRedundantBrackets">
+            postprocessor="org.dresdenocl.refactoring.RemoveRedundantBrackets">
       </postprocessor>
    </extension>
    <extension
@@ -53,7 +53,7 @@
       <postprocessor
             mapping_name="Remove All Redundant Brackets"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RemoveAllRedundantBrackets">
+            postprocessor="org.dresdenocl.refactoring.RemoveAllRedundantBrackets">
       </postprocessor>
    </extension>
    <extension
@@ -61,7 +61,7 @@
       <postprocessor
             mapping_name="Remove Unused Variable Declarations"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RemoveUnusedVariableDeclarationsPP">
+            postprocessor="org.dresdenocl.refactoring.RemoveUnusedVariableDeclarationsPP">
       </postprocessor>
    </extension>
    <extension
@@ -69,7 +69,7 @@
       <postprocessor
             mapping_name="RenameNamedLiteralExpCS"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RenameNamedLiteralExpPostProcessor">
+            postprocessor="org.dresdenocl.refactoring.RenameNamedLiteralExpPostProcessor">
       </postprocessor>
    </extension>
    <extension
@@ -77,7 +77,7 @@
       <postprocessor
             mapping_name="Split Expression"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.SplitExpressionPP">
+            postprocessor="org.dresdenocl.refactoring.SplitExpressionPP">
       </postprocessor>
    </extension>
    <extension
@@ -85,7 +85,7 @@
       <postprocessor
             mapping_name="Split Expression Atomic"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.SplitExpressionAtomicPP">
+            postprocessor="org.dresdenocl.refactoring.SplitExpressionAtomicPP">
       </postprocessor>
    </extension>
    <extension
@@ -93,7 +93,7 @@
       <postprocessor
             mapping_name="Merge Atomic Expressions"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.MergeAtomicExpressionsPP">
+            postprocessor="org.dresdenocl.refactoring.MergeAtomicExpressionsPP">
       </postprocessor>
    </extension>
    <extension
@@ -101,7 +101,7 @@
       <postprocessor
             mapping_name="Merge Expressions"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.MergeExpressionsPP">
+            postprocessor="org.dresdenocl.refactoring.MergeExpressionsPP">
       </postprocessor>
    </extension>
    <extension
@@ -109,7 +109,7 @@
       <postprocessor
             mapping_name="Rename Variable"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.RenameVariablePP">
+            postprocessor="org.dresdenocl.refactoring.RenameVariablePP">
       </postprocessor>
    </extension>
    <extension
@@ -117,7 +117,7 @@
       <postprocessor
             mapping_name="Inline Variable Here"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.InlineVariablePP">
+            postprocessor="org.dresdenocl.refactoring.InlineVariablePP">
       </postprocessor>
    </extension>
    <extension
@@ -125,7 +125,7 @@
       <postprocessor
             mapping_name="Separate Context Classifiers"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.SeparateContextClassifiersPP">
+            postprocessor="org.dresdenocl.refactoring.SeparateContextClassifiersPP">
       </postprocessor>
    </extension>
    <extension
@@ -133,7 +133,7 @@
       <postprocessor
             mapping_name="Merge Chained Let Expressions"
             nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
-            postprocessor="oclrefactoring.MergeLetExpPP">
+            postprocessor="org.dresdenocl.refactoring.MergeLetExpPP">
       </postprocessor>
    </extension>
 
