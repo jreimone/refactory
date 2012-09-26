@@ -12,7 +12,9 @@ Require-Bundle: org.eclipse.ui,
  org.emftext.language.refactoring.roles,
  tudresden.ocl20.pivot.language.ocl,
  tudresden.ocl20.pivot.pivotmodel,
- org.eclipse.emf.compare.diff
+ org.eclipse.emf.compare.diff,
+ org.emftext.access,
+ org.emftext.refactoring.util
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.emf.compare,
