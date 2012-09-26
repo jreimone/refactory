@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
@@ -168,7 +169,10 @@ public class PostProcessingHelper {
 				NamedLiteralExpCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);			
 
 				EObject replaceeParent = replacee.eContainer();
-				replaceeParent.eSet(replacee.eContainmentFeature(), newNamedLiteral);
+				EReference containmentFeature = replacee.eContainmentFeature();
+				if(replaceeParent != null && containmentFeature != null){
+					replaceeParent.eSet(containmentFeature, newNamedLiteral);
+				}
 			}
 		}
 	}
