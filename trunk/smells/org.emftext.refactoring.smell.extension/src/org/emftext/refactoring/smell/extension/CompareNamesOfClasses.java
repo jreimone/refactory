@@ -10,9 +10,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.refactoring.smell.smell_model.Metric;
+import org.emftext.refactoring.smell.smell_model.ModelMetric;
 
-public class CompareNamesOfClasses extends EObjectImpl implements Metric {
+public class CompareNamesOfClasses extends EObjectImpl implements ModelMetric {
 	
 	private String name;
 	private List<EPackage> list;
@@ -35,16 +35,23 @@ public class CompareNamesOfClasses extends EObjectImpl implements Metric {
 	@Override
 	public Map<EObject, Float> calculate(Resource loadedResource) {
 		Map<EObject, Float> map = new HashMap<EObject, Float>();
-		EPackage epackage = (EPackage) loadedResource.getContents().get(0);
-		getList().add(epackage);
-		walkPackages(epackage.getESubpackages());
-		for (EPackage p : list){
-			for (EClassifier c : p.getEClassifiers()){
-				for (EPackage p2 : list){
-					for (EClassifier c2 : p2.getEClassifiers()){
-						if (!p.equals(p2) && !c.equals(c2) && c.getName().equals(c2.getName())){
-							if (!map.containsKey(c) && !map.containsKey(c2)){
-								map.put(c2, 1.0f);
+		EPackage epackage = null;
+		if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
+			epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
+		} else {
+			epackage = (EPackage) loadedResource.getContents().get(0);
+		}
+		if (epackage != null){
+			getList().add(epackage);
+			walkPackages(epackage.getESubpackages());
+			for (EPackage p : list){
+				for (EClassifier c : p.getEClassifiers()){
+					for (EPackage p2 : list){
+						for (EClassifier c2 : p2.getEClassifiers()){
+							if (!p.equals(p2) && !c.equals(c2) && c.getName().equals(c2.getName())){
+								if (!map.containsKey(c) && !map.containsKey(c2)){
+									map.put(c2, 1.0f);
+								}
 							}
 						}
 					}
