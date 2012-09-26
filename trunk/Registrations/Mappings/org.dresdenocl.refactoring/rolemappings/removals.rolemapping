@@ -1,0 +1,18 @@
+ROLEMODELMAPPING FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl>
+IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dresden.de/ocl20/pivot/2007/datatypes>
+
+"Remove Deprecated Null Check" maps <SelectX> { 
+	 Selection := ClassifierContextDeclarationCS ; 
+}
+
+"Remove Redundant Brackets" maps <SelectX> {
+	Selection := BracketExpCS;
+}
+
+"Remove All Redundant Brackets" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
+}
+
+"Remove Unused Variable Declarations" maps <SelectX> {
+	Selection := ClassifierContextDeclarationCS;
+}
