@@ -388,7 +388,15 @@ public class Refactorer implements IRefactorer {
 //					wizardPage.setRoleRuntimeInstanceMap(fakeInterpreter.getRoleRuntimeInstances());
 //				}
 				
-				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier, currentSelection);
+				List<EObject> copiedSelection = new ArrayList<EObject>();
+				for (EObject selectedElement : currentSelection) {
+					EObject copiedSelectedElement = copier.get(selectedElement);
+					if(copiedSelectedElement != null){
+						copiedSelection.add(copiedSelectedElement);
+					}
+				}
+				
+				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier, copiedSelection);
 
 				if (fakePostProcessingStatus.getSeverity() != IRefactoringStatus.OK) {
 					int severity = fakePostProcessingStatus.getSeverity();
