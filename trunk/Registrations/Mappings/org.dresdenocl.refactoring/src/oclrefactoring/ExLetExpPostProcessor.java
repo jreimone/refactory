@@ -70,21 +70,16 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 	private OclExpressionCS extract;
 	private EObject origExtractContainer;
 	private SimpleNameCS variableName;
-	private SimpleNameCS newType;
 	private LetExpCS letExpression;
 	private Boolean newLetExp;
 	private EStructuralFeature origExtractReference;
 	private EObject constraintRoot;
 
 	private OclFactory oclFactory;
-	private DatatypesFactory myDataTypesFactory;
-	private PivotModelFactory myPivotModelFactory;
 	private List<EObject> subsequentExtracts;
 
 	public ExLetExpPostProcessor() {
 		oclFactory = OclFactory.eINSTANCE;
-		myDataTypesFactory = DatatypesFactory.eINSTANCE;
-		myPivotModelFactory = PivotModelFactory.eINSTANCE;
 	}
 
 
@@ -209,35 +204,20 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 		}
 		//reset the letExp to insert the new variable
 		if (firstContainingLetExp != null) letExpression = firstContainingLetExp;
-		//		System.out.println("check done.");
-
-
-
-
 
 		//creating the variable and adding the extract
-
 		VariableDeclarationWithInitCS variableDeclaration = oclFactory.createVariableDeclarationWithInitCS();
 		//		System.out.println("myvd: "+myVD.eClass());
 		variableDeclaration.setVariableName(variableName);
 
-		EObject context = extract.eContainer();
-		// now move the extract around
-//		Copier copier = new Copier(false, true);
-//		copier.copy(constraintRoot);
-//		copier.copyReferences();
-//		OclExpressionCS copy = (OclExpressionCS) copier.get(extract);
 		OclExpressionCS copy = EcoreUtil.copy(extract);
 		if(subsequentExtracts.size() == 1){
-//			variableDeclaration.setInitialization(extract);
 			variableDeclaration.setInitialization(copy);
 		} else {
 			NavigationCallExp callExp = oclFactory.createNavigationCallExp();
-//			callExp.setSource(extract);
 			callExp.setSource(copy);
 			for (EObject subsequentElement : subsequentExtracts) {
 				if(!extract.equals(subsequentElement)){
-//				if(!copy.equals(subsequentElement)){
 					if(subsequentElement instanceof ImplicitFeatureCallCS){
 						ImplicitFeatureCallCS featureCall = (ImplicitFeatureCallCS) subsequentElement;
 						if(featureCall instanceof PropertyCallBaseExpCS){
@@ -257,29 +237,11 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 		}
 		variableDeclaration.setEqual("=");
 
-		//there needs to be a reference created replacing the extract
-//		PostProcessingHelper.replaceExpression(extract, variableName);
-//		PostProcessingHelper.replaceExpression(context, extract, variableName);	
-
-		//		
-		//		NamedLiteralExpCS myReferenceLiteral = myOclFactory.createNamedLiteralExpCS();
-		//		Property myReferenceProp = myPivotModelFactory.createProperty();
-		//		myReferenceProp.setName(variableName.getSimpleName());
-		//		myReferenceLiteral.setNamedElement(myReferenceProp);
-		//
-		//		//		System.out.println("container of extract: "+extract.eContainer());
-		//		//		System.out.println("containing feature of extract: "+extract.eContainingFeature());
-		//		//		System.out.println("orig containing feature of extract: "+origRef);
-		//
-		//		if (origRef instanceof EReference) {
-		//			origContainer.eSet(origRef, myReferenceLiteral);
-		//		}
-
 		//additionally we try to check, if there is any other occurence of the extract within the actual constraint,
 		//and if there is, it will be replaced as well, but only if the selection is not an
 		//integer literal
 
-		if(extract instanceof IntegerLiteralExpCS) return;
+		//		if(extract instanceof IntegerLiteralExpCS) return;
 
 		//moving the actual ocl expression from the invariant or pre/postcond body
 		//to the new letexp
@@ -295,14 +257,15 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 			}
 		}
 
-		TreeIterator<EObject> letIterator = letExpression.eAllContents();
 
-		while (letIterator.hasNext()) {
-			EObject nextElement = letIterator.next();
-			if((nextElement instanceof OclExpressionCS) && PostProcessingHelper.isExpressionComprised((OclExpressionCS) nextElement, extract)){
-				PostProcessingHelper.replaceExpression(nextElement, extract, variableName);	
+			TreeIterator<EObject> letIterator = letExpression.eAllContents();
+
+			while (letIterator.hasNext()) {
+				EObject nextElement = letIterator.next();
+				if((nextElement instanceof OclExpressionCS) && PostProcessingHelper.isExpressionComprised((OclExpressionCS) nextElement, extract)){
+					PostProcessingHelper.replaceExpression(nextElement, extract, variableName);	
+				}
 			}
-		}
 
 		//		//now, any occurrence in the variable declarations has to be found as well
 		//		Iterator<VariableDeclarationWithInitCS> myVarIt = myLetExp.getVariableDeclarations().iterator();
@@ -334,12 +297,4 @@ public class ExLetExpPostProcessor extends AbstractRefactoringPostProcessor {
 
 	}
 
-
-
-	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
-			ResourceSet resourceSet, ChangeDescription change) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
