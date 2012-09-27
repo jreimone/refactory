@@ -17,7 +17,6 @@ package org.dresdenocl.refactoring;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -28,21 +27,26 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
+import org.emftext.refactoring.util.RoleUtil;
 
-import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
 import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
 import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
 import tudresden.ocl20.pivot.language.ocl.LetExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS;
 import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
+import tudresden.ocl20.pivot.language.ocl.OclFactory;
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
-import tudresden.ocl20.pivot.language.ocl.impl.OclFactoryImpl;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
 public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 	
@@ -51,21 +55,14 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 	
 	private VariableDeclarationWithInitCS selectedDeclaration;
 	private NamedLiteralExpCS selectedReference;
-	private LetExpCS myLetExp;
-	String VariableName;
+	private LetExpCS letExpression;
+	private String variableName;
 	
-	
-	OclFactoryImpl myOclFactory;
-	DatatypesFactoryImpl myDataTypesFactory;
-	PivotModelFactoryImpl myPivotModelFactory;
+	private OclFactory oclFactory;
 	
 	public InlineVariablePP() {
-		myOclFactory = new OclFactoryImpl();
-		myDataTypesFactory = new DatatypesFactoryImpl();
-		myPivotModelFactory = new PivotModelFactoryImpl();
+		oclFactory = OclFactory.eINSTANCE;
 	}
-	
-	
 	
 	@Override
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
@@ -75,18 +72,8 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 			System.out.println("skipping postprocessing for fakerun");
 			return Status.OK_STATUS;
 		}
-		Set<Role> keySet = roleRuntimeInstanceMap.keySet();
-		for (Role role : keySet) {
-//			System.out.println("role found with name: "+role.getName());
-			List<EObject> roleplayers = roleRuntimeInstanceMap.get(role);
-			
-			if (role.getName().equals("Selection")) {
-				if (roleplayers.size() == 1 && (roleplayers.get(0) instanceof VariableDeclarationWithInitCS)) selectedDeclaration = (VariableDeclarationWithInitCS) roleplayers.get(0);
-				else if (roleplayers.size() == 1 && (roleplayers.get(0) instanceof NamedLiteralExpCS)) selectedReference = (NamedLiteralExpCS) roleplayers.get(0);
-//				System.out.println("   extract identified as: "+selection.toString());
-			}
-			
-		}
+		selectedDeclaration = RoleUtil.getFirstObjectForRole("Selection", VariableDeclarationWithInitCS.class, roleRuntimeInstanceMap);
+		selectedReference = RoleUtil.getFirstObjectForRole("Selection", NamedLiteralExpCS.class, roleRuntimeInstanceMap);
 		
 		IStatus refactoringStatus = Status.CANCEL_STATUS;
 		
@@ -148,10 +135,7 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 		return status;
 	}
 
-
-
 	private EObject getDefinitionParent(EObject child) {
-
 		EObject parent = child.eContainer();
 		if (parent instanceof PackageDeclarationCS) return null; //break condition	
 		
@@ -159,140 +143,91 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 		if (parent instanceof IteratorExpCS) return parent;
 			
 		return getDefinitionParent(parent);
-		
 	}
 	
-	
-	
-	
-	
-
-	
 	private IStatus performSpecificTransformationForSelectedDeclaration() {
-		
 		if (!(selectedDeclaration.eContainer() instanceof LetExpCS)) {
-//			System.err.println("Integrate Variable From LetExpression cannot be called from outside a LetExp!");
 			return Status.CANCEL_STATUS;
 		}
 		
-		myLetExp = (LetExpCS) selectedDeclaration.eContainer();
-		VariableName = selectedDeclaration.getVariableName().getSimpleName();
+		letExpression = (LetExpCS) selectedDeclaration.eContainer();
+		variableName = selectedDeclaration.getVariableName().getSimpleName();
 		OclExpressionCS declaration = selectedDeclaration.getInitialization();
 		
 		
 		//at first, search and replace all instances of the variable with the actual declaration
 		// TODO bracket expression
-		TreeIterator<EObject> myIt = myLetExp.eAllContents();
-		while (myIt.hasNext()) {
-			EObject akt = myIt.next();
+		TreeIterator<EObject> iterator = letExpression.getOclExpression().eAllContents();
+		while (iterator.hasNext()) {
+			EObject akt = iterator.next();
 			if (akt instanceof NamedLiteralExpCS) {
 				NamedLiteralExpCS aktLit = (NamedLiteralExpCS) akt;
-				if (aktLit.getNamedElement().getName().equals(VariableName)) {
-					
+				if (aktLit.getNamedElement().getName().equals(variableName)) {
 					inlineReference(declaration, aktLit);
-					
-//					//here we are at a place, where the variable should be integrated
-//					EObject container = aktLit.eContainer();
-//					EStructuralFeature containerRef = aktLit.eContainingFeature();
-//					
-//					//as a precaution for avoiding changes in meaning through weaker/stronger operator binding in the 
-//					//target expression, the declaration will be set in brackets before it is integrated
-//					BracketExpCS myBracket = myOclFactory.createBracketExpCS();
-//					
-//					ReferenceCopier copier = new ReferenceCopier();
-//					EList<EObject> copiedList = new BasicEList<EObject>();
-//					EObject myCopiedDeclaration = copier.copy(declaration);
-//					copiedList.add(myCopiedDeclaration);
-//					TreeIterator<EObject> copyListIterator = declaration.eAllContents();
-//					while (copyListIterator.hasNext()) {
-//						copiedList.add(copier.copy(copyListIterator.next()));
-//					}
-//					copier.copyReferences();
-//					
-//					
-//					Iterator<EObject> myCopyIt = copiedList.iterator();
-//					while (myCopyIt.hasNext()) {
-//						EObject aktcopy = myCopyIt.next();
-//						if (EcoreUtil.equals(aktcopy, declaration)) {
-//							myCopiedDeclaration = (OclExpressionCS) aktcopy;
-//						}
-//					}
-//					if (myCopiedDeclaration instanceof BracketExpCS) {
-//						myBracket = (BracketExpCS) myCopiedDeclaration;
-//					} else { 
-//						myBracket.setOclExpression((OclExpressionCS) myCopiedDeclaration);
-//					}
-//					container.eSet(containerRef, myBracket);
-					
 				}
 			}
 		}
 		
 		//now delete the declaration from the if expression
 		
-		myLetExp.getVariableDeclarations().remove(selectedDeclaration);
+		letExpression.getVariableDeclarations().remove(selectedDeclaration);
 		
 		//if there are no more variable declarations left, the let expression will be empty and has to be removed
-		if (myLetExp.getVariableDeclarations().size() == 0) {
+		if (letExpression.getVariableDeclarations().size() == 0) {
 //			System.out.println("removing empty let expression");
-			constraintRoot = myLetExp.eContainer();
-			EStructuralFeature parentLink = myLetExp.eContainingFeature();
-			constraintRoot.eSet(parentLink, myLetExp.getOclExpression());
+			constraintRoot = letExpression.eContainer();
+			EStructuralFeature parentLink = letExpression.eContainingFeature();
+			constraintRoot.eSet(parentLink, letExpression.getOclExpression());
 		}
-		
-				
 		return Status.OK_STATUS;		
 	}
 	
 	
-	private IStatus inlineReference(OclExpressionCS initializationValue, NamedLiteralExpCS reference) {
+	private IStatus inlineReference(OclExpressionCS inlineExpression, NamedLiteralExpCS replacee) {
 		IStatus status = Status.CANCEL_STATUS;
 		//here we are at a place, where the variable should be integrated
-		EObject container = reference.eContainer();
-		EStructuralFeature containerRef = reference.eContainingFeature();
+		EObject container = replacee.eContainer();
+		EStructuralFeature containerRef = replacee.eContainingFeature();
 		
 		//as a precaution for avoiding changes in meaning through weaker/stronger operator binding in the 
 		//target expression, the declaration will be set in brackets before it is integrated
-		BracketExpCS myBracket = myOclFactory.createBracketExpCS();
 		
-		System.out.println(" Copying initialization...");
-		ReferenceCopier copier = new ReferenceCopier();
-		EList<EObject> copiedList = new BasicEList<EObject>();
-		EObject myCopiedDeclaration = copier.copy(initializationValue);
-		copiedList.add(myCopiedDeclaration);
-		TreeIterator<EObject> copyListIterator = initializationValue.eAllContents();
-		while (copyListIterator.hasNext()) {
-			copiedList.add(copier.copy(copyListIterator.next()));
-		}
-		System.out.println(" Copying references...");
-		copier.copyReferences();
-		
-		
-//		Iterator<EObject> myCopyIt = copiedList.iterator();
-//		while (myCopyIt.hasNext()) {
-//			EObject aktcopy = myCopyIt.next();
-//			if (EcoreUtil.equals(aktcopy, initializationValue)) {
-//				myCopiedDeclaration = (OclExpressionCS) aktcopy;
-//			}
+//		System.out.println(" Copying initialization...");
+//		ReferenceCopier copier = new ReferenceCopier();
+//		EList<EObject> copiedList = new BasicEList<EObject>();
+//		EObject copiedDeclaration = copier.copy(inlineExpression);
+//		copiedList.add(copiedDeclaration);
+//		TreeIterator<EObject> copyListIterator = inlineExpression.eAllContents();
+//		while (copyListIterator.hasNext()) {
+//			copiedList.add(copier.copy(copyListIterator.next()));
 //		}
-		if (myCopiedDeclaration instanceof BracketExpCS) {
-			myBracket = (BracketExpCS) myCopiedDeclaration;
+//		System.out.println(" Copying references...");
+//		copier.copyReferences();
+		
+		OclExpressionCS copiedDeclaration = EcoreUtil.copy(inlineExpression);
+		
+		OclExpressionCS newValue = null;
+		if (copiedDeclaration instanceof BracketExpCS) {
+			newValue = (BracketExpCS) copiedDeclaration;
 		} else { 
 			System.out.println(" Putting copied initialization within brackets...");
-			myBracket.setOclExpression((OclExpressionCS) myCopiedDeclaration);
+			if(copiedDeclaration instanceof LogicalAndOperationCallExpCS
+					|| copiedDeclaration instanceof LogicalImpliesOperationCallExpCS
+					|| copiedDeclaration instanceof LogicalNotOperationCallExpCS
+					|| copiedDeclaration instanceof LogicalOrOperationCallExpCS
+					|| copiedDeclaration instanceof LogicalXorOperationCallExpCS){
+				BracketExpCS bracketExpression = oclFactory.createBracketExpCS();
+				bracketExpression.setOclExpression((OclExpressionCS) copiedDeclaration);
+				newValue = bracketExpression;
+			} else {
+				newValue = copiedDeclaration;
+			}
 		}
 		System.out.println(" Replacing reference with copied initialization value...");
-		container.eSet(containerRef, myBracket);
+		container.eSet(containerRef, newValue);
 		System.out.println(" Done...");
 		status = Status.OK_STATUS;
 		return status;
-	}
-
-	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,
-			ResourceSet resourceSet, ChangeDescription change) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
