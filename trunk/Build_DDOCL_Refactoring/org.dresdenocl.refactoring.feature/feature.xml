@@ -30,7 +30,7 @@ Contributors:
 
    <requires>
       <import feature="tudresden.ocl20.feature.facade" version="3.1.0.201207161929"/>
-      <import feature="org.emftext.refactoring.sdk" version="0.9.0.v201207171737"/>
+      <import feature="org.emftext.refactoring.sdk" version="0.9.0.v201207310007"/>
    </requires>
 
    <plugin

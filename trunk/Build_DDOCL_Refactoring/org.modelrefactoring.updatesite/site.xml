@@ -4,7 +4,7 @@
    <description name="Refactoring for Dresden OCL">
       Update site for the Refactoring feature for Dresden OCL.
    </description>
-   <feature url="features/org.dresdenocl.refactoring.feature_1.0.0.201207301320.jar" id="org.dresdenocl.refactoring.feature" version="1.0.0.201207301320">
+   <feature url="features/org.dresdenocl.refactoring.feature_1.0.0.201209271317.jar" id="org.dresdenocl.refactoring.feature" version="1.0.0.201209271317">
       <category name="Refactoring for Dresden OCL"/>
    </feature>
    <category-def name="Refactoring for Dresden OCL" label="Refactoring for Dresden OCL"/>
