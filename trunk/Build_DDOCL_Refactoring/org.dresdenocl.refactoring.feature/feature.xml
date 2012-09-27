@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.dresdenocl.refactoring.feature"
-      label="Refactoring for Dresden OCL Feature"
+      label="Refactoring for Dresden OCL"
       version="1.0.0.qualifier"
       provider-name="Software Technology Group - TU Dresden">
 
@@ -30,7 +30,7 @@ Contributors:
 
    <requires>
       <import feature="tudresden.ocl20.feature.facade" version="3.1.0.201207161929"/>
-      <import feature="org.emftext.refactoring.sdk" version="0.9.0.v201207310007"/>
+      <import feature="org.modelrefactoring.sdk" version="0.9.0.qualifier"/>
    </requires>
 
    <plugin
