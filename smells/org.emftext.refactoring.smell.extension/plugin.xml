@@ -4,13 +4,13 @@
    <extension
          point="org.emftext.refactoring.smell.smell_model.metric">
       <metric
-            class="org.emftext.refactoring.smell.extension.CountAttributesOfMethods">
+            class="org.emftext.refactoring.smell.ecore_extension.CountAttributesOfMethods">
       </metric>
       <metric
-            class="org.emftext.refactoring.smell.extension.CompareNamesOfClasses">
+            class="org.emftext.refactoring.smell.ecore_extension.CompareNamesOfClasses">
       </metric>
       <metric
-            class="org.emftext.refactoring.smell.extension.CheckClasses">
+            class="org.emftext.refactoring.smell.ecore_extension.CheckClasses">
       </metric>
    </extension>
 

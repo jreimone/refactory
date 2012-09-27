@@ -1,4 +1,4 @@
-package org.emftext.refactoring.smell.extension;
+package org.emftext.refactoring.smell.ecore_extension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
