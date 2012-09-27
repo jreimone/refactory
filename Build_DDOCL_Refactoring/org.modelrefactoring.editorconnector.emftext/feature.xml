@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.modelrefactoring.editorconnector.emftext"
+      label="Refactory EMFText Editor Connector"
+      version="0.9.0.qualifier"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://modelrefactoring.org">
+      Refactory EMFText Editor Connector: Enables refactorings in EMFText editors.
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2012 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+   </copyright>
+
+   <license>
+      Eclipse Public License v1.0
+
+Copyright (c) 2006-2012
+Software Technology Group, Dresden University of Technology
+DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Software Technology Group - TU Dresden, Germany;
+  DevBoost GmbH - Berlin, Germany
+     - initial API and implementation
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.emf" version="2.8.0.v20120608-0554"/>
+      <import feature="org.eclipse.emf.workspace" version="1.6.0.v20120328-0001-37708s734E377I3B4C2"/>
+      <import feature="org.eclipse.platform" version="4.2.0.v20120608-135145-9JF7BHV8FyMteji0Oi_ePMz0xuZ8TVo7lV0z0ecb"/>
+      <import feature="org.eclipse.sdk" version="4.2.0.v20120528-1648-7T7oDFDPz-3FepgRqG6kkFFY0UF4_otgmt0XcoU3Zh27X"/>
+      <import feature="org.emftext.access" version="1.4.1.v201207310007"/>
+      <import feature="org.modelrefactoring.runtime" version="0.9.0.qualifier"/>
+   </requires>
+
+   <plugin
+         id="org.emftext.refactoring.editorconnector.emftext"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
