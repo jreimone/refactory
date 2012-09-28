@@ -6,4 +6,5 @@
 		url="http://download.eclipse.org/eclipse/updates/4.2"/>	
 	<associateSite label="Dresden OCL"
 		url="http://www.dresden-ocl.org/update/"/>
+	<associateSite label="EMFText" url="http://www.emftext.org/update/"/>
 </associateSites>
