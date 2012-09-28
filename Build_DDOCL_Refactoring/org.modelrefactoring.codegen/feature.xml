@@ -31,8 +31,8 @@ Contributors:
    </license>
 
    <requires>
-      <import plugin="org.emftext.sdk.codegen"/>
       <import feature="org.modelrefactoring.runtime" version="0.9.0.qualifier"/>
+      <import plugin="org.emftext.sdk.codegen"/>
    </requires>
 
    <plugin
