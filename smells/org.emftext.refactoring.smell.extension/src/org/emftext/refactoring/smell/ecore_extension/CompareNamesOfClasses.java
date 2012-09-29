@@ -36,10 +36,14 @@ public class CompareNamesOfClasses extends EObjectImpl implements ModelMetric {
 	public Map<EObject, Float> calculate(Resource loadedResource) {
 		Map<EObject, Float> map = new HashMap<EObject, Float>();
 		EPackage epackage = null;
-		if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
-			epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
-		} else {
-			epackage = (EPackage) loadedResource.getContents().get(0);
+		try {
+			if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
+				epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
+			} else {
+				epackage = (EPackage) loadedResource.getContents().get(0);
+			}
+		} catch (ClassCastException e){
+
 		}
 		if (epackage != null) {
 			getList().add(epackage);
