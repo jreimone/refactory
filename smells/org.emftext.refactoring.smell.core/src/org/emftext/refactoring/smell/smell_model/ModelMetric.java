@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
  * </p>
  *
  * @see org.emftext.refactoring.smell.smell_model.Smell_modelPackage#getModelMetric()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface ModelMetric extends EObject {

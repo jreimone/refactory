@@ -136,7 +136,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	protected EList<ModelSmell> modelSmells;
 
 	/**
-	 * The default value of the '{@link #getLoadedResource() <em>Loaded Resource</em>}' attribute.
+	 * The cached value of the '{@link #getLoadedResource() <em>Loaded Resource</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @see #getLoadedResource()
@@ -144,7 +144,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 * @ordered
 	 */
 	
-	private Resource loadedResource;
+	protected Resource loadedResource;
 	
 	private Map<Quality, Float> qualityScale;
 	
@@ -214,6 +214,8 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	
+	//TODO richtige Metriken benutzen
 	public void init() {
 		modelSmells = new BasicEList<ModelSmell>();
 		qualities = new BasicEList<Quality>();
@@ -391,6 +393,7 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		    					tempMapping.setModelSmell(m);
 		    					tempMapping.setQuality(q);
 		    					quality_modelSmell.add(tempMapping);
+		    					System.out.println(m.getName() + "::" + q.getName());
 		    				}
 		    			}
 		    			i++;
@@ -440,15 +443,19 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	    		if (("#"+m.getName()).equals(rolemappings.get(i))){
 	    			i++;
 	    			for (String s : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().keySet()){
-	    				ModelSmell_Rolemapping_Mapping tempMapping = Smell_modelFactory.eINSTANCE.createModelSmell_Rolemapping_Mapping();
+//	    				for (String n : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
+//	    					System.out.println(n);
+//	    				}
 	    				if (loadedMetaModel != null){
 	    					if (s.equals(loadedMetaModel.getNsURI())){
 		    					while (rolemappings.get(i).startsWith(">")){
 		    						for (String n : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
 		    							if (rolemappings.get(i).equals(">"+n)){
+		    								ModelSmell_Rolemapping_Mapping tempMapping = Smell_modelFactory.eINSTANCE.createModelSmell_Rolemapping_Mapping();
 			    							tempMapping.setMetaModelSpecification(loadedMetaModel);
 			    							tempMapping.setModelSmell(m);
 			    							tempMapping.getRoleMappings().add(IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).get(n));
+			    							System.out.println(tempMapping.getModelSmell().getName() + "::" + tempMapping.getRoleMappings().get(0).getName());
 			    							modelSmell_roleMapping.add(tempMapping);
 			    						}
 		    						}

@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
@@ -88,7 +89,16 @@ public class View_Tree implements Observer{
 			for (ModelSmell m : result.getResult().keySet()){
 				TreeItem smellItem = addTreeItem(tree, m.getName() + ": " + ModelSmellModelImpl.getMain().getModelSmellDescription().get(m), SWT.NONE);
 				for (EObject o : result.getResult().get(m).keySet()){
-					TreeItem objectItem = addTreeItem(smellItem, o.eResource().getURIFragment(o).substring(2), SWT.UNDERLINE_LINK);
+					String name = EcoreUtil.getURI(o).toString();
+					String[] temp = o.toString().split("name:");
+					if (temp.length > 1){
+						if (temp[1].indexOf(',') < temp[1].indexOf(')')) {
+							name = temp[1].substring(0, temp[1].indexOf(','));
+						} else {
+							name = temp[1].substring(0, temp[1].indexOf(')'));
+						}
+					}
+					TreeItem objectItem = addTreeItem(smellItem, name + ", value: " + result.getResult().get(m).get(o), SWT.UNDERLINE_LINK);
 					boolean hasRoleMapping = false;
 					for (ModelSmell_Rolemapping_Mapping r : rolemapping){
 						if (r.getModelSmell().equals(m)){
@@ -96,12 +106,13 @@ public class View_Tree implements Observer{
 								hasRoleMapping = true;
 								TreeItem roleItem = addTreeItem(objectItem, "Recommended Refactoring: "+rm.getName(), SWT.NONE);
 								roleItemMap.put(roleItem, rm);
-								createMarker(m.getName(), o.eResource().getURIFragment(o).substring(2), roleItem, roleItem.getParentItem());
+								createMarker(m.getName(), EcoreUtil.getURI(o).toString(), roleItem, roleItem.getParentItem());
 							}
 						}
 					}
 					if (!hasRoleMapping){
-						addTreeItem(objectItem, "Recommended Refactoring: No Refactoring, this is only a hint", SWT.NONE);
+						addTreeItem(objectItem, "Recommended Refactoring: No Refactoring available, this is only a hint.", SWT.NONE);
+						createMarker(m.getName(), EcoreUtil.getURI(o).toString(), null, null);
 					}
 					objectItemMap.put(objectItem, o);
 				}
@@ -171,7 +182,7 @@ public class View_Tree implements Observer{
     	}
 	}
 	
-	//TODO Marker erscheinen nur im Debug Modus
+	//TODO Marker werden nur bei Debug angezeigt
 	private void  createMarker(final String smell, final String location, final TreeItem item, final TreeItem parentItem){
 		Path path = new Path(ModelSmellModelImpl.getMain().getLoadedResource().getURI().toPlatformString(true));
 		final IResource resource = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
@@ -182,10 +193,10 @@ public class View_Tree implements Observer{
 					throws CoreException {
 				IMarker mk = null;
 				try {
-					for (int i = 0; i < marker.size(); i++){
-						marker.get(i).delete();
-					}
-					marker.clear();
+//					for (int i = 0; i < marker.size(); i++){
+//						marker.get(i).delete();
+//					}
+//					marker.clear();
 					mk = resource.createMarker(IMarker.PROBLEM);
 					mk.setAttribute(IMarker.MESSAGE, smell);
 					mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
@@ -194,8 +205,10 @@ public class View_Tree implements Observer{
 					mk.setAttribute(IMarker.LINE_NUMBER, 0);
 					System.out.println("Marker created: " + mk.getAttribute(IMarker.MESSAGE));
 					marker.add(mk);
-					RefactoringQuickfix rq = createRefactoringQuickfix(item, parentItem);
-					ModelSmellModelImpl.getMain().putMarkerRefactoring(mk, rq);
+					if (item != null && parentItem != null){
+						RefactoringQuickfix rq = createRefactoringQuickfix(item, parentItem);
+						ModelSmellModelImpl.getMain().putMarkerRefactoring(mk, rq);
+					}
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}

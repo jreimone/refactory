@@ -706,7 +706,7 @@ public class Smell_modelPackageImpl extends EPackageImpl implements Smell_modelP
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "qualityScale", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(modelMetricEClass, ModelMetric.class, "ModelMetric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(modelMetricEClass, ModelMetric.class, "ModelMetric", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getModelMetric_Name(), ecorePackage.getEString(), "name", null, 0, 1, ModelMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(modelMetricEClass, null, "calculate", 0, 1, IS_UNIQUE, IS_ORDERED);
