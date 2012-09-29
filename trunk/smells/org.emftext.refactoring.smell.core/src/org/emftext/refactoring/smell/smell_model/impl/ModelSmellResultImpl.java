@@ -148,7 +148,7 @@ public class ModelSmellResultImpl extends EObjectImpl implements ModelSmellResul
 								if (ModelSmellModelImpl.getMain().getLoadedMetaModel() == null){
 									ModelSmellModelImpl.getMain().setLoadedMetaModel(o.eClass().getEPackage());
 								}
-								tempFloat = mqm.getFactor() * qualityScale.get(mqm.getQuality()) * qmm.getFactor();
+								tempFloat = mqm.getFactor() * qualityScale.get(mqm.getQuality()) * qmm.getFactor() * metricResultMap.get(mqm.getMetric()).get(o);
 								if (tempFloat >= threshold){
 									if (result.get(tempModelSmell) != null){
 										if (result.get(tempModelSmell).containsKey(o)){

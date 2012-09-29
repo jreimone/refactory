@@ -160,16 +160,6 @@ public class Smell_modelFactoryImpl extends EFactoryImpl implements Smell_modelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelMetric createModelMetric() {
-		ModelMetricImpl modelMetric = new ModelMetricImpl();
-		return modelMetric;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Smell_modelPackage getSmell_modelPackage() {
 		return (Smell_modelPackage)getEPackage();
 	}

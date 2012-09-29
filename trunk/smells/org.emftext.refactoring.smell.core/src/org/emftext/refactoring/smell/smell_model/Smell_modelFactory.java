@@ -101,15 +101,6 @@ public interface Smell_modelFactory extends EFactory {
 	ModelSmellResult createModelSmellResult();
 
 	/**
-	 * Returns a new object of class '<em>Model Metric</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Metric</em>'.
-	 * @generated
-	 */
-	ModelMetric createModelMetric();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

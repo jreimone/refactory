@@ -470,10 +470,10 @@ public interface Smell_modelPackage extends EPackage {
 	int MODEL_SMELL_RESULT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.impl.ModelMetricImpl <em>Model Metric</em>}' class.
+	 * The meta object id for the '{@link org.emftext.refactoring.smell.smell_model.ModelMetric <em>Model Metric</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.emftext.refactoring.smell.smell_model.impl.ModelMetricImpl
+	 * @see org.emftext.refactoring.smell.smell_model.ModelMetric
 	 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getModelMetric()
 	 * @generated
 	 */
@@ -1188,10 +1188,10 @@ public interface Smell_modelPackage extends EPackage {
 		EAttribute MODEL_SMELL_RESULT__RESULT = eINSTANCE.getModelSmellResult_Result();
 
 		/**
-		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.impl.ModelMetricImpl <em>Model Metric</em>}' class.
+		 * The meta object literal for the '{@link org.emftext.refactoring.smell.smell_model.ModelMetric <em>Model Metric</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.emftext.refactoring.smell.smell_model.impl.ModelMetricImpl
+		 * @see org.emftext.refactoring.smell.smell_model.ModelMetric
 		 * @see org.emftext.refactoring.smell.smell_model.impl.Smell_modelPackageImpl#getModelMetric()
 		 * @generated
 		 */
