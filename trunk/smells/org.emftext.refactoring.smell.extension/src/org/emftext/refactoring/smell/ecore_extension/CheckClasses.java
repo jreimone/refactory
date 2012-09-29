@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EClassImpl;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.refactoring.smell.smell_model.ModelMetric;
@@ -36,10 +36,14 @@ public class CheckClasses extends EObjectImpl implements ModelMetric {
 	public Map<EObject, Float> calculate(Resource loadedResource) {
 		Map<EObject, Float> map = new HashMap<EObject, Float>();
 		EPackage epackage = null;
-		if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
-			epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
-		} else {
-			epackage = (EPackage) loadedResource.getContents().get(0);
+		try {
+			if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
+				epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
+			} else {
+				epackage = (EPackage) loadedResource.getContents().get(0);
+			}
+		} catch (ClassCastException e){
+
 		}
 		if (epackage != null) {
 			getList().add(epackage);
@@ -47,8 +51,8 @@ public class CheckClasses extends EObjectImpl implements ModelMetric {
 			for (EPackage ep : list) {
 				List<EObject> contents = ep.eContents();
 				for (EObject eo : contents) {
-					if (eo instanceof EClassImpl) {
-						if(((EClassImpl) eo).getEAllAttributes().isEmpty() && ((EClassImpl) eo).getEAllOperations().isEmpty()){
+					if (eo instanceof EClass) {
+						if(((EClass) eo).getEAllAttributes().isEmpty() && ((EClass) eo).getEAllOperations().isEmpty()){
 							map.put(eo, 1.0f);
 						}
 					}

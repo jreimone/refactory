@@ -12,6 +12,9 @@
       <metric
             class="org.emftext.refactoring.smell.ecore_extension.CheckClasses">
       </metric>
+      <metric
+            class="org.emftext.refactoring.smell.ecore_extension.CheckInterfaces">
+      </metric>
    </extension>
 
 </plugin>
