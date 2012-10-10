@@ -24,6 +24,12 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 // Google Guava (required by EMF Compare)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/S20120726065500/repository/plugins!com.google.guava_10.0.1.v201203051515.jar
 
+// Apache Xerces (for Coral from Helge)
+get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/binaries/Xerces-J-bin.2.11.0.zip!resolver.jar
+get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/binaries/Xerces-J-bin.2.11.0.zip!serializer.jar
+get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/binaries/Xerces-J-bin.2.11.0.zip!xercesImpl.jar
+get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/binaries/Xerces-J-bin.2.11.0.zip!xml-apis.jar
+
 // GMF 
 
 // EMFText
