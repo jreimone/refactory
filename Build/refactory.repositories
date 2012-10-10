@@ -30,7 +30,13 @@ get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/bi
 get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/binaries/Xerces-J-bin.2.11.0.zip!xercesImpl.jar
 get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/binaries/Xerces-J-bin.2.11.0.zip!xml-apis.jar
 
+// Groovy (for Coral from Helge)
+get:http://dist.groovy.codehaus.org/distributions/groovy-binary-2.0.5.zip!groovy-2.0.5/lib/groovy-2.0.5.jar
+
 // GMF 
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/downloads/drops/1.6.0/R201206271200/gmf-runtime-1.6.0.zip
+// MDT OCL (needed from GMF???)
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.0.1/R201209171739/mdt-ocl-runtime-core-4.0.1.zip 
 
 // EMFText
 git:https://github.com/DevBoost/EMFText.git!Core/Access/
@@ -55,13 +61,14 @@ git:https://github.com/DevBoost/Reuseware.git!Sokan/
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
 
 // Dresden OCL for OCL refactorings
-svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
+svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/tudresden.ocl20.pivot.facade/
 
 // AppFlow for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/AppFlow/
 
 // Company for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Company/
+git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/DOT/
 
 // TextAdventure for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/TextAdventure/
