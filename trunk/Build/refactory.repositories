@@ -88,7 +88,7 @@ svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse
 // needs Log4j
 get:http://ftp.halifax.rwth-aachen.de/apache/logging/log4j/1.2.17/log4j-1.2.17.zip!apache-log4j-1.2.17/log4j-1.2.17.jar
 // needs AspectJ
-http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/aspectj/aspectj-1.7.1.jar
+get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/aspectj/aspectj-1.7.1.jar
 
 // AppFlow for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/AppFlow/
