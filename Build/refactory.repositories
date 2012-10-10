@@ -14,8 +14,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops
 // EMF
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip
 
-// EMF Validation (core API plugin only)
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.4.0.v20100428-2315.jar
+// EMF Validation
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip
 
 // EMF Workspace + Transaction
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/transaction/downloads/drops/1.6.0/R201206271200/emf-transaction-runtime-1.6.0.zip
@@ -24,6 +24,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/transactio
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.1/R20120605-0748/emf-compare-update-1.3.1.zip!plugins/org.eclipse.emf.compare_1.3.1.v20120605-0748.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.1/R20120605-0748/emf-compare-update-1.3.1.zip!plugins/org.eclipse.emf.compare.diff_1.3.1.v20120605-0748.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.1/R20120605-0748/emf-compare-update-1.3.1.zip!plugins/org.eclipse.emf.compare.match_1.3.1.v20120605-0748.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.1/R20120605-0748/emf-compare-update-1.3.1.zip!plugins/org.eclipse.emf.compare.ui_1.3.1.v20120605-0748.jar
 // Google Guava (required by EMF Compare)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/S20120726065500/repository/plugins!com.google.guava_10.0.1.v201203051515.jar
 
@@ -40,7 +41,14 @@ get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/bi
 get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//xerces/j/binaries/Xerces-J-bin.2.11.0.zip!xml-apis.jar
 
 // Groovy (for Coral from Helge)
-get:http://dist.groovy.codehaus.org/distributions/groovy-binary-2.0.5.zip!groovy-2.0.5/lib/groovy-2.0.5.jar
+get:http://dist.springsource.org/snapshot/GRECLIPSE/e4.2/archive-2.7.2.xx-20121005-1400-e42.zip!plugins/org.codehaus.groovy_1.8.6.xx-20121005-1400-e42.jar
+
+// TOPCASED
+get:http://topcased-mm.gforge.enseeiht.fr/indigo/release/topcased5.2/main/plugins/org.topcased.modeler_3.1.14.201204031215.jar
+get:http://topcased-mm.gforge.enseeiht.fr/indigo/release/topcased5.2/main/plugins/org.topcased.modeler.uml_5.1.0.201204031215.jar
+
+// Xtext
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui_2.3.1.v201208210947.jar
 
 // GMF 
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/downloads/drops/1.6.0/R201206271200/gmf-runtime-1.6.0.zip
@@ -58,6 +66,9 @@ git:https://github.com/DevBoost/EMFText.git!Core/Commons/
 git:https://github.com/DevBoost/EMFText.git!Core/Features/
 git:https://github.com/DevBoost/EMFText.git!Core/License/
 
+// Ecore Text
+git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/EcoreText/
+
 // JaMoPP
 git:https://github.com/DevBoost/JaMoPP.git!Core/
 git:https://github.com/DevBoost/JaMoPP.git!Eclipse-Integration/
@@ -74,6 +85,10 @@ git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
 
 // Dresden OCL for OCL refactorings
 svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/tudresden.ocl20.pivot.facade/
+// needs Log4j
+get:http://ftp.halifax.rwth-aachen.de/apache/logging/log4j/1.2.17/log4j-1.2.17.zip!apache-log4j-1.2.17/log4j-1.2.17.jar
+// needs AspectJ
+http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/aspectj/aspectj-1.7.1.jar
 
 // AppFlow for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/AppFlow/
