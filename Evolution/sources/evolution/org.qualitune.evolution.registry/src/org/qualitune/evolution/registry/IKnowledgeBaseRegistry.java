@@ -19,12 +19,12 @@ public interface IKnowledgeBaseRegistry {
 	 * 
 	 * @param knowledgeBase
 	 */
-	public void registerKnowledgeBase(KnowledgeBase knowledgeBase);
+	public void registerKnowledgeBase(IKnowledgeBase knowledgeBase);
 	
 	/**
 	 * Returns all knowledge bases.
 	 * 
 	 * @return
 	 */
-	public List<KnowledgeBase> getKnowledgeBases();
+	public List<IKnowledgeBase> getKnowledgeBases();
 }

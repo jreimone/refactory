@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * @author jreimann
  *
  */
-public interface KnowledgeBase {
+public interface IKnowledgeBase {
 
 	/**
 	 * Generates the knowledge for the given <code>resource</code>.
