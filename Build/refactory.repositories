@@ -49,6 +49,13 @@ get:http://topcased-mm.gforge.enseeiht.fr/indigo/release/topcased5.2/main/plugin
 
 // Xtext
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.util_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.xbase.lib_2.3.1.v201208210947.jar
+// needs Apache Commons Lang
+get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//commons/lang/binaries/commons-lang3-3.1-bin.zip!commons-lang3-3.1/commons-lang3-3.1.jar
+// needs Log4J
+get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//logging/log4j/1.2.17/log4j-1.2.17.zip!apache-log4j-1.2.17/log4j-1.2.17.jar
 
 // GMF 
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/downloads/drops/1.6.0/R201206271200/gmf-runtime-1.6.0.zip
@@ -85,8 +92,8 @@ git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
 
 // Dresden OCL for OCL refactorings
 svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
-// needs Log4j
-get:http://ftp.halifax.rwth-aachen.de/apache/logging/log4j/1.2.17/log4j-1.2.17.zip!apache-log4j-1.2.17/log4j-1.2.17.jar
+// needs Log4j (already referenced in Xtext above)
+//get:http://ftp.halifax.rwth-aachen.de/apache/logging/log4j/1.2.17/log4j-1.2.17.zip!apache-log4j-1.2.17/log4j-1.2.17.jar
 // needs AspectJ
 get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/aspectj/aspectj-1.7.1.jar
 
