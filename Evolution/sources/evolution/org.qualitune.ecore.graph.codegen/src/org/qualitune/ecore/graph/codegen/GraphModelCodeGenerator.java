@@ -31,6 +31,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.internal.corext.util.CodeFormatterUtil;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.expressions.Expression;
@@ -65,6 +67,7 @@ public class GraphModelCodeGenerator {
 	private GenModel model;
 	private IProject project;
 	private ResourceSet rs;
+	private int tabWidth;
 
 	public void init(GenModel model) {
 		if(model == null){
@@ -74,6 +77,12 @@ public class GraphModelCodeGenerator {
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(pluginID);
 		if(project == null){
 			return;
+		}
+		IJavaProject javaProject = (IJavaProject) project.getAdapter(IJavaProject.class);
+		if(javaProject != null){
+			tabWidth = CodeFormatterUtil.getTabWidth(javaProject);
+		} else {
+			tabWidth = CodeFormatterUtil.getTabWidth(null);
 		}
 		this.project = project;
 		this.model = model;
@@ -167,9 +176,9 @@ public class GraphModelCodeGenerator {
 			if(!(returnStatement instanceof Return)){
 				index = statements.size();
 			}
-			String name = model.getModelName();
-			name = GenerationUtil.uppercaseFirstLetter(name);
-			String literalString = name + "Package.Literals." + genClass.getFeatureID(feature);
+			GenPackage genPackage = genClass.getGenPackage();
+			String packageInterfaceName = genPackage.getPackageInterfaceName();
+			String literalString = packageInterfaceName + ".Literals." + genClass.getFeatureID(feature);
 			String blockString =
 					"\n		GObject start = this;\n" +
 					"		GObject end = " + referenceTargetParamName + ";\n" +
@@ -268,9 +277,8 @@ public class GraphModelCodeGenerator {
 		ConcreteClassifier newList = cu.getConcreteClassifier(newListName);
 		Method method = classifier.getContainedMethod(feature.getGetAccessor());
 		GenPackage genPackage = genClass.getGenPackage();
-		String name = genPackage.getEcorePackage().getName();
-		name = GenerationUtil.uppercaseFirstLetter(name);
-		String parameterString = name + "Package.Literals." + genClass.getFeatureID(feature);
+		String packageInterfaceName = genPackage.getPackageInterfaceName();
+		String parameterString = packageInterfaceName + ".Literals." + genClass.getFeatureID(feature);
 		IdentifierReference parameter = GenerationUtil.parsePartialFragment(parameterString, ReferencesPackage.Literals.IDENTIFIER_REFERENCE, IdentifierReference.class).get(0);
 		List<Expression> parameters = new ArrayList<Expression>();
 		parameters.add(parameter);
