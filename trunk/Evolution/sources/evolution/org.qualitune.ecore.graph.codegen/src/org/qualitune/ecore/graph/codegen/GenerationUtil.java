@@ -34,6 +34,7 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.ImportsFactory;
 import org.emftext.language.java.instantiations.InstantiationsPackage;
 import org.emftext.language.java.instantiations.NewConstructorCall;
@@ -222,13 +223,18 @@ public abstract class GenerationUtil {
 			List<ClassifierReference> references = typeReference.getClassifierReferences();
 			for (ClassifierReference classifierReference : references) {
 				Classifier target = classifierReference.getTarget();
-				if(target == oldConstructorType){
-					classifierReference.setTarget(newConstructorType);
-					for(EStructuralFeature.Setting setting : EcoreUtil.CrossReferencer.find(cu.getImports()).get(oldConstructorType)){
+				//				if(target == oldConstructorType){
+				classifierReference.setTarget(newConstructorType);
+				List<Import> imports = cu.getImports();
+				Map<EObject, Collection<Setting>> found = EcoreUtil.CrossReferencer.find(imports);
+				Collection<Setting> collection = found.get(oldConstructorType);
+				if(collection != null){
+					for(EStructuralFeature.Setting setting : collection){
 						ClassifierImport oldImport = (ClassifierImport) setting.getEObject();
 						replaceImport(oldImport, newConstructorType);
 					}
 				}
+				//				}
 			}
 			List<Expression> arguments = call.getArguments();
 			arguments.addAll(additionalConstructorArguments);
@@ -258,7 +264,7 @@ public abstract class GenerationUtil {
 			if(member instanceof ClassMethod){
 				ClassMethod method = (ClassMethod) member;
 				List<Parameter> parameters = method.getParameters();
-				
+
 				boolean correctTypes = true;
 				if(parameters != null && parameters.size() == sortedRequiredParameterTypes.length){
 					for (int i = 0; i< sortedRequiredParameterTypes.length; i++) {
