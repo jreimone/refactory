@@ -161,7 +161,7 @@ public abstract class OperatorImpl extends EObjectImpl implements Operator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public void execute() {
 		setExecuted(true);
