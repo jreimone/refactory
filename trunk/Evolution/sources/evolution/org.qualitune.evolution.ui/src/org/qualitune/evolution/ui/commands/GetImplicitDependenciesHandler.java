@@ -19,7 +19,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.qualitune.evolution.registry.IKnowledgeBaseRegistry;
-import org.qualitune.evolution.registry.KnowledgeBase;
+import org.qualitune.evolution.registry.IKnowledgeBase;
 import org.qualitune.evolution.ui.views.ImplicitDependencyView;
 
 public class GetImplicitDependenciesHandler extends AbstractHandler {
@@ -39,8 +39,8 @@ public class GetImplicitDependenciesHandler extends AbstractHandler {
 			try {
 				ResourceSet rs = new ResourceSetImpl();
 				IKnowledgeBaseRegistry registry = IKnowledgeBaseRegistry.INSTANCE;
-				List<KnowledgeBase> knowledgeBases = registry.getKnowledgeBases();
-				for (KnowledgeBase knowledgeBase : knowledgeBases) {
+				List<IKnowledgeBase> knowledgeBases = registry.getKnowledgeBases();
+				for (IKnowledgeBase knowledgeBase : knowledgeBases) {
 					Map<EObject, Collection<EObject>> dependencies = knowledgeBase.getDependencies(uri, rs);
 					if(dependencies != null){
 						modelChildrenMap.putAll(dependencies);

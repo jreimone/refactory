@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.qualitune.evolution.prolog.IPrologGenerator;
 import org.qualitune.evolution.prolog.registry.IPrologRegistry;
 import org.qualitune.evolution.prolog.registry.PrologUtil;
-import org.qualitune.evolution.registry.KnowledgeBase;
+import org.qualitune.evolution.registry.IKnowledgeBase;
 
 import alice.tuprolog.MalformedGoalException;
 import alice.tuprolog.NoMoreSolutionException;
@@ -23,7 +23,7 @@ import alice.tuprolog.NoSolutionException;
 import alice.tuprolog.Prolog;
 import alice.tuprolog.SolveInfo;
 
-public class PrologKnowledgeBase implements KnowledgeBase {
+public class PrologKnowledgeBase implements IKnowledgeBase {
 
 	private static final String VAR_TARGET_ELEMENT		= "TargetElement";
 	private static final String VAR_SOURCE_ELEMENT_URI	= "SourceElementUri";

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.qualitune.evolution.registry.IKnowledgeBaseRegistry;
-import org.qualitune.evolution.registry.KnowledgeBase;
+import org.qualitune.evolution.registry.IKnowledgeBase;
 
 public class GenerateKnowledgeHandler extends AbstractHandler {
 
@@ -30,8 +30,8 @@ public class GenerateKnowledgeHandler extends AbstractHandler {
 			ResourceSet rs = new ResourceSetImpl();
 			Resource resource = rs.getResource(uri, true);
 			IKnowledgeBaseRegistry registry = IKnowledgeBaseRegistry.INSTANCE;
-			List<KnowledgeBase> knowledgeBases = registry.getKnowledgeBases();
-			for (KnowledgeBase knowledgeBase : knowledgeBases) {
+			List<IKnowledgeBase> knowledgeBases = registry.getKnowledgeBases();
+			for (IKnowledgeBase knowledgeBase : knowledgeBases) {
 				knowledgeBase.generateKnowledge(resource);
 			}
 		}

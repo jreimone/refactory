@@ -24,9 +24,9 @@ import org.qualitune.evolution.guery.graph.IEMFGraphAdapterFactory;
 import org.qualitune.evolution.guery.registry.EObjectVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
 import org.qualitune.evolution.guery.registry.IGUERYRegistry;
-import org.qualitune.evolution.registry.KnowledgeBase;
+import org.qualitune.evolution.registry.IKnowledgeBase;
 
-public class GueryKnowledgeBase implements KnowledgeBase {
+public class GueryKnowledgeBase implements IKnowledgeBase {
 
 	private EMFGraphAdapter<EObjectVertex, EReferenceEdge> graphAdapter;
 	private Resource resource;

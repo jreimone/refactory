@@ -9,24 +9,24 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.qualitune.evolution.registry.IKnowledgeBaseRegistry;
 import org.qualitune.evolution.registry.IKnowledgeBaseRegistryExtensionPoint;
-import org.qualitune.evolution.registry.KnowledgeBase;
+import org.qualitune.evolution.registry.IKnowledgeBase;
 
 public class KnowledgeBaseRegistry implements IKnowledgeBaseRegistry {
 
-	private List<KnowledgeBase> knowledgeBases;
+	private List<IKnowledgeBase> knowledgeBases;
 	
 	public KnowledgeBaseRegistry(){
 		initialise();
 	}
 	
 	private void initialise() {
-		knowledgeBases = new ArrayList<KnowledgeBase>();
+		knowledgeBases = new ArrayList<IKnowledgeBase>();
 		if(Platform.isRunning()){
 			IExtensionRegistry registry = Platform.getExtensionRegistry();
 			IConfigurationElement[] configurationElements = registry.getConfigurationElementsFor(IKnowledgeBaseRegistryExtensionPoint.ID);
 			for (IConfigurationElement configurationElement : configurationElements) {
 				try {
-					KnowledgeBase knowledgeBase = (KnowledgeBase) configurationElement.createExecutableExtension(IKnowledgeBaseRegistryExtensionPoint.ATT_IMPL);
+					IKnowledgeBase knowledgeBase = (IKnowledgeBase) configurationElement.createExecutableExtension(IKnowledgeBaseRegistryExtensionPoint.ATT_IMPL);
 					registerKnowledgeBase(knowledgeBase);
 				} catch (CoreException e) {
 					e.printStackTrace();
@@ -36,12 +36,12 @@ public class KnowledgeBaseRegistry implements IKnowledgeBaseRegistry {
 	}
 
 	@Override
-	public void registerKnowledgeBase(KnowledgeBase knowledgeBase) {
+	public void registerKnowledgeBase(IKnowledgeBase knowledgeBase) {
 		knowledgeBases.add(knowledgeBase);
 	}
 
 	@Override
-	public List<KnowledgeBase> getKnowledgeBases() {
+	public List<IKnowledgeBase> getKnowledgeBases() {
 		return knowledgeBases;
 	}
 
