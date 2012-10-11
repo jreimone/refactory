@@ -49,9 +49,12 @@ get:http://topcased-mm.gforge.enseeiht.fr/indigo/release/topcased5.2/main/plugin
 
 // Xtext
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui_2.3.1.v201208210947.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext_2.3.1.v201208210947.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.util_2.3.1.v201208210947.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.xbase.lib_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.0/R201206120633/tmf-xtext-runtime-2.3.0.zip!eclipse/plugins/org.eclipse.xtext_2.3.0.v201206120633.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.0/R201206120633/tmf-xtext-runtime-2.3.0.zip!eclipse/plugins/org.eclipse.xtext.util_2.3.0.v201206120633.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.0/R201206120633/tmf-xtext-runtime-2.3.0.zip!eclipse/plugins/org.eclipse.xtext.xbase.lib_2.3.0.v201206120633.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext_2.3.1.v201208210947.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.util_2.3.1.v201208210947.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.xbase.lib_2.3.1.v201208210947.jar
 // needs Apache Commons Lang
 get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//commons/lang/binaries/commons-lang3-3.1-bin.zip!commons-lang3-3.1/commons-lang3-3.1.jar
 // needs Log4J
