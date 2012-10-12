@@ -61,6 +61,11 @@ public class SokanIndexConnector implements IndexConnector {
 		for (String string : refererStrings) {
 			URI refererUri = ResourceUtil.uriFrom(ResourceUtil.idFrom(string));
 			referringResources.add(resourceSet.getResource(refererUri, true));
+			ID refererURI = ResourceUtil.idFrom(refererUri);
+			IndexRow refererRow = IndexUtil.INSTANCE.getIndex(refererURI);
+			IndexMetaData refererMetaData = refererRow.getMetaData();
+			List<String> multi = refererMetaData.getMulti(InverseModelReferencesIndexer.KEY_INVERSE_REFERENCED_RESOURCES);
+			System.out.println(multi);
 		}
 		// Test begin
 //		List<EObject> referringModels = new ArrayList<EObject>();
