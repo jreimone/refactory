@@ -1,5 +1,10 @@
-#Thu Apr 01 15:38:48 CEST 2010
 eclipse.preferences.version=1
+encoding//ecore_hierarchies/SubModel1.ecore=UTF-8
+encoding//ecore_hierarchies/SubModel1.ecorediag=UTF-8
+encoding//ecore_hierarchies/SubModel2.ecore=UTF-8
+encoding//ecore_hierarchies/SubModel2.ecorediag=UTF-8
+encoding//ecore_hierarchies/SuperModel.ecore=UTF-8
+encoding//ecore_hierarchies/SuperModel.ecorediag=UTF-8
 encoding//roles/ExtractMethod.roles=UTF-8
 encoding//roles/ExtractMethod.rolesdiag=UTF-8
 encoding//statemachine/default.uml=UTF-8

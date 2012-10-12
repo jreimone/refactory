@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_DtZnQBREEeKSkup6mhX16A" type="EcoreTools" name="SuperModel" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_ZEpRoBREEeKSkup6mhX16A" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_ZE2F8BREEeKSkup6mhX16A" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_ZE6XYBREEeKSkup6mhX16A" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ZE6XYRREEeKSkup6mhX16A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ZE6XYhREEeKSkup6mhX16A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ZE6XYxREEeKSkup6mhX16A"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ZE6-cBREEeKSkup6mhX16A" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ZE6-cRREEeKSkup6mhX16A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ZE6-chREEeKSkup6mhX16A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ZE6-cxREEeKSkup6mhX16A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ZEpRoRREEeKSkup6mhX16A" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="SuperModel.ecore#//CommonSuperClass"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZEpRohREEeKSkup6mhX16A" x="235" y="109"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_DtZnQRREEeKSkup6mhX16A"/>
+  <element xmi:type="ecore:EPackage" href="SuperModel.ecore#/"/>
+</notation:Diagram>
