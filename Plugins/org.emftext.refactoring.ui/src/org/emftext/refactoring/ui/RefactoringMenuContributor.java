@@ -110,7 +110,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				}
 			}
 		}
-		if (selectedElements != null && selectedElements.size() >= 1) {
+		if (selectedElements != null && selectedElements.size() >= 1 && activeEditor != null) {
 			EObject model = null;
 			Resource resource = null;
 //			int i = 0;
