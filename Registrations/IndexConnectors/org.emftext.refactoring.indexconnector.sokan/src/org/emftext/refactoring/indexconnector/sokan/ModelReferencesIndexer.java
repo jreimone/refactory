@@ -55,8 +55,13 @@ public class ModelReferencesIndexer implements Indexer {
 		if(contents.size() > 0){
 			EObject root = contents.get(0);
 			List<String> values = collectReferences(root);
+			List<String> knownReferences = metaData.getMulti(KEY_REFERENCED_RESOURCES);
 			if(values != null && values.size() > 0){
-				metaData.addMultiple(KEY_REFERENCED_RESOURCES, values);
+				for (String value : values) {
+					if(!knownReferences.contains(value)){
+						metaData.addMultiple(KEY_REFERENCED_RESOURCES, values);
+					}
+				}
 			}
 		}
 
