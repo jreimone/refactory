@@ -12,13 +12,13 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.refactoring.smell.smell_model.ModelMetric;
 
-public class CheckClasses extends EObjectImpl implements ModelMetric {
+public class SearchEmptyClasses extends EObjectImpl implements ModelMetric {
 	
 	private String name;
 	private List<EPackage> list;
 
-	public CheckClasses() {
-		setName("CheckClasses");
+	public SearchEmptyClasses() {
+		setName("SearchEmptyClasses");
 		list = new ArrayList<EPackage>();
 	}
 
@@ -36,24 +36,28 @@ public class CheckClasses extends EObjectImpl implements ModelMetric {
 	public Map<EObject, Float> calculate(Resource loadedResource) {
 		Map<EObject, Float> map = new HashMap<EObject, Float>();
 		EPackage epackage = null;
-		try {
-			if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
-				epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
-			} else {
-				epackage = (EPackage) loadedResource.getContents().get(0);
-			}
-		} catch (ClassCastException e){
+		if (loadedResource != null){
+			if (loadedResource.getContents().size() > 0) {
+				try {
+					if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
+						epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
+					} else {
+						epackage = (EPackage) loadedResource.getContents().get(0);
+					}
+				} catch (ClassCastException e){
 
-		}
-		if (epackage != null) {
-			getList().add(epackage);
-			walkPackages(epackage.getESubpackages());
-			for (EPackage ep : list) {
-				List<EObject> contents = ep.eContents();
-				for (EObject eo : contents) {
-					if (eo instanceof EClass) {
-						if(((EClass) eo).getEAllAttributes().isEmpty() && ((EClass) eo).getEAllOperations().isEmpty()){
-							map.put(eo, 1.0f);
+				}
+				if (epackage != null) {
+					getList().add(epackage);
+					walkPackages(epackage.getESubpackages());
+					for (EPackage ep : list) {
+						List<EObject> contents = ep.eContents();
+						for (EObject eo : contents) {
+							if (eo instanceof EClass) {
+								if(((EClass) eo).getEAllAttributes().isEmpty() && ((EClass) eo).getEAllOperations().isEmpty()){
+									map.put(eo, 1.0f);
+								}
+							}
 						}
 					}
 				}

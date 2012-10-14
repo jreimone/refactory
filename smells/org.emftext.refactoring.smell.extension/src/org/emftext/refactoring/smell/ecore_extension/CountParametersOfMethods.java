@@ -15,14 +15,14 @@ import org.emftext.refactoring.smell.smell_model.ModelMetric;
 
 
 
-public class CountAttributesOfMethods extends EObjectImpl implements ModelMetric {
+public class CountParametersOfMethods extends EObjectImpl implements ModelMetric {
 	
 	private String name;
 	private List<EPackage> list;
-	private Float highNumberOfAttributes = 8.0f;
+	private Float highNumberOfParameters = 8.0f;
 
-	public CountAttributesOfMethods() {
-		setName("CountAttributesOfMethods");
+	public CountParametersOfMethods() {
+		setName("CountParametersOfMethods");
 		list = new ArrayList<EPackage>();
 	}
 
@@ -41,29 +41,33 @@ public class CountAttributesOfMethods extends EObjectImpl implements ModelMetric
 		Map<EObject, Float> map = new HashMap<EObject, Float>();
 		Float f = 0.0f;
 		EPackage epackage = null;
-		try {
-			if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
-				epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
-			} else {
-				epackage = (EPackage) loadedResource.getContents().get(0);
-			}
-		} catch (ClassCastException e){
+		if (loadedResource != null){
+			if (loadedResource.getContents().size() > 0) {
+				try {
+					if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
+						epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
+					} else {
+						epackage = (EPackage) loadedResource.getContents().get(0);
+					}
+				} catch (ClassCastException e){
 
-		}
-		if (epackage != null){
-			getList().add(epackage);
-			walkPackages(epackage.getESubpackages());
-			for (EPackage ep : list) {
-				List<EObject> contents = ep.eContents();
-				for (EObject eo : contents) {
-					if (eo instanceof EClass) {
-						for (EOperation eop : ((EClass) eo).getEAllOperations()){
-							f = (float) eop.getEParameters().size();
-							f = f/highNumberOfAttributes;
-							if (f > 1.0f){
-								f = 1.0f;
+				}
+				if (epackage != null){
+					getList().add(epackage);
+					walkPackages(epackage.getESubpackages());
+					for (EPackage ep : list) {
+						List<EObject> contents = ep.eContents();
+						for (EObject eo : contents) {
+							if (eo instanceof EClass) {
+								for (EOperation eop : ((EClass) eo).getEAllOperations()){
+									f = (float) eop.getEParameters().size();
+									f = f/highNumberOfParameters;
+									if (f > 1.0f){
+										f = 1.0f;
+									}
+									map.put(eop, f);
+								}
 							}
-							map.put(eop, f);
 						}
 					}
 				}

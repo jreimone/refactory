@@ -5,20 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.refactoring.smell.smell_model.ModelMetric;
 
-public class CompareNamesOfClasses extends EObjectImpl implements ModelMetric {
+public class CheckInterfaceSpecifications extends EObjectImpl implements ModelMetric {
 	
 	private String name;
 	private List<EPackage> list;
-	
-	public CompareNamesOfClasses(){
-		setName("CompareNamesOfClasses");
+
+	public CheckInterfaceSpecifications() {
+		setName("CheckInterfaceSpecifications");
 		list = new ArrayList<EPackage>();
 	}
 
@@ -28,11 +28,10 @@ public class CompareNamesOfClasses extends EObjectImpl implements ModelMetric {
 	}
 
 	@Override
-	public void setName(String value) {
-		this.name = value;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	@Override
+	
 	public Map<EObject, Float> calculate(Resource loadedResource) {
 		Map<EObject, Float> map = new HashMap<EObject, Float>();
 		EPackage epackage = null;
@@ -47,19 +46,31 @@ public class CompareNamesOfClasses extends EObjectImpl implements ModelMetric {
 				} catch (ClassCastException e){
 
 				}
-				if (epackage != null) {
+				if (epackage != null){
 					getList().add(epackage);
 					walkPackages(epackage.getESubpackages());
-					for (EPackage p : list) {
-						for (EClassifier c : p.getEClassifiers()){
-							for (EPackage p2 : list) {
-								for (EClassifier c2 : p2.getEClassifiers()){
-									if (!p.equals(p2) && !c.equals(c2) && c.getName().equals(c2.getName())){
-										if (!map.containsKey(c) && !map.containsKey(c2)){
-											map.put(c2, 1.0f);
+					for (EPackage ep : list) {
+						List<EObject> contents = ep.eContents();
+						for (EObject eo : contents) {
+							if (eo instanceof EClass) {
+								if (((EClass) eo).isInterface()){
+									boolean hasNoSpecification = true;
+									for (EPackage ep2 : list){
+										List<EObject> contents2 = ep2.eContents();
+										for (EObject eo2: contents2) {
+											if (eo2 instanceof EClass) {
+												if (((EClass) eo).isSuperTypeOf((EClass)eo2) && !(eo.equals(eo2))){
+													hasNoSpecification = false;
+													break;
+												}
+											}
 										}
 									}
+									if (hasNoSpecification){
+										map.put(eo, 1.0f);
+									}
 								}
+								
 							}
 						}
 					}
