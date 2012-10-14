@@ -9,10 +9,14 @@ public class View_Quickfixer implements IMarkerResolutionGenerator {
 	
     public IMarkerResolution[] getResolutions(IMarker mk) {
        try {
-          Object problem = mk.getAttribute(IMarker.MESSAGE);
-          return new IMarkerResolution[] {
-             new View_Quickfix("Fix for "+problem)
-          };
+    	   if (mk != null){
+    		   Object problem = mk.getAttribute(IMarker.MESSAGE);
+    	       return new IMarkerResolution[] {
+    	    		   new View_Quickfix("Fix for "+problem)
+    	       };
+    	   } else {
+    		   return new IMarkerResolution[0];
+    	   }
        }
        catch (CoreException e) {
           return new IMarkerResolution[0];

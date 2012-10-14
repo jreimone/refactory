@@ -56,6 +56,7 @@ import org.emftext.refactoring.smell.smell_model.Quality;
 import org.emftext.refactoring.smell.smell_model.Quality_ModelSmell_Mapping;
 import org.emftext.refactoring.smell.smell_model.Smell_modelFactory;
 import org.emftext.refactoring.smell.smell_model.Smell_modelPackage;
+import org.emftext.refactoring.smell.smell_model.ui.RefactoringQuickfix;
 
 
 
@@ -215,7 +216,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	 * @generated NOT
 	 */
 	
-	//TODO richtige Metriken benutzen
 	public void init() {
 		modelSmells = new BasicEList<ModelSmell>();
 		qualities = new BasicEList<Quality>();
@@ -243,7 +243,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	public void calculate() {
 		createMetrics(Platform.getExtensionRegistry());
 		evaluateMetricExtension(Platform.getExtensionRegistry());
-		
 	}
 
 	/**
@@ -289,7 +288,11 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	}
 	
 	public RefactoringQuickfix getQuickfixForMarker(IMarker mk){
-		return markerRefactoring.get(mk);
+		if (mk != null) {
+			return markerRefactoring.get(mk);
+		} else {
+			return null;
+		}
 	}
 	
 	private void setThreshold(){
@@ -393,7 +396,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		    					tempMapping.setModelSmell(m);
 		    					tempMapping.setQuality(q);
 		    					quality_modelSmell.add(tempMapping);
-		    					System.out.println(m.getName() + "::" + q.getName());
 		    				}
 		    			}
 		    			i++;
@@ -443,9 +445,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 	    		if (("#"+m.getName()).equals(rolemappings.get(i))){
 	    			i++;
 	    			for (String s : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().keySet()){
-//	    				for (String n : IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).keySet()){
-//	    					System.out.println(n);
-//	    				}
 	    				if (loadedMetaModel != null){
 	    					if (s.equals(loadedMetaModel.getNsURI())){
 		    					while (rolemappings.get(i).startsWith(">")){
@@ -455,7 +454,6 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 			    							tempMapping.setMetaModelSpecification(loadedMetaModel);
 			    							tempMapping.setModelSmell(m);
 			    							tempMapping.getRoleMappings().add(IRoleMappingRegistry.INSTANCE.getRoleMappingsMap().get(s).get(n));
-			    							System.out.println(tempMapping.getModelSmell().getName() + "::" + tempMapping.getRoleMappings().get(0).getName());
 			    							modelSmell_roleMapping.add(tempMapping);
 			    						}
 		    						}
@@ -473,12 +471,19 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 		FileReader fileReader = null;
 		EList<String> stringList= new BasicEList<String>();
 		try {
-			URL url = ActivatorImpl.getDefault().getBundle().getEntry(path);
-			url = FileLocator.toFileURL(url);
-			url = new URL(url.toString().replaceAll(" ", "%20"));
-			File file = new File(url.toURI());
-			assert file.exists();
-			fileReader = new FileReader(file);
+			if(ActivatorImpl.getDefault() != null) {
+				URL url = ActivatorImpl.getDefault().getBundle().getEntry(path);
+				url = FileLocator.toFileURL(url);
+				url = new URL(url.toString().replaceAll(" ", "%20"));
+				File file = new File(url.toURI());
+				assert file.exists();
+				fileReader = new FileReader(file);
+			} else {
+				URL url = new URL("file:/C:"+path);
+				File file = new File(url.toURI());
+				assert file.exists();
+				fileReader = new FileReader(file);
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -1001,6 +1006,11 @@ public class ModelSmellModelImpl extends EObjectImpl implements ModelSmellModel 
 
 	public void putMarkerRefactoring(IMarker mk, RefactoringQuickfix r) {
 		markerRefactoring.put(mk, r);
+	}
+
+	@Override
+	public EList<Observer> getObserver() {
+		return observer;
 	}
 
 } //MainImpl
