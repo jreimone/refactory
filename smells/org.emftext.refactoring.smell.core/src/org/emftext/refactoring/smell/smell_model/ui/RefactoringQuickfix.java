@@ -1,4 +1,4 @@
-package org.emftext.refactoring.smell.smell_model.impl;
+package org.emftext.refactoring.smell.smell_model.ui;
 
 import java.util.Collections;
 
@@ -26,16 +26,6 @@ public class RefactoringQuickfix extends RolestextQuickFix {
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
         IEditorConnector connector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
         RefactoringAction action = new RefactoringAction(refactorer, connector);
-//        for (IMarker marker : ModelSmellModelImpl.getMain().getMarkerRefactoring().keySet()){
-//        	if(ModelSmellModelImpl.getMain().getMarkerRefactoring().get(marker).equals(this)){
-//        		try {
-//        			ModelSmellModelImpl.getMain().getMarkerRefactoring().remove(marker);
-//					marker.delete();
-//				} catch (CoreException e) {
-//					e.printStackTrace();
-//				}
-//        	}
-//        }
         action.run();
 	}
 

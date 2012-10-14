@@ -9,7 +9,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.refactoring.smell.smell_model.impl.RefactoringQuickfix;
+import org.emftext.refactoring.smell.smell_model.ui.RefactoringQuickfix;
 
 /**
  * <!-- begin-user-doc -->
@@ -296,5 +296,6 @@ public interface ModelSmellModel extends EObject {
 	Map<IMarker, RefactoringQuickfix> getMarkerRefactoring();
 
 	void putMarkerRefactoring(IMarker mk, RefactoringQuickfix r);
-
+	
+	EList<Observer> getObserver();
 } // ModelSmellModel

@@ -40,7 +40,6 @@ import org.emftext.refactoring.smell.smell_model.ModelSmellResult;
 import org.emftext.refactoring.smell.smell_model.ModelSmell_Rolemapping_Mapping;
 import org.emftext.refactoring.smell.smell_model.Observer;
 import org.emftext.refactoring.smell.smell_model.impl.ModelSmellModelImpl;
-import org.emftext.refactoring.smell.smell_model.impl.RefactoringQuickfix;
 
 
 public class View_Tree implements Observer{
@@ -193,10 +192,6 @@ public class View_Tree implements Observer{
 					throws CoreException {
 				IMarker mk = null;
 				try {
-//					for (int i = 0; i < marker.size(); i++){
-//						marker.get(i).delete();
-//					}
-//					marker.clear();
 					mk = resource.createMarker(IMarker.PROBLEM);
 					mk.setAttribute(IMarker.MESSAGE, smell);
 					mk.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);

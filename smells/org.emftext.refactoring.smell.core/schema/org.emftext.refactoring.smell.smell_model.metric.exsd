@@ -6,7 +6,7 @@
          <meta.schema plugin="org.emftext.refactoring.smell.core" id="org.emftext.refactoring.smell.core.metric" name="Metric"/>
       </appinfo>
       <documentation>
-         [Enter description of this extension point.]
+         Extension point for model metrics for the model smell plugins.
       </documentation>
    </annotation>
 
@@ -67,7 +67,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         October, 2012
       </documentation>
    </annotation>
 
@@ -76,7 +76,11 @@
          <meta.section type="examples"/>
       </appinfo>
       <documentation>
-         [Enter extension point usage example here.]
+         Adding a new model metric for the search for model smells:
++ Define model metric and name
++ Implement model metric
++ Assign model metric in the config files
++ Add extension referencing this extension point
       </documentation>
    </annotation>
 
