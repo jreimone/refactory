@@ -1,0 +1,137 @@
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+@QueryExplorer(display = false)
+pattern isEcore(Element){
+	EClassifier.ePackage(Element,EP);
+	EPackage(EP);
+	EPackage.nsURI(EP,"http://www.eclipse.org/emf/2002/Ecore");
+}
+
+@QueryExplorer(display = false)
+pattern isAggregation(ref:EReference){
+	EReference.containment(ref,true);
+}
+
+pattern subClassesWantedInResult(OrigCont: EClass, ContCont: EClass, Extract:EClass, NewCont:EClass,
+	MovedRef:EClass, extracts:EReference, source:EReference, target:EReference, referer:EReference,
+	moved:EReference, containerRef:EReference){
+
+	find eAllContainments(OrigCont,extracts);
+	ETypedElement.eType(extracts,Extract);
+	
+	find eAllContainments(ContCont,source);
+	ETypedElement.eType(source,OrigCont);
+	
+	find eAllContainments(ContCont,target);
+	ETypedElement.eType(target,NewCont);
+	
+	find eAllContainments(OrigCont,referer);
+	ETypedElement.eType(referer,MovedRef);
+	
+	find eAllContainments(NewCont,moved);
+	ETypedElement.eType(moved,Extract);
+	
+	find eAllReferences(MovedRef,containerRef);
+	ETypedElement.eType(containerRef,NewCont);
+	neg find isAggregation(containerRef);
+
+	neg find isEcore(OrigCont);
+	neg find isEcore(ContCont);
+	neg find isEcore(NewCont);
+	neg find isEcore(MovedRef);
+	neg find isEcore(Extract);
+}
+
+// well-behaving ecore patterns
+
+@QueryExplorer(display = false)
+private pattern eStructuralFeatures(This : EClass, Target : EStructuralFeature){
+	EClass.eStructuralFeatures(This, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eAttributes(This : EClass, Target : EAttribute){
+	find eStructuralFeatures(This, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eReferences(This : EClass, Target : EReference){
+	find eStructuralFeatures(This, Target);
+}
+
+@QueryExplorer(display = false)
+private pattern eGenericSuperTypes(This : EClass, Target : EGenericType){
+	EClass.eGenericSuperTypes(This, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eAllGenericSuperTypes(This : EClass, Target : EGenericType){
+	find eSuperTypes+(This, Type);
+	find eGenericSuperTypes(Type, Target);
+} or {
+	find eGenericSuperTypes(This, Target);
+}
+
+@QueryExplorer(display = false)
+private pattern eRawType(This : EGenericType, Target : EClass){
+	EGenericType.eRawType(This, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eSuperTypes(This : EClass, Target : EClass){
+	find eGenericSuperTypes(This, GenericType);
+	find eRawType(GenericType, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eAllSuperTypes(This : EClass, Target : EClass){
+	find eAllGenericSuperTypes(This, GenericType);
+	find eRawType(GenericType, Target);
+}
+
+@QueryExplorer(display = false)
+private pattern thisAndAllSuperTypes(This : EClass, Target : EClass){
+	find eAllSuperTypes(This, Target);
+} or {
+	This == Target;
+}
+
+@QueryExplorer(display = false)
+pattern eAllStructuralFeatures(This : EClass, Target : EStructuralFeature){
+	find thisAndAllSuperTypes(This, Type);
+	find eStructuralFeatures(Type, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eAllAttributes(This : EClass, Target : EAttribute){
+	find eAllStructuralFeatures(This, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eAllReferences(This : EClass, Target : EReference){
+	find eAllStructuralFeatures(This, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eAllContainments(This : EClass, Target : EReference){
+	find eAllReferences(This, Target);
+	EReference.containment(Target, true);
+}
+
+@QueryExplorer(display = false)
+private pattern eOperations(This : EClass, Target : EOperation){
+	EClass.eOperations(This, Target);
+}
+
+@QueryExplorer(display = false)
+pattern eAllOperations(This : EClass, Target : EOperation){
+	find thisAndAllSuperTypes(This, Type);
+	find eOperations(Type, Target);
+}
+
+// NOTE: EMF uses the first attribute with id = true from all supertypes...
+@QueryExplorer(display = false)
+pattern eIDAttribute(This : EClass, Target : EAttribute){
+	find eAllAttributes(This, Target);
+	EAttribute.iD(Target, true);
+}
