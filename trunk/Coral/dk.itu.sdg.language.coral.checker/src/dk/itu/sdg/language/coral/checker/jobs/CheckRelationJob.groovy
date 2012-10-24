@@ -43,22 +43,26 @@ class CheckRelationJob extends Job {
 		//check only those files which are affected by this relation, i.e, get only the two languages
 		def fstLanguageFiles
 		def sndLanguageFiles
-		
-		monitor.beginTask("Checking...", 100)
-		
+				
 		if (relation instanceof DirectedRelation) {
 			DirectedRelation directedRelation = (DirectedRelation) relation;
 			
-			fstLanguageFiles = clusteredFiles.get(directedRelation.getKeyLanguage())
-			sndLanguageFiles = clusteredFiles.get(directedRelation.getRefLanguage())
+			fstLanguageFiles = clusteredFiles.get(directedRelation.getKeyLanguage().getLiteral())
+			sndLanguageFiles = clusteredFiles.get(directedRelation.getRefLanguage().getLiteral())
 			
-		}
-		if (relation instanceof UndirectedRelation) {
+//			println(directedRelation.getKeyLanguage().getLiteral() + " " + fstLanguageFiles.size())
+//			println(directedRelation.getRefLanguage().getLiteral() + " " + sndLanguageFiles.size())
+		} else if (relation instanceof UndirectedRelation) {
 			UndirectedRelation undirectedRelation = (UndirectedRelation) relation;
 			
-			fstLanguageFiles = clusteredFiles.get(undirectedRelation.getLeftLanguage().toString())
-			sndLanguageFiles = clusteredFiles.get(undirectedRelation.getRightLanguage().toString())
+			fstLanguageFiles = clusteredFiles.get(undirectedRelation.getLeftLanguage().getLiteral())
+			sndLanguageFiles = clusteredFiles.get(undirectedRelation.getRightLanguage().getLiteral())
+
+//			println(undirectedRelation.getLeftLanguage().getLiteral() + " " + fstLanguageFiles.size())
+//			println(undirectedRelation.getRightLanguage().getLiteral() + " " + sndLanguageFiles.size())
 		}
+
+		monitor.beginTask("Checking...", 3 * fstLanguageFiles.size() * sndLanguageFiles.size())
 		
 		def JobUtils helper = JobUtils.getInstance();
 		def classes = helper.findAllCheckerClasses(monitor)

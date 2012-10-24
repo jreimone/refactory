@@ -1,38 +1,26 @@
 package dk.itu.sdg.language.coral.checker.handlers
 
-import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyObject;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.internal.resources.Project;
-import org.eclipse.core.resources.IMarker
+import org.eclipse.core.internal.resources.Project
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.internal.core.JavaProject
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.osgi.framework.Bundle;
 
-import dk.itu.sdg.language.coral.checker.Activator;
-import dk.itu.sdg.language.coral.checker.GReader;
 import dk.itu.sdg.language.coral.checker.ResourceUtil;
+import dk.itu.sdg.language.coral.checker.handlers.Check.MutexRule;
 import dk.itu.sdg.language.coral.checker.ui.MarkerStaticChecker;
 
 class Uncheck extends AbstractHandler {
@@ -42,15 +30,32 @@ class Uncheck extends AbstractHandler {
 		
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getActiveMenuSelection(event);
 		
+		
+		Job removeResourceChangeJob = new Job("Removing Resource Change Listener") {
+			
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				ResourcesPlugin.getWorkspace().removeResourceChangeListener(MarkerStaticChecker.getInstance());
+				return Status.OK_STATUS;
+			}
+		};
+		
 		def Object[]  selections = selection.toArray()
-
+		
 		def Job job = new Job("Unmark Resource...") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				monitor.beginTask("Unmarking...", selections.size())				
 					
 				if (selection.size() == 1) {
-					Project containerProject = selections[0].getProject();
+					
+					def Project containerProject 
+					try {
+						containerProject = selections[0].getProject();
+					} catch (Exception e) {
+						containerProject = ((JavaProject)selections[0].getJavaProject()).getProject();
+					}
+					
 					ArrayList<org.eclipse.core.internal.resources.File> files = ResourceUtil.getFilesFromResource(containerProject);
 	
 					for (file in files) {
@@ -83,6 +88,12 @@ class Uncheck extends AbstractHandler {
 				
 			}
 		};
+	
+		MutexRule rule = new MutexRule();
+		removeResourceChangeJob.setRule(rule);
+		job.setRule(rule);
+	
+		removeResourceChangeJob.schedule();
 		job.schedule();
 	}
 }

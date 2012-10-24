@@ -37,7 +37,7 @@ class MarkerStaticChecker extends Check implements IResourceChangeListener {
 	
 	@Override
 	public void resourceChanged(IResourceChangeEvent event) {
-//		println "changed"
+		//println "changed"
 		
 		
 		IMarkerDelta[] deltas = event.findMarkerDeltas("dk.itu.sdg.language.coral.checker.directed_fixed_key", false);
@@ -53,8 +53,22 @@ class MarkerStaticChecker extends Check implements IResourceChangeListener {
 		IMarkerDelta[] deltas11 = event.findMarkerDeltas("dk.itu.sdg.language.coral.checker.undirected_fixed", false);
 		IMarkerDelta[] deltas12 = event.findMarkerDeltas("dk.itu.sdg.language.coral.checker.undirected_dsr", false);
 
+		def  allDeltas = []
 		
-		for (IMarkerDelta delta : deltas9) {
+		allDeltas.addAll(deltas)
+		allDeltas.addAll(deltas2)
+		allDeltas.addAll(deltas3)
+		allDeltas.addAll(deltas4)
+		allDeltas.addAll(deltas5)
+		allDeltas.addAll(deltas6)
+		allDeltas.addAll(deltas7)
+		allDeltas.addAll(deltas8)
+		allDeltas.addAll(deltas9)
+		allDeltas.addAll(deltas10)
+		allDeltas.addAll(deltas11)
+		allDeltas.addAll(deltas12)
+		
+		for (IMarkerDelta delta : allDeltas) {
 			if (delta.getKind() == IResourceDelta.ADDED) {
 			} else if (delta.getKind() == IResourceDelta.REMOVED) {
 				Job checkerJob = new CheckDanglingReferencesJob(delta.getMarker(), this)
