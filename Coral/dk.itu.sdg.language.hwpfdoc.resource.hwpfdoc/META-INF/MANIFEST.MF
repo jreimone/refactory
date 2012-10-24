@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: hwpfdoc
+Bundle-SymbolicName: dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+  org.eclipse.core.resources;resolution:=optional,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation;resolution:=optional,
+  org.emftext.access;resolution:=optional,
+  org.eclipse.debug.core;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
+  dk.itu.sdg.language.hwpfdoc
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc,
+  dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.analysis,
+  dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.mopp,
+  dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug,
+  dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.launch,
+  dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.grammar,
+  dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.util
+Bundle-Activator: dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.mopp.HwpfdocPlugin
