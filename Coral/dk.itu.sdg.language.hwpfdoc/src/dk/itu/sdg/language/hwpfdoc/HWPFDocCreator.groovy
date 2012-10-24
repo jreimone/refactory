@@ -29,7 +29,6 @@ class HWPFDocCreator {
 		
 		this.uri = file.getLocationURI()
 		
-//		def wordDocument = new POIDocument(new FileInputStream("/Users/ropf/Documents/eclipse/indigo_dresden/dk.itu.sdg.language.hwpfdoc/example/report.doc"))
 		def wordDocument = new POIDocument(new FileInputStream(file.getLocation().toString()))
 		
 				
@@ -70,6 +69,7 @@ class HWPFDocCreator {
 		modelRange = convertRange(commentsRange, (Range)modelCommentsRange, factory)
 		addRanges(modelDocument, modelRange)
 		
+		traverseModel(modelDocument)
 		return modelDocument
 	}
 	
@@ -83,7 +83,6 @@ class HWPFDocCreator {
 			if(!contentText.isEmpty()) {
 				def Paragraph modelParagraph = factory.createParagraph()
 				modelParagraph.setText(contentText)
-				writePlainText(contentText)
 				addParagraphs(modelRange, modelParagraph)
 			}
 		}
@@ -137,7 +136,12 @@ class HWPFDocCreator {
 		}
 	}
 	
-	private void writePlainText(String text) {
-		println(text)
+	private void traverseModel(Document documentModel) {
+		documentModel.getRanges().each{range ->
+			println(range.getClass().getName())
+			range.getParagraphs().each{paragraph ->
+				println("  " + paragraph.getClass().getName() + paragraph.getText())
+			}
+		}
 	}
 }
