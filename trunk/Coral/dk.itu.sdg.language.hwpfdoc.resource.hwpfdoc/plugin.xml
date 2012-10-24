@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.mopp.HwpfdocMetaInformation" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.mopp.HwpfdocMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem.batch_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem.live_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.nature" name="hwpfdoc nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.mopp.HwpfdocNature">
+			</run>
+		</runtime>
+		<builder id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.builder" name="hwpfdoc Builder">
+		<builder hasNature="true">
+			<run class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.mopp.HwpfdocBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.mopp.HwpfdocResourceFactoryDelegator" type="hwpfdoc">
+		</parser>
+	</extension>
+	
+	<extension-point id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.HwpfdocLineBreakpoint" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.breakpoint" markerType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.lineBreakpoint.marker" name="hwpfdoc Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.launchConfigurationType" delegate="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.launch.HwpfdocLaunchConfigurationDelegate" modes="run,debug" name="hwpfdoc Application" sourceLocatorId="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.sourceLocator" sourcePathComputerId="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.sourcePathComputer" delegateName="hwpfdoc Launch Tooling" delegateDescription="This will run or debug .hwpfdoc files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.HwpfdocSourcePathComputerDelegate" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.sourceLocator" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.HwpfdocSourceLocator" name="hwpfdoc Source Locator">
+		</sourceLocator>
+	</extension>
+	
+</plugin>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocUIMetaInformation" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="hwpfdoc" icon="icons/editor_icon.gif" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocEditor" name="EMFText hwpfdoc Editor">
+			<contentTypeBinding contentTypeId="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Hwpfdoc Text Editor" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocPreferencePage" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocSyntaxColoringPreferencePage" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocSyntaxColoringPreferencePage" category="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocPreferencePage">
+		</page>
+		<page name="Brackets" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocBracketPreferencePage" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocBracketPreferencePage" category="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocNewFileWizard" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocNewFileWizard" name="EMFText .hwpfdoc file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocNewProjectWizard" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocNewProjectWizard" name="EMFText hwpfdoc project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocMarkerResolutionGenerator" markerType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocAnnotationModelFactory" extensions="hwpfdoc">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc" name=".hwpfdoc File" base-type="org.eclipse.core.runtime.text" file-extensions="hwpfdoc">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="hwpfdoc" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.occurences">
+		</type>
+		<type name="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.occurences.declaration" super="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.occurences" label="Occurrences (in .hwpfdoc files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="hwpfdoc.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="hwpfdoc.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="hwpfdoc.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="hwpfdoc.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="hwpfdoc.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="hwpfdoc.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="hwpfdoc.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="hwpfdoc.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="hwpfdoc.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.occurences.declaration" label="Declarations (in .hwpfdoc files)" textPreferenceKey="hwpfdoc.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="hwpfdoc.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="hwpfdoc.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="hwpfdoc.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="hwpfdoc.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="hwpfdoc.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.launchConfigurationType" id="dk.itu.sdg.language.hwpfdoc.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.launchConfigurationType" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.launch.HwpfdocLaunchConfigurationTabGroup" id="dk.itu.sdg.language.hwpfdoc.launchConfigurationTabGroup" helpContextId="dk.itu.sdg.language.hwpfdoc.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug hwpfdoc model.">
+			</launchMode>
+			<launchMode mode="run" description="Run hwpfdoc model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="hwpfdoc Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="dk.itu.sdg.language.hwpfdoc.launch" modes="run,debug" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.launch.HwpfdocLaunchShortcut" description="Launch a hwpfdoc model" id="dk.itu.sdg.language.hwpfdoc.launchShortcut">
+			<description description="Run hwpfdoc model" mode="run">
+			</description>
+			<description description="Debug hwpfdoc model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="dk.itu.sdg.language.hwpfdoc.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="dk.itu.sdg.language.hwpfdoc.PropertyTester" type="java.lang.Object" namespace="dk.itu.sdg.language.hwpfdoc" properties="isLaunchable" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.debug.lineBreakpoint" markerType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.debug.lineBreakpoint" label="Breakpoints (in .hwpfdoc files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocEditor" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.debug.HwpfdocAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.HwpfdocDebugVariable" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.debug.HwpfdocAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debug.HwpfdocDebugVariable" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.debug.HwpfdocAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.RulerPopupActions" targetID="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.EditorRuler">
+			<action id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.HwpfdocEditor" id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.BreakpointRulerActions">
+			<action id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.debugModel" class="dk.itu.sdg.language.hwpfdoc.resource.hwpfdoc.ui.debug.HwpfdocDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>
