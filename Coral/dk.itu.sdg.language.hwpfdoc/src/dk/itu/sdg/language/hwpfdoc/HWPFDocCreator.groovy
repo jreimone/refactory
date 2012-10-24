@@ -124,15 +124,14 @@ class HWPFDocCreator {
 		Resource.Factory.Registry resourceRegistry = Resource.Factory.Registry.INSTANCE
 		Map<String, Object> m = resourceRegistry.getExtensionToFactoryMap()
 		m.put("hwpfdoc", new HwpfdocResourceFactory())
-//		m.put("hwpfdoc", new XMIResourceFactoryImpl())
 	
 		ResourceSet resourceSet = new ResourceSetImpl()
-		Resource resource = resourceSet.createResource(URI.createURI("myDoc.hwpfdoc"))
-		
+		URI newUri = URI.createURI("/dk.itu.sdg.coral.library/example/report.hwpfdoc")
+		Resource resource = resourceSet.createResource(newUri)		
 		resource.getContents().add(modelDocument)
 	
 		try {
-			resource.save(m)
+			resource.save(null)
 		} catch (IOException e) {
 			e.printStackTrace()
 		}
