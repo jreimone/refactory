@@ -27,11 +27,15 @@ public class GReader {
 	def private Resource emfResource = null
 	def private Pair<Resource,Resource> emfResources = null
 	
+	def public IResource fstRes, sndRes
+	
 	public GReader(IResource file) {
 		this.emfResource = readAsModel(file)
 	}
 	
 	public GReader(IResource fstFile, IResource sndFile) {
+		this.fstRes = fstFile
+		this.sndRes = sndFile
 		this.emfResources = readAsModels(fstFile, sndFile);
 	}
 	

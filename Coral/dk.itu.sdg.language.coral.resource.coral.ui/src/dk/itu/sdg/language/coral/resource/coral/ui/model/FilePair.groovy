@@ -5,6 +5,6 @@ class FilePair {
 	def String fileA
 	def String fileB
 	
-	def List<Relation> relations = new ArrayList<Relation>()
-
+	//def List<Relation> relations = [] as Set//new ArrayList<Relation>()
+	def relations = [] as Set
 }

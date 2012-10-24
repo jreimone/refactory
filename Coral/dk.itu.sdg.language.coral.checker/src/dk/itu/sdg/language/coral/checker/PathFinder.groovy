@@ -191,7 +191,11 @@ class PathFinder {
 						def fstAttr = fstCandidateElement.eClass().getEAllAttributes().find {attr -> 
 							def fstCandidate = fstCandidateElement.eGet(attr)
 							if (!(fstCandidate instanceof Collection) && (fstCandidate != null)) {
-								fstCandidate.toLowerCase().contains(fstCommon.fst.toLowerCase())
+								try {
+									fstCandidate.toLowerCase().contains(fstCommon.fst.toLowerCase())
+								} catch (MissingMethodException) {
+									//TODO:!!!	DIE BOOLEAN ATTRIBUTE MŸSSEN ALLE WEG!!!
+								}
 							}
 						}
 						def sndAttr = sndCandidateElement.eClass().getEAllAttributes().find {attr ->

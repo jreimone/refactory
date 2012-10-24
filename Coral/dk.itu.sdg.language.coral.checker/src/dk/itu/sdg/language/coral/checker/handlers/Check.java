@@ -136,25 +136,6 @@ public class Check extends AbstractHandler {
 		openEditor.schedule(3000);
 	}
 
-	public class MutexRule implements ISchedulingRule {
-	      public boolean isConflicting(ISchedulingRule rule) {
-	         return rule == this;
-	      }
-	      public boolean contains(ISchedulingRule rule) {
-	         return rule == this;
-	      }
-	}
-
-	private void checkProject(Project project) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void checkMarkers(final IMarker marker) {
-		Job job = new CheckMarkersJob(marker, this);
-		job.schedule();
-	}
-
 	public void checkTwoFiles(final IResource resource, final IResource resource2) {
 		
 		Job removeResourceChangeJob = new Job("Removing Resource Change Listener") {
@@ -208,9 +189,9 @@ public class Check extends AbstractHandler {
 		removeResourceChangeJob.schedule();
 		job.schedule();
 		addResourceChangeJob.schedule();
-
 		
-		UIJob uiJob = new UIJob("Open Editors") {
+		
+		UIJob openEditorsJob = new UIJob("Open Editors") {
 
 			@Override
 			public IStatus runInUIThread(IProgressMonitor monitor) {
@@ -227,10 +208,27 @@ public class Check extends AbstractHandler {
 			}
 		};
 		
-//		job.schedule();
-		uiJob.schedule(3000);
+		openEditorsJob.schedule(3000);
 	}
+
+	private void checkProject(Project project) {
+		// TODO Auto-generated method stub
+		
+	}	
 	
+	public class MutexRule implements ISchedulingRule {
+	      public boolean isConflicting(ISchedulingRule rule) {
+	         return rule == this;
+	      }
+	      public boolean contains(ISchedulingRule rule) {
+	         return rule == this;
+	      }
+	}
+
+	public void checkMarkers(final IMarker marker) {
+		Job job = new CheckMarkersJob(marker, this);
+		job.schedule();
+	}
 	
 	protected Class loadCheckerClass(String constraintClassName, IProgressMonitor monitor) {
 		monitor.subTask("Loading Constraints...");
@@ -238,6 +236,8 @@ public class Check extends AbstractHandler {
 		Class constraintClass = null;
 		
 		String pathToMainCoralPlugin = CoralProperties.getCoralProperties().getProperty("pathToMainCoralPlugin");
+		String contstraintLanguage = CoralProperties.getCoralProperties().getProperty("contstraint_language");
+
 		IProject mainCoralProject = ResourcesPlugin.getWorkspace().getRoot().getProject(pathToMainCoralPlugin);
 		String pluginPath = mainCoralProject.getLocation().toOSString();
 		
@@ -253,13 +253,13 @@ public class Check extends AbstractHandler {
 			Set<String> manualConstraints = new HashSet<String>();
 			
 			for (IResource srcResource : srcMembers) {
-				if(srcResource.getName().equals(constraintClassName + ".groovy")) {
+				if(srcResource.getName().equals(constraintClassName + "." + contstraintLanguage)) {
 					srcConstraintsCode = srcResource ;
 					manualConstraints.add(srcResource.getName());
 				}
 			}
 			for (IResource srcGenResource : srcGenMembers) {
-				if(srcGenResource.getName().equals(constraintClassName + ".groovy") && !manualConstraints.contains(srcGenResource.getName())) {
+				if(srcGenResource.getName().equals(constraintClassName + "." + contstraintLanguage) && !manualConstraints.contains(srcGenResource.getName())) {
 					srcGenConstraintsCode = srcGenResource;
 				}
 			}
@@ -305,6 +305,11 @@ public class Check extends AbstractHandler {
 		ArrayList<ArrayList<Class>> classes = new ArrayList<ArrayList<Class>>();
 		
 		String pathToMainCoralPlugin = CoralProperties.getCoralProperties().getProperty("pathToMainCoralPlugin");
+		String collectorSuffix = CoralProperties.getCoralProperties().getProperty("collector_suffix");
+		String constraintSuffix = CoralProperties.getCoralProperties().getProperty("constraint_suffix");
+		String contstraintLanguage = CoralProperties.getCoralProperties().getProperty("contstraint_language");
+
+		
 		IProject mainCoralProject = ResourcesPlugin.getWorkspace().getRoot().getProject(pathToMainCoralPlugin);
 		String pluginPath = mainCoralProject.getLocation().toOSString();
 		
@@ -321,15 +326,15 @@ public class Check extends AbstractHandler {
 			Set<String> manualConstraints = new HashSet<String>();
 			
 			for (IResource srcResource : srcMembers) {
-				if(srcResource.getName().endsWith("Constraints.groovy")) {
+				if(srcResource.getName().endsWith(constraintSuffix + "." + contstraintLanguage)) {
 					srcConstraintsCode.add(srcResource);
 					manualConstraints.add(srcResource.getName());
 				}
 			}
 			for (IResource srcGenResource : srcGenMembers) {
-				if(srcGenResource.getName().endsWith("Constraints.groovy") && !manualConstraints.contains(srcGenResource.getName())) {
+				if(srcGenResource.getName().endsWith(constraintSuffix + "." + contstraintLanguage) && !manualConstraints.contains(srcGenResource.getName())) {
 					srcGenConstraintsCode.add(srcGenResource);
-				} else if (srcGenResource.getName().endsWith("Collector.groovy")) {
+				} else if (srcGenResource.getName().endsWith(collectorSuffix + "." + contstraintLanguage)) {
 					srcGenCollectorsCode.add(srcGenResource);
 				}
 			}
@@ -370,27 +375,6 @@ public class Check extends AbstractHandler {
 				Class collectorClass = loader.parseClass(collectorFile);
 				collectorClasses.add(collectorClass);
 			}
-//			
-//			File inferedCollector = new File(pluginPath + "/src-gen/" + pathToMainCoralPlugin.replaceAll("\\.", "/") + "/" + "InferedCollector.groovy");
-//			File inferedConstraints = new File(pluginPath + "/src-gen/" + pathToMainCoralPlugin.replaceAll("\\.", "/") + "/" + "InferedConstraints.groovy");
-//			File manualCollector = new File(pluginPath + CoralProperties.getCoralProperties().getProperty("pathToCheckAllCollector"));
-//			File manualConstraints = new File(pluginPath + CoralProperties.getCoralProperties().getProperty("pathToCheckAllConstraints"));
-//			
-//			
-//			ClassLoader parent = getClass().getClassLoader();
-//			GroovyClassLoader loader = new GroovyClassLoader(parent);
-//			Class collectorClass = null;
-//			Class constraintClass = null;
-//			
-//			if (inferedCollector.exists() && inferedConstraints.exists()) {
-//				constraintClass = loader.parseClass(inferedConstraints);				
-//				collectorClass = loader.parseClass(inferedCollector);
-//			} else if (manualCollector.exists() && manualConstraints.exists()) {
-//				constraintClass = loader.parseClass(manualConstraints);				
-//				collectorClass = loader.parseClass(manualCollector);
-//			} else {
-//				System.out.println("Alles Mist!!!!");
-//			}
 			
 			classes.add(collectorClasses);
 			classes.add(constraintClasses);
@@ -411,15 +395,22 @@ public class Check extends AbstractHandler {
 		ArrayList<Class> classes = new ArrayList<Class>();
 	
 		String pathToMainCoralPlugin = CoralProperties.getCoralProperties().getProperty("pathToMainCoralPlugin");
+		String generateTo = CoralProperties.getCoralProperties().getProperty("generate_to");
+		String nameOfInferredCode = CoralProperties.getCoralProperties().getProperty("name_of_inferred_code");
+		String collectorSuffix = CoralProperties.getCoralProperties().getProperty("collector_suffix");
+		String constraintSuffix = CoralProperties.getCoralProperties().getProperty("constraint_suffix");
+		String contstraintLanguage = CoralProperties.getCoralProperties().getProperty("contstraint_language");
+
+		
 		IProject mainCoralProject = ResourcesPlugin.getWorkspace().getRoot().getProject(pathToMainCoralPlugin);
 		String pluginPath = mainCoralProject.getLocation().toOSString();
 		
 		try {
 			
-			File inferedCollector = new File(pluginPath + "/src-gen/" + pathToMainCoralPlugin.replaceAll("\\.", "/") + "/" + "InferedCollector.groovy");
-			File inferedConstraints = new File(pluginPath + "/src-gen/" + pathToMainCoralPlugin.replaceAll("\\.", "/") + "/" + "InferedConstraints.groovy");
-			File manualCollector = new File(pluginPath + CoralProperties.getCoralProperties().getProperty("pathToCheckAllCollector"));
-			File manualConstraints = new File(pluginPath + CoralProperties.getCoralProperties().getProperty("pathToCheckAllConstraints"));
+			File inferedCollector = new File(pluginPath + generateTo + pathToMainCoralPlugin.replaceAll("\\.", "/") + "/" + nameOfInferredCode + collectorSuffix + "." + contstraintLanguage);
+			File inferedConstraints = new File(pluginPath + generateTo + pathToMainCoralPlugin.replaceAll("\\.", "/") + "/" + nameOfInferredCode + constraintSuffix + "." + contstraintLanguage);
+//			File manualCollector = new File(pluginPath + CoralProperties.getCoralProperties().getProperty("pathToCheckAllCollector"));
+//			File manualConstraints = new File(pluginPath + CoralProperties.getCoralProperties().getProperty("pathToCheckAllConstraints"));
 			
 			
 			ClassLoader parent = getClass().getClassLoader();
@@ -430,11 +421,12 @@ public class Check extends AbstractHandler {
 			if (inferedCollector.exists() && inferedConstraints.exists()) {
 				constraintClass = loader.parseClass(inferedConstraints);				
 				collectorClass = loader.parseClass(inferedCollector);
-			} else if (manualCollector.exists() && manualConstraints.exists()) {
-				constraintClass = loader.parseClass(manualConstraints);				
-				collectorClass = loader.parseClass(manualCollector);
+//			} else if (manualCollector.exists() && manualConstraints.exists()) {
+//				constraintClass = loader.parseClass(manualConstraints);				
+//				collectorClass = loader.parseClass(manualCollector);
 			} else {
-				System.out.println("Alles Mist!!!!");
+				System.out.println("Cannot find checker class...");
+				throw new ClassNotFoundException();
 			}
 			
 			classes.add(collectorClass);
@@ -550,9 +542,22 @@ public class Check extends AbstractHandler {
 			
 //			int classIndex = collectorClasses.indexOf(methodsClass);
 //			GroovyObject collectorObject = collectorObjects.get(classIndex);
+//			relations.addAll((Collection)cO.invokeMethod(collectorMethod.getName(), args.toArray()));
+
 			
-			relations.addAll((Collection)cO.invokeMethod(collectorMethod.getName(), args.toArray()));
+			long startTime = System.currentTimeMillis();
+			long duration = 0;
+
+
+			Collection newRelations = (Collection)cO.invokeMethod(collectorMethod.getName(), args.toArray());
+
+			duration = System.currentTimeMillis() - startTime;
+
+//			if (newRelations.size() > 0) {
+				System.out.println(newRelations.size() + "," + collectorMethod.getName() + "," + duration + "," + reader.fstRes.getLocation().toString() + "," + reader.sndRes.getLocation().toString());
+//			}
 			
+			relations.addAll(newRelations);
 			monitor.worked(1);
 		}
 		

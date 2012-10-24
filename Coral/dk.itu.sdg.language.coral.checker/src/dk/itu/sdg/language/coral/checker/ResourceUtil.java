@@ -58,12 +58,15 @@ public class ResourceUtil {
 			
 			for (IResource member : members) {
 				
+				//TODO: put the values into the properties file!
 				//remove bin folder
 				boolean isBinFolder = folder.getName().equals("bin");
 				//remove hidden folders
 				boolean isHiddenFolder = folder.getName().startsWith(".");
+				//remove target folder
+				boolean isTargetFolder = folder.getName().equals("target");
 				
-				if (!isBinFolder && !isHiddenFolder) {
+				if (!isBinFolder && !isHiddenFolder && !isTargetFolder) {
 					files.addAll(getFilesFromResource(member));
 				}				
 			}
