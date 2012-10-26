@@ -982,250 +982,202 @@
     </parameters>
     <bodies>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.15">
+        <call patternRef="//@patterns.21">
           <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_OrigCont"/>
+            <value var="OrigCont"/>
           </parameters>
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="extracts"/>
           </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="Extract"/>
+          </parameters>
         </call>
       </constraints>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
-            </type>
-          </tail>
-          <src var="extracts"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="PH_Extract"/>
-          </dst>
-        </head>
-      </constraints>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.15">
+        <call patternRef="//@patterns.21">
           <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_ContCont"/>
+            <value var="ContCont"/>
           </parameters>
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="source"/>
           </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="OrigCont"/>
+          </parameters>
         </call>
       </constraints>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
-            </type>
-          </tail>
-          <src var="source"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="PH_OrigCont"/>
-          </dst>
-        </head>
-      </constraints>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.15">
+        <call patternRef="//@patterns.21">
           <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_ContCont"/>
+            <value var="ContCont"/>
           </parameters>
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="target"/>
           </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="NewCont"/>
+          </parameters>
         </call>
       </constraints>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
-            </type>
-          </tail>
-          <src var="target"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="PH_NewCont"/>
-          </dst>
-        </head>
-      </constraints>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.15">
+        <call patternRef="//@patterns.21">
           <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_OrigCont"/>
+            <value var="OrigCont"/>
           </parameters>
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="referer"/>
           </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="MovedRef"/>
+          </parameters>
         </call>
       </constraints>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
-            </type>
-          </tail>
-          <src var="referer"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="PH_MovedRef"/>
-          </dst>
-        </head>
-      </constraints>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.15">
+        <call patternRef="//@patterns.21">
           <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_NewCont"/>
+            <value var="NewCont"/>
           </parameters>
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="moved"/>
           </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
-            </type>
-          </tail>
-          <src var="moved"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="PH_Extract"/>
-          </dst>
-        </head>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.14">
           <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_MovedRef"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="containerRef"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
-            </type>
-          </tail>
-          <src var="containerRef"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="PH_NewCont"/>
-          </dst>
-        </head>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.1">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="containerRef"/>
+            <value var="Extract"/>
           </parameters>
         </call>
       </constraints>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.11">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="OrigCont"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_OrigCont"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.11">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="ContCont"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_ContCont"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.11">
+        <call patternRef="//@patterns.23">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="MovedRef"/>
           </parameters>
           <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_MovedRef"/>
+            <value var="containerRef"/>
           </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.11">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="NewCont"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_NewCont"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.11">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="Extract"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="PH_Extract"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.0">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="OrigCont"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.0">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="ContCont"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.0">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="NewCont"/>
           </parameters>
         </call>
       </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.0">
+    </bodies>
+  </patterns>
+  <patterns name="ExtractXWithRefClass2" fileName="platform:/resource/org.qualitune.matching.incquery.test/src/ExtractXWithReferencedClass.eiq">
+    <parameters name="OrigCont">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </type>
+    </parameters>
+    <parameters name="ContCont">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </type>
+    </parameters>
+    <parameters name="Extract">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </type>
+    </parameters>
+    <parameters name="NewCont">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </type>
+    </parameters>
+    <parameters name="MovedRef">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </type>
+    </parameters>
+    <parameters name="extracts">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </type>
+    </parameters>
+    <parameters name="source">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </type>
+    </parameters>
+    <parameters name="target">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </type>
+    </parameters>
+    <parameters name="referer">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </type>
+    </parameters>
+    <parameters name="moved">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </type>
+    </parameters>
+    <parameters name="containerRef">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.22">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="OrigCont"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="Extract"/>
+          </parameters>
+        </call>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.22">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="ContCont"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="OrigCont"/>
+          </parameters>
+        </call>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.22">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="ContCont"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="NewCont"/>
+          </parameters>
+        </call>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.22">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="OrigCont"/>
+          </parameters>
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="MovedRef"/>
           </parameters>
         </call>
       </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.0">
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.22">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="NewCont"/>
+          </parameters>
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="Extract"/>
+          </parameters>
+        </call>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.23">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="MovedRef"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="containerRef"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="NewCont"/>
           </parameters>
         </call>
       </constraints>
@@ -1300,6 +1252,65 @@
             <value var="Source"/>
           </parameters>
         </call>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="containment2" fileName="platform:/resource/org.qualitune.matching.incquery.test/src/ExtractXWithReferencedClass.eiq">
+    <parameters name="Source">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </type>
+    </parameters>
+    <parameters name="Target">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.24">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="PH_Source"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="PH_Target"/>
+          </parameters>
+        </call>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.11">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="Source"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="PH_Source"/>
+          </parameters>
+        </call>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.11">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="Target"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="PH_Target"/>
+          </parameters>
+        </call>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
+        <call patternRef="//@patterns.0">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="Source"/>
+          </parameters>
+        </call>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint" feature="!=">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="Source"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:VariableValue">
+          <value var="Target"/>
+        </rightOperand>
       </constraints>
     </bodies>
   </patterns>
@@ -1382,143 +1393,6 @@
       </constraints>
     </bodies>
   </patterns>
-  <patterns name="ExtractXWithRefClass2" fileName="platform:/resource/org.qualitune.matching.incquery.test/src/ExtractXWithReferencedClass.eiq">
-    <parameters name="OrigCont">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
-      </type>
-    </parameters>
-    <parameters name="ContCont">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
-      </type>
-    </parameters>
-    <parameters name="Extract">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
-      </type>
-    </parameters>
-    <parameters name="NewCont">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
-      </type>
-    </parameters>
-    <parameters name="MovedRef">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
-      </type>
-    </parameters>
-    <parameters name="extracts">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-      </type>
-    </parameters>
-    <parameters name="source">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-      </type>
-    </parameters>
-    <parameters name="target">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-      </type>
-    </parameters>
-    <parameters name="referer">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-      </type>
-    </parameters>
-    <parameters name="moved">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-      </type>
-    </parameters>
-    <parameters name="containerRef">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-      </type>
-    </parameters>
-    <bodies>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.20">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="OrigCont"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="extracts"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="Extract"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.20">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="ContCont"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="source"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="OrigCont"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.20">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="ContCont"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="target"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="NewCont"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.20">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="OrigCont"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="referer"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="MovedRef"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.20">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="NewCont"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="moved"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="Extract"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.21">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="MovedRef"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="containerRef"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="NewCont"/>
-          </parameters>
-        </call>
-      </constraints>
-    </bodies>
-  </patterns>
   <patterns name="canTransitivelyContain" fileName="platform:/resource/org.qualitune.matching.incquery.test/src/ExtractXWithReferencedClass.eiq">
     <parameters name="Source">
       <type xsi:type="eMFPatternLanguage:ClassType">
@@ -1532,7 +1406,7 @@
     </parameters>
     <bodies>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.24" transitive="true">
+        <call patternRef="//@patterns.25" transitive="true">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="Source"/>
           </parameters>
@@ -1580,56 +1454,6 @@
             <value var="Target"/>
           </dst>
         </head>
-      </constraints>
-    </bodies>
-  </patterns>
-  <patterns name="pathContain" fileName="platform:/resource/org.qualitune.matching.incquery.test/src/ExtractXWithReferencedClass.eiq">
-    <parameters name="Source">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
-      </type>
-    </parameters>
-    <parameters name="reference">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-      </type>
-    </parameters>
-    <bodies>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.15">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="Source"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="reference"/>
-          </parameters>
-        </call>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
-            </type>
-          </tail>
-          <src var="reference"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="Type"/>
-          </dst>
-        </head>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.25">
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="Type"/>
-          </parameters>
-          <parameters xsi:type="patternLanguage:VariableValue">
-            <value var="nextReference"/>
-          </parameters>
-        </call>
       </constraints>
     </bodies>
   </patterns>
