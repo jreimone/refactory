@@ -3,15 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Incquery
 Bundle-SymbolicName: org.emftext.refactoring.matching.incquery
 Bundle-Version: 1.0.0.qualifier
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.emftext.language.refactoring.roles,
  org.emftext.language.refactoring.roles.resource.rolestext,
- org.eclipse.emf.ecore.xmi,
  org.junit4,
  org.emftext.language.pl0,
- org.eclipse.viatra2.patternlanguage.core,
- org.eclipse.viatra2.patternlanguage.emf.source,
  org.eclipse.viatra2.patternlanguage.emf
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
