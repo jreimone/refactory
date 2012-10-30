@@ -9,5 +9,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.emftext.language.refactoring.roles.resource.rolestext,
  org.junit4,
  org.emftext.language.pl0,
- org.eclipse.viatra2.patternlanguage.emf
+ org.eclipse.viatra2.patternlanguage.emf,
+ org.eclipse.xtext.xbase
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

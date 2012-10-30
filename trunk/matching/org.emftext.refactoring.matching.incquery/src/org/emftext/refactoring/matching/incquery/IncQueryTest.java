@@ -19,9 +19,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.viatra2.patternlanguage.EMFPatternLanguageRuntimeModule;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.ParameterRef;
@@ -30,6 +32,7 @@ import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternBody;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternCall;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternCompositionConstraint;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguageFactory;
+import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguagePackage;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Type;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Variable;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.VariableReference;
@@ -37,6 +40,7 @@ import org.eclipse.viatra2.patternlanguage.core.patternLanguage.VariableValue;
 import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.EMFPatternLanguagePackage;
 import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.PatternModel;
 import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
@@ -203,12 +207,17 @@ public class IncQueryTest {
 	}
 	
 	private static void initLanguages(){
+		// Ecore
+		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		// role models
 		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolestextMetaInformation().getSyntaxName(), new RolestextResourceFactory());
 		// XMI
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		// Pattern language
+		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
 		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
