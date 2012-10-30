@@ -1,3 +1,4 @@
+/* @model{operators.ecore} */
 package operators
 
 context Variable inv nameNotNull:
