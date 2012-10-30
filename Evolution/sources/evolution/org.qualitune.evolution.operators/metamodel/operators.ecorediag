@@ -12,10 +12,6 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_QTJ_w5UBEeG-CeAr07OHmw"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_QTJ_xJUBEeG-CeAr07OHmw" type="5002">
-      <children xmi:type="notation:Node" xmi:id="_kXI38ZghEeGwscj9dXOH8w" type="2002">
-        <element xmi:type="ecore:EOperation" href="operators.ecore#//Operator/execute"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_kXI38pghEeGwscj9dXOH8w"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_QTJ_xZUBEeG-CeAr07OHmw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_QTJ_xpUBEeG-CeAr07OHmw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_QTKm0JUBEeG-CeAr07OHmw"/>
