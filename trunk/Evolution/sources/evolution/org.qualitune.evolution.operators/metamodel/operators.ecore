@@ -9,7 +9,6 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true">
-    <eOperations name="execute"/>
     <eOperations name="execute">
       <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
       <eAnnotations source="java.lang.Override"/>
