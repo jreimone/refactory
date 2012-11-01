@@ -7,12 +7,14 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.qualitune.evolution.megamodel.architecture,
+Export-Package: org.qualitune.evolution.megamodel,
+ org.qualitune.evolution.megamodel.architecture,
  org.qualitune.evolution.megamodel.architecture.impl,
  org.qualitune.evolution.megamodel.architecture.util,
  org.qualitune.evolution.megamodel.cods,
  org.qualitune.evolution.megamodel.cods.impl,
- org.qualitune.evolution.megamodel.cods.util
+ org.qualitune.evolution.megamodel.cods.util,
+ org.qualitune.evolution.megamodel.impl
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

@@ -15,16 +15,20 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.qualitune.evolution.megamodel.architecture.ArchitecturePackage;
+import org.qualitune.evolution.megamodel.architecture.InstanceModel;
 import org.qualitune.evolution.megamodel.architecture.MegaModel;
 import org.qualitune.evolution.megamodel.architecture.Model;
 import org.qualitune.evolution.megamodel.architecture.ReferenceModel;
 import org.qualitune.evolution.megamodel.architecture.TerminalModel;
+import org.qualitune.evolution.megamodel.architecture.TransformationModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -111,6 +115,44 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 			}
 		}
 		return terminalModels;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ReferenceModel getReferenceModelByEPackage(EPackage epackage) {
+		List<ReferenceModel> referenceModels = getReferenceModels();
+		for (ReferenceModel referenceModel : referenceModels) {
+			if(referenceModel.getPackage().equals(epackage)){
+				return referenceModel;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TerminalModel getTerminalModelByEObject(EObject model) {
+		List<Model> models = getModels();
+		for (Model knownModel : models) {
+			if(knownModel instanceof TerminalModel){
+				EObject realObject = null;
+				if(knownModel instanceof TransformationModel){
+					realObject = ((TransformationModel) knownModel).getTransformation();
+				} else if(knownModel instanceof InstanceModel){
+					realObject = ((InstanceModel) knownModel).getModel();
+				}
+				if(realObject != null && realObject.equals(model)){
+					return (TerminalModel) knownModel;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**

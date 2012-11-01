@@ -80,6 +80,14 @@
         <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getTerminalModels"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_EJhN8SQbEeK6C-FjNsub9w"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_68qBgCQ1EeKznf6yet5KDw" type="2002">
+        <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getReferenceModelByEPackage"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_68qBgSQ1EeKznf6yet5KDw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9R5lICQ2EeKznf6yet5KDw" type="2002">
+        <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getTerminalModelByEObject"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9R5lISQ2EeKznf6yet5KDw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_fT86ASKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT86AiKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT86AyKlEeKLXve17CTS8Q"/>

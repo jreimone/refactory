@@ -7,12 +7,14 @@
 package org.qualitune.evolution.megamodel.architecture.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.qualitune.evolution.megamodel.MegamodelPackage;
 import org.qualitune.evolution.megamodel.architecture.ArchitectureFactory;
 import org.qualitune.evolution.megamodel.architecture.ArchitecturePackage;
 import org.qualitune.evolution.megamodel.architecture.InstanceModel;
@@ -27,6 +29,7 @@ import org.qualitune.evolution.megamodel.architecture.TransformationModel;
 import org.qualitune.evolution.megamodel.cods.CodsPackage;
 
 import org.qualitune.evolution.megamodel.cods.impl.CodsPackageImpl;
+import org.qualitune.evolution.megamodel.impl.MegamodelPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -141,14 +144,17 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 		EcorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
+		MegamodelPackageImpl theMegamodelPackage = (MegamodelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MegamodelPackage.eNS_URI) instanceof MegamodelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MegamodelPackage.eNS_URI) : MegamodelPackage.eINSTANCE);
 		CodsPackageImpl theCodsPackage = (CodsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CodsPackage.eNS_URI) instanceof CodsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CodsPackage.eNS_URI) : CodsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theArchitecturePackage.createPackageContents();
+		theMegamodelPackage.createPackageContents();
 		theCodsPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theArchitecturePackage.initializePackageContents();
+		theMegamodelPackage.initializePackageContents();
 		theCodsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -385,15 +391,18 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 
 		addEOperation(megaModelEClass, this.getTerminalModel(), "getTerminalModels", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		EOperation op = addEOperation(megaModelEClass, this.getReferenceModel(), "getReferenceModelByEPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "epackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(megaModelEClass, this.getTerminalModel(), "getTerminalModelByEObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEObject(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(metaMetaModelEClass, MetaMetaModel.class, "MetaMetaModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(metaModelEClass, MetaModel.class, "MetaModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(instanceModelEClass, InstanceModel.class, "InstanceModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstanceModel_Model(), theEcorePackage.getEObject(), null, "model", null, 1, 1, InstanceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //ArchitecturePackageImpl

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.qualitune.evolution.megamodel.MegamodelPackage;
 import org.qualitune.evolution.megamodel.architecture.ArchitecturePackage;
 
 import org.qualitune.evolution.megamodel.architecture.impl.ArchitecturePackageImpl;
@@ -22,6 +23,7 @@ import org.qualitune.evolution.megamodel.cods.CodsFactory;
 import org.qualitune.evolution.megamodel.cods.CodsPackage;
 import org.qualitune.evolution.megamodel.cods.DomainSpecificEvolutionSpecification;
 import org.qualitune.evolution.megamodel.cods.EvolutionDefinition;
+import org.qualitune.evolution.megamodel.impl.MegamodelPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -108,14 +110,17 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 		EcorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
+		MegamodelPackageImpl theMegamodelPackage = (MegamodelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MegamodelPackage.eNS_URI) instanceof MegamodelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MegamodelPackage.eNS_URI) : MegamodelPackage.eINSTANCE);
 		ArchitecturePackageImpl theArchitecturePackage = (ArchitecturePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArchitecturePackage.eNS_URI) instanceof ArchitecturePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArchitecturePackage.eNS_URI) : ArchitecturePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theCodsPackage.createPackageContents();
+		theMegamodelPackage.createPackageContents();
 		theArchitecturePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theCodsPackage.initializePackageContents();
+		theMegamodelPackage.initializePackageContents();
 		theArchitecturePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -285,9 +290,6 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 		initEClass(evolutionDefinitionEClass, EvolutionDefinition.class, "EvolutionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(coEvolutionDefinitionEClass, CoEvolutionDefinition.class, "CoEvolutionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //CodsPackageImpl
