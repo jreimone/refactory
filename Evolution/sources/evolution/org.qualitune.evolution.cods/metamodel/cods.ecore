@@ -35,6 +35,8 @@
           eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MegaModel" abstract="true" eSuperTypes="#//architecture/TerminalModel">
+      <eOperations name="getReferenceModels" upperBound="-1" eType="#//architecture/ReferenceModel"/>
+      <eOperations name="getTerminalModels" upperBound="-1" eType="#//architecture/TerminalModel"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
           eType="#//architecture/Model" containment="true"/>
     </eClassifiers>

@@ -72,6 +72,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT85_yKlEeKLXve17CTS8Q"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_fT86ACKlEeKLXve17CTS8Q" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_rw97QCQFEeKjAu6SMnzz7A" type="2002">
+        <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getReferenceModels"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_rw97QSQFEeKjAu6SMnzz7A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EJhN8CQbEeK6C-FjNsub9w" type="2002">
+        <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getTerminalModels"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EJhN8SQbEeK6C-FjNsub9w"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_fT86ASKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT86AiKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT86AyKlEeKLXve17CTS8Q"/>
@@ -170,7 +178,7 @@
   <element xmi:type="ecore:EPackage" href="cods.ecore#//architecture"/>
   <edges xmi:type="notation:Edge" xmi:id="_fT86KCKlEeKLXve17CTS8Q" type="3002" source="_fTzI4CKlEeKLXve17CTS8Q" target="_fTzI7CKlEeKLXve17CTS8Q">
     <children xmi:type="notation:Node" xmi:id="_fT86LCKlEeKLXve17CTS8Q" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_fT86LSKlEeKLXve17CTS8Q" x="-10" y="-10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fT86LSKlEeKLXve17CTS8Q" x="-25" y="39"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_fT86LiKlEeKLXve17CTS8Q" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_fT86LyKlEeKLXve17CTS8Q" x="10" y="10"/>
