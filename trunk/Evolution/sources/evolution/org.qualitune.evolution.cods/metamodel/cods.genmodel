@@ -40,6 +40,7 @@
       </genClasses>
       <genClasses image="false" ecoreClass="cods.ecore#//architecture/MegaModel">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cods.ecore#//architecture/MegaModel/models"/>
+        <genOperations ecoreOperation="cods.ecore#//architecture/MegaModel/getReferenceModels"/>
       </genClasses>
       <genClasses ecoreClass="cods.ecore#//architecture/MetaMetaModel"/>
       <genClasses ecoreClass="cods.ecore#//architecture/MetaModel"/>
