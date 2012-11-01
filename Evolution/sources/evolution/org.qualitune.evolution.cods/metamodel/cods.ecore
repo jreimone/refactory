@@ -3,6 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="megamodel"
     nsURI="http://www.qualitune.org/megamodel" nsPrefix="megamodel">
+  <eClassifiers xsi:type="ecore:EDataType" name="Dummy" instanceClassName="java.lang.Object"/>
   <eSubpackages name="cods" nsURI="http://www.qualitune.org/megamodel/cods" nsPrefix="cods">
     <eClassifiers xsi:type="ecore:EClass" name="CODS" eSuperTypes="#//architecture/MegaModel">
       <eStructuralFeatures xsi:type="ecore:EReference" name="DSES" upperBound="-1"
@@ -37,6 +38,12 @@
     <eClassifiers xsi:type="ecore:EClass" name="MegaModel" abstract="true" eSuperTypes="#//architecture/TerminalModel">
       <eOperations name="getReferenceModels" upperBound="-1" eType="#//architecture/ReferenceModel"/>
       <eOperations name="getTerminalModels" upperBound="-1" eType="#//architecture/TerminalModel"/>
+      <eOperations name="getReferenceModelByEPackage" eType="#//architecture/ReferenceModel">
+        <eParameters name="epackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+      </eOperations>
+      <eOperations name="getTerminalModelByEObject" eType="#//architecture/TerminalModel">
+        <eParameters name="model" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
           eType="#//architecture/Model" containment="true"/>
     </eClassifiers>

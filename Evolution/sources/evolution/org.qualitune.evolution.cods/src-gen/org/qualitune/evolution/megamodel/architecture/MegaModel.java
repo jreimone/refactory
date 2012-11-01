@@ -7,6 +7,8 @@
 package org.qualitune.evolution.megamodel.architecture;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,5 +58,21 @@ public interface MegaModel extends TerminalModel {
 	 * @generated
 	 */
 	EList<TerminalModel> getTerminalModels();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	ReferenceModel getReferenceModelByEPackage(EPackage epackage);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	TerminalModel getTerminalModelByEObject(EObject model);
 
 } // MegaModel
