@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CODS Creation Plugin
+Bundle-SymbolicName: org.qualitune.evolution.cods.creation;singleton:=true
+Bundle-Version: 0.0.0.qualifier
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.e4.ui.workbench,
+ org.eclipse.e4.core.di,
+ org.eclipse.e4.core.contexts,
+ org.qualitune.evolution.cods,
+ org.eclipse.core.resources,
+ org.eclipse.equinox.common,
+ javax.inject
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
