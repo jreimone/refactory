@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         id="earlyBinding"
+         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
+      <matcher
+            factoryProvider="earlybinding.EarlyBindingMatcherFactory$Provider"
+            id="earlyBinding">
+      </matcher>
+   </extension>
+   <extension
+         id="earlyBinding3"
+         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
+      <matcher
+            factoryProvider="earlybinding3.EarlyBinding3MatcherFactory$Provider"
+            id="earlyBinding3">
+      </matcher>
+   </extension>
+
+</plugin>

@@ -1,0 +1,34 @@
+import "http://www.emftext.org/java/classifiers"
+import "http://www.emftext.org/java/members"
+import "http://www.emftext.org/java/types"
+import "http://www.emftext.org/java/references"
+import "http://www.emftext.org/java/statements"
+
+// inspired by the GReQL query for "early resource binding" from the following paper:
+// Marion Gottschalk, Mirco Joseﬁok, Jan Jelschen, Andreas Winter (2012) 
+// "Removing Energy Code Smells with Reengineering Services"
+pattern earlyBinding(actClass:Class, onCreate:ClassMethod, superClass: Class, callee:ClassMethod){
+	Class.^extends(actClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierRef);
+	ClassifierReference.target(classifierRef, superClass);
+	Class.name(superClass, "Activity");
+	Class.members(actClass, onCreate);
+	ClassMethod.name(onCreate, "onCreate");
+	ClassMethod.statements(onCreate, statement);
+	ExpressionStatement.expression(statement, caller);
+	MethodCall.target(caller, callee);
+	ClassMethod.name(callee, "requestLocationUpdates");
+}
+
+pattern earlyBinding3(actClass:Class, searchedMethod:ClassMethod, superClass: Class, callee:ClassMethod){
+	Class.^extends(actClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierRef);
+	ClassifierReference.target(classifierRef, superClass);
+	Class.name(superClass, "File");
+	Class.members(actClass, searchedMethod);
+	ClassMethod.name(searchedMethod, "toString");
+	ClassMethod.statements(searchedMethod, statement);
+	ExpressionStatement.expression(statement, caller);
+	MethodCall.target(caller, callee);
+	ClassMethod.name(callee, "testMethod");
+}
