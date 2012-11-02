@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eMFPatternLanguage:PatternModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eMFPatternLanguage="http://www.eclipse.org/viatra2/patternlanguage/EMFPatternLanguage" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:patternLanguage="http://www.eclipse.org/viatra2/patternlanguage/core/PatternLanguage">
+  <patterns name="earlyBinding" fileName="platform:/resource/org.qualitune.refactoring.energy.test/queries/earlyBinding.eiq">
+    <parameters name="actClass">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+      </type>
+    </parameters>
+    <parameters name="onCreate">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+      </type>
+    </parameters>
+    <parameters name="superClass">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+      </type>
+    </parameters>
+    <parameters name="callee">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/classifiers#//Class/extends"/>
+            </type>
+          </tail>
+          <src var="actClass"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="superClassRef"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/types#//NamespaceClassifierReference"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//NamespaceClassifierReference/classifierReferences"/>
+            </type>
+          </tail>
+          <src var="superClassRef"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="classifierRef"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/types#//ClassifierReference"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//ClassifierReference/target"/>
+            </type>
+          </tail>
+          <src var="classifierRef"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="superClass"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://www.emftext.org/java/commons#//NamedElement/name"/>
+            </type>
+          </tail>
+          <src var="superClass"/>
+          <dst xsi:type="patternLanguage:StringValue" value="Activity"/>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/members#//MemberContainer/members"/>
+            </type>
+          </tail>
+          <src var="actClass"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="onCreate"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://www.emftext.org/java/commons#//NamedElement/name"/>
+            </type>
+          </tail>
+          <src var="onCreate"/>
+          <dst xsi:type="patternLanguage:StringValue" value="onCreate"/>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/statements#//StatementListContainer/statements"/>
+            </type>
+          </tail>
+          <src var="onCreate"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="statement"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/statements#//ExpressionStatement"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/statements#//ExpressionStatement/expression"/>
+            </type>
+          </tail>
+          <src var="statement"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="caller"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/references#//MethodCall"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/references#//ElementReference/target"/>
+            </type>
+          </tail>
+          <src var="caller"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="callee"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://www.emftext.org/java/commons#//NamedElement/name"/>
+            </type>
+          </tail>
+          <src var="callee"/>
+          <dst xsi:type="patternLanguage:StringValue" value="requestLocationUpdates"/>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="earlyBinding3" fileName="platform:/resource/org.qualitune.refactoring.energy.test/queries/earlyBinding.eiq">
+    <parameters name="actClass">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+      </type>
+    </parameters>
+    <parameters name="searchedMethod">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+      </type>
+    </parameters>
+    <parameters name="superClass">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+      </type>
+    </parameters>
+    <parameters name="callee">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/classifiers#//Class/extends"/>
+            </type>
+          </tail>
+          <src var="actClass"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="superClassRef"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/types#//NamespaceClassifierReference"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//NamespaceClassifierReference/classifierReferences"/>
+            </type>
+          </tail>
+          <src var="superClassRef"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="classifierRef"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/types#//ClassifierReference"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//ClassifierReference/target"/>
+            </type>
+          </tail>
+          <src var="classifierRef"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="superClass"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://www.emftext.org/java/commons#//NamedElement/name"/>
+            </type>
+          </tail>
+          <src var="superClass"/>
+          <dst xsi:type="patternLanguage:StringValue" value="File"/>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/members#//MemberContainer/members"/>
+            </type>
+          </tail>
+          <src var="actClass"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="searchedMethod"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://www.emftext.org/java/commons#//NamedElement/name"/>
+            </type>
+          </tail>
+          <src var="searchedMethod"/>
+          <dst xsi:type="patternLanguage:StringValue" value="toString"/>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/statements#//StatementListContainer/statements"/>
+            </type>
+          </tail>
+          <src var="searchedMethod"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="statement"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/statements#//ExpressionStatement"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/statements#//ExpressionStatement/expression"/>
+            </type>
+          </tail>
+          <src var="statement"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="caller"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/references#//MethodCall"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/references#//ElementReference/target"/>
+            </type>
+          </tail>
+          <src var="caller"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="callee"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://www.emftext.org/java/commons#//NamedElement/name"/>
+            </type>
+          </tail>
+          <src var="callee"/>
+          <dst xsi:type="patternLanguage:StringValue" value="testMethod"/>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
+  <importPackages>
+    <ePackage href="http://www.emftext.org/java/references#/"/>
+  </importPackages>
+  <importPackages>
+    <ePackage href="http://www.emftext.org/java/statements#/"/>
+  </importPackages>
+  <importPackages>
+    <ePackage href="http://www.emftext.org/java/classifiers#/"/>
+  </importPackages>
+  <importPackages>
+    <ePackage href="http://www.emftext.org/java/types#/"/>
+  </importPackages>
+  <importPackages>
+    <ePackage href="http://www.emftext.org/java/members#/"/>
+  </importPackages>
+</eMFPatternLanguage:PatternModel>
