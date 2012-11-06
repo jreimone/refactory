@@ -47,12 +47,14 @@ public class GUERYRegistry implements IGUERYRegistry {
 				Bundle bundle = Platform.getBundle(pluginID);
 				URL motifUrl = bundle.getEntry(gueryFileString);
 				try {
-					InputStream stream = motifUrl.openStream();
-					Motif<EObjectVertex, EReferenceEdge> motif = reader.read(stream);
-					if(motif != null){
-						motifs.add(motif);
+					if(motifUrl != null){
+						InputStream stream = motifUrl.openStream();
+						Motif<EObjectVertex, EReferenceEdge> motif = reader.read(stream);
+						if(motif != null){
+							motifs.add(motif);
+						}
+						stream.close();
 					}
-					stream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (MotifReaderException e) {

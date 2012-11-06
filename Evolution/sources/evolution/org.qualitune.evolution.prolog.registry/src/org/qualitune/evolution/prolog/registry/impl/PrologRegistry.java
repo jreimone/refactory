@@ -18,7 +18,7 @@ import alice.tuprolog.Theory;
 
 public class PrologRegistry implements IPrologRegistry {
 
-	private static Prolog engine;
+	private Prolog engine;
 	
 	public PrologRegistry(){
 		engine = new Prolog();
@@ -35,12 +35,14 @@ public class PrologRegistry implements IPrologRegistry {
 				Bundle bundle = Platform.getBundle(pluginID);
 				URL prologFileURL = bundle.getEntry(prologFilePath);
 				try {
-					InputStream stream = prologFileURL.openStream();
-					// http://weblogs.java.net/blog/pat/archive/2004/10/stupid_scanner_1.html
-					// \\A is the regex for the beginning which is only one in a stream
-					String prologRules = new Scanner(stream).useDelimiter("\\A").next();
-					prologRules += "\n\n";
-					registerKnowledge(prologRules);
+					if(prologFileURL != null){
+						InputStream stream = prologFileURL.openStream();
+						// http://weblogs.java.net/blog/pat/archive/2004/10/stupid_scanner_1.html
+						// \\A is the regex for the beginning which is only one in a stream
+						String prologRules = new Scanner(stream).useDelimiter("\\A").next();
+						prologRules += "\n\n";
+						registerKnowledge(prologRules);
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
