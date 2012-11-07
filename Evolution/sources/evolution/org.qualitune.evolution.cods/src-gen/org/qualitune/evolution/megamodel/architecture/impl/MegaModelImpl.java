@@ -136,12 +136,19 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public TerminalModel getTerminalModelByEObject(EObject model) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		List<TerminalModel> terminalModels = getTerminalModels();
+		for (TerminalModel terminalModel : terminalModels) {
+			if(terminalModel instanceof TransformationModel && ((TransformationModel) terminalModel).getTransformation().equals(model)){
+				return terminalModel;
+			}
+			if(terminalModel instanceof InstanceModel && ((InstanceModel) terminalModel).getModel().equals(model)){
+				return terminalModel;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -167,8 +174,8 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ArchitecturePackage.MEGA_MODEL__MODELS:
-				return ((InternalEList<?>)getModels()).basicRemove(otherEnd, msgs);
+		case ArchitecturePackage.MEGA_MODEL__MODELS:
+			return ((InternalEList<?>)getModels()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -181,8 +188,8 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ArchitecturePackage.MEGA_MODEL__MODELS:
-				return getModels();
+		case ArchitecturePackage.MEGA_MODEL__MODELS:
+			return getModels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -196,10 +203,10 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ArchitecturePackage.MEGA_MODEL__MODELS:
-				getModels().clear();
-				getModels().addAll((Collection<? extends Model>)newValue);
-				return;
+		case ArchitecturePackage.MEGA_MODEL__MODELS:
+			getModels().clear();
+			getModels().addAll((Collection<? extends Model>)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -212,9 +219,9 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ArchitecturePackage.MEGA_MODEL__MODELS:
-				getModels().clear();
-				return;
+		case ArchitecturePackage.MEGA_MODEL__MODELS:
+			getModels().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -227,8 +234,8 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ArchitecturePackage.MEGA_MODEL__MODELS:
-				return models != null && !models.isEmpty();
+		case ArchitecturePackage.MEGA_MODEL__MODELS:
+			return models != null && !models.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
