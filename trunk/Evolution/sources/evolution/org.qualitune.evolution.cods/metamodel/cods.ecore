@@ -44,6 +44,7 @@
       <eOperations name="getTerminalModelByEObject" eType="#//architecture/TerminalModel">
         <eParameters name="model" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
       </eOperations>
+      <eOperations name="getMetaMetaModel" eType="#//architecture/MetaMetaModel"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
           eType="#//architecture/Model" containment="true"/>
     </eClassifiers>

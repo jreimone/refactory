@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.qualitune.evolution.megamodel.architecture.ArchitecturePackage;
 import org.qualitune.evolution.megamodel.architecture.InstanceModel;
 import org.qualitune.evolution.megamodel.architecture.MegaModel;
+import org.qualitune.evolution.megamodel.architecture.MetaMetaModel;
 import org.qualitune.evolution.megamodel.architecture.Model;
 import org.qualitune.evolution.megamodel.architecture.ReferenceModel;
 import org.qualitune.evolution.megamodel.architecture.TerminalModel;
@@ -138,18 +139,21 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	 * @generated
 	 */
 	public TerminalModel getTerminalModelByEObject(EObject model) {
-		List<Model> models = getModels();
-		for (Model knownModel : models) {
-			if(knownModel instanceof TerminalModel){
-				EObject realObject = null;
-				if(knownModel instanceof TransformationModel){
-					realObject = ((TransformationModel) knownModel).getTransformation();
-				} else if(knownModel instanceof InstanceModel){
-					realObject = ((InstanceModel) knownModel).getModel();
-				}
-				if(realObject != null && realObject.equals(model)){
-					return (TerminalModel) knownModel;
-				}
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public MetaMetaModel getMetaMetaModel() {
+		List<ReferenceModel> referenceModels = getReferenceModels();
+		for (ReferenceModel referenceModel : referenceModels) {
+			if(referenceModel instanceof MetaMetaModel){
+				return (MetaMetaModel) referenceModel; 
 			}
 		}
 		return null;

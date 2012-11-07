@@ -75,4 +75,12 @@ public interface MegaModel extends TerminalModel {
 	 */
 	TerminalModel getTerminalModelByEObject(EObject model);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	MetaMetaModel getMetaMetaModel();
+
 } // MegaModel
