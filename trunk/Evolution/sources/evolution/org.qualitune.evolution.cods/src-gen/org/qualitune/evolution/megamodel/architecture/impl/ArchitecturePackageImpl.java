@@ -399,6 +399,12 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 
 		addEOperation(megaModelEClass, this.getMetaMetaModel(), "getMetaMetaModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(megaModelEClass, this.getMetaModel(), "getMetaModels", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(megaModelEClass, this.getTransformationModel(), "getTransformationModels", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(megaModelEClass, this.getInstanceModel(), "getInstanceModels", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(metaMetaModelEClass, MetaMetaModel.class, "MetaMetaModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(metaModelEClass, MetaModel.class, "MetaModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

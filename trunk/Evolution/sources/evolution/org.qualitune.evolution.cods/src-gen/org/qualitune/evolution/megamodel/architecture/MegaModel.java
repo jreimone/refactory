@@ -83,4 +83,28 @@ public interface MegaModel extends TerminalModel {
 	 */
 	MetaMetaModel getMetaMetaModel();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<MetaModel> getMetaModels();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<TransformationModel> getTransformationModels();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<InstanceModel> getInstanceModels();
+
 } // MegaModel
