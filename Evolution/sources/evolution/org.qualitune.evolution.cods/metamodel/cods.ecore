@@ -45,6 +45,9 @@
         <eParameters name="model" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
       </eOperations>
       <eOperations name="getMetaMetaModel" eType="#//architecture/MetaMetaModel"/>
+      <eOperations name="getMetaModels" upperBound="-1" eType="#//architecture/MetaModel"/>
+      <eOperations name="getTransformationModels" upperBound="-1" eType="#//architecture/TransformationModel"/>
+      <eOperations name="getInstanceModels" upperBound="-1" eType="#//architecture/InstanceModel"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
           eType="#//architecture/Model" containment="true"/>
     </eClassifiers>

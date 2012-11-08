@@ -92,6 +92,18 @@
         <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getMetaMetaModel"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_qNQfESjiEeK7L_S7OFDluA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_p7OOcCmTEeKGINyQEUU-dQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getMetaModels"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_p7OOcSmTEeKGINyQEUU-dQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_r3S5kCmTEeKGINyQEUU-dQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getTransformationModels"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_r3S5kSmTEeKGINyQEUU-dQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_tE9mkCmTEeKGINyQEUU-dQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="cods.ecore#//architecture/MegaModel/getInstanceModels"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tE9mkSmTEeKGINyQEUU-dQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_fT86ASKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT86AiKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT86AyKlEeKLXve17CTS8Q"/>
