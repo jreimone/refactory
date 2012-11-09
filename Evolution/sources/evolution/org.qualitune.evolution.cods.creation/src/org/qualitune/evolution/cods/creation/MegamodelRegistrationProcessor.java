@@ -26,7 +26,9 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.osgi.framework.Bundle;
 import org.qualitune.evolution.cods.kinds.IKindsExtensionPoint;
 import org.qualitune.evolution.megamodel.MegamodelPackage;
@@ -46,19 +48,38 @@ import org.qualitune.evolution.megamodel.cods.CodsFactory;
  *
  */
 @SuppressWarnings("restriction")
-public class MegamodelRegistrationProcessor{
+public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 
 	private static final String MEGAMODEL_FILE	= "megamodel.cods";
+	public static final String MEGAMODEL_STRING	= "http://qualitune.org/" + MEGAMODEL_FILE;
+	public static final URI MEGAMODEL_URI		= URI.createURI(MEGAMODEL_STRING);
 
 	@Inject
 	private IWorkspace workspace;
+	
+	private Resource codsResource;
+	
+	@Override
+	public Resource createResource(URI uri) {
+		if(uri.equals(MEGAMODEL_URI)){
+			return codsResource;
+		}
+		return super.createResource(uri);
+	}
 
 	@Execute
 	public void register(IEclipseContext context) {
 		CODS megaModel = loadMegaModel();
+		codsResource = megaModel.eResource();
 		context.set(MegaModel.class, megaModel);
 		context.set(CODS.class, megaModel);
+		registerInEMF();
 		workspace.addResourceChangeListener(new WorkspaceModelChangeListener(megaModel));
+	}
+
+	private void registerInEMF() {
+		URIConverter.URI_MAP.put(MEGAMODEL_URI, codsResource.getURI());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(MEGAMODEL_URI.fileExtension(), this);
 	}
 
 	/**
@@ -144,6 +165,7 @@ public class MegamodelRegistrationProcessor{
 			return false;
 		}
 		ResourceSet rs = megaModel.eResource().getResourceSet();
+		boolean modified = false;
 		if(ifile != null){
 			URI uri = URI.createPlatformResourceURI(ifile.getFullPath().toString(), true);
 			Factory factory = Resource.Factory.Registry.INSTANCE.getFactory(uri);
@@ -163,12 +185,13 @@ public class MegamodelRegistrationProcessor{
 							} else {
 								existentMetamodel.setPackage(metamodel);
 							}
+							modified = true;
 						}
 						if(megaModel.getTerminalModelByEObject(model) == null){
 							Model newModel = createModelForEObject(model);
 							megaModel.getModels().add(newModel);
 							newModel.setConformsTo(existentMetamodel);
-							return true;
+							modified = true;
 						}
 					}
 				} catch (Exception e) {
@@ -178,7 +201,7 @@ public class MegamodelRegistrationProcessor{
 				}
 			}
 		}
-		return false;
+		return modified;
 	}
 	
 	private static Model createModelForEObject(EObject model){

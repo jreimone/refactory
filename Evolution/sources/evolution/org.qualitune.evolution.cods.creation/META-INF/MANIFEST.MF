@@ -11,5 +11,6 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.eclipse.core.resources,
  org.eclipse.equinox.common,
  javax.inject,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.qualitune.evolution.registry
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
