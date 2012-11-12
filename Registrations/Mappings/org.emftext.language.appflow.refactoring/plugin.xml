@@ -13,9 +13,6 @@
       <rolemapping
             rolemapping_resource="rolemappings/createInitialState.rolemapping">
       </rolemapping>
-      <rolemapping
-            rolemapping_resource="rolemappings/oclTest.rolemapping">
-      </rolemapping>
    </extension>
  <extension
        point="org.emftext.refactoring.postprocessor">
