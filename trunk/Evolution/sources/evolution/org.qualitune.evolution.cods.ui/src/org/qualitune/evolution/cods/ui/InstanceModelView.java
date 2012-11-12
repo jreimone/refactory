@@ -38,7 +38,7 @@ import org.eclipse.swt.custom.ScrolledComposite;
  * @author jreimann
  *
  */
-public class TerminalModelView extends ViewPart {
+public class InstanceModelView extends ViewPart {
 	private DataBindingContext m_bindingContext;
 
 	@Inject
@@ -46,19 +46,13 @@ public class TerminalModelView extends ViewPart {
 	
 	public static final String ID = "org.qualitune.evolution.cods.ui.MegaModelView"; //$NON-NLS-1$
 	private final FormToolkit toolkit = new FormToolkit(Display.getCurrent());
-	private ExpandBar terminalModelExpandBar;
-	private ExpandItem expandItemInstanceModels;
-	private ExpandItem expandItemTransformationModels;
 	private Table instanceModelTable;
 	private TableViewer instanceModelTableViewer;
 	private TableColumn tableColumnModelElement;
-	private Table transformationModelTable;
-	private TableViewer transformationModelTableViewer;
-	private TableColumn tableColumnModelElement_1;
 	private Composite composite;
 	private ScrolledComposite scrolledComposite;
 
-	public TerminalModelView() {
+	public InstanceModelView() {
 		super();
 		URI createURI = URI.createURI("http://qualitune.org/megamodel.cods");
 		ResourceSet rs = new ResourceSetImpl();
@@ -72,20 +66,8 @@ public class TerminalModelView extends ViewPart {
 	 */
 	@Override
 	public void createPartControl(Composite parent) {
-		Composite container = toolkit.createComposite(parent, SWT.NONE);
-		toolkit.paintBordersFor(container);
-		container.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
-		terminalModelExpandBar = new ExpandBar(container, SWT.NONE);
-		toolkit.adapt(terminalModelExpandBar);
-		toolkit.paintBordersFor(terminalModelExpandBar);
-		
-		expandItemInstanceModels = new ExpandItem(terminalModelExpandBar, SWT.NONE);
-		expandItemInstanceModels.setExpanded(true);
-		expandItemInstanceModels.setText("Instance Models");
-		
-		scrolledComposite = new ScrolledComposite(terminalModelExpandBar, SWT.BORDER | SWT.V_SCROLL);
-		expandItemInstanceModels.setControl(scrolledComposite);
+		scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		
 		composite = new Composite(scrolledComposite, SWT.NONE);
 		scrolledComposite.setContent(composite);
@@ -105,24 +87,8 @@ public class TerminalModelView extends ViewPart {
 		toolkit.paintBordersFor(instanceModelTable);
 		
 		tableColumnModelElement = new TableColumn(instanceModelTable, SWT.NONE);
-		tableColumnModelElement.setWidth(500);
+		tableColumnModelElement.setWidth(600);
 		tableColumnModelElement.setText("Location");
-		expandItemInstanceModels.setHeight(150);
-		
-		expandItemTransformationModels = new ExpandItem(terminalModelExpandBar, SWT.NONE);
-		expandItemTransformationModels.setText("Transformation Models");
-		
-		transformationModelTableViewer = new TableViewer(terminalModelExpandBar, SWT.BORDER | SWT.FULL_SELECTION);
-		transformationModelTable = transformationModelTableViewer.getTable();
-		transformationModelTable.setLinesVisible(true);
-		transformationModelTable.setHeaderVisible(true);
-		expandItemTransformationModels.setControl(transformationModelTable);
-		toolkit.paintBordersFor(transformationModelTable);
-		expandItemTransformationModels.setHeight(150);
-		
-		tableColumnModelElement_1 = new TableColumn(transformationModelTable, SWT.NONE);
-		tableColumnModelElement_1.setWidth(500);
-		tableColumnModelElement_1.setText("Location");
 
 		createActions();
 		initializeToolBar();
@@ -170,14 +136,6 @@ public class TerminalModelView extends ViewPart {
 		//
 		IObservableList instanceModelsMegaModelObserveList = PojoProperties.list("instanceModels").observe(megaModel);
 		instanceModelTableViewer.setInput(instanceModelsMegaModelObserveList);
-		//
-		ObservableListContentProvider listContentProvider_1 = new ObservableListContentProvider();
-		IObservableMap observeMap_1 = PojoObservables.observeMap(listContentProvider_1.getKnownElements(), TransformationModel.class, "transformation");
-		transformationModelTableViewer.setLabelProvider(new ObservableMapLabelProvider(observeMap_1));
-		transformationModelTableViewer.setContentProvider(listContentProvider_1);
-		//
-		IObservableList transformationModelsMegaModelObserveList = PojoProperties.list("transformationModels").observe(megaModel);
-		transformationModelTableViewer.setInput(transformationModelsMegaModelObserveList);
 		//
 		return bindingContext;
 	}

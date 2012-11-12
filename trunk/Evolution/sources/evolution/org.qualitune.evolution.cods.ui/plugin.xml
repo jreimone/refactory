@@ -5,10 +5,10 @@
          point="org.eclipse.ui.views">
       <view
             category="org.qualitune.view.category"
-            class="org.qualitune.evolution.cods.ui.TerminalModelView"
+            class="org.qualitune.evolution.cods.ui.InstanceModelView"
             icon="icons/reltopics_co.gif"
             id="org.qualitune.evolution.cods.ui.TerminalModelView"
-            name="Terminal Models">
+            name="Instance Models">
       </view>
    </extension>
 

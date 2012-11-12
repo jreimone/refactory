@@ -66,7 +66,7 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 			System.out.print(res.getFullPath());
 			System.out.println(" was added.");
 			IFile file = (IFile) res.getAdapter(IFile.class);
-			boolean newModelRegistered = MegamodelRegistrationProcessor.registerModelInIFile(megamodel, file);
+			boolean newModelRegistered = MegamodelRegistrationProcessor.registerModelInFile(megamodel, file);
 			if(newModelRegistered){
 				try {
 					URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);

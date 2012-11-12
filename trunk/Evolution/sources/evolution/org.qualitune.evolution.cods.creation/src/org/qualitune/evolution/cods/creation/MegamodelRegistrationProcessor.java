@@ -9,8 +9,10 @@ import java.util.Collections;
 import javax.inject.Inject;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IPathVariableManager;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
@@ -109,6 +111,7 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 				cods = (CODS) resource.getContents().get(0);
 			}
 		}
+		cods.eAdapters().add(new MegaModelContentAdapter());
 		return cods;
 	}
 
@@ -127,7 +130,7 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 	 * Traverses the workspace and registers existing models.
 	 * @param megaModel
 	 */
-	private void registerExistingModels(CODS megaModel) {
+	private void registerExistingModels(final CODS megaModel) {
 		MetaMetaModel ecoreMetaMetaModel = ArchitectureFactory.eINSTANCE.createMetaMetaModel();
 		ecoreMetaMetaModel.setPackage(EcorePackage.eINSTANCE);
 		ecoreMetaMetaModel.setConformsTo(ecoreMetaMetaModel);
@@ -138,15 +141,25 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 		megaModel.setConformsTo(codsMetaModel);
 		megaModel.getModels().add(codsMetaModel);
 		IWorkspaceRoot root = workspace.getRoot();
+		final IPathVariableManager pathVariableManager = workspace.getPathVariableManager();
 		try {
 			IProject[] projects = root.getProjects();
 			for (IProject project : projects) {
 				if(project.isOpen()){
-					IResource[] members = project.members();
-					for (IResource iResource : members) {
-						IFile ifile = (IFile) iResource.getAdapter(IFile.class);
-						registerModelInIFile(megaModel, ifile);
-					}
+					project.accept(new IResourceVisitor() {
+						@Override
+						public boolean visit(IResource resource) throws CoreException {
+							IFile file = (IFile) resource.getAdapter(IFile.class);
+							if(file != null){
+								java.net.URI locationURI = file.getLocationURI();
+								IPath rawLocation = file.getRawLocation();
+								java.net.URI rawLocationURI = file.getRawLocationURI();
+								java.net.URI uri = pathVariableManager.resolveURI(locationURI);
+								registerModelInFile(megaModel, file);
+							}
+							return true;
+						}
+					});
 				}
 			}
 		} catch (CoreException e) {
@@ -157,17 +170,22 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 	/**
 	 * @param megaModel
 	 * @param ecoreMetaMetaModel
-	 * @param ifile
+	 * @param file
 	 * @return returns <code>true</code> when a new model was registered in the megamodel and <code>false</code> otherwise.
 	 */
-	protected static boolean registerModelInIFile(CODS megaModel, IFile ifile) {
-		if(megaModel == null || ifile == null){
+	protected static boolean registerModelInFile(CODS megaModel, IFile file) {
+		if(megaModel == null || file == null){
 			return false;
 		}
 		ResourceSet rs = megaModel.eResource().getResourceSet();
 		boolean modified = false;
-		if(ifile != null){
-			URI uri = URI.createPlatformResourceURI(ifile.getFullPath().toString(), true);
+		if(file != null){
+			URI uri = null;
+			if(file.isLinked()){
+				uri = URI.createFileURI(file.getLocation().toString());
+			} else {
+				uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			}
 			Factory factory = Resource.Factory.Registry.INSTANCE.getFactory(uri);
 			if(factory != null){
 				try {
