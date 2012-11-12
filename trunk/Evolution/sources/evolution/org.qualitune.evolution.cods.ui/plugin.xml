@@ -7,8 +7,16 @@
             category="org.qualitune.view.category"
             class="org.qualitune.evolution.cods.ui.InstanceModelView"
             icon="icons/reltopics_co.gif"
-            id="org.qualitune.evolution.cods.ui.TerminalModelView"
+            id="org.qualitune.evolution.cods.ui.InstanceModelView"
             name="Instance Models">
+      </view>
+      <view
+            category="org.qualitune.view.category"
+            class="org.qualitune.evolution.cods.ui.TransformationModelView"
+            icon="icons/trafo.gif"
+            id="org.qualitune.evolution.cods.ui.TransformationModelView"
+            name="Transformation Models"
+            restorable="true">
       </view>
    </extension>
 
