@@ -8,13 +8,13 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.qualitune.evolution.megamodel.architecture.ArchitecturePackage;
-import org.qualitune.evolution.megamodel.architecture.InstanceModel;
+import org.qualitune.evolution.megamodel.architecture.TransformationModel;
 
 /**
  * @author jreimann
  *
  */
-public class InstanceModelView extends AbstractModelView {
+public class TransformationModelView extends AbstractModelView {
 
 	@Override
 	public EObject getObservableParent() {
@@ -25,8 +25,8 @@ public class InstanceModelView extends AbstractModelView {
 	public String getObservableParentToObservableFeatureName() {
 		List<EOperation> operations = ArchitecturePackage.Literals.MEGA_MODEL.getEOperations();
 		for (EOperation operation : operations) {
-			if(operation.getName().equals("getInstanceModels")){
-				return "instanceModels";
+			if(operation.getName().equals("getTransformationModels")){
+				return "transformationModels";
 			}
 		}
 		return null;
@@ -34,12 +34,12 @@ public class InstanceModelView extends AbstractModelView {
 
 	@Override
 	public Class<?> getObservableEClass() {
-		return InstanceModel.class;
+		return TransformationModel.class;
 	}
 
 	@Override
 	public String getObservableDisplayFeatureName() {
-		return ArchitecturePackage.Literals.INSTANCE_MODEL__MODEL.getName();
+		return ArchitecturePackage.Literals.TRANSFORMATION_MODEL__TRANSFORMATION.getName();
 	}
 
 }
