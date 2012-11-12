@@ -3,11 +3,15 @@
  */
 package org.qualitune.evolution.cods.ui;
 
+import java.util.List;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.beans.PojoProperties;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,13 +30,15 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
+import org.qualitune.evolution.cods.creation.MegaModelChangeObserver;
+import org.qualitune.evolution.cods.creation.MegaModelChangeSubject;
 import org.qualitune.evolution.megamodel.cods.CODS;
 
 /**
  * @author jreimann
  *
  */
-public class AbstractModelView extends ViewPart {
+public class AbstractModelView extends ViewPart implements MegaModelChangeObserver {
 	private DataBindingContext m_bindingContext;
 
 	private CODS megaModel;
@@ -47,6 +53,14 @@ public class AbstractModelView extends ViewPart {
 
 	public AbstractModelView() {
 		super();
+		CODS cods = getMegaModel();
+		List<Adapter> adapters = cods.eAdapters();
+		for (Adapter adapter : adapters) {
+			if(adapter instanceof MegaModelChangeSubject){
+				((MegaModelChangeSubject) adapter).registerObserver(this, Notification.ADD);
+				break;
+			}
+		}
 	}
 
 	public EObject getObservableParent(){
@@ -154,5 +168,10 @@ public class AbstractModelView extends ViewPart {
 			megaModel = (CODS) resource.getContents().get(0);
 		}
 		return megaModel;
+	}
+
+	@Override
+	public void megaModelChanged() {
+		instanceModelTableViewer.refresh();
 	}
 }
