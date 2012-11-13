@@ -16,8 +16,10 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.qualitune.evolution.megamodel.architecture.TerminalModel;
 import org.qualitune.evolution.megamodel.cods.CODS;
 import org.qualitune.evolution.registry.IKnowledgeBase;
 import org.qualitune.evolution.registry.IKnowledgeBaseRegistry;
@@ -60,12 +62,12 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 	@Override
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		IResource res = delta.getResource();
+		IFile file = (IFile) res.getAdapter(IFile.class);
 		switch (delta.getKind()) {
 		case IResourceDelta.ADDED:
 			System.out.print("Resource ");
 			System.out.print(res.getFullPath());
 			System.out.println(" was added.");
-			IFile file = (IFile) res.getAdapter(IFile.class);
 			boolean newModelRegistered = MegamodelRegistrationProcessor.registerModelInFile(megamodel, file);
 			if(newModelRegistered){
 				try {
@@ -86,6 +88,20 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 			System.out.print("Resource ");
 			System.out.print(res.getFullPath());
 			System.out.println(" was removed.");
+			boolean ex = file.exists();
+			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			ResourceSet resourceSet = megamodel.eResource().getResourceSet();
+			Resource resource = resourceSet.getResource(uri, true);
+			EObject model = resource.getContents().get(0);
+			TerminalModel terminalModel = megamodel.getTerminalModelByEObject(model);
+			if(terminalModel != null){
+				megamodel.getModels().remove(terminalModel);
+				try {
+					megamodel.eResource().save(Collections.EMPTY_MAP);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 			break;
 		case IResourceDelta.CHANGED:
 			System.out.print("Resource ");

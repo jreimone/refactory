@@ -3,23 +3,20 @@
  */
 package org.qualitune.evolution.cods.ui;
 
-import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
+import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.IDE;
 import org.qualitune.evolution.megamodel.architecture.InstanceModel;
 import org.qualitune.evolution.megamodel.architecture.TransformationModel;
 
@@ -27,7 +24,7 @@ import org.qualitune.evolution.megamodel.architecture.TransformationModel;
  * @author jreimann
  *
  */
-public class ObservableModelLabelProvider extends ObservableMapLabelProvider {
+public class ObservableModelLabelProvider extends LabelProvider implements ITableLabelProvider {
 
 	private static AdapterFactoryLabelProvider labelProvider;
 
@@ -66,12 +63,4 @@ public class ObservableModelLabelProvider extends ObservableMapLabelProvider {
 		}
 		return labelProvider.getColumnText(element, columnIndex);
 	}
-
-	/**
-	 * @param attributeMap
-	 */
-	public ObservableModelLabelProvider(IObservableMap attributeMap) {
-		super(attributeMap);
-	}
-
 }
