@@ -90,9 +90,12 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 			System.out.println(" was removed.");
 			boolean ex = file.exists();
 			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			uri = uri.trimFragment();
+			uri = URI.createURI(file.getFullPath().toString());
 			ResourceSet resourceSet = megamodel.eResource().getResourceSet();
-			Resource resource = resourceSet.getResource(uri, true);
-			EObject model = resource.getContents().get(0);
+			EObject model = resourceSet.getEObject(uri, false);
+//			Resource resource = resourceSet.getResource(uri, true);
+//			EObject model = resource.getContents().get(0);
 			TerminalModel terminalModel = megamodel.getTerminalModelByEObject(model);
 			if(terminalModel != null){
 				megamodel.getModels().remove(terminalModel);

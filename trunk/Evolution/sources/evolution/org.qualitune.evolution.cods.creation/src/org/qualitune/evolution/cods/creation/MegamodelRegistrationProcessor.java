@@ -58,9 +58,9 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 
 	@Inject
 	private IWorkspace workspace;
-	
+
 	private Resource codsResource;
-	
+
 	@Override
 	public Resource createResource(URI uri) {
 		if(uri.equals(MEGAMODEL_URI)){
@@ -186,7 +186,8 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 			} else {
 				uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 			}
-			Factory factory = Resource.Factory.Registry.INSTANCE.getFactory(uri);
+//			Factory factory = Resource.Factory.Registry.INSTANCE.getFactory(uri);
+			Object factory = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(uri.fileExtension());
 			if(factory != null){
 				try {
 					Resource resource = rs.getResource(uri, true);
@@ -196,32 +197,32 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 						ReferenceModel existentMetamodel = megaModel.getReferenceModelByEPackage(metamodel);
 						if(existentMetamodel == null){
 							existentMetamodel = ArchitectureFactory.eINSTANCE.createMetaModel();
-							megaModel.getModels().add(existentMetamodel);
 							existentMetamodel.setConformsTo(megaModel.getMetaMetaModel());
 							if(model instanceof EPackage){
 								existentMetamodel.setPackage((EPackage) model);
 							} else {
 								existentMetamodel.setPackage(metamodel);
 							}
+							megaModel.getModels().add(existentMetamodel);
 							modified = true;
 						}
 						if(megaModel.getTerminalModelByEObject(model) == null){
 							Model newModel = createModelForEObject(model);
-							megaModel.getModels().add(newModel);
 							newModel.setConformsTo(existentMetamodel);
+							megaModel.getModels().add(newModel);
 							modified = true;
 						}
 					}
 				} catch (Exception e) {
 					// no model found, just don't include it in the megamodel
-					//									e.printStackTrace();
-					//									System.out.println();
+					e.printStackTrace();
+					System.out.println();
 				}
 			}
 		}
 		return modified;
 	}
-	
+
 	private static Model createModelForEObject(EObject model){
 		if(model instanceof EPackage){
 			MetaModel metaModel = ArchitectureFactory.eINSTANCE.createMetaModel();
