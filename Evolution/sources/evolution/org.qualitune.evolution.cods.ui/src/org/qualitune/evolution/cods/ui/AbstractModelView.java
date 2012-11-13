@@ -161,12 +161,13 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 
 	@Override
 	public void megaModelChanged() {
-		contentProvider.setInputModel(getContent2Display());
-		instanceModelTableViewer.setInput(getContent2Display());
-		instanceModelTableViewer.refresh();
-//		instanceModelTableViewer.update(null, null);
-//		instanceModelTable.update();
-//		instanceModelTable.redraw();
-//		instanceModelTable.pack(true);
+		Display.getDefault().asyncExec(new Runnable() {
+            @Override
+            public void run() {
+            	contentProvider.setInputModel(getContent2Display());
+            	instanceModelTableViewer.setInput(getContent2Display());
+            	instanceModelTableViewer.refresh(true);
+            }
+        });
 	}
 }
