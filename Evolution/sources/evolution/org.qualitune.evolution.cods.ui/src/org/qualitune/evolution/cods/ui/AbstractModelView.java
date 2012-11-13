@@ -5,11 +5,6 @@ package org.qualitune.evolution.cods.ui;
 
 import java.util.List;
 
-import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.core.databinding.beans.PojoProperties;
-import org.eclipse.core.databinding.observable.list.IObservableList;
-import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
@@ -19,7 +14,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -39,8 +33,6 @@ import org.qualitune.evolution.megamodel.cods.CODS;
  *
  */
 public class AbstractModelView extends ViewPart implements MegaModelChangeObserver {
-	private DataBindingContext m_bindingContext;
-
 	private CODS megaModel;
 	
 	public static final String ID = "org.qualitune.evolution.cods.ui.MegaModelView"; //$NON-NLS-1$
@@ -50,6 +42,8 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 	private TableColumn tableColumnModelElement;
 	private Composite composite;
 	private ScrolledComposite scrolledComposite;
+	
+	private ModelContentProvider contentProvider;
 
 	public AbstractModelView() {
 		super();
@@ -63,21 +57,21 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 		}
 	}
 
-	public EObject getObservableParent(){
-		return null;
-	}
-
-	public String getObservableParentToObservableFeatureName(){
-		return null;
-	}
-	
-	public Class<?> getObservableEClass(){
-		return null;
-	}
-	
-	public String getObservableDisplayFeatureName(){
-		return null;
-	}
+//	public EObject getObservableParent(){
+//		return null;
+//	}
+//
+//	public String getObservableParentToObservableFeatureName(){
+//		return null;
+//	}
+//	
+//	public Class<?> getObservableEClass(){
+//		return null;
+//	}
+//	
+//	public String getObservableDisplayFeatureName(){
+//		return null;
+//	}
 	
 	
 	/**
@@ -87,7 +81,7 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 	@Override
 	public void createPartControl(Composite parent) {
 		
-		scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite = new ScrolledComposite(parent, SWT.H_SCROLL | SWT.V_SCROLL);
 		
 		composite = new Composite(scrolledComposite, SWT.NONE);
 		scrolledComposite.setContent(composite);
@@ -109,11 +103,15 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 		tableColumnModelElement = new TableColumn(instanceModelTable, SWT.NONE);
 		tableColumnModelElement.setWidth(600);
 		tableColumnModelElement.setText("Location");
+		contentProvider = new ModelContentProvider();
+		instanceModelTableViewer.setContentProvider(contentProvider);
+		contentProvider.setInputModel(getContent2Display());
+		instanceModelTableViewer.setInput(getContent2Display());
+		instanceModelTableViewer.setLabelProvider(new ObservableModelLabelProvider());
 
 		createActions();
 		initializeToolBar();
 		initializeMenu();
-		m_bindingContext = initDataBindings();
 	}
 
 	public void dispose() {
@@ -146,19 +144,6 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 	public void setFocus() {
 		// Set the focus
 	}
-	protected DataBindingContext initDataBindings() {
-		DataBindingContext bindingContext = new DataBindingContext();
-		//
-		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
-		IObservableMap observeMap = PojoObservables.observeMap(listContentProvider.getKnownElements(), getObservableEClass(), getObservableDisplayFeatureName());
-		instanceModelTableViewer.setLabelProvider(new ObservableModelLabelProvider(observeMap));
-		instanceModelTableViewer.setContentProvider(listContentProvider);
-		//
-		IObservableList instanceModelsMegaModelObserveList = PojoProperties.list(getObservableParentToObservableFeatureName()).observe(getObservableParent());
-		instanceModelTableViewer.setInput(instanceModelsMegaModelObserveList);
-		//
-		return bindingContext;
-	}
 
 	public CODS getMegaModel() {
 		if(megaModel == null){
@@ -169,9 +154,19 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 		}
 		return megaModel;
 	}
+	
+	public List<? extends EObject> getContent2Display(){
+		return null;
+	}
 
 	@Override
 	public void megaModelChanged() {
+		contentProvider.setInputModel(getContent2Display());
+		instanceModelTableViewer.setInput(getContent2Display());
 		instanceModelTableViewer.refresh();
+//		instanceModelTableViewer.update(null, null);
+//		instanceModelTable.update();
+//		instanceModelTable.redraw();
+//		instanceModelTable.pack(true);
 	}
 }

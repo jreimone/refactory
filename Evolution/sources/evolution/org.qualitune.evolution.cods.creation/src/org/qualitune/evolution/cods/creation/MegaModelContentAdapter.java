@@ -59,6 +59,7 @@ public class MegaModelContentAdapter extends org.eclipse.emf.ecore.util.EContent
 				kindObservers = new HashSet<MegaModelChangeObserver>();
 				observerMap.put(kind, kindObservers);
 			}
+			kindObservers.add(observer);
 		}
 	}
 }
