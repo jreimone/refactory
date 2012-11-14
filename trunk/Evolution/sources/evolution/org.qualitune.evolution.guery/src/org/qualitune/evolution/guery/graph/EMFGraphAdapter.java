@@ -59,6 +59,9 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferen
 			EObject element = elementVertex.getModelElement();
 			EObject container = element.eContainer();
 			Vertex containerVertex = factory.createVertex(container);
+			if(containerVertex == null){
+				return;
+			}
 			if(!graph.containsVertex(containerVertex)){
 				addNode(containerVertex);
 			}
@@ -71,10 +74,13 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferen
 				List<EObject> referencedElements = Util.getReferencedElements(reference, element);
 				for (EObject referencedElement : referencedElements) {
 					Vertex referencedElementVertex = factory.createVertex(referencedElement);
+					if(referencedElementVertex == null){
+						continue;
+					}
 					Edge newEdge = null;
 					if(!graph.containsVertex(referencedElementVertex)){
 						Resource otherResource = referencedElement.eResource();
-						if(!otherResource.equals(resource)){
+						if(otherResource != null && !otherResource.equals(resource)){
 							graph.addVertex(referencedElementVertex);
 							newEdge = factory.createEdge(element, referencedElement, reference);
 							assert newEdge instanceof ExternalEdge;

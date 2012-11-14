@@ -13,6 +13,9 @@ public class EMFGraphAdapterFactory<Vertex extends EObjectVertex> implements IEM
 	@SuppressWarnings("unchecked")
 	@Override
 	public Vertex createVertex(EObject modelElement) {
+		if(modelElement == null){
+			return null;
+		}
 		EObjectVertex vertex = new EObjectVertex(modelElement);
 		return (Vertex) vertex;
 	}

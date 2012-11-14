@@ -108,10 +108,12 @@ public class PrologGenerator implements IPrologGenerator {
 	private List<EObject> getReferencedElements(EReference reference, EObject element) {
 		List<EObject> referencedElements = new ArrayList<EObject>();
 		Object object = element.eGet(reference, true);
-		if(!reference.isMany()){
-			referencedElements.add((EObject) object);
-		} else {
-			referencedElements.addAll((List<EObject>) object);
+		if(object != null){
+			if(!reference.isMany()){
+				referencedElements.add((EObject) object);
+			} else {
+				referencedElements.addAll((List<EObject>) object);
+			}
 		}
 		return referencedElements;
 	}
