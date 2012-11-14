@@ -252,6 +252,60 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMegaModel_InstanceModels() {
+		return (EReference)megaModelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMegaModel_ReferenceModels() {
+		return (EReference)megaModelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMegaModel_TerminalModels() {
+		return (EReference)megaModelEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMegaModel_MetaMetaModel() {
+		return (EReference)megaModelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMegaModel_MetaModels() {
+		return (EReference)megaModelEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMegaModel_TransformationModels() {
+		return (EReference)megaModelEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMetaMetaModel() {
 		return metaMetaModelEClass;
 	}
@@ -324,6 +378,12 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 
 		megaModelEClass = createEClass(MEGA_MODEL);
 		createEReference(megaModelEClass, MEGA_MODEL__MODELS);
+		createEReference(megaModelEClass, MEGA_MODEL__INSTANCE_MODELS);
+		createEReference(megaModelEClass, MEGA_MODEL__REFERENCE_MODELS);
+		createEReference(megaModelEClass, MEGA_MODEL__TERMINAL_MODELS);
+		createEReference(megaModelEClass, MEGA_MODEL__META_META_MODEL);
+		createEReference(megaModelEClass, MEGA_MODEL__META_MODELS);
+		createEReference(megaModelEClass, MEGA_MODEL__TRANSFORMATION_MODELS);
 
 		metaMetaModelEClass = createEClass(META_META_MODEL);
 
@@ -386,24 +446,18 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 
 		initEClass(megaModelEClass, MegaModel.class, "MegaModel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMegaModel_Models(), this.getModel(), null, "models", null, 0, -1, MegaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(megaModelEClass, this.getReferenceModel(), "getReferenceModels", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(megaModelEClass, this.getTerminalModel(), "getTerminalModels", 0, -1, IS_UNIQUE, IS_ORDERED);
+		initEReference(getMegaModel_InstanceModels(), this.getInstanceModel(), null, "instanceModels", null, 0, -1, MegaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getMegaModel_ReferenceModels(), this.getReferenceModel(), null, "referenceModels", null, 0, -1, MegaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getMegaModel_TerminalModels(), this.getTerminalModel(), null, "terminalModels", null, 0, -1, MegaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getMegaModel_MetaMetaModel(), this.getMetaMetaModel(), null, "metaMetaModel", null, 0, 1, MegaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getMegaModel_MetaModels(), this.getMetaModel(), null, "metaModels", null, 0, -1, MegaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getMegaModel_TransformationModels(), this.getTransformationModel(), null, "transformationModels", null, 0, -1, MegaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(megaModelEClass, this.getReferenceModel(), "getReferenceModelByEPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "epackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(megaModelEClass, this.getTerminalModel(), "getTerminalModelByEObject", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEObject(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(megaModelEClass, this.getMetaMetaModel(), "getMetaMetaModel", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(megaModelEClass, this.getMetaModel(), "getMetaModels", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(megaModelEClass, this.getTransformationModel(), "getTransformationModels", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(megaModelEClass, this.getInstanceModel(), "getInstanceModels", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(metaMetaModelEClass, MetaMetaModel.class, "MetaMetaModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

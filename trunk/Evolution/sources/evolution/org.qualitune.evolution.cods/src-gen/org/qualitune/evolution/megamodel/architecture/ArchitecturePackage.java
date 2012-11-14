@@ -217,13 +217,67 @@ public interface ArchitecturePackage extends EPackage {
 	int MEGA_MODEL__MODELS = TERMINAL_MODEL_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Instance Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEGA_MODEL__INSTANCE_MODELS = TERMINAL_MODEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Reference Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEGA_MODEL__REFERENCE_MODELS = TERMINAL_MODEL_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Terminal Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEGA_MODEL__TERMINAL_MODELS = TERMINAL_MODEL_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Meta Meta Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEGA_MODEL__META_META_MODEL = TERMINAL_MODEL_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Meta Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEGA_MODEL__META_MODELS = TERMINAL_MODEL_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Transformation Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEGA_MODEL__TRANSFORMATION_MODELS = TERMINAL_MODEL_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Mega Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEGA_MODEL_FEATURE_COUNT = TERMINAL_MODEL_FEATURE_COUNT + 1;
+	int MEGA_MODEL_FEATURE_COUNT = TERMINAL_MODEL_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.evolution.megamodel.architecture.impl.MetaMetaModelImpl <em>Meta Meta Model</em>}' class.
@@ -432,6 +486,72 @@ public interface ArchitecturePackage extends EPackage {
 	EReference getMegaModel_Models();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getInstanceModels <em>Instance Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Instance Models</em>'.
+	 * @see org.qualitune.evolution.megamodel.architecture.MegaModel#getInstanceModels()
+	 * @see #getMegaModel()
+	 * @generated
+	 */
+	EReference getMegaModel_InstanceModels();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getReferenceModels <em>Reference Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Reference Models</em>'.
+	 * @see org.qualitune.evolution.megamodel.architecture.MegaModel#getReferenceModels()
+	 * @see #getMegaModel()
+	 * @generated
+	 */
+	EReference getMegaModel_ReferenceModels();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getTerminalModels <em>Terminal Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Terminal Models</em>'.
+	 * @see org.qualitune.evolution.megamodel.architecture.MegaModel#getTerminalModels()
+	 * @see #getMegaModel()
+	 * @generated
+	 */
+	EReference getMegaModel_TerminalModels();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getMetaMetaModel <em>Meta Meta Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Meta Meta Model</em>'.
+	 * @see org.qualitune.evolution.megamodel.architecture.MegaModel#getMetaMetaModel()
+	 * @see #getMegaModel()
+	 * @generated
+	 */
+	EReference getMegaModel_MetaMetaModel();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getMetaModels <em>Meta Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Meta Models</em>'.
+	 * @see org.qualitune.evolution.megamodel.architecture.MegaModel#getMetaModels()
+	 * @see #getMegaModel()
+	 * @generated
+	 */
+	EReference getMegaModel_MetaModels();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getTransformationModels <em>Transformation Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Transformation Models</em>'.
+	 * @see org.qualitune.evolution.megamodel.architecture.MegaModel#getTransformationModels()
+	 * @see #getMegaModel()
+	 * @generated
+	 */
+	EReference getMegaModel_TransformationModels();
+
+	/**
 	 * Returns the meta object for class '{@link org.qualitune.evolution.megamodel.architecture.MetaMetaModel <em>Meta Meta Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -575,6 +695,54 @@ public interface ArchitecturePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MEGA_MODEL__MODELS = eINSTANCE.getMegaModel_Models();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance Models</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEGA_MODEL__INSTANCE_MODELS = eINSTANCE.getMegaModel_InstanceModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference Models</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEGA_MODEL__REFERENCE_MODELS = eINSTANCE.getMegaModel_ReferenceModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Terminal Models</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEGA_MODEL__TERMINAL_MODELS = eINSTANCE.getMegaModel_TerminalModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Meta Meta Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEGA_MODEL__META_META_MODEL = eINSTANCE.getMegaModel_MetaMetaModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Meta Models</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEGA_MODEL__META_MODELS = eINSTANCE.getMegaModel_MetaModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Transformation Models</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEGA_MODEL__TRANSFORMATION_MODELS = eINSTANCE.getMegaModel_TransformationModels();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.evolution.megamodel.architecture.impl.MetaMetaModelImpl <em>Meta Meta Model</em>}' class.
