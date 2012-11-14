@@ -37,8 +37,9 @@ public class PrologGenerator implements IPrologGenerator {
 				List<EObject> referencedElements = getReferencedElements(reference, element);
 				Prolog engine = IPrologRegistry.INSTANCE.getEngine();
 				for (EObject referencedElement : referencedElements) {
+					EcoreUtil.resolveAll(referencedElement);
 					Resource otherResource = referencedElement.eResource();
-					if(!otherResource.equals(modelResource)){
+					if(otherResource != null && !otherResource.equals(modelResource)){
 						List<String> clauseList = createClauseList(modelResource, element, reference, referencedElement, otherResource);
 						Theory theory = createTheory(clauseList);
 						try {
