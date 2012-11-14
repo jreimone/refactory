@@ -447,7 +447,7 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 						getMetaModels().add((MetaModel) newValue);
 					}
 				} else if(newValue instanceof MetaMetaModel){
-					if(!getMetaMetaModel().equals(newValue)){
+					if(!newValue.equals(getMetaMetaModel())){
 						setMetaMetaModel((MetaMetaModel) newValue);
 					}
 				}
@@ -496,6 +496,15 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 				break;
 			}
 		}
+	}
+
+	/**
+	 * This is used to get notified of modified dependent features for updating the derived features.
+	 */
+	@Override
+	public boolean eNotificationRequired() {
+//		return super.eNotificationRequired();
+		return true;
 	}
 
 } //MegaModelImpl

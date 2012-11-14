@@ -60,7 +60,7 @@ public interface MegaModel extends TerminalModel {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instance Models</em>' reference list.
 	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_InstanceModels()
-	 * @model derived="true"
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	EList<InstanceModel> getInstanceModels();
@@ -72,7 +72,7 @@ public interface MegaModel extends TerminalModel {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference Models</em>' reference list.
 	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_ReferenceModels()
-	 * @model derived="true"
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	EList<ReferenceModel> getReferenceModels();
@@ -84,7 +84,7 @@ public interface MegaModel extends TerminalModel {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Terminal Models</em>' reference list.
 	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_TerminalModels()
-	 * @model derived="true"
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	EList<TerminalModel> getTerminalModels();
@@ -112,7 +112,7 @@ public interface MegaModel extends TerminalModel {
 	 * @return the value of the '<em>Meta Meta Model</em>' reference.
 	 * @see #setMetaMetaModel(MetaMetaModel)
 	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_MetaMetaModel()
-	 * @model derived="true"
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	MetaMetaModel getMetaMetaModel();
@@ -134,7 +134,7 @@ public interface MegaModel extends TerminalModel {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Meta Models</em>' reference list.
 	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_MetaModels()
-	 * @model derived="true"
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	EList<MetaModel> getMetaModels();
@@ -146,7 +146,7 @@ public interface MegaModel extends TerminalModel {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Transformation Models</em>' reference list.
 	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_TransformationModels()
-	 * @model derived="true"
+	 * @model transient="true" derived="true"
 	 * @generated
 	 */
 	EList<TransformationModel> getTransformationModels();

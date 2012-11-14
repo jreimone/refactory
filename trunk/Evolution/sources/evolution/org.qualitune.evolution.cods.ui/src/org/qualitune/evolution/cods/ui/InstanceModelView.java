@@ -3,9 +3,9 @@
  */
 package org.qualitune.evolution.cods.ui;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.qualitune.evolution.megamodel.architecture.ArchitecturePackage;
 
 /**
  * @author jreimann
@@ -14,34 +14,18 @@ import org.eclipse.emf.ecore.EObject;
 public class InstanceModelView extends AbstractModelView {
 
 	@Override
-	public List<? extends EObject> getContent2Display() {
-		return getMegaModel().getInstanceModels();
+	public EObject getObservableParent() {
+		return getMegaModel();
 	}
 
-//	@Override
-//	public EObject getObservableParent() {
-//		return getMegaModel();
-//	}
-//
-//	@Override
-//	public String getObservableParentToObservableFeatureName() {
-//		List<EOperation> operations = ArchitecturePackage.Literals.MEGA_MODEL.getEOperations();
-//		for (EOperation operation : operations) {
-//			if(operation.getName().equals("getInstanceModels")){
-//				return "instanceModels";
-//			}
-//		}
-//		return null;
-//	}
-//
-//	@Override
-//	public Class<?> getObservableEClass() {
-//		return InstanceModel.class;
-//	}
-//
-//	@Override
-//	public String getObservableDisplayFeatureName() {
-//		return ArchitecturePackage.Literals.INSTANCE_MODEL__MODEL.getName();
-//	}
+	@Override
+	public EReference getObservableParentToObservableFeature() {
+		return ArchitecturePackage.Literals.MEGA_MODEL__INSTANCE_MODELS;
+	}
+
+	@Override
+	public EReference getObservableDisplayFeature() {
+		return ArchitecturePackage.Literals.INSTANCE_MODEL__MODEL;
+	}
 
 }

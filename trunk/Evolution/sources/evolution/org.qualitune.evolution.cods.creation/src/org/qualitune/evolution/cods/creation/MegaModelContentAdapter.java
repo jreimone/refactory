@@ -41,8 +41,10 @@ public class MegaModelContentAdapter extends org.eclipse.emf.ecore.util.EContent
 		switch (eventType) {
 		case Notification.ADD:
 			Set<MegaModelChangeObserver> addObservers = observerMap.get(eventType);
-			for (MegaModelChangeObserver megaModelChangeObserver : addObservers) {
-				megaModelChangeObserver.megaModelChanged();
+			if(addObservers != null){
+				for (MegaModelChangeObserver megaModelChangeObserver : addObservers) {
+					megaModelChangeObserver.megaModelChanged();
+				}
 			}
 			break;
 

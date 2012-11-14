@@ -3,17 +3,21 @@
  */
 package org.qualitune.evolution.cods.ui;
 
-import java.util.List;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.core.databinding.observable.list.IObservableList;
+import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -24,54 +28,42 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
-import org.qualitune.evolution.cods.creation.MegaModelChangeObserver;
-import org.qualitune.evolution.cods.creation.MegaModelChangeSubject;
 import org.qualitune.evolution.megamodel.cods.CODS;
 
 /**
  * @author jreimann
  *
  */
-public class AbstractModelView extends ViewPart implements MegaModelChangeObserver {
+public class AbstractModelView extends ViewPart {
+	private DataBindingContext m_bindingContext;
+	
 	private CODS megaModel;
 	
 	public static final String ID = "org.qualitune.evolution.cods.ui.MegaModelView"; //$NON-NLS-1$
 	private final FormToolkit toolkit = new FormToolkit(Display.getCurrent());
 	private Table instanceModelTable;
 	private TableViewer instanceModelTableViewer;
-	private TableColumn tableColumnModelElement;
+	private TableColumn tableColumnLocation;
 	private Composite composite;
 	private ScrolledComposite scrolledComposite;
+	private TableColumn tableColumnMetamodel;
 	
-	private ModelContentProvider contentProvider;
-
 	public AbstractModelView() {
 		super();
-		CODS cods = getMegaModel();
-		List<Adapter> adapters = cods.eAdapters();
-		for (Adapter adapter : adapters) {
-			if(adapter instanceof MegaModelChangeSubject){
-				((MegaModelChangeSubject) adapter).registerObserver(this, Notification.ADD);
-				break;
-			}
-		}
+//		getMegaModel();
 	}
 
-//	public EObject getObservableParent(){
-//		return null;
-//	}
-//
-//	public String getObservableParentToObservableFeatureName(){
-//		return null;
-//	}
-//	
-//	public Class<?> getObservableEClass(){
-//		return null;
-//	}
-//	
-//	public String getObservableDisplayFeatureName(){
-//		return null;
-//	}
+	public EObject getObservableParent(){
+		return null;
+	}
+
+	public EReference getObservableParentToObservableFeature() {
+		return null;
+	}
+
+	public EReference getObservableDisplayFeature(){
+		return null;
+	}
 	
 	
 	/**
@@ -100,18 +92,20 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 		instanceModelTable.setHeaderVisible(true);
 		toolkit.paintBordersFor(instanceModelTable);
 		
-		tableColumnModelElement = new TableColumn(instanceModelTable, SWT.NONE);
-		tableColumnModelElement.setWidth(600);
-		tableColumnModelElement.setText("Location");
-		contentProvider = new ModelContentProvider();
-		instanceModelTableViewer.setContentProvider(contentProvider);
-		contentProvider.setInputModel(getContent2Display());
-		instanceModelTableViewer.setInput(getContent2Display());
-		instanceModelTableViewer.setLabelProvider(new ObservableModelLabelProvider());
+		tableColumnLocation = new TableColumn(instanceModelTable, SWT.NONE);
+		tableColumnLocation.setWidth(500);
+		tableColumnLocation.setText("Location");
+		
+		tableColumnMetamodel = new TableColumn(instanceModelTable, SWT.NONE);
+		tableColumnMetamodel.setWidth(300);
+		tableColumnMetamodel.setText("Metamodel");
+//		instanceModelTableViewer.setLabelProvider(new ObservableModelLabelProvider());
 
 		createActions();
 		initializeToolBar();
 		initializeMenu();
+		
+		m_bindingContext = initDataBindings();
 	}
 
 	public void dispose() {
@@ -155,19 +149,32 @@ public class AbstractModelView extends ViewPart implements MegaModelChangeObserv
 		return megaModel;
 	}
 	
-	public List<? extends EObject> getContent2Display(){
-		return null;
+	protected DataBindingContext initDataBindings() {
+		DataBindingContext bindingContext = new DataBindingContext();
+		//
+		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
+		IObservableMap[] observeMaps = EMFObservables.observeMaps(listContentProvider.getKnownElements(), new EStructuralFeature[]{getObservableDisplayFeature()});
+		instanceModelTableViewer.setLabelProvider(new ObservableModelMapLabelProvider(observeMaps));
+		instanceModelTableViewer.setContentProvider(listContentProvider);
+		//
+		IObservableList megaModelInstanceModelsObserveList = EMFObservables.observeList(Realm.getDefault(), getObservableParent(), getObservableParentToObservableFeature());
+		instanceModelTableViewer.setInput(megaModelInstanceModelsObserveList);
+		//
+		return bindingContext;
 	}
-
-	@Override
-	public void megaModelChanged() {
-		Display.getDefault().asyncExec(new Runnable() {
-            @Override
-            public void run() {
-            	contentProvider.setInputModel(getContent2Display());
-            	instanceModelTableViewer.setInput(getContent2Display());
-            	instanceModelTableViewer.refresh(true);
-            }
-        });
-	}
+	
+	// TODO comment out when intended to open in Window Builder
+//	protected DataBindingContext initDataBindings() {
+//		DataBindingContext bindingContext = new DataBindingContext();
+//		//
+//		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
+//		IObservableMap[] observeMaps = EMFObservables.observeMaps(listContentProvider.getKnownElements(), new EStructuralFeature[]{ArchitecturePackage.Literals.INSTANCE_MODEL__MODEL});
+//		instanceModelTableViewer.setLabelProvider(new ObservableModelMapLabelProvider(observeMaps));
+//		instanceModelTableViewer.setContentProvider(listContentProvider);
+//		//
+//		IObservableList megaModelInstanceModelsObserveList = EMFObservables.observeList(Realm.getDefault(), megaModel, ArchitecturePackage.Literals.MEGA_MODEL__INSTANCE_MODELS);
+//		instanceModelTableViewer.setInput(megaModelInstanceModelsObserveList);
+//		//
+//		return bindingContext;
+//	}
 }
