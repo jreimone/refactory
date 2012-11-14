@@ -89,6 +89,60 @@ public interface CodsPackage extends EPackage {
 	int CODS__MODELS = ArchitecturePackage.MEGA_MODEL__MODELS;
 
 	/**
+	 * The feature id for the '<em><b>Instance Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODS__INSTANCE_MODELS = ArchitecturePackage.MEGA_MODEL__INSTANCE_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Reference Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODS__REFERENCE_MODELS = ArchitecturePackage.MEGA_MODEL__REFERENCE_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Terminal Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODS__TERMINAL_MODELS = ArchitecturePackage.MEGA_MODEL__TERMINAL_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Meta Meta Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODS__META_META_MODEL = ArchitecturePackage.MEGA_MODEL__META_META_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Meta Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODS__META_MODELS = ArchitecturePackage.MEGA_MODEL__META_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Transformation Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODS__TRANSFORMATION_MODELS = ArchitecturePackage.MEGA_MODEL__TRANSFORMATION_MODELS;
+
+	/**
 	 * The feature id for the '<em><b>DSES</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

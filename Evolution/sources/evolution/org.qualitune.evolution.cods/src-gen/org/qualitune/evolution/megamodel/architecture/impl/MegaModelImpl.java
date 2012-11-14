@@ -9,19 +9,18 @@ package org.qualitune.evolution.megamodel.architecture.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
-
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.qualitune.evolution.megamodel.architecture.ArchitecturePackage;
 import org.qualitune.evolution.megamodel.architecture.InstanceModel;
 import org.qualitune.evolution.megamodel.architecture.MegaModel;
@@ -40,6 +39,12 @@ import org.qualitune.evolution.megamodel.architecture.TransformationModel;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.qualitune.evolution.megamodel.architecture.impl.MegaModelImpl#getModels <em>Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.impl.MegaModelImpl#getInstanceModels <em>Instance Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.impl.MegaModelImpl#getReferenceModels <em>Reference Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.impl.MegaModelImpl#getTerminalModels <em>Terminal Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.impl.MegaModelImpl#getMetaMetaModel <em>Meta Meta Model</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.impl.MegaModelImpl#getMetaModels <em>Meta Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.impl.MegaModelImpl#getTransformationModels <em>Transformation Models</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,6 +60,66 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	 * @ordered
 	 */
 	protected EList<Model> models;
+
+	/**
+	 * The cached value of the '{@link #getInstanceModels() <em>Instance Models</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstanceModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<InstanceModel> instanceModels;
+
+	/**
+	 * The cached value of the '{@link #getReferenceModels() <em>Reference Models</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferenceModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ReferenceModel> referenceModels;
+
+	/**
+	 * The cached value of the '{@link #getTerminalModels() <em>Terminal Models</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTerminalModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TerminalModel> terminalModels;
+
+	/**
+	 * The cached value of the '{@link #getMetaMetaModel() <em>Meta Meta Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaMetaModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected MetaMetaModel metaMetaModel;
+
+	/**
+	 * The cached value of the '{@link #getMetaModels() <em>Meta Models</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MetaModel> metaModels;
+
+	/**
+	 * The cached value of the '{@link #getTransformationModels() <em>Transformation Models</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTransformationModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TransformationModel> transformationModels;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,15 +155,23 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
+	 */
+	public EList<InstanceModel> getInstanceModels() {
+		if (instanceModels == null) {
+			instanceModels = new EObjectResolvingEList<InstanceModel>(InstanceModel.class, this, ArchitecturePackage.MEGA_MODEL__INSTANCE_MODELS);
+		}
+		return instanceModels;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	public EList<ReferenceModel> getReferenceModels() {
-		EList<ReferenceModel> referenceModels = new BasicEList<ReferenceModel>();
-		List<Model> models = getModels();
-		for (Model model : models) {
-			if(model instanceof ReferenceModel){
-				referenceModels.add((ReferenceModel) model);
-			}
+		if (referenceModels == null) {
+			referenceModels = new EObjectResolvingEList<ReferenceModel>(ReferenceModel.class, this, ArchitecturePackage.MEGA_MODEL__REFERENCE_MODELS);
 		}
 		return referenceModels;
 	}
@@ -106,15 +179,11 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public EList<TerminalModel> getTerminalModels() {
-		EList<TerminalModel> terminalModels = new BasicEList<TerminalModel>();
-		List<Model> models = getModels();
-		for (Model model : models) {
-			if(model instanceof TerminalModel){
-				terminalModels.add((TerminalModel) model);
-			}
+		if (terminalModels == null) {
+			terminalModels = new EObjectResolvingEList<TerminalModel>(TerminalModel.class, this, ArchitecturePackage.MEGA_MODEL__TERMINAL_MODELS);
 		}
 		return terminalModels;
 	}
@@ -155,29 +224,49 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public MetaMetaModel getMetaMetaModel() {
-		List<ReferenceModel> referenceModels = getReferenceModels();
-		for (ReferenceModel referenceModel : referenceModels) {
-			if(referenceModel instanceof MetaMetaModel){
-				return (MetaMetaModel) referenceModel; 
+		if (metaMetaModel != null && metaMetaModel.eIsProxy()) {
+			InternalEObject oldMetaMetaModel = (InternalEObject)metaMetaModel;
+			metaMetaModel = (MetaMetaModel)eResolveProxy(oldMetaMetaModel);
+			if (metaMetaModel != oldMetaMetaModel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArchitecturePackage.MEGA_MODEL__META_META_MODEL, oldMetaMetaModel, metaMetaModel));
 			}
 		}
-		return null;
+		return metaMetaModel;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
+	 */
+	public MetaMetaModel basicGetMetaMetaModel() {
+		return metaMetaModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMetaMetaModel(MetaMetaModel newMetaMetaModel) {
+		MetaMetaModel oldMetaMetaModel = metaMetaModel;
+		metaMetaModel = newMetaMetaModel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ArchitecturePackage.MEGA_MODEL__META_META_MODEL, oldMetaMetaModel, metaMetaModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	public EList<MetaModel> getMetaModels() {
-		EList<MetaModel> metaModels = new BasicEList<MetaModel>();
-		EList<ReferenceModel> referenceModels = new BasicEList<ReferenceModel>(getReferenceModels());
-		referenceModels.remove(getMetaMetaModel());
-		for (ReferenceModel referenceModel : referenceModels) {
-			metaModels.add((MetaModel) referenceModel);
+		if (metaModels == null) {
+			metaModels = new EObjectResolvingEList<MetaModel>(MetaModel.class, this, ArchitecturePackage.MEGA_MODEL__META_MODELS);
 		}
 		return metaModels;
 	}
@@ -185,31 +274,13 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public EList<TransformationModel> getTransformationModels() {
-		EList<TransformationModel> transformationModels = new BasicEList<TransformationModel>();
-		for (TerminalModel terminalModel : getTerminalModels()) {
-			if(terminalModel instanceof TransformationModel){
-				transformationModels.add((TransformationModel) terminalModel);
-			}
+		if (transformationModels == null) {
+			transformationModels = new EObjectResolvingEList<TransformationModel>(TransformationModel.class, this, ArchitecturePackage.MEGA_MODEL__TRANSFORMATION_MODELS);
 		}
 		return transformationModels;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList<InstanceModel> getInstanceModels() {
-		EList<InstanceModel> instanceModels = new BasicEList<InstanceModel>();
-		EList<TerminalModel> terminalModels = new BasicEList<TerminalModel>(getTerminalModels());
-		terminalModels.removeAll(getTransformationModels());
-		for (TerminalModel terminalModel : terminalModels) {
-			instanceModels.add((InstanceModel) terminalModel);
-		}
-		return instanceModels;
 	}
 
 	/**
@@ -236,6 +307,19 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 		switch (featureID) {
 			case ArchitecturePackage.MEGA_MODEL__MODELS:
 				return getModels();
+			case ArchitecturePackage.MEGA_MODEL__INSTANCE_MODELS:
+				return getInstanceModels();
+			case ArchitecturePackage.MEGA_MODEL__REFERENCE_MODELS:
+				return getReferenceModels();
+			case ArchitecturePackage.MEGA_MODEL__TERMINAL_MODELS:
+				return getTerminalModels();
+			case ArchitecturePackage.MEGA_MODEL__META_META_MODEL:
+				if (resolve) return getMetaMetaModel();
+				return basicGetMetaMetaModel();
+			case ArchitecturePackage.MEGA_MODEL__META_MODELS:
+				return getMetaModels();
+			case ArchitecturePackage.MEGA_MODEL__TRANSFORMATION_MODELS:
+				return getTransformationModels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -253,6 +337,29 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 				getModels().clear();
 				getModels().addAll((Collection<? extends Model>)newValue);
 				return;
+			case ArchitecturePackage.MEGA_MODEL__INSTANCE_MODELS:
+				getInstanceModels().clear();
+				getInstanceModels().addAll((Collection<? extends InstanceModel>)newValue);
+				return;
+			case ArchitecturePackage.MEGA_MODEL__REFERENCE_MODELS:
+				getReferenceModels().clear();
+				getReferenceModels().addAll((Collection<? extends ReferenceModel>)newValue);
+				return;
+			case ArchitecturePackage.MEGA_MODEL__TERMINAL_MODELS:
+				getTerminalModels().clear();
+				getTerminalModels().addAll((Collection<? extends TerminalModel>)newValue);
+				return;
+			case ArchitecturePackage.MEGA_MODEL__META_META_MODEL:
+				setMetaMetaModel((MetaMetaModel)newValue);
+				return;
+			case ArchitecturePackage.MEGA_MODEL__META_MODELS:
+				getMetaModels().clear();
+				getMetaModels().addAll((Collection<? extends MetaModel>)newValue);
+				return;
+			case ArchitecturePackage.MEGA_MODEL__TRANSFORMATION_MODELS:
+				getTransformationModels().clear();
+				getTransformationModels().addAll((Collection<? extends TransformationModel>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -268,6 +375,24 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 			case ArchitecturePackage.MEGA_MODEL__MODELS:
 				getModels().clear();
 				return;
+			case ArchitecturePackage.MEGA_MODEL__INSTANCE_MODELS:
+				getInstanceModels().clear();
+				return;
+			case ArchitecturePackage.MEGA_MODEL__REFERENCE_MODELS:
+				getReferenceModels().clear();
+				return;
+			case ArchitecturePackage.MEGA_MODEL__TERMINAL_MODELS:
+				getTerminalModels().clear();
+				return;
+			case ArchitecturePackage.MEGA_MODEL__META_META_MODEL:
+				setMetaMetaModel((MetaMetaModel)null);
+				return;
+			case ArchitecturePackage.MEGA_MODEL__META_MODELS:
+				getMetaModels().clear();
+				return;
+			case ArchitecturePackage.MEGA_MODEL__TRANSFORMATION_MODELS:
+				getTransformationModels().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -282,8 +407,95 @@ public abstract class MegaModelImpl extends TerminalModelImpl implements MegaMod
 		switch (featureID) {
 			case ArchitecturePackage.MEGA_MODEL__MODELS:
 				return models != null && !models.isEmpty();
+			case ArchitecturePackage.MEGA_MODEL__INSTANCE_MODELS:
+				return instanceModels != null && !instanceModels.isEmpty();
+			case ArchitecturePackage.MEGA_MODEL__REFERENCE_MODELS:
+				return referenceModels != null && !referenceModels.isEmpty();
+			case ArchitecturePackage.MEGA_MODEL__TERMINAL_MODELS:
+				return terminalModels != null && !terminalModels.isEmpty();
+			case ArchitecturePackage.MEGA_MODEL__META_META_MODEL:
+				return metaMetaModel != null;
+			case ArchitecturePackage.MEGA_MODEL__META_MODELS:
+				return metaModels != null && !metaModels.isEmpty();
+			case ArchitecturePackage.MEGA_MODEL__TRANSFORMATION_MODELS:
+				return transformationModels != null && !transformationModels.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * This is used to get notified of modified dependent features for updating the derived features.
+	 */
+	@Override
+	public void eNotify(Notification notification) {
+		super.eNotify(notification);
+		if(ArchitecturePackage.Literals.MEGA_MODEL__MODELS.equals(notification.getFeature())){
+			int eventType = notification.getEventType();
+			switch (eventType) {
+			case Notification.ADD:
+				EObject newValue = (EObject) notification.getNewValue();
+				if(newValue instanceof InstanceModel){
+					if(!getInstanceModels().contains(newValue)){
+						getInstanceModels().add((InstanceModel) newValue);
+					}
+				} else if(newValue instanceof TransformationModel){
+					if(!getTransformationModels().contains(newValue)){
+						getTransformationModels().add((TransformationModel) newValue);
+					}
+				} else if(newValue instanceof MetaModel){
+					if(!getMetaModels().contains(newValue)){
+						getMetaModels().add((MetaModel) newValue);
+					}
+				} else if(newValue instanceof MetaMetaModel){
+					if(!getMetaMetaModel().equals(newValue)){
+						setMetaMetaModel((MetaMetaModel) newValue);
+					}
+				}
+				if(newValue instanceof TerminalModel){
+					if(!getTerminalModels().contains(newValue)){
+						getTerminalModels().add((TerminalModel) newValue);
+					}
+				}
+				if(newValue instanceof ReferenceModel){
+					if(!getReferenceModels().contains(newValue)){
+						getReferenceModels().add((ReferenceModel) newValue);
+					}
+				}
+				break;
+			case Notification.REMOVE:
+				EObject oldValue = (EObject) notification.getOldValue();
+				if(oldValue instanceof InstanceModel){
+					if(getInstanceModels().contains(oldValue)){
+						getInstanceModels().remove((InstanceModel) oldValue);
+					}
+				} else if(oldValue instanceof TransformationModel){
+					if(getTransformationModels().contains(oldValue)){
+						getTransformationModels().remove((TransformationModel) oldValue);
+					}
+				} else if(oldValue instanceof MetaModel){
+					if(getMetaModels().contains(oldValue)){
+						getMetaModels().remove((MetaModel) oldValue);
+					}
+				} else if(oldValue instanceof MetaMetaModel){
+					if(getMetaMetaModel().equals(oldValue)){
+						setMetaMetaModel(null);
+					}
+				}
+				if(oldValue instanceof TerminalModel){
+					if(getTerminalModels().contains(oldValue)){
+						getTerminalModels().remove((TerminalModel) oldValue);
+					}
+				}
+				if(oldValue instanceof ReferenceModel){
+					if(getReferenceModels().contains(oldValue)){
+						getReferenceModels().remove((ReferenceModel) oldValue);
+					}
+				}
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 } //MegaModelImpl

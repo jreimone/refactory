@@ -36,20 +36,26 @@
           eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MegaModel" abstract="true" eSuperTypes="#//architecture/TerminalModel">
-      <eOperations name="getReferenceModels" upperBound="-1" eType="#//architecture/ReferenceModel"/>
-      <eOperations name="getTerminalModels" upperBound="-1" eType="#//architecture/TerminalModel"/>
       <eOperations name="getReferenceModelByEPackage" eType="#//architecture/ReferenceModel">
         <eParameters name="epackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
       </eOperations>
       <eOperations name="getTerminalModelByEObject" eType="#//architecture/TerminalModel">
         <eParameters name="model" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
       </eOperations>
-      <eOperations name="getMetaMetaModel" eType="#//architecture/MetaMetaModel"/>
-      <eOperations name="getMetaModels" upperBound="-1" eType="#//architecture/MetaModel"/>
-      <eOperations name="getTransformationModels" upperBound="-1" eType="#//architecture/TransformationModel"/>
-      <eOperations name="getInstanceModels" upperBound="-1" eType="#//architecture/InstanceModel"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
           eType="#//architecture/Model" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instanceModels" upperBound="-1"
+          eType="#//architecture/InstanceModel" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referenceModels" upperBound="-1"
+          eType="#//architecture/ReferenceModel" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="terminalModels" upperBound="-1"
+          eType="#//architecture/TerminalModel" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metaMetaModel" eType="#//architecture/MetaMetaModel"
+          derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metaModels" upperBound="-1"
+          eType="#//architecture/MetaModel" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transformationModels"
+          upperBound="-1" eType="#//architecture/TransformationModel" derived="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MetaMetaModel" eSuperTypes="#//architecture/ReferenceModel"/>
     <eClassifiers xsi:type="ecore:EClass" name="MetaModel" eSuperTypes="#//architecture/ReferenceModel"/>

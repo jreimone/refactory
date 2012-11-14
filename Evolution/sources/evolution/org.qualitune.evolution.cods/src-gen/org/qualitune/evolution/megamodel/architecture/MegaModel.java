@@ -19,6 +19,12 @@ import org.eclipse.emf.ecore.EPackage;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getModels <em>Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getInstanceModels <em>Instance Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getReferenceModels <em>Reference Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getTerminalModels <em>Terminal Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getMetaMetaModel <em>Meta Meta Model</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getMetaModels <em>Meta Models</em>}</li>
+ *   <li>{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getTransformationModels <em>Transformation Models</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,17 +50,41 @@ public interface MegaModel extends TerminalModel {
 	EList<Model> getModels();
 
 	/**
+	 * Returns the value of the '<em><b>Instance Models</b></em>' reference list.
+	 * The list contents are of type {@link org.qualitune.evolution.megamodel.architecture.InstanceModel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Instance Models</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Instance Models</em>' reference list.
+	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_InstanceModels()
+	 * @model derived="true"
+	 * @generated
+	 */
+	EList<InstanceModel> getInstanceModels();
+
+	/**
+	 * Returns the value of the '<em><b>Reference Models</b></em>' reference list.
+	 * The list contents are of type {@link org.qualitune.evolution.megamodel.architecture.ReferenceModel}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>Reference Models</em>' reference list.
+	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_ReferenceModels()
+	 * @model derived="true"
 	 * @generated
 	 */
 	EList<ReferenceModel> getReferenceModels();
 
 	/**
+	 * Returns the value of the '<em><b>Terminal Models</b></em>' reference list.
+	 * The list contents are of type {@link org.qualitune.evolution.megamodel.architecture.TerminalModel}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>Terminal Models</em>' reference list.
+	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_TerminalModels()
+	 * @model derived="true"
 	 * @generated
 	 */
 	EList<TerminalModel> getTerminalModels();
@@ -76,35 +106,49 @@ public interface MegaModel extends TerminalModel {
 	TerminalModel getTerminalModelByEObject(EObject model);
 
 	/**
+	 * Returns the value of the '<em><b>Meta Meta Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>Meta Meta Model</em>' reference.
+	 * @see #setMetaMetaModel(MetaMetaModel)
+	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_MetaMetaModel()
+	 * @model derived="true"
 	 * @generated
 	 */
 	MetaMetaModel getMetaMetaModel();
 
 	/**
+	 * Sets the value of the '{@link org.qualitune.evolution.megamodel.architecture.MegaModel#getMetaMetaModel <em>Meta Meta Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @param value the new value of the '<em>Meta Meta Model</em>' reference.
+	 * @see #getMetaMetaModel()
+	 * @generated
+	 */
+	void setMetaMetaModel(MetaMetaModel value);
+
+	/**
+	 * Returns the value of the '<em><b>Meta Models</b></em>' reference list.
+	 * The list contents are of type {@link org.qualitune.evolution.megamodel.architecture.MetaModel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Meta Models</em>' reference list.
+	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_MetaModels()
+	 * @model derived="true"
 	 * @generated
 	 */
 	EList<MetaModel> getMetaModels();
 
 	/**
+	 * Returns the value of the '<em><b>Transformation Models</b></em>' reference list.
+	 * The list contents are of type {@link org.qualitune.evolution.megamodel.architecture.TransformationModel}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>Transformation Models</em>' reference list.
+	 * @see org.qualitune.evolution.megamodel.architecture.ArchitecturePackage#getMegaModel_TransformationModels()
+	 * @model derived="true"
 	 * @generated
 	 */
 	EList<TransformationModel> getTransformationModels();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	EList<InstanceModel> getInstanceModels();
 
 } // MegaModel
