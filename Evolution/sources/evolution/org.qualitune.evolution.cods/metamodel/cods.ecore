@@ -45,17 +45,18 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
           eType="#//architecture/Model" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="instanceModels" upperBound="-1"
-          eType="#//architecture/InstanceModel" derived="true"/>
+          eType="#//architecture/InstanceModel" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="referenceModels" upperBound="-1"
-          eType="#//architecture/ReferenceModel" derived="true"/>
+          eType="#//architecture/ReferenceModel" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="terminalModels" upperBound="-1"
-          eType="#//architecture/TerminalModel" derived="true"/>
+          eType="#//architecture/TerminalModel" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="metaMetaModel" eType="#//architecture/MetaMetaModel"
-          derived="true"/>
+          transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="metaModels" upperBound="-1"
-          eType="#//architecture/MetaModel" derived="true"/>
+          eType="#//architecture/MetaModel" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="transformationModels"
-          upperBound="-1" eType="#//architecture/TransformationModel" derived="true"/>
+          upperBound="-1" eType="#//architecture/TransformationModel" transient="true"
+          derived="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MetaMetaModel" eSuperTypes="#//architecture/ReferenceModel"/>
     <eClassifiers xsi:type="ecore:EClass" name="MetaModel" eSuperTypes="#//architecture/ReferenceModel"/>

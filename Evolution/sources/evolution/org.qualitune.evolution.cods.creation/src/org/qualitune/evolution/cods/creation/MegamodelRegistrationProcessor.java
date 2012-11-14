@@ -9,7 +9,6 @@ import java.util.Collections;
 import javax.inject.Inject;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IPathVariableManager;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
@@ -26,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -111,7 +109,7 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 				cods = (CODS) resource.getContents().get(0);
 			}
 		}
-		cods.eAdapters().add(new MegaModelContentAdapter());
+//		cods.eAdapters().add(new MegaModelContentAdapter());
 		return cods;
 	}
 
@@ -141,7 +139,7 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 		megaModel.setConformsTo(codsMetaModel);
 		megaModel.getModels().add(codsMetaModel);
 		IWorkspaceRoot root = workspace.getRoot();
-		final IPathVariableManager pathVariableManager = workspace.getPathVariableManager();
+//		final IPathVariableManager pathVariableManager = workspace.getPathVariableManager();
 		try {
 			IProject[] projects = root.getProjects();
 			for (IProject project : projects) {
@@ -151,10 +149,10 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 						public boolean visit(IResource resource) throws CoreException {
 							IFile file = (IFile) resource.getAdapter(IFile.class);
 							if(file != null){
-								java.net.URI locationURI = file.getLocationURI();
-								IPath rawLocation = file.getRawLocation();
-								java.net.URI rawLocationURI = file.getRawLocationURI();
-								java.net.URI uri = pathVariableManager.resolveURI(locationURI);
+//								java.net.URI locationURI = file.getLocationURI();
+//								IPath rawLocation = file.getRawLocation();
+//								java.net.URI rawLocationURI = file.getRawLocationURI();
+//								java.net.URI uri = pathVariableManager.resolveURI(locationURI);
 								registerModelInFile(megaModel, file);
 							}
 							return true;
