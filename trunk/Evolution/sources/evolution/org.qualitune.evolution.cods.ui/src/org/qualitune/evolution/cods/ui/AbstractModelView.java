@@ -28,13 +28,30 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
+import org.qualitune.evolution.megamodel.architecture.ArchitecturePackage;
+import org.qualitune.evolution.megamodel.architecture.InstanceModel;
+import org.qualitune.evolution.megamodel.architecture.TransformationModel;
 import org.qualitune.evolution.megamodel.cods.CODS;
+import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.Viewer;
 
 /**
  * @author jreimann
  *
  */
 public class AbstractModelView extends ViewPart {
+	private static class Sorter extends ViewerSorter {
+		public int compare(Viewer viewer, Object e1, Object e2) {
+			Object item1 = e1;
+			Object item2 = e2;
+			if(item1 instanceof InstanceModel && item2 instanceof InstanceModel){
+				String string1 = ((InstanceModel) item1).getModel().eResource().getURI().toString();
+				String string2 = ((InstanceModel) item2).getModel().eResource().getURI().toString();
+				return string1.compareTo(string2);
+			}
+			return 0;
+		}
+	}
 	private DataBindingContext m_bindingContext;
 	
 	private CODS megaModel;
@@ -87,19 +104,22 @@ public class AbstractModelView extends ViewPart {
 		composite.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		instanceModelTableViewer = new TableViewer(composite, SWT.BORDER | SWT.FULL_SELECTION);
+		instanceModelTableViewer.setSorter(new Sorter());
 		instanceModelTable = instanceModelTableViewer.getTable();
 		instanceModelTable.setLinesVisible(true);
 		instanceModelTable.setHeaderVisible(true);
 		toolkit.paintBordersFor(instanceModelTable);
 		
+		
 		tableColumnLocation = new TableColumn(instanceModelTable, SWT.NONE);
 		tableColumnLocation.setWidth(500);
 		tableColumnLocation.setText("Location");
+		new TableSortSelectionListener(instanceModelTableViewer, tableColumnLocation, new MegamodelSorter(), SWT.DOWN, true).chooseColumnForSorting();
 		
 		tableColumnMetamodel = new TableColumn(instanceModelTable, SWT.NONE);
 		tableColumnMetamodel.setWidth(300);
 		tableColumnMetamodel.setText("Metamodel");
-//		instanceModelTableViewer.setLabelProvider(new ObservableModelLabelProvider());
+		new TableSortSelectionListener(instanceModelTableViewer, tableColumnMetamodel, new MegamodelSorter(), SWT.DOWN, true);
 
 		createActions();
 		initializeToolBar();
