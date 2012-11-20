@@ -357,18 +357,18 @@
     </bodies>
   </patterns>
   <importPackages>
-    <ePackage href="http://www.emftext.org/java/references#/"/>
-  </importPackages>
-  <importPackages>
-    <ePackage href="http://www.emftext.org/java/statements#/"/>
+    <ePackage href="http://www.emftext.org/java/members#/"/>
   </importPackages>
   <importPackages>
     <ePackage href="http://www.emftext.org/java/classifiers#/"/>
   </importPackages>
   <importPackages>
+    <ePackage href="http://www.emftext.org/java/references#/"/>
+  </importPackages>
+  <importPackages>
     <ePackage href="http://www.emftext.org/java/types#/"/>
   </importPackages>
   <importPackages>
-    <ePackage href="http://www.emftext.org/java/members#/"/>
+    <ePackage href="http://www.emftext.org/java/statements#/"/>
   </importPackages>
 </eMFPatternLanguage:PatternModel>

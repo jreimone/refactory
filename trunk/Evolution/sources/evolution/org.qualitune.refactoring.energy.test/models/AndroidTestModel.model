@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:members="http://www.emftext.org/java/members" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements">
+  <classifiers:Class name="GPSComponent">
+    <members xsi:type="members:ClassMethod" name="requestLocationUpdates"/>
+  </classifiers:Class>
+  <classifiers:Class name="MyActivity">
+    <members xsi:type="members:ClassMethod" name="onCreate">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="/0/@members.0"/>
+      </statements>
+    </members>
+  </classifiers:Class>
+  <classifiers:Class name="FrameworkMainClass"/>
+</xmi:XMI>
