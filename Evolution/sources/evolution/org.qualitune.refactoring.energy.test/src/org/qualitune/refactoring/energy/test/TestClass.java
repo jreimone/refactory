@@ -1,14 +1,7 @@
 package org.qualitune.refactoring.energy.test;
 import java.io.File;
 
-/**
- * 
- */
 
-/**
- * @author jreimann
- *
- */
 public class TestClass extends File{
 
 	private static final long serialVersionUID = 6805008686507481048L;
