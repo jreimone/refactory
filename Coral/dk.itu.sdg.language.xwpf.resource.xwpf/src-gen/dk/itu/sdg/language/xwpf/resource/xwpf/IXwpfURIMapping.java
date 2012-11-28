@@ -1,0 +1,37 @@
+/**
+ * Copyright 2012 
+ * Rolf-Helge Pfeiffer (IT University Copenhagen)
+ * Jan Reimann (TU Dresden, Software Technology Group)
+ * Mirko Seifert (DevBoost GmbH)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package dk.itu.sdg.language.xwpf.resource.xwpf;
+
+/**
+ * Implementors of this interface map identifiers to URIs. This is sometimes
+ * necessary when resolving references depends on the resolution of others.
+ * 
+ * @param <ReferenceType> unused type parameter which is needed to implement
+ * dk.itu.sdg.language.xwpf.resource.xwpf.IXwpfReferenceMapping.
+ */
+public interface IXwpfURIMapping<ReferenceType> extends dk.itu.sdg.language.xwpf.resource.xwpf.IXwpfReferenceMapping<ReferenceType> {
+	
+	/**
+	 * Returns an alternative proxy URI that should follow EMF's default naming scheme
+	 * such that it can be resolved by the default resolution mechanism that will be
+	 * called on this URI (see <code>Resource.getEObject()</code>).
+	 */
+	public org.eclipse.emf.common.util.URI getTargetIdentifier();
+	
+}
