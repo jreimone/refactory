@@ -84,6 +84,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		}
 		ISelection selection = selectionProvider.getSelection();
 		List<EObject> selectedElements = new LinkedList<EObject>();
+		if(selection == null){
+			return;
+		}
 		if (selection instanceof StructuredSelection) {
 			List<?> temp = ((StructuredSelection) selection).toList();
 			for (Object object : temp) {
@@ -99,7 +102,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		IEditorConnector editorConnector = null;
 		if (selectedElements == null || selectedElements.size() == 0) {
 			activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//			if(activeEditor.equals(activePart)){
 			if(activeEditor != null && activeEditor.equals(activePart)){
 				editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
 				if(editorConnector != null){
