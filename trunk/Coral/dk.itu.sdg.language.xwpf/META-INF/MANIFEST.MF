@@ -3,29 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: dk.itu.sdg.language.xwpf;singleton:=true
 Bundle-Version: 1.0.0.alpha
-Bundle-ClassPath: .,
- lib/poi-3.8-20120326.jar,
- lib/poi-excelant-3.8-20120326.jar,
- lib/poi-ooxml-3.8-20120326.jar,
- lib/poi-ooxml-schemas-3.8-20120326.jar,
- lib/poi-scratchpad-3.8-20120326.jar,
- lib/xbean.jar,
- lib/dom4j-1.6.1.jar,
- lib/jsr173_1.0_api.jar
+Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: dk.itu.sdg.language.xwpf,
  dk.itu.sdg.language.xwpf.impl,
  dk.itu.sdg.language.xwpf.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- org.codehaus.groovy;bundle-version="1.8.6",
- org.eclipse.emf.ecore.xmi,
- org.eclipse.core.commands,
- org.eclipse.jface,
- org.eclipse.ui,
- org.eclipse.core.resources,
+Require-Bundle: org.eclipse.emf.ecore.xmi,
  org.devboost.stanford.language
 Bundle-ActivationPolicy: lazy
-Import-Package: dk.itu.sdg.language.xwpf.resource.xwpf.mopp
