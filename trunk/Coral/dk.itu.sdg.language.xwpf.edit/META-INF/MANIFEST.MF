@@ -12,5 +12,5 @@ Export-Package: dk.itu.sdg.language.xwpf.provider
 Require-Bundle: org.eclipse.core.runtime,
  dk.itu.sdg.language.xwpf;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,
- org.devboost.stanford.language.edit;bundle-version="1.0.0"
+ org.devboost.stanford.language.edit
 Bundle-ActivationPolicy: lazy

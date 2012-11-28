@@ -2,11 +2,13 @@ SYNTAXDEF xwpf
 FOR <http://www.itu.dk/sdg/language/xwpf>
 START Content,Document
 
-
 IMPORTS {
 	org.devboost.stanford.language:<http://www.devboost.org/stanford/language>
 }
 
+OPTIONS {
+	licenceHeader = "platform:/resource/dk.itu.sdg.language.xwpf/metamodel/licenseComment.txt";
+}
 
 TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
