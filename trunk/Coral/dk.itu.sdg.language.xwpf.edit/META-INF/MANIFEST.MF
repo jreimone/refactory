@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: dk.itu.sdg.language.xwpf.provider.xwpfEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: dk.itu.sdg.language.xwpf.provider
 Require-Bundle: org.eclipse.core.runtime,
  dk.itu.sdg.language.xwpf;visibility:=reexport,
