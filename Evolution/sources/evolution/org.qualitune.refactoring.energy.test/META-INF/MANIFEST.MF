@@ -3,7 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.qualitune.refactoring.energy.test
 Bundle-SymbolicName: org.qualitune.refactoring.energy.test;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Export-Package: earlybinding,
+Bundle-ClassPath: libs/apache/httpclient-4.2.2.jar,
+ .,
+ libs/apache/httpmime-4.2.2.jar
+Export-Package: datatransmissionwithoutcompression,
+ earlybinding,
  earlybinding3
 Require-Bundle: org.eclipse.pde.core,
  org.eclipse.emf.ecore,

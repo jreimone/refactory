@@ -2,11 +2,11 @@ package org.qualitune.refactoring.energy.test;
 import java.io.File;
 
 
-public class TestClass extends File{
+public class EarlyResourceBinding extends File{
 
 	private static final long serialVersionUID = 6805008686507481048L;
 
-	public TestClass(File parent, String child) {
+	public EarlyResourceBinding(File parent, String child) {
 		super(parent, child);
 	}
 

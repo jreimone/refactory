@@ -17,5 +17,29 @@
             id="earlyBinding3">
       </matcher>
    </extension>
+   <extension
+         id="earlyBinding"
+         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
+      <matcher
+            factoryProvider="earlybinding.EarlyBindingMatcherFactory$Provider"
+            id="earlyBinding">
+      </matcher>
+   </extension>
+   <extension
+         id="earlyBinding3"
+         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
+      <matcher
+            factoryProvider="earlybinding3.EarlyBinding3MatcherFactory$Provider"
+            id="earlyBinding3">
+      </matcher>
+   </extension>
+   <extension
+         id="dataTransmissionWithoutCompression"
+         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
+      <matcher
+            factoryProvider="datatransmissionwithoutcompression.DataTransmissionWithoutCompressionMatcherFactory$Provider"
+            id="dataTransmissionWithoutCompression">
+      </matcher>
+   </extension>
 
 </plugin>
