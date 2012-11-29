@@ -1,5 +1,159 @@
 <?xml version="1.0" encoding="ASCII"?>
 <eMFPatternLanguage:PatternModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eMFPatternLanguage="http://www.eclipse.org/viatra2/patternlanguage/EMFPatternLanguage" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:patternLanguage="http://www.eclipse.org/viatra2/patternlanguage/core/PatternLanguage">
+  <patterns name="dataTransmissionWithoutCompression" fileName="platform:/resource/org.qualitune.refactoring.energy.test/queries/dataTransmissionWithoutCompression.eiq">
+    <parameters name="fileBodyConstructor">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/instantiations#//NewConstructorCall"/>
+      </type>
+    </parameters>
+    <parameters name="fileArgumentConstructor">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/instantiations#//NewConstructorCall"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/instantiations#//NewConstructorCall"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//TypedElement/typeReference"/>
+            </type>
+          </tail>
+          <src var="fileBodyConstructor"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="fileBodyConstructorType"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/types#//NamespaceClassifierReference"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//NamespaceClassifierReference/classifierReferences"/>
+            </type>
+          </tail>
+          <src var="fileBodyConstructorType"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="fileBodyConstructorTypeReference"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/types#//ClassifierReference"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//ClassifierReference/target"/>
+            </type>
+          </tail>
+          <src var="fileBodyConstructorTypeReference"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="fileBodyConstructorTypeReferenceTarget"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://www.emftext.org/java/commons#//NamedElement/name"/>
+            </type>
+          </tail>
+          <src var="fileBodyConstructorTypeReferenceTarget"/>
+          <dst xsi:type="patternLanguage:StringValue" value="FileBody"/>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/instantiations#//NewConstructorCall"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/references#//Argumentable/arguments"/>
+            </type>
+          </tail>
+          <src var="fileBodyConstructor"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="fileArgumentConstructor"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/instantiations#//NewConstructorCall"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//TypedElement/typeReference"/>
+            </type>
+          </tail>
+          <src var="fileArgumentConstructor"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="fileArgumentConstructorType"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/types#//NamespaceClassifierReference"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//NamespaceClassifierReference/classifierReferences"/>
+            </type>
+          </tail>
+          <src var="fileArgumentConstructorType"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="fileArgumentConstructorTypeRef"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/types#//ClassifierReference"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/types#//ClassifierReference/target"/>
+            </type>
+          </tail>
+          <src var="fileArgumentConstructorTypeRef"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="fileArgumentConstructorTypeRefTarget"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/classifiers#//Class"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://www.emftext.org/java/commons#//NamedElement/name"/>
+            </type>
+          </tail>
+          <src var="fileArgumentConstructorTypeRefTarget"/>
+          <dst xsi:type="patternLanguage:StringValue" value="File"/>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
   <patterns name="earlyBinding" fileName="platform:/resource/org.qualitune.refactoring.energy.test/queries/earlyBinding.eiq">
     <parameters name="actClass">
       <type xsi:type="eMFPatternLanguage:ClassType">
@@ -360,6 +514,9 @@
     <ePackage href="http://www.emftext.org/java/members#/"/>
   </importPackages>
   <importPackages>
+    <ePackage href="http://www.emftext.org/java/instantiations#/"/>
+  </importPackages>
+  <importPackages>
     <ePackage href="http://www.emftext.org/java/classifiers#/"/>
   </importPackages>
   <importPackages>
@@ -370,5 +527,8 @@
   </importPackages>
   <importPackages>
     <ePackage href="http://www.emftext.org/java/statements#/"/>
+  </importPackages>
+  <importPackages>
+    <ePackage href="http://www.emftext.org/java/variables#/"/>
   </importPackages>
 </eMFPatternLanguage:PatternModel>

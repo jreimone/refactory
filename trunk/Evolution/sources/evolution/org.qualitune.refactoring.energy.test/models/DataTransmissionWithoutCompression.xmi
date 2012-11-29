@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:annotations="http://www.emftext.org/java/annotations" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:layout="http://www.emftext.org/commons/layout" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types">
+  <layoutInformations xsi:type="layout:KeywordLayoutInformation" hiddenTokenText="" visibleTokenText="package" syntaxElementID="JAVA_2_0_0_0_0_0_0"/>
+  <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="7" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_2_0_0_0_0_0_1"/>
+  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="11" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_2_0_0_0_0_0_2_0_0_0"/>
+  <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="12" hiddenTokenText="" visibleTokenText="qualitune" syntaxElementID="JAVA_2_0_0_0_0_0_2_0_0_1"/>
+  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="21" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_2_0_0_0_0_0_2_0_0_0"/>
+  <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="22" hiddenTokenText="" visibleTokenText="refactoring" syntaxElementID="JAVA_2_0_0_0_0_0_2_0_0_1"/>
+  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="33" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_2_0_0_0_0_0_2_0_0_0"/>
+  <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="34" hiddenTokenText="" visibleTokenText="energy" syntaxElementID="JAVA_2_0_0_0_0_0_2_0_0_1"/>
+  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="40" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_2_0_0_0_0_0_2_0_0_0"/>
+  <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="41" hiddenTokenText="" visibleTokenText="test" syntaxElementID="JAVA_2_0_0_0_0_0_2_0_0_1"/>
+  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="45" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_2_0_0_0_0_0_3"/>
+  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1900" hiddenTokenText="&#xD;&#xA;" visibleTokenText="&lt;EOF>" syntaxElementID="&lt;EOF>"/>
+  <namespaces>org</namespaces>
+  <namespaces>qualitune</namespaces>
+  <namespaces>refactoring</namespaces>
+  <namespaces>energy</namespaces>
+  <namespaces>test</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="46" hiddenTokenText="&#xD;&#xA;&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="56" hiddenTokenText=" " visibleTokenText="java" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="61" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="62" hiddenTokenText="" visibleTokenText="io" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="64" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="65" hiddenTokenText="" visibleTokenText="File" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_0_File"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="69" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_0_File"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="70" hiddenTokenText="&#xD;&#xA;&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="80" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="84" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="85" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="91" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="92" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="96" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="97" hiddenTokenText="" visibleTokenText="HttpEntity" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_1_HttpEntity"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="107" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_1_HttpEntity"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="108" hiddenTokenText="&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="116" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="120" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="121" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="127" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="128" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="132" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="133" hiddenTokenText="" visibleTokenText="HttpResponse" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_2_HttpResponse"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="145" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_2_HttpResponse"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="146" hiddenTokenText="&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="154" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="158" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="159" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="165" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="166" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="170" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="171" hiddenTokenText="" visibleTokenText="client" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="177" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="178" hiddenTokenText="" visibleTokenText="HttpClient" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_3_HttpClient"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="188" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <namespaces>client</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_3_HttpClient"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="189" hiddenTokenText="&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="197" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="201" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="202" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="208" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="209" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="213" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="214" hiddenTokenText="" visibleTokenText="client" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="220" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="221" hiddenTokenText="" visibleTokenText="methods" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="228" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="229" hiddenTokenText="" visibleTokenText="HttpPost" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_4_HttpPost"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="237" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <namespaces>client</namespaces>
+    <namespaces>methods</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_4_HttpPost"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="238" hiddenTokenText="&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="246" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="250" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="251" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="257" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="258" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="262" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="263" hiddenTokenText="" visibleTokenText="entity" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="269" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="270" hiddenTokenText="" visibleTokenText="mime" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="274" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="275" hiddenTokenText="" visibleTokenText="MultipartEntity" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_5_MultipartEntity"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="290" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <namespaces>entity</namespaces>
+    <namespaces>mime</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_5_MultipartEntity"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="291" hiddenTokenText="&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="299" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="303" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="304" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="310" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="311" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="315" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="316" hiddenTokenText="" visibleTokenText="entity" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="322" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="323" hiddenTokenText="" visibleTokenText="mime" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="327" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="328" hiddenTokenText="" visibleTokenText="content" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="335" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="336" hiddenTokenText="" visibleTokenText="FileBody" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_6_FileBody"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="344" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <namespaces>entity</namespaces>
+    <namespaces>mime</namespaces>
+    <namespaces>content</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_6_FileBody"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="345" hiddenTokenText="&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="353" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="357" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="358" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="364" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="365" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="369" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="370" hiddenTokenText="" visibleTokenText="entity" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="376" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="377" hiddenTokenText="" visibleTokenText="mime" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="381" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="382" hiddenTokenText="" visibleTokenText="content" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="389" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="390" hiddenTokenText="" visibleTokenText="StringBody" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_7_StringBody"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="400" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <namespaces>entity</namespaces>
+    <namespaces>mime</namespaces>
+    <namespaces>content</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_7_StringBody"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="401" hiddenTokenText="&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="409" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="413" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="414" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="420" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="421" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="425" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="426" hiddenTokenText="" visibleTokenText="impl" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="430" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="431" hiddenTokenText="" visibleTokenText="client" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="437" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="438" hiddenTokenText="" visibleTokenText="DefaultHttpClient" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_8_DefaultHttpClient"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="455" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>client</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_8_DefaultHttpClient"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="456" hiddenTokenText="&#xD;&#xA;" visibleTokenText="import" syntaxElementID="JAVA_3_0_0_0"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="464" hiddenTokenText=" " visibleTokenText="org" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="468" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="469" hiddenTokenText="" visibleTokenText="apache" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="475" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="476" hiddenTokenText="" visibleTokenText="http" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="480" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="481" hiddenTokenText="" visibleTokenText="util" syntaxElementID="JAVA_3_0_0_1_0_0_0"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="485" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_3_0_0_1_0_0_1"/>
+    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="486" hiddenTokenText="" visibleTokenText="EntityUtils" syntaxElementID="JAVA_3_0_0_2">
+      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_9_EntityUtils"/>
+    </layoutInformations>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="497" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_3_0_0_3"/>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>http</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_9_EntityUtils"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="DataTransmissionWithoutCompression">
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="791" hiddenTokenText=" " visibleTokenText="class" syntaxElementID="JAVA_7_0_0_1"/>
+    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="797" hiddenTokenText=" " visibleTokenText="DataTransmissionWithoutCompression" syntaxElementID="JAVA_7_0_0_2"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="832" hiddenTokenText=" " visibleTokenText="{" syntaxElementID="JAVA_7_0_0_7"/>
+    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1897" hiddenTokenText="&#xD;&#xA;" visibleTokenText="}" syntaxElementID="JAVA_7_0_0_10"/>
+    <members xsi:type="members:ClassMethod" name="main">
+      <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="857" hiddenTokenText=" " visibleTokenText="main" syntaxElementID="JAVA_21_0_0_3"/>
+      <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="862" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_21_0_0_4"/>
+      <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="876" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_21_0_0_6"/>
+      <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="877" hiddenTokenText=" " visibleTokenText="throws" syntaxElementID="JAVA_21_0_0_8_0_0_0"/>
+      <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="894" hiddenTokenText=" " visibleTokenText="{" syntaxElementID="JAVA_21_0_0_10"/>
+      <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1893" hiddenTokenText="&#xD;&#xA;&#x9;" visibleTokenText="}" syntaxElementID="JAVA_21_0_0_13"/>
+      <typeReference xsi:type="types:Void">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="852" hiddenTokenText=" " visibleTokenText="void" syntaxElementID="JAVA_133_0_0_0"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="args">
+        <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="871" hiddenTokenText=" " visibleTokenText="args" syntaxElementID="JAVA_23_0_0_4"/>
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="863" hiddenTokenText="" visibleTokenText="String" syntaxElementID="JAVA_39_0_0_0">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_10_String"/>
+            </layoutInformations>
+            <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_10_String"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="869" hiddenTokenText="" visibleTokenText="[" syntaxElementID="JAVA_120_0_0_0_0_0_0"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="870" hiddenTokenText="" visibleTokenText="]" syntaxElementID="JAVA_120_0_0_0_0_0_1"/>
+        </arrayDimensionsBefore>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="884" hiddenTokenText=" " visibleTokenText="Exception" syntaxElementID="JAVA_39_0_0_0">
+            <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_11_Exception"/>
+          </layoutInformations>
+          <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_11_Exception"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="834" hiddenTokenText="&#xD;&#xA;&#xD;&#xA;&#x9;" visibleTokenText="public" syntaxElementID="JAVA_122_0_0_0"/>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="845" hiddenTokenText=" " visibleTokenText="static" syntaxElementID="JAVA_127_0_0_0"/>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="896" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="if" syntaxElementID="JAVA_53_0_0_0"/>
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="902" hiddenTokenText=" " visibleTokenText="(" syntaxElementID="JAVA_53_0_0_2"/>
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="920" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_53_0_0_4"/>
+        <statement xsi:type="statements:Block" name="Block">
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="921" hiddenTokenText="  " visibleTokenText="{" syntaxElementID="JAVA_18_0_0_2"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="991" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="}" syntaxElementID="JAVA_18_0_0_5"/>
+          <statements xsi:type="statements:ExpressionStatement">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="970" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+            <expression xsi:type="references:IdentifierReference">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="924" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;&#x9;" visibleTokenText="System" syntaxElementID="JAVA_41_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_14_System"/>
+              </layoutInformations>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="935" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+              <next xsi:type="references:IdentifierReference">
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="936" hiddenTokenText="" visibleTokenText="out" syntaxElementID="JAVA_41_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_15_out"/>
+                </layoutInformations>
+                <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="939" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+                <next xsi:type="references:MethodCall">
+                  <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="940" hiddenTokenText="" visibleTokenText="println" syntaxElementID="JAVA_40_0_0_1">
+                    <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_16_println"/>
+                  </layoutInformations>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="947" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="969" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+                  <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_16_println"/>
+                  <arguments xsi:type="references:StringReference" value="File path not given">
+                    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="948" hiddenTokenText="" visibleTokenText="&quot;File path not given&quot;" syntaxElementID="JAVA_47_0_0_0"/>
+                  </arguments>
+                </next>
+                <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_15_out"/>
+              </next>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_14_System"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="990" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+            <expression xsi:type="references:IdentifierReference">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="971" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;&#x9;" visibleTokenText="System" syntaxElementID="JAVA_41_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_17_System"/>
+              </layoutInformations>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="982" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+              <next xsi:type="references:MethodCall">
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="983" hiddenTokenText="" visibleTokenText="exit" syntaxElementID="JAVA_40_0_0_1">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_18_exit"/>
+                </layoutInformations>
+                <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="987" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+                <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="989" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+                <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_18_exit"/>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1">
+                  <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="988" hiddenTokenText="" visibleTokenText="1" syntaxElementID="JAVA_144_0_0_0"/>
+                </arguments>
+              </next>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_17_System"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="915" hiddenTokenText=" " visibleTokenText="!=" syntaxElementID="JAVA_115_0_0_0"/>
+          </equalityOperators>
+          <children xsi:type="references:IdentifierReference">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="904" hiddenTokenText="" visibleTokenText="args" syntaxElementID="JAVA_41_0_0_0">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_12_args"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="908" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+            <next xsi:type="references:IdentifierReference">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="909" hiddenTokenText="" visibleTokenText="length" syntaxElementID="JAVA_41_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_13_length"/>
+              </layoutInformations>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_13_length"/>
+            </next>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_12_args"/>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1">
+            <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="918" hiddenTokenText=" " visibleTokenText="1" syntaxElementID="JAVA_144_0_0_0"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1047" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_26_0_0_1"/>
+        <variable name="httpclient">
+          <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1010" hiddenTokenText=" " visibleTokenText="httpclient" syntaxElementID="JAVA_25_0_0_4"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1021" hiddenTokenText=" " visibleTokenText="=" syntaxElementID="JAVA_25_0_0_6_0_0_1"/>
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="996" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="HttpClient" syntaxElementID="JAVA_39_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_19_HttpClient"/>
+              </layoutInformations>
+              <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_19_HttpClient"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1023" hiddenTokenText=" " visibleTokenText="new" syntaxElementID="JAVA_31_0_0_0"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1045" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_31_0_0_4"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1046" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_31_0_0_6"/>
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1027" hiddenTokenText=" " visibleTokenText="DefaultHttpClient" syntaxElementID="JAVA_39_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_20_DefaultHttpClient"/>
+                </layoutInformations>
+                <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_20_DefaultHttpClient"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1153" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_26_0_0_1"/>
+        <variable name="httppost">
+          <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1060" hiddenTokenText=" " visibleTokenText="httppost" syntaxElementID="JAVA_25_0_0_4"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1069" hiddenTokenText=" " visibleTokenText="=" syntaxElementID="JAVA_25_0_0_6_0_0_1"/>
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1048" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="HttpPost" syntaxElementID="JAVA_39_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_21_HttpPost"/>
+              </layoutInformations>
+              <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_21_HttpPost"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1071" hiddenTokenText=" " visibleTokenText="new" syntaxElementID="JAVA_31_0_0_0"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1084" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_31_0_0_4"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1152" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_31_0_0_6"/>
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1075" hiddenTokenText=" " visibleTokenText="HttpPost" syntaxElementID="JAVA_39_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_22_HttpPost"/>
+                </layoutInformations>
+                <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_22_HttpPost"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="http://some.url:8080/servlets-examples/servlet/RequestInfoExample">
+              <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1085" hiddenTokenText="" visibleTokenText="&quot;http://some.url:8080/servlets-examples/servlet/RequestInfoExample&quot;" syntaxElementID="JAVA_47_0_0_0"/>
+            </arguments>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1204" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_26_0_0_1"/>
+        <variable name="bin">
+          <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1166" hiddenTokenText=" " visibleTokenText="bin" syntaxElementID="JAVA_25_0_0_4"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1170" hiddenTokenText=" " visibleTokenText="=" syntaxElementID="JAVA_25_0_0_6_0_0_1"/>
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1154" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="FileBody" syntaxElementID="JAVA_39_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_23_FileBody"/>
+              </layoutInformations>
+              <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_23_FileBody"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1172" hiddenTokenText=" " visibleTokenText="new" syntaxElementID="JAVA_31_0_0_0"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1185" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_31_0_0_4"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1203" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_31_0_0_6"/>
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1176" hiddenTokenText=" " visibleTokenText="FileBody" syntaxElementID="JAVA_39_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_24_FileBody"/>
+                </layoutInformations>
+                <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_24_FileBody"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="instantiations:NewConstructorCall">
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1186" hiddenTokenText="" visibleTokenText="new" syntaxElementID="JAVA_31_0_0_0"/>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1194" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_31_0_0_4"/>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1202" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_31_0_0_6"/>
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1189" hiddenTokenText=" " visibleTokenText="File" syntaxElementID="JAVA_39_0_0_0">
+                    <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_25_File"/>
+                  </layoutInformations>
+                  <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_25_File"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference">
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1195" hiddenTokenText="" visibleTokenText="args" syntaxElementID="JAVA_41_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_26_args"/>
+                </layoutInformations>
+                <arraySelectors>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1199" hiddenTokenText="" visibleTokenText="[" syntaxElementID="JAVA_37_0_0_0"/>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1201" hiddenTokenText="" visibleTokenText="]" syntaxElementID="JAVA_37_0_0_2"/>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0">
+                    <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1200" hiddenTokenText="" visibleTokenText="0" syntaxElementID="JAVA_144_0_0_0"/>
+                  </position>
+                </arraySelectors>
+                <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_26_args"/>
+              </arguments>
+            </arguments>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1274" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_26_0_0_1"/>
+        <variable name="comment">
+          <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1219" hiddenTokenText=" " visibleTokenText="comment" syntaxElementID="JAVA_25_0_0_4"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1227" hiddenTokenText=" " visibleTokenText="=" syntaxElementID="JAVA_25_0_0_6_0_0_1"/>
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1205" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="StringBody" syntaxElementID="JAVA_39_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_27_StringBody"/>
+              </layoutInformations>
+              <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_27_StringBody"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1229" hiddenTokenText=" " visibleTokenText="new" syntaxElementID="JAVA_31_0_0_0"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1244" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_31_0_0_4"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1273" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_31_0_0_6"/>
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1233" hiddenTokenText=" " visibleTokenText="StringBody" syntaxElementID="JAVA_39_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_28_StringBody"/>
+                </layoutInformations>
+                <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_28_StringBody"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="A binary file of some kind">
+              <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1245" hiddenTokenText="" visibleTokenText="&quot;A binary file of some kind&quot;" syntaxElementID="JAVA_47_0_0_0"/>
+            </arguments>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1330" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_26_0_0_1"/>
+        <variable name="reqEntity">
+          <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1296" hiddenTokenText=" " visibleTokenText="reqEntity" syntaxElementID="JAVA_25_0_0_4"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1306" hiddenTokenText=" " visibleTokenText="=" syntaxElementID="JAVA_25_0_0_6_0_0_1"/>
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1275" hiddenTokenText="&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;" visibleTokenText="MultipartEntity" syntaxElementID="JAVA_39_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_29_MultipartEntity"/>
+              </layoutInformations>
+              <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_29_MultipartEntity"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1308" hiddenTokenText=" " visibleTokenText="new" syntaxElementID="JAVA_31_0_0_0"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1328" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_31_0_0_4"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1329" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_31_0_0_6"/>
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1312" hiddenTokenText=" " visibleTokenText="MultipartEntity" syntaxElementID="JAVA_39_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_30_MultipartEntity"/>
+                </layoutInformations>
+                <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_30_MultipartEntity"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1364" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+        <expression xsi:type="references:IdentifierReference">
+          <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1331" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="reqEntity" syntaxElementID="JAVA_41_0_0_0">
+            <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_31_reqEntity"/>
+          </layoutInformations>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1344" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+          <next xsi:type="references:MethodCall">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1345" hiddenTokenText="" visibleTokenText="addPart" syntaxElementID="JAVA_40_0_0_1">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_32_addPart"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1352" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1358" hiddenTokenText="" visibleTokenText="," syntaxElementID="JAVA_40_0_0_4_0_0_1_0_0_0"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1363" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_32_addPart"/>
+            <arguments xsi:type="references:StringReference" value="bin">
+              <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1353" hiddenTokenText="" visibleTokenText="&quot;bin&quot;" syntaxElementID="JAVA_47_0_0_0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1359" hiddenTokenText=" " visibleTokenText="bin" syntaxElementID="JAVA_41_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_33_bin"/>
+              </layoutInformations>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_33_bin"/>
+            </arguments>
+          </next>
+          <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_31_reqEntity"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1406" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+        <expression xsi:type="references:IdentifierReference">
+          <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1365" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="reqEntity" syntaxElementID="JAVA_41_0_0_0">
+            <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_34_reqEntity"/>
+          </layoutInformations>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1378" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+          <next xsi:type="references:MethodCall">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1379" hiddenTokenText="" visibleTokenText="addPart" syntaxElementID="JAVA_40_0_0_1">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_35_addPart"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1386" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1396" hiddenTokenText="" visibleTokenText="," syntaxElementID="JAVA_40_0_0_4_0_0_1_0_0_0"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1405" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_35_addPart"/>
+            <arguments xsi:type="references:StringReference" value="comment">
+              <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1387" hiddenTokenText="" visibleTokenText="&quot;comment&quot;" syntaxElementID="JAVA_47_0_0_0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1397" hiddenTokenText=" " visibleTokenText="comment" syntaxElementID="JAVA_41_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_36_comment"/>
+              </layoutInformations>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_36_comment"/>
+            </arguments>
+          </next>
+          <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_34_reqEntity"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1442" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+        <expression xsi:type="references:IdentifierReference">
+          <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1407" hiddenTokenText="&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;" visibleTokenText="httppost" syntaxElementID="JAVA_41_0_0_0">
+            <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_37_httppost"/>
+          </layoutInformations>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1421" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+          <next xsi:type="references:MethodCall">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1422" hiddenTokenText="" visibleTokenText="setEntity" syntaxElementID="JAVA_40_0_0_1">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_38_setEntity"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1431" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1441" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_38_setEntity"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1432" hiddenTokenText="" visibleTokenText="reqEntity" syntaxElementID="JAVA_41_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_39_reqEntity"/>
+              </layoutInformations>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_39_reqEntity"/>
+            </arguments>
+          </next>
+          <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_37_httppost"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1517" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+        <expression xsi:type="references:IdentifierReference">
+          <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1443" hiddenTokenText="&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;" visibleTokenText="System" syntaxElementID="JAVA_41_0_0_0">
+            <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_40_System"/>
+          </layoutInformations>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1455" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+          <next xsi:type="references:IdentifierReference">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1456" hiddenTokenText="" visibleTokenText="out" syntaxElementID="JAVA_41_0_0_0">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_41_out"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1459" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+            <next xsi:type="references:MethodCall">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1460" hiddenTokenText="" visibleTokenText="println" syntaxElementID="JAVA_40_0_0_1">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_42_println"/>
+              </layoutInformations>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1467" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1516" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_42_println"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="executing request ">
+                  <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1468" hiddenTokenText="" visibleTokenText="&quot;executing request &quot;" syntaxElementID="JAVA_47_0_0_0"/>
+                </children>
+                <children xsi:type="references:IdentifierReference">
+                  <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1490" hiddenTokenText=" " visibleTokenText="httppost" syntaxElementID="JAVA_41_0_0_0">
+                    <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_43_httppost"/>
+                  </layoutInformations>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1499" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+                  <next xsi:type="references:MethodCall">
+                    <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1500" hiddenTokenText="" visibleTokenText="getRequestLine" syntaxElementID="JAVA_40_0_0_1">
+                      <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_44_getRequestLine"/>
+                    </layoutInformations>
+                    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1514" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+                    <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1515" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+                    <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_44_getRequestLine"/>
+                  </next>
+                  <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_43_httppost"/>
+                </children>
+                <additiveOperators xsi:type="operators:Addition">
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1488" hiddenTokenText=" " visibleTokenText="+" syntaxElementID="JAVA_102_0_0_0"/>
+                </additiveOperators>
+              </arguments>
+            </next>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_41_out"/>
+          </next>
+          <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_40_System"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1574" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_26_0_0_1"/>
+        <variable name="response">
+          <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1534" hiddenTokenText=" " visibleTokenText="response" syntaxElementID="JAVA_25_0_0_4"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1543" hiddenTokenText=" " visibleTokenText="=" syntaxElementID="JAVA_25_0_0_6_0_0_1"/>
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1518" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="HttpResponse" syntaxElementID="JAVA_39_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_45_HttpResponse"/>
+              </layoutInformations>
+              <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_45_HttpResponse"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1545" hiddenTokenText=" " visibleTokenText="httpclient" syntaxElementID="JAVA_41_0_0_0">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_46_httpclient"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1556" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+            <next xsi:type="references:MethodCall">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1557" hiddenTokenText="" visibleTokenText="execute" syntaxElementID="JAVA_40_0_0_1">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_47_execute"/>
+              </layoutInformations>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1564" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1573" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_47_execute"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1565" hiddenTokenText="" visibleTokenText="httppost" syntaxElementID="JAVA_41_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_48_httppost"/>
+                </layoutInformations>
+                <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_48_httppost"/>
+              </arguments>
+            </next>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_46_httpclient"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1622" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_26_0_0_1"/>
+        <variable name="resEntity">
+          <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1589" hiddenTokenText=" " visibleTokenText="resEntity" syntaxElementID="JAVA_25_0_0_4"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1599" hiddenTokenText=" " visibleTokenText="=" syntaxElementID="JAVA_25_0_0_6_0_0_1"/>
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1575" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="HttpEntity" syntaxElementID="JAVA_39_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_49_HttpEntity"/>
+              </layoutInformations>
+              <target xsi:type="classifiers:Class" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_49_HttpEntity"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1601" hiddenTokenText=" " visibleTokenText="response" syntaxElementID="JAVA_41_0_0_0">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_50_response"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1610" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+            <next xsi:type="references:MethodCall">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1611" hiddenTokenText="" visibleTokenText="getEntity" syntaxElementID="JAVA_40_0_0_1">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_51_getEntity"/>
+              </layoutInformations>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1620" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1621" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_51_getEntity"/>
+            </next>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_50_response"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1691" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+        <expression xsi:type="references:IdentifierReference">
+          <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1623" hiddenTokenText="&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;" visibleTokenText="System" syntaxElementID="JAVA_41_0_0_0">
+            <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_52_System"/>
+          </layoutInformations>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1635" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+          <next xsi:type="references:IdentifierReference">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1636" hiddenTokenText="" visibleTokenText="out" syntaxElementID="JAVA_41_0_0_0">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_53_out"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1639" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+            <next xsi:type="references:MethodCall">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1640" hiddenTokenText="" visibleTokenText="println" syntaxElementID="JAVA_40_0_0_1">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_54_println"/>
+              </layoutInformations>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1647" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1690" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_54_println"/>
+              <arguments xsi:type="references:StringReference" value="----------------------------------------">
+                <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1648" hiddenTokenText="" visibleTokenText="&quot;----------------------------------------&quot;" syntaxElementID="JAVA_47_0_0_0"/>
+              </arguments>
+            </next>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_53_out"/>
+          </next>
+          <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_52_System"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1740" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+        <expression xsi:type="references:IdentifierReference">
+          <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1692" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="System" syntaxElementID="JAVA_41_0_0_0">
+            <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_55_System"/>
+          </layoutInformations>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1702" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+          <next xsi:type="references:IdentifierReference">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1703" hiddenTokenText="" visibleTokenText="out" syntaxElementID="JAVA_41_0_0_0">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_56_out"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1706" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+            <next xsi:type="references:MethodCall">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1707" hiddenTokenText="" visibleTokenText="println" syntaxElementID="JAVA_40_0_0_1">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_57_println"/>
+              </layoutInformations>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1714" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1739" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_57_println"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1715" hiddenTokenText="" visibleTokenText="response" syntaxElementID="JAVA_41_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_58_response"/>
+                </layoutInformations>
+                <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1723" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+                <next xsi:type="references:MethodCall">
+                  <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1724" hiddenTokenText="" visibleTokenText="getStatusLine" syntaxElementID="JAVA_40_0_0_1">
+                    <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_59_getStatusLine"/>
+                  </layoutInformations>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1737" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1738" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+                  <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_59_getStatusLine"/>
+                </next>
+                <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_58_response"/>
+              </arguments>
+            </next>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_56_out"/>
+          </next>
+          <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_55_System"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1741" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="if" syntaxElementID="JAVA_53_0_0_0"/>
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1747" hiddenTokenText=" " visibleTokenText="(" syntaxElementID="JAVA_53_0_0_2"/>
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1766" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_53_0_0_4"/>
+        <statement xsi:type="statements:Block" name="Block">
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1767" hiddenTokenText=" " visibleTokenText="{" syntaxElementID="JAVA_18_0_0_2"/>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1853" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="}" syntaxElementID="JAVA_18_0_0_5"/>
+          <statements xsi:type="statements:ExpressionStatement">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1852" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+            <expression xsi:type="references:IdentifierReference">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1769" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;&#x9;" visibleTokenText="System" syntaxElementID="JAVA_41_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_61_System"/>
+              </layoutInformations>
+              <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1780" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+              <next xsi:type="references:IdentifierReference">
+                <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1781" hiddenTokenText="" visibleTokenText="out" syntaxElementID="JAVA_41_0_0_0">
+                  <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_62_out"/>
+                </layoutInformations>
+                <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1784" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+                <next xsi:type="references:MethodCall">
+                  <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1785" hiddenTokenText="" visibleTokenText="println" syntaxElementID="JAVA_40_0_0_1">
+                    <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_63_println"/>
+                  </layoutInformations>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1792" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+                  <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1851" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+                  <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_63_println"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Response content length: ">
+                      <layoutInformations xsi:type="layout:AttributeLayoutInformation" startOffset="1793" hiddenTokenText="" visibleTokenText="&quot;Response content length: &quot;" syntaxElementID="JAVA_47_0_0_0"/>
+                    </children>
+                    <children xsi:type="references:IdentifierReference">
+                      <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1822" hiddenTokenText=" " visibleTokenText="resEntity" syntaxElementID="JAVA_41_0_0_0">
+                        <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_64_resEntity"/>
+                      </layoutInformations>
+                      <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1832" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+                      <next xsi:type="references:MethodCall">
+                        <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1833" hiddenTokenText="" visibleTokenText="getContentLength" syntaxElementID="JAVA_40_0_0_1">
+                          <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_65_getContentLength"/>
+                        </layoutInformations>
+                        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1849" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+                        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1850" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+                        <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_65_getContentLength"/>
+                      </next>
+                      <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_64_resEntity"/>
+                    </children>
+                    <additiveOperators xsi:type="operators:Addition">
+                      <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1820" hiddenTokenText=" " visibleTokenText="+" syntaxElementID="JAVA_102_0_0_0"/>
+                    </additiveOperators>
+                  </arguments>
+                </next>
+                <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_62_out"/>
+              </next>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_61_System"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1758" hiddenTokenText=" " visibleTokenText="!=" syntaxElementID="JAVA_115_0_0_0"/>
+          </equalityOperators>
+          <children xsi:type="references:IdentifierReference">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1749" hiddenTokenText="" visibleTokenText="resEntity" syntaxElementID="JAVA_41_0_0_0">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_60_resEntity"/>
+            </layoutInformations>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_60_resEntity"/>
+          </children>
+          <children xsi:type="literals:NullLiteral">
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1761" hiddenTokenText=" " visibleTokenText="null" syntaxElementID="JAVA_121_0_0_0"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1892" hiddenTokenText="" visibleTokenText=";" syntaxElementID="JAVA_70_0_0_1"/>
+        <expression xsi:type="references:IdentifierReference">
+          <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1858" hiddenTokenText="&#xD;&#xA;&#x9;&#x9;" visibleTokenText="EntityUtils" syntaxElementID="JAVA_41_0_0_0">
+            <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_66_EntityUtils"/>
+          </layoutInformations>
+          <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1873" hiddenTokenText="" visibleTokenText="." syntaxElementID="JAVA_41_0_0_3_0_0_0"/>
+          <next xsi:type="references:MethodCall">
+            <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1874" hiddenTokenText="" visibleTokenText="consume" syntaxElementID="JAVA_40_0_0_1">
+              <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_67_consume"/>
+            </layoutInformations>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1881" hiddenTokenText="" visibleTokenText="(" syntaxElementID="JAVA_40_0_0_3"/>
+            <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="1891" hiddenTokenText="" visibleTokenText=")" syntaxElementID="JAVA_40_0_0_5"/>
+            <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_67_consume"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <layoutInformations xsi:type="layout:ReferenceLayoutInformation" startOffset="1882" hiddenTokenText="" visibleTokenText="resEntity" syntaxElementID="JAVA_41_0_0_0">
+                <object href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_68_resEntity"/>
+              </layoutInformations>
+              <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_68_resEntity"/>
+            </arguments>
+          </next>
+          <target xsi:type="annotations:AnnotationAttribute" href="../src/org/qualitune/refactoring/energy/test/DataTransmissionWithoutCompression.java#EMFTEXT_INTERNAL_URI_FRAGMENT_66_EntityUtils"/>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <layoutInformations xsi:type="layout:KeywordLayoutInformation" startOffset="498" hiddenTokenText="&#xD;&#xA;&#xD;&#xA;/**&#xD;&#xA; * Example class for demonstrating a data transmission without compression,&#xD;&#xA; * taken from http://mirror.synyx.de/apache//httpcomponents/httpclient/binary/httpcomponents-client-4.2.2-bin.zip&#xD;&#xA; * the ClientMultipartFormPost.java and modified.&#xD;&#xA; * &#xD;&#xA; * @author jreimann&#xD;&#xA; *&#xD;&#xA; */&#xD;&#xA;" visibleTokenText="public" syntaxElementID="JAVA_122_0_0_0"/>
+    </annotationsAndModifiers>
+    <defaultExtends xsi:type="types:ClassifierReference">
+      <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Object.java#//@classifiers.0"/>
+    </defaultExtends>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tracing:TracingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:operators="http://www.qualitune.org/operators" xmlns:tracing="http://www.qualitune.org/tracing" targetURI="platform:/resource/org.qualitune.refactoring.energy.test/models/AndroidTestModel.model">
+  <traceLinks>
+    <sources href="../models/AndroidTestModel.uml#_ZovpuDI_EeKBtoZPCEDgGg"/>
+    <destination href="../models/AndroidTestModel.model#/2"/>
+    <type xsi:type="operators:CREATE"/>
+  </traceLinks>
+  <traceLinks>
+    <sources href="../models/AndroidTestModel.uml#_IRQZeDI_EeKBtoZPCEDgGg"/>
+    <destination href="../models/AndroidTestModel.model#/0"/>
+    <type xsi:type="operators:CREATE"/>
+  </traceLinks>
+  <traceLinks>
+    <sources href="../models/AndroidTestModel.uml#_gOSFODI9EeKBtoZPCEDgGg"/>
+    <destination href="../models/AndroidTestModel.model#/1"/>
+    <type xsi:type="operators:CREATE"/>
+  </traceLinks>
+  <traceLinks>
+    <sources href="../models/AndroidTestModel.uml#_LBGq4jI_EeKBtoZPCEDgGg"/>
+    <destination href="../models/AndroidTestModel.model#/0/@members.0"/>
+    <type xsi:type="operators:CREATE"/>
+  </traceLinks>
+  <traceLinks>
+    <sources href="../models/AndroidTestModel.uml#_VvUL8DI9EeKBtoZPCEDgGg"/>
+    <destination href="../models/AndroidTestModel.model#/1/@members.0"/>
+    <type xsi:type="operators:CREATE"/>
+  </traceLinks>
+  <traceLinks>
+    <sources href="../models/AndroidTestModel.uml#_s_CVsDJPEeKBtoZPCEDgGg"/>
+    <sources href="../models/AndroidTestModel.uml#_s_LfoTJPEeKBtoZPCEDgGg"/>
+    <sources href="../models/AndroidTestModel.uml#_LBGq4jI_EeKBtoZPCEDgGg"/>
+    <sources href="../models/AndroidTestModel.uml#_s_LfojJPEeKBtoZPCEDgGg"/>
+    <destination href="../models/AndroidTestModel.model#/1/@members.0/@statements.0/@expression"/>
+    <type xsi:type="operators:CREATE"/>
+  </traceLinks>
+  <sourceURIs>platform:/resource/org.qualitune.refactoring.energy.test/models/AndroidTestModel.uml</sourceURIs>
+</tracing:TracingModel>

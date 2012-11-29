@@ -1,0 +1,35 @@
+import "http://www.emftext.org/java/classifiers"
+import "http://www.emftext.org/java/members"
+import "http://www.emftext.org/java/types"
+import "http://www.emftext.org/java/references"
+import "http://www.emftext.org/java/statements"
+import "http://www.emftext.org/java/instantiations"
+import "http://www.emftext.org/java/variables"
+
+// inspired by the paper:
+// Höpfner Bunse(2010)
+// "Towards an energy-consumption based complexity classification for resource substitution strategies" 
+pattern dataTransmissionWithoutCompression(
+//		transmissionClass:Class, 
+//		transmissionMethod:ClassMethod, 
+		fileBodyConstructor: NewConstructorCall,
+		fileArgumentConstructor: NewConstructorCall
+){
+//	Class.members(transmissionClass, transmissionMethod);
+//	ClassMethod.statements(transmissionMethod, fileBodyStatement);
+//	LocalVariableStatement.variable(fileBodyStatement, variable);
+//	LocalVariable.initialValue(variable, fileBodyConstructor);
+	
+	// FileBody constructor
+	NewConstructorCall.typeReference(fileBodyConstructor, fileBodyConstructorType);
+	NamespaceClassifierReference.classifierReferences(fileBodyConstructorType, fileBodyConstructorTypeReference);
+	ClassifierReference.target(fileBodyConstructorTypeReference, fileBodyConstructorTypeReferenceTarget);
+	Class.name(fileBodyConstructorTypeReferenceTarget, "FileBody");
+	
+	// File constructor
+	NewConstructorCall.arguments(fileBodyConstructor, fileArgumentConstructor);
+	NewConstructorCall.typeReference(fileArgumentConstructor, fileArgumentConstructorType);
+	NamespaceClassifierReference.classifierReferences(fileArgumentConstructorType, fileArgumentConstructorTypeRef);
+	ClassifierReference.target(fileArgumentConstructorTypeRef, fileArgumentConstructorTypeRefTarget);
+	Class.name(fileArgumentConstructorTypeRefTarget, "File");
+}
