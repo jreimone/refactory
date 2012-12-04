@@ -5,6 +5,7 @@ import "http://www.emftext.org/java/references"
 import "http://www.emftext.org/java/statements"
 import "http://www.emftext.org/java/instantiations"
 import "http://www.emftext.org/java/variables"
+import "http://www.eclipse.org/emf/2002/Ecore"
 
 // inspired by the paper:
 // Höpfner Bunse(2010)
@@ -15,10 +16,48 @@ pattern dataTransmissionWithoutCompression(
 		fileBodyConstructor: NewConstructorCall,
 		fileArgumentConstructor: NewConstructorCall
 ){
-//	Class.members(transmissionClass, transmissionMethod);
-//	ClassMethod.statements(transmissionMethod, fileBodyStatement);
-//	LocalVariableStatement.variable(fileBodyStatement, variable);
-//	LocalVariable.initialValue(variable, fileBodyConstructor);
+	
+	find fileBodyConstructorWithFileConstructorParameter(fileBodyVar, fileBodyConstructor, fileArgumentConstructor);
+	
+	// MultipartEntity.addPart(FileBody)
+	LocalVariableStatement.variable(_, entityVar);
+	ExpressionStatement.expression(_, entityVarRef);
+	IdentifierReference.target(entityVarRef, entityVar);
+	IdentifierReference.next(entityVarRef, addPartCaller);
+	MethodCall.target(addPartCaller, addPartCallee);
+	ClassMethod.name(addPartCallee, "addPart");
+	MethodCall.arguments(addPartCaller, fileBodyRef);
+	IdentifierReference.target(fileBodyRef, fileBodyVar);
+	
+	// HttpPost.setEntity(MultipartEntity);
+	LocalVariableStatement.variable(_, httppostVar);
+	ExpressionStatement.expression(_, httppostRef);
+	IdentifierReference.target(httppostRef, httppostVar);
+	IdentifierReference.next(httppostRef, setEntityCaller);
+	MethodCall.target(setEntityCaller, setEntityCallee);
+	ClassMethod.name(setEntityCallee, "setEntity");
+	MethodCall.arguments(setEntityCaller, setEntityEntityVarArg);
+	IdentifierReference.target(setEntityEntityVarArg, entityVar);
+	
+	// HttpClient.execute(HttpPost); TODO finish
+	LocalVariableStatement.variable(_, httpclientVar);
+////	ExpressionStatement.expression(_, httpclientRef);
+	IdentifierReference.target(httpclientRef, httpclientVar);
+	IdentifierReference.next(httpclientRef, executeCaller);
+	MethodCall.target(executeCaller, executeCallee);
+	// attention: here it's not a ClassMethod but an InterfaceMethod
+	InterfaceMethod.name(executeCallee, "execute");
+	MethodCall.arguments(executeCaller, executeHttpPostVarArg);
+	IdentifierReference.target(executeHttpPostVarArg, httppostVar);
+}
+
+private pattern fileBodyConstructorWithFileConstructorParameter(
+	fileBodyVar: LocalVariable,
+	fileBodyConstructor: NewConstructorCall,
+	fileArgumentConstructor: NewConstructorCall
+){
+	LocalVariableStatement.variable(_, fileBodyVar);
+	LocalVariable.initialValue(fileBodyVar, fileBodyConstructor);
 	
 	// FileBody constructor
 	NewConstructorCall.typeReference(fileBodyConstructor, fileBodyConstructorType);
@@ -33,3 +72,13 @@ pattern dataTransmissionWithoutCompression(
 	ClassifierReference.target(fileArgumentConstructorTypeRef, fileArgumentConstructorTypeRefTarget);
 	Class.name(fileArgumentConstructorTypeRefTarget, "File");
 }
+
+//private pattern methodContainingDataTransmission(eobject: EObject, classMethod: ClassMethod){
+//	find findContainer+(eobject, container);
+//	EObject.eClass(container, containerEClass);
+//	EClass.name(containerEClass, "ClassMethod");
+//}
+//
+//private pattern findContainer(eobject: EObject, container: EObject){
+//	EObject.eContainer(eobject, parent);
+//}
