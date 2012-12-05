@@ -117,21 +117,7 @@ private pattern transmissionCoreMethodCalls(fileBodyVar : LocalVariable, classme
 }
 
 private pattern parentContainsSomething(parent, child){
-//	ClassMethod.statements(parent, child);
-//} or 
-//{
 	LocalVariableStatement.variable(parent, child);
 } or {
 	StatementListContainer.statements(parent, child);
 }
-
-
-//private pattern methodContainingDataTransmission(eobject: EObject, classMethod: ClassMethod){
-//	find findContainer+(eobject, container);
-//	EObject.eClass(container, containerEClass);
-//	EClass.name(containerEClass, "ClassMethod");
-//}
-//
-//private pattern findContainer(eobject: EObject, container: EObject){
-//	EObject.eContainer(eobject, parent);
-//}
