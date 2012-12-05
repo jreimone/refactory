@@ -13,12 +13,13 @@ import "http://www.eclipse.org/emf/2002/Ecore"
 // the determined FileBody constructor is checked and must be replaced by a file that is compressed before 
 pattern dataTransmissionWithoutCompression(
 		fileBodyConstructor: NewConstructorCall
+		, method: ClassMethod
 ){
 	find fileBodyConstructorWithFileConstructorParameter(fileBodyVar, fileBodyConstructor, _);
-	find transmissionCoreMethodCalls(fileBodyVar);
+	find transmissionCoreMethodCalls(fileBodyVar, method);
 } or {
 	find fileBodyConstructorWithFileParameter(fileBodyVar, _, fileBodyConstructor);
-	find transmissionCoreMethodCalls(fileBodyVar);
+	find transmissionCoreMethodCalls(fileBodyVar, method);
 }
 
 // the first possibility for instantiating a FileBody:
@@ -78,7 +79,7 @@ private pattern fileBodyConstructorWithFileParameter(
 	IdentifierReference.target(fileVarRef,fileVar);
 }
 
-private pattern transmissionCoreMethodCalls(fileBodyVar : LocalVariable){
+private pattern transmissionCoreMethodCalls(fileBodyVar : LocalVariable, classmethod: ClassMethod){
 	// MultipartEntity.addPart(FileBody)
 	LocalVariableStatement.variable(_, entityVar);
 	ExpressionStatement.expression(_, entityVarRef);
@@ -110,8 +111,19 @@ private pattern transmissionCoreMethodCalls(fileBodyVar : LocalVariable){
 	Method.name(executeCallee, "execute");
 	MethodCall.arguments(executeCaller, executeHttpPostVarArg);
 	IdentifierReference.target(executeHttpPostVarArg, httppostVar);
+	
+	// give me the method in which everything is contained
+	find parentContainsSomething+(classmethod, fileBodyVar);
 }
 
+private pattern parentContainsSomething(parent, child){
+//	ClassMethod.statements(parent, child);
+//} or 
+//{
+	LocalVariableStatement.variable(parent, child);
+} or {
+	StatementListContainer.statements(parent, child);
+}
 
 
 //private pattern methodContainingDataTransmission(eobject: EObject, classMethod: ClassMethod){

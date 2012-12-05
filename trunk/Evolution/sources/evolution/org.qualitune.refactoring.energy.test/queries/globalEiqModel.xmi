@@ -6,6 +6,11 @@
         <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/instantiations#//NewConstructorCall"/>
       </type>
     </parameters>
+    <parameters name="method">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+      </type>
+    </parameters>
     <bodies>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
         <call patternRef="//@patterns.1">
@@ -24,6 +29,9 @@
         <call patternRef="//@patterns.3">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="fileBodyVar"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="method"/>
           </parameters>
         </call>
       </constraints>
@@ -46,6 +54,9 @@
         <call patternRef="//@patterns.3">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="fileBodyVar"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="method"/>
           </parameters>
         </call>
       </constraints>
@@ -490,6 +501,11 @@
         <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/variables#//LocalVariable"/>
       </type>
     </parameters>
+    <parameters name="classmethod">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/members#//ClassMethod"/>
+      </type>
+    </parameters>
     <bodies>
       <constraints xsi:type="patternLanguage:PathExpressionConstraint">
         <head>
@@ -850,6 +866,57 @@
           <src var="executeHttpPostVarArg"/>
           <dst xsi:type="patternLanguage:VariableValue">
             <value var="httppostVar"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.4" transitive="true">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="classmethod"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="fileBodyVar"/>
+          </parameters>
+        </call>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="parentContainsSomething" fileName="platform:/resource/org.qualitune.refactoring.energy.test/queries/dataTransmissionWithoutCompression.eiq">
+    <modifiers private="true"/>
+    <parameters name="parent"/>
+    <parameters name="child"/>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/statements#//LocalVariableStatement"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/statements#//LocalVariableStatement/variable"/>
+            </type>
+          </tail>
+          <src var="parent"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="child"/>
+          </dst>
+        </head>
+      </constraints>
+    </bodies>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://www.emftext.org/java/statements#//StatementListContainer"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://www.emftext.org/java/statements#//StatementListContainer/statements"/>
+            </type>
+          </tail>
+          <src var="parent"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="child"/>
           </dst>
         </head>
       </constraints>
