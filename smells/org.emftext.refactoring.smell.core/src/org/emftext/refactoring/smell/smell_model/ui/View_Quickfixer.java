@@ -4,8 +4,9 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolutionGenerator;
+import org.eclipse.ui.IMarkerResolutionGenerator2;
 
-public class View_Quickfixer implements IMarkerResolutionGenerator {
+public class View_Quickfixer implements IMarkerResolutionGenerator, IMarkerResolutionGenerator2 {
 	
     public IMarkerResolution[] getResolutions(IMarker mk) {
        try {
@@ -22,4 +23,10 @@ public class View_Quickfixer implements IMarkerResolutionGenerator {
           return new IMarkerResolution[0];
        }
     }
+
+	@Override
+	public boolean hasResolutions(IMarker marker) {
+		// TODO Auto-generated method stub
+		return false;
+	}
  }

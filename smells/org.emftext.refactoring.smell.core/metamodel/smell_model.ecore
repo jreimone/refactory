@@ -74,7 +74,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
         eType="#//ModelMetric" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleMapping"/>
   <eClassifiers xsi:type="ecore:EClass" name="Mapping">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="factor" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloatObject"/>
   </eClassifiers>
