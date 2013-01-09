@@ -5,10 +5,9 @@ Bundle-SymbolicName: org.emftext.refactoring.smell.test
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.junit,
- org.emftext.refactoring.smell.core;bundle-version="1.0.0",
- org.emftext.refactoring.smell.ecore_extension;bundle-version="1.0.0"
-Import-Package: org.eclipse.core.resources,
- org.eclipse.core.runtime;version="3.4.0",
- org.eclipse.swt,
- org.eclipse.swt.widgets,
- org.eclipse.ui
+ org.emftext.refactoring.smell.core,
+ org.emftext.refactoring.smell.ecore_extension,
+ org.eclipse.emf.ecore,
+ org.eclipse.ui.ide,
+ org.eclipse.core.resources,
+ org.eclipse.equinox.common
