@@ -38,7 +38,7 @@ public class ExtractSubDepartmentPostProcessor extends AbstractRefactoringPostPr
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
+	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection) {
 		List<Employee> extractees = (List<Employee>) getInstancesByRoleName(roleRuntimeInstanceMap, "Extractee");
 		List<Department> containers = (List<Department>) getInstancesByRoleName(roleRuntimeInstanceMap, "NewContainer");
 		Department container = (Department) containers.get(0);
