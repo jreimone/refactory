@@ -1,0 +1,41 @@
+<!-- How to configure this ant script:
+	Run as->Ant Build...
+		Set:
+			- Base directory (to the workspace_loc variable)
+			- Run in same JRE
+-->
+<project name="HOT-Composition" default="transform">
+	<property name="inputfile" value="../Families2Persons/Families2Persons.atl"/>
+	<property name="inputfile2" value="../Families2Persons/Families2Persons.atl"/>
+	
+	<target name="transform">
+		<echo message="Transforming file ${inputfile} and ${inputfile2}"/>
+
+		<atl.loadModel modelHandler="EMF" name="ATL" metamodel="MOF" path="../Metamodels/ATL/ATL.ecore" />
+		<atl.loadModel name="input" metamodel="ATL" path="${inputfile}">
+		 	<injector name="ATL" />
+		</atl.loadModel>
+		
+		<atl.saveModel model="input" path="${inputfile}.xmi"/>
+		
+		<atl.loadModel modelHandler="EMF" name="ATL2" metamodel="MOF" path="../Metamodels/ATL/ATL.ecore" />
+		<atl.loadModel name="input2" metamodel="ATL2" path="${inputfile2}">
+		 	<injector name="ATL" />
+		</atl.loadModel>		
+
+		<atl.saveModel model="input2" path="${inputfile2}.xmi"/>
+		
+		<atl.launch path="HOT-Composition.atl">
+			<inmodel name="IN" model="input"/>
+			<inmodel name="IN2" model="input2"/>
+			<outmodel name="OUT" model="output" metamodel="ATL"/>
+		</atl.launch>
+
+		<atl.saveModel model="output" path="Output.xmi"/>
+		
+		<atl.saveModel model="output" path="Output.atl">
+		 	<extractor name="ATL" />
+		</atl.saveModel>
+	</target>
+
+</project>

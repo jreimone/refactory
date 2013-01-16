@@ -1,0 +1,62 @@
+-- @path ATL=/Metamodels/ATL/ATL.ecore
+module ATL2BindingDebugger;
+create OUT : ATL refining IN : ATL;
+
+rule Binding {
+	from
+		s : ATL!Binding
+	to
+		t : ATL!Binding (
+			value <- debugger
+		),
+		debugger : ATL!OperationCallExp (
+			source <- s.value,
+			operationName <- 'debug',
+			arguments <- Sequence {arg}
+		),
+		arg : ATL!StringExp (
+			stringSymbol <- s.outPatternElement.outPattern."rule".name + '.' +
+					s.outPatternElement.varName + '.' +
+					s.propertyName
+		)
+}
+
+rule Attribute {
+	from
+		s : ATL!Attribute
+	to
+		t : ATL!Attribute (
+			initExpression <- debugger
+		),
+		debugger : ATL!OperationCallExp (
+			source <- s.initExpression,
+			operationName <- 'debug',
+			arguments <- Sequence {arg}
+		),
+		arg : ATL!StringExp (
+			stringSymbol <- s.name
+		)
+}
+
+rule Helper {
+	from
+		s : ATL!Helper
+	to
+		t : ATL!Helper (
+			definition <- o
+		),
+		o : ATL!OclFeatureDefinition (
+			feature <- o2
+		),
+		o2 : ATL!Attribute (
+			initExpression <- debugger
+		),		
+		debugger : ATL!OperationCallExp (
+			source <- s.initExpression,
+			operationName <- 'debug',
+			arguments <- Sequence {arg}
+		),
+		arg : ATL!StringExp (
+			stringSymbol <- s.name
+		)
+}

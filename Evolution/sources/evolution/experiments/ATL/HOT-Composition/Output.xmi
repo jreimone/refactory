@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<atl:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" name="merge">
+  <elements xsi:type="atl:Helper">
+    <commentsBefore>-- duplicated</commentsBefore>
+  </elements>
+  <elements xsi:type="atl:Helper">
+    <commentsBefore>-- duplicated</commentsBefore>
+  </elements>
+</atl:Module>

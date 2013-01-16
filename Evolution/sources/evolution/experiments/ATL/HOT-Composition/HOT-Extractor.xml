@@ -1,0 +1,21 @@
+<!-- How to configure this ant script:
+	Run as->Ant Build...
+		Set:
+			- Run in same JRE
+-->
+<project name="HOT-Extractor" default="transform">
+	<property name="inputfile" value="../HOT-Composition/Output.xmi"/>
+	
+	<target name="transform">
+		<echo message="Transforming file ${inputfile}"/>
+
+		<atl.loadModel modelHandler="EMF" name="ATL" metamodel="MOF" path="../Metamodels/ATL/ATL.ecore" />
+		<atl.loadModel name="input" metamodel="ATL" path="${inputfile}"/>
+
+		<atl.saveModel model="input" path="${inputfile}.atl">
+		 	<extractor name="ATL" />
+		</atl.saveModel>
+	
+	</target>
+
+</project>
