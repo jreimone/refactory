@@ -12,9 +12,10 @@
       </menuContribution>
    </extension>
    <extension
-         point="org.eclipse.ui.startup">
-      <startup
-            class="org.emftext.refactoring.ui.StartUpRegistrations">
-      </startup>
+         id="id1"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            uri="fragment.e4xmi">
+      </fragment>
    </extension>
 </plugin>

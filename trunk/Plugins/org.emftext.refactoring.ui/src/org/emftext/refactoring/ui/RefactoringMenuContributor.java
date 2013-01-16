@@ -168,6 +168,8 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 //			}
 			
 			ResourceSet resourceSet = resource.getResourceSet();
+			resource = elementsInResource.get(0).eResource();
+//			resourceSet.getResource(uri, loadOnDemand)
 			EcoreUtil.resolveAll(resourceSet);
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
 

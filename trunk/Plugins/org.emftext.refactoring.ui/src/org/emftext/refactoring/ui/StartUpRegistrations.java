@@ -15,16 +15,18 @@
  ******************************************************************************/
 package org.emftext.refactoring.ui;
 
+import javax.annotation.PostConstruct;
+
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.ui.IStartup;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
 
-public class StartUpRegistrations implements IStartup {
+public class StartUpRegistrations {
 
 	@SuppressWarnings("unused")
+	@PostConstruct
 	public void earlyStartup() {
 		// just provoke to initialize registries
 		IRoleModelRegistry roleModelRegistry = IRoleModelRegistry.INSTANCE;
