@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<project name="project" default="genmodel.generate.sources" basedir="..">
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+	  <classpath>
+	    <pathelement location="BuildLanguagesProject/lib/ant-contrib-1.0b3.jar"/>
+	  	<pathelement location="BuildLanguagesProject/lib/bcel-5.1.jar"/>
+	  	<pathelement location="BuildLanguagesProject/lib/commons-httpclient-3.0.1.jar"/>
+	  	<pathelement location="BuildLanguagesProject/lib/commons-logging-1.0.4.jar"/>
+	  	<pathelement location="BuildLanguagesProject/lib/ivy-1.3.1.jar"/>
+	  </classpath>
+	</taskdef>
+	
+    <target name="genmodel.generate.sources">
+    	
+    	<macrodef name="generateModelResources">
+    		<attribute name="languageName" description="The name of the language to generate. Usually it is the name of the metamodel package."/>
+    		<attribute name="ecoreFile" default="@{languageName}.ecore" description="The name of the ecore file. Usually it is @{languageName}.ecore."/>
+    		<attribute name="genmodelFile" default="@{languageName}.genmodel" description="The name of the genmodel file. Usually it is @{languageName}.genmodel."/>
+       		<attribute name="languageFolder" default="metamodel" description="The folder in the language "/>
+       		<attribute name="pluginID" default="org.emftext.language.@{languageName}" description="The id of the plugin which contains the language. Default value is org.emftext.language.@{languageName}."/>
+       		<attribute name="generateEditProject" default="false" description="A boolean value to specify if to generate the edit plugin. Default value is false"/>
+      		<attribute name="generateEditorProject" default="false" description="A boolean value to specify if to generate the editor plugin. Default value is false"/>
+	   		<attribute name="generateTestProject" default="false" description="A boolean value to specify if to generate the test plugin. Default value is false"/>
+    		<sequential>
+    			<echo>========== Generating model resources for @{pluginID} ==========</echo>
+    			<emf.Ecore2Java
+    		    	model="${basedir}/@{pluginID}/@{languageFolder}/@{ecoreFile}"
+    		    	genModel="${basedir}/@{pluginID}/@{languageFolder}/@{genmodelFile}"
+    		    	modelProject="${basedir}/@{pluginID}/"
+    		    	reconcileGenModel="keep"
+    		    	generateModelProject="true"
+    		    	generateEditProject="@{generateEditProject}"
+    		    	generateEditorProject="@{generateEditorProject}"
+    		    	generateTestsProject="@{generateTestProject}"
+    		    	modelPluginID="@{pluginID}"
+    		    	modelProjectFragmentPath="src"
+    		    	validateModel="true" />
+    		</sequential>
+    	</macrodef>
+    	
+    	<macrodef name="generateLanguage">
+    		<attribute name="languageName" description="The name of the language to generate. Usually it is the name of the metamodel package."/>
+    		<attribute name="ecoreFile" default="@{languageName}.ecore" description="The name of the ecore file. Usually it is the name of the @{languageName}.ecore."/>
+    		<attribute name="genmodelFile" default="@{languageName}.genmodel" description="The name of the genmodel file. Usually it is @{languageName}.genmodel."/>
+    		<attribute name="syntaxFile" default="@{languageName}.cs" description="The name of the cs file. Usually it is the name of the @{languageName}.cs."/>
+    		<attribute name="languageFolder" default="metamodel" description="The folder in the language "/>
+    		<attribute name="pluginID" default="org.emftext.language.@{languageName}" description="The id of the plugin that contains the language. Default value is org.emftext.language.@{languageName}."/>
+    		<attribute name="generateModel" default="true" description="A boolean value to specify if to generate the model code. Default value is true"/>
+    		<attribute name="generateEditProject" default="false" description="A boolean value to specify if to generate the edit plugin. Default value is false"/>
+    		<attribute name="generateEditorProject" default="false" description="A boolean value to specify if to generate the editor plugin. Default value is false"/>
+    		<attribute name="generateTestProject" default="false" description="A boolean value to specify if to generate the test plugin. Default value is false"/>
+    		<attribute name="syntaxPluginID" default="@{pluginID}.resource.@{languageName}" description="A string value for providing the plugin name of the generated language projects (resource and ui). Default value is @{pluginID}.resource.@{languageName}"/>
+    	 	<sequential>
+    	 		<if>
+    	 			<istrue value="@{generateModel}"/>
+    	 			<then>
+    	 				<generateModelResources pluginid="@{pluginID}" languagename="@{languageName}" ecorefile="@{ecoreFile}" genmodelfile="@{genmodelFile}" languagefolder="@{languageFolder}" generateeditproject="@{generateEditProject}" generateeditorproject="@{generateEditorProject}" generatetestproject="@{generateTestProject}"/>
+    	 			</then>
+    	 		</if>
+    	 		
+    	 		<echo>========== Generating text resources for @{pluginID} ==========</echo>
+    	 		<emftext.GenerateTextResource
+    	 		    syntax="@{pluginID}/@{languageFolder}/@{syntaxFile}"
+    	 		    rootFolder="${basedir}/"
+    	 		    syntaxProjectName="@{syntaxPluginID}"
+    	 		/>
+    		</sequential>
+    	</macrodef>
+    	
+    	<!-- Add models to generate here (only model, edit, editor resources can be generated with this task) -->    	
+    	<generateModelResources 
+    		pluginid="org.emftext.commons.layout" 
+    		languagename="layout" 
+    		generateeditproject="true" 
+    	/>
+    	<!--
+    	<generateModelResources 
+    		pluginid="org.reuseware.sokan" 
+    		languagename="sokan" 
+    		languagefolder="model" 
+    	/>
+    	<generateModelResources 
+    	   	pluginid="org.reuseware.sokan.ui.model" 
+    	   	languagename="sokanui" 
+    	   	languagefolder="model"
+    	/>  
+    	-->
+    	<generateModelResources languagename="timedautomata"
+    		ecorefile="simpleGraph.ecore"
+    		genmodelfile="simpleGraph.genmodel"
+    	/>    	
+    	
+    	<!-- Add languages to generate here (includes generation of model resources and generation of text resources afterwards) -->
+    	<generateLanguage languagename="java"/>
+    	<generateLanguage 
+    	    	    languagename="roles" 
+    	    	    pluginid="org.emftext.language.refactoring.roles"
+    	    	/>    	
+    	<generateLanguage 
+    	    	    languagename="rolemapping" 
+    	    	    pluginid="org.emftext.language.refactoring.rolemapping"
+    	    	/>    	
+    	<generateLanguage 
+    	    	    languagename="refactoring_specification" 
+    	    	    pluginid="org.emftext.language.refactoring.specification"
+    	    	/>
+    	<generateLanguage languagename="manifest"/>
+    	<generateLanguage languagename="pl0"/>
+    	<generateLanguage
+    				languagename="pl0extended"
+    				pluginid="org.emftext.language.pl0.extended"
+    				syntaxpluginid="org.emftext.language.pl0extended"/>
+    	<generateLanguage
+    				languagename="properties"
+    				pluginid="org.emftext.refactoring.tests.properties"
+    				ecorefile="Properties"
+    				/>    	
+    	<generateLanguage languagename="conference"/>    	
+    	<generateLanguage languagename="textadventure"/>
+    	<generateLanguage languagename="dot"/>
+    	<generateLanguage
+    				languagename="company"
+    				ecorefile="company.text.ecore"
+    				syntaxfile="company.text.cs"
+    				/>
+    	<generateLanguage languagename="appflow"
+    				ecorefile="appflow.text.ecore"
+    	/>
+    	<generateLanguage languagename="forms"/>
+    	<!-- <generateLanguage languagename="office"/> -->
+    	<generateLanguage languagename="sandwich"
+    				ecorefile="sandwich_simple.ecore"
+    				genmodelfile="sandwich_simple.genmodel"
+    				syntaxfile="sandwich_simple.cs"
+    	/>
+    	<generateLanguage languagename="simplegui"/>
+    	<generateLanguage languagename="timedautomata"
+    				ecorefile="timedAutomata.ecore"
+    				genmodelfile="timedAutomata.genmodel"
+    				syntaxfile="timedAutomata.cs"
+    	/>
+    	<generateLanguage languagename="owl"
+    				ecorefile="owl.text.ecore"
+    	/>
+    	<generateLanguage languagename="guery"
+    				pluginid="org.qualitune.guery"
+    	/>
+    	<generateLanguage languagename="efactory"/>
+    	<generateLanguage languagename="functions"/>
+    	<generateModelResources 
+    	    		pluginid="org.qualitune.evolution.operators" 
+    	    		languagename="operators" 
+    	/>    	
+    </target>
+</project>
