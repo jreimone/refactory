@@ -1,0 +1,17 @@
+-- @path Simple=/Metamodels/Simple/Simple.ecore
+-- @path ATL=/Metamodels/ATL/ATL.ecore
+
+module HOTAnalysis;
+
+create OUT : Simple from IN : ATL;
+uses hotlib;
+
+rule moduleRule {
+	from 
+		s: ATL!Module 
+	to 
+		t: Simple!Element (
+			name <- 'Number of Rules',
+			value <- ATL!Rule.allInstances()->size().toString()
+		)
+}

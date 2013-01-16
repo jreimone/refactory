@@ -1,0 +1,178 @@
+library hotlib;
+
+--belongsTo(metaModelName: String)         OclAny            Boolean *******************************************
+--return true if the element belongs to the specified model.
+helper context OclAny def: belongsTo(modelName: String) : Boolean =
+	self.oclType().allInstancesFrom(modelName)->contains(self);
+
+--firstContainerOfType(OclType) OclAny                OclAny ***************************************************
+--compute the ATL element of the specified type in which the contextual element is declared
+-- ATL!OutPatternElement.allInstances()->first().firstContainerOfType(ATL!Rule)
+
+helper context OclAny def: firstContainerOfType(type: OclType) : OclAny = 
+	let container: OclAny = self.refImmediateComposite() in
+		if container.oclIsUndefined()
+		then OclUndefined
+		else if container.oclIsTypeOf(type)
+			then container
+			else container.firstContainerOfType(type)
+			endif
+		endif;
+
+--firstContainerOfKind(OclType) OclAny                OclAny ***************************************************
+--compute the ATL element of the specified kind in which the contextual element is declared
+helper context OclAny def: firstContainerOfKind(type: OclType) : OclAny = 
+	let container: OclAny = self.refImmediateComposite() in
+		if container.oclIsUndefined()
+		then OclUndefined
+		else if container.oclIsKindOf(type)
+			then container
+			else container.firstContainerOfKind(type)
+			endif
+		endif;
+
+--rootExpression                       ATL!OclExpression     ATL!OclExpression *********************************
+helper context ATL!OclExpression def: rootExpression() : ATL!OclExpression =
+	let container: OclAny = self.refImmediateComposite() in
+		if container.oclIsUndefined()
+		then self
+		else if container.oclIsKindOf(ATL!OclExpression)
+			then container.rootExpression()
+			else self
+			endif
+		endif;
+
+--navigationRootExpression             ATL!PropertyCallExp ATL!OclExpression ***********************************
+--return the root OCL element of the containment or navigation tree that includes the contextual
+--element.
+helper context ATL!PropertyCallExp def: navigationRootExpression() : ATL!OclExpression =
+	let source : OclAny = self.source in
+		if source.oclIsKindOf(ATL!PropertyCallExp)
+		then source.navigationRootExpression()
+		else source
+		endif;
+
+--knownVariables                       ATL!OclAny            OrderedSet(ATL!VariableDeclaration) ***************
+--helper context OclAny def: knownVariables(): OrderedSet(ATL!VariableDeclaration) 
+helper context OclAny def: knownVariables() : OrderedSet(ATL!VariableDeclaration) =
+	let container : ATL!Element = self.immediateComposite in
+		if container.oclIsUndefined() then
+			OrderedSet{}
+		else if container.oclIsTypeOf(ATL!Rule) then
+			OrderedSet{
+				container.ruleVariables()
+			}->flatten()
+		else if container.oclIsTypeOf(ATL!LetExp) then
+			OrderedSet{
+				container.variable,
+				container.knownVariables()
+			}->flatten()
+		else if container.oclIsTypeOf(ATL!IfExp) then
+			OrderedSet{
+				container.knownVariables()
+			}->flatten()
+		else if container.oclIsTypeOf(ATL!IteratorExp) then
+			if container.source = self
+			then
+				OrderedSet{
+					container.knownVariables()
+				}->flatten()
+			else
+				OrderedSet{
+					container.iterators,
+					container.knownVariables()
+				}->flatten()
+			endif
+		else if container.oclIsTypeOf(ATL!IterateExp) then
+			if container.source = self
+			then
+				OrderedSet{
+					container.knownVariables()
+				}->flatten()
+			else
+				OrderedSet{
+					container.iterators,
+					container.result,
+					container.knownVariables()
+				}->flatten()
+			endif
+		else 
+			OrderedSet{
+				container.knownVariables()
+			}->flatten()
+		endif endif endif endif endif endif;
+
+-- This helper computes a sequence containing all the VariableDeclaration
+-- elements that are associated with the contextual Rule. 
+helper context ATL!Rule def: ruleVariables : OrderedSet(ATL!VariableDeclaration) =
+	OrderedSet{
+		if self.oclIsTypeOf(ATL!MatchedRule)
+		then
+			self.inPattern.elements->asSequence()
+		else
+			OrderedSet{}
+		endif,
+		self.variables->asSequence(),
+		self.outPattern.elements->asSequence()
+	}->flatten();
+		
+--containedVariables                   ATL!OclExpression     OrderedSet(ATL!VariableDeclaration) ***************
+--computes an ordered set containing the VariableDeclarations that are defined higher or lower than
+--the contextual ATL element in its namespace tree.
+helper context ATL!OclExpression def: containedVariables() : OrderedSet(ATL!VariableDeclaration) =
+	if self.oclIsTypeOf(ATL!LetExp) then
+		OrderedSet{
+			self.variable,
+			self.in_.containedVariables()
+		}->flatten()
+	else if self.oclIsTypeOf(ATL!IfExp) then
+		OrderedSet{
+			self.condition.containedVariables(),
+			self.thenExpression.containedVariables(),
+			self.elseExpression.containedVariables()
+		}->flatten()
+	else if self.oclIsTypeOf(ATL!IteratorExp) then
+		OrderedSet{
+			self.iterators,
+			self.source.containedVariables(),
+			self.body.containedVariables()
+		}->flatten()
+	else if self.oclIsTypeOf(ATL!IterateExp) then
+		OrderedSet{
+			self.iterators,
+			self.result,
+			self.source.containedVariables(),
+			self.body.containedVariables()
+		}->flatten()
+	else OrderedSet{}
+	endif endif endif endif;
+
+--generatingRules                      ATL!OclModelElement OrderedSet(ATL!Rule) ********************************
+--matchingRules                        ATL!OclModelElement OrderedSet(ATL!Rule) ********************************
+--copyRules                            ATL!OclModelElement OrderedSet(ATL!Rule) ********************************
+--computes an ordered set containing all the rules that can generate, match or copy the contextual
+--element type.
+
+helper context String def: generatingRules() : OrderedSet(ATL!MatchingRule) =
+	ATL!MatchedRule.allInstances()->select(r | r.outPattern.elements->exists(e | 
+		e.type.name = self.split('!').at(2) and
+		e.type.model.name = self.split('!').at(1)));
+
+helper context String def: matchingRules() : OrderedSet(ATL!MatchingRule) =
+	ATL!MatchedRule.allInstances()->select(r | r.inPattern.elements->exists(e | 
+		e.type.name = self.split('!').at(2) and
+		e.type.model.name = self.split('!').at(1)));
+
+helper context String def: copyingRules() : OrderedSet(ATL!MatchingRule) =
+	ATL!MatchedRule.allInstances()->select(r | 
+		r.outPattern.elements->exists(e | 
+			e.type.name = self.split('!').at(2) and
+			e.type.model.name = self.split('!').at(1)) and
+		r.inPattern.elements->exists(e | 
+			e.type.name = self.split('!').at(2) and
+			e.type.model.name = self.split('!').at(1)));
+
+--callsByName(name: String)            thisModule            OrderedSet(ATL!NavigationExp) *********************
+--computes an ordered set containing the calls to operations with the given name.
+helper def: callsByName(name: String): OrderedSet(ATL!NavigationOrAttributeCallExp) =
+	ATL!NavigationOrAttributeCallExp.allInstances()->select(c | c.name = name);

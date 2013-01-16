@@ -1,0 +1,10 @@
+module HOTSynthesis;
+
+create OUT : ATL from IN : Simple;
+
+rule helperRule {
+	from
+		i : Simple!Element 
+	to
+		o : ATL!MatchedRule 
+}

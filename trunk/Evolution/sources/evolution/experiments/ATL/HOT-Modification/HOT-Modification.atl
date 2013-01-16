@@ -1,0 +1,16 @@
+-- @path ATL=/Metamodels/ATL/ATL.ecore
+
+module HOTModification;
+
+create OUT : ATL refining IN : ATL;
+
+rule ciaoname {
+	from
+		i : ATL!OclModelElement (
+			i.name = 'Male'
+		)
+	to
+		o : ATL!OclModelElement (
+			name <- 'Homme'
+		)
+}

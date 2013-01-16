@@ -1,0 +1,112 @@
+-- @atlcompiler atl2004
+-- @path ATL=/Metamodels/ATL/ATL.ecore
+ 
+module ATL2Tracer;
+create OUT : ATL refining IN : ATL;
+
+rule Module {
+	from
+		s : ATL!Module
+	to
+		t : ATL!Module (
+			name <- s.name,
+			libraries <- s.libraries,
+			isRefining <- s.isRefining,
+			inModels <- s.inModels,
+			outModels <- s.outModels->including(traceModel),
+			elements <- s.elements,
+
+			location <- s.location,
+			commentsBefore <- s.commentsBefore,
+			commentsAfter <- s.commentsAfter
+		),
+		traceModel : ATL!OclModel (
+			name <- 'trace',
+			metamodel <- traceMetamodel
+		),
+		traceMetamodel : ATL!OclModel (
+			name <- 'Trace'
+		)
+}
+
+rule OutPattern {
+	from
+		s : ATL!OutPattern
+	to
+		t : ATL!OutPattern (
+			elements <- s.elements->including(traceLink)
+		),
+
+		-- We add a target pattern element creating a trace link to the rule.
+		traceLink : ATL!SimpleOutPatternElement (
+			varName <- 'traceLink',
+			type <- traceType,
+			bindings <- Sequence {ruleName, targetElements}
+		),
+		traceType : ATL!OclModelElement (
+			name <- 'TraceLink',
+			model <- thisModule.resolveTemp(s."rule"."module", 'traceMetamodel')
+		),
+
+		-- The rule name is set using a binding.
+		ruleName : ATL!Binding (
+			propertyName <- 'ruleName',
+			value <- nameString
+		),
+		nameString : ATL!StringExp (
+			stringSymbol <- s."rule".name
+		),
+
+		-- Source elements cannot be set with a binding because they are not supposed to be referrable.
+		-- An imperative block is used instead.
+		sourceSeq : ATL!SequenceExp (
+			elements <- s."rule".inPattern.elements->collect(e|thisModule.sourceVars(e))
+		),
+		actionBlock : ATL!ActionBlock (	-- we suppose there is no action block in the original program
+			"rule" <- s."rule",
+			statements <- Sequence {stat}
+		),
+		stat : ATL!ExpressionStat (
+			expression <- refSetValue
+		),
+		refSetValue : ATL!OperationCallExp (
+			operationName <- 'refSetValue',
+			source <- traceLinkVar,
+			arguments <- Sequence {seString, sourceSeq}
+		),
+		traceLinkVar : ATL!VariableExp (
+			referredVariable <- traceLink
+		),
+		seString : ATL!StringExp (
+			stringSymbol <- 'sourceElements'
+		),
+
+		-- Target elements are initialized using a binding
+		targetElements : ATL!Binding (
+			propertyName <- 'targetElements',
+			value <- targetSeq
+		),
+		targetSeq : ATL!SequenceExp (
+			elements <- s.elements->collect(e|thisModule.targetVars(e))
+		)
+		
+}
+
+lazy rule sourceVars {
+		from
+			e : ATL!InPatternElement
+		to
+		
+		sourceVars : ATL!VariableExp (
+			referredVariable <- e
+		)
+}
+
+lazy rule targetVars {
+		from
+			e : ATL!OutPatternElement
+		to
+		targetVars : ATL!VariableExp (
+			referredVariable <- e
+		)
+}
