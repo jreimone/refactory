@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SAT4J Core Wrapper Plugin
+Bundle-SymbolicName: org.sat4j.core
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.sat4j,
+ org.sat4j.core,
+ org.sat4j.minisat,
+ org.sat4j.minisat.constraints,
+ org.sat4j.minisat.constraints.card,
+ org.sat4j.minisat.constraints.cnf,
+ org.sat4j.minisat.core,
+ org.sat4j.minisat.learning,
+ org.sat4j.minisat.orders,
+ org.sat4j.minisat.restarts,
+ org.sat4j.opt,
+ org.sat4j.reader,
+ org.sat4j.specs,
+ org.sat4j.tools,
+ org.sat4j.tools.encoding,
+ org.sat4j.tools.xplain
