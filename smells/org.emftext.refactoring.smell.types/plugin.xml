@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension-point id="smellType" name="org.emftext.refactoring.smelltype" schema="schema/smelltype.exsd"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://modelrefactoring.org/smell/type"
+            class="org.emftext.refactoring.smelltype.SmelltypePackage"
+            genModel="metamodel/smelltype.genmodel"/>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.smell.types.smellType">
+      <smellType
+            smellTypeClass="org.emftext.refactoring.smelltype.StructureSmell">
+      </smellType>
+      <smellType
+            smellTypeClass="org.emftext.refactoring.smelltype.MetricSmell">
+      </smellType>
+   </extension>
+   <extension
+         id="id1"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            uri="fragment.e4xmi">
+      </fragment>
+   </extension>
+
+</plugin>
