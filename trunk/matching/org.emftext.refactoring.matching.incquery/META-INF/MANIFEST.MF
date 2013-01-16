@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Incquery
-Bundle-SymbolicName: org.emftext.refactoring.matching.incquery
+Bundle-SymbolicName: org.emftext.refactoring.matching.incquery;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
