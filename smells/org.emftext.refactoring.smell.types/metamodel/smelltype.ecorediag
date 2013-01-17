@@ -28,7 +28,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_3eJY6l5BEeKN9vNNI_wJ3Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_3eJY615BEeKN9vNNI_wJ3Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_3eJY4V5BEeKN9vNNI_wJ3Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_3eJY4V5BEeKN9vNNI_wJ3Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="smelltype.ecore#//SmellType"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3eJY4l5BEeKN9vNNI_wJ3Q" x="185" y="65"/>
   </children>

@@ -1,22 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smell"
-    nsURI="http://modelrefactoring.org/smell" nsPrefix="smell">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smell" nsURI="http://modelrefactoring.org/smell" nsPrefix="smell">
   <eClassifiers xsi:type="ecore:EClass" name="QualitySmellModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="smells" upperBound="-1"
         eType="#//QualitySmell" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="qualities" upperBound="-1"
         eType="#//Quality" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concreteSmells" upperBound="-1"
+        eType="#//ConcreteQualitySmell" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Quality">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculations" upperBound="-1"
+        eType="#//QualityCalculation" eOpposite="#//QualityCalculation/quality"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QualitySmell">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.emftext.refactoring.smell.types/metamodel/smelltype.ecore#//SmellType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Calculation" abstract="true" interface="true">
     <eOperations name="calculate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.emftext.refactoring.smell.types/metamodel/smelltype.ecore#//SmellType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="monotonicity" lowerBound="1"
+        eType="#//Monotonicity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Monotonicity">
+    <eLiterals name="INCREASING"/>
+    <eLiterals name="DECREASING" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConcreteQualitySmell">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="genericSmell" lowerBound="1"
+        eType="#//QualitySmell"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concreteName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualityCalculations" lowerBound="1"
+        upperBound="-1" eType="#//QualityCalculation" containment="true" eOpposite="#//QualityCalculation/concreteSmell"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refactoring" eType="ecore:EClass ../../org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.ecore#//RoleMapping"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QualityCalculation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concreteSmell" lowerBound="1"
+        eType="#//ConcreteQualitySmell" eOpposite="#//ConcreteQualitySmell/qualityCalculations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="quality" lowerBound="1"
+        eType="#//Quality" eOpposite="#//Quality/calculations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculation" eType="#//Calculation"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
