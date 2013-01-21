@@ -5,22 +5,13 @@
 -->
 
 <plugin>
-   <extension-point id="smellType" name="org.emftext.refactoring.smelltype" schema="schema/smelltype.exsd"/>
+   <extension-point id="calculation" name="Smell Calculation" schema="schema/calculation.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://modelrefactoring.org/smell/type"
-            class="org.emftext.refactoring.smelltype.SmelltypePackage"
-            genModel="metamodel/smelltype.genmodel"/>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.smell.types.smellType">
-      <smellType
-            smellTypeClass="org.emftext.refactoring.smelltype.StructureSmell">
-      </smellType>
-      <smellType
-            smellTypeClass="org.emftext.refactoring.smelltype.MetricSmell">
-      </smellType>
+            uri="http://modelrefactoring.org/smell/calculation"
+            class="org.emftext.refactoring.smell.calculation.CalculationPackage"
+            genModel="metamodel/calculation.genmodel"/>
    </extension>
    <extension
          id="id1"

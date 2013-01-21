@@ -16,19 +16,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QualitySmell">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.emftext.refactoring.smell.types/metamodel/smelltype.ecore#//SmellType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Calculation" abstract="true" interface="true">
-    <eOperations name="calculate"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.emftext.refactoring.smell.types/metamodel/smelltype.ecore#//SmellType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="monotonicity" lowerBound="1"
-        eType="#//Monotonicity"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Monotonicity">
-    <eLiterals name="INCREASING"/>
-    <eLiterals name="DECREASING" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConcreteQualitySmell">
     <eStructuralFeatures xsi:type="ecore:EReference" name="genericSmell" lowerBound="1"
@@ -44,7 +31,11 @@
         eType="#//ConcreteQualitySmell" eOpposite="#//ConcreteQualitySmell/qualityCalculations"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="quality" lowerBound="1"
         eType="#//Quality" eOpposite="#//Quality/calculations"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="calculation" eType="#//Calculation"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="influence" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&quot;influence&quot; represents the percentual contribution of this quality to the overall concrete quality smell. The sum of the &quot;influence&quot; values of all quality calculations of a concrete quality smell must be exactly 1.0."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculation" eType="ecore:EClass ../../org.emftext.refactoring.smell.calculation/metamodel/calculation.ecore#//Calculation"/>
   </eClassifiers>
 </ecore:EPackage>

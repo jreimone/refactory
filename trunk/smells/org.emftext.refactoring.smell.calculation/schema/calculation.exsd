@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.emftext.refactoring.smell.types" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.emftext.refactoring.smell.calculation" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.emftext.refactoring.smell.types" id="smellType" name="org.emftext.refactoring.smelltype"/>
+         <meta.schema plugin="org.emftext.refactoring.smell.calculation" id="calculation" name="Smell Calculation"/>
       </appInfo>
       <documentation>
-         Register a new smell type with this extension point.
+         [Enter description of this extension point.]
       </documentation>
    </annotation>
 
@@ -17,8 +17,8 @@
          </appInfo>
       </annotation>
       <complexType>
-         <sequence minOccurs="0" maxOccurs="unbounded">
-            <element ref="smellType"/>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="calculation"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,15 +47,15 @@
       </complexType>
    </element>
 
-   <element name="smellType">
+   <element name="calculation">
       <complexType>
-         <attribute name="smellTypeClass" type="string" use="required">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.emftext.refactoring.smelltype.SmellType"/>
+                  <meta.attribute kind="java" basedOn=":org.emftext.refactoring.smell.calculation.Calculation"/>
                </appInfo>
             </annotation>
          </attribute>

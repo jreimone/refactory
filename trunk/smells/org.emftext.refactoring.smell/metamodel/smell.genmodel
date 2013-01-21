@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.emftext.refactoring.smell/src-gen" editDirectory="/org.emftext.refactoring.smell.edit/src-gen"
+    editorDirectory="/org.emftext.refactoring.smell.editor/src-gen" modelPluginID="org.emftext.refactoring.smell"
+    modelName="Smell" editPluginClass="org.emftext.refactoring.smell.provider.SmellEditPlugin"
+    editorPluginClass="org.emftext.refactoring.smell.presentation.SmellEditorPlugin"
+    testsDirectory="/org.emftext.refactoring.smell.tests/src-gen" testSuiteClass="org.emftext.refactoring.smell.tests.SmellAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    usedGenPackages="../../org.emftext.refactoring.smell.calculation/metamodel/calculation.genmodel#//calculation platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.genmodel#//rolemapping ../../org.emftext.language.refactoring.roles/metamodel/roles.genmodel#//roles">
+  <foreignModel>smell.ecore</foreignModel>
+  <genPackages prefix="Smell" basePackage="org.emftext.refactoring" disposableProviderFactory="true"
+      ecorePackage="smell.ecore#/">
+    <genClasses ecoreClass="smell.ecore#//QualitySmellModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell.ecore#//QualitySmellModel/smells"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell.ecore#//QualitySmellModel/qualities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell.ecore#//QualitySmellModel/concreteSmells"/>
+    </genClasses>
+    <genClasses ecoreClass="smell.ecore#//Quality">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell.ecore#//Quality/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell.ecore#//Quality/calculations"/>
+    </genClasses>
+    <genClasses ecoreClass="smell.ecore#//QualitySmell">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell.ecore#//QualitySmell/name"/>
+    </genClasses>
+    <genClasses ecoreClass="smell.ecore#//ConcreteQualitySmell">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell.ecore#//ConcreteQualitySmell/genericSmell"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell.ecore#//ConcreteQualitySmell/concreteName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell.ecore#//ConcreteQualitySmell/qualityCalculations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell.ecore#//ConcreteQualitySmell/refactoring"/>
+    </genClasses>
+    <genClasses ecoreClass="smell.ecore#//QualityCalculation">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference smell.ecore#//QualityCalculation/concreteSmell"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell.ecore#//QualityCalculation/quality"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell.ecore#//QualityCalculation/influence"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell.ecore#//QualityCalculation/calculation"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
