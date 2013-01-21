@@ -1,7 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.emftext.refactoring.smell
-Bundle-SymbolicName: org.emftext.refactoring.smell; singleton:=true
-Bundle-Version: 0.1.0
-Require-Bundle: org.eclipse.emf.ecore
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.emftext.refactoring.smell;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.emftext.refactoring.smell,
+ org.emftext.refactoring.smell.impl,
+ org.emftext.refactoring.smell.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.emftext.language.refactoring.rolemapping;visibility:=reexport,
+ org.emftext.language.refactoring.roles;visibility:=reexport,
+ org.emftext.refactoring.smell.calculation
+Bundle-ActivationPolicy: lazy
