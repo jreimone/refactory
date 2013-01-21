@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getMonotonicity <em>Monotonicity</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getName <em>Name</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getSmellMessage <em>Smell Message</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +86,38 @@ public interface Calculation extends EObject {
 	 * @generated
 	 */
 	String getDescription();
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_Name()
+	 * @model default="" required="true" changeable="false"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Returns the value of the '<em><b>Smell Message</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Smell Message</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Smell Message</em>' attribute.
+	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_SmellMessage()
+	 * @model default="" required="true" changeable="false"
+	 * @generated
+	 */
+	String getSmellMessage();
 
 	/**
 	 * <!-- begin-user-doc -->

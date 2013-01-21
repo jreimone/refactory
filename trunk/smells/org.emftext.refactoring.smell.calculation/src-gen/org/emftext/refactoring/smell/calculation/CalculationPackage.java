@@ -122,13 +122,31 @@ public interface CalculationPackage extends EPackage {
 	int CALCULATION__DESCRIPTION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALCULATION__NAME = 3;
+
+	/**
+	 * The feature id for the '<em><b>Smell Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALCULATION__SMELL_MESSAGE = 4;
+
+	/**
 	 * The number of structural features of the '<em>Calculation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALCULATION_FEATURE_COUNT = 3;
+	int CALCULATION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.calculation.impl.CalculationResultImpl <em>Result</em>}' class.
@@ -150,13 +168,22 @@ public interface CalculationPackage extends EPackage {
 	int CALCULATION_RESULT__CAUSING_OBJECTS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Resulting Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALCULATION_RESULT__RESULTING_VALUE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Result</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALCULATION_RESULT_FEATURE_COUNT = 1;
+	int CALCULATION_RESULT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.calculation.impl.StructureImpl <em>Structure</em>}' class.
@@ -194,6 +221,24 @@ public interface CalculationPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURE__DESCRIPTION = CALCULATION__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__NAME = CALCULATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Smell Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__SMELL_MESSAGE = CALCULATION__SMELL_MESSAGE;
 
 	/**
 	 * The number of structural features of the '<em>Structure</em>' class.
@@ -240,6 +285,24 @@ public interface CalculationPackage extends EPackage {
 	 * @ordered
 	 */
 	int METRIC__DESCRIPTION = CALCULATION__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC__NAME = CALCULATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Smell Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC__SMELL_MESSAGE = CALCULATION__SMELL_MESSAGE;
 
 	/**
 	 * The number of structural features of the '<em>Metric</em>' class.
@@ -326,6 +389,28 @@ public interface CalculationPackage extends EPackage {
 	EAttribute getCalculation_Description();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.calculation.Calculation#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.Calculation#getName()
+	 * @see #getCalculation()
+	 * @generated
+	 */
+	EAttribute getCalculation_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.calculation.Calculation#getSmellMessage <em>Smell Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Smell Message</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.Calculation#getSmellMessage()
+	 * @see #getCalculation()
+	 * @generated
+	 */
+	EAttribute getCalculation_SmellMessage();
+
+	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.calculation.CalculationResult <em>Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -345,6 +430,17 @@ public interface CalculationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCalculationResult_CausingObjects();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.calculation.CalculationResult#getResultingValue <em>Resulting Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resulting Value</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.CalculationResult#getResultingValue()
+	 * @see #getCalculationResult()
+	 * @generated
+	 */
+	EAttribute getCalculationResult_ResultingValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.calculation.Structure <em>Structure</em>}'.
@@ -451,6 +547,22 @@ public interface CalculationPackage extends EPackage {
 		EAttribute CALCULATION__DESCRIPTION = eINSTANCE.getCalculation_Description();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALCULATION__NAME = eINSTANCE.getCalculation_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Smell Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALCULATION__SMELL_MESSAGE = eINSTANCE.getCalculation_SmellMessage();
+
+		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.calculation.impl.CalculationResultImpl <em>Result</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -467,6 +579,14 @@ public interface CalculationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CALCULATION_RESULT__CAUSING_OBJECTS = eINSTANCE.getCalculationResult_CausingObjects();
+
+		/**
+		 * The meta object literal for the '<em><b>Resulting Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALCULATION_RESULT__RESULTING_VALUE = eINSTANCE.getCalculationResult_ResultingValue();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.calculation.impl.StructureImpl <em>Structure</em>}' class.

@@ -1,69 +1,67 @@
 package org.emftext.refactoring.smell.ecore_extension;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.refactoring.smell.smell_model.ModelMetric;
+import org.emftext.refactoring.smell.calculation.CalculationFactory;
+import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
 
-public class SearchEmptyClasses extends EObjectImpl implements ModelMetric {
+public class SearchEmptyClasses extends MetricImpl{
 	
-	private String name;
-	private List<EPackage> list;
+	private List<EPackage> packages;
 
 	public SearchEmptyClasses() {
-		setName("SearchEmptyClasses");
-		list = new ArrayList<EPackage>();
+		packages = new ArrayList<EPackage>();
 	}
 
 	@Override
 	public String getName() {
-		return name;
+		return "Empty Classes Count";
 	}
 
 	@Override
-	public void setName(String name) {
-		this.name = name;
+	public Monotonicity getMonotonicity() {
+		return Monotonicity.DECREASING;
 	}
-	
-	@Override
-	public Map<EObject, Float> calculate(Resource loadedResource) {
-		Map<EObject, Float> map = new HashMap<EObject, Float>();
-		EPackage epackage = null;
-		if (loadedResource != null){
-			if (loadedResource.getContents().size() > 0) {
-				try {
-					if (loadedResource.getContents().get(0) instanceof org.eclipse.gmf.runtime.notation.impl.DiagramImpl){
-						epackage = (EPackage) ((org.eclipse.gmf.runtime.notation.impl.DiagramImpl) loadedResource.getContents().get(0)).getElement();
-					} else {
-						epackage = (EPackage) loadedResource.getContents().get(0);
-					}
-				} catch (ClassCastException e){
 
-				}
-				if (epackage != null) {
-					getList().add(epackage);
-					walkPackages(epackage.getESubpackages());
-					for (EPackage ep : list) {
-						List<EObject> contents = ep.eContents();
-						for (EObject eo : contents) {
-							if (eo instanceof EClass) {
-								if(((EClass) eo).getEAllAttributes().isEmpty() && ((EClass) eo).getEAllOperations().isEmpty()){
-									map.put(eo, 1.0f);
-								}
-							}
-						}
+	@Override
+	public String getDescription() {
+		return "Determines all EClasses having no attributes or operations";
+	}
+
+	@Override
+	public String getSmellMessage() {
+		return "This EClass has no attributes or operations.";
+	}
+
+	@Override
+	public CalculationResult calculate(EObject model) {
+		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
+		result.setResultingValue(0);
+		if(model == null || !(model instanceof EPackage)){
+			return null;
+		}
+		EPackage epackage = (EPackage) model;
+		// from here from cvonsien
+		packages.add(epackage);
+		walkPackages(epackage.getESubpackages());
+		for (EPackage ep : packages) {
+			List<EObject> contents = ep.eContents();
+			for (EObject eo : contents) {
+				if (eo instanceof EClass) {
+					if(((EClass) eo).getEAllAttributes().isEmpty() && ((EClass) eo).getEAllOperations().isEmpty()){
+						result.getCausingObjects().add(eo);
 					}
 				}
 			}
 		}
-		return map;
+		result.setResultingValue(result.getCausingObjects().size());
+		return result;
 	}
 	
 	private void walkPackages(List<EPackage> subPackages){
@@ -71,12 +69,7 @@ public class SearchEmptyClasses extends EObjectImpl implements ModelMetric {
 			if (epackage.getESubpackages() != null){
 				walkPackages(epackage.getESubpackages());
 			}
-			getList().add(epackage);
+			packages.add(epackage);
 		}
 	}
-
-	public List<EPackage> getList() {
-		return list;
-	}
-
 }
