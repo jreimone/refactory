@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracemodel
+Bundle-SymbolicName: dk.itu.sdg.tracemodel
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: dk.itu.sdg.tracemodel.Activator
+Require-Bundle: org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.aspectj.lang
+Export-Package: dk.itu.sdg.tracemodel.runtimedata

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<SimpleTrace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SimpleTrace="SimpleTrace">
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Male(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@sons.0"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Male(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@father"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Male(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.0"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Male(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.1"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Male(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@father"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Female(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@mother"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Female(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@daughters.0"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Female(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@daughters.0"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2PersonsGroovy.member2Female(Member) in Families2PersonsGroovy.groovy:0">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@mother"/>
+  </links>
+</SimpleTrace:Trace>

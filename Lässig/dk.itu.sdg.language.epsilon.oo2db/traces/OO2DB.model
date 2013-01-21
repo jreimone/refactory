@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ASCII"?>
+<SimpleTrace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SimpleTrace="SimpleTrace">
+  <links description="-> Transformed by Column dk.itu.sdg.language.epsilon.oo2db.OO2DB.singleValuedAttribute2Column(Attribute) in OO2DB.java:149">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.1/@features.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.3/@columns.2"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_multiValuedAttribute2Table(Table, Attribute) in OO2DB.java:233">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.1"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.2"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_class2Table(Table, Class) in OO2DB.java:86">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.11"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.7"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_class2Table(Table, Class) in OO2DB.java:86">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.0"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.multiValuedAttribute2Table(Attribute) in OO2DB.java:216">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.2/@features.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_singleValuedAttribute2Column(Column, Attribute) in OO2DB.java:166">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.0/@columns.1"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_reference2ForeignKey(ForeignKey, Reference) in OO2DB.java:298">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.12"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.7/@features.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_singleValuedAttribute2Column(Column, Attribute) in OO2DB.java:166">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.0/@columns.2"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.2"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.class2Table(Class) in OO2DB.java:69">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.2"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.4"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_multiValuedAttribute2Table(Table, Attribute) in OO2DB.java:233">
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.0"/>
+  </links>
+  <links description="-> Transformed by Column dk.itu.sdg.language.epsilon.oo2db.OO2DB.singleValuedAttribute2Column(Attribute) in OO2DB.java:149">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.0/@columns.1"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.class2Table(Class) in OO2DB.java:69">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_singleValuedAttribute2Column(Column, Attribute) in OO2DB.java:166">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.3/@columns.2"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.1/@features.0"/>
+  </links>
+  <links description="-> Transformed by Column dk.itu.sdg.language.epsilon.oo2db.OO2DB.singleValuedAttribute2Column(Attribute) in OO2DB.java:149">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.2"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.0/@columns.2"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.multiValuedAttribute2Table(Attribute) in OO2DB.java:216">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.0"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.class2Table(Class) in OO2DB.java:69">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.1"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.3"/>
+  </links>
+  <links description="-> Transformed by Column dk.itu.sdg.language.epsilon.oo2db.OO2DB.singleValuedAttribute2Column(Attribute) in OO2DB.java:149">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.2/@features.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.4/@columns.1"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_class2Table(Table, Class) in OO2DB.java:86">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.4"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.2"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_singleValuedAttribute2Column(Column, Attribute) in OO2DB.java:166">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.7/@columns.2"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.3/@features.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_multiValuedAttribute2Table(Table, Attribute) in OO2DB.java:233">
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.2/@features.0"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.class2Table(Class) in OO2DB.java:69">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.7"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.11"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.multiValuedAttribute2Table(Attribute) in OO2DB.java:216">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.3/@features.0"/>
+  </links>
+  <links description="-> Transformed by Column dk.itu.sdg.language.epsilon.oo2db.OO2DB.singleValuedAttribute2Column(Attribute) in OO2DB.java:149">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.3/@features.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.7/@columns.2"/>
+  </links>
+  <links description="-> Transformed by ForeignKey dk.itu.sdg.language.epsilon.oo2db.OO2DB.reference2ForeignKey(Reference) in OO2DB.java:281">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.1"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.6"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_class2Table(Table, Class) in OO2DB.java:86">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.7"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.3"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.class2Table(Class) in OO2DB.java:69">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.3"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.7"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.multiValuedAttribute2Table(Attribute) in OO2DB.java:216">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.2"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.1"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_singleValuedAttribute2Column(Column, Attribute) in OO2DB.java:166">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.4/@columns.1"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.2/@features.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_multiValuedAttribute2Table(Table, Attribute) in OO2DB.java:233">
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.1/@features.0"/>
+  </links>
+  <links description="-> Transformed by ForeignKey dk.itu.sdg.language.epsilon.oo2db.OO2DB.reference2ForeignKey(Reference) in OO2DB.java:281">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.7/@features.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.12"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.multiValuedAttribute2Table(Attribute) in OO2DB.java:216">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.1/@features.0"/>
+  </links>
+  <links description="-> Transformed by ForeignKey dk.itu.sdg.language.epsilon.oo2db.OO2DB.reference2ForeignKey(Reference) in OO2DB.java:281">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.4/@features.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.13"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_multiValuedAttribute2Table(Table, Attribute) in OO2DB.java:233">
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.3/@features.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_class2Table(Table, Class) in OO2DB.java:86">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.9"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.4"/>
+  </links>
+  <links description="-> Transformed by Table dk.itu.sdg.language.epsilon.oo2db.OO2DB.class2Table(Class) in OO2DB.java:69">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.4"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.9"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_class2Table(Table, Class) in OO2DB.java:86">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.3"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.1"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_reference2ForeignKey(ForeignKey, Reference) in OO2DB.java:298">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.13"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.4/@features.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.oo2db.OO2DB._init_reference2ForeignKey(ForeignKey, Reference) in OO2DB.java:298">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/output/DBInstance.model#//@contents.6"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.oo2db/input/OOInstance.model#//@contents.0/@contents.0/@contents.0/@features.1"/>
+  </links>
+</SimpleTrace:Trace>

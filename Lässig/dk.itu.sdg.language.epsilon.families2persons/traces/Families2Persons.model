@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ASCII"?>
+<SimpleTrace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SimpleTrace="SimpleTrace">
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Female(Member) in Families2Persons.java:107">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@mother"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/2"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Female(Female, Member) in Families2Persons.java:124">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/3"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@daughters.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Male(Male, Member) in Families2Persons.java:97">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/6"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.1"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2Persons.4.apply(Member) in Families2Persons.java:70">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@daughters.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/3"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Female(Member) in Families2Persons.java:107">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@mother"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/7"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Male(Member) in Families2Persons.java:80">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/5"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.3.apply(Member) in Families2Persons.java:62">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/5"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Female(Female, Member) in Families2Persons.java:124">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/7"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@mother"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.3.apply(Member) in Families2Persons.java:62">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@father"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/0"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2Persons.4.apply(Member) in Families2Persons.java:70">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@mother"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/7"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2Persons.4.apply(Member) in Families2Persons.java:70">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@daughters.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/8"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.3.apply(Member) in Families2Persons.java:62">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@father"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/4"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Male(Male, Member) in Families2Persons.java:97">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/0"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@father"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Female(Member) in Families2Persons.java:107">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@daughters.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/3"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2Persons.4.apply(Member) in Families2Persons.java:70">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@mother"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/2"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Male(Member) in Families2Persons.java:80">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@sons.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/1"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Female(Female, Member) in Families2Persons.java:124">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/8"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@daughters.0"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Female(Member) in Families2Persons.java:107">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@daughters.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/8"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Male(Male, Member) in Families2Persons.java:97">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/4"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@father"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.3.apply(Member) in Families2Persons.java:62">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@sons.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/1"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Male(Male, Member) in Families2Persons.java:97">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/1"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@sons.0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Female(Female, Member) in Families2Persons.java:124">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/2"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@mother"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Male(Member) in Families2Persons.java:80">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@father"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/4"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.3.apply(Member) in Families2Persons.java:62">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.1"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/6"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Male(Member) in Families2Persons.java:80">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@father"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/0"/>
+  </links>
+  <links description="&lt;-> Transformed by void dk.itu.sdg.language.epsilon.families2persons.Families2Persons._init_member2Male(Male, Member) in Families2Persons.java:97">
+    <sources href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/5"/>
+    <targets href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.0"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2Persons.member2Male(Member) in Families2Persons.java:80">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.1"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/6"/>
+  </links>
+</SimpleTrace:Trace>

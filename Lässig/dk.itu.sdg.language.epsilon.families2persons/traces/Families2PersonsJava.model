@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<SimpleTrace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SimpleTrace="SimpleTrace">
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Male(Member) in Families2PersonsJava.java:65">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.1"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/6"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Female(Member) in Families2PersonsJava.java:84">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@daughters.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/8"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Male(Member) in Families2PersonsJava.java:65">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@father"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/4"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Male(Member) in Families2PersonsJava.java:65">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@sons.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/1"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Female(Member) in Families2PersonsJava.java:84">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@mother"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/2"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Female(Member) in Families2PersonsJava.java:84">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@daughters.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/3"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Male(Member) in Families2PersonsJava.java:65">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@sons.0"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/5"/>
+  </links>
+  <links description="-> Transformed by Female dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Female(Member) in Families2PersonsJava.java:84">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/1/@mother"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/7"/>
+  </links>
+  <links description="-> Transformed by Male dk.itu.sdg.language.epsilon.families2persons.Families2PersonsJava.member2Male(Member) in Families2PersonsJava.java:65">
+    <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/input/sample-Families.xmi#/0/@father"/>
+    <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.families2persons/output/sample-Persons.xmi#/0"/>
+  </links>
+</SimpleTrace:Trace>
