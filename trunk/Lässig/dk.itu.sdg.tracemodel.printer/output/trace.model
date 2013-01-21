@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SimpleTrace="SimpleTrace">
+  <SimpleTrace:Trace>
+    <links description="D: Transformed by Node dk.itu.sdg.language.epsilon.tree2graph.Tree2GraphJava.tree2Node(Tree) in Tree2GraphJava.java:45">
+      <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/input/tree.model#_G2JuIFdyEeKaTqPItN-9Bw"/>
+      <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/output/graph.model#//@nodes.2"/>
+    </links>
+  </SimpleTrace:Trace>
+  <SimpleTrace:Trace>
+    <links description="D: Transformed by Node dk.itu.sdg.language.epsilon.tree2graph.Tree2GraphJava.tree2Node(Tree) in Tree2GraphJava.java:45">
+      <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/input/tree.model#_LEogwFdyEeKaTqPItN-9Bw"/>
+      <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/output/graph.model#//@nodes.3"/>
+    </links>
+  </SimpleTrace:Trace>
+  <SimpleTrace:Trace>
+    <links description="D: Transformed by Node dk.itu.sdg.language.epsilon.tree2graph.Tree2GraphJava.tree2Node(Tree) in Tree2GraphJava.java:45">
+      <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/input/tree.model#_MZyV0FdyEeKaTqPItN-9Bw"/>
+      <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/output/graph.model#//@nodes.4"/>
+    </links>
+  </SimpleTrace:Trace>
+  <SimpleTrace:Trace>
+    <links description="D: Transformed by Node dk.itu.sdg.language.epsilon.tree2graph.Tree2GraphJava.tree2Node(Tree) in Tree2GraphJava.java:45">
+      <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/input/tree.model#_K1z-wAtpEd6tCvOilyvb-g"/>
+      <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/output/graph.model#//@nodes.1"/>
+    </links>
+  </SimpleTrace:Trace>
+  <SimpleTrace:Trace>
+    <links description="D: Transformed by Node dk.itu.sdg.language.epsilon.tree2graph.Tree2GraphJava.tree2Node(Tree) in Tree2GraphJava.java:45">
+      <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/input/tree.model#_JsC9MFdyEeKaTqPItN-9Bw"/>
+      <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/output/graph.model#//@nodes.5"/>
+    </links>
+  </SimpleTrace:Trace>
+  <SimpleTrace:Trace>
+    <links description="D: Transformed by Graph dk.itu.sdg.language.epsilon.tree2graph.Tree2GraphJava.transform(Tree) in Tree2GraphJava.java:27">
+      <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/input/tree.model#_CZpqwQtpEd6tCvOilyvb-g"/>
+      <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/output/graph.model#/"/>
+    </links>
+    <links description="D: Transformed by Node dk.itu.sdg.language.epsilon.tree2graph.Tree2GraphJava.tree2Node(Tree) in Tree2GraphJava.java:45">
+      <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/input/tree.model#_CZpqwQtpEd6tCvOilyvb-g"/>
+      <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/output/graph.model#//@nodes.0"/>
+    </links>
+  </SimpleTrace:Trace>
+  <SimpleTrace:Trace>
+    <links description="D: Transformed by Node dk.itu.sdg.language.epsilon.tree2graph.Tree2GraphJava.tree2Node(Tree) in Tree2GraphJava.java:45">
+      <sources href="file:/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/input/tree.model#_CZpqwQtpEd6tCvOilyvb-g"/>
+      <targets href="/Users/ropf/Documents/eclipse/juno_dresden/dk.itu.sdg.language.epsilon.tree2graph/output/graph.model#//@nodes.0"/>
+    </links>
+  </SimpleTrace:Trace>
+</xmi:XMI>

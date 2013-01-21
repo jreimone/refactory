@@ -1,0 +1,84 @@
+module dk.itu.sdg.aspect.tracemodel.generator.GenerateAspect
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xpand2.*
+
+
+var projectName = "dk.itu.sdg.aspect.tracemodel.generator"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+    bean = StandaloneSetup {
+        platformUri = "${runtimeProject}/.."
+        scanClassPath = true
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+            to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
+        }
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
+            to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+        }
+
+        registerGeneratedEPackage = "org.eclipse.emf.ecore.EcorePackage"
+    }
+
+    component = DirectoryCleaner {
+        directory = "output"
+    }
+
+ 
+//	component = org.eclipse.emf.mwe.utils.Reader {
+//		uri = "models/families.ecore"
+//		modelSlot = "modelA"
+//	}
+//
+//	component = org.eclipse.emf.mwe.utils.Reader {
+//		uri = "models/persons.ecore"
+//		modelSlot = "modelB"
+//	}
+	
+
+//	component = org.eclipse.xpand2.Generator {
+//		
+//		metaModel = org.eclipse.xtend.typesystem.emf.EmfMetaModel { 
+//			metaModelPackage = "org.eclipse.emf.ecore.EcorePackage"
+//			metaModelFile = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+//		}
+//		metaModel = org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel {}
+//		fileEncoding = "UTF-8"
+//		//dk.itu.sdg.aspect.tracemodel.generator/templates/AspectGenerator.xpt
+//		expand = "dk::itu::sdg::aspect::tracemodel::templates::AspectGenerator::main FOR {modelA,modelB}"
+//		outlet = { path = "output/" }
+//	}
+
+	component = AspectGeneratorSupport {}
+
+	component = org.eclipse.xtext.mwe.Reader {
+		path = "models/"
+		register = AspectGeneratorSetup {}
+		loadResource = {
+			slot = "models"
+		}
+	}
+	
+	component = AspectGeneratorComponent {
+		register = AspectGeneratorSetup {}
+		slot = 'models'
+		outlet = {
+			path = "output/"
+		}
+	}
+
+//	component = org.eclipse.xtext.generator.GeneratorComponent {
+//		register = AspectGeneratorSetup {}
+//		slot = 'models'
+//		outlet = {
+//			path = "output/"
+//		}
+//	}
+//	
+	
+}

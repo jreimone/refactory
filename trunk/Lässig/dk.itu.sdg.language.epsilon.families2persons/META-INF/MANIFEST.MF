@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Families2persons
+Bundle-SymbolicName: dk.itu.sdg.language.epsilon.families2persons; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: dk.itu.sdg.language.epsilon.families2persons.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.3.1",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.8.0",
+ org.codehaus.groovy;bundle-version="2.0.0",
+ dk.itu.sdg.language.epsilon.families;bundle-version="1.0.0",
+ dk.itu.sdg.language.epsilon.persons;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

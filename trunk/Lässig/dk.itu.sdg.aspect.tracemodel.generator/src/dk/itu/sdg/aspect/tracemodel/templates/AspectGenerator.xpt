@@ -1,0 +1,24 @@
+«IMPORT ecore»
+
+
+
+«DEFINE main FOR List»
+«FILE "Tracer.aj"-»
+public class package dk.itu.sdg.tracemodel.observer;
+
+import java.util.ArrayList;
+import org.aspectj.lang.JoinPoint;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+public aspect Tracer {
+«EXPAND pointcuts FOR this»				
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE pointcuts FOR List»
+
+
+
+private pointcut findMethod1(Families t1, Persons t2) : !within(Tracer2) && execution(* *(.., Families, .. , Persons, ..)) && args(t1,t2,..);
+«ENDDEFINE»

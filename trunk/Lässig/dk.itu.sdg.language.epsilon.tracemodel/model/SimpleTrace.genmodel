@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/dk.itu.sdg.language.epsilon.tracemodel/src" modelPluginID="dk.itu.sdg.language.epsilon.tracemodel"
+    modelName="SimpleTrace" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>SimpleTrace.ecore</foreignModel>
+  <genPackages prefix="SimpleTrace" disposableProviderFactory="true" ecorePackage="SimpleTrace.ecore#/">
+    <genClasses ecoreClass="SimpleTrace.ecore#//Trace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleTrace.ecore#//Trace/links"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleTrace.ecore#//TraceLink">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleTrace.ecore#//TraceLink/sources"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleTrace.ecore#//TraceLink/targets"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleTrace.ecore#//TraceLink/description"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

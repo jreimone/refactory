@@ -1,0 +1,49 @@
+module dk.itu.sdg.language.epsilon.oo2db.OO2DB
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xpand2.*
+
+
+var projectName = "dk.itu.sdg.language.epsilon.oo2db"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	
+    bean = StandaloneSetup {
+        platformUri = "${runtimeProject}/.."
+        scanClassPath = true
+        uriMap = {
+            from = "platform:/resource/dk.itu.sdg.language.epsilon.oo/model/OO.ecore"
+            to = "platform:/resource/dk.itu.sdg.language.epsilon.oo/model/OO.genmodel"
+        }
+        
+        uriMap = {
+            from = "platform:/resource/dk.itu.sdg.language.epsilon.db/model/DB.ecore"
+            to = "platform:/resource/dk.itu.sdg.language.epsilon.db/model/DB.genmodel"
+        }
+
+        registerGeneratedEPackage = "oo.OO.OOPackage"
+        registerGeneratedEPackage = "db.DB.DBPackage"
+    }
+
+    component = DirectoryCleaner {
+        directory = "output"
+    }
+ 
+	component = org.eclipse.emf.mwe.utils.Reader {
+		uri = "input/OOInstance.model"
+		modelSlot = "ooModel"
+	}
+
+	component = dk.itu.sdg.language.epsilon.oo2db.DB2OOWfComponent {
+		modelSlot = "ooModel"
+		outputSlot = "dbModel"
+	}
+
+	component = org.eclipse.emf.mwe.utils.Writer {
+	    modelSlot = "dbModel"
+		uri = "output/DBInstance.model"
+	}
+}

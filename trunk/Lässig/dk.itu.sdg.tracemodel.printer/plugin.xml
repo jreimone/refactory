@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Tracemodel Printer Category"
+            id="dk.itu.sdg.tracemodel.printer.commands.category">
+      </category>
+      <command
+            name="TMPriner Command"
+            categoryId="dk.itu.sdg.tracemodel.printer.commands.category"
+            id="dk.itu.sdg.tracemodel.printer.commands.printCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="dk.itu.sdg.tracemodel.printer.commands.printCommand"
+            class="dk.itu.sdg.tracemodel.printer.handlers.TracemodelPrinterHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="dk.itu.sdg.tracemodel.printer.commands.printCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+8"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="TraceModel Menu"
+               mnemonic="M"
+               id="dk.itu.sdg.tracemodel.printer.menus.tracemodelMenu">
+            <command
+                  commandId="dk.itu.sdg.tracemodel.printer.commands.sampleCommand"
+                  mnemonic="S"
+                  id="dk.itu.sdg.tracemodel.printer.menus.sampleCommand">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="dk.itu.sdg.tracemodel.printer.toolbars.sampleToolbar">
+            <command
+                  commandId="dk.itu.sdg.tracemodel.printer.commands.printCommand"
+                  icon="icons/printer.png"
+                  tooltip="Print Tracemodel to Console"
+                  id="dk.itu.sdg.tracemodel.printer.toolbars.printCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>
