@@ -25,6 +25,8 @@ import org.emftext.refactoring.smell.calculation.Monotonicity;
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getMonotonicity <em>Monotonicity</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getThreshold <em>Threshold</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getSmellMessage <em>Smell Message</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,6 +94,46 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSmellMessage() <em>Smell Message</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmellMessage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SMELL_MESSAGE_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getSmellMessage() <em>Smell Message</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSmellMessage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String smellMessage = SMELL_MESSAGE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -154,6 +196,24 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSmellMessage() {
+		return smellMessage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CalculationResult calculate(EObject model) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -174,6 +234,10 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 				return getThreshold();
 			case CalculationPackage.CALCULATION__DESCRIPTION:
 				return getDescription();
+			case CalculationPackage.CALCULATION__NAME:
+				return getName();
+			case CalculationPackage.CALCULATION__SMELL_MESSAGE:
+				return getSmellMessage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -222,6 +286,10 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 				return threshold != THRESHOLD_EDEFAULT;
 			case CalculationPackage.CALCULATION__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case CalculationPackage.CALCULATION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case CalculationPackage.CALCULATION__SMELL_MESSAGE:
+				return SMELL_MESSAGE_EDEFAULT == null ? smellMessage != null : !SMELL_MESSAGE_EDEFAULT.equals(smellMessage);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -242,6 +310,10 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 		result.append(threshold);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", name: ");
+		result.append(name);
+		result.append(", smellMessage: ");
+		result.append(smellMessage);
 		result.append(')');
 		return result.toString();
 	}

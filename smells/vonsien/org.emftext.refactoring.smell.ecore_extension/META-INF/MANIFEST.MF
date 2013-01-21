@@ -5,6 +5,6 @@ Bundle-SymbolicName: org.emftext.refactoring.smell.ecore_extension;singleton:=tr
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.emf.ecore,
- org.emftext.refactoring.smell.core,
- org.eclipse.gmf.runtime.notation
+ org.eclipse.gmf.runtime.notation,
+ org.emftext.refactoring.smell.calculation
 Export-Package: org.emftext.refactoring.smell.ecore_extension
