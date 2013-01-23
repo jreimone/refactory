@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ecore Tools Additions
+Bundle-SymbolicName: org.modelrefactoring.ecoretools.additions;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: www.modelrefactoring.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.e4.ui.workbench,
+ org.eclipse.e4.core.di,
+ org.eclipse.e4.core.contexts,
+ org.eclipse.emf.ecoretools.diagram,
+ org.eclipse.gmf.runtime.diagram.ui,
+ org.eclipse.gmf.runtime.diagram.ui.resources.editor,
+ org.eclipse.ui.ide
