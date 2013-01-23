@@ -33,7 +33,7 @@ public class ModifyFillColorHandler {
 	}
 	
 	@Execute
-	public void fillColorsOfEClasses(@Active MPart activePart){
+	public void fillColorsOfEClasses(){
 		final Diagram diagram = editor.getDiagram();
 		TransactionalEditingDomain editingDomain = editor.getEditingDomain();
 		RecordingCommand command = new RecordingCommand(editingDomain) {
