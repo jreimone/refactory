@@ -1,61 +1,53 @@
 package org.emftext.refactoring.smell.uml_extension;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
-import org.emftext.refactoring.smell.smell_model.ModelMetric;
+import org.emftext.refactoring.smell.calculation.CalculationFactory;
+import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
 
-public class SearchEmptyClassesAndInterfaces extends EObjectImpl implements ModelMetric {
+public class SearchEmptyClassesAndInterfaces extends MetricImpl {
 	
-private String name;
-	
-	public SearchEmptyClassesAndInterfaces(){
-		setName("SearchEmptyClassesAndInterfaces");
-	}
-
 	@Override
 	public String getName() {
-		return name;
+		return "Empty UML Classes Count";
 	}
 
 	@Override
-	public void setName(String value) {
-		this.name = value;
+	public Monotonicity getMonotonicity() {
+		return Monotonicity.DECREASING;
 	}
 
 	@Override
-	public Map<EObject, Float> calculate(Resource loadedResource) {
-		Map<EObject, Float> map = new HashMap<EObject, Float>();
-		Model model = null;
-		if (loadedResource != null){
-			if (loadedResource.getContents().size() > 0) {
-				try {
-					model = (Model) loadedResource.getContents().get(0);
-				} catch (ClassCastException e){
+	public String getDescription() {
+		return "Determines all UML classes having no properties or operations.";
+	}
 
-				}
-				if (model != null){
-					for (Element e1 : model.allOwnedElements()){
-						if (e1 instanceof Class){
-							if (((Class) e1).getAllAttributes().isEmpty() && ((Class) e1).getAllOperations().isEmpty())
-							map.put(e1, 1.0f);
-						}
-						if (e1 instanceof Interface){
-							if (((Interface) e1).getAllAttributes().isEmpty() && ((Interface) e1).getAllOperations().isEmpty())
-							map.put(e1, 1.0f);
-						}
-					}
+	@Override
+	public String getSmellMessage() {
+		return "This UML class is empty has no properties or operations.";
+	}
+
+	@Override
+	public CalculationResult calculate(EObject model) {
+		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
+		result.setResultingValue(0);
+		if(model == null || !(model instanceof Model)){
+			return null;
+		}
+		Model umlModel = (Model) model;
+		for (Element element : umlModel.allOwnedElements()) {
+			if(element instanceof Classifier){
+				Classifier classifier = (Classifier) element;
+				if(classifier.getAllAttributes().isEmpty() && classifier.getAllOperations().isEmpty()){
+					result.getCausingObjects().add(classifier);
 				}
 			}
 		}
-		return map;
+		result.setResultingValue(result.getCausingObjects().size());
+		return result;
 	}
-
 }

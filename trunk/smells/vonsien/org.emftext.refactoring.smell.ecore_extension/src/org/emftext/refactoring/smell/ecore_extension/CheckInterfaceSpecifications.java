@@ -70,7 +70,6 @@ public class CheckInterfaceSpecifications extends MetricImpl {
 							}
 							if (hasNoSpecification){
 								result.getCausingObjects().add(eo);
-								result.setResultingValue(result.getResultingValue() + 1);
 							}
 						}
 						
@@ -78,6 +77,7 @@ public class CheckInterfaceSpecifications extends MetricImpl {
 				}
 			}
 		}
+		result.setResultingValue(result.getCausingObjects().size());
 		return result;
 	}
 
