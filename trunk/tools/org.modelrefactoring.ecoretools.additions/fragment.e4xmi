@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_IU2pYGCJEeK-fpTrs2yrzw">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_LgthYGCJEeK-fpTrs2yrzw" featurename="commands" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:Command" xmi:id="_S2HosGCJEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.commands.modifyFillColor" commandName="Modify Fill Color of EClasses to white" description="Modifies the fill color of each EClass in an open Ecore Tools Diagram Editor to white" category="_mWvIoGCJEeK-fpTrs2yrzw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_inHcQGCJEeK-fpTrs2yrzw" featurename="categories" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:Category" xmi:id="_mWvIoGCJEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.categories.ecoretoolsadditions" name="Ecore Tools Additions" description="Some additional features for the Ecore Tools"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_unv8kGCJEeK-fpTrs2yrzw" featurename="handlers" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:Handler" xmi:id="_xYe-0GCJEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.handlers.fillColorChangeHandler" contributionURI="bundleclass://org.modelrefactoring.ecoretools.additions/org.modelrefactoring.ecoretools.additions.ModifyFillColorHandler" command="_S2HosGCJEeK-fpTrs2yrzw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q4ShsGCXEeK-fpTrs2yrzw" featurename="menuContributions" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_g19fUGCXEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.modifyFillColor.menuitem" parentId="org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_aj-cgGCaEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.modifyFillColor.menu.item" label="Modify Fill Color of EClasses to white" iconURI="platform:/plugin/org.modelrefactoring.ecoretools.additions/icons/EclassModified.png" command="_S2HosGCJEeK-fpTrs2yrzw"/>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>
