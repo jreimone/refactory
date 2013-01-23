@@ -2,19 +2,19 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.emftext.refactoring.smell.smell_model.metric">
-      <metric
-            class="org.emftext.refactoring.smell.uml_extension.CompareNames">
-      </metric>
-      <metric
-            class="org.emftext.refactoring.smell.uml_extension.CountParametersOfMethods">
-      </metric>
-      <metric
-            class="org.emftext.refactoring.smell.uml_extension.SearchEmptyClassesAndInterfaces">
-      </metric>
-      <metric
+         point="org.emftext.refactoring.smell.calculation.calculation">
+      <calculation
             class="org.emftext.refactoring.smell.uml_extension.CheckInterfaceSpecifications">
-      </metric>
+      </calculation>
+      <calculation
+            class="org.emftext.refactoring.smell.uml_extension.CompareNames">
+      </calculation>
+      <calculation
+            class="org.emftext.refactoring.smell.uml_extension.CountParametersOfMethods">
+      </calculation>
+      <calculation
+            class="org.emftext.refactoring.smell.uml_extension.SearchEmptyClassesAndInterfaces">
+      </calculation>
    </extension>
 
 </plugin>
