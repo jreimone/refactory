@@ -6,6 +6,7 @@ package org.qualitune.evolution.cods.creation;
 import java.io.IOException;
 import java.util.Collections;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.core.resources.IFile;
@@ -54,7 +55,7 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 	public static final String MEGAMODEL_STRING	= "http://qualitune.org/" + MEGAMODEL_FILE;
 	public static final URI MEGAMODEL_URI		= URI.createURI(MEGAMODEL_STRING);
 
-	@Inject
+//	@Inject
 	private IWorkspace workspace;
 
 	private Resource codsResource;
@@ -67,14 +68,15 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 		return super.createResource(uri);
 	}
 
-	@Execute
-	public void register(IEclipseContext context) {
+	@PostConstruct
+	public void register(IEclipseContext context, IWorkspace workspace) {
 		CODS megaModel = loadMegaModel();
 		codsResource = megaModel.eResource();
 		context.set(MegaModel.class, megaModel);
 		context.set(CODS.class, megaModel);
 		registerInEMF();
 		workspace.addResourceChangeListener(new WorkspaceModelChangeListener(megaModel));
+		this.workspace = workspace;
 	}
 
 	private void registerInEMF() {
