@@ -31,7 +31,17 @@ public class ModifyFillColorHandler {
 		}
 		return false;
 	}
-	
+
+	// to have this IServiceConstants available add org.eclipse.e4.ui.services as plugin dependency
+	//	@Execute
+	//	public void fillColorsOfEClasses(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) StructuredSelection structuredSelection){
+	//		TransactionalEditingDomain editingDomain2 = null;
+	//		if(!structuredSelection.isEmpty()){
+	//			Object selectedElement = structuredSelection.getFirstElement();
+	//			if(selectedElement instanceof IGraphicalEditPart){
+	//				editingDomain2 = ((IGraphicalEditPart) selectedElement).getEditingDomain();
+	//			}
+	//		}
 	@Execute
 	public void fillColorsOfEClasses(){
 		final Diagram diagram = editor.getDiagram();
