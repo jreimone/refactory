@@ -215,7 +215,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_87In8WPREeKeuoKtC2rhSQ" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_87In8mPREeKeuoKtC2rhSQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="calculation.ecore#//CalculationResult/causingObjects"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_87In82PREeKeuoKtC2rhSQ" points="[-14, 66, 8, -87]$[-14, 95, 8, -58]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_87In82PREeKeuoKtC2rhSQ" points="[-12, 49, 7, -104]$[-12, 95, 7, -58]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_87vE4GPREeKeuoKtC2rhSQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_87vE4WPREeKeuoKtC2rhSQ" id="(0.5,1.0)"/>
   </edges>
@@ -223,7 +223,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_SykOQWPSEeKeuoKtC2rhSQ" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_SykOQmPSEeKeuoKtC2rhSQ" fontName="Segoe UI"/>
     <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_SykOQ2PSEeKeuoKtC2rhSQ" points="[9, -7, -63, 53]$[9, -27, -63, 33]$[60, -27, -12, 33]$[60, -47, -12, 13]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_SykOQ2PSEeKeuoKtC2rhSQ" points="[10, -7, -63, 50]$[10, -22, -63, 35]$[65, -22, -8, 35]$[65, -42, -8, 15]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SykORGPSEeKeuoKtC2rhSQ" id="(0.5588235294117647,0.18604651162790697)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SykORWPSEeKeuoKtC2rhSQ" id="(0.5532786885245902,0.8817204301075269)"/>
   </edges>
@@ -231,7 +231,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_TKaGgWPSEeKeuoKtC2rhSQ" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_TKaGgmPSEeKeuoKtC2rhSQ" fontName="Segoe UI"/>
     <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_TKaGg2PSEeKeuoKtC2rhSQ" points="[-9, -6, 74, 58]$[-9, -26, 74, 38]$[-70, -26, 13, 38]$[-70, -46, 13, 18]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_TKaGg2PSEeKeuoKtC2rhSQ" points="[-9, -6, 73, 56]$[-9, -21, 73, 41]$[-65, -21, 17, 41]$[-65, -41, 17, 21]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TKaGhGPSEeKeuoKtC2rhSQ" id="(0.5,0.16279069767441862)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TKaGhWPSEeKeuoKtC2rhSQ" id="(0.44672131147540983,0.8387096774193549)"/>
   </edges>
