@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_1cm-gGYOEeKtF6ZMPvFr3g">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_WpAR8GYPEeKtF6ZMPvFr3g" featurename="addons" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="application:Addon" xmi:id="_bBJ98GYPEeKtF6ZMPvFr3g" elementId="org.emftext.refactoring.smell.addon.modelregistration" contributionURI="bundleclass://org.emftext.refactoring.smell.registry/org.emftext.refactoring.smell.registry.ModelRegistration"/>
+  </fragments>
+</fragment:ModelFragments>
