@@ -49,7 +49,7 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 			break;
 
 		case IResourceChangeEvent.POST_CHANGE:
-			System.out.println("Resources have changed.");
+			//			System.out.println("Resources have changed.");
 			try {
 				event.getDelta().accept(this);
 			} catch (CoreException e) {
@@ -104,18 +104,20 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 			}
 			break;
 		case IResourceDelta.CHANGED:
-			System.out.print("Resource ");
-			System.out.print(delta.getFullPath());
-			System.out.println(" has changed.");
+			if(delta.getResource().getType() == IResource.FILE){
+				System.out.print("Resource ");
+				System.out.print(delta.getFullPath());
+				System.out.println(" has changed.");
+			}
 			int flags = delta.getFlags();
 			if ((flags & IResourceDelta.CONTENT) != 0) {
-				System.out.println("--> Content Change");
+				//				System.out.println("--> Content Change");
 			}
 			if ((flags & IResourceDelta.REPLACED) != 0) {
-				System.out.println("--> Content Replaced");
+				//				System.out.println("--> Content Replaced");
 			}
 			if ((flags & IResourceDelta.MARKERS) != 0) {
-				System.out.println("--> Marker Change");
+				//				System.out.println("--> Marker Change");
 				IMarkerDelta[] markers = delta.getMarkerDeltas();
 				// if interested in markers, check these deltas
 			}
