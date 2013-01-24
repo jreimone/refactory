@@ -9,6 +9,12 @@
       <calculation
             class="org.emftext.refactoring.smell.ecore_extension.CompareNamesOfClasses">
       </calculation>
+      <calculation
+            class="org.emftext.refactoring.smell.ecore_extension.CountParametersOfMethods">
+      </calculation>
+      <calculation
+            class="org.emftext.refactoring.smell.ecore_extension.SearchEmptyClasses">
+      </calculation>
    </extension>
 
 </plugin>
