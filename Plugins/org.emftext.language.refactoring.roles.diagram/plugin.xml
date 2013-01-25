@@ -125,9 +125,10 @@
    <extension point="org.eclipse.ui.preferencePages" id="prefpages">
       <?gmfgen generated="true"?>
       <page
+            category="org.emftext.refactoring.ui.preferences"
+            class="org.emftext.language.refactoring.roles.diagram.preferences.DiagramGeneralPreferencePage"
             id="org.emftext.language.refactoring.roles.diagram.general"
-            name="%prefpage.org.emftext.language.refactoring.roles.diagram.general"
-            class="org.emftext.language.refactoring.roles.diagram.preferences.DiagramGeneralPreferencePage">
+            name="%prefpage.org.emftext.language.refactoring.roles.diagram.general">
       </page>
       <page
             id="org.emftext.language.refactoring.roles.diagram.appearance"
