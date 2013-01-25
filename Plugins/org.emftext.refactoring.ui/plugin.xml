@@ -18,4 +18,12 @@
             uri="fragment.e4xmi">
       </fragment>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.emftext.refactoring.ui.preferences.RefactoryPreferencePage"
+            id="org.emftext.refactoring.ui.preferences"
+            name="Refactory">
+      </page>
+   </extension>
 </plugin>
