@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="id2"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            uri="fragment.e4xmi">
+      </fragment>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.emftext.refactory.ui.view"
+            class="org.emftext.refactoring.smell.ui.views.QualitySmellView"
+            id="org.emftext.refactoring.smell.ui.views.QualitySmellView"
+            name="Generic Quality Smells">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.emftext.refactoring.ui.preferences"
+            class="org.emftext.refactoring.smell.ui.preferences.QualitySmellsPreferencePage"
+            id="org.emftext.refactoring.preferences.smells.qualitySmells"
+            name="Quality Smells">
+      </page>
+      <page
+            category="org.emftext.refactoring.preferences.smells.qualitySmells"
+            class="org.emftext.refactoring.smell.ui.preferences.GenericSmellPreferencePage"
+            id="org.emftext.refactoring.preferences.smells.qualitySmells.generic"
+            name="Generic Quality Smells">
+      </page>
+      <page
+            category="org.emftext.refactoring.preferences.smells.qualitySmells"
+            class="org.emftext.refactoring.smell.ui.preferences.GenericQualityPreferencePage"
+            id="org.emftext.refactoring.preferences.smells.qualitySmells.qualities"
+            name="Generic Qualities">
+      </page>
+   </extension>
+
+</plugin>
