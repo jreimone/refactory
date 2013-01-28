@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Observation Plugin for quality smells
 Bundle-SymbolicName: org.emftext.refactoring.smell.registry;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-Vendor: www.qualitune.org
+Bundle-Vendor: www.modelrefactoring.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.e4.ui.workbench,
  org.eclipse.e4.core.contexts,
@@ -12,4 +12,6 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.emftext.refactoring.smell.calculation,
  javax.inject,
  org.eclipse.equinox.registry,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.e4.core.di
+Export-Package: org.emftext.refactoring.smell.registry
