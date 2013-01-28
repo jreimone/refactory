@@ -24,6 +24,8 @@ import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 
 @SuppressWarnings("restriction")
 public class ModelRegistration {
@@ -31,8 +33,21 @@ public class ModelRegistration {
 	public static final String SMELL_PLUGIN_ID		= "org.emftext.refactoring.smell.registry";
 	private static final String SMELL_MODEL_NAME	= "smellmodel.smell";
 	
+	private CalculationModel calculationModel;
+	private QualitySmellModel smellModel;
+	
+	private static ModelRegistration instance;
+	
+	public static ModelRegistration getDefault(){
+		if(instance == null){
+			instance = new ModelRegistration();
+		}
+		return instance;
+	}
+	
 	@PostConstruct
 	public void register(IEclipseContext context, IWorkspace workspace, IExtensionRegistry registry) {
+		instance = this;
 		registerCalculationExtensions(context, registry);
 		registerQualitySmellModel(context, workspace);
 	}
@@ -41,6 +56,7 @@ public class ModelRegistration {
 	private void registerCalculationExtensions(IEclipseContext context, IExtensionRegistry registry) {
 		CalculationModel calculationModel = initCalculationModel(registry);
 		context.set(CalculationModel.class, calculationModel);
+		this.calculationModel = calculationModel;
 	}
 	
 	private CalculationModel initCalculationModel(IExtensionRegistry registry) {
@@ -66,6 +82,12 @@ public class ModelRegistration {
 	private void registerQualitySmellModel(IEclipseContext context, IWorkspace workspace) {
 		QualitySmellModel smellModel = initQualitySmellModel(workspace);
 		context.set(QualitySmellModel.class, smellModel);
+		this.smellModel = smellModel;
+		
+		context.declareModifiable(QualitySmellModel.class);
+		context.modify(QualitySmellModel.class, smellModel);
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
+		BundleContext bundleContext = bundle.getBundleContext();
 	}
 
 
@@ -73,10 +95,10 @@ public class ModelRegistration {
 		ResourceSet rs = new ResourceSetImpl();
 		Bundle bundle = Platform.getBundle(SMELL_PLUGIN_ID);
 		QualitySmellModel smellModel = null;
+		Resource resource = null;
 		if(bundle != null){
 			IPath stateLocation = Platform.getStateLocation(bundle);
 			IPath smellModelFilePath = stateLocation.append("/" + SMELL_MODEL_NAME);
-			Resource resource = null;
 			if(!smellModelFilePath.toFile().exists()){
 				URI uri = URI.createFileURI(smellModelFilePath.toString());
 				resource = rs.createResource(uri);
@@ -96,6 +118,17 @@ public class ModelRegistration {
 				smellModel = (QualitySmellModel) resource.getContents().get(0);
 			}
 		}
+		smellModel.eAdapters().add(new ModificationListener(resource));
+		return smellModel;
+	}
+
+
+	public CalculationModel getCalculationmodel() {
+		return calculationModel;
+	}
+
+
+	public QualitySmellModel getSmellmodel() {
 		return smellModel;
 	}
 }
