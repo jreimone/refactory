@@ -14,6 +14,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell.ecore#//QualitySmellModel/smells"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell.ecore#//QualitySmellModel/qualities"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smell.ecore#//QualitySmellModel/concreteSmells"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smell.ecore#//QualitySmellModel/smellingMetamodels"/>
+      <genOperations ecoreOperation="smell.ecore#//QualitySmellModel/getSmellsForMetamodel">
+        <genParameters ecoreParameter="smell.ecore#//QualitySmellModel/getSmellsForMetamodel/metamodel"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="smell.ecore#//Quality">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell.ecore#//Quality/name"/>

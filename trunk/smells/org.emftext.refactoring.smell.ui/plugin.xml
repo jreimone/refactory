@@ -37,6 +37,12 @@
             id="org.emftext.refactoring.preferences.smells.qualitySmells.qualities"
             name="Generic Qualities">
       </page>
+      <page
+            category="org.emftext.refactoring.preferences.smells.qualitySmells"
+            class="org.emftext.refactoring.smell.ui.preferences.ConcreteSmellPreferencePage"
+            id="org.emftext.refactoring.preferences.smells.qualitySmells.concrete"
+            name="Concrete Smells">
+      </page>
    </extension>
 
 </plugin>

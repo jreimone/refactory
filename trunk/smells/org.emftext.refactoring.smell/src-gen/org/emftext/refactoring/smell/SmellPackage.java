@@ -93,13 +93,22 @@ public interface SmellPackage extends EPackage {
 	int QUALITY_SMELL_MODEL__CONCRETE_SMELLS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Smelling Metamodels</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUALITY_SMELL_MODEL__SMELLING_METAMODELS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Quality Smell Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUALITY_SMELL_MODEL_FEATURE_COUNT = 3;
+	int QUALITY_SMELL_MODEL_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.impl.QualityImpl <em>Quality</em>}' class.
@@ -321,6 +330,17 @@ public interface SmellPackage extends EPackage {
 	EReference getQualitySmellModel_ConcreteSmells();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.emftext.refactoring.smell.QualitySmellModel#getSmellingMetamodels <em>Smelling Metamodels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Smelling Metamodels</em>'.
+	 * @see org.emftext.refactoring.smell.QualitySmellModel#getSmellingMetamodels()
+	 * @see #getQualitySmellModel()
+	 * @generated
+	 */
+	EReference getQualitySmellModel_SmellingMetamodels();
+
+	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.Quality <em>Quality</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -536,6 +556,14 @@ public interface SmellPackage extends EPackage {
 		 * @generated
 		 */
 		EReference QUALITY_SMELL_MODEL__CONCRETE_SMELLS = eINSTANCE.getQualitySmellModel_ConcreteSmells();
+
+		/**
+		 * The meta object literal for the '<em><b>Smelling Metamodels</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QUALITY_SMELL_MODEL__SMELLING_METAMODELS = eINSTANCE.getQualitySmellModel_SmellingMetamodels();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.impl.QualityImpl <em>Quality</em>}' class.

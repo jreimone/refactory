@@ -6,11 +6,15 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.ui.IWorkbench;
 import org.emftext.refactoring.smell.QualitySmell;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.SmellPackage.Literals;
 import org.emftext.refactoring.smell.registry.ModelRegistration;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.util.tracker.ServiceTracker;
 
 public class GenericSmellPreferencePage extends AbstractPreferencePage {
 	
@@ -25,6 +29,15 @@ public class GenericSmellPreferencePage extends AbstractPreferencePage {
 		return smellModel;
 	}
 
+	@Override
+	public void init(IWorkbench workbench) {
+		super.init(workbench);
+		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+		tracker.open();
+		smellModel = tracker.getService();
+	}
+	
 	@Override
 	public EReference getListReference() {
 		return Literals.QUALITY_SMELL_MODEL__SMELLS;
