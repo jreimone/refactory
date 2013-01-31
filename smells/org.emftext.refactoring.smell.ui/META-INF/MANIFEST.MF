@@ -24,6 +24,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.e4.core.contexts,
  org.eclipse.e4.core.di,
  javax.annotation,
- org.emftext.refactoring.smell.registry
+ org.emftext.refactoring.smell.registry,
+ org.eclipse.ui.forms
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

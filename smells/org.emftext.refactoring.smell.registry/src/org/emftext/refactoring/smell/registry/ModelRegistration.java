@@ -26,6 +26,7 @@ import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceRegistration;
 
 @SuppressWarnings("restriction")
 public class ModelRegistration {
@@ -84,10 +85,12 @@ public class ModelRegistration {
 		context.set(QualitySmellModel.class, smellModel);
 		this.smellModel = smellModel;
 		
-		context.declareModifiable(QualitySmellModel.class);
-		context.modify(QualitySmellModel.class, smellModel);
-		Bundle bundle = FrameworkUtil.getBundle(getClass());
-		BundleContext bundleContext = bundle.getBundleContext();
+//		context.declareModifiable(QualitySmellModel.class);
+//		context.modify(QualitySmellModel.class, smellModel);
+		
+		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//		ServiceRegistration<QualitySmellModel> smellModelService = bundleContext.registerService(QualitySmellModel.class, smellModel, null);
+		bundleContext.registerService(QualitySmellModel.class, smellModel, null);
 	}
 
 

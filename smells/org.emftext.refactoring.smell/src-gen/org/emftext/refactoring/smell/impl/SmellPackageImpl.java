@@ -4,6 +4,7 @@ package org.emftext.refactoring.smell.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -163,6 +164,15 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 	 */
 	public EReference getQualitySmellModel_ConcreteSmells() {
 		return (EReference)qualitySmellModelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQualitySmellModel_SmellingMetamodels() {
+		return (EReference)qualitySmellModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -332,6 +342,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		createEReference(qualitySmellModelEClass, QUALITY_SMELL_MODEL__SMELLS);
 		createEReference(qualitySmellModelEClass, QUALITY_SMELL_MODEL__QUALITIES);
 		createEReference(qualitySmellModelEClass, QUALITY_SMELL_MODEL__CONCRETE_SMELLS);
+		createEReference(qualitySmellModelEClass, QUALITY_SMELL_MODEL__SMELLING_METAMODELS);
 
 		qualityEClass = createEClass(QUALITY);
 		createEAttribute(qualityEClass, QUALITY__NAME);
@@ -377,8 +388,8 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		RolemappingPackage theRolemappingPackage = (RolemappingPackage)EPackage.Registry.INSTANCE.getEPackage(RolemappingPackage.eNS_URI);
 		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+		RolemappingPackage theRolemappingPackage = (RolemappingPackage)EPackage.Registry.INSTANCE.getEPackage(RolemappingPackage.eNS_URI);
 		CalculationPackage theCalculationPackage = (CalculationPackage)EPackage.Registry.INSTANCE.getEPackage(CalculationPackage.eNS_URI);
 
 		// Create type parameters
@@ -392,6 +403,10 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		initEReference(getQualitySmellModel_Smells(), this.getQualitySmell(), null, "smells", null, 0, -1, QualitySmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQualitySmellModel_Qualities(), this.getQuality(), null, "qualities", null, 0, -1, QualitySmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQualitySmellModel_ConcreteSmells(), this.getConcreteQualitySmell(), null, "concreteSmells", null, 0, -1, QualitySmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQualitySmellModel_SmellingMetamodels(), theEcorePackage.getEPackage(), null, "smellingMetamodels", null, 0, -1, QualitySmellModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(qualitySmellModelEClass, this.getConcreteQualitySmell(), "getSmellsForMetamodel", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "metamodel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(qualityEClass, Quality.class, "Quality", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQuality_Name(), ecorePackage.getEString(), "name", null, 1, 1, Quality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

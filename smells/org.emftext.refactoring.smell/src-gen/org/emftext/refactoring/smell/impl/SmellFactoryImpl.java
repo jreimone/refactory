@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.emftext.refactoring.smell.*;
+import org.emftext.refactoring.smell.custom.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,10 +70,10 @@ public class SmellFactoryImpl extends EFactoryImpl implements SmellFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public QualitySmellModel createQualitySmellModel() {
-		QualitySmellModelImpl qualitySmellModel = new QualitySmellModelImpl();
+		QualitySmellModelImpl qualitySmellModel = new QualitySmellModelCustom();
 		return qualitySmellModel;
 	}
 

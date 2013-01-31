@@ -5,6 +5,7 @@ package org.emftext.refactoring.smell;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.emftext.refactoring.smell.QualitySmellModel#getSmells <em>Smells</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.QualitySmellModel#getQualities <em>Qualities</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.QualitySmellModel#getConcreteSmells <em>Concrete Smells</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.QualitySmellModel#getSmellingMetamodels <em>Smelling Metamodels</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,5 +74,29 @@ public interface QualitySmellModel extends EObject {
 	 * @generated
 	 */
 	EList<ConcreteQualitySmell> getConcreteSmells();
+
+	/**
+	 * Returns the value of the '<em><b>Smelling Metamodels</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EPackage}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Smelling Metamodels</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Smelling Metamodels</em>' reference list.
+	 * @see org.emftext.refactoring.smell.SmellPackage#getQualitySmellModel_SmellingMetamodels()
+	 * @model transient="true" derived="true"
+	 * @generated
+	 */
+	EList<EPackage> getSmellingMetamodels();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<ConcreteQualitySmell> getSmellsForMetamodel(EPackage metamodel);
 
 } // QualitySmellModel
