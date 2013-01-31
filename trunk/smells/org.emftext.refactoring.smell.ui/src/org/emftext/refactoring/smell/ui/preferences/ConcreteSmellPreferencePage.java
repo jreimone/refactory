@@ -18,6 +18,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -41,6 +42,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage.Literals;
 import org.eclipse.core.databinding.observable.Realm;
 import org.emftext.refactoring.smell.SmellPackage;
+import org.emftext.refactoring.smell.wizard.NewConcreteSmellWizard;
 
 public class ConcreteSmellPreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
@@ -94,7 +96,8 @@ public class ConcreteSmellPreferencePage extends PreferencePage implements
 		btnAddQualitySmell.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				//TODO implement
+				WizardDialog dialog = new WizardDialog(getShell(), new NewConcreteSmellWizard());
+				dialog.open();
 			}
 		});
 		btnAddQualitySmell.setText("Add Concrete Smell");
