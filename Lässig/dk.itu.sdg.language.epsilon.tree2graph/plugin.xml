@@ -33,19 +33,6 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
-         <menu
-               label="Sample Menu"
-               mnemonic="M"
-               id="dk.itu.sdg.language.epsilon.tree2graph.menus.sampleMenu">
-            <command
-                  commandId="dk.itu.sdg.language.epsilon.tree2graph.commands.sampleCommand"
-                  mnemonic="S"
-                  id="dk.itu.sdg.language.epsilon.tree2graph.menus.sampleCommand">
-            </command>
-         </menu>
-      </menuContribution>
-      <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
          <toolbar
                id="dk.itu.sdg.language.epsilon.tree2graph.toolbars.sampleToolbar">
