@@ -1,10 +1,10 @@
 package dk.itu.sdg.language.epsilon.tree2graph
 
-import graph.Graph.GraphFactory
-import graph.Graph.impl.GraphFactoryImpl
 import graph.Graph.Graph
-import tree.Tree.Tree
+import graph.Graph.GraphFactory
 import graph.Graph.Node
+import graph.Graph.impl.GraphFactoryImpl
+import tree.Tree.Tree
 
 class Tree2Graph {
 	
