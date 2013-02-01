@@ -109,7 +109,7 @@ class AspectGenerator implements IGenerator2 {
 				if(!this.tA«counter».equals(t1) || !this.tB«counter».equals(t2)) {
 					TraceCollector tc = TraceCollector.getInstance();
 					tc.setTrace(t1, thisJoinPoint, t2);
-					//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+					System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 				}
 			}
 			
@@ -129,7 +129,7 @@ class AspectGenerator implements IGenerator2 {
 				if(!this.tA«counter».equals(t1) || !this.tB«counter».equals(t2)) {
 					TraceCollector tc = TraceCollector.getInstance();
 					tc.setTrace(t1, thisJoinPoint, t2);
-					//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+					System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 				}
 			}
 			
@@ -162,7 +162,7 @@ class AspectGenerator implements IGenerator2 {
 				if(t1 != null && returnValue != null) {
 					TraceCollector tc = TraceCollector.getInstance();
 					tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-					//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+					System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 				}
 			}
 		'''
@@ -174,7 +174,7 @@ class AspectGenerator implements IGenerator2 {
 				if(t1 != null && returnValue != null) {
 					TraceCollector tc = TraceCollector.getInstance();
 					tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-					//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+					System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 				}
 			}
 		'''
