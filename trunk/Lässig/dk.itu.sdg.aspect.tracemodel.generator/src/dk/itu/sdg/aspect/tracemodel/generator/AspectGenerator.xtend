@@ -1,59 +1,74 @@
 package dk.itu.sdg.aspect.tracemodel.generator
 
 import java.util.ArrayList
+import java.util.HashSet
+import java.util.Set
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.emf.codegen.ecore.genmodel.GenClass
 
 
 class AspectGenerator implements IGenerator2 {
 	
 	private var String contents = ""
+	private var Set<GenClass> collectedGenClasses = new HashSet
+	
+	private var Resource resourceA
+	private var Resource resourceB
+	private var Resource genResourceA
+	private var Resource genResourceB
+	private var GenModel genmodelA
+	private var GenModel genmodelB
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		//DO NOTHING
 	}
 	
 	
-	override void doGenerate(Iterable<?> resources, IFileSystemAccess fsa) {
+	override void doGenerate(Iterable<? extends Resource> resources, IFileSystemAccess fsa) {
 		
 		
-		if (resources.size == 2) {
+		if (resources.size >= 2) {
 			
-			var Resource resourceA = resources.toList.get(0) as Resource
-			var Resource resourceB = resources.toList.get(1) as Resource
+			determineGenAndModelResources(resources)
 			
+//			var Resource resourceA = resources.toList.get(0) as Resource
+//			var Resource resourceB = resources.toList.get(1) as Resource
 			
-			var ArrayList<Pair> elementCombinations = getModelElementCombinations(resourceA.getNonAbstractModelElements(), resourceB.getNonAbstractModelElements())
-			var int counter = 0		
-						
-			for (Pair elementCombination : elementCombinations) { 
-				elementCombination.generatePointcutType1(counter)
-				elementCombination.generatePointcutType2(counter)
+			if(resourceA != null && resourceB != null){
+//				var ArrayList<Pair> elementCombinations = getModelElementCombinations(resourceA.getNonAbstractModelElements(), resourceB.getNonAbstractModelElements())
+				var ArrayList<Pair> elementCombinations = getModelElementCombinations(genmodelA.getNonAbstractModelElements(), genmodelB.getNonAbstractModelElements())
+				var int counter = 0		
+							
+				for (Pair elementCombination : elementCombinations) { 
+					elementCombination.generatePointcutType1(counter)
+					elementCombination.generatePointcutType2(counter)
+					
+					counter = counter + 1			
+				}
 				
-				counter = counter + 1			
-			}
-			
-			generateAdvise()
-			
-			counter = 0
-			for (Pair elementCombination : elementCombinations) { 
-				//generate advise
-				elementCombination.generateAdvisePCType1(counter)
-				elementCombination.generateAdvisePCType2(counter)
+				generateAdvise()
 				
-				counter = counter + 1			
+				counter = 0
+				for (Pair elementCombination : elementCombinations) { 
+					//generate advise
+					elementCombination.generateAdvisePCType1(counter)
+					elementCombination.generateAdvisePCType2(counter)
+					
+					counter = counter + 1			
+				}
+				
+				
+	//			var EClass[] elements = resourceA.getNonAbstractModelElements() + resourceB.getNonAbstractModelElements()
+	//			for (EClass c : elements) {
+	//				c.generatePointcutType3()
+	//			}
+				
+				fsa.write()
 			}
-			
-			
-//			var EClass[] elements = resourceA.getNonAbstractModelElements() + resourceB.getNonAbstractModelElements()
-//			for (EClass c : elements) {
-//				c.generatePointcutType3()
-//			}
-			
-			fsa.write()
-			
 		}
 	}
 	
@@ -199,9 +214,13 @@ package dk.itu.sdg.tracemodel.observer;
 import java.util.ArrayList;
 import org.aspectj.lang.JoinPoint;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
 
 import dk.itu.sdg.tracemodel.runtimedata.TraceCollector;
 
+«FOR metaclass : collectedGenClasses»
+	import «metaclass.qualifiedInterfaceName»;
+«ENDFOR»
 
 public aspect Tracer {
 	
@@ -215,17 +234,63 @@ public aspect Tracer {
 
 
 	//------------------------- HELPER METHODS -------------------------
-	def EClass[] getNonAbstractModelElements(Resource model) {
+	def determineGenAndModelResources(Iterable<? extends Resource> resources){
+		if(resources.size == 2){
+			var Resource tempResA = resources.toList.get(0) as Resource
+			if(tempResA.URI.fileExtension.equals("ecore")){
+				var Resource tempResB = resources.toList.get(1) as Resource
+				if(tempResB.URI.fileExtension.equals("ecore")){
+					resourceA = tempResA
+					resourceB = tempResB
+				}	
+			}
+		} else if(resources.size == 4){
+			var genmodels = resources.toList.filter(typeof(Resource)).filter(r | r.URI.fileExtension.equals("genmodel"))
+			if(genmodels.size == 2){
+				genResourceA = genmodels.toList.get(0)
+				genResourceB = genmodels.toList.get(1)
+				genmodelA = genResourceA.contents.get(0) as GenModel
+				genmodelB = genResourceB.contents.get(0) as GenModel
+				resourceA = genmodelA.genPackages.get(0).ecorePackage.eResource
+				resourceB = genmodelB.genPackages.get(0).ecorePackage.eResource
+			}
+		}
+	}
+	
+//	def EClass[] getNonAbstractModelElements(Resource model) {
+//		//get all eClasses
+//		var modelClasses = model.allContents.toIterable.filter(typeof(EClass)).filter(e | !e.isAbstract())			
+//		return modelClasses
+//	}
+	
+	def GenClass[] getNonAbstractModelElements(GenModel model) {
 		//get all eClasses
-		var modelClasses = model.allContents.toIterable.filter(typeof(EClass)).filter(e | !e.isAbstract())			
+		var modelClasses = model.eAllContents.toIterable.filter(typeof(GenClass)).filter(e | !e.ecoreClass.isAbstract())			
 		return modelClasses
 	}
 	
-	def ArrayList<Pair> getModelElementCombinations(EClass[] modelAClasses, EClass[] modelBClasses) {
+//	def ArrayList<Pair> getModelElementCombinations(EClass[] modelAClasses, EClass[] modelBClasses) {
+//		
+//		var elementPairs = new ArrayList<Pair>() 
+//		for (EClass modelAClass : modelAClasses) {
+//			collectedClasses.add(modelAClass)
+//			for (EClass modelBClass : modelBClasses) {
+//				collectedClasses.add(modelBClass)
+//				var Pair pair = new Pair(modelAClass, modelBClass)
+//				elementPairs.add(pair)
+//			}	
+//		}
+//		
+//		return elementPairs
+//	}
+
+	def ArrayList<Pair> getModelElementCombinations(GenClass[] modelAClasses, GenClass[] modelBClasses) {
 		
 		var elementPairs = new ArrayList<Pair>() 
-		for (EClass modelAClass : modelAClasses) {
-			for (EClass modelBClass : modelBClasses) {
+		for (GenClass modelAClass : modelAClasses) {
+			collectedGenClasses.add(modelAClass)
+			for (GenClass modelBClass : modelBClasses) {
+				collectedGenClasses.add(modelBClass)
 				var Pair pair = new Pair(modelAClass, modelBClass)
 				elementPairs.add(pair)
 			}	
@@ -233,8 +298,6 @@ public aspect Tracer {
 		
 		return elementPairs
 	}
-
-
 
 }
 

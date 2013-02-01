@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/dk.itu.sdg.language.epsilon.oo/src" modelPluginID="dk.itu.sdg.language.epsilon.oo"
+    modelName="OO" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>OO.ecore</foreignModel>
+  <genPackages prefix="OO" basePackage="oo" disposableProviderFactory="true" ecorePackage="OO.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="OO.ecore#//VisibilityEnum">
+      <genEnumLiterals ecoreEnumLiteral="OO.ecore#//VisibilityEnum/public"/>
+      <genEnumLiterals ecoreEnumLiteral="OO.ecore#//VisibilityEnum/private"/>
+    </genEnums>
+    <genClasses ecoreClass="OO.ecore#//Model"/>
+    <genClasses image="false" ecoreClass="OO.ecore#//PackageableElement">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference OO.ecore#//PackageableElement/package"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OO.ecore#//AnnotatedElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OO.ecore#//AnnotatedElement/annotations"/>
+    </genClasses>
+    <genClasses ecoreClass="OO.ecore#//Annotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OO.ecore#//Annotation/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OO.ecore#//Annotation/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OO.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OO.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="OO.ecore#//Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OO.ecore#//Package/contents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OO.ecore#//Classifier"/>
+    <genClasses ecoreClass="OO.ecore#//ExternalClass"/>
+    <genClasses ecoreClass="OO.ecore#//Class">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OO.ecore#//Class/extends"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OO.ecore#//Class/extendedBy"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OO.ecore#//Class/features"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OO.ecore#//Class/isAbstract"/>
+    </genClasses>
+    <genClasses ecoreClass="OO.ecore#//Datatype"/>
+    <genClasses image="false" ecoreClass="OO.ecore#//Feature">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference OO.ecore#//Feature/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OO.ecore#//Feature/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OO.ecore#//Feature/visibility"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="OO.ecore#//StructuralFeature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OO.ecore#//StructuralFeature/isMany"/>
+    </genClasses>
+    <genClasses ecoreClass="OO.ecore#//Operation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OO.ecore#//Operation/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="OO.ecore#//Parameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OO.ecore#//Parameter/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference OO.ecore#//Parameter/owner"/>
+    </genClasses>
+    <genClasses ecoreClass="OO.ecore#//Reference"/>
+    <genClasses ecoreClass="OO.ecore#//Attribute"/>
+  </genPackages>
+</genmodel:GenModel>

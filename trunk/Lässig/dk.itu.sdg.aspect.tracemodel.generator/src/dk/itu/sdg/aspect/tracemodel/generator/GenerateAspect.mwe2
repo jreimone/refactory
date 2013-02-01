@@ -21,8 +21,17 @@ Workflow {
             from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
             to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
         }
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.emf.codegen.ecore/model/GenModel.ecore"
+            to = "platform:/resource/org.eclipse.emf.codegen.ecore/model/GenModel.ecore"
+        }
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.emf.codegen.ecore/model/GenModel.genmodel"
+            to = "platform:/resource/org.eclipse.emf.codegen.ecore/model/GenModel.genmodel"
+        }
 
         registerGeneratedEPackage = "org.eclipse.emf.ecore.EcorePackage"
+        registerGeneratedEPackage = "org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage"
     }
 
     component = DirectoryCleaner {
