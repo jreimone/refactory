@@ -1,13 +1,12 @@
 package dk.itu.sdg.aspect.tracemodel.generator;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
-import static com.google.common.collect.Maps.uniqueIndex;
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.generator.GeneratorComponent.Outlet;
 
 import com.google.common.base.Function;
 import com.google.inject.Injector;
@@ -108,7 +106,8 @@ public class AspectGeneratorComponent extends GeneratorComponent {
 				throw new IllegalStateException("Slot '"+slot+"' was empty!");
 			}
 			if (object instanceof Iterable) {
-				Iterable<?> iterable = (Iterable<?>) object;
+				@SuppressWarnings("unchecked")
+				Iterable<? extends Resource> iterable = (Iterable<? extends Resource>) object;
 				for (Object object2 : iterable) {
 					if (!(object2 instanceof Resource)) {
 //						throw new IllegalStateException("Slot contents was not a Resource but a '"+object.getClass().getSimpleName()+"'!");

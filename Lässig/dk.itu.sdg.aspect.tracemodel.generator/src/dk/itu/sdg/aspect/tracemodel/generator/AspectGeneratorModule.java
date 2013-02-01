@@ -13,7 +13,8 @@ public class AspectGeneratorModule extends AbstractGenericResourceRuntimeModule 
 
 	@Override
 	protected String getFileExtensions() {
-		return "ecore";
+		// return "ecore";
+		return "genmodel";
 	}
 
 	public Class<? extends IGenerator2> bindIGenerator() {

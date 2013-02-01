@@ -7,19 +7,19 @@ import org.eclipse.emf.ecore.EObject;
 
 import dk.itu.sdg.tracemodel.runtimedata.TraceCollector;
 
-import db.DB.Database;
-import db.DB.ForeignKey;
-import oo.OO.Parameter;
-import db.DB.Table;
 import oo.OO.ExternalClass;
-import oo.OO.Class;
-import oo.OO.Attribute;
 import oo.OO.Operation;
 import oo.OO.Model;
+import oo.OO.Package;
+import oo.OO.Class;
+import oo.OO.Datatype;
+import oo.OO.Attribute;
+import db.DB.Database;
+import db.DB.ForeignKey;
 import db.DB.Column;
 import oo.OO.Annotation;
-import oo.OO.Package;
-import oo.OO.Datatype;
+import db.DB.Table;
+import oo.OO.Parameter;
 import oo.OO.Reference;
 
 public aspect Tracer {
