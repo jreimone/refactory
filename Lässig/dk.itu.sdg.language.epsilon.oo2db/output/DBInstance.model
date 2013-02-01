@@ -4,7 +4,7 @@
     <columns name="schoolId" type="INT"/>
     <columns name="address" type="NVARCHAR"/>
     <columns/>
-    <columns name="postCodesAccepted" type="INT"/>
+    <columns name="postCodesAcceptedId" type="INT"/>
   </contents>
   <contents xsi:type="DB:Table" name="School_PostCodesAcceptedValues" primaryKeys="//@contents.1/@columns.0">
     <columns name="id" type="INT"/>
