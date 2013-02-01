@@ -302,7 +302,7 @@ after(Database t1, Model t2) : findMethodA0(t1, t2) {
 	if(!this.tA0.equals(t1) || !this.tB0.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -318,7 +318,7 @@ after(Model t1, Database t2) : findMethodB0(t1, t2) {
 	if(!this.tA0.equals(t1) || !this.tB0.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -334,7 +334,7 @@ after(Model t1) returning (Database returnValue): findMethodC0(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -342,7 +342,7 @@ after(Database t1) returning (Model returnValue): findMethodD0(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -352,7 +352,7 @@ after(Database t1, Annotation t2) : findMethodA1(t1, t2) {
 	if(!this.tA1.equals(t1) || !this.tB1.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -368,7 +368,7 @@ after(Annotation t1, Database t2) : findMethodB1(t1, t2) {
 	if(!this.tA1.equals(t1) || !this.tB1.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -384,7 +384,7 @@ after(Annotation t1) returning (Database returnValue): findMethodC1(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -392,7 +392,7 @@ after(Database t1) returning (Annotation returnValue): findMethodD1(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -402,7 +402,7 @@ after(Database t1, Package t2) : findMethodA2(t1, t2) {
 	if(!this.tA2.equals(t1) || !this.tB2.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -418,7 +418,7 @@ after(Package t1, Database t2) : findMethodB2(t1, t2) {
 	if(!this.tA2.equals(t1) || !this.tB2.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -434,7 +434,7 @@ after(Package t1) returning (Database returnValue): findMethodC2(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -442,7 +442,7 @@ after(Database t1) returning (Package returnValue): findMethodD2(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -452,7 +452,7 @@ after(Database t1, ExternalClass t2) : findMethodA3(t1, t2) {
 	if(!this.tA3.equals(t1) || !this.tB3.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -468,7 +468,7 @@ after(ExternalClass t1, Database t2) : findMethodB3(t1, t2) {
 	if(!this.tA3.equals(t1) || !this.tB3.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -484,7 +484,7 @@ after(ExternalClass t1) returning (Database returnValue): findMethodC3(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -492,7 +492,7 @@ after(Database t1) returning (ExternalClass returnValue): findMethodD3(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -502,7 +502,7 @@ after(Database t1, Class t2) : findMethodA4(t1, t2) {
 	if(!this.tA4.equals(t1) || !this.tB4.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -518,7 +518,7 @@ after(Class t1, Database t2) : findMethodB4(t1, t2) {
 	if(!this.tA4.equals(t1) || !this.tB4.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -534,7 +534,7 @@ after(Class t1) returning (Database returnValue): findMethodC4(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -542,7 +542,7 @@ after(Database t1) returning (Class returnValue): findMethodD4(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -552,7 +552,7 @@ after(Database t1, Datatype t2) : findMethodA5(t1, t2) {
 	if(!this.tA5.equals(t1) || !this.tB5.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -568,7 +568,7 @@ after(Datatype t1, Database t2) : findMethodB5(t1, t2) {
 	if(!this.tA5.equals(t1) || !this.tB5.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -584,7 +584,7 @@ after(Datatype t1) returning (Database returnValue): findMethodC5(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -592,7 +592,7 @@ after(Database t1) returning (Datatype returnValue): findMethodD5(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -602,7 +602,7 @@ after(Database t1, Operation t2) : findMethodA6(t1, t2) {
 	if(!this.tA6.equals(t1) || !this.tB6.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -618,7 +618,7 @@ after(Operation t1, Database t2) : findMethodB6(t1, t2) {
 	if(!this.tA6.equals(t1) || !this.tB6.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -634,7 +634,7 @@ after(Operation t1) returning (Database returnValue): findMethodC6(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -642,7 +642,7 @@ after(Database t1) returning (Operation returnValue): findMethodD6(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -652,7 +652,7 @@ after(Database t1, Parameter t2) : findMethodA7(t1, t2) {
 	if(!this.tA7.equals(t1) || !this.tB7.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -668,7 +668,7 @@ after(Parameter t1, Database t2) : findMethodB7(t1, t2) {
 	if(!this.tA7.equals(t1) || !this.tB7.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -684,7 +684,7 @@ after(Parameter t1) returning (Database returnValue): findMethodC7(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -692,7 +692,7 @@ after(Database t1) returning (Parameter returnValue): findMethodD7(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -702,7 +702,7 @@ after(Database t1, Reference t2) : findMethodA8(t1, t2) {
 	if(!this.tA8.equals(t1) || !this.tB8.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -718,7 +718,7 @@ after(Reference t1, Database t2) : findMethodB8(t1, t2) {
 	if(!this.tA8.equals(t1) || !this.tB8.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -734,7 +734,7 @@ after(Reference t1) returning (Database returnValue): findMethodC8(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -742,7 +742,7 @@ after(Database t1) returning (Reference returnValue): findMethodD8(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -752,7 +752,7 @@ after(Database t1, Attribute t2) : findMethodA9(t1, t2) {
 	if(!this.tA9.equals(t1) || !this.tB9.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -768,7 +768,7 @@ after(Attribute t1, Database t2) : findMethodB9(t1, t2) {
 	if(!this.tA9.equals(t1) || !this.tB9.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -784,7 +784,7 @@ after(Attribute t1) returning (Database returnValue): findMethodC9(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -792,7 +792,7 @@ after(Database t1) returning (Attribute returnValue): findMethodD9(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -802,7 +802,7 @@ after(Table t1, Model t2) : findMethodA10(t1, t2) {
 	if(!this.tA10.equals(t1) || !this.tB10.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -818,7 +818,7 @@ after(Model t1, Table t2) : findMethodB10(t1, t2) {
 	if(!this.tA10.equals(t1) || !this.tB10.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -834,7 +834,7 @@ after(Model t1) returning (Table returnValue): findMethodC10(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -842,7 +842,7 @@ after(Table t1) returning (Model returnValue): findMethodD10(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -852,7 +852,7 @@ after(Table t1, Annotation t2) : findMethodA11(t1, t2) {
 	if(!this.tA11.equals(t1) || !this.tB11.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -868,7 +868,7 @@ after(Annotation t1, Table t2) : findMethodB11(t1, t2) {
 	if(!this.tA11.equals(t1) || !this.tB11.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -884,7 +884,7 @@ after(Annotation t1) returning (Table returnValue): findMethodC11(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -892,7 +892,7 @@ after(Table t1) returning (Annotation returnValue): findMethodD11(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -902,7 +902,7 @@ after(Table t1, Package t2) : findMethodA12(t1, t2) {
 	if(!this.tA12.equals(t1) || !this.tB12.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -918,7 +918,7 @@ after(Package t1, Table t2) : findMethodB12(t1, t2) {
 	if(!this.tA12.equals(t1) || !this.tB12.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -934,7 +934,7 @@ after(Package t1) returning (Table returnValue): findMethodC12(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -942,7 +942,7 @@ after(Table t1) returning (Package returnValue): findMethodD12(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -952,7 +952,7 @@ after(Table t1, ExternalClass t2) : findMethodA13(t1, t2) {
 	if(!this.tA13.equals(t1) || !this.tB13.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -968,7 +968,7 @@ after(ExternalClass t1, Table t2) : findMethodB13(t1, t2) {
 	if(!this.tA13.equals(t1) || !this.tB13.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -984,7 +984,7 @@ after(ExternalClass t1) returning (Table returnValue): findMethodC13(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -992,7 +992,7 @@ after(Table t1) returning (ExternalClass returnValue): findMethodD13(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1002,7 +1002,7 @@ after(Table t1, Class t2) : findMethodA14(t1, t2) {
 	if(!this.tA14.equals(t1) || !this.tB14.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1018,7 +1018,7 @@ after(Class t1, Table t2) : findMethodB14(t1, t2) {
 	if(!this.tA14.equals(t1) || !this.tB14.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1034,7 +1034,7 @@ after(Class t1) returning (Table returnValue): findMethodC14(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1042,7 +1042,7 @@ after(Table t1) returning (Class returnValue): findMethodD14(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1052,7 +1052,7 @@ after(Table t1, Datatype t2) : findMethodA15(t1, t2) {
 	if(!this.tA15.equals(t1) || !this.tB15.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1068,7 +1068,7 @@ after(Datatype t1, Table t2) : findMethodB15(t1, t2) {
 	if(!this.tA15.equals(t1) || !this.tB15.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1084,7 +1084,7 @@ after(Datatype t1) returning (Table returnValue): findMethodC15(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1092,7 +1092,7 @@ after(Table t1) returning (Datatype returnValue): findMethodD15(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1102,7 +1102,7 @@ after(Table t1, Operation t2) : findMethodA16(t1, t2) {
 	if(!this.tA16.equals(t1) || !this.tB16.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1118,7 +1118,7 @@ after(Operation t1, Table t2) : findMethodB16(t1, t2) {
 	if(!this.tA16.equals(t1) || !this.tB16.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1134,7 +1134,7 @@ after(Operation t1) returning (Table returnValue): findMethodC16(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1142,7 +1142,7 @@ after(Table t1) returning (Operation returnValue): findMethodD16(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1152,7 +1152,7 @@ after(Table t1, Parameter t2) : findMethodA17(t1, t2) {
 	if(!this.tA17.equals(t1) || !this.tB17.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1168,7 +1168,7 @@ after(Parameter t1, Table t2) : findMethodB17(t1, t2) {
 	if(!this.tA17.equals(t1) || !this.tB17.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1184,7 +1184,7 @@ after(Parameter t1) returning (Table returnValue): findMethodC17(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1192,7 +1192,7 @@ after(Table t1) returning (Parameter returnValue): findMethodD17(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1202,7 +1202,7 @@ after(Table t1, Reference t2) : findMethodA18(t1, t2) {
 	if(!this.tA18.equals(t1) || !this.tB18.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1218,7 +1218,7 @@ after(Reference t1, Table t2) : findMethodB18(t1, t2) {
 	if(!this.tA18.equals(t1) || !this.tB18.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1234,7 +1234,7 @@ after(Reference t1) returning (Table returnValue): findMethodC18(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1242,7 +1242,7 @@ after(Table t1) returning (Reference returnValue): findMethodD18(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1252,7 +1252,7 @@ after(Table t1, Attribute t2) : findMethodA19(t1, t2) {
 	if(!this.tA19.equals(t1) || !this.tB19.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1268,7 +1268,7 @@ after(Attribute t1, Table t2) : findMethodB19(t1, t2) {
 	if(!this.tA19.equals(t1) || !this.tB19.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1284,7 +1284,7 @@ after(Attribute t1) returning (Table returnValue): findMethodC19(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1292,7 +1292,7 @@ after(Table t1) returning (Attribute returnValue): findMethodD19(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1302,7 +1302,7 @@ after(Column t1, Model t2) : findMethodA20(t1, t2) {
 	if(!this.tA20.equals(t1) || !this.tB20.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1318,7 +1318,7 @@ after(Model t1, Column t2) : findMethodB20(t1, t2) {
 	if(!this.tA20.equals(t1) || !this.tB20.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1334,7 +1334,7 @@ after(Model t1) returning (Column returnValue): findMethodC20(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1342,7 +1342,7 @@ after(Column t1) returning (Model returnValue): findMethodD20(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1352,7 +1352,7 @@ after(Column t1, Annotation t2) : findMethodA21(t1, t2) {
 	if(!this.tA21.equals(t1) || !this.tB21.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1368,7 +1368,7 @@ after(Annotation t1, Column t2) : findMethodB21(t1, t2) {
 	if(!this.tA21.equals(t1) || !this.tB21.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1384,7 +1384,7 @@ after(Annotation t1) returning (Column returnValue): findMethodC21(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1392,7 +1392,7 @@ after(Column t1) returning (Annotation returnValue): findMethodD21(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1402,7 +1402,7 @@ after(Column t1, Package t2) : findMethodA22(t1, t2) {
 	if(!this.tA22.equals(t1) || !this.tB22.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1418,7 +1418,7 @@ after(Package t1, Column t2) : findMethodB22(t1, t2) {
 	if(!this.tA22.equals(t1) || !this.tB22.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1434,7 +1434,7 @@ after(Package t1) returning (Column returnValue): findMethodC22(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1442,7 +1442,7 @@ after(Column t1) returning (Package returnValue): findMethodD22(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1452,7 +1452,7 @@ after(Column t1, ExternalClass t2) : findMethodA23(t1, t2) {
 	if(!this.tA23.equals(t1) || !this.tB23.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1468,7 +1468,7 @@ after(ExternalClass t1, Column t2) : findMethodB23(t1, t2) {
 	if(!this.tA23.equals(t1) || !this.tB23.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1484,7 +1484,7 @@ after(ExternalClass t1) returning (Column returnValue): findMethodC23(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1492,7 +1492,7 @@ after(Column t1) returning (ExternalClass returnValue): findMethodD23(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1502,7 +1502,7 @@ after(Column t1, Class t2) : findMethodA24(t1, t2) {
 	if(!this.tA24.equals(t1) || !this.tB24.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1518,7 +1518,7 @@ after(Class t1, Column t2) : findMethodB24(t1, t2) {
 	if(!this.tA24.equals(t1) || !this.tB24.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1534,7 +1534,7 @@ after(Class t1) returning (Column returnValue): findMethodC24(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1542,7 +1542,7 @@ after(Column t1) returning (Class returnValue): findMethodD24(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1552,7 +1552,7 @@ after(Column t1, Datatype t2) : findMethodA25(t1, t2) {
 	if(!this.tA25.equals(t1) || !this.tB25.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1568,7 +1568,7 @@ after(Datatype t1, Column t2) : findMethodB25(t1, t2) {
 	if(!this.tA25.equals(t1) || !this.tB25.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1584,7 +1584,7 @@ after(Datatype t1) returning (Column returnValue): findMethodC25(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1592,7 +1592,7 @@ after(Column t1) returning (Datatype returnValue): findMethodD25(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1602,7 +1602,7 @@ after(Column t1, Operation t2) : findMethodA26(t1, t2) {
 	if(!this.tA26.equals(t1) || !this.tB26.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1618,7 +1618,7 @@ after(Operation t1, Column t2) : findMethodB26(t1, t2) {
 	if(!this.tA26.equals(t1) || !this.tB26.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1634,7 +1634,7 @@ after(Operation t1) returning (Column returnValue): findMethodC26(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1642,7 +1642,7 @@ after(Column t1) returning (Operation returnValue): findMethodD26(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1652,7 +1652,7 @@ after(Column t1, Parameter t2) : findMethodA27(t1, t2) {
 	if(!this.tA27.equals(t1) || !this.tB27.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1668,7 +1668,7 @@ after(Parameter t1, Column t2) : findMethodB27(t1, t2) {
 	if(!this.tA27.equals(t1) || !this.tB27.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1684,7 +1684,7 @@ after(Parameter t1) returning (Column returnValue): findMethodC27(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1692,7 +1692,7 @@ after(Column t1) returning (Parameter returnValue): findMethodD27(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1702,7 +1702,7 @@ after(Column t1, Reference t2) : findMethodA28(t1, t2) {
 	if(!this.tA28.equals(t1) || !this.tB28.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1718,7 +1718,7 @@ after(Reference t1, Column t2) : findMethodB28(t1, t2) {
 	if(!this.tA28.equals(t1) || !this.tB28.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1734,7 +1734,7 @@ after(Reference t1) returning (Column returnValue): findMethodC28(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1742,7 +1742,7 @@ after(Column t1) returning (Reference returnValue): findMethodD28(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1752,7 +1752,7 @@ after(Column t1, Attribute t2) : findMethodA29(t1, t2) {
 	if(!this.tA29.equals(t1) || !this.tB29.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1768,7 +1768,7 @@ after(Attribute t1, Column t2) : findMethodB29(t1, t2) {
 	if(!this.tA29.equals(t1) || !this.tB29.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1784,7 +1784,7 @@ after(Attribute t1) returning (Column returnValue): findMethodC29(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1792,7 +1792,7 @@ after(Column t1) returning (Attribute returnValue): findMethodD29(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1802,7 +1802,7 @@ after(ForeignKey t1, Model t2) : findMethodA30(t1, t2) {
 	if(!this.tA30.equals(t1) || !this.tB30.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1818,7 +1818,7 @@ after(Model t1, ForeignKey t2) : findMethodB30(t1, t2) {
 	if(!this.tA30.equals(t1) || !this.tB30.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1834,7 +1834,7 @@ after(Model t1) returning (ForeignKey returnValue): findMethodC30(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1842,7 +1842,7 @@ after(ForeignKey t1) returning (Model returnValue): findMethodD30(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1852,7 +1852,7 @@ after(ForeignKey t1, Annotation t2) : findMethodA31(t1, t2) {
 	if(!this.tA31.equals(t1) || !this.tB31.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1868,7 +1868,7 @@ after(Annotation t1, ForeignKey t2) : findMethodB31(t1, t2) {
 	if(!this.tA31.equals(t1) || !this.tB31.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1884,7 +1884,7 @@ after(Annotation t1) returning (ForeignKey returnValue): findMethodC31(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1892,7 +1892,7 @@ after(ForeignKey t1) returning (Annotation returnValue): findMethodD31(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1902,7 +1902,7 @@ after(ForeignKey t1, Package t2) : findMethodA32(t1, t2) {
 	if(!this.tA32.equals(t1) || !this.tB32.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1918,7 +1918,7 @@ after(Package t1, ForeignKey t2) : findMethodB32(t1, t2) {
 	if(!this.tA32.equals(t1) || !this.tB32.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1934,7 +1934,7 @@ after(Package t1) returning (ForeignKey returnValue): findMethodC32(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1942,7 +1942,7 @@ after(ForeignKey t1) returning (Package returnValue): findMethodD32(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -1952,7 +1952,7 @@ after(ForeignKey t1, ExternalClass t2) : findMethodA33(t1, t2) {
 	if(!this.tA33.equals(t1) || !this.tB33.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1968,7 +1968,7 @@ after(ExternalClass t1, ForeignKey t2) : findMethodB33(t1, t2) {
 	if(!this.tA33.equals(t1) || !this.tB33.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -1984,7 +1984,7 @@ after(ExternalClass t1) returning (ForeignKey returnValue): findMethodC33(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -1992,7 +1992,7 @@ after(ForeignKey t1) returning (ExternalClass returnValue): findMethodD33(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -2002,7 +2002,7 @@ after(ForeignKey t1, Class t2) : findMethodA34(t1, t2) {
 	if(!this.tA34.equals(t1) || !this.tB34.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2018,7 +2018,7 @@ after(Class t1, ForeignKey t2) : findMethodB34(t1, t2) {
 	if(!this.tA34.equals(t1) || !this.tB34.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2034,7 +2034,7 @@ after(Class t1) returning (ForeignKey returnValue): findMethodC34(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -2042,7 +2042,7 @@ after(ForeignKey t1) returning (Class returnValue): findMethodD34(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -2052,7 +2052,7 @@ after(ForeignKey t1, Datatype t2) : findMethodA35(t1, t2) {
 	if(!this.tA35.equals(t1) || !this.tB35.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2068,7 +2068,7 @@ after(Datatype t1, ForeignKey t2) : findMethodB35(t1, t2) {
 	if(!this.tA35.equals(t1) || !this.tB35.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2084,7 +2084,7 @@ after(Datatype t1) returning (ForeignKey returnValue): findMethodC35(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -2092,7 +2092,7 @@ after(ForeignKey t1) returning (Datatype returnValue): findMethodD35(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -2102,7 +2102,7 @@ after(ForeignKey t1, Operation t2) : findMethodA36(t1, t2) {
 	if(!this.tA36.equals(t1) || !this.tB36.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2118,7 +2118,7 @@ after(Operation t1, ForeignKey t2) : findMethodB36(t1, t2) {
 	if(!this.tA36.equals(t1) || !this.tB36.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2134,7 +2134,7 @@ after(Operation t1) returning (ForeignKey returnValue): findMethodC36(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -2142,7 +2142,7 @@ after(ForeignKey t1) returning (Operation returnValue): findMethodD36(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -2152,7 +2152,7 @@ after(ForeignKey t1, Parameter t2) : findMethodA37(t1, t2) {
 	if(!this.tA37.equals(t1) || !this.tB37.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2168,7 +2168,7 @@ after(Parameter t1, ForeignKey t2) : findMethodB37(t1, t2) {
 	if(!this.tA37.equals(t1) || !this.tB37.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2184,7 +2184,7 @@ after(Parameter t1) returning (ForeignKey returnValue): findMethodC37(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -2192,7 +2192,7 @@ after(ForeignKey t1) returning (Parameter returnValue): findMethodD37(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -2202,7 +2202,7 @@ after(ForeignKey t1, Reference t2) : findMethodA38(t1, t2) {
 	if(!this.tA38.equals(t1) || !this.tB38.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2218,7 +2218,7 @@ after(Reference t1, ForeignKey t2) : findMethodB38(t1, t2) {
 	if(!this.tA38.equals(t1) || !this.tB38.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2234,7 +2234,7 @@ after(Reference t1) returning (ForeignKey returnValue): findMethodC38(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -2242,7 +2242,7 @@ after(ForeignKey t1) returning (Reference returnValue): findMethodD38(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType1 first part
@@ -2252,7 +2252,7 @@ after(ForeignKey t1, Attribute t2) : findMethodA39(t1, t2) {
 	if(!this.tA39.equals(t1) || !this.tB39.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2268,7 +2268,7 @@ after(Attribute t1, ForeignKey t2) : findMethodB39(t1, t2) {
 	if(!this.tA39.equals(t1) || !this.tB39.equals(t2)) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setTrace(t1, thisJoinPoint, t2);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 
@@ -2284,7 +2284,7 @@ after(Attribute t1) returning (ForeignKey returnValue): findMethodC39(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 //genertated by generateAdvisePCType2 second part
@@ -2292,7 +2292,7 @@ after(ForeignKey t1) returning (Attribute returnValue): findMethodD39(t1) {
 	if(t1 != null && returnValue != null) {
 		TraceCollector tc = TraceCollector.getInstance();
 		tc.setDirectedTrace(t1, thisJoinPoint, returnValue);
-		//System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
+		System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " --> " + EcoreUtil.getURI((EObject)returnValue) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
 	}
 }
 }
