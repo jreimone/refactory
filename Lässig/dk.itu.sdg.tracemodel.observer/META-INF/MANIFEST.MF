@@ -18,5 +18,5 @@ Require-Bundle: org.aspectj.runtime,
  dk.itu.sdg.language.epsilon.families,
  dk.itu.sdg.language.epsilon.persons,
  org.eclipse.emf.ecore
-Export-Package: dk.itu.sdg.tracemodel.observer;aspects=Tracer
-Eclipse-SupplementBundle: dk.itu.sdg.language.epsilon.families2persons;bundle-version="1.0.0"
+Export-Package: dk.itu.sdg.tracemodel.observer;aspects="Tracer"
+Eclipse-SupplementBundle: dk.itu.sdg.language.epsilon.oo2db
