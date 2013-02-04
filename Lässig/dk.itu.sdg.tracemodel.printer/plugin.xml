@@ -39,9 +39,10 @@
                mnemonic="M"
                id="dk.itu.sdg.tracemodel.printer.menus.tracemodelMenu">
             <command
-                  commandId="dk.itu.sdg.tracemodel.printer.commands.sampleCommand"
-                  mnemonic="S"
-                  id="dk.itu.sdg.tracemodel.printer.menus.sampleCommand">
+                  commandId="dk.itu.sdg.tracemodel.printer.commands.printCommand"
+                  icon="icons/printer.png"
+                  id="dk.itu.sdg.tracemodel.printer.menus.sampleCommand"
+                  mnemonic="S">
             </command>
          </menu>
       </menuContribution>
