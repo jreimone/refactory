@@ -47,6 +47,13 @@ public interface IRefactorer {
 	public void setInput(List<? extends EObject> selectedElements);
 	
 	/**
+	 * Returns the selected elements on which this refactoring is to be executed.
+	 * @see #setInput(List)
+	 * @return
+	 */
+	public List<EObject> getInput();
+	
+	/**
 	 * Infers over the mapped roles of the elements set with {@link #setInput(EList)} and determines 
 	 * by the completeness of the applied roles in different mappings if they are invokable.
 	 * All present roles in the from the elements will be compared to the overall mapped roles in each 

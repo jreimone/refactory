@@ -77,6 +77,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	private Set<IRoleMappingRegistryListener> listeners;
 	private Map<RoleMapping, List<Entry<Object, String>>> preConditionsMap;
 	private Map<RoleMapping, List<Entry<Object, String>>> postConditionsMap;
+	private Map<RoleMapping, IConfigurationElement> contributorMap;
 
 	public BasicRoleMappingRegistry(){
 		roleMappingsMap = new LinkedHashMap<String, Map<String, RoleMapping>>();
@@ -88,6 +89,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		listeners = new HashSet<IRoleMappingRegistryListener>();
 		preConditionsMap = new HashMap<RoleMapping, List<Entry<Object,String>>>();
 		postConditionsMap = new HashMap<RoleMapping, List<Entry<Object,String>>>();
+		contributorMap = new HashMap<RoleMapping, IConfigurationElement>();
 		collectRegisteredRoleMappings();
 		collectRegisteredPostProcessors();
 	}
@@ -110,6 +112,13 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		registerIconsForMappings(roleMapping, config);
 		registerConditionsForMappings(roleMapping, config);
 		registerSubMenu(roleMapping, config);
+		registerContributor(roleMapping, config);
+	}
+
+	private void registerContributor(RoleMappingModel roleMapping, IConfigurationElement config) {
+		for (RoleMapping mapping : roleMapping.getMappings()) {
+			contributorMap.put(mapping, config);
+		}
 	}
 
 	private void registerSubMenu(RoleMappingModel roleMappingModel, IConfigurationElement config) {
@@ -369,7 +378,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 				String nsUri = subpackage.getNsURI();
 				Map<String, RoleMapping> registered = getRoleMappingsMap().get(nsUri);
 				if(registered != null){
-					RegistryUtil.log("Metamodel " + nsUri + " already registered ", IStatus.WARNING);
+//					RegistryUtil.log("Metamodel " + nsUri + " already registered ", IStatus.WARNING);
 				} else {
 					if(mappings != null){
 						getRoleMappingsMap().put(nsUri, mappings);
@@ -538,5 +547,10 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	@Override
 	public List<Entry<Object, String>> getPostConditionsForRoleMapping(RoleMapping mapping) {
 		return postConditionsMap.get(mapping);
+	}
+
+	@Override
+	public IConfigurationElement getContributorForRoleMapping(RoleMapping roleMapping) {
+		return contributorMap.get(roleMapping);
 	}
 }

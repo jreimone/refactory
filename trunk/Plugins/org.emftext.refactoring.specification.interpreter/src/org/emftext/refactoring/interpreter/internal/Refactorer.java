@@ -585,4 +585,10 @@ public class Refactorer implements IRefactorer {
 	public RoleMapping getRoleMapping() {
 		return roleMapping;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EObject> getInput() {
+		return (List<EObject>) currentSelection;
+	}
 }

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -39,6 +40,13 @@ import org.emftext.refactoring.registry.rolemapping.impl.BasicRoleMappingRegistr
 public interface IRoleMappingRegistry {
 
 	public static final IRoleMappingRegistry INSTANCE = new BasicRoleMappingRegistry();
+	
+	/**
+	 * Returns the IConfigurationElement from which the given <code>roleMapping</code> was contributed.
+	 * @param roleMapping
+	 * @return
+	 */
+	public IConfigurationElement getContributorForRoleMapping(RoleMapping roleMapping);
 	
 	/**
 	 * Returns the {@link RoleMappingModel} registered for the given namespace URI.
