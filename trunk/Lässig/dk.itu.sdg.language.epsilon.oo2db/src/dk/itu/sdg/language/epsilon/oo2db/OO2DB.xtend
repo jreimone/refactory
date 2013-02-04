@@ -12,8 +12,6 @@ import oo.OO.Classifier
 import oo.OO.Datatype
 import oo.OO.Package
 import oo.OO.Reference
-import oo.OO.Attribute
-import db.DB.Database
 
 class OO2DB {
 	
