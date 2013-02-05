@@ -42,7 +42,6 @@ import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
 import org.eclipse.ui.services.IServiceLocator;
@@ -112,7 +111,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				}
 			}
 		}
-		if (selectedElements != null && selectedElements.size() >= 1 && activeEditor != null) {
+		if (selectedElements != null && selectedElements.size() >= 1) {
 			EObject model = null;
 			Resource resource = null;
 //			int i = 0;
@@ -129,6 +128,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 //			} while (i < selectedElements.size() && resource == null);
 //			if (resource == null) {
 //			}
+			if(activeEditor == null){
+				activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+			}
 			IEditorInput editorInput = activeEditor.getEditorInput();
 			ResourceSet rs;
 			if(editorInput instanceof IFileEditorInput){

@@ -19,20 +19,15 @@
 package org.emftext.refactoring.ltk;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoableOperation;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.util.URI;
@@ -54,7 +49,6 @@ import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.ChangeDescriptor;
-import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringChangeDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -63,10 +57,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
-import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.ui.RefactoringRecordingCommand;
 import org.emftext.refactoring.ui.RefactoringUndoOperation;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -85,7 +77,6 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 
 	private RefactoringRecordingCommand command;
 	private IRefactoringStatus status;
-	private long timestamp;
 
 	public ModelRefactoringChange(ModelRefactoring modelRefactoring) {
 		super();
@@ -93,7 +84,6 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		this.refactorer = modelRefactoring.getRefactorer();
 		this.editingDomain = modelRefactoring.getDiagramTransactionalEditingDomain();
 		this.activeEditor = modelRefactoring.getActiveEditor();
-		this.timestamp = System.currentTimeMillis();
 		
 		//cseidl
 		//Make sure the fake refactoring is performed, once the preview page is about to be displayed.
@@ -102,61 +92,10 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 
 	@Override
 	public ChangeDescriptor getDescriptor() {
-		RoleMapping roleMapping = refactorer.getRoleMapping();
-		IConfigurationElement element = IRoleMappingRegistry.INSTANCE.getContributorForRoleMapping(roleMapping);
-		String id = element.getContributor().getName() + "." + roleMapping.getName().replace(" ", "");
-
-		String projectID = null;
-		IFile file = getFileFromUri();
-		IProject project = file.getProject();
-		if(project != null){
-			projectID = project.getName();
-		}
-		String description = roleMapping.getName() + " (" + roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI() + ")";
-		String comment = description + ":\n" +
-				"- specific for the generic refactoring '" + roleMapping.getMappedRoleModel().getName() + "'\n" +
-				"- executable for the language " + roleMapping.getOwningMappingModel().getTargetMetamodel().getName().toUpperCase()
-				 + " (" + roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI() + ")\n" +
-				"- refactored elements:\n";
-		List<EObject> selectedElements = refactorer.getInput();
-		for (EObject selectedElement : selectedElements) {
-			comment += "\t" + selectedElement;
-		}
-		comment += "\n- has the following generic description: " + roleMapping.getMappedRoleModel().getComment();
-		int flags = RefactoringDescriptor.MULTI_CHANGE | RefactoringDescriptor.STRUCTURAL_CHANGE;
-
-		RefactoringDescriptor descriptor = new RefactoringDescriptor(id, projectID, description, comment, flags) {
-			
-			@Override
-			public Refactoring createRefactoring(RefactoringStatus status) throws CoreException {
-				if(status.isOK()){
-					return new ModelRefactoring(refactorer, editingDomain, modelRefactoring.getName(), activeEditor);
-				}
-				return null;
-			}
-		};
-		descriptor.setTimeStamp(timestamp);
+		RefactoringDescriptor descriptor = new ModelRefactoringDescriptor(refactorer, modelRefactoring);
 		RefactoringChangeDescriptor changeDescriptor = new RefactoringChangeDescriptor(descriptor);
 		return changeDescriptor;
 	}
-
-	private IFile getFileFromUri() {
-		URI uri = refactorer.getResource().getURI();
-		uri = refactorer.getResource().getResourceSet().getURIConverter().normalize(uri);
-		String scheme = uri.scheme();
-		if ("platform".equals(scheme) && uri.segmentCount() > 1 && "resource".equals(uri.segment(0)))
-		{
-			StringBuffer platformResourcePath = new StringBuffer();
-			for (int j = 1, size = uri.segmentCount(); j < size; ++j)
-			{
-				platformResourcePath.append('/');
-				platformResourcePath.append(uri.segment(j));
-			}
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformResourcePath.toString()));
-		}
-		return null;
-	}
-
 
 	//	private void doFakeRun() {
 	//		try{
