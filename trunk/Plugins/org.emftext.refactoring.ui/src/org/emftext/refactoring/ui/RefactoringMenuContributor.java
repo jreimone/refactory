@@ -210,6 +210,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 							if(subMenu == null){
 								rootMenu.add(refactoringAction);
 							} else {
+								subMenu.removeAll();
 								List<IMenuManager> subMenuPath = subMenuRegistry.getSubMenuPathForRoleMapping(mapping);
 								IMenuManager parent = rootMenu;
 								for (IMenuManager singleSubMenu : subMenuPath) {
