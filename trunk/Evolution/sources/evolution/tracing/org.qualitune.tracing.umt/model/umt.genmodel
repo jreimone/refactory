@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.qualitune.tracing.umt/src" modelPluginID="umt"
+    modelName="Umt" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.qualitune.tracing.vapoditrace/model/VapodiTrace.genmodel#//vapoditrace">
+  <foreignModel>umt.ecore</foreignModel>
+  <genPackages prefix="Umt" basePackage="org.qualitune.tracing" disposableProviderFactory="true"
+      ecorePackage="umt.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="umt.ecore#//IntentionEnum">
+      <genEnumLiterals ecoreEnumLiteral="umt.ecore#//IntentionEnum/OMITTED_INTENTION"/>
+      <genEnumLiterals ecoreEnumLiteral="umt.ecore#//IntentionEnum/IN"/>
+      <genEnumLiterals ecoreEnumLiteral="umt.ecore#//IntentionEnum/OUT"/>
+      <genEnumLiterals ecoreEnumLiteral="umt.ecore#//IntentionEnum/INOUT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="umt.ecore#//UniverseType">
+      <genEnumLiterals ecoreEnumLiteral="umt.ecore#//UniverseType/LIGHT_UNIVERSE"/>
+      <genEnumLiterals ecoreEnumLiteral="umt.ecore#//UniverseType/SHADOW_UNIVERSE"/>
+    </genEnums>
+    <genClasses ecoreClass="umt.ecore#//InstructionBlock">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//InstructionBlock/instructions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="umt.ecore#//Instruction"/>
+    <genClasses ecoreClass="umt.ecore#//Selection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Selection/branches"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//VariableDeclarationInstruction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//VariableDeclarationInstruction/variables"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//VariableAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//VariableAssignment/destination"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//VariableAssignment/source"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="umt.ecore#//WriteDestinationModel"/>
+    <genClasses image="false" ecoreClass="umt.ecore#//CfsInstruction"/>
+    <genClasses ecoreClass="umt.ecore#//Function">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Function/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Function/main"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Function/name"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Variable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//Condition"/>
+    <genClasses ecoreClass="umt.ecore#//Debug">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Debug/text"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//Program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Program/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Program/models"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Program/name"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//Loop">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//Loop/body"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//Loop/invariant"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="umt.ecore#//ModelModification"/>
+    <genClasses ecoreClass="umt.ecore#//Branch">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Branch/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Branch/body"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//Call">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//Call/function"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="umt.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Model/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//Model/metamodel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Model/urn"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//AddTraceLink">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//AddTraceLink/destination"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="umt.ecore#//VapodiInstruction"/>
+    <genClasses ecoreClass="umt.ecore#//Write"/>
+    <genClasses ecoreClass="umt.ecore#//Delete"/>
+    <genClasses ecoreClass="umt.ecore#//TypeFilter"/>
+    <genClasses ecoreClass="umt.ecore#//LogicalCondition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//LogicalCondition/dependency"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//VariableDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//VariableDeclaration/variables"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="umt.ecore#//NumerousKindsOfBranches">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//NumerousKindsOfBranches/oppositeBranch"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//BlackBoxInstruction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//BlackBoxInstruction/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//InstanceModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//InstanceModel/intention"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//InstanceModel/universe"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//MetaModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//MetaModel/nsURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//MetaModel/nsPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//MetaModel/types"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//Comment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Comment/text"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//CfsPush">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//CfsPush/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//CfsPop"/>
+    <genClasses ecoreClass="umt.ecore#//PrimitiveVariable"/>
+    <genClasses ecoreClass="umt.ecore#//CollectionVariable"/>
+    <genClasses ecoreClass="umt.ecore#//ModelVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//ModelVariable/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//ModelVariable/model"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//ModelType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//ModelType/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//ModelType/model"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//VariableReset">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//VariableReset/variables"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
