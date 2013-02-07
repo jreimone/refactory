@@ -1,0 +1,26 @@
+module everyone_is_an_equal_citizen;
+create REPUBLIC : republic from KINGDOM : kingdom;
+
+-- from references strictly metamodels -> insane if multiple input files of same MM
+
+rule knight2citizen {
+	from
+		knight : kingdom!Knight
+	to
+		citizen : republic!Citizen (
+			name <- knight.name
+		)
+	do {
+		if (knight.name = 'kuno')
+			citizen.name <- 'alter Schwede';
+}
+
+rule dragon2citizen {
+	from
+		dragon : kingdom!Dragon
+	to
+		citizen : republic!Citizen
+	do {
+		citizen.name <- dragon.name
+	}
+}
