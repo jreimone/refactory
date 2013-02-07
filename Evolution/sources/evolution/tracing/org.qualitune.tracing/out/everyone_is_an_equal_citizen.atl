@@ -1,0 +1,200 @@
+module everyone_is_an_equal_citizen;
+create REPUBLIC : republic, VAPODI_TRACE : VAPODI_TRACE_METAMODEL from KINGDOM : kingdom;
+
+-- from references strictly metamodels -> insane if multiple input files of same MM
+rule knight2citizen {
+ from
+  knight : kingdom!Knight
+ to
+  citizen : republic!Citizen (
+   name <- knight.name
+  )
+ do {
+  -- [VAPODI] warning: ATL instruction below is not handled by VAPODI and has been ignored for its analysis
+  if(knight.name = 'kuno')
+   citizen.name <- 'alter Schwede';
+  thisModule.CFS_push();
+  thisModule.CFS_pop();
+ }
+}
+
+rule dragon2citizen {
+ from
+  dragon : kingdom!Dragon
+ to
+  citizen : republic!Citizen
+ do {
+  thisModule.CFS_push();
+  thisModule.CFS_pop();
+ }
+}
+
+helper context VAPODI_TRACE_METAMODEL!DynamicEntity def: equals(other : VAPODI_TRACE_METAMODEL!DynamicEntity) : Boolean =
+ self.concern = other.concern and self.object = other.object and self.attributeName = other.attributeName;
+
+helper def: traceCollection : VAPODI_TRACE_METAMODEL!VAPODI_TRACE_METAMODELCollection =
+ VAPODI_TRACE_METAMODEL!TraceCollection.newInstance();
+
+helper def: CFS : Sequence(Sequence(VAPODI_TRACE_METAMODEL!DynamicEntity)) =
+ Sequence {};
+
+rule CFS_push(what : VAPODI_TRACE_METAMODEL!DynamicEntity) {
+ do {
+  thisModule.CFS <- thisModule.CFS.append(what);
+ }
+}
+
+rule CFS_push_object(object : Ecore!EObject, semantics : VAPODI_TRACE_METAMODEL!TraceType, universe : VAPODI_TRACE_METAMODEL!UniverseType) {
+ to
+  what : VAPODI_TRACE_METAMODEL!DynamicEntity (
+   concern <- #OBJECT,
+   semantics <- semantics,
+   universe <- universe
+  )
+ do {
+  what.object <- object;
+  thisModule.CFS_push(what);
+ }
+}
+
+rule CFS_push_attribute(object : Ecore!EObject, attributeName : String, semantics : VAPODI_TRACE_METAMODEL!TraceType, universe : VAPODI_TRACE_METAMODEL!UniverseType) {
+ to
+  what : VAPODI_TRACE_METAMODEL!DynamicEntity (
+   attributeName <- attributeName,
+   concern <- #ATTRIBUTE,
+   semantics <- semantics,
+   universe <- universe
+  )
+ do {
+  what.object <- object;
+  thisModule.CFS_push(what);
+ }
+}
+
+rule CFS_pop() {
+ do {
+  if(thisModule.CFS.isEmpty()) {
+   'ERROR: Trying to pop from empty Control Flow Stack.'.println();
+   '       (This is an internal error resulting from wrong instrumentation)'.println();
+   '       (As a user, you cannnot do much about it)'.println();
+  } -- workaround: as we can't destroy created objects and all existing objects make their way into output file,
+  --             so we have them in one place, at least
+  -- workaround: as we can't destroy created objects and all existing objects make their way into output file,
+  --             so we have them in one place, at least
+  -- workaround: as we can't destroy created objects and all existing objects make their way into output file,
+  --             so we have them in one place, at least
+  -- workaround: as we can't destroy created objects and all existing objects make their way into output file,
+  --             so we have them in one place, at least
+  -- workaround: as we can't destroy created objects and all existing objects make their way into output file,
+  --             so we have them in one place, at least
+  thisModule.traceCollection.trash <- thisModule.CFS.last(); -- workaround: empty subsequence is returned as [], not as an empty sequence
+  --             (does not even have collection type operations) 
+  -- workaround: empty subsequence is returned as [], not as an empty sequence
+  --             (does not even have collection type operations) 
+  if(thisModule.CFS.size() > 1)
+   thisModule.CFS <- thisModule.CFS.subSequence(1, thisModule.CFS.asSequence().size() - 1);
+  else
+   thisModule.CFS <- Sequence {};
+  
+ }
+}
+
+helper def: ST : Sequence(TupleType(symbol : String, dependencies : Sequence(VAPODI_TRACE_METAMODEL!DynamicEntity))) =
+ Sequence {};
+
+rule ST_put(target : String, reason : Sequence(VAPODI_TRACE_METAMODEL!DynamicEntity)) {
+ using
+ {
+  entry : TupleType(symbol : String, dependencies : Sequence(VAPODI_TRACE_METAMODEL!DynamicEntity)) = Tuple {symbol = target, dependencies = reason};
+ }
+ do {
+  -- won't work:
+  -- thisModule.ST <- entry;
+  -- won't work:
+  -- thisModule.ST <- entry;
+  -- won't work:
+  -- thisModule.ST <- entry;
+  thisModule.ST <- thisModule.ST.append(entry);
+ }
+}
+
+rule ST_move_deps_onto_CFS(whose : String) {
+ do {
+  
+ }
+}
+
+rule ST_ask(whom : VAPODI_TRACE_METAMODEL!DynamicEntity) {
+ do {
+  'ASK'.println();
+  thisModule.ST.debug();
+  thisModule.ST->select(e |
+   e.symbol.equals(whom)
+  ).last().debug();
+ }
+}
+
+rule ST_drop(whom : VAPODI_TRACE_METAMODEL!DynamicEntity) {
+ do {
+  
+ }
+}
+
+rule addTraceLink(target : VAPODI_TRACE_METAMODEL!DynamicEntity) {
+ using
+ {
+  tmpEntity : VAPODI_TRACE_METAMODEL!DynamicEntity = 0;
+ }
+ to
+  link : VAPODI_TRACE_METAMODEL!TraceLink (
+   destination <- target -- ,source <- thisModule.CFS -- live could be so easy ...
+   -- ,source <- thisModule.CFS -- live could be so easy ...
+   
+  )
+ do {
+  -- CFS copy leaves some trash behind
+  for(e in thisModule.CFS) {
+   tmpEntity <- VAPODI_TRACE_METAMODEL!DynamicEntity.newInstance();
+   tmpEntity.object <- e.object;
+   tmpEntity.attributeName <- e.attributeName;
+   tmpEntity.concern <- e.concern;
+   tmpEntity.universe <- e.universe;
+   tmpEntity.semantics <- e.semantics;
+   link.source <- tmpEntity;
+  }
+  'aaa'.println();
+  link.source.toString().println();
+  'xxx'.println();
+  thisModule.TraceCollection.traceLinks <- link;
+  if(target.universe = #SHADOW_UNIVERSE)
+   thisModule.traceCollection.shadowObjects <- target.object;
+  
+ }
+}
+
+rule traceLinkToObject(object : Ecore!EObject, universe : VAPODI_TRACE_METAMODEL!UniverseType) {
+ to
+  target : VAPODI_TRACE_METAMODEL!DynamicEntity (
+   object <- object,
+   concern <- #OBJECT,
+   semantics <- #CREATE,
+   universe <- universe
+  )
+ do {
+  thisModule.addTraceLink(target, universe);
+ }
+}
+
+rule addTraceLinkToAttribute(object : Ecore!EObject, attributeName : String, universe : VAPODI_TRACE_METAMODEL!UniverseType) {
+ to
+  target : VAPODI_TRACE_METAMODEL!DynamicEntity (
+   object <- object,
+   attributeName <- attributeName,
+   concern <- #ATTRIBUTE,
+   semantics <- #WRITE,
+   universe <- universe
+  )
+ do {
+  thisModule.addTraceLink(target, universe);
+ }
+}
