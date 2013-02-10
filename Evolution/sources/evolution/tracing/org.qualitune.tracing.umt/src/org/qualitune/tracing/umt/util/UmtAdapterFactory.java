@@ -212,6 +212,14 @@ public class UmtAdapterFactory extends AdapterFactoryImpl {
 				return createVariableResetAdapter();
 			}
 			@Override
+			public Adapter caseModelTypeAttribute(ModelTypeAttribute object) {
+				return createModelTypeAttributeAdapter();
+			}
+			@Override
+			public Adapter caseModelAttributeVariable(ModelAttributeVariable object) {
+				return createModelAttributeVariableAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -732,6 +740,34 @@ public class UmtAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableResetAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.ModelTypeAttribute <em>Model Type Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.qualitune.tracing.umt.ModelTypeAttribute
+	 * @generated
+	 */
+	public Adapter createModelTypeAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.ModelAttributeVariable <em>Model Attribute Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.qualitune.tracing.umt.ModelAttributeVariable
+	 * @generated
+	 */
+	public Adapter createModelAttributeVariableAdapter() {
 		return null;
 	}
 

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.qualitune.tracing.umt;singleton:=true
+Bundle-SymbolicName: umt;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
@@ -12,5 +12,5 @@ Export-Package: org.qualitune.tracing.umt,
  org.qualitune.tracing.umt.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.qualitune.tracing.vapoditrace;bundle-version="1.0.0"
+ org.qualitune.tracing.vapoditrace;visibility:=reexport
 Bundle-ActivationPolicy: lazy

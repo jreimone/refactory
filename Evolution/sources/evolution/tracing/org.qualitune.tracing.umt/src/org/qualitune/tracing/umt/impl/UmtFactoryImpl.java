@@ -84,6 +84,8 @@ public class UmtFactoryImpl extends EFactoryImpl implements UmtFactory {
 			case UmtPackage.MODEL_VARIABLE: return createModelVariable();
 			case UmtPackage.MODEL_TYPE: return createModelType();
 			case UmtPackage.VARIABLE_RESET: return createVariableReset();
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE: return createModelTypeAttribute();
+			case UmtPackage.MODEL_ATTRIBUTE_VARIABLE: return createModelAttributeVariable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -391,6 +393,26 @@ public class UmtFactoryImpl extends EFactoryImpl implements UmtFactory {
 	public VariableReset createVariableReset() {
 		VariableResetImpl variableReset = new VariableResetImpl();
 		return variableReset;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelTypeAttribute createModelTypeAttribute() {
+		ModelTypeAttributeImpl modelTypeAttribute = new ModelTypeAttributeImpl();
+		return modelTypeAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelAttributeVariable createModelAttributeVariable() {
+		ModelAttributeVariableImpl modelAttributeVariable = new ModelAttributeVariableImpl();
+		return modelAttributeVariable;
 	}
 
 	/**

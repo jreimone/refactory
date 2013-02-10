@@ -265,6 +265,24 @@ public interface UmtFactory extends EFactory {
 	VariableReset createVariableReset();
 
 	/**
+	 * Returns a new object of class '<em>Model Type Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Type Attribute</em>'.
+	 * @generated
+	 */
+	ModelTypeAttribute createModelTypeAttribute();
+
+	/**
+	 * Returns a new object of class '<em>Model Attribute Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Attribute Variable</em>'.
+	 * @generated
+	 */
+	ModelAttributeVariable createModelAttributeVariable();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

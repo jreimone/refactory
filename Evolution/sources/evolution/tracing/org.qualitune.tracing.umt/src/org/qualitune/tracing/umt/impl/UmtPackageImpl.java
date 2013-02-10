@@ -32,8 +32,10 @@ import org.qualitune.tracing.umt.LogicalCondition;
 import org.qualitune.tracing.umt.Loop;
 import org.qualitune.tracing.umt.MetaModel;
 import org.qualitune.tracing.umt.Model;
+import org.qualitune.tracing.umt.ModelAttributeVariable;
 import org.qualitune.tracing.umt.ModelModification;
 import org.qualitune.tracing.umt.ModelType;
+import org.qualitune.tracing.umt.ModelTypeAttribute;
 import org.qualitune.tracing.umt.ModelVariable;
 import org.qualitune.tracing.umt.NumerousKindsOfBranches;
 import org.qualitune.tracing.umt.PrimitiveVariable;
@@ -318,6 +320,20 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass modelTypeAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelAttributeVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum intentionEnumEEnum = null;
 
 	/**
@@ -504,6 +520,15 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCfsInstruction_Conditions() {
+		return (EReference)cfsInstructionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFunction() {
 		return functionEClass;
 	}
@@ -560,6 +585,15 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 */
 	public EClass getCondition() {
 		return conditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCondition_Dependencies() {
+		return (EReference)conditionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -801,15 +835,6 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLogicalCondition_Dependency() {
-		return (EReference)logicalConditionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getVariableDeclaration() {
 		return variableDeclarationEClass;
 	}
@@ -954,15 +979,6 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCfsPush_Condition() {
-		return (EReference)cfsPushEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCfsPop() {
 		return cfsPopEClass;
 	}
@@ -1017,6 +1033,15 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getModelVariable_Attributes() {
+		return (EReference)modelVariableEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getModelType() {
 		return modelTypeEClass;
 	}
@@ -1044,6 +1069,15 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getModelType_Attributes() {
+		return (EReference)modelTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVariableReset() {
 		return variableResetEClass;
 	}
@@ -1055,6 +1089,60 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 */
 	public EReference getVariableReset_Variables() {
 		return (EReference)variableResetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelTypeAttribute() {
+		return modelTypeAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModelTypeAttribute_Name() {
+		return (EAttribute)modelTypeAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeAttribute_PartOf() {
+		return (EReference)modelTypeAttributeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelAttributeVariable() {
+		return modelAttributeVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelAttributeVariable_InstanceOf() {
+		return (EReference)modelAttributeVariableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelAttributeVariable_PartOf() {
+		return (EReference)modelAttributeVariableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1121,6 +1209,7 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		writeDestinationModelEClass = createEClass(WRITE_DESTINATION_MODEL);
 
 		cfsInstructionEClass = createEClass(CFS_INSTRUCTION);
+		createEReference(cfsInstructionEClass, CFS_INSTRUCTION__CONDITIONS);
 
 		functionEClass = createEClass(FUNCTION);
 		createEReference(functionEClass, FUNCTION__BODY);
@@ -1131,6 +1220,7 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		createEAttribute(variableEClass, VARIABLE__NAME);
 
 		conditionEClass = createEClass(CONDITION);
+		createEReference(conditionEClass, CONDITION__DEPENDENCIES);
 
 		debugEClass = createEClass(DEBUG);
 		createEAttribute(debugEClass, DEBUG__TEXT);
@@ -1170,7 +1260,6 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		typeFilterEClass = createEClass(TYPE_FILTER);
 
 		logicalConditionEClass = createEClass(LOGICAL_CONDITION);
-		createEReference(logicalConditionEClass, LOGICAL_CONDITION__DEPENDENCY);
 
 		variableDeclarationEClass = createEClass(VARIABLE_DECLARATION);
 		createEReference(variableDeclarationEClass, VARIABLE_DECLARATION__VARIABLES);
@@ -1194,7 +1283,6 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		createEAttribute(commentEClass, COMMENT__TEXT);
 
 		cfsPushEClass = createEClass(CFS_PUSH);
-		createEReference(cfsPushEClass, CFS_PUSH__CONDITION);
 
 		cfsPopEClass = createEClass(CFS_POP);
 
@@ -1205,13 +1293,23 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		modelVariableEClass = createEClass(MODEL_VARIABLE);
 		createEReference(modelVariableEClass, MODEL_VARIABLE__TYPE);
 		createEReference(modelVariableEClass, MODEL_VARIABLE__MODEL);
+		createEReference(modelVariableEClass, MODEL_VARIABLE__ATTRIBUTES);
 
 		modelTypeEClass = createEClass(MODEL_TYPE);
 		createEAttribute(modelTypeEClass, MODEL_TYPE__NAME);
 		createEReference(modelTypeEClass, MODEL_TYPE__MODEL);
+		createEReference(modelTypeEClass, MODEL_TYPE__ATTRIBUTES);
 
 		variableResetEClass = createEClass(VARIABLE_RESET);
 		createEReference(variableResetEClass, VARIABLE_RESET__VARIABLES);
+
+		modelTypeAttributeEClass = createEClass(MODEL_TYPE_ATTRIBUTE);
+		createEAttribute(modelTypeAttributeEClass, MODEL_TYPE_ATTRIBUTE__NAME);
+		createEReference(modelTypeAttributeEClass, MODEL_TYPE_ATTRIBUTE__PART_OF);
+
+		modelAttributeVariableEClass = createEClass(MODEL_ATTRIBUTE_VARIABLE);
+		createEReference(modelAttributeVariableEClass, MODEL_ATTRIBUTE_VARIABLE__INSTANCE_OF);
+		createEReference(modelAttributeVariableEClass, MODEL_ATTRIBUTE_VARIABLE__PART_OF);
 
 		// Create enums
 		intentionEnumEEnum = createEEnum(INTENTION_ENUM);
@@ -1266,7 +1364,6 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		writeEClass.getESuperTypes().add(this.getWriteDestinationModel());
 		deleteEClass.getESuperTypes().add(this.getWriteDestinationModel());
 		typeFilterEClass.getESuperTypes().add(this.getCondition());
-		typeFilterEClass.getESuperTypes().add(this.getVariableDeclaration());
 		logicalConditionEClass.getESuperTypes().add(this.getCondition());
 		numerousKindsOfBranchesEClass.getESuperTypes().add(this.getInstruction());
 		blackBoxInstructionEClass.getESuperTypes().add(this.getInstruction());
@@ -1279,6 +1376,7 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		collectionVariableEClass.getESuperTypes().add(this.getVariable());
 		modelVariableEClass.getESuperTypes().add(this.getVariable());
 		variableResetEClass.getESuperTypes().add(this.getInstruction());
+		modelAttributeVariableEClass.getESuperTypes().add(this.getVariable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(instructionBlockEClass, InstructionBlock.class, "InstructionBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1299,6 +1397,7 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		initEClass(writeDestinationModelEClass, WriteDestinationModel.class, "WriteDestinationModel", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cfsInstructionEClass, CfsInstruction.class, "CfsInstruction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCfsInstruction_Conditions(), this.getCondition(), null, "conditions", null, 0, -1, CfsInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunction_Body(), this.getInstructionBlock(), null, "body", null, 1, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1308,7 +1407,8 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		initEClass(variableEClass, Variable.class, "Variable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariable_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCondition_Dependencies(), this.getVariable(), null, "dependencies", null, 0, -1, Condition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(debugEClass, Debug.class, "Debug", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDebug_Text(), ecorePackage.getEString(), "text", null, 0, 1, Debug.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1348,7 +1448,6 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		initEClass(typeFilterEClass, TypeFilter.class, "TypeFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(logicalConditionEClass, LogicalCondition.class, "LogicalCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLogicalCondition_Dependency(), this.getVariable(), null, "dependency", null, 0, -1, LogicalCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableDeclarationEClass, VariableDeclaration.class, "VariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableDeclaration_Variables(), this.getVariable(), null, "variables", null, 0, -1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1372,7 +1471,6 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		initEAttribute(getComment_Text(), theEcorePackage.getEString(), "text", null, 0, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cfsPushEClass, CfsPush.class, "CfsPush", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCfsPush_Condition(), this.getCondition(), null, "condition", null, 0, -1, CfsPush.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cfsPopEClass, CfsPop.class, "CfsPop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1381,15 +1479,25 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		initEClass(collectionVariableEClass, CollectionVariable.class, "CollectionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(modelVariableEClass, ModelVariable.class, "ModelVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelVariable_Type(), this.getModelType(), null, "type", null, 0, 1, ModelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelVariable_Type(), this.getModelType(), null, "type", null, 1, 1, ModelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelVariable_Model(), this.getInstanceModel(), null, "model", null, 0, 1, ModelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelVariable_Attributes(), this.getModelAttributeVariable(), this.getModelAttributeVariable_PartOf(), "attributes", null, 0, -1, ModelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getModelType_Name(), ecorePackage.getEString(), "name", null, 1, 1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelType_Model(), this.getMetaModel(), this.getMetaModel_Types(), "model", null, 0, 1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelType_Attributes(), this.getModelTypeAttribute(), this.getModelTypeAttribute_PartOf(), "attributes", null, 0, -1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableResetEClass, VariableReset.class, "VariableReset", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableReset_Variables(), this.getVariable(), null, "variables", null, 1, -1, VariableReset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelTypeAttributeEClass, ModelTypeAttribute.class, "ModelTypeAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModelTypeAttribute_Name(), theEcorePackage.getEString(), "name", null, 1, 1, ModelTypeAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeAttribute_PartOf(), this.getModelType(), this.getModelType_Attributes(), "partOf", null, 1, 1, ModelTypeAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelAttributeVariableEClass, ModelAttributeVariable.class, "ModelAttributeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelAttributeVariable_InstanceOf(), this.getModelTypeAttribute(), null, "instanceOf", null, 1, 1, ModelAttributeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelAttributeVariable_PartOf(), this.getModelVariable(), this.getModelVariable_Attributes(), "partOf", null, 1, 1, ModelAttributeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(intentionEnumEEnum, IntentionEnum.class, "IntentionEnum");

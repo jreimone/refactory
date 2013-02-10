@@ -224,7 +224,6 @@ public class UmtSwitch<T> extends Switch<T> {
 				TypeFilter typeFilter = (TypeFilter)theEObject;
 				T result = caseTypeFilter(typeFilter);
 				if (result == null) result = caseCondition(typeFilter);
-				if (result == null) result = caseVariableDeclaration(typeFilter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -325,6 +324,19 @@ public class UmtSwitch<T> extends Switch<T> {
 				VariableReset variableReset = (VariableReset)theEObject;
 				T result = caseVariableReset(variableReset);
 				if (result == null) result = caseInstruction(variableReset);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE: {
+				ModelTypeAttribute modelTypeAttribute = (ModelTypeAttribute)theEObject;
+				T result = caseModelTypeAttribute(modelTypeAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UmtPackage.MODEL_ATTRIBUTE_VARIABLE: {
+				ModelAttributeVariable modelAttributeVariable = (ModelAttributeVariable)theEObject;
+				T result = caseModelAttributeVariable(modelAttributeVariable);
+				if (result == null) result = caseVariable(modelAttributeVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -869,6 +881,36 @@ public class UmtSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVariableReset(VariableReset object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Type Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Type Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelTypeAttribute(ModelTypeAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Attribute Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Attribute Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelAttributeVariable(ModelAttributeVariable object) {
 		return null;
 	}
 
