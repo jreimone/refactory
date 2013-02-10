@@ -13,12 +13,14 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.m2m.atl.core.IModel;
 import org.eclipse.m2m.atl.core.IReferenceModel;
 import org.eclipse.m2m.atl.core.ModelFactory;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.qualitune.tracing.umt.Branch;
+import org.qualitune.tracing.umt.Condition;
 import org.qualitune.tracing.umt.Debug;
 import org.qualitune.tracing.umt.Function;
 import org.qualitune.tracing.umt.InstanceModel;
@@ -27,6 +29,7 @@ import org.qualitune.tracing.umt.InstructionBlock;
 import org.qualitune.tracing.umt.IntentionEnum;
 import org.qualitune.tracing.umt.MetaModel;
 import org.qualitune.tracing.umt.Model;
+import org.qualitune.tracing.umt.ModelAttributeVariable;
 import org.qualitune.tracing.umt.ModelType;
 import org.qualitune.tracing.umt.ModelVariable;
 import org.qualitune.tracing.umt.Program;
@@ -35,6 +38,7 @@ import org.qualitune.tracing.umt.TypeFilter;
 import org.qualitune.tracing.umt.UmtFactory;
 import org.qualitune.tracing.umt.UmtPackage;
 import org.qualitune.tracing.umt.UniverseType;
+import org.qualitune.tracing.umt.Variable;
 import org.qualitune.tracing.umt.VariableDeclarationInstruction;
 import org.qualitune.tracing.umt_abstract_content_adapter.*;
 import org.qualitune.tracing.util.VUtil;
@@ -138,6 +142,56 @@ public class Atl2Umt {
 		
 		return ib;
 	}
+
+	// could be ModelVariable or PrimitiveVariable as well 
+	// @untested
+	protected Variable variableExp2Variable(EObject atlVariableExp) {
+		VUtil.assertAtlType(atlVariableExp, "VariableExp");
+		
+		EObject oclModel = VUtil.getRefTarget(atlVariableExp, "referredVariable");
+		VUtil.printer(oclModel);
+		
+		VUtil.assertAtlType(oclModel,"OclModel");
+		
+		assert !VUtil.isSet(oclModel, "model") : "ReferredVariable refers to a model, but is expected to refere to a variable";
+		
+		List<EObject> elements = VUtil.getRefCollection(oclModel, "elements");
+		assert elements.size() == 1;
+		
+		// this first
+		
+		return null;
+	}
+	
+	// @untested
+	protected ModelAttributeVariable navigationOrAttributeCallExp2modelAttributeVariable (EObject atlNavigationOrAttributeCallExp) {
+		VUtil.assertAtlType(atlNavigationOrAttributeCallExp, "NavigationOrAttributeCallExp");
+		
+		ModelAttributeVariable ret = _umtFactory.createModelAttributeVariable();
+		
+		String attributeName = VUtil.getName(atlNavigationOrAttributeCallExp);
+		
+		VUtil.printer(atlNavigationOrAttributeCallExp);
+		
+		EObject oclModel = VUtil.getRefTarget(atlNavigationOrAttributeCallExp, "source"); 
+		
+		
+		
+		return ret;
+	}
+	
+	// @untested
+	protected Variable variable2variable(EObject atlVariable) {
+		String atlVarType = VUtil.typeName(atlVariable);
+		if (atlVarType.equals("VariableExpr")) {
+			return variableExp2Variable(atlVariable);
+		} else if (atlVarType.equals("NavigationOrAttributeCallExp")) {
+			return navigationOrAttributeCallExp2modelAttributeVariable(atlVariable);
+		} else {
+			VUtil.myExit("Meta model inconsistency: unknown variable type " + atlVarType);
+			return null;
+		}
+	}
 	
 	/**
 	 * 
@@ -193,7 +247,7 @@ public class Atl2Umt {
 		selection.getBranches().add(branch);
 		branch.setCondition(typeFilter);
 		branch.setBody(branchBody);
-		typeFilter.getVariables().addAll(requiredElements);
+		typeFilter.getDependencies().addAll(requiredElements);
 		branchBody.getInstructions().add(0,create);
 		create.getVariables().addAll(createdElements);
 		
@@ -326,8 +380,8 @@ public class Atl2Umt {
 		String atlInstructionType = VUtil.typeName(atlInstruction);
 		Instruction ret;
 		
-		if (false) { // prepared branch for long 'switch' statement based on atlType
-			ret = null;
+		if (atlInstructionType.equals("IfStat")) {
+			ret = ifStat2Selection(atlInstruction);
 		} else {
 			VUtil.warning("Unknown ATL instruction type " + atlInstructionType + ", creating debug instead.");
 			Debug debug = _umtFactory.createDebug();
@@ -337,10 +391,104 @@ public class Atl2Umt {
 			VUtil.setAttribute(atlInstruction, "commentsBefore", msgList);
 			ret = debug;
 		}
-		translationTable.addTranslation(atlInstruction, ret);
+		// translation routines do this themselves
+		//translationTable.addTranslation(atlInstruction, ret);
 		return ret;
 	}
 	
+	private InstructionBlock statements2instructionBlock(List <EObject> atlStatments) {
+		InstructionBlock ib = _umtFactory.createInstructionBlock();
+		List <Instruction> instructions = ib.getInstructions(); 
+		
+		for (EObject atlStatement : atlStatments) {
+			instructions.add(atlInstruction2umtInstruction(atlStatement));
+		}
+		
+		return ib;
+	}
+	
+//	<condition xsi:type="ocl:OperatorCallExp" location="18:6-18:27" operationName="=">
+//    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="18:6-18:17" name="name">
+//      <source xsi:type="ocl:VariableExp" location="18:6-18:12" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+//    </source>
+//    <arguments xsi:type="ocl:VariableExp" location="18:20-18:27" referredVariable="/0/@elements.0/@variables.0"/>
+//  </condition>
+
+  private List<Variable> gatherInvolvedVariables(EObject atlOperatorCallExp) {
+		VUtil.assertAtlType(atlOperatorCallExp, "OperatorCallExp");
+		
+		/* number of properties, we go for thinks like X = Y
+		 * - source
+		 * - arguments
+		 */
+		assert VUtil.isSet(atlOperatorCallExp, "operationName");
+		assert ! VUtil.isSet(atlOperatorCallExp, "type");
+		assert ! VUtil.isSet(atlOperatorCallExp, "ifExp3");
+		assert ! VUtil.isSet(atlOperatorCallExp, "appliedProperty");
+		assert ! VUtil.isSet(atlOperatorCallExp, "collection");
+		assert ! VUtil.isSet(atlOperatorCallExp, "letExp");
+		assert ! VUtil.isSet(atlOperatorCallExp, "loopExp");
+		assert ! VUtil.isSet(atlOperatorCallExp, "parentOperation");
+		assert ! VUtil.isSet(atlOperatorCallExp, "initializedVariable");
+		assert ! VUtil.isSet(atlOperatorCallExp, "ifExp2");
+		assert ! VUtil.isSet(atlOperatorCallExp, "owningOperation");
+		assert ! VUtil.isSet(atlOperatorCallExp, "ifExp1");
+		assert ! VUtil.isSet(atlOperatorCallExp, "owningAttribute");
+				
+		List<Variable> ret = new LinkedList<Variable>();
+		
+		EObject source = VUtil.getRefTarget(atlOperatorCallExp, "source");
+		if (VUtil.isAtlVariable(source))
+			ret.add(variable2variable(source));
+		
+		for (EObject argument :  VUtil.getRefCollection(atlOperatorCallExp, "arguments"))
+			if (VUtil.isAtlVariable(argument))
+				ret.add(variable2variable(argument));
+		
+		
+		
+		return ret;
+	}
+	
+	/**
+	 * @param atlIfStat
+	 * @return
+	 */
+	private Instruction ifStat2Selection(EObject atlIfStat) {
+		VUtil.assertAtlType(atlIfStat, "IfStat");
+		
+		EObject atlCondition = VUtil.getRefTarget(atlIfStat, "condition");
+		List<EObject> atlThenStatements = VUtil.getRefCollection(atlIfStat, "thenStatements");
+		List<EObject> atlElseStatements = VUtil.getRefCollection(atlIfStat, "elseStatements");
+		
+		//VUtil.assertAtlType(atlCondition, "OclExpression"); - could be others as well
+		
+		InstructionBlock thenBody = statements2instructionBlock(atlThenStatements);
+		InstructionBlock elseBody = statements2instructionBlock(atlElseStatements);
+		
+		Selection selection = _umtFactory.createSelection();
+		Branch thenBranch   = _umtFactory.createBranch();
+		Branch elseBranch   = _umtFactory.createBranch();
+		Condition ifCondition = _umtFactory.createLogicalCondition();
+		
+		List<Branch> branches = selection.getBranches();
+		branches.add(thenBranch);
+		branches.add(elseBranch);
+		
+		thenBranch.setCondition(ifCondition);
+		// looks strange, but remember that this construct expresses a dependency from 
+		// elements of ifCondition to execution of this branch
+		elseBranch.setCondition(EcoreUtil.copy(ifCondition));
+		
+		thenBranch.setBody(thenBody);
+		elseBranch.setBody(elseBody);
+		
+		ifCondition.getDependencies().addAll(gatherInvolvedVariables(atlCondition));
+		
+		translationTable.addTranslation(atlIfStat, selection);
+		return selection;
+	}
+
 	public Program module2program(EObject atlModule) {
 		/* ASSERT correct input */
 		

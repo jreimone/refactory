@@ -27,9 +27,14 @@ public class VUtil {
 		
 		for (EAttribute attr : rootClass.getEAllAttributes()) {
 			if (attr.getName() == "name")
-					return object.eGet(attr).toString();
+				return object.eGet(attr).toString();
 		}
 		return "unknown";
+	}
+	
+	public static void assertAtlType(EObject atlObject, String type) {
+		assert typeName(atlObject).equals(type) : "expecting ATL object to be of type " + type + 
+				", but found " + typeName(atlObject) + " instead.";
 	}
 	
 	// prints tree
@@ -227,6 +232,14 @@ public class VUtil {
 		object.eSet(eAttribute, value);
 	}
 	
+	public static void setAttribute(EObject object, String attributeName, int value) {
+		EAttribute eAttribute = getAttribute(object,attributeName);
+		assert ! eAttribute.isMany() : 
+			"Multiplicity of attribute '" + attributeName + "' is many, "+
+			"expecting solitary.";
+		object.eSet(eAttribute, value);
+	}
+	
 	public static void setAttribute(EObject object, String attributeName, IntentionEnum value) {
 		EAttribute eAttribute = getAttribute(object,attributeName);
 		assert ! eAttribute.isMany() : 
@@ -316,5 +329,16 @@ public class VUtil {
 		}
 		
 		currentValue.add(value);
+	}
+
+	/**
+	 * @param argument
+	 * @return
+	 */
+	public static boolean isAtlVariable(EObject argument) {
+		String type = typeName(argument);
+		if (type.equals("NavigationOrAttributeCallExp") || type.equals("VariableExp"))
+			return true;
+		return false;
 	}
 }

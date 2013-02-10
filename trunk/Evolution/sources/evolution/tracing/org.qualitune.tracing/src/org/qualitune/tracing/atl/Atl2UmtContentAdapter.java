@@ -20,6 +20,7 @@ import org.qualitune.tracing.umt.Call;
 import org.qualitune.tracing.umt.CfsPop;
 import org.qualitune.tracing.umt.CfsPush;
 import org.qualitune.tracing.umt.Comment;
+import org.qualitune.tracing.umt.Condition;
 import org.qualitune.tracing.umt.Debug;
 import org.qualitune.tracing.umt.Function;
 import org.qualitune.tracing.umt.InstanceModel;
@@ -29,10 +30,9 @@ import org.qualitune.tracing.umt.MetaModel;
 import org.qualitune.tracing.umt.Model;
 import org.qualitune.tracing.umt.NumerousKindsOfBranches;
 import org.qualitune.tracing.umt.Program;
+import org.qualitune.tracing.umt.Variable;
 import org.qualitune.tracing.umt.VariableAssignment;
 import org.qualitune.tracing.umt.VariableDeclarationInstruction;
-import org.qualitune.tracing.umt.impl.InstanceModelImpl;
-import org.qualitune.tracing.umt.impl.MetaModelImpl;
 import org.qualitune.tracing.umt_abstract_content_adapter.*;
 import org.qualitune.tracing.util.VUtil;
 
@@ -74,9 +74,9 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 	}
 	
 	protected void handleProgramAddModels(Program program, Model addedModel) {
-		if (addedModel instanceof InstanceModelImpl)
+		if (addedModel.eClass() instanceof InstanceModel)
 			handleProgramAddInstanceModel(program, (InstanceModel) addedModel);
-		else if (addedModel instanceof MetaModelImpl)
+		else if (addedModel.eClass() instanceof MetaModel)
 			handleProgramAddMetaModel(program, (MetaModel) addedModel);
 		else
 			VUtil.warning("severe warning: unknown model type " + addedModel.eClass().getName() + 
@@ -225,28 +225,37 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 	
 	// mapped to call to called rule CFS_pop (parameterless)
 	
-	// CfsPop parameter barely used to identify polymorphous method
+	private int getNumberOfInvolvedVariables(List<Condition> conditions) {
+		int count = 0;
+		for (Condition condition : conditions)
+			count += condition.getDependencies().size();
+		return count;
+	}
+	
 	protected EObject umt2AtlInstruction(CfsPop umtInstruction) {
 		EObject atlExpressionStat = atlFactory.createModelElement("ExpressionStat");
 		EObject atlOperationCallExp = atlFactory.createModelElement("OperationCallExp");
 		EObject atlVariableExp = atlFactory.createModelElement("VariableExp");
 		EObject thisModule = atlFactory.createModelElement("VariableDeclaration");
-
+		EObject atlIntegerExpression = atlFactory.createModelElement("IntegerExp");
+		
 		VUtil.setReference(atlExpressionStat, "expression", atlOperationCallExp);
 		VUtil.setReference(atlOperationCallExp, "source", atlVariableExp);
 		VUtil.setReference(atlVariableExp, "referredVariable", thisModule);
 
-		VUtil.setAttribute(atlOperationCallExp, "operationName", "CFS_pop");
+		VUtil.setAttribute(atlOperationCallExp, "operationName", "CFS_pop_multiple");
 		VUtil.setAttribute(thisModule, "varName", "thisModule");
+		VUtil.addtoReference(atlOperationCallExp, "arguments", atlIntegerExpression);
 
+		VUtil.setAttribute(atlIntegerExpression, "integerSymbol", getNumberOfInvolvedVariables(umtInstruction.getConditions()));
+		
 		// ugly
 		thisModule.eResource().getContents().add(thisModule);
 
 		return atlExpressionStat;
 	}
 
-	protected EObject umt2AtlInstruction(CfsPush umtInstruction) {
-		// TODO parameters
+	private EObject atlCfsPush(Variable var) {
 		EObject atlExpressionStat = atlFactory.createModelElement("ExpressionStat");
 		EObject atlOperationCallExp = atlFactory.createModelElement("OperationCallExp");
 		EObject atlVariableExp = atlFactory.createModelElement("VariableExp");
@@ -261,8 +270,22 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		
 		// ugly
 		thisModule.eResource().getContents().add(thisModule);
-			
+		
 		return atlExpressionStat;
+	}
+	protected List<EObject> umt2AtlInstruction(CfsPush umtInstruction) {
+		// for every condition : for every var @ dependencies : add a CFS_push_X(var) call
+		List<EObject> ret = new LinkedList<EObject>();
+		
+		for (Condition condition : umtInstruction.getConditions()) {
+			//TraceType tt;
+			
+			for (Variable var : condition.getDependencies()) {
+				//ret += atlCfsPush(var);
+			}
+		}
+		
+		return ret;
 	}
 	
 	
@@ -286,8 +309,8 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 			return null;
 		} if (umtInstruction instanceof Debug) {
 			atlRet = umt2AtlInstruction ( (Debug) umtInstruction);
-		} else if (umtInstruction instanceof CfsPush) {
-			atlRet = umt2AtlInstruction ( (CfsPush) umtInstruction);
+		} else if (umtInstruction instanceof CfsPush && false) {
+			// XXX atlRet = umt2AtlInstruction ( (CfsPush) umtInstruction);
 		} else if (umtInstruction instanceof CfsPop) {
 			atlRet = umt2AtlInstruction ( (CfsPop) umtInstruction);
 		} else {
