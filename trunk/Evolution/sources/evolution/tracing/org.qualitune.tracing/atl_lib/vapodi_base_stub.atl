@@ -69,6 +69,15 @@ rule CFS_pop() {
 	}
 }
 
+rule CFS_pop_multiple(n : Integer) {
+	do {
+		-- workaround: recursive emulation of numeric for loop
+		if (n > 0) {
+			thisModule.CFS_pop();
+			thisModule.CFS_pop_multiple(n-1);
+		}
+	}
+}
 
 --- Control Flow Stack (CFS) - end -----------------------------------------------------
 

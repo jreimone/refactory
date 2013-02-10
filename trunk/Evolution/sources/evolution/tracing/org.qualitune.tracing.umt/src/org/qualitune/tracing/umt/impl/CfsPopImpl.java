@@ -2,9 +2,13 @@
  */
 package org.qualitune.tracing.umt.impl;
 
+import java.util.Collection;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.qualitune.tracing.umt.CfsPop;
+import org.qualitune.tracing.umt.Condition;
 import org.qualitune.tracing.umt.UmtPackage;
 
 /**

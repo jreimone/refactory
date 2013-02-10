@@ -2,6 +2,7 @@
  */
 package org.qualitune.tracing.umt;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.qualitune.tracing.umt.ModelType#getName <em>Name</em>}</li>
  *   <li>{@link org.qualitune.tracing.umt.ModelType#getModel <em>Model</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.ModelType#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,5 +77,23 @@ public interface ModelType extends EObject {
 	 * @generated
 	 */
 	void setModel(MetaModel value);
+
+	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.qualitune.tracing.umt.ModelTypeAttribute}.
+	 * It is bidirectional and its opposite is '{@link org.qualitune.tracing.umt.ModelTypeAttribute#getPartOf <em>Part Of</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
+	 * @see org.qualitune.tracing.umt.UmtPackage#getModelType_Attributes()
+	 * @see org.qualitune.tracing.umt.ModelTypeAttribute#getPartOf
+	 * @model opposite="partOf" containment="true"
+	 * @generated
+	 */
+	EList<ModelTypeAttribute> getAttributes();
 
 } // ModelType

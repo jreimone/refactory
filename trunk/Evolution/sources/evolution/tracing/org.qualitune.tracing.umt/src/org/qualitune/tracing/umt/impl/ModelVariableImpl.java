@@ -2,14 +2,20 @@
  */
 package org.qualitune.tracing.umt.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.qualitune.tracing.umt.InstanceModel;
+import org.qualitune.tracing.umt.ModelAttributeVariable;
 import org.qualitune.tracing.umt.ModelType;
 import org.qualitune.tracing.umt.ModelVariable;
 import org.qualitune.tracing.umt.UmtPackage;
@@ -23,6 +29,7 @@ import org.qualitune.tracing.umt.UmtPackage;
  * <ul>
  *   <li>{@link org.qualitune.tracing.umt.impl.ModelVariableImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.qualitune.tracing.umt.impl.ModelVariableImpl#getModel <em>Model</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.impl.ModelVariableImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +55,16 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 	 * @ordered
 	 */
 	protected InstanceModel model;
+
+	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ModelAttributeVariable> attributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -149,6 +166,47 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ModelAttributeVariable> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentWithInverseEList<ModelAttributeVariable>(ModelAttributeVariable.class, this, UmtPackage.MODEL_VARIABLE__ATTRIBUTES, UmtPackage.MODEL_ATTRIBUTE_VARIABLE__PART_OF);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UmtPackage.MODEL_VARIABLE__ATTRIBUTES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAttributes()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UmtPackage.MODEL_VARIABLE__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -158,6 +216,8 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 			case UmtPackage.MODEL_VARIABLE__MODEL:
 				if (resolve) return getModel();
 				return basicGetModel();
+			case UmtPackage.MODEL_VARIABLE__ATTRIBUTES:
+				return getAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -167,6 +227,7 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -175,6 +236,10 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 				return;
 			case UmtPackage.MODEL_VARIABLE__MODEL:
 				setModel((InstanceModel)newValue);
+				return;
+			case UmtPackage.MODEL_VARIABLE__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends ModelAttributeVariable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -194,6 +259,9 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 			case UmtPackage.MODEL_VARIABLE__MODEL:
 				setModel((InstanceModel)null);
 				return;
+			case UmtPackage.MODEL_VARIABLE__ATTRIBUTES:
+				getAttributes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -210,6 +278,8 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 				return type != null;
 			case UmtPackage.MODEL_VARIABLE__MODEL:
 				return model != null;
+			case UmtPackage.MODEL_VARIABLE__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

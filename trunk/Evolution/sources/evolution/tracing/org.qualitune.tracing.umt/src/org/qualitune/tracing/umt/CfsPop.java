@@ -2,6 +2,8 @@
  */
 package org.qualitune.tracing.umt;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->

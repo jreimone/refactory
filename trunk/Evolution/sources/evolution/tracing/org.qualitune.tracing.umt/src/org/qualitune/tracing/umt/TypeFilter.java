@@ -13,5 +13,5 @@ package org.qualitune.tracing.umt;
  * @model
  * @generated
  */
-public interface TypeFilter extends Condition, VariableDeclaration {
+public interface TypeFilter extends Condition {
 } // TypeFilter

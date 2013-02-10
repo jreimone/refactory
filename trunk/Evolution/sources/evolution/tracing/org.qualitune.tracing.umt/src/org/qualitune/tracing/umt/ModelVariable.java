@@ -2,6 +2,8 @@
  */
 package org.qualitune.tracing.umt;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -13,6 +15,7 @@ package org.qualitune.tracing.umt;
  * <ul>
  *   <li>{@link org.qualitune.tracing.umt.ModelVariable#getType <em>Type</em>}</li>
  *   <li>{@link org.qualitune.tracing.umt.ModelVariable#getModel <em>Model</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.ModelVariable#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,7 +35,7 @@ public interface ModelVariable extends Variable {
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(ModelType)
 	 * @see org.qualitune.tracing.umt.UmtPackage#getModelVariable_Type()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	ModelType getType();
@@ -72,5 +75,23 @@ public interface ModelVariable extends Variable {
 	 * @generated
 	 */
 	void setModel(InstanceModel value);
+
+	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.qualitune.tracing.umt.ModelAttributeVariable}.
+	 * It is bidirectional and its opposite is '{@link org.qualitune.tracing.umt.ModelAttributeVariable#getPartOf <em>Part Of</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
+	 * @see org.qualitune.tracing.umt.UmtPackage#getModelVariable_Attributes()
+	 * @see org.qualitune.tracing.umt.ModelAttributeVariable#getPartOf
+	 * @model opposite="partOf" containment="true"
+	 * @generated
+	 */
+	EList<ModelAttributeVariable> getAttributes();
 
 } // ModelVariable

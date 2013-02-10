@@ -2,42 +2,36 @@
  */
 package org.qualitune.tracing.umt.impl;
 
-import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.qualitune.tracing.umt.MetaModel;
 import org.qualitune.tracing.umt.ModelType;
 import org.qualitune.tracing.umt.ModelTypeAttribute;
 import org.qualitune.tracing.umt.UmtPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model Type</b></em>'.
+ * An implementation of the model object '<em><b>Model Type Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.qualitune.tracing.umt.impl.ModelTypeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.qualitune.tracing.umt.impl.ModelTypeImpl#getModel <em>Model</em>}</li>
- *   <li>{@link org.qualitune.tracing.umt.impl.ModelTypeImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.impl.ModelTypeAttributeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.impl.ModelTypeAttributeImpl#getPartOf <em>Part Of</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ModelTypeImpl extends EObjectImpl implements ModelType {
+public class ModelTypeAttributeImpl extends EObjectImpl implements ModelTypeAttribute {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -59,21 +53,11 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ModelTypeAttribute> attributes;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ModelTypeImpl() {
+	protected ModelTypeAttributeImpl() {
 		super();
 	}
 
@@ -84,7 +68,7 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UmtPackage.Literals.MODEL_TYPE;
+		return UmtPackage.Literals.MODEL_TYPE_ATTRIBUTE;
 	}
 
 	/**
@@ -105,7 +89,7 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.MODEL_TYPE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.MODEL_TYPE_ATTRIBUTE__NAME, oldName, name));
 	}
 
 	/**
@@ -113,9 +97,9 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetaModel getModel() {
-		if (eContainerFeatureID() != UmtPackage.MODEL_TYPE__MODEL) return null;
-		return (MetaModel)eContainer();
+	public ModelType getPartOf() {
+		if (eContainerFeatureID() != UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF) return null;
+		return (ModelType)eContainer();
 	}
 
 	/**
@@ -123,8 +107,8 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetModel(MetaModel newModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newModel, UmtPackage.MODEL_TYPE__MODEL, msgs);
+	public NotificationChain basicSetPartOf(ModelType newPartOf, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newPartOf, UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF, msgs);
 		return msgs;
 	}
 
@@ -133,20 +117,20 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setModel(MetaModel newModel) {
-		if (newModel != eInternalContainer() || (eContainerFeatureID() != UmtPackage.MODEL_TYPE__MODEL && newModel != null)) {
-			if (EcoreUtil.isAncestor(this, newModel))
+	public void setPartOf(ModelType newPartOf) {
+		if (newPartOf != eInternalContainer() || (eContainerFeatureID() != UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF && newPartOf != null)) {
+			if (EcoreUtil.isAncestor(this, newPartOf))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newModel != null)
-				msgs = ((InternalEObject)newModel).eInverseAdd(this, UmtPackage.META_MODEL__TYPES, MetaModel.class, msgs);
-			msgs = basicSetModel(newModel, msgs);
+			if (newPartOf != null)
+				msgs = ((InternalEObject)newPartOf).eInverseAdd(this, UmtPackage.MODEL_TYPE__ATTRIBUTES, ModelType.class, msgs);
+			msgs = basicSetPartOf(newPartOf, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.MODEL_TYPE__MODEL, newModel, newModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF, newPartOf, newPartOf));
 	}
 
 	/**
@@ -154,28 +138,13 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ModelTypeAttribute> getAttributes() {
-		if (attributes == null) {
-			attributes = new EObjectContainmentWithInverseEList<ModelTypeAttribute>(ModelTypeAttribute.class, this, UmtPackage.MODEL_TYPE__ATTRIBUTES, UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF);
-		}
-		return attributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UmtPackage.MODEL_TYPE__MODEL:
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetModel((MetaModel)otherEnd, msgs);
-			case UmtPackage.MODEL_TYPE__ATTRIBUTES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAttributes()).basicAdd(otherEnd, msgs);
+				return basicSetPartOf((ModelType)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -188,10 +157,8 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UmtPackage.MODEL_TYPE__MODEL:
-				return basicSetModel(null, msgs);
-			case UmtPackage.MODEL_TYPE__ATTRIBUTES:
-				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF:
+				return basicSetPartOf(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -204,8 +171,8 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UmtPackage.MODEL_TYPE__MODEL:
-				return eInternalContainer().eInverseRemove(this, UmtPackage.META_MODEL__TYPES, MetaModel.class, msgs);
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF:
+				return eInternalContainer().eInverseRemove(this, UmtPackage.MODEL_TYPE__ATTRIBUTES, ModelType.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -218,12 +185,10 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UmtPackage.MODEL_TYPE__NAME:
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__NAME:
 				return getName();
-			case UmtPackage.MODEL_TYPE__MODEL:
-				return getModel();
-			case UmtPackage.MODEL_TYPE__ATTRIBUTES:
-				return getAttributes();
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF:
+				return getPartOf();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -233,19 +198,14 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UmtPackage.MODEL_TYPE__NAME:
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__NAME:
 				setName((String)newValue);
 				return;
-			case UmtPackage.MODEL_TYPE__MODEL:
-				setModel((MetaModel)newValue);
-				return;
-			case UmtPackage.MODEL_TYPE__ATTRIBUTES:
-				getAttributes().clear();
-				getAttributes().addAll((Collection<? extends ModelTypeAttribute>)newValue);
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF:
+				setPartOf((ModelType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -259,14 +219,11 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UmtPackage.MODEL_TYPE__NAME:
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case UmtPackage.MODEL_TYPE__MODEL:
-				setModel((MetaModel)null);
-				return;
-			case UmtPackage.MODEL_TYPE__ATTRIBUTES:
-				getAttributes().clear();
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF:
+				setPartOf((ModelType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -280,12 +237,10 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UmtPackage.MODEL_TYPE__NAME:
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case UmtPackage.MODEL_TYPE__MODEL:
-				return getModel() != null;
-			case UmtPackage.MODEL_TYPE__ATTRIBUTES:
-				return attributes != null && !attributes.isEmpty();
+			case UmtPackage.MODEL_TYPE_ATTRIBUTE__PART_OF:
+				return getPartOf() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -306,4 +261,4 @@ public class ModelTypeImpl extends EObjectImpl implements ModelType {
 		return result.toString();
 	}
 
-} //ModelTypeImpl
+} //ModelTypeAttributeImpl
