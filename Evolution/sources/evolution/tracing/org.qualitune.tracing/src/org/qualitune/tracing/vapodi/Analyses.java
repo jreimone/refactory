@@ -3,6 +3,7 @@
  */
 package org.qualitune.tracing.vapodi;
 
+import java.nio.channels.GatheringByteChannel;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +30,8 @@ import org.qualitune.tracing.umt.Program;
 import org.qualitune.tracing.umt.Selection;
 import org.qualitune.tracing.umt.UmtFactory;
 import org.qualitune.tracing.umt.UmtPackage;
+import org.qualitune.tracing.umt.VapodiInstruction;
+import org.qualitune.tracing.umt.VariableAssignment;
 import org.qualitune.tracing.umt_abstract_content_adapter.*;
 import org.qualitune.tracing.util.VUtil;
 
@@ -80,16 +83,21 @@ public class Analyses {
 		Condition condition = branch.getCondition();
 		
 		CfsPush cfsPush = _umtFactory.createCfsPush();
-		cfsPush.getCondition().add(condition);
+		cfsPush.getConditions().add(condition);
 		instructions.add(0, cfsPush);
 		
 		CfsPop cfsPop = _umtFactory.createCfsPop();
+		cfsPop.getConditions().add(condition);
 		instructions.add(cfsPop);
 	}
 	
 	private void addCfs(Selection selection) {
-		for (Branch branch : selection.getBranches())
+		for (Branch branch : selection.getBranches()) {
 			addCfs(branch);
+			EStructuralFeature bodyFeature = branch.eClass().getEStructuralFeature(UmtPackage.BRANCH__BODY);
+			if (branch.eIsSet(bodyFeature))
+				addCfs(branch.getBody());
+		}
 	}
 	
 	private void addCfs(Loop loop) {
@@ -163,6 +171,32 @@ public class Analyses {
 			sugesstion += 'x';
 		
 		return sugesstion;
+	}
+	
+	
+	
+	/**
+	 * what we basically do:
+	 * 
+	 * @param branch
+	 */
+	private StaticDependencyTree staticAnalysis(InstructionBlock ib) {
+		StaticDependencyTree sdt = new StaticDependencyTree();
+		
+		for (Instruction instruction : ib.getInstructions()) {
+			if (instruction instanceof VapodiInstruction) {
+				VUtil.warning("analysis has found a VapodiInstruction. This should not happen, as VapodiIstructions are added after" +
+						"analysis phase");
+			} else if (instruction instanceof NumerousKindsOfBranches) {
+				// do something recursive
+			} else if (instruction instanceof VariableAssignment) {
+				// yea, most interesting
+			} else {
+				VUtil.warning("analysis has found an instruction it does not understand of class " + instruction.eClass().getName());
+			}
+		}
+		
+		return sdt;
 	}
 	
 	/**

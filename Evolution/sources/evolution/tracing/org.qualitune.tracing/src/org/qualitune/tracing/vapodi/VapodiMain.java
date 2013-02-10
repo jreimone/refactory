@@ -1,6 +1,14 @@
 package org.qualitune.tracing.vapodi;
 import org.qualitune.tracing.atl.AtlHandler;
+import org.qualitune.tracing.umt.InstanceModel;
 import org.qualitune.tracing.umt.Program;
+import org.qualitune.tracing.umt.ModelAttributeVariable;
+import org.qualitune.tracing.umt.UmtFactory;
+import org.qualitune.tracing.vapodi.analysis.AnalysisRunner;
+import org.qualitune.tracing.vapodi.analysis.ControlFlowStack;
+import org.qualitune.tracing.vapodi.analysis.IUmtAnalysis;
+import org.qualitune.tracing.vapodi.analysis.Shadow;
+import org.qualitune.tracing.vapodi.analysis.TraceLinks;
 
 /**
  * Front-end program to showcase VAPODI
@@ -34,12 +42,25 @@ public class VapodiMain {
 		 * analyse source program and make changes ('invade'/'instrument' it)
 		 */
 		
-		Analyses analyses = new Analyses();
-		
+		//Analyses analyses = new Analyses();
 		//analyses.setName(program);
 		//analyses.addDebugToAllFunctions(program);
 		//analyses.addTracingModel(program);
-		analyses.addCfs(program);
+		//analyses.addCfs(program);
+		
+		AnalysisRunner runner = new AnalysisRunner();
+		
+		IUmtAnalysis Shadow = new Shadow();
+		IUmtAnalysis CFS = new ControlFlowStack();
+		IUmtAnalysis TL = new TraceLinks();
+		
+		runner.addAnalysis(Shadow);
+		runner.addAnalysis(CFS);
+		runner.addAnalysis(TL);
+		
+		UmtFactory _umtFactory = UmtFactory.eINSTANCE;
+		ModelAttributeVariable test = _umtFactory.createModelAttributeVariable();
+		runner.run(program);
 		
 		/*
 		 * finally write modified program
