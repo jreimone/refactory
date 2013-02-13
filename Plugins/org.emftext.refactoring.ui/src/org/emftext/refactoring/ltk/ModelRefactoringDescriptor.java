@@ -66,7 +66,7 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 
 	public static String generateDescription(IRefactorer refactorer) {
 		RoleMapping roleMapping = refactorer.getRoleMapping();
-		String description = roleMapping.getName() + " (" + roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI() + ")";
+		String description = roleMapping.getName() + " in " + refactorer.getResource().getURI().lastSegment();
 		return description;
 	}
 
