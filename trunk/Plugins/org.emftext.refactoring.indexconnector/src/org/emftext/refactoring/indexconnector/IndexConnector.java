@@ -33,7 +33,7 @@ public interface IndexConnector {
 	
 	/**
 	 * Returns a list with all {@link Resource resources} referencing the given <code>referenceTarget</code>.
-	 * @param referenceTarget TODO
+	 * @param referenceTarget
 	 * @return
 	 */
 	public List<Resource> getReferencingResources(EObject referenceTarget);
