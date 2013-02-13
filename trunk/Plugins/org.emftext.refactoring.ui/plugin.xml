@@ -26,4 +26,13 @@
             name="Refactory">
       </page>
    </extension>
+   <!--
+   <extension
+         point="org.eclipse.ltk.core.refactoring.refactoringContributions">
+      <contribution
+            class="org.emftext.refactoring.ltk.GenericRefactoringContribution"
+            id="org.emftext.refactoring.ui.genericRefactoringContribution">
+      </contribution>
+   </extension>
+   -->
 </plugin>
