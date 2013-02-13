@@ -119,7 +119,7 @@
     <element xmi:type="ecore:EClass" href="platform:/resource/org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.ecore#//RoleMapping"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_P4_yomC9EeK-fpTrs2yrzw" x="-170" y="50"/>
   </children>
-  <children xmi:type="notation:Shape" xmi:id="_pawusGPIEeKeuoKtC2rhSQ" type="Note" fontName="Segoe UI" description="&quot;influence&quot; represents the &#xD;&#xA;percentual contribution&#xD;&#xA;of this quality to the overall&#xD;&#xA;concrete quality smell.&#xD;&#xA;The sum of the &quot;influence&quot;&#xD;&#xA;values of all quality calculations&#xD;&#xA;of a concrete quality smell must&#xD;&#xA;be exactly 1.0" fillColor="15400959" transparency="0" lineColor="6737151" lineWidth="1">
+  <children xmi:type="notation:Shape" xmi:id="_pawusGPIEeKeuoKtC2rhSQ" type="Note" fontName="Segoe UI" description="&quot;influence&quot; represents the &#xD;&#xA;percentual contribution&#xD;&#xA;of this quality to the overall&#xD;&#xA;concrete quality smell.&#xD;&#xA;The sum of the &quot;influence&quot;&#xD;&#xA;values of all quality calculations&#xD;&#xA;of a concrete quality smell must&#xD;&#xA;be exactly 1.0" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_pawutGPIEeKeuoKtC2rhSQ" type="DiagramName">
       <element xsi:nil="true"/>
     </children>
@@ -165,7 +165,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_FXhZd2upEeKKeIiE9iVyng"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_FXhZeGupEeKKeIiE9iVyng"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_FXYPgWupEeKKeIiE9iVyng" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_FXYPgWupEeKKeIiE9iVyng" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FXYPgmupEeKKeIiE9iVyng" x="450" y="305"/>
   </children>
