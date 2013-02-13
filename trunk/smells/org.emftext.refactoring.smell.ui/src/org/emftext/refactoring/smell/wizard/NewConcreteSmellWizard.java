@@ -11,6 +11,8 @@ public class NewConcreteSmellWizard extends Wizard {
 	@Override
 	public void addPages() {
 		addPage(new MetamodelPage());
+		addPage(new RoleMappingPage());
+		addPage(new CalculationsPage());
 	}
 
 	@Override
