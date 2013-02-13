@@ -1,6 +1,8 @@
 package org.emftext.refactoring.ltk;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -10,6 +12,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -19,15 +23,18 @@ import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
 public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 
+	protected static final String ID_SELECTED_ELEMENTS	= "selection";
+	protected static final String ID_RESOURCE			= "resource";
+	protected static final String ID_METAMODEL			= "metamodel";
+	protected static final String ID_ROLEMAPPING		= "rolemapping";
+	
 	private IRefactorer refactorer;
-	private RoleMapping roleMapping;
-	private ModelRefactoring modelRefactoring;
 	
 	private ModelRefactoringDescriptor(String id, String project, String description, String comment, int flags) {
 		super(id, project, description, comment, flags);
 	}
 	
-	public ModelRefactoringDescriptor(IRefactorer refactorer, ModelRefactoring modelRefactoring) {
+	public ModelRefactoringDescriptor(IRefactorer refactorer) {
 		this(generateID(refactorer),
 				getProjectID(refactorer),
 				generateDescription(refactorer),
@@ -35,8 +42,6 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 				generateFlags());
 		setTimeStamp(System.currentTimeMillis());
 		this.refactorer = refactorer;
-		this.roleMapping = refactorer.getRoleMapping();
-		this.modelRefactoring = modelRefactoring;
 	}
 
 	public static int generateFlags() {
@@ -94,6 +99,15 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 
 	public static String generateID(IRefactorer refactorer) {
 		RoleMapping roleMapping = refactorer.getRoleMapping();
+		return generateRefactoringID(roleMapping);
+	}
+
+	/**
+	 * Generates a unique ID for the given <code>roleMapping</code>.
+	 * @param roleMapping
+	 * @return
+	 */
+	public static String generateRefactoringID(RoleMapping roleMapping) {
 		IConfigurationElement element = IRoleMappingRegistry.INSTANCE.getContributorForRoleMapping(roleMapping);
 		String id = element.getContributor().getName() + "." + roleMapping.getName().replace(" ", "");
 		return id;
@@ -102,17 +116,27 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 	@Override
 	public Refactoring createRefactoring(RefactoringStatus status) throws CoreException {
 		if(status.isOK()){
-			return new ModelRefactoring(refactorer, modelRefactoring.getDiagramTransactionalEditingDomain(), modelRefactoring.getName(), modelRefactoring.getActiveEditor());
+			return new ModelRefactoring(refactorer, null, refactorer.getRoleMapping().getName(), null);
 		}
 		return null;
 	}
 
-	public RoleMapping getRoleMapping() {
-		return roleMapping;
+	public Map<String, String> getArgumentsMap(){
+		Map<String, String> arguments = new HashMap<String, String>();
+		List<EObject> input = refactorer.getInput();
+		String selectedElements = "";
+		selectedElements += EcoreUtil.getURI(input.get(0)).toString();
+		if(input.size() > 1){
+			for (int i = 1; i < input.size(); i++) {
+				selectedElements += ";" + EcoreUtil.getURI(input.get(i)).toString();		
+			}
+		}
+		arguments.put(ID_SELECTED_ELEMENTS, selectedElements);
+		Resource resource = refactorer.getResource();
+		arguments.put(ID_RESOURCE, resource.getURI().toString());
+		RoleMapping roleMapping = refactorer.getRoleMapping();
+		arguments.put(ID_ROLEMAPPING, roleMapping.getName());
+		arguments.put(ID_METAMODEL, roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI());
+		return arguments;
 	}
-
-	public IRefactorer getRefactorer() {
-		return refactorer;
-	}
-
 }

@@ -15,16 +15,46 @@
  ******************************************************************************/
 package org.emftext.refactoring.ui;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 
+import org.eclipse.core.internal.registry.ExtensionRegistry;
+import org.eclipse.core.runtime.ContributorFactoryOSGi;
+import org.eclipse.core.runtime.IContributor;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.refactoring.ltk.ModelRefactoringDescriptor;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
 import org.emftext.refactoring.util.RegistryUtil;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
+@SuppressWarnings("restriction")
 public class StartUpRegistrations {
 
+	private static final String REFACTORING_ID_PLACEHOLDER	= "REFACTORING_ID_PLACEHOLDER";
+	private static final String CONTRIBUTION	=
+			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+			"<?eclipse version=\"3.4\"?>\n" +
+			"<plugin>\n" + 
+			"\t<extension point=\"org.eclipse.ltk.core.refactoring.refactoringContributions\">\n" +
+			"\t\t	<contribution\n" +
+			"\t\t\t		class=\"org.emftext.refactoring.ltk.GenericRefactoringContribution\"\n"+ 
+			"\t\t\t		id=\"" + REFACTORING_ID_PLACEHOLDER + "\">\n" +
+			"\t\t	</contribution>\n" +
+			"\t</extension>\n" + 
+			"</plugin>";
+	
 	@SuppressWarnings("unused")
 	@PostConstruct
 	public void earlyStartup() {
@@ -35,5 +65,47 @@ public class StartUpRegistrations {
 		RegistryUtil.log("Initialized Refactoring Specification registry on startup", IStatus.OK);
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		RegistryUtil.log("Initialized Role Mapping registry on startup", IStatus.OK);
+		
+//		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ltk.core.refactoring.refactoringContributions");
+		registerRefactoringContributionForRoleMappings();
+		
+//		elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ltk.core.refactoring.refactoringContributions");
+//		for (IConfigurationElement element : elements) {
+//			String attribute = element.getAttribute("class");
+//			String attribute2 = element.getAttribute("id");
+//			System.out.println(attribute + " " + attribute2);
+//		}
+	}
+
+	private void registerRefactoringContributionForRoleMappings() {
+		IExtensionRegistry registry = Platform.getExtensionRegistry();
+		Object temporaryUserToken = ((ExtensionRegistry)registry).getTemporaryUserToken();
+		List<RoleMapping> roleMappings = getRoleMappings();
+		Bundle bundle = FrameworkUtil.getBundle(StartUpRegistrations.class);
+		for (RoleMapping roleMapping : roleMappings) {
+			String id = ModelRefactoringDescriptor.generateRefactoringID(roleMapping);
+			String extension = CONTRIBUTION.replaceAll(REFACTORING_ID_PLACEHOLDER, id);
+			InputStream is;
+			try {
+				is = new ByteArrayInputStream(extension.getBytes("UTF-8"));
+				IContributor contributor = ContributorFactoryOSGi.createContributor(bundle);
+				if(registry.addContribution(is, contributor, false, null, null, temporaryUserToken)){
+//					System.out.println("Successfully registered contribution for " + id);
+				}
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private List<RoleMapping> getRoleMappings(){
+		List<RoleMapping> roleMappings = new ArrayList<RoleMapping>();
+		Map<String, Map<String, RoleMapping>> roleMappingsMap = IRoleMappingRegistry.INSTANCE.getRoleMappingsMap();
+		for (Map<String, RoleMapping> map : roleMappingsMap.values()) {
+			for (RoleMapping roleMapping : map.values()) {
+				roleMappings.add(roleMapping);
+			}
+		}
+		return roleMappings;
 	}
 }

@@ -50,7 +50,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.ChangeDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringChangeDescriptor;
-import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -92,7 +91,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 
 	@Override
 	public ChangeDescriptor getDescriptor() {
-		RefactoringDescriptor descriptor = new ModelRefactoringDescriptor(refactorer, modelRefactoring);
+		ModelRefactoringDescriptor descriptor = new ModelRefactoringDescriptor(refactorer);
 		RefactoringChangeDescriptor changeDescriptor = new RefactoringChangeDescriptor(descriptor);
 		return changeDescriptor;
 	}
