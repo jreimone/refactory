@@ -336,7 +336,6 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, false);
 		//		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
 		MatchModel match = null;
-		DiffModel diff = null;
 		try {
 			EObject originalModel = refactorer.getOriginalModel();
 			createTemporaryResource(originalModel);
@@ -352,6 +351,7 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 			e1.printStackTrace();
 		}
 		if (match != null) {
+			DiffModel diff = null;
 			diff = DiffService.doDiff(match, false);
 			ModelCompareInput compareInput = new ModelCompareInput(match, diff);
 			return compareInput;
