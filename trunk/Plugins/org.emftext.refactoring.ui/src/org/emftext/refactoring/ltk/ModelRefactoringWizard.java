@@ -72,7 +72,6 @@ public class ModelRefactoringWizard extends RefactoringWizard {
 			this.addPage(userInputWizardPage);
 		}
 		
-		//TODO: cseidl Retrieve the appropriate value for the roleRuntimeInstanceMap and use it instead of null.
 		Map<Role, List<EObject>> roleRuntimeInstanceMap = refactoring.getInterpreter().getFakeInterpreter().getRoleRuntimeInstances();
 		addCustomWizardPages(roleRuntimeInstanceMap);
 	}

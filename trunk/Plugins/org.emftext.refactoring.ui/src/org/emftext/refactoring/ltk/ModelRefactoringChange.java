@@ -209,7 +209,6 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 
 			@Override
 			public void initializeValidationData(IProgressMonitor pm) {
-				// TODO Auto-generated method stub
 			}
 
 			@Override
