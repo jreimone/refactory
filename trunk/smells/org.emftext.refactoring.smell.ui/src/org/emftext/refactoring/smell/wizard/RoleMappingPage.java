@@ -18,6 +18,7 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -64,6 +65,10 @@ public class RoleMappingPage extends WizardPage {
 					if(firstElement instanceof RoleMapping){
 						selectedRoleMapping = (RoleMapping) firstElement;
 						setPageComplete(true);
+						IWizardPage nextPage = getNextPage();
+						if(nextPage instanceof CalculationsPage){
+							((CalculationsPage) nextPage).setRoleMapping(selectedRoleMapping);
+						}
 					}
 				}
 			}

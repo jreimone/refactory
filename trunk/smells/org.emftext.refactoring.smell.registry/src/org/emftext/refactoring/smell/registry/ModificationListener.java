@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.emftext.refactoring.smell.SmellPackage;
 
 public class ModificationListener extends EContentAdapter {
 
@@ -22,7 +23,7 @@ public class ModificationListener extends EContentAdapter {
 		Object notifier = notification.getNotifier();
 		if(notifier instanceof EObject){
 			try {
-				if(resource != null){
+				if(resource != null && !notification.getFeature().equals(SmellPackage.Literals.QUALITY__CALCULATIONS)){
 					resource.save(Collections.EMPTY_MAP);
 				}
 			} catch (IOException e) {
