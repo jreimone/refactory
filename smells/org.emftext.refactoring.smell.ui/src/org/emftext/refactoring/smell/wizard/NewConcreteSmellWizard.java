@@ -5,7 +5,7 @@ import org.eclipse.jface.wizard.Wizard;
 public class NewConcreteSmellWizard extends Wizard {
 
 	public NewConcreteSmellWizard() {
-		setWindowTitle("New Wizard");
+		setWindowTitle("New Concrete Smell Wizard");
 	}
 
 	@Override
