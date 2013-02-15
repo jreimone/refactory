@@ -66,15 +66,9 @@ public class StartUpRegistrations {
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		RegistryUtil.log("Initialized Role Mapping registry on startup", IStatus.OK);
 		
-//		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ltk.core.refactoring.refactoringContributions");
+		// register a refactoring contribution for each role mapping so that each model refactoring appears in 
+		// the refactoring history and can be reexecuted after restarting Eclipse
 		registerRefactoringContributionForRoleMappings();
-		
-//		elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ltk.core.refactoring.refactoringContributions");
-//		for (IConfigurationElement element : elements) {
-//			String attribute = element.getAttribute("class");
-//			String attribute2 = element.getAttribute("id");
-//			System.out.println(attribute + " " + attribute2);
-//		}
 	}
 
 	private void registerRefactoringContributionForRoleMappings() {
