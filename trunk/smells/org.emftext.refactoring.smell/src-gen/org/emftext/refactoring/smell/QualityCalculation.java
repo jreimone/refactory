@@ -92,7 +92,7 @@ public interface QualityCalculation extends EObject {
 	 * @return the value of the '<em>Influence</em>' attribute.
 	 * @see #setInfluence(float)
 	 * @see org.emftext.refactoring.smell.SmellPackage#getQualityCalculation_Influence()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	float getInfluence();
@@ -108,26 +108,26 @@ public interface QualityCalculation extends EObject {
 	void setInfluence(float value);
 
 	/**
-	 * Returns the value of the '<em><b>Calculation</b></em>' reference.
+	 * Returns the value of the '<em><b>Calculation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Calculation</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Calculation</em>' reference.
+	 * @return the value of the '<em>Calculation</em>' containment reference.
 	 * @see #setCalculation(Calculation)
 	 * @see org.emftext.refactoring.smell.SmellPackage#getQualityCalculation_Calculation()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Calculation getCalculation();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}' reference.
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Calculation</em>' reference.
+	 * @param value the new value of the '<em>Calculation</em>' containment reference.
 	 * @see #getCalculation()
 	 * @generated
 	 */

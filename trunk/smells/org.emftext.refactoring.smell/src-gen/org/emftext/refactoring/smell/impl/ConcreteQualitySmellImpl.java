@@ -6,23 +6,23 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
-
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.QualityCalculation;
 import org.emftext.refactoring.smell.QualitySmell;
+import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellPackage;
 
 /**
@@ -355,6 +355,42 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 		result.append(concreteName);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public void eNotify(Notification notification) {
+		super.eNotify(notification);
+		if(SmellPackage.Literals.CONCRETE_QUALITY_SMELL__REFACTORING.equals(notification.getFeature())){
+			int eventType = notification.getEventType();
+			switch (eventType) {
+			case Notification.SET:
+				EObject newValue = (EObject) notification.getNewValue();
+				if(newValue instanceof RoleMapping){
+					RoleMapping roleMapping = (RoleMapping) newValue;
+					if(roleMapping.eIsProxy()){
+						URI uri = ((InternalEObject) roleMapping).eProxyURI();
+						Resource resource = eResource();
+						ResourceSet rs = resource.getResourceSet();
+						EObject eObject = rs.getEObject(uri, true);
+						if(eObject != null && eObject instanceof RoleMapping){
+							roleMapping = (RoleMapping) eObject;
+						}
+					}
+					EPackage metamodel = roleMapping.getOwningMappingModel().getTargetMetamodel();
+					QualitySmellModel smellModel = (QualitySmellModel) eContainer();
+					if(smellModel != null && !smellModel.getSmellingMetamodels().contains(metamodel)){
+						smellModel.getSmellingMetamodels().add((EPackage) metamodel);
+					}
+				}
+				break;
+			}
+		}
+	}
+
+	@Override
+	public boolean eNotificationRequired() {
+//		return super.eNotificationRequired();
+		return true;
 	}
 
 } //ConcreteQualitySmellImpl

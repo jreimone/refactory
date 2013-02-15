@@ -104,22 +104,13 @@ public interface CalculationPackage extends EPackage {
 	int CALCULATION__MONOTONICITY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALCULATION__THRESHOLD = 1;
-
-	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALCULATION__DESCRIPTION = 2;
+	int CALCULATION__DESCRIPTION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -128,7 +119,7 @@ public interface CalculationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALCULATION__NAME = 3;
+	int CALCULATION__NAME = 2;
 
 	/**
 	 * The feature id for the '<em><b>Smell Message</b></em>' attribute.
@@ -137,7 +128,16 @@ public interface CalculationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALCULATION__SMELL_MESSAGE = 4;
+	int CALCULATION__SMELL_MESSAGE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALCULATION__THRESHOLD = 4;
 
 	/**
 	 * The number of structural features of the '<em>Calculation</em>' class.
@@ -205,15 +205,6 @@ public interface CalculationPackage extends EPackage {
 	int STRUCTURE__MONOTONICITY = CALCULATION__MONOTONICITY;
 
 	/**
-	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE__THRESHOLD = CALCULATION__THRESHOLD;
-
-	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -239,6 +230,15 @@ public interface CalculationPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURE__SMELL_MESSAGE = CALCULATION__SMELL_MESSAGE;
+
+	/**
+	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__THRESHOLD = CALCULATION__THRESHOLD;
 
 	/**
 	 * The number of structural features of the '<em>Structure</em>' class.
@@ -269,15 +269,6 @@ public interface CalculationPackage extends EPackage {
 	int METRIC__MONOTONICITY = CALCULATION__MONOTONICITY;
 
 	/**
-	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METRIC__THRESHOLD = CALCULATION__THRESHOLD;
-
-	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -303,6 +294,15 @@ public interface CalculationPackage extends EPackage {
 	 * @ordered
 	 */
 	int METRIC__SMELL_MESSAGE = CALCULATION__SMELL_MESSAGE;
+
+	/**
+	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC__THRESHOLD = CALCULATION__THRESHOLD;
 
 	/**
 	 * The number of structural features of the '<em>Metric</em>' class.
@@ -367,17 +367,6 @@ public interface CalculationPackage extends EPackage {
 	EAttribute getCalculation_Monotonicity();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Threshold</em>'.
-	 * @see org.emftext.refactoring.smell.calculation.Calculation#getThreshold()
-	 * @see #getCalculation()
-	 * @generated
-	 */
-	EAttribute getCalculation_Threshold();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.calculation.Calculation#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -409,6 +398,17 @@ public interface CalculationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCalculation_SmellMessage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Threshold</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.Calculation#getThreshold()
+	 * @see #getCalculation()
+	 * @generated
+	 */
+	EAttribute getCalculation_Threshold();
 
 	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.calculation.CalculationResult <em>Result</em>}'.
@@ -531,14 +531,6 @@ public interface CalculationPackage extends EPackage {
 		EAttribute CALCULATION__MONOTONICITY = eINSTANCE.getCalculation_Monotonicity();
 
 		/**
-		 * The meta object literal for the '<em><b>Threshold</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CALCULATION__THRESHOLD = eINSTANCE.getCalculation_Threshold();
-
-		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -561,6 +553,14 @@ public interface CalculationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CALCULATION__SMELL_MESSAGE = eINSTANCE.getCalculation_SmellMessage();
+
+		/**
+		 * The meta object literal for the '<em><b>Threshold</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALCULATION__THRESHOLD = eINSTANCE.getCalculation_Threshold();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.calculation.impl.CalculationResultImpl <em>Result</em>}' class.

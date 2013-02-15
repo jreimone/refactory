@@ -15,12 +15,6 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="monotonicity" lowerBound="1"
         eType="#//Monotonicity" changeable="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Threshold is the specific value representing the limit from when the calculation should be considered as a &quot;smell&quot;. Values less than the threshold are not considered as a &quot;smell&quot;. &quot;Less than&quot; regarding the calculation refers to the monotonicity. I.e., if it's increasing the smell is satisfied when the value is less than the threshold, and if it's decreasing the smell is satisfied when the value is greater than the threshold."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
         defaultValueLiteral=""/>
@@ -29,6 +23,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="smellMessage" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
         defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Monotonicity">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

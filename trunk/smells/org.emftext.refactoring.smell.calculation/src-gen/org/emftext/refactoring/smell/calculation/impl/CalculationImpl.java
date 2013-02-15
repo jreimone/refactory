@@ -23,10 +23,10 @@ import org.emftext.refactoring.smell.calculation.Monotonicity;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getMonotonicity <em>Monotonicity</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getThreshold <em>Threshold</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getSmellMessage <em>Smell Message</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getThreshold <em>Threshold</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,26 +52,6 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	 * @ordered
 	 */
 	protected Monotonicity monotonicity = MONOTONICITY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getThreshold()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final float THRESHOLD_EDEFAULT = 0.0F;
-
-	/**
-	 * The cached value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getThreshold()
-	 * @generated
-	 * @ordered
-	 */
-	protected float threshold = THRESHOLD_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -134,6 +114,26 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	protected String smellMessage = SMELL_MESSAGE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThreshold()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final float THRESHOLD_EDEFAULT = 0.0F;
+
+	/**
+	 * The cached value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThreshold()
+	 * @generated
+	 * @ordered
+	 */
+	protected float threshold = THRESHOLD_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -159,27 +159,6 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	 */
 	public Monotonicity getMonotonicity() {
 		return monotonicity;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public float getThreshold() {
-		return threshold;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setThreshold(float newThreshold) {
-		float oldThreshold = threshold;
-		threshold = newThreshold;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CalculationPackage.CALCULATION__THRESHOLD, oldThreshold, threshold));
 	}
 
 	/**
@@ -214,6 +193,27 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public float getThreshold() {
+		return threshold;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setThreshold(float newThreshold) {
+		float oldThreshold = threshold;
+		threshold = newThreshold;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CalculationPackage.CALCULATION__THRESHOLD, oldThreshold, threshold));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CalculationResult calculate(EObject model) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -230,14 +230,14 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 		switch (featureID) {
 			case CalculationPackage.CALCULATION__MONOTONICITY:
 				return getMonotonicity();
-			case CalculationPackage.CALCULATION__THRESHOLD:
-				return getThreshold();
 			case CalculationPackage.CALCULATION__DESCRIPTION:
 				return getDescription();
 			case CalculationPackage.CALCULATION__NAME:
 				return getName();
 			case CalculationPackage.CALCULATION__SMELL_MESSAGE:
 				return getSmellMessage();
+			case CalculationPackage.CALCULATION__THRESHOLD:
+				return getThreshold();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -282,14 +282,14 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 		switch (featureID) {
 			case CalculationPackage.CALCULATION__MONOTONICITY:
 				return monotonicity != MONOTONICITY_EDEFAULT;
-			case CalculationPackage.CALCULATION__THRESHOLD:
-				return threshold != THRESHOLD_EDEFAULT;
 			case CalculationPackage.CALCULATION__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CalculationPackage.CALCULATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case CalculationPackage.CALCULATION__SMELL_MESSAGE:
 				return SMELL_MESSAGE_EDEFAULT == null ? smellMessage != null : !SMELL_MESSAGE_EDEFAULT.equals(smellMessage);
+			case CalculationPackage.CALCULATION__THRESHOLD:
+				return threshold != THRESHOLD_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -306,14 +306,14 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (monotonicity: ");
 		result.append(monotonicity);
-		result.append(", threshold: ");
-		result.append(threshold);
 		result.append(", description: ");
 		result.append(description);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", smellMessage: ");
 		result.append(smellMessage);
+		result.append(", threshold: ");
+		result.append(threshold);
 		result.append(')');
 		return result.toString();
 	}

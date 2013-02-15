@@ -8,11 +8,8 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
-
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.Quality;
 import org.emftext.refactoring.smell.QualityCalculation;
@@ -20,7 +17,6 @@ import org.emftext.refactoring.smell.QualitySmell;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.SmellPackage;
-
 import org.emftext.refactoring.smell.calculation.CalculationPackage;
 
 /**
@@ -424,8 +420,8 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		initEClass(qualityCalculationEClass, QualityCalculation.class, "QualityCalculation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQualityCalculation_ConcreteSmell(), this.getConcreteQualitySmell(), this.getConcreteQualitySmell_QualityCalculations(), "concreteSmell", null, 1, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQualityCalculation_Quality(), this.getQuality(), this.getQuality_Calculations(), "quality", null, 1, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getQualityCalculation_Influence(), theEcorePackage.getEFloat(), "influence", null, 0, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getQualityCalculation_Calculation(), theCalculationPackage.getCalculation(), null, "calculation", null, 0, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQualityCalculation_Influence(), theEcorePackage.getEFloat(), "influence", null, 1, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQualityCalculation_Calculation(), theCalculationPackage.getCalculation(), null, "calculation", null, 0, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

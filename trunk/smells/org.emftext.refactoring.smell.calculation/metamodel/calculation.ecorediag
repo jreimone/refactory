@@ -23,10 +23,6 @@
         <element xmi:type="ecore:EAttribute" href="calculation.ecore#//Calculation/monotonicity"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_aMih8WPREeKeuoKtC2rhSQ"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_dYF38GPREeKeuoKtC2rhSQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="calculation.ecore#//Calculation/threshold"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_dYF38WPREeKeuoKtC2rhSQ"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_fvyvIGPREeKeuoKtC2rhSQ" type="2001">
         <element xmi:type="ecore:EAttribute" href="calculation.ecore#//Calculation/description"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_fvyvIWPREeKeuoKtC2rhSQ"/>
@@ -38,6 +34,10 @@
       <children xmi:type="notation:Node" xmi:id="_n6vGkGPtEeKeuoKtC2rhSQ" type="2001">
         <element xmi:type="ecore:EAttribute" href="calculation.ecore#//Calculation/smellMessage"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_n6vGkWPtEeKeuoKtC2rhSQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_yoP-sHdgEeK5e4aPLLtnBQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="calculation.ecore#//Calculation/threshold"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_yoP-sXdgEeK5e4aPLLtnBQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PR8cpWPREeKeuoKtC2rhSQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PR8cpmPREeKeuoKtC2rhSQ"/>
@@ -170,17 +170,17 @@
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_V8Vbk2PSEeKeuoKtC2rhSQ" x="200" y="290"/>
   </children>
-  <children xmi:type="notation:Shape" xmi:id="_ciqPUGPSEeKeuoKtC2rhSQ" type="Note" fontName="Segoe UI" description="Threshold is the specific &#xD;&#xA;value representing the limit &#xD;&#xA;from when the calculation&#xD;&#xA;should be considered as &#xD;&#xA;a &quot;smell&quot;. Values less than&#xD;&#xA;the threshold are not considered&#xD;&#xA;as a &quot;smell&quot;. &quot;Less than&quot; regarding&#xD;&#xA;the calculation refers to the&#xD;&#xA;monotonicity. I.e., if it's increasing&#xD;&#xA;the smell is satisfied when the &#xD;&#xA;value is less than the threshold, and&#xD;&#xA;if it's decreasing the smell is&#xD;&#xA;satisfied when the value is greater&#xD;&#xA;than the threshold." fillColor="15400959" transparency="0" lineColor="6737151" lineWidth="1">
-    <children xmi:type="notation:BasicDecorationNode" xmi:id="_ci0AUGPSEeKeuoKtC2rhSQ" type="DiagramName">
+  <children xmi:type="notation:Shape" xmi:id="_1H20sHdgEeK5e4aPLLtnBQ" type="Note" fontName="Segoe UI" description="Threshold is the specific &#xD;&#xA;value representing the limit &#xD;&#xA;from when the calculation&#xD;&#xA;should be considered as &#xD;&#xA;a &quot;smell&quot;. Values less than&#xD;&#xA;the threshold are not considered&#xD;&#xA;as a &quot;smell&quot;. &quot;Less than&quot; regarding&#xD;&#xA;the calculation refers to the&#xD;&#xA;monotonicity. I.e., if it's increasing&#xD;&#xA;the smell is satisfied when the &#xD;&#xA;value is less than the threshold, and&#xD;&#xA;if it's decreasing the smell is&#xD;&#xA;satisfied when the value is greater&#xD;&#xA;than the threshold." fillColor="15400959" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_1IAlsHdgEeK5e4aPLLtnBQ" type="DiagramName">
       <element xsi:nil="true"/>
     </children>
-    <children xmi:type="notation:BasicDecorationNode" xmi:id="_ci0AUWPSEeKeuoKtC2rhSQ" type="Description">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_1IAlsXdgEeK5e4aPLLtnBQ" type="Description">
       <element xsi:nil="true"/>
     </children>
-    <styles xmi:type="notation:TextStyle" xmi:id="_ciqPUWPSEeKeuoKtC2rhSQ"/>
-    <styles xmi:type="notation:LineTypeStyle" xmi:id="_ciqPUmPSEeKeuoKtC2rhSQ"/>
+    <styles xmi:type="notation:TextStyle" xmi:id="_1H20sXdgEeK5e4aPLLtnBQ"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_1H20sndgEeK5e4aPLLtnBQ"/>
     <element xsi:nil="true"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ciqPU2PSEeKeuoKtC2rhSQ" x="565" y="70"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1H20s3dgEeK5e4aPLLtnBQ" x="643" y="106"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_wPSlgV5BEeKN9vNNI_wJ3Q"/>
   <element xmi:type="ecore:EPackage" href="calculation.ecore#/"/>
@@ -257,12 +257,12 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_YsB8A2PSEeKeuoKtC2rhSQ" points="[50, 7, 36, -43]$[14, 50, 0, 0]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_YsB8BGPSEeKeuoKtC2rhSQ" id="(0.8753993610223643,0.0)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_eRFgAGPSEeKeuoKtC2rhSQ" type="NoteAttachment" source="_PR8coGPREeKeuoKtC2rhSQ" target="_ciqPUGPSEeKeuoKtC2rhSQ" routing="Rectilinear" lineWidth="1">
-    <styles xmi:type="notation:ArrowStyle" xmi:id="_eRFgAWPSEeKeuoKtC2rhSQ"/>
-    <styles xmi:type="notation:LineTypeStyle" xmi:id="_eRFgAmPSEeKeuoKtC2rhSQ"/>
+  <edges xmi:type="notation:Connector" xmi:id="_186NYHdgEeK5e4aPLLtnBQ" type="NoteAttachment" source="_PR8coGPREeKeuoKtC2rhSQ" target="_1H20sHdgEeK5e4aPLLtnBQ" routing="Rectilinear" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_186NYXdgEeK5e4aPLLtnBQ"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_186NYndgEeK5e4aPLLtnBQ"/>
     <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_eRFgA2PSEeKeuoKtC2rhSQ" points="[2, -35, -73, -36]$[75, 1, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_eRPRAGPSEeKeuoKtC2rhSQ" id="(0.9139344262295082,0.3870967741935484)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_eRPRAWPSEeKeuoKtC2rhSQ" id="(0.0,0.17117117117117117)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_186NY3dgEeK5e4aPLLtnBQ" points="[2, 25, -146, 23]$[148, 2, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_186NZHdgEeK5e4aPLLtnBQ" id="(0.930327868852459,0.8031496062992126)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_186NZXdgEeK5e4aPLLtnBQ" id="(0.0,0.25225225225225223)"/>
   </edges>
 </notation:Diagram>
