@@ -68,7 +68,7 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	protected float influence = INFLUENCE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCalculation() <em>Calculation</em>}' reference.
+	 * The cached value of the '{@link #getCalculation() <em>Calculation</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCalculation()
@@ -224,14 +224,6 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	 * @generated
 	 */
 	public Calculation getCalculation() {
-		if (calculation != null && calculation.eIsProxy()) {
-			InternalEObject oldCalculation = (InternalEObject)calculation;
-			calculation = (Calculation)eResolveProxy(oldCalculation);
-			if (calculation != oldCalculation) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmellPackage.QUALITY_CALCULATION__CALCULATION, oldCalculation, calculation));
-			}
-		}
 		return calculation;
 	}
 
@@ -240,8 +232,14 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Calculation basicGetCalculation() {
-		return calculation;
+	public NotificationChain basicSetCalculation(Calculation newCalculation, NotificationChain msgs) {
+		Calculation oldCalculation = calculation;
+		calculation = newCalculation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SmellPackage.QUALITY_CALCULATION__CALCULATION, oldCalculation, newCalculation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -250,10 +248,17 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	 * @generated
 	 */
 	public void setCalculation(Calculation newCalculation) {
-		Calculation oldCalculation = calculation;
-		calculation = newCalculation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SmellPackage.QUALITY_CALCULATION__CALCULATION, oldCalculation, calculation));
+		if (newCalculation != calculation) {
+			NotificationChain msgs = null;
+			if (calculation != null)
+				msgs = ((InternalEObject)calculation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SmellPackage.QUALITY_CALCULATION__CALCULATION, null, msgs);
+			if (newCalculation != null)
+				msgs = ((InternalEObject)newCalculation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SmellPackage.QUALITY_CALCULATION__CALCULATION, null, msgs);
+			msgs = basicSetCalculation(newCalculation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SmellPackage.QUALITY_CALCULATION__CALCULATION, newCalculation, newCalculation));
 	}
 
 	/**
@@ -288,6 +293,8 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 				return basicSetConcreteSmell(null, msgs);
 			case SmellPackage.QUALITY_CALCULATION__QUALITY:
 				return basicSetQuality(null, msgs);
+			case SmellPackage.QUALITY_CALCULATION__CALCULATION:
+				return basicSetCalculation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -322,8 +329,7 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 			case SmellPackage.QUALITY_CALCULATION__INFLUENCE:
 				return getInfluence();
 			case SmellPackage.QUALITY_CALCULATION__CALCULATION:
-				if (resolve) return getCalculation();
-				return basicGetCalculation();
+				return getCalculation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

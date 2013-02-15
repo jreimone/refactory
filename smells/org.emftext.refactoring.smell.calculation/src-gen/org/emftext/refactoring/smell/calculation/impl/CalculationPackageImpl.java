@@ -171,7 +171,7 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCalculation_Threshold() {
+	public EAttribute getCalculation_Description() {
 		return (EAttribute)calculationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -180,7 +180,7 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCalculation_Description() {
+	public EAttribute getCalculation_Name() {
 		return (EAttribute)calculationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -189,7 +189,7 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCalculation_Name() {
+	public EAttribute getCalculation_SmellMessage() {
 		return (EAttribute)calculationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -198,7 +198,7 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCalculation_SmellMessage() {
+	public EAttribute getCalculation_Threshold() {
 		return (EAttribute)calculationEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -289,10 +289,10 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 
 		calculationEClass = createEClass(CALCULATION);
 		createEAttribute(calculationEClass, CALCULATION__MONOTONICITY);
-		createEAttribute(calculationEClass, CALCULATION__THRESHOLD);
 		createEAttribute(calculationEClass, CALCULATION__DESCRIPTION);
 		createEAttribute(calculationEClass, CALCULATION__NAME);
 		createEAttribute(calculationEClass, CALCULATION__SMELL_MESSAGE);
+		createEAttribute(calculationEClass, CALCULATION__THRESHOLD);
 
 		calculationResultEClass = createEClass(CALCULATION_RESULT);
 		createEReference(calculationResultEClass, CALCULATION_RESULT__CAUSING_OBJECTS);
@@ -343,10 +343,10 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 
 		initEClass(calculationEClass, Calculation.class, "Calculation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCalculation_Monotonicity(), this.getMonotonicity(), "monotonicity", null, 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCalculation_Threshold(), ecorePackage.getEFloat(), "threshold", null, 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCalculation_Description(), ecorePackage.getEString(), "description", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCalculation_Name(), ecorePackage.getEString(), "name", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCalculation_SmellMessage(), ecorePackage.getEString(), "smellMessage", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCalculation_Threshold(), ecorePackage.getEFloat(), "threshold", null, 0, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(calculationEClass, this.getCalculationResult(), "calculate", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);

@@ -8,20 +8,16 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.Quality;
 import org.emftext.refactoring.smell.QualitySmell;
@@ -275,7 +271,7 @@ public class QualitySmellModelImpl extends EObjectImpl implements QualitySmellMo
 	}
 
 	// this method must be overridden when adding a derived feature and implemented 
-	// following the following pattern
+	// with respect to the following pattern
 	@Override
 	public void eNotify(Notification notification) {
 		super.eNotify(notification);
@@ -285,9 +281,12 @@ public class QualitySmellModelImpl extends EObjectImpl implements QualitySmellMo
 			case Notification.ADD:
 				EObject newValue = (EObject) notification.getNewValue();
 				if(newValue instanceof ConcreteQualitySmell){
-					EPackage metamodel = ((ConcreteQualitySmell) newValue).getRefactoring().getOwningMappingModel().getTargetMetamodel();
-					if(!getSmellingMetamodels().contains(metamodel)){
-						getSmellingMetamodels().add((EPackage) metamodel);
+					RoleMapping roleMapping = ((ConcreteQualitySmell) newValue).getRefactoring();
+					if(roleMapping != null){
+						EPackage metamodel = roleMapping.getOwningMappingModel().getTargetMetamodel();
+						if(!getSmellingMetamodels().contains(metamodel)){
+							getSmellingMetamodels().add((EPackage) metamodel);
+						}
 					}
 				}
 				break;
@@ -309,6 +308,12 @@ public class QualitySmellModelImpl extends EObjectImpl implements QualitySmellMo
 				break;
 			}
 		}
+	}
+
+	@Override
+	public boolean eNotificationRequired() {
+//		return super.eNotificationRequired();
+		return true;
 	}
 
 } //QualitySmellModelImpl

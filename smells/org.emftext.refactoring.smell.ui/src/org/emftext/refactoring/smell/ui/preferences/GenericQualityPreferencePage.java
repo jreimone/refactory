@@ -2,9 +2,6 @@ package org.emftext.refactoring.smell.ui.preferences;
 
 import javax.inject.Inject;
 
-import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.core.contexts.EclipseContextFactory;
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -14,8 +11,6 @@ import org.emftext.refactoring.smell.Quality;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.SmellPackage.Literals;
-import org.emftext.refactoring.smell.registry.ModelRegistration;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -29,6 +24,7 @@ public class GenericQualityPreferencePage extends AbstractPreferencePage {
 	@Override
 	public EObject getModel() {
 		if(smellModel == null){
+			// e4 dependency injection
 //			Bundle bundle = FrameworkUtil.getBundle(getClass());
 //			BundleContext bundleContext = bundle.getBundleContext();
 //			IEclipseContext context = EclipseContextFactory.getServiceContext(bundleContext);
@@ -37,7 +33,11 @@ public class GenericQualityPreferencePage extends AbstractPreferencePage {
 //			QualitySmellModel model = ContextInjectionFactory.make(QualitySmellModel.class, context);
 //			ContextInjectionFactory.inject(object, context)
 
-			smellModel = ModelRegistration.getDefault().getSmellmodel();
+			// OSGi service
+			BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+			ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+			tracker.open();
+			smellModel = tracker.getService();
 		}
 		return smellModel;
 	}

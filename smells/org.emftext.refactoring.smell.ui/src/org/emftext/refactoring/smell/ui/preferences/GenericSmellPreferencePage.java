@@ -11,7 +11,6 @@ import org.emftext.refactoring.smell.QualitySmell;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.SmellPackage.Literals;
-import org.emftext.refactoring.smell.registry.ModelRegistration;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -24,7 +23,10 @@ public class GenericSmellPreferencePage extends AbstractPreferencePage {
 	@Override
 	public EObject getModel() {
 		if(smellModel == null){
-			smellModel = ModelRegistration.getDefault().getSmellmodel();
+			BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+			ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+			tracker.open();
+			smellModel = tracker.getService();
 		}
 		return smellModel;
 	}

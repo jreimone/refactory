@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getMonotonicity <em>Monotonicity</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getDescription <em>Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getName <em>Name</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getSmellMessage <em>Smell Message</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,31 +45,6 @@ public interface Calculation extends EObject {
 	 * @generated
 	 */
 	Monotonicity getMonotonicity();
-
-	/**
-	 * Returns the value of the '<em><b>Threshold</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Threshold is the specific value representing the limit from when the calculation should be considered as a "smell". Values less than the threshold are not considered as a "smell". "Less than" regarding the calculation refers to the monotonicity. I.e., if it's increasing the smell is satisfied when the value is less than the threshold, and if it's decreasing the smell is satisfied when the value is greater than the threshold.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Threshold</em>' attribute.
-	 * @see #setThreshold(float)
-	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_Threshold()
-	 * @model required="true"
-	 * @generated
-	 */
-	float getThreshold();
-
-	/**
-	 * Sets the value of the '{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Threshold</em>' attribute.
-	 * @see #getThreshold()
-	 * @generated
-	 */
-	void setThreshold(float value);
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
@@ -118,6 +93,32 @@ public interface Calculation extends EObject {
 	 * @generated
 	 */
 	String getSmellMessage();
+
+	/**
+	 * Returns the value of the '<em><b>Threshold</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Threshold</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Threshold</em>' attribute.
+	 * @see #setThreshold(float)
+	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_Threshold()
+	 * @model
+	 * @generated
+	 */
+	float getThreshold();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Threshold</em>' attribute.
+	 * @see #getThreshold()
+	 * @generated
+	 */
+	void setThreshold(float value);
 
 	/**
 	 * <!-- begin-user-doc -->

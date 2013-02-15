@@ -268,7 +268,7 @@ public interface SmellPackage extends EPackage {
 	int QUALITY_CALCULATION__INFLUENCE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Calculation</b></em>' reference.
+	 * The feature id for the '<em><b>Calculation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -491,10 +491,10 @@ public interface SmellPackage extends EPackage {
 	EAttribute getQualityCalculation_Influence();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Calculation</em>'.
+	 * @return the meta object for the containment reference '<em>Calculation</em>'.
 	 * @see org.emftext.refactoring.smell.QualityCalculation#getCalculation()
 	 * @see #getQualityCalculation()
 	 * @generated
@@ -686,7 +686,7 @@ public interface SmellPackage extends EPackage {
 		EAttribute QUALITY_CALCULATION__INFLUENCE = eINSTANCE.getQualityCalculation_Influence();
 
 		/**
-		 * The meta object literal for the '<em><b>Calculation</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Calculation</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

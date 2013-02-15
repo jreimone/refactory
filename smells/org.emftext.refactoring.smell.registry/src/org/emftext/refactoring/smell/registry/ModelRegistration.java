@@ -26,7 +26,6 @@ import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.ServiceRegistration;
 
 @SuppressWarnings("restriction")
 public class ModelRegistration {
@@ -34,21 +33,8 @@ public class ModelRegistration {
 	public static final String SMELL_PLUGIN_ID		= "org.emftext.refactoring.smell.registry";
 	private static final String SMELL_MODEL_NAME	= "smellmodel.smell";
 	
-	private CalculationModel calculationModel;
-	private QualitySmellModel smellModel;
-	
-	private static ModelRegistration instance;
-	
-	public static ModelRegistration getDefault(){
-		if(instance == null){
-			instance = new ModelRegistration();
-		}
-		return instance;
-	}
-	
 	@PostConstruct
 	public void register(IEclipseContext context, IWorkspace workspace, IExtensionRegistry registry) {
-		instance = this;
 		registerCalculationExtensions(context, registry);
 		registerQualitySmellModel(context, workspace);
 	}
@@ -57,7 +43,11 @@ public class ModelRegistration {
 	private void registerCalculationExtensions(IEclipseContext context, IExtensionRegistry registry) {
 		CalculationModel calculationModel = initCalculationModel(registry);
 		context.set(CalculationModel.class, calculationModel);
-		this.calculationModel = calculationModel;
+//		this.calculationModel = calculationModel;
+		
+		// OSGi service registration
+		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+		bundleContext.registerService(CalculationModel.class, calculationModel, null);
 	}
 	
 	private CalculationModel initCalculationModel(IExtensionRegistry registry) {
@@ -83,11 +73,12 @@ public class ModelRegistration {
 	private void registerQualitySmellModel(IEclipseContext context, IWorkspace workspace) {
 		QualitySmellModel smellModel = initQualitySmellModel(workspace);
 		context.set(QualitySmellModel.class, smellModel);
-		this.smellModel = smellModel;
+//		this.smellModel = smellModel;
 		
 //		context.declareModifiable(QualitySmellModel.class);
 //		context.modify(QualitySmellModel.class, smellModel);
 		
+		// OSGi service registration
 		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
 //		ServiceRegistration<QualitySmellModel> smellModelService = bundleContext.registerService(QualitySmellModel.class, smellModel, null);
 		bundleContext.registerService(QualitySmellModel.class, smellModel, null);
@@ -122,16 +113,6 @@ public class ModelRegistration {
 			}
 		}
 		smellModel.eAdapters().add(new ModificationListener(resource));
-		return smellModel;
-	}
-
-
-	public CalculationModel getCalculationmodel() {
-		return calculationModel;
-	}
-
-
-	public QualitySmellModel getSmellmodel() {
 		return smellModel;
 	}
 }
