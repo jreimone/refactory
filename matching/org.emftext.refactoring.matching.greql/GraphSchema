@@ -1,0 +1,10 @@
+// JGraLab - The Java graph laboratory
+//   Version : 7.2.0
+//   Codename: Giraffatitan
+
+TGraph 2;
+Schema de.uni_koblenz.jgralab.demo.schema.GraphSchema;
+GraphClass GraphModel;
+EnumDomain ConnectionType (AGGREGATION, ASSOCIATION);
+VertexClass Node { name: String };
+EdgeClass Connection from Node (0,*) role source to Node (0,*) role target { connectionType: ConnectionType, name: String, source: String, target: String };
