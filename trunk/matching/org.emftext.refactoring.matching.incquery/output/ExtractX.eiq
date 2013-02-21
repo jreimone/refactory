@@ -131,19 +131,11 @@ pattern eIDAttribute(This : EClass, Target : EAttribute) {
 	EAttribute.iD(Target, true);
 }
 
-//	find containment(OrigContainer, extracts, Extract);
-//	find containment(OrigContainer, referer, MovedReference);
-//	find containment(NewContainer, moved, Extract);
-//	find containment(ContainerContainer, target, NewContainer);
-//	find containment(ContainerContainer, source, OrigContainer);
-//	find reference(MovedReference, containerRef, NewContainer);
-
 pattern
-ExtractXwithReferenceClass(OrigContainer : EClass, Extract : EClass, NewContainer : EClass, ContainerContainer : EClass, MovedReference : EClass, extracts : EReference, referer : EReference, moved : EReference, target : EReference, source : EReference, containerRef : EReference) {
-	find containment(OrigContainer, extracts, Extract);
-	find containment(OrigContainer, referer, MovedReference);
-	find containment(NewContainer, moved, Extract);
+ExtractX(OrigContainer : EClass, Extractee : EClass, NewContainer : EClass, ContainerContainer : EClass, extracts : EReference, moved : EReference, target : EReference, source : EReference, reference : EReference) {
+	find containment(OrigContainer, extracts, Extractee);
+	find containment(NewContainer, moved, Extractee);
 	find containment(ContainerContainer, target, NewContainer);
 	find containment(ContainerContainer, source, OrigContainer);
-	find reference(MovedReference, containerRef, NewContainer);
+	find reference(OrigContainer, reference, NewContainer);
 }
