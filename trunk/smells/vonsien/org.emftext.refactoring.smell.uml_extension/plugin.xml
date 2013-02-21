@@ -3,18 +3,18 @@
 <plugin>
    <extension
          point="org.emftext.refactoring.smell.calculation.calculation">
-      <calculation
+      <metricCalculation
             class="org.emftext.refactoring.smell.uml_extension.CheckInterfaceSpecifications">
-      </calculation>
-      <calculation
+      </metricCalculation>
+      <metricCalculation
             class="org.emftext.refactoring.smell.uml_extension.CompareNames">
-      </calculation>
-      <calculation
+      </metricCalculation>
+      <metricCalculation
             class="org.emftext.refactoring.smell.uml_extension.CountParametersOfMethods">
-      </calculation>
-      <calculation
+      </metricCalculation>
+      <metricCalculation
             class="org.emftext.refactoring.smell.uml_extension.SearchEmptyClassesAndInterfaces">
-      </calculation>
+      </metricCalculation>
    </extension>
 
 </plugin>

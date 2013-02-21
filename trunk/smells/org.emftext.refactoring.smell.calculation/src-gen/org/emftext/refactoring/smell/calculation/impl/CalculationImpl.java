@@ -26,7 +26,6 @@ import org.emftext.refactoring.smell.calculation.Monotonicity;
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getSmellMessage <em>Smell Message</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.calculation.impl.CalculationImpl#getThreshold <em>Threshold</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,26 +113,6 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	protected String smellMessage = SMELL_MESSAGE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getThreshold()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final float THRESHOLD_EDEFAULT = 0.0F;
-
-	/**
-	 * The cached value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getThreshold()
-	 * @generated
-	 * @ordered
-	 */
-	protected float threshold = THRESHOLD_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -166,8 +145,32 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void setMonotonicity(Monotonicity newMonotonicity) {
+		Monotonicity oldMonotonicity = monotonicity;
+		monotonicity = newMonotonicity == null ? MONOTONICITY_EDEFAULT : newMonotonicity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CalculationPackage.CALCULATION__MONOTONICITY, oldMonotonicity, monotonicity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDescription() {
 		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CalculationPackage.CALCULATION__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -184,6 +187,18 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CalculationPackage.CALCULATION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getSmellMessage() {
 		return smellMessage;
 	}
@@ -193,20 +208,11 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public float getThreshold() {
-		return threshold;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setThreshold(float newThreshold) {
-		float oldThreshold = threshold;
-		threshold = newThreshold;
+	public void setSmellMessage(String newSmellMessage) {
+		String oldSmellMessage = smellMessage;
+		smellMessage = newSmellMessage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CalculationPackage.CALCULATION__THRESHOLD, oldThreshold, threshold));
+			eNotify(new ENotificationImpl(this, Notification.SET, CalculationPackage.CALCULATION__SMELL_MESSAGE, oldSmellMessage, smellMessage));
 	}
 
 	/**
@@ -214,7 +220,7 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CalculationResult calculate(EObject model) {
+	public CalculationResult calculate(EObject model, float threshold) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -236,8 +242,6 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 				return getName();
 			case CalculationPackage.CALCULATION__SMELL_MESSAGE:
 				return getSmellMessage();
-			case CalculationPackage.CALCULATION__THRESHOLD:
-				return getThreshold();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -250,8 +254,17 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CalculationPackage.CALCULATION__THRESHOLD:
-				setThreshold((Float)newValue);
+			case CalculationPackage.CALCULATION__MONOTONICITY:
+				setMonotonicity((Monotonicity)newValue);
+				return;
+			case CalculationPackage.CALCULATION__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
+			case CalculationPackage.CALCULATION__NAME:
+				setName((String)newValue);
+				return;
+			case CalculationPackage.CALCULATION__SMELL_MESSAGE:
+				setSmellMessage((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -265,8 +278,17 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CalculationPackage.CALCULATION__THRESHOLD:
-				setThreshold(THRESHOLD_EDEFAULT);
+			case CalculationPackage.CALCULATION__MONOTONICITY:
+				setMonotonicity(MONOTONICITY_EDEFAULT);
+				return;
+			case CalculationPackage.CALCULATION__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case CalculationPackage.CALCULATION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case CalculationPackage.CALCULATION__SMELL_MESSAGE:
+				setSmellMessage(SMELL_MESSAGE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -288,8 +310,6 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case CalculationPackage.CALCULATION__SMELL_MESSAGE:
 				return SMELL_MESSAGE_EDEFAULT == null ? smellMessage != null : !SMELL_MESSAGE_EDEFAULT.equals(smellMessage);
-			case CalculationPackage.CALCULATION__THRESHOLD:
-				return threshold != THRESHOLD_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -312,8 +332,6 @@ public abstract class CalculationImpl extends EObjectImpl implements Calculation
 		result.append(name);
 		result.append(", smellMessage: ");
 		result.append(smellMessage);
-		result.append(", threshold: ");
-		result.append(threshold);
 		result.append(')');
 		return result.toString();
 	}

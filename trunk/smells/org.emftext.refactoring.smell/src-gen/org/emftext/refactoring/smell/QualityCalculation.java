@@ -18,6 +18,7 @@ import org.emftext.refactoring.smell.calculation.Calculation;
  *   <li>{@link org.emftext.refactoring.smell.QualityCalculation#getQuality <em>Quality</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.QualityCalculation#getInfluence <em>Influence</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.QualityCalculation#getThreshold <em>Threshold</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,29 +109,55 @@ public interface QualityCalculation extends EObject {
 	void setInfluence(float value);
 
 	/**
-	 * Returns the value of the '<em><b>Calculation</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Calculation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Calculation</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Calculation</em>' containment reference.
+	 * @return the value of the '<em>Calculation</em>' reference.
 	 * @see #setCalculation(Calculation)
 	 * @see org.emftext.refactoring.smell.SmellPackage#getQualityCalculation_Calculation()
-	 * @model containment="true"
+	 * @model keys="name"
 	 * @generated
 	 */
 	Calculation getCalculation();
 
 	/**
-	 * Sets the value of the '{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}' containment reference.
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Calculation</em>' containment reference.
+	 * @param value the new value of the '<em>Calculation</em>' reference.
 	 * @see #getCalculation()
 	 * @generated
 	 */
 	void setCalculation(Calculation value);
+
+	/**
+	 * Returns the value of the '<em><b>Threshold</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Threshold</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Threshold</em>' attribute.
+	 * @see #setThreshold(float)
+	 * @see org.emftext.refactoring.smell.SmellPackage#getQualityCalculation_Threshold()
+	 * @model
+	 * @generated
+	 */
+	float getThreshold();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.QualityCalculation#getThreshold <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Threshold</em>' attribute.
+	 * @see #getThreshold()
+	 * @generated
+	 */
+	void setThreshold(float value);
 
 } // QualityCalculation

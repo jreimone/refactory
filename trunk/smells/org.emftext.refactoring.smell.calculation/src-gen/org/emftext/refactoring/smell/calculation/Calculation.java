@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getDescription <em>Description</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getName <em>Name</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getSmellMessage <em>Smell Message</em>}</li>
- *   <li>{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,11 +39,23 @@ public interface Calculation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Monotonicity</em>' attribute.
 	 * @see org.emftext.refactoring.smell.calculation.Monotonicity
+	 * @see #setMonotonicity(Monotonicity)
 	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_Monotonicity()
-	 * @model required="true" changeable="false"
+	 * @model required="true"
 	 * @generated
 	 */
 	Monotonicity getMonotonicity();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.calculation.Calculation#getMonotonicity <em>Monotonicity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Monotonicity</em>' attribute.
+	 * @see org.emftext.refactoring.smell.calculation.Monotonicity
+	 * @see #getMonotonicity()
+	 * @generated
+	 */
+	void setMonotonicity(Monotonicity value);
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
@@ -56,11 +67,22 @@ public interface Calculation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
 	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_Description()
-	 * @model default="" required="true" changeable="false"
+	 * @model default="" required="true"
 	 * @generated
 	 */
 	String getDescription();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.calculation.Calculation#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
+	void setDescription(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -72,11 +94,22 @@ public interface Calculation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
 	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_Name()
-	 * @model default="" required="true" changeable="false"
+	 * @model default="" required="true"
 	 * @generated
 	 */
 	String getName();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.calculation.Calculation#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Smell Message</b></em>' attribute.
@@ -88,37 +121,22 @@ public interface Calculation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Smell Message</em>' attribute.
+	 * @see #setSmellMessage(String)
 	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_SmellMessage()
-	 * @model default="" required="true" changeable="false"
+	 * @model default="" required="true"
 	 * @generated
 	 */
 	String getSmellMessage();
 
 	/**
-	 * Returns the value of the '<em><b>Threshold</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Threshold</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Threshold</em>' attribute.
-	 * @see #setThreshold(float)
-	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculation_Threshold()
-	 * @model
-	 * @generated
-	 */
-	float getThreshold();
-
-	/**
-	 * Sets the value of the '{@link org.emftext.refactoring.smell.calculation.Calculation#getThreshold <em>Threshold</em>}' attribute.
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.calculation.Calculation#getSmellMessage <em>Smell Message</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Threshold</em>' attribute.
-	 * @see #getThreshold()
+	 * @param value the new value of the '<em>Smell Message</em>' attribute.
+	 * @see #getSmellMessage()
 	 * @generated
 	 */
-	void setThreshold(float value);
+	void setSmellMessage(String value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -126,6 +144,6 @@ public interface Calculation extends EObject {
 	 * @model required="true"
 	 * @generated
 	 */
-	CalculationResult calculate(EObject model);
+	CalculationResult calculate(EObject model, float threshold);
 
 } // Calculation

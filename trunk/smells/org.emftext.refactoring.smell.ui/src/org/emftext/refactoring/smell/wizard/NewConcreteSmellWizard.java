@@ -3,6 +3,7 @@ package org.emftext.refactoring.smell.wizard;
 import org.eclipse.jface.wizard.Wizard;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.QualitySmellModel;
+import org.emftext.refactoring.smell.SmellFactory;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -28,7 +29,7 @@ public class NewConcreteSmellWizard extends Wizard {
 	public void addPages() {
 		addPage(new MetamodelPage());
 		addPage(new RoleMappingPage());
-		calculationPage = new CalculationsPage();
+		calculationPage = new CalculationsPage(SmellFactory.eINSTANCE.createConcreteQualitySmell());
 		addPage(calculationPage);
 	}
 

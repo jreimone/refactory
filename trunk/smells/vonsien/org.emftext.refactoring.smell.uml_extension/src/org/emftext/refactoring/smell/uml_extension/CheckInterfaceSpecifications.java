@@ -36,7 +36,7 @@ public class CheckInterfaceSpecifications extends MetricImpl {
 	}
 
 	@Override
-	public CalculationResult calculate(EObject model) {
+	public CalculationResult calculate(EObject model, float threshold) {
 		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
 		result.setResultingValue(0);
 		if(model == null || !(model instanceof Model)){

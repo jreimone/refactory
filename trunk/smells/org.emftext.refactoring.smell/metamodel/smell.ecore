@@ -44,6 +44,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="calculation" eType="ecore:EClass ../../org.emftext.refactoring.smell.calculation/metamodel/calculation.ecore#//Calculation"
-        containment="true"/>
+        eKeys="../../org.emftext.refactoring.smell.calculation/metamodel/calculation.ecore#//Calculation/name"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
   </eClassifiers>
 </ecore:EPackage>

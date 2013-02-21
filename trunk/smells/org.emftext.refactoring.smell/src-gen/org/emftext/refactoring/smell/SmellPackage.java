@@ -268,7 +268,7 @@ public interface SmellPackage extends EPackage {
 	int QUALITY_CALCULATION__INFLUENCE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Calculation</b></em>' containment reference.
+	 * The feature id for the '<em><b>Calculation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -277,13 +277,22 @@ public interface SmellPackage extends EPackage {
 	int QUALITY_CALCULATION__CALCULATION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Threshold</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUALITY_CALCULATION__THRESHOLD = 4;
+
+	/**
 	 * The number of structural features of the '<em>Quality Calculation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUALITY_CALCULATION_FEATURE_COUNT = 4;
+	int QUALITY_CALCULATION_FEATURE_COUNT = 5;
 
 
 	/**
@@ -491,15 +500,26 @@ public interface SmellPackage extends EPackage {
 	EAttribute getQualityCalculation_Influence();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}'.
+	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.QualityCalculation#getCalculation <em>Calculation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Calculation</em>'.
+	 * @return the meta object for the reference '<em>Calculation</em>'.
 	 * @see org.emftext.refactoring.smell.QualityCalculation#getCalculation()
 	 * @see #getQualityCalculation()
 	 * @generated
 	 */
 	EReference getQualityCalculation_Calculation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.QualityCalculation#getThreshold <em>Threshold</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Threshold</em>'.
+	 * @see org.emftext.refactoring.smell.QualityCalculation#getThreshold()
+	 * @see #getQualityCalculation()
+	 * @generated
+	 */
+	EAttribute getQualityCalculation_Threshold();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -686,12 +706,20 @@ public interface SmellPackage extends EPackage {
 		EAttribute QUALITY_CALCULATION__INFLUENCE = eINSTANCE.getQualityCalculation_Influence();
 
 		/**
-		 * The meta object literal for the '<em><b>Calculation</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Calculation</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference QUALITY_CALCULATION__CALCULATION = eINSTANCE.getQualityCalculation_Calculation();
+
+		/**
+		 * The meta object literal for the '<em><b>Threshold</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUALITY_CALCULATION__THRESHOLD = eINSTANCE.getQualityCalculation_Threshold();
 
 	}
 

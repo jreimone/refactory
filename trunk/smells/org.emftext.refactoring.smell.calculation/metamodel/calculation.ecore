@@ -12,18 +12,16 @@
     </eAnnotations>
     <eOperations name="calculate" lowerBound="1" eType="#//CalculationResult">
       <eParameters name="model" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="threshold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="monotonicity" lowerBound="1"
-        eType="#//Monotonicity" changeable="false"/>
+        eType="#//Monotonicity"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
-        defaultValueLiteral=""/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="smellMessage" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
         defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="smellMessage" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Monotonicity">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -38,6 +36,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resultingValue" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Structure" eSuperTypes="#//Calculation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Structure" eSuperTypes="#//Calculation">
+    <eOperations name="calculate" eType="#//CalculationResult">
+      <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
+      <eParameters name="model" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="threshold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Metric" eSuperTypes="#//Calculation"/>
 </ecore:EPackage>

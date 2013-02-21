@@ -3,8 +3,7 @@
 package org.emftext.refactoring.smell.impl;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -294,12 +293,8 @@ public class QualitySmellModelImpl extends EObjectImpl implements QualitySmellMo
 				EObject oldValue = (EObject) notification.getOldValue();
 				if(oldValue instanceof ConcreteQualitySmell){
 					EPackage metamodelOldValue = ((ConcreteQualitySmell) oldValue).getRefactoring().getOwningMappingModel().getTargetMetamodel();
-					Set<EPackage> smellingMetamodels = new HashSet<>();
-					for (ConcreteQualitySmell existingSmell : getConcreteSmells()) {
-						EPackage smellingMetamodel = existingSmell.getRefactoring().getOwningMappingModel().getTargetMetamodel();
-						smellingMetamodels.add(smellingMetamodel);
-					}
-					if(!smellingMetamodels.contains(metamodelOldValue)){
+					List<ConcreteQualitySmell> smellsForMetamodel = getSmellsForMetamodel(metamodelOldValue);
+					if(smellsForMetamodel.isEmpty()){
 						getSmellingMetamodels().remove(metamodelOldValue);
 					}
 				}

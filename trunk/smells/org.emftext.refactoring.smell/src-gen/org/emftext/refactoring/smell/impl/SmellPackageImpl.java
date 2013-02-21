@@ -311,6 +311,15 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getQualityCalculation_Threshold() {
+		return (EAttribute)qualityCalculationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SmellFactory getSmellFactory() {
 		return (SmellFactory)getEFactoryInstance();
 	}
@@ -358,6 +367,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		createEReference(qualityCalculationEClass, QUALITY_CALCULATION__QUALITY);
 		createEAttribute(qualityCalculationEClass, QUALITY_CALCULATION__INFLUENCE);
 		createEReference(qualityCalculationEClass, QUALITY_CALCULATION__CALCULATION);
+		createEAttribute(qualityCalculationEClass, QUALITY_CALCULATION__THRESHOLD);
 	}
 
 	/**
@@ -421,7 +431,9 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		initEReference(getQualityCalculation_ConcreteSmell(), this.getConcreteQualitySmell(), this.getConcreteQualitySmell_QualityCalculations(), "concreteSmell", null, 1, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQualityCalculation_Quality(), this.getQuality(), this.getQuality_Calculations(), "quality", null, 1, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getQualityCalculation_Influence(), theEcorePackage.getEFloat(), "influence", null, 1, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getQualityCalculation_Calculation(), theCalculationPackage.getCalculation(), null, "calculation", null, 0, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQualityCalculation_Calculation(), theCalculationPackage.getCalculation(), null, "calculation", null, 0, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getQualityCalculation_Calculation().getEKeys().add(theCalculationPackage.getCalculation_Name());
+		initEAttribute(getQualityCalculation_Threshold(), theEcorePackage.getEFloat(), "threshold", null, 0, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

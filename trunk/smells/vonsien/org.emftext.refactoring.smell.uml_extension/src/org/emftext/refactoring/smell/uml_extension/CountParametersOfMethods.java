@@ -35,7 +35,7 @@ public class CountParametersOfMethods extends MetricImpl {
 	}
 
 	@Override
-	public CalculationResult calculate(EObject model) {
+	public CalculationResult calculate(EObject model, float threshold) {
 		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
 		result.setResultingValue(0);
 		if(model == null || !(model instanceof Model)){
@@ -48,7 +48,7 @@ public class CountParametersOfMethods extends MetricImpl {
 				List<Operation> operations = classifier.getOperations();
 				for (Operation operation : operations) {
 					int parameterCount = operation.getOwnedParameters().size();
-					if(parameterCount >= getThreshold()){
+					if(parameterCount >= threshold){
 						result.getCausingObjects().add(operation);
 						if(parameterCount > result.getResultingValue()){
 							result.setResultingValue(parameterCount);
