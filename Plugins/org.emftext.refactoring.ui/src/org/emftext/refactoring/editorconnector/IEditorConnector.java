@@ -69,4 +69,10 @@ public interface IEditorConnector {
 	 * @param objectsToSelect
 	 */
 	public void selectEObjects(List<EObject> objectsToSelect);
+	
+	/**
+	 * Returns the model contained in the editor passed in the {@link #canHandle(IEditorPart)} method.
+	 * @return
+	 */
+	public EObject getModel();
 }
