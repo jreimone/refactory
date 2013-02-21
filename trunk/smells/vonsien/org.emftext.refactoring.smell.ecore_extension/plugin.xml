@@ -3,18 +3,18 @@
 <plugin>
    <extension
          point="org.emftext.refactoring.smell.calculation.calculation">
-      <calculation
-            class="org.emftext.refactoring.smell.ecore_extension.CheckInterfaceSpecifications">
-      </calculation>
-      <calculation
-            class="org.emftext.refactoring.smell.ecore_extension.CompareNamesOfClasses">
-      </calculation>
-      <calculation
-            class="org.emftext.refactoring.smell.ecore_extension.CountParametersOfMethods">
-      </calculation>
-      <calculation
-            class="org.emftext.refactoring.smell.ecore_extension.SearchEmptyClasses">
-      </calculation>
+      <metricCalculation
+            class="org.emftext.refactoring.smell.ecoresmells.impl.CheckInterfaceSpecificationsImpl">
+      </metricCalculation>
+      <metricCalculation
+            class="org.emftext.refactoring.smell.ecoresmells.impl.CompareNamesOfClassesImpl">
+      </metricCalculation>
+      <metricCalculation
+            class="org.emftext.refactoring.smell.ecoresmells.impl.CountParametersOfMethodsImpl">
+      </metricCalculation>
+      <metricCalculation
+            class="org.emftext.refactoring.smell.ecoresmells.impl.SearchEmptyClassesImpl">
+      </metricCalculation>
    </extension>
 
 </plugin>
