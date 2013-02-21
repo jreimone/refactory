@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_SVrPMGPYEeK8xsUFaVrJWw" type="EcoreTools" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_SXzWIGPYEeK8xsUFaVrJWw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_SZ6O8GPYEeK8xsUFaVrJWw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_SaDY4GPYEeK8xsUFaVrJWw" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_SaDY4WPYEeK8xsUFaVrJWw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_SaDY4mPYEeK8xsUFaVrJWw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_SaDY42PYEeK8xsUFaVrJWw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_SaD_8GPYEeK8xsUFaVrJWw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_SaD_8WPYEeK8xsUFaVrJWw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_SaD_8mPYEeK8xsUFaVrJWw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_SaD_82PYEeK8xsUFaVrJWw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_SXzWIWPYEeK8xsUFaVrJWw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="SimpleTrace.ecore#//Trace"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SXzWImPYEeK8xsUFaVrJWw" x="27" y="54"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_SbN2gGPYEeK8xsUFaVrJWw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_SbOdkGPYEeK8xsUFaVrJWw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_SbOdkWPYEeK8xsUFaVrJWw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_SbPrsGPYEeK8xsUFaVrJWw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="SimpleTrace.ecore#//TraceLink/description"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_SbPrsWPYEeK8xsUFaVrJWw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_SbOdkmPYEeK8xsUFaVrJWw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_SbOdk2PYEeK8xsUFaVrJWw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_SbOdlGPYEeK8xsUFaVrJWw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_SbOdlWPYEeK8xsUFaVrJWw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_SbOdlmPYEeK8xsUFaVrJWw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_SbOdl2PYEeK8xsUFaVrJWw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_SbOdmGPYEeK8xsUFaVrJWw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_SbN2gWPYEeK8xsUFaVrJWw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="SimpleTrace.ecore#//TraceLink"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SbN2gmPYEeK8xsUFaVrJWw" x="324" y="117"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_SVr2QGPYEeK8xsUFaVrJWw"/>
+  <element xmi:type="ecore:EPackage" href="SimpleTrace.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_Sbb48GPYEeK8xsUFaVrJWw" type="3002" source="_SXzWIGPYEeK8xsUFaVrJWw" target="_SbN2gGPYEeK8xsUFaVrJWw">
+    <children xmi:type="notation:Node" xmi:id="_SbdHEGPYEeK8xsUFaVrJWw" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_SbdHEWPYEeK8xsUFaVrJWw" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_SbqicGPYEeK8xsUFaVrJWw" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_SbqicWPYEeK8xsUFaVrJWw" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_Sbb48WPYEeK8xsUFaVrJWw" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Sbb48mPYEeK8xsUFaVrJWw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="SimpleTrace.ecore#//Trace/links"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Sbb482PYEeK8xsUFaVrJWw" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_S14ZQGPYEeK8xsUFaVrJWw" id="(0.5,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_S15AUGPYEeK8xsUFaVrJWw" id="(0.49612403100775193,1.0)"/>
+  </edges>
+</notation:Diagram>

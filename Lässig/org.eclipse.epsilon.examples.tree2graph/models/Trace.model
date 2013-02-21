@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<SimpleTrace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SimpleTrace="SimpleTrace">
+  <links description="Transformed by Tree2Node">
+    <sources href="tree.model#/"/>
+    <targets href="graph.model#/0"/>
+  </links>
+  <links description="Transformed by Tree2Node">
+    <sources href="tree.model#//@children.0"/>
+    <targets href="graph.model#/1"/>
+  </links>
+  <links description="Transformed by Tree2Node">
+    <sources href="tree.model#//@children.1"/>
+    <targets href="graph.model#/2"/>
+  </links>
+  <links description="Transformed by Tree2Node">
+    <sources href="tree.model#//@children.1/@children.0"/>
+    <targets href="graph.model#/3"/>
+  </links>
+  <links description="Transformed by Tree2Node">
+    <sources href="tree.model#//@children.1/@children.1"/>
+    <targets href="graph.model#/4"/>
+  </links>
+  <links description="Transformed by Tree2Node">
+    <sources href="tree.model#//@children.2"/>
+    <targets href="graph.model#/5"/>
+  </links>
+</SimpleTrace:Trace>
