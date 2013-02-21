@@ -19,16 +19,24 @@
     </genClasses>
     <genClasses image="false" ecoreClass="calculation.ecore#//Calculation">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute calculation.ecore#//Calculation/monotonicity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute calculation.ecore#//Calculation/threshold"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute calculation.ecore#//Calculation/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute calculation.ecore#//Calculation/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute calculation.ecore#//Calculation/smellMessage"/>
       <genOperations ecoreOperation="calculation.ecore#//Calculation/calculate">
         <genParameters ecoreParameter="calculation.ecore#//Calculation/calculate/model"/>
+        <genParameters ecoreParameter="calculation.ecore#//Calculation/calculate/threshold"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="calculation.ecore#//CalculationResult">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference calculation.ecore#//CalculationResult/causingObjects"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute calculation.ecore#//CalculationResult/resultingValue"/>
     </genClasses>
-    <genClasses ecoreClass="calculation.ecore#//Structure"/>
+    <genClasses ecoreClass="calculation.ecore#//Structure">
+      <genOperations ecoreOperation="calculation.ecore#//Structure/calculate">
+        <genParameters ecoreParameter="calculation.ecore#//Structure/calculate/model"/>
+        <genParameters ecoreParameter="calculation.ecore#//Structure/calculate/threshold"/>
+      </genOperations>
+    </genClasses>
     <genClasses ecoreClass="calculation.ecore#//Metric"/>
   </genPackages>
 </genmodel:GenModel>

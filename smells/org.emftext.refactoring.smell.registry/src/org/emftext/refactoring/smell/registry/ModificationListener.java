@@ -23,8 +23,14 @@ public class ModificationListener extends EContentAdapter {
 		Object notifier = notification.getNotifier();
 		if(notifier instanceof EObject){
 			try {
-				if(resource != null && !notification.getFeature().equals(SmellPackage.Literals.QUALITY__CALCULATIONS)){
-					resource.save(Collections.EMPTY_MAP);
+				Object feature = notification.getFeature();
+				if(resource != null){
+					if(feature != null && !feature.equals(SmellPackage.Literals.QUALITY__CALCULATIONS)){
+						resource.save(Collections.EMPTY_MAP);
+					}
+					if(feature == null){
+						resource.save(Collections.EMPTY_MAP);
+					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

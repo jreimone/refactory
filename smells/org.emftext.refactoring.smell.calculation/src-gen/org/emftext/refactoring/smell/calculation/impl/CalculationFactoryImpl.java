@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.emftext.refactoring.smell.calculation.*;
+import org.emftext.refactoring.smell.calculation.custom.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,7 +123,7 @@ public class CalculationFactoryImpl extends EFactoryImpl implements CalculationF
 	 * @generated
 	 */
 	public Structure createStructure() {
-		StructureImpl structure = new StructureImpl();
+		StructureImpl structure = new StructureCustom();
 		return structure;
 	}
 

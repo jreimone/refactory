@@ -13,6 +13,11 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  javax.inject,
  org.eclipse.equinox.registry,
  org.eclipse.core.runtime,
- org.eclipse.e4.core.di
+ org.eclipse.e4.core.di,
+ org.emftext.refactoring.ui,
+ org.eclipse.ui.workbench,
+ org.eclipse.ui.ide,
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.viatra2.patternlanguage.emf
 Export-Package: org.emftext.refactoring.smell.registry
 Bundle-ActivationPolicy: lazy

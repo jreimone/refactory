@@ -4,20 +4,17 @@ package org.emftext.refactoring.smell.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.Quality;
 import org.emftext.refactoring.smell.QualityCalculation;
 import org.emftext.refactoring.smell.SmellPackage;
-
 import org.emftext.refactoring.smell.calculation.Calculation;
 
 /**
@@ -31,6 +28,7 @@ import org.emftext.refactoring.smell.calculation.Calculation;
  *   <li>{@link org.emftext.refactoring.smell.impl.QualityCalculationImpl#getQuality <em>Quality</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.impl.QualityCalculationImpl#getInfluence <em>Influence</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.impl.QualityCalculationImpl#getCalculation <em>Calculation</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.impl.QualityCalculationImpl#getThreshold <em>Threshold</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,7 +66,7 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	protected float influence = INFLUENCE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCalculation() <em>Calculation</em>}' containment reference.
+	 * The cached value of the '{@link #getCalculation() <em>Calculation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCalculation()
@@ -76,6 +74,26 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	 * @ordered
 	 */
 	protected Calculation calculation;
+
+	/**
+	 * The default value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThreshold()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final float THRESHOLD_EDEFAULT = 0.0F;
+
+	/**
+	 * The cached value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThreshold()
+	 * @generated
+	 * @ordered
+	 */
+	protected float threshold = THRESHOLD_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -224,6 +242,14 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	 * @generated
 	 */
 	public Calculation getCalculation() {
+		if (calculation != null && calculation.eIsProxy()) {
+			InternalEObject oldCalculation = (InternalEObject)calculation;
+			calculation = (Calculation)eResolveProxy(oldCalculation);
+			if (calculation != oldCalculation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmellPackage.QUALITY_CALCULATION__CALCULATION, oldCalculation, calculation));
+			}
+		}
 		return calculation;
 	}
 
@@ -232,14 +258,8 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCalculation(Calculation newCalculation, NotificationChain msgs) {
-		Calculation oldCalculation = calculation;
-		calculation = newCalculation;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SmellPackage.QUALITY_CALCULATION__CALCULATION, oldCalculation, newCalculation);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Calculation basicGetCalculation() {
+		return calculation;
 	}
 
 	/**
@@ -248,17 +268,31 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	 * @generated
 	 */
 	public void setCalculation(Calculation newCalculation) {
-		if (newCalculation != calculation) {
-			NotificationChain msgs = null;
-			if (calculation != null)
-				msgs = ((InternalEObject)calculation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SmellPackage.QUALITY_CALCULATION__CALCULATION, null, msgs);
-			if (newCalculation != null)
-				msgs = ((InternalEObject)newCalculation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SmellPackage.QUALITY_CALCULATION__CALCULATION, null, msgs);
-			msgs = basicSetCalculation(newCalculation, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SmellPackage.QUALITY_CALCULATION__CALCULATION, newCalculation, newCalculation));
+		Calculation oldCalculation = calculation;
+		calculation = newCalculation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SmellPackage.QUALITY_CALCULATION__CALCULATION, oldCalculation, calculation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public float getThreshold() {
+		return threshold;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setThreshold(float newThreshold) {
+		float oldThreshold = threshold;
+		threshold = newThreshold;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SmellPackage.QUALITY_CALCULATION__THRESHOLD, oldThreshold, threshold));
 	}
 
 	/**
@@ -293,8 +327,6 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 				return basicSetConcreteSmell(null, msgs);
 			case SmellPackage.QUALITY_CALCULATION__QUALITY:
 				return basicSetQuality(null, msgs);
-			case SmellPackage.QUALITY_CALCULATION__CALCULATION:
-				return basicSetCalculation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -329,7 +361,10 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 			case SmellPackage.QUALITY_CALCULATION__INFLUENCE:
 				return getInfluence();
 			case SmellPackage.QUALITY_CALCULATION__CALCULATION:
-				return getCalculation();
+				if (resolve) return getCalculation();
+				return basicGetCalculation();
+			case SmellPackage.QUALITY_CALCULATION__THRESHOLD:
+				return getThreshold();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -353,6 +388,9 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 				return;
 			case SmellPackage.QUALITY_CALCULATION__CALCULATION:
 				setCalculation((Calculation)newValue);
+				return;
+			case SmellPackage.QUALITY_CALCULATION__THRESHOLD:
+				setThreshold((Float)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -378,6 +416,9 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 			case SmellPackage.QUALITY_CALCULATION__CALCULATION:
 				setCalculation((Calculation)null);
 				return;
+			case SmellPackage.QUALITY_CALCULATION__THRESHOLD:
+				setThreshold(THRESHOLD_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -398,6 +439,8 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 				return influence != INFLUENCE_EDEFAULT;
 			case SmellPackage.QUALITY_CALCULATION__CALCULATION:
 				return calculation != null;
+			case SmellPackage.QUALITY_CALCULATION__THRESHOLD:
+				return threshold != THRESHOLD_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -414,8 +457,20 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (influence: ");
 		result.append(influence);
+		result.append(", threshold: ");
+		result.append(threshold);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public String eURIFragmentSegment(EStructuralFeature eStructuralFeature, EObject eObject) {
+		return super.eURIFragmentSegment(eStructuralFeature, eObject);
+	}
+
+	@Override
+	public EObject eObjectForURIFragmentSegment(String uriFragmentSegment) {
+		return super.eObjectForURIFragmentSegment(uriFragmentSegment);
 	}
 
 } //QualityCalculationImpl

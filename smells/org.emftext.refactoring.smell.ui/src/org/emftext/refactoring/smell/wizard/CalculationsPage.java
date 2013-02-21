@@ -29,6 +29,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TextCellEditor;
@@ -85,11 +86,12 @@ public class CalculationsPage extends WizardPage {
 	/**
 	 * Create the wizard.
 	 */
-	public CalculationsPage() {
+	public CalculationsPage(ConcreteQualitySmell concreteSmell) {
 		super("Quality Specification Page");
 		setTitle("Specify Qualities");
 		setDescription("Select the qualities for the smell to be registered");
 		init();
+		this.concreteSmell = concreteSmell;
 	}
 
 	private void init() {
@@ -100,7 +102,7 @@ public class CalculationsPage extends WizardPage {
 		ServiceTracker<CalculationModel,CalculationModel> tracker2 = new ServiceTracker<>(bundleContext, CalculationModel.class, null);
 		tracker2.open();
 		calculationModel = tracker2.getService();
-		concreteSmell = SmellFactory.eINSTANCE.createConcreteQualitySmell();
+		
 	}
 
 	/**
@@ -168,17 +170,6 @@ public class CalculationsPage extends WizardPage {
 
 		comboBoxCellEditor = new ComboBoxViewerCellEditor(table, SWT.READ_ONLY);
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
-		//		tableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
-		//			public Image getImage(Object element) {
-		//				return null;
-		//			}
-		//			public String getText(Object element) {
-		//				if(element instanceof Quality){
-		//					return ((Quality) element).getName();
-		//				}
-		//				return element == null ? "" : element.toString();
-		//			}
-		//		});
 		tableViewerColumn.setEditingSupport(new EditingSupport(tableViewer){
 
 			@Override
@@ -261,20 +252,21 @@ public class CalculationsPage extends WizardPage {
 				if(element instanceof QualityCalculation && value instanceof Calculation){
 					QualityCalculation qCalculation = (QualityCalculation) element;
 					Calculation referenceCalculation = (Calculation) value;
-					try {
-						Calculation concreteCalculation = referenceCalculation.getClass().newInstance();
-						qCalculation.setCalculation(concreteCalculation);
-						// take over the specified threshold value
-						Calculation oldCalculation = qCalculation.getCalculation();
-						Float threshold = oldCalculation.getThreshold();
-						if(threshold != null){
-							concreteCalculation.setThreshold(threshold);
-						}
-					} catch (InstantiationException e) {
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
-					}
+					qCalculation.setCalculation(referenceCalculation);
+//					try {
+//						Calculation concreteCalculation = referenceCalculation.getClass().newInstance();
+//						qCalculation.setCalculation(concreteCalculation);
+//						// take over the specified threshold value
+//						Calculation oldCalculation = qCalculation.getCalculation();
+//						Float threshold = oldCalculation.getThreshold();
+//						if(threshold != null){
+//							concreteCalculation.setThreshold(threshold);
+//						}
+//					} catch (InstantiationException e) {
+//						e.printStackTrace();
+//					} catch (IllegalAccessException e) {
+//						e.printStackTrace();
+//					}
 				}
 				setPageComplete();
 			}
@@ -315,11 +307,11 @@ public class CalculationsPage extends WizardPage {
 					try {
 						float parseFloat = Float.parseFloat((String) value);
 						QualityCalculation qualityCalculation = (QualityCalculation) element;
-						Calculation calculation = qualityCalculation.getCalculation();
-						calculation.setThreshold(parseFloat);
+//						Calculation calculation = qualityCalculation.getCalculation();
+						qualityCalculation.setThreshold(parseFloat);
 						// to notify label provider
-						qualityCalculation.setCalculation(null);
-						qualityCalculation.setCalculation(calculation);
+//						qualityCalculation.setCalculation(null);
+//						qualityCalculation.setCalculation(calculation);
 					} catch (NumberFormatException e) {
 						// do nothing
 					}
@@ -331,10 +323,10 @@ public class CalculationsPage extends WizardPage {
 			protected Object getValue(Object element) {
 				if(element instanceof QualityCalculation){
 					QualityCalculation qCalculation = (QualityCalculation) element;
-					Calculation calculation = qCalculation.getCalculation();
-					if(calculation != null){
-						return String.valueOf(calculation.getThreshold());
-					}
+//					Calculation calculation = qCalculation.getCalculation();
+//					if(calculation != null){
+						return String.valueOf(qCalculation.getThreshold());
+//					}
 				}
 				return null;
 			}
@@ -399,6 +391,10 @@ public class CalculationsPage extends WizardPage {
 		initDataBindingsForTableQualityCombo();
 		initDataBindingsForTableCalculationCombo();
 		setPageComplete();
+		// select the generic smell
+		if(concreteSmell.getGenericSmell() != null){
+			comboViewer.setSelection(new StructuredSelection(concreteSmell.getGenericSmell()));
+		}
 	}
 
 	private void setPageComplete() {
@@ -473,7 +469,7 @@ public class CalculationsPage extends WizardPage {
 		ControlDecorationSupport.create(bindValue, SWT.TOP | SWT.LEFT);
 		//
 		ObservableListContentProvider listContentProvider_1 = new ObservableListContentProvider();
-		IObservableMap[] observeMaps_1 = EMFObservables.observeMaps(listContentProvider_1.getKnownElements(), new EStructuralFeature[]{Literals.QUALITY_CALCULATION__QUALITY, Literals.QUALITY_CALCULATION__INFLUENCE, Literals.QUALITY_CALCULATION__CALCULATION});
+		IObservableMap[] observeMaps_1 = EMFObservables.observeMaps(listContentProvider_1.getKnownElements(), new EStructuralFeature[]{Literals.QUALITY_CALCULATION__QUALITY, Literals.QUALITY_CALCULATION__INFLUENCE, Literals.QUALITY_CALCULATION__CALCULATION, Literals.QUALITY_CALCULATION__THRESHOLD});
 		tableViewer.setLabelProvider(new ObservableMapLabelProvider(observeMaps_1){
 			@Override
 			public String getColumnText(Object element, int columnIndex) {
@@ -495,10 +491,9 @@ public class CalculationsPage extends WizardPage {
 						}
 						break;
 					case 3: // threshold
-						if(calculation != null){
-							return String.valueOf(calculation.getThreshold());
-						}
-						break;
+//						if(calculation != null){
+							return String.valueOf(qualityCalculation.getThreshold());
+//						}
 					}
 				}
 				return "";

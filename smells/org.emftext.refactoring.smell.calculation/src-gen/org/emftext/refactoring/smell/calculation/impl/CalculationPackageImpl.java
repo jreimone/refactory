@@ -198,15 +198,6 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCalculation_Threshold() {
-		return (EAttribute)calculationEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCalculationResult() {
 		return calculationResultEClass;
 	}
@@ -292,7 +283,6 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		createEAttribute(calculationEClass, CALCULATION__DESCRIPTION);
 		createEAttribute(calculationEClass, CALCULATION__NAME);
 		createEAttribute(calculationEClass, CALCULATION__SMELL_MESSAGE);
-		createEAttribute(calculationEClass, CALCULATION__THRESHOLD);
 
 		calculationResultEClass = createEClass(CALCULATION_RESULT);
 		createEReference(calculationResultEClass, CALCULATION_RESULT__CAUSING_OBJECTS);
@@ -342,14 +332,14 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		initEReference(getCalculationModel_Calculations(), this.getCalculation(), null, "calculations", null, 0, -1, CalculationModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(calculationEClass, Calculation.class, "Calculation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCalculation_Monotonicity(), this.getMonotonicity(), "monotonicity", null, 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCalculation_Description(), ecorePackage.getEString(), "description", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCalculation_Name(), ecorePackage.getEString(), "name", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCalculation_SmellMessage(), ecorePackage.getEString(), "smellMessage", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCalculation_Threshold(), ecorePackage.getEFloat(), "threshold", null, 0, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCalculation_Monotonicity(), this.getMonotonicity(), "monotonicity", null, 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCalculation_Description(), ecorePackage.getEString(), "description", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCalculation_Name(), ecorePackage.getEString(), "name", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCalculation_SmellMessage(), ecorePackage.getEString(), "smellMessage", "", 1, 1, Calculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(calculationEClass, this.getCalculationResult(), "calculate", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEFloat(), "threshold", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(calculationResultEClass, CalculationResult.class, "CalculationResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCalculationResult_CausingObjects(), ecorePackage.getEObject(), null, "causingObjects", null, 0, -1, CalculationResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
