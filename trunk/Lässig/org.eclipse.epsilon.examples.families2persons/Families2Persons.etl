@@ -1,0 +1,61 @@
+pre {
+	"Running ETL".println();
+}
+
+post {
+	// Store traceability links in custom model
+	var trace : new Trace!Trace;
+	for (t in transTrace.transformations) {
+		var link : new Trace!TraceLink;
+		link.sources.add(t.source);
+		link.targets = t.targets;
+		link.description = "Transformed by " + t.getRule().name;
+		trace.links.add(link);
+	}
+}
+
+rule Member2Male 
+	transform s : Families!Member
+	to t : Persons!Male {
+	
+	guard : not s.isFemale()
+	
+	t.fullName = s.firstName + " " + s.familyName();	
+}
+
+rule Member2Female
+	transform s : Families!Member
+	to t : Persons!Female {
+	
+	guard : s.isFemale()
+	
+	t.fullName = s.firstName + " " + s.familyName();
+}
+
+operation Families!Member isFemale() : Boolean {
+	if (self.familyMother.isDefined()) {																				
+		return true;
+	} else {
+		if (self.familyDaughter.isDefined()) {																				
+			return true;
+		} else {
+			return false;																			
+		}																			
+	}
+}
+
+operation Families!Member familyName() : String {
+	if (self.familyFather.isDefined()) {
+		return self.familyFather.lastName;
+	} else {
+		if (self.familyMother.isDefined()) {
+			return self.familyMother.lastName;
+		} else {
+			if (self.familySon.isDefined()) {
+				return self.familySon.lastName;
+			} else {
+				return self.familyDaughter.lastName;
+			}
+		}
+	}
+}
