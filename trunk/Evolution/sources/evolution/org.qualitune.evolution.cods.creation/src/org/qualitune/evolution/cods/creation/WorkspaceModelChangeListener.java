@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.qualitune.evolution.megamodel.architecture.InstanceModel;
@@ -92,14 +93,19 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 			uri = uri.trimFragment();
 			List<InstanceModel> instanceModels = new ArrayList<InstanceModel>(megamodel.getInstanceModels());
 			for (InstanceModel instanceModel : instanceModels) {
-				URI uri2 = instanceModel.getModel().eResource().getURI();
-				if(uri.equals(uri2)){
+				EObject model = instanceModel.getModel();
+				if(model.eIsProxy()){
 					megamodel.getModels().remove(instanceModel);
-					try {
-						megamodel.eResource().save(Collections.EMPTY_MAP);
-					} catch (IOException e) {
-						e.printStackTrace();
+				} else {
+					URI uri2 = model.eResource().getURI();
+					if(uri.equals(uri2)){
+						megamodel.getModels().remove(instanceModel);
 					}
+				}
+				try {
+					megamodel.eResource().save(Collections.EMPTY_MAP);
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 			break;
