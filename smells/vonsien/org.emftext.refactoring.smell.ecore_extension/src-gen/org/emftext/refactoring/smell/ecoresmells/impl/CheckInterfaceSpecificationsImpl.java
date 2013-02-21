@@ -1,4 +1,6 @@
-package org.emftext.refactoring.smell.ecore_extension;
+/**
+ */
+package org.emftext.refactoring.smell.ecoresmells.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +12,39 @@ import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
 import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
+import org.emftext.refactoring.smell.ecoresmells.CheckInterfaceSpecifications;
+import org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage;
 
-public class CheckInterfaceSpecifications extends MetricImpl {
-	
-	private List<EPackage> packages;
-
-	public CheckInterfaceSpecifications() {
-		packages = new ArrayList<EPackage>();
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Check Interface Specifications</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * </p>
+ *
+ * @generated
+ */
+public class CheckInterfaceSpecificationsImpl extends MetricImpl implements CheckInterfaceSpecifications {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CheckInterfaceSpecificationsImpl() {
+		super();
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return EcoresmellsPackage.Literals.CHECK_INTERFACE_SPECIFICATIONS;
+	}
+
+	private List<EPackage> packages;
 
 	@Override
 	public String getName() {
@@ -40,7 +67,8 @@ public class CheckInterfaceSpecifications extends MetricImpl {
 	}
 	
 	@Override
-	public CalculationResult calculate(EObject model) {
+	public CalculationResult calculate(EObject model, float threshold) {
+		packages = new ArrayList<EPackage>();
 		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
 		result.setResultingValue(0);
 		if(model == null || !(model instanceof EPackage)){
@@ -89,4 +117,5 @@ public class CheckInterfaceSpecifications extends MetricImpl {
 			packages.add(epackage);
 		}
 	}
-}
+	
+} //CheckInterfaceSpecificationsImpl
