@@ -3,9 +3,7 @@
  */
 package org.emftext.refactoring.matching.incquery;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,14 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.viatra2.patternlanguage.EMFPatternLanguageRuntimeModule;
@@ -33,10 +30,11 @@ import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternCall;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternCompositionConstraint;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguageFactory;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguagePackage;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Type;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Variable;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.VariableReference;
 import org.eclipse.viatra2.patternlanguage.core.patternLanguage.VariableValue;
+import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.ClassType;
+import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.EMFPatternLanguageFactory;
 import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.EMFPatternLanguagePackage;
 import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.PatternModel;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -63,12 +61,13 @@ import com.google.inject.Injector;
 public class IncQueryTest {
 
 	private static final String INPUT_FILE					= "../org.emftext.refactoring.extractXwithReferenceClass/rolemodel/ExtractXwithReferenceClass.rolestext";
+	//	private static final String INPUT_FILE					= "../org.emftext.refactoring.extractX/rolemodel/ExtractX.rolestext";
 	private static final String TEMPLATE_FILE				= "template/base.eiq";
 	private static final String OUTPUT_FOLDER				= "output";
 
 	private static final String CONTAINMENT_PATTERN_NAME	= "containment";
 	private static final String REFERENCE_PATTERN_NAME		= "reference";
-	
+
 	private static Resource patternResource;
 	private static RoleModel roleModel;
 	// a template will be loaded first which then can be extended
@@ -76,7 +75,7 @@ public class IncQueryTest {
 	// patterns to be referenced in generated pattern
 	private static Pattern containmentPattern;
 	private static Pattern referencePattern;
-	
+
 	@BeforeClass
 	public static void init(){
 		initLanguages();
@@ -95,9 +94,9 @@ public class IncQueryTest {
 		for (Role role : roleModel.getRoles()) {
 			Variable variable = factory.createVariable();
 			variable.setName(role.getName());
-			Type type = factory.createType();
-			type.setTypename(EClass.class.getSimpleName());
-			variable.setType(type);
+			ClassType classType = EMFPatternLanguageFactory.eINSTANCE.createClassType();
+			classType.setClassname(EcorePackage.Literals.ECLASS);
+			variable.setType(classType);
 			variableNameMap.put(variable.getName(), variable);
 			pattern.getParameters().add(variable);
 		}
@@ -106,9 +105,9 @@ public class IncQueryTest {
 				MultiplicityCollaboration coll = (MultiplicityCollaboration) collaboration;
 				Variable variable = factory.createVariable();
 				variable.setName(coll.getTargetName());
-				Type type = factory.createType();
-				type.setTypename(EReference.class.getSimpleName());
-				variable.setType(type);
+				ClassType classType = EMFPatternLanguageFactory.eINSTANCE.createClassType();
+				classType.setClassname(EcorePackage.Literals.EREFERENCE);
+				variable.setType(classType);
 				pattern.getParameters().add(variable);
 				PatternCall patternCall = factory.createPatternCall();
 				Pattern calledPattern = null;
@@ -123,11 +122,11 @@ public class IncQueryTest {
 				VariableValue targetValue = factory.createVariableValue();
 				VariableReference sourceVariableReference = factory.createVariableReference();
 				VariableReference targetVariableReference = factory.createVariableReference();
-//				sourceVariableReference.setVariable(variableNameMap.get(coll.getSource().getName()));
+				//				sourceVariableReference.setVariable(variableNameMap.get(coll.getSource().getName()));
 				ParameterRef sourceParameterRef = factory.createParameterRef();
 				sourceParameterRef.setReferredParam(variableNameMap.get(coll.getSource().getName()));
 				sourceVariableReference.setVariable(sourceParameterRef);
-//				targetVariableReference.setVariable(variableNameMap.get(coll.getTarget().getName()));
+				//				targetVariableReference.setVariable(variableNameMap.get(coll.getTarget().getName()));
 				ParameterRef targetParameterRef = factory.createParameterRef();
 				targetParameterRef.setReferredParam(variableNameMap.get(coll.getTarget().getName()));
 				targetVariableReference.setVariable(targetParameterRef);
@@ -136,14 +135,14 @@ public class IncQueryTest {
 				sourceValue.setValue(sourceVariableReference);
 				targetValue.setValue(targetVariableReference);
 				patternCall.getParameters().add(sourceValue);
-				if(coll instanceof RoleAssociation){
-					VariableValue referenceValue = factory.createVariableValue();
-					VariableReference referenceVariableReference = factory.createVariableReference();
-					sourceVariableReference.setVariable(variable);
-					referenceVariableReference.setVar(variable.getName());
-					referenceValue.setValue(referenceVariableReference);
-					patternCall.getParameters().add(referenceValue);
-				}
+				// add parameter for relation
+				VariableValue referenceValue = factory.createVariableValue();
+				VariableReference referenceVariableReference = factory.createVariableReference();
+				sourceVariableReference.setVariable(variable);
+				referenceVariableReference.setVar(variable.getName());
+				referenceValue.setValue(referenceVariableReference);
+				patternCall.getParameters().add(referenceValue);
+				// until here
 				patternCall.getParameters().add(targetValue);
 				PatternCompositionConstraint constraint = factory.createPatternCompositionConstraint();
 				constraint.setCall(patternCall);
@@ -157,7 +156,7 @@ public class IncQueryTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static void initReferencedPatterns() {
 		List<Pattern> patterns = patternModel.getPatterns();
 		for (Pattern pattern : patterns) {
@@ -174,7 +173,7 @@ public class IncQueryTest {
 		assertNotNull("containment pattern mustn't be null", containmentPattern);
 		assertNotNull("reference pattern mustn't be null", referencePattern);
 	}
-	
+
 	public static void initModels() {
 		ResourceSet rs = new ResourceSetImpl();
 		// input model
@@ -192,8 +191,8 @@ public class IncQueryTest {
 		uri = URI.createFileURI(file.getAbsolutePath());
 		model = rs.getResource(uri, true).getContents().get(0);
 		assertTrue("must be a PatternModel", model instanceof PatternModel);
-		patternModel = (PatternModel) model;
-		
+		patternModel = EcoreUtil.copy((PatternModel) model);
+
 		// output model
 		file = new File(OUTPUT_FOLDER + "/" + roleModel.getName() + "." + uri.fileExtension());
 		if(file.exists()){
@@ -205,7 +204,7 @@ public class IncQueryTest {
 		assertNotNull("Pattern resource mustn't be null", patternResource);
 		patternResource.getContents().add(patternModel);
 	}
-	
+
 	private static void initLanguages(){
 		// Ecore
 		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
@@ -223,6 +222,6 @@ public class IncQueryTest {
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
 	}
-	
-	
+
+
 }
