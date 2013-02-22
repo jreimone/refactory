@@ -56,8 +56,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 		if(editor == null){
 			return null;
 		}
-		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor,
-				IEditor.class);
+		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
 		ILocationMap locationMap = emftextResource.getLocationMap();
 		ITextSelection textSelection = (ITextSelection) selection;
@@ -94,8 +93,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 
 	public void selectEObjects(List<EObject> objectsToSelect) {
 		try {
-			IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor,
-					IEditor.class);
+			IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 			IResource emftextResource = emftextEditor.getResource();
 			ILocationMap locationMap = emftextResource.getLocationMap();
 			if (objectsToSelect.size() > 0) {
@@ -117,6 +115,17 @@ public class EMFTextEditorConnector implements IEditorConnector {
 			IStatus status = new Status(IStatus.WARNING, Activator.PLUGIN_ID, "Could not select objects after refactoring in editor: " + editor);
 			Activator.getDefault().getLog().log(status);
 		}
+	}
+
+	@Override
+	public EObject getModel() {
+		if(editor == null){
+			return null;
+		}
+		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
+		IResource emftextResource = emftextEditor.getResource();
+		EObject model = emftextResource.getContents().get(0);
+		return model;
 	}
 
 }
