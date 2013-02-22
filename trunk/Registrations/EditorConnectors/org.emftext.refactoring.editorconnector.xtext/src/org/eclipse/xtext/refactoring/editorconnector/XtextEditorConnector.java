@@ -177,4 +177,12 @@ public class XtextEditorConnector implements IEditorConnector {
 		});
 	}
 
+	@Override
+	public EObject getModel() {
+		if(resource == null){
+			return null;
+		}
+		return resource.getContents().get(0);
+	}
+
 }
