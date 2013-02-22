@@ -1213,19 +1213,16 @@
     </bodies>
   </patterns>
   <importPackages>
-    <ePackage href="http://www.emftext.org/java/variables#/"/>
-  </importPackages>
-  <importPackages>
-    <ePackage href="http://www.emftext.org/java/references#/"/>
-  </importPackages>
-  <importPackages>
     <ePackage href="http://www.emftext.org/java/statements#/"/>
   </importPackages>
   <importPackages>
-    <ePackage href="http://www.emftext.org/java/instantiations#/"/>
+    <ePackage href="http://www.emftext.org/java/variables#/"/>
   </importPackages>
   <importPackages>
     <ePackage href="http://www.emftext.org/java/classifiers#/"/>
+  </importPackages>
+  <importPackages>
+    <ePackage href="http://www.emftext.org/java/types#/"/>
   </importPackages>
   <importPackages>
     <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
@@ -1234,6 +1231,9 @@
     <ePackage href="http://www.emftext.org/java/members#/"/>
   </importPackages>
   <importPackages>
-    <ePackage href="http://www.emftext.org/java/types#/"/>
+    <ePackage href="http://www.emftext.org/java/instantiations#/"/>
+  </importPackages>
+  <importPackages>
+    <ePackage href="http://www.emftext.org/java/references#/"/>
   </importPackages>
 </eMFPatternLanguage:PatternModel>
