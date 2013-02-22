@@ -223,13 +223,22 @@ public interface CalculationPackage extends EPackage {
 	int STRUCTURE__SMELL_MESSAGE = CALCULATION__SMELL_MESSAGE;
 
 	/**
+	 * The feature id for the '<em><b>Pattern</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__PATTERN = CALCULATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Structure</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_FEATURE_COUNT = CALCULATION_FEATURE_COUNT + 0;
+	int STRUCTURE_FEATURE_COUNT = CALCULATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.calculation.impl.MetricImpl <em>Metric</em>}' class.
@@ -415,6 +424,17 @@ public interface CalculationPackage extends EPackage {
 	EClass getStructure();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.calculation.Structure#getPattern <em>Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Pattern</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.Structure#getPattern()
+	 * @see #getStructure()
+	 * @generated
+	 */
+	EReference getStructure_Pattern();
+
+	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.calculation.Metric <em>Metric</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -551,6 +571,14 @@ public interface CalculationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STRUCTURE = eINSTANCE.getStructure();
+
+		/**
+		 * The meta object literal for the '<em><b>Pattern</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRUCTURE__PATTERN = eINSTANCE.getStructure_Pattern();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.calculation.impl.MetricImpl <em>Metric</em>}' class.

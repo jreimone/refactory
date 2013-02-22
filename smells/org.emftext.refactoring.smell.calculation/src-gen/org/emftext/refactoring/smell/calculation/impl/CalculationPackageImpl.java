@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguagePackage;
 import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
@@ -114,6 +115,9 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		CalculationPackageImpl theCalculationPackage = (CalculationPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CalculationPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CalculationPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		PatternLanguagePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theCalculationPackage.createPackageContents();
@@ -234,6 +238,15 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getStructure_Pattern() {
+		return (EReference)structureEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMetric() {
 		return metricEClass;
 	}
@@ -289,6 +302,7 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		createEAttribute(calculationResultEClass, CALCULATION_RESULT__RESULTING_VALUE);
 
 		structureEClass = createEClass(STRUCTURE);
+		createEReference(structureEClass, STRUCTURE__PATTERN);
 
 		metricEClass = createEClass(METRIC);
 
@@ -319,6 +333,9 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		PatternLanguagePackage thePatternLanguagePackage = (PatternLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(PatternLanguagePackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -346,6 +363,11 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		initEAttribute(getCalculationResult_ResultingValue(), ecorePackage.getEFloat(), "resultingValue", null, 1, 1, CalculationResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(structureEClass, Structure.class, "Structure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStructure_Pattern(), thePatternLanguagePackage.getPattern(), null, "pattern", null, 0, 1, Structure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(structureEClass, this.getCalculationResult(), "calculate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEFloat(), "threshold", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(metricEClass, Metric.class, "Metric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -356,6 +378,25 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// de.devboost.emfcustomize.EcoreModelRefactorer
+		createDeAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>de.devboost.emfcustomize.EcoreModelRefactorer</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createDeAnnotations() {
+		String source = "de.devboost.emfcustomize.EcoreModelRefactorer";				
+		addAnnotation
+		  (structureEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //CalculationPackageImpl

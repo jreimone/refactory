@@ -16,19 +16,30 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.viatra2.patternlanguage.EMFPatternLanguageRuntimeModule;
+import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Pattern;
+import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguagePackage;
+import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.EMFPatternLanguagePackage;
 import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.PatternModel;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
+import org.emftext.refactoring.smell.calculation.Structure;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 @SuppressWarnings("restriction")
 public class ModelRegistration {
@@ -109,6 +120,14 @@ public class ModelRegistration {
 						Bundle bundle = Platform.getBundle(element.getContributor().getName());
 //						URL resourceUrl = bundle.getResource(patternResource);
 						URI uri = URI.createPlatformPluginURI(bundle.getSymbolicName() + "/" + patternResource, true);
+						//////////// needed because Guice Injector exceptions are thrown otherwise
+						EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
+						EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
+						EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
+						Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+						IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+						Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
+						///////////////////////////////////////////////////////////////////////////////
 						ResourceSet rs = new ResourceSetImpl();
 						Resource resource = null;
 						try {
@@ -119,7 +138,25 @@ public class ModelRegistration {
 						if(resource != null){
 							EObject model = resource.getContents().get(0);
 							if(model instanceof PatternModel){
-								PatternModel pattern = (PatternModel) model;
+								PatternModel patternModel = (PatternModel) model;
+								String patternName = element.getAttribute(ICalculationExtensionPoint.PATTERN_NAME);
+								Pattern patternToRegister = null;
+								for (Pattern pattern : patternModel.getPatterns()) {
+									if(pattern.getName().equals(patternName)){
+										patternToRegister = pattern;
+										break;
+									}
+								}
+								if(patternToRegister != null){
+									String description = element.getAttribute(ICalculationExtensionPoint.PATTERN_DESCRIPTION);
+									String smellMessage = element.getAttribute(ICalculationExtensionPoint.PATTERN_SMELL_MESSAGE);
+									Structure structureSmell = CalculationFactory.eINSTANCE.createStructure();
+									structureSmell.setName(patternName);
+									structureSmell.setDescription(description);
+									structureSmell.setSmellMessage(smellMessage);
+									structureSmell.setPattern(patternToRegister);
+									calculationModel.getCalculations().add(structureSmell);
+								}
 							}
 						}
 					}
