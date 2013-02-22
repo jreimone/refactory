@@ -18,8 +18,8 @@
       </annotation>
       <complexType>
          <sequence minOccurs="0" maxOccurs="unbounded">
-            <element ref="metricCalculation"/>
-            <element ref="structureCalculation"/>
+            <element ref="metricCalculation" minOccurs="0" maxOccurs="1"/>
+            <element ref="structureCalculation" minOccurs="0" maxOccurs="1"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -65,7 +65,7 @@
 
    <element name="structureCalculation">
       <complexType>
-         <attribute name="pattern" type="string" use="required">
+         <attribute name="patternResource" type="string" use="required">
             <annotation>
                <documentation>
                   Specify the resource that contains the pattern query (IncQuery).
@@ -73,6 +73,27 @@
                <appInfo>
                   <meta.attribute kind="resource"/>
                </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="patternName" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Specify the name of the pattern in the given resource that corresponds to the structural smell and should be queried. The name is reused as the name of the calculation. There must not be more than one pattern in the pattern resource with the same name.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="description" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Describe the pattern here.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="smellMessage" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Specify an error message which should be presented to the user when the given pattern is matched.
+               </documentation>
             </annotation>
          </attribute>
       </complexType>

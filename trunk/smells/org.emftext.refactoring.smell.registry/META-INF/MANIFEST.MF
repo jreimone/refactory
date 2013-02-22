@@ -18,6 +18,7 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.eclipse.ui.workbench,
  org.eclipse.ui.ide,
  org.eclipse.emf.codegen.ecore,
- org.eclipse.viatra2.patternlanguage.emf
+ org.eclipse.viatra2.patternlanguage.emf,
+ org.eclipse.xtext.xbase
 Export-Package: org.emftext.refactoring.smell.registry
 Bundle-ActivationPolicy: lazy
