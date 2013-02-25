@@ -39,10 +39,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Structure" eSuperTypes="#//Calculation">
     <eOperations name="calculate" eType="#//CalculationResult">
       <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
-      <eParameters name="model"/>
+      <eParameters name="model" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="threshold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass ../../org.eclipse.viatra2.patternlanguage.core/src-gen/org/eclipse/viatra2/patternlanguage/core/PatternLanguage.ecore#//Pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Pattern"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Metric" eSuperTypes="#//Calculation"/>
 </ecore:EPackage>

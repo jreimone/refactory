@@ -7,7 +7,7 @@
     editorPluginClass="org.emftext.refactoring.smell.calculation.presentation.CalculationEditorPlugin"
     testsDirectory="/org.emftext.refactoring.smell.calculation.tests/src-gen" testSuiteClass="org.emftext.refactoring.smell.calculation.tests.CalculationAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    usedGenPackages="platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    usedGenPackages="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.genmodel#//patternLanguage platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <foreignModel>calculation.ecore</foreignModel>
   <genPackages prefix="Calculation" basePackage="org.emftext.refactoring.smell" disposableProviderFactory="true"
       ecorePackage="calculation.ecore#/">

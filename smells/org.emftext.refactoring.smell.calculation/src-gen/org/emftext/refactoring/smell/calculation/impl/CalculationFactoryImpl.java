@@ -123,7 +123,7 @@ public class CalculationFactoryImpl extends EFactoryImpl implements CalculationF
 	 * @generated
 	 */
 	public Structure createStructure() {
-		StructureImpl structure = new StructureCustom();
+		StructureImpl structure = new StructureImpl();
 		return structure;
 	}
 

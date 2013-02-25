@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguagePackage;
+import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
 import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
