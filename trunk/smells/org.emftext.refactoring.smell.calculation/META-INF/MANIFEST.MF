@@ -12,6 +12,6 @@ Export-Package: org.emftext.refactoring.smell.calculation,
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.e4.ui.workbench,
- org.eclipse.viatra2.patternlanguage.emf
+ org.eclipse.incquery.patternlanguage.emf;bundle-version="0.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
