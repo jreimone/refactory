@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,https://github.com/ujhelyiz/EMF-IncQuery.git,master,plugins/org.eclipse.incquery.patternlanguage"/>
+<project reference="1.0,https://github.com/ujhelyiz/EMF-IncQuery.git,master,plugins/org.eclipse.incquery.patternlanguage.emf"/>
+<project reference="1.0,https://github.com/ujhelyiz/EMF-IncQuery.git,master,plugins/org.eclipse.incquery.patternlanguage.generator"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1361792675624_10" label="IncQuery" name="IncQuery">
+<item elementID="=org.eclipse.incquery.patternlanguage.emf" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.incquery.patternlanguage" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.incquery.patternlanguage.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+</psf>
