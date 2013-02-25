@@ -84,37 +84,6 @@ public class ModelRegistration {
 						} catch (CoreException e) {
 							System.err.println("No public constructor for class " + element.getAttribute(ICalculationExtensionPoint.CALCULATION_CLASS));
 						}
-						
-						//					IContributor contributor = element.getContributor();
-						//					Bundle bundle = Platform.getBundle(contributor.getName());
-						//					Enumeration<URL> entries = bundle.findEntries("/", "*.genmodel", true);
-						//					while (entries.hasMoreElements()) {
-						//						URL url = (URL) entries.nextElement();
-						//						try {
-						//							InputStream stream = url.openStream();
-						//							URI uri = URI.createURI(url.getFile());
-						//							ResourceSet rs = new ResourceSetImpl();
-						//							Resource resource = rs.createResource(uri);
-						//							resource.load(stream, null);
-						//							GenModel genmodel = (GenModel) resource.getContents().get(0);
-						//							if(genmodel != null){
-						//								GenClass genClass = getGenClassForName(genmodel, element.getAttribute(ICalculationExtensionPoint.CALCULATION_CLASS));
-						//								if(genClass != null){
-						//									EClass eClass = genClass.getEcoreClass();
-						//									Calculation calculation = (Calculation) EcoreUtil.create(eClass);
-						//									if(calculation != null){
-						//										calculation.setName(calculation.getName());
-						//										calculation.setDescription(calculation.getDescription());
-						//										calculation.setMonotonicity(calculation.getMonotonicity());
-						//										calculation.setSmellMessage(calculation.getSmellMessage());
-						//										model.getCalculations().add(calculation);
-						//									}
-						//								}
-						//							}
-						//						} catch (IOException e) {
-						//							e.printStackTrace();
-						//						}
-						//					}
 					} else if(element.getName().equals(ICalculationExtensionPoint.STRUCTURE_CALCULATION)){
 						String patternResource = element.getAttribute(ICalculationExtensionPoint.PATTERN_RESOURCE);
 						Bundle bundle = Platform.getBundle(element.getContributor().getName());

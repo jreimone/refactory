@@ -5,7 +5,7 @@
 -->
 
 <plugin>
-   <extension-point id="calculation" name="Smell Calculation" schema="schema/calculation.exsd"/>
+   <!--<extension-point id="calculation" name="Smell Calculation" schema="schema/calculation.exsd"/>-->
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
