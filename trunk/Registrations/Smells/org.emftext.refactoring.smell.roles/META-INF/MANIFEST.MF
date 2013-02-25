@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RoleModel Smells
+Bundle-SymbolicName: org.emftext.refactoring.smell.roles;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Vendor: www.modelrefactoring.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.emftext.refactoring.smell.calculation,
+ org.emftext.refactoring.smell.registry,
+ org.emftext.language.refactoring.roles
