@@ -2,24 +2,17 @@
 <plugin>
 
    <extension
-         id="dataTransmissionWithoutCompressionOptimised"
-         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
-      <matcher
-            factoryProvider="datatransmissionwithoutcompressionoptimised.DataTransmissionWithoutCompressionOptimisedMatcherFactory$Provider"
-            id="dataTransmissionWithoutCompressionOptimised">
-      </matcher>
-   </extension>
-   <extension
-         id="dataTransmissionWithoutCompression"
-         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
-      <matcher
-            factoryProvider="datatransmissionwithoutcompression.DataTransmissionWithoutCompressionMatcherFactory$Provider"
-            id="dataTransmissionWithoutCompression">
-      </matcher>
+         point="org.emftext.refactoring.smell.registry.calculation">
+      <structureCalculation
+            smellMessage="File is transmitted without compression."
+            description="Searches for data transmission implemented with the Apache HttpClient library and searches for file transmission without compression."
+            patternResource="queries/dataTransmissionWithoutCompressionOptimised.eiq"
+            patternName="dataTransmissionWithoutCompressionOptimised">
+      </structureCalculation>
    </extension>
    <extension
          id="earlyBinding"
-         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
+         point="org.eclipse.incquery.runtime.matcherfactory">
       <matcher
             factoryProvider="earlybinding.EarlyBindingMatcherFactory$Provider"
             id="earlyBinding">
@@ -27,20 +20,27 @@
    </extension>
    <extension
          id="earlyBinding3"
-         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
+         point="org.eclipse.incquery.runtime.matcherfactory">
       <matcher
             factoryProvider="earlybinding3.EarlyBinding3MatcherFactory$Provider"
             id="earlyBinding3">
       </matcher>
    </extension>
    <extension
-         point="org.emftext.refactoring.smell.calculation.calculation">
-      <structureCalculation
-            description="Searches for data transmission implemented with the Apache HttpClient library and searches for file transmission without compression."
-            patternName="dataTransmissionWithoutCompressionOptimised"
-            patternResource="queries/dataTransmissionWithoutCompressionOptimised.eiq"
-            smellMessage="File is transmitted without compression.">
-      </structureCalculation>
+         id="dataTransmissionWithoutCompression"
+         point="org.eclipse.incquery.runtime.matcherfactory">
+      <matcher
+            factoryProvider="datatransmissionwithoutcompression.DataTransmissionWithoutCompressionMatcherFactory$Provider"
+            id="dataTransmissionWithoutCompression">
+      </matcher>
+   </extension>
+   <extension
+         id="dataTransmissionWithoutCompressionOptimised"
+         point="org.eclipse.incquery.runtime.matcherfactory">
+      <matcher
+            factoryProvider="datatransmissionwithoutcompressionoptimised.DataTransmissionWithoutCompressionOptimisedMatcherFactory$Provider"
+            id="dataTransmissionWithoutCompressionOptimised">
+      </matcher>
    </extension>
 
 </plugin>

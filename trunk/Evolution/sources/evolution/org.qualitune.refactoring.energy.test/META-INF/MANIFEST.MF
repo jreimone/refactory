@@ -13,9 +13,9 @@ Export-Package: datatransmissionwithoutcompression,
 Require-Bundle: org.eclipse.pde.core,
  org.eclipse.emf.ecore,
  org.eclipse.emf.transaction,
- org.eclipse.viatra2.emf.incquery.runtime,
  org.eclipse.xtext.xbase.lib,
  org.emftext.language.java,
  org.eclipse.uml2.uml,
- org.emftext.refactoring.smell.calculation
+ org.emftext.refactoring.smell.calculation,
+ org.eclipse.incquery.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
