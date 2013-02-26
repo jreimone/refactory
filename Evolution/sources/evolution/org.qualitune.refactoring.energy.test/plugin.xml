@@ -11,6 +11,22 @@
       </structureCalculation>
    </extension>
    <extension
+         id="dataTransmissionWithoutCompressionOptimised"
+         point="org.eclipse.incquery.runtime.matcherfactory">
+      <matcher
+            factoryProvider="datatransmissionwithoutcompressionoptimised.DataTransmissionWithoutCompressionOptimisedMatcherFactory$Provider"
+            id="dataTransmissionWithoutCompressionOptimised">
+      </matcher>
+   </extension>
+   <extension
+         id="dataTransmissionWithoutCompression"
+         point="org.eclipse.incquery.runtime.matcherfactory">
+      <matcher
+            factoryProvider="datatransmissionwithoutcompression.DataTransmissionWithoutCompressionMatcherFactory$Provider"
+            id="dataTransmissionWithoutCompression">
+      </matcher>
+   </extension>
+   <extension
          id="earlyBinding"
          point="org.eclipse.incquery.runtime.matcherfactory">
       <matcher
@@ -24,22 +40,6 @@
       <matcher
             factoryProvider="earlybinding3.EarlyBinding3MatcherFactory$Provider"
             id="earlyBinding3">
-      </matcher>
-   </extension>
-   <extension
-         id="dataTransmissionWithoutCompression"
-         point="org.eclipse.incquery.runtime.matcherfactory">
-      <matcher
-            factoryProvider="datatransmissionwithoutcompression.DataTransmissionWithoutCompressionMatcherFactory$Provider"
-            id="dataTransmissionWithoutCompression">
-      </matcher>
-   </extension>
-   <extension
-         id="dataTransmissionWithoutCompressionOptimised"
-         point="org.eclipse.incquery.runtime.matcherfactory">
-      <matcher
-            factoryProvider="datatransmissionwithoutcompressionoptimised.DataTransmissionWithoutCompressionOptimisedMatcherFactory$Provider"
-            id="dataTransmissionWithoutCompressionOptimised">
       </matcher>
    </extension>
 
