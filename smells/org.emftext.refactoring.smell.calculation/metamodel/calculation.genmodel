@@ -7,7 +7,7 @@
     editorPluginClass="org.emftext.refactoring.smell.calculation.presentation.CalculationEditorPlugin"
     testsDirectory="/org.emftext.refactoring.smell.calculation.tests/src-gen" testSuiteClass="org.emftext.refactoring.smell.calculation.tests.CalculationAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.genmodel#//patternLanguage platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    usedGenPackages="platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <foreignModel>calculation.ecore</foreignModel>
   <genPackages prefix="Calculation" basePackage="org.emftext.refactoring.smell" disposableProviderFactory="true"
       ecorePackage="calculation.ecore#/">
@@ -40,5 +40,120 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="calculation.ecore#//Metric"/>
+  </genPackages>
+  <genPackages prefix="PatternLanguage" ecorePackage="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CompareFeature">
+      <genEnumLiterals ecoreEnumLiteral="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CompareFeature/equality"/>
+      <genEnumLiterals ecoreEnumLiteral="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CompareFeature/inequality"/>
+    </genEnums>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternModel/packageName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternModel/patterns"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Pattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Pattern/annotations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Pattern/modifiers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Pattern/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Pattern/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Pattern/bodies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Pattern/fileName"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Annotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Annotation/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Annotation/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//AnnotationParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//AnnotationParameter/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//AnnotationParameter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Modifiers">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Modifiers/private"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Variable/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Variable/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Variable/references"/>
+      <genOperations ecoreOperation="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Variable/getSimpleName"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//VariableReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//VariableReference/var"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//VariableReference/variable"/>
+      <genOperations ecoreOperation="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//VariableReference/getVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Type/typename"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternBody">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternBody/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternBody/constraints"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternBody/variables"/>
+      <genOperations ecoreOperation="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternBody/getVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//Constraint"/>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternCall/patternRef"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternCall/transitive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternCall/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionElement/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionElement/tail"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//ValueReference"/>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//LiteralValueReference"/>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//ComputationValue"/>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//AggregatorExpression"/>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//ParameterRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//ParameterRef/referredParam"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//LocalVariable"/>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//EntityType"/>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//RelationType"/>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternCompositionConstraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternCompositionConstraint/negative"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PatternCompositionConstraint/call"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CompareConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CompareConstraint/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CompareConstraint/feature"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CompareConstraint/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CheckConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CheckConstraint/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionConstraint/head"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionHead">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionHead/src"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionHead/dst"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionTail">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionTail/index"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//PathExpressionTail/closure"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//IntValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//IntValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//StringValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//StringValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//BoolValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//BoolValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//DoubleValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//DoubleValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//VariableValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//VariableValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//ListValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//ListValue/values"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//AggregatedValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//AggregatedValue/aggregator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//AggregatedValue/call"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.incquery.patternlanguage/src-gen/org/eclipse/incquery/patternlanguage/PatternLanguage.ecore#//CountAggregator"/>
   </genPackages>
 </genmodel:GenModel>
