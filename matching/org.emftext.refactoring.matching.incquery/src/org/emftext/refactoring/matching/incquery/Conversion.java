@@ -1,29 +1,25 @@
 package org.emftext.refactoring.matching.incquery;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Pattern;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguageFactory;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternModel;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Type;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Variable;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.ClassType;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguageFactory;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
+import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
+import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguageFactory;
+import org.eclipse.incquery.patternlanguage.patternLanguage.Type;
+import org.eclipse.incquery.patternlanguage.patternLanguage.Variable;
 import org.emftext.language.refactoring.roles.Collaboration;
-import org.emftext.language.refactoring.roles.CollaborationModifier;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleImplication;
@@ -55,7 +51,7 @@ public class Conversion {
 			RoleModel rolemodel = (RoleModel) model;
 			
 			//Test
-			PatternModel patternModel = PatternLanguageFactory.eINSTANCE.createPatternModel();
+			PatternModel patternModel = EMFPatternLanguageFactory.eINSTANCE.createPatternModel();
 //			pm.getPatterns().add(..)
 			//EndTest
 			
@@ -68,9 +64,9 @@ public class Conversion {
 			for (Role role : rolemodel.getRoles()){
 				Variable var = PatternLanguageFactory.eINSTANCE.createVariable();
 				var.setName(role.getName());
-				Type t=PatternLanguageFactory.eINSTANCE.createType();
-				t.setTypename("EClass");
-				var.setType(t);
+				ClassType classType = EMFPatternLanguageFactory.eINSTANCE.createClassType();
+				classType.setTypename("EClass");
+				var.setType(classType);
 				pattern.getParameters().add(var);
 			}
 			
@@ -139,8 +135,8 @@ public class Conversion {
 ////							gueryConnection.setMaxLength(-1);
 ////						}
 ////					}
-//					gueryConnection.setMinLength(1); //Minimale Länge 1
-////					gueryConnection.setMaxLength(-1); //Maximale Länge *
+//					gueryConnection.setMinLength(1); //Minimale Lï¿½nge 1
+////					gueryConnection.setMaxLength(-1); //Maximale Lï¿½nge *
 //					gueryConnection.setComputeAll(true); //erst alle Connections berechnen
 //					connections.add(gueryConnection);
 ////					edgeSelection.getConnections().add(gueryConnection);
