@@ -13,8 +13,7 @@ pattern ExtractXWithRefClass(OrigCont: EClass, ContCont: EClass, Extract:EClass,
 }
 
 pattern ExtractXWithRefClass2(OrigCont: EClass, ContCont: EClass, Extract:EClass, NewCont:EClass,
-	MovedRef:EClass, extracts:EReference, source:EReference, target:EReference, referer:EReference,
-	moved:EReference, containerRef:EReference){
+	MovedRef:EClass, containerRef:EReference){
 
 	find containment2(OrigCont, Extract);
 	find containment2(ContCont, OrigCont);
