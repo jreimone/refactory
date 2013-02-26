@@ -1,8 +1,6 @@
 package org.emftext.refactoring.matching.incquery;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,19 +18,20 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.viatra2.patternlanguage.EMFPatternLanguageRuntimeModule;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.ParameterRef;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Pattern;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternBody;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternCall;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternCompositionConstraint;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguageFactory;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Type;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.Variable;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.VariableReference;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.VariableValue;
-import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.EMFPatternLanguagePackage;
-import org.eclipse.viatra2.patternlanguage.eMFPatternLanguage.PatternModel;
+import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageRuntimeModule;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.ClassType;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguageFactory;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
+import org.eclipse.incquery.patternlanguage.patternLanguage.ParameterRef;
+import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
+import org.eclipse.incquery.patternlanguage.patternLanguage.PatternBody;
+import org.eclipse.incquery.patternlanguage.patternLanguage.PatternCall;
+import org.eclipse.incquery.patternlanguage.patternLanguage.PatternCompositionConstraint;
+import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguageFactory;
+import org.eclipse.incquery.patternlanguage.patternLanguage.Variable;
+import org.eclipse.incquery.patternlanguage.patternLanguage.VariableReference;
+import org.eclipse.incquery.patternlanguage.patternLanguage.VariableValue;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -82,9 +81,9 @@ public class CopyOfIncQueryTest {
 		for (String name : NAMES) {
 			Variable variable = factory.createVariable();
 			variable.setName(name);
-			Type type = factory.createType();
-			type.setTypename(EClass.class.getSimpleName());
-			variable.setType(type);
+			ClassType classType = EMFPatternLanguageFactory.eINSTANCE.createClassType();
+			classType.setTypename(EClass.class.getSimpleName());
+			variable.setType(classType);
 			variableNameMap.put(variable.getName(), variable);
 			pattern.getParameters().add(variable);
 		}
@@ -99,9 +98,9 @@ public class CopyOfIncQueryTest {
 				}
 				Variable variable = factory.createVariable();
 				variable.setName(name);
-				Type type = factory.createType();
-				type.setTypename(EReference.class.getSimpleName());
-				variable.setType(type);
+				ClassType classType = EMFPatternLanguageFactory.eINSTANCE.createClassType();
+				classType.setTypename(EReference.class.getSimpleName());
+				variable.setType(classType);
 				pattern.getParameters().add(variable);
 				PatternCall patternCall = factory.createPatternCall();
 				Pattern calledPattern = null;

@@ -4,19 +4,21 @@ package org.emftext.refactoring.matching.incquery;
 //import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-//import java.io.IOException;
 import java.util.ArrayList;
-//import java.util.Collections;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
+import org.eclipse.incquery.patternlanguage.scoping.PatternLanguageResourceDescriptionStrategy;
+import org.emftext.language.refactoring.roles.RolesPackage;
+import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
+import org.junit.Test;
+//import java.io.IOException;
+//import java.util.Collections;
 //import org.eclipse.emf.common.util.EList;
 //import org.eclipse.emf.common.util.URI;
 //import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.PatternLanguagePackage;
-import org.eclipse.viatra2.patternlanguage.core.patternLanguage.util.PatternLanguageAdapterFactory;
-import org.eclipse.viatra2.patternlanguage.core.scoping.PatternLanguageResourceDescriptionStrategy;
 //import org.eclipse.emf.ecore.resource.ResourceSet;
 //import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 //import org.emftext.language.refactoring.roles.Collaboration;
@@ -26,9 +28,6 @@ import org.eclipse.viatra2.patternlanguage.core.scoping.PatternLanguageResourceD
 //import org.emftext.language.refactoring.roles.RoleImplication;
 //import org.emftext.language.refactoring.roles.RoleModel;
 //import org.emftext.language.refactoring.roles.RoleProhibition;
-import org.emftext.language.refactoring.roles.RolesPackage;
-import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
-import org.junit.Test;
 //import org.qualitune.guery.ConnectedBy;
 //import org.qualitune.guery.EdgeSelection;
 //import org.qualitune.guery.GueryFactory;
@@ -139,8 +138,8 @@ public class ConversionTest {
 ////						gueryConnection.setMaxLength(-1);
 ////					}
 ////				}
-//				gueryConnection.setMinLength(1); //Minimale Länge 1
-////				gueryConnection.setMaxLength(-1); //Maximale Länge *
+//				gueryConnection.setMinLength(1); //Minimale Lï¿½nge 1
+////				gueryConnection.setMaxLength(-1); //Maximale Lï¿½nge *
 //				gueryConnection.setComputeAll(true); //erst alle Connections berechnen
 //				edgeSelection.getConnections().add(gueryConnection);
 //			}
