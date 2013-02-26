@@ -123,23 +123,29 @@ public class CalculationsPage extends WizardPage {
 		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		gd_text.horizontalIndent = 5;
 		text.setLayoutData(gd_text);
-
-		comboViewer = new ComboViewer(container, SWT.READ_ONLY);
-		comboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			public void selectionChanged(SelectionChangedEvent event) {
-				ISelection selection = event.getSelection();
-				if(selection instanceof IStructuredSelection){
-					Object firstElement = ((IStructuredSelection) selection).getFirstElement();
-					if(firstElement instanceof QualitySmell){
-						selectedSmell = (QualitySmell) firstElement;
-						concreteSmell.setGenericSmell(selectedSmell);
-						setPageComplete();
+				
+				Label lblSelectGenericSmell = new Label(container, SWT.NONE);
+				lblSelectGenericSmell.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+				lblSelectGenericSmell.setText("Select generic Smell:");
+		
+				comboViewer = new ComboViewer(container, SWT.READ_ONLY);
+				comboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+					public void selectionChanged(SelectionChangedEvent event) {
+						ISelection selection = event.getSelection();
+						if(selection instanceof IStructuredSelection){
+							Object firstElement = ((IStructuredSelection) selection).getFirstElement();
+							if(firstElement instanceof QualitySmell){
+								selectedSmell = (QualitySmell) firstElement;
+								concreteSmell.setGenericSmell(selectedSmell);
+								setPageComplete();
+							}
+						}
 					}
-				}
-			}
-		});
-		Combo combo = comboViewer.getCombo();
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+				});
+				Combo combo = comboViewer.getCombo();
+				GridData gd_combo = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+				gd_combo.horizontalIndent = 5;
+				combo.setLayoutData(gd_combo);
 
 		Label lblWhichQualitiesAre = new Label(container, SWT.WRAP);
 		lblWhichQualitiesAre.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, false, 2, 1));
