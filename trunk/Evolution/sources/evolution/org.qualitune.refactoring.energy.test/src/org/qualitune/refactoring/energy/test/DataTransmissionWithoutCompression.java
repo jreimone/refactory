@@ -23,10 +23,9 @@ import org.apache.http.util.EntityUtils;
  * the ClientMultipartFormPost.java and modified.
  * 
  * @author jreimann
- *
  */
 public class DataTransmissionWithoutCompression {
-
+	
 	public static void main(String[] args) throws Exception {
 		if (args.length != 1)  {
 			System.out.println("File path not given");
