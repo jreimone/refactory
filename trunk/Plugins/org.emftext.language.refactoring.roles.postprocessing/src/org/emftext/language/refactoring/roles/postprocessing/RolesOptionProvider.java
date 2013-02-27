@@ -33,7 +33,7 @@ public class RolesOptionProvider implements IRolestextOptionProvider {
 		postProcessors.add(new RoleModifierAnalyser());
 		postProcessors.add(new RelationModifierAnalyser());
 		postProcessors.add(new DistinctRelationNamesAnalyser());
-		postProcessors.add(new DistinctRoleNamesAnalyser());
+//		postProcessors.add(new DistinctRoleNamesAnalyser());
 		
 		options.put(IRolestextOptions.RESOURCE_POSTPROCESSOR_PROVIDER, postProcessors);
 		return options;
