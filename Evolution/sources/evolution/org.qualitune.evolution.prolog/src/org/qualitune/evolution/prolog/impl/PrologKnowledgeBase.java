@@ -49,7 +49,7 @@ public class PrologKnowledgeBase implements IKnowledgeBase {
 		IPrologRegistry registry = IPrologRegistry.INSTANCE;
 		Prolog engine = registry.getEngine();
 		String query = "implicit(" + PrologUtil.makeStringAtomic(uri.toString()) + "," + VAR_TARGET_ELEMENT + ",_," + VAR_SOURCE_ELEMENT_URI + "," + VAR_TARGET_ELEMENT_URI + ").";
-		System.out.println(query);
+//		System.out.println(query);
 		try {
 			List<SolveInfo> results = solveQuery(engine, query);
 			for (SolveInfo result : PrologUtil.removeDuplicates(results)) {
@@ -58,11 +58,11 @@ public class PrologKnowledgeBase implements IKnowledgeBase {
 					String targetElementUriString = PrologUtil.unescapeCharacters(PrologUtil.removeApostrophe(result.getVarValue(VAR_TARGET_ELEMENT_URI).toString()));
 					String targetElementString = result.getVarValue(VAR_TARGET_ELEMENT).toString();
 					String targetModelQuery = "elementtoresourcemapping(" + targetElementString + ", " + VAR_TARGET_MODEL + ").";
-					System.out.println(targetModelQuery);
+//					System.out.println(targetModelQuery);
 					SolveInfo modelResult = engine.solve(targetModelQuery);
 					String targetModel = modelResult.getVarValue(VAR_TARGET_MODEL).toString();
 					String targetModelUriQuery = "uri(" + targetModel + "," + VAR_TARGET_MODEL_URI + ").";
-					System.out.println(targetModelUriQuery);
+//					System.out.println(targetModelUriQuery);
 					SolveInfo modelUriResult = engine.solve(targetModelUriQuery);
 					String targetModelUriString = PrologUtil.unescapeCharacters(PrologUtil.removeApostrophe(modelUriResult.getVarValue(VAR_TARGET_MODEL_URI).toString()));
 					URI targetModelUri = URI.createURI(targetModelUriString);

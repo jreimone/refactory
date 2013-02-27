@@ -94,7 +94,7 @@ public class PrologGenerator implements IPrologGenerator {
 		} catch (MalformedGoalException e) {
 			e.printStackTrace();
 		}
-		System.out.println(buffer.toString());
+//		System.out.println(buffer.toString());
 		return theory;
 	}
 
