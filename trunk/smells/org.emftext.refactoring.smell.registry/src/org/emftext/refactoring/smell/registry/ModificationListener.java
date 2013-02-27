@@ -20,7 +20,7 @@ public class ModificationListener extends EContentAdapter {
 
 	@Override
 	public void notifyChanged(Notification notification) {
-		super.notifyChanged(notification);
+//		super.notifyChanged(notification);
 		Object notifier = notification.getNotifier();
 		if(notifier instanceof EObject){
 			try {

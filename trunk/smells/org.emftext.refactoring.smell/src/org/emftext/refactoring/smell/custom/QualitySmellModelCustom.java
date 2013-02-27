@@ -17,6 +17,9 @@ public class QualitySmellModelCustom extends QualitySmellModelImpl {
 
 	@Override
 	public EList<ConcreteQualitySmell> getSmellsForMetamodel(EPackage metamodel) {
+		while(metamodel.getESuperPackage() != null){
+			metamodel = metamodel.getESuperPackage();
+		}
 		EList<ConcreteQualitySmell> metamodelSmells = new BasicEList<>();
 		for (ConcreteQualitySmell smell : getConcreteSmells()) {
 			if(smell.getRefactoring().getOwningMappingModel().getTargetMetamodel().equals(metamodel)){

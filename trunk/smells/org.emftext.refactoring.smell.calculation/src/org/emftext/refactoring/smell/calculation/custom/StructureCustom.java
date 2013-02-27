@@ -1,13 +1,11 @@
 package org.emftext.refactoring.smell.calculation.custom;
 
 import java.util.Collection;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
-import org.eclipse.incquery.runtime.api.IMatchProcessor;
 import org.eclipse.incquery.runtime.api.IMatcherFactory;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
@@ -35,21 +33,28 @@ public class StructureCustom extends StructureImpl {
 			IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getOrCreateMatcherFactory(pattern);
 			try {
 				final IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(rs);
-				String[] parameterNames = matcher.getParameterNames();
-				matcher.forEachMatch(new IMatchProcessor<IPatternMatch>() {
-					@Override
-					public void process(IPatternMatch match) {
-						String[] parameterNames2 = match.parameterNames();
-						for (String name : parameterNames2) {
-							Set<Object> values = matcher.getAllValues(name);
-							Object object = match.get(name);
-							System.out.println(match.prettyPrint());
-						}
-						
-					}
-				});
+//				matcher.forEachMatch(new IMatchProcessor<IPatternMatch>() {
+//					@Override
+//					public void process(IPatternMatch match) {
+//						String[] parameterNames2 = match.parameterNames();
+//						for (String name : parameterNames2) {
+//							Object object = match.get(name);
+//							System.out.println(match.prettyPrint());
+//						}
+//					}
+//				});
 				Collection<IPatternMatch> matches = matcher.getAllMatches();
-				
+				for (IPatternMatch match : matches) {
+					String[] parameterNames = match.parameterNames();
+					for (String name : parameterNames) {
+						Object object = match.get(name);
+						if(object instanceof EObject){
+							EObject element = (EObject) object;
+							result.getCausingObjects().add(element);
+						}
+					}
+					result.setResultingValue(result.getResultingValue() + 1);
+				}
 			} catch (IncQueryException e) {
 				e.printStackTrace();
 			}
