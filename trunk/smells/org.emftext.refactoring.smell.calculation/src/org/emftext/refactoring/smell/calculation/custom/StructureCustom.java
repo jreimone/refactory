@@ -33,16 +33,6 @@ public class StructureCustom extends StructureImpl {
 			IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getOrCreateMatcherFactory(pattern);
 			try {
 				final IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(rs);
-//				matcher.forEachMatch(new IMatchProcessor<IPatternMatch>() {
-//					@Override
-//					public void process(IPatternMatch match) {
-//						String[] parameterNames2 = match.parameterNames();
-//						for (String name : parameterNames2) {
-//							Object object = match.get(name);
-//							System.out.println(match.prettyPrint());
-//						}
-//					}
-//				});
 				Collection<IPatternMatch> matches = matcher.getAllMatches();
 				for (IPatternMatch match : matches) {
 					String[] parameterNames = match.parameterNames();
