@@ -143,20 +143,6 @@ public class ModelRegistration {
 		return calculationModel;
 	}
 
-//	private GenClass getGenClassForName(GenModel genmodel, String attribute) {
-//		List<GenPackage> genPackages = genmodel.getGenPackages();
-//		for (GenPackage genPackage : genPackages) {
-//			List<GenClass> genClasses = genPackage.getGenClasses();
-//			for (GenClass genClass : genClasses) {
-//				String qualifiedClassName = genClass.getQualifiedClassName();
-//				String qualifiedInterfaceName = genClass.getQualifiedInterfaceName();
-//				if(qualifiedClassName.equals(attribute) || qualifiedInterfaceName.equals(attribute)){
-//					return genClass;
-//				}
-//			}
-//		}
-//		return null;
-//	}
 
 	private QualitySmellModel registerQualitySmellModel(IEclipseContext context, IWorkspace workspace) {
 		QualitySmellModel smellModel = initQualitySmellModel(workspace);
