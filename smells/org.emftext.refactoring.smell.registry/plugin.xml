@@ -25,5 +25,12 @@
             type="org.eclipse.emf.ecore.diagnostic">
       </super>
    </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="org.emftext.refactoring.smell.registry.SmellResolutionQuickFixer"
+            markerType="org.emftext.refactoring.smell.problem">
+      </markerResolutionGenerator>
+   </extension>
 
 </plugin>

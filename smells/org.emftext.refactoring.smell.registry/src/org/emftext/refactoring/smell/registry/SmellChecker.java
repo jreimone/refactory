@@ -67,7 +67,6 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 	@Override
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		IResource res = delta.getResource();
-		IResourceDelta[] affectedChildren = delta.getAffectedChildren();
 		IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
 		boolean ownMarkersChanged = false;
 		if(markerDeltas.length > 0){
@@ -197,6 +196,7 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
 						marker.setAttribute(IMarker.LINE_NUMBER, 0);
 					}
+					//TODO add quickfix
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}
