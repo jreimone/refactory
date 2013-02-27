@@ -50,12 +50,12 @@ public class ModelRegistration {
 
 	@PostConstruct
 	public void register(IEclipseContext context, IWorkspace workspace, IExtensionRegistry registry) {
-		registerCalculationExtensions(context, registry, workspace);
+		CalculationModel calculationModel = registerCalculationExtensions(context, registry, workspace);
 		QualitySmellModel smellModel = registerQualitySmellModel(context, workspace);
-		workspace.addResourceChangeListener(new SmellChecker(smellModel), IResourceChangeEvent.POST_CHANGE);
+		workspace.addResourceChangeListener(new SmellChecker(smellModel, calculationModel), IResourceChangeEvent.POST_CHANGE);
 	}
 
-	private void registerCalculationExtensions(IEclipseContext context, IExtensionRegistry registry, IWorkspace workspace) {
+	private CalculationModel registerCalculationExtensions(IEclipseContext context, IExtensionRegistry registry, IWorkspace workspace) {
 		CalculationModel calculationModel = initCalculationModel(registry, workspace);
 		context.set(CalculationModel.class, calculationModel);
 		//		this.calculationModel = calculationModel;
@@ -63,6 +63,7 @@ public class ModelRegistration {
 		// OSGi service registration
 		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
 		bundleContext.registerService(CalculationModel.class, calculationModel, null);
+		return calculationModel;
 	}
 
 	private CalculationModel initCalculationModel(IExtensionRegistry registry, IWorkspace workspace) {

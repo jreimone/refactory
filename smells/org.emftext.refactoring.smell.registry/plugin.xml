@@ -11,5 +11,19 @@
             uri="fragment.e4xmi">
       </fragment>
    </extension>
+   <extension
+         id="org.emftext.refactoring.smell.problem"
+         name="Quality Smell"
+         point="org.eclipse.core.resources.markers">
+      <persistent
+            value="true">
+      </persistent>
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <super
+            type="org.eclipse.emf.ecore.diagnostic">
+      </super>
+   </extension>
 
 </plugin>

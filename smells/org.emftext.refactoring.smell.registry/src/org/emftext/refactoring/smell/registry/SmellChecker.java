@@ -3,18 +3,25 @@ package org.emftext.refactoring.smell.registry;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -29,22 +36,29 @@ import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.QualityCalculation;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.calculation.Calculation;
+import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
 
 public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisitor {
 
 	private QualitySmellModel smellModel;
+	private CalculationModel calculationModel;
 
-	public SmellChecker(QualitySmellModel smellModel) {
+	public SmellChecker(QualitySmellModel smellModel, CalculationModel calculationModel) {
 		this.smellModel = smellModel;
+		this.calculationModel = calculationModel;
 	}
 
 	@Override
 	public void resourceChanged(IResourceChangeEvent event) {
 		// only registered for IResourceChangeEvent.POST_CHANGE events
+		//		if (event.getType() == IResourceChangeEvent.POST_CHANGE && getChangedResource(delta).getMarkerDeltas().length <= 0){
 		try {
-			event.getDelta().accept(this);
+			IResourceDelta delta = event.getDelta();
+			if(delta.getAffectedChildren() != null && delta.getAffectedChildren().length > 0 && delta.getMarkerDeltas().length == 0){
+				delta.accept(this);
+			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -53,20 +67,29 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 	@Override
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		IResource res = delta.getResource();
+		IResourceDelta[] affectedChildren = delta.getAffectedChildren();
+		IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
+		boolean ownMarkersChanged = false;
+		if(markerDeltas.length > 0){
+			for (IMarkerDelta markerDelta : markerDeltas) {
+				if(markerDelta.getType().equals(IQualitySmellMarker.ID)){
+					ownMarkersChanged = true;
+					break;
+				}
+			}
+		}
 		IFile file = (IFile) res.getAdapter(IFile.class);
-		switch (delta.getKind()) {
-		case IResourceDelta.ADDED:
-			if(file != null){
+		if(file != null && !ownMarkersChanged){
+			switch (delta.getKind()) {
+			case IResourceDelta.ADDED:
 				checkSmellsInFile(file);
-			}
-			break;
-		case IResourceDelta.REMOVED:
-			break;
-		case IResourceDelta.CHANGED:
-			if(file != null){
+				break;
+			case IResourceDelta.CHANGED:
 				checkSmellsInFile(file);
+				break;
+			case IResourceDelta.REMOVED:
+				break;
 			}
-			break;
 		}
 		return true; // visit the children
 	}
@@ -102,7 +125,13 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 					List<QualityCalculation> qualityCalculations = qualitySmell.getQualityCalculations();
 					for (QualityCalculation qualityCalculation : qualityCalculations) {
 						Calculation calculation = qualityCalculation.getCalculation();
-						if(calculation != null){
+						if(calculation.eIsProxy()){
+							EcoreUtil.resolveAll(calculation);
+							ResourceSet resourceSet = calculationModel.eResource().getResourceSet();
+							calculation = (Calculation) EcoreUtil.resolve(calculation, resourceSet);
+							calculation = (Calculation) EcoreUtil.resolve(calculation, calculationModel.eResource());
+						}
+						if(calculation != null && !calculation.eIsProxy()){
 							float threshold = qualityCalculation.getThreshold();
 							// TODO distinguish between Metric and Structure
 							CalculationResult result = calculation.calculate(model, threshold);
@@ -113,14 +142,14 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 								// je größer der wert desto schlechter die qualität 
 								// --> smell trifft zu wenn result >= threshold
 								if(resultingValue >= threshold){
-									addSmellAndQuickFix(file, model, result, roleMapping);
+									addSmellAndQuickFix(file, model, calculation, result, roleMapping);
 								}
 								break;
 							case INCREASING: 
 								// je größer der wert desto besser die qualität
 								// --> smell trifft zu wenn result <= threshold
 								if(resultingValue <= threshold){
-									addSmellAndQuickFix(file, model, result, roleMapping);
+									addSmellAndQuickFix(file, model, calculation, result, roleMapping);
 								}
 								break;
 							}
@@ -134,20 +163,48 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 	private IEditorPart getEditorPartForFile(IFile file) {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		if(activePage != null){
-			try {
-				IEditorPart editor = IDE.openEditor(activePage, file);
-				return editor;
-			} catch (PartInitException e) {
-				e.printStackTrace();
+		if(activeWorkbenchWindow != null){
+			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+			if(activePage != null){
+				try {
+					IEditorPart editor = IDE.openEditor(activePage, file);
+					return editor;
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return null;
 	}
 
-	private void addSmellAndQuickFix(IFile file, EObject model, CalculationResult result, RoleMapping roleMapping) {
-		
+	private void addSmellAndQuickFix(final IFile file, EObject model, final Calculation calculation, final CalculationResult result, RoleMapping roleMapping) {
+		WorkspaceJob job = new WorkspaceJob("Creating markers for bad smells") {
+
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				try {
+					IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
+					for (IMarker marker : markers) {
+						marker.delete();
+					}
+					String smellMessage = calculation.getSmellMessage();
+					List<EObject> causingObjects = result.getCausingObjects();
+					for (EObject element : causingObjects) {
+						IMarker marker = file.createMarker(IQualitySmellMarker.ID);
+						marker.setAttribute(IMarker.LOCATION, EcoreUtil.getURI(element).toString());
+						marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+						marker.setAttribute(IMarker.MESSAGE, smellMessage);
+						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
+						marker.setAttribute(IMarker.LINE_NUMBER, 0);
+					}
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
+		System.out.println("marker created");
 	}
 }
 
