@@ -15,6 +15,7 @@ import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.SmellPackage;
 import org.emftext.refactoring.smell.custom.QualitySmellModelCustom;
+import org.emftext.refactoring.smell.custom.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -106,7 +107,7 @@ public class SmellFactoryImpl extends EFactoryImpl implements SmellFactory {
 	 * @generated
 	 */
 	public ConcreteQualitySmell createConcreteQualitySmell() {
-		ConcreteQualitySmellImpl concreteQualitySmell = new ConcreteQualitySmellImpl();
+		ConcreteQualitySmellImpl concreteQualitySmell = new ConcreteQualitySmellCustom();
 		return concreteQualitySmell;
 	}
 

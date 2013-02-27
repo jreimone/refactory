@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.emftext.refactoring.smell.SmellPackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class ModificationListener extends EContentAdapter {
 
@@ -23,17 +24,34 @@ public class ModificationListener extends EContentAdapter {
 		Object notifier = notification.getNotifier();
 		if(notifier instanceof EObject){
 			try {
-				Object feature = notification.getFeature();
+//				Object feature = notification.getFeature();
 				if(resource != null){
-					if(feature != null && !feature.equals(SmellPackage.Literals.QUALITY__CALCULATIONS)){
-						resource.save(Collections.EMPTY_MAP);
+//					if(feature != null && !feature.equals(SmellPackage.Literals.QUALITY__CALCULATIONS)){
+//						resource.save(Collections.EMPTY_MAP);
+//					}
+//					if(feature == null){
+//						resource.save(Collections.EMPTY_MAP);
+//					}
+					EObject model = EcoreUtil.getRootContainer((EObject) notifier);
+					if(model == null){
+						model = (EObject) notifier;
 					}
-					if(feature == null){
+					boolean allElementsHaveContainers = true;
+					TreeIterator<EObject> iterator = model.eAllContents();
+					while (iterator.hasNext()) {
+						EObject element = (EObject) iterator.next();
+						if(element.eContainer() == null){
+							allElementsHaveContainers = false;
+						} else if(element.eContainer().eResource() == null){
+							allElementsHaveContainers = false;
+						}
+					}
+					if(allElementsHaveContainers){
 						resource.save(Collections.EMPTY_MAP);
 					}
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		} else {
 			System.err.println("Notifier is not an EObject: " + notifier);

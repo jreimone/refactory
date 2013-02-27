@@ -133,7 +133,17 @@ IWorkbenchPreferencePage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				ISelection selection = tableViewerMetamodels.getSelection();
-				if(selection != null){
+				ISelection selection2 = tableViewerSmells.getSelection();
+				if(selection2 != null && !selection2.isEmpty()){
+					if(selection2 instanceof StructuredSelection){
+						List<?> selectedElements = ((StructuredSelection) selection2).toList();
+						for (Object object : selectedElements) {
+							if(object instanceof ConcreteQualitySmell){
+								smellModel.getConcreteSmells().remove((ConcreteQualitySmell) object);
+							}
+						}
+					}
+				} else if(selection != null && !selection.isEmpty()){
 					if(selection instanceof StructuredSelection){
 						List<?> selectedElements = ((StructuredSelection) selection).toList();
 						for (Object object : selectedElements) {
