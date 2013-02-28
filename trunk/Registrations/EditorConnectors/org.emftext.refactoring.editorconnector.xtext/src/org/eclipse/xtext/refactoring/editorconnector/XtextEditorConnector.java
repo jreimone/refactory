@@ -20,6 +20,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
 
@@ -183,6 +186,25 @@ public class XtextEditorConnector implements IEditorConnector {
 			return null;
 		}
 		return resource.getContents().get(0);
+	}
+
+	@Override
+	public void setMarkingForEObject(EObject element, IMarker marker) {
+		if(locationInFileProvider != null){
+			ITextRegion textRegion = locationInFileProvider.getFullTextRegion(element);
+			int start = textRegion.getOffset();
+			int end = start + textRegion.getLength();
+			if(textRegion instanceof ITextRegionWithLineInformation){
+				int lineNumber = ((ITextRegionWithLineInformation) textRegion).getLineNumber();
+				try {
+					marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
+					marker.setAttribute(IMarker.CHAR_START, start);
+					marker.setAttribute(IMarker.CHAR_END, end);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }

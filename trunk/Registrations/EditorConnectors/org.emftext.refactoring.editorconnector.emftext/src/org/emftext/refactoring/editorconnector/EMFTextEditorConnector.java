@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
@@ -126,6 +128,23 @@ public class EMFTextEditorConnector implements IEditorConnector {
 		IResource emftextResource = emftextEditor.getResource();
 		EObject model = emftextResource.getContents().get(0);
 		return model;
+	}
+
+	@Override
+	public void setMarkingForEObject(EObject element, IMarker marker) {
+		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
+		IResource emftextResource = emftextEditor.getResource();
+		ILocationMap locationMap = emftextResource.getLocationMap();
+		int start = locationMap.getCharStart(element);
+		int end = locationMap.getCharEnd(element);
+		int line = locationMap.getLine(element);
+		try {
+			marker.setAttribute(IMarker.LINE_NUMBER, line);
+			marker.setAttribute(IMarker.CHAR_START, start);
+			marker.setAttribute(IMarker.CHAR_END, end);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
