@@ -17,6 +17,7 @@ package org.emftext.refactoring.editorconnector;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.viewers.ISelection;
@@ -75,4 +76,19 @@ public interface IEditorConnector {
 	 * @return
 	 */
 	public EObject getModel();
+	
+	/**
+	 * Each editor has its own mechanisms for visualising the marker line. Use this method
+	 * to highlight the given <code>element</code> in the editor and set the appropriate
+	 * values in the given <code>marker</code>.<br><br>
+	 * An appropriate value might be, e.g.:<br><br>
+	 * <code>
+	 * marker.setAttribute(IMarker.CHAR_START, 3);<br>
+	 * marker.setAttribute(IMarker.CHAR_END, 10);
+	 * </code><br><br>
+	 * This would indicate that the given <code>element</code> resides from offset 3 to 10.
+	 * @param element
+	 * @param marker
+	 */
+	public void setMarkingForEObject(EObject element, IMarker marker);
 }

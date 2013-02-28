@@ -18,6 +18,7 @@ package org.eclipse.gmf.refactoring.editorconnector;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -100,6 +101,11 @@ public class GMFEditorConnector implements IEditorConnector {
 	@Override
 	public EObject getModel() {
 		return model;
+	}
+
+	@Override
+	public void setMarkingForEObject(EObject element, IMarker marker) {
+		//TODO jreimann: implement setting marker in GMF editor
 	}
 
 }
