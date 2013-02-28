@@ -24,6 +24,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.text.ITextSelection;
@@ -135,16 +137,24 @@ public class EMFTextEditorConnector implements IEditorConnector {
 		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
 		ILocationMap locationMap = emftextResource.getLocationMap();
+		if(element.eIsProxy()){
+			ResourceSet resourceSet = emftextResource.getResourceSet();
+			InternalEObject internal = (InternalEObject) element;
+			element = EcoreUtil.resolve(element, resourceSet);
+		}
 		int start = locationMap.getCharStart(element);
 		int end = locationMap.getCharEnd(element);
 		int line = locationMap.getLine(element);
-		try {
-			marker.setAttribute(IMarker.LINE_NUMBER, line);
-			marker.setAttribute(IMarker.CHAR_START, start);
-			marker.setAttribute(IMarker.CHAR_END, end);
-		} catch (CoreException e) {
-			e.printStackTrace();
+		if(start != -1 && end != -1 && line != -1){
+			try {
+				marker.setAttribute(IMarker.LINE_NUMBER, line);
+				marker.setAttribute(IMarker.CHAR_START, start);
+				marker.setAttribute(IMarker.CHAR_END, end);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
 		}
+			
 	}
 
 }
