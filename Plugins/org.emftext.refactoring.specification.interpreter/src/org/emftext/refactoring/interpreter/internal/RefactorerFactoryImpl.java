@@ -35,6 +35,9 @@ public class RefactorerFactoryImpl implements RefactorerFactory {
 	 * @see org.emftext.refactoring.interpreter.RefactoringInterpreterFactory#getRefactoringInterpreter(org.eclipse.emf.common.util.URI)
 	 */
 	public IRefactorer getRefactorer(Resource resource, RoleMapping roleMapping) {
+		if(resource == null || roleMapping == null){
+			return null;
+		}
 		IRefactorer refactorer = new Refactorer(resource, roleMapping);
 		RegistryUtil.log("created Refactorer for " + resource, IStatus.INFO);
 		return refactorer;
