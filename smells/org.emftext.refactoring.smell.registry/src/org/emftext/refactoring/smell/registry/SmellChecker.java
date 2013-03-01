@@ -132,7 +132,6 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 						}
 						if(calculation != null && !calculation.eIsProxy()){
 							float threshold = qualityCalculation.getThreshold();
-							// TODO distinguish between Metric and Structure
 							CalculationResult result = calculation.calculate(model, threshold);
 							float resultingValue = result.getResultingValue();
 							Monotonicity monotonicity = calculation.getMonotonicity();
@@ -141,14 +140,14 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 								// je größer der wert desto schlechter die qualität 
 								// --> smell trifft zu wenn result >= threshold
 								if(resultingValue >= threshold){
-									addSmellAndQuickFix(file, model, calculation, result, roleMapping);
+									addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
 								}
 								break;
 							case INCREASING: 
 								// je größer der wert desto besser die qualität
 								// --> smell trifft zu wenn result <= threshold
 								if(resultingValue <= threshold){
-									addSmellAndQuickFix(file, model, calculation, result, roleMapping);
+									addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
 								}
 								break;
 							}
@@ -176,16 +175,16 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 		return null;
 	}
 
-	private void addSmellAndQuickFix(final IFile file, EObject model, final Calculation calculation, final CalculationResult result, RoleMapping roleMapping) {
+	protected void addSmellAndQuickFix(final IFile file, final EObject model, final Calculation calculation, final CalculationResult result, final RoleMapping roleMapping, final IEditorConnector editorConnector) {
 		WorkspaceJob job = new WorkspaceJob("Creating markers for bad smells") {
 
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				try {
-					IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
-					for (IMarker marker : markers) {
-						marker.delete();
-					}
+//					IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
+//					for (IMarker marker : markers) {
+//						marker.delete();
+//					}
 					String smellMessage = calculation.getSmellMessage();
 					List<EObject> causingObjects = result.getCausingObjects();
 					for (EObject element : causingObjects) {
@@ -195,8 +194,13 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 						marker.setAttribute(IMarker.MESSAGE, smellMessage);
 						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
 						marker.setAttribute(IMarker.LINE_NUMBER, 0);
+						if(editorConnector != null){
+							editorConnector.setMarkingForEObject(element, marker);
+						}
+						marker.setAttribute(IQualitySmellMarker.ROLEMAPPING, EcoreUtil.getURI(roleMapping).toString());
+						//TODO jreimann: determine different registered editors and select the most appropriate one.
+						//TODO jreimann: set marker.setAttribute(IQualitySmellMarker.EDITOR_ID, editorID); 
 					}
-					//TODO add quickfix
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}
