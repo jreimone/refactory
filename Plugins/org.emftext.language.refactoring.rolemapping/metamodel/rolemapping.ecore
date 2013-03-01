@@ -45,6 +45,7 @@
         upperBound="-1" eType="#//ConcreteMapping" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningMappingModel" lowerBound="1"
         eType="#//RoleMappingModel" eOpposite="#//RoleMappingModel/mappings"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConcreteMapping">
     <eOperations name="getCollaborationMappingForTargetRole" lowerBound="1" eType="#//CollaborationMapping">

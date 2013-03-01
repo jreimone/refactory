@@ -61,6 +61,10 @@
         <element xmi:type="ecore:EAttribute" href="rolemapping.ecore#//RoleMapping/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_fgrk0RcGEd-v66FqVrAtPg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_1DPkgIJjEeKQXazKkZNLrA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="rolemapping.ecore#//RoleMapping/comment"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1DPkgYJjEeKQXazKkZNLrA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Y4UJshcGEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Y4UJsxcGEd-v66FqVrAtPg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Y4UJtBcGEd-v66FqVrAtPg"/>
@@ -310,7 +314,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_FiiAwRcGEd-v66FqVrAtPg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_FiiAwhcGEd-v66FqVrAtPg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="rolemapping.ecore#//RoleMapping/mappedRoleModel"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_FiiAwxcGEd-v66FqVrAtPg" points="[0, -69, 178, -29]$[0, -94, 178, -54]$[-178, -94, 0, -54]$[-178, -69, 0, -29]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_FiiAwxcGEd-v66FqVrAtPg" points="[0, -80, 178, -29]$[0, -102, 178, -51]$[-178, -102, 0, -51]$[-178, -80, 0, -29]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_1z7kcBcGEd-v66FqVrAtPg" id="(0.1391304347826087,0.6470588235294118)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_cn9rQBcGEd-v66FqVrAtPg" type="3002" source="_k4GnYBcEEd-v66FqVrAtPg" target="_Y4GHQBcGEd-v66FqVrAtPg">

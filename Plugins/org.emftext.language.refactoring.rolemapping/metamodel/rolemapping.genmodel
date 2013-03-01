@@ -19,6 +19,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMapping/mappedRoleModel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMapping/roleToMetaelement"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference rolemapping.ecore#//RoleMapping/owningMappingModel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rolemapping.ecore#//RoleMapping/comment"/>
       <genOperations ecoreOperation="rolemapping.ecore#//RoleMapping/getAllMappedRoles"/>
       <genOperations ecoreOperation="rolemapping.ecore#//RoleMapping/getMappedRolesForEObject">
         <genParameters ecoreParameter="rolemapping.ecore#//RoleMapping/getMappedRolesForEObject/object"/>
