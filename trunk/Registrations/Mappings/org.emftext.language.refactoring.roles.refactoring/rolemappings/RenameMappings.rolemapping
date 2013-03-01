@@ -1,5 +1,7 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/roles> 
 
-RenameRoleModelElement maps <RenameX> { 
-	 Nameable := NamedElement(name -> name); 
+/* Renames the given role.
+*/
+"Rename Role" maps <RenameX> { 
+	 Nameable := Role(name -> name); 
 }	
