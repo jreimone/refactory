@@ -20,6 +20,10 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.eclipse.emf.codegen.ecore,
  org.eclipse.xtext.xbase,
  org.eclipse.incquery.patternlanguage.emf,
- org.eclipse.swt
+ org.eclipse.swt,
+ org.emftext.refactoring.specification.interpreter,
+ org.emftext.refactoring.registry.rolemapping,
+ org.eclipse.jface,
+ org.apache.commons.lang
 Export-Package: org.emftext.refactoring.smell.registry
 Bundle-ActivationPolicy: lazy
