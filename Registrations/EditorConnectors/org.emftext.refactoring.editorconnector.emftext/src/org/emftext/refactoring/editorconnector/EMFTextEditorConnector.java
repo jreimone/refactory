@@ -24,7 +24,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -139,7 +138,6 @@ public class EMFTextEditorConnector implements IEditorConnector {
 		ILocationMap locationMap = emftextResource.getLocationMap();
 		if(element.eIsProxy()){
 			ResourceSet resourceSet = emftextResource.getResourceSet();
-			InternalEObject internal = (InternalEObject) element;
 			element = EcoreUtil.resolve(element, resourceSet);
 		}
 		int start = locationMap.getCharStart(element);
