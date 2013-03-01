@@ -51,7 +51,8 @@ RULES {
 	RoleMappingModel::= "ROLEMODELMAPPING" #1 "FOR" #1 targetMetamodel['<','>'] 
 				(!0 "IMPORTS" (imports['<','>']+))? !0 !0 mappings+;
 	
-	RoleMapping ::= (name['"','"'] | name[IDENT]) #1 "maps" #1 mappedRoleModel['<','>'] #1 "{" !1 
+	RoleMapping ::= (comment[ML_COMMENT])?
+					(name['"','"'] | name[IDENT]) #1 "maps" #1 mappedRoleModel['<','>'] #1 "{" !1 
 					roleToMetaelement+ !0 !0  
 					"}" !0 !0 ;
 	
