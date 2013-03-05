@@ -1,0 +1,105 @@
+module vapodi_base_stub;
+create VAPODI_TRACE : VAPODI_TRACE_METAMODEL from alibi:alibi;
+
+rule assert (condition : Boolean, msg : String) {
+	do {
+		if (not condition) {
+			'VAPODI RUNTIME ERROR'.println();
+			'An assertion failed with message:'.println();
+			msg.println();
+			if (thisModule.fail_softly)
+				'(runtime should likely be terminated, but ATL doesn\'t have respective facilities)'.println();
+			else {
+				'(terminating ATL program the rude way as ATL doesn\'t offer respective facilities)'.println();
+				('This is intentionally breaking the program, set fail_softly=true in VAPODI config' + 
+				' for different handling').yes_indeed();
+			}
+		}
+	}
+}
+
+rule CFS_print() {
+	using {
+		entry : Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) = Sequence {};
+		p : Persons!Male = 0;
+		empty : Boolean = true;
+	}
+	do {
+		for (entry in thisModule.CFS ) {
+			for (p in entry) {
+				p.object.fullName.println();
+			}
+			empty <- false;
+		}
+		if (empty)
+			'(empty)'.println();
+	}
+}
+
+rule ST_print_prim_variables() {
+	using {
+		name : String = '';
+		seq_for_this_name : Sequence ( Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = 0;
+		cfs_seq : Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) = 0;
+		empty : Boolean = true;
+		seq_for_this_name_empty : Boolean = true;	
+		cfs_empty : Boolean = true;
+		lineAssembly : String = '';
+	}
+	do {
+		for (name in thisModule.ST_prim_variables.getKeys()) {
+			seq_for_this_name <- thisModule.ST_prim_variables.get(name);
+			seq_for_this_name_empty <- true;
+			for (cfs_seq in seq_for_this_name) {
+				lineAssembly <- name + ':';
+				cfs_empty <- true;
+				for (cfs_entry in cfs_seq) {
+					lineAssembly <- lineAssembly + ' ' + cfs_entry.object.fullName;
+					cfs_empty <- false;
+				}
+				if (cfs_empty)
+					lineAssembly <- lineAssembly + ' (empty CFS)';
+				lineAssembly.println();
+				seq_for_this_name_empty <- false;
+			}
+			if (seq_for_this_name_empty)
+				(name + ': (no entries for this symbol)').println();
+			empty <- false;
+		}
+		if (empty)
+			'(empty)'.println();
+	}
+}
+
+rule ST_model_variables_print() {
+	using {
+		attributeMap : Map ( String, Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity )) = Map {};
+		attributeName : String = '';
+		empty : Boolean = true;
+	}
+	do {
+		for (variable in thisModule.ST_model_variables.getKeys() ) {
+			variable.fullName.println();
+			for (attributeMap in thisModule.ST_model_variables.get(variable)) {
+				attributeMap.eClass().getName().toString().println();
+				for (attributeName in attributeMap.getKeys()) {
+					attributeName.println();
+					attributeName + attributeMap.get(attributeName).println();
+				}
+			}
+			empty <- false;
+		}
+		if (empty) {
+			'(empty)'.println();
+		}
+	}	
+}
+
+rule reset_datastructures() {
+	do {
+		thisModule.CFS <- Sequence {};
+		thisModule.ST_prim_variables <- Map {};
+		thisModule.ST_model_variables <- Map {};
+		thisModule.ST_model_attribute_variables <- Map {};
+	}
+}
