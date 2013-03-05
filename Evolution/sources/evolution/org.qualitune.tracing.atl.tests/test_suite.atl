@@ -1,0 +1,660 @@
+--- WARNING: THIS FILE IS GENERATED - do not alter, as your changes will likely get overwritten
+module VapodiTestRunner;
+create OUT : Persons, VAPODI_TRACE : VAPODI_TRACE_METAMODEL from IN : Families;
+
+-- starting part copied from ../org.qualitune.tracing/atl_lib/vapodi_base_stub.atl
+
+
+-- separate identifiers for MM and IM, but neither MM name nor IM name can be used more than once
+
+-- currently not used
+helper context VAPODI_TRACE_METAMODEL!DynamicEntity def: equals (other : VAPODI_TRACE_METAMODEL!DynamicEntity) : Boolean = 
+	(self.concern = other.concern and
+	self.object = other.object and
+	self.attributeName = other.attributeName);
+
+-- config option: if an assertion fails, kill ATL program rudely (true), or just give error message to stdout (false)?  
+helper def : fail_softly : Boolean = true;
+
+--- TRACES THEMSELVES - begin ---
+
+helper def: trace_collection : VAPODI_TRACE_METAMODEL!TraceCollection = VAPODI_TRACE_METAMODEL!TraceCollection.newInstance();
+
+rule add_trace_link_internal(target : VAPODI_TRACE_METAMODEL!DynamicEntity) {
+	using {
+		aDependency : VAPODI_TRACE_METAMODEL!DynamicEntity = VAPODI_TRACE_METAMODEL!DynamicEntity.newInstance();
+		aDependencyCopy : VAPODI_TRACE_METAMODEL!DynamicEntity = VAPODI_TRACE_METAMODEL!DynamicEntity.newInstance();
+		dependencies : Sequence (VAPODI_TRACE_METAMODEL!DynamicEntity) = Sequence {};
+	}
+	to
+		link : VAPODI_TRACE_METAMODEL!DynamicEntity		
+	do {
+		link.destination <- target;
+		
+		-- make a real copy
+		for (aDependency in thisModule.CFS.flatten()) {
+			aDependencyCopy = VAPODI_TRACE_METAMODEL!DynamicEntity.newInstance();
+			aDependencyCopy.attributeName <- aDependency.attributeName;
+			aDependencyCopy.concern <- aDependency.concern;
+			aDependencyCopy.semantics <- aDependency.semantics;
+			aDependencyCopy.universe <- aDependency.universe;
+			aDependencyCopy.object <- aDependency.object;
+			
+			dependencies <- dependencies.including(aDependencyCopy);
+		}
+		
+		link.source <- dependencies;
+		
+		thisModule.trace_collection <- thisModule.trace_collection.including(link);
+	}
+}
+
+rule add_trace_link_to_model_variable (target_object : ecore!EObject, semantics : VAPODI_TRACE_METAMODEL!TraceType, universe : VAPODI_TRACE_METAMODEL!UniverseType) {
+	to
+		target : VAPODI_TRACE_METAMODEL!DynamicEntity (
+			concern <- #OBJECT,
+			semantics <- semantics,
+			universe <- universe
+		)
+	do {
+		target.object <- target_object;
+		thisModule.add_trace_link_internal(target);
+	}
+}
+
+rule add_trace_link_to_model_attribute_variable (target_object : ecore!EObject, attribute : String, semantics : VAPODI_TRACE_METAMODEL!TraceType, universe : VAPODI_TRACE_METAMODEL!UniverseType) {
+	to
+		target : VAPODI_TRACE_METAMODEL!DynamicEntity (
+			concern <- #ATTRIBUTE,
+			semantics <- semantics,
+			universe <- universe,
+			attributeName <- attribute
+		)
+	do {
+		target.object <- target_object;
+		thisModule.add_trace_link_internal(target);
+	}
+}
+	
+--- TRACES THEMSELVES - end ---
+
+
+--- CONTROL FLOW STACK - begin ---
+
+helper def: CFS : Sequence ( Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = Sequence {};
+		
+-- prevent stealing? currently neither prevented nor happening (seems so, at least).
+helper def : cfs_flat_copy () : Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) = thisModule.CFS.flatten();
+
+--- CONTROL FLOW STACK - end ---
+
+
+--- PRIMITIVE VARIABLES - begin ---
+
+helper def : ST_prim_variables : Map (String, -- name of variable
+		Sequence ( -- account for shadowed names 
+				  Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity )
+		)
+	) = Map {};
+
+rule ST_put_prim_variable(variable_name : String) {
+	using {
+		seq_for_this_name : Sequence ( Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = 0;
+	}
+	do {
+		seq_for_this_name <- thisModule.ST_prim_variables.get(variable_name);
+		
+		if (seq_for_this_name.oclIsUndefined()) {
+			seq_for_this_name <- Sequence {};
+		}
+		seq_for_this_name <- seq_for_this_name.including(thisModule.cfs_flat_copy());
+		thisModule.ST_prim_variables <- thisModule.ST_prim_variables.including(variable_name, seq_for_this_name);
+	}
+}
+
+rule ST_drop_prim_variable(variable_name : String) {
+	using {
+		seq_for_this_name : Sequence ( Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = 0;
+	}
+	do {
+		seq_for_this_name <- thisModule.ST_prim_variables.get(variable_name);
+		
+		thisModule.assert(not seq_for_this_name.oclIsUndefined(),'Can\'t drop ST_prim_variables entry for variable "' + variable_name + '"');
+
+		seq_for_this_name <- seq_for_this_name.subSequence(1, seq_for_this_name.size()-1);
+		
+		thisModule.ST_prim_variables <- thisModule.ST_prim_variables.including(variable_name, seq_for_this_name);
+	}
+}
+
+rule ST_push_deps_of_prim_variable(variable_name : String) {
+	using {
+		seq_for_this_name : Sequence ( Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = 0;
+	}
+	do {
+		seq_for_this_name <- thisModule.ST_prim_variables.get(variable_name);
+		
+		thisModule.assert(not seq_for_this_name.oclIsUndefined(),'Can\'t find ST_prim_variables entry for variable "' + variable_name + '"');
+		
+		thisModule.CFS_push_seq(seq_for_this_name.last());
+	}
+}
+
+
+--- PRIMITIVE VARIABLES - end ---
+
+
+--- MODEL ATTRIBUTE VARIABLES - begin ---
+
+helper def : ST_model_attribute_variables : Map (ecore!EObject, -- all together: object -> attribute -> seq. of deps
+		Map (String, Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) )
+	) = Map {};
+
+rule ST_put_model_attribute_variable(variable : ecore!EObject, attribute : String) {
+	using {
+		attributeMap : Map (String, Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = Map {};
+	}
+	do {
+		-- identify or if not present create entry for variable object
+		attributeMap <- thisModule.ST_model_attribute_variables.get(variable);
+		
+		if (attributeMap.oclIsUndefined()) {
+			attributeMap <- Map {};
+			thisModule.ST_model_attribute_variables <- thisModule.ST_model_attribute_variables.including(attributeMap);
+		}
+		-- do we have to identify 
+		-- attributeEntry <- attributeMap.get(attribute);
+		-- No, the entry is clobbered if present or newly created if not - we don't have to care for this
+		
+		attributeMap <- attributeMap.including(attribute, thisModule.cfs_flat_copy());
+	}
+}
+
+-- to be called from ST_drop_model_variables
+rule ST_drop_model_attribute_variables(variable_to_drop : ecore!EObject) {
+using {
+		deps_of_model_var : Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) = Sequence {};
+		cleaned_ST_model_attribute_variables : Map (ecore!EObject, 
+			Map (String, Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) )
+		) = Map {};
+		variable : ecore!EObject = 0;
+	}
+	do {
+		deps_of_model_var <- thisModule.ST_model_variables.get(variable);
+		
+		
+		for (variable in thisModule.ST_model_variables.getKeys()) {
+			if (variable <> variable_to_drop) {
+				cleaned_ST_model_attribute_variables <- cleaned_ST_model_attribute_variables.including(
+						variable, thisModule.ST_model_variables.get(variable) );
+			}
+		}
+		thisModule.ST_model_variables <- cleaned_ST_model_attribute_variables;
+	}
+}
+
+rule CFS_push_deps_of_model_attribute_variable(object : Ecore!EObject) {
+	using {
+		deps_of_model_var : Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) = Sequence {};
+	}
+	do {
+		deps_of_model_var <- thisModule.ST_model_variables.get(object);
+		thisModule.CFS_push_seq(deps_of_model_var);
+	}
+}
+
+rule CFS_push_model_attribute_variable(object : Ecore!EObject, attribute : String, semantics : VAPODI_TRACE_METAMODEL!TraceType, universe : VAPODI_TRACE_METAMODEL!UniverseType) {
+	to
+		what : VAPODI_TRACE_METAMODEL!DynamicEntity (
+			concern <- #ATTRIBUTE,
+			semantics <- semantics,
+			universe <- universe,
+			attributeName <- attribute
+		)
+	do {
+		what.object <- object;
+		thisModule.CFS_push_single(what);
+	}
+}
+
+--- MODEL ATTRIBUTE VARIABLES - end ---
+
+
+--- MODEL VARIABLES - start ---
+
+helper def : ST_model_variables : Map (ecore!EObject, Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = Map {};
+
+-- explanation: expresses that variable (meaning its current value) is dependent upon current CFS
+-- action: copy CFS onto variable's entry in ST for model variables
+-- precondition/assertion: no existing entries for this variable neighter in ST for model or model attribute vars (as this variable
+--		did not exist before, or if, its entry should have been removed)
+
+rule ST_put_model_variable(variable : ecore!EObject) {
+	do {
+		thisModule.ST_model_variables <- thisModule.ST_model_variables.including(variable,thisModule.cfs_flat_copy());
+	}
+}
+
+-- drop ST_model_variables AND ST_model_attribute_variables entry for variable
+rule ST_drop_model_variable(variable_to_drop : ecore!EObject) {
+	using {
+		cleaned_ST_model_variables : Map (ecore!EObject, Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = Map {};
+		drop_counter : Integer = 0;
+	}
+	do {
+		-- life could be so easy:
+		--thisModule.ST_model_variables <- thisModule.ST_model_variables.excluding(variable);
+		
+		-- workaround idea 1: we clob the value associated with variable to be empty
+		-- thisModule.ST_model_variables <- thisModule.ST_model_variables.including(variable, Sequence {} );
+		-- yet then we had to rewrite all code accessing this function to account for this special case
+		
+		-- now for the ugly solution
+		
+		for (variable in thisModule.ST_model_variables.getKeys()) {
+			if (variable = variable_to_drop) {
+				drop_counter <- drop_counter + 1;
+				--'dropped'.println();
+			} else {
+				cleaned_ST_model_variables <- cleaned_ST_model_variables.including
+						(variable, thisModule.ST_model_variables.get(variable) );
+				--('copy ' + variable.fullName).println();
+			}
+		}
+		thisModule.assert(drop_counter = 1, 'removed a variable ' + drop_counter.toString() + ' times from ST_model_variables which should have been there exactly once');
+		
+		thisModule.ST_model_variables <- cleaned_ST_model_variables;
+		
+		-- 2nd part: ST_model_attribute_variables
+		thisModule.ST_drop_model_attribute_variables(variable_to_drop);
+	}
+}
+
+-- explanation: expresses that program flow is dependent upon deps of variable (which is *not* a src var itself)
+-- This is the REASON why CFS has to be Sequence of Sequence
+rule CFS_push_deps_of_model_variable(variable : Ecore!EObject) {
+	do {
+		thisModule.CFS_push_seq(thisModule.ST_model_variables.get(variable));
+	}
+}
+
+-- explanation: expresses that program flow is dependent upon deps of variable (which *is* a src var itself)
+rule CFS_push_model_variable(object : Ecore!EObject, semantics : VAPODI_TRACE_METAMODEL!TraceType, universe : VAPODI_TRACE_METAMODEL!UniverseType) {
+	to
+		what : VAPODI_TRACE_METAMODEL!DynamicEntity (
+			concern <- #OBJECT,
+			semantics <- semantics,
+			universe <- universe
+		)
+	do {
+		what.object <- object;
+		thisModule.CFS_push_single(what);
+	}
+}
+
+
+
+--- MODEL VARIABLES - end ---
+
+-- no rule CFS_push_primitive_variable, as they have no meaning outside of the program; instead they are resolved in
+-- CFS_push_deps_of_primitive_variable
+
+
+rule CFS_push_single(what : VAPODI_TRACE_METAMODEL!DynamicEntity) {
+	do {
+		thisModule.CFS_push_seq( Sequence{what} );
+	}
+}
+
+rule CFS_push_seq(what : Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) {
+	do {
+		thisModule.CFS <- thisModule.CFS.append(what);
+	}
+}
+
+rule CFS_pop() {
+	do {
+		thisModule.assert(not thisModule.CFS.isEmpty(), 'Trying to pop from empty Control Flow Stack. ' + 
+			'(This is an internal error resulting from wrong composition; ' +
+			'As a user, you cannnot do much about it)');
+		
+		-- workaround: as we can't destroy created objects and all existing objects make their way into output file,
+		--             so we have them in one place, at least
+		-- does not work, as containment references may not span across models (ATL error msg)
+		--thisModule.traceCollection.trash <-
+		--thisModule.traceCollection.trash.union(thisModule.CFS.last());
+		
+		
+		-- workaround: empty subsequence is returned as [], not as an empty sequence
+		--             (does not even have collection type operations) 
+		if (thisModule.CFS.size() > 1)
+			thisModule.CFS <- thisModule.CFS.subSequence(1,thisModule.CFS.asSequence().size()-1);
+		else
+			thisModule.CFS <- Sequence {};
+	}
+}
+
+rule CFS_pop_multiple(n : Integer) {
+	do {
+		thisModule.assert(n >= 0, 'Tried to pop negative number of items from CFS');
+		-- workaround: recursive emulation of numeric for loop
+		if (n > 0) {
+			thisModule.CFS_pop();
+			thisModule.CFS_pop_multiple(n-1);
+		}
+	}
+}
+
+-- starting part copied from test_cases.atl
+
+
+rule test_ST () {
+	to
+		jim : Persons!Male (fullName <- 'jim'),
+		kasandra : Persons!Female  (fullName <- 'kasandra'),
+		julia : Persons!Female  (fullName <- 'julia')
+	do {
+		'kasandra'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		thisModule.CFS_push_model_variable(kasandra,#EXISTENCE,#LIGHT_UNIVERSE);
+		thisModule.ST_put_model_variable(jim); -- dep: jim <- kasandra
+		thisModule.ST_put_model_variable(julia); -- dep: jim <- julia; doesn't steal entry
+		thisModule.CFS_pop();
+		thisModule.CFS_push_deps_of_model_variable(jim);
+		thisModule.CFS_print(); -- should include kasandra and only her
+		thisModule.ST_drop_model_variable(jim);
+		thisModule.ST_drop_model_variable(julia);
+	}
+}
+
+rule test_ST_model_vars_put_drop_fail() {
+	to
+		jim : Persons!Male (fullName <- 'jim'),
+		kasandra : Persons!Female  (fullName <- 'kasandra'),
+		julia : Persons!Female  (fullName <- 'julia')
+	do {
+		'kasandra'.println();
+		'VAPODI RUNTIME ERROR'.println();
+		'An assertion failed with message:'.println();
+		'removed a variable 0 times from ST_model_variables which should have been there exactly once'.println();
+		'(runtime should likely be terminated, but ATL doesn\'t have respective facilities)'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.CFS_push_model_variable(kasandra,#EXISTENCE,#LIGHT_UNIVERSE);
+		thisModule.ST_put_model_variable(jim); -- dep: jim <- kasandra
+		thisModule.ST_put_model_variable(julia); -- dep: jim <- julia; doesn't steal entry
+		thisModule.CFS_pop();
+		thisModule.CFS_push_deps_of_model_variable(jim);
+		thisModule.CFS_print(); -- should include kasandra and only her
+		thisModule.ST_drop_model_variable(kasandra); -- but not on ST
+		
+	}
+}
+
+rule test_ST_model_attribute_variables () {
+	to
+		jim : Persons!Male (fullName <- 'jim'),
+		kasandra : Persons!Female  (fullName <- 'kasandra'),
+		julia : Persons!Female  (fullName <- 'julia')
+	do {
+		'-'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		thisModule.ST_put_model_attribute_variable(jim,'fullName');
+		
+	}
+}
+
+rule test_failing () {
+	do {
+		'lorem ipsum'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		'hakuna matata'.println();
+		
+	}
+}
+
+rule ST_model_var_put_drop() {
+	to
+		jim : Persons!Male (fullName <- 'Eric')
+	do {
+		'(empty)'.println();
+		'Eric'.println();
+		'(empty)'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.ST_model_variables_print();
+		thisModule.ST_put_model_variable(jim);
+		thisModule.ST_model_variables_print();
+		thisModule.ST_drop_model_variable(jim);
+		thisModule.ST_model_variables_print();
+		
+		
+	}
+}
+
+rule ST_prim_var_put_drop_cfs_empty() {
+	using {
+		jim : String = 'Jim';
+	}
+		do {
+		'(empty)'.println();
+		'Jim: (empty CFS)'.println();
+		'Jim: (no entries for this symbol)'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.ST_print_prim_variables();
+		thisModule.ST_put_prim_variable(jim);
+		thisModule.ST_print_prim_variables();
+		thisModule.ST_drop_prim_variable(jim);
+		thisModule.ST_print_prim_variables();
+		
+		
+	}
+}
+
+rule ST_prim_var_put_drop() {
+	using {
+		jim : String = 'Jim';
+	}
+	to
+		eric : Persons!Male (fullName <- 'Eric')
+	do {
+		'(empty)'.println();
+		'Jim: Eric'.println();
+		'Jim: (no entries for this symbol)'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.CFS_push_model_variable(eric,#EXISTENCE, #LIGHT_UNIVERSE);
+		
+		thisModule.ST_print_prim_variables();
+		thisModule.ST_put_prim_variable(jim);
+		thisModule.ST_print_prim_variables();
+		thisModule.ST_drop_prim_variable(jim);
+		thisModule.ST_print_prim_variables();
+		
+		
+	}
+}
+
+rule ST_prim_var_push() {
+	using {
+		jim : String = 'Jim';
+	}
+	to
+		eric : Persons!Male (fullName <- 'Eric')
+	do {
+		'Eric'.println();
+		'(empty)'.println();
+		'Eric'.println();
+		
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.CFS_push_model_variable(eric,#EXISTENCE, #LIGHT_UNIVERSE);
+		thisModule.CFS_print();
+		
+		thisModule.ST_put_prim_variable(jim);
+		
+		thisModule.CFS_pop();
+		thisModule.CFS_print();
+		
+		thisModule.ST_push_deps_of_prim_variable(jim);
+		thisModule.CFS_print();
+	}
+}
+
+
+-- starting part copied from test_infrastructure.atl
+
+
+rule assert (condition : Boolean, msg : String) {
+	do {
+		if (not condition) {
+			'VAPODI RUNTIME ERROR'.println();
+			'An assertion failed with message:'.println();
+			msg.println();
+			if (thisModule.fail_softly)
+				'(runtime should likely be terminated, but ATL doesn\'t have respective facilities)'.println();
+			else {
+				'(terminating ATL program the rude way as ATL doesn\'t offer respective facilities)'.println();
+				('This is intentionally breaking the program, set fail_softly=true in VAPODI config' + 
+				' for different handling').yes_indeed();
+			}
+		}
+	}
+}
+
+rule CFS_print() {
+	using {
+		entry : Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) = Sequence {};
+		p : Persons!Male = 0;
+		empty : Boolean = true;
+	}
+	do {
+		for (entry in thisModule.CFS ) {
+			for (p in entry) {
+				p.object.fullName.println();
+			}
+			empty <- false;
+		}
+		if (empty)
+			'(empty)'.println();
+	}
+}
+
+rule ST_print_prim_variables() {
+	using {
+		name : String = '';
+		seq_for_this_name : Sequence ( Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) ) = 0;
+		cfs_seq : Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity ) = 0;
+		empty : Boolean = true;
+		seq_for_this_name_empty : Boolean = true;	
+		cfs_empty : Boolean = true;
+		lineAssembly : String = '';
+	}
+	do {
+		for (name in thisModule.ST_prim_variables.getKeys()) {
+			seq_for_this_name <- thisModule.ST_prim_variables.get(name);
+			seq_for_this_name_empty <- true;
+			for (cfs_seq in seq_for_this_name) {
+				lineAssembly <- name + ':';
+				cfs_empty <- true;
+				for (cfs_entry in cfs_seq) {
+					lineAssembly <- lineAssembly + ' ' + cfs_entry.object.fullName;
+					cfs_empty <- false;
+				}
+				if (cfs_empty)
+					lineAssembly <- lineAssembly + ' (empty CFS)';
+				lineAssembly.println();
+				seq_for_this_name_empty <- false;
+			}
+			if (seq_for_this_name_empty)
+				(name + ': (no entries for this symbol)').println();
+			empty <- false;
+		}
+		if (empty)
+			'(empty)'.println();
+	}
+}
+
+rule ST_model_variables_print() {
+	using {
+		attributeMap : Map ( String, Sequence ( VAPODI_TRACE_METAMODEL!DynamicEntity )) = Map {};
+		attributeName : String = '';
+		empty : Boolean = true;
+	}
+	do {
+		for (variable in thisModule.ST_model_variables.getKeys() ) {
+			variable.fullName.println();
+			for (attributeMap in thisModule.ST_model_variables.get(variable)) {
+				attributeMap.eClass().getName().toString().println();
+				for (attributeName in attributeMap.getKeys()) {
+					attributeName.println();
+					attributeName + attributeMap.get(attributeName).println();
+				}
+			}
+			empty <- false;
+		}
+		if (empty) {
+			'(empty)'.println();
+		}
+	}	
+}
+
+rule reset_datastructures() {
+	do {
+		thisModule.CFS <- Sequence {};
+		thisModule.ST_prim_variables <- Map {};
+		thisModule.ST_model_variables <- Map {};
+		thisModule.ST_model_attribute_variables <- Map {};
+	}
+}
+
+-- starting auto-generated entrypoint rule
+	
+	entrypoint rule test_runner () {
+	do {
+		'msg Hi, I \'m the test runner and I\'m going to run 8 tests\n'.println();
+		
+		thisModule.fail_softly <- true;thisModule.reset_datastructures();
+		'testcase_begin test_ST'.println();
+		thisModule.test_ST();
+		'testcase_end\n'.println();
+		
+		thisModule.reset_datastructures();
+		'testcase_begin test_ST_model_vars_put_drop_fail'.println();
+		thisModule.test_ST_model_vars_put_drop_fail();
+		'testcase_end\n'.println();
+		
+		thisModule.reset_datastructures();
+		'testcase_begin test_ST_model_attribute_variables'.println();
+		thisModule.test_ST_model_attribute_variables();
+		'testcase_end\n'.println();
+		
+		thisModule.reset_datastructures();
+		'testcase_begin test_failing'.println();
+		thisModule.test_failing();
+		'testcase_end\n'.println();
+		
+		thisModule.reset_datastructures();
+		'testcase_begin ST_model_var_put_drop'.println();
+		thisModule.ST_model_var_put_drop();
+		'testcase_end\n'.println();
+		
+		thisModule.reset_datastructures();
+		'testcase_begin ST_prim_var_put_drop_cfs_empty'.println();
+		thisModule.ST_prim_var_put_drop_cfs_empty();
+		'testcase_end\n'.println();
+		
+		thisModule.reset_datastructures();
+		'testcase_begin ST_prim_var_put_drop'.println();
+		thisModule.ST_prim_var_put_drop();
+		'testcase_end\n'.println();
+		
+		thisModule.reset_datastructures();
+		'testcase_begin ST_prim_var_push'.println();
+		thisModule.ST_prim_var_push();
+		'testcase_end\n'.println();
+		
+		'msg Hi, I\'m the test runner and I\'ve just finished running 8 tests'.println();
+	}
+}
