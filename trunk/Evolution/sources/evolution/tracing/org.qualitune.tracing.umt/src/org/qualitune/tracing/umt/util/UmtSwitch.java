@@ -89,6 +89,7 @@ public class UmtSwitch<T> extends Switch<T> {
 			case UmtPackage.VARIABLE_DECLARATION_INSTRUCTION: {
 				VariableDeclarationInstruction variableDeclarationInstruction = (VariableDeclarationInstruction)theEObject;
 				T result = caseVariableDeclarationInstruction(variableDeclarationInstruction);
+				if (result == null) result = caseVariableProcessingInstruction(variableDeclarationInstruction);
 				if (result == null) result = caseInstruction(variableDeclarationInstruction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -96,6 +97,7 @@ public class UmtSwitch<T> extends Switch<T> {
 			case UmtPackage.VARIABLE_ASSIGNMENT: {
 				VariableAssignment variableAssignment = (VariableAssignment)theEObject;
 				T result = caseVariableAssignment(variableAssignment);
+				if (result == null) result = caseVariableProcessingInstruction(variableAssignment);
 				if (result == null) result = caseInstruction(variableAssignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -172,10 +174,12 @@ public class UmtSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UmtPackage.CALL: {
-				Call call = (Call)theEObject;
-				T result = caseCall(call);
-				if (result == null) result = caseInstruction(call);
+			case UmtPackage.CALL_EXPRESSION: {
+				CallExpression callExpression = (CallExpression)theEObject;
+				T result = caseCallExpression(callExpression);
+				if (result == null) result = caseExpression(callExpression);
+				if (result == null) result = caseVariableProcessingInstruction(callExpression);
+				if (result == null) result = caseInstruction(callExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -247,10 +251,12 @@ public class UmtSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UmtPackage.BLACK_BOX_INSTRUCTION: {
-				BlackBoxInstruction blackBoxInstruction = (BlackBoxInstruction)theEObject;
-				T result = caseBlackBoxInstruction(blackBoxInstruction);
-				if (result == null) result = caseInstruction(blackBoxInstruction);
+			case UmtPackage.BLACK_BOX_EXPRESSION: {
+				BlackBoxExpression blackBoxExpression = (BlackBoxExpression)theEObject;
+				T result = caseBlackBoxExpression(blackBoxExpression);
+				if (result == null) result = caseExpression(blackBoxExpression);
+				if (result == null) result = caseVariableProcessingInstruction(blackBoxExpression);
+				if (result == null) result = caseInstruction(blackBoxExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -323,6 +329,7 @@ public class UmtSwitch<T> extends Switch<T> {
 			case UmtPackage.VARIABLE_RESET: {
 				VariableReset variableReset = (VariableReset)theEObject;
 				T result = caseVariableReset(variableReset);
+				if (result == null) result = caseVariableProcessingInstruction(variableReset);
 				if (result == null) result = caseInstruction(variableReset);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -337,6 +344,56 @@ public class UmtSwitch<T> extends Switch<T> {
 				ModelAttributeVariable modelAttributeVariable = (ModelAttributeVariable)theEObject;
 				T result = caseModelAttributeVariable(modelAttributeVariable);
 				if (result == null) result = caseVariable(modelAttributeVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UmtPackage.ST_PUT: {
+				StPut stPut = (StPut)theEObject;
+				T result = caseStPut(stPut);
+				if (result == null) result = caseStInstruction(stPut);
+				if (result == null) result = caseVapodiInstruction(stPut);
+				if (result == null) result = caseInstruction(stPut);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UmtPackage.ST_DROP: {
+				StDrop stDrop = (StDrop)theEObject;
+				T result = caseStDrop(stDrop);
+				if (result == null) result = caseStInstruction(stDrop);
+				if (result == null) result = caseVapodiInstruction(stDrop);
+				if (result == null) result = caseInstruction(stDrop);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UmtPackage.ST_INSTRUCTION: {
+				StInstruction stInstruction = (StInstruction)theEObject;
+				T result = caseStInstruction(stInstruction);
+				if (result == null) result = caseVapodiInstruction(stInstruction);
+				if (result == null) result = caseInstruction(stInstruction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UmtPackage.EXPRESSION: {
+				Expression expression = (Expression)theEObject;
+				T result = caseExpression(expression);
+				if (result == null) result = caseVariableProcessingInstruction(expression);
+				if (result == null) result = caseInstruction(expression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UmtPackage.CALCULATED_EXPRESSION: {
+				CalculatedExpression calculatedExpression = (CalculatedExpression)theEObject;
+				T result = caseCalculatedExpression(calculatedExpression);
+				if (result == null) result = caseExpression(calculatedExpression);
+				if (result == null) result = caseVariableProcessingInstruction(calculatedExpression);
+				if (result == null) result = caseInstruction(calculatedExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UmtPackage.VARIABLE_PROCESSING_INSTRUCTION: {
+				VariableProcessingInstruction variableProcessingInstruction = (VariableProcessingInstruction)theEObject;
+				T result = caseVariableProcessingInstruction(variableProcessingInstruction);
+				if (result == null) result = caseInstruction(variableProcessingInstruction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -570,17 +627,17 @@ public class UmtSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Call Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Call Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCall(Call object) {
+	public T caseCallExpression(CallExpression object) {
 		return null;
 	}
 
@@ -720,17 +777,17 @@ public class UmtSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Black Box Instruction</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Black Box Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Black Box Instruction</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Black Box Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBlackBoxInstruction(BlackBoxInstruction object) {
+	public T caseBlackBoxExpression(BlackBoxExpression object) {
 		return null;
 	}
 
@@ -911,6 +968,96 @@ public class UmtSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseModelAttributeVariable(ModelAttributeVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>St Put</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>St Put</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStPut(StPut object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>St Drop</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>St Drop</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStDrop(StDrop object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>St Instruction</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>St Instruction</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStInstruction(StInstruction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpression(Expression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Calculated Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Calculated Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCalculatedExpression(CalculatedExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Processing Instruction</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Processing Instruction</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableProcessingInstruction(VariableProcessingInstruction object) {
 		return null;
 	}
 

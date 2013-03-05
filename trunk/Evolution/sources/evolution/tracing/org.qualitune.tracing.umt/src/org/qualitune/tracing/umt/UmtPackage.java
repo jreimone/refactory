@@ -169,6 +169,34 @@ public interface UmtPackage extends EPackage {
 	int SELECTION_FEATURE_COUNT = NUMEROUS_KINDS_OF_BRANCHES_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.VariableProcessingInstructionImpl <em>Variable Processing Instruction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.qualitune.tracing.umt.impl.VariableProcessingInstructionImpl
+	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getVariableProcessingInstruction()
+	 * @generated
+	 */
+	int VARIABLE_PROCESSING_INSTRUCTION = 43;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PROCESSING_INSTRUCTION__DESTINATION = INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Variable Processing Instruction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PROCESSING_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.VariableDeclarationInstructionImpl <em>Variable Declaration Instruction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,13 +207,13 @@ public interface UmtPackage extends EPackage {
 	int VARIABLE_DECLARATION_INSTRUCTION = 3;
 
 	/**
-	 * The feature id for the '<em><b>Variables</b></em>' reference list.
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DECLARATION_INSTRUCTION__VARIABLES = INSTRUCTION_FEATURE_COUNT + 0;
+	int VARIABLE_DECLARATION_INSTRUCTION__DESTINATION = VARIABLE_PROCESSING_INSTRUCTION__DESTINATION;
 
 	/**
 	 * The number of structural features of the '<em>Variable Declaration Instruction</em>' class.
@@ -194,7 +222,7 @@ public interface UmtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DECLARATION_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
+	int VARIABLE_DECLARATION_INSTRUCTION_FEATURE_COUNT = VARIABLE_PROCESSING_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.
@@ -213,16 +241,16 @@ public interface UmtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT__DESTINATION = INSTRUCTION_FEATURE_COUNT + 0;
+	int VARIABLE_ASSIGNMENT__DESTINATION = VARIABLE_PROCESSING_INSTRUCTION__DESTINATION;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference list.
+	 * The feature id for the '<em><b>Assigned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT__SOURCE = INSTRUCTION_FEATURE_COUNT + 1;
+	int VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION = VARIABLE_PROCESSING_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Variable Assignment</em>' class.
@@ -231,7 +259,7 @@ public interface UmtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 2;
+	int VARIABLE_ASSIGNMENT_FEATURE_COUNT = VARIABLE_PROCESSING_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.VapodiInstruction <em>Vapodi Instruction</em>}' class.
@@ -301,13 +329,13 @@ public interface UmtPackage extends EPackage {
 	int CFS_INSTRUCTION = 6;
 
 	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
+	 * The feature id for the '<em><b>Variables</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CFS_INSTRUCTION__CONDITIONS = VAPODI_INSTRUCTION_FEATURE_COUNT + 0;
+	int CFS_INSTRUCTION__VARIABLES = VAPODI_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Cfs Instruction</em>' class.
@@ -624,14 +652,69 @@ public interface UmtPackage extends EPackage {
 	int BRANCH_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.CallImpl <em>Call</em>}' class.
+	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.ExpressionImpl <em>Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.qualitune.tracing.umt.impl.CallImpl
-	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getCall()
+	 * @see org.qualitune.tracing.umt.impl.ExpressionImpl
+	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getExpression()
 	 * @generated
 	 */
-	int CALL = 15;
+	int EXPRESSION = 41;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__DESTINATION = VARIABLE_PROCESSING_INSTRUCTION__DESTINATION;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__PARAMETERS = VARIABLE_PROCESSING_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_FEATURE_COUNT = VARIABLE_PROCESSING_INSTRUCTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.CallExpressionImpl <em>Call Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.qualitune.tracing.umt.impl.CallExpressionImpl
+	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getCallExpression()
+	 * @generated
+	 */
+	int CALL_EXPRESSION = 15;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXPRESSION__DESTINATION = EXPRESSION__DESTINATION;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXPRESSION__PARAMETERS = EXPRESSION__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' reference.
@@ -640,16 +723,16 @@ public interface UmtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__FUNCTION = INSTRUCTION_FEATURE_COUNT + 0;
+	int CALL_EXPRESSION__FUNCTION = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Call</em>' class.
+	 * The number of structural features of the '<em>Call Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
+	int CALL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.Model <em>Model</em>}' class.
@@ -708,13 +791,22 @@ public interface UmtPackage extends EPackage {
 	int ADD_TRACE_LINK = 17;
 
 	/**
-	 * The feature id for the '<em><b>Destination</b></em>' reference list.
+	 * The feature id for the '<em><b>Semantics</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_TRACE_LINK__DESTINATION = VAPODI_INSTRUCTION_FEATURE_COUNT + 0;
+	int ADD_TRACE_LINK__SEMANTICS = VAPODI_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TRACE_LINK__DESTINATION = VAPODI_INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Add Trace Link</em>' class.
@@ -723,7 +815,7 @@ public interface UmtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_TRACE_LINK_FEATURE_COUNT = VAPODI_INSTRUCTION_FEATURE_COUNT + 1;
+	int ADD_TRACE_LINK_FEATURE_COUNT = VAPODI_INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.WriteImpl <em>Write</em>}' class.
@@ -820,14 +912,23 @@ public interface UmtPackage extends EPackage {
 	int LOGICAL_CONDITION_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.BlackBoxInstructionImpl <em>Black Box Instruction</em>}' class.
+	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.BlackBoxExpressionImpl <em>Black Box Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.qualitune.tracing.umt.impl.BlackBoxInstructionImpl
-	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getBlackBoxInstruction()
+	 * @see org.qualitune.tracing.umt.impl.BlackBoxExpressionImpl
+	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getBlackBoxExpression()
 	 * @generated
 	 */
-	int BLACK_BOX_INSTRUCTION = 25;
+	int BLACK_BOX_EXPRESSION = 25;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLACK_BOX_EXPRESSION__DESTINATION = EXPRESSION__DESTINATION;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
@@ -836,16 +937,16 @@ public interface UmtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLACK_BOX_INSTRUCTION__PARAMETERS = INSTRUCTION_FEATURE_COUNT + 0;
+	int BLACK_BOX_EXPRESSION__PARAMETERS = EXPRESSION__PARAMETERS;
 
 	/**
-	 * The number of structural features of the '<em>Black Box Instruction</em>' class.
+	 * The number of structural features of the '<em>Black Box Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLACK_BOX_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
+	int BLACK_BOX_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.InstanceModelImpl <em>Instance Model</em>}' class.
@@ -1023,13 +1124,13 @@ public interface UmtPackage extends EPackage {
 	int CFS_PUSH = 29;
 
 	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
+	 * The feature id for the '<em><b>Variables</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CFS_PUSH__CONDITIONS = CFS_INSTRUCTION__CONDITIONS;
+	int CFS_PUSH__VARIABLES = CFS_INSTRUCTION__VARIABLES;
 
 	/**
 	 * The number of structural features of the '<em>Cfs Push</em>' class.
@@ -1051,13 +1152,13 @@ public interface UmtPackage extends EPackage {
 	int CFS_POP = 30;
 
 	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' reference list.
+	 * The feature id for the '<em><b>Variables</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CFS_POP__CONDITIONS = CFS_INSTRUCTION__CONDITIONS;
+	int CFS_POP__VARIABLES = CFS_INSTRUCTION__VARIABLES;
 
 	/**
 	 * The number of structural features of the '<em>Cfs Pop</em>' class.
@@ -1236,13 +1337,13 @@ public interface UmtPackage extends EPackage {
 	int VARIABLE_RESET = 35;
 
 	/**
-	 * The feature id for the '<em><b>Variables</b></em>' reference list.
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_RESET__VARIABLES = INSTRUCTION_FEATURE_COUNT + 0;
+	int VARIABLE_RESET__DESTINATION = VARIABLE_PROCESSING_INSTRUCTION__DESTINATION;
 
 	/**
 	 * The number of structural features of the '<em>Variable Reset</em>' class.
@@ -1251,7 +1352,7 @@ public interface UmtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_RESET_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 1;
+	int VARIABLE_RESET_FEATURE_COUNT = VARIABLE_PROCESSING_INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.ModelTypeAttributeImpl <em>Model Type Attribute</em>}' class.
@@ -1337,6 +1438,127 @@ public interface UmtPackage extends EPackage {
 	int MODEL_ATTRIBUTE_VARIABLE_FEATURE_COUNT = VARIABLE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.StInstructionImpl <em>St Instruction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.qualitune.tracing.umt.impl.StInstructionImpl
+	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getStInstruction()
+	 * @generated
+	 */
+	int ST_INSTRUCTION = 40;
+
+	/**
+	 * The feature id for the '<em><b>Symbols</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ST_INSTRUCTION__SYMBOLS = VAPODI_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>St Instruction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ST_INSTRUCTION_FEATURE_COUNT = VAPODI_INSTRUCTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.StPutImpl <em>St Put</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.qualitune.tracing.umt.impl.StPutImpl
+	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getStPut()
+	 * @generated
+	 */
+	int ST_PUT = 38;
+
+	/**
+	 * The feature id for the '<em><b>Symbols</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ST_PUT__SYMBOLS = ST_INSTRUCTION__SYMBOLS;
+
+	/**
+	 * The number of structural features of the '<em>St Put</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ST_PUT_FEATURE_COUNT = ST_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.StDropImpl <em>St Drop</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.qualitune.tracing.umt.impl.StDropImpl
+	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getStDrop()
+	 * @generated
+	 */
+	int ST_DROP = 39;
+
+	/**
+	 * The feature id for the '<em><b>Symbols</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ST_DROP__SYMBOLS = ST_INSTRUCTION__SYMBOLS;
+
+	/**
+	 * The number of structural features of the '<em>St Drop</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ST_DROP_FEATURE_COUNT = ST_INSTRUCTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.CalculatedExpressionImpl <em>Calculated Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.qualitune.tracing.umt.impl.CalculatedExpressionImpl
+	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getCalculatedExpression()
+	 * @generated
+	 */
+	int CALCULATED_EXPRESSION = 42;
+
+	/**
+	 * The feature id for the '<em><b>Destination</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALCULATED_EXPRESSION__DESTINATION = EXPRESSION__DESTINATION;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALCULATED_EXPRESSION__PARAMETERS = EXPRESSION__PARAMETERS;
+
+	/**
+	 * The number of structural features of the '<em>Calculated Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALCULATED_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.IntentionEnum <em>Intention Enum</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1344,7 +1566,7 @@ public interface UmtPackage extends EPackage {
 	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getIntentionEnum()
 	 * @generated
 	 */
-	int INTENTION_ENUM = 38;
+	int INTENTION_ENUM = 44;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.UniverseType <em>Universe Type</em>}' enum.
@@ -1354,7 +1576,7 @@ public interface UmtPackage extends EPackage {
 	 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getUniverseType()
 	 * @generated
 	 */
-	int UNIVERSE_TYPE = 39;
+	int UNIVERSE_TYPE = 45;
 
 
 	/**
@@ -1420,17 +1642,6 @@ public interface UmtPackage extends EPackage {
 	EClass getVariableDeclarationInstruction();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.VariableDeclarationInstruction#getVariables <em>Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Variables</em>'.
-	 * @see org.qualitune.tracing.umt.VariableDeclarationInstruction#getVariables()
-	 * @see #getVariableDeclarationInstruction()
-	 * @generated
-	 */
-	EReference getVariableDeclarationInstruction_Variables();
-
-	/**
 	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.VariableAssignment <em>Variable Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1441,26 +1652,15 @@ public interface UmtPackage extends EPackage {
 	EClass getVariableAssignment();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.qualitune.tracing.umt.VariableAssignment#getDestination <em>Destination</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.qualitune.tracing.umt.VariableAssignment#getAssignedExpression <em>Assigned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Destination</em>'.
-	 * @see org.qualitune.tracing.umt.VariableAssignment#getDestination()
+	 * @return the meta object for the containment reference '<em>Assigned Expression</em>'.
+	 * @see org.qualitune.tracing.umt.VariableAssignment#getAssignedExpression()
 	 * @see #getVariableAssignment()
 	 * @generated
 	 */
-	EReference getVariableAssignment_Destination();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.VariableAssignment#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Source</em>'.
-	 * @see org.qualitune.tracing.umt.VariableAssignment#getSource()
-	 * @see #getVariableAssignment()
-	 * @generated
-	 */
-	EReference getVariableAssignment_Source();
+	EReference getVariableAssignment_AssignedExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.WriteDestinationModel <em>Write Destination Model</em>}'.
@@ -1483,15 +1683,15 @@ public interface UmtPackage extends EPackage {
 	EClass getCfsInstruction();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.CfsInstruction#getConditions <em>Conditions</em>}'.
+	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.CfsInstruction#getVariables <em>Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Conditions</em>'.
-	 * @see org.qualitune.tracing.umt.CfsInstruction#getConditions()
+	 * @return the meta object for the reference list '<em>Variables</em>'.
+	 * @see org.qualitune.tracing.umt.CfsInstruction#getVariables()
 	 * @see #getCfsInstruction()
 	 * @generated
 	 */
-	EReference getCfsInstruction_Conditions();
+	EReference getCfsInstruction_Variables();
 
 	/**
 	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.Function <em>Function</em>}'.
@@ -1717,25 +1917,25 @@ public interface UmtPackage extends EPackage {
 	EReference getBranch_Body();
 
 	/**
-	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.Call <em>Call</em>}'.
+	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.CallExpression <em>Call Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Call</em>'.
-	 * @see org.qualitune.tracing.umt.Call
+	 * @return the meta object for class '<em>Call Expression</em>'.
+	 * @see org.qualitune.tracing.umt.CallExpression
 	 * @generated
 	 */
-	EClass getCall();
+	EClass getCallExpression();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.qualitune.tracing.umt.Call#getFunction <em>Function</em>}'.
+	 * Returns the meta object for the reference '{@link org.qualitune.tracing.umt.CallExpression#getFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Function</em>'.
-	 * @see org.qualitune.tracing.umt.Call#getFunction()
-	 * @see #getCall()
+	 * @see org.qualitune.tracing.umt.CallExpression#getFunction()
+	 * @see #getCallExpression()
 	 * @generated
 	 */
-	EReference getCall_Function();
+	EReference getCallExpression_Function();
 
 	/**
 	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.Model <em>Model</em>}'.
@@ -1791,10 +1991,21 @@ public interface UmtPackage extends EPackage {
 	EClass getAddTraceLink();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.AddTraceLink#getDestination <em>Destination</em>}'.
+	 * Returns the meta object for the attribute '{@link org.qualitune.tracing.umt.AddTraceLink#getSemantics <em>Semantics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Destination</em>'.
+	 * @return the meta object for the attribute '<em>Semantics</em>'.
+	 * @see org.qualitune.tracing.umt.AddTraceLink#getSemantics()
+	 * @see #getAddTraceLink()
+	 * @generated
+	 */
+	EAttribute getAddTraceLink_Semantics();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.qualitune.tracing.umt.AddTraceLink#getDestination <em>Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Destination</em>'.
 	 * @see org.qualitune.tracing.umt.AddTraceLink#getDestination()
 	 * @see #getAddTraceLink()
 	 * @generated
@@ -1894,25 +2105,14 @@ public interface UmtPackage extends EPackage {
 	EReference getNumerousKindsOfBranches_OppositeBranch();
 
 	/**
-	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.BlackBoxInstruction <em>Black Box Instruction</em>}'.
+	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.BlackBoxExpression <em>Black Box Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Black Box Instruction</em>'.
-	 * @see org.qualitune.tracing.umt.BlackBoxInstruction
+	 * @return the meta object for class '<em>Black Box Expression</em>'.
+	 * @see org.qualitune.tracing.umt.BlackBoxExpression
 	 * @generated
 	 */
-	EClass getBlackBoxInstruction();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.BlackBoxInstruction#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Parameters</em>'.
-	 * @see org.qualitune.tracing.umt.BlackBoxInstruction#getParameters()
-	 * @see #getBlackBoxInstruction()
-	 * @generated
-	 */
-	EReference getBlackBoxInstruction_Parameters();
+	EClass getBlackBoxExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.InstanceModel <em>Instance Model</em>}'.
@@ -2147,17 +2347,6 @@ public interface UmtPackage extends EPackage {
 	EClass getVariableReset();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.VariableReset#getVariables <em>Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Variables</em>'.
-	 * @see org.qualitune.tracing.umt.VariableReset#getVariables()
-	 * @see #getVariableReset()
-	 * @generated
-	 */
-	EReference getVariableReset_Variables();
-
-	/**
 	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.ModelTypeAttribute <em>Model Type Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2220,6 +2409,99 @@ public interface UmtPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelAttributeVariable_PartOf();
+
+	/**
+	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.StPut <em>St Put</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>St Put</em>'.
+	 * @see org.qualitune.tracing.umt.StPut
+	 * @generated
+	 */
+	EClass getStPut();
+
+	/**
+	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.StDrop <em>St Drop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>St Drop</em>'.
+	 * @see org.qualitune.tracing.umt.StDrop
+	 * @generated
+	 */
+	EClass getStDrop();
+
+	/**
+	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.StInstruction <em>St Instruction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>St Instruction</em>'.
+	 * @see org.qualitune.tracing.umt.StInstruction
+	 * @generated
+	 */
+	EClass getStInstruction();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.StInstruction#getSymbols <em>Symbols</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Symbols</em>'.
+	 * @see org.qualitune.tracing.umt.StInstruction#getSymbols()
+	 * @see #getStInstruction()
+	 * @generated
+	 */
+	EReference getStInstruction_Symbols();
+
+	/**
+	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression</em>'.
+	 * @see org.qualitune.tracing.umt.Expression
+	 * @generated
+	 */
+	EClass getExpression();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.Expression#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Parameters</em>'.
+	 * @see org.qualitune.tracing.umt.Expression#getParameters()
+	 * @see #getExpression()
+	 * @generated
+	 */
+	EReference getExpression_Parameters();
+
+	/**
+	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.CalculatedExpression <em>Calculated Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Calculated Expression</em>'.
+	 * @see org.qualitune.tracing.umt.CalculatedExpression
+	 * @generated
+	 */
+	EClass getCalculatedExpression();
+
+	/**
+	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.VariableProcessingInstruction <em>Variable Processing Instruction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Processing Instruction</em>'.
+	 * @see org.qualitune.tracing.umt.VariableProcessingInstruction
+	 * @generated
+	 */
+	EClass getVariableProcessingInstruction();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.qualitune.tracing.umt.VariableProcessingInstruction#getDestination <em>Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Destination</em>'.
+	 * @see org.qualitune.tracing.umt.VariableProcessingInstruction#getDestination()
+	 * @see #getVariableProcessingInstruction()
+	 * @generated
+	 */
+	EReference getVariableProcessingInstruction_Destination();
 
 	/**
 	 * Returns the meta object for enum '{@link org.qualitune.tracing.umt.IntentionEnum <em>Intention Enum</em>}'.
@@ -2320,14 +2602,6 @@ public interface UmtPackage extends EPackage {
 		EClass VARIABLE_DECLARATION_INSTRUCTION = eINSTANCE.getVariableDeclarationInstruction();
 
 		/**
-		 * The meta object literal for the '<em><b>Variables</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VARIABLE_DECLARATION_INSTRUCTION__VARIABLES = eINSTANCE.getVariableDeclarationInstruction_Variables();
-
-		/**
 		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2338,20 +2612,12 @@ public interface UmtPackage extends EPackage {
 		EClass VARIABLE_ASSIGNMENT = eINSTANCE.getVariableAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Destination</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Assigned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_ASSIGNMENT__DESTINATION = eINSTANCE.getVariableAssignment_Destination();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VARIABLE_ASSIGNMENT__SOURCE = eINSTANCE.getVariableAssignment_Source();
+		EReference VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION = eINSTANCE.getVariableAssignment_AssignedExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.tracing.umt.WriteDestinationModel <em>Write Destination Model</em>}' class.
@@ -2374,12 +2640,12 @@ public interface UmtPackage extends EPackage {
 		EClass CFS_INSTRUCTION = eINSTANCE.getCfsInstruction();
 
 		/**
-		 * The meta object literal for the '<em><b>Conditions</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Variables</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CFS_INSTRUCTION__CONDITIONS = eINSTANCE.getCfsInstruction_Conditions();
+		EReference CFS_INSTRUCTION__VARIABLES = eINSTANCE.getCfsInstruction_Variables();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.FunctionImpl <em>Function</em>}' class.
@@ -2566,14 +2832,14 @@ public interface UmtPackage extends EPackage {
 		EReference BRANCH__BODY = eINSTANCE.getBranch_Body();
 
 		/**
-		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.CallImpl <em>Call</em>}' class.
+		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.CallExpressionImpl <em>Call Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.qualitune.tracing.umt.impl.CallImpl
-		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getCall()
+		 * @see org.qualitune.tracing.umt.impl.CallExpressionImpl
+		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getCallExpression()
 		 * @generated
 		 */
-		EClass CALL = eINSTANCE.getCall();
+		EClass CALL_EXPRESSION = eINSTANCE.getCallExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Function</b></em>' reference feature.
@@ -2581,7 +2847,7 @@ public interface UmtPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CALL__FUNCTION = eINSTANCE.getCall_Function();
+		EReference CALL_EXPRESSION__FUNCTION = eINSTANCE.getCallExpression_Function();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.tracing.umt.Model <em>Model</em>}' class.
@@ -2628,7 +2894,15 @@ public interface UmtPackage extends EPackage {
 		EClass ADD_TRACE_LINK = eINSTANCE.getAddTraceLink();
 
 		/**
-		 * The meta object literal for the '<em><b>Destination</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Semantics</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADD_TRACE_LINK__SEMANTICS = eINSTANCE.getAddTraceLink_Semantics();
+
+		/**
+		 * The meta object literal for the '<em><b>Destination</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2722,22 +2996,14 @@ public interface UmtPackage extends EPackage {
 		EReference NUMEROUS_KINDS_OF_BRANCHES__OPPOSITE_BRANCH = eINSTANCE.getNumerousKindsOfBranches_OppositeBranch();
 
 		/**
-		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.BlackBoxInstructionImpl <em>Black Box Instruction</em>}' class.
+		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.BlackBoxExpressionImpl <em>Black Box Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.qualitune.tracing.umt.impl.BlackBoxInstructionImpl
-		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getBlackBoxInstruction()
+		 * @see org.qualitune.tracing.umt.impl.BlackBoxExpressionImpl
+		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getBlackBoxExpression()
 		 * @generated
 		 */
-		EClass BLACK_BOX_INSTRUCTION = eINSTANCE.getBlackBoxInstruction();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BLACK_BOX_INSTRUCTION__PARAMETERS = eINSTANCE.getBlackBoxInstruction_Parameters();
+		EClass BLACK_BOX_EXPRESSION = eINSTANCE.getBlackBoxExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.InstanceModelImpl <em>Instance Model</em>}' class.
@@ -2936,14 +3202,6 @@ public interface UmtPackage extends EPackage {
 		EClass VARIABLE_RESET = eINSTANCE.getVariableReset();
 
 		/**
-		 * The meta object literal for the '<em><b>Variables</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VARIABLE_RESET__VARIABLES = eINSTANCE.getVariableReset_Variables();
-
-		/**
 		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.ModelTypeAttributeImpl <em>Model Type Attribute</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2994,6 +3252,90 @@ public interface UmtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_ATTRIBUTE_VARIABLE__PART_OF = eINSTANCE.getModelAttributeVariable_PartOf();
+
+		/**
+		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.StPutImpl <em>St Put</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.qualitune.tracing.umt.impl.StPutImpl
+		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getStPut()
+		 * @generated
+		 */
+		EClass ST_PUT = eINSTANCE.getStPut();
+
+		/**
+		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.StDropImpl <em>St Drop</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.qualitune.tracing.umt.impl.StDropImpl
+		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getStDrop()
+		 * @generated
+		 */
+		EClass ST_DROP = eINSTANCE.getStDrop();
+
+		/**
+		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.StInstructionImpl <em>St Instruction</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.qualitune.tracing.umt.impl.StInstructionImpl
+		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getStInstruction()
+		 * @generated
+		 */
+		EClass ST_INSTRUCTION = eINSTANCE.getStInstruction();
+
+		/**
+		 * The meta object literal for the '<em><b>Symbols</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ST_INSTRUCTION__SYMBOLS = eINSTANCE.getStInstruction_Symbols();
+
+		/**
+		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.qualitune.tracing.umt.impl.ExpressionImpl
+		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getExpression()
+		 * @generated
+		 */
+		EClass EXPRESSION = eINSTANCE.getExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPRESSION__PARAMETERS = eINSTANCE.getExpression_Parameters();
+
+		/**
+		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.CalculatedExpressionImpl <em>Calculated Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.qualitune.tracing.umt.impl.CalculatedExpressionImpl
+		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getCalculatedExpression()
+		 * @generated
+		 */
+		EClass CALCULATED_EXPRESSION = eINSTANCE.getCalculatedExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.VariableProcessingInstructionImpl <em>Variable Processing Instruction</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.qualitune.tracing.umt.impl.VariableProcessingInstructionImpl
+		 * @see org.qualitune.tracing.umt.impl.UmtPackageImpl#getVariableProcessingInstruction()
+		 * @generated
+		 */
+		EClass VARIABLE_PROCESSING_INSTRUCTION = eINSTANCE.getVariableProcessingInstruction();
+
+		/**
+		 * The meta object literal for the '<em><b>Destination</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_PROCESSING_INSTRUCTION__DESTINATION = eINSTANCE.getVariableProcessingInstruction_Destination();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.tracing.umt.IntentionEnum <em>Intention Enum</em>}' enum.

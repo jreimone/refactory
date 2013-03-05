@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.qualitune.tracing.vapodi;
+package org.qualitune.tracing.vapodi.analysis;
 
 import java.util.LinkedList;
 import java.util.List;

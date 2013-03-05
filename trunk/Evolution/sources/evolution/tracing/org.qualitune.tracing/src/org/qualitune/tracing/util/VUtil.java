@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreEList;
-import org.eclipse.m2m.atl.engine.parser.AtlParser;
 import org.qualitune.tracing.umt.IntentionEnum;
 import org.qualitune.tracing.umt.UniverseType;
 

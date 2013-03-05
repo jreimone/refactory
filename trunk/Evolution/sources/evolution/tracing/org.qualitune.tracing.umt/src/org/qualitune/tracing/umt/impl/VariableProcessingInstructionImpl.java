@@ -10,40 +10,40 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.qualitune.tracing.umt.Call;
-import org.qualitune.tracing.umt.Function;
 import org.qualitune.tracing.umt.UmtPackage;
+import org.qualitune.tracing.umt.Variable;
+import org.qualitune.tracing.umt.VariableProcessingInstruction;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Call</b></em>'.
+ * An implementation of the model object '<em><b>Variable Processing Instruction</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.qualitune.tracing.umt.impl.CallImpl#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.impl.VariableProcessingInstructionImpl#getDestination <em>Destination</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CallImpl extends EObjectImpl implements Call {
+public abstract class VariableProcessingInstructionImpl extends EObjectImpl implements VariableProcessingInstruction {
 	/**
-	 * The cached value of the '{@link #getFunction() <em>Function</em>}' reference.
+	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFunction()
+	 * @see #getDestination()
 	 * @generated
 	 * @ordered
 	 */
-	protected Function function;
+	protected Variable destination;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CallImpl() {
+	protected VariableProcessingInstructionImpl() {
 		super();
 	}
 
@@ -54,7 +54,7 @@ public class CallImpl extends EObjectImpl implements Call {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UmtPackage.Literals.CALL;
+		return UmtPackage.Literals.VARIABLE_PROCESSING_INSTRUCTION;
 	}
 
 	/**
@@ -62,16 +62,16 @@ public class CallImpl extends EObjectImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Function getFunction() {
-		if (function != null && function.eIsProxy()) {
-			InternalEObject oldFunction = (InternalEObject)function;
-			function = (Function)eResolveProxy(oldFunction);
-			if (function != oldFunction) {
+	public Variable getDestination() {
+		if (destination != null && destination.eIsProxy()) {
+			InternalEObject oldDestination = (InternalEObject)destination;
+			destination = (Variable)eResolveProxy(oldDestination);
+			if (destination != oldDestination) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UmtPackage.CALL__FUNCTION, oldFunction, function));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UmtPackage.VARIABLE_PROCESSING_INSTRUCTION__DESTINATION, oldDestination, destination));
 			}
 		}
-		return function;
+		return destination;
 	}
 
 	/**
@@ -79,8 +79,8 @@ public class CallImpl extends EObjectImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Function basicGetFunction() {
-		return function;
+	public Variable basicGetDestination() {
+		return destination;
 	}
 
 	/**
@@ -88,11 +88,11 @@ public class CallImpl extends EObjectImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFunction(Function newFunction) {
-		Function oldFunction = function;
-		function = newFunction;
+	public void setDestination(Variable newDestination) {
+		Variable oldDestination = destination;
+		destination = newDestination;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.CALL__FUNCTION, oldFunction, function));
+			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.VARIABLE_PROCESSING_INSTRUCTION__DESTINATION, oldDestination, destination));
 	}
 
 	/**
@@ -103,9 +103,9 @@ public class CallImpl extends EObjectImpl implements Call {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UmtPackage.CALL__FUNCTION:
-				if (resolve) return getFunction();
-				return basicGetFunction();
+			case UmtPackage.VARIABLE_PROCESSING_INSTRUCTION__DESTINATION:
+				if (resolve) return getDestination();
+				return basicGetDestination();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,8 +118,8 @@ public class CallImpl extends EObjectImpl implements Call {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UmtPackage.CALL__FUNCTION:
-				setFunction((Function)newValue);
+			case UmtPackage.VARIABLE_PROCESSING_INSTRUCTION__DESTINATION:
+				setDestination((Variable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,8 +133,8 @@ public class CallImpl extends EObjectImpl implements Call {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UmtPackage.CALL__FUNCTION:
-				setFunction((Function)null);
+			case UmtPackage.VARIABLE_PROCESSING_INSTRUCTION__DESTINATION:
+				setDestination((Variable)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -148,10 +148,10 @@ public class CallImpl extends EObjectImpl implements Call {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UmtPackage.CALL__FUNCTION:
-				return function != null;
+			case UmtPackage.VARIABLE_PROCESSING_INSTRUCTION__DESTINATION:
+				return destination != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //CallImpl
+} //VariableProcessingInstructionImpl

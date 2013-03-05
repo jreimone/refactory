@@ -6,21 +6,21 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Black Box Instruction</b></em>'.
+ * A representation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.qualitune.tracing.umt.BlackBoxInstruction#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.Expression#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.qualitune.tracing.umt.UmtPackage#getBlackBoxInstruction()
- * @model
+ * @see org.qualitune.tracing.umt.UmtPackage#getExpression()
+ * @model abstract="true"
  * @generated
  */
-public interface BlackBoxInstruction extends Instruction {
+public interface Expression extends VariableProcessingInstruction {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' reference list.
 	 * The list contents are of type {@link org.qualitune.tracing.umt.Variable}.
@@ -31,10 +31,10 @@ public interface BlackBoxInstruction extends Instruction {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' reference list.
-	 * @see org.qualitune.tracing.umt.UmtPackage#getBlackBoxInstruction_Parameters()
+	 * @see org.qualitune.tracing.umt.UmtPackage#getExpression_Parameters()
 	 * @model
 	 * @generated
 	 */
 	EList<Variable> getParameters();
 
-} // BlackBoxInstruction
+} // Expression

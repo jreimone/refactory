@@ -28,10 +28,12 @@
     </genClasses>
     <genClasses ecoreClass="umt.ecore#//VariableAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//VariableAssignment/destination"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//VariableAssignment/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//VariableAssignment/expression"/>
     </genClasses>
     <genClasses image="false" ecoreClass="umt.ecore#//WriteDestinationModel"/>
-    <genClasses image="false" ecoreClass="umt.ecore#//CfsInstruction"/>
+    <genClasses image="false" ecoreClass="umt.ecore#//CfsInstruction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//CfsInstruction/concernedEntities"/>
+    </genClasses>
     <genClasses ecoreClass="umt.ecore#//Function">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Function/body"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Function/main"/>
@@ -40,7 +42,9 @@
     <genClasses ecoreClass="umt.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Variable/name"/>
     </genClasses>
-    <genClasses ecoreClass="umt.ecore#//Condition"/>
+    <genClasses ecoreClass="umt.ecore#//Condition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//Condition/dependencies"/>
+    </genClasses>
     <genClasses ecoreClass="umt.ecore#//Debug">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Debug/text"/>
     </genClasses>
@@ -58,8 +62,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Branch/condition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//Branch/body"/>
     </genClasses>
-    <genClasses ecoreClass="umt.ecore#//Call">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//Call/function"/>
+    <genClasses ecoreClass="umt.ecore#//CallExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//CallExpression/function"/>
     </genClasses>
     <genClasses image="false" ecoreClass="umt.ecore#//Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Model/name"/>
@@ -67,24 +71,20 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Model/urn"/>
     </genClasses>
     <genClasses ecoreClass="umt.ecore#//AddTraceLink">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//AddTraceLink/destination"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//AddTraceLink/semantics"/>
     </genClasses>
     <genClasses image="false" ecoreClass="umt.ecore#//VapodiInstruction"/>
     <genClasses ecoreClass="umt.ecore#//Write"/>
     <genClasses ecoreClass="umt.ecore#//Delete"/>
     <genClasses ecoreClass="umt.ecore#//TypeFilter"/>
-    <genClasses ecoreClass="umt.ecore#//LogicalCondition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//LogicalCondition/dependency"/>
-    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//LogicalCondition"/>
     <genClasses ecoreClass="umt.ecore#//VariableDeclaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//VariableDeclaration/variables"/>
     </genClasses>
     <genClasses image="false" ecoreClass="umt.ecore#//NumerousKindsOfBranches">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//NumerousKindsOfBranches/oppositeBranch"/>
     </genClasses>
-    <genClasses ecoreClass="umt.ecore#//BlackBoxInstruction">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//BlackBoxInstruction/parameters"/>
-    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//BlackBoxExpression"/>
     <genClasses ecoreClass="umt.ecore#//InstanceModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//InstanceModel/intention"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//InstanceModel/universe"/>
@@ -97,22 +97,39 @@
     <genClasses ecoreClass="umt.ecore#//Comment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//Comment/text"/>
     </genClasses>
-    <genClasses ecoreClass="umt.ecore#//CfsPush">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//CfsPush/condition"/>
-    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//CfsPush"/>
     <genClasses ecoreClass="umt.ecore#//CfsPop"/>
     <genClasses ecoreClass="umt.ecore#//PrimitiveVariable"/>
     <genClasses ecoreClass="umt.ecore#//CollectionVariable"/>
     <genClasses ecoreClass="umt.ecore#//ModelVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//ModelVariable/type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//ModelVariable/model"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//ModelVariable/attributes"/>
     </genClasses>
     <genClasses ecoreClass="umt.ecore#//ModelType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//ModelType/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//ModelType/model"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference umt.ecore#//ModelType/attributes"/>
     </genClasses>
     <genClasses ecoreClass="umt.ecore#//VariableReset">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//VariableReset/variables"/>
     </genClasses>
+    <genClasses ecoreClass="umt.ecore#//ModelTypeAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute umt.ecore#//ModelTypeAttribute/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference umt.ecore#//ModelTypeAttribute/partOf"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//ModelAttributeVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//ModelAttributeVariable/instanceOf"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference umt.ecore#//ModelAttributeVariable/partOf"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//StPut"/>
+    <genClasses ecoreClass="umt.ecore#//StDrop"/>
+    <genClasses image="false" ecoreClass="umt.ecore#//StInstruction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//StInstruction/symbols"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="umt.ecore#//Expression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference umt.ecore#//Expression/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="umt.ecore#//CalculatedExpression"/>
   </genPackages>
 </genmodel:GenModel>

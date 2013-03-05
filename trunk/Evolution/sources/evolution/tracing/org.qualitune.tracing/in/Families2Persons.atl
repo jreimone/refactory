@@ -1,6 +1,8 @@
 -- @path Families=/Families2Persons/Families.ecore
 -- @path Persons=/Families2Persons/Persons.ecore
 
+-- this is an example provided by the ATL team under terms of the EPL 1.0
+
 module Families2Persons;
 create OUT : Persons from IN : Families;
 

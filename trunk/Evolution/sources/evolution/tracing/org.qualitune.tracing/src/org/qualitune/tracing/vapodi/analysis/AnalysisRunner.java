@@ -9,27 +9,21 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractTreeIterator;
-import org.eclipse.emf.common.util.TreeIterator;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
-import org.qualitune.tracing.umt.Branch;
-import org.qualitune.tracing.umt.Function;
-import org.qualitune.tracing.umt.InstructionBlock;
-import org.qualitune.tracing.umt.Program;
-import org.qualitune.tracing.umt.Selection;
-import org.qualitune.tracing.util.VUtil;
 
 /**
  * @author Fabian Haensel <fabian.haensel@gmx.de>
  *
  */
 public class AnalysisRunner {
-	private List<IUmtAnalysis> analyses;
+	protected List<IUmtAnalysis> analyses;
+	protected Logger logger;
 	
 	public AnalysisRunner() {
 		analyses = new LinkedList<IUmtAnalysis>();
+		logger = Logger.getLogger(AnalysisRunner.class);
 	}
 	
 	public void addAnalysis(IUmtAnalysis analysis) {
@@ -59,13 +53,17 @@ public class AnalysisRunner {
 		try {
 			m.invoke(analysis, umtObject);
 		} catch (IllegalArgumentException e) {
-			VUtil.warning("Analyses runner class seems broken");
+			logger.error("Analysis " + analysis.getClass().getSimpleName() + " seems broken for " +
+					methodName + "(" + wantedSignatureClass.getSimpleName() + ")");
 			return false;
 		} catch (IllegalAccessException e) {
-			VUtil.warning("Analysis class seems broken");
+			logger.error("Analysis " + analysis.getClass().getSimpleName() + " seems broken for " +
+					methodName + "(" + wantedSignatureClass.getSimpleName() + ")");
 			return false;
 		} catch (InvocationTargetException e) {
-			VUtil.warning("Analyses runner class seems broken");
+			logger.error("Analysis " + analysis.getClass().getSimpleName() + " seems broken for " +
+					methodName + "(" + wantedSignatureClass.getSimpleName() + "). " + 
+					"Details: " + e.getMessage() + " " + e.getCause().getMessage());
 			return false;
 		}
 		return true;
@@ -80,7 +78,7 @@ public class AnalysisRunner {
 	 */
 	private void tryVisit(IUmtAnalysis analysis, EObject umtObject) {
 		
-		System.out.println("going for a "  + umtObject.eClass().getName());
+		logger.debug("going for a "  + umtObject.eClass().getName());
 		
 		@SuppressWarnings("unchecked")
 		Class<EObject> wantedClass = (Class<EObject>) umtObject.eClass().getInstanceClass();
@@ -89,7 +87,7 @@ public class AnalysisRunner {
 		
 		if (! successfullyCalled ) {
 			for (EClass aSuperClass : umtObject.eClass().getESuperTypes()) {
-				System.out.println("trying super " + aSuperClass);
+				logger.debug("trying super " + aSuperClass);
 				
 				@SuppressWarnings("unchecked")
 				Class<EObject> wantedSuperClass = (Class<EObject>) aSuperClass.getInstanceClass();
@@ -104,9 +102,9 @@ public class AnalysisRunner {
 
 	public void run(EObject umtProgram) {
 		if (analyses.size() == 0)
-			VUtil.warning("AnalysisRunner: ordered to run, but no analyses have been added");
+			logger.warn("AnalysisRunner: ordered to run, but no analyses have been added");
 		
-		System.out.println("running");
+		logger.info("running");
 		
 		Iterator <EObject> it  = new UmtTreeIterator(umtProgram);
 		
