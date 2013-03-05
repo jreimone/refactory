@@ -128,8 +128,8 @@ public class UmtAdapterFactory extends AdapterFactoryImpl {
 				return createBranchAdapter();
 			}
 			@Override
-			public Adapter caseCall(Call object) {
-				return createCallAdapter();
+			public Adapter caseCallExpression(CallExpression object) {
+				return createCallExpressionAdapter();
 			}
 			@Override
 			public Adapter caseModel(Model object) {
@@ -168,8 +168,8 @@ public class UmtAdapterFactory extends AdapterFactoryImpl {
 				return createNumerousKindsOfBranchesAdapter();
 			}
 			@Override
-			public Adapter caseBlackBoxInstruction(BlackBoxInstruction object) {
-				return createBlackBoxInstructionAdapter();
+			public Adapter caseBlackBoxExpression(BlackBoxExpression object) {
+				return createBlackBoxExpressionAdapter();
 			}
 			@Override
 			public Adapter caseInstanceModel(InstanceModel object) {
@@ -218,6 +218,30 @@ public class UmtAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseModelAttributeVariable(ModelAttributeVariable object) {
 				return createModelAttributeVariableAdapter();
+			}
+			@Override
+			public Adapter caseStPut(StPut object) {
+				return createStPutAdapter();
+			}
+			@Override
+			public Adapter caseStDrop(StDrop object) {
+				return createStDropAdapter();
+			}
+			@Override
+			public Adapter caseStInstruction(StInstruction object) {
+				return createStInstructionAdapter();
+			}
+			@Override
+			public Adapter caseExpression(Expression object) {
+				return createExpressionAdapter();
+			}
+			@Override
+			public Adapter caseCalculatedExpression(CalculatedExpression object) {
+				return createCalculatedExpressionAdapter();
+			}
+			@Override
+			public Adapter caseVariableProcessingInstruction(VariableProcessingInstruction object) {
+				return createVariableProcessingInstructionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -450,16 +474,16 @@ public class UmtAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.Call <em>Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.CallExpression <em>Call Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.qualitune.tracing.umt.Call
+	 * @see org.qualitune.tracing.umt.CallExpression
 	 * @generated
 	 */
-	public Adapter createCallAdapter() {
+	public Adapter createCallExpressionAdapter() {
 		return null;
 	}
 
@@ -590,16 +614,16 @@ public class UmtAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.BlackBoxInstruction <em>Black Box Instruction</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.BlackBoxExpression <em>Black Box Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.qualitune.tracing.umt.BlackBoxInstruction
+	 * @see org.qualitune.tracing.umt.BlackBoxExpression
 	 * @generated
 	 */
-	public Adapter createBlackBoxInstructionAdapter() {
+	public Adapter createBlackBoxExpressionAdapter() {
 		return null;
 	}
 
@@ -768,6 +792,90 @@ public class UmtAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelAttributeVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.StPut <em>St Put</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.qualitune.tracing.umt.StPut
+	 * @generated
+	 */
+	public Adapter createStPutAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.StDrop <em>St Drop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.qualitune.tracing.umt.StDrop
+	 * @generated
+	 */
+	public Adapter createStDropAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.StInstruction <em>St Instruction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.qualitune.tracing.umt.StInstruction
+	 * @generated
+	 */
+	public Adapter createStInstructionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.qualitune.tracing.umt.Expression
+	 * @generated
+	 */
+	public Adapter createExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.CalculatedExpression <em>Calculated Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.qualitune.tracing.umt.CalculatedExpression
+	 * @generated
+	 */
+	public Adapter createCalculatedExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.qualitune.tracing.umt.VariableProcessingInstruction <em>Variable Processing Instruction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.qualitune.tracing.umt.VariableProcessingInstruction
+	 * @generated
+	 */
+	public Adapter createVariableProcessingInstructionAdapter() {
 		return null;
 	}
 

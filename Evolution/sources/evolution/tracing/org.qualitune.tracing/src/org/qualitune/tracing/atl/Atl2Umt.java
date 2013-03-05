@@ -3,11 +3,10 @@
  */
 package org.qualitune.tracing.atl;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -40,7 +39,6 @@ import org.qualitune.tracing.umt.UmtPackage;
 import org.qualitune.tracing.umt.UniverseType;
 import org.qualitune.tracing.umt.Variable;
 import org.qualitune.tracing.umt.VariableDeclarationInstruction;
-import org.qualitune.tracing.umt_abstract_content_adapter.*;
 import org.qualitune.tracing.util.VUtil;
 
 /**
@@ -51,6 +49,8 @@ import org.qualitune.tracing.util.VUtil;
  */
 public class Atl2Umt {
 
+	protected Logger logger;
+	
 	EcoreFactory _ecoreFactory;
 	EcorePackage _ecorePackage;
 	
@@ -69,6 +69,8 @@ public class Atl2Umt {
 	EObject _atlRoot = null;
 	
 	public Atl2Umt (IReferenceModel atlMetamodel) {
+		logger = Logger.getLogger(Atl2Umt.class);
+		
 		_ecoreFactory = EcoreFactory.eINSTANCE;
 		_ecorePackage = EcorePackage.eINSTANCE;
 		_umtFactory = UmtFactory.eINSTANCE;
@@ -80,7 +82,7 @@ public class Atl2Umt {
 		try {
 			atlCreator = (EMFModel) atlModelFactory.newModel(atlMetamodel);
 		} catch (ATLCoreException e) {
-			System.err.println("[VAPODI] Error while initialising software component to " +
+			logger.error("Error while initialising software component to " +
 					"generate new ATL model elements.");
 			e.printStackTrace();
 		}
@@ -149,7 +151,7 @@ public class Atl2Umt {
 		VUtil.assertAtlType(atlVariableExp, "VariableExp");
 		
 		EObject oclModel = VUtil.getRefTarget(atlVariableExp, "referredVariable");
-		VUtil.printer(oclModel);
+		//VUtil.printer(oclModel);
 		
 		VUtil.assertAtlType(oclModel,"OclModel");
 		
@@ -171,7 +173,7 @@ public class Atl2Umt {
 		
 		String attributeName = VUtil.getName(atlNavigationOrAttributeCallExp);
 		
-		VUtil.printer(atlNavigationOrAttributeCallExp);
+		//VUtil.printer(atlNavigationOrAttributeCallExp);
 		
 		EObject oclModel = VUtil.getRefTarget(atlNavigationOrAttributeCallExp, "source"); 
 		
@@ -237,7 +239,6 @@ public class Atl2Umt {
 		Branch branch = _umtFactory.createBranch();
 		TypeFilter typeFilter = _umtFactory.createTypeFilter();
 		InstructionBlock branchBody = actionBlock2instructionBlock(atlActionBlock);
-		VariableDeclarationInstruction create = _umtFactory.createVariableDeclarationInstruction();
 		List <ModelVariable> requiredElements = inPattern2variables(VUtil.getRefTarget(atlRule, "inPattern"));
 		List <ModelVariable> createdElements = outPattern2variables(VUtil.getRefTarget(atlRule, "outPattern"));
 		
@@ -248,8 +249,12 @@ public class Atl2Umt {
 		branch.setCondition(typeFilter);
 		branch.setBody(branchBody);
 		typeFilter.getDependencies().addAll(requiredElements);
-		branchBody.getInstructions().add(0,create);
-		create.getVariables().addAll(createdElements);
+		
+		for (Variable element : createdElements) {
+			VariableDeclarationInstruction create = _umtFactory.createVariableDeclarationInstruction();
+			create.setDestination(element);
+			branchBody.getInstructions().add(0,create);
+		}
 		
 		// XXX no translation table entry for 'create', as this is a pure VapodiInstruction
 		translationTable.addTranslation(atlActionBlock, branchBody);
@@ -383,7 +388,7 @@ public class Atl2Umt {
 		if (atlInstructionType.equals("IfStat")) {
 			ret = ifStat2Selection(atlInstruction);
 		} else {
-			VUtil.warning("Unknown ATL instruction type " + atlInstructionType + ", creating debug instead.");
+			logger.warn("Unknown ATL instruction type " + atlInstructionType + ", creating debug instead.");
 			Debug debug = _umtFactory.createDebug();
 			debug.setText("replacement for " + atlInstructionType);
 			List<String> msgList = new LinkedList<String>();
@@ -537,7 +542,7 @@ public class Atl2Umt {
 			if (typeName.equals("MatchedRule")) {
 				program.getFunctions().add(matchedRule2function(element));
 			} else
-				VUtil.warning("unhandled element type " + typeName);
+				logger.warn("unhandled element type " + typeName);
 		}
 		
 		// who has to have a mapping entry?

@@ -18,10 +18,11 @@ import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
 import org.qualitune.tracing.umt.Program;
 import org.qualitune.tracing.util.VUtil;
+import org.qualitune.tracing.vapodi.IConcreteLanguageHandler;
 
 /* general infrastructure */
 
-public class AtlHandler {
+public class AtlHandler implements IConcreteLanguageHandler {
 	private enum AtlHandlerInnerState {
 		INITIALISED, MODEL_LOADED, VAPODI_MERGED
 	}
@@ -49,7 +50,7 @@ public class AtlHandler {
 		innerState = AtlHandlerInnerState.INITIALISED;
 	}
 	
-	public void loadModel(String path) {
+	public boolean loadModel(String path) {
 		if (innerState != AtlHandlerInnerState.INITIALISED) {
 			VUtil.myExit("loadModel has been called on an AtlHandler that is in state " +
 					innerState + ", expecting it to be in state INITIALISED. (Did you try " +
@@ -75,6 +76,8 @@ public class AtlHandler {
 		innerState = AtlHandlerInnerState.MODEL_LOADED;
 		
 		mergeInBaseStub(atlModule);
+		
+		return true;
 	}
 	
 	/**

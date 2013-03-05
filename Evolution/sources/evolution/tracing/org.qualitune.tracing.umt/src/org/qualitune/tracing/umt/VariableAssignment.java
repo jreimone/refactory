@@ -12,8 +12,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.qualitune.tracing.umt.VariableAssignment#getDestination <em>Destination</em>}</li>
- *   <li>{@link org.qualitune.tracing.umt.VariableAssignment#getSource <em>Source</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.VariableAssignment#getAssignedExpression <em>Assigned Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -21,47 +20,31 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface VariableAssignment extends Instruction {
+public interface VariableAssignment extends VariableProcessingInstruction {
 	/**
-	 * Returns the value of the '<em><b>Destination</b></em>' reference.
+	 * Returns the value of the '<em><b>Assigned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Destination</em>' reference isn't clear,
+	 * If the meaning of the '<em>Assigned Expression</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Destination</em>' reference.
-	 * @see #setDestination(Variable)
-	 * @see org.qualitune.tracing.umt.UmtPackage#getVariableAssignment_Destination()
-	 * @model required="true"
+	 * @return the value of the '<em>Assigned Expression</em>' containment reference.
+	 * @see #setAssignedExpression(Expression)
+	 * @see org.qualitune.tracing.umt.UmtPackage#getVariableAssignment_AssignedExpression()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Variable getDestination();
+	Expression getAssignedExpression();
 
 	/**
-	 * Sets the value of the '{@link org.qualitune.tracing.umt.VariableAssignment#getDestination <em>Destination</em>}' reference.
+	 * Sets the value of the '{@link org.qualitune.tracing.umt.VariableAssignment#getAssignedExpression <em>Assigned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Destination</em>' reference.
-	 * @see #getDestination()
+	 * @param value the new value of the '<em>Assigned Expression</em>' containment reference.
+	 * @see #getAssignedExpression()
 	 * @generated
 	 */
-	void setDestination(Variable value);
-
-	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference list.
-	 * The list contents are of type {@link org.qualitune.tracing.umt.Variable}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Source</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' reference list.
-	 * @see org.qualitune.tracing.umt.UmtPackage#getVariableAssignment_Source()
-	 * @model
-	 * @generated
-	 */
-	EList<Variable> getSource();
+	void setAssignedExpression(Expression value);
 
 } // VariableAssignment

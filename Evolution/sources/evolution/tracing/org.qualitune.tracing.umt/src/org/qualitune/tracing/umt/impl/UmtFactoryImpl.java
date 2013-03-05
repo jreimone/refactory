@@ -66,14 +66,14 @@ public class UmtFactoryImpl extends EFactoryImpl implements UmtFactory {
 			case UmtPackage.PROGRAM: return createProgram();
 			case UmtPackage.LOOP: return createLoop();
 			case UmtPackage.BRANCH: return createBranch();
-			case UmtPackage.CALL: return createCall();
+			case UmtPackage.CALL_EXPRESSION: return createCallExpression();
 			case UmtPackage.ADD_TRACE_LINK: return createAddTraceLink();
 			case UmtPackage.WRITE: return createWrite();
 			case UmtPackage.DELETE: return createDelete();
 			case UmtPackage.TYPE_FILTER: return createTypeFilter();
 			case UmtPackage.LOGICAL_CONDITION: return createLogicalCondition();
 			case UmtPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
-			case UmtPackage.BLACK_BOX_INSTRUCTION: return createBlackBoxInstruction();
+			case UmtPackage.BLACK_BOX_EXPRESSION: return createBlackBoxExpression();
 			case UmtPackage.INSTANCE_MODEL: return createInstanceModel();
 			case UmtPackage.META_MODEL: return createMetaModel();
 			case UmtPackage.COMMENT: return createComment();
@@ -86,6 +86,9 @@ public class UmtFactoryImpl extends EFactoryImpl implements UmtFactory {
 			case UmtPackage.VARIABLE_RESET: return createVariableReset();
 			case UmtPackage.MODEL_TYPE_ATTRIBUTE: return createModelTypeAttribute();
 			case UmtPackage.MODEL_ATTRIBUTE_VARIABLE: return createModelAttributeVariable();
+			case UmtPackage.ST_PUT: return createStPut();
+			case UmtPackage.ST_DROP: return createStDrop();
+			case UmtPackage.CALCULATED_EXPRESSION: return createCalculatedExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -220,9 +223,9 @@ public class UmtFactoryImpl extends EFactoryImpl implements UmtFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Call createCall() {
-		CallImpl call = new CallImpl();
-		return call;
+	public CallExpression createCallExpression() {
+		CallExpressionImpl callExpression = new CallExpressionImpl();
+		return callExpression;
 	}
 
 	/**
@@ -290,9 +293,9 @@ public class UmtFactoryImpl extends EFactoryImpl implements UmtFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BlackBoxInstruction createBlackBoxInstruction() {
-		BlackBoxInstructionImpl blackBoxInstruction = new BlackBoxInstructionImpl();
-		return blackBoxInstruction;
+	public BlackBoxExpression createBlackBoxExpression() {
+		BlackBoxExpressionImpl blackBoxExpression = new BlackBoxExpressionImpl();
+		return blackBoxExpression;
 	}
 
 	/**
@@ -413,6 +416,36 @@ public class UmtFactoryImpl extends EFactoryImpl implements UmtFactory {
 	public ModelAttributeVariable createModelAttributeVariable() {
 		ModelAttributeVariableImpl modelAttributeVariable = new ModelAttributeVariableImpl();
 		return modelAttributeVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StPut createStPut() {
+		StPutImpl stPut = new StPutImpl();
+		return stPut;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StDrop createStDrop() {
+		StDropImpl stDrop = new StDropImpl();
+		return stDrop;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CalculatedExpression createCalculatedExpression() {
+		CalculatedExpressionImpl calculatedExpression = new CalculatedExpressionImpl();
+		return calculatedExpression;
 	}
 
 	/**

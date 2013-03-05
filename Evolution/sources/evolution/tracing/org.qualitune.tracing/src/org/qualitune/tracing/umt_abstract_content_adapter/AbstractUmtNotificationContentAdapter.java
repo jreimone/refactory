@@ -3,12 +3,12 @@
  */
 package org.qualitune.tracing.umt_abstract_content_adapter;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.qualitune.tracing.umt.Function;
 import org.qualitune.tracing.umt.InstructionBlock;
 import org.qualitune.tracing.umt.Program;
-import org.qualitune.tracing.util.VUtil;
 
 /**
  * @author Fabian Haensel <fabian.haensel@gmx.de>
@@ -28,30 +28,36 @@ import org.qualitune.tracing.util.VUtil;
  */
 abstract public class AbstractUmtNotificationContentAdapter extends EContentAdapter {
 
+	protected Logger logger;
+	
+	public AbstractUmtNotificationContentAdapter() {
+		logger = Logger.getLogger(AbstractUmtNotificationContentAdapter.class);
+	}
+	
 	/*
 	 * General infrastructure
 	 */
 	protected void warningUnknown()
 	{
-		VUtil.warning("something unknown has changed");	
+		logger.warn("something unknown has changed");	
 	}
 	
 	protected void warningUnknownFeature(Notification n)
 	{
-		VUtil.warning("unhandled change to feature of UMT element of type " +
+		logger.warn("unhandled change to feature of UMT element of type " +
 				n.getNotifier().getClass().getName() + " (unknown feature)");
 	}
 	
 	protected void warningUnknownType(Notification n)
 	{
-		VUtil.warning("unhandled change to UMT element of type " + 
+		logger.warn("unhandled change to UMT element of type " + 
 				n.getNotifier().getClass().getName() + " (unknown type)");
 		
 	}
 	
 	protected void warningUnknownEventType(Notification n)
 	{
-		VUtil.warning("unhandled change to feature of UMT element of type " +
+		logger.warn("unhandled change to feature of UMT element of type " +
 				n.getNotifier().getClass().getName() + " (unknown event type " + n.getEventType() + ")");
 	}
 	

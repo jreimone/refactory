@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -14,6 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.qualitune.tracing.umt.Expression;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.qualitune.tracing.umt.UmtPackage;
@@ -27,33 +29,22 @@ import org.qualitune.tracing.umt.VariableAssignment;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.qualitune.tracing.umt.impl.VariableAssignmentImpl#getDestination <em>Destination</em>}</li>
- *   <li>{@link org.qualitune.tracing.umt.impl.VariableAssignmentImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.impl.VariableAssignmentImpl#getAssignedExpression <em>Assigned Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableAssignmentImpl extends EObjectImpl implements VariableAssignment {
+public class VariableAssignmentImpl extends VariableProcessingInstructionImpl implements VariableAssignment {
 	/**
-	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
+	 * The cached value of the '{@link #getAssignedExpression() <em>Assigned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDestination()
+	 * @see #getAssignedExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable destination;
-
-	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Variable> source;
+	protected Expression assignedExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -79,16 +70,23 @@ public class VariableAssignmentImpl extends EObjectImpl implements VariableAssig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable getDestination() {
-		if (destination != null && destination.eIsProxy()) {
-			InternalEObject oldDestination = (InternalEObject)destination;
-			destination = (Variable)eResolveProxy(oldDestination);
-			if (destination != oldDestination) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UmtPackage.VARIABLE_ASSIGNMENT__DESTINATION, oldDestination, destination));
-			}
+	public Expression getAssignedExpression() {
+		return assignedExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAssignedExpression(Expression newAssignedExpression, NotificationChain msgs) {
+		Expression oldAssignedExpression = assignedExpression;
+		assignedExpression = newAssignedExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION, oldAssignedExpression, newAssignedExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return destination;
+		return msgs;
 	}
 
 	/**
@@ -96,32 +94,32 @@ public class VariableAssignmentImpl extends EObjectImpl implements VariableAssig
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetDestination() {
-		return destination;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDestination(Variable newDestination) {
-		Variable oldDestination = destination;
-		destination = newDestination;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.VARIABLE_ASSIGNMENT__DESTINATION, oldDestination, destination));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Variable> getSource() {
-		if (source == null) {
-			source = new EObjectResolvingEList<Variable>(Variable.class, this, UmtPackage.VARIABLE_ASSIGNMENT__SOURCE);
+	public void setAssignedExpression(Expression newAssignedExpression) {
+		if (newAssignedExpression != assignedExpression) {
+			NotificationChain msgs = null;
+			if (assignedExpression != null)
+				msgs = ((InternalEObject)assignedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION, null, msgs);
+			if (newAssignedExpression != null)
+				msgs = ((InternalEObject)newAssignedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION, null, msgs);
+			msgs = basicSetAssignedExpression(newAssignedExpression, msgs);
+			if (msgs != null) msgs.dispatch();
 		}
-		return source;
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION, newAssignedExpression, newAssignedExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION:
+				return basicSetAssignedExpression(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -132,11 +130,8 @@ public class VariableAssignmentImpl extends EObjectImpl implements VariableAssig
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UmtPackage.VARIABLE_ASSIGNMENT__DESTINATION:
-				if (resolve) return getDestination();
-				return basicGetDestination();
-			case UmtPackage.VARIABLE_ASSIGNMENT__SOURCE:
-				return getSource();
+			case UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION:
+				return getAssignedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -150,12 +145,8 @@ public class VariableAssignmentImpl extends EObjectImpl implements VariableAssig
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UmtPackage.VARIABLE_ASSIGNMENT__DESTINATION:
-				setDestination((Variable)newValue);
-				return;
-			case UmtPackage.VARIABLE_ASSIGNMENT__SOURCE:
-				getSource().clear();
-				getSource().addAll((Collection<? extends Variable>)newValue);
+			case UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION:
+				setAssignedExpression((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -169,11 +160,8 @@ public class VariableAssignmentImpl extends EObjectImpl implements VariableAssig
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UmtPackage.VARIABLE_ASSIGNMENT__DESTINATION:
-				setDestination((Variable)null);
-				return;
-			case UmtPackage.VARIABLE_ASSIGNMENT__SOURCE:
-				getSource().clear();
+			case UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION:
+				setAssignedExpression((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -187,10 +175,8 @@ public class VariableAssignmentImpl extends EObjectImpl implements VariableAssig
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UmtPackage.VARIABLE_ASSIGNMENT__DESTINATION:
-				return destination != null;
-			case UmtPackage.VARIABLE_ASSIGNMENT__SOURCE:
-				return source != null && !source.isEmpty();
+			case UmtPackage.VARIABLE_ASSIGNMENT__ASSIGNED_EXPRESSION:
+				return assignedExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

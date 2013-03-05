@@ -3,6 +3,7 @@
 package org.qualitune.tracing.umt;
 
 import org.eclipse.emf.common.util.EList;
+import org.qualitune.tracing.vapoditrace.DynamicEntity;
 
 
 /**
@@ -13,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.qualitune.tracing.umt.CfsInstruction#getConditions <em>Conditions</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.CfsInstruction#getVariables <em>Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,18 +25,18 @@ import org.eclipse.emf.common.util.EList;
 public interface CfsInstruction extends VapodiInstruction {
 
 	/**
-	 * Returns the value of the '<em><b>Conditions</b></em>' reference list.
-	 * The list contents are of type {@link org.qualitune.tracing.umt.Condition}.
+	 * Returns the value of the '<em><b>Variables</b></em>' reference list.
+	 * The list contents are of type {@link org.qualitune.tracing.umt.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Conditions</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Variables</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Conditions</em>' reference list.
-	 * @see org.qualitune.tracing.umt.UmtPackage#getCfsInstruction_Conditions()
+	 * @return the value of the '<em>Variables</em>' reference list.
+	 * @see org.qualitune.tracing.umt.UmtPackage#getCfsInstruction_Variables()
 	 * @model
 	 * @generated
 	 */
-	EList<Condition> getConditions();
+	EList<Variable> getVariables();
 } // CfsInstruction

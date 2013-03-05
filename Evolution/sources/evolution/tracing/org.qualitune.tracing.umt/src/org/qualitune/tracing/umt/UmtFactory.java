@@ -103,13 +103,13 @@ public interface UmtFactory extends EFactory {
 	Branch createBranch();
 
 	/**
-	 * Returns a new object of class '<em>Call</em>'.
+	 * Returns a new object of class '<em>Call Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call</em>'.
+	 * @return a new object of class '<em>Call Expression</em>'.
 	 * @generated
 	 */
-	Call createCall();
+	CallExpression createCallExpression();
 
 	/**
 	 * Returns a new object of class '<em>Add Trace Link</em>'.
@@ -166,13 +166,13 @@ public interface UmtFactory extends EFactory {
 	VariableDeclaration createVariableDeclaration();
 
 	/**
-	 * Returns a new object of class '<em>Black Box Instruction</em>'.
+	 * Returns a new object of class '<em>Black Box Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Black Box Instruction</em>'.
+	 * @return a new object of class '<em>Black Box Expression</em>'.
 	 * @generated
 	 */
-	BlackBoxInstruction createBlackBoxInstruction();
+	BlackBoxExpression createBlackBoxExpression();
 
 	/**
 	 * Returns a new object of class '<em>Instance Model</em>'.
@@ -281,6 +281,33 @@ public interface UmtFactory extends EFactory {
 	 * @generated
 	 */
 	ModelAttributeVariable createModelAttributeVariable();
+
+	/**
+	 * Returns a new object of class '<em>St Put</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>St Put</em>'.
+	 * @generated
+	 */
+	StPut createStPut();
+
+	/**
+	 * Returns a new object of class '<em>St Drop</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>St Drop</em>'.
+	 * @generated
+	 */
+	StDrop createStDrop();
+
+	/**
+	 * Returns a new object of class '<em>Calculated Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Calculated Expression</em>'.
+	 * @generated
+	 */
+	CalculatedExpression createCalculatedExpression();
 
 	/**
 	 * Returns the package supported by this factory.

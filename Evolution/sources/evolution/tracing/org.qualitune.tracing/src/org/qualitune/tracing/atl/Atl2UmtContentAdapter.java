@@ -5,18 +5,15 @@ package org.qualitune.tracing.atl;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.m2m.atl.core.IModel;
 import org.eclipse.m2m.atl.core.IReferenceModel;
 import org.qualitune.tracing.umt.AddTraceLink;
-import org.qualitune.tracing.umt.BlackBoxInstruction;
-import org.qualitune.tracing.umt.Call;
+import org.qualitune.tracing.umt.BlackBoxExpression;
+import org.qualitune.tracing.umt.CallExpression;
 import org.qualitune.tracing.umt.CfsPop;
 import org.qualitune.tracing.umt.CfsPush;
 import org.qualitune.tracing.umt.Comment;
@@ -30,10 +27,13 @@ import org.qualitune.tracing.umt.MetaModel;
 import org.qualitune.tracing.umt.Model;
 import org.qualitune.tracing.umt.NumerousKindsOfBranches;
 import org.qualitune.tracing.umt.Program;
+import org.qualitune.tracing.umt.StDrop;
+import org.qualitune.tracing.umt.StInstruction;
+import org.qualitune.tracing.umt.StPut;
 import org.qualitune.tracing.umt.Variable;
 import org.qualitune.tracing.umt.VariableAssignment;
 import org.qualitune.tracing.umt.VariableDeclarationInstruction;
-import org.qualitune.tracing.umt_abstract_content_adapter.*;
+import org.qualitune.tracing.umt_abstract_content_adapter.AbstractUmtEventContentAdapter;
 import org.qualitune.tracing.util.VUtil;
 
 /**
@@ -79,7 +79,7 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		else if (addedModel.eClass() instanceof MetaModel)
 			handleProgramAddMetaModel(program, (MetaModel) addedModel);
 		else
-			VUtil.warning("severe warning: unknown model type " + addedModel.eClass().getName() + 
+			logger.warn("severe warning: unknown model type " + addedModel.eClass().getName() + 
 					" (can't technically happen). Did you change the UMT metamodel without adapting the content adapter?");
 	}
 
@@ -93,16 +93,16 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 			VUtil.addtoReference(atlModule, "inModels", atlModel);
 			break;
 		case INOUT:
-			VUtil.warning("severe warning: INOUT model intention. Atl2UmtContentAdapter doesn't know how to handle this.");
+			logger.warn("severe warning: INOUT model intention. Atl2UmtContentAdapter doesn't know how to handle this.");
 			break;
 		case OMITTED_INTENTION:
-			VUtil.warning("severe warning: omitted model intention. That's likely an error in a UMT analysis.");
+			logger.warn("severe warning: omitted model intention. That's likely an error in a UMT analysis.");
 			break;
 		case OUT:
 			VUtil.addtoReference(atlModule, "outModels", atlModel);
 			break;
 		default:
-			VUtil.warning("severe warning: unknown model intention (can't technically happen). Did you change the " +
+			logger.warn("severe warning: unknown model intention (can't technically happen). Did you change the " +
 					"UMT metamodel?");
 			break;
 		}
@@ -181,32 +181,32 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		return atlExpressionStat;
 	}
 	
-	protected EObject umt2AtlInstruction(BlackBoxInstruction umt) {
-		VUtil.warning("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
+	protected EObject umt2AtlInstruction(BlackBoxExpression umt) {
+		logger.warn("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
 				"certainly lead to unwanted program shutdown.");
 		return null;
 	}
 	
 	protected EObject umt2AtlInstruction(VariableDeclarationInstruction umt) {
-		VUtil.warning("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
+		logger.warn("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
 				"certainly lead to unwanted program shutdown.");
 		return null;
 	}
 	
 	protected EObject umt2AtlInstruction(VariableAssignment umt) {
-		VUtil.warning("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
+		logger.warn("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
 				"certainly lead to unwanted program shutdown.");
 		return null;
 	}
 	
-	protected EObject umt2AtlInstruction(Call umt) {
-		VUtil.warning("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
+	protected EObject umt2AtlInstruction(CallExpression umt) {
+		logger.warn("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
 				"certainly lead to unwanted program shutdown.");
 		return null;
 	}
 	
 	protected EObject umt2AtlInstruction(NumerousKindsOfBranches umt) {
-		VUtil.warning("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
+		logger.warn("UMT instruction mapped to null instead of specific ATL instruction. This will almost "+
 				"certainly lead to unwanted program shutdown.");
 		return null;
 	}
@@ -247,7 +247,7 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		VUtil.setAttribute(thisModule, "varName", "thisModule");
 		VUtil.addtoReference(atlOperationCallExp, "arguments", atlIntegerExpression);
 
-		VUtil.setAttribute(atlIntegerExpression, "integerSymbol", getNumberOfInvolvedVariables(umtInstruction.getConditions()));
+		VUtil.setAttribute(atlIntegerExpression, "integerSymbol", umtInstruction.getVariables().size());
 		
 		// ugly
 		thisModule.eResource().getContents().add(thisModule);
@@ -277,14 +277,52 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		// for every condition : for every var @ dependencies : add a CFS_push_X(var) call
 		List<EObject> ret = new LinkedList<EObject>();
 		
-		for (Condition condition : umtInstruction.getConditions()) {
+		for (Variable condition : umtInstruction.getVariables()) {
 			//TraceType tt;
 			
-			for (Variable var : condition.getDependencies()) {
+			//for (Variable var : condition.getDependencies()) {
 				//ret += atlCfsPush(var);
-			}
+			//}
 		}
 		
+		return ret;
+	}
+	
+	protected List<EObject> umt2AtlInstruction(StInstruction stInstruction) {
+		List<EObject> ret = new LinkedList<EObject>();
+		String operationName;
+		
+		if (stInstruction instanceof StPut)
+			operationName = "ST_put";
+		else if (stInstruction instanceof StDrop)
+			operationName = "ST_drop";
+		else {
+			VUtil.myExit("unknown symbol table instruction of type " + stInstruction.eClass().getName());
+			return null;
+		}
+		
+		for (Variable symbol : stInstruction.getSymbols()) {
+			// ATL: ST_put/drop("symbol") (where symbol is a string representation of the referred variable)
+			EObject atlExpressionStat = atlFactory.createModelElement("ExpressionStat");
+			EObject atlOperationCallExp = atlFactory.createModelElement("OperationCallExp");
+			EObject atlVariableExp = atlFactory.createModelElement("VariableExp");
+			EObject thisModule = atlFactory.createModelElement("VariableDeclaration");
+			EObject atlStringExpression = atlFactory.createModelElement("StringExp");
+			
+			VUtil.setReference(atlExpressionStat, "expression", atlOperationCallExp);
+			VUtil.setReference(atlOperationCallExp, "source", atlVariableExp);
+			VUtil.setReference(atlVariableExp, "referredVariable", thisModule);
+
+			VUtil.setAttribute(atlOperationCallExp, "operationName", operationName);
+			VUtil.setAttribute(thisModule, "varName", "thisModule");
+			VUtil.setAttribute(atlStringExpression, "stringSymbol", symbol.getName());
+			VUtil.addtoReference(atlOperationCallExp, "arguments", atlStringExpression);
+
+			// ugly
+			thisModule.eResource().getContents().add(thisModule);
+
+			ret.add(atlExpressionStat);
+		}
 		return ret;
 	}
 	
@@ -304,7 +342,7 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		// alternative approaches: duck typing, reflection; both not much less evil, yet more complicated
 		
 		if (umtInstruction instanceof Comment) {
-			VUtil.warning("ATL does not directly support comments in this fashion. Ignoring demand to add " +
+			logger.warn("ATL does not directly support comments in this fashion. Ignoring demand to add " +
 					"comment with text '" + ((Comment) umtInstruction).getText() + " '(might lead to program shutdown).");
 			return null;
 		} if (umtInstruction instanceof Debug) {
@@ -314,7 +352,7 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		} else if (umtInstruction instanceof CfsPop) {
 			atlRet = umt2AtlInstruction ( (CfsPop) umtInstruction);
 		} else {
-			VUtil.warning("Don't know how to handle UMT instruction " + umtInstruction.eClass().getName() +
+			logger.warn("Don't know how to handle UMT instruction " + umtInstruction.eClass().getName() +
 					"; UMT instruction mapped to generic placeholder instead of specific ATL instruction.");
 			return createAtlPrintln("warning: actionless placeholder for instruction of type " + umtInstruction.eClass().getName());
 		}
@@ -346,7 +384,7 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		
 		// otherwise we don't have to pay attention to these corner cases
 		
-		VUtil.warning("XXX currently we should not reach this point 7zb");
+		logger.warn("XXX currently we should not reach this point 7zb");
 		
 		/* XXX untested, currently expected to fail 
 		 * - not all instructions have atl pendants (spec: not pure vapodi instructions)
