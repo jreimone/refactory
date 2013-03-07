@@ -21,9 +21,18 @@
       <super
             type="org.eclipse.core.resources.problemmarker">
       </super>
+     <!-- <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super> -->
       <super
             type="org.eclipse.emf.ecore.diagnostic">
       </super>
+      <super
+            type="org.eclipse.core.resources.textmarker">
+      </super>
+      <attribute
+            name="roleMapping">
+      </attribute>
    </extension>
    <extension
          point="org.eclipse.ui.ide.markerResolution">
@@ -31,6 +40,52 @@
             class="org.emftext.refactoring.smell.registry.SmellResolutionQuickFixer"
             markerType="org.emftext.refactoring.smell.problem">
       </markerResolutionGenerator>
+   </extension>
+   <!-- <extension
+         point="org.eclipse.ui.ide.markerImageProviders">
+      <imageprovider
+            icon="icons/poop.png"
+            id="org.emftext.refactoring.smell.problem.imageprovider"
+            markertype="org.emftext.refactoring.smell.problem">
+      </imageprovider>
+   </extension>
+   -->
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+      <type
+            markerSeverity="1"
+            markerType="org.emftext.refactoring.smell.problem"
+            name="org.emftext.refactoring.smell.problem.annotation">
+      </type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="org.emftext.refactoring.smell.problem.annotation"
+            colorPreferenceKey="smell.occurrenceIndicationColor"
+            colorPreferenceValue="255,128,0"
+            contributesToHeader="false"
+            highlightPreferenceKey="smell.occurrenceHighlighting"
+            highlightPreferenceValue="true"
+            icon="icons/poop.png"
+            includeOnPreferencePage="true"
+            isGoToNextNavigationTarget="true"
+            isGoToNextNavigationTargetKey="smell.isOccurrenceGoToNextNavigationTarget"
+            isGoToPreviousNavigationTarget="true"
+            isGoToPreviousNavigationTargetKey="smell.isOccurrenceGoToPreviousNavigationTarget"
+            label="Quality Smells"
+            overviewRulerPreferenceKey="smell.occurrenceIndicationInOverviewRuler"
+            overviewRulerPreferenceValue="true"
+            presentationLayer="4"
+            showInNextPrevDropdownToolbarAction="true"
+            showInNextPrevDropdownToolbarActionKey="smell.showOccurrenceInNextPrevDropdownToolbarAction"
+            textPreferenceKey="smell.occurrenceIndication"
+            textPreferenceValue="true"
+            textStylePreferenceKey="smell.occurrenceTextStyle"
+            textStylePreferenceValue="SQUIGGLES"
+            verticalRulerPreferenceKey="smell.occurrenceIndicationInVerticalRuler"
+            verticalRulerPreferenceValue="true">
+	  </specification>
    </extension>
 
 </plugin>

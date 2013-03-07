@@ -67,27 +67,29 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 	@Override
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		IResource res = delta.getResource();
-		IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
-		boolean ownMarkersChanged = false;
-		if(markerDeltas.length > 0){
-			for (IMarkerDelta markerDelta : markerDeltas) {
-				if(markerDelta.getType().equals(IQualitySmellMarker.ID)){
-					ownMarkersChanged = true;
-					break;
+		IFile file = (IFile) res.getAdapter(IFile.class);
+		if(file != null){
+			IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
+			boolean ownMarkersChanged = false;
+			if(markerDeltas.length > 0){
+				for (IMarkerDelta markerDelta : markerDeltas) {
+					if(markerDelta.getType().equals(IQualitySmellMarker.ID)){
+						ownMarkersChanged = true;
+						break;
+					}
 				}
 			}
-		}
-		IFile file = (IFile) res.getAdapter(IFile.class);
-		if(file != null && !ownMarkersChanged){
-			switch (delta.getKind()) {
-			case IResourceDelta.ADDED:
-				checkSmellsInFile(file);
-				break;
-			case IResourceDelta.CHANGED:
-				checkSmellsInFile(file);
-				break;
-			case IResourceDelta.REMOVED:
-				break;
+			if(!ownMarkersChanged){
+				switch (delta.getKind()) {
+				case IResourceDelta.ADDED:
+					checkSmellsInFile(file);
+					break;
+				case IResourceDelta.CHANGED:
+					checkSmellsInFile(file);
+					break;
+				case IResourceDelta.REMOVED:
+					break;
+				}
 			}
 		}
 		return true; // visit the children
@@ -181,14 +183,15 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				try {
-//					IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
-//					for (IMarker marker : markers) {
-//						marker.delete();
-//					}
+					//					IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
+					//					for (IMarker marker : markers) {
+					//						marker.delete();
+					//					}
 					String smellMessage = calculation.getSmellMessage();
 					List<EObject> causingObjects = result.getCausingObjects();
 					for (EObject element : causingObjects) {
 						IMarker marker = file.createMarker(IQualitySmellMarker.ID);
+						System.out.println("marker created");
 						marker.setAttribute(IMarker.LOCATION, EcoreUtil.getURI(element).toString());
 						marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
 						marker.setAttribute(IMarker.MESSAGE, smellMessage);
@@ -208,7 +211,6 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 			}
 		};
 		job.schedule();
-		System.out.println("marker created");
 	}
 }
 
