@@ -42,11 +42,11 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 		IResource resource = event.getResource();
 		switch (event.getType()) {
 		case IResourceChangeEvent.PRE_CLOSE:
-			System.out.println("close");
+//			System.out.println("close");
 			break;
 
 		case IResourceChangeEvent.PRE_DELETE:
-			System.out.println("delete");
+//			System.out.println("delete");
 			break;
 
 		case IResourceChangeEvent.POST_CHANGE:
@@ -66,9 +66,9 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 		IFile file = (IFile) res.getAdapter(IFile.class);
 		switch (delta.getKind()) {
 		case IResourceDelta.ADDED:
-			System.out.print("Resource ");
-			System.out.print(res.getFullPath());
-			System.out.println(" was added.");
+//			System.out.print("Resource ");
+//			System.out.print(res.getFullPath());
+//			System.out.println(" was added.");
 			boolean newModelRegistered = MegamodelRegistrationProcessor.registerModelInFile(megamodel, file);
 			if(newModelRegistered){
 				try {
@@ -86,9 +86,9 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 			}
 			break;
 		case IResourceDelta.REMOVED:
-			System.out.print("Resource ");
-			System.out.print(res.getFullPath());
-			System.out.println(" was removed.");
+//			System.out.print("Resource ");
+//			System.out.print(res.getFullPath());
+//			System.out.println(" was removed.");
 			URI uri = URI.createPlatformResourceURI(res.getFullPath().toString(), true);
 			uri = uri.trimFragment();
 			List<InstanceModel> instanceModels = new ArrayList<InstanceModel>(megamodel.getInstanceModels());
@@ -111,9 +111,9 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 			break;
 		case IResourceDelta.CHANGED:
 			if(delta.getResource().getType() == IResource.FILE){
-				System.out.print("Resource ");
-				System.out.print(delta.getFullPath());
-				System.out.println(" has changed.");
+//				System.out.print("Resource ");
+//				System.out.print(delta.getFullPath());
+//				System.out.println(" has changed.");
 			}
 			int flags = delta.getFlags();
 			if ((flags & IResourceDelta.CONTENT) != 0) {
