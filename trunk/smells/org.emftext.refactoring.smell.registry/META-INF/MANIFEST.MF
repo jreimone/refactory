@@ -24,6 +24,7 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.emftext.refactoring.specification.interpreter,
  org.emftext.refactoring.registry.rolemapping,
  org.eclipse.jface,
- org.apache.commons.lang
+ org.apache.commons.lang,
+ org.eclipse.ui.editors
 Export-Package: org.emftext.refactoring.smell.registry
 Bundle-ActivationPolicy: lazy
