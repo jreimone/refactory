@@ -1213,27 +1213,27 @@
     </bodies>
   </patterns>
   <importPackages xsi:type="eMFPatternLanguage:PackageImport">
+    <ePackage href="http://www.emftext.org/java/instantiations#/"/>
+  </importPackages>
+  <importPackages xsi:type="eMFPatternLanguage:PackageImport">
+    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+  </importPackages>
+  <importPackages xsi:type="eMFPatternLanguage:PackageImport">
     <ePackage href="http://www.emftext.org/java/types#/"/>
+  </importPackages>
+  <importPackages xsi:type="eMFPatternLanguage:PackageImport">
+    <ePackage href="http://www.emftext.org/java/references#/"/>
   </importPackages>
   <importPackages xsi:type="eMFPatternLanguage:PackageImport">
     <ePackage href="http://www.emftext.org/java/statements#/"/>
   </importPackages>
   <importPackages xsi:type="eMFPatternLanguage:PackageImport">
-    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    <ePackage href="http://www.emftext.org/java/variables#/"/>
   </importPackages>
   <importPackages xsi:type="eMFPatternLanguage:PackageImport">
     <ePackage href="http://www.emftext.org/java/classifiers#/"/>
   </importPackages>
   <importPackages xsi:type="eMFPatternLanguage:PackageImport">
     <ePackage href="http://www.emftext.org/java/members#/"/>
-  </importPackages>
-  <importPackages xsi:type="eMFPatternLanguage:PackageImport">
-    <ePackage href="http://www.emftext.org/java/variables#/"/>
-  </importPackages>
-  <importPackages xsi:type="eMFPatternLanguage:PackageImport">
-    <ePackage href="http://www.emftext.org/java/instantiations#/"/>
-  </importPackages>
-  <importPackages xsi:type="eMFPatternLanguage:PackageImport">
-    <ePackage href="http://www.emftext.org/java/references#/"/>
   </importPackages>
 </eMFPatternLanguage:PatternModel>
