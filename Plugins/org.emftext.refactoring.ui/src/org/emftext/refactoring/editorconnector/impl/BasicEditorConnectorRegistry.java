@@ -73,7 +73,7 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 							list = new ArrayList<Class<IEditorConnector>>();
 							fileExtensionMap.put(extension, list);
 						}
-						if(list.contains(editorConnectorClass)){
+						if(!list.contains(editorConnectorClass)){
 							list.add(editorConnectorClass);
 						}
 					}
@@ -86,6 +86,7 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 						Map<String, String> extensionToEditorID = connectorClassToEditorIDMap.get(editorConnectorClass);
 						if(extensionToEditorID == null){
 							extensionToEditorID = new HashMap<String, String>();
+							connectorClassToEditorIDMap.put(editorConnectorClass, extensionToEditorID);
 						}
 						extensionToEditorID.put(extension, editorID);
 					}
@@ -119,9 +120,11 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 							IEditorPart editor;
 							try {
 								editor = IDE.openEditor(activePage, fileEditorInput, editorID);
-								editorConnector = getEditorConnector(editor);
-								if(editorConnector != null){
-									break;
+								if(editor != null){
+									editorConnector = getEditorConnector(editor);
+									if(editorConnector != null){
+										break;
+									}
 								}
 							} catch (PartInitException e) {
 								e.printStackTrace();
