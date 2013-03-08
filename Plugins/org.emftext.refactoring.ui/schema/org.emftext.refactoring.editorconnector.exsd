@@ -49,6 +49,9 @@
 
    <element name="editorconnector">
       <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="extensionToEditorMapping"/>
+         </sequence>
          <attribute name="editorconnector" type="string" use="required">
             <annotation>
                <documentation>
@@ -56,6 +59,38 @@
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn=":org.emftext.refactoring.editorconnector.IEditorConnector"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="fileExtensions" type="string">
+            <annotation>
+               <documentation>
+                  Specify file extensions for which this editor connector should be used. Separate the extensions with comma. This optional attribute can be used to specialise editor connectors.
+
+Example:
+We have an EMFTextEditorConnector for connecting to editors generated with EMFText. DresdenOCL has an EMFText generated editor, too. But, it would be more appropriate to provide a DresdenOCL specific editor connector for, e.g., resolve CS elements to abstract model elements.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="extensionToEditorMapping">
+      <complexType>
+         <attribute name="extension" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="editorID" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier" basedOn="org.eclipse.ui.editors/editor/@id"/>
                </appinfo>
             </annotation>
          </attribute>
