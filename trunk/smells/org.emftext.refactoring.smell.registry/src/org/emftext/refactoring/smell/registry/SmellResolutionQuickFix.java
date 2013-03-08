@@ -1,15 +1,7 @@
 package org.emftext.refactoring.smell.registry;
 
 import org.apache.commons.lang.WordUtils;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRunnable;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -76,6 +68,7 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 
 	@Override
 	public void run(IMarker marker) {
+		System.out.println("SmellResolutionQuickFix.run()");
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if(activeWorkbenchWindow != null){
 			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
@@ -90,37 +83,17 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 					IEditorConnector editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(editor);
 					RefactoringAction action = new RefactoringAction(refactorer, editorConnector);
 					action.run();
-					final IFile file = getFileFromResource(resource);
-					IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
-						@Override
-						public void run(IProgressMonitor monitor) throws CoreException {
-							try {
-								IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
-								for (IMarker iMarker : markers) {
-									iMarker.delete();
-								}
-							} catch (CoreException e) {
-								e.printStackTrace();
-							}
-							
-						}
-					};
-					try {
-						runnable.run(null);
-					} catch (CoreException e) {
-						e.printStackTrace();
-					}
 				}
 			}
 		}
 	}
 
-	private IFile getFileFromResource(Resource resource) {
-		URI uri = resource.getURI();
-		String platformString = uri.toPlatformString(true);
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
-		return file;
-	}
+//	private IFile getFileFromResource(Resource resource) {
+//		URI uri = resource.getURI();
+//		String platformString = uri.toPlatformString(true);
+//		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
+//		return file;
+//	}
 
 	@Override
 	public Image getImage() {

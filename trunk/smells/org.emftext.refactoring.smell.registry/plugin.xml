@@ -27,9 +27,6 @@
       <super
             type="org.eclipse.emf.ecore.diagnostic">
       </super>
-      <super
-            type="org.eclipse.core.resources.textmarker">
-      </super>
       <attribute
             name="roleMapping">
       </attribute>

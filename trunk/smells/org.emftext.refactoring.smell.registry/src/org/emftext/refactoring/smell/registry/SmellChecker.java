@@ -39,6 +39,7 @@ import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.osgi.framework.FrameworkUtil;
 
 public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisitor {
 
@@ -96,6 +97,8 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 	}
 
 	private void checkSmellsInFile(IFile file) {
+		System.out.println("SmellChecker.checkSmellsInFile()");
+		removeAllMarkers(file);
 		URI uri = null;
 		if(file.isLinked()){
 			uri = URI.createFileURI(file.getLocation().toString());
@@ -160,6 +163,29 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 		}
 	}
 
+	private void removeAllMarkers(final IFile file) {
+		if(file == null || !file.exists()){
+			return;
+		}
+		WorkspaceJob runnable = new WorkspaceJob("Cleaning Quality Smell markers") {
+
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				try {
+					IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
+					for (IMarker iMarker : markers) {
+						iMarker.delete();
+					}
+				} catch (CoreException e) {
+					e.printStackTrace();
+					return new Status(IStatus.WARNING, FrameworkUtil.getBundle(getClass()).getSymbolicName(), "Quality Smell markers couldn't be deleted for " + file.getLocation().toString());
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		runnable.schedule();
+	}
+
 	private IEditorPart getEditorPartForFile(IFile file) {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
@@ -178,15 +204,14 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 	}
 
 	protected void addSmellAndQuickFix(final IFile file, final EObject model, final Calculation calculation, final CalculationResult result, final RoleMapping roleMapping, final IEditorConnector editorConnector) {
+		System.out.println("SmellChecker.addSmellAndQuickFix()");
 		WorkspaceJob job = new WorkspaceJob("Creating markers for bad smells") {
 
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				try {
-					//					IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
-					//					for (IMarker marker : markers) {
-					//						marker.delete();
-					//					}
+					System.out
+					.println("SmellChecker.addSmellAndQuickFix(...).new WorkspaceJob() {...}.runInWorkspace()");
 					String smellMessage = calculation.getSmellMessage();
 					List<EObject> causingObjects = result.getCausingObjects();
 					for (EObject element : causingObjects) {
