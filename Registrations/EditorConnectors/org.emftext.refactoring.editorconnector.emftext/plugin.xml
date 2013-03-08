@@ -4,7 +4,12 @@
    <extension
          point="org.emftext.refactoring.editorconnector">
       <editorconnector
-            editorconnector="org.emftext.refactoring.editorconnector.EMFTextEditorConnector">
+            editorconnector="org.emftext.refactoring.editorconnector.EMFTextEditorConnector"
+            fileExtensions="java">
+         <extensionToEditorMapping
+               extension="java"
+               editorID="org.emftext.language.java.resource.java.ui.JavaEditor">
+         </extensionToEditorMapping>
       </editorconnector>
    </extension>
 
