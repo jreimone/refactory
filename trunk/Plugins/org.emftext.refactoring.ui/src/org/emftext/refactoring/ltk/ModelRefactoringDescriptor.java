@@ -14,6 +14,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -57,10 +59,26 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 				 + " (" + roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI() + ")\n" +
 				"- refactored elements:";
 		List<EObject> selectedElements = refactorer.getInput();
+		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(composedAdapterFactory);
 		for (EObject selectedElement : selectedElements) {
-			comment += "\n\t" + selectedElement;
+			String label = labelProvider.getText(selectedElement);
+			comment += "\n\t" + label;
 		}
-		comment += "\n- has the following generic description: " + roleMapping.getMappedRoleModel().getComment();
+		String roleMappingComment = roleMapping.getComment();
+		if(roleMappingComment != null && !roleMappingComment.trim().isEmpty()){
+			roleMappingComment = roleMappingComment.trim();
+			if(roleMappingComment.startsWith("/*")){
+				roleMappingComment = roleMappingComment.replace("/*", "");
+			}
+			if(roleMappingComment.endsWith("*/")){
+				roleMappingComment = roleMappingComment.replace("*/", "");
+			}
+			roleMappingComment = roleMappingComment.trim();
+			comment += "\n- has the following description: " + roleMappingComment;
+		} else {
+			comment += "\n- has the following generic description: " + roleMapping.getMappedRoleModel().getComment();
+		}
 		return comment;
 	}
 
