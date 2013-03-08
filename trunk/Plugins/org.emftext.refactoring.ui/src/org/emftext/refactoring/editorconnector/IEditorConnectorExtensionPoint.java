@@ -17,6 +17,10 @@ package org.emftext.refactoring.editorconnector;
 
 public interface IEditorConnectorExtensionPoint {
 
-	public static final String ID 					= "org.emftext.refactoring.editorconnector";
-	public static final String CONNECTOR_ATTRIBUTE 	= "editorconnector";
+	public static final String ID 									= "org.emftext.refactoring.editorconnector";
+	public static final String CONNECTOR_ATTRIBUTE 					= "editorconnector";
+	public static final String EXTENSIONS_ATTRIBUTE					= "fileExtensions";
+	public static final String EXTENSION_EDITOR_MAPPING				= "extensionToEditorMapping";
+	public static final String EXTENSION_EDITOR_MAPPING_EXTENSION	= "extension";
+	public static final String EXTENSION_EDITOR_MAPPING_EDITOR_ID	= "editorID";
 }

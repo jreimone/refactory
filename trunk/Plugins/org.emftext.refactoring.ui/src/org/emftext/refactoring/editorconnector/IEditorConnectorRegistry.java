@@ -35,4 +35,10 @@ public interface IEditorConnectorRegistry {
 	 */
 	public IEditorConnector getEditorConnectorForEditorPart(IEditorPart editorPart);
 	
+//	/**
+//	 * Returns all editor connectors being registered for the given file <code>extension</code>.
+//	 * @param extension
+//	 * @return
+//	 */
+//	public List<IEditorConnector> getEditorConnectorsForExtension(String extension);
 }
