@@ -3,6 +3,8 @@
  */
 package org.qualitune.tracing.util;
 
+import java.io.IOException;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +13,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.qualitune.tracing.umt.Instruction;
 import org.qualitune.tracing.umt.IntentionEnum;
 import org.qualitune.tracing.umt.UniverseType;
 
@@ -34,6 +40,23 @@ public class VUtil {
 	public static void assertAtlType(EObject atlObject, String type) {
 		assert typeName(atlObject).equals(type) : "expecting ATL object to be of type " + type + 
 				", but found " + typeName(atlObject) + " instead.";
+	}
+	
+	public static void printEObject(List<Instruction> objs) {
+		for (EObject obj : objs) {
+			printEObject(obj);
+		}
+	}
+	
+	// this one is fucking misleading - res.save() is b0rken - zeigt nur referenzen an, die unterhalb von obj enden
+	public static void printEObject(EObject obj) {
+		Resource res = new XMLResourceImpl ();
+		res.getContents().add(EcoreUtil.copy(obj));
+		try {
+			res.save(System.out, null);
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
 	}
 	
 	// prints tree
@@ -133,6 +156,13 @@ public class VUtil {
 		return false;
 	}
 	
+	public static boolean hasReference(EObject object, String name) {
+		for (EReference candidate : object.eClass().getEAllReferences())
+			if (candidate.getName().equals(name))
+				return true;
+		return false;
+	}
+	
 	public static EAttribute getAttribute(EObject object, String name) {
 		for (EAttribute candidate : object.eClass().getEAllAttributes())
 			if (candidate.getName().equals(name))
@@ -218,6 +248,11 @@ public class VUtil {
 	public static void unSetAttribute(EObject object, String attributeName) {
 		EAttribute eAttribute = getAttribute(object,attributeName);
 		object.eUnset(eAttribute);
+	}
+	
+	public static void unSetReference(EObject object, String refName) {
+		EReference ref= getReference(object,refName);
+		object.eUnset(ref);
 	}
 	
 	public static void setAttribute(EObject object, String attributeName, String value) {

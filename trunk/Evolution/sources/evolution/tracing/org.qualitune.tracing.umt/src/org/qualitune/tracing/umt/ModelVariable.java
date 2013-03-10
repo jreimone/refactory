@@ -52,6 +52,7 @@ public interface ModelVariable extends Variable {
 
 	/**
 	 * Returns the value of the '<em><b>Model</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.qualitune.tracing.umt.InstanceModel#getVariables <em>Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Model</em>' reference isn't clear,
@@ -61,7 +62,8 @@ public interface ModelVariable extends Variable {
 	 * @return the value of the '<em>Model</em>' reference.
 	 * @see #setModel(InstanceModel)
 	 * @see org.qualitune.tracing.umt.UmtPackage#getModelVariable_Model()
-	 * @model
+	 * @see org.qualitune.tracing.umt.InstanceModel#getVariables
+	 * @model opposite="variables"
 	 * @generated
 	 */
 	InstanceModel getModel();

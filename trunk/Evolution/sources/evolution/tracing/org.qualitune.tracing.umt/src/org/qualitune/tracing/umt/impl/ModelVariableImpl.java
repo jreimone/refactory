@@ -154,11 +154,33 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setModel(InstanceModel newModel) {
+	public NotificationChain basicSetModel(InstanceModel newModel, NotificationChain msgs) {
 		InstanceModel oldModel = model;
 		model = newModel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.MODEL_VARIABLE__MODEL, oldModel, model));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UmtPackage.MODEL_VARIABLE__MODEL, oldModel, newModel);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setModel(InstanceModel newModel) {
+		if (newModel != model) {
+			NotificationChain msgs = null;
+			if (model != null)
+				msgs = ((InternalEObject)model).eInverseRemove(this, UmtPackage.INSTANCE_MODEL__VARIABLES, InstanceModel.class, msgs);
+			if (newModel != null)
+				msgs = ((InternalEObject)newModel).eInverseAdd(this, UmtPackage.INSTANCE_MODEL__VARIABLES, InstanceModel.class, msgs);
+			msgs = basicSetModel(newModel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UmtPackage.MODEL_VARIABLE__MODEL, newModel, newModel));
 	}
 
 	/**
@@ -182,6 +204,10 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case UmtPackage.MODEL_VARIABLE__MODEL:
+				if (model != null)
+					msgs = ((InternalEObject)model).eInverseRemove(this, UmtPackage.INSTANCE_MODEL__VARIABLES, InstanceModel.class, msgs);
+				return basicSetModel((InstanceModel)otherEnd, msgs);
 			case UmtPackage.MODEL_VARIABLE__ATTRIBUTES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAttributes()).basicAdd(otherEnd, msgs);
 		}
@@ -196,6 +222,8 @@ public class ModelVariableImpl extends VariableImpl implements ModelVariable {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case UmtPackage.MODEL_VARIABLE__MODEL:
+				return basicSetModel(null, msgs);
 			case UmtPackage.MODEL_VARIABLE__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}

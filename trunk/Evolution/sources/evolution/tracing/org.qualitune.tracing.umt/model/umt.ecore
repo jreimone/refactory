@@ -89,6 +89,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="InstanceModel" eSuperTypes="#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="intention" eType="#//IntentionEnum"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="universe" eType="#//UniverseType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//ModelVariable" eOpposite="#//ModelVariable/model"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaModel" eSuperTypes="#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -115,7 +117,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="CollectionVariable" eSuperTypes="#//Variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="ModelVariable" eSuperTypes="#//Variable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ModelType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="#//InstanceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="#//InstanceModel"
+        eOpposite="#//InstanceModel/variables"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//ModelAttributeVariable" containment="true" eOpposite="#//ModelAttributeVariable/partOf"/>
   </eClassifiers>

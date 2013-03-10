@@ -946,6 +946,15 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getInstanceModel_Variables() {
+		return (EReference)instanceModelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMetaModel() {
 		return metaModelEClass;
 	}
@@ -1373,6 +1382,7 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		instanceModelEClass = createEClass(INSTANCE_MODEL);
 		createEAttribute(instanceModelEClass, INSTANCE_MODEL__INTENTION);
 		createEAttribute(instanceModelEClass, INSTANCE_MODEL__UNIVERSE);
+		createEReference(instanceModelEClass, INSTANCE_MODEL__VARIABLES);
 
 		metaModelEClass = createEClass(META_MODEL);
 		createEAttribute(metaModelEClass, META_MODEL__NS_URI);
@@ -1579,6 +1589,7 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 		initEClass(instanceModelEClass, InstanceModel.class, "InstanceModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInstanceModel_Intention(), this.getIntentionEnum(), "intention", null, 0, 1, InstanceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInstanceModel_Universe(), this.getUniverseType(), "universe", null, 0, 1, InstanceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstanceModel_Variables(), this.getModelVariable(), this.getModelVariable_Model(), "variables", null, 0, -1, InstanceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaModelEClass, MetaModel.class, "MetaModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaModel_NsURI(), theEcorePackage.getEString(), "nsURI", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1598,7 +1609,7 @@ public class UmtPackageImpl extends EPackageImpl implements UmtPackage {
 
 		initEClass(modelVariableEClass, ModelVariable.class, "ModelVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelVariable_Type(), this.getModelType(), null, "type", null, 1, 1, ModelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelVariable_Model(), this.getInstanceModel(), null, "model", null, 0, 1, ModelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelVariable_Model(), this.getInstanceModel(), this.getInstanceModel_Variables(), "model", null, 0, 1, ModelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelVariable_Attributes(), this.getModelAttributeVariable(), this.getModelAttributeVariable_PartOf(), "attributes", null, 0, -1, ModelVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -9,5 +9,8 @@ Require-Bundle: org.eclipse.m2m.atl.core;bundle-version="3.3.0",
  org.eclipse.m2m.atl.engine;bundle-version="3.3.0",
  org.eclipse.m2m.atl.core.ant;bundle-version="3.3.0",
  org.apache.log4j;bundle-version="1.2.15"
-Import-Package: org.qualitune.tracing.umt,
+Import-Package: org.qualitune.tracing.atl.ATL,
+ org.qualitune.tracing.atl.OCL,
+ org.qualitune.tracing.atl.PrimitiveTypes,
+ org.qualitune.tracing.umt,
  org.qualitune.tracing.vapoditrace

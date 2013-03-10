@@ -62,6 +62,7 @@ abstract public class AbstractUmtNotificationContentAdapter extends EContentAdap
 	}
 	
 	// start observing a Program model
+	// TODO we don't use this method - will we need it in future?
 	public void observeProgram(Program program){
 		program.eAdapters().add(this);
 		System.err.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXxxx");

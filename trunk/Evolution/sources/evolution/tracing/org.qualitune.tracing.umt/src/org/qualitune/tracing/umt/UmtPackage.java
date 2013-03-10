@@ -1004,13 +1004,22 @@ public interface UmtPackage extends EPackage {
 	int INSTANCE_MODEL__UNIVERSE = MODEL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_MODEL__VARIABLES = MODEL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Instance Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_MODEL_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+	int INSTANCE_MODEL_FEATURE_COUNT = MODEL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.qualitune.tracing.umt.impl.MetaModelImpl <em>Meta Model</em>}' class.
@@ -2147,6 +2156,17 @@ public interface UmtPackage extends EPackage {
 	EAttribute getInstanceModel_Universe();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.qualitune.tracing.umt.InstanceModel#getVariables <em>Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Variables</em>'.
+	 * @see org.qualitune.tracing.umt.InstanceModel#getVariables()
+	 * @see #getInstanceModel()
+	 * @generated
+	 */
+	EReference getInstanceModel_Variables();
+
+	/**
 	 * Returns the meta object for class '{@link org.qualitune.tracing.umt.MetaModel <em>Meta Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3030,6 +3050,14 @@ public interface UmtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INSTANCE_MODEL__UNIVERSE = eINSTANCE.getInstanceModel_Universe();
+
+		/**
+		 * The meta object literal for the '<em><b>Variables</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE_MODEL__VARIABLES = eINSTANCE.getInstanceModel_Variables();
 
 		/**
 		 * The meta object literal for the '{@link org.qualitune.tracing.umt.impl.MetaModelImpl <em>Meta Model</em>}' class.

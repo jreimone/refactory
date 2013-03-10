@@ -1,9 +1,7 @@
 package org.qualitune.tracing.vapodi;
 import org.apache.log4j.PropertyConfigurator;
 import org.qualitune.tracing.atl.AtlHandler;
-import org.qualitune.tracing.umt.ModelAttributeVariable;
 import org.qualitune.tracing.umt.Program;
-import org.qualitune.tracing.umt.UmtFactory;
 import org.qualitune.tracing.vapodi.analysis.AnalysisRunner;
 import org.qualitune.tracing.vapodi.analysis.ControlFlowStack;
 import org.qualitune.tracing.vapodi.analysis.IUmtAnalysis;
@@ -44,14 +42,8 @@ public class VapodiMain {
 		program = myAtlHandler.getUmtRepresentation();
 		
 		/*
-		 * analyse source program and make changes ('invade'/'instrument' it)
+		 * perform composition
 		 */
-		
-		//Analyses analyses = new Analyses();
-		//analyses.setName(program);
-		//analyses.addDebugToAllFunctions(program);
-		//analyses.addTracingModel(program);
-		//analyses.addCfs(program);
 		
 		AnalysisRunner runner = new AnalysisRunner();
 		
@@ -65,8 +57,6 @@ public class VapodiMain {
 		runner.addAnalysis(CFS);
 		runner.addAnalysis(TL);
 		
-		UmtFactory _umtFactory = UmtFactory.eINSTANCE;
-		ModelAttributeVariable test = _umtFactory.createModelAttributeVariable();
 		runner.run(program);
 		
 		/*
