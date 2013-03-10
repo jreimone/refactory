@@ -2,17 +2,23 @@
  */
 package org.qualitune.tracing.umt.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.qualitune.tracing.umt.InstanceModel;
 import org.qualitune.tracing.umt.IntentionEnum;
 import org.qualitune.tracing.umt.MetaModel;
+import org.qualitune.tracing.umt.ModelVariable;
 import org.qualitune.tracing.umt.UmtPackage;
 import org.qualitune.tracing.umt.UniverseType;
 
@@ -28,6 +34,7 @@ import org.qualitune.tracing.umt.UniverseType;
  *   <li>{@link org.qualitune.tracing.umt.impl.InstanceModelImpl#getUrn <em>Urn</em>}</li>
  *   <li>{@link org.qualitune.tracing.umt.impl.InstanceModelImpl#getIntention <em>Intention</em>}</li>
  *   <li>{@link org.qualitune.tracing.umt.impl.InstanceModelImpl#getUniverse <em>Universe</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.impl.InstanceModelImpl#getVariables <em>Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,6 +130,16 @@ public class InstanceModelImpl extends EObjectImpl implements InstanceModel {
 	 * @ordered
 	 */
 	protected UniverseType universe = UNIVERSE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ModelVariable> variables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -270,6 +287,47 @@ public class InstanceModelImpl extends EObjectImpl implements InstanceModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ModelVariable> getVariables() {
+		if (variables == null) {
+			variables = new EObjectWithInverseResolvingEList<ModelVariable>(ModelVariable.class, this, UmtPackage.INSTANCE_MODEL__VARIABLES, UmtPackage.MODEL_VARIABLE__MODEL);
+		}
+		return variables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UmtPackage.INSTANCE_MODEL__VARIABLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariables()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case UmtPackage.INSTANCE_MODEL__VARIABLES:
+				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -284,6 +342,8 @@ public class InstanceModelImpl extends EObjectImpl implements InstanceModel {
 				return getIntention();
 			case UmtPackage.INSTANCE_MODEL__UNIVERSE:
 				return getUniverse();
+			case UmtPackage.INSTANCE_MODEL__VARIABLES:
+				return getVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -293,6 +353,7 @@ public class InstanceModelImpl extends EObjectImpl implements InstanceModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -310,6 +371,10 @@ public class InstanceModelImpl extends EObjectImpl implements InstanceModel {
 				return;
 			case UmtPackage.INSTANCE_MODEL__UNIVERSE:
 				setUniverse((UniverseType)newValue);
+				return;
+			case UmtPackage.INSTANCE_MODEL__VARIABLES:
+				getVariables().clear();
+				getVariables().addAll((Collection<? extends ModelVariable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -338,6 +403,9 @@ public class InstanceModelImpl extends EObjectImpl implements InstanceModel {
 			case UmtPackage.INSTANCE_MODEL__UNIVERSE:
 				setUniverse(UNIVERSE_EDEFAULT);
 				return;
+			case UmtPackage.INSTANCE_MODEL__VARIABLES:
+				getVariables().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -360,6 +428,8 @@ public class InstanceModelImpl extends EObjectImpl implements InstanceModel {
 				return intention != INTENTION_EDEFAULT;
 			case UmtPackage.INSTANCE_MODEL__UNIVERSE:
 				return universe != UNIVERSE_EDEFAULT;
+			case UmtPackage.INSTANCE_MODEL__VARIABLES:
+				return variables != null && !variables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -347,8 +347,8 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 			return null;
 		} if (umtInstruction instanceof Debug) {
 			atlRet = umt2AtlInstruction ( (Debug) umtInstruction);
-		} else if (umtInstruction instanceof CfsPush && false) {
-			// XXX atlRet = umt2AtlInstruction ( (CfsPush) umtInstruction);
+		} else if ((umtInstruction instanceof CfsPush) && false) {
+		//	atlRet = umt2AtlInstruction ( (CfsPush) umtInstruction);
 		} else if (umtInstruction instanceof CfsPop) {
 			atlRet = umt2AtlInstruction ( (CfsPop) umtInstruction);
 		} else {
@@ -402,6 +402,7 @@ public class Atl2UmtContentAdapter extends AbstractUmtEventContentAdapter {
 		}
 		// will lead to problems
 		
+		logger.error("return rudiculous position -1");
 		return -1;
 	}
 	

@@ -2,6 +2,8 @@
  */
 package org.qualitune.tracing.umt;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -13,6 +15,7 @@ package org.qualitune.tracing.umt;
  * <ul>
  *   <li>{@link org.qualitune.tracing.umt.InstanceModel#getIntention <em>Intention</em>}</li>
  *   <li>{@link org.qualitune.tracing.umt.InstanceModel#getUniverse <em>Universe</em>}</li>
+ *   <li>{@link org.qualitune.tracing.umt.InstanceModel#getVariables <em>Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,5 +81,23 @@ public interface InstanceModel extends Model {
 	 * @generated
 	 */
 	void setUniverse(UniverseType value);
+
+	/**
+	 * Returns the value of the '<em><b>Variables</b></em>' reference list.
+	 * The list contents are of type {@link org.qualitune.tracing.umt.ModelVariable}.
+	 * It is bidirectional and its opposite is '{@link org.qualitune.tracing.umt.ModelVariable#getModel <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variables</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variables</em>' reference list.
+	 * @see org.qualitune.tracing.umt.UmtPackage#getInstanceModel_Variables()
+	 * @see org.qualitune.tracing.umt.ModelVariable#getModel
+	 * @model opposite="model"
+	 * @generated
+	 */
+	EList<ModelVariable> getVariables();
 
 } // InstanceModel
