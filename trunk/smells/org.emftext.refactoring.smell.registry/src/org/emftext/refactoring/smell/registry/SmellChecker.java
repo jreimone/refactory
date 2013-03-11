@@ -97,7 +97,7 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 	}
 
 	private void checkSmellsInFile(IFile file) {
-		System.out.println("SmellChecker.checkSmellsInFile()");
+//		System.out.println("SmellChecker.checkSmellsInFile()");
 		removeAllMarkers(file);
 		URI uri = null;
 		if(file.isLinked()){
@@ -204,14 +204,14 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 	}
 
 	protected void addSmellAndQuickFix(final IFile file, final EObject model, final Calculation calculation, final CalculationResult result, final RoleMapping roleMapping, final IEditorConnector editorConnector) {
-		System.out.println("SmellChecker.addSmellAndQuickFix()");
+//		System.out.println("SmellChecker.addSmellAndQuickFix()");
 		WorkspaceJob job = new WorkspaceJob("Creating markers for bad smells") {
 
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				try {
-					System.out
-					.println("SmellChecker.addSmellAndQuickFix(...).new WorkspaceJob() {...}.runInWorkspace()");
+//					System.out
+//					.println("SmellChecker.addSmellAndQuickFix(...).new WorkspaceJob() {...}.runInWorkspace()");
 					String smellMessage = calculation.getSmellMessage();
 					List<EObject> causingObjects = result.getCausingObjects();
 					for (EObject element : causingObjects) {
@@ -222,12 +222,17 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 						marker.setAttribute(IMarker.MESSAGE, smellMessage);
 						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
 						marker.setAttribute(IMarker.LINE_NUMBER, 0);
+						String editorID = null;
 						if(editorConnector != null){
 							editorConnector.setMarkingForEObject(element, marker);
+							editorID = editorConnector.getEditor().getEditorSite().getId();
 						}
 						marker.setAttribute(IQualitySmellMarker.ROLEMAPPING, EcoreUtil.getURI(roleMapping).toString());
-						//TODO jreimann: determine different registered editors and select the most appropriate one.
-						//TODO jreimann: set marker.setAttribute(IQualitySmellMarker.EDITOR_ID, editorID); 
+						//determine different registered editors and select the most appropriate one.
+						//set marker.setAttribute(IQualitySmellMarker.EDITOR_ID, editorID);
+						if(editorID != null){
+							marker.setAttribute(IQualitySmellMarker.EDITOR_ID, editorID);
+						}
 					}
 				} catch (CoreException e) {
 					e.printStackTrace();
