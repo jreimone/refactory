@@ -21,19 +21,18 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.IDE;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.emftext.refactoring.editorconnector.IEditorConnectorExtensionPoint;
 import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
@@ -104,52 +103,52 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 		}
 		String defaultEditorID = editorPart.getSite().getId();
 		IEditorConnector editorConnector = getEditorConnector(editorPart);
-		if(editorConnector == null){
-			IEditorInput editorInput = editorPart.getEditorInput();
-			if(editorInput instanceof IFileEditorInput){
-				IFileEditorInput fileEditorInput = (IFileEditorInput) editorInput;
-				IFile file = fileEditorInput.getFile();
-				
-				Set<Class<IEditorConnector>> connectorClasses = connectorClassToEditorIDMap.keySet();
-				for (Class<IEditorConnector> connectorClass : connectorClasses) {
-					Map<String, String> extensions = connectorClassToEditorIDMap.get(connectorClass);
-					String editorID = extensions.get(file.getFileExtension());
-					if(editorID != null && !defaultEditorID.equals(editorID)){
-						IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-						if(activePage != null){
-							IEditorPart editor;
-							try {
-								editor = IDE.openEditor(activePage, fileEditorInput, editorID);
-								if(editor != null){
-									editorConnector = getEditorConnector(editor);
-									if(editorConnector != null){
-										break;
-									}
-								}
-							} catch (PartInitException e) {
-								e.printStackTrace();
-							}
-						}
-					}
-				}
-//				IEditorRegistry editorRegistry = PlatformUI.getWorkbench().getEditorRegistry();
-//				IEditorDescriptor[] editors = editorRegistry.getEditors(file.getName());
-//				if(activePage != null){
-//					for (IEditorDescriptor editorDescriptor : editors) {
-//						String editorID = editorDescriptor.getId();
-//						if(!defaultEditorID.equals(editorID)){
+//		if(editorConnector == null){
+//			IEditorInput editorInput = editorPart.getEditorInput();
+//			if(editorInput instanceof IFileEditorInput){
+//				IFileEditorInput fileEditorInput = (IFileEditorInput) editorInput;
+//				IFile file = fileEditorInput.getFile();
+//				
+//				Set<Class<IEditorConnector>> connectorClasses = connectorClassToEditorIDMap.keySet();
+//				for (Class<IEditorConnector> connectorClass : connectorClasses) {
+//					Map<String, String> extensions = connectorClassToEditorIDMap.get(connectorClass);
+//					String editorID = extensions.get(file.getFileExtension());
+//					if(editorID != null && !defaultEditorID.equals(editorID)){
+//						IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+//						if(activePage != null){
+//							IEditorPart editor;
 //							try {
+//								editor = IDE.openEditor(activePage, fileEditorInput, editorID);
 //								if(editor != null){
-//									activePage.closeEditor(editor, false);
+//									editorConnector = getEditorConnector(editor);
+//									if(editorConnector != null){
+//										break;
+//									}
 //								}
 //							} catch (PartInitException e) {
-//								// do nothing
+//								e.printStackTrace();
 //							}
 //						}
 //					}
 //				}
-			}
-		}
+////				IEditorRegistry editorRegistry = PlatformUI.getWorkbench().getEditorRegistry();
+////				IEditorDescriptor[] editors = editorRegistry.getEditors(file.getName());
+////				if(activePage != null){
+////					for (IEditorDescriptor editorDescriptor : editors) {
+////						String editorID = editorDescriptor.getId();
+////						if(!defaultEditorID.equals(editorID)){
+////							try {
+////								if(editor != null){
+////									activePage.closeEditor(editor, false);
+////								}
+////							} catch (PartInitException e) {
+////								// do nothing
+////							}
+////						}
+////					}
+////				}
+//			}
+//		}
 		return editorConnector;
 	}
 
@@ -167,8 +166,29 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 			if(list != null && list.size() > 0){
 				for (Class<IEditorConnector> editorConnectorClass : list) {
 					IEditorConnector editorConnector = instantiateEditorConnectorClass(editorPart, editorConnectorClass);
-					if(editorConnector != null){
+					if(editorConnector != null && editorConnector.canHandle(editorPart)){
+						editorConnectorCache.put(editorPart, editorConnector);
 						return editorConnector;
+					}
+					// look for alternative editors
+					Map<String, String> extension2editorMap = connectorClassToEditorIDMap.get(editorConnectorClass);
+					if(extension2editorMap != null && extension2editorMap.size() > 0){
+						String editorID = extension2editorMap.get(extension);
+						IWorkbench workbench = PlatformUI.getWorkbench();
+						if(editorID != null && editorID.length() > 0 && workbench != null){
+							IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+							if(activeWorkbenchWindow != null){
+								IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+								try {
+									IEditorPart alternative = activePage.openEditor(fileEditorInput, editorID, true, IWorkbenchPage.MATCH_ID);
+									if(!alternative.equals(editorPart)){
+										return getEditorConnector(alternative);
+									}
+								} catch (PartInitException e) {
+									e.printStackTrace();
+								}
+							}
+						}
 					}
 				}
 			}
@@ -176,7 +196,8 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 		// 2. try registered editor connectors
 		for (Class<IEditorConnector> connectorClass : editorConnectors) {
 			IEditorConnector editorConnector = instantiateEditorConnectorClass(editorPart, connectorClass);
-			if(editorConnector != null){
+			if(editorConnector != null && editorConnector.canHandle(editorPart)){
+				editorConnectorCache.put(editorPart, editorConnector);
 				return editorConnector;
 			}
 		}
@@ -191,9 +212,6 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
-		}
-		if(connector != null && connector.canHandle(editorPart)){
-			editorConnectorCache.put(editorPart, connector);
 		}
 		return connector;
 	}
