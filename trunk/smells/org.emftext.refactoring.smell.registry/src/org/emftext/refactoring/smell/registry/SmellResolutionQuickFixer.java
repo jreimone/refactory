@@ -21,7 +21,7 @@ public class SmellResolutionQuickFixer implements IMarkerResolutionGenerator, IM
 
 	@Override
 	public IMarkerResolution[] getResolutions(IMarker marker) {
-		System.out.println("SmellResolutionQuickFixer.getResolutions()");
+//		System.out.println("SmellResolutionQuickFixer.getResolutions()");
 		Triple triple = initTripleFromMarker(marker);
 		EObject element = triple.getElement();
 		Resource resource = triple.getResource();
@@ -35,7 +35,7 @@ public class SmellResolutionQuickFixer implements IMarkerResolutionGenerator, IM
 
 	@Override
 	public boolean hasResolutions(IMarker marker) {
-		System.out.println("SmellResolutionQuickFixer.hasResolutions()");
+//		System.out.println("SmellResolutionQuickFixer.hasResolutions()");
 		Triple triple = initTripleFromMarker(marker);
 		EObject element = triple.getElement();
 		Resource resource = triple.getResource();

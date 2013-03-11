@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 
 /**
@@ -20,6 +21,7 @@ import org.emftext.language.refactoring.rolemapping.RoleMapping;
  *   <li>{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getConcreteName <em>Concrete Name</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getQualityCalculations <em>Quality Calculations</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getRefactoring <em>Refactoring</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getMetamodel <em>Metamodel</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,5 +125,31 @@ public interface ConcreteQualitySmell extends EObject {
 	 * @generated
 	 */
 	void setRefactoring(RoleMapping value);
+
+	/**
+	 * Returns the value of the '<em><b>Metamodel</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metamodel</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Metamodel</em>' reference.
+	 * @see #setMetamodel(EPackage)
+	 * @see org.emftext.refactoring.smell.SmellPackage#getConcreteQualitySmell_Metamodel()
+	 * @model required="true"
+	 * @generated
+	 */
+	EPackage getMetamodel();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getMetamodel <em>Metamodel</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Metamodel</em>' reference.
+	 * @see #getMetamodel()
+	 * @generated
+	 */
+	void setMetamodel(EPackage value);
 
 } // ConcreteQualitySmell

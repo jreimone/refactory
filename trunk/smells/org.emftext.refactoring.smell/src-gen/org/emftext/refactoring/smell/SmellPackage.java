@@ -222,13 +222,22 @@ public interface SmellPackage extends EPackage {
 	int CONCRETE_QUALITY_SMELL__REFACTORING = 3;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_QUALITY_SMELL__METAMODEL = 4;
+
+	/**
 	 * The number of structural features of the '<em>Concrete Quality Smell</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONCRETE_QUALITY_SMELL_FEATURE_COUNT = 4;
+	int CONCRETE_QUALITY_SMELL_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.impl.QualityCalculationImpl <em>Quality Calculation</em>}' class.
@@ -457,6 +466,17 @@ public interface SmellPackage extends EPackage {
 	EReference getConcreteQualitySmell_Refactoring();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getMetamodel <em>Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Metamodel</em>'.
+	 * @see org.emftext.refactoring.smell.ConcreteQualitySmell#getMetamodel()
+	 * @see #getConcreteQualitySmell()
+	 * @generated
+	 */
+	EReference getConcreteQualitySmell_Metamodel();
+
+	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.QualityCalculation <em>Quality Calculation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -670,6 +690,14 @@ public interface SmellPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONCRETE_QUALITY_SMELL__REFACTORING = eINSTANCE.getConcreteQualitySmell_Refactoring();
+
+		/**
+		 * The meta object literal for the '<em><b>Metamodel</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONCRETE_QUALITY_SMELL__METAMODEL = eINSTANCE.getConcreteQualitySmell_Metamodel();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.impl.QualityCalculationImpl <em>Quality Calculation</em>}' class.

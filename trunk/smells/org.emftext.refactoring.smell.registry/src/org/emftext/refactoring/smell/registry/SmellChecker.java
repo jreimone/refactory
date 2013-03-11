@@ -227,7 +227,9 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 							editorConnector.setMarkingForEObject(element, marker);
 							editorID = editorConnector.getEditor().getEditorSite().getId();
 						}
-						marker.setAttribute(IQualitySmellMarker.ROLEMAPPING, EcoreUtil.getURI(roleMapping).toString());
+						if(roleMapping != null){
+							marker.setAttribute(IQualitySmellMarker.ROLEMAPPING, EcoreUtil.getURI(roleMapping).toString());
+						}
 						//determine different registered editors and select the most appropriate one.
 						//set marker.setAttribute(IQualitySmellMarker.EDITOR_ID, editorID);
 						if(editorID != null){

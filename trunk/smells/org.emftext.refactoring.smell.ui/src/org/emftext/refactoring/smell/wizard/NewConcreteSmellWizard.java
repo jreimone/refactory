@@ -12,6 +12,8 @@ public class NewConcreteSmellWizard extends Wizard {
 
 	private CalculationsPage calculationPage;
 	private QualitySmellModel smellModel;
+	private MetamodelPage metamodelPage;
+	private RoleMappingPage rolemappingPage;
 
 	public NewConcreteSmellWizard() {
 		setWindowTitle("New Concrete Smell Wizard");
@@ -27,8 +29,10 @@ public class NewConcreteSmellWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		addPage(new MetamodelPage());
-		addPage(new RoleMappingPage());
+		metamodelPage = new MetamodelPage();
+		addPage(metamodelPage);
+		rolemappingPage = new RoleMappingPage();
+		addPage(rolemappingPage);
 		calculationPage = new CalculationsPage(SmellFactory.eINSTANCE.createConcreteQualitySmell());
 		addPage(calculationPage);
 	}
@@ -43,4 +47,15 @@ public class NewConcreteSmellWizard extends Wizard {
 		return false;
 	}
 
+	public CalculationsPage getCalculationPage() {
+		return calculationPage;
+	}
+
+	public MetamodelPage getMetamodelPage() {
+		return metamodelPage;
+	}
+
+	public RoleMappingPage getRolemappingPage() {
+		return rolemappingPage;
+	}
 }

@@ -6,12 +6,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.emftext.refactoring.smell.calculation.*;
+import org.emftext.refactoring.smell.calculation.CalculationFactory;
+import org.emftext.refactoring.smell.calculation.CalculationModel;
+import org.emftext.refactoring.smell.calculation.CalculationPackage;
+import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.Metric;
+import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.Structure;
 import org.emftext.refactoring.smell.calculation.custom.*;
 
 /**
@@ -163,7 +166,7 @@ public class CalculationFactoryImpl extends EFactoryImpl implements CalculationF
 	 * @generated
 	 */
 	public CalculationPackage getCalculationPackage() {
-		return (CalculationPackage)getEPackage();
+		return (CalculationPackage) getEPackage();
 	}
 
 	/**

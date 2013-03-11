@@ -3,7 +3,6 @@ package org.emftext.refactoring.smell.wizard;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.PojoObservables;
@@ -23,25 +22,22 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
-import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
 public class MetamodelPage extends WizardPage {
 	private DataBindingContext m_bindingContext;
 
 	private List<EPackage> availableMetamodels;
-	
+
 	private static AdapterFactoryLabelProvider labelProvider;
 	private Table table;
 	private TableViewer tableViewer;
-	
+
 	private EPackage selectedMetamodel;
 
 	/**
@@ -66,7 +62,7 @@ public class MetamodelPage extends WizardPage {
 	@SuppressWarnings("unchecked")
 	private void initMetamodels() {
 		availableMetamodels = new ArrayList<>();
-//		availableMetamodels.addAll((Collection<? extends EPackage>) EPackage.Registry.INSTANCE.values());
+		//		availableMetamodels.addAll((Collection<? extends EPackage>) EPackage.Registry.INSTANCE.values());
 		Collection<Object> values = EPackage.Registry.INSTANCE.values();
 		for (Object object : values) {
 			if(object instanceof EPackage){
@@ -84,7 +80,7 @@ public class MetamodelPage extends WizardPage {
 
 		setControl(container);
 		container.setLayout(new FillLayout(SWT.HORIZONTAL));
-		
+
 		tableViewer = new TableViewer(container, SWT.BORDER | SWT.FULL_SELECTION);
 		tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -93,21 +89,24 @@ public class MetamodelPage extends WizardPage {
 					Object firstElement = ((IStructuredSelection) selection).getFirstElement();
 					if(firstElement instanceof EPackage){
 						selectedMetamodel = (EPackage) firstElement;
-						Map<String, RoleMapping> roleMappingsForUri = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(selectedMetamodel.getNsURI());
-						if(roleMappingsForUri != null){
-							Collection<RoleMapping> values = roleMappingsForUri.values();
-							if(values != null && !values.isEmpty()){
-								setErrorMessage(null);
-								setPageComplete(true);
-								IWizardPage nextPage = getNextPage();
-								if(nextPage instanceof RoleMappingPage){
-									((RoleMappingPage) nextPage).setMetamodel(selectedMetamodel);
-									return;
-								}
-							}
-						}
-						setErrorMessage("There are no refactorings registered for the language " + selectedMetamodel.getName());
-						setPageComplete(false);
+//						Map<String, RoleMapping> roleMappingsForUri = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(selectedMetamodel.getNsURI());
+						//						if(roleMappingsForUri != null){
+						//							Collection<RoleMapping> values = roleMappingsForUri.values();
+						//							if(values != null && !values.isEmpty()){
+						setErrorMessage(null);
+						setPageComplete(true);
+						((NewConcreteSmellWizard) getWizard()).getRolemappingPage().setMetamodel(selectedMetamodel);
+						((NewConcreteSmellWizard) getWizard()).getCalculationPage().setMetamodel(selectedMetamodel);
+						return;
+//						IWizardPage nextPage = getNextPage();
+//						if(nextPage instanceof RoleMappingPage){
+//							((RoleMappingPage) nextPage).setMetamodel(selectedMetamodel);
+//							return;
+//						}
+						//							}
+						//						}
+						//						setErrorMessage("There are no refactorings registered for the language " + selectedMetamodel.getName());
+						//						setPageComplete(false);
 					}
 				}
 			}

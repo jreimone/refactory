@@ -8,11 +8,8 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
-
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.Quality;
 import org.emftext.refactoring.smell.QualityCalculation;
@@ -20,7 +17,6 @@ import org.emftext.refactoring.smell.QualitySmell;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.SmellPackage;
-
 import org.emftext.refactoring.smell.calculation.CalculationPackage;
 
 /**
@@ -270,6 +266,15 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getConcreteQualitySmell_Metamodel() {
+		return (EReference)concreteQualitySmellEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getQualityCalculation() {
 		return qualityCalculationEClass;
 	}
@@ -365,6 +370,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		createEAttribute(concreteQualitySmellEClass, CONCRETE_QUALITY_SMELL__CONCRETE_NAME);
 		createEReference(concreteQualitySmellEClass, CONCRETE_QUALITY_SMELL__QUALITY_CALCULATIONS);
 		createEReference(concreteQualitySmellEClass, CONCRETE_QUALITY_SMELL__REFACTORING);
+		createEReference(concreteQualitySmellEClass, CONCRETE_QUALITY_SMELL__METAMODEL);
 
 		qualityCalculationEClass = createEClass(QUALITY_CALCULATION);
 		createEReference(qualityCalculationEClass, QUALITY_CALCULATION__CONCRETE_SMELL);
@@ -430,6 +436,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		initEAttribute(getConcreteQualitySmell_ConcreteName(), ecorePackage.getEString(), "concreteName", null, 1, 1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConcreteQualitySmell_QualityCalculations(), this.getQualityCalculation(), this.getQualityCalculation_ConcreteSmell(), "qualityCalculations", null, 1, -1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConcreteQualitySmell_Refactoring(), theRolemappingPackage.getRoleMapping(), null, "refactoring", null, 0, 1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConcreteQualitySmell_Metamodel(), theEcorePackage.getEPackage(), null, "metamodel", null, 1, 1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qualityCalculationEClass, QualityCalculation.class, "QualityCalculation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQualityCalculation_ConcreteSmell(), this.getConcreteQualitySmell(), this.getConcreteQualitySmell_QualityCalculations(), "concreteSmell", null, 1, 1, QualityCalculation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
