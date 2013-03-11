@@ -91,4 +91,10 @@ public interface IEditorConnector {
 	 * @param marker
 	 */
 	public void setMarkingForEObject(EObject element, IMarker marker);
+	
+	/**
+	 * Returns the connected editor of this editor connector.
+	 * @return
+	 */
+	public IEditorPart getEditor();
 }

@@ -207,4 +207,9 @@ public class XtextEditorConnector implements IEditorConnector {
 		}
 	}
 
+	@Override
+	public IEditorPart getEditor() {
+		return editor;
+	}
+
 }
