@@ -22,6 +22,9 @@ public class StructureCustom extends StructureImpl {
 		setMonotonicity(Monotonicity.DECREASING);
 	}
 
+	/**
+	 * @model
+	 */
 	public CalculationResult calculate(EObject model, float threshold){
 		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
 		Pattern pattern = getPattern();
