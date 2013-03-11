@@ -38,6 +38,10 @@
         <genParameters ecoreParameter="calculation.ecore#//Structure/calculate/model"/>
         <genParameters ecoreParameter="calculation.ecore#//Structure/calculate/threshold"/>
       </genOperations>
+      <genOperations ecoreOperation="calculation.ecore#//Structure/calculate.1">
+        <genParameters ecoreParameter="calculation.ecore#//Structure/calculate.1/model"/>
+        <genParameters ecoreParameter="calculation.ecore#//Structure/calculate.1/threshold"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="calculation.ecore#//Metric"/>
   </genPackages>
