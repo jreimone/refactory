@@ -42,6 +42,7 @@ public class RoleMappingPage extends WizardPage {
 	 */
 	public RoleMappingPage() {
 		super("Refactoring Selection Page");
+		setDescription("...or don't select anything for just specifying a concrete quality smell without providing the opportunity to resolve the smell by a refactoring.");
 		setTitle("Select a Refactoring");
 		roleMappings = new ArrayList<>();
 	}
@@ -75,7 +76,7 @@ public class RoleMappingPage extends WizardPage {
 		});
 		table = tableViewer.getTable();
 		m_bindingContext = initDataBindings();
-		setPageComplete(false);
+		setPageComplete(true);
 	}
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
@@ -94,6 +95,7 @@ public class RoleMappingPage extends WizardPage {
 	protected void setMetamodel(EPackage metamodel){
 		if(!metamodel.equals(this.metamodel)){
 			this.metamodel = metamodel;
+			setDescription("Select a registered " + metamodel.getName() + " refactoring for which a smell should be defined...or don't select anything for just specifying a concrete quality smell without providing the opportunity to resolve the smell by a refactoring.");
 			initRoleMappings();
 		} 
 	}
@@ -105,7 +107,6 @@ public class RoleMappingPage extends WizardPage {
 			Collection<RoleMapping> values = roleMappingsForUri.values();
 			if(values != null){
 				roleMappings.addAll(values);
-				setDescription("Select a registered " + metamodel.getName() + " refactoring for which a smell should be defined");
 				table.update();
 				tableViewer.refresh();
 			}

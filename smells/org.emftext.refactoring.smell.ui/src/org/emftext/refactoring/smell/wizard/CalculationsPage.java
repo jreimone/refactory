@@ -16,6 +16,7 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
@@ -445,6 +446,11 @@ public class CalculationsPage extends WizardPage {
 	protected void setRoleMapping(RoleMapping roleMapping) {
 		concreteSmell.setRefactoring(roleMapping);
 	}
+	
+	protected void setMetamodel(EPackage metamodel){
+		concreteSmell.setMetamodel(metamodel);
+	}
+	
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//

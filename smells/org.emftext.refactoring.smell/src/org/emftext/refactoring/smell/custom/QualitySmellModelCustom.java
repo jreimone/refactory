@@ -7,7 +7,6 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.SmellPackage;
 import org.emftext.refactoring.smell.impl.QualitySmellModelImpl;
@@ -15,6 +14,9 @@ import org.emftext.refactoring.smell.impl.QualitySmellModelImpl;
 
 public class QualitySmellModelCustom extends QualitySmellModelImpl {
 
+	/**
+	 * @model
+	 */
 	@Override
 	public EList<ConcreteQualitySmell> getSmellsForMetamodel(EPackage metamodel) {
 		while(metamodel.getESuperPackage() != null){
@@ -22,7 +24,7 @@ public class QualitySmellModelCustom extends QualitySmellModelImpl {
 		}
 		EList<ConcreteQualitySmell> metamodelSmells = new BasicEList<>();
 		for (ConcreteQualitySmell smell : getConcreteSmells()) {
-			if(smell.getRefactoring().getOwningMappingModel().getTargetMetamodel().equals(metamodel)){
+			if(smell.getMetamodel().equals(metamodel)){
 				metamodelSmells.add(smell);
 			}
 		}
@@ -42,19 +44,16 @@ public class QualitySmellModelCustom extends QualitySmellModelImpl {
 			case Notification.ADD:
 				EObject newValue = (EObject) notification.getNewValue();
 				if(newValue instanceof ConcreteQualitySmell){
-					RoleMapping refactoring = ((ConcreteQualitySmell) newValue).getRefactoring();
-					if(refactoring != null){
-						EPackage metamodel = refactoring.getOwningMappingModel().getTargetMetamodel();
-						if(!getSmellingMetamodels().contains(metamodel)){
-							getSmellingMetamodels().add((EPackage) metamodel);
-						}
+					EPackage metamodel = ((ConcreteQualitySmell) newValue).getMetamodel();
+					if(metamodel != null && !getSmellingMetamodels().contains(metamodel)){
+						getSmellingMetamodels().add((EPackage) metamodel);
 					}
 				}
 				break;
 			case Notification.REMOVE:
 				EObject oldValue = (EObject) notification.getOldValue();
 				if(oldValue instanceof ConcreteQualitySmell){
-					EPackage metamodelOldValue = ((ConcreteQualitySmell) oldValue).getRefactoring().getOwningMappingModel().getTargetMetamodel();
+					EPackage metamodelOldValue = ((ConcreteQualitySmell) oldValue).getMetamodel();
 					List<ConcreteQualitySmell> smellsForMetamodel = getSmellsForMetamodel(metamodelOldValue);
 					if(smellsForMetamodel.size() == 0){
 						getSmellingMetamodels().remove(metamodelOldValue);
@@ -67,7 +66,7 @@ public class QualitySmellModelCustom extends QualitySmellModelImpl {
 					@SuppressWarnings("unchecked")
 					List<ConcreteQualitySmell> smellsToRemove = (List<ConcreteQualitySmell>) value;
 					for (ConcreteQualitySmell concreteQualitySmell : smellsToRemove) {
-						EPackage metamodel = concreteQualitySmell.getRefactoring().getOwningMappingModel().getTargetMetamodel();
+						EPackage metamodel = concreteQualitySmell.getMetamodel();
 						List<ConcreteQualitySmell> smellsForMetamodel = getSmellsForMetamodel(metamodel);
 						if(smellsForMetamodel.size() == 0){
 							getSmellingMetamodels().remove(metamodel);

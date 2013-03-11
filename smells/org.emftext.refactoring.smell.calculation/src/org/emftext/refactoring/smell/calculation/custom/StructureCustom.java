@@ -23,6 +23,7 @@ public class StructureCustom extends StructureImpl {
 	}
 
 	/**
+	 * Runs IncQuery Pattern
 	 * @model
 	 */
 	public CalculationResult calculate(EObject model, float threshold){

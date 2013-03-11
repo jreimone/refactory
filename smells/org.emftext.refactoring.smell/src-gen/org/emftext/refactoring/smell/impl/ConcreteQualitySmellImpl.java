@@ -8,6 +8,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -30,6 +31,7 @@ import org.emftext.refactoring.smell.SmellPackage;
  *   <li>{@link org.emftext.refactoring.smell.impl.ConcreteQualitySmellImpl#getConcreteName <em>Concrete Name</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.impl.ConcreteQualitySmellImpl#getQualityCalculations <em>Quality Calculations</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.impl.ConcreteQualitySmellImpl#getRefactoring <em>Refactoring</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.impl.ConcreteQualitySmellImpl#getMetamodel <em>Metamodel</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,6 +87,16 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 	 * @ordered
 	 */
 	protected RoleMapping refactoring;
+
+	/**
+	 * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetamodel()
+	 * @generated
+	 * @ordered
+	 */
+	protected EPackage metamodel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -219,6 +231,44 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EPackage getMetamodel() {
+		if (metamodel != null && metamodel.eIsProxy()) {
+			InternalEObject oldMetamodel = (InternalEObject)metamodel;
+			metamodel = (EPackage)eResolveProxy(oldMetamodel);
+			if (metamodel != oldMetamodel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL, oldMetamodel, metamodel));
+			}
+		}
+		return metamodel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage basicGetMetamodel() {
+		return metamodel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMetamodel(EPackage newMetamodel) {
+		EPackage oldMetamodel = metamodel;
+		metamodel = newMetamodel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL, oldMetamodel, metamodel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -261,6 +311,9 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 			case SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING:
 				if (resolve) return getRefactoring();
 				return basicGetRefactoring();
+			case SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL:
+				if (resolve) return getMetamodel();
+				return basicGetMetamodel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -287,6 +340,9 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 			case SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING:
 				setRefactoring((RoleMapping)newValue);
 				return;
+			case SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL:
+				setMetamodel((EPackage)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -311,6 +367,9 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 			case SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING:
 				setRefactoring((RoleMapping)null);
 				return;
+			case SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL:
+				setMetamodel((EPackage)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -331,6 +390,8 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 				return qualityCalculations != null && !qualityCalculations.isEmpty();
 			case SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING:
 				return refactoring != null;
+			case SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL:
+				return metamodel != null;
 		}
 		return super.eIsSet(featureID);
 	}

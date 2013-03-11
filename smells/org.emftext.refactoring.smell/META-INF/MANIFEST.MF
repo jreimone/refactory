@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.emftext.language.refactoring.roles;visibility:=reexport,
  org.emftext.refactoring.smell.calculation,
  org.emftext.refactoring.registry.rolemapping,
- org.emftext.refactoring.registry.rolemodel
+ org.emftext.refactoring.registry.rolemodel,
+ org.eclipse.incquery.patternlanguage
 Bundle-ActivationPolicy: lazy
