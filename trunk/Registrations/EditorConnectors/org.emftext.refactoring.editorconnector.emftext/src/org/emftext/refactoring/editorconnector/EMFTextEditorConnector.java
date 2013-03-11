@@ -155,4 +155,9 @@ public class EMFTextEditorConnector implements IEditorConnector {
 			
 	}
 
+	@Override
+	public IEditorPart getEditor() {
+		return editor;
+	}
+
 }

@@ -35,6 +35,7 @@ public class GMFEditorConnector implements IEditorConnector {
 
 	private TransactionalEditingDomain diagramTransactionalEditingDomain;
 	private EObject model;
+	private DiagramDocumentEditor documentEditor;
 
 	public GMFEditorConnector() {
 		// 
@@ -62,7 +63,7 @@ public class GMFEditorConnector implements IEditorConnector {
 	
 	private boolean alternativeCanHandle(IEditorPart editor){
 		if(editor instanceof DiagramDocumentEditor){
-			DiagramDocumentEditor documentEditor = (DiagramDocumentEditor) editor;
+			documentEditor = (DiagramDocumentEditor) editor;
 			diagramTransactionalEditingDomain = documentEditor.getEditingDomain();
 			DiagramEditPart editPart = documentEditor.getDiagramEditPart();
 			if(editPart.getModel() instanceof View){
@@ -106,6 +107,11 @@ public class GMFEditorConnector implements IEditorConnector {
 	@Override
 	public void setMarkingForEObject(EObject element, IMarker marker) {
 		//TODO jreimann: implement setting marker in GMF editor
+	}
+
+	@Override
+	public IEditorPart getEditor() {
+		return documentEditor;
 	}
 
 }
