@@ -13,7 +13,7 @@ import "http://www.eclipse.org/emf/2002/Ecore"
 // the determined FileBody constructor is checked and must be replaced by a file that is compressed before 
 pattern dataTransmissionWithoutCompressionOptimised(
 		fileBodyConstructor: NewConstructorCall
-		, method: ClassMethod
+//		, method: ClassMethod
 ){
 	find fileBodyConstructorWithFileConstructorParameter(fileBodyVar, fileBodyConstructor, _);
 	find transmissionCoreMethodCalls(fileBodyVar, method);
