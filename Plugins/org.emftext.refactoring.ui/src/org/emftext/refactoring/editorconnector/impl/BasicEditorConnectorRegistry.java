@@ -17,8 +17,6 @@ package org.emftext.refactoring.editorconnector.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +40,7 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 
 	private List<Class<IEditorConnector>> editorConnectors;
 	private Map<IEditorPart, IEditorConnector> editorConnectorCache;
+	private Map<IEditorPart, IEditorPart> editorEditorMappingCache;
 	private Map<String, List<Class<IEditorConnector>>> fileExtensionMap;
 	private Map<Class<IEditorConnector>, Map<String, String>> connectorClassToEditorIDMap;
 
@@ -52,8 +51,9 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 
 	@SuppressWarnings("unchecked")
 	private void initialize(){
-		editorConnectors = new LinkedList<Class<IEditorConnector>>();
-		editorConnectorCache = new LinkedHashMap<IEditorPart, IEditorConnector>();
+		editorConnectors = new ArrayList<Class<IEditorConnector>>();
+		editorConnectorCache = new HashMap<IEditorPart, IEditorConnector>();
+		editorEditorMappingCache = new HashMap<IEditorPart, IEditorPart>();
 		fileExtensionMap = new HashMap<String, List<Class<IEditorConnector>>>();
 		connectorClassToEditorIDMap = new HashMap<Class<IEditorConnector>, Map<String, String>>();
 		IConfigurationElement[] elements = RegistryUtil.collectConfigurationElements(IEditorConnectorExtensionPoint.ID);
@@ -153,7 +153,12 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 	}
 
 	public IEditorConnector getEditorConnector(IEditorPart editorPart) {
-		IEditorConnector cachedConnector = editorConnectorCache.get(editorPart);
+		IEditorConnector cachedConnector = null;
+		if(editorEditorMappingCache.get(editorPart) != null){
+			cachedConnector = editorConnectorCache.get(editorEditorMappingCache.get(editorPart));
+		} else {
+			cachedConnector = editorConnectorCache.get(editorPart);
+		}
 		if(cachedConnector != null){
 			return cachedConnector;
 		}
@@ -165,7 +170,7 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 			List<Class<IEditorConnector>> list = fileExtensionMap.get(extension);
 			if(list != null && list.size() > 0){
 				for (Class<IEditorConnector> editorConnectorClass : list) {
-					IEditorConnector editorConnector = instantiateEditorConnectorClass(editorPart, editorConnectorClass);
+					IEditorConnector editorConnector = instantiateEditorConnectorClass(editorConnectorClass);
 					if(editorConnector != null && editorConnector.canHandle(editorPart)){
 						editorConnectorCache.put(editorPart, editorConnector);
 						return editorConnector;
@@ -182,6 +187,7 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 								try {
 									IEditorPart alternative = activePage.openEditor(fileEditorInput, editorID, true, IWorkbenchPage.MATCH_ID);
 									if(!alternative.equals(editorPart)){
+										editorEditorMappingCache.put(editorPart, alternative);
 										return getEditorConnector(alternative);
 									}
 								} catch (PartInitException e) {
@@ -195,7 +201,7 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 		}
 		// 2. try registered editor connectors
 		for (Class<IEditorConnector> connectorClass : editorConnectors) {
-			IEditorConnector editorConnector = instantiateEditorConnectorClass(editorPart, connectorClass);
+			IEditorConnector editorConnector = instantiateEditorConnectorClass(connectorClass);
 			if(editorConnector != null && editorConnector.canHandle(editorPart)){
 				editorConnectorCache.put(editorPart, editorConnector);
 				return editorConnector;
@@ -204,7 +210,7 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 		return null;
 	}
 
-	public IEditorConnector instantiateEditorConnectorClass(IEditorPart editorPart, Class<IEditorConnector> connectorClass) {
+	public IEditorConnector instantiateEditorConnectorClass(Class<IEditorConnector> connectorClass) {
 		IEditorConnector connector = null;
 		try {
 			connector = connectorClass.newInstance();
