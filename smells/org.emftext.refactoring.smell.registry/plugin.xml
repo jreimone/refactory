@@ -60,8 +60,8 @@
       <specification
             annotationType="org.emftext.refactoring.smell.problem.annotation"
             colorPreferenceKey="smell.occurrenceIndicationColor"
-            colorPreferenceValue="255,128,0"
-            contributesToHeader="false"
+            colorPreferenceValue="128,128,0"
+            contributesToHeader="true"
             highlightPreferenceKey="smell.occurrenceHighlighting"
             highlightPreferenceValue="true"
             icon="icons/poop.png"

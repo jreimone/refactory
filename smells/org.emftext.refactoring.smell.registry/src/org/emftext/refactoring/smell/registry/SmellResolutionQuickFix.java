@@ -2,6 +2,7 @@ package org.emftext.refactoring.smell.registry;
 
 import org.apache.commons.lang.WordUtils;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -68,15 +69,23 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 
 	@Override
 	public void run(IMarker marker) {
-		System.out.println("SmellResolutionQuickFix.run()");
+//		System.out.println("SmellResolutionQuickFix.run()");
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if(activeWorkbenchWindow != null){
 			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 			if(activePage != null){
 				IEditorPart editor = null;
 				try {
+					String editorID = (String) marker.getAttribute(IQualitySmellMarker.EDITOR_ID);
+//					if(editorID != null){
+//						marker.getResource()
+//						activePage.openEditor(input, editorId, activate, matchFlags)
+//					} else {
+//					}
 					editor = IDE.openEditor(activePage, marker);
 				} catch (PartInitException e) {
+					e.printStackTrace();
+				} catch (CoreException e) {
 					e.printStackTrace();
 				}
 				if(editor != null){
