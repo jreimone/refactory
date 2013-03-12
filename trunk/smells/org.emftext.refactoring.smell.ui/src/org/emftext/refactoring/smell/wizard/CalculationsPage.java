@@ -83,7 +83,7 @@ public class CalculationsPage extends WizardPage {
 	private ComboBoxViewerCellEditor comboBoxCellEditor2;
 
 	private List<String> inappropriateValues;
-	
+
 	/**
 	 * Create the wizard.
 	 */
@@ -103,7 +103,7 @@ public class CalculationsPage extends WizardPage {
 		ServiceTracker<CalculationModel,CalculationModel> tracker2 = new ServiceTracker<>(bundleContext, CalculationModel.class, null);
 		tracker2.open();
 		calculationModel = tracker2.getService();
-		
+
 	}
 
 	/**
@@ -124,29 +124,28 @@ public class CalculationsPage extends WizardPage {
 		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		gd_text.horizontalIndent = 5;
 		text.setLayoutData(gd_text);
-				
-				Label lblSelectGenericSmell = new Label(container, SWT.NONE);
-				lblSelectGenericSmell.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-				lblSelectGenericSmell.setText("Select generic Smell:");
-		
-				comboViewer = new ComboViewer(container, SWT.READ_ONLY);
-				comboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
-					public void selectionChanged(SelectionChangedEvent event) {
-						ISelection selection = event.getSelection();
-						if(selection instanceof IStructuredSelection){
-							Object firstElement = ((IStructuredSelection) selection).getFirstElement();
-							if(firstElement instanceof QualitySmell){
-								selectedSmell = (QualitySmell) firstElement;
-								concreteSmell.setGenericSmell(selectedSmell);
-								setPageComplete();
-							}
-						}
+
+		Label lblSelectGenericSmell = new Label(container, SWT.NONE);
+		lblSelectGenericSmell.setText("Select generic Smell:");
+
+		comboViewer = new ComboViewer(container, SWT.READ_ONLY);
+		comboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				ISelection selection = event.getSelection();
+				if(selection instanceof IStructuredSelection){
+					Object firstElement = ((IStructuredSelection) selection).getFirstElement();
+					if(firstElement instanceof QualitySmell){
+						selectedSmell = (QualitySmell) firstElement;
+						concreteSmell.setGenericSmell(selectedSmell);
+						setPageComplete();
 					}
-				});
-				Combo combo = comboViewer.getCombo();
-				GridData gd_combo = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-				gd_combo.horizontalIndent = 5;
-				combo.setLayoutData(gd_combo);
+				}
+			}
+		});
+		Combo combo = comboViewer.getCombo();
+		GridData gd_combo = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_combo.horizontalIndent = 5;
+		combo.setLayoutData(gd_combo);
 
 		Label lblWhichQualitiesAre = new Label(container, SWT.WRAP);
 		lblWhichQualitiesAre.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, false, 2, 1));
@@ -260,20 +259,20 @@ public class CalculationsPage extends WizardPage {
 					QualityCalculation qCalculation = (QualityCalculation) element;
 					Calculation referenceCalculation = (Calculation) value;
 					qCalculation.setCalculation(referenceCalculation);
-//					try {
-//						Calculation concreteCalculation = referenceCalculation.getClass().newInstance();
-//						qCalculation.setCalculation(concreteCalculation);
-//						// take over the specified threshold value
-//						Calculation oldCalculation = qCalculation.getCalculation();
-//						Float threshold = oldCalculation.getThreshold();
-//						if(threshold != null){
-//							concreteCalculation.setThreshold(threshold);
-//						}
-//					} catch (InstantiationException e) {
-//						e.printStackTrace();
-//					} catch (IllegalAccessException e) {
-//						e.printStackTrace();
-//					}
+					//					try {
+					//						Calculation concreteCalculation = referenceCalculation.getClass().newInstance();
+					//						qCalculation.setCalculation(concreteCalculation);
+					//						// take over the specified threshold value
+					//						Calculation oldCalculation = qCalculation.getCalculation();
+					//						Float threshold = oldCalculation.getThreshold();
+					//						if(threshold != null){
+					//							concreteCalculation.setThreshold(threshold);
+					//						}
+					//					} catch (InstantiationException e) {
+					//						e.printStackTrace();
+					//					} catch (IllegalAccessException e) {
+					//						e.printStackTrace();
+					//					}
 				}
 				setPageComplete();
 			}
@@ -314,11 +313,11 @@ public class CalculationsPage extends WizardPage {
 					try {
 						float parseFloat = Float.parseFloat((String) value);
 						QualityCalculation qualityCalculation = (QualityCalculation) element;
-//						Calculation calculation = qualityCalculation.getCalculation();
+						//						Calculation calculation = qualityCalculation.getCalculation();
 						qualityCalculation.setThreshold(parseFloat);
 						// to notify label provider
-//						qualityCalculation.setCalculation(null);
-//						qualityCalculation.setCalculation(calculation);
+						//						qualityCalculation.setCalculation(null);
+						//						qualityCalculation.setCalculation(calculation);
 					} catch (NumberFormatException e) {
 						// do nothing
 					}
@@ -330,10 +329,10 @@ public class CalculationsPage extends WizardPage {
 			protected Object getValue(Object element) {
 				if(element instanceof QualityCalculation){
 					QualityCalculation qCalculation = (QualityCalculation) element;
-//					Calculation calculation = qCalculation.getCalculation();
-//					if(calculation != null){
-						return String.valueOf(qCalculation.getThreshold());
-//					}
+					//					Calculation calculation = qCalculation.getCalculation();
+					//					if(calculation != null){
+					return String.valueOf(qCalculation.getThreshold());
+					//					}
 				}
 				return null;
 			}
@@ -393,6 +392,7 @@ public class CalculationsPage extends WizardPage {
 		});
 		btnRemoveQuality.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		btnRemoveQuality.setText("Remove quality");
+
 		m_bindingContext = initDataBindings();
 		// all the databindings for the combos contained in the table
 		initDataBindingsForTableQualityCombo();
@@ -433,7 +433,7 @@ public class CalculationsPage extends WizardPage {
 			setErrorMessage(errorMessage);
 		} else {
 			setErrorMessage(null);
-			
+
 		}
 	}
 
@@ -446,11 +446,11 @@ public class CalculationsPage extends WizardPage {
 	protected void setRoleMapping(RoleMapping roleMapping) {
 		concreteSmell.setRefactoring(roleMapping);
 	}
-	
+
 	protected void setMetamodel(EPackage metamodel){
 		concreteSmell.setMetamodel(metamodel);
 	}
-	
+
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
@@ -503,9 +503,9 @@ public class CalculationsPage extends WizardPage {
 						}
 						break;
 					case 3: // threshold
-//						if(calculation != null){
-							return String.valueOf(qualityCalculation.getThreshold());
-//						}
+						//						if(calculation != null){
+						return String.valueOf(qualityCalculation.getThreshold());
+						//						}
 					}
 				}
 				return "";

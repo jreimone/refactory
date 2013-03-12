@@ -13,6 +13,7 @@ import org.eclipse.core.databinding.property.Properties;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -21,6 +22,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
@@ -83,7 +85,17 @@ public class RoleMappingPage extends WizardPage {
 		//
 		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
 		IObservableMap observeMap = PojoObservables.observeMap(listContentProvider.getKnownElements(), RoleMapping.class, "name");
-		tableViewer.setLabelProvider(new ObservableMapLabelProvider(observeMap));
+		tableViewer.setLabelProvider(new ObservableMapLabelProvider(observeMap){
+			@Override
+			public Image getColumnImage(Object element, int columnIndex) {
+				if(element instanceof RoleMapping){
+					ImageDescriptor descriptor = IRoleMappingRegistry.INSTANCE.getImageForMapping((RoleMapping) element);
+					return descriptor.createImage();
+				}
+				return super.getColumnImage(element, columnIndex);
+			}
+			
+		});
 		tableViewer.setContentProvider(listContentProvider);
 		//
 		IObservableList selfList = Properties.selfList(RoleMapping.class).observe(roleMappings);
