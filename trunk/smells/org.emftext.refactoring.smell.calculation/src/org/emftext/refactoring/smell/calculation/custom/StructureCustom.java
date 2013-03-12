@@ -32,24 +32,26 @@ public class StructureCustom extends StructureImpl {
 		Resource resource = model.eResource();
 		if(resource != null){
 			ResourceSet rs = resource.getResourceSet();
-			try {
-				@SuppressWarnings("unchecked")
-				IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getOrCreateMatcherFactory(pattern);
-				final IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(rs);
-				Collection<IPatternMatch> matches = matcher.getAllMatches();
-				for (IPatternMatch match : matches) {
-					String[] parameterNames = match.parameterNames();
-					for (String name : parameterNames) {
-						Object object = match.get(name);
-						if(object instanceof EObject){
-							EObject element = (EObject) object;
-							result.getCausingObjects().add(element);
+			if(rs != null){
+				try {
+					@SuppressWarnings("unchecked")
+					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getOrCreateMatcherFactory(pattern);
+					final IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(rs);
+					Collection<IPatternMatch> matches = matcher.getAllMatches();
+					for (IPatternMatch match : matches) {
+						String[] parameterNames = match.parameterNames();
+						for (String name : parameterNames) {
+							Object object = match.get(name);
+							if(object instanceof EObject){
+								EObject element = (EObject) object;
+								result.getCausingObjects().add(element);
+							}
 						}
+						result.setResultingValue(result.getResultingValue() + 1);
 					}
-					result.setResultingValue(result.getResultingValue() + 1);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 		return result;
