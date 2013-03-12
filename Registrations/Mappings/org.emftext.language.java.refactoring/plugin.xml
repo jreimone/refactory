@@ -15,6 +15,13 @@
       <rolemapping
             rolemapping_resource="rolemappings/RemoveEmptyMethods.rolemapping">
       </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/AddDataCompression.rolemapping">
+         <mappingIcon
+               icon="icons/exportzip_wiz.gif"
+               mapping_name="Add Data Compression to Apache HTTP Client based file transmission">
+         </mappingIcon>
+      </rolemapping>
    </extension>
    <extension
          point="org.emftext.refactoring.postprocessor">
@@ -22,6 +29,11 @@
             mapping_name="ExtractMethod"
             nsUri="http://www.emftext.org/java"
             postprocessor="org.emftext.jamopp.refactoring.JavaExtractMethodPostProcessor">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Add Data Compression to Apache HTTP Client based file transmission"
+            nsUri="http://www.emftext.org/java"
+            postprocessor="org.emftext.language.java.refactoring.AddDataCompressionPostProcessor">
       </postprocessor>
    </extension>
 
