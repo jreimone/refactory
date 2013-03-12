@@ -1,5 +1,6 @@
 package org.emftext.refactoring.smell.registry;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
@@ -60,16 +61,21 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 
 	@Override
 	public String getLabel() {
-		String label = roleMapping.getName().replace(" ", "");
-		label = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, label);
-		label = label.replace("_", " ");
-		label = WordUtils.capitalizeFully(label);
+		String label = null;
+		if(StringUtils.contains(roleMapping.getName(), " ")){
+			label = roleMapping.getName();
+		} else {
+			label = roleMapping.getName().replace(" ", "");
+			label = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, label);
+			label = label.replace("_", " ");
+			label = WordUtils.capitalizeFully(label);
+		}
 		return label;
 	}
 
 	@Override
 	public void run(IMarker marker) {
-//		System.out.println("SmellResolutionQuickFix.run()");
+		//		System.out.println("SmellResolutionQuickFix.run()");
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if(activeWorkbenchWindow != null){
 			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
@@ -77,11 +83,11 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 				IEditorPart editor = null;
 				try {
 					String editorID = (String) marker.getAttribute(IQualitySmellMarker.EDITOR_ID);
-//					if(editorID != null){
-//						marker.getResource()
-//						activePage.openEditor(input, editorId, activate, matchFlags)
-//					} else {
-//					}
+					//					if(editorID != null){
+					//						marker.getResource()
+					//						activePage.openEditor(input, editorId, activate, matchFlags)
+					//					} else {
+					//					}
 					editor = IDE.openEditor(activePage, marker);
 				} catch (PartInitException e) {
 					e.printStackTrace();
@@ -97,12 +103,12 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 		}
 	}
 
-//	private IFile getFileFromResource(Resource resource) {
-//		URI uri = resource.getURI();
-//		String platformString = uri.toPlatformString(true);
-//		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
-//		return file;
-//	}
+	//	private IFile getFileFromResource(Resource resource) {
+	//		URI uri = resource.getURI();
+	//		String platformString = uri.toPlatformString(true);
+	//		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
+	//		return file;
+	//	}
 
 	@Override
 	public Image getImage() {
