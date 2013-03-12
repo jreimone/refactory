@@ -46,7 +46,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellPackage;
-import org.emftext.refactoring.smell.wizard.CalculationsPage;
+import org.emftext.refactoring.smell.wizard.CalculationsWithRolemappingPage;
 import org.emftext.refactoring.smell.wizard.NewConcreteSmellWizard;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -168,7 +168,7 @@ IWorkbenchPreferencePage {
 					Object firstElement = ((IStructuredSelection) selection).getFirstElement();
 					if(firstElement instanceof ConcreteQualitySmell){
 						ConcreteQualitySmell smell = (ConcreteQualitySmell) firstElement;
-						CalculationsPage page = new CalculationsPage(smell);
+						CalculationsWithRolemappingPage page = new CalculationsWithRolemappingPage(smell);
 						Wizard wizard = new Wizard() {
 							@Override
 							public boolean performFinish() {
