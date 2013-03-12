@@ -10,6 +10,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.emftext.language.java,
  org.emftext.language.refactoring.roles,
  org.eclipse.emf.ecore.change,
- org.emftext.language.refactoring.specification
+ org.emftext.language.refactoring.specification,
+ org.emftext.refactoring.util,
+ org.emftext.language.java.resource.java
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
