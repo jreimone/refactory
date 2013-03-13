@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.MembersPackage;
+import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.resource.java.IJavaOptions;
@@ -69,15 +69,12 @@ public class AddDataCompressionPostProcessor extends AbstractRefactoringPostProc
 		List<ClassMethod> methods = new ArrayList<ClassMethod>(clazz.getChildrenByType(ClassMethod.class));
 		ClassMethod zippingMethod = parsePartialFragment(COMPRESSION_METHOD, MembersPackage.Literals.CLASS_METHOD, ClassMethod.class).get(0);
 		clazz.getMembers().add(zippingMethod);
-		boolean methodExists = false;
 		for (ClassMethod classMethod : methods) {
-			if(EcoreUtil.equals(zippingMethod, classMethod)){
-				methodExists = true;
+			if(isSignatureEqual(zippingMethod, classMethod)){
+				clazz.getMembers().remove(zippingMethod);
+				zippingMethod = classMethod;
 				break;
 			}
-		}
-		if(methodExists){
-			clazz.getMembers().remove(zippingMethod);
 		}
 		List<Expression> arguments = new ArrayList<Expression>(newConstructorCall.getArguments());
 		for (Expression expression : arguments) {
@@ -90,6 +87,26 @@ public class AddDataCompressionPostProcessor extends AbstractRefactoringPostProc
 		return Status.OK_STATUS;
 	}
 
+	private boolean isSignatureEqual(ClassMethod m1, ClassMethod m2){
+		if(!m1.getName().equals(m2.getName())){
+			return false;
+		}
+//		TypeReference typeReference = m1.getTypeReference();
+		// dauert zu lange
+//		if(!typeReference.getTarget().equals(m2.getTypeReference().getTarget())){
+//			return false;
+//		}
+		List<Parameter> parameters1 = m1.getParameters();
+		List<Parameter> parameters2 = m2.getParameters();
+		if(parameters1 == null){
+			return parameters2 == null;
+		}
+		if(parameters1.size() != parameters2.size()){
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Parses the given <code>fragment</code> and returns the according model elements.
 	 * The parameter <code>startRule</code> specifies the {@link EClass} which should be the starting rule.
