@@ -39,6 +39,7 @@ import org.qualitune.tracing.umt.Program;
 import org.qualitune.tracing.umt.UmtFactory;
 import org.qualitune.tracing.util.VUtil;
 import org.qualitune.tracing.vapodi.IConcreteLanguageHandler;
+import org.qualitune.tracing.vapodi.IComposer;
 
 /* general infrastructure */
 
@@ -53,16 +54,25 @@ public class AtlHandler implements IConcreteLanguageHandler {
 	private ModelFactory modelFactory = null;
 	private IReferenceModel atlMetamodel;
 	EMFModel atlModel = null; 
-	
-	
+	EObject atlModule = null;
+	protected IComposer composer = null;
+	protected TranslationTable mappings = null;
 	private Program program = null;
 	
 	private AtlHandlerInnerState innerState; // inner state of the class; used assure correct usage
 	
-	protected String VAPODI_ATL_BASE_STUB = "atl_lib/vapodi_base_stub.atl";
+	protected final String VAPODI_ATL_BASE_STUB = "atl_lib/vapodi_base_stub.atl";
+	protected final String VAPODI_ATL_EMPTY_STUB = "atl_lib/vapodi_base_stub.atl";
 	
 	protected Logger logger = null;
 	private boolean keepTmpFile = true;//false;
+	private String atlXmiPath = null;
+	private String umtXmiPath = null;
+	private String atlXmiOutPath = null;
+	
+	public IComposer getComposer () {
+		return composer;
+	}
 	
 	public AtlHandler() {
 		logger = Logger.getLogger(AtlHandler.class);
@@ -73,6 +83,8 @@ public class AtlHandler implements IConcreteLanguageHandler {
 		modelFactory = atlInjector.getModelFactory();
 		
 		innerState = AtlHandlerInnerState.INITIALISED;
+		mappings = new TranslationTable();
+		composer = new AtlComposer(mappings);
 	}
 	
 	protected EObject loadAtlModel(String path) {
@@ -211,11 +223,31 @@ public class AtlHandler implements IConcreteLanguageHandler {
 		}
 	}
 	
+	protected void saveUmtXmi(EObject program, String path) {
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("umt", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet = new ResourceSetImpl();
+		Resource resource = resSet.createResource(URI.createURI(path));
+
+		resource.getContents().add(program);
+		
+		// TODO just as a marker; if anything is b0rken in model, here's tea point to add a fix
+		
+		try {
+			resource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	protected void showWarnings(Resource res) {
 		for (Diagnostic diag : res.getWarnings()) {
 			logger.warn("resource warning: " + diag.getMessage());
 		}
 	}
+	
 	protected Module loadAtlXmiModel(String path) {
 		ATLPackage.eINSTANCE.eClass();
 
@@ -249,24 +281,24 @@ public class AtlHandler implements IConcreteLanguageHandler {
 					"to load a second model? Create a new AtlHandler instance for this purpose.)");
 		}
 		
-		EObject atlModule = loadAtlModel(atlPath);
+		atlModule = loadAtlModel(atlPath);
 		
 		
-		String atlXmiPath = makeTempPath("vapodi_tmp_",".atl_xmi");
-		logger.debug("Saving temporary XMI representation of ATL module to " + atlXmiPath);
+		atlXmiPath = makeTempPath("vapodi_tmp_",".atl_xmi");
+		umtXmiPath = atlXmiPath.substring(0,(atlXmiPath.length()-7)) + "umt";
+		logger.debug("Saving temporary XMI representation of ATL module to " + atlXmiPath + 
+				" and " + umtXmiPath);
 		saveAtlXmi(atlModule, atlXmiPath);
 		Module module = loadAtlXmiModel(atlXmiPath);
 		
-		if (! keepTmpFile)
-			new File(atlXmiPath).delete();
-		
-		
-		
-		Atl2Umt converter = new Atl2Umt(module);
+		Atl2Umt converter = new Atl2Umt(module, mappings);
 		program = converter.getProgram();
 		
+		if (keepTmpFile)
+			saveUmtXmi(program,  umtXmiPath);
+		
 		// TODO inb copy in referredVariables etc. as we did when loading original ATL program
-		mergeInBaseStub(atlModule);
+		//mergeInBaseStub(atlModule);
 		
 		innerState = AtlHandlerInnerState.MODEL_LOADED;
 		
@@ -316,14 +348,13 @@ public class AtlHandler implements IConcreteLanguageHandler {
 		
 		// to find out: do I need a separate model factory for this purpose?
 		
-		String path = VAPODI_ATL_BASE_STUB;
 		EMFModel atlModelToMergeIn = null;
 		
 		try {
 			atlModelToMergeIn = (EMFModel) modelFactory.newModel(atlMetamodel);	
-			atlInjector.inject(atlModelToMergeIn, path);
+			atlInjector.inject(atlModelToMergeIn, VAPODI_ATL_BASE_STUB);
 		} catch (ATLCoreException e) {
-			VUtil.myExit("Error while loading ATL file which holds VAPODI base stub (think: library) from " + path + ".");
+			VUtil.myExit("Error while loading ATL file which holds VAPODI base stub (think: library) from " + VAPODI_ATL_BASE_STUB + ".");
 		}
 
 		Resource atlResourceToMergeIn = atlModelToMergeIn.getResource();
@@ -342,16 +373,78 @@ public class AtlHandler implements IConcreteLanguageHandler {
 		return program;
 	}
 
+	// ugliness redefined ...
+	
+	protected EMFModel atlModule2EmfModel(EObject atlModule) {
+		AtlParser myAtlInjector;
+		ModelFactory myModelFactory;
+		IReferenceModel myAtlMetamodel;
+		EMFModel myAtlModel = null; 
+		
+		Resource myAtlResource;
+		
+		String path = VAPODI_ATL_EMPTY_STUB;
+		
+		myAtlInjector = new AtlParser();
+		
+		myAtlMetamodel = myAtlInjector.getAtlMetamodel();
+		myModelFactory = myAtlInjector.getModelFactory();
+		
+		try {
+			myAtlModel = (EMFModel) myModelFactory.newModel(myAtlMetamodel);	
+			myAtlInjector.inject(myAtlModel, path);
+
+		} catch (ATLCoreException e) {
+			logger.error("Error while loading ATL model from " + path + ".");
+			System.exit(1);
+		}
+
+		//myAtlResource = myAtlModel.getResource();
+		//myAtlResource.getContents().clear();
+		//myAtlResource.getContents().add(atlModule);
+		//myAtlResource.getContents().addAll(getOclVariableDeclarations((Module) atlModule));
+		
+		return myAtlModel;
+	}
+
+	/**
+	 * @param atlModule2
+	 * @return
+	 */
+	private Collection<EObject> getOclVariableDeclarations(Module atlModule) {
+		TreeIterator it = atlModule.eAllContents();
+		LinkedList<EObject> dangling = new LinkedList<EObject>();
+		
+		while (it.hasNext()) {
+			EObject candidate = (EObject) it.next();
+			if (candidate.eContainer() == null) {
+				System.err.println("y");
+			} else
+				System.err.println("n");
+		}
+		// TODO Auto-generated method stub
+		return dangling;
+	}
+
 	public boolean writeModel(String path) {
 		try {
-			// accepts map<String,object> as last options parameter - fine-tune tabs?
-			atlInjector.extract(atlModel, path);
+			atlInjector.extract(atlModule2EmfModel(atlModule), path);
 		} catch (ATLCoreException e) {
-			System.err.println("[Vapodi] Error while storing ATL model to " + path + ".");
+			cleanup();
+			logger.error("Error while storing ATL model to " + path + ".");
 			e.printStackTrace();
 			System.exit(1);
 			return false; // in case we alter error behaviour
 		}
+		cleanup();
 		return true;
+	}
+
+	private void cleanup() {
+		if (! keepTmpFile) {
+			new File(atlXmiOutPath).delete();
+			new File(atlXmiPath).delete();
+			new File(umtXmiPath).delete();
+		}
 	}
 }
