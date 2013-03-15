@@ -121,7 +121,7 @@ class AspectGenerator implements IGenerator2 {
 	def generateSubAdvisePCType1PartA(Pair p, int counter, String modifier) {
 		contents = contents + '''
 			after(«p.fst.name» t1, «p.snd.name» t2) : findMethod«modifier»«counter»(t1, t2) {
-				if(!this.tA«counter».equals(t1) || !this.tB«counter».equals(t2)) {
+				if(!equalChecker.equals((EObject)this.tA«counter», t1) || !equalChecker.equals((EObject)this.tB«counter», t2)) {
 					TraceCollector tc = TraceCollector.getInstance();
 					tc.setTrace(t1, thisJoinPoint, t2);
 					System.out.println("trace " + EcoreUtil.getURI((EObject)t1) + " <--> " + EcoreUtil.getURI((EObject)t2) + " by " +  thisJoinPoint.getSignature().toShortString() + " in " + thisJoinPoint.getSourceLocation().toString());
@@ -227,6 +227,7 @@ public aspect Tracer {
 	//TODO: if scoping to a certain class is need fill it in here!!!
 	//private pointcut belowMethod(Object o) : within(!!!Put class name here!!!) && !within(Tracer) && cflow(execution(* *(..))) && target(o);
 	
+	EcoreUtil.EqualityHelper equalChecker = new EcoreUtil.EqualityHelper();
 ''' + contents + '''
 }''')
 	}	
