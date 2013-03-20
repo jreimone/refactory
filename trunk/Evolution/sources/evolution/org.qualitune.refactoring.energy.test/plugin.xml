@@ -2,7 +2,7 @@
 <plugin>
 
    <extension
-         point="org.emftext.refactoring.smell.registry.calculation">
+         point="org.emftext.refactoring.smell.registry.ui.calculation">
       <structureCalculation
             smellMessage="File is transmitted without compression."
             description="Searches for data transmission implemented with the Apache HttpClient library and searches for file transmission without compression."

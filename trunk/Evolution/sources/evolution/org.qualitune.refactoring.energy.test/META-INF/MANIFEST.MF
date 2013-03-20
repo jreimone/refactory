@@ -13,5 +13,6 @@ Require-Bundle: org.eclipse.pde.core,
  org.emftext.language.java,
  org.eclipse.uml2.uml,
  org.emftext.refactoring.smell.calculation,
- org.eclipse.incquery.runtime
+ org.eclipse.incquery.runtime,
+ org.emftext.refactoring.smell.registry.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
