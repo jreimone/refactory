@@ -111,6 +111,13 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 							ResourceSet resourceSet = getCalculationModel().eResource().getResourceSet();
 							calculation = (Calculation) EcoreUtil.resolve(calculation, resourceSet);
 							calculation = (Calculation) EcoreUtil.resolve(calculation, getCalculationModel().eResource());
+//							Resource eResource = calculationModel.eResource();
+//							ResourceSet resourceSet2 = eResource.getResourceSet();
+//							Resource eResource2 = smellModel.eResource();
+//							ResourceSet resourceSet3 = eResource2.getResourceSet();
+//							EObject resolve = EcoreUtil.resolve(calculation, eResource2);
+//							EObject resolve2 = EcoreUtil.resolve(calculation, resourceSet3);
+//							System.out.println();
 						}
 						if(calculation != null && !calculation.eIsProxy()){
 							Pair<Calculation, QualityCalculation> pair = new Pair<Calculation, QualityCalculation>(calculation, qualityCalculation);
@@ -131,6 +138,7 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 		if(calculationModel != null){
 			this.calculationModel = calculationModel;
 		}
+		
 	}
 
 }
