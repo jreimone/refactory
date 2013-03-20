@@ -52,12 +52,17 @@ public class ModelRegistration {
 	public void register(IEclipseContext context, IWorkspace workspace, IExtensionRegistry registry) {
 		CalculationModel calculationModel = registerCalculationExtensions(context, registry, workspace);
 		QualitySmellModel smellModel = registerQualitySmellModel(context, workspace);
-		workspace.addResourceChangeListener(new SmellChecker(smellModel, calculationModel), IResourceChangeEvent.POST_CHANGE);
+		IQualitySmellRegistry.INSTANCE.initialize(smellModel, calculationModel);
+		if(workspace != null){
+			workspace.addResourceChangeListener(new SmellChecker(smellModel, calculationModel), IResourceChangeEvent.POST_CHANGE);
+		}
 	}
 
 	private CalculationModel registerCalculationExtensions(IEclipseContext context, IExtensionRegistry registry, IWorkspace workspace) {
 		CalculationModel calculationModel = initCalculationModel(registry, workspace);
-		context.set(CalculationModel.class, calculationModel);
+		if(context != null){
+			context.set(CalculationModel.class, calculationModel);
+		}
 		//		this.calculationModel = calculationModel;
 
 		// OSGi service registration
@@ -88,7 +93,7 @@ public class ModelRegistration {
 					} else if(element.getName().equals(ICalculationExtensionPoint.STRUCTURE_CALCULATION)){
 						String patternResource = element.getAttribute(ICalculationExtensionPoint.PATTERN_RESOURCE);
 						Bundle bundle = Platform.getBundle(element.getContributor().getName());
-//						URL resourceUrl = bundle.getResource(patternResource);
+						//						URL resourceUrl = bundle.getResource(patternResource);
 						URI uri = URI.createPlatformPluginURI(bundle.getSymbolicName() + "/" + patternResource, true);
 						//////////// needed because Guice Injector exceptions are thrown otherwise
 						EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
@@ -147,7 +152,9 @@ public class ModelRegistration {
 
 	private QualitySmellModel registerQualitySmellModel(IEclipseContext context, IWorkspace workspace) {
 		QualitySmellModel smellModel = initQualitySmellModel(workspace);
-		context.set(QualitySmellModel.class, smellModel);
+		if(context != null){
+			context.set(QualitySmellModel.class, smellModel);
+		}
 		//		this.smellModel = smellModel;
 
 		//		context.declareModifiable(QualitySmellModel.class);
