@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Observation Plugin for quality smells
-Bundle-SymbolicName: org.emftext.refactoring.smell.registry;singleton:=true
+Bundle-SymbolicName: org.emftext.refactoring.smell.registry.ui;singleton:=true
 Bundle-Version: 0.0.1.qualifier
 Bundle-Vendor: www.modelrefactoring.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
@@ -25,7 +25,7 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.emftext.refactoring.registry.rolemapping,
  org.eclipse.jface,
  org.apache.commons.lang,
- org.eclipse.ui.editors
-Export-Package: org.emftext.refactoring.smell.registry,
- org.emftext.refactoring.smell.registry.util
+ org.eclipse.ui.editors,
+ org.emftext.refactoring.smell.registry
+Export-Package: org.emftext.refactoring.smell.registry
 Bundle-ActivationPolicy: lazy
