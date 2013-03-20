@@ -6,5 +6,5 @@ Bundle-Version: 0.0.1
 Bundle-Vendor: www.modelrefactoring.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.emftext.refactoring.smell.calculation,
- org.emftext.refactoring.smell.registry,
+ org.emftext.refactoring.smell.registry.ui,
  org.emftext.language.refactoring.roles

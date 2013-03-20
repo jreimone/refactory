@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.gmf.runtime.notation,
- org.emftext.refactoring.smell.registry,
+ org.emftext.refactoring.smell.registry.ui,
  org.emftext.refactoring.smell.calculation
 Export-Package: org.emftext.refactoring.smell.ecoresmells,
  org.emftext.refactoring.smell.ecoresmells.impl,
