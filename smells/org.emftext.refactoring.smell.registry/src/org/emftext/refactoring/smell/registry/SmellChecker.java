@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -38,17 +37,18 @@ import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
-import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.registry.util.Triple;
 import org.osgi.framework.FrameworkUtil;
 
 public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisitor {
 
-	private QualitySmellModel smellModel;
-	private CalculationModel calculationModel;
+//	private QualitySmellModel smellModel;
+//	private CalculationModel calculationModel;
 
 	public SmellChecker(QualitySmellModel smellModel, CalculationModel calculationModel) {
-		this.smellModel = smellModel;
-		this.calculationModel = calculationModel;
+//		this.smellModel = smellModel;
+//		this.calculationModel = calculationModel;
+		IQualitySmellRegistry.INSTANCE.initialize(smellModel, calculationModel);
 	}
 
 	@Override
@@ -121,44 +121,15 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 			} else {
 				model = resource.getContents().get(0);
 			}
-			if(model != null){
-				EPackage metamodel = model.eClass().getEPackage();
-				List<ConcreteQualitySmell> smells = smellModel.getSmellsForMetamodel(metamodel);
-				for (ConcreteQualitySmell qualitySmell : smells) {
-					RoleMapping roleMapping = qualitySmell.getRefactoring();
-					List<QualityCalculation> qualityCalculations = qualitySmell.getQualityCalculations();
-					for (QualityCalculation qualityCalculation : qualityCalculations) {
-						Calculation calculation = qualityCalculation.getCalculation();
-						if(calculation.eIsProxy()){
-							EcoreUtil.resolveAll(calculation);
-							ResourceSet resourceSet = calculationModel.eResource().getResourceSet();
-							calculation = (Calculation) EcoreUtil.resolve(calculation, resourceSet);
-							calculation = (Calculation) EcoreUtil.resolve(calculation, calculationModel.eResource());
-						}
-						if(calculation != null && !calculation.eIsProxy()){
-							float threshold = qualityCalculation.getThreshold();
-							CalculationResult result = calculation.calculate(model, threshold);
-							float resultingValue = result.getResultingValue();
-							Monotonicity monotonicity = calculation.getMonotonicity();
-							switch (monotonicity) {
-							case DECREASING: 
-								// je größer der wert desto schlechter die qualität 
-								// --> smell trifft zu wenn result >= threshold
-								if(resultingValue >= threshold){
-									addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
-								}
-								break;
-							case INCREASING: 
-								// je größer der wert desto besser die qualität
-								// --> smell trifft zu wenn result <= threshold
-								if(resultingValue <= threshold){
-									addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
-								}
-								break;
-							}
-						}
-					}
-				}
+			resource = model.eResource();
+			List<Triple<CalculationResult,Calculation,QualityCalculation>> matchingCalculations = IQualitySmellRegistry.INSTANCE.getMatchingSmellCalculationsForResource(resource);
+			for (Triple<CalculationResult, Calculation, QualityCalculation> triple : matchingCalculations) {
+				CalculationResult result = triple.getFirst();
+				Calculation calculation = triple.getSecond();
+				QualityCalculation qualityCalculation = triple.getThird();
+				ConcreteQualitySmell concreteSmell = qualityCalculation.getConcreteSmell();
+				RoleMapping roleMapping = concreteSmell.getRefactoring();
+				addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
 			}
 		}
 	}
