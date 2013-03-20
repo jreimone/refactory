@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.emftext.refactoring.smell.registry.calculation">
+         point="org.emftext.refactoring.smell.registry.ui.calculation">
       <metricCalculation
             class="org.emftext.refactoring.smell.uml_extension.CheckInterfaceSpecifications">
       </metricCalculation>
