@@ -7,6 +7,14 @@
             class="org.emftext.refactoring.smell.rolessmell.impl.DistinctRoleNamesImpl">
       </metricCalculation>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="org.emftext.refactoring.smell.rolessmell.RolessmellPackage"
+            genModel="calculation/rolesSmell.genmodel"
+            uri="http://modelrefactoring.org/smell/calculation/roles">
+      </package>
+   </extension>
 
 
 

@@ -33,9 +33,7 @@ import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.QualityCalculation;
-import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.calculation.Calculation;
-import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
 import org.emftext.refactoring.smell.registry.util.Triple;
 import org.osgi.framework.FrameworkUtil;
@@ -45,11 +43,11 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 //	private QualitySmellModel smellModel;
 //	private CalculationModel calculationModel;
 
-	public SmellChecker(QualitySmellModel smellModel, CalculationModel calculationModel) {
-//		this.smellModel = smellModel;
-//		this.calculationModel = calculationModel;
-		IQualitySmellRegistry.INSTANCE.initialize(smellModel, calculationModel);
-	}
+//	public SmellChecker(QualitySmellModel smellModel, CalculationModel calculationModel) {
+////		this.smellModel = smellModel;
+////		this.calculationModel = calculationModel;
+//		IQualitySmellRegistry.INSTANCE.initialize(smellModel, calculationModel);
+//	}
 
 	@Override
 	public void resourceChanged(IResourceChangeEvent event) {

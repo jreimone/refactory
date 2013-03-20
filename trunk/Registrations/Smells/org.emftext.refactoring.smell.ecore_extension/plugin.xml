@@ -16,5 +16,13 @@
             class="org.emftext.refactoring.smell.ecoresmells.impl.SearchEmptyClassesImpl">
       </metricCalculation>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage"
+            genModel="metamodel_extension/ecoreSmells.genmodel"
+            uri="http://modelrefactoring.org/smell/calculation/ecore">
+      </package>
+   </extension>
 
 </plugin>

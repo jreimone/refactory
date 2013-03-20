@@ -44,7 +44,7 @@ import com.google.inject.Injector;
 @SuppressWarnings("restriction")
 public class ModelRegistration {
 
-	public static final String SMELL_PLUGIN_ID		= "org.emftext.refactoring.smell.registry";
+//	public static final String SMELL_PLUGIN_ID		= "org.emftext.refactoring.smell.registry";
 	private static final String SMELL_MODEL_NAME	= "smellmodel.smell";
 	private static final String CALC_MODEL_NAME		= "registered.calculation";
 
@@ -54,7 +54,8 @@ public class ModelRegistration {
 		QualitySmellModel smellModel = registerQualitySmellModel(context, workspace);
 		IQualitySmellRegistry.INSTANCE.initialize(smellModel, calculationModel);
 		if(workspace != null){
-			workspace.addResourceChangeListener(new SmellChecker(smellModel, calculationModel), IResourceChangeEvent.POST_CHANGE);
+//			workspace.addResourceChangeListener(new SmellChecker(smellModel, calculationModel), IResourceChangeEvent.POST_CHANGE);
+			workspace.addResourceChangeListener(new SmellChecker(), IResourceChangeEvent.POST_CHANGE);
 		}
 	}
 
@@ -170,7 +171,7 @@ public class ModelRegistration {
 
 	private QualitySmellModel initQualitySmellModel(IWorkspace workspace) {
 		ResourceSet rs = new ResourceSetImpl();
-		Bundle bundle = Platform.getBundle(SMELL_PLUGIN_ID);
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
 		QualitySmellModel smellModel = null;
 		Resource resource = null;
 		if(bundle != null){
@@ -201,7 +202,7 @@ public class ModelRegistration {
 
 	private CalculationModel createCalculationModel(IWorkspace workspace) {
 		ResourceSet rs = new ResourceSetImpl();
-		Bundle bundle = Platform.getBundle(SMELL_PLUGIN_ID);
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
 		CalculationModel calculationModel = null;
 		Resource resource = null;
 		if(bundle != null){
