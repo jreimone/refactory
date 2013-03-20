@@ -3,7 +3,7 @@
 <schema targetNamespace="org.emftext.refactoring.smell.registry" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.emftext.refactoring.smell.registry" id="calculation" name="Smell Calculation"/>
+         <meta.schema plugin="org.emftext.refactoring.smell.registry.ui" id="calculation" name="Smell Calculation"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
