@@ -155,7 +155,8 @@ git:https://github.com/DevBoost/Reuseware.git!Sokan/
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
 
 // Dresden OCL for OCL refactorings
-svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
+get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.facade_3.2.0.v201209240638.jar
+//svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
 // needs AspectJ
 //get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/aspectj/aspectj-1.7.1.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/aspectj/aspectj-1.7.1.jar
