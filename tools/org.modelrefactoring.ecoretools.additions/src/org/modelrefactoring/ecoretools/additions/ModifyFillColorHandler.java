@@ -5,6 +5,7 @@ import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -54,9 +55,11 @@ public class ModifyFillColorHandler {
 				for (View child : visibleChildren) {
 					if(child instanceof Node){
 						Node node = (Node) child;
-						FillStyle fillStyle = (FillStyle) node.getStyle(NotationPackage.Literals.FILL_STYLE);
-						// white
-						fillStyle.setFillColor(16777215);
+						if(node.getElement() instanceof EClassifier){
+							FillStyle fillStyle = (FillStyle) node.getStyle(NotationPackage.Literals.FILL_STYLE);
+							// white
+							fillStyle.setFillColor(16777215);
+						}
 					}
 				}
 			}
