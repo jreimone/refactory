@@ -44,7 +44,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
-import org.eclipse.uml2.uml.internal.resource.UML302UMLResourceFactoryImpl;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import org.emftext.language.conference.ConferencePackage;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceResourceFactory;
@@ -83,7 +82,8 @@ import org.emftext.refactoring.tests.properties.KeyValuePair;
 import org.emftext.refactoring.tests.properties.PropertiesPackage;
 import org.emftext.refactoring.tests.properties.PropertyModel;
 import org.emftext.refactoring.tests.properties.StringValue;
-import org.emftext.refactoring.tests.properties.resource.properties.mopp.PropertiesResourceFactory;
+import org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation;
+import org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResourceFactory;
 import org.emftext.refactoring.util.UtilTestFragment;
 import org.emftext.test.core.AbstractRefactoringTestCase;
 import org.emftext.test.core.DataPairTestFileFilter;
@@ -631,7 +631,7 @@ public class RefactoringTestSuite extends TestCase {
 				new RolemappingResourceFactory());
 		extensionToFactoryMap.put("refspec", new RefspecResourceFactory());
 		// properties
-		extensionToFactoryMap.put("properties", new PropertiesResourceFactory());
+		extensionToFactoryMap.put(new TestpropertiesMetaInformation().getSyntaxName(), new TestpropertiesResourceFactory());
 		// arbitrary metamodels
 		extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl());
 		extensionToFactoryMap.put("pl0", new Pl0ResourceFactory());

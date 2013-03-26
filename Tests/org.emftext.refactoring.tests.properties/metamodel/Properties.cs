@@ -1,4 +1,4 @@
-SYNTAXDEF properties
+SYNTAXDEF testproperties
 FOR <http://www.emftext.org/language/properties>
 START PropertyModel
 
