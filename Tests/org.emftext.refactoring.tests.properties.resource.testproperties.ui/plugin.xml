@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIMetaInformation" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="testproperties" icon="icons/editor_icon.gif" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesEditor" name="EMFText testproperties Editor">
+			<contentTypeBinding contentTypeId="org.emftext.refactoring.tests.properties.resource.testproperties">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Testproperties Text Editor" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferencePage" class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringPreferencePage" class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringPreferencePage" category="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketPreferencePage" class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketPreferencePage" category="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesNewFileWizard" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesNewFileWizard" name="EMFText .testproperties file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesNewProjectWizard" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesNewProjectWizard" name="EMFText testproperties project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesMarkerResolutionGenerator" markerType="org.emftext.refactoring.tests.properties.resource.testproperties.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesAnnotationModelFactory" extensions="testproperties">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.refactoring.tests.properties.resource.testproperties" name=".testproperties File" base-type="org.eclipse.core.runtime.text" file-extensions="testproperties">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="testproperties" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.refactoring.tests.properties.resource.testproperties.ui.occurences">
+		</type>
+		<type name="org.emftext.refactoring.tests.properties.resource.testproperties.ui.occurences.declaration" super="org.emftext.refactoring.tests.properties.resource.testproperties.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.refactoring.tests.properties.resource.testproperties.ui.occurences" label="Occurrences (in .testproperties files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="testproperties.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="testproperties.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="testproperties.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="testproperties.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="testproperties.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="testproperties.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="testproperties.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="testproperties.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="testproperties.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.refactoring.tests.properties.resource.testproperties.ui.occurences.declaration" label="Declarations (in .testproperties files)" textPreferenceKey="testproperties.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="testproperties.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="testproperties.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="testproperties.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="testproperties.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="testproperties.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+</plugin>
