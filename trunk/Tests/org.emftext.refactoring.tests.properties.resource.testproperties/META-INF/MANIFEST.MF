@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: testproperties
+Bundle-SymbolicName: org.emftext.refactoring.tests.properties.resource.testproperties;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+  org.eclipse.core.resources;resolution:=optional,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation;resolution:=optional,
+  org.emftext.access;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
+  org.emftext.refactoring.tests.properties
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.emftext.refactoring.tests.properties.resource.testproperties,
+  org.emftext.refactoring.tests.properties.resource.testproperties.analysis,
+  org.emftext.refactoring.tests.properties.resource.testproperties.mopp,
+  org.emftext.refactoring.tests.properties.resource.testproperties.debug,
+  org.emftext.refactoring.tests.properties.resource.testproperties.launch,
+  org.emftext.refactoring.tests.properties.resource.testproperties.grammar,
+  org.emftext.refactoring.tests.properties.resource.testproperties.util
+Bundle-Activator: org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesPlugin
