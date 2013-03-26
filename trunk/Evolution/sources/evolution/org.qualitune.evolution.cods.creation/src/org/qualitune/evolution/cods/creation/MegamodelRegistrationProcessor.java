@@ -68,15 +68,16 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 		return super.createResource(uri);
 	}
 
-	@PostConstruct
+	// @Execute is needed because this class is registered as a processor and not in a fragment.e4xmi
+	@Execute
 	public void register(IEclipseContext context, IWorkspace workspace) {
+		this.workspace = workspace;
 		CODS megaModel = loadMegaModel();
 		codsResource = megaModel.eResource();
 		context.set(MegaModel.class, megaModel);
 		context.set(CODS.class, megaModel);
 		registerInEMF();
 		workspace.addResourceChangeListener(new WorkspaceModelChangeListener(megaModel));
-		this.workspace = workspace;
 	}
 
 	private void registerInEMF() {
