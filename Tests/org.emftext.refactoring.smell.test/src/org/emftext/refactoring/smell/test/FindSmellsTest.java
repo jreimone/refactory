@@ -132,12 +132,12 @@ public class FindSmellsTest {
 	
 	private static void loadSmellModels() {
 		resourceSet = new ResourceSetImpl();
-		URI uri = URI.createFileURI(CALC_MODEL_PATH);
+		URI uri = URI.createFileURI(new File(CALC_MODEL_PATH).getAbsolutePath());
 		Resource resource = resourceSet.getResource(uri, true);
 		assertNotNull("Calculation Resource mustn't be null", resource);
 		calculationModel = (CalculationModel) resource.getContents().get(0);
 		assertNotNull("Calculation Model mustn't be null", calculationModel);
-		uri = URI.createFileURI(SMELL_MODEL_PATH);
+		uri = URI.createFileURI(new File(SMELL_MODEL_PATH).getAbsolutePath());
 		resource = resourceSet.getResource(uri, true);
 		assertNotNull("Smell Resource mustn't be null", resource);
 		smellModel = (QualitySmellModel) resource.getContents().get(0);
