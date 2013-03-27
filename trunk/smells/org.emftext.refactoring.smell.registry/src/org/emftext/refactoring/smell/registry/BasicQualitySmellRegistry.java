@@ -108,6 +108,7 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 						Calculation calculation = qualityCalculation.getCalculation();
 						if(calculation.eIsProxy()){
 							EcoreUtil.resolveAll(calculation);
+							EcoreUtil.resolveAll(qualityCalculation);
 							ResourceSet resourceSet = getCalculationModel().eResource().getResourceSet();
 							calculation = (Calculation) EcoreUtil.resolve(calculation, resourceSet);
 							calculation = (Calculation) EcoreUtil.resolve(calculation, getCalculationModel().eResource());
