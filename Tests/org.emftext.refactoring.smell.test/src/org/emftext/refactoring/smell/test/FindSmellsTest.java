@@ -132,16 +132,22 @@ public class FindSmellsTest {
 	
 	private static void loadSmellModels() {
 		resourceSet = new ResourceSetImpl();
-		URI uri = URI.createFileURI(new File(CALC_MODEL_PATH).getAbsolutePath());
-		Resource resource = resourceSet.getResource(uri, true);
-		assertNotNull("Calculation Resource mustn't be null", resource);
-		calculationModel = (CalculationModel) resource.getContents().get(0);
-		assertNotNull("Calculation Model mustn't be null", calculationModel);
-		uri = URI.createFileURI(new File(SMELL_MODEL_PATH).getAbsolutePath());
-		resource = resourceSet.getResource(uri, true);
-		assertNotNull("Smell Resource mustn't be null", resource);
-		smellModel = (QualitySmellModel) resource.getContents().get(0);
-		assertNotNull("Smell Model mustn't be null", smellModel);
+		try {
+			File file = new File(CALC_MODEL_PATH).getCanonicalFile();
+			URI uri = URI.createFileURI(file.getAbsolutePath());
+			Resource resource = resourceSet.getResource(uri, true);
+			assertNotNull("Calculation Resource mustn't be null", resource);
+			calculationModel = (CalculationModel) resource.getContents().get(0);
+			assertNotNull("Calculation Model mustn't be null", calculationModel);
+			file = new File(SMELL_MODEL_PATH).getCanonicalFile();
+			uri = URI.createFileURI(file.getAbsolutePath());
+			resource = resourceSet.getResource(uri, true);
+			assertNotNull("Smell Resource mustn't be null", resource);
+			smellModel = (QualitySmellModel) resource.getContents().get(0);
+			assertNotNull("Smell Model mustn't be null", smellModel);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static void initRegistry() {
@@ -157,7 +163,7 @@ public class FindSmellsTest {
 			smellingResources = new ArrayList<Resource>();
 			for (String path : paths) {
 				if(!path.startsWith("//")){
-					file = new File(path);
+					file = new File(path).getCanonicalFile();
 					assertTrue("Smelling resource must exist", file != null && file.exists());
 					Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
 					assertNotNull("Smelling resource " + file.getAbsolutePath() + " couldn't be loaded", resource);
