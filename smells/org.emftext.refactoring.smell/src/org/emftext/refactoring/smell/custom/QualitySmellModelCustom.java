@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.SmellPackage;
 import org.emftext.refactoring.smell.impl.QualitySmellModelImpl;
@@ -24,6 +25,7 @@ public class QualitySmellModelCustom extends QualitySmellModelImpl {
 		}
 		EList<ConcreteQualitySmell> metamodelSmells = new BasicEList<>();
 		for (ConcreteQualitySmell smell : getConcreteSmells()) {
+			EcoreUtil.resolveAll(smell);
 			if(smell.getMetamodel().equals(metamodel)){
 				metamodelSmells.add(smell);
 			}
