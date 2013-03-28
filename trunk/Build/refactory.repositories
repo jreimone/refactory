@@ -2,72 +2,23 @@
 git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMF/
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 
-
-
 // Eclipse Platform
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-4.2-delta-pack.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/org.eclipse.pde-4.2.zip
+
 // JDT
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/org.eclipse.jdt-4.2.zip
+
 // EMF
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip
+
 // EMF Validation (core plugin and feature)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.4.0.v20100428-2315.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.3.0.v200901271722.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.v200901271722.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/features/org.eclipse.emf.validation_1.6.0.v20120328-0001-479-9oB56N5BBR6LCA6/feature.xml
 
-
-
-
-
-
-// Old dependencies
-
-
-// Eclipse Platform
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.core.runtime_3.8.0.v20120521-2346.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.core.resources_3.8.0.v20120522-2034.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.core.expressions_3.4.400.v20120523-2004.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.ui_3.103.0.v20120521-2329.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.ui.ide_3.8.0.v20120521-2329.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.ui.views_3.6.100.v20120521-2329.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.ui.editors_3.8.0.v20120523-1540.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.jface_3.8.0.v20120521-2329.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.jface.text_3.8.0.v20120531-0600.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.jface.databinding_1.6.0.v20120521-2329.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.ui.workbench_3.103.0.v20120530-1824.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.equinox.registry_3.5.200.v20120522-1841.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.ui.navigator_3.5.200.v20120523-1955.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-platform-4.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.ui.navigator.resources_3.4.400.v20120523-1955.jar
-
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/eclipse-4.2-delta-pack.zip
-// JDT
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/org.eclipse.jdt-4.2.zip!plugins/org.eclipse.jdt_3.8.0.v201206081400.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/org.eclipse.jdt-4.2.zip!plugins/org.eclipse.jdt.core_3.8.1.v20120531-0637.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/org.eclipse.jdt-4.2.zip!plugins/org.eclipse.jdt.launching_3.6.100.v20120523-1953.jar
-
-// JUnit
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/org.eclipse.jdt-4.2.zip!plugins/org.junit4_4.8.1.v20120523-1257.jar
-// EMF
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf_2.6.0.v20120608-0554.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.codegen.ecore_2.8.0.v20120608-0554.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.ecore_2.8.0.v20120606-0717.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.ecore.edit_2.8.0.v20120608-0554.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.edit.ui_2.8.0.v20120608-0554.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.common_2.8.0.v20120606-0717.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.ecore.xmi_2.8.0.v20120606-0717.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.ecore.change_2.8.0.v20120606-0717.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.edit.ui_2.8.0.v20120608-0554.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/org.eclipse.emf.codegen.ui_2.6.0.v20120608-0554.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip!eclipse/plugins/
-
-// EMF Validation
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.4.0.v20100428-2315.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.3.0.v200901271722.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.v200901271722.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/features/org.eclipse.emf.validation_1.6.0.v20120328-0001-479-9oB56N5BBR6LCA6/feature.xml
- 
 // Testing (JUnit Stage)
 git:https://github.com/DevBoost/BuildBoost.git!Extensions/JUnit/
 
@@ -84,10 +35,10 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
 // get:http://search.maven.org/remotecontent?filepath=com/google/guava/guava/10.0/guava-10.0.jar
 
 // EMF Workspace + Transaction
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/transaction/downloads/drops/1.6.0/R201206271200/emf-transaction-runtime-1.6.0.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/transaction/downloads/drops/1.6.0/R201206271200/emf-transaction-runtime-1.6.0.zip
 
 // UML2
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downloads/drops/4.0.1/R201209131441/mdt-uml2-runtime-4.0.1.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downloads/drops/4.0.1/R201209131441/mdt-uml2-runtime-4.0.1.zip
 
 // BPMN2
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/downloads/drops/0.7/S20111111/site.zip!site/plugins/org.eclipse.bpmn2_0.7.0.201111091619.jar
@@ -123,8 +74,10 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 
 // GMF 
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/downloads/drops/1.6.0/R201206271200/gmf-runtime-1.6.0.zip
+
 // MDT OCL (needed from GMF???)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.0.1/R201209171739/mdt-ocl-runtime-core-4.0.1.zip
+
 // GEF
 get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.8.1/R201208200205/GEF-runtime-3.8.1.zip
 get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.8.1/R201208200205/GEF-zest-3.8.1.zip 
@@ -155,24 +108,20 @@ git:https://github.com/DevBoost/Reuseware.git!Sokan/
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
 
 // Dresden OCL for OCL refactorings
-get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.facade_3.2.0.v201209240638.jar
-//svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
+svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
+
 // needs AspectJ
-//get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/aspectj/aspectj-1.7.1.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/aspectj/aspectj-1.7.1.jar
+get:http://ftp-stud.hs-esslingen.de/Mirrors/eclipse/tools/ajdt/42/update/ajdt_2.2.2_for_eclipse_4.2.zip
 
 // AppFlow for Mapping
-git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/AppFlow/
+//git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/AppFlow/
 
 // Company for Mapping
-git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Company/
-git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/DOT/
+//git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Company/
+//git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/DOT/
 
 // TextAdventure for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/TextAdventure/
-
-// Conference for Mapping
-git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Conference/
 
 // PL/0 for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/PL0/
