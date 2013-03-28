@@ -128,11 +128,6 @@ git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Conference/
 
 // Dresden OCL for OCL refactorings
 //svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
-get:http://www.dresden-ocl.org/update/plugins/?C=N;O=D
-get:http://www.dresden-ocl.org/update/plugins/?C=M;O=A
-get:http://www.dresden-ocl.org/update/plugins/?C=S;O=A
-get:http://www.dresden-ocl.org/update/plugins/?C=D;O=A
-get:http://www.dresden-ocl.org/update/
 get:http://www.dresden-ocl.org/update/plugins/com.ibm.icu_4.4.2.v20110823.jar
 get:http://www.dresden-ocl.org/update/plugins/javax.annotation_1.0.0.v20101115-0725.jar
 get:http://www.dresden-ocl.org/update/plugins/javax.inject_1.0.0.v20091030.jar
