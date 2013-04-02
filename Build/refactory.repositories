@@ -103,7 +103,14 @@ git:https://github.com/DevBoost/JaMoPP.git!Features/
 git:https://github.com/DevBoost/EMFTools.git!eJava/
 
 // Sokan
-git:https://github.com/DevBoost/Reuseware.git!Sokan/
+//git:https://github.com/DevBoost/Reuseware.git!Sokan/
+get:http://emftext.org/update/plugins/org.reuseware.sokan_1.0.1.v201207310007.jar
+get:http://emftext.org/update/plugins/org.reuseware.sokan.index_1.0.1.v201207310007.jar
+get:http://emftext.org/update/plugins/org.reuseware.sokan.index.solr_1.0.1.v201207310007.jar
+get:http://emftext.org/update/plugins/org.reuseware.sokan.resource_1.0.1.v201207310007.jar
+get:http://emftext.org/update/plugins/org.reuseware.sokan.ui_1.0.1.v201207310007.jar
+get:http://emftext.org/update/plugins/org.reuseware.sokan.ui.model_1.0.1.v201207310007.jar
+get:http://emftext.org/update/plugins/org.reuseware.sokan.ui.model.edit_1.0.1.v201207310007.jar
 
 // Manifest for Codegen
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
