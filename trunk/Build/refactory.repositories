@@ -1,5 +1,6 @@
 // BuildBoost extensions
 git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMF/
+git:https://github.com/DevBoost/TestUtils.git
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 
 // Eclipse Platform
