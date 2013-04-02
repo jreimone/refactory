@@ -109,7 +109,7 @@ git:https://github.com/DevBoost/Reuseware.git!Sokan/
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
 
 // needs AspectJ
-//get:http://ftp-stud.hs-esslingen.de/Mirrors/eclipse/tools/ajdt/42/update/ajdt_2.2.2_for_eclipse_4.2.zip
+get:http://ftp-stud.hs-esslingen.de/Mirrors/eclipse/tools/ajdt/42/update/ajdt_2.2.2_for_eclipse_4.2.zip!plugins/org.aspectj.runtime_1.7.2.20130214224500.jar
 
 // AppFlow for Mapping
 //git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/AppFlow/
