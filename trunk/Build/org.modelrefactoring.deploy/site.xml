@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site
+      associateSitesURL="http://www.modelrefactoring.org/update_trunk/associateSites.xml">
+   <description name="Refactory">
+      Update site for the generic model refactoring tool Refactory.
+   </description>
+   <feature url="features/org.modelrefactoring.runtime_0.0.0.v0.jar" id="org.modelrefactoring.runtime" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.sdk_0.0.0.v0.jar" id="org.modelrefactoring.sdk" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.codegen_0.0.0.v0.jar" id="org.modelrefactoring.codegen" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.genericrefactorings_0.0.0.v0.jar" id="org.modelrefactoring.genericrefactorings" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.indexconnector.sokan_0.0.0.v0.jar" id="org.modelrefactoring.indexconnector.sokan" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.ecore_0.0.0.v0.jar" id="org.modelrefactoring.mappings.ecore" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.uml2_0.0.0.v0.jar" id="org.modelrefactoring.mappings.uml2" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.roles_0.0.0.v0.jar" id="org.modelrefactoring.mappings.roles" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.pl0_0.0.0.v0.jar" id="org.modelrefactoring.mappings.pl0" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.stp.bpmn_0.0.0.v0.jar" id="org.modelrefactoring.mappings.stp.bpmn" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.constraintinterpreter.ocl_0.0.0.v0.jar" id="org.modelrefactoring.constraintinterpreter.ocl" version="0.0.0.v0">
+      <category name="Refactory Constraint Interpreter"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.editorconnector.emftext_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.emftext" version="0.0.0.v0">
+      <category name="Refactory Editor Connectors"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.editorconnector.xtext_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.xtext" version="0.0.0.v0">
+      <category name="Refactory Editor Connectors"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.editorconnector.gmf_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.gmf" version="0.0.0.v0">
+      <category name="Refactory Editor Connectors"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells_0.0.0.v0.jar" id="org.modelrefactoring.smells" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.defaults_0.0.0.v0.jar" id="org.modelrefactoring.smells.defaults" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.ecore_0.0.0.v0.jar" id="org.modelrefactoring.smells.ecore" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.roles_0.0.0.v0.jar" id="org.modelrefactoring.smells.roles" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <category-def name="Refactory Core" label="Refactory Core"/>
+   <category-def name="Refactory Editor Connectors" label="Refactory Editor Connectors"/>
+   <category-def name="Refactory Mappings" label="Refactory Mappings"/>
+   <category-def name="Refactory Constraint Interpreter" label="Refactory Constraint Interpreter"/>
+   <category-def name="Refactory Smells" label="Refactory Smells"/>
+</site>
