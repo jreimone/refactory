@@ -5,7 +5,7 @@
 	<associateSite label="The Eclipse Project Updates"
 		url="http://download.eclipse.org/eclipse/updates/4.2"/>	
 	<associateSite label="Refactory"
-		url="http://emftext.org/update_trunk"/>
+		url="http://modelrefactoring.org/update_trunk"/>
 	<associateSite label="Dresden OCL"
 		url="http://www.dresden-ocl.org/update/"/>			
 </associateSites>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site
-      associateSitesURL="http://www.modelrefactoring.org/update/DresdenOCLRefactoring/associateSites.xml">
+      associateSitesURL="http://www.modelrefactoring.org/DresdenOCLRefactoring/associateSites.xml">
    <description name="Refactoring for Dresden OCL">
       Update site for the Refactoring feature for Dresden OCL.
    </description>
