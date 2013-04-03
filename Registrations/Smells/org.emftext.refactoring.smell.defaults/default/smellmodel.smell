@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smell:QualitySmellModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:calculation="http://modelrefactoring.org/smell/calculation" xmlns:rolessmell="http://modelrefactoring.org/smell/calculation/roles" xmlns:smell="http://modelrefactoring.org/smell">
+  <smells name="Inconsistency"/>
+  <smells name="Energy Inefficiency"/>
+  <qualities name="Consistency" calculations="//@concreteSmells.1/@qualityCalculations.0"/>
+  <qualities name="Energy Efficiency" calculations="//@concreteSmells.0/@qualityCalculations.0"/>
+  <concreteSmells genericSmell="//@smells.1" concreteName="Data Transmission Without Compression">
+    <qualityCalculations quality="//@qualities.1" influence="1.0" threshold="1.0">
+      <calculation xsi:type="calculation:Structure" href="registered.calculation#dataTransmissionWithoutCompressionOptimised"/>
+    </qualityCalculations>
+    <refactoring href="platform:/plugin/org.emftext.language.java.refactoring/rolemappings/AddDataCompression.rolemapping#//@mappings.0"/>
+    <metamodel href="http://www.emftext.org/java#/"/>
+  </concreteSmells>
+  <concreteSmells genericSmell="//@smells.0" concreteName="Distinct Role Names">
+    <qualityCalculations quality="//@qualities.0" influence="1.0" threshold="1.0">
+      <calculation xsi:type="rolessmell:DistinctRoleNames" href="registered.calculation#Distinct Role Names"/>
+    </qualityCalculations>
+    <refactoring href="platform:/plugin/org.emftext.language.refactoring.roles.refactoring/rolemappings/RenameMappings.rolemapping#//@mappings.0"/>
+    <metamodel href="http://www.emftext.org/language/roles#/"/>
+  </concreteSmells>
+</smell:QualitySmellModel>
