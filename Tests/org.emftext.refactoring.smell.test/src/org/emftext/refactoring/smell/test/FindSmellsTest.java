@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageRuntimeModule;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
 import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
@@ -44,6 +45,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.io.Files;
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 @SuppressWarnings("restriction")
@@ -61,10 +63,10 @@ public class FindSmellsTest {
 	
 	@BeforeClass
 	public static void setUp(){
-		registerCoreLanguages();
+//		registerCoreLanguages();
 		registerCalculationExtensionLanguages();
-		registerSmellingLanguages();
-		registerTestingRootAsPlatformRoot();
+//		registerSmellingLanguages();
+//		registerTestingRootAsPlatformRoot();
 		loadSmellModels();
 		initRegistry();
 		initSmellingResources();
@@ -72,12 +74,19 @@ public class FindSmellsTest {
 
 	private static void registerCoreLanguages() {
 		// IncQuery
-		EMFPatternLanguageStandaloneSetupGenerated setup = new EMFPatternLanguageStandaloneSetupGenerated();
-		Injector injector = setup.createInjectorAndDoEMFRegistration();
+//		EMFPatternLanguageStandaloneSetupGenerated setup = new EMFPatternLanguageStandaloneSetupGenerated();
+//		Injector injector = setup.createInjectorAndDoEMFRegistration();
+//		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
+////		injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+//		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
+		
 		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-//		injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
 		// smells
