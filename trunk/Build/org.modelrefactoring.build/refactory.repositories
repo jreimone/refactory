@@ -47,7 +47,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/transaction/downloads/drops/1.6.0/R201206271200/emf-transaction-runtime-1.6.0.zip
 
 // all plugins from ZESSY repository
-svn:svn+ssh://jreimann@svn-st.inf.tu-dresden.de/srv/svn/zessy/sources/evolution/org.qualitune.refactoring.energy.test
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/zessy/sources/evolution/org.qualitune.refactoring.energy.test
 
 // UML2
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downloads/drops/4.0.1/R201209131441/mdt-uml2-runtime-4.0.1.zip
