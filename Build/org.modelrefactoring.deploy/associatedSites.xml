@@ -1,0 +1,12 @@
+<associateSites>
+	<associateSite label="Juno" 
+		url="http://download.eclipse.org/releases/juno"/>
+	<associateSite label="The Eclipse Project Updates" 
+		url="http://download.eclipse.org/eclipse/updates/4.2"/>
+	<associateSite label="EMFText"
+		url="http://www.emftext.org/update/"/>		
+	<associateSite label="Dresden OCL"
+		url="http://www.dresden-ocl.org/update/"/>
+	<associateSite label="EMF-IncQuery"
+		url="http://download.eclipse.org/incquery/updates/milestone"/>	
+</associateSites>
