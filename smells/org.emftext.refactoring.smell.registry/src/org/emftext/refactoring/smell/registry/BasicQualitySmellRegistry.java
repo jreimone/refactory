@@ -31,14 +31,14 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 
 	private void initQualitySmellModel() {
 		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
 		tracker.open();
 		smellModel = tracker.getService();
 	}
 	
 	private void initCalculationModel() {
 		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<CalculationModel,CalculationModel> tracker = new ServiceTracker<>(bundleContext, CalculationModel.class, null);
+		ServiceTracker<CalculationModel,CalculationModel> tracker = new ServiceTracker<CalculationModel,CalculationModel>(bundleContext, CalculationModel.class, null);
 		tracker.open();
 		calculationModel = tracker.getService();
 	}
