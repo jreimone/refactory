@@ -3,7 +3,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smell" nsURI="http://modelrefactoring.org/smell" nsPrefix="smell">
   <eClassifiers xsi:type="ecore:EClass" name="QualitySmellModel">
     <eOperations name="getSmellsForMetamodel" upperBound="-1" eType="#//ConcreteQualitySmell">
-      <eParameters name="metamodel" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+      <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
+      <eParameters name="metamodel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="smells" upperBound="-1"
         eType="#//QualitySmell" containment="true"/>
