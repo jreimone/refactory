@@ -35,7 +35,7 @@ public class GenericQualityPreferencePage extends AbstractPreferencePage {
 
 			// OSGi service
 			BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-			ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+			ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
 			tracker.open();
 			smellModel = tracker.getService();
 		}
@@ -46,7 +46,7 @@ public class GenericQualityPreferencePage extends AbstractPreferencePage {
 	public void init(IWorkbench workbench) {
 		super.init(workbench);
 		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
 		tracker.open();
 		smellModel = tracker.getService();
 	}

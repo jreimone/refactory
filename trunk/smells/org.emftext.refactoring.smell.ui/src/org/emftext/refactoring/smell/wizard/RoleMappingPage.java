@@ -46,7 +46,7 @@ public class RoleMappingPage extends WizardPage {
 		super("Refactoring Selection Page");
 		setDescription("...or don't select anything for just specifying a concrete quality smell without providing the opportunity to resolve the smell by a refactoring.");
 		setTitle("Select a Refactoring");
-		roleMappings = new ArrayList<>();
+		roleMappings = new ArrayList<RoleMapping>();
 	}
 
 	/**
