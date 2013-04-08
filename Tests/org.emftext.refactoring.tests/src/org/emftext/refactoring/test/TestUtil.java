@@ -86,7 +86,7 @@ public class TestUtil {
 	public static File getFileByPath(String path){
 		File file = new File(path);
 		assertNotNull(file);
-		assertTrue(file.exists());
+		assertTrue(path + " must exist", file.exists());
 		return file;
 	}
 }
