@@ -23,7 +23,7 @@ public class QualitySmellModelCustom extends QualitySmellModelImpl {
 		while(metamodel.getESuperPackage() != null){
 			metamodel = metamodel.getESuperPackage();
 		}
-		EList<ConcreteQualitySmell> metamodelSmells = new BasicEList<>();
+		EList<ConcreteQualitySmell> metamodelSmells = new BasicEList<ConcreteQualitySmell>();
 		for (ConcreteQualitySmell smell : getConcreteSmells()) {
 			EcoreUtil.resolveAll(smell);
 			if(smell.getMetamodel().equals(metamodel)){
