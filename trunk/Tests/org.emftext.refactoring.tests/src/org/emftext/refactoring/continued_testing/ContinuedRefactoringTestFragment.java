@@ -84,6 +84,7 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		init();
 		
 		EObject inputModel = TestUtil.getModelFromResource(getTestDataSet().getResourceByPattern(INPUT_PATTERN, false));
+		assertNotNull("input model mustn't be null", inputModel);
 		Resource inputResource = inputModel.eResource();
 		
 		File path = getTestDataSet().getInputFileByPattern(PATH_PATTERN);
@@ -115,7 +116,7 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		IValueProviderFactory factory = new TestValueProviderFactory();
 		refactorer.setValueProviderFactory(factory);
 		EObject refactoredModel = refactorer.refactor();
-		assertNotNull(refactoredModel);
+		assertNotNull("", refactoredModel);
 	
 		File inputFile = getTestDataSet().getInputFileByPattern(INPUT_PATTERN);
 		File parent = inputFile.getParentFile();
