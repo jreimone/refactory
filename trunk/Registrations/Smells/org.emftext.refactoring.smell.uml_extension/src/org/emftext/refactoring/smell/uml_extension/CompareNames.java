@@ -45,7 +45,7 @@ public class CompareNames extends MetricImpl {
 			return null;
 		}
 		Model umlModel = (Model) model;
-		Map<String, Set<Classifier>> allNames = new HashMap<>();
+		Map<String, Set<Classifier>> allNames = new HashMap<String, Set<Classifier>>();
 		for (Element element : umlModel.allOwnedElements()) {
 			if(element instanceof Classifier){
 				Classifier classifier = (Classifier) element;
