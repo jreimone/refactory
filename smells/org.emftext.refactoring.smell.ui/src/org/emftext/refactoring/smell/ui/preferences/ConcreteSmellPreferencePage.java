@@ -74,7 +74,7 @@ IWorkbenchPreferencePage {
 	public ConcreteSmellPreferencePage() {
 		setDescription(getDescription());
 		setTitle(getTitle());
-		concreteSmells = new ArrayList<>();
+		concreteSmells = new ArrayList<ConcreteQualitySmell>();
 	}
 
 	/**
@@ -203,7 +203,7 @@ IWorkbenchPreferencePage {
 	@Override
 	public void init(IWorkbench workbench) {
 		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
 		tracker.open();
 		smellModel = tracker.getService();
 	}

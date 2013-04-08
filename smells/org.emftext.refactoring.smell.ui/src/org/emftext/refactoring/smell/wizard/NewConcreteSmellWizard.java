@@ -22,7 +22,7 @@ public class NewConcreteSmellWizard extends Wizard {
 
 	private void init() {
 		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
 		tracker.open();
 		smellModel = tracker.getService();
 	}

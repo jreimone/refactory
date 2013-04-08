@@ -61,7 +61,7 @@ public class MetamodelPage extends WizardPage {
 
 	@SuppressWarnings("unchecked")
 	private void initMetamodels() {
-		availableMetamodels = new ArrayList<>();
+		availableMetamodels = new ArrayList<EPackage>();
 		//		availableMetamodels.addAll((Collection<? extends EPackage>) EPackage.Registry.INSTANCE.values());
 		Collection<Object> values = EPackage.Registry.INSTANCE.values();
 		for (Object object : values) {

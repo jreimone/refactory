@@ -97,10 +97,10 @@ public class CalculationsPage extends WizardPage {
 
 	private void init() {
 		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<>(bundleContext, QualitySmellModel.class, null);
+		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
 		tracker.open();
 		smellModel = tracker.getService();
-		ServiceTracker<CalculationModel,CalculationModel> tracker2 = new ServiceTracker<>(bundleContext, CalculationModel.class, null);
+		ServiceTracker<CalculationModel,CalculationModel> tracker2 = new ServiceTracker<CalculationModel,CalculationModel>(bundleContext, CalculationModel.class, null);
 		tracker2.open();
 		calculationModel = tracker2.getService();
 
@@ -405,7 +405,7 @@ public class CalculationsPage extends WizardPage {
 	}
 
 	private void setPageComplete() {
-		inappropriateValues = new ArrayList<>();
+		inappropriateValues = new ArrayList<String>();
 		boolean smellNotNull = selectedSmell != null;
 		checkInappropriateValue(smellNotNull, "a generic smell must be selected");
 		boolean nameSet = concreteSmell.getConcreteName() != null && concreteSmell.getConcreteName().trim().length() > 0;

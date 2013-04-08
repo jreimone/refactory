@@ -37,7 +37,7 @@ public class CalculationsWithRolemappingPage extends CalculationsPage {
 		ConcreteQualitySmell concreteSmell = getConcreteSmell();
 		EPackage metamodel = concreteSmell.getMetamodel();
 		Map<String, RoleMapping> roleMappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(metamodel.getNsURI());
-		List<RoleMapping> rolemappingsForMetamodel = new ArrayList<>(roleMappings.values());
+		List<RoleMapping> rolemappingsForMetamodel = new ArrayList<RoleMapping>(roleMappings.values());
 		
 		Label lblRefactoringToResolve = new Label(calculationPageComposite, SWT.NONE);
 		lblRefactoringToResolve.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
