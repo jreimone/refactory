@@ -75,13 +75,13 @@ public class CompareNamesOfClassesImpl extends MetricImpl implements CompareName
 			return null;
 		}
 		EPackage epackage = (EPackage) model;
-		List<EClassifier> metaclasses = new ArrayList<>();
+		List<EClassifier> metaclasses = new ArrayList<EClassifier>();
 		walkPackages(epackage, metaclasses);
-		Map<String, List<EClassifier>> classifiersWithSameName = new HashMap<>();
+		Map<String, List<EClassifier>> classifiersWithSameName = new HashMap<String, List<EClassifier>>();
 		for (EClassifier classifier : metaclasses) {
 			List<EClassifier> list = classifiersWithSameName.get(classifier.getName());
 			if(list == null){
-				list = new ArrayList<>();
+				list = new ArrayList<EClassifier>();
 				classifiersWithSameName.put(classifier.getName(), list);
 			}
 			list.add(classifier);
