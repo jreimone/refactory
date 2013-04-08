@@ -77,7 +77,7 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 					// je größer der wert desto schlechter die qualität 
 					// --> smell trifft zu wenn result >= threshold
 					if(resultingValue >= threshold){
-						Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<>(result, calculation, qualityCalculation);
+						Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
 						matchingCalculations.add(triple);
 					}
 					break;
@@ -85,7 +85,7 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 					// je größer der wert desto besser die qualität
 					// --> smell trifft zu wenn result <= threshold
 					if(resultingValue <= threshold){
-						Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<>(result, calculation, qualityCalculation);
+						Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
 						matchingCalculations.add(triple);
 					}
 					break;
