@@ -56,11 +56,11 @@ public class DistinctRoleNamesImpl extends MetricImpl implements DistinctRoleNam
 		if(model instanceof RoleModel){
 			RoleModel roleModel = (RoleModel) model;
 			List<Role> roles = roleModel.getRoles();
-			Map<String, List<Role>> rolesMap = new HashMap<>();
+			Map<String, List<Role>> rolesMap = new HashMap<String, List<Role>>();
 			for (Role role : roles) {
 				List<Role> list = rolesMap.get(role.getName());
 				if(list == null){
-					list = new ArrayList<>();
+					list = new ArrayList<Role>();
 					rolesMap.put(role.getName(), list);
 				}
 				list.add(role);
