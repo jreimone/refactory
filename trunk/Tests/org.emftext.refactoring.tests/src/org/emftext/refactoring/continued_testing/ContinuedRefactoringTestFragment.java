@@ -84,7 +84,7 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 	public void continuedRefactoring(){
 		TestDataSet testDataSet = getTestDataSet();
 		List<File> dataFiles = testDataSet.getInputDataFiles();
-		System.out.println("Input data files:");
+		System.out.println("\nInput data files:");
 		for (File file : dataFiles) {
 			System.out.println(file.getPath());
 		}
@@ -123,6 +123,7 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		refactorer.setInput(elements);
 		IValueProviderFactory factory = new TestValueProviderFactory();
 		refactorer.setValueProviderFactory(factory);
+		// currentModelResourceSet
 		EObject refactoredModel = refactorer.refactor();
 		assertNotNull("refactored model mustn't be null", refactoredModel);
 	
