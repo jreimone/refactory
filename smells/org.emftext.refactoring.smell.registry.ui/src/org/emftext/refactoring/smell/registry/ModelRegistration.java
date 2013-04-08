@@ -140,7 +140,7 @@ public class ModelRegistration {
 			}
 		}
 		try {
-			Map<String,Object> options = new HashMap<>();
+			Map<String,Object> options = new HashMap<String,Object>();
 			options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
 			options.put(XMLResource.OPTION_ENCODING, "UTF-8");
 			calculationModel.eResource().save(options);
@@ -183,7 +183,7 @@ public class ModelRegistration {
 				smellModel = SmellFactory.eINSTANCE.createQualitySmellModel();
 				resource.getContents().add(smellModel);
 				try {
-					Map<String,Object> options = new HashMap<>();
+					Map<String,Object> options = new HashMap<String,Object>();
 					options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
 					options.put(XMLResource.OPTION_ENCODING, "UTF-8");
 					resource.save(options);
