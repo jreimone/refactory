@@ -112,7 +112,7 @@ public class RefactoringTestSuite extends TestCase {
 
 	// paths for files which will be inserted into registries
 	public static final String REGISTRY_FOLDER = INPUT_FOLDER + File.separator + "registry";
-	public static final String MODELS_TO_REGISTER = REGISTRY_FOLDER + File.separator + "referenced_models.properties";
+	public static final String MODELS_TO_REGISTER = REGISTRY_FOLDER + File.separator + "referenced_models.testproperties";
 
 	@SuppressWarnings("unchecked")
 	private static final List<Class<? extends TestClass>> testClasses = new ArrayList<Class<? extends TestClass>>(Arrays.asList(
