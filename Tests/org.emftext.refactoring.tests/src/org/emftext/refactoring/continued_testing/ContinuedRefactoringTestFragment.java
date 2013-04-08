@@ -45,6 +45,7 @@ import org.emftext.refactoring.test.TestUtil;
 import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
 import org.emftext.test.core.TestData;
+import org.emftext.test.core.TestDataSet;
 import org.junit.Test;
 
 @TestData("ContinuedRefactoringTest")
@@ -81,6 +82,13 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 	@Test
 	@InputData({INPUT_PATTERN, EXPECTED_PATTERN, PATH_PATTERN, VALUE_PATTERN, MAPPING_PATTERN})
 	public void continuedRefactoring(){
+		TestDataSet testDataSet = getTestDataSet();
+		List<File> dataFiles = testDataSet.getInputDataFiles();
+		System.out.println("Input data files:");
+		for (File file : dataFiles) {
+			System.out.println(file.getPath());
+		}
+		
 		init();
 		
 		EObject inputModel = TestUtil.getModelFromResource(getTestDataSet().getResourceByPattern(INPUT_PATTERN, false));
