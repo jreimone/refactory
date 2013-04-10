@@ -32,9 +32,8 @@ Contributors:
       <import feature="org.eclipse.platform"/>
       <import feature="org.eclipse.emf"/>
       <import feature="org.eclipse.emf.workspace"/>
-      <import feature="org.eclipse.stp.bpmn.feature"/>
       <import feature="org.modelrefactoring.runtime"/>
-      <import feature="org.eclipse.bpmn2.modeler.feature"/>
+      <import plugin="org.eclipse.bpmn2"/>
    </requires>
 
    <plugin
