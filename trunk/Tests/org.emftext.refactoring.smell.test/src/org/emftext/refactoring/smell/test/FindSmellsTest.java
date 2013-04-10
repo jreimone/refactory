@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageRuntimeModule;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
+import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -37,8 +39,10 @@ import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationPackage;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.Structure;
 import org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage;
 import org.emftext.refactoring.smell.registry.IQualitySmellRegistry;
+import org.emftext.refactoring.smell.registry.util.Pair;
 import org.emftext.refactoring.smell.registry.util.Triple;
 import org.emftext.refactoring.smell.rolessmell.RolessmellPackage;
 import org.junit.BeforeClass;
@@ -189,10 +193,18 @@ public class FindSmellsTest {
 		for (Resource resource : smellingResources) {
 			System.out.println("-------------------");
 			System.out.println("file: " + resource.getURI().toString());
+			List<Pair<Calculation,QualityCalculation>> smellCalculationsForResource = registry.getSmellCalculationsForResource(resource);
+			for (Pair<Calculation, QualityCalculation> pair : smellCalculationsForResource) {
+				Calculation calculation = pair.getFirst();
+				if(calculation instanceof Structure){
+					Pattern pattern = ((Structure) calculation).getPattern();
+					checkForProxies(pattern);
+				}
+			}
+			
 			List<Triple<CalculationResult, Calculation, QualityCalculation>> matchingSmellCalculations = registry.getMatchingSmellCalculationsForResource(resource);
 			for (Triple<CalculationResult, Calculation, QualityCalculation> triple : matchingSmellCalculations) {
 				CalculationResult result = triple.getFirst();
-				Calculation calculation = triple.getSecond();
 				QualityCalculation qualityCalculation = triple.getThird();
 				ConcreteQualitySmell concreteSmell = qualityCalculation.getConcreteSmell();
 				String concreteName = concreteSmell.getConcreteName();
@@ -206,6 +218,17 @@ public class FindSmellsTest {
 				for (EObject element : causingObjects) {
 					System.out.println("smelling element: " + EcoreUtil.getURI(element).toString());
 				}
+			}
+		}
+	}
+
+	private void checkForProxies(Pattern pattern) {
+		assertNotNull("pattern mustn't be null", pattern);
+		TreeIterator<EObject> allContents = pattern.eAllContents();
+		while (allContents.hasNext()) {
+			EObject element = (EObject) allContents.next();
+			if(element.eIsProxy()){
+				fail("pattern " + pattern.getName() + " contains proxy:\n" + element);
 			}
 		}
 	}
