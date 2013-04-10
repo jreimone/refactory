@@ -30,10 +30,10 @@ Contributors:
 
    <requires>
       <import feature="org.eclipse.platform"/>
-      <import feature="org.eclipse.sdk"/>
       <import feature="org.eclipse.emf"/>
       <import feature="org.eclipse.emf.workspace"/>
       <import feature="org.modelrefactoring.sdk"/>
+      <import feature="org.eclipse.sdk"/>
    </requires>
 
    <plugin

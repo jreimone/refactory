@@ -30,10 +30,15 @@ Contributors:
 
    <requires>
       <import feature="org.modelrefactoring.smells"/>
-      <import feature="org.eclipse.xtext.runtime"/>
-      <import feature="org.eclipse.xtext.sdk"/>
-      <import feature="org.eclipse.xtext.ui"/>
-      <!-- TODO: add IncQuery and other stuff -->
+      <import plugin="org.eclipse.pde.core"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.transaction"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.emftext.language.java"/>
+      <import plugin="org.eclipse.uml2.uml"/>
+      <import plugin="org.emftext.refactoring.smell.calculation"/>
+      <import plugin="org.eclipse.incquery.runtime"/>
+      <import plugin="org.emftext.refactoring.smell.registry.ui"/>
    </requires>
 
    <plugin
