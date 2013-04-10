@@ -31,9 +31,15 @@ Contributors:
    </license>
 
    <requires>
-      <import feature="org.modelrefactoring.runtime"/>
-      <import feature="org.emftext.language.manifest"/>
       <import plugin="org.emftext.sdk.codegen"/>
+      <import plugin="org.emftext.language.manifest"/>
+      <import feature="org.modelrefactoring.sdk"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.emftext.language.refactoring.rolemapping"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.emftext.refactoring.util"/>
    </requires>
 
    <plugin
