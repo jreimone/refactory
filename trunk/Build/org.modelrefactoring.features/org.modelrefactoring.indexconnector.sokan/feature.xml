@@ -29,13 +29,13 @@ Contributors:
    </license>
 
    <requires>
-      <import feature="org.eclipse.platform"/>
-      <import feature="org.eclipse.sdk"/>
-      <import feature="org.eclipse.emf"/>
-      <import feature="org.eclipse.emf.workspace"/>
-      <import feature="org.emftext.access"/>
       <import feature="org.modelrefactoring.runtime"/>
-      <import feature="org.reuseware.sokan"/>
+      <import plugin="org.emftext.refactoring.indexconnector"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.reuseware.sokan.index"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.runtime"/>
    </requires>
 
    <plugin
