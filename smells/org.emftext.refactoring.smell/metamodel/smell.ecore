@@ -31,7 +31,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="qualityCalculations" lowerBound="1"
         upperBound="-1" eType="#//QualityCalculation" containment="true" eOpposite="#//QualityCalculation/concreteSmell"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refactoring" eType="ecore:EClass ../../org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.ecore#//RoleMapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refactoring" upperBound="-1"
+        eType="ecore:EClass ../../org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.ecore#//RoleMapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
   </eClassifiers>

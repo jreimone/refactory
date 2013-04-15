@@ -444,7 +444,8 @@ public class CalculationsPage extends WizardPage {
 	}
 
 	protected void setRoleMapping(RoleMapping roleMapping) {
-		concreteSmell.setRefactoring(roleMapping);
+		concreteSmell.getRefactoring().clear();
+		concreteSmell.getRefactoring().add(roleMapping);
 	}
 
 	protected void setMetamodel(EPackage metamodel){

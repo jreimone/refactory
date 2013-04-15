@@ -213,7 +213,7 @@ public interface SmellPackage extends EPackage {
 	int CONCRETE_QUALITY_SMELL__QUALITY_CALCULATIONS = 2;
 
 	/**
-	 * The feature id for the '<em><b>Refactoring</b></em>' reference.
+	 * The feature id for the '<em><b>Refactoring</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -455,10 +455,10 @@ public interface SmellPackage extends EPackage {
 	EReference getConcreteQualitySmell_QualityCalculations();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getRefactoring <em>Refactoring</em>}'.
+	 * Returns the meta object for the reference list '{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getRefactoring <em>Refactoring</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Refactoring</em>'.
+	 * @return the meta object for the reference list '<em>Refactoring</em>'.
 	 * @see org.emftext.refactoring.smell.ConcreteQualitySmell#getRefactoring()
 	 * @see #getConcreteQualitySmell()
 	 * @generated
@@ -684,7 +684,7 @@ public interface SmellPackage extends EPackage {
 		EReference CONCRETE_QUALITY_SMELL__QUALITY_CALCULATIONS = eINSTANCE.getConcreteQualitySmell_QualityCalculations();
 
 		/**
-		 * The meta object literal for the '<em><b>Refactoring</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Refactoring</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

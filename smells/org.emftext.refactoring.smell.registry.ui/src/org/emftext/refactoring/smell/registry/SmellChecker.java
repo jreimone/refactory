@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -126,8 +127,10 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 				Calculation calculation = triple.getSecond();
 				QualityCalculation qualityCalculation = triple.getThird();
 				ConcreteQualitySmell concreteSmell = qualityCalculation.getConcreteSmell();
-				RoleMapping roleMapping = concreteSmell.getRefactoring();
-				addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
+				List<RoleMapping> refactorings = concreteSmell.getRefactoring();
+				for (RoleMapping roleMapping : refactorings) {
+					addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
+				}
 			}
 		}
 	}

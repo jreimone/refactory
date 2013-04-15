@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
@@ -79,14 +80,14 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 	protected EList<QualityCalculation> qualityCalculations;
 
 	/**
-	 * The cached value of the '{@link #getRefactoring() <em>Refactoring</em>}' reference.
+	 * The cached value of the '{@link #getRefactoring() <em>Refactoring</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRefactoring()
 	 * @generated
 	 * @ordered
 	 */
-	protected RoleMapping refactoring;
+	protected EList<RoleMapping> refactoring;
 
 	/**
 	 * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' reference.
@@ -193,37 +194,11 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RoleMapping getRefactoring() {
-		if (refactoring != null && refactoring.eIsProxy()) {
-			InternalEObject oldRefactoring = (InternalEObject)refactoring;
-			refactoring = (RoleMapping)eResolveProxy(oldRefactoring);
-			if (refactoring != oldRefactoring) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING, oldRefactoring, refactoring));
-			}
+	public EList<RoleMapping> getRefactoring() {
+		if (refactoring == null) {
+			refactoring = new EObjectResolvingEList<RoleMapping>(RoleMapping.class, this, SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING);
 		}
 		return refactoring;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RoleMapping basicGetRefactoring() {
-		return refactoring;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRefactoring(RoleMapping newRefactoring) {
-		RoleMapping oldRefactoring = refactoring;
-		refactoring = newRefactoring;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING, oldRefactoring, refactoring));
 	}
 
 	/**
@@ -309,8 +284,7 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 			case SmellPackage.CONCRETE_QUALITY_SMELL__QUALITY_CALCULATIONS:
 				return getQualityCalculations();
 			case SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING:
-				if (resolve) return getRefactoring();
-				return basicGetRefactoring();
+				return getRefactoring();
 			case SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL:
 				if (resolve) return getMetamodel();
 				return basicGetMetamodel();
@@ -338,7 +312,8 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 				getQualityCalculations().addAll((Collection<? extends QualityCalculation>)newValue);
 				return;
 			case SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING:
-				setRefactoring((RoleMapping)newValue);
+				getRefactoring().clear();
+				getRefactoring().addAll((Collection<? extends RoleMapping>)newValue);
 				return;
 			case SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL:
 				setMetamodel((EPackage)newValue);
@@ -365,7 +340,7 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 				getQualityCalculations().clear();
 				return;
 			case SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING:
-				setRefactoring((RoleMapping)null);
+				getRefactoring().clear();
 				return;
 			case SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL:
 				setMetamodel((EPackage)null);
@@ -389,7 +364,7 @@ public class ConcreteQualitySmellImpl extends EObjectImpl implements ConcreteQua
 			case SmellPackage.CONCRETE_QUALITY_SMELL__QUALITY_CALCULATIONS:
 				return qualityCalculations != null && !qualityCalculations.isEmpty();
 			case SmellPackage.CONCRETE_QUALITY_SMELL__REFACTORING:
-				return refactoring != null;
+				return refactoring != null && !refactoring.isEmpty();
 			case SmellPackage.CONCRETE_QUALITY_SMELL__METAMODEL:
 				return metamodel != null;
 		}

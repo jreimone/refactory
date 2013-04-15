@@ -101,30 +101,20 @@ public interface ConcreteQualitySmell extends EObject {
 	EList<QualityCalculation> getQualityCalculations();
 
 	/**
-	 * Returns the value of the '<em><b>Refactoring</b></em>' reference.
+	 * Returns the value of the '<em><b>Refactoring</b></em>' reference list.
+	 * The list contents are of type {@link org.emftext.language.refactoring.rolemapping.RoleMapping}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Refactoring</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Refactoring</em>' reference.
-	 * @see #setRefactoring(RoleMapping)
+	 * @return the value of the '<em>Refactoring</em>' reference list.
 	 * @see org.emftext.refactoring.smell.SmellPackage#getConcreteQualitySmell_Refactoring()
 	 * @model
 	 * @generated
 	 */
-	RoleMapping getRefactoring();
-
-	/**
-	 * Sets the value of the '{@link org.emftext.refactoring.smell.ConcreteQualitySmell#getRefactoring <em>Refactoring</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Refactoring</em>' reference.
-	 * @see #getRefactoring()
-	 * @generated
-	 */
-	void setRefactoring(RoleMapping value);
+	EList<RoleMapping> getRefactoring();
 
 	/**
 	 * Returns the value of the '<em><b>Metamodel</b></em>' reference.
