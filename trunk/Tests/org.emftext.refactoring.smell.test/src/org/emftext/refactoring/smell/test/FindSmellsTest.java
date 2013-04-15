@@ -7,9 +7,11 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -22,8 +24,16 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageRuntimeModule;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.ImportDeclaration;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PackageImport;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
+import org.eclipse.incquery.runtime.api.IMatcherFactory;
+import org.eclipse.incquery.runtime.api.IPatternMatch;
+import org.eclipse.incquery.runtime.api.IncQueryMatcher;
+import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.incquery.runtime.extensibility.MatcherFactoryRegistry;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.emftext.language.java.resource.JaMoPPUtil;
@@ -198,7 +208,20 @@ public class FindSmellsTest {
 				Calculation calculation = pair.getFirst();
 				if(calculation instanceof Structure){
 					Pattern pattern = ((Structure) calculation).getPattern();
+//					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getMatcherFactory(pattern.getName());
+//					if(matcherFactory != null){
+//						try {
+//							IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(resourceSet);
+//							Collection<IPatternMatch> allMatches = matcher.getAllMatches();
+//							for (IPatternMatch match : allMatches) {
+//								System.out.println(match);
+//							}
+//						} catch (IncQueryException e) {
+//							e.printStackTrace();
+//						}
+//					}
 					checkForProxies(pattern);
+					checkMetamodels(pattern, resource);
 				}
 			}
 			
@@ -220,6 +243,26 @@ public class FindSmellsTest {
 				}
 			}
 		}
+	}
+
+	private void checkMetamodels(Pattern pattern, Resource resource) {
+		PatternModel patternModel = (PatternModel) pattern.eContainer();
+		ImportDeclaration importDeclaration = patternModel.getImportPackages().get(0);
+		EPackage metamodelPattern = null;
+		if(importDeclaration instanceof PackageImport){
+			PackageImport packageImport = (PackageImport) importDeclaration;
+			metamodelPattern = packageImport.getEPackage();
+		}
+		assertNotNull("import must reference an EPackage", importDeclaration);
+		while(metamodelPattern.getESuperPackage() != null){
+			metamodelPattern = metamodelPattern.getESuperPackage();
+		}
+		EObject model = resource.getContents().get(0);
+		EPackage metamodelResource = model.eClass().getEPackage();
+		while(metamodelResource.getESuperPackage() != null){
+			metamodelResource = metamodelResource.getESuperPackage();
+		}
+		assertEquals("metamodels of pattern and resource must be equal", metamodelPattern, metamodelResource);
 	}
 
 	private void checkForProxies(Pattern pattern) {

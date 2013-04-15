@@ -21,4 +21,6 @@ Require-Bundle: org.junit4,
  org.emftext.language.java.resource,
  org.emftext.language.java.resource.java,
  org.emftext.language.java.resource.bcel,
- org.emftext.language.refactoring.roles.resource.rolestext
+ org.emftext.language.refactoring.roles.resource.rolestext,
+ org.eclipse.incquery.runtime,
+ org.qualitune.refactoring.energy.test
