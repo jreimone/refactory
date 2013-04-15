@@ -18,9 +18,6 @@
       <genOperations ecoreOperation="smell.ecore#//QualitySmellModel/getSmellsForMetamodel">
         <genParameters ecoreParameter="smell.ecore#//QualitySmellModel/getSmellsForMetamodel/metamodel"/>
       </genOperations>
-      <genOperations ecoreOperation="smell.ecore#//QualitySmellModel/getSmellsForMetamodel.1">
-        <genParameters ecoreParameter="smell.ecore#//QualitySmellModel/getSmellsForMetamodel.1/metamodel"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="smell.ecore#//Quality">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smell.ecore#//Quality/name"/>

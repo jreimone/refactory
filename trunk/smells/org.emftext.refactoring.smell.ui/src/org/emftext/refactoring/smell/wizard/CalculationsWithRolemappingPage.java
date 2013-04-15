@@ -91,13 +91,14 @@ public class CalculationsWithRolemappingPage extends CalculationsPage {
 				if(selection instanceof IStructuredSelection){
 					Object firstElement = ((IStructuredSelection) selection).getFirstElement();
 					if(firstElement instanceof RoleMapping){
-						getConcreteSmell().setRefactoring((RoleMapping) firstElement);
+						getConcreteSmell().getRefactoring().clear();
+						getConcreteSmell().getRefactoring().add((RoleMapping) firstElement);
 					}
 				}
 			}
 		});
 		comboViewer_1.setInput(rolemappingsForMetamodel);
-		final RoleMapping rolemapping = getConcreteSmell().getRefactoring();
+		final RoleMapping rolemapping = getConcreteSmell().getRefactoring().get(0);
 		if(rolemapping != null){
 			RoleMapping temp = roleMappings.get(rolemapping.getName());
 			int index = rolemappingsForMetamodel.indexOf(temp);

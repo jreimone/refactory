@@ -422,7 +422,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		initEReference(getQualitySmellModel_SmellingMetamodels(), theEcorePackage.getEPackage(), null, "smellingMetamodels", null, 0, -1, QualitySmellModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(qualitySmellModelEClass, this.getConcreteQualitySmell(), "getSmellsForMetamodel", 0, -1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "metamodel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "metamodel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(qualityEClass, Quality.class, "Quality", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQuality_Name(), ecorePackage.getEString(), "name", null, 1, 1, Quality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -435,7 +435,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		initEReference(getConcreteQualitySmell_GenericSmell(), this.getQualitySmell(), null, "genericSmell", null, 1, 1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConcreteQualitySmell_ConcreteName(), ecorePackage.getEString(), "concreteName", null, 1, 1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConcreteQualitySmell_QualityCalculations(), this.getQualityCalculation(), this.getQualityCalculation_ConcreteSmell(), "qualityCalculations", null, 1, -1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConcreteQualitySmell_Refactoring(), theRolemappingPackage.getRoleMapping(), null, "refactoring", null, 0, 1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConcreteQualitySmell_Refactoring(), theRolemappingPackage.getRoleMapping(), null, "refactoring", null, 0, -1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConcreteQualitySmell_Metamodel(), theEcorePackage.getEPackage(), null, "metamodel", null, 1, 1, ConcreteQualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qualityCalculationEClass, QualityCalculation.class, "QualityCalculation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -448,6 +448,25 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// de.devboost.emfcustomize.EcoreModelRefactorer
+		createDeAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>de.devboost.emfcustomize.EcoreModelRefactorer</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createDeAnnotations() {
+		String source = "de.devboost.emfcustomize.EcoreModelRefactorer";		
+		addAnnotation
+		  (qualitySmellModelEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });	
 	}
 
 } //SmellPackageImpl
