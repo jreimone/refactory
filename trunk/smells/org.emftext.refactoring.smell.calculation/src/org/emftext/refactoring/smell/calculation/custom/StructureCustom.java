@@ -6,10 +6,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
-import org.eclipse.incquery.patternlanguage.patternLanguage.Variable;
-import org.eclipse.incquery.runtime.api.IMatchProcessor;
+import org.eclipse.incquery.runtime.api.EngineManager;
 import org.eclipse.incquery.runtime.api.IMatcherFactory;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
+import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.extensibility.MatcherFactoryRegistry;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
@@ -39,9 +39,12 @@ public class StructureCustom extends StructureImpl {
 					@SuppressWarnings("unchecked")
 					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getOrCreateMatcherFactory(pattern);
 					if(matcherFactory != null){
+						IncQueryEngine engine = EngineManager.getInstance().getIncQueryEngine(resourceSet);
+						IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(engine);
+						// the above two lines can be replaced by the following single line
 						// here the matcher must be retrieved by the resourceSet because passing only a resource
 						// no matches are calculated
-						IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(resourceSet);
+//						IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(resourceSet);
 						Collection<IPatternMatch> matches = matcher.getAllMatches();
 						for (IPatternMatch match : matches) {
 							String[] parameterNames = match.parameterNames();
@@ -54,6 +57,7 @@ public class StructureCustom extends StructureImpl {
 							}
 							result.setResultingValue(result.getResultingValue() + 1);
 						}
+//						engine.wipe();
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
