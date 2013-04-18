@@ -175,6 +175,8 @@ IWorkbenchPreferencePage {
 								return true;
 							}
 						};
+						page.setTitle("Edit Concrete Quality Smell");
+						page.setDescription("Edit the concrete quality smell '" + smell.getConcreteName() + "'");
 						wizard.setWindowTitle("Edit Concrete Quality Smell");
 						wizard.addPage(page);
 						WizardDialog dialog = new WizardDialog(getShell(), wizard);
