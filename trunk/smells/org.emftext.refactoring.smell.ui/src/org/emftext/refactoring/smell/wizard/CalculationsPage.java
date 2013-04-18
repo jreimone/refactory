@@ -208,7 +208,7 @@ public class CalculationsPage extends WizardPage {
 		});
 		TableColumn tblclmnGenericSmell = tableViewerColumn.getColumn();
 		tblclmnGenericSmell.setWidth(100);
-		tblclmnGenericSmell.setText("Generic Smell");
+		tblclmnGenericSmell.setText("Generic Quality");
 
 		final TextCellEditor textEditor = new TextCellEditor(table);
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
