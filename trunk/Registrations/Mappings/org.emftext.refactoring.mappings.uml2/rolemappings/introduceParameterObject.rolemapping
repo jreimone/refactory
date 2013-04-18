@@ -1,0 +1,19 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+
+"Introduce Parameter Object" maps <ExtractX> {  
+	ContainerContainer := Model {
+		source := packagedElement;
+		target := packagedElement;
+	};
+	
+	OrigContainer := Class {
+		reference := superClass;
+		extracts := ownedOperation -> ownedParameter;
+	};
+	
+	NewContainer := Class (newName -> name){
+		moved := ownedOperation -> ownedParameter;
+	};
+	
+	Extractee := Parameter ;
+}	
