@@ -58,6 +58,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 import org.emftext.refactoring.ui.RefactoringRecordingCommand;
 import org.emftext.refactoring.ui.RefactoringUndoOperation;
 import org.emftext.refactoring.util.RegistryUtil;
@@ -91,6 +92,9 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 
 	@Override
 	public ChangeDescriptor getDescriptor() {
+		if(IRoleMappingRegistry.INSTANCE.getContributorForRoleMapping(refactorer.getRoleMapping()) == null){
+			return null;
+		}
 		ModelRefactoringDescriptor descriptor = new ModelRefactoringDescriptor(refactorer);
 		RefactoringChangeDescriptor changeDescriptor = new RefactoringChangeDescriptor(descriptor);
 		return changeDescriptor;

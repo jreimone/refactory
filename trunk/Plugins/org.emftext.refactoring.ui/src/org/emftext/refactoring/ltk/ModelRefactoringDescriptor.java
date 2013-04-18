@@ -127,6 +127,9 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 	 */
 	public static String generateRefactoringID(RoleMapping roleMapping) {
 		IConfigurationElement element = IRoleMappingRegistry.INSTANCE.getContributorForRoleMapping(roleMapping);
+		if(element == null){ // case when a role mapping is added temporarily to the registry with right-clicking in the editor
+			return null;
+		}
 		String id = element.getContributor().getName() + "." + roleMapping.getName().replace(" ", "");
 		return id;
 	}
