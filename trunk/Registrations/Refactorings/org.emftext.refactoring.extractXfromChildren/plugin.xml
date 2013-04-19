@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.emftext.refactoring.rolemodel">
+      <rolemodel
+            rolemodel_resource="rolemodel/extractXfromChildren.rolestext">
+      </rolemodel>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.refspec">
+      <refspec
+            refspec_resource="refspec/extractXfromChildren.refspec">
+      </refspec>
+   </extension>
+
+</plugin>
