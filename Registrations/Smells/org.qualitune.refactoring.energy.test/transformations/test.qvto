@@ -1,0 +1,14 @@
+modeltype qvto uses "http://www.eclipse.org/QVT/1.0.0/Operational";
+
+transformation Test2QVTo( out qvtoModel : qvto);
+
+main(){
+	map createMainUnit('Hallo Welt');
+}
+
+mapping createMainUnit(cuName : String) : qvto::expressions::OperationalTransformation {
+	result.name := cuName;
+	result.entry := object qvto::expressions::EntryOperation {
+		name := 'Einstieg';
+	};
+}
