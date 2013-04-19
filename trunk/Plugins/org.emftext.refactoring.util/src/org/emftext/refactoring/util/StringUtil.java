@@ -49,6 +49,15 @@ public class StringUtil {
 		return sb.toString();
 	}
 	
+	public static String firstLetterLowerCase(String text){
+		if(text == null || "".equals(text)){
+			return "";
+		}
+		StringBuffer sb = new StringBuffer(text);
+		sb.setCharAt(0, Character.toLowerCase(sb.charAt(0)));
+		return sb.toString();
+	}
+	
 	public static String convertWordsToCamelCase(String words){
 		String result = words.replaceAll(" ", "");
 		return firstLetterUpperCase(result);
