@@ -14,9 +14,11 @@ import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
 
 public class CountParametersOfMethods extends MetricImpl {
 	
+	private float threshold;
+
 	@Override
 	public String getName() {
-		return "Parameters Of Methods Count";
+		return "Parameters Count";
 	}
 
 	@Override
@@ -31,11 +33,12 @@ public class CountParametersOfMethods extends MetricImpl {
 
 	@Override
 	public String getSmellMessage() {
-		return "This method has too many parameters.";
+		return "This parameter exceeds the defined maximum parameter count of " + threshold + ".";
 	}
 
 	@Override
 	public CalculationResult calculate(EObject model, float threshold) {
+		this.threshold = threshold;
 		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
 		result.setResultingValue(0);
 		if(model == null || !(model instanceof Model)){
@@ -49,7 +52,10 @@ public class CountParametersOfMethods extends MetricImpl {
 				for (Operation operation : operations) {
 					int parameterCount = operation.getOwnedParameters().size();
 					if(parameterCount >= threshold){
-						result.getCausingObjects().add(operation);
+						// -2 because a new parameter object is added thus it would be again more than the threshold
+						for (int i = ((int)threshold - 2); i < parameterCount; i++) {
+							result.getCausingObjects().add(operation.getOwnedParameters().get(i));
+						}
 						if(parameterCount > result.getResultingValue()){
 							result.setResultingValue(parameterCount);
 						}
