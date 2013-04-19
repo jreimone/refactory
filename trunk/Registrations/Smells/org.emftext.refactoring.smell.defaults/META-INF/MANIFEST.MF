@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.emftext.refactoring.smell.defaults
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: www.modelrefactoring.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.qualitune.refactoring.energy.test,
+Require-Bundle: org.emftext.refactoring.smell.java.energy,
  org.emftext.refactoring.mappings.uml2,
  org.emftext.language.refactoring.roles.refactoring,
  org.emftext.language.java.refactoring,
