@@ -90,7 +90,9 @@ public class RoleMappingPage extends WizardPage {
 			public Image getColumnImage(Object element, int columnIndex) {
 				if(element instanceof RoleMapping){
 					ImageDescriptor descriptor = IRoleMappingRegistry.INSTANCE.getImageForMapping((RoleMapping) element);
-					return descriptor.createImage();
+					if(descriptor != null){
+						return descriptor.createImage();
+					}
 				}
 				return super.getColumnImage(element, columnIndex);
 			}
