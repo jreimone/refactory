@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.qualitune.refactoring.energy.test
-Bundle-SymbolicName: org.qualitune.refactoring.energy.test;singleton:=true
+Bundle-SymbolicName: org.emftext.refactoring.smell.java.energy;singleton:=true
 Bundle-Version: 0.0.1.qualifier
 Bundle-ClassPath: libs/apache/httpclient-4.2.2.jar,
  .,
