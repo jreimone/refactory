@@ -1,0 +1,9 @@
+pre {
+  "Transforming ".println();
+}
+
+rule Lifeline2Class 
+	transform s : u!Lifeline
+	to t : java!Class {
+		
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ASCII"?>
+<trace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trace="http:///www.eclipse.org/m2m/qvt/operational/trace.ecore">
+  <traceRecords>
+    <mappingOperation name="toNewClass" package="sequence2class" module="sequence2class">
+      <runtimeMappingOperation href="sequence2class.qvtox#//toNewClass"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Lifeline">
+        <value>
+          <modelElement href="../models/AndroidTestModel.uml#_fDSMgDJPEeKBtoZPCEDgGg"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters kind="INOUT" name="operationCallsMap" type="Dictionary(Operation, List(Operation))">
+        <value collectionType="OclCollection"/>
+      </parameters>
+      <parameters kind="INOUT" name="operation2methodMap" type="Dictionary(Operation, ClassMethod)">
+        <value collectionType="OclCollection"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Class">
+        <value>
+          <modelElement href="../models/AndroidTestModel.model#/0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="toNewClass" package="sequence2class" module="sequence2class">
+      <runtimeMappingOperation href="sequence2class.qvtox#//toNewClass"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Lifeline">
+        <value>
+          <modelElement href="../models/AndroidTestModel.uml#_bAjW4DJPEeKBtoZPCEDgGg"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters kind="INOUT" name="operationCallsMap" type="Dictionary(Operation, List(Operation))">
+        <value collectionType="OclCollection">
+          <collection collectionType="OclCollection"/>
+        </value>
+      </parameters>
+      <parameters kind="INOUT" name="operation2methodMap" type="Dictionary(Operation, ClassMethod)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="../models/AndroidTestModel.model#/0/@members.0"/>
+          </collection>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Class">
+        <value>
+          <modelElement href="../models/AndroidTestModel.model#/1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="toNewClass" package="sequence2class" module="sequence2class">
+      <runtimeMappingOperation href="sequence2class.qvtox#//toNewClass"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Lifeline">
+        <value>
+          <modelElement href="../models/AndroidTestModel.uml#_TYZF8DI_EeKBtoZPCEDgGg"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters kind="INOUT" name="operationCallsMap" type="Dictionary(Operation, List(Operation))">
+        <value collectionType="OclCollection">
+          <collection collectionType="OclCollection">
+            <collection>
+              <modelElement href="../models/AndroidTestModel.uml#_LBGq4jI_EeKBtoZPCEDgGg"/>
+            </collection>
+          </collection>
+          <collection collectionType="OclCollection"/>
+        </value>
+      </parameters>
+      <parameters kind="INOUT" name="operation2methodMap" type="Dictionary(Operation, ClassMethod)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="../models/AndroidTestModel.model#/1/@members.0"/>
+          </collection>
+          <collection>
+            <modelElement href="../models/AndroidTestModel.model#/0/@members.0"/>
+          </collection>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Class">
+        <value>
+          <modelElement href="../models/AndroidTestModel.model#/2"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+</trace:Trace>

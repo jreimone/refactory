@@ -1,0 +1,75 @@
+modeltype uml uses "http://www.eclipse.org/uml2/3.0.0/UML";
+modeltype containers uses "http://www.emftext.org/java/containers";
+modeltype classes uses "http://www.emftext.org/java/classifiers";
+modeltype members uses "http://www.emftext.org/java/members";
+modeltype statements uses "http://www.emftext.org/java/statements";
+modeltype refs uses "http://www.emftext.org/java/references";
+	
+transformation sequence2class(in sequencem:uml, out javam:containers);
+
+main() {
+	var operationCallsMap : Dict(uml::Operation, List(uml::Operation)); 
+	var operation2methodMap : Dict(uml::Operation, members::ClassMethod);
+	sequencem.objects()[Lifeline]->map toNewClass(operationCallsMap, operation2methodMap);
+}
+
+mapping Lifeline::toNewClass(
+		inout operationCallsMap : Dict(uml::Operation, List(uml::Operation)), 
+		inout operation2methodMap : Dict(uml::Operation, members::ClassMethod)) : classes::Class {
+	result.name := self.represents.type.name;
+	var operations : Set(uml::Operation);
+	self.coveredBy->forEach(mos|mos.oclIsTypeOf(uml::MessageOccurrenceSpecification)){
+		if(mos.oclAsType(uml::MessageOccurrenceSpecification).message.receiveEvent = mos) then {
+			// incoming message
+			var operation := mos.oclAsType(uml::MessageOccurrenceSpecification).event.oclAsType(uml::CallEvent).operation;
+			if(operation.name <> '') then {
+				operations += operation;
+				var newMethod := operation2methodMap->get(operation);
+				if(newMethod = null) then {
+					newMethod := object ClassMethod{
+						name := operation.name;
+					};
+					operation2methodMap->put(operation, newMethod);
+				} endif;
+				var operationCalls : List(uml::Operation);
+				self.coveredBy->forEach(mosOut|mosOut.oclIsTypeOf(uml::MessageOccurrenceSpecification)){
+					if(mosOut.oclAsType(uml::MessageOccurrenceSpecification).message.sendEvent = mosOut) then {
+						// outgoing messages
+						var operationOut := mosOut.oclAsType(uml::MessageOccurrenceSpecification).event.oclAsType(uml::CallEvent).operation;
+						if(operationOut <> null) then {
+							newMethod := operation2methodMap->get(operationOut);
+							if(newMethod = null) then {
+								newMethod := object ClassMethod{
+									name := operationOut.name;
+								};
+								operation2methodMap->put(operationOut, newMethod);
+							} endif;
+							operationCalls += operationOut;
+						} endif;
+					} endif;
+				};			
+				operationCallsMap->put(operation, operationCalls);
+			} endif;
+		} endif;
+	};
+	operations->forEach(operation){
+		var newMethod := operation2methodMap->get(operation);
+		if(newMethod = null) then {
+			newMethod := object ClassMethod{
+				name := operation.name;
+			};
+		} endif;
+		var operationCalls := operationCallsMap->get(operation);
+		operationCalls->forEach(operationCall|operationCall <> null){
+			var methodCall := object MethodCall {
+				var mappedMethod := operation2methodMap->get(operationCall);
+				target := mappedMethod;
+			};
+			var expressionStatement := object ExpressionStatement {
+				expression := methodCall;
+			};
+			newMethod.statements += expressionStatement;
+		};
+		result.members += newMethod;
+	};
+}

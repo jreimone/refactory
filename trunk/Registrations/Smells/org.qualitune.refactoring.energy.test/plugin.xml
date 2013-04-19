@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         point="org.emftext.refactoring.smell.registry.ui.calculation">
+      <structureCalculation
+            smellMessage="File is transmitted without compression."
+            description="Searches for data transmission implemented with the Apache HttpClient library and searches for file transmission without compression."
+            patternResource="queries/dataTransmissionWithoutCompressionOptimised.eiq"
+            patternName="dataTransmissionWithoutCompressionOptimised">
+      </structureCalculation>
+   </extension>
+
+</plugin>

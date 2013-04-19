@@ -1,0 +1,122 @@
+import "http://www.emftext.org/java/classifiers"
+import "http://www.emftext.org/java/members"
+import "http://www.emftext.org/java/types"
+import "http://www.emftext.org/java/references"
+import "http://www.emftext.org/java/statements"
+import "http://www.emftext.org/java/instantiations"
+import "http://www.emftext.org/java/variables"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+// inspired by the paper:
+// Höpfner Bunse(2010)
+// "Towards an energy-consumption based complexity classification for resource substitution strategies"
+// the determined FileBody constructor is checked and must be replaced by a file that is compressed before 
+pattern dataTransmissionWithoutCompressionOptimised(
+		fileBodyConstructor: NewConstructorCall
+//		, method: ClassMethod
+){
+	find fileBodyConstructorWithFileConstructorParameter(fileBodyVar, fileBodyConstructor, _);
+	find transmissionCoreMethodCalls(fileBodyVar, method);
+} or {
+	// caution: with this subpattern it cannot be assured if the passed file parameter wasn't compressed before!
+	find fileBodyConstructorWithFileParameter(fileBodyVar, _, fileBodyConstructor);
+	find transmissionCoreMethodCalls(fileBodyVar, method);
+}
+
+// the first possibility for instantiating a FileBody:
+// FileBody bin = new FileBody(new File(args[0]));
+private pattern fileBodyConstructorWithFileConstructorParameter(
+	fileBodyVar: LocalVariable,
+	fileBodyConstructor: NewConstructorCall,
+	fileArgumentConstructor: NewConstructorCall
+){
+//	LocalVariableStatement.variable(_, fileBodyVar);
+	LocalVariable.initialValue(fileBodyVar, fileBodyConstructor);
+	
+	// FileBody constructor
+	NewConstructorCall.typeReference(fileBodyConstructor, fileBodyConstructorType);
+	NamespaceClassifierReference.classifierReferences(fileBodyConstructorType, fileBodyConstructorTypeReference);
+	ClassifierReference.target(fileBodyConstructorTypeReference, fileBodyConstructorTypeReferenceTarget);
+	Class.name(fileBodyConstructorTypeReferenceTarget, "FileBody");
+	
+	// File constructor
+	NewConstructorCall.arguments(fileBodyConstructor, fileArgumentConstructor);
+	NewConstructorCall.typeReference(fileArgumentConstructor, fileArgumentConstructorType);
+	NamespaceClassifierReference.classifierReferences(fileArgumentConstructorType, fileArgumentConstructorTypeRef);
+	ClassifierReference.target(fileArgumentConstructorTypeRef, fileArgumentConstructorTypeRefTarget);
+	Class.name(fileArgumentConstructorTypeRefTarget, "File");
+}
+
+// the second possibility for instantiating a FileBody:
+// File file = new File(args[0]);
+// FileBody bin = new FileBody(file);
+private pattern fileBodyConstructorWithFileParameter(
+	fileBodyVar: LocalVariable,
+	fileVar: LocalVariable,
+	fileBodyConstructor: NewConstructorCall
+){
+	// File variable
+	LocalVariableStatement.variable(_, fileVar);
+	LocalVariable.initialValue(fileVar, fileConstructor);
+	
+	// File constructor
+	NewConstructorCall.typeReference(fileConstructor, fileConstructorType);
+	NamespaceClassifierReference.classifierReferences(fileConstructorType, fileConstructorTypeReference);
+	ClassifierReference.target(fileConstructorTypeReference, fileConstructorTypeReferenceTarget);
+	Class.name(fileConstructorTypeReferenceTarget, "File");
+	
+	// FileBody variable
+	LocalVariableStatement.variable(_, fileBodyVar);
+	LocalVariable.initialValue(fileBodyVar, fileBodyConstructor);
+	
+	// FileBody constructor
+	NewConstructorCall.typeReference(fileBodyConstructor, fileBodyConstructorType);
+	NamespaceClassifierReference.classifierReferences(fileBodyConstructorType, fileBodyConstructorTypeReference);
+	ClassifierReference.target(fileBodyConstructorTypeReference, fileBodyConstructorTypeReferenceTarget);
+	Class.name(fileBodyConstructorTypeReferenceTarget, "FileBody");
+	
+	// File variable parameter
+	NewConstructorCall.arguments(fileBodyConstructor, fileVarRef);
+	IdentifierReference.target(fileVarRef,fileVar);
+}
+
+private pattern transmissionCoreMethodCalls(fileBodyVar : LocalVariable, classmethod: ClassMethod){
+	// MultipartEntity.addPart(FileBody)
+//	LocalVariableStatement.variable(_, entityVar);
+//	ExpressionStatement.expression(_, entityVarRef);
+	IdentifierReference.target(entityVarRef, entityVar);
+	IdentifierReference.next(entityVarRef, addPartCaller);
+	MethodCall.target(addPartCaller, addPartCallee);
+	Method.name(addPartCallee, "addPart");
+	MethodCall.arguments(addPartCaller, fileBodyRef);
+	IdentifierReference.target(fileBodyRef, fileBodyVar);
+	
+	// HttpPost.setEntity(MultipartEntity);
+//	LocalVariableStatement.variable(_, httppostVar);
+//	ExpressionStatement.expression(_, httppostRef);
+	IdentifierReference.target(httppostRef, httppostVar);
+	IdentifierReference.next(httppostRef, setEntityCaller);
+	MethodCall.target(setEntityCaller, setEntityCallee);
+	Method.name(setEntityCallee, "setEntity");
+	MethodCall.arguments(setEntityCaller, setEntityEntityVarArg);
+	IdentifierReference.target(setEntityEntityVarArg, entityVar);
+	
+	// HttpClient.execute(HttpPost);
+//	LocalVariableStatement.variable(_, httpclientVar);
+////	ExpressionStatement.expression(_, httpclientRef);
+//	IdentifierReference.target(httpclientRef, httpclientVar);
+//	IdentifierReference.next(httpclientRef, executeCaller);
+	MethodCall.target(executeCaller, executeCallee);
+	Method.name(executeCallee, "execute");
+	MethodCall.arguments(executeCaller, executeHttpPostVarArg);
+	IdentifierReference.target(executeHttpPostVarArg, httppostVar);
+	
+	// give me the method in which everything is contained
+	find parentContainsSomething+(classmethod, fileBodyVar);
+}
+
+private pattern parentContainsSomething(parent, child){
+	LocalVariableStatement.variable(parent, child);
+} or {
+	StatementListContainer.statements(parent, child);
+}
