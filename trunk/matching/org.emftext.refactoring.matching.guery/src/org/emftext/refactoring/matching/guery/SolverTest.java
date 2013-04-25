@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.emftext.refactoring.matching.guery;
 
@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.pl0.PL0Package;
-import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
-import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
+//import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
+//import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.qualitune.evolution.guery.graph.MetamodelVertex;
@@ -31,8 +31,8 @@ import org.qualitune.evolution.guery.registry.EReferenceEdge;
 import org.qualitune.guery.GueryPackage;
 
 import org.emftext.language.pl0.PL0Package;
-import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
-import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
+//import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
+//import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 
 //import org.emftext.language.martinfowlerdsl.MartinfowlerdslPackage;
 //import org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl.mopp.MartinfowlerdslMetaInformation;
@@ -49,15 +49,15 @@ import util.Writer2txt;
  *
  */
 public class SolverTest {
-	
+
 	private EPackage pl0MM;
 	private Resource pl0MMResource;
-	
+
 //	public void init(){
 //		initLanguages();
 //		initPL0MM();
 //	}
-	
+
 //	private void initLanguages() {
 //		EPackage.Registry.INSTANCE.put(MartinfowlerdslPackage.eNS_URI, MartinfowlerdslPackage.eINSTANCE);
 ////		EPackage.Registry.INSTANCE.put(FeatherweightjavaPackage.eNS_URI, FeatherweightjavaPackage.eINSTANCE);
@@ -73,7 +73,7 @@ public class SolverTest {
 //		pl0MMResource = pl0MM.eResource();
 //		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
 //	}
-	
+
 	@Test
 	@Ignore
 	public void secondTest(){
@@ -90,7 +90,7 @@ public class SolverTest {
 		SolvingMotif solver = new SolvingMotif(loadTestMotifs(), resource);
 		solver.findMotifInstances();
 	}
-	
+
 	@Test
 //	@Ignore
 	public void findMapping(){
@@ -107,7 +107,7 @@ public class SolverTest {
 		SolvingMotif solver = new SolvingMotif(loadMappingMotifs(), resource);
 		solver.findMotifInstances();
 	}
-	
+
 	@Test
 //	@Ignore
 	public void withoutOptionalTest(){
@@ -124,7 +124,7 @@ public class SolverTest {
 		SolvingMotif solver = new SolvingMotif(loadWithoutOptionalMotifs(), resource);
 		solver.findMotifInstances();
 	}
-	
+
 	@Test
 //	@Ignore
 	public void generatedMotifTest(){
@@ -141,11 +141,11 @@ public class SolverTest {
 		SolvingMotif solver = new SolvingMotif(loadGeneratedMotifs(), resource);
 		solver.findMotifInstances();
 	}
-	
+
 	@Test
 	@Ignore
 	public void optionalAndLength3() {
-		
+
 		//TODO entfernen
 //		EPackage.Registry.INSTANCE.put(FeatherweightjavaPackage.eNS_URI, FeatherweightjavaPackage.eINSTANCE);
 ////		EPackage.Registry.INSTANCE.put(FeatherweightjavaPackage.eNS_URI, FeatherweightjavaPackage.eINSTANCE);
@@ -159,7 +159,7 @@ public class SolverTest {
 //		//TODO entfernen ende
 //		Writer2txt w2t=new Writer2txt("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.greql/src/VergleichMFDSL.txt");
 //		String header="tassiloEdited3 -- EXWRC";
-//		
+//
 //		java.util.Date now = new java.util.Date();
 //		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
 //		String ausgabe = sdf.format(now);
@@ -167,13 +167,13 @@ public class SolverTest {
 		// TODO Auto-generated method stub
 //		loadMotifs();
 //		SolvingMotif sm=new SolvingMotif(loadMotifs(), );
-		
+
 //		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
 //		EPackage.Registry.INSTANCE.put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);
 //		Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
 //		extensionToFactoryMap.put("rolestext", new RolestextResourceFactory());
 //		extensionToFactoryMap.put("guery", new GueryResourceFactory());
-//		
+//
 ////		assertTrue(sourceFile.exists());
 ////		System.out.println(sourceFile.getAbsolutePath());
 //		URI uri = URI.createFileURI(sourceFile.getAbsolutePath());
@@ -181,7 +181,7 @@ public class SolverTest {
 //		Resource resource = resourceSet.getResource(uri, true);
 //		EObject model = resource.getContents().get(0);
 //		RoleModel rolemodel = (RoleModel) model;
-		
+
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 
@@ -197,23 +197,23 @@ public class SolverTest {
 //		SolvingMotif solver = new SolvingMotif(loadMotifs(), pl0MMResource);
 		SolvingMotif solver = new SolvingMotif(loadMotifs(), resource);
 		solver.findMotifInstances();
-		
+
 //		File f=new File("../resultGuery.txt");
-//		
+//
 //		now = new java.util.Date();
 //		sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
 //		ausgabe = sdf.format(now);
 //		w2t.writeLine(ausgabe);
-		
+
 //		URI fileURI=URI.createFileURI("C:\\Users\\Robert\\gbswt\\org.emftext.refactoring.matching\\src\\org\\emftext\\refactoring\\matching\\Conversion.java");
 //		Resource r=resourceSet.createResource(fileURI);
 //		Resource res=resourceSet.createResource(URI.createURI(GueryPackage.eNS_URI));
 //		Resource resource = resourceSet.createResource(URI.createURI("http:///My.guery"));
 //		SolvingMotif sm=new SolvingMotif(loadMotifs(), r);
-//		
+//
 //		sm.findMotifInstances();
 	}
-	
+
 	private static Motif<MetamodelVertex,EReferenceEdge> loadMotifs(){
 		InputStream in=null;
 		try {
@@ -228,10 +228,10 @@ public class SolverTest {
 		} catch (MotifReaderException e) {
 			e.printStackTrace();
 		}
-		
+
 		return motif;
 	}
-	
+
 	private static Motif<MetamodelVertex,EReferenceEdge> loadMappingMotifs(){
 		InputStream in=null;
 		try {
@@ -246,10 +246,10 @@ public class SolverTest {
 		} catch (MotifReaderException e) {
 			e.printStackTrace();
 		}
-		
+
 		return motif;
 	}
-	
+
 	private static Motif<MetamodelVertex,EReferenceEdge> loadWithoutOptionalMotifs(){
 		InputStream in=null;
 		try {
@@ -264,10 +264,10 @@ public class SolverTest {
 		} catch (MotifReaderException e) {
 			e.printStackTrace();
 		}
-		
+
 		return motif;
 	}
-	
+
 	private static Motif<MetamodelVertex,EReferenceEdge> loadGeneratedMotifs(){
 		InputStream in=null;
 		try {
@@ -282,10 +282,10 @@ public class SolverTest {
 		} catch (MotifReaderException e) {
 			e.printStackTrace();
 		}
-		
+
 		return motif;
 	}
-	
+
 	private static Motif<MetamodelVertex,EReferenceEdge> loadTestMotifs(){
 		InputStream in=null;
 		try {
@@ -300,7 +300,7 @@ public class SolverTest {
 		} catch (MotifReaderException e) {
 			e.printStackTrace();
 		}
-		
+
 		return motif;
 	}
 }
