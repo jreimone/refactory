@@ -42,7 +42,7 @@ import org.emftext.language.pl0.PL0Package;
 //import org.emftext.language.featherweightjava.resource.fj.mopp.FjMetaInformation;
 //import org.emftext.language.featherweightjava.resource.fj.mopp.FjResourceFactory;
 
-import util.Writer2txt;
+//import util.Writer2txt;
 
 /**
  * @author jreimann
