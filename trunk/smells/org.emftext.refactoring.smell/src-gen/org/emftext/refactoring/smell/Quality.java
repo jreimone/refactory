@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.emftext.refactoring.smell.Quality#getName <em>Name</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.Quality#getCalculations <em>Calculations</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.Quality#isActive <em>Active</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,5 +68,32 @@ public interface Quality extends EObject {
 	 * @generated
 	 */
 	EList<QualityCalculation> getCalculations();
+
+	/**
+	 * Returns the value of the '<em><b>Active</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Active</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Active</em>' attribute.
+	 * @see #setActive(boolean)
+	 * @see org.emftext.refactoring.smell.SmellPackage#getQuality_Active()
+	 * @model default="true" required="true"
+	 * @generated
+	 */
+	boolean isActive();
+
+	/**
+	 * Sets the value of the '{@link org.emftext.refactoring.smell.Quality#isActive <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Active</em>' attribute.
+	 * @see #isActive()
+	 * @generated
+	 */
+	void setActive(boolean value);
 
 } // Quality

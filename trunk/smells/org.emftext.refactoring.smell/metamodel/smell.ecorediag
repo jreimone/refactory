@@ -27,6 +27,10 @@
         <element xmi:type="ecore:EAttribute" href="smell.ecore#//Quality/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_DT8SoVwHEeKPg7xkducZ0w"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_CmhzUK2mEeKhbor9PEt4LA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="smell.ecore#//Quality/active"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CmhzUa2mEeKhbor9PEt4LA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_zfPq1VwGEeKPg7xkducZ0w"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_zfPq1lwGEeKPg7xkducZ0w"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_zfPq11wGEeKPg7xkducZ0w"/>

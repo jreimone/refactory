@@ -139,13 +139,22 @@ public interface SmellPackage extends EPackage {
 	int QUALITY__CALCULATIONS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUALITY__ACTIVE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Quality</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUALITY_FEATURE_COUNT = 2;
+	int QUALITY_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.impl.QualitySmellImpl <em>Quality Smell</em>}' class.
@@ -391,6 +400,17 @@ public interface SmellPackage extends EPackage {
 	EReference getQuality_Calculations();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.Quality#isActive <em>Active</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active</em>'.
+	 * @see org.emftext.refactoring.smell.Quality#isActive()
+	 * @see #getQuality()
+	 * @generated
+	 */
+	EAttribute getQuality_Active();
+
+	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.QualitySmell <em>Quality Smell</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,6 +650,14 @@ public interface SmellPackage extends EPackage {
 		 * @generated
 		 */
 		EReference QUALITY__CALCULATIONS = eINSTANCE.getQuality_Calculations();
+
+		/**
+		 * The meta object literal for the '<em><b>Active</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUALITY__ACTIVE = eINSTANCE.getQuality_Active();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.impl.QualitySmellImpl <em>Quality Smell</em>}' class.

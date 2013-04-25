@@ -31,6 +31,7 @@ import org.emftext.refactoring.smell.SmellPackage;
  * <ul>
  *   <li>{@link org.emftext.refactoring.smell.impl.QualityImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.impl.QualityImpl#getCalculations <em>Calculations</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.impl.QualityImpl#isActive <em>Active</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,6 +67,26 @@ public class QualityImpl extends EObjectImpl implements Quality {
 	 * @ordered
 	 */
 	protected EList<QualityCalculation> calculations;
+
+	/**
+	 * The default value of the '{@link #isActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ACTIVE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean active = ACTIVE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,6 +145,27 @@ public class QualityImpl extends EObjectImpl implements Quality {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActive(boolean newActive) {
+		boolean oldActive = active;
+		active = newActive;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SmellPackage.QUALITY__ACTIVE, oldActive, active));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -160,6 +202,8 @@ public class QualityImpl extends EObjectImpl implements Quality {
 				return getName();
 			case SmellPackage.QUALITY__CALCULATIONS:
 				return getCalculations();
+			case SmellPackage.QUALITY__ACTIVE:
+				return isActive();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -180,6 +224,9 @@ public class QualityImpl extends EObjectImpl implements Quality {
 				getCalculations().clear();
 				getCalculations().addAll((Collection<? extends QualityCalculation>)newValue);
 				return;
+			case SmellPackage.QUALITY__ACTIVE:
+				setActive((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -198,6 +245,9 @@ public class QualityImpl extends EObjectImpl implements Quality {
 			case SmellPackage.QUALITY__CALCULATIONS:
 				getCalculations().clear();
 				return;
+			case SmellPackage.QUALITY__ACTIVE:
+				setActive(ACTIVE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -214,6 +264,8 @@ public class QualityImpl extends EObjectImpl implements Quality {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SmellPackage.QUALITY__CALCULATIONS:
 				return calculations != null && !calculations.isEmpty();
+			case SmellPackage.QUALITY__ACTIVE:
+				return active != ACTIVE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -230,6 +282,8 @@ public class QualityImpl extends EObjectImpl implements Quality {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", active: ");
+		result.append(active);
 		result.append(')');
 		return result.toString();
 	}
