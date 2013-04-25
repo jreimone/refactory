@@ -203,6 +203,15 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getQuality_Active() {
+		return (EAttribute)qualityEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getQualitySmell() {
 		return qualitySmellEClass;
 	}
@@ -361,6 +370,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		qualityEClass = createEClass(QUALITY);
 		createEAttribute(qualityEClass, QUALITY__NAME);
 		createEReference(qualityEClass, QUALITY__CALCULATIONS);
+		createEAttribute(qualityEClass, QUALITY__ACTIVE);
 
 		qualitySmellEClass = createEClass(QUALITY_SMELL);
 		createEAttribute(qualitySmellEClass, QUALITY_SMELL__NAME);
@@ -427,6 +437,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		initEClass(qualityEClass, Quality.class, "Quality", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQuality_Name(), ecorePackage.getEString(), "name", null, 1, 1, Quality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQuality_Calculations(), this.getQualityCalculation(), this.getQualityCalculation_Quality(), "calculations", null, 0, -1, Quality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQuality_Active(), theEcorePackage.getEBoolean(), "active", "true", 1, 1, Quality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qualitySmellEClass, QualitySmell.class, "QualitySmell", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQualitySmell_Name(), ecorePackage.getEString(), "name", null, 1, 1, QualitySmell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
