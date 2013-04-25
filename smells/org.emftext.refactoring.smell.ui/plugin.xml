@@ -9,15 +9,6 @@
       </fragment>
    </extension>
    <extension
-         point="org.eclipse.ui.views">
-      <view
-            category="org.emftext.refactory.ui.view"
-            class="org.emftext.refactoring.smell.ui.views.QualitySmellView"
-            id="org.emftext.refactoring.smell.ui.views.QualitySmellView"
-            name="Generic Quality Smells">
-      </view>
-   </extension>
-   <extension
          point="org.eclipse.ui.preferencePages">
       <page
             category="org.emftext.refactoring.ui.preferences"
@@ -43,6 +34,16 @@
             id="org.emftext.refactoring.preferences.smells.qualitySmells.concrete"
             name="Concrete Smells">
       </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.emftext.refactory.ui.view"
+            class="org.emftext.refactoring.smell.ui.views.QualitiesView"
+            icon="icons/qualities.gif"
+            id="org.emftext.refactoring.smell.ui.views.QualitiesView"
+            name="Qualities">
+      </view>
    </extension>
 
 </plugin>
