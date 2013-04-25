@@ -1,7 +1,0 @@
-from caller, callee:V{Node}, connection:E{Connection}
-
-with caller -->{Connection} callee and
-connection.target=callee.name and connection.source=caller.name
-
-report caller.name, connection.name, callee.name
-end

@@ -14,7 +14,9 @@ import util.Writer2txt;
 import de.uni_koblenz.jgralab.greql.GreqlQuery;
 import de.uni_koblenz.jgralab.greql.evaluator.GreqlEnvironmentAdapter;
 import de.uni_koblenz.jgralab.greql.evaluator.GreqlEvaluatorImpl;
+import de.uni_koblenz.jgralab.greql.types.Path;
 import de.uni_koblenz.jgralab.greql.types.Tuple;
+import de.uni_koblenz.jgralab.impl.generic.GenericEdgeImpl;
 
 public class CreateGraphTest {
 
@@ -46,33 +48,6 @@ public class CreateGraphTest {
 	}
 	
 	/**
-	 * Testet PL0-Struktur auf einfaches Caller->Callee Pattern
-	 */
-	@Ignore
-	@Test
-	public void testAdvancedGraphWithCCP() {
-		System.out.println("START~~~~PL0-Struktur CCP~~~");
-		CreateGraph cg=new CreateGraph();
-		cg.init();
-		cg.createGraph();
-		
-		File file=new File("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.greql/src/test2.tg");
-		GreqlQuery gq=null;
-		try {
-			gq=GreqlQuery.readQuery(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		GreqlEvaluatorImpl ge=new GreqlEvaluatorImpl(gq, cg.getGraph(), new GreqlEnvironmentAdapter());
-		
-		ArrayPVector  o=(ArrayPVector) ge.evaluate();
-		System.out.println(o);
-		System.out.println(o.size());
-		System.out.println("END~~~~PL0-Struktur CCP~~~");
-		System.out.println();
-	}
-	
-	/**
 	 * Testet ExtractXWithReferenceClass-Struktur auf EXWRC-Pattern ohne Connection
 	 */
 	@Ignore
@@ -99,32 +74,6 @@ public class CreateGraphTest {
 	}
 	
 	/**
-	 * Testet PL0-Struktur auf EXWRC-Pattern ohne Connection
-	 */
-	@Ignore
-	@Test
-	public void testAdvancedGraphWithEXWRCWithoutCon() {
-		System.out.println("START~~~~PL0-Struktur EXWRC ohne Con~~~");
-		CreateGraph cg=new CreateGraph();
-		cg.init();
-		cg.createGraph();
-		File file=new File("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.greql/src/extractXWithReferenceClass.tg");
-		GreqlQuery gq=null;
-		try {
-			gq=GreqlQuery.readQuery(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		GreqlEvaluatorImpl ge=new GreqlEvaluatorImpl(gq, cg.getGraph(), new GreqlEnvironmentAdapter());
-		
-		ArrayPVector  o=(ArrayPVector) ge.evaluate();
-		System.out.println(o);
-		System.out.println(o.size());
-		System.out.println("END~~~~PL0-Struktur EXWRC ohne Con~~~");
-		System.out.println();
-	}
-	
-	/**
 	 * Testet ExtractXWithReferenceClass-Struktur auf EXWRC-Pattern mit Connection
 	 */
 	@Ignore
@@ -147,32 +96,6 @@ public class CreateGraphTest {
 		System.out.println(o);
 		System.out.println(o.size());
 		System.out.println("END~~~~Simple-Struktur EXWR mit Con~~~");
-		System.out.println();
-	}
-	
-	/**
-	 * Testet PL0-Struktur auf EXWRC-Pattern mit Connection
-	 */
-	@Ignore
-	@Test
-	public void testAdvancedGraphWithEXWRCWithCon() {
-		System.out.println("START~~~~PL0-Struktur EXWR mit Con~~~");
-		CreateGraph cg=new CreateGraph();
-		cg.init();
-		cg.createGraph();
-		File file=new File("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.greql/src/extractXWithReferenceClass2.tg");
-		GreqlQuery gq=null;
-		try {
-			gq=GreqlQuery.readQuery(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		GreqlEvaluatorImpl ge=new GreqlEvaluatorImpl(gq, cg.getGraph(), new GreqlEnvironmentAdapter());
-		
-		ArrayPVector  o=(ArrayPVector) ge.evaluate();
-		System.out.println(o);
-		System.out.println(o.size());
-		System.out.println("END~~~~PL0-Struktur EXWR mit Con~~~");
 		System.out.println();
 	}
 	
@@ -336,13 +259,13 @@ public class CreateGraphTest {
 	public void testPL0Tassilo2() {
 		System.out.println("START~~~~PL0-Graph Tassilo~~~");
 		
-		Writer2txt w2t=new Writer2txt("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.greql/src/ResultEXWRC.txt");
+		Writer2txt w2t=new Writer2txt("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.greql/src/Vergleich.txt");
 		String header="tassiloEdited3 -- EXWRC";
 		
 		java.util.Date now = new java.util.Date();
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
 		String ausgabe = sdf.format(now);
-		w2t.writeLine(ausgabe);
+//		w2t.writeLine(ausgabe);
 		
 		CreateGraph cg=new CreateGraph(); //Klasse zur Grapherstellung
 		cg.init(); //PL0-Metamodell initialisieren
@@ -351,7 +274,7 @@ public class CreateGraphTest {
 		now = new java.util.Date();
 		sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
 		ausgabe = sdf.format(now);
-		w2t.writeLine(ausgabe);
+//		w2t.writeLine(ausgabe);
 		
 		File file=new File("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.greql/src/tassiloEdited3.tg"); //Query als tg-Datei
 //		File file=new File("C:/Users/Robert/testGReQL/GReQLPrototyp/src/testPathSystem.tg");
@@ -368,11 +291,29 @@ public class CreateGraphTest {
 		if (o.getClass().equals(OrderedPSet.class)){
 			OrderedPSet<Tuple> ops=(OrderedPSet<Tuple>)o;
 			int i=0;
-			w2t.initialize(header);
+//			w2t.initialize(header);
 			for (Tuple e:ops){
 				i++;
-				w2t.writeLine(i+" "+e.toString());
-				System.out.println(i+" "+e);
+				String test="";
+				for (int i2=0;i2<e.size();i2++){
+//					System.out.println(i2+" "+e.get(i2).getClass());
+					if (e.get(i2).getClass().equals(Path.class)){
+						test=test+", "+"Path";
+						Path p=(Path)e.get(i2);
+						for (int i3=0;i3<p.getLength();i3++){
+							GenericEdgeImpl gei=(GenericEdgeImpl)p.getEdgeAt(i3);
+							test=test+": "+gei.getAlpha().getAttribute("name")+"-"+gei.getAttribute("name")+"-"+gei.getOmega().getAttribute("name");
+						}
+					}
+					else{
+						test=test+", "+e.get(i2);
+					}
+				}
+				System.out.println(test);
+				System.out.println(i+" "+test);
+				w2t.writeLine(i+" "+test);
+//				w2t.writeLine(i+" "+e.toString());
+//				System.out.println(i+" "+e);
 			}
 		}
 		else{
@@ -382,26 +323,36 @@ public class CreateGraphTest {
 				w2t.initialize(header);
 				for (Tuple e:aps){
 					i++;
-					w2t.writeLine(i+" "+e.toString());
-					System.out.println(i+" "+e);
+					String test="";
+					for (int i2=0;i2<e.size();i2++){
+//						System.out.println(i2+" "+e.get(i2).getClass());
+						if (e.get(i2).getClass().equals(Path.class)){
+							test=test+", "+"Path";
+							Path p=(Path)e.get(i2);
+							for (int i3=0;i3<p.getLength();i3++){
+								GenericEdgeImpl gei=(GenericEdgeImpl)p.getEdgeAt(i3);
+								test=test+": "+gei.getAlpha().getAttribute("name")+"-"+gei.getAttribute("name")+"-"+gei.getOmega().getAttribute("name");
+							}
+						}
+						else{
+							test=test+", "+e.get(i2);
+						}
+					}
+					System.out.println(i+" "+test);
+//					System.out.println(test);
+					w2t.writeLine(i+" "+test);
+//					w2t.writeLine(i+" "+e.toString());
+//					System.out.println(i+" "+e);
 				}
 			}
 		}
-//		int i=0;
-//		w2t.initialize(header);
-//		for (Tuple e:o){
-//			i++;
-//			w2t.writeLine(i+" "+e.toString());
-//			System.out.println(i+" "+e);
-//		}
 		
 		now = new java.util.Date();
 		sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
 		ausgabe = sdf.format(now);
-		w2t.writeLine(ausgabe);
+//		w2t.writeLine(ausgabe);
 		w2t.closeBW();
 		
-//		System.out.println(o.size());
 		System.out.println("END~~~~PL0-Graph Tassilo~~~");
 		System.out.println();
 	}
