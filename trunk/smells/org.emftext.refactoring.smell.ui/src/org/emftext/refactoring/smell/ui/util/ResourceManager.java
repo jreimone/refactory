@@ -8,7 +8,7 @@
  * Contributors:
  *    Google, Inc. - initial API and implementation
  *******************************************************************************/
-package org.eclipse.wb.swt;
+package org.emftext.refactoring.smell.ui.util;
 
 import java.io.File;
 import java.io.InputStream;
@@ -27,6 +27,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * Utility class for managing OS resources associated with SWT/JFace controls such as colors, fonts, images,
@@ -242,6 +243,28 @@ public class ResourceManager extends SWTResourceManager {
 		}
 		return null;
 	}
+	/**
+	 * Returns an {@link Image} based on a {@link Bundle} and resource entry path.
+	 * 
+	 * @param symbolicName
+	 *            the symbolic name of the {@link Bundle}.
+	 * @param path
+	 *            the path of the resource entry.
+	 * @return the {@link Image} stored in the file at the specified path.
+	 */
+	public static Image getImageFromThisPlugin(String path) {
+		try {
+			Bundle bundle = FrameworkUtil.getBundle(ResourceManager.class);
+			URL url = bundle.getEntry(path);
+			if (url != null) {
+				return getPluginImageFromUrl(url);
+			}
+		} catch (Throwable e) {
+			// Ignore any exceptions
+		}
+		return null;
+	}
+	
 	/**
 	 * Returns an {@link Image} based on a {@link Bundle} and resource entry path.
 	 * 

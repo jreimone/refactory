@@ -4,21 +4,22 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CheckboxCellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.EditingSupport;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.emftext.refactoring.smell.Quality;
 
 public class IsActiveEditingSupport extends EditingSupport {
 
-	private ColumnViewer viewer;
+	private TableViewer viewer;
 
-	public IsActiveEditingSupport(ColumnViewer viewer) {
+	public IsActiveEditingSupport(TableViewer viewer) {
 		super(viewer);
 		this.viewer = viewer;
 	}
 
 	@Override
 	protected CellEditor getCellEditor(Object element) {
-		return new CheckboxCellEditor(null, SWT.CHECK);
+		return new CheckboxCellEditor(viewer.getTable(), SWT.CHECK);
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package org.emftext.refactoring.smell.ui.views;
 
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -12,6 +14,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
 import org.emftext.refactoring.smell.QualitySmellModel;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -28,11 +31,11 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.refactoring.smell.SmellPackage.Literals;
+import org.emftext.refactoring.smell.ui.util.ResourceManager;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.wb.swt.ResourceManager;
 
 public class QualitiesView extends ViewPart {
 	private DataBindingContext m_bindingContext;
@@ -77,22 +80,8 @@ public class QualitiesView extends ViewPart {
 				toolkit.paintBordersFor(table);
 				{
 					TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer_1, SWT.NONE);
-//					tableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
-//						public Image getImage(Object element) {
-//							if(element instanceof Quality){
-//								Quality quality = (Quality) element;
-//								if(quality.isActive()){
-//									return ResourceManager.getPluginImage("org.emftext.refactoring.smell.ui", "icons/smartmode_co.gif");
-//								}
-//								return ResourceManager.getPluginImage("org.emftext.refactoring.smell.ui", "icons/th_horizontal.gif");
-//							}
-//							return null;
-//						}
-//						public String getText(Object element) {
-//							return null;
-//						}
-//					});
 					TableColumn tblclmnActive = tableViewerColumn.getColumn();
+					tblclmnActive.setResizable(false);
 					tblclmnActive.setWidth(25);
 					tableViewerColumn.setEditingSupport(new IsActiveEditingSupport(tableViewer_1));
 				}
@@ -154,7 +143,31 @@ public class QualitiesView extends ViewPart {
 		//
 		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
 		IObservableMap[] observeMaps = EMFObservables.observeMaps(listContentProvider.getKnownElements(), new EStructuralFeature[]{Literals.QUALITY__ACTIVE, Literals.QUALITY__NAME});
-		tableViewer_1.setLabelProvider(new ObservableMapLabelProvider(observeMaps));
+		tableViewer_1.setLabelProvider(new ObservableMapLabelProvider(observeMaps) {
+			@Override
+			public Image getColumnImage(Object element, int columnIndex) {
+				if(columnIndex == 0){
+					if(element instanceof Quality){
+						Quality quality = (Quality) element;
+						if(quality.isActive()){
+							return ResourceManager.getImageFromThisPlugin("icons/checked.gif");
+						}
+						return ResourceManager.getImageFromThisPlugin("icons/unchecked.gif");
+					}
+					return null;
+				}
+				return super.getColumnImage(element, columnIndex);
+			}
+
+			@Override
+			public String getColumnText(Object element, int columnIndex) {
+				if(columnIndex == 0){
+					return "";
+				}
+				return super.getColumnText(element, columnIndex);
+			}
+
+		});
 		tableViewer_1.setContentProvider(listContentProvider);
 		//
 		IObservableList smellModelQualitiesObserveList = EMFObservables.observeList(Realm.getDefault(), smellModel, Literals.QUALITY_SMELL_MODEL__QUALITIES);
