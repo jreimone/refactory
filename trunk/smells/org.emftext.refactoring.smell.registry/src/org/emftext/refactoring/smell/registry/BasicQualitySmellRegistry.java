@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
+import org.emftext.refactoring.smell.Quality;
 import org.emftext.refactoring.smell.QualityCalculation;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.calculation.Calculation;
@@ -68,27 +69,30 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 			for (Pair<Calculation, QualityCalculation> pair : calculations) {
 				Calculation calculation = pair.getFirst();
 				QualityCalculation qualityCalculation = pair.getSecond();
-				float threshold = qualityCalculation.getThreshold();
-				CalculationResult result = calculation.calculate(model, threshold);
-				float resultingValue = result.getResultingValue();
-				Monotonicity monotonicity = calculation.getMonotonicity();
-				switch (monotonicity) {
-				case DECREASING: 
-					// je größer der wert desto schlechter die qualität 
-					// --> smell trifft zu wenn result >= threshold
-					if(resultingValue >= threshold){
-						Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
-						matchingCalculations.add(triple);
+				Quality quality = qualityCalculation.getQuality();
+				if(quality.isActive()){
+					float threshold = qualityCalculation.getThreshold();
+					CalculationResult result = calculation.calculate(model, threshold);
+					float resultingValue = result.getResultingValue();
+					Monotonicity monotonicity = calculation.getMonotonicity();
+					switch (monotonicity) {
+					case DECREASING: 
+						// je größer der wert desto schlechter die qualität 
+						// --> smell trifft zu wenn result >= threshold
+						if(resultingValue >= threshold){
+							Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
+							matchingCalculations.add(triple);
+						}
+						break;
+					case INCREASING: 
+						// je größer der wert desto besser die qualität
+						// --> smell trifft zu wenn result <= threshold
+						if(resultingValue <= threshold){
+							Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
+							matchingCalculations.add(triple);
+						}
+						break;
 					}
-					break;
-				case INCREASING: 
-					// je größer der wert desto besser die qualität
-					// --> smell trifft zu wenn result <= threshold
-					if(resultingValue <= threshold){
-						Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
-						matchingCalculations.add(triple);
-					}
-					break;
 				}
 			}
 		}
