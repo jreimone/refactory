@@ -4,17 +4,25 @@
    <extension
          point="org.emftext.refactoring.smell.registry.ui.calculation">
       <metricCalculation
-            class="org.emftext.refactoring.smell.uml_extension.CheckInterfaceSpecifications">
+            class="org.emftext.refactoring.smell.umlsmells.impl.CheckInterfaceSpecificationsImpl">
       </metricCalculation>
       <metricCalculation
-            class="org.emftext.refactoring.smell.uml_extension.CompareNames">
+            class="org.emftext.refactoring.smell.umlsmells.impl.CompareNamesImpl">
       </metricCalculation>
       <metricCalculation
-            class="org.emftext.refactoring.smell.uml_extension.CountParametersOfMethods">
+            class="org.emftext.refactoring.smell.umlsmells.impl.CountParametersOfMethodsImpl">
       </metricCalculation>
       <metricCalculation
-            class="org.emftext.refactoring.smell.uml_extension.SearchEmptyClassesAndInterfaces">
+            class="org.emftext.refactoring.smell.umlsmells.impl.SearchEmptyClassesAndInterfacesImpl">
       </metricCalculation>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="org.emftext.refactoring.smell.umlsmells.UmlsmellsPackage"
+            genModel="metamodel_extension/umlSmells.genmodel"
+            uri="http://modelrefactoring.org/smell/calculation/uml">
+      </package>
    </extension>
 
 </plugin>

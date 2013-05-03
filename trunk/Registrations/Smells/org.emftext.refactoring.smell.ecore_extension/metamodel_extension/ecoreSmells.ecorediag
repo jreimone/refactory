@@ -33,7 +33,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="__laZoXqKEeK_pNWwfeUUxA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="ecoreSmells.ecore#//CheckInterfaceSpecifications"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__laZonqKEeK_pNWwfeUUxA" x="97" y="316"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__laZonqKEeK_pNWwfeUUxA" x="15" y="315"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="__skKgHqKEeK_pNWwfeUUxA" type="1001">
     <children xmi:type="notation:Node" xmi:id="__skKg3qKEeK_pNWwfeUUxA" type="4001"/>
