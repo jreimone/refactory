@@ -20,6 +20,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.commands.Category;
+import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
@@ -35,6 +38,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.SWT;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -42,6 +46,10 @@ import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.commands.ICommandService;
+import org.eclipse.ui.handlers.IHandlerService;
+import org.eclipse.ui.menus.CommandContributionItem;
+import org.eclipse.ui.menus.CommandContributionItemParameter;
 import org.eclipse.ui.menus.ExtensionContributionFactory;
 import org.eclipse.ui.menus.IContributionRoot;
 import org.eclipse.ui.services.IServiceLocator;
@@ -51,6 +59,7 @@ import org.emftext.refactoring.editorconnector.IEditorConnector;
 import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
+import org.emftext.refactoring.ltk.ModelRefactoringDescriptor;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.rolemapping.ICustomWizardPageRegistry;
 import org.emftext.refactoring.registry.rolemapping.IRefactoringSubMenuRegistry;
@@ -61,7 +70,8 @@ import org.emftext.refactoring.util.StringUtil;
 
 public class RefactoringMenuContributor extends ExtensionContributionFactory {
 
-	private static final String CONTEXT_MENU_ENTRY_TEXT = "Refactor";
+	private static final String REFACTORY_COMMAND_CATEGORY 	= "org.modelrefactoring.commands.category";
+	private static final String CONTEXT_MENU_ENTRY_TEXT 		= "Refactor";
 
 	public RefactoringMenuContributor() {
 		super();
@@ -174,7 +184,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 //			resourceSet.getResource(uri, loadOnDemand)
 			EcoreUtil.resolveAll(resourceSet);
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
-
+//			IMenuManager rootMenu2 = new MenuManager(CONTEXT_MENU_ENTRY_TEXT + " (Commands)", IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID + ".commands");
 //			for (EObject element : elementsInResource) {
 //				URI uri = EcoreUtil.getURI(element);
 //				ResourceSet resourceSet2 = resource.getResourceSet();
@@ -186,7 +196,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			Map<String, RoleMapping> roleMappings = getRoleMappingsForResource(resource);
 			List<RoleMapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elementsInResource, roleMappings, 1.0);
 			boolean containsEntries = false;
-			List<IMenuManager> registeredSubMenus = new LinkedList<IMenuManager>();
 			for (RoleMapping mapping : mappings) {
 				Resource mappingResource = mapping.eResource();
 				if (mappingResource != null && (mappingResource.getErrors() == null || mappingResource.getErrors().size() == 0)) {
@@ -196,32 +205,8 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						refactorer.setInput(elementsInResource);
 						RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 						if (refSpec != null) {
-							String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
-							Action refactoringAction = null;
-							if (transactionalEditingDomain == null) {
-								refactoringAction = new RefactoringAction(refactorer, editorConnector);
-							} else {
-								refactoringAction = new RefactoringAction(refactorer, transactionalEditingDomain, activeEditor, editorConnector);
-							}
-							refactoringAction.setText(refactoringName);
-							refactoringAction.setImageDescriptor(IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping));
-							IRefactoringSubMenuRegistry subMenuRegistry = IRefactoringSubMenuRegistry.INSTANCE;
-							IMenuManager subMenu = subMenuRegistry.getSubMenuForRoleMapping(mapping);
-							if(subMenu == null){
-								rootMenu.add(refactoringAction);
-							} else {
-								subMenu.removeAll();
-								List<IMenuManager> subMenuPath = subMenuRegistry.getSubMenuPathForRoleMapping(mapping);
-								IMenuManager parent = rootMenu;
-								for (IMenuManager singleSubMenu : subMenuPath) {
-									if(!registeredSubMenus.contains(singleSubMenu)){
-										parent.add(singleSubMenu);
-										registeredSubMenus.add(singleSubMenu);
-									}
-									parent = singleSubMenu;
-								}
-								parent.add(refactoringAction);
-							}
+//							createAction(mapping, refactorer, rootMenu, editorConnector, activeEditor, transactionalEditingDomain);
+							createCommand(serviceLocator, mapping, refactorer, rootMenu, editorConnector, activeEditor, transactionalEditingDomain);
 							containsEntries = true;
 						}
 
@@ -233,7 +218,54 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			} 
 			if (containsEntries) {
 				additions.addContributionItem(rootMenu, null);
+//				additions.addContributionItem(rootMenu2, null);
 			}
+		}
+	}
+
+	private void createCommand(IServiceLocator serviceLocator, RoleMapping mapping, IRefactorer refactorer, IMenuManager rootMenu2, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain) {
+		ICommandService commandService = (ICommandService) serviceLocator.getService(ICommandService.class);
+		Category category = commandService.getCategory(REFACTORY_COMMAND_CATEGORY);
+		String commandID = ModelRefactoringDescriptor.generateRefactoringID(mapping) + ".command";
+		Command command = commandService.getCommand(commandID);
+		String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
+		command.define(refactoringName, "Refactoring '" + refactoringName + "' is executed", category);
+		
+		IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
+		IHandler handler = null;
+		if(transactionalEditingDomain == null){
+			handler = new RefactoringCommandHandler(refactorer, editorConnector);
+		} else {
+			handler = new RefactoringCommandHandler(refactorer, transactionalEditingDomain, activeEditor, editorConnector);
+		}
+		if(!command.isHandled()){
+			handlerService.activateHandler(commandID, handler);
+		}
+		
+		CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(serviceLocator, null, commandID, SWT.PUSH);
+        commandParameter.label = refactoringName;
+        commandParameter.icon = IRoleMappingRegistry.INSTANCE.getImageForMapping(mapping);
+        
+        CommandContributionItem item = new CommandContributionItem(commandParameter);
+        item.setVisible(true);
+        
+        List<IMenuManager> registeredSubMenus = new LinkedList<IMenuManager>();
+        IRefactoringSubMenuRegistry subMenuRegistry = IRefactoringSubMenuRegistry.INSTANCE;
+		IMenuManager subMenu = subMenuRegistry.getSubMenuForRoleMapping(mapping);
+		if(subMenu == null){
+			rootMenu2.add(item);
+		} else {
+			subMenu.removeAll();
+			List<IMenuManager> subMenuPath = subMenuRegistry.getSubMenuPathForRoleMapping(mapping);
+			IMenuManager parent = rootMenu2;
+			for (IMenuManager singleSubMenu : subMenuPath) {
+				if(!registeredSubMenus.contains(singleSubMenu)){
+					parent.add(singleSubMenu);
+					registeredSubMenus.add(singleSubMenu);
+				}
+				parent = singleSubMenu;
+			}
+			parent.add(item);
 		}
 	}
 
