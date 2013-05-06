@@ -42,7 +42,7 @@ Contributors:
    </requires>
 
    <plugin
-         id="org.qualitune.refactoring.energy.test"
+         id="org.emftext.refactoring.smell.java.energy"
          download-size="0"
          install-size="0"
          version="0.0.0"
