@@ -23,6 +23,7 @@ import java.util.Map;
 import org.eclipse.core.commands.Category;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
@@ -222,8 +223,8 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			}
 		}
 	}
-
-	private void createCommand(IServiceLocator serviceLocator, RoleMapping mapping, IRefactorer refactorer, IMenuManager rootMenu2, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain) {
+	
+	public static Command getCommandForRefactoring(IServiceLocator serviceLocator, RoleMapping mapping, IRefactorer refactorer, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain){
 		ICommandService commandService = (ICommandService) serviceLocator.getService(ICommandService.class);
 		Category category = commandService.getCategory(REFACTORY_COMMAND_CATEGORY);
 		String commandID = ModelRefactoringDescriptor.generateRefactoringID(mapping) + ".command";
@@ -241,6 +242,18 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		if(!command.isHandled()){
 			handlerService.activateHandler(commandID, handler);
 		}
+		return command;
+	}
+
+	private void createCommand(IServiceLocator serviceLocator, RoleMapping mapping, IRefactorer refactorer, IMenuManager rootMenu, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain) {
+		Command command = getCommandForRefactoring(serviceLocator, mapping, refactorer, editorConnector, activeEditor, transactionalEditingDomain);
+		String refactoringName = null;
+		try {
+			refactoringName = command.getName();
+		} catch (NotDefinedException e) {
+			e.printStackTrace();
+		}
+		String commandID = command.getId();
 		
 		CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(serviceLocator, null, commandID, SWT.PUSH);
         commandParameter.label = refactoringName;
@@ -253,11 +266,11 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
         IRefactoringSubMenuRegistry subMenuRegistry = IRefactoringSubMenuRegistry.INSTANCE;
 		IMenuManager subMenu = subMenuRegistry.getSubMenuForRoleMapping(mapping);
 		if(subMenu == null){
-			rootMenu2.add(item);
+			rootMenu.add(item);
 		} else {
 			subMenu.removeAll();
 			List<IMenuManager> subMenuPath = subMenuRegistry.getSubMenuPathForRoleMapping(mapping);
-			IMenuManager parent = rootMenu2;
+			IMenuManager parent = rootMenu;
 			for (IMenuManager singleSubMenu : subMenuPath) {
 				if(!registeredSubMenus.contains(singleSubMenu)){
 					parent.add(singleSubMenu);
