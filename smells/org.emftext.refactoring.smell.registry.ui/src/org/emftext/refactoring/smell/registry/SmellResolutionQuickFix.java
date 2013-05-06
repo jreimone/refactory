@@ -2,6 +2,7 @@ package org.emftext.refactoring.smell.registry;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
+import org.eclipse.core.commands.Command;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
@@ -15,6 +16,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.ide.IDE;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
@@ -22,7 +24,7 @@ import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
-import org.emftext.refactoring.ui.RefactoringAction;
+import org.emftext.refactoring.ui.RefactoringMenuContributor;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Lists;
@@ -96,8 +98,17 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 				}
 				if(editor != null){
 					IEditorConnector editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(editor);
-					RefactoringAction action = new RefactoringAction(refactorer, editorConnector);
-					action.run();
+					
+					IHandlerService handlerService = (IHandlerService) activeWorkbenchWindow.getService(IHandlerService.class);
+					Command command = RefactoringMenuContributor.getCommandForRefactoring(activeWorkbenchWindow, roleMapping, refactorer, editorConnector, editor, null);
+					try {
+						handlerService.executeCommand(command.getId(), null);
+					} catch (Exception ex) {
+						throw new RuntimeException("Command '" + command.getId() + "' threw an exception");
+					}
+
+//					RefactoringAction action = new RefactoringAction(refactorer, editorConnector);
+//					action.run();
 				}
 			}
 		}
