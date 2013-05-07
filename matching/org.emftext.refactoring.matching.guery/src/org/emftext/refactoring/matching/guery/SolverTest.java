@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.pl0.PL0Package;
+//import org.emftext.language.conference.ConferencePackage;
 //import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
 //import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 import org.junit.Ignore;
@@ -30,7 +31,7 @@ import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
 import org.qualitune.guery.GueryPackage;
 
-import org.emftext.language.pl0.PL0Package;
+//import org.emftext.language.pl0.PL0Package;
 //import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
 //import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
 
@@ -50,8 +51,8 @@ import org.emftext.language.pl0.PL0Package;
  */
 public class SolverTest {
 
-	private EPackage pl0MM;
-	private Resource pl0MMResource;
+//	private EPackage pl0MM;
+//	private Resource pl0MMResource;
 
 //	public void init(){
 //		initLanguages();
@@ -92,7 +93,7 @@ public class SolverTest {
 	}
 
 	@Test
-//	@Ignore
+	@Ignore
 	public void findMapping(){
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
@@ -109,7 +110,7 @@ public class SolverTest {
 	}
 
 	@Test
-//	@Ignore
+	@Ignore
 	public void withoutOptionalTest(){
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
@@ -126,7 +127,7 @@ public class SolverTest {
 	}
 
 	@Test
-//	@Ignore
+	@Ignore
 	public void generatedMotifTest(){
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
@@ -139,6 +140,40 @@ public class SolverTest {
 		URI uri = URI.createFileURI(file.getAbsolutePath());
 		Resource resource = PL0Package.eINSTANCE.eResource();
 		SolvingMotif solver = new SolvingMotif(loadGeneratedMotifs(), resource);
+		solver.findMotifInstances();
+	}
+	
+	@Test
+	@Ignore
+	public void ExtractXToNewParentWithRestrictionTest(){
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+
+		// Register the package to ensure it is available during loading.
+		//
+		resourceSet.getPackageRegistry().put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);
+		String path = "../org.emftext.language.pl0/metamodel/pl0.ecore";
+		File file = new File(path);
+		URI uri = URI.createFileURI(file.getAbsolutePath());
+		Resource resource = PL0Package.eINSTANCE.eResource();
+		SolvingMotif solver = new SolvingMotif(loadExtractXToNewParentWithRestriction(), resource);
+		solver.findMotifInstances();
+	}
+	
+	@Test
+//	@Ignore
+	public void ExtractSubXTest(){
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+
+		// Register the package to ensure it is available during loading.
+		//
+		resourceSet.getPackageRegistry().put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);
+		String path = "../org.emftext.language.pl0/metamodel/pl0.ecore";
+		File file = new File(path);
+		URI uri = URI.createFileURI(file.getAbsolutePath());
+		Resource resource = PL0Package.eINSTANCE.eResource();
+		SolvingMotif solver = new SolvingMotif(loadExtractSubX(), resource);
 		solver.findMotifInstances();
 	}
 
@@ -212,6 +247,25 @@ public class SolverTest {
 //		SolvingMotif sm=new SolvingMotif(loadMotifs(), r);
 //
 //		sm.findMotifInstances();
+	}
+	
+	private static Motif<MetamodelVertex,EReferenceEdge> loadExtractXToNewParentWithRestriction(){
+		InputStream in=null;
+		try {
+//			in = new FileInputStream("ExtractXtoNewParentWithRestrictionV1.guery");
+			in = new FileInputStream("MoveXloosely.guery");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		MotifReader<MetamodelVertex,EReferenceEdge> reader = new DefaultMotifReader<MetamodelVertex,EReferenceEdge>();
+		Motif<MetamodelVertex,EReferenceEdge> motif=null;
+		try {
+			motif = reader.read(in);
+		} catch (MotifReaderException e) {
+			e.printStackTrace();
+		}
+
+		return motif;
 	}
 
 	private static Motif<MetamodelVertex,EReferenceEdge> loadMotifs(){
@@ -290,6 +344,24 @@ public class SolverTest {
 		InputStream in=null;
 		try {
 			in = new FileInputStream("test1.guery");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		MotifReader<MetamodelVertex,EReferenceEdge> reader = new DefaultMotifReader<MetamodelVertex,EReferenceEdge>();
+		Motif<MetamodelVertex,EReferenceEdge> motif=null;
+		try {
+			motif = reader.read(in);
+		} catch (MotifReaderException e) {
+			e.printStackTrace();
+		}
+
+		return motif;
+	}
+	
+	private static Motif<MetamodelVertex,EReferenceEdge> loadExtractSubX(){
+		InputStream in=null;
+		try {
+			in = new FileInputStream("ExtractSubXV1.guery");
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
