@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.pl0.PL0Package;
+//import org.emftext.language.conference.ConferencePackage;
+
 import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
 import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EObjectVertex;

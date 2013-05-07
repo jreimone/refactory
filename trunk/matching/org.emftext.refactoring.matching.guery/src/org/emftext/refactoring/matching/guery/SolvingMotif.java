@@ -1,5 +1,11 @@
 package org.emftext.refactoring.matching.guery;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Set;
 
@@ -8,10 +14,13 @@ import nz.ac.massey.cs.guery.DefaultMotif;
 import nz.ac.massey.cs.guery.GQL;
 import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifInstance;
+import nz.ac.massey.cs.guery.MotifReader;
+import nz.ac.massey.cs.guery.MotifReaderException;
 import nz.ac.massey.cs.guery.Path;
 import nz.ac.massey.cs.guery.ResultListener;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 import nz.ac.massey.cs.guery.impl.RRPath;
+import nz.ac.massey.cs.guery.io.dsl.DefaultMotifReader;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -31,6 +40,8 @@ public class SolvingMotif {
 	private EPackageGraphAdapter graphAdapter;
 	private Resource resource;
 	private Motif<MetamodelVertex, EReferenceEdge> motif;
+	private ByteArrayOutputStream os;
+	private static int maxResults=25;
 	
 	int help=0;
 	String help2="C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/PL";
@@ -43,6 +54,20 @@ public class SolvingMotif {
 		this.resource = resource;
 		graphAdapter = new EPackageGraphAdapter(resource);
 	}
+	
+	public SolvingMotif(/*Motif<MetamodelVertex, EReferenceEdge> motif,*/ Resource resource, ByteArrayOutputStream os){
+//		this.motif = motif;
+		this.resource = resource;
+		graphAdapter = new EPackageGraphAdapter(resource);
+		this.os=os;
+		motif=loadMotif();
+		System.out.println("PathRoles: "+motif.getPathRoles());
+		System.out.println(os);
+	}
+	
+//	private void outputStreamToMotif(){
+//		
+//	}
 	
 	public void findMotifInstances(){
 //		int help=0;
@@ -88,7 +113,7 @@ public class SolvingMotif {
 //					}
 //				}
 					//TODO
-				if (i>20){
+				if (i>maxResults){
 					System.out.println("Zu viele Ergebnisse, bitte einschränken");
 					stopped=true;
 					return false;
@@ -117,6 +142,53 @@ public class SolvingMotif {
 		sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
 		sdf.format(now);
 		w2t.writeLine(ausgabe);
+	}
+	
+	public void findMotifInstancesFromOutputStream(){
+		
+		ResultListener<MetamodelVertex, EReferenceEdge> listener = new ResultListener<MetamodelVertex, EReferenceEdge>(){
+			private int i = 0;
+			private boolean stopped=false;
+			public void done() {
+				if (!stopped){
+					System.out.println("Bin fertig!");
+				}
+				else{
+					System.out.println("Wurde abgebrochen!");
+				}
+			} 
+			public boolean found(MotifInstance<MetamodelVertex, EReferenceEdge> instance) {
+				i++;
+				System.out.println(i);
+				Set<MetamodelVertex> instances=instance.getVertices();
+					i=analyzeMotifs(instance,i);
+					//TODO
+				if (i>maxResults){
+					System.out.println("Zu viele Ergebnisse, bitte einschränken");
+					stopped=true;
+					return false;
+				}
+//				transformToRolemapping();
+//				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return true;
+			}
+			public void progressMade(int progress, int total) {
+				System.out.println("ca. bearbeitet: "+((float)progress/total)*100+"%");
+			} 
+		};
+		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>();
+		engine.query(graphAdapter,motif,listener,ComputationMode.ALL_INSTANCES);
+
+		
+//		now = new java.util.Date();
+//		sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
+//		sdf.format(now);
+//		w2t.writeLine(ausgabe);
 	}
 	
 	public int analyzeMotifs(MotifInstance<MetamodelVertex,EReferenceEdge> instance, int i){
@@ -175,13 +247,33 @@ public class SolvingMotif {
 			}
 			ausgabe=ausgabe+"("+edges.size()+")";
 		}
-		w2t.writeLine(ausgabe);
+//		w2t.writeLine(ausgabe);
 		System.out.println("~~~~~~~~~~~~~~~~~~");
 		return i;
 	}
 	
 	private void transformToRolemapping() {
 		
+	}
+	
+	private Motif<MetamodelVertex,EReferenceEdge> loadMotif(){
+		ByteArrayInputStream in=new ByteArrayInputStream(os.toByteArray());
+//		InputStream in=os;
+//		InputStream in=null;
+//		try {
+//			in = new FileInputStream("ExtractXwithReferenceClass3.guery");
+//		} catch (FileNotFoundException e1) {
+//			e1.printStackTrace();
+//		}
+		MotifReader<MetamodelVertex,EReferenceEdge> reader = new DefaultMotifReader<MetamodelVertex,EReferenceEdge>();
+		Motif<MetamodelVertex,EReferenceEdge> motif=null;
+		try {
+			motif = reader.read(in);
+		} catch (MotifReaderException e) {
+			e.printStackTrace();
+		}
+
+		return motif;
 	}
 
 }
