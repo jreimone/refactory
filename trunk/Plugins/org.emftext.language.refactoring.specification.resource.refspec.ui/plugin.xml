@@ -19,7 +19,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Refspec Text Editor" id="org.emftext.language.refactoring.specification.resource.ui.RefspecPreferencePage" class="org.emftext.language.refactoring.specification.resource.ui.RefspecPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		<page name="Refspec Text Editor" id="org.emftext.language.refactoring.specification.resource.ui.RefspecPreferencePage" class="org.emftext.language.refactoring.specification.resource.ui.RefspecPreferencePage" category="org.emftext.refactoring.ui.preferences">
 		</page>
 		<page name="Syntax Coloring" id="org.emftext.language.refactoring.specification.resource.ui.RefspecSyntaxColoringPreferencePage" class="org.emftext.language.refactoring.specification.resource.ui.RefspecSyntaxColoringPreferencePage" category="org.emftext.language.refactoring.specification.resource.ui.RefspecPreferencePage">
 		</page>

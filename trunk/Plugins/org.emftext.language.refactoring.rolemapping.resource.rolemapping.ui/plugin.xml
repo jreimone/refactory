@@ -19,7 +19,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Rolemapping Text Editor" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		<page name="Rolemapping Text Editor" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage" category="org.emftext.refactoring.ui.preferences">
 		</page>
 		<page name="Syntax Coloring" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingSyntaxColoringPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingSyntaxColoringPreferencePage" category="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage">
 		</page>
