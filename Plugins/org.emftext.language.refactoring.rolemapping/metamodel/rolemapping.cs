@@ -20,6 +20,7 @@ OPTIONS {
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 	preferencePagesCategory = "org.emftext.refactoring.ui.preferences";
+	overrideProposalPostProcessor = "false";
 }
 
 TOKENS {
