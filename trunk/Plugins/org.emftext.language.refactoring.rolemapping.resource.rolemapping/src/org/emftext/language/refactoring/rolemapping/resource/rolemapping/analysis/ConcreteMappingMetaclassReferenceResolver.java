@@ -154,7 +154,14 @@ org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingRe
 	}
 
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		String result = element.getName();
+		EPackage ePackage = element.getEPackage();
+		EPackage parent = ePackage.getESuperPackage();
+		while (parent != null) {
+			result = ePackage.getName() + result;
+		}
+//		return delegate.deResolve(element, container, reference);
+		return result;
 	}
 
 	public void setOptions(java.util.Map<?, ?> options) {
