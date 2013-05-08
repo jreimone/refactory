@@ -49,86 +49,87 @@ import org.emftext.language.refactoring.roles.RolesPackage;
 public class MultiplicityItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public MultiplicityItemProvider(AdapterFactory adapterFactory) {
-		super(adapterFactory);
-	}
+    super(adapterFactory);
+  }
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+    if (itemPropertyDescriptors == null)
+    {
+      super.getPropertyDescriptors(object);
 
-			addLowerBoundPropertyDescriptor(object);
-			addUpperBoundPropertyDescriptor(object);
-		}
-		return itemPropertyDescriptors;
-	}
+      addLowerBoundPropertyDescriptor(object);
+      addUpperBoundPropertyDescriptor(object);
+    }
+    return itemPropertyDescriptors;
+  }
 
 	/**
-	 * This adds a property descriptor for the Lower Bound feature.
-	 * <!-- begin-user-doc -->
+   * This adds a property descriptor for the Lower Bound feature.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected void addLowerBoundPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Multiplicity_lowerBound_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Multiplicity_lowerBound_feature", "_UI_Multiplicity_type"),
-				 RolesPackage.Literals.MULTIPLICITY__LOWER_BOUND,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
-	}
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_Multiplicity_lowerBound_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_Multiplicity_lowerBound_feature", "_UI_Multiplicity_type"),
+         RolesPackage.Literals.MULTIPLICITY__LOWER_BOUND,
+         true,
+         false,
+         false,
+         ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+         null,
+         null));
+  }
 
 	/**
-	 * This adds a property descriptor for the Upper Bound feature.
-	 * <!-- begin-user-doc -->
+   * This adds a property descriptor for the Upper Bound feature.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected void addUpperBoundPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Multiplicity_upperBound_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Multiplicity_upperBound_feature", "_UI_Multiplicity_type"),
-				 RolesPackage.Literals.MULTIPLICITY__UPPER_BOUND,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
-	}
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_Multiplicity_upperBound_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_Multiplicity_upperBound_feature", "_UI_Multiplicity_type"),
+         RolesPackage.Literals.MULTIPLICITY__UPPER_BOUND,
+         true,
+         false,
+         false,
+         ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+         null,
+         null));
+  }
 
 	/**
-	 * This returns Multiplicity.gif.
-	 * <!-- begin-user-doc -->
+   * This returns Multiplicity.gif.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Multiplicity"));
-	}
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/Multiplicity"));
+  }
 
 	/**
 	 * This returns the label text for the adapted class.
@@ -162,46 +163,47 @@ public class MultiplicityItemProvider extends ItemProviderAdapter implements IEd
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
+   * This handles model notifications by calling {@link #updateChildren} to update any cached
+   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void notifyChanged(Notification notification) {
-		updateChildren(notification);
+    updateChildren(notification);
 
-		switch (notification.getFeatureID(Multiplicity.class)) {
-			case RolesPackage.MULTIPLICITY__LOWER_BOUND:
-			case RolesPackage.MULTIPLICITY__UPPER_BOUND:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
-		super.notifyChanged(notification);
-	}
+    switch (notification.getFeatureID(Multiplicity.class))
+    {
+      case RolesPackage.MULTIPLICITY__LOWER_BOUND:
+      case RolesPackage.MULTIPLICITY__UPPER_BOUND:
+        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+        return;
+    }
+    super.notifyChanged(notification);
+  }
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
+    super.collectNewChildDescriptors(newChildDescriptors, object);
+  }
 
 	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return RolesEditPlugin.INSTANCE;
-	}
+    return RolesEditPlugin.INSTANCE;
+  }
 
 }

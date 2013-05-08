@@ -31,6 +31,7 @@ OPTIONS{
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 	licenceHeader = "../../org.dropsbox/licence.txt";
+	preferencePagesCategory = "org.emftext.refactoring.ui.preferences";
 }
 
 TOKENS{
