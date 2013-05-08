@@ -27,6 +27,7 @@ OPTIONS {
 	overrideUIPluginXML = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	preferencePagesCategory = "org.emftext.refactoring.ui.preferences";
 }
 
 TOKENS{

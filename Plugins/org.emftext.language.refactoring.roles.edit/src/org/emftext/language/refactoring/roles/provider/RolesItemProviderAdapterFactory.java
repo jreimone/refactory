@@ -53,334 +53,345 @@ import org.emftext.language.refactoring.roles.util.RolesAdapterFactory;
  */
 public class RolesItemProviderAdapterFactory extends RolesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-	 * This keeps track of the root adapter factory that delegates to this adapter factory.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the root adapter factory that delegates to this adapter factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-	 * <!-- begin-user-doc -->
+   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-	 * <!-- begin-user-doc -->
+   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
-	 * This constructs an instance.
-	 * <!-- begin-user-doc -->
+   * This constructs an instance.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public RolesItemProviderAdapterFactory() {
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class);
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);
-	}
+    supportedTypes.add(IEditingDomainItemProvider.class);
+    supportedTypes.add(IStructuredItemContentProvider.class);
+    supportedTypes.add(ITreeItemContentProvider.class);
+    supportedTypes.add(IItemLabelProvider.class);
+    supportedTypes.add(IItemPropertySource.class);
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleModel} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleModel} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleModelItemProvider roleModelItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleModel}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleModel}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createRoleModelAdapter() {
-		if (roleModelItemProvider == null) {
-			roleModelItemProvider = new RoleModelItemProvider(this);
-		}
+    if (roleModelItemProvider == null)
+    {
+      roleModelItemProvider = new RoleModelItemProvider(this);
+    }
 
-		return roleModelItemProvider;
-	}
+    return roleModelItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.Role} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.Role} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleItemProvider roleItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.Role}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.refactoring.roles.Role}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createRoleAdapter() {
-		if (roleItemProvider == null) {
-			roleItemProvider = new RoleItemProvider(this);
-		}
+    if (roleItemProvider == null)
+    {
+      roleItemProvider = new RoleItemProvider(this);
+    }
 
-		return roleItemProvider;
-	}
+    return roleItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleImplication} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleImplication} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleImplicationItemProvider roleImplicationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleImplication}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleImplication}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createRoleImplicationAdapter() {
-		if (roleImplicationItemProvider == null) {
-			roleImplicationItemProvider = new RoleImplicationItemProvider(this);
-		}
+    if (roleImplicationItemProvider == null)
+    {
+      roleImplicationItemProvider = new RoleImplicationItemProvider(this);
+    }
 
-		return roleImplicationItemProvider;
-	}
+    return roleImplicationItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleAttribute} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleAttribute} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleAttributeItemProvider roleAttributeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleAttribute}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleAttribute}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createRoleAttributeAdapter() {
-		if (roleAttributeItemProvider == null) {
-			roleAttributeItemProvider = new RoleAttributeItemProvider(this);
-		}
+    if (roleAttributeItemProvider == null)
+    {
+      roleAttributeItemProvider = new RoleAttributeItemProvider(this);
+    }
 
-		return roleAttributeItemProvider;
-	}
+    return roleAttributeItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleProhibition} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleProhibition} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleProhibitionItemProvider roleProhibitionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleProhibition}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleProhibition}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createRoleProhibitionAdapter() {
-		if (roleProhibitionItemProvider == null) {
-			roleProhibitionItemProvider = new RoleProhibitionItemProvider(this);
-		}
+    if (roleProhibitionItemProvider == null)
+    {
+      roleProhibitionItemProvider = new RoleProhibitionItemProvider(this);
+    }
 
-		return roleProhibitionItemProvider;
-	}
+    return roleProhibitionItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.Multiplicity} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.Multiplicity} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected MultiplicityItemProvider multiplicityItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.Multiplicity}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.refactoring.roles.Multiplicity}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createMultiplicityAdapter() {
-		if (multiplicityItemProvider == null) {
-			multiplicityItemProvider = new MultiplicityItemProvider(this);
-		}
+    if (multiplicityItemProvider == null)
+    {
+      multiplicityItemProvider = new MultiplicityItemProvider(this);
+    }
 
-		return multiplicityItemProvider;
-	}
+    return multiplicityItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleAssociation} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleAssociation} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleAssociationItemProvider roleAssociationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleAssociation}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleAssociation}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createRoleAssociationAdapter() {
-		if (roleAssociationItemProvider == null) {
-			roleAssociationItemProvider = new RoleAssociationItemProvider(this);
-		}
+    if (roleAssociationItemProvider == null)
+    {
+      roleAssociationItemProvider = new RoleAssociationItemProvider(this);
+    }
 
-		return roleAssociationItemProvider;
-	}
+    return roleAssociationItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleComposition} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.refactoring.roles.RoleComposition} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleCompositionItemProvider roleCompositionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleComposition}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.refactoring.roles.RoleComposition}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createRoleCompositionAdapter() {
-		if (roleCompositionItemProvider == null) {
-			roleCompositionItemProvider = new RoleCompositionItemProvider(this);
-		}
+    if (roleCompositionItemProvider == null)
+    {
+      roleCompositionItemProvider = new RoleCompositionItemProvider(this);
+    }
 
-		return roleCompositionItemProvider;
-	}
+    return roleCompositionItemProvider;
+  }
 
 	/**
-	 * This returns the root adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
+   * This returns the root adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-	}
+    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+  }
 
 	/**
-	 * This sets the composed adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
+   * This sets the composed adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-		this.parentAdapterFactory = parentAdapterFactory;
-	}
+    this.parentAdapterFactory = parentAdapterFactory;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type) || super.isFactoryForType(type);
-	}
+    return supportedTypes.contains(type) || super.isFactoryForType(type);
+  }
 
 	/**
-	 * This implementation substitutes the factory itself as the key for the adapter.
-	 * <!-- begin-user-doc -->
+   * This implementation substitutes the factory itself as the key for the adapter.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-		return super.adapt(notifier, this);
-	}
+    return super.adapt(notifier, this);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
+    if (isFactoryForType(type))
+    {
+      Object adapter = super.adapt(object, type);
+      if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
+      {
+        return adapter;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * This adds a listener.
-	 * <!-- begin-user-doc -->
+   * This adds a listener.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.addListener(notifyChangedListener);
-	}
+    changeNotifier.addListener(notifyChangedListener);
+  }
 
 	/**
-	 * This removes a listener.
-	 * <!-- begin-user-doc -->
+   * This removes a listener.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.removeListener(notifyChangedListener);
-	}
+    changeNotifier.removeListener(notifyChangedListener);
+  }
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-	 * <!-- begin-user-doc -->
+   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void fireNotifyChanged(Notification notification) {
-		changeNotifier.fireNotifyChanged(notification);
+    changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
-			parentAdapterFactory.fireNotifyChanged(notification);
-		}
-	}
+    if (parentAdapterFactory != null)
+    {
+      parentAdapterFactory.fireNotifyChanged(notification);
+    }
+  }
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
-	 * <!-- begin-user-doc -->
+   * This disposes all of the item providers created by this factory. 
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void dispose() {
-		if (roleItemProvider != null) roleItemProvider.dispose();
-		if (roleModelItemProvider != null) roleModelItemProvider.dispose();
-		if (multiplicityItemProvider != null) multiplicityItemProvider.dispose();
-		if (roleProhibitionItemProvider != null) roleProhibitionItemProvider.dispose();
-		if (roleAssociationItemProvider != null) roleAssociationItemProvider.dispose();
-		if (roleCompositionItemProvider != null) roleCompositionItemProvider.dispose();
-		if (roleImplicationItemProvider != null) roleImplicationItemProvider.dispose();
-		if (roleAttributeItemProvider != null) roleAttributeItemProvider.dispose();
-	}
+    if (roleItemProvider != null) roleItemProvider.dispose();
+    if (roleModelItemProvider != null) roleModelItemProvider.dispose();
+    if (multiplicityItemProvider != null) multiplicityItemProvider.dispose();
+    if (roleProhibitionItemProvider != null) roleProhibitionItemProvider.dispose();
+    if (roleAssociationItemProvider != null) roleAssociationItemProvider.dispose();
+    if (roleCompositionItemProvider != null) roleCompositionItemProvider.dispose();
+    if (roleImplicationItemProvider != null) roleImplicationItemProvider.dispose();
+    if (roleAttributeItemProvider != null) roleAttributeItemProvider.dispose();
+  }
 
 }
