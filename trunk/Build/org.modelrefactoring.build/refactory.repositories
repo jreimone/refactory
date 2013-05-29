@@ -15,6 +15,7 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/features/org.eclipse.sdk_4.2.2.v20130116-114742-7T7oDVDQ23Iosz-vkFwNncmx7z-9Rts4b0m1FotkYacO5.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip!eclipse/features/org.eclipse.sdk_4.3.0.v20130526-2205/feature.xml
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip!eclipse/plugins/org.eclipse.sdk_4.3.0.v20130526-2000/plugin.xml
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-platform-4.3RC2a-win32-x86_64.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-4.3RC2a-delta-pack.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/org.eclipse.pde-4.3RC2a.zip
@@ -98,9 +99,9 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/down
 // Xtext
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/features/org.eclipse.xtend.sdk_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.xbase.ui_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend_1.2.0.v201206110941.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xpand_1.2.0.v201206110941.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.typesystem.emf_1.2.0.v201206110941.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend_1.2.0.v201206110941.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xpand_1.2.0.v201206110941.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.typesystem.emf_1.2.0.v201206110941.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.core_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.core.source_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.lib.source_2.3.1.v201208210947.jar
@@ -114,7 +115,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/down
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.generator_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.generator.source_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.purexbase.ui_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/javax.inject.source_1.0.0.v20091030.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/javax.inject.source_1.0.0.v20091030.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201305210450/mwe/plugins/org.eclipse.emf.mwe.core_1.2.1.v201305210450.jar
