@@ -13,9 +13,9 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 //
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.sdk_4.2.2.v201302041200.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/features/org.eclipse.sdk_4.2.2.v20130116-114742-7T7oDVDQ23Iosz-vkFwNncmx7z-9Rts4b0m1FotkYacO5.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip!eclipse/features/org.eclipse.sdk_4.3.0.v20130526-2205/feature.xml
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip!eclipse/plugins/org.eclipse.sdk_4.3.0.v20130526-2000/plugin.xml
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip!eclipse/features/org.eclipse.sdk_4.3.0.v20130526-2205/feature.xml
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip!eclipse/plugins/org.eclipse.sdk_4.3.0.v20130526-2000/
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-platform-4.3RC2a-win32-x86_64.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-4.3RC2a-delta-pack.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/org.eclipse.pde-4.3RC2a.zip
