@@ -149,7 +149,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 
 // needs Log4J
 //get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//logging/log4j/1.2.17/log4j-1.2.17.zip!apache-log4j-1.2.17/log4j-1.2.17.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/S20130308121626/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
 
 // GMF 
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/downloads/drops/1.6.0/R201206271200/gmf-runtime-1.6.0.zip
