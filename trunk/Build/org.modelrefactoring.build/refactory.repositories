@@ -53,7 +53,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milest
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 
 // Google Guava (required by EMF Compare)
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/S20130308121626/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
 // get:http://search.maven.org/remotecontent?filepath=com/google/guava/guava/10.0/guava-10.0.jar
 
 // Google Inject (required by IncQuery)
