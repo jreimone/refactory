@@ -24,7 +24,7 @@ import org.emftext.language.refactoring.roles.RoleModel;
 /**
  * A class which can be overridden to customize code completion proposals.
  */
-public class RolemappingProposalPostProcessorTest {
+public class RolemappingProposalPostProcessorTemp {
 	
 	public List<RolemappingCompletionProposal> process(List<RolemappingCompletionProposal> proposals) {
 		RoleMapping mapping = getCurrentRoleMapping(proposals);
