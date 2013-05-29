@@ -7,9 +7,10 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-platform-4.2.2-win32-x86_64.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-4.2.2-delta-pack.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/org.eclipse.pde-4.2.2.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip!eclipse/features/org.eclipse.sdk_4.2.2.v20130116-114742-7T7oDVDQ23Iosz-vkFwNncmx7z-9Rts4b0m1FotkYacO5/feature.xml
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.sdk_4.2.2.v201302041200/feature.xml
+http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.sdk_4.2.2.v201302041200.jar
 
 // JDT
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/org.eclipse.jdt-4.2.2.zip
@@ -49,7 +50,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milest
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.base_0.7.0.201303081734.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.rete_0.7.0.201303081734.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.base.itc_0.7.0.201303081734.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/S20130308121626/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 
 // Google Guava (required by EMF Compare)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/S20130308121626/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
@@ -88,6 +89,27 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/down
 // get:http://topcased-mm.gforge.enseeiht.fr/indigo/release/topcased5.2/main/plugins/org.topcased.modeler.uml_5.1.0.201204031215.jar
 
 // Xtext
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/features/org.eclipse.xtend.sdk_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.xbase.ui_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend_1.2.0.v201206110941.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xpand_1.2.0.v201206110941.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.typesystem.emf_1.2.0.v201206110941.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.core_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.core.source_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.lib.source_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.lib_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.ide_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.ide.source_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.examples_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.doc_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend2.lib_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend2.lib.source_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.generator_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.generator.source_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.purexbase.ui_2.3.1.v201208210947.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/javax.inject.source_1.0.0.v20091030.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/features/org.eclipse.xtext.runtime_2.3.1.v201208210947/feature.xml
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.util_2.3.1.v201208210947.jar
@@ -100,8 +122,6 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/down
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.common.types.ui_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.common.types.edit_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.common.types_2.3.1.v201208210947.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtend.lib_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.xbase_2.3.1.v201208210947.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/features/org.eclipse.xtext.sdk_2.3.1.v201208210947/feature.xml
