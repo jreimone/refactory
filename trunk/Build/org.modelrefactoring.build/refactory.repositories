@@ -57,7 +57,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 // get:http://search.maven.org/remotecontent?filepath=com/google/guava/guava/10.0/guava-10.0.jar
 
 // Google Inject (required by IncQuery)
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/S20130308121626/repository/plugins/com.google.inject_3.0.0.v201203062045.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.inject_3.0.0.v201203062045.jar
 
 // EMF Workspace + Transaction
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/transaction/downloads/drops/1.6.0/R201206271200/emf-transaction-runtime-1.6.0.zip
