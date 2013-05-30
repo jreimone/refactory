@@ -2,7 +2,7 @@
 <feature
       id="org.modelrefactoring.mappings.roles"
       label="Refactorings for Role models"
-      version="0.0.0"
+      version="0.9.1"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">
