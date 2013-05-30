@@ -4,18 +4,7 @@ git:https://github.com/DevBoost/TestUtils.git
 git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 
 // Eclipse Platform
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-platform-4.2.2-win32-x86_64.zip
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-4.2.2-delta-pack.zip
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/org.eclipse.pde-4.2.2.zip
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip!eclipse/features/org.eclipse.sdk_4.2.2.v20130116-114742-7T7oDVDQ23Iosz-vkFwNncmx7z-9Rts4b0m1FotkYacO5/feature.xml
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip!eclipse/plugins/org.eclipse.sdk_4.2.2.v201302041200/feature.xml
-//
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.sdk_4.2.2.v201302041200.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/features/org.eclipse.sdk_4.2.2.v20130116-114742-7T7oDVDQ23Iosz-vkFwNncmx7z-9Rts4b0m1FotkYacO5.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip!eclipse/features/org.eclipse.sdk_4.3.0.v20130526-2205/feature.xml
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-SDK-4.3RC2a-win32-x86_64.zip!eclipse/plugins/org.eclipse.sdk_4.3.0.v20130526-2000/
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-platform-4.3RC2a-win32-x86_64.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/eclipse-4.3RC2a-delta-pack.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/S-4.3RC2a-201305262000/org.eclipse.pde-4.3RC2a.zip
@@ -62,7 +51,6 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 
 // Google Guava (required by EMF Compare)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
-// get:http://search.maven.org/remotecontent?filepath=com/google/guava/guava/10.0/guava-10.0.jar
 
 // Google Inject (required by IncQuery)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.inject_3.0.0.v201203062045.jar
@@ -70,9 +58,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 // EMF Workspace + Transaction
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/transaction/downloads/drops/1.6.0/R201206271200/emf-transaction-runtime-1.6.0.zip
 
-
 // all plugins from ZESSY repository
-// not need anymore because it is moved to Refactory repo
+// not needed anymore because it is moved to Refactory repo
 //svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/zessy/sources/evolution/org.qualitune.refactoring.energy.test
 
 // UML2
@@ -80,7 +67,6 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downl
 
 // BPMN2
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/downloads/drops/0.7/S20111111/site.zip!site/plugins/org.eclipse.bpmn2_0.7.0.201111091619.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/downloads/drops/0.7/S20111111/site.zip!site/features/org.eclipse.bpmn2.feature_0.7.0.201111091619.jar
 
 // Apache Xerces (for Coral from Helge)
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/S20120917013952/repository/plugins/org.apache.xerces_2.9.0.v201101211617.jar
@@ -97,24 +83,9 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/down
 // get:http://topcased-mm.gforge.enseeiht.fr/indigo/release/topcased5.2/main/plugins/org.topcased.modeler.uml_5.1.0.201204031215.jar
 
 // Xtext
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/features/org.eclipse.xtend.sdk_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.xbase.ui_2.3.1.v201208210947.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend_1.2.0.v201206110941.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xpand_1.2.0.v201206110941.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.typesystem.emf_1.2.0.v201206110941.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.core_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.core.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.lib.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.lib_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.ide_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.ide.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.examples_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend.doc_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend2.lib_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtend2.lib.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.generator_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.generator.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/org.eclipse.xtext.purexbase.ui_2.3.1.v201208210947.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/juno/201303010900/plugins/javax.inject.source_1.0.0.v20091030.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip
@@ -122,45 +93,11 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updat
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201305210450/mwe/plugins/org.eclipse.emf.mwe.utils_1.3.0.v201305210450.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201305210450/mwe/plugins/org.eclipse.emf.mwe2.runtime_2.4.0.v201305210450.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201305210450/mwe/plugins/org.apache.commons.cli_1.2.0.v201105210650.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/features/org.eclipse.xtext.runtime_2.3.1.v201208210947/feature.xml
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.util_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.xbase.lib_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.smap_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.builder_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.generator_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ecore_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.common.types.ui_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.common.types.edit_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-runtime-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.common.types_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtend.lib_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.xbase_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/features/org.eclipse.xtext.sdk_2.3.1.v201208210947/feature.xml
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/features/org.eclipse.xtext.ui_2.3.1.v201208210947/feature.xml
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/features/org.eclipse.xtend.sdk_2.3.1.v201208210947/feature.xml
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.junit_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.junit4_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.junit.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.junit4.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui.junit_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui.junit.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.purexbase_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.purexbase.ui_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.purexbase.ui.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.purexbase.source_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.common.types.shared_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui.shared_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui.ecore_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui.codetemplates_2.3.1.v201208210947.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.3.1/R201208210947/tmf-xtext-SDK-2.3.1.zip!eclipse/plugins/org.eclipse.xtext.ui.codetemplates.ui_2.3.1.v201208210947.jar
 
 // needs Apache Commons Lang
-//get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//commons/lang/binaries/commons-lang3-3.1-bin.zip!commons-lang3-3.1/commons-lang3-3.1.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
 
 // needs Log4J
-//get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//logging/log4j/1.2.17/log4j-1.2.17.zip!apache-log4j-1.2.17/log4j-1.2.17.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
 
 // GMF 
@@ -193,7 +130,6 @@ git:https://github.com/DevBoost/JaMoPP.git!Features/
 git:https://github.com/DevBoost/EMFTools.git!eJava/
 
 // Sokan
-//git:https://github.com/DevBoost/Reuseware.git!Sokan/
 get:http://emftext.org/update/plugins/org.reuseware.sokan_1.0.1.v201207310007.jar
 get:http://emftext.org/update/plugins/org.reuseware.sokan.index_1.0.1.v201207310007.jar
 get:http://emftext.org/update/plugins/org.reuseware.sokan.index.solr_1.0.1.v201207310007.jar
@@ -230,74 +166,12 @@ git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Conference/
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/equinox/drops/R-3.8.2-201302041200/org.eclipse.osgi_3.8.2.v20130124-134944.jar
 
 // Dresden OCL for OCL refactorings
-//svn:http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/
-// get:http://www.dresden-ocl.org/update/plugins/com.ibm.icu_4.4.2.v20110823.jar
-// get:http://www.dresden-ocl.org/update/plugins/javax.annotation_1.0.0.v20101115-0725.jar
-// get:http://www.dresden-ocl.org/update/plugins/javax.inject_1.0.0.v20091030.jar
-// get:http://www.dresden-ocl.org/update/plugins/javax.xml_1.3.4.v201005080400.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.apache.batik.css_1.6.0.v201011041432.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.apache.batik.util.gui_1.6.0.v201011041432.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.apache.batik.util_1.6.0.v201011041432.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.apache.felix.gogo.command_0.8.0.v201108120515.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.apache.felix.gogo.runtime_0.8.0.v201108120515.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.apache.felix.gogo.shell_0.8.0.v201110170705.jar
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.metrics.source_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.metrics.ui.source_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.metrics.ui_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.metrics_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.testsuite.abstract.source_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.testsuite.abstract_3.2.0.v201209240638.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.commands_3.6.1.v20120521-2329.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.contenttype_3.4.200.v20120523-2004.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.databinding.beans_1.2.200.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.databinding.observable_1.4.1.v20120521-2329.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.databinding.property_1.4.100.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.databinding_1.4.1.v20120521-2329.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.expressions_3.4.400.v20120523-2004.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.jobs_3.5.200.v20120521-2346.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.core.runtime_3.8.0.v20120521-2346.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.core.commands_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.core.contexts_1.1.0.v20120523-2004.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.core.di.extensions_0.11.0.v20120523-2004.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.core.di_1.1.0.v20120521-2346.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.core.services_1.0.0.v20120521-2346.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.bindings_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.css.core_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.css.swt.theme_0.9.2.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.css.swt_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.di_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.model.workbench_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.services_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.widgets_0.12.0.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.workbench.addons.swt_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.workbench.renderers.swt.cocoa_0.11.0.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.workbench.renderers.swt_0.10.1.v20120523-1955.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.workbench.swt_0.10.1.v20120525-2014.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.workbench3_0.12.0.v20120521-2329.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.e4.ui.workbench_0.10.2.v20120531-1742.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.app_1.3.100.v20120522-1841.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.bidi_0.9.0.v20120522-1841.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.common_3.6.100.v20120522-1841.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.console_1.0.0.v20120522-1841.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.ds_1.4.0.v20120522-1841.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.event_1.2.200.v20120522-2049.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.launcher.cocoa.macosx.x86_64_1.1.200.v20120522-1813.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.preferences_3.5.0.v20120522-1841.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.registry_3.5.200.v20120522-1841.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.simpleconfigurator_1.0.300.v20110815-1744.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.equinox.util_1.0.400.v20120522-2049.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.help_3.6.0.v20120521-2344.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.jface.databinding_1.6.0.v20120521-2329.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.jface_3.8.0.v20120521-2329.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.osgi.services_3.3.100.v20120522-1822.jar
-//get:http://www.dresden-ocl.org/update/plugins/org.eclipse.osgi_3.8.0.v20120529-1548.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.rcp_4.2.0.v201206081400.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.swt.cocoa.macosx.x86_64_3.100.0.v4233d.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.swt_3.100.0.v4233d.jar
-//get:http://www.dresden-ocl.org/update/plugins/org.eclipse.ui.workbench_3.103.0.v20120530-1824.jar
-//get:http://www.dresden-ocl.org/update/plugins/org.eclipse.ui_3.103.0.v20120521-2329.jar
-// get:http://www.dresden-ocl.org/update/plugins/org.eclipse.update.configurator_3.3.200.v20120523-1752.jar
 get:http://www.dresden-ocl.org/update/plugins/org.kiama.attribution.source_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/org.kiama.attribution_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/org.w3c.css.sac_1.3.1.v200903091627.jar
@@ -318,26 +192,6 @@ get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.essentialocl
 get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.essentialocl.standardlibrary.source_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.essentialocl.standardlibrary_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.essentialocl_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.living.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.living_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.ocl22java.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.ocl22java_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.pain.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.pain_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.pml.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.pml_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.royalandloyal.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.royalandloyal_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.simple.ocl22javacode.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.simple.ocl22javacode_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.simple.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.simple_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.ui.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.ui_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.university.source_3.2.0.v201209240638.jar
-//get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.examples.university_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.facade.source_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.facade_3.2.0.v201209240638.jar
 get:http://www.dresden-ocl.org/update/plugins/tudresden.ocl20.pivot.interpreter.source_3.2.0.v201209240638.jar
