@@ -35,11 +35,13 @@ Contributors:
       <import feature="org.eclipse.emf.workspace"/>
       <import feature="org.modelrefactoring.runtime"/>
       <import plugin="org.emftext.language.pl0"/>
-      <import plugin="org.emftext.language.pl0.extended"/>
       <import plugin="org.emftext.language.pl0.resource.pl0"/>
       <import plugin="org.emftext.language.pl0.resource.pl0.ui"/>
+      <!--
+      <import plugin="org.emftext.language.pl0.extended"/>
       <import plugin="org.emftext.language.pl0extended.resource.pl0extended"/>
       <import plugin="org.emftext.language.pl0extended.resource.pl0extended.ui"/>
+      -->
    </requires>
 
    <plugin
