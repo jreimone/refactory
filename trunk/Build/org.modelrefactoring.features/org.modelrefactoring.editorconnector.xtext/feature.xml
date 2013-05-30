@@ -6,7 +6,8 @@
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">
-      Refactory xText Editor Connector: Enables refactorings in xText editors.
+      Refactory Xtext Editor Connector: Enables refactorings in Xtext
+editors.
    </description>
 
    <copyright>
