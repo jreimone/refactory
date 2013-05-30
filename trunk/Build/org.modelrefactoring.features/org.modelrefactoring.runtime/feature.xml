@@ -34,8 +34,8 @@ Contributors:
       <import feature="org.eclipse.emf"/>
       <import feature="org.eclipse.emf.compare"/>
       <import feature="org.eclipse.emf.workspace"/>
-      <import feature="org.emftext.access"/>
       <import feature="org.emftext.commons.antlr3_4_0"/>
+      <import plugin="org.emftext.access"/>
    </requires>
 
    <plugin
