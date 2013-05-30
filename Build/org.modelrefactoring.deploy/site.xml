@@ -49,13 +49,16 @@
    <feature url="features/org.modelrefactoring.smells_0.0.0.v0.jar" id="org.modelrefactoring.smells" version="0.0.0.v0">
       <category name="Refactory Smells"/>
    </feature>
-   <feature url="features/org.modelrefactoring.smells.defaults_0.0.0.v0.jar" id="org.modelrefactoring.smells.defaults" version="0.0.0.v0">
-      <category name="Refactory Smells"/>
-   </feature>
    <feature url="features/org.modelrefactoring.smells.ecore_0.0.0.v0.jar" id="org.modelrefactoring.smells.ecore" version="0.0.0.v0">
       <category name="Refactory Smells"/>
    </feature>
    <feature url="features/org.modelrefactoring.smells.roles_0.0.0.v0.jar" id="org.modelrefactoring.smells.roles" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.java_0.0.0.v0.jar" id="org.modelrefactoring.smells.java" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.defaults_0.0.0.v0.jar" id="org.modelrefactoring.smells.defaults" version="0.0.0.v0">
       <category name="Refactory Smells"/>
    </feature>
    <category-def name="Refactory Core" label="Refactory Core"/>
