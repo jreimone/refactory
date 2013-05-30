@@ -32,7 +32,7 @@ Contributors:
       <import feature="org.modelrefactoring.smells"/>
       <import feature="org.modelrefactoring.smells.ecore"/>
       <import feature="org.modelrefactoring.smells.roles"/>
-      <import plugin="org.qualitune.refactoring.energy.test"/>
+      <import plugin="org.emftext.refactoring.smell.java.energy"/>
    </requires>
 
    <plugin
