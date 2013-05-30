@@ -3,8 +3,12 @@
 		url="http://download.eclipse.org/releases/juno"/>
 	<associateSite label="The Eclipse Project Updates" 
 		url="http://download.eclipse.org/eclipse/updates/4.2"/>
+	<!-- needed for EMFText Access Plugin 1.4.2 -->
 	<associateSite label="EMFText Trunk"
-		url="http://www.emftext.org/update_trunk/"/>		
+		url="http://www.emftext.org/update_trunk/"/>	
+	<!-- needed for Reuseware Sokan Index -->	
+	<associateSite label="EMFText"
+		url="http://www.emftext.org/update/"/>
 	<associateSite label="Dresden OCL"
 		url="http://www.dresden-ocl.org/update/"/>
 	<associateSite label="EMF-IncQuery"
