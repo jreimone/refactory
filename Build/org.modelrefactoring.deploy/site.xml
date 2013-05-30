@@ -2,7 +2,7 @@
 <site
       associateSitesURL="http://www.modelrefactoring.org/update_trunk/associateSites.xml">
    <description name="Refactory">
-      Update site for the generic model refactoring tool Refactory.
+      Update site for the generic model refactoring tool Refactory. http://www.modelrefactoring.org
    </description>
    <feature url="features/org.modelrefactoring.runtime_0.0.0.v0.jar" id="org.modelrefactoring.runtime" version="0.0.0.v0">
       <category name="Refactory Core"/>
@@ -56,6 +56,9 @@
       <category name="Refactory Smells"/>
    </feature>
    <feature url="features/org.modelrefactoring.smells.roles_0.0.0.v0.jar" id="org.modelrefactoring.smells.roles" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.java_0.0.0.v0.jar" id="org.modelrefactoring.smells.java" version="0.0.0.v0">
       <category name="Refactory Smells"/>
    </feature>
    <category-def name="Refactory Core" label="Refactory Core"/>
