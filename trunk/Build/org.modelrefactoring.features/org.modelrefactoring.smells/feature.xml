@@ -6,7 +6,10 @@
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">
-      Refactory Smells: Support for registering smell definitions and correlate them with refactorins. If a smell is detected and a refactoring is registered to resolve it then a quickfix is provided for the smell.
+      Refactory Smells: Support for registering smell definitions and
+correlate them with refactorings. If a smell is detected and a
+refactoring is registered to resolve it then a quickfix is provided
+for the smell.
    </description>
 
    <copyright>
