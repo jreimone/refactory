@@ -6,7 +6,7 @@
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">
-      Refactory Smells and Refactoring Defaults
+      Refactory Smells and some default smells, such as some ecore, java and role models smells including their configuration.
    </description>
 
    <copyright>
@@ -32,18 +32,11 @@ Contributors:
       <import feature="org.modelrefactoring.smells"/>
       <import feature="org.modelrefactoring.smells.ecore"/>
       <import feature="org.modelrefactoring.smells.roles"/>
-      <import plugin="org.emftext.refactoring.smell.java.energy"/>
+      <import feature="org.modelrefactoring.smells.java"/>
    </requires>
 
    <plugin
          id="org.emftext.refactoring.smell.defaults"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.emftext.refactoring.smell.java.energy"
          download-size="0"
          install-size="0"
          version="0.0.0"
