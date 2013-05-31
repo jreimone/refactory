@@ -2,7 +2,7 @@
 <feature
       id="org.modelrefactoring.mappings.uml2"
       label="Refactorings for UML2 models"
-      version="0.9.1"
+      version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">

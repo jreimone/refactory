@@ -2,7 +2,7 @@
 <feature
       id="org.modelrefactoring.smells.defaults"
       label="Refactory Default Smells"
-      version="0.9.1"
+      version="0.0.0"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">
