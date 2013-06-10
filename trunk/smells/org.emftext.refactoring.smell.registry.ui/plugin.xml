@@ -84,5 +84,24 @@
             verticalRulerPreferenceValue="true">
 	  </specification>
    </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerSupport">
+      <markerContentGenerator
+            id="org.emftext.refactoring.smell.problem.contentgenerator"
+            name="Quality Smell Marker Content Generator">
+         <markerTypeReference
+               id="org.emftext.refactoring.smell.problem">
+         </markerTypeReference>
+         <markerFieldReference
+               id="org.eclipse.ui.ide.resourceField">
+         </markerFieldReference>
+         <markerFieldReference
+               id="org.eclipse.ui.ide.severityAndDescriptionField">
+         </markerFieldReference>
+         <markerFieldReference
+               id="org.eclipse.ui.ide.pathField">
+         </markerFieldReference>
+      </markerContentGenerator>
+   </extension>
 
 </plugin>
