@@ -3,7 +3,7 @@ package org.emftext.refactoring.smell.registry;
 
 public interface IQualitySmellMarker {
 	
-	public static final String ID			= "org.emftext.refactoring.smell.problem";
+	public static final String ID				= "org.emftext.refactoring.smell.problem";
 	public static final String ROLEMAPPING	= "roleMapping";
 	
 	/**
@@ -15,4 +15,10 @@ public interface IQualitySmellMarker {
 	 * and added to the marker. 
 	 */
 	public static final String EDITOR_ID	= "EDITOR_ID_ATTR";
+	
+	/**
+	 * This is the ID used in the markerSupport extension. And this, on the other side, is used to create
+	 * a quality smells view.
+	 */
+	public static final String CONTENT_GENERATOR_ID	= "org.emftext.refactoring.smell.problem.contentgenerator";
 }

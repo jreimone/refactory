@@ -135,7 +135,7 @@ public class SmellChecker implements IResourceChangeListener, IResourceDeltaVisi
 		}
 	}
 
-	private void removeAllMarkers(final IFile file) {
+	public static void removeAllMarkers(final IFile file) {
 		if(file == null || !file.exists()){
 			return;
 		}

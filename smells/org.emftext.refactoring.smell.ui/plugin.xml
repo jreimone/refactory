@@ -44,6 +44,13 @@
             id="org.emftext.refactoring.smell.ui.views.QualitiesView"
             name="Qualities">
       </view>
+      <view
+            category="org.emftext.refactory.ui.view"
+            class="org.emftext.refactoring.smell.ui.views.QualitySmellsView"
+            icon="icons/poop.png"
+            id="org.emftext.refactoring.smell.ui.views.QualitySmellsView"
+            name="Quality Smells">
+      </view>
    </extension>
 
 </plugin>
