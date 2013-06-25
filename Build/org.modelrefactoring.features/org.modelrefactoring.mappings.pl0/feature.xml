@@ -2,7 +2,7 @@
 <feature
       id="org.modelrefactoring.mappings.pl0"
       label="Refactorings for PL/0 models"
-      version="0.0.0"
+      version="0.9.1"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">
@@ -37,11 +37,6 @@ Contributors:
       <import plugin="org.emftext.language.pl0"/>
       <import plugin="org.emftext.language.pl0.resource.pl0"/>
       <import plugin="org.emftext.language.pl0.resource.pl0.ui"/>
-      <!--
-      <import plugin="org.emftext.language.pl0.extended"/>
-      <import plugin="org.emftext.language.pl0extended.resource.pl0extended"/>
-      <import plugin="org.emftext.language.pl0extended.resource.pl0extended.ui"/>
-      -->
    </requires>
 
    <plugin
