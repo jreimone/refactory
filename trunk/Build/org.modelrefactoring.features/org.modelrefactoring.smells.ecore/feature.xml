@@ -2,7 +2,7 @@
 <feature
       id="org.modelrefactoring.smells.ecore"
       label="Refactory Smells for Ecore"
-      version="0.0.0"
+      version="0.9.1"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">
