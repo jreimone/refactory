@@ -107,8 +107,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtim
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.1.0/R201306101317/mdt-ocl-runtime-core-4.1.0.zip
 
 // GEF
-get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.8.1/R201208200205/GEF-runtime-3.8.1.zip
-get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.8.1/R201208200205/GEF-zest-3.8.1.zip 
+get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.9.0/R201305060205/GEF-runtime-3.9.0.zip
+get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.9.0/R201305060205/GEF-zest-3.9.0.zip
 
 // EMFText
 git:https://github.com/DevBoost/EMFText.git!Core/Access/
