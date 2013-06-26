@@ -10,9 +10,11 @@
    <feature url="features/org.modelrefactoring.sdk_0.0.0.v0.jar" id="org.modelrefactoring.sdk" version="0.0.0.v0">
       <category name="Refactory Core"/>
    </feature>
+   <!--
    <feature url="features/org.modelrefactoring.codegen_0.0.0.v0.jar" id="org.modelrefactoring.codegen" version="0.0.0.v0">
       <category name="Refactory Core"/>
    </feature>
+   -->
    <feature url="features/org.modelrefactoring.genericrefactorings_0.0.0.v0.jar" id="org.modelrefactoring.genericrefactorings" version="0.0.0.v0">
       <category name="Refactory Core"/>
    </feature>
