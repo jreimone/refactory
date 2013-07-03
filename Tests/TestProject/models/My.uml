@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_SzPNkKg3EeK7e6cz3iyfoA" name="ContainerContainer">
+  <packagedElement xmi:type="uml:Class" xmi:id="_WqkEcKg3EeK7e6cz3iyfoA" name="OrigContainer">
+    <ownedOperation xmi:id="_dNvdkKg3EeK7e6cz3iyfoA" name="myOp">
+      <ownedParameter xmi:id="_ic9UcKg3EeK7e6cz3iyfoA" name="first" type="_WqkEcKg3EeK7e6cz3iyfoA"/>
+      <ownedParameter xmi:id="_eKaHs9QJEeKZ1uk4-caQaw" name="neueTestKlasse" type="_eKQ9wNQJEeKZ1uk4-caQaw"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_c-TBMKjYEeKr8NFhGCltmA" name="NewContainer">
+    <ownedAttribute xmi:id="_doMSwKjYEeKr8NFhGCltmA" name="second" type="_WqkEcKg3EeK7e6cz3iyfoA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_doMSwajYEeKr8NFhGCltmA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_doMSwqjYEeKr8NFhGCltmA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_doNg4KjYEeKr8NFhGCltmA" name="third" type="_WqkEcKg3EeK7e6cz3iyfoA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_doNg4ajYEeKr8NFhGCltmA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_doNg4qjYEeKr8NFhGCltmA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-5LOcKjcEeK6jdHmfw5O4g" name="TestBla">
+    <ownedAttribute xmi:id="_-5SjMKjcEeK6jdHmfw5O4g" name="newContainer" type="_c-TBMKjYEeKr8NFhGCltmA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-5SjMajcEeK6jdHmfw5O4g" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-5SjMqjcEeK6jdHmfw5O4g" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_GxASYLPKEeKIrPd77v4dbA" name="NewClass">
+    <ownedOperation xmi:id="_N5jpcLPKEeKIrPd77v4dbA" name="smellingOp">
+      <ownedParameter xmi:id="_QqI6sLPKEeKIrPd77v4dbA" name="op1"/>
+      <ownedParameter xmi:id="_TD4ZQLPKEeKIrPd77v4dbA" name="op2"/>
+      <ownedParameter xmi:id="_UbvkELPKEeKIrPd77v4dbA" name="op3"/>
+      <ownedParameter xmi:id="_WQGdoLPKEeKIrPd77v4dbA" name="op4"/>
+      <ownedParameter xmi:id="_xeRCoLPLEeKQ5b6T5J34FA" name="op6"/>
+      <ownedParameter xmi:id="_jqZ347PQEeKv85v_GO6JzQ" name="classssss" type="_jqRVALPQEeKv85v_GO6JzQ"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jqRVALPQEeKv85v_GO6JzQ" name="Classssss">
+    <ownedAttribute xmi:id="_jqZ34LPQEeKv85v_GO6JzQ" name="op5">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jqZ34bPQEeKv85v_GO6JzQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jqZ34rPQEeKv85v_GO6JzQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_eKQ9wNQJEeKZ1uk4-caQaw" name="NeueTestKlasse">
+    <ownedAttribute xmi:id="_eKY5kNQJEeKZ1uk4-caQaw" name="third" type="_WqkEcKg3EeK7e6cz3iyfoA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_eKY5kdQJEeKZ1uk4-caQaw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eKY5ktQJEeKZ1uk4-caQaw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_eKaHsNQJEeKZ1uk4-caQaw" name="testBla" type="_-5LOcKjcEeK6jdHmfw5O4g">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_eKaHsdQJEeKZ1uk4-caQaw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eKaHstQJEeKZ1uk4-caQaw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+</uml:Model>
