@@ -3,9 +3,9 @@
   <children xmi:type="notation:Node" xmi:id="_-mBDcOPYEeKald4t7VM2XQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_-mGjAOPYEeKald4t7VM2XQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_-mHKEOPYEeKald4t7VM2XQ" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_-mIYMOPYEeKald4t7VM2XQ" type="2001">
+      <children xmi:type="notation:Node" xmi:id="_4QEtsOPbEeKYNt0mcnp7mw" type="2001">
         <element xmi:type="ecore:EAttribute" href="DefaultName.ecore#//EClassOne/name"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-mIYMePYEeKald4t7VM2XQ"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4QEtsePbEeKYNt0mcnp7mw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_-mHKEePYEeKald4t7VM2XQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_-mHKEuPYEeKald4t7VM2XQ"/>
@@ -23,9 +23,9 @@
   <children xmi:type="notation:Node" xmi:id="_-mIYMuPYEeKald4t7VM2XQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_-mI_QOPYEeKald4t7VM2XQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_-mI_QePYEeKald4t7VM2XQ" type="5001">
-      <children xmi:type="notation:Node" xmi:id="__0isEOPYEeKald4t7VM2XQ" type="2001">
+      <children xmi:type="notation:Node" xmi:id="_6XaNoOPbEeKYNt0mcnp7mw" type="2001">
         <element xmi:type="ecore:EAttribute" href="DefaultName.ecore#//EClassTwo/name"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="__0isEePYEeKald4t7VM2XQ"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6XaNoePbEeKYNt0mcnp7mw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_-mI_QuPYEeKald4t7VM2XQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_-mI_Q-PYEeKald4t7VM2XQ"/>
