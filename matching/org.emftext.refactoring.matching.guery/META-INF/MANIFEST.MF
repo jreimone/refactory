@@ -10,8 +10,8 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.qualitune.guery,
  org.qualitune.guery.resource.guery,
  org.eclipse.emf.ecore.xmi,
- org.junit4,
  org.qualitune.evolution.guery,
  org.qualitune.evolution.guery.registry,
  org.emftext.language.pl0,
- org.qualitune.graph
+ org.qualitune.graph,
+ org.junit
