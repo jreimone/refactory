@@ -9,6 +9,11 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 public class TestpropertiesDynamicTokenStyler {
 	
 	/**
+	 * The offset in the text where the lexer started.
+	 */
+	private int offset;
+	
+	/**
 	 * This method is called to dynamically style tokens.
 	 * 
 	 * @param resource the TextResource that contains the token
@@ -21,6 +26,14 @@ public class TestpropertiesDynamicTokenStyler {
 		// implement dynamic token styling, set the overrideDynamicTokenStyler option to
 		// <code>false</code> and customize this method.
 		return staticStyle;
+	}
+	
+	public int getOffset() {
+		return offset;
+	}
+	
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 	
 }

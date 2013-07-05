@@ -63,7 +63,7 @@ public class TestpropertiesCodeCompletionHelper {
 		// Count the proposals before the cursor that match the prefix
 		int leftMatchingProposals = 0;
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal leftProposal : leftProposals) {
-			if (leftProposal.getMatchesPrefix()) {
+			if (leftProposal.isMatchesPrefix()) {
 				leftMatchingProposals++;
 			}
 		}
@@ -223,7 +223,7 @@ public class TestpropertiesCodeCompletionHelper {
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesExpectedElement expectedElement = (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesExpectedElement) expectedTerminal.getTerminal();
 		if (expectedElement instanceof org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString csString = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString) expectedElement;
-			return handleKeyword(expectedTerminal, csString, expectedTerminal.getPrefix());
+			return handleKeyword(expectedTerminal, csString, expectedTerminal.getPrefix(), expectedTerminal.getContainer());
 		} else if (expectedElement instanceof org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedBooleanTerminal) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedBooleanTerminal expectedBooleanTerminal = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedBooleanTerminal) expectedElement;
 			return handleBooleanTerminal(expectedTerminal, expectedBooleanTerminal, expectedTerminal.getPrefix());
@@ -319,7 +319,9 @@ public class TestpropertiesCodeCompletionHelper {
 						image = getImage((org.eclipse.emf.ecore.EObject) target);
 					}
 					boolean matchesPrefix = matches(identifier, prefix);
-					resultSet.add(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, identifier, prefix, matchesPrefix, reference, container, image));
+					org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, identifier, prefix, matchesPrefix, reference, container, image);
+					proposal.setReferenceTarget(target);
+					resultSet.add(proposal);
 				}
 			}
 			return resultSet;
@@ -352,10 +354,10 @@ public class TestpropertiesCodeCompletionHelper {
 	/**
 	 * Creates a set of completion proposals from the given keyword.
 	 */
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleKeyword(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString csString, String prefix) {
+	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleKeyword(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString csString, String prefix, org.eclipse.emf.ecore.EObject container) {
 		String proposal = csString.getValue();
 		boolean matchesPrefix = matches(proposal, prefix);
-		return java.util.Collections.singleton(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, proposal, prefix, matchesPrefix, null, null));
+		return java.util.Collections.singleton(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, proposal, prefix, matchesPrefix, null, container));
 	}
 	
 	/**

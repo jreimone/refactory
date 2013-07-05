@@ -23,7 +23,9 @@ public class TestpropertiesTokenScanner implements org.emftext.refactoring.tests
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource;
 	
 	/**
+	 * Creates a new TestpropertiesTokenScanner.
 	 * 
+	 * @param resource The resource to scan
 	 * @param colorManager A manager to obtain color objects
 	 */
 	public TestpropertiesTokenScanner(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesColorManager colorManager) {
@@ -99,25 +101,30 @@ public class TestpropertiesTokenScanner implements org.emftext.refactoring.tests
 	}
 	
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenStyle getStaticTokenStyle() {
-		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenStyle staticStyle = null;
 		String tokenName = currentToken.getName();
 		String enableKey = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.ENABLE);
-		boolean enabled = store.getBoolean(enableKey);
-		if (enabled) {
-			String colorKey = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.COLOR);
-			org.eclipse.swt.graphics.RGB foregroundRGB = org.eclipse.jface.preference.PreferenceConverter.getColor(store, colorKey);
-			org.eclipse.swt.graphics.RGB backgroundRGB = null;
-			boolean bold = store.getBoolean(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.BOLD));
-			boolean italic = store.getBoolean(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.ITALIC));
-			boolean strikethrough = store.getBoolean(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.STRIKETHROUGH));
-			boolean underline = store.getBoolean(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.UNDERLINE));
-			staticStyle = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTokenStyle(convertToIntArray(foregroundRGB), convertToIntArray(backgroundRGB), bold, italic, strikethrough, underline);
+		if (store == null) {
+			return null;
 		}
-		return staticStyle;
+		
+		boolean enabled = store.getBoolean(enableKey);
+		if (!enabled) {
+			return null;
+		}
+		
+		String colorKey = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.COLOR);
+		org.eclipse.swt.graphics.RGB foregroundRGB = org.eclipse.jface.preference.PreferenceConverter.getColor(store, colorKey);
+		org.eclipse.swt.graphics.RGB backgroundRGB = null;
+		boolean bold = store.getBoolean(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.BOLD));
+		boolean italic = store.getBoolean(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.ITALIC));
+		boolean strikethrough = store.getBoolean(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.STRIKETHROUGH));
+		boolean underline = store.getBoolean(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.UNDERLINE));
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTokenStyle(convertToIntArray(foregroundRGB), convertToIntArray(backgroundRGB), bold, italic, strikethrough, underline);
 	}
 	
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenStyle getDynamicTokenStyle(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenStyle staticStyle) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesDynamicTokenStyler dynamicTokenStyler = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesDynamicTokenStyler();
+		dynamicTokenStyler.setOffset(offset);
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenStyle dynamicStyle = dynamicTokenStyler.getDynamicTokenStyle(resource, currentToken, staticStyle);
 		return dynamicStyle;
 	}

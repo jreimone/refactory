@@ -134,4 +134,8 @@ public class TestpropertiesCopiedEList<E> implements org.eclipse.emf.common.util
 		return copy.toArray(a);
 	}
 	
+	public String toString() {
+		return copy.toString();
+	}
+	
 }

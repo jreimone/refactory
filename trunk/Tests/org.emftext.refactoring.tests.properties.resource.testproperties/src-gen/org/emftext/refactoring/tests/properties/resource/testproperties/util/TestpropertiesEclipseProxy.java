@@ -99,7 +99,12 @@ public class TestpropertiesEclipseProxy {
 	public org.eclipse.core.resources.IFile getFileForURI(org.eclipse.emf.common.util.URI uri) {
 		org.eclipse.core.resources.IWorkspace workspace = org.eclipse.core.resources.ResourcesPlugin.getWorkspace();
 		org.eclipse.core.resources.IWorkspaceRoot workspaceRoot = workspace.getRoot();
-		org.eclipse.core.runtime.Path path = new org.eclipse.core.runtime.Path(uri.toPlatformString(true));
+		String platformString = uri.toPlatformString(true);
+		// If the URI is not a platform URI, we cannot determine the file.
+		if (platformString == null) {
+			return null;
+		}
+		org.eclipse.core.runtime.Path path = new org.eclipse.core.runtime.Path(platformString);
 		return workspaceRoot.getFile(path);
 	}
 	

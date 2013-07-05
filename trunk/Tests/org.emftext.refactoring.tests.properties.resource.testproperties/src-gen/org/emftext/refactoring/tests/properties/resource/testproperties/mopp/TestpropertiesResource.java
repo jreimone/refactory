@@ -78,7 +78,6 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem;
 		
 		public PositionBasedTextDiagnostic(org.eclipse.emf.common.util.URI uri, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem, int column, int line, int charStart, int charEnd) {
-			
 			super();
 			this.uri = uri;
 			this.column = column;
@@ -213,6 +212,9 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 			
 			clearState();
 			unloadAndClearContents();
+			// We must set the load options again since they are deleted by the unload()
+			// method.
+			this.loadOptions = options;
 			org.eclipse.emf.ecore.EObject root = null;
 			if (result != null) {
 				root = result.getRoot();
@@ -252,15 +254,14 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	
 	protected void unloadAndClearContents() {
 		java.util.List<org.eclipse.emf.ecore.EObject> contentsInternal = getContentsInternal();
+		// unload the root objects
 		for (org.eclipse.emf.ecore.EObject eObject : contentsInternal) {
-			// unload the root object
-			unloaded((org.eclipse.emf.ecore.InternalEObject) eObject);
-			// unload all children
-			java.util.Iterator<org.eclipse.emf.ecore.EObject> allContents = eObject.eAllContents();
-			while (allContents.hasNext()) {
-				unloaded((org.eclipse.emf.ecore.InternalEObject) allContents.next());
+			if (eObject instanceof org.eclipse.emf.ecore.InternalEObject) {
+				unloaded((org.eclipse.emf.ecore.InternalEObject) eObject);
 			}
 		}
+		// unload all children using the super class method
+		unload();
 		// now we can clear the contents
 		contentsInternal.clear();
 	}
@@ -349,6 +350,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter printer = getMetaInformation().createPrinter(outputStream, this);
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
 		printer.setEncoding(getEncoding(options));
+		printer.setOptions(options);
 		referenceResolverSwitch.setOptions(options);
 		for (org.eclipse.emf.ecore.EObject root : getContentsInternal()) {
 			if (isLayoutInformationRecordingEnabled()) {
@@ -814,21 +816,24 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		if (loadOptions == null) {
 			return true;
 		}
-		return !loadOptions.containsKey(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS);
+		Object value = loadOptions.get(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS);
+		return value == null || Boolean.FALSE.equals(value);
 	}
 	
-	protected boolean isLocationMapEnabled() {
+	public boolean isLocationMapEnabled() {
 		if (loadOptions == null) {
 			return true;
 		}
-		return !loadOptions.containsKey(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_LOCATION_MAP);
+		Object value = loadOptions.get(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_LOCATION_MAP);
+		return value == null || Boolean.FALSE.equals(value);
 	}
 	
-	protected boolean isLayoutInformationRecordingEnabled() {
+	public boolean isLayoutInformationRecordingEnabled() {
 		if (loadOptions == null) {
 			return true;
 		}
-		return !loadOptions.containsKey(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_LAYOUT_INFORMATION_RECORDING);
+		Object value = loadOptions.get(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_LAYOUT_INFORMATION_RECORDING);
+		return value == null || Boolean.FALSE.equals(value);
 	}
 	
 }

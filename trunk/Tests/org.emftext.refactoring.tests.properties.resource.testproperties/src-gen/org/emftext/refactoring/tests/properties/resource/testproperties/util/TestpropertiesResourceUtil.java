@@ -95,10 +95,17 @@ public class TestpropertiesResourceUtil {
 	 * Returns the resource after parsing the given text.
 	 */
 	public static org.eclipse.emf.ecore.resource.Resource getResource(String text) {
+		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		return getResource(text, resourceSet);
+	}
+	
+	/**
+	 * Returns the resource after parsing the given text.
+	 */
+	public static org.eclipse.emf.ecore.resource.Resource getResource(String text, org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation();
 		metaInformation.registerResourceFactory();
 		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
-		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
 		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);
 		if (resource == null) {
 			return null;
@@ -162,7 +169,7 @@ public class TestpropertiesResourceUtil {
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation();
 		metaInformation.registerResourceFactory();
 		org.eclipse.emf.ecore.resource.ResourceSet rs = null;
-		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource = (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource) eObject.eResource();
+		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource resource = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource) eObject.eResource();
 		if (resource != null) {
 			rs = resource.getResourceSet();
 		}
@@ -171,7 +178,13 @@ public class TestpropertiesResourceUtil {
 		}
 		if (resource == null) {
 			org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
-			resource = (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource) rs.createResource(uri);
+			resource = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource) rs.createResource(uri);
+		}
+		// Convert layout information to EAdapters because the printer retrieves layout
+		// information from these adapters.
+		org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesLayoutUtil layoutUtil = new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesLayoutUtil();
+		if (resource.isLayoutInformationRecordingEnabled()) {
+			layoutUtil.transferAllLayoutInformationFromModel(eObject);
 		}
 		java.io.ByteArrayOutputStream outputStream = new java.io.ByteArrayOutputStream();
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter printer = metaInformation.createPrinter(outputStream, resource);
@@ -179,6 +192,10 @@ public class TestpropertiesResourceUtil {
 			printer.print(eObject);
 		} catch (java.io.IOException e) {
 			return null;
+		}
+		// Move layout information from EAdapters back to the model.
+		if (resource.isLayoutInformationRecordingEnabled()) {
+			layoutUtil.transferAllLayoutInformationToModel(eObject);
 		}
 		return outputStream.toString();
 	}

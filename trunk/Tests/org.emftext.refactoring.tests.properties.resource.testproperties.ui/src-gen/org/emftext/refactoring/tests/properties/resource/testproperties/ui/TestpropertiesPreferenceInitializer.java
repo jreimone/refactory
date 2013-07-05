@@ -7,7 +7,7 @@
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
 /**
- * A class used to initialize default preference values.
+ * This class can be used to initialize default preference values.
  */
 public class TestpropertiesPreferenceInitializer extends org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer {
 	
@@ -23,9 +23,22 @@ public class TestpropertiesPreferenceInitializer extends org.eclipse.core.runtim
 		
 	}
 	
-	private void initializeDefaultBrackets() {
+	protected void initializeDefaultBrackets() {
 		org.eclipse.jface.preference.IPreferenceStore store = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.getDefault().getPreferenceStore();
 		initializeDefaultBrackets(store, new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation());
+	}
+	
+	protected void initializeDefaultBrackets(org.eclipse.jface.preference.IPreferenceStore store, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesMetaInformation metaInformation) {
+		String languageId = metaInformation.getSyntaxName();
+		// set default brackets
+		org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketSet bracketSet = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketSet();
+		final java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair> bracketPairs = metaInformation.getBracketPairs();
+		if (bracketPairs != null) {
+			for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
+				bracketSet.addBracketPair(bracketPair.getOpeningBracket(), bracketPair.getClosingBracket(), bracketPair.isClosingEnabledInside(), bracketPair.isCloseAfterEnter());
+			}
+		}
+		store.setDefault(languageId + org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSet.serialize());
 	}
 	
 	public void initializeDefaultSyntaxHighlighting() {
@@ -33,20 +46,7 @@ public class TestpropertiesPreferenceInitializer extends org.eclipse.core.runtim
 		initializeDefaultSyntaxHighlighting(store, new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation());
 	}
 	
-	private void initializeDefaultBrackets(org.eclipse.jface.preference.IPreferenceStore store, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesMetaInformation metaInformation) {
-		String languageId = metaInformation.getSyntaxName();
-		// set default brackets for ITextResource bracket set
-		org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketSet bracketSet = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketSet(null, null);
-		final java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair> bracketPairs = metaInformation.getBracketPairs();
-		if (bracketPairs != null) {
-			for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
-				bracketSet.addBracketPair(bracketPair.getOpeningBracket(), bracketPair.getClosingBracket(), bracketPair.isClosingEnabledInside());
-			}
-		}
-		store.setDefault(languageId + org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSet.getBracketString());
-	}
-	
-	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation metaInformation) {
+	protected void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation metaInformation) {
 		String languageId = metaInformation.getSyntaxName();
 		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
 		if (tokenNames == null) {
@@ -64,7 +64,7 @@ public class TestpropertiesPreferenceInitializer extends org.eclipse.core.runtim
 		}
 	}
 	
-	private void setProperties(org.eclipse.jface.preference.IPreferenceStore store, String languageID, String tokenName, String color, boolean bold, boolean enable, boolean italic, boolean strikethrough, boolean underline) {
+	protected void setProperties(org.eclipse.jface.preference.IPreferenceStore store, String languageID, String tokenName, String color, boolean bold, boolean enable, boolean italic, boolean strikethrough, boolean underline) {
 		store.setDefault(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.BOLD), bold);
 		store.setDefault(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.COLOR), color);
 		store.setDefault(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.ENABLE), enable);
@@ -73,7 +73,7 @@ public class TestpropertiesPreferenceInitializer extends org.eclipse.core.runtim
 		store.setDefault(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSyntaxColoringHelper.StyleProperty.UNDERLINE), underline);
 	}
 	
-	private String getColorString(int[] colorAsRGB) {
+	protected String getColorString(int[] colorAsRGB) {
 		if (colorAsRGB == null) {
 			return "0,0,0";
 		}
@@ -82,4 +82,6 @@ public class TestpropertiesPreferenceInitializer extends org.eclipse.core.runtim
 		}
 		return colorAsRGB[0] + "," +colorAsRGB[1] + ","+ colorAsRGB[2];
 	}
+	
 }
+

@@ -83,7 +83,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
     	/**
     	 * Another helper list to allow a lexer to pass positions of errors to its parser
     	 */
-    	protected java.util.List<Integer> lexerExceptionsPosition = java.util.Collections.synchronizedList(new java.util.ArrayList<Integer>());
+    	protected java.util.List<Integer> lexerExceptionPositions = java.util.Collections.synchronizedList(new java.util.ArrayList<Integer>());
     	
     	/**
     	 * A stack for incomplete objects. This stack is used filled when the parser is
@@ -113,6 +113,13 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
     	
     	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap;
     	
+    	private org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesSyntaxErrorMessageConverter syntaxErrorMessageConverter = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesSyntaxErrorMessageConverter(tokenNames);
+    	
+    	@Override	
+    	public void reportError(org.antlr.runtime3_4_0.RecognitionException re) {
+    		addErrorToResource(syntaxErrorMessageConverter.translateParseError(re));
+    	}
+    	
     	protected void addErrorToResource(final String errorMessage, final int column, final int line, final int startIndex, final int stopIndex) {
     		postParseCommands.add(new org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>() {
     			public boolean execute(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource) {
@@ -137,6 +144,13 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
     				return true;
     			}
     		});
+    	}
+    	
+    	protected void addErrorToResource(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLocalizedMessage message) {
+    		if (message == null) {
+    			return;
+    		}
+    		addErrorToResource(message.getMessage(), message.getColumn(), message.getLine(), message.getCharStart(), message.getCharEnd());
     	}
     	
     	public void addExpectedElement(org.eclipse.emf.ecore.EClass eClass, int[] ids) {
@@ -256,7 +270,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
     		this.lastPosition = 0;
     		// required because the lexer class can not be subclassed
     		((TestpropertiesLexer) getTokenStream().getTokenSource()).lexerExceptions = lexerExceptions;
-    		((TestpropertiesLexer) getTokenStream().getTokenSource()).lexerExceptionsPosition = lexerExceptionsPosition;
+    		((TestpropertiesLexer) getTokenStream().getTokenSource()).lexerExceptionPositions = lexerExceptionPositions;
     		Object typeObject = getTypeObject();
     		if (typeObject == null) {
     			return start();
@@ -331,7 +345,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
     				parseResult.setLocationMap(locationMap);
     			}
     		} catch (org.antlr.runtime3_4_0.RecognitionException re) {
-    			reportError(re);
+    			addErrorToResource(syntaxErrorMessageConverter.translateParseError(re));
     		} catch (java.lang.IllegalArgumentException iae) {
     			if ("The 'no null' constraint is violated".equals(iae.getMessage())) {
     				// can be caused if a null is set on EMF models where not allowed. this will just
@@ -341,7 +355,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
     			}
     		}
     		for (org.antlr.runtime3_4_0.RecognitionException re : lexerExceptions) {
-    			reportLexicalError(re);
+    			addErrorToResource(syntaxErrorMessageConverter.translateLexicalError(re, lexerExceptions, lexerExceptionPositions));
     		}
     		parseResult.getPostParseCommands().addAll(postParseCommands);
     		return parseResult;
@@ -453,79 +467,6 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
     		}
     	}
     	
-    	/**
-    	 * Translates errors thrown by the parser into human readable messages.
-    	 */
-    	public void reportError(final org.antlr.runtime3_4_0.RecognitionException e)  {
-    		String message = e.getMessage();
-    		if (e instanceof org.antlr.runtime3_4_0.MismatchedTokenException) {
-    			org.antlr.runtime3_4_0.MismatchedTokenException mte = (org.antlr.runtime3_4_0.MismatchedTokenException) e;
-    			String expectedTokenName = formatTokenName(mte.expecting);
-    			String actualTokenName = formatTokenName(e.token.getType());
-    			message = "Syntax error on token \"" + e.token.getText() + " (" + actualTokenName + ")\", \"" + expectedTokenName + "\" expected";
-    		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedTreeNodeException) {
-    			org.antlr.runtime3_4_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_4_0.MismatchedTreeNodeException) e;
-    			String expectedTokenName = formatTokenName(mtne.expecting);
-    			message = "mismatched tree node: " + "xxx" + "; tokenName " + expectedTokenName;
-    		} else if (e instanceof org.antlr.runtime3_4_0.NoViableAltException) {
-    			message = "Syntax error on token \"" + e.token.getText() + "\", check following tokens";
-    		} else if (e instanceof org.antlr.runtime3_4_0.EarlyExitException) {
-    			message = "Syntax error on token \"" + e.token.getText() + "\", delete this token";
-    		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedSetException) {
-    			org.antlr.runtime3_4_0.MismatchedSetException mse = (org.antlr.runtime3_4_0.MismatchedSetException) e;
-    			message = "mismatched token: " + e.token + "; expecting set " + mse.expecting;
-    		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedNotSetException) {
-    			org.antlr.runtime3_4_0.MismatchedNotSetException mse = (org.antlr.runtime3_4_0.MismatchedNotSetException) e;
-    			message = "mismatched token: " +  e.token + "; expecting set " + mse.expecting;
-    		} else if (e instanceof org.antlr.runtime3_4_0.FailedPredicateException) {
-    			org.antlr.runtime3_4_0.FailedPredicateException fpe = (org.antlr.runtime3_4_0.FailedPredicateException) e;
-    			message = "rule " + fpe.ruleName + " failed predicate: {" +  fpe.predicateText + "}?";
-    		}
-    		// the resource may be null if the parser is used for code completion
-    		final String finalMessage = message;
-    		if (e.token instanceof org.antlr.runtime3_4_0.CommonToken) {
-    			final org.antlr.runtime3_4_0.CommonToken ct = (org.antlr.runtime3_4_0.CommonToken) e.token;
-    			addErrorToResource(finalMessage, ct.getCharPositionInLine(), ct.getLine(), ct.getStartIndex(), ct.getStopIndex());
-    		} else {
-    			int position = 1;
-    			int line = 1;
-    			if (e.token != null) {
-    				position = e.token.getCharPositionInLine();
-    				line = e.token.getLine();
-    			}
-    			addErrorToResource(finalMessage, position, line, 1, 5);
-    		}
-    	}
-    	
-    	/**
-    	 * Translates errors thrown by the lexer into human readable messages.
-    	 */
-    	public void reportLexicalError(final org.antlr.runtime3_4_0.RecognitionException e)  {
-    		String message = "";
-    		if (e instanceof org.antlr.runtime3_4_0.MismatchedTokenException) {
-    			org.antlr.runtime3_4_0.MismatchedTokenException mte = (org.antlr.runtime3_4_0.MismatchedTokenException) e;
-    			message = "Syntax error on token \"" + ((char) e.c) + "\", \"" + (char) mte.expecting + "\" expected";
-    		} else if (e instanceof org.antlr.runtime3_4_0.NoViableAltException) {
-    			message = "Syntax error on token \"" + ((char) e.c) + "\", delete this token";
-    		} else if (e instanceof org.antlr.runtime3_4_0.EarlyExitException) {
-    			org.antlr.runtime3_4_0.EarlyExitException eee = (org.antlr.runtime3_4_0.EarlyExitException) e;
-    			message = "required (...)+ loop (decision=" + eee.decisionNumber + ") did not match anything; on line " + e.line + ":" + e.charPositionInLine + " char=" + ((char) e.c) + "'";
-    		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedSetException) {
-    			org.antlr.runtime3_4_0.MismatchedSetException mse = (org.antlr.runtime3_4_0.MismatchedSetException) e;
-    			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-    		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedNotSetException) {
-    			org.antlr.runtime3_4_0.MismatchedNotSetException mse = (org.antlr.runtime3_4_0.MismatchedNotSetException) e;
-    			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-    		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedRangeException) {
-    			org.antlr.runtime3_4_0.MismatchedRangeException mre = (org.antlr.runtime3_4_0.MismatchedRangeException) e;
-    			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set '" + (char) mre.a + "'..'" + (char) mre.b + "'";
-    		} else if (e instanceof org.antlr.runtime3_4_0.FailedPredicateException) {
-    			org.antlr.runtime3_4_0.FailedPredicateException fpe = (org.antlr.runtime3_4_0.FailedPredicateException) e;
-    			message = "rule " + fpe.ruleName + " failed predicate: {" + fpe.predicateText + "}?";
-    		}
-    		addErrorToResource(message, e.charPositionInLine, e.line, lexerExceptionsPosition.get(lexerExceptions.indexOf(e)), lexerExceptionsPosition.get(lexerExceptions.indexOf(e)));
-    	}
-    	
     	private void startIncompleteElement(Object object) {
     		if (object instanceof org.eclipse.emf.ecore.EObject) {
     			this.incompleteObjects.add((org.eclipse.emf.ecore.EObject) object);
@@ -555,7 +496,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
 
     // $ANTLR start "start"
-    // Testproperties.g:530:1: start returns [ org.eclipse.emf.ecore.EObject element = null] : (c0= parse_org_emftext_refactoring_tests_properties_PropertyModel ) EOF ;
+    // Testproperties.g:471:1: start returns [ org.eclipse.emf.ecore.EObject element = null] : (c0= parse_org_emftext_refactoring_tests_properties_PropertyModel ) EOF ;
     public final org.eclipse.emf.ecore.EObject start() throws RecognitionException {
         org.eclipse.emf.ecore.EObject element =  null;
 
@@ -567,8 +508,8 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 1) ) { return element; }
 
-            // Testproperties.g:531:2: ( (c0= parse_org_emftext_refactoring_tests_properties_PropertyModel ) EOF )
-            // Testproperties.g:532:2: (c0= parse_org_emftext_refactoring_tests_properties_PropertyModel ) EOF
+            // Testproperties.g:472:2: ( (c0= parse_org_emftext_refactoring_tests_properties_PropertyModel ) EOF )
+            // Testproperties.g:473:2: (c0= parse_org_emftext_refactoring_tests_properties_PropertyModel ) EOF
             {
             if ( state.backtracking==0 ) {
             		// follow set for start rule(s)
@@ -576,8 +517,8 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
             		expectedElementsIndexOfLastCompleteElement = 0;
             	}
 
-            // Testproperties.g:537:2: (c0= parse_org_emftext_refactoring_tests_properties_PropertyModel )
-            // Testproperties.g:538:3: c0= parse_org_emftext_refactoring_tests_properties_PropertyModel
+            // Testproperties.g:478:2: (c0= parse_org_emftext_refactoring_tests_properties_PropertyModel )
+            // Testproperties.g:479:3: c0= parse_org_emftext_refactoring_tests_properties_PropertyModel
             {
             pushFollow(FOLLOW_parse_org_emftext_refactoring_tests_properties_PropertyModel_in_start82);
             c0=parse_org_emftext_refactoring_tests_properties_PropertyModel();
@@ -616,7 +557,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_refactoring_tests_properties_PropertyModel"
-    // Testproperties.g:546:1: parse_org_emftext_refactoring_tests_properties_PropertyModel returns [org.emftext.refactoring.tests.properties.PropertyModel element = null] : ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) ) )* ;
+    // Testproperties.g:487:1: parse_org_emftext_refactoring_tests_properties_PropertyModel returns [org.emftext.refactoring.tests.properties.PropertyModel element = null] : ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) ) )* ;
     public final org.emftext.refactoring.tests.properties.PropertyModel parse_org_emftext_refactoring_tests_properties_PropertyModel() throws RecognitionException {
         org.emftext.refactoring.tests.properties.PropertyModel element =  null;
 
@@ -630,10 +571,10 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
 
-            // Testproperties.g:549:2: ( ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) ) )* )
-            // Testproperties.g:550:2: ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) ) )*
+            // Testproperties.g:490:2: ( ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) ) )* )
+            // Testproperties.g:491:2: ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) ) )*
             {
-            // Testproperties.g:550:2: ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) ) )*
+            // Testproperties.g:491:2: ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -646,13 +587,13 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
                 switch (alt1) {
             	case 1 :
-            	    // Testproperties.g:551:3: ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) )
+            	    // Testproperties.g:492:3: ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) )
             	    {
-            	    // Testproperties.g:551:3: ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) )
-            	    // Testproperties.g:552:4: (a0_0= parse_org_emftext_refactoring_tests_properties_Category )
+            	    // Testproperties.g:492:3: ( (a0_0= parse_org_emftext_refactoring_tests_properties_Category ) )
+            	    // Testproperties.g:493:4: (a0_0= parse_org_emftext_refactoring_tests_properties_Category )
             	    {
-            	    // Testproperties.g:552:4: (a0_0= parse_org_emftext_refactoring_tests_properties_Category )
-            	    // Testproperties.g:553:5: a0_0= parse_org_emftext_refactoring_tests_properties_Category
+            	    // Testproperties.g:493:4: (a0_0= parse_org_emftext_refactoring_tests_properties_Category )
+            	    // Testproperties.g:494:5: a0_0= parse_org_emftext_refactoring_tests_properties_Category
             	    {
             	    pushFollow(FOLLOW_parse_org_emftext_refactoring_tests_properties_Category_in_parse_org_emftext_refactoring_tests_properties_PropertyModel130);
             	    a0_0=parse_org_emftext_refactoring_tests_properties_Category();
@@ -725,7 +666,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_refactoring_tests_properties_Category"
-    // Testproperties.g:587:1: parse_org_emftext_refactoring_tests_properties_Category returns [org.emftext.refactoring.tests.properties.Category element = null] : (a0= QUOTED_91_93 ) ( (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair ) )* ;
+    // Testproperties.g:528:1: parse_org_emftext_refactoring_tests_properties_Category returns [org.emftext.refactoring.tests.properties.Category element = null] : (a0= QUOTED_91_93 ) ( (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair ) )* ;
     public final org.emftext.refactoring.tests.properties.Category parse_org_emftext_refactoring_tests_properties_Category() throws RecognitionException {
         org.emftext.refactoring.tests.properties.Category element =  null;
 
@@ -740,11 +681,11 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
 
-            // Testproperties.g:590:2: ( (a0= QUOTED_91_93 ) ( (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair ) )* )
-            // Testproperties.g:591:2: (a0= QUOTED_91_93 ) ( (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair ) )*
+            // Testproperties.g:531:2: ( (a0= QUOTED_91_93 ) ( (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair ) )* )
+            // Testproperties.g:532:2: (a0= QUOTED_91_93 ) ( (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair ) )*
             {
-            // Testproperties.g:591:2: (a0= QUOTED_91_93 )
-            // Testproperties.g:592:3: a0= QUOTED_91_93
+            // Testproperties.g:532:2: (a0= QUOTED_91_93 )
+            // Testproperties.g:533:3: a0= QUOTED_91_93
             {
             a0=(Token)match(input,QUOTED_91_93,FOLLOW_QUOTED_91_93_in_parse_org_emftext_refactoring_tests_properties_Category190); if (state.failed) return element;
 
@@ -788,7 +729,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
             		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel(), org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectationConstants.EXPECTATIONS[6]);
             	}
 
-            // Testproperties.g:630:2: ( (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair ) )*
+            // Testproperties.g:571:2: ( (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair ) )*
             loop2:
             do {
                 int alt2=2;
@@ -801,10 +742,10 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
                 switch (alt2) {
             	case 1 :
-            	    // Testproperties.g:631:3: (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair )
+            	    // Testproperties.g:572:3: (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair )
             	    {
-            	    // Testproperties.g:631:3: (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair )
-            	    // Testproperties.g:632:4: a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair
+            	    // Testproperties.g:572:3: (a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair )
+            	    // Testproperties.g:573:4: a1_0= parse_org_emftext_refactoring_tests_properties_KeyValuePair
             	    {
             	    pushFollow(FOLLOW_parse_org_emftext_refactoring_tests_properties_KeyValuePair_in_parse_org_emftext_refactoring_tests_properties_Category220);
             	    a1_0=parse_org_emftext_refactoring_tests_properties_KeyValuePair();
@@ -872,7 +813,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_refactoring_tests_properties_KeyValuePair"
-    // Testproperties.g:663:1: parse_org_emftext_refactoring_tests_properties_KeyValuePair returns [org.emftext.refactoring.tests.properties.KeyValuePair element = null] : ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' ) )? (a2_0= parse_org_emftext_refactoring_tests_properties_Value ) ;
+    // Testproperties.g:604:1: parse_org_emftext_refactoring_tests_properties_KeyValuePair returns [org.emftext.refactoring.tests.properties.KeyValuePair element = null] : ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' ) )? (a2_0= parse_org_emftext_refactoring_tests_properties_Value ) ;
     public final org.emftext.refactoring.tests.properties.KeyValuePair parse_org_emftext_refactoring_tests_properties_KeyValuePair() throws RecognitionException {
         org.emftext.refactoring.tests.properties.KeyValuePair element =  null;
 
@@ -889,10 +830,10 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return element; }
 
-            // Testproperties.g:666:2: ( ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' ) )? (a2_0= parse_org_emftext_refactoring_tests_properties_Value ) )
-            // Testproperties.g:667:2: ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' ) )? (a2_0= parse_org_emftext_refactoring_tests_properties_Value )
+            // Testproperties.g:607:2: ( ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' ) )? (a2_0= parse_org_emftext_refactoring_tests_properties_Value ) )
+            // Testproperties.g:608:2: ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' ) )? (a2_0= parse_org_emftext_refactoring_tests_properties_Value )
             {
-            // Testproperties.g:667:2: ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' ) )?
+            // Testproperties.g:608:2: ( ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -901,13 +842,13 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
             }
             switch (alt3) {
                 case 1 :
-                    // Testproperties.g:668:3: ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' )
+                    // Testproperties.g:609:3: ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' )
                     {
-                    // Testproperties.g:668:3: ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' )
-                    // Testproperties.g:669:4: (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '='
+                    // Testproperties.g:609:3: ( (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '=' )
+                    // Testproperties.g:610:4: (a0_0= parse_org_emftext_refactoring_tests_properties_Key ) a1= '='
                     {
-                    // Testproperties.g:669:4: (a0_0= parse_org_emftext_refactoring_tests_properties_Key )
-                    // Testproperties.g:670:5: a0_0= parse_org_emftext_refactoring_tests_properties_Key
+                    // Testproperties.g:610:4: (a0_0= parse_org_emftext_refactoring_tests_properties_Key )
+                    // Testproperties.g:611:5: a0_0= parse_org_emftext_refactoring_tests_properties_Key
                     {
                     pushFollow(FOLLOW_parse_org_emftext_refactoring_tests_properties_Key_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair276);
                     a0_0=parse_org_emftext_refactoring_tests_properties_Key();
@@ -976,8 +917,8 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
             		addExpectedElement(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair(), org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectationConstants.EXPECTATIONS[15]);
             	}
 
-            // Testproperties.g:718:2: (a2_0= parse_org_emftext_refactoring_tests_properties_Value )
-            // Testproperties.g:719:3: a2_0= parse_org_emftext_refactoring_tests_properties_Value
+            // Testproperties.g:659:2: (a2_0= parse_org_emftext_refactoring_tests_properties_Value )
+            // Testproperties.g:660:3: a2_0= parse_org_emftext_refactoring_tests_properties_Value
             {
             pushFollow(FOLLOW_parse_org_emftext_refactoring_tests_properties_Value_in_parse_org_emftext_refactoring_tests_properties_KeyValuePair341);
             a2_0=parse_org_emftext_refactoring_tests_properties_Value();
@@ -1036,7 +977,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_refactoring_tests_properties_Key"
-    // Testproperties.g:749:1: parse_org_emftext_refactoring_tests_properties_Key returns [org.emftext.refactoring.tests.properties.Key element = null] : (a0= TEXT ) ;
+    // Testproperties.g:690:1: parse_org_emftext_refactoring_tests_properties_Key returns [org.emftext.refactoring.tests.properties.Key element = null] : (a0= TEXT ) ;
     public final org.emftext.refactoring.tests.properties.Key parse_org_emftext_refactoring_tests_properties_Key() throws RecognitionException {
         org.emftext.refactoring.tests.properties.Key element =  null;
 
@@ -1049,11 +990,11 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return element; }
 
-            // Testproperties.g:752:2: ( (a0= TEXT ) )
-            // Testproperties.g:753:2: (a0= TEXT )
+            // Testproperties.g:693:2: ( (a0= TEXT ) )
+            // Testproperties.g:694:2: (a0= TEXT )
             {
-            // Testproperties.g:753:2: (a0= TEXT )
-            // Testproperties.g:754:3: a0= TEXT
+            // Testproperties.g:694:2: (a0= TEXT )
+            // Testproperties.g:695:3: a0= TEXT
             {
             a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_emftext_refactoring_tests_properties_Key378); if (state.failed) return element;
 
@@ -1114,7 +1055,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue"
-    // Testproperties.g:791:1: parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue returns [org.emftext.refactoring.tests.properties.EObjectReferenceValue element = null] : (a0= QUOTED_60_62 ) ;
+    // Testproperties.g:732:1: parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue returns [org.emftext.refactoring.tests.properties.EObjectReferenceValue element = null] : (a0= QUOTED_60_62 ) ;
     public final org.emftext.refactoring.tests.properties.EObjectReferenceValue parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue() throws RecognitionException {
         org.emftext.refactoring.tests.properties.EObjectReferenceValue element =  null;
 
@@ -1127,11 +1068,11 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return element; }
 
-            // Testproperties.g:794:2: ( (a0= QUOTED_60_62 ) )
-            // Testproperties.g:795:2: (a0= QUOTED_60_62 )
+            // Testproperties.g:735:2: ( (a0= QUOTED_60_62 ) )
+            // Testproperties.g:736:2: (a0= QUOTED_60_62 )
             {
-            // Testproperties.g:795:2: (a0= QUOTED_60_62 )
-            // Testproperties.g:796:3: a0= QUOTED_60_62
+            // Testproperties.g:736:2: (a0= QUOTED_60_62 )
+            // Testproperties.g:737:3: a0= QUOTED_60_62
             {
             a0=(Token)match(input,QUOTED_60_62,FOLLOW_QUOTED_60_62_in_parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue418); if (state.failed) return element;
 
@@ -1199,7 +1140,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_refactoring_tests_properties_StringValue"
-    // Testproperties.g:840:1: parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.refactoring.tests.properties.StringValue element = null] : (a0= QUOTED_34_34 ) ;
+    // Testproperties.g:781:1: parse_org_emftext_refactoring_tests_properties_StringValue returns [org.emftext.refactoring.tests.properties.StringValue element = null] : (a0= QUOTED_34_34 ) ;
     public final org.emftext.refactoring.tests.properties.StringValue parse_org_emftext_refactoring_tests_properties_StringValue() throws RecognitionException {
         org.emftext.refactoring.tests.properties.StringValue element =  null;
 
@@ -1212,11 +1153,11 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return element; }
 
-            // Testproperties.g:843:2: ( (a0= QUOTED_34_34 ) )
-            // Testproperties.g:844:2: (a0= QUOTED_34_34 )
+            // Testproperties.g:784:2: ( (a0= QUOTED_34_34 ) )
+            // Testproperties.g:785:2: (a0= QUOTED_34_34 )
             {
-            // Testproperties.g:844:2: (a0= QUOTED_34_34 )
-            // Testproperties.g:845:3: a0= QUOTED_34_34
+            // Testproperties.g:785:2: (a0= QUOTED_34_34 )
+            // Testproperties.g:786:3: a0= QUOTED_34_34
             {
             a0=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_emftext_refactoring_tests_properties_StringValue458); if (state.failed) return element;
 
@@ -1280,7 +1221,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
 
 
     // $ANTLR start "parse_org_emftext_refactoring_tests_properties_Value"
-    // Testproperties.g:885:1: parse_org_emftext_refactoring_tests_properties_Value returns [org.emftext.refactoring.tests.properties.Value element = null] : (c0= parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue |c1= parse_org_emftext_refactoring_tests_properties_StringValue );
+    // Testproperties.g:826:1: parse_org_emftext_refactoring_tests_properties_Value returns [org.emftext.refactoring.tests.properties.Value element = null] : (c0= parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue |c1= parse_org_emftext_refactoring_tests_properties_StringValue );
     public final org.emftext.refactoring.tests.properties.Value parse_org_emftext_refactoring_tests_properties_Value() throws RecognitionException {
         org.emftext.refactoring.tests.properties.Value element =  null;
 
@@ -1294,7 +1235,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return element; }
 
-            // Testproperties.g:886:2: (c0= parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue |c1= parse_org_emftext_refactoring_tests_properties_StringValue )
+            // Testproperties.g:827:2: (c0= parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue |c1= parse_org_emftext_refactoring_tests_properties_StringValue )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1314,7 +1255,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
             }
             switch (alt4) {
                 case 1 :
-                    // Testproperties.g:887:2: c0= parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue
+                    // Testproperties.g:828:2: c0= parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue
                     {
                     pushFollow(FOLLOW_parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue_in_parse_org_emftext_refactoring_tests_properties_Value490);
                     c0=parse_org_emftext_refactoring_tests_properties_EObjectReferenceValue();
@@ -1327,7 +1268,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Testproperties.g:888:4: c1= parse_org_emftext_refactoring_tests_properties_StringValue
+                    // Testproperties.g:829:4: c1= parse_org_emftext_refactoring_tests_properties_StringValue
                     {
                     pushFollow(FOLLOW_parse_org_emftext_refactoring_tests_properties_StringValue_in_parse_org_emftext_refactoring_tests_properties_Value500);
                     c1=parse_org_emftext_refactoring_tests_properties_StringValue();

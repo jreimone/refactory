@@ -15,7 +15,6 @@ public class TestpropertiesSourceViewerConfiguration extends org.eclipse.ui.edit
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesColorManager colorManager;
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider resourceProvider;
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesAnnotationModelProvider annotationModelProvider;
-	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesBracketHandlerProvider bracketHandlerProvider;
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesQuickAssistAssistant quickAssistAssistant;
 	
 	/**
@@ -25,21 +24,29 @@ public class TestpropertiesSourceViewerConfiguration extends org.eclipse.ui.edit
 	 * editor)
 	 * @param colorManager the color manager to use
 	 */
-	public TestpropertiesSourceViewerConfiguration(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider resourceProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesAnnotationModelProvider annotationModelProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesBracketHandlerProvider bracketHandlerProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesColorManager colorManager) {
+	public TestpropertiesSourceViewerConfiguration(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider resourceProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesAnnotationModelProvider annotationModelProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesColorManager colorManager) {
 		super(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.getDefault().getPreferenceStore());
 		this.fPreferenceStore.setDefault(org.eclipse.ui.texteditor.spelling.SpellingService.PREFERENCE_SPELLING_ENABLED, true);
 		this.fPreferenceStore.setDefault(org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants.EDITOR_TAB_WIDTH, 4);
 		this.fPreferenceStore.setDefault(org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants.EDITOR_HYPERLINK_KEY_MODIFIER, org.eclipse.jface.action.Action.findModifierString(org.eclipse.swt.SWT.MOD1));
 		this.resourceProvider = resourceProvider;
 		this.annotationModelProvider = annotationModelProvider;
-		this.bracketHandlerProvider = bracketHandlerProvider;
 		this.colorManager = colorManager;
+	}
+	
+	/**
+	 * Returns an instance of class
+	 * org.emftext.refactoring.tests.properties.resource.testproperties.ui.Testproperti
+	 * esAutoEditStrategy.
+	 */
+	public org.eclipse.jface.text.IAutoEditStrategy[] getAutoEditStrategies(org.eclipse.jface.text.source.ISourceViewer sourceViewer, String contentType) {
+		return new org.eclipse.jface.text.IAutoEditStrategy[] {new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesAutoEditStrategy()};
 	}
 	
 	public org.eclipse.jface.text.contentassist.IContentAssistant getContentAssistant(org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
 		
 		org.eclipse.jface.text.contentassist.ContentAssistant assistant = new org.eclipse.jface.text.contentassist.ContentAssistant();
-		assistant.setContentAssistProcessor(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProcessor(resourceProvider, bracketHandlerProvider), org.eclipse.jface.text.IDocument.DEFAULT_CONTENT_TYPE);
+		assistant.setContentAssistProcessor(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProcessor(resourceProvider), org.eclipse.jface.text.IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.enableAutoActivation(true);
 		assistant.setAutoActivationDelay(500);
 		assistant.setProposalPopupOrientation(org.eclipse.jface.text.contentassist.IContentAssistant.PROPOSAL_OVERLAY);
@@ -101,6 +108,7 @@ public class TestpropertiesSourceViewerConfiguration extends org.eclipse.ui.edit
 		}
 		
 		org.eclipse.jface.text.reconciler.IReconcilingStrategy strategy = new org.eclipse.ui.texteditor.spelling.SpellingReconcileStrategy(sourceViewer, spellingService) {
+			
 			@Override			
 			protected org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector createSpellingProblemCollector() {
 				final org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector collector = super.createSpellingProblemCollector();
@@ -139,9 +147,15 @@ public class TestpropertiesSourceViewerConfiguration extends org.eclipse.ui.edit
 				};
 			}
 		};
+		
 		org.eclipse.jface.text.reconciler.MonoReconciler reconciler = new org.eclipse.jface.text.reconciler.MonoReconciler(strategy, false);
 		reconciler.setDelay(500);
 		return reconciler;
+	}
+	
+	@Override	
+	public String[] getDefaultPrefixes(org.eclipse.jface.text.source.ISourceViewer sourceViewer, String contentType) {
+		return new String[] { "//" };
 	}
 	
 }

@@ -72,4 +72,26 @@
 		</specification>
 	</extension>
 	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Testproperties" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.command.category" name="Testproperties">
+		</category>
+		<command categoryId="org.emftext.refactoring.tests.properties.resource.testproperties.ui.command.category" description="Toggle comment of the selected lines" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesToggleCommentHandler" commandId="org.emftext.refactoring.tests.properties.resource.testproperties.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Testproperties Files" description="Editing Testproperties Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.emftext.refactoring.tests.properties.resource.testproperties.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.emftext.refactoring.tests.properties.resource.testproperties.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.emftext.refactoring.tests.properties.resource.testproperties.EditorScope">
+		</key>
+	</extension>
+	
 </plugin>

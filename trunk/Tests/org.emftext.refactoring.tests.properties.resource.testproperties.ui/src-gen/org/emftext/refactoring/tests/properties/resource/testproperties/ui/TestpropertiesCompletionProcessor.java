@@ -9,11 +9,10 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 public class TestpropertiesCompletionProcessor implements org.eclipse.jface.text.contentassist.IContentAssistProcessor {
 	
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider resourceProvider;
-	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesBracketHandlerProvider bracketHandlerProvider;
 	
-	public TestpropertiesCompletionProcessor(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider resourceProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesBracketHandlerProvider bracketHandlerProvider) {
+	public TestpropertiesCompletionProcessor(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider resourceProvider) {
+		super();
 		this.resourceProvider = resourceProvider;
-		this.bracketHandlerProvider = bracketHandlerProvider;
 	}
 	
 	public org.eclipse.jface.text.contentassist.ICompletionProposal[] computeCompletionProposals(org.eclipse.jface.text.ITextViewer viewer, int offset) {
@@ -34,7 +33,7 @@ public class TestpropertiesCompletionProcessor implements org.eclipse.jface.text
 		}
 		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> finalProposalList = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal : extendedProposalList) {
-			if (proposal.getMatchesPrefix()) {
+			if (proposal.isMatchesPrefix()) {
 				finalProposalList.add(proposal);
 			}
 		}
@@ -42,20 +41,13 @@ public class TestpropertiesCompletionProcessor implements org.eclipse.jface.text
 		int i = 0;
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal : finalProposalList) {
 			String proposalString = proposal.getInsertString();
-			String displayString = proposal.getDisplayString();
+			String displayString = (proposal.getDisplayString()==null)?proposalString:proposal.getDisplayString();
 			String prefix = proposal.getPrefix();
 			org.eclipse.swt.graphics.Image image = proposal.getImage();
 			org.eclipse.jface.text.contentassist.IContextInformation info;
-			info = new org.eclipse.jface.text.contentassist.ContextInformation(image, proposalString, proposalString);
+			info = new org.eclipse.jface.text.contentassist.ContextInformation(image, displayString, proposalString);
 			int begin = offset - prefix.length();
 			int replacementLength = prefix.length();
-			// if a closing bracket was automatically inserted right before, we enlarge the
-			// replacement length in order to overwrite the bracket.
-			org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesBracketHandler bracketHandler = bracketHandlerProvider.getBracketHandler();
-			String closingBracket = bracketHandler.getClosingBracket();
-			if (bracketHandler.addedClosingBracket() && proposalString.endsWith(closingBracket)) {
-				replacementLength += closingBracket.length();
-			}
 			result[i++] = new org.eclipse.jface.text.contentassist.CompletionProposal(proposalString, begin, replacementLength, proposalString.length(), image, displayString, info, proposalString);
 		}
 		return result;

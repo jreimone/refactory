@@ -165,35 +165,14 @@ public abstract class TestpropertiesANTLRParserBase extends org.antlr.runtime3_4
 		});
 	}
 	
-	protected String formatTokenName(int tokenType)  {
-		String tokenName = "<unknown>";
-		if (tokenType < 0) {
-			tokenName = "EOF";
-		} else {
-			if (tokenType < 0) {
-				return tokenName;
-			}
-			tokenName = getTokenNames()[tokenType];
-			tokenName = org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesStringUtil.formatTokenName(tokenName);
-		}
-		return tokenName;
-	}
-	
 	protected java.util.Map<?,?> getOptions() {
 		return options;
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
 		this.options = options;
-		if (this.options == null) {
-			return;
-		}
-		if (this.options.containsKey(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_LOCATION_MAP)) {
-			this.disableLocationMap = true;
-		}
-		if (this.options.containsKey(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_LAYOUT_INFORMATION_RECORDING)) {
-			this.disableLayoutRecording = true;
-		}
+		this.disableLocationMap = !isLocationMapEnabled();
+		this.disableLayoutRecording = !isLayoutInformationRecordingEnabled();
 	}
 	
 	/**
@@ -283,6 +262,22 @@ public abstract class TestpropertiesANTLRParserBase extends org.antlr.runtime3_4
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesReferenceResolverSwitch resolverSwitch = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesReferenceResolverSwitch) metaInformation.getReferenceResolverSwitch();
 		resolverSwitch.setOptions(options);
 		return resolverSwitch;
+	}
+	
+	public boolean isLayoutInformationRecordingEnabled() {
+		if (options == null) {
+			return true;
+		}
+		Object value = options.get(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_LAYOUT_INFORMATION_RECORDING);
+		return value == null || Boolean.FALSE.equals(value);
+	}
+	
+	public boolean isLocationMapEnabled() {
+		if (options == null) {
+			return true;
+		}
+		Object value = options.get(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_LOCATION_MAP);
+		return value == null || Boolean.FALSE.equals(value);
 	}
 	
 }

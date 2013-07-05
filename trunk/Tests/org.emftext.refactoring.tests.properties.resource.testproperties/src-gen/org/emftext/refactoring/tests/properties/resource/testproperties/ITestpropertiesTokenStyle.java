@@ -29,6 +29,11 @@ public interface ITestpropertiesTokenStyle {
 	public boolean isBold();
 	
 	/**
+	 * Sets whether the token must be displayed in bold face.
+	 */
+	public void setBold(boolean bold);
+	
+	/**
 	 * Returns true if the token must be displayed in italic face.
 	 */
 	public boolean isItalic();
