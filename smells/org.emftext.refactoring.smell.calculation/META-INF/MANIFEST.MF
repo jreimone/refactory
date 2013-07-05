@@ -9,7 +9,11 @@ Bundle-Localization: plugin
 Export-Package: org.emftext.refactoring.smell.calculation,
  org.emftext.refactoring.smell.calculation.impl,
  org.emftext.refactoring.smell.calculation.util
-Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.incquery.patternlanguage;visibility:=reexport,
+ org.eclipse.xtext.common.types;visibility:=reexport,
+ org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.e4.ui.workbench,
  org.eclipse.incquery.patternlanguage.emf,
