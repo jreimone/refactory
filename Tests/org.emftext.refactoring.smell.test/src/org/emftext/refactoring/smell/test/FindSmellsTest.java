@@ -7,11 +7,9 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -24,16 +22,10 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageRuntimeModule;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
-import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.ImportDeclaration;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PackageImport;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
-import org.eclipse.incquery.runtime.api.IMatcherFactory;
-import org.eclipse.incquery.runtime.api.IPatternMatch;
-import org.eclipse.incquery.runtime.api.IncQueryMatcher;
-import org.eclipse.incquery.runtime.exception.IncQueryException;
-import org.eclipse.incquery.runtime.extensibility.MatcherFactoryRegistry;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.emftext.language.java.resource.JaMoPPUtil;
@@ -55,6 +47,7 @@ import org.emftext.refactoring.smell.registry.IQualitySmellRegistry;
 import org.emftext.refactoring.smell.registry.util.Pair;
 import org.emftext.refactoring.smell.registry.util.Triple;
 import org.emftext.refactoring.smell.rolessmell.RolessmellPackage;
+import org.emftext.refactoring.smell.umlsmells.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -77,9 +70,9 @@ public class FindSmellsTest {
 	
 	@BeforeClass
 	public static void setUp(){
-//		registerCoreLanguages();
+		registerCoreLanguages();
 		registerCalculationExtensionLanguages();
-//		registerSmellingLanguages();
+		registerSmellingLanguages();
 //		registerTestingRootAsPlatformRoot();
 		loadSmellModels();
 		initRegistry();
@@ -88,8 +81,8 @@ public class FindSmellsTest {
 
 	private static void registerCoreLanguages() {
 		// IncQuery
-//		EMFPatternLanguageStandaloneSetupGenerated setup = new EMFPatternLanguageStandaloneSetupGenerated();
-//		Injector injector = setup.createInjectorAndDoEMFRegistration();
+		EMFPatternLanguageStandaloneSetupGenerated setup = new EMFPatternLanguageStandaloneSetupGenerated();
+		Injector injector = setup.createInjectorAndDoEMFRegistration();
 //		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
 //		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
 //		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
@@ -100,7 +93,7 @@ public class FindSmellsTest {
 		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+//		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
 		// smells
@@ -109,6 +102,8 @@ public class FindSmellsTest {
 		// smells calculation
 		EPackage.Registry.INSTANCE.put(CalculationPackage.eNS_URI, CalculationPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("calculation", new XMIResourceFactoryImpl());
+		// registered UML smells
+		EPackage.Registry.INSTANCE.put(UmlsmellsPackage.eNS_URI, UmlsmellsPackage.eINSTANCE);
 	}
 	
 	private static void registerCalculationExtensionLanguages() {
@@ -247,13 +242,18 @@ public class FindSmellsTest {
 
 	private void checkMetamodels(Pattern pattern, Resource resource) {
 		PatternModel patternModel = (PatternModel) pattern.eContainer();
-		ImportDeclaration importDeclaration = patternModel.getImportPackages().get(0);
-		EPackage metamodelPattern = null;
-		if(importDeclaration instanceof PackageImport){
-			PackageImport packageImport = (PackageImport) importDeclaration;
-			metamodelPattern = packageImport.getEPackage();
-		}
-		assertNotNull("import must reference an EPackage", importDeclaration);
+		// new IncQuery version
+		PackageImport packageImport = patternModel.getImportPackages().getPackageImport().get(0);
+		assertNotNull("import must reference an EPackage", packageImport);
+		EPackage metamodelPattern = packageImport.getEPackage();
+		// old IncQuery version
+//		ImportDeclaration importDeclaration = patternModel.getImportPackages().get(0);
+//		EPackage metamodelPattern = null;
+//		if(importDeclaration instanceof PackageImport){
+//			PackageImport packageImport = (PackageImport) importDeclaration;
+//			metamodelPattern = packageImport.getEPackage();
+//		}
+//		assertNotNull("import must reference an EPackage", packageImport);
 		while(metamodelPattern.getESuperPackage() != null){
 			metamodelPattern = metamodelPattern.getESuperPackage();
 		}
