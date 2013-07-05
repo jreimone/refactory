@@ -10,6 +10,7 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Operation;
+import org.eclipse.uml2.uml.Type;
 
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
@@ -79,7 +80,7 @@ public class CountParametersOfMethodsImpl extends MetricImpl implements CountPar
 			return null;
 		}
 		Model umlModel = (Model) model;
-		for (Element element : umlModel.allOwnedElements()) {
+		for (Type element : umlModel.getOwnedTypes()) {
 			if(element instanceof Classifier){
 				Classifier classifier = (Classifier) element;
 				List<Operation> operations = classifier.getOperations();
@@ -87,7 +88,7 @@ public class CountParametersOfMethodsImpl extends MetricImpl implements CountPar
 					int parameterCount = operation.getOwnedParameters().size();
 					if(parameterCount >= threshold){
 						// -2 because a new parameter object is added thus it would be again more than the threshold
-						for (int i = ((int)threshold - 2); i < parameterCount; i++) {
+						for (int i = (((int)threshold - 2)); i < parameterCount; i++) {
 							result.getCausingObjects().add(operation.getOwnedParameters().get(i));
 						}
 						if(parameterCount > result.getResultingValue()){
