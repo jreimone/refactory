@@ -1,3 +1,4 @@
+import "http://www.emftext.org/java/commons"
 import "http://www.emftext.org/java/classifiers"
 import "http://www.emftext.org/java/members"
 import "http://www.emftext.org/java/types"
