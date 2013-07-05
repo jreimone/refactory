@@ -7,3 +7,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.uml2.uml,
  org.emftext.refactoring.smell.calculation,
  org.emftext.refactoring.smell.registry.ui
+Export-Package: org.emftext.refactoring.smell.umlsmells,
+ org.emftext.refactoring.smell.umlsmells.impl,
+ org.emftext.refactoring.smell.umlsmells.util
