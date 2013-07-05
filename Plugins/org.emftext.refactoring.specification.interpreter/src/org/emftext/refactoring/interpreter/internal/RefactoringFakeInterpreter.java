@@ -58,5 +58,4 @@ public class RefactoringFakeInterpreter extends RefactoringInterpreter implement
 	public void setProvideableValues(List<IValueProvider<?, ?>> provideableValues) {
 		valuesToProvide = provideableValues;
 	}
-
 }
