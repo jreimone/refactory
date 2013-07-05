@@ -8,5 +8,6 @@ public class QualitySmellsView extends MarkerSupportView {
 	public QualitySmellsView() {
 		super(IQualitySmellMarker.CONTENT_GENERATOR_ID);
 	}
-
+	
+	
 }

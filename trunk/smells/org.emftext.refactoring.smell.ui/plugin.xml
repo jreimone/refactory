@@ -52,5 +52,50 @@
             name="Quality Smells">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.emftext.refactoring.smell.ui.determine"
+            name="Determine Smells for open resource">
+      </command>
+      <command
+            id="org.emftext.refactoring.smell.ui.remove"
+            name="Remove All Active Smells">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.emftext.refactoring.smell.ui.handlers.DetermineSmells"
+            commandId="org.emftext.refactoring.smell.ui.determine">
+      </handler>
+      <handler
+            class="org.emftext.refactoring.smell.ui.handlers.RemoveSmells"
+            commandId="org.emftext.refactoring.smell.ui.remove">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.emftext.refactoring.smell.ui.views.QualitySmellsView">
+         <command
+               commandId="org.emftext.refactoring.smell.ui.determine"
+               icon="icons/start.gif"
+               label="Determine Smells for open resource"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.emftext.refactoring.smell.ui.views.QualitySmellsView">
+         <command
+               commandId="org.emftext.refactoring.smell.ui.remove"
+               icon="icons/remove.gif"
+               label="Remove All Active Smells"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
 
 </plugin>

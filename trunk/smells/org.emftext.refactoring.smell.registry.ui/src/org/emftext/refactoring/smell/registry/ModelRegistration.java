@@ -55,7 +55,8 @@ public class ModelRegistration {
 		IQualitySmellRegistry.INSTANCE.initialize(smellModel, calculationModel);
 		if(workspace != null){
 //			workspace.addResourceChangeListener(new SmellChecker(smellModel, calculationModel), IResourceChangeEvent.POST_CHANGE);
-			workspace.addResourceChangeListener(new SmellChecker(), IResourceChangeEvent.POST_CHANGE);
+			// commented out for better performance --> must now be initiated in the Quality Smell View
+//			workspace.addResourceChangeListener(new SmellChecker(), IResourceChangeEvent.POST_CHANGE);
 		}
 	}
 

@@ -38,7 +38,7 @@ public class ModificationListener extends EContentAdapter {
 					}
 					boolean allElementsHaveContainers = true;
 					TreeIterator<EObject> iterator = model.eAllContents();
-					while (iterator.hasNext()) {
+					while (iterator.hasNext() && allElementsHaveContainers) {
 						EObject element = (EObject) iterator.next();
 						if(element.eContainer() == null){
 							allElementsHaveContainers = false;
@@ -52,6 +52,7 @@ public class ModificationListener extends EContentAdapter {
 				}
 			} catch (IOException e) {
 //				e.printStackTrace();
+				System.err.println("exception caught while the quality smell model changed");
 			}
 		} else {
 			System.err.println("Notifier is not an EObject: " + notifier);
