@@ -10,7 +10,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_xYe-0GCJEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.handlers.fillColorChangeHandler" contributionURI="bundleclass://org.modelrefactoring.ecoretools.additions/org.modelrefactoring.ecoretools.additions.ModifyFillColorHandler" command="_S2HosGCJEeK-fpTrs2yrzw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q4ShsGCXEeK-fpTrs2yrzw" featurename="menuContributions" parentElementId="org.eclipse.e4.legacy.ide.application">
-    <elements xsi:type="menu:MenuContribution" xmi:id="_g19fUGCXEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.modifyFillColor.menuitem" parentId="org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_g19fUGCXEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.modifyFillColor.menuitem" accessibilityPhrase="" parentId="org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
       <children xsi:type="menu:HandledMenuItem" xmi:id="_aj-cgGCaEeK-fpTrs2yrzw" elementId="org.modelrefactoring.ecoretools.modifyFillColor.menu.item" label="Modify Fill Color of EClasses to white" iconURI="platform:/plugin/org.modelrefactoring.ecoretools.additions/icons/EclassModified.png" command="_S2HosGCJEeK-fpTrs2yrzw"/>
     </elements>
   </fragments>
