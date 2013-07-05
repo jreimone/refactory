@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
@@ -305,6 +304,10 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				}
 				if(realElement != null){
 					elements.add(realElement);
+				} else if(element != null){
+					String fragment = uri.fragment();
+					realElement = resource.getEObject(fragment);
+					elements.add(element);
 				}
 			}
 			return elements;
