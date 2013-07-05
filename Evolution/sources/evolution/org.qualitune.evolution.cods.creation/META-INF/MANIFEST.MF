@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.eclipse.equinox.common,
  javax.inject,
  org.eclipse.core.runtime,
- org.qualitune.evolution.registry
+ org.qualitune.evolution.registry,
+ org.eclipse.emf.ecore.xmi
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.qualitune.evolution.cods.creation,
  org.qualitune.evolution.cods.kinds

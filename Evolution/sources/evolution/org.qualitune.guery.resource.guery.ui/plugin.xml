@@ -72,4 +72,26 @@
 		</specification>
 	</extension>
 	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Guery" id="org.qualitune.guery.resource.guery.ui.command.category" name="Guery">
+		</category>
+		<command categoryId="org.qualitune.guery.resource.guery.ui.command.category" description="Toggle comment of the selected lines" id="org.qualitune.guery.resource.guery.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.qualitune.guery.resource.guery.ui.GueryToggleCommentHandler" commandId="org.qualitune.guery.resource.guery.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Guery Files" description="Editing Guery Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.qualitune.guery.resource.guery.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.qualitune.guery.resource.guery.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.qualitune.guery.resource.guery.EditorScope">
+		</key>
+	</extension>
+	
 </plugin>
