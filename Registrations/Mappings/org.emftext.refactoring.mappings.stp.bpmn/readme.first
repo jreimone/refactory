@@ -3,5 +3,5 @@ How to install the BPMN modeler including its metamodel in Juno:
 
 * Help -> Install New Software...
 * use "http://download.eclipse.org/bpmn2-modeler/site/"
-* install "Eclipse BPMN2 Modeler"
+* install "BPMN2 Editor"
 * restart Eclipse
