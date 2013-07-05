@@ -44,220 +44,227 @@ import org.qualitune.evolution.tracing.TracingPackage;
  */
 public class TracingModelImpl extends EObjectImpl implements TracingModel {
 	/**
-	 * The cached value of the '{@link #getTraceLinks() <em>Trace Links</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTraceLinks() <em>Trace Links</em>}' containment reference list.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTraceLinks()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTraceLinks()
+   * @generated
+   * @ordered
+   */
 	protected EList<TraceLink> traceLinks;
 
 	/**
-	 * The cached value of the '{@link #getSourceURIs() <em>Source UR Is</em>}' attribute list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getSourceURIs() <em>Source UR Is</em>}' attribute list.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSourceURIs()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getSourceURIs()
+   * @generated
+   * @ordered
+   */
 	protected EList<String> sourceURIs;
 
 	/**
-	 * The default value of the '{@link #getTargetURI() <em>Target URI</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getTargetURI() <em>Target URI</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTargetURI()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTargetURI()
+   * @generated
+   * @ordered
+   */
 	protected static final String TARGET_URI_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTargetURI() <em>Target URI</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTargetURI() <em>Target URI</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTargetURI()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTargetURI()
+   * @generated
+   * @ordered
+   */
 	protected String targetURI = TARGET_URI_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected TracingModelImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return TracingPackage.Literals.TRACING_MODEL;
-	}
+    return TracingPackage.Literals.TRACING_MODEL;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EList<TraceLink> getTraceLinks() {
-		if (traceLinks == null) {
-			traceLinks = new EObjectContainmentEList<TraceLink>(TraceLink.class, this, TracingPackage.TRACING_MODEL__TRACE_LINKS);
-		}
-		return traceLinks;
-	}
+    if (traceLinks == null)
+    {
+      traceLinks = new EObjectContainmentEList<TraceLink>(TraceLink.class, this, TracingPackage.TRACING_MODEL__TRACE_LINKS);
+    }
+    return traceLinks;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EList<String> getSourceURIs() {
-		if (sourceURIs == null) {
-			sourceURIs = new EDataTypeUniqueEList<String>(String.class, this, TracingPackage.TRACING_MODEL__SOURCE_UR_IS);
-		}
-		return sourceURIs;
-	}
+    if (sourceURIs == null)
+    {
+      sourceURIs = new EDataTypeUniqueEList<String>(String.class, this, TracingPackage.TRACING_MODEL__SOURCE_UR_IS);
+    }
+    return sourceURIs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String getTargetURI() {
-		return targetURI;
-	}
+    return targetURI;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setTargetURI(String newTargetURI) {
-		String oldTargetURI = targetURI;
-		targetURI = newTargetURI;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TracingPackage.TRACING_MODEL__TARGET_URI, oldTargetURI, targetURI));
-	}
+    String oldTargetURI = targetURI;
+    targetURI = newTargetURI;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TracingPackage.TRACING_MODEL__TARGET_URI, oldTargetURI, targetURI));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TracingPackage.TRACING_MODEL__TRACE_LINKS:
-				return ((InternalEList<?>)getTraceLinks()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case TracingPackage.TRACING_MODEL__TRACE_LINKS:
+        return ((InternalEList<?>)getTraceLinks()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case TracingPackage.TRACING_MODEL__TRACE_LINKS:
-				return getTraceLinks();
-			case TracingPackage.TRACING_MODEL__SOURCE_UR_IS:
-				return getSourceURIs();
-			case TracingPackage.TRACING_MODEL__TARGET_URI:
-				return getTargetURI();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case TracingPackage.TRACING_MODEL__TRACE_LINKS:
+        return getTraceLinks();
+      case TracingPackage.TRACING_MODEL__SOURCE_UR_IS:
+        return getSourceURIs();
+      case TracingPackage.TRACING_MODEL__TARGET_URI:
+        return getTargetURI();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TracingPackage.TRACING_MODEL__TRACE_LINKS:
-				getTraceLinks().clear();
-				getTraceLinks().addAll((Collection<? extends TraceLink>)newValue);
-				return;
-			case TracingPackage.TRACING_MODEL__SOURCE_UR_IS:
-				getSourceURIs().clear();
-				getSourceURIs().addAll((Collection<? extends String>)newValue);
-				return;
-			case TracingPackage.TRACING_MODEL__TARGET_URI:
-				setTargetURI((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case TracingPackage.TRACING_MODEL__TRACE_LINKS:
+        getTraceLinks().clear();
+        getTraceLinks().addAll((Collection<? extends TraceLink>)newValue);
+        return;
+      case TracingPackage.TRACING_MODEL__SOURCE_UR_IS:
+        getSourceURIs().clear();
+        getSourceURIs().addAll((Collection<? extends String>)newValue);
+        return;
+      case TracingPackage.TRACING_MODEL__TARGET_URI:
+        setTargetURI((String)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TracingPackage.TRACING_MODEL__TRACE_LINKS:
-				getTraceLinks().clear();
-				return;
-			case TracingPackage.TRACING_MODEL__SOURCE_UR_IS:
-				getSourceURIs().clear();
-				return;
-			case TracingPackage.TRACING_MODEL__TARGET_URI:
-				setTargetURI(TARGET_URI_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case TracingPackage.TRACING_MODEL__TRACE_LINKS:
+        getTraceLinks().clear();
+        return;
+      case TracingPackage.TRACING_MODEL__SOURCE_UR_IS:
+        getSourceURIs().clear();
+        return;
+      case TracingPackage.TRACING_MODEL__TARGET_URI:
+        setTargetURI(TARGET_URI_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case TracingPackage.TRACING_MODEL__TRACE_LINKS:
-				return traceLinks != null && !traceLinks.isEmpty();
-			case TracingPackage.TRACING_MODEL__SOURCE_UR_IS:
-				return sourceURIs != null && !sourceURIs.isEmpty();
-			case TracingPackage.TRACING_MODEL__TARGET_URI:
-				return TARGET_URI_EDEFAULT == null ? targetURI != null : !TARGET_URI_EDEFAULT.equals(targetURI);
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case TracingPackage.TRACING_MODEL__TRACE_LINKS:
+        return traceLinks != null && !traceLinks.isEmpty();
+      case TracingPackage.TRACING_MODEL__SOURCE_UR_IS:
+        return sourceURIs != null && !sourceURIs.isEmpty();
+      case TracingPackage.TRACING_MODEL__TARGET_URI:
+        return TARGET_URI_EDEFAULT == null ? targetURI != null : !TARGET_URI_EDEFAULT.equals(targetURI);
+    }
+    return super.eIsSet(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sourceURIs: ");
-		result.append(sourceURIs);
-		result.append(", targetURI: ");
-		result.append(targetURI);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (sourceURIs: ");
+    result.append(sourceURIs);
+    result.append(", targetURI: ");
+    result.append(targetURI);
+    result.append(')');
+    return result.toString();
+  }
 
 } //TracingModelImpl
