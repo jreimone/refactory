@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.emftext.refactoring.smell.calculation.*;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationPackage;
@@ -32,7 +33,7 @@ public class CalculationFactoryImpl extends EFactoryImpl implements CalculationF
 	 */
 	public static CalculationFactory init() {
 		try {
-			CalculationFactory theCalculationFactory = (CalculationFactory)EPackage.Registry.INSTANCE.getEFactory("http://modelrefactoring.org/smell/calculation"); 
+			CalculationFactory theCalculationFactory = (CalculationFactory)EPackage.Registry.INSTANCE.getEFactory(CalculationPackage.eNS_URI);
 			if (theCalculationFactory != null) {
 				return theCalculationFactory;
 			}
