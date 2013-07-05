@@ -39,118 +39,124 @@ import org.qualitune.evolution.megamodel.cods.DomainSpecificEvolutionSpecificati
  */
 public class CODSImpl extends MegaModelImpl implements CODS {
 	/**
-	 * The cached value of the '{@link #getDSES() <em>DSES</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getDSES() <em>DSES</em>}' containment reference list.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDSES()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getDSES()
+   * @generated
+   * @ordered
+   */
 	protected EList<DomainSpecificEvolutionSpecification> dses;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected CODSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return CodsPackage.Literals.CODS;
-	}
+    return CodsPackage.Literals.CODS;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EList<DomainSpecificEvolutionSpecification> getDSES() {
-		if (dses == null) {
-			dses = new EObjectContainmentEList<DomainSpecificEvolutionSpecification>(DomainSpecificEvolutionSpecification.class, this, CodsPackage.CODS__DSES);
-		}
-		return dses;
-	}
+    if (dses == null)
+    {
+      dses = new EObjectContainmentEList<DomainSpecificEvolutionSpecification>(DomainSpecificEvolutionSpecification.class, this, CodsPackage.CODS__DSES);
+    }
+    return dses;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CodsPackage.CODS__DSES:
-				return ((InternalEList<?>)getDSES()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.CODS__DSES:
+        return ((InternalEList<?>)getDSES()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CodsPackage.CODS__DSES:
-				return getDSES();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.CODS__DSES:
+        return getDSES();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CodsPackage.CODS__DSES:
-				getDSES().clear();
-				getDSES().addAll((Collection<? extends DomainSpecificEvolutionSpecification>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.CODS__DSES:
+        getDSES().clear();
+        getDSES().addAll((Collection<? extends DomainSpecificEvolutionSpecification>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CodsPackage.CODS__DSES:
-				getDSES().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.CODS__DSES:
+        getDSES().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CodsPackage.CODS__DSES:
-				return dses != null && !dses.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.CODS__DSES:
+        return dses != null && !dses.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //CODSImpl

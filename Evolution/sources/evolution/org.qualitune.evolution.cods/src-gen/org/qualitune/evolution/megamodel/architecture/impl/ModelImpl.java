@@ -33,129 +33,135 @@ import org.qualitune.evolution.megamodel.architecture.ReferenceModel;
  */
 public abstract class ModelImpl extends EObjectImpl implements Model {
 	/**
-	 * The cached value of the '{@link #getConformsTo() <em>Conforms To</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getConformsTo() <em>Conforms To</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConformsTo()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getConformsTo()
+   * @generated
+   * @ordered
+   */
 	protected ReferenceModel conformsTo;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ModelImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return ArchitecturePackage.Literals.MODEL;
-	}
+    return ArchitecturePackage.Literals.MODEL;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ReferenceModel getConformsTo() {
-		if (conformsTo != null && conformsTo.eIsProxy()) {
-			InternalEObject oldConformsTo = (InternalEObject)conformsTo;
-			conformsTo = (ReferenceModel)eResolveProxy(oldConformsTo);
-			if (conformsTo != oldConformsTo) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArchitecturePackage.MODEL__CONFORMS_TO, oldConformsTo, conformsTo));
-			}
-		}
-		return conformsTo;
-	}
+    if (conformsTo != null && conformsTo.eIsProxy())
+    {
+      InternalEObject oldConformsTo = (InternalEObject)conformsTo;
+      conformsTo = (ReferenceModel)eResolveProxy(oldConformsTo);
+      if (conformsTo != oldConformsTo)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArchitecturePackage.MODEL__CONFORMS_TO, oldConformsTo, conformsTo));
+      }
+    }
+    return conformsTo;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ReferenceModel basicGetConformsTo() {
-		return conformsTo;
-	}
+    return conformsTo;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setConformsTo(ReferenceModel newConformsTo) {
-		ReferenceModel oldConformsTo = conformsTo;
-		conformsTo = newConformsTo;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArchitecturePackage.MODEL__CONFORMS_TO, oldConformsTo, conformsTo));
-	}
+    ReferenceModel oldConformsTo = conformsTo;
+    conformsTo = newConformsTo;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ArchitecturePackage.MODEL__CONFORMS_TO, oldConformsTo, conformsTo));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ArchitecturePackage.MODEL__CONFORMS_TO:
-				if (resolve) return getConformsTo();
-				return basicGetConformsTo();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.MODEL__CONFORMS_TO:
+        if (resolve) return getConformsTo();
+        return basicGetConformsTo();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ArchitecturePackage.MODEL__CONFORMS_TO:
-				setConformsTo((ReferenceModel)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.MODEL__CONFORMS_TO:
+        setConformsTo((ReferenceModel)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ArchitecturePackage.MODEL__CONFORMS_TO:
-				setConformsTo((ReferenceModel)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.MODEL__CONFORMS_TO:
+        setConformsTo((ReferenceModel)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ArchitecturePackage.MODEL__CONFORMS_TO:
-				return conformsTo != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.MODEL__CONFORMS_TO:
+        return conformsTo != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //ModelImpl

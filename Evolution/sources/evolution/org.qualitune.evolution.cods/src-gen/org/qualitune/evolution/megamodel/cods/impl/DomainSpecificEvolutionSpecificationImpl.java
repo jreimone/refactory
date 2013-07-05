@@ -39,271 +39,282 @@ import org.qualitune.evolution.megamodel.cods.EvolutionDefinition;
  */
 public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implements DomainSpecificEvolutionSpecification {
 	/**
-	 * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetamodel()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getMetamodel()
+   * @generated
+   * @ordered
+   */
 	protected MetaModel metamodel;
 
 	/**
-	 * The cached value of the '{@link #getED() <em>ED</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getED() <em>ED</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getED()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getED()
+   * @generated
+   * @ordered
+   */
 	protected EvolutionDefinition ed;
 
 	/**
-	 * The cached value of the '{@link #getCoED() <em>Co ED</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getCoED() <em>Co ED</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCoED()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getCoED()
+   * @generated
+   * @ordered
+   */
 	protected CoEvolutionDefinition coED;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected DomainSpecificEvolutionSpecificationImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return CodsPackage.Literals.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION;
-	}
+    return CodsPackage.Literals.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public MetaModel getMetamodel() {
-		if (metamodel != null && metamodel.eIsProxy()) {
-			InternalEObject oldMetamodel = (InternalEObject)metamodel;
-			metamodel = (MetaModel)eResolveProxy(oldMetamodel);
-			if (metamodel != oldMetamodel) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL, oldMetamodel, metamodel));
-			}
-		}
-		return metamodel;
-	}
+    if (metamodel != null && metamodel.eIsProxy())
+    {
+      InternalEObject oldMetamodel = (InternalEObject)metamodel;
+      metamodel = (MetaModel)eResolveProxy(oldMetamodel);
+      if (metamodel != oldMetamodel)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL, oldMetamodel, metamodel));
+      }
+    }
+    return metamodel;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public MetaModel basicGetMetamodel() {
-		return metamodel;
-	}
+    return metamodel;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setMetamodel(MetaModel newMetamodel) {
-		MetaModel oldMetamodel = metamodel;
-		metamodel = newMetamodel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL, oldMetamodel, metamodel));
-	}
+    MetaModel oldMetamodel = metamodel;
+    metamodel = newMetamodel;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL, oldMetamodel, metamodel));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EvolutionDefinition getED() {
-		return ed;
-	}
+    return ed;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetED(EvolutionDefinition newED, NotificationChain msgs) {
-		EvolutionDefinition oldED = ed;
-		ed = newED;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED, oldED, newED);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    EvolutionDefinition oldED = ed;
+    ed = newED;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED, oldED, newED);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setED(EvolutionDefinition newED) {
-		if (newED != ed) {
-			NotificationChain msgs = null;
-			if (ed != null)
-				msgs = ((InternalEObject)ed).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED, null, msgs);
-			if (newED != null)
-				msgs = ((InternalEObject)newED).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED, null, msgs);
-			msgs = basicSetED(newED, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED, newED, newED));
-	}
+    if (newED != ed)
+    {
+      NotificationChain msgs = null;
+      if (ed != null)
+        msgs = ((InternalEObject)ed).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED, null, msgs);
+      if (newED != null)
+        msgs = ((InternalEObject)newED).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED, null, msgs);
+      msgs = basicSetED(newED, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED, newED, newED));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public CoEvolutionDefinition getCoED() {
-		return coED;
-	}
+    return coED;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetCoED(CoEvolutionDefinition newCoED, NotificationChain msgs) {
-		CoEvolutionDefinition oldCoED = coED;
-		coED = newCoED;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, oldCoED, newCoED);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    CoEvolutionDefinition oldCoED = coED;
+    coED = newCoED;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, oldCoED, newCoED);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setCoED(CoEvolutionDefinition newCoED) {
-		if (newCoED != coED) {
-			NotificationChain msgs = null;
-			if (coED != null)
-				msgs = ((InternalEObject)coED).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, null, msgs);
-			if (newCoED != null)
-				msgs = ((InternalEObject)newCoED).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, null, msgs);
-			msgs = basicSetCoED(newCoED, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, newCoED, newCoED));
-	}
+    if (newCoED != coED)
+    {
+      NotificationChain msgs = null;
+      if (coED != null)
+        msgs = ((InternalEObject)coED).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, null, msgs);
+      if (newCoED != null)
+        msgs = ((InternalEObject)newCoED).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, null, msgs);
+      msgs = basicSetCoED(newCoED, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, newCoED, newCoED));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
-				return basicSetED(null, msgs);
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				return basicSetCoED(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
+        return basicSetED(null, msgs);
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
+        return basicSetCoED(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
-				if (resolve) return getMetamodel();
-				return basicGetMetamodel();
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
-				return getED();
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				return getCoED();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
+        if (resolve) return getMetamodel();
+        return basicGetMetamodel();
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
+        return getED();
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
+        return getCoED();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
-				setMetamodel((MetaModel)newValue);
-				return;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
-				setED((EvolutionDefinition)newValue);
-				return;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				setCoED((CoEvolutionDefinition)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
+        setMetamodel((MetaModel)newValue);
+        return;
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
+        setED((EvolutionDefinition)newValue);
+        return;
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
+        setCoED((CoEvolutionDefinition)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
-				setMetamodel((MetaModel)null);
-				return;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
-				setED((EvolutionDefinition)null);
-				return;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				setCoED((CoEvolutionDefinition)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
+        setMetamodel((MetaModel)null);
+        return;
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
+        setED((EvolutionDefinition)null);
+        return;
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
+        setCoED((CoEvolutionDefinition)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
-				return metamodel != null;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
-				return ed != null;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				return coED != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
+        return metamodel != null;
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
+        return ed != null;
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
+        return coED != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //DomainSpecificEvolutionSpecificationImpl

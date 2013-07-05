@@ -32,129 +32,135 @@ import org.qualitune.evolution.megamodel.architecture.InstanceModel;
  */
 public class InstanceModelImpl extends TerminalModelImpl implements InstanceModel {
 	/**
-	 * The cached value of the '{@link #getModel() <em>Model</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getModel() <em>Model</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getModel()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getModel()
+   * @generated
+   * @ordered
+   */
 	protected EObject model;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected InstanceModelImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return ArchitecturePackage.Literals.INSTANCE_MODEL;
-	}
+    return ArchitecturePackage.Literals.INSTANCE_MODEL;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EObject getModel() {
-		if (model != null && model.eIsProxy()) {
-			InternalEObject oldModel = (InternalEObject)model;
-			model = eResolveProxy(oldModel);
-			if (model != oldModel) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArchitecturePackage.INSTANCE_MODEL__MODEL, oldModel, model));
-			}
-		}
-		return model;
-	}
+    if (model != null && model.eIsProxy())
+    {
+      InternalEObject oldModel = (InternalEObject)model;
+      model = eResolveProxy(oldModel);
+      if (model != oldModel)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArchitecturePackage.INSTANCE_MODEL__MODEL, oldModel, model));
+      }
+    }
+    return model;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EObject basicGetModel() {
-		return model;
-	}
+    return model;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setModel(EObject newModel) {
-		EObject oldModel = model;
-		model = newModel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArchitecturePackage.INSTANCE_MODEL__MODEL, oldModel, model));
-	}
+    EObject oldModel = model;
+    model = newModel;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ArchitecturePackage.INSTANCE_MODEL__MODEL, oldModel, model));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ArchitecturePackage.INSTANCE_MODEL__MODEL:
-				if (resolve) return getModel();
-				return basicGetModel();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.INSTANCE_MODEL__MODEL:
+        if (resolve) return getModel();
+        return basicGetModel();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ArchitecturePackage.INSTANCE_MODEL__MODEL:
-				setModel((EObject)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.INSTANCE_MODEL__MODEL:
+        setModel((EObject)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ArchitecturePackage.INSTANCE_MODEL__MODEL:
-				setModel((EObject)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.INSTANCE_MODEL__MODEL:
+        setModel((EObject)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ArchitecturePackage.INSTANCE_MODEL__MODEL:
-				return model != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.INSTANCE_MODEL__MODEL:
+        return model != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //InstanceModelImpl

@@ -22,22 +22,22 @@ import org.qualitune.evolution.megamodel.architecture.MetaMetaModel;
  */
 public class MetaMetaModelImpl extends ReferenceModelImpl implements MetaMetaModel {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected MetaMetaModelImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return ArchitecturePackage.Literals.META_META_MODEL;
-	}
+    return ArchitecturePackage.Literals.META_META_MODEL;
+  }
 
 } //MetaMetaModelImpl

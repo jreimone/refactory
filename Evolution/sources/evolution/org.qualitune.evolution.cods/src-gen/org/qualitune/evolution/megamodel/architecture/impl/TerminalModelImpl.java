@@ -22,22 +22,22 @@ import org.qualitune.evolution.megamodel.architecture.TerminalModel;
  */
 public class TerminalModelImpl extends ModelImpl implements TerminalModel {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected TerminalModelImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return ArchitecturePackage.Literals.TERMINAL_MODEL;
-	}
+    return ArchitecturePackage.Literals.TERMINAL_MODEL;
+  }
 
 } //TerminalModelImpl

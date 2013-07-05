@@ -32,129 +32,135 @@ import org.qualitune.evolution.megamodel.architecture.TransformationModel;
  */
 public class TransformationModelImpl extends TerminalModelImpl implements TransformationModel {
 	/**
-	 * The cached value of the '{@link #getTransformation() <em>Transformation</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTransformation() <em>Transformation</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTransformation()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTransformation()
+   * @generated
+   * @ordered
+   */
 	protected EObject transformation;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected TransformationModelImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return ArchitecturePackage.Literals.TRANSFORMATION_MODEL;
-	}
+    return ArchitecturePackage.Literals.TRANSFORMATION_MODEL;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EObject getTransformation() {
-		if (transformation != null && transformation.eIsProxy()) {
-			InternalEObject oldTransformation = (InternalEObject)transformation;
-			transformation = eResolveProxy(oldTransformation);
-			if (transformation != oldTransformation) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION, oldTransformation, transformation));
-			}
-		}
-		return transformation;
-	}
+    if (transformation != null && transformation.eIsProxy())
+    {
+      InternalEObject oldTransformation = (InternalEObject)transformation;
+      transformation = eResolveProxy(oldTransformation);
+      if (transformation != oldTransformation)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION, oldTransformation, transformation));
+      }
+    }
+    return transformation;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EObject basicGetTransformation() {
-		return transformation;
-	}
+    return transformation;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setTransformation(EObject newTransformation) {
-		EObject oldTransformation = transformation;
-		transformation = newTransformation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION, oldTransformation, transformation));
-	}
+    EObject oldTransformation = transformation;
+    transformation = newTransformation;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION, oldTransformation, transformation));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION:
-				if (resolve) return getTransformation();
-				return basicGetTransformation();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION:
+        if (resolve) return getTransformation();
+        return basicGetTransformation();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION:
-				setTransformation((EObject)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION:
+        setTransformation((EObject)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION:
-				setTransformation((EObject)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION:
+        setTransformation((EObject)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION:
-				return transformation != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case ArchitecturePackage.TRANSFORMATION_MODEL__TRANSFORMATION:
+        return transformation != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //TransformationModelImpl
