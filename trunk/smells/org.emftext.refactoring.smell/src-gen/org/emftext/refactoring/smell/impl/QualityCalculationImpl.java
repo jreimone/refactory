@@ -124,7 +124,7 @@ public class QualityCalculationImpl extends EObjectImpl implements QualityCalcul
 	 */
 	public ConcreteQualitySmell getConcreteSmell() {
 		if (eContainerFeatureID() != SmellPackage.QUALITY_CALCULATION__CONCRETE_SMELL) return null;
-		return (ConcreteQualitySmell)eContainer();
+		return (ConcreteQualitySmell)eInternalContainer();
 	}
 
 	/**

@@ -34,7 +34,7 @@ public class SmellFactoryImpl extends EFactoryImpl implements SmellFactory {
 	 */
 	public static SmellFactory init() {
 		try {
-			SmellFactory theSmellFactory = (SmellFactory)EPackage.Registry.INSTANCE.getEFactory("http://modelrefactoring.org/smell"); 
+			SmellFactory theSmellFactory = (SmellFactory)EPackage.Registry.INSTANCE.getEFactory(SmellPackage.eNS_URI);
 			if (theSmellFactory != null) {
 				return theSmellFactory;
 			}
