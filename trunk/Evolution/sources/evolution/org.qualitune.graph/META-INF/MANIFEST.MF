@@ -105,6 +105,5 @@ Export-Package: com.google.common.annotations,
  org.mvel2.util
 Require-Bundle: org.jdom,
  org.eclipse.core.runtime,
- javax.xml.bind,
  javax.xml
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
