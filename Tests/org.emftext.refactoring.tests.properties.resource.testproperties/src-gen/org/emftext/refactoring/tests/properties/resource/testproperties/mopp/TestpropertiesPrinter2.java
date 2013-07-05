@@ -947,6 +947,12 @@ public class TestpropertiesPrinter2 implements org.emftext.refactoring.tests.pro
 	}
 	
 	protected PrintToken createNewLineToken(org.eclipse.emf.ecore.EObject container) {
+		if (options != null) {
+			Object lineBreaks = options.get(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.LINE_DELIMITER_FOR_PRINTING);
+			if (lineBreaks != null && lineBreaks instanceof String) {
+				return new PrintToken((String) lineBreaks, null, container);
+			}
+		}
 		return new PrintToken(NEW_LINE, null, container);
 	}
 	

@@ -8,29 +8,38 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
 public class TestpropertiesTokenStyle implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenStyle {
 	
-	private int[] color;
-	private int[] backgroundColor;
+	private int[] colorAsRGB;
+	
+	private int[] backgroundColorAsRGB;
+	
 	private boolean bold;
+	
 	private boolean italic;
+	
 	private boolean strikethrough;
+	
 	private boolean underline;
 	
-	public TestpropertiesTokenStyle(int[] color, int[] backgroundColor, boolean bold, boolean italic, boolean striketrough, boolean underline) {
+	public TestpropertiesTokenStyle(int[] colorAsRGB, int[] backgroundColorAsRGB, boolean bold, boolean italic, boolean striketrough, boolean underline) {
 		super();
-		this.color = color;
-		this.backgroundColor = backgroundColor;
+		this.colorAsRGB = colorAsRGB;
+		this.backgroundColorAsRGB = backgroundColorAsRGB;
 		this.bold = bold;
 		this.italic = italic;
 		this.strikethrough = striketrough;
 		this.underline = underline;
 	}
 	
+	public TestpropertiesTokenStyle(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenStyle styleToCopy) {
+		this(styleToCopy.getColorAsRGB(), styleToCopy.getBackgroundColorAsRGB(), styleToCopy.isBold(), styleToCopy.isItalic(), styleToCopy.isStrikethrough(), styleToCopy.isUnderline());
+	}
+	
 	public int[] getColorAsRGB() {
-		return color;
+		return colorAsRGB;
 	}
 	
 	public int[] getBackgroundColorAsRGB() {
-		return backgroundColor;
+		return backgroundColorAsRGB;
 	}
 	
 	public boolean isBold() {
@@ -47,6 +56,30 @@ public class TestpropertiesTokenStyle implements org.emftext.refactoring.tests.p
 	
 	public boolean isUnderline() {
 		return underline;
+	}
+	
+	public void setColorAsRGB(int[] colorAsRGB) {
+		this.colorAsRGB = colorAsRGB;
+	}
+	
+	public void setBackgroundColorAsRGB(int[] backgroundColorAsRGB) {
+		this.backgroundColorAsRGB = backgroundColorAsRGB;
+	}
+	
+	public void setBold(boolean bold) {
+		this.bold = bold;
+	}
+	
+	public void setItalic(boolean italic) {
+		this.italic = italic;
+	}
+	
+	public void setStrikethrough(boolean strikethrough) {
+		this.strikethrough = strikethrough;
+	}
+	
+	public void setUnderline(boolean underline) {
+		this.underline = underline;
 	}
 	
 }

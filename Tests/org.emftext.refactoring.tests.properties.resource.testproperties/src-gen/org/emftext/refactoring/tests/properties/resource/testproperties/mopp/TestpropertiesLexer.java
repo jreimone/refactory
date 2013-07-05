@@ -23,11 +23,11 @@ public class TestpropertiesLexer extends Lexer {
     public static final int WHITESPACE=12;
 
     	public java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>();
-    	public java.util.List<Integer> lexerExceptionsPosition = new java.util.ArrayList<Integer>();
+    	public java.util.List<Integer> lexerExceptionPositions = new java.util.ArrayList<Integer>();
     	
     	public void reportError(org.antlr.runtime3_4_0.RecognitionException e) {
     		lexerExceptions.add(e);
-    		lexerExceptionsPosition.add(((org.antlr.runtime3_4_0.ANTLRStringStream) input).index());
+    		lexerExceptionPositions.add(((org.antlr.runtime3_4_0.ANTLRStringStream) input).index());
     	}
 
 
@@ -72,17 +72,17 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:892:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Testproperties.g:893:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Testproperties.g:833:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Testproperties.g:834:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Testproperties.g:893:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Testproperties.g:893:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Testproperties.g:834:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Testproperties.g:834:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
 
 
-            // Testproperties.g:893:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Testproperties.g:834:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -137,10 +137,10 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:896:8: ( ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
-            // Testproperties.g:897:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Testproperties.g:837:8: ( ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
+            // Testproperties.g:838:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             {
-            // Testproperties.g:897:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Testproperties.g:838:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -159,9 +159,9 @@ public class TestpropertiesLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // Testproperties.g:897:3: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Testproperties.g:838:3: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // Testproperties.g:897:3: ( '-' )?
+                    // Testproperties.g:838:3: ( '-' )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -170,7 +170,7 @@ public class TestpropertiesLexer extends Lexer {
                     }
                     switch (alt2) {
                         case 1 :
-                            // Testproperties.g:897:4: '-'
+                            // Testproperties.g:838:4: '-'
                             {
                             match('-'); 
 
@@ -190,7 +190,7 @@ public class TestpropertiesLexer extends Lexer {
                     }
 
 
-                    // Testproperties.g:897:19: ( '0' .. '9' )*
+                    // Testproperties.g:838:19: ( '0' .. '9' )*
                     loop3:
                     do {
                         int alt3=2;
@@ -227,7 +227,7 @@ public class TestpropertiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Testproperties.g:897:31: '0'
+                    // Testproperties.g:838:31: '0'
                     {
                     match('0'); 
 
@@ -255,13 +255,13 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:900:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
-            // Testproperties.g:901:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Testproperties.g:841:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
+            // Testproperties.g:842:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
             {
-            // Testproperties.g:901:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // Testproperties.g:901:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // Testproperties.g:842:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Testproperties.g:842:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // Testproperties.g:901:3: ( '-' )?
+            // Testproperties.g:842:3: ( '-' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -270,7 +270,7 @@ public class TestpropertiesLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // Testproperties.g:901:4: '-'
+                    // Testproperties.g:842:4: '-'
                     {
                     match('-'); 
 
@@ -280,7 +280,7 @@ public class TestpropertiesLexer extends Lexer {
             }
 
 
-            // Testproperties.g:901:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Testproperties.g:842:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -299,7 +299,7 @@ public class TestpropertiesLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // Testproperties.g:901:10: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Testproperties.g:842:10: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
                     if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
                         input.consume();
@@ -311,7 +311,7 @@ public class TestpropertiesLexer extends Lexer {
                     }
 
 
-                    // Testproperties.g:901:21: ( '0' .. '9' )*
+                    // Testproperties.g:842:21: ( '0' .. '9' )*
                     loop6:
                     do {
                         int alt6=2;
@@ -348,7 +348,7 @@ public class TestpropertiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Testproperties.g:901:35: '0'
+                    // Testproperties.g:842:35: '0'
                     {
                     match('0'); 
 
@@ -360,7 +360,7 @@ public class TestpropertiesLexer extends Lexer {
 
             match('.'); 
 
-            // Testproperties.g:901:44: ( '0' .. '9' )+
+            // Testproperties.g:842:44: ( '0' .. '9' )+
             int cnt8=0;
             loop8:
             do {
@@ -420,13 +420,13 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:904:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
-            // Testproperties.g:905:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Testproperties.g:845:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
+            // Testproperties.g:846:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
             {
-            // Testproperties.g:905:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // Testproperties.g:905:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Testproperties.g:846:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Testproperties.g:846:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // Testproperties.g:905:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Testproperties.g:846:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt9=0;
             loop9:
             do {
@@ -484,8 +484,8 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:907:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Testproperties.g:908:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Testproperties.g:848:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Testproperties.g:849:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -515,13 +515,13 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:911:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Testproperties.g:912:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Testproperties.g:852:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Testproperties.g:853:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Testproperties.g:912:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Testproperties.g:912:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Testproperties.g:853:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Testproperties.g:853:3: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Testproperties.g:912:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Testproperties.g:853:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt10=3;
             int LA10_0 = input.LA(1);
 
@@ -547,7 +547,7 @@ public class TestpropertiesLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // Testproperties.g:912:4: '\\r\\n'
+                    // Testproperties.g:853:4: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -556,14 +556,14 @@ public class TestpropertiesLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Testproperties.g:912:13: '\\r'
+                    // Testproperties.g:853:13: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Testproperties.g:912:20: '\\n'
+                    // Testproperties.g:853:20: '\\n'
                     {
                     match('\n'); 
 
@@ -594,21 +594,21 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_91_93;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:915:13: ( ( ( '[' ) (~ ( ']' ) )* ( ']' ) ) )
-            // Testproperties.g:916:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
+            // Testproperties.g:856:13: ( ( ( '[' ) (~ ( ']' ) )* ( ']' ) ) )
+            // Testproperties.g:857:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
             {
-            // Testproperties.g:916:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
-            // Testproperties.g:916:3: ( '[' ) (~ ( ']' ) )* ( ']' )
+            // Testproperties.g:857:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
+            // Testproperties.g:857:3: ( '[' ) (~ ( ']' ) )* ( ']' )
             {
-            // Testproperties.g:916:3: ( '[' )
-            // Testproperties.g:916:4: '['
+            // Testproperties.g:857:3: ( '[' )
+            // Testproperties.g:857:4: '['
             {
             match('['); 
 
             }
 
 
-            // Testproperties.g:916:8: (~ ( ']' ) )*
+            // Testproperties.g:857:8: (~ ( ']' ) )*
             loop11:
             do {
                 int alt11=2;
@@ -642,8 +642,8 @@ public class TestpropertiesLexer extends Lexer {
             } while (true);
 
 
-            // Testproperties.g:916:17: ( ']' )
-            // Testproperties.g:916:18: ']'
+            // Testproperties.g:857:17: ( ']' )
+            // Testproperties.g:857:18: ']'
             {
             match(']'); 
 
@@ -669,21 +669,21 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_60_62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:918:13: ( ( ( '<' ) (~ ( '>' ) )* ( '>' ) ) )
-            // Testproperties.g:919:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
+            // Testproperties.g:859:13: ( ( ( '<' ) (~ ( '>' ) )* ( '>' ) ) )
+            // Testproperties.g:860:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
             {
-            // Testproperties.g:919:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
-            // Testproperties.g:919:3: ( '<' ) (~ ( '>' ) )* ( '>' )
+            // Testproperties.g:860:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
+            // Testproperties.g:860:3: ( '<' ) (~ ( '>' ) )* ( '>' )
             {
-            // Testproperties.g:919:3: ( '<' )
-            // Testproperties.g:919:4: '<'
+            // Testproperties.g:860:3: ( '<' )
+            // Testproperties.g:860:4: '<'
             {
             match('<'); 
 
             }
 
 
-            // Testproperties.g:919:8: (~ ( '>' ) )*
+            // Testproperties.g:860:8: (~ ( '>' ) )*
             loop12:
             do {
                 int alt12=2;
@@ -717,8 +717,8 @@ public class TestpropertiesLexer extends Lexer {
             } while (true);
 
 
-            // Testproperties.g:919:17: ( '>' )
-            // Testproperties.g:919:18: '>'
+            // Testproperties.g:860:17: ( '>' )
+            // Testproperties.g:860:18: '>'
             {
             match('>'); 
 
@@ -744,21 +744,21 @@ public class TestpropertiesLexer extends Lexer {
         try {
             int _type = QUOTED_34_34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Testproperties.g:921:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
-            // Testproperties.g:922:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Testproperties.g:862:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
+            // Testproperties.g:863:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
             {
-            // Testproperties.g:922:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Testproperties.g:922:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Testproperties.g:863:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Testproperties.g:863:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
             {
-            // Testproperties.g:922:3: ( '\"' )
-            // Testproperties.g:922:4: '\"'
+            // Testproperties.g:863:3: ( '\"' )
+            // Testproperties.g:863:4: '\"'
             {
             match('\"'); 
 
             }
 
 
-            // Testproperties.g:922:8: (~ ( '\"' ) )*
+            // Testproperties.g:863:8: (~ ( '\"' ) )*
             loop13:
             do {
                 int alt13=2;
@@ -792,8 +792,8 @@ public class TestpropertiesLexer extends Lexer {
             } while (true);
 
 
-            // Testproperties.g:922:17: ( '\"' )
-            // Testproperties.g:922:18: '\"'
+            // Testproperties.g:863:17: ( '\"' )
+            // Testproperties.g:863:18: '\"'
             {
             match('\"'); 
 

@@ -46,6 +46,12 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 	private org.eclipse.emf.ecore.EObject root;
 	
 	/**
+	 * The target object, if this proposal suggests to insert a reference to another
+	 * object.
+	 */
+	private Object referenceTarget;
+	
+	/**
 	 * The string that will be inserted if the user picks this proposal. This string
 	 * can differ from 'displayString' because usually only the missing part of the
 	 * text is inserted and an existing prefix is kept.
@@ -63,7 +69,7 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 	 * the prefix to allow proposal post processors to access these and add valid
 	 * proposals even if the built-in proposal engine did not find a matching
 	 * proposal. The completion pop-up will only show proposals for which this method
-	 * returns true. See also {@link #getMatchesPrefix()}.
+	 * returns true. See also {@link #isMatchesPrefix()}.
 	 */
 	private boolean matchesPrefix;
 	
@@ -91,6 +97,10 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 		return root;
 	}
 	
+	public Object getReferenceTarget() {
+		return referenceTarget;
+	}
+	
 	public String getInsertString() {
 		return insertString;
 	}
@@ -105,12 +115,16 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 	 * using the camel case style. Only proposals that return true will be considered
 	 * for the final list of proposals that is presented in the editor.
 	 */
-	public boolean getMatchesPrefix() {
+	public boolean isMatchesPrefix() {
 		return matchesPrefix;
 	}
 	
 	public void setRoot(org.eclipse.emf.ecore.EObject root) {
 		this.root = root;
+	}
+	
+	public void setReferenceTarget(Object referenceTarget) {
+		this.referenceTarget = referenceTarget;
 	}
 	
 	public void setInsertString(String insertString) {
@@ -165,7 +179,7 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 		if (object instanceof TestpropertiesCompletionProposal) {
 			TestpropertiesCompletionProposal other = (TestpropertiesCompletionProposal) object;
 			// proposals that start with the prefix are preferred over the ones that do not
-			int startCompare = (matchesPrefix ? 1 : 0) - (other.getMatchesPrefix() ? 1 : 0);
+			int startCompare = (matchesPrefix ? 1 : 0) - (other.isMatchesPrefix() ? 1 : 0);
 			// if both proposals start with the prefix of both do not the insert string is
 			// compared
 			return startCompare == 0 ? getInsertString().compareTo(other.getInsertString()) : -startCompare;
@@ -174,9 +188,9 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 	}
 	
 	public String toString() {
-		String result = (container == null ? "null" : container.eClass().getName()) + ".";
-		result += (structuralFeature == null ? "null" : structuralFeature.getName());
-		result += ": " + insertString;
+		String result = (container == null ? "<NO_ECLASS>" : container.eClass().getName()) + ".";
+		result += (structuralFeature == null ? "<NO_ESTRUCTURALFEATURE>" : structuralFeature.getName());
+		result += ": '" + insertString + "'";
 		return result;
 	}
 	

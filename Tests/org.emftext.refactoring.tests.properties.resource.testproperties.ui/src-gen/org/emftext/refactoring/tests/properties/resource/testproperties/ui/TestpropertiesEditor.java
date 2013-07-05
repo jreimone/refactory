@@ -18,6 +18,9 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
  * The editor's ruler context menu has id
  * <code>org.emftext.refactoring.tests.properties.resource.testproperties.EditorRul
  * er</code>.
+ * The editor's editing context has id
+ * <code>org.emftext.refactoring.tests.properties.resource.testproperties.EditorSco
+ * pe</code>.
  * </p>
  */
 public class TestpropertiesEditor extends org.eclipse.ui.editors.text.TextEditor implements org.eclipse.emf.edit.domain.IEditingDomainProvider, org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener, org.eclipse.emf.common.ui.viewer.IViewerProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesBracketHandlerProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesAnnotationModelProvider {
@@ -40,7 +43,7 @@ public class TestpropertiesEditor extends org.eclipse.ui.editors.text.TextEditor
 	
 	public TestpropertiesEditor() {
 		super();
-		setSourceViewerConfiguration(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSourceViewerConfiguration(this, this, this, colorManager));
+		setSourceViewerConfiguration(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesSourceViewerConfiguration(this, this, colorManager));
 		initializeEditingDomain();
 		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE);
 		addSelectionChangedListener(this);
@@ -138,6 +141,9 @@ public class TestpropertiesEditor extends org.eclipse.ui.editors.text.TextEditor
 		// turn projection mode on
 		viewer.doOperation(org.eclipse.jface.text.source.projection.ProjectionViewer.TOGGLE);
 		codeFoldingManager = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCodeFoldingManager(viewer, this);
+		
+		org.eclipse.ui.contexts.IContextService contextService = (org.eclipse.ui.contexts.IContextService) getSite().getService(org.eclipse.ui.contexts.IContextService.class);
+		contextService.activateContext("org.emftext.refactoring.tests.properties.resource.testproperties.EditorScope");
 	}
 	
 	protected void doSetInput(org.eclipse.ui.IEditorInput editorInput) throws org.eclipse.core.runtime.CoreException {

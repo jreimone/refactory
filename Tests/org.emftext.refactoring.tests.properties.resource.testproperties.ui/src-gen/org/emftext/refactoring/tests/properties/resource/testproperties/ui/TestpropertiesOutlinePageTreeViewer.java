@@ -34,6 +34,22 @@ public class TestpropertiesOutlinePageTreeViewer extends org.eclipse.jface.viewe
 		}
 	}
 	
+	private static class FlatEObjectComparer extends org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper {
+		
+		private static final long serialVersionUID = 1L;
+		
+		@Override		
+		protected boolean haveEqualReference(org.eclipse.emf.ecore.EObject eObject1, org.eclipse.emf.ecore.EObject eObject2, org.eclipse.emf.ecore.EReference reference) {
+			return true;
+		}
+		
+		@Override		
+		protected boolean equalFeatureMaps(org.eclipse.emf.ecore.util.FeatureMap featureMap1, org.eclipse.emf.ecore.util.FeatureMap featureMap2) {
+			return true;
+		}
+		
+	}
+	
 	private boolean suppressNotifications = false;
 	
 	private boolean linkWithEditor = false;
@@ -56,6 +72,9 @@ public class TestpropertiesOutlinePageTreeViewer extends org.eclipse.jface.viewe
 			}
 			
 			public boolean equals(Object o1, Object o2) {
+				if (o1 instanceof org.eclipse.emf.ecore.EObject && o2 instanceof org.eclipse.emf.ecore.EObject) {
+					return new FlatEObjectComparer().equals((org.eclipse.emf.ecore.EObject) o1, (org.eclipse.emf.ecore.EObject) o2);
+				}
 				String s1 = toString(o1);
 				String s2 = toString(o2);
 				if (s1 != null) {
@@ -65,11 +84,6 @@ public class TestpropertiesOutlinePageTreeViewer extends org.eclipse.jface.viewe
 			}
 			
 			private String toString(Object o) {
-				if (o instanceof org.eclipse.emf.ecore.EObject) {
-					org.eclipse.emf.ecore.EObject e = (org.eclipse.emf.ecore.EObject) o;
-					String uri = getURI(e);
-					return uri;
-				}
 				if (o instanceof String) {
 					return (String) o;
 				}
@@ -77,22 +91,6 @@ public class TestpropertiesOutlinePageTreeViewer extends org.eclipse.jface.viewe
 					return ((org.eclipse.emf.ecore.resource.Resource) o).getURI().toString();
 				}
 				return null;
-			}
-			
-			private String getURI(org.eclipse.emf.ecore.EObject eObject) {
-				java.util.List<String> uriFragmentPath = getFragmentPath(eObject);
-				String uriFragment = org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesStringUtil.explode(uriFragmentPath, "/");
-				return uriFragment;
-			}
-			
-			private java.util.List<String> getFragmentPath(org.eclipse.emf.ecore.EObject eObject) {
-				org.eclipse.emf.ecore.InternalEObject internalEObject = (org.eclipse.emf.ecore.InternalEObject) eObject;
-				java.util.List<String> uriFragmentPath = new java.util.ArrayList<String>();
-				for (org.eclipse.emf.ecore.InternalEObject container = internalEObject.eInternalContainer(); container != null; container = internalEObject.eInternalContainer()) {
-					uriFragmentPath.add(0, container.eURIFragmentSegment(internalEObject.eContainingFeature(), internalEObject));
-					internalEObject = container;
-				}
-				return uriFragmentPath;
 			}
 			
 		});

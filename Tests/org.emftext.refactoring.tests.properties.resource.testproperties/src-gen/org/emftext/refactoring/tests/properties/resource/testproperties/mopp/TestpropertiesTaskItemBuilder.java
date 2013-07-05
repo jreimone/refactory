@@ -22,9 +22,11 @@ public class TestpropertiesTaskItemBuilder {
 		}
 		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem> taskItems = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem>();
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItemDetector taskItemDetector = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItemDetector();
+		java.io.InputStream inputStream = null;
 		try {
-			java.io.InputStream inputStream = resource.getContents();
-			String content = org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesStreamUtil.getContent(inputStream);
+			inputStream = resource.getContents();
+			String charset = resource.getCharset();
+			String content = org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesStreamUtil.getContent(inputStream, charset);
 			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextScanner lexer = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().createLexer();
 			lexer.setText(content);
 			
@@ -38,6 +40,14 @@ public class TestpropertiesTaskItemBuilder {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesPlugin.logError("Exception while searching for task items", e);
 		} catch (org.eclipse.core.runtime.CoreException e) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesPlugin.logError("Exception while searching for task items", e);
+		}
+		
+		try {
+			if (inputStream != null) {
+				inputStream.close();
+			}
+		} catch (java.io.IOException e) {
+			// Ignore this
 		}
 		
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem taskItem : taskItems) {

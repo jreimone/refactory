@@ -12,156 +12,29 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 public class TestpropertiesBracketSet {
 	
 	/**
-	 * the separator between a bracket pair, should not contain escape needed
-	 * character, it will be used as regular expression
+	 * The separator between a bracket pair, must not contain characters that need to
+	 * be escaped as it will be used as regular expression.
 	 */
 	public final static String BRACKET_SEPARATOR = " and ";
+	
+	private final static String SERIAL_SEPARATOR = "#";
+	
 	private final static org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPositionHelper positionHelper = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPositionHelper();
+	
 	private java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair> bracketPairs;
-	private org.eclipse.jface.text.source.ISourceViewer viewer;
 	private String languageID;
-	private org.eclipse.swt.custom.StyledText textWidget;
-	private org.eclipse.jface.preference.IPreferenceStore preferenceStore;
 	
 	/**
-	 * A single pair of brackets.
+	 * Creates a new bracket set to manage bracket pairs.
 	 */
-	private class BracketPair implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair {
-		
-		private final String[] brackets;
-		private boolean closingEnabledInside;
-		
-		public BracketPair(String opening, String closing, boolean closingEnabledInside) {
-			brackets = new String[] { opening, closing };
-			this.closingEnabledInside = closingEnabledInside;
-		}
-		
-		public String getClosingBracket() {
-			return brackets[1];
-		}
-		
-		public String getOpeningBracket() {
-			return brackets[0];
-		}
-		
-		public boolean isClosingEnabledInside() {
-			return closingEnabledInside;
-		}
-		
-		public void setClosingEnabledInside(boolean closingEnabledInside) {
-			this.closingEnabledInside=closingEnabledInside;
-		}
-	}
-	
-	/**
-	 * A listener for the automatic closing.
-	 */
-	private class ClosingListener implements org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesBracketHandler, org.eclipse.swt.events.VerifyListener, org.eclipse.swt.events.ModifyListener, org.eclipse.swt.custom.VerifyKeyListener {
-		private int closingLength = -1;
-		private int addedPosition = -1;
-		private boolean closingAdded = false;
-		private boolean isEmbraced = false;
-		private String closing;
-		
-		/**
-		 * Automatic closing will be activated if the text about to insert is a bracket.
-		 */
-		public void verifyText(org.eclipse.swt.events.VerifyEvent e) {
-			int caret = textWidget.getCaretOffset();
-			if (!isOpeningBracket(e.text)) {
-				return;
-			}
-			if (caret > 0 && caret < textWidget.getCharCount()) {
-				org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair = getBracketPair(textWidget.getTextRange(caret - 1, 1), textWidget.getTextRange(caret, 1));
-				if (bracketPair != null && !bracketPair.isClosingEnabledInside()) {
-					return;
-				}
-			}
-			closingAdded = true;
-			closing = getCounterpart(e.text);
-			e.text += closing;
-			closingLength = closing.length();
-		}
-		
-		/**
-		 * After a change there are two cases which have to be considered:
-		 * 1) if an automatic closing happened the caret will be set between the bracket
-		 * pair
-		 * 2) if a bracket opening is deleted on the left side of the caret the bracket
-		 * closing on the right side of this caret is deleted as well
-		 */
-		public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
-			if (closingAdded) {
-				closingAdded = false;
-				addedPosition = textWidget.getCaretOffset() - closingLength;
-				textWidget.setCaretOffset(addedPosition);
-				closingLength = -1;
-			}
-			if (isEmbraced) {
-				isEmbraced = false;
-				textWidget.replaceTextRange(textWidget.getCaretOffset(), 1, "");
-			}
-		}
-		
-		/**
-		 * This is for the Backspace key, if you want to delete a previous character.
-		 */
-		public void verifyKey(org.eclipse.swt.events.VerifyEvent e) {
-			int caretOffset = textWidget.getCaretOffset();
-			int caret = caretOffset;
-			// Discard the closing bracket if there is one
-			if (closing != null && closing.equals("" + e.character) && addedPosition == caret) {
-				e.doit = false;
-				textWidget.setCaretOffset(caret + 1);
-			}
-			// if the CTRL key is pressed to activate the code completion, we do clear the
-			// information about the recently closed bracket.
-			if ((e.keyCode & org.eclipse.swt.SWT.CTRL) != 0) {
-				return;
-			}
-			closing = null;
-			addedPosition = -1;
-			
-			if (caret == 0 || e.keyCode != org.eclipse.swt.SWT.BS || caret == textWidget.getCharCount()) {
-				return;
-			}
-			String prevStr = textWidget.getTextRange(caretOffset - 1, 1);
-			String nextStr = textWidget.getTextRange(caretOffset, 1);
-			if (e.keyCode == org.eclipse.swt.SWT.BS && isOpeningBracket(prevStr) && getCounterpart(prevStr).equals(nextStr)) {
-				isEmbraced = true;
-			}
-		}
-		public boolean addedClosingBracket() {
-			return closing != null;
-		}
-		
-		public String getClosingBracket() {
-			return closing;
-		}
-		
-	}
-	
-	/**
-	 * Creates a bracket set to manage the bracket pairs.
-	 * 
-	 * @param sourceViewer the source viewer for matching brackets
-	 */
-	public TestpropertiesBracketSet(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesEditor editor, org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
-		languageID = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getSyntaxName();
+	public TestpropertiesBracketSet() {
+		super();
+		this.languageID = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getSyntaxName();
 		this.bracketPairs = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair>();
-		if (sourceViewer != null) {
-			viewer = sourceViewer;
-			textWidget = viewer.getTextWidget();
-		}
-		preferenceStore = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.getDefault().getPreferenceStore();
-		if (sourceViewer != null && preferenceStore != null) {
-			resetBrackets();
-			addListeners(editor);
-		}
 	}
 	
 	/**
-	 * Checks whether the given string is an open bracket.
+	 * Checks whether the given string is an opening bracket.
 	 */
 	public boolean isOpeningBracket(String bracket) {
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
@@ -173,7 +46,7 @@ public class TestpropertiesBracketSet {
 	}
 	
 	/**
-	 * Checks whether the string is a bracket.
+	 * Checks whether the given string is a bracket (opening or closing).
 	 */
 	public boolean isBracket(String bracket) {
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
@@ -182,18 +55,6 @@ public class TestpropertiesBracketSet {
 			}
 		}
 		return false;
-	}
-	
-	/**
-	 * Returns the bracket pair with the given opening and closing.
-	 */
-	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair getBracketPair(String opening, String closing) {
-		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
-			if (bracketPair.getOpeningBracket().equals(opening) && bracketPair.getClosingBracket().equals(closing)) {
-				return bracketPair;
-			}
-		}
-		return null;
 	}
 	
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair getBracketPair(int index) {
@@ -205,43 +66,46 @@ public class TestpropertiesBracketSet {
 	}
 	
 	/**
-	 * Adds the bracket pair to this bracket set.
+	 * Returns the bracket pair with the given opening and closing bracket. If no
+	 * matching pair is found, <code>null</code> is returned.
 	 */
-	public boolean addBracketPair(String opening, String closing, boolean closingEnabledInside) {
+	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair getBracketPair(String opening, String closing) {
+		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
+			if (bracketPair.getOpeningBracket().equals(opening) && bracketPair.getClosingBracket().equals(closing)) {
+				return bracketPair;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Adds a new bracket pair to this bracket set.
+	 */
+	public boolean addBracketPair(String opening, String closing, boolean closingEnabledInside, boolean closeAfterEnter) {
 		if (isBracket(opening) || isBracket(closing)) {
 			return false;
 		}
-		bracketPairs.add(new BracketPair(opening, closing, closingEnabledInside));
+		bracketPairs.add(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesBracketPair(opening, closing, closingEnabledInside, closeAfterEnter));
 		return true;
 	}
 	
 	/**
-	 * Sets whether other bracket pairs shall be automatically closed, when used
-	 * inside of this bracket pair.
+	 * Removes all bracket pairs from this bracket set and reloads the bracket set
+	 * from the preference store.
 	 */
-	public boolean setClosingEnabledInside(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair, boolean closingEnabledInside) {
-		if (bracketPair instanceof BracketPair) {
-			((BracketPair) bracketPair).setClosingEnabledInside(closingEnabledInside);
-			return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Removes all bracket pairs from this bracket set, reload the bracket set from
-	 * the preference store.
-	 */
-	public boolean resetBrackets() {
+	public boolean resetBrackets(org.eclipse.jface.preference.IPreferenceStore preferenceStore) {
 		String bracketPairs = preferenceStore.getString(languageID + org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_BRACKETS_SUFFIX);
 		if (bracketPairs == null) {
 			return false;
 		}
-		setBrackets(bracketPairs);
+		deserialize(bracketPairs);
 		return true;
 	}
 	
 	/**
-	 * Returns the counter part of a bracket.
+	 * Returns the counter part of a bracket (i.e., the closing bracket for the
+	 * opening one and the other way around). If no respective bracket is found,
+	 * <code>null</code> is returned.
 	 */
 	public String getCounterpart(String bracket) {
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
@@ -285,22 +149,19 @@ public class TestpropertiesBracketSet {
 	/**
 	 * Removes the old bracket set and sets the given bracket set. It is useful to
 	 * take a stored <code>String</code> in a preference store. A bracket pair
-	 * contains of opening, closing and isClosingEnabledInside = {'1','0'}.
-	 * 
-	 * @param bracketSet the bracket set as a <code>String</code> in the form
-	 * "()0<>0[]1". This string must have length == 3*n
-	 * 
-	 * @return <code>true</code> if successful
+	 * contains of opening, closing and the flags 'closingEnabledInside' and
+	 * 'closeAfterEnter'.
 	 */
-	public boolean setBrackets(String bracketSet) {
-		if (bracketSet.length() % 3 != 0) {
-			return false;
-		}
+	public void deserialize(String bracketSet) {
 		bracketPairs = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair>();
-		for (int i = 0; i < bracketSet.length() / 3; i++) {
-			addBracketPair("" + bracketSet.charAt(i * 3), "" + bracketSet.charAt(i * 3 + 1), bracketSet.charAt(i * 3 + 2) != '0');
+		String[] parts = bracketSet.split(SERIAL_SEPARATOR + SERIAL_SEPARATOR);
+		for (String part : parts) {
+			String[] fields = part.split(SERIAL_SEPARATOR);
+			if (fields.length != 4) {
+				continue;
+			}
+			addBracketPair(fields[0], fields[1], "1".equals(fields[2]), "1".equals(fields[3]));
 		}
-		return true;
 	}
 	
 	/**
@@ -324,34 +185,39 @@ public class TestpropertiesBracketSet {
 	 * Returns this bracket set as <code>String</code>. This is useful to store the
 	 * set in the <code>org.eclipse.jface.preference.IPreferenceStore</code>.
 	 * 
-	 * @return String the bracket set in the form "()<>[]"
-	 * 
 	 * @see org.eclipse.jface.preference.IPreferenceStore
 	 */
-	public String getBracketString() {
-		if (bracketPairs.size() < 1) {
-			return "";
-		}
-		String result = "";
+	public String serialize() {
+		StringBuilder result = new StringBuilder();
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
-			String isClosingStr = "0";
-			if (bracketPair.isClosingEnabledInside()) {
-				isClosingStr = "1";
-			}
-			result += bracketPair.getOpeningBracket() + bracketPair.getClosingBracket() + isClosingStr;
+			result.append(bracketPair.getOpeningBracket());
+			result.append(SERIAL_SEPARATOR);
+			result.append(bracketPair.getClosingBracket());
+			result.append(SERIAL_SEPARATOR);
+			result.append(bracketPair.isClosingEnabledInside() ? "1" : "0");
+			result.append(SERIAL_SEPARATOR);
+			result.append(bracketPair.isCloseAfterEnter() ? "1" : "0");
+			// We use two separators to indicate the boundary between two bracket pairs
+			result.append(SERIAL_SEPARATOR);
+			result.append(SERIAL_SEPARATOR);
 		}
-		return result;
+		return result.toString();
 	}
 	
-	/**
-	 * Adds listeners to handle bracket automatic closing.
-	 */
-	private void addListeners(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesEditor editor) {
-		ClosingListener closingListener = new ClosingListener();
-		textWidget.addVerifyListener(closingListener);
-		textWidget.addVerifyKeyListener(closingListener);
-		textWidget.addModifyListener(closingListener);
-		editor.setBracketHandler(closingListener);
+	public int getCaretOffset(org.eclipse.jface.text.source.ISourceViewer viewer, org.eclipse.swt.custom.StyledText textWidget) {
+		org.eclipse.jface.text.IDocument document = viewer.getDocument();
+		org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer = null;
+		if (viewer instanceof org.eclipse.jface.text.source.projection.ProjectionViewer) {
+			projectionViewer = (org.eclipse.jface.text.source.projection.ProjectionViewer) viewer;
+		}
+		if (document == null) {
+			return -1;
+		}
+		int caretOffset = textWidget.getCaretOffset();
+		if (projectionViewer != null) {
+			caretOffset = projectionViewer.widgetOffset2ModelOffset(caretOffset);
+		}
+		return caretOffset;
 	}
 	
 	/**
@@ -359,23 +225,12 @@ public class TestpropertiesBracketSet {
 	 * information will be stored in the <code>org.eclipse.jface.text.IDocument</code>
 	 * in the category <code>ExtensionConstants.PositionCategory.BRACKET</code>.
 	 */
-	public void matchingBrackets() {
-		org.eclipse.jface.text.IDocument document = viewer.getDocument();
-		org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer = null;
-		if (viewer instanceof org.eclipse.jface.text.source.projection.ProjectionViewer) {
-			projectionViewer = (org.eclipse.jface.text.source.projection.ProjectionViewer) viewer;
-		}
-		if (document == null) {
+	public void findAndHighlightMatchingBrackets(org.eclipse.jface.text.IDocument document, int caretOffset) {
+		if (caretOffset <= 0) {
 			return;
 		}
-		int caretOffset = textWidget.getCaretOffset();
-		if (projectionViewer != null) {
-			caretOffset = projectionViewer.widgetOffset2ModelOffset(caretOffset);
-		}
+		
 		final String prevStr;
-		if (caretOffset == 0) {
-			return;
-		}
 		try {
 			prevStr = "" + document.getChar(caretOffset - 1);
 		} catch (org.eclipse.jface.text.BadLocationException e) {
@@ -411,6 +266,32 @@ public class TestpropertiesBracketSet {
 			positionHelper.addPosition(document, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPositionCategory.BRACKET.toString(), position, 1);
 			positionHelper.addPosition(document, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPositionCategory.BRACKET.toString(), caretOffset - 1, 1);
 		}
+	}
+	
+	/**
+	 * Checks whether the given string is an opening bracket and closing is desired
+	 * after entering a line break.
+	 */
+	public boolean isCloseAfterEnter(String bracket) {
+		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
+			if (bracket.equals(bracketPair.getOpeningBracket())) {
+				return bracketPair.isCloseAfterEnter();
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Checks whether the given string is an opening bracket and closing is desired
+	 * right after entering this bracket.
+	 */
+	public boolean isCloseInstantly(String bracket) {
+		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair bracketPair : bracketPairs) {
+			if (bracket.equals(bracketPair.getOpeningBracket())) {
+				return !bracketPair.isCloseAfterEnter();
+			}
+		}
+		return false;
 	}
 	
 }
