@@ -24,120 +24,124 @@ import org.qualitune.evolution.megamodel.architecture.*;
  */
 public class ArchitectureFactoryImpl extends EFactoryImpl implements ArchitectureFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public static ArchitectureFactory init() {
-		try {
-			ArchitectureFactory theArchitectureFactory = (ArchitectureFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.qualitune.org/megamodel/architecture"); 
-			if (theArchitectureFactory != null) {
-				return theArchitectureFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new ArchitectureFactoryImpl();
-	}
+    try
+    {
+      ArchitectureFactory theArchitectureFactory = (ArchitectureFactory)EPackage.Registry.INSTANCE.getEFactory(ArchitecturePackage.eNS_URI);
+      if (theArchitectureFactory != null)
+      {
+        return theArchitectureFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new ArchitectureFactoryImpl();
+  }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ArchitectureFactoryImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case ArchitecturePackage.TERMINAL_MODEL: return createTerminalModel();
-			case ArchitecturePackage.TRANSFORMATION_MODEL: return createTransformationModel();
-			case ArchitecturePackage.META_META_MODEL: return createMetaMetaModel();
-			case ArchitecturePackage.META_MODEL: return createMetaModel();
-			case ArchitecturePackage.INSTANCE_MODEL: return createInstanceModel();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case ArchitecturePackage.TERMINAL_MODEL: return createTerminalModel();
+      case ArchitecturePackage.TRANSFORMATION_MODEL: return createTransformationModel();
+      case ArchitecturePackage.META_META_MODEL: return createMetaMetaModel();
+      case ArchitecturePackage.META_MODEL: return createMetaModel();
+      case ArchitecturePackage.INSTANCE_MODEL: return createInstanceModel();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TerminalModel createTerminalModel() {
-		TerminalModelImpl terminalModel = new TerminalModelImpl();
-		return terminalModel;
-	}
+    TerminalModelImpl terminalModel = new TerminalModelImpl();
+    return terminalModel;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TransformationModel createTransformationModel() {
-		TransformationModelImpl transformationModel = new TransformationModelImpl();
-		return transformationModel;
-	}
+    TransformationModelImpl transformationModel = new TransformationModelImpl();
+    return transformationModel;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public MetaMetaModel createMetaMetaModel() {
-		MetaMetaModelImpl metaMetaModel = new MetaMetaModelImpl();
-		return metaMetaModel;
-	}
+    MetaMetaModelImpl metaMetaModel = new MetaMetaModelImpl();
+    return metaMetaModel;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public MetaModel createMetaModel() {
-		MetaModelImpl metaModel = new MetaModelImpl();
-		return metaModel;
-	}
+    MetaModelImpl metaModel = new MetaModelImpl();
+    return metaModel;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public InstanceModel createInstanceModel() {
-		InstanceModelImpl instanceModel = new InstanceModelImpl();
-		return instanceModel;
-	}
+    InstanceModelImpl instanceModel = new InstanceModelImpl();
+    return instanceModel;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ArchitecturePackage getArchitecturePackage() {
-		return (ArchitecturePackage)getEPackage();
-	}
+    return (ArchitecturePackage)getEPackage();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
 	@Deprecated
 	public static ArchitecturePackage getPackage() {
-		return ArchitecturePackage.eINSTANCE;
-	}
+    return ArchitecturePackage.eINSTANCE;
+  }
 
 } //ArchitectureFactoryImpl

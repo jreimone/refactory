@@ -28,246 +28,256 @@ import org.qualitune.evolution.megamodel.architecture.*;
  */
 public class ArchitectureSwitch<T> extends Switch<T> {
 	/**
-	 * The cached model package
-	 * <!-- begin-user-doc -->
+   * The cached model package
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected static ArchitecturePackage modelPackage;
 
 	/**
-	 * Creates an instance of the switch.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the switch.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ArchitectureSwitch() {
-		if (modelPackage == null) {
-			modelPackage = ArchitecturePackage.eINSTANCE;
-		}
-	}
+    if (modelPackage == null)
+    {
+      modelPackage = ArchitecturePackage.eINSTANCE;
+    }
+  }
 
 	/**
-	 * Checks whether this is a switch for the given package.
-	 * <!-- begin-user-doc -->
+   * Checks whether this is a switch for the given package.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
-	 * @return whether this is a switch for the given package.
-	 * @generated
-	 */
+   * @parameter ePackage the package in question.
+   * @return whether this is a switch for the given package.
+   * @generated
+   */
 	@Override
 	protected boolean isSwitchFor(EPackage ePackage) {
-		return ePackage == modelPackage;
-	}
+    return ePackage == modelPackage;
+  }
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
+   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @generated
+   */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case ArchitecturePackage.MODEL: {
-				Model model = (Model)theEObject;
-				T result = caseModel(model);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArchitecturePackage.REFERENCE_MODEL: {
-				ReferenceModel referenceModel = (ReferenceModel)theEObject;
-				T result = caseReferenceModel(referenceModel);
-				if (result == null) result = caseModel(referenceModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArchitecturePackage.TERMINAL_MODEL: {
-				TerminalModel terminalModel = (TerminalModel)theEObject;
-				T result = caseTerminalModel(terminalModel);
-				if (result == null) result = caseModel(terminalModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArchitecturePackage.TRANSFORMATION_MODEL: {
-				TransformationModel transformationModel = (TransformationModel)theEObject;
-				T result = caseTransformationModel(transformationModel);
-				if (result == null) result = caseTerminalModel(transformationModel);
-				if (result == null) result = caseModel(transformationModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArchitecturePackage.MEGA_MODEL: {
-				MegaModel megaModel = (MegaModel)theEObject;
-				T result = caseMegaModel(megaModel);
-				if (result == null) result = caseTerminalModel(megaModel);
-				if (result == null) result = caseModel(megaModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArchitecturePackage.META_META_MODEL: {
-				MetaMetaModel metaMetaModel = (MetaMetaModel)theEObject;
-				T result = caseMetaMetaModel(metaMetaModel);
-				if (result == null) result = caseReferenceModel(metaMetaModel);
-				if (result == null) result = caseModel(metaMetaModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArchitecturePackage.META_MODEL: {
-				MetaModel metaModel = (MetaModel)theEObject;
-				T result = caseMetaModel(metaModel);
-				if (result == null) result = caseReferenceModel(metaModel);
-				if (result == null) result = caseModel(metaModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArchitecturePackage.INSTANCE_MODEL: {
-				InstanceModel instanceModel = (InstanceModel)theEObject;
-				T result = caseInstanceModel(instanceModel);
-				if (result == null) result = caseTerminalModel(instanceModel);
-				if (result == null) result = caseModel(instanceModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			default: return defaultCase(theEObject);
-		}
-	}
+    switch (classifierID)
+    {
+      case ArchitecturePackage.MODEL:
+      {
+        Model model = (Model)theEObject;
+        T result = caseModel(model);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArchitecturePackage.REFERENCE_MODEL:
+      {
+        ReferenceModel referenceModel = (ReferenceModel)theEObject;
+        T result = caseReferenceModel(referenceModel);
+        if (result == null) result = caseModel(referenceModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArchitecturePackage.TERMINAL_MODEL:
+      {
+        TerminalModel terminalModel = (TerminalModel)theEObject;
+        T result = caseTerminalModel(terminalModel);
+        if (result == null) result = caseModel(terminalModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArchitecturePackage.TRANSFORMATION_MODEL:
+      {
+        TransformationModel transformationModel = (TransformationModel)theEObject;
+        T result = caseTransformationModel(transformationModel);
+        if (result == null) result = caseTerminalModel(transformationModel);
+        if (result == null) result = caseModel(transformationModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArchitecturePackage.MEGA_MODEL:
+      {
+        MegaModel megaModel = (MegaModel)theEObject;
+        T result = caseMegaModel(megaModel);
+        if (result == null) result = caseTerminalModel(megaModel);
+        if (result == null) result = caseModel(megaModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArchitecturePackage.META_META_MODEL:
+      {
+        MetaMetaModel metaMetaModel = (MetaMetaModel)theEObject;
+        T result = caseMetaMetaModel(metaMetaModel);
+        if (result == null) result = caseReferenceModel(metaMetaModel);
+        if (result == null) result = caseModel(metaMetaModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArchitecturePackage.META_MODEL:
+      {
+        MetaModel metaModel = (MetaModel)theEObject;
+        T result = caseMetaModel(metaModel);
+        if (result == null) result = caseReferenceModel(metaModel);
+        if (result == null) result = caseModel(metaModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArchitecturePackage.INSTANCE_MODEL:
+      {
+        InstanceModel instanceModel = (InstanceModel)theEObject;
+        T result = caseInstanceModel(instanceModel);
+        if (result == null) result = caseTerminalModel(instanceModel);
+        if (result == null) result = caseModel(instanceModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      default: return defaultCase(theEObject);
+    }
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseModel(Model object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reference Model</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Reference Model</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reference Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reference Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseReferenceModel(ReferenceModel object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Terminal Model</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Terminal Model</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Terminal Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Terminal Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseTerminalModel(TerminalModel object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Transformation Model</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Transformation Model</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Transformation Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transformation Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseTransformationModel(TransformationModel object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mega Model</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Mega Model</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mega Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Mega Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseMegaModel(MegaModel object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Meta Meta Model</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Meta Meta Model</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Meta Meta Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Meta Meta Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseMetaMetaModel(MetaMetaModel object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Meta Model</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Meta Model</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Meta Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Meta Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseMetaModel(MetaModel object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance Model</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Instance Model</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Instance Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
 	public T caseInstanceModel(InstanceModel object) {
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+   * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+   * @generated
+   */
 	@Override
 	public T defaultCase(EObject object) {
-		return null;
-	}
+    return null;
+  }
 
 } //ArchitectureSwitch

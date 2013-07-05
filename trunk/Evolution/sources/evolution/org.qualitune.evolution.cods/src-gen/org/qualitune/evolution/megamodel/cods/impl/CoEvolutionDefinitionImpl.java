@@ -24,22 +24,22 @@ import org.qualitune.evolution.megamodel.cods.CodsPackage;
  */
 public class CoEvolutionDefinitionImpl extends EObjectImpl implements CoEvolutionDefinition {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected CoEvolutionDefinitionImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return CodsPackage.Literals.CO_EVOLUTION_DEFINITION;
-	}
+    return CodsPackage.Literals.CO_EVOLUTION_DEFINITION;
+  }
 
 } //CoEvolutionDefinitionImpl

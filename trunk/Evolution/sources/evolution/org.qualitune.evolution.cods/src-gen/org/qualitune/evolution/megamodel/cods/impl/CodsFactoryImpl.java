@@ -24,109 +24,113 @@ import org.qualitune.evolution.megamodel.cods.*;
  */
 public class CodsFactoryImpl extends EFactoryImpl implements CodsFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public static CodsFactory init() {
-		try {
-			CodsFactory theCodsFactory = (CodsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.qualitune.org/megamodel/cods"); 
-			if (theCodsFactory != null) {
-				return theCodsFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new CodsFactoryImpl();
-	}
+    try
+    {
+      CodsFactory theCodsFactory = (CodsFactory)EPackage.Registry.INSTANCE.getEFactory(CodsPackage.eNS_URI);
+      if (theCodsFactory != null)
+      {
+        return theCodsFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new CodsFactoryImpl();
+  }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public CodsFactoryImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case CodsPackage.CODS: return createCODS();
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION: return createDomainSpecificEvolutionSpecification();
-			case CodsPackage.EVOLUTION_DEFINITION: return createEvolutionDefinition();
-			case CodsPackage.CO_EVOLUTION_DEFINITION: return createCoEvolutionDefinition();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case CodsPackage.CODS: return createCODS();
+      case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION: return createDomainSpecificEvolutionSpecification();
+      case CodsPackage.EVOLUTION_DEFINITION: return createEvolutionDefinition();
+      case CodsPackage.CO_EVOLUTION_DEFINITION: return createCoEvolutionDefinition();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public CODS createCODS() {
-		CODSImpl cods = new CODSImpl();
-		return cods;
-	}
+    CODSImpl cods = new CODSImpl();
+    return cods;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public DomainSpecificEvolutionSpecification createDomainSpecificEvolutionSpecification() {
-		DomainSpecificEvolutionSpecificationImpl domainSpecificEvolutionSpecification = new DomainSpecificEvolutionSpecificationImpl();
-		return domainSpecificEvolutionSpecification;
-	}
+    DomainSpecificEvolutionSpecificationImpl domainSpecificEvolutionSpecification = new DomainSpecificEvolutionSpecificationImpl();
+    return domainSpecificEvolutionSpecification;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EvolutionDefinition createEvolutionDefinition() {
-		EvolutionDefinitionImpl evolutionDefinition = new EvolutionDefinitionImpl();
-		return evolutionDefinition;
-	}
+    EvolutionDefinitionImpl evolutionDefinition = new EvolutionDefinitionImpl();
+    return evolutionDefinition;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public CoEvolutionDefinition createCoEvolutionDefinition() {
-		CoEvolutionDefinitionImpl coEvolutionDefinition = new CoEvolutionDefinitionImpl();
-		return coEvolutionDefinition;
-	}
+    CoEvolutionDefinitionImpl coEvolutionDefinition = new CoEvolutionDefinitionImpl();
+    return coEvolutionDefinition;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public CodsPackage getCodsPackage() {
-		return (CodsPackage)getEPackage();
-	}
+    return (CodsPackage)getEPackage();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
 	@Deprecated
 	public static CodsPackage getPackage() {
-		return CodsPackage.eINSTANCE;
-	}
+    return CodsPackage.eINSTANCE;
+  }
 
 } //CodsFactoryImpl

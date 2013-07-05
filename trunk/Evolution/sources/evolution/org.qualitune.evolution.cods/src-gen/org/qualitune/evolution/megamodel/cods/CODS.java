@@ -28,19 +28,19 @@ import org.qualitune.evolution.megamodel.architecture.MegaModel;
  */
 public interface CODS extends MegaModel {
 	/**
-	 * Returns the value of the '<em><b>DSES</b></em>' containment reference list.
-	 * The list contents are of type {@link org.qualitune.evolution.megamodel.cods.DomainSpecificEvolutionSpecification}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>DSES</b></em>' containment reference list.
+   * The list contents are of type {@link org.qualitune.evolution.megamodel.cods.DomainSpecificEvolutionSpecification}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>DSES</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>DSES</em>' containment reference list.
-	 * @see org.qualitune.evolution.megamodel.cods.CodsPackage#getCODS_DSES()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>DSES</em>' containment reference list.
+   * @see org.qualitune.evolution.megamodel.cods.CodsPackage#getCODS_DSES()
+   * @model containment="true"
+   * @generated
+   */
 	EList<DomainSpecificEvolutionSpecification> getDSES();
 
 } // CODS
