@@ -24,87 +24,91 @@ import org.qualitune.evolution.tracing.*;
  */
 public class TracingFactoryImpl extends EFactoryImpl implements TracingFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public static TracingFactory init() {
-		try {
-			TracingFactory theTracingFactory = (TracingFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.qualitune.org/tracing"); 
-			if (theTracingFactory != null) {
-				return theTracingFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new TracingFactoryImpl();
-	}
+    try
+    {
+      TracingFactory theTracingFactory = (TracingFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.qualitune.org/tracing"); 
+      if (theTracingFactory != null)
+      {
+        return theTracingFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new TracingFactoryImpl();
+  }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TracingFactoryImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case TracingPackage.TRACING_MODEL: return createTracingModel();
-			case TracingPackage.TRACE_LINK: return createTraceLink();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case TracingPackage.TRACING_MODEL: return createTracingModel();
+      case TracingPackage.TRACE_LINK: return createTraceLink();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TracingModel createTracingModel() {
-		TracingModelImpl tracingModel = new TracingModelImpl();
-		return tracingModel;
-	}
+    TracingModelImpl tracingModel = new TracingModelImpl();
+    return tracingModel;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TraceLink createTraceLink() {
-		TraceLinkImpl traceLink = new TraceLinkImpl();
-		return traceLink;
-	}
+    TraceLinkImpl traceLink = new TraceLinkImpl();
+    return traceLink;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TracingPackage getTracingPackage() {
-		return (TracingPackage)getEPackage();
-	}
+    return (TracingPackage)getEPackage();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
 	@Deprecated
 	public static TracingPackage getPackage() {
-		return TracingPackage.eINSTANCE;
-	}
+    return TracingPackage.eINSTANCE;
+  }
 
 } //TracingFactoryImpl
