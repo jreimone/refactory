@@ -1,3 +1,5 @@
+package org.emftext.refactoring.smell.java.energy
+
 import "http://www.emftext.org/java/commons"
 import "http://www.emftext.org/java/classifiers"
 import "http://www.emftext.org/java/members"
@@ -12,9 +14,9 @@ import "http://www.eclipse.org/emf/2002/Ecore"
 // Höpfner Bunse(2010)
 // "Towards an energy-consumption based complexity classification for resource substitution strategies"
 // the determined FileBody constructor is checked and must be replaced by a file that is compressed before 
-pattern dataTransmissionWithoutCompression(
+pattern dataTransmissionWithoutCompressionOptimised(
 		fileBodyConstructor: NewConstructorCall
-		, method: ClassMethod
+//		, method: ClassMethod
 ){
 	find fileBodyConstructorWithFileConstructorParameter(fileBodyVar, fileBodyConstructor, _);
 	find transmissionCoreMethodCalls(fileBodyVar, method);
@@ -31,7 +33,7 @@ private pattern fileBodyConstructorWithFileConstructorParameter(
 	fileBodyConstructor: NewConstructorCall,
 	fileArgumentConstructor: NewConstructorCall
 ){
-	LocalVariableStatement.variable(_, fileBodyVar);
+//	LocalVariableStatement.variable(_, fileBodyVar);
 	LocalVariable.initialValue(fileBodyVar, fileBodyConstructor);
 	
 	// FileBody constructor
@@ -83,8 +85,8 @@ private pattern fileBodyConstructorWithFileParameter(
 
 private pattern transmissionCoreMethodCalls(fileBodyVar : LocalVariable, classmethod: ClassMethod){
 	// MultipartEntity.addPart(FileBody)
-	LocalVariableStatement.variable(_, entityVar);
-	ExpressionStatement.expression(_, entityVarRef);
+//	LocalVariableStatement.variable(_, entityVar);
+//	ExpressionStatement.expression(_, entityVarRef);
 	IdentifierReference.target(entityVarRef, entityVar);
 	IdentifierReference.next(entityVarRef, addPartCaller);
 	MethodCall.target(addPartCaller, addPartCallee);
@@ -93,8 +95,8 @@ private pattern transmissionCoreMethodCalls(fileBodyVar : LocalVariable, classme
 	IdentifierReference.target(fileBodyRef, fileBodyVar);
 	
 	// HttpPost.setEntity(MultipartEntity);
-	LocalVariableStatement.variable(_, httppostVar);
-	ExpressionStatement.expression(_, httppostRef);
+//	LocalVariableStatement.variable(_, httppostVar);
+//	ExpressionStatement.expression(_, httppostRef);
 	IdentifierReference.target(httppostRef, httppostVar);
 	IdentifierReference.next(httppostRef, setEntityCaller);
 	MethodCall.target(setEntityCaller, setEntityCallee);
@@ -103,13 +105,11 @@ private pattern transmissionCoreMethodCalls(fileBodyVar : LocalVariable, classme
 	IdentifierReference.target(setEntityEntityVarArg, entityVar);
 	
 	// HttpClient.execute(HttpPost);
-	LocalVariableStatement.variable(_, httpclientVar);
+//	LocalVariableStatement.variable(_, httpclientVar);
 ////	ExpressionStatement.expression(_, httpclientRef);
-	IdentifierReference.target(httpclientRef, httpclientVar);
-	IdentifierReference.next(httpclientRef, executeCaller);
+//	IdentifierReference.target(httpclientRef, httpclientVar);
+//	IdentifierReference.next(httpclientRef, executeCaller);
 	MethodCall.target(executeCaller, executeCallee);
-	// attention: here it's not a ClassMethod but an InterfaceMethod
-	// InterfaceMethod.name(executeCallee, "execute");
 	Method.name(executeCallee, "execute");
 	MethodCall.arguments(executeCaller, executeHttpPostVarArg);
 	IdentifierReference.target(executeHttpPostVarArg, httppostVar);

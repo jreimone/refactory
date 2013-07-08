@@ -1,3 +1,5 @@
+package org.emftext.refactoring.smell.java.energy
+
 import "http://www.emftext.org/java/commons"
 import "http://www.emftext.org/java/classifiers"
 import "http://www.emftext.org/java/members"
