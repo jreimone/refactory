@@ -1,4 +1,4 @@
-package org.eclipse.incquery.runtime.emftext;
+package org.emftext.incquery.modelconnector;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.incquery.runtime.api.IModelConnector;

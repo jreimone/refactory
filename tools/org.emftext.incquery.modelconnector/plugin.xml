@@ -5,7 +5,7 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.ui.IEditorPart"
-            class="org.eclipse.incquery.runtime.emftext.ModelConnectorAdapterFactoryForEMFTextEditors">
+            class="org.emftext.incquery.modelconnector.ModelConnectorAdapterFactoryForEMFTextEditors">
          <adapter
                type="org.eclipse.incquery.runtime.api.IModelConnector">
          </adapter>
