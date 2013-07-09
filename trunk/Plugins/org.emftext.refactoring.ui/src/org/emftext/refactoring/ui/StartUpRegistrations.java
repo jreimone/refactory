@@ -18,11 +18,9 @@ package org.emftext.refactoring.ui;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-
-import javax.annotation.PostConstruct;
+import java.util.Set;
 
 import org.eclipse.core.internal.registry.ExtensionRegistry;
 import org.eclipse.core.runtime.ContributorFactoryOSGi;
@@ -30,6 +28,7 @@ import org.eclipse.core.runtime.IContributor;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.di.annotations.Execute;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.ltk.ModelRefactoringDescriptor;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
@@ -56,7 +55,7 @@ public class StartUpRegistrations {
 			"</plugin>";
 	
 	@SuppressWarnings("unused")
-	@PostConstruct
+	@Execute
 	public void earlyStartup() {
 		// just provoke to initialize registries
 		IRoleModelRegistry roleModelRegistry = IRoleModelRegistry.INSTANCE;
@@ -74,7 +73,7 @@ public class StartUpRegistrations {
 	private void registerRefactoringContributionForRoleMappings() {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		Object temporaryUserToken = ((ExtensionRegistry)registry).getTemporaryUserToken();
-		List<RoleMapping> roleMappings = getRoleMappings();
+		Set<RoleMapping> roleMappings = getRoleMappings();
 		Bundle bundle = FrameworkUtil.getBundle(StartUpRegistrations.class);
 		for (RoleMapping roleMapping : roleMappings) {
 			String id = ModelRefactoringDescriptor.generateRefactoringID(roleMapping);
@@ -92,8 +91,8 @@ public class StartUpRegistrations {
 		}
 	}
 	
-	private List<RoleMapping> getRoleMappings(){
-		List<RoleMapping> roleMappings = new ArrayList<RoleMapping>();
+	private Set<RoleMapping> getRoleMappings(){
+		Set<RoleMapping> roleMappings = new HashSet<RoleMapping>();
 		Map<String, Map<String, RoleMapping>> roleMappingsMap = IRoleMappingRegistry.INSTANCE.getRoleMappingsMap();
 		for (Map<String, RoleMapping> map : roleMappingsMap.values()) {
 			for (RoleMapping roleMapping : map.values()) {

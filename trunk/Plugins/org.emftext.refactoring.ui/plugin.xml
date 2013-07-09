@@ -12,11 +12,15 @@
       </menuContribution>
    </extension>
    <extension
-         id="id1"
+         id="modelContribution"
          point="org.eclipse.e4.workbench.model">
       <fragment
             uri="fragment.e4xmi">
       </fragment>
+      <processor
+            beforefragment="true"
+            class="org.emftext.refactoring.ui.StartUpRegistrations">
+      </processor>
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">

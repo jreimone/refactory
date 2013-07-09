@@ -18,9 +18,6 @@
  */
 package org.emftext.refactoring.ltk;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -31,13 +28,6 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.metamodel.DiffModel;
-import org.eclipse.emf.compare.diff.service.DiffService;
-import org.eclipse.emf.compare.match.MatchOptions;
-import org.eclipse.emf.compare.match.engine.IMatchEngine;
-import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.ui.IModelCompareInputProvider;
-import org.eclipse.emf.compare.ui.ModelCompareInput;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -67,7 +57,7 @@ import org.emftext.refactoring.util.RegistryUtil;
  * @author Jan Reimann
  *
  */
-public class ModelRefactoringChange extends Change implements IModelCompareInputProvider {
+public class ModelRefactoringChange extends Change {
 
 	private IRefactorer refactorer;
 	private EditingDomain editingDomain;
@@ -333,48 +323,51 @@ public class ModelRefactoringChange extends Change implements IModelCompareInput
 		return monitor;
 	}
 
-	public ModelCompareInput getModelCompareInput() {
-		Map<String, Object> options = new LinkedHashMap<String, Object>();
-		options.put(MatchOptions.OPTION_DISTINCT_METAMODELS, true);
-		options.put(MatchOptions.OPTION_IGNORE_ID, false);
-		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, false);
-		//		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
-		MatchModel match = null;
-		try {
-			EObject originalModel = refactorer.getOriginalModel();
-			createTemporaryResource(originalModel);
-			//			refactorer.fakeRefactor();
-			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
-			createTemporaryResource(fakeRefactoredModel);
-			IMatchEngine engine = new RefactoringMatchEngine();
-			if (originalModel != null && fakeRefactoredModel != null) {
-				//				match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
-				match = engine.modelMatch(originalModel, fakeRefactoredModel, options);
-			}
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-		if (match != null) {
-			DiffModel diff = null;
-			diff = DiffService.doDiff(match, false);
-			ModelCompareInput compareInput = new ModelCompareInput(match, diff);
-			return compareInput;
-		}
-		return null;
-	}
-
-	private Resource createTemporaryResource(EObject model) {
-		if(model == null){
-			return null;
-		}
-		Resource resource = model.eResource();
-		if(resource == null){
-			String id = EcoreUtil.getIdentification(model);
-			URI uri = URI.createURI(id);
-			resource = new ResourceImpl(uri);
-			resource.getContents().add(model);
-		}
-		return resource;
-	}
+	// commented out because of API changes in EMF Compare in Kepler
+	// this method had to be implemented by use of the old interface org.eclipse.emf.compare.ui.IModelCompareInputProvider
+	// this class implemented this interface und, thus, could easily provide a preview of the refactoring
+//	public ModelCompareInput getModelCompareInput() {
+//		Map<String, Object> options = new LinkedHashMap<String, Object>();
+//		options.put(MatchOptions.OPTION_DISTINCT_METAMODELS, true);
+//		options.put(MatchOptions.OPTION_IGNORE_ID, false);
+//		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, false);
+//		//		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
+//		MatchModel match = null;
+//		try {
+//			EObject originalModel = refactorer.getOriginalModel();
+//			createTemporaryResource(originalModel);
+//			//			refactorer.fakeRefactor();
+//			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
+//			createTemporaryResource(fakeRefactoredModel);
+//			IMatchEngine engine = new RefactoringMatchEngine();
+//			if (originalModel != null && fakeRefactoredModel != null) {
+//				//				match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
+//				match = engine.modelMatch(originalModel, fakeRefactoredModel, options);
+//			}
+//		} catch (InterruptedException e1) {
+//			e1.printStackTrace();
+//		}
+//		if (match != null) {
+//			DiffModel diff = null;
+//			diff = DiffService.doDiff(match, false);
+//			ModelCompareInput compareInput = new ModelCompareInput(match, diff);
+//			return compareInput;
+//		}
+//		return null;
+//	}
+//
+//	private Resource createTemporaryResource(EObject model) {
+//		if(model == null){
+//			return null;
+//		}
+//		Resource resource = model.eResource();
+//		if(resource == null){
+//			String id = EcoreUtil.getIdentification(model);
+//			URI uri = URI.createURI(id);
+//			resource = new ResourceImpl(uri);
+//			resource.getContents().add(model);
+//		}
+//		return resource;
+//	}
 
 }
