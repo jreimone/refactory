@@ -1,3 +1,5 @@
+package template
+
 import "http://www.eclipse.org/emf/2002/Ecore"
 
 //pattern ExtractXWithRefClass(OrigCont: EClass, ContCont: EClass, Extract:EClass, NewCont:EClass,
