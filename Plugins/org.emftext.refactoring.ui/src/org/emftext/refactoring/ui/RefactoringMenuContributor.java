@@ -231,7 +231,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
 		command.define(refactoringName, "Refactoring '" + refactoringName + "' is executed", category);
 		
-		IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
 		IHandler handler = null;
 		if(transactionalEditingDomain == null){
 			handler = new RefactoringCommandHandler(refactorer, editorConnector);
@@ -239,8 +238,11 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			handler = new RefactoringCommandHandler(refactorer, transactionalEditingDomain, activeEditor, editorConnector);
 		}
 		if(!command.isHandled()){
-			handlerService.activateHandler(commandID, handler);
+//			IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
+//			handlerService.activateHandler(commandID, handler);
+			command.setHandler(handler);
 		}
+//		command.setEnabled(null);
 		return command;
 	}
 

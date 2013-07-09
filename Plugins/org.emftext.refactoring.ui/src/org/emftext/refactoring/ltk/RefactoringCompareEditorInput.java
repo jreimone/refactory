@@ -16,17 +16,21 @@
 package org.emftext.refactoring.ltk;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.CompareEditorInput;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.compare.diff.metamodel.DiffModel;
-import org.eclipse.emf.compare.diff.service.DiffService;
-import org.eclipse.emf.compare.match.MatchOptions;
-import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.service.MatchService;
+import org.eclipse.emf.compare.EMFCompare;
+import org.eclipse.emf.compare.match.DefaultComparisonFactory;
+import org.eclipse.emf.compare.match.DefaultEqualityHelperFactory;
+import org.eclipse.emf.compare.match.DefaultMatchEngine;
+import org.eclipse.emf.compare.match.IComparisonFactory;
+import org.eclipse.emf.compare.match.IMatchEngine;
+import org.eclipse.emf.compare.match.eobject.IEObjectMatcher;
+import org.eclipse.emf.compare.match.impl.MatchEngineFactoryImpl;
+import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
+import org.eclipse.emf.compare.scope.IComparisonScope;
+import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -34,22 +38,22 @@ import org.eclipse.swt.widgets.Control;
 public class RefactoringCompareEditorInput extends CompareEditorInput {
 
 	private static CompareConfiguration config = new CompareConfiguration();
-	
+
 	static{
 		config.setLeftEditable(false);
 		config.setRightEditable(false);
 	}
-	
+
 	private EObject originalModel;
 	private EObject fakeRefactoredModel;
-	
+
 	private Control control;
-	
+
 	public RefactoringCompareEditorInput(Composite parent) {
 		super(config);
 		control = super.createContents(parent);
-//		control.pack();
-//		control.setVisible(true);
+		//		control.pack();
+		//		control.setVisible(true);
 	}
 
 	@Override
@@ -60,15 +64,29 @@ public class RefactoringCompareEditorInput extends CompareEditorInput {
 		if(fakeRefactoredModel == null){
 			throw new InvocationTargetException(new NullPointerException("Fake Refactored Model mustn't be null"));
 		}
-		Map<String, Object> options = new LinkedHashMap<String, Object>();
-		options.put(MatchOptions.OPTION_DISTINCT_METAMODELS, true);
-		options.put(MatchOptions.OPTION_IGNORE_ID, true);
-		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, true);
-		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
-		MatchModel match = MatchService.doContentMatch(originalModel, fakeRefactoredModel, options);
-		DiffModel diff = DiffService.doDiff(match, false);
+		// new EMF Compare API
+		IEObjectMatcher matcher = DefaultMatchEngine.createDefaultEObjectMatcher(UseIdentifiers.NEVER);
+		IComparisonFactory comparisonFactory = new DefaultComparisonFactory(new DefaultEqualityHelperFactory());
+//		IMatchEngine matchEngine = new DefaultMatchEngine(matcher, comparisonFactory);
+		//		IMatchEngine.Factory.Registry matchEngineRegistry = EMFCompareRCPPlugin.getDefault().getMatchEngineFactoryRegistry();
+		IMatchEngine.Factory matchEngineFactory = new MatchEngineFactoryImpl(matcher, comparisonFactory);
+		matchEngineFactory.setRanking(20);
+		IMatchEngine.Factory.Registry matchEngineRegistry = new MatchEngineFactoryRegistryImpl();
+		matchEngineRegistry.add(matchEngineFactory);
+		EMFCompare comparator = EMFCompare.builder().setMatchEngineFactoryRegistry(matchEngineRegistry).build();
+		IComparisonScope scope = EMFCompare.createDefaultScope(originalModel, fakeRefactoredModel);
+		return comparator.compare(scope);
 		
-		return diff;
+		// old EMF Compare API
+		//		Map<String, Object> options = new LinkedHashMap<String, Object>();
+		//		options.put(MatchOptions.OPTION_DISTINCT_METAMODELS, true);
+		//		options.put(MatchOptions.OPTION_IGNORE_ID, true);
+		//		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, true);
+		//		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
+		//		MatchModel match = MatchService.doContentMatch(originalModel, fakeRefactoredModel, options);
+		//		DiffModel diff = DiffService.doDiff(match, false);
+		//		
+		//		return diff;
 	}
 
 	public EObject getOriginalModel() {
