@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageRuntimeModule;
+import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.ClassType;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguageFactory;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
@@ -51,7 +51,6 @@ import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextR
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -60,31 +59,34 @@ import com.google.inject.Injector;
  */
 public class IncQueryTest {
 
-	private static final String INPUT_FILE					= "../org.emftext.refactoring.extractXwithReferenceClass/rolemodel/ExtractXwithReferenceClass.rolestext";
-	//	private static final String INPUT_FILE					= "../org.emftext.refactoring.extractX/rolemodel/ExtractX.rolestext";
-	private static final String TEMPLATE_FILE				= "template/base.eiq";
-	private static final String OUTPUT_FOLDER				= "output";
+	private static final String QUERY_FOLDER					= "queries";
+	private static final String TEMPLATE_FILE					= QUERY_FOLDER + "/template/base.eiq";
+	private static final String OUTPUT_PACKAGE				= "output";
+	private static final String OUTPUT_FOLDER					= QUERY_FOLDER + "/" + OUTPUT_PACKAGE;
 
-	private static final String CONTAINMENT_PATTERN_NAME	= "containment";
+	private static final String CONTAINMENT_PATTERN_NAME		= "containment";
 	private static final String REFERENCE_PATTERN_NAME		= "reference";
 
-	private static Resource patternResource;
-	private static RoleModel roleModel;
 	// a template will be loaded first which then can be extended
-	private static PatternModel patternModel;
-	// patterns to be referenced in generated pattern
-	private static Pattern containmentPattern;
-	private static Pattern referencePattern;
+	private static PatternModel templatePatternModel;
 
 	@BeforeClass
 	public static void init(){
 		initLanguages();
-		initModels();
-		initReferencedPatterns();
+		initTemplateModel();
 	}
 
 	@Test
-	public void generatePatternTest(){
+	public void testExtractXWithReferenceClass(){
+		internalTest("../org.emftext.refactoring.extractXwithReferenceClass/rolemodel/ExtractXwithReferenceClass.rolestext");
+	}
+	
+	@Test
+	public void testExtractX(){
+		internalTest("../org.emftext.refactoring.extractX/rolemodel/ExtractX.rolestext");
+	}
+	
+	private void generatePattern(RoleModel roleModel, PatternModel generatedPatternModel, Pattern containmentPattern, Pattern referencePattern){
 		PatternLanguageFactory factory = PatternLanguageFactory.eINSTANCE;
 		Pattern pattern = factory.createPattern();
 		pattern.setName(roleModel.getName());
@@ -149,60 +151,74 @@ public class IncQueryTest {
 				patternBody.getConstraints().add(constraint);
 			}
 		}
-		patternModel.getPatterns().add(pattern);
+		generatedPatternModel.getPatterns().add(0, pattern);
 		try {
+			Resource patternResource = generatedPatternModel.eResource();
 			patternResource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static void initReferencedPatterns() {
+	private Pattern determineNamedPattern(PatternModel patternModel, String patternName) {
 		List<Pattern> patterns = patternModel.getPatterns();
 		for (Pattern pattern : patterns) {
-			if(pattern.getName().equals(CONTAINMENT_PATTERN_NAME)){
-				containmentPattern = pattern;
+			if(pattern.getName().equals(patternName)){
+				return pattern;
 			} 
-			if(pattern.getName().equals(REFERENCE_PATTERN_NAME)){
-				referencePattern = pattern;
-			}
-			if(referencePattern != null && containmentPattern != null){
-				break;
-			}
 		}
-		assertNotNull("containment pattern mustn't be null", containmentPattern);
-		assertNotNull("reference pattern mustn't be null", referencePattern);
+		return null;
 	}
 
-	public static void initModels() {
+	private static void initTemplateModel() {
+		// template file which will be extended by generated pattern
 		ResourceSet rs = new ResourceSetImpl();
+		File file = new File(TEMPLATE_FILE);
+		assertTrue("template file " + file.getAbsolutePath() + " must exist", file.exists());
+		URI uri = URI.createFileURI(file.getAbsolutePath());
+		EObject model = rs.getResource(uri, true).getContents().get(0);
+		assertTrue("must be a PatternModel", model instanceof PatternModel);
+		templatePatternModel = (PatternModel) model;
+	}
+	
+	private RoleModel initInputRoleModel(String inputRoleModel) {
 		// input model
-		File file = new File(INPUT_FILE);
+		ResourceSet rs = new ResourceSetImpl();
+		File file = new File(inputRoleModel);
 		assertTrue("file " + file.getAbsolutePath() + " must exist", file.exists());
 		URI uri = URI.createFileURI(file.getAbsolutePath());
 		EObject model = rs.getResource(uri, true).getContents().get(0);
 		assertTrue("must be a RoleModel", model instanceof RoleModel);
-		roleModel = (RoleModel) model;
+		RoleModel roleModel = (RoleModel) model;
 		assertNotNull("Role model mustn't be null", roleModel);
+		return roleModel;
+	}
 
-		// template file which will be extended by generated pattern
-		file = new File(TEMPLATE_FILE);
-		assertTrue("template file " + file.getAbsolutePath() + " must exist", file.exists());
-		uri = URI.createFileURI(file.getAbsolutePath());
-		model = rs.getResource(uri, true).getContents().get(0);
-		assertTrue("must be a PatternModel", model instanceof PatternModel);
-		patternModel = EcoreUtil.copy((PatternModel) model);
-
-		// output model
-		file = new File(OUTPUT_FOLDER + "/" + roleModel.getName() + "." + uri.fileExtension());
+	private PatternModel initOutputPatternModel(RoleModel roleModel) {
+		URI uri = templatePatternModel.eResource().getURI();
+		File file = new File(OUTPUT_FOLDER + "/" + roleModel.getName() + "." + uri.fileExtension());
 		if(file.exists()){
 			file.delete();
 		}
 		assertFalse("File " + file.getName() + " must not exist", file.exists());
 		uri = URI.createFileURI(file.getAbsolutePath());
-		patternResource = rs.createResource(uri);
+		ResourceSet rs = new ResourceSetImpl();
+		Resource patternResource = rs.createResource(uri);
 		assertNotNull("Pattern resource mustn't be null", patternResource);
-		patternResource.getContents().add(patternModel);
+		PatternModel generatedPatternModel = EcoreUtil.copy(templatePatternModel);
+		generatedPatternModel.setPackageName(OUTPUT_PACKAGE);
+		patternResource.getContents().add(generatedPatternModel);
+		return generatedPatternModel;
+	}
+	
+	private void internalTest(String inputRoleModel){
+		RoleModel roleModel = initInputRoleModel(inputRoleModel);
+		PatternModel outputPatternModel = initOutputPatternModel(roleModel);
+		Pattern containmentPattern = determineNamedPattern(outputPatternModel, CONTAINMENT_PATTERN_NAME);
+		Pattern referencePattern = determineNamedPattern(outputPatternModel, REFERENCE_PATTERN_NAME);
+		assertNotNull("containment pattern mustn't be null", containmentPattern);
+		assertNotNull("reference pattern mustn't be null", referencePattern);
+		generatePattern(roleModel, outputPatternModel, containmentPattern, referencePattern);
 	}
 
 	private static void initLanguages(){
@@ -215,10 +231,12 @@ public class IncQueryTest {
 		// XMI
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		// Pattern language
+		EMFPatternLanguageStandaloneSetupGenerated setup = new EMFPatternLanguageStandaloneSetupGenerated();
+		Injector injector = setup.createInjectorAndDoEMFRegistration();
 		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+//		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
 	}
