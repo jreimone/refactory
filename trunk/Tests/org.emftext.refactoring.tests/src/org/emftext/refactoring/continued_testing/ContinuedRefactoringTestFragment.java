@@ -15,23 +15,28 @@
  ******************************************************************************/
 package org.emftext.refactoring.continued_testing;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.util.Collections;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.match.metamodel.MatchElement;
-import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.service.MatchService;
+import org.eclipse.emf.compare.Comparison;
+import org.eclipse.emf.compare.EMFCompare;
+import org.eclipse.emf.compare.match.DefaultComparisonFactory;
+import org.eclipse.emf.compare.match.DefaultEqualityHelperFactory;
+import org.eclipse.emf.compare.match.DefaultMatchEngine;
+import org.eclipse.emf.compare.match.IComparisonFactory;
+import org.eclipse.emf.compare.match.IMatchEngine;
+import org.eclipse.emf.compare.match.eobject.IEObjectMatcher;
+import org.eclipse.emf.compare.match.impl.MatchEngineFactoryImpl;
+import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
+import org.eclipse.emf.compare.scope.IComparisonScope;
+import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,6 +51,7 @@ import org.emftext.test.core.InputData;
 import org.emftext.test.core.TestClass;
 import org.emftext.test.core.TestData;
 import org.emftext.test.core.TestDataSet;
+import org.junit.Assert;
 import org.junit.Test;
 
 @TestData("ContinuedRefactoringTest")
@@ -59,8 +65,8 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 	 * must only differ in its prefixes! If not they won't be recognized		*
 	 * as belonging together.													*
 	 * 																			*
-	*****************************************************************************/
-	
+	 *****************************************************************************/
+
 	// name all input models with this pattern at the beginning 
 	private static final String INPUT_PATTERN = "IN_";
 	// name all expected models with this pattern at the beginning
@@ -71,14 +77,14 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 	private static final String VALUE_PATTERN = "VAL_";
 	// name all files containing the name of the mapping, which is intended to be used, at the beginning 
 	private static final String MAPPING_PATTERN = "MAP_";
-	
+
 	private static final String REFACTORED_PATTERN = "REF_";
-	
+
 	private void init(){
 		TestAttributeValueProvider.setTestDataSet(getTestDataSet());
 		TestAttributeValueProvider.setValuePattern(VALUE_PATTERN);
 	}
-	
+
 	@Test
 	@InputData({INPUT_PATTERN, EXPECTED_PATTERN, PATH_PATTERN, VALUE_PATTERN, MAPPING_PATTERN})
 	public void continuedRefactoring(){
@@ -88,13 +94,13 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		for (File file : dataFiles) {
 			System.out.println(file.getPath());
 		}
-		
+
 		init();
-		
+
 		EObject inputModel = TestUtil.getModelFromResource(getTestDataSet().getResourceByPattern(INPUT_PATTERN, false));
 		assertNotNull("input model mustn't be null", inputModel);
 		Resource inputResource = inputModel.eResource();
-		
+
 		File path = getTestDataSet().getInputFileByPattern(PATH_PATTERN);
 		assertNotNull("no path file could be found", path);
 		String query = QueryUtil.getLineInFile(path, 1);
@@ -103,8 +109,8 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 				"model: " + inputModel
 				+ "\nquery: " + query, elements);
 		assertTrue("query must result at least in 1 element", elements.size() > 0);
-		
-		
+
+
 		List<RoleMapping> mappings = IRoleMappingRegistry.INSTANCE.getPossibleRoleMappingsForResource(inputResource, elements, 1.0);
 		assertNotNull("Some mappings must be registered for " + inputModel.eClass().getEPackage().getNsURI(), mappings);
 		assertTrue("At least one mapping must be registered for " + inputModel.eClass().getEPackage().getNsURI(), mappings.size() > 0);
@@ -126,7 +132,7 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		// currentModelResourceSet
 		EObject refactoredModel = refactorer.refactor();
 		assertNotNull("refactored model mustn't be null", refactoredModel);
-	
+
 		File inputFile = getTestDataSet().getInputFileByPattern(INPUT_PATTERN);
 		File parent = inputFile.getParentFile();
 		assertTrue(parent.exists());
@@ -137,7 +143,7 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		if(!folder.exists()){
 			created = folder.mkdir();
 			assertTrue(created);
-			
+
 		}
 		File subfolder = new File(folder.getAbsolutePath() + File.separator + System.currentTimeMillis());
 		created = subfolder.mkdir();
@@ -150,13 +156,13 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 		File refactoredFile = new File(subfolder.getAbsolutePath() + File.separator + refactoredName);
 		ResourceSet rs = inputResource.getResourceSet();
 		assertNotNull(rs);
-//		Resource movedInputResource = rs.createResource(URI.createFileURI(movedInputFile.getAbsolutePath()));
-//		assertNotNull(movedInputResource);
+		//		Resource movedInputResource = rs.createResource(URI.createFileURI(movedInputFile.getAbsolutePath()));
+		//		assertNotNull(movedInputResource);
 		Resource movedExpectedResource = rs.createResource(URI.createFileURI(movedExpectedFile.getAbsolutePath()));
 		assertNotNull(movedExpectedResource);
 		Resource refactoredResource = rs.createResource(URI.createFileURI(refactoredFile.getAbsolutePath()));
 		assertNotNull(refactoredResource);
-//		movedInputResource.getContents().add(refactorer.inputModel);
+		//		movedInputResource.getContents().add(refactorer.inputModel);
 		EObject expectedModel = TestUtil.getModelFromResource(getTestDataSet().getResourceByPattern(EXPECTED_PATTERN, false));
 		movedExpectedResource.getContents().add(expectedModel);
 		refactoredResource.getContents().add(refactoredModel);
@@ -172,50 +178,64 @@ public class ContinuedRefactoringTestFragment extends TestClass {
 			outChannel.close();
 			fileInputStream.close();
 			fileOutputStream.close();
-//			movedInputResource.save(null);
+			//			movedInputResource.save(null);
 			movedExpectedResource.save(null);
 			refactoredResource.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail("Exception occurred");
 		}
-		try {
-			MatchModel matchModel = MatchService.doMatch(expectedModel, refactoredModel, Collections.<String, Object>emptyMap());			
-			List<MatchElement> matchedElements = matchModel.getMatchedElements();
-			double similarity = sumSimilarity(matchedElements);
-			int count = sumMatches(matchedElements);
-			double ratio = similarity / count;
-			assertTrue("Similarity must be 1.0 but is " + ratio, ratio == 1.0);
-			
-//			DiffModel inputDiff = DiffService.doDiff(matchModel);
-//
-//			DiffGroup diffGroup = (DiffGroup) inputDiff.getOwnedElements().get(0);
-//			if (diffGroup.getSubchanges() != 0) {
-//				Assert.fail("Refactored model does not match expected result.");
-//			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			Assert.fail("Exception occurred");
-		}
+		//		try {
+		// Configure EMF Compare
+		IEObjectMatcher matcher = DefaultMatchEngine.createDefaultEObjectMatcher(UseIdentifiers.NEVER);
+		IComparisonFactory comparisonFactory = new DefaultComparisonFactory(new DefaultEqualityHelperFactory());
+		IMatchEngine.Factory matchEngineFactory = new MatchEngineFactoryImpl(matcher, comparisonFactory);
+		matchEngineFactory.setRanking(20);
+		IMatchEngine.Factory.Registry matchEngineRegistry = new MatchEngineFactoryRegistryImpl();
+		matchEngineRegistry.add(matchEngineFactory);
+		EMFCompare comparator = EMFCompare.builder().setMatchEngineFactoryRegistry(matchEngineRegistry).build();
+		// Compare the two models
+		IComparisonScope scope = EMFCompare.createDefaultScope(expectedModel, refactoredModel);
+		Comparison comparison = comparator.compare(scope);
+		//			List<Match> matches = comparison.getMatches();
+		assertTrue("Models are not equal", comparison.getDifferences().size() == 0);
+
+		//			MatchModel matchModel = MatchService.doMatch(expectedModel, refactoredModel, Collections.<String, Object>emptyMap());			
+		//			List<MatchElement> matchedElements = matchModel.getMatchedElements();
+		//			double similarity = sumSimilarity(matchedElements);
+		//			int count = sumMatches(matchedElements);
+		//			double ratio = similarity / count;
+		//			assertTrue("Similarity must be 1.0 but is " + ratio, ratio == 1.0);
+
+		//			DiffModel inputDiff = DiffService.doDiff(matchModel);
+		//
+		//			DiffGroup diffGroup = (DiffGroup) inputDiff.getOwnedElements().get(0);
+		//			if (diffGroup.getSubchanges() != 0) {
+		//				Assert.fail("Refactored model does not match expected result.");
+		//			}
+		//		} catch (InterruptedException e) {
+		//			e.printStackTrace();
+		//			Assert.fail("Exception occurred");
+		//		}
 	}
 
-	private double sumSimilarity(List<MatchElement> matchedElements) {
-		double similarity = 0.0;
-		for (MatchElement matchElement : matchedElements) {
-			similarity += matchElement.getSimilarity();
-			List<MatchElement> subMatches = matchElement.getSubMatchElements();
-			similarity += sumSimilarity(subMatches);
-		}
-		return similarity;
-	}
-	
-	private int sumMatches(List<MatchElement> matchedElements) {
-		int matches = 0;
-		for (MatchElement matchElement : matchedElements) {
-			matches++;
-			List<MatchElement> subMatches = matchElement.getSubMatchElements();
-			matches += sumMatches(subMatches);
-		}
-		return matches;
-	}
+	//	private double sumSimilarity(List<MatchElement> matchedElements) {
+	//		double similarity = 0.0;
+	//		for (MatchElement matchElement : matchedElements) {
+	//			similarity += matchElement.getSimilarity();
+	//			List<MatchElement> subMatches = matchElement.getSubMatchElements();
+	//			similarity += sumSimilarity(subMatches);
+	//		}
+	//		return similarity;
+	//	}
+	//
+	//	private int sumMatches(List<MatchElement> matchedElements) {
+	//		int matches = 0;
+	//		for (MatchElement matchElement : matchedElements) {
+	//			matches++;
+	//			List<MatchElement> subMatches = matchElement.getSubMatchElements();
+	//			matches += sumMatches(subMatches);
+	//		}
+	//		return matches;
+	//	}
 }
