@@ -3,8 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.emftext.refactoring.tests
 Bundle-SymbolicName: org.emftext.refactoring.tests;singleton:=true
 Bundle-Version: 0.1.0
-Require-Bundle: org.junit4,
- org.eclipse.emf.ecore.xmi,
+Require-Bundle: org.eclipse.emf.ecore.xmi,
  org.emftext.refactoring.graph,
  org.emftext.language.refactoring.roles.resource.rolestext,
  org.emftext.language.refactoring.rolemapping,
@@ -22,8 +21,6 @@ Require-Bundle: org.junit4,
  org.emftext.refactoring.registry.rolemapping,
  org.emftext.refactoring.registry.refactoringspecification,
  org.emftext.refactoring.registry.rolemodel,
- org.eclipse.emf.compare.match,
- org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare,
  org.emftext.refactoring.mappings.ecore,
  org.eclipse.swt,
@@ -44,6 +41,7 @@ Require-Bundle: org.junit4,
  org.emftext.language.java.resource.bcel,
  org.emftext.language.java.resource.jdt,
  org.emftext.refactoring.tests.properties,
- org.emftext.refactoring.tests.properties.resource.testproperties
+ org.emftext.refactoring.tests.properties.resource.testproperties,
+ org.junit
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: libs/guava-12.0.1.jar
