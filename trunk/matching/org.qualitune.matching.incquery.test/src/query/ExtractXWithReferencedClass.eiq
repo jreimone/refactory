@@ -1,4 +1,63 @@
+package query
+
 import "http://www.eclipse.org/emf/2002/Ecore"
+
+pattern ExtractXWithRefClass(OrigCont: EClass, ContCont: EClass, Extract:EClass, NewCont:EClass,
+	MovedRef:EClass, extracts:EReference, source:EReference, target:EReference, referer:EReference,
+	moved:EReference, containerRef:EReference){
+
+	find containment(OrigCont, extracts, Extract);
+	find containment(ContCont, source, OrigCont);
+	find containment(ContCont, target, NewCont);
+	find containment(OrigCont, referer, MovedRef);
+	find containment(NewCont, moved, Extract);
+	find reference(MovedRef, containerRef, NewCont);
+}
+
+pattern ExtractXWithRefClass2(OrigCont: EClass, ContCont: EClass, Extract:EClass, NewCont:EClass,
+	MovedRef:EClass, containerRef:EReference){
+
+	find containment2(OrigCont, Extract);
+	find containment2(ContCont, OrigCont);
+	find containment2(ContCont, NewCont);
+	find containment2(OrigCont, MovedRef);
+	find containment2(NewCont, Extract);
+	find reference(MovedRef, containerRef, NewCont);
+}
+
+pattern containment(Source: EClass, reference: EReference, Target: EClass){
+	find eAllContainments(PH_Source,reference);
+	ETypedElement.eType(reference,PH_Target);
+	find thisAndAllSuperTypes(Source, PH_Source);
+	find thisAndAllSuperTypes(Target, PH_Target);
+	neg find isEcore(Source);
+}
+
+pattern containment2(Source: EClass, Target: EClass){
+	find canTransitivelyContain(PH_Source, PH_Target);
+	find thisAndAllSuperTypes(Source, PH_Source);
+	find thisAndAllSuperTypes(Target, PH_Target);
+	neg find isEcore(Source);
+	Source != Target;
+}
+
+pattern reference(Source: EClass, reference: EReference, Target: EClass){
+	find eAllReferences(PH_Source,reference);
+	ETypedElement.eType(reference,PH_Target);
+	neg find isAggregation(reference);
+	find thisAndAllSuperTypes(Source, PH_Source);
+	find thisAndAllSuperTypes(Target, PH_Target);
+	neg find isEcore(Source);
+}
+
+pattern canTransitivelyContain(Source : EClass, Target : EClass) {
+	find canContain+(Source, Target);
+} 
+
+pattern canContain(Source: EClass, Target : EClass) {
+	find eAllContainments(Source,reference);
+	EReference.eType(reference, Target);
+}
 
 @QueryExplorer(display = false)
 pattern isEcore(Element){
@@ -10,36 +69,6 @@ pattern isEcore(Element){
 @QueryExplorer(display = false)
 pattern isAggregation(ref:EReference){
 	EReference.containment(ref,true);
-}
-
-pattern subClassesWantedInResult(OrigCont: EClass, ContCont: EClass, Extract:EClass, NewCont:EClass,
-	MovedRef:EClass, extracts:EReference, source:EReference, target:EReference, referer:EReference,
-	moved:EReference, containerRef:EReference){
-
-	find eAllContainments(OrigCont,extracts);
-	ETypedElement.eType(extracts,Extract);
-	
-	find eAllContainments(ContCont,source);
-	ETypedElement.eType(source,OrigCont);
-	
-	find eAllContainments(ContCont,target);
-	ETypedElement.eType(target,NewCont);
-	
-	find eAllContainments(OrigCont,referer);
-	ETypedElement.eType(referer,MovedRef);
-	
-	find eAllContainments(NewCont,moved);
-	ETypedElement.eType(moved,Extract);
-	
-	find eAllReferences(MovedRef,containerRef);
-	ETypedElement.eType(containerRef,NewCont);
-	neg find isAggregation(containerRef);
-
-	neg find isEcore(OrigCont);
-	neg find isEcore(ContCont);
-	neg find isEcore(NewCont);
-	neg find isEcore(MovedRef);
-	neg find isEcore(Extract);
 }
 
 // well-behaving ecore patterns
