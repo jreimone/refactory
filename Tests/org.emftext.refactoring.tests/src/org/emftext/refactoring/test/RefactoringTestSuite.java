@@ -577,7 +577,7 @@ public class RefactoringTestSuite extends TestCase {
 				}
 			}
 		};
-		newTest.setName(name + "(" + UUID.randomUUID().toString() + ")");
+		newTest.setName(name + " " + UUID.randomUUID().toString());
 		return newTest;
 	}
 
