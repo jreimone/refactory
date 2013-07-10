@@ -216,7 +216,7 @@ public class RefactoringTestSuite extends TestCase {
 		registerTestingRootAsPlatformRoot();
 		registerModelsForRefactorings();
 		registerPostProcessors();
-		TestSuite suite = new TestSuite("All Refactoring Tests") {};
+		TestSuite suite = new TestSuite("All Refactoring Tests");
 		for (Class<? extends TestClass> testClass : testClasses) {
 			try {
 				suite.addTest(createTests(testClass));
@@ -262,8 +262,7 @@ public class RefactoringTestSuite extends TestCase {
 								if (mappings != null) {
 									RoleMapping mapping = mappings.get(mappingName);
 									if (mapping != null) {
-										IRoleMappingRegistry.INSTANCE.registerPostProcessor(
-												mapping, postProcessor);
+										IRoleMappingRegistry.INSTANCE.registerPostProcessor(mapping, postProcessor);
 									}
 								}
 							}
@@ -287,8 +286,7 @@ public class RefactoringTestSuite extends TestCase {
 		List<List<TestDataPair>> pairSets = new LinkedList<List<TestDataPair>>();
 		int greatestList = 0;
 		for (String filePattern : filePatterns) {
-			List<TestDataPair> dataPairs = getTestDataPairs(classFolder,
-					filePattern);
+			List<TestDataPair> dataPairs = getTestDataPairs(classFolder, filePattern);
 			pairSets.add(dataPairs);
 			if (dataPairs.size() > greatestList) {
 				greatestList = dataPairs.size();
@@ -350,8 +348,7 @@ public class RefactoringTestSuite extends TestCase {
 		if (inputValue != null) {
 			for (String filePattern : inputValue) {
 				String[] otherInputValues = getOthers(inputValue, filePattern);
-				List<File> files = getTestFiles(classFolder, filePattern, true,
-						otherInputValues);
+				List<File> files = getTestFiles(classFolder, filePattern, true, otherInputValues);
 				if (setCount == -1) {
 					setCount = files.size();
 				} else {
@@ -364,10 +361,8 @@ public class RefactoringTestSuite extends TestCase {
 		}
 		if (expectedValue != null) {
 			for (String filePattern : expectedValue) {
-				String[] otherExpectedValues = getOthers(expectedValue,
-						filePattern);
-				List<File> files = getTestFiles(classFolder, filePattern,
-						false, otherExpectedValues);
+				String[] otherExpectedValues = getOthers(expectedValue, filePattern);
+				List<File> files = getTestFiles(classFolder, filePattern, false, otherExpectedValues);
 				for (List<File> list : inputFiles) {
 					files.removeAll(list);
 				}
@@ -446,8 +441,7 @@ public class RefactoringTestSuite extends TestCase {
 		} 
 		Test methodSuite = null;
 		if (testData == null || testData.size() == 0) {
-			AbstractRefactoringTestCase newTest = createTest(testClass, method,
-					null, method.getName());
+			AbstractRefactoringTestCase newTest = createTest(testClass, method, null, method.getName());
 			methodSuite = newTest;
 			LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName());
 			if (newTest != null) {
@@ -490,8 +484,7 @@ public class RefactoringTestSuite extends TestCase {
 		dataFiles = getTestFiles(folder, inputValue, expectedValue);
 		Test methodSuite = null;
 		if (dataFiles == null || dataFiles.size() == 0) {
-			AbstractRefactoringTestCase newTest = createTest(testClass, method,
-					null, method.getName());
+			AbstractRefactoringTestCase newTest = createTest(testClass, method, null, method.getName());
 			methodSuite = newTest;
 			LOG.info("Adding test " + testClass.getSimpleName() + " for method " + method.getName());
 			LOG.info("Created Test " + newTest.getName());
@@ -506,8 +499,7 @@ public class RefactoringTestSuite extends TestCase {
 				for (File expectedFile : testData.getExpectedDataFiles()) {
 					expectedFiles += " " + expectedFile.getName();
 				}
-				AbstractRefactoringTestCase newTest = createTest(testClass, method,
-						testData,
+				AbstractRefactoringTestCase newTest = createTest(testClass, method, testData,
 						method.getName() + " -> INPUT:" + inputFiles + " EXPECTED:" + expectedFiles);
 				if (newTest != null) {
 					((TestSuite) methodSuite).addTest(newTest);
@@ -545,8 +537,7 @@ public class RefactoringTestSuite extends TestCase {
 				if (inputExpectedDataTest != null && inputExpectedDataTest.countTestCases() > 0) {
 					newSuite.addTest(inputExpectedDataTest);
 				} else {
-					Test dataPairTest = handleDataPairAnnotation(testClass,
-							method, folder);
+					Test dataPairTest = handleDataPairAnnotation(testClass, method, folder);
 					if (dataPairTest != null && dataPairTest.countTestCases() > 0) {
 						newSuite.addTest(dataPairTest);
 					}
@@ -586,7 +577,7 @@ public class RefactoringTestSuite extends TestCase {
 				}
 			}
 		};
-		newTest.setName(name + " " + UUID.randomUUID().toString());
+		newTest.setName(name + "(" + UUID.randomUUID().toString() + ")");
 		return newTest;
 	}
 
