@@ -55,7 +55,11 @@ public class MakeRefactoringDocGenAction extends Action {
 					RoleModel roleModel = (RoleModel) parent.getObject();
 					if (roleModel != null) {
 						try {
-							String tempdir = System.getProperty("java.io.tmpdir") + "Refactor";
+							String tempdir = System.getProperty("java.io.tmpdir");
+							if(!tempdir.endsWith(File.separator)){
+								tempdir += File.separator;
+							}
+							tempdir += "Refactor";
 							File tempDir = new File(tempdir);
 							boolean success = true;
 							if (!tempDir.isDirectory()) {

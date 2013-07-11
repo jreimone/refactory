@@ -16,13 +16,20 @@
 package org.emftext.refactoring.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.commands.Category;
 import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.commands.IParameter;
+import org.eclipse.core.commands.IParameterValues;
+import org.eclipse.core.commands.ParameterValuesException;
+import org.eclipse.core.commands.Parameterization;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
@@ -79,21 +86,23 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 
 	@Override
 	public void createContributionItems(IServiceLocator serviceLocator, IContributionRoot additions) {
+		System.out.println("entering");
 		IWorkbenchPart activePart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
 		if (!(activePart instanceof ISaveablePart)) {
-//			System.out.println("not saveable");
+			System.out.println("not saveable");
 			return;
 		}
 		IWorkbenchPartSite partSite = activePart.getSite();
 		//		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		ISelectionProvider selectionProvider = partSite.getSelectionProvider();
 		if (selectionProvider == null) {
-//			System.out.println("no selection provider");
+			System.out.println("no selection provider");
 			return;
 		}
 		ISelection selection = selectionProvider.getSelection();
 		List<EObject> selectedElements = new LinkedList<EObject>();
 		if(selection == null){
+			System.out.println("no selection");
 			return;
 		}
 		if (selection instanceof StructuredSelection) {
@@ -110,10 +119,13 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		IEditorPart activeEditor = null;
 		IEditorConnector editorConnector = null;
 		if (selectedElements == null || selectedElements.size() == 0) {
+			System.out.println("no tree editor");
 			activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 			if(activeEditor != null && activeEditor.equals(activePart)){
+				System.out.println("active editor");
 				editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
 				if(editorConnector != null){
+					System.out.println("editor connector");
 					selectedElements = editorConnector.handleSelection(selection);
 					if (selectedElements != null && selectedElements.size() >= 1) {
 						transactionalEditingDomain = editorConnector.getTransactionalEditingDomain();
@@ -121,49 +133,50 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				}
 			}
 		}
+		System.out.println(selectedElements);
 		if (selectedElements != null && selectedElements.size() >= 1) {
+			System.out.println("if reached");
 			EObject model = null;
 			Resource resource = null;
-//			int i = 0;
-//			do {
-//				EObject element = selectedElements.get(i);
+			// TODO das hier auch nochmal anschauen, um ResourceSet und Resource zu bekommen
+			// da drunter wird nämlich immer neu angelegt :(
+			// dadurch evtl. ConcurrentModificationException
+			int i = 0;
+			do {
+				EObject element = selectedElements.get(i);
+				EObject parent;
+				do {
+					parent = element.eContainer();
+					resource = element.eResource();
+					if(resource == null){
+						resource = parent.eResource();
+					}
+				} while (parent != null && resource == null);
 //				model = EcoreUtil.getRootContainer(element, false);
 //				model = EcoreUtil.getRootContainer(element, true);
 //				resource = model.eResource();
 //				resource = element.eResource();
-//				if(resource != null){
-//					System.out.println(resource.getURIFragment(element));
-//				}
-//				i++;
-//			} while (i < selectedElements.size() && resource == null);
-//			if (resource == null) {
+				if(resource != null){
+					System.out.println(resource.getURIFragment(element));
+				}
+				i++;
+			} while (i < selectedElements.size() && resource == null);
+//			if(activeEditor == null){
+//				activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 //			}
-			if(activeEditor == null){
-				activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			}
-			IEditorInput editorInput = activeEditor.getEditorInput();
-			ResourceSet rs;
-			if(editorInput instanceof IFileEditorInput){
-				IFileEditorInput fei = (IFileEditorInput) editorInput;
-				IFile file = fei.getFile();
-				URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-				rs = new ResourceSetImpl();
-				resource = rs.getResource(uri, true);
-			}
+//			IEditorInput editorInput = activeEditor.getEditorInput();
+//			ResourceSet rs;
+//			if(editorInput instanceof IFileEditorInput){
+//				IFileEditorInput fei = (IFileEditorInput) editorInput;
+//				IFile file = fei.getFile();
+//				URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+//				rs = new ResourceSetImpl();
+//				resource = rs.getResource(uri, true);
+//			}
 			if(resource == null){
 				return;
 			}
 			List<EObject> elementsInResource = getElementsByUris(resource, selectedElements);
-//			System.out.println("~~~~~~~");
-//			System.out.println(resource);
-////			EObject model = resource.getContents().get(0);
-//			System.out.println(model);
-//			TreeIterator<EObject> iterator = model.eAllContents();
-//			while (iterator.hasNext()) {
-//				EObject object = (EObject) iterator.next();
-//				System.out.println(object);
-//			}
-//			System.out.println("~~~~~~~");
 			//Resolve the entire resource set, not just the resource itself. It might be the case that there are
 			//multiple models with cross references that have not been resolved up to this point. If one of the elements
 			//is changed during the refactoring, resolving the proxy to this element in another model does not recognize
@@ -179,20 +192,18 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 //				System.out.println(element.equals(eObject));
 //			}
 			
-			ResourceSet resourceSet = resource.getResourceSet();
-			resource = elementsInResource.get(0).eResource();
-//			resourceSet.getResource(uri, loadOnDemand)
-			EcoreUtil.resolveAll(resourceSet);
+//			ResourceSet resourceSet = resource.getResourceSet();
+//			EObject element = elementsInResource.get(0);
+//			resource = element.eResource();
+//			EObject rootContainer = EcoreUtil.getRootContainer(element, true);
+//			resource = rootContainer.eResource();
+////			resourceSet.getResource(uri, loadOnDemand)
+//			EcoreUtil.resolveAll(resourceSet);
+//			resource = element.eResource();
+//			rootContainer = EcoreUtil.getRootContainer(element, true);
+//			resource = rootContainer.eResource();
+//			System.out.println("RefactoringMenuContributor.createContributionItems()");
 			IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
-//			IMenuManager rootMenu2 = new MenuManager(CONTEXT_MENU_ENTRY_TEXT + " (Commands)", IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID + ".commands");
-//			for (EObject element : elementsInResource) {
-//				URI uri = EcoreUtil.getURI(element);
-//				ResourceSet resourceSet2 = resource.getResourceSet();
-//				System.out.println(resource.equals(element.eResource()));
-//				EObject eObject = resourceSet2.getEObject(uri, true);
-//				System.out.println(element.equals(eObject));
-//			}
-			
 			Map<String, RoleMapping> roleMappings = getRoleMappingsForResource(resource);
 			List<RoleMapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elementsInResource, roleMappings, 1.0);
 			boolean containsEntries = false;
@@ -205,7 +216,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						refactorer.setInput(elementsInResource);
 						RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 						if (refSpec != null) {
-//							createAction(mapping, refactorer, rootMenu, editorConnector, activeEditor, transactionalEditingDomain);
 							createCommand(serviceLocator, mapping, refactorer, rootMenu, editorConnector, activeEditor, transactionalEditingDomain);
 							containsEntries = true;
 						}
@@ -218,32 +228,72 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			} 
 			if (containsEntries) {
 				additions.addContributionItem(rootMenu, null);
-//				additions.addContributionItem(rootMenu2, null);
 			}
 		}
+		System.out.println("leaving");
 	}
 	
-	public static Command getCommandForRefactoring(IServiceLocator serviceLocator, RoleMapping mapping, IRefactorer refactorer, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain){
+	public static Command getCommandForRefactoring(IServiceLocator serviceLocator, RoleMapping mapping, final IRefactorer refactorer, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain){
+//		Command.DEBUG_COMMAND_EXECUTION = true;
+//		Command.DEBUG_HANDLERS = true;
 		ICommandService commandService = (ICommandService) serviceLocator.getService(ICommandService.class);
 		Category category = commandService.getCategory(REFACTORY_COMMAND_CATEGORY);
 		String commandID = ModelRefactoringDescriptor.generateRefactoringID(mapping) + ".command";
 		Command command = commandService.getCommand(commandID);
 		String refactoringName = StringUtil.convertCamelCaseToWords(mapping.getName());
-		command.define(refactoringName, "Refactoring '" + refactoringName + "' is executed", category);
 		
-		IHandler handler = null;
-		if(transactionalEditingDomain == null){
-			handler = new RefactoringCommandHandler(refactorer, editorConnector);
-		} else {
-			handler = new RefactoringCommandHandler(refactorer, transactionalEditingDomain, activeEditor, editorConnector);
-		}
+		IHandler handler = new RefactoringCommandHandler();
 		if(!command.isHandled()){
-//			IHandlerService handlerService = (IHandlerService) serviceLocator.getService(IHandlerService.class);
-//			handlerService.activateHandler(commandID, handler);
 			command.setHandler(handler);
 		}
-//		command.setEnabled(null);
+		IParameter refactorerParam = createParameter(refactorer, commandID, "refactorer", "instance");
+		IParameter editorConnectorParam = createParameter(editorConnector, commandID, "editorConnector", "instance");
+		IParameter editingDomainParam = null;
+		IParameter activeEditorParam = null;
+		if(transactionalEditingDomain != null){
+			editingDomainParam = createParameter(transactionalEditingDomain, commandID, "editingDomain", "instance");
+			activeEditorParam = createParameter(activeEditor, commandID, "activeEditor", "instance");
+		}
+		IParameter[] parameters = null;
+		if(editingDomainParam == null && activeEditorParam == null){
+			parameters = new IParameter[]{refactorerParam, editorConnectorParam};
+		} else {
+			parameters = new IParameter[]{refactorerParam, editorConnectorParam, editingDomainParam, activeEditorParam};
+		}
+		command.define(refactoringName, "Refactoring '" + refactoringName + "' is executed", category, parameters);
 		return command;
+	}
+
+	private static IParameter createParameter(final Object value, final String commandID, final String name, final String valueName) {
+		return new IParameter() {
+			@Override
+			public boolean isOptional() {
+				return false;
+			}
+			
+			@Override
+			public IParameterValues getValues() throws ParameterValuesException {
+				return new IParameterValues() {
+					@SuppressWarnings("rawtypes")
+					@Override
+					public Map getParameterValues() {
+						Map<String, Object> map = new HashMap<String, Object>();
+						map.put(valueName, value);
+						return map;
+					}
+				};
+			}
+			
+			@Override
+			public String getName() {
+				return name;
+			}
+			
+			@Override
+			public String getId() {
+				return commandID + name;
+			}
+		};
 	}
 
 	private void createCommand(IServiceLocator serviceLocator, RoleMapping mapping, IRefactorer refactorer, IMenuManager rootMenu, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain) {

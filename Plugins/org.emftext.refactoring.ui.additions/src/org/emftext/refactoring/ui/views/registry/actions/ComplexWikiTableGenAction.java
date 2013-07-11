@@ -54,7 +54,11 @@ public class ComplexWikiTableGenAction extends Action {
 	public void run() {
 		TreeParent invisibleRoot = contentProvider.getInvisibleRoot();
 		try {
-			String tempdir = System.getProperty("java.io.tmpdir") + "Refactor";
+			String tempdir = System.getProperty("java.io.tmpdir");
+			if(!tempdir.endsWith(File.separator)){
+				tempdir += File.separator;
+			}
+			tempdir += "Refactor";
 			File tempDir = new File(tempdir);
 			boolean success = true;
 			if (!tempDir.isDirectory()) {
@@ -77,7 +81,7 @@ public class ComplexWikiTableGenAction extends Action {
 				for (TreeObject roleModelParent : invisibleRoot.getChildren()) {
 					if (roleModelParent instanceof TreeParent && !(roleModelParent instanceof TreeMetaModelParent)) {
 						RoleModel rolemodel = (RoleModel) roleModelParent.getObject();
-						String roleModelName = rolemodel.getName();
+						String roleModelName = rolemodel.getName().replace(" ", "_");
 						writer.append("|-\n");
 						writer.append("! [[Refactoring:" + roleModelName + "|" + StringUtil.convertCamelCaseToWords(roleModelName) + "]]\n");
 						writer.append("| colspan=\"2\"|\n");
@@ -104,7 +108,7 @@ public class ComplexWikiTableGenAction extends Action {
 									for (TreeObject mappingChild : mappingChildren) {
 										if (mappingChild instanceof TreeLeaf) {
 											RoleMapping mapping = (RoleMapping) mappingChild.getObject();
-											writer.append(" | [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName() + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
+											writer.append(" | [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName().replace(" ", "_") + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
 											writer.append(" |- \n");
 										}
 									}
@@ -114,7 +118,7 @@ public class ComplexWikiTableGenAction extends Action {
 									TreeObject mappingLeaf = mappingChildren[0];
 									RoleMapping mapping = (RoleMapping) mappingLeaf.getObject();
 									writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
-									writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName() + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
+									writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName().replace(" ", "_") + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
 									//											writer.append("|- \n");
 								}
 								TreeObject[] children = ((TreeParent) roleModelParent).getChildren();
