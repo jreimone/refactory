@@ -49,7 +49,11 @@ public class ComplexLatexTableGenAction extends Action {
 	public void run() {
 		TreeParent invisibleRoot = contentProvider.getInvisibleRoot();
 		try {
-			String tempdir = System.getProperty("java.io.tmpdir") + "Refactor";
+			String tempdir = System.getProperty("java.io.tmpdir");
+			if(!tempdir.endsWith(File.separator)){
+				tempdir += File.separator;
+			}
+			tempdir += "Refactor";
 			File tempDir = new File(tempdir);
 			boolean success = true;
 			if (!tempDir.isDirectory()) {

@@ -8,6 +8,10 @@ import java.util.Map;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IParameter;
+import org.eclipse.core.commands.IParameterValues;
+import org.eclipse.core.commands.ParameterValuesException;
+import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -38,31 +42,68 @@ public class RefactoringCommandHandler extends AbstractHandler {
 	private EditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 
-	public RefactoringCommandHandler(IRefactorer refactorer, IEditorConnector connector){
-		super();
-		this.refactorer = refactorer;
-		this.connector = connector;
-		IValueProviderFactory factory = new BasicValueProviderFactory(refactorer);
-		refactorer.setValueProviderFactory(factory);
-	}
+	//	public RefactoringCommandHandler(IRefactorer refactorer, IEditorConnector connector){
+	//		super();
+	//		this.refactorer = refactorer;
+	//		this.connector = connector;
+	//		IValueProviderFactory factory = new BasicValueProviderFactory(refactorer);
+	//		refactorer.setValueProviderFactory(factory);
+	//	}
+	//
+	//	public RefactoringCommandHandler(IRefactorer refactorer, EditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector){
+	//		this(refactorer, connector);
+	//		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
+	//		this.activeEditor = activeEditor;
+	//	}
 
-	public RefactoringCommandHandler(IRefactorer refactorer, EditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector){
-		this(refactorer, connector);
-		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
-		this.activeEditor = activeEditor;
+	public RefactoringCommandHandler() {
+		super();
 	}
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		readCommandParameters(event);
 		ltkRun();
 		return null;
+	}
+
+	private void readCommandParameters(ExecutionEvent event) {
+		IParameter[] parameters;
+		try {
+			parameters = event.getCommand().getParameters();
+			for (IParameter parameter : parameters) {
+				IParameterValues values = parameter.getValues();
+				@SuppressWarnings("rawtypes")
+				Map parameterValues = values.getParameterValues();
+				Object instance = parameterValues.get("instance");
+				if(instance instanceof IRefactorer){
+					refactorer = (IRefactorer) instance;
+					IValueProviderFactory factory = new BasicValueProviderFactory(refactorer);
+					refactorer.setValueProviderFactory(factory);
+				} else if(instance instanceof IEditorConnector){
+					connector = (IEditorConnector) instance;
+				} else if(instance instanceof IEditorPart){
+					activeEditor = (IEditorPart) instance;
+				} else if(instance instanceof EditingDomain){
+					diagramTransactionalEditingDomain = (EditingDomain) instance;
+				}
+			}
+		} catch (NotDefinedException e) {
+			e.printStackTrace();
+		} catch (ParameterValuesException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private String getText() {
 		return StringUtil.convertCamelCaseToWords(refactorer.getRoleMapping().getName());
 	}
-	
+
 	private void ltkRun() {
+		if(refactorer == null){
+			System.err.println("Refactorer must not be null!");
+			return;
+		}
 		//		EObject original = refactorer.getOriginalModel();
 		ModelRefactoring refactoring = new ModelRefactoring(refactorer, diagramTransactionalEditingDomain, getText(), activeEditor);
 		EObject fakeRefactoredModel = refactoring.getRefactorer().getFakeRefactoredModel();
