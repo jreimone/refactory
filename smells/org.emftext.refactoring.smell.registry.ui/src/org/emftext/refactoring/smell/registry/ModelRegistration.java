@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -48,7 +49,7 @@ public class ModelRegistration {
 	private static final String SMELL_MODEL_NAME	= "smellmodel.smell";
 	private static final String CALC_MODEL_NAME		= "registered.calculation";
 
-	@PostConstruct
+	@Execute
 	public void register(IEclipseContext context, IWorkspace workspace, IExtensionRegistry registry) {
 		CalculationModel calculationModel = registerCalculationExtensions(context, registry, workspace);
 		QualitySmellModel smellModel = registerQualitySmellModel(context, workspace);

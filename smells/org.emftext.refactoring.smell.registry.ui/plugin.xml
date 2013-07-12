@@ -10,6 +10,10 @@
       <fragment
             uri="fragment.e4xmi">
       </fragment>
+      <processor
+            beforefragment="true"
+            class="org.emftext.refactoring.smell.registry.ModelRegistration">
+      </processor>
    </extension>
    <extension
          id="org.emftext.refactoring.smell.problem"
