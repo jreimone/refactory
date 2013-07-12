@@ -105,6 +105,7 @@
             locationURI="popup:org.emftext.refactoring.smell.ui.views.QualitySmellsView">
          <command
                commandId="org.eclipse.jdt.ui.edit.text.java.correction.assist.proposals"
+               icon="icons/poop_remove.png"
                label="Quick Fix Refactoring"
                style="push">
          </command>
