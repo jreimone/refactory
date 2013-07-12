@@ -73,6 +73,10 @@
             class="org.emftext.refactoring.smell.ui.handlers.RemoveSmells"
             commandId="org.emftext.refactoring.smell.ui.remove">
       </handler>
+      <handler
+            class="org.eclipse.ui.internal.views.markers.QuickFixHandler"
+            commandId="org.eclipse.jdt.ui.edit.text.java.correction.assist.proposals">
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -93,6 +97,15 @@
                commandId="org.emftext.refactoring.smell.ui.remove"
                icon="icons/remove.gif"
                label="Remove All Active Smells"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.emftext.refactoring.smell.ui.views.QualitySmellsView">
+         <command
+               commandId="org.eclipse.jdt.ui.edit.text.java.correction.assist.proposals"
+               label="Quick Fix Refactoring"
                style="push">
          </command>
       </menuContribution>
