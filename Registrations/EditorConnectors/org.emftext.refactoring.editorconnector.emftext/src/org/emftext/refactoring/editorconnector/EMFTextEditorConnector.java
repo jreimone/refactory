@@ -76,8 +76,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 				}
 			}
 		} else {
-			selectedElements = locationMap.getElementsBetween(startOffset,
-					endOffset);
+			selectedElements = locationMap.getElementsBetween(startOffset, endOffset);
 			for (EObject object : selectedElements) {
 				EcoreUtil.resolveAll(object);
 				int start = locationMap.getCharStart(object);
