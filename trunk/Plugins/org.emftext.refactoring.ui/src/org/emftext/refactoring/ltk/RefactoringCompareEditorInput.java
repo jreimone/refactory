@@ -19,7 +19,11 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.CompareEditorInput;
+import org.eclipse.compare.ITypedElement;
+import org.eclipse.compare.structuremergeviewer.ICompareInput;
+import org.eclipse.compare.structuremergeviewer.ICompareInputChangeListener;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.compare.EMFCompare;
 import org.eclipse.emf.compare.match.DefaultComparisonFactory;
 import org.eclipse.emf.compare.match.DefaultEqualityHelperFactory;
@@ -32,6 +36,7 @@ import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
 import org.eclipse.emf.compare.scope.IComparisonScope;
 import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
@@ -48,10 +53,11 @@ public class RefactoringCompareEditorInput extends CompareEditorInput {
 	private EObject fakeRefactoredModel;
 
 	private Control control;
+	private ModelRefactoringChange change;
 
 	public RefactoringCompareEditorInput(Composite parent) {
 		super(config);
-		control = super.createContents(parent);
+//		control = super.createContents(parent);
 		//		control.pack();
 		//		control.setVisible(true);
 	}
@@ -75,7 +81,8 @@ public class RefactoringCompareEditorInput extends CompareEditorInput {
 		matchEngineRegistry.add(matchEngineFactory);
 		EMFCompare comparator = EMFCompare.builder().setMatchEngineFactoryRegistry(matchEngineRegistry).build();
 		IComparisonScope scope = EMFCompare.createDefaultScope(originalModel, fakeRefactoredModel);
-		return comparator.compare(scope);
+		Comparison comparison = comparator.compare(scope);
+		return new ModelRefactoringCompareInput(comparison, change);
 		
 		// old EMF Compare API
 		//		Map<String, Object> options = new LinkedHashMap<String, Object>();
@@ -108,6 +115,7 @@ public class RefactoringCompareEditorInput extends CompareEditorInput {
 	@Override
 	public Control createContents(Composite parent) {
 		// don't change the parent
+		control = super.createContents(parent);
 		return control;
 	}
 
@@ -115,4 +123,7 @@ public class RefactoringCompareEditorInput extends CompareEditorInput {
 		return control;
 	}
 
+	public void setChange(ModelRefactoringChange change) {
+		this.change = change;
+	}
 }

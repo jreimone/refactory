@@ -30,6 +30,17 @@
             name="Refactory">
       </page>
    </extension>
+   <extension
+         point="org.eclipse.ltk.ui.refactoring.changePreviewViewers">
+      <changePreviewViewer
+            class="org.emftext.refactoring.ltk.ModelChangePreviewer"
+            id="org.emftext.refactoring.ui.changePreviewViewer">
+         <enablement>
+            <instanceof
+                  value="org.emftext.refactoring.ltk.ModelRefactoringChange">
+            </instanceof></enablement>
+      </changePreviewViewer>
+   </extension>
    <!--
    <extension
          point="org.eclipse.ltk.core.refactoring.refactoringContributions">
