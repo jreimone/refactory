@@ -65,8 +65,10 @@ get:get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyru
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.uml.diagram.feature_0.10.0.v201306121352.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.uml.tools.feature_0.10.0.v201306121352.jar
 
-// Papyris needs EMF Facet
+// Papyrus needs EMF Facet
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/downloads/drops/0.3.0/R201305312221/org.eclipse.emf.facet.updatesite-0.3.0.201305312221.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest_1.1.0.v20090501071000.jar
+
 
 // IncQuery
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage_0.7.0.201306302207.jar
