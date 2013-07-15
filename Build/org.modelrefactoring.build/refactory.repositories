@@ -69,7 +69,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/do
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.uml.diagram.feature_0.10.0.v201306121352.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.uml.tools.feature_0.10.0.v201306121352.jar
 
-// Papyrus needs EMF Facet
+// Papyrus needs more other stuff
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/downloads/drops/0.3.0/R201305312221/org.eclipse.emf.facet.updatesite-0.3.0.201305312221.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest_1.1.0.v20090501071000.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest.integration_1.1.0.v201303031500.jar
@@ -88,6 +88,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmt/modisco/up
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmt/modisco/updates/milestones/plugins/org.eclipse.gmt.modisco.xml.discoverer_0.8.0.v201005050326.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmt/modisco/updates/milestones/plugins/org.eclipse.gmt.modisco.infra.discoverymanager_0.8.0.v201005050326.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmt/modisco/updates/milestones/plugins/org.eclipse.gmt.modisco.infra.common.core_0.8.0.v201005050326.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drops/R3.5.0/R-3.5.0-20130610150119/repository/plugins/org.eclipse.wst.xml.core_1.1.800.v201301091921.jar
 
 
 // IncQuery
@@ -168,6 +169,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/update
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.examples.xtext.markup_3.3.0.v20130520-1503.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.examples.common_3.2.100.v20130520-1503.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.examples.library_3.3.0.v20130523-1817.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.examples.domain_3.3.0.v20130523-1817.jar
 
 // GEF
 get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.9.0/R201305060205/GEF-runtime-3.9.0.zip
