@@ -134,6 +134,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 // GMF 
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/downloads/drops/1.7.0/R201306111432/gmf-runtime-1.7.0.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-notation/downloads/drops/1.7.0/R201306101425/gmf-notation-1.7.0.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-tooling/downloads/drops/3.1.0/R201306121500/gmf-tooling-runtime-3.1.0.v201306121500.zip
 
 // MDT OCL (needed from GMF???)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.1.0/R201306101317/mdt-ocl-runtime-core-4.1.0.zip
