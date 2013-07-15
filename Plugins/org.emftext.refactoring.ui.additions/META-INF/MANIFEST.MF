@@ -19,13 +19,13 @@ Require-Bundle: org.eclipse.ui,
  org.emftext.refactoring.util,
  org.eclipse.jface.text,
  org.eclipse.gef,
- org.eclipse.gmf.runtime.notation,
  org.emftext.language.refactoring.roles.resource.rolestext.ui,
  org.emftext.language.refactoring.roles.resource.rolestext,
  org.eclipse.ui.editors,
  org.emftext.language.refactoring.specification.resource.refspec.ui,
  org.emftext.language.refactoring.specification.resource.refspec,
  org.emftext.language.refactoring.rolemapping.resource.rolemapping,
- org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui,
+ org.eclipse.gmf.runtime.notation
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
