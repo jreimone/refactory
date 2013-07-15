@@ -18,9 +18,9 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops
 
 // EMF
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-SDK-2.9.0.zip
-http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library_2.5.0.v20130610-0406.jar
-http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library.editor_2.5.0.v20130610-0406.jar
-http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library.edit_2.5.0.v20130610-0406.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library_2.5.0.v20130610-0406.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library.editor_2.5.0.v20130610-0406.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library.edit_2.5.0.v20130610-0406.jar
 
 // Ecore Tools Diagram Editor
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/ecoretools/updates/1.2/org.eclipse.emf.ecoretools.update-201306071421.zip
