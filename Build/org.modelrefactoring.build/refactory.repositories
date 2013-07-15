@@ -46,7 +46,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.2/R20120918-1125/emf-compare-update-1.3.2.zip!plugins/org.eclipse.emf.compare.epatch_1.3.2.v20120918-1125.jar
 
 // EMF Compare needs Papyrus
-get:get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.activity_0.10.0.v201306121352.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.clazz_0.10.0.v201306121352.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.communication_0.10.0.v201306121352.jar
