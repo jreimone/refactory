@@ -89,6 +89,9 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmt/modisco/up
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmt/modisco/updates/milestones/plugins/org.eclipse.gmt.modisco.infra.discoverymanager_0.8.0.v201005050326.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmt/modisco/updates/milestones/plugins/org.eclipse.gmt.modisco.infra.common.core_0.8.0.v201005050326.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drops/R3.5.0/R-3.5.0-20130610150119/repository/plugins/org.eclipse.wst.xml.core_1.1.800.v201301091921.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drops/R3.5.0/R-3.5.0-20130610150119/repository/plugins/org.eclipse.wst.common.core_1.2.0.v200908252030.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drops/R3.5.0/R-3.5.0-20130610150119/repository/plugins/org.eclipse.wst.sse.core_1.1.800.v201304222123.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drops/R3.5.0/R-3.5.0-20130610150119/repository/plugins/org.eclipse.wst.common.uriresolver_1.2.100.v201305141800.jar
 
 
 // IncQuery
