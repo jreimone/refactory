@@ -50,24 +50,6 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 
 // EMF Compare needs Papyrus
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.activity_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.clazz_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.communication_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.component_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.composite_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.deployment_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.sequence_0.10.1.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.statemachine_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.usecase_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.uml.diagram.common_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.infra.emf.diagram.common_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.infra.gmfdiag.common_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!plugins/org.eclipse.papyrus.infra.core_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.infra.core.feature_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.infra.emf.feature_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.infra.gmfdiag.feature_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.uml.diagram.feature_0.10.0.v201306121352.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip!features/org.eclipse.papyrus.uml.tools.feature_0.10.0.v201306121352.jar
 
 // Papyrus needs more other stuff
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/downloads/drops/0.3.0/R201305312221/org.eclipse.emf.facet.updatesite-0.3.0.201305312221.zip
