@@ -29,7 +29,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation
 
 //EMFText (required to generate test languages)
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
-get:http://www.emftext.org/update/emftext-1.4.1.v201207310007.zip
+get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 
 // EMF Compare (required for tests)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.0/R201306250935/emf-compare-update-2.1.0a.zip
