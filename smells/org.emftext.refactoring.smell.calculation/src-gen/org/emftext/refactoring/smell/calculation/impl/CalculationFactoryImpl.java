@@ -167,7 +167,7 @@ public class CalculationFactoryImpl extends EFactoryImpl implements CalculationF
 	 * @generated
 	 */
 	public CalculationPackage getCalculationPackage() {
-		return (CalculationPackage) getEPackage();
+		return (CalculationPackage)getEPackage();
 	}
 
 	/**
