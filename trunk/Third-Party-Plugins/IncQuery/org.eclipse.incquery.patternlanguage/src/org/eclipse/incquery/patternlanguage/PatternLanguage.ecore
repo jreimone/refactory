@@ -36,7 +36,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Modifiers">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="private" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement">
     <eOperations name="getSimpleName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return this.name;"/>
@@ -125,7 +125,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CheckConstraint" eSuperTypes="#//Constraint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PathExpressionConstraint" eSuperTypes="#//Constraint">

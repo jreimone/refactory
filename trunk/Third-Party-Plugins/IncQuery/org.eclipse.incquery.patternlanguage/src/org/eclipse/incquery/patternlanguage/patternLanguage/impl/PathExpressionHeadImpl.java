@@ -32,234 +32,225 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.VariableReference;
 public class PathExpressionHeadImpl extends PathExpressionElementImpl implements PathExpressionHead
 {
   /**
-   * The cached value of the '{@link #getSrc() <em>Src</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSrc() <em>Src</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSrc()
-   * @generated
-   * @ordered
-   */
+	 * @see #getSrc()
+	 * @generated
+	 * @ordered
+	 */
   protected VariableReference src;
 
   /**
-   * The cached value of the '{@link #getDst() <em>Dst</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDst() <em>Dst</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDst()
-   * @generated
-   * @ordered
-   */
+	 * @see #getDst()
+	 * @generated
+	 * @ordered
+	 */
   protected ValueReference dst;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected PathExpressionHeadImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.PATH_EXPRESSION_HEAD;
-  }
+		return PatternLanguagePackage.Literals.PATH_EXPRESSION_HEAD;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public VariableReference getSrc()
   {
-    return src;
-  }
+		return src;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetSrc(VariableReference newSrc, NotificationChain msgs)
   {
-    VariableReference oldSrc = src;
-    src = newSrc;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC, oldSrc, newSrc);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		VariableReference oldSrc = src;
+		src = newSrc;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC, oldSrc, newSrc);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setSrc(VariableReference newSrc)
   {
-    if (newSrc != src)
-    {
-      NotificationChain msgs = null;
-      if (src != null)
-        msgs = ((InternalEObject)src).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC, null, msgs);
-      if (newSrc != null)
-        msgs = ((InternalEObject)newSrc).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC, null, msgs);
-      msgs = basicSetSrc(newSrc, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC, newSrc, newSrc));
-  }
+		if (newSrc != src) {
+			NotificationChain msgs = null;
+			if (src != null)
+				msgs = ((InternalEObject)src).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC, null, msgs);
+			if (newSrc != null)
+				msgs = ((InternalEObject)newSrc).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC, null, msgs);
+			msgs = basicSetSrc(newSrc, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC, newSrc, newSrc));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ValueReference getDst()
   {
-    return dst;
-  }
+		return dst;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetDst(ValueReference newDst, NotificationChain msgs)
   {
-    ValueReference oldDst = dst;
-    dst = newDst;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST, oldDst, newDst);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		ValueReference oldDst = dst;
+		dst = newDst;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST, oldDst, newDst);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setDst(ValueReference newDst)
   {
-    if (newDst != dst)
-    {
-      NotificationChain msgs = null;
-      if (dst != null)
-        msgs = ((InternalEObject)dst).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST, null, msgs);
-      if (newDst != null)
-        msgs = ((InternalEObject)newDst).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST, null, msgs);
-      msgs = basicSetDst(newDst, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST, newDst, newDst));
-  }
+		if (newDst != dst) {
+			NotificationChain msgs = null;
+			if (dst != null)
+				msgs = ((InternalEObject)dst).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST, null, msgs);
+			if (newDst != null)
+				msgs = ((InternalEObject)newDst).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST, null, msgs);
+			msgs = basicSetDst(newDst, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST, newDst, newDst));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
-        return basicSetSrc(null, msgs);
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
-        return basicSetDst(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
+				return basicSetSrc(null, msgs);
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
+				return basicSetDst(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
-        return getSrc();
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
-        return getDst();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
+				return getSrc();
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
+				return getDst();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
-        setSrc((VariableReference)newValue);
-        return;
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
-        setDst((ValueReference)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
+				setSrc((VariableReference)newValue);
+				return;
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
+				setDst((ValueReference)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
-        setSrc((VariableReference)null);
-        return;
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
-        setDst((ValueReference)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
+				setSrc((VariableReference)null);
+				return;
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
+				setDst((ValueReference)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
-        return src != null;
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
-        return dst != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__SRC:
+				return src != null;
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD__DST:
+				return dst != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //PathExpressionHeadImpl

@@ -19,24 +19,24 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePacka
 public class ComputationValueImpl extends ValueReferenceImpl implements ComputationValue
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ComputationValueImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.COMPUTATION_VALUE;
-  }
+		return PatternLanguagePackage.Literals.COMPUTATION_VALUE;
+	}
 
 } //ComputationValueImpl

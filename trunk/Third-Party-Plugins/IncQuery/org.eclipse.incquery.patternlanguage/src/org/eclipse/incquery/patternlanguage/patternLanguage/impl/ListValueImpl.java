@@ -34,132 +34,126 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.ValueReference;
 public class ListValueImpl extends LiteralValueReferenceImpl implements ListValue
 {
   /**
-   * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValues()
-   * @generated
-   * @ordered
-   */
+	 * @see #getValues()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<ValueReference> values;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ListValueImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.LIST_VALUE;
-  }
+		return PatternLanguagePackage.Literals.LIST_VALUE;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<ValueReference> getValues()
   {
-    if (values == null)
-    {
-      values = new EObjectContainmentEList<ValueReference>(ValueReference.class, this, PatternLanguagePackage.LIST_VALUE__VALUES);
-    }
-    return values;
-  }
+		if (values == null) {
+			values = new EObjectContainmentEList<ValueReference>(ValueReference.class, this, PatternLanguagePackage.LIST_VALUE__VALUES);
+		}
+		return values;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.LIST_VALUE__VALUES:
-        return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.LIST_VALUE__VALUES:
+				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.LIST_VALUE__VALUES:
-        return getValues();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.LIST_VALUE__VALUES:
+				return getValues();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.LIST_VALUE__VALUES:
-        getValues().clear();
-        getValues().addAll((Collection<? extends ValueReference>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.LIST_VALUE__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends ValueReference>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.LIST_VALUE__VALUES:
-        getValues().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.LIST_VALUE__VALUES:
+				getValues().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.LIST_VALUE__VALUES:
-        return values != null && !values.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.LIST_VALUE__VALUES:
+				return values != null && !values.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //ListValueImpl

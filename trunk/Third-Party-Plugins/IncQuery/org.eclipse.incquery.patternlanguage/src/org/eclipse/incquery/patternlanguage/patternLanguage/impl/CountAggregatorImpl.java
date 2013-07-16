@@ -19,24 +19,24 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePacka
 public class CountAggregatorImpl extends AggregatorExpressionImpl implements CountAggregator
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected CountAggregatorImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.COUNT_AGGREGATOR;
-  }
+		return PatternLanguagePackage.Literals.COUNT_AGGREGATOR;
+	}
 
 } //CountAggregatorImpl

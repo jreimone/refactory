@@ -21,24 +21,24 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePacka
 public class ConstraintImpl extends MinimalEObjectImpl.Container implements Constraint
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ConstraintImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.CONSTRAINT;
-  }
+		return PatternLanguagePackage.Literals.CONSTRAINT;
+	}
 
 } //ConstraintImpl

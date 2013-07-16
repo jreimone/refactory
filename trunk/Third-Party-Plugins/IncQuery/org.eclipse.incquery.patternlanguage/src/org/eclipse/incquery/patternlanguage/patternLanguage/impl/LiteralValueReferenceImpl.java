@@ -19,24 +19,24 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePacka
 public class LiteralValueReferenceImpl extends ValueReferenceImpl implements LiteralValueReference
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LiteralValueReferenceImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.LITERAL_VALUE_REFERENCE;
-  }
+		return PatternLanguagePackage.Literals.LITERAL_VALUE_REFERENCE;
+	}
 
 } //LiteralValueReferenceImpl

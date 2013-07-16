@@ -22,538 +22,532 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.*;
 public class PatternLanguageFactoryImpl extends EFactoryImpl implements PatternLanguageFactory
 {
   /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static PatternLanguageFactory init()
   {
-    try
-    {
-      PatternLanguageFactory thePatternLanguageFactory = (PatternLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(PatternLanguagePackage.eNS_URI);
-      if (thePatternLanguageFactory != null)
-      {
-        return thePatternLanguageFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new PatternLanguageFactoryImpl();
-  }
+		try {
+			PatternLanguageFactory thePatternLanguageFactory = (PatternLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(PatternLanguagePackage.eNS_URI);
+			if (thePatternLanguageFactory != null) {
+				return thePatternLanguageFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new PatternLanguageFactoryImpl();
+	}
 
   /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PatternLanguageFactoryImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public EObject create(EClass eClass)
   {
-    switch (eClass.getClassifierID())
-    {
-      case PatternLanguagePackage.PATTERN_MODEL: return createPatternModel();
-      case PatternLanguagePackage.PATTERN: return createPattern();
-      case PatternLanguagePackage.ANNOTATION: return createAnnotation();
-      case PatternLanguagePackage.ANNOTATION_PARAMETER: return createAnnotationParameter();
-      case PatternLanguagePackage.MODIFIERS: return createModifiers();
-      case PatternLanguagePackage.VARIABLE: return createVariable();
-      case PatternLanguagePackage.VARIABLE_REFERENCE: return createVariableReference();
-      case PatternLanguagePackage.TYPE: return createType();
-      case PatternLanguagePackage.PATTERN_BODY: return createPatternBody();
-      case PatternLanguagePackage.CONSTRAINT: return createConstraint();
-      case PatternLanguagePackage.PATTERN_CALL: return createPatternCall();
-      case PatternLanguagePackage.PATH_EXPRESSION_ELEMENT: return createPathExpressionElement();
-      case PatternLanguagePackage.VALUE_REFERENCE: return createValueReference();
-      case PatternLanguagePackage.LITERAL_VALUE_REFERENCE: return createLiteralValueReference();
-      case PatternLanguagePackage.COMPUTATION_VALUE: return createComputationValue();
-      case PatternLanguagePackage.AGGREGATOR_EXPRESSION: return createAggregatorExpression();
-      case PatternLanguagePackage.PARAMETER_REF: return createParameterRef();
-      case PatternLanguagePackage.LOCAL_VARIABLE: return createLocalVariable();
-      case PatternLanguagePackage.ENTITY_TYPE: return createEntityType();
-      case PatternLanguagePackage.RELATION_TYPE: return createRelationType();
-      case PatternLanguagePackage.PATTERN_COMPOSITION_CONSTRAINT: return createPatternCompositionConstraint();
-      case PatternLanguagePackage.COMPARE_CONSTRAINT: return createCompareConstraint();
-      case PatternLanguagePackage.CHECK_CONSTRAINT: return createCheckConstraint();
-      case PatternLanguagePackage.PATH_EXPRESSION_CONSTRAINT: return createPathExpressionConstraint();
-      case PatternLanguagePackage.PATH_EXPRESSION_HEAD: return createPathExpressionHead();
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL: return createPathExpressionTail();
-      case PatternLanguagePackage.INT_VALUE: return createIntValue();
-      case PatternLanguagePackage.STRING_VALUE: return createStringValue();
-      case PatternLanguagePackage.BOOL_VALUE: return createBoolValue();
-      case PatternLanguagePackage.DOUBLE_VALUE: return createDoubleValue();
-      case PatternLanguagePackage.VARIABLE_VALUE: return createVariableValue();
-      case PatternLanguagePackage.LIST_VALUE: return createListValue();
-      case PatternLanguagePackage.AGGREGATED_VALUE: return createAggregatedValue();
-      case PatternLanguagePackage.COUNT_AGGREGATOR: return createCountAggregator();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eClass.getClassifierID()) {
+			case PatternLanguagePackage.PATTERN_MODEL: return createPatternModel();
+			case PatternLanguagePackage.PATTERN: return createPattern();
+			case PatternLanguagePackage.ANNOTATION: return createAnnotation();
+			case PatternLanguagePackage.ANNOTATION_PARAMETER: return createAnnotationParameter();
+			case PatternLanguagePackage.MODIFIERS: return createModifiers();
+			case PatternLanguagePackage.VARIABLE: return createVariable();
+			case PatternLanguagePackage.VARIABLE_REFERENCE: return createVariableReference();
+			case PatternLanguagePackage.TYPE: return createType();
+			case PatternLanguagePackage.PATTERN_BODY: return createPatternBody();
+			case PatternLanguagePackage.CONSTRAINT: return createConstraint();
+			case PatternLanguagePackage.PATTERN_CALL: return createPatternCall();
+			case PatternLanguagePackage.PATH_EXPRESSION_ELEMENT: return createPathExpressionElement();
+			case PatternLanguagePackage.VALUE_REFERENCE: return createValueReference();
+			case PatternLanguagePackage.LITERAL_VALUE_REFERENCE: return createLiteralValueReference();
+			case PatternLanguagePackage.COMPUTATION_VALUE: return createComputationValue();
+			case PatternLanguagePackage.AGGREGATOR_EXPRESSION: return createAggregatorExpression();
+			case PatternLanguagePackage.PARAMETER_REF: return createParameterRef();
+			case PatternLanguagePackage.LOCAL_VARIABLE: return createLocalVariable();
+			case PatternLanguagePackage.ENTITY_TYPE: return createEntityType();
+			case PatternLanguagePackage.RELATION_TYPE: return createRelationType();
+			case PatternLanguagePackage.PATTERN_COMPOSITION_CONSTRAINT: return createPatternCompositionConstraint();
+			case PatternLanguagePackage.COMPARE_CONSTRAINT: return createCompareConstraint();
+			case PatternLanguagePackage.CHECK_CONSTRAINT: return createCheckConstraint();
+			case PatternLanguagePackage.PATH_EXPRESSION_CONSTRAINT: return createPathExpressionConstraint();
+			case PatternLanguagePackage.PATH_EXPRESSION_HEAD: return createPathExpressionHead();
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL: return createPathExpressionTail();
+			case PatternLanguagePackage.INT_VALUE: return createIntValue();
+			case PatternLanguagePackage.STRING_VALUE: return createStringValue();
+			case PatternLanguagePackage.BOOL_VALUE: return createBoolValue();
+			case PatternLanguagePackage.DOUBLE_VALUE: return createDoubleValue();
+			case PatternLanguagePackage.VARIABLE_VALUE: return createVariableValue();
+			case PatternLanguagePackage.LIST_VALUE: return createListValue();
+			case PatternLanguagePackage.AGGREGATED_VALUE: return createAggregatedValue();
+			case PatternLanguagePackage.COUNT_AGGREGATOR: return createCountAggregator();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object createFromString(EDataType eDataType, String initialValue)
   {
-    switch (eDataType.getClassifierID())
-    {
-      case PatternLanguagePackage.COMPARE_FEATURE:
-        return createCompareFeatureFromString(eDataType, initialValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eDataType.getClassifierID()) {
+			case PatternLanguagePackage.COMPARE_FEATURE:
+				return createCompareFeatureFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String convertToString(EDataType eDataType, Object instanceValue)
   {
-    switch (eDataType.getClassifierID())
-    {
-      case PatternLanguagePackage.COMPARE_FEATURE:
-        return convertCompareFeatureToString(eDataType, instanceValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eDataType.getClassifierID()) {
+			case PatternLanguagePackage.COMPARE_FEATURE:
+				return convertCompareFeatureToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PatternModel createPatternModel()
   {
-    PatternModelImpl patternModel = new PatternModelImpl();
-    return patternModel;
-  }
+		PatternModelImpl patternModel = new PatternModelImpl();
+		return patternModel;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Pattern createPattern()
   {
-    PatternImpl pattern = new PatternImpl();
-    return pattern;
-  }
+		PatternImpl pattern = new PatternImpl();
+		return pattern;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Annotation createAnnotation()
   {
-    AnnotationImpl annotation = new AnnotationImpl();
-    return annotation;
-  }
+		AnnotationImpl annotation = new AnnotationImpl();
+		return annotation;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public AnnotationParameter createAnnotationParameter()
   {
-    AnnotationParameterImpl annotationParameter = new AnnotationParameterImpl();
-    return annotationParameter;
-  }
+		AnnotationParameterImpl annotationParameter = new AnnotationParameterImpl();
+		return annotationParameter;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Modifiers createModifiers()
   {
-    ModifiersImpl modifiers = new ModifiersImpl();
-    return modifiers;
-  }
+		ModifiersImpl modifiers = new ModifiersImpl();
+		return modifiers;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Variable createVariable()
   {
-    VariableImpl variable = new VariableImpl();
-    return variable;
-  }
+		VariableImpl variable = new VariableImpl();
+		return variable;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public VariableReference createVariableReference()
   {
-    VariableReferenceImpl variableReference = new VariableReferenceImpl();
-    return variableReference;
-  }
+		VariableReferenceImpl variableReference = new VariableReferenceImpl();
+		return variableReference;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Type createType()
   {
-    TypeImpl type = new TypeImpl();
-    return type;
-  }
+		TypeImpl type = new TypeImpl();
+		return type;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PatternBody createPatternBody()
   {
-    PatternBodyImpl patternBody = new PatternBodyImpl();
-    return patternBody;
-  }
+		PatternBodyImpl patternBody = new PatternBodyImpl();
+		return patternBody;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Constraint createConstraint()
   {
-    ConstraintImpl constraint = new ConstraintImpl();
-    return constraint;
-  }
+		ConstraintImpl constraint = new ConstraintImpl();
+		return constraint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PatternCall createPatternCall()
   {
-    PatternCallImpl patternCall = new PatternCallImpl();
-    return patternCall;
-  }
+		PatternCallImpl patternCall = new PatternCallImpl();
+		return patternCall;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PathExpressionElement createPathExpressionElement()
   {
-    PathExpressionElementImpl pathExpressionElement = new PathExpressionElementImpl();
-    return pathExpressionElement;
-  }
+		PathExpressionElementImpl pathExpressionElement = new PathExpressionElementImpl();
+		return pathExpressionElement;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ValueReference createValueReference()
   {
-    ValueReferenceImpl valueReference = new ValueReferenceImpl();
-    return valueReference;
-  }
+		ValueReferenceImpl valueReference = new ValueReferenceImpl();
+		return valueReference;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public LiteralValueReference createLiteralValueReference()
   {
-    LiteralValueReferenceImpl literalValueReference = new LiteralValueReferenceImpl();
-    return literalValueReference;
-  }
+		LiteralValueReferenceImpl literalValueReference = new LiteralValueReferenceImpl();
+		return literalValueReference;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ComputationValue createComputationValue()
   {
-    ComputationValueImpl computationValue = new ComputationValueImpl();
-    return computationValue;
-  }
+		ComputationValueImpl computationValue = new ComputationValueImpl();
+		return computationValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public AggregatorExpression createAggregatorExpression()
   {
-    AggregatorExpressionImpl aggregatorExpression = new AggregatorExpressionImpl();
-    return aggregatorExpression;
-  }
+		AggregatorExpressionImpl aggregatorExpression = new AggregatorExpressionImpl();
+		return aggregatorExpression;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ParameterRef createParameterRef()
   {
-    ParameterRefImpl parameterRef = new ParameterRefImpl();
-    return parameterRef;
-  }
+		ParameterRefImpl parameterRef = new ParameterRefImpl();
+		return parameterRef;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public LocalVariable createLocalVariable()
   {
-    LocalVariableImpl localVariable = new LocalVariableImpl();
-    return localVariable;
-  }
+		LocalVariableImpl localVariable = new LocalVariableImpl();
+		return localVariable;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EntityType createEntityType()
   {
-    EntityTypeImpl entityType = new EntityTypeImpl();
-    return entityType;
-  }
+		EntityTypeImpl entityType = new EntityTypeImpl();
+		return entityType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public RelationType createRelationType()
   {
-    RelationTypeImpl relationType = new RelationTypeImpl();
-    return relationType;
-  }
+		RelationTypeImpl relationType = new RelationTypeImpl();
+		return relationType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PatternCompositionConstraint createPatternCompositionConstraint()
   {
-    PatternCompositionConstraintImpl patternCompositionConstraint = new PatternCompositionConstraintImpl();
-    return patternCompositionConstraint;
-  }
+		PatternCompositionConstraintImpl patternCompositionConstraint = new PatternCompositionConstraintImpl();
+		return patternCompositionConstraint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public CompareConstraint createCompareConstraint()
   {
-    CompareConstraintImpl compareConstraint = new CompareConstraintImpl();
-    return compareConstraint;
-  }
+		CompareConstraintImpl compareConstraint = new CompareConstraintImpl();
+		return compareConstraint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public CheckConstraint createCheckConstraint()
   {
-    CheckConstraintImpl checkConstraint = new CheckConstraintImpl();
-    return checkConstraint;
-  }
+		CheckConstraintImpl checkConstraint = new CheckConstraintImpl();
+		return checkConstraint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PathExpressionConstraint createPathExpressionConstraint()
   {
-    PathExpressionConstraintImpl pathExpressionConstraint = new PathExpressionConstraintImpl();
-    return pathExpressionConstraint;
-  }
+		PathExpressionConstraintImpl pathExpressionConstraint = new PathExpressionConstraintImpl();
+		return pathExpressionConstraint;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PathExpressionHead createPathExpressionHead()
   {
-    PathExpressionHeadImpl pathExpressionHead = new PathExpressionHeadImpl();
-    return pathExpressionHead;
-  }
+		PathExpressionHeadImpl pathExpressionHead = new PathExpressionHeadImpl();
+		return pathExpressionHead;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PathExpressionTail createPathExpressionTail()
   {
-    PathExpressionTailImpl pathExpressionTail = new PathExpressionTailImpl();
-    return pathExpressionTail;
-  }
+		PathExpressionTailImpl pathExpressionTail = new PathExpressionTailImpl();
+		return pathExpressionTail;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public IntValue createIntValue()
   {
-    IntValueImpl intValue = new IntValueImpl();
-    return intValue;
-  }
+		IntValueImpl intValue = new IntValueImpl();
+		return intValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public StringValue createStringValue()
   {
-    StringValueImpl stringValue = new StringValueImpl();
-    return stringValue;
-  }
+		StringValueImpl stringValue = new StringValueImpl();
+		return stringValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public BoolValue createBoolValue()
   {
-    BoolValueImpl boolValue = new BoolValueImpl();
-    return boolValue;
-  }
+		BoolValueImpl boolValue = new BoolValueImpl();
+		return boolValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public DoubleValue createDoubleValue()
   {
-    DoubleValueImpl doubleValue = new DoubleValueImpl();
-    return doubleValue;
-  }
+		DoubleValueImpl doubleValue = new DoubleValueImpl();
+		return doubleValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public VariableValue createVariableValue()
   {
-    VariableValueImpl variableValue = new VariableValueImpl();
-    return variableValue;
-  }
+		VariableValueImpl variableValue = new VariableValueImpl();
+		return variableValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ListValue createListValue()
   {
-    ListValueImpl listValue = new ListValueImpl();
-    return listValue;
-  }
+		ListValueImpl listValue = new ListValueImpl();
+		return listValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public AggregatedValue createAggregatedValue()
   {
-    AggregatedValueImpl aggregatedValue = new AggregatedValueImpl();
-    return aggregatedValue;
-  }
+		AggregatedValueImpl aggregatedValue = new AggregatedValueImpl();
+		return aggregatedValue;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public CountAggregator createCountAggregator()
   {
-    CountAggregatorImpl countAggregator = new CountAggregatorImpl();
-    return countAggregator;
-  }
+		CountAggregatorImpl countAggregator = new CountAggregatorImpl();
+		return countAggregator;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public CompareFeature createCompareFeatureFromString(EDataType eDataType, String initialValue)
   {
-    CompareFeature result = CompareFeature.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
+		CompareFeature result = CompareFeature.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String convertCompareFeatureToString(EDataType eDataType, Object instanceValue)
   {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public PatternLanguagePackage getPatternLanguagePackage()
   {
-    return (PatternLanguagePackage)getEPackage();
-  }
+		return (PatternLanguagePackage)getEPackage();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+	 * @deprecated
+	 * @generated
+	 */
   @Deprecated
   public static PatternLanguagePackage getPackage()
   {
-    return PatternLanguagePackage.eINSTANCE;
-  }
+		return PatternLanguagePackage.eINSTANCE;
+	}
 
 } //PatternLanguageFactoryImpl

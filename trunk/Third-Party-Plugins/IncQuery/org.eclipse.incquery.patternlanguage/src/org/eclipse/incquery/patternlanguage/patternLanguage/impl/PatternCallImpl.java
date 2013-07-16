@@ -41,266 +41,258 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.ValueReference;
 public class PatternCallImpl extends MinimalEObjectImpl.Container implements PatternCall
 {
   /**
-   * The cached value of the '{@link #getPatternRef() <em>Pattern Ref</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPatternRef() <em>Pattern Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPatternRef()
-   * @generated
-   * @ordered
-   */
+	 * @see #getPatternRef()
+	 * @generated
+	 * @ordered
+	 */
   protected Pattern patternRef;
 
   /**
-   * The default value of the '{@link #isTransitive() <em>Transitive</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isTransitive() <em>Transitive</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isTransitive()
-   * @generated
-   * @ordered
-   */
+	 * @see #isTransitive()
+	 * @generated
+	 * @ordered
+	 */
   protected static final boolean TRANSITIVE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isTransitive() <em>Transitive</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isTransitive() <em>Transitive</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isTransitive()
-   * @generated
-   * @ordered
-   */
+	 * @see #isTransitive()
+	 * @generated
+	 * @ordered
+	 */
   protected boolean transitive = TRANSITIVE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getParameters()
-   * @generated
-   * @ordered
-   */
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<ValueReference> parameters;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected PatternCallImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.PATTERN_CALL;
-  }
+		return PatternLanguagePackage.Literals.PATTERN_CALL;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Pattern getPatternRef()
   {
-    if (patternRef != null && patternRef.eIsProxy())
-    {
-      InternalEObject oldPatternRef = (InternalEObject)patternRef;
-      patternRef = (Pattern)eResolveProxy(oldPatternRef);
-      if (patternRef != oldPatternRef)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, PatternLanguagePackage.PATTERN_CALL__PATTERN_REF, oldPatternRef, patternRef));
-      }
-    }
-    return patternRef;
-  }
+		if (patternRef != null && patternRef.eIsProxy()) {
+			InternalEObject oldPatternRef = (InternalEObject)patternRef;
+			patternRef = (Pattern)eResolveProxy(oldPatternRef);
+			if (patternRef != oldPatternRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PatternLanguagePackage.PATTERN_CALL__PATTERN_REF, oldPatternRef, patternRef));
+			}
+		}
+		return patternRef;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Pattern basicGetPatternRef()
   {
-    return patternRef;
-  }
+		return patternRef;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setPatternRef(Pattern newPatternRef)
   {
-    Pattern oldPatternRef = patternRef;
-    patternRef = newPatternRef;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATTERN_CALL__PATTERN_REF, oldPatternRef, patternRef));
-  }
+		Pattern oldPatternRef = patternRef;
+		patternRef = newPatternRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATTERN_CALL__PATTERN_REF, oldPatternRef, patternRef));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public boolean isTransitive()
   {
-    return transitive;
-  }
+		return transitive;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setTransitive(boolean newTransitive)
   {
-    boolean oldTransitive = transitive;
-    transitive = newTransitive;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATTERN_CALL__TRANSITIVE, oldTransitive, transitive));
-  }
+		boolean oldTransitive = transitive;
+		transitive = newTransitive;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATTERN_CALL__TRANSITIVE, oldTransitive, transitive));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<ValueReference> getParameters()
   {
-    if (parameters == null)
-    {
-      parameters = new EObjectContainmentEList<ValueReference>(ValueReference.class, this, PatternLanguagePackage.PATTERN_CALL__PARAMETERS);
-    }
-    return parameters;
-  }
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<ValueReference>(ValueReference.class, this, PatternLanguagePackage.PATTERN_CALL__PARAMETERS);
+		}
+		return parameters;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
-        return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN_CALL__PATTERN_REF:
-        if (resolve) return getPatternRef();
-        return basicGetPatternRef();
-      case PatternLanguagePackage.PATTERN_CALL__TRANSITIVE:
-        return isTransitive();
-      case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
-        return getParameters();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN_CALL__PATTERN_REF:
+				if (resolve) return getPatternRef();
+				return basicGetPatternRef();
+			case PatternLanguagePackage.PATTERN_CALL__TRANSITIVE:
+				return isTransitive();
+			case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
+				return getParameters();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN_CALL__PATTERN_REF:
-        setPatternRef((Pattern)newValue);
-        return;
-      case PatternLanguagePackage.PATTERN_CALL__TRANSITIVE:
-        setTransitive((Boolean)newValue);
-        return;
-      case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
-        getParameters().clear();
-        getParameters().addAll((Collection<? extends ValueReference>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN_CALL__PATTERN_REF:
+				setPatternRef((Pattern)newValue);
+				return;
+			case PatternLanguagePackage.PATTERN_CALL__TRANSITIVE:
+				setTransitive((Boolean)newValue);
+				return;
+			case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends ValueReference>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN_CALL__PATTERN_REF:
-        setPatternRef((Pattern)null);
-        return;
-      case PatternLanguagePackage.PATTERN_CALL__TRANSITIVE:
-        setTransitive(TRANSITIVE_EDEFAULT);
-        return;
-      case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
-        getParameters().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN_CALL__PATTERN_REF:
+				setPatternRef((Pattern)null);
+				return;
+			case PatternLanguagePackage.PATTERN_CALL__TRANSITIVE:
+				setTransitive(TRANSITIVE_EDEFAULT);
+				return;
+			case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
+				getParameters().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN_CALL__PATTERN_REF:
-        return patternRef != null;
-      case PatternLanguagePackage.PATTERN_CALL__TRANSITIVE:
-        return transitive != TRANSITIVE_EDEFAULT;
-      case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
-        return parameters != null && !parameters.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN_CALL__PATTERN_REF:
+				return patternRef != null;
+			case PatternLanguagePackage.PATTERN_CALL__TRANSITIVE:
+				return transitive != TRANSITIVE_EDEFAULT;
+			case PatternLanguagePackage.PATTERN_CALL__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (transitive: ");
-    result.append(transitive);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (transitive: ");
+		result.append(transitive);
+		result.append(')');
+		return result.toString();
+	}
 
 } //PatternCallImpl

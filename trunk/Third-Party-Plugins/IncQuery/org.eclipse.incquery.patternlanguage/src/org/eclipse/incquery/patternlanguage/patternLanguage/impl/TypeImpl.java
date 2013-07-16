@@ -28,150 +28,146 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.Type;
 public class TypeImpl extends MinimalEObjectImpl.Container implements Type
 {
   /**
-   * The default value of the '{@link #getTypename() <em>Typename</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getTypename() <em>Typename</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTypename()
-   * @generated
-   * @ordered
-   */
+	 * @see #getTypename()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String TYPENAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getTypename() <em>Typename</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTypename() <em>Typename</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTypename()
-   * @generated
-   * @ordered
-   */
+	 * @see #getTypename()
+	 * @generated
+	 * @ordered
+	 */
   protected String typename = TYPENAME_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TypeImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.TYPE;
-  }
+		return PatternLanguagePackage.Literals.TYPE;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getTypename()
   {
-    return typename;
-  }
+		return typename;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setTypename(String newTypename)
   {
-    String oldTypename = typename;
-    typename = newTypename;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.TYPE__TYPENAME, oldTypename, typename));
-  }
+		String oldTypename = typename;
+		typename = newTypename;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.TYPE__TYPENAME, oldTypename, typename));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.TYPE__TYPENAME:
-        return getTypename();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.TYPE__TYPENAME:
+				return getTypename();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.TYPE__TYPENAME:
-        setTypename((String)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.TYPE__TYPENAME:
+				setTypename((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.TYPE__TYPENAME:
-        setTypename(TYPENAME_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.TYPE__TYPENAME:
+				setTypename(TYPENAME_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.TYPE__TYPENAME:
-        return TYPENAME_EDEFAULT == null ? typename != null : !TYPENAME_EDEFAULT.equals(typename);
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.TYPE__TYPENAME:
+				return TYPENAME_EDEFAULT == null ? typename != null : !TYPENAME_EDEFAULT.equals(typename);
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (typename: ");
-    result.append(typename);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (typename: ");
+		result.append(typename);
+		result.append(')');
+		return result.toString();
+	}
 
 } //TypeImpl

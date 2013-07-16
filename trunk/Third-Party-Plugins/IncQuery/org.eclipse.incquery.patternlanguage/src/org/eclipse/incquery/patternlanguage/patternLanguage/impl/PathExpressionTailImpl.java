@@ -28,205 +28,201 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePacka
 public class PathExpressionTailImpl extends PathExpressionElementImpl implements PathExpressionTail
 {
   /**
-   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
+	 * @see #getIndex()
+	 * @generated
+	 * @ordered
+	 */
   protected static final int INDEX_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
+	 * @see #getIndex()
+	 * @generated
+	 * @ordered
+	 */
   protected int index = INDEX_EDEFAULT;
 
   /**
-   * The default value of the '{@link #isClosure() <em>Closure</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isClosure() <em>Closure</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isClosure()
-   * @generated
-   * @ordered
-   */
+	 * @see #isClosure()
+	 * @generated
+	 * @ordered
+	 */
   protected static final boolean CLOSURE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isClosure() <em>Closure</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isClosure() <em>Closure</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isClosure()
-   * @generated
-   * @ordered
-   */
+	 * @see #isClosure()
+	 * @generated
+	 * @ordered
+	 */
   protected boolean closure = CLOSURE_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected PathExpressionTailImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.PATH_EXPRESSION_TAIL;
-  }
+		return PatternLanguagePackage.Literals.PATH_EXPRESSION_TAIL;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public int getIndex()
   {
-    return index;
-  }
+		return index;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setIndex(int newIndex)
   {
-    int oldIndex = index;
-    index = newIndex;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX, oldIndex, index));
-  }
+		int oldIndex = index;
+		index = newIndex;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX, oldIndex, index));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public boolean isClosure()
   {
-    return closure;
-  }
+		return closure;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setClosure(boolean newClosure)
   {
-    boolean oldClosure = closure;
-    closure = newClosure;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE, oldClosure, closure));
-  }
+		boolean oldClosure = closure;
+		closure = newClosure;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE, oldClosure, closure));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX:
-        return getIndex();
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE:
-        return isClosure();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX:
+				return getIndex();
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE:
+				return isClosure();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX:
-        setIndex((Integer)newValue);
-        return;
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE:
-        setClosure((Boolean)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX:
+				setIndex((Integer)newValue);
+				return;
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE:
+				setClosure((Boolean)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX:
-        setIndex(INDEX_EDEFAULT);
-        return;
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE:
-        setClosure(CLOSURE_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX:
+				setIndex(INDEX_EDEFAULT);
+				return;
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE:
+				setClosure(CLOSURE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX:
-        return index != INDEX_EDEFAULT;
-      case PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE:
-        return closure != CLOSURE_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL__INDEX:
+				return index != INDEX_EDEFAULT;
+			case PatternLanguagePackage.PATH_EXPRESSION_TAIL__CLOSURE:
+				return closure != CLOSURE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (index: ");
-    result.append(index);
-    result.append(", closure: ");
-    result.append(closure);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (index: ");
+		result.append(index);
+		result.append(", closure: ");
+		result.append(closure);
+		result.append(')');
+		return result.toString();
+	}
 
 } //PathExpressionTailImpl

@@ -19,24 +19,24 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePacka
 public class LocalVariableImpl extends VariableImpl implements LocalVariable
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LocalVariableImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.LOCAL_VARIABLE;
-  }
+		return PatternLanguagePackage.Literals.LOCAL_VARIABLE;
+	}
 
 } //LocalVariableImpl

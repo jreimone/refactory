@@ -20,204 +20,198 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum CompareFeature implements Enumerator
 {
   /**
-   * The '<em><b>Equality</b></em>' literal object.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Equality</b></em>' literal object.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #EQUALITY_VALUE
-   * @generated
-   * @ordered
-   */
+	 * @see #EQUALITY_VALUE
+	 * @generated
+	 * @ordered
+	 */
   EQUALITY(0, "equality", "=="),
 
   /**
-   * The '<em><b>Inequality</b></em>' literal object.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Inequality</b></em>' literal object.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #INEQUALITY_VALUE
-   * @generated
-   * @ordered
-   */
+	 * @see #INEQUALITY_VALUE
+	 * @generated
+	 * @ordered
+	 */
   INEQUALITY(1, "inequality", "!=");
 
   /**
-   * The '<em><b>Equality</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Equality</b></em>' literal value.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of '<em><b>Equality</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #EQUALITY
-   * @model name="equality" literal="=="
-   * @generated
-   * @ordered
-   */
+	 * @see #EQUALITY
+	 * @model name="equality" literal="=="
+	 * @generated
+	 * @ordered
+	 */
   public static final int EQUALITY_VALUE = 0;
 
   /**
-   * The '<em><b>Inequality</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Inequality</b></em>' literal value.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of '<em><b>Inequality</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #INEQUALITY
-   * @model name="inequality" literal="!="
-   * @generated
-   * @ordered
-   */
+	 * @see #INEQUALITY
+	 * @model name="inequality" literal="!="
+	 * @generated
+	 * @ordered
+	 */
   public static final int INEQUALITY_VALUE = 1;
 
   /**
-   * An array of all the '<em><b>Compare Feature</b></em>' enumerators.
-   * <!-- begin-user-doc -->
+	 * An array of all the '<em><b>Compare Feature</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private static final CompareFeature[] VALUES_ARRAY =
-    new CompareFeature[]
-    {
-      EQUALITY,
-      INEQUALITY,
-    };
+    new CompareFeature[] {
+			EQUALITY,
+			INEQUALITY,
+		};
 
   /**
-   * A public read-only list of all the '<em><b>Compare Feature</b></em>' enumerators.
-   * <!-- begin-user-doc -->
+	 * A public read-only list of all the '<em><b>Compare Feature</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static final List<CompareFeature> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
-   * Returns the '<em><b>Compare Feature</b></em>' literal with the specified literal value.
-   * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Compare Feature</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static CompareFeature get(String literal)
   {
-    for (int i = 0; i < VALUES_ARRAY.length; ++i)
-    {
-      CompareFeature result = VALUES_ARRAY[i];
-      if (result.toString().equals(literal))
-      {
-        return result;
-      }
-    }
-    return null;
-  }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			CompareFeature result = VALUES_ARRAY[i];
+			if (result.toString().equals(literal)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
   /**
-   * Returns the '<em><b>Compare Feature</b></em>' literal with the specified name.
-   * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Compare Feature</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static CompareFeature getByName(String name)
   {
-    for (int i = 0; i < VALUES_ARRAY.length; ++i)
-    {
-      CompareFeature result = VALUES_ARRAY[i];
-      if (result.getName().equals(name))
-      {
-        return result;
-      }
-    }
-    return null;
-  }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			CompareFeature result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
   /**
-   * Returns the '<em><b>Compare Feature</b></em>' literal with the specified integer value.
-   * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Compare Feature</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static CompareFeature get(int value)
   {
-    switch (value)
-    {
-      case EQUALITY_VALUE: return EQUALITY;
-      case INEQUALITY_VALUE: return INEQUALITY;
-    }
-    return null;
-  }
+		switch (value) {
+			case EQUALITY_VALUE: return EQUALITY;
+			case INEQUALITY_VALUE: return INEQUALITY;
+		}
+		return null;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private final int value;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private final String name;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private final String literal;
 
   /**
-   * Only this class can construct instances.
-   * <!-- begin-user-doc -->
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private CompareFeature(int value, String name, String literal)
   {
-    this.value = value;
-    this.name = name;
-    this.literal = literal;
-  }
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public int getValue()
   {
-    return value;
-  }
+	  return value;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getName()
   {
-    return name;
-  }
+	  return name;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getLiteral()
   {
-    return literal;
-  }
+	  return literal;
+	}
 
   /**
-   * Returns the literal value of the enumerator, which is its string representation.
-   * <!-- begin-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    return literal;
-  }
+		return literal;
+	}
   
 } //CompareFeature

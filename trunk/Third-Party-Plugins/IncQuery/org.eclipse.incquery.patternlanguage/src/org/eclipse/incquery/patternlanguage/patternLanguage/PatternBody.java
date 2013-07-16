@@ -27,54 +27,54 @@ import org.eclipse.emf.ecore.EObject;
 public interface PatternBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Name</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage#getPatternBody_Name()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage#getPatternBody_Name()
+	 * @model
+	 * @generated
+	 */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipse.incquery.patternlanguage.patternLanguage.PatternBody#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.incquery.patternlanguage.patternLanguage.PatternBody#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.incquery.patternlanguage.patternLanguage.Constraint}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.incquery.patternlanguage.patternLanguage.Constraint}.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Constraints</em>' containment reference list.
-   * @see org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage#getPatternBody_Constraints()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Constraints</em>' containment reference list.
+	 * @see org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage#getPatternBody_Constraints()
+	 * @model containment="true"
+	 * @generated
+	 */
   EList<Constraint> getConstraints();
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\tif (variables == null)\n      {\n          variables = new EObjectContainmentEList<Variable>(Variable.class, this, PatternLanguagePackage.PATTERN_BODY__VARIABLES);\n      }  \n      \n      return org.eclipse.incquery.patternlanguage.helper.CorePatternLanguageHelper.getAllVariablesInBody(this, variables);'"
-   * @generated
-   */
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\tif (variables == null)\n      {\n          variables = new EObjectContainmentEList<Variable>(Variable.class, this, PatternLanguagePackage.PATTERN_BODY__VARIABLES);\n      }  \n      \n      return org.eclipse.incquery.patternlanguage.helper.CorePatternLanguageHelper.getAllVariablesInBody(this, variables);'"
+	 * @generated
+	 */
   EList<Variable> getVariables();
 
 } // PatternBody
