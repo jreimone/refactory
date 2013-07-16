@@ -1,0 +1,850 @@
+Manifest-Version: 1.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Built-By: hudsonBuild
+Bundle-SymbolicName: org.eclipse.incquery.patternlanguage;singleton:=t
+ rue
+Eclipse-SourceReferences: scm:git:git://git.eclipse.org/gitroot/incque
+ ry/org.eclipse.incquery.git;path="plugins/org.eclipse.incquery.patter
+ nlanguage";commitId=cb5fe5c60bbe518342cef709ec20c6e42c019ecc
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0",org.ec
+ lipse.xtext;bundle-version="[2.4.2,2.5.0)";visibility:=reexport,org.a
+ pache.commons.logging;bundle-version="1.0.4";resolution:=optional;vis
+ ibility:=reexport,org.eclipse.xtext.util;bundle-version="[2.4.2,2.5.0
+ )",org.eclipse.emf.ecore,org.eclipse.emf.common,org.antlr.runtime,org
+ .eclipse.xtext.common.types;bundle-version="[2.4.2,2.5.0)";visibility
+ :=reexport,org.eclipse.xtext.xbase;bundle-version="[2.4.2,2.5.0)",org
+ .eclipse.xtext.generator;bundle-version="[2.4.2,2.5.0)";resolution:=o
+ ptional,org.eclipse.emf.mwe2.launch;resolution:=optional,org.eclipse.
+ incquery.patternlanguage.generator;bundle-version="0.7.0";resolution:
+ =optional,org.eclipse.xtext.xbase.lib;bundle-version="[2.4.2,2.5.0)",
+ org.eclipse.incquery.runtime.base;bundle-version="0.7.0"
+Export-Package: org.eclipse.incquery.patternlanguage,org.eclipse.incqu
+ ery.patternlanguage.annotations,org.eclipse.incquery.patternlanguage.
+ formatting,org.eclipse.incquery.patternlanguage.helper,org.eclipse.in
+ cquery.patternlanguage.jvmmodel,org.eclipse.incquery.patternlanguage.
+ naming,org.eclipse.incquery.patternlanguage.scoping,org.eclipse.incqu
+ ery.patternlanguage.serializer,org.eclipse.incquery.patternlanguage.v
+ alidation,org.eclipse.incquery.patternlanguage.services,org.eclipse.i
+ ncquery.patternlanguage.patternLanguage,org.eclipse.incquery.patternl
+ anguage.patternLanguage.impl,org.eclipse.incquery.patternlanguage.pat
+ ternLanguage.util
+Bundle-Version: 0.7.0.201306302207
+Build-Jdk: 1.6.0_21
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: Budapest University of Technology and Economics, Fault 
+ Tolerant Systems Research Group
+Bundle-Name: IncQuery Base Pattern Language (Incubation)
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Import-Package: org.apache.log4j
+Bundle-ManifestVersion: 2
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/util/Patter
+ nLanguageAdapterFactory.class
+SHA1-Digest: ZO6aVpcJiBu6iu09PEnzz2Y5iD4=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/IPatternAnnotat
+ ionValidator.class
+SHA1-Digest: qkY9hnORMWk7wFRK5lTBxUdJ0Bo=
+
+Name: org/eclipse/incquery/patternlanguage/validation/VariableReferenc
+ eCount$ReferenceType.class
+SHA1-Digest: 0W9dCHfRSDcvHrX7hcjAd63FJYE=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Patter
+ nCallImpl.class
+SHA1-Digest: Gn/6Mbgl32nL1kBkviWE5/5aGKw=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/DoubleValue
+ .class
+SHA1-Digest: MyPQKbRK2grs2UedxqFS24xtD6M=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$ListValueElements.class
+SHA1-Digest: HrLPzTbm+XPfmESo9I/jT806sAY=
+
+Name: org/eclipse/incquery/patternlanguage/validation/whitelist/XBaseP
+ ureCheckerUtil.java
+SHA1-Digest: pdiq8wOxDNX/W9V4Xn1vh76cNK4=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/Annotation.
+ class
+SHA1-Digest: WARqWXu48vW3lYZl/vGlLcomXYQ=
+
+Name: org/eclipse/incquery/patternlanguage/validation/whitelist/JavaLa
+ ngWhitelist.class
+SHA1-Digest: QyYUglwiYZvFjeEKoUJDpPuh+o0=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/CountAggreg
+ ator.class
+SHA1-Digest: HEcBCrstq/AGN05N7zeQ0v2KfEY=
+
+Name: org/eclipse/incquery/patternlanguage/validation/whitelist/IXBase
+ PureWhitelist.java
+SHA1-Digest: 7RnhYAWt1Y8zt2ATdhMY6vS0qog=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper$2.class
+SHA1-Digest: bncgOnREnc8/uAqKAFVuv6r827M=
+
+Name: org/eclipse/incquery/patternlanguage/validation/VariableReferenc
+ eCount.class
+SHA1-Digest: xtw4RxAsQqQ4LZTbHFQw+o22YtU=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/EntityType.
+ class
+SHA1-Digest: S+ypuJ137fQ3pD0XGh1JnwgLxCI=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Variab
+ leReferenceImpl.class
+SHA1-Digest: T+FBmOw33j1Ks6eGKMmXQ1msPY4=
+
+Name: org/eclipse/incquery/patternlanguage/validation/AbstractPatternL
+ anguageJavaValidator.class
+SHA1-Digest: lzdSYd4650FByHSava1LYddmdPs=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Variab
+ leImpl.class
+SHA1-Digest: +M5SDBX1NkFPGCCSUFt/3rxfgqs=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$DoubleValueElements.class
+SHA1-Digest: n0qZbSVupevnFV7JEENmxJSh5v0=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Aggreg
+ atorExpressionImpl.class
+SHA1-Digest: 5rJr0uJ/IZ0N4MZ4xWi8U7onk+4=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$BoolValueElements.class
+SHA1-Digest: cqgkMdR9E1+BAGm4+pYjkJDu3jw=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$PatternModelElements.class
+SHA1-Digest: FtKx9W6iEN/2rkz6ELauOlb1ZoY=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/PathEx
+ pressionTailImpl.class
+SHA1-Digest: gwA7IniAkFyAoQEwh/5BgaGBHIo=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/Constraint.
+ class
+SHA1-Digest: Roc3/ECWRjXFteCV+5qMtePZR8w=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PathExpress
+ ionElement.class
+SHA1-Digest: t16IEUDiaWisuXBK2BzOQqGDROI=
+
+Name: org/eclipse/incquery/patternlanguage/GeneratePatternLanguage.mwe
+ 2
+SHA1-Digest: Ut0eBueDNe2BR7wSKqfrti62KZs=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$IntValueElements.class
+SHA1-Digest: kHUHdBUDnBU0k7ZZ6dtqIjZ88dE=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageScop
+ eProvider$3.class
+SHA1-Digest: QiweOXpr7Y7g1zQnR30Z8fXdg+c=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Patter
+ nBodyImpl.class
+SHA1-Digest: LAt4VW/v8RVV0bT3pqKk9KwOD6E=
+
+Name: org/eclipse/incquery/patternlanguage/naming/PatternNameProvider.
+ java
+SHA1-Digest: /nxHN66yH5Xjk3dYVRo5a4XDvzo=
+
+Name: org/eclipse/incquery/patternlanguage/validation/UnionFindForVari
+ ables.java
+SHA1-Digest: 70fNoxbtDiXtvA8euBc0wf6DEDM=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/IPatternAnnotat
+ ionValidator.java
+SHA1-Digest: S+HdW/l7GTmCJbJEq+U8bzC7IOk=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageReso
+ urceDescriptionStrategy.java
+SHA1-Digest: PFUslwPxHyPwfSEBxyvPbDltcXM=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PatternComp
+ ositionConstraint.class
+SHA1-Digest: 3IwKPUVPg2pA6jz0/czVBTIi2CQ=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguage.xtextbin
+SHA1-Digest: Xbe1XjmF9iCeCqGLgWsZfICuc64=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/PatternAnnotati
+ onProvider.java
+SHA1-Digest: TaPxNFOxWqYqV94gz3XmZXLvaQY=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Litera
+ lValueReferenceImpl.class
+SHA1-Digest: LVosDVbAp/ZMIa91JmQHqir10WE=
+
+Name: org/eclipse/incquery/patternlanguage/jvmmodel/PatternLanguageJvm
+ ModelInferrer.xtend
+SHA1-Digest: 0VWT+G3k6OJy5NsU6WHoASZhNaU=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/impl/ExtensionB
+ asedPatternAnnotationParameter.class
+SHA1-Digest: iA/hp8gCDQSh0sNbUlqvSM8U1pY=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$ComputationValueElements.class
+SHA1-Digest: 6S1iBEe6nQqlVLo5G0b6aFCstHg=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Entity
+ TypeImpl.class
+SHA1-Digest: Gn+iLEuZ2gZkWYYDZLzxDUTafpg=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/.PatternLanguageSco
+ peProvider.java._trace
+SHA1-Digest: xotEQOwnmKA9zydw2RAo2BsKe6E=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageDecl
+ arativeScopeProvider$UndefinedVariable.class
+SHA1-Digest: pUfVRq9lsBxz+NJ+WX0Gs1ZemNM=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/VariableVal
+ ue.class
+SHA1-Digest: vOe5uof7O8dYuwmIHVNtHvqG98o=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageDecl
+ arativeScopeProvider.java
+SHA1-Digest: SU9tG4k2jHFN49zQtwv2QLdNd+A=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$VariableElements.class
+SHA1-Digest: 54ezBO6ELxldAOpo/HJBTIM2M8M=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PathExpress
+ ionHead.class
+SHA1-Digest: mXW2oqraaIn3aMyYlolY4AedEik=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/LiteralValu
+ eReference.class
+SHA1-Digest: CC2O1xiEfEe7DjTv/IlusjLYdcU=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/PathEx
+ pressionConstraintImpl.class
+SHA1-Digest: zz8i3+b1967g7I8j1lvAvtv+3NA=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguageStandaloneSe
+ tup.class
+SHA1-Digest: WbQ8xM+GUBlzAXFAd0qbJ51hQTw=
+
+Name: org/eclipse/incquery/patternlanguage/serializer/AbstractPatternL
+ anguageSemanticSequencer.class
+SHA1-Digest: VgaRU39Zc5Vvrq7Dw4yhg7C9zpQ=
+
+Name: org/eclipse/incquery/patternlanguage/validation/IssueCodes.class
+SHA1-Digest: EAxM6raTYD9yVpgynTiqwy2v0yw=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/Computation
+ Value.class
+SHA1-Digest: dA22QAMB0V+XkbTC6n9QG10hwD4=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Constr
+ aintImpl.class
+SHA1-Digest: 6qNSeH/vs0M2M+UmNvhMb4ywTio=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/MyAbstractDeclarati
+ veScopeProvider$1.class
+SHA1-Digest: EsKoRykDoEYMgv5aohCzDqduFKA=
+
+Name: org/eclipse/incquery/patternlanguage/serializer/AbstractPatternL
+ anguageSyntacticSequencer.class
+SHA1-Digest: dq+FcmMc0fUd+ras2Pfl8lpLPhg=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: 09gN05tobgS/MdtqyTNQhOhB73M=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper$4.class
+SHA1-Digest: uOCf9DdRV1eap7hahDW/YvKlJ6g=
+
+Name: org/eclipse/incquery/patternlanguage/serializer/PatternLanguageS
+ emanticSequencer.java
+SHA1-Digest: pHWK0QAT3AKXxn1iiqnfAiOcx1o=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/AggregatorE
+ xpression.class
+SHA1-Digest: AQNq+mPtV6892o9tegbTydz/sXM=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/util/Patter
+ nLanguageSwitch.class
+SHA1-Digest: o6HmRIW60zhC00SW+Jcka1mvWk4=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/impl/ExtensionB
+ asedPatternAnnotationValidator$AnnotationParameterName.class
+SHA1-Digest: F/sxPt0qkdFBziu0PJ2DT7DWjv0=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/PatternAnnotati
+ onProvider$ExtensionConverter.class
+SHA1-Digest: BGyhaMS7KgKip72QHp/WW6pKr4A=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguage.ecore
+SHA1-Digest: 3pLQ85NNTvJdKNg7ZnhEEyVSMgY=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$VariableReferenceElements.class
+SHA1-Digest: eaE+AFOtWoiZMaHnQZTvLAsCxeY=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$AnnotationParameterElements.class
+SHA1-Digest: auM0Q6+uAdjYJBjHv8K3mqmNKNU=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/ParameterRe
+ f.class
+SHA1-Digest: Ya/JN0Izs4KWUbMg1cVbcMfUfPE=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/AggregatedV
+ alue.class
+SHA1-Digest: KUHJ/VHlDS+uPqMcPNVQOMAgJHI=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/VariableRef
+ erence.class
+SHA1-Digest: D5Kd2zyRuQKlaXCNTq0okVxb69Y=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Patter
+ nLanguageFactoryImpl.class
+SHA1-Digest: bqKrkSGPR3pYzQ5bcrt2Id89eD8=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$CompareFeatureElements.class
+SHA1-Digest: xkXh6QjCvxcvF6MeXDOdpJ1CJxQ=
+
+Name: plugin.xml
+SHA1-Digest: uWS/aFNX2r6q1waBMBe1MhEFtJw=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Compar
+ eConstraintImpl.class
+SHA1-Digest: gnrFWs4vkOoMmMJ/Z3o49GXycoQ=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$CheckConstraintElements.class
+SHA1-Digest: 5QwXTMJZBc7Osm4hgsnKRBe0d10=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PatternMode
+ l.class
+SHA1-Digest: uDy2//i4MIA51/zSgNK8HDofSdE=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Parame
+ terRefImpl.class
+SHA1-Digest: S0T53ceUnwX3xELS2qJCueuwrvo=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageScop
+ eProvider.xtend
+SHA1-Digest: 2c/rDTvuY0MQ0+YppwkL25eYoQY=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguage.xtext
+SHA1-Digest: 7fexWPaBzKaUI9VluCByUE6VVeE=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper$1.class
+SHA1-Digest: NLFGPE4mGFBZiq1Ttk5k7K03DFI=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/impl/ExtensionB
+ asedPatternAnnotationValidator$2.class
+SHA1-Digest: RAgSF9DsWwxkiHgnJHdy/6PR9KM=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/TypeIm
+ pl.class
+SHA1-Digest: ttgNfnGM4bmrHQVzCA07bGu6Ono=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PathExpress
+ ionTail.class
+SHA1-Digest: SKQBHQ6Qqba3jsg2lSToMgVC0AI=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguage.genmodel
+SHA1-Digest: 61Apt95oIHNncGAaBhecnTU2LCc=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageReso
+ urceDescriptionStrategy.class
+SHA1-Digest: DcS7sKjJriEE5pWq94n6rzELtdA=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/IntVal
+ ueImpl.class
+SHA1-Digest: rRb6JtoyzrueIA27Lv+Pv4u0Zyk=
+
+Name: org/eclipse/incquery/patternlanguage/validation/whitelist/JavaLa
+ ngWhitelist.java
+SHA1-Digest: gJeVlApfNnYt9XAwPBoLXWioyJM=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguageRuntimeModul
+ e.class
+SHA1-Digest: p/0iow9NJx3K5QQdhjefZMwED7M=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/RelationTyp
+ e.class
+SHA1-Digest: v0KMHjnTQmgy41zH1Z25jt/IuqU=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$LiteralValueReferenceElements.class
+SHA1-Digest: P2GxzazAcyqPeVaEfe3v6597jtY=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PathExpress
+ ionConstraint.class
+SHA1-Digest: LKyMcnAFOqUrGbJmikOSVozthbc=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageDecl
+ arativeScopeProvider$CreateObjectDescFunction.class
+SHA1-Digest: uTRUJ6af8yPeGPzU38HWG2p2Gxo=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$AggregatorExpressionElements.class
+SHA1-Digest: NS+TOSr+MQ3PnmhI1YaqAPzbJss=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/CompareCons
+ traint.class
+SHA1-Digest: xdeSOlzqnsYOdeVLa1jF9tqhRIM=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageScop
+ eProvider$2.class
+SHA1-Digest: IL5+3kqmO5nMtZswSRdwITpPmEg=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Relati
+ onTypeImpl.class
+SHA1-Digest: L+3V/qIDNu/mepVGxUEjveFZAys=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Patter
+ nLanguagePackageImpl.class
+SHA1-Digest: oCAJdICr93YVpSb/FWresPYcGw0=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/PathEx
+ pressionElementImpl.class
+SHA1-Digest: tH/Cv5N4aUcdQfXz3+Tng0Z8Bvw=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/ListValue.c
+ lass
+SHA1-Digest: Rc2jx3bhV4JP/ap391XhCIE+MRQ=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$LocalVariableElements.class
+SHA1-Digest: qc+4LtmjEqpwY0owIPNlB4s6BK4=
+
+Name: org/eclipse/incquery/patternlanguage/serializer/PatternLanguageS
+ yntacticSequencer.class
+SHA1-Digest: y1ff8oNfDuyF7VdwYgqY/1KBiqI=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Comput
+ ationValueImpl.class
+SHA1-Digest: jcnSOueOT9S/OEZNkjwSFiDflpI=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$PathExpressionHeadElements.class
+SHA1-Digest: nrt3msHxgKrWidZPaFuuRy1NEpA=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$PatternElements.class
+SHA1-Digest: gdvoJpgBljllCLmAZ9Wtu/DSv0U=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper$6.class
+SHA1-Digest: FGCL2oN32V9uu1OGi8dg2RvGDhA=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/CheckConstr
+ aint.class
+SHA1-Digest: 1z2Vvil0Lz2uxgQVKYFz6B6r4m0=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/CountA
+ ggregatorImpl.class
+SHA1-Digest: RoF0qvgzrghJ+xmoBZHh7cLFMvk=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$AnnotationValueReferenceElements.class
+SHA1-Digest: 3WVvdt9tvAtKASCaBf1bL96JDhY=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$ParameterRefElements.class
+SHA1-Digest: 0b+Iixhk5fT365aFjRqlHMxyblM=
+
+Name: schema/annotation.exsd
+SHA1-Digest: GnMVcTHas3T2ry70a+Rc4wDd6C8=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Annota
+ tionParameterImpl.class
+SHA1-Digest: KGAFeil8OZDMY7d9FCASeNy2hRU=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Modifi
+ ersImpl.class
+SHA1-Digest: J2541k9xVaGu6rbljcW5NwLoqUw=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$DOUBLEElements.class
+SHA1-Digest: 7vZ1QI20XNJwoCXkh6XyEsrvq7U=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$TypeElements.class
+SHA1-Digest: OCOpBWmhCvVKoFjU2V80oguzUfo=
+
+Name: org/eclipse/incquery/patternlanguage/jvmmodel/.PatternLanguageJv
+ mModelInferrer.java._trace
+SHA1-Digest: LBWpdCDfdDZtnAFCZYrgpbIz0n0=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$RefTypeElements.class
+SHA1-Digest: +ny/P0mKB9pJmY/BTlnNc3z5jHo=
+
+Name: org/eclipse/incquery/patternlanguage/naming/PatternNameProvider.
+ class
+SHA1-Digest: +X+AGqQfk+D7pw72JsMxhZUF6cs=
+
+Name: org/eclipse/incquery/patternlanguage/validation/PatternLanguageJ
+ avaValidator.java
+SHA1-Digest: O8UYH8renMAY3Z6HNoRTApVIkSA=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/util/Patter
+ nLanguageAdapterFactory$1.class
+SHA1-Digest: PQGUt3E4gVQtBeyZg/yobateZUk=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Variab
+ leValueImpl.class
+SHA1-Digest: 2vQgQUgHdsQjXBMmJfGOijwWWIs=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/BoolValue.c
+ lass
+SHA1-Digest: scd0HKUN6Su/8dn8uB1Ier+dQKs=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$ModifiersElements.class
+SHA1-Digest: ZG8HstWapL2gA4JW0GSdfsCR2zA=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageDecl
+ arativeScopeProvider.class
+SHA1-Digest: Dz9Z+fwm+jKdAGK/+e1jAagkGL8=
+
+Name: META-INF/maven/org.eclipse.incquery/org.eclipse.incquery.pattern
+ language/pom.xml
+SHA1-Digest: Onu7Wa5nNGt6GYe34s0qkXliQww=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/IPatternAnnotat
+ ionAdditionalValidator.class
+SHA1-Digest: GYL6A2ZcRGGnJ8rBrgQatAdiIyw=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/String
+ ValueImpl.class
+SHA1-Digest: lG7fE+gDmts0dUhm1nKdb5n20C8=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/impl/ExtensionB
+ asedPatternAnnotationValidator.class
+SHA1-Digest: 810+auP7dKDGVWspCSJNadr35Q4=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/Modifiers.c
+ lass
+SHA1-Digest: 1jFzTdJ8Dlopf0olY1boyWSupR4=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper$3.class
+SHA1-Digest: r7vnwUgOoFRpTU/pSyHrO889KRw=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Annota
+ tionImpl.class
+SHA1-Digest: G3h+hVyfSosqYhwwFfCjV8PFgVE=
+
+Name: about.html
+SHA1-Digest: upsJNogaGlPvrCoyWxm5ik9e9Bk=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/IntValue.cl
+ ass
+SHA1-Digest: KV1NcSTKnboxlf+UI1NLWlGRPiE=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/ListVa
+ lueImpl.class
+SHA1-Digest: HFK6DIBt3wdGMKJyPW92TtOmPTc=
+
+Name: org/eclipse/incquery/patternlanguage/validation/PatternLanguageJ
+ avaValidator.class
+SHA1-Digest: L9y3xEMOzTkJyp68cZMkWyacXm4=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Patter
+ nModelImpl.class
+SHA1-Digest: EqpGRZd8ojycgxHYwhyZZL2JJ1Q=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/PatternAnnotati
+ onProvider.class
+SHA1-Digest: 6ll5QiRW3x3GWT8vn862ofZKX4Q=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PatternCall
+ .class
+SHA1-Digest: 9jOAMsKvoUTLSluGRPQNch7QJ4Q=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/Pattern.cla
+ ss
+SHA1-Digest: e24Nt67hg72TzZum1zYaD5Rqlws=
+
+Name: org/eclipse/incquery/patternlanguage/formatting/PatternLanguageF
+ ormatter.class
+SHA1-Digest: 0ip8jkhrpQlOi6XVO1cDiiXY6CA=
+
+Name: org/eclipse/incquery/patternlanguage/formatting/PatternLanguageF
+ ormatter.java
+SHA1-Digest: RTjS09mDqz697VmWV4HE/nOcxso=
+
+Name: org/eclipse/incquery/patternlanguage/jvmmodel/PatternLanguageJvm
+ ModelInferrer.class
+SHA1-Digest: eCDmmLIcWPXAgrdYgFN42T7R344=
+
+Name: org/eclipse/incquery/patternlanguage/validation/IIssueCallback.j
+ ava
+SHA1-Digest: CtepKUbmfuatsgtkM5Z8Fg05Ikk=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/LocalV
+ ariableImpl.class
+SHA1-Digest: zrlv8m2lsUh61DKoKZbkKFw0ags=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/ValueRefere
+ nce.class
+SHA1-Digest: BGGHlNC60xIkis4fK8CIPTM4GeM=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$AggregatedValueElements.class
+SHA1-Digest: pFHSFP/VLnkwqnj0fdaZOr7mH+g=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess.class
+SHA1-Digest: 4mNXbqF94kpvCGNDDNQMANnId50=
+
+Name: org/eclipse/incquery/patternlanguage/validation/IssueCodes.java
+SHA1-Digest: RUw9le4lTNlosVhFRT1Cqmb+ngo=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Patter
+ nImpl.class
+SHA1-Digest: 4zpFDNc8BM6YxW4qJ0bKEtSW48s=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PatternLang
+ uageFactory.class
+SHA1-Digest: 2qKu4n4GdVEdIsCnHdHOmkA1fjY=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/MyAbstractDeclarati
+ veScopeProvider.java
+SHA1-Digest: f5eGPU+ogZlZUSV9a57kBL3it8Y=
+
+Name: org/eclipse/incquery/patternlanguage/validation/VariableReferenc
+ eCount.java
+SHA1-Digest: ctMa9X/AbUbseVroAc/wJe9G1BM=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$PathExpressionTailElements.class
+SHA1-Digest: uFeNCFbNlOvoZ2m9yzMCE/giR+8=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Double
+ ValueImpl.class
+SHA1-Digest: vVBUKSAiWPNo/nbb4pGUozSsSAk=
+
+Name: org/eclipse/incquery/patternlanguage/serializer/PatternLanguageS
+ yntacticSequencer.java
+SHA1-Digest: aclAAlvC4367qDQu/JMIyXEuVog=
+
+Name: org/eclipse/incquery/patternlanguage/validation/IIssueCallback.c
+ lass
+SHA1-Digest: 7ugTNBNhfkxGaDiHt76T+PBQHks=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper.java
+SHA1-Digest: L9INY2uFOa4QLzqsKq29nQzNEGE=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/BoolVa
+ lueImpl.class
+SHA1-Digest: jIEbikkYog7vo/VFf6miFVzBocQ=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/AnnotationP
+ arameter.class
+SHA1-Digest: x9Rh+umzf875KJSle9jbNNhnvlY=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$ValueReferenceElements.class
+SHA1-Digest: 2zLwDVCVsSVQQRTevIv2cDm9Sn0=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/Variable.cl
+ ass
+SHA1-Digest: tvJdPmZ/KzIB0hGnsVH9Dnnt2Wg=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$PatternCallElements.class
+SHA1-Digest: kWccFtbE18vY1aGAg6wn0uetp4Y=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguageStandaloneSe
+ tup.java
+SHA1-Digest: Uhqp+uwf4SyTAZEt1tiGPcDdlHE=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/impl/ExtensionB
+ asedPatternAnnotationValidator$1.class
+SHA1-Digest: gL1r/a0Zt5L7iRf3XBr0MZ/reLo=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/impl/ExtensionB
+ asedPatternAnnotationValidator$AnnotationDefinitionParameterName.clas
+ s
+SHA1-Digest: kdVZqbj/jL52vyFFW1DEkpTAi9U=
+
+Name: schema/purewhitelist.exsd
+SHA1-Digest: wHeNbAajsaSzDPe/Lkq2w9iH3bM=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/LocalVariab
+ le.class
+SHA1-Digest: Q0hZu85K8haCVrtC5GXrxsCTfYI=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$AnnotationElements.class
+SHA1-Digest: 9U3xYvq/nA0Zc7cP5h1KCYXnYiU=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/CompareFeat
+ ure.class
+SHA1-Digest: IAvvCUS1sCyvWc4flLoSD2oMbRo=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguageRuntimeModul
+ e.java
+SHA1-Digest: dwXkgIetwNK8sh7NtJmMM29OR6s=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PatternBody
+ .class
+SHA1-Digest: PsGQorxycitW3mBcscdoAszt8ug=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/impl/ExtensionB
+ asedPatternAnnotationValidator.java
+SHA1-Digest: 2Ty8hy7SS/Jb2JZ85kljr+wxkSA=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/CheckC
+ onstraintImpl.class
+SHA1-Digest: IzuksPpqNH922zMCqnTcehbcoLE=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$BOOLEANElements.class
+SHA1-Digest: Xa235AMfPLr7sI3x0BlgQRbgTiI=
+
+Name: org/eclipse/incquery/patternlanguage/AbstractPatternLanguageRunt
+ imeModule.class
+SHA1-Digest: Zi1U7FtfTAAW7bZD9izIaQO6LSg=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$ParameterElements.class
+SHA1-Digest: lLwS+6xTVjblA1CQOFB36Gue1CQ=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$PatternCompositionConstraintElements.class
+SHA1-Digest: T73sOSEJVUTAGB/2qA70kCAmtgk=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/impl/ExtensionB
+ asedPatternAnnotationParameter.java
+SHA1-Digest: fD85YiXPRzoiv60Qyo6S+IGPxWQ=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PatternLang
+ uagePackage.class
+SHA1-Digest: P0dl5GqqmACApa2bc7qSQXOe0jU=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/StringValue
+ .class
+SHA1-Digest: ON5zimZg211WUyJJRWUMC415AmE=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/MyAbstractDeclarati
+ veScopeProvider.class
+SHA1-Digest: MZWKt/+HdjP6IDg8ecockKNSuMs=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageScop
+ eProvider$1.class
+SHA1-Digest: N0yXNiYcW9QBeu7Zbzf6BXC5Bmk=
+
+Name: org/eclipse/incquery/patternlanguage/PatternLanguageStandaloneSe
+ tupGenerated.class
+SHA1-Digest: Fy791RNOr+s3ss7V9daVRVRmalg=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$INTNUMBERElements.class
+SHA1-Digest: Qztkz0BHBgmsUufppnzOcy1jM7c=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper$AnnotationNameFilter.class
+SHA1-Digest: cR4OcKEAOkue3xlXmA9WY9ot+x4=
+
+Name: org/eclipse/incquery/patternlanguage/serializer/PatternLanguageS
+ emanticSequencer.class
+SHA1-Digest: JkHrGz1dW4BEP6x7FW1EKtAixVo=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/ValueR
+ eferenceImpl.class
+SHA1-Digest: +cEijvAwwrFJd27n6mQmamUIzUc=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/PathEx
+ pressionHeadImpl.class
+SHA1-Digest: UWLRNs+qNmBgA8YZhvuFEQKmEBY=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/MyAbstractDeclarati
+ veScopeProvider$2.class
+SHA1-Digest: ZOuMA7SlWJ0syhJHEzVUGk9YJp8=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper.class
+SHA1-Digest: udQJU53usC7Awx/X9ZNXfhrbwlY=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageDecl
+ arativeScopeProvider$PrivateDescFilter.class
+SHA1-Digest: 91bJnIXhtYwdAtIOV99A6+vyryg=
+
+Name: org/eclipse/incquery/patternlanguage/annotations/IPatternAnnotat
+ ionAdditionalValidator.java
+SHA1-Digest: I6v7dwGkfooxg3iJNu4YWGHRutU=
+
+Name: org/eclipse/incquery/patternlanguage/validation/UnionFindForVari
+ ables.class
+SHA1-Digest: Bn9YEqcoEQJ/py+vCjf10z6zNHk=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/Type.class
+SHA1-Digest: J23oeEPH9C//c6kaGN9+B6x8AAc=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$PathExpressionConstraintElements.class
+SHA1-Digest: ErwLQiFBsbJVWarPkeAJJtjQZWc=
+
+Name: org/eclipse/incquery/patternlanguage/validation/whitelist/XBaseP
+ ureCheckerUtil.class
+SHA1-Digest: gKN9VwJXFfx0ElprP18tvYccBRc=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Aggreg
+ atedValueImpl.class
+SHA1-Digest: okj3O03RcM2/jWtZJ8Tsd7ANJoY=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$ConstraintElements.class
+SHA1-Digest: 2+Io1VQAHup29X6qqRabj+noEOA=
+
+Name: org/eclipse/incquery/patternlanguage/helper/CorePatternLanguageH
+ elper$5.class
+SHA1-Digest: fJ/g6lm+JxOcLDRhGmdg5sEcncY=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$PatternBodyElements.class
+SHA1-Digest: YGoF+SgH6iSIPNkZQroLcgHOlWk=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$VariableValueElements.class
+SHA1-Digest: F2sBsJSmTJVwbGC+5SPxO6fnz5c=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/impl/Patter
+ nCompositionConstraintImpl.class
+SHA1-Digest: vN8vXfnxzbKmZCXgr9NA1n5mE5s=
+
+Name: META-INF/maven/org.eclipse.incquery/org.eclipse.incquery.pattern
+ language/pom.properties
+SHA1-Digest: sfcHWgof0rBc7j412q8/ryWJ5mM=
+
+Name: org/eclipse/incquery/patternlanguage/patternLanguage/PatternLang
+ uagePackage$Literals.class
+SHA1-Digest: RaOxc7cEGV4giZv1WXRM1fQh9bM=
+
+Name: org/eclipse/incquery/patternlanguage/validation/whitelist/IXBase
+ PureWhitelist.class
+SHA1-Digest: UuKY7ZKqCun2oxX/FxWPffJDufo=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$StringValueElements.class
+SHA1-Digest: 1pw3ThGyYnfjUwIEGk5A50KjNRQ=
+
+Name: org/eclipse/incquery/patternlanguage/services/PatternLanguageGra
+ mmarAccess$CompareConstraintElements.class
+SHA1-Digest: uqTIfvPRwNdqdGlg/LMHXLaXxBQ=
+
+Name: org/eclipse/incquery/patternlanguage/scoping/PatternLanguageScop
+ eProvider.class
+SHA1-Digest: XyDRMsvnSweFfvN2bDuAE3OdQ8I=
+
