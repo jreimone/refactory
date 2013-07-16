@@ -19,24 +19,24 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.RelationType;
 public class RelationTypeImpl extends TypeImpl implements RelationType
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected RelationTypeImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.RELATION_TYPE;
-  }
+		return PatternLanguagePackage.Literals.RELATION_TYPE;
+	}
 
 } //RelationTypeImpl

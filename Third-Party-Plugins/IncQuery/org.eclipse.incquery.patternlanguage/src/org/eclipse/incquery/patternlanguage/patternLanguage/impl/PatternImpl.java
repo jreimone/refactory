@@ -46,368 +46,359 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.Variable;
 public class PatternImpl extends MinimalEObjectImpl.Container implements Pattern
 {
   /**
-   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAnnotations()
-   * @generated
-   * @ordered
-   */
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<Annotation> annotations;
 
   /**
-   * The cached value of the '{@link #getModifiers() <em>Modifiers</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getModifiers() <em>Modifiers</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getModifiers()
-   * @generated
-   * @ordered
-   */
+	 * @see #getModifiers()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<Modifiers> modifiers;
 
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getParameters()
-   * @generated
-   * @ordered
-   */
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<Variable> parameters;
 
   /**
-   * The cached value of the '{@link #getBodies() <em>Bodies</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getBodies() <em>Bodies</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBodies()
-   * @generated
-   * @ordered
-   */
+	 * @see #getBodies()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<PatternBody> bodies;
 
   /**
-   * The default value of the '{@link #getFileName() <em>File Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getFileName() <em>File Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFileName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getFileName()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String FILE_NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getFileName() <em>File Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getFileName() <em>File Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFileName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getFileName()
+	 * @generated
+	 * @ordered
+	 */
   protected String fileName = FILE_NAME_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected PatternImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.PATTERN;
-  }
+		return PatternLanguagePackage.Literals.PATTERN;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<Annotation> getAnnotations()
   {
-    if (annotations == null)
-    {
-      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, PatternLanguagePackage.PATTERN__ANNOTATIONS);
-    }
-    return annotations;
-  }
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, PatternLanguagePackage.PATTERN__ANNOTATIONS);
+		}
+		return annotations;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<Modifiers> getModifiers()
   {
-    if (modifiers == null)
-    {
-      modifiers = new EObjectContainmentEList<Modifiers>(Modifiers.class, this, PatternLanguagePackage.PATTERN__MODIFIERS);
-    }
-    return modifiers;
-  }
+		if (modifiers == null) {
+			modifiers = new EObjectContainmentEList<Modifiers>(Modifiers.class, this, PatternLanguagePackage.PATTERN__MODIFIERS);
+		}
+		return modifiers;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getName()
   {
-    return name;
-  }
+		return name;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setName(String newName)
   {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATTERN__NAME, oldName, name));
-  }
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATTERN__NAME, oldName, name));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<Variable> getParameters()
   {
-    if (parameters == null)
-    {
-      parameters = new EObjectContainmentEList<Variable>(Variable.class, this, PatternLanguagePackage.PATTERN__PARAMETERS);
-    }
-    return parameters;
-  }
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<Variable>(Variable.class, this, PatternLanguagePackage.PATTERN__PARAMETERS);
+		}
+		return parameters;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<PatternBody> getBodies()
   {
-    if (bodies == null)
-    {
-      bodies = new EObjectContainmentEList<PatternBody>(PatternBody.class, this, PatternLanguagePackage.PATTERN__BODIES);
-    }
-    return bodies;
-  }
+		if (bodies == null) {
+			bodies = new EObjectContainmentEList<PatternBody>(PatternBody.class, this, PatternLanguagePackage.PATTERN__BODIES);
+		}
+		return bodies;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getFileName()
   {
-    return fileName;
-  }
+		return fileName;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setFileName(String newFileName)
   {
-    String oldFileName = fileName;
-    fileName = newFileName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATTERN__FILE_NAME, oldFileName, fileName));
-  }
+		String oldFileName = fileName;
+		fileName = newFileName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PATTERN__FILE_NAME, oldFileName, fileName));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN__ANNOTATIONS:
-        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-      case PatternLanguagePackage.PATTERN__MODIFIERS:
-        return ((InternalEList<?>)getModifiers()).basicRemove(otherEnd, msgs);
-      case PatternLanguagePackage.PATTERN__PARAMETERS:
-        return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-      case PatternLanguagePackage.PATTERN__BODIES:
-        return ((InternalEList<?>)getBodies()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+			case PatternLanguagePackage.PATTERN__MODIFIERS:
+				return ((InternalEList<?>)getModifiers()).basicRemove(otherEnd, msgs);
+			case PatternLanguagePackage.PATTERN__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case PatternLanguagePackage.PATTERN__BODIES:
+				return ((InternalEList<?>)getBodies()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN__ANNOTATIONS:
-        return getAnnotations();
-      case PatternLanguagePackage.PATTERN__MODIFIERS:
-        return getModifiers();
-      case PatternLanguagePackage.PATTERN__NAME:
-        return getName();
-      case PatternLanguagePackage.PATTERN__PARAMETERS:
-        return getParameters();
-      case PatternLanguagePackage.PATTERN__BODIES:
-        return getBodies();
-      case PatternLanguagePackage.PATTERN__FILE_NAME:
-        return getFileName();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN__ANNOTATIONS:
+				return getAnnotations();
+			case PatternLanguagePackage.PATTERN__MODIFIERS:
+				return getModifiers();
+			case PatternLanguagePackage.PATTERN__NAME:
+				return getName();
+			case PatternLanguagePackage.PATTERN__PARAMETERS:
+				return getParameters();
+			case PatternLanguagePackage.PATTERN__BODIES:
+				return getBodies();
+			case PatternLanguagePackage.PATTERN__FILE_NAME:
+				return getFileName();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN__ANNOTATIONS:
-        getAnnotations().clear();
-        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-        return;
-      case PatternLanguagePackage.PATTERN__MODIFIERS:
-        getModifiers().clear();
-        getModifiers().addAll((Collection<? extends Modifiers>)newValue);
-        return;
-      case PatternLanguagePackage.PATTERN__NAME:
-        setName((String)newValue);
-        return;
-      case PatternLanguagePackage.PATTERN__PARAMETERS:
-        getParameters().clear();
-        getParameters().addAll((Collection<? extends Variable>)newValue);
-        return;
-      case PatternLanguagePackage.PATTERN__BODIES:
-        getBodies().clear();
-        getBodies().addAll((Collection<? extends PatternBody>)newValue);
-        return;
-      case PatternLanguagePackage.PATTERN__FILE_NAME:
-        setFileName((String)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PatternLanguagePackage.PATTERN__MODIFIERS:
+				getModifiers().clear();
+				getModifiers().addAll((Collection<? extends Modifiers>)newValue);
+				return;
+			case PatternLanguagePackage.PATTERN__NAME:
+				setName((String)newValue);
+				return;
+			case PatternLanguagePackage.PATTERN__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends Variable>)newValue);
+				return;
+			case PatternLanguagePackage.PATTERN__BODIES:
+				getBodies().clear();
+				getBodies().addAll((Collection<? extends PatternBody>)newValue);
+				return;
+			case PatternLanguagePackage.PATTERN__FILE_NAME:
+				setFileName((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN__ANNOTATIONS:
-        getAnnotations().clear();
-        return;
-      case PatternLanguagePackage.PATTERN__MODIFIERS:
-        getModifiers().clear();
-        return;
-      case PatternLanguagePackage.PATTERN__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case PatternLanguagePackage.PATTERN__PARAMETERS:
-        getParameters().clear();
-        return;
-      case PatternLanguagePackage.PATTERN__BODIES:
-        getBodies().clear();
-        return;
-      case PatternLanguagePackage.PATTERN__FILE_NAME:
-        setFileName(FILE_NAME_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN__ANNOTATIONS:
+				getAnnotations().clear();
+				return;
+			case PatternLanguagePackage.PATTERN__MODIFIERS:
+				getModifiers().clear();
+				return;
+			case PatternLanguagePackage.PATTERN__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case PatternLanguagePackage.PATTERN__PARAMETERS:
+				getParameters().clear();
+				return;
+			case PatternLanguagePackage.PATTERN__BODIES:
+				getBodies().clear();
+				return;
+			case PatternLanguagePackage.PATTERN__FILE_NAME:
+				setFileName(FILE_NAME_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PATTERN__ANNOTATIONS:
-        return annotations != null && !annotations.isEmpty();
-      case PatternLanguagePackage.PATTERN__MODIFIERS:
-        return modifiers != null && !modifiers.isEmpty();
-      case PatternLanguagePackage.PATTERN__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case PatternLanguagePackage.PATTERN__PARAMETERS:
-        return parameters != null && !parameters.isEmpty();
-      case PatternLanguagePackage.PATTERN__BODIES:
-        return bodies != null && !bodies.isEmpty();
-      case PatternLanguagePackage.PATTERN__FILE_NAME:
-        return FILE_NAME_EDEFAULT == null ? fileName != null : !FILE_NAME_EDEFAULT.equals(fileName);
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PATTERN__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
+			case PatternLanguagePackage.PATTERN__MODIFIERS:
+				return modifiers != null && !modifiers.isEmpty();
+			case PatternLanguagePackage.PATTERN__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PatternLanguagePackage.PATTERN__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+			case PatternLanguagePackage.PATTERN__BODIES:
+				return bodies != null && !bodies.isEmpty();
+			case PatternLanguagePackage.PATTERN__FILE_NAME:
+				return FILE_NAME_EDEFAULT == null ? fileName != null : !FILE_NAME_EDEFAULT.equals(fileName);
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", fileName: ");
-    result.append(fileName);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", fileName: ");
+		result.append(fileName);
+		result.append(')');
+		return result.toString();
+	}
 
 } //PatternImpl

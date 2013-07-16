@@ -21,24 +21,24 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePacka
 public class AggregatorExpressionImpl extends MinimalEObjectImpl.Container implements AggregatorExpression
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected AggregatorExpressionImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.AGGREGATOR_EXPRESSION;
-  }
+		return PatternLanguagePackage.Literals.AGGREGATOR_EXPRESSION;
+	}
 
 } //AggregatorExpressionImpl

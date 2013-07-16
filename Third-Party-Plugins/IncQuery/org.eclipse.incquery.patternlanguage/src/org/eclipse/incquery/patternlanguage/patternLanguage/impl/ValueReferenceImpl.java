@@ -21,24 +21,24 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.ValueReference;
 public class ValueReferenceImpl extends MinimalEObjectImpl.Container implements ValueReference
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ValueReferenceImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.VALUE_REFERENCE;
-  }
+		return PatternLanguagePackage.Literals.VALUE_REFERENCE;
+	}
 
 } //ValueReferenceImpl

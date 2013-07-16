@@ -24,55 +24,55 @@ import org.eclipse.emf.ecore.EObject;
 public interface PathExpressionElement extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Type</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(Type)
-   * @see org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage#getPathExpressionElement_Type()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Type</em>' containment reference.
+	 * @see #setType(Type)
+	 * @see org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage#getPathExpressionElement_Type()
+	 * @model containment="true"
+	 * @generated
+	 */
   Type getType();
 
   /**
-   * Sets the value of the '{@link org.eclipse.incquery.patternlanguage.patternLanguage.PathExpressionElement#getType <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.incquery.patternlanguage.patternLanguage.PathExpressionElement#getType <em>Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' containment reference.
-   * @see #getType()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Type</em>' containment reference.
+	 * @see #getType()
+	 * @generated
+	 */
   void setType(Type value);
 
   /**
-   * Returns the value of the '<em><b>Tail</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Tail</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Tail</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Tail</em>' containment reference.
-   * @see #setTail(PathExpressionTail)
-   * @see org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage#getPathExpressionElement_Tail()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Tail</em>' containment reference.
+	 * @see #setTail(PathExpressionTail)
+	 * @see org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage#getPathExpressionElement_Tail()
+	 * @model containment="true"
+	 * @generated
+	 */
   PathExpressionTail getTail();
 
   /**
-   * Sets the value of the '{@link org.eclipse.incquery.patternlanguage.patternLanguage.PathExpressionElement#getTail <em>Tail</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.incquery.patternlanguage.patternLanguage.PathExpressionElement#getTail <em>Tail</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Tail</em>' containment reference.
-   * @see #getTail()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Tail</em>' containment reference.
+	 * @see #getTail()
+	 * @generated
+	 */
   void setTail(PathExpressionTail value);
 
 } // PathExpressionElement

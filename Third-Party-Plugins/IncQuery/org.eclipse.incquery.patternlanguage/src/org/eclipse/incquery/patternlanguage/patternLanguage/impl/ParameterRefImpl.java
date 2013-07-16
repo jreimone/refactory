@@ -29,144 +29,138 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.Variable;
 public class ParameterRefImpl extends VariableImpl implements ParameterRef
 {
   /**
-   * The cached value of the '{@link #getReferredParam() <em>Referred Param</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getReferredParam() <em>Referred Param</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getReferredParam()
-   * @generated
-   * @ordered
-   */
+	 * @see #getReferredParam()
+	 * @generated
+	 * @ordered
+	 */
   protected Variable referredParam;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ParameterRefImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return PatternLanguagePackage.Literals.PARAMETER_REF;
-  }
+		return PatternLanguagePackage.Literals.PARAMETER_REF;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Variable getReferredParam()
   {
-    if (referredParam != null && referredParam.eIsProxy())
-    {
-      InternalEObject oldReferredParam = (InternalEObject)referredParam;
-      referredParam = (Variable)eResolveProxy(oldReferredParam);
-      if (referredParam != oldReferredParam)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM, oldReferredParam, referredParam));
-      }
-    }
-    return referredParam;
-  }
+		if (referredParam != null && referredParam.eIsProxy()) {
+			InternalEObject oldReferredParam = (InternalEObject)referredParam;
+			referredParam = (Variable)eResolveProxy(oldReferredParam);
+			if (referredParam != oldReferredParam) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM, oldReferredParam, referredParam));
+			}
+		}
+		return referredParam;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Variable basicGetReferredParam()
   {
-    return referredParam;
-  }
+		return referredParam;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setReferredParam(Variable newReferredParam)
   {
-    Variable oldReferredParam = referredParam;
-    referredParam = newReferredParam;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM, oldReferredParam, referredParam));
-  }
+		Variable oldReferredParam = referredParam;
+		referredParam = newReferredParam;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM, oldReferredParam, referredParam));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM:
-        if (resolve) return getReferredParam();
-        return basicGetReferredParam();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM:
+				if (resolve) return getReferredParam();
+				return basicGetReferredParam();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM:
-        setReferredParam((Variable)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM:
+				setReferredParam((Variable)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM:
-        setReferredParam((Variable)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM:
+				setReferredParam((Variable)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM:
-        return referredParam != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case PatternLanguagePackage.PARAMETER_REF__REFERRED_PARAM:
+				return referredParam != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //ParameterRefImpl
