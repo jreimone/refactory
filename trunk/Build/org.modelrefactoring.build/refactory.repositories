@@ -249,6 +249,7 @@ get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3
 //git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/EcoreText/
 //get:http://www.emftext.org/update/plugins/org.emftext.language.ecore.resource.text.ui_0.9.9.v201207310007.jar
 get:http://www.emftext.org/update/plugins/org.emftext.language.ecore.resource.text_0.9.9.v201207310007.jar
+get:http://www.emftext.org/update/plugins/org.emftext.language.ecore.resource_0.9.9.v201207310007.jar
 
 // JaMoPP
 //git:https://github.com/DevBoost/JaMoPP.git!Core/
