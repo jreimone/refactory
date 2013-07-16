@@ -52,7 +52,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip
 
 // Papyrus needs more other stuff
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/downloads/drops/0.3.0/R201305312221/org.eclipse.emf.facet.updatesite-0.3.0.201305312221.zip
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/downloads/drops/0.3.0/R201305312221/org.eclipse.emf.facet.updatesite-0.3.0.201305312221.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.browser.custom.examples.uml_0.3.0.201305312221.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest_1.1.0.v20090501071000.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest.integration_1.1.0.v201303031500.jar
