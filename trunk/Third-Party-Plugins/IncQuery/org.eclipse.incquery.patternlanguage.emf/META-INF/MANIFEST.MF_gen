@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.incquery.patternlanguage.emf
+Bundle-SymbolicName: org.eclipse.incquery.patternlanguage.emf; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.incquery.patternlanguage.emf,
+ org.eclipse.incquery.patternlanguage.emf.services,
+ org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage,
+ org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.impl,
+ org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.util,
+ org.eclipse.incquery.patternlanguage.emf.serializer,
+ org.eclipse.incquery.patternlanguage.emf.parser.antlr,
+ org.eclipse.incquery.patternlanguage.emf.parser.antlr.internal,
+ org.eclipse.incquery.patternlanguage.emf.validation,
+ org.eclipse.incquery.patternlanguage.emf.formatting,
+ org.eclipse.incquery.patternlanguage.emf.jvmmodel
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtext.xbase,
+ org.eclipse.xtext.xbase.lib
+Import-Package: org.apache.log4j
+

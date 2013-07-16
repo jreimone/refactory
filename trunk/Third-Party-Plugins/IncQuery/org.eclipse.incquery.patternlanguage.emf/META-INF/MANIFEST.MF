@@ -1,0 +1,602 @@
+Manifest-Version: 1.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Built-By: hudsonBuild
+Bundle-SymbolicName: org.eclipse.incquery.patternlanguage.emf;singleto
+ n:=true
+Eclipse-SourceReferences: scm:git:git://git.eclipse.org/gitroot/incque
+ ry/org.eclipse.incquery.git;path="plugins/org.eclipse.incquery.patter
+ nlanguage.emf";commitId=cb5fe5c60bbe518342cef709ec20c6e42c019ecc
+Require-Bundle: org.eclipse.xtext;bundle-version="2.1.0";visibility:=r
+ eexport,org.apache.commons.logging;bundle-version="1.0.4";resolution:
+ =optional;visibility:=reexport,org.eclipse.xtext.generator;bundle-ver
+ sion="[2.4.2,2.5.0)";resolution:=optional,org.eclipse.emf.codegen.eco
+ re;resolution:=optional,org.eclipse.emf.mwe.utils;resolution:=optiona
+ l,org.eclipse.emf.mwe2.launch;resolution:=optional,org.eclipse.incque
+ ry.patternlanguage;bundle-version="0.7.0";visibility:=reexport,org.ec
+ lipse.xtext.util;bundle-version="[2.4.2,2.5.0)",org.eclipse.emf.ecore
+ ,org.eclipse.emf.common,org.antlr.runtime,org.eclipse.xtext.xbase;bun
+ dle-version="[2.4.2,2.5.0)",org.eclipse.core.runtime;bundle-version="
+ 3.7.0",org.eclipse.xtext.xbase.lib;bundle-version="[2.4.2,2.5.0)",org
+ .eclipse.incquery.runtime.base;bundle-version="0.7.0",org.eclipse.inc
+ query.runtime.rete;bundle-version="0.7.0",org.eclipse.xtext.common.ty
+ pes;bundle-version="[2.4.2,2.5.0)"
+Export-Package: org.eclipse.incquery.patternlanguage.emf,org.eclipse.i
+ ncquery.patternlanguage.emf.annotations,org.eclipse.incquery.patternl
+ anguage.emf.eMFPatternLanguage,org.eclipse.incquery.patternlanguage.e
+ mf.eMFPatternLanguage.impl,org.eclipse.incquery.patternlanguage.emf.e
+ MFPatternLanguage.util,org.eclipse.incquery.patternlanguage.emf.forma
+ tting,org.eclipse.incquery.patternlanguage.emf.helper,org.eclipse.inc
+ query.patternlanguage.emf.jvmmodel,org.eclipse.incquery.patternlangua
+ ge.emf.parser.antlr,org.eclipse.incquery.patternlanguage.emf.parser.a
+ ntlr.internal,org.eclipse.incquery.patternlanguage.emf.scoping,org.ec
+ lipse.incquery.patternlanguage.emf.serializer,org.eclipse.incquery.pa
+ tternlanguage.emf.services,org.eclipse.incquery.patternlanguage.emf.t
+ ypes,org.eclipse.incquery.patternlanguage.emf.validation,org.eclipse.
+ incquery.runtime.exception
+Bundle-Version: 0.7.0.201306302207
+Build-Jdk: 1.6.0_21
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: Budapest University of Technology and Economics, Fault 
+ Tolerant Systems Research Group
+Bundle-Name: EMF-IncQuery Pattern Language (Incubation)
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Import-Package: org.apache.log4j
+Bundle-ManifestVersion: 2
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /XImportSectionImpl.class
+SHA1-Digest: F3LoGPepjWGPjBAte02+VElvd/A=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageStand
+ aloneSetup.class
+SHA1-Digest: xEYK996whLj9fpJoq1bEOwdxuhE=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$EMFPatternModelElements.class
+SHA1-Digest: lPforXPbjAPJo9QtAZa8UWgKkwI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/types/EMFPatternTypePro
+ vider.java
+SHA1-Digest: +csmvCzx351iriVfS2Y6CZWbND4=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA64.class
+SHA1-Digest: ZaOpBlyJ1MlibRWS2I3XjXdZbEc=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA105.class
+SHA1-Digest: P8ewKX3xZ4k0fLOyvgEdp+iETbY=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA8.class
+SHA1-Digest: YSEoDleE1sOyprJb9ZfYUYRER20=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /EClassifierConstraintImpl.class
+SHA1-Digest: OZDTp3TqMfdBKpdF6zkiww4p/IY=
+
+Name: org/eclipse/incquery/patternlanguage/emf/helper/EMFPatternLangua
+ geHelper.class
+SHA1-Digest: J3P5JtgWnvGru4pX9HxLY7SLHGU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageBatchScopeProvider$DualDelegatingScope.class
+SHA1-Digest: z0juvU5fFwDydKhutTD2mkGSAp4=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/Pack
+ ageImport.class
+SHA1-Digest: 3Yf7dDBFQwfwWyESsMHvcqRwGh8=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$EClassifierConstraintElements.class
+SHA1-Digest: ZTzZ+QLcw/t+TaZOfDHoNEH1GlY=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageServi
+ ceProvider.class
+SHA1-Digest: 9YGewZXPSk3XePyQM6r3PUhyx4k=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/PatternSetVa
+ lidator.class
+SHA1-Digest: ThB7kG8c0fcOQUSmUtYWvbVgVkI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageRunti
+ meModule.java
+SHA1-Digest: UmG27Kwu5uikRlfgv3zazW6VM3w=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$LiteralValueReferenceElements.class
+SHA1-Digest: EEfz05LUBzoJbKiGLmMhUqmPBIc=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageScope
+ Helper.java
+SHA1-Digest: 7zMBQpvVbCVsBYiVqsCuwVW1HmM=
+
+Name: org/eclipse/incquery/patternlanguage/emf/helper/EMFPatternLangua
+ geHelper$1.class
+SHA1-Digest: 123HpTA1rXWDkrxUZD/7ga3zdnQ=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$ConstraintElements.class
+SHA1-Digest: 2Dgc73hSAoX8Zx/aQ6QHRUtoT1E=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageQuali
+ fiedNameProvider.class
+SHA1-Digest: I4I9Iuszvo+P5q40BVpnznomTMM=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/EMFIssueCode
+ s.java
+SHA1-Digest: HyQu7bu5P2pZqJXzImIZpuaxVyc=
+
+Name: META-INF/MANIFEST.MF_gen
+SHA1-Digest: xUKAMoncBPxO9bpaLbkivflXpfI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageBatchScopeProvider.java
+SHA1-Digest: wRpIJ0IHl8CCGpUK1n9IGl0nXas=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA75.class
+SHA1-Digest: PjA0kZu0VaVVQOYdrlgq2nWX1XM=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/Refe
+ renceType.class
+SHA1-Digest: 2GuIvoebzF+i8U7fhFbFbdIQf3s=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /EMFPatternLanguageFactoryImpl.class
+SHA1-Digest: RiX4YWHmSQGPT3+WLY8A0+zUTdI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/EMFPatternLa
+ nguageJavaValidator.java
+SHA1-Digest: rO/oAwjgixGOttPv41q0yl15IBU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguage.tokens
+SHA1-Digest: AZY4g/wqJ4ZU2RQAcrJNNIUO7gU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/AbstractEMFPatternLangu
+ ageRuntimeModule.class
+SHA1-Digest: dbrfgJsYwc0EsCee46Laubr7fwg=
+
+Name: org/eclipse/incquery/patternlanguage/emf/annotations/AnnotationE
+ xpressionValidator.java
+SHA1-Digest: wwQdgpXlIh49xYk5J5Npsp5iv4g=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageRunti
+ meModule.class
+SHA1-Digest: TXFYBJAGEDCIochsXlYuqTnU+W0=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/PatternSetVa
+ lidationDiagnostics.java
+SHA1-Digest: HKbkt9ZBOi9EyBkX1YwOehoJlms=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/Enum
+ Value.class
+SHA1-Digest: Cycyvwhc7glyfwexIwUu1ook3IA=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$TypeElements.class
+SHA1-Digest: B0k756odgHt6ViRuGtH+kDPbw9M=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/EMFPatternLa
+ nguageSyntaxErrorMessageProvider.java
+SHA1-Digest: mruevOBuvw/yN8N4cVHSGiV/anM=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /ClassTypeImpl.class
+SHA1-Digest: +fKsDzf6K2kQoJcYZt5JxsbGMq4=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$XImportDeclarationElements.class
+SHA1-Digest: ZiEhPedgBwVDL9ZgjiXXREiKsB4=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/EMFIssueCode
+ s.class
+SHA1-Digest: 9Kh2gbahCiaFLHmEu5Je9HtOEeo=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageDeclarativeScopeProvider$ParentScopeProvider.class
+SHA1-Digest: siuds6k6Wbm9N67Z0pgKHZ+esGg=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/EMFP
+ atternLanguagePackage$Literals.class
+SHA1-Digest: Y+pQXN4aXh1eMyIUCBatBd5xtNA=
+
+Name: org/eclipse/incquery/runtime/exception/IncQueryException.java
+SHA1-Digest: 8NG4aa0XiIJkCdNrJCTpKV2SrqI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA106.class
+SHA1-Digest: 9qHA17VlP3g/miTwEKei6pegNiU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /PatternModelImpl.class
+SHA1-Digest: jc9JmX0/10F377TSTGq/rUT6qZ0=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/EMFPattern
+ LanguageParser.class
+SHA1-Digest: RsGgeecAjK3JCq730Vyy/aewxlQ=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguage.xtex
+ tbin
+SHA1-Digest: qf1H4ucquiKk5szTsbQQuihlQA0=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/Patt
+ ernModel.class
+SHA1-Digest: 5EgAbde4Yamm+FbjL0LIKg+XAR4=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/MetamodelProvid
+ erService$1.class
+SHA1-Digest: s7J1fqVyLLyiLG7MoqmKHSR+gI8=
+
+Name: org/eclipse/incquery/patternlanguage/emf/annotations/AnnotationE
+ xpressionValidator.class
+SHA1-Digest: lmwLQei43CwQV5zzbrJfnnuf6mE=
+
+Name: org/eclipse/incquery/patternlanguage/emf/helper/EMFPatternLangua
+ geHelper.java
+SHA1-Digest: u6pXIJzVNNmmqiafLCpBpu7SQ6M=
+
+Name: org/eclipse/incquery/patternlanguage/emf/ResolutionException.cla
+ ss
+SHA1-Digest: U45tbzO0Q2T5Liv/WEyJXSANBO4=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageLexer.class
+SHA1-Digest: kLexFo7tNe+8eCyBtYl12NJVo7I=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$EnumValueElements.class
+SHA1-Digest: bHruWN+HCvWl/I/HN7RSSrCICGQ=
+
+Name: org/eclipse/incquery/patternlanguage/emf/IResourceSetPreparer.cl
+ ass
+SHA1-Digest: LEhv7AjNNsXtWpuFCGcuEJhTPWY=
+
+Name: about.html
+SHA1-Digest: upsJNogaGlPvrCoyWxm5ik9e9Bk=
+
+Name: org/eclipse/incquery/patternlanguage/emf/serializer/EMFPatternLa
+ nguageCrossRefSerializer.class
+SHA1-Digest: QxIoAEFJKYpM6p7BM49Ho88gixI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/ECla
+ ssifierConstraint.class
+SHA1-Digest: cm5g6yX7o21+yYpTcDVK1gUKcMc=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /EMFPatternLanguagePackageImpl.class
+SHA1-Digest: ve5PuFF81dyOCqhW84jOVyC4w1s=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA97.class
+SHA1-Digest: d+2FYui/+VL9f24rRB/lxG0wRFc=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageScope
+ Helper.class
+SHA1-Digest: hERGMVACfY3iPnZCryGIfei2108=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/util
+ /EMFPatternLanguageSwitch.class
+SHA1-Digest: RTeiN2Cuvj/NEYxc00+UogcQKD8=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser.class
+SHA1-Digest: dLhIDn7Vj25VfukT9chweI9trf0=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EcoreGenmodelRegistry.c
+ lass
+SHA1-Digest: K4XBNnk72jXtLGRplNSmZKWix6A=
+
+Name: org/eclipse/incquery/patternlanguage/emf/GenerateEMFPatternLangu
+ age.mwe2
+SHA1-Digest: TXWUxEhUeMPY76i7izz9NidblQg=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/PatternSetVa
+ lidationDiagnostics.class
+SHA1-Digest: od+f93+kbmQygsCE3je+9Dr5VBk=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/EMFPatternLa
+ nguageJavaValidator$SamePackageUri.class
+SHA1-Digest: MAuf868r1fEyNN39pN/d2cpYC8c=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageDeclarativeScopeProvider$1.class
+SHA1-Digest: mB90jmvF5BZv5OGlORsHXmvyP4Y=
+
+Name: org/eclipse/incquery/runtime/exception/IncQueryException.class
+SHA1-Digest: rbpM3Ln+b8zH5gj1Nr785rIyiTI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageBatchScopeProvider.class
+SHA1-Digest: oBVYAkLc3TwWCMT4rYlZmUxmwwI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/types/IEMFTypeProvider.
+ class
+SHA1-Digest: CThzGIEQ7h8Dmq/dBRMWiajbCOw=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/EMFP
+ atternLanguageFactory.class
+SHA1-Digest: m/ElVjoX3Mb6h/04+aB4rHY0fEQ=
+
+Name: org/eclipse/incquery/patternlanguage/emf/formatting/EMFPatternLa
+ nguageFormatter.java
+SHA1-Digest: tHGPaZ0CDlZD3IB4liXBzI58OZQ=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA62.class
+SHA1-Digest: BJKvH2dTx9XnfgfF1fMBNyKLlWE=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/MetamodelProvid
+ erService.class
+SHA1-Digest: VwZqLDi7jon3yaLJOhScDSwF/c0=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA103.class
+SHA1-Digest: EPY+AItHIaidxFcqR3HBo3faq5Y=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA66.class
+SHA1-Digest: wok80kzuX3MPW4wRdo2fBlweQwM=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA107.class
+SHA1-Digest: LbEne76i4Zo6biw0qc1wf3aVGBI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/PatternValid
+ ationStatus.class
+SHA1-Digest: Zzzt+gamqVcQ3iRkQU3LNgzVh6o=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA49.class
+SHA1-Digest: sSzUqiDWK+hfgSZU8blkhbdF6Bg=
+
+Name: org/eclipse/incquery/patternlanguage/emf/jvmmodel/Empty.class
+SHA1-Digest: JA6ugIcr9Fj07ahP55TEvKeihVQ=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/Clas
+ sType.class
+SHA1-Digest: m2ddQULq1sw3qN3LJXll4FHTM0A=
+
+Name: org/eclipse/incquery/patternlanguage/emf/serializer/EMFPatternLa
+ nguageSyntacticSequencer.java
+SHA1-Digest: DT4XGSfGwkg4kV7NFnz2N9qeAlE=
+
+Name: org/eclipse/incquery/patternlanguage/emf/types/EMFPatternTypeUti
+ l.java
+SHA1-Digest: yZeQDjV9T8UyZTy2V41d23/Y0UY=
+
+Name: META-INF/maven/org.eclipse.incquery/org.eclipse.incquery.pattern
+ language.emf/pom.properties
+SHA1-Digest: XIt2UjuxMTmjc/FO+O4yYcocgr4=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: 09gN05tobgS/MdtqyTNQhOhB73M=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$RefTypeElements.class
+SHA1-Digest: HJzzYoTZ+ge9ib7xSSkzeHWsuUs=
+
+Name: META-INF/maven/org.eclipse.incquery/org.eclipse.incquery.pattern
+ language.emf/pom.xml
+SHA1-Digest: PGcoZP1rPQVANKAy72/+UxylzZU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/types/EMFPatternTypePro
+ vider.class
+SHA1-Digest: tzO02qWwiBxyXXBcd0yPpju7xRE=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageLexer$DFA19.class
+SHA1-Digest: P/6R2atASSqAhILncAbhG3Z+woE=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageLinkingService.class
+SHA1-Digest: XwQ8gGnSEq91+/quctnTB/uEF64=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguage.g
+SHA1-Digest: ZYJ/3I3tosmiguXkySE2MeyfSWY=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguage.ecor
+ e
+SHA1-Digest: I6HsnEqQdPhRB0TUZ6wF2oeBo0Y=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageQuali
+ fiedNameProvider.java
+SHA1-Digest: MwJTxINXMuolbl+7dv+uFesAj+w=
+
+Name: org/eclipse/incquery/patternlanguage/emf/serializer/EMFPatternLa
+ nguageCrossRefSerializer.java
+SHA1-Digest: PMuAufVggwK26tAeJyxs1mknjsg=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA110.class
+SHA1-Digest: YoLxjw7eijegTTWiqJIQKN9D1fo=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA98.class
+SHA1-Digest: dQFnUMg4V24Okcs15R6IVzdu/zs=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageStand
+ aloneSetupGenerated.class
+SHA1-Digest: O3AUQqIRnr/0X5SIkQw/2Kb2fsA=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/EMFPattern
+ LanguageAntlrTokenFileProvider.class
+SHA1-Digest: ziMoLH21bG0psAeJLqf8g+F5Y7U=
+
+Name: org/eclipse/incquery/patternlanguage/emf/serializer/AbstractEMFP
+ atternLanguageSyntacticSequencer.class
+SHA1-Digest: vUeTIcCiXD3AuVRRpkw6kfjAHCE=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/PatternSetVa
+ lidator.java
+SHA1-Digest: bjWSy+/GL1ZV5pK6la7F/6aBMmA=
+
+Name: org/eclipse/incquery/patternlanguage/emf/jvmmodel/Empty.java
+SHA1-Digest: llua+OUjm9I8Nm0KJHRmXwV4jcg=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /PackageImportImpl.class
+SHA1-Digest: 1Tg7NFAkr9YMaiEFnFrn7eu+xEU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/util
+ /EMFPatternLanguageAdapterFactory.class
+SHA1-Digest: ryWjHid0mkCEi61fZ3oMtnQORnY=
+
+Name: org/eclipse/incquery/patternlanguage/emf/serializer/EMFPatternLa
+ nguageSemanticSequencer.java
+SHA1-Digest: nG7gZbCp6zH/JOlH1nFvXqbd5cw=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$PackageImportElements.class
+SHA1-Digest: P8DkTrZFSEHx7Wzj6ki5qD7DsHk=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageDeclarativeScopeProvider.java
+SHA1-Digest: YhuLE/NN29SzwlE0M+vP8zGretY=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/MetamodelProvid
+ erService.java
+SHA1-Digest: NzEH5UuVo5XBQWN4BeDFDAOroiU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/formatting/EMFPatternLa
+ nguageFormatter.class
+SHA1-Digest: 3S+vK86TQ6BUu1euDIRrlT/r0+Q=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguage.xtex
+ t
+SHA1-Digest: bo1TAyPobRydmucT7NxrG0FGF6A=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/EMFP
+ atternLanguagePackage.class
+SHA1-Digest: ytj+eal6sXofGBo0iSHKwy6uf7k=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageStand
+ aloneSetup.java
+SHA1-Digest: 4JbYhH1dkTyN5ckqdas7BW+KloI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/XImp
+ ortSection.class
+SHA1-Digest: MWBr/180iHfcsEl30rFdoDZKIz4=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/util
+ /EMFPatternLanguageAdapterFactory$1.class
+SHA1-Digest: 0YjEdTP9ih/aLNOWNboAof5IGFk=
+
+Name: org/eclipse/incquery/patternlanguage/emf/types/IEMFTypeProvider.
+ java
+SHA1-Digest: r1bVOMCiBhUkus6u1TWQ6nrmySY=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageLinkingService.java
+SHA1-Digest: JtaOvrdc2wjz+Pr79egJBpJ7/TE=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA63.class
+SHA1-Digest: P3Y2FcvjZIm5+ziKDRfWYD7Blis=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA125.class
+SHA1-Digest: zlzWER4nPm0CrbE074bt7nOP5w0=
+
+Name: org/eclipse/incquery/patternlanguage/emf/serializer/AbstractEMFP
+ atternLanguageSemanticSequencer.class
+SHA1-Digest: VIRsaMh6j6uH1+clAa5emc3535k=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA46.class
+SHA1-Digest: HgnFybVdpV+Y8SW+Po1qFDnDo0c=
+
+Name: org/eclipse/incquery/patternlanguage/emf/ResolutionException.jav
+ a
+SHA1-Digest: KPj/A/QNeLdJZoVoYodGTSqmb6M=
+
+Name: org/eclipse/incquery/patternlanguage/emf/serializer/EMFPatternLa
+ nguageSemanticSequencer.class
+SHA1-Digest: 9gOWAqXVwPDZBUVMm58/Y4YrXL8=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /ReferenceTypeImpl.class
+SHA1-Digest: 0PcveflglXc/XzcqHy66Qo3IX38=
+
+Name: plugin.xml
+SHA1-Digest: ppLXjiTbyzTlwdCmlXhanY3OM+M=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/IMetamodelProvi
+ der.class
+SHA1-Digest: hxlADSsRBgE0ot3cbGm7tqi3ts4=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EcoreGenmodelRegistry.j
+ ava
+SHA1-Digest: xnMyL3e6GWS9ks3bn4Nx3G3u4ow=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/PatternValid
+ ationStatus.java
+SHA1-Digest: jbDrOpb69PIXaIC+tgK/BEaearU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/AbstractEMFP
+ atternLanguageJavaValidator.class
+SHA1-Digest: vKz9qhvf1pQcu4+ssWheySSiaCI=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/EMFPatternLa
+ nguageJavaValidator.class
+SHA1-Digest: YidX3QoLx9er21Fw6az5sC/+4ZM=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess.class
+SHA1-Digest: RrHIPVtU7Rq5iBoKmiol43ImW74=
+
+Name: org/eclipse/incquery/patternlanguage/emf/eMFPatternLanguage/impl
+ /EnumValueImpl.class
+SHA1-Digest: 2Qj+inITOJlATkxoErnLu+r+cYo=
+
+Name: org/eclipse/incquery/patternlanguage/emf/IResourceSetPreparer.ja
+ va
+SHA1-Digest: 5QKcBkyc86AH9m8VeQJci4/4Tog=
+
+Name: org/eclipse/incquery/patternlanguage/emf/validation/EMFPatternLa
+ nguageSyntaxErrorMessageProvider.class
+SHA1-Digest: wt9hMNqWSORCpManp1ztV35srJU=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguage.genm
+ odel
+SHA1-Digest: gbmZrOF72p1zsmIxjlIShGjqc9Q=
+
+Name: org/eclipse/incquery/patternlanguage/emf/services/EMFPatternLang
+ uageGrammarAccess$XImportSectionElements.class
+SHA1-Digest: fcf/bqv5rkqpsZy2HuzzVJ2a03I=
+
+Name: org/eclipse/incquery/patternlanguage/emf/parser/antlr/internal/I
+ nternalEMFPatternLanguageParser$DFA99.class
+SHA1-Digest: +GTZllx1zo3CwSyz7gslaG5v6Xo=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageDeclarativeScopeProvider.class
+SHA1-Digest: qOj9fCyGRWSCrnTj+67vICZ/3xM=
+
+Name: org/eclipse/incquery/patternlanguage/emf/serializer/EMFPatternLa
+ nguageSyntacticSequencer.class
+SHA1-Digest: ExY0Uq87x/aRJYfiQh/oB9DDoDc=
+
+Name: org/eclipse/incquery/patternlanguage/emf/types/EMFPatternTypeUti
+ l.class
+SHA1-Digest: CpjXU+EaChKxvFHPVhGoCkU6EVg=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/IMetamodelProvi
+ der.java
+SHA1-Digest: 3yGaXvwNMls85gTMwDSvFjfB6Hg=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageScopeProvider.java
+SHA1-Digest: 5fbOzbswH9eQ3dKedaX/y18ThcQ=
+
+Name: org/eclipse/incquery/patternlanguage/emf/scoping/EMFPatternLangu
+ ageScopeProvider.class
+SHA1-Digest: GnfBlPjFjLCzHWcO6bbYt/PRufA=
+
+Name: org/eclipse/incquery/patternlanguage/emf/EMFPatternLanguageServi
+ ceProvider.java
+SHA1-Digest: rQh4nsKyo1O/KQHpIJ440zDxN90=
+
