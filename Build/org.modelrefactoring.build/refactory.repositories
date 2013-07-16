@@ -56,7 +56,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/downloads/drops/0
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest_1.1.0.v20090501071000.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest.integration_1.1.0.v201303031500.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest.text_1.1.0.v20090501071000.jar
-get:http://download.eclipse.org/technology/swtbot/releases/latest/repository.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest.library_1.1.0.v20090501071000.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/query/downloads/drops/1.7.0/R201306111332/emf-query-SDK-1.7.0.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/query/downloads/drops/1.7.0/R201306111332/emf-query-examples-1.7.0.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/m2m/updates/plugins/org.eclipse.m2m.qvt.oml_2.0.1.v20090901-1357.jar
@@ -74,7 +74,19 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drop
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drops/R3.5.0/R-3.5.0-20130610150119/repository/plugins/org.eclipse.wst.common.core_1.2.0.v200908252030.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drops/R3.5.0/R-3.5.0-20130610150119/repository/plugins/org.eclipse.wst.sse.core_1.1.800.v201304222123.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/webtools/downloads/drops/R3.5.0/R-3.5.0-20130610150119/repository/plugins/org.eclipse.wst.common.uriresolver_1.2.100.v201305141800.jar
-
+// EMF Facet needs SWTBot
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.finder_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.junit4_x_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.ui_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.go_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.swt.finder.source_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.junit4_x.source_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.go.source_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.core.source_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.spy.source_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.ui.source_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.core_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.spy_2.1.1.201307101628.jar
 
 // IncQuery
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage_0.7.0.201306302207.jar
