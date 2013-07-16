@@ -51,9 +51,53 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 // EMF Compare needs Papyrus
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/papyrus/downloads/drops/0.10.0/R201306120938/Papyrus-Update-0.10.0.zip
 
-// Papyrus needs more other stuff
+// Papyrus needs EMF Facet
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/downloads/drops/0.3.0/R201305312221/org.eclipse.emf.facet.updatesite-0.3.0.201305312221.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.browser.custom.examples.uml_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.nattable.instance_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.nattable_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.facet.core_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.util.emf.core_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.browser.uicore_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.browser.custom.core_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.query.core_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.facet_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.query_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.celleditors_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.celleditors.edit_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.facet.edit_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.query.edit_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.nattable.tableconfiguration_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.nattable.tableconfiguration.edit_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.browser.custom_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.browser.custom.edit_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.common.core_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.browser_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.browser.custom.ui_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.query.ui_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.custom.metamodel_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.query.editor_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.query.java_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.celleditors.ecore_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.util.core_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.nattable.workbench_0.3.0.201305312221.jar
+get:
+get:
+get:
+get:
+get:
+get:
+get:
+get:
+get:
+get:
+get:
+get:
+get:
+get:
+
+// EMF Facet needs more stuff
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest_1.1.0.v20090501071000.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest.integration_1.1.0.v201303031500.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest.text_1.1.0.v20090501071000.jar
