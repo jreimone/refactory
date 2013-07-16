@@ -90,6 +90,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/relea
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.spy_2.1.1.201307101628.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.finder.source_2.1.1.201307101628.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.forms.finder.source_2.1.1.201307101628.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.forms.finder_2.1.1.201307101628.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.generator.source_2.1.1.201307101628.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.generator_2.1.1.201307101628.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.junit.headless_2.1.1.201307101628.jar
