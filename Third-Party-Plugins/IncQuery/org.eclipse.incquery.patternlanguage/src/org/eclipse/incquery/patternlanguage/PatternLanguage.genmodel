@@ -4,9 +4,10 @@
     editDirectory="/org.eclipse.incquery.patternlanguage.edit/src" editorDirectory="/org.eclipse.incquery.patternlanguage.editor/src"
     modelPluginID="org.eclipse.incquery.patternlanguage" forceOverwrite="true" modelName="PatternLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.incquery.patternlanguage.edit"
-    editorPluginID="org.eclipse.incquery.patternlanguage.editor" runtimeVersion="2.9"
-    usedGenPackages="../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    editPluginID="org.eclipse.incquery.patternlanguage.edit" editorPluginID="org.eclipse.incquery.patternlanguage.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+  <foreignModel>PatternLanguage.ecore</foreignModel>
   <genPackages prefix="PatternLanguage" basePackage="org.eclipse.incquery.patternlanguage"
       disposableProviderFactory="true" ecorePackage="PatternLanguage.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="PatternLanguage.ecore#//CompareFeature">
