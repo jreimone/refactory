@@ -98,15 +98,6 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.util.ui_0.3.0.201305312221.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.common.core_0.3.0.201305312221.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.query.java.core_0.3.0.201305312221.jar
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-
 
 // EMF Facet needs more stuff
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest_1.1.0.v20090501071000.jar
