@@ -82,20 +82,15 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.util.core_0.3.0.201305312221.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets_0.3.0.201305312221.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.widgets.nattable.workbench_0.3.0.201305312221.jar
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-get:
-get:
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.efacet.metamodel_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.util.emf.catalog_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.util.emf.ui_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.custom.ui_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/net.sourceforge.nattable.core_2.1.0.v201102231538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.infra.common.ui_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.common.ui_0.3.0.201305312221.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/facet/updates/release/0.3.0/plugins/org.eclipse.emf.facet.custom.core_0.3.0.201305312221.jar
+
 
 // EMF Facet needs more stuff
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.hamcrest_1.1.0.v20090501071000.jar
