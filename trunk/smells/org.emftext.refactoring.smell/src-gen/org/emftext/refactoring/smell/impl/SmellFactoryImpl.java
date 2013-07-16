@@ -129,7 +129,7 @@ public class SmellFactoryImpl extends EFactoryImpl implements SmellFactory {
 	 * @generated
 	 */
 	public SmellPackage getSmellPackage() {
-		return (SmellPackage) getEPackage();
+		return (SmellPackage)getEPackage();
 	}
 
 	/**
