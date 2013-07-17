@@ -166,6 +166,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/zipped
 // the above zip needs Graphiti
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.ui_0.10.0.v20130612-0936.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti_0.10.0.v20130612-0936.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.mm_0.10.0.v20130612-0936.jar
 // and ANTLR is needed
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 
