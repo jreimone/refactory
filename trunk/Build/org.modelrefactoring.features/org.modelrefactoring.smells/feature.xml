@@ -37,6 +37,8 @@ Contributors:
       <import feature="org.eclipse.emf.workspace"/>
       <import feature="org.modelrefactoring.sdk"/>
       <import feature="org.eclipse.sdk"/>
+      <import feature="org.eclipse.incquery.runtime.feature" version="0.7.0.201306302207"/>
+      <import feature="org.eclipse.incquery.sdk.feature" version="0.7.0.201306302207"/>
    </requires>
 
    <plugin
