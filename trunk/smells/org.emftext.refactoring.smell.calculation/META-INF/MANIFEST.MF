@@ -18,5 +18,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.e4.ui.workbench,
  org.eclipse.incquery.patternlanguage.emf,
  org.eclipse.incquery.runtime
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
