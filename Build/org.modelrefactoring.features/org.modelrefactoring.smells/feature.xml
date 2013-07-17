@@ -39,6 +39,8 @@ Contributors:
       <import feature="org.eclipse.sdk"/>
       <import feature="org.eclipse.incquery.runtime.feature" version="0.7.0.201306302207"/>
       <import feature="org.eclipse.incquery.sdk.feature" version="0.7.0.201306302207"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.4.2.v201306120542"/>
+      <import feature="org.eclipse.xtext.xbase" version="2.4.2.v201306120542"/>
    </requires>
 
    <plugin
