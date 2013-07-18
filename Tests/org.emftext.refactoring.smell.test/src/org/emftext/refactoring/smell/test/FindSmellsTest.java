@@ -5,17 +5,25 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -29,6 +37,9 @@ import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePacka
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.emftext.language.java.resource.JaMoPPUtil;
+import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
@@ -73,7 +84,7 @@ public class FindSmellsTest {
 		registerCoreLanguages();
 		registerCalculationExtensionLanguages();
 		registerSmellingLanguages();
-//		registerTestingRootAsPlatformRoot();
+		registerTestingRootAsPlatformRoot();
 		loadSmellModels();
 		initRegistry();
 		initSmellingResources();
@@ -119,10 +130,14 @@ public class FindSmellsTest {
 		// roles
 		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolestextMetaInformation().getSyntaxName(), new RolestextResourceFactory());
+		// role mapping
+		EPackage.Registry.INSTANCE.put(RolemappingPackage.eNS_URI, RolemappingPackage.eINSTANCE);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolemappingMetaInformation().getSyntaxName(), new RolemappingResourceFactory());
 	}
 	
 	private static void registerTestingRootAsPlatformRoot() {
 		Map<String, URI> resourceMap = EcorePlugin.getPlatformResourceMap();
+		Map<URI, URI> uriMap = URIConverter.URI_MAP;
 		File root = new File(".");
 		assertTrue(root.exists());
 
@@ -145,6 +160,9 @@ public class FindSmellsTest {
 			assertNotNull(testProjectRoot);
 			rootUri = URI.createFileURI(rootPath);
 			resourceMap.put(testProjectRoot, rootUri);
+			URI realUri = rootUri.trimSegments(1);
+			URI pluginURI = URI.createPlatformPluginURI(testProjectRoot, true);
+			uriMap.put(pluginURI, realUri);
 		}
 	}
 	
@@ -203,6 +221,13 @@ public class FindSmellsTest {
 				Calculation calculation = pair.getFirst();
 				if(calculation instanceof Structure){
 					Pattern pattern = ((Structure) calculation).getPattern();
+					if(pattern.eIsProxy()){
+						Map<URI, URI> uriMap = URIConverter.URI_MAP;
+						URI uri = ((InternalEObject) pattern).eProxyURI();
+						URI localUri = URI.createURI(uri.toString().replace("plugin", "resource"));
+						uriMap.put(uri, localUri);
+						EcoreUtil.resolveAll(pattern);
+					}
 //					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getMatcherFactory(pattern.getName());
 //					if(matcherFactory != null){
 //						try {
