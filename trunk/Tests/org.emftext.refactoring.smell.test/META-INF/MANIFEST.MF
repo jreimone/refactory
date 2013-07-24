@@ -24,4 +24,5 @@ Require-Bundle: org.junit4,
  org.emftext.language.refactoring.roles.resource.rolestext,
  org.eclipse.incquery.runtime,
  org.emftext.refactoring.smell.java.energy,
- org.emftext.language.refactoring.rolemapping.resource.rolemapping
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping,
+ org.eclipse.uml2.uml
