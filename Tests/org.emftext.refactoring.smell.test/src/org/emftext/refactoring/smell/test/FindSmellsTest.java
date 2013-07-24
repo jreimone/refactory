@@ -34,6 +34,7 @@ import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PackageImport
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
+import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.emftext.language.java.resource.JaMoPPUtil;
@@ -113,8 +114,6 @@ public class FindSmellsTest {
 		// smells calculation
 		EPackage.Registry.INSTANCE.put(CalculationPackage.eNS_URI, CalculationPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("calculation", new XMIResourceFactoryImpl());
-		// registered UML smells
-		EPackage.Registry.INSTANCE.put(UmlsmellsPackage.eNS_URI, UmlsmellsPackage.eINSTANCE);
 	}
 	
 	private static void registerCalculationExtensionLanguages() {
@@ -122,6 +121,8 @@ public class FindSmellsTest {
 		EPackage.Registry.INSTANCE.put(RolessmellPackage.eNS_URI, RolessmellPackage.eINSTANCE);
 		// ecore calculation extension
 		EPackage.Registry.INSTANCE.put(EcoresmellsPackage.eNS_URI, EcoresmellsPackage.eINSTANCE);
+		// UML calculation extension
+		EPackage.Registry.INSTANCE.put(UmlsmellsPackage.eNS_URI, UmlsmellsPackage.eINSTANCE);
 	}
 	
 	private static void registerSmellingLanguages() {
@@ -133,6 +134,8 @@ public class FindSmellsTest {
 		// role mapping
 		EPackage.Registry.INSTANCE.put(RolemappingPackage.eNS_URI, RolemappingPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolemappingMetaInformation().getSyntaxName(), new RolemappingResourceFactory());
+		// UML
+		EPackage.Registry.INSTANCE.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 	}
 	
 	private static void registerTestingRootAsPlatformRoot() {
@@ -160,8 +163,8 @@ public class FindSmellsTest {
 			assertNotNull(testProjectRoot);
 			rootUri = URI.createFileURI(rootPath);
 			resourceMap.put(testProjectRoot, rootUri);
-			URI realUri = rootUri.trimSegments(1);
-			URI pluginURI = URI.createPlatformPluginURI(testProjectRoot, true);
+			URI realUri = URI.createURI(rootUri.trimSegments(1).toString() + "/");
+			URI pluginURI = URI.createPlatformPluginURI(testProjectRoot + "/", true);
 			uriMap.put(pluginURI, realUri);
 		}
 	}
@@ -221,13 +224,13 @@ public class FindSmellsTest {
 				Calculation calculation = pair.getFirst();
 				if(calculation instanceof Structure){
 					Pattern pattern = ((Structure) calculation).getPattern();
-					if(pattern.eIsProxy()){
-						Map<URI, URI> uriMap = URIConverter.URI_MAP;
-						URI uri = ((InternalEObject) pattern).eProxyURI();
-						URI localUri = URI.createURI(uri.toString().replace("plugin", "resource"));
-						uriMap.put(uri, localUri);
-						EcoreUtil.resolveAll(pattern);
-					}
+//					if(pattern.eIsProxy()){
+//						Map<URI, URI> uriMap = URIConverter.URI_MAP;
+//						URI uri = ((InternalEObject) pattern).eProxyURI();
+//						URI localUri = URI.createURI(uri.toString().replace("plugin", "resource"));
+//						uriMap.put(uri, localUri);
+//						EcoreUtil.resolveAll(pattern);
+//					}
 //					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getMatcherFactory(pattern.getName());
 //					if(matcherFactory != null){
 //						try {
