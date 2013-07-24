@@ -89,10 +89,11 @@ public class FindSmellsTest {
 
 	@BeforeClass
 	public static void setUp(){
-		registerCoreLanguages();
-		registerCalculationExtensionLanguages();
-		registerSmellingLanguages();
-		registerTestingRootAsPlatformRoot();
+		// not needed when test is run as JUnit Plugin test
+//		registerCoreLanguages();
+//		registerCalculationExtensionLanguages();
+//		registerSmellingLanguages();
+//		registerTestingRootAsPlatformRoot();
 		loadSmellModels();
 		initRegistry();
 		initSmellingResources();
@@ -247,7 +248,7 @@ public class FindSmellsTest {
 					if(querySpecification != null){
 						// TODO try passing only the resource
 						try {
-							IncQueryEngine engine = IncQueryEngine.on(resource);
+							IncQueryEngine engine = IncQueryEngine.on(resource.getResourceSet());
 							// TODO try the following one day
 							// attention: then engine.wipe() and engine.dispose() must be called if use finished
 							//						IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
