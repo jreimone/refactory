@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,12 @@ import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PackageImport
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
+import org.eclipse.incquery.runtime.api.IPatternMatch;
+import org.eclipse.incquery.runtime.api.IQuerySpecification;
+import org.eclipse.incquery.runtime.api.IncQueryEngine;
+import org.eclipse.incquery.runtime.api.IncQueryMatcher;
+import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.incquery.runtime.extensibility.QuerySpecificationRegistry;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -73,13 +80,13 @@ public class FindSmellsTest {
 	private static final String SMELL_MODEL_PATH		= "../../runtime-Evolution_WS/.metadata/.plugins/org.emftext.refactoring.smell.registry.ui/smellmodel.smell";
 	private static final String CALC_MODEL_PATH		= "../../runtime-Evolution_WS/.metadata/.plugins/org.emftext.refactoring.smell.registry.ui/registered.calculation";
 	private static final String SMELLING_RESOURCES	= "config/smellingResources.config";
-	
+
 	private static CalculationModel calculationModel;
 	private static QualitySmellModel smellModel;
 	private static IQualitySmellRegistry registry;
 	private static List<Resource> smellingResources;
 	private static ResourceSetImpl resourceSet;
-	
+
 	@BeforeClass
 	public static void setUp(){
 		registerCoreLanguages();
@@ -95,17 +102,17 @@ public class FindSmellsTest {
 		// IncQuery
 		EMFPatternLanguageStandaloneSetupGenerated setup = new EMFPatternLanguageStandaloneSetupGenerated();
 		Injector injector = setup.createInjectorAndDoEMFRegistration();
-//		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
-//		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
-//		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-////		injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
-//		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
-		
+		//		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
+		//		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
+		//		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
+		////		injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+		//		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
+
 		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-//		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+		//		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
 		// smells
@@ -115,7 +122,7 @@ public class FindSmellsTest {
 		EPackage.Registry.INSTANCE.put(CalculationPackage.eNS_URI, CalculationPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("calculation", new XMIResourceFactoryImpl());
 	}
-	
+
 	private static void registerCalculationExtensionLanguages() {
 		// roles calculation extension
 		EPackage.Registry.INSTANCE.put(RolessmellPackage.eNS_URI, RolessmellPackage.eINSTANCE);
@@ -124,7 +131,7 @@ public class FindSmellsTest {
 		// UML calculation extension
 		EPackage.Registry.INSTANCE.put(UmlsmellsPackage.eNS_URI, UmlsmellsPackage.eINSTANCE);
 	}
-	
+
 	private static void registerSmellingLanguages() {
 		// java
 		JaMoPPUtil.initialize();
@@ -137,7 +144,7 @@ public class FindSmellsTest {
 		// UML
 		EPackage.Registry.INSTANCE.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 	}
-	
+
 	private static void registerTestingRootAsPlatformRoot() {
 		Map<String, URI> resourceMap = EcorePlugin.getPlatformResourceMap();
 		Map<URI, URI> uriMap = URIConverter.URI_MAP;
@@ -168,7 +175,7 @@ public class FindSmellsTest {
 			uriMap.put(pluginURI, realUri);
 		}
 	}
-	
+
 	private static void loadSmellModels() {
 		resourceSet = new ResourceSetImpl();
 		try {
@@ -188,9 +195,14 @@ public class FindSmellsTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static void initRegistry() {
 		registry = IQualitySmellRegistry.INSTANCE;
+		// to test all qualities they must be activated
+		List<Quality> qualities = smellModel.getQualities();
+		for (Quality quality : qualities) {
+			quality.setActive(true);
+		}
 		registry.initialize(smellModel, calculationModel);
 	}
 
@@ -213,7 +225,7 @@ public class FindSmellsTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testFindSmells(){
 		for (Resource resource : smellingResources) {
@@ -224,30 +236,47 @@ public class FindSmellsTest {
 				Calculation calculation = pair.getFirst();
 				if(calculation instanceof Structure){
 					Pattern pattern = ((Structure) calculation).getPattern();
-//					if(pattern.eIsProxy()){
-//						Map<URI, URI> uriMap = URIConverter.URI_MAP;
-//						URI uri = ((InternalEObject) pattern).eProxyURI();
-//						URI localUri = URI.createURI(uri.toString().replace("plugin", "resource"));
-//						uriMap.put(uri, localUri);
-//						EcoreUtil.resolveAll(pattern);
-//					}
-//					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getMatcherFactory(pattern.getName());
-//					if(matcherFactory != null){
-//						try {
-//							IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(resourceSet);
-//							Collection<IPatternMatch> allMatches = matcher.getAllMatches();
-//							for (IPatternMatch match : allMatches) {
-//								System.out.println(match);
-//							}
-//						} catch (IncQueryException e) {
-//							e.printStackTrace();
-//						}
-//					}
+					//					if(pattern.eIsProxy()){
+					//						Map<URI, URI> uriMap = URIConverter.URI_MAP;
+					//						URI uri = ((InternalEObject) pattern).eProxyURI();
+					//						URI localUri = URI.createURI(uri.toString().replace("plugin", "resource"));
+					//						uriMap.put(uri, localUri);
+					//						EcoreUtil.resolveAll(pattern);
+					//					}
+					IQuerySpecification<?> querySpecification = QuerySpecificationRegistry.getOrCreateQuerySpecification(pattern);
+					if(querySpecification != null){
+						// TODO try passing only the resource
+						try {
+							IncQueryEngine engine = IncQueryEngine.on(resource);
+							// TODO try the following one day
+							// attention: then engine.wipe() and engine.dispose() must be called if use finished
+							//						IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
+							IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
+							Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+							for (IPatternMatch match : matches) {
+								System.out.println(match);
+							}
+						} catch (IncQueryException e) {
+							e.printStackTrace();
+						}
+					}					
+					//					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getMatcherFactory(pattern.getName());
+					//					if(matcherFactory != null){
+					//						try {
+					//							IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(resourceSet);
+					//							Collection<IPatternMatch> allMatches = matcher.getAllMatches();
+					//							for (IPatternMatch match : allMatches) {
+					//								System.out.println(match);
+					//							}
+					//						} catch (IncQueryException e) {
+					//							e.printStackTrace();
+					//						}
+					//					}
 					checkForProxies(pattern);
 					checkMetamodels(pattern, resource);
 				}
 			}
-			
+
 			List<Triple<CalculationResult, Calculation, QualityCalculation>> matchingSmellCalculations = registry.getMatchingSmellCalculationsForResource(resource);
 			for (Triple<CalculationResult, Calculation, QualityCalculation> triple : matchingSmellCalculations) {
 				CalculationResult result = triple.getFirst();
@@ -275,13 +304,13 @@ public class FindSmellsTest {
 		assertNotNull("import must reference an EPackage", packageImport);
 		EPackage metamodelPattern = packageImport.getEPackage();
 		// old IncQuery version
-//		ImportDeclaration importDeclaration = patternModel.getImportPackages().get(0);
-//		EPackage metamodelPattern = null;
-//		if(importDeclaration instanceof PackageImport){
-//			PackageImport packageImport = (PackageImport) importDeclaration;
-//			metamodelPattern = packageImport.getEPackage();
-//		}
-//		assertNotNull("import must reference an EPackage", packageImport);
+		//		ImportDeclaration importDeclaration = patternModel.getImportPackages().get(0);
+		//		EPackage metamodelPattern = null;
+		//		if(importDeclaration instanceof PackageImport){
+		//			PackageImport packageImport = (PackageImport) importDeclaration;
+		//			metamodelPattern = packageImport.getEPackage();
+		//		}
+		//		assertNotNull("import must reference an EPackage", packageImport);
 		while(metamodelPattern.getESuperPackage() != null){
 			metamodelPattern = metamodelPattern.getESuperPackage();
 		}
