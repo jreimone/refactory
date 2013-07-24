@@ -4,9 +4,9 @@ Bundle-Name: Test
 Bundle-SymbolicName: org.qualitune.evolution.guery.test
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Jan Reimann
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.qualitune.evolution.guery,
- org.junit;bundle-version="4.10.0",
+ org.junit,
  org.emftext.language.pl0,
  org.emftext.language.pl0.resource.pl0,
  org.qualitune.evolution.guery.registry,
