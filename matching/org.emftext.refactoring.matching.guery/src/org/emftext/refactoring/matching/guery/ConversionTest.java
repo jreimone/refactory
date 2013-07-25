@@ -3,17 +3,16 @@ package org.emftext.refactoring.matching.guery;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
-import org.junit.Test;
 import org.qualitune.guery.GueryPackage;
 import org.qualitune.guery.resource.guery.mopp.GueryResourceFactory;
 
 public class ConversionTest {
 
-	@Test
 	public void testTransformationSimple(){
 		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);

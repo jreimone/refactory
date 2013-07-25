@@ -1,8 +1,5 @@
 package org.emftext.refactoring.matching.guery;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +14,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.CollaborationModifier;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
@@ -54,13 +50,13 @@ public class Conversion {
 		this.fileList=fileList;
 //		this.epackage = (EPackage) EPackage.Registry.INSTANCE.get(PL0Package.eNS_URI);
 //		this.epackage=EPackage.Registry.INSTANCE.getEPackage(PL0Package.eNS_URI);
-		epackage=PL0Package.eINSTANCE;
+//		epackage=PL0Package.eINSTANCE;
 		System.out.println("EPackage: "+epackage);
 	}
 
 	public void roleModel2GueryTransformation(){
 		for (File sourceFile : fileList){
-			assertTrue(sourceFile.exists());
+//			assertTrue(sourceFile.exists());
 			URI uri = URI.createFileURI(sourceFile.getAbsolutePath());
 			resourceSet = new ResourceSetImpl();
 			resourceSet.createResource(uri);
@@ -289,11 +285,11 @@ public class Conversion {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			assertTrue(targetFile.exists());
+//			assertTrue(targetFile.exists());
 		}
 		URI targetUri = URI.createFileURI(targetFile.getAbsolutePath());
 		Resource targetResource = resourceSet.createResource(targetUri);
-		assertNotNull(targetResource);
+//		assertNotNull(targetResource);
 		targetResource.getContents().add(motifModel);
 		os=new ByteArrayOutputStream() ;
 		try {
@@ -319,7 +315,8 @@ public class Conversion {
 	}
 
 	private void startSolver() {
-		Resource pl0resource = PL0Package.eINSTANCE.eResource();
+//		Resource pl0resource = PL0Package.eINSTANCE.eResource();
+		Resource pl0resource = null;
 		SolvingMotif solver = new SolvingMotif(pl0resource, epackage, os, rolemodel);
 		solver.findMotifInstancesFromOutputStream();
 	}

@@ -11,22 +11,19 @@ import nz.ac.massey.cs.guery.MotifInstance;
 import nz.ac.massey.cs.guery.Path;
 import nz.ac.massey.cs.guery.ResultListener;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
-import nz.ac.massey.cs.guery.impl.RRPath;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.pl0.PL0Package;
-//import org.emftext.language.conference.ConferencePackage;
-
 import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
 import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EObjectVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
 import util.Writer2txt;
+//import org.emftext.language.conference.ConferencePackage;
 
 public class SolvingMotifWithModifiedModel {
 	
@@ -44,10 +41,10 @@ public class SolvingMotifWithModifiedModel {
 	public SolvingMotifWithModifiedModel(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource){
 		this.motif = motif;
 		this.resource = resource;
-		((PL0Package)resource.getContents().get(0)).getBody_Statements().setContainment(false);
-		if (debug){
-			System.out.println(((PL0Package)resource.getContents().get(0)).getBody_Statements().isContainment());
-		}
+//		((PL0Package)resource.getContents().get(0)).getBody_Statements().setContainment(false);
+//		if (debug){
+//			System.out.println(((PL0Package)resource.getContents().get(0)).getBody_Statements().isContainment());
+//		}
 		graphAdapter = new EPackageGraphAdapter(resource);
 	}
 	
