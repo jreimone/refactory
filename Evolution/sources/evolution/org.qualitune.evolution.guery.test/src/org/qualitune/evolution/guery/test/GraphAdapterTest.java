@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -24,9 +25,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.emftext.language.java.JavaPackage;
+import org.emftext.language.pl0.PL0Package;
+import org.emftext.language.pl0extended.Pl0extendedFactory;
+import org.emftext.language.pl0extended.Pl0extendedPackage;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.qualitune.evolution.guery.graph.ContainmentEdge;
+import org.qualitune.evolution.guery.graph.EClassVertex;
 import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
 import org.qualitune.evolution.guery.graph.MetamodelVertex;
 import org.qualitune.evolution.guery.registry.EObjectVertex;
@@ -38,26 +44,11 @@ import org.qualitune.evolution.guery.registry.EReferenceEdge;
  */
 public class GraphAdapterTest {
 
-	//	private EPackage pl0MM;
-	//	private Resource pl0MMResource;
-
-	//	@Before
-	//	public void init(){
-	//		initLanguages();
-	//		initPL0MM();
-	//	}
-	//
 	//	private void initLanguages() {
 	//		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
 	//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new Pl0MetaInformation().getSyntaxName(), new Pl0ResourceFactory());
 	//	}
 
-	//	private void initPL0MM() {
-	//		pl0MM = (EPackage) EPackage.Registry.INSTANCE.get(PL0Package.eNS_URI);
-	//		assertNotNull("PL/0 metamodel couldn't be initialised", pl0MM);
-	//		pl0MMResource = pl0MM.eResource();
-	//		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
-	//	}
 
 	private EPackageGraphAdapter graphAdapter;
 
@@ -75,6 +66,52 @@ public class GraphAdapterTest {
 		testGraphAdapter(mmResource, metamodel);
 	}
 
+	@Test
+	public void testBridge(){
+		EPackage metamodel = getMetamodelFromFile("metamodels/Bridge.ecore");
+		Resource mmResource = metamodel.eResource();
+		testGraphAdapter(mmResource, metamodel);
+	}
+
+	@Test
+	public void testPL0() {
+		EPackage pl0MM = PL0Package.eINSTANCE;
+		assertNotNull("PL/0 metamodel couldn't be initialised", pl0MM);
+		Resource pl0MMResource = pl0MM.eResource();
+		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
+		testGraphAdapter(pl0MMResource, pl0MM);
+	}
+	
+	@Test
+	public void testPL0Extended() {
+		Pl0extendedPackage pl0MM = Pl0extendedPackage.eINSTANCE;
+		assertNotNull("PL/0 metamodel couldn't be initialised", pl0MM);
+		Resource pl0MMResource = pl0MM.eResource();
+		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
+		testGraphAdapter(pl0MMResource, pl0MM);
+	}
+	
+	@Test
+	public void testMultipleInheritance(){
+		EPackage metamodel = getMetamodelFromFile("metamodels/MultipleInheritance.ecore");
+		Resource mmResource = metamodel.eResource();
+		testGraphAdapter(mmResource, metamodel);
+	}
+	
+	@Test
+	public void testBridgeMultipleInheritance(){
+		EPackage metamodel = getMetamodelFromFile("metamodels/BridgeMultipleInheritance.ecore");
+		Resource mmResource = metamodel.eResource();
+		testGraphAdapter(mmResource, metamodel);
+	}
+	
+	@Test
+	public void testJava() {
+		assertNotNull("PL/0 metamodel couldn't be initialised", JavaPackage.eINSTANCE);
+		assertNotNull("Resource for URI '" + JavaPackage.eINSTANCE.getNsURI() +"' mustn't be null", JavaPackage.eINSTANCE.eResource());
+		testGraphAdapter(JavaPackage.eINSTANCE.eResource(), JavaPackage.eINSTANCE);
+	}
+
 	private EPackage getMetamodelFromFile(String metamodelPath) {
 		File mmFile = new File(metamodelPath);
 		assertTrue("File '" + mmFile.getPath() + "' doesn't exist", mmFile.exists());
@@ -89,20 +126,19 @@ public class GraphAdapterTest {
 	private void testGraphAdapter(Resource mmResource, EPackage metamodel){
 		graphAdapter = new EPackageGraphAdapter(mmResource);
 		Iterator<MetamodelVertex> vertices = graphAdapter.getVertices();
-		int count = 0;
 		// 1. build up the map of the metamodel for comparison
-		Map<String, EClass> metaclasses = new HashMap<String, EClass>();
-		for (EClassifier classifier : metamodel.getEClassifiers()) {
-			if(classifier instanceof EClass){
-				EClass metaclass = (EClass) classifier;
-				metaclasses.put(metaclass.getName(), metaclass);
-			}
-		}
+		Map<String, EClass> metaclasses = getMetaclasses(metamodel);
 		// 2. print and compare the graph with the previously created map
 		System.out.println("~~~~~~~~~~~~~~~");
+		System.out.println(mmResource.getURI().toString());
+		System.out.println();
+		Map<String, EClassVertex> vertexMetaclasses = new HashMap<String, EClassVertex>();
 		while (vertices.hasNext()) {
 			MetamodelVertex vertex = vertices.next();
-			count++;
+			if(vertex instanceof EClassVertex){
+				EClassVertex eclassVertex = (EClassVertex) vertex;
+				vertexMetaclasses.put(eclassVertex.getEClass().getName(), eclassVertex);
+			}
 			EObject element = vertex.getModelElement();
 			assertTrue("Input was an EPackage, i.e. the wrapped vertex must be an EClass", element instanceof EClass);
 			System.out.println(((EClass) element).getName());
@@ -112,9 +148,36 @@ public class GraphAdapterTest {
 			printEdges(inEdges, "<--", "---", false, metaclasses);
 		}
 		// 3. some additional comparison
-		int eclassesCount = metaclasses.size();
-		assertEquals("The vertices must count the same as EClasses in the metamodel ", count, eclassesCount);
+//		int eclassesCount = metaclasses.size();
+//		int vertexCount = vertexMetaclasses.size();
+		compareInternalVerticesAndMetaclasses(vertexMetaclasses, metaclasses);
+//		assertEquals("The vertices must count the same as EClasses in the metamodel ", vertexCount, eclassesCount);
+	}
 
+	private void compareInternalVerticesAndMetaclasses(Map<String, EClassVertex> vertexMetaclasses, Map<String, EClass> metaclasses) {
+		for (String name : vertexMetaclasses.keySet()) {
+			if(vertexMetaclasses.get(name).isInternal()){
+				EClass metaclass = metaclasses.get(name);
+				assertTrue("Vertex '" + name + "' not contained in the metamodel", metaclass != null);
+			} else {
+				System.out.println("Metaclass '" + name + "' is external");
+			}
+		}
+	}
+
+	private Map<String, EClass> getMetaclasses(EPackage metamodel) {
+		Map<String, EClass> metaclasses = new HashMap<String, EClass>();
+		for (EClassifier classifier : metamodel.getEClassifiers()) {
+			if(classifier instanceof EClass){
+				EClass metaclass = (EClass) classifier;
+				metaclasses.put(metaclass.getName(), metaclass);
+			}
+		}
+		List<EPackage> subpackages = metamodel.getESubpackages();
+		for (EPackage subpackage : subpackages) {
+			metaclasses.putAll(getMetaclasses(subpackage));
+		}
+		return metaclasses;
 	}
 
 	/**
@@ -130,15 +193,15 @@ public class GraphAdapterTest {
 		if(edgeList.size() > 0){
 			EReferenceEdge edge = edgeList.get(0);
 			EClass metaclass = null;
-//			Map<String, EReference> allReferences = new HashMap<String, EReference>();
+			//			Map<String, EReference> allReferences = new HashMap<String, EReference>();
 			if(out && edge != null){
 				EObjectVertex start = edge.getStart();
 				EClass graphClass = (EClass) start.getModelElement();
 				metaclass = metaclasses.get(graphClass.getName());
-//				List<EReference> eAllReferences = metaclass.getEAllReferences();
-//				for (EReference reference : eAllReferences) {
-//					allReferences.put(reference.getName(), reference);
-//				}
+				//				List<EReference> eAllReferences = metaclass.getEAllReferences();
+				//				for (EReference reference : eAllReferences) {
+				//					allReferences.put(reference.getName(), reference);
+				//				}
 			}
 			for (int i = 0; i < edgeList.size(); i++) {
 				edge = edgeList.get(i);
