@@ -11,4 +11,5 @@ Require-Bundle: org.qualitune.evolution.guery,
  org.emftext.language.pl0.resource.pl0,
  org.qualitune.evolution.guery.registry,
  org.qualitune.guery,
- org.qualitune.graph
+ org.qualitune.graph,
+ org.eclipse.emf.ecore.xmi
