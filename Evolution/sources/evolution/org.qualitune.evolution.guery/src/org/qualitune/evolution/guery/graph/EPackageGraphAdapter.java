@@ -3,6 +3,7 @@
  */
 package org.qualitune.evolution.guery.graph;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,19 +28,22 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  */
 public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends EReferenceEdge>*/ extends EMFGraphAdapter<MetamodelVertex, EReferenceEdge> {
 
-	private Map<EObject, EClassVertex> index;
-	private Map<EReference, Set<EReferenceEdge>> referenceIndex;
-	private Map<EClassVertex, Collection<EReferenceEdge>> targetToSource;
+	private Map<EClass, EClassVertex> index;
+	private Map<EReference, Set<EReferenceEdge>> referenceEdgeMap;
+	private Map<EClassVertex, List<EReferenceEdge>> vertex2IncomingEdges;
 	
+	private Map<EClass, Set<EClass>> subClasses;
+
 	public EPackageGraphAdapter(Resource resource) {
 		super(resource, new MetamodelGraphAdapterFactory());
 	}
 
 	@Override
 	protected void initialiseGraph() {
-		index = new HashMap<EObject, EClassVertex>();
-		referenceIndex = new HashMap<EReference, Set<EReferenceEdge>>();
-		targetToSource = new HashMap<EClassVertex, Collection<EReferenceEdge>>();
+		index = new HashMap<EClass, EClassVertex>();
+		referenceEdgeMap = new HashMap<EReference, Set<EReferenceEdge>>();
+		vertex2IncomingEdges = new HashMap<EClassVertex, List<EReferenceEdge>>();
+		subClasses = new HashMap<EClass, Set<EClass>>();
 		super.initialiseGraph();
 	}
 
@@ -49,47 +53,68 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 		for (EObject model : contents) {
 			if(model instanceof EPackage){
 				EPackage epackage = (EPackage) model;
-				EList<EClassifier> classifiers = epackage.getEClassifiers();
-				for (EClassifier classifier : classifiers) {
-					if(classifier instanceof EClass){
-						EClassVertex classVertex = (EClassVertex) getFactory().createVertex(classifier);
-						addNode(classVertex);
-					}
-				}
+				addNodesForPackage(epackage);
 			}
 		}
 		createInheritedReferences();
 	}
-	
-	/**
+
+	private void addNodesForPackage(EPackage epackage) {
+		List<EClassifier> classifiers = epackage.getEClassifiers();
+		for (EClassifier classifier : classifiers) {
+			if(classifier instanceof EClass){
+				MetamodelVertex classVertex = getFactory().createVertex(classifier);
+				addNode(classVertex);
+			}
+		}
+		List<EPackage> subpackages = epackage.getESubpackages();
+		for (EPackage subpackage : subpackages) {
+			addNodesForPackage(subpackage);
+		}
+	}
+
+	/*
 	 * Loest Vererbungsproblem
 	 * eingehende Referenzen der Oberklasse werden in Unterklasse geschrieben
+	 * (ausgehende Referenzen der Oberklassen werden schon in addNode(..) erzeugt)
 	 */
 	private void createInheritedReferences(){
 		List<EObject> contents = getResource().getContents();
 		for (EObject model : contents) {
 			if(model instanceof EPackage){
 				EPackage epackage = (EPackage) model;
-				EList<EClassifier> classifiers = epackage.getEClassifiers();
-				for (EClassifier classifier : classifiers) {
-					if(classifier instanceof EClass){
-						EClassVertex classVertexSub = (EClassVertex) getFactory().createVertex(classifier);
-						EList<EClass> allSuperTypes=((EClass) classifier).getEAllSuperTypes();
-						for (EClass clazz:allSuperTypes){
-							EClassVertex classVertexSuper = (EClassVertex) getFactory().createVertex(clazz);
-							if (targetToSource.containsKey(classVertexSuper)){
-								if (!targetToSource.get(classVertexSuper).isEmpty()){
-									Collection<EReferenceEdge> references=targetToSource.get(classVertexSuper);
-									for (EReferenceEdge reference:references){
-										EClass eclass=(EClass)reference.getStart().getModelElement();
-										EClassVertex classVertexSource = (EClassVertex) getFactory().createVertex(eclass);
-										EdgeType edgeType = EdgeType.DIRECTED;
-										reference.setEnd(classVertexSub);
-										EReferenceEdge newEdge = getFactory().createEdge(classVertexSource, classVertexSub, reference.getReference());
-										getGraph().addEdge(newEdge, classVertexSource, classVertexSub, edgeType);
-									}
-								}
+				createInheritedReferencesOfPackage(epackage);
+				List<EPackage> subpackages = epackage.getESubpackages();
+				for (EPackage subpackage : subpackages) {
+					createInheritedReferencesOfPackage(subpackage);
+				}
+			}
+		}
+	}
+
+	private void createInheritedReferencesOfPackage(EPackage epackage) {
+		EList<EClassifier> classifiers = epackage.getEClassifiers();
+		for (EClassifier classifier : classifiers) {
+			if(classifier instanceof EClass){
+				EClass clazz = (EClass) classifier;
+				EClassVertex classVertexSub = index.get(clazz);
+				List<EClass> allSuperTypes = clazz.getEAllSuperTypes();
+				for (EClass superClass:allSuperTypes){
+					EClassVertex classVertexSuper = index.get(superClass);
+					if (vertex2IncomingEdges.containsKey(classVertexSuper)){
+						List<EReferenceEdge> references = vertex2IncomingEdges.get(classVertexSuper);
+						for (EReferenceEdge referenceEdge:references){
+							EClass sourceClass = (EClass)referenceEdge.getStart().getModelElement();
+							EClassVertex classVertexSource = index.get(sourceClass);
+							EdgeType edgeType = EdgeType.DIRECTED;
+							EReferenceEdge newInheritedIncomingEdge = getFactory().createEdge(classVertexSource, classVertexSub, referenceEdge.getReference());
+							getGraph().addEdge(newInheritedIncomingEdge, classVertexSource, classVertexSub, edgeType);
+							Set<EReferenceEdge> edges = referenceEdgeMap.get(newInheritedIncomingEdge.getReference());
+							if(edges == null){
+								edges = new HashSet<EReferenceEdge>();
+								referenceEdgeMap.put(newInheritedIncomingEdge.getReference(), edges);
 							}
+							edges.add(newInheritedIncomingEdge);
 						}
 					}
 				}
@@ -101,10 +126,11 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 	protected void addNode(MetamodelVertex vertex) {
 		if(vertex instanceof EClassVertex){
 			EClassVertex eclassVertex = (EClassVertex) vertex;
-			if(!index.containsKey(vertex.getModelElement())){
+			if(!index.containsKey(eclassVertex.getEClass())){
 				getGraph().addVertex(eclassVertex);
-				index.put(vertex.getModelElement(), eclassVertex);
+				index.put(eclassVertex.getEClass(), eclassVertex);
 				EClass eClass = eclassVertex.getEClass();
+				populateSubTypeHierarchy(eClass);
 				EdgeType edgeType = EdgeType.DIRECTED;
 				List<EReference> references = eClass.getEAllReferences();
 				for (EReference reference : references) { //enthaelt Referenzen von EClass mit namen
@@ -112,27 +138,28 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 					if(targetClassifier instanceof EClass){
 						EClass targetClass = (EClass) targetClassifier;
 						EClassVertex targetVertex = (EClassVertex) getFactory().createVertex(targetClass);
-						if(index.containsKey(targetVertex.getModelElement())){
-							targetVertex = index.get(targetVertex.getModelElement()); //Testet ob targetEClass vorhanden
+						if(index.containsKey(targetVertex.getEClass())){
+							targetVertex = index.get(targetVertex.getEClass()); //Testet ob targetEClass vorhanden
 						} 
 						EReferenceEdge newEdge = getFactory().createEdge(eclassVertex, targetVertex, reference);
-						if(referenceIndex.get(reference) == null){
+						List<EReferenceEdge> incomingEdges = vertex2IncomingEdges.get(targetVertex);
+						if(incomingEdges == null){
+							incomingEdges = new ArrayList<EReferenceEdge>();
+							vertex2IncomingEdges.put(targetVertex, incomingEdges);
+						}
+						if(referenceEdgeMap.get(reference) == null){
 							getGraph().addEdge(newEdge, eclassVertex, targetVertex, edgeType);
-							if (targetToSource.containsKey(targetVertex)){
-								if(!targetToSource.get(targetVertex).contains(newEdge)){
-									targetToSource.get(targetVertex).add(newEdge);
-								}
+							if(!incomingEdges.contains(newEdge)){
+								incomingEdges.add(newEdge);
 							}
-							else{
-								Set<EReferenceEdge> edges = new HashSet<EReferenceEdge>();
-								edges.add(newEdge);
-								targetToSource.put(targetVertex, edges);
+							Set<EReferenceEdge> edges = referenceEdgeMap.get(reference);
+							if(edges == null){
+								edges = new HashSet<EReferenceEdge>();
+								referenceEdgeMap.put(reference, edges);
 							}
-							Set<EReferenceEdge> edges = new HashSet<EReferenceEdge>();
 							edges.add(newEdge);
-							referenceIndex.put(reference, edges);
 						} else {
-							Set<EReferenceEdge> edges = referenceIndex.get(reference);
+							Set<EReferenceEdge> edges = referenceEdgeMap.get(reference);
 							boolean found = false;
 							for (EReferenceEdge edge : edges) {
 								if(edge.getStart().getModelElement().equals(eClass) && edge.getEnd().getModelElement().equals(targetClass)){
@@ -142,15 +169,8 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 							if(!found){
 								edges.add(newEdge);
 								getGraph().addEdge(newEdge, eclassVertex, targetVertex, edgeType);
-								if (targetToSource.containsKey(targetVertex)){
-									if(!targetToSource.get(targetVertex).contains(newEdge)){
-										targetToSource.get(targetVertex).add(newEdge);
-									}
-								}
-								else{
-									Set<EReferenceEdge> edgesToAdd = new HashSet<EReferenceEdge>();
-									edgesToAdd.add(newEdge);
-									targetToSource.put(targetVertex, edgesToAdd);
+								if(!incomingEdges.contains(newEdge)){
+									incomingEdges.add(newEdge);
 								}
 							}
 						}
@@ -161,6 +181,26 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 				}
 			}
 		}
+	}
+
+	private void populateSubTypeHierarchy(EClass subType) {
+		List<EClass> allSuperTypes = subType.getEAllSuperTypes();
+		for (EClass superType : allSuperTypes) {
+			Set<EClass> subTypes = subClasses.get(superType);
+			if(subTypes == null){
+				subTypes = new HashSet<EClass>();
+				subClasses.put(superType, subTypes);
+			}
+			subTypes.add(subType);
+		}
+	}
+
+	public Map<EClass, Set<EClass>> getSubTypeHierarchy() {
+		return subClasses;
+	}
+
+	public Map<EReference, Set<EReferenceEdge>> getReferenceOutEdgeMap() {
+		return referenceEdgeMap;
 	}
 
 }
