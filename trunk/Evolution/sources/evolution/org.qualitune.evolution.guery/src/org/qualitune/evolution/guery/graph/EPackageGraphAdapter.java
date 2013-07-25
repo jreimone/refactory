@@ -34,7 +34,7 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 	private Map<EClass, Set<EClass>> subClasses;
 
 	public EPackageGraphAdapter(Resource resource) {
-		super(resource, new MetamodelGraphAdapterFactory());
+		super(resource, new MetamodelGraphAdapterFactory(resource));
 	}
 
 	@Override

@@ -10,6 +10,12 @@ import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
 public class EMFGraphAdapterFactory<Vertex extends EObjectVertex> implements IEMFGraphAdapterFactory<Vertex, EReferenceEdge> {
 
+	private Resource resource;
+	
+	public EMFGraphAdapterFactory(Resource resource) {
+		this.resource = resource;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Vertex createVertex(EObject modelElement) {
@@ -28,9 +34,8 @@ public class EMFGraphAdapterFactory<Vertex extends EObjectVertex> implements IEM
 		if(reference.isContainment()){
 			edge = new ContainmentEdge(reference);
 		} else {
-			Resource fromResource = from.eResource();
 			Resource toResource = to.eResource();
-			if(fromResource.equals(toResource)){
+			if(resource.equals(toResource)){
 				edge = new InternalEdge(reference);
 			} else {
 				edge = new ExternalEdge(reference);
@@ -47,4 +52,7 @@ public class EMFGraphAdapterFactory<Vertex extends EObjectVertex> implements IEM
 		return edge;
 	}
 
+	public Resource getBaseResource(){
+		return resource;
+	}
 }
