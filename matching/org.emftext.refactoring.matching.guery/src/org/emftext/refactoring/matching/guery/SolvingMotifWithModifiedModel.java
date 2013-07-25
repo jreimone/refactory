@@ -33,6 +33,7 @@ public class SolvingMotifWithModifiedModel {
 	private EPackageGraphAdapter graphAdapter;
 	private Resource resource;
 	private Motif<MetamodelVertex, EReferenceEdge> motif;
+	private boolean debug=false;
 	
 	int help=0;
 	String help2="C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/PL";
@@ -44,16 +45,14 @@ public class SolvingMotifWithModifiedModel {
 		this.motif = motif;
 		this.resource = resource;
 		((PL0Package)resource.getContents().get(0)).getBody_Statements().setContainment(false);
-		System.out.println(((PL0Package)resource.getContents().get(0)).getBody_Statements().isContainment());
+		if (debug){
+			System.out.println(((PL0Package)resource.getContents().get(0)).getBody_Statements().isContainment());
+		}
 		graphAdapter = new EPackageGraphAdapter(resource);
 	}
 	
 	public void findMotifInstances(){
-//		int help=0;
-//		String help2="C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/Vergleich.txt";
-//		w2t=new Writer2txt("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/Vergleich.txt");
 		w2t=new Writer2txt(help2+help+ext);
-		String header="tassiloEdited3 -- EXWRC";
 		
 		java.util.Date now = new java.util.Date();
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
@@ -85,7 +84,9 @@ public class SolvingMotifWithModifiedModel {
 				transformToRolemapping();
 //				}
 				i++;
-				System.out.println(i);
+				if (debug){
+					System.out.println(i);
+				}
 				return true; //TODO return instance?
 			}
 			public void progressMade(int progress, int total) {} 
@@ -102,7 +103,9 @@ public class SolvingMotifWithModifiedModel {
 	
 	public int analyzeMotifs(MotifInstance<MetamodelVertex,EReferenceEdge> instance, int i){
 		String ausgabe="";
-		System.out.println("~~~~~~~~~~~~~~~~~~");
+		if (debug){
+			System.out.println("~~~~~~~~~~~~~~~~~~");
+		}
 //		MotifInstance<EObjectVertex,EReferenceEdge> instance = null;
 //		Motif<MetamodelVertex,EReferenceEdge> motif = instance.getMotif();
 		DefaultMotif<MetamodelVertex,EReferenceEdge> motif = (DefaultMotif<MetamodelVertex, EReferenceEdge>) instance.getMotif();
@@ -130,34 +133,50 @@ public class SolvingMotifWithModifiedModel {
 			if(vertex != null){
 				EObject modelElement = vertex.getModelElement();
 				if(modelElement instanceof EClass){
-					System.out.println(vertexRole + " -> "+ ((EClass) modelElement).getName());
+					if (debug){
+						System.out.println(vertexRole + " -> "+ ((EClass) modelElement).getName());
+					}
 					ausgabe=ausgabe+" "+((EClass)modelElement).getName();
 				} else if (modelElement instanceof EReference) {
-					System.out.println(vertexRole + " -> ERef "+ ((EReference)modelElement).getName());
+					if (debug){
+						System.out.println(vertexRole + " -> ERef "+ ((EReference)modelElement).getName());
+					}
 				}
 				else if (modelElement instanceof EPackage){
-					System.out.println(vertexRole + " -> EPa "+ ((EPackage)modelElement).getName());
+					if (debug){
+						System.out.println(vertexRole + " -> EPa "+ ((EPackage)modelElement).getName());
+					}
 				}
 				else{
-					System.out.println(vertexRole + " -> "+ modelElement);
+					if(debug){
+						System.out.println(vertexRole + " -> "+ modelElement);
+					}
 				}
 			} else {
-				System.out.println(vertexRole + " -> "+ vertex);
+				if (debug){
+					System.out.println(vertexRole + " -> "+ vertex);
+				}
 			}
 		}
 		
 		for (String edgeRole:motif.getPathRoles()) {
 			Path<MetamodelVertex,EReferenceEdge> path = instance.getPath(edgeRole);
 			ausgabe=ausgabe+" "+edgeRole;
-			System.out.println(edgeRole + ": ");
+			if (debug){
+				System.out.println(edgeRole + ": ");
+			}
 			List<EReferenceEdge> edges = path.getEdges();
-			for (EReferenceEdge edge : edges) {
-				System.out.println("\t" + edge.getStart() + " --" + edge.getReference().getName() +" "+edge.getReference().isContainment()+ "--> " + edge.getEnd());
+			if (debug){
+				for (EReferenceEdge edge : edges) {
+					System.out.println("\t" + edge.getStart() + " --" + edge.getReference().getName() +" "+edge.getReference().isContainment()+ "--> " + edge.getEnd());
+				}
 			}
 			ausgabe=ausgabe+"("+edges.size()+")";
 		}
 		w2t.writeLine(ausgabe);
-		System.out.println("~~~~~~~~~~~~~~~~~~");
+		if (debug){
+			System.out.println("~~~~~~~~~~~~~~~~~~");
+		}
 		return i;
 	}
 	
