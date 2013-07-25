@@ -2,269 +2,97 @@ package org.emftext.refactoring.matching.guery;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.Set;
 
 import nz.ac.massey.cs.guery.ComputationMode;
-import nz.ac.massey.cs.guery.DefaultMotif;
 import nz.ac.massey.cs.guery.GQL;
 import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifInstance;
 import nz.ac.massey.cs.guery.MotifReader;
 import nz.ac.massey.cs.guery.MotifReaderException;
-import nz.ac.massey.cs.guery.Path;
 import nz.ac.massey.cs.guery.ResultListener;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
-import nz.ac.massey.cs.guery.impl.RRPath;
 import nz.ac.massey.cs.guery.io.dsl.DefaultMotifReader;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.pl0.PL0Package;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
 import org.qualitune.evolution.guery.graph.MetamodelVertex;
-import org.qualitune.evolution.guery.registry.EObjectVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
 
-import util.Writer2txt;
-
 public class SolvingMotif {
-	
+
 	private EPackageGraphAdapter graphAdapter;
-	private Resource resource;
 	private Motif<MetamodelVertex, EReferenceEdge> motif;
 	private ByteArrayOutputStream os;
 	private static int maxResults=25;
-	
-	int help=0;
-	String help2="C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/PL";
-	String ext=".txt";
-	
-	private Writer2txt w2t;
-	
+	private RoleModel rolemodel;
+	private static boolean debug=false;
+	private EPackage epackage;
+
+
+//	int help=0;
+//	String help2="C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/PL";
+//	String ext=".txt";
+
 	public SolvingMotif(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource){
 		this.motif = motif;
-		this.resource = resource;
 		graphAdapter = new EPackageGraphAdapter(resource);
 	}
-	
-	public SolvingMotif(/*Motif<MetamodelVertex, EReferenceEdge> motif,*/ Resource resource, ByteArrayOutputStream os){
-//		this.motif = motif;
-		this.resource = resource;
+
+	public SolvingMotif(Resource resource, EPackage epackage, ByteArrayOutputStream os, RoleModel rolemodel){
+		this.epackage=epackage;
+		this.rolemodel=rolemodel;
 		graphAdapter = new EPackageGraphAdapter(resource);
 		this.os=os;
 		motif=loadMotif();
-		System.out.println("PathRoles: "+motif.getPathRoles());
-		System.out.println(os);
 	}
-	
-//	private void outputStreamToMotif(){
-//		
-//	}
-	
-	public void findMotifInstances(){
-//		int help=0;
-//		String help2="C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/Vergleich.txt";
-//		w2t=new Writer2txt("C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/Vergleich.txt");
-		w2t=new Writer2txt(help2+help+ext);
-		String header="tassiloEdited3 -- EXWRC";
-		
-		java.util.Date now = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
-		String ausgabe = sdf.format(now);
-		w2t.writeLine(ausgabe);
-		
-//		Motif<EObjectVertex, EReferenceEdge> motif=loadMotifs();
-		ResultListener<MetamodelVertex, EReferenceEdge> listener = new ResultListener<MetamodelVertex, EReferenceEdge>(){
-			private int i = 0;
-			private boolean stopped=false;
-			public void done() {
-				if (!stopped){
-					System.out.println("Bin fertig!");
-				}
-				else{
-					System.out.println("Wurde abgebrochen!");
-				}
-			} 
-			public boolean found(MotifInstance<MetamodelVertex, EReferenceEdge> instance) {
-				i++;
-				System.out.println(i);
-				// do something 
-				//TODO transformation in rm
-//				if (i==1){
-				Set<MetamodelVertex> instances=instance.getVertices();
-//				System.out.println(motif.getRoles().size());
-//				for (EObjectVertex instanceTest:instances){
-//					System.out.println(i+" "+instanceTest.getModelElement());
-//				}
-//				if (motif.getRoles().size()==instances.size()){
-					i=analyzeMotifs(instance,i);
-//					if (i==50000){
-//						w2t=new Writer2txt(help2+help+ext);
-//						help++;
-//						i=0;
-//					}
-//				}
-					//TODO
-				if (i>maxResults){
-					System.out.println("Zu viele Ergebnisse, bitte einschränken");
-					stopped=true;
-					return false;
-				}
-				transformToRolemapping();
-//				}
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return true; //TODO return instance?
-			}
-			public void progressMade(int progress, int total) {
-//				if (stopped){
-					System.out.println("ca. bearbeitet: "+((float)progress/total)*100+"%");
-//				}
-			} 
-		};
-		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>();
-		engine.query(graphAdapter,motif,listener,ComputationMode.ALL_INSTANCES);
 
-		
-		now = new java.util.Date();
-		sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
-		sdf.format(now);
-		w2t.writeLine(ausgabe);
-	}
-	
 	public void findMotifInstancesFromOutputStream(){
-		
 		ResultListener<MetamodelVertex, EReferenceEdge> listener = new ResultListener<MetamodelVertex, EReferenceEdge>(){
 			private int i = 0;
 			private boolean stopped=false;
 			public void done() {
-				if (!stopped){
-					System.out.println("Bin fertig!");
+				if (debug){
+					if (!stopped){
+						System.out.println("Bin fertig!");
+					}
+					else{
+						System.out.println("Wurde abgebrochen!");
+					}
 				}
-				else{
-					System.out.println("Wurde abgebrochen!");
-				}
-			} 
+			}
 			public boolean found(MotifInstance<MetamodelVertex, EReferenceEdge> instance) {
 				i++;
-				System.out.println(i);
-				Set<MetamodelVertex> instances=instance.getVertices();
-					i=analyzeMotifs(instance,i);
-					//TODO
+				InstanceToRoleMapping itrm=new InstanceToRoleMapping(instance, rolemodel, epackage);
+//				itrm.printMotifInstance();
+				itrm.transform2RoleMapping();
 				if (i>maxResults){
-					System.out.println("Zu viele Ergebnisse, bitte einschränken");
+					if (debug){
+						System.out.println("Zu viele Ergebnisse, bitte einschränken");
+					}
 					stopped=true;
 					return false;
 				}
-//				transformToRolemapping();
+//				try {
+////					Thread.sleep(100);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
 //				}
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 				return true;
 			}
 			public void progressMade(int progress, int total) {
-				System.out.println("ca. bearbeitet: "+((float)progress/total)*100+"%");
-			} 
+				if (debug){
+					System.out.println(progress+" von "+total+" Möglichkeiten bearbeitet");
+				}
+			}
 		};
 		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>();
 		engine.query(graphAdapter,motif,listener,ComputationMode.ALL_INSTANCES);
+	}
 
-		
-//		now = new java.util.Date();
-//		sdf = new java.text.SimpleDateFormat("HH:mm:ss:SSS");
-//		sdf.format(now);
-//		w2t.writeLine(ausgabe);
-	}
-	
-	public int analyzeMotifs(MotifInstance<MetamodelVertex,EReferenceEdge> instance, int i){
-		String ausgabe="";
-		System.out.println("~~~~~~~~~~~~~~~~~~");
-//		MotifInstance<EObjectVertex,EReferenceEdge> instance = null;
-//		Motif<MetamodelVertex,EReferenceEdge> motif = instance.getMotif();
-		DefaultMotif<MetamodelVertex,EReferenceEdge> motif = (DefaultMotif<MetamodelVertex, EReferenceEdge>) instance.getMotif();
-//		RRPath<MetamodelVertex,EReferenceEdge> path1=null;
-//		RRPath<MetamodelVertex,EReferenceEdge> path2=null;
-		
-//		for (String edgeRole:motif.getPathRoles()) {
-//			if (edgeRole.equals("containerRef")){
-//				path1 = (RRPath<MetamodelVertex, EReferenceEdge>) instance.getPath(edgeRole);
-//				System.out.println(instance.getPath(edgeRole));
-//				System.out.println(path1);
-//			}
-//			else{
-//				if (edgeRole.equals("referer")){
-//					path2 = (RRPath<MetamodelVertex, EReferenceEdge>) instance.getPath(edgeRole);
-//				}
-//			}
-//			if ((path1.size()==0&&path2.size()!=0)||(path2.size()==0&&path1.size()!=0)){
-//				return i-1;
-//			}
-//		}
-		
-		for (String vertexRole:motif.getRoles()) {
-			EObjectVertex vertex = instance.getVertex(vertexRole);
-			if(vertex != null){
-				EObject modelElement = vertex.getModelElement();
-				if(modelElement instanceof EClass){
-					System.out.println(vertexRole + " -> "+ ((EClass) modelElement).getName());
-					ausgabe=ausgabe+" "+((EClass)modelElement).getName();
-				} else if (modelElement instanceof EReference) {
-					System.out.println(vertexRole + " -> ERef "+ ((EReference)modelElement).getName());
-				}
-				else if (modelElement instanceof EPackage){
-					System.out.println(vertexRole + " -> EPa "+ ((EPackage)modelElement).getName());
-				}
-				else{
-					System.out.println(vertexRole + " -> "+ modelElement);
-				}
-			} else {
-				System.out.println(vertexRole + " -> "+ vertex);
-			}
-		}
-		
-		for (String edgeRole:motif.getPathRoles()) {
-			Path<MetamodelVertex,EReferenceEdge> path = instance.getPath(edgeRole);
-			ausgabe=ausgabe+" "+edgeRole;
-			System.out.println(edgeRole + ": ");
-			List<EReferenceEdge> edges = path.getEdges();
-			for (EReferenceEdge edge : edges) {
-				System.out.println("\t" + edge.getStart() + " --" + edge.getReference().getName() +" "+edge.getReference().isContainment()+ "--> " + edge.getEnd());
-			}
-			ausgabe=ausgabe+"("+edges.size()+")";
-		}
-//		w2t.writeLine(ausgabe);
-		System.out.println("~~~~~~~~~~~~~~~~~~");
-		return i;
-	}
-	
-	private void transformToRolemapping() {
-		
-	}
-	
 	private Motif<MetamodelVertex,EReferenceEdge> loadMotif(){
 		ByteArrayInputStream in=new ByteArrayInputStream(os.toByteArray());
-//		InputStream in=os;
-//		InputStream in=null;
-//		try {
-//			in = new FileInputStream("ExtractXwithReferenceClass3.guery");
-//		} catch (FileNotFoundException e1) {
-//			e1.printStackTrace();
-//		}
 		MotifReader<MetamodelVertex,EReferenceEdge> reader = new DefaultMotifReader<MetamodelVertex,EReferenceEdge>();
 		Motif<MetamodelVertex,EReferenceEdge> motif=null;
 		try {
@@ -272,7 +100,6 @@ public class SolvingMotif {
 		} catch (MotifReaderException e) {
 			e.printStackTrace();
 		}
-
 		return motif;
 	}
 
