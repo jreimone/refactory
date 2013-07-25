@@ -3,33 +3,9 @@
  */
 package org.emftext.refactoring.matching.guery;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
-import nz.ac.massey.cs.guery.Motif;
-import nz.ac.massey.cs.guery.MotifReader;
-import nz.ac.massey.cs.guery.MotifReaderException;
-import nz.ac.massey.cs.guery.io.dsl.DefaultMotifReader;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.emftext.language.pl0.PL0Package;
 //import org.emftext.language.conference.ConferencePackage;
 //import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
 //import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.qualitune.evolution.guery.graph.MetamodelVertex;
-import org.qualitune.evolution.guery.registry.EReferenceEdge;
-import org.qualitune.guery.GueryPackage;
 
 //import org.emftext.language.pl0.PL0Package;
 //import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;

@@ -4,14 +4,11 @@ Bundle-Name: Matching
 Bundle-SymbolicName: org.emftext.refactoring.matching.guery
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.emf.ecore,
- org.emftext.language.refactoring.roles,
- org.emftext.language.refactoring.roles.resource.rolestext,
+Require-Bundle: org.emftext.language.refactoring.roles.resource.rolestext,
  org.qualitune.guery,
  org.qualitune.guery.resource.guery,
- org.eclipse.emf.ecore.xmi,
  org.qualitune.evolution.guery,
  org.qualitune.evolution.guery.registry,
- org.emftext.language.pl0,
- org.qualitune.graph,
- org.junit
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping,
+ org.qualitune.graph

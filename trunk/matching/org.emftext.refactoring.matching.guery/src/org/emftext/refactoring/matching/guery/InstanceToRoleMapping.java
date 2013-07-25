@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nz.ac.massey.cs.guery.Motif;
+import nz.ac.massey.cs.guery.MotifInstance;
+import nz.ac.massey.cs.guery.Path;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -28,10 +32,6 @@ import org.qualitune.evolution.guery.registry.EObjectVertex;
 import org.qualitune.evolution.guery.registry.EReferenceEdge;
 import org.qualitune.guery.GueryPackage;
 import org.qualitune.guery.resource.guery.mopp.GueryResourceFactory;
-
-import nz.ac.massey.cs.guery.Motif;
-import nz.ac.massey.cs.guery.MotifInstance;
-import nz.ac.massey.cs.guery.Path;
 
 public class InstanceToRoleMapping {
 
