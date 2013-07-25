@@ -61,7 +61,7 @@ public class GueryKnowledgeBase implements IKnowledgeBase {
 	@Override
 	public void generateKnowledge(Resource resource) {
 		this.resource = resource;
-		IEMFGraphAdapterFactory<EObjectVertex, EReferenceEdge> factory = new EMFGraphAdapterFactory<EObjectVertex>();
+		IEMFGraphAdapterFactory<EObjectVertex, EReferenceEdge> factory = new EMFGraphAdapterFactory<EObjectVertex>(resource);
 		graphAdapter = new EMFGraphAdapter<EObjectVertex, EReferenceEdge>(resource, factory);
 	}
 
