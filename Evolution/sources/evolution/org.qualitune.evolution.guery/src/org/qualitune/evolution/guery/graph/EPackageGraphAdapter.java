@@ -199,7 +199,7 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 		return subClasses;
 	}
 
-	public Map<EReference, Set<EReferenceEdge>> getReferenceOutEdgeMap() {
+	public Map<EReference, Set<EReferenceEdge>> getReferenceEdgeMap() {
 		return referenceEdgeMap;
 	}
 
