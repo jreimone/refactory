@@ -13,7 +13,6 @@ import nz.ac.massey.cs.guery.PropertyConstraint;
 import nz.ac.massey.cs.guery.mvel.CompiledGroupByClause;
 import nz.ac.massey.cs.guery.mvel.CompiledPropertyConstraint;
 
-import org.antlr.runtime.Token;
 import org.eclipse.emf.common.util.EList;
 import org.modelrefactoring.guery.ConnectedBy;
 import org.modelrefactoring.guery.Connection;
@@ -30,7 +29,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
 /**
- * Just an adapter implementation of {@link Motif} to adapt {@link org.qualitune.guery.Motif}.
+ * Just an adapter implementation of {@link Motif} to adapt {@link org.modelrefactoring.guery.Motif}.
  * 
  * @author jreimann
  *
