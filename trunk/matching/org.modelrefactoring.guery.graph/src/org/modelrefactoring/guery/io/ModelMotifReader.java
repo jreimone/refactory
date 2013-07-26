@@ -27,6 +27,15 @@ public class ModelMotifReader implements MotifReader<EObjectVertex, EReferenceEd
 		this.motif = motif;
 	}
 	
+	/**
+	 * This method just returns a {@link ModelMotifAdapter} which adapts a {@link org.modelrefactoring.guery.Motif}
+	 * to a GUERY {@link Motif}.
+	 * 
+	 * @param source is ignored because the {@link org.modelrefactoring.guery.Motif} to be converted to a GUERY {@link Motif}
+	 * is passed in the constructor already
+	 * @return the GUERY {@link Motif}, converted from a {@link org.modelrefactoring.guery.Motif} parsed
+	 * by the EMFText generated parser of the GUERY DSL
+	 */
 	@Override
 	public Motif<EObjectVertex, EReferenceEdge> read(InputStream source) throws MotifReaderException {
 		Motif<EObjectVertex, EReferenceEdge> gueryMotif = new ModelMotifAdapter(motif);

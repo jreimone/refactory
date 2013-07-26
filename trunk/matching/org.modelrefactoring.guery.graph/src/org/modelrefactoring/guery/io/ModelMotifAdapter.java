@@ -9,15 +9,15 @@ import nz.ac.massey.cs.guery.GroupByClause;
 import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.PathConstraint;
 import nz.ac.massey.cs.guery.Processor;
+import nz.ac.massey.cs.guery.mvel.CompiledGroupByClause;
 
-import org.eclipse.emf.common.util.EList;
 import org.modelrefactoring.guery.ConnectedBy;
 import org.modelrefactoring.guery.Connection;
 import org.modelrefactoring.guery.EdgeSelection;
 import org.modelrefactoring.guery.Grouping;
 import org.modelrefactoring.guery.NotConnectedBy;
+import org.modelrefactoring.guery.PreProcessor;
 import org.modelrefactoring.guery.Role;
-import org.modelrefactoring.guery.VertexSelection;
 import org.modelrefactoring.guery.graph.EObjectVertex;
 import org.modelrefactoring.guery.graph.EReferenceEdge;
 
@@ -30,12 +30,16 @@ import org.modelrefactoring.guery.graph.EReferenceEdge;
 public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
 
 	private org.modelrefactoring.guery.Motif motif;
-	
+
 	private List<String> roles;
 	private List<String> pathRoles;
 	private List<String> negatedPathRoles;
 	private List<Constraint> constraints;
-	
+
+	private ArrayList<GroupByClause<EObjectVertex>> groupByClauses;
+
+	private ArrayList<Processor<EObjectVertex, EReferenceEdge>> processors;
+
 	public ModelMotifAdapter(org.modelrefactoring.guery.Motif motif) {
 		super();
 		this.motif = motif;
@@ -91,31 +95,70 @@ public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
 	public List<Constraint> getConstraints() {
 		if(constraints == null){
 			constraints = new ArrayList<Constraint>();
-			EList<org.modelrefactoring.guery.Constraint> constraints2;
 			List<EdgeSelection> edgeSelections = motif.getEdgeSelections();
 			for (EdgeSelection edgeSelection : edgeSelections) {
-				constraints2 = edgeSelection.getConstraints();
-				for (org.modelrefactoring.guery.Constraint constraint : constraints2) {
-					PathConstraint<EObjectVertex, EReferenceEdge> gueryConstraint = new PathConstraint<EObjectVertex, EReferenceEdge>();
-//					gueryConstraint.
+				
+					List<org.modelrefactoring.guery.Constraint> modelConstraints = edgeSelection.getConstraints();
+					List<Connection> connections = edgeSelection.getConnections();
+					for (org.modelrefactoring.guery.Constraint constraint : modelConstraints) {
+						PathConstraint<EObjectVertex, EReferenceEdge> gueryConstraint = new PathConstraint<EObjectVertex, EReferenceEdge>();
+						int index = modelConstraints.indexOf(constraint);
+						Connection connection = connections.get(index);
+						gueryConstraint.setRole(connection.getPath());
+						gueryConstraint.setSource(connection.getFrom().getName());
+						gueryConstraint.setTarget(connection.getTo().getName());
+						gueryConstraint.setNegated(false);
+						gueryConstraint.setMinLength(connection.getMinLength());
+						gueryConstraint.setMaxLength(connection.getMaxLength());
+						gueryConstraint.setComputeAll(connection.isComputeAll());
+						boolean negated = edgeSelection instanceof ConnectedBy;
+						gueryConstraint.setNegated(negated);
+						constraints.add(gueryConstraint);
 				}
 			}
-			VertexSelection vertexSelection = motif.getVertexSelection();
-			List<Grouping> groupBy = motif.getGroupBy();
 		}
 		return constraints;
 	}
 
 	@Override
 	public Collection<GroupByClause<EObjectVertex>> getGroupByClauses() {
-		// TODO Auto-generated method stub
-		return null;
+		if(groupByClauses == null){
+			groupByClauses = new ArrayList<GroupByClause<EObjectVertex>>();
+			List<Grouping> groupings = motif.getGroupBy();
+			for (Grouping grouping : groupings) {
+				List<org.modelrefactoring.guery.Constraint> groupByConstraints = grouping.getConstraints();
+				for (org.modelrefactoring.guery.Constraint groupBy : groupByConstraints) {
+					CompiledGroupByClause<EObjectVertex> clause = new CompiledGroupByClause<EObjectVertex>(groupBy.getExpression());
+					groupByClauses.add(clause);
+				}
+			}
+		}
+		return groupByClauses;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Processor<EObjectVertex, EReferenceEdge>> getGraphProcessors() {
-		// TODO Auto-generated method stub
-		return null;
+		if(processors == null){
+			processors = new ArrayList<Processor<EObjectVertex, EReferenceEdge>>();
+			List<PreProcessor> preprocessors = motif.getPrepare();
+			for (PreProcessor preProcessor : preprocessors) {
+				@SuppressWarnings("rawtypes")
+				Class class_ = preProcessor.getClass_();
+				if(Processor.class.isAssignableFrom(class_)){
+					try {
+						@SuppressWarnings("rawtypes")
+						Processor processor = (Processor) class_.newInstance();
+						processors.add(processor);
+					} catch (InstantiationException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return processors;
 	}
 
 	@Override
