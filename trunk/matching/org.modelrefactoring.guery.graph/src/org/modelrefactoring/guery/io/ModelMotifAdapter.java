@@ -9,8 +9,12 @@ import nz.ac.massey.cs.guery.GroupByClause;
 import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.PathConstraint;
 import nz.ac.massey.cs.guery.Processor;
+import nz.ac.massey.cs.guery.PropertyConstraint;
 import nz.ac.massey.cs.guery.mvel.CompiledGroupByClause;
+import nz.ac.massey.cs.guery.mvel.CompiledPropertyConstraint;
 
+import org.antlr.runtime.Token;
+import org.eclipse.emf.common.util.EList;
 import org.modelrefactoring.guery.ConnectedBy;
 import org.modelrefactoring.guery.Connection;
 import org.modelrefactoring.guery.EdgeSelection;
@@ -18,8 +22,12 @@ import org.modelrefactoring.guery.Grouping;
 import org.modelrefactoring.guery.NotConnectedBy;
 import org.modelrefactoring.guery.PreProcessor;
 import org.modelrefactoring.guery.Role;
+import org.modelrefactoring.guery.VertexSelection;
 import org.modelrefactoring.guery.graph.EObjectVertex;
 import org.modelrefactoring.guery.graph.EReferenceEdge;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 
 /**
  * Just an adapter implementation of {@link Motif} to adapt {@link org.qualitune.guery.Motif}.
@@ -95,29 +103,62 @@ public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
 	public List<Constraint> getConstraints() {
 		if(constraints == null){
 			constraints = new ArrayList<Constraint>();
+			VertexSelection vertexSelection = motif.getVertexSelection();
+			EList<org.modelrefactoring.guery.Constraint> vertexConstraints = vertexSelection.getConstraints();
+			for (org.modelrefactoring.guery.Constraint constraint : vertexConstraints) {
+				PropertyConstraint propertyConstraint = createPropertyConstraint(constraint);
+				constraints.add(propertyConstraint);
+			}
 			List<EdgeSelection> edgeSelections = motif.getEdgeSelections();
 			for (EdgeSelection edgeSelection : edgeSelections) {
-				
-					List<org.modelrefactoring.guery.Constraint> modelConstraints = edgeSelection.getConstraints();
-					List<Connection> connections = edgeSelection.getConnections();
-					for (org.modelrefactoring.guery.Constraint constraint : modelConstraints) {
-						PathConstraint<EObjectVertex, EReferenceEdge> gueryConstraint = new PathConstraint<EObjectVertex, EReferenceEdge>();
-						int index = modelConstraints.indexOf(constraint);
-						Connection connection = connections.get(index);
-						gueryConstraint.setRole(connection.getPath());
-						gueryConstraint.setSource(connection.getFrom().getName());
-						gueryConstraint.setTarget(connection.getTo().getName());
-						gueryConstraint.setNegated(false);
-						gueryConstraint.setMinLength(connection.getMinLength());
-						gueryConstraint.setMaxLength(connection.getMaxLength());
-						gueryConstraint.setComputeAll(connection.isComputeAll());
-						boolean negated = edgeSelection instanceof ConnectedBy;
-						gueryConstraint.setNegated(negated);
-						constraints.add(gueryConstraint);
+				List<Connection> connections = edgeSelection.getConnections();
+				for (Connection connection : connections) {
+					PathConstraint<EObjectVertex,EReferenceEdge> pathConstraint = createPathConstraint(edgeSelection, connection);
+					constraints.add(pathConstraint);
+				}
+			}
+			// the following was adapted from gueryParser.addConstraint(Token constraintT)
+			// to attach a PropertyConstraint to a PathConstraint when a path is constrained with it
+			Collection<Constraint> pathConstraints = Collections2.filter(new ArrayList<Constraint>(constraints),new Predicate<Constraint>(){@Override public boolean apply(Constraint arg) {return arg instanceof PathConstraint;}});
+			for (EdgeSelection edgeSelection : edgeSelections) {
+				List<org.modelrefactoring.guery.Constraint> modelConstraints = edgeSelection.getConstraints();
+				for (org.modelrefactoring.guery.Constraint constraint : modelConstraints) {
+					PropertyConstraint propertyConstraint = createPropertyConstraint(constraint);
+					boolean addedToPathConstraint = false;
+					for (Constraint filteredPathConstraint : pathConstraints) {
+						PathConstraint<?, ?> pathConstraint = (PathConstraint<?, ?>) filteredPathConstraint;
+						if (propertyConstraint.getRoles().size()==1 && propertyConstraint.getFirstRole().equals(pathConstraint.getRole())) {
+							pathConstraint.addConstraint(propertyConstraint);
+							addedToPathConstraint = true;
+						} 
+					}
+					if(!addedToPathConstraint){
+						constraints.add(propertyConstraint);
+					}
 				}
 			}
 		}
 		return constraints;
+	}
+
+	private PropertyConstraint createPropertyConstraint(org.modelrefactoring.guery.Constraint constraint){
+		String expression = constraint.getExpression();
+		CompiledPropertyConstraint propertyConstraint = new CompiledPropertyConstraint(expression);
+		return propertyConstraint;
+	}
+	
+	private PathConstraint<EObjectVertex, EReferenceEdge> createPathConstraint(EdgeSelection edgeSelection, Connection connection) {
+		PathConstraint<EObjectVertex, EReferenceEdge> gueryConstraint = new PathConstraint<EObjectVertex, EReferenceEdge>();
+		gueryConstraint.setRole(connection.getPath());
+		gueryConstraint.setSource(connection.getFrom().getName());
+		gueryConstraint.setTarget(connection.getTo().getName());
+		gueryConstraint.setNegated(false);
+		gueryConstraint.setMinLength(connection.getMinLength());
+		gueryConstraint.setMaxLength(connection.getMaxLength());
+		gueryConstraint.setComputeAll(connection.isComputeAll());
+		boolean negated = edgeSelection instanceof NotConnectedBy;
+		gueryConstraint.setNegated(negated);
+		return gueryConstraint;
 	}
 
 	@Override
