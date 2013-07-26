@@ -34,7 +34,7 @@ import com.google.common.collect.Collections2;
  * @author jreimann
  *
  */
-public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
+public class ModelMotifAdapter<Vertex extends EObjectVertex> implements Motif<Vertex, EReferenceEdge> {
 
 	private org.modelrefactoring.guery.Motif motif;
 
@@ -43,9 +43,9 @@ public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
 	private List<String> negatedPathRoles;
 	private List<Constraint> constraints;
 
-	private List<GroupByClause<EObjectVertex>> groupByClauses;
+	private List<GroupByClause<Vertex>> groupByClauses;
 
-	private List<Processor<EObjectVertex, EReferenceEdge>> processors;
+	private List<Processor<Vertex, EReferenceEdge>> processors;
 
 	public ModelMotifAdapter(org.modelrefactoring.guery.Motif motif) {
 		super();
@@ -161,14 +161,14 @@ public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
 	}
 
 	@Override
-	public Collection<GroupByClause<EObjectVertex>> getGroupByClauses() {
+	public Collection<GroupByClause<Vertex>> getGroupByClauses() {
 		if(groupByClauses == null){
-			groupByClauses = new ArrayList<GroupByClause<EObjectVertex>>();
+			groupByClauses = new ArrayList<GroupByClause<Vertex>>();
 			List<Grouping> groupings = motif.getGroupBy();
 			for (Grouping grouping : groupings) {
 				List<org.modelrefactoring.guery.Constraint> groupByConstraints = grouping.getConstraints();
 				for (org.modelrefactoring.guery.Constraint groupBy : groupByConstraints) {
-					CompiledGroupByClause<EObjectVertex> clause = new CompiledGroupByClause<EObjectVertex>(groupBy.getExpression());
+					CompiledGroupByClause<Vertex> clause = new CompiledGroupByClause<Vertex>(groupBy.getExpression());
 					groupByClauses.add(clause);
 				}
 			}
@@ -178,9 +178,9 @@ public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Processor<EObjectVertex, EReferenceEdge>> getGraphProcessors() {
+	public Collection<Processor<Vertex, EReferenceEdge>> getGraphProcessors() {
 		if(processors == null){
-			processors = new ArrayList<Processor<EObjectVertex, EReferenceEdge>>();
+			processors = new ArrayList<Processor<Vertex, EReferenceEdge>>();
 			List<PreProcessor> preprocessors = motif.getPrepare();
 			for (PreProcessor preProcessor : preprocessors) {
 				@SuppressWarnings("rawtypes")
