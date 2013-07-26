@@ -159,7 +159,7 @@ public class MotifAdapterTest {
 		}
 	}
 
-	private nz.ac.massey.cs.guery.Motif<EObjectVertex, EReferenceEdge> getMotifByModel(String path){
+	protected <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getMotifByModel(String path){
 		File file = new File(path);
 		assertTrue("File '" + path + "' doesn't exist", file.exists());
 		URI uri = URI.createFileURI(file.getAbsolutePath());
@@ -169,7 +169,7 @@ public class MotifAdapterTest {
 		assertTrue("Given model must be an instance of MotifModel", model instanceof MotifModel);
 		Motif motif = ((MotifModel) model).getMotifs().get(0);
 		ModelMotifReader reader = new ModelMotifReader(motif);
-		nz.ac.massey.cs.guery.Motif<EObjectVertex, EReferenceEdge> gueryMotif;
+		nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> gueryMotif;
 		try {
 			gueryMotif = reader.read(null);
 			return gueryMotif;
@@ -180,13 +180,13 @@ public class MotifAdapterTest {
 		return null;
 	}
 
-	private nz.ac.massey.cs.guery.Motif<EObjectVertex, EReferenceEdge> getMotifByGuery(String path){
+	protected <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getMotifByGuery(String path){
 		File file = new File(path);
 		assertTrue("File '" + path + "' doesn't exist", file.exists());
 		try {
 			FileInputStream stream = new FileInputStream(file);
-			MotifReader<EObjectVertex, EReferenceEdge> reader = new DefaultMotifReader<EObjectVertex, EReferenceEdge>();
-			nz.ac.massey.cs.guery.Motif<EObjectVertex, EReferenceEdge> motif = reader.read(stream);
+			MotifReader<Vertex, EReferenceEdge> reader = new DefaultMotifReader<Vertex, EReferenceEdge>();
+			nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> motif = reader.read(stream);
 			return motif;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

@@ -19,7 +19,7 @@ import org.modelrefactoring.guery.graph.EReferenceEdge;
  * @author jreimann
  *
  */
-public class ModelMotifReader implements MotifReader<EObjectVertex, EReferenceEdge> {
+public class ModelMotifReader<Vertex extends EObjectVertex> implements MotifReader<Vertex, EReferenceEdge> {
 
 	private org.modelrefactoring.guery.Motif motif;
 	
@@ -37,8 +37,8 @@ public class ModelMotifReader implements MotifReader<EObjectVertex, EReferenceEd
 	 * by the EMFText generated parser of the GUERY DSL
 	 */
 	@Override
-	public Motif<EObjectVertex, EReferenceEdge> read(InputStream source) throws MotifReaderException {
-		Motif<EObjectVertex, EReferenceEdge> gueryMotif = new ModelMotifAdapter(motif);
+	public Motif<Vertex, EReferenceEdge> read(InputStream source) throws MotifReaderException {
+		Motif<Vertex, EReferenceEdge> gueryMotif = new ModelMotifAdapter(motif);
 		return gueryMotif;
 	}
 
