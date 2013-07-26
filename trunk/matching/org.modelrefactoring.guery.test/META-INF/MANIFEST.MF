@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.modelrefactoring.guery.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Jan Reimann
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.junit,
+ org.emftext.language.pl0,
+ org.emftext.language.pl0.resource.pl0,
+ org.eclipse.emf.ecore.xmi,
+ org.emftext.language.java,
+ org.emftext.language.pl0.extended,
+ org.modelrefactoring.guery.graph

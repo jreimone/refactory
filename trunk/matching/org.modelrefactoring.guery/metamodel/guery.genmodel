@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.modelrefactoring.guery/src-gen" editDirectory="/org.modelrefactoring.guery.edit/src-gen"
+    editorDirectory="/org.modelrefactoring.guery.editor/src-gen" modelPluginID="org.modelrefactoring.guery"
+    modelName="Guery" editPluginClass="org.modelrefactoring.guery.provider.GueryEditPlugin"
+    editorPluginClass="org.modelrefactoring.guery.presentation.GueryEditorPlugin"
+    testSuiteClass="org.modelrefactoring.guery.tests.GueryAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.modelrefactoring.guery.edit"
+    editorPluginID="org.modelrefactoring.guery.editor" language="">
+  <foreignModel>guery.ecore</foreignModel>
+  <genPackages prefix="Guery" basePackage="org.modelrefactoring" disposableProviderFactory="true"
+      ecorePackage="guery.ecore#/">
+    <genClasses ecoreClass="guery.ecore#//MotifModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//MotifModel/motifs"/>
+    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//Motif">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Motif/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Motif/vertexSelection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Motif/groupBy"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Motif/prepare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Motif/edgeSelections"/>
+      <genOperations ecoreOperation="guery.ecore#//Motif/getContexts"/>
+      <genOperations ecoreOperation="guery.ecore#//Motif/getConstrainables"/>
+    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//Role">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Role/name"/>
+    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//Constraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Constraint/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//VertexSelection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//VertexSelection/roles"/>
+    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//ConnectedBy"/>
+    <genClasses image="false" ecoreClass="guery.ecore#//Connection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference guery.ecore#//Connection/to"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference guery.ecore#//Connection/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Connection/minLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Connection/maxLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Connection/computeAll"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Connection/path"/>
+    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//NotConnectedBy"/>
+    <genClasses ecoreClass="guery.ecore#//Grouping"/>
+    <genClasses ecoreClass="guery.ecore#//PreProcessor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//PreProcessor/class"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="guery.ecore#//EdgeSelection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//EdgeSelection/connections"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="guery.ecore#//Constrainable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Constrainable/constraints"/>
+    </genClasses>
+    <genClasses ecoreClass="guery.ecore#//StringToEObjectMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//StringToEObjectMap/key"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference guery.ecore#//StringToEObjectMap/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
