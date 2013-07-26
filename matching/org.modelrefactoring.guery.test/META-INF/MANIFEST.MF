@@ -11,4 +11,6 @@ Require-Bundle: org.junit,
  org.eclipse.emf.ecore.xmi,
  org.emftext.language.java,
  org.emftext.language.pl0.extended,
- org.modelrefactoring.guery.graph
+ org.modelrefactoring.guery.graph,
+ org.modelrefactoring.guery,
+ org.modelrefactoring.guery.resource.guery
