@@ -1,4 +1,4 @@
-package org.emftext.refactoring.matching.guery;
+package org.modelrefactoring.matching.guery;
 
 import java.util.List;
 import java.util.Set;

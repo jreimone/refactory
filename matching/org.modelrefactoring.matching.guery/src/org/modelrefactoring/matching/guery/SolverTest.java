@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.emftext.refactoring.matching.guery;
+package org.modelrefactoring.matching.guery;
 
 //import org.emftext.language.conference.ConferencePackage;
 //import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;

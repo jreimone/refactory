@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.qualitune.evolution.guery.test;
+package org.modelrefactoring.guery.test;
 
 import static org.junit.Assert.*;
 

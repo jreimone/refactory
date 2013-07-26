@@ -1,4 +1,4 @@
-package org.emftext.refactoring.matching.guery;
+package org.modelrefactoring.matching.guery;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,7 +32,7 @@ public class SolvingMotif {
 
 
 //	int help=0;
-//	String help2="C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/PL";
+//	String help2="C:/Users/Robert/workspaces/grosserBeleg/org.modelrefactoring.matching.guery/src/PL";
 //	String ext=".txt";
 
 	public SolvingMotif(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource){
