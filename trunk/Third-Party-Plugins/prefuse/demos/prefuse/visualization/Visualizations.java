@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
-import org.qualitune.evolution.guery.graph.EClassVertex;
-import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
-import org.qualitune.evolution.guery.registry.EReferenceEdge;
+import org.modelrefactoring.guery.graph.EClassVertex;
+import org.modelrefactoring.guery.graph.EPackageGraphAdapter;
+import org.modelrefactoring.guery.graph.EReferenceEdge;
 
 import prefuse.data.Edge;
 import prefuse.data.Graph;

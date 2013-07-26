@@ -40,7 +40,6 @@ Export-Package: prefuse,
  prefuse.visual.tuple,
  prefuse.visualization
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.qualitune.evolution.guery,
- org.emftext.language.pl0,
+Require-Bundle: org.emftext.language.pl0,
  org.emftext.language.pl0.resource.pl0,
- org.qualitune.evolution.guery.registry
+ org.modelrefactoring.guery.graph

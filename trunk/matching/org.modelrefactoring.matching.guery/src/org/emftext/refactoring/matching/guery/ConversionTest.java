@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
-import org.qualitune.guery.GueryPackage;
-import org.qualitune.guery.resource.guery.mopp.GueryResourceFactory;
+import org.modelrefactoring.guery.GueryPackage;
+import org.modelrefactoring.guery.resource.guery.mopp.GueryResourceFactory;
 
 public class ConversionTest {
 

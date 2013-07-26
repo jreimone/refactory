@@ -27,11 +27,11 @@ import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.qualitune.evolution.guery.graph.MetamodelVertex;
-import org.qualitune.evolution.guery.registry.EObjectVertex;
-import org.qualitune.evolution.guery.registry.EReferenceEdge;
-import org.qualitune.guery.GueryPackage;
-import org.qualitune.guery.resource.guery.mopp.GueryResourceFactory;
+import org.modelrefactoring.guery.GueryPackage;
+import org.modelrefactoring.guery.graph.EObjectVertex;
+import org.modelrefactoring.guery.graph.EReferenceEdge;
+import org.modelrefactoring.guery.graph.MetamodelVertex;
+import org.modelrefactoring.guery.resource.guery.mopp.GueryResourceFactory;
 
 public class InstanceToRoleMapping {
 

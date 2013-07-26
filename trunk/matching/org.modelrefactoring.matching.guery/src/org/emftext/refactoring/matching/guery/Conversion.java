@@ -24,14 +24,14 @@ import org.emftext.language.refactoring.roles.RoleImplication;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.language.refactoring.roles.RoleProhibition;
-import org.qualitune.evolution.guery.graph.ContainmentEdge;
-import org.qualitune.guery.EdgeSelection;
-import org.qualitune.guery.GueryFactory;
-import org.qualitune.guery.Motif;
-import org.qualitune.guery.MotifModel;
-import org.qualitune.guery.VertexSelection;
-import org.qualitune.guery.resource.guery.IGueryTextResource;
-import org.qualitune.guery.resource.guery.mopp.GueryPrinter2;
+import org.modelrefactoring.guery.EdgeSelection;
+import org.modelrefactoring.guery.GueryFactory;
+import org.modelrefactoring.guery.Motif;
+import org.modelrefactoring.guery.MotifModel;
+import org.modelrefactoring.guery.VertexSelection;
+import org.modelrefactoring.guery.graph.ContainmentEdge;
+import org.modelrefactoring.guery.resource.guery.IGueryTextResource;
+import org.modelrefactoring.guery.resource.guery.mopp.GueryPrinter2;
 
 public class Conversion {
 
@@ -102,7 +102,7 @@ public class Conversion {
 
 	private void createRole(int version, ArrayList<Role> optionalRoles, Role role) {
 		if (showRole(version-1,optionalRoles,role)){
-			org.qualitune.guery.Role gueryRole = GueryFactory.eINSTANCE.createRole();
+			org.modelrefactoring.guery.Role gueryRole = GueryFactory.eINSTANCE.createRole();
 			gueryRole.setName(role.getName());
 			vertexSelection.getRoles().add(gueryRole);
 			int attributes=role.getAttributes().size();
@@ -115,7 +115,7 @@ public class Conversion {
 				}
 			}
 			if (attributes>0){
-				org.qualitune.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
+				org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
 				if (optional>0){ //wenn optionale Attribute
 					if (attributes>optional){ //wenn nicht alle Attribute optional
 						gueryConstraint.setExpression(role.getName()+".getEClass().getEAttributes().size()>0");
@@ -159,10 +159,10 @@ public class Conversion {
 		boolean showCol=true;
 		boolean foundSource=false;
 		boolean foundTarget=false;
-		org.qualitune.guery.Connection gueryConnection = GueryFactory.eINSTANCE.createConnection();
+		org.modelrefactoring.guery.Connection gueryConnection = GueryFactory.eINSTANCE.createConnection();
 		gueryConnection.setPath(((MultiplicityCollaboration) collaboration).getTargetName());
-		EList<org.qualitune.guery.Role> roleList=vertexSelection.getRoles();
-		for (org.qualitune.guery.Role gueryRole:roleList){
+		EList<org.modelrefactoring.guery.Role> roleList=vertexSelection.getRoles();
+		for (org.modelrefactoring.guery.Role gueryRole:roleList){
 			if (collaboration.getSource().getName().equals(gueryRole.getName())){
 				foundSource=true;
 				if (optionalRoles.contains(collaboration.getSource())){
@@ -182,10 +182,10 @@ public class Conversion {
 			if (maxLength>1&&showCol){
 				gueryConnection.setMinLength(1);
 				gueryConnection.setMaxLength(1);
-				org.qualitune.guery.Role gueryRolePH = GueryFactory.eINSTANCE.createRole();
+				org.modelrefactoring.guery.Role gueryRolePH = GueryFactory.eINSTANCE.createRole();
 				gueryRolePH.setName(((MultiplicityCollaboration) collaboration).getTargetName()+"PH");
 				vertexSelection.getRoles().add(gueryRolePH);
-				org.qualitune.guery.Connection gueryConnection2 = GueryFactory.eINSTANCE.createConnection();
+				org.modelrefactoring.guery.Connection gueryConnection2 = GueryFactory.eINSTANCE.createConnection();
 				gueryConnection2.setPath(((MultiplicityCollaboration) collaboration).getTargetName()+"2");
 				gueryConnection2.setFrom(gueryRolePH);
 				gueryConnection2.setTo(gueryConnection.getTo());
@@ -199,11 +199,11 @@ public class Conversion {
 				if (maxLength==-1){
 					gueryConnection.setMinLength(1);
 					gueryConnection.setMaxLength(1);
-					org.qualitune.guery.Role gueryRolePH = GueryFactory.eINSTANCE.createRole();
+					org.modelrefactoring.guery.Role gueryRolePH = GueryFactory.eINSTANCE.createRole();
 					gueryRolePH.setName(((MultiplicityCollaboration) collaboration).getTargetName()+"PH");
 					vertexSelection.getRoles().add(gueryRolePH);
 
-					org.qualitune.guery.Connection gueryConnection2 = GueryFactory.eINSTANCE.createConnection();
+					org.modelrefactoring.guery.Connection gueryConnection2 = GueryFactory.eINSTANCE.createConnection();
 					gueryConnection2.setPath(((MultiplicityCollaboration) collaboration).getTargetName()+"2");
 					gueryConnection2.setFrom(gueryRolePH);
 					gueryConnection2.setTo(gueryConnection.getTo());
@@ -223,12 +223,12 @@ public class Conversion {
 		if (showCol&&foundSource&&foundTarget){
 			edgeSelection.getConnections().add(gueryConnection);
 			if (collaboration instanceof RoleComposition){
-				org.qualitune.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
+				org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
 				gueryConstraint.setExpression(((MultiplicityCollaboration) collaboration).getTargetName()+" is " + ContainmentEdge.class.getName());
 				edgeSelection.getConstraints().add(gueryConstraint);
 			}
 			else{
-				org.qualitune.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
+				org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
 				gueryConstraint.setExpression("!("+((MultiplicityCollaboration) collaboration).getTargetName()+" is " + ContainmentEdge.class.getName() + ")");
 				edgeSelection.getConstraints().add(gueryConstraint);
 			}
@@ -237,11 +237,11 @@ public class Conversion {
 	}
 
 	private void createRoleProhibition(Collaboration collaboration) {
-		EList<org.qualitune.guery.Role> roleList=vertexSelection.getRoles();
-		org.qualitune.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
+		EList<org.modelrefactoring.guery.Role> roleList=vertexSelection.getRoles();
+		org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
 		String constraintSource=null;
 		String constraintTarget=null;
-		for (org.qualitune.guery.Role gueryRole:roleList){
+		for (org.modelrefactoring.guery.Role gueryRole:roleList){
 			if (collaboration.getSource().getName().equals(gueryRole.getName())){
 				constraintSource=collaboration.getSource().getName();
 			}
@@ -256,11 +256,11 @@ public class Conversion {
 	}
 
 	private void createRoleImplication(Collaboration collaboration) {
-		EList<org.qualitune.guery.Role> roleList=vertexSelection.getRoles();
-		org.qualitune.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
+		EList<org.modelrefactoring.guery.Role> roleList=vertexSelection.getRoles();
+		org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
 		String constraintSource=null;
 		String constraintTarget=null;
-		for (org.qualitune.guery.Role gueryRole:roleList){
+		for (org.modelrefactoring.guery.Role gueryRole:roleList){
 			if (collaboration.getSource().getName().equals(gueryRole.getName())){
 				constraintSource=collaboration.getSource().getName();
 			}
