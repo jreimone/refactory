@@ -81,6 +81,7 @@ Export-Package: com.google.common.annotations,
  org.apache.log4j.varia,
  org.apache.log4j.xml,
  org.modelrefactoring.guery.graph,
+ org.modelrefactoring.guery.io,
  org.mvel2,
  org.mvel2.asm,
  org.mvel2.asm.signature,
@@ -110,5 +111,6 @@ Export-Package: com.google.common.annotations,
 Require-Bundle: org.jdom,
  org.eclipse.core.runtime,
  javax.xml,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ org.modelrefactoring.guery
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
