@@ -1,4 +1,4 @@
-package org.emftext.refactoring.matching.guery;
+package org.modelrefactoring.matching.guery;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
