@@ -11,13 +11,6 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.qualitune.org/guery"
-            class="org.qualitune.guery.GueryPackage"
-            genModel="metamodel/guery.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated guery -->
       <package
             uri="http://www.modelrefactoring.org/guery"

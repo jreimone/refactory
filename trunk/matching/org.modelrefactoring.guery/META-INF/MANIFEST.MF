@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.modelrefactoring.guery,
+ org.modelrefactoring.guery.custom,
  org.modelrefactoring.guery.impl,
  org.modelrefactoring.guery.util
 Require-Bundle: org.eclipse.core.runtime,
