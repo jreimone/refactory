@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
-import org.qualitune.evolution.guery.graph.MetamodelVertex;
-import org.qualitune.evolution.guery.registry.EObjectVertex;
-import org.qualitune.evolution.guery.registry.EReferenceEdge;
+import org.modelrefactoring.guery.graph.EObjectVertex;
+import org.modelrefactoring.guery.graph.EPackageGraphAdapter;
+import org.modelrefactoring.guery.graph.EReferenceEdge;
+import org.modelrefactoring.guery.graph.MetamodelVertex;
 
 import util.Writer2txt;
 //import org.emftext.language.conference.ConferencePackage;
@@ -33,7 +33,7 @@ public class SolvingMotifWithModifiedModel {
 	private boolean debug=false;
 	
 	int help=0;
-	String help2="C:/Users/Robert/workspaces/grosserBeleg/org.emftext.refactoring.matching.guery/src/PL";
+	String help2="C:/Users/Robert/workspaces/grosserBeleg/org.modelrefactoring.matching.guery/src/PL";
 	String ext=".txt";
 	
 	private Writer2txt w2t;

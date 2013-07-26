@@ -16,9 +16,9 @@ import nz.ac.massey.cs.guery.io.dsl.DefaultMotifReader;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.qualitune.evolution.guery.graph.EPackageGraphAdapter;
-import org.qualitune.evolution.guery.graph.MetamodelVertex;
-import org.qualitune.evolution.guery.registry.EReferenceEdge;
+import org.modelrefactoring.guery.graph.EPackageGraphAdapter;
+import org.modelrefactoring.guery.graph.EReferenceEdge;
+import org.modelrefactoring.guery.graph.MetamodelVertex;
 
 public class SolvingMotif {
 
@@ -69,7 +69,7 @@ public class SolvingMotif {
 				itrm.transform2RoleMapping();
 				if (i>maxResults){
 					if (debug){
-						System.out.println("Zu viele Ergebnisse, bitte einschränken");
+						System.out.println("Zu viele Ergebnisse, bitte einschrï¿½nken");
 					}
 					stopped=true;
 					return false;
@@ -83,7 +83,7 @@ public class SolvingMotif {
 			}
 			public void progressMade(int progress, int total) {
 				if (debug){
-					System.out.println(progress+" von "+total+" Möglichkeiten bearbeitet");
+					System.out.println(progress+" von "+total+" Mï¿½glichkeiten bearbeitet");
 				}
 			}
 		};
