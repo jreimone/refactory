@@ -43,9 +43,9 @@ public class ModelMotifAdapter implements Motif<EObjectVertex, EReferenceEdge> {
 	private List<String> negatedPathRoles;
 	private List<Constraint> constraints;
 
-	private ArrayList<GroupByClause<EObjectVertex>> groupByClauses;
+	private List<GroupByClause<EObjectVertex>> groupByClauses;
 
-	private ArrayList<Processor<EObjectVertex, EReferenceEdge>> processors;
+	private List<Processor<EObjectVertex, EReferenceEdge>> processors;
 
 	public ModelMotifAdapter(org.modelrefactoring.guery.Motif motif) {
 		super();
