@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.modelrefactoring.guery.resource.guery.default_load_options">
+      <provider
+            class="org.modelrefactoring.guery.postprocessor.GueryOptionProvider"
+            id="org.modelrefactoring.guery.postprocessor.provider">
+      </provider>
+   </extension>
+
+</plugin>
