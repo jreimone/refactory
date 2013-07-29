@@ -1,0 +1,44 @@
+/**
+This role model describes all roles being used to express the original Martin Fowler refactoring 
+<a href="http://www.refactoring.com/catalog/extractMethod.html">Extract Method</a>.
+Therein statements contained in a method (e.g. Java) will be selected and removed to a newly created method.
+At the old position of the statements a method call will be set instead.
+*/ 
+RoleModel ExtractXwithReferenceClass { 
+	/**
+	This role represents the container class which contains the elements being intended to be moved
+	to the new container.
+	*/  
+	ROLE OrigContainer ; 
+	/**
+	This role stands for the elements contained in the role 'OrigContainer'
+	*/ 
+	input super  ROLE Extract ; 
+	/**
+	'NewContainer' is the role for the new parent of the elements with role 'Extract'
+	*/  
+	ROLE NewContainer ( /**
+		The attribute 'newName' is intended to be mapped to a String attribute for the name of
+		the new container
+		*/ 
+		optional input newName ) ; 
+	/**
+	This role represents the container of the both other containers: 'OrigContainer' and 'NewContainer'.
+	It must be mapped to an EClass having containment references to the other both mapped EClasses
+	*/  
+	super ROLE ContainerContainer ; 
+	/**
+	This role represents an element which can refer to the element owning the role 'NewContainer'.
+	It is optional because there might be metamodels for which no references must be set.
+	An example for such a metamodel is the conference language from the zoo. 
+	*/ 
+	optional  ROLE MovedReference ;
+	
+	transitive :  OrigContainer  [1 ..1 ]  <>- Extract extracts [0 ..* ] ; 
+	transitive :  OrigContainer  [1 ..1 ]  <>- MovedReference referer [1 ..1 ] ; 
+	transitive :  NewContainer  [1 ..1 ]  <>- Extract moved [0 ..* ] ; 
+	transitive :  ContainerContainer  [1 ..1 ]  <>- NewContainer target [1 ..1 ] ; 
+	transitive reflexive :  ContainerContainer  [1 ..1 ]  <>- OrigContainer source [1 ..1 ] ; 
+	 MovedReference  [1 ..1 ]  -- NewContainer containerRef [1 ..1 ] ; 
+	
+}

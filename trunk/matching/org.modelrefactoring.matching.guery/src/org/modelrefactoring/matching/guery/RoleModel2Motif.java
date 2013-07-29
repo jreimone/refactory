@@ -1,8 +1,5 @@
 package org.modelrefactoring.matching.guery;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.CollaborationModifier;
@@ -23,7 +20,7 @@ import org.modelrefactoring.guery.graph.ContainmentEdge;
 
 public class RoleModel2Motif {
 
-	private static int maxLength=3;
+	private static int maxLength = 3;
 	private RoleModel rolemodel;
 	private MotifModel motifModel;
 
@@ -33,76 +30,56 @@ public class RoleModel2Motif {
 
 	public MotifModel createMotifModel(){
 		motifModel = GueryFactory.eINSTANCE.createMotifModel();
-		calculateVersions();
+		transform();
 		return motifModel;
 	}
 
-	private void calculateVersions() {
-		int versions=countVersions(rolemodel);
-		for (int i=1;i<=versions;i++){
-			transform(i);
-		}
-	}
-
-	private void transform(int version) {
+	private void transform() {
 		Motif motif = GueryFactory.eINSTANCE.createMotif();
 		motifModel.getMotifs().add(motif);
 		motif.setName(rolemodel.getName());
 		VertexSelection vertexSelection = GueryFactory.eINSTANCE.createVertexSelection();
 		motif.setVertexSelection(vertexSelection);
-		ArrayList<Role> optionalRoles=new ArrayList<Role>();
-		for (Role role : rolemodel.getRoles()){
-			for (RoleModifier rm:role.getModifier()){
-				if (rm == RoleModifier.OPTIONAL){
-					optionalRoles.add(role);
-				}
-			}
-		}
 		for (Role role : rolemodel.getRoles()) {
-			createRole(motif, version, optionalRoles, role);
+			createRole(motif, role);
 		}
 		for (Collaboration collaboration : rolemodel.getCollaborations()){
-			createCollaboration(motif, version, optionalRoles, collaboration);
+			createCollaboration(motif, collaboration);
 		}
 	}
 
-	private void createRole(Motif motif, int version, ArrayList<Role> optionalRoles, Role role) {
-		if (showRole(version-1,optionalRoles,role)){
-			org.modelrefactoring.guery.Role gueryRole = GueryFactory.eINSTANCE.createRole();
-			gueryRole.setName(role.getName());
-			motif.getVertexSelection().getRoles().add(gueryRole);
-			int attributes=role.getAttributes().size();
-			int optional=0;
-			for (RoleAttribute attribut:role.getAttributes()){
-				for (RoleModifier rm:attribut.getModifier()){
-					if (rm == RoleModifier.OPTIONAL){
-						optional++;
-					}
-				}
+	private void createRole(Motif motif, Role role) {
+		org.modelrefactoring.guery.Role gueryRole = GueryFactory.eINSTANCE.createRole();
+		gueryRole.setName(role.getName());
+		motif.getVertexSelection().getRoles().add(gueryRole);
+		int attributes=role.getAttributes().size();
+		int optional=0;
+		for (RoleAttribute attribut:role.getAttributes()){
+			if(attribut.getModifier().contains(RoleModifier.OPTIONAL)){
+				optional++;
 			}
-			if (attributes>0){
-				org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
-				if (optional>0){ //wenn optionale Attribute
-					if (attributes>optional){ //wenn nicht alle Attribute optional
-						gueryConstraint.setExpression(role.getName()+".getEClass().getEAttributes().size()>0");
-					}
-					//wenn alle Attribute optional -> Kein Test auf Attributanzahl
-				}
-				else{
+		}
+		if (attributes>0){
+			org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
+			if (optional>0){ //wenn optionale Attribute
+				if (attributes>optional){ //wenn nicht alle Attribute optional
 					gueryConstraint.setExpression(role.getName()+".getEClass().getEAttributes().size()>0");
-					motif.getVertexSelection().getConstraints().add(gueryConstraint);
 				}
+				//wenn alle Attribute optional -> Kein Test auf Attributanzahl
+			}
+			else{
+				gueryConstraint.setExpression(role.getName()+".getEClass().getEAttributes().size()>0");
+				motif.getVertexSelection().getConstraints().add(gueryConstraint);
 			}
 		}
 	}
 
-	private void createCollaboration(Motif motif, int version, ArrayList<Role> optionalRoles, Collaboration collaboration) {
+	private void createCollaboration(Motif motif, Collaboration collaboration) {
 		EdgeSelection edgeSelection = GueryFactory.eINSTANCE.createConnectedBy();
 		EdgeSelection edgeSelection2 = GueryFactory.eINSTANCE.createConnectedBy();
-		boolean showCol=true;
 		// Role Composition && Role Association
 		if (collaboration instanceof MultiplicityCollaboration){
-			showCol=createMultiplicityCollaboration(motif, edgeSelection, edgeSelection2,version, optionalRoles, collaboration);
+			createMultiplicityCollaboration(motif, edgeSelection, edgeSelection2, collaboration);
 		}
 
 		if (collaboration instanceof RoleProhibition){
@@ -112,17 +89,14 @@ public class RoleModel2Motif {
 		if (collaboration instanceof RoleImplication){
 			createRoleImplication(motif, collaboration);
 		}
-		if (showCol){
-			motif.getEdgeSelections().add(edgeSelection);
-			if (maxLength>1||maxLength<0){
-				motif.getEdgeSelections().add(edgeSelection2);
-			}
+		motif.getEdgeSelections().add(edgeSelection);
+		if (maxLength > 1 || maxLength < 0){
+			motif.getEdgeSelections().add(edgeSelection2);
 		}
 	}
 
 
-	private boolean createMultiplicityCollaboration(Motif motif, EdgeSelection edgeSelection, EdgeSelection edgeSelection2,int version, ArrayList<Role> optionalRoles, Collaboration collaboration) {
-		boolean showCol=true;
+	private void createMultiplicityCollaboration(Motif motif, EdgeSelection edgeSelection, EdgeSelection edgeSelection2, Collaboration collaboration) {
 		boolean foundSource=false;
 		boolean foundTarget=false;
 		org.modelrefactoring.guery.Connection gueryConnection = GueryFactory.eINSTANCE.createConnection();
@@ -131,21 +105,15 @@ public class RoleModel2Motif {
 		for (org.modelrefactoring.guery.Role gueryRole:roleList){
 			if (collaboration.getSource().getName().equals(gueryRole.getName())){
 				foundSource=true;
-				if (optionalRoles.contains(collaboration.getSource())){
-					showCol=showRole(version-1,optionalRoles,collaboration.getSource());
-				}
 				gueryConnection.setFrom(gueryRole);
 			}
 			if (collaboration.getTarget().getName().equals(gueryRole.getName())){
 				foundTarget=true;
-				if (optionalRoles.contains(collaboration.getTarget())){
-					showCol=showRole(version-1,optionalRoles,collaboration.getSource());
-				}
 				gueryConnection.setTo(gueryRole);
 			}
 		}
 		if (collaboration.getModifier().contains(CollaborationModifier.TRANSITIVE)){
-			if (maxLength>1&&showCol){
+			if (maxLength > 1){
 				gueryConnection.setMinLength(1);
 				gueryConnection.setMaxLength(1);
 				org.modelrefactoring.guery.Role gueryRolePH = GueryFactory.eINSTANCE.createRole();
@@ -186,7 +154,7 @@ public class RoleModel2Motif {
 			gueryConnection.setMaxLength(1);
 		}
 		gueryConnection.setComputeAll(true); //erst alle Connections berechnen
-		if (showCol&&foundSource&&foundTarget){
+		if (foundSource && foundTarget){
 			edgeSelection.getConnections().add(gueryConnection);
 			if (collaboration instanceof RoleComposition){
 				org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
@@ -199,7 +167,6 @@ public class RoleModel2Motif {
 				edgeSelection.getConstraints().add(gueryConstraint);
 			}
 		}
-		return showCol;
 	}
 
 	private void createRoleProhibition(Motif motif, Collaboration collaboration) {
@@ -241,41 +208,41 @@ public class RoleModel2Motif {
 	}
 
 
-	private int countVersions(RoleModel rolemodel){
-		int result=0;
-		int countR=0; //Anzahl optionaler Rollen
-		for (Role role : rolemodel.getRoles()) {
-			List<RoleModifier> rmlist=role.getModifier();
-			for (RoleModifier rm: rmlist){
-				if (rm == RoleModifier.OPTIONAL){
-					countR++;
-				}
-			}
-		}
-		/*
-		 * Wenn keine Paare dann ist Anzahl Varianten
-		 * 2^(Anzahl optionaler Rollen+Anzahl optionaler Attribute)
-		 */
-		result=(int) Math.pow(2,(countR));
-		return result;
-	}
+	//	private int countVersions(RoleModel rolemodel){
+	//		int result=0;
+	//		int countR=0; //Anzahl optionaler Rollen
+	//		for (Role role : rolemodel.getRoles()) {
+	//			List<RoleModifier> rmlist=role.getModifier();
+	//			for (RoleModifier rm: rmlist){
+	//				if (rm == RoleModifier.OPTIONAL){
+	//					countR++;
+	//				}
+	//			}
+	//		}
+	//		/*
+	//		 * Wenn keine Paare dann ist Anzahl Varianten
+	//		 * 2^(Anzahl optionaler Rollen+Anzahl optionaler Attribute)
+	//		 */
+	//		result=(int) Math.pow(2,(countR));
+	//		return result;
+	//	}
 
-	private boolean showRole(int version, ArrayList<Role> optionalRoles, Role role){
-		int pos=optionalRoles.indexOf(role);
-		if (pos==-1){
-			return true;
-		}
-		String test=Integer.toBinaryString(version);
-		String dual="";
-		for (int i3=optionalRoles.size();i3>test.length();i3--){
-			dual=dual+"0";
-		}
-		dual=dual+test;
-		if (dual.subSequence(pos, pos+1).equals("0")){
-			return false;
-		}
-		else{
-			return true;
-		}
-	}
+	//	private boolean showRole(int version, ArrayList<Role> optionalRoles, Role role){
+	//		int pos=optionalRoles.indexOf(role);
+	//		if (pos==-1){
+	//			return true;
+	//		}
+	//		String test=Integer.toBinaryString(version);
+	//		String dual="";
+	//		for (int i3=optionalRoles.size();i3>test.length();i3--){
+	//			dual=dual+"0";
+	//		}
+	//		dual=dual+test;
+	//		if (dual.subSequence(pos, pos+1).equals("0")){
+	//			return false;
+	//		}
+	//		else{
+	//			return true;
+	//		}
+	//	}
 }

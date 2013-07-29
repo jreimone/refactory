@@ -24,6 +24,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.emftext.language.refactoring.roles.RolesPackage;
+import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
+import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.modelrefactoring.guery.GueryPackage;
@@ -41,6 +45,9 @@ public class MotifAdapterTest {
 	public static void init(){
 		EPackage.Registry.INSTANCE.put(GueryPackage.eNS_URI, GueryPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new GueryMetaInformation().getSyntaxName(), new GueryResourceFactory());
+		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolestextMetaInformation().getSyntaxName(), new RolestextResourceFactory());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 	}
 
 	@Test
@@ -70,7 +77,7 @@ public class MotifAdapterTest {
 	
 	@Test
 	public void testExtractXwithReferenceClass(){
-		testQuery("queries/ExtractXwithReferenceClass.guery");
+		testQuery("queries/ExtractXwithReferenceClass0.guery");
 	}
 	
 	private void testQuery(String path){
@@ -193,7 +200,7 @@ public class MotifAdapterTest {
 			fail("File '" + path + "' wasn't found");
 		} catch (MotifReaderException e) {
 			e.printStackTrace();
-			fail("DefaultMotifRead failed");
+			fail(path + " couldn't be parsed: " + e.getLocalizedMessage());
 		}
 		return null;
 	}
