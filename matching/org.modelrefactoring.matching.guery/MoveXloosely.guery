@@ -1,5 +1,0 @@
-motif MoveXloosely
-select Movee, Neighbor, Container
-where"Neighbor instanceof Movee"
-connected by movedElements(Container>Movee)[1,*] find all
-	and neighbor(Container>Neighbor)[1,*] find all

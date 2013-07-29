@@ -30,10 +30,16 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.modelrefactoring.guery.resource.guery.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.qualitune.guery.resource.guery.nature</nature>
+		<nature>org.modelrefactoring.guery.resource.guery.nature</nature>
 	</natures>
 </projectDescription>

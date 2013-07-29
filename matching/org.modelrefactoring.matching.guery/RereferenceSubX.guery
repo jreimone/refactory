@@ -1,6 +1,0 @@
-motif RereferenceSubX
-select Base, Source, OrigReference, NewReference
-connected by originalReference(Base>Source)[1,1] find all
-	and reference(Source>OrigReference)[1,1] find all
-	and newReference(Source>NewReference)[1,1] find all
-	and relatedElements(OrigReference>NewReference)[1,1] find all

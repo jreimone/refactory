@@ -216,7 +216,7 @@ public class SolverTest {
 ////		ausgabe = sdf.format(now);
 ////		w2t.writeLine(ausgabe);
 //
-////		URI fileURI=URI.createFileURI("C:\\Users\\Robert\\gbswt\\org.emftext.refactoring.matching\\src\\org\\emftext\\refactoring\\matching\\Conversion.java");
+////		URI fileURI=URI.createFileURI("C:\\Users\\Robert\\gbswt\\org.emftext.refactoring.matching\\src\\org\\emftext\\refactoring\\matching\\RoleModel2Motif.java");
 ////		Resource r=resourceSet.createResource(fileURI);
 ////		Resource res=resourceSet.createResource(URI.createURI(GueryPackage.eNS_URI));
 ////		Resource resource = resourceSet.createResource(URI.createURI("http:///My.guery"));

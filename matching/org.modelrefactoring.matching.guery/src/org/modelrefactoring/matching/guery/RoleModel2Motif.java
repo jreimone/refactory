@@ -1,19 +1,9 @@
 package org.modelrefactoring.matching.guery;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.CollaborationModifier;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
@@ -30,41 +20,21 @@ import org.modelrefactoring.guery.Motif;
 import org.modelrefactoring.guery.MotifModel;
 import org.modelrefactoring.guery.VertexSelection;
 import org.modelrefactoring.guery.graph.ContainmentEdge;
-import org.modelrefactoring.guery.resource.guery.IGueryTextResource;
-import org.modelrefactoring.guery.resource.guery.mopp.GueryPrinter2;
 
-public class Conversion {
+public class RoleModel2Motif {
 
 	private static int maxLength=3;
-	private static boolean saveAsFile=true;
-	private ArrayList<File> fileList;
-	private EPackage epackage;
-	private ResourceSet resourceSet;
 	private RoleModel rolemodel;
-	private Motif motif;
 	private MotifModel motifModel;
-	private VertexSelection vertexSelection;
-	private ByteArrayOutputStream os;
 
-	public Conversion(ArrayList<File> fileList){
-		this.fileList=fileList;
-//		this.epackage = (EPackage) EPackage.Registry.INSTANCE.get(PL0Package.eNS_URI);
-//		this.epackage=EPackage.Registry.INSTANCE.getEPackage(PL0Package.eNS_URI);
-//		epackage=PL0Package.eINSTANCE;
-		System.out.println("EPackage: "+epackage);
+	public RoleModel2Motif(RoleModel roleModel){
+		this.rolemodel = roleModel;
 	}
 
-	public void roleModel2GueryTransformation(){
-		for (File sourceFile : fileList){
-//			assertTrue(sourceFile.exists());
-			URI uri = URI.createFileURI(sourceFile.getAbsolutePath());
-			resourceSet = new ResourceSetImpl();
-			resourceSet.createResource(uri);
-			Resource resource = resourceSet.getResource(uri, true);
-			EObject model = resource.getContents().get(0);
-			rolemodel = (RoleModel) model;
-			calculateVersions();
-		}
+	public MotifModel createMotifModel(){
+		motifModel = GueryFactory.eINSTANCE.createMotifModel();
+		calculateVersions();
+		return motifModel;
 	}
 
 	private void calculateVersions() {
@@ -75,11 +45,10 @@ public class Conversion {
 	}
 
 	private void transform(int version) {
-		motifModel = GueryFactory.eINSTANCE.createMotifModel();
-		motif = GueryFactory.eINSTANCE.createMotif();
+		Motif motif = GueryFactory.eINSTANCE.createMotif();
 		motifModel.getMotifs().add(motif);
 		motif.setName(rolemodel.getName());
-		vertexSelection = GueryFactory.eINSTANCE.createVertexSelection();
+		VertexSelection vertexSelection = GueryFactory.eINSTANCE.createVertexSelection();
 		motif.setVertexSelection(vertexSelection);
 		ArrayList<Role> optionalRoles=new ArrayList<Role>();
 		for (Role role : rolemodel.getRoles()){
@@ -90,26 +59,23 @@ public class Conversion {
 			}
 		}
 		for (Role role : rolemodel.getRoles()) {
-			createRole(version, optionalRoles, role);
+			createRole(motif, version, optionalRoles, role);
 		}
 		for (Collaboration collaboration : rolemodel.getCollaborations()){
-			createCollaboration(version, optionalRoles, collaboration);
+			createCollaboration(motif, version, optionalRoles, collaboration);
 		}
-
-		saveMotif(version);
-		startSolver();
 	}
 
-	private void createRole(int version, ArrayList<Role> optionalRoles, Role role) {
+	private void createRole(Motif motif, int version, ArrayList<Role> optionalRoles, Role role) {
 		if (showRole(version-1,optionalRoles,role)){
 			org.modelrefactoring.guery.Role gueryRole = GueryFactory.eINSTANCE.createRole();
 			gueryRole.setName(role.getName());
-			vertexSelection.getRoles().add(gueryRole);
+			motif.getVertexSelection().getRoles().add(gueryRole);
 			int attributes=role.getAttributes().size();
 			int optional=0;
 			for (RoleAttribute attribut:role.getAttributes()){
 				for (RoleModifier rm:attribut.getModifier()){
-					if (rm.getValue()==0){
+					if (rm == RoleModifier.OPTIONAL){
 						optional++;
 					}
 				}
@@ -124,27 +90,27 @@ public class Conversion {
 				}
 				else{
 					gueryConstraint.setExpression(role.getName()+".getEClass().getEAttributes().size()>0");
-					vertexSelection.getConstraints().add(gueryConstraint);
+					motif.getVertexSelection().getConstraints().add(gueryConstraint);
 				}
 			}
 		}
 	}
 
-	private void createCollaboration(int version, ArrayList<Role> optionalRoles, Collaboration collaboration) {
+	private void createCollaboration(Motif motif, int version, ArrayList<Role> optionalRoles, Collaboration collaboration) {
 		EdgeSelection edgeSelection = GueryFactory.eINSTANCE.createConnectedBy();
 		EdgeSelection edgeSelection2 = GueryFactory.eINSTANCE.createConnectedBy();
 		boolean showCol=true;
 		// Role Composition && Role Association
 		if (collaboration instanceof MultiplicityCollaboration){
-			showCol=createMultiplicityCollaboration(edgeSelection, edgeSelection2,version, optionalRoles, collaboration);
+			showCol=createMultiplicityCollaboration(motif, edgeSelection, edgeSelection2,version, optionalRoles, collaboration);
 		}
 
 		if (collaboration instanceof RoleProhibition){
-			createRoleProhibition(collaboration);
+			createRoleProhibition(motif, collaboration);
 		}
 
 		if (collaboration instanceof RoleImplication){
-			createRoleImplication(collaboration);
+			createRoleImplication(motif, collaboration);
 		}
 		if (showCol){
 			motif.getEdgeSelections().add(edgeSelection);
@@ -155,13 +121,13 @@ public class Conversion {
 	}
 
 
-	private boolean createMultiplicityCollaboration(EdgeSelection edgeSelection, EdgeSelection edgeSelection2,int version, ArrayList<Role> optionalRoles, Collaboration collaboration) {
+	private boolean createMultiplicityCollaboration(Motif motif, EdgeSelection edgeSelection, EdgeSelection edgeSelection2,int version, ArrayList<Role> optionalRoles, Collaboration collaboration) {
 		boolean showCol=true;
 		boolean foundSource=false;
 		boolean foundTarget=false;
 		org.modelrefactoring.guery.Connection gueryConnection = GueryFactory.eINSTANCE.createConnection();
 		gueryConnection.setPath(((MultiplicityCollaboration) collaboration).getTargetName());
-		EList<org.modelrefactoring.guery.Role> roleList=vertexSelection.getRoles();
+		EList<org.modelrefactoring.guery.Role> roleList=motif.getVertexSelection().getRoles();
 		for (org.modelrefactoring.guery.Role gueryRole:roleList){
 			if (collaboration.getSource().getName().equals(gueryRole.getName())){
 				foundSource=true;
@@ -184,7 +150,7 @@ public class Conversion {
 				gueryConnection.setMaxLength(1);
 				org.modelrefactoring.guery.Role gueryRolePH = GueryFactory.eINSTANCE.createRole();
 				gueryRolePH.setName(((MultiplicityCollaboration) collaboration).getTargetName()+"PH");
-				vertexSelection.getRoles().add(gueryRolePH);
+				motif.getVertexSelection().getRoles().add(gueryRolePH);
 				org.modelrefactoring.guery.Connection gueryConnection2 = GueryFactory.eINSTANCE.createConnection();
 				gueryConnection2.setPath(((MultiplicityCollaboration) collaboration).getTargetName()+"2");
 				gueryConnection2.setFrom(gueryRolePH);
@@ -201,7 +167,7 @@ public class Conversion {
 					gueryConnection.setMaxLength(1);
 					org.modelrefactoring.guery.Role gueryRolePH = GueryFactory.eINSTANCE.createRole();
 					gueryRolePH.setName(((MultiplicityCollaboration) collaboration).getTargetName()+"PH");
-					vertexSelection.getRoles().add(gueryRolePH);
+					motif.getVertexSelection().getRoles().add(gueryRolePH);
 
 					org.modelrefactoring.guery.Connection gueryConnection2 = GueryFactory.eINSTANCE.createConnection();
 					gueryConnection2.setPath(((MultiplicityCollaboration) collaboration).getTargetName()+"2");
@@ -236,8 +202,8 @@ public class Conversion {
 		return showCol;
 	}
 
-	private void createRoleProhibition(Collaboration collaboration) {
-		EList<org.modelrefactoring.guery.Role> roleList=vertexSelection.getRoles();
+	private void createRoleProhibition(Motif motif, Collaboration collaboration) {
+		EList<org.modelrefactoring.guery.Role> roleList=motif.getVertexSelection().getRoles();
 		org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
 		String constraintSource=null;
 		String constraintTarget=null;
@@ -251,88 +217,42 @@ public class Conversion {
 		}
 		if ((constraintSource!=null)&&(constraintTarget!=null)){
 			gueryConstraint.setExpression(constraintSource+"!="+constraintTarget);
-			vertexSelection.getConstraints().add(gueryConstraint);
+			motif.getVertexSelection().getConstraints().add(gueryConstraint);
 		}
 	}
 
-	private void createRoleImplication(Collaboration collaboration) {
-		EList<org.modelrefactoring.guery.Role> roleList=vertexSelection.getRoles();
+	private void createRoleImplication(Motif motif, Collaboration collaboration) {
+		EList<org.modelrefactoring.guery.Role> roleList = motif.getVertexSelection().getRoles();
 		org.modelrefactoring.guery.Constraint gueryConstraint = GueryFactory.eINSTANCE.createConstraint();
-		String constraintSource=null;
-		String constraintTarget=null;
+		String constraintSource = null;
+		String constraintTarget = null;
 		for (org.modelrefactoring.guery.Role gueryRole:roleList){
 			if (collaboration.getSource().getName().equals(gueryRole.getName())){
-				constraintSource=collaboration.getSource().getName();
+				constraintSource = collaboration.getSource().getName();
 			}
 			if (collaboration.getTarget().getName().equals(gueryRole.getName())){
-				constraintTarget=collaboration.getTarget().getName();
+				constraintTarget = collaboration.getTarget().getName();
 			}
 		}
-		if ((constraintSource!=null)&&(constraintTarget!=null)){
+		if ((constraintSource != null) && (constraintTarget != null)){
 			gueryConstraint.setExpression(constraintSource+" == "+constraintTarget);
-			vertexSelection.getConstraints().add(gueryConstraint);
+			motif.getVertexSelection().getConstraints().add(gueryConstraint);
 		}
 	}
 
-	private void saveMotif(int version) {
-		File targetFile = new File(rolemodel.getName() +"V"+version+ ".guery");
-		if (saveAsFile){
-			if(targetFile.exists()){
-				targetFile.delete();
-			}
-			try {
-				targetFile.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-//			assertTrue(targetFile.exists());
-		}
-		URI targetUri = URI.createFileURI(targetFile.getAbsolutePath());
-		Resource targetResource = resourceSet.createResource(targetUri);
-//		assertNotNull(targetResource);
-		targetResource.getContents().add(motifModel);
-		os=new ByteArrayOutputStream() ;
-		try {
-			if (saveAsFile){
-				targetResource.save(Collections.EMPTY_MAP);
-			}
-			targetResource.save(os, Collections.EMPTY_MAP);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
-	private OutputStream getStreamFromMotif(MotifModel motifModel){
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		GueryPrinter2 printer = new GueryPrinter2(os, (IGueryTextResource) motifModel.eResource());
-		try {
-			printer.print(motifModel);
-			return os;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private void startSolver() {
-//		Resource pl0resource = PL0Package.eINSTANCE.eResource();
-		Resource pl0resource = null;
-		SolvingMotif solver = new SolvingMotif(pl0resource, epackage, os, rolemodel);
-		solver.findMotifInstancesFromOutputStream();
-	}
-
-	public int countVersions(RoleModel rolemodel){
+	private int countVersions(RoleModel rolemodel){
 		int result=0;
 		int countR=0; //Anzahl optionaler Rollen
 		for (Role role : rolemodel.getRoles()) {
-			EList<RoleModifier> rmlist=role.getModifier();
+			List<RoleModifier> rmlist=role.getModifier();
 			for (RoleModifier rm: rmlist){
-				if (rm.getValue()==0){
+				if (rm == RoleModifier.OPTIONAL){
 					countR++;
 				}
 			}
 		}
-		/**
+		/*
 		 * Wenn keine Paare dann ist Anzahl Varianten
 		 * 2^(Anzahl optionaler Rollen+Anzahl optionaler Attribute)
 		 */
