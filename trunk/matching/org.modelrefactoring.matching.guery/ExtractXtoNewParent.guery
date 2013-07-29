@@ -1,8 +1,0 @@
-motif ExtractXtoNewParent
-select Extractee, OrigContainer, NewContainer, NewContainerParent, ContainerContainer
-connected by extracts(OrigContainer>Extractee)[1,*] find all
-	and moved(NewContainer>Extractee)[1,*] find all
-	and target(NewContainerParent>NewContainer)[1,*] find all
-	and source(ContainerContainer>OrigContainer)[1,*] find all
-	and targetParent(ContainerContainer>NewContainerParent)[1,*] find all
-	and reference(OrigContainer>NewContainer)[1,*] find all
