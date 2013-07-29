@@ -10,3 +10,5 @@ Require-Bundle: org.emftext.language.refactoring.roles.resource.rolestext,
  org.modelrefactoring.guery,
  org.modelrefactoring.guery.graph,
  org.modelrefactoring.guery.resource.guery
+Export-Package: org.modelrefactoring.matching.guery,
+ util

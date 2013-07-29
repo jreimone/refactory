@@ -13,4 +13,8 @@ Require-Bundle: org.junit,
  org.emftext.language.pl0.extended,
  org.modelrefactoring.guery.graph,
  org.modelrefactoring.guery,
- org.modelrefactoring.guery.resource.guery
+ org.modelrefactoring.guery.resource.guery,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping,
+ org.emftext.language.refactoring.roles.resource.rolestext,
+ org.modelrefactoring.matching.guery
