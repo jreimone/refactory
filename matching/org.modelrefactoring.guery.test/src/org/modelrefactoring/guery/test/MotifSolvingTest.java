@@ -27,28 +27,50 @@ import org.modelrefactoring.guery.graph.MetamodelVertex;
 
 public class MotifSolvingTest extends MotifAdapterTest {
 	
-	public boolean isSearching = true;
+	public static final int THRESHOLD = 100;
+	
+	private static List<MotifInstance<MetamodelVertex, EReferenceEdge>> instancesGuery;
+	private static List<MotifInstance<MetamodelVertex, EReferenceEdge>> instancesModel;
 	
 	@Test
-	public void testPL0ExtractXwithReferenceClass(){
+	public void testPL0ZZZCompare(){
+		assertNotNull("No instances found for GUERY parsing", instancesGuery);
+		assertNotNull("No instances found for EMFText parsing", instancesModel);
+		compare(instancesGuery, instancesModel);
+	}
+	
+	@Test
+	public void testPL0ExtractXwithReferenceClassGuery(){
 		EPackage pl0MM = PL0Package.eINSTANCE;
 		assertNotNull("PL/0 metamodel couldn't be initialised", pl0MM);
 		Resource pl0MMResource = pl0MM.eResource();
 		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
-		testMotifOnMetamodel("queries/ExtractXwithReferenceClass.guery", pl0MMResource);
+		instancesGuery = testMotifOnMetamodelWithGUERYParsing("queries/ExtractXwithReferenceClass.guery", pl0MMResource);
 	}
 	
-	private void testMotifOnMetamodel(String motifPath, Resource metamodelResource){
+	@Test
+	public void testPL0ExtractXwithReferenceClassModel(){
+		EPackage pl0MM = PL0Package.eINSTANCE;
+		assertNotNull("PL/0 metamodel couldn't be initialised", pl0MM);
+		Resource pl0MMResource = pl0MM.eResource();
+		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
+		instancesModel = testMotifOnMetamodelWithEMFTextParsing("queries/ExtractXwithReferenceClass.guery", pl0MMResource);
+	}
+	
+	
+	private List<MotifInstance<MetamodelVertex, EReferenceEdge>> testMotifOnMetamodelWithGUERYParsing(String motifPath, Resource metamodelResource){
 		Motif<MetamodelVertex, EReferenceEdge> motifByGuery = this.<MetamodelVertex>getMotifByGuery(motifPath);
+		return solveMotifOnResource(motifByGuery, metamodelResource);
+	}
+	
+	private List<MotifInstance<MetamodelVertex, EReferenceEdge>> testMotifOnMetamodelWithEMFTextParsing(String motifPath, Resource metamodelResource){
 		Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getMotifByModel(motifPath);
-		List<MotifInstance<MetamodelVertex, EReferenceEdge>> gueryInstances = solveMotifOnResource(motifByGuery, metamodelResource);
-		List<MotifInstance<MetamodelVertex, EReferenceEdge>> modelInstances = solveMotifOnResource(motifByModel, metamodelResource);
-		compare(gueryInstances, modelInstances);
+		return solveMotifOnResource(motifByModel, metamodelResource);
 	}
 	
 	private void testMotifOnMetamodel(String motifPath, String metamodelPath){
 		Resource resource = getMetamodel(metamodelPath);
-		testMotifOnMetamodel(motifPath, resource);
+		testMotifOnMetamodelWithGUERYParsing(motifPath, resource);
 	}
 	
 	private void compare(List<MotifInstance<MetamodelVertex, EReferenceEdge>> gueryInstances, List<MotifInstance<MetamodelVertex, EReferenceEdge>> modelInstances) {
@@ -56,14 +78,20 @@ public class MotifSolvingTest extends MotifAdapterTest {
 	}
 
 	private List<MotifInstance<MetamodelVertex, EReferenceEdge>> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource){
-		isSearching = true;
 		final List<MotifInstance<MetamodelVertex, EReferenceEdge>> instances = new ArrayList<MotifInstance<MetamodelVertex, EReferenceEdge>>();
 		ResultListener<MetamodelVertex, EReferenceEdge> listener = new ResultListener<MetamodelVertex, EReferenceEdge>() {
 
+			private int count = 0;
+			
 			@Override
 			public boolean found(MotifInstance<MetamodelVertex, EReferenceEdge> instance) {
+				count++;
 				instances.add(instance);
-				return true;
+				System.out.println("Found an instance: " + instance);
+				if(count <= THRESHOLD){
+					return true;
+				}
+				return false;
 			}
 
 			@Override
@@ -73,16 +101,12 @@ public class MotifSolvingTest extends MotifAdapterTest {
 
 			@Override
 			public void done() {
-				isSearching = false;
+				System.out.println("done");
 			}
 		};
-		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>();
+		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(1);
 		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(resource);
 		engine.query(graphAdapter, motif, listener, ComputationMode.ALL_INSTANCES);
-		while (isSearching) {
-			// do nothing and just wait
-			System.out.println("still searching");
-		}
 		return instances;
 	}
 	
