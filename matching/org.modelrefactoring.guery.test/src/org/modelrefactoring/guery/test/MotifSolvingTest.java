@@ -59,12 +59,13 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		for (org.modelrefactoring.guery.Motif motif : motifs) {
 			String uriString = motif.eResource().getURI().toFileString();
 			testMotifOnMetamodelWithGUERYParsing(uriString, metamodel.eResource(), roleModel);
+			testMotifOnMetamodelWithEMFTextParsing(uriString, metamodel.eResource(), roleModel);
 		}
 	}
 
 	private List<org.modelrefactoring.guery.Motif> convertRoleModel2Motifs(RoleModel roleModel) {
 		RoleModel2Motif converter = new RoleModel2Motif(roleModel);
-		MotifModel motifModel = converter.createMotifModel();
+		MotifModel motifModel = converter.createMotifModel(3);
 		Resource roleModelResource = roleModel.eResource();
 		ResourceSet rs = roleModelResource.getResourceSet();
 		URI roleModelUri = roleModelResource.getURI();
