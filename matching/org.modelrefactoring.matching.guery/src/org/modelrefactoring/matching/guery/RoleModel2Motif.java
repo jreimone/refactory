@@ -24,7 +24,7 @@ import org.modelrefactoring.guery.graph.ContainmentEdge;
 
 public class RoleModel2Motif {
 
-	private static final String INTERMEDIATE_IDENTIFIER	= "_";
+	public static final String INTERMEDIATE_IDENTIFIER	= "_";
 	
 	private RoleModel rolemodel;
 	private MotifModel motifModel;
