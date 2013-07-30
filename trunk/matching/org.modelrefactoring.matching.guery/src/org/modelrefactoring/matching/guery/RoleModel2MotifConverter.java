@@ -22,7 +22,7 @@ import org.modelrefactoring.guery.MotifModel;
 import org.modelrefactoring.guery.VertexSelection;
 import org.modelrefactoring.guery.graph.ContainmentEdge;
 
-public class RoleModel2Motif {
+public class RoleModel2MotifConverter {
 
 	public static final String INTERMEDIATE_IDENTIFIER	= "_";
 	
@@ -31,7 +31,7 @@ public class RoleModel2Motif {
 
 	private int maxPathLength;
 
-	public RoleModel2Motif(RoleModel roleModel){
+	public RoleModel2MotifConverter(RoleModel roleModel){
 		this.rolemodel = roleModel;
 	}
 
@@ -114,7 +114,7 @@ public class RoleModel2Motif {
 		connection.setFrom(getGueryRoleFromRole(motif, sourceRole));
 		connection.setPath(collaborationName);
 		int upperBound = targetMultiplicity.getUpperBound();
-		if(upperBound == -1 || Math.abs(upperBound - targetMultiplicity.getLowerBound()) > 1){
+		if((upperBound == -1 || Math.abs(upperBound - targetMultiplicity.getLowerBound()) > 1) && maxPathLength > 1){
 			connection.setMinLength(1);
 			connection.setMaxLength(1);
 			// create intermediate role
@@ -133,9 +133,9 @@ public class RoleModel2Motif {
 			intermediateEdge.getConnections().add(intermediateConnection);
 			motif.getEdgeSelections().add(intermediateEdge);
 		} else {
-			connection.setMinLength(targetMultiplicity.getLowerBound());
+			connection.setMinLength(1);
 			connection.setTo(getGueryRoleFromRole(motif, targetRole));
-			connection.setMaxLength(upperBound);
+			connection.setMaxLength(1);
 		}
 		Constraint edgeConstraint = GueryFactory.eINSTANCE.createConstraint();
 		if(collaboration instanceof RoleComposition){

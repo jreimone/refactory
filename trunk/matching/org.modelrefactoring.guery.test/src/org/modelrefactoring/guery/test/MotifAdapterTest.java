@@ -175,7 +175,7 @@ public class MotifAdapterTest {
 		EObject model = resource.getContents().get(0);
 		assertTrue("Given model must be an instance of MotifModel", model instanceof MotifModel);
 		Motif motif = ((MotifModel) model).getMotifs().get(0);
-		ModelMotifReader reader = new ModelMotifReader(motif);
+		ModelMotifReader<Vertex> reader = new ModelMotifReader<Vertex>(motif);
 		nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> gueryMotif;
 		try {
 			gueryMotif = reader.read(null);

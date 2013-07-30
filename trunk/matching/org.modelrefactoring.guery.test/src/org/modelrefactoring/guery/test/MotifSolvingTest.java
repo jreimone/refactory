@@ -12,7 +12,6 @@ import nz.ac.massey.cs.guery.ComputationMode;
 import nz.ac.massey.cs.guery.GQL;
 import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifInstance;
-import nz.ac.massey.cs.guery.ResultListener;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 
 import org.eclipse.emf.common.util.URI;
@@ -33,16 +32,13 @@ import org.modelrefactoring.guery.graph.EPackageGraphAdapter;
 import org.modelrefactoring.guery.graph.EReferenceEdge;
 import org.modelrefactoring.guery.graph.MetamodelVertex;
 import org.modelrefactoring.guery.resource.guery.mopp.GueryMetaInformation;
-import org.modelrefactoring.matching.guery.MotifInstance2RoleMapping;
-import org.modelrefactoring.matching.guery.RoleModel2Motif;
+import org.modelrefactoring.matching.guery.MotifInstance2RoleMappingConverter;
+import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 
 public class MotifSolvingTest extends MotifAdapterTest {
 	
-	public static final int THRESHOLD = 50;
-	
-	private static List<MotifInstance<MetamodelVertex, EReferenceEdge>> instancesGuery;
-	private static List<MotifInstance<MetamodelVertex, EReferenceEdge>> instancesModel;
-	
+	public static final int THRESHOLD 		= 50;
+	private static final int MAX_PATH_LENGTH	= 3;
 	
 //	@Test
 //	public void testPL0ZZZCompare(){
@@ -58,14 +54,18 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2Motifs(roleModel);
 		for (org.modelrefactoring.guery.Motif motif : motifs) {
 			String uriString = motif.eResource().getURI().toFileString();
-			testMotifOnMetamodelWithGUERYParsing(uriString, metamodel.eResource(), roleModel);
-			testMotifOnMetamodelWithEMFTextParsing(uriString, metamodel.eResource(), roleModel);
+			List<RoleMapping> gueryParsingRoleMappings = testMotifOnMetamodelWithGUERYParsing(uriString, metamodel.eResource(), roleModel);
+			List<RoleMapping> emfTextParsingRoleMappings = testMotifOnMetamodelWithEMFTextParsing(uriString, metamodel.eResource(), roleModel);
+			System.out.println("~~~~~~~~~ GUERY Parsing solving results:");
+			printRoleMappings(gueryParsingRoleMappings);
+			System.out.println("~~~~~~~~~ EMFText Parsing solving results:");
+			printRoleMappings(emfTextParsingRoleMappings);
 		}
 	}
 
 	private List<org.modelrefactoring.guery.Motif> convertRoleModel2Motifs(RoleModel roleModel) {
-		RoleModel2Motif converter = new RoleModel2Motif(roleModel);
-		MotifModel motifModel = converter.createMotifModel(3);
+		RoleModel2MotifConverter converter = new RoleModel2MotifConverter(roleModel);
+		MotifModel motifModel = converter.createMotifModel(MAX_PATH_LENGTH);
 		Resource roleModelResource = roleModel.eResource();
 		ResourceSet rs = roleModelResource.getResourceSet();
 		URI roleModelUri = roleModelResource.getURI();
@@ -102,7 +102,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		Resource pl0MMResource = pl0MM.eResource();
 		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
 		RoleModel roleModel = initRoleModel("rolemodels/ExtractXwithReferenceClass.rolestext");
-		instancesGuery = testMotifOnMetamodelWithGUERYParsing("queries/ExtractXwithReferenceClass.guery", pl0MMResource, roleModel);
+		List<RoleMapping> roleMappingsGuery = testMotifOnMetamodelWithGUERYParsing("queries/ExtractXwithReferenceClass.guery", pl0MMResource, roleModel);
 	}
 
 	
@@ -114,7 +114,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		Resource pl0MMResource = pl0MM.eResource();
 		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
 		RoleModel roleModel = initRoleModel("rolemodels/ExtractXwithReferenceClass.rolestext");
-		instancesModel = testMotifOnMetamodelWithEMFTextParsing("queries/ExtractXwithReferenceClass.guery", pl0MMResource, roleModel);
+		List<RoleMapping> roleMappingsEMFText = testMotifOnMetamodelWithEMFTextParsing("queries/ExtractXwithReferenceClass.guery", pl0MMResource, roleModel);
 	}
 	
 	private RoleModel initRoleModel(String path) {
@@ -129,12 +129,12 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		return roleModel;
 	}
 	
-	private List<MotifInstance<MetamodelVertex, EReferenceEdge>> testMotifOnMetamodelWithGUERYParsing(String motifPath, Resource metamodelResource, RoleModel roleModel){
+	private List<RoleMapping> testMotifOnMetamodelWithGUERYParsing(String motifPath, Resource metamodelResource, RoleModel roleModel){
 		Motif<MetamodelVertex, EReferenceEdge> motifByGuery = this.<MetamodelVertex>getMotifByGuery(motifPath);
 		return solveMotifOnResource(motifByGuery, metamodelResource, roleModel);
 	}
 	
-	private List<MotifInstance<MetamodelVertex, EReferenceEdge>> testMotifOnMetamodelWithEMFTextParsing(String motifPath, Resource metamodelResource, RoleModel roleModel){
+	private List<RoleMapping> testMotifOnMetamodelWithEMFTextParsing(String motifPath, Resource metamodelResource, RoleModel roleModel){
 		Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getMotifByModel(motifPath);
 		return solveMotifOnResource(motifByModel, metamodelResource, roleModel);
 	}
@@ -148,48 +148,24 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		System.out.println("compare them");
 	}
 
-	private List<MotifInstance<MetamodelVertex, EReferenceEdge>> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
-		final List<MotifInstance<MetamodelVertex, EReferenceEdge>> instances = new ArrayList<MotifInstance<MetamodelVertex, EReferenceEdge>>();
-		ResultListener<MetamodelVertex, EReferenceEdge> listener = new ResultListener<MetamodelVertex, EReferenceEdge>() {
-
-			private int count = 0;
-			
-			@Override
-			public boolean found(MotifInstance<MetamodelVertex, EReferenceEdge> instance) {
-				count++;
-				instances.add(instance);
-				printInstance(instance, roleModel);
-				if(count <= THRESHOLD){
-					return true;
-				}
-				return false;
-			}
-
-			@Override
-			public void progressMade(int progress, int total) {
-				System.out.println(progress + "/" + total);
-			}
-
-			@Override
-			public void done() {
-				System.out.println("done");
-			}
-		};
+	private List<RoleMapping> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
+		MotifInstance2RoleMappingConverter converter = new MotifInstance2RoleMappingConverter(roleModel, THRESHOLD);
 		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(1);
 		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(resource);
-		engine.query(graphAdapter, motif, listener, ComputationMode.ALL_INSTANCES);
-		return instances;
+		engine.query(graphAdapter, motif, converter, ComputationMode.ALL_INSTANCES);
+		List<RoleMapping> foundRoleMappings = converter.getFoundRoleMappings();
+		return foundRoleMappings;
 	}
 	
-	protected void printInstance(MotifInstance<MetamodelVertex, EReferenceEdge> instance, RoleModel roleModel) {
-		MotifInstance2RoleMapping conversion = new MotifInstance2RoleMapping(instance, roleModel);
-		RoleMapping roleMapping = conversion.createRoleMapping();
-		RolemappingPrinter2 printer = new RolemappingPrinter2(System.out, null);
-//		RolemappingPrinter printer = new RolemappingPrinter(System.out, null);
-		try {
-			printer.print(roleMapping);
-		} catch (IOException e) {
-			e.printStackTrace();
+	private void printRoleMappings(List<RoleMapping> roleMappings) {
+		for (RoleMapping roleMapping : roleMappings) {
+			RolemappingPrinter2 printer = new RolemappingPrinter2(System.out, null);
+//			RolemappingPrinter printer = new RolemappingPrinter(System.out, null);
+			try {
+				printer.print(roleMapping);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
