@@ -114,7 +114,7 @@ public class RoleModel2MotifConverter {
 		connection.setFrom(getGueryRoleFromRole(motif, sourceRole));
 		connection.setPath(collaborationName);
 		int upperBound = targetMultiplicity.getUpperBound();
-		if((upperBound == -1 || Math.abs(upperBound - targetMultiplicity.getLowerBound()) > 1) && maxPathLength > 1){
+		if((upperBound == -1 || Math.abs(upperBound - targetMultiplicity.getLowerBound()) > 1) && (maxPathLength > 1 || maxPathLength < 0)){
 			connection.setMinLength(1);
 			connection.setMaxLength(1);
 			// create intermediate role
@@ -124,7 +124,25 @@ public class RoleModel2MotifConverter {
 			connection.setTo(intermediateRole);
 			// create intermediate edge
 			Connection intermediateConnection = GueryFactory.eINSTANCE.createConnection();
-			intermediateConnection.setMaxLength(upperBound == -1 || upperBound > maxPathLength ? maxPathLength - 1 : upperBound - 1);
+			int max = 0;
+			if(upperBound == -1){
+				if(maxPathLength > 0){
+					max = maxPathLength - 1;
+				} else {
+					max = -1;
+				}
+			} else if(upperBound > 0){
+				if(maxPathLength > 0){
+					if(upperBound > maxPathLength){
+						max = maxPathLength - 1;
+					} else {
+						max = upperBound - 1;
+					}
+				} else {
+					max = upperBound - 1;
+				}
+			}
+			intermediateConnection.setMaxLength(max);
 			intermediateConnection.setFrom(intermediateRole);
 			intermediateConnection.setTo(getGueryRoleFromRole(motif, targetRole));
 			intermediateConnection.setMinLength(0);
