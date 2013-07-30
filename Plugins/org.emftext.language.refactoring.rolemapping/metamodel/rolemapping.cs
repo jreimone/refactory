@@ -55,14 +55,14 @@ RULES {
 	
 	RoleMapping ::= (comment[ML_COMMENT])?
 					(name['"','"'] | name[IDENT]) #1 "maps" #1 mappedRoleModel['<','>'] #1 "{" !1 
-					roleToMetaelement+ !0 !0  
-					"}" !0 !0 ;
+					(roleToMetaelement !1)+
+					!0 "}" !0 !0 ;
 	
-	ConcreteMapping ::= role[IDENT] ":=" metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? ("{" collaborationMappings collaborationMappings* "}")? ";" !0;
+	ConcreteMapping ::= role[IDENT] #1 ":=" #1 metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? (#1 "{" !1 collaborationMappings (!1 collaborationMappings)* !0 "}")? ";";
 	
-	CollaborationMapping ::= collaboration[IDENT] ":=" referenceMetaClassPair ("->" referenceMetaClassPair)* ";";
+	CollaborationMapping ::= collaboration[IDENT] #1 ":=" #1 referenceMetaClassPair (#1 "->" #1 referenceMetaClassPair)* ";";
 	
 	ReferenceMetaClassPair ::= reference[IDENT] (":" metaClass[IDENT])?;
 	
-	AttributeMapping ::= roleAttribute[IDENT] "->" classAttribute[IDENT];
+	AttributeMapping ::= roleAttribute[IDENT] #1 "->" #1 classAttribute[IDENT];
 }
