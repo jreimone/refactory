@@ -38,7 +38,7 @@ public class ModelMotifReader<Vertex extends EObjectVertex> implements MotifRead
 	 */
 	@Override
 	public Motif<Vertex, EReferenceEdge> read(InputStream source) throws MotifReaderException {
-		Motif<Vertex, EReferenceEdge> gueryMotif = new ModelMotifAdapter(motif);
+		Motif<Vertex, EReferenceEdge> gueryMotif = new ModelMotifAdapter<Vertex>(motif);
 		return gueryMotif;
 	}
 
