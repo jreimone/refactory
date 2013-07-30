@@ -157,12 +157,12 @@ public class MotifInstance2RoleMappingConverter implements ResultListener<Metamo
 
 	@Override
 	public void progressMade(int progress, int total) {
-		System.out.println(progress + "/" + total);
+//		System.out.println(progress + "/" + total);
 	}
 
 	@Override
 	public void done() {
-		System.out.println("done");
+//		System.out.println("done");
 	}
 	
 	public List<RoleMapping> getFoundRoleMappings(){
