@@ -162,7 +162,7 @@ public class MotifInstance2RoleMappingConverter implements ResultListener<Metamo
 
 	@Override
 	public void done() {
-//		System.out.println("done");
+		System.out.println("done");
 	}
 	
 	public List<RoleMapping> getFoundRoleMappings(){

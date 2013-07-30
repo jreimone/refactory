@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import nz.ac.massey.cs.guery.GQL;
 import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -37,7 +39,7 @@ import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 public class MotifSolvingTest extends MotifAdapterTest {
 	
 	private static final int THRESHOLD 		= 50;
-	private static final int MAX_PATH_LENGTH	= 1;
+	private static final int MAX_PATH_LENGTH	= 3;
 	
 	@Test
 	public void testPL0ExtractXwithReferenceClass(){
@@ -74,6 +76,8 @@ public class MotifSolvingTest extends MotifAdapterTest {
 			System.out.println("Results:\n");
 			List<String> printedGueryRoleMappings = printRoleMappings(gueryParsingRoleMappings);
 			List<String> printedEMFTextRoleMappings = printRoleMappings(emfTextParsingRoleMappings);
+			System.out.println("GUERY count: " + printedGueryRoleMappings.size());
+			System.out.println("EMFText count: " + printedEMFTextRoleMappings.size());
 			compare(printedGueryRoleMappings, printedEMFTextRoleMappings);
 		}
 	}
@@ -137,6 +141,13 @@ public class MotifSolvingTest extends MotifAdapterTest {
 //	}
 	
 	private void compare(List<String> gueryRoleMappings, List<String> emftextRoleMappings) {
+		assertEquals("Both result lists must have the same size", gueryRoleMappings.size(), emftextRoleMappings.size());
+		Collections.sort(gueryRoleMappings);
+		Collections.sort(emftextRoleMappings);
+		ArrayList<String> subtract = (ArrayList<String>) CollectionUtils.subtract(gueryRoleMappings, emftextRoleMappings);
+		ArrayList<String> subtract2 = (ArrayList<String>) CollectionUtils.subtract(emftextRoleMappings, gueryRoleMappings);
+		int index = emftextRoleMappings.indexOf(subtract2.get(0));
+		String string = gueryRoleMappings.get(index);
 		for (String gueryRoleMapping : gueryRoleMappings) {
 			System.out.println("GUERY: \n" + gueryRoleMapping);
 			assertTrue("The following RoleMapping resulting from GUERY parsing couldn't be solved with EMFText parsing:"
@@ -171,7 +182,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 			try {
 				printer.print(roleMapping);
 				out.close();
-				printedRoleMappings.add(out.toString());
+				printedRoleMappings.add(out.toString().trim());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
