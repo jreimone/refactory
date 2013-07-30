@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
-import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingPrinter;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingPrinter2;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -167,7 +167,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 
 			@Override
 			public void progressMade(int progress, int total) {
-				
+				System.out.println(progress + "/" + total);
 			}
 
 			@Override
@@ -184,8 +184,8 @@ public class MotifSolvingTest extends MotifAdapterTest {
 	protected void printInstance(MotifInstance<MetamodelVertex, EReferenceEdge> instance, RoleModel roleModel) {
 		MotifInstance2RoleMapping conversion = new MotifInstance2RoleMapping(instance, roleModel);
 		RoleMapping roleMapping = conversion.createRoleMapping();
-//		RolemappingPrinter2 printer = new RolemappingPrinter2(System.out, null);
-		RolemappingPrinter printer = new RolemappingPrinter(System.out, null);
+		RolemappingPrinter2 printer = new RolemappingPrinter2(System.out, null);
+//		RolemappingPrinter printer = new RolemappingPrinter(System.out, null);
 		try {
 			printer.print(roleMapping);
 		} catch (IOException e) {
