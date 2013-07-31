@@ -63,7 +63,12 @@ public class RoleMappingMappedRoleModelReferenceResolver implements org.emftext.
 	}
 
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.RoleModel element, org.emftext.language.refactoring.rolemapping.RoleMapping container, org.eclipse.emf.ecore.EReference reference) {
-		return EcoreUtil.getURI(element).toString();
+//		IRoleModelRegistry registry = IRoleModelRegistry.INSTANCE;
+//		if(registry.getRoleModelByName(element.getName()) != null){
+//			return element.getName();
+//		}
+//		return EcoreUtil.getURI(element).toString();
+		return element.getName();
 	}
 
 	public void setOptions(java.util.Map<?,?> options) {
