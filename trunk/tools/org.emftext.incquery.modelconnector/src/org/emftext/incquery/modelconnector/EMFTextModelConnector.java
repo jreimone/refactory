@@ -4,7 +4,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.incquery.runtime.api.IModelConnectorTypeEnum;
 import org.eclipse.incquery.tooling.ui.queryexplorer.adapters.EMFModelConnector;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.emftext.access.resource.IEditor;
 import org.emftext.access.resource.ILocationMap;
@@ -13,11 +12,12 @@ import org.emftext.access.resource.IResource;
 public class EMFTextModelConnector extends EMFModelConnector {
 
 	private IEditor emftextEditor;
+	private ITextEditor textEditor;
 
-	public EMFTextModelConnector(IEditorPart editorPart, IEditor emftextEditor) {
-		super(editorPart);
+	public EMFTextModelConnector(ITextEditor textEditor, IEditor emftextEditor) {
+		super(textEditor);
 		this.emftextEditor = emftextEditor;
-		this.editorPart = editorPart;
+		this.textEditor = textEditor;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class EMFTextModelConnector extends EMFModelConnector {
 			EObject eObject = (EObject) locationObjects[0];
 			int start = locationMap.getCharStart(eObject);
 			int end = locationMap.getCharEnd(eObject);
-			((ITextEditor) editorPart).selectAndReveal(start, end - start + 1);
+			textEditor.selectAndReveal(start, end - start + 1);
 		} 
 	}
 
