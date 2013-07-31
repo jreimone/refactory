@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +23,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.rolemapping.RolemappingFactory;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingPrinter2;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.junit.Test;
@@ -38,7 +40,7 @@ import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 
 public class MotifSolvingTest extends MotifAdapterTest {
 	
-	private static final int THRESHOLD 		= 50;
+	private static final int THRESHOLD 		= 1000;
 	private static final int MAX_PATH_LENGTH	= 3;
 	
 	@Test
@@ -73,12 +75,33 @@ public class MotifSolvingTest extends MotifAdapterTest {
 			String uriString = motif.eResource().getURI().toFileString();
 			List<RoleMapping> gueryParsingRoleMappings = testMotifOnMetamodelWithGUERYParsing(uriString, metamodel.eResource(), roleModel);
 			List<RoleMapping> emfTextParsingRoleMappings = testMotifOnMetamodelWithEMFTextParsing(uriString, metamodel.eResource(), roleModel);
+			saveRolemappings(gueryParsingRoleMappings, metamodel, "GUERY");
+			saveRolemappings(emfTextParsingRoleMappings, metamodel, "EMFText");
 			System.out.println("Results:\n");
 			List<String> printedGueryRoleMappings = printRoleMappings(gueryParsingRoleMappings);
 			List<String> printedEMFTextRoleMappings = printRoleMappings(emfTextParsingRoleMappings);
 			System.out.println("GUERY count: " + printedGueryRoleMappings.size());
 			System.out.println("EMFText count: " + printedEMFTextRoleMappings.size());
 			compare(printedGueryRoleMappings, printedEMFTextRoleMappings);
+		}
+	}
+
+	private void saveRolemappings(List<RoleMapping> parsedRoleMappings, EPackage metamodel, String type) {
+		RoleMappingModel roleMappingModel = RolemappingFactory.eINSTANCE.createRoleMappingModel();
+		roleMappingModel.setTargetMetamodel(metamodel);
+		roleMappingModel.getMappings().addAll(parsedRoleMappings);
+		File file = new File("rolemappings/" + metamodel.getName() + "_" + type + "." + new RolemappingMetaInformation().getSyntaxName());
+		if(file.exists()){
+			file.delete();
+		}
+		URI uri = URI.createFileURI(file.getAbsolutePath());
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource = rs.createResource(uri);
+		resource.getContents().add(roleMappingModel);
+		try {
+			resource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -135,33 +158,26 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		return solveMotifOnResource(motifByModel, metamodelResource, roleModel);
 	}
 	
-//	private void testMotifOnMetamodel(String motifPath, String metamodelPath){
-//		Resource resource = getMetamodel(metamodelPath);
-//		testMotifOnMetamodelWithGUERYParsing(motifPath, resource);
-//	}
-	
+	@SuppressWarnings("unchecked")
 	private void compare(List<String> gueryRoleMappings, List<String> emftextRoleMappings) {
 		assertEquals("Both result lists must have the same size", gueryRoleMappings.size(), emftextRoleMappings.size());
 		Collections.sort(gueryRoleMappings);
 		Collections.sort(emftextRoleMappings);
-		ArrayList<String> subtract = (ArrayList<String>) CollectionUtils.subtract(gueryRoleMappings, emftextRoleMappings);
-		ArrayList<String> subtract2 = (ArrayList<String>) CollectionUtils.subtract(emftextRoleMappings, gueryRoleMappings);
-		int index = emftextRoleMappings.indexOf(subtract2.get(0));
-		String string = gueryRoleMappings.get(index);
-		for (String gueryRoleMapping : gueryRoleMappings) {
-			System.out.println("GUERY: \n" + gueryRoleMapping);
-			assertTrue("The following RoleMapping resulting from GUERY parsing couldn't be solved with EMFText parsing:"
-					+ "\n"
-					+ gueryRoleMapping, emftextRoleMappings.contains(gueryRoleMapping));
-		}
-		for (String emftextRoleMapping : emftextRoleMappings) {
-			if(!gueryRoleMappings.contains(emftextRoleMapping)){
-				System.out.println("EMFText: \n" + emftextRoleMapping);
-				fail("The following RoleMapping resulting from EMFText parsing couldn't be solved with GUERY parsing:"
-						+ "\n"
-						+ emftextRoleMapping);
+		ArrayList<String> gueryAdditionals = (ArrayList<String>) CollectionUtils.subtract(gueryRoleMappings, emftextRoleMappings);
+		ArrayList<String> emftextAdditionals = (ArrayList<String>) CollectionUtils.subtract(emftextRoleMappings, gueryRoleMappings);
+		if(gueryAdditionals.size() != 0){
+			System.out.println("The following role mappings couldn't be solved by EMFText parsing:");
+			for (String string : gueryAdditionals) {
+				System.out.println("\n" + string);
 			}
 		}
+		if(emftextAdditionals.size() != 0){
+			System.out.println("The following role mappings couldn't be solved by GUERY parsing:");
+			for (String string : emftextAdditionals) {
+				System.out.println("\n" + string);
+			}
+		}
+		assertTrue("Solved role mappings are not equal", gueryAdditionals.size() == 0 && emftextAdditionals.size() == 0);
 	}
 
 	private List<RoleMapping> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
