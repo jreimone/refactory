@@ -24,6 +24,7 @@ OPTIONS {
 	overrideHoverTextProvider = "false";
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel";
 	overrideBuilder = "true";
+	editorName = "Role Model Text Editor";
 	overrideUIPluginXML = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";

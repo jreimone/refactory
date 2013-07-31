@@ -7,7 +7,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolestext" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" name="EMFText rolestext Editor">
+		<editor class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolestext" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" name="Role Model Text Editor">
 			<contentTypeBinding contentTypeId="org.emftext.language.refactoring.roles.resource.rolestext">
 			</contentTypeBinding>
 		</editor>
@@ -31,6 +31,10 @@
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
 		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" name="EMFText .rolestext file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewProjectWizard" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewProjectWizard" name="EMFText rolestext project" project="true">
 		</wizard>
 	</extension>
 	
@@ -66,6 +70,28 @@
 		</specification>
 		<specification annotationType="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences.declaration" label="Declarations (in .rolestext files)" textPreferenceKey="rolestext.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="rolestext.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="rolestext.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolestext.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolestext.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="rolestext.declarationTextStyle" textStylePreferenceValue="NONE">
 		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Rolestext" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.category" name="Rolestext">
+		</category>
+		<command categoryId="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.category" description="Toggle comment of the selected lines" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextToggleCommentHandler" commandId="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Rolestext Files" description="Editing Rolestext Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.emftext.language.refactoring.roles.resource.rolestext.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.emftext.language.refactoring.roles.resource.rolestext.EditorScope">
+		</key>
 	</extension>
 	
 </plugin>
