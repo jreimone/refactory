@@ -4,8 +4,7 @@ Bundle-Name: Test
 Bundle-SymbolicName: org.emftext.refactoring.smell.test
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.junit4,
- org.eclipse.emf.ecore,
+Require-Bundle: org.eclipse.emf.ecore,
  com.google.inject,
  org.eclipse.incquery.patternlanguage,
  org.eclipse.incquery.patternlanguage.emf,
@@ -25,4 +24,5 @@ Require-Bundle: org.junit4,
  org.eclipse.incquery.runtime,
  org.emftext.refactoring.smell.java.energy,
  org.emftext.language.refactoring.rolemapping.resource.rolemapping,
- org.eclipse.uml2.uml
+ org.eclipse.uml2.uml,
+ org.junit
