@@ -4,8 +4,7 @@ Bundle-Name: Rolemodelmatching
 Bundle-SymbolicName: org.emftext.refactoring.rolemodelmatching.test
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit4,
- org.eclipse.emf.ecore,
+Require-Bundle: org.eclipse.emf.ecore,
  org.emftext.language.refactoring.roles,
  org.emftext.language.refactoring.roles.resource.rolestext,
  org.emftext.language.ecore.resource.text,
@@ -13,7 +12,8 @@ Require-Bundle: org.junit4,
  org.eclipse.uml2.uml,
  org.emftext.sdk.concretesyntax,
  org.emftext.commons.antlr3_4_0,
- org.eclipse.bpmn2
+ org.eclipse.bpmn2,
+ org.junit
 Export-Package: org.emftext.refactoring.rolemodelmatching,
  org.emftext.refactoring.rolemodelmatching.combinatory,
  org.emftext.refactoring.rolemodelmatching.listener
