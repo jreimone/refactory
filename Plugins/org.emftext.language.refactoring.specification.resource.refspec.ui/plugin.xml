@@ -32,6 +32,10 @@
 		</category>
 		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.specification.resource.ui.RefspecNewFileWizard" id="org.emftext.language.refactoring.specification.resource.ui.RefspecNewFileWizard" name="EMFText .refspec file">
 		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.specification.resource.ui.RefspecNewProjectWizard" id="org.emftext.language.refactoring.specification.resource.ui.RefspecNewProjectWizard" name="EMFText refspec project" project="true">
+		</wizard>
 	</extension>
 	
 	<extension point="org.eclipse.ui.ide.markerResolution">
@@ -66,6 +70,28 @@
 		</specification>
 		<specification annotationType="org.emftext.language.refactoring.specification.resource.refspec.ui.occurences.declaration" label="Declarations (in .refspec files)" textPreferenceKey="refspec.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="refspec.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="refspec.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="refspec.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="refspec.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="refspec.declarationTextStyle" textStylePreferenceValue="NONE">
 		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Refspec" id="org.emftext.language.refactoring.specification.resource.refspec.ui.command.category" name="Refspec">
+		</category>
+		<command categoryId="org.emftext.language.refactoring.specification.resource.refspec.ui.command.category" description="Toggle comment of the selected lines" id="org.emftext.language.refactoring.specification.resource.refspec.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.emftext.language.refactoring.specification.resource.ui.RefspecToggleCommentHandler" commandId="org.emftext.language.refactoring.specification.resource.refspec.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Refspec Files" description="Editing Refspec Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.emftext.language.refactoring.specification.resource.refspec.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.emftext.language.refactoring.specification.resource.refspec.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.emftext.language.refactoring.specification.resource.refspec.EditorScope">
+		</key>
 	</extension>
 	
 </plugin>
