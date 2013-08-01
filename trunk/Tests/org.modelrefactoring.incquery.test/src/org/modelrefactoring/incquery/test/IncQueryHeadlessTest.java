@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetup;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
@@ -21,10 +22,14 @@ import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.extensibility.QuerySpecificationRegistry;
+import org.eclipse.incquery.tooling.core.generator.GeneratorModule;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.java.resource.java.util.JavaResourceUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 public class IncQueryHeadlessTest {
 
@@ -39,13 +44,14 @@ public class IncQueryHeadlessTest {
 
 	private static void initPattern() {
 		// Xtext resource magic -- this is needed for EIQs
-//		new EMFPatternLanguageStandaloneSetup()
-//		{
-//		 @Override
-//		 public Injector createInjector() {
-//		  return Guice.createInjector(new GeneratorModule());
-//		 }
-//		}.createInjectorAndDoEMFRegistration();
+		// use a trick to load Pattern models from a file
+		new EMFPatternLanguageStandaloneSetup()
+		{
+		 @Override
+		 public Injector createInjector() {
+		  return Guice.createInjector(new GeneratorModule());
+		 }
+		}.createInjectorAndDoEMFRegistration();
 		File file = new File("src/org/modelrefactoring/incquery/test/query/dataTransmissionWithoutCompression.eiq");
 		assertTrue("File must exist", file != null && file.exists());
 		ResourceSet rs = new ResourceSetImpl();
@@ -69,9 +75,9 @@ public class IncQueryHeadlessTest {
 		assertTrue("File must exist", file != null && file.exists());
 		javaResource = JavaResourceUtil.getResource(file);
 		ResourceSet rs = javaResource.getResourceSet();
-		Set<EObject> findUnresolvedProxies = JavaResourceUtil.findUnresolvedProxies(rs);
+//		Set<EObject> findUnresolvedProxies = JavaResourceUtil.findUnresolvedProxies(rs);
 		EcoreUtil.resolveAll(rs);
-		Set<EObject> findUnresolvedProxies2 = JavaResourceUtil.findUnresolvedProxies(rs);
+//		Set<EObject> findUnresolvedProxies2 = JavaResourceUtil.findUnresolvedProxies(rs);
 //		JavaResourceUtil.resolveAll(javaResource);
 		assertNotNull("Java resource " + file.getAbsolutePath() + " couldn't be loaded", javaResource);
 	}
