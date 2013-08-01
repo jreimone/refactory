@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import nz.ac.massey.cs.guery.ComputationMode;
@@ -40,6 +41,15 @@ import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 
 public class MotifSolvingTest extends MotifAdapterTest {
 	
+	private class RoleMappingComparator implements Comparator<RoleMapping> {
+		@Override
+		public int compare(RoleMapping rm1, RoleMapping rm2) {
+			String rm1String = printRoleMapping(rm1);
+			String rm2String = printRoleMapping(rm2);
+			return String.CASE_INSENSITIVE_ORDER.compare(rm1String, rm2String);
+		}
+	}
+
 	private static final int THRESHOLD 		= 1000;
 	private static final int MAX_PATH_LENGTH	= 3;
 	
@@ -75,6 +85,8 @@ public class MotifSolvingTest extends MotifAdapterTest {
 			String uriString = motif.eResource().getURI().toFileString();
 			List<RoleMapping> gueryParsingRoleMappings = testMotifOnMetamodelWithGUERYParsing(uriString, metamodel.eResource(), roleModel);
 			List<RoleMapping> emfTextParsingRoleMappings = testMotifOnMetamodelWithEMFTextParsing(uriString, metamodel.eResource(), roleModel);
+			Collections.sort(gueryParsingRoleMappings, new RoleMappingComparator());
+			Collections.sort(emfTextParsingRoleMappings, new RoleMappingComparator());
 			saveRolemappings(gueryParsingRoleMappings, metamodel, "GUERY");
 			saveRolemappings(emfTextParsingRoleMappings, metamodel, "EMFText");
 			System.out.println("Results:\n");
@@ -192,18 +204,23 @@ public class MotifSolvingTest extends MotifAdapterTest {
 	private List<String> printRoleMappings(List<RoleMapping> roleMappings) {
 		List<String> printedRoleMappings = new ArrayList<String>();
 		for (RoleMapping roleMapping : roleMappings) {
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			RolemappingPrinter2 printer = new RolemappingPrinter2(out, null);
-//			RolemappingPrinter printer = new RolemappingPrinter(out, null);
-			try {
-				printer.print(roleMapping);
-				out.close();
-				printedRoleMappings.add(out.toString().trim());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			String printedRoleMapping = printRoleMapping(roleMapping);
+			printedRoleMappings.add(printedRoleMapping);
 		}
 		return printedRoleMappings;
+	}
+	
+	private String printRoleMapping(RoleMapping roleMapping) {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		RolemappingPrinter2 printer = new RolemappingPrinter2(out, null);
+		try {
+			printer.print(roleMapping);
+			out.close();
+			return out.toString().trim();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private EPackage initMetamodel(String path){
