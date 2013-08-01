@@ -67,7 +67,7 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	};
 	Extract := ProcedureDeclaration;
 	NewContainer := ProcedureDeclaration {
-		moved := block:Block -> owner:ProcedureDeclaration;
+		moved := block:Block -> procedures:ProcedureDeclaration;
 	};
 	ContainerContainer := Block {
 		source := body:Body;
@@ -102,7 +102,7 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> then:Body -> statements:Assignment;
+		extracts := statements:IfStatement -> else:Body -> statements:Assignment;
 		referer := statements:CallStatement;
 	};
 	Extract := Assignment;
@@ -122,7 +122,7 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> then:Body -> statements:CallStatement;
+		extracts := statements:IfStatement -> else:Body -> statements:CallStatement;
 		referer := statements:CallStatement;
 	};
 	Extract := CallStatement;
@@ -142,7 +142,7 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> then:Body -> statements:Statement;
+		extracts := statements:IfStatement -> else:Body -> statements:Statement;
 		referer := statements:CallStatement;
 	};
 	Extract := Statement;
@@ -162,7 +162,7 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> then:Body -> statements:WhileStatement;
+		extracts := statements:IfStatement -> else:Body -> statements:WhileStatement;
 		referer := statements:CallStatement;
 	};
 	Extract := WhileStatement;
@@ -182,7 +182,7 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> then:Body;
+		extracts := statements:IfStatement -> else:Body;
 		referer := statements:CallStatement;
 	};
 	Extract := Body;
@@ -362,46 +362,6 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := ProcedureDeclaration {
-		extracts := block:Block -> allOwners:BlockOwner;
-		referer := block:Block;
-	};
-	Extract := BlockOwner;
-	NewContainer := ProcedureDeclaration {
-		moved := block:Block -> allOwners:BlockOwner;
-	};
-	ContainerContainer := Block {
-		source := procedures:ProcedureDeclaration;
-		target := procedures:ProcedureDeclaration;
-	};
-	MovedReference := Block {
-		containerRef := allOwners:ProcedureDeclaration;
-	};
-	
-	
-}
-
-"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
-	OrigContainer := ProcedureDeclaration {
-		extracts := block:Block -> allOwners:BlockOwner;
-		referer := block:Block;
-	};
-	Extract := BlockOwner;
-	NewContainer := ProcedureDeclaration {
-		moved := block:Block -> allOwners:BlockOwner;
-	};
-	ContainerContainer := Block {
-		source := procedures:ProcedureDeclaration;
-		target := procedures:ProcedureDeclaration;
-	};
-	MovedReference := Block {
-		containerRef := owner:ProcedureDeclaration;
-	};
-	
-	
-}
-
-"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
-	OrigContainer := ProcedureDeclaration {
 		extracts := block:Block -> body:Body -> statements:Assignment;
 		referer := block:Block;
 	};
@@ -682,12 +642,12 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := ProcedureDeclaration {
-		extracts := block:Block -> owner:ProcedureDeclaration;
+		extracts := block:Block -> owner:BlockOwner;
 		referer := block:Block;
 	};
-	Extract := ProcedureDeclaration;
+	Extract := BlockOwner;
 	NewContainer := ProcedureDeclaration {
-		moved := block:Block -> owner:ProcedureDeclaration;
+		moved := block:Block -> owner:BlockOwner;
 	};
 	ContainerContainer := Block {
 		source := procedures:ProcedureDeclaration;
@@ -702,12 +662,12 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := ProcedureDeclaration {
-		extracts := block:Block -> owner:ProcedureDeclaration;
+		extracts := block:Block -> owner:BlockOwner;
 		referer := block:Block;
 	};
-	Extract := ProcedureDeclaration;
+	Extract := BlockOwner;
 	NewContainer := ProcedureDeclaration {
-		moved := block:Block -> owner:ProcedureDeclaration;
+		moved := block:Block -> owner:BlockOwner;
 	};
 	ContainerContainer := Block {
 		source := procedures:ProcedureDeclaration;
@@ -748,6 +708,46 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	Extract := Program;
 	NewContainer := ProcedureDeclaration {
 		moved := block:Block -> owner:Program;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> procedures:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> procedures:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> procedures:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> procedures:ProcedureDeclaration;
 	};
 	ContainerContainer := Block {
 		source := procedures:ProcedureDeclaration;

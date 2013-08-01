@@ -1,8 +1,6 @@
-ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
-
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> else:Body -> statements:Assignment;
+		extracts := statements:IfStatement -> then:Body -> statements:Assignment;
 		referer := statements:CallStatement;
 	};
 	Extract := Assignment;
@@ -18,11 +16,9 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	};
 	
 	
-}
-
-"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+}"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> else:Body -> statements:CallStatement;
+		extracts := statements:IfStatement -> then:Body -> statements:CallStatement;
 		referer := statements:CallStatement;
 	};
 	Extract := CallStatement;
@@ -38,11 +34,9 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	};
 	
 	
-}
-
-"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+}"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> else:Body -> statements:Statement;
+		extracts := statements:IfStatement -> then:Body -> statements:Statement;
 		referer := statements:CallStatement;
 	};
 	Extract := Statement;
@@ -58,11 +52,9 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	};
 	
 	
-}
-
-"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+}"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> else:Body -> statements:WhileStatement;
+		extracts := statements:IfStatement -> then:Body -> statements:WhileStatement;
 		referer := statements:CallStatement;
 	};
 	Extract := WhileStatement;
@@ -78,11 +70,9 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	};
 	
 	
-}
-
-"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+}"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
-		extracts := statements:IfStatement -> else:Body;
+		extracts := statements:IfStatement -> then:Body;
 		referer := statements:CallStatement;
 	};
 	Extract := Body;
@@ -95,46 +85,6 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	};
 	MovedReference := CallStatement {
 		containerRef := procedure:ProcedureDeclaration;
-	};
-	
-	
-}
-
-"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
-	OrigContainer := ProcedureDeclaration {
-		extracts := block:Block -> allOwners:Program;
-		referer := block:Block;
-	};
-	Extract := Program;
-	NewContainer := ProcedureDeclaration {
-		moved := block:Block -> allOwners:Program;
-	};
-	ContainerContainer := Block {
-		source := procedures:ProcedureDeclaration;
-		target := procedures:ProcedureDeclaration;
-	};
-	MovedReference := Block {
-		containerRef := allOwners:ProcedureDeclaration;
-	};
-	
-	
-}
-
-"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
-	OrigContainer := ProcedureDeclaration {
-		extracts := block:Block -> allOwners:Program;
-		referer := block:Block;
-	};
-	Extract := Program;
-	NewContainer := ProcedureDeclaration {
-		moved := block:Block -> allOwners:Program;
-	};
-	ContainerContainer := Block {
-		source := procedures:ProcedureDeclaration;
-		target := procedures:ProcedureDeclaration;
-	};
-	MovedReference := Block {
-		containerRef := owner:ProcedureDeclaration;
 	};
 	
 	
