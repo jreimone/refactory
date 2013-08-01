@@ -161,8 +161,8 @@ public class MotifSolvingTest extends MotifAdapterTest {
 	@SuppressWarnings("unchecked")
 	private void compare(List<String> gueryRoleMappings, List<String> emftextRoleMappings) {
 		assertEquals("Both result lists must have the same size", gueryRoleMappings.size(), emftextRoleMappings.size());
-		Collections.sort(gueryRoleMappings);
-		Collections.sort(emftextRoleMappings);
+		Collections.sort(gueryRoleMappings, String.CASE_INSENSITIVE_ORDER);
+		Collections.sort(emftextRoleMappings, String.CASE_INSENSITIVE_ORDER);
 		ArrayList<String> gueryAdditionals = (ArrayList<String>) CollectionUtils.subtract(gueryRoleMappings, emftextRoleMappings);
 		ArrayList<String> emftextAdditionals = (ArrayList<String>) CollectionUtils.subtract(emftextRoleMappings, gueryRoleMappings);
 		if(gueryAdditionals.size() != 0){
