@@ -67,6 +67,46 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	};
 	Extract := ProcedureDeclaration;
 	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := body:Body;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := CallStatement {
+		containerRef := procedure:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := Body {
+		extracts := statements:CallStatement -> procedure:ProcedureDeclaration;
+		referer := statements:CallStatement;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := body:Body;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := CallStatement {
+		containerRef := procedure:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := Body {
+		extracts := statements:CallStatement -> procedure:ProcedureDeclaration;
+		referer := statements:CallStatement;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
 		moved := block:Block -> procedures:ProcedureDeclaration;
 	};
 	ContainerContainer := Block {
@@ -183,6 +223,106 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := Body {
 		extracts := statements:IfStatement -> else:Body;
+		referer := statements:CallStatement;
+	};
+	Extract := Body;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> body:Body;
+	};
+	ContainerContainer := Block {
+		source := body:Body;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := CallStatement {
+		containerRef := procedure:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := Body {
+		extracts := statements:IfStatement -> then:Body -> statements:Assignment;
+		referer := statements:CallStatement;
+	};
+	Extract := Assignment;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> body:Body -> statements:Assignment;
+	};
+	ContainerContainer := Block {
+		source := body:Body;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := CallStatement {
+		containerRef := procedure:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := Body {
+		extracts := statements:IfStatement -> then:Body -> statements:CallStatement;
+		referer := statements:CallStatement;
+	};
+	Extract := CallStatement;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> body:Body -> statements:CallStatement;
+	};
+	ContainerContainer := Block {
+		source := body:Body;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := CallStatement {
+		containerRef := procedure:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := Body {
+		extracts := statements:IfStatement -> then:Body -> statements:Statement;
+		referer := statements:CallStatement;
+	};
+	Extract := Statement;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> body:Body -> statements:Statement;
+	};
+	ContainerContainer := Block {
+		source := body:Body;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := CallStatement {
+		containerRef := procedure:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := Body {
+		extracts := statements:IfStatement -> then:Body -> statements:WhileStatement;
+		referer := statements:CallStatement;
+	};
+	Extract := WhileStatement;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> body:Body -> statements:WhileStatement;
+	};
+	ContainerContainer := Block {
+		source := body:Body;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := CallStatement {
+		containerRef := procedure:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := Body {
+		extracts := statements:IfStatement -> then:Body;
 		referer := statements:CallStatement;
 	};
 	Extract := Body;
@@ -362,6 +502,286 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 
 "ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
 	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:BlockOwner;
+		referer := block:Block;
+	};
+	Extract := BlockOwner;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:BlockOwner;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:BlockOwner;
+		referer := block:Block;
+	};
+	Extract := BlockOwner;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:BlockOwner;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:BlockOwner;
+		referer := block:Block;
+	};
+	Extract := BlockOwner;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:BlockOwner;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:BlockOwner;
+		referer := block:Block;
+	};
+	Extract := BlockOwner;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:BlockOwner;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> procedures:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> procedures:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:Program;
+		referer := block:Block;
+	};
+	Extract := Program;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:Program;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:Program;
+		referer := block:Block;
+	};
+	Extract := Program;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:Program;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:Program;
+		referer := block:Block;
+	};
+	Extract := Program;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:Program;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> allOwners:Program;
+		referer := block:Block;
+	};
+	Extract := Program;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:Program;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
 		extracts := block:Block -> body:Body -> statements:Assignment;
 		referer := block:Block;
 	};
@@ -647,6 +1067,46 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	};
 	Extract := BlockOwner;
 	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:BlockOwner;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:BlockOwner;
+		referer := block:Block;
+	};
+	Extract := BlockOwner;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:BlockOwner;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:BlockOwner;
+		referer := block:Block;
+	};
+	Extract := BlockOwner;
+	NewContainer := ProcedureDeclaration {
 		moved := block:Block -> owner:BlockOwner;
 	};
 	ContainerContainer := Block {
@@ -668,6 +1128,166 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	Extract := BlockOwner;
 	NewContainer := ProcedureDeclaration {
 		moved := block:Block -> owner:BlockOwner;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> procedures:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> procedures:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:Program;
+		referer := block:Block;
+	};
+	Extract := Program;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:Program;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> owner:Program;
+		referer := block:Block;
+	};
+	Extract := Program;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:Program;
 	};
 	ContainerContainer := Block {
 		source := procedures:ProcedureDeclaration;
@@ -708,6 +1328,86 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0>
 	Extract := Program;
 	NewContainer := ProcedureDeclaration {
 		moved := block:Block -> owner:Program;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> procedures:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> procedures:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> allOwners:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := owner:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> procedures:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:ProcedureDeclaration;
+	};
+	ContainerContainer := Block {
+		source := procedures:ProcedureDeclaration;
+		target := procedures:ProcedureDeclaration;
+	};
+	MovedReference := Block {
+		containerRef := allOwners:ProcedureDeclaration;
+	};
+	
+	
+}
+
+"ExtractXwithReferenceClass for pl0" maps <ExtractXwithReferenceClass> {
+	OrigContainer := ProcedureDeclaration {
+		extracts := block:Block -> procedures:ProcedureDeclaration;
+		referer := block:Block;
+	};
+	Extract := ProcedureDeclaration;
+	NewContainer := ProcedureDeclaration {
+		moved := block:Block -> owner:ProcedureDeclaration;
 	};
 	ContainerContainer := Block {
 		source := procedures:ProcedureDeclaration;

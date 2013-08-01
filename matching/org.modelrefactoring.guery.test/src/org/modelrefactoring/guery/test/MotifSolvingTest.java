@@ -93,8 +93,8 @@ public class MotifSolvingTest extends MotifAdapterTest {
 			System.out.println("Results:\n");
 			List<String> printedGueryRoleMappings = printRoleMappings(gueryParsingRoleMappings);
 			List<String> printedEMFTextRoleMappings = printRoleMappings(emfTextParsingRoleMappings);
-			System.out.println("GUERY count: " + printedGueryRoleMappings.size());
-			System.out.println("EMFText count: " + printedEMFTextRoleMappings.size());
+			System.out.println("GUERY count: " + gueryParsingRoleMappings.size());
+			System.out.println("EMFText count: " + emfTextParsingRoleMappings.size());
 			compare(printedGueryRoleMappings, printedEMFTextRoleMappings, metamodel, roleModel);
 		}
 	}
@@ -177,41 +177,33 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		assertEquals("Both result lists must have the same size", gueryRoleMappings.size(), emftextRoleMappings.size());
 		Collections.sort(gueryRoleMappings, String.CASE_INSENSITIVE_ORDER);
 		Collections.sort(emftextRoleMappings, String.CASE_INSENSITIVE_ORDER);
-		ArrayList<String> gueryAdditionals = (ArrayList<String>) CollectionUtils.subtract(gueryRoleMappings, emftextRoleMappings);
-		ArrayList<String> emftextAdditionals = (ArrayList<String>) CollectionUtils.subtract(emftextRoleMappings, gueryRoleMappings);
-		try {
-			File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_GUERY_" + "additionals" + "." + new RolemappingMetaInformation().getSyntaxName());
-			if(file.exists()){
-				file.delete();
-			}
-			FileWriter writer = new FileWriter(file, true);
-			if(gueryAdditionals.size() != 0){
-				System.out.println("The following role mappings couldn't be solved by EMFText parsing:");
-				for (String string : gueryAdditionals) {
-					System.out.println("\n" + string);
-					writer.append(string);
-				}
-			}
-			writer.flush();
-			writer.close();
-			file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_EMFText_" + "additionals" + "." + new RolemappingMetaInformation().getSyntaxName());
-			if(file.exists()){
-				file.delete();
-			}
-			writer = new FileWriter(file, true);
-			if(emftextAdditionals.size() != 0){
-				System.out.println("The following role mappings couldn't be solved by GUERY parsing:");
-				for (String string : emftextAdditionals) {
-					System.out.println("\n" + string);
-					writer.append(string);
-				}
-			}
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<String> gueryAdditionals = (List<String>) CollectionUtils.subtract(gueryRoleMappings, emftextRoleMappings);
+		List<String> emftextAdditionals = (List<String>) CollectionUtils.subtract(emftextRoleMappings, gueryRoleMappings);
+		printAndSaveAdditionals(gueryAdditionals, metamodel, roleModel, "GUERY");
+		printAndSaveAdditionals(emftextAdditionals, metamodel, roleModel, "EMFText");
 		assertTrue("Solved role mappings are not equal", gueryAdditionals.size() == 0 && emftextAdditionals.size() == 0);
+	}
+
+	private void printAndSaveAdditionals(List<String> additionals, EPackage metamodel, RoleModel roleModel, String type) {
+		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_" + type + "_" + "additionals" + "." + new RolemappingMetaInformation().getSyntaxName());
+		if(file.exists()){
+			file.delete();
+		}
+		if(additionals.size() != 0){
+			FileWriter writer;
+			try {
+				writer = new FileWriter(file, true);
+				System.out.println("The following role mappings couldn't be solved by " + type + " parsing: " + additionals.size());
+				for (String string : additionals) {
+//					System.out.println("\n" + string);
+					writer.append(string);
+				}
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private List<RoleMapping> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
