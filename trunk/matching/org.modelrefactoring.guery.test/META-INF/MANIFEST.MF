@@ -4,7 +4,7 @@ Bundle-Name: Test
 Bundle-SymbolicName: org.modelrefactoring.guery.test
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Jan Reimann
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit,
  org.emftext.language.pl0,
  org.emftext.language.pl0.resource.pl0,
@@ -18,4 +18,5 @@ Require-Bundle: org.junit,
  org.emftext.language.refactoring.rolemapping.resource.rolemapping,
  org.emftext.language.refactoring.roles.resource.rolestext,
  org.modelrefactoring.matching.guery,
- org.apache.commons.collections;bundle-version="3.2.0"
+ org.apache.commons.collections,
+ com.google.guava
