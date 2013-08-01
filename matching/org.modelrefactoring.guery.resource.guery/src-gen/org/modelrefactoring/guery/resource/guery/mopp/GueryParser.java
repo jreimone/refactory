@@ -1399,7 +1399,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     							completedElement(value, true);
                     						}
                     						collectHiddenTokens(element);
-                    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_2, a5_0, true);
+                    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_3, a5_0, true);
                     						copyLocalizationInfos(a5_0, element);
                     					}
                     				}
@@ -1442,7 +1442,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     	    							startIncompleteElement(element);
                     	    						}
                     	    						collectHiddenTokens(element);
-                    	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_3_0_0_1, null, true);
+                    	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_4_0_0_1, null, true);
                     	    						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
                     	    					}
 
@@ -1475,7 +1475,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     	    									completedElement(value, true);
                     	    								}
                     	    								collectHiddenTokens(element);
-                    	    								retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_3_0_0_2, a7_0, true);
+                    	    								retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_4_0_0_3, a7_0, true);
                     	    								copyLocalizationInfos(a7_0, element);
                     	    							}
                     	    						}
@@ -1863,7 +1863,7 @@ public class GueryParser extends GueryANTLRParserBase {
             	    							completedElement(value, true);
             	    						}
             	    						collectHiddenTokens(element);
-            	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_4_0_0_2, a3_0, true);
+            	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_4_0_0_3, a3_0, true);
             	    						copyLocalizationInfos(a3_0, element);
             	    					}
             	    				}
@@ -1958,7 +1958,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     							completedElement(value, true);
                     						}
                     						collectHiddenTokens(element);
-                    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_2, a5_0, true);
+                    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_3, a5_0, true);
                     						copyLocalizationInfos(a5_0, element);
                     					}
                     				}
@@ -2001,7 +2001,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     	    							startIncompleteElement(element);
                     	    						}
                     	    						collectHiddenTokens(element);
-                    	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_3_0_0_1, null, true);
+                    	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_4_0_0_1, null, true);
                     	    						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
                     	    					}
 
@@ -2034,7 +2034,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     	    									completedElement(value, true);
                     	    								}
                     	    								collectHiddenTokens(element);
-                    	    								retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_3_0_0_2, a7_0, true);
+                    	    								retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_4_0_0_3, a7_0, true);
                     	    								copyLocalizationInfos(a7_0, element);
                     	    							}
                     	    						}
@@ -2254,7 +2254,7 @@ public class GueryParser extends GueryANTLRParserBase {
             	    							completedElement(value, true);
             	    						}
             	    						collectHiddenTokens(element);
-            	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_4_0_0_2, a3_0, true);
+            	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_4_0_0_3, a3_0, true);
             	    						copyLocalizationInfos(a3_0, element);
             	    					}
             	    				}
@@ -2349,7 +2349,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     							completedElement(value, true);
                     						}
                     						collectHiddenTokens(element);
-                    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_5_0_0_2, a5_0, true);
+                    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_5_0_0_3, a5_0, true);
                     						copyLocalizationInfos(a5_0, element);
                     					}
                     				}
@@ -2392,7 +2392,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     	    							startIncompleteElement(element);
                     	    						}
                     	    						collectHiddenTokens(element);
-                    	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_5_0_0_3_0_0_1, null, true);
+                    	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_5_0_0_4_0_0_1, null, true);
                     	    						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
                     	    					}
 
@@ -2425,7 +2425,7 @@ public class GueryParser extends GueryANTLRParserBase {
                     	    									completedElement(value, true);
                     	    								}
                     	    								collectHiddenTokens(element);
-                    	    								retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_5_0_0_3_0_0_2, a7_0, true);
+                    	    								retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_5_0_0_4_0_0_3, a7_0, true);
                     	    								copyLocalizationInfos(a7_0, element);
                     	    							}
                     	    						}
@@ -3093,7 +3093,7 @@ public class GueryParser extends GueryANTLRParserBase {
             					completedElement(value, true);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_9_0_0_2, a1_0, true);
+            				retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_9_0_0_3, a1_0, true);
             				copyLocalizationInfos(a1_0, element);
             			}
             		}
@@ -3134,7 +3134,7 @@ public class GueryParser extends GueryANTLRParserBase {
             	    					startIncompleteElement(element);
             	    				}
             	    				collectHiddenTokens(element);
-            	    				retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_9_0_0_3_0_0_1, null, true);
+            	    				retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_9_0_0_4_0_0_1, null, true);
             	    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
             	    			}
 
@@ -3167,7 +3167,7 @@ public class GueryParser extends GueryANTLRParserBase {
             	    							completedElement(value, true);
             	    						}
             	    						collectHiddenTokens(element);
-            	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_9_0_0_3_0_0_2, a3_0, true);
+            	    						retrieveLayoutInformation(element, org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_9_0_0_4_0_0_3, a3_0, true);
             	    						copyLocalizationInfos(a3_0, element);
             	    					}
             	    				}

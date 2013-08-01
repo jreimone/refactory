@@ -161,37 +161,45 @@ public class GueryGrammarInformationProvider {
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_3_0_0_4_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("where", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_3_0_0_4_0_0_2 = INSTANCE.getGUERY_3_0_0_4_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_3_0_0_4_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_3_0_0_4_0_0_2 = INSTANCE.getGUERY_3_0_0_4_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_3_0_0_4_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_3_0_0_4_0_0_3 = INSTANCE.getGUERY_3_0_0_4_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_3_0_0_4_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getVertexSelection().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.VERTEX_SELECTION__CONSTRAINTS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConstraint(), }, 0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak GUERY_3_0_0_4_0_0_3_0_0_0 = INSTANCE.getGUERY_3_0_0_4_0_0_3_0_0_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak getGUERY_3_0_0_4_0_0_3_0_0_0() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak GUERY_3_0_0_4_0_0_4_0_0_0 = INSTANCE.getGUERY_3_0_0_4_0_0_4_0_0_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak getGUERY_3_0_0_4_0_0_4_0_0_0() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, 1);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword GUERY_3_0_0_4_0_0_3_0_0_1 = INSTANCE.getGUERY_3_0_0_4_0_0_3_0_0_1();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_3_0_0_4_0_0_3_0_0_1() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword GUERY_3_0_0_4_0_0_4_0_0_1 = INSTANCE.getGUERY_3_0_0_4_0_0_4_0_0_1();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_3_0_0_4_0_0_4_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("and", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_3_0_0_4_0_0_3_0_0_2 = INSTANCE.getGUERY_3_0_0_4_0_0_3_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_3_0_0_4_0_0_3_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_3_0_0_4_0_0_4_0_0_2 = INSTANCE.getGUERY_3_0_0_4_0_0_4_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_3_0_0_4_0_0_4_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_3_0_0_4_0_0_4_0_0_3 = INSTANCE.getGUERY_3_0_0_4_0_0_4_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_3_0_0_4_0_0_4_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getVertexSelection().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.VERTEX_SELECTION__CONSTRAINTS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConstraint(), }, 0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_3_0_0_4_0_0_3_0_0 = INSTANCE.getGUERY_3_0_0_4_0_0_3_0_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_3_0_0_4_0_0_3_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_3_0_0_4_0_0_3_0_0_0, GUERY_3_0_0_4_0_0_3_0_0_1, GUERY_3_0_0_4_0_0_3_0_0_2);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_3_0_0_4_0_0_4_0_0 = INSTANCE.getGUERY_3_0_0_4_0_0_4_0_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_3_0_0_4_0_0_4_0_0() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_3_0_0_4_0_0_4_0_0_0, GUERY_3_0_0_4_0_0_4_0_0_1, GUERY_3_0_0_4_0_0_4_0_0_2, GUERY_3_0_0_4_0_0_4_0_0_3);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_3_0_0_4_0_0_3_0 = INSTANCE.getGUERY_3_0_0_4_0_0_3_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_3_0_0_4_0_0_3_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryChoice(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_3_0_0_4_0_0_3_0_0);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_3_0_0_4_0_0_4_0 = INSTANCE.getGUERY_3_0_0_4_0_0_4_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_3_0_0_4_0_0_4_0() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryChoice(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_3_0_0_4_0_0_4_0_0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryCompound GUERY_3_0_0_4_0_0_3 = INSTANCE.getGUERY_3_0_0_4_0_0_3();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryCompound getGUERY_3_0_0_4_0_0_3() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryCompound(GUERY_3_0_0_4_0_0_3_0, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.STAR);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryCompound GUERY_3_0_0_4_0_0_4 = INSTANCE.getGUERY_3_0_0_4_0_0_4();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryCompound getGUERY_3_0_0_4_0_0_4() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryCompound(GUERY_3_0_0_4_0_0_4_0, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.STAR);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_3_0_0_4_0_0 = INSTANCE.getGUERY_3_0_0_4_0_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_3_0_0_4_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_3_0_0_4_0_0_0, GUERY_3_0_0_4_0_0_1, GUERY_3_0_0_4_0_0_2, GUERY_3_0_0_4_0_0_3);
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_3_0_0_4_0_0_0, GUERY_3_0_0_4_0_0_1, GUERY_3_0_0_4_0_0_2, GUERY_3_0_0_4_0_0_3, GUERY_3_0_0_4_0_0_4);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_3_0_0_4_0 = INSTANCE.getGUERY_3_0_0_4_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_3_0_0_4_0() {
@@ -269,13 +277,17 @@ public class GueryGrammarInformationProvider {
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_6_0_0_4_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("and", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_6_0_0_4_0_0_2 = INSTANCE.getGUERY_6_0_0_4_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_6_0_0_4_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_6_0_0_4_0_0_2 = INSTANCE.getGUERY_6_0_0_4_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_6_0_0_4_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_6_0_0_4_0_0_3 = INSTANCE.getGUERY_6_0_0_4_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_6_0_0_4_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConnectedBy().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.CONNECTED_BY__CONNECTIONS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConnection(), }, 0);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_6_0_0_4_0_0 = INSTANCE.getGUERY_6_0_0_4_0_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_6_0_0_4_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_6_0_0_4_0_0_0, GUERY_6_0_0_4_0_0_1, GUERY_6_0_0_4_0_0_2);
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_6_0_0_4_0_0_0, GUERY_6_0_0_4_0_0_1, GUERY_6_0_0_4_0_0_2, GUERY_6_0_0_4_0_0_3);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_6_0_0_4_0 = INSTANCE.getGUERY_6_0_0_4_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_6_0_0_4_0() {
@@ -293,37 +305,45 @@ public class GueryGrammarInformationProvider {
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_6_0_0_5_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("where", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_6_0_0_5_0_0_2 = INSTANCE.getGUERY_6_0_0_5_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_6_0_0_5_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_6_0_0_5_0_0_2 = INSTANCE.getGUERY_6_0_0_5_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_6_0_0_5_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_6_0_0_5_0_0_3 = INSTANCE.getGUERY_6_0_0_5_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_6_0_0_5_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConnectedBy().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.CONNECTED_BY__CONSTRAINTS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConstraint(), }, 0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak GUERY_6_0_0_5_0_0_3_0_0_0 = INSTANCE.getGUERY_6_0_0_5_0_0_3_0_0_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak getGUERY_6_0_0_5_0_0_3_0_0_0() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak GUERY_6_0_0_5_0_0_4_0_0_0 = INSTANCE.getGUERY_6_0_0_5_0_0_4_0_0_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak getGUERY_6_0_0_5_0_0_4_0_0_0() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, 1);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword GUERY_6_0_0_5_0_0_3_0_0_1 = INSTANCE.getGUERY_6_0_0_5_0_0_3_0_0_1();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_6_0_0_5_0_0_3_0_0_1() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword GUERY_6_0_0_5_0_0_4_0_0_1 = INSTANCE.getGUERY_6_0_0_5_0_0_4_0_0_1();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_6_0_0_5_0_0_4_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("and", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_6_0_0_5_0_0_3_0_0_2 = INSTANCE.getGUERY_6_0_0_5_0_0_3_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_6_0_0_5_0_0_3_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_6_0_0_5_0_0_4_0_0_2 = INSTANCE.getGUERY_6_0_0_5_0_0_4_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_6_0_0_5_0_0_4_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_6_0_0_5_0_0_4_0_0_3 = INSTANCE.getGUERY_6_0_0_5_0_0_4_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_6_0_0_5_0_0_4_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConnectedBy().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.CONNECTED_BY__CONSTRAINTS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConstraint(), }, 0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_6_0_0_5_0_0_3_0_0 = INSTANCE.getGUERY_6_0_0_5_0_0_3_0_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_6_0_0_5_0_0_3_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_6_0_0_5_0_0_3_0_0_0, GUERY_6_0_0_5_0_0_3_0_0_1, GUERY_6_0_0_5_0_0_3_0_0_2);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_6_0_0_5_0_0_4_0_0 = INSTANCE.getGUERY_6_0_0_5_0_0_4_0_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_6_0_0_5_0_0_4_0_0() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_6_0_0_5_0_0_4_0_0_0, GUERY_6_0_0_5_0_0_4_0_0_1, GUERY_6_0_0_5_0_0_4_0_0_2, GUERY_6_0_0_5_0_0_4_0_0_3);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_6_0_0_5_0_0_3_0 = INSTANCE.getGUERY_6_0_0_5_0_0_3_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_6_0_0_5_0_0_3_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryChoice(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_6_0_0_5_0_0_3_0_0);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_6_0_0_5_0_0_4_0 = INSTANCE.getGUERY_6_0_0_5_0_0_4_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_6_0_0_5_0_0_4_0() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryChoice(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_6_0_0_5_0_0_4_0_0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryCompound GUERY_6_0_0_5_0_0_3 = INSTANCE.getGUERY_6_0_0_5_0_0_3();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryCompound getGUERY_6_0_0_5_0_0_3() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryCompound(GUERY_6_0_0_5_0_0_3_0, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.STAR);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryCompound GUERY_6_0_0_5_0_0_4 = INSTANCE.getGUERY_6_0_0_5_0_0_4();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryCompound getGUERY_6_0_0_5_0_0_4() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryCompound(GUERY_6_0_0_5_0_0_4_0, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.STAR);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_6_0_0_5_0_0 = INSTANCE.getGUERY_6_0_0_5_0_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_6_0_0_5_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_6_0_0_5_0_0_0, GUERY_6_0_0_5_0_0_1, GUERY_6_0_0_5_0_0_2, GUERY_6_0_0_5_0_0_3);
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_6_0_0_5_0_0_0, GUERY_6_0_0_5_0_0_1, GUERY_6_0_0_5_0_0_2, GUERY_6_0_0_5_0_0_3, GUERY_6_0_0_5_0_0_4);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_6_0_0_5_0 = INSTANCE.getGUERY_6_0_0_5_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_6_0_0_5_0() {
@@ -369,13 +389,17 @@ public class GueryGrammarInformationProvider {
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_7_0_0_4_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("and", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_7_0_0_4_0_0_2 = INSTANCE.getGUERY_7_0_0_4_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_7_0_0_4_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_7_0_0_4_0_0_2 = INSTANCE.getGUERY_7_0_0_4_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_7_0_0_4_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_7_0_0_4_0_0_3 = INSTANCE.getGUERY_7_0_0_4_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_7_0_0_4_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getNotConnectedBy().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.NOT_CONNECTED_BY__CONNECTIONS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConnection(), }, 0);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_7_0_0_4_0_0 = INSTANCE.getGUERY_7_0_0_4_0_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_7_0_0_4_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_7_0_0_4_0_0_0, GUERY_7_0_0_4_0_0_1, GUERY_7_0_0_4_0_0_2);
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_7_0_0_4_0_0_0, GUERY_7_0_0_4_0_0_1, GUERY_7_0_0_4_0_0_2, GUERY_7_0_0_4_0_0_3);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_7_0_0_4_0 = INSTANCE.getGUERY_7_0_0_4_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_7_0_0_4_0() {
@@ -393,37 +417,45 @@ public class GueryGrammarInformationProvider {
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_7_0_0_5_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("where", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_7_0_0_5_0_0_2 = INSTANCE.getGUERY_7_0_0_5_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_7_0_0_5_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_7_0_0_5_0_0_2 = INSTANCE.getGUERY_7_0_0_5_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_7_0_0_5_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_7_0_0_5_0_0_3 = INSTANCE.getGUERY_7_0_0_5_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_7_0_0_5_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getNotConnectedBy().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.NOT_CONNECTED_BY__CONSTRAINTS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConstraint(), }, 0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak GUERY_7_0_0_5_0_0_3_0_0_0 = INSTANCE.getGUERY_7_0_0_5_0_0_3_0_0_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak getGUERY_7_0_0_5_0_0_3_0_0_0() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak GUERY_7_0_0_5_0_0_4_0_0_0 = INSTANCE.getGUERY_7_0_0_5_0_0_4_0_0_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak getGUERY_7_0_0_5_0_0_4_0_0_0() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, 1);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword GUERY_7_0_0_5_0_0_3_0_0_1 = INSTANCE.getGUERY_7_0_0_5_0_0_3_0_0_1();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_7_0_0_5_0_0_3_0_0_1() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword GUERY_7_0_0_5_0_0_4_0_0_1 = INSTANCE.getGUERY_7_0_0_5_0_0_4_0_0_1();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_7_0_0_5_0_0_4_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("and", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_7_0_0_5_0_0_3_0_0_2 = INSTANCE.getGUERY_7_0_0_5_0_0_3_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_7_0_0_5_0_0_3_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_7_0_0_5_0_0_4_0_0_2 = INSTANCE.getGUERY_7_0_0_5_0_0_4_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_7_0_0_5_0_0_4_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_7_0_0_5_0_0_4_0_0_3 = INSTANCE.getGUERY_7_0_0_5_0_0_4_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_7_0_0_5_0_0_4_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getNotConnectedBy().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.NOT_CONNECTED_BY__CONSTRAINTS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConstraint(), }, 0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_7_0_0_5_0_0_3_0_0 = INSTANCE.getGUERY_7_0_0_5_0_0_3_0_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_7_0_0_5_0_0_3_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_7_0_0_5_0_0_3_0_0_0, GUERY_7_0_0_5_0_0_3_0_0_1, GUERY_7_0_0_5_0_0_3_0_0_2);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_7_0_0_5_0_0_4_0_0 = INSTANCE.getGUERY_7_0_0_5_0_0_4_0_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_7_0_0_5_0_0_4_0_0() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_7_0_0_5_0_0_4_0_0_0, GUERY_7_0_0_5_0_0_4_0_0_1, GUERY_7_0_0_5_0_0_4_0_0_2, GUERY_7_0_0_5_0_0_4_0_0_3);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_7_0_0_5_0_0_3_0 = INSTANCE.getGUERY_7_0_0_5_0_0_3_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_7_0_0_5_0_0_3_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryChoice(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_7_0_0_5_0_0_3_0_0);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_7_0_0_5_0_0_4_0 = INSTANCE.getGUERY_7_0_0_5_0_0_4_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_7_0_0_5_0_0_4_0() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryChoice(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_7_0_0_5_0_0_4_0_0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryCompound GUERY_7_0_0_5_0_0_3 = INSTANCE.getGUERY_7_0_0_5_0_0_3();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryCompound getGUERY_7_0_0_5_0_0_3() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryCompound(GUERY_7_0_0_5_0_0_3_0, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.STAR);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryCompound GUERY_7_0_0_5_0_0_4 = INSTANCE.getGUERY_7_0_0_5_0_0_4();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryCompound getGUERY_7_0_0_5_0_0_4() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryCompound(GUERY_7_0_0_5_0_0_4_0, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.STAR);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_7_0_0_5_0_0 = INSTANCE.getGUERY_7_0_0_5_0_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_7_0_0_5_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_7_0_0_5_0_0_0, GUERY_7_0_0_5_0_0_1, GUERY_7_0_0_5_0_0_2, GUERY_7_0_0_5_0_0_3);
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_7_0_0_5_0_0_0, GUERY_7_0_0_5_0_0_1, GUERY_7_0_0_5_0_0_2, GUERY_7_0_0_5_0_0_3, GUERY_7_0_0_5_0_0_4);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_7_0_0_5_0 = INSTANCE.getGUERY_7_0_0_5_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_7_0_0_5_0() {
@@ -529,37 +561,45 @@ public class GueryGrammarInformationProvider {
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_9_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("group by", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_9_0_0_2 = INSTANCE.getGUERY_9_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_9_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_9_0_0_2 = INSTANCE.getGUERY_9_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_9_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_9_0_0_3 = INSTANCE.getGUERY_9_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_9_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getGrouping().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.GROUPING__CONSTRAINTS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConstraint(), }, 0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak GUERY_9_0_0_3_0_0_0 = INSTANCE.getGUERY_9_0_0_3_0_0_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak getGUERY_9_0_0_3_0_0_0() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak GUERY_9_0_0_4_0_0_0 = INSTANCE.getGUERY_9_0_0_4_0_0_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak getGUERY_9_0_0_4_0_0_0() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryLineBreak(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, 1);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword GUERY_9_0_0_3_0_0_1 = INSTANCE.getGUERY_9_0_0_3_0_0_1();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_9_0_0_3_0_0_1() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword GUERY_9_0_0_4_0_0_1 = INSTANCE.getGUERY_9_0_0_4_0_0_1();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword getGUERY_9_0_0_4_0_0_1() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryKeyword("and", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_9_0_0_3_0_0_2 = INSTANCE.getGUERY_9_0_0_3_0_0_2();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_9_0_0_3_0_0_2() {
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace GUERY_9_0_0_4_0_0_2 = INSTANCE.getGUERY_9_0_0_4_0_0_2();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace getGUERY_9_0_0_4_0_0_2() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryWhiteSpace(1, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE);
+	}
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryContainment GUERY_9_0_0_4_0_0_3 = INSTANCE.getGUERY_9_0_0_4_0_0_3();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryContainment getGUERY_9_0_0_4_0_0_3() {
 		return new org.modelrefactoring.guery.resource.guery.grammar.GueryContainment(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getGrouping().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.GROUPING__CONSTRAINTS), org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.modelrefactoring.guery.GueryPackage.eINSTANCE.getConstraint(), }, 0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_9_0_0_3_0_0 = INSTANCE.getGUERY_9_0_0_3_0_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_9_0_0_3_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_9_0_0_3_0_0_0, GUERY_9_0_0_3_0_0_1, GUERY_9_0_0_3_0_0_2);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_9_0_0_4_0_0 = INSTANCE.getGUERY_9_0_0_4_0_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_9_0_0_4_0_0() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_9_0_0_4_0_0_0, GUERY_9_0_0_4_0_0_1, GUERY_9_0_0_4_0_0_2, GUERY_9_0_0_4_0_0_3);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_9_0_0_3_0 = INSTANCE.getGUERY_9_0_0_3_0();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_9_0_0_3_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryChoice(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_9_0_0_3_0_0);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_9_0_0_4_0 = INSTANCE.getGUERY_9_0_0_4_0();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_9_0_0_4_0() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryChoice(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_9_0_0_4_0_0);
 	}
-	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryCompound GUERY_9_0_0_3 = INSTANCE.getGUERY_9_0_0_3();
-	private org.modelrefactoring.guery.resource.guery.grammar.GueryCompound getGUERY_9_0_0_3() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryCompound(GUERY_9_0_0_3_0, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.STAR);
+	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryCompound GUERY_9_0_0_4 = INSTANCE.getGUERY_9_0_0_4();
+	private org.modelrefactoring.guery.resource.guery.grammar.GueryCompound getGUERY_9_0_0_4() {
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryCompound(GUERY_9_0_0_4_0, org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.STAR);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_9_0_0 = INSTANCE.getGUERY_9_0_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_9_0_0() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_9_0_0_0, GUERY_9_0_0_1, GUERY_9_0_0_2, GUERY_9_0_0_3);
+		return new org.modelrefactoring.guery.resource.guery.grammar.GuerySequence(org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, GUERY_9_0_0_0, GUERY_9_0_0_1, GUERY_9_0_0_2, GUERY_9_0_0_3, GUERY_9_0_0_4);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryChoice GUERY_9_0 = INSTANCE.getGUERY_9_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryChoice getGUERY_9_0() {

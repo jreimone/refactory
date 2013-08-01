@@ -33,10 +33,10 @@ public class GueryFollowSetProvider {
 		TERMINALS[9] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_3_0_0_0);
 		TERMINALS[10] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_1);
 		TERMINALS[11] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedStructuralFeature(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_5_0_0_0);
-		TERMINALS[12] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_3_0_0_1);
-		TERMINALS[13] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_3_0_0_1);
-		TERMINALS[14] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_5_0_0_3_0_0_1);
-		TERMINALS[15] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_9_0_0_3_0_0_1);
+		TERMINALS[12] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_3_0_0_4_0_0_4_0_0_1);
+		TERMINALS[13] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_4_0_0_1);
+		TERMINALS[14] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_7_0_0_5_0_0_4_0_0_1);
+		TERMINALS[15] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_9_0_0_4_0_0_1);
 		TERMINALS[16] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedStructuralFeature(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_8_0_0_0);
 		TERMINALS[17] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_4_0_0_1);
 		TERMINALS[18] = new org.modelrefactoring.guery.resource.guery.mopp.GueryExpectedCsString(org.modelrefactoring.guery.resource.guery.grammar.GueryGrammarInformationProvider.GUERY_6_0_0_5_0_0_1);
