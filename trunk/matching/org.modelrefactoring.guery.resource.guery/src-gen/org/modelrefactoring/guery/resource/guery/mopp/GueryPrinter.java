@@ -139,7 +139,6 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		java.io.PrintWriter out = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.BufferedOutputStream(outputStream), encoding));
 		doPrint(element, out, "");
 		out.flush();
-		out.close();
 	}
 	
 	public void print_org_modelrefactoring_guery_MotifModel(org.modelrefactoring.guery.MotifModel element, String outertab, java.io.PrintWriter out) {
@@ -459,6 +458,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("where");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("constraints");
@@ -504,6 +504,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("and");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("constraints");
@@ -661,6 +662,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("and");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("connections");
@@ -692,6 +694,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("where");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("constraints");
@@ -737,6 +740,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("and");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("constraints");
@@ -840,6 +844,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("and");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("connections");
@@ -871,6 +876,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("where");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("constraints");
@@ -916,6 +922,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("and");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("constraints");
@@ -1092,6 +1099,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("group by");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("constraints");
@@ -1137,6 +1145,7 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("and");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("constraints");
