@@ -14,5 +14,6 @@ Require-Bundle: org.junit,
  org.eclipse.incquery.runtime,
  org.emftext.language.java,
  org.emftext.language.java.resource,
- org.emftext.language.java.resource.java
+ org.emftext.language.java.resource.java,
+ org.eclipse.incquery.tooling.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
