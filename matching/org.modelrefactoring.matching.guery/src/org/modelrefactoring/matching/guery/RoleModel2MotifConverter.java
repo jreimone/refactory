@@ -143,6 +143,7 @@ public class RoleModel2MotifConverter {
 				}
 			}
 			intermediateConnection.setMaxLength(max);
+			intermediateConnection.setComputeAll(true);
 			intermediateConnection.setFrom(intermediateRole);
 			intermediateConnection.setTo(getGueryRoleFromRole(motif, targetRole));
 			intermediateConnection.setMinLength(0);
