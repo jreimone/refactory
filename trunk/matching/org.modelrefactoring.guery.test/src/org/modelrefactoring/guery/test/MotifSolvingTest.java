@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +41,7 @@ import org.modelrefactoring.matching.guery.MotifInstance2RoleMappingConverter;
 import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 
 public class MotifSolvingTest extends MotifAdapterTest {
-	
+
 	private class RoleMappingComparator implements Comparator<RoleMapping> {
 		@Override
 		public int compare(RoleMapping rm1, RoleMapping rm2) {
@@ -52,7 +53,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 
 	private static final int THRESHOLD 		= 1000;
 	private static final int MAX_PATH_LENGTH	= 3;
-	
+
 	@Test
 	public void testPL0ExtractXwithReferenceClass(){
 		EPackage pl0MM = PL0Package.eINSTANCE;
@@ -62,7 +63,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		RoleModel roleModel = initRoleModel("rolemodels/ExtractXwithReferenceClass.rolestext");
 		testGueryAndEMFTextParsing(roleModel, pl0MM);
 	}
-	
+
 	@Test
 	public void testSimpleMM(){
 		testGueryAndEMFTextParsing("rolemodels/ExtractXwithReferenceClass.rolestext", "metamodels/EExtractXWithReferenceClass.ecore");
@@ -94,7 +95,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 			List<String> printedEMFTextRoleMappings = printRoleMappings(emfTextParsingRoleMappings);
 			System.out.println("GUERY count: " + printedGueryRoleMappings.size());
 			System.out.println("EMFText count: " + printedEMFTextRoleMappings.size());
-			compare(printedGueryRoleMappings, printedEMFTextRoleMappings);
+			compare(printedGueryRoleMappings, printedEMFTextRoleMappings, metamodel, roleModel);
 		}
 	}
 
@@ -102,7 +103,8 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		RoleMappingModel roleMappingModel = RolemappingFactory.eINSTANCE.createRoleMappingModel();
 		roleMappingModel.setTargetMetamodel(metamodel);
 		roleMappingModel.getMappings().addAll(parsedRoleMappings);
-		File file = new File("rolemappings/" + metamodel.getName() + "_" + type + "." + new RolemappingMetaInformation().getSyntaxName());
+		RoleModel roleModel = parsedRoleMappings.get(0).getMappedRoleModel();
+		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_" + type + "." + new RolemappingMetaInformation().getSyntaxName());
 		if(file.exists()){
 			file.delete();
 		}
@@ -147,7 +149,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		}
 		return returnedMotifs;
 	}
-	
+
 	private RoleModel initRoleModel(String path) {
 		File roleModelFile = new File(path);
 		URI uri = URI.createFileURI(roleModelFile.getAbsolutePath());
@@ -159,35 +161,55 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		RoleModel roleModel = (RoleModel) model;
 		return roleModel;
 	}
-	
+
 	private List<RoleMapping> testMotifOnMetamodelWithGUERYParsing(String motifPath, Resource metamodelResource, RoleModel roleModel){
 		Motif<MetamodelVertex, EReferenceEdge> motifByGuery = this.<MetamodelVertex>getMotifByGuery(motifPath);
 		return solveMotifOnResource(motifByGuery, metamodelResource, roleModel);
 	}
-	
+
 	private List<RoleMapping> testMotifOnMetamodelWithEMFTextParsing(String motifPath, Resource metamodelResource, RoleModel roleModel){
 		Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getMotifByModel(motifPath);
 		return solveMotifOnResource(motifByModel, metamodelResource, roleModel);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	private void compare(List<String> gueryRoleMappings, List<String> emftextRoleMappings) {
+	private void compare(List<String> gueryRoleMappings, List<String> emftextRoleMappings, EPackage metamodel, RoleModel roleModel) {
 		assertEquals("Both result lists must have the same size", gueryRoleMappings.size(), emftextRoleMappings.size());
 		Collections.sort(gueryRoleMappings, String.CASE_INSENSITIVE_ORDER);
 		Collections.sort(emftextRoleMappings, String.CASE_INSENSITIVE_ORDER);
 		ArrayList<String> gueryAdditionals = (ArrayList<String>) CollectionUtils.subtract(gueryRoleMappings, emftextRoleMappings);
 		ArrayList<String> emftextAdditionals = (ArrayList<String>) CollectionUtils.subtract(emftextRoleMappings, gueryRoleMappings);
-		if(gueryAdditionals.size() != 0){
-			System.out.println("The following role mappings couldn't be solved by EMFText parsing:");
-			for (String string : gueryAdditionals) {
-				System.out.println("\n" + string);
+		try {
+			File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_GUERY_" + "additionals" + "." + new RolemappingMetaInformation().getSyntaxName());
+			if(file.exists()){
+				file.delete();
 			}
-		}
-		if(emftextAdditionals.size() != 0){
-			System.out.println("The following role mappings couldn't be solved by GUERY parsing:");
-			for (String string : emftextAdditionals) {
-				System.out.println("\n" + string);
+			FileWriter writer = new FileWriter(file, true);
+			if(gueryAdditionals.size() != 0){
+				System.out.println("The following role mappings couldn't be solved by EMFText parsing:");
+				for (String string : gueryAdditionals) {
+					System.out.println("\n" + string);
+					writer.append(string);
+				}
 			}
+			writer.flush();
+			writer.close();
+			file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_EMFText_" + "additionals" + "." + new RolemappingMetaInformation().getSyntaxName());
+			if(file.exists()){
+				file.delete();
+			}
+			writer = new FileWriter(file, true);
+			if(emftextAdditionals.size() != 0){
+				System.out.println("The following role mappings couldn't be solved by GUERY parsing:");
+				for (String string : emftextAdditionals) {
+					System.out.println("\n" + string);
+					writer.append(string);
+				}
+			}
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		assertTrue("Solved role mappings are not equal", gueryAdditionals.size() == 0 && emftextAdditionals.size() == 0);
 	}
@@ -200,7 +222,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		List<RoleMapping> foundRoleMappings = converter.getFoundRoleMappings();
 		return foundRoleMappings;
 	}
-	
+
 	private List<String> printRoleMappings(List<RoleMapping> roleMappings) {
 		List<String> printedRoleMappings = new ArrayList<String>();
 		for (RoleMapping roleMapping : roleMappings) {
@@ -209,7 +231,7 @@ public class MotifSolvingTest extends MotifAdapterTest {
 		}
 		return printedRoleMappings;
 	}
-	
+
 	private String printRoleMapping(RoleMapping roleMapping) {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		RolemappingPrinter2 printer = new RolemappingPrinter2(out, null);
