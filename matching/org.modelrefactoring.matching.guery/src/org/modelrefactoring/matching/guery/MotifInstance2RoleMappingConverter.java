@@ -149,10 +149,10 @@ public class MotifInstance2RoleMappingConverter implements ResultListener<Metamo
 		if(roleMapping != null){
 			foundRoleMappings.add(roleMapping);
 		}
-		if(count <= maxResultCount){
-			return true;
+		if(count == maxResultCount){
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
