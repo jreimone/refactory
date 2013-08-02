@@ -19,6 +19,13 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downlo
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library.editor_2.5.0.v20130610-0406.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library.edit_2.5.0.v20130610-0406.jar
 
+// EMF Validation (core plugin and feature)
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.7.0.201306111341.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ocl_1.4.0.201306111341.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.7.0.201306111341.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.201306111341.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/features/org.eclipse.emf.validation_1.7.0.201306111341/feature.xml
+
 //EMFText (required to generate languages)
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
 get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
@@ -47,16 +54,16 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.inject_3.0.0.v201203062045.jar
 
 // Xtext
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xtend_1.4.0.v201306110406.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xpand_1.4.0.v201306110406.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xtend.typesystem.emf_1.4.0.v201306110406.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/javax.inject.source_1.0.0.v20091030.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-runtime-2.4.2.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-SDK-2.4.2.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe.core_1.2.1.v201303191413.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe.utils_1.3.0.v201303191413.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe2.runtime_2.4.0.v201303191413.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.apache.commons.cli_1.2.0.v201105210650.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xtend_1.4.0.v201306110406.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xpand_1.4.0.v201306110406.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xtend.typesystem.emf_1.4.0.v201306110406.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/javax.inject.source_1.0.0.v20091030.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-runtime-2.4.2.zip
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-SDK-2.4.2.zip
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe.core_1.2.1.v201303191413.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe.utils_1.3.0.v201303191413.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe2.runtime_2.4.0.v201303191413.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.apache.commons.cli_1.2.0.v201105210650.jar
 
 // needs Apache Commons Lang
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
