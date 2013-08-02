@@ -26,6 +26,10 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.201306111341.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/features/org.eclipse.emf.validation_1.7.0.201306111341/feature.xml
 
+// needs MDT OCL
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl_3.3.0.v20130610-1317.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.ecore_3.3.0.v20130520-1222.jar
+
 //EMFText (required to generate languages)
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
 get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
@@ -65,12 +69,23 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe2.runtime_2.4.0.v201303191413.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.apache.commons.cli_1.2.0.v201105210650.jar
 
-// needs Apache Commons Lang
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang.source_2.6.0.v201205030909.jar
-
 // needs Log4J
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
+
+// JDOM
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.jdom_1.1.1.v201101151400.jar
+
+// Apache
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.collections_3.2.0.v2013030210310.jar
+
+// Refactory Dependencies
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.rolemapping
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.rolemapping.resource.rolemapping
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.roles.resource.rolestext
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.roles
+
+// JaMoPP
+get:http://jamopp.org/update_trunk/org.jamopp.deploy-complete.zip
 
 // PL/0 for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/PL0/
