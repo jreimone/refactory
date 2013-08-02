@@ -51,7 +51,7 @@ get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
 
 // Google Inject (required by IncQuery)
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.inject_3.0.0.v201203062045.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.inject_3.0.0.v201203062045.jar
 
 // Xtext
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xtend_1.4.0.v201306110406.jar
@@ -66,11 +66,11 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.apache.commons.cli_1.2.0.v201105210650.jar
 
 // needs Apache Commons Lang
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang.source_2.6.0.v201205030909.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang.source_2.6.0.v201205030909.jar
 
 // needs Log4J
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
 
 // PL/0 for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/PL0/
