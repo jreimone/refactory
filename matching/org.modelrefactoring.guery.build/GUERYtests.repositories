@@ -29,48 +29,15 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation
 // needs MDT OCL
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl_3.3.0.v20130610-1317.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.ecore_3.3.0.v20130520-1222.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.common_1.1.0.v20130531-0544.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/lpg.runtime.java_2.0.17.v201004271640.jar
 
 //EMFText (required to generate languages)
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
 get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 
-// IncQuery
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage.emf_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.rete_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base.itc_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.runtime.feature_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.sdk.feature_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/zipped/org.eclipse.incquery.update-0.7.0-incubation.zip
-// the above zip needs Graphiti
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.ui_0.10.0.v20130612-0936.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti_0.10.0.v20130612-0936.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.mm_0.10.0.v20130612-0936.jar
-// and ANTLR is needed
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
-
 // Google Guava (required by EMF Compare)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
-
-// Google Inject (required by IncQuery)
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.inject_3.0.0.v201203062045.jar
-
-// Xtext
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xtend_1.4.0.v201306110406.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xpand_1.4.0.v201306110406.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/org.eclipse.xtend.typesystem.emf_1.4.0.v201306110406.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/javax.inject.source_1.0.0.v20091030.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-runtime-2.4.2.zip
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-SDK-2.4.2.zip
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe.core_1.2.1.v201303191413.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe.utils_1.3.0.v201303191413.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.eclipse.emf.mwe2.runtime_2.4.0.v201303191413.jar
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201303191413/mwe/plugins/org.apache.commons.cli_1.2.0.v201105210650.jar
-
-// needs Log4J
-// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
 
 // JDOM
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.jdom_1.1.1.v201101151400.jar
@@ -83,11 +50,12 @@ svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/or
 svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.rolemapping.resource.rolemapping
 svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.roles.resource.rolestext
 svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.roles
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.refactoring.registry.rolemodel
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.refactoring.registry.rolemapping
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.refactoring.util
 
 // JaMoPP
 get:http://jamopp.org/update_trunk/org.jamopp.deploy-complete.zip
 
 // PL/0 for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/PL0/
-//get:http://www.emftext.org/update/plugins/org.emftext.language.pl0.resource.pl0_0.7.1.v201207310007.jar
-//get:http://www.emftext.org/update/plugins/org.emftext.language.pl0_0.7.1.v201207310007.jar
