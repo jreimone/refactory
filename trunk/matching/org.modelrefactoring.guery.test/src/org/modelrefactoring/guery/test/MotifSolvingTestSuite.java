@@ -42,6 +42,7 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
+import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -308,6 +309,7 @@ public class MotifSolvingTestSuite {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
 		JaMoPPUtil.initialize();
+		EPackage.Registry.INSTANCE.put(ConcretesyntaxPackage.eNS_URI, ConcretesyntaxPackage.eINSTANCE);
 	}
 	
 	private <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getMotifByModel(String path){
