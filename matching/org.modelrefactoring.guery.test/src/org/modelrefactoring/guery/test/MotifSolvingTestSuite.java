@@ -63,7 +63,8 @@ import com.google.common.io.Files;
 @RunWith(Parameterized.class)
 public class MotifSolvingTestSuite {
 
-	private static final String CONFIG_FILE_PATH	= "config/metamodelRolemodelGUERY.config";
+	private static final String CONFIG_FILE_PATH		= "config/metamodelRolemodelGUERY.config";
+	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20Matching%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
 	
 	private EPackage metamodel;
 	private RoleModel roleModel;
@@ -132,9 +133,9 @@ public class MotifSolvingTestSuite {
 			List<String> printedGueryRoleMappings = printRoleMappings(gueryParsingRoleMappings);
 			List<String> printedEMFTextRoleMappings = printRoleMappings(emfTextParsingRoleMappings);
 			System.out.println("GUERY count: " + gueryParsingRoleMappings.size());
-			System.out.println("all GUERY results can be found in " + gueryParsedFile.getAbsolutePath());
+			System.out.println("all GUERY results can be found in " + JENKINS_LINK_PREFIX + gueryParsedFile.getPath());
 			System.out.println("EMFText count: " + emfTextParsingRoleMappings.size());
-			System.out.println("all EMFText results can be found in " + emftextParsedFile.getAbsolutePath());
+			System.out.println("all EMFText results can be found in " + JENKINS_LINK_PREFIX + emftextParsedFile.getPath());
 			compare(printedGueryRoleMappings, printedEMFTextRoleMappings, metamodel, roleModel);
 		}
 	}
@@ -224,8 +225,8 @@ public class MotifSolvingTestSuite {
 		File emftextAdditionalsFile = printAndSaveAdditionals(emftextAdditionals, metamodel, roleModel, "EMFText");
 		if(gueryAdditionals.size() > 0 || emftextAdditionals.size() > 0){
 			System.out.println("Solving of the generated motif for the role model '" + roleModel.getName() + "' for metamodel " + metamodel.getName() + " caused different results:");
-			System.out.println("additional RoleMappings solved by GUERY-parsing can be found in: " + gueryAdditionalsFile.getAbsolutePath());
-			System.out.println("additional RoleMappings solved by EMFText-parsing can be found in: " + emftextAdditionalsFile.getAbsolutePath());
+			System.out.println("additional RoleMappings solved by GUERY-parsing can be found in: " + JENKINS_LINK_PREFIX + gueryAdditionalsFile.getPath());
+			System.out.println("additional RoleMappings solved by EMFText-parsing can be found in: " + JENKINS_LINK_PREFIX + emftextAdditionalsFile.getPath());
 		}
 		assertTrue("Solved role mappings are not equal", gueryAdditionals.size() == 0 && emftextAdditionals.size() == 0);
 		System.out.println("Both solving results are equal --> test succeeds");
