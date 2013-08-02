@@ -19,4 +19,5 @@ Require-Bundle: org.junit,
  org.emftext.language.refactoring.roles.resource.rolestext,
  org.modelrefactoring.matching.guery,
  org.apache.commons.collections,
- com.google.guava
+ com.google.guava,
+ org.emftext.language.java.resource

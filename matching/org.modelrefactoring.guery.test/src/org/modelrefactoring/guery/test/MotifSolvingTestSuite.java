@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
@@ -87,7 +88,7 @@ public class MotifSolvingTestSuite {
 		try {
 			List<String> lines = Files.readLines(configFile, Charset.defaultCharset());
 			for (String line : lines) {
-				if(!line.startsWith("//")){
+				if(!line.startsWith("//") && !line.trim().isEmpty()){
 					String[] parts = line.split(";");
 					assertTrue("There must be exactly 4 parts in each line", parts.length == 4);
 					String metamodelString = parts[0].trim();
@@ -117,6 +118,7 @@ public class MotifSolvingTestSuite {
 
 	@Test
 	public void testAndCompareGueryAndEMFTextParsedGUERYQuerying() {
+		System.out.println();
 		System.out.println("##################################");
 		System.out.println("Metamodel: " + metamodel.getName());
 		System.out.println("RoleModel: " + roleModel.getName());
@@ -129,13 +131,12 @@ public class MotifSolvingTestSuite {
 			List<RoleMapping> emfTextParsingRoleMappings = testMotifOnMetamodelWithEMFTextParsing(uriString, metamodel.eResource(), roleModel);
 			File gueryParsedFile = saveRolemappings(gueryParsingRoleMappings, metamodel, "GUERY");
 			File emftextParsedFile = saveRolemappings(emfTextParsingRoleMappings, metamodel, "EMFText");
-			System.out.println("Results:");
-			List<String> printedGueryRoleMappings = printRoleMappings(gueryParsingRoleMappings);
-			List<String> printedEMFTextRoleMappings = printRoleMappings(emfTextParsingRoleMappings);
 			System.out.println("GUERY count: " + gueryParsingRoleMappings.size());
 			System.out.println("all GUERY results can be found in " + JENKINS_LINK_PREFIX + gueryParsedFile.getPath());
 			System.out.println("EMFText count: " + emfTextParsingRoleMappings.size());
 			System.out.println("all EMFText results can be found in " + JENKINS_LINK_PREFIX + emftextParsedFile.getPath());
+			List<String> printedGueryRoleMappings = printRoleMappings(gueryParsingRoleMappings);
+			List<String> printedEMFTextRoleMappings = printRoleMappings(emfTextParsingRoleMappings);
 			compare(printedGueryRoleMappings, printedEMFTextRoleMappings, metamodel, roleModel);
 		}
 	}
@@ -306,6 +307,7 @@ public class MotifSolvingTestSuite {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolemappingMetaInformation().getSyntaxName(), new RolemappingResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
+		JaMoPPUtil.initialize();
 	}
 	
 	private <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getMotifByModel(String path){
