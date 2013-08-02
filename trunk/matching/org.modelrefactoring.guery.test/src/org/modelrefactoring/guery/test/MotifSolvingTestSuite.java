@@ -133,7 +133,7 @@ public class MotifSolvingTestSuite {
 			File gueryParsedFile = saveRolemappings(gueryParsingRoleMappings, metamodel, "GUERY");
 			File emftextParsedFile = saveRolemappings(emfTextParsingRoleMappings, metamodel, "EMFText");
 			System.out.println("GUERY count: " + gueryParsingRoleMappings.size());
-//			System.out.println("all GUERY results can be found in " + JENKINS_LINK_PREFIX + gueryParsedFile.getPath());
+			System.out.println("all GUERY results can be found in " + JENKINS_LINK_PREFIX + gueryParsedFile.getPath());
 			System.out.println("[[ATTACHMENT|" + gueryParsedFile.getAbsolutePath() + "]]");
 			System.out.println("EMFText count: " + emfTextParsingRoleMappings.size());
 			System.out.println("all EMFText results can be found in " + JENKINS_LINK_PREFIX + emftextParsedFile.getPath());
