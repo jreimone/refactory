@@ -26,13 +26,13 @@ get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base.itc_0.7.0.201306302207.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.runtime.feature_0.7.0.201306302207.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.sdk.feature_0.7.0.201306302207.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/zipped/org.eclipse.incquery.update-0.7.0-incubation.zip
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/zipped/org.eclipse.incquery.update-0.7.0-incubation.zip
 // the above zip needs Graphiti
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.ui_0.10.0.v20130612-0936.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti_0.10.0.v20130612-0936.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.mm_0.10.0.v20130612-0936.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.ui_0.10.0.v20130612-0936.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti_0.10.0.v20130612-0936.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.mm_0.10.0.v20130612-0936.jar
 // and ANTLR is needed
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
+// get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 
 // Google Guava (required by EMF Compare)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
