@@ -20,4 +20,6 @@ Require-Bundle: org.junit,
  org.modelrefactoring.matching.guery,
  org.apache.commons.collections,
  com.google.guava,
- org.emftext.language.java.resource
+ org.emftext.language.java.resource,
+ org.emftext.sdk.concretesyntax,
+ org.eclipse.emf.codegen.ecore
