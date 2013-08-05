@@ -1,0 +1,31 @@
+ROLEMODELMAPPING FOR <http://subpackagesmm/1.0> 
+
+"Rename Element 1"  maps <RenameX> {
+
+        Nameable := RootMC(name -> name);
+}
+
+"Rename Element 2"  maps <RenameX> {
+
+        Nameable := subpackagesmm.RootMC(name -> name);
+}
+
+"Rename Element 3"  maps <RenameX> {
+
+        Nameable := Sub1.RootSub1(name -> name);
+}
+
+"Rename Element 4"  maps <RenameX> {
+
+        Nameable := subpackagesmm.Sub1.RootSub1(name -> name);
+}
+
+"Rename Element 5"  maps <RenameX> {
+
+        Nameable := Sub2.Sub2Sub1.RootSub2Sub1(name -> name);
+}
+
+"Rename Element 6"  maps <RenameX> {
+
+        Nameable := subpackagesmm.Sub2.Sub2Sub1.RootSub2Sub1(name -> name);
+}
