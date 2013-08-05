@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
 
-TestProhibitionMapping maps </org.emftext.refactoring.tests/test/TestProhibition.xmi> { 
+"TestProhibitionMapping" maps </org.emftext.refactoring.tests/test/TestProhibition.xmi> { 
 	InputRole -> EClass ;
 	OutputRole -> EClass;
 	TransitiveOutputRoleParent -> EClassifier;
