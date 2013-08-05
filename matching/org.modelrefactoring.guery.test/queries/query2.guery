@@ -1,0 +1,7 @@
+// connect a red node to a different red node, avoid black edges and look for connections that are at least 3 edges long
+motif query2
+select start,end
+where "start.colour=='red'" and "end.colour=='red'"
+connected by connection(start>end)[3,*]
+where "start!=end" and "connection.colour!='black'" and "end != start"
+group by "start"
