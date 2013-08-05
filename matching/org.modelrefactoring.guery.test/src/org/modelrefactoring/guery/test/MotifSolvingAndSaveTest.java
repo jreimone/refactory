@@ -148,12 +148,13 @@ public class MotifSolvingAndSaveTest {
 			System.out.println("Very simple String-based saving took: " + seconds + "s");
 			System.out.println("Found possible role mappings: " + emfTextParsingRoleMappings.size());
 			File absFile = verySimpleParsedFile.getAbsoluteFile();
-			int count = 1;
-			File temp = absFile.getParentFile();
+			int count = 0;
+			File temp = absFile;
 			File parent = null;
-			while (temp != null && count <= 4) {
+			while (temp.getParentFile() != null && count <= 4) {
 				parent = temp;
 				temp = temp.getParentFile();
+				count++;
 			}
 			File wsFile = parent.getAbsoluteFile();
 			System.out.println("Workspace: " + wsFile.getPath());
