@@ -508,4 +508,17 @@
     <element xmi:type="ecore:EReference" href="rolemapping.ecore#//RoleMappingModel/imports"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2JaStP0oEd-D1JS4KEiUGQ" points="[71, 0, 58, -89]$[115, 0, 102, -89]$[115, 89, 102, 0]$[71, 89, 58, 0]"/>
   </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_dT8a8P2kEeKHKu9LFblwyw" type="3002" source="_FBM_4BcHEd-v66FqVrAtPg" target="_fsuSMBcFEd-v66FqVrAtPg">
+    <children xmi:type="notation:Node" xmi:id="_dUAFUP2kEeKHKu9LFblwyw" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_dUAFUf2kEeKHKu9LFblwyw" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_dUAsYP2kEeKHKu9LFblwyw" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_dUAsYf2kEeKHKu9LFblwyw" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_dT8a8f2kEeKHKu9LFblwyw" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_dT8a8v2kEeKHKu9LFblwyw" fontColor="4210752" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="rolemapping.ecore#//ConcreteMapping/packagesOfMetaclass"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dT8a8_2kEeKHKu9LFblwyw" points="[14, 16, -317, 97]$[43, 16, -288, 97]$[43, -25, -288, 56]$[332, -25, 1, 56]$[332, -52, 1, 29]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dULEcP2kEeKHKu9LFblwyw" id="(0.9084967320261438,0.13953488372093023)"/>
+  </edges>
 </notation:Diagram>

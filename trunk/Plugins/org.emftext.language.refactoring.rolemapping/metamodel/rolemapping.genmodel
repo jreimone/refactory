@@ -36,6 +36,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ConcreteMapping/metaclass"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ConcreteMapping/collaborationMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ConcreteMapping/attributeMappings"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rolemapping.ecore#//ConcreteMapping/packagesOfMetaclass"/>
       <genOperations ecoreOperation="rolemapping.ecore#//ConcreteMapping/getCollaborationMappingForTargetRole">
         <genParameters ecoreParameter="rolemapping.ecore#//ConcreteMapping/getCollaborationMappingForTargetRole/role"/>
       </genOperations>
