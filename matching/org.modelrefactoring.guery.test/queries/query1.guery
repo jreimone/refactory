@@ -1,7 +1,0 @@
-// connect a red node to a different red node
-motif query1
-select start,end
-where "start.colour=='red'" and "end.colour=='red'"
-connected by connection(start>end)
-where "start!=end"
-group by "start"
