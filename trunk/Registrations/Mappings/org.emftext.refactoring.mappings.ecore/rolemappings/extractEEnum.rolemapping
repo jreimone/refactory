@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
-ExtractEEnum maps <ExtractX> {
+"Extract EEnum" maps <ExtractX> {
 
 	Extractee := EEnumLiteral;
 	

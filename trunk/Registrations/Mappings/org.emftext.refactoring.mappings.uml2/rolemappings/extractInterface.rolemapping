@@ -5,7 +5,7 @@ ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
  * a new interface. The existing class will be defined as
  * implementing the new interface.
  */
-ExtractInterface maps <ExtractX> {
+"Extract Interface" maps <ExtractX> {
 
 	Extractee := Operation;
 	OrigContainer := Class {

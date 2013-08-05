@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
-DeriveCompositeInterface maps <IntroduceReferenceClass> { 
+"Derive Composite Interface" maps <IntroduceReferenceClass> { 
 	 
 	 DerivationContainer := EPackage {
 	 	derivation := eClassifiers;

@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/conference> 
 
-ExtractTrack maps <ExtractXwithReferenceClass> { 
+"Extract Track" maps <ExtractXwithReferenceClass> { 
 	Extract := Slot;
 	OrigContainer := Track{
 		extracts := slots;

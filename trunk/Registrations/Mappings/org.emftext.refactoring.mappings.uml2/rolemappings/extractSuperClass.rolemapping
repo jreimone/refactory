@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
 
-ExtractSuperClass maps <ExtractX> {
+"Extract Super Class" maps <ExtractX> {
 
 	Extractee := Property;
 	

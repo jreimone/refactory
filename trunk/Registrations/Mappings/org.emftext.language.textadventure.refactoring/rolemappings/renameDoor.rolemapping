@@ -1,5 +1,5 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/textadventure> 
 
-RenameDoor maps <RenameX> { 
+"Rename Door" maps <RenameX> { 
 	 Nameable := Door(name -> name); 
 }

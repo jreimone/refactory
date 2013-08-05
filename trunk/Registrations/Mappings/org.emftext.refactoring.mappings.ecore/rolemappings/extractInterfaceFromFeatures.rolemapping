@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
 
-ExtractInterfaceFromFeatures maps <ExtractX> {
+"Extract Interface From Features" maps <ExtractX> {
 
 	Extractee := EStructuralFeature;
 	OrigContainer := EClass {

@@ -4,7 +4,7 @@ ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
  * This refactoring replaces a reference to a superclass with an explicit
  * delegation reference, which is typed by the superclass.
  */
-ReplaceInheritanceWithDelegation maps <ExtractX> {
+"Replace Inheritance With Delegation" maps <ExtractX> {
 
 	// TODO implement this
 }

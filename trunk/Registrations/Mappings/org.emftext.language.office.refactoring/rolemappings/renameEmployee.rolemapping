@@ -1,9 +1,9 @@
 ROLEMODELMAPPING FOR <http://emftext.org/office> 
 
-RenameEmployee maps <RenameX> { 
+"Rename Employee" maps <RenameX> { 
 	 Nameable := Employee(name -> name); 
 }
 
-RenameOffice maps <RenameX> { 
+"Rename Office" maps <RenameX> { 
 	 Nameable := Office(name -> name); 
 }
