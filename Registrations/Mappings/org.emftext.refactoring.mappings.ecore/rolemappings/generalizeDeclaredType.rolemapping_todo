@@ -6,7 +6,7 @@ ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
  * ETypedElement the refactoring applied equally to EOperations, EParameters,
  * and EStructuralFeatures.
  */
-GeneralizeDeclaredType maps <ReplaceX?> {
+"Generalize Declared Type" maps <ReplaceX?> {
 
 	// TODO implement this
 }

@@ -5,7 +5,7 @@ ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
  * them into a class, which replaces the parameters. The new class
  * encapsulates the set of parameters. 
  */
-IntroduceParameterObject maps <ExtractX> {
+"Introduce Parameter Object" maps <ExtractX> {
 
 	Extractee := EParameter;
 	

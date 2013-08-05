@@ -1,13 +1,13 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0> 
 
-RenameProcedure maps <RenameX> {
+"Rename Procedure" maps <RenameX> {
 	Nameable := ProcedureDeclaration(name -> name);
 }
 
-RenameDeclaration maps <RenameX> {
+"Rename Declaration" maps <RenameX> {
 	Nameable := Declaration (name -> name);
 }
 
-RenameProgram maps <RenameX> {
+"Rename Program" maps <RenameX> {
 	Nameable := Program (name -> name);
 }

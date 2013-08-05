@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.eclipse.org/e4/tm/widgets.ecore> 
 
-EncapsulateInComposite maps <ExtractSubX> {
+"Encapsulate In Composite" maps <ExtractSubX> {
 
 	Extractee := Control;
 	

@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/textadventure> 
 
-MoveToNewRoom maps <ExtractXwithReferenceClass>{ 
+"Move To New Room" maps <ExtractXwithReferenceClass>{ 
 	 Extract := Item;
 	 OrigContainer := Room{
 	 	extracts := items;

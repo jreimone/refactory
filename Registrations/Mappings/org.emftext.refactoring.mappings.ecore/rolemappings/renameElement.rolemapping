@@ -1,5 +1,5 @@
 ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
 
-RenameEElement maps <RenameX> { 
+"Rename EElement" maps <RenameX> { 
 	 Nameable := ENamedElement(name -> name) ; 
 }

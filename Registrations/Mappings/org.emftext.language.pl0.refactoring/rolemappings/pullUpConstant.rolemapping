@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0> 
 
-PullUpConstant maps <MoveX> {
+"Pull Up Constant" maps <MoveX> {
 	Movee := ConstDeclaration;
 	SourceContainer := Block{
 		sourceContainment := constants;

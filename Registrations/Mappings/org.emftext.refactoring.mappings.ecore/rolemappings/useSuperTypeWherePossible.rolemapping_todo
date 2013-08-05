@@ -6,7 +6,7 @@ ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
  * but instead of selecting the element that references a type, the type is
  * selected and references to the type are discovered automatically. 
  */
-UseSuperTypeWherePossible maps <ReplaceX?> {
+"Use Super Type Where Possible" maps <ReplaceX?> {
 
 	// TODO implement this
 }

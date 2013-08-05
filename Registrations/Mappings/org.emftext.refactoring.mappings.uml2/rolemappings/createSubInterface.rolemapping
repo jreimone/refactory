@@ -3,7 +3,7 @@ ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
 /**
  * Create Sub Interface - creates an empty sub interface of a selected interface.
  */
-CreateSubInterface maps <IntroduceReferenceClass> {
+"Create Sub Interface" maps <IntroduceReferenceClass> {
 	 
 	 DerivationContainer := Package {
 	 	derivation := packagedElement;

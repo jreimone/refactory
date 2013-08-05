@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/forms> 
 
-IntroduceItemGroup maps <ExtractXwithReferenceClass> {
+"Introduce Item Group" maps <ExtractXwithReferenceClass> {
 
 	Extract := Item;
 	

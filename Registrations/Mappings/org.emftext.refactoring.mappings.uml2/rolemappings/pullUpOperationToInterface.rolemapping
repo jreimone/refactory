@@ -4,7 +4,7 @@ ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
  * Pull Up Operation To Interface - moves an operation of a class to 
  * one of its implemented interfaces.
  */
-PullUpOperationToInterface maps <MoveX> {
+"Pull Up Operation To Interface" maps <MoveX> {
 
 	Movee := Operation;
 	SourceContainer := Class {

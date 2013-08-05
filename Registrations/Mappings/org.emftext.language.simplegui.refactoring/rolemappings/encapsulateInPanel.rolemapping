@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/simplegui> 
 
-EncapsulateInPanel maps <ExtractXwithReferenceClass> {
+"ncapsulate In Panel" maps <ExtractXwithReferenceClass> {
 
 	Extract := UIElement;
 	

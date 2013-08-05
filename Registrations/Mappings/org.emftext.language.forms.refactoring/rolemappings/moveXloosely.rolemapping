@@ -1,6 +1,6 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/forms>
 
-MoveGroupNextTo maps <MoveXloosely> { 
+"Move Group Next To" maps <MoveXloosely> { 
 	 Movee := Group;
 	 
 	 Container := Form{

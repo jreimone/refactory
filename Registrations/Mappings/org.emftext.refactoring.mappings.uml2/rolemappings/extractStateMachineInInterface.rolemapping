@@ -1,7 +1,7 @@
 ROLEMODELMAPPING FOR 
 <http://www.eclipse.org/uml2/3.0.0/UML>
 
-ExtractStateMachineInInterface maps <ExtractX> { 
+"Extract StateMachine In Interface" maps <ExtractX> { 
 	
 	ContainerContainer := Interface{
 		source := protocol;
