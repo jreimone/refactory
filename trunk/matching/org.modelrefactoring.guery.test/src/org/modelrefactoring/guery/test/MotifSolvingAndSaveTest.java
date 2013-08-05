@@ -18,7 +18,6 @@ import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifReaderException;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
