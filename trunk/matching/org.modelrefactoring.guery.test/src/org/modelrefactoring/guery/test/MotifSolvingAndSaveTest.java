@@ -151,7 +151,7 @@ public class MotifSolvingAndSaveTest {
 			int count = 0;
 			File temp = absFile;
 			File parent = null;
-			while (temp.getParentFile() != null && count <= 4) {
+			while (temp.getParentFile() != null && count <= 6) {
 				parent = temp;
 				temp = temp.getParentFile();
 				count++;
@@ -161,7 +161,7 @@ public class MotifSolvingAndSaveTest {
 			java.net.URI relativize = wsFile.toURI().relativize(absFile.toURI());
 			System.out.println("Workspace relative: " + relativize.toString());
 			System.out.println("all results can be found in " + JENKINS_LINK_PREFIX + verySimpleParsedFile.getPath());
-			System.out.println("[[ATTACHMENT|" + verySimpleParsedFile.getPath() + "]]");
+			System.out.println("[[ATTACHMENT|" + relativize.getPath() + "]]");
 		}
 	}
 
