@@ -1,9 +1,0 @@
-// connect a red node to a different red node, without back reference from end to start
-motif query4
-prepare with org.modelrefactoring.guery.test.TestProcessor
-select start,end
-where "start.colour=='red'" and "end.colour=='red'"
-connected by connection(start>end)
-not connected by missing(end>start)
-where "start!=end"
-group by "start"
