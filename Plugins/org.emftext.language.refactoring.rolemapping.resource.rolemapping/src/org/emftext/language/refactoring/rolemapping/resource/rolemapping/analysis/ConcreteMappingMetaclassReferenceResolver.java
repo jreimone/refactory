@@ -15,6 +15,7 @@
  ******************************************************************************/
 package org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,8 +31,8 @@ public class ConcreteMappingMetaclassReferenceResolver
 implements
 org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> {
 
-	private static final String PACKAGE_SEPARATOR = ".";
-	private static final String PACKAGE_SEPARATOR_REGEX = "\\.";
+	//	private static final String PACKAGE_SEPARATOR = ".";
+	//	private static final String PACKAGE_SEPARATOR_REGEX = "\\.";
 
 	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass>();
 
@@ -45,7 +46,15 @@ org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingRe
 			validMetamodels.add(targetMetamodel);
 
 			if (targetMetamodel != null && !targetMetamodel.eIsProxy()) {
-				Map<String, List<EClass>> eClassMap = getEClassesFromEPackages(validMetamodels);
+				Map<String, List<EClass>> eClassMap = null;
+				List<EPackage> packagesOfMetaclass = container.getPackagesOfMetaclass();
+				if(packagesOfMetaclass.size() == 0){
+					eClassMap = getEClassesFromEPackages(validMetamodels);
+				} else {
+					List<EPackage> lastPackage = new ArrayList<EPackage>();
+					lastPackage.add(packagesOfMetaclass.get(packagesOfMetaclass.size() - 1));
+					eClassMap = getEClassesFromEPackages(lastPackage);
+				}
 				if (!eClassMap.isEmpty()) {
 					if (resolveFuzzy) {
 						for (String key : eClassMap.keySet()) {
@@ -73,24 +82,7 @@ org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingRe
 
 					}
 				} else {
-					String[] segments = identifier.split(PACKAGE_SEPARATOR_REGEX);
-					if (segments.length == 1) {
-						result.setErrorMessage("Metaclass '" + segments[0]
-								+ "' doesn't exist in "
-								+ targetMetamodel.getNsURI());
-					} else {
-						String packageString = "";
-						for (int i = 0; i < segments.length - 1; i++) {
-							packageString += segments[i] + PACKAGE_SEPARATOR;
-						}
-						StringBuilder builder = new StringBuilder(packageString);
-						builder.deleteCharAt(builder.length() - 1);
-						result.setErrorMessage("Metaclass '"
-								+ segments[segments.length - 1]
-										+ "' doesn't exist in "
-										+ targetMetamodel.getNsURI() + "/"
-										+ builder.toString());
-					}
+					result.setErrorMessage("No appropriate metaclasses exist for '" + identifier + "'");
 				}
 			}
 		} else {
@@ -116,51 +108,45 @@ org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingRe
 					List<EClass> classesWithSameNames = foundEClasses.get(eClassifier.getName());
 					if (classesWithSameNames == null) {
 						classesWithSameNames = new LinkedList<EClass>();
-						String name = "";
-						EPackage superPackage = metamodel.getESuperPackage();
-						if (superPackage == null) {
-							name = eClassifier.getName();
-						} else {
-							name = getPackageNavigation((EClass) eClassifier);
-						}
+						String name = eClassifier.getName();
 						foundEClasses.put(name, classesWithSameNames);
 					}
 					classesWithSameNames.add((EClass) eClassifier);
 				}
 			}
-			List<EPackage> subPackages = metamodel.getESubpackages();
-			Map<String, List<EClass>> subPackagesMap = getEClassesFromEPackages(subPackages);
-			for (String key : subPackagesMap.keySet()) {
-				List<EClass> existentClasses = foundEClasses.get(key);
-				if (existentClasses != null) {
-					existentClasses.addAll(subPackagesMap.get(key));
-				} else {
-					foundEClasses.put(key, subPackagesMap.get(key));
-				}
-			}
+//			List<EPackage> subPackages = metamodel.getESubpackages();
+//			Map<String, List<EClass>> subPackagesMap = getEClassesFromEPackages(subPackages);
+//			for (String key : subPackagesMap.keySet()) {
+//				List<EClass> existentClasses = foundEClasses.get(key);
+//				if (existentClasses != null) {
+//					existentClasses.addAll(subPackagesMap.get(key));
+//				} else {
+//					foundEClasses.put(key, subPackagesMap.get(key));
+//				}
+//			}
 		}
 		return foundEClasses;
 	}
 
-	private String getPackageNavigation(EClass eclass) {
-		EPackage ePackage = eclass.getEPackage();
-		StringBuffer packageNavigation = new StringBuffer();
-		while (ePackage.getESuperPackage() != null) {
-			packageNavigation.insert(0, ePackage.getName() + PACKAGE_SEPARATOR);
-			ePackage = ePackage.getESuperPackage();
-		}
-		packageNavigation.append(eclass.getName());
-		return packageNavigation.toString();
-	}
+//	private String getPackageNavigation(EClass eclass) {
+//		EPackage ePackage = eclass.getEPackage();
+//		StringBuffer packageNavigation = new StringBuffer();
+//		while (ePackage.getESuperPackage() != null) {
+//			packageNavigation.insert(0, ePackage.getName() + PACKAGE_SEPARATOR);
+//			ePackage = ePackage.getESuperPackage();
+//		}
+//		packageNavigation.append(eclass.getName());
+//		return packageNavigation.toString();
+//	}
 
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {
 		String result = element.getName();
-		EPackage ePackage = element.getEPackage();
-		EPackage parent = ePackage.getESuperPackage();
-		while (parent != null) {
-			result = ePackage.getName() + result;
-		}
-//		return delegate.deResolve(element, container, reference);
+//		EPackage ePackage = element.getEPackage();
+//		EPackage parent = ePackage.getESuperPackage();
+//		while (parent != null) {
+//			result = ePackage.getName() + result;
+//		}
+		//		return delegate.deResolve(element, container, reference);
 		return result;
 	}
 

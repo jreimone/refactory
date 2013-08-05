@@ -29,7 +29,7 @@ TOKENS {
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;	
 	//DEFINE DOT_IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$ + $('.'$ + IDENT + $)*$;
-	DEFINE IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-') + ('.'('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+)*$;
+	DEFINE IDENT $('A'..'Z'|'a'..'z') + ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')*$;
 	//DEFINE IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$;
 	//DEFINE DOT_IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-'|'.')+$;
 	//DEFINE DOT_IDENT $(('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+('.')?('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+)+$;
@@ -54,11 +54,11 @@ RULES {
 				(!0 "IMPORTS" (imports['<','>']+))? !0 !0 mappings+;
 	
 	RoleMapping ::= (comment[ML_COMMENT])?
-					(name['"','"'] | name[IDENT]) #1 "maps" #1 mappedRoleModel['<','>'] #1 "{" !1 
+					name['"','"'] #1 "maps" #1 mappedRoleModel['<','>'] #1 "{" !1 
 					(roleToMetaelement !1)+
 					!0 "}" !0 !0 ;
 	
-	ConcreteMapping ::= role[IDENT] #1 ":=" #1 metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? (#1 "{" !1 collaborationMappings (!1 collaborationMappings)* !0 "}")? ";";
+	ConcreteMapping ::= role[IDENT] #1 ":=" #1 (packagesOfMetaclass[IDENT] ".")* metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? (#1 "{" !1 collaborationMappings (!1 collaborationMappings)* !0 "}")? ";";
 	
 	CollaborationMapping ::= collaboration[IDENT] #1 ":=" #1 referenceMetaClassPair (#1 "->" #1 referenceMetaClassPair)* ";";
 	
