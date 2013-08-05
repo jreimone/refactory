@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -33,8 +32,6 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
-import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
-import org.emftext.language.refactoring.rolemapping.RolemappingFactory;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingPrinter2;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
@@ -63,17 +60,16 @@ import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 import com.google.common.io.Files;
 
 @RunWith(Parameterized.class)
-public class MotifSolvingTestSuite {
+public class MotifSolvingAndCompareTest {
 
-	private static final String CONFIG_FILE_PATH		= "config/metamodelRolemodelGUERY.config";
-	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20Matching%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
+	private static final String CONFIG_FILE_PATH		= "config/MotifSolvingAndCompareTest.config";
 	
 	private EPackage metamodel;
 	private RoleModel roleModel;
 	private int maxPathLength;
 	private int maxResults;
 	
-	public MotifSolvingTestSuite(EPackage metamodel, RoleModel roleModel, int maxPathLength, int maxResults){
+	public MotifSolvingAndCompareTest(EPackage metamodel, RoleModel roleModel, int maxPathLength, int maxResults){
 		this.metamodel = metamodel;
 		this.roleModel = roleModel;
 		this.maxPathLength = maxPathLength;
@@ -130,39 +126,18 @@ public class MotifSolvingTestSuite {
 			String uriString = motif.eResource().getURI().toFileString();
 			List<RoleMapping> gueryParsingRoleMappings = testMotifOnMetamodelWithGUERYParsing(uriString, metamodel.eResource(), roleModel);
 			List<RoleMapping> emfTextParsingRoleMappings = testMotifOnMetamodelWithEMFTextParsing(uriString, metamodel.eResource(), roleModel);
-			File gueryParsedFile = saveRolemappings(gueryParsingRoleMappings, metamodel, "GUERY");
-			File emftextParsedFile = saveRolemappings(emfTextParsingRoleMappings, metamodel, "EMFText");
+//			File gueryParsedFile = saveRolemappings(gueryParsingRoleMappings, metamodel, "GUERY");
+//			File emftextParsedFile = saveRolemappings(emfTextParsingRoleMappings, metamodel, "EMFText");
 			System.out.println("GUERY count: " + gueryParsingRoleMappings.size());
-			System.out.println("all GUERY results can be found in " + JENKINS_LINK_PREFIX + gueryParsedFile.getPath());
-			System.out.println("[[ATTACHMENT|" + gueryParsedFile.getAbsolutePath() + "]]");
-			System.out.println("[[ATTACHMENT|" + gueryParsedFile.getPath() + "]]");
+//			System.out.println("all GUERY results can be found in " + JENKINS_LINK_PREFIX + gueryParsedFile.getPath());
+//			System.out.println("[[ATTACHMENT|" + gueryParsedFile.getAbsolutePath() + "]]");
+//			System.out.println("[[ATTACHMENT|" + gueryParsedFile.getPath() + "]]");
 			System.out.println("EMFText count: " + emfTextParsingRoleMappings.size());
-			System.out.println("all EMFText results can be found in " + JENKINS_LINK_PREFIX + emftextParsedFile.getPath());
+//			System.out.println("all EMFText results can be found in " + JENKINS_LINK_PREFIX + emftextParsedFile.getPath());
 			List<String> printedGueryRoleMappings = printRoleMappings(gueryParsingRoleMappings);
 			List<String> printedEMFTextRoleMappings = printRoleMappings(emfTextParsingRoleMappings);
 			compare(printedGueryRoleMappings, printedEMFTextRoleMappings, metamodel, roleModel);
 		}
-	}
-
-	private File saveRolemappings(List<RoleMapping> parsedRoleMappings, EPackage metamodel, String type) {
-		RoleMappingModel roleMappingModel = RolemappingFactory.eINSTANCE.createRoleMappingModel();
-		roleMappingModel.setTargetMetamodel(metamodel);
-		roleMappingModel.getMappings().addAll(parsedRoleMappings);
-		RoleModel roleModel = parsedRoleMappings.get(0).getMappedRoleModel();
-		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_" + type + "." + new RolemappingMetaInformation().getSyntaxName());
-		if(file.exists()){
-			file.delete();
-		}
-		URI uri = URI.createFileURI(file.getAbsolutePath());
-		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.createResource(uri);
-		resource.getContents().add(roleMappingModel);
-		try {
-			resource.save(Collections.EMPTY_MAP);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return file;
 	}
 
 	private List<org.modelrefactoring.guery.Motif> convertRoleModel2Motifs(RoleModel roleModel) {
@@ -225,38 +200,15 @@ public class MotifSolvingTestSuite {
 		Collections.sort(emftextRoleMappings, String.CASE_INSENSITIVE_ORDER);
 		List<String> gueryAdditionals = (List<String>) CollectionUtils.subtract(gueryRoleMappings, emftextRoleMappings);
 		List<String> emftextAdditionals = (List<String>) CollectionUtils.subtract(emftextRoleMappings, gueryRoleMappings);
-		File gueryAdditionalsFile = printAndSaveAdditionals(gueryAdditionals, metamodel, roleModel, "GUERY");
-		File emftextAdditionalsFile = printAndSaveAdditionals(emftextAdditionals, metamodel, roleModel, "EMFText");
-		if(gueryAdditionals.size() > 0 || emftextAdditionals.size() > 0){
-			System.out.println("Solving of the generated motif for the role model '" + roleModel.getName() + "' for metamodel " + metamodel.getName() + " caused different results:");
-			System.out.println("additional RoleMappings solved by GUERY-parsing can be found in: " + JENKINS_LINK_PREFIX + gueryAdditionalsFile.getPath());
-			System.out.println("additional RoleMappings solved by EMFText-parsing can be found in: " + JENKINS_LINK_PREFIX + emftextAdditionalsFile.getPath());
-		}
-		assertTrue("Solved role mappings are not equal", gueryAdditionals.size() == 0 && emftextAdditionals.size() == 0);
+//		File gueryAdditionalsFile = printAndSaveAdditionals(gueryAdditionals, metamodel, roleModel, "GUERY");
+//		File emftextAdditionalsFile = printAndSaveAdditionals(emftextAdditionals, metamodel, roleModel, "EMFText");
+//		if(gueryAdditionals.size() > 0 || emftextAdditionals.size() > 0){
+//			System.out.println("Solving of the generated motif for the role model '" + roleModel.getName() + "' for metamodel " + metamodel.getName() + " caused different results:");
+//			System.out.println("additional RoleMappings solved by GUERY-parsing can be found in: " + JENKINS_LINK_PREFIX + gueryAdditionalsFile.getPath());
+//			System.out.println("additional RoleMappings solved by EMFText-parsing can be found in: " + JENKINS_LINK_PREFIX + emftextAdditionalsFile.getPath());
+//		}
+		assertTrue("Solved role mappings are not equal: " + metamodel.getName() + ", " + roleModel.getName(), gueryAdditionals.size() == 0 && emftextAdditionals.size() == 0);
 		System.out.println("Both solving results are equal --> test succeeds");
-	}
-
-	private File printAndSaveAdditionals(List<String> additionals, EPackage metamodel, RoleModel roleModel, String type) {
-		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_" + type + "_" + "additionals" + "." + new RolemappingMetaInformation().getSyntaxName());
-		if(file.exists()){
-			file.delete();
-		}
-		if(additionals.size() != 0){
-			FileWriter writer;
-			try {
-				writer = new FileWriter(file, true);
-				System.out.println("The following role mappings couldn't be solved by " + type + " parsing: " + additionals.size());
-				for (String string : additionals) {
-//					System.out.println("\n" + string);
-					writer.append(string);
-				}
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return file;
 	}
 
 	private List<RoleMapping> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
