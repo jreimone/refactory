@@ -61,7 +61,7 @@ public class RoleConstraintCheckerTestFragment extends TestClass{
 		assertNotNull("Metamodel mustn't be null", metamodel);
 		EList<RoleMapping> mappings = mappingModel.getMappings();
 		assertTrue("There must be mappings", mappings.size() > 0);
-		EList<EObject> prohibitionMappings = ModelUtil.filterObjectsByAttribute(mappings.iterator(), "name", "TestProhibitionMapping");
+		EList<EObject> prohibitionMappings = ModelUtil.filterObjectsByAttribute(mappings.iterator(), "name", "Test Prohibition Mapping");
 		assertEquals("There must be a prohibition mapping", 1, prohibitionMappings.size());
 		RoleMapping prohibitionMapping = (RoleMapping) prohibitionMappings.get(0);
 //		prohibitionMapping.getMappedRoleModel()
