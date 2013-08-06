@@ -159,9 +159,12 @@ public class MotifSolvingAndSaveTest {
 			File wsFile = parent.getAbsoluteFile();
 			System.out.println("Workspace: " + wsFile.getPath());
 			java.net.URI relativize = wsFile.toURI().relativize(absFile.toURI());
-			System.out.println("Workspace relative: " + relativize.toString());
+//			System.out.println("Workspace relative: " + relativize.toString());
 //			System.out.println("all results can be found in " + JENKINS_LINK_PREFIX + verySimpleParsedFile.getPath());
-			System.out.println("[[ATTACHMENT|" + relativize.getPath() + "]]");
+			System.out.println("relative path to workspace:");
+			System.out.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
+			System.out.println("absolute path:");
+			System.out.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
 		}
 	}
 
