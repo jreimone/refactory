@@ -6,8 +6,6 @@
  */
 package org.modelrefactoring.guery.resource.guery.analysis;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.modelrefactoring.guery.resource.guery.IGueryTokenResolveResult;
 
