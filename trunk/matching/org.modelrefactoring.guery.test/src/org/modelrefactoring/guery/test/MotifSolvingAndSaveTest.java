@@ -151,7 +151,7 @@ public class MotifSolvingAndSaveTest {
 			int count = 0;
 			File temp = absFile;
 			File parent = null;
-			while (temp.getParentFile() != null && count <= 2) {
+			while (temp.getParentFile() != null && count <= 4) {
 				parent = temp;
 				temp = temp.getParentFile();
 				count++;
