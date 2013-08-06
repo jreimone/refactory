@@ -68,7 +68,7 @@ import com.google.common.io.Files;
 public class MotifSolvingAndSaveTest {
 
 	private static final String CONFIG_FILE_PATH		= "config/MotifSolvingAndSaveTest.config";
-	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20Matching%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
+	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20DSL%20and%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
 
 	private EPackage metamodel;
 	private RoleModel roleModel;
@@ -160,7 +160,7 @@ public class MotifSolvingAndSaveTest {
 			System.out.println("Workspace: " + wsFile.getPath());
 			java.net.URI relativize = wsFile.toURI().relativize(absFile.toURI());
 			System.out.println("Workspace relative: " + relativize.toString());
-			System.out.println("all results can be found in " + JENKINS_LINK_PREFIX + verySimpleParsedFile.getPath());
+//			System.out.println("all results can be found in " + JENKINS_LINK_PREFIX + verySimpleParsedFile.getPath());
 			System.out.println("[[ATTACHMENT|" + relativize.getPath() + "]]");
 		}
 	}
