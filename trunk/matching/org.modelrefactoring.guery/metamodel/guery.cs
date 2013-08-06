@@ -10,6 +10,7 @@ OPTIONS {
 	disableDebugSupport = "true";
 	disableLaunchSupport = "true";
 	overrideProposalPostProcessor = "false";
+	additionalDependencies = "org.modelrefactoring.guery.graph";
 }
 
 
