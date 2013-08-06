@@ -6,6 +6,8 @@
  */
 package org.modelrefactoring.guery.resource.guery.analysis;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.modelrefactoring.guery.resource.guery.IGueryTokenResolveResult;
 
@@ -26,10 +28,10 @@ public class GueryCLASSNAMETokenResolver implements org.modelrefactoring.guery.r
 		try {
 			Class<?> clazz = classLoader.loadClass(lexem);
 			result.setResolvedToken(clazz);
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {			
 			result.setErrorMessage("Class '" + lexem + "' couldn't be loaded");
 			//	By default token resolving is delegated to the DefaultTokenResolver.
-			defaultTokenResolver.resolve(lexem, feature, result, null, null, null);
+//			defaultTokenResolver.resolve(lexem, feature, result, null, null, null);
 		}
 	}
 
