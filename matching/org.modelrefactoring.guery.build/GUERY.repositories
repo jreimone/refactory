@@ -36,14 +36,18 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/update
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
 get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 
-// Google Guava (required by EMF Compare)
+// Google Guava
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
+
+// ANTLR
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 
 // JDOM
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.jdom_1.1.1.v201101151400.jar
 
 // Apache
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.collections_3.2.0.v2013030210310.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
 
 // Refactory Dependencies
 svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.rolemapping
