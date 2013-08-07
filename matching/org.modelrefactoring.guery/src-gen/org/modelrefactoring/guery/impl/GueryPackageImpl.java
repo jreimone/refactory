@@ -6,9 +6,13 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.modelrefactoring.guery.ConnectedBy;
@@ -415,7 +419,7 @@ public class GueryPackageImpl extends EPackageImpl implements GueryPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPreProcessor_Class() {
+	public EAttribute getPreProcessor_ProcessorClassName() {
 		return (EAttribute)preProcessorEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -544,7 +548,7 @@ public class GueryPackageImpl extends EPackageImpl implements GueryPackage {
 		groupingEClass = createEClass(GROUPING);
 
 		preProcessorEClass = createEClass(PRE_PROCESSOR);
-		createEAttribute(preProcessorEClass, PRE_PROCESSOR__CLASS);
+		createEAttribute(preProcessorEClass, PRE_PROCESSOR__PROCESSOR_CLASS_NAME);
 
 		edgeSelectionEClass = createEClass(EDGE_SELECTION);
 		createEReference(edgeSelectionEClass, EDGE_SELECTION__CONNECTIONS);
@@ -602,9 +606,9 @@ public class GueryPackageImpl extends EPackageImpl implements GueryPackage {
 		initEReference(getMotif_Prepare(), this.getPreProcessor(), null, "prepare", null, 0, -1, Motif.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMotif_EdgeSelections(), this.getEdgeSelection(), null, "edgeSelections", null, 0, -1, Motif.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(motifEClass, this.getConstrainable(), "getConstrainables", 0, -1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(motifEClass, this.getStringToEObjectMap(), "getContexts", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(motifEClass, this.getConstrainable(), "getConstrainables", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -630,7 +634,7 @@ public class GueryPackageImpl extends EPackageImpl implements GueryPackage {
 		initEClass(groupingEClass, Grouping.class, "Grouping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(preProcessorEClass, PreProcessor.class, "PreProcessor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPreProcessor_Class(), ecorePackage.getEJavaClass(), "class", null, 1, 1, PreProcessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPreProcessor_ProcessorClassName(), ecorePackage.getEString(), "processorClassName", null, 1, 1, PreProcessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(edgeSelectionEClass, EdgeSelection.class, "EdgeSelection", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEdgeSelection_Connections(), this.getConnection(), null, "connections", null, 1, -1, EdgeSelection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -644,6 +648,25 @@ public class GueryPackageImpl extends EPackageImpl implements GueryPackage {
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// de.devboost.emfcustomize.EcoreModelRefactorer
+		createDeAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>de.devboost.emfcustomize.EcoreModelRefactorer</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createDeAnnotations() {
+		String source = "de.devboost.emfcustomize.EcoreModelRefactorer";				
+		addAnnotation
+		  (motifEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //GueryPackageImpl

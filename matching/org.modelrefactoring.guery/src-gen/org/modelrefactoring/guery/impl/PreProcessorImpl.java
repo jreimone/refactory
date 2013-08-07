@@ -19,7 +19,7 @@ import org.modelrefactoring.guery.PreProcessor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.modelrefactoring.guery.impl.PreProcessorImpl#getClass_ <em>Class</em>}</li>
+ *   <li>{@link org.modelrefactoring.guery.impl.PreProcessorImpl#getProcessorClassName <em>Processor Class Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,15 +27,23 @@ import org.modelrefactoring.guery.PreProcessor;
  */
 public class PreProcessorImpl extends EObjectImpl implements PreProcessor {
 	/**
-	 * The cached value of the '{@link #getClass_() <em>Class</em>}' attribute.
+	 * The default value of the '{@link #getProcessorClassName() <em>Processor Class Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getClass_()
+	 * @see #getProcessorClassName()
 	 * @generated
 	 * @ordered
 	 */
-	protected Class class_;
-
+	protected static final String PROCESSOR_CLASS_NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getProcessorClassName() <em>Processor Class Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProcessorClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String processorClassName = PROCESSOR_CLASS_NAME_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,8 +68,8 @@ public class PreProcessorImpl extends EObjectImpl implements PreProcessor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Class getClass_() {
-		return class_;
+	public String getProcessorClassName() {
+		return processorClassName;
 	}
 
 	/**
@@ -69,11 +77,11 @@ public class PreProcessorImpl extends EObjectImpl implements PreProcessor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setClass(Class newClass) {
-		Class oldClass = class_;
-		class_ = newClass;
+	public void setProcessorClassName(String newProcessorClassName) {
+		String oldProcessorClassName = processorClassName;
+		processorClassName = newProcessorClassName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GueryPackage.PRE_PROCESSOR__CLASS, oldClass, class_));
+			eNotify(new ENotificationImpl(this, Notification.SET, GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME, oldProcessorClassName, processorClassName));
 	}
 
 	/**
@@ -84,8 +92,8 @@ public class PreProcessorImpl extends EObjectImpl implements PreProcessor {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GueryPackage.PRE_PROCESSOR__CLASS:
-				return getClass_();
+			case GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME:
+				return getProcessorClassName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -98,8 +106,8 @@ public class PreProcessorImpl extends EObjectImpl implements PreProcessor {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GueryPackage.PRE_PROCESSOR__CLASS:
-				setClass((Class)newValue);
+			case GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME:
+				setProcessorClassName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -113,8 +121,8 @@ public class PreProcessorImpl extends EObjectImpl implements PreProcessor {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GueryPackage.PRE_PROCESSOR__CLASS:
-				setClass((Class)null);
+			case GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME:
+				setProcessorClassName(PROCESSOR_CLASS_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -128,8 +136,8 @@ public class PreProcessorImpl extends EObjectImpl implements PreProcessor {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GueryPackage.PRE_PROCESSOR__CLASS:
-				return class_ != null;
+			case GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME:
+				return PROCESSOR_CLASS_NAME_EDEFAULT == null ? processorClassName != null : !PROCESSOR_CLASS_NAME_EDEFAULT.equals(processorClassName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -144,8 +152,8 @@ public class PreProcessorImpl extends EObjectImpl implements PreProcessor {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (class: ");
-		result.append(class_);
+		result.append(" (processorClassName: ");
+		result.append(processorClassName);
 		result.append(')');
 		return result.toString();
 	}

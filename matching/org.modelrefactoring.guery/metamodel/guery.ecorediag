@@ -184,7 +184,7 @@
     <children xmi:type="notation:Node" xmi:id="_4mydeF1jEeGfIOIMw6LnYg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_4mydeV1jEeGfIOIMw6LnYg" type="5001">
       <children xmi:type="notation:Node" xmi:id="_4mydel1jEeGfIOIMw6LnYg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="guery.ecore#//PreProcessor/class"/>
+        <element xmi:type="ecore:EAttribute" href="guery.ecore#//PreProcessor/processorClassName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_4myde11jEeGfIOIMw6LnYg"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_4mydfF1jEeGfIOIMw6LnYg"/>
@@ -192,13 +192,17 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_4mydfl1jEeGfIOIMw6LnYg"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_4mydf11jEeGfIOIMw6LnYg" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_dhEsUP82EeKKCJ6mNQS27w" type="2002">
+        <element xmi:type="ecore:EOperation" href="guery.ecore#//PreProcessor/getProcessorClass"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dhEsUf82EeKKCJ6mNQS27w"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_4mydgF1jEeGfIOIMw6LnYg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_4mydgV1jEeGfIOIMw6LnYg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_4mydgl1jEeGfIOIMw6LnYg"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_4mydg11jEeGfIOIMw6LnYg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="guery.ecore#//PreProcessor"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4mydhF1jEeGfIOIMw6LnYg" x="-235" y="220"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4mydhF1jEeGfIOIMw6LnYg" x="-320" y="220"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_EU9JIF1uEeGfIOIMw6LnYg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_EU--UF1uEeGfIOIMw6LnYg" type="4001"/>

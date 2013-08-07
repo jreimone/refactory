@@ -103,7 +103,7 @@ public class GueryGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GueryPlaceholder GUERY_2_0_0_2 = INSTANCE.getGUERY_2_0_0_2();
 	private org.modelrefactoring.guery.resource.guery.grammar.GueryPlaceholder getGUERY_2_0_0_2() {
-		return new org.modelrefactoring.guery.resource.guery.grammar.GueryPlaceholder(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getPreProcessor().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__CLASS), "CLASSNAME", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, 0);
+		return new org.modelrefactoring.guery.resource.guery.grammar.GueryPlaceholder(org.modelrefactoring.guery.GueryPackage.eINSTANCE.getPreProcessor().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME), "CLASSNAME", org.modelrefactoring.guery.resource.guery.grammar.GueryCardinality.ONE, 0);
 	}
 	public final static org.modelrefactoring.guery.resource.guery.grammar.GuerySequence GUERY_2_0_0 = INSTANCE.getGUERY_2_0_0();
 	private org.modelrefactoring.guery.resource.guery.grammar.GuerySequence getGUERY_2_0_0() {

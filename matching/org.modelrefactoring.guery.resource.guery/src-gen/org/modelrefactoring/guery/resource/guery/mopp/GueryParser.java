@@ -1113,15 +1113,15 @@ public class GueryParser extends GueryANTLRParserBase {
             				org.modelrefactoring.guery.resource.guery.IGueryTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("CLASSNAME");
             				tokenResolver.setOptions(getOptions());
             				org.modelrefactoring.guery.resource.guery.IGueryTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__CLASS), result);
+            				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
             					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
             				}
-            				java.lang.Class resolved = (java.lang.Class) resolvedObject;
+            				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
             					Object value = resolved;
-            					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__CLASS), value);
+            					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME), value);
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);

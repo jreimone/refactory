@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.modelrefactoring.guery.PreProcessor#getClass_ <em>Class</em>}</li>
+ *   <li>{@link org.modelrefactoring.guery.PreProcessor#getProcessorClassName <em>Processor Class Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,29 +22,29 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface PreProcessor extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Class</b></em>' attribute.
+	 * Returns the value of the '<em><b>Processor Class Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Class</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Processor Class Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class</em>' attribute.
-	 * @see #setClass(Class)
-	 * @see org.modelrefactoring.guery.GueryPackage#getPreProcessor_Class()
+	 * @return the value of the '<em>Processor Class Name</em>' attribute.
+	 * @see #setProcessorClassName(String)
+	 * @see org.modelrefactoring.guery.GueryPackage#getPreProcessor_ProcessorClassName()
 	 * @model required="true"
 	 * @generated
 	 */
-	Class getClass_();
+	String getProcessorClassName();
 
 	/**
-	 * Sets the value of the '{@link org.modelrefactoring.guery.PreProcessor#getClass_ <em>Class</em>}' attribute.
+	 * Sets the value of the '{@link org.modelrefactoring.guery.PreProcessor#getProcessorClassName <em>Processor Class Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class</em>' attribute.
-	 * @see #getClass_()
+	 * @param value the new value of the '<em>Processor Class Name</em>' attribute.
+	 * @see #getProcessorClassName()
 	 * @generated
 	 */
-	void setClass(Class value);
+	void setProcessorClassName(String value);
 
 } // PreProcessor

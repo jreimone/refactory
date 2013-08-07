@@ -491,13 +491,13 @@ public interface GueryPackage extends EPackage {
 	int PRE_PROCESSOR = 9;
 
 	/**
-	 * The feature id for the '<em><b>Class</b></em>' attribute.
+	 * The feature id for the '<em><b>Processor Class Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRE_PROCESSOR__CLASS = 0;
+	int PRE_PROCESSOR__PROCESSOR_CLASS_NAME = 0;
 
 	/**
 	 * The number of structural features of the '<em>Pre Processor</em>' class.
@@ -812,15 +812,15 @@ public interface GueryPackage extends EPackage {
 	EClass getPreProcessor();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.modelrefactoring.guery.PreProcessor#getClass_ <em>Class</em>}'.
+	 * Returns the meta object for the attribute '{@link org.modelrefactoring.guery.PreProcessor#getProcessorClassName <em>Processor Class Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Class</em>'.
-	 * @see org.modelrefactoring.guery.PreProcessor#getClass_()
+	 * @return the meta object for the attribute '<em>Processor Class Name</em>'.
+	 * @see org.modelrefactoring.guery.PreProcessor#getProcessorClassName()
 	 * @see #getPreProcessor()
 	 * @generated
 	 */
-	EAttribute getPreProcessor_Class();
+	EAttribute getPreProcessor_ProcessorClassName();
 
 	/**
 	 * Returns the meta object for class '{@link org.modelrefactoring.guery.EdgeSelection <em>Edge Selection</em>}'.
@@ -1141,12 +1141,12 @@ public interface GueryPackage extends EPackage {
 		EClass PRE_PROCESSOR = eINSTANCE.getPreProcessor();
 
 		/**
-		 * The meta object literal for the '<em><b>Class</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Processor Class Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PRE_PROCESSOR__CLASS = eINSTANCE.getPreProcessor_Class();
+		EAttribute PRE_PROCESSOR__PROCESSOR_CLASS_NAME = eINSTANCE.getPreProcessor_ProcessorClassName();
 
 		/**
 		 * The meta object literal for the '{@link org.modelrefactoring.guery.impl.EdgeSelectionImpl <em>Edge Selection</em>}' class.

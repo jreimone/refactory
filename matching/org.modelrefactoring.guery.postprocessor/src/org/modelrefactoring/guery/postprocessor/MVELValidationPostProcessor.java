@@ -1,17 +1,14 @@
 package org.modelrefactoring.guery.postprocessor;
 
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
 import org.modelrefactoring.guery.Constrainable;
 import org.modelrefactoring.guery.Constraint;
 import org.modelrefactoring.guery.Motif;
 import org.modelrefactoring.guery.MotifModel;
 import org.modelrefactoring.guery.resource.guery.GueryEProblemType;
 import org.modelrefactoring.guery.resource.guery.mopp.GueryResource;
-import org.mvel2.MVELInterpretedRuntime;
-import org.mvel2.integration.impl.MapVariableResolverFactory;
+import org.mvel2.MVEL;
 
 public class MVELValidationPostProcessor extends AbstractGueryPostProcessor {
 
@@ -29,14 +26,14 @@ public class MVELValidationPostProcessor extends AbstractGueryPostProcessor {
 	}
 
 	private void validateConstraint(GueryResource resource, Constraint constraint, Motif motif) {
-		Map<String, EObject> variables = motif.getContexts().map();
-		MapVariableResolverFactory resolverFactory = new MapVariableResolverFactory(variables);
+//		Map<String, EObject> variables = motif.getContexts().map();
+//		MapVariableResolverFactory resolverFactory = new MapVariableResolverFactory(variables);
 		String expression = constraint.getExpression();
-		MVELInterpretedRuntime interpreter = new MVELInterpretedRuntime(expression, null, resolverFactory);
 		try {
-			interpreter.parse();
+			MVEL.compileExpression(expression);
 		} catch (Exception e) {
-			resource.addError(e.getMessage(), GueryEProblemType.SYNTAX_ERROR, constraint);
+			String message = "This string is parsed by MVEL. The following error occured:\n\n" + e.getMessage();
+			resource.addError(message, GueryEProblemType.SYNTAX_ERROR, constraint);
 		}
 	}
 }

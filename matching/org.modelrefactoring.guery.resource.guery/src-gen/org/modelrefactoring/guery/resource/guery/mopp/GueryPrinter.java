@@ -323,8 +323,8 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		// 0 (if the feature is null).
 		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
 		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__CLASS));
-		printCountingMap.put("class", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME));
+		printCountingMap.put("processorClassName", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (LineBreak)
@@ -334,16 +334,16 @@ public class GueryPrinter implements org.modelrefactoring.guery.resource.guery.I
 		out.print("prepare with");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
-		count = printCountingMap.get("class");
+		count = printCountingMap.get("processorClassName");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__CLASS));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME));
 			if (o != null) {
 				org.modelrefactoring.guery.resource.guery.IGueryTokenResolver resolver = tokenResolverFactory.createTokenResolver("CLASSNAME");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__CLASS), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.modelrefactoring.guery.GueryPackage.PRE_PROCESSOR__PROCESSOR_CLASS_NAME), element));
 				out.print(" ");
 			}
-			printCountingMap.put("class", count - 1);
+			printCountingMap.put("processorClassName", count - 1);
 		}
 	}
 	

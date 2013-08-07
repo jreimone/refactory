@@ -171,7 +171,7 @@ public class GueryFactoryImpl extends EFactoryImpl implements GueryFactory {
 	 * @generated
 	 */
 	public PreProcessor createPreProcessor() {
-		PreProcessorImpl preProcessor = new PreProcessorImpl();
+		PreProcessorImpl preProcessor = new PreProcessorCustom();
 		return preProcessor;
 	}
 

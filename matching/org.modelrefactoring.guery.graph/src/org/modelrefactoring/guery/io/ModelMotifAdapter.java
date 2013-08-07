@@ -13,7 +13,12 @@ import nz.ac.massey.cs.guery.PropertyConstraint;
 import nz.ac.massey.cs.guery.mvel.CompiledGroupByClause;
 import nz.ac.massey.cs.guery.mvel.CompiledPropertyConstraint;
 
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.modelrefactoring.guery.ConnectedBy;
 import org.modelrefactoring.guery.Connection;
 import org.modelrefactoring.guery.EdgeSelection;
@@ -145,7 +150,7 @@ public class ModelMotifAdapter<Vertex extends EObjectVertex> implements Motif<Ve
 		CompiledPropertyConstraint propertyConstraint = new CompiledPropertyConstraint(expression);
 		return propertyConstraint;
 	}
-	
+
 	private PathConstraint<EObjectVertex, EReferenceEdge> createPathConstraint(EdgeSelection edgeSelection, Connection connection) {
 		PathConstraint<EObjectVertex, EReferenceEdge> gueryConstraint = new PathConstraint<EObjectVertex, EReferenceEdge>();
 		gueryConstraint.setRole(connection.getPath());
@@ -184,17 +189,15 @@ public class ModelMotifAdapter<Vertex extends EObjectVertex> implements Motif<Ve
 			List<PreProcessor> preprocessors = motif.getPrepare();
 			for (PreProcessor preProcessor : preprocessors) {
 				@SuppressWarnings("rawtypes")
-				Class class_ = preProcessor.getClass_();
-				if(Processor.class.isAssignableFrom(class_)){
-					try {
-						@SuppressWarnings("rawtypes")
-						Processor processor = (Processor) class_.newInstance();
-						processors.add(processor);
-					} catch (InstantiationException e) {
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
-					}
+				Class<Processor> processorClass = getProcessorClass(preProcessor);
+				try {
+					@SuppressWarnings("rawtypes")
+					Processor processor = processorClass.newInstance();
+					processors.add(processor);
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -206,4 +209,50 @@ public class ModelMotifAdapter<Vertex extends EObjectVertex> implements Motif<Ve
 		return motif.getName();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Class<Processor> getProcessorClass(PreProcessor processor){
+		//		if(Platform.isRunning()){
+		//		URI uri2 = EcoreUtil.getURI(container);
+		//		Resource resource = container.eResource();
+		//		if(resource != null){
+		//			URI uri = resource.getURI();
+		//			if(uri.isPlatformResource()){
+		//				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		//				IFile file = root.getFile(new Path(uri.toPlatformString(true)));
+		//				if(file != null && file.exists()){
+		//					IProject project = file.getProject();
+		//					if(project != null && project.exists()){
+		//						IJavaProject javaProject = (IJavaProject) project.getAdapter(IJavaProject.class);
+		//						if(javaProject != null){
+		//							String id1 = javaProject.getElementName();
+		//							String id2 = javaProject.getHandleIdentifier();
+		////							Platform.getBundle(javaProject.get)
+		//							try {
+		//								IType type = javaProject.findType(lexem);
+		//								if(type != null){
+		//									IClassFile classFile = type.getClassFile();
+		//									IJavaModel javaModel = classFile.getJavaModel();
+		//									//									JavaCore.getClasspathContainer(containerPath, project)
+		//									System.out.println();
+		//								}
+		//							} catch (JavaModelException e) {
+		//								result.setErrorMessage("Class '" + lexem + "' couldn't be loaded");
+		//							}
+		//						}
+		//					}
+		//				}
+		//			}
+		//		}
+		//	} else {
+		try {
+			ClassLoader classLoader = this.getClass().getClassLoader();
+			Class<?> clazz = classLoader.loadClass(processor.getProcessorClassName());
+			if(Processor.class.isAssignableFrom(clazz)){
+				return (Class<Processor>) clazz;
+			} 
+		} catch (ClassNotFoundException e) {			
+		}
+		//	}
+		return null;
+	}
 }

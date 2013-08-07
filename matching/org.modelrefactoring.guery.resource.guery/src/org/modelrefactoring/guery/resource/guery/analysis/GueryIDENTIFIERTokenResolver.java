@@ -6,6 +6,7 @@
  */
 package org.modelrefactoring.guery.resource.guery.analysis;
 
+
 public class GueryIDENTIFIERTokenResolver implements org.modelrefactoring.guery.resource.guery.IGueryTokenResolver {
 	
 	private org.modelrefactoring.guery.resource.guery.analysis.GueryDefaultTokenResolver defaultTokenResolver = new org.modelrefactoring.guery.resource.guery.analysis.GueryDefaultTokenResolver(true);

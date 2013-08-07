@@ -56,7 +56,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="NotConnectedBy" eSuperTypes="#//EdgeSelection"/>
   <eClassifiers xsi:type="ecore:EClass" name="Grouping" eSuperTypes="#//Constrainable"/>
   <eClassifiers xsi:type="ecore:EClass" name="PreProcessor">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="class" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="processorClassName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EdgeSelection" abstract="true" eSuperTypes="#//Constrainable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="connections" lowerBound="1"
