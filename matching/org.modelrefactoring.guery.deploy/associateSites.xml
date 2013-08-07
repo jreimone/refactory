@@ -1,0 +1,9 @@
+<associateSites>
+	<associateSite label="Kepler" 
+		url="http://download.eclipse.org/releases/kepler"/>
+	<associateSite label="The Eclipse Project Updates" 
+		url="http://download.eclipse.org/eclipse/updates/4.3"/>
+	<!-- needed for plugins, such as ANTLR, Guava... --> 
+	<associateSite label="Eclipse Orbit" 
+		url="http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository/"/>	
+</associateSites>

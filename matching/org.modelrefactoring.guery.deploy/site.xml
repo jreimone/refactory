@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site
+      associateSitesURL="http://www.modelrefactoring.org/GUERY_update_trunk/associateSites.xml">
+   <description name="GUERY DSL" url="http://www.modelrefactoring.org/GUERY_update_trunk/">
+      Update site for the EMF-based GUERY DSL. http://www.modelrefactoring.org
+   </description>
+   <feature url="features/org.modelrefactoring.guery.feature_0.1.0.qualifier.jar" id="org.modelrefactoring.guery.feature" version="0.1.0.qualifier">
+      <category name="GUERY"/>
+   </feature>
+   <category-def name="GUERY" label="GUERY">
+      <description>
+         This feature provides a wrapper plug-in for the GUERY framework (http://code.google.com/p/gueryframework/). Furthermore, an EMF-based DSL for GUERY queries and an editor generated with EMFText (http://www.emftext.org/) are provided.
+      </description>
+   </category-def>
+</site>

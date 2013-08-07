@@ -1,0 +1,5 @@
+site/vendor = Software Technology Group TU Dresden / DevBoost GmbH
+site/uploadPath = www.modelrefactoring.org:/srv/www_modelrefactoring.org/GUERY_update_trunk
+site/usernameProperty = DROPSBOX_UPLOAD_USER
+site/passwordProperty = DROPSBOX_UPLOAD_PASS
+site/version = 0.1.0
