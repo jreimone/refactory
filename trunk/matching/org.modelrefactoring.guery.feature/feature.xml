@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.modelrefactoring.guery.feature"
+      label="GUERY DSL Feature"
+      version="0.1.0.qualifier"
+      provider-name="Software Technology Group TU Dresden / DevBoost GmbH">
+
+   <description url="http://code.google.com/p/gueryframework/">
+      This is a textual DSL for the GUERY framework (http://code.google.com/p/gueryframework/).
+This DSL was developed and generated with EMFText (http://www.emftext.org/)
+and is used within the generic model refactoring framework Refactory
+(http://www.modelrefactoring.org/).
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2012 Software Technology Group, Dresden University
+of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg,
+HRB 140026.
+   </copyright>
+
+   <license url="https://www.gnu.org/licenses/agpl-3.0-standalone.html">
+      GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+Copyright (c) 2006-2013
+Software Technology Group, Dresden University of Technology
+DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+School of Engineering and Advanced Technology (SEAT) at the Turitea (Palmerston North) Campus of Massey University
+
+Contributors:
+  Software Technology Group - TU Dresden, Germany;
+  DevBoost GmbH - Berlin, Germany
+     - initial API and implementation
+  School of Engineering and Advanced Technology (SEAT) at the Turitea (Palmerston North) Campus of Massey University
+     - GUERY framework which we wrapped as the Eclipse plug-in org.modelrefactoring.guery.graph
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.emf" version="2.9.0.v20130610-0406"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.jdom"/>
+      <import plugin="org.antlr.runtime"/>
+      <import plugin="com.google.guava"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+   </requires>
+
+   <plugin
+         id="org.modelrefactoring.guery"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.modelrefactoring.guery.graph"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.modelrefactoring.guery.postprocessor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.modelrefactoring.guery.resource.guery"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.modelrefactoring.guery.resource.guery.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
