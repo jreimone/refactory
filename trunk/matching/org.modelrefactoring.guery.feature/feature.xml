@@ -2,7 +2,7 @@
 <feature
       id="org.modelrefactoring.guery.feature"
       label="GUERY DSL Feature"
-      version="0.1.0.qualifier"
+      version="0.1.0"
       provider-name="Software Technology Group TU Dresden / DevBoost GmbH">
 
    <description url="http://code.google.com/p/gueryframework/">
