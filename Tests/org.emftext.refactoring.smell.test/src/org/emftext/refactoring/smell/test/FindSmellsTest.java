@@ -5,30 +5,27 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageRuntimeModule;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PackageImport;
@@ -44,6 +41,7 @@ import org.eclipse.incquery.runtime.extensibility.QuerySpecificationRegistry;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
@@ -66,12 +64,11 @@ import org.emftext.refactoring.smell.registry.IQualitySmellRegistry;
 import org.emftext.refactoring.smell.registry.util.Pair;
 import org.emftext.refactoring.smell.registry.util.Triple;
 import org.emftext.refactoring.smell.rolessmell.RolessmellPackage;
-import org.emftext.refactoring.smell.umlsmells.*;
+import org.emftext.refactoring.smell.umlsmells.UmlsmellsPackage;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.io.Files;
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 @SuppressWarnings("restriction")
@@ -87,6 +84,77 @@ public class FindSmellsTest {
 	private static List<Resource> smellingResources;
 	private static ResourceSetImpl resourceSet;
 
+	@Test
+	public void testFindSmells(){
+		for (Resource resource : smellingResources) {
+			System.out.println("-------------------");
+			System.out.println("file: " + resource.getURI().toString());
+			List<Pair<Calculation,QualityCalculation>> smellCalculationsForResource = registry.getSmellCalculationsForResource(resource);
+//			for (Pair<Calculation, QualityCalculation> pair : smellCalculationsForResource) {
+//				Calculation calculation = pair.getFirst();
+//				if(calculation instanceof Structure){
+//					Pattern pattern = ((Structure) calculation).getPattern();
+//					//					if(pattern.eIsProxy()){
+//					//						Map<URI, URI> uriMap = URIConverter.URI_MAP;
+//					//						URI uri = ((InternalEObject) pattern).eProxyURI();
+//					//						URI localUri = URI.createURI(uri.toString().replace("plugin", "resource"));
+//					//						uriMap.put(uri, localUri);
+//					//						EcoreUtil.resolveAll(pattern);
+//					//					}
+//					IQuerySpecification<?> querySpecification = QuerySpecificationRegistry.getOrCreateQuerySpecification(pattern);
+//					if(querySpecification != null){
+//						// TODO try passing only the resource
+//						try {
+//							IncQueryEngine engine = IncQueryEngine.on(resource.getResourceSet());
+//							// TODO try the following one day
+//							// attention: then engine.wipe() and engine.dispose() must be called if use finished
+//							//						IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
+//							IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
+//							Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+//							for (IPatternMatch match : matches) {
+//								System.out.println(match);
+//							}
+//						} catch (IncQueryException e) {
+//							e.printStackTrace();
+//						}
+//					}					
+//					//					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getMatcherFactory(pattern.getName());
+//					//					if(matcherFactory != null){
+//					//						try {
+//					//							IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(resourceSet);
+//					//							Collection<IPatternMatch> allMatches = matcher.getAllMatches();
+//					//							for (IPatternMatch match : allMatches) {
+//					//								System.out.println(match);
+//					//							}
+//					//						} catch (IncQueryException e) {
+//					//							e.printStackTrace();
+//					//						}
+//					//					}
+//					checkForProxies(pattern);
+//					checkMetamodels(pattern, resource);
+//				}
+//			}
+
+			List<Triple<CalculationResult, Calculation, QualityCalculation>> matchingSmellCalculations = registry.getMatchingSmellCalculationsForResource(resource);
+			for (Triple<CalculationResult, Calculation, QualityCalculation> triple : matchingSmellCalculations) {
+				CalculationResult result = triple.getFirst();
+				QualityCalculation qualityCalculation = triple.getThird();
+				ConcreteQualitySmell concreteSmell = qualityCalculation.getConcreteSmell();
+				String concreteName = concreteSmell.getConcreteName();
+				String genericName = concreteSmell.getGenericSmell().getName();
+				Quality quality = qualityCalculation.getQuality();
+				String qualityName = quality.getName();
+				System.out.println("generic smell: " + genericName);
+				System.out.println("concrete smell: " + concreteName);
+				System.out.println("quality: " + qualityName);
+				List<EObject> causingObjects = result.getCausingObjects();
+				for (EObject element : causingObjects) {
+					System.out.println("smelling element: " + EcoreUtil.getURI(element).toString());
+				}
+			}
+		}
+	}
+	
 	@BeforeClass
 	public static void setUp(){
 		// not needed when test is run as JUnit Plugin test
@@ -215,8 +283,16 @@ public class FindSmellsTest {
 			smellingResources = new ArrayList<Resource>();
 			for (String path : paths) {
 				if(!path.startsWith("//")){
-					file = new File(path).getCanonicalFile();
+					String[] strings = path.split(";");
+					file = new File(strings[0].trim()).getCanonicalFile();
+					File parent = file.getParentFile();
+					if(strings.length == 2){
+						parent = new File(strings[1].trim()).getCanonicalFile();
+					}
 					assertTrue("Smelling resource must exist", file != null && file.exists());
+					assertTrue("Parent of smelling resource must exist", parent != null && parent.exists());
+					loadAllFilesInResourceSet(resourceSet, parent , ".java");
+					collectJarsAndAddToResourceSet(resourceSet, parent);
 					Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
 					assertNotNull("Smelling resource " + file.getAbsolutePath() + " couldn't be loaded", resource);
 					smellingResources.add(resource);
@@ -225,78 +301,10 @@ public class FindSmellsTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		checkProxyResolution(resourceSet);
 	}
 
-	@Test
-	public void testFindSmells(){
-		for (Resource resource : smellingResources) {
-			System.out.println("-------------------");
-			System.out.println("file: " + resource.getURI().toString());
-			List<Pair<Calculation,QualityCalculation>> smellCalculationsForResource = registry.getSmellCalculationsForResource(resource);
-			for (Pair<Calculation, QualityCalculation> pair : smellCalculationsForResource) {
-				Calculation calculation = pair.getFirst();
-				if(calculation instanceof Structure){
-					Pattern pattern = ((Structure) calculation).getPattern();
-					//					if(pattern.eIsProxy()){
-					//						Map<URI, URI> uriMap = URIConverter.URI_MAP;
-					//						URI uri = ((InternalEObject) pattern).eProxyURI();
-					//						URI localUri = URI.createURI(uri.toString().replace("plugin", "resource"));
-					//						uriMap.put(uri, localUri);
-					//						EcoreUtil.resolveAll(pattern);
-					//					}
-					IQuerySpecification<?> querySpecification = QuerySpecificationRegistry.getOrCreateQuerySpecification(pattern);
-					if(querySpecification != null){
-						// TODO try passing only the resource
-						try {
-							IncQueryEngine engine = IncQueryEngine.on(resource.getResourceSet());
-							// TODO try the following one day
-							// attention: then engine.wipe() and engine.dispose() must be called if use finished
-							//						IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
-							IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
-							Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
-							for (IPatternMatch match : matches) {
-								System.out.println(match);
-							}
-						} catch (IncQueryException e) {
-							e.printStackTrace();
-						}
-					}					
-					//					IMatcherFactory<IncQueryMatcher<IPatternMatch>> matcherFactory = (IMatcherFactory<IncQueryMatcher<IPatternMatch>>) MatcherFactoryRegistry.getMatcherFactory(pattern.getName());
-					//					if(matcherFactory != null){
-					//						try {
-					//							IncQueryMatcher<IPatternMatch> matcher = matcherFactory.getMatcher(resourceSet);
-					//							Collection<IPatternMatch> allMatches = matcher.getAllMatches();
-					//							for (IPatternMatch match : allMatches) {
-					//								System.out.println(match);
-					//							}
-					//						} catch (IncQueryException e) {
-					//							e.printStackTrace();
-					//						}
-					//					}
-					checkForProxies(pattern);
-					checkMetamodels(pattern, resource);
-				}
-			}
-
-			List<Triple<CalculationResult, Calculation, QualityCalculation>> matchingSmellCalculations = registry.getMatchingSmellCalculationsForResource(resource);
-			for (Triple<CalculationResult, Calculation, QualityCalculation> triple : matchingSmellCalculations) {
-				CalculationResult result = triple.getFirst();
-				QualityCalculation qualityCalculation = triple.getThird();
-				ConcreteQualitySmell concreteSmell = qualityCalculation.getConcreteSmell();
-				String concreteName = concreteSmell.getConcreteName();
-				String genericName = concreteSmell.getGenericSmell().getName();
-				Quality quality = qualityCalculation.getQuality();
-				String qualityName = quality.getName();
-				System.out.println("generic smell: " + genericName);
-				System.out.println("concrete smell: " + concreteName);
-				System.out.println("quality: " + qualityName);
-				List<EObject> causingObjects = result.getCausingObjects();
-				for (EObject element : causingObjects) {
-					System.out.println("smelling element: " + EcoreUtil.getURI(element).toString());
-				}
-			}
-		}
-	}
+	
 
 	private void checkMetamodels(Pattern pattern, Resource resource) {
 		PatternModel patternModel = (PatternModel) pattern.eContainer();
@@ -332,5 +340,149 @@ public class FindSmellsTest {
 				fail("pattern " + pattern.getName() + " contains proxy:\n" + element);
 			}
 		}
+	}
+	
+//////////this is adapted from JaMoPPC
+	
+	private static void collectJarsAndAddToResourceSet(ResourceSet rs, File root) {
+		List<File> allJars = collectJars(root);
+		JavaClasspath classpath = JavaClasspath.get(rs);
+		classpath.registerStdLib();
+		// register jar files
+		for (File jarFile : allJars) {
+			if (!jarFile.exists()) {
+				System.out.println("not found: " + jarFile);
+				return;
+			}
+			try {
+				System.out.println("Registering JAR " + jarFile.getCanonicalPath());
+				classpath.registerClassifierJar(URI.createFileURI(jarFile.getCanonicalPath()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static void checkProxyResolution(ResourceSet rs) {
+		if (!resolveAllProxies(rs, 0)) {
+			System.err.println("Resolution of some Proxies failed...");
+			Iterator<Notifier> it = rs.getAllContents();
+			while (it.hasNext()) {
+				Notifier next = it.next();
+				if (next instanceof EObject) {
+					EObject o = (EObject) next;
+					if (o.eIsProxy()) {
+						try {
+							it.remove();
+						} catch (UnsupportedOperationException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private static List<File> collectJars(File root) {
+		List<File> jarFiles = new ArrayList<File>();
+		File[] files = root.listFiles();
+		for (File file : files) {
+			if(file.isFile() && file.getName().endsWith(".jar")){
+				jarFiles.add(file);
+				continue;
+			}
+			if(file.isDirectory()){
+				jarFiles.addAll(collectJars(file));
+			}
+		}
+		return jarFiles; 
+	}
+	
+	private static void loadAllFilesInResourceSet(ResourceSet rs, File startFolder, String extension) {
+		for (File member : startFolder.listFiles()) {
+			if (member.isFile()) {
+				if (member.getName().endsWith(extension)) {
+					System.out.println("Parsing " + member);
+					parseResource(rs, member);
+				} else {
+					System.out.println("Skipping " + member);
+				}
+			}
+			if (member.isDirectory()) {
+				if (!member.getName().startsWith(".")) {
+					System.out.println("Recursing into " + member);
+					loadAllFilesInResourceSet(rs, member, extension);
+				} else {
+					System.out.println("Skipping " + member);
+				}
+			}
+		}
+	}
+	
+	private static void parseResource(ResourceSet rs, File file) {
+		try {
+			loadResource(rs, file.getCanonicalPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void loadResource(ResourceSet rs, String filePath) {
+		loadResource(rs, URI.createFileURI(filePath));
+	}
+
+	private static void loadResource(ResourceSet rs, URI uri) {
+		rs.getResource(uri, true);
+	}
+
+	protected static boolean resolveAllProxies(ResourceSet rs, int resourcesProcessedBefore) {
+		boolean failure = false;
+		List<EObject> eobjects = new LinkedList<EObject>();
+		for (Iterator<Notifier> i = rs.getAllContents(); i.hasNext();) {
+			Notifier next = i.next();
+			if (next instanceof EObject) {
+				eobjects.add((EObject) next);
+			}
+		}
+		int resourcesProcessed = rs.getResources().size();
+		if (resourcesProcessed == resourcesProcessedBefore) {
+			return true;
+		}
+
+		System.out.println("Resolving cross-references of " + eobjects.size()
+				+ " EObjects.");
+		int resolved = 0;
+		int notResolved = 0;
+		int eobjectCnt = 0;
+		for (EObject next : eobjects) {
+			eobjectCnt++;
+			if (eobjectCnt % 1000 == 0) {
+				System.out.println(eobjectCnt + "/" + eobjects.size()
+						+ " done: Resolved " + resolved + " crossrefs, "
+						+ notResolved + " crossrefs could not be resolved.");
+			}
+
+			InternalEObject nextElement = (InternalEObject) next;
+			for (EObject crElement : nextElement.eCrossReferences()) {
+				crElement = EcoreUtil.resolve(crElement, rs);
+				if (crElement.eIsProxy()) {
+					failure = true;
+					notResolved++;
+					System.out
+					.println("Can not find referenced element in classpath: "
+							+ ((InternalEObject) crElement).eProxyURI());
+				} else {
+					resolved++;
+				}
+			}
+		}
+
+		System.out.println(eobjectCnt + "/" + eobjects.size()
+				+ " done: Resolved " + resolved + " crossrefs, " + notResolved
+				+ " crossrefs could not be resolved.");
+
+		//call this method again, because the resolving might have triggered loading
+		//of additional resources that may also contain references that need to be resolved.
+		return !failure && resolveAllProxies(rs, resourcesProcessed);
 	}
 }
