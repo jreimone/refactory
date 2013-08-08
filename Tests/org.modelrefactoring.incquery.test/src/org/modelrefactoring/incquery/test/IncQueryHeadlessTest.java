@@ -3,7 +3,6 @@ package org.modelrefactoring.incquery.test;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,16 +39,6 @@ import com.google.inject.Injector;
 
 public class IncQueryHeadlessTest {
 
-	private static class RecursiveJarFileFilter implements FileFilter {
-		@Override
-		public boolean accept(File file) {
-			if(file.isFile()){
-				return file.getName().endsWith(".jar");
-			}
-			return false;
-		}
-	}
-
 	private static Resource javaResource;
 	private static Pattern pattern;
 
@@ -65,6 +54,7 @@ public class IncQueryHeadlessTest {
 				//				IncQueryEngine engine = IncQueryEngine.on(rs);
 				IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
 				Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+				assertEquals("", 2, matches.size());
 				for (IPatternMatch match : matches) {
 					System.out.println(match);
 				}
@@ -120,6 +110,7 @@ public class IncQueryHeadlessTest {
 		File root = new File(".");
 		List<File> allJars = collectJars(root);
 		JavaClasspath classpath = JavaClasspath.get(rs);
+		classpath.registerStdLib();
 		// register jar files
 		for (File jarFile : allJars) {
 			if (!jarFile.exists()) {
