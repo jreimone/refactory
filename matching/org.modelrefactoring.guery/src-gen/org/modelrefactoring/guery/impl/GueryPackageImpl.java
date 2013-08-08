@@ -642,25 +642,6 @@ public class GueryPackageImpl extends EPackageImpl implements GueryPackage {
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// de.devboost.emfcustomize.EcoreModelRefactorer
-		createDeAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>de.devboost.emfcustomize.EcoreModelRefactorer</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createDeAnnotations() {
-		String source = "de.devboost.emfcustomize.EcoreModelRefactorer";				
-		addAnnotation
-		  (motifEClass.getEOperations().get(1), 
-		   source, 
-		   new String[] {
-		   });
 	}
 
 } //GueryPackageImpl

@@ -7,13 +7,20 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.modelrefactoring.guery.*;
-import org.modelrefactoring.guery.custom.*;
+import org.modelrefactoring.guery.ConnectedBy;
+import org.modelrefactoring.guery.Connection;
+import org.modelrefactoring.guery.Constraint;
+import org.modelrefactoring.guery.Grouping;
+import org.modelrefactoring.guery.GueryFactory;
+import org.modelrefactoring.guery.GueryPackage;
+import org.modelrefactoring.guery.Motif;
+import org.modelrefactoring.guery.MotifModel;
+import org.modelrefactoring.guery.NotConnectedBy;
+import org.modelrefactoring.guery.PreProcessor;
+import org.modelrefactoring.guery.Role;
+import org.modelrefactoring.guery.VertexSelection;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,7 +76,7 @@ public class GueryFactoryImpl extends EFactoryImpl implements GueryFactory {
 			case GueryPackage.NOT_CONNECTED_BY: return createNotConnectedBy();
 			case GueryPackage.GROUPING: return createGrouping();
 			case GueryPackage.PRE_PROCESSOR: return createPreProcessor();
-			case GueryPackage.STRING_TO_EOBJECT_MAP: return (EObject) createStringToEObjectMap();
+			case GueryPackage.STRING_TO_EOBJECT_MAP: return (EObject)createStringToEObjectMap();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -91,7 +98,7 @@ public class GueryFactoryImpl extends EFactoryImpl implements GueryFactory {
 	 * @generated
 	 */
 	public Motif createMotif() {
-		MotifImpl motif = new MotifCustom();
+		MotifImpl motif = new MotifImpl();
 		return motif;
 	}
 
@@ -171,7 +178,7 @@ public class GueryFactoryImpl extends EFactoryImpl implements GueryFactory {
 	 * @generated
 	 */
 	public PreProcessor createPreProcessor() {
-		PreProcessorImpl preProcessor = new PreProcessorCustom();
+		PreProcessorImpl preProcessor = new PreProcessorImpl();
 		return preProcessor;
 	}
 
@@ -180,7 +187,7 @@ public class GueryFactoryImpl extends EFactoryImpl implements GueryFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map.Entry<String,EObject> createStringToEObjectMap() {
+	public Map.Entry<String, EObject> createStringToEObjectMap() {
 		StringToEObjectMapImpl stringToEObjectMap = new StringToEObjectMapImpl();
 		return stringToEObjectMap;
 	}
@@ -191,7 +198,7 @@ public class GueryFactoryImpl extends EFactoryImpl implements GueryFactory {
 	 * @generated
 	 */
 	public GueryPackage getGueryPackage() {
-		return (GueryPackage) getEPackage();
+		return (GueryPackage)getEPackage();
 	}
 
 	/**
