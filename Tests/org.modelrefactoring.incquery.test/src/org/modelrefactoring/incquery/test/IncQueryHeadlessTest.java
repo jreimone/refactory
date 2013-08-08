@@ -13,14 +13,18 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetup;
+import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
+import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
+import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
 import org.eclipse.incquery.runtime.api.IQuerySpecification;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
@@ -28,6 +32,8 @@ import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.incquery.runtime.extensibility.QuerySpecificationRegistry;
 import org.eclipse.incquery.tooling.core.generator.GeneratorModule;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.java.resource.java.util.JavaResourceUtil;
@@ -66,20 +72,31 @@ public class IncQueryHeadlessTest {
 
 	@BeforeClass
 	public static void setUp(){
+		initLanguages();
 		initJavaResource();
 		initPattern();
 	}
 
-	private static void initPattern() {
+	private static void initLanguages() {
 		// Xtext resource magic -- this is needed for EIQs
 		// use a trick to load Pattern models from a file
-		new EMFPatternLanguageStandaloneSetup()
+		Injector injector = new EMFPatternLanguageStandaloneSetup()
 		{
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new GeneratorModule());
 			}
 		}.createInjectorAndDoEMFRegistration();
+		JaMoPPUtil.initialize();
+		// the following must not be done when run as plugin test
+//		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
+//		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
+	}
+
+	private static void initPattern() {
 		File file = new File("src/org/modelrefactoring/incquery/test/query/dataTransmissionWithoutCompression.eiq");
 		assertTrue("File must exist", file != null && file.exists());
 		ResourceSet rs = new ResourceSetImpl();
@@ -97,10 +114,7 @@ public class IncQueryHeadlessTest {
 		}
 	}
 
-
-
 	private static void initJavaResource() {
-		JaMoPPUtil.initialize();
 		File file = new File("src/org/modelrefactoring/incquery/test/model/DataTransmissionWithoutCompression.java");
 		assertTrue("File must exist", file != null && file.exists());
 		javaResource = JavaResourceUtil.getResource(file);
@@ -141,10 +155,8 @@ public class IncQueryHeadlessTest {
 					}
 				}
 			}
-			// return;
 		}
 		//////////this is adapted from JaMoPPC -- till here
-		
 		assertNotNull("Java resource " + file.getAbsolutePath() + " couldn't be loaded", javaResource);
 	}
 
@@ -201,7 +213,7 @@ public class IncQueryHeadlessTest {
 	private static void loadResource(ResourceSet rs, URI uri) {
 		rs.getResource(uri, true);
 	}
-	
+
 	protected static boolean resolveAllProxies(ResourceSet rs, int resourcesProcessedBefore) {
 		boolean failure = false;
 		List<EObject> eobjects = new LinkedList<EObject>();
@@ -236,8 +248,8 @@ public class IncQueryHeadlessTest {
 					failure = true;
 					notResolved++;
 					System.out
-							.println("Can not find referenced element in classpath: "
-									+ ((InternalEObject) crElement).eProxyURI());
+					.println("Can not find referenced element in classpath: "
+							+ ((InternalEObject) crElement).eProxyURI());
 				} else {
 					resolved++;
 				}
@@ -247,7 +259,7 @@ public class IncQueryHeadlessTest {
 		System.out.println(eobjectCnt + "/" + eobjects.size()
 				+ " done: Resolved " + resolved + " crossrefs, " + notResolved
 				+ " crossrefs could not be resolved.");
-		
+
 		//call this method again, because the resolving might have triggered loading
 		//of additional resources that may also contain references that need to be resolved.
 		return !failure && resolveAllProxies(rs, resourcesProcessed);
