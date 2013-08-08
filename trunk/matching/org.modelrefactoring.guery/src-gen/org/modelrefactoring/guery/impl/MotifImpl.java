@@ -6,26 +6,25 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.modelrefactoring.guery.Connection;
 import org.modelrefactoring.guery.Constrainable;
 import org.modelrefactoring.guery.EdgeSelection;
 import org.modelrefactoring.guery.Grouping;
 import org.modelrefactoring.guery.GueryPackage;
 import org.modelrefactoring.guery.Motif;
 import org.modelrefactoring.guery.PreProcessor;
+import org.modelrefactoring.guery.Role;
 import org.modelrefactoring.guery.VertexSelection;
 
 /**
@@ -228,23 +227,33 @@ public class MotifImpl extends EObjectImpl implements Motif {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<Constrainable> getConstrainables() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		EList<Constrainable> constrainables = new BasicEList<Constrainable>();
+		constrainables.addAll(this.getGroupBy());
+		constrainables.addAll(this.getEdgeSelections());
+		constrainables.add(this.getVertexSelection());
+		return constrainables;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EMap<String, EObject> getContexts() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		EMap<String, EObject> context = new BasicEMap<String, EObject>();
+		VertexSelection selection = this.getVertexSelection();
+		for (Role role : selection.getRoles()) {
+			context.put(role.getName(), role);
+		}
+		for (EdgeSelection edgeSelection : this.getEdgeSelections()) {
+			for (Connection	connection : edgeSelection.getConnections()) {
+				context.put(connection.getPath(), connection);
+			}
+		}
+		return context;
 	}
 
 	/**

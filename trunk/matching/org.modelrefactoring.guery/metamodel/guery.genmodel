@@ -21,7 +21,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference guery.ecore#//Motif/edgeSelections"/>
       <genOperations ecoreOperation="guery.ecore#//Motif/getContexts"/>
       <genOperations ecoreOperation="guery.ecore#//Motif/getConstrainables"/>
-      <genOperations ecoreOperation="guery.ecore#//Motif/getConstrainables.1"/>
     </genClasses>
     <genClasses ecoreClass="guery.ecore#//Role">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute guery.ecore#//Role/name"/>

@@ -15,10 +15,6 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&#xD;&#xA;&#x9;Returns all contained Constrainables of this motif.&#xD;&#xA;"/>
       </eAnnotations>
-      <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
-    </eOperations>
-    <eOperations name="getConstrainables" upperBound="-1" eType="#//Constrainable">
-      <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vertexSelection" lowerBound="1"
