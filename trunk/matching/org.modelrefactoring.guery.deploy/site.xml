@@ -4,7 +4,7 @@
    <description name="GUERY DSL" url="http://www.modelrefactoring.org/GUERY_update_trunk/">
       Update site for the EMF-based GUERY DSL. http://www.modelrefactoring.org
    </description>
-   <feature url="features/org.modelrefactoring.guery.feature_0.1.0.qualifier.jar" id="org.modelrefactoring.guery.feature" version="0.1.0.qualifier">
+   <feature url="features/org.modelrefactoring.guery.feature_0.1.0.jar" id="org.modelrefactoring.guery.feature" version="0.1.0">
       <category name="GUERY"/>
    </feature>
    <category-def name="GUERY" label="GUERY">
