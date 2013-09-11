@@ -48,6 +48,7 @@ import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.modelrefactoring.guery.GueryFactory;
 import org.modelrefactoring.guery.GueryPackage;
@@ -70,19 +71,20 @@ public class MotifSolvingAndSaveTest {
 	private static final String CONFIG_FILE_PATH		= "config/MotifSolvingAndSaveTest.config";
 	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20DSL%20and%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
 
-	private EPackage metamodel;
-	private RoleModel roleModel;
-	private int maxPathLength;
-	private int maxResults;
+	@Parameter(0)
+	public EPackage metamodel;
+	@Parameter(1)
+	public RoleModel roleModel;
+	@Parameter(2)
+	public int maxPathLength;
+	@Parameter(3)
+	public int maxResults;
+	@Parameter(4)
+	public String metamodelName;
+	@Parameter(5)
+	public String rolemodelName;
 
-	public MotifSolvingAndSaveTest(EPackage metamodel, RoleModel roleModel, int maxPathLength, int maxResults){
-		this.metamodel = metamodel;
-		this.roleModel = roleModel;
-		this.maxPathLength = maxPathLength;
-		this.maxResults = maxResults;
-	}
-
-	@Parameters
+	@Parameters(name = "MM = {4} | RM = {5} | MPL = {2} | MR = {3}")
 	public static Collection<Object[]> initParameterData(){
 		initLanguages();
 		List<Object[]> readData = new ArrayList<Object[]>();
@@ -109,7 +111,7 @@ public class MotifSolvingAndSaveTest {
 					assertNotNull("RoleModel " + rolemodelString + " couldn't be loaded", roleModel);
 					int maxPathLength = Integer.parseInt(maxPathLengthString);
 					int maxResultsCount = Integer.parseInt(maxResultsCountString);
-					readData.add(new Object[]{metamodel, roleModel, maxPathLength, maxResultsCount});
+					readData.add(new Object[]{metamodel, roleModel, maxPathLength, maxResultsCount, metamodel.getName(), roleModel.getName()});
 				}
 			}
 		} catch (IOException e) {
