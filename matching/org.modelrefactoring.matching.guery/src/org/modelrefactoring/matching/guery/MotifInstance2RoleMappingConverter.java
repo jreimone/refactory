@@ -62,7 +62,6 @@ public class MotifInstance2RoleMappingConverter implements ResultListener<Metamo
 				concreteMapping.setMetaclass(metaclass);
 				concreteMapping.setRole(roleByName);
 				roleMapping.getRoleToMetaelement().add(concreteMapping);
-				//				}
 			}
 		}
 	}
