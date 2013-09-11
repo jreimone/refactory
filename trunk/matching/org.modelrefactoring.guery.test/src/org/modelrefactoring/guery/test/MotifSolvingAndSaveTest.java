@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.uml2.uml.UMLPackage;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
@@ -129,7 +130,7 @@ public class MotifSolvingAndSaveTest {
 		System.out.println("RoleModel: " + roleModel.getName());
 		System.out.println("Max PathLength: " + maxPathLength);
 		System.out.println("Max Results: " + maxResults);
-		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2Motifs(roleModel);
+		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2Motifs();
 		for (org.modelrefactoring.guery.Motif motif : motifs) {
 			String uriString = motif.eResource().getURI().toFileString();
 			List<RoleMapping> emfTextParsingRoleMappings = testMotifOnMetamodel(uriString, metamodel.eResource(), roleModel);
@@ -279,7 +280,7 @@ public class MotifSolvingAndSaveTest {
 		return file;
 	}
 
-	private List<org.modelrefactoring.guery.Motif> convertRoleModel2Motifs(RoleModel roleModel) {
+	private List<org.modelrefactoring.guery.Motif> convertRoleModel2Motifs() {
 		RoleModel2MotifConverter converter = new RoleModel2MotifConverter(roleModel);
 		MotifModel motifModel = converter.createMotifModel(maxPathLength);
 		Resource roleModelResource = roleModel.eResource();
@@ -289,7 +290,7 @@ public class MotifSolvingAndSaveTest {
 		List<org.modelrefactoring.guery.Motif> motifs = motifModel.getMotifs();
 		ArrayList<org.modelrefactoring.guery.Motif> temp = new ArrayList<org.modelrefactoring.guery.Motif>(motifs);
 		for (org.modelrefactoring.guery.Motif motif : temp) {
-			String gueryFileName = "queries/" + roleModelUri.lastSegment().replace("." + roleModelUri.fileExtension(), temp.indexOf(motif) + "." + new GueryMetaInformation().getSyntaxName());
+			String gueryFileName = "queries/" + roleModelUri.lastSegment().replace("." + roleModelUri.fileExtension(), "_" + metamodelName + "_MPL" + maxPathLength + "." + new GueryMetaInformation().getSyntaxName());
 			File gueryFile = new File(gueryFileName);
 			if(gueryFile.exists()){
 				gueryFile.delete();
@@ -330,7 +331,9 @@ public class MotifSolvingAndSaveTest {
 
 	private List<RoleMapping> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
 		MotifInstance2RoleMappingConverter converter = new MotifInstance2RoleMappingConverter(roleModel, maxResults);
-		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(1);
+//		int processors = Runtime.getRuntime().availableProcessors();
+		int processors = 1;
+		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
 		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(resource);
 		engine.query(graphAdapter, motif, converter, ComputationMode.ALL_INSTANCES);
 		List<RoleMapping> foundRoleMappings = converter.getFoundRoleMappings();
@@ -360,6 +363,7 @@ public class MotifSolvingAndSaveTest {
 		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
 		JaMoPPUtil.initialize();
 		EPackage.Registry.INSTANCE.put(ConcretesyntaxPackage.eNS_URI, ConcretesyntaxPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 	}
 
 	private <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getMotifByPath(String path){

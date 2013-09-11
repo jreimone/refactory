@@ -22,4 +22,5 @@ Require-Bundle: org.junit,
  com.google.guava,
  org.emftext.language.java.resource,
  org.emftext.sdk.concretesyntax,
- org.eclipse.emf.codegen.ecore
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.uml2.uml
