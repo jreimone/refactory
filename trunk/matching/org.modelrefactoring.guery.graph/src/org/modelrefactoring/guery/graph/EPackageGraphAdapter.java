@@ -35,6 +35,10 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 	public EPackageGraphAdapter(Resource resource) {
 		super(resource, new MetamodelGraphAdapterFactory(resource));
 	}
+	
+	public EPackageGraphAdapter(EPackage metamodel) {
+		this(metamodel.eResource());
+	}
 
 	@Override
 	protected void initialiseGraph() {

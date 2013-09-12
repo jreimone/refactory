@@ -204,7 +204,7 @@ public class MotifSolvingAndSaveTest {
 	}
 
 	private File saveRoleMappingsTextBasedVerySimple(List<RoleMapping> parsedRoleMappings){
-		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_XSIMPLE_" + "." + new RolemappingMetaInformation().getSyntaxName());
+		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_MPL" + maxPathLength + "_XSIMPLE" + "." + new RolemappingMetaInformation().getSyntaxName());
 		if(file.exists()){
 			file.delete();
 		}

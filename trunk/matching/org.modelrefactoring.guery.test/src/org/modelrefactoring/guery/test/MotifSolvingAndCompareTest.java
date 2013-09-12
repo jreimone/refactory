@@ -215,7 +215,9 @@ public class MotifSolvingAndCompareTest {
 
 	private List<RoleMapping> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
 		MotifInstance2RoleMappingConverter converter = new MotifInstance2RoleMappingConverter(roleModel, maxResults);
-		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(1);
+//		int processors = Runtime.getRuntime().availableProcessors();
+		int processors = 1;
+		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
 		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(resource);
 		engine.query(graphAdapter, motif, converter, ComputationMode.ALL_INSTANCES);
 		List<RoleMapping> foundRoleMappings = converter.getFoundRoleMappings();
