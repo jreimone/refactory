@@ -1,5 +1,10 @@
 motif ExtractXwithReferenceClass
 select OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_
+	where "Extract.getEClass().getName() == 'EObject'"
+//	and "NewContainer.getEClass().getName() == 'EAnnotation'"
+//	and "MovedReference.getEClass().getName() == 'EAnnotation'"
+	and "OrigContainer.getEClass().getName() == 'EStructuralFeature'"
+//	and "ContainerContainer.getEClass().getName() == 'EClass'"
 connected by extracts(OrigContainer>_OrigContainer_Extract_)[1,1] find all
 where "extracts is org.modelrefactoring.guery.graph.ContainmentEdge"
 connected by _extracts_(_OrigContainer_Extract_>Extract)[0,1] find all
