@@ -1,0 +1,19 @@
+motif ExtractXwithReferenceClass
+select OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_
+	where "Extract.getEClass().getName() == 'Statement'"
+	and "NewContainer.getEClass().getName() == 'ProcedureDeclaration'"
+	and "MovedReference.getEClass().getName() == 'CallStatement'"
+connected by extracts(OrigContainer>_OrigContainer_Extract_)[1,1] find all
+	where "extracts is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by _extracts_(_OrigContainer_Extract_>Extract)[0,3] find all
+connected by referer(OrigContainer>MovedReference)[1,1] find all
+	where "referer is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by moved(NewContainer>_NewContainer_Extract_)[1,1] find all
+	where "moved is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by _moved_(_NewContainer_Extract_>Extract)[0,3] find all
+connected by target(ContainerContainer>NewContainer)[1,1] find all
+	where "target is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by source(ContainerContainer>OrigContainer)[1,1] find all
+	where "source is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by containerRef(MovedReference>NewContainer)[1,1] find all
+	where "!(containerRef is org.modelrefactoring.guery.graph.ContainmentEdge)"

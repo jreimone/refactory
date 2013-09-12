@@ -1,0 +1,15 @@
+motif ExtractXwithReferenceClass
+select OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_
+where "OrigContainer.getEClass().getName() == 'Region'"
+	and "Extract.getEClass().getName() == 'State'"
+//	and "ContainerContainer.getEClass().getName() == 'Region'"
+connected by extracts(OrigContainer>_OrigContainer_Extract_)[1,1] find all
+where "extracts is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by _extracts_(_OrigContainer_Extract_>Extract)[0,1] find all
+connected by moved(NewContainer>_NewContainer_Extract_)[1,1] find all
+where "moved is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by _moved_(_NewContainer_Extract_>Extract)[0,1] find all
+connected by target(ContainerContainer>NewContainer)[1,1] find all
+where "target is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by source(ContainerContainer>OrigContainer)[1,1] find all
+where "source is org.modelrefactoring.guery.graph.ContainmentEdge"

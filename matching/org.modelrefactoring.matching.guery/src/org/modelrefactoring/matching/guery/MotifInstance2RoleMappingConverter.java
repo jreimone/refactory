@@ -40,7 +40,7 @@ public class MotifInstance2RoleMappingConverter implements ResultListener<Metamo
 		foundRoleMappings = new ArrayList<RoleMapping>();
 	}
 
-	private RoleMapping createRoleMapping(MotifInstance<MetamodelVertex, EReferenceEdge> instance){
+	public RoleMapping createRoleMapping(MotifInstance<MetamodelVertex, EReferenceEdge> instance){
 		RoleMapping roleMapping = RolemappingFactory.eINSTANCE.createRoleMapping();
 		createRoleMappings(instance, roleMapping);
 		createCollaborationMappings(instance, roleMapping);
