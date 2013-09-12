@@ -2,9 +2,7 @@ package org.modelrefactoring.guery.test;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -19,10 +17,8 @@ import nz.ac.massey.cs.guery.MotifReaderException;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -30,17 +26,8 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.pl0.PL0Package;
-import org.emftext.language.refactoring.rolemapping.CollaborationMapping;
-import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
-import org.emftext.language.refactoring.rolemapping.ReferenceMetaClassPair;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
-import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
-import org.emftext.language.refactoring.rolemapping.RolemappingFactory;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
-import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingPrinter2;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
-import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
-import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
@@ -61,7 +48,6 @@ import org.modelrefactoring.guery.graph.MetamodelVertex;
 import org.modelrefactoring.guery.io.ModelMotifReader;
 import org.modelrefactoring.guery.resource.guery.mopp.GueryMetaInformation;
 import org.modelrefactoring.guery.resource.guery.mopp.GueryResourceFactory;
-import org.modelrefactoring.matching.guery.MotifInstance2RoleMappingConverter;
 import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 
 import com.google.common.io.Files;
@@ -133,24 +119,10 @@ public class MotifSolvingAndSaveTest {
 		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2Motifs();
 		for (org.modelrefactoring.guery.Motif motif : motifs) {
 			String uriString = motif.eResource().getURI().toFileString();
-			List<RoleMapping> emfTextParsingRoleMappings = testMotifOnMetamodel(uriString, metamodel.eResource(), roleModel);
-//			long start = System.currentTimeMillis();
-//			File emftextParsedFile = saveRolemappings(emfTextParsingRoleMappings);
-//			long end = System.currentTimeMillis();
-//			double seconds = (end - start)/1000.0d;
-//			System.out.println("EMF-based saving took: " + seconds + "s");
-//			start = System.currentTimeMillis();
-//			File simpleEmftextParsedFile = saveRoleMappingsTextBased(emfTextParsingRoleMappings);
-//			end  = System.currentTimeMillis();
-//			seconds = (end - start)/1000.0d;
-//			System.out.println("String-based saving took: " + seconds + "s");
-			long start = System.currentTimeMillis();
-			File verySimpleParsedFile = saveRoleMappingsTextBasedVerySimple(emfTextParsingRoleMappings);
-			long end  = System.currentTimeMillis();
-			double seconds = (end - start)/1000.0d;
-			System.out.println("Very simple String-based saving took: " + seconds + "s");
-			System.out.println("Found possible role mappings: " + emfTextParsingRoleMappings.size());
-			File absFile = verySimpleParsedFile.getAbsoluteFile();
+			FileWriteResultListener writeResultListener = testMotifOnMetamodel(uriString, "rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_MPL" + maxPathLength + "_XSIMPLE" + "." + new RolemappingMetaInformation().getSyntaxName());
+			System.out.println("Very simple String-based saving took: " + writeResultListener.getTimeToWriteInSeconds() + "s");
+			System.out.println("Found possible role mappings: " + writeResultListener.getFoundRoleMappingsCount());
+			File absFile = writeResultListener.getFile();
 			int count = 0;
 			File temp = absFile;
 			File parent = null;
@@ -169,115 +141,6 @@ public class MotifSolvingAndSaveTest {
 			System.out.println("absolute path:");
 			System.out.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
 		}
-	}
-
-	private String printRoleMapping(RoleMapping roleMapping) {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		RolemappingPrinter2 printer = new RolemappingPrinter2(out, null);
-		try {
-			printer.print(roleMapping);
-			out.close();
-			return out.toString().trim();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private File saveRoleMappingsTextBased(List<RoleMapping> parsedRoleMappings){
-		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_SIMPLE_" + "." + new RolemappingMetaInformation().getSyntaxName());
-		if(file.exists()){
-			file.delete();
-		}
-		try {
-			FileWriter writer = new FileWriter(file, true);
-			for (RoleMapping roleMapping : parsedRoleMappings) {
-				String printedRoleMapping = printRoleMapping(roleMapping);
-				writer.append(printedRoleMapping);
-			}
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return file;
-	}
-
-	private File saveRoleMappingsTextBasedVerySimple(List<RoleMapping> parsedRoleMappings){
-		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_MPL" + maxPathLength + "_XSIMPLE" + "." + new RolemappingMetaInformation().getSyntaxName());
-		if(file.exists()){
-			file.delete();
-		}
-		try {
-			FileWriter writer = new FileWriter(file, true);
-			for (RoleMapping roleMapping : parsedRoleMappings) {
-				String printedRoleMapping = printRoleMappingVerySimple(roleMapping);
-				writer.append(printedRoleMapping);
-			}
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return file;
-	}
-
-	private String printRoleMappingVerySimple(RoleMapping roleMapping) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(roleMapping.getName() + "{");
-		List<ConcreteMapping> concreteMappings = roleMapping.getRoleToMetaelement();
-		for (ConcreteMapping concreteMapping : concreteMappings) {
-			Role role = concreteMapping.getRole();
-			EClass metaclass = concreteMapping.getMetaclass();
-			buffer.append(role.getName() + ":=");
-			List<EPackage> packagesOfMetaclass = concreteMapping.getPackagesOfMetaclass();
-			for (EPackage package_ : packagesOfMetaclass) {
-				buffer.append(package_.getName() + ".");
-			}
-			buffer.append(metaclass.getName());
-			List<CollaborationMapping> collaborationMappings = concreteMapping.getCollaborationMappings();
-			if(collaborationMappings.size() > 0){
-				buffer.append("[");
-				for (CollaborationMapping collaborationMapping : collaborationMappings) {
-					MultiplicityCollaboration collaboration = collaborationMapping.getCollaboration();
-					buffer.append(collaboration.getTargetName() + ":=");
-					List<ReferenceMetaClassPair> referenceMetaClassPairs = collaborationMapping.getReferenceMetaClassPair();
-					int size = referenceMetaClassPairs.size();
-					for (ReferenceMetaClassPair referenceMetaClassPair : referenceMetaClassPairs) {
-						EReference reference = referenceMetaClassPair.getReference();
-						EClass metaClass2 = referenceMetaClassPair.getMetaClass();
-						int indexOf = referenceMetaClassPairs.indexOf(referenceMetaClassPair);
-						buffer.append(reference.getName() + (metaClass2 != null?":" + metaClass2.getName():"") + (indexOf + 1 == size?"":"->"));					
-					}
-					buffer.append(";");
-				}
-				buffer.append("]");
-			}
-			buffer.append(";");
-		}
-		buffer.append("}\n");
-		return buffer.toString();
-	}
-
-	private File saveRolemappings(List<RoleMapping> parsedRoleMappings) {
-		RoleMappingModel roleMappingModel = RolemappingFactory.eINSTANCE.createRoleMappingModel();
-		roleMappingModel.setTargetMetamodel(metamodel);
-		roleMappingModel.getMappings().addAll(parsedRoleMappings);
-		RoleModel roleModel = parsedRoleMappings.get(0).getMappedRoleModel();
-		File file = new File("rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "." + new RolemappingMetaInformation().getSyntaxName());
-		if(file.exists()){
-			file.delete();
-		}
-		URI uri = URI.createFileURI(file.getAbsolutePath());
-		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.createResource(uri);
-		resource.getContents().add(roleMappingModel);
-		try {
-			resource.save(Collections.EMPTY_MAP);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return file;
 	}
 
 	private List<org.modelrefactoring.guery.Motif> convertRoleModel2Motifs() {
@@ -323,21 +186,20 @@ public class MotifSolvingAndSaveTest {
 		return roleModel;
 	}
 
-	private List<RoleMapping> testMotifOnMetamodel(String motifPath, Resource metamodelResource, RoleModel roleModel){
+	private FileWriteResultListener testMotifOnMetamodel(String motifPath, String filePath){
 		Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getMotifByPath(motifPath);
-		return solveMotifOnResource(motifByModel, metamodelResource, roleModel);
+		return solveMotifOnResource(motifByModel, filePath);
 	}
 
 
-	private List<RoleMapping> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
-		MotifInstance2RoleMappingConverter converter = new MotifInstance2RoleMappingConverter(roleModel, maxResults);
+	private FileWriteResultListener solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, String filePath){
 //		int processors = Runtime.getRuntime().availableProcessors();
 		int processors = 1;
 		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
-		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(resource);
-		engine.query(graphAdapter, motif, converter, ComputationMode.ALL_INSTANCES);
-		List<RoleMapping> foundRoleMappings = converter.getFoundRoleMappings();
-		return foundRoleMappings;
+		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
+		FileWriteResultListener listener = new FileWriteResultListener(roleModel, maxResults, filePath);
+		engine.query(graphAdapter, motif, listener, ComputationMode.ALL_INSTANCES);
+		return listener;
 	}
 
 
