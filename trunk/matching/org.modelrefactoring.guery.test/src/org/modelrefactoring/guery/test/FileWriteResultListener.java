@@ -101,7 +101,7 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 	}
 	
 	public File getFile(){
-		return file;
+		return file.getAbsoluteFile();
 	}
 
 	private String printRoleMappingSimple(RoleMapping roleMapping) {
