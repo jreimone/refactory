@@ -2,8 +2,8 @@ motif ExtractXwithReferenceClass
 select OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_
 where "Extract.getEClass().getName() == 'State'"
 	and "NewContainer.getEClass().getName() == 'State'"
-//	and "OrigContainer.getEClass().getName() == 'Region'"
-//	and "ContainerContainer.getEClass().getName() == 'Region'"
+	and "OrigContainer.getEClass().getName() == 'Region'"
+	and "ContainerContainer.getEClass().getName() == 'Region'"
 connected by extracts(OrigContainer>_OrigContainer_Extract_)[1,1] find all
 where "extracts is org.modelrefactoring.guery.graph.ContainmentEdge"
 connected by _extracts_(_OrigContainer_Extract_>Extract)[0,1] find all
