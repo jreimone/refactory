@@ -59,7 +59,9 @@ public class CollaborationMappingCollaborationReferenceResolver implements org.e
 				}
 			}
 		}
-		result.setErrorMessage("Role '" + mappedRole.getName() + "' has no outgoing relation with target name '" + targetName + "'");
+		if(!resolveFuzzy){
+			result.setErrorMessage("Role '" + mappedRole.getName() + "' has no outgoing relation with target name '" + targetName + "'");
+		}
 	}
 	
 	public java.lang.String deResolve(org.emftext.language.refactoring.roles.MultiplicityCollaboration element, org.emftext.language.refactoring.rolemapping.CollaborationMapping container, org.eclipse.emf.ecore.EReference reference) {

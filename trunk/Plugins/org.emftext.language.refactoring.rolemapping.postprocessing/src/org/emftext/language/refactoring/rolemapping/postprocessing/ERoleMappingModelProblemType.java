@@ -33,6 +33,7 @@ public enum ERoleMappingModelProblemType {
 	NOT_ALL_ATTRIBUTES_MAPPED(RolemappingEProblemSeverity.ERROR),
 	NOT_ALL_COLLABORATIONS_MAPPED(RolemappingEProblemSeverity.ERROR),
 	DUPLICATE_ROLE_MAPPING(RolemappingEProblemSeverity.ERROR),
+	TOO_MUCH_COLLABORATIONS_MAPPED(RolemappingEProblemSeverity.ERROR),
 	DUPLICATE_COLLABORATION_MAPPING(RolemappingEProblemSeverity.ERROR),
 	CHECK_RELATIONS_BETWEEN_ECLASSES(RolemappingEProblemSeverity.WARNING)
 	;
