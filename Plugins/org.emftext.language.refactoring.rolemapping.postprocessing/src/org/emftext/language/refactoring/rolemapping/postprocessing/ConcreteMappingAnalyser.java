@@ -47,11 +47,13 @@ import org.emftext.refactoring.util.RoleUtil;
  */
 public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 
-	private static final String MAPPED_ROLE_MISSED 			= "The obligatory role '%1$s' has to be mapped.";
-	private static final String MAPPED_COLLABORATION_MISSED	= "The collaboration '%1$s' has to be mapped.";
-	private static final String MAPPED_ROLE_UNIQUE 			= "The role '%1$s' was mapped more than once.";
-	private static final String MAPPED_COLLABORATION_UNIQUE	= "The collaboration '%1$s' was mapped more than once.";
-	private static final String MAPPED_ATTRIBUTE_MISSED 	= "The non-optional attribute '%1$s' has to be mapped.";
+	private static final String MAPPED_ROLE_MISSED 				= "The obligatory role '%1$s' has to be mapped.";
+	private static final String MAPPED_COLLABORATION_MISSED		= "The collaboration '%1$s' has to be mapped.";
+	private static final String MAPPED_ROLE_UNIQUE 				= "The role '%1$s' was mapped more than once.";
+	private static final String MAPPED_COLLABORATION_UNIQUE		= "The collaboration '%1$s' was mapped more than once.";
+	private static final String MAPPED_COLLABORATION_TOO_MUCH		= "The collaboration '%1$s' was mapped but its target role '%2$s' was't.\n"
+			+ "Either map the target role or remove this collaboration mapping.";
+	private static final String MAPPED_ATTRIBUTE_MISSED 			= "The non-optional attribute '%1$s' has to be mapped.";
 	
 	private List<Role> obligatoryRoles;
 	private Set<Role> mappedRoles;
@@ -89,9 +91,25 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 				}
 			}
 			analyseObligatoryAttributeMappings(resource, mapping);
+			for (ConcreteMapping concreteMapping : concreteMappings) {
+				analyseTooMuchCollaborations(resource, concreteMapping);
+			}
 		}
 	}
 	
+	private void analyseTooMuchCollaborations(RolemappingResource resource, ConcreteMapping concreteMapping) {
+		List<CollaborationMapping> collaborationMappings = concreteMapping.getCollaborationMappings();
+		for (CollaborationMapping collaborationMapping : collaborationMappings) {
+			Role targetRole = collaborationMapping.getCollaboration().getTarget();
+			if(targetRole != null && !mappedRoles.contains(targetRole)){
+				addProblem(resource
+						, ERoleMappingModelProblemType.TOO_MUCH_COLLABORATIONS_MAPPED
+						, String.format(MAPPED_COLLABORATION_TOO_MUCH, collaborationMapping.getCollaboration().getTargetName(), targetRole.getName())
+						, collaborationMapping);
+			}
+		}
+	}
+
 	private void analyseObligatoryCollaborations(RolemappingResource resource, ConcreteMapping concreteMapping) {
 		Role role = concreteMapping.getRole();
 		List<Collaboration> collaborations = role.getOutgoing();
@@ -109,18 +127,18 @@ public class ConcreteMappingAnalyser extends AbstractPostProcessor {
 			}
 		}
 		RoleMapping roleMapping = (RoleMapping) concreteMapping.eContainer();
-		List<Role> optionalRoles = RoleUtil.getAllOptionalRoles(roleMapping);
-		List<Role> mappedOptionalRoles = new ArrayList<Role>();
-		for (Role optionalRole : optionalRoles) {
-			ConcreteMapping concreteMappingForRole = roleMapping.getConcreteMappingForRole(optionalRole);
-			if(concreteMappingForRole != null){
-				mappedOptionalRoles.add(concreteMappingForRole.getRole());
-			}
-		}
+		List<Role> mappedOptionalRoles = RoleUtil.getAllOptionalRoles(roleMapping);
+//		List<Role> mappedOptionalRoles = new ArrayList<Role>();
+//		for (Role optionalRole : optionalRoles) {
+//			ConcreteMapping concreteMappingForRole = roleMapping.getConcreteMappingForRole(optionalRole);
+//			if(concreteMappingForRole != null){
+//				mappedOptionalRoles.add(concreteMappingForRole.getRole());
+//			}
+//		}
 		for (Collaboration collaboration : collaborationsNotMapped) {
 			if(collaboration instanceof MultiplicityCollaboration){
 				Role targetRole = collaboration.getTarget();
-				if(mappedOptionalRoles.contains(targetRole)){
+				if(!(targetRole.getModifier().contains(RoleModifier.OPTIONAL) && !mappedOptionalRoles.contains(targetRole))){
 					addProblem(resource
 							, ERoleMappingModelProblemType.NOT_ALL_COLLABORATIONS_MAPPED
 							, String.format(MAPPED_COLLABORATION_MISSED, ((MultiplicityCollaboration) collaboration).getTargetName())

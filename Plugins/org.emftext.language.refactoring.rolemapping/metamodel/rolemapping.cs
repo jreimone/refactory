@@ -29,7 +29,9 @@ TOKENS {
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;	
 	//DEFINE DOT_IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$ + $('.'$ + IDENT + $)*$;
-	DEFINE IDENT $('A'..'Z'|'a'..'z') + ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')*$;
+//	DEFINE IDENT $('A'..'Z'|'a'..'z') + ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')*$;
+	DEFINE UPPER_IDENTIFIER $('A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
+	DEFINE LOWER_IDENTIFIER $('a'..'z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*$;
 	//DEFINE IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$;
 	//DEFINE DOT_IDENT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-'|'.')+$;
 	//DEFINE DOT_IDENT $(('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+('.')?('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+)+$;
@@ -58,11 +60,11 @@ RULES {
 					(roleToMetaelement !1)+
 					!0 "}" !0 !0 ;
 	
-	ConcreteMapping ::= role[IDENT] #1 ":=" #1 (packagesOfMetaclass[IDENT] ".")* metaclass[IDENT] ("(" attributeMappings ("," attributeMappings)* ")")? (#1 "{" !1 collaborationMappings (!1 collaborationMappings)* !0 "}")? ";";
+	ConcreteMapping ::= role[UPPER_IDENTIFIER] #1 ":=" #1 (packagesOfMetaclass[LOWER_IDENTIFIER] ".")* metaclass[UPPER_IDENTIFIER] ("(" attributeMappings ("," attributeMappings)* ")")? (#1 "{" !1 collaborationMappings (!1 collaborationMappings)* !0 "}")? ";";
 	
-	CollaborationMapping ::= collaboration[IDENT] #1 ":=" #1 referenceMetaClassPair (#1 "->" #1 referenceMetaClassPair)* ";";
+	CollaborationMapping ::= collaboration[LOWER_IDENTIFIER] #1 ":=" #1 referenceMetaClassPair (#1 "->" #1 referenceMetaClassPair)* ";";
 	
-	ReferenceMetaClassPair ::= reference[IDENT] (":" metaClass[IDENT])?;
+	ReferenceMetaClassPair ::= reference[LOWER_IDENTIFIER] (":" metaClass[UPPER_IDENTIFIER])?;
 	
-	AttributeMapping ::= roleAttribute[IDENT] #1 "->" #1 classAttribute[IDENT];
+	AttributeMapping ::= roleAttribute[LOWER_IDENTIFIER] #1 "->" #1 classAttribute[LOWER_IDENTIFIER];
 }
