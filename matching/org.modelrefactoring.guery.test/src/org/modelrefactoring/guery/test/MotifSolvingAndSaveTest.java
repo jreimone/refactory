@@ -16,6 +16,7 @@ import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifReaderException;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -38,9 +39,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.modelrefactoring.guery.GueryFactory;
 import org.modelrefactoring.guery.GueryPackage;
 import org.modelrefactoring.guery.MotifModel;
+import org.modelrefactoring.guery.Role;
 import org.modelrefactoring.guery.graph.EObjectVertex;
 import org.modelrefactoring.guery.graph.EPackageGraphAdapter;
 import org.modelrefactoring.guery.graph.EReferenceEdge;
@@ -116,10 +117,19 @@ public class MotifSolvingAndSaveTest {
 		System.out.println("RoleModel: " + roleModel.getName());
 		System.out.println("Max PathLength: " + maxPathLength);
 		System.out.println("Max Results: " + maxResults);
-		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2Motifs();
+		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2MotifModel().getMotifs();
+		int index = 0;
 		for (org.modelrefactoring.guery.Motif motif : motifs) {
-			String uriString = motif.eResource().getURI().toFileString();
-			FileWriteResultListener writeResultListener = testMotifOnMetamodel(uriString, "rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_MPL" + maxPathLength + "_XSIMPLE" + "." + new RolemappingMetaInformation().getSyntaxName());
+			System.out.print("Used roles: ");
+			List<Role> roles = motif.getVertexSelection().getRoles();
+			for (Role role : roles) {
+				System.out.print(role.getName());
+				if(roles.indexOf(role) < roles.size() - 1){
+					System.out.print(", ");
+				}
+			}
+			System.out.println();
+			FileWriteResultListener writeResultListener = testMotifOnMetamodel(motif, "rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_MPL" + maxPathLength + "_XSIMPLE" + index + "." + new RolemappingMetaInformation().getSyntaxName());
 			System.out.println("Very simple String-based saving took: " + writeResultListener.getTimeToWriteInSeconds() + "s");
 			System.out.println("Found possible role mappings: " + writeResultListener.getFoundRoleMappingsCount());
 			File absFile = writeResultListener.getFile();
@@ -132,46 +142,37 @@ public class MotifSolvingAndSaveTest {
 				count++;
 			}
 			File wsFile = parent.getAbsoluteFile();
-			System.out.println("Workspace: " + wsFile.getPath());
+//			System.out.println("Workspace: " + wsFile.getPath());
 			java.net.URI relativize = wsFile.toURI().relativize(absFile.toURI());
-//			System.out.println("Workspace relative: " + relativize.toString());
-//			System.out.println("all results can be found in " + JENKINS_LINK_PREFIX + verySimpleParsedFile.getPath());
 			System.out.println("relative path to workspace:");
 			System.out.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
 			System.out.println("absolute path:");
 			System.out.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
+			index++;
 		}
 	}
 
-	private List<org.modelrefactoring.guery.Motif> convertRoleModel2Motifs() {
+	private MotifModel convertRoleModel2MotifModel() {
 		RoleModel2MotifConverter converter = new RoleModel2MotifConverter(roleModel);
 		MotifModel motifModel = converter.createMotifModel(maxPathLength);
 		Resource roleModelResource = roleModel.eResource();
 		ResourceSet rs = roleModelResource.getResourceSet();
 		URI roleModelUri = roleModelResource.getURI();
-		List<org.modelrefactoring.guery.Motif> returnedMotifs = new ArrayList<org.modelrefactoring.guery.Motif>();
-		List<org.modelrefactoring.guery.Motif> motifs = motifModel.getMotifs();
-		ArrayList<org.modelrefactoring.guery.Motif> temp = new ArrayList<org.modelrefactoring.guery.Motif>(motifs);
-		for (org.modelrefactoring.guery.Motif motif : temp) {
-			String gueryFileName = "queries/" + roleModelUri.lastSegment().replace("." + roleModelUri.fileExtension(), "_" + metamodelName + "_MPL" + maxPathLength + "." + new GueryMetaInformation().getSyntaxName());
-			File gueryFile = new File(gueryFileName);
-			if(gueryFile.exists()){
-				gueryFile.delete();
-			}
-			URI uri = URI.createFileURI(gueryFile.getAbsolutePath());
-			Resource resource = rs.createResource(uri);
-			MotifModel motifModelSeparate = GueryFactory.eINSTANCE.createMotifModel();
-			motifModel.getMotifs().remove(motif);
-			motifModelSeparate.getMotifs().add(motif);
-			returnedMotifs.add(motif);
-			resource.getContents().add(motifModelSeparate);
-			try {
-				resource.save(Collections.EMPTY_MAP);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		String gueryFileName = "queries/" + roleModelUri.lastSegment().replace("." + roleModelUri.fileExtension(), "_" + metamodelName + "_MPL" + maxPathLength + "." + new GueryMetaInformation().getSyntaxName());
+		File gueryFile = new File(gueryFileName);
+		if(gueryFile.exists()){
+			gueryFile.delete();
 		}
-		return returnedMotifs;
+		URI uri = URI.createFileURI(gueryFile.getAbsolutePath());
+		Resource resource = rs.createResource(uri);
+		resource.getContents().add(motifModel);
+		try {
+			resource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//		}
+		return motifModel;
 	}
 
 	private static RoleModel initRoleModel(String path) {
@@ -186,14 +187,14 @@ public class MotifSolvingAndSaveTest {
 		return roleModel;
 	}
 
-	private FileWriteResultListener testMotifOnMetamodel(String motifPath, String filePath){
-		Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getMotifByPath(motifPath);
+	private FileWriteResultListener testMotifOnMetamodel(org.modelrefactoring.guery.Motif motif, String filePath){
+		Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getGueryMotifByMotif(motif);
 		return solveMotifOnResource(motifByModel, filePath);
 	}
 
 
 	private FileWriteResultListener solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, String filePath){
-//		int processors = Runtime.getRuntime().availableProcessors();
+		//		int processors = Runtime.getRuntime().availableProcessors();
 		int processors = 1;
 		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
 		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
@@ -228,15 +229,16 @@ public class MotifSolvingAndSaveTest {
 		EPackage.Registry.INSTANCE.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 	}
 
-	private <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getMotifByPath(String path){
-		File file = new File(path);
-		assertTrue("File '" + path + "' doesn't exist", file.exists());
-		URI uri = URI.createFileURI(file.getAbsolutePath());
-		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.getResource(uri, true);
-		EObject model = resource.getContents().get(0);
-		assertTrue("Given model must be an instance of MotifModel", model instanceof MotifModel);
-		org.modelrefactoring.guery.Motif motif = ((MotifModel) model).getMotifs().get(0);
+	private <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getGueryMotifByMotif(org.modelrefactoring.guery.Motif motif){
+		assertNotNull("Motif mustn't be null", motif);
+		//		File file = new File(path);
+		//		assertTrue("File '" + path + "' doesn't exist", file.exists());
+		//		URI uri = URI.createFileURI(file.getAbsolutePath());
+		//		ResourceSet rs = new ResourceSetImpl();
+		//		Resource resource = rs.getResource(uri, true);
+		//		EObject model = resource.getContents().get(0);
+		//		assertTrue("Given model must be an instance of MotifModel", model instanceof MotifModel);
+		//		org.modelrefactoring.guery.Motif motif = ((MotifModel) model).getMotifs().get(0);
 		ModelMotifReader<Vertex> reader = new ModelMotifReader<Vertex>(motif);
 		nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> gueryMotif;
 		try {

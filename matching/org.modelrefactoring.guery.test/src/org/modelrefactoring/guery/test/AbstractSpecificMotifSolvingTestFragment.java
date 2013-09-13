@@ -67,19 +67,21 @@ public abstract class AbstractSpecificMotifSolvingTestFragment {
 	public void testCountMappings(){
 		System.out.println("Querying the " + metamodel.getName() + " metamodel for '" + roleModel.getName() + "'");
 		System.out.println("max results: " + getMaxResults());
-		ModelMotifReader<MetamodelVertex> reader = new ModelMotifReader<MetamodelVertex>(motifModel.getMotifs().get(0));
-		try {
-			Motif<MetamodelVertex, EReferenceEdge> motif = reader.read(null);
-			ResultListener<MetamodelVertex, EReferenceEdge> listener = getResultListener();
-//			int processors = Runtime.getRuntime().availableProcessors();
-			int processors = 1;
-			GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
-			EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
-			engine.query(graphAdapter, motif, listener, ComputationMode.ALL_INSTANCES);
-//			int count = converter.getFoundRoleMappingsCount();
-//			System.out.println("found role mappings: " + count);
-		} catch (MotifReaderException e) {
-			e.printStackTrace();
+		ResultListener<MetamodelVertex, EReferenceEdge> listener = getResultListener();
+		for (org.modelrefactoring.guery.Motif motif : motifModel.getMotifs()) {
+			try {
+				ModelMotifReader<MetamodelVertex> reader = new ModelMotifReader<MetamodelVertex>(motif);
+				Motif<MetamodelVertex, EReferenceEdge> gueryMotif = reader.read(null);
+//				int processors = Runtime.getRuntime().availableProcessors();
+				int processors = 1;
+				GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
+				EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
+				engine.query(graphAdapter, gueryMotif, listener, ComputationMode.ALL_INSTANCES);
+	//			int count = converter.getFoundRoleMappingsCount();
+	//			System.out.println("found role mappings: " + count);
+			} catch (MotifReaderException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

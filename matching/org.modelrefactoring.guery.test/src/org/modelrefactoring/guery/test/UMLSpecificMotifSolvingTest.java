@@ -9,7 +9,7 @@ public class UMLSpecificMotifSolvingTest extends AbstractSpecificMotifSolvingTes
 	private static final String ROLEMODEL_FILE_NAME	= "rolemodels/ExtractXwithReferenceClass.rolestext";
 	private static final int MAX_RESULTS 				= 10000;
 
-	private UMLPackage umlMM = UMLPackage.eINSTANCE;;
+	private UMLPackage umlMM = UMLPackage.eINSTANCE;
 
 	@Override
 	protected String getGUERYFileName() {
