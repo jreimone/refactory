@@ -1,8 +1,10 @@
 package org.modelrefactoring.matching.guery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.Multiplicity;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
@@ -26,13 +28,13 @@ public class RoleModel2MotifConverter {
 
 	public static final String INTERMEDIATE_IDENTIFIER	= "_";
 	
-	private RoleModel rolemodel;
+	private RoleModel initialRolemodel;
 	private MotifModel motifModel;
 
 	private int maxPathLength;
 
 	public RoleModel2MotifConverter(RoleModel roleModel){
-		this.rolemodel = roleModel;
+		this.initialRolemodel = roleModel;
 	}
 
 	public MotifModel createMotifModel(int maxPathLength){
@@ -43,17 +45,48 @@ public class RoleModel2MotifConverter {
 	}
 
 	private void transform() {
+		motifModel.getMotifs().add(createMotif(initialRolemodel));
+		List<Role> roles = initialRolemodel.getRoles();
+		List<Role> optionalRoles = new ArrayList<Role>();
+		for (Role role : roles) {
+			if(role.getModifier().contains(RoleModifier.OPTIONAL)){
+				optionalRoles.add(role);
+			}
+		}
+		CombinationGenerator<Role> generator = new CombinationGenerator<Role>();
+		for (int count = 1; count <= optionalRoles.size(); count++) {
+			List<List<Role>> countCombinations = generator.getCombinations(optionalRoles, count);
+			for (List<Role> rolesToRemove : countCombinations) {
+				EcoreUtil.Copier copier = new EcoreUtil.Copier(true, false);
+				RoleModel copiedRoleModel = (RoleModel) copier.copy(initialRolemodel);
+				copier.copyReferences();
+				for (Role absentRole : rolesToRemove) {
+					copiedRoleModel.getRoles().remove(copier.get(absentRole));
+					for (Collaboration collaboration : absentRole.getIncoming()) {
+						EcoreUtil.delete(copier.get(collaboration));
+					}
+					for (Collaboration collaboration : absentRole.getOutgoing()) {
+						EcoreUtil.delete(copier.get(collaboration));
+					}
+				}
+				Motif motif = createMotif(copiedRoleModel);
+				motifModel.getMotifs().add(motif);
+			}
+		}
+	}
+
+	private Motif createMotif(RoleModel roleModel) {
 		Motif motif = GueryFactory.eINSTANCE.createMotif();
-		motifModel.getMotifs().add(motif);
-		motif.setName(rolemodel.getName());
+		motif.setName(roleModel.getName());
 		VertexSelection vertexSelection = GueryFactory.eINSTANCE.createVertexSelection();
 		motif.setVertexSelection(vertexSelection);
-		for (Role role : rolemodel.getRoles()) {
+		for (Role role : roleModel.getRoles()) {
 			createRole(vertexSelection, role);
 		}
-		for (Collaboration collaboration : rolemodel.getCollaborations()){
+		for (Collaboration collaboration : roleModel.getCollaborations()){
 			createCollaboration(motif, collaboration);
 		}
+		return motif;
 	}
 
 	private void createRole(VertexSelection vertexSelection, Role role) {
