@@ -8,7 +8,7 @@
             rolemapping_resource="rolemappings/extractCompositeState.rolemapping">
             <mappingIcon
                   icon="icons/extract_composite_state.gif"
-                  mapping_name="ExtractCompositeState">
+                  mapping_name="Extract Composite State">
             </mappingIcon>
       </rolemapping>
       <rolemapping
@@ -27,7 +27,7 @@
             rolemapping_resource="rolemappings/renameElement.rolemapping">
             <mappingIcon
                   icon="icons/rename_element.gif"
-                  mapping_name="RenameElement">
+                  mapping_name="Rename Element">
             </mappingIcon>
       </rolemapping>
       <rolemapping
@@ -60,7 +60,7 @@
 	<extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="ExtractCompositeState"
+            mapping_name="Extract Composite State"
             nsUri="http://www.eclipse.org/uml2/4.0.0/UML"
             postprocessor="org.eclipse.uml2.refactoring.UMLExtractCompositeStatePostProcessor">
       </postprocessor>
