@@ -1,18 +1,19 @@
-ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/4.0.0/UML> 
 
 "Extract Composite State" maps <ExtractXwithReferenceClass> {  
 	OrigContainer := Region {
 		extracts := subvertex:State;
-		referer := transition;
+//		referer := transition;
 	};
 	
 	Extract := State;
 	
-	ContainerContainer := Region {
-		target := subvertex:State;
+	ContainerContainer := StateMachine {
+		target := region:Region -> subvertex:State;
+		source := region:Region;
 	};
 	
 	NewContainer := State (newName -> name) {
-		moved := region -> subvertex:State;
+		moved := region -> subvertex:State; 
 	};
-}	
+}

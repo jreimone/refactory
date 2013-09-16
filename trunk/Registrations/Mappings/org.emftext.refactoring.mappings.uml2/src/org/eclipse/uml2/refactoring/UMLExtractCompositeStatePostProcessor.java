@@ -36,6 +36,7 @@ import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.Vertex;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
+import org.emftext.refactoring.util.RoleUtil;
 
 public class UMLExtractCompositeStatePostProcessor extends AbstractRefactoringPostProcessor {
 
@@ -45,23 +46,8 @@ public class UMLExtractCompositeStatePostProcessor extends AbstractRefactoringPo
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	ResourceSet resourceSet, ChangeDescription change) {
 		extract = new LinkedList<State>();
 //		System.out.println("Add additional transitions for 'Extract Composite State' in UML");
-		Set<Role> roles = roleRuntimeInstanceMap.keySet();
-		for (Role role : roles) {
-			List<EObject> runtimeObject = roleRuntimeInstanceMap.get(role);
-			if(role.getName().equals("Extract")){
-				if(runtimeObject instanceof List<?>){
-					for (EObject eObject : runtimeObject) {
-						if(eObject instanceof State){
-							extract.add((State) eObject);
-						}
-					}
-				}
-			} else if(role.getName().equals("NewContainer")){
-				if(runtimeObject.get(0) instanceof State){
-					newContainer = (State) runtimeObject.get(0);
-				}
-			}
-		}
+		extract = RoleUtil.getObjectsForRole("Extract", State.class, roleRuntimeInstanceMap);
+		newContainer = RoleUtil.getFirstObjectForRole("NewContainer", State.class, roleRuntimeInstanceMap);
 		boolean result = processAdditionals();
 		if(!result){
 			return new Status(IStatus.WARNING, "org.emftext.refactoring.rolemappings", "Couldn't determine correctly the outgoing and incoming transitions");
