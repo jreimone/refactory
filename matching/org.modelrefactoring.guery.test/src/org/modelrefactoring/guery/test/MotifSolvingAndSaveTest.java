@@ -34,6 +34,7 @@ import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
+import org.emftext.language.timedAutomata.TimedAutomataPackage;
 import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -229,6 +230,7 @@ public class MotifSolvingAndSaveTest {
 		EPackage.Registry.INSTANCE.put(ConcretesyntaxPackage.eNS_URI, ConcretesyntaxPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(Bpmn2Package.eNS_URI, Bpmn2Package.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(TimedAutomataPackage.eNS_URI, TimedAutomataPackage.eINSTANCE);
 	}
 
 	private <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getGueryMotifByMotif(org.modelrefactoring.guery.Motif motif){
