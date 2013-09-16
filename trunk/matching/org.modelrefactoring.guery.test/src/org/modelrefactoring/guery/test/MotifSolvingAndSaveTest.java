@@ -16,6 +16,7 @@ import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifReaderException;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 
+import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -227,6 +228,7 @@ public class MotifSolvingAndSaveTest {
 		JaMoPPUtil.initialize();
 		EPackage.Registry.INSTANCE.put(ConcretesyntaxPackage.eNS_URI, ConcretesyntaxPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(Bpmn2Package.eNS_URI, Bpmn2Package.eINSTANCE);
 	}
 
 	private <Vertex extends EObjectVertex> nz.ac.massey.cs.guery.Motif<Vertex, EReferenceEdge> getGueryMotifByMotif(org.modelrefactoring.guery.Motif motif){
