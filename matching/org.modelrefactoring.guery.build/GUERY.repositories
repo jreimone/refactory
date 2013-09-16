@@ -66,6 +66,9 @@ get:http://jamopp.org/update_trunk/org.jamopp.deploy-complete.zip
 // PL/0 for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/PL0/
 
+// TimedAutomata for Mapping
+git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/TimedAutomata/
+
 // UML2
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downloads/drops/4.1.0/R201306100712/mdt-uml2-runtime-4.1.0.zip
 
