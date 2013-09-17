@@ -76,8 +76,15 @@ public class RoleModel2MotifConverter {
 		for (int count = 1; count <= optionalRoles.size(); count++) {
 			List<List<Role>> countCombinations = generator.getCombinations(optionalRoles, count);
 			for (List<Role> rolesToRemove : countCombinations) {
-				for (Role roleToRemove : rolesToRemove) {
-					if(mappedRoles.contains(roleToRemove)){
+				if(mappedRoles != null){
+					boolean roleAlreadyMapped = false;
+					for (Role roleToRemove : rolesToRemove) {
+						if(mappedRoles.contains(roleToRemove)){
+							roleAlreadyMapped = true;
+							break;
+						}
+					}
+					if(roleAlreadyMapped){
 						continue;
 					}
 				}
