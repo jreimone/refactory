@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Collaboration;
 import org.emftext.language.refactoring.roles.Multiplicity;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
@@ -33,8 +36,20 @@ public class RoleModel2MotifConverter {
 
 	private int maxPathLength;
 
+	private RoleMapping roleMapping;
+
 	public RoleModel2MotifConverter(RoleModel roleModel){
 		this.initialRolemodel = roleModel;
+	}
+	
+	/**
+	 * This constructor is used if some roles were mapped manually already
+	 * in an existing role mapping. 
+	 * @param roleMapping
+	 */
+	public RoleModel2MotifConverter(RoleMapping roleMapping){
+		this(roleMapping.getMappedRoleModel());
+		this.roleMapping = roleMapping;
 	}
 
 	public MotifModel createMotifModel(int maxPathLength){
@@ -54,18 +69,27 @@ public class RoleModel2MotifConverter {
 			}
 		}
 		CombinationGenerator<Role> generator = new CombinationGenerator<Role>();
+		List<Role> mappedRoles = null;
+		if(roleMapping != null){
+			mappedRoles = roleMapping.getAllMappedRoles();
+		}
 		for (int count = 1; count <= optionalRoles.size(); count++) {
 			List<List<Role>> countCombinations = generator.getCombinations(optionalRoles, count);
 			for (List<Role> rolesToRemove : countCombinations) {
+				for (Role roleToRemove : rolesToRemove) {
+					if(mappedRoles.contains(roleToRemove)){
+						continue;
+					}
+				}
 				EcoreUtil.Copier copier = new EcoreUtil.Copier(true, false);
 				RoleModel copiedRoleModel = (RoleModel) copier.copy(initialRolemodel);
 				copier.copyReferences();
-				for (Role absentRole : rolesToRemove) {
-					copiedRoleModel.getRoles().remove(copier.get(absentRole));
-					for (Collaboration collaboration : absentRole.getIncoming()) {
+				for (Role roleToRemove : rolesToRemove) {
+					copiedRoleModel.getRoles().remove(copier.get(roleToRemove));
+					for (Collaboration collaboration : roleToRemove.getIncoming()) {
 						EcoreUtil.delete(copier.get(collaboration));
 					}
-					for (Collaboration collaboration : absentRole.getOutgoing()) {
+					for (Collaboration collaboration : roleToRemove.getOutgoing()) {
 						EcoreUtil.delete(copier.get(collaboration));
 					}
 				}
@@ -82,6 +106,17 @@ public class RoleModel2MotifConverter {
 		motif.setVertexSelection(vertexSelection);
 		for (Role role : roleModel.getRoles()) {
 			createRole(vertexSelection, role);
+		}
+		if(roleMapping != null){
+			List<Constraint> constraints = vertexSelection.getConstraints();
+			List<ConcreteMapping> concreteMappings = roleMapping.getRoleToMetaelement();
+			for (ConcreteMapping concreteMapping : concreteMappings) {
+				Constraint constraint = GueryFactory.eINSTANCE.createConstraint();
+				Role role = concreteMapping.getRole();
+				EClass metaclass = concreteMapping.getMetaclass();
+				constraint.setExpression(role.getName() + ".getEClass().getName() == '" + metaclass.getName() + "'");
+				constraints.add(constraint);
+			}
 		}
 		for (Collaboration collaboration : roleModel.getCollaborations()){
 			createCollaboration(motif, collaboration);
