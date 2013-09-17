@@ -3,6 +3,7 @@ package org.modelrefactoring.guery.test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 
 import nz.ac.massey.cs.guery.ComputationMode;
 import nz.ac.massey.cs.guery.GQL;
@@ -52,15 +53,19 @@ public abstract class AbstractSpecificMotifSolvingTestFragment {
 		initAdditionalLanguages();
 		metamodel = getTargetMetamodel();
 		// GUERY file
-		EObject model = loadModel(getGUERYFileName());
-		assertNotNull("Resource must contain a model", model);
-		assertTrue("Model must be a MotifModel", model instanceof MotifModel);
-		motifModel = (MotifModel) model;
+		motifModel = getMotifModel();
 		// role model
-		model = loadModel(getRoleModelFileName());
+		EObject model = loadModel(getRoleModelFileName());
 		assertNotNull("Resource must contain a model", model);
 		assertTrue("Model must be a MotifModel", model instanceof RoleModel);
 		roleModel = (RoleModel) model;
+	}
+
+	protected MotifModel getMotifModel() {
+		EObject model = loadModel(getGUERYFileName());
+		assertNotNull("Resource must contain a model", model);
+		assertTrue("Model must be a MotifModel", model instanceof MotifModel);
+		return (MotifModel) model;
 	}
 
 	@Test
@@ -102,7 +107,7 @@ public abstract class AbstractSpecificMotifSolvingTestFragment {
 		return converter;
 	}
 	
-	private EObject loadModel(String filePath) {
+	protected EObject loadModel(String filePath) {
 		File file = new File(filePath);
 		assertTrue("File " + filePath + " doesn't exist", file.exists());
 		URI uri = URI.createFileURI(file.getAbsolutePath());
@@ -115,5 +120,22 @@ public abstract class AbstractSpecificMotifSolvingTestFragment {
 	
 	protected RoleModel getRoleModel(){
 		return roleModel;
+	}
+
+	protected void saveModel(EObject model, String fileName) {
+		File file = new File(fileName);
+		if(file.exists()){
+			file.delete();
+		}
+		URI uri = URI.createFileURI(file.getAbsolutePath());
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource = rs.createResource(uri);
+		assertNotNull("Resource " + uri + " couldn't be created", resource);
+		resource.getContents().add(model);
+		try {
+			resource.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
