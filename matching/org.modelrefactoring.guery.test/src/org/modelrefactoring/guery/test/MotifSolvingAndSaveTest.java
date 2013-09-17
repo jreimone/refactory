@@ -19,8 +19,11 @@ import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -115,7 +118,9 @@ public class MotifSolvingAndSaveTest {
 	public void testAndGenerateRoleMappings() {
 		System.out.println();
 		System.out.println("##################################");
-		System.out.println("Metamodel: " + metamodel.getName());
+		List<EClass> metaclasses = getMetaClasses(metamodel);
+		List<EStructuralFeature> structuralFeatures = getStructuralFeatures(metaclasses);
+		System.out.println("Metamodel: " + metamodel.getName() + " (MC: " + metaclasses.size() + ", SF: " + structuralFeatures.size() + ")");
 		System.out.println("RoleModel: " + roleModel.getName());
 		System.out.println("Max PathLength: " + maxPathLength);
 		System.out.println("Max Results: " + maxResults);
@@ -150,8 +155,32 @@ public class MotifSolvingAndSaveTest {
 			System.out.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
 			System.out.println("absolute path:");
 			System.out.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
+			System.out.println();
 			index++;
 		}
+	}
+
+	private List<EStructuralFeature> getStructuralFeatures(List<EClass> metaclasses) {
+		List<EStructuralFeature> structuralFeatures = new ArrayList<EStructuralFeature>();
+		for (EClass metaclass : metaclasses) {
+			structuralFeatures.addAll(metaclass.getEStructuralFeatures());
+		}
+		return structuralFeatures;
+	}
+
+	private List<EClass> getMetaClasses(EPackage epackage) {
+		List<EClass> metaclasses = new ArrayList<EClass>();
+		List<EClassifier> classifiers = epackage.getEClassifiers();
+		for (EClassifier classifier : classifiers) {
+			if(classifier instanceof EClass){
+				metaclasses.add((EClass) classifier);
+			}
+		}
+		List<EPackage> subpackages = epackage.getESubpackages();
+		for (EPackage subpackage : subpackages) {
+			metaclasses.addAll(getMetaClasses(subpackage));
+		}
+		return metaclasses;
 	}
 
 	private MotifModel convertRoleModel2MotifModel() {
