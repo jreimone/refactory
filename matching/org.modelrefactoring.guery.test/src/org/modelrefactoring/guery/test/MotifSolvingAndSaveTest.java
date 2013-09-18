@@ -188,8 +188,7 @@ public class MotifSolvingAndSaveTest {
 		MotifModel motifModel = converter.createMotifModel(maxPathLength);
 		Resource roleModelResource = roleModel.eResource();
 		ResourceSet rs = roleModelResource.getResourceSet();
-		URI roleModelUri = roleModelResource.getURI();
-		String gueryFileName = "queries/" + roleModelUri.lastSegment().replace("." + roleModelUri.fileExtension(), "_" + metamodelName + "_MPL" + maxPathLength + "." + new GueryMetaInformation().getSyntaxName());
+		String gueryFileName = "queries/" + metamodelName + "_" + rolemodelName + "_MPL" + maxPathLength + "." + new GueryMetaInformation().getSyntaxName();
 		File gueryFile = new File(gueryFileName);
 		if(gueryFile.exists()){
 			gueryFile.delete();
