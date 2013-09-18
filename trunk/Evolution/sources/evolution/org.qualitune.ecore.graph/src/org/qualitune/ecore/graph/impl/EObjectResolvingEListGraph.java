@@ -4,9 +4,9 @@
 package org.qualitune.ecore.graph.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections15.map.HashedMap;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -29,7 +29,7 @@ public class EObjectResolvingEListGraph<Type extends GObject> extends EObjectRes
 		super(dataClass, owner, featureID);
 		this.reference = reference;
 		this.owner = (GObject) owner;
-		targetEdgeMap = new HashedMap<GObject, GReference>();
+		targetEdgeMap = new HashMap<GObject, GReference>();
 	}
 
 	@Override
