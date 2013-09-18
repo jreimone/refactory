@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0extended.Pl0extendedPackage;
+import org.emftext.language.timedAutomata.TimedAutomataPackage;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.modelrefactoring.guery.graph.ContainmentEdge;
@@ -116,6 +117,13 @@ public class GraphAdapterTest {
 		assertNotNull("BPMN metamodel couldn't be initialised", Bpmn2Package.eINSTANCE);
 		assertNotNull("Resource for URI '" + Bpmn2Package.eINSTANCE.getNsURI() +"' mustn't be null", Bpmn2Package.eINSTANCE.eResource());
 		testGraphAdapter(Bpmn2Package.eINSTANCE.eResource(), Bpmn2Package.eINSTANCE);
+	}
+	
+	@Test
+	public void testTimedAutomata() {
+		assertNotNull("TimedAutomata metamodel couldn't be initialised", TimedAutomataPackage.eINSTANCE);
+		assertNotNull("Resource for URI '" + TimedAutomataPackage.eINSTANCE.getNsURI() +"' mustn't be null", TimedAutomataPackage.eINSTANCE.eResource());
+		testGraphAdapter(TimedAutomataPackage.eINSTANCE.eResource(), TimedAutomataPackage.eINSTANCE);
 	}
 
 	private EPackage getMetamodelFromFile(String metamodelPath) {
