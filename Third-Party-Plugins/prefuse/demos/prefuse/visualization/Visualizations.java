@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.timedAutomata.TimedAutomataPackage;
 import org.modelrefactoring.guery.graph.EClassVertex;
 import org.modelrefactoring.guery.graph.EPackageGraphAdapter;
@@ -35,10 +34,13 @@ public class Visualizations {
         JFrame frame = aggregateVisualization(createGraph(getMetamodel()));
         frame.setVisible(true);
         
-        frame = radialGraphView(createGraph(getMetamodel()), null, null, false);
+        Map<String, String> edgeTypeColorMap = new HashMap<String, String>();
+		edgeTypeColorMap.put("containment", "200,0,0");
+		edgeTypeColorMap.put("reference", "200,200,200");
+        frame = radialGraphView(createGraph(getMetamodel()), "edgeType", edgeTypeColorMap, false);
         frame.setVisible(true);
         
-        frame = graphView(createGraph(getMetamodel()));
+        frame = graphView(createGraph(getMetamodel()), "edgeType", edgeTypeColorMap, false);
         frame.setVisible(true);
         
         JFrame closeFrame = new JFrame("Close Frame");
@@ -54,8 +56,9 @@ public class Visualizations {
     	EPackageGraphAdapter adapter = new EPackageGraphAdapter(metamodel);
     	adapter.initialiseGraph();
     	Iterator<EReferenceEdge> iterator = adapter.getEdges();
-    	Graph g = new Graph();
+    	Graph g = new Graph(true);
     	g.addColumn("name", String.class);
+    	g.addColumn("edgeType", String.class);
     	Map<EClassVertex, Node> vertexNodeMap = new HashMap<EClassVertex, Node>();
     	while (iterator.hasNext()) {
 			EReferenceEdge edge = iterator.next();
@@ -74,7 +77,9 @@ public class Visualizations {
 				vertexNodeMap.put(end, endNode);
 			}
 			Edge nodeEdge = g.addEdge(startNode, endNode);
+			nodeEdge.setString("edgeType", (edge.getReference().isContainment())?"containment":"reference");
 			nodeEdge.setString("name", edge.getReference().getName());
+//			nodeEdge.s
 		}
 		return g;
 	}
@@ -98,9 +103,9 @@ public class Visualizations {
         return frame;
     }
     
-    public static JFrame graphView(Graph graph){
+    public static JFrame graphView(Graph graph, String edgeTypePredicate, Map<String, String> edgeTypeColorMap, boolean useStraightLineForSingleEdges){
         UILib.setPlatformLookAndFeel();
-        final GraphView view = new GraphView(graph, "name");
+        final GraphView view = new GraphView(graph, "name", edgeTypePredicate, edgeTypeColorMap, useStraightLineForSingleEdges);
         JFrame frame = new JFrame("p r e f u s e  |  g r a p h v i e w");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(view);

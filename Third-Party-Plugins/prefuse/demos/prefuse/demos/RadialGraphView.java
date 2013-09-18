@@ -107,6 +107,7 @@ public class RadialGraphView extends Display {
 		m_edgeRenderer.setArrowType(prefuse.Constants.EDGE_ARROW_FORWARD);
 		m_edgeRenderer.setEdgeType(prefuse.Constants.EDGE_TYPE_CURVE);
 		// to fill the arrows
+//		m_edgeRenderer = new EdgeRenderer(prefuse.Constants.EDGE_TYPE_CURVE, prefuse.Constants.EDGE_ARROW_FORWARD);
 		FillColorAction fillArrow = new FillColorAction(treeEdges);
 
 		DefaultRendererFactory rf = new DefaultRendererFactory(m_nodeRenderer);
