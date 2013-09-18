@@ -12,10 +12,8 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.pl0.PL0Package;
-import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
-import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;
+import org.emftext.language.timedAutomata.TimedAutomataPackage;
 import org.modelrefactoring.guery.graph.EClassVertex;
 import org.modelrefactoring.guery.graph.EPackageGraphAdapter;
 import org.modelrefactoring.guery.graph.EReferenceEdge;
@@ -34,13 +32,13 @@ import prefuse.util.ui.UILib;
 public class Visualizations {
 	
 	public static void main(String[] argv) {
-        JFrame frame = aggregateVisualization(createGraph(getResource()));
+        JFrame frame = aggregateVisualization(createGraph(getMetamodel()));
         frame.setVisible(true);
         
-        frame = radialGraphView(createGraph(getResource()), null, null, false);
+        frame = radialGraphView(createGraph(getMetamodel()), null, null, false);
         frame.setVisible(true);
         
-        frame = graphView(createGraph(getResource()));
+        frame = graphView(createGraph(getMetamodel()));
         frame.setVisible(true);
         
         JFrame closeFrame = new JFrame("Close Frame");
@@ -48,15 +46,13 @@ public class Visualizations {
         closeFrame.setVisible(true);
     }
 	
-    private static Resource getResource() {
-		EPackage.Registry.INSTANCE.put(PL0Package.eNS_URI, PL0Package.eINSTANCE);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new Pl0MetaInformation().getSyntaxName(), new Pl0ResourceFactory());
-		EPackage pl0MM = (EPackage) EPackage.Registry.INSTANCE.get(PL0Package.eNS_URI);
-		return pl0MM.eResource();
+    private static EPackage getMetamodel() {
+		return TimedAutomataPackage.eINSTANCE;
 	}
 	
-	private static Graph createGraph(Resource resource) {
-    	EPackageGraphAdapter adapter = new EPackageGraphAdapter(resource);
+	private static Graph createGraph(EPackage metamodel) {
+    	EPackageGraphAdapter adapter = new EPackageGraphAdapter(metamodel);
+    	adapter.initialiseGraph();
     	Iterator<EReferenceEdge> iterator = adapter.getEdges();
     	Graph g = new Graph();
     	g.addColumn("name", String.class);

@@ -41,5 +41,5 @@ Export-Package: prefuse,
  prefuse.visualization
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.emftext.language.pl0,
- org.emftext.language.pl0.resource.pl0,
- org.modelrefactoring.guery.graph
+ org.modelrefactoring.guery.graph,
+ org.emftext.language.timedautomata

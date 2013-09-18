@@ -81,6 +81,7 @@ public abstract class AbstractSpecificMotifSolvingTestFragment {
 				int processors = 1;
 				GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
 				EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
+				graphAdapter.initialiseGraph();
 				engine.query(graphAdapter, gueryMotif, listener, ComputationMode.ALL_INSTANCES);
 	//			int count = converter.getFoundRoleMappingsCount();
 	//			System.out.println("found role mappings: " + count);
