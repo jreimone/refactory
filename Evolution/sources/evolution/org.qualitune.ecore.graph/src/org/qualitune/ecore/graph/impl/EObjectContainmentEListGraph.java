@@ -4,10 +4,10 @@
 package org.qualitune.ecore.graph.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections15.map.HashedMap;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -28,7 +28,7 @@ public class EObjectContainmentEListGraph<Type extends GObject> extends EObjectC
 		super(dataClass, owner, featureID);
 		this.owner = (GObject) owner;
 		this.reference = reference;
-		targetEdgeMap = new HashedMap<GObject, GReference>();
+		targetEdgeMap = new HashMap<GObject, GReference>();
 	}
 
 	@Override

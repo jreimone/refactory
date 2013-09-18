@@ -6,8 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.qualitune.ecore.graph.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
- org.qualitune.guery,
- org.qualitune.graph;visibility:=reexport
+ org.modelrefactoring.guery.graph
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.qualitune.ecore.graph,
