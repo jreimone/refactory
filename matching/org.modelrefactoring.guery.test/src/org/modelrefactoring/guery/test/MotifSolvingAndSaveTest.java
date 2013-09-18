@@ -229,6 +229,9 @@ public class MotifSolvingAndSaveTest {
 		int processors = 1;
 		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
 		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
+		graphAdapter.initialiseGraph();
+		int vertexCount = graphAdapter.getVertexCount();
+		System.out.println("Vertex count: " + vertexCount);
 		FileWriteResultListener listener = new FileWriteResultListener(roleModel, maxResults, filePath);
 		engine.query(graphAdapter, motif, listener, ComputationMode.ALL_INSTANCES);
 		return listener;

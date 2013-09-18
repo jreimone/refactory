@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -79,7 +80,7 @@ public class GraphAdapterTest {
 		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
 		testGraphAdapter(pl0MMResource, pl0MM);
 	}
-	
+
 	@Test
 	public void testPL0Extended() {
 		Pl0extendedPackage pl0MM = Pl0extendedPackage.eINSTANCE;
@@ -88,26 +89,33 @@ public class GraphAdapterTest {
 		assertNotNull("Resource for URI '" + pl0MM.getNsURI() +"' mustn't be null", pl0MMResource);
 		testGraphAdapter(pl0MMResource, pl0MM);
 	}
-	
+
 	@Test
 	public void testMultipleInheritance(){
 		EPackage metamodel = getMetamodelFromFile("metamodels/MultipleInheritance.ecore");
 		Resource mmResource = metamodel.eResource();
 		testGraphAdapter(mmResource, metamodel);
 	}
-	
+
 	@Test
 	public void testBridgeMultipleInheritance(){
 		EPackage metamodel = getMetamodelFromFile("metamodels/BridgeMultipleInheritance.ecore");
 		Resource mmResource = metamodel.eResource();
 		testGraphAdapter(mmResource, metamodel);
 	}
-	
+
 	@Test
 	public void testJava() {
-		assertNotNull("PL/0 metamodel couldn't be initialised", JavaPackage.eINSTANCE);
+		assertNotNull("Java metamodel couldn't be initialised", JavaPackage.eINSTANCE);
 		assertNotNull("Resource for URI '" + JavaPackage.eINSTANCE.getNsURI() +"' mustn't be null", JavaPackage.eINSTANCE.eResource());
 		testGraphAdapter(JavaPackage.eINSTANCE.eResource(), JavaPackage.eINSTANCE);
+	}
+	
+	@Test
+	public void testBPMN() {
+		assertNotNull("BPMN metamodel couldn't be initialised", Bpmn2Package.eINSTANCE);
+		assertNotNull("Resource for URI '" + Bpmn2Package.eINSTANCE.getNsURI() +"' mustn't be null", Bpmn2Package.eINSTANCE.eResource());
+		testGraphAdapter(Bpmn2Package.eINSTANCE.eResource(), Bpmn2Package.eINSTANCE);
 	}
 
 	private EPackage getMetamodelFromFile(String metamodelPath) {
@@ -123,6 +131,7 @@ public class GraphAdapterTest {
 
 	private void testGraphAdapter(Resource mmResource, EPackage metamodel){
 		graphAdapter = new EPackageGraphAdapter(mmResource);
+		graphAdapter.initialiseGraph();
 		Iterator<MetamodelVertex> vertices = graphAdapter.getVertices();
 		// 1. build up the map of the metamodel for comparison
 		Map<String, EClass> metaclasses = getMetaclasses(metamodel);
@@ -133,10 +142,9 @@ public class GraphAdapterTest {
 		Map<String, EClassVertex> vertexMetaclasses = new HashMap<String, EClassVertex>();
 		while (vertices.hasNext()) {
 			MetamodelVertex vertex = vertices.next();
-			if(vertex instanceof EClassVertex){
-				EClassVertex eclassVertex = (EClassVertex) vertex;
-				vertexMetaclasses.put(eclassVertex.getEClass().getName(), eclassVertex);
-			}
+			assertTrue("Vertex must be an " + EClassVertex.class.getSimpleName(), vertex instanceof EClassVertex);
+			EClassVertex eclassVertex = (EClassVertex) vertex;
+			vertexMetaclasses.put(eclassVertex.getEClass().getName(), eclassVertex);
 			EObject element = vertex.getModelElement();
 			assertTrue("Input was an EPackage, i.e. the wrapped vertex must be an EClass", element instanceof EClass);
 			System.out.println(((EClass) element).getName());
@@ -146,17 +154,21 @@ public class GraphAdapterTest {
 			printEdges(inEdges, "<--", "---", false, metaclasses);
 		}
 		// 3. some additional comparison
-//		int eclassesCount = metaclasses.size();
-//		int vertexCount = vertexMetaclasses.size();
+		//		int eclassesCount = metaclasses.size();
+		//		int vertexCount = vertexMetaclasses.size();
 		compareInternalVerticesAndMetaclasses(vertexMetaclasses, metaclasses);
-//		assertEquals("The vertices must count the same as EClasses in the metamodel ", vertexCount, eclassesCount);
+		//		assertEquals("The vertices must count the same as EClasses in the metamodel ", vertexCount, eclassesCount);
 	}
 
 	private void compareInternalVerticesAndMetaclasses(Map<String, EClassVertex> vertexMetaclasses, Map<String, EClass> metaclasses) {
+		System.out.println("Vertex count: " + vertexMetaclasses.size() + "; Metaclasses count: " + metaclasses.size());
+		assertEquals("Vertex and Metaclasses count must be equal", metaclasses.size(), vertexMetaclasses.size());
 		for (String name : vertexMetaclasses.keySet()) {
-			if(vertexMetaclasses.get(name).isInternal()){
+			EClassVertex vertexMetaclass = vertexMetaclasses.get(name);
+			if(vertexMetaclass.isInternal()){
 				EClass metaclass = metaclasses.get(name);
 				assertTrue("Vertex '" + name + "' not contained in the metamodel", metaclass != null);
+				assertEquals("Vertex metaclass and real metaclass must be equal", metaclass, vertexMetaclass.getEClass());
 			} else {
 				System.out.println("Metaclass '" + name + "' is external");
 			}
@@ -215,11 +227,8 @@ public class GraphAdapterTest {
 				for (EReferenceEdge outEdge : edgeList) {
 					EReference reference = outEdge.getReference();
 					EClass targetClass = (EClass) outEdge.getEnd().getModelElement();
-					EClassifier classifier = reference.getEType();
-					if(classifier instanceof EClass){
-						EClass referenceTargetClass = (EClass) classifier;
-						assertTrue("Class '" + targetClass.getName() + "' must be a subclass of '" + referenceTargetClass.getName() + "'", referenceTargetClass.isSuperTypeOf(targetClass));
-					}
+					EClass referenceTargetClass = reference.getEReferenceType();
+					assertTrue("Class '" + targetClass.getName() + "' must be a subclass of '" + referenceTargetClass.getName() + "'", referenceTargetClass.isSuperTypeOf(targetClass));
 					List<EReference> allReferences = metaclass.getEAllReferences();
 					assertTrue(allReferences.contains(reference));
 				}
@@ -227,9 +236,13 @@ public class GraphAdapterTest {
 				List<EReference> allReferences = metaclass.getEAllReferences();
 				for (EReference reference : allReferences) {
 					Set<EReferenceEdge> referenceEdges = graphAdapter.getReferenceEdgeMap().get(reference);
-					for (EReferenceEdge referenceEdge : referenceEdges) {
-						if(((EClass) referenceEdge.getStart().getModelElement()).equals(metaclass)){
-							edgesCount++;
+					if(referenceEdges == null){
+						System.out.println("\tReference '" + reference.getName() + "' refers to the external metaclass '" + reference.getEReferenceType().getName() + "' and is omitted");
+					} else {
+						for (EReferenceEdge referenceEdge : referenceEdges) {
+							if(((EClass) referenceEdge.getStart().getModelElement()).equals(metaclass)){
+								edgesCount++;
+							}
 						}
 					}
 				}

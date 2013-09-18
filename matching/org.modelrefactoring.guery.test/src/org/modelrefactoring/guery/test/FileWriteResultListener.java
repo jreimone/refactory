@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 import nz.ac.massey.cs.guery.MotifInstance;
@@ -25,7 +26,7 @@ import org.modelrefactoring.guery.graph.EReferenceEdge;
 import org.modelrefactoring.guery.graph.MetamodelVertex;
 import org.modelrefactoring.matching.guery.MotifInstance2RoleMappingConverter;
 
-public class FileWriteResultListener extends MotifInstance2RoleMappingConverter {
+public class FileWriteResultListener extends MotifInstance2RoleMappingConverter implements AdditionalListenerInvocator{
 
 	private int maxResultCount;
 	private int count = 0;
@@ -34,11 +35,14 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 	private int buffer = (int) Math.pow(1024, 2);
 	private Writer writer;
 	private File file;
+	
+	private List<AdditionalResultListener> additionalListeners;
 
 	public FileWriteResultListener(RoleModel roleModel, int maxResultCount, String filePath) {
 		super(roleModel, maxResultCount);
 		this.maxResultCount = maxResultCount;
 		initFile(filePath);
+		additionalListeners = new ArrayList<AdditionalResultListener>();
 	}
 
 	private void initFile(String filePath) {
@@ -67,6 +71,9 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 		if(count == maxResultCount){
 			return false;
 		}
+		for (AdditionalResultListener additionalResultListener : getAdditionalListeners()) {
+			additionalResultListener.found(roleMapping);
+		}
 		return true;
 	}
 
@@ -89,6 +96,9 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		for (AdditionalResultListener additionalResultListener : getAdditionalListeners()) {
+			additionalResultListener.done();
 		}
 	}
 
@@ -152,5 +162,22 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void addListener(AdditionalResultListener listener) {
+		if(!additionalListeners.contains(listener)){
+			additionalListeners.add(listener);
+		}
+	}
+
+	@Override
+	public boolean removeListener(AdditionalResultListener listener) {
+		return additionalListeners.remove(listener);
+	}
+
+	@Override
+	public List<AdditionalResultListener> getAdditionalListeners() {
+		return additionalListeners;
 	}
 }

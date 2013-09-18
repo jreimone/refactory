@@ -219,6 +219,7 @@ public class MotifSolvingAndCompareTest {
 		int processors = 1;
 		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
 		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(resource);
+		graphAdapter.initialiseGraph();
 		engine.query(graphAdapter, motif, converter, ComputationMode.ALL_INSTANCES);
 		List<RoleMapping> foundRoleMappings = converter.getFoundRoleMappings();
 		return foundRoleMappings;

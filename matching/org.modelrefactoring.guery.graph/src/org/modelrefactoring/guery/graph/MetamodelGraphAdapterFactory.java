@@ -5,13 +5,14 @@ package org.modelrefactoring.guery.graph;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 
 
 
 /**
+ * This GraphAdapter ignores external metaclasses and references to them.
+ * 
  * @author jreimann
  *
  */
@@ -24,12 +25,15 @@ public class MetamodelGraphAdapterFactory extends EMFGraphAdapterFactory<Metamod
 	@Override
 	public MetamodelVertex createVertex(EObject modelElement) {
 		if(modelElement instanceof EClass){
-			return new EClassVertex((EClass) modelElement, isInSameModelAsBaseResourceModel(modelElement));
+			if(isInSameModelAsBaseResourceModel(modelElement)){
+				return new EClassVertex((EClass) modelElement, true);
+			}
 		}
-		if(modelElement instanceof EPackage){
-			return new EPackageVertex((EPackage) modelElement);
-		}
-		return super.createVertex(modelElement);
+//		if(modelElement instanceof EPackage){
+//			return new EPackageVertex((EPackage) modelElement);
+//		}
+//		return super.createVertex(modelElement);
+		return null;
 	}
 	
 	@Override
@@ -41,9 +45,10 @@ public class MetamodelGraphAdapterFactory extends EMFGraphAdapterFactory<Metamod
 //			Resource toResource = to.eResource();
 			if(isInSameModelAsBaseResourceModel(to)){
 				edge = new InternalEdge(reference);
-			} else {
-				edge = new ExternalEdge(reference);
-			}
+			} 
+//			else {
+//				edge = new ExternalEdge(reference);
+//			}
 		}
 		return edge;
 	}

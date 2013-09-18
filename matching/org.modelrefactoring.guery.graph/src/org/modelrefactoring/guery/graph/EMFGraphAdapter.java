@@ -25,10 +25,10 @@ public class EMFGraphAdapter<Vertex extends EObjectVertex, Edge extends EReferen
 	public EMFGraphAdapter(Resource resource, IEMFGraphAdapterFactory<Vertex, Edge> factory){
 		this.resource = resource;
 		this.factory = factory;
-		initialiseGraph();
+//		initialiseGraph();
 	}
 	
-	protected void initialiseGraph() {
+	public void initialiseGraph() {
 		graph = new DirectedSparseMultigraph<Vertex, Edge>();
 		createGraph();
 	}
