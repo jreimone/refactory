@@ -1,0 +1,14 @@
+motif ExtractXwithReferenceClass
+select OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference
+connected by extracts(OrigContainer>Extract)[1,1] find all
+where "extracts is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by referer(OrigContainer>MovedReference)[1,1] find all
+where "referer is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by moved(NewContainer>Extract)[1,1] find all
+where "moved is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by target(ContainerContainer>NewContainer)[1,1] find all
+where "target is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by source(ContainerContainer>OrigContainer)[1,1] find all
+where "source is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by containerRef(MovedReference>NewContainer)[1,1] find all
+where "!(containerRef is org.modelrefactoring.guery.graph.ContainmentEdge)"
