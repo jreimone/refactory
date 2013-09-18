@@ -76,4 +76,4 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downl
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/downloads/drops/0.7/S20111111/site.zip!site/plugins/org.eclipse.bpmn2_0.7.0.201111091619.jar
 
 // FeatureMapper
-get:http://featuremapper.org/update/featuremapper-0.8.9.201210111140.zip
+// get:http://featuremapper.org/update/featuremapper-0.8.9.201210111140.zip
