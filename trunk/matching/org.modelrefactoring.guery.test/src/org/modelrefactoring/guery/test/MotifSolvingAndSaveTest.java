@@ -153,10 +153,10 @@ public class MotifSolvingAndSaveTest {
 			java.net.URI relativize = wsFile.toURI().relativize(absFile.toURI());
 			System.out.println("relative path to workspace:");
 			System.out.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
-			System.err.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
+//			System.err.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
 			System.out.println("absolute path:");
 			System.out.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
-			System.err.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
+//			System.err.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
 			System.out.println();
 			index++;
 		}
