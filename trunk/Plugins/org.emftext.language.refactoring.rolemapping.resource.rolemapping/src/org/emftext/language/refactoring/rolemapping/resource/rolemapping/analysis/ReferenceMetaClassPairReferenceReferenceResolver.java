@@ -47,6 +47,11 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 		ConcreteMapping concreteMapping = (ConcreteMapping) collaborationMapping.eContainer();
 		List<ReferenceMetaClassPair> referenceMetaClassPairs = collaborationMapping.getReferenceMetaClassPair();
 		List<EReference> possibleReferences = getPossibleReferences(currentPair, referenceMetaClassPairs, concreteMapping);
+//		System.out.println("#");
+//		for (EReference eReference : possibleReferences) {
+//			System.out.println(eReference.getName());
+//		}
+//		System.out.println("~");
 		for (EReference possibleReference : possibleReferences) {
 			if(possibleReference.getName().equals(identifier) || resolveFuzzy){
 				result.addMapping(possibleReference.getName(), possibleReference);
@@ -59,7 +64,10 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 		if(!resolveFuzzy){
 			result.setErrorMessage("Reference '" + identifier + "' is not a reference of metaclass '" + currentMetaclass.getName() + "'");
 		} else {
+			System.out.println("-------");
 			System.out.println(currentMetaclass.getName());
+			System.out.println(referenceMetaClassPairs.indexOf(currentPair));
+			System.out.println(identifier);
 		}
 	}
 
@@ -80,6 +88,8 @@ public class ReferenceMetaClassPairReferenceReferenceResolver implements org.emf
 			possibleReferences.addAll(currentMetaclass.getEAllReferences());
 			currentMetaclassPairMap.put(index, currentMetaclass);
 		}
+//		System.out.println("curr: " + currentMetaclass.getName());
+//		System.out.println("curr: " + index);
 		return possibleReferences;
 	}
 
