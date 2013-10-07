@@ -1,0 +1,9 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+/*
+This refactoring moves a request to a physical GPS component to
+the onResume() method of a subclass of Activity.
+*/
+"Move GPS resource request to visible state method" maps <SelectX> { 
+	 Selection := statements.ExpressionStatement; 
+}

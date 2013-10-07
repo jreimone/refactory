@@ -16,6 +16,13 @@
             rolemapping_resource="rolemappings/RemoveEmptyMethods.rolemapping">
       </rolemapping>
       <rolemapping
+            rolemapping_resource="rolemappings/MoveRequestToVisibleState.rolemapping">
+         <mappingIcon
+               icon="icons/move_to_on_resume.png"
+               mapping_name="Move GPS resource request to visible state method">
+         </mappingIcon>
+      </rolemapping>
+      <rolemapping
             rolemapping_resource="rolemappings/AddDataCompression.rolemapping">
          <mappingIcon
                icon="icons/exportzip_wiz.gif"
@@ -34,6 +41,11 @@
             mapping_name="Add Data Compression to Apache HTTP Client based file transmission"
             nsUri="http://www.emftext.org/java"
             postprocessor="org.emftext.language.java.refactoring.AddDataCompressionPostProcessor">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Move GPS resource request to visible state method"
+            nsUri="http://www.emftext.org/java"
+            postprocessor="org.emftext.language.java.refactoring.MoveRequestToVisibleStatePostProcessor">
       </postprocessor>
    </extension>
 
