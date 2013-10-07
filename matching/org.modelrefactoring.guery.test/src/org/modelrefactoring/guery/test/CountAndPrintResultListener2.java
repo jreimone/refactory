@@ -14,20 +14,20 @@ import org.modelrefactoring.guery.graph.EReferenceEdge;
 import org.modelrefactoring.guery.graph.MetamodelVertex;
 import org.modelrefactoring.matching.guery.MotifInstance2RoleMappingConverter;
 
-public class CountAndPrintResultListener extends MotifInstance2RoleMappingConverter implements AdditionalListenerInvocator{
+public class CountAndPrintResultListener2 extends MotifInstance2RoleMappingConverter implements AdditionalListenerInvocator{
 
 	private int count = 0;
 	private int maxResultCount;
-	private int queryIterationsCount;
-	private int currentQueryIteration = 0;
+	private int queryCycleCount;
+	private int currentQueryCycle = 0;
 	
 	private List<AdditionalResultListener> additionalListeners;
 
-	public CountAndPrintResultListener(RoleModel roleModel, int maxResultCount, int queryIterationsCount) {
+	public CountAndPrintResultListener2(RoleModel roleModel, int maxResultCount, int queryCycleCount) {
 		super(roleModel, maxResultCount);
 		this.maxResultCount = maxResultCount;
 		additionalListeners = new ArrayList<AdditionalResultListener>();
-		this.queryIterationsCount = queryIterationsCount;
+		this.queryCycleCount = queryCycleCount;
 	}
 
 	@Override
@@ -38,8 +38,8 @@ public class CountAndPrintResultListener extends MotifInstance2RoleMappingConver
 		}
 		System.out.println(count);
 		RoleMapping roleMapping = createRoleMapping(instance);
-		String string = printRoleMapping(roleMapping);
-		System.out.println(string);
+//		String string = printRoleMapping(roleMapping);
+//		System.out.println(string);
 //		System.out.println();
 		for (AdditionalResultListener listener : additionalListeners) {
 			listener.found(roleMapping);
@@ -50,9 +50,9 @@ public class CountAndPrintResultListener extends MotifInstance2RoleMappingConver
 	@Override
 	public void done() {
 		super.done();
-		currentQueryIteration++;
-		System.out.println(currentQueryIteration + ". done");
-		if(currentQueryIteration == queryIterationsCount){
+		currentQueryCycle++;
+		System.out.println(currentQueryCycle + ". done");
+		if(currentQueryCycle == queryCycleCount){
 			System.out.println("= final done");
 			for (AdditionalResultListener listener : additionalListeners) {
 				listener.done();
@@ -60,19 +60,6 @@ public class CountAndPrintResultListener extends MotifInstance2RoleMappingConver
 		}
 	}
 
-	private String printRoleMapping(RoleMapping roleMapping) {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		RolemappingPrinter2 printer = new RolemappingPrinter2(out, null);
-		try {
-			printer.print(roleMapping);
-			out.close();
-			return out.toString().trim();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	public int getFoundRoleMappingsCount(){
 		return count;
 	}
