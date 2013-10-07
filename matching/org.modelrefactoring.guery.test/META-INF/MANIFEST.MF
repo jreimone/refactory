@@ -35,4 +35,5 @@ Bundle-ClassPath: .,
  libs/orientdb-client-1.5.0.jar,
  libs/orientdb-core-1.5.0.jar,
  libs/orientdb-enterprise-1.5.0.jar,
- libs/orientdb-graphdb-1.5.0.jar
+ libs/orientdb-graphdb-1.5.0.jar,
+ libs/commons-configuration-1.9.jar

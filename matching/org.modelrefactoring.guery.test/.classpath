@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="libs/commons-configuration-1.9.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/blueprints-core-2.4.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/blueprints-orient-graph-2.4.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gremlin-groovy-2.4.0-SNAPSHOT.jar"/>
