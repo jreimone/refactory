@@ -315,7 +315,7 @@ git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Conference/
 //get:http://www.emftext.org/update/plugins/org.emftext.language.conference_0.3.1.v201207310007.jar
 
 // OSGi
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/equinox/drops/R-KeplerSR1-201309111000/org.eclipse.osgi_3.9.1.v20130814-1242.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/equinox/drops/R-Kepler-201306052000/org.eclipse.osgi_3.9.0.v20130529-1710.jar
 
 // Dresden OCL for OCL refactorings
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.metrics.source_3.2.0.v201209240638.jar
