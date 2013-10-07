@@ -4,7 +4,8 @@ Bundle-Name: EnergySmellTest
 Bundle-SymbolicName: EnergySmellTest
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-ClassPath: libs/apache/httpclient-4.2.2.jar,
- libs/apache/httpcore-4.2.2.jar,
+Bundle-ClassPath: libs/apache/httpcore-4.2.2.jar,
+ libs/apache/httpclient-4.2.2.jar,
  libs/apache/httpmime-4.2.2.jar,
+ libs/android/android.jar,
  .

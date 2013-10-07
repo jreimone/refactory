@@ -69,7 +69,7 @@ public class DataTransmissionWithoutCompression {
 			HttpPost httppost = new HttpPost("http://some.url:8080/servlets-examples/servlet/RequestInfoExample");
 			File file = new File(args[0]);
 //			FileBody fileBody = new FileBody(gzipFile(file));
-			FileBody fileBody = new FileBody(file) ;
+			FileBody fileBody = new FileBody(gzipFile(file)) ;
 			StringBody comment = new StringBody("A binary file of some kind");
 
 			MultipartEntity reqEntity = new MultipartEntity();
