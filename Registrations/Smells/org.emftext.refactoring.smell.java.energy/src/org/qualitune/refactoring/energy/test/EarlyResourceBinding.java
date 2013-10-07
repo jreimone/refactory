@@ -20,3 +20,5 @@ public class EarlyResourceBinding extends File{
 		return super.toString();
 	}
 }
+
+

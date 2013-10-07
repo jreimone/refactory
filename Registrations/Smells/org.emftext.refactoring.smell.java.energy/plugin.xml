@@ -9,6 +9,12 @@
             patternResource="queries/org/emftext/refactoring/smell/java/energy/dataTransmissionWithoutCompressionOptimised.eiq"
             patternName="dataTransmissionWithoutCompressionOptimised">
       </structureCalculation>
+      <structureCalculation
+            description="Searches for classes being subclasses of android.app.Activity and requesting the GPS component in the onCreate() method already. This means, the physical GPS resource is requested too early since the user cannot even interact with the app while the onCreate() method is executed."
+            patternName="earlyResourceBinding"
+            patternResource="queries/org/emftext/refactoring/smell/java/energy/earlyBinding.eiq"
+            smellMessage="Physical GPS component is requested too early.">
+      </structureCalculation>
    </extension>
 
 </plugin>
