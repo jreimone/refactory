@@ -72,16 +72,17 @@ public abstract class AbstractSpecificMotifSolvingTestFragment {
 	public void testCountMappings(){
 		System.out.println("Querying the " + metamodel.getName() + " metamodel for '" + roleModel.getName() + "'");
 		System.out.println("max results: " + getMaxResults());
-		ResultListener<MetamodelVertex, EReferenceEdge> listener = getResultListener();
+		int queryIterationsCount = motifModel.getMotifs().size();
+		ResultListener<MetamodelVertex, EReferenceEdge> listener = getResultListener(queryIterationsCount);
+//				int processors = Runtime.getRuntime().availableProcessors();
+		int processors = 1;
+		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
+		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
+		graphAdapter.initialiseGraph();
 		for (org.modelrefactoring.guery.Motif motif : motifModel.getMotifs()) {
 			try {
 				ModelMotifReader<MetamodelVertex> reader = new ModelMotifReader<MetamodelVertex>(motif);
 				Motif<MetamodelVertex, EReferenceEdge> gueryMotif = reader.read(null);
-//				int processors = Runtime.getRuntime().availableProcessors();
-				int processors = 1;
-				GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
-				EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
-				graphAdapter.initialiseGraph();
 				engine.query(graphAdapter, gueryMotif, listener, ComputationMode.ALL_INSTANCES);
 	//			int count = converter.getFoundRoleMappingsCount();
 	//			System.out.println("found role mappings: " + count);
@@ -101,9 +102,9 @@ public abstract class AbstractSpecificMotifSolvingTestFragment {
 	
 	protected abstract void initAdditionalLanguages();
 	
-	protected ResultListener<MetamodelVertex, EReferenceEdge> getResultListener() {
+	protected ResultListener<MetamodelVertex, EReferenceEdge> getResultListener(int queryCycleCount) {
 		if(converter == null){
-			converter = new CountAndPrintResultListener(getRoleModel(), getMaxResults());
+			converter = new CountAndPrintResultListener(getRoleModel(), getMaxResults(), queryCycleCount);
 		}
 		return converter;
 	}
