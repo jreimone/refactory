@@ -98,11 +98,14 @@ public class CalculationsWithRolemappingPage extends CalculationsPage {
 			}
 		});
 		comboViewer_1.setInput(rolemappingsForMetamodel);
-		final RoleMapping rolemapping = getConcreteSmell().getRefactoring().get(0);
-		if(rolemapping != null){
-			RoleMapping temp = roleMappings.get(rolemapping.getName());
-			int index = rolemappingsForMetamodel.indexOf(temp);
-			combo_1.select(index);
+		List<RoleMapping> resolvingRefactorings = getConcreteSmell().getRefactoring();
+		if(resolvingRefactorings.size() > 0){
+			RoleMapping rolemapping = resolvingRefactorings.get(0);
+			if(rolemapping != null){
+				RoleMapping temp = roleMappings.get(rolemapping.getName());
+				int index = rolemappingsForMetamodel.indexOf(temp);
+				combo_1.select(index);
+			}
 		}
 	}
 }

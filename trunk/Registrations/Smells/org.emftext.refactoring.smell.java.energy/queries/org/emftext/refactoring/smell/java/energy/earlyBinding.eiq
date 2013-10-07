@@ -10,28 +10,27 @@ import "http://www.emftext.org/java/statements"
 // inspired by the GReQL query for "early resource binding" from the following paper:
 // Marion Gottschalk, Mirco Joseﬁok, Jan Jelschen, Andreas Winter (2012) 
 // "Removing Energy Code Smells with Reengineering Services"
-pattern earlyBinding(actClass:Class, onCreate:ClassMethod, superClass: Class, callee:ClassMethod){
-	Class.^extends(actClass, superClassRef);
-	NamespaceClassifierReference.classifierReferences(superClassRef, classifierRef);
-	ClassifierReference.target(classifierRef, superClass);
+pattern earlyResourceBinding(bindingStatement:ExpressionStatement){
+	// find the class extending 'Activity'
+	Class.^extends(actualClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
+	ClassifierReference.target(classifierReference, superClass);
 	Class.name(superClass, "Activity");
-	Class.members(actClass, onCreate);
-	ClassMethod.name(onCreate, "onCreate");
-	ClassMethod.statements(onCreate, statement);
-	ExpressionStatement.expression(statement, caller);
-	MethodCall.target(caller, callee);
-	ClassMethod.name(callee, "requestLocationUpdates");
+	// find the overriding method 'onCreate(..)'
+	Class.members(actualClass, onCreateMethod);
+	ClassMethod.name(onCreateMethod, "onCreate");
+	// find the binding statement calling 'requestLocationUpdates(..)' too early
+	ExpressionStatement.expression(bindingStatement, earlyBindingMethodCallReference);
+	IdentifierReference.next(earlyBindingMethodCallReference, earlyBindingMethodCall);
+	MethodCall.target(earlyBindingMethodCall, requestLocationUpdatesMethod);
+	ClassMethod.name(requestLocationUpdatesMethod, "requestLocationUpdates");
+	find parentContainsSomething+(onCreateMethod, bindingStatement);
 }
 
-pattern earlyBinding3(actClass:Class, searchedMethod:ClassMethod, superClass: Class, callee:ClassMethod){
-	Class.^extends(actClass, superClassRef);
-	NamespaceClassifierReference.classifierReferences(superClassRef, classifierRef);
-	ClassifierReference.target(classifierRef, superClass);
-	Class.name(superClass, "File");
-	Class.members(actClass, searchedMethod);
-	ClassMethod.name(searchedMethod, "toString");
-	ClassMethod.statements(searchedMethod, statement);
-	ExpressionStatement.expression(statement, caller);
-	MethodCall.target(caller, callee);
-	ClassMethod.name(callee, "testMethod");
+private pattern parentContainsSomething(parent, child){
+	StatementListContainer.statements(parent, child);
+} or {
+	ExpressionStatement.expression(parent, child);
+} or {
+	StatementContainer.statement(parent, child);
 }
