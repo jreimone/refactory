@@ -120,8 +120,12 @@ public class SmellChecker
 				QualityCalculation qualityCalculation = triple.getThird();
 				ConcreteQualitySmell concreteSmell = qualityCalculation.getConcreteSmell();
 				List<RoleMapping> refactorings = concreteSmell.getRefactoring();
-				for (RoleMapping roleMapping : refactorings) {
-					addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
+				if(refactorings == null || refactorings.size() == 0){
+					addSmellAndQuickFix(file, model, calculation, result, null, editorConnector);
+				} else {
+					for (RoleMapping roleMapping : refactorings) {
+						addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
+					}
 				}
 			}
 		}
