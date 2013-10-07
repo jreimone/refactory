@@ -48,8 +48,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 // Apache
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.collections_3.2.0.v2013030210310.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
-get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//commons/configuration/binaries/commons-configuration-1.9-bin.zip!commons-configuration-1.9.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
+//get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//commons/configuration/binaries/commons-configuration-1.9-bin.zip!commons-configuration-1.9.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
 
 // Refactory Dependencies
 svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.rolemapping
