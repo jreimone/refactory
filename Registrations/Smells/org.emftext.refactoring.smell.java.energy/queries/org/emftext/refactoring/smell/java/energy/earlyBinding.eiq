@@ -24,10 +24,10 @@ pattern earlyResourceBinding(bindingStatement:ExpressionStatement){
 	IdentifierReference.next(earlyBindingMethodCallReference, earlyBindingMethodCall);
 	MethodCall.target(earlyBindingMethodCall, requestLocationUpdatesMethod);
 	ClassMethod.name(requestLocationUpdatesMethod, "requestLocationUpdates");
-	find parentContainsSomething+(onCreateMethod, bindingStatement);
+	find parentContainsBindingExpression+(onCreateMethod, bindingStatement);
 }
 
-private pattern parentContainsSomething(parent, child){
+private pattern parentContainsBindingExpression(parent, child){
 	StatementListContainer.statements(parent, child);
 } or {
 	ExpressionStatement.expression(parent, child);
