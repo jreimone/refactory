@@ -37,8 +37,6 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation
 //EMFText (required to generate languages)
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
 get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
-// CodeComposers
-get:git:https://github.com/DevBoost/CodeComposers.git!Plugins/de.devboost.codecomposers
 
 // EMF Compare (required for tests)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.0/R201306250935/emf-compare-update-2.1.0a.zip
@@ -254,6 +252,9 @@ get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3
 //git:https://github.com/DevBoost/EMFText.git!Core/Commons/
 //git:https://github.com/DevBoost/EMFText.git!Core/Features/
 //git:https://github.com/DevBoost/EMFText.git!Core/License/
+
+// CodeComposers
+git:https://github.com/DevBoost/CodeComposers.git!Plugins/de.devboost.codecomposers
 
 // Ecore Text
 //git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/EcoreText/
