@@ -5,10 +5,10 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 git:https://github.com/DevBoost/BuildBoost.git!Extensions/JUnit/
 
 // Eclipse Platform
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3-201306052000/eclipse-SDK-4.3-win32-x86_64.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3-201306052000/eclipse-platform-4.3-win32-x86_64.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3-201306052000/eclipse-4.3-delta-pack.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3-201306052000/org.eclipse.pde-4.3.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-SDK-4.3.1-win32-x86_64.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-platform-4.3.1-win32-x86_64.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-4.3.1-delta-pack.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/org.eclipse.pde-4.3.1.zip
 
 // JUnit4 needed
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip!eclipse/plugins/org.junit4_4.8.1.v20120523-1257/META-INF/MANIFEST.MF
@@ -39,7 +39,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation
 get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 
 // EMF Compare (required for tests)
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.0/R201306250935/emf-compare-update-2.1.0a.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.2.0/S201310020659/emf-compare-update-2.2.0M2.zip
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.2/R20120918-1125/emf-compare-update-1.3.2.zip!plugins/org.eclipse.emf.compare_1.3.2.v20120918-1125.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.2/R20120918-1125/emf-compare-update-1.3.2.zip!plugins/org.eclipse.emf.compare.diff_1.3.2.v20120918-1125.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.2/R20120918-1125/emf-compare-update-1.3.2.zip!plugins/org.eclipse.emf.compare.match_1.3.2.v20120918-1125.jar
@@ -242,8 +242,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/update
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.examples.domain_3.3.0.v20130523-1817.jar
 
 // GEF
-get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.9.0/R201305060205/GEF-runtime-3.9.0.zip
-get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.9.0/R201305060205/GEF-zest-3.9.0.zip
+get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.10.0/S201309301555/GEF-runtime-3.10.0M2.zip
+get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.10.0/S201309301555/GEF-zest-3.10.0M2.zip
 
 // EMFText
 //git:https://github.com/DevBoost/EMFText.git!Core/Access/
