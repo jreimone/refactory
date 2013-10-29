@@ -56,7 +56,8 @@ import org.emftext.language.manifest.RequireBundle;
 import org.emftext.language.manifest.RequireBundleDescription;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.util.StringUtil;
-import org.emftext.sdk.codegen.composites.JavaComposite;
+
+import de.devboost.codecomposers.java.JavaComposite;
 
 public class GenerateRoleMappingFacadesJob extends Job {
 
