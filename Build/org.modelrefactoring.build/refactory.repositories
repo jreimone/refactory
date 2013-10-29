@@ -254,7 +254,7 @@ get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3
 //git:https://github.com/DevBoost/EMFText.git!Core/License/
 
 // CodeComposers
-git:https://github.com/DevBoost/CodeComposers.git!Plugins/de.devboost.codecomposers
+git:https://github.com/DevBoost/CodeComposers.git
 
 // Ecore Text
 //git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/EcoreText/
