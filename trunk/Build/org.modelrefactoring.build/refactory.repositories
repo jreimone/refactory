@@ -18,6 +18,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops
 
 // EMF
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.1/R201309020605/emf-xsd-SDK-2.9.1.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.1/R201309020605/emf-runtime-2.9.1.zip
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.1/R201309020605/emf-xsd-Examples-2.9.1.zip!eclipse/plugins/org.eclipse.emf.examples.library_2.5.0.v20130610-0406.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.1/R201309020605/emf-xsd-Examples-2.9.1.zip!eclipse/plugins/org.eclipse.emf.examples.library.editor_2.5.0.v20130610-0406.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.1/R201309020605/emf-xsd-Examples-2.9.1.zip!eclipse/plugins/org.eclipse.emf.examples.library.edit_2.5.0.v20130610-0406.jar
@@ -202,8 +203,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/2013092
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201309270900/plugins/org.eclipse.xpand_1.4.0.v201306110406.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201309270900/plugins/org.eclipse.xtend.typesystem.emf_1.4.0.v201306110406.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/javax.inject.source_1.0.0.v20091030.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.3/R201309030823/tmf-xtext-runtime-2.4.3.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.3/R201309030823/tmf-xtext-SDK-2.4.3.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-runtime-2.4.2.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-SDK-2.4.2.zip
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.eclipse.emf.mwe.core_1.2.1.v201310010411.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.eclipse.emf.mwe.utils_1.3.1.v201310010411.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.eclipse.emf.mwe2.runtime_2.5.0.v201310010411.jar
