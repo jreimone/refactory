@@ -149,15 +149,15 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/swtbot/releases/latest/plugins/org.eclipse.swtbot.eclipse.gef.finder_2.1.1.201307101628.jar
 
 // IncQuery
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage.emf_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.rete_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base.itc_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.runtime.feature_0.7.0.201306302207.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.sdk.feature_0.7.0.201306302207.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/zipped/org.eclipse.incquery.update-0.7.0-incubation.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage_0.7.0.201306302207.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage.emf_0.7.0.201306302207.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime_0.7.0.201306302207.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base_0.7.0.201306302207.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.rete_0.7.0.201306302207.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base.itc_0.7.0.201306302207.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.runtime.feature_0.7.0.201306302207.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.sdk.feature_0.7.0.201306302207.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/zipped/org.eclipse.incquery.update-0.7.0-incubation.zip
 // the above zip needs Graphiti
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti.ui_0.10.0.v20130612-0936.jar
 // get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/graphiti/updates/0.10.0/plugins/org.eclipse.graphiti_0.10.0.v20130612-0936.jar
