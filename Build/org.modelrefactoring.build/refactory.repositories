@@ -11,7 +11,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/org.eclipse.pde-4.3.1.zip
 
 // JUnit4 needed
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-SDK-4.3.1-win32-x86_64.zip!eclipse/plugins/org.junit4_4.8.1.v20120523-1257/META-INF/MANIFEST.MF
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-SDK-4.3.1-win32-x86_64.zip!eclipse/plugins/org.junit_4.11.0.v201303080030/META-INF/MANIFEST.MF
 
 // JDT
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/org.eclipse.jdt-4.3.1.zip
@@ -205,8 +205,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/2013092
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201306260900/plugins/javax.inject.source_1.0.0.v20091030.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-runtime-2.4.2.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-SDK-2.4.2.zip
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.eclipse.emf.mwe.core_1.2.1.v201310010411.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.eclipse.emf.mwe.utils_1.3.1.v201310010411.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.eclipse.emf.mwe.core_1.2.1.v201310010411.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.eclipse.emf.mwe.utils_1.3.1.v201310010411.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.eclipse.emf.mwe2.runtime_2.5.0.v201310010411.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emft/mwe/updates/milestones/S201310010411/mwe/plugins/org.apache.commons.cli_1.2.0.v201105210650.jar
 
