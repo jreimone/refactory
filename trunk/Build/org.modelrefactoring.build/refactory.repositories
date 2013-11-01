@@ -44,6 +44,9 @@ get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.2/R201310031412/emf-compare-update-2.1.2.zip!plugins/org.eclipse.emf.compare_3.0.1.201310031412.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.2/R201310031412/emf-compare-update-2.1.2.zip!plugins/org.eclipse.emf.compare.ide.ui_3.0.2.201310031412.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.2/R201310031412/emf-compare-update-2.1.2.zip!plugins/org.eclipse.emf.compare.edit_3.0.1.201310031412.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.2/R201310031412/emf-compare-update-2.1.2.zip!plugins/org.eclipse.emf.compare.ide_3.0.1.201310031412.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.2/R201310031412/emf-compare-update-2.1.2.zip!plugins/org.eclipse.emf.compare.rcp_2.1.1.201310031412.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.2/R201310031412/emf-compare-update-2.1.2.zip!plugins/org.eclipse.emf.compare.rcp.ui_3.0.1.201310031412.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.2/R20120918-1125/emf-compare-update-1.3.2.zip!plugins/org.eclipse.emf.compare.diff_1.3.2.v20120918-1125.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.2/R20120918-1125/emf-compare-update-1.3.2.zip!plugins/org.eclipse.emf.compare.match_1.3.2.v20120918-1125.jar
 
