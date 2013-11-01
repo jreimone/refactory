@@ -11,7 +11,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/org.eclipse.pde-4.3.1.zip
 
 // JUnit4 needed
-get:get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip!eclipse/plugins/org.junit4_4.8.1.v20120523-1257/META-INF/MANIFEST.MF
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip!eclipse/plugins/org.junit4_4.8.1.v20120523-1257/META-INF/MANIFEST.MF
 
 // JDT
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/org.eclipse.jdt-4.3.1.zip
