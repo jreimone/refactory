@@ -50,6 +50,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/releas
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base.itc_0.7.0.201306302207.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.runtime.feature_0.7.0.201306302207.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.sdk.feature_0.7.0.201306302207.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/zipped/org.eclipse.incquery.update-0.7.0-incubation.zip!features/org.eclipse.incquery.runtime.feature_0.7.0.201306301831.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/zipped/org.eclipse.incquery.update-0.7.0-incubation.zip!features/org.eclipse.incquery.sdk.feature_0.7.0.201306302207.jar
 // and ANTLR is needed
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 
