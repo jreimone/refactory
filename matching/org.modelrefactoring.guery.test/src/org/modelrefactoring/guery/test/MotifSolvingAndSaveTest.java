@@ -62,7 +62,7 @@ import com.google.common.io.Files;
 public class MotifSolvingAndSaveTest {
 
 	private static final String CONFIG_FILE_PATH		= "config/MotifSolvingAndSaveTest.config";
-	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20DSL%20and%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
+//	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20DSL%20and%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
 
 	@Parameter(0)
 	public EPackage metamodel;
@@ -150,9 +150,9 @@ public class MotifSolvingAndSaveTest {
 			}
 			File wsFile = parent.getAbsoluteFile();
 //			System.out.println("Workspace: " + wsFile.getPath());
-			java.net.URI relativize = wsFile.toURI().relativize(absFile.toURI());
-			System.out.println("relative path to workspace:");
-			System.out.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
+//			java.net.URI relativize = wsFile.toURI().relativize(absFile.toURI());
+//			System.out.println("relative path to workspace:");
+//			System.out.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
 //			System.err.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
 			System.out.println("absolute path:");
 			System.out.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
