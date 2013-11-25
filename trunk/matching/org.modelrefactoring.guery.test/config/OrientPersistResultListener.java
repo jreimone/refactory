@@ -17,31 +17,30 @@ import org.emftext.language.refactoring.roles.RoleModel;
 
 import com.orientechnologies.orient.client.remote.OServerAdmin;
 import com.orientechnologies.orient.core.config.OGlobalConfiguration;
-import com.orientechnologies.orient.core.db.ODatabaseComplex;
+import com.orientechnologies.orient.core.db.graph.OGraphDatabase;
+import com.orientechnologies.orient.core.intent.OIntentMassiveInsert;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OProperty;
 import com.orientechnologies.orient.core.metadata.schema.OType;
-import com.orientechnologies.orient.core.record.ORecordInternal;
+import com.tinkerpop.blueprints.TransactionalGraph;
 import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.impls.orient.OrientBaseGraph;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
+import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
 
 public class OrientPersistResultListener implements AdditionalResultListener {
 
+	private static final String DB_ADMIN 											= "admin";
+	private static final String DB_PASS 											= "admin";
 	private static final String DB_TYPE 											= "plocal";
-	private static final String DB_ADMIN 											= "superadmin";
-	private static final String DB_PASS 											= "kuCh3n$%";
-	private static final String DB_SERVER_STRING 									= "remote:hudson-st.inf.tu-dresden.de/";
+	private static final String DB_SERVER_STRING 									= "remote:www.myorientdb-server.org/";
 	private static final String REFERENCE_META_CLASS_PAIR__INDEX_PROPERTY 			= "index";
-	// 's' muss angehangen werden, da die Referenz im Metamodell klein geschrieben ist und somit genauso heißt
-	// wie der VertexType von 'ReferenceMetaclassPair', da alle VertexTypes mit kleinem Anfangsbuchstaben anfangen
 	private static final String COLLABORATION_MAPPING__REFERENCE_META_CLASS_PAIR	= RolemappingPackage.Literals.COLLABORATION_MAPPING__REFERENCE_META_CLASS_PAIR.getName() + "s";
-	private static final int TRANSACTION_COUNT 										= 300;
+	private static final int TRANSACTION_COUNT 										= 200;
 
-	//	private EPackage targetMetamodel;
+	private EPackage targetMetamodel;
 
-	//	private OGraphDatabase database;
-	private OrientBaseGraph graph;
+	private OGraphDatabase database;
+	private OrientGraph graph;
 
 	private OProperty roleMappingRoleModelP;
 	private OProperty concreteMappingRoleP;
@@ -57,14 +56,11 @@ public class OrientPersistResultListener implements AdditionalResultListener {
 	private OClass concreteMappingC;
 	private OClass collMappingC;
 	private OClass refMetaClassPairC;
-
-	//	private boolean dbExists = false;
+	
 	private int count = 0;
-	private ODatabaseComplex<ORecordInternal<?>> tx;
 
 	public OrientPersistResultListener(EPackage targetMetamodel) {
-		//		this.targetMetamodel = targetMetamodel;
-		initGraph(targetMetamodel);
+		this.targetMetamodel = targetMetamodel;
 	}
 
 	@Override
@@ -72,21 +68,20 @@ public class OrientPersistResultListener implements AdditionalResultListener {
 		if(something != null && something[0] instanceof RoleMapping){
 			RoleMapping roleMapping = (RoleMapping) something[0];
 			count++;
-			//			OrientBaseGraph graph = initGraph(targetMetamodel);
+			OrientGraph graph = initGraphAndDatabase(targetMetamodel);
 			persistRoleMapping(roleMapping, graph);
 		}
 	}
 
 
-	protected void persistRoleMapping(RoleMapping roleMapping, OrientBaseGraph graph) {
+	protected void persistRoleMapping(RoleMapping roleMapping, OrientGraph graph) {
 		if(graph != null){
-			//			if(database.isClosed()){
-			//				System.err.println("DB was closed");
-			//				database = database.open(DB_ADMIN, DB_PASS);
-			//			}
+			if(database.isClosed()){
+				System.err.println("DB was closed");
+				database = database.open(DB_ADMIN, DB_PASS);
+			}
 			RoleModel roleModel = roleMapping.getMappedRoleModel();
 			Vertex roleMappingV = graph.addVertex("class:" + roleMappingC.getName());
-			//			Vertex roleMappingV = graph.addVertex(roleMappingC.getName());
 			roleMappingV.setProperty(roleMappingRoleModelP.getName(), roleModel.getName());
 			List<ConcreteMapping> concreteMappings = roleMapping.getRoleToMetaelement();
 			for (ConcreteMapping concreteMapping : concreteMappings) {
@@ -114,96 +109,93 @@ public class OrientPersistResultListener implements AdditionalResultListener {
 					}
 				}
 			}
-			if( count % TRANSACTION_COUNT == 0){
-				System.out.println("Commit #" + count / TRANSACTION_COUNT);
-				graph.commit();
-			}
+//			if( count % TRANSACTION_COUNT == 0){
+//				System.out.println("Commit #" + count / TRANSACTION_COUNT);
+//				graph.commit();
+//			}
 		}
 	}
 
-	private void initSchema(OrientBaseGraph graph){
-		//		if(graph.isClosed()){
-		//			database = graph.open(DB_ADMIN, DB_PASS);
-		//		}
-		//		graph.setUseCustomTypes(true);
+	private void initSchema(OGraphDatabase database){
+		if(database.isClosed()){
+			database = database.open(DB_ADMIN, DB_PASS);
+		}
+		database.setUseCustomTypes(true);
 		// RoleMapping
-		//		graph.getRawGraph().getTransaction().close();
-		//		graph.commit();
-		graph.getRawGraph().commit();
-		roleMappingC 				= graph.createVertexType(RoleMapping.class.getSimpleName());
+		roleMappingC 				= database.createVertexType(RoleMapping.class.getSimpleName());
 		roleMappingRoleModelP 		= roleMappingC.createProperty(RolemappingPackage.Literals.ROLE_MAPPING__MAPPED_ROLE_MODEL.getName(), OType.STRING);
 		// ConcreteMapping
-		concreteMappingC 			= graph.createVertexType(ConcreteMapping.class.getSimpleName());
+		concreteMappingC 			= database.createVertexType(ConcreteMapping.class.getSimpleName());
 		roleMappingRole2MetaR 		= roleMappingC.createProperty(RolemappingPackage.Literals.ROLE_MAPPING__ROLE_TO_METAELEMENT.getName(), OType.LINKLIST, concreteMappingC);
 		concreteMappingRoleP 		= concreteMappingC.createProperty(RolemappingPackage.Literals.CONCRETE_MAPPING__ROLE.getName(), OType.STRING);
 		concreteMappingMetaclassP 	= concreteMappingC.createProperty(RolemappingPackage.Literals.CONCRETE_MAPPING__METACLASS.getName(), OType.STRING);
 		// CollaborationMapping
-		collMappingC 				= graph.createVertexType(CollaborationMapping.class.getSimpleName());
+		collMappingC 				= database.createVertexType(CollaborationMapping.class.getSimpleName());
 		concreteMappingCollMappingR = concreteMappingC.createProperty(RolemappingPackage.Literals.CONCRETE_MAPPING__COLLABORATION_MAPPINGS.getName(), OType.LINKLIST, collMappingC);
 		collMappingCollP 			= collMappingC.createProperty(RolemappingPackage.Literals.COLLABORATION_MAPPING__COLLABORATION.getName(), OType.STRING);
 		// ReferenceMetaclassPair
-		refMetaClassPairC			= graph.createVertexType(ReferenceMetaClassPair.class.getSimpleName());
+		refMetaClassPairC			= database.createVertexType(ReferenceMetaClassPair.class.getSimpleName());
 		collMappingRefMClassPairR	= collMappingC.createProperty(COLLABORATION_MAPPING__REFERENCE_META_CLASS_PAIR, OType.LINKLIST, refMetaClassPairC);
 		refMetaClassPairRefP		= refMetaClassPairC.createProperty(RolemappingPackage.Literals.REFERENCE_META_CLASS_PAIR__REFERENCE.getName(), OType.STRING);
 		refMetaClassPairMetaclassP	= refMetaClassPairC.createProperty(RolemappingPackage.Literals.REFERENCE_META_CLASS_PAIR__META_CLASS.getName(), OType.STRING);
 		refMetaClassPairIndexP		= refMetaClassPairC.createProperty(REFERENCE_META_CLASS_PAIR__INDEX_PROPERTY, OType.INTEGER);
-
-		// indices
-		//		roleMappingC.createIndex("roleModelIndex", OClass.INDEX_TYPE.NOTUNIQUE_HASH_INDEX, roleMappingRoleModelP.getName());
-		//		concreteMappingC.createIndex("roleMetaclassIndex", OClass.INDEX_TYPE.NOTUNIQUE_HASH_INDEX, concreteMappingRoleP.getName(), concreteMappingMetaclassP.getName());
-
+		
 		roleMappingC.createIndex("roleModelIndex", OClass.INDEX_TYPE.NOTUNIQUE, roleMappingRoleModelP.getName());
 		concreteMappingC.createIndex("roleMetaclassIndex", OClass.INDEX_TYPE.NOTUNIQUE, concreteMappingRoleP.getName(), concreteMappingMetaclassP.getName());
-
-		graph.commit();
+		
+		database.commit();
 	}
-
-	private OrientBaseGraph initGraph(EPackage targetMetamodel){
-		if(graph == null){
+	
+	private OrientGraph initGraphAndDatabase(EPackage targetMetamodel){
+		if(database == null){
 			String name = targetMetamodel.getName();
 			String nsURI = targetMetamodel.getNsURI();
-			//			String dbName = name + "_" + nsURI.replaceAll("[/:,\\.]", "_");
+//			String dbName = name + "_" + nsURI.replaceAll("[/:,\\.]", "_");
 			String dbName = name;
-			String dbURL = DB_SERVER_STRING + dbName;
-			OServerAdmin admin;
 			try {
-				admin = new OServerAdmin(dbURL);
+				OServerAdmin admin = new OServerAdmin(DB_SERVER_STRING + dbName);
 				admin.connect(DB_ADMIN, DB_PASS);
 				if(!admin.existsDatabase(DB_TYPE)){
 					admin.createDatabase("graph", DB_TYPE);
-					graph = new OrientGraph(dbURL, DB_ADMIN, DB_PASS);
-//										graph = new OrientGraphNoTx(dbURL, DB_ADMIN, DB_PASS);
-					initSchema(graph);
+					database = new OGraphDatabase(DB_SERVER_STRING + dbName);
+					initSchema(database);
 				} else {
-					graph = new OrientGraph(dbURL, DB_ADMIN, DB_PASS);
-//										graph = new OrientGraphNoTx(dbURL, DB_ADMIN, DB_PASS);
-					loadSchema(graph);
+					database = new OGraphDatabase(DB_SERVER_STRING + dbName);
+					loadSchema(database);
 				}
 				performanceTuning();
 			} catch (IOException e) {
 				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
-
+			if(database == null){
+				database = new OGraphDatabase(DB_SERVER_STRING + dbName);
+			}
+			if(database.isClosed()){
+				database = database.open(DB_ADMIN, DB_PASS);
+			}
 		}
-		//		tx = graph.getRawGraph().begin(TXTYPE.OPTIMISTIC);
+		if(graph == null){
+			graph = new OrientGraph(database);
+		}
 		return graph;
 	}
 
-	private void loadSchema(OrientBaseGraph graph) {
+	private void loadSchema(OGraphDatabase database) {
 		// RoleMapping
-		roleMappingC 				= graph.getVertexType(RoleMapping.class.getSimpleName());
+		roleMappingC 				= database.getVertexType(RoleMapping.class.getSimpleName());
 		roleMappingRoleModelP 		= roleMappingC.getProperty(RolemappingPackage.Literals.ROLE_MAPPING__MAPPED_ROLE_MODEL.getName());
 		// ConcreteMapping
-		concreteMappingC 			= graph.getVertexType(ConcreteMapping.class.getSimpleName());
+		concreteMappingC 			= database.getVertexType(ConcreteMapping.class.getSimpleName());
 		roleMappingRole2MetaR 		= roleMappingC.getProperty(RolemappingPackage.Literals.ROLE_MAPPING__ROLE_TO_METAELEMENT.getName());
 		concreteMappingRoleP 		= concreteMappingC.getProperty(RolemappingPackage.Literals.CONCRETE_MAPPING__ROLE.getName());
 		concreteMappingMetaclassP 	= concreteMappingC.getProperty(RolemappingPackage.Literals.CONCRETE_MAPPING__METACLASS.getName());
 		// CollaborationMapping
-		collMappingC 				= graph.getVertexType(CollaborationMapping.class.getSimpleName());
+		collMappingC 				= database.getVertexType(CollaborationMapping.class.getSimpleName());
 		concreteMappingCollMappingR = concreteMappingC.getProperty(RolemappingPackage.Literals.CONCRETE_MAPPING__COLLABORATION_MAPPINGS.getName());
 		collMappingCollP 			= collMappingC.getProperty(RolemappingPackage.Literals.COLLABORATION_MAPPING__COLLABORATION.getName());
 		// ReferenceMetaclassPair
-		refMetaClassPairC			= graph.getVertexType(ReferenceMetaClassPair.class.getSimpleName());
+		refMetaClassPairC			= database.getVertexType(ReferenceMetaClassPair.class.getSimpleName());
 		collMappingRefMClassPairR	= collMappingC.getProperty(COLLABORATION_MAPPING__REFERENCE_META_CLASS_PAIR);
 		refMetaClassPairRefP		= refMetaClassPairC.getProperty(RolemappingPackage.Literals.REFERENCE_META_CLASS_PAIR__REFERENCE.getName());
 		refMetaClassPairMetaclassP	= refMetaClassPairC.getProperty(RolemappingPackage.Literals.REFERENCE_META_CLASS_PAIR__META_CLASS.getName());
@@ -211,33 +203,23 @@ public class OrientPersistResultListener implements AdditionalResultListener {
 	}
 
 	private void performanceTuning() {
-		// auf Server Console gemacht mit:
-		// config set storage.useWAL false
-		OGlobalConfiguration.TX_USE_LOG.setValue(false);
-		//		OGlobalConfiguration.USE_WAL.setValue(false);
-		//		OGlobalConfiguration.STORAGE_KEEP_OPEN.setValue(false);
-		//		OGlobalConfiguration.USE_WAL.setValue(true);
-		//		OGlobalConfiguration.TX_USE_LOG.setValue(true);
-		//		graph.getRawGraph().declareIntent(new OIntentMassiveInsert());
+//		OGlobalConfiguration.TX_USE_LOG.setValue(false);
+//		OGlobalConfiguration.USE_WAL.setValue(false);
+//		OGlobalConfiguration.STORAGE_KEEP_OPEN.setValue(false);
+		database.declareIntent(new OIntentMassiveInsert());
 	}
-
+	
 	@Override
 	public void done() {
+		System.out.println("Close Graph and DB");
 		if(graph != null){
 			System.out.println("Commit #" + (count / TRANSACTION_COUNT + 1));
 			graph.commit();
 			graph.shutdown();
-			//			graph.getRawGraph().declareIntent(null);
-			//			graph.shutdown();
-			//			tx.commit();
-			//			tx.close();
-			//			graph.getRawGraph().commit();
-			System.out.println("Graph closed");
 		}
-		//		if(database != null){
-		//			database.commit();
-		//			database.declareIntent(null);
-		//			database.close();
-		//		}
+		if(database != null){
+			database.declareIntent(null);
+			database.close();
+		}
 	}
 }
