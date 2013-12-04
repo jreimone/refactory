@@ -140,23 +140,8 @@ public class MotifSolvingAndSaveTest {
 			System.out.println("Very simple String-based saving took: " + writeResultListener.getTimeToWriteInSeconds() + "s");
 			System.out.println("Found possible role mappings: " + writeResultListener.getFoundRoleMappingsCount());
 			File absFile = writeResultListener.getFile();
-			int count = 0;
-			File temp = absFile;
-			File parent = null;
-			while (temp.getParentFile() != null && count <= 6) {
-				parent = temp;
-				temp = temp.getParentFile();
-				count++;
-			}
-			File wsFile = parent.getAbsoluteFile();
-//			System.out.println("Workspace: " + wsFile.getPath());
-//			java.net.URI relativize = wsFile.toURI().relativize(absFile.toURI());
-//			System.out.println("relative path to workspace:");
-//			System.out.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
-//			System.err.println("[[ATTACHMENT|/" + relativize.getPath() + "]]");
-			System.out.println("absolute path:");
+			System.out.println("persisted role mappings:");
 			System.out.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
-//			System.err.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
 			System.out.println();
 			index++;
 		}
