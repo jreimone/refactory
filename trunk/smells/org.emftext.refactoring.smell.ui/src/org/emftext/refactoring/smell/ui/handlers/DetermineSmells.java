@@ -23,6 +23,9 @@ public class DetermineSmells extends AbstractHandler {
 		//			IEditorReference[] editorReferences = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getEditorReferences();
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		//			for (IEditorReference editorReference : editorReferences) {
+		if(activeEditor == null){
+			return null;
+		}
 		IEditorInput editorInput = activeEditor.getEditorInput();
 		if(editorInput instanceof IFileEditorInput){
 			IFile openFile = ((IFileEditorInput) editorInput).getFile();

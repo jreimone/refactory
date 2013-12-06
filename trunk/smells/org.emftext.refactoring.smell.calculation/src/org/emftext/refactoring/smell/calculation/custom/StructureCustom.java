@@ -40,7 +40,7 @@ public class StructureCustom extends StructureImpl {
 					if(querySpecification != null){
 						// TODO try passing only the resource
 						IncQueryEngine engine = IncQueryEngine.on(resourceSet);
-						// TODO try the following one day
+						// TODO try the following one day for better handling of the engine when the editor is closed and opened again
 						// attention: then engine.wipe() and engine.dispose() must be called if use finished
 //						IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
 						IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
