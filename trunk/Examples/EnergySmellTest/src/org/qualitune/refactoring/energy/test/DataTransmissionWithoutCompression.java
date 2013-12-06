@@ -51,7 +51,6 @@ public class DataTransmissionWithoutCompression {
 			if (resEntity != null) {
 				System.out.println("Response content length: " + resEntity.getContentLength());
 			}
-			EntityUtils.consume(resEntity);
 		} finally {
 			try { httpclient.getConnectionManager().shutdown(); } catch (Exception ignore) {}
 		}
