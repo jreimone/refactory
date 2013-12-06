@@ -21,6 +21,11 @@ import org.apache.http.util.EntityUtils;
  * Example class for demonstrating a data transmission without compression,
  * taken from http://mirror.synyx.de/apache//httpcomponents/httpclient/binary/httpcomponents-client-4.2.2-bin.zip
  * the ClientMultipartFormPost.java and modified.
+ * 
+ * Inspired by the following publication:
+ * Höpfner, Bunse: "Towards an Energy-Consumption Based Complexity Classification for Resource Substitution Strategies"
+ * CEUR vol. 581, 2010
+ * 
  */
 public class DataTransmissionWithoutCompression {
 	
