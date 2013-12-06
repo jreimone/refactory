@@ -12,7 +12,7 @@
             category="org.emftext.refactory.ui.view"
             class="org.emftext.refactoring.ui.views.registry.RefactoringRegistryView"
             icon="icons/rolemodel.gif"
-            id="org.emftext.refactoring.ui.views.registry.RefactoringStatisticView"
+            id="org.emftext.refactoring.ui.views.registry.RefactoringRegistryView"
             name="Refactoring Registry">
       </view>
    </extension>
