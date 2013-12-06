@@ -12,6 +12,18 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Gottschalk et al. discussed in the following publication that hardware resources of Android devices
+ * consume unnecessarily energy if they are requested in an early state of the Android app lifecycle.
+ * When, e.g., the GPS component is requested in the onCreate() method the activity is not visible for the user yet.
+ * Thus, energy is consumed already. They recommend to move the request to the onResume() method
+ * since it represents a visible state. 
+ * 
+ * taken from the following publication:
+ * Gottschalk, Josefiok, Jelschen, Winter: "Removing Energy Code Smells with Reengineering Services"
+ * Beitragsband der GI vol. 208, 2012
+ *
+ */
 public class GpsPrint extends Activity implements OnClickListener, Listener, LocationListener {
 
 	private TextView statusView;
