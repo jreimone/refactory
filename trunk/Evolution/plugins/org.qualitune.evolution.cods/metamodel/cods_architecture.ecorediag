@@ -86,7 +86,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_fT85-SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/MegaModel"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fT85-iKlEeKLXve17CTS8Q" x="685" y="300"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fT85-iKlEeKLXve17CTS8Q" x="815" y="285"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_fT86BCKlEeKLXve17CTS8Q" type="1001">
     <children xmi:type="notation:Node" xmi:id="_fT86ByKlEeKLXve17CTS8Q" type="4001"/>

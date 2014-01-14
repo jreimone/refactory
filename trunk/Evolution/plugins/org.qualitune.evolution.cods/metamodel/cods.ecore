@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="megamodel"
-    nsURI="http://www.qualitune.org/megamodel" nsPrefix="megamodel">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="megamodel" nsURI="http://www.qualitune.org/megamodel" nsPrefix="megamodel">
   <eClassifiers xsi:type="ecore:EDataType" name="Dummy" instanceClassName="java.lang.Object"/>
   <eSubpackages name="cods" nsURI="http://www.qualitune.org/megamodel/cods" nsPrefix="cods">
     <eClassifiers xsi:type="ecore:EClass" name="CODS" eSuperTypes="#//architecture/MegaModel">
