@@ -31,7 +31,10 @@ RULES {
 	@SuppressWarnings(featureWithoutSyntax)
 	VAR ::= "var" variable;
 	@SuppressWarnings(featureWithoutSyntax)
-	QueryVariable ::= name[IDENTIFIER] #1 "=" #1 queryObject "." (operation[IDENTIFIER] | structuralFeature[IDENTIFIER]) ;
+	QueryVariable ::= name[IDENTIFIER] #1 "=" #1 queryObject "." qualifier? ;
+	EStructuralFeatureQualifier ::= structuralFeature[IDENTIFIER];
+	EOperationQualifier ::= operation[IDENTIFIER];
+	
 	EObjectReference ::= element['<','>'];
 	VariableReference ::= referencedVariable[IDENTIFIER];
 	//CREATE ::= "new" newInstanceVariable | parent;

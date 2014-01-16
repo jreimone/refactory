@@ -18,6 +18,9 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
 
 public class CREATECustom extends CREATEImpl {
 	
+	/**
+	 * @model
+	 */
 	@Override
 	public void execute(){
 		TypeVariable variable = getNewInstanceVariable();

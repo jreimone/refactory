@@ -16,6 +16,9 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
 
 public class SETCustom extends SETImpl {
 
+	/**
+	 * @model
+	 */
 	@Override
 	public void execute() {
 		Referrable referenceOwner = getReferenceOwner();

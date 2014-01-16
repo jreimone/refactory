@@ -7,6 +7,8 @@ import java.util.List;
 
 import nz.ac.massey.cs.guery.Motif;
 
+import org.modelrefactoring.guery.graph.EObjectVertex;
+import org.modelrefactoring.guery.graph.EReferenceEdge;
 import org.qualitune.evolution.guery.registry.impl.GUERYRegistry;
 
 /**
