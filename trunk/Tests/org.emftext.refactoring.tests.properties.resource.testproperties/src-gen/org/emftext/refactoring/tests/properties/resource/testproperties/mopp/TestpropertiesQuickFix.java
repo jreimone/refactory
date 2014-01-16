@@ -6,22 +6,30 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 public abstract class TestpropertiesQuickFix implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix {
 	
 	private String displayString;
 	private String imageKey;
-	private org.eclipse.emf.ecore.resource.Resource resource;
-	private java.util.Collection<org.eclipse.emf.ecore.EObject> contextObjects;
+	private Resource resource;
+	private Collection<EObject> contextObjects;
 	
-	public TestpropertiesQuickFix(String displayString, String imageKey, org.eclipse.emf.ecore.EObject contextObject) {
-		this(displayString, imageKey, java.util.Collections.singleton(contextObject), contextObject.eResource());
+	public TestpropertiesQuickFix(String displayString, String imageKey, EObject contextObject) {
+		this(displayString, imageKey, Collections.singleton(contextObject), contextObject.eResource());
 	}
 	
-	public TestpropertiesQuickFix(String displayString, String imageKey, java.util.Collection<org.eclipse.emf.ecore.EObject> contextObjects) {
+	public TestpropertiesQuickFix(String displayString, String imageKey, Collection<EObject> contextObjects) {
 		this(displayString, imageKey, contextObjects, contextObjects.iterator().next().eResource());
 	}
 	
-	public TestpropertiesQuickFix(String displayString, String imageKey, java.util.Collection<org.eclipse.emf.ecore.EObject> contextObjects, org.eclipse.emf.ecore.resource.Resource resource) {
+	public TestpropertiesQuickFix(String displayString, String imageKey, Collection<EObject> contextObjects, Resource resource) {
 		super();
 		if (displayString == null) {
 			throw new IllegalArgumentException("displayString must not be null.");
@@ -41,10 +49,10 @@ public abstract class TestpropertiesQuickFix implements org.emftext.refactoring.
 	public String apply(String currentText) {
 		applyChanges();
 		try {
-			java.io.ByteArrayOutputStream output = new java.io.ByteArrayOutputStream();
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			getResource().save(output, null);
 			return output.toString();
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 			new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesRuntimeUtil().logError("Exception while applying quick fix", e);
 		}
 		return null;
@@ -52,7 +60,7 @@ public abstract class TestpropertiesQuickFix implements org.emftext.refactoring.
 	
 	public abstract void applyChanges();
 	
-	public org.eclipse.emf.ecore.resource.Resource getResource() {
+	public Resource getResource() {
 		return resource;
 	}
 	
@@ -64,7 +72,7 @@ public abstract class TestpropertiesQuickFix implements org.emftext.refactoring.
 		return imageKey;
 	}
 	
-	public java.util.Collection<org.eclipse.emf.ecore.EObject> getContextObjects() {
+	public Collection<EObject> getContextObjects() {
 		return contextObjects;
 	}
 	
@@ -72,8 +80,8 @@ public abstract class TestpropertiesQuickFix implements org.emftext.refactoring.
 		StringBuilder result = new StringBuilder();
 		result.append(getType());
 		result.append(",");
-		for (org.eclipse.emf.ecore.EObject contextObject : contextObjects) {
-			result.append(org.eclipse.emf.ecore.util.EcoreUtil.getURI(contextObject));
+		for (EObject contextObject : contextObjects) {
+			result.append(EcoreUtil.getURI(contextObject));
 			result.append(",");
 		}
 		return result.toString();

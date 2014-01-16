@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * This class provides the follow sets for all terminals of the grammar. These
  * sets are used during code completion.
@@ -14,7 +16,7 @@ public class TestpropertiesFollowSetProvider {
 	
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesExpectedElement TERMINALS[] = new org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesExpectedElement[5];
 	
-	public final static org.eclipse.emf.ecore.EStructuralFeature[] FEATURES = new org.eclipse.emf.ecore.EStructuralFeature[4];
+	public final static EStructuralFeature[] FEATURES = new EStructuralFeature[4];
 	
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature[] LINKS = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature[42];
 	

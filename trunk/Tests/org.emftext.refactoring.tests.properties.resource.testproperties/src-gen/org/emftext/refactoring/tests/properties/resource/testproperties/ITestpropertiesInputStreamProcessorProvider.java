@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+import java.io.InputStream;
+
 /**
  * Implementors of this interface can provide InputStreamProcessors. These
  * processors can be used to pre-process input stream before a text resource is
@@ -21,5 +23,5 @@ public interface ITestpropertiesInputStreamProcessorProvider {
 	 * 
 	 * @return a processor that pre-processes the input stream
 	 */
-	public org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesInputStreamProcessor getInputStreamProcessor(java.io.InputStream inputStream);
+	public org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesInputStreamProcessor getInputStreamProcessor(InputStream inputStream);
 }

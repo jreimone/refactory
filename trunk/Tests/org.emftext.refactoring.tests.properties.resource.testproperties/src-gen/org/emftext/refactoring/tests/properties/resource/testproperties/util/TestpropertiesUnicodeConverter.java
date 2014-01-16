@@ -6,6 +6,9 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * A UnicodeConverter can read an input stream and convert unicode escape
  * sequences (backslash + uXXXX) to actual unicode characters. Each escaped
@@ -22,14 +25,14 @@ public class TestpropertiesUnicodeConverter extends org.emftext.refactoring.test
 	/**
 	 * The original input stream.
 	 */
-	private java.io.InputStream inputStream;
+	private InputStream inputStream;
 	
 	/**
 	 * Creates a new UnicodeConverter that reads from the given stream.
 	 * 
 	 * @param inputStream the original stream to read from
 	 */
-	public TestpropertiesUnicodeConverter(java.io.InputStream inputStream) {
+	public TestpropertiesUnicodeConverter(InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
 	
@@ -37,8 +40,9 @@ public class TestpropertiesUnicodeConverter extends org.emftext.refactoring.test
 	 * Reads one character from the stream. Escaped unicode characters are converted
 	 * to UTF-8 byte sequences (i.e., up to four bytes).
 	 */
-	@Override	
-	public int read() throws java.io.IOException {
+	@Override
+	
+	public int read() throws IOException {
 		if (!stackIsEmpty()) {
 			int result = pop();
 			return result;

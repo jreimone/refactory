@@ -6,12 +6,21 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.analysis;
 
+import java.util.Map;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 /**
  * A default implementation for token resolvers. Generated token resolvers
  * delegate calls to this class to convert text (i.e., tokens) to Java objects.
  * This default implementation tries to perform this conversion using the
- * EMF-based data type serialization mechanism using
- * org.eclipse.emf.ecore.util.EcoreUtil.createFromString().
+ * EMF-based data type serialization mechanism using EcoreUtil.createFromString().
  * 
  * In addition, enumeration literals are converted to the respective literal
  * object, if the text (i.e., the token) matches the literal.
@@ -26,7 +35,7 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.analysi
  */
 public class TestpropertiesDefaultTokenResolver implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver {
 	
-	private java.util.Map<?, ?> options;
+	private Map<?, ?> options;
 	private boolean escapeKeywords;
 	
 	/**
@@ -47,11 +56,11 @@ public class TestpropertiesDefaultTokenResolver implements org.emftext.refactori
 		this.escapeKeywords = escapeKeywords;
 	}
 	
-	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolveResult result) {
+	public void resolve(String lexem, EStructuralFeature feature, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolveResult result) {
 		resolve(lexem, feature, result, null, null, null);
 	}
 	
-	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolveResult result, String suffix, String prefix, String escapeCharacter) {
+	public void resolve(String lexem, EStructuralFeature feature, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolveResult result, String suffix, String prefix, String escapeCharacter) {
 		// Step 1: unescape keywords if required
 		if (escapeKeywords && lexem.startsWith("_")) {
 			for (String keyword : org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesGrammarInformationProvider.INSTANCE.getKeywords()) {
@@ -84,10 +93,10 @@ public class TestpropertiesDefaultTokenResolver implements org.emftext.refactori
 		}
 		
 		// Step 3: convert text to Java object
-		if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
-			org.eclipse.emf.ecore.EClassifier featureType = feature.getEType();
-			if (featureType instanceof org.eclipse.emf.ecore.EEnum) {
-				org.eclipse.emf.ecore.EEnumLiteral literal = ((org.eclipse.emf.ecore.EEnum) featureType).getEEnumLiteralByLiteral(lexem);
+		if (feature instanceof EAttribute) {
+			EClassifier featureType = feature.getEType();
+			if (featureType instanceof EEnum) {
+				EEnumLiteral literal = ((EEnum) featureType).getEEnumLiteralByLiteral(lexem);
 				if (literal != null) {
 					result.setResolvedToken(literal.getInstance());
 					return;
@@ -95,9 +104,9 @@ public class TestpropertiesDefaultTokenResolver implements org.emftext.refactori
 					result.setErrorMessage("Could not map lexem '" + lexem + "' to enum '" + featureType.getName() + "'.");
 					return;
 				}
-			} else if (featureType instanceof org.eclipse.emf.ecore.EDataType) {
+			} else if (featureType instanceof EDataType) {
 				try {
-					result.setResolvedToken(org.eclipse.emf.ecore.util.EcoreUtil.createFromString((org.eclipse.emf.ecore.EDataType) featureType, lexem));
+					result.setResolvedToken(EcoreUtil.createFromString((EDataType) featureType, lexem));
 				} catch (Exception e) {
 					result.setErrorMessage("Could not convert '" + lexem + "' to '" + featureType.getName() + "'.");
 				}
@@ -129,11 +138,11 @@ public class TestpropertiesDefaultTokenResolver implements org.emftext.refactori
 		}
 	}
 	
-	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		return deResolve(value, feature, container, null, null, null);
 	}
 	
-	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, String prefix, String suffix, String escapeCharacter) {
+	public String deResolve(Object value, EStructuralFeature feature, EObject container, String prefix, String suffix, String escapeCharacter) {
 		// Step 1: convert Java object to text
 		String result = "";
 		if (value != null) {
@@ -180,11 +189,11 @@ public class TestpropertiesDefaultTokenResolver implements org.emftext.refactori
 		this.escapeKeywords = escapeKeywords;
 	}
 	
-	public void setOptions(java.util.Map<?, ?> options) {
+	public void setOptions(Map<?, ?> options) {
 		this.options = options;
 	}
 	
-	public java.util.Map<?, ?> getOptions() {
+	public Map<?, ?> getOptions() {
 		return options;
 	}
 	

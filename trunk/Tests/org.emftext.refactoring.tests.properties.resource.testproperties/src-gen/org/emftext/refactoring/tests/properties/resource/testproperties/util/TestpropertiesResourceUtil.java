@@ -6,6 +6,23 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 /**
  * Class ResourceUtil can be used to perform common tasks on resources, such as
  * resolving proxy object, saving resources, as well as, checking them for errors.
@@ -19,7 +36,7 @@ public class TestpropertiesResourceUtil {
 	 * 
 	 * @return all proxy objects that are not resolvable
 	 */
-	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
+	public static Set<EObject> findUnresolvedProxies(ResourceSet resourceSet) {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesInterruptibleEcoreResolver().findUnresolvedProxies(resourceSet);
 	}
 	
@@ -30,7 +47,7 @@ public class TestpropertiesResourceUtil {
 	 * 
 	 * @return all proxy objects that are not resolvable
 	 */
-	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.Resource resource) {
+	public static Set<EObject> findUnresolvedProxies(Resource resource) {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesInterruptibleEcoreResolver().findUnresolvedProxies(resource);
 	}
 	
@@ -43,8 +60,8 @@ public class TestpropertiesResourceUtil {
 	 * 
 	 * @return true on success
 	 */
-	public static boolean resolveAll(org.eclipse.emf.ecore.resource.Resource resource) {
-		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(resource);
+	public static boolean resolveAll(Resource resource) {
+		EcoreUtil.resolveAll(resource);
 		if (findUnresolvedProxies(resource).size() > 0) {
 			return false;
 		} else {
@@ -52,7 +69,7 @@ public class TestpropertiesResourceUtil {
 		}
 	}
 	
-	public static String getProxyIdentifier(org.eclipse.emf.ecore.EObject eObject) {
+	public static String getProxyIdentifier(EObject eObject) {
 		String deresolvedReference = null;
 		if (eObject instanceof org.eclipse.emf.ecore.EObject) {
 			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) eObject;
@@ -69,51 +86,51 @@ public class TestpropertiesResourceUtil {
 		return deresolvedReference;
 	}
 	
-	public static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource getResource(java.io.File file) {
+	public static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource getResource(File file) {
 		return getResource(file, null);
 	}
 	
-	public static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource getResource(java.io.File file, java.util.Map<?,?> options) {
-		return getResource(org.eclipse.emf.common.util.URI.createFileURI(file.getAbsolutePath()), options);
+	public static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource getResource(File file, Map<?,?> options) {
+		return getResource(URI.createFileURI(file.getAbsolutePath()), options);
 	}
 	
-	public static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource getResource(org.eclipse.emf.common.util.URI uri) {
+	public static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource getResource(URI uri) {
 		return getResource(uri, null);
 	}
 	
-	public static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
+	public static org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource getResource(URI uri, Map<?,?> options) {
 		new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().registerResourceFactory();
-		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		ResourceSet rs = new ResourceSetImpl();
 		if (options != null) {
 			rs.getLoadOptions().putAll(options);
 		}
-		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource(uri, true);
+		Resource resource = rs.getResource(uri, true);
 		return (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource) resource;
 	}
 	
 	/**
 	 * Returns the resource after parsing the given text.
 	 */
-	public static org.eclipse.emf.ecore.resource.Resource getResource(String text) {
-		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+	public static Resource getResource(String text) {
+		ResourceSet resourceSet = new ResourceSetImpl();
 		return getResource(text, resourceSet);
 	}
 	
 	/**
 	 * Returns the resource after parsing the given text.
 	 */
-	public static org.eclipse.emf.ecore.resource.Resource getResource(String text, org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
+	public static Resource getResource(String text, ResourceSet resourceSet) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation();
 		metaInformation.registerResourceFactory();
-		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
-		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);
+		URI uri = URI.createURI("temp." + metaInformation.getSyntaxName());
+		Resource resource = resourceSet.createResource(uri);
 		if (resource == null) {
 			return null;
 		}
-		java.io.ByteArrayInputStream inputStream = new java.io.ByteArrayInputStream(text.getBytes());
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(text.getBytes());
 		try {
 			resource.load(inputStream, null);
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			return null;
 		}
 		return resource;
@@ -122,23 +139,23 @@ public class TestpropertiesResourceUtil {
 	/**
 	 * Returns the root element of the resource with the given URI.
 	 */
-	public static org.emftext.refactoring.tests.properties.PropertyModel getResourceContent(org.eclipse.emf.common.util.URI uri) {
+	public static org.emftext.refactoring.tests.properties.PropertyModel getResourceContent(URI uri) {
 		return getResourceContent(uri, null);
 	}
 	
 	/**
 	 * Returns the root element of the resource with the given URI.
 	 */
-	public static org.emftext.refactoring.tests.properties.PropertyModel getResourceContent(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
-		org.eclipse.emf.ecore.resource.Resource resource = getResource(uri, options);
+	public static org.emftext.refactoring.tests.properties.PropertyModel getResourceContent(URI uri, Map<?,?> options) {
+		Resource resource = getResource(uri, options);
 		if (resource == null) {
 			return null;
 		}
-		java.util.List<org.eclipse.emf.ecore.EObject> contents = resource.getContents();
+		List<EObject> contents = resource.getContents();
 		if (contents == null || contents.isEmpty()) {
 			return null;
 		}
-		org.eclipse.emf.ecore.EObject root = contents.get(0);
+		EObject root = contents.get(0);
 		return (org.emftext.refactoring.tests.properties.PropertyModel) root;
 	}
 	
@@ -146,38 +163,38 @@ public class TestpropertiesResourceUtil {
 	 * Returns the root element after parsing the given text.
 	 */
 	public static org.emftext.refactoring.tests.properties.PropertyModel getResourceContent(String text) {
-		org.eclipse.emf.ecore.resource.Resource resource = getResource(text);
+		Resource resource = getResource(text);
 		if (resource == null) {
 			return null;
 		}
-		java.util.List<org.eclipse.emf.ecore.EObject> contents = resource.getContents();
+		List<EObject> contents = resource.getContents();
 		if (contents == null || contents.isEmpty()) {
 			return null;
 		}
-		org.eclipse.emf.ecore.EObject root = contents.get(0);
+		EObject root = contents.get(0);
 		return (org.emftext.refactoring.tests.properties.PropertyModel) root;
 	}
 	
-	public static void saveResource(java.io.File file, org.eclipse.emf.ecore.resource.Resource resource) throws java.io.IOException {
-		java.util.Map<?, ?> options = java.util.Collections.EMPTY_MAP;
-		java.io.OutputStream outputStream = new java.io.FileOutputStream(file);
+	public static void saveResource(File file, Resource resource) throws IOException {
+		Map<?, ?> options = Collections.EMPTY_MAP;
+		OutputStream outputStream = new FileOutputStream(file);
 		resource.save(outputStream, options);
 		outputStream.close();
 	}
 	
-	public static String getText(org.eclipse.emf.ecore.EObject eObject) {
+	public static String getText(EObject eObject) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation();
 		metaInformation.registerResourceFactory();
-		org.eclipse.emf.ecore.resource.ResourceSet rs = null;
+		ResourceSet rs = null;
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource resource = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource) eObject.eResource();
 		if (resource != null) {
 			rs = resource.getResourceSet();
 		}
 		if (rs == null) {
-			rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+			rs = new ResourceSetImpl();
 		}
 		if (resource == null) {
-			org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
+			URI uri = URI.createURI("temp." + metaInformation.getSyntaxName());
 			resource = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource) rs.createResource(uri);
 		}
 		// Convert layout information to EAdapters because the printer retrieves layout
@@ -186,11 +203,11 @@ public class TestpropertiesResourceUtil {
 		if (resource.isLayoutInformationRecordingEnabled()) {
 			layoutUtil.transferAllLayoutInformationFromModel(eObject);
 		}
-		java.io.ByteArrayOutputStream outputStream = new java.io.ByteArrayOutputStream();
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter printer = metaInformation.createPrinter(outputStream, resource);
 		try {
 			printer.print(eObject);
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 			return null;
 		}
 		// Move layout information from EAdapters back to the model.
@@ -200,15 +217,15 @@ public class TestpropertiesResourceUtil {
 		return outputStream.toString();
 	}
 	
-	public static boolean containsErrors(org.eclipse.emf.ecore.resource.Resource resource) {
+	public static boolean containsErrors(Resource resource) {
 		return !resource.getErrors().isEmpty();
 	}
 	
-	public static boolean containsWarnings(org.eclipse.emf.ecore.resource.Resource resource) {
+	public static boolean containsWarnings(Resource resource) {
 		return !resource.getWarnings().isEmpty();
 	}
 	
-	public static boolean containsProblems(org.eclipse.emf.ecore.resource.Resource resource) {
+	public static boolean containsProblems(Resource resource) {
 		return containsErrors(resource) || containsWarnings(resource);
 	}
 	

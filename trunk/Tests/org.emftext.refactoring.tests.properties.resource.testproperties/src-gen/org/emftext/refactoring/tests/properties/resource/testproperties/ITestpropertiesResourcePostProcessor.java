@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+
 /**
  * Implementors of this interface can be used to post-process parsed text
  * resources. This can be useful to validate or modify the model that was

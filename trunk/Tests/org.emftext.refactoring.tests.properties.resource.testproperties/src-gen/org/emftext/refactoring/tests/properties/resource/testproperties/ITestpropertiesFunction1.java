@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+
 /**
  * A simple interface for generic functions with one argument.
  */

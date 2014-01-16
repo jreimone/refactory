@@ -6,6 +6,11 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Collection;
+import org.eclipse.emf.ecore.EClass;
+
 /**
  * This interface provides information about a generated EMFText text resource
  * plug-in.
@@ -48,7 +53,7 @@ public interface ITestpropertiesMetaInformation {
 	 * 
 	 * @return a new instance of the parser class
 	 */
-	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextParser createParser(java.io.InputStream inputStream, String encoding);
+	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextParser createParser(InputStream inputStream, String encoding);
 	
 	/**
 	 * Returns a new instance of the printer.
@@ -58,13 +63,13 @@ public interface ITestpropertiesMetaInformation {
 	 * 
 	 * @return a new instance of the printer class
 	 */
-	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter createPrinter(java.io.OutputStream outputStream, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource);
+	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter createPrinter(OutputStream outputStream, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource);
 	
 	/**
 	 * Returns all meta classes for which syntax was defined. This information is used
 	 * both by the NewFileWizard and the code completion.
 	 */
-	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax();
+	public EClass[] getClassesWithSyntax();
 	
 	/**
 	 * Returns an instance of the reference resolver switch class.
@@ -94,11 +99,11 @@ public interface ITestpropertiesMetaInformation {
 	/**
 	 * Returns the default bracket pairs.
 	 */
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair> getBracketPairs();
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair> getBracketPairs();
 	
 	/**
 	 * Returns all classes for which folding must be enabled in the editor.
 	 */
-	public org.eclipse.emf.ecore.EClass[] getFoldableClasses();
+	public EClass[] getFoldableClasses();
 	
 }

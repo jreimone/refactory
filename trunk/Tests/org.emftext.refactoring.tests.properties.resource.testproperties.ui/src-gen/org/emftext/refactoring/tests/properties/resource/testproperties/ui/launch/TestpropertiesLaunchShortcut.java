@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui.launch;
 
+
 /**
  * A class that converts the current selection or active editor to a launch
  * configuration (currently disabled).

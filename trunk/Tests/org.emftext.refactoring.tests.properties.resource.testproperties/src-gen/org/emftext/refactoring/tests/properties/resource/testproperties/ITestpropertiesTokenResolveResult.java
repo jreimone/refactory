@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+
 /**
  * Implementations of this interface are used store the result of resolving a
  * token.

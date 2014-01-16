@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import org.antlr.runtime3_4_0.RecognitionException;
+
 /**
  * An Excpetion to represent invalid content types for parser instances.
  * 
@@ -13,7 +15,7 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
  * Options.RESOURCE_CONTENT_TYPE
  */
-public class TestpropertiesUnexpectedContentTypeException extends org.antlr.runtime3_4_0.RecognitionException {
+public class TestpropertiesUnexpectedContentTypeException extends RecognitionException {
 	
 	private static final long serialVersionUID = 4791359811519433999L;
 	

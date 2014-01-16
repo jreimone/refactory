@@ -6,18 +6,20 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 public class TestpropertiesTerminal extends org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesSyntaxElement {
 	
-	private final org.eclipse.emf.ecore.EStructuralFeature feature;
+	private final EStructuralFeature feature;
 	private final int mandatoryOccurencesAfter;
 	
-	public TestpropertiesTerminal(org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality cardinality, int mandatoryOccurencesAfter) {
+	public TestpropertiesTerminal(EStructuralFeature feature, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality cardinality, int mandatoryOccurencesAfter) {
 		super(cardinality, null);
 		this.feature = feature;
 		this.mandatoryOccurencesAfter = mandatoryOccurencesAfter;
 	}
 	
-	public org.eclipse.emf.ecore.EStructuralFeature getFeature() {
+	public EStructuralFeature getFeature() {
 		return feature;
 	}
 	

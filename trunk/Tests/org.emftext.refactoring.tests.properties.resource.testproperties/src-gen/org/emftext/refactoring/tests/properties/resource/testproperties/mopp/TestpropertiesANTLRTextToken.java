@@ -6,12 +6,15 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import org.antlr.runtime3_4_0.CommonToken;
+import org.antlr.runtime3_4_0.Token;
+
 public class TestpropertiesANTLRTextToken extends org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTextToken {
 	
 	private final static org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation();
 	
-	public TestpropertiesANTLRTextToken(org.antlr.runtime3_4_0.Token antlrToken) {
-		super(getTokenName(metaInformation.getTokenNames(), antlrToken.getType()), antlrToken.getText(), ((org.antlr.runtime3_4_0.CommonToken) antlrToken).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) antlrToken).getStopIndex() - ((org.antlr.runtime3_4_0.CommonToken) antlrToken).getStartIndex() + 1, antlrToken.getLine(), antlrToken.getCharPositionInLine(), canBeUsedForSyntaxHighlighting(antlrToken.getType()));
+	public TestpropertiesANTLRTextToken(Token antlrToken) {
+		super(getTokenName(metaInformation.getTokenNames(), antlrToken.getType()), antlrToken.getText(), ((CommonToken) antlrToken).getStartIndex(), ((CommonToken) antlrToken).getStopIndex() - ((CommonToken) antlrToken).getStartIndex() + 1, antlrToken.getLine(), antlrToken.getCharPositionInLine(), canBeUsedForSyntaxHighlighting(antlrToken.getType()));
 	}
 	
 	public static String getTokenName(String[] tokenNames, int index) {

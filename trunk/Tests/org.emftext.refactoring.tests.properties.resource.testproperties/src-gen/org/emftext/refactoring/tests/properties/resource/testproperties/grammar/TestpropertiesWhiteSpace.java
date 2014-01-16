@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+
 public class TestpropertiesWhiteSpace extends org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesFormattingElement {
 	
 	private final int amount;

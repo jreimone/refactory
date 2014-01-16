@@ -6,6 +6,13 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import org.eclipse.emf.common.util.URI;
+
 /**
  * A basic implementation of the
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
@@ -16,10 +23,10 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
  */
 public class TestpropertiesReferenceResolveResult<ReferenceType> implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<ReferenceType> {
 	
-	private java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>> mappings;
+	private Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>> mappings;
 	private String errorMessage;
 	private boolean resolveFuzzy;
-	private java.util.Set<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> quickFixes;
+	private Set<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> quickFixes;
 	
 	public TestpropertiesReferenceResolveResult(boolean resolveFuzzy) {
 		super();
@@ -30,21 +37,21 @@ public class TestpropertiesReferenceResolveResult<ReferenceType> implements org.
 		return errorMessage;
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> getQuickFixes() {
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> getQuickFixes() {
 		if (quickFixes == null) {
-			quickFixes = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix>();
+			quickFixes = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix>();
 		}
-		return java.util.Collections.unmodifiableSet(quickFixes);
+		return Collections.unmodifiableSet(quickFixes);
 	}
 	
 	public void addQuickFix(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix quickFix) {
 		if (quickFixes == null) {
-			quickFixes = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix>();
+			quickFixes = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix>();
 		}
 		quickFixes.add(quickFix);
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>> getMappings() {
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>> getMappings() {
 		return mappings;
 	}
 	
@@ -73,19 +80,19 @@ public class TestpropertiesReferenceResolveResult<ReferenceType> implements org.
 	
 	public void addMapping(String identifier, ReferenceType target, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>>(1);
+			mappings = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesElementMapping<ReferenceType>(identifier, target, warning));
 		errorMessage = null;
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri) {
+	public void addMapping(String identifier, URI uri) {
 		addMapping(identifier, uri, null);
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
+	public void addMapping(String identifier, URI uri, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>>(1);
+			mappings = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesURIMapping<ReferenceType>(identifier, uri, warning));
 	}

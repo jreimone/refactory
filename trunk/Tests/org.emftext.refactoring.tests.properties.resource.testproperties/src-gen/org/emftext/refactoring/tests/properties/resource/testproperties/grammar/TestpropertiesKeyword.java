@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+
 /**
  * A class to represent a keyword in the grammar.
  */

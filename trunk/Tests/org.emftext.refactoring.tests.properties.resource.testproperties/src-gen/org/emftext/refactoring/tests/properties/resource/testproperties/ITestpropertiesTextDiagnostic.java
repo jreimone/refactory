@@ -6,11 +6,14 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+
 /**
  * An extended diagnostic that gives access to the exact position of the problem
  * in a character stream.
  */
-public interface ITestpropertiesTextDiagnostic extends org.eclipse.emf.ecore.resource.Resource.Diagnostic {
+public interface ITestpropertiesTextDiagnostic extends Resource.Diagnostic {
 	
 	/**
 	 * Returns the position of the first character of the problem area.
@@ -42,6 +45,6 @@ public interface ITestpropertiesTextDiagnostic extends org.eclipse.emf.ecore.res
 	 * 
 	 * @return true if the problem was caused by <code>element</code>
 	 */
-	public boolean wasCausedBy(org.eclipse.emf.ecore.EObject element);
+	public boolean wasCausedBy(EObject element);
 	
 }

@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+
 public class TestpropertiesUIMetaInformation extends org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation {
 	
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesHoverTextProvider getHoverTextProvider() {

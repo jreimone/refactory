@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import org.eclipse.emf.common.util.URI;
+
 /**
  * A basic implementation of the
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
@@ -17,18 +19,18 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
  */
 public class TestpropertiesURIMapping<ReferenceType> implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesURIMapping<ReferenceType> {
 	
-	private org.eclipse.emf.common.util.URI uri;
+	private URI uri;
 	private String identifier;
 	private String warning;
 	
-	public TestpropertiesURIMapping(String identifier, org.eclipse.emf.common.util.URI newIdentifier, String warning) {
+	public TestpropertiesURIMapping(String identifier, URI newIdentifier, String warning) {
 		super();
 		this.uri = newIdentifier;
 		this.identifier = identifier;
 		this.warning = warning;
 	}
 	
-	public org.eclipse.emf.common.util.URI getTargetIdentifier() {
+	public URI getTargetIdentifier() {
 		return uri;
 	}
 	

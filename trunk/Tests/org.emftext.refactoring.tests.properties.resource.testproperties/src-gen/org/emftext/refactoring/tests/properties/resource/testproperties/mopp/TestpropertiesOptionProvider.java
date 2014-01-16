@@ -13,11 +13,14 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.Collections;
+import java.util.Map;
+
 public class TestpropertiesOptionProvider implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptionProvider {
 	
-	public java.util.Map<?,?> getOptions() {
+	public Map<?,?> getOptions() {
 		// create a map with static option providers here
-		return java.util.Collections.emptyMap();
+		return Collections.emptyMap();
 	}
 	
 }

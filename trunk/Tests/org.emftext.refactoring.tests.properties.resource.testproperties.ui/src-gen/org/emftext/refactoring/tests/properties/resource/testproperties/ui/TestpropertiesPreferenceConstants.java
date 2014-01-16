@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+
 /**
  * An interface that defines some constants used to create the keys for
  * preferences.

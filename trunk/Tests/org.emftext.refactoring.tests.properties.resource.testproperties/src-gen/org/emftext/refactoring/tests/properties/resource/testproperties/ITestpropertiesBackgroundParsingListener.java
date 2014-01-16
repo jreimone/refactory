@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+import org.eclipse.emf.ecore.resource.Resource;
+
 /**
  * A listener interface for classes that need notification when a background
  * parsing pass has completed.
@@ -18,5 +20,5 @@ public interface ITestpropertiesBackgroundParsingListener {
 	 * 
 	 * @param resource the resource that has changed
 	 */
-	public void parsingCompleted(org.eclipse.emf.ecore.resource.Resource resource);
+	public void parsingCompleted(Resource resource);
 }

@@ -6,20 +6,27 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+import java.lang.reflect.Field;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
+
 public class TestpropertiesGrammarInformationProvider {
 	
-	public final static org.eclipse.emf.ecore.EStructuralFeature ANONYMOUS_FEATURE = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.createEAttribute();
+	public final static EStructuralFeature ANONYMOUS_FEATURE = EcoreFactory.eINSTANCE.createEAttribute();
 	static {
 		ANONYMOUS_FEATURE.setName("_");
 	}
 	
 	public final static TestpropertiesGrammarInformationProvider INSTANCE = new TestpropertiesGrammarInformationProvider();
 	
-	private java.util.Set<String> keywords;
+	private Set<String> keywords;
 	
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment TESTPROPERTIES_0_0_0_0_0_0_0 = INSTANCE.getTESTPROPERTIES_0_0_0_0_0_0_0();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment getTESTPROPERTIES_0_0_0_0_0_0_0() {
-		return new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.PROPERTY_MODEL__CATEGORIES), org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), }, 0);
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getPropertyModel().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.PROPERTY_MODEL__CATEGORIES), org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality.ONE, new EClass[] {org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory(), }, 0);
 	}
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesLineBreak TESTPROPERTIES_0_0_0_0_0_0_1 = INSTANCE.getTESTPROPERTIES_0_0_0_0_0_0_1();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesLineBreak getTESTPROPERTIES_0_0_0_0_0_0_1() {
@@ -63,7 +70,7 @@ public class TestpropertiesGrammarInformationProvider {
 	}
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment TESTPROPERTIES_1_0_0_2 = INSTANCE.getTESTPROPERTIES_1_0_0_2();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment getTESTPROPERTIES_1_0_0_2() {
-		return new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.CATEGORY__PAIRS), org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality.STAR, new org.eclipse.emf.ecore.EClass[] {org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair(), }, 0);
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getCategory().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.CATEGORY__PAIRS), org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality.STAR, new EClass[] {org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair(), }, 0);
 	}
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesSequence TESTPROPERTIES_1_0_0 = INSTANCE.getTESTPROPERTIES_1_0_0();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesSequence getTESTPROPERTIES_1_0_0() {
@@ -79,7 +86,7 @@ public class TestpropertiesGrammarInformationProvider {
 	}
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment TESTPROPERTIES_2_0_0_0_0_0_0 = INSTANCE.getTESTPROPERTIES_2_0_0_0_0_0_0();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment getTESTPROPERTIES_2_0_0_0_0_0_0() {
-		return new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY_VALUE_PAIR__KEY), org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKey(), }, 0);
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY_VALUE_PAIR__KEY), org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality.ONE, new EClass[] {org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKey(), }, 0);
 	}
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesKeyword TESTPROPERTIES_2_0_0_0_0_0_1 = INSTANCE.getTESTPROPERTIES_2_0_0_0_0_0_1();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesKeyword getTESTPROPERTIES_2_0_0_0_0_0_1() {
@@ -99,7 +106,7 @@ public class TestpropertiesGrammarInformationProvider {
 	}
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment TESTPROPERTIES_2_0_0_1 = INSTANCE.getTESTPROPERTIES_2_0_0_1();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment getTESTPROPERTIES_2_0_0_1() {
-		return new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY_VALUE_PAIR__VALUE), org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality.ONE, new org.eclipse.emf.ecore.EClass[] {org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getValue(), }, 0);
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainment(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getKeyValuePair().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY_VALUE_PAIR__VALUE), org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality.ONE, new EClass[] {org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getValue(), }, 0);
 	}
 	public final static org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesLineBreak TESTPROPERTIES_2_0_0_2 = INSTANCE.getTESTPROPERTIES_2_0_0_2();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesLineBreak getTESTPROPERTIES_2_0_0_2() {
@@ -171,7 +178,7 @@ public class TestpropertiesGrammarInformationProvider {
 			// null indicates EOF
 			return "<EOF>";
 		}
-		for (java.lang.reflect.Field field : org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesGrammarInformationProvider.class.getFields()) {
+		for (Field field : org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesGrammarInformationProvider.class.getFields()) {
 			Object fieldValue;
 			try {
 				fieldValue = field.get(null);
@@ -205,9 +212,9 @@ public class TestpropertiesGrammarInformationProvider {
 	 * Returns all keywords of the grammar. This includes all literals for boolean and
 	 * enumeration terminals.
 	 */
-	public java.util.Set<String> getKeywords() {
+	public Set<String> getKeywords() {
 		if (this.keywords == null) {
-			this.keywords = new java.util.LinkedHashSet<String>();
+			this.keywords = new LinkedHashSet<String>();
 			for (org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesRule rule : RULES) {
 				findKeywords(rule, this.keywords);
 			}
@@ -219,7 +226,7 @@ public class TestpropertiesGrammarInformationProvider {
 	 * Finds all keywords in the given element and its children and adds them to the
 	 * set. This includes all literals for boolean and enumeration terminals.
 	 */
-	private void findKeywords(org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesSyntaxElement element, java.util.Set<String> keywords) {
+	private void findKeywords(org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesSyntaxElement element, Set<String> keywords) {
 		if (element instanceof org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesKeyword) {
 			keywords.add(((org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesKeyword) element).getValue());
 		} else if (element instanceof org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesBooleanTerminal) {

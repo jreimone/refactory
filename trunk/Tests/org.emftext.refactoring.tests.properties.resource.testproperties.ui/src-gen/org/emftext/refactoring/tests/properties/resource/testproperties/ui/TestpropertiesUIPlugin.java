@@ -6,10 +6,19 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
+
 /**
  * A singleton class for the text resource UI plug-in.
  */
-public class TestpropertiesUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
+public class TestpropertiesUIPlugin extends AbstractUIPlugin {
 	
 	public static final String PLUGIN_ID = "org.emftext.refactoring.tests.properties.resource.testproperties.ui";
 	public static final String EDITOR_ID = "org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesEditor";
@@ -23,12 +32,12 @@ public class TestpropertiesUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlug
 		super();
 	}
 	
-	public void start(org.osgi.framework.BundleContext context) throws Exception {
+	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
 	}
 	
-	public void stop(org.osgi.framework.BundleContext context) throws Exception {
+	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 	}
@@ -38,10 +47,10 @@ public class TestpropertiesUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlug
 	}
 	
 	public static void showErrorDialog(final String title, final String message) {
-		org.eclipse.swt.widgets.Display.getDefault().asyncExec(new Runnable() {
+		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				org.eclipse.swt.widgets.Shell parent = new org.eclipse.swt.widgets.Shell();
-				org.eclipse.jface.dialogs.MessageDialog dialog = new org.eclipse.jface.dialogs.MessageDialog(parent, title, null, message, org.eclipse.jface.dialogs.MessageDialog.ERROR, new String[] { org.eclipse.jface.dialogs.IDialogConstants.OK_LABEL }, 0) {
+				Shell parent = new Shell();
+				MessageDialog dialog = new MessageDialog(parent, title, null, message, MessageDialog.ERROR, new String[] { IDialogConstants.OK_LABEL }, 0) {
 				};
 				dialog.open();
 			}
@@ -56,12 +65,12 @@ public class TestpropertiesUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlug
 	 * 
 	 * @return the status object describing the error
 	 */
-	public static org.eclipse.core.runtime.IStatus logError(String message, Throwable exception) {
-		org.eclipse.core.runtime.IStatus status;
+	public static IStatus logError(String message, Throwable exception) {
+		IStatus status;
 		if (exception != null) {
-			status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, TestpropertiesUIPlugin.PLUGIN_ID, 0, message, exception);
+			status = new Status(IStatus.ERROR, TestpropertiesUIPlugin.PLUGIN_ID, 0, message, exception);
 		} else {
-			status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, TestpropertiesUIPlugin.PLUGIN_ID, message);
+			status = new Status(IStatus.ERROR, TestpropertiesUIPlugin.PLUGIN_ID, message);
 		}
 		final TestpropertiesUIPlugin pluginInstance = TestpropertiesUIPlugin.getDefault();
 		if (pluginInstance == null) {

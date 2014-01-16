@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.launch;
 
+
 /**
  * A class that handles launch configurations.
  */

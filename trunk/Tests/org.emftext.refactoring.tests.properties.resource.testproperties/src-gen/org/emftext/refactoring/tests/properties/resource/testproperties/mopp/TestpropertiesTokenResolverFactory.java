@@ -6,6 +6,9 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * The TestpropertiesTokenResolverFactory class provides access to all generated
  * token resolvers. By giving the name of a defined token, the corresponding
@@ -16,13 +19,13 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
  */
 public class TestpropertiesTokenResolverFactory implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolverFactory {
 	
-	private java.util.Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver> tokenName2TokenResolver;
-	private java.util.Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver> featureName2CollectInTokenResolver;
+	private Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver> tokenName2TokenResolver;
+	private Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver> featureName2CollectInTokenResolver;
 	private static org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver defaultResolver = new org.emftext.refactoring.tests.properties.resource.testproperties.analysis.TestpropertiesDefaultTokenResolver();
 	
 	public TestpropertiesTokenResolverFactory() {
-		tokenName2TokenResolver = new java.util.LinkedHashMap<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver>();
-		featureName2CollectInTokenResolver = new java.util.LinkedHashMap<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver>();
+		tokenName2TokenResolver = new LinkedHashMap<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver>();
+		featureName2CollectInTokenResolver = new LinkedHashMap<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver>();
 		registerTokenResolver("TEXT", new org.emftext.refactoring.tests.properties.resource.testproperties.analysis.TestpropertiesTEXTTokenResolver());
 		registerTokenResolver("QUOTED_91_93", new org.emftext.refactoring.tests.properties.resource.testproperties.analysis.TestpropertiesQUOTED_91_93TokenResolver());
 		registerTokenResolver("QUOTED_60_62", new org.emftext.refactoring.tests.properties.resource.testproperties.analysis.TestpropertiesQUOTED_60_62TokenResolver());
@@ -49,7 +52,7 @@ public class TestpropertiesTokenResolverFactory implements org.emftext.refactori
 		return tokenName2TokenResolver.remove(tokenName);
 	}
 	
-	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver internalCreateResolver(java.util.Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver> resolverMap, String key) {
+	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver internalCreateResolver(Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver> resolverMap, String key) {
 		if (resolverMap.containsKey(key)){
 			return resolverMap.get(key);
 		} else {
@@ -57,7 +60,7 @@ public class TestpropertiesTokenResolverFactory implements org.emftext.refactori
 		}
 	}
 	
-	private boolean internalRegisterTokenResolver(java.util.Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver> resolverMap, String key, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver resolver) {
+	private boolean internalRegisterTokenResolver(Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver> resolverMap, String key, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver resolver) {
 		if (!resolverMap.containsKey(key)) {
 			resolverMap.put(key,resolver);
 			return true;

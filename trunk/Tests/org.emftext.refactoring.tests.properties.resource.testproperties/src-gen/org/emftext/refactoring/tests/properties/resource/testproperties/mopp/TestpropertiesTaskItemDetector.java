@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.List;
+
 /**
  * The TestpropertiesTaskItemDetector is used to find task items in text
  * documents. The current implementation searches for specific keywords to detect
@@ -16,7 +18,7 @@ public class TestpropertiesTaskItemDetector {
 	
 	public static String[] TASK_ITEM_KEYWORDS = new String[] {"TODO", "FIXME", "XXX"};
 	
-	public java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem> findTaskItems(String text, int line, int charStart) {
+	public List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem> findTaskItems(String text, int line, int charStart) {
 		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem> foundItems = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem>();
 		String remainingText = text;
 		boolean continueSearch = true;

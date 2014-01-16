@@ -6,6 +6,9 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.Collection;
+import org.eclipse.emf.common.util.URI;
+
 /**
  * An implementation of the ResolveResult interface that delegates all method
  * calls to another ResolveResult. Client may subclass this class to easily create
@@ -26,7 +29,7 @@ public class TestpropertiesDelegatingResolveResult<ReferenceType> implements org
 		return delegate.getErrorMessage();
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>> getMappings() {
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>> getMappings() {
 		return delegate.getMappings();
 	}
 	
@@ -50,7 +53,7 @@ public class TestpropertiesDelegatingResolveResult<ReferenceType> implements org
 		delegate.addMapping(identifier, target);
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri) {
+	public void addMapping(String identifier, URI uri) {
 		delegate.addMapping(identifier, uri);
 	}
 	
@@ -58,11 +61,11 @@ public class TestpropertiesDelegatingResolveResult<ReferenceType> implements org
 		delegate.addMapping(identifier, target, warning);
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
+	public void addMapping(String identifier, URI uri, String warning) {
 		delegate.addMapping(identifier, uri, warning);
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> getQuickFixes() {
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> getQuickFixes() {
 		return delegate.getQuickFixes();
 	}
 	

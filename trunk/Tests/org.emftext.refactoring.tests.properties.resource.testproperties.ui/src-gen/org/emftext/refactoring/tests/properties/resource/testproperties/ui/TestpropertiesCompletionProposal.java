@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+import org.eclipse.swt.graphics.Image;
+
 /**
  * A proposal for completing an incomplete document.
  */
@@ -38,7 +40,7 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 	/**
 	 * The image that will be shown in the pop-up containing the completion proposals.
 	 */
-	private org.eclipse.swt.graphics.Image image;
+	private Image image;
 	
 	/**
 	 * The root object of the resource for which this proposal was computed.
@@ -83,12 +85,12 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 		this.container = container;
 	}
 	
-	public TestpropertiesCompletionProposal(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image) {
+	public TestpropertiesCompletionProposal(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, Image image) {
 		this(expectedTerminal, insertString, prefix, matchesPrefix, structuralFeature, container);
 		this.image = image;
 	}
 	
-	public TestpropertiesCompletionProposal(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image, String displayString) {
+	public TestpropertiesCompletionProposal(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, Image image, String displayString) {
 		this(expectedTerminal, insertString, prefix, matchesPrefix, structuralFeature, container, image);
 		this.displayString = displayString;
 	}
@@ -143,7 +145,7 @@ public class TestpropertiesCompletionProposal implements java.lang.Comparable<Te
 		return prefix;
 	}
 	
-	public org.eclipse.swt.graphics.Image getImage() {
+	public Image getImage() {
 		return image;
 	}
 	

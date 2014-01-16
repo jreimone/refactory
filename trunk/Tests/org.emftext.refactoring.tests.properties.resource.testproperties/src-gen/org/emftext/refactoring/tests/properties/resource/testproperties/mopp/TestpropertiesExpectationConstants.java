@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+
 /**
  * This class contains some constants that are used during code completion.
  */

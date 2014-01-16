@@ -6,19 +6,23 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import org.eclipse.emf.ecore.EObject;
+
 public class TestpropertiesParseResult implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesParseResult {
 	
-	private org.eclipse.emf.ecore.EObject root;
+	private EObject root;
 	
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap;
 	
-	private java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>> commands = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>>();
+	private Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>> commands = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>>();
 	
 	public TestpropertiesParseResult() {
 		super();
 	}
 	
-	public org.eclipse.emf.ecore.EObject getRoot() {
+	public EObject getRoot() {
 		return root;
 	}
 	
@@ -26,7 +30,7 @@ public class TestpropertiesParseResult implements org.emftext.refactoring.tests.
 		return locationMap;
 	}
 	
-	public void setRoot(org.eclipse.emf.ecore.EObject root) {
+	public void setRoot(EObject root) {
 		this.root = root;
 	}
 	
@@ -34,7 +38,7 @@ public class TestpropertiesParseResult implements org.emftext.refactoring.tests.
 		this.locationMap = locationMap;
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>> getPostParseCommands() {
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>> getPostParseCommands() {
 		return commands;
 	}
 	

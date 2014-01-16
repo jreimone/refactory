@@ -6,6 +6,10 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.Collection;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * A FuzzyResolveResult is an implementation of the
  * ITestpropertiesReferenceResolveResult interface that delegates all method calls
@@ -15,11 +19,11 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
  * 
  * @param <ReferenceType> the type of the reference that is resolved
  */
-public class TestpropertiesFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.EObject> implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<ReferenceType> {
+public class TestpropertiesFuzzyResolveResult<ReferenceType extends EObject> implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<ReferenceType> {
 	
-	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<org.eclipse.emf.ecore.EObject> delegate;
+	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<EObject> delegate;
 	
-	public TestpropertiesFuzzyResolveResult(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<org.eclipse.emf.ecore.EObject> delegate) {
+	public TestpropertiesFuzzyResolveResult(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<EObject> delegate) {
 		this.delegate = delegate;
 	}
 	
@@ -27,7 +31,7 @@ public class TestpropertiesFuzzyResolveResult<ReferenceType extends org.eclipse.
 		return delegate.getErrorMessage();
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>> getMappings() {
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<ReferenceType>> getMappings() {
 		return null;
 	}
 	
@@ -48,22 +52,22 @@ public class TestpropertiesFuzzyResolveResult<ReferenceType extends org.eclipse.
 	}
 	
 	public void addMapping(String identifier, ReferenceType target) {
-		delegate.addMapping(identifier, (org.eclipse.emf.ecore.EObject) target);
+		delegate.addMapping(identifier, (EObject) target);
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri) {
+	public void addMapping(String identifier, URI uri) {
 		delegate.addMapping(identifier, uri);
 	}
 	
 	public void addMapping(String identifier, ReferenceType target, String warning) {
-		delegate.addMapping(identifier, (org.eclipse.emf.ecore.EObject) target, warning);
+		delegate.addMapping(identifier, (EObject) target, warning);
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
+	public void addMapping(String identifier, URI uri, String warning) {
 		delegate.addMapping(identifier, uri, warning);
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> getQuickFixes() {
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> getQuickFixes() {
 		return delegate.getQuickFixes();
 	}
 	

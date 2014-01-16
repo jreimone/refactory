@@ -6,6 +6,11 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
+import org.eclipse.jface.text.DocumentCommand;
+import org.eclipse.jface.text.IDocument;
+
 /**
  * The TestpropertiesAutoEditStrategy extends the default auto edit strategy such
  * that an additional tab is added if a line break is entered after opening
@@ -13,7 +18,7 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
  * brackets are automatically inserted right away when opening brackets are added
  * where <code>closeAfterEnter</code> is set to <code>false</code>.
  */
-public class TestpropertiesAutoEditStrategy extends org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy {
+public class TestpropertiesAutoEditStrategy extends DefaultIndentLineAutoEditStrategy {
 	
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketSet bracketSet;
 	
@@ -21,7 +26,7 @@ public class TestpropertiesAutoEditStrategy extends org.eclipse.jface.text.Defau
 		super();
 		org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin plugin = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.getDefault();
 		if (plugin != null) {
-			org.eclipse.jface.preference.IPreferenceStore preferenceStore = plugin.getPreferenceStore();
+			IPreferenceStore preferenceStore = plugin.getPreferenceStore();
 			bracketSet = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketSet();
 			bracketSet.resetBrackets(preferenceStore);
 		}
@@ -30,12 +35,13 @@ public class TestpropertiesAutoEditStrategy extends org.eclipse.jface.text.Defau
 	/**
 	 * This method is only used for injecting a bracket set during tests.
 	 */
-	@Deprecated	
+	@Deprecated
 	public void setBracketSet(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketSet bracketSet) {
 		this.bracketSet = bracketSet;
 	}
 	
-	@Override	public void customizeDocumentCommand(org.eclipse.jface.text.IDocument document, org.eclipse.jface.text.DocumentCommand command) {
+	@Override
+	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
 		String text = command.text;
 		String textBefore = command.text;
 		super.customizeDocumentCommand(document, command);
@@ -48,7 +54,7 @@ public class TestpropertiesAutoEditStrategy extends org.eclipse.jface.text.Defau
 		addClosingBracket(command);
 	}
 	
-	protected void addClosingBracket(org.eclipse.jface.text.DocumentCommand command) {
+	protected void addClosingBracket(DocumentCommand command) {
 		String insertedText = command.text;
 		boolean closeInstantly = bracketSet.isCloseInstantly(insertedText);
 		if (!closeInstantly) {
@@ -60,7 +66,7 @@ public class TestpropertiesAutoEditStrategy extends org.eclipse.jface.text.Defau
 		command.caretOffset = command.offset + 1;
 	}
 	
-	protected void addClosingBracketAfterEnterIfRequired(org.eclipse.jface.text.IDocument document, org.eclipse.jface.text.DocumentCommand command, String text, String textBefore, String textAfter) {
+	protected void addClosingBracketAfterEnterIfRequired(IDocument document, DocumentCommand command, String text, String textBefore, String textAfter) {
 		boolean isLineBreak = isLineBreak(text);
 		if (!isLineBreak) {
 			return;
