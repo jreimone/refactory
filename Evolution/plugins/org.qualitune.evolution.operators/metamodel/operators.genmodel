@@ -72,13 +72,21 @@
       <genOperations ecoreOperation="operators.ecore#//VAR/execute"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//QueryVariable">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/operation"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/structuralFeature"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/queryObject"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/queryResult"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//QueryVariable/qualifier"/>
     </genClasses>
     <genClasses image="false" ecoreClass="operators.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute operators.ecore#//Variable/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="operators.ecore#//QueryVariableQualifier">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference operators.ecore#//QueryVariableQualifier/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//EOperationQualifier">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//EOperationQualifier/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="operators.ecore#//EStructuralFeatureQualifier">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//EStructuralFeatureQualifier/structuralFeature"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

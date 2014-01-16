@@ -14,6 +14,9 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
 
 public class ASSIGNCustom extends ASSIGNImpl {
 
+	/**
+	 * @model
+	 */
 	@Override
 	public void execute() {
 		Referrable attributeOwner = getAttributeOwner();

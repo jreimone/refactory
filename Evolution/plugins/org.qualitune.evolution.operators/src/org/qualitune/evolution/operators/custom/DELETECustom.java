@@ -13,6 +13,9 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
 
 public class DELETECustom extends DELETEImpl {
 
+	/**
+	 * @model
+	 */
 	@Override
 	public void execute() {
 		Referrable referrable = getDeletion();

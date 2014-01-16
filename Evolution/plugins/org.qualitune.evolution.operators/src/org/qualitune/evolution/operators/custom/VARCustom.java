@@ -11,8 +11,11 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.qualitune.evolution.operators.EObjectReference;
+import org.qualitune.evolution.operators.EOperationQualifier;
+import org.qualitune.evolution.operators.EStructuralFeatureQualifier;
 import org.qualitune.evolution.operators.OperatorsFactory;
 import org.qualitune.evolution.operators.QueryVariable;
+import org.qualitune.evolution.operators.QueryVariableQualifier;
 import org.qualitune.evolution.operators.Referrable;
 import org.qualitune.evolution.operators.Result;
 import org.qualitune.evolution.operators.TypeVariable;
@@ -23,6 +26,9 @@ import org.qualitune.evolution.operators.impl.VARImpl;
 
 public class VARCustom extends VARImpl {
 
+	/**
+	 * @model
+	 */
 	@Override
 	public void execute() {
 		QueryVariable queryVariable = getVariable();
@@ -77,43 +83,46 @@ public class VARCustom extends VARImpl {
 				}
 			}
 		}
-		EOperation operation = queryVariable.getOperation();
-		EStructuralFeature structuralFeature = queryVariable.getStructuralFeature();
-		if(operation != null){
-			List<EParameter> parameters = operation.getEParameters();
-			if(parameters == null || parameters.size() == 0){
-				try {
-					Object result = contextObject.eInvoke(operation, null);
-					if(result instanceof EObject){
-						EObject singleResult = (EObject) result;
-						operatorResult.getElement().add(singleResult);
-					} else if(result instanceof List<?>){
-						List<?> resultList = (List<?>) result;
-						List<EObject> eobjects = new BasicEList<EObject>();
-						for (Object resultElement : resultList) {
-							if(resultElement instanceof EObject){
-								eobjects.add((EObject) resultElement);
+		QueryVariableQualifier qualifier = queryVariable.getQualifier();
+		if(qualifier != null){
+			if(qualifier instanceof EOperationQualifier){
+				EOperation operation = ((EOperationQualifier) qualifier).getOperation();
+				List<EParameter> parameters = operation.getEParameters();
+				// only parameter-less operations are supported
+				if(parameters == null || parameters.size() == 0){
+					try {
+						Object result = contextObject.eInvoke(operation, null);
+						if(result instanceof EObject){
+							EObject singleResult = (EObject) result;
+							operatorResult.getElement().add(singleResult);
+						} else if(result instanceof List<?>){
+							List<?> resultList = (List<?>) result;
+							List<EObject> eobjects = new BasicEList<EObject>();
+							for (Object resultElement : resultList) {
+								if(resultElement instanceof EObject){
+									eobjects.add((EObject) resultElement);
+								}
+							}
+							if(eobjects.size() == resultList.size()){
+								operatorResult.getElement().addAll(eobjects);
 							}
 						}
-						if(eobjects.size() == resultList.size()){
-							operatorResult.getElement().addAll(eobjects);
-						}
+					} catch (InvocationTargetException e) {
+						e.printStackTrace();
 					}
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
 				}
-
-			}
-		} else if(structuralFeature != null){
-			Object result = contextObject.eGet(structuralFeature, true);
-			if(!structuralFeature.isMany()){
-				EObject singleResult = (EObject) result;
-				operatorResult.getElement().add(singleResult);
-			} else {
-				List<?> resultList = (List<?>) result;
-				for (Object resultElement : resultList) {
-					if(resultElement instanceof EObject){
-						operatorResult.getElement().add((EObject) resultElement);
+			} else if (qualifier instanceof EStructuralFeatureQualifier){
+				EStructuralFeature structuralFeature = ((EStructuralFeatureQualifier) qualifier).getStructuralFeature();
+				Object result = contextObject.eGet(structuralFeature, true);
+				if(!structuralFeature.isMany()){
+					EObject singleResult = (EObject) result;
+					operatorResult.getElement().add(singleResult);
+				} else {
+					List<?> resultList = (List<?>) result;
+					for (Object resultElement : resultList) {
+						if(resultElement instanceof EObject){
+							operatorResult.getElement().add((EObject) resultElement);
+						}
 					}
 				}
 			}

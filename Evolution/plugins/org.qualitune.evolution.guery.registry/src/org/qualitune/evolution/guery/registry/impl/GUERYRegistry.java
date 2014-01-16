@@ -3,23 +3,24 @@
  */
 package org.qualitune.evolution.guery.registry.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import nz.ac.massey.cs.guery.Motif;
-import nz.ac.massey.cs.guery.MotifReader;
 import nz.ac.massey.cs.guery.MotifReaderException;
-import nz.ac.massey.cs.guery.io.dsl.DefaultMotifReader;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
-import org.osgi.framework.Bundle;
-import org.qualitune.evolution.guery.registry.EObjectVertex;
-import org.qualitune.evolution.guery.registry.EReferenceEdge;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.modelrefactoring.guery.MotifModel;
+import org.modelrefactoring.guery.graph.EObjectVertex;
+import org.modelrefactoring.guery.graph.EReferenceEdge;
+import org.modelrefactoring.guery.io.ModelMotifReader;
 import org.qualitune.evolution.guery.registry.IGUERYRegistry;
 import org.qualitune.evolution.guery.registry.IGUERYRegistryExtensionPoint;
 
@@ -40,26 +41,45 @@ public class GUERYRegistry implements IGUERYRegistry {
 		if(Platform.isRunning()){
 			IExtensionRegistry registry = Platform.getExtensionRegistry();
 			IConfigurationElement[] configurationElements = registry.getConfigurationElementsFor(IGUERYRegistryExtensionPoint.ID);
-			MotifReader<EObjectVertex, EReferenceEdge> reader = new DefaultMotifReader<EObjectVertex, EReferenceEdge>();
 			for (IConfigurationElement configurationElement : configurationElements) {
 				String gueryFileString = configurationElement.getAttribute(IGUERYRegistryExtensionPoint.ATT_GUERY_FILE);
 				String pluginID = configurationElement.getContributor().getName();
-				Bundle bundle = Platform.getBundle(pluginID);
-				URL motifUrl = bundle.getEntry(gueryFileString);
-				try {
-					if(motifUrl != null){
-						InputStream stream = motifUrl.openStream();
-						Motif<EObjectVertex, EReferenceEdge> motif = reader.read(stream);
+				
+				ResourceSet rs = new ResourceSetImpl();
+				URI uri = URI.createPlatformPluginURI(pluginID + "/" + gueryFileString, true);
+				Resource motifResource = rs.getResource(uri, true);
+				EObject model = motifResource.getContents().get(0);
+				assert model instanceof MotifModel;
+				MotifModel motifModel = (MotifModel) model;
+				List<org.modelrefactoring.guery.Motif> modelMotifs = motifModel.getMotifs();
+				for (org.modelrefactoring.guery.Motif modelMotif : modelMotifs) {
+					ModelMotifReader<EObjectVertex> reader = new ModelMotifReader<EObjectVertex>(modelMotif);
+					try {
+						Motif<EObjectVertex, EReferenceEdge> motif = reader.read(null);
 						if(motif != null){
 							motifs.add(motif);
 						}
-						stream.close();
+					} catch (MotifReaderException e) {
+						e.printStackTrace();
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (MotifReaderException e) {
-					e.printStackTrace();
 				}
+//				Bundle bundle = Platform.getBundle(pluginID);
+//				URL motifUrl = bundle.getEntry(gueryFileString);
+//				try {
+//					if(motifUrl != null){
+//						InputStream stream = motifUrl.openStream();
+//						MotifReader<EObjectVertex, EReferenceEdge> reader = new DefaultMotifReader<EObjectVertex, EReferenceEdge>();
+//						Motif<EObjectVertex, EReferenceEdge> motif = reader.read(stream);
+//						if(motif != null){
+//							motifs.add(motif);
+//						}
+//						stream.close();
+//					}
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				} catch (MotifReaderException e) {
+//					e.printStackTrace();
+//				}
 			}
 		}
 	}

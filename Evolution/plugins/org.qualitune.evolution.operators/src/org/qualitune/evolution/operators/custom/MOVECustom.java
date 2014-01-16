@@ -13,6 +13,9 @@ import org.qualitune.evolution.operators.util.OperatorsUtil;
 
 public class MOVECustom extends MOVEImpl {
 
+	/**
+	 * @model
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void execute() {
