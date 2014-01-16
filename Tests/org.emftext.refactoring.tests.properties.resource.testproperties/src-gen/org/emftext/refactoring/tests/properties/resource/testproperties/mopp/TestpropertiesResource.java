@@ -6,16 +6,37 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
-public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource {
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList.ManyInverse;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+public class TestpropertiesResource extends ResourceImpl implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource {
 	
 	public class ElementBasedTextDiagnostic implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextDiagnostic {
 		
 		private final org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap;
-		private final org.eclipse.emf.common.util.URI uri;
-		private final org.eclipse.emf.ecore.EObject element;
+		private final URI uri;
+		private final EObject element;
 		private final org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem;
 		
-		public ElementBasedTextDiagnostic(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap, org.eclipse.emf.common.util.URI uri, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem, org.eclipse.emf.ecore.EObject element) {
+		public ElementBasedTextDiagnostic(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap, URI uri, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem, EObject element) {
 			super();
 			this.uri = uri;
 			this.locationMap = locationMap;
@@ -51,11 +72,11 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 			return Math.max(0, locationMap.getLine(element));
 		}
 		
-		public org.eclipse.emf.ecore.EObject getElement() {
+		public EObject getElement() {
 			return element;
 		}
 		
-		public boolean wasCausedBy(org.eclipse.emf.ecore.EObject element) {
+		public boolean wasCausedBy(EObject element) {
 			if (this.element == null) {
 				return false;
 			}
@@ -69,7 +90,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	
 	public class PositionBasedTextDiagnostic implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextDiagnostic {
 		
-		private final org.eclipse.emf.common.util.URI uri;
+		private final URI uri;
 		
 		private int column;
 		private int line;
@@ -77,7 +98,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		private int charEnd;
 		private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem;
 		
-		public PositionBasedTextDiagnostic(org.eclipse.emf.common.util.URI uri, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem, int column, int line, int charStart, int charEnd) {
+		public PositionBasedTextDiagnostic(URI uri, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem, int column, int line, int charStart, int charEnd) {
 			super();
 			this.uri = uri;
 			this.column = column;
@@ -115,7 +136,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 			return problem.getMessage();
 		}
 		
-		public boolean wasCausedBy(org.eclipse.emf.ecore.EObject element) {
+		public boolean wasCausedBy(EObject element) {
 			return false;
 		}
 		
@@ -130,9 +151,9 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextParser parser;
 	private org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesLayoutUtil layoutUtil = new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesLayoutUtil();
 	private org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMarkerHelper markerHelper;
-	private java.util.Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>> internalURIFragmentMap = new java.util.LinkedHashMap<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>>();
-	private java.util.Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> quickFixMap = new java.util.LinkedHashMap<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix>();
-	private java.util.Map<?, ?> loadOptions;
+	private Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends EObject>> internalURIFragmentMap = new LinkedHashMap<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends EObject>>();
+	private Map<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> quickFixMap = new LinkedHashMap<String, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix>();
+	private Map<?, ?> loadOptions;
 	
 	/**
 	 * If a post-processor is currently running, this field holds a reference to it.
@@ -148,9 +169,9 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	private Object terminateReloadLock = new Object();
 	private Object loadingLock = new Object();
 	private boolean delayNotifications = false;
-	private java.util.List<org.eclipse.emf.common.notify.Notification> delayedNotifications = new java.util.ArrayList<org.eclipse.emf.common.notify.Notification>();
-	private java.io.InputStream latestReloadInputStream = null;
-	private java.util.Map<?, ?> latestReloadOptions = null;
+	private List<Notification> delayedNotifications = new ArrayList<Notification>();
+	private InputStream latestReloadInputStream = null;
+	private Map<?, ?> latestReloadOptions = null;
 	
 	/**
 	 * This flag indicates whether this resource is currently reloaded. The flag is
@@ -168,12 +189,12 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		resetLocationMap();
 	}
 	
-	public TestpropertiesResource(org.eclipse.emf.common.util.URI uri) {
+	public TestpropertiesResource(URI uri) {
 		super(uri);
 		resetLocationMap();
 	}
 	
-	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
+	protected void doLoad(InputStream inputStream, Map<?,?> options) throws IOException {
 		synchronized (loadingLock) {
 			if (processTerminationRequested()) {
 				return;
@@ -182,7 +203,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 			delayNotifications = true;
 			resetLocationMap();
 			String encoding = getEncoding(options);
-			java.io.InputStream actualInputStream = inputStream;
+			InputStream actualInputStream = inputStream;
 			Object inputStreamPreProcessorProvider = null;
 			if (options != null) {
 				inputStreamPreProcessorProvider = options.get(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
@@ -215,7 +236,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 			// We must set the load options again since they are deleted by the unload()
 			// method.
 			this.loadOptions = options;
-			org.eclipse.emf.ecore.EObject root = null;
+			EObject root = null;
 			if (result != null) {
 				root = result.getRoot();
 				if (root != null) {
@@ -232,7 +253,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 					}
 					getContentsInternal().add(root);
 				}
-				java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>> commands = result.getPostParseCommands();
+				Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>> commands = result.getPostParseCommands();
 				if (commands != null) {
 					for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesCommand<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource>  command : commands) {
 						command.execute(this);
@@ -253,11 +274,11 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	}
 	
 	protected void unloadAndClearContents() {
-		java.util.List<org.eclipse.emf.ecore.EObject> contentsInternal = getContentsInternal();
+		List<EObject> contentsInternal = getContentsInternal();
 		// unload the root objects
-		for (org.eclipse.emf.ecore.EObject eObject : contentsInternal) {
-			if (eObject instanceof org.eclipse.emf.ecore.InternalEObject) {
-				unloaded((org.eclipse.emf.ecore.InternalEObject) eObject);
+		for (EObject eObject : contentsInternal) {
+			if (eObject instanceof InternalEObject) {
+				unloaded((InternalEObject) eObject);
 			}
 		}
 		// unload all children using the super class method
@@ -277,13 +298,13 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	
 	protected void notifyDelayed() {
 		delayNotifications = false;
-		for (org.eclipse.emf.common.notify.Notification delayedNotification : delayedNotifications) {
+		for (Notification delayedNotification : delayedNotifications) {
 			super.eNotify(delayedNotification);
 		}
 		delayedNotifications.clear();
 	}
 	
-	public void eNotify(org.eclipse.emf.common.notify.Notification notification) {
+	public void eNotify(Notification notification) {
 		if (delayNotifications) {
 			delayedNotifications.add(notification);
 		} else {
@@ -294,7 +315,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	/**
 	 * Reloads the contents of this resource from the given stream.
 	 */
-	public void reload(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
+	public void reload(InputStream inputStream, Map<?,?> options) throws IOException {
 		synchronized (terminateReloadLock) {
 			latestReloadInputStream = inputStream;
 			latestReloadOptions = options;
@@ -309,7 +330,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 				terminateReload = false;
 			}
 			isLoaded = false;
-			java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(latestReloadOptions);
+			Map<Object, Object> loadOptions = addDefaultLoadOptions(latestReloadOptions);
 			try {
 				// Set isReloading flag to allow other method to differentiate between loading and
 				// reloading.
@@ -346,13 +367,13 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	protected void doSave(java.io.OutputStream outputStream, java.util.Map<?,?> options) throws java.io.IOException {
+	protected void doSave(OutputStream outputStream, Map<?,?> options) throws IOException {
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter printer = getMetaInformation().createPrinter(outputStream, this);
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
 		printer.setEncoding(getEncoding(options));
 		printer.setOptions(options);
 		referenceResolverSwitch.setOptions(options);
-		for (org.eclipse.emf.ecore.EObject root : getContentsInternal()) {
+		for (EObject root : getContentsInternal()) {
 			if (isLayoutInformationRecordingEnabled()) {
 				layoutUtil.transferAllLayoutInformationFromModel(root);
 			}
@@ -367,7 +388,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		return "testproperties";
 	}
 	
-	public String getEncoding(java.util.Map<?, ?> options) {
+	public String getEncoding(Map<?, ?> options) {
 		String encoding = null;
 		if (new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesRuntimeUtil().isEclipsePlatformAvailable()) {
 			encoding = new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesEclipseProxy().getPlatformResourceEncoding(uri);
@@ -401,23 +422,23 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		locationMap = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLocationMap();
 	}
 	
-	public void addURIFragment(String internalURIFragment, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment) {
+	public void addURIFragment(String internalURIFragment, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends EObject> uriFragment) {
 		internalURIFragmentMap.put(internalURIFragment, uriFragment);
 	}
 	
-	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, String id, org.eclipse.emf.ecore.EObject proxyElement, int position) {
-		org.eclipse.emf.ecore.InternalEObject proxy = (org.eclipse.emf.ecore.InternalEObject) proxyElement;
+	public <ContainerType extends EObject, ReferenceType extends EObject> void registerContextDependentProxy(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, EReference reference, String id, EObject proxyElement, int position) {
+		InternalEObject proxy = (InternalEObject) proxyElement;
 		String internalURIFragment = org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX + (proxyCounter++) + "_" + id;
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<?> uriFragment = factory.create(id, container, reference, position, proxy);
 		proxy.eSetProxyURI(getURI().appendFragment(internalURIFragment));
 		addURIFragment(internalURIFragment, uriFragment);
 	}
 	
-	public org.eclipse.emf.ecore.EObject getEObject(String id) {
+	public EObject getEObject(String id) {
 		if (internalURIFragmentMap.containsKey(id)) {
-			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment = internalURIFragmentMap.get(id);
+			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends EObject> uriFragment = internalURIFragmentMap.get(id);
 			boolean wasResolvedBefore = uriFragment.isResolved();
-			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result = null;
+			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<? extends EObject> result = null;
 			// catch and report all Exceptions that occur during proxy resolving
 			try {
 				result = uriFragment.resolve();
@@ -436,15 +457,15 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 			} else if (!result.wasResolved()) {
 				return null;
 			} else {
-				org.eclipse.emf.ecore.EObject proxy = uriFragment.getProxy();
+				EObject proxy = uriFragment.getProxy();
 				// remove an error that might have been added by an earlier attempt
 				removeDiagnostics(proxy, getErrors());
 				// remove old warnings and attach new
 				removeDiagnostics(proxy, getWarnings());
 				attachResolveWarnings(result, proxy);
-				org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping = result.getMappings().iterator().next();
-				org.eclipse.emf.ecore.EObject resultElement = getResultElement(uriFragment, mapping, proxy, result.getErrorMessage());
-				org.eclipse.emf.ecore.EObject container = uriFragment.getContainer();
+				org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<? extends EObject> mapping = result.getMappings().iterator().next();
+				EObject resultElement = getResultElement(uriFragment, mapping, proxy, result.getErrorMessage());
+				EObject container = uriFragment.getContainer();
 				replaceProxyInLayoutAdapters(container, proxy, resultElement);
 				return resultElement;
 			}
@@ -453,8 +474,8 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	protected void replaceProxyInLayoutAdapters(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject proxy, org.eclipse.emf.ecore.EObject target) {
-		for (org.eclipse.emf.common.notify.Adapter adapter : container.eAdapters()) {
+	protected void replaceProxyInLayoutAdapters(EObject container, EObject proxy, EObject target) {
+		for (Adapter adapter : container.eAdapters()) {
 			if (adapter instanceof org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLayoutInformationAdapter) {
 				org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLayoutInformationAdapter layoutInformationAdapter = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLayoutInformationAdapter) adapter;
 				layoutInformationAdapter.replaceProxy(proxy, target);
@@ -462,11 +483,11 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	protected org.eclipse.emf.ecore.EObject getResultElement(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final String errorMessage) {
+	protected EObject getResultElement(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<? extends EObject> uriFragment, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<? extends EObject> mapping, EObject proxy, final String errorMessage) {
 		if (mapping instanceof org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesURIMapping<?>) {
-			org.eclipse.emf.common.util.URI uri = ((org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesURIMapping<? extends org.eclipse.emf.ecore.EObject>)mapping).getTargetIdentifier();
+			URI uri = ((org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesURIMapping<? extends EObject>)mapping).getTargetIdentifier();
 			if (uri != null) {
-				org.eclipse.emf.ecore.EObject result = null;
+				EObject result = null;
 				try {
 					result = this.getResourceSet().getEObject(uri, true);
 				} catch (Exception e) {
@@ -485,12 +506,12 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 			}
 			return null;
 		} else if (mapping instanceof org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesElementMapping<?>) {
-			org.eclipse.emf.ecore.EObject element = ((org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesElementMapping<? extends org.eclipse.emf.ecore.EObject>)mapping).getTargetElement();
-			org.eclipse.emf.ecore.EReference reference = uriFragment.getReference();
-			org.eclipse.emf.ecore.EReference oppositeReference = uriFragment.getReference().getEOpposite();
+			EObject element = ((org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesElementMapping<? extends EObject>)mapping).getTargetElement();
+			EReference reference = uriFragment.getReference();
+			EReference oppositeReference = uriFragment.getReference().getEOpposite();
 			if (!uriFragment.getReference().isContainment() && oppositeReference != null) {
 				if (reference.isMany()) {
-					org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList.ManyInverse<org.eclipse.emf.ecore.EObject> list = org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesCastUtil.cast(element.eGet(oppositeReference, false));										// avoids duplicate entries in the reference caused by adding to the
+					ManyInverse<EObject> list = org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesCastUtil.cast(element.eGet(oppositeReference, false));										// avoids duplicate entries in the reference caused by adding to the
 					// oppositeReference
 					list.basicAdd(uriFragment.getContainer(),null);
 				} else {
@@ -504,9 +525,9 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	protected void removeDiagnostics(org.eclipse.emf.ecore.EObject cause, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
+	protected void removeDiagnostics(EObject cause, List<Diagnostic> diagnostics) {
 		// remove all errors/warnings from this resource
-		for (org.eclipse.emf.ecore.resource.Resource.Diagnostic errorCand : new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(diagnostics)) {
+		for (Diagnostic errorCand : new BasicEList<Diagnostic>(diagnostics)) {
 			if (errorCand instanceof org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextDiagnostic) {
 				if (((org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextDiagnostic) errorCand).wasCausedBy(cause)) {
 					diagnostics.remove(errorCand);
@@ -516,7 +537,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	protected void attachResolveError(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
+	protected void attachResolveError(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<?> result, EObject proxy) {
 		// attach errors to this resource
 		assert result != null;
 		final String errorMessage = result.getErrorMessage();
@@ -527,11 +548,11 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	protected void attachResolveWarnings(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
+	protected void attachResolveWarnings(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<? extends EObject> result, EObject proxy) {
 		assert result != null;
 		assert result.wasResolved();
 		if (result.wasResolved()) {
-			for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping : result.getMappings()) {
+			for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<? extends EObject> mapping : result.getMappings()) {
 				final String warningMessage = mapping.getWarning();
 				if (warningMessage == null) {
 					continue;
@@ -554,7 +575,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	/**
 	 * Runs all post processors to process this resource.
 	 */
-	protected boolean runPostProcessors(java.util.Map<?, ?> loadOptions) {
+	protected boolean runPostProcessors(Map<?, ?> loadOptions) {
 		unmark(org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType.ANALYSIS_PROBLEM);
 		if (processTerminationRequested()) {
 			return false;
@@ -570,7 +591,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		if (resourcePostProcessorProvider != null) {
 			if (resourcePostProcessorProvider instanceof org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourcePostProcessorProvider) {
 				runPostProcessor(((org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourcePostProcessorProvider) resourcePostProcessorProvider).getResourcePostProcessor());
-			} else if (resourcePostProcessorProvider instanceof java.util.Collection<?>) {
+			} else if (resourcePostProcessorProvider instanceof Collection<?>) {
 				java.util.Collection<?> resourcePostProcessorProviderCollection = (java.util.Collection<?>) resourcePostProcessorProvider;
 				for (Object processorProvider : resourcePostProcessorProviderCollection) {
 					if (processTerminationRequested()) {
@@ -600,8 +621,8 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		this.runningPostProcessor = null;
 	}
 	
-	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
-		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
+	public void load(Map<?, ?> options) throws IOException {
+		Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 		super.load(loadOptions);
 		resolveAfterParsing();
 	}
@@ -612,10 +633,10 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		interruptibleResolver = null;
 	}
 	
-	public void setURI(org.eclipse.emf.common.util.URI uri) {
+	public void setURI(URI uri) {
 		// because of the context dependent proxy resolving it is essential to resolve all
 		// proxies before the URI is changed which can cause loss of object identities
-		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this);
+		EcoreUtil.resolveAll(this);
 		super.setURI(uri);
 	}
 	
@@ -627,7 +648,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		return locationMap;
 	}
 	
-	public void addProblem(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem, org.eclipse.emf.ecore.EObject element) {
+	public void addProblem(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem, EObject element) {
 		ElementBasedTextDiagnostic diagnostic = new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element);
 		getDiagnostics(problem.getSeverity()).add(diagnostic);
 		mark(diagnostic);
@@ -642,7 +663,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	}
 	
 	protected void addQuickFixesToQuickFixMap(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem problem) {
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> quickFixes = problem.getQuickFixes();
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> quickFixes = problem.getQuickFixes();
 		if (quickFixes != null) {
 			for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix quickFix : quickFixes) {
 				if (quickFix != null) {
@@ -652,25 +673,25 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	@Deprecated	
-	public void addError(String message, org.eclipse.emf.ecore.EObject cause) {
+	@Deprecated
+	public void addError(String message, EObject cause) {
 		addError(message, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType.UNKNOWN, cause);
 	}
 	
-	public void addError(String message, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType type, org.eclipse.emf.ecore.EObject cause) {
+	public void addError(String message, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType type, EObject cause) {
 		addProblem(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesProblem(message, type, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemSeverity.ERROR), cause);
 	}
 	
-	@Deprecated	
-	public void addWarning(String message, org.eclipse.emf.ecore.EObject cause) {
+	@Deprecated
+	public void addWarning(String message, EObject cause) {
 		addWarning(message, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType.UNKNOWN, cause);
 	}
 	
-	public void addWarning(String message, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType type, org.eclipse.emf.ecore.EObject cause) {
+	public void addWarning(String message, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType type, EObject cause) {
 		addProblem(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesProblem(message, type, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemSeverity.WARNING), cause);
 	}
 	
-	protected java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemSeverity severity) {
+	protected List<Diagnostic> getDiagnostics(org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemSeverity severity) {
 		if (severity == org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemSeverity.ERROR) {
 			return getErrors();
 		} else {
@@ -678,8 +699,8 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	protected java.util.Map<Object, Object> addDefaultLoadOptions(java.util.Map<?, ?> loadOptions) {
-		java.util.Map<Object, Object> loadOptionsCopy = org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesMapUtil.copySafelyToObjectToObjectMap(loadOptions);
+	protected Map<Object, Object> addDefaultLoadOptions(Map<?, ?> loadOptions) {
+		Map<Object, Object> loadOptionsCopy = org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesMapUtil.copySafelyToObjectToObjectMap(loadOptions);
 		// first add static option provider
 		loadOptionsCopy.putAll(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesOptionProvider().getOptions());
 		
@@ -723,22 +744,22 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	 * sure that clients which obtain a reference to the list of contents do not
 	 * interfere when changing the list.
 	 */
-	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContents() {
+	public EList<EObject> getContents() {
 		if (terminateReload) {
 			// the contents' state is currently unclear
-			return new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.EObject>();
+			return new BasicEList<EObject>();
 		}
-		return new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesCopiedEObjectInternalEList((org.eclipse.emf.ecore.util.InternalEList<org.eclipse.emf.ecore.EObject>) super.getContents());
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesCopiedEObjectInternalEList((InternalEList<EObject>) super.getContents());
 	}
 	
 	/**
 	 * Returns the raw contents of this resource. In contrast to getContents(), this
 	 * methods does not return a copy of the content list, but the original list.
 	 */
-	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContentsInternal() {
+	public EList<EObject> getContentsInternal() {
 		if (terminateReload) {
 			// the contents' state is currently unclear
-			return new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.EObject>();
+			return new BasicEList<EObject>();
 		}
 		return super.getContents();
 	}
@@ -746,34 +767,48 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 	/**
 	 * Returns all warnings that are associated with this resource.
 	 */
-	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getWarnings() {
+	public EList<Diagnostic> getWarnings() {
 		if (terminateReload) {
 			// the contents' state is currently unclear
-			return new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>();
+			return new BasicEList<Diagnostic>();
 		}
-		return new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getWarnings());
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesCopiedEList<Diagnostic>(super.getWarnings());
 	}
 	
 	/**
 	 * Returns all errors that are associated with this resource.
 	 */
-	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getErrors() {
+	public EList<Diagnostic> getErrors() {
 		if (terminateReload) {
 			// the contents' state is currently unclear
-			return new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>();
+			return new BasicEList<Diagnostic>();
 		}
-		return new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getErrors());
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesCopiedEList<Diagnostic>(super.getErrors());
 	}
 	
-	protected void runValidators(org.eclipse.emf.ecore.EObject root) {
+	/**
+	 * Returns true if errors are associated with this resource.
+	 */
+	public boolean hasErrors() {
+		// We use the method of the super class to avoid copying the list of errors which
+		// is done by getErrors() in this class. Creating a copy is not required to check
+		// whether the list of errors is empty and moreover it did cause race conditions
+		// in the editor that led to ArrayIndexOutOfBoundsExceptions while copying the
+		// error list.
+		return !super.getErrors().isEmpty();
+	}
+	
+	protected void runValidators(EObject root) {
 		// checking constraints provided by EMF validator classes was disabled by option
 		// 'disableEValidators'.
 		
 		if (new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesRuntimeUtil().isEclipsePlatformAvailable()) {
-			// We do only evaluate batch constraints when the resource is loaded for the first
-			// time. If the resource is reloaded, only live constraints are evaluated.
-			boolean includeBatchConstraints = !this.isReloading;
-			new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesEclipseProxy().checkEMFValidationConstraints(this, root, includeBatchConstraints);
+			if (loadOptions == null || !Boolean.TRUE.equals(loadOptions.get(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.DISABLE_EMF_VALIDATION))) {
+				// We do only evaluate batch constraints when the resource is loaded for the first
+				// time. If the resource is reloaded, only live constraints are evaluated.
+				boolean includeBatchConstraints = !this.isReloading;
+				new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesEclipseProxy().checkEMFValidationConstraints(this, root, includeBatchConstraints);
+			}
 		}
 	}
 	
@@ -788,7 +823,7 @@ public class TestpropertiesResource extends org.eclipse.emf.ecore.resource.impl.
 		}
 	}
 	
-	protected void unmark(org.eclipse.emf.ecore.EObject cause) {
+	protected void unmark(EObject cause) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMarkerHelper markerHelper = getMarkerHelper();
 		if (markerHelper != null) {
 			markerHelper.unmark(this, cause);

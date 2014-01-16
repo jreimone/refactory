@@ -6,6 +6,9 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+
 /**
  * An interface for factories to create instances of
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
@@ -15,7 +18,7 @@ package org.emftext.refactoring.tests.properties.resource.testproperties;
  * resolved
  * @param <ReferenceType> the type of the reference to be resolved
  */
-public interface ITestpropertiesContextDependentURIFragmentFactory<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> {
+public interface ITestpropertiesContextDependentURIFragmentFactory<ContainerType extends EObject, ReferenceType extends EObject> {
 	
 	/**
 	 * Create a new instance of the
@@ -33,5 +36,5 @@ public interface ITestpropertiesContextDependentURIFragmentFactory<ContainerType
 	 * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
 	 * ContextDependentURIFragment
 	 */
-	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<?> create(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int positionInReference, org.eclipse.emf.ecore.EObject proxy);
+	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment<?> create(String identifier, ContainerType container, EReference reference, int positionInReference, EObject proxy);
 }

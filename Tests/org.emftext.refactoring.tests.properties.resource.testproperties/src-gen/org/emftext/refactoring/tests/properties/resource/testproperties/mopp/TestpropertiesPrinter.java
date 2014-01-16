@@ -6,11 +6,24 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+
 public class TestpropertiesPrinter implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter {
 	
 	protected org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolverFactory tokenResolverFactory = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTokenResolverFactory();
 	
-	protected java.io.OutputStream outputStream;
+	protected OutputStream outputStream;
 	
 	/**
 	 * Holds the resource that is associated with this printer. This may be null if
@@ -18,16 +31,16 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 	 */
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource;
 	
-	private java.util.Map<?, ?> options;
+	private Map<?, ?> options;
 	private String encoding = System.getProperty("file.encoding");
 	
-	public TestpropertiesPrinter(java.io.OutputStream outputStream, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource) {
+	public TestpropertiesPrinter(OutputStream outputStream, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource) {
 		super();
 		this.outputStream = outputStream;
 		this.resource = resource;
 	}
 	
-	protected int matchCount(java.util.Map<String, Integer> featureCounter, java.util.Collection<String> needed) {
+	protected int matchCount(Map<String, Integer> featureCounter, Collection<String> needed) {
 		int pos = 0;
 		int neg = 0;
 		
@@ -44,12 +57,12 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		return neg > 0 ? -neg : pos;
 	}
 	
-	protected void doPrint(org.eclipse.emf.ecore.EObject element, java.io.PrintWriter out, String globaltab) {
+	protected void doPrint(EObject element, PrintWriter out, String globaltab) {
 		if (element == null) {
-			throw new java.lang.IllegalArgumentException("Nothing to write.");
+			throw new IllegalArgumentException("Nothing to write.");
 		}
 		if (out == null) {
-			throw new java.lang.IllegalArgumentException("Nothing to write on.");
+			throw new IllegalArgumentException("Nothing to write on.");
 		}
 		
 		if (element instanceof org.emftext.refactoring.tests.properties.PropertyModel) {
@@ -84,7 +97,7 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		return (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesReferenceResolverSwitch) new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getReferenceResolverSwitch();
 	}
 	
-	protected void addWarningToResource(final String errorMessage, org.eclipse.emf.ecore.EObject cause) {
+	protected void addWarningToResource(final String errorMessage, EObject cause) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource = getResource();
 		if (resource == null) {
 			// the resource can be null if the printer is used stand alone
@@ -93,11 +106,11 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		resource.addProblem(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesProblem(errorMessage, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType.PRINT_PROBLEM, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemSeverity.WARNING), cause);
 	}
 	
-	public void setOptions(java.util.Map<?,?> options) {
+	public void setOptions(Map<?,?> options) {
 		this.options = options;
 	}
 	
-	public java.util.Map<?,?> getOptions() {
+	public Map<?,?> getOptions() {
 		return options;
 	}
 	
@@ -119,35 +132,34 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 	 * Calls {@link #doPrint(EObject, PrintWriter, String)} and writes the result to
 	 * the underlying output stream.
 	 */
-	public void print(org.eclipse.emf.ecore.EObject element) throws java.io.IOException {
-		java.io.PrintWriter out = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.BufferedOutputStream(outputStream), encoding));
+	public void print(EObject element) throws java.io.IOException {
+		PrintWriter out = new PrintWriter(new OutputStreamWriter(new BufferedOutputStream(outputStream), encoding));
 		doPrint(element, out, "");
 		out.flush();
-		out.close();
 	}
 	
-	public void print_org_emftext_refactoring_tests_properties_PropertyModel(org.emftext.refactoring.tests.properties.PropertyModel element, String outertab, java.io.PrintWriter out) {
+	public void print_org_emftext_refactoring_tests_properties_PropertyModel(org.emftext.refactoring.tests.properties.PropertyModel element, String outertab, PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(1);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.PROPERTY_MODEL__CATEGORIES));
-		printCountingMap.put("categories", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		printCountingMap.put("categories", temp == null ? 0 : ((Collection<?>) temp).size());
 		// print collected hidden tokens
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.Map<String, Integer> printCountingMap1 = null;
+		PrintWriter out1 = null;
+		Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		iterate = true;
 		while (iterate) {
-			sWriter = new java.io.StringWriter();
-			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			sWriter = new StringWriter();
+			out1 = new PrintWriter(sWriter);
+			printCountingMap1 = new LinkedHashMap<String, Integer>(printCountingMap);
 			print_org_emftext_refactoring_tests_properties_PropertyModel_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
@@ -161,14 +173,14 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		}
 	}
 	
-	public void print_org_emftext_refactoring_tests_properties_PropertyModel_0(org.emftext.refactoring.tests.properties.PropertyModel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+	public void print_org_emftext_refactoring_tests_properties_PropertyModel_0(org.emftext.refactoring.tests.properties.PropertyModel element, String outertab, PrintWriter out, Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("categories");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.PROPERTY_MODEL__CATEGORIES));
-			java.util.List<?> list = (java.util.List<?>) o;
+			List<?> list = (List<?>) o;
 			int index = list.size() - count;
 			if (index >= 0) {
 				o = list.get(index);
@@ -176,7 +188,7 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 				o = null;
 			}
 			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+				doPrint((EObject) o, out, localtab);
 			}
 			printCountingMap.put("categories", count - 1);
 		}
@@ -189,17 +201,17 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 	}
 	
 	
-	public void print_org_emftext_refactoring_tests_properties_Category(org.emftext.refactoring.tests.properties.Category element, String outertab, java.io.PrintWriter out) {
+	public void print_org_emftext_refactoring_tests_properties_Category(org.emftext.refactoring.tests.properties.Category element, String outertab, PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(2);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.CATEGORY__PAIRS));
-		printCountingMap.put("pairs", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		printCountingMap.put("pairs", temp == null ? 0 : ((Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.CATEGORY__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -222,29 +234,29 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("pairs");
 		if (count > 0) {
-			java.util.List<?> list = (java.util.List<?>)element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.CATEGORY__PAIRS));
+			List<?> list = (List<?>)element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.CATEGORY__PAIRS));
 			int index  = list.size() - count;
 			if (index < 0) {
 				index = 0;
 			}
-			java.util.ListIterator<?> it  = list.listIterator(index);
+			ListIterator<?> it  = list.listIterator(index);
 			while (it.hasNext()) {
 				Object o = it.next();
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+				doPrint((EObject) o, out, localtab);
 			}
 			printCountingMap.put("pairs", 0);
 		}
 	}
 	
 	
-	public void print_org_emftext_refactoring_tests_properties_KeyValuePair(org.emftext.refactoring.tests.properties.KeyValuePair element, String outertab, java.io.PrintWriter out) {
+	public void print_org_emftext_refactoring_tests_properties_KeyValuePair(org.emftext.refactoring.tests.properties.KeyValuePair element, String outertab, PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(2);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY_VALUE_PAIR__VALUE));
 		printCountingMap.put("value", temp == null ? 0 : 1);
@@ -253,12 +265,12 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		// print collected hidden tokens
 		int count;
 		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.Map<String, Integer> printCountingMap1 = null;
+		PrintWriter out1 = null;
+		Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CompoundDefinition)
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		sWriter = new StringWriter();
+		out1 = new PrintWriter(sWriter);
+		printCountingMap1 = new LinkedHashMap<String, Integer>(printCountingMap);
 		print_org_emftext_refactoring_tests_properties_KeyValuePair_0(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
@@ -273,7 +285,7 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY_VALUE_PAIR__VALUE));
 			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+				doPrint((EObject) o, out, localtab);
 			}
 			printCountingMap.put("value", count - 1);
 		}
@@ -282,7 +294,7 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		out.print(localtab);
 	}
 	
-	public void print_org_emftext_refactoring_tests_properties_KeyValuePair_0(org.emftext.refactoring.tests.properties.KeyValuePair element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+	public void print_org_emftext_refactoring_tests_properties_KeyValuePair_0(org.emftext.refactoring.tests.properties.KeyValuePair element, String outertab, PrintWriter out, Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
@@ -290,7 +302,7 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY_VALUE_PAIR__KEY));
 			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+				doPrint((EObject) o, out, localtab);
 			}
 			printCountingMap.put("key", count - 1);
 		}
@@ -300,13 +312,13 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 	}
 	
 	
-	public void print_org_emftext_refactoring_tests_properties_Key(org.emftext.refactoring.tests.properties.Key element, String outertab, java.io.PrintWriter out) {
+	public void print_org_emftext_refactoring_tests_properties_Key(org.emftext.refactoring.tests.properties.Key element, String outertab, PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(1);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.KEY__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
@@ -327,13 +339,13 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 	}
 	
 	
-	public void print_org_emftext_refactoring_tests_properties_EObjectReferenceValue(org.emftext.refactoring.tests.properties.EObjectReferenceValue element, String outertab, java.io.PrintWriter out) {
+	public void print_org_emftext_refactoring_tests_properties_EObjectReferenceValue(org.emftext.refactoring.tests.properties.EObjectReferenceValue element, String outertab, PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(1);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.EOBJECT_REFERENCE_VALUE__OBJECT_REFERENCE));
 		printCountingMap.put("objectReference", temp == null ? 0 : 1);
@@ -346,7 +358,7 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 			if (o != null) {
 				org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEObjectReferenceValueObjectReferenceReferenceResolver().deResolve((org.eclipse.emf.ecore.EObject) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.EOBJECT_REFERENCE_VALUE__OBJECT_REFERENCE)), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.EOBJECT_REFERENCE_VALUE__OBJECT_REFERENCE), element));
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEObjectReferenceValueObjectReferenceReferenceResolver().deResolve((org.eclipse.emf.ecore.EObject) o, element, (EReference) element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.EOBJECT_REFERENCE_VALUE__OBJECT_REFERENCE)), element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.EOBJECT_REFERENCE_VALUE__OBJECT_REFERENCE), element));
 				out.print(" ");
 			}
 			printCountingMap.put("objectReference", count - 1);
@@ -354,13 +366,13 @@ public class TestpropertiesPrinter implements org.emftext.refactoring.tests.prop
 	}
 	
 	
-	public void print_org_emftext_refactoring_tests_properties_StringValue(org.emftext.refactoring.tests.properties.StringValue element, String outertab, java.io.PrintWriter out) {
+	public void print_org_emftext_refactoring_tests_properties_StringValue(org.emftext.refactoring.tests.properties.StringValue element, String outertab, PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(1);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.emftext.refactoring.tests.properties.PropertiesPackage.STRING_VALUE__VALUE));
 		printCountingMap.put("value", temp == null ? 0 : 1);

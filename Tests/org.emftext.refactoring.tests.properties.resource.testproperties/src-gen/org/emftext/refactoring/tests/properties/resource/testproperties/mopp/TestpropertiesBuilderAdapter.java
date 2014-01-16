@@ -6,7 +6,21 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
-public class TestpropertiesBuilderAdapter extends org.eclipse.core.resources.IncrementalProjectBuilder implements org.eclipse.core.resources.IResourceDeltaVisitor, org.eclipse.core.resources.IResourceVisitor {
+import java.util.Map;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+public class TestpropertiesBuilderAdapter extends IncrementalProjectBuilder implements IResourceDeltaVisitor, IResourceVisitor {
 	
 	/**
 	 * The ID of the default, generated builder.
@@ -18,19 +32,19 @@ public class TestpropertiesBuilderAdapter extends org.eclipse.core.resources.Inc
 	/**
 	 * This resource set is used during the whole build.
 	 */
-	private org.eclipse.emf.ecore.resource.ResourceSet resourceSet;
+	private ResourceSet resourceSet;
 	
 	/**
 	 * This monitor is used during the build.
 	 */
-	private org.eclipse.core.runtime.IProgressMonitor monitor;
+	private IProgressMonitor monitor;
 	
-	public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map<String, String> args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
+	public IProject[] build(int kind, Map<String, String> args, final IProgressMonitor monitor) throws CoreException {
 		// Set context for build
 		this.monitor = monitor;
-		this.resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		this.resourceSet = new ResourceSetImpl();
 		// Perform build by calling the resource visitors
-		org.eclipse.core.resources.IResourceDelta delta = getDelta(getProject());
+		IResourceDelta delta = getDelta(getProject());
 		if (delta != null) {
 			// This is an incremental build
 			delta.accept(this);
@@ -44,8 +58,8 @@ public class TestpropertiesBuilderAdapter extends org.eclipse.core.resources.Inc
 		return null;
 	}
 	
-	public void build(org.eclipse.core.resources.IFile resource, org.eclipse.emf.ecore.resource.ResourceSet resourceSet, org.eclipse.core.runtime.IProgressMonitor monitor) {
-		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
+	public void build(IFile resource, ResourceSet resourceSet, IProgressMonitor monitor) {
+		URI uri = URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBuilder builder = getBuilder();
 		if (builder.isBuildingNeeded(uri)) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource customResource = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource) resourceSet.getResource(uri, true);
@@ -73,24 +87,24 @@ public class TestpropertiesBuilderAdapter extends org.eclipse.core.resources.Inc
 	/**
 	 * Runs the task item builder to search for new task items in changed resources.
 	 */
-	public void runTaskItemBuilder(org.eclipse.core.resources.IFile resource, org.eclipse.emf.ecore.resource.ResourceSet resourceSet, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public void runTaskItemBuilder(IFile resource, ResourceSet resourceSet, IProgressMonitor monitor) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItemBuilder taskItemBuilder = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItemBuilder();
 		new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMarkerHelper().removeAllMarkers(resource, taskItemBuilder.getBuilderMarkerId());
 		taskItemBuilder.build(resource, resourceSet, monitor);
 	}
 	
-	public boolean visit(org.eclipse.core.resources.IResourceDelta delta) throws org.eclipse.core.runtime.CoreException {
-		org.eclipse.core.resources.IResource resource = delta.getResource();
-		return doVisit(resource, delta.getKind() == org.eclipse.core.resources.IResourceDelta.REMOVED);
+	public boolean visit(IResourceDelta delta) throws CoreException {
+		IResource resource = delta.getResource();
+		return doVisit(resource, delta.getKind() == IResourceDelta.REMOVED);
 	}
 	
-	public boolean visit(org.eclipse.core.resources.IResource resource) throws org.eclipse.core.runtime.CoreException {
+	public boolean visit(IResource resource) throws CoreException {
 		return doVisit(resource, false);
 	}
 	
-	protected boolean doVisit(org.eclipse.core.resources.IResource resource, boolean removed) throws org.eclipse.core.runtime.CoreException {
+	protected boolean doVisit(IResource resource, boolean removed) throws CoreException {
 		if (removed) {
-			org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
+			URI uri = URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBuilder builder = getBuilder();
 			if (builder.isBuildingNeeded(uri)) {
 				builder.handleDeletion(uri, monitor);
@@ -98,13 +112,13 @@ public class TestpropertiesBuilderAdapter extends org.eclipse.core.resources.Inc
 			new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMarkerHelper().removeAllMarkers(resource, getBuilderMarkerId());
 			return false;
 		}
-		if (resource instanceof org.eclipse.core.resources.IFile && resource.getName().endsWith("." + new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getSyntaxName())) {
+		if (resource instanceof IFile && resource.getName().endsWith("." + new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getSyntaxName())) {
 			// First, call the default generated builder that is usually customized to add
 			// compilation-like behavior.
-			build((org.eclipse.core.resources.IFile) resource, resourceSet, monitor);
+			build((IFile) resource, resourceSet, monitor);
 			// Second, call the task item builder that searches for task items in DSL
 			// documents and creates task markers.
-			runTaskItemBuilder((org.eclipse.core.resources.IFile) resource, resourceSet, monitor);
+			runTaskItemBuilder((IFile) resource, resourceSet, monitor);
 			return false;
 		}
 		return true;

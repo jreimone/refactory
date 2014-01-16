@@ -6,10 +6,15 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
+import org.osgi.framework.BundleContext;
+
 /**
  * A singleton class for the text resource plug-in.
  */
-public class TestpropertiesPlugin extends org.eclipse.core.runtime.Plugin {
+public class TestpropertiesPlugin extends Plugin {
 	
 	public static final String PLUGIN_ID = "org.emftext.refactoring.tests.properties.resource.testproperties";
 	/**
@@ -30,12 +35,12 @@ public class TestpropertiesPlugin extends org.eclipse.core.runtime.Plugin {
 		super();
 	}
 	
-	public void start(org.osgi.framework.BundleContext context) throws Exception {
+	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
 	}
 	
-	public void stop(org.osgi.framework.BundleContext context) throws Exception {
+	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 	}
@@ -52,8 +57,8 @@ public class TestpropertiesPlugin extends org.eclipse.core.runtime.Plugin {
 	 * 
 	 * @return the status object describing the error
 	 */
-	public static org.eclipse.core.runtime.IStatus logError(String message, Throwable throwable) {
-		return log(org.eclipse.core.runtime.IStatus.ERROR, message, throwable);
+	public static IStatus logError(String message, Throwable throwable) {
+		return log(IStatus.ERROR, message, throwable);
 	}
 	
 	/**
@@ -65,8 +70,20 @@ public class TestpropertiesPlugin extends org.eclipse.core.runtime.Plugin {
 	 * 
 	 * @return the status object describing the warning
 	 */
-	public static org.eclipse.core.runtime.IStatus logWarning(String message, Throwable throwable) {
-		return log(org.eclipse.core.runtime.IStatus.WARNING, message, throwable);
+	public static IStatus logWarning(String message, Throwable throwable) {
+		return log(IStatus.WARNING, message, throwable);
+	}
+	
+	/**
+	 * Helper method for logging infos.
+	 * 
+	 * @param message the info message to log
+	 * @param throwable the exception that describes the info in detail (can be null)
+	 * 
+	 * @return the status object describing the info
+	 */
+	public static IStatus logInfo(String message, Throwable throwable) {
+		return log(IStatus.INFO, message, throwable);
 	}
 	
 	/**
@@ -78,12 +95,12 @@ public class TestpropertiesPlugin extends org.eclipse.core.runtime.Plugin {
 	 * 
 	 * @return the status object describing the error
 	 */
-	protected static org.eclipse.core.runtime.IStatus log(int type, String message, Throwable throwable) {
-		org.eclipse.core.runtime.IStatus status;
+	protected static IStatus log(int type, String message, Throwable throwable) {
+		IStatus status;
 		if (throwable != null) {
-			status = new org.eclipse.core.runtime.Status(type, TestpropertiesPlugin.PLUGIN_ID, 0, message, throwable);
+			status = new Status(type, TestpropertiesPlugin.PLUGIN_ID, 0, message, throwable);
 		} else {
-			status = new org.eclipse.core.runtime.Status(type, TestpropertiesPlugin.PLUGIN_ID, message);
+			status = new Status(type, TestpropertiesPlugin.PLUGIN_ID, message);
 		}
 		final TestpropertiesPlugin pluginInstance = TestpropertiesPlugin.getDefault();
 		if (pluginInstance == null) {

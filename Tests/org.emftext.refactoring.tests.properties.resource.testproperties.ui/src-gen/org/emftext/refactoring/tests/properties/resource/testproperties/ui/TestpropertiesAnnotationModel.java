@@ -6,13 +6,18 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
-public class TestpropertiesAnnotationModel extends org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel {
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.ui.texteditor.MarkerAnnotation;
+import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
+
+public class TestpropertiesAnnotationModel extends ResourceMarkerAnnotationModel {
 	
-	public TestpropertiesAnnotationModel(org.eclipse.core.resources.IResource resource) {
+	public TestpropertiesAnnotationModel(IResource resource) {
 		super(resource);
 	}
 	
-	protected org.eclipse.ui.texteditor.MarkerAnnotation createMarkerAnnotation(org.eclipse.core.resources.IMarker marker) {
+	protected MarkerAnnotation createMarkerAnnotation(IMarker marker) {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesMarkerAnnotation(marker);
 	}
 	

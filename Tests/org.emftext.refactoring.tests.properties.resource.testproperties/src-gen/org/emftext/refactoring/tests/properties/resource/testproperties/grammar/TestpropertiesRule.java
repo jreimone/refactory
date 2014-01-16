@@ -6,19 +6,21 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+import org.eclipse.emf.ecore.EClass;
+
 /**
  * A class to represent a rules in the grammar.
  */
 public class TestpropertiesRule extends org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesSyntaxElement {
 	
-	private final org.eclipse.emf.ecore.EClass metaclass;
+	private final EClass metaclass;
 	
-	public TestpropertiesRule(org.eclipse.emf.ecore.EClass metaclass, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesChoice choice, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality cardinality) {
+	public TestpropertiesRule(EClass metaclass, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesChoice choice, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality cardinality) {
 		super(cardinality, new org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesSyntaxElement[] {choice});
 		this.metaclass = metaclass;
 	}
 	
-	public org.eclipse.emf.ecore.EClass getMetaclass() {
+	public EClass getMetaclass() {
 		return metaclass;
 	}
 	

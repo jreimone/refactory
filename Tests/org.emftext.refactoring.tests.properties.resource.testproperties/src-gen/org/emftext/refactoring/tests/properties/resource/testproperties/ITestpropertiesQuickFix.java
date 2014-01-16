@@ -6,6 +6,9 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+import java.util.Collection;
+import org.eclipse.emf.ecore.EObject;
+
 public interface ITestpropertiesQuickFix {
 	
 	/**
@@ -34,7 +37,7 @@ public interface ITestpropertiesQuickFix {
 	 * Returns a collection of objects the fix refers to. This collection is used to
 	 * check whether the fix is can still be applied even after a workbench restart.
 	 */
-	public java.util.Collection<org.eclipse.emf.ecore.EObject> getContextObjects();
+	public Collection<EObject> getContextObjects();
 	
 	/**
 	 * Returns a string representation of the context in which this quick fix can be

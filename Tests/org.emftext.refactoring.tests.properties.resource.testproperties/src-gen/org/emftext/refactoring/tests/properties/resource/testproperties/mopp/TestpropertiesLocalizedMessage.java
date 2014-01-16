@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+
 public class TestpropertiesLocalizedMessage {
 	
 	public TestpropertiesLocalizedMessage(String message, int column, int line, int charStart, int charEnd) {

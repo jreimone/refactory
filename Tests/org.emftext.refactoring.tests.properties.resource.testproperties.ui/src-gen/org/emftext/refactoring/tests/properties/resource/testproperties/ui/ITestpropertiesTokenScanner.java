@@ -6,7 +6,9 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
-public interface ITestpropertiesTokenScanner extends org.eclipse.jface.text.rules.ITokenScanner {
+import org.eclipse.jface.text.rules.ITokenScanner;
+
+public interface ITestpropertiesTokenScanner extends ITokenScanner {
 	
 	public String getTokenText();
 	

@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+
 /**
  * A mapping from an identifier to something else. The &quot;something else&quot;
  * is defined by subclasses of this interface. Implementors of such subclasses are

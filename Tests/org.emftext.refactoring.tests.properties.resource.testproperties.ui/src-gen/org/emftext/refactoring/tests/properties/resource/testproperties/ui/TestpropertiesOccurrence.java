@@ -6,6 +6,26 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextViewerExtension5;
+import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.swt.custom.StyledText;
+
 /**
  * This class finds text positions to highlight and adds them to the document.
  */
@@ -23,7 +43,7 @@ public class TestpropertiesOccurrence {
 	/**
 	 * The viewer showing the document the we search occurrences for
 	 */
-	private org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer;
+	private ProjectionViewer projectionViewer;
 	
 	/**
 	 * The resource we operate on
@@ -40,7 +60,7 @@ public class TestpropertiesOccurrence {
 	 * The region of the token that was located at the caret position at the time
 	 * occurrence were computed last
 	 */
-	private org.eclipse.jface.text.Region tokenRegion;
+	private Region tokenRegion;
 	
 	/**
 	 * Creates a TestpropertiesOccurrence object to find positions to highlight.
@@ -48,7 +68,7 @@ public class TestpropertiesOccurrence {
 	 * @param textResource the text resource for location
 	 * @param projectionViewer the viewer for the text
 	 */
-	public TestpropertiesOccurrence(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource textResource, org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer) {
+	public TestpropertiesOccurrence(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource textResource, ProjectionViewer projectionViewer) {
 		super();
 		this.textResource = textResource;
 		this.projectionViewer = projectionViewer;
@@ -56,8 +76,8 @@ public class TestpropertiesOccurrence {
 		resetTokenRegion();
 	}
 	
-	protected org.eclipse.emf.ecore.EObject getResolvedEObject(org.eclipse.emf.ecore.EObject eObject) {
-		return eObject.eIsProxy() ? org.eclipse.emf.ecore.util.EcoreUtil.resolve(eObject, textResource) : eObject;
+	protected EObject getResolvedEObject(EObject eObject) {
+		return eObject.eIsProxy() ? EcoreUtil.resolve(eObject, textResource) : eObject;
 	}
 	
 	/**
@@ -69,8 +89,8 @@ public class TestpropertiesOccurrence {
 	 * <code>EObject</code> in a list. If resolving fails, <code>null</code> is
 	 * returned.
 	 */
-	public org.eclipse.emf.ecore.EObject tryToResolve(java.util.List<org.eclipse.emf.ecore.EObject> objects) {
-		for (org.eclipse.emf.ecore.EObject object : objects) {
+	public EObject tryToResolve(List<EObject> objects) {
+		for (EObject object : objects) {
 			if (object.eIsProxy()) {
 				return getResolvedEObject(object);
 			}
@@ -81,7 +101,7 @@ public class TestpropertiesOccurrence {
 	/**
 	 * Returns the EObject at the current caret position.
 	 */
-	public org.eclipse.emf.ecore.EObject getEObjectAtCurrentPosition() {
+	public EObject getEObjectAtCurrentPosition() {
 		if (textResource == null) {
 			return null;
 		}
@@ -89,13 +109,13 @@ public class TestpropertiesOccurrence {
 		int caretOffset = getCaretOffset();
 		
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap = textResource.getLocationMap();
-		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
+		List<EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
 		
 		if (elementsAtOffset == null || elementsAtOffset.isEmpty()) {
 			return null;
 		}
 		
-		for (org.eclipse.emf.ecore.EObject candidate : elementsAtOffset) {
+		for (EObject candidate : elementsAtOffset) {
 			if (candidate.eIsProxy()) {
 				candidate = getResolvedEObject(candidate);
 			}
@@ -119,7 +139,7 @@ public class TestpropertiesOccurrence {
 		return tokenText;
 	}
 	
-	protected int getLength(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap, org.eclipse.emf.ecore.EObject eObject) {
+	protected int getLength(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap, EObject eObject) {
 		return locationMap.getCharEnd(eObject) - locationMap.getCharStart(eObject) + 1;
 	}
 	
@@ -133,7 +153,7 @@ public class TestpropertiesOccurrence {
 		}
 		
 		final int caretOffset = getCaretOffset();
-		org.eclipse.jface.text.IDocument document = getSourceViewer().getDocument();
+		IDocument document = getSourceViewer().getDocument();
 		if (caretOffset < 0 || caretOffset >= document.getLength()) {
 			// The caret is outside of the document.
 			removeAnnotations();
@@ -148,7 +168,7 @@ public class TestpropertiesOccurrence {
 		
 		resetTokenRegion();
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap = textResource.getLocationMap();
-		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
+		List<EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
 		
 		if (elementsAtOffset == null || elementsAtOffset.size() < 1) {
 			// The document does not contain EObjects. Probably there is a syntax error.
@@ -157,9 +177,9 @@ public class TestpropertiesOccurrence {
 		}
 		
 		removeAnnotations();
-		org.eclipse.emf.ecore.EObject resolvedEObject = tryToResolve(elementsAtOffset);
-		org.eclipse.emf.ecore.EObject referencedElement;
-		org.eclipse.emf.ecore.EObject firstElementAtOffset = elementsAtOffset.get(0);
+		EObject resolvedEObject = tryToResolve(elementsAtOffset);
+		EObject referencedElement;
+		EObject firstElementAtOffset = elementsAtOffset.get(0);
 		if (resolvedEObject != null) {
 			referencedElement = resolvedEObject;
 		} else {
@@ -184,7 +204,7 @@ public class TestpropertiesOccurrence {
 			int tokenOffset = tokenScanner.getTokenOffset();
 			int tokenLength = tokenScanner.getTokenLength();
 			tokenText = tokenScanner.getTokenText();
-			tokenRegion = new org.eclipse.jface.text.Region(tokenOffset, tokenLength);
+			tokenRegion = new Region(tokenOffset, tokenLength);
 		}
 		
 		// The tokenScanner must always be not null if there was no proxy at the caret
@@ -206,13 +226,13 @@ public class TestpropertiesOccurrence {
 				if (index >= 0) {
 					addAnnotations(referencedElement, proxyText, index, caretOffset);
 				}
-			} catch (org.eclipse.jface.text.BadLocationException e) {
+			} catch (BadLocationException e) {
 				// ignore
 			}
 		}
 	}
 	
-	protected boolean isContainedIn(org.eclipse.jface.text.Region region, int offset) {
+	protected boolean isContainedIn(Region region, int offset) {
 		int regionOffset = region.getOffset();
 		int regionEnd = regionOffset + region.getLength();
 		return offset >= regionOffset && offset <= regionEnd;
@@ -223,18 +243,18 @@ public class TestpropertiesOccurrence {
 		return regionOffset <= offset && offset < regionEnd;
 	}
 	
-	protected void addAnnotations(org.eclipse.emf.ecore.EObject referencedElement, String definitionText, int definitionOffset, int caretOffset) {
-		java.util.List<String> matchingNames = addAnnotationsForDefinition(referencedElement, definitionText, definitionOffset, caretOffset);
+	protected void addAnnotations(EObject referencedElement, String definitionText, int definitionOffset, int caretOffset) {
+		List<String> matchingNames = addAnnotationsForDefinition(referencedElement, definitionText, definitionOffset, caretOffset);
 		addAnnotationsForReferences(referencedElement, matchingNames);
 	}
 	
-	protected void addAnnotationsForReferences(org.eclipse.emf.ecore.EObject referencedElement, java.util.List<String> matchingNames) {
+	protected void addAnnotationsForReferences(EObject referencedElement, List<String> matchingNames) {
 		
-		org.eclipse.jface.text.IDocument document = getSourceViewer().getDocument();
+		IDocument document = getSourceViewer().getDocument();
 		
 		// Determine all references to the EObject
-		java.util.Map<org.eclipse.emf.ecore.EObject, java.util.Collection<org.eclipse.emf.ecore.EStructuralFeature.Setting>> map = org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer.find(java.util.Collections.singleton(textResource));
-		java.util.Collection<org.eclipse.emf.ecore.EStructuralFeature.Setting> referencingObjects = map.get(referencedElement);
+		Map<EObject, Collection<org.eclipse.emf.ecore.EStructuralFeature.Setting>> map = EcoreUtil.UsageCrossReferencer.find(Collections.singleton(textResource));
+		Collection<org.eclipse.emf.ecore.EStructuralFeature.Setting> referencingObjects = map.get(referencedElement);
 		if (referencingObjects == null) {
 			// No references found
 			return;
@@ -242,7 +262,7 @@ public class TestpropertiesOccurrence {
 		
 		// Highlight the token in the text for the referencing objects
 		for (org.eclipse.emf.ecore.EStructuralFeature.Setting setting : referencingObjects) {
-			org.eclipse.emf.ecore.EObject referencingElement = setting.getEObject();
+			EObject referencingElement = setting.getEObject();
 			// Search through all tokens in the elements that reference the element at the
 			// caret position
 			for (String name : matchingNames) {
@@ -254,14 +274,14 @@ public class TestpropertiesOccurrence {
 		}
 	}
 	
-	protected java.util.List<String> addAnnotationsForDefinition(org.eclipse.emf.ecore.EObject referencedElement, String definitionText, int definitionOffset, final int caretOffset) {
+	protected List<String> addAnnotationsForDefinition(EObject referencedElement, String definitionText, int definitionOffset, final int caretOffset) {
 		
-		final org.eclipse.jface.text.IDocument document = getSourceViewer().getDocument();
-		final java.util.List<String> matchingNames = new java.util.ArrayList<String>();
+		final IDocument document = getSourceViewer().getDocument();
+		final List<String> matchingNames = new ArrayList<String>();
 		if (definitionText == null) {
 			// The object at the caret position is not referenced from within the resource.
 			// Thus, we cannot highlight occurrences or declarations.
-			final java.util.List<String> names = new org.emftext.refactoring.tests.properties.resource.testproperties.analysis.TestpropertiesDefaultNameProvider().getNames(referencedElement);
+			final List<String> names = new org.emftext.refactoring.tests.properties.resource.testproperties.analysis.TestpropertiesDefaultNameProvider().getNames(referencedElement);
 			scan(referencedElement, new ITokenScannerConstraint() {
 				
 				public boolean mustStop(org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesTokenScanner tokenScanner) {
@@ -287,7 +307,7 @@ public class TestpropertiesOccurrence {
 	 * Returns the index of the given text within the text that corresponds to  the
 	 * EObject.
 	 */
-	protected int getIndexOf(org.eclipse.emf.ecore.EObject eObject, final String text) {
+	protected int getIndexOf(EObject eObject, final String text) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesTokenScanner tokenScanner = scan(eObject, new ITokenScannerConstraint() {
 			
 			public boolean mustStop(org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesTokenScanner tokenScanner) {
@@ -303,8 +323,8 @@ public class TestpropertiesOccurrence {
 		}
 	}
 	
-	protected org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesTokenScanner scan(org.eclipse.emf.ecore.EObject object, ITokenScannerConstraint constraint) {
-		org.eclipse.jface.text.IDocument document = getSourceViewer().getDocument();
+	protected org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesTokenScanner scan(EObject object, ITokenScannerConstraint constraint) {
+		IDocument document = getSourceViewer().getDocument();
 		
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesLocationMap locationMap = textResource.getLocationMap();
 		
@@ -313,7 +333,7 @@ public class TestpropertiesOccurrence {
 		int length = getLength(locationMap, object);
 		
 		tokenScanner.setRange(document, offset, length);
-		org.eclipse.jface.text.rules.IToken token = tokenScanner.nextToken();
+		IToken token = tokenScanner.nextToken();
 		while (!token.isEOF()) {
 			if (constraint.mustStop(tokenScanner)) {
 				return tokenScanner;
@@ -327,12 +347,12 @@ public class TestpropertiesOccurrence {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIMetaInformation().createTokenScanner(null, null);
 	}
 	
-	protected void addAnnotation(org.eclipse.jface.text.IDocument document, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPositionCategory type, String text, int offset, int length) {
+	protected void addAnnotation(IDocument document, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPositionCategory type, String text, int offset, int length) {
 		// for declarations and occurrences we do not need to add the position to the
 		// document
-		org.eclipse.jface.text.Position position = positionHelper.createPosition(offset, length);
+		Position position = positionHelper.createPosition(offset, length);
 		// instead, an annotation is created
-		org.eclipse.jface.text.source.Annotation annotation = new org.eclipse.jface.text.source.Annotation(false);
+		Annotation annotation = new Annotation(false);
 		if (type == org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPositionCategory.DEFINITION) {
 			annotation.setText("Declaration of " + text);
 			annotation.setType(DECLARATION_ANNOTATION_ID);
@@ -349,19 +369,19 @@ public class TestpropertiesOccurrence {
 	}
 	
 	protected void removeAnnotations(String annotationTypeID) {
-		java.util.List<org.eclipse.jface.text.source.Annotation> annotationsToRemove = new java.util.ArrayList<org.eclipse.jface.text.source.Annotation>();
-		org.eclipse.jface.text.source.IAnnotationModel annotationModel = getSourceViewer().getAnnotationModel();
-		java.util.Iterator<?> annotationIterator = annotationModel.getAnnotationIterator();
+		List<Annotation> annotationsToRemove = new ArrayList<Annotation>();
+		IAnnotationModel annotationModel = getSourceViewer().getAnnotationModel();
+		Iterator<?> annotationIterator = annotationModel.getAnnotationIterator();
 		while (annotationIterator.hasNext()) {
 			Object object = (Object) annotationIterator.next();
-			if (object instanceof org.eclipse.jface.text.source.Annotation) {
-				org.eclipse.jface.text.source.Annotation annotation = (org.eclipse.jface.text.source.Annotation) object;
+			if (object instanceof Annotation) {
+				Annotation annotation = (Annotation) object;
 				if (annotationTypeID.equals(annotation.getType())) {
 					annotationsToRemove.add(annotation);
 				}
 			}
 		}
-		for (org.eclipse.jface.text.source.Annotation annotation : annotationsToRemove) {
+		for (Annotation annotation : annotationsToRemove) {
 			annotationModel.removeAnnotation(annotation);
 		}
 	}
@@ -370,11 +390,11 @@ public class TestpropertiesOccurrence {
 	 * Resets the token region to enable remove highlighting if the text is changing.
 	 */
 	public void resetTokenRegion() {
-		tokenRegion = new org.eclipse.jface.text.Region(-1, 0);
+		tokenRegion = new Region(-1, 0);
 	}
 	
 	protected int getCaretOffset() {
-		org.eclipse.swt.custom.StyledText textWidget = getSourceViewer().getTextWidget();
+		StyledText textWidget = getSourceViewer().getTextWidget();
 		int widgetOffset = textWidget.getCaretOffset();
 		return getTextViewerExtension5().widgetOffset2ModelOffset(widgetOffset);
 	}
@@ -384,7 +404,7 @@ public class TestpropertiesOccurrence {
 	 * also used for unit testing to inject a custom source viewer by overriding this
 	 * method.
 	 */
-	protected org.eclipse.jface.text.source.ISourceViewer getSourceViewer() {
+	protected ISourceViewer getSourceViewer() {
 		return projectionViewer;
 	}
 	
@@ -393,7 +413,7 @@ public class TestpropertiesOccurrence {
 	 * also used for unit testing to inject a custom text viewer extension by
 	 * overriding this method.
 	 */
-	protected org.eclipse.jface.text.ITextViewerExtension5 getTextViewerExtension5() {
+	protected ITextViewerExtension5 getTextViewerExtension5() {
 		return projectionViewer;
 	}
 	

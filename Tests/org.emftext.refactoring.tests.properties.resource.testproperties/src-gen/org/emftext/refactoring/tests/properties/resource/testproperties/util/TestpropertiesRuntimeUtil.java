@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.util;
 
+import org.eclipse.core.runtime.Platform;
+
 /**
  * This utility class provides methods to obtain information about the current
  * runtime, for example whether Eclipse is available or not.
@@ -13,10 +15,9 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.util;
 public class TestpropertiesRuntimeUtil {
 	
 	/**
-	 * Checks whether the class
-	 * <code>org.eclipse.emf.validation.internal.EMFModelValidationPlugin</code> is
-	 * available on the classpath. This can be used to determine if Eclipse is
-	 * available in the current runtime environment.
+	 * Checks whether the class <code>EMFModelValidationPlugin</code> is available on
+	 * the classpath. This can be used to determine if Eclipse is available in the
+	 * current runtime environment.
 	 */
 	public boolean isEMFValidationAvailable() {
 		try {
@@ -78,7 +79,7 @@ public class TestpropertiesRuntimeUtil {
 		if (!isEclipsePlatformAvailable()) {
 			return false;
 		}
-		return org.eclipse.core.runtime.Platform.isRunning();
+		return Platform.isRunning();
 	}
 	
 }

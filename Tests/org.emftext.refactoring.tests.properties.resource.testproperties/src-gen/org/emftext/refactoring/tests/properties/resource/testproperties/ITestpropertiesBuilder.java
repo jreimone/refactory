@@ -6,6 +6,10 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.URI;
+
 /**
  * An interface for builders that can be used to perform operations when resources
  * are changed and saved. This is an abstraction over the Eclipse builder API that
@@ -19,16 +23,16 @@ public interface ITestpropertiesBuilder {
 	 * loaded. If this method returns false, the build() method will not be invoked
 	 * for the resource located at the given URI.
 	 */
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri);
+	public boolean isBuildingNeeded(URI uri);
 	
 	/**
 	 * Builds the given resource.
 	 */
-	public org.eclipse.core.runtime.IStatus build(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource resource, org.eclipse.core.runtime.IProgressMonitor monitor);
+	public IStatus build(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource resource, IProgressMonitor monitor);
 	
 	/**
 	 * Handles the deletion of the given resource.
 	 */
-	public org.eclipse.core.runtime.IStatus handleDeletion(org.eclipse.emf.common.util.URI uri, org.eclipse.core.runtime.IProgressMonitor monitor);
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor);
 	
 }

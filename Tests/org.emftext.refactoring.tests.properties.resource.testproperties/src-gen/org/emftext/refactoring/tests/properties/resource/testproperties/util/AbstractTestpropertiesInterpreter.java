@@ -6,6 +6,22 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
+import org.eclipse.emf.ecore.EObject;
+import org.emftext.refactoring.tests.properties.Category;
+import org.emftext.refactoring.tests.properties.EObjectReferenceValue;
+import org.emftext.refactoring.tests.properties.Key;
+import org.emftext.refactoring.tests.properties.KeyValuePair;
+import org.emftext.refactoring.tests.properties.PropertyModel;
+import org.emftext.refactoring.tests.properties.StringValue;
+import org.emftext.refactoring.tests.properties.Value;
+
 /**
  * This class provides basic infrastructure to interpret models. To implement
  * concrete interpreters, subclass this abstract interpreter and override the
@@ -20,19 +36,19 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.util;
  */
 public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 	
-	private java.util.Stack<org.eclipse.emf.ecore.EObject> interpretationStack = new java.util.Stack<org.eclipse.emf.ecore.EObject>();
-	private java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesInterpreterListener> listeners = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesInterpreterListener>();
-	private org.eclipse.emf.ecore.EObject nextObjectToInterprete;
-	private Object currentContext;
+	private Stack<EObject> interpretationStack = new Stack<EObject>();
+	private List<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesInterpreterListener> listeners = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesInterpreterListener>();
+	private EObject nextObjectToInterprete;
+	private ContextType currentContext;
 	
 	public ResultType interprete(ContextType context) {
 		ResultType result = null;
-		org.eclipse.emf.ecore.EObject next = null;
+		EObject next = null;
 		currentContext = context;
 		while (!interpretationStack.empty()) {
 			try {
 				next = interpretationStack.pop();
-			} catch (java.util.EmptyStackException ese) {
+			} catch (EmptyStackException ese) {
 				// this can happen when the interpreter was terminated between the call to empty()
 				// and pop()
 				break;
@@ -56,7 +72,7 @@ public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 		return true;
 	}
 	
-	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
+	public ResultType interprete(EObject object, ContextType context) {
 		ResultType result = null;
 		if (object instanceof org.emftext.refactoring.tests.properties.PropertyModel) {
 			result = interprete_org_emftext_refactoring_tests_properties_PropertyModel((org.emftext.refactoring.tests.properties.PropertyModel) object, context);
@@ -103,35 +119,35 @@ public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 		return result;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_PropertyModel(org.emftext.refactoring.tests.properties.PropertyModel propertyModel, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_PropertyModel(PropertyModel propertyModel, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_Category(org.emftext.refactoring.tests.properties.Category category, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_Category(Category category, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_Value(org.emftext.refactoring.tests.properties.Value value, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_Value(Value value, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_KeyValuePair(org.emftext.refactoring.tests.properties.KeyValuePair keyValuePair, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_KeyValuePair(KeyValuePair keyValuePair, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_Key(org.emftext.refactoring.tests.properties.Key key, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_Key(Key key, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_EObjectReferenceValue(org.emftext.refactoring.tests.properties.EObjectReferenceValue eObjectReferenceValue, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_EObjectReferenceValue(EObjectReferenceValue eObjectReferenceValue, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_emftext_refactoring_tests_properties_StringValue(org.emftext.refactoring.tests.properties.StringValue stringValue, ContextType context) {
+	public ResultType interprete_org_emftext_refactoring_tests_properties_StringValue(StringValue stringValue, ContextType context) {
 		return null;
 	}
 	
-	private void notifyListeners(org.eclipse.emf.ecore.EObject element) {
+	private void notifyListeners(EObject element) {
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesInterpreterListener listener : listeners) {
 			listener.handleInterpreteObject(element);
 		}
@@ -141,7 +157,7 @@ public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 	 * Adds the given object to the interpretation stack. Attention: Objects that are
 	 * added first, are interpret last.
 	 */
-	public void addObjectToInterprete(org.eclipse.emf.ecore.EObject object) {
+	public void addObjectToInterprete(EObject object) {
 		interpretationStack.push(object);
 	}
 	
@@ -149,8 +165,8 @@ public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 	 * Adds the given collection of objects to the interpretation stack. Attention:
 	 * Collections that are added first, are interpret last.
 	 */
-	public void addObjectsToInterprete(java.util.Collection<? extends org.eclipse.emf.ecore.EObject> objects) {
-		for (org.eclipse.emf.ecore.EObject object : objects) {
+	public void addObjectsToInterprete(Collection<? extends EObject> objects) {
+		for (EObject object : objects) {
 			addObjectToInterprete(object);
 		}
 	}
@@ -159,10 +175,10 @@ public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 	 * Adds the given collection of objects in reverse order to the interpretation
 	 * stack.
 	 */
-	public void addObjectsToInterpreteInReverseOrder(java.util.Collection<? extends org.eclipse.emf.ecore.EObject> objects) {
-		java.util.List<org.eclipse.emf.ecore.EObject> reverse = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>(objects.size());
+	public void addObjectsToInterpreteInReverseOrder(Collection<? extends EObject> objects) {
+		List<EObject> reverse = new ArrayList<EObject>(objects.size());
 		reverse.addAll(objects);
-		java.util.Collections.reverse(reverse);
+		Collections.reverse(reverse);
 		addObjectsToInterprete(reverse);
 	}
 	
@@ -170,12 +186,12 @@ public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 	 * Adds the given object and all its children to the interpretation stack such
 	 * that they are interpret in top down order.
 	 */
-	public void addObjectTreeToInterpreteTopDown(org.eclipse.emf.ecore.EObject root) {
-		java.util.List<org.eclipse.emf.ecore.EObject> objects = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+	public void addObjectTreeToInterpreteTopDown(EObject root) {
+		List<EObject> objects = new ArrayList<EObject>();
 		objects.add(root);
-		java.util.Iterator<org.eclipse.emf.ecore.EObject> it = root.eAllContents();
+		Iterator<EObject> it = root.eAllContents();
 		while (it.hasNext()) {
-			org.eclipse.emf.ecore.EObject eObject = (org.eclipse.emf.ecore.EObject) it.next();
+			EObject eObject = (EObject) it.next();
 			objects.add(eObject);
 		}
 		addObjectsToInterpreteInReverseOrder(objects);
@@ -189,11 +205,11 @@ public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 		return listeners.remove(listener);
 	}
 	
-	public org.eclipse.emf.ecore.EObject getNextObjectToInterprete() {
+	public EObject getNextObjectToInterprete() {
 		return nextObjectToInterprete;
 	}
 	
-	public java.util.Stack<org.eclipse.emf.ecore.EObject> getInterpretationStack() {
+	public Stack<EObject> getInterpretationStack() {
 		return interpretationStack;
 	}
 	
@@ -201,7 +217,7 @@ public class AbstractTestpropertiesInterpreter<ResultType, ContextType> {
 		interpretationStack.clear();
 	}
 	
-	public Object getCurrentContext() {
+	public ContextType getCurrentContext() {
 		return currentContext;
 	}
 	

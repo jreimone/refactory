@@ -6,10 +6,12 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+import org.eclipse.jface.action.IAction;
+
 public class TestpropertiesOutlinePageCollapseAllAction extends org.emftext.refactoring.tests.properties.resource.testproperties.ui.AbstractTestpropertiesOutlinePageAction {
 	
 	public TestpropertiesOutlinePageCollapseAllAction(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesOutlinePageTreeViewer treeViewer) {
-		super(treeViewer, "Collapse all", org.eclipse.jface.action.IAction.AS_PUSH_BUTTON);
+		super(treeViewer, "Collapse all", IAction.AS_PUSH_BUTTON);
 		initialize("icons/collapse_all_icon.gif");
 	}
 	

@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+
 /**
  * A provider for BracketHandler objects.
  */

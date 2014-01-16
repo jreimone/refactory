@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+
 public class TestpropertiesResourcePostProcessor implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourcePostProcessor {
 	
 	public void process(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource resource) {

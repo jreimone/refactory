@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+
 /**
  * A basic implementation of the
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties

@@ -6,6 +6,12 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Collection;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.Resource.Factory;
+
 public class TestpropertiesMetaInformation implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesMetaInformation {
 	
 	public String getSyntaxName() {
@@ -20,19 +26,19 @@ public class TestpropertiesMetaInformation implements org.emftext.refactoring.te
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesAntlrScanner(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLexer());
 	}
 	
-	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextParser createParser(java.io.InputStream inputStream, String encoding) {
+	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextParser createParser(InputStream inputStream, String encoding) {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesParser().createInstance(inputStream, encoding);
 	}
 	
-	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter createPrinter(java.io.OutputStream outputStream, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource) {
+	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter createPrinter(OutputStream outputStream, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource) {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesPrinter2(outputStream, resource);
 	}
 	
-	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax() {
+	public EClass[] getClassesWithSyntax() {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesSyntaxCoverageInformationProvider().getClassesWithSyntax();
 	}
 	
-	public org.eclipse.emf.ecore.EClass[] getStartSymbols() {
+	public EClass[] getStartSymbols() {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesSyntaxCoverageInformationProvider().getStartSymbols();
 	}
 	
@@ -56,15 +62,15 @@ public class TestpropertiesMetaInformation implements org.emftext.refactoring.te
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTokenStyleInformationProvider().getDefaultTokenStyle(tokenName);
 	}
 	
-	public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair> getBracketPairs() {
+	public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBracketPair> getBracketPairs() {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesBracketInformationProvider().getBracketPairs();
 	}
 	
-	public org.eclipse.emf.ecore.EClass[] getFoldableClasses() {
+	public EClass[] getFoldableClasses() {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesFoldingInformationProvider().getFoldableClasses();
 	}
 	
-	public org.eclipse.emf.ecore.resource.Resource.Factory createResourceFactory() {
+	public Factory createResourceFactory() {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResourceFactory();
 	}
 	
@@ -74,8 +80,8 @@ public class TestpropertiesMetaInformation implements org.emftext.refactoring.te
 	
 	public void registerResourceFactory() {
 		// if no resource factory registered, register delegator
-		if (org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(getSyntaxName()) == null) {
-			org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(getSyntaxName(), new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResourceFactoryDelegator());
+		if (Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(getSyntaxName()) == null) {
+			Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(getSyntaxName(), new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResourceFactoryDelegator());
 		}
 	}
 	

@@ -6,6 +6,10 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * A representation for a range in a document where a boolean attribute is
  * expected.
@@ -30,7 +34,7 @@ public class TestpropertiesExpectedBooleanTerminal extends org.emftext.refactori
 		return booleanTerminal;
 	}
 	
-	private org.eclipse.emf.ecore.EStructuralFeature getFeature() {
+	private EStructuralFeature getFeature() {
 		return booleanTerminal.getFeature();
 	}
 	
@@ -45,14 +49,14 @@ public class TestpropertiesExpectedBooleanTerminal extends org.emftext.refactori
 		return false;
 	}
 	
-	@Override	
+	@Override
 	public int hashCode() {
 		return getFeature().hashCode();
 	}
 	
-	public java.util.Set<String> getTokenNames() {
+	public Set<String> getTokenNames() {
 		// BooleanTerminals are associated with two or one token(s)
-		java.util.Set<String> tokenNames = new java.util.LinkedHashSet<String>(2);
+		Set<String> tokenNames = new LinkedHashSet<String>(2);
 		String trueLiteral = booleanTerminal.getTrueLiteral();
 		if (!"".equals(trueLiteral)) {
 			tokenNames.add("'" + trueLiteral + "'");

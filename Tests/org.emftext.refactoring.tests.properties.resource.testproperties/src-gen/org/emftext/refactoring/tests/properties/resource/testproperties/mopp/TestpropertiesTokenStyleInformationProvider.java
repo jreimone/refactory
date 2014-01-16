@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+
 public class TestpropertiesTokenStyleInformationProvider {
 	
 	public static String TASK_ITEM_TOKEN_NAME = "TASK_ITEM";

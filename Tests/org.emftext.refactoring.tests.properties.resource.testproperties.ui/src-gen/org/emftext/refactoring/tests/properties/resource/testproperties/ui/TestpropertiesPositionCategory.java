@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+
 /**
  * An enumeration of all position categories.
  */

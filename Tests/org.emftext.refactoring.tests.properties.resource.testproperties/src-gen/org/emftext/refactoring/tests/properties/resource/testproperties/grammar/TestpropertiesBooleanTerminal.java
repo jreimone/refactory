@@ -6,6 +6,9 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * A class to represent boolean terminals in a grammar.
  */
@@ -14,9 +17,9 @@ public class TestpropertiesBooleanTerminal extends org.emftext.refactoring.tests
 	private String trueLiteral;
 	private String falseLiteral;
 	
-	public TestpropertiesBooleanTerminal(org.eclipse.emf.ecore.EStructuralFeature attribute, String trueLiteral, String falseLiteral, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality cardinality, int mandatoryOccurrencesAfter) {
+	public TestpropertiesBooleanTerminal(EStructuralFeature attribute, String trueLiteral, String falseLiteral, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality cardinality, int mandatoryOccurrencesAfter) {
 		super(attribute, cardinality, mandatoryOccurrencesAfter);
-		assert attribute instanceof org.eclipse.emf.ecore.EAttribute;
+		assert attribute instanceof EAttribute;
 		this.trueLiteral = trueLiteral;
 		this.falseLiteral = falseLiteral;
 	}
@@ -29,8 +32,8 @@ public class TestpropertiesBooleanTerminal extends org.emftext.refactoring.tests
 		return falseLiteral;
 	}
 	
-	public org.eclipse.emf.ecore.EAttribute getAttribute() {
-		return (org.eclipse.emf.ecore.EAttribute) getFeature();
+	public EAttribute getAttribute() {
+		return (EAttribute) getFeature();
 	}
 	
 }

@@ -6,24 +6,29 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
+
 public class TestpropertiesBuilder implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesBuilder {
 	
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		// change this to return true to enable building of all resources
 		return false;
 	}
 	
-	public org.eclipse.core.runtime.IStatus build(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public IStatus build(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResource resource, IProgressMonitor monitor) {
 		// set option overrideBuilder to 'false' and then perform build here
-		return org.eclipse.core.runtime.Status.OK_STATUS;
+		return Status.OK_STATUS;
 	}
 	
 	/**
 	 * Handles the deletion of the given resource.
 	 */
-	public org.eclipse.core.runtime.IStatus handleDeletion(org.eclipse.emf.common.util.URI uri, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
 		// by default nothing is done when a resource is deleted
-		return org.eclipse.core.runtime.Status.OK_STATUS;
+		return Status.OK_STATUS;
 	}
 	
 }

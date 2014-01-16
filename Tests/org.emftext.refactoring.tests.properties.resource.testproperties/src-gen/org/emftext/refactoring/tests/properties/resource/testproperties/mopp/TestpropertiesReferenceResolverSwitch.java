@@ -6,12 +6,19 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 public class TestpropertiesReferenceResolverSwitch implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolverSwitch {
 	
 	/**
 	 * This map stores a copy of the options the were set for loading the resource.
 	 */
-	private java.util.Map<Object, Object> options;
+	private Map<Object, Object> options;
 	
 	protected org.emftext.refactoring.tests.properties.resource.testproperties.analysis.EObjectReferenceValueObjectReferenceReferenceResolver eObjectReferenceValueObjectReferenceReferenceResolver = new org.emftext.refactoring.tests.properties.resource.testproperties.analysis.EObjectReferenceValueObjectReferenceReferenceResolver();
 	
@@ -19,37 +26,37 @@ public class TestpropertiesReferenceResolverSwitch implements org.emftext.refact
 		return getResolverChain(org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getEObjectReferenceValue_ObjectReference(), eObjectReferenceValueObjectReferenceReferenceResolver);
 	}
 	
-	public void setOptions(java.util.Map<?, ?> options) {
+	public void setOptions(Map<?, ?> options) {
 		if (options != null) {
-			this.options = new java.util.LinkedHashMap<Object, Object>();
+			this.options = new LinkedHashMap<Object, Object>();
 			this.options.putAll(options);
 		}
 		eObjectReferenceValueObjectReferenceReferenceResolver.setOptions(options);
 	}
 	
-	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolveFuzzy(String identifier, EObject container, EReference reference, int position, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<EObject> result) {
 		if (container == null) {
 			return;
 		}
 		if (org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getEObjectReferenceValue().isInstance(container)) {
 			TestpropertiesFuzzyResolveResult<org.eclipse.emf.ecore.EObject> frr = new TestpropertiesFuzzyResolveResult<org.eclipse.emf.ecore.EObject>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("objectReference")) {
-				eObjectReferenceValueObjectReferenceReferenceResolver.resolve(identifier, (org.emftext.refactoring.tests.properties.EObjectReferenceValue) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("objectReference")) {
+				eObjectReferenceValueObjectReferenceReferenceResolver.resolve(identifier, (org.emftext.refactoring.tests.properties.EObjectReferenceValue) container, (EReference) feature, position, true, frr);
 			}
 		}
 	}
 	
-	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolver<? extends org.eclipse.emf.ecore.EObject, ? extends org.eclipse.emf.ecore.EObject> getResolver(org.eclipse.emf.ecore.EStructuralFeature reference) {
+	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolver<? extends EObject, ? extends EObject> getResolver(EStructuralFeature reference) {
 		if (reference == org.emftext.refactoring.tests.properties.PropertiesPackage.eINSTANCE.getEObjectReferenceValue_ObjectReference()) {
 			return getResolverChain(reference, eObjectReferenceValueObjectReferenceReferenceResolver);
 		}
 		return null;
 	}
 	
-	@SuppressWarnings({"rawtypes", "unchecked"})	
-	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolver<ContainerType, ReferenceType> getResolverChain(org.eclipse.emf.ecore.EStructuralFeature reference, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolver<ContainerType, ReferenceType> originalResolver) {
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public <ContainerType extends EObject, ReferenceType extends EObject> org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolver<ContainerType, ReferenceType> getResolverChain(EStructuralFeature reference, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolver<ContainerType, ReferenceType> originalResolver) {
 		if (options == null) {
 			return originalResolver;
 		}
@@ -57,12 +64,12 @@ public class TestpropertiesReferenceResolverSwitch implements org.emftext.refact
 		if (value == null) {
 			return originalResolver;
 		}
-		if (!(value instanceof java.util.Map)) {
+		if (!(value instanceof Map)) {
 			// send this to the error log
-			new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesRuntimeUtil().logWarning("Found value with invalid type for option " + org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.ADDITIONAL_REFERENCE_RESOLVERS + " (expected " + java.util.Map.class.getName() + ", but was " + value.getClass().getName() + ")", null);
+			new org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesRuntimeUtil().logWarning("Found value with invalid type for option " + org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.ADDITIONAL_REFERENCE_RESOLVERS + " (expected " + Map.class.getName() + ", but was " + value.getClass().getName() + ")", null);
 			return originalResolver;
 		}
-		java.util.Map<?,?> resolverMap = (java.util.Map<?,?>) value;
+		Map<?,?> resolverMap = (Map<?,?>) value;
 		Object resolverValue = resolverMap.get(reference);
 		if (resolverValue == null) {
 			return originalResolver;
@@ -74,8 +81,8 @@ public class TestpropertiesReferenceResolverSwitch implements org.emftext.refact
 				((org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesDelegatingReferenceResolver) replacingResolver).setDelegate(originalResolver);
 			}
 			return replacingResolver;
-		} else if (resolverValue instanceof java.util.Collection) {
-			java.util.Collection replacingResolvers = (java.util.Collection) resolverValue;
+		} else if (resolverValue instanceof Collection) {
+			Collection replacingResolvers = (Collection) resolverValue;
 			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolver replacingResolver = originalResolver;
 			for (Object next : replacingResolvers) {
 				if (next instanceof org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceCache) {

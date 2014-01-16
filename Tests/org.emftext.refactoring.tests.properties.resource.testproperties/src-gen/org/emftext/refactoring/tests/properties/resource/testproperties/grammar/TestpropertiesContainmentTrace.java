@@ -6,6 +6,9 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * A TestpropertiesContainmentTrace represents a specific path to a structural
  * feature by navigating over a set of a structural feature from a start class.
@@ -18,19 +21,19 @@ public class TestpropertiesContainmentTrace {
 	/**
 	 * The class where the trace starts.
 	 */
-	private org.eclipse.emf.ecore.EClass startClass;
+	private EClass startClass;
 	
 	/**
 	 * The path of contained features.
 	 */
 	private org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature[] path;
 	
-	public TestpropertiesContainmentTrace(org.eclipse.emf.ecore.EClass startClass, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature[] path) {
+	public TestpropertiesContainmentTrace(EClass startClass, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature[] path) {
 		super();
 		// Verify arguments
 		if (startClass != null) {
 			if (path.length > 0) {
-				org.eclipse.emf.ecore.EStructuralFeature feature = path[path.length - 1].getFeature();
+				EStructuralFeature feature = path[path.length - 1].getFeature();
 				if (!startClass.getEAllStructuralFeatures().contains(feature)) {
 					throw new RuntimeException("Metaclass " + startClass.getName() + " must contain feature " + feature.getName());
 				}
@@ -40,7 +43,7 @@ public class TestpropertiesContainmentTrace {
 		this.path = path;
 	}
 	
-	public org.eclipse.emf.ecore.EClass getStartClass() {
+	public EClass getStartClass() {
 		return startClass;
 	}
 	

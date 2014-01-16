@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui.launch;
 
+
 /**
  * A class that provides the main tab to parameterize launch configurations
  * (currently disabled).

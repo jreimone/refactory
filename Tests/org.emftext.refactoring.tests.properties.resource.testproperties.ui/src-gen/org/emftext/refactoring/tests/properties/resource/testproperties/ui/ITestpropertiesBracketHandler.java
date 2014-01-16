@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+
 /**
  * The BracketHandler is responsible for handling the input of brackets. It
  * automatically adds closing brackets, if the opening counterpart is entered in

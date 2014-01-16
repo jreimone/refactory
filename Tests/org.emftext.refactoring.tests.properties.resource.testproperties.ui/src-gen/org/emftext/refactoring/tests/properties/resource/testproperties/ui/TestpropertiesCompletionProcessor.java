@@ -6,7 +6,20 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
-public class TestpropertiesCompletionProcessor implements org.eclipse.jface.text.contentassist.IContentAssistProcessor {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.contentassist.CompletionProposal;
+import org.eclipse.jface.text.contentassist.ContextInformation;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.contentassist.IContextInformation;
+import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.swt.graphics.Image;
+
+public class TestpropertiesCompletionProcessor implements IContentAssistProcessor {
 	
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider resourceProvider;
 	
@@ -15,10 +28,10 @@ public class TestpropertiesCompletionProcessor implements org.eclipse.jface.text
 		this.resourceProvider = resourceProvider;
 	}
 	
-	public org.eclipse.jface.text.contentassist.ICompletionProposal[] computeCompletionProposals(org.eclipse.jface.text.ITextViewer viewer, int offset) {
+	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource textResource = resourceProvider.getResource();
 		if (textResource == null) {
-			return new org.eclipse.jface.text.contentassist.ICompletionProposal[0];
+			return new ICompletionProposal[0];
 		}
 		String content = viewer.getDocument().get();
 		org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCodeCompletionHelper helper = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCodeCompletionHelper();
@@ -26,34 +39,34 @@ public class TestpropertiesCompletionProcessor implements org.eclipse.jface.text
 		
 		// call completion proposal post processor to allow for customizing the proposals
 		org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesProposalPostProcessor proposalPostProcessor = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesProposalPostProcessor();
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> computedProposalList = java.util.Arrays.asList(computedProposals);
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> extendedProposalList = proposalPostProcessor.process(computedProposalList);
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> computedProposalList = Arrays.asList(computedProposals);
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> extendedProposalList = proposalPostProcessor.process(computedProposalList);
 		if (extendedProposalList == null) {
-			extendedProposalList = java.util.Collections.emptyList();
+			extendedProposalList = Collections.emptyList();
 		}
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> finalProposalList = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> finalProposalList = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal : extendedProposalList) {
 			if (proposal.isMatchesPrefix()) {
 				finalProposalList.add(proposal);
 			}
 		}
-		org.eclipse.jface.text.contentassist.ICompletionProposal[] result = new org.eclipse.jface.text.contentassist.ICompletionProposal[finalProposalList.size()];
+		ICompletionProposal[] result = new ICompletionProposal[finalProposalList.size()];
 		int i = 0;
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal : finalProposalList) {
 			String proposalString = proposal.getInsertString();
 			String displayString = (proposal.getDisplayString()==null)?proposalString:proposal.getDisplayString();
 			String prefix = proposal.getPrefix();
-			org.eclipse.swt.graphics.Image image = proposal.getImage();
-			org.eclipse.jface.text.contentassist.IContextInformation info;
-			info = new org.eclipse.jface.text.contentassist.ContextInformation(image, displayString, proposalString);
+			Image image = proposal.getImage();
+			IContextInformation info;
+			info = new ContextInformation(image, displayString, proposalString);
 			int begin = offset - prefix.length();
 			int replacementLength = prefix.length();
-			result[i++] = new org.eclipse.jface.text.contentassist.CompletionProposal(proposalString, begin, replacementLength, proposalString.length(), image, displayString, info, proposalString);
+			result[i++] = new CompletionProposal(proposalString, begin, replacementLength, proposalString.length(), image, displayString, info, proposalString);
 		}
 		return result;
 	}
 	
-	public org.eclipse.jface.text.contentassist.IContextInformation[] computeContextInformation(org.eclipse.jface.text.ITextViewer viewer, int offset) {
+	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
 		return null;
 	}
 	
@@ -65,7 +78,7 @@ public class TestpropertiesCompletionProcessor implements org.eclipse.jface.text
 		return null;
 	}
 	
-	public org.eclipse.jface.text.contentassist.IContextInformationValidator getContextInformationValidator() {
+	public IContextInformationValidator getContextInformationValidator() {
 		return null;
 	}
 	

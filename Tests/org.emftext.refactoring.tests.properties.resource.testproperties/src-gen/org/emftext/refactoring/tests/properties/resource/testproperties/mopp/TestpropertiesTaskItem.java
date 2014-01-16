@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+
 public class TestpropertiesTaskItem {
 	
 	private String keyword;

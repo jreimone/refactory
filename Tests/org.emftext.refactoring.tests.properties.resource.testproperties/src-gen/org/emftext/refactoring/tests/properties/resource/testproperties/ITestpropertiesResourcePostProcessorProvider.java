@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+
 /**
  * Implementors of this interface can provide a post-processor for text resources.
  */

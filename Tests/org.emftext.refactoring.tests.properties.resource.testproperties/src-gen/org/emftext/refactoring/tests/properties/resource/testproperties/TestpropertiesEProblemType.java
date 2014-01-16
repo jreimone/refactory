@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+
 public enum TestpropertiesEProblemType {
 	SYNTAX_ERROR, PRINT_PROBLEM, UNRESOLVED_REFERENCE, ANALYSIS_PROBLEM, BATCH_CONSTRAINT_PROBLEM, LIVE_CONSTRAINT_PROBLEM, BUILDER_ERROR, UNKNOWN, ;
 	

@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+
 /**
  * A list of constants that contains the keys for some options that are built into
  * EMFText. Generated resource plug-ins do automatically recognize these options
@@ -67,6 +68,13 @@ public interface ITestpropertiesOptions {
 	 * computed during printing and the original layout is not preserved.
 	 */
 	public final String DISABLE_LAYOUT_INFORMATION_RECORDING = "DISABLE_LAYOUT_INFORMATION_RECORDING";
+	
+	/**
+	 * The key for the option to disable EMF validation when loading resources. If
+	 * this option is set to <code>true</code>, the EMF validation framework is not
+	 * invoked.
+	 */
+	public final String DISABLE_EMF_VALIDATION = "DISABLE_EMF_VALIDATION";
 	
 	/**
 	 * The key for the option to set the encoding to use when loading or saving

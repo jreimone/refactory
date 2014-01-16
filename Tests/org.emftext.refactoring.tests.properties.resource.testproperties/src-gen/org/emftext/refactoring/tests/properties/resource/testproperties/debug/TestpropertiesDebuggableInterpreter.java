@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.debug;
 
+
 /**
  * A DebuggableInterpreter is a facade for interpreters that adds debug support.
  */

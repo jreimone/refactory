@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties;
 
+import org.eclipse.emf.common.util.URI;
+
 /**
  * Implementors of this interface map identifiers to URIs. This is sometimes
  * necessary when resolving references depends on the resolution of others.
@@ -21,6 +23,6 @@ public interface ITestpropertiesURIMapping<ReferenceType> extends org.emftext.re
 	 * such that it can be resolved by the default resolution mechanism that will be
 	 * called on this URI (see <code>Resource.getEObject()</code>).
 	 */
-	public org.eclipse.emf.common.util.URI getTargetIdentifier();
+	public URI getTargetIdentifier();
 	
 }
