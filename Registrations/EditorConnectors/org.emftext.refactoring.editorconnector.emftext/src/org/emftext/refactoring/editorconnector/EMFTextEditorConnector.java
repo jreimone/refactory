@@ -56,6 +56,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 	}
 
 	public List<EObject> handleSelection(ISelection selection) {
+		// TODO jreimann: this method can be used for DD OCL to determine the real model elements instead of the CS elements
 		if(editor == null){
 			return null;
 		}
