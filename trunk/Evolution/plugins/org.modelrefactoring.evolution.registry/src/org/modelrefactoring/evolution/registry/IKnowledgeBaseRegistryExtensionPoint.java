@@ -7,6 +7,6 @@ package org.modelrefactoring.evolution.registry;
  */
 public interface IKnowledgeBaseRegistryExtensionPoint {
 
-	public static final String ID		= "org.qualitune.evolution.knowledgebase";
+	public static final String ID		= "org.modelrefactoring.evolution.knowledgebase";
 	public static final String ATT_IMPL	= "implementation";
 }

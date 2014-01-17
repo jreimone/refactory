@@ -3,7 +3,7 @@
 <schema targetNamespace="org.modelrefactoring.evolution.registry" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.modelrefactoring.evolution.registry" id="org.qualitune.evolution.knowledgebase" name="knowledgebase"/>
+         <meta.schema plugin="org.modelrefactoring.evolution.registry" id="org.modelrefactoring.evolution.knowledgebase" name="knowledgebase"/>
       </appinfo>
       <documentation>
          This extension point is used to register differnet knowledge base techniques.

@@ -21,12 +21,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.qualitune.guery.resource.guery.builder</name>
+			<name>org.modelrefactoring.guery.resource.guery.builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.qualitune.guery.resource.guery.taskItemBuilder</name>
+			<name>org.modelrefactoring.guery.resource.guery.taskItemBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -39,7 +39,7 @@
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.qualitune.guery.resource.guery.nature</nature>
+		<nature>org.modelrefactoring.guery.resource.guery.nature</nature>
 		<nature>org.modelrefactoring.guery.resource.guery.nature</nature>
 	</natures>
 </projectDescription>
