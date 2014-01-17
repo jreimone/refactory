@@ -52,7 +52,7 @@ import org.osgi.framework.Bundle;
 public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 
 	private static final String MEGAMODEL_FILE	= "megamodel.cods";
-	public static final String MEGAMODEL_STRING	= "http://qualitune.org/" + MEGAMODEL_FILE;
+	public static final String MEGAMODEL_STRING	= "http://modelrefactoring.org/" + MEGAMODEL_FILE;
 	public static final URI MEGAMODEL_URI		= URI.createURI(MEGAMODEL_STRING);
 
 //	@Inject

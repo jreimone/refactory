@@ -20,14 +20,14 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.qualitune.org/megamodel/cods"
+            uri="http://www.modelrefactoring.org/megamodel/cods"
             class="org.modelrefactoring.evolution.megamodel.cods.CodsPackage"
             genModel="metamodel/cods.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.qualitune.org/megamodel/architecture"
+            uri="http://www.modelrefactoring.org/megamodel/architecture"
             class="org.modelrefactoring.evolution.megamodel.architecture.ArchitecturePackage"
             genModel="metamodel/cods.genmodel"/>
    </extension>

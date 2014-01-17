@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="org.qualitune.evolution.knowledgebase" name="knowledgebase" schema="schema/org.qualitune.evolution.knowledgebase.exsd"/>
+   <extension-point id="org.modelrefactoring.evolution.knowledgebase" name="knowledgebase" schema="schema/org.modelrefactoring.evolution.knowledgebase.exsd"/>
 
 </plugin>

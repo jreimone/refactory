@@ -4,7 +4,7 @@ Bundle-Name: Generator for Prolog fact base
 Bundle-SymbolicName: org.modelrefactoring.evolution.prolog;singleton:=true
 Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: org.modelrefactoring.evolution.prolog.PrologGeneratorPlugin
-Bundle-Vendor: qualitune.org
+Bundle-Vendor: modelrefactoring.org
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.modelrefactoring.tuprolog,

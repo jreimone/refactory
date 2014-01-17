@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.qualitune.evolution.knowledgebase">
+         point="org.modelrefactoring.evolution.knowledgebase">
       <knowledgebase
             implementation="org.modelrefactoring.evolution.prolog.impl.PrologKnowledgeBase">
       </knowledgebase>

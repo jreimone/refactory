@@ -4,7 +4,7 @@ Bundle-Name: Registry for knowledge bases
 Bundle-SymbolicName: org.modelrefactoring.evolution.registry;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.modelrefactoring.evolution.registry.Activator
-Bundle-Vendor: www.qualitune.org
+Bundle-Vendor: www.modelrefactoring.org
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: tuProlog Wrapper Plugin
 Bundle-SymbolicName: org.modelrefactoring.tuprolog
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: qualitune.org
+Bundle-Vendor: modelrefactoring.org
 Export-Package: alice.tuprolog,
  alice.tuprolog.event,
  alice.tuprolog.interfaces,

@@ -4,7 +4,7 @@ Bundle-Name: UI stuff for evolution
 Bundle-SymbolicName: org.modelrefactoring.evolution.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.modelrefactoring.evolution.ui.Activator
-Bundle-Vendor: qualitune.org
+Bundle-Vendor: modelrefactoring.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,

@@ -161,7 +161,7 @@ public class AbstractModelView extends ViewPart {
 
 	public CODS getMegaModel() {
 		if(megaModel == null){
-			URI createURI = URI.createURI("http://qualitune.org/megamodel.cods");
+			URI createURI = URI.createURI("http://modelrefactoring.org/megamodel.cods");
 			ResourceSet rs = new ResourceSetImpl();
 			Resource resource = rs.getResource(createURI, true);
 			megaModel = (CODS) resource.getContents().get(0);
