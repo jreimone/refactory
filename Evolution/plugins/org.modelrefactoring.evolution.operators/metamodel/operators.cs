@@ -1,5 +1,5 @@
 SYNTAXDEF operators
-FOR <http://www.qualitune.org/operators>
+FOR <http://www.modelrefactoring.org/operators>
 START 
 //	CREATE
 //	,DELETE

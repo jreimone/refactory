@@ -1,4 +1,4 @@
-package org.qualitune.evolution.operators.custom;
+package org.modelrefactoring.evolution.operators.custom;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -10,18 +10,18 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.qualitune.evolution.operators.EObjectReference;
-import org.qualitune.evolution.operators.EOperationQualifier;
-import org.qualitune.evolution.operators.EStructuralFeatureQualifier;
-import org.qualitune.evolution.operators.OperatorsFactory;
-import org.qualitune.evolution.operators.QueryVariable;
-import org.qualitune.evolution.operators.QueryVariableQualifier;
-import org.qualitune.evolution.operators.Referrable;
-import org.qualitune.evolution.operators.Result;
-import org.qualitune.evolution.operators.TypeVariable;
-import org.qualitune.evolution.operators.Variable;
-import org.qualitune.evolution.operators.VariableReference;
-import org.qualitune.evolution.operators.impl.VARImpl;
+import org.modelrefactoring.evolution.operators.EObjectReference;
+import org.modelrefactoring.evolution.operators.EOperationQualifier;
+import org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier;
+import org.modelrefactoring.evolution.operators.OperatorsFactory;
+import org.modelrefactoring.evolution.operators.QueryVariable;
+import org.modelrefactoring.evolution.operators.QueryVariableQualifier;
+import org.modelrefactoring.evolution.operators.Referrable;
+import org.modelrefactoring.evolution.operators.Result;
+import org.modelrefactoring.evolution.operators.TypeVariable;
+import org.modelrefactoring.evolution.operators.Variable;
+import org.modelrefactoring.evolution.operators.VariableReference;
+import org.modelrefactoring.evolution.operators.impl.VARImpl;
 
 
 public class VARCustom extends VARImpl {

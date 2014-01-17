@@ -1,4 +1,4 @@
-package org.qualitune.evolution.operators.util;
+package org.modelrefactoring.evolution.operators.util;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +15,8 @@ import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.model.IModelConstraint;
 import org.eclipse.emf.validation.service.AbstractConstraintDescriptor;
 import org.eclipse.emf.validation.service.IConstraintDescriptor;
-import org.qualitune.evolution.operators.Operator;
+import org.modelrefactoring.evolution.operators.Operator;
+import org.modelrefactoring.evolution.operators.util.OperatorsValidator;
 
 public class OCLConstraintProvider extends AbstractModelConstraint implements IModelConstraint{
 	
@@ -68,7 +69,7 @@ public class OCLConstraintProvider extends AbstractModelConstraint implements IM
 			}
 			
 			public String getPluginId() {
-				return "org.qualitune.evolution.operators.";
+				return "org.modelrefactoring.evolution.operators.";
 			}
 			
 			public String getName() {

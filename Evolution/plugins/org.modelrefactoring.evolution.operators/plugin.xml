@@ -22,8 +22,8 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.qualitune.org/operators"
-            class="org.qualitune.evolution.operators.OperatorsPackage"
+            uri="http://www.modelrefactoring.org/operators"
+            class="org.modelrefactoring.evolution.operators.OperatorsPackage"
             genModel="metamodel/operators.genmodel"/>
    </extension>
    <extension
@@ -37,12 +37,12 @@
     <constraintProvider
           cache="true"
           mode="Live">
-         <package namespaceUri="http://www.qualitune.org/operators" />
+         <package namespaceUri="http://www.modelrefactoring.org/operators" />
          
          <constraints categories="org.emftext.language.refactoring.specification.category2">
 
             <constraint
-                  class="org.qualitune.evolution.operators.util.OCLConstraintProvider"
+                  class="org.modelrefactoring.evolution.operators.util.OCLConstraintProvider"
                   id="org.emftext.language.refactoring.specification.uniqueNameConstraint1"
                   lang="Java"
                   mode="Live"
@@ -64,7 +64,7 @@
           default="false"
           id="org.emftext.language.refactoring.specification.clientContext2">
        <selector
-             class="org.qualitune.evolution.operators.ClientSelector1">
+             class="org.modelrefactoring.evolution.operators.ClientSelector1">
        </selector>
 	</clientContext>
     <binding
@@ -76,7 +76,7 @@
    <extension
          point="org.eclipse.emf.validation.constraintProviders">
       <category
-            id="org.qualitune.evolution.operators.category.ocl"
+            id="org.modelrefactoring.evolution.operators.category.ocl"
             mandatory="true"
             name="Operators OCL constraints">
       </category>
@@ -84,13 +84,13 @@
             cache="true"
             mode="Batch">
          <package
-               namespaceUri="http://www.qualitune.org/operators">
+               namespaceUri="http://www.modelrefactoring.org/operators">
          </package>
          <constraints
-               categories="org.qualitune.evolution.operators.category.ocl">
+               categories="org.modelrefactoring.evolution.operators.category.ocl">
             <constraint
-                  class="org.qualitune.evolution.operators.util.OCLConstraintProvider"
-                  id="org.qualitune.evolution.operators.oclconstraintWrapper"
+                  class="org.modelrefactoring.evolution.operators.util.OCLConstraintProvider"
+                  id="org.modelrefactoring.evolution.operators.oclconstraintWrapper"
                   lang="Java"
                   mode="Batch"
                   name="Constraint which wraps the defined OCL constraints"
@@ -109,15 +109,15 @@
          point="org.eclipse.emf.validation.constraintBindings">
       <clientContext
             default="false"
-            id="org.qualitune.evolution.operators.oclclientContext">
+            id="org.modelrefactoring.evolution.operators.oclclientContext">
          <enablement>
             <instanceof
                   value="org.eclipse.emf.ecore.EObject">
             </instanceof></enablement>
       </clientContext>
       <binding
-            category="org.qualitune.evolution.operators.category.ocl"
-            context="org.qualitune.evolution.operators.oclclientContext">
+            category="org.modelrefactoring.evolution.operators.category.ocl"
+            context="org.modelrefactoring.evolution.operators.oclclientContext">
       </binding>
    </extension>
 -->
