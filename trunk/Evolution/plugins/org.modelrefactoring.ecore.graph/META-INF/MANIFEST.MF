@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Graph
 Bundle-SymbolicName: org.modelrefactoring.ecore.graph
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.qualitune.ecore.graph.Activator
+Bundle-Activator: org.modelrefactoring.ecore.graph.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.modelrefactoring.guery.graph
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.qualitune.ecore.graph,
- org.qualitune.ecore.graph.impl
+Export-Package: org.modelrefactoring.ecore.graph,
+ org.modelrefactoring.ecore.graph.impl

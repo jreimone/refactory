@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.modelrefactoring.evolution.megamodel.architecture.InstanceModel;
 import org.modelrefactoring.evolution.megamodel.cods.CODS;
-import org.qualitune.evolution.registry.IKnowledgeBase;
-import org.qualitune.evolution.registry.IKnowledgeBaseRegistry;
+import org.modelrefactoring.evolution.registry.IKnowledgeBase;
+import org.modelrefactoring.evolution.registry.IKnowledgeBaseRegistry;
 
 /**
  * @author jreimann

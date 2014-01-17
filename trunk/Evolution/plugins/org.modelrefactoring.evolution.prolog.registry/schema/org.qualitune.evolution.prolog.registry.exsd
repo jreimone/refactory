@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.qualitune.evolution.prolog.registry" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.modelrefactoring.evolution.prolog.registry" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.qualitune.evolution.prolog.registry" id="org.qualitune.evolution.prolog.registry" name="prologRegistry"/>
+         <meta.schema plugin="org.modelrefactoring.evolution.prolog.registry" id="org.modelrefactoring.evolution.prolog.registry" name="prologRegistry"/>
       </appinfo>
       <documentation>
          This extension point can be used to register additional Prolog rules to the global Prolog knowledge base. The registered Prolog rules must at least contain one rule with the following syntax:

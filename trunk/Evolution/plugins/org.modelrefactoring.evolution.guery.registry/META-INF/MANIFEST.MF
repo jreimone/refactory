@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: GUERY Registry
-Bundle-SymbolicName: org.qualitune.evolution.guery.registry;singleton:=true
+Bundle-SymbolicName: org.modelrefactoring.evolution.guery.registry;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.qualitune.evolution.guery.registry.Activator
+Bundle-Activator: org.modelrefactoring.evolution.guery.registry.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.modelrefactoring.guery,
  org.modelrefactoring.guery.graph
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.qualitune.evolution.guery.registry
+Export-Package: org.modelrefactoring.evolution.guery.registry

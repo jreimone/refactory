@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: tuProlog Wrapper Plugin
-Bundle-SymbolicName: org.qualitune.tuprolog
+Bundle-SymbolicName: org.modelrefactoring.tuprolog
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: qualitune.org
 Export-Package: alice.tuprolog,

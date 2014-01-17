@@ -4,16 +4,16 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            categoryId="org.qualitune.category"
-            id="org.qualitune.ecore.graph.codegen.command"
+            categoryId="org.emftext.refactoring.commands"
+            id="org.modelrefactoring.ecore.graph.codegen.command"
             name="Generate Graph Model Code">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.qualitune.ecore.graph.codegen.handler.GenerateGraphModelCodeHandler"
-            commandId="org.qualitune.ecore.graph.codegen.command">
+            class="org.modelrefactoring.ecore.graph.codegen.handler.GenerateGraphModelCodeHandler"
+            commandId="org.modelrefactoring.ecore.graph.codegen.command">
             <enabledWhen>
             <with
                   variable="selection">
@@ -31,7 +31,7 @@
             allPopups="false"
             locationURI="popup:org.eclipse.ui.popup.any?before=additions">
          <command
-               commandId="org.qualitune.ecore.graph.codegen.command"
+               commandId="org.modelrefactoring.ecore.graph.codegen.command"
                label="Generate Graph Model Code"
                style="push">
                <visibleWhen>
