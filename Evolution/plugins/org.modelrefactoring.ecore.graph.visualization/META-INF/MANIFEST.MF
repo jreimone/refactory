@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Visualization
 Bundle-SymbolicName: org.modelrefactoring.ecore.graph.visualization;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.qualitune.ecore.graph.visualization.Activator
+Bundle-Activator: org.modelrefactoring.ecore.graph.visualization.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.modelrefactoring.ecore.graph,

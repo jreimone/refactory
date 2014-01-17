@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Codegen
 Bundle-SymbolicName: org.modelrefactoring.ecore.graph.codegen;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.qualitune.ecore.graph.codegen.Activator
+Bundle-Activator: org.modelrefactoring.ecore.graph.codegen.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.codegen.ecore,
  org.eclipse.ui,
@@ -16,4 +16,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.core
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.qualitune.ecore.graph.codegen
+Export-Package: org.modelrefactoring.ecore.graph.codegen

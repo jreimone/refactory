@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.qualitune.evolution.guery.registry">
+         point="org.modelrefactoring.evolution.guery.registry">
       <motifFile
             motifResource="motifs/inverseReferences.guery">
       </motifFile>

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.qualitune.evolution.guery.registry" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.modelrefactoring.evolution.guery.registry" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.qualitune.evolution.guery.registry" id="org.qualitune.evolution.guery.registry" name="gueryRegistry"/>
+         <meta.schema plugin="org.modelrefactoring.evolution.guery.registry" id="org.modelrefactoring.evolution.guery.registry" name="gueryRegistry"/>
       </appinfo>
       <documentation>
          Use this extension point to register additional GUERY motifs for determining dependencies in a system of models.

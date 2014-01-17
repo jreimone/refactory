@@ -3,17 +3,19 @@
 <plugin>
    <extension
          point="org.eclipse.ui.commands">
+      <!--
       <category
             id="org.qualitune.category"
             name="QualiTune">
       </category>
+      -->
       <command
-            categoryId="org.qualitune.category"
+            categoryId="org.emftext.refactoring.commands"
             id="org.qualitune.evolution.ui.prologgeneration.command"
             name="Generate Prolog theory">
       </command>
       <command
-            categoryId="org.qualitune.category"
+            categoryId="org.emftext.refactoring.commands"
             id="org.qualitune.evolution.ui.implicitdependencies.command"
             name="Get all implicit dependencies">
       </command>
@@ -21,11 +23,11 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.qualitune.evolution.ui.commands.GenerateKnowledgeHandler"
+            class="org.modelrefactoring.evolution.ui.commands.GenerateKnowledgeHandler"
             commandId="org.qualitune.evolution.ui.prologgeneration.command">
       </handler>
       <handler
-            class="org.qualitune.evolution.ui.commands.GetImplicitDependenciesHandler"
+            class="org.modelrefactoring.evolution.ui.commands.GetImplicitDependenciesHandler"
             commandId="org.qualitune.evolution.ui.implicitdependencies.command">
       </handler>
    </extension>
@@ -76,16 +78,18 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="false"
-            category="org.qualitune.view.category"
-            class="org.qualitune.evolution.ui.views.ImplicitDependencyView"
+            category="org.emftext.refactory.ui.view"
+            class="org.modelrefactoring.evolution.ui.views.ImplicitDependencyView"
             icon="icons/implicitDependency.png"
             id="org.qualitune.evolution.ui.views.ImplicitDependencyView"
             name="Implicit Dependencies">
       </view>
+      <!--
       <category
             id="org.qualitune.view.category"
             name="QualiTune">
       </category>
+      -->
    </extension>
 
 </plugin>

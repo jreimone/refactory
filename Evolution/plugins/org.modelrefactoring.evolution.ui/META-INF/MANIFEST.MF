@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UI stuff for evolution
-Bundle-SymbolicName: org.qualitune.evolution.ui;singleton:=true
+Bundle-SymbolicName: org.modelrefactoring.evolution.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.qualitune.evolution.ui.Activator
+Bundle-Activator: org.modelrefactoring.evolution.ui.Activator
 Bundle-Vendor: qualitune.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -12,6 +12,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.edit,
  org.eclipse.emf.ecore.edit,
  org.eclipse.emf.edit.ui,
- org.qualitune.evolution.registry
+ org.modelrefactoring.evolution.registry
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

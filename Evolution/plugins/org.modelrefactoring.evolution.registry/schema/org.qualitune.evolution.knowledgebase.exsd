@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.qualitune.evolution.registry" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.modelrefactoring.evolution.registry" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.qualitune.evolution.registry" id="org.qualitune.evolution.knowledgebase" name="knowledgebase"/>
+         <meta.schema plugin="org.modelrefactoring.evolution.registry" id="org.qualitune.evolution.knowledgebase" name="knowledgebase"/>
       </appinfo>
       <documentation>
          This extension point is used to register differnet knowledge base techniques.
@@ -56,7 +56,7 @@ Examples are a Prolog based knowledge base or a knowledge base for which GUERY g
                   Specify a class which represents the knowledge base by implementing KnowledgeBase.
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.qualitune.evolution.registry.KnowledgeBase"/>
+                  <meta.attribute kind="java" basedOn=":org.modelrefactoring.evolution.registry.KnowledgeBase"/>
                </appinfo>
             </annotation>
          </attribute>
