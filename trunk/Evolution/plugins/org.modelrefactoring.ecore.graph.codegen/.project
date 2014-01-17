@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.qualitune.ecore.graph.codegen</name>
+	<name>org.modelrefactoring.ecore.graph.codegen</name>
 	<comment></comment>
 	<projects>
 	</projects>
