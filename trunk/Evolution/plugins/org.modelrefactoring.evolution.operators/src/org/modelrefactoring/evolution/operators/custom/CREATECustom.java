@@ -1,4 +1,4 @@
-package org.qualitune.evolution.operators.custom;
+package org.modelrefactoring.evolution.operators.custom;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.qualitune.evolution.operators.EObjectReference;
-import org.qualitune.evolution.operators.OperatorsFactory;
-import org.qualitune.evolution.operators.Referrable;
-import org.qualitune.evolution.operators.TypeVariable;
-import org.qualitune.evolution.operators.impl.CREATEImpl;
-import org.qualitune.evolution.operators.util.OperatorsUtil;
+import org.modelrefactoring.evolution.operators.EObjectReference;
+import org.modelrefactoring.evolution.operators.OperatorsFactory;
+import org.modelrefactoring.evolution.operators.Referrable;
+import org.modelrefactoring.evolution.operators.TypeVariable;
+import org.modelrefactoring.evolution.operators.impl.CREATEImpl;
+import org.modelrefactoring.evolution.operators.util.OperatorsUtil;
 
 
 public class CREATECustom extends CREATEImpl {

@@ -1,4 +1,4 @@
-package org.qualitune.evolution.operators.custom;
+package org.modelrefactoring.evolution.operators.custom;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.qualitune.evolution.operators.Referrable;
-import org.qualitune.evolution.operators.impl.ASSIGNImpl;
-import org.qualitune.evolution.operators.util.OperatorsUtil;
+import org.modelrefactoring.evolution.operators.Referrable;
+import org.modelrefactoring.evolution.operators.impl.ASSIGNImpl;
+import org.modelrefactoring.evolution.operators.util.OperatorsUtil;
 
 
 public class ASSIGNCustom extends ASSIGNImpl {

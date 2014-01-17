@@ -1,6 +1,7 @@
-package org.qualitune.evolution.operators;
+package org.modelrefactoring.evolution.operators;
 
 import org.eclipse.emf.validation.model.IClientSelector;
+import org.modelrefactoring.evolution.operators.Operator;
 
 public class ClientSelector1 implements IClientSelector{
 

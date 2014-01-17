@@ -1,6 +1,6 @@
-package org.qualitune.evolution.operators.custom;
+package org.modelrefactoring.evolution.operators.custom;
 
-import org.qualitune.evolution.operators.impl.OperatorImpl;
+import org.modelrefactoring.evolution.operators.impl.OperatorImpl;
 
 
 public class OperatorCustom extends OperatorImpl {

@@ -1,21 +1,21 @@
 /**
  * 
  */
-package org.qualitune.evolution.operators.util;
+package org.modelrefactoring.evolution.operators.util;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.qualitune.evolution.operators.EObjectReference;
-import org.qualitune.evolution.operators.PrimitiveReference;
-import org.qualitune.evolution.operators.QueryVariable;
-import org.qualitune.evolution.operators.Referrable;
-import org.qualitune.evolution.operators.Result;
-import org.qualitune.evolution.operators.TypeVariable;
-import org.qualitune.evolution.operators.Variable;
-import org.qualitune.evolution.operators.VariableReference;
+import org.modelrefactoring.evolution.operators.EObjectReference;
+import org.modelrefactoring.evolution.operators.PrimitiveReference;
+import org.modelrefactoring.evolution.operators.QueryVariable;
+import org.modelrefactoring.evolution.operators.Referrable;
+import org.modelrefactoring.evolution.operators.Result;
+import org.modelrefactoring.evolution.operators.TypeVariable;
+import org.modelrefactoring.evolution.operators.Variable;
+import org.modelrefactoring.evolution.operators.VariableReference;
 
 /**
  * @author jreimann
