@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.qualitune.evolution.cods.creation" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.modelrefactoring.evolution.cods.creation" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.qualitune.evolution.cods.creation" id="org.qualitune.evolution.cods" name="Model Kinds"/>
+         <meta.schema plugin="org.modelrefactoring.evolution.cods.creation" id="org.modelrefactoring.evolution.cods" name="Model Kinds"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
