@@ -32,7 +32,7 @@ public class CREATECustom extends CREATEImpl {
 		}
 		EObject instance = EcoreUtil.create(metaclass);
 		result.getElement().add(instance);
-		variable.setValue(instance);
+		variable.setInstance(instance);
 		EReference containmentReference = getParentCompositeReference();
 		if(!containmentReference.isContainment()){
 			OperatorsUtil.createDiagnosticAndAddToResource(this, "Reference " + containmentReference.getName() + " must be a containment reference");

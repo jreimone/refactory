@@ -25,7 +25,7 @@
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//TypeVariable">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//TypeVariable/type"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//TypeVariable/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference operators.ecore#//TypeVariable/instance"/>
     </genClasses>
     <genClasses ecoreClass="operators.ecore#//DELETE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference operators.ecore#//DELETE/deletion"/>

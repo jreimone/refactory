@@ -56,7 +56,7 @@ public abstract class OperatorsUtil {
 					return null;
 				}
 			} else if(referencedVariable instanceof TypeVariable){
-				result = ((TypeVariable) referencedVariable).getValue();
+				result = ((TypeVariable) referencedVariable).getInstance();
 			}
 		}
 		return result;
