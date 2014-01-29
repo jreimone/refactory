@@ -41,6 +41,14 @@
             </instanceof></enablement>
       </changePreviewViewer>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Refactory Command category"
+            id="org.emftext.refactoring.commands"
+            name="Refactory">
+      </category>
+   </extension>
    <!--
    <extension
          point="org.eclipse.ltk.core.refactoring.refactoringContributions">
