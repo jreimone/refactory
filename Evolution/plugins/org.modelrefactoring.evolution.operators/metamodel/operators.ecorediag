@@ -656,14 +656,14 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_b9u9QJUREeG-CeAr07OHmw" type="3002" source="_SotscJUCEeG-CeAr07OHmw" target="_W5FXoJUREeG-CeAr07OHmw">
     <children xmi:type="notation:Node" xmi:id="_b9vkUJUREeG-CeAr07OHmw" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_b9vkUZUREeG-CeAr07OHmw" x="-11" y="14"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_b9vkUZUREeG-CeAr07OHmw" x="-26" y="16"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_b9vkUpUREeG-CeAr07OHmw" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_b9vkU5UREeG-CeAr07OHmw" x="-11" y="-10"/>
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_b9u9QZUREeG-CeAr07OHmw" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_b9u9QpUREeG-CeAr07OHmw" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="operators.ecore#//TypeVariable/value"/>
+    <element xmi:type="ecore:EReference" href="operators.ecore#//TypeVariable/instance"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_b9u9Q5UREeG-CeAr07OHmw" points="[17, 9, 12, -115]$[17, 118, 12, -6]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_b9xZgJUREeG-CeAr07OHmw" id="(0.7304347826086957,0.803921568627451)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_b9xZgZUREeG-CeAr07OHmw" id="(0.18627450980392157,0.11666666666666667)"/>

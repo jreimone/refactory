@@ -45,7 +45,7 @@ public class VARCustom extends VARImpl {
 		} else if(queryObject instanceof VariableReference){
 			final Variable referencedVariable = ((VariableReference) queryObject).getReferencedVariable();
 			if(referencedVariable instanceof TypeVariable){
-				contextObject = ((TypeVariable) referencedVariable).getValue();
+				contextObject = ((TypeVariable) referencedVariable).getInstance();
 			} else if(referencedVariable instanceof QueryVariable){
 				Result queryResult = ((QueryVariable) referencedVariable).getQueryResult();
 				if(queryResult instanceof EObjectReference){

@@ -4,11 +4,6 @@ package operators
 context Variable inv nameNotNull:
 not(self.name = null)
 
--- either operation or structural feature must be set
-context QueryVariable inv operationFeatureXOR:
-self.operation = null xor self.structuralFeature = null 
-
-
 -- referenced type of TypeVariable must not be abstract
 context TypeVariable inv typeMustBeConcrete:
 not(self.type.abstract = true)
