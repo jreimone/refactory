@@ -227,7 +227,7 @@ public class OperatorsPrinter2 implements org.modelrefactoring.evolution.operato
 			printInternal(element, org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsGrammarInformationProvider.OPERATORS_3, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier) {
+		if (element instanceof org.modelrefactoring.evolution.operators.EReferenceQualifier) {
 			printInternal(element, org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsGrammarInformationProvider.OPERATORS_4, foundFormattingElements);
 			return;
 		}

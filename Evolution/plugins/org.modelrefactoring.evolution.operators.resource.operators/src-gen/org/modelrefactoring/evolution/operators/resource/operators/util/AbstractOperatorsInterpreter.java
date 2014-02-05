@@ -19,7 +19,7 @@ import org.modelrefactoring.evolution.operators.CREATE;
 import org.modelrefactoring.evolution.operators.DELETE;
 import org.modelrefactoring.evolution.operators.EObjectReference;
 import org.modelrefactoring.evolution.operators.EOperationQualifier;
-import org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier;
+import org.modelrefactoring.evolution.operators.EReferenceQualifier;
 import org.modelrefactoring.evolution.operators.MERGE;
 import org.modelrefactoring.evolution.operators.MOVE;
 import org.modelrefactoring.evolution.operators.Operator;
@@ -202,8 +202,8 @@ public class AbstractOperatorsInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier) {
-			result = interprete_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier((org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier) object, context);
+		if (object instanceof org.modelrefactoring.evolution.operators.EReferenceQualifier) {
+			result = interprete_org_modelrefactoring_evolution_operators_EReferenceQualifier((org.modelrefactoring.evolution.operators.EReferenceQualifier) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -297,7 +297,7 @@ public class AbstractOperatorsInterpreter<ResultType, ContextType> {
 		return null;
 	}
 	
-	public ResultType interprete_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier(EStructuralFeatureQualifier eStructuralFeatureQualifier, ContextType context) {
+	public ResultType interprete_org_modelrefactoring_evolution_operators_EReferenceQualifier(EReferenceQualifier eReferenceQualifier, ContextType context) {
 		return null;
 	}
 	

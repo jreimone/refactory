@@ -287,8 +287,8 @@ import org.eclipse.emf.ecore.EReference;
 			if (type.getInstanceClass() == org.modelrefactoring.evolution.operators.QueryVariable.class) {
 				return parse_org_modelrefactoring_evolution_operators_QueryVariable();
 			}
-			if (type.getInstanceClass() == org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier.class) {
-				return parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier();
+			if (type.getInstanceClass() == org.modelrefactoring.evolution.operators.EReferenceQualifier.class) {
+				return parse_org_modelrefactoring_evolution_operators_EReferenceQualifier();
 			}
 			if (type.getInstanceClass() == org.modelrefactoring.evolution.operators.EOperationQualifier.class) {
 				return parse_org_modelrefactoring_evolution_operators_EOperationQualifier();
@@ -881,7 +881,7 @@ parse_org_modelrefactoring_evolution_operators_QueryVariable returns [org.modelr
 	
 ;
 
-parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier returns [org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier element = null]
+parse_org_modelrefactoring_evolution_operators_EReferenceQualifier returns [org.modelrefactoring.evolution.operators.EReferenceQualifier element = null]
 @init{
 }
 :
@@ -892,25 +892,25 @@ parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier retur
 				throw new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsTerminateParsingException();
 			}
 			if (element == null) {
-				element = org.modelrefactoring.evolution.operators.OperatorsFactory.eINSTANCE.createEStructuralFeatureQualifier();
+				element = org.modelrefactoring.evolution.operators.OperatorsFactory.eINSTANCE.createEReferenceQualifier();
 				startIncompleteElement(element);
 			}
 			if (a0 != null) {
 				org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
 				tokenResolver.setOptions(getOptions());
 				org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE), result);
+				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
 					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
-				org.eclipse.emf.ecore.EStructuralFeature proxy = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.createEAttribute();
+				org.eclipse.emf.ecore.EReference proxy = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.createEReference();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsContextDependentURIFragmentFactory<org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier, org.eclipse.emf.ecore.EStructuralFeature>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEStructuralFeatureQualifierStructuralFeatureReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE), resolved, proxy);
+				registerContextDependentProxy(new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsContextDependentURIFragmentFactory<org.modelrefactoring.evolution.operators.EReferenceQualifier, org.eclipse.emf.ecore.EReference>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEReferenceQualifierReferenceReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
-					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE), value);
+					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE), value);
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
@@ -1678,7 +1678,7 @@ parse_org_modelrefactoring_evolution_operators_Referrable returns [org.modelrefa
 
 parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier returns [org.modelrefactoring.evolution.operators.QueryVariableQualifier element = null]
 :
-	c0 = parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier{ element = c0; /* this is a subclass or primitive expression choice */ }
+	c0 = parse_org_modelrefactoring_evolution_operators_EReferenceQualifier{ element = c0; /* this is a subclass or primitive expression choice */ }
 	|	c1 = parse_org_modelrefactoring_evolution_operators_EOperationQualifier{ element = c1; /* this is a subclass or primitive expression choice */ }
 	
 ;

@@ -29,7 +29,9 @@ public final class OperatorsUtil {
 		if(referrable instanceof EObjectReference){
 			List<EObject> elements = ((EObjectReference) referrable).getElements();
 			if(elements.size() != 1){
-				errors.add(createDiagnostic(referrable, "The referenced parent must not be a multi-valued list"));
+				if(errors != null){
+					errors.add(createDiagnostic(referrable, "The referenced parent must not be a multi-valued list"));
+				}
 				return null;
 			}
 			return elements;
@@ -41,7 +43,9 @@ public final class OperatorsUtil {
 					List<EObject> elements = ((EObjectReference) queryResult).getElements();
 					result.addAll(elements);
 				} else if(queryResult instanceof PrimitiveReference){
-					errors.add(createDiagnostic(referrable, "The referenced element must not be a primitive type"));
+					if(errors != null){
+						errors.add(createDiagnostic(referrable, "The referenced element must not be a primitive type"));
+					}
 					return null;
 				}
 			} else if(referencedVariable instanceof TypeVariable){
@@ -62,7 +66,9 @@ public final class OperatorsUtil {
 	public static EObject getEObjectFromReferrable(Referrable referrable, List<Diagnostic> errors){
 		List<EObject> elements = getEObjectsFromReferrable(referrable, errors);
 		if(elements != null && elements.size() != 1){
-			errors.add(createDiagnostic(referrable, "The referenced parent must not be a multi-valued list"));
+			if(errors != null){
+				errors.add(createDiagnostic(referrable, "The referenced element must not be a multi-valued list"));
+			}
 			return null;
 		}
 		return elements.get(0);

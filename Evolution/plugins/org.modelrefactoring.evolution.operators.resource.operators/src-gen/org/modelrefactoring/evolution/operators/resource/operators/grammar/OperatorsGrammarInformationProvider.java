@@ -154,7 +154,7 @@ public class OperatorsGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsPlaceholder OPERATORS_4_0_0_0 = INSTANCE.getOPERATORS_4_0_0_0();
 	private org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsPlaceholder getOPERATORS_4_0_0_0() {
-		return new org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsPlaceholder(org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEStructuralFeatureQualifier().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE), "IDENTIFIER", org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsCardinality.ONE, 0);
+		return new org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsPlaceholder(org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEReferenceQualifier().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE), "IDENTIFIER", org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsCardinality.ONE, 0);
 	}
 	public final static org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsSequence OPERATORS_4_0_0 = INSTANCE.getOPERATORS_4_0_0();
 	private org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsSequence getOPERATORS_4_0_0() {
@@ -166,7 +166,7 @@ public class OperatorsGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsRule OPERATORS_4 = INSTANCE.getOPERATORS_4();
 	private org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsRule getOPERATORS_4() {
-		return new org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsRule(org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEStructuralFeatureQualifier(), OPERATORS_4_0, org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsCardinality.ONE);
+		return new org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsRule(org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEReferenceQualifier(), OPERATORS_4_0, org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsCardinality.ONE);
 	}
 	public final static org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsPlaceholder OPERATORS_5_0_0_0 = INSTANCE.getOPERATORS_5_0_0_0();
 	private org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsPlaceholder getOPERATORS_5_0_0_0() {
