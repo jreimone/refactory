@@ -317,8 +317,8 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
     			if (type.getInstanceClass() == org.modelrefactoring.evolution.operators.QueryVariable.class) {
     				return parse_org_modelrefactoring_evolution_operators_QueryVariable();
     			}
-    			if (type.getInstanceClass() == org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier.class) {
-    				return parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier();
+    			if (type.getInstanceClass() == org.modelrefactoring.evolution.operators.EReferenceQualifier.class) {
+    				return parse_org_modelrefactoring_evolution_operators_EReferenceQualifier();
     			}
     			if (type.getInstanceClass() == org.modelrefactoring.evolution.operators.EOperationQualifier.class) {
     				return parse_org_modelrefactoring_evolution_operators_EOperationQualifier();
@@ -1259,12 +1259,12 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
 
 
 
-    // $ANTLR start "parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier"
-    // Operators.g:884:1: parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier returns [org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier element = null] : (a0= IDENTIFIER ) ;
-    public final org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier() throws RecognitionException {
-        org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier element =  null;
+    // $ANTLR start "parse_org_modelrefactoring_evolution_operators_EReferenceQualifier"
+    // Operators.g:884:1: parse_org_modelrefactoring_evolution_operators_EReferenceQualifier returns [org.modelrefactoring.evolution.operators.EReferenceQualifier element = null] : (a0= IDENTIFIER ) ;
+    public final org.modelrefactoring.evolution.operators.EReferenceQualifier parse_org_modelrefactoring_evolution_operators_EReferenceQualifier() throws RecognitionException {
+        org.modelrefactoring.evolution.operators.EReferenceQualifier element =  null;
 
-        int parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier_StartIndex = input.index();
+        int parse_org_modelrefactoring_evolution_operators_EReferenceQualifier_StartIndex = input.index();
 
         Token a0=null;
 
@@ -1279,32 +1279,32 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
             // Operators.g:888:2: (a0= IDENTIFIER )
             // Operators.g:889:3: a0= IDENTIFIER
             {
-            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier513); if (state.failed) return element;
+            a0=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_operators_EReferenceQualifier513); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
             				throw new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsTerminateParsingException();
             			}
             			if (element == null) {
-            				element = org.modelrefactoring.evolution.operators.OperatorsFactory.eINSTANCE.createEStructuralFeatureQualifier();
+            				element = org.modelrefactoring.evolution.operators.OperatorsFactory.eINSTANCE.createEReferenceQualifier();
             				startIncompleteElement(element);
             			}
             			if (a0 != null) {
             				org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE), result);
+            				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
             					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
             				}
             				String resolved = (String) resolvedObject;
-            				org.eclipse.emf.ecore.EStructuralFeature proxy = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.createEAttribute();
+            				org.eclipse.emf.ecore.EReference proxy = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.createEReference();
             				collectHiddenTokens(element);
-            				registerContextDependentProxy(new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsContextDependentURIFragmentFactory<org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier, org.eclipse.emf.ecore.EStructuralFeature>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEStructuralFeatureQualifierStructuralFeatureReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE), resolved, proxy);
+            				registerContextDependentProxy(new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsContextDependentURIFragmentFactory<org.modelrefactoring.evolution.operators.EReferenceQualifier, org.eclipse.emf.ecore.EReference>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEReferenceQualifierReferenceReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE), resolved, proxy);
             				if (proxy != null) {
             					Object value = proxy;
-            					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE), value);
+            					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE), value);
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
@@ -1331,12 +1331,12 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 6, parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 6, parse_org_modelrefactoring_evolution_operators_EReferenceQualifier_StartIndex); }
 
         }
         return element;
     }
-    // $ANTLR end "parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier"
+    // $ANTLR end "parse_org_modelrefactoring_evolution_operators_EReferenceQualifier"
 
 
 
@@ -2578,13 +2578,13 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
 
 
     // $ANTLR start "parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier"
-    // Operators.g:1679:1: parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier returns [org.modelrefactoring.evolution.operators.QueryVariableQualifier element = null] : (c0= parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier |c1= parse_org_modelrefactoring_evolution_operators_EOperationQualifier );
+    // Operators.g:1679:1: parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier returns [org.modelrefactoring.evolution.operators.QueryVariableQualifier element = null] : (c0= parse_org_modelrefactoring_evolution_operators_EReferenceQualifier |c1= parse_org_modelrefactoring_evolution_operators_EOperationQualifier );
     public final org.modelrefactoring.evolution.operators.QueryVariableQualifier parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier() throws RecognitionException {
         org.modelrefactoring.evolution.operators.QueryVariableQualifier element =  null;
 
         int parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier_StartIndex = input.index();
 
-        org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier c0 =null;
+        org.modelrefactoring.evolution.operators.EReferenceQualifier c0 =null;
 
         org.modelrefactoring.evolution.operators.EOperationQualifier c1 =null;
 
@@ -2592,7 +2592,7 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 15) ) { return element; }
 
-            // Operators.g:1680:2: (c0= parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier |c1= parse_org_modelrefactoring_evolution_operators_EOperationQualifier )
+            // Operators.g:1680:2: (c0= parse_org_modelrefactoring_evolution_operators_EReferenceQualifier |c1= parse_org_modelrefactoring_evolution_operators_EOperationQualifier )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -2624,10 +2624,10 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
             }
             switch (alt4) {
                 case 1 :
-                    // Operators.g:1681:2: c0= parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier
+                    // Operators.g:1681:2: c0= parse_org_modelrefactoring_evolution_operators_EReferenceQualifier
                     {
-                    pushFollow(FOLLOW_parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier_in_parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier1239);
-                    c0=parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier();
+                    pushFollow(FOLLOW_parse_org_modelrefactoring_evolution_operators_EReferenceQualifier_in_parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier1239);
+                    c0=parse_org_modelrefactoring_evolution_operators_EReferenceQualifier();
 
                     state._fsp--;
                     if (state.failed) return element;
@@ -2668,14 +2668,14 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
 
     // $ANTLR start synpred8_Operators
     public final void synpred8_Operators_fragment() throws RecognitionException {
-        org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier c0 =null;
+        org.modelrefactoring.evolution.operators.EReferenceQualifier c0 =null;
 
 
-        // Operators.g:1681:2: (c0= parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier )
-        // Operators.g:1681:2: c0= parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier
+        // Operators.g:1681:2: (c0= parse_org_modelrefactoring_evolution_operators_EReferenceQualifier )
+        // Operators.g:1681:2: c0= parse_org_modelrefactoring_evolution_operators_EReferenceQualifier
         {
-        pushFollow(FOLLOW_parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier_in_synpred8_Operators1239);
-        c0=parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier();
+        pushFollow(FOLLOW_parse_org_modelrefactoring_evolution_operators_EReferenceQualifier_in_synpred8_Operators1239);
+        c0=parse_org_modelrefactoring_evolution_operators_EReferenceQualifier();
 
         state._fsp--;
         if (state.failed) return ;
@@ -2786,7 +2786,7 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
     public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_Referrable_in_parse_org_modelrefactoring_evolution_operators_QueryVariable440 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_14_in_parse_org_modelrefactoring_evolution_operators_QueryVariable458 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier_in_parse_org_modelrefactoring_evolution_operators_QueryVariable476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier513 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_operators_EReferenceQualifier513 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_operators_EOperationQualifier553 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_16_in_parse_org_modelrefactoring_evolution_operators_CREATE589 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_TypeVariable_in_parse_org_modelrefactoring_evolution_operators_CREATE607 = new BitSet(new long[]{0x0000000000040000L});
@@ -2818,8 +2818,8 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
     public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_operators_MOVE1176 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_EObjectReference_in_parse_org_modelrefactoring_evolution_operators_Referrable1208 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_VariableReference_in_parse_org_modelrefactoring_evolution_operators_Referrable1218 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier_in_parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier1239 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_EReferenceQualifier_in_parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier1239 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_EOperationQualifier_in_parse_org_modelrefactoring_evolution_operators_QueryVariableQualifier1249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier_in_synpred8_Operators1239 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_operators_EReferenceQualifier_in_synpred8_Operators1239 = new BitSet(new long[]{0x0000000000000002L});
 
 }

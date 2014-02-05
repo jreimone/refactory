@@ -43,7 +43,7 @@ RULES {
 	VAR ::= "var" #1 variable;
 	@SuppressWarnings(featureWithoutSyntax)
 	QueryVariable ::= name[IDENTIFIER] #1 "=" #1 queryObject #0 "." #0 qualifier ;
-	EStructuralFeatureQualifier ::= structuralFeature[IDENTIFIER];
+	EReferenceQualifier ::= reference[IDENTIFIER];
 	EOperationQualifier ::= operation[IDENTIFIER];
 	
 	// Create

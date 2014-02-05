@@ -7,11 +7,11 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.modelrefactoring.evolution.operators.EObjectReference;
 import org.modelrefactoring.evolution.operators.EOperationQualifier;
-import org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier;
+import org.modelrefactoring.evolution.operators.EReferenceQualifier;
 import org.modelrefactoring.evolution.operators.OperatorsFactory;
 import org.modelrefactoring.evolution.operators.QueryVariable;
 import org.modelrefactoring.evolution.operators.QueryVariableQualifier;
@@ -110,10 +110,10 @@ public class VARCustom extends VARImpl {
 						e.printStackTrace();
 					}
 				}
-			} else if (qualifier instanceof EStructuralFeatureQualifier){
-				EStructuralFeature structuralFeature = ((EStructuralFeatureQualifier) qualifier).getStructuralFeature();
-				Object result = contextObject.eGet(structuralFeature, true);
-				if(!structuralFeature.isMany()){
+			} else if (qualifier instanceof EReferenceQualifier){
+				EReference reference = ((EReferenceQualifier) qualifier).getReference();
+				Object result = contextObject.eGet(reference, true);
+				if(!reference.isMany()){
 					EObject singleResult = (EObject) result;
 					operatorResult.getElements().add(singleResult);
 				} else {

@@ -22,7 +22,7 @@ public class OperatorsReferenceResolverSwitch implements org.modelrefactoring.ev
 	
 	protected org.modelrefactoring.evolution.operators.resource.operators.analysis.EObjectReferenceElementsReferenceResolver eObjectReferenceElementsReferenceResolver = new org.modelrefactoring.evolution.operators.resource.operators.analysis.EObjectReferenceElementsReferenceResolver();
 	protected org.modelrefactoring.evolution.operators.resource.operators.analysis.VariableReferenceReferencedVariableReferenceResolver variableReferenceReferencedVariableReferenceResolver = new org.modelrefactoring.evolution.operators.resource.operators.analysis.VariableReferenceReferencedVariableReferenceResolver();
-	protected org.modelrefactoring.evolution.operators.resource.operators.analysis.EStructuralFeatureQualifierStructuralFeatureReferenceResolver eStructuralFeatureQualifierStructuralFeatureReferenceResolver = new org.modelrefactoring.evolution.operators.resource.operators.analysis.EStructuralFeatureQualifierStructuralFeatureReferenceResolver();
+	protected org.modelrefactoring.evolution.operators.resource.operators.analysis.EReferenceQualifierReferenceReferenceResolver eReferenceQualifierReferenceReferenceResolver = new org.modelrefactoring.evolution.operators.resource.operators.analysis.EReferenceQualifierReferenceReferenceResolver();
 	protected org.modelrefactoring.evolution.operators.resource.operators.analysis.EOperationQualifierOperationReferenceResolver eOperationQualifierOperationReferenceResolver = new org.modelrefactoring.evolution.operators.resource.operators.analysis.EOperationQualifierOperationReferenceResolver();
 	protected org.modelrefactoring.evolution.operators.resource.operators.analysis.CREATEParentCompositeReferenceReferenceResolver cREATEParentCompositeReferenceReferenceResolver = new org.modelrefactoring.evolution.operators.resource.operators.analysis.CREATEParentCompositeReferenceReferenceResolver();
 	protected org.modelrefactoring.evolution.operators.resource.operators.analysis.TypeVariableTypeReferenceResolver typeVariableTypeReferenceResolver = new org.modelrefactoring.evolution.operators.resource.operators.analysis.TypeVariableTypeReferenceResolver();
@@ -38,8 +38,8 @@ public class OperatorsReferenceResolverSwitch implements org.modelrefactoring.ev
 		return getResolverChain(org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getVariableReference_ReferencedVariable(), variableReferenceReferencedVariableReferenceResolver);
 	}
 	
-	public org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver<org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier, org.eclipse.emf.ecore.EStructuralFeature> getEStructuralFeatureQualifierStructuralFeatureReferenceResolver() {
-		return getResolverChain(org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEStructuralFeatureQualifier_StructuralFeature(), eStructuralFeatureQualifierStructuralFeatureReferenceResolver);
+	public org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver<org.modelrefactoring.evolution.operators.EReferenceQualifier, org.eclipse.emf.ecore.EReference> getEReferenceQualifierReferenceReferenceResolver() {
+		return getResolverChain(org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEReferenceQualifier_Reference(), eReferenceQualifierReferenceReferenceResolver);
 	}
 	
 	public org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver<org.modelrefactoring.evolution.operators.EOperationQualifier, org.eclipse.emf.ecore.EOperation> getEOperationQualifierOperationReferenceResolver() {
@@ -73,7 +73,7 @@ public class OperatorsReferenceResolverSwitch implements org.modelrefactoring.ev
 		}
 		eObjectReferenceElementsReferenceResolver.setOptions(options);
 		variableReferenceReferencedVariableReferenceResolver.setOptions(options);
-		eStructuralFeatureQualifierStructuralFeatureReferenceResolver.setOptions(options);
+		eReferenceQualifierReferenceReferenceResolver.setOptions(options);
 		eOperationQualifierOperationReferenceResolver.setOptions(options);
 		cREATEParentCompositeReferenceReferenceResolver.setOptions(options);
 		typeVariableTypeReferenceResolver.setOptions(options);
@@ -102,12 +102,12 @@ public class OperatorsReferenceResolverSwitch implements org.modelrefactoring.ev
 				variableReferenceReferencedVariableReferenceResolver.resolve(identifier, (org.modelrefactoring.evolution.operators.VariableReference) container, (EReference) feature, position, true, frr);
 			}
 		}
-		if (org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEStructuralFeatureQualifier().isInstance(container)) {
-			OperatorsFuzzyResolveResult<org.eclipse.emf.ecore.EStructuralFeature> frr = new OperatorsFuzzyResolveResult<org.eclipse.emf.ecore.EStructuralFeature>(result);
+		if (org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEReferenceQualifier().isInstance(container)) {
+			OperatorsFuzzyResolveResult<org.eclipse.emf.ecore.EReference> frr = new OperatorsFuzzyResolveResult<org.eclipse.emf.ecore.EReference>(result);
 			String referenceName = reference.getName();
 			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("structuralFeature")) {
-				eStructuralFeatureQualifierStructuralFeatureReferenceResolver.resolve(identifier, (org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier) container, (EReference) feature, position, true, frr);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("reference")) {
+				eReferenceQualifierReferenceReferenceResolver.resolve(identifier, (org.modelrefactoring.evolution.operators.EReferenceQualifier) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEOperationQualifier().isInstance(container)) {
@@ -167,8 +167,8 @@ public class OperatorsReferenceResolverSwitch implements org.modelrefactoring.ev
 		if (reference == org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getVariableReference_ReferencedVariable()) {
 			return getResolverChain(reference, variableReferenceReferencedVariableReferenceResolver);
 		}
-		if (reference == org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEStructuralFeatureQualifier_StructuralFeature()) {
-			return getResolverChain(reference, eStructuralFeatureQualifierStructuralFeatureReferenceResolver);
+		if (reference == org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEReferenceQualifier_Reference()) {
+			return getResolverChain(reference, eReferenceQualifierReferenceReferenceResolver);
 		}
 		if (reference == org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEOperationQualifier_Operation()) {
 			return getResolverChain(reference, eOperationQualifierOperationReferenceResolver);

@@ -6,18 +6,43 @@
  */
 package org.modelrefactoring.evolution.operators.resource.operators.analysis;
 
-import org.eclipse.emf.ecore.EReference;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EOperationQualifierOperationReferenceResolver implements org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver<org.modelrefactoring.evolution.operators.EOperationQualifier, org.eclipse.emf.ecore.EOperation> {
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.modelrefactoring.evolution.operators.EOperationQualifier;
+import org.modelrefactoring.evolution.operators.Referrable;
+import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult;
+import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver;
+import org.modelrefactoring.evolution.operators.util.OperatorsUtil;
+
+public class EOperationQualifierOperationReferenceResolver implements IOperatorsReferenceResolver<EOperationQualifier, EOperation> {
 	
-	private org.modelrefactoring.evolution.operators.resource.operators.analysis.OperatorsDefaultResolverDelegate<org.modelrefactoring.evolution.operators.EOperationQualifier, org.eclipse.emf.ecore.EOperation> delegate = new org.modelrefactoring.evolution.operators.resource.operators.analysis.OperatorsDefaultResolverDelegate<org.modelrefactoring.evolution.operators.EOperationQualifier, org.eclipse.emf.ecore.EOperation>();
+//	private OperatorsDefaultResolverDelegate<EOperationQualifier, EOperation> delegate = new OperatorsDefaultResolverDelegate<EOperationQualifier, EOperation>();
 	
-	public void resolve(String identifier, org.modelrefactoring.evolution.operators.EOperationQualifier container, EReference reference, int position, boolean resolveFuzzy, final org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult<org.eclipse.emf.ecore.EOperation> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, EOperationQualifier qualifier, EReference reference, int position, boolean resolveFuzzy, final IOperatorsReferenceResolveResult<EOperation> result) {
+		Referrable queryObject = qualifier.getVariable().getQueryObject();
+		if(queryObject == null){
+			result.setErrorMessage("Owner of the operation '" + identifier + "' must be specified");
+			return;
+		}
+		List<Diagnostic> errors = new ArrayList<Diagnostic>();
+		EObject operationOwner = OperatorsUtil.getEObjectFromReferrable(queryObject, errors);
+		EClass metaclass = operationOwner.eClass();
+		List<EOperation> allOperations = metaclass.getEAllOperations();
+		for (EOperation operation : allOperations) {
+			if(resolveFuzzy || identifier.equals(operation.getName())){
+				result.addMapping(operation.getName(), operation);
+			}
+		}
 	}
 	
-	public String deResolve(org.eclipse.emf.ecore.EOperation element, org.modelrefactoring.evolution.operators.EOperationQualifier container, EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(EOperation operation, EOperationQualifier container, EReference reference) {
+		return operation.getName();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

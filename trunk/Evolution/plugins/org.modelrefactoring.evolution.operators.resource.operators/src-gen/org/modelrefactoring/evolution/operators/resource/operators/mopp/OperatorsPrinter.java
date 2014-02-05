@@ -80,8 +80,8 @@ public class OperatorsPrinter implements org.modelrefactoring.evolution.operator
 			print_org_modelrefactoring_evolution_operators_QueryVariable((org.modelrefactoring.evolution.operators.QueryVariable) element, globaltab, out);
 			return;
 		}
-		if (element instanceof org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier) {
-			print_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier((org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier) element, globaltab, out);
+		if (element instanceof org.modelrefactoring.evolution.operators.EReferenceQualifier) {
+			print_org_modelrefactoring_evolution_operators_EReferenceQualifier((org.modelrefactoring.evolution.operators.EReferenceQualifier) element, globaltab, out);
 			return;
 		}
 		if (element instanceof org.modelrefactoring.evolution.operators.EOperationQualifier) {
@@ -365,7 +365,7 @@ public class OperatorsPrinter implements org.modelrefactoring.evolution.operator
 	}
 	
 	
-	public void print_org_modelrefactoring_evolution_operators_EStructuralFeatureQualifier(org.modelrefactoring.evolution.operators.EStructuralFeatureQualifier element, String outertab, PrintWriter out) {
+	public void print_org_modelrefactoring_evolution_operators_EReferenceQualifier(org.modelrefactoring.evolution.operators.EReferenceQualifier element, String outertab, PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -373,23 +373,23 @@ public class OperatorsPrinter implements org.modelrefactoring.evolution.operator
 		// 0 (if the feature is null).
 		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(2);
 		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__VARIABLE));
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__VARIABLE));
 		printCountingMap.put("variable", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE));
-		printCountingMap.put("structuralFeature", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE));
+		printCountingMap.put("reference", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
-		count = printCountingMap.get("structuralFeature");
+		count = printCountingMap.get("reference");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE));
 			if (o != null) {
 				org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEStructuralFeatureQualifierStructuralFeatureReferenceResolver().deResolve((org.eclipse.emf.ecore.EStructuralFeature) o, element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE)), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.ESTRUCTURAL_FEATURE_QUALIFIER__STRUCTURAL_FEATURE), element));
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEReferenceQualifierReferenceReferenceResolver().deResolve((org.eclipse.emf.ecore.EReference) o, element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE)), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.operators.OperatorsPackage.EREFERENCE_QUALIFIER__REFERENCE), element));
 				out.print(" ");
 			}
-			printCountingMap.put("structuralFeature", count - 1);
+			printCountingMap.put("reference", count - 1);
 		}
 	}
 	

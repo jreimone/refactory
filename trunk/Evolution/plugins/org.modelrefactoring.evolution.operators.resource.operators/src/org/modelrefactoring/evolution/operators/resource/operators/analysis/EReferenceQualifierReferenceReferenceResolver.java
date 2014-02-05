@@ -13,25 +13,25 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.modelrefactoring.evolution.operators.MOVE;
+import org.modelrefactoring.evolution.operators.EReferenceQualifier;
 import org.modelrefactoring.evolution.operators.Referrable;
 import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult;
 import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver;
 import org.modelrefactoring.evolution.operators.util.OperatorsUtil;
 
-public class MOVEParentReferenceReferenceResolver implements IOperatorsReferenceResolver<MOVE, EReference> {
+public class EReferenceQualifierReferenceReferenceResolver implements IOperatorsReferenceResolver<EReferenceQualifier, EReference> {
 	
-//	private OperatorsDefaultResolverDelegate<MOVE, EReference> delegate = new OperatorsDefaultResolverDelegate<MOVE, EReference>();
+//	private OperatorsDefaultResolverDelegate<EReferenceQualifier, EReference> delegate = new OperatorsDefaultResolverDelegate<EReferenceQualifier, EReference>();
 	
-	public void resolve(String identifier, MOVE move, EReference reference, int position, boolean resolveFuzzy, final IOperatorsReferenceResolveResult<EReference> result) {
-		Referrable newParentReferrable = move.getNewParent();
-		if(newParentReferrable == null){
-			result.setErrorMessage("The new parent must be specified");
+	public void resolve(String identifier, EReferenceQualifier qualifier, EReference reference, int position, boolean resolveFuzzy, final IOperatorsReferenceResolveResult<EReference> result) {
+		Referrable queryObject = qualifier.getVariable().getQueryObject();
+		if(queryObject == null){
+			result.setErrorMessage("Owner of the structural feature '" + identifier + "' must be specified");
 			return;
 		}
 		List<Diagnostic> errors = new ArrayList<Diagnostic>();
-		EObject newParent = OperatorsUtil.getEObjectFromReferrable(newParentReferrable, errors);
-		EClass metaclass = newParent.eClass();
+		EObject referenceOwner = OperatorsUtil.getEObjectFromReferrable(queryObject, errors);
+		EClass metaclass = referenceOwner.eClass();
 		List<EReference> allReferences = metaclass.getEAllReferences();
 		for (EReference ownedReference : allReferences) {
 			if(resolveFuzzy || identifier.equals(ownedReference.getName())){
@@ -40,7 +40,7 @@ public class MOVEParentReferenceReferenceResolver implements IOperatorsReference
 		}
 	}
 	
-	public String deResolve(EReference element, MOVE container, EReference reference) {
+	public String deResolve(EReference element, EReferenceQualifier container, EReference reference) {
 		return element.getName();
 	}
 	

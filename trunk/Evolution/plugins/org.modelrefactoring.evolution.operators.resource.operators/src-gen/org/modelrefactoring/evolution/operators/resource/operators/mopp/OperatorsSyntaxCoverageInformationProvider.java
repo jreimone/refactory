@@ -16,7 +16,7 @@ public class OperatorsSyntaxCoverageInformationProvider {
 			org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getVariableReference(),
 			org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getVAR(),
 			org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getQueryVariable(),
-			org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEStructuralFeatureQualifier(),
+			org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEReferenceQualifier(),
 			org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getEOperationQualifier(),
 			org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getCREATE(),
 			org.modelrefactoring.evolution.operators.OperatorsPackage.eINSTANCE.getTypeVariable(),

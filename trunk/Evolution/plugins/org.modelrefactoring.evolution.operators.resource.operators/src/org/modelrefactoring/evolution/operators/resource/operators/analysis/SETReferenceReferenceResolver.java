@@ -6,18 +6,42 @@
  */
 package org.modelrefactoring.evolution.operators.resource.operators.analysis;
 
-import org.eclipse.emf.ecore.EReference;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SETReferenceReferenceResolver implements org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver<org.modelrefactoring.evolution.operators.SET, org.eclipse.emf.ecore.EReference> {
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.modelrefactoring.evolution.operators.Referrable;
+import org.modelrefactoring.evolution.operators.SET;
+import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult;
+import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver;
+import org.modelrefactoring.evolution.operators.util.OperatorsUtil;
+
+public class SETReferenceReferenceResolver implements IOperatorsReferenceResolver<SET, EReference> {
 	
-	private org.modelrefactoring.evolution.operators.resource.operators.analysis.OperatorsDefaultResolverDelegate<org.modelrefactoring.evolution.operators.SET, org.eclipse.emf.ecore.EReference> delegate = new org.modelrefactoring.evolution.operators.resource.operators.analysis.OperatorsDefaultResolverDelegate<org.modelrefactoring.evolution.operators.SET, org.eclipse.emf.ecore.EReference>();
+//	private OperatorsDefaultResolverDelegate<SET, EReference> delegate = new OperatorsDefaultResolverDelegate<SET, EReference>();
 	
-	public void resolve(String identifier, org.modelrefactoring.evolution.operators.SET container, EReference reference, int position, boolean resolveFuzzy, final org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, SET set, EReference reference, int position, boolean resolveFuzzy, final IOperatorsReferenceResolveResult<EReference> result) {
+		Referrable referenceOwnerReferrable = set.getReferenceOwner();
+		if(referenceOwnerReferrable == null){
+			result.setErrorMessage("The parent must be specified");
+			return;
+		}
+		List<Diagnostic> errors = new ArrayList<Diagnostic>();
+		EObject referenceOwner = OperatorsUtil.getEObjectFromReferrable(referenceOwnerReferrable, errors);
+		EClass metaclass = referenceOwner.eClass();
+		List<EReference> allReferences = metaclass.getEAllReferences();
+		for (EReference ownedReference : allReferences) {
+			if(resolveFuzzy || identifier.equals(ownedReference.getName())){
+				result.addMapping(ownedReference.getName(), ownedReference);
+			}
+		}
 	}
 	
-	public String deResolve(org.eclipse.emf.ecore.EReference element, org.modelrefactoring.evolution.operators.SET container, EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(EReference element, SET container, EReference reference) {
+		return element.getName();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

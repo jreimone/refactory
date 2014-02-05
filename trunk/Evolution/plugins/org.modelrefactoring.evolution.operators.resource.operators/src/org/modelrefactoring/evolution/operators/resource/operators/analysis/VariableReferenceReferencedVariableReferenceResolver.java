@@ -7,17 +7,21 @@
 package org.modelrefactoring.evolution.operators.resource.operators.analysis;
 
 import org.eclipse.emf.ecore.EReference;
+import org.modelrefactoring.evolution.operators.Variable;
+import org.modelrefactoring.evolution.operators.VariableReference;
+import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult;
+import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver;
 
-public class VariableReferenceReferencedVariableReferenceResolver implements org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver<org.modelrefactoring.evolution.operators.VariableReference, org.modelrefactoring.evolution.operators.Variable> {
+public class VariableReferenceReferencedVariableReferenceResolver implements IOperatorsReferenceResolver<VariableReference, Variable> {
 	
-	private org.modelrefactoring.evolution.operators.resource.operators.analysis.OperatorsDefaultResolverDelegate<org.modelrefactoring.evolution.operators.VariableReference, org.modelrefactoring.evolution.operators.Variable> delegate = new org.modelrefactoring.evolution.operators.resource.operators.analysis.OperatorsDefaultResolverDelegate<org.modelrefactoring.evolution.operators.VariableReference, org.modelrefactoring.evolution.operators.Variable>();
+	private OperatorsDefaultResolverDelegate<VariableReference, Variable> delegate = new OperatorsDefaultResolverDelegate<VariableReference, Variable>();
 	
-	public void resolve(String identifier, org.modelrefactoring.evolution.operators.VariableReference container, EReference reference, int position, boolean resolveFuzzy, final org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult<org.modelrefactoring.evolution.operators.Variable> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, VariableReference variableReference, EReference reference, int position, boolean resolveFuzzy, final IOperatorsReferenceResolveResult<Variable> result) {
+		delegate.resolve(identifier, variableReference, reference, position, resolveFuzzy, result);
 	}
 	
-	public String deResolve(org.modelrefactoring.evolution.operators.Variable element, org.modelrefactoring.evolution.operators.VariableReference container, EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(Variable variable, VariableReference container, EReference reference) {
+		return variable.getName();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

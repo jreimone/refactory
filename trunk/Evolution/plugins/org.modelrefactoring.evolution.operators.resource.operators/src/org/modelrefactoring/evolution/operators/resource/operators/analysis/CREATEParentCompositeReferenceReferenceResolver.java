@@ -6,18 +6,42 @@
  */
 package org.modelrefactoring.evolution.operators.resource.operators.analysis;
 
-import org.eclipse.emf.ecore.EReference;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CREATEParentCompositeReferenceReferenceResolver implements org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver<org.modelrefactoring.evolution.operators.CREATE, org.eclipse.emf.ecore.EReference> {
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.modelrefactoring.evolution.operators.CREATE;
+import org.modelrefactoring.evolution.operators.Referrable;
+import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult;
+import org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolver;
+import org.modelrefactoring.evolution.operators.util.OperatorsUtil;
+
+public class CREATEParentCompositeReferenceReferenceResolver implements IOperatorsReferenceResolver<CREATE, EReference> {
 	
-	private org.modelrefactoring.evolution.operators.resource.operators.analysis.OperatorsDefaultResolverDelegate<org.modelrefactoring.evolution.operators.CREATE, org.eclipse.emf.ecore.EReference> delegate = new org.modelrefactoring.evolution.operators.resource.operators.analysis.OperatorsDefaultResolverDelegate<org.modelrefactoring.evolution.operators.CREATE, org.eclipse.emf.ecore.EReference>();
+//	private OperatorsDefaultResolverDelegate<CREATE, EReference> delegate = new OperatorsDefaultResolverDelegate<CREATE, EReference>();
 	
-	public void resolve(String identifier, org.modelrefactoring.evolution.operators.CREATE container, EReference reference, int position, boolean resolveFuzzy, final org.modelrefactoring.evolution.operators.resource.operators.IOperatorsReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, CREATE container, EReference reference, int position, boolean resolveFuzzy, final IOperatorsReferenceResolveResult<EReference> result) {
+		Referrable referrable = container.getParent();
+		if(referrable == null){
+			result.setErrorMessage("Parent of the new element must be specified");
+			return;
+		}
+		List<Diagnostic> errors = new ArrayList<Diagnostic>();
+		EObject parent = OperatorsUtil.getEObjectFromReferrable(referrable, errors);
+		EClass metaclass = parent.eClass();
+		List<EReference> allContainments = metaclass.getEAllContainments();
+		for (EReference eReference : allContainments) {
+			if(resolveFuzzy || identifier.equals(eReference.getName())){
+				result.addMapping(eReference.getName(), eReference);
+			}
+		}
 	}
 	
-	public String deResolve(org.eclipse.emf.ecore.EReference element, org.modelrefactoring.evolution.operators.CREATE container, EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(EReference element, CREATE container, EReference reference) {
+		return element.getName();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
