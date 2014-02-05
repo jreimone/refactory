@@ -19,10 +19,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CREATE" eSuperTypes="#//Operator">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="containmentReference"/>
+      <details key="constraints" value="containmentReference uniqueParent"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
       <details key="containmentReference" value="self.parentCompositeReference.containment = true"/>
+      <details key="uniqueParent" value="let &#xA;&#x9;variableReference : VariableReference = self.parent.oclAsType(VariableReference),&#xA;&#x9;queryResult : EObjectReference = variableReference.referencedVariable.oclAsType(QueryVariable).queryResult.oclAsType(EObjectReference)&#xA;in&#xA;&#x9;if self.parent.oclIsKindOf(EObjectReference) then&#xA;&#x9;&#x9;self.parent.oclAsType(EObjectReference).elements->size() = 1&#xA;&#x9;else&#xA;&#x9;&#x9;if self.parent.oclIsKindOf(VariableReference) then&#xA;&#x9;&#x9; &#x9;if variableReference.referencedVariable.oclIsKindOf(QueryVariable) then&#xA;&#x9;&#x9; &#x9;&#x9;if variableReference.referencedVariable.oclAsType(QueryVariable).queryResult.oclIsKindOf(EObjectReference) then&#xA;&#x9;&#x9; &#x9;&#x9;&#x9;queryResult.elements->size() = 1&#xA;&#x9;&#x9; &#x9;&#x9;else false&#xA;&#x9;&#x9; &#x9;&#x9;endif&#xA;&#x9;&#x9; &#x9;else true&#xA;&#x9;&#x9; &#x9;endif&#xA;&#x9;&#x9;else true&#xA;&#x9;&#x9;endif&#xA;&#x9;endif"/>
     </eAnnotations>
     <eOperations name="execute">
       <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
@@ -63,7 +64,7 @@
         eType="#//Referrable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EObjectReference" eSuperTypes="#//Result #//Referrable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" lowerBound="1"
         upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Result" abstract="true"/>
@@ -72,6 +73,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SET" eSuperTypes="#//Operator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="uniqueParent"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="uniqueParent" value="let &#xA;&#x9;variableReference : VariableReference = self.referenceOwner.oclAsType(VariableReference),&#xA;&#x9;queryResult : EObjectReference = variableReference.referencedVariable.oclAsType(QueryVariable).queryResult.oclAsType(EObjectReference)&#xA;in&#xA;&#x9;if self.referenceOwner.oclIsKindOf(EObjectReference) then&#xA;&#x9;&#x9;self.referenceOwner.oclAsType(EObjectReference).elements->size() = 1&#xA;&#x9;else&#xA;&#x9;&#x9;if self.referenceOwner.oclIsKindOf(VariableReference) then&#xA;&#x9;&#x9; &#x9;if variableReference.referencedVariable.oclIsKindOf(QueryVariable) then&#xA;&#x9;&#x9; &#x9;&#x9;if variableReference.referencedVariable.oclAsType(QueryVariable).queryResult.oclIsKindOf(EObjectReference) then&#xA;&#x9;&#x9; &#x9;&#x9;&#x9;queryResult.elements->size() = 1&#xA;&#x9;&#x9; &#x9;&#x9;else false&#xA;&#x9;&#x9; &#x9;&#x9;endif&#xA;&#x9;&#x9; &#x9;else true&#xA;&#x9;&#x9; &#x9;endif&#xA;&#x9;&#x9;else true&#xA;&#x9;&#x9;endif&#xA;&#x9;endif"/>
+    </eAnnotations>
     <eOperations name="execute">
       <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
     </eOperations>
@@ -87,6 +94,12 @@
         eType="#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//Operator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="uniqueParent"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="uniqueParent" value="let &#xA;&#x9;variableReference : VariableReference = self.newParent.oclAsType(VariableReference),&#xA;&#x9;queryResult : EObjectReference = variableReference.referencedVariable.oclAsType(QueryVariable).queryResult.oclAsType(EObjectReference)&#xA;in&#xA;&#x9;if self.newParent.oclIsKindOf(EObjectReference) then&#xA;&#x9;&#x9;self.newParent.oclAsType(EObjectReference).elements->size() = 1&#xA;&#x9;else&#xA;&#x9;&#x9;if self.newParent.oclIsKindOf(VariableReference) then&#xA;&#x9;&#x9; &#x9;if variableReference.referencedVariable.oclIsKindOf(QueryVariable) then&#xA;&#x9;&#x9; &#x9;&#x9;if variableReference.referencedVariable.oclAsType(QueryVariable).queryResult.oclIsKindOf(EObjectReference) then&#xA;&#x9;&#x9; &#x9;&#x9;&#x9;queryResult.elements->size() = 1&#xA;&#x9;&#x9; &#x9;&#x9;else false&#xA;&#x9;&#x9; &#x9;&#x9;endif&#xA;&#x9;&#x9; &#x9;else true&#xA;&#x9;&#x9; &#x9;endif&#xA;&#x9;&#x9;else true&#xA;&#x9;&#x9;endif&#xA;&#x9;endif"/>
+    </eAnnotations>
     <eOperations name="execute">
       <eAnnotations source="de.devboost.emfcustomize.EcoreModelRefactorer"/>
     </eOperations>
@@ -119,13 +132,6 @@
         eType="#//QueryVariable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QueryVariable" eSuperTypes="#//Variable">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
-      <details key="operationFeatureXOR" value="self.operation = null xor self.structuralFeature = null"/>
-      <details key="nameNotNull" value="not(self.name = null)"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="operationFeatureXOR"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="queryObject" lowerBound="1"
         eType="#//Referrable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="queryResult" lowerBound="1"
@@ -134,6 +140,12 @@
         eType="#//QueryVariableQualifier" containment="true" eOpposite="#//QueryVariableQualifier/variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="nameNotNull" value="not(self.name = null)"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="nameNotNull"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QueryVariableQualifier" abstract="true">
@@ -141,6 +153,12 @@
         eType="#//QueryVariable" eOpposite="#//QueryVariable/qualifier"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EOperationQualifier" eSuperTypes="#//QueryVariableQualifier">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="parameterLessOperation"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="parameterLessOperation" value="self.operation.eParameters->size() = 0"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EOperation"/>
   </eClassifiers>

@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
@@ -38,7 +37,7 @@ public class VARCustom extends VARImpl {
 		queryVariable.setQueryResult(operatorResult);
 		EObject contextObject = null;
 		if(queryObject instanceof EObjectReference){
-			EList<EObject> element = ((EObjectReference) queryObject).getElement();
+			List<EObject> element = ((EObjectReference) queryObject).getElements();
 			if(element != null && element.size() == 1){
 				contextObject = element.get(0);
 			}
@@ -49,7 +48,7 @@ public class VARCustom extends VARImpl {
 			} else if(referencedVariable instanceof QueryVariable){
 				Result queryResult = ((QueryVariable) referencedVariable).getQueryResult();
 				if(queryResult instanceof EObjectReference){
-					EList<EObject> results = ((EObjectReference) queryResult).getElement();
+					List<EObject> results = ((EObjectReference) queryResult).getElements();
 					if(results != null && results.size() == 1){
 						contextObject = results.get(0);
 					} else {
@@ -94,7 +93,7 @@ public class VARCustom extends VARImpl {
 						Object result = contextObject.eInvoke(operation, null);
 						if(result instanceof EObject){
 							EObject singleResult = (EObject) result;
-							operatorResult.getElement().add(singleResult);
+							operatorResult.getElements().add(singleResult);
 						} else if(result instanceof List<?>){
 							List<?> resultList = (List<?>) result;
 							List<EObject> eobjects = new BasicEList<EObject>();
@@ -104,7 +103,7 @@ public class VARCustom extends VARImpl {
 								}
 							}
 							if(eobjects.size() == resultList.size()){
-								operatorResult.getElement().addAll(eobjects);
+								operatorResult.getElements().addAll(eobjects);
 							}
 						}
 					} catch (InvocationTargetException e) {
@@ -116,12 +115,12 @@ public class VARCustom extends VARImpl {
 				Object result = contextObject.eGet(structuralFeature, true);
 				if(!structuralFeature.isMany()){
 					EObject singleResult = (EObject) result;
-					operatorResult.getElement().add(singleResult);
+					operatorResult.getElements().add(singleResult);
 				} else {
 					List<?> resultList = (List<?>) result;
 					for (Object resultElement : resultList) {
 						if(resultElement instanceof EObject){
-							operatorResult.getElement().add((EObject) resultElement);
+							operatorResult.getElements().add((EObject) resultElement);
 						}
 					}
 				}

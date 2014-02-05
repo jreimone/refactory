@@ -31,7 +31,7 @@ public class CREATECustom extends CREATEImpl {
 			return;
 		}
 		EObject instance = EcoreUtil.create(metaclass);
-		result.getElement().add(instance);
+		result.getElements().add(instance);
 		variable.setInstance(instance);
 		EReference containmentReference = getParentCompositeReference();
 		if(!containmentReference.isContainment()){
