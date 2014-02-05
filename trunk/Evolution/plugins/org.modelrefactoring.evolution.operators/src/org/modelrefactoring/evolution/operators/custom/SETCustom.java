@@ -3,7 +3,7 @@ package org.modelrefactoring.evolution.operators.custom;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -29,8 +29,8 @@ public class SETCustom extends SETImpl {
 			return;
 		}
 		Referrable valueReferrable = getValue();
-		EObject value = OperatorsUtil.getEObjectFromReferrable(valueReferrable, errors);
-		if(value == null){
+		List<EObject> values = OperatorsUtil.getEObjectsFromReferrable(valueReferrable, errors);
+		if(values == null){
 			OperatorsUtil.addErrorsToResourceOf(this, errors);
 			return;
 		}
@@ -39,15 +39,15 @@ public class SETCustom extends SETImpl {
 			OperatorsUtil.createDiagnosticAndAddToResource(this, "The reference mustn't be null");
 			return;
 		}
-		EClassifier type = reference.getEReferenceType();
-		if(type.isInstance(value)){
-			owner.eSet(reference, value);
+		EClass type = reference.getEReferenceType();
+		if(type.isInstance(values)){
+			owner.eSet(reference, values);
 		} else {
-			OperatorsUtil.createDiagnosticAndAddToResource(this, "The type '" + type.getName() + "' is not compatible with the value '" + value + "'");
+			OperatorsUtil.createDiagnosticAndAddToResource(this, "The type '" + type.getName() + "' is not compatible with the value '" + values + "'");
 			return;
 		}
 		EObjectReference result = OperatorsFactory.eINSTANCE.createEObjectReference();
-		result.getElement().add(reference);
+		result.getElements().add(reference);
 		setResult(result);
 		super.execute();
 	}

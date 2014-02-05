@@ -69,7 +69,7 @@ public class OCLConstraintProvider extends AbstractModelConstraint implements IM
 			}
 			
 			public String getPluginId() {
-				return "org.modelrefactoring.evolution.operators.";
+				return "org.modelrefactoring.evolution.operators";
 			}
 			
 			public String getName() {

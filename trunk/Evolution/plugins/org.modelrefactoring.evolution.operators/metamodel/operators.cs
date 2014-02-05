@@ -2,10 +2,10 @@ SYNTAXDEF operators
 FOR <http://www.modelrefactoring.org/operators>
 START 
 	CREATE
-//	,DELETE
-//	,ASSIGN
-//	,SET
-//	,MOVE
+	,DELETE
+	,ASSIGN
+	,SET
+	,MOVE
 //	,SPLIT
 //	,MERGE
 	,VAR
@@ -34,7 +34,8 @@ TOKENS {
 
 
 RULES {
-	EObjectReference ::= element['<','>'];
+	// Referrable
+	EObjectReference ::= elements['<','>'] ("," #1 elements['<','>'])*;
 	VariableReference ::= referencedVariable[IDENTIFIER];
 	
 	// Var
@@ -44,19 +45,30 @@ RULES {
 	QueryVariable ::= name[IDENTIFIER] #1 "=" #1 queryObject #0 "." #0 qualifier ;
 	EStructuralFeatureQualifier ::= structuralFeature[IDENTIFIER];
 	EOperationQualifier ::= operation[IDENTIFIER];
-	@SuppressWarnings(featureWithoutSyntax)
 	
 	// Create
-	CREATE ::= newInstanceVariable #1 "in" #1 parent #0 "." #0 parentCompositeReference[IDENTIFIER];
 	@SuppressWarnings(featureWithoutSyntax)
-	TypeVariable ::= name[IDENTIFIER] #1 "=" #1 "new" type[IDENTIFIER];
+	CREATE ::= "create" newInstanceVariable #1 "in" #1 parent #0 "." #0 parentCompositeReference[IDENTIFIER];
+	@SuppressWarnings(featureWithoutSyntax)
+	TypeVariable ::= name[IDENTIFIER] #1 "=" #1 "new" #1 type[IDENTIFIER];
+	@SuppressWarnings(featureWithoutSyntax)
 	
+	// Delete
+	DELETE ::= "delete" #1 deletion;
 	
-	//DELETE ::= "dELETE" (result | executed["executed" : ""] | deletion)*;
-	//ASSIGN ::= "aSSIGN" (result | executed["executed" : ""] | attribute[] | value[])*;
+	// Assign (attribute)
+	@SuppressWarnings(featureWithoutSyntax)
+	ASSIGN ::= attributeOwner #0 "." #0 attribute[IDENTIFIER] #1 "=" #1 value['"','"'];
+	
+	// Set (reference)	
+	@SuppressWarnings(featureWithoutSyntax)
+	SET ::= referenceOwner #0 "." #0 reference[IDENTIFIER] #1 "=" #1 value;
+	
+	// Move
+	@SuppressWarnings(featureWithoutSyntax)
+	MOVE ::= "move" #1 movee #1 "to" #1 newParent #0 "." #0 parentReference[IDENTIFIER];
+	
 	//PrimitiveReference ::= "primitiveReference" (value[])* ";";
-	//SET ::= "sET" (result | executed["executed" : ""] | reference[] | value)*;
-	//MOVE ::= "mOVE" (result | executed["executed" : ""] | newParent | parentReference[] | movee)*;
 	//SPLIT ::= "sPLIT" (result | executed["executed" : ""] | splitSets | splitObject)*;
 	//StructuralFeatureSet ::= "structuralFeatureSet" (structuralFeatures[])* ";";
 	//MERGE ::= "mERGE" (result | executed["executed" : ""] | mergeObjects)*;
