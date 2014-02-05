@@ -84,10 +84,6 @@ public class CodsAdapterFactory extends AdapterFactoryImpl {
 				return createEvolutionDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseCoEvolutionDefinition(CoEvolutionDefinition object) {
-				return createCoEvolutionDefinitionAdapter();
-			}
-			@Override
 			public Adapter caseModel(Model object) {
 				return createModelAdapter();
 			}
@@ -158,20 +154,6 @@ public class CodsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEvolutionDefinitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.modelrefactoring.evolution.megamodel.cods.CoEvolutionDefinition <em>Co Evolution Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.modelrefactoring.evolution.megamodel.cods.CoEvolutionDefinition
-	 * @generated
-	 */
-	public Adapter createCoEvolutionDefinitionAdapter() {
 		return null;
 	}
 

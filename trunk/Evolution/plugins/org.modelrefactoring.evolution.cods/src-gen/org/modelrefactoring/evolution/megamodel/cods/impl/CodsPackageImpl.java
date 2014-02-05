@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.modelrefactoring.evolution.coed.CoedPackage;
 import org.modelrefactoring.evolution.megamodel.MegamodelPackage;
 import org.modelrefactoring.evolution.megamodel.architecture.ArchitecturePackage;
 import org.modelrefactoring.evolution.megamodel.architecture.impl.ArchitecturePackageImpl;
-import org.modelrefactoring.evolution.megamodel.cods.CoEvolutionDefinition;
 import org.modelrefactoring.evolution.megamodel.cods.CodsFactory;
 import org.modelrefactoring.evolution.megamodel.cods.CodsPackage;
 import org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification;
@@ -48,13 +48,6 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 	 * @generated
 	 */
 	private EClass evolutionDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass coEvolutionDefinitionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -103,6 +96,7 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
+		CoedPackage.eINSTANCE.eClass();
 		EcorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
@@ -178,7 +172,7 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDomainSpecificEvolutionSpecification_CoED() {
+	public EReference getDomainSpecificEvolutionSpecification_CoEvolutionDefinition() {
 		return (EReference)domainSpecificEvolutionSpecificationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -189,15 +183,6 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 	 */
 	public EClass getEvolutionDefinition() {
 		return evolutionDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getCoEvolutionDefinition() {
-		return coEvolutionDefinitionEClass;
 	}
 
 	/**
@@ -234,11 +219,9 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 		domainSpecificEvolutionSpecificationEClass = createEClass(DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION);
 		createEReference(domainSpecificEvolutionSpecificationEClass, DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL);
 		createEReference(domainSpecificEvolutionSpecificationEClass, DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED);
-		createEReference(domainSpecificEvolutionSpecificationEClass, DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED);
+		createEReference(domainSpecificEvolutionSpecificationEClass, DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION);
 
 		evolutionDefinitionEClass = createEClass(EVOLUTION_DEFINITION);
-
-		coEvolutionDefinitionEClass = createEClass(CO_EVOLUTION_DEFINITION);
 	}
 
 	/**
@@ -266,6 +249,7 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 
 		// Obtain other dependent packages
 		ArchitecturePackage theArchitecturePackage = (ArchitecturePackage)EPackage.Registry.INSTANCE.getEPackage(ArchitecturePackage.eNS_URI);
+		CoedPackage theCoedPackage = (CoedPackage)EPackage.Registry.INSTANCE.getEPackage(CoedPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -281,11 +265,9 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 		initEClass(domainSpecificEvolutionSpecificationEClass, DomainSpecificEvolutionSpecification.class, "DomainSpecificEvolutionSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainSpecificEvolutionSpecification_Metamodel(), theArchitecturePackage.getMetaModel(), null, "metamodel", null, 1, 1, DomainSpecificEvolutionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainSpecificEvolutionSpecification_ED(), this.getEvolutionDefinition(), null, "ED", null, 0, 1, DomainSpecificEvolutionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainSpecificEvolutionSpecification_CoED(), this.getCoEvolutionDefinition(), null, "CoED", null, 0, 1, DomainSpecificEvolutionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainSpecificEvolutionSpecification_CoEvolutionDefinition(), theCoedPackage.getCoEvolutionDefinition(), null, "coEvolutionDefinition", null, 0, 1, DomainSpecificEvolutionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(evolutionDefinitionEClass, EvolutionDefinition.class, "EvolutionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(coEvolutionDefinitionEClass, CoEvolutionDefinition.class, "CoEvolutionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //CodsPackageImpl
