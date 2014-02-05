@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_r2cPcI59EeO-CIpo86JznA" type="EcoreTools" name="coed" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_wblOkI59EeO-CIpo86JznA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_wbmcsI59EeO-CIpo86JznA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_wbmcsY59EeO-CIpo86JznA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_wbmcso59EeO-CIpo86JznA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_wbmcs459EeO-CIpo86JznA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_wbmctI59EeO-CIpo86JznA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_wbmctY59EeO-CIpo86JznA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_wbmcto59EeO-CIpo86JznA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_wbmct459EeO-CIpo86JznA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_wbmcuI59EeO-CIpo86JznA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_wblOkY59EeO-CIpo86JznA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="coed.ecore#//CoEvolutionDefinition"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wblOko59EeO-CIpo86JznA" x="280" y="130"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_3xyqUI6BEeO-CIpo86JznA" type="Note" fontName="Sans" description="one CoED for each different language" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_3x3i0I6BEeO-CIpo86JznA" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_3x4J4I6BEeO-CIpo86JznA" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_3xzRYI6BEeO-CIpo86JznA"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_3xzRYY6BEeO-CIpo86JznA"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3xzRYo6BEeO-CIpo86JznA" x="515" y="62"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_r2cPcY59EeO-CIpo86JznA"/>
+  <element xmi:type="ecore:EPackage" href="coed.ecore#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_6lSFoI6BEeO-CIpo86JznA" type="NoteAttachment" source="_3xyqUI6BEeO-CIpo86JznA" target="_wblOkI59EeO-CIpo86JznA" routing="Rectilinear" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_6lSFoY6BEeO-CIpo86JznA"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_6lSFoo6BEeO-CIpo86JznA"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6lSFo46BEeO-CIpo86JznA" points="[-45, 29, 97, -61]$[-140, 109, 2, 19]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6lVwAI6BEeO-CIpo86JznA" id="(0.18218623481781376,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6lVwAY6BEeO-CIpo86JznA" id="(0.8641975308641975,0.5581395348837209)"/>
+  </edges>
+</notation:Diagram>
