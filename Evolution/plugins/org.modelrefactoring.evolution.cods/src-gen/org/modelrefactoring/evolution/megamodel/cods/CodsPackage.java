@@ -188,13 +188,13 @@ public interface CodsPackage extends EPackage {
 	int DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED = 1;
 
 	/**
-	 * The feature id for the '<em><b>Co ED</b></em>' containment reference.
+	 * The feature id for the '<em><b>Co Evolution Definition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED = 2;
+	int DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION = 2;
 
 	/**
 	 * The number of structural features of the '<em>Domain Specific Evolution Specification</em>' class.
@@ -223,26 +223,6 @@ public interface CodsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVOLUTION_DEFINITION_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.modelrefactoring.evolution.megamodel.cods.impl.CoEvolutionDefinitionImpl <em>Co Evolution Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.modelrefactoring.evolution.megamodel.cods.impl.CoEvolutionDefinitionImpl
-	 * @see org.modelrefactoring.evolution.megamodel.cods.impl.CodsPackageImpl#getCoEvolutionDefinition()
-	 * @generated
-	 */
-	int CO_EVOLUTION_DEFINITION = 3;
-
-	/**
-	 * The number of structural features of the '<em>Co Evolution Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CO_EVOLUTION_DEFINITION_FEATURE_COUNT = 0;
-
 
 	/**
 	 * Returns the meta object for class '{@link org.modelrefactoring.evolution.megamodel.cods.CODS <em>CODS</em>}'.
@@ -298,15 +278,15 @@ public interface CodsPackage extends EPackage {
 	EReference getDomainSpecificEvolutionSpecification_ED();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getCoED <em>Co ED</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getCoEvolutionDefinition <em>Co Evolution Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Co ED</em>'.
-	 * @see org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getCoED()
+	 * @return the meta object for the containment reference '<em>Co Evolution Definition</em>'.
+	 * @see org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getCoEvolutionDefinition()
 	 * @see #getDomainSpecificEvolutionSpecification()
 	 * @generated
 	 */
-	EReference getDomainSpecificEvolutionSpecification_CoED();
+	EReference getDomainSpecificEvolutionSpecification_CoEvolutionDefinition();
 
 	/**
 	 * Returns the meta object for class '{@link org.modelrefactoring.evolution.megamodel.cods.EvolutionDefinition <em>Evolution Definition</em>}'.
@@ -317,16 +297,6 @@ public interface CodsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEvolutionDefinition();
-
-	/**
-	 * Returns the meta object for class '{@link org.modelrefactoring.evolution.megamodel.cods.CoEvolutionDefinition <em>Co Evolution Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Co Evolution Definition</em>'.
-	 * @see org.modelrefactoring.evolution.megamodel.cods.CoEvolutionDefinition
-	 * @generated
-	 */
-	EClass getCoEvolutionDefinition();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -395,12 +365,12 @@ public interface CodsPackage extends EPackage {
 		EReference DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED = eINSTANCE.getDomainSpecificEvolutionSpecification_ED();
 
 		/**
-		 * The meta object literal for the '<em><b>Co ED</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Co Evolution Definition</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED = eINSTANCE.getDomainSpecificEvolutionSpecification_CoED();
+		EReference DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION = eINSTANCE.getDomainSpecificEvolutionSpecification_CoEvolutionDefinition();
 
 		/**
 		 * The meta object literal for the '{@link org.modelrefactoring.evolution.megamodel.cods.impl.EvolutionDefinitionImpl <em>Evolution Definition</em>}' class.
@@ -411,16 +381,6 @@ public interface CodsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EVOLUTION_DEFINITION = eINSTANCE.getEvolutionDefinition();
-
-		/**
-		 * The meta object literal for the '{@link org.modelrefactoring.evolution.megamodel.cods.impl.CoEvolutionDefinitionImpl <em>Co Evolution Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.modelrefactoring.evolution.megamodel.cods.impl.CoEvolutionDefinitionImpl
-		 * @see org.modelrefactoring.evolution.megamodel.cods.impl.CodsPackageImpl#getCoEvolutionDefinition()
-		 * @generated
-		 */
-		EClass CO_EVOLUTION_DEFINITION = eINSTANCE.getCoEvolutionDefinition();
 
 	}
 

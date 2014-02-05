@@ -53,15 +53,6 @@ public interface CodsFactory extends EFactory {
 	EvolutionDefinition createEvolutionDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Co Evolution Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Co Evolution Definition</em>'.
-	 * @generated
-	 */
-	CoEvolutionDefinition createCoEvolutionDefinition();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

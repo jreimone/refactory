@@ -16,5 +16,6 @@ Export-Package: org.modelrefactoring.evolution.megamodel,
  org.modelrefactoring.evolution.megamodel.cods.util,
  org.modelrefactoring.evolution.megamodel.impl
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.modelrefactoring.evolution.coed
 Bundle-ActivationPolicy: lazy

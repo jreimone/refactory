@@ -7,7 +7,7 @@
     testsDirectory="/org.modelrefactoring.evolution.cods.tests/src-gen" testSuiteClass="org.modelrefactoring.evolution.cods.tests.CodsAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
     editPluginID="org.modelrefactoring.evolution.cods.edit" editorPluginID="org.modelrefactoring.evolution.cods.editor"
-    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    usedGenPackages="../../org.modelrefactoring.evolution.coed/metamodel/coed.genmodel#//coed platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>cods.ecore</foreignModel>
   <genPackages prefix="Megamodel" basePackage="org.modelrefactoring.evolution" disposableProviderFactory="true"
       ecorePackage="cods.ecore#/">
@@ -21,10 +21,9 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference cods.ecore#//cods/DomainSpecificEvolutionSpecification/metamodel"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cods.ecore#//cods/DomainSpecificEvolutionSpecification/ED"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cods.ecore#//cods/DomainSpecificEvolutionSpecification/CoED"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cods.ecore#//cods/DomainSpecificEvolutionSpecification/coEvolutionDefinition"/>
       </genClasses>
       <genClasses ecoreClass="cods.ecore#//cods/EvolutionDefinition"/>
-      <genClasses ecoreClass="cods.ecore#//cods/CoEvolutionDefinition"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Architecture" basePackage="org.modelrefactoring.evolution.megamodel"
         disposableProviderFactory="true" ecorePackage="cods.ecore#//architecture">

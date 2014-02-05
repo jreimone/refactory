@@ -60,7 +60,6 @@ public class CodsFactoryImpl extends EFactoryImpl implements CodsFactory {
 			case CodsPackage.CODS: return createCODS();
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION: return createDomainSpecificEvolutionSpecification();
 			case CodsPackage.EVOLUTION_DEFINITION: return createEvolutionDefinition();
-			case CodsPackage.CO_EVOLUTION_DEFINITION: return createCoEvolutionDefinition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -94,16 +93,6 @@ public class CodsFactoryImpl extends EFactoryImpl implements CodsFactory {
 	public EvolutionDefinition createEvolutionDefinition() {
 		EvolutionDefinitionImpl evolutionDefinition = new EvolutionDefinitionImpl();
 		return evolutionDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CoEvolutionDefinition createCoEvolutionDefinition() {
-		CoEvolutionDefinitionImpl coEvolutionDefinition = new CoEvolutionDefinitionImpl();
-		return coEvolutionDefinition;
 	}
 
 	/**

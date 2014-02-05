@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.modelrefactoring.evolution.coed.CoedPackage;
 import org.modelrefactoring.evolution.megamodel.MegamodelFactory;
 import org.modelrefactoring.evolution.megamodel.MegamodelPackage;
 import org.modelrefactoring.evolution.megamodel.architecture.ArchitecturePackage;
@@ -78,6 +79,7 @@ public class MegamodelPackageImpl extends EPackageImpl implements MegamodelPacka
 		isInited = true;
 
 		// Initialize simple dependencies
+		CoedPackage.eINSTANCE.eClass();
 		EcorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies

@@ -1,19 +1,20 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.modelrefactoring.evolution.megamodel.cods.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
+
 import org.modelrefactoring.evolution.megamodel.architecture.MetaModel;
-import org.modelrefactoring.evolution.megamodel.cods.CoEvolutionDefinition;
+
 import org.modelrefactoring.evolution.megamodel.cods.CodsPackage;
 import org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification;
 import org.modelrefactoring.evolution.megamodel.cods.EvolutionDefinition;
@@ -27,7 +28,7 @@ import org.modelrefactoring.evolution.megamodel.cods.EvolutionDefinition;
  * <ul>
  *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.impl.DomainSpecificEvolutionSpecificationImpl#getMetamodel <em>Metamodel</em>}</li>
  *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.impl.DomainSpecificEvolutionSpecificationImpl#getED <em>ED</em>}</li>
- *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.impl.DomainSpecificEvolutionSpecificationImpl#getCoED <em>Co ED</em>}</li>
+ *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.impl.DomainSpecificEvolutionSpecificationImpl#getCoEvolutionDefinition <em>Co Evolution Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,14 +56,14 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	protected EvolutionDefinition ed;
 
 	/**
-	 * The cached value of the '{@link #getCoED() <em>Co ED</em>}' containment reference.
+	 * The cached value of the '{@link #getCoEvolutionDefinition() <em>Co Evolution Definition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCoED()
+	 * @see #getCoEvolutionDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected CoEvolutionDefinition coED;
+	protected CoEvolutionDefinition coEvolutionDefinition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -169,8 +170,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoEvolutionDefinition getCoED() {
-		return coED;
+	public CoEvolutionDefinition getCoEvolutionDefinition() {
+		return coEvolutionDefinition;
 	}
 
 	/**
@@ -178,11 +179,11 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCoED(CoEvolutionDefinition newCoED, NotificationChain msgs) {
-		CoEvolutionDefinition oldCoED = coED;
-		coED = newCoED;
+	public NotificationChain basicSetCoEvolutionDefinition(CoEvolutionDefinition newCoEvolutionDefinition, NotificationChain msgs) {
+		CoEvolutionDefinition oldCoEvolutionDefinition = coEvolutionDefinition;
+		coEvolutionDefinition = newCoEvolutionDefinition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, oldCoED, newCoED);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION, oldCoEvolutionDefinition, newCoEvolutionDefinition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -193,18 +194,18 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCoED(CoEvolutionDefinition newCoED) {
-		if (newCoED != coED) {
+	public void setCoEvolutionDefinition(CoEvolutionDefinition newCoEvolutionDefinition) {
+		if (newCoEvolutionDefinition != coEvolutionDefinition) {
 			NotificationChain msgs = null;
-			if (coED != null)
-				msgs = ((InternalEObject)coED).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, null, msgs);
-			if (newCoED != null)
-				msgs = ((InternalEObject)newCoED).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, null, msgs);
-			msgs = basicSetCoED(newCoED, msgs);
+			if (coEvolutionDefinition != null)
+				msgs = ((InternalEObject)coEvolutionDefinition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION, null, msgs);
+			if (newCoEvolutionDefinition != null)
+				msgs = ((InternalEObject)newCoEvolutionDefinition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION, null, msgs);
+			msgs = basicSetCoEvolutionDefinition(newCoEvolutionDefinition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED, newCoED, newCoED));
+			eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION, newCoEvolutionDefinition, newCoEvolutionDefinition));
 	}
 
 	/**
@@ -217,8 +218,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 		switch (featureID) {
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				return basicSetED(null, msgs);
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				return basicSetCoED(null, msgs);
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION:
+				return basicSetCoEvolutionDefinition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -236,8 +237,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 				return basicGetMetamodel();
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				return getED();
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				return getCoED();
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION:
+				return getCoEvolutionDefinition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -256,8 +257,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				setED((EvolutionDefinition)newValue);
 				return;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				setCoED((CoEvolutionDefinition)newValue);
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION:
+				setCoEvolutionDefinition((CoEvolutionDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -277,8 +278,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				setED((EvolutionDefinition)null);
 				return;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				setCoED((CoEvolutionDefinition)null);
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION:
+				setCoEvolutionDefinition((CoEvolutionDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -296,8 +297,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 				return metamodel != null;
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				return ed != null;
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_ED:
-				return coED != null;
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION:
+				return coEvolutionDefinition != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.modelrefactoring.evolution.coed.CoedPackage;
 import org.modelrefactoring.evolution.megamodel.MegamodelPackage;
 import org.modelrefactoring.evolution.megamodel.architecture.ArchitectureFactory;
 import org.modelrefactoring.evolution.megamodel.architecture.ArchitecturePackage;
@@ -137,6 +138,7 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 		isInited = true;
 
 		// Initialize simple dependencies
+		CoedPackage.eINSTANCE.eClass();
 		EcorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
