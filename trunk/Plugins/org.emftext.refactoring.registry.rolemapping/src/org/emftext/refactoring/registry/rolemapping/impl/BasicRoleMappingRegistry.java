@@ -95,7 +95,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	}
 
 	public Map<String, RoleMapping> getRoleMappingsForUri(String nsUri) {
-		return getRoleMappingsMap().get(nsUri);
+		return Collections.unmodifiableMap(getRoleMappingsMap().get(nsUri));
 	}
 
 	private void collectRegisteredRoleMappings(){
@@ -390,7 +390,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	}
 
 	public Map<String, Map<String, RoleMapping>> getRoleMappingsMap() {
-		return roleMappingsMap;
+		return Collections.unmodifiableMap(roleMappingsMap);
 	}
 
 	/* (non-Javadoc)
