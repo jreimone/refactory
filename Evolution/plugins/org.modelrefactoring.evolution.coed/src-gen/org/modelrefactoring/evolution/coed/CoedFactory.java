@@ -58,6 +58,15 @@ public interface CoedFactory extends EFactory {
 	RoleMappingAction createRoleMappingAction();
 
 	/**
+   * Returns a new object of class '<em>Metamodel Import</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Metamodel Import</em>'.
+   * @generated
+   */
+  MetamodelImport createMetamodelImport();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

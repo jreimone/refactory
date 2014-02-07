@@ -278,6 +278,9 @@ import org.eclipse.emf.ecore.EReference;
 			if (type.getInstanceClass() == org.modelrefactoring.evolution.coed.CoEvolutionDefinition.class) {
 				return parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition();
 			}
+			if (type.getInstanceClass() == org.modelrefactoring.evolution.coed.MetamodelImport.class) {
+				return parse_org_modelrefactoring_evolution_coed_MetamodelImport();
+			}
 			if (type.getInstanceClass() == org.modelrefactoring.evolution.coed.PlainCondition.class) {
 				return parse_org_modelrefactoring_evolution_coed_PlainCondition();
 			}
@@ -389,7 +392,7 @@ import org.eclipse.emf.ecore.EReference;
 				break;
 			}
 		}
-		int followSetID = 19;
+		int followSetID = 27;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
 			CommonToken nextToken = (CommonToken) tokenStream.get(i);
@@ -573,38 +576,90 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 	{
 		// expected elements (follow set)
 		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[3]);
-	}
-	
-	a3 = '{' {
-		if (element == null) {
-			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
-			startIncompleteElement(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_6, null, true);
-		copyLocalizationInfos((CommonToken)a3, element);
-	}
-	{
-		// expected elements (follow set)
 		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[4]);
 	}
 	
-	a4 = 'incoming' {
+	(
+		(
+			a3 = 'import' {
+				if (element == null) {
+					element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
+					startIncompleteElement(element);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_6_0_0_0, null, true);
+				copyLocalizationInfos((CommonToken)a3, element);
+			}
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[5]);
+			}
+			
+			(
+				a4_0 = parse_org_modelrefactoring_evolution_coed_MetamodelImport				{
+					if (terminateParsing) {
+						throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
+					}
+					if (element == null) {
+						element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
+						startIncompleteElement(element);
+					}
+					if (a4_0 != null) {
+						if (a4_0 != null) {
+							Object value = a4_0;
+							addObjectToList(element, org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS, value);
+							completedElement(value, true);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_6_0_0_2, a4_0, true);
+						copyLocalizationInfos(a4_0, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[6]);
+				addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[7]);
+			}
+			
+		)
+		
+	)*	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[8]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[9]);
+	}
+	
+	a5 = '{' {
 		if (element == null) {
 			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_8, null, true);
-		copyLocalizationInfos((CommonToken)a4, element);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_7, null, true);
+		copyLocalizationInfos((CommonToken)a5, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[5]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[10]);
+	}
+	
+	a6 = 'incoming' {
+		if (element == null) {
+			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
+			startIncompleteElement(element);
+		}
+		collectHiddenTokens(element);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_9, null, true);
+		copyLocalizationInfos((CommonToken)a6, element);
+	}
+	{
+		// expected elements (follow set)
+		addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[11]);
 	}
 	
 	(
-		a5_0 = parse_org_modelrefactoring_evolution_coed_Event		{
+		a7_0 = parse_org_modelrefactoring_evolution_coed_Event		{
 			if (terminateParsing) {
 				throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
 			}
@@ -612,27 +667,27 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 				element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
 				startIncompleteElement(element);
 			}
-			if (a5_0 != null) {
-				if (a5_0 != null) {
-					Object value = a5_0;
+			if (a7_0 != null) {
+				if (a7_0 != null) {
+					Object value = a7_0;
 					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__EVENT), value);
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_10, a5_0, true);
-				copyLocalizationInfos(a5_0, element);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_11, a7_0, true);
+				copyLocalizationInfos(a7_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[6]);
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[7]);
+		addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[12]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[13]);
 	}
 	
 	(
 		(
-			a6_0 = parse_org_modelrefactoring_evolution_coed_Condition			{
+			a8_0 = parse_org_modelrefactoring_evolution_coed_Condition			{
 				if (terminateParsing) {
 					throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
 				}
@@ -640,40 +695,40 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 					element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
 					startIncompleteElement(element);
 				}
-				if (a6_0 != null) {
-					if (a6_0 != null) {
-						Object value = a6_0;
+				if (a8_0 != null) {
+					if (a8_0 != null) {
+						Object value = a8_0;
 						element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__CONDITION), value);
 						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_12, a6_0, true);
-					copyLocalizationInfos(a6_0, element);
+					retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_13, a8_0, true);
+					copyLocalizationInfos(a8_0, element);
 				}
 			}
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[8]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[14]);
 	}
 	
-	a7 = 'outgoing' {
+	a9 = 'outgoing' {
 		if (element == null) {
 			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_14, null, true);
-		copyLocalizationInfos((CommonToken)a7, element);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_15, null, true);
+		copyLocalizationInfos((CommonToken)a9, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[9]);
+		addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[15]);
 	}
 	
 	(
-		a8_0 = parse_org_modelrefactoring_evolution_coed_Action		{
+		a10_0 = parse_org_modelrefactoring_evolution_coed_Action		{
 			if (terminateParsing) {
 				throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
 			}
@@ -681,34 +736,131 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 				element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
 				startIncompleteElement(element);
 			}
-			if (a8_0 != null) {
-				if (a8_0 != null) {
-					Object value = a8_0;
+			if (a10_0 != null) {
+				if (a10_0 != null) {
+					Object value = a10_0;
 					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__ACTION), value);
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_16, a8_0, true);
-				copyLocalizationInfos(a8_0, element);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_17, a10_0, true);
+				copyLocalizationInfos(a10_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[10]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[16]);
 	}
 	
-	a9 = '}' {
+	a11 = '}' {
 		if (element == null) {
 			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_18, null, true);
-		copyLocalizationInfos((CommonToken)a9, element);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_19, null, true);
+		copyLocalizationInfos((CommonToken)a11, element);
 	}
 	{
 		// expected elements (follow set)
+	}
+	
+;
+
+parse_org_modelrefactoring_evolution_coed_MetamodelImport returns [org.modelrefactoring.evolution.coed.MetamodelImport element = null]
+@init{
+}
+:
+	(
+		a0 = IDENTIFIER		
+		{
+			if (terminateParsing) {
+				throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createMetamodelImport();
+				startIncompleteElement(element);
+			}
+			if (a0 != null) {
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				tokenResolver.setOptions(getOptions());
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__SHORTCUT), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
+				}
+				java.lang.String resolved = (java.lang.String) resolvedObject;
+				if (resolved != null) {
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__SHORTCUT), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_1_0_0_0, resolved, true);
+				copyLocalizationInfos((CommonToken) a0, element);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[17]);
+	}
+	
+	a1 = ':' {
+		if (element == null) {
+			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createMetamodelImport();
+			startIncompleteElement(element);
+		}
+		collectHiddenTokens(element);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_1_0_0_2, null, true);
+		copyLocalizationInfos((CommonToken)a1, element);
+	}
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[18]);
+	}
+	
+	(
+		a2 = QUOTED_60_62		
+		{
+			if (terminateParsing) {
+				throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createMetamodelImport();
+				startIncompleteElement(element);
+			}
+			if (a2 != null) {
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
+				tokenResolver.setOptions(getOptions());
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__METAMODEL), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a2).getLine(), ((CommonToken) a2).getCharPositionInLine(), ((CommonToken) a2).getStartIndex(), ((CommonToken) a2).getStopIndex());
+				}
+				String resolved = (String) resolvedObject;
+				org.eclipse.emf.ecore.EPackage proxy = org.eclipse.emf.ecore.EcoreFactory.eINSTANCE.createEPackage();
+				collectHiddenTokens(element);
+				registerContextDependentProxy(new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedContextDependentURIFragmentFactory<org.modelrefactoring.evolution.coed.MetamodelImport, org.eclipse.emf.ecore.EPackage>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getMetamodelImportMetamodelReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__METAMODEL), resolved, proxy);
+				if (proxy != null) {
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__METAMODEL), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_1_0_0_4, proxy, true);
+				copyLocalizationInfos((CommonToken) a2, element);
+				copyLocalizationInfos((CommonToken) a2, proxy);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[19]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[20]);
 	}
 	
 ;
@@ -723,12 +875,12 @@ parse_org_modelrefactoring_evolution_coed_PlainCondition returns [org.modelrefac
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_1_0_0_0, null, true);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_2_0_0_0, null, true);
 		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[11]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[21]);
 	}
 	
 	(
@@ -757,14 +909,14 @@ parse_org_modelrefactoring_evolution_coed_PlainCondition returns [org.modelrefac
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_1_0_0_1, resolved, true);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_2_0_0_1, resolved, true);
 				copyLocalizationInfos((CommonToken) a1, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[12]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[22]);
 	}
 	
 ;
@@ -779,16 +931,16 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingEvent returns [org.modelref
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_2_0_0_0, null, true);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_3_0_0_0, null, true);
 		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[13]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[23]);
 	}
 	
 	(
-		a1 = QUOTED_60_62		
+		a1 = IDENTIFIER		
 		{
 			if (terminateParsing) {
 				throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
@@ -798,13 +950,67 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingEvent returns [org.modelref
 				startIncompleteElement(element);
 			}
 			if (a1 != null) {
-				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
 				tokenResolver.setOptions(getOptions());
 				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING), result);
+				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__METAMODEL_IMPORT), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
 					addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
+				}
+				String resolved = (String) resolvedObject;
+				org.modelrefactoring.evolution.coed.MetamodelImport proxy = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createMetamodelImport();
+				collectHiddenTokens(element);
+				registerContextDependentProxy(new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedContextDependentURIFragmentFactory<org.modelrefactoring.evolution.coed.RoleMappingEvent, org.modelrefactoring.evolution.coed.MetamodelImport>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getRoleMappingEventMetamodelImportReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__METAMODEL_IMPORT), resolved, proxy);
+				if (proxy != null) {
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__METAMODEL_IMPORT), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_3_0_0_2, proxy, true);
+				copyLocalizationInfos((CommonToken) a1, element);
+				copyLocalizationInfos((CommonToken) a1, proxy);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[24]);
+	}
+	
+	a2 = ':' {
+		if (element == null) {
+			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createRoleMappingEvent();
+			startIncompleteElement(element);
+		}
+		collectHiddenTokens(element);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_3_0_0_4, null, true);
+		copyLocalizationInfos((CommonToken)a2, element);
+	}
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[25]);
+	}
+	
+	(
+		a3 = QUOTED_60_62		
+		{
+			if (terminateParsing) {
+				throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createRoleMappingEvent();
+				startIncompleteElement(element);
+			}
+			if (a3 != null) {
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
+				tokenResolver.setOptions(getOptions());
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a3).getLine(), ((CommonToken) a3).getCharPositionInLine(), ((CommonToken) a3).getStartIndex(), ((CommonToken) a3).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.emftext.language.refactoring.rolemapping.RoleMapping proxy = org.emftext.language.refactoring.rolemapping.RolemappingFactory.eINSTANCE.createRoleMapping();
@@ -816,16 +1022,16 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingEvent returns [org.modelref
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_2_0_0_2, proxy, true);
-				copyLocalizationInfos((CommonToken) a1, element);
-				copyLocalizationInfos((CommonToken) a1, proxy);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_3_0_0_6, proxy, true);
+				copyLocalizationInfos((CommonToken) a3, element);
+				copyLocalizationInfos((CommonToken) a3, proxy);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[14]);
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[15]);
+		addExpectedElement(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[26]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[27]);
 	}
 	
 ;
@@ -840,12 +1046,12 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingAction returns [org.modelre
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_3_0_0_0, null, true);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_4_0_0_0, null, true);
 		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[16]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[28]);
 	}
 	
 	(
@@ -877,7 +1083,7 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingAction returns [org.modelre
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_3_0_0_2, proxy, true);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_4_0_0_2, proxy, true);
 				copyLocalizationInfos((CommonToken) a1, element);
 				copyLocalizationInfos((CommonToken) a1, proxy);
 			}
@@ -885,8 +1091,8 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingAction returns [org.modelre
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[17]);
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[18]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[29]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[30]);
 	}
 	
 	(
@@ -917,21 +1123,21 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingAction returns [org.modelre
 							completedElement(value, false);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_3_0_0_3_0_0_1, resolved, true);
+						retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_4_0_0_3_0_0_1, resolved, true);
 						copyLocalizationInfos((CommonToken) a2, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[19]);
+				addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[31]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[20]);
+		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[32]);
 	}
 	
 ;
@@ -956,7 +1162,6 @@ parse_org_modelrefactoring_evolution_coed_Action returns [org.modelrefactoring.e
 
 IDENTIFIER:
 	(('A'..'Z' | 'a'..'z' | '-'| '_')('A'..'Z' | 'a'..'z' | '0'..'9' | '-'| '_')*)
-	{ _channel = 99; }
 ;
 WHITESPACE:
 	((' ' | '\t' | '\f'))

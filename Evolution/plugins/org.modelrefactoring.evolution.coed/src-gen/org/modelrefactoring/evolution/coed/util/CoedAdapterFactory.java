@@ -107,6 +107,11 @@ public class CoedAdapterFactory extends AdapterFactoryImpl {
         return createRoleMappingActionAdapter();
       }
       @Override
+      public Adapter caseMetamodelImport(MetamodelImport object)
+      {
+        return createMetamodelImportAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -226,6 +231,21 @@ public class CoedAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
+   * Creates a new adapter for an object of class '{@link org.modelrefactoring.evolution.coed.MetamodelImport <em>Metamodel Import</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.modelrefactoring.evolution.coed.MetamodelImport
+   * @generated
+   */
+  public Adapter createMetamodelImportAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for the default case.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null.

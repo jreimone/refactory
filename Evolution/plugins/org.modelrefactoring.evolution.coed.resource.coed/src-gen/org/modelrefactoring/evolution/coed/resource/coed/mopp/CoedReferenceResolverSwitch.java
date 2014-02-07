@@ -21,11 +21,21 @@ public class CoedReferenceResolverSwitch implements org.modelrefactoring.evoluti
 	private Map<Object, Object> options;
 	
 	protected org.modelrefactoring.evolution.coed.resource.coed.analysis.CoEvolutionDefinitionMetamodelReferenceResolver coEvolutionDefinitionMetamodelReferenceResolver = new org.modelrefactoring.evolution.coed.resource.coed.analysis.CoEvolutionDefinitionMetamodelReferenceResolver();
+	protected org.modelrefactoring.evolution.coed.resource.coed.analysis.MetamodelImportMetamodelReferenceResolver metamodelImportMetamodelReferenceResolver = new org.modelrefactoring.evolution.coed.resource.coed.analysis.MetamodelImportMetamodelReferenceResolver();
+	protected org.modelrefactoring.evolution.coed.resource.coed.analysis.RoleMappingEventMetamodelImportReferenceResolver roleMappingEventMetamodelImportReferenceResolver = new org.modelrefactoring.evolution.coed.resource.coed.analysis.RoleMappingEventMetamodelImportReferenceResolver();
 	protected org.modelrefactoring.evolution.coed.resource.coed.analysis.RoleMappingEventConcreteRefactoringReferenceResolver roleMappingEventConcreteRefactoringReferenceResolver = new org.modelrefactoring.evolution.coed.resource.coed.analysis.RoleMappingEventConcreteRefactoringReferenceResolver();
 	protected org.modelrefactoring.evolution.coed.resource.coed.analysis.RoleMappingActionConcreteRefactoringReferenceResolver roleMappingActionConcreteRefactoringReferenceResolver = new org.modelrefactoring.evolution.coed.resource.coed.analysis.RoleMappingActionConcreteRefactoringReferenceResolver();
 	
 	public org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolver<org.modelrefactoring.evolution.coed.CoEvolutionDefinition, org.eclipse.emf.ecore.EPackage> getCoEvolutionDefinitionMetamodelReferenceResolver() {
 		return getResolverChain(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition_Metamodel(), coEvolutionDefinitionMetamodelReferenceResolver);
+	}
+	
+	public org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolver<org.modelrefactoring.evolution.coed.MetamodelImport, org.eclipse.emf.ecore.EPackage> getMetamodelImportMetamodelReferenceResolver() {
+		return getResolverChain(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getMetamodelImport_Metamodel(), metamodelImportMetamodelReferenceResolver);
+	}
+	
+	public org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolver<org.modelrefactoring.evolution.coed.RoleMappingEvent, org.modelrefactoring.evolution.coed.MetamodelImport> getRoleMappingEventMetamodelImportReferenceResolver() {
+		return getResolverChain(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent_MetamodelImport(), roleMappingEventMetamodelImportReferenceResolver);
 	}
 	
 	public org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolver<org.modelrefactoring.evolution.coed.RoleMappingEvent, org.emftext.language.refactoring.rolemapping.RoleMapping> getRoleMappingEventConcreteRefactoringReferenceResolver() {
@@ -42,6 +52,8 @@ public class CoedReferenceResolverSwitch implements org.modelrefactoring.evoluti
 			this.options.putAll(options);
 		}
 		coEvolutionDefinitionMetamodelReferenceResolver.setOptions(options);
+		metamodelImportMetamodelReferenceResolver.setOptions(options);
+		roleMappingEventMetamodelImportReferenceResolver.setOptions(options);
 		roleMappingEventConcreteRefactoringReferenceResolver.setOptions(options);
 		roleMappingActionConcreteRefactoringReferenceResolver.setOptions(options);
 	}
@@ -56,6 +68,22 @@ public class CoedReferenceResolverSwitch implements org.modelrefactoring.evoluti
 			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("metamodel")) {
 				coEvolutionDefinitionMetamodelReferenceResolver.resolve(identifier, (org.modelrefactoring.evolution.coed.CoEvolutionDefinition) container, (EReference) feature, position, true, frr);
+			}
+		}
+		if (org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getMetamodelImport().isInstance(container)) {
+			CoedFuzzyResolveResult<org.eclipse.emf.ecore.EPackage> frr = new CoedFuzzyResolveResult<org.eclipse.emf.ecore.EPackage>(result);
+			String referenceName = reference.getName();
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("metamodel")) {
+				metamodelImportMetamodelReferenceResolver.resolve(identifier, (org.modelrefactoring.evolution.coed.MetamodelImport) container, (EReference) feature, position, true, frr);
+			}
+		}
+		if (org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent().isInstance(container)) {
+			CoedFuzzyResolveResult<org.modelrefactoring.evolution.coed.MetamodelImport> frr = new CoedFuzzyResolveResult<org.modelrefactoring.evolution.coed.MetamodelImport>(result);
+			String referenceName = reference.getName();
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("metamodelImport")) {
+				roleMappingEventMetamodelImportReferenceResolver.resolve(identifier, (org.modelrefactoring.evolution.coed.RoleMappingEvent) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent().isInstance(container)) {
@@ -79,6 +107,12 @@ public class CoedReferenceResolverSwitch implements org.modelrefactoring.evoluti
 	public org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolver<? extends EObject, ? extends EObject> getResolver(EStructuralFeature reference) {
 		if (reference == org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition_Metamodel()) {
 			return getResolverChain(reference, coEvolutionDefinitionMetamodelReferenceResolver);
+		}
+		if (reference == org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getMetamodelImport_Metamodel()) {
+			return getResolverChain(reference, metamodelImportMetamodelReferenceResolver);
+		}
+		if (reference == org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent_MetamodelImport()) {
+			return getResolverChain(reference, roleMappingEventMetamodelImportReferenceResolver);
 		}
 		if (reference == org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent_ConcreteRefactoring()) {
 			return getResolverChain(reference, roleMappingEventConcreteRefactoringReferenceResolver);

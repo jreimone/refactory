@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -65,6 +66,10 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		
 		if (element instanceof org.modelrefactoring.evolution.coed.CoEvolutionDefinition) {
 			print_org_modelrefactoring_evolution_coed_CoEvolutionDefinition((org.modelrefactoring.evolution.coed.CoEvolutionDefinition) element, globaltab, out);
+			return;
+		}
+		if (element instanceof org.modelrefactoring.evolution.coed.MetamodelImport) {
+			print_org_modelrefactoring_evolution_coed_MetamodelImport((org.modelrefactoring.evolution.coed.MetamodelImport) element, globaltab, out);
 			return;
 		}
 		if (element instanceof org.modelrefactoring.evolution.coed.PlainCondition) {
@@ -135,7 +140,7 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(4);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(5);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__EVENT));
 		printCountingMap.put("event", temp == null ? 0 : 1);
@@ -145,8 +150,14 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		printCountingMap.put("action", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__METAMODEL));
 		printCountingMap.put("metamodel", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS));
+		printCountingMap.put("imports", temp == null ? 0 : ((Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		PrintWriter out1 = null;
+		Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("CoED");
 		// DEFINITION PART BEGINS (WhiteSpaces)
@@ -163,11 +174,30 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getCoEvolutionDefinitionMetamodelReferenceResolver().deResolve((org.eclipse.emf.ecore.EPackage) o, element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__METAMODEL)), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__METAMODEL), element));
+				out.print(" ");
 			}
 			printCountingMap.put("metamodel", count - 1);
 		}
-		// DEFINITION PART BEGINS (WhiteSpaces)
-		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new StringWriter();
+			out1 = new PrintWriter(sWriter);
+			printCountingMap1 = new LinkedHashMap<String, Integer>(printCountingMap);
+			print_org_modelrefactoring_evolution_coed_CoEvolutionDefinition_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print("{");
 		out.print(" ");
@@ -226,6 +256,82 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		out.print(" ");
 	}
 	
+	public void print_org_modelrefactoring_evolution_coed_CoEvolutionDefinition_0(org.modelrefactoring.evolution.coed.CoEvolutionDefinition element, String outertab, PrintWriter out, Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("import");
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("imports");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS));
+			List<?> list = (List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((EObject) o, out, localtab);
+			}
+			printCountingMap.put("imports", count - 1);
+		}
+	}
+	
+	
+	public void print_org_modelrefactoring_evolution_coed_MetamodelImport(org.modelrefactoring.evolution.coed.MetamodelImport element, String outertab, PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(2);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__METAMODEL));
+		printCountingMap.put("metamodel", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__SHORTCUT));
+		printCountingMap.put("shortcut", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		count = printCountingMap.get("shortcut");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__SHORTCUT));
+			if (o != null) {
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__SHORTCUT), element));
+				out.print(" ");
+			}
+			printCountingMap.put("shortcut", count - 1);
+		}
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
+		// DEFINITION PART BEGINS (CsString)
+		out.print(":");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("metamodel");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__METAMODEL));
+			if (o != null) {
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getMetamodelImportMetamodelReferenceResolver().deResolve((org.eclipse.emf.ecore.EPackage) o, element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__METAMODEL)), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__METAMODEL), element));
+				out.print(" ");
+			}
+			printCountingMap.put("metamodel", count - 1);
+		}
+	}
+	
 	
 	public void print_org_modelrefactoring_evolution_coed_PlainCondition(org.modelrefactoring.evolution.coed.PlainCondition element, String outertab, PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -233,8 +339,10 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(1);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(2);
 		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CO_ED));
+		printCountingMap.put("coED", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CONDITION));
 		printCountingMap.put("condition", temp == null ? 0 : 1);
 		// print collected hidden tokens
@@ -263,16 +371,35 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(1);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(3);
 		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__CO_ED));
+		printCountingMap.put("coED", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING));
 		printCountingMap.put("concreteRefactoring", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__METAMODEL_IMPORT));
+		printCountingMap.put("metamodelImport", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("refactoring");
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		count = printCountingMap.get("metamodelImport");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__METAMODEL_IMPORT));
+			if (o != null) {
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getRoleMappingEventMetamodelImportReferenceResolver().deResolve((org.modelrefactoring.evolution.coed.MetamodelImport) o, element, (EReference) element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__METAMODEL_IMPORT)), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__METAMODEL_IMPORT), element));
+			}
+			printCountingMap.put("metamodelImport", count - 1);
+		}
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		// DEFINITION PART BEGINS (CsString)
+		out.print(":");
+		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (PlaceholderInQuotes)
 		count = printCountingMap.get("concreteRefactoring");
 		if (count > 0) {
@@ -295,8 +422,10 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(2);
+		Map<String, Integer> printCountingMap = new LinkedHashMap<String, Integer>(3);
 		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__CO_ED));
+		printCountingMap.put("coED", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__CONCRETE_REFACTORING));
 		printCountingMap.put("concreteRefactoring", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__BINDING));

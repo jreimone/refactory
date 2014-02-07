@@ -18,6 +18,9 @@ public class CoedTokenStyleInformationProvider {
 		if ("for".equals(tokenName)) {
 			return new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("import".equals(tokenName)) {
+			return new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
 		if ("incoming".equals(tokenName)) {
 			return new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}

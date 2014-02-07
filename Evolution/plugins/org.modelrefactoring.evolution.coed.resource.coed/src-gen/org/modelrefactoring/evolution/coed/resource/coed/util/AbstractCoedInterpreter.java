@@ -18,6 +18,7 @@ import org.modelrefactoring.evolution.coed.Action;
 import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
 import org.modelrefactoring.evolution.coed.Condition;
 import org.modelrefactoring.evolution.coed.Event;
+import org.modelrefactoring.evolution.coed.MetamodelImport;
 import org.modelrefactoring.evolution.coed.PlainCondition;
 import org.modelrefactoring.evolution.coed.RoleMappingAction;
 import org.modelrefactoring.evolution.coed.RoleMappingEvent;
@@ -116,6 +117,12 @@ public class AbstractCoedInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
+		if (object instanceof org.modelrefactoring.evolution.coed.MetamodelImport) {
+			result = interprete_org_modelrefactoring_evolution_coed_MetamodelImport((org.modelrefactoring.evolution.coed.MetamodelImport) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		return result;
 	}
 	
@@ -144,6 +151,10 @@ public class AbstractCoedInterpreter<ResultType, ContextType> {
 	}
 	
 	public ResultType interprete_org_modelrefactoring_evolution_coed_RoleMappingAction(RoleMappingAction roleMappingAction, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_modelrefactoring_evolution_coed_MetamodelImport(MetamodelImport metamodelImport, ContextType context) {
 		return null;
 	}
 	

@@ -44,65 +44,89 @@ public class CoedGrammarInformationProvider {
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_0_0_0_4() {
 		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__METAMODEL), "QUOTED_60_62", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_0_0_0_5 = INSTANCE.getCOED_0_0_0_5();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_0_0_0_5() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_6 = INSTANCE.getCOED_0_0_0_6();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_6() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("{", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_7 = INSTANCE.getCOED_0_0_0_7();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_7() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 1);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_8 = INSTANCE.getCOED_0_0_0_8();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_8() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("incoming", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_0_0_0_9 = INSTANCE.getCOED_0_0_0_9();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_0_0_0_9() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment COED_0_0_0_10 = INSTANCE.getCOED_0_0_0_10();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment getCOED_0_0_0_10() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__EVENT), org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, new EClass[] {org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getEvent(), }, 0);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_11 = INSTANCE.getCOED_0_0_0_11();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_11() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 1);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment COED_0_0_0_12 = INSTANCE.getCOED_0_0_0_12();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment getCOED_0_0_0_12() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__CONDITION), org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.QUESTIONMARK, new EClass[] {org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCondition(), }, 0);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_13 = INSTANCE.getCOED_0_0_0_13();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_13() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 1);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_14 = INSTANCE.getCOED_0_0_0_14();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_14() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("outgoing", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_0_0_0_15 = INSTANCE.getCOED_0_0_0_15();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_0_0_0_15() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment COED_0_0_0_16 = INSTANCE.getCOED_0_0_0_16();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment getCOED_0_0_0_16() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__ACTION), org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, new EClass[] {org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getAction(), }, 0);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_17 = INSTANCE.getCOED_0_0_0_17();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_17() {
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_5 = INSTANCE.getCOED_0_0_0_5();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_5() {
 		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_18 = INSTANCE.getCOED_0_0_0_18();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_18() {
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_6_0_0_0 = INSTANCE.getCOED_0_0_0_6_0_0_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_6_0_0_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("import", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_0_0_0_6_0_0_1 = INSTANCE.getCOED_0_0_0_6_0_0_1();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_0_0_0_6_0_0_1() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment COED_0_0_0_6_0_0_2 = INSTANCE.getCOED_0_0_0_6_0_0_2();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment getCOED_0_0_0_6_0_0_2() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS), org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, new EClass[] {org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getMetamodelImport(), }, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_0_0_0_6_0_0 = INSTANCE.getCOED_0_0_0_6_0_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_0_0_0_6_0_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_0_0_0_6_0_0_0, COED_0_0_0_6_0_0_1, COED_0_0_0_6_0_0_2);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice COED_0_0_0_6_0 = INSTANCE.getCOED_0_0_0_6_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice getCOED_0_0_0_6_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_0_0_0_6_0_0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound COED_0_0_0_6 = INSTANCE.getCOED_0_0_0_6();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound getCOED_0_0_0_6() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound(COED_0_0_0_6_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.STAR);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_7 = INSTANCE.getCOED_0_0_0_7();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_7() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("{", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_8 = INSTANCE.getCOED_0_0_0_8();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_8() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 1);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_9 = INSTANCE.getCOED_0_0_0_9();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_9() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("incoming", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_0_0_0_10 = INSTANCE.getCOED_0_0_0_10();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_0_0_0_10() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment COED_0_0_0_11 = INSTANCE.getCOED_0_0_0_11();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment getCOED_0_0_0_11() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__EVENT), org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, new EClass[] {org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getEvent(), }, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_12 = INSTANCE.getCOED_0_0_0_12();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_12() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 1);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment COED_0_0_0_13 = INSTANCE.getCOED_0_0_0_13();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment getCOED_0_0_0_13() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__CONDITION), org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.QUESTIONMARK, new EClass[] {org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCondition(), }, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_14 = INSTANCE.getCOED_0_0_0_14();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_14() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 1);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_15 = INSTANCE.getCOED_0_0_0_15();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_15() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("outgoing", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_0_0_0_16 = INSTANCE.getCOED_0_0_0_16();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_0_0_0_16() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment COED_0_0_0_17 = INSTANCE.getCOED_0_0_0_17();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment getCOED_0_0_0_17() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedContainment(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.CO_EVOLUTION_DEFINITION__ACTION), org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, new EClass[] {org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getAction(), }, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_0_0_0_18 = INSTANCE.getCOED_0_0_0_18();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_0_0_0_18() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_0_0_0_19 = INSTANCE.getCOED_0_0_0_19();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_0_0_0_19() {
 		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("}", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_0_0_0 = INSTANCE.getCOED_0_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_0_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_0_0_0_0, COED_0_0_0_1, COED_0_0_0_2, COED_0_0_0_3, COED_0_0_0_4, COED_0_0_0_5, COED_0_0_0_6, COED_0_0_0_7, COED_0_0_0_8, COED_0_0_0_9, COED_0_0_0_10, COED_0_0_0_11, COED_0_0_0_12, COED_0_0_0_13, COED_0_0_0_14, COED_0_0_0_15, COED_0_0_0_16, COED_0_0_0_17, COED_0_0_0_18);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_0_0_0_0, COED_0_0_0_1, COED_0_0_0_2, COED_0_0_0_3, COED_0_0_0_4, COED_0_0_0_5, COED_0_0_0_6, COED_0_0_0_7, COED_0_0_0_8, COED_0_0_0_9, COED_0_0_0_10, COED_0_0_0_11, COED_0_0_0_12, COED_0_0_0_13, COED_0_0_0_14, COED_0_0_0_15, COED_0_0_0_16, COED_0_0_0_17, COED_0_0_0_18, COED_0_0_0_19);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice COED_0_0 = INSTANCE.getCOED_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice getCOED_0_0() {
@@ -112,17 +136,29 @@ public class CoedGrammarInformationProvider {
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule getCOED_0() {
 		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getCoEvolutionDefinition(), COED_0_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_1_0_0_0 = INSTANCE.getCOED_1_0_0_0();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_1_0_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("condition", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_1_0_0_0 = INSTANCE.getCOED_1_0_0_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_1_0_0_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getMetamodelImport().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__SHORTCUT), "IDENTIFIER", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_1_0_0_1 = INSTANCE.getCOED_1_0_0_1();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_1_0_0_1() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getPlainCondition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CONDITION), "QUOTED_123_125", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_1_0_0_1 = INSTANCE.getCOED_1_0_0_1();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_1_0_0_1() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_1_0_0_2 = INSTANCE.getCOED_1_0_0_2();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_1_0_0_2() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword(":", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak COED_1_0_0_3 = INSTANCE.getCOED_1_0_0_3();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak getCOED_1_0_0_3() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedLineBreak(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_1_0_0_4 = INSTANCE.getCOED_1_0_0_4();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_1_0_0_4() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getMetamodelImport().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.METAMODEL_IMPORT__METAMODEL), "QUOTED_60_62", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_1_0_0 = INSTANCE.getCOED_1_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_1_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_1_0_0_0, COED_1_0_0_1);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_1_0_0_0, COED_1_0_0_1, COED_1_0_0_2, COED_1_0_0_3, COED_1_0_0_4);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice COED_1_0 = INSTANCE.getCOED_1_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice getCOED_1_0() {
@@ -130,23 +166,19 @@ public class CoedGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule COED_1 = INSTANCE.getCOED_1();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule getCOED_1() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getPlainCondition(), COED_1_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getMetamodelImport(), COED_1_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_2_0_0_0 = INSTANCE.getCOED_2_0_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_2_0_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("refactoring", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("condition", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_2_0_0_1 = INSTANCE.getCOED_2_0_0_1();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_2_0_0_1() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_2_0_0_2 = INSTANCE.getCOED_2_0_0_2();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_2_0_0_2() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING), "QUOTED_60_62", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_2_0_0_1 = INSTANCE.getCOED_2_0_0_1();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_2_0_0_1() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getPlainCondition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CONDITION), "QUOTED_123_125", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_2_0_0 = INSTANCE.getCOED_2_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_2_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_2_0_0_0, COED_2_0_0_1, COED_2_0_0_2);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_2_0_0_0, COED_2_0_0_1);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice COED_2_0 = INSTANCE.getCOED_2_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice getCOED_2_0() {
@@ -154,11 +186,11 @@ public class CoedGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule COED_2 = INSTANCE.getCOED_2();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule getCOED_2() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent(), COED_2_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getPlainCondition(), COED_2_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_3_0_0_0 = INSTANCE.getCOED_3_0_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_3_0_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("corefactoring", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("refactoring", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_3_0_0_1 = INSTANCE.getCOED_3_0_0_1();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_3_0_0_1() {
@@ -166,31 +198,27 @@ public class CoedGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_3_0_0_2 = INSTANCE.getCOED_3_0_0_2();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_3_0_0_2() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingAction().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__CONCRETE_REFACTORING), "QUOTED_60_62", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__METAMODEL_IMPORT), "IDENTIFIER", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_3_0_0_3_0_0_0 = INSTANCE.getCOED_3_0_0_3_0_0_0();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_3_0_0_3_0_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_3_0_0_3 = INSTANCE.getCOED_3_0_0_3();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_3_0_0_3() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_3_0_0_3_0_0_1 = INSTANCE.getCOED_3_0_0_3_0_0_1();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_3_0_0_3_0_0_1() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingAction().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__BINDING), "QUOTED_123_125", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_3_0_0_4 = INSTANCE.getCOED_3_0_0_4();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_3_0_0_4() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword(":", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_3_0_0_3_0_0 = INSTANCE.getCOED_3_0_0_3_0_0();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_3_0_0_3_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_3_0_0_3_0_0_0, COED_3_0_0_3_0_0_1);
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_3_0_0_5 = INSTANCE.getCOED_3_0_0_5();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_3_0_0_5() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice COED_3_0_0_3_0 = INSTANCE.getCOED_3_0_0_3_0();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice getCOED_3_0_0_3_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_3_0_0_3_0_0);
-	}
-	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound COED_3_0_0_3 = INSTANCE.getCOED_3_0_0_3();
-	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound getCOED_3_0_0_3() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound(COED_3_0_0_3_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.QUESTIONMARK);
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_3_0_0_6 = INSTANCE.getCOED_3_0_0_6();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_3_0_0_6() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING), "QUOTED_60_62", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_3_0_0 = INSTANCE.getCOED_3_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_3_0_0() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_3_0_0_0, COED_3_0_0_1, COED_3_0_0_2, COED_3_0_0_3);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_3_0_0_0, COED_3_0_0_1, COED_3_0_0_2, COED_3_0_0_3, COED_3_0_0_4, COED_3_0_0_5, COED_3_0_0_6);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice COED_3_0 = INSTANCE.getCOED_3_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice getCOED_3_0() {
@@ -198,7 +226,51 @@ public class CoedGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule COED_3 = INSTANCE.getCOED_3();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule getCOED_3() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingAction(), COED_3_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingEvent(), COED_3_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword COED_4_0_0_0 = INSTANCE.getCOED_4_0_0_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword getCOED_4_0_0_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedKeyword("corefactoring", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_4_0_0_1 = INSTANCE.getCOED_4_0_0_1();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_4_0_0_1() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_4_0_0_2 = INSTANCE.getCOED_4_0_0_2();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_4_0_0_2() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingAction().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__CONCRETE_REFACTORING), "QUOTED_60_62", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace COED_4_0_0_3_0_0_0 = INSTANCE.getCOED_4_0_0_3_0_0_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace getCOED_4_0_0_3_0_0_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedWhiteSpace(1, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_4_0_0_3_0_0_1 = INSTANCE.getCOED_4_0_0_3_0_0_1();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_4_0_0_3_0_0_1() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingAction().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__BINDING), "QUOTED_123_125", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_4_0_0_3_0_0 = INSTANCE.getCOED_4_0_0_3_0_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_4_0_0_3_0_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_4_0_0_3_0_0_0, COED_4_0_0_3_0_0_1);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice COED_4_0_0_3_0 = INSTANCE.getCOED_4_0_0_3_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice getCOED_4_0_0_3_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_4_0_0_3_0_0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound COED_4_0_0_3 = INSTANCE.getCOED_4_0_0_3();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound getCOED_4_0_0_3() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCompound(COED_4_0_0_3_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.QUESTIONMARK);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_4_0_0 = INSTANCE.getCOED_4_0_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_4_0_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_4_0_0_0, COED_4_0_0_1, COED_4_0_0_2, COED_4_0_0_3);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice COED_4_0 = INSTANCE.getCOED_4_0();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice getCOED_4_0() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedChoice(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, COED_4_0_0);
+	}
+	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule COED_4 = INSTANCE.getCOED_4();
+	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule getCOED_4() {
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedRule(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingAction(), COED_4_0, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE);
 	}
 	
 	public static String getSyntaxElementID(org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSyntaxElement syntaxElement) {
@@ -232,6 +304,7 @@ public class CoedGrammarInformationProvider {
 		COED_1,
 		COED_2,
 		COED_3,
+		COED_4,
 	};
 	
 	/**

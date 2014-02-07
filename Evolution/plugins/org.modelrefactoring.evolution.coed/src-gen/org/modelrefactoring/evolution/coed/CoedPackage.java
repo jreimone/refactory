@@ -103,13 +103,22 @@ public interface CoedPackage extends EPackage {
 	int CO_EVOLUTION_DEFINITION__METAMODEL = 3;
 
 	/**
+   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CO_EVOLUTION_DEFINITION__IMPORTS = 4;
+
+  /**
    * The number of structural features of the '<em>Co Evolution Definition</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int CO_EVOLUTION_DEFINITION_FEATURE_COUNT = 4;
+	int CO_EVOLUTION_DEFINITION_FEATURE_COUNT = 5;
 
 	/**
    * The number of operations of the '<em>Co Evolution Definition</em>' class.
@@ -132,13 +141,22 @@ public interface CoedPackage extends EPackage {
 	int EVENT = 1;
 
 	/**
+   * The feature id for the '<em><b>Co ED</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT__CO_ED = 0;
+
+  /**
    * The number of structural features of the '<em>Event</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int EVENT_FEATURE_COUNT = 0;
+	int EVENT_FEATURE_COUNT = 1;
 
 	/**
    * The number of operations of the '<em>Event</em>' class.
@@ -160,13 +178,22 @@ public interface CoedPackage extends EPackage {
 	int CONDITION = 2;
 
 	/**
+   * The feature id for the '<em><b>Co ED</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION__CO_ED = 0;
+
+  /**
    * The number of structural features of the '<em>Condition</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int CONDITION_FEATURE_COUNT = 0;
+	int CONDITION_FEATURE_COUNT = 1;
 
 	/**
    * The number of operations of the '<em>Condition</em>' class.
@@ -188,13 +215,22 @@ public interface CoedPackage extends EPackage {
 	int ACTION = 3;
 
 	/**
+   * The feature id for the '<em><b>Co ED</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__CO_ED = 0;
+
+  /**
    * The number of structural features of the '<em>Action</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int ACTION_FEATURE_COUNT = 0;
+	int ACTION_FEATURE_COUNT = 1;
 
 	/**
    * The number of operations of the '<em>Action</em>' class.
@@ -216,6 +252,15 @@ public interface CoedPackage extends EPackage {
 	int ROLE_MAPPING_EVENT = 4;
 
 	/**
+   * The feature id for the '<em><b>Co ED</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_MAPPING_EVENT__CO_ED = EVENT__CO_ED;
+
+  /**
    * The feature id for the '<em><b>Concrete Refactoring</b></em>' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -225,13 +270,22 @@ public interface CoedPackage extends EPackage {
 	int ROLE_MAPPING_EVENT__CONCRETE_REFACTORING = EVENT_FEATURE_COUNT + 0;
 
 	/**
+   * The feature id for the '<em><b>Metamodel Import</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_MAPPING_EVENT__METAMODEL_IMPORT = EVENT_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Role Mapping Event</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int ROLE_MAPPING_EVENT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+	int ROLE_MAPPING_EVENT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
 
 	/**
    * The number of operations of the '<em>Role Mapping Event</em>' class.
@@ -253,6 +307,15 @@ public interface CoedPackage extends EPackage {
 	int PLAIN_CONDITION = 5;
 
 	/**
+   * The feature id for the '<em><b>Co ED</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLAIN_CONDITION__CO_ED = CONDITION__CO_ED;
+
+  /**
    * The feature id for the '<em><b>Condition</b></em>' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -290,6 +353,15 @@ public interface CoedPackage extends EPackage {
 	int ROLE_MAPPING_ACTION = 6;
 
 	/**
+   * The feature id for the '<em><b>Co ED</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_MAPPING_ACTION__CO_ED = ACTION__CO_ED;
+
+  /**
    * The feature id for the '<em><b>Concrete Refactoring</b></em>' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -327,6 +399,53 @@ public interface CoedPackage extends EPackage {
 
 
 	/**
+   * The meta object id for the '{@link org.modelrefactoring.evolution.coed.impl.MetamodelImportImpl <em>Metamodel Import</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.modelrefactoring.evolution.coed.impl.MetamodelImportImpl
+   * @see org.modelrefactoring.evolution.coed.impl.CoedPackageImpl#getMetamodelImport()
+   * @generated
+   */
+  int METAMODEL_IMPORT = 7;
+
+  /**
+   * The feature id for the '<em><b>Metamodel</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METAMODEL_IMPORT__METAMODEL = 0;
+
+  /**
+   * The feature id for the '<em><b>Shortcut</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METAMODEL_IMPORT__SHORTCUT = 1;
+
+  /**
+   * The number of structural features of the '<em>Metamodel Import</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METAMODEL_IMPORT_FEATURE_COUNT = 2;
+
+  /**
+   * The number of operations of the '<em>Metamodel Import</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METAMODEL_IMPORT_OPERATION_COUNT = 0;
+
+
+  /**
    * Returns the meta object for class '{@link org.modelrefactoring.evolution.coed.CoEvolutionDefinition <em>Co Evolution Definition</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -381,6 +500,17 @@ public interface CoedPackage extends EPackage {
 	EReference getCoEvolutionDefinition_Metamodel();
 
 	/**
+   * Returns the meta object for the containment reference list '{@link org.modelrefactoring.evolution.coed.CoEvolutionDefinition#getImports <em>Imports</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Imports</em>'.
+   * @see org.modelrefactoring.evolution.coed.CoEvolutionDefinition#getImports()
+   * @see #getCoEvolutionDefinition()
+   * @generated
+   */
+  EReference getCoEvolutionDefinition_Imports();
+
+  /**
    * Returns the meta object for class '{@link org.modelrefactoring.evolution.coed.Event <em>Event</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -391,6 +521,17 @@ public interface CoedPackage extends EPackage {
 	EClass getEvent();
 
 	/**
+   * Returns the meta object for the container reference '{@link org.modelrefactoring.evolution.coed.Event#getCoED <em>Co ED</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the container reference '<em>Co ED</em>'.
+   * @see org.modelrefactoring.evolution.coed.Event#getCoED()
+   * @see #getEvent()
+   * @generated
+   */
+  EReference getEvent_CoED();
+
+  /**
    * Returns the meta object for class '{@link org.modelrefactoring.evolution.coed.Condition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -401,6 +542,17 @@ public interface CoedPackage extends EPackage {
 	EClass getCondition();
 
 	/**
+   * Returns the meta object for the container reference '{@link org.modelrefactoring.evolution.coed.Condition#getCoED <em>Co ED</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the container reference '<em>Co ED</em>'.
+   * @see org.modelrefactoring.evolution.coed.Condition#getCoED()
+   * @see #getCondition()
+   * @generated
+   */
+  EReference getCondition_CoED();
+
+  /**
    * Returns the meta object for class '{@link org.modelrefactoring.evolution.coed.Action <em>Action</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -411,6 +563,17 @@ public interface CoedPackage extends EPackage {
 	EClass getAction();
 
 	/**
+   * Returns the meta object for the container reference '{@link org.modelrefactoring.evolution.coed.Action#getCoED <em>Co ED</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the container reference '<em>Co ED</em>'.
+   * @see org.modelrefactoring.evolution.coed.Action#getCoED()
+   * @see #getAction()
+   * @generated
+   */
+  EReference getAction_CoED();
+
+  /**
    * Returns the meta object for class '{@link org.modelrefactoring.evolution.coed.RoleMappingEvent <em>Role Mapping Event</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -432,6 +595,17 @@ public interface CoedPackage extends EPackage {
 	EReference getRoleMappingEvent_ConcreteRefactoring();
 
 	/**
+   * Returns the meta object for the reference '{@link org.modelrefactoring.evolution.coed.RoleMappingEvent#getMetamodelImport <em>Metamodel Import</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Metamodel Import</em>'.
+   * @see org.modelrefactoring.evolution.coed.RoleMappingEvent#getMetamodelImport()
+   * @see #getRoleMappingEvent()
+   * @generated
+   */
+  EReference getRoleMappingEvent_MetamodelImport();
+
+  /**
    * Returns the meta object for class '{@link org.modelrefactoring.evolution.coed.PlainCondition <em>Plain Condition</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -485,6 +659,38 @@ public interface CoedPackage extends EPackage {
 	EAttribute getRoleMappingAction_Binding();
 
 	/**
+   * Returns the meta object for class '{@link org.modelrefactoring.evolution.coed.MetamodelImport <em>Metamodel Import</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Metamodel Import</em>'.
+   * @see org.modelrefactoring.evolution.coed.MetamodelImport
+   * @generated
+   */
+  EClass getMetamodelImport();
+
+  /**
+   * Returns the meta object for the reference '{@link org.modelrefactoring.evolution.coed.MetamodelImport#getMetamodel <em>Metamodel</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Metamodel</em>'.
+   * @see org.modelrefactoring.evolution.coed.MetamodelImport#getMetamodel()
+   * @see #getMetamodelImport()
+   * @generated
+   */
+  EReference getMetamodelImport_Metamodel();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.modelrefactoring.evolution.coed.MetamodelImport#getShortcut <em>Shortcut</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Shortcut</em>'.
+   * @see org.modelrefactoring.evolution.coed.MetamodelImport#getShortcut()
+   * @see #getMetamodelImport()
+   * @generated
+   */
+  EAttribute getMetamodelImport_Shortcut();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,6 +751,13 @@ public interface CoedPackage extends EPackage {
      */
 		EReference CO_EVOLUTION_DEFINITION__METAMODEL = eINSTANCE.getCoEvolutionDefinition_Metamodel();
 		/**
+     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CO_EVOLUTION_DEFINITION__IMPORTS = eINSTANCE.getCoEvolutionDefinition_Imports();
+    /**
      * The meta object literal for the '{@link org.modelrefactoring.evolution.coed.impl.EventImpl <em>Event</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -554,6 +767,13 @@ public interface CoedPackage extends EPackage {
      */
 		EClass EVENT = eINSTANCE.getEvent();
 		/**
+     * The meta object literal for the '<em><b>Co ED</b></em>' container reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EVENT__CO_ED = eINSTANCE.getEvent_CoED();
+    /**
      * The meta object literal for the '{@link org.modelrefactoring.evolution.coed.impl.ConditionImpl <em>Condition</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -563,6 +783,13 @@ public interface CoedPackage extends EPackage {
      */
 		EClass CONDITION = eINSTANCE.getCondition();
 		/**
+     * The meta object literal for the '<em><b>Co ED</b></em>' container reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONDITION__CO_ED = eINSTANCE.getCondition_CoED();
+    /**
      * The meta object literal for the '{@link org.modelrefactoring.evolution.coed.impl.ActionImpl <em>Action</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -572,6 +799,13 @@ public interface CoedPackage extends EPackage {
      */
 		EClass ACTION = eINSTANCE.getAction();
 		/**
+     * The meta object literal for the '<em><b>Co ED</b></em>' container reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTION__CO_ED = eINSTANCE.getAction_CoED();
+    /**
      * The meta object literal for the '{@link org.modelrefactoring.evolution.coed.impl.RoleMappingEventImpl <em>Role Mapping Event</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -588,6 +822,13 @@ public interface CoedPackage extends EPackage {
      */
 		EReference ROLE_MAPPING_EVENT__CONCRETE_REFACTORING = eINSTANCE.getRoleMappingEvent_ConcreteRefactoring();
 		/**
+     * The meta object literal for the '<em><b>Metamodel Import</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROLE_MAPPING_EVENT__METAMODEL_IMPORT = eINSTANCE.getRoleMappingEvent_MetamodelImport();
+    /**
      * The meta object literal for the '{@link org.modelrefactoring.evolution.coed.impl.PlainConditionImpl <em>Plain Condition</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -626,6 +867,29 @@ public interface CoedPackage extends EPackage {
      * @generated
      */
 		EAttribute ROLE_MAPPING_ACTION__BINDING = eINSTANCE.getRoleMappingAction_Binding();
+    /**
+     * The meta object literal for the '{@link org.modelrefactoring.evolution.coed.impl.MetamodelImportImpl <em>Metamodel Import</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.modelrefactoring.evolution.coed.impl.MetamodelImportImpl
+     * @see org.modelrefactoring.evolution.coed.impl.CoedPackageImpl#getMetamodelImport()
+     * @generated
+     */
+    EClass METAMODEL_IMPORT = eINSTANCE.getMetamodelImport();
+    /**
+     * The meta object literal for the '<em><b>Metamodel</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference METAMODEL_IMPORT__METAMODEL = eINSTANCE.getMetamodelImport_Metamodel();
+    /**
+     * The meta object literal for the '<em><b>Shortcut</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METAMODEL_IMPORT__SHORTCUT = eINSTANCE.getMetamodelImport_Shortcut();
 
 	}
 

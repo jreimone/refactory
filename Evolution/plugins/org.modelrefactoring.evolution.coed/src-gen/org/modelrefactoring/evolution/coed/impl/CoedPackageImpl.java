@@ -17,6 +17,7 @@ import org.modelrefactoring.evolution.coed.CoedFactory;
 import org.modelrefactoring.evolution.coed.CoedPackage;
 import org.modelrefactoring.evolution.coed.Condition;
 import org.modelrefactoring.evolution.coed.Event;
+import org.modelrefactoring.evolution.coed.MetamodelImport;
 import org.modelrefactoring.evolution.coed.PlainCondition;
 import org.modelrefactoring.evolution.coed.RoleMappingAction;
 import org.modelrefactoring.evolution.coed.RoleMappingEvent;
@@ -73,6 +74,13 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
 	private EClass roleMappingActionEClass = null;
 
 	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass metamodelImportEClass = null;
+
+  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -183,6 +191,16 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
 
 	/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCoEvolutionDefinition_Imports()
+  {
+    return (EReference)coEvolutionDefinitionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -191,6 +209,16 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
   }
 
 	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEvent_CoED()
+  {
+    return (EReference)eventEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -201,6 +229,16 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
 
 	/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCondition_CoED()
+  {
+    return (EReference)conditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -209,6 +247,16 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
   }
 
 	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAction_CoED()
+  {
+    return (EReference)actionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -227,6 +275,16 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
   }
 
 	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRoleMappingEvent_MetamodelImport()
+  {
+    return (EReference)roleMappingEventEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -273,6 +331,36 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
 
 	/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMetamodelImport()
+  {
+    return metamodelImportEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMetamodelImport_Metamodel()
+  {
+    return (EReference)metamodelImportEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMetamodelImport_Shortcut()
+  {
+    return (EAttribute)metamodelImportEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -304,15 +392,20 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
     createEReference(coEvolutionDefinitionEClass, CO_EVOLUTION_DEFINITION__CONDITION);
     createEReference(coEvolutionDefinitionEClass, CO_EVOLUTION_DEFINITION__ACTION);
     createEReference(coEvolutionDefinitionEClass, CO_EVOLUTION_DEFINITION__METAMODEL);
+    createEReference(coEvolutionDefinitionEClass, CO_EVOLUTION_DEFINITION__IMPORTS);
 
     eventEClass = createEClass(EVENT);
+    createEReference(eventEClass, EVENT__CO_ED);
 
     conditionEClass = createEClass(CONDITION);
+    createEReference(conditionEClass, CONDITION__CO_ED);
 
     actionEClass = createEClass(ACTION);
+    createEReference(actionEClass, ACTION__CO_ED);
 
     roleMappingEventEClass = createEClass(ROLE_MAPPING_EVENT);
     createEReference(roleMappingEventEClass, ROLE_MAPPING_EVENT__CONCRETE_REFACTORING);
+    createEReference(roleMappingEventEClass, ROLE_MAPPING_EVENT__METAMODEL_IMPORT);
 
     plainConditionEClass = createEClass(PLAIN_CONDITION);
     createEAttribute(plainConditionEClass, PLAIN_CONDITION__CONDITION);
@@ -320,6 +413,10 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
     roleMappingActionEClass = createEClass(ROLE_MAPPING_ACTION);
     createEReference(roleMappingActionEClass, ROLE_MAPPING_ACTION__CONCRETE_REFACTORING);
     createEAttribute(roleMappingActionEClass, ROLE_MAPPING_ACTION__BINDING);
+
+    metamodelImportEClass = createEClass(METAMODEL_IMPORT);
+    createEReference(metamodelImportEClass, METAMODEL_IMPORT__METAMODEL);
+    createEAttribute(metamodelImportEClass, METAMODEL_IMPORT__SHORTCUT);
   }
 
 	/**
@@ -360,19 +457,24 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
 
     // Initialize classes, features, and operations; add parameters
     initEClass(coEvolutionDefinitionEClass, CoEvolutionDefinition.class, "CoEvolutionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getCoEvolutionDefinition_Event(), this.getEvent(), null, "event", null, 1, 1, CoEvolutionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCoEvolutionDefinition_Condition(), this.getCondition(), null, "condition", null, 0, 1, CoEvolutionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCoEvolutionDefinition_Action(), this.getAction(), null, "action", null, 1, 1, CoEvolutionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCoEvolutionDefinition_Event(), this.getEvent(), this.getEvent_CoED(), "event", null, 1, 1, CoEvolutionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCoEvolutionDefinition_Condition(), this.getCondition(), this.getCondition_CoED(), "condition", null, 0, 1, CoEvolutionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCoEvolutionDefinition_Action(), this.getAction(), this.getAction_CoED(), "action", null, 1, 1, CoEvolutionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCoEvolutionDefinition_Metamodel(), theEcorePackage.getEPackage(), null, "metamodel", null, 1, 1, CoEvolutionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCoEvolutionDefinition_Imports(), this.getMetamodelImport(), null, "imports", null, 0, -1, CoEvolutionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEvent_CoED(), this.getCoEvolutionDefinition(), this.getCoEvolutionDefinition_Event(), "coED", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCondition_CoED(), this.getCoEvolutionDefinition(), this.getCoEvolutionDefinition_Condition(), "coED", null, 1, 1, Condition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actionEClass, Action.class, "Action", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAction_CoED(), this.getCoEvolutionDefinition(), this.getCoEvolutionDefinition_Action(), "coED", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(roleMappingEventEClass, RoleMappingEvent.class, "RoleMappingEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRoleMappingEvent_ConcreteRefactoring(), theRolemappingPackage.getRoleMapping(), null, "concreteRefactoring", null, 1, 1, RoleMappingEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRoleMappingEvent_MetamodelImport(), this.getMetamodelImport(), null, "metamodelImport", null, 1, 1, RoleMappingEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(plainConditionEClass, PlainCondition.class, "PlainCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPlainCondition_Condition(), theEcorePackage.getEString(), "condition", null, 1, 1, PlainCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -380,6 +482,10 @@ public class CoedPackageImpl extends EPackageImpl implements CoedPackage {
     initEClass(roleMappingActionEClass, RoleMappingAction.class, "RoleMappingAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRoleMappingAction_ConcreteRefactoring(), theRolemappingPackage.getRoleMapping(), null, "concreteRefactoring", null, 1, 1, RoleMappingAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRoleMappingAction_Binding(), theEcorePackage.getEString(), "binding", null, 0, 1, RoleMappingAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(metamodelImportEClass, MetamodelImport.class, "MetamodelImport", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMetamodelImport_Metamodel(), theEcorePackage.getEPackage(), null, "metamodel", null, 1, 1, MetamodelImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMetamodelImport_Shortcut(), theEcorePackage.getEString(), "shortcut", null, 1, 1, MetamodelImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);
