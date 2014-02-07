@@ -57,6 +57,9 @@ public class CoedFactoryImpl extends EFactoryImpl implements CoedFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case CoedPackage.CO_EVOLUTION_DEFINITION: return createCoEvolutionDefinition();
+			case CoedPackage.ROLE_MAPPING_EVENT: return createRoleMappingEvent();
+			case CoedPackage.PLAIN_CONDITION: return createPlainCondition();
+			case CoedPackage.ROLE_MAPPING_ACTION: return createRoleMappingAction();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -70,6 +73,36 @@ public class CoedFactoryImpl extends EFactoryImpl implements CoedFactory {
 	public CoEvolutionDefinition createCoEvolutionDefinition() {
 		CoEvolutionDefinitionImpl coEvolutionDefinition = new CoEvolutionDefinitionImpl();
 		return coEvolutionDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RoleMappingEvent createRoleMappingEvent() {
+		RoleMappingEventImpl roleMappingEvent = new RoleMappingEventImpl();
+		return roleMappingEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PlainCondition createPlainCondition() {
+		PlainConditionImpl plainCondition = new PlainConditionImpl();
+		return plainCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RoleMappingAction createRoleMappingAction() {
+		RoleMappingActionImpl roleMappingAction = new RoleMappingActionImpl();
+		return roleMappingAction;
 	}
 
 	/**
