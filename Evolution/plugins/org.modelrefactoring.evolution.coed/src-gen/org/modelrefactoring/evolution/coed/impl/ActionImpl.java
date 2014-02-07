@@ -20,22 +20,22 @@ import org.modelrefactoring.evolution.coed.CoedPackage;
  */
 public abstract class ActionImpl extends MinimalEObjectImpl.Container implements Action {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ActionImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return CoedPackage.Literals.ACTION;
-	}
+    return CoedPackage.Literals.ACTION;
+  }
 
 } //ActionImpl

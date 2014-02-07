@@ -20,22 +20,22 @@ import org.modelrefactoring.evolution.coed.Condition;
  */
 public abstract class ConditionImpl extends MinimalEObjectImpl.Container implements Condition {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ConditionImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return CoedPackage.Literals.CONDITION;
-	}
+    return CoedPackage.Literals.CONDITION;
+  }
 
 } //ConditionImpl

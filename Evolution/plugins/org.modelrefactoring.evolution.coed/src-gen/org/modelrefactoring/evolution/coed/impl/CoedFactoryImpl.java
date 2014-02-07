@@ -20,109 +20,113 @@ import org.modelrefactoring.evolution.coed.*;
  */
 public class CoedFactoryImpl extends EFactoryImpl implements CoedFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public static CoedFactory init() {
-		try {
-			CoedFactory theCoedFactory = (CoedFactory)EPackage.Registry.INSTANCE.getEFactory(CoedPackage.eNS_URI);
-			if (theCoedFactory != null) {
-				return theCoedFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new CoedFactoryImpl();
-	}
+    try
+    {
+      CoedFactory theCoedFactory = (CoedFactory)EPackage.Registry.INSTANCE.getEFactory(CoedPackage.eNS_URI);
+      if (theCoedFactory != null)
+      {
+        return theCoedFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new CoedFactoryImpl();
+  }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public CoedFactoryImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case CoedPackage.CO_EVOLUTION_DEFINITION: return createCoEvolutionDefinition();
-			case CoedPackage.ROLE_MAPPING_EVENT: return createRoleMappingEvent();
-			case CoedPackage.PLAIN_CONDITION: return createPlainCondition();
-			case CoedPackage.ROLE_MAPPING_ACTION: return createRoleMappingAction();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case CoedPackage.CO_EVOLUTION_DEFINITION: return createCoEvolutionDefinition();
+      case CoedPackage.ROLE_MAPPING_EVENT: return createRoleMappingEvent();
+      case CoedPackage.PLAIN_CONDITION: return createPlainCondition();
+      case CoedPackage.ROLE_MAPPING_ACTION: return createRoleMappingAction();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public CoEvolutionDefinition createCoEvolutionDefinition() {
-		CoEvolutionDefinitionImpl coEvolutionDefinition = new CoEvolutionDefinitionImpl();
-		return coEvolutionDefinition;
-	}
+    CoEvolutionDefinitionImpl coEvolutionDefinition = new CoEvolutionDefinitionImpl();
+    return coEvolutionDefinition;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public RoleMappingEvent createRoleMappingEvent() {
-		RoleMappingEventImpl roleMappingEvent = new RoleMappingEventImpl();
-		return roleMappingEvent;
-	}
+    RoleMappingEventImpl roleMappingEvent = new RoleMappingEventImpl();
+    return roleMappingEvent;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public PlainCondition createPlainCondition() {
-		PlainConditionImpl plainCondition = new PlainConditionImpl();
-		return plainCondition;
-	}
+    PlainConditionImpl plainCondition = new PlainConditionImpl();
+    return plainCondition;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public RoleMappingAction createRoleMappingAction() {
-		RoleMappingActionImpl roleMappingAction = new RoleMappingActionImpl();
-		return roleMappingAction;
-	}
+    RoleMappingActionImpl roleMappingAction = new RoleMappingActionImpl();
+    return roleMappingAction;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public CoedPackage getCoedPackage() {
-		return (CoedPackage)getEPackage();
-	}
+    return (CoedPackage)getEPackage();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
 	@Deprecated
 	public static CoedPackage getPackage() {
-		return CoedPackage.eINSTANCE;
-	}
+    return CoedPackage.eINSTANCE;
+  }
 
 } //CoedFactoryImpl

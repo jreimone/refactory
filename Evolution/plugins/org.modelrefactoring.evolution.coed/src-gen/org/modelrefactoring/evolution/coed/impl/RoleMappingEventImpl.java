@@ -29,129 +29,135 @@ import org.modelrefactoring.evolution.coed.RoleMappingEvent;
  */
 public class RoleMappingEventImpl extends EventImpl implements RoleMappingEvent {
 	/**
-	 * The cached value of the '{@link #getConcreteRefactoring() <em>Concrete Refactoring</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getConcreteRefactoring() <em>Concrete Refactoring</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConcreteRefactoring()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getConcreteRefactoring()
+   * @generated
+   * @ordered
+   */
 	protected RoleMapping concreteRefactoring;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RoleMappingEventImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return CoedPackage.Literals.ROLE_MAPPING_EVENT;
-	}
+    return CoedPackage.Literals.ROLE_MAPPING_EVENT;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public RoleMapping getConcreteRefactoring() {
-		if (concreteRefactoring != null && concreteRefactoring.eIsProxy()) {
-			InternalEObject oldConcreteRefactoring = (InternalEObject)concreteRefactoring;
-			concreteRefactoring = (RoleMapping)eResolveProxy(oldConcreteRefactoring);
-			if (concreteRefactoring != oldConcreteRefactoring) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING, oldConcreteRefactoring, concreteRefactoring));
-			}
-		}
-		return concreteRefactoring;
-	}
+    if (concreteRefactoring != null && concreteRefactoring.eIsProxy())
+    {
+      InternalEObject oldConcreteRefactoring = (InternalEObject)concreteRefactoring;
+      concreteRefactoring = (RoleMapping)eResolveProxy(oldConcreteRefactoring);
+      if (concreteRefactoring != oldConcreteRefactoring)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING, oldConcreteRefactoring, concreteRefactoring));
+      }
+    }
+    return concreteRefactoring;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public RoleMapping basicGetConcreteRefactoring() {
-		return concreteRefactoring;
-	}
+    return concreteRefactoring;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setConcreteRefactoring(RoleMapping newConcreteRefactoring) {
-		RoleMapping oldConcreteRefactoring = concreteRefactoring;
-		concreteRefactoring = newConcreteRefactoring;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING, oldConcreteRefactoring, concreteRefactoring));
-	}
+    RoleMapping oldConcreteRefactoring = concreteRefactoring;
+    concreteRefactoring = newConcreteRefactoring;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING, oldConcreteRefactoring, concreteRefactoring));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING:
-				if (resolve) return getConcreteRefactoring();
-				return basicGetConcreteRefactoring();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING:
+        if (resolve) return getConcreteRefactoring();
+        return basicGetConcreteRefactoring();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING:
-				setConcreteRefactoring((RoleMapping)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING:
+        setConcreteRefactoring((RoleMapping)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING:
-				setConcreteRefactoring((RoleMapping)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING:
+        setConcreteRefactoring((RoleMapping)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING:
-				return concreteRefactoring != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case CoedPackage.ROLE_MAPPING_EVENT__CONCRETE_REFACTORING:
+        return concreteRefactoring != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //RoleMappingEventImpl
