@@ -2,8 +2,10 @@
  */
 package org.modelrefactoring.evolution.coed.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -11,11 +13,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.modelrefactoring.evolution.coed.Action;
 import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
 import org.modelrefactoring.evolution.coed.CoedPackage;
 import org.modelrefactoring.evolution.coed.Condition;
 import org.modelrefactoring.evolution.coed.Event;
+import org.modelrefactoring.evolution.coed.MetamodelImport;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +33,7 @@ import org.modelrefactoring.evolution.coed.Event;
  *   <li>{@link org.modelrefactoring.evolution.coed.impl.CoEvolutionDefinitionImpl#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.modelrefactoring.evolution.coed.impl.CoEvolutionDefinitionImpl#getAction <em>Action</em>}</li>
  *   <li>{@link org.modelrefactoring.evolution.coed.impl.CoEvolutionDefinitionImpl#getMetamodel <em>Metamodel</em>}</li>
+ *   <li>{@link org.modelrefactoring.evolution.coed.impl.CoEvolutionDefinitionImpl#getImports <em>Imports</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +78,16 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
 	protected EPackage metamodel;
 
 	/**
+   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getImports()
+   * @generated
+   * @ordered
+   */
+  protected EList<MetamodelImport> imports;
+
+  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -125,9 +141,9 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
     {
       NotificationChain msgs = null;
       if (event != null)
-        msgs = ((InternalEObject)event).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__EVENT, null, msgs);
+        msgs = ((InternalEObject)event).eInverseRemove(this, CoedPackage.EVENT__CO_ED, Event.class, msgs);
       if (newEvent != null)
-        msgs = ((InternalEObject)newEvent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__EVENT, null, msgs);
+        msgs = ((InternalEObject)newEvent).eInverseAdd(this, CoedPackage.EVENT__CO_ED, Event.class, msgs);
       msgs = basicSetEvent(newEvent, msgs);
       if (msgs != null) msgs.dispatch();
     }
@@ -170,9 +186,9 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
     {
       NotificationChain msgs = null;
       if (condition != null)
-        msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__CONDITION, null, msgs);
+        msgs = ((InternalEObject)condition).eInverseRemove(this, CoedPackage.CONDITION__CO_ED, Condition.class, msgs);
       if (newCondition != null)
-        msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__CONDITION, null, msgs);
+        msgs = ((InternalEObject)newCondition).eInverseAdd(this, CoedPackage.CONDITION__CO_ED, Condition.class, msgs);
       msgs = basicSetCondition(newCondition, msgs);
       if (msgs != null) msgs.dispatch();
     }
@@ -215,9 +231,9 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
     {
       NotificationChain msgs = null;
       if (action != null)
-        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__ACTION, null, msgs);
+        msgs = ((InternalEObject)action).eInverseRemove(this, CoedPackage.ACTION__CO_ED, Action.class, msgs);
       if (newAction != null)
-        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__ACTION, null, msgs);
+        msgs = ((InternalEObject)newAction).eInverseAdd(this, CoedPackage.ACTION__CO_ED, Action.class, msgs);
       msgs = basicSetAction(newAction, msgs);
       if (msgs != null) msgs.dispatch();
     }
@@ -267,6 +283,46 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
 
 	/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<MetamodelImport> getImports()
+  {
+    if (imports == null)
+    {
+      imports = new EObjectContainmentEList<MetamodelImport>(MetamodelImport.class, this, CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS);
+    }
+    return imports;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case CoedPackage.CO_EVOLUTION_DEFINITION__EVENT:
+        if (event != null)
+          msgs = ((InternalEObject)event).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__EVENT, null, msgs);
+        return basicSetEvent((Event)otherEnd, msgs);
+      case CoedPackage.CO_EVOLUTION_DEFINITION__CONDITION:
+        if (condition != null)
+          msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__CONDITION, null, msgs);
+        return basicSetCondition((Condition)otherEnd, msgs);
+      case CoedPackage.CO_EVOLUTION_DEFINITION__ACTION:
+        if (action != null)
+          msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CoedPackage.CO_EVOLUTION_DEFINITION__ACTION, null, msgs);
+        return basicSetAction((Action)otherEnd, msgs);
+    }
+    return super.eInverseAdd(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -280,6 +336,8 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
         return basicSetCondition(null, msgs);
       case CoedPackage.CO_EVOLUTION_DEFINITION__ACTION:
         return basicSetAction(null, msgs);
+      case CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS:
+        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -302,6 +360,8 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
       case CoedPackage.CO_EVOLUTION_DEFINITION__METAMODEL:
         if (resolve) return getMetamodel();
         return basicGetMetamodel();
+      case CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS:
+        return getImports();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -311,7 +371,8 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
    * @generated
    */
-	@Override
+	@SuppressWarnings("unchecked")
+  @Override
 	public void eSet(int featureID, Object newValue) {
     switch (featureID)
     {
@@ -326,6 +387,10 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
         return;
       case CoedPackage.CO_EVOLUTION_DEFINITION__METAMODEL:
         setMetamodel((EPackage)newValue);
+        return;
+      case CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS:
+        getImports().clear();
+        getImports().addAll((Collection<? extends MetamodelImport>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -352,6 +417,9 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
       case CoedPackage.CO_EVOLUTION_DEFINITION__METAMODEL:
         setMetamodel((EPackage)null);
         return;
+      case CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS:
+        getImports().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -373,6 +441,8 @@ public class CoEvolutionDefinitionImpl extends MinimalEObjectImpl.Container impl
         return action != null;
       case CoedPackage.CO_EVOLUTION_DEFINITION__METAMODEL:
         return metamodel != null;
+      case CoedPackage.CO_EVOLUTION_DEFINITION__IMPORTS:
+        return imports != null && !imports.isEmpty();
     }
     return super.eIsSet(featureID);
   }

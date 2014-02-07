@@ -8,7 +8,8 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	disableLaunchSupport = "true";
-	disableDebugSupport = "true";	
+	disableDebugSupport = "true";
+	additionalDependencies = "org.emftext.refactoring.registry.rolemapping";	
 }
 
 
@@ -23,16 +24,22 @@ TOKENS {
 
 
 RULES {
-	CoEvolutionDefinition ::= "CoED" #1 "for" #1 metamodel['<','>'] #1 "{" 
+	CoEvolutionDefinition ::= "CoED" #1 "for" #1 metamodel['<','>'] 
+								!0 ("import" #1 imports)*
+								"{" 
 								!1 "incoming" #1 event 
 								!1 condition? 
 								!1 "outgoing" #1 action 
 								!0 "}";
 	
+	// imports
+	MetamodelImport ::= shortcut[IDENTIFIER] !0 ":" !0 metamodel['<','>'];
+	
+	// conditions
 	PlainCondition ::= "condition" condition['{','}'];
 	
 	// 1. possibility: incoming Event and outgoing modifications based on RoleMapping
-	RoleMappingEvent ::= "refactoring" #1 concreteRefactoring['<','>'];
+	RoleMappingEvent ::= "refactoring" #1 metamodelImport[IDENTIFIER] #0 ":" #0 concreteRefactoring['<','>'];
 	RoleMappingAction ::= "corefactoring" #1 concreteRefactoring['<','>'] (#1 binding['{','}'])?;
 	
 }

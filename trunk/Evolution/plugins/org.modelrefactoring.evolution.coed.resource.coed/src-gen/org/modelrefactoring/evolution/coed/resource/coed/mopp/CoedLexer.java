@@ -25,6 +25,8 @@ public class CoedLexer extends Lexer {
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__19=19;
+    public static final int T__20=20;
+    public static final int T__21=21;
     public static final int FLOAT=4;
     public static final int IDENTIFIER=5;
     public static final int LINEBREAK=6;
@@ -62,12 +64,10 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:20:7: ( 'CoED' )
-            // Coed.g:20:9: 'CoED'
+            // Coed.g:20:7: ( ':' )
+            // Coed.g:20:9: ':'
             {
-            match("CoED"); 
-
-
+            match(':'); 
 
             }
 
@@ -85,10 +85,10 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:21:7: ( 'condition' )
-            // Coed.g:21:9: 'condition'
+            // Coed.g:21:7: ( 'CoED' )
+            // Coed.g:21:9: 'CoED'
             {
-            match("condition"); 
+            match("CoED"); 
 
 
 
@@ -108,10 +108,10 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:22:7: ( 'corefactoring' )
-            // Coed.g:22:9: 'corefactoring'
+            // Coed.g:22:7: ( 'condition' )
+            // Coed.g:22:9: 'condition'
             {
-            match("corefactoring"); 
+            match("condition"); 
 
 
 
@@ -131,10 +131,10 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:23:7: ( 'for' )
-            // Coed.g:23:9: 'for'
+            // Coed.g:23:7: ( 'corefactoring' )
+            // Coed.g:23:9: 'corefactoring'
             {
-            match("for"); 
+            match("corefactoring"); 
 
 
 
@@ -154,10 +154,10 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:24:7: ( 'incoming' )
-            // Coed.g:24:9: 'incoming'
+            // Coed.g:24:7: ( 'for' )
+            // Coed.g:24:9: 'for'
             {
-            match("incoming"); 
+            match("for"); 
 
 
 
@@ -177,10 +177,10 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:25:7: ( 'outgoing' )
-            // Coed.g:25:9: 'outgoing'
+            // Coed.g:25:7: ( 'import' )
+            // Coed.g:25:9: 'import'
             {
-            match("outgoing"); 
+            match("import"); 
 
 
 
@@ -200,10 +200,10 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:26:7: ( 'refactoring' )
-            // Coed.g:26:9: 'refactoring'
+            // Coed.g:26:7: ( 'incoming' )
+            // Coed.g:26:9: 'incoming'
             {
-            match("refactoring"); 
+            match("incoming"); 
 
 
 
@@ -223,10 +223,12 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:27:7: ( '{' )
-            // Coed.g:27:9: '{'
+            // Coed.g:27:7: ( 'outgoing' )
+            // Coed.g:27:9: 'outgoing'
             {
-            match('{'); 
+            match("outgoing"); 
+
+
 
             }
 
@@ -244,10 +246,12 @@ public class CoedLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:28:7: ( '}' )
-            // Coed.g:28:9: '}'
+            // Coed.g:28:7: ( 'refactoring' )
+            // Coed.g:28:9: 'refactoring'
             {
-            match('}'); 
+            match("refactoring"); 
+
+
 
             }
 
@@ -260,16 +264,58 @@ public class CoedLexer extends Lexer {
     }
     // $ANTLR end "T__19"
 
+    // $ANTLR start "T__20"
+    public final void mT__20() throws RecognitionException {
+        try {
+            int _type = T__20;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Coed.g:29:7: ( '{' )
+            // Coed.g:29:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__20"
+
+    // $ANTLR start "T__21"
+    public final void mT__21() throws RecognitionException {
+        try {
+            int _type = T__21;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Coed.g:30:7: ( '}' )
+            // Coed.g:30:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__21"
+
     // $ANTLR start "IDENTIFIER"
     public final void mIDENTIFIER() throws RecognitionException {
         try {
             int _type = IDENTIFIER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:957:11: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )* ) )
-            // Coed.g:958:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )* )
+            // Coed.g:1163:11: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )* ) )
+            // Coed.g:1164:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )* )
             {
-            // Coed.g:958:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )* )
-            // Coed.g:958:3: ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )*
+            // Coed.g:1164:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )* )
+            // Coed.g:1164:3: ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )*
             {
             if ( input.LA(1)=='-'||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -281,7 +327,7 @@ public class CoedLexer extends Lexer {
             }
 
 
-            // Coed.g:958:35: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )*
+            // Coed.g:1164:35: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' )*
             loop1:
             do {
                 int alt1=2;
@@ -318,8 +364,6 @@ public class CoedLexer extends Lexer {
             }
 
 
-             _channel = 99; 
-
             }
 
             state.type = _type;
@@ -336,8 +380,8 @@ public class CoedLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:961:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Coed.g:962:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Coed.g:1166:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Coed.g:1167:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -367,13 +411,13 @@ public class CoedLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:965:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Coed.g:966:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Coed.g:1170:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Coed.g:1171:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Coed.g:966:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Coed.g:966:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Coed.g:1171:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Coed.g:1171:3: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Coed.g:966:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Coed.g:1171:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -399,7 +443,7 @@ public class CoedLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // Coed.g:966:4: '\\r\\n'
+                    // Coed.g:1171:4: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -408,14 +452,14 @@ public class CoedLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Coed.g:966:13: '\\r'
+                    // Coed.g:1171:13: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Coed.g:966:20: '\\n'
+                    // Coed.g:1171:20: '\\n'
                     {
                     match('\n'); 
 
@@ -446,13 +490,13 @@ public class CoedLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:969:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
-            // Coed.g:970:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Coed.g:1174:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
+            // Coed.g:1175:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
             {
-            // Coed.g:970:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // Coed.g:970:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // Coed.g:1175:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Coed.g:1175:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // Coed.g:970:3: ( '-' )?
+            // Coed.g:1175:3: ( '-' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -461,7 +505,7 @@ public class CoedLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // Coed.g:970:4: '-'
+                    // Coed.g:1175:4: '-'
                     {
                     match('-'); 
 
@@ -471,7 +515,7 @@ public class CoedLexer extends Lexer {
             }
 
 
-            // Coed.g:970:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Coed.g:1175:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -490,7 +534,7 @@ public class CoedLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // Coed.g:970:10: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Coed.g:1175:10: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
                     if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
                         input.consume();
@@ -502,7 +546,7 @@ public class CoedLexer extends Lexer {
                     }
 
 
-                    // Coed.g:970:21: ( '0' .. '9' )*
+                    // Coed.g:1175:21: ( '0' .. '9' )*
                     loop4:
                     do {
                         int alt4=2;
@@ -539,7 +583,7 @@ public class CoedLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Coed.g:970:35: '0'
+                    // Coed.g:1175:35: '0'
                     {
                     match('0'); 
 
@@ -551,7 +595,7 @@ public class CoedLexer extends Lexer {
 
             match('.'); 
 
-            // Coed.g:970:44: ( '0' .. '9' )+
+            // Coed.g:1175:44: ( '0' .. '9' )+
             int cnt6=0;
             loop6:
             do {
@@ -611,17 +655,17 @@ public class CoedLexer extends Lexer {
         try {
             int _type = SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:973:11: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Coed.g:974:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Coed.g:1178:11: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Coed.g:1179:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Coed.g:974:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Coed.g:974:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Coed.g:1179:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Coed.g:1179:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
 
 
-            // Coed.g:974:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Coed.g:1179:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop7:
             do {
                 int alt7=2;
@@ -676,21 +720,21 @@ public class CoedLexer extends Lexer {
         try {
             int _type = QUOTED_60_62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:977:13: ( ( ( '<' ) (~ ( '>' ) )* ( '>' ) ) )
-            // Coed.g:978:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
+            // Coed.g:1182:13: ( ( ( '<' ) (~ ( '>' ) )* ( '>' ) ) )
+            // Coed.g:1183:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
             {
-            // Coed.g:978:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
-            // Coed.g:978:3: ( '<' ) (~ ( '>' ) )* ( '>' )
+            // Coed.g:1183:2: ( ( '<' ) (~ ( '>' ) )* ( '>' ) )
+            // Coed.g:1183:3: ( '<' ) (~ ( '>' ) )* ( '>' )
             {
-            // Coed.g:978:3: ( '<' )
-            // Coed.g:978:4: '<'
+            // Coed.g:1183:3: ( '<' )
+            // Coed.g:1183:4: '<'
             {
             match('<'); 
 
             }
 
 
-            // Coed.g:978:8: (~ ( '>' ) )*
+            // Coed.g:1183:8: (~ ( '>' ) )*
             loop8:
             do {
                 int alt8=2;
@@ -724,8 +768,8 @@ public class CoedLexer extends Lexer {
             } while (true);
 
 
-            // Coed.g:978:17: ( '>' )
-            // Coed.g:978:18: '>'
+            // Coed.g:1183:17: ( '>' )
+            // Coed.g:1183:18: '>'
             {
             match('>'); 
 
@@ -751,21 +795,21 @@ public class CoedLexer extends Lexer {
         try {
             int _type = QUOTED_123_125;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:980:15: ( ( ( '{' ) (~ ( '}' ) )* ( '}' ) ) )
-            // Coed.g:981:2: ( ( '{' ) (~ ( '}' ) )* ( '}' ) )
+            // Coed.g:1185:15: ( ( ( '{' ) (~ ( '}' ) )* ( '}' ) ) )
+            // Coed.g:1186:2: ( ( '{' ) (~ ( '}' ) )* ( '}' ) )
             {
-            // Coed.g:981:2: ( ( '{' ) (~ ( '}' ) )* ( '}' ) )
-            // Coed.g:981:3: ( '{' ) (~ ( '}' ) )* ( '}' )
+            // Coed.g:1186:2: ( ( '{' ) (~ ( '}' ) )* ( '}' ) )
+            // Coed.g:1186:3: ( '{' ) (~ ( '}' ) )* ( '}' )
             {
-            // Coed.g:981:3: ( '{' )
-            // Coed.g:981:4: '{'
+            // Coed.g:1186:3: ( '{' )
+            // Coed.g:1186:4: '{'
             {
             match('{'); 
 
             }
 
 
-            // Coed.g:981:8: (~ ( '}' ) )*
+            // Coed.g:1186:8: (~ ( '}' ) )*
             loop9:
             do {
                 int alt9=2;
@@ -799,8 +843,8 @@ public class CoedLexer extends Lexer {
             } while (true);
 
 
-            // Coed.g:981:17: ( '}' )
-            // Coed.g:981:18: '}'
+            // Coed.g:1186:17: ( '}' )
+            // Coed.g:1186:18: '}'
             {
             match('}'); 
 
@@ -822,8 +866,8 @@ public class CoedLexer extends Lexer {
     // $ANTLR end "QUOTED_123_125"
 
     public void mTokens() throws RecognitionException {
-        // Coed.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | IDENTIFIER | WHITESPACE | LINEBREAK | FLOAT | SL_COMMENT | QUOTED_60_62 | QUOTED_123_125 )
-        int alt10=16;
+        // Coed.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | IDENTIFIER | WHITESPACE | LINEBREAK | FLOAT | SL_COMMENT | QUOTED_60_62 | QUOTED_123_125 )
+        int alt10=18;
         alt10 = dfa10.predict(input);
         switch (alt10) {
             case 1 :
@@ -899,55 +943,71 @@ public class CoedLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // Coed.g:1:64: IDENTIFIER
+                // Coed.g:1:64: T__20
+                {
+                mT__20(); 
+
+
+                }
+                break;
+            case 11 :
+                // Coed.g:1:70: T__21
+                {
+                mT__21(); 
+
+
+                }
+                break;
+            case 12 :
+                // Coed.g:1:76: IDENTIFIER
                 {
                 mIDENTIFIER(); 
 
 
                 }
                 break;
-            case 11 :
-                // Coed.g:1:75: WHITESPACE
+            case 13 :
+                // Coed.g:1:87: WHITESPACE
                 {
                 mWHITESPACE(); 
 
 
                 }
                 break;
-            case 12 :
-                // Coed.g:1:86: LINEBREAK
+            case 14 :
+                // Coed.g:1:98: LINEBREAK
                 {
                 mLINEBREAK(); 
 
 
                 }
                 break;
-            case 13 :
-                // Coed.g:1:96: FLOAT
+            case 15 :
+                // Coed.g:1:108: FLOAT
                 {
                 mFLOAT(); 
 
 
                 }
                 break;
-            case 14 :
-                // Coed.g:1:102: SL_COMMENT
+            case 16 :
+                // Coed.g:1:114: SL_COMMENT
                 {
                 mSL_COMMENT(); 
 
 
                 }
                 break;
-            case 15 :
-                // Coed.g:1:113: QUOTED_60_62
+            case 17 :
+                // Coed.g:1:125: QUOTED_60_62
                 {
                 mQUOTED_60_62(); 
 
 
                 }
                 break;
-            case 16 :
-                // Coed.g:1:126: QUOTED_123_125
+            case 18 :
+                // Coed.g:1:138: QUOTED_123_125
                 {
                 mQUOTED_123_125(); 
 
@@ -962,82 +1022,84 @@ public class CoedLexer extends Lexer {
 
     protected DFA10 dfa10 = new DFA10(this);
     static final String DFA10_eotS =
-        "\1\uffff\6\14\1\26\1\uffff\1\14\6\uffff\6\14\2\uffff\5\14\1\45\4"+
-        "\14\1\51\2\14\1\uffff\3\14\1\uffff\21\14\1\100\1\101\1\14\1\103"+
-        "\1\14\2\uffff\1\14\1\uffff\3\14\1\111\1\14\1\uffff\1\113\1\uffff";
+        "\2\uffff\6\15\1\30\1\uffff\1\15\6\uffff\7\15\2\uffff\5\15\1\50\5"+
+        "\15\1\55\2\15\1\uffff\4\15\1\uffff\10\15\1\74\5\15\1\uffff\5\15"+
+        "\1\107\1\110\1\15\1\112\1\15\2\uffff\1\15\1\uffff\3\15\1\120\1\15"+
+        "\1\uffff\1\122\1\uffff";
     static final String DFA10_eofS =
-        "\114\uffff";
+        "\123\uffff";
     static final String DFA10_minS =
-        "\1\11\3\157\1\156\1\165\1\145\1\0\1\uffff\1\60\6\uffff\1\105\1\156"+
-        "\1\162\1\143\1\164\1\146\2\uffff\2\56\1\104\1\144\1\145\1\55\1\157"+
-        "\1\147\1\141\1\56\1\55\1\151\1\146\1\uffff\1\155\1\157\1\143\1\uffff"+
-        "\1\164\1\141\2\151\1\164\1\151\1\143\2\156\2\157\1\164\2\147\1\162"+
-        "\1\156\1\157\2\55\1\151\1\55\1\162\2\uffff\1\156\1\uffff\1\151\1"+
-        "\147\1\156\1\55\1\147\1\uffff\1\55\1\uffff";
+        "\1\11\1\uffff\3\157\1\155\1\165\1\145\1\0\1\uffff\1\60\6\uffff\1"+
+        "\105\1\156\1\162\1\160\1\143\1\164\1\146\2\uffff\2\56\1\104\1\144"+
+        "\1\145\1\55\2\157\1\147\1\141\1\56\1\55\1\151\1\146\1\uffff\1\162"+
+        "\1\155\1\157\1\143\1\uffff\1\164\1\141\1\164\2\151\1\164\1\151\1"+
+        "\143\1\55\2\156\2\157\1\164\1\uffff\2\147\1\162\1\156\1\157\2\55"+
+        "\1\151\1\55\1\162\2\uffff\1\156\1\uffff\1\151\1\147\1\156\1\55\1"+
+        "\147\1\uffff\1\55\1\uffff";
     static final String DFA10_maxS =
-        "\1\175\3\157\1\156\1\165\1\145\1\uffff\1\uffff\1\71\6\uffff\1\105"+
-        "\2\162\1\143\1\164\1\146\2\uffff\1\71\1\56\1\104\1\144\1\145\1\172"+
-        "\1\157\1\147\1\141\1\71\1\172\1\151\1\146\1\uffff\1\155\1\157\1"+
-        "\143\1\uffff\1\164\1\141\2\151\1\164\1\151\1\143\2\156\2\157\1\164"+
-        "\2\147\1\162\1\156\1\157\2\172\1\151\1\172\1\162\2\uffff\1\156\1"+
-        "\uffff\1\151\1\147\1\156\1\172\1\147\1\uffff\1\172\1\uffff";
+        "\1\175\1\uffff\3\157\1\156\1\165\1\145\1\uffff\1\uffff\1\71\6\uffff"+
+        "\1\105\2\162\1\160\1\143\1\164\1\146\2\uffff\1\71\1\56\1\104\1\144"+
+        "\1\145\1\172\2\157\1\147\1\141\1\71\1\172\1\151\1\146\1\uffff\1"+
+        "\162\1\155\1\157\1\143\1\uffff\1\164\1\141\1\164\2\151\1\164\1\151"+
+        "\1\143\1\172\2\156\2\157\1\164\1\uffff\2\147\1\162\1\156\1\157\2"+
+        "\172\1\151\1\172\1\162\2\uffff\1\156\1\uffff\1\151\1\147\1\156\1"+
+        "\172\1\147\1\uffff\1\172\1\uffff";
     static final String DFA10_acceptS =
-        "\10\uffff\1\11\1\uffff\1\13\1\14\1\12\1\15\1\16\1\17\6\uffff\1\10"+
-        "\1\20\15\uffff\1\4\3\uffff\1\1\26\uffff\1\5\1\6\1\uffff\1\2\5\uffff"+
-        "\1\7\1\uffff\1\3";
+        "\1\uffff\1\1\7\uffff\1\13\1\uffff\1\15\1\16\1\14\1\17\1\20\1\21"+
+        "\7\uffff\1\12\1\22\16\uffff\1\5\4\uffff\1\2\16\uffff\1\6\12\uffff"+
+        "\1\7\1\10\1\uffff\1\3\5\uffff\1\11\1\uffff\1\4";
     static final String DFA10_specialS =
-        "\7\uffff\1\0\104\uffff}>";
+        "\10\uffff\1\0\112\uffff}>";
     static final String[] DFA10_transitionS = {
-            "\1\12\1\13\1\uffff\1\12\1\13\22\uffff\1\12\14\uffff\1\11\1\uffff"+
-            "\1\16\12\15\2\uffff\1\17\4\uffff\2\14\1\1\27\14\4\uffff\1\14"+
-            "\1\uffff\2\14\1\2\2\14\1\3\2\14\1\4\5\14\1\5\2\14\1\6\10\14"+
-            "\1\7\1\uffff\1\10",
-            "\1\20",
+            "\1\13\1\14\1\uffff\1\13\1\14\22\uffff\1\13\14\uffff\1\12\1\uffff"+
+            "\1\17\12\16\1\1\1\uffff\1\20\4\uffff\2\15\1\2\27\15\4\uffff"+
+            "\1\15\1\uffff\2\15\1\3\2\15\1\4\2\15\1\5\5\15\1\6\2\15\1\7\10"+
+            "\15\1\10\1\uffff\1\11",
+            "",
             "\1\21",
             "\1\22",
             "\1\23",
-            "\1\24",
-            "\1\25",
-            "\0\27",
+            "\1\24\1\25",
+            "\1\26",
+            "\1\27",
+            "\0\31",
             "",
-            "\1\31\11\30",
-            "",
-            "",
-            "",
+            "\1\33\11\32",
             "",
             "",
             "",
-            "\1\32",
-            "\1\33\3\uffff\1\34",
-            "\1\35",
-            "\1\36",
+            "",
+            "",
+            "",
+            "\1\34",
+            "\1\35\3\uffff\1\36",
             "\1\37",
             "\1\40",
-            "",
-            "",
-            "\1\15\1\uffff\12\41",
-            "\1\15",
+            "\1\41",
             "\1\42",
             "\1\43",
-            "\1\44",
-            "\1\14\2\uffff\12\14\7\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
+            "",
+            "",
+            "\1\16\1\uffff\12\44",
+            "\1\16",
+            "\1\45",
             "\1\46",
             "\1\47",
-            "\1\50",
-            "\1\15\1\uffff\12\41",
-            "\1\14\2\uffff\12\14\7\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
+            "\1\15\2\uffff\12\15\7\uffff\32\15\4\uffff\1\15\1\uffff\32\15",
+            "\1\51",
             "\1\52",
             "\1\53",
-            "",
             "\1\54",
-            "\1\55",
+            "\1\16\1\uffff\12\44",
+            "\1\15\2\uffff\12\15\7\uffff\32\15\4\uffff\1\15\1\uffff\32\15",
             "\1\56",
-            "",
             "\1\57",
+            "",
             "\1\60",
             "\1\61",
             "\1\62",
             "\1\63",
+            "",
             "\1\64",
             "\1\65",
             "\1\66",
@@ -1046,26 +1108,34 @@ public class CoedLexer extends Lexer {
             "\1\71",
             "\1\72",
             "\1\73",
-            "\1\74",
+            "\1\15\2\uffff\12\15\7\uffff\32\15\4\uffff\1\15\1\uffff\32\15",
             "\1\75",
             "\1\76",
             "\1\77",
-            "\1\14\2\uffff\12\14\7\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
-            "\1\14\2\uffff\12\14\7\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
+            "\1\100",
+            "\1\101",
+            "",
             "\1\102",
-            "\1\14\2\uffff\12\14\7\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
+            "\1\103",
             "\1\104",
-            "",
-            "",
             "\1\105",
-            "",
             "\1\106",
-            "\1\107",
-            "\1\110",
-            "\1\14\2\uffff\12\14\7\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
-            "\1\112",
+            "\1\15\2\uffff\12\15\7\uffff\32\15\4\uffff\1\15\1\uffff\32\15",
+            "\1\15\2\uffff\12\15\7\uffff\32\15\4\uffff\1\15\1\uffff\32\15",
+            "\1\111",
+            "\1\15\2\uffff\12\15\7\uffff\32\15\4\uffff\1\15\1\uffff\32\15",
+            "\1\113",
             "",
-            "\1\14\2\uffff\12\14\7\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
+            "",
+            "\1\114",
+            "",
+            "\1\115",
+            "\1\116",
+            "\1\117",
+            "\1\15\2\uffff\12\15\7\uffff\32\15\4\uffff\1\15\1\uffff\32\15",
+            "\1\121",
+            "",
+            "\1\15\2\uffff\12\15\7\uffff\32\15\4\uffff\1\15\1\uffff\32\15",
             ""
     };
 
@@ -1099,19 +1169,19 @@ public class CoedLexer extends Lexer {
             this.transition = DFA10_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | IDENTIFIER | WHITESPACE | LINEBREAK | FLOAT | SL_COMMENT | QUOTED_60_62 | QUOTED_123_125 );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | IDENTIFIER | WHITESPACE | LINEBREAK | FLOAT | SL_COMMENT | QUOTED_60_62 | QUOTED_123_125 );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA10_7 = input.LA(1);
+                        int LA10_8 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA10_7 >= '\u0000' && LA10_7 <= '\uFFFF')) ) {s = 23;}
+                        if ( ((LA10_8 >= '\u0000' && LA10_8 <= '\uFFFF')) ) {s = 25;}
 
-                        else s = 22;
+                        else s = 24;
 
                         if ( s>=0 ) return s;
                         break;

@@ -6,18 +6,37 @@
  */
 package org.modelrefactoring.evolution.coed.resource.coed.analysis;
 
-import org.eclipse.emf.ecore.EReference;
+import java.util.Map;
 
-public class RoleMappingEventConcreteRefactoringReferenceResolver implements org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolver<org.modelrefactoring.evolution.coed.RoleMappingEvent, org.emftext.language.refactoring.rolemapping.RoleMapping> {
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.modelrefactoring.evolution.coed.MetamodelImport;
+import org.modelrefactoring.evolution.coed.RoleMappingEvent;
+import org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolveResult;
+import org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolver;
+
+public class RoleMappingEventConcreteRefactoringReferenceResolver implements ICoedReferenceResolver<RoleMappingEvent, RoleMapping> {
 	
-	private org.modelrefactoring.evolution.coed.resource.coed.analysis.CoedDefaultResolverDelegate<org.modelrefactoring.evolution.coed.RoleMappingEvent, org.emftext.language.refactoring.rolemapping.RoleMapping> delegate = new org.modelrefactoring.evolution.coed.resource.coed.analysis.CoedDefaultResolverDelegate<org.modelrefactoring.evolution.coed.RoleMappingEvent, org.emftext.language.refactoring.rolemapping.RoleMapping>();
-	
-	public void resolve(String identifier, org.modelrefactoring.evolution.coed.RoleMappingEvent container, EReference reference, int position, boolean resolveFuzzy, final org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolveResult<org.emftext.language.refactoring.rolemapping.RoleMapping> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, RoleMappingEvent rolemappingEvent, EReference reference, int position, boolean resolveFuzzy, final ICoedReferenceResolveResult<RoleMapping> result) {
+		MetamodelImport metamodelImport = rolemappingEvent.getMetamodelImport();
+		Map<String, RoleMapping> roleMappingsForUri = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(metamodelImport.getMetamodel().getNsURI());
+		if(!resolveFuzzy){
+			RoleMapping roleMapping = roleMappingsForUri.get(identifier);
+			if(roleMapping != null){
+				result.addMapping(identifier, roleMapping);
+			} else {
+				result.setErrorMessage("RoleMapping '" + identifier + "' doesn't exist for metamodel " + metamodelImport.getShortcut() + ":" + metamodelImport.getMetamodel().getNsURI());
+			}
+		} else {
+			for (String rolemappingName : roleMappingsForUri.keySet()) {
+				result.addMapping(rolemappingName, roleMappingsForUri.get(rolemappingName));
+			}
+		}
 	}
 	
-	public String deResolve(org.emftext.language.refactoring.rolemapping.RoleMapping element, org.modelrefactoring.evolution.coed.RoleMappingEvent container, EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(RoleMapping rolemapping, RoleMappingEvent container, EReference reference) {
+		return rolemapping.getName();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

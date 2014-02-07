@@ -64,6 +64,7 @@ public class CoedFactoryImpl extends EFactoryImpl implements CoedFactory {
       case CoedPackage.ROLE_MAPPING_EVENT: return createRoleMappingEvent();
       case CoedPackage.PLAIN_CONDITION: return createPlainCondition();
       case CoedPackage.ROLE_MAPPING_ACTION: return createRoleMappingAction();
+      case CoedPackage.METAMODEL_IMPORT: return createMetamodelImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -110,6 +111,17 @@ public class CoedFactoryImpl extends EFactoryImpl implements CoedFactory {
   }
 
 	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MetamodelImport createMetamodelImport()
+  {
+    MetamodelImportImpl metamodelImport = new MetamodelImportImpl();
+    return metamodelImport;
+  }
+
+  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated

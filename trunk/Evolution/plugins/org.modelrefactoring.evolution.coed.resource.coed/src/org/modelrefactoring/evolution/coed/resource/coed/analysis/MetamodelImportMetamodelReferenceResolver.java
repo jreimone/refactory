@@ -10,13 +10,14 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
+import org.modelrefactoring.evolution.coed.MetamodelImport;
 import org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolveResult;
 import org.modelrefactoring.evolution.coed.resource.coed.ICoedReferenceResolver;
 
-public class CoEvolutionDefinitionMetamodelReferenceResolver implements ICoedReferenceResolver<CoEvolutionDefinition, EPackage> {
+public class MetamodelImportMetamodelReferenceResolver implements ICoedReferenceResolver<MetamodelImport, EPackage> {
 	
-	public void resolve(String identifier, CoEvolutionDefinition container, EReference reference, int position, boolean resolveFuzzy, final ICoedReferenceResolveResult<EPackage> result) {
+	
+	public void resolve(String identifier, MetamodelImport container, EReference reference, int position, boolean resolveFuzzy, final ICoedReferenceResolveResult<EPackage> result) {
 		if(!resolveFuzzy){
 			EPackage metamodel = EPackage.Registry.INSTANCE.getEPackage(identifier);
 			if(metamodel != null){
@@ -35,7 +36,7 @@ public class CoEvolutionDefinitionMetamodelReferenceResolver implements ICoedRef
 		}
 	}
 	
-	public String deResolve(EPackage metamodel, CoEvolutionDefinition container, EReference reference) {
+	public String deResolve(EPackage metamodel, MetamodelImport container, EReference reference) {
 		return metamodel.getNsURI();
 	}
 	

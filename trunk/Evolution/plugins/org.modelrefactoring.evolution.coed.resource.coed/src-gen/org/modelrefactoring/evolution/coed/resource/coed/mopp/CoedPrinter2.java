@@ -215,16 +215,20 @@ public class CoedPrinter2 implements org.modelrefactoring.evolution.coed.resourc
 			printInternal(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.modelrefactoring.evolution.coed.PlainCondition) {
+		if (element instanceof org.modelrefactoring.evolution.coed.MetamodelImport) {
 			printInternal(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_1, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.modelrefactoring.evolution.coed.RoleMappingEvent) {
+		if (element instanceof org.modelrefactoring.evolution.coed.PlainCondition) {
 			printInternal(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_2, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.modelrefactoring.evolution.coed.RoleMappingAction) {
+		if (element instanceof org.modelrefactoring.evolution.coed.RoleMappingEvent) {
 			printInternal(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_3, foundFormattingElements);
+			return;
+		}
+		if (element instanceof org.modelrefactoring.evolution.coed.RoleMappingAction) {
+			printInternal(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_4, foundFormattingElements);
 			return;
 		}
 		
