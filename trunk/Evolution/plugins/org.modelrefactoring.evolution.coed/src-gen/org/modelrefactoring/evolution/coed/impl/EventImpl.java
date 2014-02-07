@@ -20,22 +20,22 @@ import org.modelrefactoring.evolution.coed.Event;
  */
 public abstract class EventImpl extends MinimalEObjectImpl.Container implements Event {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected EventImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return CoedPackage.Literals.EVENT;
-	}
+    return CoedPackage.Literals.EVENT;
+  }
 
 } //EventImpl

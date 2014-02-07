@@ -14,56 +14,56 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface CoedFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+   * The singleton instance of the factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	CoedFactory eINSTANCE = org.modelrefactoring.evolution.coed.impl.CoedFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Co Evolution Definition</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns a new object of class '<em>Co Evolution Definition</em>'.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Co Evolution Definition</em>'.
-	 * @generated
-	 */
+   * @return a new object of class '<em>Co Evolution Definition</em>'.
+   * @generated
+   */
 	CoEvolutionDefinition createCoEvolutionDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Role Mapping Event</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns a new object of class '<em>Role Mapping Event</em>'.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Role Mapping Event</em>'.
-	 * @generated
-	 */
+   * @return a new object of class '<em>Role Mapping Event</em>'.
+   * @generated
+   */
 	RoleMappingEvent createRoleMappingEvent();
 
 	/**
-	 * Returns a new object of class '<em>Plain Condition</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns a new object of class '<em>Plain Condition</em>'.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Plain Condition</em>'.
-	 * @generated
-	 */
+   * @return a new object of class '<em>Plain Condition</em>'.
+   * @generated
+   */
 	PlainCondition createPlainCondition();
 
 	/**
-	 * Returns a new object of class '<em>Role Mapping Action</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns a new object of class '<em>Role Mapping Action</em>'.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Role Mapping Action</em>'.
-	 * @generated
-	 */
+   * @return a new object of class '<em>Role Mapping Action</em>'.
+   * @generated
+   */
 	RoleMappingAction createRoleMappingAction();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+   * Returns the package supported by this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+   * @return the package supported by this factory.
+   * @generated
+   */
 	CoedPackage getCoedPackage();
 
 } //CoedFactory
