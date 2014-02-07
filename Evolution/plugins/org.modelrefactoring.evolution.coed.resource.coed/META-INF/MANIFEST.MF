@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: coed
+Bundle-SymbolicName: org.modelrefactoring.evolution.coed.resource.coed;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+  org.eclipse.core.resources;resolution:=optional,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation;resolution:=optional,
+  org.emftext.access;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
+  org.modelrefactoring.evolution.coed,
+  org.emftext.language.refactoring.rolemapping,
+  org.emftext.language.refactoring.roles
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.modelrefactoring.evolution.coed.resource.coed,
+  org.modelrefactoring.evolution.coed.resource.coed.analysis,
+  org.modelrefactoring.evolution.coed.resource.coed.mopp,
+  org.modelrefactoring.evolution.coed.resource.coed.debug,
+  org.modelrefactoring.evolution.coed.resource.coed.launch,
+  org.modelrefactoring.evolution.coed.resource.coed.grammar,
+  org.modelrefactoring.evolution.coed.resource.coed.util
+Bundle-Activator: org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedPlugin
