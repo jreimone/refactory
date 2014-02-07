@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
-    modelDirectory="/org.modelrefactoring.evolution.coed/src-gen" editDirectory="/org.modelrefactoring.evolution.coed.edit/src-gen"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.modelrefactoring.evolution.coed/src-gen" editDirectory="/org.modelrefactoring.evolution.coed.edit/src-gen"
     editorDirectory="/org.modelrefactoring.evolution.coed.editor/src-gen" modelPluginID="org.modelrefactoring.evolution.coed"
     modelName="Coed" editPluginClass="org.modelrefactoring.evolution.coed.provider.CoedEditPlugin"
     editorPluginClass="org.modelrefactoring.evolution.coed.presentation.CoedEditorPlugin"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/org.modelrefactoring.evolution.coed.tests/src-gen"
     testSuiteClass="org.modelrefactoring.evolution.coed.tests.CoedAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.genmodel#//rolemapping ../../org.emftext.language.refactoring.roles/metamodel/roles.genmodel#//roles"
+    operationReflection="true" importOrganizing="true">
   <foreignModel>coed.ecore</foreignModel>
   <genPackages prefix="Coed" basePackage="org.modelrefactoring.evolution" disposableProviderFactory="true"
       ecorePackage="coed.ecore#/">
-    <genClasses ecoreClass="coed.ecore#//CoEvolutionDefinition"/>
+    <genClasses ecoreClass="coed.ecore#//CoEvolutionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference coed.ecore#//CoEvolutionDefinition/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference coed.ecore#//CoEvolutionDefinition/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference coed.ecore#//CoEvolutionDefinition/action"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference coed.ecore#//CoEvolutionDefinition/metamodel"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="coed.ecore#//Event"/>
+    <genClasses image="false" ecoreClass="coed.ecore#//Condition"/>
+    <genClasses image="false" ecoreClass="coed.ecore#//Action"/>
+    <genClasses ecoreClass="coed.ecore#//RoleMappingEvent">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference coed.ecore#//RoleMappingEvent/concreteRefactoring"/>
+    </genClasses>
+    <genClasses ecoreClass="coed.ecore#//PlainCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coed.ecore#//PlainCondition/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="coed.ecore#//RoleMappingAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference coed.ecore#//RoleMappingAction/concreteRefactoring"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute coed.ecore#//RoleMappingAction/binding"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

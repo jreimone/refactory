@@ -31,6 +31,33 @@ public interface CoedFactory extends EFactory {
 	CoEvolutionDefinition createCoEvolutionDefinition();
 
 	/**
+	 * Returns a new object of class '<em>Role Mapping Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Role Mapping Event</em>'.
+	 * @generated
+	 */
+	RoleMappingEvent createRoleMappingEvent();
+
+	/**
+	 * Returns a new object of class '<em>Plain Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Plain Condition</em>'.
+	 * @generated
+	 */
+	PlainCondition createPlainCondition();
+
+	/**
+	 * Returns a new object of class '<em>Role Mapping Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Role Mapping Action</em>'.
+	 * @generated
+	 */
+	RoleMappingAction createRoleMappingAction();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -11,5 +11,7 @@ Export-Package: org.modelrefactoring.evolution.coed,
  org.modelrefactoring.evolution.coed.impl,
  org.modelrefactoring.evolution.coed.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.language.refactoring.roles;visibility:=reexport
 Bundle-ActivationPolicy: lazy
