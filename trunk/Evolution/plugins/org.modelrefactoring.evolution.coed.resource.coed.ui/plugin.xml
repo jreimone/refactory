@@ -19,7 +19,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Coed Text Editor" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" category="org.emftext.refactoring.ui.preferences">
+		<page name="CoED Editor" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" category="org.emftext.refactoring.ui.preferences">
 		</page>
 		<page name="Syntax Coloring" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedSyntaxColoringPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedSyntaxColoringPreferencePage" category="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage">
 		</page>
