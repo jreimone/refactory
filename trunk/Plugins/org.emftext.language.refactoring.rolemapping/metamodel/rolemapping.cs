@@ -15,11 +15,11 @@ OPTIONS {
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.refactoring.registry.rolemapping";
 	additionalUIDependencies = "org.emftext.language.refactoring.roles.resource.rolestext.ui";
 	overrideHoverTextProvider = "false";
-	overrideBuilder = "true";
-	overrideUIPluginXML = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 	preferencePagesCategory = "org.emftext.refactoring.ui.preferences";
+	newFileWizardCategory = "org.emftext.refactory.ui";
+	editorName = "Rolemapping Text Editor";
 	//overrideProposalPostProcessor = "false";
 }
 
