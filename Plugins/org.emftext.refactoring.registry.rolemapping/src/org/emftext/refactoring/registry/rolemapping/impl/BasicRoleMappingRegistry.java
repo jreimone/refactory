@@ -289,10 +289,10 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		if(nsUri == null){// then the meta model isn't registered correctly and doesn't exist
 			return new LinkedList<RoleMapping>(mappingsToRegister.values());
 		}
-		Map<String, RoleMapping> registered = getRoleMappingsMap().get(nsUri);
+		Map<String, RoleMapping> registered = roleMappingsMap.get(nsUri);
 		if(registered == null){
 			registered = new LinkedHashMap<String, RoleMapping>();
-			getRoleMappingsMap().put(nsUri, registered);
+			roleMappingsMap.put(nsUri, registered);
 		}
 		List<RoleMapping> alreadyRegistered = new LinkedList<RoleMapping>();
 		for (String mappingName : mappingsToRegister.keySet()) {
@@ -376,12 +376,12 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 		if(subPackages != null){
 			for (EPackage subpackage : subPackages) {
 				String nsUri = subpackage.getNsURI();
-				Map<String, RoleMapping> registered = getRoleMappingsMap().get(nsUri);
+				Map<String, RoleMapping> registered = roleMappingsMap.get(nsUri);
 				if(registered != null){
 //					RegistryUtil.log("Metamodel " + nsUri + " already registered ", IStatus.WARNING);
 				} else {
 					if(mappings != null){
-						getRoleMappingsMap().put(nsUri, mappings);
+						roleMappingsMap.put(nsUri, mappings);
 						registerSubPackages(subpackage, mappings);
 					}
 				}
