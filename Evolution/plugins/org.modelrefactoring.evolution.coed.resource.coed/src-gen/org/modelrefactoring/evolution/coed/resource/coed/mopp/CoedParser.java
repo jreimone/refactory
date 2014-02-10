@@ -33,7 +33,7 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CoedParser extends CoedANTLRParserBase {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FLOAT", "IDENTIFIER", "LINEBREAK", "QUOTED_123_125", "QUOTED_60_62", "SL_COMMENT", "WHITESPACE", "':'", "'CoED'", "'condition'", "'corefactoring'", "'for'", "'import'", "'incoming'", "'outgoing'", "'refactoring'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FLOAT", "IDENTIFIER", "LINEBREAK", "QUOTED_123_125", "QUOTED_60_62", "SL_COMMENT", "WHITESPACE", "'('", "')'", "':'", "'CoED'", "'condition'", "'corefactoring'", "'for'", "'import'", "'incoming'", "'outgoing'", "'refactoring'"
     };
 
     public static final int EOF=-1;
@@ -582,7 +582,7 @@ public class CoedParser extends CoedANTLRParserBase {
 
 
     // $ANTLR start "parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition"
-    // Coed.g:509:1: parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.modelrefactoring.evolution.coed.CoEvolutionDefinition element = null] : a0= 'CoED' a1= 'for' (a2= QUOTED_60_62 ) ( (a3= 'import' (a4_0= parse_org_modelrefactoring_evolution_coed_MetamodelImport ) ) )* a5= '{' a6= 'incoming' (a7_0= parse_org_modelrefactoring_evolution_coed_Event ) ( (a8_0= parse_org_modelrefactoring_evolution_coed_Condition ) )? a9= 'outgoing' (a10_0= parse_org_modelrefactoring_evolution_coed_Action ) a11= '}' ;
+    // Coed.g:509:1: parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.modelrefactoring.evolution.coed.CoEvolutionDefinition element = null] : a0= 'CoED' a1= 'for' (a2= QUOTED_60_62 ) ( (a3= 'import' (a4_0= parse_org_modelrefactoring_evolution_coed_MetamodelImport ) ) )* a5= '(' a6= 'incoming' (a7_0= parse_org_modelrefactoring_evolution_coed_Event ) ( (a8_0= parse_org_modelrefactoring_evolution_coed_Condition ) )? a9= 'outgoing' (a10_0= parse_org_modelrefactoring_evolution_coed_Action ) a11= ')' ;
     public final org.modelrefactoring.evolution.coed.CoEvolutionDefinition parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition() throws RecognitionException {
         org.modelrefactoring.evolution.coed.CoEvolutionDefinition element =  null;
 
@@ -610,10 +610,10 @@ public class CoedParser extends CoedANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
 
-            // Coed.g:512:2: (a0= 'CoED' a1= 'for' (a2= QUOTED_60_62 ) ( (a3= 'import' (a4_0= parse_org_modelrefactoring_evolution_coed_MetamodelImport ) ) )* a5= '{' a6= 'incoming' (a7_0= parse_org_modelrefactoring_evolution_coed_Event ) ( (a8_0= parse_org_modelrefactoring_evolution_coed_Condition ) )? a9= 'outgoing' (a10_0= parse_org_modelrefactoring_evolution_coed_Action ) a11= '}' )
-            // Coed.g:513:2: a0= 'CoED' a1= 'for' (a2= QUOTED_60_62 ) ( (a3= 'import' (a4_0= parse_org_modelrefactoring_evolution_coed_MetamodelImport ) ) )* a5= '{' a6= 'incoming' (a7_0= parse_org_modelrefactoring_evolution_coed_Event ) ( (a8_0= parse_org_modelrefactoring_evolution_coed_Condition ) )? a9= 'outgoing' (a10_0= parse_org_modelrefactoring_evolution_coed_Action ) a11= '}'
+            // Coed.g:512:2: (a0= 'CoED' a1= 'for' (a2= QUOTED_60_62 ) ( (a3= 'import' (a4_0= parse_org_modelrefactoring_evolution_coed_MetamodelImport ) ) )* a5= '(' a6= 'incoming' (a7_0= parse_org_modelrefactoring_evolution_coed_Event ) ( (a8_0= parse_org_modelrefactoring_evolution_coed_Condition ) )? a9= 'outgoing' (a10_0= parse_org_modelrefactoring_evolution_coed_Action ) a11= ')' )
+            // Coed.g:513:2: a0= 'CoED' a1= 'for' (a2= QUOTED_60_62 ) ( (a3= 'import' (a4_0= parse_org_modelrefactoring_evolution_coed_MetamodelImport ) ) )* a5= '(' a6= 'incoming' (a7_0= parse_org_modelrefactoring_evolution_coed_Event ) ( (a8_0= parse_org_modelrefactoring_evolution_coed_Condition ) )? a9= 'outgoing' (a10_0= parse_org_modelrefactoring_evolution_coed_Action ) a11= ')'
             {
-            a0=(Token)match(input,12,FOLLOW_12_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition115); if (state.failed) return element;
+            a0=(Token)match(input,14,FOLLOW_14_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition115); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -630,7 +630,7 @@ public class CoedParser extends CoedANTLRParserBase {
             		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[1]);
             	}
 
-            a1=(Token)match(input,15,FOLLOW_15_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition129); if (state.failed) return element;
+            a1=(Token)match(input,17,FOLLOW_17_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition129); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -700,7 +700,7 @@ public class CoedParser extends CoedANTLRParserBase {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==16) ) {
+                if ( (LA1_0==18) ) {
                     alt1=1;
                 }
 
@@ -712,7 +712,7 @@ public class CoedParser extends CoedANTLRParserBase {
             	    // Coed.g:583:3: (a3= 'import' (a4_0= parse_org_modelrefactoring_evolution_coed_MetamodelImport ) )
             	    // Coed.g:584:4: a3= 'import' (a4_0= parse_org_modelrefactoring_evolution_coed_MetamodelImport )
             	    {
-            	    a3=(Token)match(input,16,FOLLOW_16_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition177); if (state.failed) return element;
+            	    a3=(Token)match(input,18,FOLLOW_18_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition177); if (state.failed) return element;
 
             	    if ( state.backtracking==0 ) {
             	    				if (element == null) {
@@ -785,7 +785,7 @@ public class CoedParser extends CoedANTLRParserBase {
             		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[9]);
             	}
 
-            a5=(Token)match(input,20,FOLLOW_20_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition244); if (state.failed) return element;
+            a5=(Token)match(input,11,FOLLOW_11_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition244); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -793,7 +793,7 @@ public class CoedParser extends CoedANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_7, null, true);
+            		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_8, null, true);
             		copyLocalizationInfos((CommonToken)a5, element);
             	}
 
@@ -802,7 +802,7 @@ public class CoedParser extends CoedANTLRParserBase {
             		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[10]);
             	}
 
-            a6=(Token)match(input,17,FOLLOW_17_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition258); if (state.failed) return element;
+            a6=(Token)match(input,19,FOLLOW_19_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition258); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -810,7 +810,7 @@ public class CoedParser extends CoedANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_9, null, true);
+            		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_10, null, true);
             		copyLocalizationInfos((CommonToken)a6, element);
             	}
 
@@ -843,7 +843,7 @@ public class CoedParser extends CoedANTLRParserBase {
             					completedElement(value, true);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_11, a7_0, true);
+            				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_12, a7_0, true);
             				copyLocalizationInfos(a7_0, element);
             			}
             		}
@@ -861,7 +861,7 @@ public class CoedParser extends CoedANTLRParserBase {
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==13) ) {
+            if ( (LA2_0==15) ) {
                 alt2=1;
             }
             switch (alt2) {
@@ -892,7 +892,7 @@ public class CoedParser extends CoedANTLRParserBase {
                     						completedElement(value, true);
                     					}
                     					collectHiddenTokens(element);
-                    					retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_13, a8_0, true);
+                    					retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_14, a8_0, true);
                     					copyLocalizationInfos(a8_0, element);
                     				}
                     			}
@@ -911,7 +911,7 @@ public class CoedParser extends CoedANTLRParserBase {
             		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[14]);
             	}
 
-            a9=(Token)match(input,18,FOLLOW_18_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition329); if (state.failed) return element;
+            a9=(Token)match(input,20,FOLLOW_20_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition329); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -919,7 +919,7 @@ public class CoedParser extends CoedANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_15, null, true);
+            		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_16, null, true);
             		copyLocalizationInfos((CommonToken)a9, element);
             	}
 
@@ -952,7 +952,7 @@ public class CoedParser extends CoedANTLRParserBase {
             					completedElement(value, true);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_17, a10_0, true);
+            				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_18, a10_0, true);
             				copyLocalizationInfos(a10_0, element);
             			}
             		}
@@ -965,7 +965,7 @@ public class CoedParser extends CoedANTLRParserBase {
             		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[16]);
             	}
 
-            a11=(Token)match(input,21,FOLLOW_21_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition365); if (state.failed) return element;
+            a11=(Token)match(input,12,FOLLOW_12_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition365); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -973,7 +973,7 @@ public class CoedParser extends CoedANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_19, null, true);
+            		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_20, null, true);
             		copyLocalizationInfos((CommonToken)a11, element);
             	}
 
@@ -1061,7 +1061,7 @@ public class CoedParser extends CoedANTLRParserBase {
             		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[17]);
             	}
 
-            a1=(Token)match(input,11,FOLLOW_11_in_parse_org_modelrefactoring_evolution_coed_MetamodelImport419); if (state.failed) return element;
+            a1=(Token)match(input,13,FOLLOW_13_in_parse_org_modelrefactoring_evolution_coed_MetamodelImport419); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -1162,7 +1162,7 @@ public class CoedParser extends CoedANTLRParserBase {
             // Coed.g:871:2: (a0= 'condition' (a1= QUOTED_123_125 ) )
             // Coed.g:872:2: a0= 'condition' (a1= QUOTED_123_125 )
             {
-            a0=(Token)match(input,13,FOLLOW_13_in_parse_org_modelrefactoring_evolution_coed_PlainCondition473); if (state.failed) return element;
+            a0=(Token)match(input,15,FOLLOW_15_in_parse_org_modelrefactoring_evolution_coed_PlainCondition473); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -1260,7 +1260,7 @@ public class CoedParser extends CoedANTLRParserBase {
             // Coed.g:927:2: (a0= 'refactoring' (a1= IDENTIFIER ) a2= ':' (a3= QUOTED_60_62 ) )
             // Coed.g:928:2: a0= 'refactoring' (a1= IDENTIFIER ) a2= ':' (a3= QUOTED_60_62 )
             {
-            a0=(Token)match(input,19,FOLLOW_19_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent527); if (state.failed) return element;
+            a0=(Token)match(input,21,FOLLOW_21_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent527); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -1323,7 +1323,7 @@ public class CoedParser extends CoedANTLRParserBase {
             		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[24]);
             	}
 
-            a2=(Token)match(input,11,FOLLOW_11_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent566); if (state.failed) return element;
+            a2=(Token)match(input,13,FOLLOW_13_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent566); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -1425,7 +1425,7 @@ public class CoedParser extends CoedANTLRParserBase {
             // Coed.g:1042:2: (a0= 'corefactoring' (a1= QUOTED_60_62 ) ( ( (a2= QUOTED_123_125 ) ) )? )
             // Coed.g:1043:2: a0= 'corefactoring' (a1= QUOTED_60_62 ) ( ( (a2= QUOTED_123_125 ) ) )?
             {
-            a0=(Token)match(input,14,FOLLOW_14_in_parse_org_modelrefactoring_evolution_coed_RoleMappingAction620); if (state.failed) return element;
+            a0=(Token)match(input,16,FOLLOW_16_in_parse_org_modelrefactoring_evolution_coed_RoleMappingAction620); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -1712,28 +1712,28 @@ public class CoedParser extends CoedANTLRParserBase {
 
     public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition_in_start82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition115 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition129 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition147 = new BitSet(new long[]{0x0000000000110000L});
-    public static final BitSet FOLLOW_16_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition177 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_MetamodelImport_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition203 = new BitSet(new long[]{0x0000000000110000L});
-    public static final BitSet FOLLOW_20_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition244 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition258 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_Event_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition276 = new BitSet(new long[]{0x0000000000042000L});
-    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_Condition_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition303 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition329 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_Action_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition347 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_21_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition365 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_coed_MetamodelImport398 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_org_modelrefactoring_evolution_coed_MetamodelImport419 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_14_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition115 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition129 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition147 = new BitSet(new long[]{0x0000000000040800L});
+    public static final BitSet FOLLOW_18_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition177 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_MetamodelImport_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition203 = new BitSet(new long[]{0x0000000000040800L});
+    public static final BitSet FOLLOW_11_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition244 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition258 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_Event_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition276 = new BitSet(new long[]{0x0000000000108000L});
+    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_Condition_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition303 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition329 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_Action_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition347 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition365 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_coed_MetamodelImport398 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_org_modelrefactoring_evolution_coed_MetamodelImport419 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_modelrefactoring_evolution_coed_MetamodelImport437 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_parse_org_modelrefactoring_evolution_coed_PlainCondition473 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_15_in_parse_org_modelrefactoring_evolution_coed_PlainCondition473 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_QUOTED_123_125_in_parse_org_modelrefactoring_evolution_coed_PlainCondition491 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent527 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent545 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent566 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_21_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent527 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent545 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent566 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_parse_org_modelrefactoring_evolution_coed_RoleMappingAction620 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_16_in_parse_org_modelrefactoring_evolution_coed_RoleMappingAction620 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_modelrefactoring_evolution_coed_RoleMappingAction638 = new BitSet(new long[]{0x0000000000000082L});
     public static final BitSet FOLLOW_QUOTED_123_125_in_parse_org_modelrefactoring_evolution_coed_RoleMappingAction674 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_modelrefactoring_evolution_coed_RoleMappingEvent_in_parse_org_modelrefactoring_evolution_coed_Event731 = new BitSet(new long[]{0x0000000000000002L});

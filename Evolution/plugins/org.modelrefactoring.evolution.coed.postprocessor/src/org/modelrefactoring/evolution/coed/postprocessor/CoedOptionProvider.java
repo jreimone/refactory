@@ -15,7 +15,8 @@ public class CoedOptionProvider implements ICoedOptionProvider {
 	public Map<?, ?> getOptions() {
 		Map<String, List<ICoedResourcePostProcessorProvider>> map = new HashMap<String, List<ICoedResourcePostProcessorProvider>>();
 		List<ICoedResourcePostProcessorProvider> providers = new ArrayList<ICoedResourcePostProcessorProvider>();
-		providers.add(new MVELExpressionPostProcessor());
+		providers.add(new MVELActionExpressionPostProcessor());
+		providers.add(new MVELConditionExpressionPostProcessor());
 		map.put(ICoedOptions.RESOURCE_POSTPROCESSOR_PROVIDER, providers);
 		return map;
 	}

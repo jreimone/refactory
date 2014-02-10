@@ -7,7 +7,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="coed" icon="icons/editor_icon.gif" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedEditor" name="EMFText coed Editor">
+		<editor class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="coed" icon="icons/editor_icon.gif" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedEditor" name="CoED Editor">
 			<contentTypeBinding contentTypeId="org.modelrefactoring.evolution.coed.resource.coed">
 			</contentTypeBinding>
 		</editor>
@@ -19,7 +19,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Coed Text Editor" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		<page name="Coed Text Editor" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" category="org.emftext.refactoring.ui.preferences">
 		</page>
 		<page name="Syntax Coloring" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedSyntaxColoringPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedSyntaxColoringPreferencePage" category="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage">
 		</page>
@@ -28,9 +28,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedNewFileWizard" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedNewFileWizard" name="EMFText .coed file">
+		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedNewFileWizard" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedNewFileWizard" name="EMFText .coed file">
 		</wizard>
 		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
 		</category>
