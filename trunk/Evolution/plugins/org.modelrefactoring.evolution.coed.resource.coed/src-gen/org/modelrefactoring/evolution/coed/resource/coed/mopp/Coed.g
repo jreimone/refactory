@@ -630,13 +630,13 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[9]);
 	}
 	
-	a5 = '{' {
+	a5 = '(' {
 		if (element == null) {
 			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_7, null, true);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_8, null, true);
 		copyLocalizationInfos((CommonToken)a5, element);
 	}
 	{
@@ -650,7 +650,7 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_9, null, true);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_10, null, true);
 		copyLocalizationInfos((CommonToken)a6, element);
 	}
 	{
@@ -674,7 +674,7 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_11, a7_0, true);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_12, a7_0, true);
 				copyLocalizationInfos(a7_0, element);
 			}
 		}
@@ -702,7 +702,7 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_13, a8_0, true);
+					retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_14, a8_0, true);
 					copyLocalizationInfos(a8_0, element);
 				}
 			}
@@ -719,7 +719,7 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_15, null, true);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_16, null, true);
 		copyLocalizationInfos((CommonToken)a9, element);
 	}
 	{
@@ -743,7 +743,7 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_17, a10_0, true);
+				retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_18, a10_0, true);
 				copyLocalizationInfos(a10_0, element);
 			}
 		}
@@ -753,13 +753,13 @@ parse_org_modelrefactoring_evolution_coed_CoEvolutionDefinition returns [org.mod
 		addExpectedElement(null, org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedExpectationConstants.EXPECTATIONS[16]);
 	}
 	
-	a11 = '}' {
+	a11 = ')' {
 		if (element == null) {
 			element = org.modelrefactoring.evolution.coed.CoedFactory.eINSTANCE.createCoEvolutionDefinition();
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_19, null, true);
+		retrieveLayoutInformation(element, org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedGrammarInformationProvider.COED_0_0_0_20, null, true);
 		copyLocalizationInfos((CommonToken)a11, element);
 	}
 	{

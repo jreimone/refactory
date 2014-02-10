@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.modelrefactoring.evolution.coed.postprocessor;singleton
 Bundle-Version: 0.0.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.modelrefactoring.evolution.coed,
- org.modelrefactoring.evolution.coed.resource.coed
+ org.modelrefactoring.evolution.coed.resource.coed,
+ org.emftext.language.refactoring.rolemapping
 Bundle-ClassPath: libs/mvel2-2.1.3.Final.jar,
  .

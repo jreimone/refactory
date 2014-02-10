@@ -198,8 +198,11 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 				printCountingMap.putAll(printCountingMap1);
 			}
 		}
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
-		out.print("{");
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (LineBreak)
 		localtab += "	";
@@ -252,7 +255,7 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		out.println();
 		out.print(localtab);
 		// DEFINITION PART BEGINS (CsString)
-		out.print("}");
+		out.print(")");
 		out.print(" ");
 	}
 	

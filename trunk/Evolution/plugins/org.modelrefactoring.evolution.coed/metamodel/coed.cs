@@ -9,7 +9,10 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
-	additionalDependencies = "org.emftext.refactoring.registry.rolemapping";	
+	additionalDependencies = "org.emftext.refactoring.registry.rolemapping";
+	preferencePagesCategory = "org.emftext.refactoring.ui.preferences";
+	editorName = "CoED Editor";
+	newFileWizardCategory = "org.emftext.refactory.ui";
 }
 
 
@@ -26,11 +29,11 @@ TOKENS {
 RULES {
 	CoEvolutionDefinition ::= "CoED" #1 "for" #1 metamodel['<','>'] 
 								!0 ("import" #1 imports)*
-								"{" 
+								!0 "(" 
 								!1 "incoming" #1 event 
 								!1 condition? 
 								!1 "outgoing" #1 action 
-								!0 "}";
+								!0 ")";
 	
 	// imports
 	MetamodelImport ::= shortcut[IDENTIFIER] !0 ":" !0 metamodel['<','>'];
