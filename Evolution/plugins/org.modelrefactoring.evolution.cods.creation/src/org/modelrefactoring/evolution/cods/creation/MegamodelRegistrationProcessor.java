@@ -6,9 +6,6 @@ package org.modelrefactoring.evolution.cods.creation;
 import java.io.IOException;
 import java.util.Collections;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -48,7 +45,6 @@ import org.osgi.framework.Bundle;
  * @author jreimann
  *
  */
-@SuppressWarnings("restriction")
 public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 
 	private static final String MEGAMODEL_FILE	= "megamodel.cods";

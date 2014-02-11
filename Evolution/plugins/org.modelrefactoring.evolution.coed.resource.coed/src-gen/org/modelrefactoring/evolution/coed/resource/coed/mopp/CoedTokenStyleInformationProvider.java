@@ -39,7 +39,7 @@ public class CoedTokenStyleInformationProvider {
 		if ("QUOTED_60_62".equals(tokenName)) {
 			return new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTokenStyle(new int[] {0x2A, 0x00, 0xFF}, null, false, false, false, false);
 		}
-		if ("QUOTED_123_125".equals(tokenName)) {
+		if ("QUOTED_64_64".equals(tokenName)) {
 			return new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTokenStyle(new int[] {0x2A, 0x00, 0xFF}, null, false, false, false, false);
 		}
 		if ("TASK_ITEM".equals(tokenName)) {

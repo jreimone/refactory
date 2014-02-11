@@ -19,7 +19,6 @@ public class CoedBracketInformationProvider {
 		Collection<org.modelrefactoring.evolution.coed.resource.coed.ICoedBracketPair> result = new ArrayList<org.modelrefactoring.evolution.coed.resource.coed.ICoedBracketPair>();
 		result.add(new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedBracketPair("(", ")", true, false));
 		result.add(new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedBracketPair("<", ">", false, false));
-		result.add(new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedBracketPair("{", "}", false, true));
 		return result;
 	}
 	

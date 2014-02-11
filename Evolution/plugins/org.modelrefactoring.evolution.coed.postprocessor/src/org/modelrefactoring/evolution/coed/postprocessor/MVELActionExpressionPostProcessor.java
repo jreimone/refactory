@@ -1,13 +1,10 @@
 package org.modelrefactoring.evolution.coed.postprocessor;
 
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.modelrefactoring.evolution.coed.Action;
 import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
 import org.modelrefactoring.evolution.coed.RoleMappingAction;
-import org.modelrefactoring.evolution.coed.resource.coed.CoedEProblemSeverity;
 import org.modelrefactoring.evolution.coed.resource.coed.CoedEProblemType;
-import org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedProblem;
 import org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedResource;
 
 public class MVELActionExpressionPostProcessor extends MVELExpressionPostProcessor {
@@ -35,7 +32,8 @@ public class MVELActionExpressionPostProcessor extends MVELExpressionPostProcess
 	public void addParseError(CoedResource resource, EObject context, String errorMessage) {
 		if(context instanceof RoleMappingAction){
 			RoleMappingAction roleMappingAction = (RoleMappingAction) context;
-			String message = "This action was parsed by MVEL. The following error occured: " + errorMessage;
+//			String message = "This action was parsed by MVEL. The following error occured: " + errorMessage;
+			String message = errorMessage;
 			resource.addError(message, CoedEProblemType.SYNTAX_ERROR, roleMappingAction);
 			// following does not work since the concreteRefactoring is only a proxy in the location map 
 //			CoedProblem problem = new CoedProblem(message, CoedEProblemType.SYNTAX_ERROR, CoedEProblemSeverity.ERROR);
