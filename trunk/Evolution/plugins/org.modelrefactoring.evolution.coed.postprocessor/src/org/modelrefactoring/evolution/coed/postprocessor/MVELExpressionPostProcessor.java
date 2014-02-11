@@ -22,7 +22,7 @@ public abstract class MVELExpressionPostProcessor extends AbstractCoedPostProces
 	
 	public abstract void addParseError(CoedResource resource, EObject context, String errorMessage);
 
-	private void evaluate(String expression, EObject context, CoedResource resource) {
+	protected void evaluate(String expression, EObject context, CoedResource resource) {
 		if(expression != null){
 			try {
 				// compilation parses the expression 

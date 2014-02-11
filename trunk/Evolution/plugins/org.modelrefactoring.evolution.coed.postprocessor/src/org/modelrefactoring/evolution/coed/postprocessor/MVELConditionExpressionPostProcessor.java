@@ -14,7 +14,10 @@ public class MVELConditionExpressionPostProcessor extends MVELExpressionPostProc
 	@Override
 	public String getExpression(EObject context) {
 		if(context instanceof PlainCondition){
-			return ((PlainCondition) context).getCondition();
+			String condition = ((PlainCondition) context).getCondition();
+			// to make sure that the evaluated expression is of type boolean
+			String booleanExpression = "if (" + condition + ") { }";
+			return booleanExpression;
 		}
 		return null;
 	}
@@ -33,7 +36,8 @@ public class MVELConditionExpressionPostProcessor extends MVELExpressionPostProc
 	public void addParseError(CoedResource resource, EObject context, String errorMessage) {
 		if(context instanceof PlainCondition){
 			PlainCondition plainCondition = (PlainCondition) context;
-			String message = "This condition was parsed by MVEL. The following error occured: " + errorMessage;
+//			String message = "This condition was parsed by MVEL. The following error occured: " + errorMessage;
+			String message = errorMessage;
 			CoedProblem problem = new CoedProblem(message, CoedEProblemType.SYNTAX_ERROR, CoedEProblemSeverity.ERROR);
 			int charStart = resource.getLocationMap().getCharStart(plainCondition) + "condition ".length();
 			int line = resource.getLocationMap().getLine(plainCondition);
@@ -42,5 +46,4 @@ public class MVELConditionExpressionPostProcessor extends MVELExpressionPostProc
 			resource.addProblem(problem, column, line, charStart, charEnd);
 		}
 	}
-
 }

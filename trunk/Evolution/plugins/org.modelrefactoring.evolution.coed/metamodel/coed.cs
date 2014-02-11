@@ -39,10 +39,10 @@ RULES {
 	MetamodelImport ::= shortcut[IDENTIFIER] !0 ":" !0 metamodel['<','>'];
 	
 	// conditions
-	PlainCondition ::= "condition" condition['{','}'];
+	PlainCondition ::= "condition" condition['@','@'];
 	
 	// 1. possibility: incoming Event and outgoing modifications based on RoleMapping
 	RoleMappingEvent ::= "refactoring" #1 metamodelImport[IDENTIFIER] #0 ":" #0 concreteRefactoring['<','>'];
-	RoleMappingAction ::= "corefactoring" #1 concreteRefactoring['<','>'] (#1 binding['{','}'])?;
+	RoleMappingAction ::= "corefactoring" #1 concreteRefactoring['<','>'] (#1 binding['@','@'])?;
 	
 }
