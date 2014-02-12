@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
@@ -51,7 +53,7 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 	public static final String MEGAMODEL_STRING	= "http://modelrefactoring.org/" + MEGAMODEL_FILE;
 	public static final URI MEGAMODEL_URI		= URI.createURI(MEGAMODEL_STRING);
 
-//	@Inject
+	//	@Inject
 	private IWorkspace workspace;
 
 	private Resource codsResource;
@@ -142,17 +144,18 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 		try {
 			IProject[] projects = root.getProjects();
 			for (IProject project : projects) {
-				if(project.isOpen()){
+				if(project.isAccessible()){
 					project.accept(new IResourceVisitor() {
 						@Override
 						public boolean visit(IResource resource) throws CoreException {
-							IFile file = (IFile) resource.getAdapter(IFile.class);
-							if(file != null){
-								//								java.net.URI locationURI = file.getLocationURI();
-								//								IPath rawLocation = file.getRawLocation();
-								//								java.net.URI rawLocationURI = file.getRawLocationURI();
-								//								java.net.URI uri = pathVariableManager.resolveURI(locationURI);
-								registerModelInFile(megaModel, file);
+							IFolder folder = (IFolder) resource.getAdapter(IFolder.class);
+							if(folder != null && WorkspaceModelChangeListener.isResourceHidden(folder)){
+								return false;
+							} else {
+								IFile file = (IFile) resource.getAdapter(IFile.class);
+								if(file != null && WorkspaceModelChangeListener.isResourceHidden(file)){
+									registerModelInFile(megaModel, file);
+								}
 							}
 							return true;
 						}
@@ -183,40 +186,40 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 			} else {
 				uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 			}
-//			Factory factory2 = Resource.Factory.Registry.INSTANCE.getFactory(uri);
-//			Object factory = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(uri.fileExtension());
+			//			Factory factory2 = Resource.Factory.Registry.INSTANCE.getFactory(uri);
+			//			Object factory = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(uri.fileExtension());
 			try {
 				Resource resource = rs.getResource(uri, true);
 				if(resource != null){
-//					if(resource != null){
-						EObject model = resource.getContents().get(0);
-						EPackage metamodel = model.eClass().getEPackage();
-						ReferenceModel existentMetamodel = megaModel.getReferenceModelByEPackage(metamodel);
-						if(existentMetamodel == null){
-							existentMetamodel = ArchitectureFactory.eINSTANCE.createMetaModel();
-							existentMetamodel.setConformsTo(megaModel.getMetaMetaModel());
-							if(model instanceof EPackage){
-								existentMetamodel.setPackage((EPackage) model);
-							} else {
-								existentMetamodel.setPackage(metamodel);
-							}
-							megaModel.getModels().add(existentMetamodel);
-							modified = true;
+					//					if(resource != null){
+					EObject model = resource.getContents().get(0);
+					EPackage metamodel = model.eClass().getEPackage();
+					ReferenceModel existentMetamodel = megaModel.getReferenceModelByEPackage(metamodel);
+					if(existentMetamodel == null){
+						existentMetamodel = ArchitectureFactory.eINSTANCE.createMetaModel();
+						existentMetamodel.setConformsTo(megaModel.getMetaMetaModel());
+						if(model instanceof EPackage){
+							existentMetamodel.setPackage((EPackage) model);
+						} else {
+							existentMetamodel.setPackage(metamodel);
 						}
-						if(megaModel.getTerminalModelByEObject(model) == null){
-							Model newModel = createModelForEObject(model);
-							newModel.setConformsTo(existentMetamodel);
-							megaModel.getModels().add(newModel);
-							modified = true;
-						}
-//					}
+						megaModel.getModels().add(existentMetamodel);
+						modified = true;
+					}
+					if(megaModel.getTerminalModelByEObject(model) == null){
+						Model newModel = createModelForEObject(model);
+						newModel.setConformsTo(existentMetamodel);
+						megaModel.getModels().add(newModel);
+						modified = true;
+					}
+					//					}
 				}
 			} catch (Exception e) {
 				// no model found, just don't include it in the megamodel
-//				ILog log = Platform.getLog(Platform.getBundle("org.modelrefactoring.evolution.cods"));
-//				if(log != null){
-//					log.log(new Status(IStatus.WARNING, "org.modelrefactoring.evolution.cods", "no model: " + uri.toString(), e));
-//				}
+				//				ILog log = Platform.getLog(Platform.getBundle("org.modelrefactoring.evolution.cods"));
+				//				if(log != null){
+				//					log.log(new Status(IStatus.WARNING, "org.modelrefactoring.evolution.cods", "no model: " + uri.toString(), e));
+				//				}
 				System.err.println("no model: " + uri.toString());
 			}
 		}
