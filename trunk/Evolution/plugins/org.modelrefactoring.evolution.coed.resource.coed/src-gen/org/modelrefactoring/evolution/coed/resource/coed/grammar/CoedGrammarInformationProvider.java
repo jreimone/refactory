@@ -178,7 +178,7 @@ public class CoedGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_2_0_0_1 = INSTANCE.getCOED_2_0_0_1();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_2_0_0_1() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getPlainCondition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CONDITION), "QUOTED_64_64", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getPlainCondition().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CONDITION), "QUOTED_36_36", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_2_0_0 = INSTANCE.getCOED_2_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_2_0_0() {
@@ -250,7 +250,7 @@ public class CoedGrammarInformationProvider {
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder COED_4_0_0_3_0_0_1 = INSTANCE.getCOED_4_0_0_3_0_0_1();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder getCOED_4_0_0_3_0_0_1() {
-		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingAction().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__BINDING), "QUOTED_64_64", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
+		return new org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedPlaceholder(org.modelrefactoring.evolution.coed.CoedPackage.eINSTANCE.getRoleMappingAction().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__BINDING), "QUOTED_36_36", org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedCardinality.ONE, 0);
 	}
 	public final static org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence COED_4_0_0_3_0_0 = INSTANCE.getCOED_4_0_0_3_0_0();
 	private org.modelrefactoring.evolution.coed.resource.coed.grammar.CoedSequence getCOED_4_0_0_3_0_0() {

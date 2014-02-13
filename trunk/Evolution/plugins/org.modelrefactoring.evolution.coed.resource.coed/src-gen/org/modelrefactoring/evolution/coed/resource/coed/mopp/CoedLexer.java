@@ -30,8 +30,8 @@ public class CoedLexer extends Lexer {
     public static final int FLOAT=4;
     public static final int IDENTIFIER=5;
     public static final int LINEBREAK=6;
-    public static final int QUOTED_60_62=7;
-    public static final int QUOTED_64_64=8;
+    public static final int QUOTED_36_36=7;
+    public static final int QUOTED_60_62=8;
     public static final int SL_COMMENT=9;
     public static final int WHITESPACE=10;
 
@@ -790,32 +790,32 @@ public class CoedLexer extends Lexer {
     }
     // $ANTLR end "QUOTED_60_62"
 
-    // $ANTLR start "QUOTED_64_64"
-    public final void mQUOTED_64_64() throws RecognitionException {
+    // $ANTLR start "QUOTED_36_36"
+    public final void mQUOTED_36_36() throws RecognitionException {
         try {
-            int _type = QUOTED_64_64;
+            int _type = QUOTED_36_36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Coed.g:1185:13: ( ( ( '@' ) (~ ( '@' ) )* ( '@' ) ) )
-            // Coed.g:1186:2: ( ( '@' ) (~ ( '@' ) )* ( '@' ) )
+            // Coed.g:1185:13: ( ( ( '$' ) (~ ( '$' ) )* ( '$' ) ) )
+            // Coed.g:1186:2: ( ( '$' ) (~ ( '$' ) )* ( '$' ) )
             {
-            // Coed.g:1186:2: ( ( '@' ) (~ ( '@' ) )* ( '@' ) )
-            // Coed.g:1186:3: ( '@' ) (~ ( '@' ) )* ( '@' )
+            // Coed.g:1186:2: ( ( '$' ) (~ ( '$' ) )* ( '$' ) )
+            // Coed.g:1186:3: ( '$' ) (~ ( '$' ) )* ( '$' )
             {
-            // Coed.g:1186:3: ( '@' )
-            // Coed.g:1186:4: '@'
+            // Coed.g:1186:3: ( '$' )
+            // Coed.g:1186:4: '$'
             {
-            match('@'); 
+            match('$'); 
 
             }
 
 
-            // Coed.g:1186:8: (~ ( '@' ) )*
+            // Coed.g:1186:8: (~ ( '$' ) )*
             loop9:
             do {
                 int alt9=2;
                 int LA9_0 = input.LA(1);
 
-                if ( ((LA9_0 >= '\u0000' && LA9_0 <= '?')||(LA9_0 >= 'A' && LA9_0 <= '\uFFFF')) ) {
+                if ( ((LA9_0 >= '\u0000' && LA9_0 <= '#')||(LA9_0 >= '%' && LA9_0 <= '\uFFFF')) ) {
                     alt9=1;
                 }
 
@@ -824,7 +824,7 @@ public class CoedLexer extends Lexer {
             	case 1 :
             	    // Coed.g:
             	    {
-            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '?')||(input.LA(1) >= 'A' && input.LA(1) <= '\uFFFF') ) {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '#')||(input.LA(1) >= '%' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
             	    }
             	    else {
@@ -843,10 +843,10 @@ public class CoedLexer extends Lexer {
             } while (true);
 
 
-            // Coed.g:1186:17: ( '@' )
-            // Coed.g:1186:18: '@'
+            // Coed.g:1186:17: ( '$' )
+            // Coed.g:1186:18: '$'
             {
-            match('@'); 
+            match('$'); 
 
             }
 
@@ -863,10 +863,10 @@ public class CoedLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "QUOTED_64_64"
+    // $ANTLR end "QUOTED_36_36"
 
     public void mTokens() throws RecognitionException {
-        // Coed.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | IDENTIFIER | WHITESPACE | LINEBREAK | FLOAT | SL_COMMENT | QUOTED_60_62 | QUOTED_64_64 )
+        // Coed.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | IDENTIFIER | WHITESPACE | LINEBREAK | FLOAT | SL_COMMENT | QUOTED_60_62 | QUOTED_36_36 )
         int alt10=18;
         alt10 = dfa10.predict(input);
         switch (alt10) {
@@ -1007,9 +1007,9 @@ public class CoedLexer extends Lexer {
                 }
                 break;
             case 18 :
-                // Coed.g:1:138: QUOTED_64_64
+                // Coed.g:1:138: QUOTED_36_36
                 {
-                mQUOTED_64_64(); 
+                mQUOTED_36_36(); 
 
 
                 }
@@ -1050,10 +1050,10 @@ public class CoedLexer extends Lexer {
     static final String DFA10_specialS =
         "\122\uffff}>";
     static final String[] DFA10_transitionS = {
-            "\1\13\1\14\1\uffff\1\13\1\14\22\uffff\1\13\7\uffff\1\1\1\2\3"+
-            "\uffff\1\12\1\uffff\1\17\12\16\1\3\1\uffff\1\20\3\uffff\1\21"+
-            "\2\15\1\4\27\15\4\uffff\1\15\1\uffff\2\15\1\5\2\15\1\6\2\15"+
-            "\1\7\5\15\1\10\2\15\1\11\10\15",
+            "\1\13\1\14\1\uffff\1\13\1\14\22\uffff\1\13\3\uffff\1\21\3\uffff"+
+            "\1\1\1\2\3\uffff\1\12\1\uffff\1\17\12\16\1\3\1\uffff\1\20\4"+
+            "\uffff\2\15\1\4\27\15\4\uffff\1\15\1\uffff\2\15\1\5\2\15\1\6"+
+            "\2\15\1\7\5\15\1\10\2\15\1\11\10\15",
             "",
             "",
             "",
@@ -1167,7 +1167,7 @@ public class CoedLexer extends Lexer {
             this.transition = DFA10_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | IDENTIFIER | WHITESPACE | LINEBREAK | FLOAT | SL_COMMENT | QUOTED_60_62 | QUOTED_64_64 );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | IDENTIFIER | WHITESPACE | LINEBREAK | FLOAT | SL_COMMENT | QUOTED_60_62 | QUOTED_36_36 );";
         }
     }
  

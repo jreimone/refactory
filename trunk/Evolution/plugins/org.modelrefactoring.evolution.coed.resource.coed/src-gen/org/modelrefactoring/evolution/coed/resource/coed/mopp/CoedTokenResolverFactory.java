@@ -28,7 +28,7 @@ public class CoedTokenResolverFactory implements org.modelrefactoring.evolution.
 		featureName2CollectInTokenResolver = new LinkedHashMap<String, org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver>();
 		registerTokenResolver("IDENTIFIER", new org.modelrefactoring.evolution.coed.resource.coed.analysis.CoedIDENTIFIERTokenResolver());
 		registerTokenResolver("QUOTED_60_62", new org.modelrefactoring.evolution.coed.resource.coed.analysis.CoedQUOTED_60_62TokenResolver());
-		registerTokenResolver("QUOTED_64_64", new org.modelrefactoring.evolution.coed.resource.coed.analysis.CoedQUOTED_64_64TokenResolver());
+		registerTokenResolver("QUOTED_36_36", new org.modelrefactoring.evolution.coed.resource.coed.analysis.CoedQUOTED_36_36TokenResolver());
 	}
 	
 	public org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver createTokenResolver(String tokenName) {
