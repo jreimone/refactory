@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         point="org.emftext.refactoring.smell.registry.ui.calculation">
+      <structureCalculation
+            smellMessage="A WakeLock should be acquired with a timeout."
+            description="Transforms acquire statement to use timeout."
+            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/durableWakeLock.eiq"
+            patternName="durableWakeLock">
+      </structureCalculation>
+      <structureCalculation
+            smellMessage="Override Implement the onLowMemory() method"
+            description="Lets the activity class override onLowMemory() method."
+            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/noMemoryResolver.eiq"
+            patternName="noMemoryResolver">
+      </structureCalculation>
+      <structureCalculation
+            smellMessage="Background services and broadcast recievers should not call interrupting tasks."
+            description="Removes the toast statement from background task"
+            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/interruptingFromBackground.eiq"
+            patternName="interruptingFromBackground">
+      </structureCalculation>
+      <structureCalculation
+            smellMessage="The inexact alarm manager should be used if exact execution is not needed."
+            description="Replaces the exact AlarmManager with an inexact"
+            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/rigidAlarmManager.eiq"
+            patternName="rigidAlarmManager">
+      </structureCalculation>
+      <structureCalculation
+            smellMessage="The IMEI should not be used for security reasons."
+            description="Uses a unique generated id for tracking the hardware id."
+            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/trackingHardwareId.eiq"
+            patternName="trackingHardwareId">
+      </structureCalculation>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/AquireWakeLockWithTimeout.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/OverrideOnLowMemory.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/RemoveToastFromBackground.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/UseInexactAlarmManager.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/UseUniqueGeneratedId.rolemapping">
+      </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.AcquireWakeLockWithTimeout"
+            mapping_name="Transforms acquire statement to use timeout"
+            nsUri="http://www.emftext.org/java">
+      </postprocessor>
+      <postprocessor
+            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.OverrideOnLowMemoryResolver"
+            mapping_name="Lets the activity class override onLowMemory() method"
+            nsUri="http://www.emftext.org/java">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Removes the toast statement from background task"
+            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.RemoveInterrupFromBackground"
+            nsUri="http://www.emftext.org/java">
+      </postprocessor>
+      <postprocessor
+            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.SetInexactAlarmManager"
+            mapping_name="Replaces the exact AlarmManager with an inexact"
+            nsUri="http://www.emftext.org/java">
+      </postprocessor>
+      <postprocessor
+            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.UseUUID"
+            mapping_name="Uses a unique generated id for tracking the hardware id"
+            nsUri="http://www.emftext.org/java">
+      </postprocessor>
+   </extension>
+
+</plugin>
