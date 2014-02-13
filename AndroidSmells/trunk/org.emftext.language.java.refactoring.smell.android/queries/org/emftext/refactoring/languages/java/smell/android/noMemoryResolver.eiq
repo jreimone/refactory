@@ -1,0 +1,24 @@
+package org.emftext.refactoring.languages.java.smell.android
+
+import "http://www.emftext.org/java/commons"
+import "http://www.emftext.org/java/classifiers"
+import "http://www.emftext.org/java/members"
+import "http://www.emftext.org/java/parameters"
+import "http://www.emftext.org/java/types"
+import "http://www.emftext.org/java/references"
+import "http://www.emftext.org/java/variables"
+import "http://www.emftext.org/java/statements"
+
+
+pattern noMemoryResolver(actualClass:Class) = {
+	Class.^extends(actualClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
+	ClassifierReference.target(classifierReference, superClass);
+	Class.name(superClass, "Activity");
+	
+	neg find hasMethod_mom(actualClass, "onLowMemoryResolver");
+}
+
+private pattern hasMethod_mom(class, method) = {
+	Class.members.name(class, method);
+}
