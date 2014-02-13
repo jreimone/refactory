@@ -358,7 +358,7 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CONDITION));
 			if (o != null) {
-				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_64_64");
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_36_36");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CONDITION), element));
 				out.print(" ");
@@ -478,7 +478,7 @@ public class CoedPrinter implements org.modelrefactoring.evolution.coed.resource
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__BINDING));
 			if (o != null) {
-				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_64_64");
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_36_36");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__BINDING), element));
 				out.print(" ");

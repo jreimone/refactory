@@ -150,6 +150,9 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 		ResourceAttributes attributes = resource.getResourceAttributes();
 		boolean hiddenInWorkspace = resource.isHidden();
 		boolean semanticallyHiddenInFilesystem = resource.getName().startsWith(".");
+		if(resource instanceof IFolder){
+			semanticallyHiddenInFilesystem = semanticallyHiddenInFilesystem || resource.getName().equals("bin");
+		}
 		boolean hiddenInFilesystem = attributes != null && attributes.isHidden();
 		return hiddenInWorkspace || semanticallyHiddenInFilesystem || hiddenInFilesystem;
 	}

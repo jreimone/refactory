@@ -884,7 +884,7 @@ parse_org_modelrefactoring_evolution_coed_PlainCondition returns [org.modelrefac
 	}
 	
 	(
-		a1 = QUOTED_64_64		
+		a1 = QUOTED_36_36		
 		{
 			if (terminateParsing) {
 				throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
@@ -894,7 +894,7 @@ parse_org_modelrefactoring_evolution_coed_PlainCondition returns [org.modelrefac
 				startIncompleteElement(element);
 			}
 			if (a1 != null) {
-				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_64_64");
+				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_36_36");
 				tokenResolver.setOptions(getOptions());
 				org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.PLAIN_CONDITION__CONDITION), result);
@@ -1098,7 +1098,7 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingAction returns [org.modelre
 	(
 		(
 			(
-				a2 = QUOTED_64_64				
+				a2 = QUOTED_36_36				
 				{
 					if (terminateParsing) {
 						throw new org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedTerminateParsingException();
@@ -1108,7 +1108,7 @@ parse_org_modelrefactoring_evolution_coed_RoleMappingAction returns [org.modelre
 						startIncompleteElement(element);
 					}
 					if (a2 != null) {
-						org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_64_64");
+						org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_36_36");
 						tokenResolver.setOptions(getOptions());
 						org.modelrefactoring.evolution.coed.resource.coed.ICoedTokenResolveResult result = getFreshTokenResolveResult();
 						tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.modelrefactoring.evolution.coed.CoedPackage.ROLE_MAPPING_ACTION__BINDING), result);
@@ -1182,7 +1182,7 @@ SL_COMMENT:
 QUOTED_60_62:
 	(('<')(~('>'))*('>'))
 ;
-QUOTED_64_64:
-	(('@')(~('@'))*('@'))
+QUOTED_36_36:
+	(('$')(~('$'))*('$'))
 ;
 
