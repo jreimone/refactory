@@ -1,0 +1,43 @@
+package org.emftext.refactoring.languages.java.smell.android
+
+import "http://www.emftext.org/java/commons"
+import "http://www.emftext.org/java/classifiers"
+import "http://www.emftext.org/java/members"
+import "http://www.emftext.org/java/parameters"
+import "http://www.emftext.org/java/types"
+import "http://www.emftext.org/java/references"
+import "http://www.emftext.org/java/variables"
+import "http://www.emftext.org/java/statements"
+
+
+pattern durableWakeLock(acquireExpression:MethodCall) = {
+	Class.^extends(actualClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
+	ClassifierReference.target(classifierReference, superClass);
+	Class.name(superClass, "Activity");
+	Class.members(actualClass, anyMethod);
+//	ClassMethod.name(anyMethod, "onCreate");
+	
+	ExpressionStatement.expression(bindingStatement, wakeLockIdentifier);
+	IdentifierReference.target(wakeLockIdentifier, wakeLockIdentifierReference);
+	IdentifierReference.next(wakeLockIdentifier, acquireExpression);
+	MethodCall.target.name(acquireExpression, "acquire");
+	neg find hasArguments_dur(acquireExpression);
+
+	LocalVariable.typeReference(wakeLockIdentifierReference, wakeLockIdentifierReferenceClassfier);
+	NamespaceClassifierReference.classifierReferences.target.name(wakeLockIdentifierReferenceClassfier, "WakeLock");
+	
+	find parentContainsBindingExpression_dur+(anyMethod, bindingStatement);
+}
+
+private pattern parentContainsBindingExpression_dur(parent, child) = {
+	StatementListContainer.statements(parent, child);
+} or {
+	ExpressionStatement.expression(parent, child);
+} or {
+	StatementContainer.statement(parent, child);
+}
+
+private pattern hasArguments_dur(args) {
+	MethodCall.arguments(args, _);
+}

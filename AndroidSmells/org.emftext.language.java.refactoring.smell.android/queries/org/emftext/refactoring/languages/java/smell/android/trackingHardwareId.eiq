@@ -1,0 +1,72 @@
+package org.emftext.refactoring.languages.java.smell.android
+
+import "http://www.emftext.org/java/commons"
+import "http://www.emftext.org/java/classifiers"
+import "http://www.emftext.org/java/members"
+import "http://www.emftext.org/java/parameters"
+import "http://www.emftext.org/java/types"
+import "http://www.emftext.org/java/references"
+import "http://www.emftext.org/java/variables"
+import "http://www.emftext.org/java/statements"
+import "http://www.emftext.org/java/instantiations"
+
+
+pattern trackingHardwareIdMethodCall(deviceIdCall:MethodCall) {
+	Class.^extends(actualClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
+	ClassifierReference.target(classifierReference, superClass);
+	Class.name(superClass, "Activity");
+	
+	Class.members(actualClass, anyMethod);
+	
+	MethodCall.target.name(deviceIdCall, "getDeviceId");
+//	MethodCall.target(deviceIdCall, );
+	
+	IdentifierReference.target(deviceIdIdentifier, deviceIdIdentifierReference);
+	IdentifierReference.next(deviceIdIdentifier, deviceIdCall);
+	
+	// LocalVariable.typeReference(idVarRef, idVar);
+	// LocalVariable.initialValue(idVarRef, deviceIdIdentifier);
+	
+	Variable.typeReference(deviceIdIdentifierReference, deviceIdIdentifierReferenceClassfier);
+	NamespaceClassifierReference.classifierReferences.target.name(deviceIdIdentifierReferenceClassfier, "TelephonyManager");
+	
+	find parentContainsSomething+(anyMethod, deviceIdCall);
+}
+
+pattern trackingHardwareId(deviceIdIdentifier:IdentifierReference) {
+	Class.^extends(actualClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
+	ClassifierReference.target(classifierReference, superClass);
+	Class.name(superClass, "Activity");
+	Class.members(actualClass, anyMethod);
+//	ClassMethod.name(anyMethod, "onCreate");
+	
+	// LocalVariableStatement.variable(bindingStatement, idVarRef);
+	
+	IdentifierReference.target(deviceIdIdentifier, deviceIdIdentifierReference);
+	IdentifierReference.next(deviceIdIdentifier, deviceIdMethodExpression);
+	MethodCall.target.name(deviceIdMethodExpression, "getDeviceId");
+	
+	// LocalVariable.typeReference(idVarRef, idVar);
+	// LocalVariable.initialValue(idVarRef, deviceIdIdentifier);
+	
+	LocalVariable.typeReference(deviceIdIdentifierReference, deviceIdIdentifierReferenceClassfier);
+	NamespaceClassifierReference.classifierReferences.target.name(deviceIdIdentifierReferenceClassfier, "TelephonyManager");
+	
+	find parentContainsBindingExpression_tra+(anyMethod, _bindingStatement);
+}
+
+private pattern parentContainsBindingExpression_tra(parent, child) {
+	StatementListContainer.statements(parent, child);
+} or {
+	ExpressionStatement.expression(parent, child);
+} or {
+	StatementContainer.statement(parent, child);
+}
+
+private pattern parentContainsSomething(parent, child){
+	LocalVariableStatement.variable(parent, child);
+} or {
+	StatementListContainer.statements(parent, child);
+}
