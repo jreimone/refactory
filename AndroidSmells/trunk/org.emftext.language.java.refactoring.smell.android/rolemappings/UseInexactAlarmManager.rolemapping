@@ -3,6 +3,6 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/java>
 /*
 	Replaces the exact AlarmManager with an inexact.
 */
-"Replaces the exact AlarmManager with an inexact" maps <SelectX> { 
+"Replace exact with inexact AlarmManager" maps <SelectX> { 
 	 Selection := references.MethodCall; 
 }

@@ -17,6 +17,8 @@ pattern interruptingFromBackground(expression:ExpressionStatement){
 	find isServiceOrBroadcastReciever(superClass);
 	
 	find startsActivityOrToast(expression);
+	Class.members(actualClass, method);
+	find parentContainsSomething+(method, expression);
 }
 
 private pattern startsActivityOrToast(expression) {
@@ -39,4 +41,10 @@ private pattern isServiceOrBroadcastReciever(class) {
 
 private pattern isClassOf(class, className) {
 	Class.name(class, className);
+}
+
+private pattern parentContainsSomething(parent, child){
+	LocalVariableStatement.variable(parent, child);
+} or {
+	StatementListContainer.statements(parent, child);
 }

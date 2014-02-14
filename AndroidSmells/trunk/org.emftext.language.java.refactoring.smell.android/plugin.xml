@@ -56,27 +56,27 @@
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
             postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.AcquireWakeLockWithTimeout"
-            mapping_name="Transforms acquire statement to use timeout"
+            mapping_name="Transform acquire statement to use timeout"
             nsUri="http://www.emftext.org/java">
       </postprocessor>
       <postprocessor
             postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.OverrideOnLowMemoryResolver"
-            mapping_name="Lets the activity class override onLowMemory() method"
+            mapping_name="Let activity class override onLowMemory() method"
             nsUri="http://www.emftext.org/java">
       </postprocessor>
       <postprocessor
-            mapping_name="Removes the toast statement from background task"
+            mapping_name="Remove toast statement from background task"
             postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.RemoveInterrupFromBackground"
             nsUri="http://www.emftext.org/java">
       </postprocessor>
       <postprocessor
             postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.SetInexactAlarmManager"
-            mapping_name="Replaces the exact AlarmManager with an inexact"
+            mapping_name="Replace exact with inexact AlarmManager"
             nsUri="http://www.emftext.org/java">
       </postprocessor>
       <postprocessor
             postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.UseUUID"
-            mapping_name="Uses a unique generated id for tracking the hardware id"
+            mapping_name="Use unique generated id for tracking hardware id"
             nsUri="http://www.emftext.org/java">
       </postprocessor>
    </extension>

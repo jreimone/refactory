@@ -11,7 +11,30 @@ import "http://www.emftext.org/java/statements"
 import "http://www.emftext.org/java/instantiations"
 
 
-pattern trackingHardwareId(deviceIdIdentifier:IdentifierReference) = {
+pattern trackingHardwareIdMethodCall(deviceIdCall:MethodCall) {
+	Class.^extends(actualClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
+	ClassifierReference.target(classifierReference, superClass);
+	Class.name(superClass, "Activity");
+	
+	Class.members(actualClass, anyMethod);
+	
+	MethodCall.target.name(deviceIdCall, "getDeviceId");
+//	MethodCall.target(deviceIdCall, );
+	
+	IdentifierReference.target(deviceIdIdentifier, deviceIdIdentifierReference);
+	IdentifierReference.next(deviceIdIdentifier, deviceIdCall);
+	
+	// LocalVariable.typeReference(idVarRef, idVar);
+	// LocalVariable.initialValue(idVarRef, deviceIdIdentifier);
+	
+	Variable.typeReference(deviceIdIdentifierReference, deviceIdIdentifierReferenceClassfier);
+	NamespaceClassifierReference.classifierReferences.target.name(deviceIdIdentifierReferenceClassfier, "TelephonyManager");
+	
+	find parentContainsSomething+(anyMethod, deviceIdCall);
+}
+
+pattern trackingHardwareId(deviceIdIdentifier:IdentifierReference) {
 	Class.^extends(actualClass, superClassRef);
 	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
 	ClassifierReference.target(classifierReference, superClass);
@@ -31,13 +54,19 @@ pattern trackingHardwareId(deviceIdIdentifier:IdentifierReference) = {
 	LocalVariable.typeReference(deviceIdIdentifierReference, deviceIdIdentifierReferenceClassfier);
 	NamespaceClassifierReference.classifierReferences.target.name(deviceIdIdentifierReferenceClassfier, "TelephonyManager");
 	
-	find parentContainsBindingExpression_tra+(anyMethod, bindingStatement);
+	find parentContainsBindingExpression_tra+(anyMethod, _bindingStatement);
 }
 
-private pattern parentContainsBindingExpression_tra(parent, child) = {
+private pattern parentContainsBindingExpression_tra(parent, child) {
 	StatementListContainer.statements(parent, child);
 } or {
 	ExpressionStatement.expression(parent, child);
 } or {
 	StatementContainer.statement(parent, child);
+}
+
+private pattern parentContainsSomething(parent, child){
+	LocalVariableStatement.variable(parent, child);
+} or {
+	StatementListContainer.statements(parent, child);
 }

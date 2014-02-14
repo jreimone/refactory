@@ -3,6 +3,6 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/java>
 /*
 	Transforms the acquire statement (without the use of the timeout parameter) to use the timeout parameter.
 */
-"Transforms acquire statement to use timeout" maps <SelectX> { 
+"Transform acquire statement to use timeout" maps <SelectX> { 
 	 Selection := references.MethodCall; 
 }
