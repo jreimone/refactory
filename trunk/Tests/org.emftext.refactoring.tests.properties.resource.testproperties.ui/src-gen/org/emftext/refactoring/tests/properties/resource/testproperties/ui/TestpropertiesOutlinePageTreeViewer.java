@@ -176,7 +176,7 @@ public class TestpropertiesOutlinePageTreeViewer extends TreeViewer {
 	}
 	
 	protected void fireSelectionChanged(SelectionChangedEvent event) {
-		if (suppressNotifications == true) {
+		if (suppressNotifications) {
 			return;
 		}
 		super.fireSelectionChanged(event);
@@ -199,6 +199,10 @@ public class TestpropertiesOutlinePageTreeViewer extends TreeViewer {
 	
 	public void removeTypeToFilter(EClass typeToNotFilter) {
 		typeFilter.getFilteredTypes().remove(typeToNotFilter);
+	}
+	
+	public void setSuppressNotifications(boolean suppressNotifications) {
+		this.suppressNotifications = suppressNotifications;
 	}
 	
 }

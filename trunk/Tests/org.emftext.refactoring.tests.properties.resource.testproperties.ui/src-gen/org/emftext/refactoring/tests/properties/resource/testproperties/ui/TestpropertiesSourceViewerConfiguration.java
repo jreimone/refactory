@@ -44,6 +44,7 @@ public class TestpropertiesSourceViewerConfiguration extends TextSourceViewerCon
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider resourceProvider;
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesAnnotationModelProvider annotationModelProvider;
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesQuickAssistAssistant quickAssistAssistant;
+	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesTokenScanner tokenScanner;
 	
 	/**
 	 * Creates a new editor configuration.
@@ -90,7 +91,10 @@ public class TestpropertiesSourceViewerConfiguration extends TextSourceViewerCon
 	}
 	
 	protected ITokenScanner getScanner() {
-		return new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIMetaInformation().createTokenScanner(resourceProvider.getResource(), colorManager);
+		if (tokenScanner == null) {
+			tokenScanner = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIMetaInformation().createTokenScanner(resourceProvider.getResource(), colorManager);
+		}
+		return tokenScanner;
 	}
 	
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {

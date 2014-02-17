@@ -160,7 +160,7 @@ public class TestpropertiesEditor extends TextEditor implements IEditingDomainPr
 								}
 								// reset the selected element in outline and properties by text position
 								if (highlighting != null) {
-									highlighting.setEObjectSelection();
+									highlighting.updateEObjectSelection();
 								}
 							}
 						}
@@ -342,9 +342,14 @@ public class TestpropertiesEditor extends TextEditor implements IEditingDomainPr
 		}
 	}
 	
-	private Object getOutlinePage() {
+	/**
+	 * Return the outline page this is associated with this editor. If no outline page
+	 * exists, a new one is created.
+	 */
+	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesOutlinePage getOutlinePage() {
 		if (outlinePage == null) {
 			outlinePage = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesOutlinePage(this);
+			// Connect highlighting class and outline page for event notification
 			outlinePage.addSelectionChangedListener(highlighting);
 			highlighting.addSelectionChangedListener(outlinePage);
 		}

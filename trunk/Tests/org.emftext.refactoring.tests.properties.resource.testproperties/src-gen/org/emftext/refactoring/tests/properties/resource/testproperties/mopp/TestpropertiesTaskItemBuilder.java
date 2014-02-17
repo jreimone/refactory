@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 public class TestpropertiesTaskItemBuilder {
 	
 	public void build(IFile resource, ResourceSet resourceSet, IProgressMonitor monitor) {
-		monitor.setTaskName("Searching for task items");
+		monitor.setTaskName("Searching for task items in " + new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getSyntaxName() + " files");
 		new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMarkerHelper().removeAllMarkers(resource, IMarker.TASK);
 		if (isInBinFolder(resource)) {
 			return;
