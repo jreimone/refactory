@@ -61,22 +61,60 @@ public class TestpropertiesUIPlugin extends AbstractUIPlugin {
 	 * Helper method for error logging.
 	 * 
 	 * @param message the error message to log
-	 * @param exception the exception that describes the error in detail
+	 * @param throwable the exception that describes the error in detail (can be null)
 	 * 
 	 * @return the status object describing the error
 	 */
-	public static IStatus logError(String message, Throwable exception) {
+	public static IStatus logError(String message, Throwable throwable) {
+		return log(IStatus.ERROR, message, throwable);
+	}
+	
+	/**
+	 * Helper method for logging warnings.
+	 * 
+	 * @param message the warning message to log
+	 * @param throwable the exception that describes the warning in detail (can be
+	 * null)
+	 * 
+	 * @return the status object describing the warning
+	 */
+	public static IStatus logWarning(String message, Throwable throwable) {
+		return log(IStatus.WARNING, message, throwable);
+	}
+	
+	/**
+	 * Helper method for logging infos.
+	 * 
+	 * @param message the info message to log
+	 * @param throwable the exception that describes the info in detail (can be null)
+	 * 
+	 * @return the status object describing the info
+	 */
+	public static IStatus logInfo(String message, Throwable throwable) {
+		return log(IStatus.INFO, message, throwable);
+	}
+	
+	/**
+	 * Helper method for logging.
+	 * 
+	 * @param type the type of the message to log
+	 * @param message the message to log
+	 * @param throwable the exception that describes the error in detail (can be null)
+	 * 
+	 * @return the status object describing the error
+	 */
+	protected static IStatus log(int type, String message, Throwable throwable) {
 		IStatus status;
-		if (exception != null) {
-			status = new Status(IStatus.ERROR, TestpropertiesUIPlugin.PLUGIN_ID, 0, message, exception);
+		if (throwable != null) {
+			status = new Status(type, TestpropertiesUIPlugin.PLUGIN_ID, 0, message, throwable);
 		} else {
-			status = new Status(IStatus.ERROR, TestpropertiesUIPlugin.PLUGIN_ID, message);
+			status = new Status(type, TestpropertiesUIPlugin.PLUGIN_ID, message);
 		}
 		final TestpropertiesUIPlugin pluginInstance = TestpropertiesUIPlugin.getDefault();
 		if (pluginInstance == null) {
 			System.err.println(message);
-			if (exception != null) {
-				exception.printStackTrace();
+			if (throwable != null) {
+				throwable.printStackTrace();
 			}
 		} else {
 			pluginInstance.getLog().log(status);

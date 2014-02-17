@@ -89,7 +89,7 @@ public class TestpropertiesHighlighting implements ISelectionProvider, ISelectio
 				caret = textCaret;
 				removeHighlighting();
 				setHighlighting();
-				setEObjectSelection();
+				updateEObjectSelection();
 			}
 		}
 		
@@ -131,7 +131,7 @@ public class TestpropertiesHighlighting implements ISelectionProvider, ISelectio
 	 * @param sourceviewer the source viewer converts offset between master and slave
 	 * documents
 	 * @param colorManager the color manager provides highlighting colors
-	 * @param editor
+	 * @param editor the editor that uses this highlighting object
 	 */
 	public TestpropertiesHighlighting(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource textResource, ProjectionViewer projectionViewer, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesColorManager colorManager, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesEditor editor) {
 		this.display = Display.getCurrent();
@@ -210,12 +210,16 @@ public class TestpropertiesHighlighting implements ISelectionProvider, ISelectio
 		positionHelper.removePositions(document, category);
 	}
 	
-	public void setEObjectSelection() {
+	/**
+	 * Updates the currently selected EObject and notifies registered selection
+	 * listeners (e.g., the outline page) about this asynchronously.
+	 */
+	public void updateEObjectSelection() {
 		display.asyncExec(new Runnable() {
 			public void run() {
 				EObject selectedEObject = occurrence.getEObjectAtCurrentPosition();
 				if (selectedEObject != null) {
-					setSelection(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesEObjectSelection(selectedEObject, false));
+					setSelection(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesEObjectSelection(selectedEObject));
 				}
 			}
 		});
@@ -264,10 +268,15 @@ public class TestpropertiesHighlighting implements ISelectionProvider, ISelectio
 		selectionChangedListeners.remove(listener);
 	}
 	
+	/**
+	 * Updates the current selection and notifies registered selection listeners
+	 * (e.g., the outline page) about this.
+	 */
 	public void setSelection(ISelection selection) {
 		this.selection = selection;
+		SelectionChangedEvent event = new SelectionChangedEvent(this, selection);
 		for (ISelectionChangedListener listener : selectionChangedListeners) {
-			listener.selectionChanged(new SelectionChangedEvent(this, selection));
+			listener.selectionChanged(event);
 		}
 	}
 	
@@ -275,16 +284,28 @@ public class TestpropertiesHighlighting implements ISelectionProvider, ISelectio
 		return selection;
 	}
 	
+	/**
+	 * This method is called by the outline page if its selection was changed. This is
+	 * accomplished by adding this class as selection change listener to the outline
+	 * page, which is performed by the editor.
+	 */
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (event.getSelection() instanceof TreeSelection) {
 			handleContentOutlineSelection(event.getSelection());
 		}
 	}
 	
+	/**
+	 * Notifies the editor that the selection in the outline page has changed. This
+	 * method assumes that the origin of the selection is the outline page or its tree
+	 * viewer.
+	 */
 	private void handleContentOutlineSelection(ISelection selection) {
-		if (!selection.isEmpty()) {
-			editor.setSelection(selection);
+		if (selection.isEmpty()) {
+			// Ignore empty selections
+			return;
 		}
+		editor.setSelection(selection);
 	}
 	
 }

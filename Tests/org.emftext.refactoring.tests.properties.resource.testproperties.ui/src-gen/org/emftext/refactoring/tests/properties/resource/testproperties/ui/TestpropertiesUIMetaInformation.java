@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+import org.eclipse.core.resources.IResource;
 
 public class TestpropertiesUIMetaInformation extends org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation {
 	
@@ -38,6 +39,11 @@ public class TestpropertiesUIMetaInformation extends org.emftext.refactoring.tes
 	
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCodeCompletionHelper createCodeCompletionHelper() {
 		return new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCodeCompletionHelper();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public Object createResourceAdapter(Object adaptableObject, Class adapterType, IResource resource) {
+		return new org.emftext.refactoring.tests.properties.resource.testproperties.ui.debug.TestpropertiesLineBreakpointAdapter();
 	}
 	
 }

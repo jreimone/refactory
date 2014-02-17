@@ -8,7 +8,9 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
 import java.util.List;
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.provider.IViewerNotification;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.GroupMarker;
@@ -71,7 +73,29 @@ public class TestpropertiesOutlinePage extends Page implements ISelectionProvide
 		adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory());
-		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(adapterFactory);
+		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(adapterFactory) {
+			
+			@Override
+			public void notifyChanged(Notification notification) {
+				if (viewer != null && viewer.getControl() != null && !viewer.getControl().isDisposed()) {
+					viewerRefresh = new ViewerRefresh(viewer) {
+						
+						protected void refresh(IViewerNotification notification) {
+							if (viewer instanceof org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesOutlinePageTreeViewer) {
+								org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesOutlinePageTreeViewer pageTreeViewer = (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesOutlinePageTreeViewer) viewer;
+								pageTreeViewer.setSuppressNotifications(true);
+								super.refresh(notification);
+								pageTreeViewer.setSuppressNotifications(false);
+							} else {
+								super.refresh(notification);
+							}
+						}
+					};
+				}
+				super.notifyChanged(notification);
+			}
+		};
+		
 		treeViewer.setAutoExpandLevel(AUTO_EXPAND_LEVEL);
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
