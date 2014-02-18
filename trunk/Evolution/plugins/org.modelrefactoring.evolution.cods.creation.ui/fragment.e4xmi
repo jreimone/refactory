@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_AdCfYJiXEeOxFN_g4OEU9A">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_I5B0QJiXEeOxFN_g4OEU9A" featurename="commands" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:Command" xmi:id="_PsJG0JiXEeOxFN_g4OEU9A" elementId="org.modelrefactoring.evolution.cods.creation.register" commandName="Register resource and its children in CODS" category="_hKraQJiXEeOxFN_g4OEU9A"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_dXrpwJiXEeOxFN_g4OEU9A" featurename="categories" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:Category" xmi:id="_hKraQJiXEeOxFN_g4OEU9A" elementId="org.modelrefactoring.evolution.cods.category" name="Refactory Evolution Category"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_nrwhoJiXEeOxFN_g4OEU9A" featurename="handlers" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="commands:Handler" xmi:id="_rrIhQJiXEeOxFN_g4OEU9A" elementId="org.modelrefactoring.evolution.cods.creation.register.handler" contributionURI="bundleclass://org.modelrefactoring.evolution.cods.creation.ui/org.modelrefactoring.evolution.cods.creation.ui.handler.RegisterResourceInCODSHandler" command="_PsJG0JiXEeOxFN_g4OEU9A"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_4CeRYJiXEeOxFN_g4OEU9A" featurename="menuContributions" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_7Z-YsJiXEeOxFN_g4OEU9A" elementId="org.modelrefactoring.evolution.cods.creation.ui.register.menuItem" positionInParent="before=additions" parentId="org.eclipse.jdt.ui.PackageExplorer">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_lJzs0JiYEeOxFN_g4OEU9A" elementId="org.modelrefactoring.evolution.cods.creation.ui.register.menu.item" label="Register resource and its children in CODS" command="_PsJG0JiXEeOxFN_g4OEU9A"/>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>
