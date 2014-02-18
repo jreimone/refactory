@@ -9,13 +9,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
-import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -64,7 +62,7 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 	@Override
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		IResource modifiedResource = delta.getResource();
-		if(modifiedResource.isAccessible() && !isResourceHidden(modifiedResource)){
+		if(modifiedResource.isAccessible() && !CODSUtil.isResourceHidden(modifiedResource)){
 			switch (modifiedResource.getType()) {
 			case IResource.FILE:
 				IFile file = (IFile) modifiedResource.getAdapter(IFile.class);
@@ -126,7 +124,7 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 
 	private void handleFileAdded(IFile file) {
 		System.out.println("Processing... " + file);
-		boolean newModelRegistered = MegamodelRegistrationProcessor.registerModelInFile(megamodel, file);
+		boolean newModelRegistered = CODSUtil.registerModelInFile(megamodel, file);
 		if(newModelRegistered){
 			try {
 				URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
@@ -141,17 +139,5 @@ public class WorkspaceModelChangeListener implements IResourceChangeListener, IR
 				e.printStackTrace();
 			}
 		}
-	}
-
-	protected static boolean isResourceHidden(IResource resource) {
-		// exclude all folders being hidden in the workspace or in the file system
-		ResourceAttributes attributes = resource.getResourceAttributes();
-		boolean hiddenInWorkspace = resource.isHidden();
-		boolean semanticallyHiddenInFilesystem = resource.getName().startsWith(".");
-		if(resource instanceof IFolder){
-			semanticallyHiddenInFilesystem = semanticallyHiddenInFilesystem || resource.getName().equals("bin");
-		}
-		boolean hiddenInFilesystem = attributes != null && attributes.isHidden();
-		return hiddenInWorkspace || semanticallyHiddenInFilesystem || hiddenInFilesystem;
 	}
 }
