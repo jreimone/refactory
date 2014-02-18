@@ -95,7 +95,11 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	}
 
 	public Map<String, RoleMapping> getRoleMappingsForUri(String nsUri) {
-		return Collections.unmodifiableMap(getRoleMappingsMap().get(nsUri));
+		Map<String, RoleMapping> registeredRolemappings = getRoleMappingsMap().get(nsUri);
+		if(registeredRolemappings == null){
+			return Collections.emptyMap();
+		}
+		return Collections.unmodifiableMap(registeredRolemappings);
 	}
 
 	private void collectRegisteredRoleMappings(){
