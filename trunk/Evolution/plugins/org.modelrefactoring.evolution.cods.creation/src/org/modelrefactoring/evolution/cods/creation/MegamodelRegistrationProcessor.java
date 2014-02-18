@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
@@ -148,16 +147,25 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 					project.accept(new IResourceVisitor() {
 						@Override
 						public boolean visit(IResource resource) throws CoreException {
-							IFolder folder = (IFolder) resource.getAdapter(IFolder.class);
-							if(folder != null && WorkspaceModelChangeListener.isResourceHidden(folder)){
-								return false;
-							} else {
+							switch (resource.getType()) {
+							case IResource.PROJECT:
+								return true;
+							case IResource.FOLDER:
+								IFolder folder = (IFolder) resource.getAdapter(IFolder.class);
+								if(folder != null){
+									if(!WorkspaceModelChangeListener.isResourceHidden(folder)){
+										return true;
+									}
+								}
+								break;
+							case IResource.FILE:
 								IFile file = (IFile) resource.getAdapter(IFile.class);
-								if(file != null && WorkspaceModelChangeListener.isResourceHidden(file)){
+								if(file != null && !WorkspaceModelChangeListener.isResourceHidden(file)){
 									registerModelInFile(megaModel, file);
 								}
+								break;
 							}
-							return true;
+							return false;
 						}
 					});
 				}
