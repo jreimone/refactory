@@ -14,30 +14,22 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.modelrefactoring.evolution.cods.kinds.IKindsExtensionPoint;
 import org.modelrefactoring.evolution.megamodel.MegamodelPackage;
 import org.modelrefactoring.evolution.megamodel.architecture.ArchitectureFactory;
-import org.modelrefactoring.evolution.megamodel.architecture.InstanceModel;
 import org.modelrefactoring.evolution.megamodel.architecture.MegaModel;
 import org.modelrefactoring.evolution.megamodel.architecture.MetaMetaModel;
 import org.modelrefactoring.evolution.megamodel.architecture.MetaModel;
-import org.modelrefactoring.evolution.megamodel.architecture.Model;
-import org.modelrefactoring.evolution.megamodel.architecture.ReferenceModel;
-import org.modelrefactoring.evolution.megamodel.architecture.TransformationModel;
 import org.modelrefactoring.evolution.megamodel.cods.CODS;
 import org.modelrefactoring.evolution.megamodel.cods.CodsFactory;
 import org.osgi.framework.Bundle;
@@ -74,7 +66,7 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 		context.set(MegaModel.class, megaModel);
 		context.set(CODS.class, megaModel);
 		registerInEMF();
-		workspace.addResourceChangeListener(new WorkspaceModelChangeListener(megaModel));
+		//		workspace.addResourceChangeListener(new WorkspaceModelChangeListener(megaModel));
 	}
 
 	private void registerInEMF() {
@@ -120,7 +112,8 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 	private CODS createMegaModel(Resource resource) {
 		CODS cods = CodsFactory.eINSTANCE.createCODS();
 		resource.getContents().add(cods);
-		registerExistingModels(cods);
+		initialise(cods);
+//		registerExistingModels(cods);
 		return cods;
 	}
 
@@ -129,15 +122,6 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 	 * @param megaModel
 	 */
 	private void registerExistingModels(final CODS megaModel) {
-		MetaMetaModel ecoreMetaMetaModel = ArchitectureFactory.eINSTANCE.createMetaMetaModel();
-		ecoreMetaMetaModel.setPackage(EcorePackage.eINSTANCE);
-		ecoreMetaMetaModel.setConformsTo(ecoreMetaMetaModel);
-		megaModel.getModels().add(ecoreMetaMetaModel);
-		MetaModel codsMetaModel = ArchitectureFactory.eINSTANCE.createMetaModel();
-		codsMetaModel.setConformsTo(ecoreMetaMetaModel);
-		codsMetaModel.setPackage(MegamodelPackage.eINSTANCE);
-		megaModel.setConformsTo(codsMetaModel);
-		megaModel.getModels().add(codsMetaModel);
 		IWorkspaceRoot root = workspace.getRoot();
 		//		final IPathVariableManager pathVariableManager = workspace.getPathVariableManager();
 		try {
@@ -153,16 +137,13 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 							case IResource.FOLDER:
 								IFolder folder = (IFolder) resource.getAdapter(IFolder.class);
 								if(folder != null){
-									if(!WorkspaceModelChangeListener.isResourceHidden(folder)){
+									if(!CODSUtil.isResourceHidden(folder)){
 										return true;
 									}
 								}
 								break;
 							case IResource.FILE:
-								IFile file = (IFile) resource.getAdapter(IFile.class);
-								if(file != null && !WorkspaceModelChangeListener.isResourceHidden(file)){
-									registerModelInFile(megaModel, file);
-								}
+								CODSUtil.registerModelInFile(megaModel, (IFile) resource);
 								break;
 							}
 							return false;
@@ -175,89 +156,15 @@ public class MegamodelRegistrationProcessor extends XMIResourceFactoryImpl{
 		}
 	}
 
-	/**
-	 * @param megaModel
-	 * @param ecoreMetaMetaModel
-	 * @param file
-	 * @return returns <code>true</code> when a new model was registered in the megamodel and <code>false</code> otherwise.
-	 */
-	protected static boolean registerModelInFile(CODS megaModel, IFile file) {
-		if(megaModel == null || file == null){
-			return false;
-		}
-		ResourceSet rs = megaModel.eResource().getResourceSet();
-		boolean modified = false;
-		if(file != null){
-			URI uri = null;
-			if(file.isLinked()){
-				uri = URI.createFileURI(file.getLocation().toString());
-			} else {
-				uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			}
-			//			Factory factory2 = Resource.Factory.Registry.INSTANCE.getFactory(uri);
-			//			Object factory = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(uri.fileExtension());
-			try {
-				Resource resource = rs.getResource(uri, true);
-				if(resource != null){
-					//					if(resource != null){
-					EObject model = resource.getContents().get(0);
-					EPackage metamodel = model.eClass().getEPackage();
-					ReferenceModel existentMetamodel = megaModel.getReferenceModelByEPackage(metamodel);
-					if(existentMetamodel == null){
-						existentMetamodel = ArchitectureFactory.eINSTANCE.createMetaModel();
-						existentMetamodel.setConformsTo(megaModel.getMetaMetaModel());
-						if(model instanceof EPackage){
-							existentMetamodel.setPackage((EPackage) model);
-						} else {
-							existentMetamodel.setPackage(metamodel);
-						}
-						megaModel.getModels().add(existentMetamodel);
-						modified = true;
-					}
-					if(megaModel.getTerminalModelByEObject(model) == null){
-						Model newModel = createModelForEObject(model);
-						newModel.setConformsTo(existentMetamodel);
-						megaModel.getModels().add(newModel);
-						modified = true;
-					}
-					//					}
-				}
-			} catch (Exception e) {
-				// no model found, just don't include it in the megamodel
-				//				ILog log = Platform.getLog(Platform.getBundle("org.modelrefactoring.evolution.cods"));
-				//				if(log != null){
-				//					log.log(new Status(IStatus.WARNING, "org.modelrefactoring.evolution.cods", "no model: " + uri.toString(), e));
-				//				}
-				System.err.println("no model: " + uri.toString());
-			}
-		}
-		return modified;
-	}
-
-	private static Model createModelForEObject(EObject model){
-		if(model instanceof EPackage){
-			MetaModel metaModel = ArchitectureFactory.eINSTANCE.createMetaModel();
-			metaModel.setPackage((EPackage) model);
-			return metaModel;
-		}
-		String nsURI = model.eClass().getEPackage().getNsURI();
-		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(IKindsExtensionPoint.ID);
-		for (IConfigurationElement configurationElement : configurationElements) {
-			String nsUriAttrib = configurationElement.getAttribute(IKindsExtensionPoint.ATTRIB_NS_URI);
-			if(nsUriAttrib != null){
-				if(nsUriAttrib.equals(nsURI)){
-					String instanceAttrib = configurationElement.getAttribute(IKindsExtensionPoint.ATTRIB_MODEL_INSTANCE);
-					String transformationAttrib = configurationElement.getAttribute(IKindsExtensionPoint.ATTRIB_MODEL_TRANSFORMATION);
-					if(transformationAttrib != null){
-						TransformationModel transformationModel = ArchitectureFactory.eINSTANCE.createTransformationModel();
-						transformationModel.setTransformation(model);
-						return transformationModel;
-					}
-				}
-			}
-		}
-		InstanceModel instanceModel = ArchitectureFactory.eINSTANCE.createInstanceModel();
-		instanceModel.setModel(model);
-		return instanceModel;
+	protected void initialise(CODS megaModel) {
+		MetaMetaModel ecoreMetaMetaModel = ArchitectureFactory.eINSTANCE.createMetaMetaModel();
+		ecoreMetaMetaModel.setPackage(EcorePackage.eINSTANCE);
+		ecoreMetaMetaModel.setConformsTo(ecoreMetaMetaModel);
+		megaModel.getModels().add(ecoreMetaMetaModel);
+		MetaModel codsMetaModel = ArchitectureFactory.eINSTANCE.createMetaModel();
+		codsMetaModel.setConformsTo(ecoreMetaMetaModel);
+		codsMetaModel.setPackage(MegamodelPackage.eINSTANCE);
+		megaModel.setConformsTo(codsMetaModel);
+		megaModel.getModels().add(codsMetaModel);
 	}
 }
