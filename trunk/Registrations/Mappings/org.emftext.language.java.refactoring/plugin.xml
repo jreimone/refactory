@@ -33,7 +33,7 @@
    <extension
          point="org.emftext.refactoring.postprocessor">
       <postprocessor
-            mapping_name="ExtractMethod"
+            mapping_name="Extract Method"
             nsUri="http://www.emftext.org/java"
             postprocessor="org.emftext.jamopp.refactoring.JavaExtractMethodPostProcessor">
       </postprocessor>
