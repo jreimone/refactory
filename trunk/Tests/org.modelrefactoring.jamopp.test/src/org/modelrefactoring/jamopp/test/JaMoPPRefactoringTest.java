@@ -14,6 +14,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.compare.Comparison;
+import org.eclipse.emf.compare.Conflict;
+import org.eclipse.emf.compare.Diff;
+import org.eclipse.emf.compare.EMFCompare;
+import org.eclipse.emf.compare.match.DefaultComparisonFactory;
+import org.eclipse.emf.compare.match.DefaultEqualityHelperFactory;
+import org.eclipse.emf.compare.match.DefaultMatchEngine;
+import org.eclipse.emf.compare.match.IComparisonFactory;
+import org.eclipse.emf.compare.match.IMatchEngine;
+import org.eclipse.emf.compare.match.eobject.IEObjectMatcher;
+import org.eclipse.emf.compare.match.impl.MatchEngineFactoryImpl;
+import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
+import org.eclipse.emf.compare.scope.IComparisonScope;
+import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -90,6 +104,7 @@ public class JaMoPPRefactoringTest {
 		valueProviderFactory.setNewMethodName(NEW_METHOD_NAME);
 		refactorer.setValueProviderFactory(valueProviderFactory);
 		refactorer.setInput(elementsToExtract);
+		// obviously refactoredModel = compilationUnit
 		EObject refactoredModel = refactorer.refactor();
 		// save refactored model
 		try {
@@ -97,7 +112,20 @@ public class JaMoPPRefactoringTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println();
+		// load expected model for comparison
+		CompilationUnit expectedModel = getModelByType(FOLDER_EXPECTED + "/" + JAVA_CLASS_TO_REFACTOR, CompilationUnit.class);
+		// compare both models
+		IEObjectMatcher matcher = DefaultMatchEngine.createDefaultEObjectMatcher(UseIdentifiers.NEVER);
+		IComparisonFactory comparisonFactory = new DefaultComparisonFactory(new DefaultEqualityHelperFactory());
+		IMatchEngine.Factory matchEngineFactory = new MatchEngineFactoryImpl(matcher, comparisonFactory);
+		matchEngineFactory.setRanking(20);
+		IMatchEngine.Factory.Registry matchEngineRegistry = new MatchEngineFactoryRegistryImpl();
+		matchEngineRegistry.add(matchEngineFactory);
+		EMFCompare comparator = EMFCompare.builder().setMatchEngineFactoryRegistry(matchEngineRegistry).build();
+		IComparisonScope scope = EMFCompare.createDefaultScope(expectedModel, refactoredModel);
+		Comparison comparison = comparator.compare(scope);
+		List<Diff> differences = comparison.getDifferences();
+		assertTrue("Models are not equal. " + differences.size() + " differences found.", differences.size() == 0);
 	}
 
 	@Before
