@@ -7,7 +7,7 @@ public class SimpleExtractMethodTestClass {
 		iteration();
 	}
 
-	private static void iteration() {
+	static void iteration() {
 		for (int i = 0; i < 10; i++) {
 			System.out.println("value: " + i);
 		}
