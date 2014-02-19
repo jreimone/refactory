@@ -25,4 +25,5 @@ Require-Bundle: org.emftext.language.java,
  org.eclipse.emf.ecore.change,
  org.eclipse.swt,
  org.eclipse.emf.compare,
- com.google.guava
+ com.google.guava,
+ org.eclipse.emf.ecore.xmi

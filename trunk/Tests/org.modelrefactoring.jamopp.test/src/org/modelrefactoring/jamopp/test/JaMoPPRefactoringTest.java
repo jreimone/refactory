@@ -15,24 +15,27 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.Comparison;
-import org.eclipse.emf.compare.Conflict;
 import org.eclipse.emf.compare.Diff;
 import org.eclipse.emf.compare.EMFCompare;
 import org.eclipse.emf.compare.match.DefaultComparisonFactory;
 import org.eclipse.emf.compare.match.DefaultEqualityHelperFactory;
 import org.eclipse.emf.compare.match.DefaultMatchEngine;
 import org.eclipse.emf.compare.match.IComparisonFactory;
+import org.eclipse.emf.compare.match.IEqualityHelperFactory;
 import org.eclipse.emf.compare.match.IMatchEngine;
 import org.eclipse.emf.compare.match.eobject.IEObjectMatcher;
 import org.eclipse.emf.compare.match.impl.MatchEngineFactoryImpl;
 import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
 import org.eclipse.emf.compare.scope.IComparisonScope;
+import org.eclipse.emf.compare.utils.EqualityHelper;
 import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.members.Method;
@@ -62,6 +65,8 @@ import org.junit.Test;
 import org.modelrefactoring.jamopp.test.postprocessor.JavaExtractMethodPostProcessor;
 import org.modelrefactoring.jamopp.test.valueprovider.TestValueProviderFactory;
 
+import com.google.common.cache.LoadingCache;
+
 public class JaMoPPRefactoringTest {
 
 	private static final String JAVA_CLASS_TO_REFACTOR		= "SimpleExtractMethodTestClass.java";
@@ -80,14 +85,14 @@ public class JaMoPPRefactoringTest {
 		// first copy original model to output folder
 		File movedInputFile = copyFile(FOLDER_INPUT + "/" + JAVA_CLASS_TO_REFACTOR, FOLDER_OUTPUT + "/" + JAVA_CLASS_TO_REFACTOR);
 		// load java model
-		CompilationUnit compilationUnit = getModelByType(movedInputFile.getPath(), CompilationUnit.class);
+		CompilationUnit copiedOriginalModel = getModelByType(movedInputFile.getPath(), CompilationUnit.class);
 		// get refactoring models from registry
 		Map<String, RoleMapping> roleMappings = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(JavaPackage.eNS_URI);
 		assertNotNull("no concrete refactorings registered for java", roleMappings);
 		RoleMapping roleMapping = roleMappings.get(REFACTORING_CONCRETE_NAME);
 		assertNotNull("concrete refactoring '" + REFACTORING_CONCRETE_NAME + "' not registered", roleMapping);
 		// determine statements to extract
-		org.emftext.language.java.classifiers.Class javaClass = compilationUnit.getContainedClass();
+		org.emftext.language.java.classifiers.Class javaClass = copiedOriginalModel.getContainedClass();
 		Method method = javaClass.getMethods().get(0);
 		assertNotNull("no methods found", method);
 		List<Statement> statements = method.getChildrenByType(Statement.class);
@@ -98,7 +103,7 @@ public class JaMoPPRefactoringTest {
 		List<EObject> elementsToExtract = new ArrayList<EObject>();
 		elementsToExtract.add(forLoopStatement);
 		// refactor
-		Resource javaResource = compilationUnit.eResource();
+		Resource javaResource = copiedOriginalModel.eResource();
 		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(javaResource, roleMapping);
 		TestValueProviderFactory valueProviderFactory = new TestValueProviderFactory();
 		valueProviderFactory.setNewMethodName(NEW_METHOD_NAME);
@@ -116,7 +121,8 @@ public class JaMoPPRefactoringTest {
 		CompilationUnit expectedModel = getModelByType(FOLDER_EXPECTED + "/" + JAVA_CLASS_TO_REFACTOR, CompilationUnit.class);
 		// compare both models
 		IEObjectMatcher matcher = DefaultMatchEngine.createDefaultEObjectMatcher(UseIdentifiers.NEVER);
-		IComparisonFactory comparisonFactory = new DefaultComparisonFactory(new DefaultEqualityHelperFactory());
+		IEqualityHelperFactory helperFactory = new DefaultEqualityHelperFactory();
+		IComparisonFactory comparisonFactory = new DefaultComparisonFactory(helperFactory);
 		IMatchEngine.Factory matchEngineFactory = new MatchEngineFactoryImpl(matcher, comparisonFactory);
 		matchEngineFactory.setRanking(20);
 		IMatchEngine.Factory.Registry matchEngineRegistry = new MatchEngineFactoryRegistryImpl();
@@ -169,7 +175,7 @@ public class JaMoPPRefactoringTest {
 		assertTrue("model must be an instance of " + type.getName(), type.isAssignableFrom(model.getClass()));
 		return type.cast(model);
 	}
-	
+
 	private File copyFile(String from, String to) {
 		File inputFile = new File(from);
 		assertTrue("input file doesn't exist: " + inputFile.getPath(), inputFile.exists());
@@ -196,4 +202,28 @@ public class JaMoPPRefactoringTest {
 		}
 		return movedInputFile;
 	}
+
+	//	private <T extends EObject> Copier copyModel(T inputModel, String to) {
+	//		Copier copier = new Copier(false, true);
+	//		copier.copy(inputModel);
+	//		copier.copyReferences();
+	//		@SuppressWarnings("unchecked")
+	//		T outputModel = (T) copier.get(inputModel);
+	//		
+	//		File outputFile = new File(to);
+	//		if(outputFile.exists()){
+	//			boolean deleted = outputFile.delete();
+	//			assertTrue("existing file couldn't be deleted: " + outputFile.getPath(), deleted);
+	//		}
+	//		ResourceSet rs = new ResourceSetImpl();
+	//		URI uri = URI.createFileURI(outputFile.getAbsolutePath());
+	//		Resource outputResource = rs.createResource(uri);
+	//		outputResource.getContents().add(outputModel);
+	//		try {
+	//			outputResource.save(Collections.EMPTY_MAP);
+	//		} catch (IOException e) {
+	//			e.printStackTrace();
+	//		}
+	//		return copier;
+	//	}
 }
