@@ -23,9 +23,9 @@ Require-Bundle: org.junit,
  org.emftext.language.java.resource,
  org.emftext.sdk.concretesyntax,
  org.eclipse.emf.codegen.ecore,
- org.eclipse.uml2.uml,
  org.eclipse.bpmn2,
- org.emftext.language.timedautomata
+ org.emftext.language.timedautomata,
+ org.eclipse.uml2.uml
 Bundle-ClassPath: .,
  libs/orient-1.6.0-snapshot/blueprints-core-2.5.0-SNAPSHOT.jar,
  libs/orient-1.6.0-snapshot/blueprints-orient-graph-2.5.0-SNAPSHOT.jar,
