@@ -241,7 +241,7 @@ public class ImplicitDependencyView extends ViewPart {
 		label.setImage(labelProvider.getImage(resource));
 		treeViewer.setInput(modelChildrenMap);
 		treeViewer.refresh(true);
-		treeViewer.expandAll();
+//		treeViewer.expandAll();
 	}
 
 }

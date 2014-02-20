@@ -15,6 +15,10 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -48,16 +52,41 @@ public class RegisterResourceInCODSHandler {
 	}
 
 	@Execute
-	public void registerResourcesInCODS(CODS megaModel /* this parameter is injected */){
-		Set<IFile> filesToAdd = collectFilesToAdd();
-		for (IFile file : filesToAdd) {
-			CODSUtil.registerModelInFile(megaModel, file);
-		}
-		try {
-			megaModel.eResource().save(Collections.EMPTY_MAP);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void registerResourcesInCODS(final CODS megaModel /* this parameter is injected */){
+		Job job = new Job("Register resources in the CODS") {
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				int workUnits = 100;
+				int collectUnits = 10;
+				monitor.beginTask(getName() + "...", workUnits);
+				// 1. collect files
+				monitor.subTask("Collect all files to register");
+				Set<IFile> filesToAdd = collectFilesToAdd();
+				monitor.worked(collectUnits);
+				// 2. register them
+				int filesToRegister = filesToAdd.size();
+				int registerUnits = (int) ((workUnits - collectUnits) / filesToRegister);
+				monitor.subTask("Register " + filesToRegister + " files");
+				for (IFile file : filesToAdd) {
+					CODSUtil.registerModelInFile(megaModel, file);
+					monitor.worked(registerUnits);
+				}
+				try {
+					monitor.subTask("Save the CODS");
+					megaModel.eResource().save(Collections.EMPTY_MAP);
+					int saveUnits = workUnits - collectUnits - filesToRegister * registerUnits;
+					monitor.worked(saveUnits);
+				} catch (IOException e) {
+					e.printStackTrace();
+					monitor.done();
+					return Status.CANCEL_STATUS;
+				}
+				monitor.done();
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
 	}
 
 	protected Set<IFile> collectFilesToAdd() {
