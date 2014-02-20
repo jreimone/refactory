@@ -12,6 +12,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.edit,
  org.eclipse.emf.ecore.edit,
  org.eclipse.emf.edit.ui,
- org.modelrefactoring.evolution.registry
+ org.modelrefactoring.evolution.registry,
+ org.modelrefactoring.evolution.cods.creation
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

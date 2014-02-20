@@ -25,10 +25,31 @@
       <handler
             class="org.modelrefactoring.evolution.ui.commands.GenerateKnowledgeHandler"
             commandId="org.modelrefactoring.evolution.ui.prologgeneration.command">
+         <enabledWhen>
+            <iterate>
+               <or>
+                  <adapt
+                        type="org.eclipse.ui.IWorkingSet">
+                  </adapt>
+                  <adapt
+                        type="org.eclipse.core.resources.IResource">
+                  </adapt>
+               </or>
+            </iterate>
+         </enabledWhen>
       </handler>
       <handler
             class="org.modelrefactoring.evolution.ui.commands.GetImplicitDependenciesHandler"
             commandId="org.modelrefactoring.evolution.ui.implicitdependencies.command">
+            <enabledWhen>
+            <iterate>
+               <or>
+                  <adapt
+                        type="org.eclipse.core.resources.IFile">
+                  </adapt>
+               </or>
+            </iterate>
+         </enabledWhen>
       </handler>
    </extension>
    <extension
@@ -40,17 +61,6 @@
                commandId="org.modelrefactoring.evolution.ui.prologgeneration.command"
                label="Generate facts for model"
                style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <with
-                     variable="selection">
-                  <iterate
-                        operator="or">
-                     <instanceof
-                           value="org.eclipse.core.resources.IFile">
-                     </instanceof></iterate>
-               </with>
-            </visibleWhen>
          </command>
       </menuContribution>
       <menuContribution
@@ -60,17 +70,6 @@
                commandId="org.modelrefactoring.evolution.ui.implicitdependencies.command"
                label="Get implicit dependencies for model"
                style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <with
-                     variable="selection">
-                  <iterate
-                        operator="or">
-                     <instanceof
-                           value="org.eclipse.core.resources.IFile">
-                     </instanceof></iterate>
-               </with>
-            </visibleWhen>
          </command>
       </menuContribution>
    </extension>
