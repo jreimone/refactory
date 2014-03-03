@@ -1,0 +1,3 @@
+Selected element := DataProperty::employeeID
+
+name (Class) := EmployeeIDObject

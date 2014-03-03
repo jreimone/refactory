@@ -1,0 +1,11 @@
+defined classes
+
+synonyms and anonymous classes.
+
+Problem with defined classes:
+	Employees who live in Germany are inferred to be GermanEmployees in OWL,
+	not so in Ecore.
+	
+Can't be converted because superclasses have to be atomic classes.
+
+This case can't be reasonable converted. It violates the assumptions on convertible ontologies.

@@ -1,0 +1,14 @@
+Class-FeatureRestriction <--> EReference
+
+FeatureReference-ObjectProperty(iri) --> EReference(name)
+
+ObjectPropertySome-ClassAtomic(clazz) --> EReference(type)
+                                      --> EReference(LowerBound := 1)
+                                      --> EReference(UpperBound := -1)
+                                      
+Based on the OWA in the ontology individuals of class Person are possible, who don't have a
+relationship to an individual of class Pet. In Ecore however every individual belonging to
+a class with a reference has to have this reference to another individual of the appropriated
+class (according to the given cardinality).
+
+This case can't be reasonable converted. It violates the assumptions on convertible ontologies.

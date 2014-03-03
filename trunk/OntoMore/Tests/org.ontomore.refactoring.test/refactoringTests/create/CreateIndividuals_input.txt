@@ -1,0 +1,5 @@
+Selected element := Class::Person
+
+iri := John
+iri := Tim
+iri := Lisa

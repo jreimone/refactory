@@ -1,0 +1,18 @@
+----------------------------
+## Remove Disjoint Axioms
+----------------------------
+-- Description
+Removes all disjoint axioms from all classes of the ontology.
+This can be enhanced by removing only the disjoint axioms of
+sub classes of the selected class (for which a post processor
+might be necessary). 
+
+-- Generic Refactoring
+OntoMore generic refactoring: "Remove Contained X".
+
+-- Problem
+Disjoint axioms can currently be removed only from one single selected class
+as refspec doesn't support loops so far.
+
+If the selected class is referenced by another one in the DisjointWith-section
+some strange things happen.

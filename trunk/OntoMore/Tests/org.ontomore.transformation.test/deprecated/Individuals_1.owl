@@ -1,0 +1,12 @@
+Prefix: : <http://www.ontomore.org/test/transformation/individuals.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/individuals.owl>
+
+Class: Person
+
+Individual: John
+	Types: Person
+	
+Individual: Max
+	Types: Person
+	

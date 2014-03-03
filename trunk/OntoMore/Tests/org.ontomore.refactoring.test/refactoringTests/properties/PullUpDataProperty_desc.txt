@@ -1,0 +1,13 @@
+----------------------------
+## Pull up Data Property
+----------------------------
+-- Description
+Replaces the domain of the selected Data Property by its super class
+
+-- Generic Refactoring
+"Rereference Sub X"
+
+-- Problem
+Isn't implemented yet by Refactory:
+java.lang.UnsupportedOperationException: implement this case
+	at org.emftext.refactoring.interpreter.internal.ObjectAssignmentInterpreter.handleCollaboration(ObjectAssignmentInterpreter.java:184)

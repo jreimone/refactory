@@ -1,0 +1,11 @@
+Prefix: : <http://www.ontomore.org/test/transformation/classes.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/classes.owl>
+
+Class: Person
+
+Class: Animal
+
+Class: Mineral
+
+DisjointClasses: Person, Animal, Mineral

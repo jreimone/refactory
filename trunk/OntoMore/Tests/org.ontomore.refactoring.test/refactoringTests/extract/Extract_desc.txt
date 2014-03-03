@@ -1,0 +1,39 @@
+----------------------------
+## Extract Axiom to New Class
+----------------------------
+-- Description
+Create new class, move the selected axiom to that class, and refer from the source class to the new class.
+This should work for arbitrary axioms (meta class "Description") of classes.
+The User might choose whether he want to create a primitive or defined class.
+
+-- Generic Refactoring
+Fits to "Extract X with Reference Class".
+ContainerContainer := Ontology
+OrigContainer      := Class
+NewContainer       := Class
+Extract            := Description
+MovedReference     := Disjunction Conjunction ClassAtomic(clazz)
+
+Class: Employee
+	SubClassOf:
+		hasAddress some Address
+
+==>
+Class: Person
+	SubClassOf:
+		hasAddress some Address
+		
+Class: Employee
+	SubClassOf:
+		Person
+		
+-- Metamodell-Transformation:
+
+Class
+	superClassesDescripton Description
+
+==>
+Class(iri --> name)
+	superClassesDescripton Description
+Class
+	superClassesDescripton Disjunction Conjunction ClassAtomic(clazz --> name)

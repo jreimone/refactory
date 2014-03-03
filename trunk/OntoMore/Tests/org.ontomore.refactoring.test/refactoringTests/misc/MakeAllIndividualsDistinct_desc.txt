@@ -1,0 +1,22 @@
+----------------------------
+## Make All Individuals Distinct
+----------------------------
+-- Description
+Creates a DifferentIndividuals-Axiom
+that states the difference of all individuals of the ontology. 
+
+-- Generic Refactoring
+OntoMore: "Introduce Referer To All X".
+Similar to "Introduce Reference Class". The difference is that the input-role
+should be the container and the newly created referer-element doesn't have
+any attributes.
+
+-- Problem
+Refactoring is not provided to be executed. Some preconditions aren't met.
+Problem is the same as with Convert "Data Property to Object Property":
+Modeling one containment reference as two in the role model to refer to two different
+kinds of child-elements does not work.
+
+Update: Refactoring is provided but it throws
+java.lang.UnsupportedOperationException: implement this case
+	at org.emftext.refactoring.util.RoleUtil.getRoleFromVariable(RoleUtil.java:56)

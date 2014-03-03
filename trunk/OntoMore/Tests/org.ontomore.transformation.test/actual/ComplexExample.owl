@@ -1,0 +1,94 @@
+Prefix: : <http://www.ontomore.org/test/transformation/complex.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/complex.owl>
+
+Class: Management
+
+ObjectProperty: projects
+    Annotations: 
+        upperbound "-1",
+        containment "true"
+	Domain: Management
+	Range: Project
+
+ObjectProperty: freelancers
+    Annotations: 
+        upperbound "-1",
+        containment "true"
+	Domain: Management
+	Range: Freelancer
+
+Class: NamedElement
+
+DataProperty: name
+	Domain: NamedElement
+	Range: xsd:string
+
+Class: Project
+	SubClassOf: NamedElement
+
+DataProperty: projectID
+	Domain: Project
+	Range: ProjectID
+
+ObjectProperty: hasWorker
+    Annotations: 
+        upperbound "-1"
+	Domain: Project
+	Range: Freelancer
+
+ObjectProperty: location
+	Annotations:
+		lowerbound "1"
+	Domain: Project
+	Range: Location
+	
+Class: Location
+
+DataProperty: city
+	Domain: Location
+	Range: xsd:string
+	
+DataProperty: country
+	Domain: Location
+	Range: xsd:string
+
+Class: Freelancer
+	SubClassOf: NamedElement
+	
+DataProperty: freelancerID
+	Domain: Freelancer
+	Range: FreelancerID
+	
+DataProperty: experienceInYears
+	Domain: Freelancer
+	Range: xsd:int
+	
+DataProperty: isManager
+	Domain: Freelancer
+	Range: xsd:boolean
+
+ObjectProperty: hasProject
+    Annotations: 
+        upperbound "-1"
+	Domain: Freelancer
+	Range: Project
+	InverseOf: hasWorker
+
+Class: JavaEEExpert
+	SubClassOf: Freelancer
+	
+Class: MSNetExpert
+	SubClassOf: Freelancer
+
+Datatype: ProjectID
+
+Datatype: FreelancerID
+
+AnnotationProperty: lowerbound
+AnnotationProperty: upperbound
+AnnotationProperty: containment
+
+DisjointClasses: Management, Location, NamedElement
+DisjointClasses: Freelancer, Project
+DisjointClasses: JavaEEExpert, MSNetExpert

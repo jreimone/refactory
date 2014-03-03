@@ -1,0 +1,3 @@
+Selected element := ObjectProperty::hasAddress
+
+new Class, iri := Person

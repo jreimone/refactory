@@ -1,0 +1,9 @@
+Inverse Properties
+
+ObjectProperty <--> EReference
+
+ObjectProperty(iri) --> EReference(name)
+
+ObjectProperty(iri) 	--> EReference(name)
+	InverseOf					eOpposite 
+

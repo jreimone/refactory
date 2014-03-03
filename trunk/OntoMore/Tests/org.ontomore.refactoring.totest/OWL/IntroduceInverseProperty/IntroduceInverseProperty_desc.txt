@@ -1,0 +1,13 @@
+----------------------------
+## Introduce Inverse Property
+----------------------------
+-- Description
+Creates a new ObjectProperty with Domain and Range inverse to the selected
+ObjectProperty and declares the new new property as inverseOf the original property. 
+This is the inverse refactoring to "Remove Inverse Property".
+
+-- Generic Refactoring
+"Remove Contained X" (OntoMore)
+
+-- Problems
+Same problem as with Rename Element with refactoring over an newly opened file.

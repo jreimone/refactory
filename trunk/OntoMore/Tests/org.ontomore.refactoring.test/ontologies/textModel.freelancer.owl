@@ -1,0 +1,41 @@
+Prefix: : <http://transformed/textModel.freelancer#>
+Prefix: freelancer: <http://ontoref.org/test/freelancer#>
+
+Ontology: <http://transformed/textModel.freelancer>
+Import: <file:/E:/Users/Erik/Documents/Studium/Diplomarbeit/OntoRefRTWS/org.ontomore.refactoring.test/ontologies/freelancer.mm.owl>
+
+Class: freelancer:Nameable
+Class: freelancer:Management
+Class: freelancer:Freelancer
+DataProperty: freelancer:Nameable_name
+ObjectProperty: freelancer:Management_freelancers
+DataProperty: freelancer:Freelancer_salary
+Class: freelancer:__c__Freelancer0_min_1_salary
+Class: freelancer:__c__Freelancer1_max_1_salary
+Class: freelancer:__c__Nameable2_min_1_name
+Class: freelancer:__c__Nameable3_max_1_name
+	
+Class: individual_6
+	SubClassOf:
+		freelancer:Management ,
+		( freelancer:Management_freelancers some individual_7 ) ,
+		( freelancer:Management_freelancers some individual_8 ) ,
+		( freelancer:Management_freelancers min 2 freelancer:Freelancer )
+
+Class: individual_7
+	SubClassOf:
+		freelancer:Freelancer , 
+		( freelancer:Nameable_name value "John" ) ,
+		( freelancer:Freelancer_salary value 30 ) ,
+		( freelancer:Nameable_name exactly 1 xsd:string ) ,
+		( freelancer:Freelancer_salary exactly 1 xsd:integer )
+
+Class: individual_8
+	SubClassOf:
+		freelancer:Freelancer ,
+		( freelancer:Nameable_name value "Jane" ) ,
+		( freelancer:Freelancer_salary value 25 ) ,
+		( freelancer:Nameable_name exactly 1 xsd:string ) ,
+		( freelancer:Freelancer_salary exactly 1 xsd:integer )
+
+DisjointClasses: individual_6 , individual_7 , individual_8

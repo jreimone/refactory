@@ -1,0 +1,19 @@
+Prefix: : <http://ontomore.org/test/testOntology.owl#>
+
+Ontology: <http://ontomore.org/test/testOntology.owl>
+	
+Class: Employee
+
+Class: GermanEmployee
+	EquivalentTo:
+		livesIn only Germany,
+		livesIn some Germany	
+
+Class: Region
+
+Class: Germany
+	SubClassOf:
+		Region
+
+ObjectProperty: livesIn
+	Characteristics: Functional

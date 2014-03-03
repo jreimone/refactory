@@ -1,0 +1,11 @@
+Prefix: meta: <http://www.ontomore.org/test/meta.owl#>
+Prefix: : <http://www.ontomore.org/test/base.owl#>
+
+Ontology: <http://www.ontomore.org/test/base.owl>
+Import: <file:/E:/Users/Erik/Documents/Studium/Diplomarbeit/OntoMoreRTWS/org.ontomore.refactoring.test/ontologies/Meta.owl>
+
+Class: meta:MetaClass
+
+Class: BaseClass
+	SubClassOf: meta:MetaClass
+

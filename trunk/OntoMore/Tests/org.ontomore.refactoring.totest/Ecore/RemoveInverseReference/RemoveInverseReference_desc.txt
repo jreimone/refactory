@@ -1,0 +1,12 @@
+----------------------------
+## Remove Inverse Reference
+----------------------------
+-- Description
+Removes the opposite EReference of the selected EReference. 
+This is the inverse refactoring to "Introduce Inverse Reference". 
+
+-- Generic Refactoring
+"Remove Contained X" (OntoMore)
+
+-- Problems
+eOpposite-reference isn't removed leading to a dangling reference problem.

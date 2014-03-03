@@ -1,0 +1,15 @@
+Prefix: : <http://www.ontomore.org/test/transformation/classes.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/classes.owl>
+
+Class: Person
+
+Class: Employee
+	SubClassOf: Person
+	
+Class: Manager
+	SubClassOf: Person
+
+Class: Project
+
+DisjointClasses: Person, Project

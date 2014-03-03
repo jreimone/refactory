@@ -1,0 +1,3 @@
+Selected element := Class::Employee
+
+iri := NewEmployee

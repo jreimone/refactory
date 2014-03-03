@@ -1,0 +1,38 @@
+----------------------------
+## Rename Ontology
+----------------------------
+-- Description
+Assign new string to "uri" attribute of Ontology, which is inherited from URIIdentified.
+The name of the ontology is the string between the angle brackets ('<', '>') after the "Ontology:" keyword.
+
+-- Generic Refactoring
+Fits to "Rename X".
+
+-- Manchester OWL Syntax
+
+Ontology: <http://ontoref.org/test/pizza>
+
+==>
+Ontology: <http://ontoref.org/test/newPizza>
+
+-- Metamodel-Transformation:
+Ontology(uri --> name)
+
+----------------------------
+## Rename Element
+----------------------------
+-- Description
+Assign new string to "iri" attribute of an arbitrary subclass of IRIIdentified.
+The name is the first string in a frame after the keyword (e. g. "Class:").
+Futher considerations are necessary when renaming an referenced element from another ontology,
+as the element in the imported ontology has to be renamed too.
+
+-- Manchester OWL Syntax
+
+Class: Pizza
+
+==>
+Class: NewPizza
+
+-- Metamodel-Transformation:
+IRIIdentified(iri --> name)

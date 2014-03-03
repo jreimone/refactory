@@ -1,0 +1,101 @@
+Prefix: : <http://ontoref.org/SimpleManSyn.owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: skos: <http://www.w3.org/2004/02/skos/core#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+
+Ontology: <http://ontoref.org/SimpleManSyn.owl>
+
+AnnotationProperty: rdfs:comment
+    
+ObjectProperty: hasProject
+    Annotations: 
+        rdfs:comment "upperbound=-1",
+        rdfs:comment "lowerbound=0"
+    Domain: 
+        Employee
+    Range: 
+        Project
+    
+ObjectProperty: hasCopy
+    
+ObjectProperty: hasBook
+    
+DataProperty: hasJob
+    Domain: 
+        Employee
+    Range: 
+        xsd:boolean
+    
+DataProperty: shoeSize
+    Domain: Employee
+    Range: xsd:float
+    
+ObjectProperty: hasAddress
+    
+Class: Employee
+Class: Address
+    
+Class: CleanCode
+    SubClassOf: Book
+    
+Class: Size
+    SubClassOf: Big or Medium or Small
+    
+Class: Copy
+    SubClassOf: LibraryThings
+    
+Class: Book
+    SubClassOf: LibraryThings
+    
+Class: Project
+    
+Class: Big
+    SubClassOf: Size
+    
+Class: Library
+    SubClassOf: LibraryThings
+    
+Class: LibraryThings
+    
+Class: Small
+    SubClassOf: Size
+    
+Class: Medium
+    SubClassOf: Size
+    
+Individual: John
+    Types: 
+        Employee
+    Facts:  
+     hasJob  true,
+     shoeSize  8.5f,
+     hasAddress Mainstreet3
+     
+Individual: Mainstreet3
+	Types: Address
+    
+Individual: SLUB
+    Types: 
+        Library
+    
+Individual: CopyOfCleanCode_1
+    Types: CleanCode
+    
+Individual: CopyOfCleanCode_2
+    Types: CleanCode
+    
+Individual: CleanCode
+    Types: Book
+    
+DisjointClasses: 
+    Book,Copy,Library
+
+DisjointClasses: 
+    Employee,Project,Size
+
+DisjointClasses: 
+    Employee,LibraryThings,Project,Size
+

@@ -1,0 +1,11 @@
+Individual <--> Instance of EClass
+
+Individuals can't be transformed to the Ecore metamodel. Instead the have to be
+transformed to an Ecore model instance.
+
+Several individuals in the ontology can't be transformed to an Ecore model instance.
+The Ecore model instance requires a tree-structure of instances.
+
+A generic field has to be assigned to each class for the names of the individuals.
+
+This case can't be reasonable converted. It violates the assumptions on convertible ontologies.  

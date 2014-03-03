@@ -1,0 +1,15 @@
+----------------------------
+## Duplicate Class
+----------------------------
+-- Description
+Creates a new Class with the given name and copies the superclasses from the selected Class.
+
+-- Issues
+This refactoring might advanced by copying all Object- and DataProperties that belong
+to the selected Class. 
+
+-- Generic Refactoring
+"Duplicate With Reference" (OntoMore)
+
+-- Problems
+Same problem as with Rename Element with refactoring over an newly opened file. 

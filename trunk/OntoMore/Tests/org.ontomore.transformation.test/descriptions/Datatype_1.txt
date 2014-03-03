@@ -1,0 +1,5 @@
+OWL Datatype <--> EDataType
+
+Datatype(iri)	-->		EDataType(name)
+
+Those user-defined datatypes can be used as ranges for DataProperties.

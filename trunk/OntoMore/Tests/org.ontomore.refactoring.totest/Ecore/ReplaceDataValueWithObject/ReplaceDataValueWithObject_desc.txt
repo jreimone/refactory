@@ -1,0 +1,18 @@
+----------------------------
+## Replace Data Value With Object
+----------------------------
+-- Description
+Replaces the selected EAttribute by a EReference to a new EClass.
+The new EReference gets the given name.
+The new EClass gets the given name.
+
+-- Generic Refactoring
+"Replace Feature in Container" (OntoMore)
+
+-- Problem
+The name of the EReference can't be taken from the EAttribute
+because in one EClass no several EStructuralFeatures with
+the same name are allowed.
+This causes the "Replace Data Value With Object" to have different
+input values as the corresponding OWL refactoring "Convert Data
+Property to Object Property".

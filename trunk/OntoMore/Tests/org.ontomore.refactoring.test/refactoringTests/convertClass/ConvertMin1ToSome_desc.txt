@@ -1,0 +1,17 @@
+----------------------------
+## Convert Min 1 To Some
+----------------------------
+-- Description
+Replaces all Min1-FeatureRestrictions to the some-FeatureRestriction,
+which is equal in meaning. This leads to a better understanding because
+the same words are used for the same meaning. Furthermore it might be
+possible to use a simpler description logic for reasoning.
+
+-- Generic Refactoring
+OntoMore generic refactoring: Replace Feature
+
+-- Problem
+Same problem as in "Convert Data Property". The container holds the same
+containment reference to different elements.
+
+Edit: does work with replace feature, but the sub-elements have to be converted.

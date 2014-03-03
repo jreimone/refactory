@@ -1,0 +1,3 @@
+Selected element := Class::Employee -> disjuctions:Disjunction -> conjunctions:Conjunction -> primaries:ObjectPropertySome
+
+new Class, iri := Person

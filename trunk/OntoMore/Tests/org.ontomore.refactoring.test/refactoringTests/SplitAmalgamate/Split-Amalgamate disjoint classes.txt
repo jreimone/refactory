@@ -1,0 +1,34 @@
+Split disjoint classes
+e. g.
+
+Class: Man
+	DisjointWith: Woman
+Class: Woman
+	DisjointWith: Man
+	
+			 
+Amalgamate subclass axioms
+e. g.
+
+Class: Man
+Class: Woman
+DisjointClasses: Man, Woman
+
+Zusätzliche Logik nötig. Disjoint class sets dürfen nur für paarweise disjunkte Klassen angelegt werden. Eventuell sind mehrere disjoint class sets nötig.
+
+Metamodel-Transformation:
+
+Class
+	disjointWithClassesDescriptions Disjunction Conjunction ClassAtomic clazz
+	...
+Class
+	disjointWithClassesDescriptions Disjunction Conjunction ClassAtomic clazz
+	...
+...
+<-->
+Class
+Class
+DisjointClasses
+	Disjunction Conjunction ClassAtomic clazz
+	Disjunction Conjunction ClassAtomic clazz
+...

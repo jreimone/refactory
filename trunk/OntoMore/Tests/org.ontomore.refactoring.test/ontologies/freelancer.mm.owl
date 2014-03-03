@@ -1,0 +1,48 @@
+Prefix: freelancer: <http://ontoref.org/test/freelancer#>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: : <http://ontoref.org/test/freelancer#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+Ontology: <http://ontoref.org/test/freelancer>
+
+Class: Management
+	SubClassOf: owl:Thing
+	DisjointWith: Freelancer , Nameable
+
+Class: Freelancer
+	SubClassOf: Nameable
+	DisjointWith: Management
+
+Class: Nameable
+	SubClassOf: owl:Thing
+	DisjointWith: Management
+
+ObjectProperty: Management_freelancers
+	Domain: Management
+	Range: Freelancer
+
+DataProperty: Freelancer_salary
+	Domain: Freelancer
+	Range: xsd:integer
+
+DataProperty: Nameable_name
+	Domain: Nameable
+	Range: xsd:string
+	
+Class: __c__Freelancer0_min_1_salary
+	Annotations: rdfs:comment "The minimal cardinality of '1' for attribute 'salary' is not satisfied."
+	EquivalentTo: Freelancer and not ( Freelancer_salary min 1 xsd:integer )
+	
+Class: __c__Freelancer1_max_1_salary
+	Annotations: rdfs:comment "The maximal cardinality of '1' for attribute 'salary' is not satisfied."
+	EquivalentTo: Freelancer and not ( Freelancer_salary max 1 xsd:integer )
+
+Class: __c__Nameable2_min_1_name
+	Annotations: rdfs:comment "The minimal cardinality of '1' for attribute 'name' is not satisfied."
+	EquivalentTo: Nameable and not ( Nameable_name min 1 xsd:string )
+
+Class: __c__Nameable3_max_1_name
+	Annotations: rdfs:comment "The maximal cardinality of '1' for attribute 'name' is not satisfied."
+	EquivalentTo: Nameable and not ( Nameable_name max 1 xsd:string )

@@ -1,0 +1,19 @@
+----------------------------
+## Move Axiom to SubClassOf-Section
+----------------------------
+-- Description
+Move the selected axiom from the EquivalentTo-Section in the Class-Frame to the SubClassOf-Section.
+EquivalentTo and SubClassOf are two different containing references from the meta class "Class" to the meta class "Description".
+This refactoring might be chained in order to move all EquivalentTo-axioms at once.
+
+-- Generic Refactoring
+OntoMore: "Rereference X".
+
+Similar to "Move X" and "Move X Loosely". The difference is,
+that neither the container nor the order of the moved elements is changed, but the reference.
+
+-- Problems
+Role model assumes that there is at most one reference between two roles.
+In this case we need to change the reference and have to model two references
+between the same roles. The "set use of"-operator would need the information
+about the reference to set as its no longer unambiguous.

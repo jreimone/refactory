@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII"?>
+<individuals:City xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:individuals="http://www.ontomore.org/test/transformation/individuals.owl" hasName="Alabama" specialPerson="//@hasPerson.1">
+  <hasPerson hasName="John" hasAge="35" shoeSize="8.5"/>
+  <hasPerson hasName="Lisa" hasAge="23"/>
+</individuals:City>

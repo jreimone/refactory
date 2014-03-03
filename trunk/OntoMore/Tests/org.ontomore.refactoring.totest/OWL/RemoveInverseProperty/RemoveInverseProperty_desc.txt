@@ -1,0 +1,15 @@
+----------------------------
+## Remove Inverse Property
+----------------------------
+-- Description
+Removes the ObjectProperty that is referenced by the selected
+ObjectProperty through the inverseOf reference.
+This is the inverse refactoring to "Introduce Inverse Property".
+
+-- Generic Refactoring
+"Remove Contained X" (OntoMore)
+
+-- Problems
+InverseOf-reference isn't removed.
+
+Same problem as with Rename Element with refactoring over an newly opened file. 

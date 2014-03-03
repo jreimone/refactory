@@ -1,0 +1,10 @@
+----------------------------
+## Duplicate Class
+----------------------------
+-- Description
+Gets a class as input and creates an equal one with a different name.
+Equal means the new class has the same set of SubClassOf- and EqualTo-Properties.
+Note that DisjointWith-Properties must not be duplicated.
+
+-- Generic Refactoring
+nothing applicable

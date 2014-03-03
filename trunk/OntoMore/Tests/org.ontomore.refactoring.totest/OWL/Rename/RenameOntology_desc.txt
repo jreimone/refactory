@@ -1,0 +1,12 @@
+----------------------------
+## Rename Ontology
+----------------------------
+-- Description
+Assign new string to "uri" attribute of Ontology, which is inherited from URIIdentified.
+The name of the ontology is the string between the angle brackets ('<', '>') after the "Ontology:" keyword.
+
+-- Generic Refactoring
+"Rename X"
+
+-- Problems
+Same problem as for Rename Element.

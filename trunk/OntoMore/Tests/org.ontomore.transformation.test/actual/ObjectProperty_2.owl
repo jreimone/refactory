@@ -1,0 +1,40 @@
+Prefix: : <http://www.ontomore.org/test/transformation/properties.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/properties.owl>
+
+Class: Management
+
+Class: Freelancer
+
+Class: Project
+
+ObjectProperty: freelancers
+    Annotations: 
+        lowerbound "0",
+        upperbound "-1",
+        containment "true"
+	Domain: Management
+	Range: Freelancer
+	
+ObjectProperty: projects
+    Annotations: 
+        lowerbound "0",
+        upperbound "-1",
+        containment "true"
+	Domain: Management
+	Range: Project
+
+ObjectProperty: hasProject
+    Annotations: 
+        lowerbound "0",
+        upperbound "-1",
+        containment "false"
+	Domain: Freelancer
+	Range: Project
+	
+AnnotationProperty: lowerbound
+AnnotationProperty: upperbound
+AnnotationProperty: containment
+	
+DisjointClasses: Management, Freelancer, Project
+

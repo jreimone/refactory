@@ -1,0 +1,4 @@
+OWL Class <--> EClass
+
+EClasses are implicitly disjunct (as long there is no inheritance), no so with OWL Classes.
+So, overlapping or equal OWL classes can't be mapped to EClasses.

@@ -1,0 +1,29 @@
+----------------------------
+## Move Axiom to EquivalentTo-Section
+----------------------------
+-- Description
+Move the selected axiom from the SubClassOf-Section in the Class-Frame to the EquivalentTo-Section.
+This is the inverse to "Move Axiom to SubClassOf-Section".
+This refactoring might be chained in order to move all SubClassOf-axioms at once.
+
+-- Generic Refactoring
+Similar to "Move X" and "Move X" Loosely. The difference is,
+that neither the container nor the order of the moved elements is changed, but the reference.
+
+-- Manchester OWL Syntax
+
+Class: Worker
+	SubClassOf: Person
+	
+==>
+Class: Worker
+	EquivalentTo: Person
+
+
+-- Metamodel-Transformation:
+
+Class
+	superClassesDescriptions Disjunction
+==>
+Class
+	equivalentClassesDescriptions Disjunction

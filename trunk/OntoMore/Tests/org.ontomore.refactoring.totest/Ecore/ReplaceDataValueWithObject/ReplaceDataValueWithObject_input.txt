@@ -1,0 +1,5 @@
+Selected element := EClass::Employee --> EAttribute::employeeID
+
+name (EReference) := employeeIDRef
+
+name (EClass) := EmployeeIDObject

@@ -1,0 +1,22 @@
+Prefix: : <http://www.ontomore.org/test/transformation/properties.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/properties.owl>
+
+Class: Employee
+
+DataProperty: name
+	Domain: Employee
+	Range: xsd:string
+
+DataProperty: age
+	Domain: Employee
+	Range: xsd:int
+
+DataProperty: isManager
+	Domain: Employee
+	Range: xsd:boolean
+	
+DataProperty: shoeSize
+	Domain: Employee
+	Range: xsd:float
+	
