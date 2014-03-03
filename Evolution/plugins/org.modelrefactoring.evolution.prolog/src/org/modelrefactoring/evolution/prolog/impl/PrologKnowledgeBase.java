@@ -110,6 +110,8 @@ public class PrologKnowledgeBase implements IKnowledgeBase {
 			children = new HashSet<EObject>();
 			modelChildrenMap.put(model, children);
 		}
-		children.add(targetElement);
+		if(!model.equals(targetElement)){
+			children.add(targetElement);
+		}
 	}
 }
