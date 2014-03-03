@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.modelrefactoring.corefactoring.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.modelrefactoring.corefactoring,
+ org.junit,
+ org.eclipse.emf.ecore,
+ org.emftext.language.ecore.resource.text,
+ org.emftext.language.owl,
+ org.emftext.language.owl.resource.owl,
+ org.eclipse.emf.ecore.xmi,
+ org.modelrefactoring.evolution.registry
