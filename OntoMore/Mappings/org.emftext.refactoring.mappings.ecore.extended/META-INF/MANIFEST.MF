@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Extended
+Bundle-SymbolicName: org.emftext.refactoring.mappings.ecore.extended;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Erik Tittel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.emftext.refactoring.registry.rolemapping
