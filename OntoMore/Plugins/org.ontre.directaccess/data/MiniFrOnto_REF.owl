@@ -1,0 +1,54 @@
+Prefix: : <http://www.buschmais.com/mfronto.owl#>
+
+Ontology: <http://www.buschmais.com/mfronto.owl>
+
+Class: Person
+
+Class: Freelancer
+	SubClassOf: Person
+
+Class: Unternehmen
+
+Class: Technik
+
+Class: Programmiersprache
+    SubClassOf: Technik
+	
+Class: Datenbank
+	SubClassOf: Technik
+    
+Class: Framework
+    SubClassOf: Technik
+    
+Class: Zeitraum    
+
+Class: Verfuegbarkeit
+    SubClassOf: Zeitraum
+
+Class: Profil
+
+Class: Adresse
+
+DisjointClasses: Freelancer, Unternehmen, Technik, Zeitraum
+
+ObjectProperty: hatProfil
+	Domain: Freelancer
+    Range: Profil
+	InverseOf: beschreibtFreelancer
+	
+ObjectProperty: beschreibtFreelancer
+	Domain: Profil
+	Range: Freelancer
+	InverseOf: hatProfil
+
+ObjectProperty: hatAdresse
+	Domain: Person
+	Range: Adresse
+
+DataProperty: hatAnfangsdatum
+    Domain: Zeitraum
+    Range: xsd:dateTime
+        
+DataProperty: hatEnddatum
+    Domain: Zeitraum
+    Range: xsd:dateTime

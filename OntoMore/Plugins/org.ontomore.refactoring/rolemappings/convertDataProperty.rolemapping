@@ -1,0 +1,27 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Convert Data Property To Object Property" maps <ReplaceFeature> {
+
+	 Container := Ontology {
+	 	origFeature := frames:DataProperty;
+	 	newFeature := frames:ObjectProperty;
+	 	range := frames:Class;
+	 };
+	 
+	 OrigFeature := DataProperty (name -> iri) {
+	 	domain := domain:Disjunction -> conjunctions:Conjunction
+	 	-> primaries:ClassAtomic -> clazz;
+	 };
+	 
+	 NewFeature := ObjectProperty (name -> iri) {
+	 	domain := domain:Disjunction -> conjunctions:Conjunction
+	 	-> primaries:ClassAtomic -> clazz;
+	 	range := propertyRange:Disjunction -> conjunctions:Conjunction
+	 	-> primaries:ClassAtomic -> clazz;
+	 };
+	 
+	 Domain := Class;
+	 
+	 Range := Class (name -> iri);
+}
+

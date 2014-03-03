@@ -1,0 +1,19 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Remove Disjoint Axioms" maps <RemoveContainedX> {
+
+	Container := Class {
+		removees := disjointWithClassesDescriptions;
+	};
+	
+	Removee := Disjunction;
+}
+
+"Remove Empty Classes" maps <RemoveEmptyContainedX> { 
+	
+	Removee := Class;
+	
+	RemoveeContainer := Ontology {
+		removees := frames;
+	};
+}

@@ -1,0 +1,15 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Create Enumerated Class" maps <CreateReferencedElements> { 
+	 
+	 Container := Ontology {
+	 	containerElement := frames;
+	 	containerReferer := frames;
+	 };
+	 
+	 Element := Individual (name -> iri);
+	 
+	 Referer := Class {
+	 	reference := equivalentClassesDescriptions:Disjunction -> conjunctions:Conjunction -> primaries:IndividualsAtomic -> individuals;
+	 };
+}

@@ -1,0 +1,96 @@
+Prefix: ontretest: <http://www.buschmais.com/ontretest.owl#>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: : <http://www.buschmais.com/ontretest.owl#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+
+
+Ontology: <http://www.buschmais.com/ontretest.owl>
+
+
+AnnotationProperty: rdfs:label
+
+    
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:string
+
+    
+ObjectProperty: ontretest:hatAdresse
+
+    Annotations: 
+        rdfs:comment "Eine Postadresse"
+    
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        ontretest:Person
+    
+    Range: 
+        ontretest:Adresse
+    
+    
+DataProperty: ontretest:hatName
+
+    
+Class: ontretest:Adresse
+
+    
+Class: ontretest:Person
+
+    
+Individual: ontretest:Sally
+
+    Types: 
+        ontretest:Person
+    
+    Facts:  
+     ontretest:hatAdresse  ontretest:GenIndiv1
+    
+    
+Individual: ontretest:GenIndiv1
+
+    Annotations: 
+        rdfs:label "Riga"^^xsd:string
+    
+    Types: 
+        ontretest:Adresse
+    
+    
+Individual: ontretest:GenIndiv0
+
+    Annotations: 
+        rdfs:label "Manchester"^^xsd:string
+    
+    Types: 
+        ontretest:Adresse
+    
+    
+Individual: ontretest:GenIndiv2
+
+    Annotations: 
+        rdfs:label "York"^^xsd:string
+    
+    Types: 
+        ontretest:Adresse
+    
+    
+Individual: ontretest:John
+
+    Types: 
+        ontretest:Person
+    
+    Facts:  
+     ontretest:hatAdresse  ontretest:GenIndiv0,
+     ontretest:hatAdresse  ontretest:GenIndiv2
+    
+    

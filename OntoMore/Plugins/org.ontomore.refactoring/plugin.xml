@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/rename.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractToNewClass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/moveToOtherClass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/pullUpProperty.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/createIndividual.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/moveElement.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/remove.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/createEnumeratedClass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/select.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/makeAllIndividualsDistinct.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/convertDataProperty.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/duplicateClass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/introduceInverseProperty.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/removeInverseProperty.rolemapping">
+      </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Add Covering Axiom"
+            nsUri="http://org.emftext/owl.ecore"
+            postprocessor="org.ontomore.owl.refactoring.AddCoveringAxiomPostProcessor">
+      </postprocessor>
+   </extension>
+
+</plugin>

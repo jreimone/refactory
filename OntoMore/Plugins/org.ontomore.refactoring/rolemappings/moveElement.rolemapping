@@ -1,0 +1,25 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Move Element simple" maps <SimpleMoveX> { 
+
+	  Container := Ontology {
+	  		movedElements := frames;
+	  		neighbor := frames;
+	  };
+	  
+	  Movee := Frame;
+	  
+	  Neighbor := Frame;
+}
+
+"Move Element loosely" maps <MoveXloosely> { 
+
+	  Container := Ontology {
+	  		movedElements := frames;
+	  		neighbor := frames;
+	  };
+	  
+	  Movee := Frame;
+	  
+	  Neighbor := Frame;
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.ontomore.transformation.ui.command1"
+            name="Transform OWL to Ecore">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.ontomore.ui.TransformOWL2EcoreHandler"
+            commandId="org.ontomore.transformation.ui.command1">
+         <enabledWhen>
+            <and>
+               <count
+                     value="1">
+               </count>
+               <iterate>
+                  <adapt
+                        type="org.eclipse.core.resources.IFile">
+                     <test
+                           property="org.eclipse.core.resources.extension"
+                           value="owl">
+                     </test>
+                  </adapt></iterate></and>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <command
+               commandId="org.ontomore.transformation.ui.command1"
+               label="Tra&amp;nsform OWL to Ecore"
+               mnemonic="n"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+
+</plugin>
