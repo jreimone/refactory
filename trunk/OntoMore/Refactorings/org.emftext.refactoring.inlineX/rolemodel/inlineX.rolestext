@@ -1,0 +1,15 @@
+/*
+Moves the content of a referenced element ("inlinee") to the base element
+and deletes the referenced element.
+Used in "Inline Class" (Ecore)
+*/
+RoleModel InlineX {
+	ROLE Inlinee;
+ 	input ROLE Base;
+ 	ROLE Content;
+
+ Base  [1..1] -- Inlinee inlinee [1..*];
+ Base  [1..1] <>- Content content [1..*];
+ Inlinee  [1..1] <>- Content content [1..*];
+
+}

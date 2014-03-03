@@ -1,0 +1,19 @@
+RoleModel ExtracLooselyX{
+	
+	super input ROLE Extractee;
+ 	ROLE ContainerContainer;
+ 	ROLE OrigContainer;
+ 	ROLE NewContainer(name);
+ ROLE OrigReference;
+ ROLE NewReference;
+
+ ContainerContainer  [1..1] <>- OrigContainer origContainer [1..1];
+ ContainerContainer  [1..1] <>- Extractee extractee [1..1];
+ ContainerContainer  [1..1] <>- NewContainer newContainer [1..1];
+ OrigContainer  [1..1] -- NewContainer newContainer [1..1];
+ OrigReference  [1..1] -- OrigContainer origContainer [1..1];
+ NewReference  [1..1] -- NewContainer newContainer [1..1];
+ Extractee  [1..1] <>- OrigReference origReference [1..1];
+ Extractee  [1..1] <>- NewReference newReference [1..1];
+
+}

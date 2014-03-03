@@ -1,0 +1,19 @@
+/*
+Replaces a feature in a container by another one with a new range.
+Used in "Replace DataValue with Object" (Ecore).
+*/
+RoleModel ReplaceFeatureInContainer {
+
+	ROLE Container;
+	ROLE FeatureContainer;
+	input ROLE OrigFeature(name);
+	ROLE NewFeature(name);
+	ROLE Range(name);
+
+ Container  [1..1] <>- FeatureContainer featureContainer [1..1];
+ FeatureContainer  [1..1] <>- OrigFeature origFeature [1..1];
+ FeatureContainer  [1..1] <>- NewFeature newFeature [1..1];
+ NewFeature  [1..1] -- Range range [1..1];
+ Container  [1..1] <>- Range range [1..1];
+
+}

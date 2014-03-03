@@ -1,0 +1,10 @@
+REFACTORING FOR <InlineX> 
+
+STEPS { 
+	object base := Base from filter(INPUT);
+	object inlinee := base.inlinee;
+	object content := inlinee.content;
+	
+	move content to base;
+	remove inlinee;
+}

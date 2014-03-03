@@ -1,0 +1,18 @@
+/* Creates a sequence of elements with names and one single referer
+that holds references to all previously created elements.
+It is used in "Create Enumerated Class" to create several individuals and
+a single class that references all those individuals.
+
+To create several elements isn't yet supported.*/
+
+RoleModel CreateReferencedElements {
+
+	input ROLE Container;
+ 	ROLE Element(optional name);
+ 	ROLE Referer(optional name);
+
+ Container  [1..1] <>- Referer containerReferer [1..1];
+ Container  [1..1] <>- Element containerElement [1..*];
+ Referer  [1..1] -- Element reference [1..*];
+
+}

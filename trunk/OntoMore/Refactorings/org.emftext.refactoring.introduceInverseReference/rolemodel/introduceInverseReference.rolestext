@@ -1,0 +1,18 @@
+/*
+Used in "Introduce Inverse Reference" (Ecore)
+*/
+RoleModel IntroduceInverseReference {
+
+	input ROLE Reference;
+	ROLE Domain;
+	ROLE Range;
+	ROLE InverseReference(name);
+
+ Domain  [1..1] <>- Reference reference [1..1];
+ Range  [1..1] <>- InverseReference reference [1..1];
+ Reference  [1..1] -- Range range [1..1];
+ InverseReference  [1..1] -- Domain range [1..1];
+ InverseReference  [1..1] -- Reference opposite [1..1];
+ Reference  [1..1] -- InverseReference opposite [1..1];
+
+}

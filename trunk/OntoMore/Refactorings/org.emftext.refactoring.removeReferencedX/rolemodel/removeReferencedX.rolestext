@@ -1,0 +1,10 @@
+RoleModel RemoveReferencedX{
+
+	input ROLE Container;
+ 	ROLE Reference;
+ 	ROLE Removee;
+
+ Container  [1..1] <>- Reference reference [1..1];
+ Reference  [1..1] -- Removee removee [1..1];
+ 
+}

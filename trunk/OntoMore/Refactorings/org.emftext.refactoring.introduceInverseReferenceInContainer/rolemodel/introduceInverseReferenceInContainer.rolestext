@@ -1,0 +1,17 @@
+RoleModel IntroduceInverseReferenceInContainer {
+	
+	input ROLE Reference;
+	ROLE Container;
+	ROLE Domain;
+	ROLE Range;
+	ROLE InverseReference(name);
+
+ Container  [1..1] <>- Reference reverence [1..1];
+ Reference  [1..1] <>- Domain domain [1..1];
+ Reference  [1..1] <>- Range range [1..1];
+ InverseReference  [1..1] <>- Domain range [1..1];
+ InverseReference  [1..1] <>- Range domain [1..1];
+ Reference  [1..1] -- InverseReference inverseReference [1..1];
+ Container  [1..1] <>- InverseReference inverseReference [1..1];
+ InverseReference  [1..1] -- Reference inverseReference [1..1];
+}

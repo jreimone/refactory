@@ -1,0 +1,9 @@
+REFACTORING FOR <IntroduceRefererToAllX> 
+
+STEPS { 
+	object container := Container from filter(INPUT);
+	object elements := container.elements;
+	
+	create new ref:Referer in container;
+	set use of elements in ref.reference;
+}

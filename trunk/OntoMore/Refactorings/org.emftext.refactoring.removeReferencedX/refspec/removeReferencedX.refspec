@@ -1,0 +1,9 @@
+REFACTORING FOR <RemoveReferencedX> 
+
+STEPS { 
+	object reference := Reference from path(INPUT); 	
+	object removee := Removee from path(reference);
+	
+	remove removee;
+	remove reference;
+}

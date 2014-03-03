@@ -1,0 +1,5 @@
+REFACTORING FOR <RemoveContainedX> 
+
+STEPS { 
+	remove Container.removees;
+}

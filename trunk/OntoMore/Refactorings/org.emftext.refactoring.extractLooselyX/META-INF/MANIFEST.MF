@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ExtractLooselyX
+Bundle-SymbolicName: org.emftext.refactoring.extractLooselyX;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Erik Tittel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.emftext.refactoring.registry.rolemodel,
+ org.emftext.refactoring.registry.refactoringspecification

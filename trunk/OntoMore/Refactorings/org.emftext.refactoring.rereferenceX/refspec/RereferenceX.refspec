@@ -1,0 +1,12 @@
+REFACTORING FOR <RereferenceX> 
+
+STEPS { 
+	object source := Source from filter(INPUT);
+	object origReference := OrigReference from path(INPUT);
+	object origTarget := OrigTarget from path(origReference);
+	object newTarget := NewTarget from path(origTarget);
+	
+	remove origReference;
+	create new newReference:NewReference in source;
+	set use of newTarget in newReference; 
+}
