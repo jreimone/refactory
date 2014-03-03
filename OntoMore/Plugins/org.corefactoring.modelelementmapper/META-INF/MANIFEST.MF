@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Metamodelregistry
+Bundle-SymbolicName: org.corefactoring.modelelementmapper
+Bundle-Version: 1.0.0
+Bundle-Vendor: Erik Tittel
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit,
+ org.emftext.language.owl,
+ org.ontomore.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.corefactoring.modelelementmapper,
+ org.corefactoring.modelelementmapper.test;x-friends:="org.corefactoring.test"

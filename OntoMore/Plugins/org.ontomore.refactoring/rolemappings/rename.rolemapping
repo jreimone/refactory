@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Rename Element" maps <RenameX> { 
+	 Nameable := IRIIdentified(name -> iri) ; 
+}
+
+"Rename Ontology" maps <RenameX> { 
+	 Nameable := Ontology(name -> uri) ; 
+}
+	 

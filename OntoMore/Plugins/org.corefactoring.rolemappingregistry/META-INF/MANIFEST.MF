@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rolemappingregistry
+Bundle-SymbolicName: org.corefactoring.rolemappingregistry
+Bundle-Version: 1.0.0
+Bundle-Vendor: Erik Tittel
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit,
+ org.ontomore.util;bundle-version="1.0.0",
+ org.emftext.language.refactoring.rolemapping;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.corefactoring.rolemappingregistry,
+ org.corefactoring.rolemappingregistry.test;x-friends:="org.corefactoring.test"

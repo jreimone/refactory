@@ -1,0 +1,15 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Make All Individuals Distinct" maps <IntroduceRefererToAllX> {
+ 
+	 Container := Ontology {
+	 	elements := frames;
+	 	referer := frames;
+	 };
+	 
+	 Element := Individual;
+	 
+	 Referer := DifferentIndividuals {
+	 	reference := individuals;
+	 };
+}

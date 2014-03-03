@@ -1,0 +1,5 @@
+Prefix: : <http://ontomore.org/test/testOntology.owl#>
+
+Ontology: <http://ontomore.org/test/testOntology.owl>
+	
+Class: Person

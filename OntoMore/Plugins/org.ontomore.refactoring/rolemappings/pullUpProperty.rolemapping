@@ -1,0 +1,23 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Pull Up Property" maps <RereferenceX> {
+	 
+	 Source := Feature {
+	 	origReference := domain:Disjunction;
+	 	newReference := domain:Disjunction;
+	 };
+	  
+	 OrigReference := Disjunction {
+			origTarget := conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	 };
+	 
+	 NewReference := Disjunction {
+			newTarget := conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	 };
+	  
+	 OrigTarget := Class {
+	 	relatedElement := superClassesDescriptions:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	 };
+	 
+	 NewTarget := Class;
+}

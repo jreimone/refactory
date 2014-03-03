@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Modelregistry
+Bundle-SymbolicName: org.corefactoring.modelregistry
+Bundle-Version: 1.0.0
+Bundle-Vendor: Erik Tittel
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit,
+ org.ontomore.util,
+ org.eclipse.emf.ecore;bundle-version="2.6.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.corefactoring.modelregistry,
+ org.corefactoring.modelregistry.test;x-friends:="org.corefactoring.test"

@@ -1,0 +1,47 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Extract to new super class" maps <ExtractXwithReferenceClass> { 
+
+	ContainerContainer := Ontology {
+		source := frames;
+		target := frames;
+	};
+
+	 OrigContainer := Class {
+	 	extracts := superClassesDescriptions;
+	 	referer := superClassesDescriptions:Disjunction -> conjunctions:Conjunction -> primaries;
+	 };
+	 
+	 NewContainer := Class (newName -> iri){
+	 	moved := superClassesDescriptions;
+	 };
+	 
+	 Extract := Description;
+	 
+	MovedReference := ClassAtomic {
+		containerRef :=  clazz;	
+	};
+}
+
+"Extract to new defined class" maps <ExtractXwithReferenceClass> { 
+
+	ContainerContainer := Ontology {
+		source := frames;
+		target := frames;
+	};
+
+	 OrigContainer := Class {
+	 	extracts := superClassesDescriptions;
+	 	referer := superClassesDescriptions;
+	 };
+	 
+	 NewContainer := Class (newName -> iri){
+	 	moved := equivalentClassesDescriptions;
+	 };
+	 
+	 Extract := Description;
+	 
+	MovedReference := Disjunction {
+		containerRef :=  conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;	
+	};
+}

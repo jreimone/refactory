@@ -1,0 +1,17 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Create Individuals to Class" maps <IntroduceClassAndReference> { 
+
+	Container := Ontology {
+		targetContainment := frames;
+		sourceContainment := frames;
+	};
+	
+	Source := Class;
+	Target := Individual(name -> iri) {
+		referenceContainment := types:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic;
+	};
+	Reference := ClassAtomic {
+		sourceReference := clazz;
+	};
+}

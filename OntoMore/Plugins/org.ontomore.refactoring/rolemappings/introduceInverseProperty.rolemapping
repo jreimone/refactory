@@ -1,0 +1,25 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Introduce Inverse Property" maps <IntroduceInverseReferenceInContainer> { 
+
+	Container := Ontology {
+		reverence := frames:ObjectProperty;
+		inverseReference := frames:ObjectProperty;
+	};
+	
+	Reference := ObjectProperty {
+		domain := domain:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+		range := propertyRange:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+		inverseReference := inverseProperties:ObjectPropertyReference -> objectProperty;
+	};
+	
+	Domain := Class;
+	
+	Range := Class;
+	
+	InverseReference := ObjectProperty (name -> iri) {
+		domain := domain:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+		range := propertyRange:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+		inverseReference := inverseProperties:ObjectPropertyReference -> objectProperty;
+	};
+}

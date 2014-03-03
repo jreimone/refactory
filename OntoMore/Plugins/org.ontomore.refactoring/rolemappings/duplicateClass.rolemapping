@@ -1,0 +1,20 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Duplicate Class" maps <DuplicateWithReference> { 
+
+	Container := Ontology {
+		base := frames;
+		duplicate := frames;
+	};
+	
+	Base := Class {
+		baseAppendix := superClassesDescriptions:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	};
+	
+	Duplicate := Class (name -> iri) {
+		duplicateAppendix := superClassesDescriptions:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	};
+	
+	Appendix := Class;
+
+}
