@@ -29,6 +29,7 @@ public class PrologGenerator implements IPrologGenerator {
 	@Override
 	public void generateTheoryAndAddToKnowledgebase(EObject model) {
 		Resource modelResource = model.eResource();
+		System.out.println("Direct dependencies for " + modelResource.getURI());
 		TreeIterator<EObject> iterator = model.eAllContents();
 		while (iterator.hasNext()) {
 			EObject element = (EObject) iterator.next();
@@ -115,6 +116,9 @@ public class PrologGenerator implements IPrologGenerator {
 			} else {
 				referencedElements.addAll((List<EObject>) object);
 			}
+		}
+		for (EObject referencedElement : referencedElements) {
+			System.out.println("\t" + EcoreUtil.getURI(element).fragment() + " --> " + EcoreUtil.getURI(referencedElement));
 		}
 		return referencedElements;
 	}
