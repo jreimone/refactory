@@ -1,0 +1,11 @@
+/* Similar to MoveXloosely but without any reference from the source to the target element.
+The target postion of the move is stated by the user.*/
+RoleModel SimpleMoveX { 
+	
+	super input ROLE Movee;
+	super ROLE Neighbor;
+	super ROLE Container;
+	
+	transitive: Container [1..1] <>- Movee movedElements [1..*];
+	transitive: Container [1..1] <>- Neighbor neighbor [1..*];
+}

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SimpleMoveX
+Bundle-SymbolicName: org.emftext.refactoring.simpleMoveX;singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.rolemodel
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: Erik Tittel

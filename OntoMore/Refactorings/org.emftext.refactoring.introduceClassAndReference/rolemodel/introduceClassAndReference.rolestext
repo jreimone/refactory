@@ -1,0 +1,22 @@
+/* Creates a new element with an attribute and a reference element
+that points to the selected source element.
+
+It is used in "Create Individual to Class".
+The creation of several elements isn't supported yet. 
+
+This refactoring is similar to IntroduceReferenceClass.
+The difference is that there is an extra element
+for the reference and an optional attribute.*/
+RoleModel IntroduceClassAndReference {
+
+	ROLE Container;
+	input ROLE Source;
+	ROLE Target(optional name);
+ 	ROLE Reference;
+
+	Container  [1..1] <>- Target targetContainment [1..*];
+ 	Container  [1..1] <>- Source sourceContainment [1..1];
+ 	Target  [1..1] <>- Reference referenceContainment [1..1];
+ 	Reference  [1..1] -- Source sourceReference [1..*];
+	
+}

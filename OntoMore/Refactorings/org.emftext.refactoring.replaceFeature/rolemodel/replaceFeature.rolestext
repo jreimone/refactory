@@ -1,0 +1,21 @@
+/** Replaces the selected element by another one,
+moving attribute values and references from the original to the new element.
+Used in "Convert Data Property To Object Property".
+*/
+RoleModel ReplaceFeature {
+	 
+	ROLE Container;
+ 	input ROLE OrigFeature(name);
+ 	ROLE NewFeature(name);
+ 	optional ROLE Domain;
+	optional ROLE Range(name);
+
+
+ Container  [1..1] <>- NewFeature newFeature [1..1];
+ Container  [1..1] <>- OrigFeature origFeature [1..1];
+ Container  [1..1] <>- Range range [1..1];
+ OrigFeature  [1..1] -- Domain domain [1..1];
+ NewFeature  [1..1] -- Domain domain [1..1];
+ NewFeature  [1..1] -- Range range [1..1];
+
+}

@@ -1,0 +1,17 @@
+/* Creates a new object and copies the referenced elements
+from the base object to the new object.
+Used in "Duplicate Class" (OWL, Ecore).
+*/
+RoleModel DuplicateWithReference{
+	input ROLE Base;
+ 	ROLE Duplicate(name);
+ 	ROLE Container;
+ 	optional ROLE Appendix;
+
+ Container  [1..1] <>- Base base [1..1];
+ Container  [1..1] <>- Duplicate duplicate [1..1];
+ Base  [1..1] <>- Appendix baseAppendix [1..*];
+ Duplicate  [1..1] <>- Appendix duplicateAppendix [1..*];
+ Duplicate -> Base;
+
+}

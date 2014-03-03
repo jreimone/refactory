@@ -1,0 +1,19 @@
+/* Changes a reference to another element.
+Used in "Pull Up Property" (OWL) and "Pull Up Field" (Ecore).
+*/
+RoleModel RereferenceX {
+
+	super input ROLE Source;
+ 	ROLE OrigReference;
+ 	ROLE NewReference;
+ ROLE OrigTarget;
+ ROLE NewTarget;
+
+
+ OrigTarget  [1..1] -- NewTarget relatedElement [1..1];
+ OrigReference  [1..1] -- OrigTarget origTarget [1..1];
+ NewReference  [1..1] -- NewTarget newTarget [1..1];
+ Source  [1..1] <>- OrigReference origReference [1..1];
+ Source  [1..1] <>- NewReference newReference [1..1];
+ 
+}

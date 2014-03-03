@@ -1,0 +1,18 @@
+REFACTORING FOR <ExtracLooselyX> 
+
+STEPS { 
+	object extractee := Extractee from filter(INPUT);
+	object origReference := OrigReference from path(extractee);
+	object origContainer := OrigContainer from path(origReference);
+	object containerContainer := ContainerContainer as trace(extractee);
+	
+	index positionAfterOrigContainer := after(origContainer);
+	
+	create new newContainer:NewContainer in containerContainer at positionAfterOrigContainer;
+	assign newContainer.name;
+	set use of newContainer in origContainer;
+	
+	remove origReference;
+	create new newReference:NewReference in extractee;
+	set use of newContainer in newReference;
+} 

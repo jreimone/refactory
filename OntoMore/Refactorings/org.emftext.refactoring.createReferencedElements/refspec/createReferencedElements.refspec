@@ -1,0 +1,25 @@
+REFACTORING FOR <CreateReferencedElements> 
+
+STEPS { 
+	object container := Container from filter(INPUT);
+	
+	/* repeat as long as the user types in names */
+	create new ne:Element in container;
+	assign ne.name;
+	/* end repeat */
+	
+	/*
+	fake interpreter threw exception
+	java.lang.NullPointerException
+	at org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter.handleTargetOnly(ASSIGNInterpreter.java:165)
+	
+	create new ne1:Element in container;
+	assign ne1.name;
+	*/
+	
+	create new nr:Referer in container;
+	/* Why isn't asked for a name? A default is put instead ("newClassIri2"). */
+	assign nr.name;
+	
+	set use of ne in nr;
+} 

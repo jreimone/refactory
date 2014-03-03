@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:roles="http://www.emftext.org/language/roles" xmi:id="_ixL18QwfEeCmpceBbgrk3g" type="Role Model" name="removeContainedX.rolesdiag" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_johGkAwfEeCmpceBbgrk3g" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_joi7wAwfEeCmpceBbgrk3g" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_joi7wQwfEeCmpceBbgrk3g" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_joi7wgwfEeCmpceBbgrk3g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_joi7wwwfEeCmpceBbgrk3g"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_johGkQwfEeCmpceBbgrk3g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_johGkgwfEeCmpceBbgrk3g" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_johGkwwfEeCmpceBbgrk3g"/>
+    <element xmi:type="roles:Role" href="removeContainedX.rolestext#//@roles[name='Container']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_johGlAwfEeCmpceBbgrk3g" x="50" y="55"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_kfyFwAwfEeCmpceBbgrk3g" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_kfz68AwfEeCmpceBbgrk3g" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_kfz68QwfEeCmpceBbgrk3g" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_kfz68gwfEeCmpceBbgrk3g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_kfz68wwfEeCmpceBbgrk3g"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_kfyFwQwfEeCmpceBbgrk3g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_kfyFwgwfEeCmpceBbgrk3g" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_kfyFwwwfEeCmpceBbgrk3g"/>
+    <element xmi:type="roles:Role" href="removeContainedX.rolestext#//@roles[name='Removee']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kfyFxAwfEeCmpceBbgrk3g" x="55" y="189"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_ixL18gwfEeCmpceBbgrk3g"/>
+  <element xmi:type="roles:RoleModel" href="removeContainedX.rolestext#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_p1UnEAwfEeCmpceBbgrk3g" type="4004" source="_johGkAwfEeCmpceBbgrk3g" target="_kfyFwAwfEeCmpceBbgrk3g">
+    <children xmi:type="notation:DecorationNode" xmi:id="_p1WcQAwfEeCmpceBbgrk3g" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_p1WcQQwfEeCmpceBbgrk3g" x="10"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_p1WcQgwfEeCmpceBbgrk3g" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_p1WcQwwfEeCmpceBbgrk3g" x="-3" y="-37"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_p1UnEQwfEeCmpceBbgrk3g"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_p1UnEgwfEeCmpceBbgrk3g" fontName="Segoe UI"/>
+    <element xmi:type="roles:RoleComposition" href="removeContainedX.rolestext#//@collaborations.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_p1UnEwwfEeCmpceBbgrk3g" points="[-2, 20, -5, -114]$[-39, 123, -42, -11]"/>
+  </edges>
+</notation:Diagram>

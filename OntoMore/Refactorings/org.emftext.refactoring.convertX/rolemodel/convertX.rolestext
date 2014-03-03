@@ -1,0 +1,10 @@
+RoleModel ConvertX {
+
+	input ROLE Source(name);
+ 	ROLE Target(name);
+ 	ROLE Container;
+	optional ROLE ValueStore(variable);
+
+ Container  [1..1] <>- Source source [1..1];
+ Container  [1..1] <>- Target target [1..1];
+}

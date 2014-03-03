@@ -1,0 +1,16 @@
+/** Introduces a new element (the referer) that has references to
+all elements of a certain type in the same container.
+This refactoring is used in "Make All Individuals Distinct" in OWL.
+It is similar to "Introduce Reference Class".
+*/
+RoleModel IntroduceRefererToAllX {
+
+	input ROLE Container;
+	ROLE Element;
+	ROLE Referer;
+
+ Container  [1..1] <>- Element elements [1..*];
+ Container  [1..1] <>- Referer referer [1..*];
+ Referer  [1..1] -- Element reference [1..*];
+ 
+} 
