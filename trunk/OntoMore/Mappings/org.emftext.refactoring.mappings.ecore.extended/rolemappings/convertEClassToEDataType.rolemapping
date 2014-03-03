@@ -1,0 +1,14 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+
+"Convert EClass to EDataType" maps <ConvertX> { 
+
+	Container := EPackage {
+		source := eClassifiers;
+		target := eClassifiers;
+	};
+	
+	Source := EClass (name -> name);
+	
+	Target := EDataType (name -> name);
+	  
+}

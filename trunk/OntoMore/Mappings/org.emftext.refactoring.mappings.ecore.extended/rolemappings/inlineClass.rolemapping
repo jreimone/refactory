@@ -1,0 +1,15 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+
+"Inline Class" maps <InlineX> { 
+	
+	Base := EClass {
+		inlinee := eStructuralFeatures:EReference -> eType;
+		content := eStructuralFeatures;
+	};
+	
+	Inlinee := EClass {
+		content := eStructuralFeatures;
+	};
+	
+	Content := EStructuralFeature;
+}

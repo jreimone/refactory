@@ -1,0 +1,22 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+
+"Introduce Inverse Reference" maps <IntroduceInverseReference> { 
+
+	Domain := EClass {
+		reference := eStructuralFeatures;
+	};
+
+	Reference := EReference {
+		range := eType;
+		opposite := eOpposite;
+	};
+	
+	Range := EClass {
+		reference := eStructuralFeatures;
+	};
+	
+	InverseReference := EReference (name -> name) {
+		range := eType;
+		opposite := eOpposite;
+	};
+}
