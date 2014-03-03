@@ -1,5 +1,5 @@
 ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
 
-"Add Covering Axiom" maps <SelectForPostProcessing> { 
-	Element := Class;
+"Add Covering Axiom" maps <SelectX> { 
+	Selection := Class;
 }
