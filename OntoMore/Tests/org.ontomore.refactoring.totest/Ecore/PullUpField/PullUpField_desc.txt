@@ -1,0 +1,17 @@
+----------------------------
+## Pull Up Field
+----------------------------
+-- Description
+Moves the selected EAttribute or EReference
+to the superclass of the containing EClass.
+
+-- Issues
+Already implemented as "Pull Up Feature" with "Move X".
+
+-- Generic Refactoring
+"Move X"
+
+-- Problems
+Changing to the generic refactoring "RereferenceX" (OntoMore) doesn't work.
+This generic refactoring would be the same as for the corresponding
+OWL refactoring "Pull Up Property". See OWL/PullUpProperty/PullUpProperty_desc.txt

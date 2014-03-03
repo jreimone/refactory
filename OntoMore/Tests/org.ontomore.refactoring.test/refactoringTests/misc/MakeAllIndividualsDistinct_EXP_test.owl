@@ -1,0 +1,16 @@
+Prefix: : <http://ontomore.org/test/simpleOntology.owl#>
+
+Ontology: <http://ontomore.org/test/simpleOntology.owl>
+
+Class: Person
+
+Individual: John
+	Types: Person
+	
+Individual: Jane
+	Types: Person
+	
+Individual: Tim
+	Types: Person
+	
+DifferentIndividuals: John, Jane, Tim

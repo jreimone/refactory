@@ -1,0 +1,5 @@
+Selected element := Ontology
+
+iri := Germany
+iri := France
+iri := UnitedKingdom

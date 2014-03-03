@@ -1,0 +1,3 @@
+Selected element := EClass::Employee --> EReference::hasAddress
+
+new Class, iri := Person

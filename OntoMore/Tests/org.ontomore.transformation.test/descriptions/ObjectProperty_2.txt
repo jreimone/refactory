@@ -1,0 +1,13 @@
+ObjectProperty <--> EReference
+
+ObjectProperty(iri) --> EReference(name)
+
+ObjectProperty(iri) 	--> EReference(name)
+Domain					--> eContainingClass
+Range					--> EReference(EType)
+Annotation-rdfs:comment	--> EReference(LowerBound)
+Annotation-rdfs:comment	--> EReference(UpperBound)
+Annotation-rdfs:comment	--> EReference(Containment)
+
+Cardinality and containment of an ObjectProperty have to be
+explicitly stated using annotations.

@@ -1,0 +1,12 @@
+----------------------------
+## Create Individuals To Class
+----------------------------
+-- Description
+Creates a bunch of new individuals to a selected class.
+
+-- Generic Refactoring
+OntoMore: "Introduce Class And Reference"
+
+-- Problems
+Refactory doesn't support creation of several elements.
+Input data for assign-command is only asked for once.

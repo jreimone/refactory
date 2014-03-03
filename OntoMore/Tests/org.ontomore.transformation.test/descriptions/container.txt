@@ -1,0 +1,8 @@
+OntologyDocument/Ontology <--> EPackage
+
+Ontology(uri) --> EPackage(Ns URI)
+
+Name and Ns Prefix of EPackage have to be extracted from the ontology uri.
+The Prefix of the ontology's namespace could be used, if it is different from
+the default ":".
+Name and Ns Prefix must not contain ".", ":" or other symbols. 

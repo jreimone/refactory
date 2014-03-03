@@ -1,0 +1,16 @@
+Prefix: : <http://www.ontomore.org/test/transformation/properties.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/properties.owl>
+
+Class: Person
+	
+	
+	ObjectProperty: hasAddress
+				
+				Domain: Person
+				
+				
+				Range: Address
+	
+	
+	Class: Address

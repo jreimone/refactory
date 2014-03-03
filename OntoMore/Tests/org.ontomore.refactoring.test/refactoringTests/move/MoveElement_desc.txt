@@ -1,0 +1,11 @@
+----------------------------
+## Move Element within Ontology
+----------------------------
+-- Description
+Move the selected frame to another position within the ontology. 
+
+-- Generic Refactoring
+"Move X loosely".
+
+-- Problems
+The element isn't inserted at the correct position in some cases.

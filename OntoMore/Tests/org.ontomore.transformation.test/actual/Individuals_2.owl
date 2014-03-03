@@ -1,0 +1,71 @@
+Prefix: : <http://www.ontomore.org/test/transformation/individuals.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/individuals.owl>
+
+Class: NamedElement
+
+Class: City
+	SubClassOf: NamedElement
+
+Class: Person
+	SubClassOf: NamedElement
+
+ObjectProperty: hasPerson
+	Annotations:
+		upperbound "-1",
+		containment "true"
+	Domain: City
+	Range: Person
+
+ObjectProperty: specialPerson
+	Annotations:
+		upperbound "-1"
+	Domain: City
+	Range: Person
+
+DataProperty: hasName
+	Domain: NamedElement
+	Range: xsd:string
+
+DataProperty: hasAge
+	Domain: Person
+	Range: xsd:int
+	
+DataProperty: shoeSize
+	Domain: Person
+	Range: xsd:float
+
+DataProperty: hasJob
+	Domain: Person
+	Range: xsd:boolean
+
+AnnotationProperty: lowerbound
+AnnotationProperty: upperbound
+AnnotationProperty: containment
+AnnotationProperty: rootelement
+
+Individual: John
+	Types: Person
+	Facts:
+		hasName "John",
+		hasAge 35,
+		shoeSize 8.5f,
+		hasJob false
+
+Individual: Alabama
+	Annotations:
+		rootelement "true"
+	Types: City
+	Facts:
+		hasName "Alabama",
+		hasPerson John,
+		hasPerson Lisa,
+		specialPerson Lisa
+	
+Individual: Lisa
+	Types: Person
+	Facts:
+		hasName "Lisa",
+		hasAge 23,
+		hasJob true
+	

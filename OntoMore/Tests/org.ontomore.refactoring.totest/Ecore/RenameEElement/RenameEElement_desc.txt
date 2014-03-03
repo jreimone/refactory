@@ -1,0 +1,11 @@
+----------------------------
+## Rename EElement
+----------------------------
+-- Description
+Assign new string to "name" attribute of ENamedElement.
+
+Refactoring already implemented.
+
+-- Generic Refactoring
+"Rename X"
+

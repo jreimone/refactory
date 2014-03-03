@@ -1,0 +1,18 @@
+Prefix: : <http://ontomore.org/test/testOntology.owl#>
+
+Ontology: <http://ontomore.org/test/testOntology.owl>
+
+Class: Size
+	
+Class: LargeSize
+	SubClassOf: Size
+	
+Class: MediumSize
+	SubClassOf: Size
+	
+Class: SmallSize
+	SubClassOf: Size
+	
+Class: OtherClass
+
+ObjectProperty: hasRelationship

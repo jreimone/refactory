@@ -1,0 +1,11 @@
+Prefix: : <http://ontomore.org/test/testOntology.owl#>
+
+Ontology: <http://ontomore.org/test/testOntology.owl>
+	
+Class: Person
+	DisjointWith: Address
+	DisjointWith: Person
+	
+Class: Address
+	
+Class: Location

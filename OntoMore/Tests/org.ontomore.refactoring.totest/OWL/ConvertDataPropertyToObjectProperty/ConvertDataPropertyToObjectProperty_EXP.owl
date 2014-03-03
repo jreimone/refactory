@@ -1,0 +1,21 @@
+Prefix: : <http://www.ontomore.org/test/transformation/properties.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/properties.owl>
+
+Class: Employee
+
+DataProperty: name
+	Domain: Employee
+	Range: xsd:string
+
+DataProperty: isManager
+	Domain: Employee
+	Range: xsd:boolean
+	
+ObjectProperty: employeeID
+	Domain: Employee
+	Range: employeeIDObject
+	
+Class: employeeIDObject
+	
+Datatype: EmployeeID

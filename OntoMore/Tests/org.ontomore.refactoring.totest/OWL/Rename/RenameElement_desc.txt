@@ -1,0 +1,67 @@
+----------------------------
+## Rename Element
+----------------------------
+-- Description
+Assign new string to "iri" attribute of an arbitrary subclass of IRIIdentified.
+The name is the first string in a frame after the keyword (e. g. "Class:").
+Further considerations are necessary when renaming an referenced element from another ontology,
+as the element in the imported ontology has to be renamed, too.
+
+-- Generic Refactoring
+"Rename X"
+
+-- Problems
+Renaming changes the name of only the element itself, not of the references to it.
+Right-clicking on a reference the rename-refactoring isn't provided as the selection
+isn't recognised as being a Class.
+
+When a refactoring is executed on a newly opened file a NPE is thrown.
+This can be sometimes avoided by restarting the runtime eclipse instance with the file opened.
+
+fake interpreter threw exception
+java.lang.NullPointerException
+	at org.emftext.language.refactoring.rolemapping.impl.RoleMappingImpl.getMappedRolesForEObject(RoleMappingImpl.java:249)
+	at org.emftext.refactoring.util.RoleUtil.filterObjectsByRoles(RoleUtil.java:249)
+	at org.emftext.refactoring.interpreter.internal.RefactoringInterpreter.interprete(RefactoringInterpreter.java:251)
+	at org.emftext.refactoring.interpreter.internal.Refactorer.fakeInterpreteAndPreCollectValues(Refactorer.java:218)
+	at org.emftext.refactoring.interpreter.internal.Refactorer.fakeRefactor(Refactorer.java:121)
+	at org.emftext.refactoring.ltk.ModelRefactoring$1.doExecute(ModelRefactoring.java:65)
+	at org.eclipse.emf.transaction.RecordingCommand.execute(RecordingCommand.java:135)
+	at org.eclipse.emf.common.command.BasicCommandStack.execute(BasicCommandStack.java:84)
+	at org.eclipse.emf.transaction.impl.AbstractTransactionalCommandStack.basicExecute(AbstractTransactionalCommandStack.java:241)
+	at org.eclipse.emf.transaction.impl.TransactionalCommandStackImpl.doExecute(TransactionalCommandStackImpl.java:63)
+	at org.eclipse.emf.transaction.impl.AbstractTransactionalCommandStack.execute(AbstractTransactionalCommandStack.java:165)
+	at org.eclipse.emf.transaction.impl.AbstractTransactionalCommandStack.execute(AbstractTransactionalCommandStack.java:219)
+	at org.emftext.refactoring.ltk.ModelRefactoring.doFakeRun(ModelRefactoring.java:61)
+	at org.emftext.refactoring.ltk.ModelRefactoring.<init>(ModelRefactoring.java:51)
+	at org.emftext.refactoring.ui.RefactoringAction.ltkRun(RefactoringAction.java:69)
+	at org.emftext.refactoring.ui.RefactoringAction.run(RefactoringAction.java:59)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:498)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:584)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:501)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:411)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1053)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4066)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3657)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2640)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2604)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2438)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:671)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:664)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:115)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:369)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:619)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:574)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1407)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1383)

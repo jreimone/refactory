@@ -1,0 +1,15 @@
+Prefix: : <http://ontomore.org/test/testOntology.owl#>
+
+Ontology: <http://ontomore.org/test/testOntology.owl>
+
+Class: Employee
+	SubClassOf:
+		hasOfficeAddress some Address
+		
+Class: NewEmployee
+	SubClassOf:
+		hasOfficeAddress some Address
+
+Class: Address
+
+ObjectProperty: hasOfficeAddress

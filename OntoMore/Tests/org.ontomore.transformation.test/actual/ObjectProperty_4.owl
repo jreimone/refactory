@@ -1,0 +1,18 @@
+Prefix: : <http://www.ontomore.org/test/transformation/properties.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/properties.owl>
+
+Class: Department
+
+Class: Employee
+
+ObjectProperty: hasEmployee
+	Domain: Department
+	Range: Employee
+
+ObjectProperty: hasDepartment
+	Domain: Employee
+	Range: Department
+	
+DisjointClasses: Department, Employee
+

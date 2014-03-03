@@ -1,0 +1,16 @@
+----------------------------
+## Convert Data Property To Object Property
+----------------------------
+-- Description
+Creates a new object property moves attribute values and references from the
+selected data property to it and removes the original data property.
+
+-- Generic Refactoring
+Nothing applicable.
+
+-- Problem
+Ontology hold the same containment relationship to different child-elements.
+It is not possible to model two different relationships in the role model.
+
+Role implication cannot be used to model sub-super-class-relationships.
+Role implication inheritance constraint is needed.

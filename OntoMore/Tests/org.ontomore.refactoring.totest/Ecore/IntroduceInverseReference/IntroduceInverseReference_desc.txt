@@ -1,0 +1,9 @@
+----------------------------
+## Introduce Inverse Reference
+----------------------------
+-- Description
+Puts a new opposite EReference in the domain class of the selected EReference.
+This is the inverse refactoring to "Remove Inverse Reference".
+
+-- Generic Refactoring
+"Introduce Inverse Reference" (OntoMore)

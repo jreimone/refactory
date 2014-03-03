@@ -1,0 +1,24 @@
+Prefix: : <http://ontomore.org/test/testOntology.owl#>
+
+Ontology: <http://ontomore.org/test/testOntology.owl>
+	
+Class: Human_intermediate
+
+Class: Employee
+	SubClassOf: Human_intermediate
+	
+Class: Address
+
+ObjectProperty: hasAddress
+	Domain: Human_intermediate
+	Range: Address
+	
+ObjectProperty: hasNeighbour
+	Domain: Human_intermediate
+	Range: Human_intermediate
+	
+DataProperty: hasSalary
+	Domain: Human_intermediate
+	Range: xsd:int
+
+DisjointClasses: Human_intermediate, Address

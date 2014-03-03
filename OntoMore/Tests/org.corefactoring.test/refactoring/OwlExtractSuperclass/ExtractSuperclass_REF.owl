@@ -1,0 +1,20 @@
+Prefix: : <http://ontomore.org/test/simpleOntology.owl#>
+
+Ontology: <http://ontomore.org/test/simpleOntology.owl>
+	
+Class: Employee
+	
+	SubClassOf: Person
+	
+	
+	Class: Person
+
+Class: Address
+
+ObjectProperty: hasAddress
+	Domain: Person
+	Range: Address
+	
+DataProperty: hasSalary
+	Domain: Employee
+	Range: xsd:int

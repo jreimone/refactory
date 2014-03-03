@@ -1,0 +1,2 @@
+Selected element := EClass::ITConsultant --> EReference::hasAddress
+Selected element := EClass::ITConsultant --> EAttribute::hasSalary

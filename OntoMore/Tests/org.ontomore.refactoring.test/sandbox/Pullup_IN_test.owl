@@ -1,0 +1,34 @@
+Prefix: : <http://ontomore.org/test/simpleOntology.owl#>
+
+Ontology: <http://ontomore.org/test/simpleOntology.owl>
+	
+Class: Person
+
+Class: Animal
+
+Class: LivingBeing
+	EquivalentTo: Person or Animal
+
+Class: AddressedPerson
+	EquivalentTo:
+		Person that
+		(hasAddress some Address)and
+		(hasAddress only Address)
+
+Class: Address
+
+ObjectProperty: hasAddress
+	Characteristics: Functional
+	Domain: Person
+	
+Class: SpecialPerson
+	SubClassOf: Person
+	
+Individual: John
+	Facts:
+		hasAddress Adr1,
+		hasAddress Adr2
+
+Individual: Adr1
+Individual: Adr2
+

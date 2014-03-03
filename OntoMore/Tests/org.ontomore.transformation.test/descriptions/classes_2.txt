@@ -1,0 +1,7 @@
+classes with inheritance.
+
+SubClassOf-Axioms to one atomic class --> ESuper Types
+
+SubClassOf-Axioms to complex expressions can't be mapped.
+
+All Classes that are not in a SubClassOf relation have to be disjoint.

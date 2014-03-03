@@ -1,0 +1,16 @@
+----------------------------
+## Extract Superclass
+----------------------------
+-- Description
+Create new class, move the selected EStructuralFeature to that class.
+Makes the new class a superclass of the previous domain of the
+feature. 
+
+Refactoring already implemented.
+
+-- Generic Refactoring
+"Extract X"
+
+-- Issues
+The Superclass could be put before the original class not at the end of the model.
+

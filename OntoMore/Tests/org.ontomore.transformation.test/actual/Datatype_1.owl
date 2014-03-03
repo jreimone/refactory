@@ -1,0 +1,11 @@
+Prefix: : <http://www.ontomore.org/test/transformation/datatype.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/datatype.owl>
+
+Class: Employee
+
+DataProperty: employeeID
+	Domain: Employee
+	Range: EmployeeID
+
+Datatype: EmployeeID

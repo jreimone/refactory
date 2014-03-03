@@ -1,0 +1,9 @@
+Prefix: : <http://www.ontomore.org/test/transformation/properties.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/properties.owl>
+
+Class: Person
+
+DataProperty: hasAddress
+	Domain: Person
+	Range: xsd:string

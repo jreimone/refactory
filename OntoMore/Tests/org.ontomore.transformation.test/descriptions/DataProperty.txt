@@ -1,0 +1,20 @@
+DataProperty <--> EAttribute
+
+DataProperty	 --> 	EAttribute
+	iri						name
+	domain					eContainingClass
+	range					eType
+	
+The range of a DataProperty can be a user-defined Datatype or any of:
+xsd:string
+xsd:int
+xsd:float
+xsd:boolean
+
+xsd:int is regarded to be the default. Therefore a transformation to EInt
+takes place in case the datatype couldn't be determined or the proxy for
+the datatype couldn't be resolved (the latter one is for xsd:int usually true).
+
+Lowerbound and upperbound are set to the following defaults:
+lowerBound = 0
+upperBound = 1

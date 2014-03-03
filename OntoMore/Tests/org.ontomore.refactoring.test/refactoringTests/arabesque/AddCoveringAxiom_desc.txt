@@ -1,0 +1,28 @@
+----------------------------
+## Add Covering Axiom
+----------------------------
+-- Description
+Adds an axiom to the selected class, that states that it is the subclass of the union of all its subclasses.
+That means the class holds only individuals of one of its subclasses. The class the therefore "covered".
+
+-- Generic Refactoring
+nothing applicable
+
+-- Manchester OWL Syntax
+
+Class: Size
+
+Class: LargeSize
+	SubClassOf: Size
+	
+Class: MediumSize
+	SubClassOf: Size
+	
+Class: SmallSize
+	SubClassOf: Size
+
+==>
+
+Class: Size
+	SubClassOf: (LargeSize or MediumSize or SmallSize)
+

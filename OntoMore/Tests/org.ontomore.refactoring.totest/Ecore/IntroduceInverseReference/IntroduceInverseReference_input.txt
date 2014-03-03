@@ -1,0 +1,3 @@
+Selected element := EClass::Employee --> EReference::hasProject
+
+name (EReference) := hasEmployee
