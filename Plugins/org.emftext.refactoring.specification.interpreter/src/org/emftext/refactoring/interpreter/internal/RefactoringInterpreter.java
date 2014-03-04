@@ -18,8 +18,9 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -100,13 +101,12 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 
 	private IRefactoringFakeInterpreter fakeInterpreter;
 
-//	private Map<EObject, IValueProvider<?, ?>> valueProviderMap;
 	private IValueProviderFactory valueProviderFactory;
 
 	public RefactoringInterpreter(IRefactoringPostProcessor postProcessor) {
 		this.postProcessor = postProcessor;
-		roleRuntimeInstanceMap = new LinkedHashMap<Role, List<EObject>>();
-		roleRuntimeInstanceURIMap = new LinkedHashMap<Role, List<URI>>();
+		roleRuntimeInstanceMap = new HashMap<Role, List<EObject>>();
+		roleRuntimeInstanceURIMap = new HashMap<Role, List<URI>>();
 		resourcesToSave = new LinkedList<Resource>();
 //		valueProviderMap = new LinkedHashMap<EObject, IValueProvider<?, ?>>();
 	}
@@ -499,7 +499,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	private void putEObjectIntoRoleRuntimeInstanceMap(Role role, EObject object) {
 		List<EObject> instanceList = roleRuntimeInstanceMap.get(role);
 		if (instanceList == null) {
-			instanceList = new LinkedList<EObject>();
+			instanceList = new ArrayList<EObject>();
 			roleRuntimeInstanceMap.put(role, instanceList);
 		}
 		if (!instanceList.contains(object)) {
