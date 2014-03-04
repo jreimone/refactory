@@ -22,6 +22,24 @@ import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlPackage;
 import org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation;
 import org.emftext.language.owl.resource.owl.mopp.OwlResourceFactory;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
+import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecificationPackage;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingResourceFactory;
+import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.language.refactoring.roles.RolesPackage;
+import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
+import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
+import org.emftext.language.refactoring.specification.resource.mopp.RefspecMetaInformation;
+import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
+import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
+import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
+import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
 import org.junit.Before;
 import org.junit.Test;
 import org.modelrefactoring.evolution.registry.IKnowledgeBase;
@@ -33,9 +51,19 @@ public class OWL2EcoreCoRefactoringTest {
 	private static final String INPUT_FILE_ECORE	= "RenameElement_IN.text.ecore";
 	private static final String INPUT_FILE_OWL		= "RenameElement_IN.owl";
 	
+	private static final String INPUT_RENAMEX		= "org.emftext.refactoring.renameX";
+	private static final String INPUT_ROLEMODEL		= "rolemodel/RenameX.rolestext";
+	private static final String INPUT_REFSPEC		= "refspec/RenameX.refspec";
+	
+	private static final String INPUT_RENAME_OWL			= "org.ontomore.refactoring";
+	private static final String INPUT_RENAME_OWL_MAPPING	= "rolemappings/rename.rolemapping";
+	private static final String INPUT_RENAME_ECORE			= "org.emftext.refactoring.mappings.ecore";
+	private static final String INPUT_RENAME_ECORE_MAPPING	= "rolemappings/renameElement.rolemapping";
+	
 	// input
 	private OntologyDocument ontology;
 	private org.emftext.language.owl.Class owlClass;
+	private RoleMapping roleMappingOwl;
 	
 	// output
 	private EPackage metamodel;
@@ -44,9 +72,11 @@ public class OWL2EcoreCoRefactoringTest {
 	@Before
 	public void init(){
 		registerLanguages();
+		registerRefactorings();
 		loadModels();
 		registerDependencies();
 	}
+
 
 	@Test
 	public void testCoRefactoring(){
@@ -56,6 +86,23 @@ public class OWL2EcoreCoRefactoringTest {
 		Resource resource = ontology.eResource();
 		Map<EObject, Collection<EObject>> dependencies = knowledgeBase.getDependencies(resource.getURI(), resource.getResourceSet());
 		assertTrue("no dependencies found for " + resource, dependencies != null && dependencies.size() > 0);
+	}
+	
+	private void registerRefactorings() {
+		RoleModel roleModel = loadModelByType("../" + INPUT_RENAMEX + "/" + INPUT_ROLEMODEL, RoleModel.class);
+		RefactoringSpecification refSpec = loadModelByType("../" + INPUT_RENAMEX + "/" + INPUT_REFSPEC, RefactoringSpecification.class);
+		RoleMappingModel roleMappingModel = loadModelByType("../" + INPUT_RENAME_OWL + "/" + INPUT_RENAME_OWL_MAPPING, RoleMappingModel.class);
+		roleMappingOwl = findFirstElementWithPropertyAndValue(roleMappingModel, "name", "Rename Element", RoleMapping.class);
+		roleMappingModel = loadModelByType("../" + INPUT_RENAME_ECORE + "/" + INPUT_RENAME_ECORE_MAPPING, RoleMappingModel.class);
+		RoleMapping roleMappingEcore = findFirstElementWithPropertyAndValue(roleMappingModel, "name", "Rename EElement", RoleMapping.class);
+		try {
+			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
+			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
+			IRoleMappingRegistry.INSTANCE.registerRoleMapping(roleMappingOwl);
+			IRoleMappingRegistry.INSTANCE.registerRoleMapping(roleMappingEcore);
+		} catch (RoleModelAlreadyRegisteredException | RefSpecAlreadyRegisteredException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void registerDependencies() {
@@ -114,5 +161,12 @@ public class OWL2EcoreCoRefactoringTest {
 		// OWL
 		EPackage.Registry.INSTANCE.put(OwlPackage.eNS_URI, OwlPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new OwlMetaInformation().getSyntaxName(), new OwlResourceFactory());
+		// Refactoring
+		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolestextMetaInformation().getSyntaxName(), new RolestextResourceFactory());
+		EPackage.Registry.INSTANCE.put(RefactoringSpecificationPackage.eNS_URI, RefactoringSpecificationPackage.eINSTANCE);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RefspecMetaInformation().getSyntaxName(), new RefspecResourceFactory());
+		EPackage.Registry.INSTANCE.put(RolemappingPackage.eNS_URI, RolemappingPackage.eINSTANCE);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolemappingMetaInformation().getSyntaxName(), new RolemappingResourceFactory());
 	}
 }
