@@ -3,6 +3,8 @@ package org.modelrefactoring.corefactoring.test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,10 @@ import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextM
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecMetaInformation;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
+import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.interpreter.IValueProviderFactory;
+import org.emftext.refactoring.interpreter.RefactorerFactory;
+import org.emftext.refactoring.ltk.ModelRefactoringDescriptor;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
@@ -47,6 +53,9 @@ import org.modelrefactoring.evolution.registry.IKnowledgeBaseRegistry;
 
 public class OWL2EcoreCoRefactoringTest {
 
+	private static final String OUT					= "_OUT";
+	private static final String IN 					= "_IN";
+	
 	private static final String INPUT_FOLDER		= "input";
 	private static final String INPUT_FILE_ECORE	= "RenameElement_IN.text.ecore";
 	private static final String INPUT_FILE_OWL		= "RenameElement_IN.owl";
@@ -60,6 +69,8 @@ public class OWL2EcoreCoRefactoringTest {
 	private static final String INPUT_RENAME_ECORE			= "org.emftext.refactoring.mappings.ecore";
 	private static final String INPUT_RENAME_ECORE_MAPPING	= "rolemappings/renameElement.rolemapping";
 	
+	private static final String INPUT_NEW_NAME				= "Human";
+	
 	// input
 	private OntologyDocument ontology;
 	private org.emftext.language.owl.Class owlClass;
@@ -68,6 +79,7 @@ public class OWL2EcoreCoRefactoringTest {
 	// output
 	private EPackage metamodel;
 	private EClass ecoreClass;
+	private ModelRefactoringDescriptor descriptor;
 	
 	@Before
 	public void init(){
@@ -75,6 +87,7 @@ public class OWL2EcoreCoRefactoringTest {
 		registerRefactorings();
 		loadModels();
 		registerDependencies();
+		createAndExecuteRefactoring();
 	}
 
 
@@ -86,6 +99,28 @@ public class OWL2EcoreCoRefactoringTest {
 		Resource resource = ontology.eResource();
 		Map<EObject, Collection<EObject>> dependencies = knowledgeBase.getDependencies(resource.getURI(), resource.getResourceSet());
 		assertTrue("no dependencies found for " + resource, dependencies != null && dependencies.size() > 0);
+	}
+	
+	private void createAndExecuteRefactoring() {
+		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(ontology.eResource(), roleMappingOwl);
+		assertNotNull("refactorer couldn't be created", refactorer);
+		List<org.emftext.language.owl.Class> selection = Arrays.asList(new org.emftext.language.owl.Class[]{owlClass});
+		refactorer.setInput(selection);
+		IValueProviderFactory factory = new TestValueProviderFactory(INPUT_NEW_NAME);
+		refactorer.setValueProviderFactory(factory);
+		EObject refactoredModel = refactorer.refactor();
+		assertNotNull("refactored model mustn't be null", refactoredModel);
+		ResourceSet rs = new ResourceSetImpl();
+		File file = new File(INPUT_FOLDER + "/" + INPUT_FILE_OWL.replace(IN, OUT));
+		URI uri = URI.createFileURI(file.getAbsolutePath());
+		Resource resource = rs.createResource(uri);
+		resource.getContents().add(refactoredModel);
+		try {
+			resource.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		descriptor = new ModelRefactoringDescriptor(refactorer);
 	}
 	
 	private void registerRefactorings() {
