@@ -20,6 +20,7 @@ import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
@@ -29,6 +30,7 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 	protected static final String ID_RESOURCE			= "resource";
 	protected static final String ID_METAMODEL			= "metamodel";
 	protected static final String ID_ROLEMAPPING		= "rolemapping";
+	protected static final String ID_ROLE_BINDINGS		= "rolebindings";
 	
 	private IRefactorer refactorer;
 	
@@ -91,9 +93,11 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 	public static String getProjectID(IRefactorer refactorer) {
 		String projectID = null;
 		IFile file = getFileFromResource(refactorer);
-		IProject project = file.getProject();
-		if(project != null){
-			projectID = project.getName();
+		if(file != null){
+			IProject project = file.getProject();
+			if(project != null){
+				projectID = project.getName();
+			}
 		}
 		return projectID;
 	}
@@ -115,6 +119,11 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 		return null;
 	}
 
+	/**
+	 * Generates an ID for identifying this executed refactoring descriptor in the refactoring history.
+	 * @param refactorer
+	 * @return
+	 */
 	public static String generateID(IRefactorer refactorer) {
 		RoleMapping roleMapping = refactorer.getRoleMapping();
 		return generateRefactoringID(roleMapping);
@@ -128,7 +137,7 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 	public static String generateRefactoringID(RoleMapping roleMapping) {
 		IConfigurationElement element = IRoleMappingRegistry.INSTANCE.getContributorForRoleMapping(roleMapping);
 		if(element == null){ // case when a role mapping is added temporarily to the registry with right-clicking in the editor
-			return null;
+			return roleMapping.getName().replace(" ", "");
 		}
 		String id = element.getContributor().getName() + "." + roleMapping.getName().replace(" ", "");
 		return id;
@@ -158,6 +167,29 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 		RoleMapping roleMapping = refactorer.getRoleMapping();
 		arguments.put(ID_ROLEMAPPING, roleMapping.getName());
 		arguments.put(ID_METAMODEL, roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI());
+		String roleBinding = "";
+		Map<Role, List<EObject>> roleBindings = refactorer.getInterpreter().getRoleRuntimeInstances();
+		for (Role boundRole : roleBindings.keySet()) {
+			List<EObject> boundElements = roleBindings.get(boundRole);
+			roleBinding += boundRole.getName() + "=";
+			for (EObject boundElement : boundElements) {
+				roleBinding += EcoreUtil.getURI(boundElement).toString() + ";";
+			}
+			roleBinding = roleBinding.substring(0, roleBinding.length() - 1) + "\n";
+		}
+		if(roleBinding.length() >= 1){
+			roleBinding = roleBinding.substring(0, roleBinding.length() - 1);
+			arguments.put(ID_ROLE_BINDINGS, roleBinding);
+		}
 		return arguments;
+	}
+
+	/**
+	 * Returns the refactorer which executed the refactoring to which this descriptor corresponds.
+	 * 
+	 * @return
+	 */
+	public IRefactorer getRefactorer() {
+		return refactorer;
 	}
 }

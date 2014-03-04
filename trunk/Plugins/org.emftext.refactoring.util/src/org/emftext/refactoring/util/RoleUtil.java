@@ -383,4 +383,22 @@ public class RoleUtil {
 
 		return typedObjects;
 	}
+
+	/**
+	 * Returns the role in the <code>roleMapping</code> having the given <code>roleName</code>.
+	 * If no such role is contained <code>null</code> is returned.
+	 * 
+	 * @param roleMapping
+	 * @param roleName
+	 * @return
+	 */
+	public static Role getRoleByName(RoleMapping roleMapping, String roleName) {
+		List<Role> mappedRoles = roleMapping.getAllMappedRoles();
+		for (Role role : mappedRoles) {
+			if(role.getName().equals(roleName)){
+				return role;
+			}
+		}
+		return null;
+	}
 }
