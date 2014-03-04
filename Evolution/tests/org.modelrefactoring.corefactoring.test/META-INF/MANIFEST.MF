@@ -20,4 +20,7 @@ Require-Bundle: org.modelrefactoring.corefactoring,
  org.emftext.language.refactoring.specification.resource.refspec,
  org.emftext.language.refactoring.specification,
  org.emftext.language.refactoring.rolemapping,
- org.emftext.language.refactoring.rolemapping.resource.rolemapping
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping,
+ org.emftext.refactoring.ui,
+ org.emftext.refactoring.specification.interpreter,
+ org.eclipse.swt
