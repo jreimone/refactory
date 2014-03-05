@@ -557,4 +557,10 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	public IConfigurationElement getContributorForRoleMapping(RoleMapping roleMapping) {
 		return contributorMap.get(roleMapping);
 	}
+
+	@Override
+	public RoleMapping getRoleMappingByName(EPackage metamodel, String roleMappingName) {
+		Map<String, RoleMapping> roleMappings = getRoleMappingsForUri(metamodel.getNsURI());
+		return roleMappings.get(roleMappingName);
+	}
 }

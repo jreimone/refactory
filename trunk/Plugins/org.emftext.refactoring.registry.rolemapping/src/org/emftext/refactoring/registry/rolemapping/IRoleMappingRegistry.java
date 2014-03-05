@@ -22,6 +22,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -209,4 +210,14 @@ public interface IRoleMappingRegistry {
 	 * @return
 	 */
 	public List<Map.Entry<Object, String>> getPostConditionsForRoleMapping(RoleMapping mapping);
+
+	/**
+	 * Searches for all registered rolemappings of the given <code>metamodel</code>.
+	 * Returns the rolemapping having the given <code>roleMappingName</code>. 
+	 * Returns <code>null</code> if no such rolemapping is registered. 
+	 * @param metamodel
+	 * @param roleMappingName
+	 * @return
+	 */
+	public RoleMapping getRoleMappingByName(EPackage metamodel, String roleMappingName);
 }
