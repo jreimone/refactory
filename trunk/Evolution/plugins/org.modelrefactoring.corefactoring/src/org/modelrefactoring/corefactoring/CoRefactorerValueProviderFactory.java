@@ -6,8 +6,14 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.IValueProviderFactory;
+import org.mvel2.MVEL;
+import org.mvel2.ParserContext;
+import org.mvel2.integration.PropertyHandler;
+import org.mvel2.integration.PropertyHandlerFactory;
+import org.mvel2.integration.VariableResolverFactory;
 
 public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 
@@ -32,7 +38,12 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 	}
 
 	private void mvelInterpretation() {
-		
+		ParserContext parserContext = ParserContext.create();
+		PropertyHandler roleModelPropertyHandler = new RoleModelPropertyHandler(initialRoleMapping, roleBindings, dependentRoleMapping, dependentModel);
+		PropertyHandlerFactory.registerPropertyHandler(RoleModel.class, roleModelPropertyHandler);
+		VariableResolverFactory resolverFactory = new RoleBindingResolverFactory(initialRoleMapping, roleBindings, dependentRoleMapping, dependentModel);
+		Object result = MVEL.eval(binding, resolverFactory);
+		System.out.println(result);
 	}
 
 	@Override
