@@ -18,5 +18,7 @@ Export-Package: org.modelrefactoring.evolution.megamodel,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.modelrefactoring.evolution.coed,
+ org.emftext.language.refactoring.rolemapping;visibility:=reexport,
+ org.emftext.language.refactoring.roles;visibility:=reexport,
  org.eclipse.core.resources
 Bundle-ActivationPolicy: lazy

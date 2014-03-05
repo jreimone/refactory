@@ -97,7 +97,6 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 
 		// Initialize simple dependencies
 		CoedPackage.eINSTANCE.eClass();
-		EcorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		MegamodelPackageImpl theMegamodelPackage = (MegamodelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MegamodelPackage.eNS_URI) instanceof MegamodelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MegamodelPackage.eNS_URI) : MegamodelPackage.eINSTANCE);
@@ -154,7 +153,7 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDomainSpecificEvolutionSpecification_Metamodel() {
+	public EReference getDomainSpecificEvolutionSpecification_ReferenceModel() {
 		return (EReference)domainSpecificEvolutionSpecificationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -217,7 +216,7 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 		createEReference(codsEClass, CODS__DSES);
 
 		domainSpecificEvolutionSpecificationEClass = createEClass(DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION);
-		createEReference(domainSpecificEvolutionSpecificationEClass, DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL);
+		createEReference(domainSpecificEvolutionSpecificationEClass, DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL);
 		createEReference(domainSpecificEvolutionSpecificationEClass, DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED);
 		createEReference(domainSpecificEvolutionSpecificationEClass, DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION);
 
@@ -263,7 +262,7 @@ public class CodsPackageImpl extends EPackageImpl implements CodsPackage {
 		initEReference(getCODS_DSES(), this.getDomainSpecificEvolutionSpecification(), null, "DSES", null, 0, -1, org.modelrefactoring.evolution.megamodel.cods.CODS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainSpecificEvolutionSpecificationEClass, DomainSpecificEvolutionSpecification.class, "DomainSpecificEvolutionSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDomainSpecificEvolutionSpecification_Metamodel(), theArchitecturePackage.getMetaModel(), null, "metamodel", null, 1, 1, DomainSpecificEvolutionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainSpecificEvolutionSpecification_ReferenceModel(), theArchitecturePackage.getReferenceModel(), null, "referenceModel", null, 1, 1, DomainSpecificEvolutionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainSpecificEvolutionSpecification_ED(), this.getEvolutionDefinition(), null, "ED", null, 0, 1, DomainSpecificEvolutionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainSpecificEvolutionSpecification_CoEvolutionDefinition(), theCoedPackage.getCoEvolutionDefinition(), null, "coEvolutionDefinition", null, 0, 1, DomainSpecificEvolutionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

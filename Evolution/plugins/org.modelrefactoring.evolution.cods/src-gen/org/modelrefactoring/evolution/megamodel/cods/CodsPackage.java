@@ -170,13 +170,13 @@ public interface CodsPackage extends EPackage {
 	int DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Metamodel</b></em>' reference.
+	 * The feature id for the '<em><b>Reference Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL = 0;
+	int DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL = 0;
 
 	/**
 	 * The feature id for the '<em><b>ED</b></em>' containment reference.
@@ -256,15 +256,15 @@ public interface CodsPackage extends EPackage {
 	EClass getDomainSpecificEvolutionSpecification();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getMetamodel <em>Metamodel</em>}'.
+	 * Returns the meta object for the reference '{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getReferenceModel <em>Reference Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Metamodel</em>'.
-	 * @see org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getMetamodel()
+	 * @return the meta object for the reference '<em>Reference Model</em>'.
+	 * @see org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getReferenceModel()
 	 * @see #getDomainSpecificEvolutionSpecification()
 	 * @generated
 	 */
-	EReference getDomainSpecificEvolutionSpecification_Metamodel();
+	EReference getDomainSpecificEvolutionSpecification_ReferenceModel();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getED <em>ED</em>}'.
@@ -349,12 +349,12 @@ public interface CodsPackage extends EPackage {
 		EClass DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION = eINSTANCE.getDomainSpecificEvolutionSpecification();
 
 		/**
-		 * The meta object literal for the '<em><b>Metamodel</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Reference Model</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL = eINSTANCE.getDomainSpecificEvolutionSpecification_Metamodel();
+		EReference DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL = eINSTANCE.getDomainSpecificEvolutionSpecification_ReferenceModel();
 
 		/**
 		 * The meta object literal for the '<em><b>ED</b></em>' containment reference feature.
