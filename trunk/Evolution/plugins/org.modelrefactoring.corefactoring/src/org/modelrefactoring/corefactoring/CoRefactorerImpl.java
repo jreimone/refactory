@@ -1,6 +1,7 @@
 package org.modelrefactoring.corefactoring;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -10,7 +11,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.interpreter.IValueProviderFactory;
+import org.emftext.refactoring.interpreter.RefactorerFactory;
+import org.emftext.refactoring.util.RoleUtil;
 import org.modelrefactoring.evolution.coed.Action;
 import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
 import org.modelrefactoring.evolution.coed.Event;
@@ -23,7 +28,7 @@ import org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpec
 public class CoRefactorerImpl implements CoRefactorer {
 
 	public static final String MEGAMODEL_STRING	= "http://modelrefactoring.org/megamodel.cods";
-	
+
 	private IRefactorer initialRefactorer;
 	private EObject dependentModel;
 	private List<EObject> dependentElements;
@@ -33,6 +38,8 @@ public class CoRefactorerImpl implements CoRefactorer {
 	private CoEvolutionDefinition coed;
 	private RoleMappingAction rolemappingAction;
 	private RoleMappingEvent rolemappingEvent;
+
+	private IRefactorer dependentRefactorer;
 
 	public CoRefactorerImpl(IRefactorer refactorer, EObject dependentModel, List<EObject> dependentElements) {
 		this.initialRefactorer = refactorer;
@@ -59,37 +66,45 @@ public class CoRefactorerImpl implements CoRefactorer {
 
 	@Override
 	public EObject coRefactor() {
+		IRefactorer dependentRefactorer = getDependentRefactorer();
+		if(dependentRefactorer != null){
+			dependentRefactorer.refactor();
+		}
 		return null;
 	}
 
 	@Override
 	public RoleMapping getDependentRoleMapping() {
-		URI uri = URI.createURI(MEGAMODEL_STRING);
-		ResourceSet rs = new ResourceSetImpl();
-		Resource codsResource = rs.getResource(uri, true);
-		EObject model = codsResource.getContents().get(0);
-		if(model instanceof CODS){
-			CODS cods = (CODS) model;
-			List<DomainSpecificEvolutionSpecification> dses = cods.getDSES();
-			for (DomainSpecificEvolutionSpecification specification : dses) {
-				ReferenceModel referenceModel = specification.getReferenceModel();
-				EPackage metamodel = referenceModel.getPackage();
-				if(metamodelOfDependentModel.equals(metamodel)){
-					CoEvolutionDefinition coed = specification.getCoEvolutionDefinition();
-					Action action = coed.getAction();
-					Event event = coed.getEvent();
-					if(event instanceof RoleMappingEvent && action instanceof RoleMappingAction){
-						RoleMappingEvent rolemappingEvent = (RoleMappingEvent) event;
-						RoleMapping initialRolemapping = rolemappingEvent.getConcreteRefactoring();
-						if(initialRolemapping.equals(initialRefactorer.getRoleMapping())){
-							rolemappingAction = (RoleMappingAction) action;
-							this.rolemappingEvent = rolemappingEvent;
-							this.coed = coed;
-							return rolemappingAction.getConcreteRefactoring();
+		if(rolemappingAction == null){
+			URI uri = URI.createURI(MEGAMODEL_STRING);
+			ResourceSet rs = new ResourceSetImpl();
+			Resource codsResource = rs.getResource(uri, true);
+			EObject model = codsResource.getContents().get(0);
+			if(model instanceof CODS){
+				CODS cods = (CODS) model;
+				List<DomainSpecificEvolutionSpecification> dses = cods.getDSES();
+				for (DomainSpecificEvolutionSpecification specification : dses) {
+					ReferenceModel referenceModel = specification.getReferenceModel();
+					EPackage metamodel = referenceModel.getPackage();
+					if(metamodelOfDependentModel.equals(metamodel)){
+						CoEvolutionDefinition coed = specification.getCoEvolutionDefinition();
+						Action action = coed.getAction();
+						Event event = coed.getEvent();
+						if(event instanceof RoleMappingEvent && action instanceof RoleMappingAction){
+							RoleMappingEvent rolemappingEvent = (RoleMappingEvent) event;
+							RoleMapping initialRolemapping = rolemappingEvent.getConcreteRefactoring();
+							if(initialRolemapping.equals(initialRefactorer.getRoleMapping())){
+								rolemappingAction = (RoleMappingAction) action;
+								this.rolemappingEvent = rolemappingEvent;
+								this.coed = coed;
+								return rolemappingAction.getConcreteRefactoring();
+							}
 						}
 					}
 				}
 			}
+		} else {
+			return rolemappingAction.getConcreteRefactoring();
 		}
 		return null;
 	}
@@ -97,6 +112,24 @@ public class CoRefactorerImpl implements CoRefactorer {
 	@Override
 	public RoleMapping getInitialRoleMapping() {
 		return initialRefactorer.getRoleMapping();
+	}
+
+	@Override
+	public IRefactorer getDependentRefactorer() {
+		if(dependentRefactorer == null){
+			RoleMapping dependentRoleMapping = getDependentRoleMapping();
+			if(dependentRoleMapping != null){
+				dependentRefactorer = RefactorerFactory.eINSTANCE.getRefactorer(dependentModel.eResource(), dependentRoleMapping);
+				List<EObject> elements = getDependentElements();
+				elements = RoleUtil.filterObjectsByInputRoles(elements, dependentRoleMapping);
+				dependentRefactorer.setInput(elements);
+				String binding = rolemappingAction.getBinding();
+				Map<Role, List<EObject>> roleRuntimeInstances = initialRefactorer.getInterpreter().getRoleRuntimeInstances();
+				IValueProviderFactory factory = new CoRefactorerValueProviderFactory(roleRuntimeInstances, initialRefactorer.getRoleMapping(), dependentRoleMapping, dependentModel, binding);
+				dependentRefactorer.setValueProviderFactory(factory);
+			}
+		}
+		return dependentRefactorer;
 	}
 
 }

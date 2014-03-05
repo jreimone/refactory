@@ -15,6 +15,12 @@ public interface CoRefactorer {
 	public IRefactorer getInitialRefactorer();
 
 	/**
+	 * Returns the dependent refactorer.
+	 * @return
+	 */
+	public IRefactorer getDependentRefactorer();
+	
+	/**
 	 * Returns the model which depends on the model which was refactored by the initial refactorer.
 	 * @return
 	 * @see #getInitialRefactorer()

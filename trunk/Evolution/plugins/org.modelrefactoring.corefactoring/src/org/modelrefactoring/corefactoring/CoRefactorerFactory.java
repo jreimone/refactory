@@ -3,12 +3,9 @@ package org.modelrefactoring.corefactoring;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -16,7 +13,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
-import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.modelrefactoring.evolution.registry.IKnowledgeBase;
 import org.modelrefactoring.evolution.registry.IKnowledgeBaseRegistry;
 
