@@ -10,8 +10,8 @@
           eType="#//cods/DomainSpecificEvolutionSpecification" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainSpecificEvolutionSpecification">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" lowerBound="1"
-          eType="#//architecture/MetaModel"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referenceModel" lowerBound="1"
+          eType="#//architecture/ReferenceModel"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ED" eType="#//cods/EvolutionDefinition"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="coEvolutionDefinition"

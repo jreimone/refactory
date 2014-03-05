@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
 
 import org.modelrefactoring.evolution.megamodel.architecture.MetaModel;
+import org.modelrefactoring.evolution.megamodel.architecture.ReferenceModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +17,7 @@ import org.modelrefactoring.evolution.megamodel.architecture.MetaModel;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getMetamodel <em>Metamodel</em>}</li>
+ *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getReferenceModel <em>Reference Model</em>}</li>
  *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getED <em>ED</em>}</li>
  *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getCoEvolutionDefinition <em>Co Evolution Definition</em>}</li>
  * </ul>
@@ -28,30 +29,30 @@ import org.modelrefactoring.evolution.megamodel.architecture.MetaModel;
  */
 public interface DomainSpecificEvolutionSpecification extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Metamodel</b></em>' reference.
+	 * Returns the value of the '<em><b>Reference Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Metamodel</em>' reference isn't clear,
+	 * If the meaning of the '<em>Reference Model</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Metamodel</em>' reference.
-	 * @see #setMetamodel(MetaModel)
-	 * @see org.modelrefactoring.evolution.megamodel.cods.CodsPackage#getDomainSpecificEvolutionSpecification_Metamodel()
+	 * @return the value of the '<em>Reference Model</em>' reference.
+	 * @see #setReferenceModel(ReferenceModel)
+	 * @see org.modelrefactoring.evolution.megamodel.cods.CodsPackage#getDomainSpecificEvolutionSpecification_ReferenceModel()
 	 * @model required="true"
 	 * @generated
 	 */
-	MetaModel getMetamodel();
+	ReferenceModel getReferenceModel();
 
 	/**
-	 * Sets the value of the '{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getMetamodel <em>Metamodel</em>}' reference.
+	 * Sets the value of the '{@link org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification#getReferenceModel <em>Reference Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Metamodel</em>' reference.
-	 * @see #getMetamodel()
+	 * @param value the new value of the '<em>Reference Model</em>' reference.
+	 * @see #getReferenceModel()
 	 * @generated
 	 */
-	void setMetamodel(MetaModel value);
+	void setReferenceModel(ReferenceModel value);
 
 	/**
 	 * Returns the value of the '<em><b>ED</b></em>' containment reference.

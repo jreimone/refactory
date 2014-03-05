@@ -80,7 +80,6 @@ public class MegamodelPackageImpl extends EPackageImpl implements MegamodelPacka
 
 		// Initialize simple dependencies
 		CoedPackage.eINSTANCE.eClass();
-		EcorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		CodsPackageImpl theCodsPackage = (CodsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CodsPackage.eNS_URI) instanceof CodsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CodsPackage.eNS_URI) : CodsPackage.eINSTANCE);

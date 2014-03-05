@@ -15,6 +15,7 @@ import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
 
 import org.modelrefactoring.evolution.megamodel.architecture.MetaModel;
 
+import org.modelrefactoring.evolution.megamodel.architecture.ReferenceModel;
 import org.modelrefactoring.evolution.megamodel.cods.CodsPackage;
 import org.modelrefactoring.evolution.megamodel.cods.DomainSpecificEvolutionSpecification;
 import org.modelrefactoring.evolution.megamodel.cods.EvolutionDefinition;
@@ -26,7 +27,7 @@ import org.modelrefactoring.evolution.megamodel.cods.EvolutionDefinition;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.impl.DomainSpecificEvolutionSpecificationImpl#getMetamodel <em>Metamodel</em>}</li>
+ *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.impl.DomainSpecificEvolutionSpecificationImpl#getReferenceModel <em>Reference Model</em>}</li>
  *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.impl.DomainSpecificEvolutionSpecificationImpl#getED <em>ED</em>}</li>
  *   <li>{@link org.modelrefactoring.evolution.megamodel.cods.impl.DomainSpecificEvolutionSpecificationImpl#getCoEvolutionDefinition <em>Co Evolution Definition</em>}</li>
  * </ul>
@@ -36,14 +37,14 @@ import org.modelrefactoring.evolution.megamodel.cods.EvolutionDefinition;
  */
 public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implements DomainSpecificEvolutionSpecification {
 	/**
-	 * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' reference.
+	 * The cached value of the '{@link #getReferenceModel() <em>Reference Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetamodel()
+	 * @see #getReferenceModel()
 	 * @generated
 	 * @ordered
 	 */
-	protected MetaModel metamodel;
+	protected ReferenceModel referenceModel;
 
 	/**
 	 * The cached value of the '{@link #getED() <em>ED</em>}' containment reference.
@@ -89,16 +90,16 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetaModel getMetamodel() {
-		if (metamodel != null && metamodel.eIsProxy()) {
-			InternalEObject oldMetamodel = (InternalEObject)metamodel;
-			metamodel = (MetaModel)eResolveProxy(oldMetamodel);
-			if (metamodel != oldMetamodel) {
+	public ReferenceModel getReferenceModel() {
+		if (referenceModel != null && referenceModel.eIsProxy()) {
+			InternalEObject oldReferenceModel = (InternalEObject)referenceModel;
+			referenceModel = (ReferenceModel)eResolveProxy(oldReferenceModel);
+			if (referenceModel != oldReferenceModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL, oldMetamodel, metamodel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL, oldReferenceModel, referenceModel));
 			}
 		}
-		return metamodel;
+		return referenceModel;
 	}
 
 	/**
@@ -106,8 +107,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetaModel basicGetMetamodel() {
-		return metamodel;
+	public ReferenceModel basicGetReferenceModel() {
+		return referenceModel;
 	}
 
 	/**
@@ -115,11 +116,11 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMetamodel(MetaModel newMetamodel) {
-		MetaModel oldMetamodel = metamodel;
-		metamodel = newMetamodel;
+	public void setReferenceModel(ReferenceModel newReferenceModel) {
+		ReferenceModel oldReferenceModel = referenceModel;
+		referenceModel = newReferenceModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL, oldMetamodel, metamodel));
+			eNotify(new ENotificationImpl(this, Notification.SET, CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL, oldReferenceModel, referenceModel));
 	}
 
 	/**
@@ -232,9 +233,9 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
-				if (resolve) return getMetamodel();
-				return basicGetMetamodel();
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL:
+				if (resolve) return getReferenceModel();
+				return basicGetReferenceModel();
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				return getED();
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION:
@@ -251,8 +252,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
-				setMetamodel((MetaModel)newValue);
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL:
+				setReferenceModel((ReferenceModel)newValue);
 				return;
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				setED((EvolutionDefinition)newValue);
@@ -272,8 +273,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
-				setMetamodel((MetaModel)null);
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL:
+				setReferenceModel((ReferenceModel)null);
 				return;
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				setED((EvolutionDefinition)null);
@@ -293,8 +294,8 @@ public class DomainSpecificEvolutionSpecificationImpl extends EObjectImpl implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__METAMODEL:
-				return metamodel != null;
+			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__REFERENCE_MODEL:
+				return referenceModel != null;
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__ED:
 				return ed != null;
 			case CodsPackage.DOMAIN_SPECIFIC_EVOLUTION_SPECIFICATION__CO_EVOLUTION_DEFINITION:
