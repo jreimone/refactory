@@ -16,7 +16,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlPackage;
@@ -50,7 +53,6 @@ import org.junit.Test;
 import org.modelrefactoring.corefactoring.CoRefactorer;
 import org.modelrefactoring.corefactoring.CoRefactorerFactory;
 import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
-import org.modelrefactoring.evolution.coed.CoedFactory;
 import org.modelrefactoring.evolution.coed.CoedPackage;
 import org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedMetaInformation;
 import org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedResourceFactory;
@@ -244,6 +246,7 @@ public class OWL2EcoreCoRefactoringTest {
 		CoEvolutionDefinition coed = loadModelByType(INPUT_FOLDER + "/" + INPUT_COED, CoEvolutionDefinition.class);
 		DomainSpecificEvolutionSpecification evolutionSpecification = CodsFactory.eINSTANCE.createDomainSpecificEvolutionSpecification();
 		evolutionSpecification.setCoEvolutionDefinition(coed);
+		evolutionSpecification.setReferenceModel(ecoreMetaMetaModel);
 		cods.getDSES().add(evolutionSpecification);
 	}
 
@@ -292,5 +295,13 @@ public class OWL2EcoreCoRefactoringTest {
 		codsMetaModel.setPackage(MegamodelPackage.eINSTANCE);
 		cods.setConformsTo(codsMetaModel);
 		cods.getModels().add(codsMetaModel);
+		String codsString = "megamodel.cods";
+		String uriString = "http://modelrefactoring.org/" + codsString;
+		URI uri = URI.createURI(uriString);
+		Resource resource = new ResourceImpl(uri);
+		resource.getContents().add(cods);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("cods", new CODSResourceFactoryImpl(resource));
+//		uri = URI.createURI(uriString);
+//		URIConverter.URI_MAP.put(uri, resource.getURI());
 	}
 }
