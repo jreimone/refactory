@@ -23,13 +23,9 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.swt.widgets.Composite;
-import org.emftext.refactoring.interpreter.internal.ASSIGNInterpreter;
 
 /**
- * Interface for implementations providing values for attributes. It is needed to not ask for the values
- * in dialog when running the interpreter in a JUnit test. Therefore the internal package org.emftext.refactoring.interpreter.internal
- * has one plugin as friend defined: org.emftext.refactoring.tests
- * By this only the test plugin can invoke the static method {@link ASSIGNInterpreter#setValueProvider(Class)}
+ * Interface for implementations providing values for attributes.
  * 
  * @author Jan Reimann
  *
