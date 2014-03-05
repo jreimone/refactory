@@ -23,4 +23,7 @@ Require-Bundle: org.modelrefactoring.corefactoring,
  org.emftext.language.refactoring.rolemapping.resource.rolemapping,
  org.emftext.refactoring.ui,
  org.emftext.refactoring.specification.interpreter,
- org.eclipse.swt
+ org.eclipse.swt,
+ org.modelrefactoring.evolution.cods,
+ org.modelrefactoring.evolution.coed,
+ org.modelrefactoring.evolution.coed.resource.coed
