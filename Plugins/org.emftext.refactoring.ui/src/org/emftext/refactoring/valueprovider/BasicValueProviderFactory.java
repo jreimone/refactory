@@ -32,7 +32,7 @@ import org.emftext.refactoring.interpreter.IValueProviderFactory;
 public class BasicValueProviderFactory implements IValueProviderFactory {
 
 	private IRefactorer refactorer;
-	private Map<EObject, IValueProvider<?, ?>> valueProviderMap;
+	protected Map<EObject, IValueProvider<?, ?>> valueProviderMap;
 
 	public BasicValueProviderFactory(IRefactorer refactorer) {
 		super();
