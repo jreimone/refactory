@@ -18,4 +18,6 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.modelrefactoring.evolution.registry,
  org.emftext.language.refactoring.rolemapping,
  org.modelrefactoring.evolution.cods,
- org.modelrefactoring.evolution.coed
+ org.modelrefactoring.evolution.coed,
+ org.emftext.refactoring.util,
+ org.modelrefactoring.mvel
