@@ -86,7 +86,7 @@ public class OWL2EcoreCoRefactoringTest {
 	private static final String INPUT_RENAME_ECORE				= "org.emftext.refactoring.mappings.ecore";
 	private static final String INPUT_RENAME_ECORE_MAPPING		= "rolemappings/renameElement.rolemapping";
 
-	private static final String INPUT_COED						= "ecore_owl.coed";
+	private static final String INPUT_COED						= "ecore_owl2.coed";
 	private static final String INPUT_NEW_NAME					= "Human";
 	
 	private static MetaMetaModel ecoreMetaMetaModel;
