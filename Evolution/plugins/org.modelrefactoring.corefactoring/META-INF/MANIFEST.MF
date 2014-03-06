@@ -20,4 +20,5 @@ Require-Bundle: org.eclipse.e4.ui.workbench,
  org.modelrefactoring.evolution.cods,
  org.modelrefactoring.evolution.coed,
  org.emftext.refactoring.util,
- org.modelrefactoring.mvel
+ org.modelrefactoring.mvel,
+ org.eclipse.swt

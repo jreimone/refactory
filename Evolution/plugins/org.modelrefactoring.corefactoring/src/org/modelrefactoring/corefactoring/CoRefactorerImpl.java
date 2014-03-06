@@ -123,9 +123,8 @@ public class CoRefactorerImpl implements CoRefactorer {
 				List<EObject> elements = getDependentElements();
 				elements = RoleUtil.filterObjectsByInputRoles(elements, dependentRoleMapping);
 				dependentRefactorer.setInput(elements);
-				String binding = rolemappingAction.getBinding();
-				Map<Role, List<EObject>> roleRuntimeInstances = initialRefactorer.getInterpreter().getRoleRuntimeInstances();
-				IValueProviderFactory factory = new CoRefactorerValueProviderFactory(roleRuntimeInstances, initialRefactorer.getRoleMapping(), dependentRoleMapping, dependentModel, binding);
+				String bindingExpression = rolemappingAction.getBinding();
+				IValueProviderFactory factory = new CoRefactorerValueProviderFactory(initialRefactorer, dependentRefactorer, bindingExpression);
 				dependentRefactorer.setValueProviderFactory(factory);
 			}
 		}
