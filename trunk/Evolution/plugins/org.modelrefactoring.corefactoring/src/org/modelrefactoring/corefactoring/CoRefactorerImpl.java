@@ -68,7 +68,7 @@ public class CoRefactorerImpl implements CoRefactorer {
 	public EObject coRefactor() {
 		IRefactorer dependentRefactorer = getDependentRefactorer();
 		if(dependentRefactorer != null){
-			dependentRefactorer.refactor();
+			return dependentRefactorer.refactor();
 		}
 		return null;
 	}

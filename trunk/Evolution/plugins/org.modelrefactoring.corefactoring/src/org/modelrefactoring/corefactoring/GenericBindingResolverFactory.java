@@ -1,5 +1,9 @@
 package org.modelrefactoring.corefactoring;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.mvel2.integration.VariableResolver;
 import org.mvel2.integration.impl.BaseVariableResolverFactory;
@@ -10,16 +14,8 @@ public class GenericBindingResolverFactory extends BaseVariableResolverFactory {
 
 	private GenericBindingResolver genericResolver;
 
-	private IRefactorer initialRefactorer;
-	private IRefactorer dependentRefactorer;
-
-	private CoRefactoringValueProvider genericValueProvider;
-
-	public GenericBindingResolverFactory(IRefactorer initialRefactorer, IRefactorer dependentRefactorer, CoRefactoringValueProvider genericValueProvider) {
-		this.genericValueProvider = genericValueProvider;
-		this.genericResolver = new GenericBindingResolver(initialRefactorer, dependentRefactorer, genericValueProvider);
-		this.initialRefactorer = initialRefactorer;
-		this.dependentRefactorer = dependentRefactorer;
+	public GenericBindingResolverFactory(IRefactorer initialRefactorer, EObject dependentModel, RoleMapping dependentRoleMapping, List<EObject> dependentInput) {
+		this.genericResolver = new GenericBindingResolver(initialRefactorer, dependentModel, dependentRoleMapping, dependentInput);
 	}
 
 	@Override

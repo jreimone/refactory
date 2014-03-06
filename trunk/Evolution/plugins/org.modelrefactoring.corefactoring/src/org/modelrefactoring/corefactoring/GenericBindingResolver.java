@@ -26,8 +26,6 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 	
 	private String variableNameToResolve;
 	private IRefactorer initialRefactorer;
-	private IRefactorer dependentRefactorer;
-	private CoRefactoringValueProvider genericValueProvider;
 	
 	private Map<String, Object> inVariables = new HashMap<String, Object>();
 	private Map<String, Object> outVariables = new HashMap<String, Object>();
@@ -36,13 +34,14 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 	private boolean isOUTcontext;
 	private boolean isUndefined;
 
-	public GenericBindingResolver(IRefactorer initialRefactorer, IRefactorer dependentRefactorer, CoRefactoringValueProvider genericValueProvider) {
+	private RoleMapping dependentRoleMapping;
+
+	public GenericBindingResolver(IRefactorer initialRefactorer, EObject dependentModel, RoleMapping dependentRoleMapping, List<EObject> dependentInput) {
 		super(Util.getInRoleNameBindings(initialRefactorer), "Foo");
 		this.initialRefactorer = initialRefactorer;
-		this.dependentRefactorer = dependentRefactorer;
-		this.genericValueProvider = genericValueProvider;
+		this.dependentRoleMapping = dependentRoleMapping;
 		inVariables.putAll(Util.getInRoleNameBindings(initialRefactorer));
-		outVariables.putAll(Util.getOutRoleNameBindings(dependentRefactorer));
+		outVariables.putAll(Util.getOutRoleNameBindings(dependentModel, dependentRoleMapping, dependentInput));
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -82,6 +81,7 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 		} else {
 			value = undecidedVariables.get(name);
 		}
+		value = specializeValue(value);
 		if(roleElement != null){
 			roleChain.push(roleElement);
 		}
@@ -122,7 +122,7 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 				if(isINcontext && !isUndefined){
 					roleMapping = initialRefactorer.getRoleMapping();
 				} else if(isOUTcontext && !isUndefined) {
-					roleMapping = dependentRefactorer.getRoleMapping();
+					roleMapping = dependentRoleMapping;
 				}
 				Role role = RoleUtil.getRoleByName(roleMapping, propertyName);
 				roleChain.push(role);
@@ -141,7 +141,7 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 						roleMapping = initialRefactorer.getRoleMapping();
 						object = inVariables.get(role.getName());
 					} else if(isOUTcontext){
-						roleMapping = dependentRefactorer.getRoleMapping();
+						roleMapping = dependentRoleMapping;
 						object = outVariables.get(role.getName());
 					}
 					ConcreteMapping concreteMapping = roleMapping.getConcreteMappingForRole(role);
@@ -178,7 +178,6 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 
 	@Override
 	public Object setProperty(String propertyName, Object object, VariableResolverFactory resolverFactory, Object arg3) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
