@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
@@ -38,17 +37,15 @@ public abstract class Util {
 		return bindings;
 	}
 	
-	public static Map<String, Object> getOutRoleNameBindings(IRefactorer dependentRefactorer){
+	public static Map<String, Object> getOutRoleNameBindings(EObject dependentModel, RoleMapping dependentRoleMapping, List<EObject> dependentInput){
 		@SuppressWarnings("unchecked")
 		Map<String, Object> bindings = getRoleNameBindings(Collections.EMPTY_MAP);
-		RoleMapping roleMapping = dependentRefactorer.getRoleMapping();
-		List<EObject> input = dependentRefactorer.getInput();
-		List<Role> roles = roleMapping.getMappedRoleModel().getRoles();
+		List<Role> roles = dependentRoleMapping.getMappedRoleModel().getRoles();
 		for (Role role : roles) {
-			List<EObject> filteredObjects = RoleUtil.filterObjectsByRoles(input, roleMapping, role);
+			List<EObject> filteredObjects = RoleUtil.filterObjectsByRoles(dependentInput, dependentRoleMapping, role);
 			bindings.put(role.getName(), filteredObjects);
 		}
-		bindings.put(OUT, dependentRefactorer.getOriginalModel());
+		bindings.put(OUT, dependentInput);
 		return bindings;
 	}
 	
