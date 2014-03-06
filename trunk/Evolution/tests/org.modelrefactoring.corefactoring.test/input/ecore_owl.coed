@@ -3,5 +3,5 @@ import owl:<http://org.emftext/owl.ecore>
 (
 	incoming refactoring owl:<Rename Element>
 	outgoing corefactoring <Rename EElement> 
-		$OUT.Nameable.name = IN.Nameable.name + "_fromOWL"$
+		$blaBlub = IN; OUT.Nameable.name = blaBlub.Nameable.name + "_fromOWL"$
 )
