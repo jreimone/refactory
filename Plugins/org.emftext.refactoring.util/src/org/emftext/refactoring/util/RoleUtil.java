@@ -40,6 +40,7 @@ import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleAttribute;
 import org.emftext.language.refactoring.roles.RoleModifier;
 
 /**
@@ -397,6 +398,23 @@ public class RoleUtil {
 		for (Role role : mappedRoles) {
 			if(role.getName().equals(roleName)){
 				return role;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the attribute of the given <code>role</code> having the given <code>attributeName</code>.
+	 * If no such attribute exists <code>null</code> is returned.
+	 * @param role
+	 * @param attributeName
+	 * @return
+	 */
+	public static RoleAttribute getAttributeByName(Role role, String attributeName) {
+		List<RoleAttribute> attributes = role.getAttributes();
+		for (RoleAttribute roleAttribute : attributes) {
+			if(roleAttribute.getName().equals(attributeName)){
+				return roleAttribute;
 			}
 		}
 		return null;
