@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.IValueProviderFactory;
 import org.emftext.refactoring.util.InverseableCopier;
 import org.mvel2.MVEL;
-import org.mvel2.ParserContext;
 import org.mvel2.integration.PropertyHandlerFactory;
 
 public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
