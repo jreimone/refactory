@@ -26,4 +26,6 @@ Require-Bundle: org.modelrefactoring.corefactoring,
  org.eclipse.swt,
  org.modelrefactoring.evolution.cods,
  org.modelrefactoring.evolution.coed,
- org.modelrefactoring.evolution.coed.resource.coed
+ org.modelrefactoring.evolution.coed.resource.coed,
+ org.emftext.refactoring.tests.properties,
+ org.emftext.refactoring.tests.properties.resource.testproperties

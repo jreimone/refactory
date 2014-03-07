@@ -16,10 +16,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlPackage;
@@ -72,7 +70,7 @@ public class OWL2EcoreCoRefactoringTest {
 	private static final String OUT								= "_OUT";
 	private static final String IN 								= "_IN";
 
-	private static final String INPUT_FOLDER					= "input";
+	private static final String INPUT_FOLDER					= "testdata/rename";
 	private static final String INPUT_FILE_ECORE				= "RenameElement_IN.text.ecore";
 	private static final String INPUT_FILE_OWL					= "RenameElement_IN.owl";
 
@@ -185,7 +183,7 @@ public class OWL2EcoreCoRefactoringTest {
 			RefactoringSpecification refSpec = loadModelByType("../" + INPUT_RENAMEX + "/" + INPUT_REFSPEC, RefactoringSpecification.class);
 			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
 			RoleMappingModel roleMappingModel = loadModelByType("../" + INPUT_RENAME_OWL + "/" + INPUT_RENAME_OWL_MAPPING, RoleMappingModel.class);
-			RoleMapping roleMappingOwl = findFirstElementWithPropertyAndValue(roleMappingModel, "name", "Rename Element", RoleMapping.class);
+			RoleMapping roleMappingOwl = findFirstElementWithPropertyAndValue(roleMappingModel, "name", INPUT_RENAME_OWL_REFACTORING, RoleMapping.class);
 			roleMappingModel = loadModelByType("../" + INPUT_RENAME_ECORE + "/" + INPUT_RENAME_ECORE_MAPPING, RoleMappingModel.class);
 			RoleMapping roleMappingEcore = findFirstElementWithPropertyAndValue(roleMappingModel, "name", "Rename EElement", RoleMapping.class);
 			IRoleMappingRegistry.INSTANCE.registerRoleMapping(roleMappingOwl);
@@ -301,7 +299,5 @@ public class OWL2EcoreCoRefactoringTest {
 		Resource resource = new ResourceImpl(uri);
 		resource.getContents().add(cods);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("cods", new CODSResourceFactoryImpl(resource));
-//		uri = URI.createURI(uriString);
-//		URIConverter.URI_MAP.put(uri, resource.getURI());
 	}
 }
