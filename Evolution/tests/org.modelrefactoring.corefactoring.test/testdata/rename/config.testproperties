@@ -1,0 +1,30 @@
+// Modelle die refaktoriert werden sollen
+// Datei relativ zum Ordner in dem diese config-Datei liegt
+// müssen "_IN" im Dateinamen haben
+[inputs]
+source	= "RenameElement_IN.owl"
+target	= "RenameElement_IN.text.ecore"
+coed	= "ecore_owl2.coed"
+value	= "Human"
+
+[dependency]
+source	= "ontology[0]/frames[0]"
+target	= "eClassifiers[0]"
+
+// registriere ein generisches Refactoring
+// hierbei sind rolemodel und refspec relativ zu inputFolder anzugeben
+// inputFolder selbst ist relativ zu diesem Test-Plugin
+[refactoring]
+inputFolder	= "../org.emftext.refactoring.renameX"
+rolemodel	= "rolemodel/RenameX.rolestext"
+refspec		= "refspec/RenameX.refspec"
+
+[rolemapping]
+inputFolder	= "../org.ontomore.refactoring"
+rolemapping	= "rolemappings/rename.rolemapping"
+name		= "Rename Element"
+
+[rolemapping]
+inputFolder	= "../org.emftext.refactoring.mappings.ecore"
+rolemapping	= "rolemappings/renameElement.rolemapping"
+name		= "Rename EElement"
