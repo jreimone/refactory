@@ -3,11 +3,11 @@ package org.modelrefactoring.corefactoring.test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -37,6 +37,10 @@ import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextM
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecMetaInformation;
 import org.emftext.language.refactoring.specification.resource.mopp.RefspecResourceFactory;
+import org.emftext.refactoring.interpreter.IRefactorer;
+import org.emftext.refactoring.interpreter.IValueProviderFactory;
+import org.emftext.refactoring.interpreter.RefactorerFactory;
+import org.emftext.refactoring.ltk.ModelRefactoringDescriptor;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
@@ -49,12 +53,18 @@ import org.emftext.refactoring.tests.properties.PropertyModel;
 import org.emftext.refactoring.tests.properties.StringValue;
 import org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation;
 import org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesResourceFactory;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.modelrefactoring.corefactoring.CoRefactorer;
+import org.modelrefactoring.corefactoring.CoRefactorerFactory;
 import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
 import org.modelrefactoring.evolution.coed.CoedPackage;
+import org.modelrefactoring.evolution.coed.Event;
+import org.modelrefactoring.evolution.coed.RoleMappingEvent;
 import org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedMetaInformation;
 import org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedResourceFactory;
 import org.modelrefactoring.evolution.megamodel.MegamodelPackage;
@@ -71,8 +81,11 @@ import org.modelrefactoring.evolution.registry.IKnowledgeBaseRegistry;
 @RunWith(Parameterized.class)
 public class OWL2EcoreCoRefactoringTestSuite {
 
-	private static final String TESTDATA_DIR	= "testdata";
-	private static final String FILE_CONFIG		= "config.testproperties";
+	private static final String OUT						= "_OUT";
+	private static final String IN 						= "_IN";
+	
+	private static final String TESTDATA_DIR			= "testdata";
+	private static final String FILE_CONFIG				= "config.testproperties";
 	
 	private static final String CATEGORY_INPUTS			= "inputs";
 	private static final String CATEGORY_DEPENDENCY		= "dependency";
@@ -88,18 +101,30 @@ public class OWL2EcoreCoRefactoringTestSuite {
 	private static final String KEY_REFSPEC				= "refspec";
 	private static final String KEY_ROLEMAPPING			= CATEGORY_ROLEMAPPING;
 	private static final String KEY_NAME				= "name";
+	private static final String KEY_SOURCE_INPUT 		= "sourceInput";
 	
 	private static MetaMetaModel ecoreMetaMetaModel;
 	private static CODS cods;
+	private ModelRefactoringDescriptor descriptor;
 	
 	@Parameter(0)
 	public File testDataFolder;
 	@Parameter(1)
 	public String testDataFolderName;
 	@Parameter(2)
-	public OntologyDocument ontology;
+	public OntologyDocument sourceModel;
 	@Parameter(3)
-	public EPackage ecoreModel;
+	public EPackage targetModel;
+	@Parameter(4)
+	public String value;
+	@Parameter(5)
+	public List<EObject> selectedElements;
+	@Parameter(6)
+	public String sourceFileName;
+	@Parameter(7)
+	public String targetFileName;
+	@Parameter(8)
+	public CoEvolutionDefinition coed;
 	
 	@Parameters(name = "{1}")
 	public static Collection<Object[]> initParameterData(){
@@ -130,33 +155,37 @@ public class OWL2EcoreCoRefactoringTestSuite {
 					String inputFolder = getValueByKey(category, KEY_INPUTFOLDER);
 					String rolemappingPath = getValueByKey(category, KEY_ROLEMAPPING);
 					String rolemappingName = getValueByKey(category, KEY_NAME);
-					RoleMappingModel roleMappingModel = loadModelByType(inputFolder, RoleMappingModel.class);
+					RoleMappingModel roleMappingModel = loadModelByType(inputFolder + "/" + rolemappingPath, RoleMappingModel.class);
 					RoleMapping roleMapping = findFirstElementWithPropertyAndValue(roleMappingModel, "name", rolemappingName, RoleMapping.class);
 					IRoleMappingRegistry.INSTANCE.registerRoleMapping(roleMapping);
 				}
 				// Inputs
 				Category inputsCategory = getFirstCategoryWithName(categories, CATEGORY_INPUTS);
 				String sourcePath = getValueByKey(inputsCategory, KEY_SOURCE);
-				OntologyDocument ontologyDocument = loadModelByType(file.getAbsolutePath() + "/" + sourcePath, OntologyDocument.class);
+				OntologyDocument sourceModel = loadModelByType(file.getAbsolutePath() + "/" + sourcePath, OntologyDocument.class);
 				String targetPath = getValueByKey(inputsCategory, KEY_TARGET);
-				EPackage ecoreModel = loadModelByType(file.getAbsolutePath() + "/" + targetPath, EPackage.class);
+				EPackage targetModel = loadModelByType(file.getAbsolutePath() + "/" + targetPath, EPackage.class);
 				String coedPath = getValueByKey(inputsCategory, KEY_COED);
-				CoEvolutionDefinition coed = loadModelByType(file.getAbsolutePath() + "/" + targetPath, CoEvolutionDefinition.class);
+				CoEvolutionDefinition coed = loadModelByType(file.getAbsolutePath() + "/" + coedPath, CoEvolutionDefinition.class);
 				DomainSpecificEvolutionSpecification evolutionSpecification = CodsFactory.eINSTANCE.createDomainSpecificEvolutionSpecification();
 				evolutionSpecification.setCoEvolutionDefinition(coed);
 				evolutionSpecification.setReferenceModel(ecoreMetaMetaModel);
 				cods.getDSES().add(evolutionSpecification);
 				String value = getValueByKey(inputsCategory, KEY_VALUE);
+				String selectedElementsQuery = getValueByKey(inputsCategory, KEY_SOURCE_INPUT);
+				List<EObject> selectedElements = QueryUtil.queryModel(sourceModel, selectedElementsQuery);
+				assertNotNull("no elements could be queried", selectedElements);
+				assertTrue("at least 1 element must be contained", selectedElements.size() > 0);
 				// Dependencies
 				List<Category> dependencyCategories = getCategoriesWithName(categories, CATEGORY_DEPENDENCY);
 				for (Category category : dependencyCategories) {
 					String sourceQuery = getValueByKey(category, KEY_SOURCE);
 					String targetQuery = getValueByKey(category, KEY_TARGET);
-					List<EObject> sourceElements = QueryUtil.queryModel(ontologyDocument, sourceQuery);
+					List<EObject> sourceElements = QueryUtil.queryModel(sourceModel, sourceQuery);
 					assertNotNull("no source elements could be queried", sourceElements);
 					assertEquals("only 1 element must be contained in the source", 1, sourceElements.size());
 					EObject sourceElement = sourceElements.get(0);
-					List<EObject> targetElements = QueryUtil.queryModel(ecoreModel, targetQuery);
+					List<EObject> targetElements = QueryUtil.queryModel(targetModel, targetQuery);
 					assertNotNull("no target elements could be queried", targetElements);
 					IKnowledgeBaseRegistry registry = IKnowledgeBaseRegistry.INSTANCE;
 					List<IKnowledgeBase> knowledgeBases = registry.getKnowledgeBases();
@@ -170,10 +199,59 @@ public class OWL2EcoreCoRefactoringTestSuite {
 					}
 				}
 				
-				readData.add(new Object[]{file, file.getName(), ontologyDocument, ecoreModel, maxResultsCount, metamodel.getName(), roleModel.getName()});
+				readData.add(new Object[]{file, file.getName(), sourceModel, targetModel, value, selectedElements, sourcePath, targetPath, coed});
 			}
 		}
 		return readData;
+	}
+	
+	@Before
+	public void init(){
+		createAndExecuteInitialRefactoring();
+	}
+	
+	@Test
+	public void testCoRefactoring(){
+		CoRefactorerFactory factory = new CoRefactorerFactory();
+		List<CoRefactorer> coRefactorers = factory.getCoRefactorers(descriptor.getRefactorer());
+		assertTrue("one co-refactorer has to be determined", coRefactorers != null && coRefactorers.size() == 1);
+		CoRefactorer coRefactorer = coRefactorers.get(0);
+		EObject coRefactoredModel = coRefactorer.coRefactor();
+		assertNotNull("the co-refactored model mustn't be null", coRefactoredModel);
+		assertTrue("co-refactored model must be an EPackage", coRefactoredModel instanceof EPackage);
+		saveModel(coRefactoredModel, testDataFolder.getAbsolutePath() + "/" + targetFileName.replace(IN, OUT));
+	}
+	
+	private void createAndExecuteInitialRefactoring() {
+		Event event = coed.getEvent();
+		assertTrue("event must be an instance of " + RoleMappingEvent.class.getSimpleName(), event instanceof RoleMappingEvent);
+		RoleMappingEvent roleMappingEvent = (RoleMappingEvent) event;
+		RoleMapping sourceRoleMapping = roleMappingEvent.getConcreteRefactoring();
+		IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(sourceModel.eResource(), sourceRoleMapping);
+		assertNotNull("refactorer couldn't be created", refactorer);
+		refactorer.setInput(selectedElements);
+		IValueProviderFactory factory = new TestValueProviderFactory(value);
+		refactorer.setValueProviderFactory(factory);
+		EObject refactoredModel = refactorer.refactor();
+		assertNotNull("refactored model mustn't be null", refactoredModel);
+		saveModel(refactoredModel, testDataFolder.getAbsolutePath() + "/" + sourceFileName.replace(IN, OUT));
+		descriptor = new ModelRefactoringDescriptor(refactorer);
+	}
+
+	private void saveModel(EObject model, String fileName) {
+		ResourceSet rs = new ResourceSetImpl();
+		File file = new File(fileName);
+		if(file.exists()){
+			assertTrue("existing file " + fileName + " couldn't be deleted", file.delete());
+		}
+		URI uri = URI.createFileURI(file.getAbsolutePath());
+		Resource resource = rs.createResource(uri);
+		resource.getContents().add(model);
+		try {
+			resource.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static String getValueByKey(Category category, String key) {
