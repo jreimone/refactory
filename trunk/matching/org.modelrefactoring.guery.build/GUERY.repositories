@@ -35,7 +35,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/update
 
 //EMFText (required to generate languages)
 //git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
-get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
+dynamicfile:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 
 // Google Guava
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
