@@ -24,11 +24,11 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 		this.dependentRefactorer = dependentRefactorer;
 		this.genericValueProvider = new CoRefactoringValueProvider();
 		this.bindingExpression = bindingExpression;
-		mvelInterpretation();
 	}
 
 	@Override
 	public IValueProvider<?, ?> getValueProviderForCommand(EObject command, Object... context) {
+		mvelInterpretation();
 		return genericValueProvider;
 	}
 
@@ -44,9 +44,13 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 		}
 		RoleMapping dependentRolemapping = dependentRefactorer.getRoleMapping();
 		GenericBindingResolverFactory resolverFactory = new GenericBindingResolverFactory(initialRefactorer, dependentModelCopy, dependentRolemapping, dependentInputCopy);
+		PropertyHandlerFactory.unregisterPropertyHandler(Object.class);
+		PropertyHandlerFactory.unregisterPropertyHandler(EObject.class);
 		PropertyHandlerFactory.registerPropertyHandler(Object.class, resolverFactory.getGenericResolver());
 		PropertyHandlerFactory.registerPropertyHandler(EObject.class, resolverFactory.getGenericResolver());
 		Object result = MVEL.eval(bindingExpression, resolverFactory);
+		PropertyHandlerFactory.unregisterPropertyHandler(Object.class);
+		PropertyHandlerFactory.unregisterPropertyHandler(EObject.class);
 		System.out.println(result);
 	}
 

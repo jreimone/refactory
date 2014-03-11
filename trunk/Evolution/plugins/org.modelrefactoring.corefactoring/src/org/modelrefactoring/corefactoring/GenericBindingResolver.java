@@ -27,9 +27,9 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 	private String variableNameToResolve;
 	private IRefactorer initialRefactorer;
 	
-	private Map<String, Object> inVariables = new HashMap<String, Object>();
-	private Map<String, Object> outVariables = new HashMap<String, Object>();
-	private Map<String, Object> undecidedVariables = new HashMap<String, Object>();
+	private Map<String, Object> inVariables;
+	private Map<String, Object> outVariables;
+	private Map<String, Object> undecidedVariables;
 	private boolean isINcontext;
 	private boolean isOUTcontext;
 	private boolean isUndefined;
@@ -40,6 +40,9 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 		super(Util.getInRoleNameBindings(initialRefactorer), "Foo");
 		this.initialRefactorer = initialRefactorer;
 		this.dependentRoleMapping = dependentRoleMapping;
+		inVariables = new HashMap<String, Object>();
+		outVariables = new HashMap<String, Object>();
+		undecidedVariables = new HashMap<String, Object>();
 		inVariables.putAll(Util.getInRoleNameBindings(initialRefactorer));
 		outVariables.putAll(Util.getOutRoleNameBindings(dependentModel, dependentRoleMapping, dependentInput));
 	}
