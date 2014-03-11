@@ -46,7 +46,7 @@ public class GenericBindingResolverFactory extends BaseVariableResolverFactory {
 
 	@Override
 	public boolean isTarget(String arg0) {
-		System.out.println();
+		System.out.println(arg0);
 		return false;
 	}
 

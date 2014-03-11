@@ -45,7 +45,7 @@ public abstract class Util {
 			List<EObject> filteredObjects = RoleUtil.filterObjectsByRoles(dependentInput, dependentRoleMapping, role);
 			bindings.put(role.getName(), filteredObjects);
 		}
-		bindings.put(OUT, dependentInput);
+		bindings.put(OUT, dependentModel);
 		return bindings;
 	}
 	
