@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlPackage;
@@ -220,6 +222,7 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		assertNotNull("the co-refactored model mustn't be null", coRefactoredModel);
 		assertTrue("co-refactored model must be an EPackage", coRefactoredModel instanceof EPackage);
 		saveModel(coRefactoredModel, testDataFolder.getAbsolutePath() + "/" + targetFileName.replace(IN, OUT));
+		// TODO compare expected and (co-)refactored models
 	}
 	
 	private void createAndExecuteInitialRefactoring() {
@@ -288,12 +291,33 @@ public class OWL2EcoreCoRefactoringTestSuite {
 	private static <T extends EObject> T loadModelByType(String path, Class<T> clazz) {
 		File file = new File(path);
 		assertTrue("file " + path + " doesn't exist", file.exists());
+		boolean convert = false;
+		if(file.getName().endsWith(".ecore") && !file.getName().endsWith(".text.ecore")){
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+			convert = true;
+		}
 		URI uri = URI.createFileURI(file.getAbsolutePath());
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.getResource(uri, true);
 		assertNotNull("resource " + path + " couldn't be loaded", resource);
 		EObject model = resource.getContents().get(0);
 		assertTrue("model in file " + path + " must be an instance of " + clazz.getSimpleName(), clazz.isInstance(model));
+		if(convert){
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new TextEcoreResourceFactory());
+			file = new File(file.getAbsolutePath().replace(".ecore", ".text.ecore"));
+			if(file.exists()){
+				assertTrue("file " + file.getName() + " couldn't be deleted", file.delete());
+			}
+			uri = URI.createFileURI(file.getAbsolutePath());
+//			rs = new ResourceSetImpl();
+			resource = rs.createResource(uri);
+			resource.getContents().add(model);
+			try {
+				resource.save(Collections.EMPTY_MAP);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return clazz.cast(model);
 	}
 	
