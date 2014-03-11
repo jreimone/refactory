@@ -29,7 +29,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/features/org.eclipse.emf.validation_1.7.0.201306111341/feature.xml
 
 //EMFText (required to generate languages)
-get:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
+dynamicfile:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
 
 // EMF Compare (required for tests)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/2.1.2/R201310031412/emf-compare-update-2.1.2.zip!plugins/org.eclipse.emf.compare_3.0.1.201310031412.jar
