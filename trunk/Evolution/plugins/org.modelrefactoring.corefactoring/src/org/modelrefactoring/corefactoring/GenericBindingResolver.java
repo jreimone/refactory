@@ -132,33 +132,35 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 			}
 			return specializedValue;
 		} else {
-			EObject head = roleChain.peek();
-			if(head instanceof Role){
-				Role role = (Role) head;
-				RoleAttribute attribute = RoleUtil.getAttributeByName(role, propertyName);
-				if(!isUndefined){
-					RoleMapping roleMapping = null;
-					EObject element = null;
-					Object object = null;
-					if(isINcontext){
-						roleMapping = initialRefactorer.getRoleMapping();
-						object = inVariables.get(role.getName());
-					} else if(isOUTcontext){
-						roleMapping = dependentRoleMapping;
-						object = outVariables.get(role.getName());
-					}
-					ConcreteMapping concreteMapping = roleMapping.getConcreteMappingForRole(role);
-					AttributeMapping attributeMapping = concreteMapping.getAttributeMappingForAttribute(attribute);
-					EAttribute classAttribute = attributeMapping.getClassAttribute();
-					roleChain.push(attributeMapping.getRoleAttribute());
-					object = specializeValue(object);
-					if(object instanceof EObject){
-						element = (EObject) object;
-					}
-					if(element != null){
-						Object value = element.eGet(classAttribute);
-						value = specializeValue(value);
-						return value;
+			if(!roleChain.isEmpty()){
+				EObject head = roleChain.peek();
+				if(head instanceof Role){
+					Role role = (Role) head;
+					RoleAttribute attribute = RoleUtil.getAttributeByName(role, propertyName);
+					if(!isUndefined){
+						RoleMapping roleMapping = null;
+						EObject element = null;
+						Object object = null;
+						if(isINcontext){
+							roleMapping = initialRefactorer.getRoleMapping();
+							object = inVariables.get(role.getName());
+						} else if(isOUTcontext){
+							roleMapping = dependentRoleMapping;
+							object = outVariables.get(role.getName());
+						}
+						ConcreteMapping concreteMapping = roleMapping.getConcreteMappingForRole(role);
+						AttributeMapping attributeMapping = concreteMapping.getAttributeMappingForAttribute(attribute);
+						EAttribute classAttribute = attributeMapping.getClassAttribute();
+						roleChain.push(attributeMapping.getRoleAttribute());
+						object = specializeValue(object);
+						if(object instanceof EObject){
+							element = (EObject) object;
+						}
+						if(element != null){
+							Object value = element.eGet(classAttribute);
+							value = specializeValue(value);
+							return value;
+						}
 					}
 				}
 			}
