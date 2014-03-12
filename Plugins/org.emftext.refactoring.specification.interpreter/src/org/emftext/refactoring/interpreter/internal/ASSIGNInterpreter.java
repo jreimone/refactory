@@ -170,11 +170,6 @@ public class ASSIGNInterpreter {
 
 		@SuppressWarnings("unchecked")
 		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderFactory().getValueProviderForCommand(assign);
-		//		IValueProvider<EAttribute, Object> valueProvider = (IValueProvider<EAttribute, Object>) interpreter.getValueProviderForCommand(assign);
-		//		if(valueProvider == null){
-		//			valueProvider = getNewValueProvider(mapping);
-		//			interpreter.registerValueProviderForCommand(assign, valueProvider);
-		//		}
 		Object value = valueProvider.provideValue(interpreter, classAttribute, targetObject);
 		if(valueProvider.getReturnCode() == Dialog.CANCEL){
 			return new RefactoringStatus(IRefactoringStatus.CANCEL);
