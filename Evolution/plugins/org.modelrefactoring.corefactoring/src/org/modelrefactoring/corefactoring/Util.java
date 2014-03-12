@@ -38,10 +38,9 @@ public abstract class Util {
 	}
 	
 	public static Map<String, Object> getOutRoleNameBindings(EObject dependentModel, RoleMapping dependentRoleMapping, List<EObject> dependentInput){
-		@SuppressWarnings("unchecked")
-		Map<String, Object> bindings = getRoleNameBindings(Collections.EMPTY_MAP);
-		List<Role> roles = dependentRoleMapping.getMappedRoleModel().getRoles();
-		for (Role role : roles) {
+		Map<String, Object> bindings = new HashMap<String, Object>();
+		List<Role> inputRoles = RoleUtil.getAllInputRoles(dependentRoleMapping);
+		for (Role role : inputRoles) {
 			List<EObject> filteredObjects = RoleUtil.filterObjectsByRoles(dependentInput, dependentRoleMapping, role);
 			bindings.put(role.getName(), filteredObjects);
 		}
