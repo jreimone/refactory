@@ -33,9 +33,9 @@ public class CoRefactorerImpl implements CoRefactorer {
 
 	private EPackage metamodelOfDependentModel;
 
-	private CoEvolutionDefinition coed;
+//	private CoEvolutionDefinition coed;
 	private RoleMappingAction rolemappingAction;
-	private RoleMappingEvent rolemappingEvent;
+//	private RoleMappingEvent rolemappingEvent;
 
 	private IRefactorer dependentRefactorer;
 
@@ -93,8 +93,8 @@ public class CoRefactorerImpl implements CoRefactorer {
 							RoleMapping initialRolemapping = rolemappingEvent.getConcreteRefactoring();
 							if(initialRolemapping.equals(initialRefactorer.getRoleMapping())){
 								rolemappingAction = (RoleMappingAction) action;
-								this.rolemappingEvent = rolemappingEvent;
-								this.coed = coed;
+//								this.rolemappingEvent = rolemappingEvent;
+//								this.coed = coed;
 								return rolemappingAction.getConcreteRefactoring();
 							}
 						}

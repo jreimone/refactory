@@ -30,7 +30,6 @@ public class CoRefactorerFactory {
 		for (Role role : roleBindings.keySet()) {
 			boundElements.addAll(roleBindings.get(role));
 		}
-		List<EObject> input = refactorer.getInput();
 		// TODO use bound elements or input???
 		Map<EObject, Collection<EObject>> dependencyMap = new HashMap<EObject, Collection<EObject>>();
 		List<IKnowledgeBase> knowledgeBases = IKnowledgeBaseRegistry.INSTANCE.getKnowledgeBases();

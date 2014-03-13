@@ -1,7 +1,5 @@
 package org.modelrefactoring.corefactoring;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -9,13 +7,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.refactoring.interpreter.AbstractValueProvider;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
-import org.emftext.refactoring.util.InverseableCopier;
 import org.emftext.refactoring.util.StringUtil;
 
 public class CoRefactoringValueProvider extends AbstractValueProvider<EObject, Object> {
 
-	private InverseableCopier inverseableCopier;
-	private Map<EObject, EObject> inverse;
+//	private InverseableCopier inverseableCopier;
+//	private Map<EObject, EObject> inverse;
 
 	private EStructuralFeature structuralFeature;
 
@@ -49,17 +46,6 @@ public class CoRefactoringValueProvider extends AbstractValueProvider<EObject, O
 			} 
 		}
 		return null;
-		//		
-		//		if(inverse == null){
-		//			inverse = inverseableCopier.getInverse();
-		//		}
-		//		EObject element = (EObject) context[0];
-		//		EObject elementCopy = inverseableCopier.get(element);
-		//		if(from instanceof EStructuralFeature){
-		//			Object value = elementCopy.eGet((EStructuralFeature) from);
-		//			return value;
-		//		}
-		//		return null;
 	}
 
 	@Override

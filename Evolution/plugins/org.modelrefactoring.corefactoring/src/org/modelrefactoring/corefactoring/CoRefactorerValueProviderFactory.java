@@ -1,6 +1,5 @@
 package org.modelrefactoring.corefactoring;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IValueProvider;
 import org.emftext.refactoring.interpreter.IValueProviderFactory;
-import org.emftext.refactoring.util.InverseableCopier;
 import org.mvel2.MVEL;
 import org.mvel2.integration.PropertyHandlerFactory;
 
@@ -44,21 +42,9 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 		dependentRefactorer.setValueProviderFactory(this);
 		dependentRefactorer.fakeRefactor();
 		EObject fakeRefactoredModel = dependentRefactorer.getFakeRefactoredModel();
-		Map<Role, List<EObject>> roleRuntimeInstances = dependentRefactorer.getInterpreter().getRoleRuntimeInstances();
-		Map<Role, List<EObject>> roleRuntimeInstances2 = dependentRefactorer.getInterpreter().getFakeInterpreter().getRoleRuntimeInstances();
-		
-//		EObject dependentModel = dependentRefactorer.getOriginalModel();
-//		InverseableCopier copier = copyDependentModel(dependentModel);
-//		genericValueProvider.setInverseableCopier(copier);
-//		EObject dependentModelCopy = copier.get(dependentModel);
-//		List<EObject> dependentInputCopy = new ArrayList<EObject>();
-//		List<EObject> dependentInput = dependentRefactorer.getInput();
-//		for (EObject element : dependentInput) {
-//			dependentInputCopy.add(copier.get(element));
-//		}
-		
+		Map<Role, List<EObject>> roleRuntimeInstances = dependentRefactorer.getInterpreter().getFakeInterpreter().getRoleRuntimeInstances();
 		RoleMapping dependentRolemapping = dependentRefactorer.getRoleMapping();
-		GenericBindingResolverFactory resolverFactory = new GenericBindingResolverFactory(initialRefactorer, fakeRefactoredModel, dependentRolemapping, roleRuntimeInstances2);
+		GenericBindingResolverFactory resolverFactory = new GenericBindingResolverFactory(initialRefactorer, fakeRefactoredModel, dependentRolemapping, roleRuntimeInstances);
 		PropertyHandlerFactory.disposeAll();
 		PropertyHandlerFactory.registerPropertyHandler(Object.class, resolverFactory.getGenericResolver());
 		PropertyHandlerFactory.registerPropertyHandler(EObject.class, resolverFactory.getGenericResolver());
@@ -67,22 +53,21 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 		System.out.println(result);
 	}
 
-	private InverseableCopier copyDependentModel(EObject dependentModel) {
-		InverseableCopier copier = new InverseableCopier(false, true);
-		copier.copy(dependentModel);
-		copier.copyReferences();
-		return copier;
-	}
+//	private InverseableCopier copyDependentModel(EObject dependentModel) {
+//		InverseableCopier copier = new InverseableCopier(false, true);
+//		copier.copy(dependentModel);
+//		copier.copyReferences();
+//		return copier;
+//	}
 
 	@Override
 	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
-		// TODO Auto-generated method stub
-
+		// we don't want to register new providers because we only need the generic one
 	}
 
 	@Override
 	public IValueProvider<?, ?> registerValueProviderForCommand(EObject command, Object... context) {
-		// TODO Auto-generated method stub
+		// we don't want to register new providers because we only need the generic one
 		return null;
 	}
 
