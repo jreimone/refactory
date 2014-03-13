@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
-import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlPackage;
 import org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation;
 import org.emftext.language.owl.resource.owl.mopp.OwlResourceFactory;
@@ -63,9 +62,11 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.modelrefactoring.corefactoring.CoRefactorer;
 import org.modelrefactoring.corefactoring.CoRefactorerFactory;
+import org.modelrefactoring.evolution.coed.Action;
 import org.modelrefactoring.evolution.coed.CoEvolutionDefinition;
 import org.modelrefactoring.evolution.coed.CoedPackage;
 import org.modelrefactoring.evolution.coed.Event;
+import org.modelrefactoring.evolution.coed.RoleMappingAction;
 import org.modelrefactoring.evolution.coed.RoleMappingEvent;
 import org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedMetaInformation;
 import org.modelrefactoring.evolution.coed.resource.coed.mopp.CoedResourceFactory;
@@ -81,19 +82,19 @@ import org.modelrefactoring.evolution.registry.IKnowledgeBase;
 import org.modelrefactoring.evolution.registry.IKnowledgeBaseRegistry;
 
 @RunWith(Parameterized.class)
-public class OWL2EcoreCoRefactoringTestSuite {
+public class CoRefactoringTestSuite {
 
 	private static final String OUT						= "_OUT";
 	private static final String IN 						= "_IN";
-	
+
 	private static final String TESTDATA_DIR			= "testdata";
 	private static final String FILE_CONFIG				= "config.testproperties";
-	
+
 	private static final String CATEGORY_INPUTS			= "inputs";
 	private static final String CATEGORY_DEPENDENCY		= "dependency";
 	private static final String CATEGORY_REFACTORING	= "refactoring";
 	private static final String CATEGORY_ROLEMAPPING	= "rolemapping";
-	
+
 	private static final String KEY_SOURCE				= "source";
 	private static final String KEY_TARGET				= "target";
 	private static final String KEY_COED				= "coed";
@@ -104,31 +105,61 @@ public class OWL2EcoreCoRefactoringTestSuite {
 	private static final String KEY_ROLEMAPPING			= CATEGORY_ROLEMAPPING;
 	private static final String KEY_NAME				= "name";
 	private static final String KEY_SOURCE_INPUT 		= "sourceInput";
-	
+
 	private static MetaMetaModel ecoreMetaMetaModel;
 	private static CODS cods;
 	private ModelRefactoringDescriptor descriptor;
-	
+
 	@Parameter(0)
 	public File testDataFolder;
 	@Parameter(1)
-	public String testDataFolderName;
+	public EObject sourceModel;
 	@Parameter(2)
-	public OntologyDocument sourceModel;
+	public EObject targetModel;
 	@Parameter(3)
-	public EPackage targetModel;
-	@Parameter(4)
 	public String value;
-	@Parameter(5)
+	@Parameter(4)
 	public List<EObject> selectedElements;
-	@Parameter(6)
+	@Parameter(5)
 	public String sourceFileName;
-	@Parameter(7)
+	@Parameter(6)
 	public String targetFileName;
-	@Parameter(8)
+	@Parameter(7)
 	public CoEvolutionDefinition coed;
+	@Parameter(8)
+	public String sourceMetamodelName;
+	@Parameter(9)
+	public String targetMetamodelName;
+	@Parameter(10)
+	public String sourceRoleMappingName;
+	@Parameter(11)
+	public String targetRoleMappingName;
+
+	@Before
+	public void init(){
+		createAndExecuteInitialRefactoring();
+	}
+
+	@Test
+	public void testCoRefactoring(){
+		CoRefactorerFactory factory = new CoRefactorerFactory();
+		List<CoRefactorer> coRefactorers = factory.getCoRefactorers(descriptor.getRefactorer());
+		assertTrue("one co-refactorer has to be determined", coRefactorers != null && coRefactorers.size() == 1);
+		CoRefactorer coRefactorer = coRefactorers.get(0);
+		EObject coRefactoredModel = coRefactorer.coRefactor();
+		assertNotNull("the co-refactored model mustn't be null", coRefactoredModel);
+		assertTrue("co-refactored model must be an EPackage", coRefactoredModel instanceof EPackage);
+		saveModel(coRefactoredModel, testDataFolder.getAbsolutePath() + "/" + targetFileName.replace(IN, OUT));
+		// TODO compare expected and (co-)refactored models
+	}
+
+	protected static void registerAdditionalLanguages() {
+		// OWL
+		EPackage.Registry.INSTANCE.put(OwlPackage.eNS_URI, OwlPackage.eINSTANCE);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new OwlMetaInformation().getSyntaxName(), new OwlResourceFactory());
+	}
 	
-	@Parameters(name = "{1}")
+	@Parameters(name = "{8} -> {9} : {10} -> {11}")
 	public static Collection<Object[]> initParameterData(){
 		registerLanguages();
 		registerCODS();
@@ -164,9 +195,9 @@ public class OWL2EcoreCoRefactoringTestSuite {
 				// Inputs
 				Category inputsCategory = getFirstCategoryWithName(categories, CATEGORY_INPUTS);
 				String sourcePath = getValueByKey(inputsCategory, KEY_SOURCE);
-				OntologyDocument sourceModel = loadModelByType(file.getAbsolutePath() + "/" + sourcePath, OntologyDocument.class);
+				EObject sourceModel = loadModelByType(file.getAbsolutePath() + "/" + sourcePath, EObject.class);
 				String targetPath = getValueByKey(inputsCategory, KEY_TARGET);
-				EPackage targetModel = loadModelByType(file.getAbsolutePath() + "/" + targetPath, EPackage.class);
+				EObject targetModel = loadModelByType(file.getAbsolutePath() + "/" + targetPath, EObject.class);
 				String coedPath = getValueByKey(inputsCategory, KEY_COED);
 				CoEvolutionDefinition coed = loadModelByType(file.getAbsolutePath() + "/" + coedPath, CoEvolutionDefinition.class);
 				DomainSpecificEvolutionSpecification evolutionSpecification = CodsFactory.eINSTANCE.createDomainSpecificEvolutionSpecification();
@@ -200,32 +231,23 @@ public class OWL2EcoreCoRefactoringTestSuite {
 						}
 					}
 				}
-				
-				readData.add(new Object[]{file, file.getName(), sourceModel, targetModel, value, selectedElements, sourcePath, targetPath, coed});
+				Event event = coed.getEvent();
+				assertTrue("event must be an instance of " + RoleMappingEvent.class.getSimpleName(), event instanceof RoleMappingEvent);
+				RoleMapping sourceRoleMapping = ((RoleMappingEvent) event).getConcreteRefactoring();
+				String sourceMetamodelName = sourceRoleMapping.getOwningMappingModel().getTargetMetamodel().getName();
+				String sourceRolemappingName = sourceRoleMapping.getName();
+				Action action = coed.getAction();
+				assertTrue("action must be an instance of " + RoleMappingAction.class.getSimpleName(), action instanceof RoleMappingAction);
+				RoleMapping targetRoleMapping = ((RoleMappingAction) action).getConcreteRefactoring();
+				String targetMetamodelName = targetRoleMapping.getOwningMappingModel().getTargetMetamodel().getName();
+				String targetRolemappingName = targetRoleMapping.getName();
+				readData.add(new Object[]{file, sourceModel, targetModel, value, selectedElements, sourcePath, targetPath, coed, sourceMetamodelName, targetMetamodelName, sourceRolemappingName, targetRolemappingName});
 			}
 		}
 		return readData;
 	}
-	
-	@Before
-	public void init(){
-		createAndExecuteInitialRefactoring();
-	}
-	
-	@Test
-	public void testCoRefactoring(){
-		CoRefactorerFactory factory = new CoRefactorerFactory();
-		List<CoRefactorer> coRefactorers = factory.getCoRefactorers(descriptor.getRefactorer());
-		assertTrue("one co-refactorer has to be determined", coRefactorers != null && coRefactorers.size() == 1);
-		CoRefactorer coRefactorer = coRefactorers.get(0);
-		EObject coRefactoredModel = coRefactorer.coRefactor();
-		assertNotNull("the co-refactored model mustn't be null", coRefactoredModel);
-		assertTrue("co-refactored model must be an EPackage", coRefactoredModel instanceof EPackage);
-		saveModel(coRefactoredModel, testDataFolder.getAbsolutePath() + "/" + targetFileName.replace(IN, OUT));
-		// TODO compare expected and (co-)refactored models
-	}
-	
-	private void createAndExecuteInitialRefactoring() {
+
+	protected void createAndExecuteInitialRefactoring() {
 		Event event = coed.getEvent();
 		assertTrue("event must be an instance of " + RoleMappingEvent.class.getSimpleName(), event instanceof RoleMappingEvent);
 		RoleMappingEvent roleMappingEvent = (RoleMappingEvent) event;
@@ -241,7 +263,7 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		descriptor = new ModelRefactoringDescriptor(refactorer);
 	}
 
-	private void saveModel(EObject model, String fileName) {
+	protected void saveModel(EObject model, String fileName) {
 		ResourceSet rs = new ResourceSetImpl();
 		File file = new File(fileName);
 		if(file.exists()){
@@ -256,8 +278,8 @@ public class OWL2EcoreCoRefactoringTestSuite {
 			e.printStackTrace();
 		}
 	}
-	
-	private static String getValueByKey(Category category, String key) {
+
+	protected static String getValueByKey(Category category, String key) {
 		List<KeyValuePair> pairs = category.getPairs();
 		for (KeyValuePair keyValuePair : pairs) {
 			if(keyValuePair.getKey().getName().equals(key)){
@@ -268,7 +290,7 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		return null;
 	}
 
-	private static Category getFirstCategoryWithName(List<Category> categories, String categoryName) {
+	protected static Category getFirstCategoryWithName(List<Category> categories, String categoryName) {
 		for (Category category : categories) {
 			if(category.getName().equals(categoryName)){
 				return category;
@@ -277,8 +299,8 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		fail("Category '" + categoryName + "' wasn't found");
 		return null;
 	}
-	
-	private static List<Category> getCategoriesWithName(List<Category> categories, String categoryName) {
+
+	protected static List<Category> getCategoriesWithName(List<Category> categories, String categoryName) {
 		List<Category> namedCategories = new ArrayList<>();
 		for (Category category : categories) {
 			if(category.getName().equals(categoryName)){
@@ -288,7 +310,7 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		return namedCategories;
 	}
 
-	private static <T extends EObject> T loadModelByType(String path, Class<T> clazz) {
+	protected static <T extends EObject> T loadModelByType(String path, Class<T> clazz) {
 		File file = new File(path);
 		assertTrue("file " + path + " doesn't exist", file.exists());
 		boolean convert = false;
@@ -309,7 +331,7 @@ public class OWL2EcoreCoRefactoringTestSuite {
 				assertTrue("file " + file.getName() + " couldn't be deleted", file.delete());
 			}
 			uri = URI.createFileURI(file.getAbsolutePath());
-//			rs = new ResourceSetImpl();
+			//			rs = new ResourceSetImpl();
 			resource = rs.createResource(uri);
 			resource.getContents().add(model);
 			try {
@@ -320,8 +342,8 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		}
 		return clazz.cast(model);
 	}
-	
-	private static void registerLanguages() {
+
+	protected static void registerLanguages() {
 		// Ecore
 		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		// Properties
@@ -330,9 +352,6 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		// Ecore Text
 		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new TextEcoreResourceFactory());
-		// OWL
-		EPackage.Registry.INSTANCE.put(OwlPackage.eNS_URI, OwlPackage.eINSTANCE);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new OwlMetaInformation().getSyntaxName(), new OwlResourceFactory());
 		// Refactoring
 		EPackage.Registry.INSTANCE.put(RolesPackage.eNS_URI, RolesPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new RolestextMetaInformation().getSyntaxName(), new RolestextResourceFactory());
@@ -344,9 +363,10 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		EPackage.Registry.INSTANCE.put(CodsPackage.eNS_URI, CodsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(CoedPackage.eNS_URI, CoedPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new CoedMetaInformation().getSyntaxName(), new CoedResourceFactory());
+		registerAdditionalLanguages();
 	}
-	
-	private static void registerCODS() {
+
+	protected static void registerCODS() {
 		cods = CodsFactory.eINSTANCE.createCODS();
 		ecoreMetaMetaModel = ArchitectureFactory.eINSTANCE.createMetaMetaModel();
 		ecoreMetaMetaModel.setPackage(EcorePackage.eINSTANCE);
@@ -364,8 +384,8 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		resource.getContents().add(cods);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("cods", new CODSResourceFactoryImpl(resource));
 	}
-	
-	private static void registerRefactoring(RoleModel roleModel, RefactoringSpecification refSpec) {
+
+	protected static void registerRefactoring(RoleModel roleModel, RefactoringSpecification refSpec) {
 		try {
 			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
 			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
@@ -373,8 +393,8 @@ public class OWL2EcoreCoRefactoringTestSuite {
 			e.printStackTrace();
 		}
 	}
-	
-	private static <T extends EObject> T findFirstElementWithPropertyAndValue(EObject model, String propertyName, Object propertyValue, Class<T> clazz) {
+
+	protected static <T extends EObject> T findFirstElementWithPropertyAndValue(EObject model, String propertyName, Object propertyValue, Class<T> clazz) {
 		assertNotNull("model mustn't be null", model);
 		assertNotNull("property name mustn't be null", propertyName);
 		assertNotNull("property value mustn't be null", propertyValue);
@@ -395,8 +415,8 @@ public class OWL2EcoreCoRefactoringTestSuite {
 		fail("model doesn't contain an element having a property called " + propertyName + " and a value " + propertyValue);
 		return null;
 	}
-	
-	private static void registerKnowledgeBase() {
+
+	protected static void registerKnowledgeBase() {
 		IKnowledgeBaseRegistry registry = IKnowledgeBaseRegistry.INSTANCE;
 		TestKnowledgeBase knowledgeBase = new TestKnowledgeBase();
 		registry.registerKnowledgeBase(knowledgeBase);
