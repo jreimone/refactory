@@ -2,5 +2,7 @@ CoED for <http://www.eclipse.org/emf/2002/Ecore>
 import owl:<http://org.emftext/owl.ecore>
 (
 	incoming refactoring owl:<Duplicate Class>
-	outgoing corefactoring <Duplicate Class> $OUT.Duplicate.name = IN.Duplicate.name + "_fromOWLdouble"$
+	outgoing corefactoring <Duplicate Class> $
+		OUT.Duplicate.name = IN.Duplicate.name + "_Duplicate"
+	$
 )
