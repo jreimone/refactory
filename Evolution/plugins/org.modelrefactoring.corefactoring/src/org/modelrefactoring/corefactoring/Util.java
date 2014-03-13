@@ -1,6 +1,5 @@
 package org.modelrefactoring.corefactoring;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,5 +49,17 @@ public abstract class Util {
 	
 	public static Map<String, Object> getRoleNameBindings(IRefactorer refactorer){
 		return getRoleNameBindings(refactorer.getInterpreter().getRoleRuntimeInstances());
+	}
+
+	public static Map<String, Object> getOutRoleNameBindings(EObject fakeRefactoredModel, RoleMapping dependentRoleMapping, Map<Role, List<EObject>> dependentModelRoleBindings) {
+		Map<String, Object> bindings = new HashMap<String, Object>();
+		List<Role> inputRoles = RoleUtil.getAllInputRoles(dependentRoleMapping);
+		for (Role boundRole : dependentModelRoleBindings.keySet()) {
+			if(inputRoles.contains(boundRole)){
+				bindings.put(boundRole.getName(), dependentModelRoleBindings.get(boundRole));
+			}
+		}
+		bindings.put(OUT, fakeRefactoredModel);
+		return bindings;
 	}
 }
