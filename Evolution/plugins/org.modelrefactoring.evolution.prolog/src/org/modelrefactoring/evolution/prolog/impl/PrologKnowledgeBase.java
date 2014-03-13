@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.modelrefactoring.evolution.prolog.IPrologGenerator;
 import org.modelrefactoring.evolution.prolog.registry.IPrologRegistry;
@@ -113,5 +114,21 @@ public class PrologKnowledgeBase implements IKnowledgeBase {
 		if(!model.equals(targetElement)){
 			children.add(targetElement);
 		}
+	}
+
+	@Override
+	public Collection<EObject> getDependencies(EObject element) {
+		Resource resource = element.eResource();
+		ResourceSet rs = null;
+		URI uri = null;
+		if(resource != null){
+			uri = resource.getURI();
+			rs = resource.getResourceSet();
+		} else {
+			uri = EcoreUtil.getURI(element);
+			rs = new ResourceSetImpl();
+		}
+		Map<EObject, Collection<EObject>> dependencies = getDependencies(uri, rs);
+		return dependencies.get(element);
 	}
 }
