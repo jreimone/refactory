@@ -2,29 +2,64 @@ package org.modelrefactoring.corefactoring;
 
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.refactoring.interpreter.AbstractValueProvider;
+import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.util.InverseableCopier;
+import org.emftext.refactoring.util.StringUtil;
 
 public class CoRefactoringValueProvider extends AbstractValueProvider<EObject, Object> {
 
 	private InverseableCopier inverseableCopier;
 	private Map<EObject, EObject> inverse;
 
+	private EStructuralFeature structuralFeature;
+
+	private EStructuralFeature fakeFeature;
+	private EObject fakeFeatureOwner;
+	private EObject realFeatureOwner;
+	private EStructuralFeature realFeature;
+
 	@Override
 	public Object provideValue(IRefactoringInterpreter interpreter, EObject from, Object... context) {
-		if(inverse == null){
-			inverse = inverseableCopier.getInverse();
-		}
-		EObject element = (EObject) context[0];
-		EObject elementCopy = inverseableCopier.get(element);
-		if(from instanceof EStructuralFeature){
-			Object value = elementCopy.eGet((EStructuralFeature) from);
-			return value;
+		if(interpreter instanceof IRefactoringFakeInterpreter){
+			if(from instanceof EStructuralFeature){
+				EStructuralFeature structuralFeature = (EStructuralFeature) from;
+				fakeFeature = structuralFeature;
+				this.structuralFeature = structuralFeature;
+				fakeFeatureOwner = (EObject) context[0];
+				Object valueObject = fakeFeature.getDefaultValue();
+				if(valueObject == null){
+					valueObject = "new" + StringUtil.firstLetterUpperCase(fakeFeature.getName()) + "For" + StringUtil.firstLetterUpperCase(fakeFeatureOwner.eClass().getName());
+				}
+				return valueObject;
+			}
+		} else {
+			if(from instanceof EStructuralFeature){
+				Object object = fakeFeatureOwner.eGet(fakeFeature);
+				return object;
+			}
+			Object value = getValue();
+			if(value != null){
+				return value;
+			} 
 		}
 		return null;
+		//		
+		//		if(inverse == null){
+		//			inverse = inverseableCopier.getInverse();
+		//		}
+		//		EObject element = (EObject) context[0];
+		//		EObject elementCopy = inverseableCopier.get(element);
+		//		if(from instanceof EStructuralFeature){
+		//			Object value = elementCopy.eGet((EStructuralFeature) from);
+		//			return value;
+		//		}
+		//		return null;
 	}
 
 	@Override
@@ -35,26 +70,42 @@ public class CoRefactoringValueProvider extends AbstractValueProvider<EObject, O
 
 	@Override
 	public void provideValue() {
-		// TODO Auto-generated method stub
-		
+		if(fakeFeatureOwner != null){
+			realFeatureOwner = getInverseCopier().get(fakeFeatureOwner);
+		}
+		if(realFeatureOwner != null){
+			realFeature = realFeatureOwner.eClass().getEStructuralFeature(fakeFeature.getName());
+			structuralFeature = realFeature;
+		}
 	}
 
 	@Override
 	public Object getFakeObject() {
-		// TODO Auto-generated method stub
-		return null;
+		return fakeFeature;
 	}
 
 	@Override
 	public void propagateValueToFakeObject() {
-		// TODO Auto-generated method stub
-		
+		if(getValue() != null){
+			fakeFeatureOwner.eSet(fakeFeature, getValue());
+		}
 	}
 
-	public void setInverseableCopier(InverseableCopier copier) {
-		this.inverseableCopier = copier;
-		setCopier(copier);
+	@Override
+	public void setValue(Object value) {
+		if(structuralFeature instanceof EAttribute){
+			EAttribute attribute = (EAttribute) structuralFeature;
+			Object convertedValue = EcoreUtil.createFromString(attribute.getEAttributeType(), (String) value);
+			super.setValue(convertedValue);
+		} else {
+			super.setValue(value);
+		}
 	}
+
+//	public void setInverseableCopier(InverseableCopier copier) {
+//		this.inverseableCopier = copier;
+//		setCopier(copier);
+//	}
 
 
 }

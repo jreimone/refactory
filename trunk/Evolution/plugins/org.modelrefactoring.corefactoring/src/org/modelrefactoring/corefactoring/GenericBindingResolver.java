@@ -36,7 +36,7 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 
 	private RoleMapping dependentRoleMapping;
 
-	public GenericBindingResolver(IRefactorer initialRefactorer, EObject dependentModel, RoleMapping dependentRoleMapping, List<EObject> dependentInput) {
+	private GenericBindingResolver(IRefactorer initialRefactorer, EObject dependentModel, RoleMapping dependentRoleMapping) {
 		super(Util.getInRoleNameBindings(initialRefactorer), "Foo");
 		this.initialRefactorer = initialRefactorer;
 		this.dependentRoleMapping = dependentRoleMapping;
@@ -44,7 +44,16 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 		outVariables = new HashMap<String, Object>();
 		undecidedVariables = new HashMap<String, Object>();
 		inVariables.putAll(Util.getInRoleNameBindings(initialRefactorer));
+	}
+	
+	public GenericBindingResolver(IRefactorer initialRefactorer, EObject dependentModel, RoleMapping dependentRoleMapping, List<EObject> dependentInput) {
+		this(initialRefactorer, dependentModel, dependentRoleMapping);
 		outVariables.putAll(Util.getOutRoleNameBindings(dependentModel, dependentRoleMapping, dependentInput));
+	}
+
+	public GenericBindingResolver(IRefactorer initialRefactorer, EObject fakeRefactoredModel, RoleMapping dependentRolemapping, Map<Role, List<EObject>> dependentModelRoleBindings) {
+		this(initialRefactorer, fakeRefactoredModel, dependentRolemapping);
+		outVariables.putAll(Util.getOutRoleNameBindings(fakeRefactoredModel, dependentRoleMapping, dependentModelRoleBindings));
 	}
 
 	@SuppressWarnings("rawtypes")
