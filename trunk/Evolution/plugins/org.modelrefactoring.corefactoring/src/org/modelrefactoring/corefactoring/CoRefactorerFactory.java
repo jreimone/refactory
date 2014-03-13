@@ -10,6 +10,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
@@ -35,9 +37,20 @@ public class CoRefactorerFactory {
 		List<IKnowledgeBase> knowledgeBases = IKnowledgeBaseRegistry.INSTANCE.getKnowledgeBases();
 		for (IKnowledgeBase knowledgeBase : knowledgeBases) {
 			for (EObject element : boundElements) {
-				Resource resource = element.eResource();
-				URI uri = resource.getURI();
-				dependencyMap.putAll(knowledgeBase.getDependencies(uri, resource.getResourceSet()));
+				Collection<EObject> dependencies = knowledgeBase.getDependencies(element);
+				if(dependencies != null){
+					for (EObject dependency : dependencies) {
+						EObject model = EcoreUtil.getRootContainer(dependency, true);
+						Collection<EObject> modelDependencies = dependencyMap.get(model);
+						if(modelDependencies == null){
+							modelDependencies = new ArrayList<EObject>();
+							dependencyMap.put(model, modelDependencies);
+						}
+						if(!modelDependencies.contains(dependency)){
+							modelDependencies.add(dependency);
+						}
+					}
+				}
 			}
 		}
 		List<CoRefactorer> coRefactorers = new ArrayList<CoRefactorer>();

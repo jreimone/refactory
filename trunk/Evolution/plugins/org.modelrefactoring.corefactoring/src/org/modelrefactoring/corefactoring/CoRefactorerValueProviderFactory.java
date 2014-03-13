@@ -1,6 +1,7 @@
 package org.modelrefactoring.corefactoring;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,15 +19,15 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 	private String bindingExpression;
 	private IRefactorer initialRefactorer;
 	private IRefactorer dependentRefactorer;
-	private CoRefactoringValueProvider genericValueProvider;
+	private Map<EObject, CoRefactoringValueProvider> valueProviderMap;
 	
 	private boolean bindingWasInterpreted = false;
 
 	public CoRefactorerValueProviderFactory(IRefactorer initialRefactorer, IRefactorer dependentRefactorer, String bindingExpression) {
 		this.initialRefactorer = initialRefactorer;
 		this.dependentRefactorer = dependentRefactorer;
-		this.genericValueProvider = new CoRefactoringValueProvider();
 		this.bindingExpression = bindingExpression;
+		valueProviderMap = new HashMap<EObject, CoRefactoringValueProvider>();
 	}
 
 	@Override
@@ -34,7 +35,11 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 		if(!bindingWasInterpreted){
 			mvelInterpretation();
 		}
-		return genericValueProvider;
+		IValueProvider<?, ?> valueProvider = valueProviderMap.get(command);
+		if(valueProvider == null){
+			valueProvider = registerValueProviderForCommand(command, context);
+		} 
+		return valueProvider;
 	}
 
 	private void mvelInterpretation() {
@@ -62,13 +67,19 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 
 	@Override
 	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
-		// we don't want to register new providers because we only need the generic one
+		if(command != null && valueProvider != null && valueProvider instanceof CoRefactoringValueProvider){
+			valueProviderMap.put(command, (CoRefactoringValueProvider) valueProvider);
+		}
 	}
 
 	@Override
 	public IValueProvider<?, ?> registerValueProviderForCommand(EObject command, Object... context) {
-		// we don't want to register new providers because we only need the generic one
-		return null;
+		CoRefactoringValueProvider valueProvider = valueProviderMap.get(command);
+		if(valueProvider == null){
+			valueProvider = new CoRefactoringValueProvider();
+			registerValueProviderForCommand(command, valueProvider);
+		}
+		return valueProvider;
 	}
 
 	@Override

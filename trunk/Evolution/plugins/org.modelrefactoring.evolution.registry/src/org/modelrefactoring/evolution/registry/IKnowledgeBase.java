@@ -32,4 +32,14 @@ public interface IKnowledgeBase {
 	 * @return a map containing the dependent models as keys and the dependent elements as particular value lists
 	 */
 	public Map<EObject, Collection<EObject>> getDependencies(URI uri, ResourceSet rs);
+
+	/**
+	 * Determines all the dependencies for the given <code>element</code>. These dependencies
+	 * may be explicit or implicit.
+	 * 
+	 * @param uri the uri for the resource to determine the dependencies for
+	 * @param rs this parameter is passed to let implementers load resources with this {@link ResourceSet}
+	 * @return a map containing the dependent models as keys and the dependent elements as particular value lists
+	 */
+	public Collection<EObject> getDependencies(EObject element);
 }
