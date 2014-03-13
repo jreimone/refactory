@@ -57,4 +57,9 @@ public class TestKnowledgeBase implements IKnowledgeBase {
 		}
 	}
 
+	@Override
+	public Collection<EObject> getDependencies(EObject element) {
+		return dependencies.get(element);
+	}
+
 }
