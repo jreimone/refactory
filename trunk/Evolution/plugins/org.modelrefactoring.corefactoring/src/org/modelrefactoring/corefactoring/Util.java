@@ -52,13 +52,7 @@ public abstract class Util {
 	}
 
 	public static Map<String, Object> getOutRoleNameBindings(EObject fakeRefactoredModel, RoleMapping dependentRoleMapping, Map<Role, List<EObject>> dependentModelRoleBindings) {
-		Map<String, Object> bindings = new HashMap<String, Object>();
-		List<Role> inputRoles = RoleUtil.getAllInputRoles(dependentRoleMapping);
-		for (Role boundRole : dependentModelRoleBindings.keySet()) {
-			if(inputRoles.contains(boundRole)){
-				bindings.put(boundRole.getName(), dependentModelRoleBindings.get(boundRole));
-			}
-		}
+		Map<String, Object> bindings = getRoleNameBindings(dependentModelRoleBindings);
 		bindings.put(OUT, fakeRefactoredModel);
 		return bindings;
 	}
