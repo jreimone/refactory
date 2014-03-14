@@ -28,4 +28,6 @@ Require-Bundle: org.modelrefactoring.corefactoring,
  org.modelrefactoring.evolution.coed,
  org.modelrefactoring.evolution.coed.resource.coed,
  org.emftext.refactoring.tests.properties,
- org.emftext.refactoring.tests.properties.resource.testproperties
+ org.emftext.refactoring.tests.properties.resource.testproperties,
+ org.eclipse.emf.compare,
+ com.google.guava
