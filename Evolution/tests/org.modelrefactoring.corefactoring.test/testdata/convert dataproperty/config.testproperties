@@ -2,11 +2,12 @@
 // Datei relativ zum Ordner in dem diese config-Datei liegt
 // müssen "_IN" im Dateinamen haben
 [inputs]
-source		= "ConvertDataPropertyToObjectProperty_IN.owl"
-sourceInput	= "ontology[0]/frames[1]"
-target		= "ReplaceDataValueWithObject_IN.text.ecore"
-coed		= "ecore_owl.coed"
-value		= "Address"
+source			= "ConvertDataPropertyToObjectProperty_IN.owl"
+sourceInput		= "ontology[0]/frames[1]"
+target			= "ReplaceDataValueWithObject_IN.text.ecore"
+targetExpected	= "ReplaceDataValueWithObject_EXP.text.ecore"
+coed			= "ecore_owl.coed"
+value			= "Address"
 
 [dependency]
 source		= "ontology[0]/frames[1]"

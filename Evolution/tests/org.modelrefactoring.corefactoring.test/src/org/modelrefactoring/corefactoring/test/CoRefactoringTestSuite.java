@@ -9,8 +9,26 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.compare.AttributeChange;
+import org.eclipse.emf.compare.Comparison;
+import org.eclipse.emf.compare.Conflict;
+import org.eclipse.emf.compare.Diff;
+import org.eclipse.emf.compare.DifferenceSource;
+import org.eclipse.emf.compare.EMFCompare;
+import org.eclipse.emf.compare.Match;
+import org.eclipse.emf.compare.match.DefaultComparisonFactory;
+import org.eclipse.emf.compare.match.DefaultEqualityHelperFactory;
+import org.eclipse.emf.compare.match.DefaultMatchEngine;
+import org.eclipse.emf.compare.match.IComparisonFactory;
+import org.eclipse.emf.compare.match.IMatchEngine;
+import org.eclipse.emf.compare.match.eobject.IEObjectMatcher;
+import org.eclipse.emf.compare.match.impl.MatchEngineFactoryImpl;
+import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
+import org.eclipse.emf.compare.scope.IComparisonScope;
+import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -86,6 +104,7 @@ public class CoRefactoringTestSuite {
 
 	private static final String OUT						= "_OUT";
 	private static final String IN 						= "_IN";
+	private static final String EXP 					= "_EXP";
 
 	private static final String TESTDATA_DIR			= "testdata";
 	private static final String FILE_CONFIG				= "config.testproperties";
@@ -96,7 +115,9 @@ public class CoRefactoringTestSuite {
 	private static final String CATEGORY_ROLEMAPPING	= "rolemapping";
 
 	private static final String KEY_SOURCE				= "source";
+	private static final String KEY_SOURCE_EXPECTED		= "sourceExpected";
 	private static final String KEY_TARGET				= "target";
+	private static final String KEY_TARGET_EXPECTED		= "targetExpected";
 	private static final String KEY_COED				= "coed";
 	private static final String KEY_VALUE				= "value";
 	private static final String KEY_INPUTFOLDER			= "inputFolder";
@@ -134,6 +155,10 @@ public class CoRefactoringTestSuite {
 	public String sourceRoleMappingName;
 	@Parameter(11)
 	public String targetRoleMappingName;
+	@Parameter(12)
+	public EObject expectedSourceRefactoredModel;
+	@Parameter(13)
+	public EObject expectedTargetCoRefactoredModel;
 
 	@Before
 	public void init(){
@@ -150,7 +175,46 @@ public class CoRefactoringTestSuite {
 		assertNotNull("the co-refactored model mustn't be null", coRefactoredModel);
 		assertTrue("co-refactored model must be an EPackage", coRefactoredModel instanceof EPackage);
 		saveModel(coRefactoredModel, testDataFolder.getAbsolutePath() + "/" + targetFileName.replace(IN, OUT));
-		// TODO compare expected and (co-)refactored models
+		// compare expected and (co-)refactored models
+		if(expectedSourceRefactoredModel != null){
+			List<Diff> differences = analyseComparison(sourceModel, expectedSourceRefactoredModel);
+			assertEquals("models have differences", 0, differences.size());
+		} else {
+			System.out.println("no expected source refactored model available");
+		}
+		if(expectedTargetCoRefactoredModel != null){
+			List<Diff> differences = analyseComparison(targetModel, expectedTargetCoRefactoredModel);
+			assertEquals("models have differences", 0, differences.size());
+		} else {
+			System.out.println("no expected target refactored model available");
+		}
+	}
+
+	private List<Diff> analyseComparison(EObject compareModel, EObject expectedModel) {
+		IEObjectMatcher matcher = DefaultMatchEngine.createDefaultEObjectMatcher(UseIdentifiers.NEVER);
+		IComparisonFactory comparisonFactory = new DefaultComparisonFactory(new DefaultEqualityHelperFactory());
+		IMatchEngine.Factory matchEngineFactory = new MatchEngineFactoryImpl(matcher, comparisonFactory);
+		matchEngineFactory.setRanking(20);
+		IMatchEngine.Factory.Registry matchEngineRegistry = new MatchEngineFactoryRegistryImpl();
+		matchEngineRegistry.add(matchEngineFactory);
+		EMFCompare comparator = EMFCompare.builder().setMatchEngineFactoryRegistry(matchEngineRegistry).build();
+		// Compare the two models
+		IComparisonScope scope = EMFCompare.createDefaultScope(compareModel, expectedModel);
+		Comparison comparison = comparator.compare(scope);
+		List<Diff> differences = comparison.getDifferences();
+		for (Diff diff : differences) {
+			if(diff instanceof AttributeChange){
+				AttributeChange attributeChange = (AttributeChange) diff;
+				EAttribute attribute = attributeChange.getAttribute();
+				Match match = attributeChange.getMatch();
+				EObject left = match.getLeft();
+				EObject right = match.getRight();
+				Object expectedValue = right.eGet(attribute);
+				Object realValue = left.eGet(attribute);
+				assertEquals("attribute '" + attribute.getName() + "' wasn't equal", expectedValue, realValue);
+			}
+		}
+		return differences;
 	}
 
 	protected static void registerAdditionalLanguages() {
@@ -158,7 +222,7 @@ public class CoRefactoringTestSuite {
 		EPackage.Registry.INSTANCE.put(OwlPackage.eNS_URI, OwlPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(new OwlMetaInformation().getSyntaxName(), new OwlResourceFactory());
 	}
-	
+
 	@Parameters(name = "{8} -> {9} : {10} -> {11}")
 	public static Collection<Object[]> initParameterData(){
 		registerLanguages();
@@ -198,6 +262,28 @@ public class CoRefactoringTestSuite {
 				EObject sourceModel = loadModelByType(file.getAbsolutePath() + "/" + sourcePath, EObject.class);
 				String targetPath = getValueByKey(inputsCategory, KEY_TARGET);
 				EObject targetModel = loadModelByType(file.getAbsolutePath() + "/" + targetPath, EObject.class);
+				// Expected Models
+				EObject expectedSourceModel = null;
+				String expectedFileName = getValueByKey(inputsCategory, KEY_SOURCE_EXPECTED);
+				if(expectedFileName == null){
+					File expectedFile = new File(file.getAbsolutePath() + "/" + sourcePath.replace(IN, EXP));
+					if(expectedFile.exists()){
+						expectedSourceModel = loadModelByType(expectedFile.getAbsolutePath(), EObject.class);
+					}
+				} else {
+					expectedSourceModel = loadModelByType(file.getAbsolutePath() + "/" + expectedFileName, EObject.class);
+				}
+				EObject expectedTargetModel = null;
+				expectedFileName = getValueByKey(inputsCategory, KEY_TARGET_EXPECTED);
+				if(expectedFileName == null){
+					File expectedFile = new File(file.getAbsolutePath() + "/" + targetPath.replace(IN, EXP));
+					if(expectedFile.exists()){
+						expectedTargetModel = loadModelByType(expectedFile.getAbsolutePath(), EObject.class);
+					}
+				} else {
+					expectedTargetModel = loadModelByType(file.getAbsolutePath() + "/" + expectedFileName, EObject.class);
+				}
+				// CoED
 				String coedPath = getValueByKey(inputsCategory, KEY_COED);
 				CoEvolutionDefinition coed = loadModelByType(file.getAbsolutePath() + "/" + coedPath, CoEvolutionDefinition.class);
 				DomainSpecificEvolutionSpecification evolutionSpecification = CodsFactory.eINSTANCE.createDomainSpecificEvolutionSpecification();
@@ -241,7 +327,7 @@ public class CoRefactoringTestSuite {
 				RoleMapping targetRoleMapping = ((RoleMappingAction) action).getConcreteRefactoring();
 				String targetMetamodelName = targetRoleMapping.getOwningMappingModel().getTargetMetamodel().getName();
 				String targetRolemappingName = targetRoleMapping.getName();
-				readData.add(new Object[]{file, sourceModel, targetModel, value, selectedElements, sourcePath, targetPath, coed, sourceMetamodelName, targetMetamodelName, sourceRolemappingName, targetRolemappingName});
+				readData.add(new Object[]{file, sourceModel, targetModel, value, selectedElements, sourcePath, targetPath, coed, sourceMetamodelName, targetMetamodelName, sourceRolemappingName, targetRolemappingName, expectedSourceModel, expectedTargetModel});
 			}
 		}
 		return readData;
@@ -286,7 +372,6 @@ public class CoRefactoringTestSuite {
 				return ((StringValue) keyValuePair.getValue()).getValue();
 			}
 		}
-		fail("Key '" + key + "' wasn't found in category '" + category.getName() + "'");
 		return null;
 	}
 
