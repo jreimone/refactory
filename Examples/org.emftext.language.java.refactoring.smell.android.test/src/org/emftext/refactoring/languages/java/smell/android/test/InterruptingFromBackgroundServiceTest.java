@@ -1,8 +1,10 @@
 package org.emftext.refactoring.languages.java.smell.android.test;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.widget.Toast;
@@ -27,6 +29,6 @@ public class InterruptingFromBackgroundServiceTest extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Toast.makeText(this, "Hello World!", 1000).show();
+		Toast.makeText(this, "Hello World!",1000).show();
 	}
 }
