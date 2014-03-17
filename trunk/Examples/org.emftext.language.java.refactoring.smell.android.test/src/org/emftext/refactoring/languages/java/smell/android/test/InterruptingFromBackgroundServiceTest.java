@@ -27,10 +27,6 @@ public class InterruptingFromBackgroundServiceTest extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-
-		startActivity(new Intent(Intent.ACTION_VIEW,
-				Uri.parse("content://contacts")));
-		
 		Toast.makeText(this, "Hello World!", 1000).show();
 	}
 }
