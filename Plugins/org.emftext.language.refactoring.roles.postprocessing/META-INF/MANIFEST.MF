@@ -4,15 +4,6 @@ Bundle-Name: Role Model Postprocessing
 Bundle-SymbolicName: org.emftext.language.refactoring.roles.postprocessing;singleton:=true
 Bundle-Version: 0.0.1
 Require-Bundle: org.emftext.language.refactoring.roles.resource.rolestext,
- org.emftext.language.refactoring.roles,
- org.emftext.refactoring.specification.interpreter,
- org.emftext.language.refactoring.rolemapping,
- org.emftext.refactoring.registry.rolemapping,
- org.eclipse.jface,
- org.emftext.refactoring.ui,
- org.emftext.refactoring.util,
- org.eclipse.equinox.registry,
- org.eclipse.ui.workbench,
- org.emftext.language.refactoring.roles.refactoring
+ org.emftext.language.refactoring.rolemapping
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Jan Reimann
