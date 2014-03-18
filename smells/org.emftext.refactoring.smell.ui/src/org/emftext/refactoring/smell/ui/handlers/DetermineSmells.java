@@ -7,6 +7,10 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -21,17 +25,31 @@ public class DetermineSmells extends AbstractHandler {
 		//		try {
 		// open files
 		//			IEditorReference[] editorReferences = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getEditorReferences();
-		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		final IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		//			for (IEditorReference editorReference : editorReferences) {
 		if(activeEditor == null){
 			return null;
 		}
 		IEditorInput editorInput = activeEditor.getEditorInput();
 		if(editorInput instanceof IFileEditorInput){
-			IFile openFile = ((IFileEditorInput) editorInput).getFile();
+			final IFile openFile = ((IFileEditorInput) editorInput).getFile();
 			if(alreadyHandledFiles.add(openFile)){
-				SmellChecker.removeAllMarkers(openFile);
-				SmellChecker.checkSmellsInFile(openFile, activeEditor);
+				Job job = new Job("Determine Quality Smells") {
+					
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						monitor.beginTask(this.getName(), 3);
+						monitor.subTask("Removing markers");
+						SmellChecker.removeAllMarkers(openFile);
+						monitor.worked(1);
+						monitor.subTask("Check for smells in currently open editor");
+						SmellChecker.checkSmellsInFile(openFile, activeEditor);
+						monitor.worked(2);
+						monitor.done();
+						return Status.OK_STATUS;
+					}
+				};
+				job.schedule();
 				//					openFile.touch(new NullProgressMonitor());
 			}
 		}
