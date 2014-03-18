@@ -36,9 +36,9 @@ import org.emftext.refactoring.util.RoleUtil;
 public class RemoveInterrupFromBackground extends AbstractRefactoringPostProcessor {
 
 	private static String[] NOTIFIER_STATEMENTS	= new String[]{
-													"Notification notification = new Notification.Builder(this)\n\t.setContentTitle(\"%s\")\n\t.build();\n", 
-													"NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);\n", 
-												   	"notificationManager.notify(1, notification);"
+													"\nNotification notification = new Notification.Builder(this)\n\t.setContentTitle(\"%s\")\n\t.build();\n", 
+													"\nNotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);\n", 
+												   	"\nnotificationManager.notify(1, notification);"
 													};
 
 	@Override
@@ -69,9 +69,12 @@ public class RemoveInterrupFromBackground extends AbstractRefactoringPostProcess
 					statements.add(statement);
 					ClassMethod parent = expressionStatement.getParentByType(ClassMethod.class);
 					if(parent != null) {
-						int oldIndex = parent.getStatements().indexOf(expressionStatement);
-						parent.getStatements().remove(expressionStatement);
-						parent.getStatements().addAll(oldIndex, statements);
+						List<Statement> targetStatements = parent.getStatements();
+						int oldIndex = targetStatements.indexOf(expressionStatement);
+						targetStatements.remove(expressionStatement);
+						for (int i = 0; i < statements.size(); i++) {
+							targetStatements.add(oldIndex + i, statements.get(i));
+						}
 					}
 				}
 			}
