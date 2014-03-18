@@ -185,7 +185,7 @@ public class BasicEditorConnectorRegistry implements IEditorConnectorRegistry {
 							if(activeWorkbenchWindow != null){
 								IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 								try {
-									IEditorPart alternative = activePage.openEditor(fileEditorInput, editorID, true, IWorkbenchPage.MATCH_ID);
+									IEditorPart alternative = activePage.openEditor(fileEditorInput, editorID, false, IWorkbenchPage.MATCH_ID);
 									if(!alternative.equals(editorPart)){
 										editorEditorMappingCache.put(editorPart, alternative);
 										return getEditorConnector(alternative);
