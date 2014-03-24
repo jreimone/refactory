@@ -3,6 +3,6 @@ import owl:<http://org.emftext/owl.ecore>
 (
 	incoming refactoring owl:<Duplicate Class>
 	outgoing corefactoring <Duplicate Class> $
-		OUT.Duplicate.name = IN.Duplicate.name + "_Duplicate"
+		OUT.Duplicate.name = IN.Duplicate.name
 	$
 )

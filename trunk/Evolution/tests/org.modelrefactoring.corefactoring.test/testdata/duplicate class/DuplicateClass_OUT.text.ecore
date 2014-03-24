@@ -6,7 +6,7 @@ package classes classes "http://www.ontomore.org/test/transformation/classes.owl
 	class Employee extends Person {
 	}
 
-	class Manager_Duplicate extends Person {
+	class Manager extends Person {
 	}
 
 	class Project {

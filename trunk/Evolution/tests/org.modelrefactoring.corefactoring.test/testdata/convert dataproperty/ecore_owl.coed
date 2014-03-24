@@ -3,7 +3,7 @@ import owl:<http://org.emftext/owl.ecore>
 (
 	incoming refactoring owl:<Convert Data Property To Object Property>
 	outgoing corefactoring <Replace Data Value with Object> $
-		OUT.NewFeature.name = IN.NewFeature.name + "_ValueObject";
-		OUT.Range.name = IN.Range.name + "_fromAule";
+		OUT.NewFeature.name = IN.NewFeature.name;
+		OUT.Range.name = IN.Range.name;
 	$
 )
