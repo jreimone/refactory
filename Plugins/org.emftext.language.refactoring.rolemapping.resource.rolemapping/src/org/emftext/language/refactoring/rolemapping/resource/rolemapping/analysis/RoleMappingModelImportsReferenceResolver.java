@@ -61,6 +61,7 @@ public class RoleMappingModelImportsReferenceResolver implements IRolemappingRef
 			// 1. possibility: Ns URI in Registry
 			if(uriSetCopy.contains(identifier)){
 				result.addMapping(identifier, registry.getEPackage(identifier));
+				return;
 			} else {
 				// 2. possibility: general URI
 				try {

@@ -15,8 +15,6 @@ import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 
 public class ConcreteMappingPackagesOfMetaclassReferenceResolver implements org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EPackage> {
 	
-	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EPackage> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EPackage>();
-	
 	public void resolve(String identifier, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.eclipse.emf.ecore.EPackage> result) {
 		EObject parent = container.eContainer().eContainer();
 		if(parent instanceof RoleMappingModel){
@@ -55,12 +53,10 @@ public class ConcreteMappingPackagesOfMetaclassReferenceResolver implements org.
 			}
 			result.setErrorMessage("No metamodel found for '" + identifier + "'");
 		}
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
 	public String deResolve(org.eclipse.emf.ecore.EPackage element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getName();
-//		return delegate.deResolve(element, container, reference);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
