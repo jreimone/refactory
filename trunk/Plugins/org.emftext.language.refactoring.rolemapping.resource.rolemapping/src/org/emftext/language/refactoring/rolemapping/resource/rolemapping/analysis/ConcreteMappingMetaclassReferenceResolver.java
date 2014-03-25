@@ -25,18 +25,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver;
 
-public class ConcreteMappingMetaclassReferenceResolver
-implements
-org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolver<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> {
+public class ConcreteMappingMetaclassReferenceResolver implements IRolemappingReferenceResolver<ConcreteMapping, EClass> {
 
 	//	private static final String PACKAGE_SEPARATOR = ".";
 	//	private static final String PACKAGE_SEPARATOR_REGEX = "\\.";
 
-	private org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass> delegate = new org.emftext.language.refactoring.rolemapping.resource.rolemapping.analysis.RolemappingDefaultResolverDelegate<org.emftext.language.refactoring.rolemapping.ConcreteMapping, org.eclipse.emf.ecore.EClass>();
-
-	public void resolve(java.lang.String identifier, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
+	public void resolve(java.lang.String identifier, ConcreteMapping container, EReference reference, int position, boolean resolveFuzzy, final IRolemappingReferenceResolveResult<EClass> result) {
 		EObject parent = container.eContainer().eContainer();
 		if (parent instanceof RoleMappingModel) {
 			RoleMappingModel mappingModel = (RoleMappingModel) parent;
@@ -139,7 +139,7 @@ org.emftext.language.refactoring.rolemapping.resource.rolemapping.IRolemappingRe
 //		return packageNavigation.toString();
 //	}
 
-	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.refactoring.rolemapping.ConcreteMapping container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(EClass element, ConcreteMapping container, EReference reference) {
 		String result = element.getName();
 //		EPackage ePackage = element.getEPackage();
 //		EPackage parent = ePackage.getESuperPackage();
