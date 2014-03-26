@@ -30,7 +30,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -47,35 +46,11 @@ public class XtextEditorConnector implements IEditorConnector {
 	private ILocationInFileProvider locationInFileProvider;
 	private Resource resource;
 
-	public XtextEditorConnector() {
-		//
-	}
-
-	public boolean canHandle(IEditorPart editor) {
-		if(editor == null){
-			return false;
-		}
-		if(editor instanceof XtextEditor){
-			this.editor = (XtextEditor) editor;
-			IXtextDocument doc = XtextDocumentUtil.get(editor);
-			resource = doc.modify(new IUnitOfWork<Resource, XtextResource>() {
-
-				public Resource exec(XtextResource state) throws Exception {
-					IResourceServiceProvider resourceServiceProvider = state.getResourceServiceProvider();
-					objectAtOffsetHelper = resourceServiceProvider.get(EObjectAtOffsetHelper.class);
-					locationInFileProvider = resourceServiceProvider.get(ILocationInFileProvider.class);
-					return state;
-				}
-			});
-//			XtextResource resource = getXtextResource(this.editor);
-//			IResourceServiceProvider resourceServiceProvider = resource.getResourceServiceProvider();
-//			objectAtOffsetHelper = resourceServiceProvider.get(EObjectAtOffsetHelper.class);
-//			locationInFileProvider = resourceServiceProvider.get(ILocationInFileProvider.class);
-			if(objectAtOffsetHelper != null && locationInFileProvider != null){
-				return true;
-			}
-		}
-		return false;
+	public XtextEditorConnector(XtextEditor editor, Resource resource, EObjectAtOffsetHelper objectAtOffsetHelper, ILocationInFileProvider locationInFileProvider) {
+		this.editor = editor;
+		this.objectAtOffsetHelper = objectAtOffsetHelper;
+		this.locationInFileProvider = locationInFileProvider;
+		this.resource = resource;
 	}
 
 	public List<EObject> handleSelection(final ISelection selection) {
@@ -105,42 +80,6 @@ public class XtextEditorConnector implements IEditorConnector {
 			}
 		});
 		return selectedElements;
-//		if(selection instanceof ITextSelection){
-//			resource = getXtextResource(editor);
-//			System.out.println(resource);
-//			if(resource instanceof XtextResource){
-//				XtextResource xtextResource = (XtextResource) resource;
-//				ITextSelection textSelection = (ITextSelection) selection;
-//				Set<EObject> elementSet = new LinkedHashSet<EObject>();
-//				int offset = textSelection.getOffset();
-//				for (int i = textSelection.getLength(); i > 0; i--) {
-//					EObject element = objectAtOffsetHelper.resolveElementAt(xtextResource, offset);
-//					elementSet.add(element);
-//					offset++;
-//				}
-//				List<EObject> nonProxyElements = new LinkedList<EObject>();
-//				for (EObject object : elementSet) {
-//					if(!object.eIsProxy()){
-//						nonProxyElements.add(object);
-//					}
-//				}
-//				return nonProxyElements;
-//			}
-//		}
-//		return null;
-	}
-
-	private XtextResource getXtextResource(XtextEditor editor){
-		IXtextDocument doc = XtextDocumentUtil.get(editor);
-		XtextResource resource;
-		resource = doc.modify(new IUnitOfWork<XtextResource, XtextResource>() {
-
-			public XtextResource exec(XtextResource state) throws Exception {
-				return state;
-			}
-
-		});
-		return resource;
 	}
 
 	public TransactionalEditingDomain getTransactionalEditingDomain() {
@@ -152,12 +91,6 @@ public class XtextEditorConnector implements IEditorConnector {
 		doc.modify(new IUnitOfWork<String, XtextResource>() {
 
 			public String exec(XtextResource state) throws Exception {
-//				URI uri = resource.getURI();
-//				String pathString = uri.toPlatformString(true);
-//				IPath path = Path.fromOSString(pathString);
-//				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-//				IEditorInput editorInput = new FileEditorInput(file);
-//				editor.setInput(editorInput);
 				int offset = Integer.MAX_VALUE;
 				int length = 0;
 				for (EObject object : objectsToSelect) {

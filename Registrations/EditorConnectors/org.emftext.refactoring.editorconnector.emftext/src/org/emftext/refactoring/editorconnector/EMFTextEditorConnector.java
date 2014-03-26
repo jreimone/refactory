@@ -21,8 +21,6 @@ import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -31,36 +29,24 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.emftext.access.EMFTextAccessProxy;
 import org.emftext.access.resource.IEditor;
 import org.emftext.access.resource.ILocationMap;
 import org.emftext.access.resource.IResource;
 
 public class EMFTextEditorConnector implements IEditorConnector {
 
-	private IEditorPart editor;
+	private ITextEditor textEditor;
+	private IEditor emftextEditor;
 
-	public EMFTextEditorConnector() {
-		// empty dffff
-	}
-
-	public boolean canHandle(IEditorPart editor) {
-		if(editor == null){
-			return false;
-		}
-		if(EMFTextAccessProxy.isAccessibleWith(editor.getClass(), IEditor.class)){
-			this.editor = editor;
-			return true;
-		}
-		return false;
+	protected EMFTextEditorConnector(ITextEditor textEditor, IEditor emftextEditor) {
+		this.textEditor = textEditor;
+		this.emftextEditor = emftextEditor;
 	}
 
 	public List<EObject> handleSelection(ISelection selection) {
-		// TODO jreimann: this method can be used for DD OCL to determine the real model elements instead of the CS elements
-		if(editor == null){
+		if(emftextEditor == null){
 			return null;
 		}
-		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
 		ILocationMap locationMap = emftextResource.getLocationMap();
 		ITextSelection textSelection = (ITextSelection) selection;
@@ -96,36 +82,37 @@ public class EMFTextEditorConnector implements IEditorConnector {
 
 	public void selectEObjects(List<EObject> objectsToSelect) {
 		try {
-			IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 			IResource emftextResource = emftextEditor.getResource();
 			ILocationMap locationMap = emftextResource.getLocationMap();
 			if (objectsToSelect.size() > 0) {
 				EObject eObject = objectsToSelect.get(0);
 				int start = locationMap.getCharStart(eObject);
 				int end = locationMap.getCharEnd(eObject);
-				((ITextEditor) editor).selectAndReveal(start, end - start + 1);
+				textEditor.selectAndReveal(start, end - start + 1);
 			} else {
-				int startOffset = ((ITextSelection) ((ITextEditor) editor).getSelectionProvider().getSelection()).getOffset();
+				int startOffset = ((ITextSelection) textEditor.getSelectionProvider().getSelection()).getOffset();
 				EObject nearestObject = locationMap.getElementsAt(startOffset).get(
 						0);
 				startOffset = locationMap.getCharStart(nearestObject);
 				int endOffset = locationMap.getCharEnd(nearestObject);
 				int length = endOffset - startOffset + 1;
-				((ITextEditor) editor).selectAndReveal(startOffset, length);
+				textEditor.selectAndReveal(startOffset, length);
 			}
 		} catch (Exception e) {
 			// methods could not be invoked via EMFTextAccessProxy
-			IStatus status = new Status(IStatus.WARNING, Activator.PLUGIN_ID, "Could not select objects after refactoring in editor: " + editor);
-			Activator.getDefault().getLog().log(status);
+//			Bundle bundle = FrameworkUtil.getBundle(this.getClass());
+//			String symbolicName = bundle.getSymbolicName();
+//			IStatus status = new Status(IStatus.WARNING, symbolicName, "Could not select objects after refactoring in editor: " + textEditor);
+//			Activator.getDefault().getLog().log(status);
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public EObject getModel() {
-		if(editor == null){
+		if(emftextEditor == null){
 			return null;
 		}
-		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
 		EObject model = emftextResource.getContents().get(0);
 		return model;
@@ -133,7 +120,6 @@ public class EMFTextEditorConnector implements IEditorConnector {
 
 	@Override
 	public void setMarkingForEObject(EObject element, IMarker marker) {
-		IEditor emftextEditor = (IEditor) EMFTextAccessProxy.get(editor, IEditor.class);
 		IResource emftextResource = emftextEditor.getResource();
 		ILocationMap locationMap = emftextResource.getLocationMap();
 		if(element.eIsProxy()){
@@ -157,7 +143,7 @@ public class EMFTextEditorConnector implements IEditorConnector {
 
 	@Override
 	public IEditorPart getEditor() {
-		return editor;
+		return textEditor;
 	}
 
 }
