@@ -3,7 +3,6 @@
 
 <plugin>
 
-   <extension-point id="org.emftext.refactoring.editorconnector" name="editorconnector" schema="schema/org.emftext.refactoring.editorconnector.exsd"/>
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
