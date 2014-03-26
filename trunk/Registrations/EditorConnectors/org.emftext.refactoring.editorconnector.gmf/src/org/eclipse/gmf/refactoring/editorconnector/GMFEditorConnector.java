@@ -37,43 +37,8 @@ public class GMFEditorConnector implements IEditorConnector {
 	private EObject model;
 	private DiagramDocumentEditor documentEditor;
 
-	public GMFEditorConnector() {
-		// 
-	}
-
-	public boolean canHandle(IEditorPart editor) {
-//		try {
-//			ISelection selection = editor.getEditorSite().getSelectionProvider().getSelection();
-//			if(selection instanceof StructuredSelection){
-//				Object first = ((StructuredSelection) selection).getFirstElement();
-//				if(first != null && first instanceof EditPart){
-//					EditPartViewer viewer = ((EditPart) first).getViewer();
-//					if(viewer instanceof IDiagramGraphicalViewer){
-//						diagramTransactionalEditingDomain = ((IGraphicalEditPart) first).getEditingDomain();
-//						return true;
-//					}
-//				}
-//			}
-//		} catch (Exception e) {
-//			// not an GMF editor
-//		}
-//		return false;
-		return alternativeCanHandle(editor);
-	}
-	
-	private boolean alternativeCanHandle(IEditorPart editor){
-		if(editor instanceof DiagramDocumentEditor){
-			documentEditor = (DiagramDocumentEditor) editor;
-			diagramTransactionalEditingDomain = documentEditor.getEditingDomain();
-			DiagramEditPart editPart = documentEditor.getDiagramEditPart();
-			if(editPart.getModel() instanceof View){
-				model = EcoreUtil.getRootContainer(((View) editPart.getModel()).getElement());
-				if(model != null){
-					return true;
-				}
-			}
-		}
-		return false;
+	public GMFEditorConnector(DiagramDocumentEditor documentEditor) {
+		this.documentEditor = documentEditor;
 	}
 
 	public TransactionalEditingDomain getTransactionalEditingDomain() {
@@ -101,6 +66,12 @@ public class GMFEditorConnector implements IEditorConnector {
 
 	@Override
 	public EObject getModel() {
+		if(model == null){
+			DiagramEditPart editPart = documentEditor.getDiagramEditPart();
+			if(editPart.getModel() instanceof View){
+				model = EcoreUtil.getRootContainer(((View) editPart.getModel()).getElement());
+			}
+		}
 		return model;
 	}
 
