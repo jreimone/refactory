@@ -32,17 +32,17 @@ import org.eclipse.ui.IEditorPart;
  */
 public interface IEditorConnector {
 
-	/**
-	 * Returns <code>true</code> if this connector can handle the given editor. This method must always
-	 * be invoked before {@link IEditorConnector#handleSelection(ISelection)} and so will in the
-	 * context of contributing a context menu for model refactorings here. So implementors must
-	 * save the given <code>editor</code> passed in this method for their own to then access it in
-	 * {@link IEditorConnector#handleSelection(ISelection)}.
-	 * 
-	 * @param editor
-	 * @return
-	 */
-	public boolean canHandle(IEditorPart editor);
+//	/**
+//	 * Returns <code>true</code> if this connector can handle the given editor. This method must always
+//	 * be invoked before {@link IEditorConnector#handleSelection(ISelection)} and so will in the
+//	 * context of contributing a context menu for model refactorings here. So implementors must
+//	 * save the given <code>editor</code> passed in this method for their own to then access it in
+//	 * {@link IEditorConnector#handleSelection(ISelection)}.
+//	 * 
+//	 * @param editor
+//	 * @return
+//	 */
+//	public boolean canHandle(IEditorPart editor);
 	
 	/**
 	 * This method returns the {@link EObject}s contained in the given <code>selection</code>.
