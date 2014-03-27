@@ -6,5 +6,5 @@ to the file body constructor. This refactoring is specific to the Apache HTTP Cl
 library and removes the quality smell "Data Transmission Without Compression".
 */
 "Add Data Compression to Apache HTTP Client based file transmission" maps <SelectX> { 
-	 Selection := instantiations.NewConstructorCall; 
+	 Selection := java.instantiations.NewConstructorCall; 
 }

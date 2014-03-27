@@ -2,9 +2,9 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/java>
 
 "Remove Empty Methods" maps <RemoveEmptyContainedX> { 
 	
-	RemoveeContainer := classifiers.Class{
+	RemoveeContainer := java.classifiers.Class{
 		removees := members;
 	};
 	
-	Removee := members.Method; 
+	Removee := java.members.Method; 
 }
