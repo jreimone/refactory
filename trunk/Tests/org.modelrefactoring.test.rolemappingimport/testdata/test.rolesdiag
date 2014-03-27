@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:roles="http://www.emftext.org/language/roles" xmi:id="_majvcLTmEeO-aM3VtZR2ew" type="Role Model" name="test.rolesdiag" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_mkIiMLTmEeO-aM3VtZR2ew" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_mkMzoLTmEeO-aM3VtZR2ew" type="5001"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_mkNasLTmEeO-aM3VtZR2ew" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_mkNasbTmEeO-aM3VtZR2ew"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_mkNasrTmEeO-aM3VtZR2ew"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_mkIiMbTmEeO-aM3VtZR2ew"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_mkIiMrTmEeO-aM3VtZR2ew" fontName="Sans"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_mkIiM7TmEeO-aM3VtZR2ew"/>
+    <element xmi:type="roles:Role" href="test.rolestext#//@roles[name='Source']"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mkIiNLTmEeO-aM3VtZR2ew" x="190" y="145"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_majvcbTmEeO-aM3VtZR2ew"/>
+  <element xmi:type="roles:RoleModel" href="test.rolestext#/"/>
+</notation:Diagram>
