@@ -74,10 +74,6 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 // EMF Workspace + Transaction
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/transaction/downloads/drops/1.7.0/R201306111400/emf-transaction-runtime-1.7.0.zip
 
-// all plugins from ZESSY repository
-// not needed anymore because it is moved to Refactory repo
-//svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/zessy/sources/evolution/org.qualitune.refactoring.energy.test
-
 // UML2
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downloads/drops/4.1.1/R201309020826/mdt-uml2-runtime-4.1.1.zip
 
