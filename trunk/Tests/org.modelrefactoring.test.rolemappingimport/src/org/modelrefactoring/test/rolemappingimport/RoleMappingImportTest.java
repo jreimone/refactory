@@ -8,7 +8,6 @@ import java.io.FileFilter;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -29,7 +28,6 @@ import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.Ro
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -37,8 +35,6 @@ import org.junit.Test;
 public class RoleMappingImportTest {
 
 	private static final String PATH_BASE			= "testdata/";
-	private static final String PATH_METAMODEL		= PATH_BASE + "HierarchicalMetamodel.ecore";
-	private static final String PATH_ROLES			= PATH_BASE + "test.rolestext";
 	private static final String PATH_ROLEMAPPING	= PATH_BASE + "test.rolemapping";
 	
 	private static Resource resource;
