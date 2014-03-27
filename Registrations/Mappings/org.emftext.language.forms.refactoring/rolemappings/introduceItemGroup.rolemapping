@@ -6,7 +6,7 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/forms>
 	
 	OrigContainer := Group {
 		extracts := items;
-		referer := form;
+//		referer := form;
 	};
 	
 	NewContainer := Group(newName -> name){

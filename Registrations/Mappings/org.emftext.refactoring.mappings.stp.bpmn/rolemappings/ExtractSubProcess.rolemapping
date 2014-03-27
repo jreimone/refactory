@@ -1,17 +1,14 @@
 ROLEMODELMAPPING FOR <http://www.omg.org/spec/BPMN/20100524/MODEL-XMI> 
 
-"Extract SubProcess" maps <ExtractXwithReferenceClass> {
-	Extract := Activity;
+"Extract SubProcess" maps <ExtractSubX> {
+	Extractee := Activity;
 	
-	NewContainer := SubProcess (newName -> name){
+	NewContainer := SubProcess (name -> name){
 		moved := flowElements;
 	};
 	
 	OrigContainer := FlowElementsContainer{
 		extracts := flowElements;
+		newParent := flowElements;
 	};
-	
-	ContainerContainer := FlowElementsContainer{
-		target := flowElements;
-	}; 
 }
