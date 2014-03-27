@@ -1,19 +1,19 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/java>  
 	
 "Extract Method" maps <ExtractXwithReferenceClass> { 
-	Extract := statements.Statement;
-	OrigContainer := members.ClassMethod{
+	Extract := java.statements.Statement;
+	OrigContainer := java.members.ClassMethod{
 		extracts := statements;
 		referer := statements : ExpressionStatement -> expression : MethodCall;
 	};
-	NewContainer := members.ClassMethod (newName -> name){
+	NewContainer := java.members.ClassMethod (newName -> name){
 		moved := statements;
 	};
-	ContainerContainer := classifiers.Class{
+	ContainerContainer := java.classifiers.Class{
 		source := members;
 		target := members;
 	};
-	MovedReference := references.MethodCall{
+	MovedReference := java.references.MethodCall{
 		containerRef := target;
 	};
 }	
