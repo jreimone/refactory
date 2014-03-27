@@ -114,7 +114,9 @@ get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3
 get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.10.0/S201309301555/GEF-zest-3.10.0M2.zip
 
 // CodeComposers
-git:https://github.com/DevBoost/CodeComposers.git
+// git:https://github.com/DevBoost/CodeComposers.git
+git:https://github.com/DevBoost/CodeComposers.git!Plugins/de.devboost.codecomposers/
+git:https://github.com/DevBoost/CodeComposers.git!Features/de.devboost.codecomposers.feature/
 
 // Ecore Text
 //git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/EcoreText/
@@ -142,7 +144,10 @@ get:http://emftext.org/update/plugins/org.reuseware.sokan.ui.model.edit_1.0.1.v2
 get:http://emftext.org/update/features/org.reuseware.sokan_1.0.1.v201207310007.jar
 
 // Manifest for Codegen
-git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
+// git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/
+git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/org.emftext.language.manifest
+git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/org.emftext.language.manifest.resource.manifest
+git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/Manifest/org.emftext.language.manifest.resource.manifest.ui
 
 // TextAdventure for Mapping
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/TextAdventure/
