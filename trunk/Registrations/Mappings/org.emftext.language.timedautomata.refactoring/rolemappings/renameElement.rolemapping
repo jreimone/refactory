@@ -1,5 +1,5 @@
 ROLEMODELMAPPING FOR <http://www.emftext.org/language/timedAutomata>
 
 "Rename EElement" maps <RenameX> { 
-	 Nameable := base.Nameable(name -> name); 
+	 Nameable := timedAutomata.base.Nameable(name -> name); 
 }
