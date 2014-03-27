@@ -1,0 +1,31 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+IMPORTS <platform:/resource/org.modelrefactoring.test.rolemappingimport/testdata/HierarchicalMetamodel.ecore>
+
+"MappingWithoutPackagesFromImport" maps <platform:/resource/org.modelrefactoring.test.rolemappingimport/testdata/test.rolestext> { 
+	Source := Root;
+}
+
+"MappingWithSinglePackageFromImport" maps <platform:/resource/org.modelrefactoring.test.rolemappingimport/testdata/test.rolestext> { 
+	Source := hierarchicalmetamodel.Root;
+}
+
+"MappingWithSubPackageFromImport" maps <platform:/resource/org.modelrefactoring.test.rolemappingimport/testdata/test.rolestext> { 
+	Source := hierarchicalmetamodel.layer1.Layer1Root;
+}
+
+// this one must fail since layer1 is no valid root package
+"FailingMappingWithSubPackageFromImportAsFirstPackage" maps <platform:/resource/org.modelrefactoring.test.rolemappingimport/testdata/test.rolestext> { 
+	Source := layer1.Layer1Root;
+}
+
+"MappingWithSubSubPackageFromImport" maps <platform:/resource/org.modelrefactoring.test.rolemappingimport/testdata/test.rolestext> { 
+	Source := hierarchicalmetamodel.layer1.layer1Sub.Layer1Sub1Root;
+}
+
+"MappingWithPackageFromTargetMetamodel" maps <platform:/resource/org.modelrefactoring.test.rolemappingimport/testdata/test.rolestext> { 
+	Source := ecore.EClass;
+}
+
+"MappingWithoutPackagesFromTargetMetamodel" maps <platform:/resource/org.modelrefactoring.test.rolemappingimport/testdata/test.rolestext> { 
+	Source := EClass;
+}
