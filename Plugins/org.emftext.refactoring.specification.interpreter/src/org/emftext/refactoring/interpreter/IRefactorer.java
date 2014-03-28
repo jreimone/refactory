@@ -42,10 +42,10 @@ public interface IRefactorer {
 	 * The selection can come for example from selected nodes in a EMF generated tree editor. 
 	 * This method can only be invoked if the rolemapping to be used in this refactoring
 	 * only contains only one role marked is {@link RoleModifier#INPUT}.
-	 * This method determines the only input role and delegates to {@link #setInputRoleBinding(Map)}. 
+	 * This method determines the only input role and delegates to {@link #setInputRoleBindings(Map)}. 
 	 * 
 	 * @param selectedElements the selected elements
-	 * @see #setInputRoleBinding(Map)
+	 * @see #setInputRoleBindings(Map)
 	 */
 	public void setInput(List<? extends EObject> selectedElements);
 	
@@ -59,7 +59,7 @@ public interface IRefactorer {
 	 * 
 	 * @param inputRoleBinding
 	 */
-	public void setInputRoleBinding(Map<String, List<EObject>> inputRoleBinding);
+	public void setInputRoleBindings(Map<String, List<EObject>> inputRoleBinding);
 	
 	/**
 	 * Returns the role bindings produced while executing the refactoring.
@@ -76,6 +76,13 @@ public interface IRefactorer {
 	 * @return
 	 */
 	public List<EObject> getInput();
+	
+	/**
+	 * Returns only those role bindings belonging to input roles.
+	 * 
+	 * @return
+	 */
+	public Map<Role, List<EObject>> getInputRoleBindings();
 	
 	/**
 	 * Infers over the mapped roles of the elements set with {@link #setInput(EList)} and determines 

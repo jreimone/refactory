@@ -15,6 +15,7 @@
  ******************************************************************************/
 package org.emftext.refactoring.registry.rolemapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * Abstract class implementing basic functionality of {@link IRefactoringPostProcessor IRefactoringPostProcessor}.
@@ -33,20 +35,33 @@ import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
  * by providing backwards comatibility. Furthermore, newer versions of concrete post processors do not need to
  * implement the deprecated interface.
  * 
- * @author Christoph Seidl
+ * @author Christoph Seidl, Jan Reimann
  */
 public class AbstractRefactoringPostProcessor implements IRefactoringPostProcessor {
 
-	//Deprecated
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	ResourceSet resourceSet, ChangeDescription change) {
+	// 1st API release
+	@Deprecated
+	public IStatus process(Map<Role, List<EObject>> roleBindings, ResourceSet resourceSet, ChangeDescription change) {
 		return Status.OK_STATUS;
 	}
-
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap,	EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+	
+	// 2nd API release
+	@Deprecated
+	public IStatus process(Map<Role, List<EObject>> roleBindings, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
 			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection) {
-		
+		return process(roleBindings, resourceSet, change);
+	}
+	
+	// 3rd API release
+	public IStatus process(Map<Role, List<EObject>> roleBindings, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, 
+			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
 		//Provide backwards compatibility for those classes that need it.
 		//All others may simply override this method.
-		return process(roleRuntimeInstanceMap, resourceSet, change);
+		List<EObject> initialSelection = new ArrayList<EObject>();
+		List<Role> boundInputRoles = RoleUtil.getBoundInputRoles(roleBindings);
+		for (Role boundInputRole : boundInputRoles) {
+			initialSelection.addAll(roleBindings.get(boundInputRole));
+		}
+		return process(roleBindings, refactoredModel, resourceSet, change, refSpec, customWizardPages, isFakeRun, copier, initialSelection);
 	}
 }

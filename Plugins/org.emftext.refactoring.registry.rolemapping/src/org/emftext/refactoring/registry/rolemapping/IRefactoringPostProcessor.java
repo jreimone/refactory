@@ -47,9 +47,9 @@ import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 public interface IRefactoringPostProcessor {
 	/**
 	 * This method will be invoked after the refactoring process. Do some additional transformations here by using 
-	 * the given <code>roleRuntimeInstanceMap</code>. Its keys are the {@link Role roles} used in the
+	 * the given <code>roleBindings</code>. Its keys are the {@link Role roles} used in the
 	 * {@link ConcreteMapping concrete mappings} of the {@link Mapping mapping} to which this postprocessor is connected.
-	 * The value of each key can be a single {@link EObject object} or a list of {@link EObject objects} representing
+	 * The value of each key is a list of {@link EObject objects} representing
 	 * the concrete objects on which the roles were bound at runtime of the refactoring.<br>
 	 * The passed {@link ResourceSet resourceSet} contains all {@link Resource resources} which are referenced from
 	 * the refactored model and are referencing the refactored model. Use this resourceSet to load more resources into it
@@ -59,16 +59,15 @@ public interface IRefactoringPostProcessor {
 	 * Besides the other parameters <code>refSpec</code> can be used to do further analysis of the {@link RefactoringSpecification}
 	 * which constitutes this refactoring by which this post processor was invoked. The {@link RefactoringSpecification}
 	 * of the current refactoring is passed to this parameter and can, e.g., be used to implement transformations in other
-	 * models depending in this refactoring, in which restructurings are executed that correspond to the passed refSpec.
+	 * models depending on this refactoring, in which restructurings are executed that correspond to the passed refSpec.
 	 * 
-	 * @param roleRuntimeInstanceMap the map containing {@link Role roles} as keys and its at runtime bound {@link EObject objects} as values
+	 * @param roleBindings the map containing {@link Role roles} as keys and its at runtime bound {@link EObject objects} as values
 	 * @param refactoredModel TODO
 	 * @param resourceSet the {@link ResourceSet} containing all referencing and inverse referencing {@link Resource resources}
 	 * @param change the {@link ChangeDescription} containing all changes which were made before invoking this postprocessor
 	 * @param refSpec the passed {@link RefactoringSpecification} for further analysis
 	 * @param copier a copier is passed which contains a map from original to copied model elements
-	 * @param initialSelection all the initial selected elements
 	 * @return the status of the postprocessing 
 	 */
-	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier, List<? extends EObject> initialSelection);
+	public IStatus process(Map<Role, List<EObject>> roleBindings, EObject refactoredModel, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier);
 }

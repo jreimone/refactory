@@ -64,7 +64,7 @@ import org.emftext.refactoring.util.RoleUtil;
 public class Refactorer implements IRefactorer {
 
 	private EObject model;
-	private List<EObject> currentSelection;
+//	private List<EObject> currentSelection;
 	private boolean occuredErrors;
 	private List<Resource> resourcesToSave;
 	private Resource resource;
@@ -161,7 +161,7 @@ public class Refactorer implements IRefactorer {
 					wizardPage.setRoleRuntimeInstanceMap(interpreter.getRoleRuntimeInstances());
 				}
 
-				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, copier, currentSelection);
+				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, copier);
 				int severity = postProcessingStatus.getSeverity();
 
 				if (severity != IRefactoringStatus.OK) {
@@ -182,7 +182,7 @@ public class Refactorer implements IRefactorer {
 	 * @param interpreter
 	 * @param refactoredModelRS
 	 */
-	private void fakeInterpreteAndPreCollectValues(RoleMapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
+	private void fakeInterpreteAndPreCollectValues(RoleMapping mapping, List<EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
 		// copy init start
 		copier = new Copier(false, true);
 		List<EObject> originalElements = new LinkedList<EObject>();
@@ -224,15 +224,7 @@ public class Refactorer implements IRefactorer {
 				RefactoringSpecification fakeRefactoringSpecification = fakeInterpreter.getRefactoringSpecification();
 				List<IModelRefactoringWizardPage> customWizardPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(mapping, fakeInterpreter.getRoleRuntimeInstances());
 
-				List<EObject> copiedSelection = new ArrayList<EObject>();
-				for (EObject selectedElement : currentSelection) {
-					EObject copiedSelectedElement = copier.get(selectedElement);
-					if(copiedSelectedElement != null){
-						copiedSelection.add(copiedSelectedElement);
-					}
-				}
-
-				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier, copiedSelection);
+				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier);
 
 				if (fakePostProcessingStatus.getSeverity() != IRefactoringStatus.OK) {
 					int severity = fakePostProcessingStatus.getSeverity();
@@ -303,7 +295,7 @@ public class Refactorer implements IRefactorer {
 	}
 
 	private List<EObject> filterSelectedElements() {
-		List<EObject> filteredElements = RoleUtil.filterObjectsByInputRoles(currentSelection, getRoleMapping());
+		List<EObject> filteredElements = getInput();
 		List<EObject> elementsToRemove = new LinkedList<EObject>();
 		for (EObject child : filteredElements) {
 			List<EObject> othersList = new LinkedList<EObject>();
@@ -348,10 +340,10 @@ public class Refactorer implements IRefactorer {
 		}
 		Map<String, List<EObject>> inputRoleBinding = new HashMap<String, List<EObject>>();
 		inputRoleBinding.put(inputRoles.get(0).getName(), elements);
-		setInputRoleBinding(inputRoleBinding);
+		setInputRoleBindings(inputRoleBinding);
 	}
 	
-	public void setInputRoleBinding(Map<String, List<EObject>> inputRoleBinding){
+	public void setInputRoleBindings(Map<String, List<EObject>> inputRoleBinding){
 		for (String roleName : inputRoleBinding.keySet()) {
 			Role role = RoleUtil.getRoleByName(roleMapping, roleName);
 			List<Role> inputRoles = RoleUtil.getAllInputRoles(roleMapping);
@@ -367,14 +359,6 @@ public class Refactorer implements IRefactorer {
 					roleBindings.put(role, resolvedElements);
 				}
 			}
-		}
-		// for convenience and API compatibility
-		if(currentSelection == null){
-			currentSelection = new ArrayList<EObject>();
-		}
-		for (Role inputRole : boundInputRoles) {
-			List<EObject> boundElements = roleBindings.get(inputRole);
-			currentSelection.addAll(boundElements);
 		}
 	}
 	
@@ -414,6 +398,19 @@ public class Refactorer implements IRefactorer {
 
 	@Override
 	public List<EObject> getInput() {
-		return currentSelection;
+		List<EObject> inputElements = new ArrayList<EObject>();
+		for (List<EObject> boundElements : getInputRoleBindings().values()) {
+			inputElements.addAll(boundElements);
+		}
+		return inputElements;
+	}
+	
+	public Map<Role, List<EObject>> getInputRoleBindings(){
+		Map<Role, List<EObject>> inputRoleBindings = new HashMap<Role, List<EObject>>();
+		for (Role inputRole : boundInputRoles) {
+			List<EObject> boundElements = roleBindings.get(inputRole);
+			inputRoleBindings.put(inputRole, boundElements);
+		}
+		return inputRoleBindings;
 	}
 }
