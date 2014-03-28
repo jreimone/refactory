@@ -91,23 +91,6 @@ public class Refactorer implements IRefactorer {
 		interpreter.initialize(refSpec, roleMapping);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactorer#getPossibleRefactorings()
-	 */
-	//	public List<RefactoringSpecification> getPossibleRefactoringsForNearestRoleModels(double minEquality) {
-	//		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
-	//		List<RoleMapping> possibleMappings = RoleUtil.getPossibleMappingsForSelection(currentSelection, roleMappings, minEquality);
-	//		for (RoleMapping mapping : possibleMappings) {
-	//			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(mapping.getMappedRoleModel());
-	//			if (refSpec != null) {
-	//				refSpecs.add(refSpec);
-	//			}
-	//		}
-	//		return refSpecs;
-	//	}
-
 	public void fakeRefactor() {
 		if(filteredSelection == null){
 			loadReferencingResources();
@@ -130,42 +113,10 @@ public class Refactorer implements IRefactorer {
 		} 
 	}
 
-	//cseidl
-	//This is basically a copy of fakeRefactor(...). There is probably some redundancy that can be reduced.
-	//	public IRefactoringFakeInterpreter collectValuesToProvide(RoleMapping mapping) {
-	//		if (mapping == null) {
-	//			currentMapping = null;
-	//			return null;
-	//		}
-	//		currentMapping = mapping;
-	//		currentFilteredSelection = filterSelectedElements(mapping);
-	//		currentInterpreter = createInterpreter();
-	//
-	//		if (currentInterpreter != null && currentFilteredSelection.size() > 0) {
-	//			List<Resource> allReferencingResources = IndexConnectorRegistry.INSTANCE.getReferencingResources(model);
-	//			currentModelResourceSet = getResource().getResourceSet();
-	//			for (Resource resource : allReferencingResources) {
-	//				URI uri = resource.getURI();
-	//				currentModelResourceSet.getResource(uri, true);
-	//			}
-	//
-	//			return preCollectValues(mapping, currentFilteredSelection, currentInterpreter, currentModelResourceSet);
-	//		} else {
-	//			return null;
-	//		}
-	//	}
-
 	public EObject getFakeRefactoredModel() {
 		return fakeRefactoredModel;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactorer#refactor(org.emftext.
-	 * language.refactoring.refactoring_specification.RefactoringSpecification,
-	 * boolean)
-	 */
 	public EObject refactor() {
 		loadReferencingResources();
 		if (roleMapping == null || interpreter == null || filteredSelection.size() == 0 || currentModelResourceSet == null) {
@@ -220,96 +171,6 @@ public class Refactorer implements IRefactorer {
 		return interpreter;
 	}
 
-	//cseidl
-	//This is basically a copy of fakeInterpreteAndPreCollectValues(...). There is probably some redundancy that can be reduced.
-	//	private IRefactoringFakeInterpreter preCollectValues(RoleMapping mapping, List<? extends EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS)
-	//	{
-	//		// copy init start
-	//		Copier copier = new Copier(false, true);
-	//		List<EObject> originalElements = new LinkedList<EObject>();
-	//		// copy start
-	//		for (Resource resource : refactoredModelRS.getResources()) {
-	//			URI uri = resource.getURI();
-	//			if (uri.isPlatformResource() || uri.isFile()) {
-	//				for (EObject model : resource.getContents()) {
-	//					originalElements.add(model);
-	//				}
-	//			}
-	//		}
-	//		copier.copyAll(originalElements);
-	//		copier.copyReferences();
-	//		List<EObject> copiedInputSelection = new LinkedList<EObject>();
-	//		for (EObject eObject : filteredElements) {
-	//			copiedInputSelection.add(copier.get(eObject));
-	//		}
-	//		EObject copiedModel = copier.get(model);
-	//		interpreter.setInput(copiedInputSelection);
-	//		IRefactoringFakeInterpreter fakeInterpreter = interpreter
-	//				.getFakeInterpreter();
-	//		fakeInterpreter.setInput(copiedInputSelection);
-	//		try {
-	//			// cseidl: TODO: Actually, only the valuesToProvide are needed. If there
-	//			// is a better way to retrieve them, this should happen here.
-	//			fakeInterpreter.interprete(copiedModel);
-	//
-	//			//As a side effect, the fake refactoring also collects the roleRuntimeInstanceMap.
-	//			//The "real" fake refactoring is performed later. If the map is not cleared here,
-	//			//all entries will be duplicated.
-	//			fakeInterpreter.getRoleRuntimeInstances().clear();
-	//
-	//		} catch (Exception e) {
-	//			// e.printStackTrace();
-	//			RegistryUtil.log("fake interpreter threw exception", IStatus.ERROR,
-	//					e);
-	//			return fakeInterpreter;
-	//		}
-	//		// copy end
-	//
-	//
-	//
-	//		List<IValueProvider<?, ?>> valueProviders = fakeInterpreter.getValueProviderFactory().getValuesToProvide();
-	//
-	//		Map<EObject, EObject> inverseCopier = new LinkedHashMap<EObject, EObject>();
-	//		for (EObject originalObject : copier.keySet()) {
-	//			inverseCopier.put(copier.get(originalObject), originalObject);
-	//		}
-	//		List<IValueProvider<?, ?>> provideableValues = new LinkedList<IValueProvider<?, ?>>();
-	//		for (IValueProvider<?, ?> valueProvider : valueProviders) {
-	//			// check if value can be provided before Refactoring
-	//			Object fakeObject = valueProvider.getFakeObject();
-	//			if (fakeObject instanceof EStructuralFeature) {
-	//				provideableValues.add(valueProvider);
-	//			} else if (fakeObject instanceof EObject) {
-	//				EObject realObject = inverseCopier.get(fakeObject);
-	//				if (realObject != null) {
-	//					provideableValues.add(valueProvider);
-	//				}
-	//			} else if (fakeObject instanceof List<?>) {
-	//				@SuppressWarnings("unchecked")
-	//				List<EObject> fakeObjects = (List<EObject>) fakeObject;
-	//				boolean provideable = true;
-	//				for (EObject object : fakeObjects) {
-	//					EObject realObject = inverseCopier.get(object);
-	//					if (realObject == null) {
-	//						provideable = false;
-	//						break;
-	//					}
-	//				}
-	//				if (provideable) {
-	//					provideableValues.add(valueProvider);
-	//				}
-	//			}
-	//		}
-	//
-	//		//		fakeInterpreter.setProvideableValues(provideableValues);
-	//
-	//		for (IValueProvider<?, ?> valueProvider : provideableValues) {
-	//			valueProvider.setCopier(copier);
-	//		}
-	//
-	//		return fakeInterpreter;
-	//	}
-
 	/**
 	 * @param filteredElements
 	 * @param interpreter
@@ -332,34 +193,7 @@ public class Refactorer implements IRefactorer {
 		copier.copyReferences();
 		List<EObject> copiedInputSelection = new LinkedList<EObject>();
 		for (EObject original : filteredElements) {
-			///// von hier neu
-			// TODO hier kommt NULL raus beim Kopieren, fuck
-			//			for (EObject originalModel : originalElements) {
-			//				if(EcoreUtil.isAncestor(originalModel, original)){
-			//					URI uri = EcoreUtil.getURI(original);
-			//					EObject copiedModel = copier.get(originalModel);
-			//					Resource copiedRsource = copiedModel.eResource();
-			//					if(copiedRsource == null){
-			//						ResourceSet copiedRS = new ResourceSetImpl();
-			//						URI copiedUri = EcoreUtil.getURI(copiedModel);
-			//						copiedRsource = copiedRS.createResource(copiedUri);
-			//						copiedRsource.getContents().add(copiedModel);
-			//					}
-			//					EObject copy = copiedRsource.getEObject(uri.toString());
-			//					copiedInputSelection.add(copy);
-			//				}
-			//				
-			//			}
-			//// bis hier hin
 			EObject copy = copier.get(original);
-			//if(copy == null){
-			//				EObject eObject = refactoredModelRS.getEObject(uri, true);
-			//				EObject eObject2 = model.eResource().getResourceSet().getEObject(uri, true);
-			//				 EObject eObject4 = model.eResource().getEObject(uri.toString());
-			//				EObject eObject3 = originalElements.get(0).eResource().getResourceSet().getEObject(uri, true);
-			//				EObject eObject5 = originalElements.get(0).eResource().getEObject(uri.toString());
-			//				System.out.println();
-			//}
 			if(copy == null) {
 				RegistryUtil.log("Copy couldn't be found for fake interpreting. Retry right-clicking the element to refactor", IStatus.ERROR);
 				return;
@@ -501,58 +335,23 @@ public class Refactorer implements IRefactorer {
 		return filteredElements;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactorer#setInput(org.eclipse.
-	 * emf.common.util.EList)
-	 */
 	public void setInput(List<? extends EObject> selectedElements) {
-		ResourceSet rs = resource.getResourceSet();
+//		ResourceSet rs = resource.getResourceSet();
 		List<EObject> elements = new ArrayList<EObject>();
 		for (EObject element : selectedElements) {
-			URI uri = EcoreUtil.getURI(element);
-			//			boolean platform = uri.isPlatform();
-			EObject realElement = null;
-			//			if(platform){
-			realElement = rs.getEObject(uri, true);
-			//			} else {
-			//				realElement = resource.getEObject(uri.toString());
-			realElement = rs.getEObject(uri, true);
-			//			}
-			if(realElement != null){
-				elements.add(realElement);
+//			URI uri = EcoreUtil.getURI(element);
+//			EObject realElement = null;
+//			realElement = rs.getEObject(uri, true);
+//			if(realElement != null){
+//				elements.add(realElement);
+//			}
+			if(!element.eIsProxy()){
+				elements.add(element);
 			}
 		}
 		currentSelection = elements;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactorer#getPossibleRefactorings
-	 * (double)
-	 */
-	//	public List<RefactoringSpecification> getPossibleRefactorings(double minEquality) {
-	//		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
-	//		List<RoleMapping> possibleMappings = RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMappings, minEquality);
-	//		for (RoleMapping mapping : possibleMappings) {
-	//			RefactoringSpecification refSpec = refSpecRegistry.getRefSpec(mapping.getMappedRoleModel());
-	//			if (refSpec != null) {
-	//				refSpecs.add(refSpec);
-	//			}
-	//		}
-	//		return refSpecs;
-	//	}
-
-	//		public List<RoleMapping> getPossibleRoleMappings(double minEquality) {
-	//			return RoleUtil.getPossibleMappingsForInputSelection(currentSelection, roleMappings, minEquality);
-	//		}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.emftext.refactoring.interpreter.IRefactorer#occuredErrors()
-	 */
 	public boolean didErrorsOccur() {
 		return occuredErrors;
 	}
@@ -565,10 +364,6 @@ public class Refactorer implements IRefactorer {
 		return resource;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.emftext.refactoring.interpreter.IRefactorer#getStatus()
-	 */
 	public IRefactoringStatus getStatus() {
 		return status;
 	}

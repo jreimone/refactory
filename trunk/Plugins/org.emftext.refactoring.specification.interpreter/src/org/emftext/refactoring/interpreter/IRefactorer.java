@@ -25,13 +25,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
-import org.emftext.language.refactoring.roles.RoleModel;
 
 /**
- * Interface for Refactorer. A {@link IRefactorer} will be used for one {@link RoleRoleMappingModel roleRoleMapping}. 
- * Internally the {@link IRefactorer refactorer} consists of a map which connects a {@link RoleMapping} with
- * a {@link IRefactoringInterpreter}. This needed because one {@link RoleModel} can be applied to several parts 
- * of the same metamodel.
+ * Interface for Refactorer. A {@link IRefactorer} will be used for one {@link RoleMapping roleMapping}. 
  * 
  * @author Jan Reimann
  *
