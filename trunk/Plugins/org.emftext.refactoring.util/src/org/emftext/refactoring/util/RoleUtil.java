@@ -52,6 +52,22 @@ import org.emftext.language.refactoring.roles.RoleModifier;
 public class RoleUtil {
 
 	/**
+	 * Returns all bound input roles from the given <code>roleBindings</code>.
+	 * @param roleBindings
+	 * @return
+	 */
+	public static List<Role> getBoundInputRoles(Map<Role, List<EObject>> roleBindings){
+		List<Role> boundInputRoles = new ArrayList<Role>();
+		for (Role boundRole : roleBindings.keySet()) {
+			List<RoleModifier> modifier = boundRole.getModifier();
+			if(modifier.contains(RoleModifier.INPUT)){
+				boundInputRoles.add(boundRole);
+			}
+		}
+		return boundInputRoles;
+	}
+	
+	/**
 	 * Returns the appropriate Role from the given variable.
 	 * 
 	 * @param variable
