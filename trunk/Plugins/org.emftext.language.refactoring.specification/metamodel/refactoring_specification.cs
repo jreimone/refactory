@@ -23,6 +23,7 @@ OPTIONS{
 	uiBasePackage = "org.emftext.language.refactoring.specification.resource.ui";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
+	generateCodeFromGeneratorModel = "true";
 	additionalDependencies = "org.emftext.refactoring.registry.rolemodel,org.emftext.refactoring.util,org.emftext.refactoring.registry.refactoringspecification";
 	additionalUIDependencies = "org.emftext.language.refactoring.roles.resource.rolestext.ui";
 	overrideHoverTextProvider = "false";
@@ -111,7 +112,7 @@ RULES{
 	
 	CollaborationReference ::= collaboration[DOT_NOTATION];
 	
-	ConstantsReference ::= referencedConstant[CONSTANTS] ;
+	ConstantsReference ::= referencedConstant[CONSTANTS] (#0 ":" #0 qualifierRole[UPPER_IDENTIFIER])?;
 	
 	FromClause ::= operator #0 "(" reference ")";
 	

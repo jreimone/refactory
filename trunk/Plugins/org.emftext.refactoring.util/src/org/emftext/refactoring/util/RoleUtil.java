@@ -41,6 +41,7 @@ import org.emftext.language.refactoring.rolemapping.RoleMappingModel;
 import org.emftext.language.refactoring.roles.MultiplicityCollaboration;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleAttribute;
+import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RoleModifier;
 
 /**
@@ -65,6 +66,20 @@ public class RoleUtil {
 			}
 		}
 		return boundInputRoles;
+	}
+	
+	/**
+	 * Returns all model elements bound to input roles.
+	 * @param roleBindings
+	 * @return
+	 */
+	public static List<EObject> getBoundInputElements(Map<Role, List<EObject>> roleBindings){
+		List<EObject> boundInputElements = new ArrayList<EObject>();
+		List<Role> boundInputRoles = getBoundInputRoles(roleBindings);
+		for (Role boundRole : boundInputRoles) {
+			boundInputElements.addAll(roleBindings.get(boundRole));
+		}
+		return boundInputElements;
 	}
 	
 	/**
@@ -227,6 +242,23 @@ public class RoleUtil {
 		return mapping.getAllMappedRoles();
 	}
 
+	/**
+	 * Returns all roles of the given rolemodel having the modifier {@link RoleModifier#INPUT}.
+	 * 
+	 * @param mapping the mapping to search for input roles
+	 * @return all input roles
+	 */
+	public static List<Role> getAllInputRoles(RoleModel	roleModel) {
+		List<Role> inputRoles = new ArrayList<Role>();
+		List<Role> roles = roleModel.getRoles();
+		for (Role role : roles) {
+			if(role.getModifier().contains(RoleModifier.INPUT)){
+				inputRoles.add(role);
+			}
+		}
+		return inputRoles;
+	}
+	
 	/**
 	 * Returns all roles of the given mapping having the modifier {@link RoleModifier#INPUT}.
 	 * 

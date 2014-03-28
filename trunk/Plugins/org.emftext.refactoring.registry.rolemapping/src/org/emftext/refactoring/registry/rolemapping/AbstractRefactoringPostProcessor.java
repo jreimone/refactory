@@ -57,11 +57,7 @@ public class AbstractRefactoringPostProcessor implements IRefactoringPostProcess
 			RefactoringSpecification refSpec, List<IModelRefactoringWizardPage> customWizardPages, boolean isFakeRun, Map<EObject, EObject> copier) {
 		//Provide backwards compatibility for those classes that need it.
 		//All others may simply override this method.
-		List<EObject> initialSelection = new ArrayList<EObject>();
-		List<Role> boundInputRoles = RoleUtil.getBoundInputRoles(roleBindings);
-		for (Role boundInputRole : boundInputRoles) {
-			initialSelection.addAll(roleBindings.get(boundInputRole));
-		}
+		List<EObject> initialSelection = RoleUtil.getBoundInputElements(roleBindings);
 		return process(roleBindings, refactoredModel, resourceSet, change, refSpec, customWizardPages, isFakeRun, copier, initialSelection);
 	}
 }

@@ -107,6 +107,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ConstantsReference" eSuperTypes="#//ObjectReference #//SourceContext">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referencedConstant" lowerBound="1"
         eType="#//Constants"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualifierRole" eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectReference" abstract="true" eSuperTypes="#//ObjectRemoval"/>
   <eClassifiers xsi:type="ecore:EClass" name="Context" abstract="true"/>

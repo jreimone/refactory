@@ -1651,4 +1651,17 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HNA_YI4WEeGrWONJG5esMQ" id="(0.591304347826087,0.23529411764705882)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HNA_YY4WEeGrWONJG5esMQ" id="(0.3879310344827586,0.19607843137254902)"/>
   </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_656oQLaWEeOVeuXMUAskCg" type="3002" source="_FIYewChGEd-47dx9YBAXow" target="_lf18cB4NEd-ggaHfox02rw">
+    <children xmi:type="notation:Node" xmi:id="_66AH0LaWEeOVeuXMUAskCg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_66AH0baWEeOVeuXMUAskCg" x="7" y="-39"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_66BV8LaWEeOVeuXMUAskCg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_66BV8baWEeOVeuXMUAskCg" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_657PULaWEeOVeuXMUAskCg" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_657PUbaWEeOVeuXMUAskCg" fontColor="4210752" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="refactoring_specification.ecore#//ConstantsReference/qualifierRole"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_657PUraWEeOVeuXMUAskCg" points="[-71, -9, 35, 206]$[-71, -186, 35, 29]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_66QmgLaWEeOVeuXMUAskCg" id="(0.326271186440678,0.19607843137254902)"/>
+  </edges>
 </notation:Diagram>
