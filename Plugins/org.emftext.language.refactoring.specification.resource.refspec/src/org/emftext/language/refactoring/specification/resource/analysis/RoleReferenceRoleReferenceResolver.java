@@ -21,7 +21,8 @@
  */
 package org.emftext.language.refactoring.specification.resource.analysis;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -38,11 +39,18 @@ public class RoleReferenceRoleReferenceResolver implements org.emftext.language.
 		}
 		RefactoringSpecification specification = (RefactoringSpecification) parent;
 		RoleModel roleModel = specification.getUsedRoleModel();
-		EList<Role> roles = roleModel.getRoles();
-		for (Role role : roles) {
-			if(role.getName().equals(identifier)){
-				result.addMapping(identifier, role);
-				return;
+		List<Role> roles = roleModel.getRoles();
+		if(resolveFuzzy){
+			for (Role role : roles) {
+				result.addMapping(role.getName(), role);
+			}
+			return;
+		} else {
+			for (Role role : roles) {
+				if(role.getName().equals(identifier)){
+					result.addMapping(identifier, role);
+					return;
+				}
 			}
 		}
 		result.setErrorMessage("Role '" + identifier + "' isn't declared in the specified RoleModel");

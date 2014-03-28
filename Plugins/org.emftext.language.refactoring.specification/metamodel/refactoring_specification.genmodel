@@ -75,6 +75,7 @@
     <genClasses ecoreClass="refactoring_specification.ecore#//UPTREE"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//ConstantsReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoring_specification.ecore#//ConstantsReference/referencedConstant"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//ConstantsReference/qualifierRole"/>
     </genClasses>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//ObjectReference"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//Context"/>
