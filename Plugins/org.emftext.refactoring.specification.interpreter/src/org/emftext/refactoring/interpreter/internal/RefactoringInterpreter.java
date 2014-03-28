@@ -77,7 +77,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	private RefactoringSpecification refSpec;
 	private EObject model;
 	// private EObject originalModel;
-	private List<? extends EObject> selection;
+	private List<EObject> selection;
 	private RefactoringInterpreterContext context;
 	// private RoleMappingModel roleMapping;
 	private RoleMapping mapping;
@@ -454,7 +454,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	 * org.emftext.refactoring.interpreter.IRefactoringInterpreter#setInput(
 	 * java.util.List)
 	 */
-	public void setInput(List<? extends EObject> currentSelection) {
+	public void setInput(List<EObject> currentSelection) {
 		this.selection = currentSelection;
 	}
 

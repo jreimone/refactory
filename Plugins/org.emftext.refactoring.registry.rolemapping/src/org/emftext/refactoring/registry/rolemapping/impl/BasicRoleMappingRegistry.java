@@ -489,7 +489,7 @@ public class BasicRoleMappingRegistry implements IRoleMappingRegistry {
 	}
 
 	@Override
-	public List<RefactoringSpecification> getPossibleRefactorings(List<? extends EObject> selection, double minEquality) {
+	public List<RefactoringSpecification> getPossibleRefactorings(List<EObject> selection, double minEquality) {
 		List<RefactoringSpecification> refSpecs = new LinkedList<RefactoringSpecification>();
 		String mmUri = selection.get(0).eClass().getEPackage().getNsURI();
 		Map<String, RoleMapping> roleMappings = getRoleMappingsForUri(mmUri);

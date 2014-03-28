@@ -151,7 +151,7 @@ public interface IRoleMappingRegistry {
 	 * @param minEquality specifies the minimum equality in percent the applied roles must fulfill
 	 * @return a list of all {@link RefactoringSpecification}s having a percentual equality greater or equal <code>minEquality</code> 
 	 */
-	public List<RefactoringSpecification> getPossibleRefactorings(List<? extends EObject> selection, double minEquality);
+	public List<RefactoringSpecification> getPossibleRefactorings(List<EObject> selection, double minEquality);
 	
 	/**
 	 * Adds a listener to this registry which is notified when the registry changes.

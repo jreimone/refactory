@@ -63,7 +63,7 @@ public class REMOVEInterpreter {
 	private RefactoringInterpreter refactoringInterpreter;
 	private RoleMapping mapping;
 	private RefactoringInterpreterContext context;
-	private List<? extends EObject> selection;
+	private List<EObject> selection;
 	private Role assignedRole;
 	private Object runtimeValue;
 
@@ -72,7 +72,7 @@ public class REMOVEInterpreter {
 		this.refactoringInterpreter = refactoringInterpreter;
 	}
 
-	public IRefactoringStatus interpreteREMOVE(REMOVE object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
+	public IRefactoringStatus interpreteREMOVE(REMOVE object, RefactoringInterpreterContext context, List<EObject> selection) {
 		this.context = context;
 		this.selection = selection;
 
@@ -141,27 +141,6 @@ public class REMOVEInterpreter {
 	 */
 	private List<EObject> interpreteUNUSED(List<EObject> removals) {
 		List<EObject> unusedRemovals = new LinkedList<EObject>();
-//		List<EObject> removalWithoutExternalReferences = new LinkedList<EObject>();
-//		for (EObject removal : removals) {
-//			List<Resource> removalReferences = IndexConnectorRegistry.INSTANCE.getReferencingResources(removal);
-//			Resource ownResource = removal.eResource();
-//			if (ownResource != null) {
-//				boolean externalReferencFound = false;
-//				for (Resource resource : removalReferences) {
-//					if (!resource.equals(ownResource)) {
-//						externalReferencFound = true;
-//						break;
-//					}
-//				}
-//				if (!externalReferencFound) {
-//					removalWithoutExternalReferences.add(removal);
-//				}
-//			} else {
-//				removalWithoutExternalReferences.add(removal);
-//			}
-//		}
-//		if (removalWithoutExternalReferences.size() > 0) {
-//			for (EObject removal : removalWithoutExternalReferences) {
 		if (removals.size() > 0) {
 			for (EObject removal : removals) {
 				Resource ownResource = removal.eResource();
