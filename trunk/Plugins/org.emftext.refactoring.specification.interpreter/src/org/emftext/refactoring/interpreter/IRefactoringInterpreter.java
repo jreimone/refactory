@@ -89,7 +89,7 @@ public interface IRefactoringInterpreter extends Cloneable{
 	 * Sets the the current selection, for which the appropriate interpreter is to be run, as input.
 	 * @param currentSelection
 	 */
-	public void setInput(List<? extends EObject> currentSelection);
+	public void setInput(List<EObject> currentSelection);
 	
 	/**
 	 * Returns <code>false</code> if no errors occured while refactoring. 
@@ -141,21 +141,6 @@ public interface IRefactoringInterpreter extends Cloneable{
 	 * @return
 	 */
 	public IRefactoringStatus getStatus();
-	
-//	/**
-//	 * Returns the value provider for the given instruction. This method is needed that the interpreter and its
-//	 * fake interpreter can share the same value provider
-//	 * 
-//	 * @param command
-//	 * @return
-//	 */
-//	public IValueProvider<?, ?> getValueProviderForCommand(EObject command);
-	
-	/**
-	 * With this method a value provider will be registered to the given instruction.
-	 * @param command
-	 */
-//	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider);
 	
 	public IValueProviderFactory getValueProviderFactory();
 

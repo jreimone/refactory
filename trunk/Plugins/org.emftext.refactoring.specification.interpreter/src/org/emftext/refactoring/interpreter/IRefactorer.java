@@ -19,12 +19,15 @@
 package org.emftext.refactoring.interpreter;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleModifier;
 
 /**
  * Interface for Refactorer. A {@link IRefactorer} will be used for one {@link RoleMapping roleMapping}. 
@@ -37,10 +40,35 @@ public interface IRefactorer {
 	/**
 	 * Sets the input for the RefactoringInterpreter by passing the selected EObjects.
 	 * The selection can come for example from selected nodes in a EMF generated tree editor. 
+	 * This method can only be invoked if the rolemapping to be used in this refactoring
+	 * only contains only one role marked is {@link RoleModifier#INPUT}.
+	 * This method determines the only input role and delegates to {@link #setInputRoleBinding(Map)}. 
 	 * 
 	 * @param selectedElements the selected elements
+	 * @see #setInputRoleBinding(Map)
 	 */
 	public void setInput(List<? extends EObject> selectedElements);
+	
+	/**
+	 * This method can be used to provide an initial binding for all roles marked as {@link RoleModifier#INPUT}.
+	 * Usually this method should be used if more than one input role exists.
+	 * The keys in the given <code>initialInputRoleBinding</code> represent the role names of the input roles.
+	 * The values are lists and represent all model elements which should be bound to a particular input role.
+	 * Internally, only those initial bindings are taken into account which are bound to input roles.
+	 * In case only one input role exists {@link #setInput(List)} should be used. 
+	 * 
+	 * @param inputRoleBinding
+	 */
+	public void setInputRoleBinding(Map<String, List<EObject>> inputRoleBinding);
+	
+	/**
+	 * Returns the role bindings produced while executing the refactoring.
+	 * They keys of the returned map are the roles, and the value lists are the model elements
+	 * bound to the particular role.
+	 * 
+	 * @return
+	 */
+	public Map<Role, List<EObject>> getRoleBindings();
 	
 	/**
 	 * Returns the selected elements on which this refactoring is to be executed.

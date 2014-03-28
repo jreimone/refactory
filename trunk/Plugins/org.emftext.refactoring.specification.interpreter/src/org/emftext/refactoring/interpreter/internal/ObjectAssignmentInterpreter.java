@@ -69,7 +69,7 @@ import org.emftext.refactoring.util.RoleUtil;
 public class ObjectAssignmentInterpreter{
 
 	private RoleMapping mapping;
-	private List<? extends EObject> selection;
+	private List<EObject> selection;
 	private RefactoringInterpreterContext context;
 
 	private Role assignedRole;
@@ -88,7 +88,7 @@ public class ObjectAssignmentInterpreter{
 		this.interpreter = interpreter;
 	}
 
-	public IRefactoringStatus interpreteObjectAssignmentCommand(ObjectAssignmentCommand object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
+	public IRefactoringStatus interpreteObjectAssignmentCommand(ObjectAssignmentCommand object, RefactoringInterpreterContext context, List<EObject> selection) {
 		this.selection = selection;
 		this.context = context;
 		this.command = object;
@@ -277,7 +277,7 @@ public class ObjectAssignmentInterpreter{
 		assignedRole = roleRef.getRole();
 		FromClause from = roleRef.getFrom();
 		FromOperator operator = from.getOperator();
-		List<? extends EObject> fromObjects = getObjectReferenceObject(from.getReference());
+		List<EObject> fromObjects = getObjectReferenceObject(from.getReference());
 		if(operator instanceof UPTREE){
 			return handleFromOperatorUPTREE(assignedRole, fromObjects);	
 		} else if(operator instanceof PATH){
@@ -366,7 +366,7 @@ public class ObjectAssignmentInterpreter{
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<? extends EObject> getObjectReferenceObject(ObjectReference reference){
+	private List<EObject> getObjectReferenceObject(ObjectReference reference){
 		if(reference instanceof ConstantsReference){
 			Constants constant = ((ConstantsReference) reference).getReferencedConstant();
 			switch (constant) {
@@ -391,7 +391,7 @@ public class ObjectAssignmentInterpreter{
 	}
 
 	@SuppressWarnings("unchecked")
-	private EObject handleFromOperatorUPTREE(Role fromRole, List<? extends EObject> fromObjects) {
+	private EObject handleFromOperatorUPTREE(Role fromRole, List<EObject> fromObjects) {
 		List<?>[] rootPaths = new List<?>[fromObjects.size()];
 		int i = 0;
 		for (EObject eObject : fromObjects) {
@@ -400,7 +400,7 @@ public class ObjectAssignmentInterpreter{
 			i++;
 		}
 		// build up uptree
-		EObject uptreeObject = RoleUtil.getFirstCommonObjectWithRoleFromPaths(fromRole, mapping, (List<? extends EObject>[]) rootPaths);
+		EObject uptreeObject = RoleUtil.getFirstCommonObjectWithRoleFromPaths(fromRole, mapping, (List<EObject>[]) rootPaths);
 		if(uptreeObject == null){
 			ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
