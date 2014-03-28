@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<site
-      associateSitesURL="http://www.modelrefactoring.org/update_trunk/associateSites.xml">
-   <description name="Refactory" url="http://www.modelrefactoring.org/update_trunk/">
-      Update site for the generic model refactoring tool Refactory. http://www.modelrefactoring.org
-   </description>
+<site>
    <feature url="features/org.modelrefactoring.runtime_0.0.0.v0.jar" id="org.modelrefactoring.runtime" version="0.0.0.v0">
       <category name="Refactory Core"/>
    </feature>
