@@ -18,8 +18,6 @@
  */
 package org.emftext.refactoring.interpreter.internal;
 
-import java.util.List;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
@@ -43,24 +41,20 @@ import org.emftext.refactoring.util.RoleUtil;
 public class CREATEInterpreter {
 
 	private RoleMapping mapping;
-	private List<? extends EObject> selection;
-	private RefactoringInterpreterContext context;
 	private Role assignedRole;
-	private Object roleRuntimeInstance;
+	private Object localRoleBindings;
 
 	public CREATEInterpreter(RoleMapping mapping){
 		this.mapping = mapping;
 	}
 
-	public IRefactoringStatus interpreteCREATE(CREATE object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
-		this.selection = selection;
-		this.context = context;
+	public IRefactoringStatus interpreteCREATE(CREATE object, RefactoringInterpreterContext context) {
 		Role childRole = object.getSourceRole();
 		assignedRole = childRole;
 		Variable sourceVar = object.getVariable();
 		if(sourceVar != null){
 			context.addEObjectForVariable(sourceVar);
-			roleRuntimeInstance = context.getObjectForVariable(sourceVar);
+			localRoleBindings = context.getObjectForVariable(sourceVar);
 		}
 		TargetContext target = object.getTargetContext();
 		if(target == null){
@@ -108,9 +102,9 @@ public class CREATEInterpreter {
 	}
 
 	/**
-	 * @return the roleRuntimeInstance
+	 * @return the localRoleBindings
 	 */
-	public Object getRoleRuntimeInstance() {
-		return roleRuntimeInstance;
+	public Object getLocalRoleBindings() {
+		return localRoleBindings;
 	}
 }

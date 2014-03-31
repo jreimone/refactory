@@ -76,14 +76,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 
 	private RefactoringSpecification refSpec;
 	private EObject model;
-	// private EObject originalModel;
-	private List<EObject> selection;
 	private RefactoringInterpreterContext context;
-	// private RoleMappingModel roleMapping;
 	private RoleMapping mapping;
 	private IRefactoringPostProcessor postProcessor;
-	private Map<Role, List<EObject>> roleRuntimeInstanceMap;
-	private Map<Role, List<URI>> roleRuntimeInstanceURIMap;
 
 	private CREATEInterpreter create;
 	private SETInterpreter set;
@@ -103,12 +98,13 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 
 	private IValueProviderFactory valueProviderFactory;
 
+	private Map<Role, List<EObject>> roleBindings;
+	private Map<Role, List<URI>> roleRuntimeInstanceURIMap;
+
 	public RefactoringInterpreter(IRefactoringPostProcessor postProcessor) {
 		this.postProcessor = postProcessor;
-		roleRuntimeInstanceMap = new HashMap<Role, List<EObject>>();
 		roleRuntimeInstanceURIMap = new HashMap<Role, List<URI>>();
 		resourcesToSave = new LinkedList<Resource>();
-//		valueProviderMap = new LinkedHashMap<EObject, IValueProvider<?, ?>>();
 	}
 
 	/**
@@ -215,10 +211,6 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 				return true;
 			}
 		}
-		// else if(context instanceof RoleReference){
-		// Role role = ((RoleReference) context).getRole();
-		// if(containsModifierOPTIONAL(role)){return true;}
-		// }
 		return false;
 	}
 
@@ -234,28 +226,12 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactoringInterpreter#initialize
-	 * (org.emftext.language.refactoring.refactoring_specification.
-	 * RefactoringSpecification, org.eclipse.emf.ecore.EObject)
-	 */
 	public void initialize(RefactoringSpecification refSpec, RoleMapping mapping) {
 		this.refSpec = refSpec;
-		// this.model = model;
-		// this.originalModel = model;
 		this.mapping = mapping;
 		initInterpretationStack();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactoringInterpreter#interprete()
-	 */
 	public EObject interprete(EObject model) {
 		this.model = model;
 		context = new RefactoringInterpreterContext();
@@ -266,14 +242,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		assign = new ASSIGNInterpreter(mapping, this);
 		indexInterpreter = new IndexAssignmentInterpreter();
 		objectInterpreter = new ObjectAssignmentInterpreter(this, mapping);
-		removeInterpreter = new REMOVEInterpreter(this, mapping);
+		removeInterpreter = new REMOVEInterpreter(mapping);
 		context.setInitialContext(mapping);
 
-		List<Role> roles = RoleUtil.getAllInputRoles(mapping);
-		for (Role role : roles) {
-			List<EObject> roleElements = RoleUtil.filterObjectsByRoles(selection, mapping, role);
-			putIntoRoleRuntimeInstanceMap(role, roleElements);
-		}
 		status = interprete(context);
 		
 		if (status.getSeverity() == IRefactoringStatus.ERROR) {
@@ -321,26 +292,15 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_RefactoringSpecification(RefactoringSpecification object, RefactoringInterpreterContext context) {
 		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
-
 	
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.emftext.language.refactoring.specification.resource.util.
-	 * AbstractRefspecInterpreter#
-	 * interprete_org_emftext_language_refactoring_refactoring_005Fspecification_ASSIGN
-	 * (org.emftext.language.refactoring.refactoring_specification.ASSIGN,
-	 * java.lang.Object)
-	 */
 	@Override
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_ASSIGN(ASSIGN object, RefactoringInterpreterContext context) {
-		// object.get
-		IRefactoringStatus result = assign.interpreteASSIGN(object, context, selection);
+		List<EObject> boundInputElements = RoleUtil.getBoundInputElements(roleBindings);
+		IRefactoringStatus result = assign.interpreteASSIGN(object, context, boundInputElements);
 		Role assignedRole = assign.getAssignedRole();
 		Object roleRuntimeInstance = assign.getRoleRuntimeValue();
 		if (assignedRole != null && roleRuntimeInstance != null) {
-			putIntoRoleRuntimeInstanceMap(assignedRole, roleRuntimeInstance);
+			addRoleBinding(assignedRole, roleRuntimeInstance);
 		}
 		List<Resource> assignResourcesToSave = assign.getResourcesToSave();
 		if (assignResourcesToSave != null) {
@@ -349,95 +309,50 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.emftext.language.refactoring.specification.resource.util.
-	 * AbstractRefspecInterpreter#
-	 * interprete_org_emftext_language_refactoring_refactoring_005Fspecification_CREATE
-	 * (org.emftext.language.refactoring.refactoring_specification.CREATE,
-	 * java.lang.Object)
-	 */
 	@Override
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_CREATE(CREATE object, RefactoringInterpreterContext context) {
-		IRefactoringStatus result = create.interpreteCREATE(object, context, selection);
+		IRefactoringStatus result = create.interpreteCREATE(object, context);
 		Role assignedRole = create.getAssignedRole();
-		Object roleRuntimeInstance = create.getRoleRuntimeInstance();
+		Object roleRuntimeInstance = create.getLocalRoleBindings();
 		if (assignedRole != null && roleRuntimeInstance != null) {
-			putIntoRoleRuntimeInstanceMap(assignedRole, roleRuntimeInstance);
+			addRoleBinding(assignedRole, roleRuntimeInstance);
 		}
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.emftext.language.refactoring.specification.resource.util.
-	 * AbstractRefspecInterpreter#
-	 * interprete_org_emftext_language_refactoring_refactoring_005Fspecification_MOVE
-	 * (org.emftext.language.refactoring.refactoring_specification.MOVE,
-	 * java.lang.Object)
-	 */
 	@Override
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_MOVE(MOVE object, RefactoringInterpreterContext context) {
-		return move.interpreteMOVE(object, context, selection);
+		return move.interpreteMOVE(object, context, roleBindings);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.emftext.language.refactoring.specification.resource.util.
-	 * AbstractRefspecInterpreter#
-	 * interprete_org_emftext_language_refactoring_refactoring_005Fspecification_SET
-	 * (org.emftext.language.refactoring.refactoring_specification.SET,
-	 * java.lang.Object)
-	 */
 	@Override
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_SET(SET object, RefactoringInterpreterContext context) {
 		return set.interpreteSET(object, context);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.emftext.language.refactoring.specification.resource.util.
-	 * AbstractRefspecInterpreter#
-	 * interprete_org_emftext_language_refactoring_refactoring_005fspecification_IndexAssignmentCommand
-	 * (org.emftext.language.refactoring.refactoring_specification.
-	 * IndexAssignmentCommand, java.lang.Object)
-	 */
 	@Override
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_IndexAssignmentCommand(IndexAssignmentCommand object, RefactoringInterpreterContext context) {
-		return indexInterpreter.interpreteIndexCommand(object, context, selection);
+		return indexInterpreter.interpreteIndexCommand(object, context, roleBindings);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.emftext.language.refactoring.specification.resource.util.
-	 * AbstractRefspecInterpreter#
-	 * interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand
-	 * (org.emftext.language.refactoring.refactoring_specification.
-	 * ObjectAssignmentCommand, java.lang.Object)
-	 */
 	@Override
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(ObjectAssignmentCommand object, RefactoringInterpreterContext context) {
-		IRefactoringStatus result = objectInterpreter.interpreteObjectAssignmentCommand(object, context, selection);
+		IRefactoringStatus result = objectInterpreter.interpreteObjectAssignmentCommand(object, context, roleBindings);
 		Role assignedRole = objectInterpreter.getAssignedRole();
 		Object roleRuntimeInstance = objectInterpreter.getRoleRuntimeValue();
 		if (assignedRole != null && roleRuntimeInstance != null) {
-			putIntoRoleRuntimeInstanceMap(assignedRole, roleRuntimeInstance);
+			addRoleBinding(assignedRole, roleRuntimeInstance);
 		}
 		return result;
 	}
 
 	@Override
 	public IRefactoringStatus interprete_org_emftext_language_refactoring_refactoring_005fspecification_REMOVE(REMOVE object, RefactoringInterpreterContext context) {
-		IRefactoringStatus result = removeInterpreter.interpreteREMOVE(object, context, selection);
+		IRefactoringStatus result = removeInterpreter.interpreteREMOVE(object, context, roleBindings);
 		Role assignedRole = removeInterpreter.getAssignedRole();
 		Object roleRuntimeInstance = removeInterpreter.getRoleRuntimeValue();
 		if (assignedRole != null && roleRuntimeInstance != null) {
-			putIntoRoleRuntimeInstanceMap(assignedRole, roleRuntimeInstance);
+			addRoleBinding(assignedRole, roleRuntimeInstance);
 		}
 		return result;
 	}
@@ -447,74 +362,47 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return interprete_org_emftext_language_refactoring_refactoring_005fspecification_ObjectAssignmentCommand(object.getAssignment(), context);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactoringInterpreter#setInput(
-	 * java.util.List)
-	 */
-	public void setInput(List<EObject> currentSelection) {
-		this.selection = currentSelection;
+	public void setRoleBindings(Map<Role, List<EObject>> roleBindings){
+		this.roleBindings = roleBindings;
 	}
 
 	public EObject getModel() {
 		return model;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactoringInterpreter#occuredErrors
-	 * ()
-	 */
 	public boolean didErrorsOccur() {
 		return occuredErrors;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactoringInterpreter#getPostProcessor
-	 * ()
-	 */
 	public IRefactoringPostProcessor getPostProcessor() {
 		return postProcessor;
 	}
 
 	@SuppressWarnings("unchecked")
-	private void putIntoRoleRuntimeInstanceMap(Role role, Object object) {
+	private void addRoleBinding(Role role, Object object) {
 		if (object instanceof EObject) {
-			putEObjectIntoRoleRuntimeInstanceMap(role, (EObject) object);
+			bindEObject(role, (EObject) object);
 		} else if (object instanceof List<?>) {
 			List<EObject> objects = (List<EObject>) object;
 			for (EObject eObject : objects) {
-				putEObjectIntoRoleRuntimeInstanceMap(role, eObject);
+				bindEObject(role, eObject);
 			}
 		}
 	}
 
-	private void putEObjectIntoRoleRuntimeInstanceMap(Role role, EObject object) {
-		List<EObject> instanceList = roleRuntimeInstanceMap.get(role);
+	private void bindEObject(Role role, EObject object) {
+		List<EObject> instanceList = roleBindings.get(role);
 		if (instanceList == null) {
 			instanceList = new ArrayList<EObject>();
-			roleRuntimeInstanceMap.put(role, instanceList);
+			roleBindings.put(role, instanceList);
 		}
 		if (!instanceList.contains(object)) {
 			instanceList.add((EObject) object);
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.emftext.refactoring.interpreter.IRefactoringInterpreter#
-	 * getRoleRuntimeInstances()
-	 */
 	public Map<Role, List<EObject>> getRoleRuntimeInstances() {
-		return roleRuntimeInstanceMap;
+		return roleBindings;
 	}
 
 	public Map<Role, List<URI>> getRoleRuntimeInstanceURIs() {
@@ -525,12 +413,6 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return resourcesToSave;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.emftext.language.refactoring.specification.resource.util.
-	 * AbstractRefspecInterpreter#continueInterpretation(java.lang.Object)
-	 */
 	public boolean continueInterpretation(IRefactoringStatus result) {
 		return (result.getSeverity() == IRefactoringStatus.OK);
 	}
@@ -540,12 +422,6 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return continueInterpretation(result);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.emftext.refactoring.interpreter.IRefactoringInterpreter#getStatus()
-	 */
 	public IRefactoringStatus getStatus() {
 		return status;
 	}
@@ -578,25 +454,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return refSpec;
 	}
 
-//	public IValueProvider<?, ?> getValueProviderForCommand(EObject command) {
-//		IValueProvider<?, ?> valueProvider = null;
-//		if (fakeInterpreter != null) {
-//			valueProvider = fakeInterpreter.getValueProviderForCommand(command);
-//		}
-//		if (valueProvider == null) {
-//			return valueProviderMap.get(command);
-//		}
-//		return valueProvider;
-//	}
-
-//	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
-//		valueProviderMap.put(command, valueProvider);
-//	}
-
 	public void setRoleRuntimeInstanceURIs(Map<Role, List<URI>> roleRuntimeInstanceURIMap) {
 		this.roleRuntimeInstanceURIMap = roleRuntimeInstanceURIMap;
 	}
-
 
 	public IValueProviderFactory getValueProviderFactory() {
 		return valueProviderFactory;

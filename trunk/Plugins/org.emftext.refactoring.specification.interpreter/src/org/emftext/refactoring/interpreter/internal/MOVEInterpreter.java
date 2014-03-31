@@ -21,6 +21,7 @@ package org.emftext.refactoring.interpreter.internal;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -47,6 +48,7 @@ import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.IValueProvider;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
 import org.emftext.refactoring.util.RoleUtil;
 
 /**
@@ -55,9 +57,7 @@ import org.emftext.refactoring.util.RoleUtil;
  */
 public class MOVEInterpreter {
 
-	private RefactoringInterpreterContext context;
 	private RoleMapping mapping;
-	private List<? extends EObject> selection;
 	private IRefactoringInterpreter interpreter;
 
 	public MOVEInterpreter(RoleMapping mapping, IRefactoringInterpreter interpreter) {
@@ -66,28 +66,32 @@ public class MOVEInterpreter {
 		this.interpreter = interpreter;
 	}
 
-	public IRefactoringStatus interpreteMOVE(MOVE object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
-		this.context = context;
+	public IRefactoringStatus interpreteMOVE(MOVE object, RefactoringInterpreterContext context, Map<Role, List<EObject>> roleBindings) {
 		SourceContext sourceContext = object.getSource();
 		Role sourceRole = null;
-		List<? extends EObject> sourceObjects = null;
+		List<EObject> sourceObjects = null;
 		if (sourceContext instanceof CollaborationReference) {
 			MultiplicityCollaboration collaboration = ((CollaborationReference) sourceContext).getCollaboration();
 			sourceRole = collaboration.getTarget();
 			if (sourceRole.getModifier().contains(RoleModifier.INPUT)) {
-				sourceObjects = selection;
+				sourceObjects = roleBindings.get(sourceRole);
 			}
 		} else if (sourceContext instanceof ConstantsReference) {
-			if (((ConstantsReference) sourceContext).getReferencedConstant() == Constants.INPUT) {
-				sourceObjects = selection;
+			ConstantsReference constantsReference = (ConstantsReference) sourceContext;
+			if (constantsReference.getReferencedConstant() == Constants.INPUT) {
+				Role inputRole = RoleUtil.determineInputRole(roleBindings, constantsReference);
+				if(inputRole == null){
+					return new RefactoringStatus(IRefactoringStatus.ERROR, "Qualifier role of constant reference (INPUT) couldn't be determined");
+				} else {
+					sourceObjects = roleBindings.get(inputRole);
+				}
 			} else {
 				throw new UnsupportedOperationException("implement me");
 			}
 		} else {
 			throw new UnsupportedOperationException("implement me");
 		}
-		sourceObjects = handleMoveModifier(sourceObjects,
-				object.getMoveModifier());
+		sourceObjects = handleMoveModifier(sourceObjects, object.getMoveModifier());
 
 		TargetContext targetContext = object.getTarget();
 		Role targetRole = null;
@@ -120,8 +124,7 @@ public class MOVEInterpreter {
 				sourceObjects, index);
 	}
 
-	@SuppressWarnings("unchecked")
-	private List<EObject> handleMoveModifier(List<? extends EObject> sourceObjects, Modifier modifier) {
+	private List<EObject> handleMoveModifier(List<EObject> sourceObjects, Modifier modifier) {
 		if (modifier instanceof DISTINCT) {
 			Set<EObject> originals = new LinkedHashSet<EObject>();
 			Set<EObject> copyList = new LinkedHashSet<EObject>();

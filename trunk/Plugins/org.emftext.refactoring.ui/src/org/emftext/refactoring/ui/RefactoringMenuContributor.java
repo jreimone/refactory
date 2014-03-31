@@ -119,7 +119,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			}
 		}
 		if (selectedElements != null && selectedElements.size() >= 1) {
-			EObject model = null;
 			Resource resource = determineResource(selectedElements);
 			if(resource == null){
 				return;
@@ -130,13 +129,15 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			//the changed element and creates a new one instead. This effectively creates an imperfect copy as the resolved
 			//element represents the state before the refactoring, whereas the refactored element represents the changed state.
 			//This leads to inconsistencies of the models and is to be avoided at all cost.
-			ResourceSet resourceSet = resource.getResourceSet();
-			EcoreUtil.resolveAll(resourceSet);
+			// commented out because resolving all is very expensive, thus, only the selected elements itself are resolved instead
+//			ResourceSet resourceSet = resource.getResourceSet();
+//			EcoreUtil.resolveAll(resourceSet);
+			for (EObject selectedElement : selectedElements) {
+				EcoreUtil.resolveAll(selectedElement);
+			}
 			List<EObject> elementsInResource = getElementsByUris(resource, selectedElements);
 			
-			contributeToUI(serviceLocator, additions,
-					transactionalEditingDomain, activeEditor, editorConnector,
-					resource, elementsInResource);
+			contributeToUI(serviceLocator, additions, transactionalEditingDomain, activeEditor, editorConnector, resource, elementsInResource);
 		}
 	}
 
@@ -157,7 +158,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 						createCommand(serviceLocator, mapping, refactorer, rootMenu, editorConnector, activeEditor, transactionalEditingDomain);
 						containsEntries = true;
 					}
-
 				} else {
 					RegistryUtil.log("no rolemappings registered for " + resource.getContents().get(0).eClass().getEPackage().getNsURI(), IStatus.WARNING);
 				}
@@ -181,22 +181,9 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					resource = parent.eResource();
 				}
 			} while (parent != null && resource == null);
-			if(resource != null){
-				System.out.println(resource.getURIFragment(element));
-			}
 			i++;
 		} while (i < selectedElements.size() && resource == null);
 		return resource;
-//		IEditorInput editorInput = activeEditor.getEditorInput();
-//		ResourceSet rs;
-//		if(editorInput instanceof IFileEditorInput){
-//			IFileEditorInput fei = (IFileEditorInput) editorInput;
-//			IFile file = fei.getFile();
-//			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-//			rs = new ResourceSetImpl();
-//			resource = rs.getResource(uri, true);
-//		}
-		// return resource;
 	}
 	
 	public static Command getCommandForRefactoring(IServiceLocator serviceLocator, RoleMapping mapping, final IRefactorer refactorer, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain){

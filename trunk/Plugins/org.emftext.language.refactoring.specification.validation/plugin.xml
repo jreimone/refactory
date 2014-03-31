@@ -34,6 +34,23 @@
                <target
                      class="RefactoringSpecification"></target>
             </constraint>
+            <constraint
+                  class="org.emftext.language.refactoring.specification.validation.MultipleInputRolesConstraint"
+                  id="org.emftext.language.refactoring.specification.multipleInputRolesConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="Constant Reference for multiple input roles must be determinable"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  message body text
+               </message>
+               <description>
+                  Constant references must be determined with specific roles if more than one input role is specified.
+               </description>
+               <target
+                     class="ConstantsReference"></target>
+            </constraint>
          </constraints>
       </constraintProvider>
    </extension>

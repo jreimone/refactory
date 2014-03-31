@@ -26,7 +26,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.FilteredItemsSelectionDialog;
-import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.interpreter.AbstractValueProvider;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
 import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
@@ -41,22 +40,13 @@ import org.emftext.refactoring.interpreter.internal.AbstractPathCreator;
  */
 public class DialogOneListElementProvider extends AbstractValueProvider<List<EObject>, EObject>{
 
-	private RoleMapping mapping;
 	private int returnCode;
-	private IRefactoringFakeInterpreter fakeInterpreter;
-	//	private EObject value;
 	private List<EObject> fakeElements;
 	private List<EObject> realElements;
 	private List<EObject> elements;
-	//	private String name;
 	private FilteredEObjectsSelectionDialog<EObject> dialog;
 	private AbstractPathCreator pathCreator;
 	
-	public DialogOneListElementProvider(RoleMapping mapping){
-		this.mapping = mapping;
-		//		this.name = name;
-	}
-
 	public void provideValue(){
 		if(fakeElements != null){
 			realElements = new LinkedList<EObject>();
@@ -89,13 +79,8 @@ public class DialogOneListElementProvider extends AbstractValueProvider<List<EOb
 		return selectedElement;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.emftext.refactoring.interpreter.IStructuralFeatureValueProvider#provideValue(java.util.List)
-	 */
 	public EObject provideValue(IRefactoringInterpreter interpreter, List<EObject> elements, Object... context) {
 		if(interpreter instanceof IRefactoringFakeInterpreter){
-			fakeInterpreter = (IRefactoringFakeInterpreter) interpreter;
-			//			fakeInterpreter.addValueProvider(this);
 			this.elements = elements;
 			this.fakeElements = elements;
 			return elements.get(0);

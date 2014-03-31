@@ -19,6 +19,7 @@
 package org.emftext.refactoring.interpreter.internal;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -32,8 +33,10 @@ import org.emftext.language.refactoring.refactoring_specification.IndexAssignmen
 import org.emftext.language.refactoring.refactoring_specification.LAST;
 import org.emftext.language.refactoring.refactoring_specification.ObjectReference;
 import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * @author Jan Reimann
@@ -42,11 +45,11 @@ import org.emftext.refactoring.interpreter.RefactoringStatus;
 public class IndexAssignmentInterpreter {
 
 	private RefactoringInterpreterContext context;
-	private List<? extends EObject> selection;
+	private Map<Role, List<EObject>> roleBindings;
 	
-	public IRefactoringStatus interpreteIndexCommand(IndexAssignmentCommand command, RefactoringInterpreterContext context, List<? extends EObject> selection){
+	public IRefactoringStatus interpreteIndexCommand(IndexAssignmentCommand command, RefactoringInterpreterContext context, Map<Role, List<EObject>> roleBindings){
 		this.context = context;
-		this.selection = selection;
+		this.roleBindings = roleBindings;
 		boolean result = true;
 		if(command instanceof FIRST){
 			result = interpreteFirst((FIRST) command);
@@ -73,11 +76,17 @@ public class IndexAssignmentInterpreter {
 			return setIndexForAfter(after, object);
 		}
 		if(reference instanceof ConstantsReference){
-			Constants constant = ((ConstantsReference) reference).getReferencedConstant();
+			ConstantsReference constantsReference = (ConstantsReference) reference;
+			Constants constant = constantsReference.getReferencedConstant();
 			List<? extends EObject> elements = null;
 			switch (constant) {
 			case INPUT:
-				elements = selection;
+				Role inputRole = RoleUtil.determineInputRole(roleBindings, constantsReference);
+				if(inputRole == null){
+					return false;
+				} else {
+					elements = roleBindings.get(inputRole);
+				}
 			default:
 				break;
 			}
@@ -120,11 +129,17 @@ public class IndexAssignmentInterpreter {
 			return setIndexForFIRST(first, object);
 		}
 		if(reference instanceof ConstantsReference){
-			Constants constant = ((ConstantsReference) reference).getReferencedConstant();
-			List<? extends EObject> elements = null;
+			ConstantsReference constantsReference = (ConstantsReference) reference;
+			Constants constant = constantsReference.getReferencedConstant();
+			List<EObject> elements = null;
 			switch (constant) {
 			case INPUT:
-				elements = selection;
+				Role inputRole = RoleUtil.determineInputRole(roleBindings, constantsReference);
+				if(inputRole == null){
+					return false;
+				} else {
+					elements = roleBindings.get(inputRole);
+				}
 			default:
 				break;
 			}

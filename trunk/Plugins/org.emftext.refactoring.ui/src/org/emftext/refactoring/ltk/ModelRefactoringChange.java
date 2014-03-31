@@ -27,12 +27,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -90,26 +85,6 @@ public class ModelRefactoringChange extends Change {
 		return changeDescriptor;
 	}
 
-	//	private void doFakeRun() {
-	//		try{
-	////			ResourceSet rs = refactorer.getResource().getResourceSet();
-	////			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(rs);
-	////			if(domain == null){
-	////				domain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
-	////			}
-	////			domain.getCommandStack().execute(new RecordingCommand(domain) {
-	////
-	////				@Override
-	////				protected void doExecute() {
-	//					RoleMapping mapping = modelRefactoring.getMapping();
-	//					refactorer.fakeRefactor(mapping);
-	////				}
-	////			});
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//		}
-	//	}
-
 	@Override
 	public Object getModifiedElement() {
 		return refactorer.getOriginalModel();
@@ -149,39 +124,14 @@ public class ModelRefactoringChange extends Change {
 
 			status = command.getStatus();
 			statusSwitch(true);
-
-			//			if (status.getSeverity() == IStatus.ERROR) {
-			//				Display display = PlatformUI.getWorkbench().getDisplay();
-			//				final Shell shell = display.getActiveShell();
-			//				display.syncExec(new Runnable()
-			//				{
-			//					public void run()
-			//					{
-			//						String title = "Refactoring Error";
-			//						String message = "The refactoring could not be completed because the following error occurred:\n\n" + status.getMessage();
-			//				
-			//						MessageDialog.openInformation(shell, title, message);
-			//					}
-			//				});
-			//			}
-
-			//			statusSwitch(command, status);
 		} catch (Exception e) {
-			//			if(command != null && command.canUndo()){
-			//				command.undo();
-			//			}
 			e.printStackTrace();
 			status = new org.emftext.refactoring.interpreter.RefactoringStatus(IRefactoringStatus.ERROR, "Refactoring rolled back", e);
-			//			Activator.getDefault().getLog().log(status);
-			//			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			//			String title = "Refactoring was rolled back";
-			//			String message = "Refactoring rolled back because of an unforseen error. Check out the error log";
 			statusSwitch(true);
 			if (domain != null && editingDomain == null) {
 				domain.dispose();
 			}
 			return null;
-			//			MessageDialog.openInformation(shell, title, message);
 		}
 		if (domain != null && editingDomain == null) {
 			domain.dispose();
@@ -219,8 +169,6 @@ public class ModelRefactoringChange extends Change {
 	}
 
 	private void statusSwitch(boolean rollback) {
-		//		Shell shell;
-		//		String title;
 		String message;
 		if (status == null) {
 			status = new org.emftext.refactoring.interpreter.RefactoringStatus(IStatus.OK);
@@ -230,20 +178,14 @@ public class ModelRefactoringChange extends Change {
 		case IRefactoringStatus.OK:
 			break;
 		case IRefactoringStatus.INFO:
-			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			//			title = "Information";
 			message = status.getMessage();
-			//			MessageDialog.openInformation(shell, title, message);
 			if (rollback && command.canUndo()) {
 				command.undo();
 			}
 			RegistryUtil.log("Refactoring rolled back because of some infos", IStatus.INFO);
 			break;
 		case IRefactoringStatus.WARNING:
-			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			//			title = "Information";
 			message = status.getMessage();
-			//			MessageDialog.openInformation(shell, title, message);
 			if (rollback && command.canUndo()) {
 				command.undo();
 			}
@@ -256,18 +198,14 @@ public class ModelRefactoringChange extends Change {
 			RegistryUtil.log("Refactoring rolled back because of cancelation of dialog", IStatus.CANCEL);
 			break;
 		case IRefactoringStatus.ERROR:
-			//			shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			//			title = "Refactoring will be rolled back";
 			message = "The refactoring will be rolled back because of the following unforseen error: \n\n";
 			message += status.getMessage();
 			if (status.getException() != null) {
 				status.getException().printStackTrace();
 				message += "\n\nCheck out the error log for further information.";
-				//				Activator.getDefault().getLog().log(status);
 				ResourcesPlugin.getPlugin().getLog().log(status);
 			}
 			status.setMessage(message);
-			//			MessageDialog.openInformation(shell, title, message);
 			if (rollback && command.canUndo()) {
 				command.undo();
 			}
@@ -322,52 +260,4 @@ public class ModelRefactoringChange extends Change {
 	public IProgressMonitor getMonitor() {
 		return monitor;
 	}
-
-	// commented out because of API changes in EMF Compare in Kepler
-	// this method had to be implemented by use of the old interface org.eclipse.emf.compare.ui.IModelCompareInputProvider
-	// this class implemented this interface und, thus, could easily provide a preview of the refactoring
-//	public ModelCompareInput getModelCompareInput() {
-//		Map<String, Object> options = new LinkedHashMap<String, Object>();
-//		options.put(MatchOptions.OPTION_DISTINCT_METAMODELS, true);
-//		options.put(MatchOptions.OPTION_IGNORE_ID, false);
-//		options.put(MatchOptions.OPTION_IGNORE_XMI_ID, false);
-//		//		options.put(MatchOptions.OPTION_PROGRESS_MONITOR, monitor);
-//		MatchModel match = null;
-//		try {
-//			EObject originalModel = refactorer.getOriginalModel();
-//			createTemporaryResource(originalModel);
-//			//			refactorer.fakeRefactor();
-//			EObject fakeRefactoredModel = refactorer.getFakeRefactoredModel();
-//			createTemporaryResource(fakeRefactoredModel);
-//			IMatchEngine engine = new RefactoringMatchEngine();
-//			if (originalModel != null && fakeRefactoredModel != null) {
-//				//				match = engine.contentMatch(originalModel, fakeRefactoredModel, options);
-//				match = engine.modelMatch(originalModel, fakeRefactoredModel, options);
-//			}
-//		} catch (InterruptedException e1) {
-//			e1.printStackTrace();
-//		}
-//		if (match != null) {
-//			DiffModel diff = null;
-//			diff = DiffService.doDiff(match, false);
-//			ModelCompareInput compareInput = new ModelCompareInput(match, diff);
-//			return compareInput;
-//		}
-//		return null;
-//	}
-//
-//	private Resource createTemporaryResource(EObject model) {
-//		if(model == null){
-//			return null;
-//		}
-//		Resource resource = model.eResource();
-//		if(resource == null){
-//			String id = EcoreUtil.getIdentification(model);
-//			URI uri = URI.createURI(id);
-//			resource = new ResourceImpl(uri);
-//			resource.getContents().add(model);
-//		}
-//		return resource;
-//	}
-
 }

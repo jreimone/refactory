@@ -53,12 +53,11 @@ import org.emftext.refactoring.interpreter.RefactoringStatus;
  * @author Jan Reimann
  *
  */
-//public class ASSIGNInterpreter extends AbstractValueProviderInstantiator<EAttribute, Object>{
 public class ASSIGNInterpreter {
 
 	private RoleMapping mapping;
 	private RefactoringInterpreterContext context;
-	private List<? extends EObject> selection;
+	private List<EObject> selection;
 
 	private Role assignedRole;
 	private Object roleRuntimeValue;
@@ -76,7 +75,7 @@ public class ASSIGNInterpreter {
 		this.interpreter = interpreter;
 	}
 
-	public IRefactoringStatus interpreteASSIGN(ASSIGN object, RefactoringInterpreterContext context, List<? extends EObject> selection) {
+	public IRefactoringStatus interpreteASSIGN(ASSIGN object, RefactoringInterpreterContext context, List<EObject> selection) {
 		this.assign = object;
 		this.context = context;
 		this.selection = selection;
@@ -131,7 +130,6 @@ public class ASSIGNInterpreter {
 
 	private IRefactoringStatus handleTargetOnly(RoleAttribute target){
 		//TODO "assignedRole" und "roleRuntimeValue" werden hier nur einmal gesetzt --> korrekt? werden null
-		EObject interpretationContext = target.getInterpretationContext();
 		Role targetRole = target.getAttributeRole();
 		ConcreteMapping concreteMapping = mapping.getConcreteMappingForRole(targetRole);
 		EcoreUtil.resolveAll(concreteMapping);
@@ -143,6 +141,7 @@ public class ASSIGNInterpreter {
 		}
 		EAttribute classAttribute = attMapping.getClassAttribute();
 		EObject targetObject = null;
+		EObject interpretationContext = target.getInterpretationContext();
 		if(interpretationContext instanceof Variable){
 			targetObject = (EObject) context.getObjectForVariable((Variable) interpretationContext);
 		} else if(interpretationContext instanceof Role) {

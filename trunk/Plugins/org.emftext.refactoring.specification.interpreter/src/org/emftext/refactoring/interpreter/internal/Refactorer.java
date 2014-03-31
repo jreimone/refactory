@@ -19,8 +19,6 @@
 package org.emftext.refactoring.interpreter.internal;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -41,6 +39,7 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
+import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.indexconnector.IndexConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.IRefactoringFakeInterpreter;
@@ -64,18 +63,18 @@ import org.emftext.refactoring.util.RoleUtil;
 public class Refactorer implements IRefactorer {
 
 	private EObject model;
-//	private List<EObject> currentSelection;
+	//	private List<EObject> currentSelection;
 	private boolean occuredErrors;
 	private List<Resource> resourcesToSave;
 	private Resource resource;
 	private IRefactoringStatus status;
 	private IRefactoringInterpreter interpreter;
-	private List<EObject> filteredSelection;
 	private ResourceSet currentModelResourceSet;
 	private EObject fakeRefactoredModel;
 	private IValueProviderFactory valueProviderFactory;
 	private RoleMapping roleMapping;
 	private Copier copier;
+	private Map<Role, List<EObject>> filteredRoleBindings;
 	private Map<Role, List<EObject>> roleBindings;
 	private List<Role> boundInputRoles;
 
@@ -98,17 +97,17 @@ public class Refactorer implements IRefactorer {
 	}
 
 	public void fakeRefactor() {
-		if(filteredSelection == null){
+		if(filteredRoleBindings == null){
 			loadReferencingResources();
 		}
-		if (interpreter != null && filteredSelection.size() > 0) {
-			fakeInterpreteAndPreCollectValues(roleMapping, filteredSelection, interpreter, currentModelResourceSet);
+		if (interpreter != null && filteredRoleBindings.size() > 0) {
+			fakeInterpreteAndPreCollectValues(roleMapping, filteredRoleBindings, interpreter, currentModelResourceSet);
 		} 
 	}
 
 	private void loadReferencingResources(){
-		filteredSelection = filterSelectedElements();
-		if (interpreter != null && filteredSelection.size() > 0) {
+		filteredRoleBindings = filterSelectedElements();
+		if (interpreter != null && filteredRoleBindings.size() > 0) {
 			List<Resource> allReferencingResources = IndexConnectorRegistry.INSTANCE.getReferencingResources(model);
 			currentModelResourceSet = getResource().getResourceSet();
 
@@ -125,23 +124,23 @@ public class Refactorer implements IRefactorer {
 
 	public EObject refactor() {
 		loadReferencingResources();
-		if (roleMapping == null || interpreter == null || filteredSelection.size() == 0 || currentModelResourceSet == null) {
+		if (roleMapping == null || interpreter == null || filteredRoleBindings.size() == 0 || currentModelResourceSet == null) {
 			return null;
 		}
-		EObject refactoredModel = realInterprete(filteredSelection, interpreter, currentModelResourceSet);
+		EObject refactoredModel = realInterprete(filteredRoleBindings, interpreter, currentModelResourceSet);
 		return refactoredModel;
 	}
 
 	/**
 	 * @param mapping
-	 * @param filteredElements
+	 * @param filteredRoleBindings
 	 * @param interpreter
 	 * @param refactoredModelRS
 	 * @return
 	 */
-	private EObject realInterprete(List<EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
+	private EObject realInterprete(Map<Role, List<EObject>> filteredRoleBindings, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
 		EObject refactoredModel;
-		interpreter.setInput(filteredElements);
+		interpreter.setRoleBindings(filteredRoleBindings);
 		interpreter.setValueProviderFactory(valueProviderFactory);
 		ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
 		refactoredModel = interpreter.interprete(model);
@@ -178,11 +177,11 @@ public class Refactorer implements IRefactorer {
 	}
 
 	/**
-	 * @param filteredElements
+	 * @param filteredRoleBindings
 	 * @param interpreter
 	 * @param refactoredModelRS
 	 */
-	private void fakeInterpreteAndPreCollectValues(RoleMapping mapping, List<EObject> filteredElements, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
+	private void fakeInterpreteAndPreCollectValues(RoleMapping mapping, Map<Role, List<EObject>> filteredRoleBindings, IRefactoringInterpreter interpreter, ResourceSet refactoredModelRS) {
 		// copy init start
 		copier = new Copier(false, true);
 		List<EObject> originalElements = new LinkedList<EObject>();
@@ -197,20 +196,27 @@ public class Refactorer implements IRefactorer {
 		}
 		copier.copyAll(originalElements);
 		copier.copyReferences();
-		List<EObject> copiedInputSelection = new LinkedList<EObject>();
-		for (EObject original : filteredElements) {
-			EObject copy = copier.get(original);
-			if(copy == null) {
-				RegistryUtil.log("Copy couldn't be found for fake interpreting. Retry right-clicking the element to refactor", IStatus.ERROR);
-				return;
+		Map<Role, List<EObject>> copiedInputRoleBinding = new HashMap<Role, List<EObject>>();
+		for (Role boundRole : filteredRoleBindings.keySet()) {
+			if(boundRole.getModifier().contains(RoleModifier.INPUT)){
+				List<EObject> copiedBoundElements = new ArrayList<EObject>();
+				List<EObject> boundElements = filteredRoleBindings.get(boundRole);
+				for (EObject originalBoundElement : boundElements) {
+					EObject copiedBoundElement = copier.get(originalBoundElement);
+					if(copiedBoundElement == null) {
+						RegistryUtil.log("Copy couldn't be found for fake interpreting. Retry right-clicking the element to refactor", IStatus.ERROR);
+						return;
+					}
+					copiedBoundElements.add(copiedBoundElement);
+				}
+				copiedInputRoleBinding.put(boundRole, copiedBoundElements);
 			}
-			copiedInputSelection.add(copy);
 		}
 		EObject copiedModel = copier.get(model);
-		interpreter.setInput(copiedInputSelection);
+		//		interpreter.setRoleBindings(copiedInputRoleBinding);
 
 		IRefactoringFakeInterpreter fakeInterpreter = interpreter.getFakeInterpreter();
-		fakeInterpreter.setInput(copiedInputSelection);
+		fakeInterpreter.setRoleBindings(copiedInputRoleBinding);
 		EObject copiedRefactoredModel = null;
 		try {
 			ChangeRecorder recorder = new ChangeRecorder(refactoredModelRS);
@@ -294,16 +300,12 @@ public class Refactorer implements IRefactorer {
 		//		return fakeInterpreter;
 	}
 
-	private List<EObject> filterSelectedElements() {
+	private Map<Role, List<EObject>> filterSelectedElements() {
 		List<EObject> filteredElements = getInput();
 		List<EObject> elementsToRemove = new LinkedList<EObject>();
 		for (EObject child : filteredElements) {
-			List<EObject> othersList = new LinkedList<EObject>();
-			for (EObject eObject : filteredElements) {
-				if (!eObject.equals(child)) {
-					othersList.add(eObject);
-				}
-			}
+			List<EObject> othersList = new LinkedList<EObject>(filteredElements);
+			othersList.remove(child);
 			for (EObject parent : othersList) {
 				if (EcoreUtil.isAncestor(parent, child)) {
 					elementsToRemove.add(child);
@@ -313,20 +315,36 @@ public class Refactorer implements IRefactorer {
 		for (EObject child : elementsToRemove) {
 			filteredElements.remove(child);
 		}
-		Collections.sort(filteredElements, new Comparator<EObject>() {
-
-			public int compare(EObject o1, EObject o2) {
-				EObject parent1 = o1.eContainer();
-				EObject parent2 = o2.eContainer();
-				if (parent1.equals(parent2)) {
-					int index1 = ((List<?>) parent1.eGet(o1.eContainingFeature())).indexOf(o1);
-					int index2 = ((List<?>) parent1.eGet(o2.eContainingFeature())).indexOf(o2);
-					return index1 - index2;
+		//		Collections.sort(filteredElements, new Comparator<EObject>() {
+		//
+		//			public int compare(EObject o1, EObject o2) {
+		//				EObject parent1 = o1.eContainer();
+		//				EObject parent2 = o2.eContainer();
+		//				if (parent1.equals(parent2)) {
+		//					int index1 = ((List<?>) parent1.eGet(o1.eContainingFeature())).indexOf(o1);
+		//					int index2 = ((List<?>) parent1.eGet(o2.eContainingFeature())).indexOf(o2);
+		//					return index1 - index2;
+		//				}
+		//				return 0;
+		//			}
+		//		});
+		Map<Role, List<EObject>> filteredRoleBindings = new HashMap<Role, List<EObject>>();
+		for (EObject filteredElement : filteredElements) {
+			for (Role boundRole : roleBindings.keySet()) {
+				List<EObject> boundElements = roleBindings.get(boundRole);
+				if(boundElements.contains(filteredElement)){
+					List<EObject> filteredBoundElements = filteredRoleBindings.get(boundRole);
+					if(filteredBoundElements == null){
+						filteredBoundElements = new ArrayList<EObject>();
+						filteredRoleBindings.put(boundRole, filteredBoundElements);
+					}
+					if(!filteredBoundElements.contains(filteredElement)){
+						filteredBoundElements.add(filteredElement);
+					}
 				}
-				return 0;
 			}
-		});
-		return filteredElements;
+		}
+		return filteredRoleBindings;
 	}
 
 	public void setInput(List<? extends EObject> selectedElements) {
@@ -342,7 +360,7 @@ public class Refactorer implements IRefactorer {
 		inputRoleBinding.put(inputRoles.get(0).getName(), elements);
 		setInputRoleBindings(inputRoleBinding);
 	}
-	
+
 	public void setInputRoleBindings(Map<String, List<EObject>> inputRoleBinding){
 		for (String roleName : inputRoleBinding.keySet()) {
 			Role role = RoleUtil.getRoleByName(roleMapping, roleName);
@@ -355,13 +373,14 @@ public class Refactorer implements IRefactorer {
 					}
 				}
 				if(!resolvedElements.isEmpty()){
+					List<EObject> filteredObjects = RoleUtil.filterObjectsByInputRoles(resolvedElements, roleMapping);
 					boundInputRoles.add(role);
-					roleBindings.put(role, resolvedElements);
+					roleBindings.put(role, filteredObjects);
 				}
 			}
 		}
 	}
-	
+
 	public Map<Role, List<EObject>> getRoleBindings(){
 		return roleBindings;
 	}
@@ -398,13 +417,9 @@ public class Refactorer implements IRefactorer {
 
 	@Override
 	public List<EObject> getInput() {
-		List<EObject> inputElements = new ArrayList<EObject>();
-		for (List<EObject> boundElements : getInputRoleBindings().values()) {
-			inputElements.addAll(boundElements);
-		}
-		return inputElements;
+		return RoleUtil.getBoundInputElements(getInputRoleBindings());
 	}
-	
+
 	public Map<Role, List<EObject>> getInputRoleBindings(){
 		Map<Role, List<EObject>> inputRoleBindings = new HashMap<Role, List<EObject>>();
 		for (Role inputRole : boundInputRoles) {

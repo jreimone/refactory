@@ -31,9 +31,6 @@ import org.emftext.refactoring.util.RegistryUtil;
  */
 public class RefactorerFactoryImpl implements RefactorerFactory {
 
-	/* (non-Javadoc)
-	 * @see org.emftext.refactoring.interpreter.RefactoringInterpreterFactory#getRefactoringInterpreter(org.eclipse.emf.common.util.URI)
-	 */
 	public IRefactorer getRefactorer(Resource resource, RoleMapping roleMapping) {
 		if(resource == null || roleMapping == null){
 			return null;
