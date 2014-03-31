@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.CREATE;
 import org.emftext.language.refactoring.refactoring_specification.CollaborationReference;
+import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
 import org.emftext.language.refactoring.refactoring_specification.ObjectAssignmentCommand;
 import org.emftext.language.refactoring.refactoring_specification.RoleReference;
 import org.emftext.language.refactoring.refactoring_specification.TRACE;
@@ -66,6 +67,24 @@ public class RoleUtil {
 			}
 		}
 		return boundInputRoles;
+	}
+	
+	/**
+	 * Determines the qualifier role of the given <code>constantsReference</code> depending in the <code>roleBindings</code>.
+	 * @param roleBindings
+	 * @param constantsReference
+	 * @return
+	 */
+	public static Role determineInputRole(Map<Role, List<EObject>> roleBindings, ConstantsReference constantsReference) {
+		List<Role> boundInputRoles = RoleUtil.getBoundInputRoles(roleBindings);
+		Role qualifierRole = constantsReference.getQualifierRole();
+		Role inputRole = null;
+		if(boundInputRoles.size() > 1 || qualifierRole != null){
+			inputRole = qualifierRole;
+		} else if(boundInputRoles.size() == 1){
+			inputRole = RoleUtil.getBoundInputRoles(roleBindings).get(0);
+		}
+		return inputRole;
 	}
 	
 	/**

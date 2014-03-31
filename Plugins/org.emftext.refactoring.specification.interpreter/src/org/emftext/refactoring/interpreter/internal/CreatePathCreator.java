@@ -29,7 +29,7 @@ public class CreatePathCreator extends AbstractPathCreator {
 	@Override
 	protected IRefactoringStatus onePairLeftIndexNotNull(Object children, Integer index, ReferenceMetaClassPair referencePair, Object feature) {
 		if(((List<EObject>) feature).size() <= index){
-			boolean result = ((List<EObject>) feature).add((EObject) children);
+			((List<EObject>) feature).add((EObject) children);
 			return new RefactoringStatus(IRefactoringStatus.OK);
 		}
 		((List<EObject>) feature).add(index, (EObject) children);

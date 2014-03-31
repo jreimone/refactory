@@ -21,6 +21,7 @@ package org.emftext.refactoring.interpreter.internal;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Adapter;
@@ -52,6 +53,7 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IRefactoringStatus;
 import org.emftext.refactoring.interpreter.RefactoringStatus;
+import org.emftext.refactoring.interpreter.exceptions.RefSpecInterpretationException;
 import org.emftext.refactoring.util.RegistryUtil;
 import org.emftext.refactoring.util.RoleUtil;
 
@@ -60,29 +62,35 @@ import org.emftext.refactoring.util.RoleUtil;
  */
 public class REMOVEInterpreter {
 
-	private RefactoringInterpreter refactoringInterpreter;
 	private RoleMapping mapping;
 	private RefactoringInterpreterContext context;
-	private List<EObject> selection;
+	private Map<Role, List<EObject>> roleBindings;
 	private Role assignedRole;
 	private Object runtimeValue;
 
-	public REMOVEInterpreter(RefactoringInterpreter refactoringInterpreter, RoleMapping mapping) {
+	public REMOVEInterpreter(RoleMapping mapping) {
 		this.mapping = mapping;
-		this.refactoringInterpreter = refactoringInterpreter;
 	}
 
-	public IRefactoringStatus interpreteREMOVE(REMOVE object, RefactoringInterpreterContext context, List<EObject> selection) {
+	public IRefactoringStatus interpreteREMOVE(REMOVE object, RefactoringInterpreterContext context, Map<Role, List<EObject>> roleBindings) {
 		this.context = context;
-		this.selection = selection;
+		this.roleBindings = roleBindings;
 
 		RemoveModifier modifier = object.getModifier();
-		List<EObject> removals = resolveRemovals(object.getRemoval());
-		if (modifier != null) {
-			removals = modify(modifier, removals);
+		List<EObject> removals = null;
+		try {
+			removals = resolveRemovals(object.getRemoval());
+			if (modifier != null) {
+				removals = modify(modifier, removals);
+			}
+		} catch (RefSpecInterpretationException e) {
+			return new RefactoringStatus(IRefactoringStatus.ERROR, "An error occurred while resolving the removals", e);
 		}
-		remove(removals);
-		return new RefactoringStatus(IRefactoringStatus.OK);
+		if(removals != null){
+			remove(removals);
+			return new RefactoringStatus(IRefactoringStatus.OK);
+		}
+		return new RefactoringStatus(IRefactoringStatus.WARNING, "No removals could be resolved");
 	}
 
 	/**
@@ -124,10 +132,6 @@ public class REMOVEInterpreter {
 			if (iterator.hasNext()) {
 				empty = false;
 			}
-//			while (iterator.hasNext()) {
-//				Object object = (Object) iterator.next();
-//				empty = false;
-//			}
 			if (empty) {
 				emptyRemovals.add(removal);
 			}
@@ -202,14 +206,16 @@ public class REMOVEInterpreter {
 	/**
 	 * @param removal
 	 * @return
+	 * @throws RefSpecInterpretationException in case an error occurs while resolving the removals
 	 */
 	@SuppressWarnings("unchecked")
-	private List<EObject> resolveRemovals(ObjectRemoval removal) {
+	private List<EObject> resolveRemovals(ObjectRemoval removal) throws RefSpecInterpretationException {
 		List<EObject> removals = new LinkedList<EObject>();
 		if (removal instanceof RoleRemoval) {
 			assignedRole = ((RoleRemoval) removal).getRole();
 			if (assignedRole.getModifier().contains(RoleModifier.INPUT)) {
-				for (EObject eObject : selection) {
+				List<EObject> boundElements = roleBindings.get(assignedRole);
+				for (EObject eObject : boundElements) {
 					List<Role> mappedRoles = mapping.getMappedRolesForEObject(eObject);
 					if (mappedRoles != null && mappedRoles.contains(assignedRole)) {
 						removals.add(eObject);
@@ -217,8 +223,7 @@ public class REMOVEInterpreter {
 				}
 				runtimeValue = removals;
 			} else {
-				throw new UnsupportedOperationException(
-						"Handle the other modifiers");
+				throw new UnsupportedOperationException("Handle the other modifiers");
 			}
 		} else if (removal instanceof VariableReference) {
 			Variable variable = ((VariableReference) removal).getVariable();
@@ -229,12 +234,18 @@ public class REMOVEInterpreter {
 				removals.addAll((List<EObject>) object);
 			}
 		} else if (removal instanceof ConstantsReference) {
-			Constants constant = ((ConstantsReference) removal).getReferencedConstant();
+			ConstantsReference constantsReference = (ConstantsReference) removal;
+			Constants constant = constantsReference.getReferencedConstant();
 			switch (constant) {
-				case INPUT:
-					removals.addAll(selection);
-				default:
-					break;
+			case INPUT:
+				Role inputRole = RoleUtil.determineInputRole(roleBindings, constantsReference);
+				if(inputRole == null){
+					throw new RefSpecInterpretationException("Unique qualifier role couldn't be determined");
+				} else {
+					removals.addAll(roleBindings.get(inputRole));
+				}
+			default:
+				break;
 			}
 		} else if (removal instanceof CollaborationReference) {
 			MultiplicityCollaboration collaboration = ((CollaborationReference) removal).getCollaboration();
@@ -322,8 +333,6 @@ public class REMOVEInterpreter {
 								reducedPairs, filter));
 					}
 					return objectCollection;
-//					throw new UnsupportedOperationException(
-//							"implement this case - but this shouldn't happen because here only one EObject should be returned");
 				}
 			}
 		}
@@ -336,8 +345,7 @@ public class REMOVEInterpreter {
 		} else if (interpretationContext instanceof Role) {
 			Role role = (Role) interpretationContext;
 			if (role.getModifier().contains(RoleModifier.INPUT)) {
-				List<EObject> filteredSelection = RoleUtil.filterObjectsByRoles(
-						selection, mapping, role);
+				List<EObject> filteredSelection = roleBindings.get(role);
 				assignedRole = role;
 				runtimeValue = filteredSelection;
 				return filteredSelection;

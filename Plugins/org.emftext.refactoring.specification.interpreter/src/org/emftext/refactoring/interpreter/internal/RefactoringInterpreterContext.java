@@ -113,8 +113,7 @@ public class RefactoringInterpreterContext {
 	 * @param variable
 	 */
 	public void addEObjectForVariable(Variable variable) {
-//		CREATE create = variable.getCreateCommand();
-		Role varRole = RoleUtil.getRoleFromVariable(variable);;
+		Role varRole = RoleUtil.getRoleFromVariable(variable);
 		EClass metaClass = mapping.getEClassForRole(varRole);
 		EObject instance = ModelUtil.create(metaClass);
 		varInstanceMap.put(variable, instance);

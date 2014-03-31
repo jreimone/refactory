@@ -4,7 +4,6 @@ import org.eclipse.compare.ITypedElement;
 import org.eclipse.compare.structuremergeviewer.Differencer;
 import org.eclipse.compare.structuremergeviewer.ICompareInput;
 import org.eclipse.compare.structuremergeviewer.ICompareInputChangeListener;
-import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -14,12 +13,10 @@ import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
 public class ModelRefactoringCompareInput implements ICompareInput {
 
-	private Comparison comparison;
 	private ModelRefactoringChange change;
 	private AdapterFactoryLabelProvider labelProvider;
 
-	public ModelRefactoringCompareInput(Comparison comparison, ModelRefactoringChange change) {
-		this.comparison = comparison;
+	public ModelRefactoringCompareInput(ModelRefactoringChange change) {
 		this.change = change;
 		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		labelProvider = new AdapterFactoryLabelProvider(composedAdapterFactory);

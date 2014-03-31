@@ -67,7 +67,7 @@ public interface IRefactoringInterpreter extends Cloneable{
 	 * Invokes the refactoring process on the model and with the steps determined in {@link IRefactoringInterpreter#initialize(RefactoringSpecification, EObject)}.
 	 * 
 	 * @param copy flag to decide whether the refactoring should be invoked on a copy of the model
-	 * @return returns the refactored model or <code>null</code> if {@link IRefactoringInterpreter#setRoleMapping(RoleMapping)} wasn't invoked before
+	 * @return returns the refactored model
 	 */
 	public EObject interprete(EObject model);
 	
@@ -86,10 +86,13 @@ public interface IRefactoringInterpreter extends Cloneable{
 	public IRefactoringFakeInterpreter getFakeInterpreter();
 	
 	/**
-	 * Sets the the current selection, for which the appropriate interpreter is to be run, as input.
-	 * @param currentSelection
+	 * Passes the given <code>roleBindings</code> to the interpreter which then will be further used
+	 * to add additional bindings of the other roles being result of the interpretation process.
+	 * Usually, the passed <code>roleBindings</code> initially only contain bindings for input roles.
+	 * 
+	 * @param inputRoleBinding
 	 */
-	public void setInput(List<EObject> currentSelection);
+	public void setRoleBindings(Map<Role, List<EObject>> roleBindings);
 	
 	/**
 	 * Returns <code>false</code> if no errors occured while refactoring. 

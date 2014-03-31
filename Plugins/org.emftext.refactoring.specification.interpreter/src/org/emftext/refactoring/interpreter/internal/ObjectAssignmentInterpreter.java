@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -65,11 +66,10 @@ import org.emftext.refactoring.util.RoleUtil;
  * @author Jan Reimann
  *
  */
-//public class ObjectAssignmentInterpreter extends AbstractValueProviderInstantiator<List<EObject>, EObject>{
 public class ObjectAssignmentInterpreter{
 
 	private RoleMapping mapping;
-	private List<EObject> selection;
+	private Map<Role, List<EObject>> roleBindings;
 	private RefactoringInterpreterContext context;
 
 	private Role assignedRole;
@@ -80,7 +80,6 @@ public class ObjectAssignmentInterpreter{
 	private IRefactoringInterpreter interpreter;
 
 	private ObjectAssignmentCommand command;
-//	private EClass classForValueProvider;
 
 	public ObjectAssignmentInterpreter(IRefactoringInterpreter interpreter, RoleMapping mapping) {
 		super();
@@ -88,8 +87,8 @@ public class ObjectAssignmentInterpreter{
 		this.interpreter = interpreter;
 	}
 
-	public IRefactoringStatus interpreteObjectAssignmentCommand(ObjectAssignmentCommand object, RefactoringInterpreterContext context, List<EObject> selection) {
-		this.selection = selection;
+	public IRefactoringStatus interpreteObjectAssignmentCommand(ObjectAssignmentCommand object, RefactoringInterpreterContext context, Map<Role, List<EObject>> roleBindings) {
+		this.roleBindings = roleBindings;
 		this.context = context;
 		this.command = object;
 
@@ -121,9 +120,9 @@ public class ObjectAssignmentInterpreter{
 		return status;
 	}
 
-	private EObject handleCollaboration(CollaborationReference object,	Variable objectVar) {
+	private EObject handleCollaboration(CollaborationReference collaborationReference, Variable objectVar) {
 		// TODO split method
-		MultiplicityCollaboration collaboration = object.getCollaboration();
+		MultiplicityCollaboration collaboration = collaborationReference.getCollaboration();
 		EObject interpretationContext = collaboration.getInterpretationContext();
 		Object targetObject = null;
 		ObjectAssignmentCommand connectedCommand = null;
@@ -142,7 +141,7 @@ public class ObjectAssignmentInterpreter{
 			CollaborationMapping collaborationMapping = concreteMapping.getCollaborationMappingForCollaboration(collaboration);
 			List<ReferenceMetaClassPair> pairs = collaborationMapping.getReferenceMetaClassPair();
 			if(referencedRole.getModifier().contains(RoleModifier.INPUT)){
-				List<EObject> objects = RoleUtil.filterObjectsByRoles(selection, mapping, referencedRole);
+				List<EObject> objects = roleBindings.get(referencedRole);
 				if(objects.size() == 1){
 					List<EObject> resolvedObjects = getEObjectWithRoleFromPath(targetRole, objects.get(0), pairs);
 					if(resolvedObjects.size() == 1){
@@ -191,49 +190,12 @@ public class ObjectAssignmentInterpreter{
 		}
 	}
 
-	//	private List<EObject> resolveCollaboration(EObject root, List<ReferenceMetaClassPair> pairs, Role filter) {
-	//		if (pairs == null) {
-	//			return null;
-	//		} else {
-	//			if (pairs.size() == 1) {
-	//				List<EObject> containments = new LinkedList<EObject>();
-	//				Object children = root.eGet(pairs.get(0).getReference(), true);
-	//				if (children instanceof EObject) {
-	//					containments.add((EObject) children);
-	//				} else if (children instanceof List<?>) {
-	//					containments.addAll((List<EObject>) children);
-	//				}
-	//				return RoleUtil.filterObjectsByRoles(containments, mapping, filter);
-	//			} else {
-	//				List<ReferenceMetaClassPair> reducedPairs = new LinkedList<ReferenceMetaClassPair>();
-	//				for (int i = 1; i < pairs.size(); i++) {
-	//					reducedPairs.add(pairs.get(i));
-	//				}
-	//				ReferenceMetaClassPair pair = pairs.get(0);
-	//				Object newRoot = root.eGet(pair.getReference());
-	//				if (newRoot instanceof EObject) {
-	//					return resolveCollaboration((EObject) newRoot, reducedPairs, filter);
-	//				} else if (newRoot instanceof List<?>) {
-	//					List<EObject> newRoots = (List<EObject>) newRoot;
-	//					List<EObject> objectCollection = new LinkedList<EObject>();
-	//					for (EObject eObject : newRoots) {
-	//						objectCollection.addAll(resolveCollaboration(eObject, reducedPairs, filter));
-	//					}
-	//					return objectCollection;
-	////					throw new UnsupportedOperationException(
-	////							"implement this case - but this shouldn't happen because here only one EObject should be returned");
-	//				}
-	//			}
-	//		}
-	//		return null;
-	//	}
-
 	private void handleFILTER(RoleReference object, Variable objectVar) {
 		Role role = object.getRole();
 		assignedRole = role;
 		FromClause from = object.getFrom();
 		ObjectReference reference = from.getReference();
-		List<? extends EObject> elements = getObjectReferenceObject(reference);
+		List<EObject> elements = getObjectReferenceObject(reference);
 		List<EObject> filteredElements = new LinkedList<EObject>();
 		for (EObject element : elements) {
 			List<Role> mappedRoles = mapping.getMappedRolesForEObject(element);
@@ -253,7 +215,7 @@ public class ObjectAssignmentInterpreter{
 	private void handleTrace(TRACE trace, Variable objectVar){
 		assignedRole = trace.getRole();
 		ObjectReference from = trace.getReference();
-		List<? extends EObject> objects = getObjectReferenceObject(from);
+		List<EObject> objects = getObjectReferenceObject(from);
 		List<EObject> containers = new LinkedList<EObject>();
 		for (EObject object : objects) {
 			if(!containers.contains(object.eContainer())){
@@ -262,15 +224,6 @@ public class ObjectAssignmentInterpreter{
 		}
 		roleRuntimeValue = containers;
 		context.addEObjectsForVariable(objectVar, containers);
-
-
-		//		EObject first = objects.get(0);
-		//		EObject container = first.eContainer();
-		//		roleRuntimeValue = container;
-		//		TraceObject traceObject = RefactoringSpecificationFactory.eINSTANCE.createTraceObject();
-		//		traceObject.setAppliedRole(assignedRole);
-		//		traceObject.setContainer(container);
-		//		return traceObject;
 	}
 
 	private EObject handleRoleReference(RoleReference roleRef) {
@@ -368,10 +321,17 @@ public class ObjectAssignmentInterpreter{
 	@SuppressWarnings("unchecked")
 	private List<EObject> getObjectReferenceObject(ObjectReference reference){
 		if(reference instanceof ConstantsReference){
-			Constants constant = ((ConstantsReference) reference).getReferencedConstant();
+			ConstantsReference constantsReference = (ConstantsReference) reference;
+			Constants constant = constantsReference.getReferencedConstant();
 			switch (constant) {
 			case INPUT:
-				return selection;
+				Role inputRole = RoleUtil.determineInputRole(roleBindings, constantsReference);
+				if(inputRole == null){
+					status = new RefactoringStatus(IRefactoringStatus.ERROR, "Referenced constant (INPUT) must be concretised by a role");
+					return null;
+				} else {
+					return roleBindings.get(inputRole);
+				}
 			default:
 				break;
 			}

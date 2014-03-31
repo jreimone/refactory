@@ -42,20 +42,6 @@ public class RefactoringCommandHandler extends AbstractHandler {
 	private EditingDomain diagramTransactionalEditingDomain;
 	private IEditorPart activeEditor;
 
-	//	public RefactoringCommandHandler(IRefactorer refactorer, IEditorConnector connector){
-	//		super();
-	//		this.refactorer = refactorer;
-	//		this.connector = connector;
-	//		IValueProviderFactory factory = new BasicValueProviderFactory(refactorer);
-	//		refactorer.setValueProviderFactory(factory);
-	//	}
-	//
-	//	public RefactoringCommandHandler(IRefactorer refactorer, EditingDomain diagramTransactionalEditingDomain, IEditorPart activeEditor, IEditorConnector connector){
-	//		this(refactorer, connector);
-	//		this.diagramTransactionalEditingDomain = diagramTransactionalEditingDomain;
-	//		this.activeEditor = activeEditor;
-	//	}
-
 	public RefactoringCommandHandler() {
 		super();
 	}

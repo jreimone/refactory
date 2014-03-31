@@ -65,7 +65,7 @@ public class BasicValueProviderFactory implements IValueProviderFactory {
 			if(command instanceof ASSIGN){
 				valueProvider = new DialogAttributeValueProvider(refactorer.getRoleMapping());
 			} else if (command instanceof ObjectAssignmentCommand){
-				valueProvider = new DialogOneListElementProvider(refactorer.getRoleMapping());
+				valueProvider = new DialogOneListElementProvider();
 				if(context.length >= 1 && (context[0] instanceof Role)){
 					Role role = (Role) context[0];
 					EClass metaclass = refactorer.getRoleMapping().getEClassForRole(role);

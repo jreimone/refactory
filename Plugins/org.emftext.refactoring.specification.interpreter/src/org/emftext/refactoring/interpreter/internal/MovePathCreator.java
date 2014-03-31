@@ -48,7 +48,7 @@ public class MovePathCreator extends AbstractPathCreator {
 			EcoreUtil.remove(oldParent, referencePair.getReference(), child);
 		}
 		if(((List<EObject>) feature).size() <= index){
-			boolean result = ((List<EObject>) feature).addAll((List<? extends EObject>) children);
+			((List<EObject>) feature).addAll((List<? extends EObject>) children);
 			return new RefactoringStatus(IRefactoringStatus.OK);
 		}
 		((List<EObject>) feature).addAll(index, (List<? extends EObject>) children);
@@ -61,7 +61,7 @@ public class MovePathCreator extends AbstractPathCreator {
 			EObject oldParent = child.eContainer();
 			EcoreUtil.remove(oldParent, referencePair.getReference(), child);
 		}
-		boolean result = ((List<EObject>) feature).addAll((List<? extends EObject>) children);
+		((List<EObject>) feature).addAll((List<? extends EObject>) children);
 		return new RefactoringStatus(IRefactoringStatus.OK);
 	}
 
