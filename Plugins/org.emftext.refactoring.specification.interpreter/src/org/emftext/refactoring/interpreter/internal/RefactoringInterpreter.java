@@ -401,11 +401,11 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		}
 	}
 
-	public Map<Role, List<EObject>> getRoleRuntimeInstances() {
+	public Map<Role, List<EObject>> getRoleBindings() {
 		return roleBindings;
 	}
 
-	public Map<Role, List<URI>> getRoleRuntimeInstanceURIs() {
+	public Map<Role, List<URI>> getRoleBindingURIs() {
 		return roleRuntimeInstanceURIMap;
 	}
 
@@ -437,6 +437,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	public IRefactoringFakeInterpreter getFakeInterpreter() {
 		try {
 			if (fakeInterpreter == null) {
+				// TODO nach dem Klonen muss das RoleBinding auch kopiert werden und nur mit Inut-Rollen
 				fakeInterpreter = new RefactoringFakeInterpreter((IRefactoringInterpreter) this.clone());
 			}
 			return fakeInterpreter;
@@ -454,7 +455,7 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 		return refSpec;
 	}
 
-	public void setRoleRuntimeInstanceURIs(Map<Role, List<URI>> roleRuntimeInstanceURIMap) {
+	public void setRoleBindingURIs(Map<Role, List<URI>> roleRuntimeInstanceURIMap) {
 		this.roleRuntimeInstanceURIMap = roleRuntimeInstanceURIMap;
 	}
 

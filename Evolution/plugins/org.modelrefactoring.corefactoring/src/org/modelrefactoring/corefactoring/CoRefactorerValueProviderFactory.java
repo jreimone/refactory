@@ -47,9 +47,9 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 		dependentRefactorer.setValueProviderFactory(this);
 		dependentRefactorer.fakeRefactor();
 		EObject fakeRefactoredModel = dependentRefactorer.getFakeRefactoredModel();
-		Map<Role, List<EObject>> roleRuntimeInstances = dependentRefactorer.getInterpreter().getFakeInterpreter().getRoleRuntimeInstances();
+		Map<Role, List<EObject>> roleBindings = dependentRefactorer.getInterpreter().getFakeInterpreter().getRoleBindings();
 		RoleMapping dependentRolemapping = dependentRefactorer.getRoleMapping();
-		GenericBindingResolverFactory resolverFactory = new GenericBindingResolverFactory(initialRefactorer, fakeRefactoredModel, dependentRolemapping, roleRuntimeInstances);
+		GenericBindingResolverFactory resolverFactory = new GenericBindingResolverFactory(initialRefactorer, fakeRefactoredModel, dependentRolemapping, roleBindings);
 		PropertyHandlerFactory.disposeAll();
 		PropertyHandlerFactory.registerPropertyHandler(Object.class, resolverFactory.getGenericResolver());
 		PropertyHandlerFactory.registerPropertyHandler(EObject.class, resolverFactory.getGenericResolver());

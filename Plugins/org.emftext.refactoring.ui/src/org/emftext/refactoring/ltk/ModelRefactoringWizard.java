@@ -72,7 +72,7 @@ public class ModelRefactoringWizard extends RefactoringWizard {
 			this.addPage(userInputWizardPage);
 		}
 		
-		Map<Role, List<EObject>> roleRuntimeInstanceMap = refactoring.getInterpreter().getFakeInterpreter().getRoleRuntimeInstances();
+		Map<Role, List<EObject>> roleRuntimeInstanceMap = refactoring.getInterpreter().getFakeInterpreter().getRoleBindings();
 		addCustomWizardPages(roleRuntimeInstanceMap);
 	}
 

@@ -157,10 +157,10 @@ public class Refactorer implements IRefactorer {
 
 				List<IModelRefactoringWizardPage> customWizardPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(getRoleMapping(), null);
 				for (IModelRefactoringWizardPage wizardPage : customWizardPages) {
-					wizardPage.setRoleRuntimeInstanceMap(interpreter.getRoleRuntimeInstances());
+					wizardPage.setRoleRuntimeInstanceMap(interpreter.getRoleBindings());
 				}
 
-				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleRuntimeInstances(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, copier);
+				IStatus postProcessingStatus = postProcessor.process(interpreter.getRoleBindings(), refactoredModel, refactoredModelRS, change, refactoringSpecification, customWizardPages, false, copier);
 				int severity = postProcessingStatus.getSeverity();
 
 				if (severity != IRefactoringStatus.OK) {
@@ -228,9 +228,9 @@ public class Refactorer implements IRefactorer {
 			IRefactoringPostProcessor fakePostProcessor = fakeInterpreter.getPostProcessor();
 			if (fakePostProcessor != null) {
 				RefactoringSpecification fakeRefactoringSpecification = fakeInterpreter.getRefactoringSpecification();
-				List<IModelRefactoringWizardPage> customWizardPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(mapping, fakeInterpreter.getRoleRuntimeInstances());
+				List<IModelRefactoringWizardPage> customWizardPages = ICustomWizardPageRegistry.INSTANCE.getCustomWizardPages(mapping, fakeInterpreter.getRoleBindings());
 
-				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleRuntimeInstances(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier);
+				IStatus fakePostProcessingStatus = fakePostProcessor.process(fakeInterpreter.getRoleBindings(), copiedRefactoredModel, refactoredModelRS, change, fakeRefactoringSpecification, customWizardPages, true, copier);
 
 				if (fakePostProcessingStatus.getSeverity() != IRefactoringStatus.OK) {
 					int severity = fakePostProcessingStatus.getSeverity();

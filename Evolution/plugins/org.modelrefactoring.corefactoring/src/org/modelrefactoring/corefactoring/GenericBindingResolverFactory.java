@@ -32,7 +32,6 @@ public class GenericBindingResolverFactory extends BaseVariableResolverFactory {
 
 	@Override
 	public VariableResolver createVariable(String arg0, Object arg1, Class<?> arg2) {
-		System.out.println();
 		return null;
 	}
 
@@ -52,7 +51,6 @@ public class GenericBindingResolverFactory extends BaseVariableResolverFactory {
 
 	@Override
 	public boolean isTarget(String arg0) {
-		System.out.println(arg0);
 		return false;
 	}
 

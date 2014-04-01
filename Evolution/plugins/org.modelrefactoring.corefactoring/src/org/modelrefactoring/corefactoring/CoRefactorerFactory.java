@@ -7,14 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
-import org.emftext.refactoring.interpreter.IRefactoringInterpreter;
 import org.modelrefactoring.evolution.registry.IKnowledgeBase;
 import org.modelrefactoring.evolution.registry.IKnowledgeBaseRegistry;
 
@@ -26,9 +22,8 @@ public class CoRefactorerFactory {
 	 * @param refactorer
 	 */
 	public List<CoRefactorer> getCoRefactorers(IRefactorer refactorer) {
-		IRefactoringInterpreter interpreter = refactorer.getInterpreter();
 		List<EObject> boundElements = new ArrayList<EObject>();
-		Map<Role, List<EObject>> roleBindings = interpreter.getRoleRuntimeInstances();
+		Map<Role, List<EObject>> roleBindings = refactorer.getRoleBindings();
 		for (Role role : roleBindings.keySet()) {
 			boundElements.addAll(roleBindings.get(role));
 		}
