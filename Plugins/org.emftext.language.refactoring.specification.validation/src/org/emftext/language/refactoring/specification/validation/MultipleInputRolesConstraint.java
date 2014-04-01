@@ -19,6 +19,9 @@ import org.eclipse.emf.validation.service.AbstractConstraintDescriptor;
 import org.eclipse.emf.validation.service.IConstraintDescriptor;
 import org.emftext.language.refactoring.refactoring_specification.Constants;
 import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
+import org.emftext.language.refactoring.refactoring_specification.FILTER;
+import org.emftext.language.refactoring.refactoring_specification.FromClause;
+import org.emftext.language.refactoring.refactoring_specification.FromOperator;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
@@ -32,23 +35,30 @@ public class MultipleInputRolesConstraint extends AbstractModelConstraint implem
 		EObject target = ctx.getTarget();
 		if(target instanceof ConstantsReference){
 			ConstantsReference constantsReference = (ConstantsReference) target;
-			RefactoringSpecification refSpec = (RefactoringSpecification) EcoreUtil.getRootContainer(constantsReference);
-			RoleModel roleModel = refSpec.getUsedRoleModel();
-			List<Role> inputRoles = RoleUtil.getAllInputRoles(roleModel);
-			if(inputRoles.size() > 1){
-				Role qualifierRole = constantsReference.getQualifierRole();
-				Set<EObject> failingElements = new HashSet<EObject>();
-				if(qualifierRole == null){
-					failingElements.add(constantsReference);
-					ConstraintStatus status = new ConstraintStatus(this, target, "If used role model contains more than one input role the constant references must specify a input role as qualifier.", failingElements);
-					return status;
-				} else {
-					Constants constant = constantsReference.getReferencedConstant();
-					if(constant == Constants.INPUT){
-						if(!qualifierRole.getModifier().contains(RoleModifier.INPUT)){
+			EObject parent = constantsReference.eContainer();
+			if(parent instanceof FromClause){
+				FromClause fromClause = (FromClause) parent;
+				FromOperator operator = fromClause.getOperator();
+				if(!(operator instanceof FILTER)){
+					RefactoringSpecification refSpec = (RefactoringSpecification) EcoreUtil.getRootContainer(constantsReference);
+					RoleModel roleModel = refSpec.getUsedRoleModel();
+					List<Role> inputRoles = RoleUtil.getAllInputRoles(roleModel);
+					if(inputRoles.size() > 1){
+						Role qualifierRole = constantsReference.getQualifierRole();
+						Set<EObject> failingElements = new HashSet<EObject>();
+						if(qualifierRole == null){
 							failingElements.add(constantsReference);
-							ConstraintStatus status = new ConstraintStatus(this, target, "The qualifier role of the INPUT reference must be an input role.", failingElements);
+							ConstraintStatus status = new ConstraintStatus(this, target, "If used role model contains more than one input role the constant references must specify a input role as qualifier.", failingElements);
 							return status;
+						} else {
+							Constants constant = constantsReference.getReferencedConstant();
+							if(constant == Constants.INPUT){
+								if(!qualifierRole.getModifier().contains(RoleModifier.INPUT)){
+									failingElements.add(constantsReference);
+									ConstraintStatus status = new ConstraintStatus(this, target, "The qualifier role of the INPUT reference must be an input role.", failingElements);
+									return status;
+								}
+							}
 						}
 					}
 				}

@@ -73,7 +73,7 @@ public class ObjectAssignmentInterpreter{
 	private RefactoringInterpreterContext context;
 
 	private Role assignedRole;
-	private Object roleRuntimeValue;
+	private Object roleBinding;
 
 	private IRefactoringStatus status;
 
@@ -105,14 +105,14 @@ public class ObjectAssignmentInterpreter{
 			if(value != null){
 				context.addEObjectForVariable(objectVar, value);
 			}
-			if(roleRuntimeValue == null){
-				roleRuntimeValue = value;
+			if(roleBinding == null){
+				roleBinding = value;
 			}
 		} else if(object instanceof TRACE){
 			handleTrace((TRACE) object, objectVar);
 		} else if(object instanceof CollaborationReference){
 			value = handleCollaboration((CollaborationReference) object, objectVar);
-			roleRuntimeValue = value;
+			roleBinding = value;
 		}
 		if(status == null){
 			status = new RefactoringStatus(IRefactoringStatus.OK);
@@ -205,10 +205,10 @@ public class ObjectAssignmentInterpreter{
 		}
 		if(filteredElements.size() == 1){
 			context.addEObjectForVariable(objectVar, filteredElements.get(0));
-			roleRuntimeValue = filteredElements.get(0);
+			roleBinding = filteredElements.get(0);
 		} else {
 			context.addEObjectsForVariable(objectVar, filteredElements);
-			roleRuntimeValue = filteredElements;
+			roleBinding = filteredElements;
 		}
 	}
 
@@ -222,7 +222,7 @@ public class ObjectAssignmentInterpreter{
 				containers.add(object.eContainer());
 			}
 		}
-		roleRuntimeValue = containers;
+		roleBinding = containers;
 		context.addEObjectsForVariable(objectVar, containers);
 	}
 
@@ -327,6 +327,14 @@ public class ObjectAssignmentInterpreter{
 			case INPUT:
 				Role inputRole = RoleUtil.determineInputRole(roleBindings, constantsReference);
 				if(inputRole == null){
+					EObject parent = constantsReference.eContainer();
+					if(parent instanceof FromClause){
+						FromClause fromClause = (FromClause) parent;
+						FromOperator operator = fromClause.getOperator();
+						if(operator instanceof FILTER){
+							return RoleUtil.getBoundInputElements(roleBindings);
+						}
+					}
 					status = new RefactoringStatus(IRefactoringStatus.ERROR, "Referenced constant (INPUT) must be concretised by a role");
 					return null;
 				} else {
@@ -385,10 +393,10 @@ public class ObjectAssignmentInterpreter{
 	}
 
 	/**
-	 * @return the roleRuntimeValue
+	 * @return the roleBinding
 	 */
 	public Object getRoleRuntimeValue() {
-		return roleRuntimeValue;
+		return roleBinding;
 	}
 //
 //	@Override
