@@ -31,7 +31,7 @@ public abstract class Util {
 	}
 	
 	public static Map<String, Object> getInRoleNameBindings(IRefactorer initialRefactorer){
-		Map<String, Object> bindings = getRoleNameBindings(initialRefactorer.getRoleBindings());
+		Map<String, Object> bindings = getRoleNameBindings(initialRefactorer.getInterpreter().getRoleBindings());
 		bindings.put(IN, initialRefactorer.getOriginalModel());
 		return bindings;
 	}
@@ -48,7 +48,7 @@ public abstract class Util {
 	}
 	
 	public static Map<String, Object> getRoleNameBindings(IRefactorer refactorer){
-		return getRoleNameBindings(refactorer.getRoleBindings());
+		return getRoleNameBindings(refactorer.getInterpreter().getRoleBindings());
 	}
 
 	public static Map<String, Object> getOutRoleNameBindings(EObject fakeRefactoredModel, RoleMapping dependentRoleMapping, Map<Role, List<EObject>> dependentModelRoleBindings) {

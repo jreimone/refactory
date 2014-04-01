@@ -23,7 +23,7 @@ public class CoRefactorerFactory {
 	 */
 	public List<CoRefactorer> getCoRefactorers(IRefactorer refactorer) {
 		List<EObject> boundElements = new ArrayList<EObject>();
-		Map<Role, List<EObject>> roleBindings = refactorer.getRoleBindings();
+		Map<Role, List<EObject>> roleBindings = refactorer.getInterpreter().getRoleBindings();
 		for (Role role : roleBindings.keySet()) {
 			boundElements.addAll(roleBindings.get(role));
 		}
