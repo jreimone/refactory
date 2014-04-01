@@ -61,7 +61,7 @@ public class GenericRefactoringContribution extends RefactoringContribution {
 								boundElements.add(element);
 							}
 						}
-						refactorer.getInterpreter().getRoleRuntimeInstances().put(role, boundElements);
+						refactorer.getInterpreter().getRoleBindings().put(role, boundElements);
 					}
 				}
 			}

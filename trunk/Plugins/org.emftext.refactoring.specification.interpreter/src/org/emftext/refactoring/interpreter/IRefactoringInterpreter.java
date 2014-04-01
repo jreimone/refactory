@@ -112,23 +112,23 @@ public interface IRefactoringInterpreter extends Cloneable{
 	 * containing its values, how they were resolved at runtime.
 	 * @return
 	 */
-	public Map<Role, List<EObject>> getRoleRuntimeInstances();
+	public Map<Role, List<EObject>> getRoleBindings();
 	
 	/**
 	 * While saving a model the {@link EObject objects} will be unloaded and the proxies set instead.
-	 * To preserve unresolved proxies after saving this map returns the same structure as {@link #getRoleRuntimeInstances()}
+	 * To preserve unresolved proxies after saving this map returns the same structure as {@link #getRoleBindings()}
 	 * but with unique {@link URI}s as values. After saving the model(s) the real {@link EObject objects}
 	 * then can be resolved again by calling {@link ResourceSet#getEObject(URI, boolean)}.
 	 * 
 	 * @return
 	 */
-	public Map<Role, List<URI>> getRoleRuntimeInstanceURIs();
+	public Map<Role, List<URI>> getRoleBindingURIs();
 	
 	/**
 	 * Sets the runtime instance {@link URI}s before saving.
 	 * @param runtimeInstanceURIs
 	 */
-	public void setRoleRuntimeInstanceURIs(Map<Role, List<URI>> runtimeInstanceURIs);
+	public void setRoleBindingURIs(Map<Role, List<URI>> runtimeInstanceURIs);
 	
 	/**
 	 * Returns all resources which have to be saved after the refactoring. Those resources might be all inverse cross

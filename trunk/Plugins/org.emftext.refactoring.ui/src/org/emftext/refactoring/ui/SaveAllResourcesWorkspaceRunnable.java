@@ -103,7 +103,7 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 
 	private void preSaveRuntimeInstanceHandling(IRefactorer refactorer){
 		IRefactoringInterpreter interpreter = refactorer.getInterpreter();
-		Map<Role, List<EObject>> roleInstanceMap = interpreter.getRoleRuntimeInstances();
+		Map<Role, List<EObject>> roleInstanceMap = interpreter.getRoleBindings();
 //		System.out.println("~~~~~~~~~~~~~~~");
 		for (Role role : roleInstanceMap.keySet()) {
 //			System.out.println(role.getName() + ":");
@@ -113,7 +113,7 @@ class SaveAllResourcesWorkspaceRunnable implements IWorkspaceRunnable {
 			}
 		}
 //		System.out.println("~~~~~~~~~~~~~~~");
-		interpreter.setRoleRuntimeInstanceURIs(runtimeInstancePathMap);
+		interpreter.setRoleBindingURIs(runtimeInstancePathMap);
 	}
 
 	private void createPath(Role role, EObject object) {

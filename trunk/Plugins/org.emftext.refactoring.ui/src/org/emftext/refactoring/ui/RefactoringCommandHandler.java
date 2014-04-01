@@ -106,7 +106,7 @@ public class RefactoringCommandHandler extends AbstractHandler {
 				if (result == IDialogConstants.OK_ID) {
 					IRefactoringInterpreter interpreter = refactorer.getInterpreter();
 					interpreter = refactoring.getRefactorer().getInterpreter();
-					Map<Role, List<URI>> roleRuntimeInstanceURIs = interpreter.getRoleRuntimeInstanceURIs();
+					Map<Role, List<URI>> roleRuntimeInstanceURIs = interpreter.getRoleBindingURIs();
 					Map<Role, List<EObject>> resolvedRoleRuntimeInstances = postSaveRuntimeInstanceHandling(roleRuntimeInstanceURIs, refactorer.getResource().getResourceSet());
 					RefactoringSpecification refSpec = interpreter.getRefactoringSpecification();
 					List<EObject> objectsToSelect = new LinkedList<EObject>();

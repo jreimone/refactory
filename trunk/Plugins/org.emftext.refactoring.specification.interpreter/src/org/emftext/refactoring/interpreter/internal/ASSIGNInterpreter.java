@@ -156,7 +156,7 @@ public class ASSIGNInterpreter {
 					return new RefactoringStatus(IRefactoringStatus.ERROR, message);
 				}
 			} else {
-				List<EObject> instances = interpreter.getRoleRuntimeInstances().get((Role) interpretationContext);
+				List<EObject> instances = interpreter.getRoleBindings().get((Role) interpretationContext);
 				if(instances != null && instances.size() == 1){
 					targetObject = instances.get(0);
 				} else {
