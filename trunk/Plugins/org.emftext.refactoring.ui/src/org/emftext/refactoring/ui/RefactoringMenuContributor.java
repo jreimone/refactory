@@ -70,7 +70,7 @@ import org.emftext.refactoring.util.StringUtil;
 public class RefactoringMenuContributor extends ExtensionContributionFactory {
 
 	private static final String REFACTORY_COMMAND_CATEGORY 	= "org.modelrefactoring.commands.category";
-	private static final String CONTEXT_MENU_ENTRY_TEXT 		= "Refactor";
+	private static final String CONTEXT_MENU_ENTRY_TEXT 	= "Refactor";
 
 	public RefactoringMenuContributor() {
 		super();
@@ -83,7 +83,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			return;
 		}
 		IWorkbenchPartSite partSite = activePart.getSite();
-		//		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		ISelectionProvider selectionProvider = partSite.getSelectionProvider();
 		if (selectionProvider == null) {
 			return;
