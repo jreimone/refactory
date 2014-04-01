@@ -380,24 +380,28 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 
 	@SuppressWarnings("unchecked")
 	private void addRoleBinding(Role role, Object object) {
-		if (object instanceof EObject) {
-			bindEObject(role, (EObject) object);
-		} else if (object instanceof List<?>) {
-			List<EObject> objects = (List<EObject>) object;
-			for (EObject eObject : objects) {
-				bindEObject(role, eObject);
+		if(role != null && object != null){
+			if (object instanceof EObject) {
+				bindEObject(role, (EObject) object);
+			} else if (object instanceof List<?>) {
+				List<EObject> objects = (List<EObject>) object;
+				for (EObject eObject : objects) {
+					bindEObject(role, eObject);
+				}
 			}
 		}
 	}
 
 	private void bindEObject(Role role, EObject object) {
-		List<EObject> instanceList = roleBindings.get(role);
-		if (instanceList == null) {
-			instanceList = new ArrayList<EObject>();
-			roleBindings.put(role, instanceList);
-		}
-		if (!instanceList.contains(object)) {
-			instanceList.add((EObject) object);
+		if(role != null && object != null){
+			List<EObject> instanceList = roleBindings.get(role);
+			if (instanceList == null) {
+				instanceList = new ArrayList<EObject>();
+				roleBindings.put(role, instanceList);
+			}
+			if (!instanceList.contains(object)) {
+				instanceList.add((EObject) object);
+			}
 		}
 	}
 

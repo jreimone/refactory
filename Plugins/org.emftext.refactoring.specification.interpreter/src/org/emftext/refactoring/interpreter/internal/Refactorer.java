@@ -382,6 +382,9 @@ public class Refactorer implements IRefactorer {
 	}
 
 	public Map<Role, List<EObject>> getRoleBindings(){
+		if(interpreter != null){
+			return interpreter.getRoleBindings();
+		}
 		return roleBindings;
 	}
 
