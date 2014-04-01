@@ -168,7 +168,7 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 		arguments.put(ID_ROLEMAPPING, roleMapping.getName());
 		arguments.put(ID_METAMODEL, roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI());
 		String roleBinding = "";
-		Map<Role, List<EObject>> roleBindings = refactorer.getInterpreter().getRoleBindings();
+		Map<Role, List<EObject>> roleBindings = refactorer.getRoleBindings();
 		for (Role boundRole : roleBindings.keySet()) {
 			List<EObject> boundElements = roleBindings.get(boundRole);
 			roleBinding += boundRole.getName() + "=";
