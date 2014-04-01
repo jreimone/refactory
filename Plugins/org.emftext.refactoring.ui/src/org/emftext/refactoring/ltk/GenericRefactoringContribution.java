@@ -1,6 +1,7 @@
 package org.emftext.refactoring.ltk;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,41 +30,27 @@ public class GenericRefactoringContribution extends RefactoringContribution {
 			String metamodel = (String) arguments.get(ModelRefactoringDescriptor.ID_METAMODEL);
 			String roleMappingName = (String) arguments.get(ModelRefactoringDescriptor.ID_ROLEMAPPING);
 			String resourceString = (String) arguments.get(ModelRefactoringDescriptor.ID_RESOURCE);
-			String selectedElementsString = (String) arguments.get(ModelRefactoringDescriptor.ID_SELECTED_ELEMENTS);
-			String roleBindingsString = (String) arguments.get(ModelRefactoringDescriptor.ID_ROLE_BINDINGS);
+			String inputBindingsString = (String) arguments.get(ModelRefactoringDescriptor.ID_INPUT_BINDINGS);
+			String otherBindingsString = (String) arguments.get(ModelRefactoringDescriptor.ID_OTHER_BINDINGS);
 			RoleMapping roleMapping = IRoleMappingRegistry.INSTANCE.getRoleMappingsForUri(metamodel).get(roleMappingName);
 			URI uri = URI.createURI(resourceString);
 			ResourceSet rs = new ResourceSetImpl();
 			Resource resource = rs.getResource(uri, true);
 			IRefactorer refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, roleMapping);
-			List<EObject> selectedElements = new ArrayList<EObject>();
-			String[] elements = selectedElementsString.split(";");
-			for (String elementString : elements) {
-				EObject element = getEObjectFromURIString(rs, elementString);
-				if(element != null){
-					selectedElements.add(element);
-				}
+			Map<Role, List<EObject>> inputBindings = null;
+			if(inputBindingsString != null){
+				inputBindings = determineBindings(inputBindingsString, roleMapping, rs);
 			}
-			refactorer.setInput(selectedElements);
-			if(roleBindingsString != null){
-				String[] roleBindings = roleBindingsString.split("\\r?\\n");
-				for (String roleBinding : roleBindings) {
-					String[] split = roleBinding.split("=");
-					String roleName = split[0];
-					Role role = RoleUtil.getRoleByName(roleMapping, roleName);
-					if(role != null){
-						split = split[1].split(";");
-						List<EObject> boundElements = new ArrayList<EObject>();
-						for (int i = 0; i < split.length; i++) {
-							String uriString = split[i];
-							EObject element = getEObjectFromURIString(rs, uriString);
-							if(element != null){
-								boundElements.add(element);
-							}
-						}
-						refactorer.getInterpreter().getRoleBindings().put(role, boundElements);
-					}
-				}
+			if(inputBindings != null && !inputBindings.isEmpty()){
+				refactorer.getInterpreter().getRoleBindings().putAll(inputBindings);
+			}
+			Map<Role, List<EObject>> otherBindings = null;
+			if(otherBindingsString != null){
+				otherBindings = determineBindings(otherBindingsString, roleMapping, rs);
+			}
+			System.out.println();
+			if(otherBindings != null && !otherBindings.isEmpty()){
+				refactorer.getInterpreter().getRoleBindings().putAll(otherBindings);
 			}
 			// TODO jreimann: provide new value provider which takes the already provided values into account and provides them
 			IValueProviderFactory factory = new BasicValueProviderFactory(refactorer);
@@ -72,6 +59,31 @@ public class GenericRefactoringContribution extends RefactoringContribution {
 			return descriptor;
 		}
 		return null;
+	}
+
+	private Map<Role, List<EObject>> determineBindings(String otherBindingsString, RoleMapping roleMapping, ResourceSet rs) {
+		Map<Role, List<EObject>> bindings = new HashMap<Role, List<EObject>>();
+		String[] roleBindings = otherBindingsString.split("\\r?\\n");
+		for (String roleBinding : roleBindings) {
+			String[] split = roleBinding.split("=");
+			String roleName = split[0];
+			Role role = RoleUtil.getRoleByName(roleMapping, roleName);
+			if(role != null){
+				split = split[1].split(";");
+				List<EObject> boundElements = new ArrayList<EObject>();
+				for (int i = 0; i < split.length; i++) {
+					String uriString = split[i];
+					EObject element = getEObjectFromURIString(rs, uriString);
+					if(element != null){
+						boundElements.add(element);
+					}
+				}
+				if(!boundElements.isEmpty()){
+					bindings.put(role, boundElements);
+				}
+			}
+		}
+		return bindings;
 	}
 
 	protected EObject getEObjectFromURIString(ResourceSet rs, String elementString) {

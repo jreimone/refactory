@@ -381,13 +381,6 @@ public class Refactorer implements IRefactorer {
 		}
 	}
 
-	public Map<Role, List<EObject>> getRoleBindings(){
-		if(interpreter != null){
-			return interpreter.getRoleBindings();
-		}
-		return roleBindings;
-	}
-
 	public boolean didErrorsOccur() {
 		return occuredErrors;
 	}
@@ -425,6 +418,9 @@ public class Refactorer implements IRefactorer {
 
 	public Map<Role, List<EObject>> getInputRoleBindings(){
 		Map<Role, List<EObject>> inputRoleBindings = new HashMap<Role, List<EObject>>();
+		if(boundInputRoles.isEmpty()){
+			boundInputRoles = RoleUtil.getBoundInputRoles(roleBindings);
+		}
 		for (Role inputRole : boundInputRoles) {
 			List<EObject> boundElements = roleBindings.get(inputRole);
 			inputRoleBindings.put(inputRole, boundElements);
