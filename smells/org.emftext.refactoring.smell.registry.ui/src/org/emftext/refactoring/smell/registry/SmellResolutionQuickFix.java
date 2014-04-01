@@ -4,7 +4,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -77,49 +76,31 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 
 	@Override
 	public void run(IMarker marker) {
-		//		System.out.println("SmellResolutionQuickFix.run()");
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if(activeWorkbenchWindow != null){
 			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 			if(activePage != null){
 				IEditorPart editor = null;
 				try {
-					String editorID = (String) marker.getAttribute(IQualitySmellMarker.EDITOR_ID);
-					//					if(editorID != null){
-					//						marker.getResource()
-					//						activePage.openEditor(input, editorId, activate, matchFlags)
-					//					} else {
-					//					}
+//					String editorID = (String) marker.getAttribute(IQualitySmellMarker.EDITOR_ID);
 					editor = IDE.openEditor(activePage, marker);
 				} catch (PartInitException e) {
-					e.printStackTrace();
-				} catch (CoreException e) {
 					e.printStackTrace();
 				}
 				if(editor != null){
 					IEditorConnector editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(editor);
 					
 					IHandlerService handlerService = (IHandlerService) activeWorkbenchWindow.getService(IHandlerService.class);
-					Command command = RefactoringMenuContributor.getCommandForRefactoring(activeWorkbenchWindow, roleMapping, refactorer, editorConnector, editor, null);
+					Command command = RefactoringMenuContributor.getCommandForRefactoring(activeWorkbenchWindow, roleMapping, refactorer, editorConnector, editor);
 					try {
 						handlerService.executeCommand(command.getId(), null);
 					} catch (Exception ex) {
 						throw new RuntimeException("Command '" + command.getId() + "' threw an exception");
 					}
-
-//					RefactoringAction action = new RefactoringAction(refactorer, editorConnector);
-//					action.run();
 				}
 			}
 		}
 	}
-
-	//	private IFile getFileFromResource(Resource resource) {
-	//		URI uri = resource.getURI();
-	//		String platformString = uri.toPlatformString(true);
-	//		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
-	//		return file;
-	//	}
 
 	@Override
 	public Image getImage() {

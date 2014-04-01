@@ -39,6 +39,7 @@ public class GMFEditorConnector implements IEditorConnector {
 
 	public GMFEditorConnector(DiagramDocumentEditor documentEditor) {
 		this.documentEditor = documentEditor;
+		diagramTransactionalEditingDomain = documentEditor.getEditingDomain();
 	}
 
 	public TransactionalEditingDomain getTransactionalEditingDomain() {

@@ -102,7 +102,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				selectedElements.add((EObject) object);
 			}
 		}
-		EditingDomain transactionalEditingDomain = null;
 		IEditorPart activeEditor = null;
 		IEditorConnector editorConnector = null;
 		if (selectedElements == null || selectedElements.size() == 0) {
@@ -111,9 +110,6 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 				editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(activeEditor);
 				if(editorConnector != null){
 					selectedElements = editorConnector.handleSelection(selection);
-					if (selectedElements != null && selectedElements.size() >= 1) {
-						transactionalEditingDomain = editorConnector.getTransactionalEditingDomain();
-					}
 				}
 			}
 		}
@@ -136,11 +132,11 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			}
 			List<EObject> elementsInResource = getElementsByUris(resource, selectedElements);
 			
-			contributeToUI(serviceLocator, additions, transactionalEditingDomain, activeEditor, editorConnector, resource, elementsInResource);
+			contributeToUI(serviceLocator, additions, activeEditor, editorConnector, resource, elementsInResource);
 		}
 	}
 
-	private void contributeToUI(IServiceLocator serviceLocator,IContributionRoot additions, EditingDomain transactionalEditingDomain, IEditorPart activeEditor, IEditorConnector editorConnector, Resource resource, List<EObject> elementsInResource) {
+	private void contributeToUI(IServiceLocator serviceLocator,IContributionRoot additions, IEditorPart activeEditor, IEditorConnector editorConnector, Resource resource, List<EObject> elementsInResource) {
 		IMenuManager rootMenu = new MenuManager(CONTEXT_MENU_ENTRY_TEXT, IRefactoringSubMenuRegistry.CONTEXT_MENU_ENTRY_ID);
 		Map<String, RoleMapping> roleMappings = getRoleMappingsForResource(resource);
 		List<RoleMapping> mappings = RoleUtil.getPossibleMappingsForInputSelection(elementsInResource, roleMappings, 1.0);
@@ -154,7 +150,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 					refactorer.setInput(elementsInResource);
 					RefactoringSpecification refSpec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(mapping.getMappedRoleModel());
 					if (refSpec != null) {
-						createCommand(serviceLocator, mapping, refactorer, rootMenu, editorConnector, activeEditor, transactionalEditingDomain);
+						createCommand(serviceLocator, mapping, refactorer, rootMenu, editorConnector, activeEditor);
 						containsEntries = true;
 					}
 				} else {
@@ -185,7 +181,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		return resource;
 	}
 	
-	public static Command getCommandForRefactoring(IServiceLocator serviceLocator, RoleMapping mapping, final IRefactorer refactorer, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain){
+	public static Command getCommandForRefactoring(IServiceLocator serviceLocator, RoleMapping mapping, final IRefactorer refactorer, IEditorConnector editorConnector, IEditorPart activeEditor){
 //		Command.DEBUG_COMMAND_EXECUTION = true;
 //		Command.DEBUG_HANDLERS = true;
 		ICommandService commandService = (ICommandService) serviceLocator.getService(ICommandService.class);
@@ -202,6 +198,7 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 		IParameter editorConnectorParam = createParameter(editorConnector, commandID, "editorConnector", "instance");
 		IParameter editingDomainParam = null;
 		IParameter activeEditorParam = null;
+		EditingDomain transactionalEditingDomain = editorConnector.getTransactionalEditingDomain();
 		if(transactionalEditingDomain != null){
 			editingDomainParam = createParameter(transactionalEditingDomain, commandID, "editingDomain", "instance");
 			activeEditorParam = createParameter(activeEditor, commandID, "activeEditor", "instance");
@@ -243,13 +240,13 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			
 			@Override
 			public String getId() {
-				return commandID + name;
+				return commandID + ".param." + name;
 			}
 		};
 	}
 
-	private void createCommand(IServiceLocator serviceLocator, RoleMapping mapping, IRefactorer refactorer, IMenuManager rootMenu, IEditorConnector editorConnector, IEditorPart activeEditor, EditingDomain transactionalEditingDomain) {
-		Command command = getCommandForRefactoring(serviceLocator, mapping, refactorer, editorConnector, activeEditor, transactionalEditingDomain);
+	private void createCommand(IServiceLocator serviceLocator, RoleMapping mapping, IRefactorer refactorer, IMenuManager rootMenu, IEditorConnector editorConnector, IEditorPart activeEditor) {
+		Command command = getCommandForRefactoring(serviceLocator, mapping, refactorer, editorConnector, activeEditor);
 		String refactoringName = null;
 		try {
 			refactoringName = command.getName();
