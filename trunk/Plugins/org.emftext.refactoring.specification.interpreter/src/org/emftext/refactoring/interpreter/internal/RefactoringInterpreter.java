@@ -406,6 +406,9 @@ public class RefactoringInterpreter extends AbstractRefspecInterpreter<IRefactor
 	}
 
 	public Map<Role, List<EObject>> getRoleBindings() {
+		if(roleBindings == null){
+			roleBindings = new HashMap<Role, List<EObject>>();
+		}
 		return roleBindings;
 	}
 

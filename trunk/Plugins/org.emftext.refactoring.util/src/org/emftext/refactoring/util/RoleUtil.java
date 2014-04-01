@@ -18,6 +18,7 @@ package org.emftext.refactoring.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -99,6 +100,20 @@ public class RoleUtil {
 			boundInputElements.addAll(roleBindings.get(boundRole));
 		}
 		return boundInputElements;
+	}
+	
+	/**
+	 * Returns only those bindings of the given <code>roleBindings</code> belonging to an input role. 
+	 * @param roleBindings
+	 * @return
+	 */
+	public static Map<Role, List<EObject>> getInputBinding(Map<Role, List<EObject>> roleBindings){
+		Map<Role, List<EObject>> inputBindings = new HashMap<Role, List<EObject>>();
+		List<Role> boundInputRoles = getBoundInputRoles(roleBindings);
+		for (Role boundInputRole : boundInputRoles) {
+			inputBindings.put(boundInputRole, roleBindings.get(boundInputRole));
+		}
+		return inputBindings;
 	}
 	
 	/**

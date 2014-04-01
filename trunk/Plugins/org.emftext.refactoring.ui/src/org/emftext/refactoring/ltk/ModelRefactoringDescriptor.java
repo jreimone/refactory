@@ -21,23 +21,24 @@ import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
+import org.emftext.language.refactoring.roles.RoleModifier;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
 
 public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 
-	protected static final String ID_SELECTED_ELEMENTS	= "selection";
+	protected static final String ID_INPUT_BINDINGS		= "inputbindings";
 	protected static final String ID_RESOURCE			= "resource";
 	protected static final String ID_METAMODEL			= "metamodel";
 	protected static final String ID_ROLEMAPPING		= "rolemapping";
-	protected static final String ID_ROLE_BINDINGS		= "rolebindings";
-	
+	protected static final String ID_OTHER_BINDINGS		= "otherbindings";
+
 	private IRefactorer refactorer;
-	
+
 	private ModelRefactoringDescriptor(String id, String project, String description, String comment, int flags) {
 		super(id, project, description, comment, flags);
 	}
-	
+
 	public ModelRefactoringDescriptor(IRefactorer refactorer) {
 		this(generateID(refactorer),
 				getProjectID(refactorer),
@@ -58,7 +59,7 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 		String comment = generateDescription(refactorer) + ":\n" +
 				"- specific for the generic refactoring '" + roleMapping.getMappedRoleModel().getName() + "'\n" +
 				"- executable for the language " + roleMapping.getOwningMappingModel().getTargetMetamodel().getName().toUpperCase()
-				 + " (" + roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI() + ")\n" +
+				+ " (" + roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI() + ")\n" +
 				"- refactored elements:";
 		List<EObject> selectedElements = refactorer.getInput();
 		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
@@ -101,7 +102,7 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 		}
 		return projectID;
 	}
-	
+
 	public static IFile getFileFromResource(IRefactorer refactorer) {
 		URI uri = refactorer.getResource().getURI();
 		uri = refactorer.getResource().getResourceSet().getURIConverter().normalize(uri);
@@ -153,35 +154,55 @@ public class ModelRefactoringDescriptor extends RefactoringDescriptor {
 
 	public Map<String, String> getArgumentsMap(){
 		Map<String, String> arguments = new HashMap<String, String>();
-		List<EObject> input = refactorer.getInput();
-		String selectedElements = "";
-		selectedElements += EcoreUtil.getURI(input.get(0)).toString();
-		if(input.size() > 1){
-			for (int i = 1; i < input.size(); i++) {
-				selectedElements += ";" + EcoreUtil.getURI(input.get(i)).toString();		
+		Map<Role, List<EObject>> roleBindings = refactorer.getInterpreter().getRoleBindings();
+		String selectedElementsBinding = "";
+		String otherBindings = "";
+		if(roleBindings != null){
+			for (Role boundRole : roleBindings.keySet()) {
+				if(boundRole.getModifier().contains(RoleModifier.INPUT)){
+					selectedElementsBinding += createBindingString(roleBindings, boundRole) + "\n";
+				} else {
+					otherBindings += createBindingString(roleBindings, boundRole) + "\n";
+				}
 			}
 		}
-		arguments.put(ID_SELECTED_ELEMENTS, selectedElements);
+		if(selectedElementsBinding.length() > 0){
+			selectedElementsBinding = selectedElementsBinding.substring(0, selectedElementsBinding.length() - 1);
+			arguments.put(ID_INPUT_BINDINGS, selectedElementsBinding);
+		}
+		if(otherBindings.length() > 0){
+			otherBindings = otherBindings.substring(0, otherBindings.length() - 1);
+			arguments.put(ID_OTHER_BINDINGS, otherBindings);
+		}
 		Resource resource = refactorer.getResource();
 		arguments.put(ID_RESOURCE, resource.getURI().toString());
 		RoleMapping roleMapping = refactorer.getRoleMapping();
 		arguments.put(ID_ROLEMAPPING, roleMapping.getName());
 		arguments.put(ID_METAMODEL, roleMapping.getOwningMappingModel().getTargetMetamodel().getNsURI());
-		String roleBinding = "";
-		Map<Role, List<EObject>> roleBindings = refactorer.getRoleBindings();
-		for (Role boundRole : roleBindings.keySet()) {
-			List<EObject> boundElements = roleBindings.get(boundRole);
-			roleBinding += boundRole.getName() + "=";
-			for (EObject boundElement : boundElements) {
-				roleBinding += EcoreUtil.getURI(boundElement).toString() + ";";
-			}
-			roleBinding = roleBinding.substring(0, roleBinding.length() - 1) + "\n";
-		}
-		if(roleBinding.length() >= 1){
-			roleBinding = roleBinding.substring(0, roleBinding.length() - 1);
-			arguments.put(ID_ROLE_BINDINGS, roleBinding);
-		}
 		return arguments;
+	}
+
+	@SuppressWarnings("unused")
+	private String createBindingsString(Map<Role, List<EObject>> roleBindings) {
+		String bindingsString = "";
+		for (Role boundRole : roleBindings.keySet()) {
+			bindingsString += createBindingString(roleBindings, boundRole) + "\n";
+		}
+		if(bindingsString.length() > 0){
+			bindingsString = bindingsString.substring(0, bindingsString.length() - 1);
+		}
+		return bindingsString;
+	}
+
+	private String createBindingString(Map<Role, List<EObject>> roleBindings, Role boundRole) {
+		String bindingsString = "";
+		List<EObject> boundElements = roleBindings.get(boundRole);
+		bindingsString += boundRole.getName() + "=";
+		for (EObject boundElement : boundElements) {
+			bindingsString += EcoreUtil.getURI(boundElement).toString() + ";";
+		}
+		bindingsString = bindingsString.substring(0, bindingsString.length() - 1);
+		return bindingsString;
 	}
 
 	/**
