@@ -13,13 +13,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ui.IEditorPart;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.editorconnector.IEditorConnector;
-import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.QualityCalculation;
 import org.emftext.refactoring.smell.calculation.Calculation;
@@ -27,105 +23,26 @@ import org.emftext.refactoring.smell.calculation.CalculationResult;
 import org.emftext.refactoring.smell.registry.util.Triple;
 import org.osgi.framework.FrameworkUtil;
 
-public class SmellChecker 
-//	implements IResourceChangeListener, IResourceDeltaVisitor 
-	{
+public class SmellChecker {
 
-//	private QualitySmellModel smellModel;
-//	private CalculationModel calculationModel;
-
-//	public SmellChecker(QualitySmellModel smellModel, CalculationModel calculationModel) {
-////		this.smellModel = smellModel;
-////		this.calculationModel = calculationModel;
-//		IQualitySmellRegistry.INSTANCE.initialize(smellModel, calculationModel);
-//	}
-
-//	@Override
-//	public void resourceChanged(IResourceChangeEvent event) {
-//		// only registered for IResourceChangeEvent.POST_CHANGE events
-//		//		if (event.getType() == IResourceChangeEvent.POST_CHANGE && getChangedResource(delta).getMarkerDeltas().length <= 0){
-//		try {
-//			IResourceDelta delta = event.getDelta();
-//			if(delta.getAffectedChildren() != null 
-//					&& delta.getAffectedChildren().length > 0 
-//					&& delta.getMarkerDeltas().length == 0){
-//				delta.accept(this);
-//			}
-//		} catch (CoreException e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-//	@Override
-//	public boolean visit(IResourceDelta delta) throws CoreException {
-//		IResource res = delta.getResource();
-//		IFile file = (IFile) res.getAdapter(IFile.class);
-//		if(file != null){
-//			IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
-//			boolean ownMarkersChanged = false;
-//			if(markerDeltas.length > 0){
-//				for (IMarkerDelta markerDelta : markerDeltas) {
-//					if(markerDelta.getType().equals(IQualitySmellMarker.ID)){
-//						ownMarkersChanged = true;
-//						break;
-//					}
-//				}
-//			}
-//			if(!ownMarkersChanged){
-//				switch (delta.getKind()) {
-//				case IResourceDelta.ADDED:
-//					checkSmellsInFile(file);
-//					break;
-//				case IResourceDelta.CHANGED:
-//					checkSmellsInFile(file);
-//					break;
-//				case IResourceDelta.REMOVED:
-//					break;
-//				}
-//			}
-//		}
-//		return true; // visit the children
-//	}
-
-	public static void checkSmellsInFile(IFile file, IEditorPart editorPart) {
-//		System.out.println("SmellChecker.checkSmellsInFile()");
-//		removeAllMarkers(file);
-		URI uri = null;
-		if(file.isLinked()){
-			uri = URI.createFileURI(file.getLocation().toString());
-		} else {
-			uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+	public static void checkSmellsInFile(IEditorConnector editorConnector, IFile file) {
+		if(editorConnector == null){
+			return;
 		}
-		Resource resource = null;
-		try {
-			ResourceSet rs = new ResourceSetImpl();
-			resource = rs.getResource(uri, true);
-		} catch (Exception e) {
-			// just do nothing
-		}
-		if(resource != null){
-//			IEditorPart editorPart = getEditorPartForFile(file);
-			IEditorConnector editorConnector = IEditorConnectorRegistry.INSTANCE.getEditorConnectorForEditorPart(editorPart);
-			EObject model = null;
-			if(editorConnector != null){
-				model = editorConnector.getModel();
+		EObject model = editorConnector.getModel();
+		Resource resource = model.eResource();
+		List<Triple<CalculationResult,Calculation,QualityCalculation>> matchingCalculations = IQualitySmellRegistry.INSTANCE.getMatchingSmellCalculationsForResource(resource);
+		for (Triple<CalculationResult, Calculation, QualityCalculation> triple : matchingCalculations) {
+			CalculationResult result = triple.getFirst();
+			Calculation calculation = triple.getSecond();
+			QualityCalculation qualityCalculation = triple.getThird();
+			ConcreteQualitySmell concreteSmell = qualityCalculation.getConcreteSmell();
+			List<RoleMapping> refactorings = concreteSmell.getRefactoring();
+			if(refactorings == null || refactorings.size() == 0){
+				addSmellAndQuickFix(file, calculation, result, null, editorConnector);
 			} else {
-				model = resource.getContents().get(0);
-			}
-			resource = model.eResource();
-			List<Triple<CalculationResult,Calculation,QualityCalculation>> matchingCalculations = IQualitySmellRegistry.INSTANCE.getMatchingSmellCalculationsForResource(resource);
-			for (Triple<CalculationResult, Calculation, QualityCalculation> triple : matchingCalculations) {
-				CalculationResult result = triple.getFirst();
-				Calculation calculation = triple.getSecond();
-				QualityCalculation qualityCalculation = triple.getThird();
-				ConcreteQualitySmell concreteSmell = qualityCalculation.getConcreteSmell();
-				List<RoleMapping> refactorings = concreteSmell.getRefactoring();
-				if(refactorings == null || refactorings.size() == 0){
-					addSmellAndQuickFix(file, model, calculation, result, null, editorConnector);
-				} else {
-					for (RoleMapping roleMapping : refactorings) {
-						addSmellAndQuickFix(file, model, calculation, result, roleMapping, editorConnector);
-					}
+				for (RoleMapping roleMapping : refactorings) {
+					addSmellAndQuickFix(file, calculation, result, roleMapping, editorConnector);
 				}
 			}
 		}
@@ -141,8 +58,8 @@ public class SmellChecker
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				try {
 					IMarker[] markers = file.findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
-					for (IMarker iMarker : markers) {
-						iMarker.delete();
+					for (IMarker marker : markers) {
+						marker.delete();
 					}
 				} catch (CoreException e) {
 					e.printStackTrace();
@@ -154,32 +71,12 @@ public class SmellChecker
 		runnable.schedule();
 	}
 
-//	private static IEditorPart getEditorPartForFile(IFile file) {
-//		IWorkbench workbench = PlatformUI.getWorkbench();
-//		IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-//		if(activeWorkbenchWindow != null){
-//			IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-//			if(activePage != null){
-//				try {
-//					IEditorPart editor = IDE.openEditor(activePage, file);
-//					return editor;
-//				} catch (PartInitException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//		return null;
-//	}
-
-	private static void addSmellAndQuickFix(final IFile file, final EObject model, final Calculation calculation, final CalculationResult result, final RoleMapping roleMapping, final IEditorConnector editorConnector) {
-//		System.out.println("SmellChecker.addSmellAndQuickFix()");
+	private static void addSmellAndQuickFix(final IFile file, final Calculation calculation, final CalculationResult result, final RoleMapping roleMapping, final IEditorConnector editorConnector) {
 		WorkspaceJob job = new WorkspaceJob("Creating markers for bad smells") {
 
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				try {
-//					System.out
-//					.println("SmellChecker.addSmellAndQuickFix(...).new WorkspaceJob() {...}.runInWorkspace()");
 					String smellMessage = calculation.getSmellMessage();
 					List<EObject> causingObjects = result.getCausingObjects();
 					for (EObject element : causingObjects) {

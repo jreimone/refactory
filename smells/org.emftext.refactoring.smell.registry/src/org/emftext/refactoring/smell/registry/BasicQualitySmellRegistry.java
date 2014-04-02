@@ -73,25 +73,27 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 				if(quality.isActive()){
 					float threshold = qualityCalculation.getThreshold();
 					CalculationResult result = calculation.calculate(model, threshold);
-					float resultingValue = result.getResultingValue();
-					Monotonicity monotonicity = calculation.getMonotonicity();
-					switch (monotonicity) {
-					case DECREASING: 
-						// je größer der wert desto schlechter die qualität 
-						// --> smell trifft zu wenn result >= threshold
-						if(resultingValue >= threshold){
-							Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
-							matchingCalculations.add(triple);
+					if(result != null){
+						float resultingValue = result.getResultingValue();
+						Monotonicity monotonicity = calculation.getMonotonicity();
+						switch (monotonicity) {
+						case DECREASING: 
+							// je größer der wert desto schlechter die qualität 
+							// --> smell trifft zu wenn result >= threshold
+							if(resultingValue >= threshold){
+								Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
+								matchingCalculations.add(triple);
+							}
+							break;
+						case INCREASING: 
+							// je größer der wert desto besser die qualität
+							// --> smell trifft zu wenn result <= threshold
+							if(resultingValue <= threshold){
+								Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
+								matchingCalculations.add(triple);
+							}
+							break;
 						}
-						break;
-					case INCREASING: 
-						// je größer der wert desto besser die qualität
-						// --> smell trifft zu wenn result <= threshold
-						if(resultingValue <= threshold){
-							Triple<CalculationResult, Calculation, QualityCalculation> triple = new Triple<CalculationResult, Calculation, QualityCalculation>(result, calculation, qualityCalculation);
-							matchingCalculations.add(triple);
-						}
-						break;
 					}
 				}
 			}
