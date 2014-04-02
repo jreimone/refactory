@@ -48,6 +48,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milest
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.base_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.rete_0.8.0.201402281506.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.matchers_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.base.itc_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.evm_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.core_0.8.0.201402281506.jar
