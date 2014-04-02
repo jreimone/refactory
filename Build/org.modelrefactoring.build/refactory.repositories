@@ -157,9 +157,6 @@ get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.metrics.ui_3.3.0.20
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.metrics_3.3.0.201402241018.jar
 get:http://www.dresden-ocl.org/update/plugins/org.dresdenocl.testsuite.abstract_3.3.0.201402241018.jar
 get:http://www.dresden-ocl.org/update/plugins/org.kiama.attribution_3.3.0.201402241018.jar
-get:http://www.dresden-ocl.org/update/plugins/org.w3c.css.sac_1.3.1.v200903091627.jar
-get:http://www.dresden-ocl.org/update/plugins/org.w3c.dom.smil_1.0.0.v200806040011.jar
-get:http://www.dresden-ocl.org/update/plugins/org.w3c.dom.svg_1.1.0.v201011041433.jar
 get:http://www.dresden-ocl.org/update/plugins/scala.library_2.9.1.final.jar
 get:http://downloads.typesafe.com/scalaide-pack/3.0.0.vfinal-29-20130326/scala-SDK-3.0.0-vfinal-2.9-win32.win32.x86_64.zip!eclipse/plugins/org.scala-ide.scala.library_2.9.3.v20130127-223635-f7b5b312ca.jar
 get:http://www.dresden-ocl.org/update/plugins/tudresden.attributegrammar.integration.kiama_3.3.0.201402241018.jar
