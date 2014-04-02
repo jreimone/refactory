@@ -20,7 +20,6 @@ public class GenericQualityPreferencePage extends AbstractPreferencePage {
 	@Inject
 	private QualitySmellModel smellModel;
 	
-	@SuppressWarnings("restriction")
 	@Override
 	public EObject getModel() {
 		if(smellModel == null){

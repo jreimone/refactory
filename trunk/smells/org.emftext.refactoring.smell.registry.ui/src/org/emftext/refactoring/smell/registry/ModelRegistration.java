@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
-import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -48,6 +45,8 @@ public class ModelRegistration {
 //	public static final String SMELL_PLUGIN_ID		= "org.emftext.refactoring.smell.registry";
 	private static final String SMELL_MODEL_NAME	= "smellmodel.smell";
 	private static final String CALC_MODEL_NAME		= "registered.calculation";
+	
+	private boolean alreadyRegistered = false;
 
 	@Execute
 	public void register(IEclipseContext context, IWorkspace workspace, IExtensionRegistry registry) {
@@ -94,18 +93,10 @@ public class ModelRegistration {
 							System.err.println("No public constructor for class " + element.getAttribute(ICalculationExtensionPoint.CALCULATION_CLASS));
 						}
 					} else if(element.getName().equals(ICalculationExtensionPoint.STRUCTURE_CALCULATION)){
+						registerIncQuery();
 						String patternResource = element.getAttribute(ICalculationExtensionPoint.PATTERN_RESOURCE);
 						Bundle bundle = Platform.getBundle(element.getContributor().getName());
-						//						URL resourceUrl = bundle.getResource(patternResource);
 						URI uri = URI.createPlatformPluginURI(bundle.getSymbolicName() + "/" + patternResource, true);
-						//////////// needed because Guice Injector exceptions are thrown otherwise
-						EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
-						EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
-						EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-						Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
-						IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-						Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
-						///////////////////////////////////////////////////////////////////////////////
 						ResourceSet rs = new ResourceSetImpl();
 						Resource resource = null;
 						try {
@@ -152,6 +143,20 @@ public class ModelRegistration {
 		return calculationModel;
 	}
 
+
+	private void registerIncQuery() {
+		//////////// needed because Guice Injector exceptions are thrown otherwise
+		if(!alreadyRegistered){
+			EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
+			EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
+			EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
+			Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+			IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
+			alreadyRegistered = true;
+		}
+		///////////////////////////////////////////////////////////////////////////////
+	}
 
 	private QualitySmellModel registerQualitySmellModel(IEclipseContext context, IWorkspace workspace) {
 		QualitySmellModel smellModel = initQualitySmellModel(workspace);
