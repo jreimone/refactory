@@ -7,7 +7,7 @@
     editorPluginClass="org.emftext.refactoring.smell.ecoresmells.presentation.EcoreSmellsEditorPlugin"
     testSuiteClass="org.emftext.refactoring.smell.ecoresmells.tests.EcoreSmellsAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    publicConstructors="true" usedGenPackages="../../org.emftext.refactoring.smell.calculation/metamodel/calculation.genmodel#//calculation"
+    publicConstructors="true" usedGenPackages="../../org.emftext.refactoring.smell.calculation/metamodel/calculation.genmodel#//calculation platform:/plugin/org.eclipse.incquery.patternlanguage/model/generated/PatternLanguage.genmodel#//patternLanguage platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase"
     classNamePattern="">
   <foreignModel>ecoreSmells.ecore</foreignModel>
   <genPackages prefix="Ecoresmells" basePackage="org.emftext.refactoring.smell" disposableProviderFactory="true"

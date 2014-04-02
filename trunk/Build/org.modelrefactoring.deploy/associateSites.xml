@@ -11,8 +11,12 @@
 		url="http://www.reuseware.org/update_trunk/"/>
 	<associateSite label="Dresden OCL"
 		url="http://www.dresden-ocl.org/update/"/>
+	<!-- 
 	<associateSite label="EMF-IncQuery"
 		url="http://download.eclipse.org/incquery/updates/release"/>
+	 -->
+	<associateSite label="EMF-IncQuery Milestones"
+		url="http://download.eclipse.org/incquery/updates/milestone"/>
 	<associateSite label="EMF Compare"
 		url="http://download.eclipse.org/modeling/emf/compare/updates/releases"/>	
 </associateSites>
