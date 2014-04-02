@@ -20,22 +20,18 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetup;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
+import org.eclipse.incquery.patternlanguage.emf.specification.SpecificationBuilder;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
 import org.eclipse.incquery.runtime.api.IQuerySpecification;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
-import org.eclipse.incquery.runtime.extensibility.QuerySpecificationRegistry;
-import org.eclipse.incquery.tooling.core.generator.GeneratorModule;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.java.resource.java.util.JavaResourceUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 public class IncQueryHeadlessTest {
 
@@ -46,22 +42,22 @@ public class IncQueryHeadlessTest {
 	public void testFindMatchesHeadless(){
 		System.out.println("-------------------");
 		System.out.println("file: " + javaResource.getURI().toString());
-		IQuerySpecification<?> querySpecification = QuerySpecificationRegistry.getOrCreateQuerySpecification(pattern);
-		if(querySpecification != null){
-			try {
-				ResourceSet rs = javaResource.getResourceSet();
-				IncQueryEngine engine = IncQueryEngine.on(rs);
-				//				IncQueryEngine engine = IncQueryEngine.on(rs);
-				IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
-				Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
-				assertEquals("", 2, matches.size());
-				for (IPatternMatch match : matches) {
-					System.out.println(match);
-				}
-			} catch (IncQueryException e) {
-				e.printStackTrace();
+		try {
+			ResourceSet rs = javaResource.getResourceSet();
+			IncQueryEngine engine = IncQueryEngine.on(rs);
+			// A specification builder is used to translate patterns to query specifications
+			SpecificationBuilder builder = new SpecificationBuilder();
+			// attempt to retrieve a registered query specification		    
+			IQuerySpecification<? extends IncQueryMatcher<? extends IPatternMatch>> querySpecification = builder.getOrCreateSpecification(pattern);
+			IncQueryMatcher<? extends IPatternMatch> matcher = engine.getMatcher(querySpecification);
+			Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+			assertEquals("", 2, matches.size());
+			for (IPatternMatch match : matches) {
+				System.out.println(match);
 			}
-		}					
+		} catch (IncQueryException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@BeforeClass
@@ -74,20 +70,14 @@ public class IncQueryHeadlessTest {
 	private static void initLanguages() {
 		// Xtext resource magic -- this is needed for EIQs
 		// use a trick to load Pattern models from a file
-		Injector injector = new EMFPatternLanguageStandaloneSetup()
-		{
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new GeneratorModule());
-			}
-		}.createInjectorAndDoEMFRegistration();
+		new EMFPatternLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
 		JaMoPPUtil.initialize();
 		// the following must not be done when run as plugin test
-//		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
-//		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
-//		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-//		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
+		//		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
+		//		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
+		//		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
+		//		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
 	}
 
 	private static void initPattern() {

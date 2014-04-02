@@ -7,7 +7,6 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,18 +25,13 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetup;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PackageImport;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
-import org.eclipse.incquery.runtime.api.IPatternMatch;
-import org.eclipse.incquery.runtime.api.IQuerySpecification;
-import org.eclipse.incquery.runtime.api.IncQueryEngine;
-import org.eclipse.incquery.runtime.api.IncQueryMatcher;
-import org.eclipse.incquery.runtime.exception.IncQueryException;
-import org.eclipse.incquery.runtime.extensibility.QuerySpecificationRegistry;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -58,7 +52,6 @@ import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationPackage;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
-import org.emftext.refactoring.smell.calculation.Structure;
 import org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage;
 import org.emftext.refactoring.smell.registry.IQualitySmellRegistry;
 import org.emftext.refactoring.smell.registry.util.Pair;
@@ -158,10 +151,10 @@ public class FindSmellsTest {
 	@BeforeClass
 	public static void setUp(){
 		// not needed when test is run as JUnit Plugin test
-//		registerCoreLanguages();
-//		registerCalculationExtensionLanguages();
-//		registerSmellingLanguages();
-//		registerTestingRootAsPlatformRoot();
+		registerCoreLanguages();
+		registerCalculationExtensionLanguages();
+		registerSmellingLanguages();
+		registerTestingRootAsPlatformRoot();
 		loadSmellModels();
 		initRegistry();
 		initSmellingResources();
@@ -169,21 +162,16 @@ public class FindSmellsTest {
 
 	private static void registerCoreLanguages() {
 		// IncQuery
-		EMFPatternLanguageStandaloneSetupGenerated setup = new EMFPatternLanguageStandaloneSetupGenerated();
-		Injector injector = setup.createInjectorAndDoEMFRegistration();
-		//		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
-		//		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
-		//		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-		////		injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
-		//		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
-
-		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-		//		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
+		new EMFPatternLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+		// old IncQuery
+//		EMFPatternLanguageStandaloneSetupGenerated setup = new EMFPatternLanguageStandaloneSetupGenerated();
+//		Injector injector = setup.createInjectorAndDoEMFRegistration();
+//		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
+//		//		Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
+//		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
 		// smells
 		EPackage.Registry.INSTANCE.put(SmellPackage.eNS_URI, SmellPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("smell", new XMIResourceFactoryImpl());
