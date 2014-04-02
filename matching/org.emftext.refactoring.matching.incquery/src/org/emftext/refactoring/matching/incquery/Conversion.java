@@ -60,7 +60,6 @@ public class Conversion {
 			Pattern pattern = PatternLanguageFactory.eINSTANCE.createPattern();
 			patternModel.getPatterns().add(pattern);
 			pattern.setName(rolemodel.getName());
-			pattern.setFileName(rolemodel.getName());
 			for (Role role : rolemodel.getRoles()){
 				Variable var = PatternLanguageFactory.eINSTANCE.createVariable();
 				var.setName(role.getName());
