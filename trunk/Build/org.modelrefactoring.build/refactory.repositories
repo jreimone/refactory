@@ -104,8 +104,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downlo
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.1.1/R201309161423/mdt-ocl-Update-tools-4.1.1.zip!plugins/org.eclipse.ocl.common.ui_1.1.0.v20130530-0730.jar
 
 // GEF
-get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.10.0/S201309301555/GEF-runtime-3.10.0M2.zip
-get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.10.0/S201309301555/GEF-zest-3.10.0M2.zip
+get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.9.2/S201403090306/GEF-runtime-3.9.2M6.zip
+get:http://ftp.wh2.tu-dresden.de/pub/mirrors/eclipse/tools/gef/downloads/drops/3.9.2/S201403090306/GEF-zest-3.9.2M6.zip
 
 // CodeComposers
 // git:https://github.com/DevBoost/CodeComposers.git
