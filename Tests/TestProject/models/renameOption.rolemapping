@@ -1,0 +1,5 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/forms> 
+
+"Rename Option" maps <RenameX> { 
+	 Nameable := Option(name -> id); 
+}
