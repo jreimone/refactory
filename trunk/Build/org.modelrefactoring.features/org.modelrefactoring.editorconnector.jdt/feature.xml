@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.modelrefactoring.constraintinterpreter.ocl"
-      label="Refactory Constraint Interpreter with Dresden OCL"
+      id="org.modelrefactoring.editorconnector.emftext"
+      label="Refactory Editor Connector for JDT editor"
       version="0.9.1"
       provider-name="Software Technology Group - TU Dresden">
 
    <description url="http://modelrefactoring.org">
-      A constraint interpreter enabling support for pre- and post-conditions for your models interpreting them with Dresden OCL.
+      Refactory Editor Connector for the JDT editor: Enables refactorings in the Java editor of the JDT.
    </description>
 
    <copyright>
@@ -30,17 +30,22 @@ Contributors:
 
    <requires>
       <import feature="org.eclipse.platform"/>
+      <import feature="org.eclipse.sdk"/>
       <import feature="org.eclipse.emf"/>
       <import feature="org.eclipse.emf.workspace"/>
-      <import feature="org.modelrefactoring.sdk"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.emftext.refactoring.registry.rolemapping"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.dresdenocl.facade"/>
+      <import feature="org.modelrefactoring.runtime"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.ui.workbench"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.emftext.language.java.resource.java"/>
+      <import plugin="org.emftext.language.java"/>
+      <import plugin="org.eclipse.jface.text"/>
    </requires>
 
    <plugin
-         id="org.emftext.refactoring.oclinterpreter"
+         id="org.modelrefactoring.editorconnector.jdt"
          download-size="0"
          install-size="0"
          version="0.0.0"
