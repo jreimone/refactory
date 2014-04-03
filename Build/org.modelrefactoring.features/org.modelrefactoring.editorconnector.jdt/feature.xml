@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.modelrefactoring.editorconnector.emftext"
+      id="org.modelrefactoring.editorconnector.jdt"
       label="Refactory Editor Connector for JDT editor"
       version="0.9.1"
       provider-name="Software Technology Group - TU Dresden">
