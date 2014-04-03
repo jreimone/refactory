@@ -7,6 +7,6 @@ Bundle-Activator: org.emftext.refactoring.oclinterpreter.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.refactoring.registry.rolemapping,
  org.eclipse.emf.ecore,
- tudresden.ocl20.pivot.facade
+ org.dresdenocl.facade
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
