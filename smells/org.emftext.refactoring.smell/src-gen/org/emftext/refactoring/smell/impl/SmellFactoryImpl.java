@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.emftext.refactoring.smell.*;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.Quality;
 import org.emftext.refactoring.smell.QualityCalculation;
@@ -15,9 +14,7 @@ import org.emftext.refactoring.smell.QualitySmell;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.SmellPackage;
-import org.emftext.refactoring.smell.custom.ConcreteQualitySmellCustom;
 import org.emftext.refactoring.smell.custom.QualitySmellModelCustom;
-import org.emftext.refactoring.smell.custom.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,7 +106,7 @@ public class SmellFactoryImpl extends EFactoryImpl implements SmellFactory {
 	 * @generated
 	 */
 	public ConcreteQualitySmell createConcreteQualitySmell() {
-		ConcreteQualitySmellImpl concreteQualitySmell = new ConcreteQualitySmellCustom();
+		ConcreteQualitySmellImpl concreteQualitySmell = new ConcreteQualitySmellImpl();
 		return concreteQualitySmell;
 	}
 
@@ -129,7 +126,7 @@ public class SmellFactoryImpl extends EFactoryImpl implements SmellFactory {
 	 * @generated
 	 */
 	public SmellPackage getSmellPackage() {
-		return (SmellPackage)getEPackage();
+		return (SmellPackage) getEPackage();
 	}
 
 	/**

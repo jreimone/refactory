@@ -67,16 +67,6 @@ public class QualitySmellModelImpl extends EObjectImpl implements QualitySmellMo
 	protected EList<ConcreteQualitySmell> concreteSmells;
 
 	/**
-	 * The cached value of the '{@link #getSmellingMetamodels() <em>Smelling Metamodels</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSmellingMetamodels()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EPackage> smellingMetamodels;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -137,10 +127,11 @@ public class QualitySmellModelImpl extends EObjectImpl implements QualitySmellMo
 	 * @generated
 	 */
 	public EList<EPackage> getSmellingMetamodels() {
-		if (smellingMetamodels == null) {
-			smellingMetamodels = new EObjectResolvingEList<EPackage>(EPackage.class, this, SmellPackage.QUALITY_SMELL_MODEL__SMELLING_METAMODELS);
-		}
-		return smellingMetamodels;
+		// TODO: implement this method to return the 'Smelling Metamodels' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -260,7 +251,7 @@ public class QualitySmellModelImpl extends EObjectImpl implements QualitySmellMo
 			case SmellPackage.QUALITY_SMELL_MODEL__CONCRETE_SMELLS:
 				return concreteSmells != null && !concreteSmells.isEmpty();
 			case SmellPackage.QUALITY_SMELL_MODEL__SMELLING_METAMODELS:
-				return smellingMetamodels != null && !smellingMetamodels.isEmpty();
+				return !getSmellingMetamodels().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

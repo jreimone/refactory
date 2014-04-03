@@ -429,7 +429,7 @@ public class SmellPackageImpl extends EPackageImpl implements SmellPackage {
 		initEReference(getQualitySmellModel_Smells(), this.getQualitySmell(), null, "smells", null, 0, -1, QualitySmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQualitySmellModel_Qualities(), this.getQuality(), null, "qualities", null, 0, -1, QualitySmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQualitySmellModel_ConcreteSmells(), this.getConcreteQualitySmell(), null, "concreteSmells", null, 0, -1, QualitySmellModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getQualitySmellModel_SmellingMetamodels(), theEcorePackage.getEPackage(), null, "smellingMetamodels", null, 0, -1, QualitySmellModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getQualitySmellModel_SmellingMetamodels(), theEcorePackage.getEPackage(), null, "smellingMetamodels", null, 0, -1, QualitySmellModel.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(qualitySmellModelEClass, this.getConcreteQualitySmell(), "getSmellsForMetamodel", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "metamodel", 0, 1, IS_UNIQUE, IS_ORDERED);

@@ -86,7 +86,7 @@ public interface QualitySmellModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Smelling Metamodels</em>' reference list.
 	 * @see org.emftext.refactoring.smell.SmellPackage#getQualitySmellModel_SmellingMetamodels()
-	 * @model transient="true" derived="true"
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<EPackage> getSmellingMetamodels();
