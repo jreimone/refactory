@@ -1,7 +1,8 @@
 ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+IMPORTS <platform:/resource/TestProject/models/DefaultName.ecore>
 
 "Introduce Parameter Object" maps <ExtractXfromChildren> {  
-	ContainerContainer := Model {
+	ContainerContainer := uml.Model {
 		source := packagedElement;
 		target := packagedElement;
 	};

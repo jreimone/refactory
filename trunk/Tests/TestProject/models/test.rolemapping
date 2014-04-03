@@ -1,0 +1,26 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+IMPORTS <platform:/resource/TestProject/models/HierarchicalMetamodel.ecore>
+
+"MappingWithoutPackagesFromImport" maps <platform:/resource/TestProject/models/test.rolestext> { 
+	Source := Root;
+}
+
+"MappingWithSinglePackageFromImport" maps <platform:/resource/TestProject/models/test.rolestext> { 
+	Source := hierarchicalmetamodel.Root;
+}
+
+"MappingWithSubPackageFromImport" maps <platform:/resource/TestProject/models/test.rolestext> { 
+	Source := hierarchicalmetamodel.layer1.Layer1Root;
+}
+
+"MappingWithSubSubPackageFromImport" maps <platform:/resource/TestProject/models/test.rolestext> { 
+	Source := hierarchicalmetamodel.layer1.layer1Sub.Layer1Sub1Root;
+}
+
+"MappingWithPackageFromTargetMetamodel" maps <platform:/resource/TestProject/models/test.rolestext> { 
+	Source := ecore.EClass;
+}
+
+"MappingWithoutPackagesFromTargetMetamodel" maps <platform:/resource/TestProject/models/test.rolestext> { 
+	Source := EClass;
+}
