@@ -24,6 +24,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Type;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClassifier;
@@ -32,19 +44,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.refactoring.registry.rolemapping.IConstraintInterpreter;
 import org.emftext.refactoring.registry.rolemapping.IInterpretationResult;
-
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Type;
 
 public class OCLConstraintInterpreter implements IConstraintInterpreter {
 
@@ -89,7 +88,7 @@ public class OCLConstraintInterpreter implements IConstraintInterpreter {
 				}
 			}
 			for (IModelInstanceElement modelInstanceElement : modelInstanceElements) {
-				tudresden.ocl20.pivot.interpreter.IInterpretationResult result = Ocl2ForEclipseFacade.interpretConstraint(oclConstraint, modelInstance, modelInstanceElement);
+				org.dresdenocl.interpreter.IInterpretationResult result = Ocl2ForEclipseFacade.interpretConstraint(oclConstraint, modelInstance, modelInstanceElement);
 				if(result != null && !result.getResult().oclIsInvalid().isTrue() 
 						&& !result.getResult().oclIsUndefined().isTrue() 
 						&& !((OclBoolean) result.getResult()).isTrue()) {
