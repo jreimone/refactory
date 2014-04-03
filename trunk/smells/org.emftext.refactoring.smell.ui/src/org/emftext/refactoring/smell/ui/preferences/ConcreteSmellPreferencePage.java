@@ -52,8 +52,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
-public class ConcreteSmellPreferencePage extends PreferencePage implements
-IWorkbenchPreferencePage {
+public class ConcreteSmellPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 	private DataBindingContext m_bindingContext;
 
 	private Table tableMetamodels;
